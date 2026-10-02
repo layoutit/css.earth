@@ -5,7 +5,7 @@ import { dirname, extname, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry } from '../objects/sources/index.ts';
-import { parsePreparedSystemView, parsePreparedWorldContextSummary, parsePreparedWorldSystem, starsWithoutSystem } from '@cssearth/objects';
+import { parseCompleteWorldContext, parsePreparedSystemView, parsePreparedWorldContextSummary, parsePreparedWorldIndex } from '@cssearth/objects';
 
 const execFileAsync = promisify(execFile);
 /** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
@@ -58,30 +58,25 @@ export async function checkPublishedWorldPair(root: string, fetchText: (url: str
       catch (error) { throw disagree(error instanceof Error ? error.message : String(error)); }
     }));
   }
-  // Every system the summary defers has its published file, and it holds the bodies the summary lists for it.
-  // A star that hosts itself has no file: its row is in the published `world-stars.json`, which the build copies into the
-  // star's object entry.
-  const ownRows = starsWithoutSystem(summary.deferred);
-  if (ownRows.length) {
-    const [table] = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: ['world-stars.json'] });
-    if (!table) throw disagree('the inventory lacks world-stars.json.');
-    const stars = JSON.parse(await fetchText(table.url)) as Record<string, unknown>;
-    for (const id of ownRows) {
-      try { parsePreparedWorldSystem(stars[id], summary, id); }
-      catch (error) { throw disagree(error instanceof Error ? error.message : String(error)); }
-    }
-  }
-  const systems = [...new Set((summary.deferred ?? []).filter(body => body.host !== body.id).map(body => body.host))], systemFiles = systems.map(id => `world-systems/${id}.json`);
+  // The published index names each body's holder: every holder that is a file is published, and the summary with every
+  // holder is the whole world the index lists.
+  const [indexAsset] = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: ['world-index.json'] });
+  if (!indexAsset) throw disagree('the inventory lacks world-index.json.');
+  const indexInput: unknown = JSON.parse(await fetchText(indexAsset.url));
+  const index = parsePreparedWorldIndex(indexInput);
+  const systems = [...new Set(Object.values(index.holders))].filter(id => !Object.hasOwn(index.rows, id)), systemFiles = systems.map(id => `world-systems/${id}.json`);
   const systemAssets = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: systemFiles });
   const unpublished = systemFiles.filter(name => !systemAssets.some(entry => entry.filename === name));
   if (unpublished.length) throw disagree(`the inventory lacks ${unpublished.join(', ')}.`);
+  const files = new Map<string, unknown>();
   for (let start = 0; start < systems.length; start += 16) {
     await Promise.all(systems.slice(start, start + 16).map(async id => {
       const asset = systemAssets.find(entry => entry.filename === `world-systems/${id}.json`)!;
-      try { parsePreparedWorldSystem(JSON.parse(await fetchText(asset.url)), summary, id); }
-      catch (error) { throw disagree(error instanceof Error ? error.message : String(error)); }
+      files.set(id, JSON.parse(await fetchText(asset.url)));
     }));
   }
+  try { await parseCompleteWorldContext(summary, async id => files.get(id), indexInput); }
+  catch (error) { throw disagree(error instanceof Error ? error.message : String(error)); }
   return hosts.length;
 }
 

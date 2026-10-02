@@ -11,16 +11,13 @@ type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][numbe
 /** The browser's copy of a prepared world context, split by the object hierarchy. Every body belongs to the system of the
  * body its orbit chain ends at: a star or black hole that orbits nothing, or the focus (the Sun).
  * - `summary` (`world-context-summary.json`, read by every page) holds the camera and frame facts, the focus's own system
- *   in full, and every body that orbits nothing and the map can open by click (a featured star, a galaxy), but no star
- *   drawn as a plain dot: the map draws those from dot banks. One with planets is in its own system's file with them;
- *   one without holds no file, and `stars` gives its row, which the build puts in the star's own object entry
- *   (`/objects/<id>/entry.json`), read when the star is opened. Each body of
- *   another system is only listed (`deferred`): its name, classification, discovery record, the star whose system file
- *   holds it and its place in the full context (`order`), which is what navigation, search and world visibility read before
- *   that system loads, and what puts every body back in its place once it has.
- * - `systems` (`world-systems/<star id>.json`, one per other system) hold that system's orbiting bodies, its named orbit
- *   centres and its orbit-bank pins. A page reads its own system's file at startup and any other when the camera
- *   approaches it or navigation targets it (site/world-context-plan.mts).
+ *   in full, and every body that orbits nothing and the map can open by click (a featured star, a galaxy). It lists no
+ *   other body: a body is found through its holder.
+ * - `systems` (`world-systems/<holder id>.json`) is one holder each: a star with the bodies that orbit it, their named
+ *   orbit centres and orbit-bank pins. A star drawn as a plain dot is in its own holder, and the map draws it from a dot
+ *   bank until that file is read. A page reads its own body's holder at startup and any other when navigation targets a
+ *   body in it or the camera approaches it (site/world-context-plan.mts).
+ * - `index` is the build's table of which holder has each body.
  * Orbit paths and detail levels go to the planner worker as binary orbit banks (`worldOrbitBanks`), which these files pin
  * by byte length; each orbit here keeps its parent, bounds and size. Classification views are build-time only.
  *
@@ -60,16 +57,10 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   const pinsOf = (members: readonly Body[]) => Object.fromEntries(members.flatMap(body => orbitBanks[body.id] === undefined ? [] : [[body.id, orbitBanks[body.id]!] as const]));
   const rootBodies = bodies.filter(local), rootCentres = centresOf(focus.id);
   const root = encodeBodies([focus, ...rootBodies], positions);
-  // Each other system's bodies, listed with what navigation and visibility read, in the root's own tables.
-  const deferred = bodies.flatMap((body, order) => local(body) ? [] : [{ id: body.id, name: body.name, order,
-    ...(body.systemName === undefined ? {} : { system: root.systemName(body.systemName) }),
-    ...(body.classification === undefined ? {} : { classification: body.classification }),
-    ...(body.discovery === undefined ? {} : { discovery: root.discovery(body.discovery) }),
-    host: fileOf(body), ...(body.plainDot ? { plainDot: true } : {}), ...(body.unpackaged ? { unpackaged: true } : {}) }]);
   const [focusRow, ...rows] = root.rows;
   const summary = { schema: PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA as typeof PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, ...rest, worldBodyCount: bodies.length,
     ...(Object.keys(rootCentres).length ? { orbitCenters: rootCentres } : {}), orbitBanks: pinsOf(rootBodies),
-    ...root.tables(), focus: focusRow!, bodies: columns(rows), deferred: columns(deferred) };
+    ...root.tables(), focus: focusRow!, bodies: columns(rows) };
   const files = [...systems].map(([id, members]) => {
     const file = encodeBodies(members, positions), centres = centresOf(id);
     return { id, file: { schema: PREPARED_WORLD_SYSTEM_SCHEMA as typeof PREPARED_WORLD_SYSTEM_SCHEMA, id, ...(Object.keys(centres).length ? { orbitCenters: centres } : {}),
@@ -77,8 +68,12 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   });
   const plainStars = bodies.filter(plainStar), alone = new Set(plainStars.filter(star => systems.get(star.id)!.length === 1).map(star => star.id));
   return { summary, systems: files.filter(system => !alone.has(system.id)),
-    /** Each plain-dot star nothing orbits, as the system of one body its object entry carries. */
-    stars: Object.fromEntries(files.filter(system => alone.has(system.id)).map(system => [system.id, system.file])),
+    /** The build's own table (`world-index.json`), never served: each body outside the summary with the holder whose file
+     * has it, every body in the full context's order, and the row of each plain-dot star nothing orbits, as the holder of
+     * one body its object entry carries. A page never reads a list of the world's bodies: it finds one through that
+     * body's own entry (`world.holder`). */
+    index: { order: bodies.map(body => body.id), holders: Object.fromEntries(bodies.filter(body => !local(body)).map(body => [body.id, fileOf(body)])),
+      rows: Object.fromEntries(files.filter(system => alone.has(system.id)).map(system => [system.id, system.file])) },
     /** Every star the summary leaves out, which the map draws from dot banks (plain-star-dots.ts). */
     plainStars };
 }
@@ -148,7 +143,7 @@ function encodeBodies(bodies: readonly Body[], positions: ReadonlyMap<string, Ve
       })() } : {}) };
   });
   return { rows, systemName, discovery,
-    // Read after every row is written: a later caller may still add to the tables (the root's deferred list does).
+    // Read after every row is written: a later caller may still add to the tables.
     tables: () => ({ systemNames, discoveries, billboard: { ...(size === undefined ? {} : { size }),
       ...(focalPixels === undefined ? {} : { focalPixels }), ...(distanceRadii === undefined ? {} : { distanceRadii }) } }) };
 }

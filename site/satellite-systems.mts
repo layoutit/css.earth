@@ -1,4 +1,4 @@
-import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT as context, onWorldSystems } from './world-context-plan.mts';
 
 /** A host and its prepared, navigable satellite children. Framing may select a smaller primary subset. */
 export interface SatelliteSystem {
@@ -34,9 +34,16 @@ export function satelliteSystems(plan: Pick<typeof context, 'focus' | 'bodies'> 
   }));
 }
 
-const systems = satelliteSystems();
-const byHost = new Map(systems.map(system => [system.hostId, system]));
-const byMember = new Map(systems.flatMap(system => system.memberIds.map(id => [id, system] as const)));
-export const allSatelliteSystems = () => systems;
-export const satelliteSystemByHost = (id: string) => byHost.get(id) ?? null;
-export const satelliteSystemOfMember = (id: string) => byMember.get(id) ?? null;
+/** A plan's satellite systems, by host and by member. */
+export function satelliteSystemIndex(plan: Pick<typeof context, 'focus' | 'bodies'>) {
+  const systems = satelliteSystems(plan);
+  return Object.freeze({ systems, byHost: new Map(systems.map(system => [system.hostId, system])),
+    byMember: new Map(systems.flatMap(system => system.memberIds.map(id => [id, system] as const))) });
+}
+
+// The application's index follows its plan: a system read later brings its hosts' families with it.
+let index = satelliteSystemIndex(context);
+onWorldSystems(plan => { index = satelliteSystemIndex(plan); });
+export const allSatelliteSystems = () => index.systems;
+export const satelliteSystemByHost = (id: string) => index.byHost.get(id) ?? null;
+export const satelliteSystemOfMember = (id: string) => index.byMember.get(id) ?? null;

@@ -14,7 +14,7 @@ import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { createInFlightLoader } from './in-flight-loader.mts';
 import { startupFetch } from './startup-requests.mts';
 import { loadDotCatalogues } from './dot-catalogues.mts';
-import { worldVisibilityPolicy } from './application-world-visibility.mts';
+import { annotationsForBodies, worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
 import { CONTEXT_DATASETS } from './context-datasets.mts';
 import { KNOWN_OVERVIEWS } from './object-directory.mts';
@@ -33,7 +33,7 @@ function meshView(descriptor: { id: string; properties: Record<string, unknown> 
 
 // An asteroid sprite's smallest drawn size, and a plain asteroid dot's (see world-context.css for its opacity).
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
-const { annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, compact: phone } = worldVisibilityPolicy;
+const { annotationOpacities, annotationPriorities, ordinaryAsteroidIds, compact: phone } = worldVisibilityPolicy;
 const PARSEC_M = 3.085677581491367e16;
 
 // Published catalogues drawn through a volume bank, with its opacity (src/objects/m87-volume/README.md).
@@ -120,9 +120,12 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // body's (a planet's moons without a page) while that body or one that orbits it is.
     const pointBanks = parsedDescriptors.filter(descriptor => descriptor.type === 'catalogue-point-bank').map(parseCataloguePointBankDescriptor).map(bank =>
       ({ id: bank.id, url: resourceSet(bank.id).resolve(bank.url), ...(bank.host === undefined ? {} : { host: bank.host }) }));
-    const plainDots = new Set(plainDotIds), asteroids = new Set(asteroidIds);
-    const billboards = (bodies: Parameters<typeof preparedBodyBillboards>[0]) => preparedBodyBillboards(bodies, plainDots,
-      id => asteroids.has(id) ? ASTEROID_MINIMUM_PIXELS : 2.4);
+    // A body's row says whether it is a plain dot (no billboard) and what it is (an asteroid's sprite stays smaller).
+    const billboards = (bodies: readonly (Parameters<typeof preparedBodyBillboards>[0][number] & { readonly plainDot?: true; readonly classification?: string })[]) => {
+      const asteroids = new Set(bodies.filter(body => body.classification === 'asteroid').map(body => body.id));
+      return preparedBodyBillboards(bodies, new Set(bodies.filter(body => body.plainDot === true).map(body => body.id)),
+        id => asteroids.has(id) ? ASTEROID_MINIMUM_PIXELS : 2.4);
+    };
 
     // Bank declarations do not fetch payloads. Deduplicate pending loads only; the
     // mounted layer owns residency and can release banks after they leave view.
@@ -170,7 +173,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       }),
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       nonNavigableIds: ordinaryAsteroidIds,
-      plainDots: { ids: plainDotIds, minimumDiameterPixels: PLAIN_DOT_MINIMUM_PIXELS },
+      plainDots: { minimumDiameterPixels: PLAIN_DOT_MINIMUM_PIXELS },
       datasetVisibility: DATASET_VISIBILITY, datasetBillboards,
       // Phones draw no celestial sky cube: about 60 MB of layers and 27 MB of decoded faces behind the body.
       sky: !phone,
@@ -181,12 +184,13 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       },
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
       resolvePointResource: path => starSet.resolve(`prepared/${path}`) });
-    // Other systems' bodies join the world as their files arrive (site/world-context-plan.mts), with their billboards.
+    // Other systems' bodies join the world as their files arrive (site/world-context-plan.mts), with their billboards and
+    // their annotation strengths and tiers, which the first plan's tables did not hold.
     let drawn = plan.bodies.length;
     onWorldSystems(next => {
       const added = next.bodies.slice(drawn);
       drawn = next.bodies.length;
-      universe.addSystems(next, billboards(added));
+      universe.addSystems(next, billboards(added), annotationsForBodies(added));
     });
     // The first world mount adopts a planner made now: its worker builds the planner from the summary while the first body
     // still prepares, so the world's first frame waits only for its own plan. Later mounts make their own.

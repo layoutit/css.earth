@@ -10,7 +10,6 @@ const summary = () => ({
   focus: { id: 'sun', positionM: [0, 0, 0], radiusM: 10 },
   bodies: { id: ['earth'], radiusM: [2], positionM: [[20, 0, 0]], system: [0], discovery: [0],
     billboard: [{}], orbit: [{ centerBodyId: 'sun', bounds: { centerM: [0, 0, 0], radiusM: 20 }, lod: true }], optional: [null] },
-  deferred: { id: ['moon'], host: ['earth'], system: [0], discovery: [0] },
 });
 
 test('prepared format and compact world tables preserve the expanded transport shape', () => {
@@ -21,7 +20,6 @@ test('prepared format and compact world tables preserve the expanded transport s
       billboard: { url: '/scenes/earth/earth-billboard.webp', size: 512, focalPixels: 256, distanceM: 16 },
       orbit: { centerBodyId: 'sun', centerPositionM: [0, 0, 0], bounds: { centerM: [0, 0, 0], radiusM: 20 },
         lod: { bounds: { centerM: [0, 0, 0], radiusM: 20 } } } }],
-    deferred: [{ id: 'moon', host: 'earth', systemName: 'Solar System', discovery: { method: 'imaging' } }],
   });
   const expanded = { schema: 'cssearth-world-context-summary@2', bodies: [] };
   assert.equal(expandWorldContextSummary(expanded), expanded);
@@ -36,7 +34,7 @@ test('compact world tables reject unequal columns, missing entries and unknown o
   assert.throws(() => expandWorldContextSummary(unknown), /parent missing is not placed/);
 });
 
-test('deferred systems resolve shared orbit centres without overriding explicit billboard fields', () => {
+test('a holder\'s bodies resolve shared orbit centres without overriding explicit billboard fields', () => {
   const input = { schema: 'cssearth-world-system@1', id: 'earth', systemNames: [], discoveries: [], billboard: {},
     bodies: { id: ['moon'], radiusM: [1], billboard: [{ url: '/moon.webp', size: 32, focalPixels: 16, distanceM: 12 }],
       orbit: [{ centerBodyId: 'earth' }] } };

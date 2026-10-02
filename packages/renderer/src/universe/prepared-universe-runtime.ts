@@ -9,7 +9,7 @@ import { mountImageMesh } from './image-mesh.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 
 import { galaxyOutsideFade, logarithmicFade } from './world-context/context-scale.js';
-import { mountPreparedWorldContext, type BodyVisibility } from './prepared-world-context.js';
+import { mountPreparedWorldContext, type BodyVisibility, type WorldBodyAnnotations } from './prepared-world-context.js';
 
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -44,13 +44,17 @@ const IMAGE_MESH_LOAD_DISTANCE_M = 7e9 * 3.0856775814913673e16;
 /** Hidden, unsubscribed dataset banks are retained only within this measured DOM budget. */
 export const WARM_VOLUME_DATASET_DOM_NODE_BUDGET = 5_000;
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], contextBanks = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], starCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, nonNavigableIds, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], contextBanks = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], starCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities: initialPriorities = {}, annotationLandmarks, annotationOpacities: initialOpacities = {}, plannerSource, nonNavigableIds, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
   let plan = parsePreparedWorldContextPlan(context);
   const payload = validatePreparedCssVolume(volume);
   // What another system's bodies reach once read (addSystem): every planner made and every mounted world layer.
   const planners = new Set<ReturnType<typeof createWorldContextPlannerClient>>();
   const layers = new Set<ReturnType<typeof mountPreparedWorldContext>>();
   const spriteTable: Record<string, SpriteWithUrl> = { ...sprites };
+  // Every body's annotation tier and strength, the first plan's and each added system's: a planner or layer made after
+  // a system was added starts with that system's too.
+  const annotationPriorities: Record<string, number> = { ...initialPriorities };
+  const annotationOpacities: Record<string, { line: number; label: number }> = { ...initialOpacities };
   if (volumeDatasetBanks.length && !datasetBillboards) throw new TypeError('Volume dataset banks require their prepared billboards.');
   const datasetFacts = volumeDatasetBanks.map(bank => {
     const facts = datasetBillboards!.plan.banks.get(bank.id);
@@ -119,16 +123,18 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       return { ...client, destroy() { planners.delete(client); client.destroy(); } };
     },
     /** Draw `next`, an extension of this universe's plan with other systems' bodies (`extendWorldContext`), with their
-     * billboards: mounted layers add the bodies after their own, and planners plan them from the first view that holds them. */
-    addSystems(next: PreparedWorldContext, nextSprites: Readonly<Record<string, SpriteWithUrl>>) {
+     * billboards and annotations: mounted layers add the bodies after their own, and planners plan them from the first
+     * view that holds them. */
+    addSystems(next: PreparedWorldContext, nextSprites: Readonly<Record<string, SpriteWithUrl>>, annotations: WorldBodyAnnotations = {}) {
       const validated = parsePreparedWorldContextPlan(next);
       if (validated === plan) return;
       if (validated.focus.id !== plan.focus.id || plan.bodies.some((body, index) => validated.bodies[index] !== body)) {
         throw new TypeError('A universe only adds bodies after the ones its plan holds.');
       }
       plan = validated; Object.assign(spriteTable, nextSprites);
-      for (const layer of layers) layer.addBodies(plan, nextSprites);
-      for (const planner of planners) planner.extend(plan);
+      Object.assign(annotationPriorities, annotations.annotationPriorities); Object.assign(annotationOpacities, annotations.annotationOpacities);
+      for (const layer of layers) layer.addBodies(plan, nextSprites, annotations);
+      for (const planner of planners) planner.extend(plan, annotations.annotationPriorities);
     },
     mount(stage: HTMLElement, { requestPublication, presentationHost = stage }: {
       requestPublication?: () => boolean;

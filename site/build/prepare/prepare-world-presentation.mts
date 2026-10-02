@@ -11,9 +11,7 @@ import galaxies from '../../../src/objects/local-group-galaxies/source/presentat
 import clusters from '../../../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import { discoveryVisibility, type ObjectDiscovery } from '@cssearth/objects';
 import { WORLD_OBJECTS } from '../../world-objects.mts';
-import { APPLICATION_WORLD_CONTEXT, WORLD_SYSTEM_HOSTS } from '../../world-context-plan.mts';
-import { systemFramingRadii } from '../../system-framing-radii.mts';
-import { planetarySystemMembers } from '../../planetary-system-members.mts';
+import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
 import systemText from '../../../src/navigation/system-text.json' with { type: 'json' };
@@ -138,21 +136,18 @@ export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<
   const defaultFeatureIds = SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id);
   const orbitFeatureIds = SCENE_OBJECTS.filter(orbitFeature).map(object => object.id);
   return {
-    schema: 'cssearth-world-presentation@4',
+    schema: 'cssearth-world-presentation@5',
     satelliteSystemIntroductions,
     moons: { major: majorMoonIds(), minor },
     defaultFeatureIds,
     orbitFeatureIds,
     hiddenOrbitIds: [...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id), ...minor],
-    planetarySystems: planetarySystemMembers(APPLICATION_WORLD_CONTEXT),
     galaxies: { fadeStartDistanceM: galaxies.fadeStartDistanceM, fullDistanceM: galaxies.fullDistanceM, maximumDistanceM: galaxies.maximumDistanceM,
       minimumDistanceRadii: galaxies.minimumDistanceRadii, defaultFocusRadiusM: galaxies.defaultFocusRadiusM, metersPerParsec: galaxies.metersPerParsec },
     clusters: { fadeStartDistanceM: clusters.fadeStartDistanceM, fullDistanceM: clusters.fullDistanceM },
     categoryFrames: prepareCategoryFrames(WORLD_OBJECTS, new Set(defaultFeatureIds), new Set(orbitFeatureIds),
       notableBodies(WORLD_OBJECTS, new Set(defaultFeatureIds), orbitCentres(APPLICATION_WORLD_CONTEXT)), orbitCentres(APPLICATION_WORLD_CONTEXT),
       APPLICATION_WORLD_CONTEXT.focus.id),
-    // Every system whose bodies are their own file, framed before a page reads it (site/system-framing.mts).
-    systemFramingRadii: Object.fromEntries([...systemFramingRadii(APPLICATION_WORLD_CONTEXT)].filter(([id]) => WORLD_SYSTEM_HOSTS.includes(id))),
   };
 }
 

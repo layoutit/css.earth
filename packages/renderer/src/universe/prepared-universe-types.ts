@@ -31,8 +31,8 @@ export interface PreparedUniverseOptions {
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
   /** Bodies that are never a hover or navigation target; see `mountPreparedWorldContext`. */
   nonNavigableIds?: readonly string[];
-  /** Bodies the world draws as plain dots; see `mountPreparedWorldContext`. */
-  plainDots?: { readonly ids: readonly string[]; readonly minimumDiameterPixels: number };
+  /** How wide, at least, a body its row marks `plainDot` is drawn; see `mountPreparedWorldContext`. */
+  plainDots?: { readonly minimumDiameterPixels: number };
   /** Projected size at which any dataset bank (nebula, cluster, galaxy or accompanying cloud) is fetched and drawn.
    * It may only raise the prepared thresholds: a small cloud is decoration, not worth its dataset payload. */
   datasetVisibility?: PreparedPointVisibility;

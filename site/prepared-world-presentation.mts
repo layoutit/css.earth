@@ -1,5 +1,6 @@
-// Written by site/build/prepare/prepare-world-presentation.mts from the moon groups, the JPL mission targets, the galaxy and
-// cluster presentation recipes and the world context's orbit graph; the browser only validates it.
+// Written by site/build/prepare/prepare-world-presentation.mts from the moon groups, the JPL mission targets and the galaxy
+// and cluster presentation recipes; the browser only validates it. It lists no system: a page reads a system's members
+// and framing from the bodies its world holds (site/object-systems.mts, site/system-framing.mts).
 import prepared from './prepared-world-presentation.json' with { type: 'json' };
 import { requireRecord, requireString, isRecord } from '@cssearth/core';
 
@@ -14,31 +15,6 @@ const distances = <K extends string>(value: unknown, name: string, keys: readonl
   }
   return Object.freeze(Object.fromEntries(keys.map(key => [key, value[key] as number]))) as Readonly<Record<K, number>>;
 };
-
-/** Each candidate system host with its members (site/planetary-system-members.mts); every id is listed once. */
-function planetarySystems(value: unknown) {
-  if (!Array.isArray(value)) throw new TypeError(`Prepared world presentation planetarySystems must be a list; got ${typeof value}.`);
-  const seen = new Set<string>();
-  return Object.freeze(value.map((input, index) => {
-    if (!isRecord(input) || typeof input.id !== 'string' || !input.id) {
-      throw new TypeError(`Prepared world presentation planetarySystems[${index}].id must be an object id; got ${JSON.stringify(isRecord(input) ? input.id : input)}.`);
-    }
-    const memberIds = ids(input.memberIds, `planetarySystems[${index}] (${input.id}).memberIds`);
-    for (const id of [input.id, ...memberIds]) {
-      if (seen.has(id)) throw new TypeError(`Prepared world presentation planetarySystems[${index}] (${input.id}) lists ${id}, which another system already lists.`);
-      seen.add(id);
-    }
-    const { originM, orbitsWithinM } = input;
-    if (originM !== undefined && !(Array.isArray(originM) && originM.length === 3 && originM.every(value => typeof value === 'number' && Number.isFinite(value)))) {
-      throw new TypeError(`Prepared world presentation planetarySystems[${index}] (${input.id}).originM must be three finite metres; got ${JSON.stringify(originM)}.`);
-    }
-    if (orbitsWithinM !== undefined && !(typeof orbitsWithinM === 'number' && orbitsWithinM > 0 && Number.isFinite(orbitsWithinM))) {
-      throw new TypeError(`Prepared world presentation planetarySystems[${index}] (${input.id}).orbitsWithinM must be a positive distance; got ${JSON.stringify(orbitsWithinM)}.`);
-    }
-    return Object.freeze({ id: input.id, memberIds, ...(originM === undefined ? {} : { originM: Object.freeze([originM[0], originM[1], originM[2]] as const) }),
-      ...(orbitsWithinM === undefined ? {} : { orbitsWithinM }) });
-  }));
-}
 
 /** Each category's framed box (prepareCategoryFrames), by classification: a centre and two corners relative to it, in metres. */
 function categoryFrames(value: unknown) {
@@ -62,19 +38,9 @@ function categoryFrames(value: unknown) {
   }));
 }
 
-/** The framing radius of each system whose bodies are their own file (site/system-framing-radii.mts, measured over the whole
- * world), so a page has it before it reads that system. */
-function systemFramingRadii(value: unknown): ReadonlyMap<string, number> {
-  if (!isRecord(value)) throw new TypeError(`Prepared world presentation systemFramingRadii must map system hosts to radii; got ${typeof value}.`);
-  return new Map(Object.entries(value).map(([id, radius]) => {
-    if (typeof radius !== 'number' || !(radius > 0) || !Number.isFinite(radius)) throw new TypeError(`Prepared world presentation systemFramingRadii.${id} must be a positive number; got ${String(radius)}.`);
-    return [id, radius] as const;
-  }));
-}
-
 function parseWorldPresentation(value: unknown) {
-  if (!isRecord(value) || value.schema !== 'cssearth-world-presentation@4' || !isRecord(value.moons)) {
-    throw new TypeError(`site/prepared-world-presentation.json is ${isRecord(value) ? String(value.schema) : typeof value}, not cssearth-world-presentation@4; run pnpm prepare:world-context.`);
+  if (!isRecord(value) || value.schema !== 'cssearth-world-presentation@5' || !isRecord(value.moons)) {
+    throw new TypeError(`site/prepared-world-presentation.json is ${isRecord(value) ? String(value.schema) : typeof value}, not cssearth-world-presentation@5; run pnpm prepare:world-context.`);
   }
   return Object.freeze({
     satelliteSystemIntroductions: Object.freeze(Object.fromEntries(Object.entries(requireRecord(value.satelliteSystemIntroductions)).map(([id, text]) => [id, requireString(text)]))),
@@ -82,11 +48,9 @@ function parseWorldPresentation(value: unknown) {
     defaultFeatureIds: ids(value.defaultFeatureIds, 'defaultFeatureIds'),
     orbitFeatureIds: ids(value.orbitFeatureIds, 'orbitFeatureIds'),
     hiddenOrbitIds: ids(value.hiddenOrbitIds, 'hiddenOrbitIds'),
-    planetarySystems: planetarySystems(value.planetarySystems),
     galaxies: distances(value.galaxies, 'galaxies', ['fadeStartDistanceM', 'fullDistanceM', 'maximumDistanceM', 'minimumDistanceRadii', 'defaultFocusRadiusM', 'metersPerParsec']),
     clusters: distances(value.clusters, 'clusters', ['fadeStartDistanceM', 'fullDistanceM']),
     categoryFrames: categoryFrames(value.categoryFrames),
-    systemFramingRadii: systemFramingRadii(value.systemFramingRadii),
   });
 }
 

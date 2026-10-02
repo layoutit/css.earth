@@ -6,7 +6,8 @@ import { createCameraViewport } from '@cssearth/renderer/navigation';
 import type { PreparedLabelEdge } from '@cssearth/renderer/navigation/prepared-label-edge.ts';
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
-import { APPLICATION_WORLD_CONTEXT as applicationContext, streamWorldSystems } from './world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT as applicationContext } from './world-context-plan.mts';
+import { createWorldApproach } from './world-approach.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { suppressMinorMoonOrbitPaint } from './moon-orbit-policy.mts';
@@ -55,13 +56,14 @@ export function createApplicationWorldContext() {
         lifetime.onDispose(occlusion.subscribe(updateOcclusion));
         lifetime.onDispose(suppressMinorMoonOrbitPaint(presentationHost, worldVisibilityPolicy.minorMoonIds));
         const planner = own(prepared.createFramePlanner());
-        // The systems this page does not show arrive after its first view (startup-gate.ts), in a few batches; each joins
-        // the mounted world and its planner as it lands (site/world-context-plan.mts).
-        afterStartup(target, () => { if (!lifetime.disposed) void streamWorldSystems(); });
+        // A star's holder is read when the camera comes near it (world-approach.mts); the stars' places arrive after the
+        // first view (startup-gate.ts).
+        const approach = createWorldApproach();
+        afterStartup(target, () => { if (!lifetime.disposed) approach.start(); });
         const moonLabels = own(mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock, () => refreshWorld(), layer.depthBase));
         let heliosphereEnabled = false, shellsMounted = false;
         const frames = own(createApplicationWorldFrames({ layer, planner, moonLabels, lifetime,
-          heliosphereEnabled: () => heliosphereEnabled }));
+          heliosphereEnabled: () => heliosphereEnabled, onFrame: world => approach.observe(world.pose.positionM) }));
         refreshWorld = frames.refresh;
         // An orbit centre's paths reach the planner after the frame that asked for them; plan that view again to draw them.
         lifetime.onDispose(planner.onOrbitsLoaded(() => frames.refresh()));

@@ -61,6 +61,6 @@ export function decodeWorldOrbits(plan: PreparedWorldContext, banks: ReadonlyMap
     return Object.freeze({ ...body, orbit });
   });
   // The full context holds every body: the summary's bank pins and its list of other systems' bodies stay behind.
-  const { orbitBanks: _pins, deferred: _deferred, worldBodyCount: _count, ...rest } = plan;
+  const { orbitBanks: _pins, worldBodyCount: _count, ...rest } = plan;
   return Object.freeze({ ...rest, schema: PREPARED_WORLD_CONTEXT_SCHEMA, bodies: Object.freeze(bodies) });
 }

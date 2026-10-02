@@ -217,9 +217,9 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   }
   for (const name of await readdir(bankDirectory).catch(() => [] as string[])) if (!keptBanks.has(name)) await rm(resolve(bankDirectory, name));
   await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
-  // Every page reads the summary: the Sun's own system and one point per other system. Each other system's bodies are their
-  // own file, read when a page shows that system or the camera approaches it (summarizeWorldContext).
-  const { summary, systems, stars, plainStars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])));
+  // Every page reads the summary: the Sun's own system and the bodies that orbit nothing. Each other star is a holder, its
+  // own file with the bodies that orbit it, read when a page shows that system or the camera approaches it (summarizeWorldContext).
+  const { summary, systems, index, plainStars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])));
   // The map draws those stars as dots from these banks (`/world/dots/<id>.bin`), not as bodies.
   const dotBanks = plainStarDotBanks(plainStars.map(body => ({ id: body.id, positionM: body.positionM, color: body.color })), prepared.frame);
   for (const id of PLAIN_STAR_DOT_BANK_IDS) if (!dotBanks.some(bank => bank.id === id)) await rm(resolve(dirname(options.outputPath), `${id}.bin`), { force: true });
@@ -228,8 +228,9 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   }
   // The summary names the banks this bake wrote, so the site asks for no other.
   await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify({ ...summary, ...(dotBanks.length ? { dotBanks: dotBanks.map(bank => bank.id) } : {}) })}\n`);
-  // Read by the build and Node tools only: each star's row goes to the page in the star's own object entry.
-  await writeIfChanged(worldStarsPath(options.outputPath), `${JSON.stringify(stars)}\n`);
+  // Read by the build and Node tools only: which holder has each body, which the page reads from the body's own object entry.
+  await writeIfChanged(worldIndexPath(options.outputPath), `${JSON.stringify(index)}\n`);
+  await rm(resolve(dirname(options.outputPath), 'world-stars.json'), { force: true });
   const systemDirectory = worldSystemsDirectory(options.outputPath), keptSystems = new Set<string>();
   for (const system of systems) {
     keptSystems.add(`${system.id}.json`);
@@ -248,9 +249,9 @@ export function worldSystemViewsDirectory(outputPath: string): string {
   return resolve(dirname(outputPath), 'system-views');
 }
 
-/** `world-context.json` → `world-stars.json`, beside it: the plain-dot stars nothing orbits, each as a system of one body. */
-export function worldStarsPath(outputPath: string): string {
-  return resolve(dirname(outputPath), 'world-stars.json');
+/** `world-context.json` → `world-index.json`, beside it: the build's table of which holder has each body. */
+export function worldIndexPath(outputPath: string): string {
+  return resolve(dirname(outputPath), 'world-index.json');
 }
 
 /** `world-context.json` → `world-systems/`, beside it: `<star id>.json` per system other than the focus's. */

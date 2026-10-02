@@ -28,9 +28,10 @@ export type WorldPlannerInitialise = { readonly annotationPriorities: Readonly<R
   ({ readonly validatedPlan: PreparedWorldContextGeometry; readonly source?: undefined } |
    { readonly validatedPlan: PreparedWorldContext; readonly source: WorldPlannerSource });
 
-/** A plan with more systems' bodies (`extendWorldContext`), validated by the client like its first plan. The worker adds the
- * bodies it does not hold, after those it does, so every index it planned keeps its body. */
-export type WorldPlannerExtend = { readonly validatedExtension: PreparedWorldContext };
+/** A plan with more systems' bodies (`extendWorldContext`), validated by the client like its first plan, with the added
+ * bodies' annotation tiers. The worker adds the bodies it does not hold, after those it does, so every index it planned
+ * keeps its body. */
+export type WorldPlannerExtend = { readonly validatedExtension: PreparedWorldContext; readonly annotationPriorities: Readonly<Record<string, number>> };
 
 /** The publication queue owns admission; this transport owns one persistent prepared bank.
  * With a `source`, the worker receives the main thread's validated summary and
@@ -79,7 +80,7 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
   // Bodies the worker holds, and extended plans it has not been sent: each goes just before the first view whose columns
   // hold its bodies, since a view captured before the extension still holds fewer.
   let held = 1 + validatedPlan.bodies.length;
-  const extensions: PreparedWorldContext[] = [];
+  const extensions: WorldPlannerExtend[] = [];
   return { async plan(view: WorldContextView | PackedWorldContextView): Promise<WorldContextFrame> {
     await ready;
     if (destroyed) throw new Error('World frame planner was destroyed.');
@@ -93,19 +94,20 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
         const count = packed.length / WORLD_BODY_FIELDS;
         while (held < count && extensions.length) {
           const next = extensions.shift()!;
-          held = 1 + next.bodies.length;
-          worker.postMessage({ validatedExtension: next } satisfies WorldPlannerExtend);
+          held = 1 + next.validatedExtension.bodies.length;
+          worker.postMessage(next);
         }
         worker.postMessage({ id: sequence, view: rest, bodies: packed }, [packed.buffer as ArrayBuffer]);
       }
       catch (error) { destroy(error instanceof Error ? error : new Error(String(error))); }
     });
   },
-  /** Plan with `next`, an extension of this client's plan, from the first view whose columns hold its bodies. */
-  extend(next: PreparedWorldContext) {
+  /** Plan with `next`, an extension of this client's plan, from the first view whose columns hold its bodies;
+   * `priorities` are the added bodies' annotation tiers. */
+  extend(next: PreparedWorldContext, priorities: Readonly<Record<string, number>> = {}) {
     const validated = parsePreparedWorldContextPlan(next);
     if (source && validated.schema !== PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA) throw new TypeError('Orbit banks complete the world context summary only.');
-    extensions.push(validated);
+    extensions.push({ validatedExtension: validated, annotationPriorities: { ...priorities } });
   },
   /** Call `listener` whenever an orbit centre's paths arrive after a frame that lacked them; returns the unsubscribe. */
   onOrbitsLoaded(listener: () => void) { orbitListeners.add(listener); return () => { orbitListeners.delete(listener); }; },
