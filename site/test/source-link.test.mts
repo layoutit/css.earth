@@ -34,3 +34,13 @@ test('a native body request retains its prepared default link', () => {
   assert.equal(document.querySelector('a')?.getAttribute('href'), 'https://example.test/bennu/README.md');
   assert.doesNotThrow(() => renderSourceLink(parseHTML('<html></html>').document, 'object:bennu'));
 });
+
+test('a card that arrived after the rows were read supplies its own subject', () => {
+  const { document } = parseHTML(`<html><body><nav class="object-browser"></nav>
+    <aside class="object-information-panel"><header data-source-subject="satellite-system:earth" data-source-document="https://example.test/earth/README.md" data-source-label="Sources: NASA"></header></aside>
+    <a data-source-link data-source-document="https://example.test/mars/README.md" data-source-label="Sources: USGS"><span data-source-link-label></span></a></body></html>`);
+  // The rows read on the first page (Mars) know nothing of Earth's moons.
+  renderSourceLink(document, 'satellite-system:earth', new Map());
+  assert.equal(document.querySelector('[data-source-link]')?.getAttribute('href'), 'https://example.test/earth/README.md');
+  assert.equal(document.querySelector('[data-source-link]')?.textContent, 'Sources: NASA');
+});
