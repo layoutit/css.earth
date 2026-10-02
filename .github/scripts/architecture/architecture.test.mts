@@ -248,7 +248,7 @@ test('a repository rule has no baseline: any finding breaks the check and is pri
   assert.equal(isBroken(found), true);
   assert.doesNotMatch(formatFindings(clean), /broken/u);
   assert.match(formatFindings(found), /no-x: 1 findings[\s\S]*Repository rules broken:[\s\S]*\n {4}a\/x$/u);
-  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['workspace package cycles', 'integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'package cycles, retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
+  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['workspace-package-cycles', 'integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'package cycles, retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
 });
 
 test('a script or Astro module inside an object package is a finding; its data is not', () => {
@@ -440,7 +440,7 @@ test('manifest cycles fail without a baseline across all dependency fields', () 
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, JSON.stringify({ name: `@cssearth/${id}`, ...fields }));
   };
-  const rule = REPOSITORY_RULES.find(rule => rule.id === 'workspace package cycles');
+  const rule = REPOSITORY_RULES.find(rule => rule.id === 'workspace-package-cycles');
   assert.ok(rule, 'cycle detection must be wired into the no-baseline repository checks');
   const findings = () => repositoryFindings(root, repositoryFiles(root), [rule]);
   try {
@@ -452,7 +452,7 @@ test('manifest cycles fail without a baseline across all dependency fields', () 
       '@cssearth/a -> @cssearth/b -> @cssearth/c -> @cssearth/a', '@cssearth/a -> @cssearth/b -> @cssearth/a',
     ]);
     assert.equal(isBroken(findings()), true, 'any cycle fails without reading or creating a baseline');
-    assert.match(formatFindings(findings()), /workspace package cycles: 2 findings \(no baseline; any finding fails\)/u);
+    assert.match(formatFindings(findings()), /workspace-package-cycles: 2 findings \(no baseline; any finding fails\)/u);
     assert.match(formatFindings(findings()), /workspace package cycle: @cssearth\/a -> @cssearth\/b -> @cssearth\/a/u);
     assert.equal(isBroken(repositoryFindings(root, repositoryFiles(root), [])), false, 'disabling the rule makes the mutation green');
     write('b');

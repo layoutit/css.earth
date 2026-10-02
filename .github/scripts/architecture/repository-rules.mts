@@ -41,7 +41,7 @@ export function objectCodeFiles(files: readonly string[]): string[] {
 }
 
 export const REPOSITORY_RULES: readonly RepositoryRule[] = [
-  { id: 'workspace package cycles', description: 'workspace packages have no dependency cycles, including dev and peer dependencies', check: checkPackageCycles },
+  { id: 'workspace-package-cycles', description: 'workspace packages have no dependency cycles, including dev and peer dependencies', check: checkPackageCycles },
   { id: 'integration-owners', description: 'integration files import at least two owners with no transitive workspace dependency between them', check: checkIntegrationOwners },
   {
     id: 'retired-folders',
