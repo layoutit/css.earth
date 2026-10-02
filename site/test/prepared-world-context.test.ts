@@ -1,14 +1,12 @@
 import type { OrientationXyzw, PhysicalCameraPose } from '@cssearth/engine';
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parseCompleteWorldContext, parsePreparedWorldContext, parsePreparedWorldContextSummary, worldContextGeometry, isPlacedClassification, type WorldCameraPose } from '@cssearth/objects';
 import { required } from '@cssearth/objects/node/contract';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parseCompleteWorldContext, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '@cssearth/objects';
 import { mountPreparedWorldContext } from '../../packages/renderer/src/universe/prepared-world-context.js';
-import { worldContextGeometry } from '@cssearth/objects';
 import type { WorldContextFrame } from '../../packages/renderer/src/universe/world-context/world-context-frame.js';
 import type { PlannedWorldContext } from '../../packages/renderer/src/universe/world-context/world-context-planner.js';
 import { preparedVolumeOpacity } from '../../packages/renderer/src/universe/world-context/context-scale.js';
@@ -19,7 +17,6 @@ import { type PackedWorldContextView, unpackWorldBodies } from '../../packages/r
 import { createWorldContextPlanner } from '../../packages/renderer/src/universe/world-context/world-context-planner.js';
 import { CONTEXT_LINE_WIDTH, INDICATOR_DOT_MAX_DIAMETER, indicatorDotDiameter } from '../../packages/renderer/src/universe/world-context/context-scale.js';
 import { SCENE_OBJECTS } from '../objects.mts';
-import { isPlacedClassification } from '@cssearth/objects';
 import { labelImportance } from '../../packages/renderer/src/labels/universe-label-policy.js';
 import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';

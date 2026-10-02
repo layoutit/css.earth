@@ -1,12 +1,12 @@
 /** What the default camera of a prepared object looks at, derived with the runtime's own camera math and no browser.
  *
  * The orbit's default scene matrix is CSS rotateX(scene pitch) · rotateY(yaw), the same product the runtime builds
- * (`navigation/prepared-camera-basis.ts`); `worldCameraFromPresentation` turns it into the world pose the app reports
+ * (`@cssearth/engine`); `worldCameraFromPresentation` turns it into the world pose the app reports
  * through `captureWorldCamera`. From the pose: the sub-camera point on the body, and where the body's pole and the
  * celestial directions land on screen. A preparation check uses it to refuse a default view that misses the dataset's
  * sub-observer point; a test pins the numbers the browser was measured to show. */
 import { preparedScenePitch } from '@cssearth/engine';
-import { worldCameraFromPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
+import { worldCameraFromPresentation } from '@cssearth/objects';
 import type { SolarGeometry } from '../scene/index.ts';
 
 const DEGREE = Math.PI / 180;

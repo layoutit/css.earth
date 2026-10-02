@@ -190,3 +190,7 @@ export type { MarkerPresentation } from './prepared-data/marker-presentation.js'
 export { samePreparedVolumeTopology } from './volume/prepared-volume-topology.js';
 
 export { RENDER_ELEMENT_PROFILE_SCHEMA } from './volume/render-element-budget.js';
+
+export { worldCameraFromCenteredPresentation, worldCameraFromPresentation, cameraProjectionScale, worldCameraFocusFrame, validateWorldCameraViewport } from './prepared-data/world-camera-conversion.js';
+export type { WorldCameraPose, LocalWorldCameraPresentation, PreparedWorldCameraViewport } from './prepared-data/world-camera-conversion.js';
+export { preparedDefaultViewRotation } from './prepared-data/prepared-arrival-view.js';

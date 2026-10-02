@@ -1,6 +1,7 @@
 import { eyeDistanceM } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
-import type { WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectEntry } from './objects.mts';
 import type { SystemObjects } from './object-systems.mts';

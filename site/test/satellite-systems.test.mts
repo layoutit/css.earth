@@ -7,7 +7,7 @@ import { allSatelliteSystems, satelliteSystemByHost, satelliteSystemOfMember, sa
 import { satelliteSelectionAtCamera } from '../satellite-selection.mts';
 import { selectionTargetFromUrl, createSceneSelection } from '../scene/scene-selection.mts';
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from '../system-framing.mts';
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 
 test('every prepared satellite family derives from orbit parents and has a prepared view', () => {

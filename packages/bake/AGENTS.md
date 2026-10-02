@@ -6,7 +6,7 @@ prepared delivery. Nothing here runs in the application. The runtime (`@cssearth
 
 Each topic is one subpath entry. Topics must not import each other sideways. A topic may import a lower topic, and only
 through that topic's `index.ts`, when `LOWER_TOPICS` in `src/entries.test.ts` declares it; the declared order has no
-cycle. Share anything else through `@cssearth/core` or another package. Prepared-format conventions and validators come from `@cssearth/objects`; numeric camera orientation and solar geometry come from `@cssearth/engine`. Remaining renderer loaders and runtime test fixtures await their separate ownership migrations; the renderer never imports bake.
+cycle. Share anything else through `@cssearth/core` or another package. Prepared-format conventions and validators come from `@cssearth/objects`; numeric camera orientation and solar geometry come from `@cssearth/engine`. Remaining renderer loaders await their separate ownership migration; the renderer never imports bake.
 
 - `src/photometry/` is published as `@cssearth/bake/photometry` (Node only): published photometric models, their
   records and normalization, and the limb laws and PSG limb profiles preparation draws from them. It imports no topic.
@@ -341,3 +341,10 @@ Scientific catalogue interpretation remains in catalog; sampling, feature geomet
 
 Retained emission, photometric recipes/envelopes, windows, tone curves and compact input parsers belong to
 `@cssearth/objects`; volume retains sampling, material arithmetic, decompression, restoration and compilation.
+
+Renderer-behavior runtime, selection, material and feature transport suites and their DOM harness live in
+`integration/renderer-bake/src/contract/`; immutable material and feature JSON inputs remain in
+`src/contract/fixtures/`. Leaf-box bake checks stay in `src/presentation/`; renderer visibility conformance
+lives in `integration/renderer-bake/src/presentation/leaf-box.test.mts`. These node:test suites run in
+the packages CI lane on changes to either owner. Shell facing/material conformance lives in
+`integration/renderer-bake/src/shell/shell.test.ts`; bake-owned shell assertions stay in `src/shell/`. Validated camera conversions come from `@cssearth/objects`; bake imports no renderer behavior helpers except the volume loader and the renderer bundling plugin, which phase C1c retires.

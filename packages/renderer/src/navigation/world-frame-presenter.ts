@@ -1,4 +1,5 @@
-import type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from './world-camera.js';
 
 /** One captured camera and its corresponding application frame commit together. */
 export interface WorldFrameRequest {

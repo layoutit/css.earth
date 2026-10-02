@@ -1,6 +1,7 @@
 import { fromEyeM } from '@cssearth/engine';
 import { presentWorldCamera } from '../../navigation/world-camera.js';
-import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/world-camera.js';
+import { type WorldCameraPose, type PreparedPointAppearance, type PreparedWorldContext } from '@cssearth/objects';
+import type { WorldCameraViewport } from '../../navigation/world-camera.js';
 import { cssViewFromOrientation, rotateWorldPosition } from '@cssearth/engine';
 import { rayHitsSphereBefore } from '@cssearth/engine';
 import { bindObjectNavigationTarget } from '../../solar-system/heliocentric-navigation.js';
@@ -8,8 +9,6 @@ import { MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../../solar-system/heliocen
 import { screenPicking } from '../../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../../navigation/screen-picking.js';
 import { pointPhotometry } from '../../stars/point-field-projection.js';
-import type { PreparedPointAppearance } from '@cssearth/objects';
-import type { PreparedWorldContext } from '@cssearth/objects';
 
 export interface PointSourcePublication {
   readonly opacity?: number;

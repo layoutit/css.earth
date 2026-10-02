@@ -67,7 +67,7 @@ allocates large backing surfaces for tiny projected faces. `createLeafBoxBlocks.
 prepared levels while detached; after connection, `publish()` keeps the existing motion freeze and paced settling.
 No new geometry, texture or device-specific level policy is introduced.
 
-The connection-order regression uses Neptune's real prepared groups in `packages/bake/src/contract/object-selection-runtime.test.mts`.
+The connection-order regression uses Neptune's real prepared groups in `integration/renderer-bake/src/contract/object-selection-runtime.test.mts`.
 The leaf-box unit test checks initial selection, unchanged repeated preparation and the subsequent motion freeze.
 Matched iPad captures record the reduced layer allocation, remaining first-paint
 stalls and measurement limits.
@@ -122,4 +122,5 @@ Contract tests use node:test in the packages lane.
 
 Shared prepared resource addresses, texture tile styles, silhouette thresholds, shell material addresses, feature-bank addresses, marker validation, fly-to conventions and volume topology equality live in `@cssearth/objects`. Numeric camera orientation and solar geometry live in `@cssearth/engine`.
 
-Validated world-camera pose/presentation conversion and the default-view reader remain here: they combine objects-owned validation with engine math.
+Validated presentation-to-world camera conversion, its pose/presentation data shapes and the default-view reader
+belong to `@cssearth/objects`, using engine math. Runtime viewport/layout and world-to-presentation projection stay here.

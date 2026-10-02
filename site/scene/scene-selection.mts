@@ -1,4 +1,4 @@
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
 import { overviewScopeAtCamera } from '../overview-context.mts';
 import { PAGE_VIEWS, namesSystem, withView, type PageView } from '../navigation/navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
