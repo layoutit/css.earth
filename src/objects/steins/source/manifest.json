@@ -229,16 +229,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera geometry calculated from the pinned image and mission kernels for 2867 STEINS at 2008-09-05T18:36:22.008."
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "rosetta",
-            "missionId": "rosetta",
-            "evidence": "Prepared camera derived from the pinned mission image, kernels and source control evidence. — ESA/Rosetta/MPS OSIRIS team; PDS; NAIF"
-          }
-        ]
       }
     },
     {
@@ -255,16 +245,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera geometry calculated from the pinned image and mission kernels for 2867 STEINS at 2008-09-05T18:36:46.044."
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "rosetta",
-            "missionId": "rosetta",
-            "evidence": "Prepared camera derived from the pinned mission image, kernels and source control evidence. — ESA/Rosetta/MPS OSIRIS team; PDS; NAIF"
-          }
-        ]
       }
     },
     {

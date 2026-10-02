@@ -1001,16 +1001,6 @@
             "evidence": "science/jiram/recipe.json lists native product ids, volumes, kernel files and detector limits; science/jiram/receipt.json records the measured inputs and registration."
           }
         ]
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "juno",
-            "missionId": "juno",
-            "evidence": "Repository-authored reduction recipe selecting 90 Juno JIRAM RDR frames on six visits by volume and product id, with matching raw EDR detector checks on the 31 close-pass frames. — Juno JIRAM team (A. Adriani, R. Noschese, INAF-IAPS) via the NASA PDS Atmospheres Node; recipe by cssEarth contributors"
-          }
-        ]
       }
     },
     {

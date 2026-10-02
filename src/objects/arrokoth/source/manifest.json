@@ -356,16 +356,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera transferred from the qualified CA05 LORRI image through the fitted MVIC similarity; native inputs and source mesh are hash bound."
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "new-horizons",
-            "missionId": "new-horizons",
-            "evidence": "Source-bound image registration — cssEarth; New Horizons science team"
-          }
-        ]
       }
     },
     {
