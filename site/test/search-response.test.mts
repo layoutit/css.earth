@@ -36,7 +36,8 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
     <div id="object-category-results" role="region" aria-label="Search results">
     <ul class="object-list" data-catalogue-list></ul>
     <p class="object-error" data-search-error hidden>Couldn't load search results. <button type="button" data-search-retry>Retry</button></p>
-    <p class="object-empty" hidden>No matching results</p>
+    <p class="object-empty" data-search-busy hidden>Searching…</p>
+    <p class="object-empty" data-search-empty hidden>No matching results</p>
     <details class="object-feature-results" hidden><summary>Named features <span class="object-panel-heading-count"></span></summary><p class="object-destination-hint"></p>
       <ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></details></div>
   </nav><div class="object-selected-content">
@@ -94,7 +95,7 @@ test('features are pinned, rendered into existing rows and have ordinary destina
   assert.deepEqual(reads, ['/features/index.json'], 'the feature index is read from the files beside the function');
   assert.equal(document.querySelector('.object-destination-result')?.getAttribute('href'), '/moon/?feature=tycho');
   assert.equal(document.querySelector('.object-destination-result-name')?.textContent, 'Tycho');
-  assert.equal(document.querySelector<HTMLElement>('.object-empty')?.hidden, true);
+  assert.equal(document.querySelector<HTMLElement>('[data-search-empty]')?.hidden, true);
   const failure = await render('/saturn/?q=tycho', data(entries, async () => { throw new Error('unavailable'); }));
   assert.match(failure.querySelector('.object-destination-hint')?.textContent ?? '', /could not load/);
   assert.equal(failure.querySelector('.object-destination-result')?.hasAttribute('href'), false);
@@ -113,7 +114,7 @@ test('typed search shows a flat result list, including queries that name a level
     if (query === 'Milky Way') {
       const found = await render('/saturn/?q=Milky%20Way', data([...entries, entry('scene', 'Milky Way', 'galaxy', 4)]));
       assert.deepEqual(visibleNames(found), ['Milky Way']);
-      assert.equal(found.querySelector<HTMLElement>('.object-empty')?.hidden, true);
+      assert.equal(found.querySelector<HTMLElement>('[data-search-empty]')?.hidden, true);
     }
   }
 });
@@ -150,7 +151,7 @@ test('named features share the results panel, start collapsed, and disappear whe
   assert.equal(features.querySelector('.object-panel-heading-count')?.textContent, '(1)');
   const empty = await render('/saturn/?q=unknown');
   assert.equal(empty.querySelector<HTMLElement>('.object-feature-results')?.hidden, true);
-  assert.equal(empty.querySelector<HTMLElement>('.object-empty')?.hidden, false);
+  assert.equal(empty.querySelector<HTMLElement>('[data-search-empty]')?.hidden, false);
 });
 
 test('live feature results retain their rows and disclosure until the query changes', async () => {
