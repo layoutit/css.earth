@@ -23,6 +23,9 @@ import { PREPARED_CATALOGUE_INDEX } from '../search/prepared-catalogue-index.mts
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], datasets } = Astro.props;
 const hasDatasets = Boolean(datasets && datasets.controls.length > 0);
 const hasFacts = facts.length + moreFacts.length > 0;
+// A body whose only dataset is one color has nothing to choose between: its factsheet and that dataset show together,
+// factsheet first, without tabs.
+const stacked = hasFacts && datasets?.controls.length === 1 && datasets.controls[0]!.color !== undefined && galleries.length === 0;
 const articleUrl = await readObjectArticleUrl(objectId);
 // An object that is a level of the zoom ladder lists what it holds: the world's host and the featured bodies of the
 // classifications it holds without a list label of their own, nearest first, with search's own rows.
@@ -57,6 +60,7 @@ const memberMarkup = (list: (typeof lists)[number], { member, distancePc }: (typ
   return objectResultMarkup({ ...row, detail: { text: `${value} ${unit}`, value, unit, title: list.title, ariaLabel: `${value} ${unit}. ${list.title}` } });
 };
 const opening = bodies.length ? 'bodies' : lists[0]?.id ?? 'dataset';
+const together = stacked && !bodies.length && !lists.length;
 // The card's subject: the body, its moons, or (for a star with planets) its planetary system.
 const asked = viewFromUrl(Astro.url);
 const cardSubject = asked === 'moons' && satelliteSystemByHost(objectId) || asked === 'system' && systemById(SCENE_OBJECTS, objectId) ? asked : 'body';
@@ -64,14 +68,14 @@ const cardSubject = asked === 'moons' && satelliteSystemByHost(objectId) || aske
 const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.systemDataset)) || galleries.length > 0;
 ---
 
-<ObjectCard class="object-information-panel" data-card-subject={cardSubject}
+<ObjectCard class="object-information-panel" data-card-subject={cardSubject} data-card-stacked={together || undefined}
   data-card-view={cardSubject === 'body' ? undefined : 'overview'}>
   <SatelliteSystemCard hostId={objectId} detached={cardSubject !== 'moons'} />
   <SystemCard hostId={objectId} />
       <ObjectCardHeader {objectId} {title} {introduction} {articleUrl}>
           {level ? <ObjectBreadcrumbs scope={objectId} /> : <ObjectBreadcrumbs {objectId} />}
       </ObjectCardHeader>
-      {hasFacts && <InformationTabs idPrefix={objectId} initialTab={opening} tabs={[
+      {hasFacts && !together && <InformationTabs idPrefix={objectId} initialTab={opening} tabs={[
         ...(bodies.length ? [{ id: 'bodies', label: 'Celestial bodies' }] : []),
         ...lists.map((list, index) => ({ id: list.id, label: index === 0 && !bodies.length ? 'Celestial bodies' : list.label, count: list.rows.length })),
         { id: 'dataset', label: 'Datasets' },
@@ -86,7 +90,15 @@ const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.system
           {list.rows.map(row => <li class="object-item"><Fragment set:html={row.member === list.home ? objectResultMarkup({ ...resultRows.get(row.member.id)!, detail: undefined }) : memberMarkup(list, row)} /></li>)}
         </ul>
       </section>)}
-      <TreeDisclosure title="Datasets" class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" data-system-view-datasets={systemDatasets || undefined} open>
+      {together && <section class="object-card-tabpanel object-factsheet-content" id={`${objectId}-factsheet-content`} data-information-panel="factsheet" aria-label="Factsheet">
+        <h2 class="object-mobile-information-heading">Factsheet</h2>
+        <ObjectFactsheet id={objectId} {facts} {moreFacts} embedded />
+      </section>}
+      {together && datasets && <section class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" aria-label="Datasets">
+        <h2 class="object-card-section-title">Datasets</h2>
+        <DatasetList {objectId} {datasets} />
+      </section>}
+      {!together && <TreeDisclosure title="Datasets" class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" data-system-view-datasets={systemDatasets || undefined} open>
       <h2 class="object-mobile-information-heading">Datasets</h2>
       {hasDatasets && datasets && <DatasetList {objectId} {datasets} />}
       {galleries.map((gallery) => (
@@ -116,8 +128,8 @@ const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.system
         </div>
       </details>
       ))}
-      </TreeDisclosure>
-      {hasFacts && <section class="object-card-tabpanel object-factsheet-content" id={`${objectId}-factsheet-content`} data-information-panel="factsheet" aria-label="Factsheet">
+      </TreeDisclosure>}
+      {hasFacts && !together && <section class="object-card-tabpanel object-factsheet-content" id={`${objectId}-factsheet-content`} data-information-panel="factsheet" aria-label="Factsheet">
         <h2 class="object-mobile-information-heading">Factsheet</h2>
         <ObjectFactsheet id={objectId} {facts} {moreFacts} embedded />
       </section>}
