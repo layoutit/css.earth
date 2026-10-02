@@ -41,9 +41,9 @@ Values chosen here, not measured or published:
 
 ## Evidence
 
-![GN-z11 in the app](evidence/2026-10-03/views.jpg)
+![GN-z11 in the app](evidence/2026-10-02/views.jpg)
 
-The GN-z11 page in headless Chromium at 1440 × 900, device pixel ratio 2, on this branch on 2026-10-03: the default
+The GN-z11 page in headless Chromium at 1440 × 900, device pixel ratio 2, on this branch on 2026-10-02: the default
 arrival, then the camera turned to the side and to above the galaxy.
 
 - The volume reproduces the window along every sight line through the spheroid (the method conditions on it);
