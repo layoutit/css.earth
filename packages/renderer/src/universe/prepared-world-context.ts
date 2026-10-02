@@ -135,7 +135,7 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
 }
 
 /** Existing retained segment/sprite rendering, driven by the same observer as the detailed body. */
-export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationOpacities = {}, annotationPriorities = {}, distantNavigation, plainDots, opacityClock, orbitRenderer = 'bars', depthBase = 0 }: {
+export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationOpacities = {}, annotationPriorities = {}, nonNavigableIds = [], plainDots, opacityClock, orbitRenderer = 'bars', depthBase = 0 }: {
   host: HTMLElement; before: Element; plan: PreparedWorldContext; sprites: Readonly<Record<string, SpriteWithUrl>>;
   /** Presentation may live outside the input host's changing CSS scope. */
   presentationHost?: HTMLElement;
@@ -143,7 +143,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
   /** Each body's annotation priority (the planner's): the fixed order its marker paints and picks in. */
   annotationPriorities?: Readonly<Record<string, number>>;
-  distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
+  /** Bodies that keep their marker but are never a hover or navigation target: they are reached through search. */
+  nonNavigableIds?: readonly string[];
   /** Bodies drawn as a dot in their colour, at least `minimumDiameterPixels` wide: no sprite, and never a hover or
    * navigation target. */
   plainDots?: { readonly ids: readonly string[]; readonly minimumDiameterPixels: number };
@@ -153,10 +154,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   /** The stage's depth base: every z-index here is above it or at it, never negative (prepared-universe-runtime.ts). */
   depthBase?: number;
 }) {
-  if (distantNavigation && (!Number.isFinite(distantNavigation.afterDistanceM) || distantNavigation.afterDistanceM <= 0)) {
-    throw new TypeError('Distant navigation requires a positive finite distance.');
-  }
-  const distantNonNavigableIds = new Set(distantNavigation?.nonNavigableIds ?? []);
+  const nonNavigable = new Set(nonNavigableIds);
   const plainDotIds = new Set(plainDots?.ids ?? []);
   const root = host.ownerDocument.createElement('div');
   // The emphasised body's corner locator: one element, moved between markers (context-locator.ts).
@@ -170,7 +168,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const interactions = createWorldContextInteractions(host, root);
   // Captured frames go stale on every presentation change; the planner's policy only on semantic ones.
   let presentationRevision = 0, policyDirty = true;
-  let distantNavigationActive = false;
   const contextFrames = createWorldContextFrameReceiver();
   let previousHeader: { emphasizedId: string | null; otherSystemOpacity: number; width: number; height: number } | null = null;
   let publishCount = 0;
@@ -238,7 +235,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       dotDiameter,
       drawnDotDiameter: dotDiameter !== null && orbit === null && body.id !== plan.focus.id ? Math.min(STAR_DOT_MAX_DIAMETER_PIXELS, dotDiameter) : dotDiameter,
       pointSource: body.id === plan.focus.id && plan.focus.pointSource !== undefined,
-      alwaysNonNavigable: unpackaged || plainDot, distantNonNavigable: distantNonNavigableIds.has(body.id),
+      alwaysNonNavigable: unpackaged || plainDot || nonNavigable.has(body.id),
       orbitTransform: '',
       orbitAppearance: { width: CONTEXT_LINE_WIDTH, opacity: 1 },
       bodyHidden: false, orbitHidden: false, labelHidden: false, labelSuppressed: false, indicatorHidden: false,
@@ -531,9 +528,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       }
       fader.batch(() => {
       const cameraChanged = !sameCamera(world, viewport);
-      const nextDistantNavigationActive = distantNavigation !== undefined && eyeDistanceM(world.pose, plan.focus.positionM) >= distantNavigation.afterDistanceM;
-      const distantNavigationChanged = nextDistantNavigationActive !== distantNavigationActive;
-      distantNavigationActive = nextDistantNavigationActive;
       const rotating = rotationPhase === 'dragging', coast = coasting;
       const interactiveHover = hoverIntent && !cameraChanged && !rotating && !navigationInFlight && !coast;
       if (cameraChanged || rotating || navigationInFlight) settleHover();
@@ -553,7 +547,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       cameraState[7] = viewport.focalPixels; cameraState[8] = width; cameraState[9] = height;
       cameraState.set(viewport.principalOffsetPixels, 10);
       const resized = previousHeader?.width !== width || previousHeader?.height !== height;
-      const policyChanged = resized || distantNavigationChanged || policyDirty || previousHeader?.emphasizedId !== emphasizedId ||
+      const policyChanged = resized || policyDirty || previousHeader?.emphasizedId !== emphasizedId ||
         previousHeader?.otherSystemOpacity !== otherSystemOpacity;
       policyDirty = false;
       previousHeader = { emphasizedId, otherSystemOpacity, width, height };
@@ -606,7 +600,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const billboardShown = coast ? entry.paint.billboardShown === true : plannedShown;
         if (!billboardShown && entry.paint.billboardShown === false && orbitVisibility === 0 && entry.previousCount === 0) continue;
         bodyPublications++;
-        const navigationSuppressed = entry.alwaysNonNavigable || (distantNavigationActive && entry.distantNonNavigable);
+        const navigationSuppressed = entry.alwaysNonNavigable;
         const { pointSource } = entry;
         // A body's circle holds a dot in the body's colour, sized by its radius, until its own disc outgrows the dot.
         // The focus star's circle holds the same dot over its point of light.

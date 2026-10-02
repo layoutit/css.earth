@@ -18,11 +18,12 @@ const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => {
   return [object.id, opacity];
 }));
 const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
-// Phones get a lighter scene: no celestial sky cube, and no ordinary asteroid markers (see discoveryVisibility).
+// Phones get a lighter scene: no celestial sky cube.
 const phone = globalThis.matchMedia?.(MOBILE_VIEWPORT_QUERY).matches === true;
 const defaultFeatures: ReadonlySet<string> = new Set(prepared.defaultFeatureIds);
 const orbitFeatures: ReadonlySet<string> = new Set(prepared.orbitFeatureIds);
 const ordinaryAsteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !defaultFeatures.has(object.id)).map(object => object.id);
+const ordinaryAsteroids: ReadonlySet<string> = new Set(ordinaryAsteroidIds);
 // Only notable asteroids are map targets; preparation marks the rest as plain dots (site/build/prepare/prepare-spatial-context.ts),
 // with no sprite, caption, hover or click. Their pages stay reachable through search.
 // A system the page has not read yet lists its bodies with these flags (site/world-context-plan.mts).
@@ -62,7 +63,6 @@ function placedSystemOf(id: string): ReadonlySet<string> {
   return new Set([root, ...placedSystems.members.get(root) ?? []]);
 }
 const hiddenOrbitIds = prepared.hiddenOrbitIds;
-const cometIds = new Set(SCENE_OBJECTS.filter(object => object.classification === 'comet').map(object => object.id));
 // Every body that orbits another and every centre something orbits; a barycentre's own centre is its host star.
 const systemMembers: ReadonlySet<string> = new Set([...orbitCenters].flat());
 const annotationPriorities = Object.fromEntries([...SCENE_OBJECTS.map(object =>
@@ -79,21 +79,23 @@ export const worldVisibilityPolicy = {
 export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLayer, 'setBodyVisibility'>, lifetime: SceneLifetime) {
   let illustrations = false;
   let highlighted: string | null = null;
-  let selectedCometId: string | null = null;
+  // A selected body that orbits the Sun draws itself and its orbit, whatever the default context hides. A moon's path
+  // follows its family's rule instead.
+  let selectedId: string | null = null;
   let openSystem: ReadonlySet<string> = new Set();
 
   function update() {
     if (lifetime.disposed) return;
     const category = highlighted === null ? undefined : prepared.categoryFrames.get(highlighted);
     const highlightedIds = category?.memberIds, hosts: ReadonlySet<string> = new Set(category?.hostIds);
-    const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations, highlighted, ...(highlightedIds ? { highlightedIds } : {}), compact: phone, defaultFeatures, systemMembers, orbitFeatures });
+    const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations, highlighted, ...(highlightedIds ? { highlightedIds } : {}), defaultFeatures, systemMembers, orbitFeatures });
     layer.setBodyVisibility({
-      bodyHidden: visibility.hiddenBodies.filter(id => !openSystem.has(id)),
+      bodyHidden: visibility.hiddenBodies.filter(id => !openSystem.has(id) && id !== selectedId),
       labelHidden: [...visibility.hiddenLabels, ...plainDotIds].filter(id => !openSystem.has(id) && !hosts.has(id)),
       highlighted: [...visibility.highlightedBodies, ...hosts],
-      // Mission targets keep circles; ordinary asteroids retain a hover/pick target.
+      // Mission targets keep circles; an ordinary asteroid drawn for its highlighted category is a bare dot.
       indicatorHidden: ordinaryAsteroidIds,
-      orbitHidden: hiddenOrbitIds.filter(id => id !== selectedCometId),
+      orbitHidden: hiddenOrbitIds.filter(id => id !== selectedId),
     });
   }
 
@@ -104,12 +106,12 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
       if (lifetime.disposed) return;
       // A selected host or moon reveals its satellite family even when illustration models
       // are disabled. Other stars retain their complete planetary system visibility.
-      const comet = cometIds.has(id) && hiddenOrbitIds.includes(id) ? id : null;
-      const cometChanged = selectedCometId !== comet;
-      selectedCometId = comet;
+      const revealed = ordinaryAsteroids.has(id) || hiddenOrbitIds.includes(id) && !minorMoons.has(id) ? id : null;
+      const selectionChanged = selectedId !== revealed;
+      selectedId = revealed;
       const family = satelliteSystemByHost(id) ?? satelliteSystemOfMember(id);
       const system = family ? new Set([family.hostId, ...family.memberIds]) : placedSystemOf(id);
-      if (cometChanged || system.size !== openSystem.size || [...system].some(member => !openSystem.has(member))) {
+      if (selectionChanged || system.size !== openSystem.size || [...system].some(member => !openSystem.has(member))) {
         openSystem = system;
         update();
       }
