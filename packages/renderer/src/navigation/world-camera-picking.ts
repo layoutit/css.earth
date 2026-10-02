@@ -32,22 +32,23 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   let touch = false;
   const pick = (event: MouseEvent, reach = 0) => {
     const bounds = readBounds();
-    const target = registry.pick(event.clientX - bounds.left - bounds.width / 2,
-      event.clientY - bounds.top - bounds.height / 2, reach);
+    const picked = registry.pickTarget(event.clientX - bounds.left - bounds.width / 2,
+      event.clientY - bounds.top - bounds.height / 2, reach), target = picked?.element ?? null;
     // Context sprites paint behind the selected detailed surface. Their screen
     // bounds can overlap it even when their centres are not occluded. Reuse the
     // detail owner's existing hit contract for both hover and activation.
-    // Targets anchored on the detailed surface itself paint in front of it and opt out.
-    return target && target.dataset.surfacePick !== 'true' && detailOccludes?.(event.clientX, event.clientY) ? null : target;
+    // Targets anchored on the detailed surface itself paint in front of it and opt out, and a see-through object
+    // (a cluster's dots, a galaxy's image) covers nothing: its members' markers show through it.
+    return target && !picked!.unoccluded && target.dataset.surfacePick !== 'true' && detailOccludes?.(event.clientX, event.clientY) ? null : target;
   };
   let hoveredGroup: HTMLElement | null = null;
   const setHovered = (target: HTMLElement | null, interactive: boolean) => {
     if (target === hovered) return;
     if (hovered) delete hovered.dataset.objectHovered;
     if (hoveredGroup) delete hoveredGroup.dataset.objectHovered;
-    hoveredGroup = target?.closest<HTMLElement>('[data-context-group]') ??
+    hoveredGroup = target?.closest<HTMLElement>('[data-context-body]') ??
       (target?.dataset.objectNavigate
-        ? host.querySelector<HTMLElement>(`[data-context-group="${target.dataset.objectNavigate}"]`) : null);
+        ? host.querySelector<HTMLElement>(`[data-context-body="${target.dataset.objectNavigate}"]`) : null);
     if (hoveredGroup) hoveredGroup.dataset.objectHovered = 'true';
     if (target) {
       target.dataset.objectHovered = 'true';

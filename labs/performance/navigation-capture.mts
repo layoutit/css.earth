@@ -205,13 +205,13 @@ try {
     }, name);
     report.milestones.push(value); console.log('PHASE', name, value.active);
   };
-  const visible = async (id: string) => tab.locator(`[data-object-navigate="${id}"][data-context-label], [data-object-navigate="${id}"][data-context-indicator], [data-object-navigate="${id}"][data-context-body]`).evaluateAll((nodes): VisibleTarget | null => {
+  const visible = async (id: string) => tab.locator(`[data-object-navigate="${id}"][data-context-indicator], [data-object-navigate="${id}"][data-context-body]`).evaluateAll((nodes): VisibleTarget | null => {
     for (const node of nodes) {
       if (node.ariaDisabled === 'true' || !node.checkVisibility({ opacityProperty: true, visibilityProperty: true })) continue;
       const r = node.getBoundingClientRect(), x = r.x + r.width / 2, y = r.y + r.height / 2;
       if (!r.width || !r.height || x < 390 || x > innerWidth - 40 || y < 80 || y > innerHeight - 60) continue;
       if (!document.elementFromPoint(x, y)?.closest('.object-input-surface')) continue;
-      return { x, y, kind: node.hasAttribute('data-context-label') ? 'label' : 'marker', text: node.textContent };
+      return { x, y, kind: node.getAttribute('data-context-label-visible') === 'true' ? 'label' : 'marker', text: node.textContent };
     } return null;
   });
   const wheel = async (phase: string, delta: number) => {

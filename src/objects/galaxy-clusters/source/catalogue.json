@@ -19,7 +19,7 @@
     },
     {
       "id": "cosmicflows-4",
-      "path": "../../nearby-universe/source/galaxies/cf4-hyperleda.csv.gz",
+      "path": "../../nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz",
       "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
       "bytes": 552964,
       "citation": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table"
@@ -51,7 +51,8 @@
       "aliases": [
         "Abell 1060"
       ],
-      "cf4Group": "31478"
+      "cf4Group": "31478",
+      "detailedObjectId": "hydra-cluster"
     },
     {
       "id": "centaurus-cluster",
@@ -60,7 +61,8 @@
       "aliases": [
         "Abell 3526"
       ],
-      "cf4Group": "43296"
+      "cf4Group": "43296",
+      "detailedObjectId": "centaurus-cluster"
     },
     {
       "id": "norma-cluster",
@@ -78,7 +80,8 @@
       "aliases": [
         "Abell 426"
       ],
-      "cf4Group": "12429"
+      "cf4Group": "12429",
+      "detailedObjectId": "perseus-cluster"
     },
     {
       "id": "coma-cluster",
@@ -87,7 +90,8 @@
       "aliases": [
         "Abell 1656"
       ],
-      "cf4Group": "44715"
+      "cf4Group": "44715",
+      "detailedObjectId": "coma-cluster"
     }
   ],
   "description": "Seven nearby named galaxy clusters, independently selected from MCXC-II, each at the measured distance of its Cosmicflows-4 group (the group of its brightest galaxy). Centres and R500 apertures; Virgo and Fornax link to packages that draw their member galaxies.",

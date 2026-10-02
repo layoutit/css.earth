@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "members",
+      "path": "src/objects/perseus-cluster-members/source/dots/members.csv.gz",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+Seq%2C+objID%2C+RAJ2000%2C+DEJ2000%2C+rmag%2C+z+FROM+%22J%2FApJS%2F272%2F22%2Ftable2%22+WHERE+Mm%3D1",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/272/22",
+      "title": "Perseus Cluster members that Cosmicflows-4 does not hold",
+      "credit": "Kang et al. (2024), ApJS 272, 22; CDS J/ApJS/272/22; SDSS DR16 photometry, CDS V/154",
+      "acquisition": "Written 2026-10-02 by packages/bake/authoring/galaxy-clusters/members.mts from the CDS table (the origin) and SDSS DR16 g and r magnitudes by objID, with each member's Cosmicflows-4 group distance from the Nearby Universe's tracked table.",
+      "generator": "packages/bake/authoring/galaxy-clusters/members.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kang-2024-perseus-redshifts",
+            "role": "material",
+            "evidence": "src/objects/perseus-cluster-members/source/dots/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "cosmicflows-4-groups"
+      ],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    },
+    {
+      "id": "cosmicflows-4-groups",
+      "path": "src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/944/94/table3.dat.gz",
+      "sourceUrl": "https://doi.org/10.3847/1538-4357/ac94d8",
+      "title": "Cosmicflows-4 group distances, as joined into the Nearby Universe's tracked galaxy table",
+      "credit": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94, distributed by CDS/VizieR",
+      "acquisition": "Read from the Nearby Universe's tracked table, whose G1PGC and GDMzp columns packages/bake/authoring/nearby-universe/cf4-groups.mts joined from CDS tables 2 and 3.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cosmicflows-4",
+            "role": "method",
+            "evidence": "src/objects/perseus-cluster-members/source/dots/points.json#/table/groupDistance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite Tully et al. (2023) and CDS/VizieR."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/perseus-cluster-members/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/perseus-cluster-members/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

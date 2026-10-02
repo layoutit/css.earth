@@ -27,9 +27,21 @@ file elsewhere carries the share-alike terms with it.
 
 `site/prepared-sources.json` and `site/prepared-facilities.json` are generated
 from these records and the existing product lineage, with
-`site/prepared-source-credits.json`, the short provider list each page's
-"Sources" link shows. The pages read only that list: the whole catalogue is
-tens of megabytes. They are ignored build outputs; do not edit or commit them.
+`site/prepared-source-credits.json`: the short provider list each page's
+"Sources" link shows, and the rows of the body card's Sources tab. A published
+work is one row: its title, kind, publisher and landing page. Files that have no
+published title are one row per credit line, with their count and the datasets
+they feed, linked to the first of them. Every row leads to the source's own
+site; the README is the footer's link.
+The pages read only the credits file: the whole catalogue is tens of megabytes.
+The three prepared files are ignored build outputs; do not edit or commit them.
+
+Each row shows the favicon of the site it links to, loaded from that site: the
+repository keeps no copy of a site's mark. `node site/build/prepare/refresh-source-icons.mts`
+finds the icon address of each site not yet recorded and writes it to
+[source-icons.json](../site/source/source-icons.json). A DOI is keyed by its
+registrant prefix and resolved to its publisher. A site that refuses the request
+is recorded without an icon and its rows show the outbound mark.
 The [provenance contract](provenance/CONTRACT.md) governs citations, retained data,
 evidence and plain language. Keep scientific tables in their existing records.
 

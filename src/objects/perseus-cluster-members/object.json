@@ -1,0 +1,15 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "perseus-cluster-members",
+  "type": "catalogue-point-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/dots/points.json"
+    },
+    "host": "perseus-cluster"
+  },
+  "prepared": {
+    "format": "cssearth-catalogue-points-bin@1",
+    "url": "prepared/dots.bin"
+  }
+}

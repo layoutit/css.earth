@@ -135,9 +135,11 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       catch (error) { if (!(error instanceof Error && error.name === 'AbortError')) throw error; }
     },
     /** Fit a volume the body shows through its dataset, when the view does not already hold it. Null when the view is
-     * already as far out as the fit, or the volume is unknown. */
+     * already as far out as the fit, or the volume is unknown, or the volume is another object's extent: M87* shows its
+     * galaxy's volume around it and opened 6.3 million light-years out, its own image under a pixel (2026-10-01). */
     datasetVolumeTarget({ objectId, volumeId, mount }: { objectId: string; volumeId: string; mount?: ShellCamera | null }) {
-      const volume = DATASET_VOLUMES.get(volumeId), frame = frames.get(objectId), owner = mount?.navigation;
+      const bank = DATASET_VOLUMES.get(volumeId), volume = !bank || (bank.host !== undefined && bank.host !== objectId) ? undefined : bank.frame;
+      const frame = frames.get(objectId), owner = mount?.navigation;
       const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
       if (!volume || !frame || !from || !optics) return null;
       const target = volumeZoomTarget(from, volume, optics, systemFramingRect(optics, documentTarget), frame.originM);
