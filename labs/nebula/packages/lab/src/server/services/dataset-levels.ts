@@ -24,7 +24,8 @@ import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
-import { datasetToneRender, validateChannelGain, validateDatasetToneCurve, type ChannelGain, type DatasetToneCurve } from '@cssearth/bake/volume';
+import { datasetToneRender, validateChannelGain, type ChannelGain } from '@cssearth/bake/volume';
+import { validateDatasetToneCurve, type DatasetToneCurve } from '@cssearth/objects';
 import type { PreparedReconstruction } from '../../features/reconstruction/reconstruction-types.ts';
 
 export const LEVEL_BINS = 64;

@@ -35,7 +35,8 @@ import { datasetLevels, loadDatasetLevelGrid } from '../../server/services/datas
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { ceilingShare, composeToneCurve, coreDisc, fitCorrection, highlightExposureBound, identityToneCurve, pairedPixels, pinnedShare,
   predictToneCurve, reexposeProjection, solveExposure, splitFootprint, toneScore, TOLERANCE, type CoreDisc } from './dataset-tone-fitting.ts';
-import type { DatasetToneCurve } from '@cssearth/bake/volume';
+
+import type { DatasetToneCurve } from '@cssearth/objects';
 import { isResultName } from '../../features/result-name.ts';
 
 export { TOLERANCE };

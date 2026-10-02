@@ -1,3 +1,4 @@
+import { COMPACT_FINITE_EMISSION_METHOD } from '@cssearth/objects';
 /** Selection rules for saved reconstructions: the catalogue's owning model decides, never whichever result is on screen. */
 import { densityPreviewAllowed, reconstructionProcessingCapability, type ReconstructionProcessingCapability } from './reconstruction-capabilities.ts';
 import type { ReconstructionCandidate, ReconstructionCatalogue } from './reconstruction-types.ts';
@@ -7,7 +8,7 @@ type Catalogue = Pick<ReconstructionCatalogue, 'finiteModel'> & { candidates: re
 export function selectedProcessing(catalogue: Catalogue | null, row: Pick<ReconstructionCandidate, 'prepared'> | undefined): ReconstructionProcessingCapability | undefined {
   if (row?.prepared) return row.prepared.processing ?? reconstructionProcessingCapability(undefined);
   // A finite model owns this view: an image without its baked dataset cannot fall back to density repainting.
-  if (catalogue?.finiteModel) return reconstructionProcessingCapability('simulation-guided-finite-material@1');
+  if (catalogue?.finiteModel) return reconstructionProcessingCapability(COMPACT_FINITE_EMISSION_METHOD);
   return undefined;
 }
 export function selectedPreviewAllowed(catalogue: Catalogue | null, row: Pick<ReconstructionCandidate, 'prepared'> | undefined): boolean {

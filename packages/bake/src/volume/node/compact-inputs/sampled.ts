@@ -1,51 +1,15 @@
+import { readCompactSampled, decodeCompactPointColors } from '@cssearth/objects';
 import { readCompactPin as pinned } from './io.ts';
 /** Replay retained measured samples and emitter colors without fitting or native images. */
 import { gunzipSync } from 'node:zlib';
-import { readSampledRecipe } from '@cssearth/objects';
 import { readCompilerBakeResult, type CompilerPin } from '@cssearth/objects';
-import { prepareSampledMaterial, type SampledColor } from '../../materials/sampled.ts';
+import { prepareSampledMaterial } from '../../materials/sampled.ts';
 import { prepareSampledField } from '../../fields/sampled.ts';
-import { gridDiffuse, type DiffuseAtom } from '../../fields/diffuse-atoms.ts';
+import { gridDiffuse } from '../../fields/diffuse-atoms.ts';
 import { bakeCompiler as bake, type BakeCompilerOptions, type CompilerBakeBackend } from '../compiler/bake.ts';
 import { registerComponentBanks as register, type ComponentBankBackend } from '../compiler/component-layout.ts';
-const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 export interface SampledReplayBackend extends Omit<CompilerBakeBackend, 'compileVolume'>, ComponentBankBackend {
   decodeFits(bytes: Buffer): { values: Float32Array };
-}
-const object = (v: unknown): Record<string, unknown> => {
-  if (!jointRecord(v)) throw new Error("Invalid compact record");
-  return v;
-};
-const text = (v: unknown): string => {
-  if (typeof v !== "string") throw new Error("Invalid compact string");
-  return v;
-};
-const finite = (v: unknown): number => {
-  if (typeof v !== "number" || !Number.isFinite(v))
-    throw new Error("Invalid compact number");
-  return v;
-};
-const array = (v: unknown): unknown[] => {
-  if (!Array.isArray(v)) throw new Error("Invalid compact list");
-  return v;
-};
-const triple = (v: unknown): [number, number, number] => {
-  const a = array(v).map(finite);
-  if (a.length !== 3) throw new Error("Invalid vector");
-  return [a[0]!, a[1]!, a[2]!];
-};
-const pin = (v: unknown): CompilerPin => {
-  const p = object(v);
-  return { path: text(p.path) };
-};
-function colors(v: unknown): SampledColor[] {
-  return array(v).map((c) => {
-    const r = object(c),
-      rgb = triple(r.rgb);
-    if (typeof r.covered !== "boolean" || rgb.some((n) => n < 0 || n > 1))
-      throw new Error("Invalid material color");
-    return { rgb, covered: r.covered };
-  });
 }
 type EmissionSampler = BakeCompilerOptions['sampleEmission'];
 /** Planning-only envelope: a feature unique to any dataset remains represented without summing its brightness into the baked field. */
@@ -71,68 +35,28 @@ export async function prepareCompactSampledInputs(
   signal: AbortSignal = new AbortController().signal,
 ) {
   signal.throwIfAborted();
-  const m = object(
-    JSON.parse(
-      gunzipSync(await pinned(root, inputPin), {
-        maxOutputLength: 10_000_000,
-      }).toString(),
-    ),
-  );
-  if (m.schema !== "cssearth-compact-sampled@2")
-    throw new Error("Invalid compact sampled model");
-  const recipe = readSampledRecipe(m.recipe),
-    original = readCompilerBakeResult(m.scene),
-    id = text(m.sourceResult);
-  if (id !== original.id) throw new TypeError('Compact source result differs from its retained scene.');
-  const fits = gunzipSync(await pinned(root, pin(m.particles)), {
+  const m = readCompactSampled(JSON.parse(gunzipSync(await pinned(root, inputPin), { maxOutputLength: 10_000_000 }).toString()));
+  const { recipe, original, id } = m;
+  const fits = gunzipSync(await pinned(root, m.particles), {
       maxOutputLength: 100_000_000,
     }),
     values = backend.decodeFits(fits).values;
   const prepared = prepareSampledField(values, recipe, signal),
-    datasetInputs = array(m.datasets).map(object);
-  const datasetIds = datasetInputs.map(dataset => text(dataset.id));
-  if (new Set(datasetIds).size !== datasetIds.length || datasetIds.length !== original.datasets.length ||
-      original.datasets.some(dataset => !datasetIds.includes(dataset.id))) throw new TypeError('Compact datasets differ from the retained scene.');
-  if (Object.hasOwn(m, 'expected')) throw new TypeError(`Compact sampled inputs for ${id} carry the removed volume digest field expected.`);
-  const load = async (l: Record<string, unknown>) => {
-    const sourceId = text(l.id),
-      weights = recipe.datasetComponents[sourceId];
+    datasetInputs = m.datasets;
+  const load = async (l: typeof datasetInputs[number]) => {
+    const sourceId = l.id, weights = recipe.datasetComponents[sourceId];
     if (!weights) throw new Error("Unknown compact dataset");
-    const material = object(l.material),
-      fit = l.fit === undefined ? undefined : object(l.fit);
-    const atoms: DiffuseAtom[] = fit
-      ? array(fit.atoms).map((a) => {
-          const r = object(a),
-            sigmaArcsec = finite(r.sigmaArcsec);
-          if (sigmaArcsec <= 0) throw new Error("Invalid atom");
-          return { centerArcsec: triple(r.centerArcsec), sigmaArcsec };
-        })
-      : [];
-    const coefficients = fit ? array(fit.coefficients).map(finite) : [],
-      diffuse = fit
-        ? gridDiffuse(prepared, atoms, coefficients, signal)
-        : undefined;
-    const b = gunzipSync(await pinned(root, pin(l.points)), {
+    const { material, fit } = l, atoms = fit?.atoms ?? [], coefficients = fit?.coefficients ?? [];
+    const diffuse = fit ? gridDiffuse(prepared, atoms, coefficients, signal) : undefined;
+    const b = gunzipSync(await pinned(root, l.points), {
       maxOutputLength: recipe.source.height * 32,
     });
-    if (b.length !== recipe.source.height * 32)
-      throw new Error("Point colors size differs");
-    const pointColors = new Float64Array(recipe.source.height * 4);
-    for (let i = 0; i < pointColors.length; i++) {
-      pointColors[i] = b.readDoubleLE(i * 8);
-      if (
-        !Number.isFinite(pointColors[i]) ||
-        pointColors[i]! < 0 ||
-        pointColors[i]! > 1 ||
-        (i % 4 === 3 && pointColors[i] !== 0 && pointColors[i] !== 1)
-      )
-        throw new Error("Invalid point color");
-    }
+    const pointColors = decodeCompactPointColors(b, recipe.source.height);
     const fitData =
       fit && diffuse
-        ? { atoms, coefficients, ejectaGain: finite(fit.ejectaGain), diffuse }
+        ? { atoms, coefficients, ejectaGain: fit.ejectaGain, diffuse }
         : undefined;
-    const retained = { pointColors, windColors: colors(material.windColors), atomColors: colors(material.diffuseColors) };
+    const retained = { pointColors, windColors: material.windColors, atomColors: material.diffuseColors };
     if (retained.windColors.length !== recipe.terms.length || retained.atomColors.length !== atoms.length)
       throw new TypeError('Retained material colors differ from sampled components.');
     const prepareMaterial = () => prepareSampledMaterial(
@@ -152,7 +76,7 @@ export async function prepareCompactSampledInputs(
     );
     return {
       sourceId,
-      label: text(l.label),
+      label: l.label,
       field: fitData
         ? prepared.field(
             { ejecta: weights.ejecta * fitData.ejectaGain, pwn: weights.pwn },
@@ -167,25 +91,22 @@ export async function prepareCompactSampledInputs(
     reference = datasetInputs.find((l) => l.id === referenceId);
   if (!reference) throw new Error("Missing reference dataset");
   const referenceFit =
-    reference.fit === undefined ? undefined : object(reference.fit);
+    reference.fit;
   const ref = await load(reference);
   const neutralField = referenceFit
     ? prepared.field(
-        { ejecta: finite(referenceFit.ejectaGain), pwn: 1 },
+        { ejecta: referenceFit.ejectaGain, pwn: 1 },
         1,
         gridDiffuse(
           prepared,
-          array(referenceFit.atoms).map((a) => ({
-            centerArcsec: triple(object(a).centerArcsec),
-            sigmaArcsec: finite(object(a).sigmaArcsec),
-          })),
-          array(referenceFit.coefficients).map(finite),
+          referenceFit.atoms,
+          referenceFit.coefficients,
         ),
       )
     : prepared.field({ ejecta: 1, pwn: 1 });
   const datasets = [];
   for (const input of datasetInputs) datasets.push(input === reference ? ref : await load(input));
-  const sources = datasetInputs.map(l => ({ id: text(l.id), label: text(l.label), credit: text(l.credit), page: text(l.page) }));
+  const sources = datasetInputs.map(l => ({ id: l.id, label: l.label, credit: l.credit, page: l.page }));
   return { id, original, recipe, neutralField, datasets, sources,
     samplePlanningEmission: maximumPlanningEmission([neutralField.sampleEmission, ...datasets.map(dataset => dataset.field.sampleEmission)]) };
 }

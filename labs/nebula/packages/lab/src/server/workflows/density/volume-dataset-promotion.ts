@@ -1,11 +1,11 @@
-import { PREPARED_VOLUME_DATASETS_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, type PreparedCssVolume, validatePreparedCssVolume } from '@cssearth/objects';
+import { PREPARED_VOLUME_DATASETS_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, validatePreparedCssVolume, parseCloudCatalogue, type CloudDensityFilter, type PreparedCssVolume } from '@cssearth/objects';
 /** Offline handoff of existing cloud geometry, prepared pixels and saved display choices. */
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative, sep } from 'node:path';
 import { createCloudDensityPreparer } from '../../services/density-material.ts';
 
-import { createCloudInspection, parseCloudCatalogue, validateCloudBrightness } from '@cssearth/volume-viewer/scene/cloud-inspection';
+import { createCloudInspection, validateCloudBrightness } from '@cssearth/volume-viewer/scene/cloud-inspection';
 import { readPreparedReconstruction } from '../../services/density-reconstruction.ts';
 import { finiteModelStarsPath } from '../../services/finite-dataset-bundles.ts';
 import type { CloudBrightness, CloudStarOptions } from '@cssearth/volume-viewer/scene/cloud-types';

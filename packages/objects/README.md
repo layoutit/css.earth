@@ -134,3 +134,10 @@ Contract tests use node:test in the packages lane.
 Spatial catalogue and surface-feature formats live in `src/prepared-data/`, exported by `@cssearth/objects`.
 Their contract tests run with `pnpm test:packages`. Scientific classification and citation interpretation stay in catalog;
 sampling and geometry stay in bake; transport and label mounting stay in renderer.
+
+Retained emission fields, photometric envelopes/colors and MGE recipes, emission windows, simulation-envelope
+settings/records, dataset tone curves, compact compiler/sampled/symmetry/finite-emission inputs and component
+material receipts live in `src/volume/`, alongside the cloud-parts catalogue. Their schema identifiers, pure
+parsers and little-endian compact color/emission decoders are exported through `@cssearth/objects`. Sampling,
+fitting, selection, decompression, compilation and file I/O stay with bake, reconstruction, lab and volume-viewer.
+Contract tests use node:test in the packages lane; replay and selection conformance stay with their owners.

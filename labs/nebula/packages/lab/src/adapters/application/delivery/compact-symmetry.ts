@@ -1,10 +1,10 @@
+import { COMPACT_SYMMETRY_SCHEMA, validatePreparedCssVolume, type CompilerPin } from '@cssearth/objects';
 /** Export accepted research voxels; renderer-specific replay is injected into the internal baker. */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { gzipSync } from "node:zlib";
 import { replayCompactSymmetry as replay } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from "@cssearth/bake/volume-leaves";
-import { validatePreparedCssVolume, type CompilerPin } from '@cssearth/objects';
 import { jointRecord } from "../../../features/joint-fit/model.ts";
 
 function objectVolume(value: unknown) {
@@ -48,7 +48,7 @@ export async function exportCompactSymmetry(
     bytes = Buffer.from(
       JSON.stringify(
         {
-          schema: "cssearth-compact-symmetry@1",
+          schema: COMPACT_SYMMETRY_SCHEMA,
           recipe,
           channels,
           provenance: expected.provenance,

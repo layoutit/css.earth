@@ -1,7 +1,7 @@
+import { EMISSION_FIELD_SCHEMA, readEmissionWindow, readJointParameters, defaultCompilerControls, readCompilerControls, type EmissionComponent, type EmissionFieldModel, type CompilerControls } from '@cssearth/objects';
 /** Bounded positive multiscale fit, followed by explicitly conditional 3D depth assignment. */
 import { jointRayDepths } from '../joint/geometry.ts';
-import { createEmissionField, emissionKernel, projectEmissionComponent, type EmissionComponent, type EmissionFieldModel, type EmissionFitInput, type EmissionFitResult, createEmissionWindowSampler, readEmissionWindow } from '@cssearth/bake/volume';
-import { readJointParameters, defaultCompilerControls, readCompilerControls, type CompilerControls } from '@cssearth/objects';
+import { createEmissionField, emissionKernel, projectEmissionComponent, type EmissionFitInput, type EmissionFitResult, createEmissionWindowSampler } from '@cssearth/bake/volume';
 import { conditionDepthComponents, readDepthRecipe, type DepthRecipe } from './depth-model.ts';
 
 interface Basis {
@@ -152,7 +152,7 @@ export function fitEmissionField(input: EmissionFitInput, requested: unknown = d
   const rawComponents = buildComponents(bases, input, controls, diffuseDepthExtentArcsec);
   const conditioned = depthRecipe && conditionDepthComponents(rawComponents, depthRecipe, controls.depth);
   const components = conditioned?.components ?? rawComponents;
-  const model: EmissionFieldModel = { schema: 'cssearth-conditional-emission-field@1', identity: '', controls, components, bounds: { min: [-1, -1, -1], max: [1, 1, 1] },
+  const model: EmissionFieldModel = { schema: EMISSION_FIELD_SCHEMA, identity: '', controls, components, bounds: { min: [-1, -1, -1], max: [1, 1, 1] },
     skyBounds: input.bounds, scaffold: input.scaffold ?? null, ...(input.emissionWindow ? { emissionWindow: readEmissionWindow(input.emissionWindow) } : {}),
     assumptions: { kernel: 'C1 finite separable squared shifted Gaussian; ±4 sigma support; analytic z integral with a sampled-kernel bake approximation.',
       projectionUnits: 'Linear integrated relative emission, usable as dimensionless display optical depth; rendered alpha is 1−exp(−exposure×projection). No calibrated flux or gas density.',

@@ -1,13 +1,4 @@
-export type CloudPartKind = 'extended' | 'diffuse' | 'compact';
-
-export interface CloudPart {
-  id: string;
-  label: string;
-  kind: CloudPartKind;
-  signalFraction: number;
-  defaultEnabled: boolean;
-}
-
+import { type CloudPart } from '@cssearth/objects';
 export interface CloudSelection { contextId: string; enabledIds: string[]; }
 export interface CloudBrightness { overall: number; x: number; y: number; z: number; }
 export interface CloudStarOptions { enabled: boolean; brightness: number; size: number; }

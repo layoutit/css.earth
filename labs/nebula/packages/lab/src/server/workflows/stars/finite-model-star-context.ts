@@ -1,12 +1,11 @@
+import { readSimulationEnvelopeRecord, type DensityVolumeFrame, type Bounds3, type Vector3, type ObservationMapping, type EmissionFieldModel } from '@cssearth/objects';
 import { isFiniteNumber as coreIsFiniteNumber, isRecord as coreIsRecord } from '@cssearth/core';
 /** Offline, verified sampling context of one saved simulation-guided finite emission model for catalogue star depths. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { type DensityVolumeFrame, type Bounds3, type Vector3 } from '@cssearth/objects';
-import type { ObservationMapping } from '@cssearth/objects';
-import { type EmissionFieldModel, createEmissionField, createIntegratedSignalSampler } from '@cssearth/bake/volume';
-import { createEnvelopeSampler, validateEnvelopeSettings } from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
+import { createEmissionField, createIntegratedSignalSampler } from '@cssearth/bake/volume';
+import { createEnvelopeSampler } from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
 import { parseLabModelJson } from '../../../resources/model-paths.ts';
 import { verifyFiniteMaterialArtifacts } from '../../../cli/commands/finite-density-material-artifacts.ts';
 import { physicalToField, angularScale } from '../../../cli/commands/simulation-guided-coordinates.ts';
@@ -97,11 +96,7 @@ export async function loadFiniteModelStarContext(root: string, modelResultId: st
   const fieldFile = await read('source/emission-field.json');
   const field = createEmissionField(parseLabModelJson(fieldFile.bytes.toString()) as EmissionFieldModel);
   const envelopeRecord = provenance.envelope === null || provenance.envelope === undefined ? null : await read('source/envelope.json');
-  const envelopeValue: unknown = envelopeRecord ? parseLabModelJson(envelopeRecord.bytes.toString()) : null;
-  if (envelopeRecord && (!record(envelopeValue) || envelopeValue.schema !== 'cssearth-simulation-envelope@1' ||
-      !Number.isInteger(envelopeValue.width) || !Number.isInteger(envelopeValue.height) || !Array.isArray(envelopeValue.gain) ||
-      envelopeValue.gain.length !== Number(envelopeValue.width) * Number(envelopeValue.height) ||
-      !envelopeValue.gain.every(v => finite(v) && v >= 0) || !record(envelopeValue.bounds))) throw new TypeError('Invalid simulation envelope record.');
+  const envelopeValue = envelopeRecord ? readSimulationEnvelopeRecord(parseLabModelJson(envelopeRecord.bytes.toString())) : null;
   // The depth density is the one this model's envelope was fitted with, not the baseline request's cloud: a re-fit
   // may carry the envelope on a different volume (the VMC-constrained ellipsoid). Older records pin no cloud of their own.
   const envelopeCloud = record(envelopeValue) && envelopeValue.priorCloud !== undefined && envelopeValue.priorCloud !== null ? envelopeValue.priorCloud : null;
@@ -109,7 +104,6 @@ export async function loadFiniteModelStarContext(root: string, modelResultId: st
   const prior = await loadSimulationPrior(root, densityPin, distance, tangentBounds);
   let envelopeAt: ((x: number, y: number, z: number) => number) | null = null, envelopePin: { path: string } | null = null;
   if (envelopeRecord && record(envelopeValue)) {
-    validateEnvelopeSettings(envelopeValue.settings);
     const zRange = vector(envelopeValue.zRange, 2, 'envelope depth range');
     envelopeAt = createEnvelopeSampler({ width: Number(envelopeValue.width), height: Number(envelopeValue.height), bounds: bounds2(envelopeValue.bounds, 'envelope bounds'),
       zRange: [zRange[0]!, zRange[1]!], gain: Float32Array.from(envelopeValue.gain as number[]) }, prior);

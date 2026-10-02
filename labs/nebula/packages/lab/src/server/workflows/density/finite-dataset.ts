@@ -1,3 +1,4 @@
+import { CLOUD_PARTS_SCHEMA, COMPACT_FINITE_EMISSION_METHOD, readSimulationEnvelopeRecord, validateDatasetToneCurve, DENSITY_VOLUME_FORMAT, validateEnvelopeSettings, type DatasetToneCurve, type EmissionFieldModel, type VolumeSlices, type Vector3 } from '@cssearth/objects';
 import { collectArtifacts } from './io.ts';
 /** Finite component colors on one immutable conditional emission field. */
 import {readFile,writeFile,mkdir,cp,rename,rm} from 'node:fs/promises';
@@ -7,10 +8,8 @@ import {parseLabModelJson} from '../../../resources/model-paths.ts';
 import {compileCssVolume} from '../../../adapters/preparation/css-volume.ts';
 import {verifyFiniteMaterialArtifacts} from '../../../cli/commands/finite-density-material-artifacts.ts';
 import {physicalToField,angularScale} from '../../../cli/commands/simulation-guided-coordinates.ts';
-import { createEmissionField, createEmissionMaterial, compilerSlabMaterial, datasetChannelGainMaterial, validateChannelGain, validateDatasetToneCurve, type ChannelGain, type DatasetToneCurve, parseCloudAppearance, type CloudAppearance, type EmissionFieldModel } from '@cssearth/bake/volume';
-import { DENSITY_VOLUME_FORMAT, type VolumeSlices } from '@cssearth/objects';
-import { type Vector3 } from '@cssearth/objects';
-import {createEnvelopeSampler,envelopeChromaticity,validateEnvelopeSettings,envelopeChromaSettings} from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
+import { createEmissionField, createEmissionMaterial, compilerSlabMaterial, datasetChannelGainMaterial, validateChannelGain, type ChannelGain, parseCloudAppearance, type CloudAppearance } from '@cssearth/bake/volume';
+import { createEnvelopeSampler, envelopeChromaticity, envelopeChromaSettings } from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
 import {loadSimulationPrior} from '../../../cli/commands/simulation-prior.ts';
 import { recolorCloudSlices, sourceBytes, containedPath } from '@cssearth/bake/volume/node';
 import type {PreparedReconstruction} from '../../../features/reconstruction/reconstruction-types.ts';
@@ -41,7 +40,7 @@ export async function bakeFiniteDataset(root:string,input:FiniteDatasetInput,sig
  for(const key of ['referenceFrame','epochJdTt','originM','localToReferenceXyzw','metersPerUnit'])if(JSON.stringify(frame[key])!==JSON.stringify(work.frame[key]))throw Error('Source and model observer frames differ: '+key);
  if(Math.abs(model.geometry.observerDistanceKpc-source.geometry.observerDistanceKpc)>1e-8)throw Error('Observer distances differ');
  await sourceBytes(root,work.source);await sourceBytes(root,work.original);
- const identity={method:'simulation-guided-finite-material@1',model:{resultId:input.modelResultId},source:{resultId:input.sourceResultId},appearance,...(channelGain?{channelGain}:{}),...(toneCurve?{toneCurve}:{})};
+ const identity={method:COMPACT_FINITE_EMISSION_METHOD,model:{resultId:input.modelResultId},source:{resultId:input.sourceResultId},appearance,...(channelGain?{channelGain}:{}),...(toneCurve?{toneCurve}:{})};
  // A finite dataset is named by its model and image; a changed tone or gain re-bakes the same named dataset.
  const resultId=`${input.modelResultId}-${work.imageId}`,id=`reconstruction-${resultId}`,output=resolve(base,resultId),staging=output+'.pending';
  try{const saved=await readFile(resolve(output,'request.json'),'utf8');
@@ -56,14 +55,13 @@ export async function bakeFiniteDataset(root:string,input:FiniteDatasetInput,sig
   // The four weights sum to one, so the result is inside the byte range; floating error can leave it a hair outside.
   out[c]=Math.min(255,Math.max(0,value));}return true;}},preparedField);
  // Two-scale models carry an envelope: the named simulation × a fixed gain map. Only its color comes from this dataset.
- const envelopeRecord=model.envelope?parseLabModelJson(await readFile(resolve(modelDir,'source/envelope.json'),'utf8')):null;
+ const envelopeRecord=model.envelope?readSimulationEnvelopeRecord(parseLabModelJson(await readFile(resolve(modelDir,'source/envelope.json'),'utf8'))):null;
  let envelopeAt:((x:number,y:number,z:number)=>number)|null=null,envelopeColor:((x:number,y:number,out:Vector3)=>boolean)|null=null;
  if(envelopeRecord){
   const settings=validateEnvelopeSettings(envelopeRecord.settings),chroma=envelopeChromaSettings(settings),gw=envelopeRecord.width,gh=envelopeRecord.height;
-  if(envelopeRecord.schema!=='cssearth-simulation-envelope@1'||!Number.isInteger(gw)||!Number.isInteger(gh)||!Array.isArray(envelopeRecord.gain)||envelopeRecord.gain.length!==gw*gh||!envelopeRecord.gain.every((v:unknown)=>typeof v==='number'&&Number.isFinite(v)&&v>=0))throw Error('Invalid simulation envelope record');
   // The model may have used an alternative density; its envelope record owns that choice.
   const priorCloud=envelopeRecord.priorCloud??model.request.cloud.provenance;
-  if(typeof priorCloud!=='object'||typeof priorCloud.path!=='string')throw Error(`Envelope of model ${input.modelResultId} names no density recipe path`);
+  if(!priorCloud||typeof priorCloud!=='object'||!('path' in priorCloud)||typeof priorCloud.path!=='string')throw Error(`Envelope of model ${input.modelResultId} names no density recipe path`);
   const prior=await loadSimulationPrior(root,priorCloud,distance,model.geometry.tangentBoundsKpc);
   envelopeAt=createEnvelopeSampler({width:gw,height:gh,bounds:envelopeRecord.bounds,zRange:envelopeRecord.zRange,gain:Float32Array.from(envelopeRecord.gain)},prior);
   const datasetRgb=await sharp(resolve(sourceDir,'source/registered-image.png')).resize(gw,gh,{fit:'fill'}).removeAlpha().raw().toBuffer(),datasetAlpha=await sharp(resolve(sourceDir,'source/original-image.png')).resize(gw,gh,{fit:'fill'}).ensureAlpha().raw().toBuffer();
@@ -104,7 +102,7 @@ export async function bakeFiniteDataset(root:string,input:FiniteDatasetInput,sig
  const neutralForPrepared={...neutral,quads:neutral.quads.map(q=>({...q,texturePath:'neutral/'+q.texturePath}))};const neutralBank=await packageBank(neutralForPrepared,'neutral');
  const neutralInspection={...neutralBank.prepared,data:{...neutralBank.data,stacks:neutralBank.data.stacks.map(s=>({...s,leaves:s.leaves.flatMap(l=>[l,{...l,id:'all-light::'+l.id}])}))}};await json(resolve(staging,'prepared/neutral.json'),neutralInspection);await json(resolve(staging,'neutral-object.json'),{...neutralBank.descriptor,prepared:{...neutralBank.descriptor.prepared}});
  const referenceLeafIds=data.stacks.flatMap(s=>s.leaves.map(l=>l.id)),partLeafIds=referenceLeafIds.map(leaf=>'all-light::'+leaf),inspection={...prepared,data:{...data,stacks:data.stacks.map(s=>({...s,leaves:s.leaves.flatMap(l=>[l,{...l,id:'all-light::'+l.id}])}))}};
- await json(resolve(staging,'prepared/inspection.json'),inspection);await json(resolve(staging,'source/cloud-parts.json'),{schema:'cssearth-cloud-parts@1',id,parts:[{id:'all-light',label:'Finite emission',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,composition:'One shared finite geometry across all image materials.'});
+ await json(resolve(staging,'prepared/inspection.json'),inspection);await json(resolve(staging,'source/cloud-parts.json'),{schema:CLOUD_PARTS_SCHEMA,id,parts:[{id:'all-light',label:'Finite emission',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,composition:'One shared finite geometry across all image materials.'});
  await json(resolve(staging,'inspection-object.json'),{...descriptor,properties:{...descriptor.properties,preparation:{source:'source/cloud-parts.json'}},prepared:{format:prepared.format,url:'prepared/inspection.json'}});
  const local=relative(root,output),subject=JSON.parse(JSON.stringify(oldResult.subject).replaceAll(relative(root,modelDir),local));subject.id=id;subject.directory=local;subject.name=sourceResult.subject.name+' · finite material';subject.sourcePageUrl=work.sourcePageUrl;subject.credit=work.credit;subject.reconstructionImage={...oldResult.subject.reconstructionImage,label:sourceResult.subject.reconstructionImage.label+' · finite material',note:provenance.qualification.reason};subject.reconstructionNeutral={descriptor:'neutral-object.json'};subject.modelNote=provenance.qualification.reason;
  const result={...oldResult,resultId,finiteMaterial:{modelResultId:input.modelResultId,sourceResultId:input.sourceResultId,...(channelGain?{channelGain}:{}),...(toneCurve?{toneCurve}:{})},imageId:sourceResult.imageId,removalResultId:sourceResult.removalResultId,placement:sourceResult.placement,appearance,subject};await json(resolve(staging,'result.json'),result);

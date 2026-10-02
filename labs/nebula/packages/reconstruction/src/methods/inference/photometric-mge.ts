@@ -1,6 +1,7 @@
-/** Fitting adapter: the deterministic density and validation are shared with cold bake replay. */
-import { readPhotometricMgeRecipe, samplePhotometricMge, type PhotometricMgeRecipe } from '@cssearth/bake/volume';
-export { readPhotometricMgeRecipe, type PhotometricMgeRecipe, type PhotometricGaussian } from '@cssearth/bake/volume';
+/** Fitting adapter: the deterministic density comes from bake; recipe validation comes from objects. */
+import { samplePhotometricMge } from '@cssearth/bake/volume';
+import { readPhotometricMgeRecipe, type PhotometricMgeRecipe } from '@cssearth/objects';
+
 export function createPhotometricMgePrior(recipe: PhotometricMgeRecipe) {
   const parsed = readPhotometricMgeRecipe(recipe);
   // Named by its recipe; the mirrored line-of-sight solution is a different prior with its own name.

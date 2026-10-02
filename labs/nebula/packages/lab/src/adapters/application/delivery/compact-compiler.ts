@@ -4,7 +4,7 @@ import { replayCompactCompiler as replay, type CompactCompilerBackend, type Comp
 import { compileCssVolume } from '@cssearth/bake/volume-leaves';
 import { validatePreparedCssVolume } from '@cssearth/objects';
 import { prepareCompilerStarSprites } from '../star-sprites.ts';
-export { readCompactCompiler } from '@cssearth/bake/volume/node';
+
 
 export function replayCompactCompiler(root: string, pin: Pin, outputDirectory: string,
   progress?: (progress: CompilerBakeProgress) => void) {

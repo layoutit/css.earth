@@ -340,3 +340,6 @@ Contract tests use node:test in the packages lane.
 
 Prepared spatial catalogues, display samples and surface-feature contracts belong to `@cssearth/objects`.
 Scientific catalogue interpretation remains in catalog; sampling, feature geometry and file I/O remain here.
+
+Retained emission, photometric recipes/envelopes, windows, tone curves and compact input parsers belong to
+`@cssearth/objects`; volume retains sampling, material arithmetic, decompression, restoration and compilation.

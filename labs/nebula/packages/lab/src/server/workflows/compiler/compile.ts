@@ -12,8 +12,8 @@ import { COMPILER_VERSION, readCompilerRecipe, compilerSourceWeights, type Compi
 import { restoreCompilerInputs, type CompilerProgress } from './prerequisites.ts';
 import { compilerTarget, loadCompilerImages, compilerImagePanel } from './images.ts';
 import { fitEmissionField } from './fit.ts';
-import { createPhotometricEmission, createEmissionMaterial, readEmissionWindow } from '@cssearth/bake/volume';
-import { type CompilerPin } from '@cssearth/objects';
+import { createPhotometricEmission, createEmissionMaterial } from '@cssearth/bake/volume';
+import { readEmissionWindow, type CompilerPin } from '@cssearth/objects';
 import { loadDepthModel } from './depth-model.ts';
 import { bakeCompiler } from './bake.ts';
 import { compilerStars } from '@cssearth/nebula-reconstruction/stars/compiler';

@@ -12,8 +12,8 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gunzipSync } from 'node:zlib';
-import { replayCompactCompiler, readCompactCompiler, replayCompactSampled } from '@cssearth/bake/volume/node';
-import { readCompilerBakeResult } from '@cssearth/objects';
+import { replayCompactCompiler, replayCompactSampled } from '@cssearth/bake/volume/node';
+import { readCompactCompiler, readCompilerBakeResult } from '@cssearth/objects';
 import { assertReplayScene, verifyReplayFiles } from './cold-replay-parity.ts';
 
 const ids = ['m42', 'helix', 'm45', 'm8', 'm1'];

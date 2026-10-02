@@ -19,7 +19,6 @@ export * from './fields/emission.ts';
 export * from './fields/observation-prior.ts';
 export * from './fields/photometric-emission.ts';
 export * from './fields/photometric-mge.ts';
-export * from './fields/retained-emission.ts';
 export * from './fields/sampled.ts';
 export * from './fields/simulation-envelope.ts';
 export * from './materials/cloud-appearance.ts';

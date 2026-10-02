@@ -1,8 +1,7 @@
 import { isFiniteNumber as coreIsFiniteNumber, isRecord as coreIsRecord } from '@cssearth/core';
 export type CatalogueColor=(temperature:number,colorIndex:number)=>readonly [number,number,number];
-import type { EmissionFieldModel } from '@cssearth/bake/volume';
-import type { CompilerStarInput } from '@cssearth/objects';
-import type { CompilerStarMaterial } from '@cssearth/objects';
+
+import { type EmissionFieldModel, type CompilerStarInput, type CompilerStarMaterial } from '@cssearth/objects';
 import { createCompilerStarDepthSampler } from './compiler.ts';
 
 const record = coreIsRecord;

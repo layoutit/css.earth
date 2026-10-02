@@ -1,7 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createEmissionField, emissionComponentBounds, prepareEmissionComponent, projectEmissionComponent, samplePreparedEmissionComponent } from './emission.ts';
-import type { EmissionComponent, EmissionFieldModel } from '../contracts/emission.ts';
+
+import type { EmissionComponent, EmissionFieldModel } from '@cssearth/objects';
 
 function component(gradient?: [number, number]): EmissionComponent {
   return { id: 'patch', basisId: 'patch', center: [2, -3, 11], sigma: [4, 6, 2], angleRadians: .7,
