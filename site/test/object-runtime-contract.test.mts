@@ -1,4 +1,5 @@
-import { parsePreparedObjectRuntime } from "@cssearth/renderer";
+import { parsePreparedObjectRuntime } from '@cssearth/objects';
+
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';

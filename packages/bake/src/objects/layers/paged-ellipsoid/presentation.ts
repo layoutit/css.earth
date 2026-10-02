@@ -1,3 +1,5 @@
+import { OBJECT_RUNTIME_SCHEMA, type CameraPlan } from '@cssearth/objects';
+
 import type { prepareTextureLevels, TextureLevelConfiguration } from './texture-levels.ts';
 import type { SurfaceBankDatasets } from './contracts.ts';
 import type { PreparedNode } from '../../../presentation/index.ts';
@@ -7,7 +9,7 @@ import type { PreparedDirectionalSunPlan } from '../../../presentation/index.ts'
 import type { ShellObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import type { preparePagedEllipsoidScene } from './globe/scene.ts';
 import type { preparePlaces } from './geographic/places.ts';
-import type { CameraPlan } from '@cssearth/renderer/navigation/types.ts';
+
 import { requireRecord, requireString } from '@cssearth/core';
 type PagedPlan = ReturnType<typeof preparePagedEllipsoidScene>['scene'];
 export type PagedDataset = SurfaceBankDatasets['controls'][number] & { maximumZoom: number; polesUrl?: string;
@@ -180,7 +182,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
         ...(plan.material.atmosphere.floodAssets?["atmosphere:flood"]:plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`))])]},
     tree,variants,materials:tracks,viewBindings:[{kind:"counter-rotation",target:index(materialCounter),systemTransform:null},...(seamOutset?[seamOutsetBinding(seamOutset,index(system))]:[])],animations:[],
     motionFrame:[index(system),index(body.surface[0])]};
- return {...prepared, schema:'cssearth-object-runtime@5', id:config.namespace, controls,
+ return {...prepared, schema:OBJECT_RUNTIME_SCHEMA, id:config.namespace, controls,
  materials:prepareMaterialTracks(prepared)};
 }
 

@@ -1,3 +1,5 @@
+import { type ObjectEntry, OBJECT_RUNTIME_SCHEMA, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+
 import { isArray, hasErrorCode, isRecord, requireRecord, requireArray } from '@cssearth/core';
 import { readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
@@ -5,11 +7,12 @@ import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseAst } from "vite";
 import type { Node } from 'estree';
-import type { ObjectEntry } from '@cssearth/objects';
-import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "../presentation/index.ts";
+
+import { requirePreparedPresentation} from "../presentation/index.ts";
+
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.ts";
 import { requireAuthoredWorldFrame } from '../sources/index.ts';
-import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import { nodeName, staticObjectProperties } from '../runtime-source/index.ts';
 import type { RuntimeSourceReader } from '../runtime-source/index.ts';
@@ -53,7 +56,7 @@ export function requirePreparedDefinitionSource(source: string): string {
   const values = new Map(properties.map(property => [nodeName(property.key), property.value]));
   const id = values.get('id');
   if (values.size !== 3 || !["schema", "id", "controls"].every(key => values.has(key)) ||
-      bindings.get(nodeName(values.get("schema")) ?? '')?.name !== "PREPARED_OBJECT_RUNTIME_SCHEMA" ||
+      bindings.get(nodeName(values.get("schema")) ?? '')?.name !== "OBJECT_RUNTIME_SCHEMA" ||
       bindings.get(nodeName(values.get("schema")) ?? '')?.path !== "../../../../packages/bake/src/presentation/prepared-schema.ts" ||
       bindings.get(nodeName(values.get("controls")) ?? '')?.name !== "objectControls" ||
       bindings.get(nodeName(values.get("controls")) ?? '')?.path !== "../site/control-content.mjs" ||
@@ -199,7 +202,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
       requirePreparedControlSource(controlSource);
       const objectControls = requireObjectControls(await readControls(`${prefix}/site/control-content.mjs`));
       const plan = requirePreparedPresentation(planInput, { controls: objectControls });
-      requireObjectRuntimeDefinition({ ...plan, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id, controls: objectControls });
+      requireObjectRuntimeDefinition({ ...plan, schema: OBJECT_RUNTIME_SCHEMA, id, controls: objectControls });
 
       entries.push({ id, complete: true, evidence: "validated-source-data", observedOwners: null,
         source: { definition: relative(root, `${prefix}/runtime/definition.mjs`), presentation: relative(root, `${prefix}/runtime/preparedPresentation.mjs`),

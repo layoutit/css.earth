@@ -1,12 +1,14 @@
+import { type WorldRotation, type ObjectRuntimeDefinition, type PreparedWorldCameraFrame } from '@cssearth/objects';
+
 import { initialStageSelection } from './initial-stage-selection.js';
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
 import type { SharedView } from '../navigation/view-url.js';
 import { preparedLabelEdge } from '../navigation/prepared-label-edge.js';
-import type { WorldRotation } from '@cssearth/objects';
+
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
-import type { ObjectRuntimeDefinition } from './object-runtime-types.js';
+
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import type { PreparedWorldCameraFrame } from '@cssearth/objects';
+
 import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport, worldCameraFromCenteredPresentation } from '../navigation/world-camera.js';
 import { createCameraOrientation } from '../navigation/camera-orientation.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';

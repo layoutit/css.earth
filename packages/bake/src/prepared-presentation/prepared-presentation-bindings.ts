@@ -1,10 +1,10 @@
+import { objectPageCss, type PreparedInteriorDisc, type PreparedPresentationDefinition, type PreparedVariant } from '@cssearth/objects';
+
 import { prepareTextureBindings } from './prepared-texture-bindings.ts';
 import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill, type SurfaceMeanExclusion } from './prepared-interior-fill.ts';
 import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '../raster/index.ts';
 import { isRecord } from '@cssearth/core';
-import { objectPageCss } from '@cssearth/objects';
-import type { PreparedInteriorDisc } from '@cssearth/renderer/rendering/prepared-interior-disc.ts';
-import type { PreparedPresentationDefinition, PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+
 import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.ts';
 /** A leaf's fixed plane in scene space, which the depth preparation needs to prove a surface static. */
 type FacingBinding = { plane: [number, number, number, number]; tolerance: number };

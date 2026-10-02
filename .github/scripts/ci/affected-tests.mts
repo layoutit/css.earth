@@ -15,6 +15,7 @@ export interface AffectedTests { readonly packages: 'all' | readonly string[]; r
  * Offline tool tests remain in their package glob; integration suites also run when directly edited.
  * `affected-tests.test.mts` proves every entry exists and imports its owner. */
 export const FOREIGN_TESTS: Readonly<Record<string, readonly string[]>> = {
+  objects: ['packages/bake/src/presentation/depth-partition-contract.test.ts'],
   bake: [
     'integration/renderer-bake/src/contract/navigable-object-mount.test.ts',
     'integration/renderer-bake/src/sky/parallax.test.ts',
@@ -22,7 +23,6 @@ export const FOREIGN_TESTS: Readonly<Record<string, readonly string[]>> = {
     'integration/renderer-bake/src/stars/validation.test.ts',
     'integration/renderer-bake/src/volume-leaves/prepared-volume-runtime.test.ts',
     'integration/renderer-bake/src/volume-leaves/prepared-leaf-frustum.test.ts',
-    'integration/renderer-bake/src/presentation/depth-partitions.test.ts',
     'integration/renderer-bake/src/objects/layers/paged-ellipsoid/surface-target.test.ts',
   ],
   renderer: [
@@ -32,7 +32,6 @@ export const FOREIGN_TESTS: Readonly<Record<string, readonly string[]>> = {
     'packages/bake/src/contract/prepared-material.test.mts',
     'integration/renderer-bake/src/contract/navigable-object-mount.test.ts',
     'integration/renderer-bake/src/objects/layers/paged-ellipsoid/surface-target.test.ts',
-    'integration/renderer-bake/src/presentation/depth-partitions.test.ts',
     'integration/renderer-bake/src/sky/parallax.test.ts',
     'integration/renderer-bake/src/stars/point-field-bank.test.ts',
     'integration/renderer-bake/src/stars/validation.test.ts',

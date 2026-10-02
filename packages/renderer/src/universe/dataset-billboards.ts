@@ -1,7 +1,9 @@
+import { type DensityVolumeFrame, array, finite, positive, record, text } from '@cssearth/objects';
+
 import { writeStyle } from '../rendering/retained-write.js';
-import type { DensityVolumeFrame } from '@cssearth/objects';
+
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import { array, finite, positive, record, text } from '../validation/guards.js';
+
 import { projectVolumeImpostors } from '../volume/volume-impostor-projection.js';
 import type { VolumeVector } from '../volume/types.js';
 

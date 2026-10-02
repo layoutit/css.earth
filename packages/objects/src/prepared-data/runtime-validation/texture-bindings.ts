@@ -1,4 +1,4 @@
-import type { PreparedTree } from '../rendering/prepared-presentation.js';
+import type { PreparedTree } from '../runtime-presentation-types.js';
 
 export function requireTextureBindings(value: unknown, nodes: PreparedTree['nodes']) {
   if (value === undefined) return;

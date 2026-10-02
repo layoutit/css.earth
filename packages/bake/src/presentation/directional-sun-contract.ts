@@ -1,3 +1,5 @@
+import { PREPARED_DIRECTIONAL_SUN_SCHEMA } from '@cssearth/objects';
+
 import type { Vector3 } from "@cssearth/renderer/solar-system/types.ts";
 /** Where an object's Sun lies: its direction in the scene frame and in view space at the default camera pose. */
 export interface DirectionalSunPresentation {
@@ -7,8 +9,6 @@ export interface PreparedDirectionalSunPlan {
   schema: string; model: string; localDirection: Vector3; referenceViewDirection: Vector3;
   provenance: { source: string; sourcePath: string; qualification: string };
 }
-export const PREPARED_DIRECTIONAL_SUN_SCHEMA =
-  "cssearth-prepared-directional-sun@4";
 
 export const DIRECTIONAL_SUN_PRESENTATION_STANDARD = Object.freeze({
   schema: "cssearth-directional-sun-presentation-standard@2",

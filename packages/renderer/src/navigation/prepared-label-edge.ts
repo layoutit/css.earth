@@ -1,9 +1,9 @@
-import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
+import { type ObjectRuntimeDefinition, type PreparedWorldCameraFrame, cssMatrix } from '@cssearth/objects';
+
 import type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
-import type { PreparedWorldCameraFrame } from '@cssearth/objects';
+
 import { presentWorldCamera, worldCameraViewport } from './world-camera.js';
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
-import { cssMatrix } from '../validation/css-matrix.js';
 
 export type PreparedLabelEdge = (world: WorldCameraPose, viewport: WorldCameraViewport) => number | null;
 

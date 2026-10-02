@@ -1,9 +1,7 @@
+import { type PreparedSilhouetteSteps } from '@cssearth/objects';
+
 /** A prepared custom property value chosen by the published silhouette diameter.
  * Thresholds are CSS silhouette pixels, never DPR; each value is prepared text. */
-export interface PreparedSilhouetteSteps {
-  hysteresis: number;
-  levels: readonly { minimumDiameter: number; value: string }[];
-}
 
 /** Move from `previous` to the level whose threshold the diameter has reached.
  * A level is kept until the diameter falls below its threshold by `hysteresis`. */

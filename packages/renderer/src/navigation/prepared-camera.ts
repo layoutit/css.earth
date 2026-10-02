@@ -1,12 +1,15 @@
+import { type PerspectiveCameraPlan, type PreparedWorldCameraFrame } from '@cssearth/objects';
+
 import { preparedScenePitch } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
-import type { CameraAngles, CameraDelta, CameraPose, CameraUpdate, PerspectiveCameraPlan, TrackballMetrics } from './types.js';
+import type { CameraAngles, CameraDelta, CameraPose, CameraUpdate } from './types.js';
+
 import { createCameraOrientation } from './camera-orientation.js';
 import { distanceForSilhouetteRadius, rotationFromMatrix3d, silhouetteRadiusAtDistance } from '../solar-system/heliocentric-geometry.js';
 import { cameraProjectionScale, worldCameraViewport, presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFromPresentation } from './world-camera.js';
 import type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
-import type { PreparedWorldCameraFrame } from '@cssearth/objects';
-import { rotateWorldPosition, scaleWorldPosition, transposeWorldRotation, validateWorldPosition } from './world-camera-math.js';
+
+import { scaleWorldPosition, validateWorldPosition } from './world-camera-math.js';
 import type { PerspectiveWorldContext } from './perspective-dolly.js';
 import type { Vector3 } from './types.js';
 import { clamp } from '@cssearth/core';

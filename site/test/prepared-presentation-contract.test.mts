@@ -1,10 +1,11 @@
-import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from "@cssearth/renderer";
+import { requirePreparedData, parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from '@cssearth/objects';
+
 import { requireRecord, requireArray } from "@cssearth/core";
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { PREPARED_PRESENTATION_SCHEMA, requirePreparedData, requirePreparedPresentation } from "@cssearth/bake/presentation";
+import { PREPARED_PRESENTATION_SCHEMA, requirePreparedPresentation } from "@cssearth/bake/presentation";
 
 type FixtureVariant = { when: Record<string, string | number | boolean | null>; required: string[]; writes: unknown[]; materials: unknown[] };
 export function presentationFixture(definition: ObjectRuntimeDefinition) {
@@ -83,4 +84,3 @@ test("ellipsoid material rotation requires its immutable prepared system transfo
   Reflect.deleteProperty(rotation, "systemTransform");
   assert.throws(() => requirePreparedPresentation(plan, { controls }), /ellipsoid system transform/);
 });
-

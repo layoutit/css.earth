@@ -1,6 +1,8 @@
+import { type PreparedVariant, type PreparedWrite } from '@cssearth/objects';
+
 import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
-import type { PreparedVariant, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.ts';
 import type { PreparedNode, PresentationAdapters } from './adapters.ts';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';

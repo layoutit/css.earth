@@ -1,8 +1,8 @@
+import { parsePreparedObjectRuntime } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
-import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
+
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
 
 // The mutable fixture keeps the parsed-JSON shape the mutations below rely on.

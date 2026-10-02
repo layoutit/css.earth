@@ -1,5 +1,7 @@
+import { type PreparedMaterialTrack, type PreparedMaterialBank, type PreparedMaterialRotation } from '@cssearth/objects';
+
 import { isArray } from '@cssearth/core';
-import type { PreparedMaterialTrack, PreparedMaterialBank, PreparedMaterialRotation } from '@cssearth/renderer/rendering/prepared-material.ts';
+
 export interface MaterialPhaseRemap {lowerTransition: readonly [number, number]; plateau: readonly [number, number]; upperTransition: readonly [number, number]; plateauViewZ: number;}
 export type MaterialFrameSource = {count: number; samples: readonly (readonly [number, number, number])[]}
   | {count: number; samples?: undefined; source: string; minimum: number; maximum: number; baseFrame: number; maximumFrame?: number; span?: number; remap?: MaterialPhaseRemap | null;};

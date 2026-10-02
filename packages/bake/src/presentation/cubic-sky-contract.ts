@@ -1,10 +1,11 @@
+import { PREPARED_CUBIC_SKY_SCHEMA, CUBIC_SKY_STANDARD_SCHEMA, type CubicSkyPlan } from '@cssearth/objects';
+
 import { isArray } from '@cssearth/core';
-import type { CubicSkyPlan } from "@cssearth/renderer/solar-system/cubic-sky-plan.ts";
+
 export interface PreparedCubicSkyPlan extends CubicSkyPlan {
   schema: string; standard: string; model: string; runtimeRasterization: boolean; orientation: string; qualification: string;
   projection?: NonNullable<CubicSkyPlan["projection"]> & { axis: string; runtimeProjection: boolean };
 }
-export const PREPARED_CUBIC_SKY_SCHEMA = "cssearth-prepared-cubic-sky@3";
 
 export const CUBIC_SKY_CAMERA_PRESENTATION_STANDARD = Object.freeze({
   source: "cssEarth Mars-calibrated cubic-sky camera presentation",
@@ -20,7 +21,7 @@ export const CUBIC_SKY_CAMERA_PRESENTATION_STANDARD = Object.freeze({
 
 /** The orientation an object's sky keeps for its camera; the shared universe draws the visible sky. */
 export const CUBIC_SKY_STANDARD = Object.freeze({
-  schema: "cssearth-cubic-sky-standard@3",
+  schema: CUBIC_SKY_STANDARD_SCHEMA,
   cameraPitchResponse: -1.7,
   cameraZoomResponse: 0.12,
   presentationPitchOffsetDegrees: -20,

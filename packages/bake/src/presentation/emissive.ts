@@ -1,10 +1,12 @@
+import { type PreparedVariant } from '@cssearth/objects';
+
 // The emissive presentation: the retired static lane's `prepareEmissiveSurfacePresentation` on the generic scene
 // (scene/index.ts body-container layout) with the composite node conventions (composite.ts).
 // An emissive body has no material track, no Shadows toggle and no directional Sun; its off-limb context and
 // limb plate are silhouette-fitted roots beside the camera, exactly as the retired static presentation mounted them.
 import { canonicalPreparedAsset, preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
-import type { PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+
 import type { PresentationInputs, PresentationDraft } from './types.ts';
 import type { PresentationAdapters } from './adapters.ts';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';

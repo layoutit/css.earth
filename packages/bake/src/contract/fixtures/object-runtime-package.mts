@@ -1,11 +1,14 @@
+import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from '@cssearth/objects';
+
 import { readFile } from 'node:fs/promises';
 import type { OrbitPublication } from "@cssearth/renderer/navigation/object-orbit.ts";
-import { runtimePolicy } from '@cssearth/renderer/test/runtime-policy-fixture.mts';
+
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createObjectRuntime, parsePreparedObjectRuntime, preparedObjectCapabilities } from "@cssearth/renderer";
+import { preparedObjectCapabilities } from '@cssearth/renderer';
+
 import { createPreparedPlayback, createPreparedResidency, createObjectControlBinding, createObjectSelectionRuntime, mountPreparedPresentation, resolvePreparedPresentation } from "@cssearth/renderer/testing";
-import type { ObjectRuntimeDefinition } from "@cssearth/renderer";
+
 import type { ObjectControlBindingOptions, PreparedImage, PreparedPresentationContext } from "@cssearth/renderer/testing";
 import { viewSunDirectionToPreparedLightDirection } from "@cssearth/renderer/platform/directional-sun-coordinate";
 import { createSceneLifetime } from "@cssearth/engine";

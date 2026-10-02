@@ -1,4 +1,4 @@
-import type { DatasetVolume } from '@cssearth/renderer/runtime/object-contract.ts';
+import { type DatasetVolume } from '@cssearth/objects';
 
 export interface DatasetLegendRecipe {
   kind: "scale" | "categories" | "ranges";

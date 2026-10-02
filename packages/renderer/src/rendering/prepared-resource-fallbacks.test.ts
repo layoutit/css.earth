@@ -1,8 +1,9 @@
+import { requireAssets } from '@cssearth/objects';
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
+
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
-import { requireAssets } from '../validation/resources-tree.js';
 
 const fallbacks = [{ unsupported: 'corner-shape' as const, resources: { 'surface:model': 'surface:model:alpha' } }];
 

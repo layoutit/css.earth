@@ -1,4 +1,5 @@
-import { CUBIC_SKY_STANDARD, PREPARED_CUBIC_SKY_SCHEMA, validatePreparedCubicSky } from "./cubic-sky-contract.ts";
+import { PREPARED_CUBIC_SKY_SCHEMA } from '@cssearth/objects';
+import { CUBIC_SKY_STANDARD, validatePreparedCubicSky } from './cubic-sky-contract.ts';
 
 export interface CubicSkyPreparationOptions {
   objectId: string;

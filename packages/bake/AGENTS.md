@@ -87,7 +87,7 @@ its validators accept); the renderer never imports the bake.
   JPL moon catalogue (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `src/sources/`.
 - `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
   writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
-  and the renderer's object controls, and the audits that read a prepared presentation and its authored runtime sources back
+  and the shared object controls, and the audits that read a prepared presentation and its authored runtime sources back
   against the descriptor (`check-prepared-presentation.ts`; the prepared format constant comes
   from `@cssearth/objects`). The audit reads the registry on first use, not at import. It imports
   `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command,

@@ -1,8 +1,11 @@
+import { type PreparedAssets } from '@cssearth/objects';
+
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
+
 import { prepareObjectResources } from './prepared-resource-lease.js';
-import { createPreparedResidency, type PreparedAssets } from '../rendering/prepared-residency.js';
+import { createPreparedResidency } from '../rendering/prepared-residency.js';
+
 import { waitFor } from '@cssearth/objects/node/contract';
 
 const assets: PreparedAssets = { entries: [], pools: [], startup: [] };
@@ -206,7 +209,6 @@ test('a second preflight checkpoint replaces a ready unpublished selection inste
   adopted.destroy();
 });
 
-
 test('first-paint decode rechecks selected handles once without refetching or publishing readiness', async () => {
   const calls: string[] = [], ready = mock.fn(() => {});
   const assets: PreparedAssets = {
@@ -247,7 +249,6 @@ test('first-paint decode propagates failure and remains cancelled after its owne
   reject(new Error('discarded')); await failed;
   assert.equal((await residency.decodeForPaint()), false);
 });
-
 
 test('view-driven preflight skips the close-up startup bank until detail is requested', async () => {
   const assets: PreparedAssets = { entries: [{key:'surface',url:'/surface.webp',pool:'material'}],

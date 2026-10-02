@@ -1,6 +1,7 @@
-import type {CameraPlan} from '@cssearth/renderer/navigation/types.ts';
+import { type CameraPlan } from '@cssearth/objects';
+
 import type {PreparedProjectiveTextureLeaf} from '../../../../presentation/index.ts';
-import {type Decoder,requireRecord,shape,text,number,array,optional,dictionary,boolean} from '@cssearth/core';
+import { type Decoder, requireRecord, shape, text, number, array, optional, dictionary } from '@cssearth/core';
 export interface ReplayRings {
  leaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[];
  resource:{key:string;url:string;pool:string};coverage:Record<string,unknown>;

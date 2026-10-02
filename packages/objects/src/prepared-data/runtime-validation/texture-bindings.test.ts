@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
+
 import { requireTextureBindings } from './texture-bindings.js';
 const node = (parent: number) => ({ parent, tag: 'div', className: null, style: '', properties: [], attributes: {} });
 const nodes = [node(-1), node(0), node(1), node(0), node(3)];

@@ -1,12 +1,15 @@
-import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
+import { OBJECT_RUNTIME_SCHEMA } from '../object-controls.js';
+import type { ObjectRuntimeDefinition } from '../object-runtime-types.js';
 import { choice, fail, parsedJsonNumbersFinite, record, requireJsonData, text } from './guards.js';
 import { requireAssets, requireTree } from './resources-tree.js';
-import { requireCamera, requireControls } from './camera-controls.js';
+import { requireCamera } from './camera.js';
+import { requireControls } from './controls.js';
 import { requireSky, requireSun } from './sky.js';
 import { requireMaterials } from './materials.js';
-import { requireAnimations, requireOptionalPresentation, requireVariants, requireViewBindings, requireTextureLevels } from './presentation.js';
+import { requireAnimations, requireOptionalPresentation, requireVariants, requireViewBindings } from './presentation.js';
+import { requireTextureLevels } from './prepared-texture-levels.js';
 import { requireDepthPartitions } from './depth-partitions.js';
-import { requireDeferredDatasets } from '../prepared-data/dataset-tables.js';
+import { requireDeferredDatasets } from '../dataset-tables.js';
 
 /** Validate external prepared JSON before any DOM, image, or animation is created.
  * `parsedJson` marks a direct JSON.parse result: only its numbers need the
@@ -19,7 +22,7 @@ function requireDefinition(value: unknown, parsedJson: boolean): asserts value i
   if (!parsedJson || !parsedJsonNumbersFinite(value)) requireJsonData(value);
   const plan = record(value, 'runtime plan', ['schema', 'id', 'controls', 'camera', 'sky', 'sun', 'assets', 'tree', 'variants', 'materials',
     'viewBindings', 'animations', 'motion', 'depthPartitions', 'resourceOrder', 'destinations', 'motionFrame', 'surfaceHit', 'textureLevels', 'features', 'deferredDatasets']);
-  if (plan.schema !== 'cssearth-object-runtime@5') fail('runtime schema is incompatible');
+  if (plan.schema !== OBJECT_RUNTIME_SCHEMA) fail('runtime schema is incompatible');
   const id = text(plan.id, 'object id'); if (!/^[a-z][a-z0-9-]*$/.test(id)) fail('object identity is invalid');
   requireControls(plan.controls); requireCamera(plan.camera); requireSky(plan.sky);
   if (plan.sun !== undefined && plan.sun !== null) requireSun(plan.sun);

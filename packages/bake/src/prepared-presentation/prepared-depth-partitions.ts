@@ -1,6 +1,4 @@
-import type { PreparedDepthOrder } from '@cssearth/renderer/rendering/prepared-depth-partitions.ts';
-import type { PreparedPresentationDefinition, PreparedTree } from '@cssearth/renderer/rendering/prepared-presentation.ts';
-import type { SurfaceTriangle } from '@cssearth/renderer/navigation/prepared-surface-hit.ts';
+import { type PreparedDepthOrder, type PreparedPresentationDefinition, type PreparedTree, type SurfaceTriangle } from '@cssearth/objects';
 
 export interface DepthSurface { target: number; leaves: number[]; frontSigns?: number[]; bodyFromScene: number[]; }
 export type PresentationSource = PreparedPresentationDefinition & { id: string };

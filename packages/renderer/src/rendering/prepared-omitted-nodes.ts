@@ -1,4 +1,4 @@
-import type { PreparedTree, PreparedVariant } from './prepared-presentation.js';
+import { type PreparedTree, type PreparedVariant } from '@cssearth/objects';
 
 /** The alternative mesh a leaf belongs to: its display reads `var(--<id>-<profile>-display, none)`. A body with several
  * shape models (67P, Bennu, Psyche and 38 others) carries one such profile per model; a selection shows one of them. */

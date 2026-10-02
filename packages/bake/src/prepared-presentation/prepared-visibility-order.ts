@@ -1,4 +1,5 @@
-import type { SurfaceTriangle } from '@cssearth/renderer/navigation/prepared-surface-hit.ts';
+import { type SurfaceTriangle } from '@cssearth/objects';
+
 import { orient3d } from 'robust-predicates';
 
 /** Preparation-only visibility priority graph. With both faces front-facing,

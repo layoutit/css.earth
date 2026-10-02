@@ -1,9 +1,11 @@
+import { parsePreparedObjectRuntime } from '@cssearth/objects';
+
 import { requireRecord } from '@cssearth/core';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
-import { parsePreparedObjectRuntime } from '@cssearth/renderer';
+
 import { preparePresentationBindings } from '@cssearth/bake/prepared-presentation';
 import { objectPageStyles } from '../../object-page-contract.mts';
 import { repinObjectJson } from '@cssearth/bake/contract';

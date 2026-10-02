@@ -1,13 +1,7 @@
+import { type CameraPlan, type CubicSkyPlan, type DirectionalSunPlan, type DatasetVolume, type ObjectControls, type ObjectRuntimeDefinition, type PreparedAssets, type PreparedTree, type PreparedVariant, type PreparedViewBinding, type PreparedMaterialTrack, type PreparedMaterialAddress, type PreparedMaterialRotation, type PreparedTextureLevels } from '@cssearth/objects';
+
 import type { PreparedLeaf, PreparedSeamOutset } from '../scene/index.ts';
-import type { CameraPlan } from '@cssearth/renderer/navigation/types.ts';
-import type { CubicSkyPlan } from '@cssearth/renderer/solar-system/cubic-sky-plan.ts';
-import type { DirectionalSunPlan } from '@cssearth/renderer/solar-system/directional-sun-coordinate.ts';
-import type { DatasetVolume, ObjectControls } from '@cssearth/renderer/runtime/object-contract.ts';
-import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
-import type { PreparedAssets } from '@cssearth/renderer/rendering/prepared-residency.ts';
-import type { PreparedTree, PreparedVariant, PreparedViewBinding } from '@cssearth/renderer/rendering/prepared-presentation.ts';
-import type { PreparedMaterialTrack, PreparedMaterialAddress, PreparedMaterialRotation } from '@cssearth/renderer/rendering/prepared-material.ts';
-import type { PreparedTextureLevels } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
+
 import type { RasterPagePlan } from '../raster/index.ts';
 type SeamRepair = { outset?: PreparedSeamOutset };
 

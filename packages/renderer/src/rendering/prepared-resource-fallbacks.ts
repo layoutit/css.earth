@@ -1,8 +1,8 @@
+import { type PreparedCapability, type PreparedResourceFallback } from '@cssearth/objects';
+
 /** Prepared resources that stand in for others when the browser lacks a rendering capability. A `<u>` face is the
  * triangle its two bevelled top corners cut with `corner-shape`; a browser without it (Safari 26) rounds those corners
  * into an ellipse, so the face shows an atlas whose slices are already masked to the triangle instead. */
-export type PreparedCapability = 'corner-shape';
-export interface PreparedResourceFallback { unsupported: PreparedCapability; resources: Readonly<Record<string, string>> }
 
 let cornerShape: boolean | undefined;
 export function preparedCapabilitySupported(capability: PreparedCapability): boolean {

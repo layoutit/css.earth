@@ -1,3 +1,5 @@
+import { type PreparedPresentationDefinition, type PreparedTree, type PreparedDepthOrder, type SurfacePoint, type SurfaceTriangle } from '@cssearth/objects';
+
 import { pathToFileURL } from 'node:url';
 import { projectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
@@ -9,9 +11,6 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
-import type { PreparedPresentationDefinition, PreparedTree } from '@cssearth/renderer/rendering/prepared-presentation.ts';
-import type { PreparedDepthOrder } from '@cssearth/renderer/rendering/prepared-depth-partitions.ts';
-import type { SurfacePoint, SurfaceTriangle } from '@cssearth/renderer/navigation/prepared-surface-hit.ts';
 
 const runtimeRoot = fileURLToPath(new URL('', pathToFileURL(projectRoot(import.meta.url) + "/")));
 /** Mimas's prepared camera, read inside a test so an unrestored runtime skips it. */

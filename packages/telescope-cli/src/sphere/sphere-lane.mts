@@ -1,3 +1,5 @@
+import { objectPageCss, parsePreparedObjectRuntime, parsePreparedWorldContext } from '@cssearth/objects';
+
 /** A measurement dataset for an existing standard sphere. No geometry or camera is authored here. */
 import { readFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -6,14 +8,12 @@ import { clearInactiveImageBindings } from './sphere-assets.mts';
 import { inventoryAssets } from '@cssearth/bake/delivery';
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { objectPageCss } from '@cssearth/objects';
+
 import { outputName, parseRasterRecipe, prepareRasterAssets, rasterPageOutput } from '@cssearth/bake/raster';
-import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
+
 import { parseGeometryProfile } from '@cssearth/bake/scene';
 import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
-import { parsePreparedWorldContext } from '@cssearth/objects';
-
 
 export async function inspectMeasurementSphere(root:string,target:string){
   const id = target.toLowerCase();

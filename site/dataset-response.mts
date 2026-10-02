@@ -1,8 +1,10 @@
+import { parseObjectDescriptor, parsePreparedWorldCameraFrame } from '@cssearth/objects';
+
 import { parseHTML } from 'linkedom';
-import { parseObjectDescriptor } from '@cssearth/objects';
+
 import { serializePreparedScene, createPreparedAssetResolver, loadPreparedCssObject, loadPreparedDataset,loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection, sectionElements } from '@cssearth/renderer';
 import { parseSharedView, formatSharedView } from '@cssearth/renderer/navigation';
-import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
+
 import { requiredElement, requiredSection } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
 import { readSceneDatasetUrl } from './dataset-url.mts';
@@ -80,7 +82,7 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   if (feature && definition.features && !definition.features.datasetIds.includes(datasetId ?? definition.controls.datasets?.defaultDataset ?? '')) {
     datasetId = definition.features.datasetIds[0];
   }
-  // Another dataset's tables travel apart from the object transport (dataset-tables.ts in @cssearth/renderer).
+  // Another dataset's tables travel apart from the object transport (dataset-tables.ts in @cssearth/objects).
   await loadPreparedDataset(definition, datasetId ?? null);
   const settings: Record<string, number | boolean> = {};
   if (settingRequest) {

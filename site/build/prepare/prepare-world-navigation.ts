@@ -1,3 +1,5 @@
+import { OBJECT_RUNTIME_SCHEMA } from '@cssearth/objects';
+
 import { HOSTED_PLANET_IDS, STAR_IDS } from '@cssearth/astronomy';
 import { buildPolyCameraSceneTransform } from '@layoutit/polycss';
 import { preparedControlPitch } from '@cssearth/engine';
@@ -17,7 +19,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const bound = await readAuthoredSources(objectDirectory), descriptor = bound.descriptor;
   // The receipt names the manifest pins each source had, so a later reader can tell which inputs this frame came from.
   const sources = new Map<string, Input>([...bound.sources].map(([id, entry]) => [id, entry.value as Input]));
-  if (definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@5') throw new TypeError('Physical navigation runtime identity differs.');
+  if (definition.id !== descriptor.id || definition.schema !== OBJECT_RUNTIME_SCHEMA) throw new TypeError('Physical navigation runtime identity differs.');
   const contextSource = sources.get('world-context');
   if (contextSource) {
     const context = parseWorldContextSource(contextSource);

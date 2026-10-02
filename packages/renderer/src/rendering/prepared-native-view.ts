@@ -1,6 +1,7 @@
-import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
+import { type ObjectRuntimeDefinition, type PreparedWorldCameraFrame } from '@cssearth/objects';
+
 import type { ObjectSelection } from '../runtime/object-contract.js';
-import type { PreparedWorldCameraFrame } from '@cssearth/objects';
+
 import type { SharedView } from '../navigation/view-url.js';
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
 import { presentWorldCamera } from '../navigation/world-camera.js';

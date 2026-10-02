@@ -1,26 +1,10 @@
+import { type PreparedMaterialFrameMapping, type PreparedMaterialTrack, type PreparedMaterialSelection } from '@cssearth/objects';
+
 import type { PreparedView } from "./prepared-presentation.js";
 import type { PreparedResources } from "./prepared-residency.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
 export type PreparedMaterialView = Pick<PreparedView, "sunViewDirection" | "sceneMatrix" | "reference"> & Partial<Pick<PreparedView, "levelOfDetail" | "projection" | "viewportWidth" | "viewportHeight" | "motionAtRest">>;
-export interface PreparedMaterialFrameMapping { thresholds: readonly number[]; indices: readonly number[]; }
-export interface PreparedMaterialAddress { resource: string | null; backgroundPosition: string; backgroundSize: string; frame: number | null; row: number | null; prewarm?: readonly string[]; }
-export interface PreparedMaterialBank { id: string; default?: PreparedMaterialAddress | null; fixed?: PreparedMaterialAddress | null; frames: readonly PreparedMaterialAddress[]; }
-interface RotationPolicy { reference: "initial" | "prepared"; baseDegrees: number; polePolicy?: "azimuth" | "preserve"; zeroAtPole?: boolean; onlyWhenEnabled?: boolean; publishWithAddress?: boolean;
-  physical?: Parameters<typeof createPreparedEllipsoidProjection>[0] & {systemTransform:string}; }
-export type PreparedMaterialRotation = RotationPolicy & (
-  { kind: "angle"; property: string } |
-  { kind: "planar"; width: number; height?: number } |
-  ({ kind: "ellipsoid"; systemTransform: string } & Parameters<typeof createPreparedEllipsoidProjection>[0])
-);
-export interface PreparedMaterialTrack {
-  id: string; target: number; frame: PreparedMaterialFrameMapping; defaultFrame: number; farBank?: string;
-  banks: readonly PreparedMaterialBank[]; rotation?: PreparedMaterialRotation | null; quoted?: boolean; frameAttribute?: string | null; modeAttribute?: string | null;
-}
-export interface PreparedMaterialSelection {
-  track: string; bank: string; mode: "fixed" | "frames"; fixedMode: string; frameOverride?: number | null; frameOffset?: number;
-  enabled: boolean; rotationEnabled: boolean; modeLabel?: string; publishWhenHidden?: "always" | "static" | "never"; clearWhenHidden?: boolean;
-  addressAttributes?: readonly { source: "frame" | "mode" | "mode-or-frame" | "literal"; name: string; value: string | null }[];
-}
+
 export interface PreparedMaterialDemand { required: string[]; prewarm: readonly string[]; frame: number; row: number | null; mode: string; bank: string; }
 export interface PreparedMaterialObservation {
   bank: string | null; frame: number; calculatedFrame: number; appliedFrame: number | null; appliedRow: number | null; row: number | null; mode: string | null;

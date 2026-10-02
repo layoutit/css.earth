@@ -1,10 +1,12 @@
+import { OBJECT_RUNTIME_SCHEMA, parsePreparedObjectRuntime, requireControls } from '@cssearth/objects';
+
 // The scene of an authored object with no surface (`recipe.surfaces: []`): a galaxy, a nebula, a cluster of galaxies. It is
 // the scene every body has with no body in it: the camera, sky and world frame the shared scene preparers give its
 // astronomy record. Its datasets show context banks as their companions; the world draws those, the scene is where the
 // page stands. prepare-authored.ts runs it as one of its lanes.
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { parsePreparedObjectRuntime, requireControls } from '@cssearth/renderer';
+
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, prepareCubicSky } from '@cssearth/bake/presentation';
 import { prepareSolarSystemScene } from '@cssearth/bake/objects/scene';
 
@@ -21,7 +23,7 @@ export async function prepareSurfacelessScene({ source, controls, solarGeometry 
   requireControls(controls as never);
   const camera = scene.camera;
   const node = (parent: number, className: string, style = '', attributes: Record<string, string> = {}) => ({ parent, tag: 'div', className, style, properties: [], attributes });
-  const definition = { schema: 'cssearth-object-runtime@5', camera, sky, sun: null,
+  const definition = { schema: OBJECT_RUNTIME_SCHEMA, camera, sky, sun: null,
     assets: { entries: [], pools: [{ id: 'material', capacity: 8, concurrency: 8, retention: 'selection', reuse: false }], startup: [] },
     tree: { nodes: [node(-1, 'polycss-camera object-render-root'),
       node(0, 'polycss-scene', `transform:${camera.defaultTransform}`, { 'aria-hidden': 'true', 'data-polycss-lighting': 'baked' }),

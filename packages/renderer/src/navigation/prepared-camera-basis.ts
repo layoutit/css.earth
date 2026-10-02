@@ -1,5 +1,7 @@
+import { type CameraPlan } from '@cssearth/objects';
+
 import { preparedScenePitch } from '@cssearth/engine';
-import type { CameraPlan } from './types.js';
+
 import type { Matrix4 } from '../solar-system/types.js';
 import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4, serializePreparedMatrix4 } from '@cssearth/core';
 

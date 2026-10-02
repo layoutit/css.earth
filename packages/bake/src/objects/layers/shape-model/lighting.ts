@@ -1,6 +1,7 @@
+import { type PreparedMaterialTrack, type PreparedMaterialSelection, type PreparedViewBinding } from '@cssearth/objects';
+
 import type {createPreparedNodeTree,PreparedNode} from '../../../presentation/index.ts';
-import type {PreparedMaterialTrack,PreparedMaterialSelection} from '@cssearth/renderer/rendering/prepared-material.ts';
-import type {PreparedViewBinding} from '@cssearth/renderer/rendering/prepared-presentation.ts';
+
 interface LightingContext {builder:ReturnType<typeof createPreparedNodeTree>;root:PreparedNode;axes:readonly number[];config:{displayRadius:number};scene:{systemTransform:string;camera:{initialScenePitchDegrees:number;defaultControlYawDegrees:number}};
   /** The published lighting image's pixel size, measured from its file. */
   image:{width:number;height:number};objectId:string;}

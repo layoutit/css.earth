@@ -1,16 +1,18 @@
+import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject, type PreparedAssets } from '@cssearth/objects';
+
 import { writeData, writeStyle } from '../rendering/retained-write.js';
 import { preparedVolumeTexturePaths } from './prepared-volume-runtime.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import { preparedDomAdoption } from '../rendering/prepared-dom-adoption.js';
 import { mountPreparedVolumeLod, samePreparedVolumeTopology } from './prepared-volume-lod.js';
-import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject } from '@cssearth/objects';
+
 import type { PreparedCssTransport } from '../loader.js';
 import { validatePreparedCssVolume } from './validation.js';
 import type { PreparedCssVolume, VolumeAxis, VolumeCameraPublication } from './types.js';
 import { DEFAULT_POINT_VISIBILITY, projectedVolumeOpacity, projectedVolumeRadiusPixels } from './projected-volume-visibility.js';
 import { nativeProjectedFade } from '../rendering/native-projection.js';
 import type { PreparedPointVisibility } from './projected-volume-visibility.js';
-import type { PreparedAssets } from '../rendering/prepared-residency.js';
+
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { mountPreparedCataloguePoints, samePreparedCatalogueGeometry, samePreparedPhysicalFrame,
   validatePreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';

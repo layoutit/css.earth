@@ -1,5 +1,5 @@
-import type { PreparedMaterialTrack } from '@cssearth/renderer/rendering/prepared-material.ts';
-import type { PreparedSelectionNavigation } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+import { type PreparedMaterialTrack, type PreparedSelectionNavigation } from '@cssearth/objects';
+
 import { createPreparedNodeTree } from './prepared-node-tree.ts';
 import { prepareCssomDeclarationReads } from './prepared-cssom.ts';
 import type { PresentationDraft } from './types.ts';
