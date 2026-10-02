@@ -46,7 +46,7 @@
       "faintMagnitude": -17.5,
       "faintTone": 0.3,
       "steps": 8,
-      "basis": "The Nearby Universe field's tone scale (its galaxies' recipe), so a member is as bright as a field galaxy of the same absolute magnitude: each galaxy's absolute B magnitude (its B magnitude minus the group's distance modulus) darkens its colour, from full at M_B -21.5 to 30% at -17.5, linear in magnitude; a member without a magnitude takes the faintest tone. Galactic extinction toward the cluster is not removed."
+      "basis": "The Nearby Universe field's tone scale (its galaxies' recipe), so a member is as bright as a field galaxy of the same absolute magnitude: each galaxy's absolute B magnitude (its B magnitude minus the group's distance modulus) darkens its color, from full at M_B -21.5 to 30% at -17.5, linear in magnitude; a member without a magnitude takes the faintest tone. Galactic extinction toward the cluster is not removed."
     },
     "fullDetail": {
       "units": 250,
