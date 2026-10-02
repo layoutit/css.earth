@@ -63,8 +63,8 @@ export function parseDatasetBillboards(value: unknown): DatasetBillboards {
   return Object.freeze({ atlas, banks });
 }
 
-/** One retained leaf per billboard, sampling its cell of the shared atlas. A leaf is in the document only while its
- * billboard shows, in the entries' order. The atlas is requested only when a billboard first shows; the impostor projection places, sizes and orients it like the bank's own impostors. */
+/** One retained leaf per billboard, sampling its cell of the shared atlas. The atlas is requested only when a
+ * billboard first shows; the impostor projection places, sizes and orients it like the bank's own impostors. */
 export function mountDatasetBillboards({ host, before, atlasUrl, atlas, entries, prepareAtlas }: {
   host: HTMLElement; before: Node | null; atlasUrl: string; atlas: DatasetBillboards['atlas'];
   /** Shared universe lease: transport and decode finish before the atlas reaches CSS. */
@@ -88,8 +88,9 @@ export function mountDatasetBillboards({ host, before, atlasUrl, atlas, entries,
     const column = entry.billboard.cell % atlas.columns, row = Math.floor(entry.billboard.cell / atlas.columns);
     const percent = (index: number, cells: number) => cells > 1 ? `${index / (cells - 1) * 100}%` : '0%';
     // The leaf's fixed placement is a volume.css rule; its atlas cell and the atlas-sized box are inline.
-    node.style.cssText = `width:${box}px;height:${box}px;` +
+    node.style.cssText = `width:${box}px;height:${box}px;display:none;` +
       `background-size:${atlas.columns * 100}% ${atlas.rows * 100}%;background-position:${percent(column, atlas.columns)} ${percent(row, atlas.rows)}`;
+    layer.append(node);
     const bank = { schema: 'cssearth-volume-impostors@1' as const, radiusUnits: entry.billboard.radiusUnits,
       // A billboard never hands over to a volume here; the bank's own fetch gate decides that.
       fullBelowDiameterPixels: 0, volumeAboveDiameterPixels: 1,
@@ -110,7 +111,7 @@ export function mountDatasetBillboards({ host, before, atlasUrl, atlas, entries,
       const view = projection?.visible ? projection.views[0] : undefined;
       if (!projection || !view) {
         if (leaf.shown && coasting) { writeStyle(leaf.node, 'opacity', '0'); leaf.style = ''; }
-        else if (leaf.shown) { leaf.node.remove(); leaf.shown = false; }
+        else if (leaf.shown) { leaf.node.style.display = 'none'; leaf.shown = false; }
         return;
       }
       if (!leaf.shown && coasting) return;
@@ -125,7 +126,7 @@ export function mountDatasetBillboards({ host, before, atlasUrl, atlas, entries,
           `scale(${d / box}) translate(${-box / 2}px,${-box / 2}px)`;
         writeStyle(leaf.node, 'opacity', String(opacity));
       }
-      if (!leaf.shown) { layer.insertBefore(leaf.node, leaves.slice(index + 1).find(later => later.shown)?.node ?? null); leaf.shown = true; }
+      if (!leaf.shown) { leaf.node.style.display = 'block'; leaf.shown = true; }
     },
     destroy() { layer.remove(); },
   };

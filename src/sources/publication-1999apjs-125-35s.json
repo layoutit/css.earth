@@ -1,0 +1,45 @@
+{
+  "id": "publication-1999apjs-125-35s",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A Compilation of Redshifts and Velocity Dispersions for ACO Clusters",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "1999ApJS..125...35S"
+    },
+    {
+      "type": "doi",
+      "value": "10.1086/313274"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/1999ApJS..125...35S",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+      "checkedOn": "2026-10-02",
+      "locator": "MCXC-II row MCXC J1311.5-0120 (A1689): z 0.183200, type S (spectroscopic), redshift reference 1999ApJS..125...35S"
+    }
+  ],
+  "creators": [
+    "Struble, M. F.",
+    "Rood, H. J."
+  ],
+  "publisher": "ApJS 125, 35",
+  "publicationDate": "1999",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned MCXC-II catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz"
+    }
+  ]
+}

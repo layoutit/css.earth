@@ -1,0 +1,28 @@
+{
+  "id": "great-attractor",
+  "classification": "galaxy-cluster",
+  "order": 5443,
+  "physical": {
+    "name": "Great Attractor",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of the Great Attractor is recorded: it is an extended region toward which galaxies stream, and its package frames it at 15000000 pc (object.json worldFrame.bodyRadiusM), a presentation value: chosen to show the galaxies around the fitted point; Lynden-Bell et al. (1988) publish no radius.",
+  "star": {
+    "rightAscensionDegrees": 199.65,
+    "declinationDegrees": -53.657,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 64070000,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 4350,
+    "sources": {
+      "position": "Galactic longitude 307, latitude 9: the centre of the flow Lynden-Bell et al. (1988) fitted to the motions of 400 elliptical galaxies (https://ui.adsabs.harvard.edu/abs/1988ApJ...326...19L), turned to ICRS with the IAU 1958 galactic frame.",
+      "distance": "64070000 pc: the Planck 2018 comoving distance (https://arxiv.org/abs/1807.06209) of the fitted 4350 +/- 350 km/s (https://ui.adsabs.harvard.edu/abs/1988ApJ...326...19L), the conversion the Nearby Universe field uses for its redshift galaxies, so the point sits among the galaxies drawn around it.",
+      "properMotion": "Zero: the region toward which galaxies stream is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "4350 +/- 350 km/s in the Hubble flow, the fitted distance of the attractor: Lynden-Bell et al. (1988), Galaxy streaming toward the new supergalactic center, ApJ 326, 19 (https://ui.adsabs.harvard.edu/abs/1988ApJ...326...19L)"
+    }
+  }
+}

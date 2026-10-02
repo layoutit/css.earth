@@ -4,7 +4,6 @@ import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
 import { waitFor } from '@cssearth/objects/node/contract';
-import { readout } from '../rendering/readouts.js';
 
 mock.module('../image-layers/prepared-image-layer-runtime.js', { namedExports: {
   mountPreparedCssImageLayers: ({ host, before }: { host: HTMLElement; before: Element }) => {
@@ -29,19 +28,18 @@ test('a galaxy drawn from image layers shows its billboard from afar and hands i
   const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [{ id: 'galaxy', frame }],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
     loadImageLayer: async () => ({ payload: { id: 'galaxy', frame } }) as never, billboards: { plan, atlasUrl: '/atlas.webp' } });
-  // A billboard is in the document only while it shows.
-  const billboard = () => root.querySelector<HTMLElement>('[data-dataset-billboard="galaxy"]');
+  const billboard = root.querySelector<HTMLElement>('[data-dataset-billboard="galaxy"]')!;
   const publish = (volumeOpacity: number, detailed?: string) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1,
     pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
   { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, volumeOpacity, detailed);
   publish(0);
-  assert.equal(billboard(), null, 'inside the Milky Way the sky shows it, as a galactic dataset billboard');
+  assert.notEqual(billboard.style.display, 'block', 'inside the Milky Way the sky shows it, as a galactic dataset billboard');
   publish(1);
-  assert.equal(Number(billboard()?.style.opacity), 1, 'from outside the Milky Way the galaxy shows');
+  assert.deepEqual(([billboard.style.display, Number(billboard.style.opacity)]), ['block', 1], 'from outside the Milky Way the galaxy shows');
   publish(1, 'galaxy');
-  await waitFor(() => assert.equal(readout(root, 'imageLayerResidentBankCount'), '1'));
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
   publish(1, 'galaxy');
-  assert.equal((billboard() === null || Number(billboard()!.style.opacity) === 0), true, 'its loaded slices replace the billboard');
+  assert.equal((billboard.style.display === 'none' || Number(billboard.style.opacity) === 0), true, 'its loaded slices replace the billboard');
 });
 
 test('a package of catalogue dots mounts them when its row is selected, and hides them when another is', () => {

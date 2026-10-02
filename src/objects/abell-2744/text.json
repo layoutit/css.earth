@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "abell-2744",
+  "card": {
+    "text": "Pandora's Cluster: several clusters of galaxies coming together, 1.26 billion parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "comoving distance of z = 0.3066: 1,258 Mpc"
+      },
+      {
+        "catalogueId": "publication-2004a-a-425-367b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2004A&A...425..367B",
+        "label": "Böhringer et al. (2004), the REFLEX cluster catalogue, A&A 425, 367; the redshift reference of the MCXC-II row",
+        "checked": "2026-10-02",
+        "locator": "MCXC J0014.3-3023: z 0.3066"
+      },
+      {
+        "catalogueId": "esawebb-weic2305a",
+        "url": "https://esawebb.org/images/weic2305a/",
+        "label": "ESA/Webb weic2305a: NASA, ESA, CSA, I. Labbe (Swinburne University of Technology), R. Bezanson (University of Pittsburgh), A. Pagan (STScI)",
+        "checked": "2026-10-02",
+        "locator": "caption: Pandora's Cluster, a conglomeration of already-massive clusters of galaxies coming together to form a mega cluster"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Webb's near-infrared view. The red arcs are far galaxies magnified and stretched by the cluster's gravity; the picture is flat and has no depth.",
+    "sources": [
+      {
+        "catalogueId": "esawebb-weic2305a",
+        "url": "https://esawebb.org/images/weic2305a/",
+        "label": "ESA/Webb weic2305a: NASA, ESA, CSA, I. Labbe (Swinburne University of Technology), R. Bezanson (University of Pittsburgh), A. Pagan (STScI)",
+        "checked": "2026-10-02",
+        "locator": "caption: these lensed sources appear red in the image, and often as elongated arcs distorted by the gravitational lens"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Pandora's Cluster in near infrared",
+      "detail": "4000 × 3043 px",
+      "summary": "Webb's near-infrared view of the merging clusters and the far galaxies they magnify. A flat picture of the sky; no depth.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-weic2305a",
+          "url": "https://esawebb.org/images/weic2305a/",
+          "label": "ESA/Webb weic2305a: NASA, ESA, CSA, I. Labbe (Swinburne University of Technology), R. Bezanson (University of Pittsburgh), A. Pagan (STScI)",
+          "checked": "2026-10-02",
+          "locator": "Pandora's Cluster (Abell 2744)"
+        }
+      ]
+    }
+  }
+}

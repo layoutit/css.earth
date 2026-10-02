@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "abell-1689",
+  "card": {
+    "text": "A cluster of galaxies 776 million parsecs away whose gravity bends the light of the galaxies behind it.",
+    "sources": [
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "comoving distance of z = 0.1832: 776 Mpc"
+      },
+      {
+        "catalogueId": "publication-1999apjs-125-35s",
+        "url": "https://ui.adsabs.harvard.edu/abs/1999ApJS..125...35S",
+        "label": "Struble & Rood (1999), a compilation of redshifts of Abell clusters, ApJS 125, 35; the redshift reference of the MCXC-II row",
+        "checked": "2026-10-02",
+        "locator": "MCXC J1311.5-0120: z 0.1832"
+      },
+      {
+        "catalogueId": "esahubble-heic1317a",
+        "url": "https://esahubble.org/images/heic1317a/",
+        "label": "ESA/Hubble heic1317a: NASA, ESA, the Hubble Heritage Team (STScI/AURA), J. Blakeslee (NRC Herzberg Astrophysics Program, Dominion Astrophysical Observatory), and H. Ford (JHU)",
+        "checked": "2026-10-02",
+        "locator": "caption: Abell 1689 bends and warps the space around it, affecting how light from objects behind the cluster travels"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Hubble's view in visible and near-infrared light. The blue streaks are galaxies far behind the cluster, distorted by its gravity; the picture is flat and has no depth.",
+    "sources": [
+      {
+        "catalogueId": "esahubble-heic1317a",
+        "url": "https://esahubble.org/images/heic1317a/",
+        "label": "ESA/Hubble heic1317a: NASA, ESA, the Hubble Heritage Team (STScI/AURA), J. Blakeslee (NRC Herzberg Astrophysics Program, Dominion Astrophysical Observatory), and H. Ford (JHU)",
+        "checked": "2026-10-02",
+        "locator": "caption: the electric blue streaks are the distorted forms of galaxies that lie behind the cluster"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Abell 1689 in visible light",
+      "detail": "4002 × 3863 px",
+      "summary": "Hubble's visible and near-infrared view of the cluster and its lensed arcs. A flat picture of the sky, with no depth.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-heic1317a",
+          "url": "https://esahubble.org/images/heic1317a/",
+          "label": "ESA/Hubble heic1317a: NASA, ESA, the Hubble Heritage Team (STScI/AURA), J. Blakeslee (NRC Herzberg Astrophysics Program, Dominion Astrophysical Observatory), and H. Ford (JHU)",
+          "checked": "2026-10-02",
+          "locator": "New Hubble view of galaxy cluster Abell 1689"
+        }
+      ]
+    }
+  }
+}

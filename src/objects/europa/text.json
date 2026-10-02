@@ -29,7 +29,7 @@
     "normal": {
       "title": "Global image mosaic",
       "detail": "Global mosaic",
-      "summary": "Galileo close-ups add detail to the global mosaic. Original shadows and brightness joins remain; gray grid marks gaps.",
+      "summary": "Galileo close-ups add detail to the global mosaic, evened for Sun angle. Original shadows remain; gray grid marks gaps.",
       "sources": [
         {
           "catalogueId": "usgs-europa-controlled-galileo-images",

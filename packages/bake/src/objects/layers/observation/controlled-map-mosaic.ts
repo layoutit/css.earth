@@ -1,8 +1,10 @@
 import {resolve,relative,isAbsolute} from 'node:path';
+import {readFile} from 'node:fs/promises';
 import {fromFile} from 'geotiff';
 import {requireArray,requireFiniteNumber,requireRecord,requireString} from '@cssearth/core';
 import {numericRasterBands} from '../../raster/index.ts';
 import {linearToSrgb,srgbToLinear} from '../../color/index.ts';
+import {diskGain,loadPhotometricModelRecord,NORMAL_GEOMETRY,type DiskModel} from '../../../photometry/index.ts';
 
 /** Area integrals of native pixel squares. The validity integral is independent
  * of brightness: a valid black sample is still an observation. */
@@ -132,16 +134,62 @@ export function samplePolarCell(sample:ReturnType<typeof areaSampler>,frame:Cont
   }
   return sum/(nx*ny);
 }
-/** Keep one photograph per delivered pixel. Preserve measured I/F and original
- * illumination; no brightness fitting, terrain model or cross-image blending. */
-export async function prepareControlledMapMosaic(sourceDirectory:string,entries:readonly unknown[],profileValue:unknown,width:number,height:number,onFrame?:(id:string)=>void) {
+const HORIZONS_MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+/** Each photograph's Sun direction in the body frame, from pinned JPL Horizons observer tables of the body
+ * (quantity 15, the sub-solar point) at the photographs' capture times: `{requests: [{url, response}]}`, because
+ * Horizons refuses one URL that lists every time. Horizons prints the IAU planetographic longitude, which runs
+ * west on a prograde body; `longitudeDirection` records that for the tables. */
+export function parseSubSolarPoints(table:unknown,entries:readonly unknown[],longitudeDirection:unknown) {
+  if(longitudeDirection!=='west-positive'&&longitudeDirection!=='east-positive')throw new TypeError('Sub-solar longitude direction must be west-positive or east-positive.');
+  const rows=new Map<number,readonly[number,number,number]>();
+  for(const request of requireArray(requireRecord(table).requests)) {
+  const result=requireString(requireRecord(requireRecord(request).response).result),columns=result.match(/^(.*SunSub-LON.*)$/m)?.[1]?.split(',').map(name=>name.trim());
+  const body=result.split('$$SOE')[1]?.split('$$EOE')[0];
+  if(!columns||!body)throw new TypeError('Expected a Horizons observer table with the sub-solar point.');
+  const longitudeColumn=columns.indexOf('SunSub-LON'),latitudeColumn=columns.indexOf('SunSub-LAT');
+  for(const line of body.trim().split('\n')) {
+    const cells=line.split(',').map(cell=>cell.trim()),date=cells[0]!.match(/^(\d{4})-([A-Z][a-z]{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})\.(\d{3})$/),month=HORIZONS_MONTHS.indexOf(date?.[2]??'');
+    const longitude=Number(cells[longitudeColumn])*radians*(longitudeDirection==='west-positive'?-1:1),latitude=Number(cells[latitudeColumn])*radians;
+    if(!date||month<0||!Number.isFinite(longitude)||!Number.isFinite(latitude))throw new TypeError(`Invalid Horizons sub-solar row: ${line}`);
+    rows.set(Date.UTC(Number(date[1]),month,Number(date[3]),Number(date[4]),Number(date[5]),Number(date[6]),Number(date[7])),
+      [Math.cos(latitude)*Math.cos(longitude),Math.cos(latitude)*Math.sin(longitude),Math.sin(latitude)]);
+  }
+  }
+  return new Map(entries.map(value=>{
+    const entry=requireRecord(value),id=requireString(entry.id),observedAt=requireString(entry.observedAt),sun=rows.get(Math.round(Date.parse(observedAt)));
+    if(!sun)throw new Error(`No sub-solar point for ${id}, observed at ${observedAt}.`);
+    return [id,sun] as const;
+  }));
+}
+/** A published disk function that needs only the Sun: each sample is carried to normal incidence, and a sample
+ * lit more obliquely than the limit is withheld so a coarser photograph or the base mosaic shows there. */
+export interface ControlledMapPhotometry {disk:DiskModel;cosineLimit:number;suns:ReadonlyMap<string,readonly[number,number,number]>;report:Record<string,unknown>;}
+export async function loadControlledMapPhotometry(sourceDirectory:string,entries:readonly unknown[],value:unknown):Promise<ControlledMapPhotometry> {
+  const p=requireRecord(value),modelPath=requireString(p.model),path=requireString(p.subSolarPoints),limit=requireFiniteNumber(p.maximumIncidenceDegrees);
+  const {model,id}=await loadPhotometricModelRecord(sourceDirectory,modelPath);
+  if(model.family!=='separable'||model.disk.family!=='lambert'||model.phase)throw new TypeError(`${modelPath}: controlled photographs carry Sun geometry only, so their model must be a Lambert disk function.`);
+  if(!(limit>0&&limit<90))throw new TypeError('maximumIncidenceDegrees must lie in (0, 90).');
+  const suns=parseSubSolarPoints(JSON.parse(await readFile(resolve(sourceDirectory,path),'utf8')),entries,p.longitudeDirection);
+  return {disk:model.disk,cosineLimit:Math.cos(limit*radians),suns,report:{model:id,modelPath,reference:'normal incidence',maximumIncidenceDegrees:limit,subSolarPoints:path}};
+}
+/** The gain at a body-fixed point, or null where the Sun is lower than the limit. */
+export function controlledMapSunGain(photometry:Pick<ControlledMapPhotometry,'disk'|'cosineLimit'>,sun:readonly[number,number,number],longitude:number,latitude:number) {
+  const lon=longitude*radians,lat=latitude*radians,mu0=Math.cos(lat)*(Math.cos(lon)*sun[0]+Math.sin(lon)*sun[1])+Math.sin(lat)*sun[2];
+  return mu0<photometry.cosineLimit?null:diskGain(photometry.disk,{mu0,mu:1,phase:0},NORMAL_GEOMETRY);
+}
+/** Keep one photograph per delivered pixel, with no terrain model or cross-image blending. Without `photometry`
+ * the measured I/F keeps its original illumination; with it each sample is carried to normal incidence. */
+export async function prepareControlledMapMosaic(sourceDirectory:string,entries:readonly unknown[],profileValue:unknown,width:number,height:number,onFrame?:(id:string)=>void,photometry?:ControlledMapPhotometry) {
   const profile=parseControlledMapProfile(profileValue),frames=parseControlledFrames(entries),count=width*height;
   if(!Number.isSafeInteger(width)||width<2||height*2!==width)throw new TypeError('Expected a 2:1 output grid.');
   const values=new Float32Array(count),owners=new Uint16Array(count),missing=new Uint8Array(count).fill(1),step=360/width,units=profile.radius*radians;
-  const nativeMaxima:number[]=[];
+  // Uncorrected, a photograph's ceiling is its brightest native pixel; corrected, its brightest delivered pixel.
+  const nativeMaxima:number[]=[],withheldPixels:number[]=[];
   for(const [frameIndex,frame] of frames.entries()) {
     const sample=await loadFrame(sourceDirectory,frame,profile),b=controlledMapBounds(frame,profile.radius),t=frame.transform;
-    nativeMaxima.push(sample.maximum);
+    const sun=photometry?.suns.get(frame.id);
+    if(photometry&&!sun)throw new Error(`No sub-solar point for ${frame.id}.`);
+    let maximum=sun?0:sample.maximum,withheld=0;
     const firstY=Math.max(0,Math.floor((90-b.north)/step)),lastY=Math.min(height,Math.ceil((90-b.south)/step));
     const firstX=Math.floor(b.west/step),lastX=Math.ceil(b.east/step);
     for(let y=firstY;y<lastY;y++)for(let col=firstX;col<lastX;col++){
@@ -152,8 +200,12 @@ export async function prepareControlledMapMosaic(sourceDirectory:string,entries:
         const px=((lon-frame.centerLongitude)*units-t[0]!)/t[1]!,py=(lat*units-t[3]!)/t[5]!;
         value=sample(px,py,step*units/t[1]!,step*units/-t[5]!);
       }else value=samplePolarCell(sample,frame,profile,lon,lat,step);
-      if(value===null)continue;const i=y*width+x;values[i]=value;owners[i]=frameIndex+1;missing[i]=0;
+      if(value===null)continue;
+      if(sun) {const gain=controlledMapSunGain(photometry!,sun,lon,lat);if(gain===null){withheld++;continue;}value*=gain;}
+      const i=y*width+x;values[i]=value;owners[i]=frameIndex+1;missing[i]=0;
+      if(sun)maximum=Math.max(maximum,value);
     }
+    nativeMaxima.push(maximum);withheldPixels.push(withheld);
     onFrame?.(frame.id);
   }
   const rgb=new Uint8Array(count*3),coverage=frames.map((frame,i)=>({id:frame.id,pixels:0,surfacePercent:0,nativeMaximum:nativeMaxima[i]!}));
@@ -168,7 +220,7 @@ export async function prepareControlledMapMosaic(sourceDirectory:string,entries:
   }
   for(const frame of coverage)frame.surfacePercent=frame.surfacePercent/areaTotal*100;
   return {rgb,missing,values,owners,report:{method:'smallest-projected-pixel-valid-single-frame',sampling:{equirectangular:'native pixel-area integration; bilinear at magnification',polar:'geographic subgrid at source-pixel spacing; complete bilinear samples'},
-    photometricCorrection:false,display:{range:[0,profile.maximum],encoding:'IEC sRGB'},surfacePercent:areaCovered/areaTotal*100,clippedHighlights,clippedNegative,minimum:Number.isFinite(minimum)?minimum:null,maximum:Number.isFinite(maximum)?maximum:null,frames:coverage}};
+    photometricCorrection:photometry?{...photometry.report,withheldPixels:withheldPixels.reduce((sum,n)=>sum+n,0)}:false,display:{range:[0,profile.maximum],encoding:'IEC sRGB'},surfacePercent:areaCovered/areaTotal*100,clippedHighlights,clippedNegative,minimum:Number.isFinite(minimum)?minimum:null,maximum:Number.isFinite(maximum)?maximum:null,frames:coverage}};
 }
 
 /** One display exposure per photograph, fitted to co-located valid base pixels
@@ -200,7 +252,7 @@ export function matchControlledMapLevels(result:{values:Float32Array;owners:Uint
   return {method:'bounded-median-display-ratio-at-selected-footprint-boundaries',boundaryPixels,photometricCorrection:false,levels};
 }
 /** Only photographs intersecting a polar cap remain decoded for its direct sampler. */
-export async function loadControlledMapPoles(sourceDirectory:string,entries:readonly unknown[],profileValue:unknown,gains:ReadonlyMap<string,number>=new Map()) {
+export async function loadControlledMapPoles(sourceDirectory:string,entries:readonly unknown[],profileValue:unknown,gains:ReadonlyMap<string,number>=new Map(),photometry?:ControlledMapPhotometry) {
   const profile=parseControlledMapProfile(profileValue);
   const selected: {frame: ReturnType<typeof parseControlledFrames>[number];sample: Awaited<ReturnType<typeof loadFrame>>}[]=[];
   for(const frame of parseControlledFrames(entries).reverse()) {
@@ -211,7 +263,8 @@ export async function loadControlledMapPoles(sourceDirectory:string,entries:read
   return {sample(longitude:number,latitude:number,color:number[]) {
     for(const {frame,sample} of selected) {
       const [px,py]=pixelPoint(frame,profile,longitude,latitude),value=sample(px,py,0,0);if(value===null)continue;
-      const gray=Math.round(255*linearToSrgb(value/profile.maximum*(gains.get(frame.id)??1)));color[0]=gray;color[1]=gray;color[2]=gray;color[3]=255;return true;
+      const sun=photometry?.suns.get(frame.id),sunlit=sun?controlledMapSunGain(photometry!,sun,longitude,latitude):1;if(sunlit===null)continue;
+      const gray=Math.round(255*linearToSrgb(Math.min(1,value*sunlit/profile.maximum*(gains.get(frame.id)??1))));color[0]=gray;color[1]=gray;color[2]=gray;color[3]=255;return true;
     }
     return false;
   }};

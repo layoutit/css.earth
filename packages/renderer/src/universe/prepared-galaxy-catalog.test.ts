@@ -2,7 +2,6 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
-import { readout } from '../rendering/readouts.js';
 
 class Window {
   time = 0; next = 0; frames = new Map<number, (time: number) => void>();
@@ -41,9 +40,9 @@ test('the catalogue draws one dot for each Local Group row without a package, an
   assert.ok(packaged.length > 0);
   assert.equal(runtime.inspect().count, rows.filter(row => row.name && !row.detailedObjectId && row.membership.group === 'local-group').length);
   // A row with a package is a body of the world context: the catalogue draws no dot, marker or caption for it.
-  for (const row of packaged) assert.equal(root.children.some(node => readout(node, 'galaxyDot') === row.id), false);
-  assert.equal(root.children.every(node => readout(node, 'galaxyDot') !== undefined), true);
-  for (const id of ['hydra_1', 'leo_a', 'sagittarius_1']) assert.equal(root.children.some(node => readout(node, 'galaxyDot') === id), true);
+  for (const row of packaged) assert.equal(root.children.some(node => node.dataset.galaxyDot === row.id), false);
+  assert.equal(root.children.every(node => node.dataset.galaxyDot !== undefined), true);
+  for (const id of ['hydra_1', 'leo_a', 'sagittarius_1']) assert.equal(root.children.some(node => node.dataset.galaxyDot === id), true);
   runtime.publish(world, viewport, 1); document.defaultView.advance(300);
   const dots = root.children.filter(node => Number(node.style.opacity) > 0);
   assert.ok(dots.length > 10);

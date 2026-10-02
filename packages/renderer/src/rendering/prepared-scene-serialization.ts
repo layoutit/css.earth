@@ -5,7 +5,6 @@ import { leafBoxBindings, leafBoxStyles } from './prepared-leaf-box-direct.js';
 import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { preparedDatasetPending } from '../prepared-data/dataset-tables.js';
 import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
-import { preparedClassNames } from './prepared-leaf-class.js';
 
 export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; }
 export interface SerializedPreparedScene extends PreparedSceneMarkup {
@@ -46,10 +45,8 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, data
   if (preparedDatasetPending(definition, selection)) throw new TypeError(`${definition.id}: dataset ${String(selection.datasetId)} needs its tables (adoptPreparedDatasetTables).`);
   const variant = definition.variants.find(entry => Object.entries(entry.when).every(([key, value]) => selection[key] === value));
   if (!variant) throw new TypeError(`${definition.id}: initial presentation is missing.`);
-  // The classes the builder gives each node (prepared-leaf-class.ts): the markup and an adopted tree agree.
-  const classNames = preparedClassNames(definition.tree);
-  const elements = definition.tree.nodes.map((node, index) => ({
-    tag: node.tag, classes: new Set(classNames[index]?.split(/\s+/).filter(Boolean)),
+  const elements = definition.tree.nodes.map(node => ({
+    tag: node.tag, classes: new Set(node.className?.split(/\s+/).filter(Boolean)),
     attributes: { ...node.attributes }, style: declarations(rewritePreparedStyleUrls(node.style, definition.assetOrigin)), children: [] as number[],
   }));
   const stage = { classes: new Set(definition.tree.stageClasses), attributes: {} as Record<string, string>, style: new Map<string, string>() };

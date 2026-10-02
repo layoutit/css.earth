@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "abell-2744-dataset-optical.webp",
+      "bytes": 18658,
+      "sha256": "cf01647d55e4b61442fd922ffd69b65b3a78751cfe8a9553bc3a7aed2c0f7484"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 3333,
+      "sha256": "0426a6a6ec12dfea116095f6f7ab79beb01a7591bbcac1e897d387deb1941214"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 476,
+      "sha256": "80250680af71a7017b6612e13a56dc8f9dae834b91f5e6e530975b7249072c24"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 573,
+      "sha256": "9f5ff73aae7b5d3ddd99cb1a2e28fe23fa4af120b46d6940e5230aaddaeb3b6f"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 4629,
+      "sha256": "57b616042f7fdec17a7b797ac4d43c59fd805f338a4f3f62ef3f6276a7528a36"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 3891,
+      "sha256": "1aa16670f79265b60b99bad6df83749db4d25a11aa9427da89add99a6401c0e3"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 2231,
+      "sha256": "de488e87bbfbca5c546452fc87de1dbe2a18f54700435ae576d50564720d6f9a"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 654,
+      "sha256": "b91c213754a836971ff9c8ac931ae3cee6a0ec9979625e01ee1190be2f10cec2"
+    }
+  ]
+}

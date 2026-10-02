@@ -1,0 +1,28 @@
+{
+  "id": "abell-2744",
+  "classification": "galaxy-cluster",
+  "order": 5430,
+  "physical": {
+    "name": "Abell 2744",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Abell 2744 is recorded: it is an extended cluster of galaxies, and its package frames it at 818,387 pc (object.json worldFrame.bodyRadiusM), half the short side of its picture at the cluster's distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 3.5783,
+    "declinationDegrees": -30.3834,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 1257621141.7622752,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 91916.4,
+    "sources": {
+      "position": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe (https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz); catalogue reference mcxc-ii:MCXC J0014.3-3023",
+      "distance": "Comoving distance of the catalogued redshift z = 0.3066 (MCXC-II row MCXC J0014.3-3023, redshift reference 2004A&A...425..367B) in the Planck 2018 cosmology: 1257621141.7622752 pc, from Astropy 8.0.1 Planck18.comoving_distance (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift (packages/bake/cli/prepare-catalogue-points.mts).",
+      "properMotion": "Zero: the cluster of galaxies is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the catalogued redshift z = 0.3066: the redshift written as a velocity, not a motion through space. Redshift reference 2004A&A...425..367B, transcribed from MCXC-II (https://ui.adsabs.harvard.edu/abs/2004A&A...425..367B)."
+    }
+  }
+}

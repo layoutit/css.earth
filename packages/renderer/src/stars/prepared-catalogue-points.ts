@@ -5,7 +5,6 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 import { nativeProjectedLength } from '../rendering/native-projection.js';
-import { setReadout } from '../rendering/readouts.js';
 
 export interface PreparedCataloguePoint {
   readonly id: string;
@@ -67,12 +66,12 @@ export function mountPreparedCataloguePoints({ host, before, payload, createElem
   const create = createElement ?? ((tag: string) => document.createElement(tag));
   const root = create('div');
   root.className = 'prepared-catalogue-points'; root.ariaHidden = 'true';
-  setReadout(root, 'pointCount', String(data.points.length));
+  root.dataset.pointCount = String(data.points.length);
   Object.assign(root.style, { position: 'absolute', inset: '0', pointerEvents: 'none', overflow: 'hidden', zIndex: '1' });
   let presentation = data, materials = data.points, destroyed = false, latest: VolumeCameraPublication | null = null;
   const shownState = new Uint8Array(data.points.length).fill(255), writtenTransform: string[] = new Array(data.points.length).fill('');
   const nodes = data.points.map(point => {
-    const node = create('s'); setReadout(node, 'catalogueSource', point.id);
+    const node = create('s'); node.dataset.catalogueSource = point.id;
     Object.assign(node.style, { position: 'absolute', left: '50%', top: '50%', display: 'block',
       borderRadius: '50%', textDecoration: 'none', visibility: 'hidden' });
     root.append(node); return node;
@@ -126,7 +125,7 @@ export function mountPreparedCataloguePoints({ host, before, payload, createElem
       }
     }
     const visiblePoints = String(visible);
-    setReadout(root, 'visiblePoints', visiblePoints);
+    if (root.dataset.visiblePoints !== visiblePoints) root.dataset.visiblePoints = visiblePoints;
   };
   applyPresentation(); host.insertBefore(root, before);
   return Object.freeze({ root, publish,
