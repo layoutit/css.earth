@@ -5,7 +5,7 @@ import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseDensityVolumeObjectDescriptor, type DensityVolumeFrame, type Vector3 } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, type DensityVolumeFrame, type Vector3 } from '@cssearth/objects';
 import type { VolumeRecipe } from '@cssearth/objects';
 import { decodeDensityKtx2, sourceBytes, prepareVolumeSlices } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
@@ -118,7 +118,7 @@ export async function prepareFullParticleDensity(configPath: string): Promise<vo
     const slices = await prepareVolumeSlices({ sourceDirectory, outputDirectory, recipe: volumeRecipe });
     const data = compileCssVolume({ id: target.id, frame, slices, recipe: volumeRecipe });
     const envelope = { schema: 'cssearth-prepared-object@1' as const, id: target.id,
-      type: 'density-volume' as const, format: 'cssearth-density-volume@1' as const, data };
+      type: 'density-volume' as const, format: DENSITY_VOLUME_FORMAT, data };
     const preparedBytes = Buffer.from(JSON.stringify(envelope) + '\n');
     await writeFile(resolve(outputDirectory, 'volume.json'), preparedBytes);
     await json(resolve(objectDirectory, 'object.json'), { schema: 'cssearth-object@2', id: target.id,

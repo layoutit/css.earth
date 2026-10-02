@@ -2,7 +2,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseDensityVolumeObjectDescriptor, type Vector3 } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, type Vector3 } from '@cssearth/objects';
 import { cataloguePosition, METERS_PER_KPC } from '@cssearth/bake/volume';
 import { type VolumeRecipe } from '@cssearth/objects';
 import { planFullDensityGrid } from '@cssearth/nebula-reconstruction/stars/full-density';
@@ -104,7 +104,7 @@ export async function prepareCatalogueDensity(configPath: string) {
     const slices = await prepareVolumeSlices({ sourceDirectory, outputDirectory: prepared, recipe });
     const frame = { ...descriptor.volume, boundsUnits: plan.boundsKpc };
     const data = compileCssVolume({ id: config.id, frame, slices, recipe });
-    const envelope = { schema: 'cssearth-prepared-object@1', id: config.id, type: 'density-volume', format: 'cssearth-density-volume@1', data };
+    const envelope = { schema: 'cssearth-prepared-object@1', id: config.id, type: 'density-volume', format: DENSITY_VOLUME_FORMAT, data };
     const preparedBytes = Buffer.from(JSON.stringify(envelope) + '\n');
     await writeFile(resolve(prepared, 'volume.json'), preparedBytes);
     await json(resolve(output, 'object.json'), { schema: 'cssearth-object@2', id: config.id, type: 'density-volume',

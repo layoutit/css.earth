@@ -1,4 +1,4 @@
-import { validatePreparedVolumeDatasets, type PreparedVolumeDataset, type PreparedVolumeDatasetBrightness, type PreparedVolumeDatasets, PREPARED_VOLUME_DATASETS_SCHEMA, parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject, type PreparedAssets, type PreparedCssVolume, type VolumeAxis } from '@cssearth/objects';
+import { samePreparedCatalogueGeometry, validatePreparedVolumeDatasets, type PreparedVolumeDataset, type PreparedVolumeDatasetBrightness, type PreparedVolumeDatasets, PREPARED_VOLUME_DATASETS_SCHEMA, parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject, type PreparedAssets, type PreparedCssVolume, type VolumeAxis } from '@cssearth/objects';
 import { writeData, writeStyle } from '../rendering/retained-write.js';
 import { preparedVolumeTexturePaths } from './prepared-volume-runtime.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
@@ -9,7 +9,7 @@ import type { VolumeCameraPublication } from './types.js';
 import { projectedVolumeOpacity, projectedVolumeRadiusPixels } from './projected-volume-visibility.js';
 import { nativeProjectedFade } from '../rendering/native-projection.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import { mountPreparedCataloguePoints, samePreparedCatalogueGeometry } from '../stars/prepared-catalogue-points.js';
+import { mountPreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
 
 export interface PreparedVolumeDatasetState {
   readonly id: string;

@@ -21,4 +21,3 @@ export interface PreparedImageLayerView {
 export interface PreparedCssImageLayers extends PreparedCssVolume {
   readonly bankViews: readonly PreparedImageLayerView[];
 }
-

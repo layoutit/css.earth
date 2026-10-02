@@ -103,7 +103,7 @@ export async function promoteVolumeDatasets(root: string, input: VolumeDatasetPr
       const image = await readFile(source.url.slice(4));
       const path = `${dataset.imageId}/${resource.path}`;
       await output(`prepared/${path}`, image);
-      // The renderer's volume resource contract still requires a digest per texture (cssearth-density-volume@1).
+      // The renderer's volume resource contract still requires a digest per texture (density-volume format).
       resources.push({ ...resource, path, bytes: image.length });
     }
     const preparedVolume: PreparedCssVolume = { ...volume, id: `${recipe.id}-${dataset.imageId}`, resources,

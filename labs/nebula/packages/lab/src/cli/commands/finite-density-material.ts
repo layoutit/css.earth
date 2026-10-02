@@ -9,7 +9,7 @@ import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { fitFiniteRegionMaterial, type MaterialTransportSample } from '@cssearth/nebula-reconstruction/methods/sampled/finite-region-material';
 import { compilerSlabMaterial } from '@cssearth/bake/volume';
-import { parseVolumeRecipe, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, parseVolumeRecipe, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/objects';
 import { type Vector3 } from '@cssearth/objects';
 import { recolorCloudSlices, loadVolumeSource, sampleEncoded, sourceBytes, containedPath, channelDensity } from '@cssearth/bake/volume/node';
 const json=async(path:string,value:unknown)=>{await writeFile(path,JSON.stringify(value,null,2)+'\n');};
@@ -87,7 +87,7 @@ export async function finiteDensityMaterial(baselineId:string,settingsPath:strin
   const nextProvenance={...provenance,method:'fixed-density-finite-region-material@1',request:{...work,id,outputDirectory:output},material:receipt,qualification:receipt.qualification,validation:receipt.validation};
   await json(resolve(output,'source/provenance.json'),nextProvenance);painted.slices.provenance=nextProvenance;
   await json(resolve(output,'prepared/volume-slices.json'),painted.slices);
-  const data=compileCssVolume({id,frame,slices:painted.slices,recipe:{anchors:[]}}),prepared={schema:'cssearth-prepared-object@1',id,type:'density-volume',format:'cssearth-density-volume@1',data};
+  const data=compileCssVolume({id,frame,slices:painted.slices,recipe:{anchors:[]}}),prepared={schema:'cssearth-prepared-object@1',id,type:'density-volume',format:DENSITY_VOLUME_FORMAT,data};
   await json(resolve(output,'prepared/volume.json'),prepared);
   const descriptor={schema:'cssearth-object@2',id,type:'density-volume',properties:{volume:frame,preparation:{source:'source/provenance.json'}},prepared:{format:prepared.format,url:'prepared/volume.json'}};
   await json(resolve(output,'object.json'),descriptor);

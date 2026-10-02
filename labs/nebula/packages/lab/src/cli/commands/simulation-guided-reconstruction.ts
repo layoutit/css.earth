@@ -12,7 +12,7 @@ import {fitSimulationGuidedEmission} from '@cssearth/nebula-reconstruction/metho
 import {fitSimulationEnvelope,createEnvelopeSampler,envelopeChromaticity,validateEnvelopeSettings,envelopeChromaSettings} from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
 import {loadSimulationPrior} from './simulation-prior.ts';
 import { compilerSlabMaterial, alphaLimitedSlabMaterial } from '@cssearth/bake/volume';
-import { type Vector3, type SkyBounds, type EmissionBounds } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, type Vector3, type SkyBounds, type EmissionBounds } from '@cssearth/objects';
 import { bakeMasterVolumeSlices, recolorCloudSlices, sourceBytes, containedPath } from '@cssearth/bake/volume/node';
 const json=async(path:string,value:unknown)=>{await writeFile(path,JSON.stringify(value,null,2)+'\n');};
 /** Reconstructions are named by what they were made from, like `<subject>-<image>` or `<subject>-<settings>`. */
@@ -135,7 +135,7 @@ async function main(settingsPath:string){
  const nextProvenance={...provenance,method:'simulation-guided-finite-emission@1',request:{...work,id,frame,outputDirectory:output},geometry:{...provenance.geometry,physicalBoundsKpc:physical},envelope:envelope?{path:'source/envelope.json',settings:envelopeSettings,metrics:envelope.metrics,priorCloud,source:envelopeSource?{resultId:envelopeSource.id,imageId:envelopeSource.imageId,meaning:'Broad envelope light and color come from this separate registered image; fine structure comes from the primary baseline image.'}:null,meaning:'Smoothed image light carried along the pinned simulation density: gain(x,y) x simulation(x,y,z). Depth shape is the simulation, not recovered gas depth.'}:null,material:receipt,qualification,densityProjection:{width,height,tangentBoundsKpc:tb,observerDistanceKpc:distance,meaning:'Analytic integrated fitted finite emission, display optical-depth transfer 1-exp(-exposure*projection); not the original stellar prior.'},limitations:['A single optical image does not measure gas depth. Stellar simulation ray modes are conditional guidance only.',...(envelope?['The smooth envelope inherits the stellar simulation\'s depth distribution; it is a shape hypothesis, not measured gas geometry.']:[]),'Foreground exclusion and finite thickness limits are explicit authored settings.','Geometry and neutral opacity are newly fitted; color application alone preserves this new opacity.','Preview slab discretization and finite component chromaticity can lose sub-resolution image detail.'],validation};
  await json(resolve(staging,'source/provenance.json'),nextProvenance);painted.slices.provenance=nextProvenance;
  await json(resolve(staging,'prepared/volume-slices.json'),painted.slices);
- const data=compileCssVolume({id,frame,slices:painted.slices,recipe:{anchors:[]}}),prepared={schema:'cssearth-prepared-object@1',id,type:'density-volume',format:'cssearth-density-volume@1',data};
+ const data=compileCssVolume({id,frame,slices:painted.slices,recipe:{anchors:[]}}),prepared={schema:'cssearth-prepared-object@1',id,type:'density-volume',format:DENSITY_VOLUME_FORMAT,data};
  await json(resolve(staging,'prepared/volume.json'),prepared);
  const descriptor={schema:'cssearth-object@2',id,type:'density-volume',properties:{volume:frame,preparation:{source:'source/provenance.json'}},prepared:{format:prepared.format,url:'prepared/volume.json'}};
  await json(resolve(staging,'object.json'),descriptor);

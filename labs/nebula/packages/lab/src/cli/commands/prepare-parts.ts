@@ -1,5 +1,5 @@
 import { observationEnvelope as envelope, type ImageWcs } from '@cssearth/bake/volume';
-import { type VolumeRecipe, type DensityVolumeFrame, type VolumeSlices, type PreparedCssVolume } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, type VolumeRecipe, type DensityVolumeFrame, type VolumeSlices, type PreparedCssVolume } from '@cssearth/objects';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Offline preparation of frozen cloud-component inspection banks. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -176,5 +176,5 @@ await json(resolve(targetDirectory, 'source/cloud-parts.json'), { schema: 'cssea
   composition: 'The unfiltered default uses exact reference leaves. Filtered part leaves are independently encoded source-over contribution inspection; their combined RGBA is order-dependent and approximate.' });
 await json(resolve(targetDirectory, 'inspection-object.json'), { schema: 'cssearth-object@2', id: targetId,
   type: 'density-volume', properties: { volume: combined.data.frame, preparation: { source: 'source/cloud-parts.json' } },
-  prepared: { format: 'cssearth-density-volume@1', url: 'prepared/inspection.json' } });
+  prepared: { format: DENSITY_VOLUME_FORMAT, url: 'prepared/inspection.json' } });
 console.log(`CLOUD_PARTS_COMPLETE ${results.length} parts ${partResources.length} resources ${partResources.reduce((sum, item) => sum + item.bytes, 0)} bytes`);

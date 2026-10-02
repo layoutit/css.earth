@@ -57,4 +57,3 @@ export interface PreparedCssVolume {
   readonly sky?: PreparedCssSky;
   readonly impostors?: PreparedVolumeImpostors;
 }
-

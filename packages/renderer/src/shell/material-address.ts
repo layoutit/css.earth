@@ -1,6 +1,3 @@
-/** Fixed atlas corner convention shared by preparation and retained material selection. */
-export const SHELL_CORNER_PERMUTATIONS = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]] as const;
-
 export function nearestFacingIndex(facing: number, levels: readonly number[]): number {
   let low = 0, high = levels.length - 1;
   while (high - low > 1) {

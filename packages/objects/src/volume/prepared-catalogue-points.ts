@@ -35,4 +35,3 @@ export function validatePreparedCataloguePoints(input: unknown): PreparedCatalog
   });
   return Object.freeze({ frame, points: Object.freeze(points) });
 }
-

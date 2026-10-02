@@ -1,7 +1,7 @@
 /** Self-contained preparation entry point for pinned transparent surface objects. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
-import { parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';
+import { SURFACE_SHELL_FORMAT, parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
 
 import { sourceBytes, containedPath } from '../volume/node/index.ts';
@@ -42,7 +42,7 @@ export async function prepareSurfaceShellObject(options: { objectDirectory: stri
     atlasResource: { path: atlasPath, bytes: atlas.png.length, width: atlas.width, height: atlas.height },
     provenance: { ...provenance, mesh: { path: meshPath, bytes: meshBytes.length } } });
   const envelope = { schema: 'cssearth-prepared-object@1' as const, id: descriptor.id, type: 'surface-shell' as const,
-    format: 'cssearth-surface-shell@1' as const, data };
+    format: SURFACE_SHELL_FORMAT, data };
   const bytes = Buffer.from(JSON.stringify(envelope) + '\n'), outputPath = resolve(outputDirectory, 'shell.json');
   await writeFile(outputPath, bytes);
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {

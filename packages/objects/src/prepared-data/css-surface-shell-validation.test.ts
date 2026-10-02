@@ -104,4 +104,3 @@ for (const [_name, mutate] of [
   const payload = structuredClone(fixture()); mutate(payload);
   assert.throws(() => validatePreparedCssSurfaceShell(payload), TypeError);
 });
-

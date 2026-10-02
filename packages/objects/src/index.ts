@@ -107,10 +107,11 @@ export { validatePreparedCataloguePoints } from './volume/prepared-catalogue-poi
 export type { PreparedCataloguePoint, PreparedCataloguePoints } from './volume/prepared-catalogue-points.js';
 export { DEFAULT_POINT_VISIBILITY } from './volume/point-visibility.js';
 export type { PreparedPointVisibility } from './volume/point-visibility.js';
-export { validatePreparedVolumeDatasets } from './volume/prepared-volume-datasets.js';
+export { validatePreparedVolumeDatasets, samePreparedCatalogueGeometry, samePreparedPhysicalFrame } from './volume/prepared-volume-datasets.js';
 export type { PreparedVolumeDatasetBrightness, PreparedVolumeDataset, PreparedVolumeDatasets, PreparedVolumeDatasetBank } from './volume/prepared-volume-datasets.js';
 export type { PreparedImageLayerBank, PreparedImageLayerLeaf, PreparedImageLayerView, PreparedCssImageLayers } from './volume/image-layer-bank-types.js';
 export { validatePreparedImageLayerBank } from './volume/image-layer-bank-validation.js';
 export type { PreparedCssSurfaceShell } from './prepared-data/css-surface-shell-types.js';
 export { validatePreparedCssSurfaceShell } from './prepared-data/css-surface-shell-validation.js';
-export { PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_IMPOSTORS_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, PREPARED_CSS_SURFACE_SHELL_SCHEMA } from './volume/volume-schemas.js';
+export { PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_IMPOSTORS_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, DENSITY_VOLUME_FORMAT } from './volume/volume-schemas.js';
+export { PREPARED_CSS_SURFACE_SHELL_SCHEMA, SURFACE_SHELL_FORMAT, SHELL_CORNER_PERMUTATIONS } from './prepared-data/css-surface-shell-types.js';

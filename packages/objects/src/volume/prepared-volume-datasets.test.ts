@@ -45,4 +45,3 @@ test('nearby volume visibility is explicit and rejects unknown policies', () => 
   assert.equal(validatePreparedVolumeDatasets(payload()).contextVisibility, 'galactic');
   assert.throws(() => validatePreparedVolumeDatasets({ ...payload(), contextVisibility: 'maybe' }));
 });
-

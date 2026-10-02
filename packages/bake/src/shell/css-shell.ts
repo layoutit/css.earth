@@ -1,10 +1,9 @@
-import { PREPARED_CSS_SURFACE_SHELL_SCHEMA, type Vector3, type PreparedCssSurfaceShell } from '@cssearth/objects';
+import { PREPARED_CSS_SURFACE_SHELL_SCHEMA, SHELL_CORNER_PERMUTATIONS, type Vector3, type PreparedCssSurfaceShell } from '@cssearth/objects';
 /** Actual PolyCSS preparation of static triangular image coverage and retained transforms. */
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, resolveProjectiveQuadGuards, type Polygon } from '@layoutit/polycss';
 import type { ShellRecipe } from './config.ts';
 import { unitVector, type ShellMesh } from './mesh.ts';
 
-import { SHELL_CORNER_PERMUTATIONS } from '@cssearth/renderer/shell/material-address.ts';
 import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../scene/index.ts';
 
 /** A face drawn at TEXELS_PER_CSS_PIXEL. PolyCSS sizes the face's box at one CSS pixel per texel of its atlas tile, and

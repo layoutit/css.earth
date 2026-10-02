@@ -1,4 +1,4 @@
-import { PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset } from '@cssearth/objects';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
 
@@ -203,7 +203,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
         // Every dataset of one bank shares a frame, so navigation and framing do not change with the dataset.
         if (shared && JSON.stringify(shared.boundsUnits) !== JSON.stringify(source.boundsUnits)) throw new TypeError('Density-grid datasets must share their bounds.');
         shared ??= source;
-        const compiled = json({ schema: 'cssearth-prepared-object@1', id: `${recipe.id}-${grid.id}`, type: 'density-volume', format: 'cssearth-density-volume@1',
+        const compiled = json({ schema: 'cssearth-prepared-object@1', id: `${recipe.id}-${grid.id}`, type: 'density-volume', format: DENSITY_VOLUME_FORMAT,
           data: compileCssVolume({ id: `${recipe.id}-${grid.id}`, frame: source, slices, recipe: volumeRecipe }) });
         const volumePath = resolve(output, 'volume.json');
         await put(volumePath, compiled);

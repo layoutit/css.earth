@@ -9,7 +9,7 @@ import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
 import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
 import type { PreparedCatalogBank, PreparedUniverseOptions } from './prepared-universe-types.js';
-import type { PreparedImageLayerBank } from './prepared-universe-types.js';
+import type { PreparedImageLayerMount } from './prepared-universe-types.js';
 
 interface ImageBank {
   readonly id: string;
@@ -34,7 +34,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   pointBanks = [] }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
-  initialImages: ReadonlyMap<string, PreparedImageLayerBank>;
+  initialImages: ReadonlyMap<string, PreparedImageLayerMount>;
   volumeDeclarations: readonly { id: string; frame: DensityVolumeFrame }[];
   initialCatalog?: PreparedCatalogBank;
   catalogBank: PreparedUniverseOptions['catalogBank'];

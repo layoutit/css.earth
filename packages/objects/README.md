@@ -119,7 +119,8 @@ Bake retains the authored presentation-envelope checks: runtime validation is st
 replace them without changing accepted authored input.
 
 Prepared CSS volumes, impostors, volume datasets, embedded catalogue points and image-layer banks live in
-`src/volume/`; surface-shell data and validation live in `src/prepared-data/`. Their schema identifiers and
-pure validators are exported from the browser-safe main entry. Image generation, transport, projection,
-compositing, topology comparisons and retained mounting stay with their implementation owners.
+`src/volume/`; surface-shell data and validation live in `src/prepared-data/`. Their schema and envelope identifiers,
+pure validators, catalogue geometry/frame comparisons and shell atlas corner convention are exported from the
+browser-safe main entry. Image generation, transport, projection, compositing, volume topology comparisons and
+retained mounting stay with their implementation owners.
 Contract tests use node:test and run in the packages lane.

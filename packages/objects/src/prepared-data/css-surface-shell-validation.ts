@@ -1,4 +1,4 @@
-import { PREPARED_CSS_SURFACE_SHELL_SCHEMA } from '../volume/volume-schemas.js';
+import { PREPARED_CSS_SURFACE_SHELL_SCHEMA } from './css-surface-shell-types.js';
 import { cssMatrix as matrix, CSS_NUMBER as NUMBER } from './runtime-validation/css-matrix.js';
 import { parseDensityVolumeFrame } from '../density-volume.js';
 

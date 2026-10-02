@@ -7,7 +7,7 @@ import type { createPreparedVolumeDatasets } from '../volume/prepared-volume-dat
 import type { WorldPlannerSource } from './world-context/world-context-planner-client.js';
 import type { DatasetBillboards } from './dataset-billboards.js';
 
-export type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource(path: string): string;
+export type PreparedImageLayerMount = { payload: PreparedCssImageLayers; resolveResource(path: string): string;
   /** Published catalogues placed in the bank's own frame, drawn as dots over its layers and faded with them. */
   cataloguePointUrls?: readonly string[] };
 export type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
@@ -43,15 +43,15 @@ export interface PreparedUniverseOptions {
   /** Published stellar extents, radius in metres by object id: each such galaxy's caption hangs under what is drawn of
    * it and hides while the camera is inside the extent. Objects without one keep their ordinary caption. */
   stellarExtents?: Readonly<Record<string, number>>;
-  /** Prepared `cssearth-catalogue-points@1` banks of stars inside the galaxy, by URL: drawn as dust with the galaxy
+  /** Prepared catalogue-point banks of stars inside the galaxy, by URL: drawn as dust with the galaxy
    * volume, fetched the first time it shows. */
   galaxyCataloguePoints?: readonly string[];
   /** A prepared `cssearth-galaxy-backing@1` face-on image drawn under the galaxy's catalogue dots, by URL. */
   galaxyBacking?: string;
-  imageLayers?: readonly PreparedImageLayerBank[];
+  imageLayers?: readonly PreparedImageLayerMount[];
   /** Descriptor-only image banks. Their JSON and DOM are admitted only on projected visibility or explicit focus. */
   imageLayerBanks?: readonly { id: string; frame: DensityVolumeFrame }[];
-  loadImageLayer?(id: string): Promise<PreparedImageLayerBank>;
+  loadImageLayer?(id: string): Promise<PreparedImageLayerMount>;
   /** Packages that are only a prepared catalogue point bank (`catalogue-point-bank` descriptors), by URL: fetched and drawn
    * while the catalogue row that details to them (`detailedObjectId`) is selected, or, for a bank that belongs to a body's
    * system (`host`), while the selected body is that host or orbits it. */

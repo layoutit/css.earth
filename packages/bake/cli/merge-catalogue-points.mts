@@ -39,7 +39,7 @@
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { parseDensityVolumeFrame } from '@cssearth/objects';
+import { CATALOGUE_POINTS_SCHEMA, parseDensityVolumeFrame } from '@cssearth/objects';
 import { readCatalogueBank, recipePublished, selectByShell, writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const KPC_M = 3.0856775814913673e19, MPC_M = 3.0856775814913673e22;
@@ -138,7 +138,7 @@ for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1, fadePcFromSun }
   const bank = await readCatalogueBank(objectDirectory, bankIdValue) as { schema?: unknown; frame?: unknown; source?: unknown;
     appearance?: { colorCss?: unknown; radiusPx?: unknown; opacity?: unknown; palette?: unknown; paletteTone?: unknown; paletteRadiusPx?: unknown }; points?: unknown; kinematicSigmaKpc?: unknown; groups?: unknown };
   const parsedFrame = parseDensityVolumeFrame(bank?.frame), appearance = bank?.appearance;
-  if (bank?.schema !== 'cssearth-catalogue-points@1' || !appearance || !hex(appearance.colorCss) || typeof appearance.opacity !== 'number' ||
+  if (bank?.schema !== CATALOGUE_POINTS_SCHEMA || !appearance || !hex(appearance.colorCss) || typeof appearance.opacity !== 'number' ||
       !(appearance.opacity > 0 && appearance.opacity <= 1) || !Array.isArray(bank.points)) throw new TypeError(`${bankIdValue}: not a catalogue point bank.`);
   // Sun-centred, unrotated banks in one frame and unit: kpc for a galaxy's disc, Mpc for the universe.
   const unit = cap?.mode === 'volume' ? MPC_M : needsCentre ? KPC_M : (bankFrame?.metersPerUnit ?? parsedFrame.metersPerUnit);
@@ -202,7 +202,7 @@ const enclosing = new Set<string>(), enclosingPoints: number[][] = [];
 for (const level of (recipe.within ?? []) as string[]) {
   const outer = await readCatalogueBank(objectDirectory, level) as { schema?: unknown; frame?: unknown; points?: unknown };
   const outerFrame = parseDensityVolumeFrame(outer.frame);
-  if (outer.schema !== 'cssearth-catalogue-points@1' || !Array.isArray(outer.points) || outerFrame.metersPerUnit !== bankFrame!.metersPerUnit ||
+  if (outer.schema !== CATALOGUE_POINTS_SCHEMA || !Array.isArray(outer.points) || outerFrame.metersPerUnit !== bankFrame!.metersPerUnit ||
       outerFrame.referenceFrame !== bankFrame!.referenceFrame || outerFrame.originM.some(value => value !== 0)) {
     throw new TypeError(`${level}: an enclosing level must be a merged bank in this level's frame and unit.`);
   }
@@ -272,7 +272,7 @@ const palette = paletteEntries.map(entry => entry.split('|')[0]!), paletteRadius
 const written = centreOnGalaxy ? ordered.map(point => point.reference.map((value, axis) => Math.round((value - centreKpc![axis]!) * 1e4) / 1e4)) : ordered.map(point => point.reference);
 const reach = Math.ceil(Math.max(...written.map(point => Math.hypot(...point))));
 const outputFrame = centreOnGalaxy ? { ...(rawFrame as object), originM: galaxyFrame!.originM, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } } : rawFrame;
-const output = { schema: 'cssearth-catalogue-points@1', id, source: 'merge', meaning: recipe.meaning,
+const output = { schema: CATALOGUE_POINTS_SCHEMA, id, source: 'merge', meaning: recipe.meaning,
   order: 'A fixed shuffle, so a thinned prefix thins every region alike.', banks: entries.map(value => ({ ...value, kept: kept[value.bank] })),
   ...(recipe.within ? { within: recipe.within } : {}),
   ...(maxSigma === undefined ? {} : { unplaced: { maxKinematicSigmaKpc: maxSigma, basis: recipe.maxKinematicSigmaBasis, left: unplaced } }),

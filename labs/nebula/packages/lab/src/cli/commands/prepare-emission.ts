@@ -3,7 +3,7 @@ import {applyIsophoteMasks,applyRecordedPointMasks,emissionInputChannels,emissio
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { type DensityVolumeFrame, parseDensityVolumeObjectDescriptor, validatePreparedCssVolume } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, type DensityVolumeFrame, parseDensityVolumeObjectDescriptor, validatePreparedCssVolume } from '@cssearth/objects';
 
 import { inferEmission, projectEmission, type InferenceGrid, type SymmetryPrior } from '@cssearth/nebula-reconstruction/methods/symmetry/solver';
 import { bakeMasterVolumeSlices } from '@cssearth/bake/volume/node';
@@ -124,12 +124,12 @@ const frame: DensityVolumeFrame = { referenceFrame: 'lab-image-relative-unscaled
 const data = compileCssVolume({ id: recipe.id, frame, slices: baked.masters, recipe: { anchors: [] } });
 validatePreparedCssVolume(data);
 const preparedBytes = Buffer.from(JSON.stringify({ schema: 'cssearth-prepared-object@1', id: recipe.id,
-  type: 'density-volume', format: 'cssearth-density-volume@1', data }) + '\n');
+  type: 'density-volume', format: DENSITY_VOLUME_FORMAT, data }) + '\n');
 await writeFile(resolve(preparedDirectory, 'volume.json'), preparedBytes);
 await writeFile(resolve(staging, 'experiment.json'), recipeText);
 const descriptor = { schema: 'cssearth-object@2', id: recipe.id, type: 'density-volume',
   properties: { volume: frame, preparation: { source: 'experiment.json' } },
-  prepared: { format: 'cssearth-density-volume@1', url: 'prepared/volume.json' } };
+  prepared: { format: DENSITY_VOLUME_FORMAT, url: 'prepared/volume.json' } };
 parseDensityVolumeObjectDescriptor(descriptor);
 await json(resolve(staging, 'object.json'), descriptor);
 for (let c = 0; c < 3; c++) {

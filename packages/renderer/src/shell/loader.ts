@@ -1,10 +1,10 @@
-import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject, validatePreparedCssSurfaceShell, type PreparedCssSurfaceShell } from '@cssearth/objects';
+import { SURFACE_SHELL_FORMAT, parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject, validatePreparedCssSurfaceShell, type PreparedCssSurfaceShell } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
 
 /** Load only the prepared shell; no source geometry enters the browser. */
 export async function loadPreparedCssSurfaceShell(input: unknown, transport: PreparedCssTransport): Promise<PreparedCssSurfaceShell> {
   const descriptor = parseObjectDescriptor(input);
-  if (descriptor.type !== 'surface-shell' || descriptor.prepared?.format !== 'cssearth-surface-shell@1') {
+  if (descriptor.type !== 'surface-shell' || descriptor.prepared?.format !== SURFACE_SHELL_FORMAT) {
     throw new TypeError('A surface shell requires its prepared artifact.');
   }
   const frame = parseDensityVolumeFrame(descriptor.properties.frame);

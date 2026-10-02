@@ -1,5 +1,5 @@
 import { observationEnvelope, type ImageWcs } from '@cssearth/bake/volume';
-import { type VolumeRecipe } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, type VolumeRecipe } from '@cssearth/objects';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Lab experiment: registered native photograph + full stellar prior → filled, colored 3D components. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -134,7 +134,7 @@ for (const variant of selected) {
   const outputFrame = { ...frame, boundsUnits: physicalBounds };
   const data = compileCssVolume({ id: variant.id, frame: outputFrame, slices, recipe: { anchors: [] } });
   const prepared = { schema: 'cssearth-prepared-object@1', id: variant.id, type: 'density-volume',
-    format: 'cssearth-density-volume@1', data };
+    format: DENSITY_VOLUME_FORMAT, data };
   const preparedBytes = Buffer.from(JSON.stringify(prepared) + '\n');
   await mkdir(resolve(variant.directory, 'source'), { recursive: true });
   await json(resolve(variant.directory, 'source/provenance.json'), provenance);

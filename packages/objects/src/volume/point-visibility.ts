@@ -5,4 +5,3 @@ export interface PreparedPointVisibility {
 }
 
 export const DEFAULT_POINT_VISIBILITY: PreparedPointVisibility = Object.freeze({ hiddenBelowRadiusPixels: 2, fullAboveRadiusPixels: 24 });
-

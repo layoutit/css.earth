@@ -1,5 +1,10 @@
-import { PREPARED_CSS_SURFACE_SHELL_SCHEMA } from '../volume/volume-schemas.js';
 import type { DensityVolumeFrame, VolumeVector } from '../density-volume.js';
+
+export const PREPARED_CSS_SURFACE_SHELL_SCHEMA = 'cssearth-css-surface-shell@1';
+export const SURFACE_SHELL_FORMAT = 'cssearth-surface-shell@1';
+
+/** Fixed atlas corner convention shared by preparation and retained material selection. */
+export const SHELL_CORNER_PERMUTATIONS = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]] as const;
 
 /** Prepared transparent surface geometry and a view-facing material bank. */
 export interface PreparedCssSurfaceShell {

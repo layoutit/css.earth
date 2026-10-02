@@ -89,7 +89,7 @@ export function validatePreparedVolumeDatasets(input: unknown): PreparedVolumeDa
 }
 
 /** Bounds describe coverage; the physical embedding and point identities must not change with a dataset. */
-function samePreparedCatalogueGeometry(left: PreparedCataloguePoints, right: PreparedCataloguePoints): boolean {
+export function samePreparedCatalogueGeometry(left: PreparedCataloguePoints, right: PreparedCataloguePoints): boolean {
   if (!samePreparedPhysicalFrame(left.frame, right.frame) || left.points.length !== right.points.length) return false;
   const points = new Map(right.points.map(point => [point.id, point]));
   return left.points.every(point => {
@@ -98,9 +98,8 @@ function samePreparedCatalogueGeometry(left: PreparedCataloguePoints, right: Pre
   });
 }
 
-function samePreparedPhysicalFrame(left: DensityVolumeFrame, right: DensityVolumeFrame): boolean {
+export function samePreparedPhysicalFrame(left: DensityVolumeFrame, right: DensityVolumeFrame): boolean {
   return left.referenceFrame === right.referenceFrame && left.epochJdTt === right.epochJdTt &&
     left.metersPerUnit === right.metersPerUnit && left.originM.every((value, axis) => value === right.originM[axis]) &&
     left.localToReferenceXyzw.every((value, axis) => value === right.localToReferenceXyzw[axis]);
 }
-

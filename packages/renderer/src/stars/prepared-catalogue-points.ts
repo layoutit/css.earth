@@ -1,25 +1,9 @@
-import { validatePreparedCataloguePoints, type PreparedCataloguePoints, type DensityVolumeFrame } from '@cssearth/objects';
+import { validatePreparedCataloguePoints, type PreparedCataloguePoints, samePreparedCatalogueGeometry } from '@cssearth/objects';
 import { writeStyle } from '../rendering/retained-write.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
 import type { VolumeCameraPublication } from '../volume/types.js';
 import { nativeProjectedLength } from '../rendering/native-projection.js';
-
-/** Bounds describe coverage; the physical embedding and point identities must not change with a dataset. */
-export function samePreparedCatalogueGeometry(left: PreparedCataloguePoints, right: PreparedCataloguePoints): boolean {
-  if (!samePreparedPhysicalFrame(left.frame, right.frame) || left.points.length !== right.points.length) return false;
-  const points = new Map(right.points.map(point => [point.id, point]));
-  return left.points.every(point => {
-    const other = points.get(point.id);
-    return other && point.positionUnits.every((value, axis) => value === other.positionUnits[axis]);
-  });
-}
-
-export function samePreparedPhysicalFrame(left: DensityVolumeFrame, right: DensityVolumeFrame): boolean {
-  return left.referenceFrame === right.referenceFrame && left.epochJdTt === right.epochJdTt &&
-    left.metersPerUnit === right.metersPerUnit && left.originM.every((value, axis) => value === right.originM[axis]) &&
-    left.localToReferenceXyzw.every((value, axis) => value === right.localToReferenceXyzw[axis]);
-}
 
 /** Retained catalogue geometry. Only camera projection and prepared point presentation enter runtime. */
 export function mountPreparedCataloguePoints({ host, before, payload, createElement, nativeFocalCss }: {

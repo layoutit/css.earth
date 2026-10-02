@@ -12,7 +12,7 @@
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { parseDensityVolumeFrame } from '@cssearth/objects';
+import { CATALOGUE_POINTS_SCHEMA, parseDensityVolumeFrame } from '@cssearth/objects';
 import { readCatalogueBank, recipePublished, writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const [objectArgument, id] = process.argv.slice(2);
@@ -70,7 +70,7 @@ for (const [index, level] of levels!.entries()) {
   const bank = await readCatalogueBank(objectDirectory, String(level.bank)) as { schema?: unknown; source?: unknown; frame?: unknown;
     within?: unknown; appearance?: { palette?: unknown; paletteRadiusPx?: unknown; radiusPx?: unknown }; points?: unknown };
   const parsed = parseDensityVolumeFrame(bank.frame);
-  if (bank.schema !== 'cssearth-catalogue-points@1' || bank.source !== 'merge' || !Array.isArray(bank.points) || !Array.isArray(bank.appearance?.palette)) {
+  if (bank.schema !== CATALOGUE_POINTS_SCHEMA || bank.source !== 'merge' || !Array.isArray(bank.points) || !Array.isArray(bank.appearance?.palette)) {
     fail(`${String(level.bank)} is not a merged level.`);
   }
   // Each inner level names every level outside it, so no dot is drawn twice.
@@ -98,7 +98,7 @@ for (const entries of levelEntries) for (const { position, color, radius } of en
   if (entry < 0) { entry = keys.push(key) - 1; palette.push(color); paletteRadiusPx.push(radius); }
   points.push([...position, entry]);
 }
-const output = { schema: 'cssearth-catalogue-points@1', id, source: 'stack', meaning: recipe.meaning, frame,
+const output = { schema: CATALOGUE_POINTS_SCHEMA, id, source: 'stack', meaning: recipe.meaning, frame,
   appearance: { colorCss: '#ffffff', radiusPx: 0.75, opacity: 1, palette, ...(sized ? { paletteRadiusPx } : {}),
     levels: levels!.map((level, index) => ({ bank: level.bank, points: counts[index],
       ...(index === 0 ? { fullDetailUnits: level.fullDetailUnits } : { appearUnits: level.appearUnits }),
