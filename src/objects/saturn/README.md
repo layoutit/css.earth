@@ -164,6 +164,7 @@ component FITS rows in stored order than after a north/south flip.
 ## Known problems
 
 - Ultraviolet and methane views contain filled rows, and their rings are the visible-light opacity profile.
+- The visible map keeps a dark line 3.8 to 1.0 degrees north, where the rings hid the planet. The fill interpolates between the rows beside the gap, and in the source those rows are dark themselves (rows 430 and 445 average 12 and 8 of 255), so the filled strip stays dark.
 - Interior layers are illustrations.
 - Narrow ring features are widened and brightened for readability; they do not establish optical depth or fully resolved ringlets.
 - Rotation is accelerated. The camera, shadows and background orientation are presentation choices, and source observations come from different dates.
