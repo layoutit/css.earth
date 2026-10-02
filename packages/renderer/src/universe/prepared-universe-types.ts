@@ -31,7 +31,8 @@ export interface PreparedUniverseOptions {
   /** Moons named across their star's system; see `createWorldContextPlanner`. */
   annotationLandmarks?: readonly string[];
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
-  distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
+  /** Bodies that are never a hover or navigation target; see `mountPreparedWorldContext`. */
+  nonNavigableIds?: readonly string[];
   /** Bodies the world draws as plain dots; see `mountPreparedWorldContext`. */
   plainDots?: { readonly ids: readonly string[]; readonly minimumDiameterPixels: number };
   /** Projected size at which any dataset bank (nebula, cluster, galaxy or accompanying cloud) is fetched and drawn.

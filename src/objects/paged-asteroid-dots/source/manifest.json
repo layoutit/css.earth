@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "positions",
+      "path": "src/objects/paged-asteroid-dots/source/dots/positions.csv.gz",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
+      "title": "Positions of the asteroids that have a page and no map marker, relative to the Sun, at the world's epoch",
+      "credit": "NASA/JPL Solar System Dynamics, Horizons System",
+      "acquisition": "Written 2026-10-01 by site/build/prepare/paged-asteroid-dot-positions.mts from each asteroid package's prepared world position, which its own preparation took from JPL Horizons.",
+      "generator": "site/build/prepare/paged-asteroid-dot-positions.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "src/objects/paged-asteroid-dots/source/dots/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "NASA/JPL United States government data; cite JPL Horizons."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/paged-asteroid-dots/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/paged-asteroid-dots/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

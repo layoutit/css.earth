@@ -1,0 +1,28 @@
+{
+  "provenance": {
+    "name": "Asteroids with a page and no map marker",
+    "products": [
+      {
+        "id": "dots",
+        "label": "JPL Horizons, through each asteroid package",
+        "process": "Take every asteroid package that is not a JPL mission target; read the position its package is prepared at; draw one dot there.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "positions"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "The dots are not clickable or named; these asteroids are reached through search or the Asteroids list.",
+          "Every dot is the neutral grey of the other asteroid dots, and its size and opacity are display choices."
+        ]
+      }
+    ]
+  }
+}

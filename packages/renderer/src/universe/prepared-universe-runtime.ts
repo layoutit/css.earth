@@ -40,7 +40,7 @@ const IMAGE_MESH_LOAD_DISTANCE_M = 7e9 * 3.0856775814913673e16;
 /** Hidden, unsubscribed dataset banks are retained only within this measured DOM budget. */
 export const WARM_VOLUME_DATASET_DOM_NODE_BUDGET = 5_000;
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, nonNavigableIds, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
   let plan = parsePreparedWorldContextPlan(context);
   const payload = validatePreparedCssVolume(volume);
   // What another system's bodies reach once read (addSystem): every planner made and every mounted world layer.
@@ -217,7 +217,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         for (const shell of shells) shellLayers.push(own(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell })));
         // Picking and navigation stay on the detail stage's input owner. Billboards
         // share its viewport and depth band from outside its changing CSS scope.
-        const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites: spriteTable, requestPublication, annotationOpacities, annotationPriorities, distantNavigation, plainDots, opacityClock, orbitRenderer: 'strokes', depthBase }));
+        const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites: spriteTable, requestPublication, annotationOpacities, annotationPriorities, nonNavigableIds, plainDots, opacityClock, orbitRenderer: 'strokes', depthBase }));
         layers.add(spatial);
         lifetime.onDispose(() => { layers.delete(spatial); });
         // The selected body's own label is the close-up's; overviews label every body.

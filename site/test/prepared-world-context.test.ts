@@ -1139,7 +1139,7 @@ test('camera updates retain fixed stroke styles and only publish changed orbit p
   layer.destroy();
 });
 
-test('distant ordinary bodies stop intercepting navigation while retained bodies remain selectable', () => {
+test('non-navigable bodies never intercept navigation while the other bodies remain selectable', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const source = plan(1);
@@ -1147,20 +1147,17 @@ test('distant ordinary bodies stop intercepting navigation while retained bodies
     { ...source.bodies[1], positionM: [0, 100, 0], orbit: orbit([0, 100, 0], 1) }] });
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite },
-    distantNavigation: { afterDistanceM: 500, nonNavigableIds: ['mercury'] } });
+    nonNavigableIds: ['mercury'] });
   const root = layer.root as unknown as FakeElement;
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [30, -20] });
-  publish(400);
-  assert.equal(find(root, 'contextBody', 'mercury').dataset.objectNavigate, 'mercury');
-  assert.equal(find(root, 'contextBody', 'venus').dataset.objectNavigate, 'venus');
-  publish(600);
-  assert.equal(find(root, 'contextBody', 'mercury').dataset.objectNavigate, undefined);
-  assert.equal(find(root, 'contextOrbit', 'mercury').dataset.objectNavigate, undefined);
-  assert.equal(find(root, 'contextBody', 'venus').dataset.objectNavigate, 'venus');
-  publish(400);
-  assert.equal(find(root, 'contextBody', 'mercury').dataset.objectNavigate, 'mercury');
+  for (const distance of [400, 600]) {
+    publish(distance);
+    assert.equal(find(root, 'contextBody', 'mercury').dataset.objectNavigate, undefined);
+    assert.equal(find(root, 'contextOrbit', 'mercury').dataset.objectNavigate, undefined);
+    assert.equal(find(root, 'contextBody', 'venus').dataset.objectNavigate, 'venus');
+  }
   layer.destroy();
 });
 

@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-body-points-source@1",
+  "id": "dots",
+  "published": true,
+  "host": "sun",
+  "source": "jpl-small-body-database",
+  "meaning": "The trans-Neptunian objects in JPL's Small-Body Database that have no page, one dot each where its orbit puts it at the world's epoch. No colour is measured for most of them: the dot is the neutral grey the app gives every body without a measured colour.",
+  "table": {
+    "path": "positions.csv.gz",
+    "origin": "https://ssd-api.jpl.nasa.gov/sbdb_query.api",
+    "generator": "packages/bake/authoring/small-body-dots/positions.mts"
+  },
+  "frame": {
+    "input": "host-centred-icrf-km",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "appearance": {
+    "colorCss": "#9a9a9a",
+    "radiusPx": 1,
+    "opacity": 0.5
+  }
+}
