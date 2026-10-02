@@ -7,13 +7,13 @@ The 245 confirmed moons of Saturn that have no page of their own, one dot each, 
 | Source | Measurement used |
 | --- | --- |
 | [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/) | Each moon's geometric position relative to Saturn's centre at the world's epoch, JD 2461286.5 TT (2026-09-03), ICRF axes, kilometres. Horizons answered from its satellite solutions SAT455 (128 moons), SAT457 (79), SAT456 (20) and SAT459 (18), each merged with DE440. |
-| [JPL satellite discovery table](https://ssd.jpl.nasa.gov/sats/discovery.html) | Which moons are confirmed, and each one's Horizons code, through [Saturn's retained catalogue](../saturn/source/moons/saturn-moons.json). |
+| [JPL satellite discovery table](https://ssd.jpl.nasa.gov/sats/discovery.html) | Which moons are confirmed, and each one's Horizons code, through the [pinned moon catalogue](../../../site/source/moon-catalogues.json). |
 
 [Inputs](source/manifest.json) · [Recipe](source/dots/points.json)
 
 ## Processing
 
-1. [`positions.mts`](../../../packages/bake/authoring/saturn-minor-moons/positions.mts) takes every moon in Saturn's catalogue that has no object package and has a Horizons code, and asks Horizons for its position, one request at a time. It writes [`positions.csv.gz`](source/dots/positions.csv.gz).
+1. [`positions.mts saturn`](../../../packages/bake/authoring/minor-moons/positions.mts) takes every moon of Saturn in the catalogue that has no object package and has a Horizons code, and asks Horizons for its position, one request at a time. It writes [`positions.csv.gz`](source/dots/positions.csv.gz).
 2. `packages/bake/cli/prepare-body-points.mts` writes the positions as a point bank whose origin is Saturn's own prepared world position: 245 dots, 4 KB.
 
 The dots are the app's catalogue dots: not clickable and not named. A moon with a page keeps its own marker.

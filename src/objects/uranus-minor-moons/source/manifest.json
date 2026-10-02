@@ -4,12 +4,12 @@
   "inputs": [
     {
       "id": "positions",
-      "path": "src/objects/saturn-minor-moons/source/dots/positions.csv.gz",
+      "path": "src/objects/uranus-minor-moons/source/dots/positions.csv.gz",
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
-      "title": "Positions of Saturn's moons without a page, relative to Saturn, at the world's epoch",
-      "credit": "NASA/JPL Solar System Dynamics, Horizons System (satellite ephemerides SAT455, SAT456, SAT457 and SAT459)",
-      "acquisition": "Written 2026-10-01 by packages/bake/authoring/minor-moons/positions.mts saturn (then at packages/bake/authoring/saturn-minor-moons/): one Horizons vector request for each moon, by its Horizons code in the JPL moon catalogue.",
+      "title": "Positions of Uranus's moons without a page, relative to Uranus, at the world's epoch",
+      "credit": "NASA/JPL Solar System Dynamics, Horizons System (URA184)",
+      "acquisition": "Written 2026-10-02 by packages/bake/authoring/minor-moons/positions.mts uranus: one Horizons vector request for each moon, by the Horizons code in the pinned JPL moon catalogue.",
       "generator": "packages/bake/authoring/minor-moons/positions.mts",
       "sourceBinding": {
         "kind": "catalogued",
@@ -17,7 +17,7 @@
           {
             "catalogueId": "jpl-horizons",
             "role": "material",
-            "evidence": "src/objects/saturn-minor-moons/source/dots/points.json#/table"
+            "evidence": "src/objects/uranus-minor-moons/source/dots/points.json#/table"
           }
         ]
       },
@@ -40,7 +40,7 @@
           {
             "catalogueId": "jpl-satellite-discovery",
             "role": "method",
-            "evidence": "src/objects/saturn-minor-moons/README.md#processing"
+            "evidence": "src/objects/uranus-minor-moons/README.md#processing"
           }
         ]
       },
@@ -50,14 +50,14 @@
   ],
   "documents": [
     {
-      "path": "src/objects/saturn-minor-moons/source/dots/points.json",
+      "path": "src/objects/uranus-minor-moons/source/dots/points.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
       }
     },
     {
-      "path": "src/objects/saturn-minor-moons/source/presentation.json",
+      "path": "src/objects/uranus-minor-moons/source/presentation.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
