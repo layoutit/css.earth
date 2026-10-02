@@ -4,7 +4,6 @@ import ObjectBreadcrumbs from "./ObjectBreadcrumbs.astro";
 import SatelliteSystemCard from './SatelliteSystemCard.astro';
 import SystemCard from './SystemCard.astro';
 import { systemById } from '../object-systems.mts';
-import { orderScientificCharts } from "../scientific-chart-order.mts";
 import ObjectCard from "./ObjectCard.astro";
 import ObjectCardHeader from "./ObjectCardHeader.astro";
 import ObjectFactsheet from "./ObjectFactsheet.astro";
@@ -21,10 +20,9 @@ import { WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
 import { overviewDistanceM, overviewsReachableFrom } from '../overview-context.mts';
 import { objectResultMarkup } from '../server/object-result-markup.mts';
 import { PREPARED_CATALOGUE_INDEX } from '../search/prepared-catalogue-index.mts';
-const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], datasets } = Astro.props;
+const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], datasets } = Astro.props;
 const hasDatasets = Boolean(datasets && datasets.controls.length > 0);
 const hasFacts = facts.length + moreFacts.length > 0;
-const orderedCharts = orderScientificCharts(charts);
 const articleUrl = await readObjectArticleUrl(objectId);
 // An object that is a level of the zoom ladder lists what it holds: the world's host and the featured bodies of the
 // classifications it holds without a list label of their own, nearest first, with search's own rows.
@@ -78,7 +76,6 @@ const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.system
         ...lists.map((list, index) => ({ id: list.id, label: index === 0 && !bodies.length ? 'Celestial bodies' : list.label, count: list.rows.length })),
         { id: 'dataset', label: 'Datasets' },
         { id: 'factsheet', label: 'Factsheet' },
-        ...(orderedCharts.length ? [{ id: 'charts', label: 'Charts' }] : []),
       ]} />}
       <p data-dataset-notice role="status" aria-live="polite" hidden></p>
       {bodies.length > 0 && <section class="object-results-scroll object-card-tabpanel" id={`${objectId}-bodies-content`} data-information-panel="bodies" aria-label="Celestial bodies">
@@ -123,17 +120,6 @@ const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.system
       {hasFacts && <section class="object-card-tabpanel object-factsheet-content" id={`${objectId}-factsheet-content`} data-information-panel="factsheet" aria-label="Factsheet">
         <h2 class="object-mobile-information-heading">Factsheet</h2>
         <ObjectFactsheet id={objectId} {facts} {moreFacts} embedded />
-      </section>}
-      {orderedCharts.length > 0 && <section class="object-card-tabpanel object-charts-content" id={`${objectId}-charts-content`} data-information-panel="charts" aria-label="Charts">
-        <h2 class="object-mobile-information-heading">Charts</h2>
-        <div class="object-chart-list">
-          {orderedCharts.map((chart) => <section class="object-chart-entry" aria-labelledby={`${objectId}-${chart.id}-title`}>
-            <h3 class="object-chart-row" id={`${objectId}-${chart.id}-title`}>{chart.title.label}</h3>
-            <figure class="object-chart-figure">
-              <img class="object-chart" src={chart.src} width={chart.width} height={chart.height} alt={chart.alt} loading="lazy" decoding="async" />
-            </figure>
-          </section>)}
-        </div>
       </section>}
       <DatasetContextPanels {...Astro.props} />
     </ObjectCard>
