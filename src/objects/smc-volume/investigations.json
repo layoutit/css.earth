@@ -216,10 +216,10 @@
       "id": "shell-focus-link",
       "subject": "Direct /sun/?focus=smc physical-host closure",
       "status": "unresolved",
-      "finding": "The failure came from serializing SMC without its positioned LMC host. Commit makes native focus fragments retain the transitive SMC to LMC to MW host chain and names SMC separately as the selected record. The focused unit check passes for that chain, a missing host and a cycle. The SMC browser inspection now opens the direct route, but this checkout does not hold the complete installed runtime closure needed to rerun it locally.",
+      "finding": "The failure came from serializing SMC without its positioned LMC host. Commit makes native focus fragments retain the transitive SMC to LMC to MW host chain and names SMC separately as the selected record. The focused unit check passes for that chain, a missing host and a cycle (the referenced validator now lives in packages/objects/src/prepared-data/spatial-relations.ts). The SMC browser inspection now opens the direct route, but this checkout does not hold the complete installed runtime closure needed to rerun it locally.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/site/focus-response.mts",
-        "https://github.com/layoutit/css.earth/blob/main/packages/catalog/src/spatial-relations.ts",
+        "https://github.com/layoutit/css.earth/blob/d86ce0c46794d3548748004c0bfaa46c459139ce/packages/catalog/src/spatial-relations.ts",
         "https://github.com/layoutit/css.earth/blob/main/site/focus-catalog.mts"
       ],
       "revisitWhen": "The direct SMC browser inspection runs against a complete installed runtime closure."

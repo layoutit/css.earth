@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { M_PER_PC } from '@cssearth/astronomy';
-import { parsePreparedGalaxyCatalog } from '@cssearth/catalog';
+import { parsePreparedGalaxyCatalog } from '@cssearth/objects';
 import { parseGalaxyRecipe } from './config.ts';
 import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample } from './display-sample.ts';
 import { galaxyPositionM, classifyMembership, prepareGalaxyCatalog } from './prepare.ts';

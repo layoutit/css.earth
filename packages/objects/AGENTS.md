@@ -88,3 +88,10 @@ format contracts and schema identifiers in `packages/objects/src/prepared-data/`
 The complete catalogue bank is `PreparedCataloguePointBank`; embedded volume stars keep `PreparedCataloguePoints`.
 Counting, projection, transport and retained mounting stay in renderer; image/geometry preparation and file I/O stay in bake.
 Contract tests use node:test in the packages lane.
+
+Spatial galaxy, cluster and nebula delivery records, schema identifiers, parsers, galaxy display samples and prepared
+position/host validation live in `src/prepared-data/`. Distance-subject records also live here; objects never imports
+catalog. Scientific classification and citation interpretation stay in catalog, which imports the format contracts.
+Surface-feature wire records, normalized reader projections and catalogue parsing also live in `src/prepared-data/`;
+feature geometry, sampling, file I/O, transport and label mounting remain with bake and renderer.
+Contract tests use node:test in the packages lane.

@@ -27,7 +27,7 @@ export default {
   outDir: fileURLToPath(new URL('./dist', import.meta.url)),
   tsconfig: fileURLToPath(new URL('./tsconfig.json', import.meta.url)),
   format: ['esm'],
-  external: ['@cssearth/catalog', '@cssearth/core', '@cssearth/engine', '@cssearth/fits', '@cssearth/objects', '@layoutit/polycss'],
+  external: ['@cssearth/core', '@cssearth/engine', '@cssearth/fits', '@cssearth/objects', '@layoutit/polycss'],
   dts: process.env.CSSEARTH_SKIP_DECLARATIONS !== '1',
   sourcemap: process.env.CSSEARTH_PERFORMANCE_SOURCEMAPS === '1',
   clean: true,

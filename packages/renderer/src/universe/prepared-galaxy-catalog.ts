@@ -1,5 +1,4 @@
-import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
-import type { PreparedCatalogObject } from '@cssearth/catalog';
+import { parseGalaxyDisplaySample, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog, type PreparedCatalogObject } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import { projectCatalogPosition } from './galaxy-catalog-layout.js';
@@ -18,10 +17,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
   for (const other of [clusterCatalog, nebulaCatalog]) if (other && (other.frame.referenceFrame !== catalog.frame.referenceFrame || other.frame.epochJdTt !== catalog.frame.epochJdTt)) throw new TypeError('Prepared catalogues must share one frame and epoch.');
   let sampleIds: Set<string> | undefined;
   if (galaxySample !== undefined) {
-    if (!galaxySample || typeof galaxySample !== 'object' || !('schema' in galaxySample) || galaxySample.schema !== 'cssearth-galaxy-display-sample@1' ||
-        !('ids' in galaxySample) || !Array.isArray(galaxySample.ids) || galaxySample.ids.length > 48 ||
-        !galaxySample.ids.every(id => typeof id === 'string' && catalog.objects.some(row => row.id === id && row.membership.group === 'local-group'))) throw new TypeError('Invalid baked galaxy sample.');
-    sampleIds = new Set(galaxySample.ids);
+    sampleIds = new Set(parseGalaxyDisplaySample(galaxySample, catalog).ids);
   }
   const root = document.createElement('div');
   root.className = 'prepared-galaxy-catalog';

@@ -8,7 +8,7 @@
     "the union of every touched area's `jobs`. Job ids match the workflow's job ids in universe.yml: typecheck,",
     "universe, universePreparation (job id universe-preparation), nebula. Contract lint and the object-scope gate",
     "always run and are not listed here.",
-    "integration/** includes the renderer-bake conformance suites, which remain in the universe packages lane. Universe bank, prepared runtime, sky/Sun and leaf bounds contract tests under packages/objects/src/prepared-data/** run in that packages lane too."
+    "integration/** includes the renderer-bake conformance suites, which remain in the universe packages lane. Universe bank, spatial catalogue, surface-feature, prepared runtime, sky/Sun and leaf bounds contract tests under packages/objects/src/prepared-data/** run in that packages lane too."
   ],
   "shared": [
     "package.json",

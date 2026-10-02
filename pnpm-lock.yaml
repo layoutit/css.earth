@@ -322,6 +322,10 @@ importers:
         version: 5.9.3
 
   packages/catalog:
+    dependencies:
+      '@cssearth/objects':
+        specifier: workspace:*
+        version: link:../objects
     devDependencies:
       tsup:
         specifier: ^8.0.1
@@ -372,9 +376,6 @@ importers:
 
   packages/objects:
     dependencies:
-      '@cssearth/catalog':
-        specifier: workspace:*
-        version: link:../catalog
       '@cssearth/core':
         specifier: workspace:*
         version: link:../core
@@ -391,9 +392,6 @@ importers:
 
   packages/renderer:
     dependencies:
-      '@cssearth/catalog':
-        specifier: workspace:*
-        version: link:../catalog
       '@cssearth/core':
         specifier: workspace:*
         version: link:../core
