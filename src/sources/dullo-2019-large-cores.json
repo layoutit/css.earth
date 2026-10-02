@@ -1,0 +1,40 @@
+{
+  "id": "dullo-2019-large-cores",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The most massive galaxies with large depleted cores: structural parameter relations and black hole masses",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2019ApJ...886...80D"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...886...80D",
+      "label": "2019ApJ...886...80D"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1910.10240",
+      "checkedOn": "2026-10-02",
+      "locator": "Table 3 (best-fitting core-Sérsic parameters, major-axis profiles), row NGC 4889: HST WFPC2 F606W with SDSS r-band data at large radii (Table 2), mu_b = 17.68, R_b = 1.89 arcsec (0.86 kpc), gamma = 0.04, alpha = 2, n = 13.3, R_e = 563.9 arcsec (256.7 kpc at their 96.6 Mpc), ellipticity at the break 0.065; no additional component (Table 4). Stated uncertainties: 20% on n, 25% on R_e. Row NGC 4874: core-Sérsic n = 4.0, R_e = 4.9 arcsec, with a Sérsic component (R_e 46.5 arcsec, n 0.80) and an exponential halo (h 175.3 arcsec) in Table 4; not used."
+    }
+  ],
+  "creators": [
+    "B. T. Dullo"
+  ],
+  "publisher": "ApJ 886, 80",
+  "publicationDate": "2019",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Dullo (2019), ApJ 886, 80.",
+      "scope": "NGC 4889's Sérsic fit",
+      "evidence": "https://arxiv.org/abs/1910.10240"
+    }
+  ]
+}

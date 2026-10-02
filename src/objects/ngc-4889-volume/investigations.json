@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-4889-volume",
+  "entries": [
+    {
+      "id": "sdss-colour",
+      "subject": "SDSS DR9 colour HiPS",
+      "status": "included",
+      "finding": "An 1800 x 1800 px hips2fits cutout of CDS/P/SDSS9/color, 8.0 arcmin wide on the 2MASS position. The core does not saturate (peak 219 of 255) and the light reaches the sky level about 240 arcsec out.",
+      "evidence": [
+        "https://www.sdss.org/",
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+      ]
+    },
+    {
+      "id": "legacy-surveys-colour",
+      "subject": "DESI Legacy Imaging Surveys DR10 colour HiPS",
+      "status": "excluded",
+      "finding": "Baked first, on 2026-10-02, and replaced. The composite saturates within about 20 arcsec of the core, so sight lines through the centre carried less light than the cusp of the fit gives them: from the side and from above the volume showed a dark band through the core between two bright lobes, and green and pink rings in the halo.",
+      "evidence": [
+        "https://www.legacysurvey.org/dr10/"
+      ]
+    },
+    {
+      "id": "mask-catalogues",
+      "subject": "Catalogues for the masks",
+      "status": "included",
+      "finding": "HyperLEDA PGC alone left galaxies it lists without a D25 in the image; the 2MASS Extended Source Catalog sizes them. NOX leaves the haloes of bright stars, so Gaia DR3 stars brighter than G = 15 are masked too. At M87's three D25 radii a close neighbour's mask covers NGC 4889's own centre, so each mask stops at half its distance from the centre.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+      ]
+    },
+    {
+      "id": "sersic-fit",
+      "subject": "Spheroid",
+      "status": "included",
+      "finding": "Dullo (2019), Table 3, row NGC 4889: core-Sérsic n = 13.3, R_e = 563.9 arcsec, one component, from an optical profile that reaches large radii. Used as published without its core; no fit was made here.",
+      "evidence": [
+        "https://arxiv.org/abs/1910.10240"
+      ]
+    },
+    {
+      "id": "savorgnan-graham-fit",
+      "subject": "Savorgnan & Graham (2016) fit, as tabulated by Sahu et al. (2020)",
+      "status": "excluded",
+      "finding": "Sahu, Graham & Davis (2020), Table A1, row 33, give n_maj = 8.10, R_e,maj = 119.70 arcsec from the Spitzer 3.6 micron image. It disagrees with Dullo's optical fit by a factor of 4.7 in radius. Dullo's is used because it is fitted to optical light like the image; the choice barely changes the depth inside 240 arcsec, where both are steep cusps.",
+      "evidence": [
+        "https://arxiv.org/abs/2101.04895"
+      ]
+    },
+    {
+      "id": "globular-clusters",
+      "subject": "Globular cluster dots",
+      "status": "deferred",
+      "finding": "Not drawn. Dots on a volume bank are listed in a table in the site's code, which this change does not touch.",
+      "revisitWhen": "The site table can take a new bank."
+    }
+  ]
+}

@@ -1,6 +1,7 @@
+import { containedPath } from '@cssearth/core/node';
 /** Pinned local bake inputs. No acquisition, repository models, jobs or application path rewriting. */
-import { mkdir, readFile, realpath, rename, rm, writeFile } from 'node:fs/promises';
-import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
+import { mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
+import { dirname, isAbsolute, join, resolve } from 'node:path';
 export interface Pin { path: string }
 /** Where a download of `url` is kept in a throwaway local cache: the escaped URL itself, cut into directory names short
  * enough for any file system. The caller creates the parent directory. */
@@ -9,8 +10,9 @@ export function urlCachePath(directory: string, url: string, extension: string):
   return join(directory, ...parts) + extension;
 }
 export function localPath(root: string, path: string) {
-  const full = resolve(root, path), offset = relative(root, full);
-  if (isAbsolute(path) || !offset || offset === '..' || offset.startsWith('../')) throw new Error(`Invalid recipe path: ${path}`);
+  const full = resolve(root, path);
+  if (isAbsolute(path) || containedPath(root, full, { policy: 'lexical', rootPath: 'reject',
+    parentSeparator: 'posix', absoluteOffset: 'allow' }) === undefined) throw new Error(`Invalid recipe path: ${path}`);
   return full;
 }
 export async function pinned(root: string, pin: Pin) {
@@ -22,9 +24,9 @@ export async function pinned(root: string, pin: Pin) {
 export async function readCompactPin(root: string, p: Pin) {
   if (p.path.startsWith("/") || p.path.split("/").includes(".."))
     throw new Error("Invalid compact source path");
-  const actual = await realpath(resolve(root, p.path));
-  const offset = relative(await realpath(root), actual);
-  if (offset === ".." || offset.startsWith("../") || isAbsolute(offset)) throw new Error("Compact pin escapes root");
+  const actual = await containedPath(root, resolve(root, p.path), { policy: 'realpath', rootPath: 'allow',
+    parentSeparator: 'posix', absoluteOffset: 'reject' });
+  if (actual === undefined) throw new Error("Compact pin escapes root");
   return readFile(actual);
 }
 

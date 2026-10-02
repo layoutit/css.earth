@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 import { isArray, isRecord } from '@cssearth/core';
 import type {ProjectiveGeometry} from '../../../scene/index.ts';
 import type {RasterInfo} from '../observation/index.ts';
@@ -281,7 +282,7 @@ return { atlas: SURFACE_ATLAS, surfacePageUrls, layoutBlockPages, createSurfaceR
 
 /** Parse a checked-in raster layout for a selective asset refresh without rebuilding geometry. */
 export function parsePreparedSurfaceRasterPlan(input: unknown): PagedSurfaceRasterPlan {
-  const finite=(value: unknown): value is number => typeof value==='number'&&Number.isFinite(value);
+  const finite = coreIsFiniteNumber;
   const integer=(value: unknown): value is number => finite(value)&&Number.isInteger(value);
   const value=isRecord(input)?input:null,atlas=isRecord(value?.atlas)?value.atlas:null,cells=isArray(value?.cells)?value.cells:null,pages=isArray(value?.pages)?value.pages:null;
   const pageSize=atlas?.pageSize,density=atlas?.density,gutter=atlas?.gutter,sourceWidth=atlas?.sourceWidth,sourceHeight=atlas?.sourceHeight;

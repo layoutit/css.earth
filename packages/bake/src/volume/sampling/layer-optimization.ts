@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 /** Offline allocation of a global slab budget. Geometry is sampled again at full resolution afterwards. */
 import { type Axis, type Bounds3, type Vector3, readVolumeLayerPlan, type VolumeLayerPlan, DEFAULT_VOLUME_LAYER_BUDGET, readLayerOptimizationReport, type LayerOptimizationReport } from '@cssearth/objects';
 import type { Cancellation } from '@cssearth/objects';
@@ -18,7 +19,7 @@ const AXES: readonly Axis[] = ['x', 'y', 'z'];
 const sum = (v: Record<Axis, number>) => v.x + v.y + v.z;
 
 const integer = (v: unknown, min: number, max: number): v is number => typeof v === 'number' && Number.isSafeInteger(v) && v >= min && v <= max;
-const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+const finite = coreIsFiniteNumber;
 
 interface Profile { sensitivity: Float64Array; mass: number; pitch: number }
 interface Partitions { costs: Float64Array; backtrack: Int16Array; stride: number }

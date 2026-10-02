@@ -1,10 +1,10 @@
-import { isRecord } from './validate.js';
+import { isRecord, isFiniteNumber } from './validate.js';
 /** Structural guards: predicates that narrow a value to the type they describe. `parse` runs one and throws
  * `Invalid <label> structure at <path> (<value>).`, naming the deepest field that failed. */
 export type Guard<T> = (value: unknown, path?: string) => value is T;
 export type Infer<G> = G extends Guard<infer T> ? T : never;
 const isArray = (value: unknown): value is unknown[] => Array.isArray(value);
-export const number: Guard<number> = (value): value is number => typeof value === 'number' && Number.isFinite(value);
+export const number: Guard<number> = isFiniteNumber;
 export const string: Guard<string> = (value): value is string => typeof value === 'string';
 export const boolean: Guard<boolean> = (value): value is boolean => typeof value === 'boolean';
 export const nil: Guard<null> = (value): value is null => value === null;

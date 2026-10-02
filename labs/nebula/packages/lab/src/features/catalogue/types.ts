@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 export * from '@cssearth/nebula-reconstruction/observations/model';
 import {isRecord as record} from '@cssearth/core';
 import {safeArchiveUrl,readArchiveQuery as readQuery,type ArchiveQuery} from '@cssearth/nebula-reconstruction/observations/model';
@@ -20,7 +21,7 @@ export interface MessierInventory {
   catalogue: string; policy: string; targets: { objectId: string; queries: ArchiveQuery[] }[]; storage?: InventoryStorage;
 }
 function text(value: unknown): value is string { return typeof value === 'string'; }
-function finite(value: unknown): value is number { return typeof value === 'number' && Number.isFinite(value); }
+const finite = coreIsFiniteNumber;
 function nullableNumber(value: unknown): boolean { return value === null || finite(value); }
 function positiveOrNull(value: unknown): boolean { return value === null || (finite(value) && value > 0); }
 function strings(value: unknown): value is string[] { return Array.isArray(value) && value.every(text); }

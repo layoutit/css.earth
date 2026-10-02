@@ -1,0 +1,28 @@
+{
+  "id": "ngc-1275",
+  "classification": "galaxy",
+  "order": 5156,
+  "physical": {
+    "name": "NGC 1275",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 1275 is recorded: it is an extended galaxy, and its package frames it at 66613 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 49.950981,
+    "declinationDegrees": 41.511681,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 68700000,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 4998.141542275905,
+    "sources": {
+      "position": "Skrutskie et al. (2006), AJ 131, 1163: the Two Micron All Sky Survey; Extended Source Catalog (CDS VII/233) rows 2MASX J12294679+0800014 (M49), 2MASX J03194823+4130420 (NGC 1275), 2MASX J13000809+2758372 (NGC 4889) and 2MASX J12593570+2757338 (NGC 4874). (https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233); catalogue reference Skrutskie2006AJ....131.1163S",
+      "distance": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94): group 1PGC 12429 (NGC 1275) DMzp = 34.185 +/- 0.036, 68.7 Mpc; group 1PGC 44715 (NGC 4889; Table 2 puts NGC 4874, PGC 44628, in it) DMzp = 34.891 +/- 0.025, 95.1 Mpc. A group's distance averages its members'. (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94); catalogue reference Tully2023ApJ...944...94T: 68700000 pc (-1100000/+1100000); group-average",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NGC 1275: 4998.141542275905 km/s +/- 0.0005, from 2022ApJS..261....2K (https://ui.adsabs.harvard.edu/abs/2022ApJS..261....2K/abstract)"
+    }
+  }
+}

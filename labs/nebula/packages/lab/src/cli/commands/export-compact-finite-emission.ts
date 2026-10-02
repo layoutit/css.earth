@@ -1,3 +1,4 @@
+import { isNonemptyText, isRecord } from '@cssearth/core';
 /**
  * Export the minimal checked-in surface that regenerates an accepted finite-emission dataset bank.
  *
@@ -20,11 +21,8 @@ import { finiteModelStarsPath } from '../../server/services/finite-dataset-bundl
 import { parseVolumeDatasetPromotion } from '../../server/workflows/density/volume-dataset-promotion.ts';
 import { validateChannelGain, validateDatasetToneCurve } from '@cssearth/bake/volume';
 
-const text = (value: unknown, at: string): string => { assert.ok(typeof value === 'string' && value, `Expected text: ${at}`); return value; };
-const record = (value: unknown, at: string): Record<string, unknown> => {
-  assert.ok(value && typeof value === 'object' && !Array.isArray(value), `Expected an object: ${at}`);
-  return value as Record<string, unknown>;
-};
+const text = (value: unknown, at: string): string => { assert.ok(isNonemptyText(value), `Expected text: ${at}`); return value; };
+const record = (value: unknown, at: string): Record<string, unknown> => { assert.ok(isRecord(value), `Expected an object: ${at}`); return value; };
 const [recipeArgument, objectArgument] = process.argv.slice(2);
 assert.ok(recipeArgument && objectArgument, 'Usage: export-compact-finite-emission <promotion-recipe.json> <object-directory>');
 const root = process.cwd();

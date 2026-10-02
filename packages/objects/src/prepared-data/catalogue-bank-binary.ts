@@ -1,4 +1,4 @@
-import type { PreparedBinaryRegion } from '@cssearth/objects';
+import type { PreparedBinaryRegion } from '../prepared-binary.js';
 
 /**
  * A published catalogue point bank as the app fetches it (`<id>.bin`, packed by prepared-binary.ts): the bank's JSON

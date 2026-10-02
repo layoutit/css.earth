@@ -1,9 +1,10 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readShapeCloudResult } from './result.ts';
 import type { ShapeCloudRequest, ShapeCloudResult, ShapeCloudSettings } from './types.ts';
 import type { PreviewTicket } from './shape-cloud-scheduler';
 
 export interface CloudJob { id: string; imageId: string; status: string; progress?: { current: number; total: number; message: string }; error?: string; result?: unknown }
-const object = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const object = coreIsRecord;
 class CloudHttpError extends Error { readonly status: number; constructor(status: number, message: string) { super(message); this.status = status; } }
 export const activeCloudJob = (job: CloudJob | null) => Boolean(job && ['queued', 'running', 'cancelling'].includes(job.status));
 export function readCloudJob(value: unknown, imageId: string): CloudJob {

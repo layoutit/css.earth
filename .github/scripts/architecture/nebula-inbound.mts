@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Inbound protection for the production application and its preparation closure, run by the architecture check's
  * `nebula-boundaries` rule through `nebula-packages.mts`.
  * Unknown computed imports are rejected in the compact preparation adapter and when
@@ -19,7 +20,7 @@ const packages = {
 type PackageName = keyof typeof packages;
 type Policy = 'runtime' | 'preparation' | 'test';
 type Import = { specifier?: string; erased: boolean; expression: string; line: number };
-const object = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' && !Array.isArray(value);
+const object = coreIsRecord;
 const within = (base: string, file: string) => { const path = relative(base, file); return path === '' || !path.startsWith('../') && path !== '..' && !path.startsWith('/'); };
 const canonical = (path: string) => existsSync(path) ? realpathSync(path) : resolve(path);
 const readJson = (file: string): Record<string, unknown> => { const value: unknown = JSON.parse(readFileSync(file, 'utf8')); return object(value) ? value : {}; };

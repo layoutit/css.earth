@@ -1,3 +1,4 @@
+import { readNonArrayRecord, readFiniteNumber } from '@cssearth/core';
 type Pixel = readonly [number, number];
 type Partition = 'fit' | 'holdout';
 type Model = 'similarity' | 'reflected-similarity' | 'affine';
@@ -32,14 +33,8 @@ export interface ImageControlsFit {
 interface Control { readonly id: string; readonly partition: Partition; readonly sourcePixel: Pixel; readonly targetPixel: Pixel; }
 interface Document { readonly model: Model; readonly controls: readonly Control[]; readonly maximumRmsPixels: number; readonly maximumResidualPixels: number; }
 
-const record = (value: unknown, at: string): Record<string, unknown> => {
-  if (value === null || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`);
-  return value as Record<string, unknown>;
-};
-const finite = (value: unknown, at: string): number => {
-  if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${at} must be finite.`);
-  return value;
-};
+const record = (value: unknown, at: string): Record<string, unknown> => { return readNonArrayRecord(value, at, () => { throw new TypeError(`${at} must be an object.`); }); };
+const finite = (value: unknown, at: string): number => { return readFiniteNumber(value, at, () => { throw new TypeError(`${at} must be finite.`); }); };
 const nonnegative = (value: unknown, at: string): number => {
   const result = finite(value, at);
   if (result < 0) throw new TypeError(`${at} must be nonnegative.`);

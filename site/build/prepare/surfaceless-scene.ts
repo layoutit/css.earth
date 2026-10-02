@@ -40,7 +40,7 @@ export async function prepareSurfacelessScene({ source, controls, solarGeometry 
  * middle, north up and east left as the sky is drawn, fitted to the picture. Returns the picture's public address. */
 export async function dotsPicture(bankDirectory: string, outputPath: string): Promise<void> {
   const { unpackPreparedBinary } = await import('@cssearth/objects/node');
-  const { decodeCatalogueBankBinary } = await import('@cssearth/renderer/prepared-data/catalogue-bank-binary.ts');
+  const { decodeCatalogueBankBinary } = await import('@cssearth/objects');
   const bank = decodeCatalogueBankBinary(unpackPreparedBinary(await readFile(resolve(bankDirectory, 'prepared/dots.bin'))), `${bankDirectory}/prepared/dots.bin`);
   const points = bank.points as readonly (readonly number[])[], appearance = bank.appearance as { colorCss: string; palette?: readonly string[] };
   if (!Array.isArray(points) || !points.length) throw new TypeError(`${bankDirectory}/prepared/dots.bin: a bank of dots has points.`);

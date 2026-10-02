@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /**
  * One owner for placing a pinned published star catalogue inside a saved simulation-guided finite
  * emission model, shared by every body that has such a model (SMC, LMC).
@@ -20,7 +21,7 @@ import { finiteModelDirectory, type FiniteModelStarContext } from './finite-mode
 export const MAGNITUDE_LIMIT = 16;
 /** Model-owned external index beside the dataset bundle; discovery reads exactly this path. */
 export const finiteModelStarsIndex = (modelResultId: string) => `.local/nebula-lab/finite-stars-${modelResultId}.json`;
-const record = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
+const record = coreIsRecord;
 
 /** The published columns the shared placement needs from one catalogue row. Blank optional fields are NaN. */
 export interface CatalogueStarRow {

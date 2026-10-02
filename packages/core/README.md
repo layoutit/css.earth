@@ -17,17 +17,22 @@ behind the separate `@cssearth/core/node` entry.
 | | `isArray`, `canonical` (recursively key-sorted copy for stable JSON), `flagValue`, `positionalArguments` | no throw |
 | `@cssearth/core/schema` | structural guards: `object`, `array`, `tuple`, `union`, `literal`, `json`, … and `parse` | `Invalid <label> structure at <path> (<value>).` |
 | `@cssearth/core/oracle` | Shared oracle fixture validation and input reading; [Python harness](src/node/oracle/README.md) | Node only, ESM only |
-| `@cssearth/core/node` | `sha256` (the content address of a published runtime asset, from text as UTF-8 or bytes), `projectRoot` (nearest ancestor with `pnpm-workspace.yaml`) | Node only |
+| `@cssearth/core/node` | `sha256` (the content address of a published runtime asset, from text as UTF-8 or bytes), `projectRoot` (nearest workspace ancestor), `discoverRoot` (caller-relative marker/package discovery), `discoverGitRoot` (explicit starting directory), `containedPath` (lexical or realpath containment) | Node only |
 
 Getters take at most two parameters, so `requireArray(rows).map(requireString)` works and names a
 failing element by its index. `shape` keeps fields it does not decode; its default context is
 `Terrestrial source`, the wording the source records have always reported.
 
+Explicit readers accept a caller-owned `Fail`: `readNonArrayRecord`, `readFiniteNumber`, `readTextAllowEmpty`,
+`readNonemptyText`, `readNonblankText`, `readPositiveNumber`, `readPositiveInteger` and `readSafeIntegerAtLeast`.
+Nonempty text accepts whitespace; nonblank text checks trimming but returns the original string. Positive integers
+accept represented integers above the safe range; safe integers do not. These readers are not array-map callbacks.
+
 ```text
 packages/core/
 ├── src/           validate.ts, decode.ts, schema.ts, is-array.ts, canonical-value.ts, cli-arguments.ts and tests
 │   ├── math/      vector3.ts, matrix.ts, scalar.ts, statistics.ts
-│   └── node/      hash.ts, project-root.ts: the Node-only entry
+│   └── node/      hash.ts, project-root.ts, root-discovery.ts, path-containment.ts: the Node-only entry
 ├── AGENTS.md      Package rules
 └── CLAUDE.md      Symlink to AGENTS.md
 ```

@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber, isRecord as coreIsRecord } from '@cssearth/core';
 export type Matrix = [number, number, number, number, number, number];
 export type Point = [number, number];
 export type LayerId = 'original' | 'diffuse' | 'stars';
@@ -18,8 +19,8 @@ export interface Observations {
 export interface Adjustment { x: number; y: number; rotation: number; scale: number }
 type RegisteredImage = { imageToFrame: Matrix; source: { width: number; height: number } };
 export const unchanged: Adjustment = { x: 0, y: 0, rotation: 0, scale: 1 };
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
-const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
+const record = coreIsRecord;
+const finite = coreIsFiniteNumber;
 const positive = (value: unknown): value is number => finite(value) && value > 0;
 const string = (value: unknown): value is string => typeof value === 'string' && value.length > 0;
 const point = (value: unknown): value is Point => Array.isArray(value) && value.length === 2 && value.every(finite);

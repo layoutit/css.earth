@@ -1,3 +1,4 @@
+import { readPositiveNumber, readSafeIntegerAtLeast } from '@cssearth/core';
 /** The arithmetic of rebuilding a TIME-TAG exposure in a moving target's own rest frame. Nothing here opens a file or asks
  * the network, so every step below is checked by `timetag-frame.test.mts` on event lists small enough to write out by hand.
  *
@@ -108,16 +109,8 @@ export interface TimeTagDefinition {
 }
 
 const NAME = /^[a-z0-9][a-z0-9.-]*$/u;
-const positive = (value: unknown, label: string) => {
-  const number = requireFiniteNumber(value, label);
-  if (!(number > 0)) throw new TypeError(`${label} is positive.`);
-  return number;
-};
-const wholeNumber = (value: unknown, label: string) => {
-  const number = requireFiniteNumber(value, label);
-  if (!Number.isSafeInteger(number) || number < 1) throw new TypeError(`${label} is a whole number of at least one.`);
-  return number;
-};
+const positive = (value: unknown, label: string) => { const number = requireFiniteNumber(value, label); return readPositiveNumber(number, label, () => { throw new TypeError(`${label} is positive.`); }); };
+const wholeNumber = (value: unknown, label: string) => { const number = requireFiniteNumber(value, label); return readSafeIntegerAtLeast(number, 1, label, () => { throw new TypeError(`${label} is a whole number of at least one.`); }); };
 const ordered = (value: unknown, label: string): [number, number] => {
   const pair = requireArray(value, label).map(entry => requireFiniteNumber(entry, label));
   if (pair.length !== 2 || !(pair[0]! < pair[1]!)) throw new TypeError(`${label} is a pair running from low to high.`);

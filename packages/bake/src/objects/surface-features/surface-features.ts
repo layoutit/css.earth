@@ -1,3 +1,4 @@
+import { readNonArrayRecord, readNonblankText, readFiniteNumber } from '@cssearth/core';
 import { PREPARED_SURFACE_FEATURES_SCHEMA, featureDiscoveryZoomShare, normalizeSearchText } from './catalog.ts';
 import type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, SurfaceFeaturePolicy, PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, SurfaceFeatureCatalogDescriptor, SurfaceFeatureSelectionPlan, PreparedSurfaceFeaturePlan, Vector3 } from './catalog.ts';
 import { surfaceDirection, round, scaled, rimVectors, extentPolygon, normalizeExtent, projectRadial, meshRadiusBand, triaxialSurfacePoint } from './geometry.ts';
@@ -71,9 +72,9 @@ export interface SurfaceFeaturesSourceManifest {
 }
 
 type Input = Record<string, unknown>;
-function record(value: unknown, at: string): Input { if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`); return value as Input; }
-function text(value: unknown, at: string): string { if (typeof value !== 'string' || !value.trim()) throw new TypeError(`${at} must be non-empty text.`); return value; }
-function finite(value: unknown, at: string): number { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${at} must be a finite number.`); return value; }
+function record(value: unknown, at: string): Input { return readNonArrayRecord(value, at, () => { throw new TypeError(`${at} must be an object.`); }); }
+function text(value: unknown, at: string): string { return readNonblankText(value, at, () => { throw new TypeError(`${at} must be non-empty text.`); }); }
+function finite(value: unknown, at: string): number { return readFiniteNumber(value, at, () => { throw new TypeError(`${at} must be a finite number.`); }); }
 function integer(value: unknown, at: string, minimum = 0): number { const n = finite(value, at); if (!Number.isInteger(n) || n < minimum) throw new TypeError(`${at} must be an integer of at least ${minimum}.`); return n; }
 function relativePath(value: unknown, at: string): string {
   const path = text(value, at);

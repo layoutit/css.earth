@@ -1,18 +1,18 @@
+import { discoverRoot } from '@cssearth/core/node';
 // `@cssearth/bake/run-implemented-objects` (Node only): runs a registered scene object's acquire, prepare, test, browser
 // or assemble command, and the concurrency-limited scheduler that prepares several objects with a memory budget. It
 // imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command.
 import { isArray } from '@cssearth/core';
 import { execFileSync, spawn } from "node:child_process";
 import { access, readdir, readFile } from "node:fs/promises";
-import { createRequire } from "node:module";
 import { availableParallelism, freemem, totalmem } from "node:os";
-import { dirname, resolve } from "node:path";
+import { resolve } from "node:path";
 
 import { readPreparedObjects } from "@cssearth/objects/node";
 import { authoredObject } from '../sources/index.ts';
 
 /** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
-const ROOT = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
+const ROOT = discoverRoot({ strategy: 'package-location', fromUrl: import.meta.url, packageSpecifier: '@cssearth/bake/package.json', rootOffset: '../..', missing: { behavior: 'throw' } });
 /** The scene objects, read through the prepared registry of this checkout rather than the application's bound registry. */
 const SCENE_OBJECTS = () => readPreparedObjects(ROOT).sceneObjects;
 

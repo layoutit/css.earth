@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Offline preparation of the published Bonanos et al. (2010) massive SMC star sample inside the current finite SMC model. */
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
@@ -15,7 +16,7 @@ export const STAR_ID_PREFIX = 'Bonanos2010:';
 export const COMMAND = 'labs/nebula/packages/lab/src/cli/commands/prepare-smc-stars.ts';
 export { finiteModelStarsIndex, MAGNITUDE_LIMIT };
 export type SmcStarSelection = FiniteStarSelection;
-const record = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
+const record = coreIsRecord;
 
 /** CDS J/AJ/140/416 table3.dat bytes (1-based, inclusive) from the pinned ReadMe. Blank optional fields are NaN. */
 export function readBonanos2010Row(line: string): CatalogueStarRow {

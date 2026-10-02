@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { reconstructionProcessingCapability } from '../../features/reconstruction/reconstruction-capabilities.ts';
 import { runProcessingWorker } from '../workers/run.ts';
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
@@ -21,7 +22,7 @@ import { datasetRadialHandler } from './dataset-radial.ts';
 import { isResultName } from '../../features/result-name.ts';
 const cache = '.local/nebula-lab/reconstructions';
 const removalCache = '.local/nebula-lab/star-removal-nox-applied';
-const record = (value: unknown): value is Record<string, any> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 /** A reconstruction is named by what it was made from: `<subject>-<image>`, or a model or dataset name built the same way. */
 const token = isResultName;
 /** The saved request of a result directory equals `expected`, compared structurally. */

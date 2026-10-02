@@ -5,7 +5,7 @@ export interface SourcePin { path: string; bytes: number }
 export interface GalaxySource extends Partial<SourcePin> { id: string; url: string; citation: string; references?: SpatialCitation[] }
 export interface GalaxyMembership {
   group: 'local-group' | 'local-volume' | 'galaxy-cluster' | 'uncertain';
-  subgroup: 'milky-way' | 'andromeda' | 'field' | 'virgo' | 'hydra' | 'centaurus' | 'unknown';
+  subgroup: 'milky-way' | 'andromeda' | 'field' | 'virgo' | 'hydra' | 'centaurus' | 'perseus' | 'coma' | 'unknown';
   basis: string;
   sourceRef?: string;
 }

@@ -1,7 +1,7 @@
 import { writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
 import { MAX_CATALOGUE_POINTS, parseCatalogueCells, parseCataloguePointSpread, parseDensityVolumeFrame } from '@cssearth/objects';
-import { decodeCatalogueBankBinary } from '../prepared-data/catalogue-bank-binary.js';
+import { decodeCatalogueBankBinary } from '@cssearth/objects';
 import { readPreparedBinary } from '../prepared-data/prepared-binary.js';
 import type { CatalogueCells, CataloguePointSpread, DensityVolumeFrame } from '@cssearth/objects';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
@@ -27,7 +27,7 @@ export async function fetchPreparedJson(target: string): Promise<unknown> {
   return response.json() as Promise<unknown>;
 }
 /** A published catalogue point bank (`<id>.bin`): packed, gunzipped by the platform and decoded to the object its JSON
- * was (prepared-data/catalogue-bank-binary.ts), refusing an unsuccessful answer. */
+ * was (@cssearth/objects prepared-data/catalogue-bank-binary.ts), refusing an unsuccessful answer. */
 export async function fetchPreparedCatalogueBank(target: string, fetcher: typeof fetch = fetch): Promise<unknown> {
   const response = await fetcher(target);
   if (!response.ok) throw new Error(`${target} answered ${response.status}.`);

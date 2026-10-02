@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber, isRecord as coreIsRecord } from '@cssearth/core';
 import { readJointParameters, type JointParameters, type JointFamily } from '@cssearth/objects';
 export { readJointParameters, type JointParameters, type JointFamily } from '@cssearth/objects';
 
@@ -20,8 +21,8 @@ export interface JointMetrics {
 }
 export interface JointFit { parameters: JointParameters; metrics: JointMetrics; outline: [number, number][];
   residuals: { id: string; predictedLsrKmS: number | null; residualKmS: number; heldOut: boolean }[] }
-export const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
-const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+export const jointRecord = coreIsRecord;
+const finite = coreIsFiniteNumber;
 const range = (v: unknown, min: number, max: number): v is number => finite(v) && v >= min && v <= max;
 export const jointPath = (v: unknown): v is string => typeof v === 'string' && v.length > 0 && !v.startsWith('/') && !/[\\:?#\s]/.test(v) && v.split('/').every(p => p && p !== '.' && p !== '..');
 export function readJointControls(v: unknown): JointControls {

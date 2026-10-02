@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Browser-safe contracts for explicit, non-destructive detector proposals. */
 import { readDetectionSettings, type DetectionSettings } from '@cssearth/nebula-reconstruction/evidence/geometry/settings';
 import { isVariantName } from '../variant-name.ts';
@@ -19,7 +20,7 @@ export interface DetectionResult {
   geometry: { file: string };
   quality: DetectionQuality;
 }
-export const geometryRecord = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+export const geometryRecord = coreIsRecord;
 /** `geometry.json` is the prepared attachment of an analysis run; `geometry-<variant>.json` one detector proposal. */
 export const geometryFile = (value: unknown): value is string => typeof value === 'string' &&
   (value === 'geometry.json' || (value.startsWith('geometry-') && value.endsWith('.json') && isVariantName(value.slice(9, -5))));

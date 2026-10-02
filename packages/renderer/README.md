@@ -5,7 +5,8 @@ navigation, and renders bodies, skies, star fields, volumes, image layers and la
 the universe context around the focused object. The site mounts objects through it; the preparation tools import its
 validators so that what they write is what the browser reads. The prepared CSS format identifier and compact
 world-summary/system table decoders are shared through `@cssearth/objects`. World-context and camera-format validation, system views and orbit-bank codecs also live there;
-camera projection and navigation remain here.
+Catalogue bank codecs and point-field data, manifest and binary bank contracts also live in `@cssearth/objects`;
+star loading, camera projection and navigation remain here.
 
 It was `src/renderers/css` until 2026-09-26. The compilers that write its prepared formats stayed there
 (`src/renderers/css/preparation`) until they moved into `@cssearth/bake`; the object page stylesheets

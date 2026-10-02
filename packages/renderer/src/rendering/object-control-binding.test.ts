@@ -2,8 +2,24 @@ import { afterEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
-import { createObjectControlBinding, publishDatasetSelection } from './object-control-binding.js';
+import { createObjectControlBinding, publishDatasetPreview, publishDatasetSelection } from './object-control-binding.js';
 import type { ObjectSelectionState } from './object-selection-runtime.js';
+import { showSection } from './detached-sections.js';
+
+test('the native select takes the committed dataset while a wide layout keeps it off the page', () => {
+  const document = parseHTML(`<section class="object-datasets">
+    <div class="object-dataset-picker-display"><select data-dataset-native-select><option value="first" selected>First</option><option value="other">Other</option></select></div>
+    <div data-dataset-option><button value="first" aria-pressed="false"></button></div>
+    <div data-dataset-option><button value="other" aria-pressed="true"></button></div>
+  </section>`).document;
+  const root = document.querySelector<HTMLElement>('.object-datasets')!, display = root.querySelector<HTMLElement>('.object-dataset-picker-display')!;
+  const buttons = [...root.querySelectorAll<HTMLButtonElement>('button')];
+  showSection(display, false);
+  assert.equal(root.querySelector('select'), null);
+  publishDatasetPreview(root, buttons);
+  showSection(display, true);
+  assert.deepEqual([...root.querySelectorAll('option')].filter(option => option.hasAttribute('selected')).map(option => option.value), ['other']);
+});
 
 test('a collapsed dataset preview follows the listed member of a selected sequence', () => {
   const document = parseHTML(`<section class="object-datasets">
