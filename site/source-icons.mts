@@ -1,7 +1,8 @@
 import { isRecord } from '@cssearth/core';
 
-/** A site the Sources tab links to, and its favicon when the site serves one (`site/build/prepare/refresh-source-icons.mts`). */
-export interface SourceIcon { readonly sourceUrl: string; readonly src?: string; readonly assetUrl?: string; readonly bytes?: number }
+/** A site the Sources tab links to, and the address of its favicon when the site serves one
+ * (`site/build/prepare/refresh-source-icons.mts`). The page loads the icon from that address; no copy is kept. */
+export interface SourceIcon { readonly sourceUrl: string; readonly assetUrl?: string }
 
 const url = (value: unknown): value is string => typeof value === 'string' && /^https?:\/\/[^\s]+$/u.test(value);
 
@@ -11,13 +12,8 @@ export function parseSourceIcons(input: unknown): Readonly<Record<string, Source
   return Object.freeze(Object.fromEntries(Object.entries(input).map(([key, raw]) => {
     if (!/^(?:doi:10\.\d+|[a-z0-9][a-z0-9.-]*)$/u.test(key) || !isRecord(raw) || !url(raw.sourceUrl))
       throw new TypeError(`Invalid source icon ${key}: it needs a host or doi: key and a sourceUrl.`);
-    if (raw.src === undefined) {
-      if (raw.assetUrl !== undefined || raw.bytes !== undefined) throw new TypeError(`Incomplete source icon ${key}: assetUrl and bytes need a src.`);
-      return [key, Object.freeze({ sourceUrl: raw.sourceUrl })];
-    }
-    if (typeof raw.src !== 'string' || !/^\/shell\/source-icons\/[a-z0-9-]+\.webp$/u.test(raw.src) || !url(raw.assetUrl)
-      || typeof raw.bytes !== 'number' || !Number.isSafeInteger(raw.bytes) || raw.bytes <= 0)
-      throw new TypeError(`Invalid source icon ${key}: src must be a /shell/source-icons/ WebP with its assetUrl and byte count.`);
-    return [key, Object.freeze({ sourceUrl: raw.sourceUrl, src: raw.src, assetUrl: raw.assetUrl, bytes: raw.bytes })];
+    if (raw.assetUrl !== undefined && (!url(raw.assetUrl) || !raw.assetUrl.startsWith('https://')))
+      throw new TypeError(`Invalid source icon ${key}: assetUrl must be an https address, which a secure page can load.`);
+    return [key, Object.freeze({ sourceUrl: raw.sourceUrl, ...(raw.assetUrl === undefined ? {} : { assetUrl: raw.assetUrl }) })];
   })));
 }

@@ -21,10 +21,10 @@ const checked = new Set<string>();
 // Each object's provider index, computed when the source catalogue was written (@cssearth/objects/provenance source-credits.ts).
 const CREDITS = parseSourceCredits(credits), PROVIDERS = CREDITS.providers;
 const ICONS = parseSourceIcons(JSON.parse(readFileSync(resolve(root, 'site/source/source-icons.json'), 'utf8')));
-/** The rows of an object's Sources tab: each published source it uses, once, with its site's favicon when one is recorded. */
+/** The rows of an object's Sources tab: each published source it uses, once, with the address of its site's favicon when one is recorded. */
 export const objectSourceRows = (objectId: string) => (CREDITS.sources[objectId] ?? []).map(id => {
   const row = CREDITS.records[id]!;
-  return { ...row, iconSrc: ICONS[row.icon]?.src };
+  return { ...row, iconSrc: ICONS[row.icon]?.assetUrl };
 });
 const sourceProviders = (objectId: string): readonly string[] => PROVIDERS[objectId] ?? [];
 const creditLabel = (providers: readonly string[]) => {

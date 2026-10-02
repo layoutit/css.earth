@@ -32,13 +32,15 @@ from these records and the existing product lineage, with
 work is one row: its title, kind, publisher and landing page. Files that have no
 published title are one row per credit line, with their count and the datasets
 they feed; several files link to the body README, which lists them.
-Each row shows the favicon of the site it links to. `node site/build/prepare/refresh-source-icons.mts`
-fetches the icons of sites not yet recorded into `public/shell/source-icons/` and
-records each in [source-icons.json](../site/source/source-icons.json) with its
-site, the file taken and the prepared byte count. A DOI is keyed by its
+The pages read only the credits file: the whole catalogue is tens of megabytes.
+The three prepared files are ignored build outputs; do not edit or commit them.
+
+Each row shows the favicon of the site it links to, loaded from that site: the
+repository keeps no copy of a site's mark. `node site/build/prepare/refresh-source-icons.mts`
+finds the icon address of each site not yet recorded and writes it to
+[source-icons.json](../site/source/source-icons.json). A DOI is keyed by its
 registrant prefix and resolved to its publisher. A site that refuses the request
-is recorded without an icon and its rows show the outbound mark. The
-pages read only that file: the whole catalogue is tens of megabytes. They are ignored build outputs; do not edit or commit them.
+is recorded without an icon and its rows show the outbound mark.
 The [provenance contract](provenance/CONTRACT.md) governs citations, retained data,
 evidence and plain language. Keep scientific tables in their existing records.
 
