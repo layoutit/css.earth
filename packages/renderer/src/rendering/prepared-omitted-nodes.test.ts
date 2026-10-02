@@ -1,8 +1,9 @@
+import { type PreparedTree, type PreparedVariant } from '@cssearth/objects';
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
+
 import { meshProfile, omittedPreparedNodes } from './prepared-omitted-nodes.js';
-import type { PreparedTree, PreparedVariant } from './prepared-presentation.js';
 
 test('a selection omits the descendants of its hidden subtrees and the leaves of every mesh it hides', () => {
   const record = (parent: number, style = '') => ({ parent, tag: 'div', className: null, style, properties: [], attributes: {} });

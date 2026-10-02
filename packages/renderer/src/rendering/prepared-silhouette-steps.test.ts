@@ -1,10 +1,9 @@
+import { requireViewBindings, type PreparedTree, type CameraPlan } from '@cssearth/objects';
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
+
 import { selectPreparedSilhouetteStep } from './prepared-silhouette-steps.js';
-import { requireViewBindings } from '../validation/presentation.js';
-import type { PreparedTree } from './prepared-presentation.js';
-import type { CameraPlan } from '../navigation/types.js';
 
 const steps = { hysteresis: 0.1, levels: [{ minimumDiameter: 0, value: '0.03' }, { minimumDiameter: 16, value: '0.02' }, { minimumDiameter: 32, value: '0.01' }] };
 

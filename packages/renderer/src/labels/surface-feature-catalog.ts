@@ -1,5 +1,7 @@
+import { type PreparedSurfaceFeaturePlan, type SurfaceFeatureCatalogDescriptor } from '@cssearth/objects';
+
 import { surfaceFeatureBankIndex } from './surface-feature-banks.js';
-import type { PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, PreparedSurfaceFeaturePlan, SurfaceFeatureCatalogDescriptor, SurfaceFeatureKind, SurfaceFeatureOutline } from './surface-feature-types.js';
+import type { PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, SurfaceFeatureKind, SurfaceFeatureOutline } from './surface-feature-types.js';
 
 const KINDS: readonly SurfaceFeatureKind[] = ['point', 'linear', 'region'];
 function object(value: unknown, label: string): Record<string, unknown> {

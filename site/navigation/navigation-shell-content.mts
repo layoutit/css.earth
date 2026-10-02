@@ -1,4 +1,4 @@
-import { SHELL_SETTING_NAMES } from '@cssearth/renderer/runtime/shell-settings.ts';
+import { SHELL_SETTING_NAMES } from '@cssearth/objects';
 
 /** Update a retained shell fragment without replacing controls or unchanged text. */
 export function updateShellElement(target: Element, source: Element): void {

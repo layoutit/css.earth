@@ -1,7 +1,10 @@
+import { parsePreparedObjectRuntime } from '@cssearth/objects';
+
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
-import { loadPreparedSurfaceFeatureCatalog, parsePreparedObjectRuntime } from '@cssearth/renderer';
+import { loadPreparedSurfaceFeatureCatalog } from '@cssearth/renderer';
+
 import { fixtureFeaturePlan, fixtureFeatureTransport } from './fixtures/object-runtime-package.mts';
 
 test('the local feature transport supplies a catalogue compatible with its fixture plan', async () => {

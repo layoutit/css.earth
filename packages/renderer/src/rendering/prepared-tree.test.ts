@@ -1,8 +1,9 @@
+import { type PreparedTree } from '@cssearth/objects';
+
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { adoptPreparedTree, buildPreparedTree, preparePresentationTree } from './prepared-tree.js';
-import type { PreparedTree } from './prepared-presentation.js';
 
 const sha = 'a'.repeat(64);
 

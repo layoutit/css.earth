@@ -1,7 +1,6 @@
-import { cssMatrix as matrix, CSS_NUMBER as NUMBER } from '../validation/css-matrix.js';
-import { parseDensityVolumeFrame } from '@cssearth/objects';
-import type { PreparedCssSurfaceShell } from './types.js';
+import { cssMatrix as matrix, CSS_NUMBER as NUMBER, parseDensityVolumeFrame } from '@cssearth/objects';
 
+import type { PreparedCssSurfaceShell } from './types.js';
 
 /** Accepts prepared geometry and material addresses, never authored runtime CSS. */
 export function validatePreparedCssSurfaceShell(input: unknown): PreparedCssSurfaceShell {

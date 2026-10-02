@@ -1,6 +1,8 @@
+import { OBJECT_RUNTIME_SCHEMA, PREPARED_CSS_OBJECT_FORMAT, parseAuthoredObjectDescriptor } from '@cssearth/objects';
+
 import {readAuthoredSources} from '../../sources/index.ts';
 import {parse} from '@cssearth/core/schema';
-import {PREPARED_CSS_OBJECT_FORMAT} from '@cssearth/objects';
+
 import { layeredRecipe } from './layered-recipe.ts';
 import { spectralRecipe } from './spectral-recipe.ts';
 import { radialMotionRecipe } from './radial-motion-recipe.ts';
@@ -17,7 +19,7 @@ import {mkdir,readFile,realpath,writeFile,rm} from 'node:fs/promises';
 import {relative,resolve,sep} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import sharp from 'sharp';
-import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
+
 import {inventoryPublicAssets} from '@cssearth/objects/node';
 import {requirePreparedPresentation} from '../../../presentation/index.ts';
 import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../presentation/index.ts';
@@ -28,7 +30,6 @@ import { prepareCutawayMaterials } from './cutaway-materials.ts';
 import { createLayeredOblatePreparation } from './layered-oblate.ts';
 import { prepareLayeredOblatePresentation } from './presentation.ts';
 import {parseObservedSurfaceRecipe,prepareObservedSurfaces} from '../observed-surfaces/index.ts';
-
 
 const json=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
 const writeJson=(path:string,value:unknown)=>writeFile(path,JSON.stringify(value)+'\n');
@@ -97,7 +98,7 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const normalizedPresentation={...raw,materials:prepareMaterialTracks(raw),variants:raw.variants.map(variant=>({...variant,materials:variant.materials.map(material=>({...material,mode:material.mode==='default-pose'?'frames':material.mode}))}))};
   const presentation=withFocusedCamera(normalizedPresentation,sky);
   requirePreparedPresentation(presentation,{controls});
-  const definition={...presentation,schema:'cssearth-object-runtime@5',id:descriptor.id,controls};
+  const definition={...presentation,schema:OBJECT_RUNTIME_SCHEMA,id:descriptor.id,controls};
   // Only consumer-used scene data is published. Dormant moon/orbit generators,
   // raw masters and diagnostic shader metadata are not runtime dependencies.
   const values={scene,sky,sun,runtime:definition,'material-datasets':presentationDatasets,views,layouts};

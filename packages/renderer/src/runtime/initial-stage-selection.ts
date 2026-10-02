@@ -1,4 +1,7 @@
-import { initialObjectSelection, type ObjectControls } from './object-contract.js';
+import { type ObjectControls } from '@cssearth/objects';
+
+import { initialObjectSelection } from './object-contract.js';
+
 import { sectionElements } from '../rendering/detached-sections.js';
 
 /** Preparation and attachment read the same transported selection and live controls. */

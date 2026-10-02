@@ -1,7 +1,8 @@
-import type { ObjectRuntimeDefinition } from './runtime/object-runtime-types.js';
+import { type ObjectRuntimeDefinition, preparedDatasetReference } from '@cssearth/objects';
+
 import { decodePreparedCssObject, requirePreparedCssDescriptor } from './prepared-object-decoder.js';
 import { decodePreparedObjectInWorker } from './prepared-object-worker-client.js';
-import { adoptPreparedDatasetTables, preparedDatasetReference } from './prepared-data/dataset-tables.js';
+import { adoptPreparedDatasetTables } from './prepared-data/dataset-tables.js';
 
 export interface PreparedCssTransport {
   /** Return the exact bytes addressed by the prepared reference. The decoder

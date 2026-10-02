@@ -1,5 +1,7 @@
+import { type DatasetVolume } from '@cssearth/objects';
+
 import { CONTEXT_DATASETS } from '../context-datasets.mts';
-import type { DatasetVolume } from '@cssearth/renderer/runtime/object-contract.ts';
+
 import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import type { PreparedFocusBank } from '@cssearth/renderer/universe/prepared-focus-bank.ts';
 import type { SceneSession } from './scene-session.mts';

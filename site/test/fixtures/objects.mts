@@ -1,6 +1,8 @@
+import { parsePreparedObjectRuntime } from '@cssearth/objects';
+
 import {parseSaturnScene,parseSaturnViews,parseSaturnDatasets,parseSaturnLayouts} from './saturn-prepared.mts';
 import {parseTitle,parsePanel,parseContent} from './prepared-schemas.mts';
-import {parsePreparedObjectRuntime} from '@cssearth/renderer';
+
 import {requireObjectRuntimeDefinition} from '@cssearth/bake/contract';
 import {validatePreparedCubicSky} from '@cssearth/bake/presentation';
 import {validateDirectionalSunPlan} from '@cssearth/bake/presentation';

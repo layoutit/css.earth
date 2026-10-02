@@ -1,9 +1,10 @@
-import { parseObjectDescriptor } from '@cssearth/objects';
+import { parseObjectDescriptor, parsePreparedWorldCameraFrame, type ObjectRuntimeDefinition } from '@cssearth/objects';
+
 import { loadPreparedCssObject } from '../loader.js';
 import type { PreparedCssTransport } from '../loader.js';
-import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
+
 import type { ObjectSceneLifecycle } from './object-scene.js';
-import type { ObjectRuntimeDefinition } from './object-runtime-types.js';
+
 import { createPreparedObjectNavigation } from './prepared-object-navigation.js';
 
 type Bind<Options> = (definition: ObjectRuntimeDefinition, frame: import('@cssearth/objects').PreparedWorldCameraFrame) => (stage: HTMLElement, options: Options) => ObjectSceneLifecycle;

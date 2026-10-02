@@ -1,11 +1,13 @@
+import { type PreparedVariant, type PreparedWrite, type PreparedResourceEntry } from '@cssearth/objects';
+
 import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
-import type { PreparedVariant, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.ts';
 import type { PreparedNode, PresentationAdapters } from './adapters.ts';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
 import { RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '../raster/index.ts';
-import type { PreparedResourceEntry } from '@cssearth/renderer/rendering/prepared-residency.ts';
+
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard', SHADOWLESS_BILLBOARD_KEY = 'shadowless-billboard';
 export async function prepareComposite(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
@@ -154,4 +156,3 @@ function pagedSurface(pages: RasterPagePlan | undefined, datasets: PresentationI
   return { entries, keys, pageCount: pages.pageCount, maximumDecodedBytes: 2 * largest,
     textureLevels: { hysteresis: RASTER_LEVEL_HYSTERESIS, levels } };
 }
-

@@ -1,7 +1,7 @@
 import { requireTextureBindings } from './texture-bindings.js';
 import { array, attribute, boolean, choice, fail, finite, integer, record, text, unique } from './guards.js';
-import type { PreparedAssets } from '../rendering/prepared-residency.js';
-import type { PreparedTree, PreparedWrite } from '../rendering/prepared-presentation.js';
+import type { PreparedAssets } from '../runtime-resource-types.js';
+import type { PreparedTree, PreparedWrite } from '../runtime-presentation-types.js';
 
 export function requireAssets(value: unknown): asserts value is PreparedAssets {
   const assets = record(value, 'resources'), resourceIds: string[] = [];

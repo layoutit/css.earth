@@ -1,3 +1,5 @@
+import { OBJECT_RUNTIME_SCHEMA, type PreparedVariant, type PreparedPresentationDefinition } from '@cssearth/objects';
+
 import type { PreparedCubicSkyPlan } from '../../../presentation/index.ts';
 import type { PreparedDirectionalSunPlan } from '../../../presentation/index.ts';
 import type { PreparedProjectiveTextureLeaf } from '../../../presentation/index.ts';
@@ -6,8 +8,7 @@ import type { SolidRasterGrid } from './raster-grid.ts';
 import type { combineRadialModels } from './radial/radial-models.ts';
 import type { createSourceManifest } from '@cssearth/objects/node';
 import type { MaterialSourceTrack } from '../../../presentation/index.ts';
-import type { PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
-import type { PreparedPresentationDefinition } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+
 import { requireString, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import { prepareScientificNavigation } from './scientific-focus.ts';
@@ -241,5 +242,5 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   const prepared = { ...presentation, materials: prepareMaterialTracks(presentation) };
   const validated=requirePreparedPresentation(prepared, { controls });
   requirePreparedResourceCatalog(prepared.assets);
-  return { ...validated, schema: 'cssearth-object-runtime@5', id, controls:requireObjectControls(controls) };
+  return { ...validated, schema: OBJECT_RUNTIME_SCHEMA, id, controls:requireObjectControls(controls) };
 }

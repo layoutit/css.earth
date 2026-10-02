@@ -1,10 +1,11 @@
+import { PREPARED_CUBIC_SKY_SCHEMA, CUBIC_SKY_STANDARD_SCHEMA, PREPARED_DIRECTIONAL_SUN_SCHEMA } from '../runtime-camera-types.js';
 import { direction, fail, finite, numbers, positive, record, text } from './guards.js';
-import type { CubicSkyPlan } from '../solar-system/cubic-sky-plan.js';
-import type { DirectionalSunPlan } from '../solar-system/directional-sun-coordinate.js';
+import type { CubicSkyPlan } from '../runtime-camera-types.js';
+import type { DirectionalSunPlan } from '../runtime-camera-types.js';
 
 export function requireSky(value: unknown): asserts value is CubicSkyPlan {
   const sky = record(value, 'sky');
-  if (sky.schema !== 'cssearth-prepared-cubic-sky@3' || sky.standard !== 'cssearth-cubic-sky-standard@3' ||
+  if (sky.schema !== PREPARED_CUBIC_SKY_SCHEMA || sky.standard !== CUBIC_SKY_STANDARD_SCHEMA ||
       sky.runtimeRasterization !== false || sky.orientation !== 'camera-rotation-only-no-translation-or-parallax') fail('retained cubic sky is incompatible');
   for (const name of ['cameraPitchResponse', 'cameraZoomResponse', 'presentationPitchOffsetDegrees', 'presentationYawOffsetDegrees']) finite(sky[name], `sky ${name}`);
   if (sky.sceneRegistration !== undefined || sky.cameraContract === 'scene-locked-unbounded-accumulated-matrix3d') matrixText(sky.sceneRegistration, 'scene registration');
@@ -28,6 +29,6 @@ export function matrixText(value: unknown, label: string): void {
 }
 export function requireSun(value: unknown): asserts value is DirectionalSunPlan {
   const sun = record(value, 'directional Sun');
-  if (sun.schema !== 'cssearth-prepared-directional-sun@4') fail('directional Sun is incompatible');
+  if (sun.schema !== PREPARED_DIRECTIONAL_SUN_SCHEMA) fail('directional Sun is incompatible');
   direction(sun.localDirection, 'Sun local direction'); direction(sun.referenceViewDirection, 'Sun reference direction');
 }

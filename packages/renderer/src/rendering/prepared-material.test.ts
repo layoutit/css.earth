@@ -1,7 +1,10 @@
+import { type PreparedMaterialTrack, type PreparedMaterialSelection } from '@cssearth/objects';
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
-import { preparedMaterialFrame, preparedMaterialState, preparedMaterialAddress, type PreparedMaterialTrack, type PreparedMaterialSelection } from "./prepared-material.js";
+
+import { preparedMaterialFrame, preparedMaterialState, preparedMaterialAddress } from './prepared-material.js';
+
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.js";
 import { mercuryPhaseMapping, venusPhaseMapping } from "./prepared-material-fixtures.js";
 

@@ -1,4 +1,4 @@
-import type { PreparedTree, PreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+import { type PreparedTree, type PreparedVariant } from '@cssearth/objects';
 
 export type ActivationDefinition = {
   tree: Pick<PreparedTree, 'camera' | 'scene' | 'textureBindings'> & { nodes: readonly Pick<PreparedTree['nodes'][number], 'parent'>[] };

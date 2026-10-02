@@ -1,12 +1,11 @@
 import { array, attribute, boolean, choice, fail, finite, integer, positive, record, text, unique } from './guards.js';
 import { ancestor, nodeReference, requireWrite, resourceList } from './resources-tree.js';
 import { requireSelectedMaterial } from './materials.js';
-import type { PreparedVariant, PreparedViewBinding, PreparedPresentationDefinition, PreparedTree } from '../rendering/prepared-presentation.js';
-import type { PreparedMaterialTrack } from '../rendering/prepared-material.js';
-import type { ObjectControls } from '../runtime/object-contract.js';
-import type { CameraPlan } from '../navigation/types.js';
+import type { PreparedVariant, PreparedViewBinding, PreparedPresentationDefinition, PreparedTree } from '../runtime-presentation-types.js';
+import type { PreparedMaterialTrack } from '../runtime-material-types.js';
+import type { ObjectControls } from '../object-controls.js';
+import type { CameraPlan } from '../runtime-camera-types.js';
 
-export { requireTextureLevels } from './prepared-texture-levels.js';
 import { requireTexturePlacements } from './prepared-texture-levels.js';
 
 /** `deferred`: datasets whose variants stand in until their tables arrive (dataset-tables.ts). A toggle whose effect

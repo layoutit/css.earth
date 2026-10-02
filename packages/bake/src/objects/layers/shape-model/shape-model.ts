@@ -1,5 +1,5 @@
-import { NEUTRAL_CATALOGUE_RGB } from '@cssearth/objects';
-import type { AuthoredObjectDescriptor } from '@cssearth/objects';
+import { OBJECT_RUNTIME_SCHEMA, NEUTRAL_CATALOGUE_RGB, type AuthoredObjectDescriptor } from '@cssearth/objects';
+
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
 import { parseShapeModelConfig, parseShapeContent } from './source.ts';
 import { prepareRingLeaves, ringQuadStyle } from './rings.ts';
@@ -134,7 +134,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   } : {};
   const { tree, index } = b.finish({ camera, scene: root });
   function requiredMaterialRoot(){if(!materialRoot)throw new TypeError("Shape silhouette lacks its material root.");return materialRoot;}
-  const definition = requireObjectRuntimeDefinition(JSON.parse(JSON.stringify({ schema: 'cssearth-object-runtime@5', id, camera: { ...scene.camera, ...materialReference, responsiveFit: { ...scene.camera.responsiveFit, maximumHeightShare: config.camera.maximumHeightShare } }, sky: scene.starfield, sun,
+  const definition = requireObjectRuntimeDefinition(JSON.parse(JSON.stringify({ schema: OBJECT_RUNTIME_SCHEMA, id, camera: { ...scene.camera, ...materialReference, responsiveFit: { ...scene.camera.responsiveFit, maximumHeightShare: config.camera.maximumHeightShare } }, sky: scene.starfield, sun,
     controls: preparedContent.controls, tree,
     assets: { entries, pools, startup: entries.filter(entry => entry.pool === 'mounted').map(entry => entry.key) },
     variants: datasets.map(dataset => ({ when: { datasetId: dataset.id }, required: [`surface:${dataset.id}`, `poles:${dataset.id}`, 'lighting', ...(ringTexture ? ['ring'] : [])], writes: [

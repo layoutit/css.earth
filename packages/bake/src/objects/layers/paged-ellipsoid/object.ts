@@ -1,4 +1,5 @@
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
+
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
 import { readJsonSource } from '../../sources/index.ts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
@@ -40,7 +41,6 @@ const json = readJsonSource;
 const canonical = (value: unknown): string => JSON.stringify(value, (_key, item: unknown) => item && typeof item === 'object' && !Array.isArray(item)
   ? Object.fromEntries(Object.entries(item).sort(([left], [right]) => left < right ? -1 : left > right ? 1 : 0)) : item);
 const write = (directory: string, name: string, value: unknown) => writeFile(resolve(directory, `${name}.json`), `${JSON.stringify(value)}\n`);
-
 
 /** Source-derived projective globe, atmosphere, cutaway, map hierarchy and places. */
 export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, solarGeometry, assetWorker, reuseImages = false, acceptChanged = [], packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(process.cwd(), '.local/wmts-global') }: PagedEllipsoidContext) {

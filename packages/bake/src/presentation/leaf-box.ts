@@ -1,3 +1,5 @@
+import { type PreparedSilhouetteSteps, type PreparedTexturePlacements } from '@cssearth/objects';
+
 // Leaf boxes that follow the body's size on screen.
 //
 // WebKit, and so every browser on iOS, backs a composited leaf at its CSS box times the device pixel ratio, whatever its
@@ -13,8 +15,7 @@
 // write they inherit the body's initial step from the system node. The node builder writes the lengths and transform;
 // the presentation bindings, measured in a browser, write each factor, the groups and the steps
 // (`prepared-presentation/prepared-presentation-bindings.ts`), so every generator shares one rule.
-import { walkSilhouetteLevels, type PreparedSilhouetteSteps } from '@cssearth/renderer/rendering/prepared-silhouette-steps.ts';
-import type { PreparedTexturePlacements } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
+import { walkSilhouetteLevels } from '@cssearth/renderer/rendering/prepared-silhouette-steps.ts';
 
 /** The step every leaf reads; `<property>-<block>` names a block in the binding's placements and groups. */
 export const LEAF_BOX_PROPERTY = '--silhouette-step';

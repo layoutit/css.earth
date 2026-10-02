@@ -23,7 +23,7 @@ Camera projection, star loading and navigation remain here.
 - No runtime `clip-path`, CSS masks, filters, CSS gradients, blend modes, canvas or WebGL. Detailed bodies are PolyCSS.
 - No per-object folders, planet-specific implementations or branches on named object ids: every object fact arrives in
   its prepared data. Object page stylesheets (`src/renderers/css/styles/*-surfaces.css`) belong to the objects, not here.
-- Validate every external value where it enters (`src/validation/`); no `any` and no TypeScript suppression comments.
+- Validate every external value where it enters (prepared runtime validators in `@cssearth/objects`); no `any` and no TypeScript suppression comments.
 
 ## Entries
 
@@ -43,3 +43,6 @@ Camera projection, star loading and navigation remain here.
 - Tests may read prepared object data from the checkout, so run `pnpm setup:assets` first.
 - A change that only moves or renames code keeps the site's built bundles byte-identical; compare `dist/` before and after.
 - Maintain README.md and CLAUDE.md as a symlink to this guide.
+
+Object runtime definitions, control metadata, prepared dataset tables and their JSON validators belong to
+`@cssearth/objects`. Selection operations and in-place dataset installation stay in this package.

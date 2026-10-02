@@ -1,3 +1,5 @@
+import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from '@cssearth/objects';
+
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
@@ -7,9 +9,9 @@ import { cameraMotionSignalFor } from '@cssearth/renderer/navigation';
 import { createPreparedResidency } from '@cssearth/renderer/testing';
 import { retainedPresentationFixture, preparedSelectionFixture } from "./fixtures/object-runtime-package.mts";
 import { mountPreparedPresentation, initialObjectSelection } from '@cssearth/renderer/testing';
-import { parsePreparedObjectRuntime } from '@cssearth/renderer';
+
 import type { ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
-import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
+
 import type { ObjectSelectionState } from '@cssearth/renderer/rendering/object-selection-runtime.ts';
 import type { PreparedImage } from '@cssearth/renderer/rendering/prepared-image-store.ts';
 import type { PreparedResidencyTicket } from '@cssearth/renderer/rendering/prepared-residency.ts';
@@ -17,7 +19,6 @@ import type { PreparedPresentationContext, PreparedPresentationPlan, PreparedVie
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('earth'));
 const saturnDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('saturn'));
 import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
-import { viewSunDirectionToPreparedLightDirection } from "@cssearth/renderer/platform/directional-sun-coordinate";
 
 const flush = async () => { for (let i = 0; i < 40; i++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
@@ -326,7 +327,6 @@ test('superseded departures retain their hold and disposal never publishes held 
   assert.equal(h.commits.length, before);
 });
 
-
 test('same-turn navigation supersession does not briefly publish the old surface', async t => {
   const h = harness(); t.after(h.restore); await h.ready();
   const release = h.coordinator.holdPresentation(), frames = h.frameCount();
@@ -337,7 +337,6 @@ test('same-turn navigation supersession does not briefly publish the old surface
   assert.equal(h.frameCount(), frames);
   h.lifetime.destroy(); successor();
 });
-
 
 test('held departure moves and hides every Ryugu depth partition without publishing materials', async t => {
   const definition = parsePreparedObjectRuntime(await loadObjectTestDefinition('ryugu'));

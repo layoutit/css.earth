@@ -1,3 +1,5 @@
+import { type PreparedDepthOrder, type PreparedDepthPartitions } from '@cssearth/objects';
+
 import { showSection } from './detached-sections.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 
@@ -11,15 +13,6 @@ export function sceneEye(projection: PhysicalProjection): readonly [number, numb
   return [(x * (e * i - f * h) + y * (c * h - b * i) + z * (b * f - c * e)) / determinant,
     (x * (f * g - d * i) + y * (a * i - c * g) + z * (c * d - a * f)) / determinant,
     (x * (d * h - e * g) + y * (b * g - a * h) + z * (a * e - b * d)) / determinant];
-}
-
-export type PreparedDepthOrder = { readonly group: number } | { readonly sequence: readonly PreparedDepthOrder[] } | {
-  readonly plane: readonly [number, number, number, number];
-  readonly back: PreparedDepthOrder; readonly front: PreparedDepthOrder;
-};
-export interface PreparedDepthPartitions {
-  readonly groups: readonly { readonly root: number; readonly scene: number }[];
-  readonly order: PreparedDepthOrder;
 }
 
 export interface DepthPartitionNode { hidden: boolean; style: Pick<CSSStyleDeclaration, 'transform' | 'zIndex'>; }

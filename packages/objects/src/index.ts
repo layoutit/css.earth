@@ -62,3 +62,28 @@ export { PREPARED_CSS_POINT_FIELD_SCHEMA, PREPARED_CSS_POINT_FIELD_MANIFEST_SCHE
 export { POINT_FIELD_BANK_MAGIC, POINT_FIELD_BANK_VERSION, POINT_FIELD_BANK_HEADER_BYTES, POINT_FIELD_MAGNITUDE_DIVISOR, POINT_FIELD_MAGNITUDE_BOUND, POINT_FIELD_BANK_QUANTIZATION, decodeStarMagnitude, pointFieldBankLayout, pointFieldBankHeader, pointFieldBankRegions, decodePointFieldBank } from './stars/point-field-bank.js';
 export { parsePreparedCssPointFieldManifest, decodePreparedCssPointField } from './stars/point-field-validation.js';
 export type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedPointFieldStar, PreparedPointFieldNode, PreparedPointFieldResource, PreparedPointFieldBank, PreparedPointFieldQuantization, PreparedPointAppearance } from './stars/point-field-types.js';
+
+export { OBJECT_RUNTIME_SCHEMA, requireObjectControls, requireObjectRuntimeDefinition, objectCycleStates, OBJECT_SPEED_STATES, SHELL_SETTING_NAMES } from './prepared-data/object-controls.js';
+export type { DatasetVolume, DatasetControl, CycleState, ToggleControl, CycleControl, SettingControl, ObjectControls } from './prepared-data/object-controls.js';
+export type { ObjectRuntimeDefinition } from './prepared-data/object-runtime-types.js';
+export type { PreparedWrite, PreparedSelectionNavigation, PreparedVariant, PreparedTree, PreparedViewBinding, PreparedPresentationDefinition, PreparedInteriorDisc, LeafBoxComponent, PreparedLeafBox, PreparedDepthOrder, PreparedDepthPartitions, PreparedTexturePlacements, PreparedTextureLevels, PreparedTextureTile, PreparedTextureTileLeaves, PreparedSilhouetteSteps, SurfacePoint, SurfaceTriangle, SurfaceFrontFace, PreparedSurfaceRange, PreparedSurfaceHit, SurfaceFeaturePolicy, SurfaceFeatureCatalogDescriptor, SurfaceFeatureSelectionPlan, PreparedSurfaceFeaturePlan } from './prepared-data/runtime-presentation-types.js';
+export type { PreparedMaterialRotationPolicy, PreparedMaterialFrameMapping, PreparedMaterialAddress, PreparedMaterialBank, PreparedMaterialRotation, PreparedMaterialTrack, PreparedMaterialSelection, CounterTransport, EllipsoidProjectionPlan } from './prepared-data/runtime-material-types.js';
+export type { PreparedResourceEntry, PreparedResourcePool, PreparedAssets, PreparedCapability, PreparedResourceFallback, PreparedAssetOrigin } from './prepared-data/runtime-resource-types.js';
+export type { PitchCalibration, ResponsiveFit, CameraPlan, PerspectiveCameraPlan, CubicSkyCameraContract, CubicSkyPlan, DirectionalSunPlan } from './prepared-data/runtime-camera-types.js';
+export { CSS_NUMBER, cssMatrix } from './prepared-data/runtime-validation/css-matrix.js';
+
+export { record, array, text, finite, positive, requireJsonData, requirePreparedData } from './prepared-data/runtime-validation/guards.js';
+export type { RecordValue } from './prepared-data/runtime-validation/guards.js';
+export { parsePreparedObjectRuntime } from './prepared-data/runtime-validation/index.js';
+
+export { requireTextureLevels, requireTextureTileLeaves, requireTexturePlacements } from './prepared-data/runtime-validation/prepared-texture-levels.js';
+export { requireVariants, requireViewBindings } from './prepared-data/runtime-validation/presentation.js';
+export { requireAssets } from './prepared-data/runtime-validation/resources-tree.js';
+
+export { requireTextureBindings } from './prepared-data/runtime-validation/texture-bindings.js';
+export { PREPARED_DATASET_SCHEMA, deferredDatasetIds, preparedDatasetReference, splitPreparedDatasetTables, requireDeferredDatasets, requirePreparedDatasetTables, mergePreparedDatasetTables } from './prepared-data/dataset-tables.js';
+export type { PreparedDatasetLevel, PreparedDatasetTables } from './prepared-data/dataset-tables.js';
+export { requireCamera } from './prepared-data/runtime-validation/camera.js';
+export { requireControls } from './prepared-data/runtime-validation/controls.js';
+
+export { PREPARED_CUBIC_SKY_SCHEMA, CUBIC_SKY_STANDARD_SCHEMA, PREPARED_DIRECTIONAL_SUN_SCHEMA } from './prepared-data/runtime-camera-types.js';

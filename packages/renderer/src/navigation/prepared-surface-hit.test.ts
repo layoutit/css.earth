@@ -1,7 +1,9 @@
+import { type SurfaceTriangle } from '@cssearth/objects';
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
-import { rayHitsPreparedTriangles, type SurfaceTriangle } from './prepared-surface-hit.js';
+
+import { rayHitsPreparedTriangles } from './prepared-surface-hit.js';
 
 test('prepared surface hits distinguish an irregular extremity from empty space inside its bounding sphere', () => {
   const mesh: readonly SurfaceTriangle[] = [[[-3, -1, 0], [3, -1, 0], [0, 1, 0]]];

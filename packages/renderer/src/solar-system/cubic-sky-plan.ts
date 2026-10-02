@@ -1,2 +1,0 @@
-export interface CubicSkyCameraContract {source:string;sourcePath:string;rotationResponse:number;zoomResponse:number;horizontalFovDegrees:number;focalLengthOverViewportWidth:number;qualification:string;}
-export interface CubicSkyPlan {cameraPitchResponse:number;cameraZoomResponse:number;presentationPitchOffsetDegrees:number;presentationYawOffsetDegrees:number;sceneRegistration?:string;cameraContract?:string|CubicSkyCameraContract;projection?:{cssPerspective:string;horizontalFovDegrees:number;focalLengthOverViewportWidth?:number};}

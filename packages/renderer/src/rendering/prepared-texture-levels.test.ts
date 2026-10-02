@@ -1,11 +1,14 @@
+import { type PreparedTextureTileLeaves, type PreparedPresentationDefinition, requireTextureLevels } from '@cssearth/objects';
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
+
 import { parseHTML } from 'linkedom';
-import { createTextureTileWriter, selectPreparedTextureLevel, textureTileLeafStyles, tiledTextureKeys, type PreparedTextureTileLeaves } from './prepared-texture-levels.js';
-import { mountPreparedPresentation, preparedTextureLevelKeys, resolvePreparedPresentation, type PreparedPresentationDefinition } from './prepared-presentation.js';
+import { createTextureTileWriter, selectPreparedTextureLevel, textureTileLeafStyles, tiledTextureKeys } from './prepared-texture-levels.js';
+
+import { mountPreparedPresentation, preparedTextureLevelKeys, resolvePreparedPresentation } from './prepared-presentation.js';
+
 import type { PreparedResources } from './prepared-residency.js';
-import { requireTextureLevels } from '../validation/presentation.js';
 
 const textureLevels = { hysteresis: 0.2, levels: [
   { minimumDiameter: 0, resources: { a: 'a-small', b: 'b-small' } },
@@ -121,7 +124,6 @@ test('a sheet level plans each page as a tile of one shared image; the page leve
   assert.doesNotThrow(() => requireTextureLevels(sheet, both, new Set(['a', 'b', 'sheet'])));
   assert.throws(() => requireTextureLevels({ ...sheet, levels: [{ ...sheet.levels[0], tiles: { a: { x: 0, y: 0, scale: 0.5 } } }, sheet.levels[1]] }, both, new Set(['a', 'b', 'sheet'])), /tile a/);
 });
-
 
 test('system-scale proxies require no detail images and acquire them on geometry entry', () => {
   const at = (stage: string) => ({sceneMatrix: '', sunViewDirection: null,

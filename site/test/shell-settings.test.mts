@@ -1,7 +1,8 @@
+import { SHELL_SETTING_NAMES } from '@cssearth/objects';
+
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFileSync } from 'node:fs';
-import { SHELL_SETTING_NAMES } from '@cssearth/renderer/runtime/shell-settings.ts';
 
 import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
@@ -12,7 +13,6 @@ import { setLinkSelected, type BrowserWindow } from '../browser/browser-types.mt
 import { sectionElements } from '@cssearth/renderer';
 // A closed settings panel waits off the page (shell-settings.mts); its inputs are found where they wait.
 const find = <T extends Element>(document: Document, selector: string) => sectionElements<T & HTMLElement>(document, selector)[0] ?? null;
-
 
 test('the shell-owned setting names are exactly the setting inputs the shared shell renders', () => {
   const shell = readFileSync(new URL('../components/ObjectShell.astro', import.meta.url), 'utf8');

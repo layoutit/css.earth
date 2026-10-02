@@ -1,3 +1,5 @@
+import { parsePreparedObjectRuntime, splitPreparedDatasetTables } from '@cssearth/objects';
+
 // The prepared runtime contract and the shared selection owner, on the bodies with the most kinds of control. The code is
 // the same for every body, and each body's own data is checked when it is prepared. CSSEARTH_TEST_OBJECTS=<id>[,<id>] runs
 // those bodies instead (see anchor-table.mts).
@@ -9,7 +11,8 @@ import { objectRuntimePackageTests, preparedSelectionFixture } from '../../packa
 import { loadObjectTestDefinition, required } from '@cssearth/objects/node/contract';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { isDeepStrictEqual } from 'node:util';
-import { adoptPreparedDatasetTables, parsePreparedObjectRuntime, splitPreparedDatasetTables } from '@cssearth/renderer';
+import { adoptPreparedDatasetTables } from '@cssearth/renderer';
+
 import { selectedObjectIds } from './fixtures/anchor-table.mts';
 import { projectRoot } from './fixtures/objects.mts';
 

@@ -1,9 +1,7 @@
+import { type SurfacePoint, type SurfaceTriangle, type SurfaceFrontFace, type PreparedSurfaceRange, type PreparedSurfaceHit } from '@cssearth/objects';
+
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-export type SurfacePoint = readonly [number, number, number];
-export type SurfaceTriangle = readonly [SurfacePoint, SurfacePoint, SurfacePoint];
-export type SurfaceFrontFace = 'clockwise' | 'counter-clockwise';
-export interface PreparedSurfaceRange { readonly datasetId: string; readonly start: number; readonly count: number; }
-export interface PreparedSurfaceHit { readonly target: number; readonly triangles: readonly SurfaceTriangle[]; readonly frontFace?: SurfaceFrontFace; readonly datasetRanges?: readonly PreparedSurfaceRange[]; }
+
 const sub = (a: SurfacePoint, b: SurfacePoint): SurfacePoint => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 /** Intersect source-prepared triangles. Runtime never creates or resamples a mesh. */
 export function rayHitsPreparedTriangles(origin: SurfacePoint, direction: SurfacePoint, triangles: readonly SurfaceTriangle[], frontFace?: SurfaceFrontFace,

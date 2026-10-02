@@ -1,10 +1,14 @@
+import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from '@cssearth/objects';
+
 import { orbitFixture } from '@cssearth/renderer/test/orbit-fixture.mts';
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { createObjectRuntime, parsePreparedObjectRuntime, preparedObjectCapabilities } from "@cssearth/renderer";
-import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeCapabilities } from "@cssearth/renderer/runtime/object-runtime-types.ts";
+import { createObjectRuntime } from '@cssearth/renderer';
+
+import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
+
 import type { PreparedImage } from "@cssearth/renderer/rendering/prepared-image-store.ts";
 import type { RuntimePolicy } from "@cssearth/renderer/navigation/runtime-policy.ts";
 import type { OrbitPublication } from "@cssearth/renderer/navigation/object-orbit.ts";
@@ -213,7 +217,6 @@ test('mount rejects an uncompiled motion document instead of discovering live CS
   const { motion, ...uncompiled } = moonDefinition;
   assert.throws(() => createObjectRuntime(uncompiled), /motion bindings must be prepared/);
 });
-
 
 test("hidden departure frames keep world publication without rescheduling detail or readouts", async t => {
   const h = harness(); t.after(h.restore); await h.complete();
