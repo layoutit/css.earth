@@ -13,7 +13,7 @@ export interface PlainStar { readonly id: string; readonly positionM: readonly [
 export interface WorldFrame { readonly referenceFrame: string; readonly epochJdTt: number; readonly originM: readonly number[] }
 
 /** The stars the map draws as plain dots, which nothing orbits and no click opens, as catalogue point banks
- * (cssearth-catalogue-points@1): one dot each at the star's prepared position, in the star's prepared color. A star takes
+ * (CATALOGUE_POINTS_SCHEMA): one dot each at the star's prepared position, in the star's prepared color. A star takes
  * the smallest unit that reaches it, so the bank near the Sun keeps 1e-4 pc. Stars keep the world's order within a bank,
  * so a rerun writes the same file. */
 export function plainStarDotBanks(stars: readonly PlainStar[], frame: WorldFrame) {
