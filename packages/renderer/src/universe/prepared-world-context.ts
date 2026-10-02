@@ -1,5 +1,6 @@
 import { writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
+import { isExtendedClassification } from '@cssearth/objects';
 import { createContextLocator } from './context-locator.js';
 import type { PreparedWorldContext, PreparedContextBody } from '../prepared-data/world-context.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
@@ -695,7 +696,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         paintMembershipChanged = false;
       }
       interactions.commit(paintedOrder, depthOrder.rank, captionBody,
-        captionBody ? bodies[captionBody.index].labelSize : undefined, pickingChanged, navigationInFlight);
+        captionBody ? bodies[captionBody.index].labelSize : undefined, pickingChanged, navigationInFlight,
+        isExtendedClassification(selectedEntry.body.classification));
       });
       // Publish first, then attach populated owners. A later view reads only requested caption sizes.
       for (const entry of attachMarkers) root.appendChild(entry.mover);

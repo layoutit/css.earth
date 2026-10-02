@@ -67,7 +67,10 @@ async function readDatasetVolumes(entries: readonly CatalogEntry[], projectRoot:
       const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', volumeId, 'object.json'), 'utf8'));
       if (!isRecord(descriptor) || !isRecord(descriptor.properties)) throw new TypeError(`src/objects/${volumeId}/object.json: the bank ${id} shows has no properties.`);
       // A bank of catalogue dots declares no frame: its object's own radius frames it.
-      if (isRecord(descriptor.properties.frame)) volumes[volumeId] = descriptor.properties.frame;
+      // A bank that names a host is that object's own extent (a galaxy's volume); another body may show it around itself.
+      const { frame, host } = descriptor.properties;
+      if (host !== undefined && typeof host !== 'string') throw new TypeError(`src/objects/${volumeId}/object.json: properties.host must be an object id.`);
+      if (isRecord(frame)) volumes[volumeId] = { frame, ...(host === undefined ? {} : { host }) };
     }
   }
   return volumes;
