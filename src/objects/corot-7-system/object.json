@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "corot-7-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "corot-7",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "CoRoT-7 system",
+      "systemName": "CoRoT-7 system",
+      "classification": "planetary-system",
+      "color": "#ffead9",
+      "distanceAu": 32910002.5,
+      "description": "CoRoT-7 b crosses CoRoT-7 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -935547914170563700,
+        4832696848906909000,
+        -91336042259124860
+      ],
+      "presentationToReference": [
+        -0.19002586052824905,
+        0.003525940631359321,
+        0.9817727537842771,
+        0.9816037890479086,
+        -0.018213769515171143,
+        0.1900585697274325,
+        -0.018551917887041684,
+        -0.9998278983618692,
+        -1.0541883302011733e-8
+      ],
+      "orbitUpReference": [
+        -0.003525940631359321,
+        0.018213769515171143,
+        0.9998278983618692
+      ],
+      "metersPerUnit": 1862680.6451612904,
+      "bodyRadiusM": 577431000
+    }
+  }
+}

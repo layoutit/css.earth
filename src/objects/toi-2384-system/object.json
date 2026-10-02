@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2384-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2384",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2384 system",
+      "systemName": "TOI-2384 system",
+      "classification": "planetary-system",
+      "color": "#ffc18e",
+      "distanceAu": 38757905.2,
+      "description": "TOI-2384 b crosses TOI-2384 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1978440613437232000,
+        1445679115077681000,
+        -5254878624291967000
+      ],
+      "presentationToReference": [
+        0.3412242182585369,
+        -0.7317650724174445,
+        0.5899880606111814,
+        0.24933815174324875,
+        -0.5347115088991371,
+        -0.8074119694035189,
+        -0.9063092843831577,
+        -0.42261505065567706,
+        -4.340488794296888e-7
+      ],
+      "orbitUpReference": [
+        0.7317650724174445,
+        0.5347115088991371,
+        0.42261505065567706
+      ],
+      "metersPerUnit": 1371875.4838709678,
+      "bodyRadiusM": 425281400
+    }
+  }
+}

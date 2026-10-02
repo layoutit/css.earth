@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-270-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-270",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-270 system",
+      "systemName": "TOI-270 system",
+      "classification": "planetary-system",
+      "color": "#ffc384",
+      "distanceAu": 4636273.3,
+      "description": "3 planets cross TOI-270 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        157224471199749380,
+        397438016628002100,
+        -546234397245362200
+      ],
+      "presentationToReference": [
+        0.22669056488477188,
+        -0.2897118782146522,
+        0.929880860870661,
+        0.573037058263358,
+        -0.7323298063590586,
+        -0.36786082228878436,
+        -0.787553120525276,
+        -0.6162467706523436,
+        -0.000003384950585934805
+      ],
+      "orbitUpReference": [
+        0.2897118782146522,
+        0.7323298063590586,
+        0.6162467706523436
+      ],
+      "metersPerUnit": 852793.5483870967,
+      "bodyRadiusM": 264366000
+    }
+  }
+}

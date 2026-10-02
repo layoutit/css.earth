@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-95338-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-95338",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 95338 system",
+      "systemName": "HD 95338 system",
+      "classification": "planetary-system",
+      "color": "#ffe5d5",
+      "distanceAu": 7624948.8,
+      "description": "HD 95338 b crosses HD 95338 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -605724291195296400,
+        163958959809457180,
+        -952553152814741500
+      ],
+      "presentationToReference": [
+        -0.5310271552800641,
+        0.8060749398531665,
+        0.26125342427588755,
+        0.1437397528027761,
+        -0.2181564472680416,
+        0.9652702460863398,
+        -0.8350742744327354,
+        -0.5501372154800113,
+        0.000018014996253338263
+      ],
+      "orbitUpReference": [
+        -0.8060749398531665,
+        0.2181564472680416,
+        0.5501372154800113
+      ],
+      "metersPerUnit": 1947960,
+      "bodyRadiusM": 603867600
+    }
+  }
+}

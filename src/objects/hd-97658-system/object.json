@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-97658-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-97658",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 97658 system",
+      "systemName": "HD 97658 system",
+      "classification": "planetary-system",
+      "color": "#ffe9d7",
+      "distanceAu": 4447627.6,
+      "description": "HD 97658 b crosses HD 97658 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -587732435140222000,
+        118109649763381460,
+        288649967255824000
+      ],
+      "presentationToReference": [
+        -0.883336860287251,
+        -0.4253231964411798,
+        0.1970181966898465,
+        0.17751378169672005,
+        0.08546945150442048,
+        0.9803998317866353,
+        0.43382582745335785,
+        -0.9009967543940384,
+        -0.0000024121012225119155
+      ],
+      "orbitUpReference": [
+        0.4253231964411798,
+        -0.08546945150442048,
+        0.9009967543940384
+      ],
+      "metersPerUnit": 1633772.9032258065,
+      "bodyRadiusM": 506469600
+    }
+  }
+}

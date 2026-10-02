@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-12-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-12",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HAT-P-12 system",
+      "systemName": "HAT-P-12 system",
+      "classification": "planetary-system",
+      "color": "#ffd1b6",
+      "distanceAu": 29278833.9,
+      "description": "HAT-P-12 b crosses HAT-P-12 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2768638128530940400,
+        -1559287908472889000,
+        3014649683035844000
+      ],
+      "presentationToReference": [
+        -0.6321003995753869,
+        -0.5996972517353679,
+        -0.4907262894095679,
+        -0.35599687073357705,
+        -0.33775511716126394,
+        0.8713137832372914,
+        0.6882697965801907,
+        -0.7254548139563398,
+        -0.000004799510949354536
+      ],
+      "orbitUpReference": [
+        0.5996972517353679,
+        0.33775511716126394,
+        0.7254548139563398
+      ],
+      "metersPerUnit": 1573179.677419355,
+      "bodyRadiusM": 487685700
+    }
+  }
+}

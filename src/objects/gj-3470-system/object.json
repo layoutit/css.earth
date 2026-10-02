@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-3470-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-3470",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 3470 system",
+      "systemName": "GJ 3470 system",
+      "classification": "planetary-system",
+      "color": "#ffc68b",
+      "distanceAu": 6063598.5,
+      "description": "GJ 3470 b crosses GJ 3470 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -434279572285729900,
+        759127097537949200,
+        240749450132154400
+      ],
+      "presentationToReference": [
+        -0.47875486459062294,
+        -0.13179425911497128,
+        0.868000030469556,
+        0.836870564467983,
+        0.23037298285322255,
+        0.49656414197800103,
+        0.26540805933101175,
+        -0.9641361740105204,
+        -0.000002549807953146127
+      ],
+      "orbitUpReference": [
+        0.13179425911497128,
+        -0.23037298285322255,
+        0.9641361740105204
+      ],
+      "metersPerUnit": 1227573.8709677418,
+      "bodyRadiusM": 380547900
+    }
+  }
+}

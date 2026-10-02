@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-411-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-411",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-411 system",
+      "systemName": "Kepler-411 system",
+      "classification": "planetary-system",
+      "color": "#ffd7bc",
+      "distanceAu": 31581114.7,
+      "description": "2 planets cross Kepler-411 as seen from Earth: c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        927609149601839700,
+        -2923173512939051500,
+        3593771156562593300
+      ],
+      "presentationToReference": [
+        0.19634191108244942,
+        0.23007624627391604,
+        -0.9531604140190654,
+        -0.6187320103587435,
+        -0.7250417051526834,
+        -0.3024652461799823,
+        0.760671120333827,
+        -0.6491374636313897,
+        5.356113022286017e-7
+      ],
+      "orbitUpReference": [
+        -0.23007624627391604,
+        0.7250417051526834,
+        0.6491374636313897
+      ],
+      "metersPerUnit": 1840238.7096774194,
+      "bodyRadiusM": 570474000
+    }
+  }
+}

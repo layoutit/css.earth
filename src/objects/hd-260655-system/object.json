@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-260655-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-260655",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 260655 system",
+      "systemName": "HD 260655 system",
+      "classification": "planetary-system",
+      "color": "#ffbd87",
+      "distanceAu": 2062037.7,
+      "description": "2 planets cross HD 260655 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -47470630066257520,
+        290233504012126100,
+        93106255728469330
+      ],
+      "presentationToReference": [
+        -0.15388822157718055,
+        -0.04872902089199808,
+        0.9868859598670557,
+        0.9408663345701429,
+        0.29784969094785535,
+        0.16141902637177327,
+        0.30180946925561625,
+        -0.9533682625959259,
+        -0.00001193603656783329
+      ],
+      "orbitUpReference": [
+        0.04872902089199808,
+        -0.29784969094785535,
+        0.9533682625959259
+      ],
+      "metersPerUnit": 985200.9677419355,
+      "bodyRadiusM": 305412300
+    }
+  }
+}

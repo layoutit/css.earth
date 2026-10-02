@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1052-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1052",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1052 system",
+      "systemName": "TOI-1052 system",
+      "classification": "planetary-system",
+      "color": "#fdf7ff",
+      "distanceAu": 26645832.7,
+      "description": "TOI-1052 b crosses TOI-1052 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        913021236647972600,
+        -378008769548348200,
+        -3861731705589904000
+      ],
+      "presentationToReference": [
+        0.22904792262305207,
+        -0.8951068095774568,
+        -0.3825190826483441,
+        -0.09483034996516967,
+        0.3705779989768287,
+        -0.9239475912625202,
+        -0.9687849368500462,
+        -0.24790269486715116,
+        0.0000031711729865903115
+      ],
+      "orbitUpReference": [
+        0.8951068095774568,
+        -0.3705779989768287,
+        0.24790269486715116
+      ],
+      "metersPerUnit": 2836660.64516129,
+      "bodyRadiusM": 879364800
+    }
+  }
+}

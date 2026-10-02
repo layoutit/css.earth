@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2128-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2128",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2128 system",
+      "systemName": "TOI-2128 system",
+      "classification": "planetary-system",
+      "color": "#fcf6ff",
+      "distanceAu": 7564176.1,
+      "description": "TOI-2128 b crosses TOI-2128 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -215929987926718750,
+        -933897886887523000,
+        601409000393812100
+      ],
+      "presentationToReference": [
+        -0.19082062822198323,
+        -0.11972101862047972,
+        -0.9742968569924889,
+        -0.8252998259814075,
+        -0.5178171132748633,
+        0.2252679170116019,
+        0.5314768904477656,
+        -0.8470727919725448,
+        -0.000004451025404514744
+      ],
+      "orbitUpReference": [
+        0.11972101862047972,
+        0.5178171132748633,
+        0.8470727919725448
+      ],
+      "metersPerUnit": 2507661.935483871,
+      "bodyRadiusM": 777375200
+    }
+  }
+}

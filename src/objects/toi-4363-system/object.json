@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-4363-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-4363",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-4363 system",
+      "systemName": "TOI-4363 system",
+      "classification": "planetary-system",
+      "color": "#ffbf91",
+      "distanceAu": 16021988.4,
+      "description": "TOI-4363 b crosses TOI-4363 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1865759771067749600,
+        1411602111624229400,
+        -520802788449566000
+      ],
+      "presentationToReference": [
+        0.7784207265474485,
+        -0.17327560254918775,
+        0.6033545707480453,
+        0.5889398830261625,
+        -0.1310974912944415,
+        -0.797473047793738,
+        -0.21728089345930052,
+        -0.9761091195852643,
+        9.13253605252259e-8
+      ],
+      "orbitUpReference": [
+        0.17327560254918775,
+        0.1310974912944415,
+        0.9761091195852643
+      ],
+      "metersPerUnit": 1551455.8064516129,
+      "bodyRadiusM": 480951300
+    }
+  }
+}

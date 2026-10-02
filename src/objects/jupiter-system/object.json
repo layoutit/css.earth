@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "jupiter-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "jupiter",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Jupiter system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#b48b67",
+      "distanceAu": 5.2,
+      "description": "Jupiter and its moons form a miniature solar system. Its four largest moons are Io, Europa, Ganymede and Callisto."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -497567147248.2968,
+        562511442005.565,
+        253219459105.8407
+      ],
+      "presentationToReference": [
+        0.8226442516224385,
+        0.5683180715506297,
+        0.016462224076079956,
+        0.5079295291100077,
+        -0.7216050113418623,
+        -0.47041875075765904,
+        0.25546825386071725,
+        -0.39534893088926354,
+        0.8822897449897467
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191376,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 282577.07509881427,
+      "bodyRadiusM": 71492000
+    }
+  }
+}

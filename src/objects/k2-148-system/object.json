@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-148-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-148",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-148 system",
+      "systemName": "K2-148 system",
+      "classification": "planetary-system",
+      "color": "#ffc095",
+      "distanceAu": 25672284.3,
+      "description": "3 planets cross K2-148 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3717873946376217600,
+        962721196009565600,
+        -12958929185478382
+      ],
+      "presentationToReference": [
+        0.9680654868115312,
+        -0.0032653400399630683,
+        0.2506761871394588,
+        0.2506747610922103,
+        -0.0008455472430772586,
+        -0.9680709938848614,
+        -0.003373039536799969,
+        -0.9999943112859608,
+        6.769089163675559e-9
+      ],
+      "orbitUpReference": [
+        0.0032653400399630683,
+        0.0008455472430772586,
+        0.9999943112859608
+      ],
+      "metersPerUnit": 1418330.322580645,
+      "bodyRadiusM": 439682400
+    }
+  }
+}

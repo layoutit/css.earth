@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-561-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-561",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-561 system",
+      "systemName": "TOI-561 system",
+      "classification": "planetary-system",
+      "color": "#ffede4",
+      "distanceAu": 17429729.5,
+      "description": "4 planets cross TOI-561 as seen from Earth: b, c, d, e."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2202662595294263000,
+        1366517101402226000,
+        282322894751318140
+      ],
+      "presentationToReference": [
+        -0.8447569374292158,
+        -0.09201039597035487,
+        0.5271809970954859,
+        0.5240815384055677,
+        0.057081913084739574,
+        0.8497530207660576,
+        0.10827861177382103,
+        -0.9941205873695428,
+        -6.077893837352466e-7
+      ],
+      "orbitUpReference": [
+        0.09201039597035487,
+        -0.057081913084739574,
+        0.9941205873695428
+      ],
+      "metersPerUnit": 1891855.1612903227,
+      "bodyRadiusM": 586475100
+    }
+  }
+}

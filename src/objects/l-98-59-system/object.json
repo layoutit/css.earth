@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "l-98-59-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "l-98-59",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "L 98-59 system",
+      "systemName": "L 98-59 system",
+      "classification": "planetary-system",
+      "color": "#ffc480",
+      "distanceAu": 2188092.5,
+      "description": "3 planets cross L 98-59 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -68564402011862504,
+        99636389029593250,
+        -304169434363922750
+      ],
+      "presentationToReference": [
+        -0.20947240622821686,
+        0.5267591076873386,
+        0.8237998261091101,
+        0.3044010240263221,
+        -0.7654973351291905,
+        0.5668808044746572,
+        -0.9292261982965653,
+        -0.36951139681821277,
+        -0.000004556955581713354
+      ],
+      "orbitUpReference": [
+        -0.5267591076873386,
+        0.7654973351291905,
+        0.36951139681821277
+      ],
+      "metersPerUnit": 708043.2258064516,
+      "bodyRadiusM": 219493400
+    }
+  }
+}

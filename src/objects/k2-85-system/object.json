@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-85-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-85",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-85 system",
+      "systemName": "K2-85 system",
+      "classification": "planetary-system",
+      "color": "#ffc49b",
+      "distanceAu": 19976692.4,
+      "description": "K2-85 b crosses K2-85 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1440164532686961700,
+        2441515791183011000,
+        946511262765824800
+      ],
+      "presentationToReference": [
+        0.4819062968941792,
+        0.1609171672356498,
+        0.8613199093847727,
+        0.8169773710222065,
+        0.2728002227686143,
+        -0.5080630016986456,
+        0.3167243221657959,
+        -0.9485176349157923,
+        0.0000015390941918811847
+      ],
+      "orbitUpReference": [
+        -0.1609171672356498,
+        -0.2728002227686143,
+        0.9485176349157923
+      ],
+      "metersPerUnit": 1593377.4193548388,
+      "bodyRadiusM": 493947000
+    }
+  }
+}

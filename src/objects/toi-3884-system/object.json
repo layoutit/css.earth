@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-3884-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-3884",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-3884 system",
+      "systemName": "TOI-3884 system",
+      "classification": "planetary-system",
+      "color": "#ffbd79",
+      "distanceAu": 8961857.9,
+      "description": "TOI-3884 b crosses TOI-3884 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1308367377601617200,
+        -35888825546076644,
+        290337517941954050
+      ],
+      "presentationToReference": [
+        -0.9759023712994446,
+        -0.2164779070086892,
+        -0.02742038419239458,
+        -0.026769232065068614,
+        -0.0059401757759610825,
+        0.9996239905716536,
+        0.21655939117657244,
+        -0.9762694454344497,
+        -0.0000020842960199943656
+      ],
+      "orbitUpReference": [
+        0.2164779070086892,
+        0.0059401757759610825,
+        0.9762694454344497
+      ],
+      "metersPerUnit": 677746.4516129033,
+      "bodyRadiusM": 210101400
+    }
+  }
+}

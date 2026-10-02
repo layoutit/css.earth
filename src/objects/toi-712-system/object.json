@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-712-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-712",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-712 system",
+      "systemName": "TOI-712 system",
+      "classification": "planetary-system",
+      "color": "#ffd0b3",
+      "distanceAu": 12102651.8,
+      "description": "3 planets cross TOI-712 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -37977794383943130,
+        740463007793378700,
+        -1651754982609258500
+      ],
+      "presentationToReference": [
+        -0.020975978854714545,
+        0.04673033514055865,
+        0.9986872804280315,
+        0.4089741557272926,
+        -0.9111072516646453,
+        0.05122222087380335,
+        -0.9123048548912992,
+        -0.4095117235705806,
+        1.3291566872737793e-7
+      ],
+      "orbitUpReference": [
+        -0.04673033514055865,
+        0.9111072516646453,
+        0.4095117235705806
+      ],
+      "metersPerUnit": 1512586.4516129033,
+      "bodyRadiusM": 468901800
+    }
+  }
+}

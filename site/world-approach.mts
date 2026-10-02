@@ -1,6 +1,6 @@
 import type { PositionM } from '@cssearth/engine';
 import { systemFadeDistances } from '@cssearth/renderer/universe/world-context/context-scale.ts';
-import { APPLICATION_WORLD_CONTEXT as context, loadWorldHolder, worldSystemHeld } from './world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT as context, loadWorldHolder, worldHolderRead } from './world-context-plan.mts';
 
 /** A system is read this many times farther out than its bodies are drawn, so its file is in before they fade in. */
 const APPROACH_LEAD = 2;
@@ -17,7 +17,7 @@ export function createWorldApproach() {
     if (!hosts) return;
     let pending = 0;
     for (const host of hosts) {
-      if (worldSystemHeld(host.id)) continue;
+      if (worldHolderRead(host.id)) continue;
       pending++;
       const dx = host.positionM[0] - eyeM[0], dy = host.positionM[1] - eyeM[1], dz = host.positionM[2] - eyeM[2];
       if (dx * dx + dy * dy + dz * dz > host.reachM * host.reachM) continue;

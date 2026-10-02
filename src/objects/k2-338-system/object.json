@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-338-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-338",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-338 system",
+      "systemName": "K2-338 system",
+      "classification": "planetary-system",
+      "color": "#ffceb2",
+      "distanceAu": 32753797.4,
+      "description": "K2-338 b crosses K2-338 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2644336700785909000,
+        3867627186432071700,
+        1434554712734041300
+      ],
+      "presentationToReference": [
+        -0.5396713315185505,
+        -0.16524327860706095,
+        0.8254995534899967,
+        0.7893274381076685,
+        0.2416851428260123,
+        0.564402770357796,
+        0.29277474171686957,
+        -0.9561814423070337,
+        -5.109302580062717e-7
+      ],
+      "orbitUpReference": [
+        0.16524327860706095,
+        -0.2416851428260123,
+        0.9561814423070337
+      ],
+      "metersPerUnit": 1413841.935483871,
+      "bodyRadiusM": 438291000
+    }
+  }
+}

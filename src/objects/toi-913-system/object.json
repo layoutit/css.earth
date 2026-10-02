@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-913-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-913",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-913 system",
+      "systemName": "TOI-913 system",
+      "classification": "planetary-system",
+      "color": "#ffe0cd",
+      "distanceAu": 13413970.1,
+      "description": "TOI-913 b crosses TOI-913 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -185919351893616640,
+        -261338973845159900,
+        -1980905418390066000
+      ],
+      "presentationToReference": [
+        -0.09264676833368722,
+        0.5722240693317323,
+        -0.8148473420185876,
+        -0.13022964582241353,
+        0.8043733151640036,
+        0.5796756068708078,
+        -0.987145792508023,
+        -0.15982235240886497,
+        0.0000020503036677195527
+      ],
+      "orbitUpReference": [
+        -0.5722240693317323,
+        -0.8043733151640036,
+        0.15982235240886497
+      ],
+      "metersPerUnit": 1643871.935483871,
+      "bodyRadiusM": 509600300
+    }
+  }
+}

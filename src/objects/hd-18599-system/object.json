@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-18599-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-18599",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 18599 system",
+      "systemName": "HD 18599 system",
+      "classification": "planetary-system",
+      "color": "#ffe4d4",
+      "distanceAu": 7968600.9,
+      "description": "HD 18599 b crosses HD 18599 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        475024330419668700,
+        462939086497267300,
+        -990508795851102200
+      ],
+      "presentationToReference": [
+        0.3984801287510461,
+        -0.5950576893696529,
+        0.6979397777119453,
+        0.3883422700126414,
+        -0.5799225936592847,
+        -0.7161564540551993,
+        -0.8309054508859468,
+        -0.5564136336265836,
+        0.0000015759087041764052
+      ],
+      "orbitUpReference": [
+        0.5950576893696529,
+        0.5799225936592847,
+        0.5564136336265836
+      ],
+      "metersPerUnit": 1721296.4516129033,
+      "bodyRadiusM": 533601900
+    }
+  }
+}

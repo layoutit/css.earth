@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-663-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-663",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-663 system",
+      "systemName": "TOI-663 system",
+      "classification": "planetary-system",
+      "color": "#ffcc95",
+      "distanceAu": 13189243.2,
+      "description": "3 planets cross TOI-663 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1834432066998166500,
+        665308108628794000,
+        -292026429785312600
+      ],
+      "presentationToReference": [
+        -0.9297295302200503,
+        0.13913343402719822,
+        0.34094704599483483,
+        0.3371924239691302,
+        -0.050459462854932545,
+        0.9400825026699595,
+        -0.14800091166822954,
+        -0.9889872244595432,
+        0.0000010871795075111071
+      ],
+      "orbitUpReference": [
+        -0.13913343402719822,
+        0.050459462854932545,
+        0.9889872244595432
+      ],
+      "metersPerUnit": 1149027.0967741935,
+      "bodyRadiusM": 356198400
+    }
+  }
+}

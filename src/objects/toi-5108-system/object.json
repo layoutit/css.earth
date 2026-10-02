@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5108-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5108",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5108 system",
+      "systemName": "TOI-5108 system",
+      "classification": "planetary-system",
+      "color": "#fff1eb",
+      "distanceAu": 27014103.3,
+      "description": "TOI-5108 b crosses TOI-5108 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3850386121198711300,
+        940779219289790600,
+        788150717893422000
+      ],
+      "presentationToReference": [
+        -0.9527700761438603,
+        -0.18945536281586614,
+        0.23735173794419856,
+        0.232793870582429,
+        0.04629105015924167,
+        0.971423775956923,
+        0.1950287051284356,
+        -0.9807975347519299,
+        6.801724960617604e-7
+      ],
+      "orbitUpReference": [
+        0.18945536281586614,
+        -0.04629105015924167,
+        0.9807975347519299
+      ],
+      "metersPerUnit": 2895009.6774193547,
+      "bodyRadiusM": 897453000
+    }
+  }
+}

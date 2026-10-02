@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-286-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-286",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-286 system",
+      "systemName": "TOI-286 system",
+      "classification": "planetary-system",
+      "color": "#ffe5d4",
+      "distanceAu": 12226128.6,
+      "description": "TOI-286 c crosses TOI-286 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -15399381771092196,
+        895886272244087000,
+        -1594491115927815200
+      ],
+      "presentationToReference": [
+        -0.00841955327681692,
+        0.014975807203529043,
+        0.9998524072688036,
+        0.4898224040652597,
+        -0.8716529405725663,
+        0.017180327905128273,
+        -0.8717815802128125,
+        -0.48989476052495295,
+        -0.0000034424847944240287
+      ],
+      "orbitUpReference": [
+        -0.014975807203529043,
+        0.8716529405725663,
+        0.48989476052495295
+      ],
+      "metersPerUnit": 1750470.9677419355,
+      "bodyRadiusM": 542646000
+    }
+  }
+}

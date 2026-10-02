@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-266-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-266",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-266 system",
+      "systemName": "K2-266 system",
+      "classification": "planetary-system",
+      "color": "#ffd9b2",
+      "distanceAu": 16026462.8,
+      "description": "4 planets cross K2-266 as seen from Earth: b, c, d, e."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2221642272932329200,
+        900495941001875100,
+        39209435947954850
+      ],
+      "presentationToReference": [
+        -0.9266399379801947,
+        -0.015159703330383797,
+        0.37564425822178604,
+        0.37559399777697655,
+        0.0061447187817428835,
+        0.926763935026068,
+        0.016357694641043558,
+        -0.9998662039623242,
+        4.825184816771812e-8
+      ],
+      "orbitUpReference": [
+        0.015159703330383797,
+        -0.0061447187817428835,
+        0.9998662039623242
+      ],
+      "metersPerUnit": 1577668.064516129,
+      "bodyRadiusM": 489077100
+    }
+  }
+}

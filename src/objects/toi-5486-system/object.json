@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5486-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5486",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5486 system",
+      "systemName": "TOI-5486 system",
+      "classification": "planetary-system",
+      "color": "#ffc48d",
+      "distanceAu": 18601387.1,
+      "description": "TOI-5486 b crosses TOI-5486 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2729715806253535000,
+        -508353664125223400,
+        183855273611424540
+      ],
+      "presentationToReference": [
+        -0.9809492679109179,
+        -0.06495829462132997,
+        -0.18308182254096875,
+        -0.18268171123097013,
+        -0.012097360319051589,
+        0.9830976788982037,
+        0.06607515544256193,
+        -0.9978146490371844,
+        -2.0432855816098265e-7
+      ],
+      "orbitUpReference": [
+        0.06495829462132997,
+        0.012097360319051589,
+        0.9978146490371844
+      ],
+      "metersPerUnit": 1241523.8709677418,
+      "bodyRadiusM": 384872400
+    }
+  }
+}

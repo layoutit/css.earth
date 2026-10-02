@@ -172,8 +172,8 @@ test('a view kept for the entry is the one Back returns to after the next push',
   // The hand-over the flight lands on keeps the view it left, then pushes its own entry.
   history.keep('/earth/?v=near');
   assert.equal(href, 'https://css.earth/earth/?v=near');
-  history.commit('/sun/?overview=system'); rest();
-  assert.equal(href, 'https://css.earth/sun/?overview=system');
+  history.commit('/solar-system/'); rest();
+  assert.equal(href, 'https://css.earth/solar-system/');
   href = 'https://css.earth/earth/?v=near'; state = earth;
   listeners.get('popstate')!({ state: earth } as PopStateEvent);
   assert.equal(calls.at(-1)?.[1].url, 'https://css.earth/earth/?v=near');

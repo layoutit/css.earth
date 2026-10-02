@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-206-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-206",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-206 system",
+      "systemName": "TOI-206 system",
+      "classification": "planetary-system",
+      "color": "#ffc783",
+      "distanceAu": 9855974.6,
+      "description": "TOI-206 b crosses TOI-206 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        190501060399299970,
+        653109912313175800,
+        -1308093609196526300
+      ],
+      "presentationToReference": [
+        0.12920151951700662,
+        -0.24843527923286707,
+        0.9599931663230651,
+        0.44295182896483587,
+        -0.8516927595250156,
+        -0.28002342864369567,
+        -0.8871869276376898,
+        -0.4614101812976731,
+        -0.000004862623323632385
+      ],
+      "orbitUpReference": [
+        0.24843527923286707,
+        0.8516927595250156,
+        0.4614101812976731
+      ],
+      "metersPerUnit": 785467.7419354839,
+      "bodyRadiusM": 243495000
+    }
+  }
+}

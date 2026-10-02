@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-78-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-78",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-78 system",
+      "systemName": "Kepler-78 system",
+      "classification": "planetary-system",
+      "color": "#ffe1cc",
+      "distanceAu": 25755863.8,
+      "description": "Kepler-78 b crosses Kepler-78 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1107452949591617000,
+        -2517817538961887000,
+        2698133483219454500
+      ],
+      "presentationToReference": [
+        0.2874242407050821,
+        0.2819393890671789,
+        -0.9153674053337998,
+        -0.6534650475511619,
+        -0.6409999363326063,
+        -0.4026195639192816,
+        0.700264762417805,
+        -0.7138832275057458,
+        0.0000013837090757919663
+      ],
+      "orbitUpReference": [
+        -0.2819393890671789,
+        0.6409999363326063,
+        0.7138832275057458
+      ],
+      "metersPerUnit": 1677534.8387096773,
+      "bodyRadiusM": 520035800
+    }
+  }
+}

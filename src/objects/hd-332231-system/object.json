@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-332231-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-332231",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 332231 system",
+      "systemName": "HD 332231 system",
+      "classification": "planetary-system",
+      "color": "#fbf5ff",
+      "distanceAu": 16624265.7,
+      "description": "HD 332231 b crosses HD 332231 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1237053182174583300,
+        -1657158233512601000,
+        1381473836866224400
+      ],
+      "presentationToReference": [
+        0.4974165888863698,
+        0.3322936670341978,
+        -0.8013474002887973,
+        -0.6663399824992178,
+        -0.4451389487268859,
+        -0.5981992511273021,
+        0.5554887621037805,
+        -0.8315240436543543,
+        -0.000001058819976035872
+      ],
+      "orbitUpReference": [
+        -0.3322936670341978,
+        0.4451389487268859,
+        0.8315240436543543
+      ],
+      "metersPerUnit": 2841149.0322580645,
+      "bodyRadiusM": 880756200
+    }
+  }
+}

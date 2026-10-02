@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-1252-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-1252",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 1252 system",
+      "systemName": "GJ 1252 system",
+      "classification": "planetary-system",
+      "color": "#ffc98b",
+      "distanceAu": 4204740.4,
+      "description": "GJ 1252 b crosses GJ 1252 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        208790335614783800,
+        -277769183117299800,
+        -524325560739006460
+      ],
+      "presentationToReference": [
+        0.3319613501775965,
+        -0.500799099799544,
+        -0.7993759588755679,
+        -0.4416326719669162,
+        0.6663051155548265,
+        -0.6008311543493994,
+        -0.8335239918800355,
+        -0.5524832618509231,
+        -0.000018301226720746597
+      ],
+      "orbitUpReference": [
+        0.500799099799544,
+        -0.6663051155548265,
+        0.5524832618509231
+      ],
+      "metersPerUnit": 877479.6774193548,
+      "bodyRadiusM": 272018700
+    }
+  }
+}

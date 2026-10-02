@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-143-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-143",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 143 system",
+      "systemName": "GJ 143 system",
+      "classification": "planetary-system",
+      "color": "#ffceb1",
+      "distanceAu": 3368980.8,
+      "description": "2 planets cross GJ 143 as seen from Earth: b, HD 21749 c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        139209281803082030,
+        176602985514255840,
+        -451043744018224500
+      ],
+      "presentationToReference": [
+        0.2762201707575134,
+        -0.5540457478605043,
+        0.7853252361565778,
+        0.350417056083757,
+        -0.7028112218941789,
+        -0.6190834137539175,
+        -0.8949359217688624,
+        -0.4461946835825207,
+        -0.000016444179094721713
+      ],
+      "orbitUpReference": [
+        0.5540457478605043,
+        0.7028112218941789,
+        0.4461946835825207
+      ],
+      "metersPerUnit": 1559714.5161290322,
+      "bodyRadiusM": 483511500
+    }
+  }
+}

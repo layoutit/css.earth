@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-138-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-138",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-138 system",
+      "systemName": "Kepler-138 system",
+      "classification": "planetary-system",
+      "color": "#ffbd89",
+      "distanceAu": 13841444.5,
+      "description": "Kepler-138's planets b, c, d, e are placed on the orbits their papers measured."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        524884071646371700,
+        -1412780017587449300,
+        1419909620572995300
+      ],
+      "presentationToReference": [
+        0.25348779043599357,
+        0.23881784435079367,
+        -0.9373953153923471,
+        -0.6822887269284155,
+        -0.6428001792364769,
+        -0.3482671714071759,
+        0.6857302918832446,
+        -0.7278557321291035,
+        -7.258633763597306e-7
+      ],
+      "orbitUpReference": [
+        -0.23881784435079367,
+        0.6428001792364769,
+        0.7278557321291035
+      ],
+      "metersPerUnit": 1200643.5483870967,
+      "bodyRadiusM": 372199500
+    }
+  }
+}

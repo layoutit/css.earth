@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-222-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-222",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-222 system",
+      "systemName": "K2-222 system",
+      "classification": "planetary-system",
+      "color": "#fef7ff",
+      "distanceAu": 20538875.1,
+      "description": "K2-222 b crosses K2-222 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2884824255774830600,
+        852481221141535700,
+        625910045752813800
+      ],
+      "presentationToReference": [
+        0.9388962592293455,
+        0.19535457857867383,
+        0.2833909014656093,
+        0.27744893921513203,
+        0.05772771571983431,
+        -0.9590044822450875,
+        0.20370542588144264,
+        -0.9790322259589409,
+        5.842542647025067e-7
+      ],
+      "orbitUpReference": [
+        -0.19535457857867383,
+        -0.05772771571983431,
+        0.9790322259589409
+      ],
+      "metersPerUnit": 2405775.4838709678,
+      "bodyRadiusM": 745790400
+    }
+  }
+}

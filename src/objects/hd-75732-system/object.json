@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-75732-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-75732",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "55 Cnc system",
+      "systemName": "55 Cnc system",
+      "classification": "planetary-system",
+      "color": "#ffe7d8",
+      "distanceAu": 2596279.2,
+      "description": "55 Cnc e crosses 55 Cnc as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -233795514987316800,
+        249445261418309540,
+        184308445528676350
+      ],
+      "presentationToReference": [
+        -0.6019446209762817,
+        -0.3245273943213333,
+        0.72961951975857,
+        0.642237441564533,
+        0.34623072135142763,
+        0.6838533148600752,
+        0.4745458270076384,
+        -0.880230798102109,
+        -0.000011923112307742198
+      ],
+      "orbitUpReference": [
+        0.3245273943213333,
+        -0.34623072135142763,
+        0.880230798102109
+      ],
+      "metersPerUnit": 2116274.5161290322,
+      "bodyRadiusM": 656045100
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-167-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-167",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-167 system",
+      "systemName": "K2-167 system",
+      "classification": "planetary-system",
+      "color": "#f9f4ff",
+      "distanceAu": 16604209,
+      "description": "K2-167 b crosses K2-167 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2167550986956411100,
+        -939044901304150100,
+        -768079695900537100
+      ],
+      "presentationToReference": [
+        0.8726227977611335,
+        -0.28372854038861245,
+        -0.3975268144370636,
+        -0.37804508126809505,
+        0.12292064402233141,
+        -0.9175905578209352,
+        -0.3092108816916563,
+        -0.95099349663501,
+        -0.0000011771800762154262
+      ],
+      "orbitUpReference": [
+        0.28372854038861245,
+        -0.12292064402233141,
+        0.95099349663501
+      ],
+      "metersPerUnit": 3364046.129032258,
+      "bodyRadiusM": 1042854300
+    }
+  }
+}

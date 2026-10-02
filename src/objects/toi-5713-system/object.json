@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5713-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5713",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5713 system",
+      "systemName": "TOI-5713 system",
+      "classification": "planetary-system",
+      "color": "#ffca81",
+      "distanceAu": 8461304.2,
+      "description": "TOI-5713 b crosses TOI-5713 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -675864061793740900,
+        -366342650047988000,
+        1005600803972892200
+      ],
+      "presentationToReference": [
+        -0.5339444383319798,
+        -0.698443562646364,
+        -0.47652904063886947,
+        -0.2894171055691513,
+        -0.3785731971443279,
+        0.8791587304963175,
+        0.7944438783062788,
+        -0.6073375702208585,
+        0.000004461187746888149
+      ],
+      "orbitUpReference": [
+        0.698443562646364,
+        0.3785731971443279,
+        0.6073375702208585
+      ],
+      "metersPerUnit": 671462.5806451613,
+      "bodyRadiusM": 208153400
+    }
+  }
+}

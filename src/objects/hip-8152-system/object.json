@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hip-8152-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hip-8152",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HIP 8152 system",
+      "systemName": "HIP 8152 system",
+      "classification": "planetary-system",
+      "color": "#fff0ed",
+      "distanceAu": 20975027.9,
+      "description": "2 planets cross HIP 8152 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2671265969645070300,
+        1314945203962966000,
+        -990539511148406000
+      ],
+      "presentationToReference": [
+        0.8513144405641682,
+        -0.28321705918675977,
+        0.4416467147760988,
+        0.4190641641193862,
+        -0.13941681041204496,
+        -0.8971890432486636,
+        -0.315672218666511,
+        -0.948868299797256,
+        0.0000014237887205452306
+      ],
+      "orbitUpReference": [
+        0.28321705918675977,
+        0.13941681041204496,
+        0.948868299797256
+      ],
+      "metersPerUnit": 2155099.0322580645,
+      "bodyRadiusM": 668080700
+    }
+  }
+}

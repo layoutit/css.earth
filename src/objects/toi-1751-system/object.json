@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1751-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1751",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1751 system",
+      "systemName": "TOI-1751 system",
+      "classification": "planetary-system",
+      "color": "#fbf6ff",
+      "distanceAu": 23414806,
+      "description": "TOI-1751 b crosses TOI-1751 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -696846946854203300,
+        -1396981749609418200,
+        3135680147375250000
+      ],
+      "presentationToReference": [
+        -0.19893611231957364,
+        -0.3995899236361049,
+        -0.8948476496832664,
+        -0.3988108429200246,
+        -0.8010631858431918,
+        0.4463716880091921,
+        0.895195137824482,
+        -0.4456743937172607,
+        3.9835368657002045e-7
+      ],
+      "orbitUpReference": [
+        0.3995899236361049,
+        0.8010631858431918,
+        0.4456743937172607
+      ],
+      "metersPerUnit": 2948197.0967741935,
+      "bodyRadiusM": 913941100
+    }
+  }
+}

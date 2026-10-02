@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-37-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-37",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-37 system",
+      "systemName": "Kepler-37 system",
+      "classification": "planetary-system",
+      "color": "#ffeee7",
+      "distanceAu": 13200657.9,
+      "description": "3 planets cross Kepler-37 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        342049973348107650,
+        -1365895301935556900,
+        1384604142771121700
+      ],
+      "presentationToReference": [
+        0.17320867802411374,
+        0.1703239304414992,
+        -0.970045623966264,
+        -0.6916677035257093,
+        -0.6801355015586005,
+        -0.24292280135693836,
+        0.7011380333119939,
+        -0.713025566328859,
+        -0.000002190721711646013
+      ],
+      "orbitUpReference": [
+        -0.1703239304414992,
+        0.6801355015586005,
+        0.713025566328859
+      ],
+      "metersPerUnit": 1770668.7096774194,
+      "bodyRadiusM": 548907300
+    }
+  }
+}

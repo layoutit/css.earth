@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-107-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-107",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-107 system",
+      "systemName": "WASP-107 system",
+      "classification": "planetary-system",
+      "color": "#ffc49e",
+      "distanceAu": 13283693.1,
+      "description": "WASP-107 b crosses WASP-107 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1935219214291301000,
+        -285289396699833820,
+        -350069799565036900
+      ],
+      "presentationToReference": [
+        -0.9738363050161236,
+        0.1742770833283178,
+        -0.1458435780523704,
+        -0.14356263615594403,
+        0.02569277641380829,
+        0.9893076623276027,
+        -0.17616078034710025,
+        -0.9843614069368651,
+        8.80944246051566e-7
+      ],
+      "orbitUpReference": [
+        -0.1742770833283178,
+        -0.02569277641380829,
+        0.9843614069368651
+      ],
+      "metersPerUnit": 1503609.677419355,
+      "bodyRadiusM": 466119000
+    }
+  }
+}

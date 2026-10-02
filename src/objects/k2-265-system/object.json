@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-265-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-265",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-265 system",
+      "systemName": "K2-265 system",
+      "classification": "planetary-system",
+      "color": "#ffebdf",
+      "distanceAu": 28828197.9,
+      "description": "K2-265 b crosses K2-265 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3971723679225876000,
+        -1288058746725541000,
+        -1079422883218335900
+      ],
+      "presentationToReference": [
+        0.9209504301307744,
+        -0.2380843748886363,
+        -0.3084900900771834,
+        -0.2986708927001275,
+        0.07721291038220218,
+        -0.9512275565415558,
+        -0.25029183585496834,
+        -0.9681704379416867,
+        -3.902421972245425e-7
+      ],
+      "orbitUpReference": [
+        0.2380843748886363,
+        -0.07721291038220218,
+        0.9681704379416867
+      ],
+      "metersPerUnit": 2064658.064516129,
+      "bodyRadiusM": 640044000
+    }
+  }
+}

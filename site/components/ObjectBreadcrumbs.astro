@@ -7,6 +7,7 @@ import preparedWorld from '../../src/objects/sun/prepared/world-context.json';
 import { SOLAR_SYSTEM_ID, systemById, systemOfObject } from '../object-systems.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from '../satellite-systems.mts';
 import { overviewsReachableFrom } from '../overview-context.mts';
+import { systemRoute } from '../navigation/system-address.mts';
 
 const { objectId, scope, systemId, satelliteSystem = false, includeObject: requestedIncludeObject,
   currentPage: requestedCurrentPage, ...attributes } = Astro.props;
@@ -23,10 +24,10 @@ const crumbs = galactic.slice(0, scope && scope !== 'system' ? galactic.findInde
 // An object's trail passes through its own planetary system; a star outside every system sits directly in the Milky Way.
 const system = scope === 'system' ? systemById(SCENE_OBJECTS, systemId ?? SOLAR_SYSTEM_ID)
   : !scope && object ? systemOfObject(SCENE_OBJECTS, object.id) : null;
-if (system) crumbs.push({ label: system.name, href: `${system.route}?overview=system` });
+if (system) crumbs.push({ label: system.name, href: systemRoute(system.id) });
 if (object && !scope && system) {
   const family = satelliteSystemByHost(object.id) ?? satelliteSystemOfMember(object.id);
-  if (family) crumbs.push({ label: family.name, href: `/${family.hostId}/?view=satellites` });
+  if (family) crumbs.push({ label: family.name, href: systemRoute(family.hostId) });
   else {
     // An orbit parent without a satellite-system selection keeps its own breadcrumb.
     const parentId = preparedWorld.bodies.find(body => body.id === object.id)?.orbit?.centerBodyId;

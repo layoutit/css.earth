@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lhs-1903-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "lhs-1903",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "LHS 1903 system",
+      "systemName": "LHS 1903 system",
+      "classification": "planetary-system",
+      "color": "#ffcb94",
+      "distanceAu": 7352871,
+      "description": "4 planets cross LHS 1903 as seen from Earth: b, c, d, e."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -224368197945600350,
+        696094584659101200,
+        821616519173327000
+      ],
+      "presentationToReference": [
+        -0.2039691767382528,
+        -0.229159315339314,
+        0.9517786418773729,
+        0.6328073264458263,
+        0.7109412568864714,
+        0.30678562034940615,
+        0.7469614866492148,
+        -0.6648673081524623,
+        -0.0000035907936350752727
+      ],
+      "orbitUpReference": [
+        0.229159315339314,
+        -0.7109412568864714,
+        0.6648673081524623
+      ],
+      "metersPerUnit": 1209620.322580645,
+      "bodyRadiusM": 374982300
+    }
+  }
+}

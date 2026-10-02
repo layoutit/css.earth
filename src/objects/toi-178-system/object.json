@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-178-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-178",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-178 system",
+      "systemName": "TOI-178 system",
+      "classification": "planetary-system",
+      "color": "#ffc8a5",
+      "distanceAu": 12972733.7,
+      "description": "6 planets cross TOI-178 as seen from Earth: b, c, d, e, f, g."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1659372001168121900,
+        212645566667511900,
+        -983644790093042600
+      ],
+      "presentationToReference": [
+        0.8550430730120882,
+        -0.5027377888390366,
+        0.1271064867238538,
+        0.10957224698462967,
+        -0.06442035139221519,
+        -0.9918890769724421,
+        -0.5068483658696991,
+        -0.862035227818295,
+        -0.000003933948259280496
+      ],
+      "orbitUpReference": [
+        0.5027377888390366,
+        0.06442035139221519,
+        0.862035227818295
+      ],
+      "metersPerUnit": 1485656.1290322582,
+      "bodyRadiusM": 460553400
+    }
+  }
+}

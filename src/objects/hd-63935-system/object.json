@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-63935-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-63935",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 63935 system",
+      "systemName": "HD 63935 system",
+      "classification": "planetary-system",
+      "color": "#ffefe8",
+      "distanceAu": 10076414.9,
+      "description": "2 planets cross HD 63935 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -696481058646735100,
+        1314070613642843400,
+        245800953897438140
+      ],
+      "presentationToReference": [
+        -0.4620374266974199,
+        -0.07636790546943936,
+        0.8835662733179879,
+        0.8717391482486152,
+        0.14408406142338145,
+        0.468306139885569,
+        0.16307137621791637,
+        -0.9866142743027561,
+        -6.638992876826067e-7
+      ],
+      "orbitUpReference": [
+        0.07636790546943936,
+        -0.14408406142338145,
+        0.9866142743027561
+      ],
+      "metersPerUnit": 2153977.0967741935,
+      "bodyRadiusM": 667732900
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-540-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-540",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-540 system",
+      "systemName": "TOI-540 system",
+      "classification": "planetary-system",
+      "color": "#ffc978",
+      "distanceAu": 2884322,
+      "description": "TOI-540 b crosses TOI-540 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        68417235079109090,
+        280858801545898600,
+        -320343058502701250
+      ],
+      "presentationToReference": [
+        0.1585607717662898,
+        -0.175710287307922,
+        0.9715885840164273,
+        0.6509059928769962,
+        -0.7213222338416198,
+        -0.23667619948475516,
+        -0.7424148908081589,
+        -0.6699403927961824,
+        0.0000025310712461599434
+      ],
+      "orbitUpReference": [
+        0.175710287307922,
+        0.7213222338416198,
+        0.6699403927961824
+      ],
+      "metersPerUnit": 425274.51612903224,
+      "bodyRadiusM": 131835100
+    }
+  }
+}

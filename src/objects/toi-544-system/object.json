@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-544-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-544",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-544 system",
+      "systemName": "TOI-544 system",
+      "classification": "planetary-system",
+      "color": "#ffc49e",
+      "distanceAu": 8439520.8,
+      "description": "TOI-544 b crosses TOI-544 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        169373597371972260,
+        1251098873889486300,
+        -7561178648000299
+      ],
+      "presentationToReference": [
+        0.134153658289383,
+        -0.0008029152910401393,
+        0.9909602168072192,
+        0.9909424692996559,
+        -0.005930753148777192,
+        -0.13415606100877073,
+        -0.005984856378912001,
+        -0.9999820905866883,
+        -1.06298220298338e-8
+      ],
+      "orbitUpReference": [
+        0.0008029152910401393,
+        0.005930753148777192,
+        0.9999820905866883
+      ],
+      "metersPerUnit": 1398132.5806451612,
+      "bodyRadiusM": 433421100
+    }
+  }
+}

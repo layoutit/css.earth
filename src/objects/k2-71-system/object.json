@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-71-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-71",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-71 system",
+      "systemName": "K2-71 system",
+      "classification": "planetary-system",
+      "color": "#ffd3a5",
+      "distanceAu": 31830065.2,
+      "description": "K2-71 b crosses K2-71 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4454466161261368000,
+        -1471001371162881000,
+        -817170784242644600
+      ],
+      "presentationToReference": [
+        0.9354761536190336,
+        -0.1629570614716519,
+        -0.3135751299555861,
+        -0.30892292248864167,
+        0.053814404099515586,
+        -0.9495633932879314,
+        -0.17161291901023984,
+        -0.985164456336067,
+        -9.200863312611533e-7
+      ],
+      "orbitUpReference": [
+        0.1629570614716519,
+        -0.053814404099515586,
+        0.985164456336067
+      ],
+      "metersPerUnit": 956026.4516129033,
+      "bodyRadiusM": 296368200
+    }
+  }
+}

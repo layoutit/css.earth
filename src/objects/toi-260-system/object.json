@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-260-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-260",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-260 system",
+      "systemName": "TOI-260 system",
+      "classification": "planetary-system",
+      "color": "#ffd4a6",
+      "distanceAu": 4168984.1,
+      "description": "TOI-260 b crosses TOI-260 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        612128244684817200,
+        51110324182716680,
+        -107946511266732800
+      ],
+      "presentationToReference": [
+        0.9814946917523616,
+        -0.1724668888219792,
+        0.08320662426756568,
+        0.08195098383031169,
+        -0.014400644824229933,
+        -0.9965323164242545,
+        -0.17306705726735166,
+        -0.9849100434500165,
+        3.2523567861991854e-7
+      ],
+      "orbitUpReference": [
+        0.1724668888219792,
+        0.014400644824229933,
+        0.9849100434500165
+      ],
+      "metersPerUnit": 1362225.4838709678,
+      "bodyRadiusM": 422289900
+    }
+  }
+}

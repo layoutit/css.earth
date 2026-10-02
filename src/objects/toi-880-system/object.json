@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-880-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-880",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-880 system",
+      "systemName": "TOI-880 system",
+      "classification": "planetary-system",
+      "color": "#ffdeca",
+      "distanceAu": 12492455.9,
+      "description": "2 planets cross TOI-880 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -131691190293643630,
+        1808644555818521900,
+        -451711416544558200
+      ],
+      "presentationToReference": [
+        -0.07046660620237578,
+        0.01755274075907828,
+        0.9973596937425153,
+        0.9677871647353476,
+        -0.24106920681762928,
+        0.07261984093783172,
+        -0.24170738752432908,
+        -0.9703491839622289,
+        -1.1651774022179376e-8
+      ],
+      "orbitUpReference": [
+        -0.01755274075907828,
+        0.24106920681762928,
+        0.9703491839622289
+      ],
+      "metersPerUnit": 1862680.6451612904,
+      "bodyRadiusM": 577431000
+    }
+  }
+}

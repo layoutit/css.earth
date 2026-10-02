@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-35843-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-35843",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 35843 system",
+      "systemName": "HD 35843 system",
+      "classification": "planetary-system",
+      "color": "#fff4f4",
+      "distanceAu": 14297268.3,
+      "description": "HD 35843 c crosses HD 35843 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        229739870464934900,
+        1509939456085932300,
+        -1497311866377580500
+      ],
+      "presentationToReference": [
+        0.10741385904224401,
+        -0.10530023183049654,
+        0.9886223364167416,
+        0.7059655060722321,
+        -0.6920887430819883,
+        -0.15041900124442834,
+        -0.7000535458961912,
+        -0.7140903534397013,
+        0.0000015912403926767532
+      ],
+      "orbitUpReference": [
+        0.10530023183049654,
+        0.6920887430819883,
+        0.7140903534397013
+      ],
+      "metersPerUnit": 2013041.6129032257,
+      "bodyRadiusM": 624042900
+    }
+  }
+}

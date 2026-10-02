@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kelt-20-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kelt-20",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "KELT-20 system",
+      "systemName": "KELT-20 system",
+      "classification": "planetary-system",
+      "color": "#b8ccff",
+      "distanceAu": 28254954.2,
+      "description": "KELT-20 b crosses KELT-20 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1508290170364708000,
+        -3285082255196882400,
+        2190848740201243000
+      ],
+      "presentationToReference": [
+        0.3568328229120076,
+        0.21626900868454862,
+        -0.9087893333304757,
+        -0.7771881018998389,
+        -0.47103790361348113,
+        -0.41725525475989206,
+        0.518313602713621,
+        -0.8551906274287736,
+        8.448564848507384e-8
+      ],
+      "orbitUpReference": [
+        -0.21626900868454862,
+        0.47103790361348113,
+        0.8551906274287736
+      ],
+      "metersPerUnit": 3512162.9032258065,
+      "bodyRadiusM": 1088770500
+    }
+  }
+}

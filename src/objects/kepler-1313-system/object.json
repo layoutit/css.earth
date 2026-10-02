@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-1313-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-1313",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-1313 system",
+      "systemName": "Kepler-1313 system",
+      "classification": "planetary-system",
+      "color": "#ffe8d9",
+      "distanceAu": 36285735.3,
+      "description": "Kepler-1313 b crosses Kepler-1313 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1530845594440059000,
+        -3716210086081788000,
+        3648615613207556600
+      ],
+      "presentationToReference": [
+        0.282013648399238,
+        0.2560128916773373,
+        -0.9246219234971443,
+        -0.6846033123134043,
+        -0.6214853225789643,
+        -0.38088620162515235,
+        0.6721507322662578,
+        -0.740414338808973,
+        6.96098331101329e-8
+      ],
+      "orbitUpReference": [
+        -0.2560128916773373,
+        0.6214853225789643,
+        0.740414338808973
+      ],
+      "metersPerUnit": 1907564.5161290322,
+      "bodyRadiusM": 591345000
+    }
+  }
+}

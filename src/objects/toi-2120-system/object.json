@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2120-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2120",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2120 system",
+      "systemName": "TOI-2120 system",
+      "classification": "planetary-system",
+      "color": "#ffcb7b",
+      "distanceAu": 6638314.2,
+      "description": "TOI-2120 b crosses TOI-2120 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        377445882959422140,
+        164193393442969250,
+        903757923866491400
+      ],
+      "presentationToReference": [
+        0.38006760065257233,
+        0.8345347833281598,
+        0.39887380755023044,
+        0.16533387186281612,
+        0.3629945252646075,
+        -0.917005826286165,
+        0.9100622669625672,
+        -0.4144715551679556,
+        0.000014408664502051074
+      ],
+      "orbitUpReference": [
+        -0.8345347833281598,
+        -0.3629945252646075,
+        0.4144715551679556
+      ],
+      "metersPerUnit": 549827.4193548387,
+      "bodyRadiusM": 170446500
+    }
+  }
+}

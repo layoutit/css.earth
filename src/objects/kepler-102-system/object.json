@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-102-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-102",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-102 system",
+      "systemName": "Kepler-102 system",
+      "classification": "planetary-system",
+      "color": "#ffd7bd",
+      "distanceAu": 22294652.3,
+      "description": "4 planets cross Kepler-102 as seen from Earth: b, c, e, f."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        451034649485367550,
+        -2220419807075319800,
+        2447463908403799000
+      ],
+      "presentationToReference": [
+        0.1352330178875854,
+        0.14608061177417092,
+        -0.9799859620100179,
+        -0.6657450194622785,
+        -0.7191356303231669,
+        -0.19906660759874353,
+        0.7338225943197625,
+        -0.6793411514573406,
+        -0.0000015581695641235045
+      ],
+      "orbitUpReference": [
+        -0.14608061177417092,
+        0.7191356303231669,
+        0.6793411514573406
+      ],
+      "metersPerUnit": 1624796.1290322582,
+      "bodyRadiusM": 503686800
+    }
+  }
+}

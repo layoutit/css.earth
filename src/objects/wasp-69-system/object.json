@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-69-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-69",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-69 system",
+      "systemName": "WASP-69 system",
+      "classification": "planetary-system",
+      "color": "#ffd7be",
+      "distanceAu": 10372427.4,
+      "description": "WASP-69 b crosses WASP-69 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1093374319741153900,
+        -1092379734952111200,
+        -137805764729947260
+      ],
+      "presentationToReference": [
+        0.70463342775762,
+        -0.06282315710866003,
+        -0.7067849626424204,
+        -0.7039924599981989,
+        0.06276623043608712,
+        -0.7074284533311678,
+        -0.08880511670073571,
+        -0.9960490205043849,
+        -1.5518182580788792e-7
+      ],
+      "orbitUpReference": [
+        0.06282315710866003,
+        -0.06276623043608712,
+        0.9960490205043849
+      ],
+      "metersPerUnit": 1797599.0322580645,
+      "bodyRadiusM": 557255700
+    }
+  }
+}

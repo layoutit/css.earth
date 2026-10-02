@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "v1298-tau-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "v1298-tau",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "V1298 Tau system",
+      "systemName": "V1298 Tau system",
+      "classification": "planetary-system",
+      "color": "#ffe6cf",
+      "distanceAu": 22280367.7,
+      "description": "2 planets cross V1298 Tau as seen from Earth: c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1501078031591824000,
+        2745376809953388500,
+        1148562983001771300
+      ],
+      "presentationToReference": [
+        0.4503553969727116,
+        0.16531524064152092,
+        0.8774114699667355,
+        0.8236715460923519,
+        0.302350908361512,
+        -0.479738587535757,
+        0.34459425499474905,
+        -0.938751724059458,
+        9.649162209494348e-8
+      ],
+      "orbitUpReference": [
+        -0.16531524064152092,
+        -0.302350908361512,
+        0.938751724059458
+      ],
+      "metersPerUnit": 2962335.4838709678,
+      "bodyRadiusM": 918324000
+    }
+  }
+}

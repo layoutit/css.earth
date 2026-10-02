@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-63433-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-63433",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 63433 system",
+      "systemName": "HD 63433 system",
+      "classification": "planetary-system",
+      "color": "#ffeee3",
+      "distanceAu": 4615953.6,
+      "description": "3 planets cross HD 63433 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -282982081692405150,
+        544082569569559300,
+        317389993936707000
+      ],
+      "presentationToReference": [
+        -0.40980000709538617,
+        -0.2120859638268515,
+        0.8871772642106295,
+        0.7879122223453591,
+        0.4077717842263165,
+        0.46142876142226336,
+        0.45962841955586164,
+        -0.8881113195633314,
+        -2.4301782922775776e-7
+      ],
+      "orbitUpReference": [
+        0.2120859638268515,
+        -0.4077717842263165,
+        0.8881113195633314
+      ],
+      "metersPerUnit": 2096076.7741935484,
+      "bodyRadiusM": 649783800
+    }
+  }
+}

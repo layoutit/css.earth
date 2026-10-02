@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1756-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1756",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1756 system",
+      "systemName": "TOI-1756 system",
+      "classification": "planetary-system",
+      "color": "#ffc088",
+      "distanceAu": 17929047.1,
+      "description": "TOI-1756 b crosses TOI-1756 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        340211966855656000,
+        -462658378323917060,
+        2619945995877007400
+      ],
+      "presentationToReference": [
+        0.12684469211733349,
+        0.5786787163076228,
+        -0.8056310367495908,
+        -0.1724976346124311,
+        -0.786947224042207,
+        -0.5924176167412484,
+        0.9768085739461827,
+        -0.21411447841009312,
+        -6.314173990299194e-7
+      ],
+      "orbitUpReference": [
+        -0.5786787163076228,
+        0.786947224042207,
+        0.21411447841009312
+      ],
+      "metersPerUnit": 1262599.0322580645,
+      "bodyRadiusM": 391405700
+    }
+  }
+}

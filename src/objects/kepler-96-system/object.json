@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-96-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-96",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-96 system",
+      "systemName": "Kepler-96 system",
+      "classification": "planetary-system",
+      "color": "#fff2ee",
+      "distanceAu": 25398400.7,
+      "description": "Kepler-96 b crosses Kepler-96 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1314315846246622500,
+        -2571722277066754600,
+        2468880977341464000
+      ],
+      "presentationToReference": [
+        0.34591406494509275,
+        0.2957005045939904,
+        -0.8904519477523882,
+        -0.6768501721358922,
+        -0.5786004802425067,
+        -0.45507727777021983,
+        0.6497825052683208,
+        -0.760120185132588,
+        0.0000011066647557731362
+      ],
+      "orbitUpReference": [
+        -0.2957005045939904,
+        0.5786004802425067,
+        0.760120185132588
+      ],
+      "metersPerUnit": 2289077.419354839,
+      "bodyRadiusM": 709614000
+    }
+  }
+}

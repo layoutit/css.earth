@@ -41,18 +41,18 @@ test('every prepared satellite family derives from orbit parents and has a prepa
 });
 
 test('system URL and body URL keep distinct selection identities', () => {
-  const system = selectionTargetFromUrl(new URL('https://css.earth/earth/?view=satellites'), 'earth', SCENE_OBJECTS);
+  const system = selectionTargetFromUrl(new URL('https://css.earth/earth-system/'), 'earth', SCENE_OBJECTS);
   assert.deepEqual(system, { objectId: 'earth', view: 'moons' });
   assert.deepEqual(selectionTargetFromUrl(new URL('https://css.earth/earth/'), 'earth', SCENE_OBJECTS),
     { objectId: 'earth', view: 'body' });
-  assert.deepEqual(selectionTargetFromUrl(new URL('https://css.earth/sun/?overview=system'), 'sun', SCENE_OBJECTS),
+  assert.deepEqual(selectionTargetFromUrl(new URL('https://css.earth/solar-system/'), 'sun', SCENE_OBJECTS),
     { objectId: 'sun', view: 'system' });
-  assert.deepEqual(selectionTargetFromUrl(new URL('https://css.earth/mercury/?view=satellites'), 'mercury', SCENE_OBJECTS),
+  assert.deepEqual(selectionTargetFromUrl(new URL('https://css.earth/mercury-system/'), 'mercury', SCENE_OBJECTS),
     { objectId: 'mercury', view: 'body' });
   const selection = createSceneSelection({ initial: system, objectId: 'earth', onChange() {} });
-  assert.equal(new URL(selection.url('https://css.earth/earth/')).searchParams.get('view'), 'satellites');
+  assert.equal(new URL(selection.url('https://css.earth/earth/')).pathname, '/earth-system/');
   selection.commit({ objectId: 'earth', view: 'body' }, 'earth');
-  assert.equal(new URL(selection.url('https://css.earth/earth/?view=satellites')).searchParams.has('view'), false);
+  assert.equal(new URL(selection.url('https://css.earth/earth-system/')).pathname, '/earth/');
 });
 
 test('camera crosses the system and body cards at the selected body, including a moon', () => {

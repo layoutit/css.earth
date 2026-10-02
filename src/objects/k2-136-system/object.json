@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-136-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-136",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-136 system",
+      "systemName": "K2-136 system",
+      "classification": "planetary-system",
+      "color": "#ffc7a2",
+      "distanceAu": 12146308.6,
+      "description": "3 planets cross K2-136 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        642981773367742600,
+        1545663558196007400,
+        706549772718116000
+      ],
+      "presentationToReference": [
+        0.35385765976709643,
+        0.1493501024348098,
+        0.9232980577943756,
+        0.8506382484706448,
+        0.35901792959186907,
+        -0.3840842309576918,
+        0.3888435763426569,
+        -0.9213037898186893,
+        0.000001665164251059626
+      ],
+      "orbitUpReference": [
+        -0.1493501024348098,
+        -0.35901792959186907,
+        0.9213037898186893
+      ],
+      "metersPerUnit": 1519319.0322580645,
+      "bodyRadiusM": 470988900
+    }
+  }
+}

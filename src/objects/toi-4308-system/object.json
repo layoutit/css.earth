@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-4308-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-4308",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-4308 system",
+      "systemName": "TOI-4308 system",
+      "classification": "planetary-system",
+      "color": "#ffe8d9",
+      "distanceAu": 22374717.9,
+      "description": "TOI-4308 b crosses TOI-4308 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2051350575754502700,
+        -1294167629399108900,
+        -2306709077225961000
+      ],
+      "presentationToReference": [
+        0.612853893163444,
+        -0.5828476215861274,
+        -0.5335716968185295,
+        -0.3866407231688117,
+        0.36770600598834474,
+        -0.8457548370228798,
+        -0.6891437127493136,
+        -0.7246246912516119,
+        0.0000025685977444294776
+      ],
+      "orbitUpReference": [
+        0.5828476215861274,
+        -0.36770600598834474,
+        0.7246246912516119
+      ],
+      "metersPerUnit": 1780543.2258064516,
+      "bodyRadiusM": 551968400
+    }
+  }
+}

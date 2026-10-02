@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngts-11-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "ngts-11",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "NGTS-11 system",
+      "systemName": "NGTS-11 system",
+      "classification": "planetary-system",
+      "color": "#ffe1cc",
+      "distanceAu": 38960131.7,
+      "description": "NGTS-11 b crosses NGTS-11 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5175740227687971000,
+        2252784059929649400,
+        -1451334804055675100
+      ],
+      "presentationToReference": [
+        0.8880278022060499,
+        -0.22832320138932968,
+        0.3990928942194038,
+        0.3865215002257554,
+        -0.09937941476821086,
+        -0.9169104982404549,
+        -0.24901355861142185,
+        -0.9684999987752481,
+        -1.4305621322084657e-7
+      ],
+      "orbitUpReference": [
+        0.22832320138932968,
+        0.09937941476821086,
+        0.9684999987752481
+      ],
+      "metersPerUnit": 1867169.0322580645,
+      "bodyRadiusM": 578822400
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-29391-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-29391",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "51 Eridani system",
+      "systemName": "51 Eridani system",
+      "classification": "planetary-system",
+      "color": "#d5deff",
+      "distanceAu": 6168412.7,
+      "description": "Young F0 star 30 parsecs away in Eridanus, orbited by a giant planet photographed directly."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        324357057753425200,
+        862978174315146900,
+        -39833181668760920
+      ],
+      "presentationToReference": [
+        0.35149939529591057,
+        -0.015186056845021641,
+        0.9360649329956278,
+        0.935192557627765,
+        -0.040403452101997264,
+        -0.35182728890164466,
+        -0.04316312389353835,
+        -0.9990680380913711,
+        -9.835945708918631e-8
+      ],
+      "orbitUpReference": [
+        0.015186056845021641,
+        0.040403452101997264,
+        0.9990680380913711
+      ],
+      "metersPerUnit": 3247076.580645161,
+      "bodyRadiusM": 1006593740
+    }
+  }
+}

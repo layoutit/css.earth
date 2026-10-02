@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-68-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-68",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-68 system",
+      "systemName": "Kepler-68 system",
+      "classification": "planetary-system",
+      "color": "#fff4f4",
+      "distanceAu": 29764854.4,
+      "description": "2 planets cross Kepler-68 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1047580564463126100,
+        -2724452447243919000,
+        3362587558649960400
+      ],
+      "presentationToReference": [
+        0.2352653601881295,
+        0.2710261718966175,
+        -0.93337828582125,
+        -0.6118567946565987,
+        -0.7048590549005164,
+        -0.35889410075578526,
+        0.7551698306527498,
+        -0.6555291960483651,
+        -2.853716781504325e-7
+      ],
+      "orbitUpReference": [
+        -0.2710261718966175,
+        0.7048590549005164,
+        0.6555291960483651
+      ],
+      "metersPerUnit": 2819604.8387096776,
+      "bodyRadiusM": 874077500
+    }
+  }
+}

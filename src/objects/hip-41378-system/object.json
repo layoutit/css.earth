@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hip-41378-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hip-41378",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HIP 41378 system",
+      "systemName": "HIP 41378 system",
+      "classification": "planetary-system",
+      "color": "#f4f1ff",
+      "distanceAu": 21859412.4,
+      "description": "5 planets cross HIP 41378 as seen from Earth: b, c, d, e, f."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1920337401959347500,
+        2584259001213230600,
+        572367527274669250
+      ],
+      "presentationToReference": [
+        -0.5872373174948489,
+        -0.10439569845537165,
+        0.8026542662226803,
+        0.7902638994772319,
+        0.14048786520087003,
+        0.5964445732122489,
+        0.17502943216640393,
+        -0.9845632015646925,
+        -4.346488543878735e-7
+      ],
+      "orbitUpReference": [
+        0.10439569845537165,
+        -0.14048786520087003,
+        0.9845632015646925
+      ],
+      "metersPerUnit": 2917451.6129032257,
+      "bodyRadiusM": 904410000
+    }
+  }
+}

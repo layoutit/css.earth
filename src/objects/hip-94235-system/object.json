@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hip-94235-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hip-94235",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HIP 94235 system",
+      "systemName": "HIP 94235 system",
+      "classification": "planetary-system",
+      "color": "#fff6fc",
+      "distanceAu": 12075929.1,
+      "description": "HIP 94235 b crosses HIP 94235 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        272967672913294460,
+        -853201202250427600,
+        -1568788969796740000
+      ],
+      "presentationToReference": [
+        0.15110165441800827,
+        -0.2646148152472786,
+        -0.9524428012136947,
+        -0.47229077289803595,
+        0.8270965574946122,
+        -0.304717427161522,
+        -0.8683949077853444,
+        -0.49587325410049116,
+        -5.225874669911853e-7
+      ],
+      "orbitUpReference": [
+        0.2646148152472786,
+        -0.8270965574946122,
+        0.49587325410049116
+      ],
+      "metersPerUnit": 2423729.0322580645,
+      "bodyRadiusM": 751356000
+    }
+  }
+}

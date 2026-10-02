@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-132-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-132",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-132 system",
+      "systemName": "WASP-132 system",
+      "classification": "planetary-system",
+      "color": "#ffd4b8",
+      "distanceAu": 25488750.9,
+      "description": "2 planets cross WASP-132 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2092270484135228400,
+        -1611803628570309400,
+        -2750262100251436500
+      ],
+      "presentationToReference": [
+        -0.5487134125107913,
+        0.5713849475386313,
+        -0.6102727526746033,
+        -0.42270742527299743,
+        0.44017185879644777,
+        0.7921913704041172,
+        -0.721271116536518,
+        -0.6926528542133898,
+        -4.572823844892404e-7
+      ],
+      "orbitUpReference": [
+        -0.5713849475386313,
+        -0.44017185879644777,
+        0.6926528542133898
+      ],
+      "metersPerUnit": 1701098.7096774194,
+      "bodyRadiusM": 527340600
+    }
+  }
+}

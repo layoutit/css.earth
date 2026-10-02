@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "eris-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "eris",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Eris–Dysnomia system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#fffaea",
+      "distanceAu": 67.78,
+      "description": "Eris and its only known moon, Dysnomia, form a distant pair beyond Neptune. Dysnomia's orbit made it possible to measure Eris's mass."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        12730277426870.79,
+        6472947119764.495,
+        -9541411215.144325
+      ],
+      "presentationToReference": [
+        0.9063407351119009,
+        2.4356826039297786e-17,
+        0.42254759717316914,
+        0.3876798407768172,
+        0.3977771559319137,
+        -0.831551366587765,
+        0.1680797814494072,
+        -0.9174820620691818,
+        -0.3605216399180519
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 5056.521739130435,
+      "bodyRadiusM": 1163000
+    }
+  }
+}

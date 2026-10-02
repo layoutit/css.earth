@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5726-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5726",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5726 system",
+      "systemName": "TOI-5726 system",
+      "classification": "planetary-system",
+      "color": "#fff4f5",
+      "distanceAu": 22417937.8,
+      "description": "TOI-5726 b crosses TOI-5726 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -674283142213782100,
+        1022811051750496500,
+        3121913013690746400
+      ],
+      "presentationToReference": [
+        -0.20105662012742226,
+        -0.5123717723980933,
+        0.8348960428416066,
+        0.3049800895768616,
+        0.7771991683724903,
+        0.5504076649564383,
+        0.9308938610092059,
+        -0.36528977474156865,
+        -0.0000021510838095585476
+      ],
+      "orbitUpReference": [
+        0.5123717723980933,
+        -0.7771991683724903,
+        0.36528977474156865
+      ],
+      "metersPerUnit": 2482078.064516129,
+      "bodyRadiusM": 769444200
+    }
+  }
+}

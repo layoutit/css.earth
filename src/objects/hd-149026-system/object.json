@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-149026-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-149026",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 149026 system",
+      "systemName": "HD 149026 system",
+      "classification": "planetary-system",
+      "color": "#fff7fe",
+      "distanceAu": 15720989.9,
+      "description": "HD 149026 b crosses HD 149026 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -702188017066597900,
+        -1705551277572621800,
+        1459148816514247700
+      ],
+      "presentationToReference": [
+        -0.2985719804710096,
+        -0.23619752165958988,
+        -0.924697519862299,
+        -0.7252043760061211,
+        -0.5737108298326962,
+        0.3807026356019242,
+        0.620430000482884,
+        -0.7842618277683459,
+        -0.0000025023714792872314
+      ],
+      "orbitUpReference": [
+        0.23619752165958988,
+        0.5737108298326962,
+        0.7842618277683459
+      ],
+      "metersPerUnit": 3164312.9032258065,
+      "bodyRadiusM": 980937000
+    }
+  }
+}

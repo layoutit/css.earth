@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-88986-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-88986",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 88986 system",
+      "systemName": "HD 88986 system",
+      "classification": "planetary-system",
+      "color": "#fff5f7",
+      "distanceAu": 6878673.5,
+      "description": "HD 88986 b crosses HD 88986 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -812208036601348400,
+        394098831341852700,
+        493879588752563650
+      ],
+      "presentationToReference": [
+        -0.7892889096814205,
+        -0.4318026692404055,
+        0.43654263467704413,
+        0.38297803381320183,
+        0.2095168191578523,
+        0.8996835710996116,
+        0.47994879171687516,
+        -0.8772965047957485,
+        -0.0000016355079621947694
+      ],
+      "orbitUpReference": [
+        0.4318026692404055,
+        -0.2095168191578523,
+        0.8772965047957485
+      ],
+      "metersPerUnit": 3462790.6451612907,
+      "bodyRadiusM": 1073465100.0000001
+    }
+  }
+}

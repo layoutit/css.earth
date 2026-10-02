@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-22-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-22",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-22 system",
+      "systemName": "Kepler-22 system",
+      "classification": "planetary-system",
+      "color": "#fff1eb",
+      "distanceAu": 40742432.3,
+      "description": "Kepler-22 b crosses Kepler-22 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1345390937360490000,
+        -3859743973492382700,
+        4521182873301621000
+      ],
+      "presentationToReference": [
+        0.22073666342789408,
+        0.2441602886676992,
+        -0.9442780728452963,
+        -0.6332635242051822,
+        -0.7004558428409084,
+        -0.3291487826823388,
+        0.7417901551853824,
+        -0.6706320643003423,
+        -0.0000015192453863237395
+      ],
+      "orbitUpReference": [
+        -0.2441602886676992,
+        0.7004558428409084,
+        0.6706320643003423
+      ],
+      "metersPerUnit": 1950204.1935483871,
+      "bodyRadiusM": 604563300
+    }
+  }
+}

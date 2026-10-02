@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-6109-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-6109",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-6109 system",
+      "systemName": "TOI-6109 system",
+      "classification": "planetary-system",
+      "color": "#ffefe9",
+      "distanceAu": 30632600,
+      "description": "2 planets cross TOI-6109 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2162063711240985000,
+        2588739055655086600,
+        3102236989335702500
+      ],
+      "presentationToReference": [
+        0.47180074675990963,
+        0.4339496829093948,
+        0.7675231123944264,
+        0.5649088938873068,
+        0.5195860560749701,
+        -0.6410212726107284,
+        0.6769652849030082,
+        -0.7360149475624077,
+        9.461128865764097e-7
+      ],
+      "orbitUpReference": [
+        -0.4339496829093948,
+        -0.5195860560749701,
+        0.7360149475624077
+      ],
+      "metersPerUnit": 2291321.6129032257,
+      "bodyRadiusM": 710309700
+    }
+  }
+}
