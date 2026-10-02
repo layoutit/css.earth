@@ -46,3 +46,6 @@ Camera projection, star loading and navigation remain here.
 
 Object runtime definitions, control metadata, prepared dataset tables and their JSON validators belong to
 `@cssearth/objects`. Selection operations and in-place dataset installation stay in this package.
+
+Leaf bounds and their validator, prepared material/selection records and serialized pose keyframes belong to
+`@cssearth/objects`; frustum computation, CSS publication and live Web Animations interfaces stay here.

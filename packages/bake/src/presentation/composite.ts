@@ -8,7 +8,7 @@ import type { PreparedNode, PresentationAdapters } from './adapters.ts';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
 import { RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '../raster/index.ts';
 
-const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
+import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard', SHADOWLESS_BILLBOARD_KEY = 'shadowless-billboard';
 export async function prepareComposite(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
   const { namespace: ns, scene: plan, assets, datasets, sun, solarSource: solarSystemSource } = input;

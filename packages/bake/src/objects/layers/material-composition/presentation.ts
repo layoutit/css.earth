@@ -12,7 +12,7 @@ import type { PreparedNode } from '../../../presentation/index.ts';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
 
 import { canonicalPreparedAsset, preparedResourcePool } from "@cssearth/renderer/rendering/prepared-object-assets.ts";
-import { PREPARED_PRESENTATION_SCHEMA } from "../../../presentation/index.ts";
+import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from "../../../presentation/index.ts";
 
 const identity = () => [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];

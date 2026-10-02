@@ -1,4 +1,4 @@
-import type { PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
+import type { PreparedLeafBounds } from '@cssearth/objects';
 import type { PositionM } from '@cssearth/engine';
 import type { PreparedVolumeLeafStyle } from '../volume/types.js';
 

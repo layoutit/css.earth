@@ -10,7 +10,7 @@ import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PresentationInputs, PresentationDraft } from './types.ts';
 import type { PresentationAdapters } from './adapters.ts';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
-const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
+import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 const LAYERS = ['surface', 'poles', 'corona', 'limb'] as const;
 
 type EmissiveDataset = PresentationInputs['datasets']['controls'][number];

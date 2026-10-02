@@ -323,3 +323,7 @@ the finite-emission compiler. Change an output only on purpose, together with ev
 - `tsup` bundles the JavaScript; declarations come from one `tsc` pass (`tsconfig.build.json`, per file under
   `dist/types/`), and each exported `dist/<entry>.d.ts` re-exports its topic's index. A new topic needs only its entry in
   `tsup.config.ts` and `package.json`; don't raise Node's heap for the build.
+
+The presentation schema identifier, narrowed material/selection records and leaf-box data shape live in
+`@cssearth/objects`; leaf-box extraction and presentation compilation stay here. The presentation-envelope
+validator remains here until its sky/Sun format dependencies can move without weakening validation.

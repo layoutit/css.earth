@@ -1,6 +1,6 @@
 import { cssMatrix as matrix, CSS_NUMBER as NUMBER } from '@cssearth/objects';
 
-import { validatePreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
+import { validatePreparedLeafBounds } from '@cssearth/objects';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssSky } from './types.js';
 import { dot3 as dot } from '@cssearth/core';

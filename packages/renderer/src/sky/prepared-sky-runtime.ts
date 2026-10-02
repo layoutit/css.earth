@@ -1,5 +1,6 @@
 import { fromEyeM } from '@cssearth/engine';
-import { createPreparedLeafFrustum, preparedLeafMayContribute, type PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
+import { type PreparedLeafBounds } from '@cssearth/objects';
+import { createPreparedLeafFrustum, preparedLeafMayContribute } from '../rendering/prepared-leaf-frustum.js';
 import { cssViewFromOrientation, worldRotationCss } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedCssVolume } from '../volume/types.js';
