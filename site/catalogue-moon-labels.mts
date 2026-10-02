@@ -7,7 +7,8 @@ import { sourceArray, sourceId, sourceObject, sourceText, sourceUnique } from '@
 import { cssViewFromOrientation, rotateWorldPosition } from '@cssearth/engine';
 import { rayHitsSphereBefore } from '@cssearth/engine';
 import type { LabelScreenRect } from '@cssearth/renderer/labels/screen-label-layout.ts';
-import type { WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
 import { createLabelBudget, labelExtentOpacity, type LabelBudget } from '@cssearth/renderer/labels/universe-label-policy.ts';
 
 interface Point { id: string; positionM: readonly number[]; radiusM: number; orbit?: { centerBodyId: string }; }

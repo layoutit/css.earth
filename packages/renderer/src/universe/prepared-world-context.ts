@@ -1,7 +1,6 @@
 import { writeStyle } from '../rendering/retained-write.js';
-import { isExtendedClassification } from '@cssearth/objects';
+import { isExtendedClassification, type PreparedWorldContext, type PreparedContextBody, type WorldCameraPose } from '@cssearth/objects';
 import { createContextLocator } from './context-locator.js';
-import type { PreparedWorldContext, PreparedContextBody } from '@cssearth/objects';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
 import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';
 import { createWorldContextMarkerFactory, createWorldContextMarkerPaint, type WorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
@@ -9,7 +8,7 @@ import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import type { PlannedWorldContext } from './world-context/world-context-planner.js';
 import { bindWorldBodyColumns, createWorldBodyColumns, type PackedWorldContextView } from './world-context/world-context-view-transport.js';
 import { createSystemFade, indicatorDotDiameter, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../solar-system/heliocentric-sprites.js';
 import type { OrientationXyzw } from '@cssearth/engine';
 import { cssViewFromOrientation } from '@cssearth/engine';

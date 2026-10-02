@@ -7,7 +7,7 @@
  * Bundle each function in netlify/functions into one ES module in netlify/functions-bundled, workspace code included, and
  * let netlify.toml point Netlify at that directory. Node built-ins stay external; everything else is inlined.
  */
-import { readdir, rm } from 'node:fs/promises';
+import { readdir, readFile, rm } from 'node:fs/promises';
 import { extname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
@@ -23,6 +23,15 @@ const result = await build({
   // Bundled CommonJS dependencies (linkedom's) still call require for Node built-ins.
   banner: { js: "import { createRequire as cssearthCreateRequire } from 'node:module'; const require = cssearthCreateRequire(import.meta.url);" },
 });
+// The functions read the Sun's world files from disk (site/world-context-plan.mts), and a deployed function holds only
+// what netlify.toml `included_files` lists. Here every file is on disk, so loading a bundle proves nothing about that list:
+// each world file is checked against it by name. world-index.json was left out on 2026-10-02 and every address with a
+// query answered 502.
+const included = /included_files\s*=\s*\[([^\]]*)\]/u.exec(await readFile(resolve(root, 'netlify.toml'), 'utf8'))?.[1];
+if (included === undefined) throw new Error('netlify.toml: [functions] included_files is missing.');
+for (const path of ['src/objects/sun/prepared/world-context-summary.json', 'src/objects/sun/prepared/world-index.json', 'src/objects/sun/prepared/world-systems/*.json']) {
+  if (!included.includes(`"${path}"`)) throw new Error(`netlify.toml: [functions] included_files does not list ${path}, which the page function reads (site/world-context-plan.mts); a deployed function would answer 502.`);
+}
 for (const [file, { bytes }] of Object.entries(result.metafile.outputs)) {
   // Load each bundle as Netlify will, so a function that cannot load fails the deploy instead of answering 502.
   const loaded: unknown = await import(pathToFileURL(resolve(root, file)).href);

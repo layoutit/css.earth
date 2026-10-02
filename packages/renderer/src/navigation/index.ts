@@ -15,6 +15,5 @@ export type { CameraMotionSignal, CameraMotionSource, CameraMotionState } from '
 export type { CameraMotion } from './camera-motion.js';
 export { createCameraFlight } from './camera-flight.js';
 
-export { worldCameraFromCenteredPresentation, worldCameraFromPresentation, presentWorldCamera, worldCameraViewport } from './world-camera.js';
-export type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
-export { preparedDefaultViewRotation } from './prepared-arrival-view.js';
+export { presentWorldCamera, worldCameraViewport } from './world-camera.js';
+export type { WorldCameraViewport } from './world-camera.js';
