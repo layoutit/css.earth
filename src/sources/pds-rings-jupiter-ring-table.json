@@ -1,0 +1,24 @@
+{
+  "id": "pds-rings-jupiter-ring-table",
+  "title": "Vital Statistics for Jupiter's Rings",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
+      "checkedOn": "2026-10-02",
+      "locator": "Ring table: inner and outer boundary, optical depth and vertical thickness"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA Planetary Data System, Ring-Moon Systems Node"
+}

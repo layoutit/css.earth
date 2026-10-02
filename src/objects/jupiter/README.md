@@ -62,7 +62,7 @@ terminator ramp. The presentation Sun direction `[0.883835, -0.385595, 0.264864]
 the PSG near-opposition phase of `4.360399` degrees would hide the terminator. In the 5 January 2024 Hubble view,
 every pixel of the 1.005-to-1.03 exterior annulus is zero, so no atmosphere halo is drawn.
 
-**Rings.** The PDS Ring-Moon Systems table fixes boundaries and optical depths: halo 100,000 to 122,400 km, main ring
+**Rings.** [Jupiter's ring particles](../jupiter-ring-particles/README.md) draws 600 dots in the rings, the only thing that shows them; the position of a single dot is drawn from a seed. The PDS Ring-Moon Systems table fixes boundaries and optical depths: halo 100,000 to 122,400 km, main ring
 to 129,100 km, Amalthea gossamer to 181,350 km, Thebe to 221,900 km and its extension to 270,000 km. The Galileo images
 establish the three-part structure, the gossamer components and the truncation in Jupiter's shadow. The components are
 composited once into a 4 by 4 tile grid. Their radial mapping keeps the Thebe extension inside Io. Each ring's opacity
