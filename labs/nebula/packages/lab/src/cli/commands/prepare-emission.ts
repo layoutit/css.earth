@@ -25,7 +25,10 @@ interface Recipe {
     fill?: 'isophote' };
   /** Each pixel clamped to the median of the square window around it: compact light smaller than the window (star
    * haloes, small background galaxies) drops out and the smooth light stays. Only for a window above the fit's cell. */
-  compactClamp?: { windowPx: number; basis: string };
+  compactClamp?: { windowPx: number; basis: string;
+    /** Also raise a pixel darker than its window's median to that median: a survey's saturation bleed trails and the
+     * holes it leaves at bright stars are darker than the galaxy around them, and a clamp that only lowers keeps them. */
+    fillDark?: boolean };
   grid: InferenceGrid; prior: SymmetryPrior; tau: number; iterations: number;
   /** One level, or one per channel (red, green, blue) for a composite whose sky is not grey. */
   blackLevel: number | [number, number, number]; displayExposure: number; slices: number; assumptions: string[];
@@ -73,7 +76,8 @@ if (recipe.compactClamp) {
   const window = recipe.compactClamp.windowPx;
   if (!Number.isInteger(window) || window < 3 || window % 2 === 0) throw new TypeError(`compactClamp.windowPx must be an odd integer of at least 3, not ${window}.`);
   const median = await sharp(diffuse, { raw: native.info }).median(window).raw().toBuffer();
-  for (let i = 0; i < diffuse.length; i++) if (median[i]! < diffuse[i]!) diffuse[i] = median[i]!;
+  const fillDark = recipe.compactClamp.fillDark === true;
+  for (let i = 0; i < diffuse.length; i++) if (fillDark || median[i]! < diffuse[i]!) diffuse[i] = median[i]!;
 }
 const { grid } = recipe, pixels = grid.width * grid.height;
 const resized = await sharp(diffuse, { raw: native.info }).extract(recipe.crop)

@@ -198,7 +198,8 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
       } else {
         const target = destination(specifier, file);
         if (target && within(lab, target)) errors.push(`${location}: direct path into labs/nebula is forbidden; use an allowed public package export (${specifier})`);
-        else if (target && within(bake, target) && !within(bake, canonical(file))) errors.push(`${location}: direct path into packages/bake is forbidden; use its public entries (${specifier})`);
+        else if (target && within(bake, target) && !within(bake, canonical(file)) &&
+            !(policy(label) === 'test' && within(resolve(bake, 'src/contract/fixtures'), target))) errors.push(`${location}: direct path into packages/bake is forbidden; use its public entries (${specifier})`);
         else if (target && within(root, target)) {
           node.edges.push({ file: target, erased: item.erased });
           if (isFile(target) && sourcePattern.test(target) && !target.includes('/node_modules/') && !graph.has(target)) sourceFiles.push(target);

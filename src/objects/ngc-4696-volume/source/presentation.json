@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-4696-volume",
+  "name": "NGC 4696",
+  "defaultDataset": "legacy-optical",
+  "bank": {
+    "path": "src/objects/ngc-4696-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "labs/nebula/models/ngc-4696/experiment.json"
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/ngc-4696-volume/source/delivery.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "legacy-optical",
+      "label": "Legacy Surveys · optical",
+      "title": "NGC 4696 in visible light",
+      "description": "The DESI Legacy Imaging Surveys' view of NGC 4696 with the Milky Way stars removed (NOX) and neighbouring galaxies masked, its light spread in depth through the spheroid of Gao et al.'s published fit. Depth is modelled, not measured, and the survey's sky subtraction removes the faint outer light.",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "detail": "2500 × 2500 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "DECam g, r, i, z"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "11.0 × 11.0 arcmin"
+        },
+        {
+          "id": "distance",
+          "label": "Distance",
+          "value": "40.3 Mpc"
+        }
+      ],
+      "input": "legacy-optical",
+      "preview": {
+        "path": ".local/nebula-lab/planetary/ngc-4696-inferred-original.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&width=2500&height=2500&fov=0.182667&projection=TAN&coordsys=icrs&ra=192.205322&dec=-41.311089&format=jpg"
+      }
+    }
+  ]
+}

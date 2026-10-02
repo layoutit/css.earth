@@ -12,7 +12,7 @@ import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.
 import { parseGeometryProfile } from '@cssearth/bake/scene';
 import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
-import { parsePreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
+import { parsePreparedWorldContext } from '@cssearth/objects';
 
 
 export async function inspectMeasurementSphere(root:string,target:string){

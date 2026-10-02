@@ -12,7 +12,7 @@ import { mountGalaxyBacking, parseGalaxyBacking, type BackingNearFade } from './
 import { revealLayer } from '../rendering/layer-reveal.js';
 import { afterStartup } from '../rendering/startup-gate.js';
 import { galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
-import type { PreparedWorldContext } from '../prepared-data/world-context.js';
+import type { PreparedWorldContext } from '@cssearth/objects';
 
 const PARSEC_M = 3.085677581491367e16;
 /** Inside the Solar System a faint share of the galaxy's dots stays, so its sky is never empty; past the planets they

@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { parsePreparedWorldContextSummary } from '../../prepared-data/world-context.js';
+import { parsePreparedWorldContextSummary } from '@cssearth/objects';
 import type { WorldPlannerInitialise, WorldPlannerWorker } from './world-context-planner-client.js';
 import { createWorldContextPlannerClient } from './world-context-planner-client.js';
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';

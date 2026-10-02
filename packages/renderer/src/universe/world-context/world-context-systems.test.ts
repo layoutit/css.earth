@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '../../prepared-data/world-context.js';
+import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
 import { createWorldContextPlanner, type WorldContextView } from './world-context-planner.js';
 import { createWorldContextPlannerClient, type WorldPlannerWorker } from './world-context-planner-client.js';
 

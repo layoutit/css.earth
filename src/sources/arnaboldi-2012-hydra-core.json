@@ -1,0 +1,48 @@
+{
+  "id": "arnaboldi-2012-hydra-core",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A tale of two tails and an off-centered envelope: diffuse light around the cD galaxy NGC 3311 in the Hydra I cluster",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2012A&A...545A..37A"
+    },
+    {
+      "type": "arXiv",
+      "value": "1205.5289"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012A&A...545A..37A",
+      "label": "2012A&A...545A..37A"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1205.5289",
+      "checkedOn": "2026-10-02",
+      "locator": "Table 2 (Parameters for the 2D GALFIT fit models of NGC 3311), V band, VLT/FORS1, column 'allmask' (the north-east excess masked): total magnitude 10.1 +/- 0.01, effective radius 198.8 +/- 2.2 arcsec, n = 4.8 +/- 0.02, axis ratio 0.93, position angle 32 degrees. Column 'cmask': 270.6 +/- 3.4 arcsec, n = 5.0, position angle 38. Its note: the 2D model is fitted to the whole 6.8 x 6.4 arcmin area. Table 1, NGC 3309, 'allmask': effective radius 21.9 arcsec, n = 3.3, axis ratio 0.85. Sect. 4.2: an envelope off-centred to the north-east of NGC 3311 and tidal tails around HCC 026 and HCC 007."
+    }
+  ],
+  "creators": [
+    "M. Arnaboldi",
+    "G. Ventimiglia",
+    "E. Iodice",
+    "O. Gerhard",
+    "L. Coccato"
+  ],
+  "publisher": "A&A 545, A37",
+  "publicationDate": "2012",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Arnaboldi et al. (2012), A&A 545, A37.",
+      "scope": "NGC 3311's Sérsic spheroid",
+      "evidence": "https://arxiv.org/abs/1205.5289"
+    }
+  ]
+}

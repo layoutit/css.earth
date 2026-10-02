@@ -225,7 +225,6 @@ test('production filesystem loads cannot read lab models or research implementat
   } finally { f.cleanup(); }
 });
 
-
 test('package import aliases and redirected public exports cannot disguise a lab owner', () => {
   const f = fixture();
   try {
@@ -279,5 +278,19 @@ test('relocated owner fixtures stay test-only while runtime imports check their 
       f.write('site/plugin.mts', 'export {};');
       f.write(path, 'export {};');
     }
+  } finally { f.cleanup(); }
+});
+
+test('tests reach package-owned bake fixtures without a public export; runtime and other sources stay forbidden', () => {
+  const f = fixture();
+  try {
+    f.write('packages/bake/src/contract/fixtures/helper.mts', "import '@cssearth/bake/public'; export const helper = 1;");
+    f.write('site/test/example.test.mts', "import '../../packages/bake/src/contract/fixtures/helper.mts';");
+    assert.deepEqual(f.check(), []);
+    f.write('site/runtime.mts', "import '../packages/bake/src/contract/fixtures/helper.mts';");
+    assert.ok(f.check().some(error => error.includes('direct path into packages/bake')));
+    f.write('site/runtime.mts', 'export {};');
+    f.write('site/test/example.test.mts', "import '../../packages/bake/src/public.ts';");
+    assert.ok(f.check().some(error => error.includes('direct path into packages/bake')));
   } finally { f.cleanup(); }
 });

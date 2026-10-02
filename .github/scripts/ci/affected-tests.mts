@@ -11,24 +11,33 @@ import { pathToFileURL } from 'node:url';
 export interface Workspace { readonly directory: string; readonly name: string; readonly dependencies: readonly string[]; }
 export interface AffectedTests { readonly packages: 'all' | readonly string[]; readonly site: boolean; readonly files: readonly string[]; }
 
-/** Tests that live in an offline tool but exercise another package: they ran on every change to that package until the
- * renderer's tests that import the bake moved into the bake, which the dependent walk below does not follow (a tool joins
- * only when a tool changed). Each runs whenever its owner, or a package the owner depends on, changed. `affected-tests.test.mts`
- * proves every entry exists and imports its owner. */
+/** Cross-owner tests run in the packages lane whenever either owner (or its dependencies) changes.
+ * Offline tool tests remain in their package glob; integration suites also run when directly edited.
+ * `affected-tests.test.mts` proves every entry exists and imports its owner. */
 export const FOREIGN_TESTS: Readonly<Record<string, readonly string[]>> = {
+  bake: [
+    'integration/renderer-bake/src/contract/navigable-object-mount.test.ts',
+    'integration/renderer-bake/src/sky/parallax.test.ts',
+    'integration/renderer-bake/src/stars/point-field-bank.test.ts',
+    'integration/renderer-bake/src/stars/validation.test.ts',
+    'integration/renderer-bake/src/volume-leaves/prepared-volume-runtime.test.ts',
+    'integration/renderer-bake/src/volume-leaves/prepared-leaf-frustum.test.ts',
+    'integration/renderer-bake/src/presentation/depth-partitions.test.ts',
+    'integration/renderer-bake/src/objects/layers/paged-ellipsoid/surface-target.test.ts',
+  ],
   renderer: [
     'packages/bake/src/contract/feature-fixture.test.mts',
     'packages/bake/src/contract/object-runtime.test.mts',
     'packages/bake/src/contract/object-selection-runtime.test.mts',
     'packages/bake/src/contract/prepared-material.test.mts',
-    'packages/bake/src/contract/renderer-navigable-object-mount.test.ts',
-    'packages/bake/src/objects/layers/paged-ellipsoid/renderer-surface-target.test.ts',
-    'packages/bake/src/presentation/renderer-depth-partitions.test.ts',
-    'packages/bake/src/sky/renderer-parallax.test.ts',
-    'packages/bake/src/stars/renderer-point-field-bank.test.ts',
-    'packages/bake/src/stars/renderer-validation.test.ts',
-    'packages/bake/src/volume-leaves/renderer-prepared-leaf-frustum.test.ts',
-    'packages/bake/src/volume-leaves/renderer-prepared-volume-runtime.test.ts',
+    'integration/renderer-bake/src/contract/navigable-object-mount.test.ts',
+    'integration/renderer-bake/src/objects/layers/paged-ellipsoid/surface-target.test.ts',
+    'integration/renderer-bake/src/presentation/depth-partitions.test.ts',
+    'integration/renderer-bake/src/sky/parallax.test.ts',
+    'integration/renderer-bake/src/stars/point-field-bank.test.ts',
+    'integration/renderer-bake/src/stars/validation.test.ts',
+    'integration/renderer-bake/src/volume-leaves/prepared-leaf-frustum.test.ts',
+    'integration/renderer-bake/src/volume-leaves/prepared-volume-runtime.test.ts',
   ],
 };
 
@@ -53,8 +62,10 @@ export function affectedTests(paths: readonly string[] | null, packages: readonl
   }
   const site = paths.some(path => SITE.some(pattern => pattern.test(path))) || siteDependencies.some(name => changed.has(byName.get(name) ?? ''));
   // A foreign test whose own package already runs is in that package's glob.
-  const files = Object.entries(FOREIGN_TESTS).filter(([owner]) => changed.has(owner))
-    .flatMap(([, tests]) => tests).filter(test => !changed.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')).sort();
+  const files = [...new Set([...Object.entries(FOREIGN_TESTS).filter(([owner]) => changed.has(owner))
+    .flatMap(([, tests]) => tests).filter(test => !changed.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')),
+      ...paths.filter(path => path.startsWith('integration/') && Object.values(FOREIGN_TESTS).some(tests => tests.includes(path))),
+    ])].sort();
   return { packages: [...changed].sort(), site, files };
 }
 

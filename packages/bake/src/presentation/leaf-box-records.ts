@@ -1,3 +1,5 @@
+import { scanCssDeclarations } from './css-declaration-scanner.ts';
+
 // Leaf boxes as prepared records (the last step of the presentation bindings, prepared-presentation-bindings.ts).
 //
 // The node builder and the bindings work in the variable form leaf-box.ts describes: each leaf's lengths and transform are
@@ -69,19 +71,9 @@ function length(value: string, where: () => string) {
 }
 /** A static style without the named declarations. Semicolons inside quotes or parentheses (URLs) do not split. */
 function withoutDeclarations(style: string, names: readonly string[]) {
-  const parts: string[] = [];
-  let start = 0, depth = 0, quote = '';
-  for (let at = 0; at <= style.length; at++) {
-    const char = style[at];
-    if (quote) { if (char === quote && style[at - 1] !== '\\') quote = ''; continue; }
-    if (char === '"' || char === "'") quote = char;
-    else if (char === '(') depth++;
-    else if (char === ')') depth--;
-    else if ((char === ';' || at === style.length) && depth === 0) { parts.push(style.slice(start, at)); start = at + 1; }
-  }
-  return parts.map(part => part.trim()).filter(part => {
+  return [...scanCssDeclarations(style)].filter(part => {
     const colon = part.indexOf(':');
-    return part !== '' && (colon < 0 || !names.includes(part.slice(0, colon).trim()));
+    return colon < 0 || !names.includes(part.slice(0, colon).trim());
   }).map(part => `${part};`).join('');
 }
 function interned(tree: Tree, nodes: readonly TreeNode[]): Tree {

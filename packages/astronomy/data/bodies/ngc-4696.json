@@ -1,0 +1,28 @@
+{
+  "id": "ngc-4696",
+  "classification": "galaxy",
+  "order": 5155,
+  "physical": {
+    "name": "NGC 4696",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 4696 is recorded: it is an extended galaxy, and its package frames it at 64241 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 192.205322,
+    "declinationDegrees": -41.311089,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 40300000,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 2904,
+    "sources": {
+      "position": "Jarrett et al. (2000), AJ 119, 2498: the 2MASS Extended Source Catalog (CDS VII/233), rows 2MASX J12484927-4118399 (NGC 4696) and 2MASX J10364282-2731420 (NGC 3311). (https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233); catalogue reference Jarrett2000AJ....119.2498J",
+      "distance": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94/groups): group 1PGC 43296 (NGC 4696, 49 galaxies) DMzp = 33.027 +/- 0.048, 40.3 Mpc; group 1PGC 31478 (NGC 3311, 67 galaxies) DMzp = 33.673 +/- 0.046, 54.3 Mpc. A group's distance averages its members'. (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94); catalogue reference Tully2023ApJ...944...94T: 40300000 pc (-900000/+900000); group-average",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Lauer et al. (2014), ApJ 797, 82, Table 1 (CDS J/ApJ/797/82/bcg): heliocentric velocity of the brightest cluster galaxy, 2904 +/- 40 km/s (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/797/82)"
+    }
+  }
+}

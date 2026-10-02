@@ -1,6 +1,6 @@
 /** Offline allocation of a global slab budget. Geometry is sampled again at full resolution afterwards. */
 import { type Axis, type Bounds3, type Vector3, readVolumeLayerPlan, type VolumeLayerPlan, DEFAULT_VOLUME_LAYER_BUDGET, readLayerOptimizationReport, type LayerOptimizationReport } from '@cssearth/objects';
-import type { Cancellation } from '../contracts/cancellation.ts';
+import type { Cancellation } from '@cssearth/objects';
 
 export interface LayerOptimizationOptions {
   bounds: Bounds3;

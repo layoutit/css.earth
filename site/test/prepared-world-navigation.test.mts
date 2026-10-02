@@ -9,7 +9,8 @@ import { createWorldSelectionTarget, presentWorldCamera, formatSharedView, saved
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 
 import { required, position, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
-import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose, WorldCameraPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 import type { ObjectPreparationView } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';

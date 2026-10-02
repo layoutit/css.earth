@@ -1,0 +1,52 @@
+{
+  "id": "gao-2020-cgs-ellipticals",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Carnegie-Irvine Galaxy Survey. IX. Classification of bulge types and statistical properties of pseudo bulges",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2020ApJS..247...20G"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/247/20"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJS..247...20G",
+      "label": "2020ApJS..247...20G"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/247/20",
+      "label": "CDS J/ApJS/247/20"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2001.00331",
+      "checkedOn": "2026-10-02",
+      "locator": "Appendix A and Table 2 (Best-fit Parameters of the CGS Ellipticals; CDS J/ApJS/247/20/table2), row NGC 4696: single-Sérsic R-band fit, mean effective surface brightness 20.72 +/- 0.12 mag per square arcsec, n = 2.99 +/- 0.13, effective radius 16.65 +/- 1.46 kpc, ellipticity 0.219. The table gives no position angle. The appendix warns that a single Sérsic function integrates to infinity and that ellipticals are better fitted by several components."
+    }
+  ],
+  "creators": [
+    "H. Gao",
+    "L. C. Ho",
+    "A. J. Barth",
+    "Z.-Y. Li"
+  ],
+  "publisher": "ApJS 247, 20",
+  "publicationDate": "2020",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Gao et al. (2020), ApJS 247, 20.",
+      "scope": "NGC 4696's Sérsic spheroid",
+      "evidence": "https://arxiv.org/abs/2001.00331"
+    }
+  ]
+}

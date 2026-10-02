@@ -1,6 +1,5 @@
 /** Authored model-only similarity; observed sky/image geometry stays fixed. */
 import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
-import { triple } from '@cssearth/objects';
 import { type Vector3, type Bounds3 } from '@cssearth/objects';
 import type { VolumeSlices } from '@cssearth/objects';
 export interface DensityPlacement {
@@ -41,4 +40,9 @@ export function placeDensitySlices(slices: VolumeSlices, placement: DensityPlace
       y: slices.approximation.slabPitchUnits.y * placement.scale, z: slices.approximation.slabPitchUnits.z * placement.scale } },
     quads: slices.quads.map(quad => ({ ...quad, center: transform.point(quad.center), normal: transform.normal(quad.normal),
       vertices: quad.vertices.map(transform.point) as typeof quad.vertices })) };
+}
+
+function triple(value: unknown, at: string): [number, number, number] {
+  if (!Array.isArray(value) || value.length !== 3) throw new TypeError(`${at} must contain three numbers.`);
+  return [finite(value[0], at), finite(value[1], at), finite(value[2], at)];
 }

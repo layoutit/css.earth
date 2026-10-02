@@ -1,12 +1,14 @@
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
 import { showSection } from '../rendering/detached-sections.js';
-import type { CameraPlan, PerspectiveCameraPlan, Vector3, LevelOfDetailPlan, OrbitLineFade } from './types.js';
+import type { CameraPlan, PerspectiveCameraPlan, Vector3 } from './types.js';
+import type { LevelOfDetailPlan, OrbitLineFade } from '@cssearth/objects';
 import type { BodyProjection } from '../solar-system/types.js';
 import type { VisibleRect } from '../solar-system/types.js';
 import type { CameraViewport } from './camera-viewport.js';
 import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from './world-camera.js';
-import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
+import type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import { createPreparedCamera } from './prepared-camera.js';
 import { createCameraOrientation } from './camera-orientation.js';
 export interface PerspectiveWorldContext {

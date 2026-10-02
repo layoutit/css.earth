@@ -18,7 +18,7 @@
   },
   "provenance": {
     "path": "provenance.json",
-    "bytes": 11032
+    "bytes": 12083
   },
   "catalogueSourceId": "lvdb-v1.1.1",
   "membershipSourceId": "mcconnachie-table1-2019",
@@ -258,6 +258,14 @@
       "id": "m95",
       "focusRadiusM": 370281309778964050000
     },
+    "ngc_4696": {
+      "id": "ngc-4696",
+      "focusRadiusM": 1.9822701351258693e+21
+    },
+    "ngc_3311": {
+      "id": "ngc-3311",
+      "focusRadiusM": 2.275779786677328e+21
+    },
     "ngc_1275": {
       "id": "ngc-1275",
       "focusRadiusM": 2.0554624073588445e+21
@@ -336,6 +344,52 @@
         "subgroup": "virgo",
         "basis": "The Virgo Cluster Catalog classes VCC 1226 (NGC 4472) a member; it is the brightest galaxy of the cluster.",
         "sourceRef": "Binggeli1985AJ.....90.1681B"
+      }
+    },
+    "ngc_4696": {
+      "name": "NGC 4696",
+      "aliases": [
+        "ESO 322-91",
+        "PGC 43296"
+      ],
+      "raDeg": 192.205322,
+      "decDeg": -41.311089,
+      "positionRef": "Jarrett2000AJ....119.2498J",
+      "distance": {
+        "valuePc": 40300000,
+        "minusPc": 900000,
+        "plusPc": 900000,
+        "method": "group-average",
+        "sourceRef": "Tully2023ApJ...944...94T"
+      },
+      "membership": {
+        "group": "galaxy-cluster",
+        "subgroup": "centaurus",
+        "basis": "Lauer et al. (2014) list NGC 4696 as the brightest cluster galaxy of Abell 3526, the Centaurus Cluster.",
+        "sourceRef": "Lauer2014ApJ...797...82L"
+      }
+    },
+    "ngc_3311": {
+      "name": "NGC 3311",
+      "aliases": [
+        "ESO 501-38",
+        "PGC 31478"
+      ],
+      "raDeg": 159.178421,
+      "decDeg": -27.528339,
+      "positionRef": "Jarrett2000AJ....119.2498J",
+      "distance": {
+        "valuePc": 54300000,
+        "minusPc": 1200000,
+        "plusPc": 1200000,
+        "method": "group-average",
+        "sourceRef": "Tully2023ApJ...944...94T"
+      },
+      "membership": {
+        "group": "galaxy-cluster",
+        "subgroup": "hydra",
+        "basis": "Lauer et al. (2014) list NGC 3311 as the brightest cluster galaxy of Abell 1060, the Hydra I Cluster.",
+        "sourceRef": "Lauer2014ApJ...797...82L"
       }
     },
     "ngc_1275": {

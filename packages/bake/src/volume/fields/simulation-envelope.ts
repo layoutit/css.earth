@@ -6,7 +6,7 @@
  * unchanged; the fit itself stays with its scientific owner.
  */
 import type { SkyBounds } from '@cssearth/objects';
-import type { SimulationDepthPrior } from '../contracts/simulation-prior.ts';
+import type { SimulationDepthPrior } from '@cssearth/objects';
 
 export interface SimulationEnvelopeSettings {
   /** Gaussian sigma, in fit pixels, of the sky-plane smoothing that separates envelope from detail. */

@@ -88,9 +88,11 @@ Venus share implementations selected by capabilities; packages contain no
 per-planet code or data folders. Concrete CSS/DOM rendering belongs to the
 application renderer. Earth is a future consumer, outside this migration's scope.
 
-Prepared volume scene contracts and their pure validators/helpers live in `src/volume/`, exported by `@cssearth/objects`. This includes volume and sampled recipes, emission-fit settings, slice data and layer validation, compiler controls and star inputs, joint parameters, authored shape settings, observation photo data and prepared catalogue stars. Writers and readers import the same contracts here. Baking, fitting, sampling, cancellation and I/O remain in `@cssearth/bake`.
+Prepared volume scene contracts and their pure validators/helpers live in `src/volume/`, exported by `@cssearth/objects`. This includes volume and sampled recipes, emission-fit settings, slice data and layer validation, compiler controls and star inputs, joint parameters, authored shape settings, observation photo data, observation mappings, simulation depth-prior and structural cancellation interfaces, and prepared catalogue stars. Writers and readers import the same contracts here. Baking, fitting, sampling, cancellation and I/O remain in `@cssearth/bake`.
 
 The browser-safe main entry exports `PREPARED_CSS_OBJECT_FORMAT`, `expandWorldContextSummary()` and
 `expandWorldSystem()` from `src/prepared-data/`. The decoders expand compact body columns, shared tables,
-billboards and orbit centres before validation. Full world-context validation still lives in the renderer,
-where its shared geometry parser depends on camera/projection implementation.
+billboards and orbit centres before validation. Full world-context validation, world-camera frame and presentation data, system views, orbit centres and
+orbit-bank codecs live here too. JSON orbit arrays (`PreparedWorldContextData`) and decoded typed arrays
+(`PreparedWorldContextGeometry`) have distinct contracts. Projection, navigation and spatial preparation
+stay with their owners.

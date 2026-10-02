@@ -5,7 +5,7 @@ import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 import { readFile } from 'node:fs/promises';
 import { createWorldSelectionTarget } from './selection-target.js';
 import { worldCameraFromCenteredPresentation, presentWorldCamera } from './world-camera.js';
-import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
+import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
 
 const viewport = { focalPixels: 1247.08, principalOffsetPixels: [-170, 0] as const, framingRadiusPixels: 259.2 };
 for (const [fromId, toId] of [['mercury', 'venus'], ['venus', 'mercury']]) {

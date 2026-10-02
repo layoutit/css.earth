@@ -10,7 +10,8 @@ import type { CameraDelta, CameraPlan, CameraAngles, CameraPose, Vector3 } from 
 import type { PerspectiveDolly, PerspectivePublication, PerspectiveWorldContext } from './perspective-dolly.js';
 import type { PhysicalSharedCamera } from './view-url.js';
 import type { DirectionalSunPlan } from '../solar-system/directional-sun-coordinate.js';
-import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
+import type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { PositionM } from '@cssearth/engine';
 import { bindWorldCameraPicking } from './world-camera-picking.js';
 import { hitsProjectedBody } from './world-camera-hit.js';
