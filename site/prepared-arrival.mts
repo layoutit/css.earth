@@ -44,7 +44,10 @@ export function createPreparedArrival(signal: AbortSignal, cover: Cover | null =
     handoff(getView: () => ObjectPreparationView, options: Partial<MountOptions> = {}, hooks: {
       beforePublish?(mount: ObjectSceneLifecycle): void;
       afterPublish?(mount: ObjectSceneLifecycle): Promise<void>;
-    } = {}): WorldHandoff {
+    } = {},
+    /** A stationary startup behind its photograph activates every texture together: nothing is seen until the reveal.
+     * A flight, and a startup whose mesh is in view while it fills, pace activation an atlas a frame. */
+    activation: 'paced' | 'whole' = 'paced'): WorldHandoff {
       if (!lease) throw new Error('Arrival resources must be ready before mounting.');
       ownership.signal.throwIfAborted();
       cover?.mounting();
@@ -55,8 +58,8 @@ export function createPreparedArrival(signal: AbortSignal, cover: Cover | null =
           arriving: true,
           preparedResources: lease.resources, preparedTree: lease.tree,
           initialWorldCamera: view.world, initialProjection: lease.projection(view),
-          progressiveActivation: true,
           ...options,
+          progressiveActivation: activation === 'paced',
         },
         async afterMount(mount) {
           let failure: unknown;
