@@ -660,7 +660,7 @@ test('the planner plans from the summary alone, names the paths it lacked, and d
   drawn.forEach((value, index) => assert.ok(Math.abs(value - exact[index]!) < 1e-3));
 });
 
-test('host detail defers satellite paths until each planetary system is opened', async () => {
+test('host detail requests its major moons\' paths once the host is small enough to show them', async () => {
   const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
   const summary = await readWholeSummary(prepared);
   for (const [hostId, satelliteId] of [['earth', 'moon'], ['jupiter', 'europa'], ['saturn', 'titan']]) {
@@ -668,9 +668,15 @@ test('host detail defers satellite paths until each planetary system is opened',
     const planner = createWorldContextPlanner(summary), current = view();
     current.selectedId = hostId; current.overview = false;
     current.viewport = { focalPixels: 900, widthPixels: 820, heightPixels: 1094, principalOffsetPixels: [0, 0] };
-    current.world.pose.positionM = [host.positionM[0], host.positionM[1], host.positionM[2] + Math.max(host.radiusM * 6, 4e7)];
-    planner(current);
+    // The host fills half the view's height: its moons' paths are faded out and stay unrequested.
+    current.world.pose.positionM = [host.positionM[0], host.positionM[1], host.positionM[2] + host.radiusM * 3.4];
+    const close = planner(current);
     assert.ok(!planner.takeWantedOrbits().includes(satelliteId), `${hostId} detail`);
+    assert.equal(close.projectedBodies.every(body => summary.bodies[body.index - 1]?.orbit?.centerBodyId !== hostId || body.segments.length === 0), true);
+    // Pulled back on the same page, the host is a small disc and the moon's path is wanted.
+    current.world.pose.positionM = [host.positionM[0], host.positionM[1], host.positionM[2] + host.radiusM * 40];
+    planner(current);
+    assert.ok(planner.takeWantedOrbits().includes(satelliteId), `${hostId} detail, pulled back`);
     current.overview = true;
     current.world.pose.positionM = [host.positionM[0], host.positionM[1], host.positionM[2] + 5e9];
     planner(current);
