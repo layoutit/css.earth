@@ -8,7 +8,7 @@ import { convertParticlesToDensityVolume } from '../../server/workflows/stars/pa
 import { extractExtendedSource, type ExtractionOptions, type NativeExtractionReceipt } from '@cssearth/nebula-reconstruction/star-removal/extraction';
 import { createPhotoMasterEmissionSampler } from '@cssearth/nebula-reconstruction/methods/density-prior/photo-master';
 import { bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/bake/volume/node';
-import { type VolumeSlices } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, type VolumeSlices } from '@cssearth/objects';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 import type { VolumeRecipe } from '@cssearth/objects';
 
@@ -128,7 +128,7 @@ export async function preparePhotoMaster(recipePath: string) {
     await json(resolve(directory, 'prepared/volume-slices.json'), slices);
     const data = compileCssVolume({ id: bank.id, frame, slices, recipe: compilerRecipe });
     const prepared = { schema: 'cssearth-prepared-object@1', id: bank.id, type: 'density-volume',
-      format: 'cssearth-density-volume@1', data };
+      format: DENSITY_VOLUME_FORMAT, data };
     const bytes = Buffer.from(JSON.stringify(prepared) + '\n');
     await writeFile(resolve(directory, 'prepared/volume.json'), bytes);
     await json(resolve(directory, 'object.json'), { schema: 'cssearth-object@2', id: bank.id,

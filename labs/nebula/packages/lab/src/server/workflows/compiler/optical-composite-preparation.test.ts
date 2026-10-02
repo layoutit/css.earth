@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import sharp from 'sharp';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
-import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
+import { validatePreparedCssVolume } from '@cssearth/objects';
 import { readObservationRecipe } from '../../../features/observations/recipe.ts';
 import { readGeometryPin } from '../geometry/registered-source.ts';
 import { bakeMasterVolumeSlices } from '@cssearth/bake/volume/node';

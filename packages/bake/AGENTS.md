@@ -327,3 +327,7 @@ the finite-emission compiler. Change an output only on purpose, together with ev
 The presentation schema identifier, narrowed material/selection records and leaf-box data shape live in
 `@cssearth/objects`; leaf-box extraction and presentation compilation stay here. The presentation-envelope
 validator remains here until its sky/Sun format dependencies can move without weakening validation.
+
+Prepared CSS volume, impostor, dataset, embedded catalogue point, image-layer and surface-shell formats
+and validators belong to `@cssearth/objects`. Image and geometry generation and file I/O stay here;
+transport, projection, compositing, topology comparison and retained mounting stay in renderer.

@@ -113,3 +113,7 @@ and decoding never reveals a new billboard during an inertial coast.
 
 Prepared leaf bounds validation and serialized pose keyframes live in `@cssearth/objects`.
 Frustum computation and live animation interfaces remain in renderer.
+
+Prepared CSS volume, impostor, dataset, embedded catalogue point, image-layer and surface-shell formats
+and validators belong to `@cssearth/objects`. This package keeps transport, projection, compositing,
+topology comparison and retained mounting; preparation imports the shared format contracts directly.

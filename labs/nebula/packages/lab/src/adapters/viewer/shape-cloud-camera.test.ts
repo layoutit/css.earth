@@ -4,7 +4,8 @@ import { shapeCloudCamera, shapeCloudOrthographicCamera } from '@cssearth/nebula
 import { compilerRenderer } from './compiler-renderer.ts';
 import { physicalLabBank, physicalLabFrame, volumeRenderer } from './volume-renderer.ts';
 import { preparedVolumeCameraTransform } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
-import type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+import type { PreparedCssVolume } from '@cssearth/objects';
 
 const frame: PreparedCssVolume['frame'] = { referenceFrame: 'lab-sky-west-north-toward', epochJdTt: 2451545, originM: [0, 0, 0],
   localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: { min: [-5, -5, -5], max: [5, 5, 5] } };

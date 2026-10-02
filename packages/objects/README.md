@@ -117,3 +117,10 @@ exported by the main entry. Runtime and authored preparation validation retain t
 Sky/Sun authored standards and direction computation stay with bake and renderer.
 Bake retains the authored presentation-envelope checks: runtime validation is stricter in several fields and cannot
 replace them without changing accepted authored input.
+
+Prepared CSS volumes, impostors, volume datasets, embedded catalogue points and image-layer banks live in
+`src/volume/`; surface-shell data and validation live in `src/prepared-data/`. Their schema and envelope identifiers,
+pure validators, catalogue geometry/frame comparisons and shell atlas corner convention are exported from the
+browser-safe main entry. Image generation, transport, projection, compositing, volume topology comparisons and
+retained mounting stay with their implementation owners.
+Contract tests use node:test and run in the packages lane.

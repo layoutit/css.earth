@@ -9,11 +9,10 @@ export { loadPreparedCssVolume } from '../volume/loader.js';
 export { loadPreparedPointAppearance } from '../stars/loader.js';
 export { loadPreparedCssSurfaceShell } from '../shell/loader.js';
 export { loadPreparedCssImageLayers } from '../image-layers/loader.js';
-export { createPreparedVolumeDatasets, loadPreparedVolumeDatasets, validatePreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
-export type { PreparedVolumeDatasets, PreparedVolumeDatasetBank, PreparedVolumeDataset, PreparedVolumeDatasetBrightness,
-  PreparedVolumeDatasetState, PreparedPointVisibility } from '../volume/prepared-volume-datasets.js';
-export { mountPreparedCataloguePoints, validatePreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
-export type { PreparedCataloguePoints, PreparedCataloguePoint } from '../stars/prepared-catalogue-points.js';
+export { createPreparedVolumeDatasets, loadPreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
+export type { PreparedVolumeDatasetState } from '../volume/prepared-volume-datasets.js';
+export { mountPreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
+
 export { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
 export { createRetainedGeometrySnapshot } from '../rendering/retained-leaf-pool.js';
 

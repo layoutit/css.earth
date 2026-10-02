@@ -8,7 +8,7 @@ import { createStarRemovalJobs, starRemovalJobsHandler } from '../jobs/operation
 import { readGeometryMap } from '../../features/observations/models/geometry-model.ts';
 import { readRegisteredGeometrySource } from '../workflows/geometry/registered-source.ts';
 import { geometryFile } from '../../features/geometry/jobs-model.ts';
-import { validatePreparedCssVolume } from '../../adapters/renderer/volume-validation.ts';
+import { validatePreparedCssVolume } from '@cssearth/objects';
 import { initializeShapeCloud, readShapeCloudSettings } from '../../features/shape-cloud/model.ts';
 import { bakeShapeCloud } from '../workflows/shape-cloud/bake.ts';
 import { readShapeCloudResult } from '../../features/shape-cloud/result.ts';

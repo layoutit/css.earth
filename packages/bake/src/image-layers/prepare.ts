@@ -1,3 +1,5 @@
+import { PREPARED_IMAGE_LAYER_BANK_SCHEMA, type PreparedImageLayerBank, type PreparedImageLayerLeaf as Quad } from '@cssearth/objects';
+
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -11,17 +13,6 @@ import { removeCompanionGalaxies, removeForegroundStars, type CompanionEllipse, 
 import { imageLayerBulgeModel } from './bulge.ts';
 import { compileVolumeLeaf } from '../volume-leaves/index.ts';
 
-type Quad = { id: string; axis: LayerAxis; offsetKpc: number; centerUnits: Vec3; doubleSided: true; texturePath: string; widthPx: number; heightPx: number;
-  verticesUnits: [Vec3, Vec3, Vec3, Vec3]; uvs: [[number, number], [number, number], [number, number], [number, number]];
-  style: { width: string; height: string; transform: string; backgroundSize: string; backgroundPosition: string };
-  bytes: number };
-export interface PreparedImageLayerBank {
-  schema: 'cssearth-image-layer-bank@1'; id: string; frame: { referenceFrame: 'sun-icrf'; epochJdTt: 2461286.5;
-    originM: Vec3; localToReferenceXyzw: [number, number, number, number]; metersPerUnit: number;
-    boundsUnits: { min: Vec3; max: Vec3 } }; observation: ImageLayerRecipe['observation'];
-  banks: { axis: LayerAxis; normalUnits: Vec3; samplingStepUnits: number; leaves: Quad[] }[]; resources: { path: string; bytes: number; width: number; height: number }[];
-  provenance: unknown; approximation: { model: string; canonicalRecomposition: string; limitations: string[] };
-}
 const M_PER_PC = 3.0856775814913673e16, M_PER_KPC = M_PER_PC * 1000;
 const scale = (a: Vec3, n: number): Vec3 => [a[0] * n, a[1] * n, a[2] * n];
 const difference3 = (a: Vec3, b: Vec3): Vec3 => [a[0] - b[0], a[1] - b[1], a[2] - b[2]], difference = difference3;
@@ -239,7 +230,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     const bank=(axis:LayerAxis)=>{const selected=leaves.filter(l=>l.axis===axis),sampled=selected.filter(l=>!l.id.startsWith('bulge-')),middle=sampled[Math.floor(sampled.length/2)],normal=axis==='z'?diskNormal:flat?norm(difference(middle.verticesUnits[axis==='x'?1:3],middle.verticesUnits[0])):norm(cross(difference(middle.verticesUnits[1],middle.verticesUnits[0]),difference(middle.verticesUnits[2],middle.verticesUnits[1])));let samplingStepUnits=thickness/(recipe.geometry.depthWeights.length-1);
     if(flat&&axis!=='z')samplingStepUnits=recipe.geometry.supportRadiusKpc*2;else if(axis!=='z'){const values=sampled.map(l=>dot(l.centerUnits,normal)),span=Math.max(...values)-Math.min(...values);samplingStepUnits=sampled.length>1?span/(sampled.length-1):recipe.geometry.supportRadiusKpc*2;}
     return {axis,normalUnits:normal,samplingStepUnits,leaves:selected};};
-  const result:PreparedImageLayerBank={schema:'cssearth-image-layer-bank@1',id:recipe.id,frame:{referenceFrame:'sun-icrf',epochJdTt:2461286.5,originM:origin,localToReferenceXyzw:q,metersPerUnit:M_PER_KPC,boundsUnits:bounds},observation:recipe.observation,
+  const result:PreparedImageLayerBank={schema:PREPARED_IMAGE_LAYER_BANK_SCHEMA,id:recipe.id,frame:{referenceFrame:'sun-icrf',epochJdTt:2461286.5,originM:origin,localToReferenceXyzw:q,metersPerUnit:M_PER_KPC,boundsUnits:bounds},observation:recipe.observation,
     banks:(['x','y','z'] as LayerAxis[]).map(bank),resources,provenance,approximation:{model:flat?`The observed display RGB lies on one plane, the ${recipe.geometry.kind}'s midplane; nothing in it has depth.`:`A low-frequency fraction of the observed display RGB is distributed through one normalized ${recipe.geometry.kind} depth profile; the compact residual remains on the physical midplane.`,canonicalRecomposition:'The source-facing diffuse slabs use optical-depth weights and composite with the residual layer to reproduce the prepared observation within resampling and encoding error.',limitations:['Depth is parametric and is not measured per pixel.','Compact residuals are image-frequency features, not classified stars or measured 3D positions.','Cross-axis banks are sampled projections of the separable display model; finite slices and bank handoffs remain visible.',foreground?`Milky Way foreground stars from ${recipe.source.foregroundStars!.source} were removed where they show (${foreground.removed} of the ${foreground.inImage} catalogued in the image; ${foreground.extended} left where the light is an extended object); fainter ones and uncatalogued stars remain.`:'Released foreground stars remain because blanket removal would also erase intrinsic galaxy stars.',...(colorTie?[`Whole-galaxy color tied to B-V ${colorTie.bv} (${colorTie.source}): red/green and blue/green in linear light measured ${colorTie.measured[0]}, ${colorTie.measured[2]}, target ${colorTie.target[0]}, ${colorTie.target[2]}; gains red ${colorTie.gains[0]}, blue ${colorTie.gains[2]}.`]:[]),...(bulgeModel?[`The bulge fit (${recipe.geometry.bulge!.source}) stands in for ${saturatedPixels} saturated pixels, scaled by ${lightScale.toPrecision(4)} optical depth per unit fitted light.`]:[]),...(companions?[`Companion galaxies ${companions.keys.join(', ')} from ${recipe.source.companions!.source} were replaced by the light around them, out to ${companions.extentHalfLight.join(', ')} half-light radii.`]:[])]}};
   await writeFile(resolve(options.outputDirectory,'image-layers.json'),JSON.stringify(result,null,2)+'\n');return result;
 }

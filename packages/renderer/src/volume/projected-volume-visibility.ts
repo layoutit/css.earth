@@ -1,18 +1,11 @@
+import { DEFAULT_POINT_VISIBILITY, type PreparedPointVisibility, type DensityVolumeFrame } from '@cssearth/objects';
 import { presentPhysicalPoseInVolume, eyeDistanceM } from '@cssearth/engine';
-import type { DensityVolumeFrame } from '@cssearth/objects';
+
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssCameraAxesFromOrientation } from '../navigation/world-camera-math.js';
 import { dot3 as dot } from '@cssearth/core';
 
 type Vector = readonly [number, number, number];
-
-/** Projected-radius thresholds for prepared content that stands for a whole volume. */
-export interface PreparedPointVisibility {
-  readonly hiddenBelowRadiusPixels: number;
-  readonly fullAboveRadiusPixels: number;
-}
-
-export const DEFAULT_POINT_VISIBILITY: PreparedPointVisibility = Object.freeze({ hiddenBelowRadiusPixels: 2, fullAboveRadiusPixels: 24 });
 
 /** Radius about the frame origin that holds every corner of the prepared bounds. */
 export function volumeFramingRadiusUnits(frame: DensityVolumeFrame): number {

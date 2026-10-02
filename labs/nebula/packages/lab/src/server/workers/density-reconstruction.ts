@@ -5,7 +5,7 @@ import { dirname, resolve, relative, isAbsolute, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import { parseDensityPlacement, densityPlacementTransform, createAlignedObservationMapping, parseCloudAppearance, prepareCloudDetail, CLOUD_DETAIL_METHOD } from '@cssearth/bake/volume';
-import { parseVolumeRecipe } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, parseVolumeRecipe } from '@cssearth/objects';
 import type { ReconstructionWork } from '../../features/reconstruction/reconstruction-types.ts';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { rectifyObservation, writeObservationPanel } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
@@ -114,7 +114,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   painted.slices.provenance=provenance;
   await json(resolve(output,'prepared/volume-slices.json'),painted.slices);
   const data=compileCssVolume({id:work.id,frame,slices:painted.slices,recipe:{anchors:[]}});
-  const prepared={schema:'cssearth-prepared-object@1',id:work.id,type:'density-volume',format:'cssearth-density-volume@1',data};
+  const prepared={schema:'cssearth-prepared-object@1',id:work.id,type:'density-volume',format:DENSITY_VOLUME_FORMAT,data};
   await json(resolve(output,'source/provenance.json'),provenance);
   await json(resolve(output,'source/validation.json'),validation);
   await json(resolve(output,'prepared/volume.json'),prepared);

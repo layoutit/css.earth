@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { projectVolumeImpostors, selectImpostorViews } from './volume-impostor-projection.js';
 import { projectedVolumeOpacity, projectVolumeSphere } from './projected-volume-visibility.js';
-import { validateVolumeImpostors } from './volume-impostor-validation.js';
-import type { PreparedVolumeImpostors, VolumeCameraPublication, VolumeVector } from './types.js';
+import { type PreparedVolumeImpostors, type VolumeVector } from '@cssearth/objects';
+import type { VolumeCameraPublication } from './types.js';
 
 const frame = { referenceFrame: 'fixture', epochJdTt: 123, originM: [0, 0, 0] as const,
   localToReferenceXyzw: [0, 0, 0, 1] as const, metersPerUnit: 1,
@@ -50,16 +50,12 @@ test('camera roll rotates the prepared image, without selecting another depth di
   [0, 1, -1, 0].forEach((n, i) => assert.ok(Math.abs(view.matrix[i] - (n)) < 10 ** -2 / 2, `${view.matrix[i]} is not close to ${n}`));
 });
 test('directional views have bounded continuous weights and declared orthonormal camera bases', () => {
-  const resources = new Set(bank.views.map(view => view.texturePath));
-  assert.deepEqual(validateVolumeImpostors(bank, resources), bank);
   for (let degree = 0; degree <= 360; degree++) {
     const a = degree * Math.PI / 180, back: VolumeVector = [Math.sin(a), 0, Math.cos(a)];
     const views = selectImpostorViews(bank.views, back);
     assert.ok(views.length <= 3); assert.ok(Math.abs(views.reduce((sum, view) => sum + view.weight, 0) - (1)) < 10 ** -2 / 2, `${views.reduce((sum, view) => sum + view.weight, 0)} is not close to ${1}`);
   }
-  assert.throws(() => validateVolumeImpostors({ ...bank, volumeAboveDiameterPixels: 1 }, resources), /thresholds/);
-  assert.throws(() => validateVolumeImpostors(bank, new Set()), /declared/);
-  assert.throws(() => validateVolumeImpostors({ ...bank, views: [{ ...bank.views[0], right: [2, 0, 0] }, ...bank.views.slice(1)] }, resources), /orthonormal/);
+
 });
 test('turning in place keeps the same views; moving around the volume selects new ones', () => {
   const p = publication();

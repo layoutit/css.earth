@@ -2,8 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { cameraPoseToReferenceFrame } from '@cssearth/engine';
-import { validatePreparedCssVolume } from './validation.js';
-import type { PreparedCssVolume } from './types.js';
+import { validatePreparedCssVolume, type PreparedCssVolume } from '@cssearth/objects';
+
 import { preparedVolumeCameraTransform } from './prepared-volume-runtime.js';
 
 const valid = (): PreparedCssVolume => ({
@@ -20,16 +20,6 @@ const valid = (): PreparedCssVolume => ({
       style: { width: '2px', height: '2px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', backgroundSize: '2px 2px', backgroundPosition: '0px 0px' } }] }],
   resources: ['x', 'y', 'z'].map(axis => ({ path: `slices/${axis}/00.png`, bytes: 2, width: 2, height: 2 })),
   provenance: {}, approximation: {},
-});
-
-test('accepts the direct prepared CSS volume payload and all three stacks', () => {
-  assert.equal(validatePreparedCssVolume(valid()).stacks.length, 3);
-});
-
-test('rejects a runtime URL in authored leaf style', () => {
-  const value = valid();
-  Object.assign(value.stacks[0]!.leaves[0]!, { style: { ...value.stacks[0]!.leaves[0]!.style, transform: 'url(/runtime.png)' } });
-  assert.throws(() => validatePreparedCssVolume(value), /URL-free/);
 });
 
 test('projects the Sun anchor and arbitrary points through the same canonical observer', () => {
@@ -82,12 +72,3 @@ function transformPoint(rotation: readonly number[], translation: readonly [numb
     translation[1] + dot(rotation, 3, [point[0] * scale, point[1] * scale, point[2] * scale]),
     translation[2] + dot(rotation, 6, [point[0] * scale, point[1] * scale, point[2] * scale])];
 }
-
-test('rotated bank normals must remain an orthonormal basis', () => {
-  const value = valid();
-  const normals = [[0, 1, 0], [-1, 0, 0], [0, 0, 1]];
-  value.stacks.forEach((stack, i) => Object.assign(stack, { normalUnits: normals[i] }));
-  assert.deepEqual(validatePreparedCssVolume(value).stacks[0]!.normalUnits, [0, 1, 0]);
-  Object.assign(value.stacks[1]!, { normalUnits: [0, 1, 0] }); assert.throws(() => validatePreparedCssVolume(value), /orthogonal/);
-  Object.assign(value.stacks[1]!, { normalUnits: [0, 2, 0] }); assert.throws(() => validatePreparedCssVolume(value), /unit vector/);
-});

@@ -8,11 +8,11 @@ import { parseShellRecipe } from './config.ts';
 import { parseGriddedShellMesh, parseIndexedShellMesh, loadShellMesh, type ShellMesh } from './mesh.ts';
 import { prepareSurfaceShellObject } from './prepare.ts';
 import { sourceBytes } from '../volume/node/index.ts';
-import type { PreparedCssSurfaceShell } from '@cssearth/renderer/shell/types.ts';
+import { SHELL_CORNER_PERMUTATIONS, type PreparedCssSurfaceShell, validatePreparedCssSurfaceShell } from '@cssearth/objects';
 import { compileCssSurfaceShell } from './css-shell.ts';
-import { SHELL_CORNER_PERMUTATIONS, nearestFacingIndex, shellMaterialAddress } from '@cssearth/renderer/shell/material-address.ts';
+import { nearestFacingIndex, shellMaterialAddress } from '@cssearth/renderer/shell/material-address.ts';
 import { shellRim } from './atlas.ts';
-import { validatePreparedCssSurfaceShell } from '@cssearth/renderer/shell/validation.ts';
+
 import { dotN as dot } from '@cssearth/core';
 import { TEXELS_PER_CSS_PIXEL } from '../scene/index.ts';
 

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { shapeCloudPhotoPose, shapeCloudImageAxes } from './shape-cloud-photo-pose.js';
 import { shapeCloudCamera } from '../../adapters/viewer/shape-cloud-camera';
 import { preparedVolumeCameraTransform } from '../../adapters/viewer/camera-reference';
-import type { PreparedCssVolume } from '../../adapters/viewer/camera-reference';
+import type { PreparedCssVolume } from '@cssearth/objects';
 
 const frame: PreparedCssVolume['frame'] = { referenceFrame: 'lab-sky-west-north-toward', epochJdTt: 2451545, originM: [0, 0, 0],
   localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: { min: [-5, -5, -5], max: [5, 5, 5] } };

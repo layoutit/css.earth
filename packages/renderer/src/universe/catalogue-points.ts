@@ -1,10 +1,11 @@
 import { writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
-import { MAX_CATALOGUE_POINTS, parseCatalogueCells, parseCataloguePointSpread, parseDensityVolumeFrame } from '@cssearth/objects';
-import { decodeCatalogueBankBinary } from '@cssearth/objects';
+import { CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS, parseCatalogueCells, parseCataloguePointSpread, parseDensityVolumeFrame, decodeCatalogueBankBinary, type CatalogueCells, type CataloguePointSpread, type DensityVolumeFrame, type VolumeVector } from '@cssearth/objects';
+
 import { readPreparedBinary } from '../prepared-data/prepared-binary.js';
-import type { CatalogueCells, CataloguePointSpread, DensityVolumeFrame } from '@cssearth/objects';
-import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
+
+import type { VolumeCameraPublication } from '../volume/types.js';
+
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
 import { revealLayer } from '../rendering/layer-reveal.js';
 import { afterStartup } from '../rendering/startup-gate.js';
@@ -108,11 +109,11 @@ export interface PreparedCataloguePoints {
   readonly cells: CatalogueCells;
 }
 
-/** A prepared `cssearth-catalogue-points@1` bank: fixed 3D positions of a published catalogue and how to draw them. */
+/** A prepared catalogue-point bank: fixed 3D positions of a published catalogue and how to draw them. */
 export function parseCataloguePoints(value: unknown, at = 'catalogue points'): PreparedCataloguePoints {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`);
   const data = value as Record<string, unknown>;
-  if (data.schema !== 'cssearth-catalogue-points@1' || typeof data.id !== 'string' || !data.id) throw new TypeError(`${at}: expected a cssearth-catalogue-points@1 bank with an id.`);
+  if (data.schema !== CATALOGUE_POINTS_SCHEMA || typeof data.id !== 'string' || !data.id) throw new TypeError(`${at}: expected a ${CATALOGUE_POINTS_SCHEMA} bank with an id.`);
   const frame = parseDensityVolumeFrame(data.frame);
   const appearance = data.appearance as Record<string, unknown> | undefined;
   const colorCss = appearance?.colorCss, radiusPx = appearance?.radiusPx, opacity = appearance?.opacity, palette = appearance?.palette, levels = appearance?.levels;

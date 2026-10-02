@@ -10,7 +10,7 @@ import { decomposeStructures, type WaveletSettings } from '@cssearth/nebula-reco
 import { createCoherentVolumeSampler, type CoarseStellarDensityPrior } from '@cssearth/nebula-reconstruction/methods/density-prior/coherent-volume';
 import { validateCoherentColumns, validateCoherentAxisSampling } from '@cssearth/nebula-reconstruction/methods/density-prior/coherent-validation';
 import { bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/bake/volume/node';
-import { type VolumeSlices } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, type VolumeSlices } from '@cssearth/objects';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 
 type Vec3 = [number, number, number];
@@ -112,7 +112,7 @@ for (const variant of selected) {
   }
   const data = compileCssVolume({ id: variant.id, frame, slices, recipe: { anchors: [] } });
   const prepared = { schema: 'cssearth-prepared-object@1', id: variant.id, type: 'density-volume',
-    format: 'cssearth-density-volume@1', data };
+    format: DENSITY_VOLUME_FORMAT, data };
   const bytes = Buffer.from(`${JSON.stringify(prepared)}\n`);
   const sourceDirectory = resolve(variant.directory, 'source');
   await mkdir(sourceDirectory, { recursive: true });

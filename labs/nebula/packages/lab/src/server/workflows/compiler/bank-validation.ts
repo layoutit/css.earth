@@ -1,14 +1,12 @@
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import sharp from 'sharp';
-import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
+import { validatePreparedCssVolume, type PreparedCssVolume, type CompilerBakeResult, type CompilerPin } from '@cssearth/objects';
 import { readGeometryPin } from '../geometry/registered-source.ts';
 import { jointRecord, jointPath } from '../../../features/joint-fit/model.ts';
 import { readCompilerRecipe } from '../../../features/compiler/model.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { readDepthRecipe, verifyDepthEvidence } from './depth-model.ts';
 import { readPhotometricMgeRecipe, verifyPhotometricEvidence } from './photometric-prior.ts';
-import type { PreparedCssVolume } from '../../../adapters/renderer/volume-types.ts';
-import type { CompilerBakeResult, CompilerPin } from '@cssearth/objects';
 
 type BankIdentity = Pick<CompilerBakeResult, 'id' | 'volumeId' | 'frame' | 'fieldIdentity'>;
 const record = coreIsRecord;
@@ -35,7 +33,6 @@ export function assertCompilerDatasetGeometry(neutral: PreparedCssVolume, textur
     }
   }
 }
-
 
 export async function validateCompilerResult(root: string, value: unknown) {
   const result = readCompilerResult(value);

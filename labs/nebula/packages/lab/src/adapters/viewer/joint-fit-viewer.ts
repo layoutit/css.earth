@@ -1,8 +1,9 @@
 /** Lab URL and renderer binding for the retained joint-fit scene. */
 import { createJointFitViewer as createScene, type JointFitViewerOptions as SceneOptions,
   type JointFitViewer } from '@cssearth/volume-viewer/scene/joint-fit-viewer';
-import type { JointVolumeResult } from '@cssearth/objects';
-import type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+import { type JointVolumeResult, type PreparedCssVolume } from '@cssearth/objects';
+import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+
 import { volumeRenderer } from './volume-renderer';
 import '@cssearth/renderer/styles/volume.css';
 export { readJointVolumeResult } from '@cssearth/objects';

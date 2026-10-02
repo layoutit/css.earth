@@ -1,6 +1,7 @@
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { projectVolumeSphere } from './projected-volume-visibility.js';
-import type { PreparedCssVolume, PreparedVolumeImpostors, VolumeCameraPublication, VolumeVector } from './types.js';
+import type { VolumeCameraPublication } from './types.js';
+import type { PreparedCssVolume, PreparedVolumeImpostors, VolumeVector } from '@cssearth/objects';
 
 type View = PreparedVolumeImpostors['views'][number];
 export interface VolumeImpostorProjection {

@@ -1,10 +1,9 @@
+import { PREPARED_CSS_SURFACE_SHELL_SCHEMA, SHELL_CORNER_PERMUTATIONS, type Vector3, type PreparedCssSurfaceShell } from '@cssearth/objects';
 /** Actual PolyCSS preparation of static triangular image coverage and retained transforms. */
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, resolveProjectiveQuadGuards, type Polygon } from '@layoutit/polycss';
 import type { ShellRecipe } from './config.ts';
 import { unitVector, type ShellMesh } from './mesh.ts';
-import type { Vector3 } from '@cssearth/objects';
-import type { PreparedCssSurfaceShell } from '@cssearth/renderer/shell/types.ts';
-import { SHELL_CORNER_PERMUTATIONS } from '@cssearth/renderer/shell/material-address.ts';
+
 import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../scene/index.ts';
 
 /** A face drawn at TEXELS_PER_CSS_PIXEL. PolyCSS sizes the face's box at one CSS pixel per texel of its atlas tile, and
@@ -74,7 +73,7 @@ export function compileCssSurfaceShell(options: { id: string; recipe: ShellRecip
       ...(recipe.atlas.facingLevels ? { vertexIndices: indices, materialTransforms } : {}) };
   });
   const units = recipe.frame.metersPerUnit;
-  return { schema: 'cssearth-css-surface-shell@1', id, frame: recipe.frame, unitScale: recipe.unitScale,
+  return { schema: PREPARED_CSS_SURFACE_SHELL_SCHEMA, id, frame: recipe.frame, unitScale: recipe.unitScale,
     atlas: { path: atlasResource.path, ...recipe.atlas }, visibility: {
       hiddenInsideM: recipe.visibility.hiddenInsideUnits * units, fullUntilM: recipe.visibility.fullUntilUnits * units,
       hiddenBeyondM: recipe.visibility.hiddenBeyondUnits * units }, faces, resources: [atlasResource], provenance,

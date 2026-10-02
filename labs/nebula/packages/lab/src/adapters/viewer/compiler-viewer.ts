@@ -1,7 +1,8 @@
 /** Lab host binding. The retained scene and its resource lifetime belong to volume-viewer. */
 import { createCompilerViewer as createScene, type CompilerViewerOptions as SceneOptions,
   type CompilerViewer } from '@cssearth/volume-viewer/scene/compiler-viewer';
-import type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+import type { PreparedCssVolume } from '@cssearth/objects';
 import { compilerRenderer } from './compiler-renderer';
 import '@cssearth/renderer/styles/volume.css';
 

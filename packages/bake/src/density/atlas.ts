@@ -1,7 +1,6 @@
 /** Offline dataset/axis WebP delivery. Geometry and non-slice resources remain unchanged. */
 import sharp from 'sharp';
-import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
-import type { PreparedCssVolume, PreparedVolumeLeaf, PreparedVolumeLeafStyle } from '@cssearth/renderer/volume/types.ts';
+import { validatePreparedCssVolume, type PreparedCssVolume, type PreparedVolumeLeaf, type PreparedVolumeLeafStyle } from '@cssearth/objects';
 
 const GUTTER = 2, MAX_SIZE = 8192;
 interface Rectangle { path: string; width: number; height: number; x: number; y: number }

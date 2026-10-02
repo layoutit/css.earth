@@ -1,19 +1,20 @@
 import { afterEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { parseObjectDescriptor, prepareObject } from '@cssearth/objects';
-import { createPreparedVolumeDatasets, loadPreparedVolumeDatasets, validatePreparedVolumeDatasets,
-  volumeDatasetCompositeOpacity } from './prepared-volume-datasets.js';
+import { parseObjectDescriptor, prepareObject, validatePreparedVolumeDatasets, type PreparedVolumeDatasets, type PreparedCssVolume, type VolumeVector, validatePreparedCataloguePoints, type PreparedCataloguePoints, createRenderElementBudget } from '@cssearth/objects';
+import { createPreparedVolumeDatasets, loadPreparedVolumeDatasets, volumeDatasetCompositeOpacity } from './prepared-volume-datasets.js';
+
 import { mountPreparedVolumeLod, samePreparedVolumeTopology } from './prepared-volume-lod.js';
-import type { PreparedVolumeDatasets } from './prepared-volume-datasets.js';
-import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from './types.js';
-import { mountPreparedCataloguePoints, validatePreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
-import type { PreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
+
+import type { VolumeCameraPublication } from './types.js';
+
+import { mountPreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
+
 import { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
 import { createPreparedResidency } from '../rendering/prepared-residency.js';
 import { cloudCompositeOpacity } from '@cssearth/volume-viewer/scene/cloud-inspection';
 import { CSS_COMPILER_RENDER_BUDGET } from './compiler-render-budget.js';
-import { createRenderElementBudget } from '@cssearth/objects';
+
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 
 class FakeElement {
@@ -163,19 +164,6 @@ test('catalogue points project prepared positions, cull hidden support and keep 
   mount.destroy(); mount.destroy(); assert.deepEqual(f.host.children, [f.before]);
 });
 
-test('malformed point payloads and dataset-specific catalogue geometry are rejected before mounting', () => {
-  const p = points();
-  for (const altered of [{ ...p, points: [p.points[0], p.points[0]] },
-    { ...p, points: [{ ...p.points[0], sizePx: NaN }] }, { ...p, points: [{ ...p.points[0], opacity: 1.1 }] },
-    { ...p, points: [{ ...p.points[0], colorCss: 'url(unsafe)' }] }]) assert.throws(() => validatePreparedCataloguePoints(altered));
-  const data = payload(), second = data.datasets[1];
-  const moved = { ...second.stars, points: second.stars.points.map(point => ({ ...point, positionUnits: [1, 2, 3] as VolumeVector })) };
-  assert.throws(() => validatePreparedVolumeDatasets({ ...data, datasets: [data.datasets[0], { ...second, stars: moved }] }), /same catalogue geometry/);
-  assert.throws(() => validatePreparedVolumeDatasets({ ...data, defaultDataset: 'absent' }), /default/);
-  assert.throws(() => validatePreparedVolumeDatasets({ ...data, datasets: [data.datasets[0], data.datasets[0]] }), /content/);
-  assert.throws(() => validatePreparedVolumeDatasets({ ...data, pointVisibility: { hiddenBelowRadiusPixels: 24, fullAboveRadiusPixels: 2 } }), /thresholds/);
-  assert.throws(() => validatePreparedVolumeDatasets({ ...data, datasets: [{ ...data.datasets[0], brightness: { overall: 2, x: 1, y: 1, z: 1 } }] }), /brightness/);
-});
 
 test('same-topology datasets reuse one retained cloud and replace all selected material', () => {
   const f = dom(), data = payload();
@@ -388,11 +376,6 @@ test('angular compact-light footprints zoom and change dataset material without 
   mount.destroy();
 });
 
-test('nearby volume visibility is explicit and rejects unknown policies', () => {
-  assert.equal(validatePreparedVolumeDatasets({ ...payload(), contextVisibility: 'independent' }).contextVisibility, 'independent');
-  assert.equal(validatePreparedVolumeDatasets(payload()).contextVisibility, 'galactic');
-  assert.throws(() => validatePreparedVolumeDatasets({ ...payload(), contextVisibility: 'maybe' }));
-});
 
 test('native mounts build every node at mount, as the server-rendered DOM they adopt was built', () => {
   const lazy = dom(), eager = dom(), data = { ...budgetPayload(30, 3), starsEnabled: true };

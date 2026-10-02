@@ -1,9 +1,9 @@
-import { type PreparedLeafBounds } from '@cssearth/objects';
+import { type PreparedLeafBounds, type PreparedCssVolume, type VolumeVector, validatePreparedCssVolume } from '@cssearth/objects';
 import { createPreparedLeafFrustum, preparedLeafMayContribute } from '../rendering/prepared-leaf-frustum.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { cssViewFromOrientation, worldRotationFromQuaternion, worldRotationCss } from '../navigation/world-camera-math.js';
-import type { PreparedVolumeMountOptions, PreparedMaterialVolumeRuntime, PreparedCssVolume, VolumeCameraPublication, VolumeLocalCamera, VolumeVector, PreparedVolumeCameraTransform } from './types.js';
-import { validatePreparedCssVolume } from './validation.js';
+import type { PreparedVolumeMountOptions, PreparedMaterialVolumeRuntime, VolumeCameraPublication, VolumeLocalCamera, PreparedVolumeCameraTransform } from './types.js';
+
 import { revealLayer } from '../rendering/layer-reveal.js';
 
 /** A leaf image this large decodes off the main thread before it shows again (layer-reveal.ts). */

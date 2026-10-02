@@ -1,3 +1,4 @@
+import { PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
 import { sha256 } from '@cssearth/core/node';
 import { parseProductInputEvidence } from '@cssearth/objects/provenance';
 import type { ProductInputEvidence } from '@cssearth/objects/provenance';
@@ -5,7 +6,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { parseObjectDescriptor } from '@cssearth/objects';
+
 import type { Dataset } from '../../object-shell-types.ts';
 import { validateDatasetText } from '../../dataset-content.mts';
 import { parsePreparedVolumePresentation } from '../../volume-presentation.mts';
@@ -166,8 +167,8 @@ async function volumeSources(root: string, input: (path: string) => Promise<Buff
     if (manifest.schema !== 'cssearth-volume-source-manifest@2' || manifest.pathBase !== 'repository') throw new TypeError(`Invalid volume source manifest: ${record.objectId}.`);
     const descriptor = parseObjectDescriptor(json(await input(`${base}/object.json`)));
     const format = descriptor.prepared?.format;
-    if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-dataset-bank' && format === 'cssearth-volume-datasets@1') ||
-      (descriptor.type === 'image-layer-bank' && format === 'cssearth-image-layer-bank@1' && record.datasets.length === 1 && record.defaultDataset === 'optical')))
+    if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-dataset-bank' && format === PREPARED_VOLUME_DATASETS_SCHEMA) ||
+      (descriptor.type === 'image-layer-bank' && format === PREPARED_IMAGE_LAYER_BANK_SCHEMA && record.datasets.length === 1 && record.defaultDataset === 'optical')))
       throw new TypeError(`Invalid volume descriptor: ${record.objectId}`);
     results.push({ base, record, manifest, descriptor });
   }

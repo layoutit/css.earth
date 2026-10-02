@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
-import type { PreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
+import type { PreparedVolumeDatasets } from '@cssearth/objects';
 
 const decode = { ready: true };
 mock.module('../volume/volume-texture-readiness.js', { namedExports: {

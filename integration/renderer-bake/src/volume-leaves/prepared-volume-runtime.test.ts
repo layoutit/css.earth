@@ -4,9 +4,10 @@ import { afterEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { bakeSlab } from '@cssearth/bake/volume/node';
-import type { VolumeRecipe } from '@cssearth/objects';
+import { type VolumeRecipe, type PreparedCssVolume, type VolumeVector } from '@cssearth/objects';
 import { mountPreparedCssVolume } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
-import type { PreparedCssVolume, VolumeCameraPublication, VolumeVector } from '@cssearth/renderer/volume/types.ts';
+import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 
 const AXES = ['x', 'y', 'z'] as const;
@@ -213,7 +214,6 @@ test('rotation keeps geometry and texture resources stable while publishing leaf
   runtime.destroy(); runtime.destroy(); assert.deepEqual(host.children, [before]);
   runtime.publish(publication([1, 0, 0])); assert.equal(document.count, count);
 });
-
 
 for (const bounds of ['leaf', 'frame']) test(`prepared ${bounds} bounds defer offscreen textures and restore retained optical copies`, () => {
   const data = payload(3);

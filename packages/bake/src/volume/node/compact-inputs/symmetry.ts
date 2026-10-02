@@ -1,6 +1,6 @@
 import type { CompiledVolumeArtifact } from '../compiler/bake.ts';
 import type { VolumeSlices } from '@cssearth/objects';
-import { type DensityVolumeFrame, type CompilerPin } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, type DensityVolumeFrame, type CompilerPin } from '@cssearth/objects';
 /** Losslessly retained RGB emission voxels; runtime slice images remain disposable. */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
@@ -156,7 +156,7 @@ export async function replayCompactSymmetry<Volume extends CompiledVolumeArtifac
       schema: "cssearth-prepared-object@1",
       id: r.id,
       type: "density-volume",
-      format: "cssearth-density-volume@1",
+      format: DENSITY_VOLUME_FORMAT,
       data: volume,
     }) + "\n",
   );

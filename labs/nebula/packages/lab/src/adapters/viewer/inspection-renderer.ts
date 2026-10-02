@@ -1,9 +1,10 @@
 /** cssEarth image-bank/volume binding for retained contribution inspection. */
 import type { InspectionMountBackend } from '@cssearth/volume-viewer/scene/inspection-banks';
 import { mountPreparedCssImageLayers } from '@cssearth/renderer/image-layers/prepared-image-layer-runtime.ts';
-import type { PreparedCssImageLayers } from '@cssearth/renderer/image-layers/loader.ts';
+import { type PreparedCssImageLayers, type PreparedCssVolume } from '@cssearth/objects';
 import { mountPreparedCssVolume } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
-import type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+
 function imageBank(payload: PreparedCssVolume | PreparedCssImageLayers): PreparedCssImageLayers {
   if (!('bankViews' in payload) || !Array.isArray(payload.bankViews)) throw new TypeError('Missing prepared image-bank views.');
   return payload;

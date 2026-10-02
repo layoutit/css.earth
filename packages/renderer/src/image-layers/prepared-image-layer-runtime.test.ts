@@ -2,7 +2,7 @@ import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { imageLayerAxisWeights, mountPreparedCssImageLayers } from './prepared-image-layer-runtime.js';
-import type { PreparedCssImageLayers, PreparedImageLayerView } from './loader.js';
+import type { PreparedCssImageLayers, PreparedImageLayerView } from '@cssearth/objects';
 
 const views: readonly PreparedImageLayerView[] = [
   { axis: 'x', normalUnits: [1, 0, 0], samplingStepUnits: 1 },

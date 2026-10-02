@@ -3,7 +3,7 @@ import { readFile, mkdir, symlink, rename, rm, realpath } from 'node:fs/promises
 import { basename, dirname, resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
 import { parseDensityPlacement, placeDensitySlices } from '@cssearth/bake/volume';
-import { type VolumeSlices } from '@cssearth/objects';
+import { DENSITY_VOLUME_FORMAT, type VolumeSlices } from '@cssearth/objects';
 import { sourceBytes, containedPath } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { parseLabModelJson } from '../../../resources/model-paths.ts';
@@ -49,11 +49,11 @@ export async function preparePlacedDensity(root: string, options: PlacedDensityO
       placement, limitation: 'Authored simulation-to-sky display registration; no new measured gas/dust geometry.' };
     const frame = { ...descriptor.properties.volume, boundsUnits: slices.boundsUnits };
     const data = compileCssVolume({ id, frame, slices, recipe: { anchors: [] } });
-    const prepared = Buffer.from(JSON.stringify({ schema: 'cssearth-prepared-object@1', id, type: 'density-volume', format: 'cssearth-density-volume@1', data }) + '\n');
+    const prepared = Buffer.from(JSON.stringify({ schema: 'cssearth-prepared-object@1', id, type: 'density-volume', format: DENSITY_VOLUME_FORMAT, data }) + '\n');
     await writeFile(resolve(temporary, 'prepared/volume.json'), prepared);
     await writeFile(resolve(temporary, 'prepared/volume-slices.json'), JSON.stringify(slices, null, 2) + '\n');
     await writeFile(resolve(temporary, 'object.json'), JSON.stringify({ ...descriptor, id, properties: { ...descriptor.properties, volume: frame },
-      prepared: { format: 'cssearth-density-volume@1', url: 'prepared/volume.json' } }, null, 2) + '\n');
+      prepared: { format: DENSITY_VOLUME_FORMAT, url: 'prepared/volume.json' } }, null, 2) + '\n');
     await writeFile(resolve(temporary, 'placement-receipt.json'), JSON.stringify({ id, ...identity, reusedAlpha: true, reusedGrid: true }, null, 2) + '\n');
     // This directory owns only generated placement products; its source assets remain at their original paths.
     await rm(output, { recursive: true, force: true }); await rename(temporary, output);

@@ -1,3 +1,4 @@
+import { DENSITY_VOLUME_FORMAT } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { createConcurrencyLimit } from './concurrency.ts';
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
@@ -112,7 +113,7 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
       return [original];
     }
     const descriptor = await json(`${subject.density.directory}/object.json`);
-    if (descriptor.prepared?.format !== 'cssearth-density-volume@1') throw new TypeError('Density has no prepared resources.');
+    if (descriptor.prepared?.format !== DENSITY_VOLUME_FORMAT) throw new TypeError('Density has no prepared resources.');
     const manifestPath = relative(root, resolve(root, subject.density.directory, descriptor.prepared.url));
     const bytes = await readFile(await safePath(manifestPath));
     const manifest = parseLabModelJson(bytes.toString('utf8'));

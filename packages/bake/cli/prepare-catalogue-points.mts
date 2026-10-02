@@ -1,3 +1,4 @@
+import { CATALOGUE_POINTS_SCHEMA } from '@cssearth/objects';
 /**
  * Prepare a published point catalogue beside an object as a bank of fixed 3D points. `source/<id>/points.json` names
  * the table, its columns, the rows the authors' own selection keeps, an optional color column and the citation;
@@ -562,7 +563,7 @@ const fullDetail = (appearance as { fullDetail?: { units?: unknown; basis?: unkn
 if (fullDetail !== undefined && (typeof fullDetail.units !== 'number' || !(fullDetail.units > 0) || typeof fullDetail.basis !== 'string' || !fullDetail.basis)) {
   throw new TypeError(`${at('appearance.fullDetail')} needs positive units and a basis, got ${JSON.stringify(fullDetail)}.`);
 }
-const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recipe.meaning,
+const bank = { schema: CATALOGUE_POINTS_SCHEMA, id, source, meaning: recipe.meaning,
   frame: { referenceFrame: frame.output, epochJdTt: frame.epochJdTt, originM: aroundOriginM ?? [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
     metersPerUnit: aroundOriginM ? 3.0856775814913673e16 : outputMpc ? 3.0856775814913673e22 : 3.0856775814913673e19, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
   appearance: photographLook ? { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity, palette: photographLook.colors, paletteTone: photographLook.tones }

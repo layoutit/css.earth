@@ -1,3 +1,4 @@
+import { PREPARED_VOLUME_DATASETS_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, validatePreparedVolumeDatasets } from '@cssearth/objects';
 import { isRecord, isNonemptyText } from '@cssearth/core';
 /** Restore a delivered finite-emission dataset bank from its checked-in compact inputs; no lab, no research services. */
 import assert from 'node:assert/strict';
@@ -5,11 +6,9 @@ import { mkdir, readFile, rename, rm, readdir } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
 import { restoreCompactFiniteEmission, localPath, pinned, type Pin, writeAtomic } from '../volume/node/index.ts';
-import { parsePreparedLmcStars } from '@cssearth/objects';
-import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/objects';
+
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { prepareVolumeAtlases } from '../density/index.ts';
-import { validatePreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 
 const record = (value: unknown, at: string): Record<string, unknown> => { assert.ok(isRecord(value), `Expected an object: ${at}`); return value; };
 const text = (value: unknown, at: string): string => { assert.ok(isNonemptyText(value), `Expected text: ${at}`); return value; };
@@ -129,9 +128,9 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
     }
     const first = delivered.find(entry => entry.imageId === defaultDataset);
     assert.ok(first, 'The delivered default dataset is missing.');
-    const data = validatePreparedVolumeDatasets({ schema: 'cssearth-volume-datasets@1', id: bankId, defaultDataset, framingRadiusUnits,
+    const data = validatePreparedVolumeDatasets({ schema: PREPARED_VOLUME_DATASETS_SCHEMA, id: bankId, defaultDataset, framingRadiusUnits,
       starsEnabled: Boolean(record(first.stars, 'default star presentation').enabled), datasets });
-    const envelope = stringify({ schema: 'cssearth-prepared-object@1', id: bankId, type: 'volume-dataset-bank', format: 'cssearth-volume-datasets@1', data });
+    const envelope = stringify({ schema: 'cssearth-prepared-object@1', id: bankId, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA, data });
 
     await mkdir(installed, { recursive: true });
     // Replace each installed dataset directory; a rename onto a populated one fails, and a re-prepare is normal.
@@ -144,7 +143,7 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
       compactInputs, datasets: receipts }));
     await writeAtomic(resolve(directory, 'object.json'), stringify({ schema: 'cssearth-object@2', id: bankId, type: 'volume-dataset-bank',
       properties: { frame, preparation: { source: 'source/compact-delivery.json' } },
-      prepared: { format: 'cssearth-volume-datasets@1', url: 'prepared/datasets.json' } }));
+      prepared: { format: PREPARED_VOLUME_DATASETS_SCHEMA, url: 'prepared/datasets.json' } }));
     console.log(`DELIVERY_READY ${directory}: ${datasets.length} datasets, ${datasets.reduce((sum, dataset) => sum + dataset.volume.resources.length, 0)} atlases`);
     return { id: bankId, status: 'prepared' };
   } finally { await rm(staging, { recursive: true, force: true }); }

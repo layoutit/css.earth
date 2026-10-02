@@ -1,10 +1,11 @@
+import { PREPARED_CSS_VOLUME_SCHEMA, validateCloudDensityFilter, type CloudDensityFilter, type PreparedCssImageLayers, type PreparedCssVolume } from '@cssearth/objects';
 import { materialResources, sharesMaterialGeometry } from './material-resources';
 import { createMaterialSlots, resyncCloudSupport } from './material-slots';
 import { mountOverlayLeaves } from '@cssearth/volume-viewer/scene/image-plane';
 import type { AppliedStarLayers } from '../star-removal/star-removal-types.ts';
 import { parseOverlayVariants, variantsForImage, type ImageLayer, type OverlayVariant } from './overlay-variants';
 import { defaultOverlayPlacement, updateOverlayPlacement, overlayPlacementTransform, type OverlayPlacement } from '@cssearth/bake/volume';
-import { validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/objects';
+
 import { readOverlaySessions, writeOverlaySessions, resolveSavedPlacement } from '../alignment/overlay-store';
 import { createToneResourceController, type ToneResource } from '../../adapters/viewer/tone-runtime';
 import { cloudCompositeOpacity, createCloudInspection, nativeCloudBrightness, parseCloudCatalogue, validateCloudBrightness } from '@cssearth/volume-viewer/scene/cloud-inspection';
@@ -12,7 +13,7 @@ import type { CloudBrightness, CloudStarOptions, CloudStarContext } from '@cssea
 import { mountPreparedLmcStars, parsePreparedLmcStars } from '../../adapters/viewer/catalogue-stars';
 import { loadRegisteredOverlay, mountReconstructionOverlay } from '../../adapters/viewer/reconstruction-overlay';
 import { createDifferencePlane, datasetResultOf, type DifferenceOverlayState } from './difference-plane';
-import { loadPreparedCssImageLayers, loadPreparedCssVolume, type PreparedCssImageLayers, type PreparedCssVolume, type VolumeCameraPublication } from '../../adapters/viewer/prepared-loaders';
+import { loadPreparedCssImageLayers, loadPreparedCssVolume, type VolumeCameraPublication } from '../../adapters/viewer/prepared-loaders';
 
 import { createInspectionCamera, type InspectionPose as CameraPose } from '@cssearth/volume-viewer/camera/inspection-camera';
 import { dominantInspectionBank, inspectPreparedLayers, mountInspectionScene, type InspectionAxis as Axis,
@@ -364,7 +365,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   }
   async function setMaterial(mode: 'neutral' | 'textured') {
     if (mode !== 'neutral' && mode !== 'textured') throw new TypeError('Invalid material mode.');
-    if (!payload || currentMode !== 'photo' || host.dataset.ready !== 'true' || !subject.reconstructionNeutral || payload.schema !== 'cssearth-css-volume@1') throw new Error('No interchangeable material bank.');
+    if (!payload || currentMode !== 'photo' || host.dataset.ready !== 'true' || !subject.reconstructionNeutral || payload.schema !== PREPARED_CSS_VOLUME_SCHEMA) throw new Error('No interchangeable material bank.');
     const token = slots.begin('material'), version = loadVersion, source = payload, directory = subject.directory, mountedDirectory = bankDirectory;
     report();
     try {
@@ -385,7 +386,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   /** Replace only the prepared material of a saved result that shares the mounted geometry; camera and leaves stay. */
   async function swapMaterialSubject(next: typeof subject, version: number, token: number) {
     const source = payload;
-    if (!source || source.schema !== 'cssearth-css-volume@1') throw new TypeError('No retained volume geometry to repaint.');
+    if (!source || source.schema !== PREPARED_CSS_VOLUME_SCHEMA) throw new TypeError('No retained volume geometry to repaint.');
     const current = () => !disposed && version === loadVersion && slots.current(token);
     const read = async (path: string) => {
       if (!relativePath(path)) throw new TypeError('Invalid prepared material path.');

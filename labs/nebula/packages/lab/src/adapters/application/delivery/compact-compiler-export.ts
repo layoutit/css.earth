@@ -2,7 +2,7 @@ import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Explicitly promote an already inspected compiler result to small, source-backed bake inputs. */
 import { readFile } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
-import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
+import { validatePreparedCssVolume } from '@cssearth/objects';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { localPath, pinned } from '../../../server/workflows/density/io.ts';
 import { writeAtomic } from '@cssearth/bake/volume/node';

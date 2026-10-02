@@ -1,7 +1,8 @@
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import type { DensityVolumeFrame } from '@cssearth/objects';
+import { type DensityVolumeFrame, type VolumeVector } from '@cssearth/objects';
 import { cssCameraAxesFromOrientation } from '../navigation/world-camera-math.js';
-import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
+import type { VolumeCameraPublication } from '../volume/types.js';
+
 import { mountPointPathSvg, mountPointPaths } from './point-paths.js';
 import { createSettlePacer } from '../rendering/settle-pacer.js';
 

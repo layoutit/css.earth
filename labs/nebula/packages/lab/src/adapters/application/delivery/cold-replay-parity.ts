@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
-import type { CompilerBakeResult } from '@cssearth/objects';
+import { validatePreparedCssVolume, type CompilerBakeResult } from '@cssearth/objects';
 
 /** Output locations may change; scientific identities, frame and appearance may not. */
 export function assertReplayScene(actual: CompilerBakeResult, expected: CompilerBakeResult): void {

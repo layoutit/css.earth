@@ -1,9 +1,7 @@
+import { PREPARED_VOLUME_IMPOSTORS_SCHEMA, validatePreparedCssVolume, type PreparedCssVolume, type PreparedVolumeImpostors, type PreparedVolumeLeaf, type VolumeAxis, type VolumeVector, type PreparedVolumeDatasetBrightness } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 /** Bounded offline views of the accepted PolyCSS leaves; no density reconstruction. */
 import sharp from 'sharp';
-import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
-import type { PreparedCssVolume, PreparedVolumeImpostors, PreparedVolumeLeaf, VolumeAxis, VolumeVector } from '@cssearth/renderer/volume/types.ts';
-import type { PreparedVolumeDatasetBrightness } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 
 const SIZE = 256;
 const AXES = ['x', 'y', 'z'] as const;
@@ -92,7 +90,7 @@ export async function prepareVolumeImpostors(options: {
     preparedResources.push({ path: view.texturePath, bytes: bytes.byteLength, width: SIZE, height: SIZE });
   }
   return { ...volume, resources: [...resources, ...preparedResources], impostors: {
-    schema: 'cssearth-volume-impostors@1', radiusUnits,
+    schema: PREPARED_VOLUME_IMPOSTORS_SCHEMA, radiusUnits,
     fullBelowDiameterPixels: 128, volumeAboveDiameterPixels: 256, views,
   } };
 }

@@ -52,3 +52,7 @@ Leaf bounds and their validator, prepared material/selection records and seriali
 
 Prepared CSS sky/parallax, cubic-sky and directional-Sun data and validation belong to `@cssearth/objects`;
 retained sky mounting, camera projection and direction computation remain here.
+
+Prepared CSS volume, impostor, dataset, embedded catalogue point, image-layer and surface-shell formats
+and validators belong to `@cssearth/objects`. This package keeps transport, projection, compositing,
+topology comparison and retained mounting; preparation imports the shared format contracts directly.

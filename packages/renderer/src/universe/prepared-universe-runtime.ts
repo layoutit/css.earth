@@ -1,4 +1,4 @@
-import { parsePreparedWorldContextPlan, type PreparedWorldContext, type PreparedWorldCameraFrame, type PreparedAssets } from '@cssearth/objects';
+import { parsePreparedWorldContextPlan, type PreparedWorldContext, type PreparedWorldCameraFrame, type PreparedAssets, validatePreparedCssVolume, type PreparedCssSurfaceShell, DEFAULT_POINT_VISIBILITY } from '@cssearth/objects';
 
 import { createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
@@ -6,7 +6,7 @@ import { mountBackgroundPoints } from './background-points.js';
 import { fetchPreparedCatalogueBank, fetchPreparedJson } from './catalogue-points.js';
 import { mountImageMesh } from './image-mesh.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
-import { validatePreparedCssVolume } from '../volume/validation.js';
+
 import { galaxyOutsideFade, logarithmicFade } from './world-context/context-scale.js';
 import { mountPreparedWorldContext, type BodyVisibility } from './prepared-world-context.js';
 
@@ -15,7 +15,6 @@ import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-c
 
 import { mountWorldContextPointSource } from './world-context/world-context-point-source.js';
 
-import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js';
 import { mountEnvironmentLabels } from './environment-labels.js';
 
@@ -23,7 +22,7 @@ import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import { createContextFocusBank } from './prepared-focus-bank.js';
 import { detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';
 import type { SelectedBank } from './detailed-focus-context.js';
-import { DEFAULT_POINT_VISIBILITY } from '../volume/projected-volume-visibility.js';
+
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context/world-context-planner-client.js';
 import { coveredTopRects, createLabelBudget } from '../labels/universe-label-policy.js';
