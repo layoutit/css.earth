@@ -5,7 +5,6 @@ import type { VolumeCameraPublication } from '../volume/types.js';
 import type { PreparedCssImageLayers, PreparedImageLayerView } from './loader.js';
 import { revealLayer } from '../rendering/layer-reveal.js';
 import { LARGE_IMAGE_PIXELS } from '../volume/prepared-volume-runtime.js';
-import { setReadout } from '../rendering/readouts.js';
 
 /** Transparent prepared layer banks. No opaque viewport matte is allowed here. */
 export function mountPreparedCssImageLayers({ host, before, payload, resolveResource }: {
@@ -13,8 +12,7 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
 }) {
   const document = host.ownerDocument, root = document.createElement('div');
   root.className = 'prepared-image-layer-bank'; root.dataset.imageLayerObject = payload.id;
-  // The bank fills the universe root; its projections are transparent and their scenes composite once (volume.css). An
-  // axis's projection is in the document only while it contributes, in the stacks' order.
+  // The bank fills the universe root; its projections are transparent and their scenes composite once (volume.css).
   const banks = payload.stacks.map(stack => {
     const projection = document.createElement('div'), camera = document.createElement('div');
     const scene = document.createElement('div'), mesh = document.createElement('div');
@@ -26,12 +24,12 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     const textures: { element: HTMLElement; path: string; large: boolean }[] = [];
     for (const leaf of stack.leaves) {
       const element = document.createElement('s');
-      setReadout(element, 'imageLayerLeaf', leaf.id);
+      element.dataset.imageLayerLeaf = leaf.id;
       Object.assign(element.style, leaf.style);
       textures.push({ element, path: leaf.texturePath, large: leaf.widthPx * leaf.heightPx >= LARGE_IMAGE_PIXELS });
       mesh.appendChild(element);
     }
-    scene.appendChild(mesh); camera.appendChild(scene); projection.appendChild(camera);
+    scene.appendChild(mesh); camera.appendChild(scene); projection.appendChild(camera); root.appendChild(projection);
     return { axis: stack.axis, projection, camera, scene, textures, loaded: false };
   });
   host.insertBefore(root, before);
@@ -44,7 +42,7 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
   };
   return Object.freeze({ root,
     /** The bank root is shown again: its large leaves wait for their decode (layer-reveal.ts). */
-    revealLarge() { for (const bank of banks) if (bank.projection.parentNode) revealLarge(bank); },
+    revealLarge() { for (const bank of banks) if (bank.projection.style.display !== 'none') revealLarge(bank); },
     publish(publication: VolumeCameraPublication) {
       if (destroyed) return;
       const transform = preparedVolumeCameraTransform(publication, payload.frame);
@@ -52,26 +50,25 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
       const local = presentPhysicalPoseInVolume(publication.world.pose, payload.frame);
       const weights = imageLayerAxisWeights(local.orientationXyzw, payload.bankViews);
       const [ox, oy] = publication.viewport.principalOffsetPixels;
-      for (const [index, bank] of banks.entries()) {
-        const weight = weights[bank.axis];
-        // A zero-weight axis contributes nothing: its 3D leaves leave the document, and nothing is written to them.
-        if (!(weight > 0)) { if (bank.projection.parentNode) bank.projection.remove(); continue; }
+      for (const bank of banks) {
         // Every write is on change: this publishes every camera frame (motion-freezes-membership.md).
-        const set = (element: HTMLElement, property: 'perspective' | 'perspectiveOrigin' | 'transform' | 'opacity' | 'visibility', value: string) => {
+        const set = (element: HTMLElement, property: 'perspective' | 'perspectiveOrigin' | 'transform' | 'opacity' | 'visibility' | 'display', value: string) => {
           if (element.style[property] !== value) element.style[property] = value;
         };
         set(bank.camera, 'perspective', `${transform.focalPixels}px`);
         set(bank.camera, 'perspectiveOrigin', `calc(50% + ${ox}px) calc(50% + ${oy}px)`);
         set(bank.scene, 'transform', cssTransform);
-        const returning = !bank.projection.parentNode;
-        if (!bank.loaded) {
+        const weight = weights[bank.axis];
+        const returning = weight > 0 && bank.projection.style.display === 'none';
+        if (weight > 0 && !bank.loaded) {
           for (const { element, path } of bank.textures) element.style.backgroundImage = `url("${url(path)}")`;
           bank.loaded = true;
         }
         if (returning) revealLarge(bank);
         set(bank.projection, 'opacity', String(weight));
-        set(bank.projection, 'visibility', 'visible');
-        if (returning) root.insertBefore(bank.projection, banks.slice(index + 1).find(later => later.projection.parentNode)?.projection ?? null);
+        set(bank.projection, 'visibility', weight > 0 ? 'visible' : 'hidden');
+        // A zero-weight axis contributes nothing; its 3D leaves leave compositing.
+        set(bank.projection, 'display', weight > 0 ? '' : 'none');
       }
     },
     destroy() { if (destroyed) return; destroyed = true; root.remove(); },
