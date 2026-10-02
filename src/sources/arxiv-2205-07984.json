@@ -1,0 +1,43 @@
+{
+  "id": "arxiv-2205-07984",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Böhringer & Chon (2021): The Cosmic Large-Scale Structure in X-rays (CLASSIX) Cluster Survey. IV. Superclusters in the local Universe at z ≤ 0.03",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2205.07984"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202141341"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2205.07984",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202141341",
+      "label": "Astronomy & Astrophysics 656, A144"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2205.07984",
+      "checkedOn": "2026-10-02",
+      "locator": "Section on the Coma supercluster and table 5: RXCJ1145.0+1936 is A 1367; the Coma cluster and A1367 are its two most prominent members"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics 656, A144",
+  "creators": [
+    "H. Böhringer",
+    "G. Chon"
+  ],
+  "publicationDate": "2021"
+}

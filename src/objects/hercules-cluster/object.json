@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hercules-cluster",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Hercules Cluster",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 154283879074568370000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Hercules Cluster",
+      "systemName": "Galaxy clusters",
+      "classification": "galaxy-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 32751042845403,
+      "description": "A cluster of galaxies 158.8 million parsecs away.",
+      "aliases": [
+        "Abell 2151",
+        "A2151",
+        "MCXC J1604.5+1743"
+      ],
+      "order": 5441,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2.2519509604498866e+24,
+        -4.087643798836451e+24,
+        1.4915934014182008e+24
+      ],
+      "presentationToReference": [
+        -0.5807152355021316,
+        0,
+        -0.814106759126654,
+        -0.7469283481079814,
+        0.3977771559319137,
+        0.5327958117434862,
+        -0.3238330712703479,
+        -0.9174820620691818,
+        0.2309952547843694
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 497689932498607600000,
+      "bodyRadiusM": 1.5428387907456836e+23
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

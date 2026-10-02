@@ -1,0 +1,118 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "great-attractor",
+  "displayName": "Great Attractor",
+  "panel": {
+    "facts": [
+      {
+        "id": "direction",
+        "label": "Direction (galactic)",
+        "value": "l 307°, b 9°",
+        "source": {
+          "catalogueId": "publication-1988apj-326-19l",
+          "url": "https://ui.adsabs.harvard.edu/abs/1988ApJ...326...19L",
+          "label": "Lynden-Bell et al. (1988), Galaxy streaming toward the new supergalactic center, ApJ 326, 19",
+          "checked": "2026-10-02",
+          "locator": "Abstract"
+        }
+      },
+      {
+        "id": "flow-distance",
+        "label": "Distance in the Hubble flow",
+        "value": "4,350 ± 350 km/s",
+        "source": {
+          "catalogueId": "publication-1988apj-326-19l",
+          "url": "https://ui.adsabs.harvard.edu/abs/1988ApJ...326...19L",
+          "label": "Lynden-Bell et al. (1988), Galaxy streaming toward the new supergalactic center, ApJ 326, 19",
+          "checked": "2026-10-02",
+          "locator": "Abstract"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Excess mass",
+        "value": "about 5.4 × 10¹⁶ solar masses",
+        "source": {
+          "catalogueId": "publication-1988apj-326-19l",
+          "url": "https://ui.adsabs.harvard.edu/abs/1988ApJ...326...19L",
+          "label": "Lynden-Bell et al. (1988), Galaxy streaming toward the new supergalactic center, ApJ 326, 19",
+          "checked": "2026-10-02",
+          "locator": "Abstract"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Placed at",
+        "value": "64.1 Mpc",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, cosmological parameters",
+          "checked": "2026-10-02",
+          "locator": "Comoving distance of 4,350 km/s in the Planck 2018 cosmology"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 199.65°, Dec -53.66°",
+        "source": {
+          "catalogueId": "publication-1988apj-326-19l",
+          "url": "https://ui.adsabs.harvard.edu/abs/1988ApJ...326...19L",
+          "label": "Lynden-Bell et al. (1988), Galaxy streaming toward the new supergalactic center, ApJ 326, 19",
+          "checked": "2026-10-02",
+          "locator": "Abstract: l = 307, b = 9, turned to J2000"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "galaxies",
+    "controls": [
+      {
+        "id": "galaxies",
+        "label": "Cosmicflows-4 · galaxies",
+        "thumbnail": "great-attractor-dataset-galaxies.webp",
+        "volume": {
+          "objectId": "nearby-universe-galaxies",
+          "datasetId": "galaxies",
+          "surface": "galaxies"
+        },
+        "source": {
+          "id": "nearby-universe-galaxies-galaxies",
+          "path": "../../nearby-universe-galaxies/source/manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Lynden-Bell et al. (1988), Galaxy streaming toward the new supergalactic center, ApJ 326, 19",
+      "href": "https://ui.adsabs.harvard.edu/abs/1988ApJ...326...19L"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Planck Collaboration (2020), Planck 2018 results VI, cosmological parameters",
+      "href": "https://arxiv.org/abs/1807.06209"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/1988ApJ...326...19L",
+      "credit": "Lynden-Bell et al. (1988), Galaxy streaming toward the new supergalactic center, ApJ 326, 19"
+    }
+  }
+}

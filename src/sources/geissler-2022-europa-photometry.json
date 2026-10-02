@@ -1,0 +1,22 @@
+{
+  "id": "geissler-2022-europa-photometry",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Geissler, Keszthelyi and Weller (2022): An empirical photometric correction for Europa",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.hou.usra.edu/meetings/lpsc2022/pdf/1691.pdf",
+      "label": "Geissler, Keszthelyi and Weller (2022): An empirical photometric correction for Europa"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/europa/source/manifest.json",
+      "locator": "/documents/34"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -17,8 +17,9 @@ test('every scene and every package the host draws has exactly one searchable de
   // A galaxy, a nebula or a cluster is an authored object like any body: its recipe declares no surface.
   const hosted = [...descriptors].filter(([, descriptor]) => isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe)
     && Array.isArray(descriptor.properties.recipe.surfaces) && !descriptor.properties.recipe.surfaces.length).map(([id]) => id);
-  // 19 galaxies, nebulae and clusters, and the four levels of the zoom ladder.
-  assert.equal(hosted.length, 36);
+  // Galaxies, nebulae and clusters, the four levels of the zoom ladder, and five places of the Nearby Universe (the Shapley
+  // Supercluster, the Hercules and Leo clusters, the Great Attractor and the Local Void) that show its galaxy field.
+  assert.equal(hosted.length, 41);
   // A bank is context the world draws, never an object: none carries a catalogue entry.
   for (const [id, descriptor] of descriptors) if (isRecord(descriptor) && typeof descriptor.type === 'string' && /-bank$/u.test(descriptor.type)) assert.ok(isRecord(descriptor.properties) && descriptor.properties.catalog === undefined, id);
   const overviews = await readOverviews(resolve('src/objects'));

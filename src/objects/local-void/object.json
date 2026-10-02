@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "local-void",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Local Void",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 925703274447410200000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Local Void",
+      "systemName": "Large-scale structure",
+      "classification": "galaxy-cluster",
+      "classificationLabel": "Void",
+      "color": "#9a9a9a",
+      "distanceAu": 6680917074343,
+      "description": "A region with few galaxies beside the Local Group, placed at its emptiest point, 32 million parsecs away.",
+      "aliases": [],
+      "order": 5444,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6.594573407523157e+23,
+        -3.764529734236011e+23,
+        6.498472261634218e+23
+      ],
+      "presentationToReference": [
+        0.9914302123756439,
+        0,
+        -0.13063741419970554,
+        -0.11985748416333167,
+        0.3977771559319137,
+        -0.9096194356480926,
+        -0.05196457907865822,
+        -0.9174820620691818,
+        -0.3943682901837568
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 2.986139594991646e+21,
+      "bodyRadiusM": 9.257032744474102e+23
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
