@@ -9,7 +9,7 @@ import { smoothstep } from "@cssearth/engine";
  * Leave more room around the body: .60 is a 20% smaller diameter than the previous .75 framing. */
 export const MOBILE_OPEN_AREA_SHARE = .60;
 /** Phones frame a little closer while leaving the tablet fit unchanged. */
-export const PHONE_OPEN_AREA_SHARE = .82;
+export const PHONE_OPEN_AREA_SHARE = .72;
 
 export function selectPreparedResponsiveZoom({
   plan,
