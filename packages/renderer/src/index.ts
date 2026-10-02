@@ -16,7 +16,6 @@ export type { PreparedView, PreparedPresentationPlan } from './rendering/prepare
 
 export { resolvePreparedAssetUrl, rewritePreparedStyleUrls, parsePreparedAssetOrigin, preparedAssetGroup, preparedAssetGroupFile, createPreparedAssetResolver } from './rendering/prepared-asset-origin.js';
 
-export { CANONICAL_PREPARED_IMAGE_DENSITY } from './rendering/prepared-object-assets.js';
 export { loadPreparedCssObject, loadPreparedDataset } from './loader.js';
 export { adoptPreparedDatasetTables } from './prepared-data/dataset-tables.js';
 
@@ -26,9 +25,6 @@ export { prestartPreparedObjectDecoding } from './prepared-object-worker-client.
 export type { ObjectDatasets } from './runtime/object-scene.js';
 export type { ObjectSharedView, ObjectSceneLifecycle } from './runtime/object-scene.js';
 export { loadNavigableObject } from './runtime/navigable-object-mount.js';
-export { worldCameraFromCenteredPresentation, presentWorldCamera } from './navigation/world-camera.js';
-export { cssCameraAxesFromOrientation, cssViewFromOrientation, worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './navigation/world-camera-math.js';
-export type { WorldCameraPose } from './navigation/world-camera.js';
 
 export type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './runtime/world-navigation-types.js';
 export { createWorldSelectionTarget } from './navigation/selection-target.js';
@@ -62,8 +58,6 @@ export { prepareObjectResources } from './runtime/prepared-resource-lease.js';
 export { createPreparedObjectNavigation } from './runtime/prepared-object-navigation.js';
 export { createPreparedUniverse } from './universe/prepared-universe-runtime.js';
 
-export { PREPARED_INTERIOR_DISC_SIZE } from './rendering/prepared-interior-disc.js';
 export { publishDatasetSelection, publishDatasetPreview } from './rendering/object-control-binding.js';
-export { textureTileLeafStyles, tiledTextureKeys } from './rendering/prepared-texture-levels.js';
 
 export { retainInputSurface, isSharedInputSurface, bindInputEvent } from './navigation/shared-input-surface.js';

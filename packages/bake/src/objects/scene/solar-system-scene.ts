@@ -15,7 +15,7 @@ import { prepareEclipticPresentationFrame } from './solar-presentation-frame.ts'
 import { LIT_DEFAULT_VIEW, prepareDefaultCameraAngles, refuseAuthoredCameraAngles } from './default-camera.ts';
 import { prepareAstrometricSkySceneRegistration } from './astrometric-sky-registration.ts';
 import { prepareSunReferenceViewDirection } from './prepare-sun-view-direction.ts';
-import type { Vector3 } from "@cssearth/renderer/solar-system/types.ts";
+import type { Vector3 } from '@cssearth/engine';
 import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from '../../presentation/index.ts';
 import type { SolarGeometry } from './solar-geometry.ts';
 

@@ -5,7 +5,7 @@ import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { type DensityVolumeFrame, type PreparedCssSurfaceShell, type PreparedCssVolume } from '@cssearth/objects';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
-import { cssCameraAxesFromOrientation } from '../navigation/world-camera-math.js';
+import { cssCameraAxesFromOrientation } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { OpacityClock } from '../stars/opacity-clock.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';

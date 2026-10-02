@@ -1,8 +1,8 @@
 import type { PositionM } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';
-import { cssCameraAxesFromOrientation, rotateWorldPosition } from './world-camera-math.js';
-import { distanceForSilhouetteRadius } from '../solar-system/heliocentric-geometry.js';
+import { cssCameraAxesFromOrientation, rotateWorldPosition } from '@cssearth/engine';
+import { distanceForSilhouetteRadius } from '@cssearth/engine';
 
 /** Center and frame the body without resetting the current viewing direction or roll. */
 export function createWorldSelectionTarget(from: WorldCameraPose, frame: PreparedWorldCameraFrame,

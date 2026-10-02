@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, ARCSECOND_RADIANS, METERS_PER_PARSEC } from './nebula-frame.ts';
-import { worldRotationFromQuaternion } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import { worldRotationFromQuaternion } from '@cssearth/engine';
 import { validatePreparedCssVolume, type PreparedCssVolume, type VolumeSlices } from '@cssearth/objects';
 
 import { compileCssVolume } from '@cssearth/bake/volume-leaves';

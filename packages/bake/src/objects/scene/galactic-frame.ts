@@ -1,4 +1,4 @@
-import type { Vector3, Matrix3 } from "@cssearth/renderer/solar-system/types.ts";
+import type { Vector3, FlatMatrix3 as Matrix3 } from '@cssearth/engine';
 // The J2000 galactic frame: the fixed rotation between ICRS (J2000
 // equatorial) and galactic coordinates. Defined by the three IAU 1958
 // constants as re-expressed on J2000 in the Hipparcos Catalogue (ESA SP-1200,

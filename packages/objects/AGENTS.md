@@ -79,8 +79,7 @@ replace them without changing accepted authored input.
 Prepared CSS volumes, impostors, volume datasets, embedded catalogue points and image-layer banks live in
 `src/volume/`; surface-shell data and validation live in `src/prepared-data/`. Their schema and envelope identifiers,
 pure validators, catalogue geometry/frame comparisons and shell atlas corner convention are exported from the
-browser-safe main entry. Image generation, transport, projection, compositing, volume topology comparisons and
-retained mounting stay with their implementation owners.
+browser-safe main entry. Image generation, transport, projection, compositing, retained mounting stay with their implementation owners.
 Contract tests use node:test and run in the packages lane.
 
 Universe catalogue point banks, galaxy backings, image meshes and dataset billboards have browser-safe
@@ -102,3 +101,5 @@ material receipts live in `src/volume/`, alongside the cloud-parts catalogue. Th
 parsers and little-endian compact color/emission decoders are exported through `@cssearth/objects`. Sampling,
 fitting, selection, decompression, compilation and file I/O stay with bake, reconstruction, lab and volume-viewer.
 Contract tests use node:test in the packages lane; replay and selection conformance stay with their owners.
+
+`src/prepared-data/` also owns canonical image density/resource addresses and pools, tile leaf styles and keys, silhouette-step walking, interior-disc size, shell material addresses, marker and shell-control validation, surface fly-to conventions and feature-bank hashing. `src/stars/` owns the luminance threshold; `src/volume/` owns the CSS compiler budget and pure topology equality. Numeric camera orientation and solar geometry belong to engine.

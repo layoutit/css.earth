@@ -1,4 +1,4 @@
-import type { OrbitSegment } from '../../solar-system/types.js';
+import type { OrbitSegment } from '@cssearth/engine';
 import { logarithmicFade, CONTEXT_LINE_WIDTH } from './context-scale.js';
 
 export const ORBIT_FADE_START_PIXELS = 12, ORBIT_FULL_PIXELS = 48;
@@ -22,7 +22,6 @@ function orbitPresentationForExtent(extent: number) {
   // Orbit paint has its own fade; label admission does not depend on this value.
   return { width: CONTEXT_LINE_WIDTH, opacity };
 }
-
 
 // Clip already-projected chords at the UI marker, preserving the prepared orbit.
 export function orbitOutsideMarker(segments: readonly OrbitSegment[], x: number, y: number, radius: number): readonly OrbitSegment[] {

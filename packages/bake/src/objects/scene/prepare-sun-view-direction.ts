@@ -1,5 +1,5 @@
 import { normalizeOrThrow, isArray } from '@cssearth/core';
-import type { Vector3, Matrix3 } from "@cssearth/renderer/solar-system/types.ts";
+import type { Vector3, FlatMatrix3 as Matrix3 } from '@cssearth/engine';
 // Converts a scene-frame Sun direction into the view-space direction the
 // retained sky uses at the default camera pose.
 //
@@ -11,7 +11,7 @@ import type { Vector3, Matrix3 } from "@cssearth/renderer/solar-system/types.ts"
 // the one the runtime would compute in the browser. Preparation-time only.
 
 import type { SolarGeometry } from "./solar-geometry.ts";
-import { cssDirectionToViewDirection } from "@cssearth/renderer/solar-system/solar-view-direction.ts";
+import { cssDirectionToViewDirection } from '@cssearth/engine';
 
 export function prepareSunReferenceViewDirection(geometry: SolarGeometry, {
   bodyId,

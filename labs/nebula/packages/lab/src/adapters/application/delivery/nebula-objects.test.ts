@@ -33,7 +33,7 @@ async function fixture(root: string) {
   }
   const request = '{}', directory = join(root,'object');
   const recipe = JSON.parse(await readFile('src/objects/m2-9-volume/source/delivery.json','utf8'));
-  for (const path of [recipe.fieldStars.path, 'packages/renderer/src/navigation/world-camera-math.ts',
+  for (const path of [recipe.fieldStars.path, 'packages/engine/src/navigation/world-camera-math.ts',
     'packages/renderer/src/stars/prepared-catalogue-points.ts']) {
     await put(root,path,await readFile(path));
   }

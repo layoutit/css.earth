@@ -1,4 +1,5 @@
-import type { Vector3, Matrix3 } from '../solar-system/types.js';
+import type { Vector3 } from '../navigation/math-types.js';
+import type { Matrix3 } from '../solar-system/types.js';
 
 export interface Point {
   readonly id: string;

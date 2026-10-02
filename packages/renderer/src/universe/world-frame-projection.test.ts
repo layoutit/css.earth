@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { createWorldFrameProjection } from './world-frame-projection.js';
 import { createPreparedRingProjector, createSphereChordTest } from '../solar-system/prepared-ring-projection.js';
-import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
-import type { Vector3 } from '../solar-system/types.js';
+import { rayHitsSphereBefore } from '@cssearth/engine';
+import type { Vector3 } from '@cssearth/engine';
 
 test('one view shares body eyes and parent shadow bounds without retaining another view', () => {
   const focus = { id: 'focus', positionM: [0, 0, -100] as Vector3, radiusM: 10 };

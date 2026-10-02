@@ -49,7 +49,6 @@ test('a flight applies eased poses each frame, ends on the target, and yields to
   assert.ok(Math.abs((current.pose.positionM[2] - origin[2]) - (7000)) < 10 ** -6 / 2, `${(current.pose.positionM[2] - origin[2])} is not close to ${7000}`);
 });
 
-
 test('replacement owns completion while an old surface publication is still awaiting presentation', async () => {
   const motion = createCameraMotion(), frames = new Map<number, FrameRequestCallback>();
   let next = 0, acknowledge!: (shown: boolean) => void;

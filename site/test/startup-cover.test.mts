@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { loadPreparedCssObject } from '@cssearth/renderer';
 import { createPreparedObjectNavigation } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
-import { presentWorldCamera } from '@cssearth/renderer/navigation';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { billboardBodyRadiusPixels } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import { readPreparedObjectBytes } from '../object-page-data.mts';
 import { requireSceneObject } from '../objects.mts';

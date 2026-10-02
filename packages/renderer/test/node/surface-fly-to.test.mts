@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 
+import { SURFACE_FLY_TO } from "@cssearth/objects";
 import {
-  SURFACE_FLY_TO,
   planSurfaceFlyTo,
   sampleSurfaceFlyTo,
 } from "@cssearth/renderer/platform/surface-fly-to";

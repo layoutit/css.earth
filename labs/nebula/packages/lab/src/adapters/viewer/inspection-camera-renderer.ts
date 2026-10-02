@@ -5,8 +5,8 @@ import { runtimePolicy } from './inspection-runtime-policy';
 import { createObjectInteractionControls } from '@cssearth/renderer/navigation/object-interaction-controls.ts';
 import { createCameraMotion } from '@cssearth/renderer/navigation/camera-motion.ts';
 import { worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
-import { referenceRotationFromPresentation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation/world-camera-math.ts';
-import { rotationFromMatrix3d } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
+import { referenceRotationFromPresentation, worldRotationFromQuaternion } from '@cssearth/engine';
+import { rotationFromMatrix3d } from '@cssearth/engine';
 export const inspectionCameraRenderer: InspectionCameraBackend<VolumeCameraPublication> = {
   rotationFromQuaternion: worldRotationFromQuaternion,
   connect(bindings) { return createObjectInteractionControls({ ...bindings, runtimePolicy, cameraMotion: createCameraMotion(),

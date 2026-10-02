@@ -347,6 +347,10 @@ importers:
         version: 5.9.3
 
   packages/engine:
+    dependencies:
+      '@cssearth/core':
+        specifier: workspace:*
+        version: link:../core
     devDependencies:
       '@types/node':
         specifier: ^26.4.0
@@ -467,6 +471,9 @@ importers:
       '@cssearth/core':
         specifier: workspace:*
         version: link:../core
+      '@cssearth/engine':
+        specifier: workspace:*
+        version: link:../engine
       '@cssearth/fits':
         specifier: workspace:*
         version: link:../fits

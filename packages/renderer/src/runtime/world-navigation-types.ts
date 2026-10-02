@@ -19,7 +19,7 @@ export interface ObjectWorldNavigation {
   /** True once every prepared detail group is connected and painted. */
   detailActivated?(): boolean;
   optics(): WorldCameraViewport & { framingRadiusPixels: number;
-    visibleRect: import('../solar-system/types.js').VisibleRect | null;
+    visibleRect: import('@cssearth/engine').VisibleRect | null;
     detailHandoffDiameterPixels: number };
   subscribe(listener: ObjectWorldNavigationListener): () => void;
 }

@@ -1,6 +1,6 @@
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
-import { worldRotationCss, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { worldRotationCss, worldRotationFromQuaternion } from '@cssearth/engine';
 import type { VolumeCameraPublication } from '../volume/types.js';
 import type { PreparedCssImageLayers, PreparedImageLayerView } from '@cssearth/objects';
 import { revealLayer } from '../rendering/layer-reveal.js';

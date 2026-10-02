@@ -41,7 +41,7 @@ mock.module('../universe/prepared-world-context.js', { namedExports: { ...await 
 const { mountPreparedCssSky, preparedSkyCameraTransform } = await import('./prepared-sky-runtime.js');
 const { validatePreparedCssVolume } = await import('@cssearth/objects');
 const { preparedVolumeCameraTransform } = await import('../volume/prepared-volume-runtime.js');
-const { worldRotationCss } = await import('../navigation/world-camera-math.js');
+const { worldRotationCss } = await import('@cssearth/engine');
 const { createPreparedUniverse } = await import('../universe/prepared-universe-runtime.js');
 const { logarithmicFade } = await import('../universe/world-context/context-scale.js');
 const { readCanonicalPointField } = await import('../../test/canonical-point-field-fixture.js');

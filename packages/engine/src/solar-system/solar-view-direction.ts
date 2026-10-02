@@ -1,4 +1,4 @@
-import type { Vector3 } from "./types.js";
+import type { Vector3 } from '../navigation/math-types.js';
 // The CSS scene frame to sprite view frame conversion the retained sky and
 // the observed Sun share. Runtime-only: the preparation of a Sun's reference
 // view direction from the checked-in solar geometry lives in

@@ -15,3 +15,16 @@ export * from './solar-system/star-color.js';
 export * from './solar-system/star-labels.js';
 export * from './solar-system/label-field.js';
 export type { Vector2, Matrix4, VisibleRect, Matrix3 as FlatMatrix3 } from './solar-system/types.js';
+
+export { cssDirectionToViewDirection } from './solar-system/solar-view-direction.js';
+
+export { viewSunDirectionToPreparedLightDirection, viewSunDirectionToPhysicalLightDirection } from './solar-system/directional-sun-coordinate.js';
+
+export { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, offAxisFrame, silhouetteEllipse, rotationFromMatrix3d, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle, eyeFraction, lerp, determinant, add, scale, magnitude, normalize, round, positive, vector, unit } from './solar-system/heliocentric-geometry.js';
+export type { OffAxisFrame } from './solar-system/heliocentric-geometry.js';
+
+export { cssViewFromOrientation, cssCameraAxesFromOrientation, flipWorldRotationY, referenceRotationFromPresentation, validateWorldPosition, transposeWorldRotation, rotateWorldPosition, scaleWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion, worldRotationCss, nearestWorldRotation } from './navigation/world-camera-math.js';
+
+export type { Matrix3dLike, SilhouetteEllipse, BodyProjection, OrbitSegment } from './solar-system/types.js';
+
+export { preparedSceneMatrix } from './navigation/prepared-scene-matrix.js';

@@ -1,5 +1,4 @@
-import { type PreparedResourceEntry, type PreparedResourcePool } from '@cssearth/objects';
-
+import type { PreparedResourceEntry, PreparedResourcePool } from './runtime-resource-types.js';
 export interface PreparedAssetPair { two?: string; url2x?: string; one?: string; url?: string; }
 export interface PreparedSkyAssetPlan { faces: readonly { url: string; url2x?: string; highContrastUrl: string; highContrastUrl2x?: string }[]; }
 export type PreparedResourcePoolOptions = Partial<Omit<PreparedResourcePool, "id">>;

@@ -63,7 +63,7 @@ export { POINT_FIELD_BANK_MAGIC, POINT_FIELD_BANK_VERSION, POINT_FIELD_BANK_HEAD
 export { parsePreparedCssPointFieldManifest, decodePreparedCssPointField } from './stars/point-field-validation.js';
 export type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedPointFieldStar, PreparedPointFieldNode, PreparedPointFieldResource, PreparedPointFieldBank, PreparedPointFieldQuantization, PreparedPointAppearance } from './stars/point-field-types.js';
 
-export { OBJECT_RUNTIME_SCHEMA, requireObjectControls, requireObjectRuntimeDefinition, objectCycleStates, OBJECT_SPEED_STATES, SHELL_SETTING_NAMES } from './prepared-data/object-controls.js';
+export { OBJECT_RUNTIME_SCHEMA, requireObjectRuntimeDefinition, objectCycleStates, OBJECT_SPEED_STATES, SHELL_SETTING_NAMES } from './prepared-data/object-controls.js';
 export type { DatasetVolume, DatasetControl, CycleState, ToggleControl, CycleControl, SettingControl, ObjectControls } from './prepared-data/object-controls.js';
 export type { ObjectRuntimeDefinition } from './prepared-data/object-runtime-types.js';
 export type { PreparedPoseKeyframe, PreparedWrite, PreparedSelectionNavigation, PreparedVariant, PreparedTree, PreparedViewBinding, PreparedPresentationDefinition, PreparedInteriorDisc, LeafBoxComponent, PreparedLeafBox, PreparedDepthOrder, PreparedDepthPartitions, PreparedTexturePlacements, PreparedTextureLevels, PreparedTextureTile, PreparedTextureTileLeaves, PreparedSilhouetteSteps, SurfacePoint, SurfaceTriangle, SurfaceFrontFace, PreparedSurfaceRange, PreparedSurfaceHit, SurfaceFeaturePolicy, SurfaceFeatureCatalogDescriptor, SurfaceFeatureSelectionPlan, PreparedSurfaceFeaturePlan } from './prepared-data/runtime-presentation-types.js';
@@ -161,3 +161,32 @@ export type { CompactSampledColor } from './volume/compact-sampled.js';
 export { COMPACT_FINITE_EMISSION_SCHEMA, COMPACT_FINITE_EMISSION_METHOD, readCompactFiniteEmission, readCompactFiniteDataset, readCompactToneProjection } from './volume/compact-finite-emission.js';
 export { COMPONENT_MATERIAL_SCHEMA, readComponentMaterialReceipt } from './volume/component-material-receipt.js';
 export type { ComponentMaterialColor, ComponentMaterialReceipt } from './volume/component-material-receipt.js';
+
+export { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool } from './prepared-data/prepared-object-assets.js';
+export type { PreparedAssetPair, PreparedResourcePoolOptions } from './prepared-data/prepared-object-assets.js';
+
+export { surfaceFeatureBankIndex } from './prepared-data/surface-feature-banks.js';
+
+export { CSS_COMPILER_RENDER_BUDGET } from './volume/compiler-render-budget.js';
+
+export { walkSilhouetteLevels } from './prepared-data/prepared-silhouette-steps.js';
+
+export { PREPARED_INTERIOR_DISC_SIZE } from './prepared-data/prepared-interior-disc-size.js';
+
+export { tiledTextureKeys, textureTileLeafStyles } from './prepared-data/prepared-texture-tile-styles.js';
+
+export { shellMaterialAddress } from './prepared-data/shell-material-address.js';
+
+export { IMPERCEPTIBLE_LUMINANCE } from './stars/point-field-luminance.js';
+
+export { SURFACE_FLY_TO_SCHEMA, SURFACE_FLY_TO } from './prepared-data/surface-fly-to.js';
+
+export { requireObjectControls } from './prepared-data/shell-controls.js';
+export type { ShellObjectControls } from './prepared-data/shell-controls.js';
+
+export { validateMarkerPresentation } from './prepared-data/marker-presentation.js';
+export type { MarkerPresentation } from './prepared-data/marker-presentation.js';
+
+export { samePreparedVolumeTopology } from './volume/prepared-volume-topology.js';
+
+export { RENDER_ELEMENT_PROFILE_SCHEMA } from './volume/render-element-budget.js';

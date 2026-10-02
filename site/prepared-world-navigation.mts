@@ -34,7 +34,8 @@ import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, S
 import { bodyViewAtCamera, overviewFrameDistanceM } from './overview-context.mts';
 import { KNOWN_OVERVIEWS } from './object-directory.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
-import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, worldCameraViewport, savedWorldCamera, parseSharedView, presentWorldCamera } from '@cssearth/renderer/navigation';
+import { createCameraMotion, createWorldSelectionTarget, savedWorldCamera, parseSharedView } from '@cssearth/renderer/navigation';
+import { worldCameraFromCenteredPresentation, worldCameraViewport, presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 
 /** A camera within this many pixels of a pair's centre already looks at it; no turn is needed. */
 const AIMED_AT_CENTER_PIXELS = 2;

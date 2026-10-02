@@ -1,9 +1,9 @@
-import { samePreparedCatalogueGeometry, validatePreparedVolumeDatasets, type PreparedVolumeDataset, type PreparedVolumeDatasetBrightness, type PreparedVolumeDatasets, PREPARED_VOLUME_DATASETS_SCHEMA, parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject, type PreparedAssets, type PreparedCssVolume, type VolumeAxis } from '@cssearth/objects';
+import { samePreparedCatalogueGeometry, validatePreparedVolumeDatasets, PREPARED_VOLUME_DATASETS_SCHEMA, parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject, samePreparedVolumeTopology, type PreparedVolumeDataset, type PreparedVolumeDatasetBrightness, type PreparedVolumeDatasets, type PreparedAssets, type PreparedCssVolume, type VolumeAxis } from '@cssearth/objects';
 import { writeData, writeStyle } from '../rendering/retained-write.js';
 import { preparedVolumeTexturePaths } from './prepared-volume-runtime.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import { preparedDomAdoption } from '../rendering/prepared-dom-adoption.js';
-import { mountPreparedVolumeLod, samePreparedVolumeTopology } from './prepared-volume-lod.js';
+import { mountPreparedVolumeLod } from './prepared-volume-lod.js';
 import type { PreparedCssTransport } from '../loader.js';
 import type { VolumeCameraPublication } from './types.js';
 import { projectedVolumeOpacity, projectedVolumeRadiusPixels } from './projected-volume-visibility.js';

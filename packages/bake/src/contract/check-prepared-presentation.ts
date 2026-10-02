@@ -1,4 +1,4 @@
-import { type ObjectEntry, OBJECT_RUNTIME_SCHEMA, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+import { OBJECT_RUNTIME_SCHEMA, PREPARED_CSS_OBJECT_FORMAT, requireObjectControls, type ObjectEntry } from '@cssearth/objects';
 
 import { isArray, hasErrorCode, isRecord, requireRecord, requireArray } from '@cssearth/core';
 import { readFile } from "node:fs/promises";
@@ -13,7 +13,6 @@ import { requirePreparedPresentation} from "../presentation/index.ts";
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.ts";
 import { requireAuthoredWorldFrame } from '../sources/index.ts';
 
-import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import { nodeName, staticObjectProperties } from '../runtime-source/index.ts';
 import type { RuntimeSourceReader } from '../runtime-source/index.ts';
 import { readPreparedObjects } from "@cssearth/objects/node";

@@ -1,10 +1,5 @@
+import type { MarkerPresentation } from '@cssearth/objects';
 import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.ts';
-
-export interface MarkerPresentation {
-  size: number; ringAngle?: number; ringExtra?: number; ringHeight?: number; ringOpacity?: number;
-  ringColorShare?: number; ringOutlineOpacity?: number; ringOutlineOffset?: number;
-  scale?: Partial<Omit<MarkerPresentation, "scale">>;
-}
 export interface PreparedNavigationMarker { url2x: string; url2xPixels?: number; presentation: MarkerPresentation; index: number; count: number; context?: { url: string; pixels?: number }; }
 export interface ResolvedMarkerStyle {
   color?: string;
@@ -21,31 +16,6 @@ export interface ResolvedMarkerStyle {
     outlineOpacity: number;
     outlineOffset: number;
   };
-}
-// Shared shell presentation; values come only from each object's marker recipe.
-const fields = new Set(["size", "ringAngle", "ringExtra", "ringHeight", "ringOpacity", "ringColorShare", "ringOutlineOpacity", "ringOutlineOffset"]);
-export function validateMarkerPresentation(input: unknown, partial?: false): MarkerPresentation;
-export function validateMarkerPresentation(input: unknown, partial: true): Partial<MarkerPresentation>;
-export function validateMarkerPresentation(input: unknown, partial: boolean): Partial<MarkerPresentation>;
-export function validateMarkerPresentation(input: unknown, partial = false): Partial<MarkerPresentation> {
-  const value = input as Partial<MarkerPresentation>;
-  if (!value || typeof value !== "object" || Array.isArray(value)) throw new TypeError("Marker presentation is missing.");
-  for (const [key, number] of Object.entries(value)) {
-    if (key === "scale" && !partial) {
-      if (typeof number !== "object" || number === null) throw new TypeError("Marker presentation is missing.");
-      validateMarkerPresentation(number, true); continue;
-    }
-    if (!fields.has(key) || typeof number !== "number" || !Number.isFinite(number)) throw new TypeError(`Invalid marker presentation field: ${key}.`);
-    if (key !== "ringAngle" && number < 0) throw new TypeError(`Negative marker presentation: ${key}.`);
-    if (["size", "ringExtra", "ringHeight"].includes(key) && number === 0) throw new TypeError(`Empty marker dimension: ${key}.`);
-    if (["ringColorShare", "ringOutlineOpacity"].includes(key) && number > 100 || key === "ringOpacity" && number > 1) throw new TypeError(`Invalid marker opacity: ${key}.`);
-  }
-  if (!partial && (!((value.size ?? Number.NaN) > 0) || Object.keys(value).some((key) => key.startsWith("ring")) && !(value.ringAngle !== undefined && (value.ringExtra ?? Number.NaN) > 0 && (value.ringHeight ?? Number.NaN) > 0))) throw new TypeError("Incomplete marker presentation.");
-  if (!partial && value.scale) {
-    const { scale, ...base } = value;
-    validateMarkerPresentation({ ...base, ...scale });
-  }
-  return value;
 }
 
 export function resolveMarkerStyle(marker: PreparedNavigationMarker, { color, scale = 1, view = "navigation" }: { color?: string; scale?: number; view?: string } = {}): ResolvedMarkerStyle {
