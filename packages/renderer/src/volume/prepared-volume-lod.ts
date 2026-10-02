@@ -1,3 +1,4 @@
+import { writeStyle } from '../rendering/retained-write.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
 import { nativeProjectedLength, nativeProjectedFade, nativeProjectedMix } from '../rendering/native-projection.js';
@@ -24,10 +25,10 @@ export function samePreparedVolumeTopology(leftInput: PreparedVolumeMountOptions
     const a = left.stacks.find(stack => stack.axis === axis), b = right.stacks.find(stack => stack.axis === axis);
     if (!a || !b || !vectorEquals(a.normalUnits, b.normalUnits) || a.leaves.length !== b.leaves.length) return false;
     for (let index = 0; index < a.leaves.length; index++) {
-      const x = a.leaves[index]!, y = b.leaves[index]!;
+      const x = a.leaves[index]!, y = b.leaves[index]!, prepared = x.style, other = y.style;
       if (x.id !== y.id || x.widthPx !== y.widthPx || x.heightPx !== y.heightPx ||
-          !vectorEquals(x.centerUnits, y.centerUnits) || x.style.width !== y.style.width || x.style.height !== y.style.height ||
-          x.style.transform !== y.style.transform || !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
+          !vectorEquals(x.centerUnits, y.centerUnits) || prepared.width !== other.width || prepared.height !== other.height ||
+          prepared.transform !== other.transform || !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
     }
   }
   const a = left.impostors, b = right.impostors;
@@ -122,6 +123,8 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     return [view.id, node] as const;
   }));
   let destroyed = false, active: readonly string[] = [...views.keys()], detailAllowed = true;
+  // What this view last wrote: the full presentation starts hidden, and none of it is read back from the page.
+  let fullShown = false;
   const publish = (publication: VolumeCameraPublication) => {
     if (destroyed) return;
     const projection = projectVolumeImpostors(publication, options.payload.frame, bank,
@@ -143,20 +146,20 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     const impostorsVisible = visible && (!detailAllowed || Number.isNaN(mix) || mix < 1);
     // Switching on, the slices wait for their large images to decode off the main thread: M31's 3,700 px detail slice
     // decoded inside one 169 ms paint each time it came back into view on the iPad (2026-09-30).
-    if (detailVisible && full.style.display === 'none') revealLayer(full, presentation.stacks.flatMap(stack => stack.leaves)
+    if (detailVisible && !fullShown) revealLayer(full, presentation.stacks.flatMap(stack => stack.leaves)
       .filter(leaf => leaf.widthPx * leaf.heightPx >= LARGE_IMAGE_PIXELS).map(leaf => options.resolveResource(leaf.texturePath)));
-    full.style.display = detailVisible ? 'block' : 'none';
-    distant.style.display = impostorsVisible ? 'block' : 'none';
-    if (responsive) options.host.style.setProperty('--native-volume-mix', nativeProjectedFade(diameterPixels,
+    writeStyle(full, 'display', detailVisible ? 'block' : 'none'); fullShown = detailVisible;
+    writeStyle(distant, 'display', impostorsVisible ? 'block' : 'none');
+    if (responsive) writeStyle(options.host, '--native-volume-mix', nativeProjectedFade(diameterPixels,
       publication.viewport.focalPixels, options.nativeFocalCss!, bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels));
     if (detailVisible) {
       const volume = detail();
       volume.publish(publication);
-      full.style.opacity = responsive ? `calc(var(--native-volume-mix) * ${completedOpacity(volume)})` : String(volumeMix * completedOpacity(volume));
+      writeStyle(full, 'opacity', responsive ? `calc(var(--native-volume-mix) * ${completedOpacity(volume)})` : String(volumeMix * completedOpacity(volume)));
     }
-    distant.style.opacity = !detailAllowed ? '' : responsive ? 'calc(1 - var(--native-volume-mix))' : String(1 - volumeMix);
+    writeStyle(distant, 'opacity', !detailAllowed ? '' : responsive ? 'calc(1 - var(--native-volume-mix))' : String(1 - volumeMix));
     const next = projection.views.map(view => view.id);
-    for (const id of active) if (!next.includes(id)) views.get(id)!.style.display = 'none';
+    for (const id of active) if (!next.includes(id)) writeStyle(views.get(id)!, 'display', 'none');
     // Only the few contributing projections receive screen transforms. Textures and cloud geometry stay fixed.
     for (const view of projection.views) {
       const node = views.get(view.id)!;
@@ -164,11 +167,11 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
         const texture = presentation.impostors!.views.find(candidate => candidate.id === view.id)!;
         node.style.backgroundImage = `url("${escapeUrl(options.resolveResource(texture.texturePath))}")`;
       }
-      node.style.display = 'block';
-      node.style.opacity = String(view.weight);
+      writeStyle(node, 'display', 'block');
+      writeStyle(node, 'opacity', String(view.weight));
       const length = (value: number) => responsive ? nativeProjectedLength(value, publication.viewport.focalPixels, options.nativeFocalCss!) : `${value}px`;
-      node.style.width = length(diameterPixels); node.style.height = length(diameterPixels);
-      node.style.transform = `translate(${length(x - diameterPixels / 2)},${length(y - diameterPixels / 2)}) matrix(${view.matrix.join(',')},0,0)`;
+      writeStyle(node, 'width', length(diameterPixels)); writeStyle(node, 'height', length(diameterPixels));
+      writeStyle(node, 'transform', `translate(${length(x - diameterPixels / 2)},${length(y - diameterPixels / 2)}) matrix(${view.matrix.join(',')},0,0)`);
     }
     active = next;
     setReadout(distant, 'activeViews', String(next.length));

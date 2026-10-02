@@ -383,6 +383,8 @@ test('angular compact-light footprints zoom and change dataset material without 
   mount.setPresentation({ ...angular, points: angular.points.map(point => ({ ...point, colorCss: '#ff1100', opacity: .1 })) });
   assert.deepEqual(root.children, nodes); assert.equal(nodes[0].style.transform, center);
   assert.equal(nodes[0].style.background, '#ff1100'); assert.equal(nodes[0].style.opacity, '0.1');
+  // The new material's size does not replace the projected one the unchanged camera already drew.
+  assert.equal(nodes[0].style.width, '4px'); assert.equal(nodes[0].style.height, '4px');
   assert.throws(() => validatePreparedCataloguePoints({ ...angular, points: [{ ...angular.points[0], diameterUnits: NaN }] }));
   mount.destroy();
 });

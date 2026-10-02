@@ -1,3 +1,4 @@
+import { writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
 import { createContextLocator } from './context-locator.js';
 import type { PreparedWorldContext, PreparedContextBody } from '../prepared-data/world-context.js';
@@ -113,9 +114,9 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
       if (circleVisible && flightBody && entry) {
         if (circle.dataset.contextFlightCircle !== entry.body.id) circle.dataset.contextFlightCircle = entry.body.id;
         const opacity = String(entry.baseAlpha.line * Math.max(0, Math.min(1, (start - flightBody.diameter) / (start - full))));
-        if (circle.style.opacity !== opacity) circle.style.opacity = opacity;
+        writeStyle(circle, 'opacity', opacity);
         const transform = `translate(${Math.round(flightBody.x * 1000) / 1000}px, ${Math.round(flightBody.y * 1000) / 1000}px) translate(-50%, -50%)`;
-        if (circle.style.transform !== transform) circle.style.transform = transform;
+        writeStyle(circle, 'transform', transform);
       }
       const captionVisibility = captionBody ? '' : 'hidden';
       if (caption.style.visibility !== captionVisibility) caption.style.visibility = captionVisibility;
@@ -127,7 +128,7 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
         }
         const [x, y] = captionBody.labelPosition;
         const transform = `translate(${Math.round(x * 1000) / 1000}px, ${Math.round(y * 1000) / 1000}px)`;
-        if (caption.style.transform !== transform) caption.style.transform = transform;
+        writeStyle(caption, 'transform', transform);
       }
       return captionBody;
     },
@@ -135,7 +136,7 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
 }
 
 /** Existing retained segment/sprite rendering, driven by the same observer as the detailed body. */
-export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationOpacities = {}, annotationPriorities = {}, distantNavigation, plainDots, opacityClock, orbitRenderer = 'bars', depthBase = 0 }: {
+export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationOpacities = {}, annotationPriorities = {}, nonNavigableIds = [], plainDots, opacityClock, orbitRenderer = 'bars', depthBase = 0 }: {
   host: HTMLElement; before: Element; plan: PreparedWorldContext; sprites: Readonly<Record<string, SpriteWithUrl>>;
   /** Presentation may live outside the input host's changing CSS scope. */
   presentationHost?: HTMLElement;
@@ -143,7 +144,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
   /** Each body's annotation priority (the planner's): the fixed order its marker paints and picks in. */
   annotationPriorities?: Readonly<Record<string, number>>;
-  distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
+  /** Bodies that keep their marker but are never a hover or navigation target: they are reached through search. */
+  nonNavigableIds?: readonly string[];
   /** Bodies drawn as a dot in their colour, at least `minimumDiameterPixels` wide: no sprite, and never a hover or
    * navigation target. */
   plainDots?: { readonly ids: readonly string[]; readonly minimumDiameterPixels: number };
@@ -153,10 +155,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   /** The stage's depth base: every z-index here is above it or at it, never negative (prepared-universe-runtime.ts). */
   depthBase?: number;
 }) {
-  if (distantNavigation && (!Number.isFinite(distantNavigation.afterDistanceM) || distantNavigation.afterDistanceM <= 0)) {
-    throw new TypeError('Distant navigation requires a positive finite distance.');
-  }
-  const distantNonNavigableIds = new Set(distantNavigation?.nonNavigableIds ?? []);
+  const nonNavigable = new Set(nonNavigableIds);
   const plainDotIds = new Set(plainDots?.ids ?? []);
   const root = host.ownerDocument.createElement('div');
   // The emphasised body's corner locator: one element, moved between markers (context-locator.ts).
@@ -170,7 +169,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const interactions = createWorldContextInteractions(host, root);
   // Captured frames go stale on every presentation change; the planner's policy only on semantic ones.
   let presentationRevision = 0, policyDirty = true;
-  let distantNavigationActive = false;
   const contextFrames = createWorldContextFrameReceiver();
   let previousHeader: { emphasizedId: string | null; otherSystemOpacity: number; width: number; height: number } | null = null;
   let publishCount = 0;
@@ -239,7 +237,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       dotDiameter,
       drawnDotDiameter: dotDiameter !== null && orbit === null && body.id !== plan.focus.id ? Math.min(STAR_DOT_MAX_DIAMETER_PIXELS, dotDiameter) : dotDiameter,
       pointSource: body.id === plan.focus.id && plan.focus.pointSource !== undefined,
-      alwaysNonNavigable: unpackaged || plainDot, distantNonNavigable: distantNonNavigableIds.has(body.id),
+      alwaysNonNavigable: unpackaged || plainDot || nonNavigable.has(body.id),
       orbitTransform: '',
       orbitAppearance: { width: CONTEXT_LINE_WIDTH, opacity: 1 },
       bodyHidden: false, orbitHidden: false, labelHidden: false, labelSuppressed: false, indicatorHidden: false,
@@ -521,20 +519,17 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       // before any writes, then replan once with their actual CSS bounds.
       let measured = false;
       const attachMarkers = new Set<(typeof bodies)[number]>();
-      const attachOrbits = new Set<(typeof bodies)[number]>();
+      const attachOrbits = new Set<(typeof bodies)[number]>(), awaitingMeasurement = new Set<(typeof bodies)[number]>();
       for (const index of coasting ? [] : preparedFrame.labelMeasurements ?? []) {
         const entry = bodies[index];
         if (entry.labelSize.width !== 0) continue;
-        if (!entry.mover.parentNode) { attachMarkers.add(entry); continue; }
+        if (!entry.mover.parentNode) { attachMarkers.add(entry); awaitingMeasurement.add(entry); continue; }
         const text = windowTarget.getComputedStyle(entry.caption, '::after');
         const width = Math.ceil(parseFloat(text.width)), height = Math.ceil(parseFloat(text.height));
         if (width > 0 && height > 0) { entry.labelSize = { width, height }; measured = true; }
       }
       fader.batch(() => {
       const cameraChanged = !sameCamera(world, viewport);
-      const nextDistantNavigationActive = distantNavigation !== undefined && eyeDistanceM(world.pose, plan.focus.positionM) >= distantNavigation.afterDistanceM;
-      const distantNavigationChanged = nextDistantNavigationActive !== distantNavigationActive;
-      distantNavigationActive = nextDistantNavigationActive;
       const rotating = rotationPhase === 'dragging', coast = coasting;
       const interactiveHover = hoverIntent && !cameraChanged && !rotating && !navigationInFlight && !coast;
       if (cameraChanged || rotating || navigationInFlight) settleHover();
@@ -554,7 +549,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       cameraState[7] = viewport.focalPixels; cameraState[8] = width; cameraState[9] = height;
       cameraState.set(viewport.principalOffsetPixels, 10);
       const resized = previousHeader?.width !== width || previousHeader?.height !== height;
-      const policyChanged = resized || distantNavigationChanged || policyDirty || previousHeader?.emphasizedId !== emphasizedId ||
+      const policyChanged = resized || policyDirty || previousHeader?.emphasizedId !== emphasizedId ||
         previousHeader?.otherSystemOpacity !== otherSystemOpacity;
       policyDirty = false;
       previousHeader = { emphasizedId, otherSystemOpacity, width, height };
@@ -607,7 +602,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const billboardShown = coast ? entry.paint.billboardShown === true : plannedShown;
         if (!billboardShown && entry.paint.billboardShown === false && orbitVisibility === 0 && entry.previousCount === 0) continue;
         bodyPublications++;
-        const navigationSuppressed = entry.alwaysNonNavigable || (distantNavigationActive && entry.distantNonNavigable);
+        const navigationSuppressed = entry.alwaysNonNavigable;
         const { pointSource } = entry;
         // A body's circle holds a dot in the body's colour, sized by its radius, until its own disc outgrows the dot.
         // The focus star's circle holds the same dot over its point of light.
@@ -713,7 +708,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (systemRetired && !coasting) {
         for (const entry of bodies) {
           if (entry === bodies[0] || (entry.orbit === null && paintedBodies.has(entry))) continue;
-          if (entry.mover.parentNode) entry.mover.remove();
+          // A marker attached this frame for its caption's measurement stays, hidden, for the next frame, which reads it.
+          // Removed here it was attached again by that frame, never measured, and each attach asked for another frame:
+          // one unmeasured star kept an idle page publishing for ever (2026-10-01).
+          if (entry.mover.parentNode && !awaitingMeasurement.has(entry)) entry.mover.remove();
           if (entry.orbitRoot.parentNode) entry.orbitRoot.remove();
           entry.piecePool.detach();
           paintedBodies.delete(entry);
@@ -723,7 +721,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       // A flight publishes its next view anyway, and its end refreshes (setNavigationInFlight): a refresh here replanned
       // the view just shown and took the flight's next frame, so the camera moved every other frame (2026-10-01: 58 of
       // 910 frames held on three flights into planetary systems, 16 of 870 with this guard).
-      if (measured || attachMarkers.size > 0) { invalidatePolicy(); if (!navigationInFlight) refresh(); }
+      // Only progress asks for another frame: a caption measured, or a marker now on the page that the next frame reads or
+      // shows. An attach the retire pass undid is not progress.
+      const attached = [...attachMarkers].some(entry => entry.mover.parentNode === root);
+      if (measured || attached) { invalidatePolicy(); if (!navigationInFlight) refresh(); }
     },
     destroy() { if (!destroyed) { destroyed = true; interactions.destroy();
       if (annotationFrame !== null) clock.cancel(annotationFrame);

@@ -25,15 +25,21 @@ function createRegistry() {
       if (publications.delete(owner)) for (const listener of listeners) listener();
     },
     subscribe(listener: () => void) { listeners.add(listener); return () => { listeners.delete(listener); }; },
-    pick(x: number, y: number) {
-      let direct: ScreenPickTarget | null = null;
+    /** `reach` is a finger's slop: when nothing is under the point, the nearest label or marker within it is picked. */
+    pick(x: number, y: number, reach = 0) {
+      let direct: ScreenPickTarget | null = null, near: ScreenPickTarget | null = null, nearest = reach;
       for (const targets of publications.values()) for (const target of targets) {
         if (target.shape.kind === 'segments') continue;
         if (target.element.ariaDisabled === 'true') continue;
+        const gap = reach > 0 ? screenShapeGap(target.shape, x, y) : hitsScreenShape(target.shape, x, y) ? 0 : Infinity;
+        if (gap > 0) {
+          if (gap < nearest || (gap === nearest && near && near.rank <= target.rank)) { near = target; nearest = gap; }
+          continue;
+        }
         if (direct && direct.rank > target.rank) continue;
-        if (!hitsScreenShape(target.shape, x, y)) continue;
         direct = target;
       }
+      direct ??= near;
       // Direct labels/markers always win, regardless of orbit depth. Do not
       // traverse any chord banks when that decision is already resolved.
       if (direct) return direct.element;
@@ -55,6 +61,12 @@ export function screenPicking(host: HTMLElement) {
   let registry = registries.get(host);
   if (!registry) { registry = createRegistry(); registries.set(host, registry); }
   return registry;
+}
+
+/** Pixels from a point to a label or marker shape; zero inside it. */
+function screenShapeGap(shape: Exclude<ScreenPickShape, { kind: 'segments' }>, x: number, y: number): number {
+  if (shape.kind === 'circle') return Math.max(0, Math.hypot(x - shape.x, y - shape.y) - shape.radius);
+  return Math.hypot(Math.max(shape.left - x, 0, x - shape.right), Math.max(shape.top - y, 0, y - shape.bottom));
 }
 
 export function hitsScreenShape(shape: ScreenPickShape, x: number, y: number): boolean {

@@ -1,3 +1,4 @@
+import { writeStyle } from '../rendering/retained-write.js';
 import { createVolumeTextureReadiness } from '../volume/volume-texture-readiness.js';
 import type { PreparedFocusBank } from './prepared-focus-bank.js';
 import type { SceneLifetime } from '@cssearth/engine';
@@ -258,18 +259,18 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         // Keep a demanded bank resident while its images decode behind the billboard.
         const visible = requestedOpacity > 0;
         if (visible !== bank.visible) { bank.visible = visible; bank.lastUsed = ++useClock; residencyChanged = true; }
-        // Compare with the retained styles: a coast may have faded a displayed bank
-        // while membership stayed frozen. A cached pre-coast alpha would skip its restoration.
+        // Opacity is compared with what was last written to each root (retained-write.ts), so a bank a coast faded while
+        // membership stayed frozen is restored. Display is a keyword and is read from the style, which mounting also writes.
         for (const target of [bank.mounted.root, bank.mounted.frontRoot]) {
           if (!target) continue;
           if (coasting && target.style.display === 'none') continue;
-          if (target.style.opacity !== String(opacity)) target.style.opacity = String(opacity);
+          writeStyle(target, 'opacity', String(opacity));
           if (!coasting) {
             const display = opacity > 0 ? 'block' : 'none';
             if (target.style.display !== display) target.style.display = display;
           }
         }
-        bank.mounted.publish({ world, viewport }, visible && Boolean(ready));
+        bank.mounted.publish({ world, viewport }, visible && Boolean(ready), coasting);
         if (visible && ready) for (const points of bank.points) points.publish({ world, viewport });
       }
       if (residencyChanged) trimWarmResidency();

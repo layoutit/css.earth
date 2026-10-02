@@ -1,3 +1,4 @@
+import { writeStyle } from '../rendering/retained-write.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { worldRotationCss } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -50,9 +51,6 @@ export function mountPreparedCssSurfaceShell({ host, before, payload: input, res
   let state: PreparedSurfaceShellStats = Object.freeze({ visible: false, visibleFaces: 0, totalFaces: slots.length, atlasFrames: payload.atlas.frames, distanceM: 0, opacity: 0 });
   function publishStats(distanceM: number, opacity: number, visibleFaces: number): void {
     state = Object.freeze({ visible: opacity > 0, visibleFaces, totalFaces: slots.length, atlasFrames: payload.atlas.frames, distanceM, opacity });
-    root.dataset.shellDistanceM = String(distanceM);
-    root.dataset.shellVisibleFaces = String(visibleFaces);
-    root.dataset.shellOpacity = String(opacity);
   }
   publishStats(0, 0, 0);
   function publish(world: WorldCameraPose, viewport: WorldCameraViewport, enabled = true): void {
@@ -68,15 +66,15 @@ export function mountPreparedCssSurfaceShell({ host, before, payload: input, res
     if (!enabled) { if (root.parentNode) root.remove(); publishStats(distanceM, 0, 0); return; }
     if (!root.parentNode) host.insertBefore(root, before.parentNode === host ? before : null);
     const opacity = distanceOpacity(distanceM, payload.visibility);
-    write(root, 'opacity', String(opacity));
-    write(root, 'visibility', opacity > 0 ? 'visible' : 'hidden');
+    writeStyle(root, 'opacity', String(opacity));
+    writeStyle(root, 'visibility', opacity > 0 ? 'visible' : 'hidden');
     // Hidden shells retain their last material addresses and face visibility.
     // The outer zero-opacity composite also hides explicitly visible children.
     if (opacity === 0) { publishStats(distanceM, 0, 0); return; }
     const transform = preparedVolumeCameraTransform({ world, viewport }, payload.frame, payload.unitScale);
-    write(camera, 'perspective', `${format(transform.focalPixels)}px`);
-    write(camera, 'perspectiveOrigin', `calc(50% + ${format(viewport.principalOffsetPixels[0])}px) calc(50% + ${format(viewport.principalOffsetPixels[1])}px)`);
-    write(scene, 'transform', `translate3d(${transform.translationCssPixels.map(value => `${format(value)}px`).join(',')}) ${worldRotationCss(transform.rotation)}`);
+    writeStyle(camera, 'perspective', `${format(transform.focalPixels)}px`);
+    writeStyle(camera, 'perspectiveOrigin', `calc(50% + ${format(viewport.principalOffsetPixels[0])}px) calc(50% + ${format(viewport.principalOffsetPixels[1])}px)`);
+    writeStyle(scene, 'transform', `translate3d(${transform.translationCssPixels.map(value => `${format(value)}px`).join(',')}) ${worldRotationCss(transform.rotation)}`);
     if (facingLevels) for (let i = 0; i < vertexFrames.length; i++) {
       const vertex = payload.vertices![i]!, p = vertex.positionUnits, n = vertex.radialNormal;
       const x = local.positionUnits[0] - p[0], y = local.positionUnits[1] - p[1], z = local.positionUnits[2] - p[2];
@@ -125,9 +123,6 @@ function distanceOpacity(distanceM: number, visibility: PreparedCssSurfaceShell[
   if (distanceM <= visibility.fullUntilM) return 1;
   const t = (distanceM - visibility.fullUntilM) / (visibility.hiddenBeyondM - visibility.fullUntilM);
   return 1 - t * t * (3 - 2 * t);
-}
-function write(element: HTMLElement, property: 'perspective' | 'perspectiveOrigin' | 'transform' | 'opacity' | 'visibility', value: string): void {
-  if (element.style[property] !== value) element.style[property] = value;
 }
 function format(value: number): string { return Math.abs(value) < 1e-9 ? '0' : Number(value.toFixed(6)).toString(); }
 function escapeUrl(value: string): string { return value.replace(/["\\\n\r]/gu, character => `\\${character}`); }

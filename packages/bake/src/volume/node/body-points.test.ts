@@ -17,6 +17,15 @@ test('a body-centred bank holds the table\'s positions in megametres and sits at
   assert.equal(bank.host, 'planet');
 });
 
+test('a bank whose rows reach past a megametre bank is held in gigametres', () => {
+  const rows = parseBodyPointsTable('name,xKm,yKm,zKm\nA,6000000000,0,0\nB,0,-150000,450000000\n', 'positions.csv');
+  const bank = bodyCentredBank({ recipe: parseBodyPointsRecipe(recipe(), 'points.json'), rows, hostFrame });
+  assert.deepEqual(bank.points, [[6000, 0, 0], [0, -0.15, 450]], 'gigametres, rounded to 100 km');
+  assert.equal(bank.frame.metersPerUnit, 1e9);
+  assert.throws(() => bodyCentredBank({ recipe: parseBodyPointsRecipe(recipe(), 'points.json'), hostFrame,
+    rows: parseBodyPointsTable('name,xKm,yKm,zKm\nFar,3e11,0,0\n', 'positions.csv') }), /dots: Far in positions\.csv is 300000000000 km from planet, past/u);
+});
+
 test('a bank whose rows were fetched at another epoch than its host\'s is refused, naming both', () => {
   const rows = parseBodyPointsTable('name,xKm,yKm,zKm\nA,1,2,3\n', 'positions.csv');
   assert.throws(() => bodyCentredBank({ recipe: parseBodyPointsRecipe(recipe(), 'points.json'), rows, hostFrame: { ...hostFrame, epochJdTt: 2451545 } }),

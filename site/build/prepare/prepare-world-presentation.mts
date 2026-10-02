@@ -46,11 +46,10 @@ export function minorMoonOrbitIds(bodies: readonly { id: string; orbit?: { cente
   }).map(body => body.id);
 }
 
-/** The default context suppresses distant orbit classes, admits only featured comets, and limits asteroid orbits to JPL spacecraft targets. */
+/** The default context draws no orbit for an asteroid, a comet or a distant orbit class, and admits only featured dwarf planets. */
 export function showsDefaultContextOrbit(object: { id: string; classification: string; discovery: Pick<ObjectDiscovery, 'featured'> }): boolean {
-  if (object.classification === 'comet') return object.discovery.featured;
-  if (['trans-neptunian', 'interstellar'].includes(object.classification)) return false;
-  return object.classification !== 'asteroid' || isJplMissionTarget(object);
+  if (object.classification === 'dwarf-planet') return object.discovery.featured;
+  return !['asteroid', 'comet', 'trans-neptunian', 'interstellar'].includes(object.classification);
 }
 
 /** Discovery prominence describes prepared content. Asteroid context prominence is instead sourced from JPL. */

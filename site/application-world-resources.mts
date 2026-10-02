@@ -33,7 +33,7 @@ function meshView(descriptor: { id: string; properties: Record<string, unknown> 
 // An asteroid sprite's smallest drawn size, and a plain asteroid dot's (see world-context.css for its opacity).
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
 const { annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, compact: phone } = worldVisibilityPolicy;
-const ASTRONOMICAL_UNIT_M = 149_597_870_700, PARSEC_M = 3.085677581491367e16;
+const PARSEC_M = 3.085677581491367e16;
 
 // Published catalogues drawn through a volume bank, with its opacity (src/objects/m87-volume/README.md).
 const VOLUME_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
@@ -158,7 +158,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
           cutaway: () => meshView(descriptor) === 'cutaway', hidden: () => meshView(descriptor) === 'hidden', hiddenCaption: KNOWN_OVERVIEWS.find(overview => overview.packages.includes(descriptor.id))?.name };
       }),
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
-      distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
+      nonNavigableIds: ordinaryAsteroidIds,
       plainDots: { ids: plainDotIds, minimumDiameterPixels: PLAIN_DOT_MINIMUM_PIXELS },
       datasetVisibility: DATASET_VISIBILITY, datasetBillboards,
       // Phones draw no celestial sky cube: about 60 MB of layers and 27 MB of decoded faces behind the body.
