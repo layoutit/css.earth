@@ -18,7 +18,9 @@ const revision = process.env.COMMIT_REF || execFileSync('git', ['rev-parse', 'HE
 if (!/^[a-f0-9]{40}$/u.test(revision)) throw new Error('Source documentation needs the build commit.');
 const checked = new Set<string>();
 // Each object's provider index, computed when the source catalogue was written (@cssearth/objects/provenance source-credits.ts).
-const PROVIDERS = parseSourceCredits(credits).providers;
+const CREDITS = parseSourceCredits(credits), PROVIDERS = CREDITS.providers;
+/** The rows of an object's Sources tab: each published source it uses, once. */
+export const objectSourceRows = (objectId: string) => (CREDITS.sources[objectId] ?? []).map(id => CREDITS.records[id]!);
 const sourceProviders = (objectId: string): readonly string[] => PROVIDERS[objectId] ?? [];
 const creditLabel = (providers: readonly string[]) => {
   if (!providers.length) return 'Sources';

@@ -9,6 +9,8 @@ import ObjectCard from "./ObjectCard.astro";
 import ObjectCardHeader from "./ObjectCardHeader.astro";
 import ObjectFactsheet from "./ObjectFactsheet.astro";
 import InformationTabs from './InformationTabs.astro';
+import MaterialSymbol from './MaterialSymbol.astro';
+import { objectSourceRows } from '../source-documentation.mts';
 import { viewFromUrl } from '../navigation/navigation-scope.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
 import DatasetContextPanels from "./DatasetContextPanels.astro";
@@ -62,6 +64,8 @@ const opening = bodies.length ? 'bodies' : lists[0]?.id ?? 'dataset';
 // The card's subject: the body, its moons, or (for a star with planets) its planetary system.
 const asked = viewFromUrl(Astro.url);
 const cardSubject = asked === 'moons' && satelliteSystemByHost(objectId) || asked === 'system' && systemById(SCENE_OBJECTS, objectId) ? asked : 'body';
+// The published sources this object's products, methods and facts name; its README (the footer link) explains their use.
+const sourceRows = objectSourceRows(objectId);
 // A dataset authored for the whole system (a debris disc) and the system's gallery pictures show on the system's card too.
 const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.systemDataset)) || galleries.length > 0;
 ---
@@ -79,6 +83,7 @@ const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.system
         { id: 'dataset', label: 'Datasets' },
         { id: 'factsheet', label: 'Factsheet' },
         ...(orderedCharts.length ? [{ id: 'charts', label: 'Charts' }] : []),
+        ...(sourceRows.length ? [{ id: 'sources', label: 'Sources' }] : []),
       ]} />}
       <p data-dataset-notice role="status" aria-live="polite" hidden></p>
       {bodies.length > 0 && <section class="object-results-scroll object-card-tabpanel" id={`${objectId}-bodies-content`} data-information-panel="bodies" aria-label="Celestial bodies">
@@ -134,6 +139,18 @@ const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.system
             </figure>
           </section>)}
         </div>
+      </section>}
+      {hasFacts && sourceRows.length > 0 && <section class="object-results-scroll object-card-tabpanel object-sources-content" id={`${objectId}-sources-content`} data-information-panel="sources" aria-label="Sources">
+        <h2 class="object-mobile-information-heading">Sources</h2>
+        <ul class="object-list">
+          {sourceRows.map(source => <li class="object-item">
+            <a class="object-observation-control object-thumbnail-leading object-result-row" href={source.url} target="_blank" rel="noopener noreferrer">
+              <span class="object-dataset-icon object-source-icon"><MaterialSymbol name="open_in_new" /></span>
+              <span class="object-name object-dataset-label">{source.title}</span>
+              <span class="object-distance object-dataset-detail">{source.detail}</span>
+            </a>
+          </li>)}
+        </ul>
       </section>}
       <DatasetContextPanels {...Astro.props} />
     </ObjectCard>

@@ -489,6 +489,9 @@
   height: 40px;
   object-fit: contain;
 }
+/* A Sources row is a result row that leaves the site: its preview square holds the outbound mark. */
+.object-source-icon .material-symbol { width: 20px; height: 20px; fill: var(--shell-text-secondary); }
+.object-result-row:is(:hover, :focus-visible) .object-source-icon .material-symbol { fill: var(--shell-text); }
 .object-dataset-round-preview { position: relative; border-radius: 50%; }
 .object-dataset-round-preview > .object-search-preview { border-radius: inherit; object-fit: cover; }
 .object-dataset-round-preview::after {
@@ -533,7 +536,8 @@
 /* A system card lists every body of its system (549 rows for the Sun's, 682 KB) and shows about eight: rows out of view
    skip style and layout until scrolled to. Inserting the Sun's list mid-zoom laid out 7,649 objects in one 22 ms frame
    (2026-09-30). The list is flat, so a row's paint stays inside its 48 px box. */
-[data-system-bodies] .object-item {
+[data-system-bodies] .object-item,
+.object-sources-content .object-item {
   content-visibility: auto;
   contain-intrinsic-size: auto 48px;
 }
@@ -542,6 +546,8 @@
   width: 100%;
 }
 .object-information-panel [data-view-part="moons"].object-results-scroll .object-list { width: 100%; }
+/* The Sources rows fill the card; their long titles end in an ellipsis. */
+.object-information-panel .object-sources-content.object-results-scroll .object-list { width: 100%; grid-template-columns: minmax(0, 1fr); }
 .object-results-scroll .object-link[aria-disabled="true"] {
   color: var(--shell-text-muted);
   cursor: default;
@@ -647,7 +653,7 @@
 @media (max-width: 820px), (orientation: portrait) {
   .object-information-panel.object-card > .object-selected-panel:has(+ .object-card-tabs)::after { content: none; }
   .object-information-panel > .object-native-tabs { display: none; }
-  .object-information-panel > :is(.object-factsheet-content, .object-dataset-content, .object-charts-content):not([hidden]) { display: block; }
+  .object-information-panel > :is(.object-factsheet-content, .object-dataset-content, .object-charts-content, .object-sources-content):not([hidden]) { display: block; }
   .object-information-panel > .object-dataset-content > summary { display: none; }
   .object-mobile-information-heading {
     display: flex;
