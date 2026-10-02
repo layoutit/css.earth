@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "mars-billboard.webp",
-      "bytes": 11678,
-      "sha256": "516c1b72c3c61af887d910a17f386065247684e80dfd4a3fa9438a97e4859bdd"
-    },
-    {
-      "location": "public",
       "filename": "mars-dataset-albedo.webp",
       "bytes": 3548,
       "sha256": "ecea8754b59d5e286994b4f20f789a8dab409503dbf96aed04604074f64ce1c5"
@@ -1354,14 +1348,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 448058,
-      "sha256": "d4cd83e072da0cde1f6501f9f32fb666a70de5c08f53c69a9eb73a8977954c97"
+      "bytes": 447918,
+      "sha256": "ad8c1cf6db25598a39e38894e2f109b7120c0c985077c6cefbbf2c061581125b"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 393599,
-      "sha256": "066175ae62dc916236d880e7080c344ee7e497d94a750ca6998262757dadfdab"
+      "sha256": "d3c0c4ebad2ffe8f5b45e16b416215d6ab59ea7d2fafc248c3cc2360ade4d276"
     },
     {
       "location": "prepared",
@@ -1386,6 +1380,12 @@
       "filename": "world-navigation.json",
       "bytes": 1217,
       "sha256": "3524ba368f18215f01ec65d75a41594f2f0bc52c2d01613504c264094f716d89"
+    },
+    {
+      "location": "public",
+      "filename": "mars-billboard.webp",
+      "bytes": 11678,
+      "sha256": "516c1b72c3c61af887d910a17f386065247684e80dfd4a3fa9438a97e4859bdd"
     }
   ]
 }
