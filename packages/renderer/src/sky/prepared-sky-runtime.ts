@@ -27,8 +27,8 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
   const boundedFaces: { node: HTMLElement; bounds: PreparedLeafBounds | undefined; shown: boolean; image: string | null }[] = [];
   for (const face of payload.faces) {
     const node = document.createElement('s'); node.dataset.skyFace = face.id;
-    Object.assign(node.style, { position: 'absolute', left: '0', top: '0', display: 'block', pointerEvents: 'none', transformOrigin: '0 0',
-      backfaceVisibility: 'visible', backgroundRepeat: 'no-repeat', textDecoration: 'none', ...face.style, visibility: 'hidden' });
+    // A face's fixed placement is a volume.css rule; its prepared box, transform and image size are inline.
+    Object.assign(node.style, { ...face.style, visibility: 'hidden' });
     scene.appendChild(node);
     boundedFaces.push({ node, bounds: face.boundsCssPixels, shown: false, image: `url("${escapeUrl(resolveResource(face.texturePath))}")` });
   }

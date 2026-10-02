@@ -143,13 +143,6 @@ html[data-embed] .object-ui-layer { display: none !important; }
   pointer-events: none;
 }
 
-[data-context-label] {
-  background: transparent;
-  color: var(--shell-text);
-  font: var(--shell-font-label);
-  text-decoration: none;
-}
-
 /* Keep prepared title artwork while exposing the heading as ordinary text. */
 .visually-hidden {
   position: absolute;
