@@ -23,6 +23,7 @@ const phone = globalThis.matchMedia?.(MOBILE_VIEWPORT_QUERY).matches === true;
 const defaultFeatures: ReadonlySet<string> = new Set(prepared.defaultFeatureIds);
 const orbitFeatures: ReadonlySet<string> = new Set(prepared.orbitFeatureIds);
 const ordinaryAsteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !defaultFeatures.has(object.id)).map(object => object.id);
+const ordinaryAsteroids: ReadonlySet<string> = new Set(ordinaryAsteroidIds);
 // Only notable asteroids are map targets; preparation marks the rest as plain dots (site/build/prepare/prepare-spatial-context.ts),
 // with no sprite, caption, hover or click. Their pages stay reachable through search.
 // A system the page has not read yet lists its bodies with these flags (site/world-context-plan.mts).
@@ -78,7 +79,8 @@ export const worldVisibilityPolicy = {
 export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLayer, 'setBodyVisibility'>, lifetime: SceneLifetime) {
   let illustrations = false;
   let highlighted: string | null = null;
-  // The selected body always draws itself and its orbit, whatever the default context hides.
+  // A selected body that orbits the Sun draws itself and its orbit, whatever the default context hides. A moon's path
+  // follows its family's rule instead.
   let selectedId: string | null = null;
   let openSystem: ReadonlySet<string> = new Set();
 
@@ -104,8 +106,9 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
       if (lifetime.disposed) return;
       // A selected host or moon reveals its satellite family even when illustration models
       // are disabled. Other stars retain their complete planetary system visibility.
-      const selectionChanged = selectedId !== id;
-      selectedId = id;
+      const revealed = ordinaryAsteroids.has(id) || hiddenOrbitIds.includes(id) && !minorMoons.has(id) ? id : null;
+      const selectionChanged = selectedId !== revealed;
+      selectedId = revealed;
       const family = satelliteSystemByHost(id) ?? satelliteSystemOfMember(id);
       const system = family ? new Set([family.hostId, ...family.memberIds]) : placedSystemOf(id);
       if (selectionChanged || system.size !== openSystem.size || [...system].some(member => !openSystem.has(member))) {
