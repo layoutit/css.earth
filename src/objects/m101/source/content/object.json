@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m101",
+  "displayName": "M101",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "6.714 Mpc (−137,700 / +140,600 pc)",
+        "source": {
+          "catalogueId": "publication-riess2016apj-826-56r",
+          "url": "https://arxiv.org/abs/1604.01424",
+          "label": "Riess et al. (2016), ApJ 826, 56, Table 5 (Approximations for Distance Parameters), row M101: Cepheid distance modulus mu_Ceph = 29.135 +/- 0.045, d = 6.71 Mpc.",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 210.8°, Dec 54.35°",
+        "source": {
+          "catalogueId": "lvdb-v1-1-1",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "NOIRLab · optical",
+        "thumbnail": "m101-dataset-optical.webp",
+        "volume": {
+          "objectId": "m101-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m101-layers-optical",
+          "path": "../../m101-layers/source/manifest.json",
+          "url": "https://noirlab.edu/public/images/noao-m101ubviha/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Riess et al. (2016), ApJ 826, 56, Table 5 (Approximations for Distance Parameters), row M101: Cepheid distance modulus mu_Ceph = 29.135 +/- 0.045, d = 6.71 Mpc.",
+      "href": "https://arxiv.org/abs/1604.01424"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+      "href": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1604.01424",
+      "credit": "Riess et al. (2016), ApJ 826, 56, Table 5 (Approximations for Distance Parameters), row M101: Cepheid distance modulus mu_Ceph = 29.135 +/- 0.045, d = 6.71 Mpc."
+    }
+  }
+}

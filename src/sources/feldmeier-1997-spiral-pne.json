@@ -1,0 +1,51 @@
+{
+  "id": "feldmeier-1997-spiral-pne",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Planetary nebulae as standard candles. XI. Application to spiral galaxies",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "1997ApJ...479..231F"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/479/231"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/1997ApJ...479..231F",
+      "label": "1997ApJ...479..231F"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/479/231",
+      "label": "CDS J/ApJ/479/231"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/479/231/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "tab2-4: planetary nebula candidates of M101 (65), M51 (64) and M96 (74) with J2000 positions, from [O III] 5007 on-band and off-band images."
+    }
+  ],
+  "creators": [
+    "J. J. Feldmeier",
+    "R. Ciardullo",
+    "G. H. Jacoby"
+  ],
+  "publisher": "ApJ 479, 231",
+  "publicationDate": "1997",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Feldmeier et al. (1997), ApJ 479, 231.",
+      "scope": "M101 planetary nebulae",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/479/231/ReadMe"
+    }
+  ]
+}

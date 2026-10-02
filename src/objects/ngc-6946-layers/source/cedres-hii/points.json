@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "cedres-hii",
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Seq%2C+%22_RA%22%2C+%22_DE%22+FROM+%22J%2FA%2BA%2F545%2FA43%2Fngc6946%22",
+    "bytes": 5047,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": 449,
+      "source": "kregel-2002-disc-flattening",
+      "basis": "The stellar disc's exponential scale height as its scale length over 7.3, the mean flattening Kregel et al. (2002) measured for edge-on discs, with Leroy et al.'s (2008) stellar scale length, 2.5 kpc at their 5.9 Mpc (87.4″): 449 pc. The same thickness as the image layers' slabs; for young objects it is an upper value. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "cedres-2012-ngc628-ngc6946-hii",
+  "meaning": "HII regions of NGC 6946 from Cedrés et al. (2012): one dot per region. The table gives offsets from the galaxy's centre; the positions are VizieR's conversion of them (columns _RA and _DE).",
+  "appearance": {
+    "colorCss": "#ff7a9c",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way HII layer's pink (hou-han-hii), as M31's and M33's HII regions use. Each dot takes its tone and half its colour from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "gallego-cano-2020-nuclear-star-cluster",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "New constraints on the structure of the nuclear stellar cluster of the Milky Way from star counts and MIR imaging",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2020A&A...634A..71G"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...634A..71G",
+      "label": "2020A&A...634A..71G"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2001.08182",
+      "checkedOn": "2026-10-01",
+      "locator": "Abstract: the nuclear star cluster is flattened with an axis ratio q = 0.71 +/- 0.10, an effective radius R_e = 5.1 +/- 1.0 pc and a Sérsic index n = 2.2 +/- 0.7; its major axis may be tilted out of the Galactic plane by up to -10 degrees."
+    }
+  ],
+  "creators": [
+    "E. Gallego-Cano",
+    "R. Schödel",
+    "F. Nogueras-Lara",
+    "H. Dong",
+    "B. Shahzamanian",
+    "T. K. Fritz",
+    "A. T. Gallego-Calvente",
+    "N. Neumayer"
+  ],
+  "publisher": "A&A 634, A71",
+  "publicationDate": "2020",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Gallego-Cano et al. (2020), A&A 634, A71.",
+      "scope": "Shape of the Milky Way's nuclear star cluster",
+      "evidence": "https://arxiv.org/abs/2001.08182"
+    }
+  ]
+}

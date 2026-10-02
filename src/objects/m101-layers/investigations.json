@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m101-layers",
+  "entries": [
+    {
+      "id": "mayall-mosaic",
+      "subject": "NOIRLab noao-m101ubviha (Mayall 4-meter Mosaic)",
+      "status": "included",
+      "finding": "The whole disc in U, B, V, I and H-alpha, 31.7 arcmin wide at 0.26 arcsec per pixel. The page's centre is wrong by 2577 and 1010 px; the registration is fitted to 41 Gaia stars.",
+      "evidence": [
+        "https://noirlab.edu/public/images/noao-m101ubviha/"
+      ]
+    },
+    {
+      "id": "hubble-mosaic",
+      "subject": "ESA/Hubble heic0602a",
+      "status": "excluded",
+      "finding": "The 15852 x 12392 px Hubble mosaic is far sharper but covers 13.2 x 10.3 arcmin of a disc 29 arcmin across, with ground-based images under its corners.",
+      "evidence": [
+        "https://esahubble.org/images/heic0602a/"
+      ],
+      "revisitWhen": "The bake composes a sharp inner image over a wide one, as M31's does."
+    },
+    {
+      "id": "cepheids",
+      "subject": "Cepheids of M101 (Hoffmann et al. 2016; Shappee & Stanek 2011)",
+      "status": "deferred",
+      "finding": "The SH0ES Cepheids of M101 have positions in CDS J/ApJ/830/10 table5, the table the Cepheid star packages of other hosts are drafted from. Not drawn as dots here: they would be the same stars a later star-package batch places.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/830/10"
+      ],
+      "revisitWhen": "M101's Cepheids are wanted as dots or as star packages."
+    }
+  ]
+}

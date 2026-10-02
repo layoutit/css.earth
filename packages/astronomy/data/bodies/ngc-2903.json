@@ -1,0 +1,28 @@
+{
+  "id": "ngc-2903",
+  "classification": "galaxy",
+  "order": 5154,
+  "physical": {
+    "name": "NGC 2903",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 2903 is recorded: it is an extended galaxy, and its package frames it at 20000 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 143.04,
+    "declinationDegrees": 21.500556,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 9162204.90122,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 536,
+    "sources": {
+      "position": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. (https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv); catalogue reference lvdb-v1.1.1:ngc_2903:location",
+      "distance": "Tully2009AJ....138..323T: The Extragalactic Distance Database (https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T); catalogue reference Tully2009AJ....138..323T: 9162204.90122 pc; trgb",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NGC 2903: 536 km/s +/- 3, from 2022ApJS..261...21Y (https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract)"
+    }
+  }
+}

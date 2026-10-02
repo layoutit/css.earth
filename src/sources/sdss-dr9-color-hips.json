@@ -1,0 +1,56 @@
+{
+  "id": "sdss-dr9-color-hips",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SDSS9 color HiPS (CDS)",
+  "identifiers": [
+    {
+      "type": "HiPS",
+      "value": "CDS/P/SDSS9/color"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.sdss.org/",
+      "label": "Sloan Digital Sky Survey"
+    },
+    {
+      "role": "archive",
+      "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+      "label": "HiPS record"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.sdss.org/collaboration/#image-use",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+      "checkedOn": "2026-10-01",
+      "locator": "obs_title 'SDSS9 color'; hips_creator Boch T. (CDS); hips_license ODbL-1.0; hips_order 10; hips_pixel_scale 1.118E-4 deg (0.40 arcsec); prov_progenitor SLOAN. The NGC 2903 cutout is 3000 x 3000 px, 0.3333333 degrees wide, tangent projection on 143.04, +21.500556 through the CDS hips2fits service; 108 of the 121 Gaia DR3 stars brighter than G = 18.5 in it fall within 2.5 px of their requested places (median 0.5 px)."
+    }
+  ],
+  "creators": [
+    "Sloan Digital Sky Survey",
+    "T. Boch (CDS)"
+  ],
+  "publisher": "CDS (CNRS/Unistra)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sloan Digital Sky Survey; colour HiPS by CDS (CNRS/Unistra)",
+      "scope": "Survey image of NGC 2903",
+      "evidence": "https://www.sdss.org/collaboration/#image-use"
+    },
+    {
+      "kind": "rights",
+      "text": "SDSS provides its images under a Creative Commons Attribution licence (CC-BY) with the credit maintained, and its released data are in the public domain (https://www.sdss.org/collaboration/#image-use); the CDS HiPS distribution is under ODbL-1.0. Retain the complete recorded credit.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "https://www.sdss.org/collaboration/#image-use"
+    }
+  ]
+}

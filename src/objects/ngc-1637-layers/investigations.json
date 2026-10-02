@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-1637-layers",
+  "entries": [
+    {
+      "id": "eso-fors1",
+      "subject": "ESO eso1315a (Very Large Telescope FORS1)",
+      "status": "included",
+      "finding": "The whole bright disc in B, V and R, 1964 px across, CC BY 4.0. The page's field (7.19 arcmin), centre and rotation (6.2 deg) do not match the Large JPEG; a blind star match to Gaia DR3 gives north up at 0.2000 arcsec per pixel, a 6.55 arcmin field, with 27 of 32 Gaia stars matched within 4 px.",
+      "evidence": [
+        "https://www.eso.org/public/images/eso1315a/"
+      ]
+    },
+    {
+      "id": "dot-catalogues",
+      "subject": "Catalogues of NGC 1637's nebulae and clusters",
+      "status": "excluded",
+      "finding": "Looked for on CDS on 2026-10-01: no HII-region, cluster or supernova-remnant table names NGC 1637, and it is not in the PHANGS-MUSE sample. The bank therefore has no dots.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/520/4902"
+      ],
+      "revisitWhen": "A catalogue of its HII regions, clusters or remnants with sky positions is published."
+    },
+    {
+      "id": "orientation",
+      "subject": "Disc tilt and position angle",
+      "status": "included",
+      "finding": "Leroy et al. (2021) give inclination 31.1 +/- 5.0 deg and position angle 20.6 +/- 10.0 deg. The galaxy is not in Lang et al.'s (2020) kinematic table or in THINGS, so no tighter measurement was found.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/897/122"
+      ],
+      "revisitWhen": "A kinematic fit with smaller errors is published."
+    }
+  ]
+}
