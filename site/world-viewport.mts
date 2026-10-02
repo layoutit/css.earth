@@ -14,3 +14,17 @@ export function createWorldViewport(stage: HTMLElement) {
     above: null,
     below: document.querySelector<HTMLElement>('.object-viewport-search-band') }, { header });
 }
+
+/** A stage without a box yet: resolves once the layout gives it one, or null when it already has one. A page loaded
+ * into a frame, pane or sheet that has no width yet has no camera to fit, so the scene's first view waits here. */
+export function stageSized(stage: HTMLElement, signal: AbortSignal): Promise<void> | null {
+  const sized = () => { const box = stage.getBoundingClientRect(); return box.width > 0 && box.height > 0; };
+  const view = stage.ownerDocument.defaultView;
+  if (signal.aborted || !view || sized()) return null;
+  return new Promise(resolve => {
+    const finish = () => { observer.disconnect(); signal.removeEventListener('abort', finish); resolve(); };
+    const observer = new view.ResizeObserver(() => { if (sized()) finish(); });
+    signal.addEventListener('abort', finish, { once: true });
+    observer.observe(stage);
+  });
+}
