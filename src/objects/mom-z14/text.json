@@ -28,7 +28,7 @@
     ]
   },
   "introduction": {
-    "text": "Webb's near-infrared view. The light left it when the universe was 2% of its present age; the picture is flat and has no depth.",
+    "text": "Webb's near-infrared view. The light left it when the universe was 2% of its present age; its depth here is a published model, not a measurement.",
     "sources": [
       {
         "catalogueId": "esawebb-weic2603a",
@@ -49,8 +49,8 @@
   "datasets": {
     "optical": {
       "title": "MoM-z14 in near infrared",
-      "detail": "1024 × 1024 px",
-      "summary": "The publisher's enlarged view of the galaxy, 0.58 arcsec across. A flat picture of the sky, with no depth.",
+      "detail": "488 × 488 px",
+      "summary": "A published model spheroid colored by Webb's picture of a few native pixels; depth is not measured.",
       "sources": [
         {
           "catalogueId": "esawebb-weic2603a",

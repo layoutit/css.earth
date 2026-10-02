@@ -18,6 +18,7 @@
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
+import type { Sharp } from 'sharp';
 
 const repository = resolve(import.meta.dirname, '../../../..');
 const ids = process.argv.slice(2);
@@ -27,7 +28,7 @@ interface Band { points: [number, number][]; halfWidthPx: number; featherPx: num
 interface Acquisition { url: string; dimensions: [number, number]; window?: [number, number, number, number]; outputDimensions?: [number, number]; band?: Band }
 
 /** The window's pixels with everything beyond the band's feather black: each pixel is scaled by how near the path it lies. */
-async function keepBand(cut: sharp.Sharp, left: number, top: number, band: Band): Promise<sharp.Sharp> {
+async function keepBand(cut: Sharp, left: number, top: number, band: Band): Promise<Sharp> {
   const { data, info } = await cut.removeAlpha().raw().toBuffer({ resolveWithObject: true });
   const segments = band.points.slice(1).map((point, index) => [band.points[index]!, point] as const);
   for (let y = 0; y < info.height; y++) for (let x = 0; x < info.width; x++) {

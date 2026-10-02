@@ -28,7 +28,7 @@
     ]
   },
   "introduction": {
-    "text": "Webb's near-infrared view: GN-z11 is the small yellow point at lower left, and the red galaxy above it is nearer. The picture is flat and has no depth.",
+    "text": "Webb's near-infrared view of GN-z11, drawn through a published model of its shape. Its depth is modelled, not measured.",
     "sources": [
       {
         "catalogueId": "esawebb-weic2406a",
@@ -49,8 +49,8 @@
   "datasets": {
     "optical": {
       "title": "GN-z11 in near infrared",
-      "detail": "300 × 300 px",
-      "summary": "The publisher's enlarged view, 0.73 arcsec across, with GN-z11 at lower left. A flat picture of the sky, with no depth.",
+      "detail": "120 × 120 px",
+      "summary": "A published model spheroid colored by Webb's picture of a few native pixels; depth is not measured.",
       "sources": [
         {
           "catalogueId": "esawebb-weic2406a",

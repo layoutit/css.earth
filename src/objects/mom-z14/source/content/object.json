@@ -74,7 +74,7 @@
       {
         "id": "picture",
         "label": "Picture width",
-        "value": "0.58 arcsec, 29.2 kpc comoving at its distance",
+        "value": "0.58 arcsec, 29.3 kpc comoving at its distance",
         "source": {
           "catalogueId": "esawebb-weic2603a",
           "url": "https://esawebb.org/images/weic2603a/",
@@ -94,13 +94,13 @@
         "label": "Webb · near infrared",
         "thumbnail": "mom-z14-dataset-optical.webp",
         "volume": {
-          "objectId": "mom-z14-layers",
+          "objectId": "mom-z14-volume",
           "datasetId": "optical",
           "surface": "optical"
         },
         "source": {
-          "id": "mom-z14-layers-optical",
-          "path": "../../mom-z14-layers/source/manifest.json",
+          "id": "mom-z14-volume-optical",
+          "path": "../../mom-z14-volume/source/manifest.json",
           "url": "https://esawebb.org/images/weic2603a/"
         },
         "falseColor": true

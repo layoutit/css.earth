@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "gn-z11-volume",
+  "entries": [
+    {
+      "id": "weic2406a",
+      "subject": "ESA/Webb weic2406a",
+      "status": "included",
+      "finding": "GN-z11 in the GOODS-North field: Webb NIRCam: 0.9 to 1.5 µm blue, 2.0 to 3.4 µm green, 3.6 to 4.4 µm red. The lab reads a 120 x 120 px window of the Large JPEG, 0.29 arcsec across. The file carries no sky tags; the scale (0.002447 arcsec per pixel, to about 3%) and the direction of north (61.4° right of vertical) are the project's measurements, recorded in src/sources/esawebb-weic2406a.json.",
+      "evidence": [
+        "https://esawebb.org/images/weic2406a/",
+        "https://esawebb.org/copyright/"
+      ]
+    },
+    {
+      "id": "archive-science-pixels",
+      "subject": "Webb NIRCam science mosaics from MAST",
+      "status": "deferred",
+      "finding": "Not used. The lab recipe reads a display image by URL; the archive's mosaics would need a cutout, a display transfer of our own and a hosted file, and the telescope tooling has no cutout command for survey mosaics. The galaxy is a few pixels either way.",
+      "revisitWhen": "The lab recipe can read a prepared local image, or the telescope tooling cuts mosaics by position."
+    },
+    {
+      "id": "sersic-fit",
+      "subject": "Spheroid",
+      "status": "included",
+      "finding": "Tacchella et al. (2023), Section 3: the extended Sérsic component, index 0.9 +/- 0.1, half-light radius 49 +/- 3 mas along the major axis, axis ratio 0.67 +/- 0.05, position angle 34 +/- 5 degrees. Used as published. The lab takes one Sérsic spheroid, so the point source is not modelled separately.",
+      "evidence": [
+        "https://arxiv.org/abs/2302.07234"
+      ]
+    },
+    {
+      "id": "flat-picture",
+      "subject": "Flat picture bank",
+      "status": "excluded",
+      "finding": "The first version drew the publisher's picture as one flat image facing the Sun (gn-z11-layers); seen from the side it was a line. Replaced by this volume."
+    }
+  ]
+}

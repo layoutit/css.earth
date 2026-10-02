@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "mom-z14-volume",
+  "entries": [
+    {
+      "id": "weic2603a",
+      "subject": "ESA/Webb weic2603a",
+      "status": "included",
+      "finding": "COSMOS Field MoM-z14 Galaxy (NIRCam pullout image): Webb NIRCam, ten filters from 0.9 to 4.4 µm. The lab reads a 488 x 488 px window of the Publication JPEG, 0.58 arcsec across. The file carries no sky tags; the scale (0.0011915 arcsec per pixel, to about 5%; 0.000194 arcsec per pixel of the 24,567 px Large JPEG) and the direction of north (90.14° left of vertical) are the project's measurements, recorded in src/sources/esawebb-weic2603a.json.",
+      "evidence": [
+        "https://esawebb.org/images/weic2603a/",
+        "https://esawebb.org/copyright/"
+      ]
+    },
+    {
+      "id": "archive-science-pixels",
+      "subject": "Webb NIRCam science mosaics from MAST",
+      "status": "deferred",
+      "finding": "Not used. The lab recipe reads a display image by URL; the archive's mosaics would need a cutout, a display transfer of our own and a hosted file, and the telescope tooling has no cutout command for survey mosaics. The galaxy is a few pixels either way.",
+      "revisitWhen": "The lab recipe can read a prepared local image, or the telescope tooling cuts mosaics by position."
+    },
+    {
+      "id": "sersic-fit",
+      "subject": "Spheroid",
+      "status": "included",
+      "finding": "Naidu et al. (2025), Section 3.2 and Table 1: Sérsic index 1.0 +/- 0.2, semi-major axis 147 pc, axis ratio 0.25, extended north to south. Used as published; the position angle is the paper's words, not a number. The same section reports about 90 pc from pysersic on the mosaics.",
+      "evidence": [
+        "https://arxiv.org/abs/2505.11263"
+      ]
+    },
+    {
+      "id": "flat-picture",
+      "subject": "Flat picture bank",
+      "status": "excluded",
+      "finding": "The first version drew the publisher's picture as one flat image facing the Sun (mom-z14-layers); seen from the side it was a line. Replaced by this volume."
+    }
+  ]
+}

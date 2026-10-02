@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "gn-z11-volume",
+  "method": "axial-symmetry",
+  "request": {
+    "path": "labs/nebula/models/gn-z11/experiment.json"
+  },
+  "inputPins": [],
+  "sky": {
+    "centerIcrsDegrees": [
+      189.106083,
+      62.242056
+    ],
+    "distancePc": 9762148825.546518,
+    "imageRotationDegrees": -61.4,
+    "arcsecPerUnit": 0.029364
+  },
+  "sourceUrl": "https://esawebb.org/images/weic2406a/",
+  "description": "GN-z11's light as a volume: the publisher's Webb picture, its light along each sight line spread in depth by the deprojected density of the extended component of Tacchella et al.'s published fit, on an oblate spheroid about the minor axis in the plane of the sky. The galaxy is a few native pixels, so the volume is almost entirely the published model; depth is not measured.",
+  "defaultDataset": "optical",
+  "framingRadiusUnits": 5,
+  "attachedTo": "gn-z11",
+  "acceptedLabResult": "gn-z11-inferred",
+  "symmetryDirectory": ".local/nebula-lab/planetary/gn-z11-inferred",
+  "compactInputs": {
+    "path": "src/objects/gn-z11-volume/source/compact/model.json"
+  },
+  "compactMethod": "symmetry"
+}

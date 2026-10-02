@@ -1,6 +1,6 @@
 # GN-z11
 
-GN-z11 as an object of the world: its place, its card and its list marker. It has no surface. Its one dataset shows the [GN-z11 picture](../gn-z11-layers/README.md) bank, whose README holds the picture's source, placement, evidence and known problems.
+GN-z11 as an object of the world: its place, its card and its list marker. It has no surface. Its one dataset shows the [GN-z11 volume](../gn-z11-volume/README.md) bank, whose README holds the picture's source, the published shape, evidence and known problems.
 
 ## Sources
 
@@ -13,7 +13,7 @@ GN-z11 as an object of the world: its place, its card and its list marker. It ha
 ## Processing
 
 1. The [astronomy record](../../../packages/astronomy/data/bodies/gn-z11.json) places the object at the published position and the comoving distance of its redshift, the project's convention for objects placed by redshift.
-2. `node packages/bake/cli/prepare-object.mts gn-z11` prepares its scene through the standard authored lane. The [recipe](object.json) declares no surface, so the scene is the camera, sky and world frame; the page frames the object at 17.4 kpc, half the short side of its picture ([solar-system.json](source/presentation/solar-system.json)).
+2. `node packages/bake/cli/prepare-object.mts gn-z11` prepares its scene through the standard authored lane. The [recipe](object.json) declares no surface, so the scene is the camera, sky and world frame; the page frames the object at 6.9 kpc comoving, half the width of the picture that is drawn ([solar-system.json](source/presentation/solar-system.json)).
 3. `node site/build/prepare/companion-context.mts gn-z11` saves the list marker from the dataset's picture.
 
 ## Known problems

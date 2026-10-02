@@ -4,50 +4,50 @@
     {
       "location": "public",
       "filename": "gn-z11-dataset-optical.webp",
-      "bytes": 852,
-      "sha256": "6ad01b759ee1ff5e9fc6f7dc20f3306f00ea8859b84e74f5493faa3e969e7769"
+      "bytes": 308,
+      "sha256": "2c21fa893eec7627923264bfcc617445ce8b9af58d31730472067d694dd68d74"
     },
     {
       "location": "prepared",
       "filename": "content.json",
       "bytes": 3064,
-      "sha256": "2f4fafd791e21132b3c65b5e3a8644a12a1e9eb2f62515fbeb23d970b1cf432b"
+      "sha256": "aaf8efd7742b7a22fc9641211511ab04555f0ad1759951b1ccc32264b1e8b69d"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
       "bytes": 464,
-      "sha256": "4c444e7f0ed7568c052424877d22930ff88d681ae716ab59feb4a809abc5e223"
+      "sha256": "dd891a30c29f05c1a85cb37a63d3dfa12d3b615e844f7d357122f94d411c34af"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 549,
-      "sha256": "7a7de81ca84acacff6186cf6f4d425853d7c0978aa204dabfcc9d1c61a9c458c"
+      "sha256": "66b284036a06aaaa70412e5ff12e35294f11ba7c490ede4f684232779ea892a4"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
       "bytes": 4652,
-      "sha256": "9a919c321feb958cdceecb17e89094fcd96f0aa7d49d00f205f63a5f7e332fb0"
+      "sha256": "0059df7f6821dfc9216092a8755d425488330cf3038ded09c144e62d3f50e8c1"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 3930,
-      "sha256": "3e8c1248e90406c7f7f50ef9b3c59b267a8db94594cab479327f747ed9ae3ded"
+      "bytes": 3929,
+      "sha256": "61f1526571f360007313069233b9d3eedd7d1a4335a873f1c38f46e0c8d60d1a"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2411,
-      "sha256": "c461ef97e43cb9b185ff1483f8e25aad56e79d2fd99bad47f88c2f656911b745"
+      "bytes": 2359,
+      "sha256": "b1f6e939cc188bc41ea0c36ccff8e9a5c2cc23d23acb9f48976654ccc3d8c22e"
     },
     {
       "location": "prepared",
       "filename": "world-navigation.json",
-      "bytes": 644,
-      "sha256": "7914828f8d66ed104777caacc4e6b0a990ddcdeb756e2fc1d26ef67a9387c6dd"
+      "bytes": 643,
+      "sha256": "651ae432b4a964665c644dbe03e4d8613b2b0dbd07d31598f5a3be1e7b60f3c3"
     }
   ]
 }
