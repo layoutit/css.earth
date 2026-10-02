@@ -124,6 +124,28 @@ test('clicking the already selected body in close-up does not zoom back out to i
   assert.equal(navigation.systemTarget({ objectId: 'saturn', fromId: 'saturn', mount: closeMount }), null);
 });
 
+test('a dataset volume is fitted through the normal projection, whatever magnification the view arrived with', () => {
+  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
+  const frame = required(required(SCENE_OBJECTS.find(object => object.id === 'm31')).worldFrame);
+  const phone = { ...optics, focalPixels: 337.75, widthPixels: 390, heightPixels: 844 };
+  // An arrival rests at a fixed distance and magnifies its projection instead: 3.76 times on a phone.
+  const magnification = 3.76, magnified = { ...phone, focalPixels: phone.focalPixels * magnification, projectionScale: magnification };
+  const at = (radii: number, projectionScale?: number): WorldCameraPose => ({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
+    ...(projectionScale === undefined ? {} : { projectionScale }),
+    pose: { positionM: [frame.originM[0], frame.originM[1], frame.originM[2] + radii * frame.bodyRadiusM], orientationXyzw: [0, 0, 0, 1] } });
+  const fit = (camera: WorldCameraPose, viewport: typeof optics) => navigation.datasetVolumeTarget({ objectId: 'm31', volumeId: 'm31-layers',
+    mount: { sharedView: unusedSharedView, navigation: navigationFixture(frame, () => camera, () => viewport) } });
+  const range = (camera: WorldCameraPose) => Math.hypot(...camera.pose.positionM.map((value, axis) => value - frame.originM[axis])) / frame.bodyRadiusM;
+  const cold = required(fit(at(1), phone)), arrived = required(fit(at(1, magnification), magnified));
+  assert.deepEqual(arrived.world.pose, cold.world.pose, 'the arrival is fitted where the page opens');
+  assert.equal(arrived.world.projectionScale, undefined, 'the fitted camera carries no magnification');
+  const fitted = range(cold.world);
+  // What a view holds is its apparent size: magnified, a camera twice as far out as the fit still shows less than the volume.
+  assert.equal(fit(at(fitted * 2), phone), null, 'a view already beyond the fit stays');
+  assert.deepEqual(required(fit(at(fitted * 2, magnification), magnified)).world.pose.orientationXyzw, [0, 0, 0, 1]);
+  assert.equal(fit(at(fitted * 2 * magnification, magnification), magnified), null, 'so does a magnified view that shows as little');
+});
+
 test('selecting the Milky Way from Local Group zooms in to the galaxy while keeping the viewing direction', async () => {
   const { overviewScopeAtCamera } = await import('../overview-context.mts');
   const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });

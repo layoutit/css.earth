@@ -63,3 +63,70 @@ test('surface labels keep no frame loop while they are off, the default', async 
   lifetime.destroy();
   assert.equal(host.querySelector('.prepared-surface-features'), null);
 });
+
+test('a selected feature shows its name and card while names are off, and leaves the document when cleared', async () => {
+  const { document, window } = parseHTML('<html><body><div id="host"><div id="scene"><div id="mesh"></div></div></div></body></html>');
+  const frames = new Map<number, (time: number) => void>();
+  let next = 0;
+  // The fixture draws no body: every transform is the identity, and every element has a size.
+  class Matrix {
+    readonly values: number[];
+    constructor(values?: unknown) { this.values = Array.isArray(values) ? [...values] : [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]; }
+    multiply() { return this; }
+    transformPoint<T>(point: T) { return point; }
+    toFloat64Array() { return Float64Array.from(this.values); }
+  }
+  Object.assign(window, {
+    requestAnimationFrame: (callback: (time: number) => void) => { frames.set(++next, callback); return next; },
+    cancelAnimationFrame: (id: number) => { frames.delete(id); },
+    DOMMatrix: Matrix, getComputedStyle: () => ({ transform: 'none' }), matchMedia: () => ({ matches: true }),
+  });
+  for (const name of ['offsetWidth', 'clientWidth']) Object.defineProperty(window.HTMLElement.prototype, name, { get(this: HTMLElement) { return this.id === 'host' ? 800 : 60; } });
+  for (const name of ['offsetHeight', 'clientHeight']) Object.defineProperty(window.HTMLElement.prototype, name, { get(this: HTMLElement) { return this.id === 'host' ? 600 : 14; } });
+  const run = () => { const pending = [...frames.values()]; frames.clear(); for (const callback of pending) callback(performance.now()); };
+  const settle = async (done: () => boolean) => {
+    for (let turn = 0; turn < 400 && !done(); turn++) { await new Promise(resolve => setTimeout(resolve, 0)); run(); }
+    assert.ok(done(), 'the fixture settles');
+  };
+  const lifetime = createSceneLifetime();
+  const plan = { outline: { pieces: 8 }, catalog: { url: '/features.json', bytes: 1, count: 1 }, datasetIds: ['surface'], meshRadiusUnits: 1,
+    policy: { minimumZoomShare: 1, minimumDiameterPixels: 30, alwaysVisibleCount: 0, maximumVisible: 4, limbCosine: 0.12 } } as unknown as Parameters<typeof mountSurfaceFeatureLabels>[0]['plan'];
+  const site = { id: '90000000', name: 'Sample site', kind: 'point', type: 'Sample site', code: 'SS', diameterKm: 0, longitudeDeg: 0, latitudeDeg: 0,
+    anchorUnits: [0, 0, 1], normal: [0, 0, 1], radiusUnits: 0, outline: { kind: 'circle', center: [0, 0, 1], east: [0, 0, 0], north: [0, 0, 0] },
+    searchNames: ['sample site'], searchContext: 'sample site', origin: 'Sampled in 2020.', approved: '2020-10-20', quad: 'sites', link: 'https://example.org', credit: 'Fixture', minimumZoomShare: 0.6 };
+  const host = document.getElementById('host')!;
+  let pose: unknown = { referenceFrame: 'test', epochJdTt: 1, pose: { positionM: [0, 0, 3], orientationXyzw: [0, 0, 0, 1] } };
+  const unused = (): never => { throw new Error('The selection fixture reads no subscription.'); };
+  const labels = mountSurfaceFeatureLabels({ host, plan, objectId: 'bennu', target: document.getElementById('mesh')!, pickingHost: host, inputSurface: host,
+    flightLimits: () => ({ minimumDistanceM: 1.5 }),
+    navigation: { motion: createCameraMotion(), frame: { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0], presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 1 },
+      capture: () => pose, apply(value: unknown) { pose = value; }, optics: () => ({ focalPixels: 1000, visibleRect: null }), subscribe: unused } as unknown as Parameters<typeof mountSurfaceFeatureLabels>[0]['navigation'],
+    scene: document.getElementById('scene')!, zoomRange: () => ({ minimum: 1, maximum: 2 }), lifetime, onError(error) { throw error; },
+    transport: async () => new Response(JSON.stringify({ schema: 'cssearth-prepared-surface-features@1', objectId: 'bennu', source: 'fixture', snapshotDate: '2026-10-02',
+      sourcePage: 'https://example.org', license: 'fixture', qualification: 'fixture', features: [site] })) });
+  labels.setDataset({ id: 'surface' });
+  // The camera is far out, below the zoom gate: only a selection may draw.
+  const publish = () => labels.publish({ projection: physicalProjectionFromCamera([1,0,0,0,1,0,0,0,1], [0,0,-3], 1, { focalPixels: 1000, principalOffsetPixels: [0,0] }),
+    levelOfDetail: { stage: 'geometry', silhouetteDiameter: 600, markerOpacity: 0, billboardOpacity: 0 }, zoom: 1 });
+  publish();
+  assert.notEqual(document.body.dataset.surfaceLabels, 'on', 'names are off, the default');
+
+  const selecting = labels.select('90000000');
+  await settle(() => labels.stats().pinned === '90000000' && !labels.stats().flying);
+  assert.deepEqual(await selecting, { completed: true });
+  publish(); run(); run();
+  const card = host.querySelector<HTMLElement>('[data-feature-tooltip]')!, name = host.querySelector<HTMLElement>('[data-feature-label="90000000"]')!;
+  assert.equal(card.hidden, false, 'the selected feature shows its card');
+  assert.equal(card.dataset.featureTooltipFor, '90000000');
+  assert.equal(card.dataset.featureTooltipPinned, 'true');
+  assert.match(card.textContent ?? '', /Sample site.*Sampled in 2020\./u);
+  assert.ok(name.hasAttribute('data-feature-selected'), 'the shell keeps the selected name visible by this mark');
+  assert.equal(labels.stats().visible, 1);
+
+  labels.clear();
+  run(); run();
+  assert.equal(host.querySelector('.prepared-surface-features'), null, 'cleared with names off, the layer leaves the document');
+  assert.equal(name.hasAttribute('data-feature-selected'), false);
+  assert.equal(labels.stats().visible, 0);
+  lifetime.destroy();
+});

@@ -1877,8 +1877,8 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
 }
 
 /* Surface labels default to hidden before the shell binds so prepared
-   nomenclature never flashes on first paint. */
-body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-label] {
+   nomenclature never flashes on first paint. A selected feature keeps its name. */
+body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-label]:not([data-feature-selected]) {
   visibility: hidden !important;
 }
 

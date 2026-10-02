@@ -140,11 +140,16 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
     datasetVolumeTarget({ objectId, volumeId, mount }: { objectId: string; volumeId: string; mount?: ShellCamera | null }) {
       const bank = DATASET_VOLUMES.get(volumeId), volume = !bank || (bank.host !== undefined && bank.host !== objectId) ? undefined : bank.frame;
       const frame = frames.get(objectId), owner = mount?.navigation;
-      const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
-      if (!volume || !frame || !from || !optics) return null;
+      const from = owner?.capture() ?? lastCamera, current = owner?.optics() ?? lastOptics;
+      if (!volume || !frame || !from || !current) return null;
+      // The fitted camera carries no magnification, so the fit is made through the normal projection, like an overview's. An
+      // arrival holds its close-up's magnification (3.76 on a phone): fitted through it, M 31 reached from another body
+      // ended that many times farther out than its own page opens, about 20 px wide (2026-10-02).
+      const optics = worldCameraViewport({ projectionScale: 1 }, current), magnification = current.focalPixels / optics.focalPixels;
       const target = volumeZoomTarget(from, volume, optics, systemFramingRect(optics, documentTarget), frame.originM);
       const distance = (camera: WorldCamera) => eyeDistanceM(camera.pose, frame.originM);
-      return distance(target.world) > distance(from) ? target : null;
+      // What the view holds is its apparent size: a magnified view stands that many times closer.
+      return distance(target.world) > distance(from) / magnification ? target : null;
     },
     /** Turn onto a bound pair's centre of mass, keeping the distance: a binary's overview is centred on the pair, not on the
      * star the scene mounts. Null when the system has no companion, or when the camera already looks at that centre. */

@@ -103,21 +103,29 @@ export async function preparedRuntimeCamera(path: string): Promise<unknown> {
 const DATASET_PACKAGE_IMAGERY: Readonly<Record<string, boolean>> = { 'image-layer-bank': true, 'volume-dataset-bank': true, 'catalogue-point-bank': false, 'density-volume': false,
   'galaxy-catalog': false, 'galaxy-point-field': false, 'map-sphere': true };
 
-export async function prepareObjectDiscovery(descriptor: unknown, objectDirectory: string) {
+export async function prepareObjectDiscovery(descriptor: unknown, objectDirectory: string): Promise<ObjectDiscovery> {
   if (isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) && Array.isArray(descriptor.properties.recipe.surfaces) && !descriptor.properties.recipe.surfaces.length) {
     // An object with no surface shows the banks its datasets name: it is pictured when one of them is imagery. It is a
     // place on the map by itself, so it is featured.
     const content: unknown = JSON.parse(await readFile(resolve(objectDirectory, 'source/content/object.json'), 'utf8'));
     const controls = isRecord(content) && isRecord(content.datasets) && Array.isArray(content.datasets.controls) ? content.datasets.controls : [];
     const banks = new Set(controls.flatMap(control => isRecord(control) && isRecord(control.volume) && typeof control.volume.objectId === 'string' ? [control.volume.objectId] : []));
-    let imagery = false;
+    const pictured = new Set<string>();
     for (const bank of banks) {
       const companion: unknown = JSON.parse(await readFile(resolve(objectDirectory, '..', bank, 'object.json'), 'utf8'));
       if (!isRecord(companion) || typeof companion.type !== 'string' || !Object.hasOwn(DATASET_PACKAGE_IMAGERY, companion.type)) throw new TypeError(`src/objects/${bank}/object.json: ${String(descriptor.id)} shows it as a dataset, but it is not a bank package.`);
-      imagery ||= DATASET_PACKAGE_IMAGERY[companion.type]!;
+      if (DATASET_PACKAGE_IMAGERY[companion.type]) pictured.add(bank);
     }
+    const imagery = pictured.size > 0;
     const policy = discoveryPolicy(descriptor.properties.catalog);
-    return { imagery, illustration: false, featured: true, ...(policy.orientationReference === undefined ? {} : { orientationReference: policy.orientationReference }) };
+    // A pictured dataset has a facing, as a body's photograph has: reached from another body, the object opens on the view
+    // its own page opens on. Without this a flight kept the direction it came from, and M 31 reached from M87* was its flat
+    // image seen from the side (2026-10-02). A field of catalogue dots keeps the direction, as before.
+    const photographed = controls.flatMap(control => isRecord(control) && typeof control.id === 'string' && isRecord(control.volume) && pictured.has(String(control.volume.objectId)) ? [control.id] : []);
+    const defaultDataset = isRecord(content) && isRecord(content.datasets) ? content.datasets.defaultDataset : undefined;
+    const camera = photographed.length && typeof defaultDataset === 'string' ? await preparedRuntimeCamera(resolve(objectDirectory, 'prepared', 'runtime.json')) : null;
+    const arrival = camera ? parseArrivalView({ defaultDataset, datasetIds: photographed, rotation: preparedDefaultViewRotation(camera) }) : undefined;
+    return { imagery, illustration: false, featured: true, ...(arrival ? { arrival } : {}), ...(policy.orientationReference === undefined ? {} : { orientationReference: policy.orientationReference }) };
   }
   if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.recipe) ||
       !Array.isArray(descriptor.properties.recipe.sources)) throw new TypeError(`Missing discovery recipe sources: ${isRecord(descriptor) ? String(descriptor.id) : 'unknown object'}.`);
