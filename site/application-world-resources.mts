@@ -55,10 +55,10 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // Only the context objects' folders are globbed; bodies share src/objects but are not world resources.
     const descriptors = CONTEXT_OBJECT_DESCRIPTORS, assets = CONTEXT_OBJECT_ASSET_URLS;
     const parsedDescriptors = Object.values(descriptors).map(parseObjectDescriptor);
-    const resourceSet = (objectId: string) => {
+    const resourceSet = (objectId: string, files: Record<string, unknown> = assets) => {
       const base = `../src/objects/${objectId}/`;
       const resolve = (path: string) => {
-        const url = assets[`${base}${path}`];
+        const url = files[`${base}${path}`];
         if (typeof url !== 'string') throw new Error(`Prepared context resource unavailable: ${path}.`);
         return url;
       };
@@ -68,6 +68,14 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
           if (!response.ok) throw new Error(`Prepared context request failed: ${response.status}.`);
           return response.arrayBuffer();
         } } };
+    };
+    // A bank a body's dataset shows names its files when it is first loaded (prepare-catalog.mts CONTEXT_BANK_TYPES).
+    const bankSet = async (objectId: string) => {
+      const response = await fetch(`/world/context-assets/${encodeURIComponent(objectId)}.json`, { signal: AbortSignal.timeout(15_000) });
+      if (!response.ok) throw new Error(`Prepared context bank ${objectId}: its file list request failed (${response.status}).`);
+      const files: unknown = await response.json();
+      if (!isRecord(files)) throw new TypeError(`Prepared context bank ${objectId}: /world/context-assets/${objectId}.json is not a file list.`);
+      return resourceSet(objectId, files);
     };
     const volumeSet = resourceSet(applicationContext.volume.objectId), starSet = resourceSet(applicationContext.stars.objectId);
     // Every galaxy point field draws its dots, and its far banks (`properties.farBanks`) once the camera is that far out.
@@ -101,7 +109,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const imageLayerBanks = imageLayerDescriptors.map(descriptor => ({ id: descriptor.id, frame: descriptor.frame }));
     const loadImageLayer = createInFlightLoader(async (id: string) => {
       if (!imageLayerIds.has(id)) throw new TypeError(`Unknown prepared image-layer bank: ${id}.`);
-      const set = resourceSet(id);
+      const set = await bankSet(id);
       return { payload: await loadPreparedCssImageLayers(set.descriptor, set.transport),
         resolveResource: (path: string) => set.resolve(`prepared/${path}`),
         cataloguePointUrls: imageLayerCataloguePoints.get(id)!.map(bank => set.resolve(`prepared/${bank}.bin`)) };
@@ -124,7 +132,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const datasetBillboards = { plan: parseDatasetBillboards(JSON.parse(datasetBillboardText)), atlasUrl: datasetBillboardAtlasUrl };
     const loadVolumeDataset = createInFlightLoader(async (id: string) => {
       if (!volumeDatasetIds.has(id)) throw new TypeError(`Unknown prepared volume dataset bank: ${id}.`);
-      const set = resourceSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport);
+      const set = await bankSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport);
       return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`),
         cataloguePointUrls: (VOLUME_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.bin`)) };
     });
