@@ -57,7 +57,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   let open = searchCard.hasAttribute('data-search-submitted');
   let showingSearchResults = false;
   const searchPresentation = createSearchPresentation(documentTarget);
-  const presentation = createSelectionPresentation(documentTarget, { windowTarget });
+  const presentation = createSelectionPresentation(documentTarget);
   const resultsPanel = requiredElement(browser, '#object-category-results');
   browser.dataset.retained = '';
   information.dataset.retained = '';

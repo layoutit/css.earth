@@ -39,14 +39,8 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
     <p class="object-empty" hidden>No matching results</p>
     <details class="object-feature-results" hidden><summary>Named features <span class="object-panel-heading-count"></span></summary><p class="object-destination-hint"></p>
       <ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></details></div>
-  </nav><div class="object-selected-content"><div class="object-context" hidden>
-    <div data-large-scale-overview="milky-way" data-large-scale-name="Milky Way" data-neighbor-home="observer" hidden>Milky Way</div>
-    <div data-large-scale-overview="local-group" data-large-scale-name="Local Group" hidden></div>
-    <div data-large-scale-overview="nearby-universe" data-large-scale-name="Nearby Universe" hidden></div>
-    <div data-large-scale-overview="observable-universe" data-large-scale-name="Observable Universe" hidden></div>
-    <div data-system-results hidden><section class="object-selected-panel" data-system-header="sun" data-system-current>Solar System introduction</section>
-      <section class="object-selected-panel" data-system-header="trappist-1">TRAPPIST-1 system</section><div data-solar-system-facts></div></div>
-    </div><section class="object-information-panel">Saturn</section></div></div><!--search-shell:end-->
+  </nav><div class="object-selected-content">
+    <section class="object-information-panel"><div data-planetary-system>System header</div><div class="body-part">Saturn</div><div data-planetary-system data-system-bodies-slot></div></section></div></div><!--search-shell:end-->
   <main class="object-stage"><u style='color: red;' data-prepared-node="0"></u></main><script type="module" src="/app.js"></script></body></html>`;
 const visibleNames = (document: Document) => [...document.querySelectorAll('[data-catalogue-list] .object-item .object-name')].map(element => element.textContent);
 const render = async (path: string, search = data(), source = html) => parseHTML(await renderSearchResponse(source, new URL(path, origin), search)).document;
@@ -127,31 +121,24 @@ test('typed search shows a flat result list, including queries that name a level
 const contextHtml = html
   .replace('</form>', '<a class="object-sidebar-search-clear" href="/saturn/">Clear search</a></form>');
 
-test('native and live selections share card visibility, inertness, labels and system headers', async () => {
-  const state = (document: Document) => [...document.querySelectorAll<HTMLElement>(
-    '.object-context, .object-information-panel, [data-system-results], [data-system-header], [data-solar-system-facts]')]
-    .map(element => ({ hidden: element.hidden, inert: element.hasAttribute('inert'), label: element.getAttribute('aria-label'), current: element.hasAttribute('data-system-current') }));
-  const cases = [
-    ['', 'saturn', { kind: 'object', objectId: 'saturn' }, '/saturn/'],
-    ['?overview=system', 'trappist-1', { kind: 'overview', overview: { scope: 'system', systemId: 'trappist-1' } }, '/trappist-1/'],
-  ] as const;
-  for (const [query, objectId, subject, page] of cases) {
-    const source = contextHtml.replace('data-search-object="saturn"', `data-search-object="${objectId}"`);
-    const native = await render(`${page}${query}`, data(), source);
-    const live = parseHTML(source).document;
-    const present = createSelectionPresentation(live);
-    present.present({ kind: 'overview', overview: { scope: 'system', systemId: 'sun' } });
-    present.present(subject);
-    assert.deepEqual(state(native), state(live), query || 'body');
-    // The context is mounted only while an overview is the subject.
-    const context = native.querySelector<HTMLElement>('.object-context');
-    assert.equal(context === null, subject.kind === 'object');
-    if (context) assert.equal(context.hidden || context.hasAttribute('inert'), false);
-    if (objectId === 'trappist-1') {
-      assert.equal(native.querySelector('[data-system-current]')?.getAttribute('data-system-header'), 'trappist-1');
-      assert.equal(native.querySelector<HTMLElement>('[data-solar-system-facts]')?.hidden, true);
-    }
-  }
+test('the native response shows the card as its subject: the body, or the planetary system of a star that has one', async () => {
+  const card = (document: Document) => document.querySelector<HTMLElement>('.object-information-panel')!;
+  const mounted = (document: Document) => [...card(document).children].filter(child => child.tagName !== 'TEMPLATE').map(child => child.textContent);
+  // A star's system view mounts its system parts; the body view keeps them off the page (detached-sections.ts).
+  const system = await render('/trappist-1/?overview=system', data(), contextHtml.replace('data-search-object="saturn"', 'data-search-object="trappist-1"'));
+  assert.equal(card(system).dataset.cardSubject, 'planetary-system');
+  assert.equal(card(system).dataset.cardView, 'overview');
+  assert.deepEqual(mounted(system), ['System header', 'Saturn', '']);
+  const body = await render('/saturn/', data(), contextHtml);
+  assert.equal(card(body).dataset.cardSubject, 'body');
+  assert.deepEqual(mounted(body), ['Saturn']);
+  // A system overview is a view of its star's page: on a planet's page the address names the planet.
+  const planet = await render('/saturn/?overview=system', data(), contextHtml);
+  assert.equal(card(planet).dataset.cardSubject, 'body');
+  // The live shell presents the card itself (updateBodyCard), so the shared presentation leaves it alone there.
+  const live = parseHTML(contextHtml).document;
+  createSelectionPresentation(live).present({ kind: 'overview', overview: { scope: 'system', systemId: 'trappist-1' } });
+  assert.equal(card(live).dataset.cardSubject, undefined);
 });
 
 test('named features share the results panel, start collapsed, and disappear when there are no matches', async () => {

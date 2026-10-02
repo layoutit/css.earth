@@ -1,7 +1,7 @@
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import { overviewScopeAtCamera, type OverviewScope } from '../overview-context.mts';
 import { overviewScopeFromUrl, satelliteSystemFromUrl, withOverviewScope, withSatelliteSystemView } from '../navigation/navigation-scope.mts';
-import { SOLAR_SYSTEM_ID, systemById, type SystemObjects } from '../object-systems.mts';
+import { systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
 import { SYSTEM_RANGES } from '../system-framing.mts';
 import { isLevelObject, levelCentre } from '../level-view.mts';
@@ -23,9 +23,9 @@ export function selectionContext(subject: SceneSubject): SceneContext {
 
 export function selectionTargetFromUrl(url: URL, objectId: string, objects: SystemObjects): SelectionTarget {
   if (satelliteSystemFromUrl(url) && satelliteSystemByHost(objectId)) return { kind: 'satellite-system', hostId: objectId };
-  const scope = overviewScopeFromUrl(url);
-  return scope ? { kind: 'overview', overview: { scope, systemId: systemById(objects, objectId)?.id ?? SOLAR_SYSTEM_ID } }
-    : { kind: 'object', objectId };
+  // A system overview is a view of its star's page: on any other page the address names the body.
+  const system = overviewScopeFromUrl(url) ? systemById(objects, objectId) : null;
+  return system ? { kind: 'overview', overview: { scope: 'system', systemId: system.id } } : { kind: 'object', objectId };
 }
 
 /** Identity used by navigation rows, source links and per-selection reading positions. */

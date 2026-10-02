@@ -76,7 +76,7 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
     }
     presentation.setEmptyHidden(found.objects.total + detailCount > 0);
   }
-  createSelectionPresentation(document).present(selectionTargetFromUrl(url, objectId, WORLD_OBJECTS));
+  createSelectionPresentation(document, { card: true }).present(selectionTargetFromUrl(url, objectId, WORLD_OBJECTS));
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 

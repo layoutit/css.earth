@@ -1,3 +1,5 @@
+import { hasPlanetarySystem, presentCardSubject } from '../selection-presentation.mts';
+import { createSystemBodiesPresentation } from '../system-bodies-fragment.mts';
 import { isLevelObject } from '../level-view.mts';
 import { isExtendedClassification } from '@cssearth/objects';
 import { bindTabPanels } from '../tab-panels.mts';
@@ -76,16 +78,21 @@ export function mountObjectShell({
   };
   drawer.ownerDocument.addEventListener('objectmotionchange', motionChanged, { capture: true });
   lifetime.onDispose(() => drawer.ownerDocument.removeEventListener('objectmotionchange', motionChanged, { capture: true }));
+  let systemBodies: { card: HTMLElement; presentation: ReturnType<typeof createSystemBodiesPresentation> } | null = null;
   function updateBodyCard() {
     if (coasting || navigationTransition?.retainsSourceCard) return;
     if (!information || !drawer.contains(sectionPlaceholder(information))) information = sectionElement(drawer, '.object-information-panel');
-    const subject = navigationTransition?.cardSubject ?? (readSelection().kind === 'satellite-system' ? 'satellite-system' : 'body');
-    const view = subject === 'satellite-system' ? 'overview' : 'detail';
-    if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
-    if (information && information.dataset.cardSubject !== subject) information.dataset.cardSubject = subject;
-    // The satellite system's header, tabs and bodies are mounted only while the system is the subject (detached-sections.ts).
-    if (information) for (const part of sectionElements(information, '[data-satellite-system]'))
-      if (sectionPlaceholder(part).parentElement === information) showSection(part, subject === 'satellite-system');
+    const selected = readSelection();
+    // A star's planetary system is a subject of the star's own card, as a host's moons are; the parts of the other subjects
+    // are mounted only while they are the subject (detached-sections.ts).
+    const subject = navigationTransition?.cardSubject ?? (selected.kind === 'satellite-system' ? 'satellite-system'
+      : selected.kind === 'overview' && information && hasPlanetarySystem(information) ? 'planetary-system' : 'body');
+    if (information) presentCardSubject(information, subject);
+    // The system's body list arrives the first time it is shown.
+    if (information && subject === 'planetary-system' && selected.kind === 'overview') {
+      if (systemBodies?.card !== information) systemBodies = { card: information, presentation: createSystemBodiesPresentation(information, windowTarget) };
+      systemBodies.presentation.show(selected.overview.systemId);
+    }
   }
   /** The page the shell shows changed in place: its head, and the forms and links that return to it. */
   function presentPage(route: string, seo: Parameters<typeof applySeoHead>[1]) {
