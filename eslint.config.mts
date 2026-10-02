@@ -132,6 +132,12 @@ export default [
     files: ['packages/renderer/src/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {
+      // The browser normalizes these values, so a value read back never equals the one written and the guard rewrites it
+      // on every frame (`translate(1px,2px)` reads `translate(1px, 2px)`, `0.30000000000000004` reads `0.3`).
+      'no-restricted-syntax': ['error', {
+        selector: 'BinaryExpression[operator=/^[!=]==?$/] > MemberExpression[property.name=/^(transform|opacity|width|height|translate)$/][object.type="MemberExpression"][object.property.name="style"]',
+        message: 'Do not compare with a style value read back from the page. Write it with writeStyle (rendering/retained-write.ts), which remembers what it wrote.',
+      }],
       'no-restricted-imports': ['error', {
         patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '**/tools/**', '**/labs/**', '**/renderers/**',
           'node:*', '@cssearth/bake', '@cssearth/bake/*', '@cssearth/renderer', '@cssearth/renderer/*'],

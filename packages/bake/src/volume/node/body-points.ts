@@ -5,10 +5,11 @@
 import { CATALOGUE_POINTS_SCHEMA } from '@cssearth/objects';
 
 export const BODY_POINTS_SOURCE_SCHEMA = 'cssearth-body-points-source@1';
-/** The bank's unit is a megametre (1,000 km): the packed bank stores each axis as a whole number of 1e-4 units in 32 bits
- * (catalogue-bank-binary.ts), so a megametre keeps 100 m and reaches 215 million km, past any planet's moons. */
-const KM_PER_UNIT = 1000, METERS_PER_UNIT = 1e6;
-const toUnits = (km: number) => Math.round(km / KM_PER_UNIT * 1e4) / 1e4;
+/** The packed bank stores each axis as a whole number of 1e-4 units in 32 bits (catalogue-bank-binary.ts), so a unit reaches
+ * 214,748 of itself. A megametre (1,000 km) keeps 100 m and reaches 215 million km, past any planet's moons; a gigametre
+ * keeps 100 km and reaches 1,435 au, past the bodies that orbit the Sun. A bank takes the smallest unit its rows fit. */
+const UNITS = [{ name: 'megametres', kmPerUnit: 1e3, rounding: '100 m' }, { name: 'gigametres', kmPerUnit: 1e6, rounding: '100 km' }] as const;
+const UNIT_REACH = 0x7fffffff / 1e4;
 
 /** The host's prepared world frame (`properties.worldFrame` of its descriptor). */
 export interface BodyPointsHostFrame { readonly referenceFrame: string; readonly epochJdTt: number; readonly originM: readonly number[] }
@@ -63,7 +64,7 @@ export function parseBodyPointsTable(text: string, path: string): readonly { rea
   });
 }
 
-/** The bank the app draws: every row a point in megametres from the host, the frame's origin at the host's world position. */
+/** The bank the app draws: every row a point from the host in the smallest unit that reaches the farthest, the frame's origin at the host's world position. */
 export function bodyCentredBank({ recipe, rows, hostFrame }: {
   recipe: BodyPointsRecipe; rows: ReturnType<typeof parseBodyPointsTable>; hostFrame: BodyPointsHostFrame;
 }) {
@@ -73,12 +74,18 @@ export function bodyCentredBank({ recipe, rows, hostFrame }: {
   }
   if (hostFrame.originM.length !== 3 || !hostFrame.originM.every(Number.isFinite)) throw new TypeError(`${recipe.id}: ${recipe.host} has no finite world position, got ${JSON.stringify(hostFrame.originM)}.`);
   if (!rows.length) throw new TypeError(`${recipe.id}: ${recipe.table.path} holds no rows.`);
-  const reach = Math.ceil(Math.max(...rows.map(row => Math.hypot(...row.positionKm))) / KM_PER_UNIT);
+  const farthestKm = Math.max(...rows.map(row => Math.hypot(...row.positionKm)));
+  const unit = UNITS.find(candidate => farthestKm / candidate.kmPerUnit < UNIT_REACH);
+  if (!unit) {
+    const farthest = rows.find(row => Math.hypot(...row.positionKm) === farthestKm)!;
+    throw new TypeError(`${recipe.id}: ${farthest.name} in ${recipe.table.path} is ${farthestKm} km from ${recipe.host}, past the ${UNIT_REACH * UNITS.at(-1)!.kmPerUnit} km a bank in ${UNITS.at(-1)!.name} reaches.`);
+  }
+  const toUnits = (km: number) => Math.round(km / unit.kmPerUnit * 1e4) / 1e4, reach = Math.ceil(farthestKm / unit.kmPerUnit);
   return { schema: CATALOGUE_POINTS_SCHEMA, id: recipe.id, source: recipe.source, meaning: recipe.meaning,
     frame: { referenceFrame: recipe.frame.output, epochJdTt: recipe.frame.epochJdTt, originM: [...hostFrame.originM], localToReferenceXyzw: [0, 0, 0, 1],
-      metersPerUnit: METERS_PER_UNIT, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
+      metersPerUnit: unit.kmPerUnit * 1000, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
     appearance: { ...recipe.appearance },
     host: recipe.host, counts: { rows: rows.length, points: rows.length },
-    conversion: `Positions relative to ${recipe.host} (${recipe.frame.output} axes, JD ${recipe.frame.epochJdTt} TT) from the table's kilometres, in megametres rounded to 100 m; the frame's origin is ${recipe.host}'s prepared world position.`,
+    conversion: `Positions relative to ${recipe.host} (${recipe.frame.output} axes, JD ${recipe.frame.epochJdTt} TT) from the table's kilometres, in ${unit.name} rounded to ${unit.rounding}; the frame's origin is ${recipe.host}'s prepared world position.`,
     points: rows.map(row => row.positionKm.map(toUnits)) };
 }

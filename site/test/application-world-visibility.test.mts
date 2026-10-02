@@ -32,10 +32,14 @@ test('leaving Ida restores discovery filters without enabling unrelated illustra
   visibility.selectObject('ida');
   assert.ok(!latest().bodyHidden?.includes('dactyl'));
   assert.ok(latest().bodyHidden?.includes('selam'));
+  assert.ok(!latest().orbitHidden?.includes('ida'), 'the selected asteroid draws its orbit');
+  visibility.selectObject('dactyl');
+  assert.ok(!latest().bodyHidden?.includes('dactyl'), 'the family stays open');
+  assert.ok(latest().orbitHidden?.includes('ida'), 'and its host is no longer the selected body');
   const count = publications.length;
   visibility.selectObject('dactyl');
-  assert.equal(publications.length, count, 'same family does not republish visibility');
-  visibility.selectObject('gaspra');
+  assert.equal(publications.length, count, 'the same selection does not republish visibility');
+  visibility.selectObject('earth');
   assert.deepEqual(latest(), initial);
 });
 
@@ -49,15 +53,18 @@ test('placed stellar systems still reveal their illustrated planets', () => {
 });
 
 
-test('only an explicitly selected non-featured comet gains its default-hidden orbit', () => {
+test('only an explicitly selected comet or asteroid gains its default-hidden orbit and marker', () => {
   const { visibility, latest } = fixture();
   assert.ok(latest().orbitHidden?.includes('comet-2p'));
-  assert.ok(!latest().orbitHidden?.includes('comet-67p'));
+  assert.ok(latest().orbitHidden?.includes('comet-67p'), 'a featured comet draws no orbit either');
   visibility.selectObject('comet-2p');
   assert.ok(!latest().orbitHidden?.includes('comet-2p'));
   assert.ok(latest().orbitHidden?.includes('comet-209p'));
   visibility.selectObject('earth');
   assert.ok(latest().orbitHidden?.includes('comet-2p'));
+  assert.ok(latest().bodyHidden?.includes('pallas') && latest().orbitHidden?.includes('pallas'));
+  visibility.selectObject('pallas');
+  assert.ok(!latest().bodyHidden?.includes('pallas') && !latest().orbitHidden?.includes('pallas'), 'an asteroid without a marker draws while it is selected');
 });
 
 test('a pill category highlights its bodies, the galaxies among them', () => {

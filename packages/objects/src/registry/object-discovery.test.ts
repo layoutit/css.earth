@@ -31,8 +31,9 @@ test('a page computes each setting combination once and reuses it', () => {
   assert.equal(discoveryVisibility(objects, { illustrations: false, defaultFeatures, highlighted: null }), hidden, 'the same combination is the same frozen result');
   assert.ok(Object.isFrozen(hidden.hiddenBodies));
   const shown = discoveryVisibility(objects, { illustrations: true, defaultFeatures });
-  assert.deepEqual([hidden.hiddenBodies, shown.hiddenBodies], [['quaoar'], []], 'another combination is computed for itself');
-  assert.deepEqual(discoveryVisibility(objects, { illustrations: false, defaultFeatures, compact: true }).hiddenBodies, ['quaoar', 'ceres']);
-  assert.deepEqual(discoveryVisibility(objects, { illustrations: false, defaultFeatures: new Set(['ceres']), compact: true }).hiddenBodies, ['quaoar'],
-    'other feature sets are other inputs');
+  assert.deepEqual([hidden.hiddenBodies, shown.hiddenBodies], [['quaoar', 'ceres'], ['ceres']], 'another combination is computed for itself');
+  assert.deepEqual(discoveryVisibility(objects, { illustrations: false, defaultFeatures: new Set(['ceres']) }).hiddenBodies, ['quaoar'],
+    'other feature sets are other inputs; a featured asteroid keeps its marker');
+  assert.deepEqual(discoveryVisibility(objects, { illustrations: false, defaultFeatures, highlighted: 'asteroid' }).hiddenBodies, ['quaoar'],
+    'an unfeatured asteroid draws while its category is highlighted');
 });

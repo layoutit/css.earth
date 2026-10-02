@@ -233,11 +233,11 @@ test('hidden distance publications skip all retained face reads and camera style
   runtime.publish(world(payload, [0, 0, 0]), viewport);
   runtime.publish(world(payload, [0, 0, 30]), viewport);
   assert.deepEqual([camera, scene, ...leaves].map(node => node.writes), writes);
-  assert.equal(root.style.opacity, '0'); assert.partialDeepStrictEqual(root.dataset, { shellDistanceM: '300', shellVisibleFaces: '0', shellOpacity: '0' });
+  assert.equal(root.style.opacity, '0'); assert.partialDeepStrictEqual(runtime.stats(), { distanceM: 300, visibleFaces: 0, opacity: 0 });
   Object.defineProperty(payload.faces[0], 'centerUnits', { configurable: true, value: center });
   runtime.publish(world(payload, [0, 0, 6]), viewport);
   assert.partialDeepStrictEqual(runtime.stats(), { visible: true, visibleFaces: 1, opacity: 1 });
-  assert.partialDeepStrictEqual(root.dataset, { shellDistanceM: '60', shellVisibleFaces: '1', shellOpacity: '1' });
+  assert.partialDeepStrictEqual(runtime.stats(), { distanceM: 60, visibleFaces: 1, opacity: 1 });
   assert.equal(leaves[0]!.style.visibility, 'visible');
 });
 

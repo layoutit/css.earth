@@ -1,3 +1,4 @@
+import { writeStyle } from '../rendering/retained-write.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
@@ -146,7 +147,7 @@ function admit(entry: Entry, opacity: number, publication: EnvironmentLabelPubli
   if (!entry.measured) { entry.width = entry.element.offsetWidth; entry.height = entry.element.offsetHeight; entry.measured = true; }
   const [x, y] = point, bottom = entry.kind === 'volume' ? y + LABEL_GAP_PX + entry.height : y - LABEL_GAP_PX;
   const rect: LabelScreenRect = { left: x - entry.width / 2, right: x + entry.width / 2, top: bottom - entry.height, bottom };
-  entry.element.style.transform = `translate(${format(x)}px,${format(bottom)}px) translate(-50%,-100%)`;
+  writeStyle(entry.element, 'transform', `translate(${format(x)}px,${format(bottom)}px) translate(-50%,-100%)`);
   if (rect.left < -width / 2 || rect.right > width / 2 || rect.top < -height / 2 || rect.bottom > height / 2 ||
       !(opacity > 0)) { fadeTo(entry, 0, fader); return false; }
   if (blockers.some(blocker => labelRectsOverlap(rect, blocker))) { fadeTo(entry, 0, fader); return false; }
