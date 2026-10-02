@@ -40,7 +40,7 @@
 
 /* The prepared universe (prepared-universe-runtime.ts) fills the stage: its root at the background's depth, its front
    root just above the body band (that depth, the stage's, is inline). The galaxy's opaque backdrop, its image layer and
-   each image-layer bank fill the root; their display and opacities change inline. */
+   each image-layer bank fill the root; their opacities change inline, and the backdrop is attached only while it shows. */
 .prepared-universe,
 .prepared-universe-front,
 .prepared-volume-context,
@@ -82,8 +82,32 @@
   will-change: transform;
 }
 
+/* The sky's cube faces (prepared-sky-runtime.ts): each face's prepared box, transform, image and visibility are inline. */
+.prepared-celestial-sky-scene > s {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  pointer-events: none;
+  transform-origin: 0 0;
+  backface-visibility: visible;
+  background-repeat: no-repeat;
+  text-decoration: none;
+}
+/* A cloud's impostor views (prepared-volume-lod.ts): each view's image, size, transform and opacity are inline. */
+.css-volume-impostors > s {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  pointer-events: none;
+  transform-origin: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
 /* Dataset billboards (dataset-billboards.ts): a zero-size root at the stage centre; each leaf's atlas-sized box, atlas cell,
-   display, transform and opacity are inline. */
+   transform and opacity are inline, and a leaf is attached only while it shows. */
 .prepared-dataset-billboards {
   position: absolute;
   left: 50%;

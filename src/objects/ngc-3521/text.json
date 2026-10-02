@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-3521",
+  "card": {
+    "text": "A spiral galaxy 10.7 million parsecs away, tilted 73° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "publication-karachentsev2013aj-145-101k",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145..101K",
+        "label": "Karachentsev2013AJ....145..101K: Updated Nearby Galaxy Catalog",
+        "checked": "2026-10-02",
+        "locator": "distance: 10.715 Mpc"
+      },
+      {
+        "catalogueId": "walter-2008-things",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/136/2563",
+        "label": "Walter et al. (2008), THINGS: The H I Nearby Galaxy Survey, Table 1",
+        "checked": "2026-10-02",
+        "locator": "row NGC 3521: inclination 73 deg"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It lies in the constellation of Leo. Its distance comes from how fast it rotates, set against how bright it is.",
+    "sources": [
+      {
+        "catalogueId": "eso-eso1129a",
+        "url": "https://www.eso.org/public/images/eso1129a/",
+        "label": "ESO eso1129a, A spiral galaxy in Leo",
+        "checked": "2026-10-02",
+        "quote": "The large spiral galaxy lies in the constellation of Leo (The Lion)"
+      },
+      {
+        "catalogueId": "lvdb-v1-1-1",
+        "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+        "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+        "checked": "2026-10-02",
+        "locator": "row ngc_3521: distance_modulus 30.15, distance method tf (Tully-Fisher)"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "NGC 3521 in visible light",
+      "detail": "2046 × 2046 px",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1129a",
+          "url": "https://www.eso.org/public/images/eso1129a/",
+          "label": "A spiral galaxy in Leo; ESO/O. Maliy",
+          "checked": "2026-10-02",
+          "locator": "A spiral galaxy in Leo"
+        }
+      ]
+    }
+  }
+}

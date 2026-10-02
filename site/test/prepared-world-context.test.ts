@@ -90,7 +90,7 @@ class FakeElement extends EventTarget {
   readonly tagName: string;
   constructor(ownerDocument: FakeDocument, tagName: string) { super(); this.ownerDocument = ownerDocument; this.tagName = tagName; }
   measurements = 0;
-  getBoundingClientRect() { this.measurements++; return { width: this.dataset.contextName.length * 6, height: 14 }; }
+  getBoundingClientRect() { this.measurements++; return { width: nameOf(this)!.length * 6, height: 14 }; }
   readonly attributes = new Map<string, string>();
   setAttribute(name: string, value: string): void { logWrite(this, `@${name}`, this.attributes.get(name), value); this.attributes.set(name, value); }
   getAttribute(name: string): string | null { return this.attributes.get(name) ?? null; }
@@ -214,13 +214,13 @@ test('approximate orbit cues stay on retained groups through selection and publi
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] } as const;
   // Orbit leaf blocks are built on first use and then retained.
   layer.publish(world, viewport);
-  const group = find(root, 'contextGroup', 'mercury'), count = all(root).length;
+  const group = find(root, 'contextBody', 'mercury'), count = all(root).length;
   layer.selectObject('mercury');
   layer.publish(world, viewport);
   assert.equal(group.dataset.contextPlacement, 'approximate');
-  assert.equal(find(root, 'contextLabel', 'mercury').dataset.contextName, 'Mercury (approx)');
+  assert.equal(nameOf(find(root, 'contextBody', 'mercury')), 'Mercury (approx)');
   assert.equal(find(root, 'contextOrbit', 'mercury').dataset.contextPlacement, 'approximate');
-  assert.equal(find(root, 'contextGroup', 'venus').dataset.contextPlacement, undefined);
+  assert.equal(find(root, 'contextBody', 'venus').dataset.contextPlacement, undefined);
   assert.equal(all(root).length, count);
   layer.destroy();
 });
@@ -269,8 +269,13 @@ function expectRetained(root: FakeElement, retained: readonly FakeElement[]) {
     node.className === 'context-orbit-block' || (node.parentNode !== null && node.parentNode !== root && demandedOwner(node.parentNode));
   assert.equal(now.every(node => known.has(node) || demandedOwner(node)), true, 'only demanded world owners or orbit leaves are attached');
 }
-function captionName(element: { dataset: { contextName?: string } }): string {
-  const name = element.dataset.contextName;
+/** A marker's name is its caption's, whose ::after draws it. */
+function nameOf(marker: HTMLElement | FakeElement): string | undefined {
+  const element = marker as FakeElement;
+  return (element.children.find(child => child.className === 'context-caption') ?? element).dataset.contextName;
+}
+function captionName(element: HTMLElement | FakeElement): string {
+  const name = nameOf(element);
   if (name === undefined) throw new Error('A shown caption has no name.');
   return name;
 }
@@ -291,7 +296,7 @@ function all(root: FakeElement): FakeElement[] { return root.children.flatMap(ch
 // Inspect the one real element's pseudo state and composed transform. These
 // helpers return values, never pretend the pseudos are independent DOM nodes.
 function annotationVisibility(element: HTMLElement | FakeElement, part: 'label' | 'indicator') {
-  return element.style.visibility !== 'hidden' && element.dataset[part === 'label' ? 'contextLabelVisible' : 'contextIndicatorVisible'] === 'true' ? '' : 'hidden';
+  return mover(element).style.visibility !== 'hidden' && element.dataset[part === 'label' ? 'contextLabelVisible' : 'contextIndicatorVisible'] === 'true' ? '' : 'hidden';
 }
 // Per-frame motion and paint order belong to the bare mover that wraps each
 // marker. The marker keeps its stable style, attributes and two pseudos, so
@@ -366,7 +371,7 @@ test('semantic changes invalidate worker snapshots without synchronously republi
   // flight stays valid (discarding it would cost a full repair of every body),
   // nothing is drawn synchronously, and the next captured view carries the hover.
   const before = drawing(), stale = layer.captureFrame(world, viewport);
-  find(root, 'contextGroup', 'mercury').dataset.objectHovered = 'true';
+  find(root, 'contextBody', 'mercury').dataset.objectHovered = 'true';
   root.parentNode!.dispatchEvent(new Event('objecthoverchange'));
   clock.advance(16);
   assert.equal(stale.current(), true);
@@ -399,7 +404,7 @@ test('a flight frame that attaches markers waits for the flight to republish; a 
 
 test('inactive annotations retain emphasis until their reveal publication', () => {
   const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
-  const nodes = all(root), groups = ['sun', 'mercury', 'venus'].map(id => find(root, 'contextGroup', id));
+  const nodes = all(root), groups = ['sun', 'mercury', 'venus'].map(id => find(root, 'contextBody', id));
   const world = { referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
@@ -419,7 +424,7 @@ test('inactive annotations retain emphasis until their reveal publication', () =
   assert.ok(shown.length > 0);
   // Emphasis is two-state. The overview emphasizes nobody, so the Sun that was
   // selected before the bodies were culled must publish 'false' on its reveal.
-  for (const body of shown) assert.equal(find(root, 'contextGroup', body.id).dataset.contextSelected, 'false');
+  for (const body of shown) assert.equal(find(root, 'contextBody', body.id).dataset.contextSelected, undefined);
   expectRetained(root, nodes);
   layer.destroy();
 });
@@ -435,7 +440,7 @@ test('a body carries its prepared colour inline, and the emphasised one wears th
   const root = layer.root as unknown as FakeElement;
   const world = { referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const, widthPixels: 800, heightPixels: 600 };
-  const mercury = find(root, 'contextGroup', 'mercury'), venus = find(root, 'contextGroup', 'venus'), sun = find(root, 'contextGroup', 'sun');
+  const mercury = find(root, 'contextBody', 'mercury'), venus = find(root, 'contextBody', 'venus'), sun = find(root, 'contextBody', 'sun');
   // No stylesheet rule per body: the colour and caption case are on the marker and its orbit.
   assert.deepEqual(([mercury.style.color, venus.style.color, find(root, 'contextOrbit', 'mercury').style.color]), ['#abcdef', '#123456', '#abcdef']);
   assert.equal(mercury.dataset.contextLabelCase, 'upper');
@@ -455,7 +460,7 @@ test('a body carries its prepared colour inline, and the emphasised one wears th
 test('a culled indicator with retained alpha is dormant, then gets current emphasis on reveal', () => {
   const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
   const mercury = layer.inspect().find(body => body.id === 'mercury')!;
-  const group = find(root, 'contextGroup', 'mercury');
+  const group = find(root, 'contextBody', 'mercury');
   const world = { referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const,
@@ -474,7 +479,7 @@ test('a culled indicator with retained alpha is dormant, then gets current empha
   assert.equal(group.dataset.contextSelected, retained);
   layer.publish(world, { ...viewport, widthPixels: 800, heightPixels: 600 });
   assert.equal(mercury.mover.style.visibility, '');
-  assert.equal(group.dataset.contextSelected, 'false');
+  assert.equal(group.dataset.contextSelected, undefined);
   layer.destroy();
 });
 
@@ -524,8 +529,8 @@ test('hidden orbit selection leaves other orbits intact and retains the same bod
   assert.equal(declared(target, 'pointerEvents'), 'none');
   assert.equal(target.dataset.objectNavigate, undefined);
   assert.equal(other.style.opacity, visibleOther);
-  assert.equal(find(root, 'contextLabel', 'mercury').style.visibility, '');
-  assert.equal(find(root, 'contextBody', 'mercury').style.visibility, '');
+  assert.equal(mover(find(root, 'contextBody', 'mercury')).style.visibility, '');
+  assert.equal(mover(find(root, 'contextBody', 'mercury')).style.visibility, '');
   expectRetained(root, nodes);
   layer.setNavigationInFlight(true);
   layer.setBodyVisibility({ orbitHidden: [] });
@@ -553,7 +558,7 @@ test('hover-only trails reveal the full orbit and keep their circle and label be
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
-  const circle = find(root, 'contextBody', 'mercury'), label = find(root, 'contextLabel', 'mercury');
+  const circle = find(root, 'contextBody', 'mercury'), label = find(root, 'contextBody', 'mercury');
   const orbit = find(root, 'contextOrbit', 'mercury'), other = find(root, 'contextOrbit', 'venus');
   for (const hovered of [false, true, false]) {
     circle.dataset.objectHovered = String(hovered);
@@ -643,10 +648,10 @@ test('hidden annotations leave the physical dot pickable and hover reveals the c
   const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
   const clock = root.ownerDocument.defaultView, host = root.parentNode!;
   const circle = find(root, 'contextBody', 'mercury');
-  const label = find(root, 'contextLabel', 'mercury');
+  const label = find(root, 'contextBody', 'mercury');
   const orbit = find(root, 'contextOrbit', 'mercury');
   const other = find(root, 'contextOrbit', 'venus');
-  const sunLabel = find(root, 'contextLabel', 'sun');
+  const sunLabel = find(root, 'contextBody', 'sun');
   layer.setBodyVisibility({ orbitHidden: ['mercury', 'venus'] });
   layer.setBodyVisibility({ labelHidden: ['mercury', 'venus'] });
   clock.advance(200);
@@ -688,19 +693,19 @@ test('hidden annotations leave the physical dot pickable and hover reveals the c
 
 test('a highlighted set reveals hidden labels and marks its retained groups until cleared', () => {
   const root = mount(1), layer = mounted.get(root)!;
-  const group = find(root, 'contextGroup', 'mercury'), label = find(root, 'contextLabel', 'mercury');
+  const group = find(root, 'contextBody', 'mercury'), label = find(root, 'contextBody', 'mercury');
   const clock = root.ownerDocument.defaultView;
   const nodes = all(root);
   // The caption is this marker's own pseudo-element, so its visibility is the
   // published attribute the style reads, not a style property of a label node.
   layer.setBodyVisibility({ labelHidden: ['mercury'] }); clock.advance(16); clock.advance(200);
-  assert.equal(label.dataset.contextLabelVisible, 'false');
+  assert.equal(label.dataset.contextLabelVisible, undefined);
   layer.setBodyVisibility({ highlighted: ['mercury'] }); clock.advance(16); clock.advance(200);
   assert.equal(label.dataset.contextLabelVisible, 'true');
   assert.equal(group.dataset.contextHighlight, 'true');
   assert.equal(root.dataset.contextHighlighting, 'true');
   layer.setBodyVisibility({ highlighted: [] }); clock.advance(16); clock.advance(200);
-  assert.equal(label.dataset.contextLabelVisible, 'false');
+  assert.equal(label.dataset.contextLabelVisible, undefined);
   assert.equal(group.dataset.contextHighlight, undefined);
   assert.equal(root.dataset.contextHighlighting, undefined);
   assert.deepEqual(all(root), nodes);
@@ -709,7 +714,7 @@ test('a highlighted set reveals hidden labels and marks its retained groups unti
 
 test('keyboard focus also reveals a hidden label and orbit, then retires them on blur', () => {
   const root = mount(1), layer = mounted.get(root)!, host = root.parentNode!;
-  const circle = find(root, 'contextBody', 'mercury'), label = find(root, 'contextLabel', 'mercury');
+  const circle = find(root, 'contextBody', 'mercury'), label = find(root, 'contextBody', 'mercury');
   const clock = root.ownerDocument.defaultView;
   layer.setBodyVisibility({ orbitHidden: ['mercury'] }); layer.setBodyVisibility({ labelHidden: ['mercury'] });
   Object.assign(root.ownerDocument, { activeElement: circle });
@@ -723,8 +728,8 @@ test('keyboard focus also reveals a hidden label and orbit, then retires them on
 
 test('camera publication consumes interaction changes without polling retained DOM state', () => {
   const root = mount(1), layer = mounted.get(root)!, host = root.parentNode!;
-  const group = find(root, 'contextGroup', 'mercury');
-  const label = find(root, 'contextLabel', 'mercury');
+  const group = find(root, 'contextBody', 'mercury');
+  const label = find(root, 'contextBody', 'mercury');
   const circle = find(root, 'contextBody', 'mercury');
   let hovered: string | undefined, focused: FakeElement | null = null;
   let hoverReads = 0, focusReads = 0;
@@ -884,7 +889,7 @@ test('prepared planetary systems retain identified moon paths and retire offscre
   layer.destroy();
 });
 
-for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer} keeps body markers and orbit opacity independent of selection`, () => {
+for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer} keeps body markers independent of selection and dims the paths outside the selected family`, () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const base = plan(1), parent = base.bodies[0]!;
@@ -914,14 +919,20 @@ for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer}
       const actual = opacity(body.id), normal = baseline.get(body.id)!;
       assert.ok(normal.marker > 0); assert.ok(normal.line > 0);
       assert.ok(Math.abs((actual.marker / normal.marker) - (expected)) < 10 ** -1 / 2, `${id} -> ${body.id} marker`);
-      assert.ok(Math.abs((actual.line / normal.line) - (1)) < 10 ** -1 / 2, `${id} -> ${body.id} orbit`);
+      // A path belongs to the family it circles: the other planet's, and the host's own about the star while one of
+      // its moons is the subject, are dim context. A family is read by a path's own centre, so the moon that circles
+      // the barycentre is outside the host's family, and with that moon as the subject (its host an unrendered
+      // origin) nothing dims.
+      const family = body.id === id || id === parent.id && body.id === 'moon-a';
+      const outside = id !== 'moon-b' && !family, ratio = actual.line / normal.line;
+      if (outside) assert.ok(ratio >= .25 - 10 ** -2 / 2 && ratio < .95, `${id} -> ${body.id} orbit ${ratio}`);
+      else assert.ok(Math.abs(ratio - 1) < 10 ** -1 / 2, `${id} -> ${body.id} orbit`);
     }
   }
-  // Finishing the preview preserves the same orbit appearance in the system overview.
+  // An overview has no subject: finishing the preview there returns every path to its overview appearance.
   layer.previewSelection(parent.id); document.defaultView.advance(200);
-  const arrival = new Map(context.bodies.map(body => [body.id, opacity(body.id).line]));
   layer.previewSelection(undefined); document.defaultView.advance(200);
-  for (const body of context.bodies) assert.ok(Math.abs(opacity(body.id).line - (arrival.get(body.id)!)) < 10 ** -2 / 2, `${opacity(body.id).line} is not close to ${arrival.get(body.id)!}`);
+  for (const body of context.bodies) assert.ok(Math.abs(opacity(body.id).line - baseline.get(body.id)!.line) < 10 ** -2 / 2, `${opacity(body.id).line} is not close to ${baseline.get(body.id)!.line}`);
   layer.previewSelection(parent.id); document.defaultView.advance(200);
   const marker = layer.inspect().find(body => body.id === unrelated.id)!.billboard;
   marker.dataset.objectHovered = 'true'; host.dispatchEvent(new Event('objecthoverchange'));
@@ -932,7 +943,7 @@ for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer}
   document.defaultView.advance(200); document.defaultView.advance(200);
   layer.previewSelection(null); document.defaultView.advance(200);
   for (const body of context.bodies) assert.deepEqual(opacity(body.id), baseline.get(body.id));
-  // Selection stays independent of opacity when zooming out and back in.
+  // Zooming out to the parent system relaxes the dimming; zooming back in returns it. Markers never follow selection.
   layer.previewSelection(parent.id);
   const publishDistance = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [100, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
@@ -944,7 +955,8 @@ for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer}
   layer.previewSelection(parent.id);
   publishDistance(40);
   assert.ok(Math.abs((opacity(unrelated.id).marker / baseline.get(unrelated.id)!.marker) - (1)) < 10 ** -1 / 2, `${(opacity(unrelated.id).marker / baseline.get(unrelated.id)!.marker)} is not close to ${1}`);
-  assert.ok(Math.abs((opacity(unrelated.id).line / baseline.get(unrelated.id)!.line) - (1)) < 10 ** -1 / 2, `${(opacity(unrelated.id).line / baseline.get(unrelated.id)!.line)} is not close to ${1}`);
+  const dimmed = opacity(unrelated.id).line / baseline.get(unrelated.id)!.line;
+  assert.ok(dimmed >= .25 - 10 ** -2 / 2 && dimmed < .95, `${dimmed} is not dimmed`);
   layer.destroy();
 });
 
@@ -1060,8 +1072,8 @@ test('satellite markers remain occluded by their parent when another detail obje
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [100, 0, 20], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   const root = layer.root as unknown as FakeElement;
-  assert.equal(find(root, 'contextBody', 'mercury').style.visibility, '');
-  assert.equal(find(root, 'contextBody', 'venus').style.visibility, 'hidden');
+  assert.equal(mover(find(root, 'contextBody', 'mercury')).style.visibility, '');
+  assert.equal(mover(find(root, 'contextBody', 'venus')).style.visibility, 'hidden');
   assert.equal(declared(find(root, 'contextBody', 'venus'), 'pointerEvents'), 'none');
   layer.destroy();
 });
@@ -1095,7 +1107,7 @@ test('an orbitless prepared object renders and navigates without manufacturing o
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   const marker = find(root, 'contextBody', 'future-object'), selections: string[] = [];
   host.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
-  assert.equal(marker.style.visibility, '');
+  assert.equal(mover(marker).style.visibility, '');
   marker.dispatchEvent(new Event('click'));
   assert.deepEqual(selections, ['future-object']);
   layer.selectObject('future-object');
@@ -1121,8 +1133,8 @@ test('projects retained markers, culls focus-occluded bodies, and keeps physical
   const near = mount(1), far = mount(1e12);
   const nearSun = find(near, 'contextBody', 'sun'), nearMercury = find(near, 'contextBody', 'mercury'), nearVenus = find(near, 'contextBody', 'venus');
   assert.ok(mover(nearSun).style.transform.includes('translate(30px,-20px)'));
-  assert.equal(nearMercury.style.visibility, '');
-  assert.equal(nearVenus.style.visibility, 'hidden');
+  assert.equal(mover(nearMercury).style.visibility, '');
+  assert.equal(mover(nearVenus).style.visibility, 'hidden');
   const nearOrbit = mounted.get(near)!.inspect().find(body => body.id === 'mercury')!.orbit.filter(element => element.style.visibility === '');
   assert.ok(nearOrbit.length > 0);
   for (const piece of nearOrbit) {
@@ -1204,7 +1216,7 @@ test('orbit chords stop at the circular indicator on both sides of the centered 
   }
   assert.equal(edges.some(([, y]) => y > -20), true);
   assert.equal(edges.some(([, y]) => y < -20), true);
-  assert.equal(find(root, 'contextBody', 'venus').style.visibility, 'hidden');
+  assert.equal(mover(find(root, 'contextBody', 'venus')).style.visibility, 'hidden');
   layer.destroy();
 });
 
@@ -1286,12 +1298,12 @@ test('overlapping circles retain selection priority and reappear when separated'
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   publish(2000);
-  assert.equal(mercury.style.visibility, '');
+  assert.equal(mover(mercury).style.visibility, '');
   assert.equal(annotationVisibility(venus, 'indicator'), 'hidden');
   assert.equal(declared(venus, 'pointerEvents'), 'none');
   const venusMarker = find(root, 'contextBody', 'venus');
   // Venus's dot is 2 px from Mercury's, under it (marker-declutter.ts): it is not drawn, and follows no camera sample.
-  assert.equal(venusMarker.style.visibility, 'hidden');
+  assert.equal(mover(venusMarker).style.visibility, 'hidden');
   let writes = 0;
   for (const node of [mover(venusMarker)]) {
     let transform = node.style.transform;
@@ -1306,11 +1318,11 @@ test('overlapping circles retain selection priority and reappear when separated'
   assert.equal(writes, 1);
   assert.deepEqual(billboardCenter(venus), [82, 0]);
   assert.equal(venusMarker, venus);
-  assert.equal(venus.style.visibility, '');
+  assert.equal(mover(venus).style.visibility, '');
   assert.equal(annotationVisibility(mercury, 'indicator'), 'hidden');
   publish(160);
-  assert.equal(mercury.style.visibility, '');
-  assert.equal(venus.style.visibility, '');
+  assert.equal(mover(mercury).style.visibility, '');
+  assert.equal(mover(venus).style.visibility, '');
   expectRetained(root, nodes);
   layer.destroy();
 });
@@ -1391,12 +1403,12 @@ test('the Sun circle and label remain visible after all planetary context fades 
       pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
       { focalPixels: 400, principalOffsetPixels: [30, -20] });
     assert.equal(root.hidden, false);
-    assert.equal(find(root, 'contextBody', 'sun').style.visibility, '');
+    assert.equal(mover(find(root, 'contextBody', 'sun')).style.visibility, '');
     assert.equal(find(root, 'contextBody', 'sun').parentNode!.style.opacity, '1');
-    assert.equal(find(root, 'contextLabel', 'sun').style.visibility, '');
-    assert.equal(find(root, 'contextLabel', 'sun').dataset.objectNavigate, 'sun');
-    assert.equal(find(root, 'contextBody', 'mercury').style.visibility, 'hidden');
-    assert.equal(find(root, 'contextLabel', 'mercury').style.visibility, 'hidden');
+    assert.equal(mover(find(root, 'contextBody', 'sun')).style.visibility, '');
+    assert.equal(find(root, 'contextBody', 'sun').dataset.objectNavigate, 'sun');
+    assert.equal(mover(find(root, 'contextBody', 'mercury')).style.visibility, 'hidden');
+    assert.equal(mover(find(root, 'contextBody', 'mercury')).style.visibility, 'hidden');
     assert.equal(layer.inspect().flatMap(body => body.orbit).every(piece => piece.style.visibility === 'hidden'), true);
   }
   expectRetained(root, nodes);
@@ -1411,7 +1423,7 @@ test('retired bodies stop receiving zoom writes and resume with current picking 
   const mercury = layer.inspect().find(body => body.id === 'mercury')!;
   publish(1e31); root.ownerDocument.defaultView.advance(200);
   const writes: string[] = [];
-  const group = find(root, 'contextGroup', 'mercury');
+  const group = find(root, 'contextBody', 'mercury');
   for (const node of [mover(group), group, ...all(group)]) for (const key of Object.keys(node.style)) {
     let value = node.style[key];
     if (typeof value !== 'string') continue;
@@ -1419,7 +1431,7 @@ test('retired bodies stop receiving zoom writes and resume with current picking 
   }
   publish(2e31); publish(3e31);
   assert.deepEqual(writes, []);
-  assert.equal(find(root, 'contextLabel', 'sun').dataset.objectNavigate, 'sun');
+  assert.equal(find(root, 'contextBody', 'sun').dataset.objectNavigate, 'sun');
   assert.equal(mercury.billboard.dataset.objectNavigate, undefined);
   assert.deepEqual(layer.backgroundExclusionRects(), [...layer.labelExclusionRects(),
     { left: 22, right: 38, top: -28, bottom: -12 }]); // Only the Sun's caption and 16 px circle remain.
@@ -1451,7 +1463,7 @@ test('retired depth groups defer rotation and selection writes until same-pose r
   publish(1e31); root.ownerDocument.defaultView.advance(200);
   let writes = 0;
   for (const id of ['mercury', 'venus']) {
-    const style = mover(find(root, 'contextGroup', id)).style;
+    const style = mover(find(root, 'contextBody', id)).style;
     let zIndex = style.zIndex;
     Object.defineProperty(style, 'zIndex', { get: () => zIndex, set: value => { writes++; zIndex = value; } });
   }
@@ -1459,7 +1471,7 @@ test('retired depth groups defer rotation and selection writes until same-pose r
   publish(-1e31, halfTurn);
   layer.selectObject('venus'); publish(-2e31, halfTurn);
   assert.equal(writes, 0);
-  const depth = (id: string) => Number(mover(find(root, 'contextGroup', id)).style.zIndex);
+  const depth = (id: string) => Number(mover(find(root, 'contextBody', id)).style.zIndex);
   assert.ok(depth('sun') < 0);
   // Distance alone resumes the system; the cached orientation/selection are
   // unchanged, so re-entry itself must invalidate the depth publication scope.
@@ -1477,7 +1489,7 @@ test('dolly motion leaves depth styles untouched while selection and rotation st
   const root = mount(1), layer = mounted.get(root)!;
   let writes = 0;
   for (const id of ['sun', 'mercury', 'venus']) {
-    const style = mover(find(root, 'contextGroup', id)).style;
+    const style = mover(find(root, 'contextBody', id)).style;
     let zIndex = style.zIndex;
     Object.defineProperty(style, 'zIndex', { get: () => zIndex, set: value => { writes++; zIndex = value; } });
   }
@@ -1488,14 +1500,14 @@ test('dolly motion leaves depth styles untouched while selection and rotation st
   layer.selectObject('venus'); publish(2000);
   assert.ok(writes > 0);
   // Venus is occluded here. Its depth style is deferred until it can draw.
-  assert.equal(find(root, 'contextGroup', 'venus').style.visibility, 'hidden');
-  assert.ok(Number(mover(find(root, 'contextGroup', 'sun')).style.zIndex) > 3);
+  assert.equal(mover(find(root, 'contextBody', 'venus')).style.visibility, 'hidden');
+  assert.ok(Number(mover(find(root, 'contextBody', 'sun')).style.zIndex) > 3);
   writes = 0; publish(3000); assert.equal(writes, 0);
   publish(-3000, [0, 1, 0, 0]);
   assert.ok(writes > 0);
-  assert.equal(mover(find(root, 'contextGroup', 'venus')).style.zIndex, '0');
-  assert.ok(Number(mover(find(root, 'contextGroup', 'mercury')).style.zIndex) < 0);
-  assert.equal(find(root, 'contextGroup', 'sun').style.visibility, '');
+  assert.equal(mover(find(root, 'contextBody', 'venus')).style.zIndex, '0');
+  assert.ok(Number(mover(find(root, 'contextBody', 'mercury')).style.zIndex) < 0);
+  assert.equal(mover(find(root, 'contextBody', 'sun')).style.visibility, '');
   layer.destroy();
 });
 
@@ -1510,21 +1522,21 @@ test('selection transfers the detail handoff to the destination while retaining 
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] } as const;
   layer.publish(camera, viewport);
   const marker = find(root, 'contextBody', 'mercury');
-  assert.equal(marker.style.visibility, '');
+  assert.equal(mover(marker).style.visibility, '');
   assert.equal(marker.dataset.objectNavigate, 'mercury');
   const selections: string[] = [];
   host.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
   marker.dispatchEvent(new Event('click'));
   assert.deepEqual(selections, ['mercury']);
   layer.selectObject('mercury'); layer.publish(camera, viewport);
-  assert.equal(marker.style.visibility, 'hidden');
+  assert.equal(mover(marker).style.visibility, 'hidden');
   assert.equal(declared(marker, 'pointerEvents'), 'none');
   marker.dispatchEvent(new Event('click'));
   assert.deepEqual(selections, ['mercury']);
   expectRetained(root, nodes);
   assert.throws(() => layer.selectObject('unprepared'), /unavailable/);
   layer.selectObject('sun'); layer.publish(camera, viewport);
-  assert.equal(marker.style.visibility, '');
+  assert.equal(mover(marker).style.visibility, '');
   layer.destroy();
 });
 
@@ -1593,17 +1605,17 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
-  const mercury = find(root, 'contextLabel', 'mercury'), venus = find(root, 'contextLabel', 'venus');
+  const mercury = find(root, 'contextBody', 'mercury'), venus = find(root, 'contextBody', 'venus');
   const publish = (focalPixels = 400) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [400, 0, 2000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels, principalOffsetPixels: [0, 0] });
-  const shown = () => [mercury, venus].filter(label => annotationVisibility(label, 'label') === '').map(label => label.dataset.contextName);
+  const shown = () => [mercury, venus].filter(label => annotationVisibility(label, 'label') === '').map(label => nameOf(label));
   publish(); assert.deepEqual(shown(), ['Mercury']);
   assert.equal(declared(venus, 'pointerEvents'), 'none');
   const selections: string[] = [];
   host.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
   // The hidden caption has no hit rectangle, and Venus's dot, under Mercury's, is not drawn: the spot navigates to Mercury.
   assert.equal(layer.inspect().find(body => body.id === 'venus')!.labelRect, null);
-  assert.equal(find(root, 'contextBody', 'venus').style.visibility, 'hidden');
+  assert.equal(mover(find(root, 'contextBody', 'venus')).style.visibility, 'hidden');
   venus.dispatchEvent(new Event('click')); assert.deepEqual(selections, []);
   // Venus's dot was under Mercury's, so it was never drawn or measured: selected, it draws, and its caption follows once
   // measured, a frame later.
@@ -1642,7 +1654,7 @@ for (const interaction of ['pointer', 'keyboard']) test(`a hidden moon annotatio
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
-  const circle = find(root, 'contextBody', 'venus'), label = find(root, 'contextLabel', 'venus');
+  const circle = find(root, 'contextBody', 'venus'), label = find(root, 'contextBody', 'venus');
   assert.equal(annotationVisibility(circle, 'indicator'), 'hidden');
   assert.equal(annotationVisibility(label, 'label'), 'hidden');
   for (const active of [true, false]) {
@@ -1670,7 +1682,7 @@ test('an in-frame circle and caption stay visible and constrained at the viewpor
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   const root = layer.root as unknown as FakeElement;
-  const circle = find(root, 'contextBody', 'mercury'), label = find(root, 'contextLabel', 'mercury');
+  const circle = find(root, 'contextBody', 'mercury'), label = find(root, 'contextBody', 'mercury');
   assert.equal(annotationVisibility(circle, 'indicator'), '');
   assert.equal(annotationVisibility(label, 'label'), '');
   const beforeHover = captionPosition(label);
@@ -1681,14 +1693,14 @@ test('an in-frame circle and caption stay visible and constrained at the viewpor
   assert.equal(annotationVisibility(label, 'label'), '');
   const [x, y] = captionPosition(label);
   assert.deepEqual(([x, y]), beforeHover);
-  assert.ok(x >= -396); assert.ok((x + label.dataset.contextName.length * 6) <= 396);
+  assert.ok(x >= -396); assert.ok((x + nameOf(label)!.length * 6) <= 396);
   assert.ok(y >= -296); assert.ok((y + 14) <= 296);
   layer.destroy();
 });
 
 test('the Sun caption stays above its marker as orbit strokes cross during zoom', () => {
   const root = mount(1), layer = mounted.get(root)!;
-  const label = find(root, 'contextLabel', 'sun');
+  const label = find(root, 'contextBody', 'sun');
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: {positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1]} },
     {focalPixels: 400, principalOffsetPixels: [0, 0]});
@@ -1725,7 +1737,7 @@ for (const { y, extent, weight, shown } of [
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
-  const label = find(layer.root as unknown as FakeElement, 'contextLabel', 'sun');
+  const label = find(layer.root as unknown as FakeElement, 'contextBody', 'sun');
   assert.equal(annotationVisibility(label, 'label'), shown ? '' : 'hidden');
   assert.equal(declared(label, 'pointerEvents'), 'none');
   if (shown) assert.deepEqual(captionPosition(label), [-9, -26]);
@@ -1886,7 +1898,7 @@ test('one retained focus label and locator survive system retirement at their ph
   const focus = layer.inspect().find(body => body.id === 'anchor')!;
   const label = focus.billboard as unknown as FakeElement, locator = focus.billboard as unknown as FakeElement;
   const retained = all(host);
-  assert.equal(label.dataset.contextName, 'Anchor');
+  assert.equal(nameOf(label), 'Anchor');
   assert.equal(mover(label).parentNode, null);
   assert.deepEqual(mover(label).children, [label]);
   // The sprite alone scales; the ring stays a pseudo of the unscaled marker and the caption is a retained element
@@ -1956,20 +1968,20 @@ test('the selected moon family shows readable labels, then fades at system dista
   layer.selectObject(parent.id);
   layer.publish(camera(1000), viewport);
   document.defaultView.advance(200);
-  assert.equal(marker.style.visibility, ''); assert.equal(annotationVisibility(label, 'label'), '');
+  assert.equal(mover(marker).style.visibility, ''); assert.equal(annotationVisibility(label, 'label'), '');
   assert.equal(declared(label, 'pointerEvents'), 'none');
   layer.publish(camera(180), viewport);
-  assert.equal(marker.style.visibility, ''); assert.equal(annotationVisibility(label, 'label'), '');
+  assert.equal(mover(marker).style.visibility, ''); assert.equal(annotationVisibility(label, 'label'), '');
   assert.equal(label.dataset.objectNavigateActivation, 'click'); assert.equal(declared(label, 'pointerEvents'), 'none');
   const [left, top] = captionPosition(label);
   const rect = child.labelRect!;
   // The caption's DOM position is written to a thousandth of a pixel (world-context-marker-paint.ts); its hit rect is exact.
   assert.ok(Math.abs(rect.left - (left)) < 10 ** -2 / 2, `${rect.left} is not close to ${left}`); assert.ok(Math.abs(rect.top - (top)) < 10 ** -2 / 2, `${rect.top} is not close to ${top}`);
-  assert.equal((rect.right - rect.left), label.dataset.contextName.length * 6);
+  assert.equal((rect.right - rect.left), nameOf(label)!.length * 6);
   assert.ok(layer.labelExclusionRects().some(item => isDeepStrictEqual(item, rect)));
   layer.publish(camera(1000), viewport);
   document.defaultView.advance(200);
-  assert.equal(marker.style.visibility, ''); assert.equal(annotationVisibility(label, 'label'), '');
+  assert.equal(mover(marker).style.visibility, ''); assert.equal(annotationVisibility(label, 'label'), '');
   layer.publish(camera(12000), viewport);
   document.defaultView.advance(200);
   assert.equal(annotationVisibility(label, 'label'), 'hidden');
@@ -2086,15 +2098,15 @@ test('billboard zoom alpha owns dot, circle and caption without per-label clocks
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
   publish(1000);
   assert.deepEqual(element.children.map(child => child.tagName), ['i', 'u']); assert.equal(element.textContent, '');
-  assert.equal(element.dataset.contextName, 'Mercury');
+  assert.equal(nameOf(element), 'Mercury');
   assert.equal(element.dataset.contextLabelVisible, 'true');
   assert.ok(Number((element.parentNode as unknown as HTMLElement).style.opacity) > 0);
   assert.equal(clock.timers.size, 0); assert.equal(layer.opacityStats().active, 0);
   publish(1e31);
-  assert.equal(element.style.visibility, 'hidden');
+  assert.equal(mover(element).style.visibility, 'hidden');
   assert.equal(element.dataset.objectNavigate, undefined);
   publish(1000);
-  assert.equal(element.style.visibility, '');
+  assert.equal(mover(element).style.visibility, '');
   assert.equal(element.dataset.objectNavigate, 'mercury');
   assert.equal(clock.timers.size, 0); expectRetained(root, nodes);
   layer.destroy();
@@ -2108,7 +2120,7 @@ test('a plain dot needs no sprite, paints its colour and is never a pick or navi
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1_000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [30, -20] });
   const marker = layer.inspect().find(body => body.id === 'mercury')!.billboard, leaf = marker.children[0] as HTMLElement;
   assert.deepEqual(([leaf.style.backgroundImage ?? '', leaf.style.backgroundColor, declared(leaf, 'borderRadius')]), ['', '#9d9388', '50%']);
-  assert.equal(marker.dataset.contextBodyVisible, 'true');
+  assert.equal(marker.dataset.contextBodyVisible, undefined);
   assert.equal(marker.dataset.objectNavigate, undefined);
   assert.equal(screenPicking(host as unknown as HTMLElement).pick(70, -20), null);
   layer.destroy();
@@ -2130,7 +2142,7 @@ test('suppression retires the whole annotation while flight preserves admission 
   assert.equal(annotationVisibility(element, 'indicator'), '');
   // The stage picker, cleared for the flight, owns every pointer hit. The
   // keyboard target is held rather than disabled and restored on every body.
-  assert.equal(element.style.visibility, ''); assert.equal(element.dataset.objectNavigate, 'mercury');
+  assert.equal(mover(element).style.visibility, ''); assert.equal(element.dataset.objectNavigate, 'mercury');
   assert.equal(screenPicking(root.parentNode! as unknown as HTMLElement).pick(70, -20), null);
   layer.setNavigationInFlight(false);
   assert.equal(annotationVisibility(element, 'label'), '');
@@ -2171,7 +2183,7 @@ test('the Sun locator stays visible across galactic observer rotations while res
   } }, viewport);
   assert.equal(declared(label, 'pointerEvents'), 'none');
   document.defaultView.advance(200);
-  assert.equal(annotationVisibility(label, 'label'), 'hidden'); assert.equal(label.style.visibility, 'hidden');
+  assert.equal(annotationVisibility(label, 'label'), 'hidden'); assert.equal(mover(label).style.visibility, 'hidden');
   layer.destroy();
 });
 
@@ -2186,7 +2198,7 @@ test('billboards straddle the selected detail in camera-depth order without repl
   const root = layer.root as unknown as FakeElement, nodes = all(root);
   // The container must not trap foreground children behind the detailed body.
   assert.equal(declared(root, 'zIndex'), '');
-  const depth = (id: string) => Number(mover(find(root, 'contextGroup', id)).style.zIndex);
+  const depth = (id: string) => Number(mover(find(root, 'contextBody', id)).style.zIndex);
   const publish = (z: number, orientationXyzw: [number, number, number, number]) => layer.publish({
     referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, z], orientationXyzw },
   }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
@@ -2194,7 +2206,7 @@ test('billboards straddle the selected detail in camera-depth order without repl
   assert.ok(depth('venus') < 0);
   // At this distance the selected Sun is detailed geometry, so its hidden
   // billboard does not need a z-index; the visible bodies still straddle it.
-  assert.equal(find(root, 'contextGroup', 'sun').style.visibility, 'hidden');
+  assert.equal(mover(find(root, 'contextBody', 'sun')).style.visibility, 'hidden');
   assert.ok(depth('mercury') > 3);
   publish(-100, [0, 1, 0, 0]);
   assert.ok(depth('mercury') < 0);
@@ -2215,7 +2227,7 @@ test('hover changes the orbit gap once per endpoint without measuring the ring',
   try {
     const body = layer.inspect().find(entry => entry.id === 'mercury')!;
     const indicator = body.billboard as unknown as FakeElement;
-    const group = find(root, 'contextGroup', 'mercury');
+    const group = find(root, 'contextBody', 'mercury');
     const nodes = all(root);
     const clock = root.ownerDocument.defaultView;
     const [cx, cy] = body.center;
@@ -2242,7 +2254,7 @@ test('hover changes the orbit gap once per endpoint without measuring the ring',
     clock.advance(180);
     assert.deepEqual(body.orbit.map(node => (node as unknown as FakeElement).styleWrites), writes);
     hover(false);
-    assert.equal(indicator.dataset.contextIndicatorHovered, 'false');
+    assert.equal(indicator.dataset.contextIndicatorHovered, undefined);
     assert.ok(Math.abs(gap() - (10)) < 10 ** -3 / 2, `${gap()} is not close to ${10}`); // Do not cut through a ring still shrinking.
     hover(true);
     finishShrink(); // A reversed transition cannot close the hover gap.
@@ -2311,7 +2323,7 @@ test('one retained flight caption survives the sprite fade through arrival', () 
     assert.equal(current.textContent, 'Mercury');
     assert.equal(current.style.zIndex, '4');
     assert.ok(Number(current.style.opacity) > 0);
-    const marker = find(root, 'contextLabel', 'mercury');
+    const marker = find(root, 'contextBody', 'mercury');
     assert.equal(annotationVisibility(marker, 'label'), 'hidden');
     const circle = find(root, 'contextFlightCircle', 'mercury');
     assert.equal(circle.style.zIndex, '4');
@@ -2355,31 +2367,31 @@ for (const destination of [null, 'venus']) test(`flights to ${destination} retai
 
 test('selection emphasis previews immediately and restores the selected detail when cleared', () => {
   const root = mount(1), layer = mounted.get(root)!;
-  const sun = find(root, 'contextGroup', 'sun'), mercury = find(root, 'contextGroup', 'mercury');
+  const sun = find(root, 'contextBody', 'sun'), mercury = find(root, 'contextBody', 'mercury');
   layer.previewSelection('mercury');
   assert.equal(mercury.dataset.contextSelected, 'true');
-  assert.equal(sun.dataset.contextSelected, 'false');
+  assert.equal(sun.dataset.contextSelected, undefined);
   layer.previewSelection(null);
   // Only the emphasized body is distinguished. With nobody emphasized both
   // markers publish the shared unselected value instead of a third state.
-  assert.equal(mercury.dataset.contextSelected, 'false');
-  assert.equal(sun.dataset.contextSelected, 'false');
+  assert.equal(mercury.dataset.contextSelected, undefined);
+  assert.equal(sun.dataset.contextSelected, undefined);
   layer.previewSelection();
   assert.equal(sun.dataset.contextSelected, 'true');
-  assert.equal(mercury.dataset.contextSelected, 'false');
+  assert.equal(mercury.dataset.contextSelected, undefined);
   layer.destroy();
 });
 
 test('the Solar System overview has no body selection until the Sun is explicitly selected', () => {
   const root = mount(1), layer = mounted.get(root)!;
   const nodes = all(root);
-  const sun = find(root, 'contextGroup', 'sun');
-  const mercury = find(root, 'contextGroup', 'mercury');
+  const sun = find(root, 'contextBody', 'sun');
+  const mercury = find(root, 'contextBody', 'mercury');
   const sprite = find(root, 'contextBody', 'mercury');
   // An overview emphasizes nobody, and styles distinguish only the emphasized
   // body, so every marker shares the same unselected value.
   const neutral = () => {
-    assert.deepEqual([sun, mercury].map(body => body.dataset.contextSelected), ['false', 'false']);
+    assert.deepEqual([sun, mercury].map(body => body.dataset.contextSelected), [undefined, undefined]);
   };
 
   layer.setOverview(true);
@@ -2392,7 +2404,7 @@ test('the Solar System overview has no body selection until the Sun is explicitl
   layer.previewSelection('sun');
   root.ownerDocument.defaultView.advance(120);
   assert.equal(sun.dataset.contextSelected, 'true');
-  assert.equal(mercury.dataset.contextSelected, 'false');
+  assert.equal(mercury.dataset.contextSelected, undefined);
   assert.ok(Math.abs(Number(sprite.parentNode!.style.opacity) - (normalOpacity)) < 10 ** -2 / 2, `${Number(sprite.parentNode!.style.opacity)} is not close to ${normalOpacity}`);
   layer.setOverview(false);
   layer.previewSelection();
@@ -2573,7 +2585,7 @@ test('delta publication matches full frames through navigation, hover, fades and
   for (const layer of [full, incremental]) { layer.setOverview(true); layer.setBodyVisibility({ orbitHidden: ['mercury'] }); }
   publish();
   for (const node of [root, deltaRoot]) {
-    find(node, 'contextGroup', 'mercury').dataset.objectHovered = 'true';
+    find(node, 'contextBody', 'mercury').dataset.objectHovered = 'true';
     node.parentNode!.dispatchEvent(new Event('objecthoverchange'));
   }
   publish();
@@ -2602,21 +2614,21 @@ test('rotation and settlement use the same annotation rules without a deferred r
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
   layer.publish(camera, viewport);
   layer.setRotationActive(true);
-  assert.equal(marker.dataset.contextAnnotationsAnimate, 'false');
+  assert.equal(marker.dataset.contextAnnotationsAnimate, undefined);
   // An explicit policy change applies during motion, not in a burst on release.
   layer.setBodyVisibility({ labelSuppressed: ['mercury'] });
-  assert.equal(marker.dataset.contextLabelVisible, 'false');
+  assert.equal(marker.dataset.contextLabelVisible, undefined);
   for (const angle of [.05, .1, 0]) {
     camera.pose.orientationXyzw = [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)];
     layer.publish(camera, viewport);
-    assert.equal(marker.dataset.contextAnnotationsAnimate, 'false');
-    assert.equal(marker.dataset.contextLabelVisible, 'false');
+    assert.equal(marker.dataset.contextAnnotationsAnimate, undefined);
+    assert.equal(marker.dataset.contextLabelVisible, undefined);
     assert.equal(layer.opacityStats().active, 0);
   }
   layer.setRotationActive(false);
-  assert.equal(marker.dataset.contextLabelVisible, 'false');
+  assert.equal(marker.dataset.contextLabelVisible, undefined);
   layer.setBodyVisibility({ labelSuppressed: [] });
-  assert.equal(marker.dataset.contextAnnotationsAnimate, 'false');
+  assert.equal(marker.dataset.contextAnnotationsAnimate, undefined);
   assert.equal(marker.dataset.contextLabelVisible, 'true');
   layer.destroy();
 });
@@ -2628,11 +2640,11 @@ test('hidden billboards settle without pseudo fades or depth writes and catch up
     pose: { positionM: [0, 0, 1000] as [number, number, number], orientationXyzw: [0, 0, 0, 1] as [number, number, number, number] } };
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
   layer.publish(camera, viewport);
-  assert.equal(marker.dataset.contextAnnotationsAnimate, 'false');
+  assert.equal(marker.dataset.contextAnnotationsAnimate, undefined);
   layer.setOverview(true);
   layer.setBodyVisibility({ bodyHidden: ['sun', 'mercury', 'venus'] });
   root.ownerDocument.defaultView.advance(1000);
-  assert.equal(marker.dataset.contextAnnotationsAnimate, 'false');
+  assert.equal(marker.dataset.contextAnnotationsAnimate, undefined);
   const counts = all(root).map(node => [node.styleWrites, node.attributeWrites]);
   const publications = layer.publicationStats();
   for (const angle of [.05, .1, -.1, 0]) {
@@ -2644,12 +2656,12 @@ test('hidden billboards settle without pseudo fades or depth writes and catch up
   layer.selectObject('mercury');
   layer.setOverview(false);
   layer.setBodyVisibility({ bodyHidden: [] });
-  assert.equal(marker.style.visibility, '');
+  assert.equal(mover(marker).style.visibility, '');
   assert.equal(mover(marker).style.zIndex, '0');
   assert.equal(marker.dataset.contextSelected, 'true');
-  assert.equal(marker.dataset.contextAnnotationsAnimate, 'false');
+  assert.equal(marker.dataset.contextAnnotationsAnimate, undefined);
   layer.publish(camera, viewport);
-  assert.equal(marker.dataset.contextAnnotationsAnimate, 'false');
+  assert.equal(marker.dataset.contextAnnotationsAnimate, undefined);
   layer.destroy();
 });
 
@@ -2666,7 +2678,7 @@ test('only interactive stationary hover arms transitions; every camera axis and 
   };
   layer.publish(camera, viewport);
   hover(true, false);
-  assert.equal(marker.dataset.contextAnnotationsAnimate, 'false');
+  assert.equal(marker.dataset.contextAnnotationsAnimate, undefined);
   hover(false, false);
   for (const move of [
     () => { camera.pose.positionM[2] += 50; },
@@ -2680,7 +2692,7 @@ test('only interactive stationary hover arms transitions; every camera axis and 
     hover(true);
     assert.equal(marker.dataset.contextAnnotationsAnimate, 'true');
     move(); layer.publish(camera, viewport);
-    assert.equal(marker.dataset.contextAnnotationsAnimate, 'false');
+    assert.equal(marker.dataset.contextAnnotationsAnimate, undefined);
     assert.equal(layer.opacityStats().active, 0);
     layer.setNavigationInFlight(false); hover(false, false);
   }
@@ -2689,14 +2701,14 @@ test('only interactive stationary hover arms transitions; every camera axis and 
   // A press cancels in the input event, before a worker or animation frame can
   // publish the hover-out state captured by the preceding pointer movement.
   clock.dispatchEvent(new Event('pointerdown'));
-  assert.equal(marker.dataset.contextAnnotationsAnimate, 'false');
+  assert.equal(marker.dataset.contextAnnotationsAnimate, undefined);
   assert.equal(layer.opacityStats().active, 0);
   hover(false, false); hover(true);
   layer.setBodyVisibility({ labelSuppressed: ['mercury'] });
-  assert.equal(marker.dataset.contextLabelVisible, 'false');
+  assert.equal(marker.dataset.contextLabelVisible, undefined);
   hover(false, false);
-  assert.equal(marker.dataset.contextLabelVisible, 'false');
-  assert.equal(marker.dataset.contextAnnotationsAnimate, 'false');
+  assert.equal(marker.dataset.contextLabelVisible, undefined);
+  assert.equal(marker.dataset.contextAnnotationsAnimate, undefined);
   layer.destroy();
 });
 
@@ -2704,10 +2716,10 @@ test('switching selection leaves an unrelated visible billboard selection attrib
   const root = mount(1), layer = mounted.get(root)!;
   const sun = find(root, 'contextBody', 'sun');
   layer.previewSelection('mercury');
-  assert.equal(sun.dataset.contextSelected, 'false');
+  assert.equal(sun.dataset.contextSelected, undefined);
   const writes = sun.attributeWrites;
   layer.previewSelection('venus');
-  assert.equal(sun.dataset.contextSelected, 'false');
+  assert.equal(sun.dataset.contextSelected, undefined);
   assert.equal(sun.attributeWrites, writes);
   layer.destroy();
 });
@@ -2809,7 +2821,7 @@ test('a body circle holds a dot in the body colour until its own disc outgrows t
   assert.equal(leaf.style.transform, `scale(${2.4 / 16})`);
   // Up close the circle retires and the prepared image returns at the disc's own size.
   publish(100);
-  assert.equal(marker.dataset.contextIndicatorVisible, 'false');
+  assert.equal(marker.dataset.contextIndicatorVisible, undefined);
   assert.deepEqual(([leaf.style.backgroundImage, leaf.style.backgroundColor, leaf.style.borderRadius]), ['url("/marker.png")', '', '']);
   layer.destroy();
 });
@@ -2903,8 +2915,8 @@ test('a driven drag around Earth keeps revealing and retiring bodies', { timeout
 
  test('activation measures only captions the planner can name and caches those bounds', () => {
   const root = mount(1), layer = mounted.get(root)!;
-  const sun = find(root, 'contextLabel', 'sun'), mercury = find(root, 'contextLabel', 'mercury');
-  const venus = find(root, 'contextLabel', 'venus');
+  const sun = find(root, 'contextBody', 'sun'), mercury = find(root, 'contextBody', 'mercury');
+  const venus = find(root, 'contextBody', 'venus');
   assert.equal(sun.measurements, 1);
   assert.equal(mercury.measurements, 1);
   assert.equal(venus.measurements, 0); // Occluded by the Sun; its text cannot contribute.

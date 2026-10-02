@@ -9,6 +9,7 @@ import type { PreparedVolumeDatasets } from '../volume/prepared-volume-datasets.
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { stubGlobal, unstubAllGlobals, waitFor } from '@cssearth/objects/node/contract';
+import { readout, readoutsOf } from '../rendering/readouts.js';
 
 // linkedom has no layout delivery; caption geometry has explicit observer tests.
 beforeEach(() => stubGlobal('ResizeObserver', class {
@@ -87,7 +88,10 @@ class FakeWindow {
   requestAnimationFrame = (callback: (time: number) => void) => { const id = ++this.next; this.pending.set(id, callback); return id; };
   cancelAnimationFrame = (id: number) => { this.pending.delete(id); };
 }
-class FakeDocument { count = 0; defaultView = new FakeWindow(); querySelectorAll(_selector: string): FakeElement[] { return []; } createElement(tag = 'div'): FakeElement { this.count++; return new FakeElement(this, tag); } }
+class FakeDocument { count = 0;
+  /** The galaxy's backdrop, which is in the document only while the galaxy shows. */
+  volumeContext(): FakeElement { return this.created.find(node => node.className === 'prepared-volume-context')!; }
+  readonly created: FakeElement[] = []; defaultView = new FakeWindow(); querySelectorAll(_selector: string): FakeElement[] { return []; } createElement(tag = 'div'): FakeElement { this.count++; const node = new FakeElement(this, tag); this.created.push(node); return node; } }
 afterEach(() => { unstubAllGlobals(); catalogMount.mock.resetCalls(); });
 
 test('cold bootstrap keeps catalogue and image banks descriptor-only, then reuses their first navigation load', async () => {
@@ -108,10 +112,10 @@ test('cold bootstrap keeps catalogue and image banks descriptor-only, then reuse
     catalogBank: { fadeStartDistanceM: 10, fullDistanceM: 20 }, loadCatalog });
   const mounted = universe.mount(stage as unknown as HTMLElement), root = mounted.root as unknown as FakeElement;
   assert.equal(loadImageLayer.mock.callCount(), 0); assert.equal(loadCatalog.mock.callCount(), 0);
-  assert.partialDeepStrictEqual(root.dataset, { imageLayerDeclaredBankCount: '1', imageLayerResidentBankCount: '0', catalogResident: 'false' });
+  assert.partialDeepStrictEqual(readoutsOf(root), { imageLayerDeclaredBankCount: '1', imageLayerResidentBankCount: '0', catalogResident: 'false' });
   await Promise.all([mounted.ensureGalaxyCatalog(), mounted.ensureGalaxyCatalog(), mounted.focusBank(image.id)!.load(), mounted.focusBank(image.id)!.load()]);
   assert.equal(loadCatalog.mock.callCount(), 1); assert.equal(loadImageLayer.mock.callCount(), 1); assert.equal(catalogMount.mock.callCount(), 1);
-  assert.partialDeepStrictEqual(root.dataset, { imageLayerResidentBankCount: '1', imageLayerLoadingBankCount: '0', catalogResident: 'true', catalogLoading: 'false' });
+  assert.partialDeepStrictEqual(readoutsOf(root), { imageLayerResidentBankCount: '1', imageLayerLoadingBankCount: '0', catalogResident: 'true', catalogLoading: 'false' });
   await mounted.ensureGalaxyCatalog(); await mounted.focusBank(image.id)!.load();
   assert.equal(loadCatalog.mock.callCount(), 1); assert.equal(loadImageLayer.mock.callCount(), 1);
   mounted.destroy(); assert.equal(catalogRuntime.destroy.mock.callCount(), 1);
@@ -126,7 +130,7 @@ test('the galaxy is its bulge slices at every overview scope, with no disc plane
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}` }).mount(document.createElement() as unknown as HTMLElement);
   try {
     const root = mounted.root as unknown as FakeElement;
-    const image = root.children.find(node => node.className === 'prepared-volume-context')!.children[0]!;
+    const image = document.volumeContext().children[0]!;
     const descendants = (node: FakeElement): FakeElement[] => node.children.flatMap(child => [child, ...descendants(child)]);
     assert.equal(volume.impostors, undefined, 'the prepared galaxy carries no impostor views');
     const radiusM = Math.hypot(...volume.frame.boundsUnits.max) * volume.frame.metersPerUnit;
@@ -136,7 +140,7 @@ test('the galaxy is its bulge slices at every overview scope, with no disc plane
       mounted.setOverview(scope !== undefined, scope);
       mounted.publish(camera, viewport, spatialFrame);
       const nodes = descendants(image);
-      assert.equal(nodes.filter(node => node.dataset.volumeImpostor !== undefined).length, 0);
+      assert.equal(nodes.filter(node => readout(node, 'volumeImpostor') !== undefined).length, 0);
       assert.equal(nodes.some(node => node.className === 'css-volume-camera'), true);
     }
   } finally { mounted.destroy(); }
@@ -238,19 +242,18 @@ for (const { withSky } of [{ withSky: true }, { withSky: false }]) test(`nearer 
   // No sky face decodes at startup: each loads when it first enters the view.
   assert.deepEqual(universe.assets.startup, []);
   const mounted = universe.mount(stage as unknown as HTMLElement), root = mounted.root as unknown as FakeElement;
-  const skyRoot = root.children.find(node => node.className === 'prepared-celestial-sky')!, volumeRoot = root.children.find(node => node.className === 'prepared-volume-context')!;
+  const skyRoot = root.children.find(node => node.className === 'prepared-celestial-sky')!, volumeRoot = document.volumeContext();
   const volumeImage = volumeRoot.children.find(node => node.className === 'prepared-volume-image')!;
-  // The opaque backdrop and its image layer fill the root by stylesheet (volume.css): only the host's display is inline,
-  // and neither declares the transform style they have by default (flat).
-  assert.deepEqual({ ...volumeRoot.style }, { display: 'none' });
+  // The opaque backdrop and its image layer fill the root by stylesheet (volume.css): nothing is inline at mount, neither
+  // declares the transform style they have by default (flat), and the backdrop waits outside the document.
+  assert.deepEqual({ ...volumeRoot.style }, {}); assert.equal(volumeRoot.parentNode, null);
   assert.ok(readFileSync(new URL('../styles/volume.css', import.meta.url), 'utf8').includes('.prepared-volume-context { background: #000; }'));
   assert.equal(volumeImage.style.transformStyle, undefined);
   // The galaxy is its bulge slices, mounted directly: it has no impostor views to hand off to.
   assert.equal(volumeImage.children.some(node => node.className === 'css-volume-impostors'), false);
   assert.equal(volumeImage.children.filter(node => node.className === 'css-volume-projection').length, 3);
   const count = document.count, originalNodes = [...root.children];
-  if (withSky) assert.ok(root.children.indexOf(skyRoot) < root.children.indexOf(volumeRoot));
-  else assert.equal(skyRoot, undefined);
+  if (!withSky) assert.equal(skyRoot, undefined);
   assert.equal(root.children.some(node => node.className === 'stellar-direct-points'), false, 'the Sun draws no star layer of its own');
   // The camera `reach` disc half-heights from the body it looks at, in any direction: orbiting never changes the answer.
   const at = (reach: number, axis = 2): WorldCameraPose => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
@@ -258,22 +261,29 @@ for (const { withSky } of [{ withSky: true }, { withSky: false }]) test(`nearer 
   for (const [reach, outside] of [[.01, 0], [.5, 0], [1, 0], [Math.SQRT2, .5], [2, 1], [4, 1]] as const) {
     for (const axis of [0, 1]) {
       mounted.publish(at(reach, axis), viewport, spatialFrame);
-      assert.ok(Math.abs(Number(volumeRoot.dataset.volumeOpacity) - (outside)) < 10 ** -12 / 2, `${Number(volumeRoot.dataset.volumeOpacity)} is not close to ${outside}`);
+      assert.ok(Math.abs(Number(readout(volumeRoot, 'volumeOpacity')) - (outside)) < 10 ** -12 / 2, `${Number(readout(volumeRoot, 'volumeOpacity'))} is not close to ${outside}`);
     }
     const camera = at(reach);
     mounted.publish(camera, viewport, spatialFrame);
-    assert.ok(Math.abs(Number(volumeRoot.dataset.volumeOpacity) - (outside)) < 10 ** -12 / 2, `${Number(volumeRoot.dataset.volumeOpacity)} is not close to ${outside}`);
+    assert.ok(Math.abs(Number(readout(volumeRoot, 'volumeOpacity')) - (outside)) < 10 ** -12 / 2, `${Number(readout(volumeRoot, 'volumeOpacity'))} is not close to ${outside}`);
     assert.ok(Math.abs(Number(volumeRoot.style.opacity) - (outside)) < 10 ** -12 / 2, `${Number(volumeRoot.style.opacity)} is not close to ${outside}`);
+    // The backdrop is attached while the galaxy shows: over the sky, right under the backing.
+    assert.equal(volumeRoot.parentNode, outside > 0 ? root : null);
+    if (outside > 0) {
+      const order = root.children.map(node => node.className);
+      assert.equal(order.indexOf('prepared-galaxy-backing'), order.indexOf('prepared-volume-context') + 1);
+      if (withSky) assert.ok(root.children.indexOf(skyRoot) < root.children.indexOf(volumeRoot));
+    }
     if (withSky) {
       assert.equal(skyRoot.style.visibility, outside < 1 ? 'visible' : 'hidden');
-      assert.ok(Math.abs(Number(skyRoot.dataset.skyContribution) - (1 - outside)) < 10 ** -12 / 2, `${Number(skyRoot.dataset.skyContribution)} is not close to ${1 - outside}`);
+      assert.ok(Math.abs(Number(readout(skyRoot, 'skyContribution')) - (1 - outside)) < 10 ** -12 / 2, `${Number(readout(skyRoot, 'skyContribution'))} is not close to ${1 - outside}`);
       // The actual DOM source-over equation: the band and the galaxy share one whole weight.
       assert.ok(Math.abs(completedPixel(volumeRoot, volumeImage, skyRoot, .4) - (.4)) < 10 ** -12 / 2, `${completedPixel(volumeRoot, volumeImage, skyRoot, .4)} is not close to ${.4}`);
     } else assert.ok(Math.abs(completedPixel(volumeRoot, volumeImage, undefined, .4) - (.4 * outside)) < 10 ** -12 / 2, `${completedPixel(volumeRoot, volumeImage, undefined, .4)} is not close to ${.4 * outside}`);
     mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport, spatialFrame);
     assert.ok(Math.abs(Number(volumeRoot.style.opacity) - (outside)) < 10 ** -12 / 2, `${Number(volumeRoot.style.opacity)} is not close to ${outside}`);
   }
-  assert.equal(document.count, count); assert.deepEqual(root.children, originalNodes);
+  assert.equal(document.count, count); assert.deepEqual(root.children.filter(node => node !== volumeRoot), originalNodes);
   mounted.destroy(); assert.deepEqual(stage.children, [detail]); assert.equal(document.defaultView.pending.size, 0);
 });
 
@@ -365,7 +375,7 @@ test('shared universe draws only resolved nebulae and never prefetches their dat
   const mounted = universe.mount(stage as unknown as HTMLElement);
   try {
     const root = mounted.root as unknown as FakeElement;
-    const milkyWay = root.children.find(node => node.className === 'prepared-volume-context')!;
+    const milkyWay = document.volumeContext();
     const findBank = (id: string) => root.children.find(node => node.dataset.volumeDatasetObject === id);
     const images = (node: FakeElement): string[] => [node.style.backgroundImage, ...node.children.flatMap(images)].filter(Boolean);
     // Mounting the universe and publishing while far from every bank must not fetch any of them either.
@@ -387,8 +397,8 @@ test('shared universe draws only resolved nebulae and never prefetches their dat
         await waitFor(() => { assert.notEqual(findBank(bank.id), undefined); });
         mounted.publish(camera, viewport, spatialFrame);
       }
-      assert.equal(milkyWay.dataset.volumeOpacity, '0');
-      assert.equal(milkyWay.style.display, 'none');
+      assert.equal(readout(milkyWay, 'volumeOpacity'), '0');
+      assert.equal(milkyWay.parentNode, null);
       const galactic = findBank('galactic-default');
       const independent = findBank(bank.id);
       if (!visible && !independent) continue; // not yet fetched: the first (invisible) distance, nothing to check
@@ -406,7 +416,7 @@ test('shared universe draws only resolved nebulae and never prefetches their dat
         const cloud = independent!.children.find(node => node.className === 'prepared-volume-dataset-cloud')!;
         const axes = cloud.children.filter(node => node.className === 'css-volume-projection');
         assert.equal(axes.length, 3);
-        assert.ok(Number(independent!.dataset.cloudOpacity) > 0);
+        assert.ok(Number(readout(independent!, 'cloudOpacity')) > 0);
         assert.equal(axes.some(axis => axis.style.visibility === 'visible' && Number(axis.style.opacity) > 0), true);
         assert.deepEqual(([...new Set(images(independent!))]), ['url("/nebula/nearby-nebula/z.webp")']);
       }
@@ -458,13 +468,13 @@ test('an unloaded independent bank is fetched by proximity while the galactic fa
   const mounted = universe.mount(stage as unknown as HTMLElement);
   try {
     const root = mounted.root as unknown as FakeElement;
-    const milkyWay = root.children.find(node => node.className === 'prepared-volume-context')!;
+    const milkyWay = document.volumeContext();
     // 2 pc from the bank, 52 pc from the focus: well within its visibility threshold, but nowhere
     // near the Milky Way's own fade-in distance, so the general galactic fade reads zero here.
     const near: WorldCameraPose = { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 52 * parsecM], orientationXyzw: [0, 0, 0, 1] } };
     mounted.publish(near, viewport, spatialFrame);
-    assert.equal(milkyWay.dataset.volumeOpacity, '0');
+    assert.equal(readout(milkyWay, 'volumeOpacity'), '0');
     assert.equal(loadVolumeDataset.mock.callCount(), 1); assert.deepEqual(loadVolumeDataset.mock.calls[0]!.arguments, [bank.id]);
   } finally { mounted.destroy(); }
   // The same bank, prepared as fading with the galaxy, is not fetched while the galaxy is faded out.
@@ -573,11 +583,11 @@ test('hidden dataset banks are bounded, active subscriptions pin them, and evict
     await waitFor(() => assert.notEqual(mounted.focusBank('far-bank')!.state(), null));
     mounted.publish(camera(102), viewport, spatialFrame);
     assert.notEqual(mounted.focusBank('near-bank')!.state(), null);
-    assert.partialDeepStrictEqual((mounted.root as unknown as FakeElement).dataset, { volumeDatasetPinnedBankCount: '1', volumeDatasetWarmDomNodeBudget: '0' });
+    assert.partialDeepStrictEqual(readoutsOf((mounted.root as unknown as FakeElement)), { volumeDatasetPinnedBankCount: '1', volumeDatasetWarmDomNodeBudget: '0' });
 
     releaseNear();
     assert.equal(mounted.focusBank('near-bank')!.state(), null);
-    assert.equal((mounted.root as unknown as FakeElement).dataset.volumeDatasetWarmDomNodes, '0');
+    assert.equal(readout((mounted.root as unknown as FakeElement), 'volumeDatasetWarmDomNodes'), '0');
 
     const releaseReloaded = mounted.focusBank('near-bank')!.subscribe(() => {});
     await waitFor(() => assert.notEqual(mounted.focusBank('near-bank')!.state(), null));
@@ -592,7 +602,7 @@ test('hidden dataset banks are bounded, active subscriptions pin them, and evict
     await waitFor(() => assert.equal(loadVolumeDataset.mock.calls.filter(({ arguments: [id] }) => id === 'near-bank').length, 3));
     await loadVolumeDataset.mock.calls.at(-1)!.result; await Promise.resolve(); await Promise.resolve();
     assert.equal(mounted.focusBank('near-bank')!.state(), null);
-    assert.equal((mounted.root as unknown as FakeElement).dataset.volumeDatasetWarmDomNodes, '0');
+    assert.equal(readout((mounted.root as unknown as FakeElement), 'volumeDatasetWarmDomNodes'), '0');
   } finally { mounted.destroy(); }
 });
 
@@ -647,7 +657,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   }).mount(stage as unknown as HTMLElement);
   const root = mounted.root as unknown as FakeElement;
   const findBank = (id: string) => root.children.find(node => node.dataset.volumeDatasetObject === id)!;
-  const mw = root.children.find(node => node.className === 'prepared-volume-context')!;
+  const mw = document.volumeContext();
   const sky = root.children.find(node => node.className === 'prepared-celestial-sky')!;
   // A bank package is a body of the world; its scene's dataset shows the bank as its companion.
   let shown: string | null = null;
@@ -673,19 +683,19 @@ test('authoritative detailed close-up gates background fetch, painting and publi
       mounted.publish(near, viewport, spatialFrame);
       assert.equal(findBank('focus-bank').style.display, 'block');
     });
-    assert.equal(findBank('warm-bank').style.display, 'none'); assert.equal(mw.style.display, 'none');
+    assert.equal(findBank('warm-bank').style.display, 'none'); assert.equal(mw.parentNode, null);
     assert.deepEqual(near, savedPose);
     const all = (node: FakeElement): FakeElement[] => [node, ...node.children.flatMap(all)];
     assert.equal(all(findBank('warm-bank')).some(node => node.style.backgroundImage), false);
     for (const [radii, multiplier] of [[6.1, 0], [20, .5], [32, 1]] as const) {
       mounted.publish(camera(radii), viewport, spatialFrame);
       if (radii > 8) { await mounted.focusBank('cold-bank')!.load(); await mounted.focusBank(image.id)!.load(); mounted.publish(camera(radii), viewport, spatialFrame); }
-      const originalOpacity = Number(mw.dataset.volumeOpacity), alpha = Number(mw.style.opacity);
+      const originalOpacity = Number(readout(mw, 'volumeOpacity')), alpha = Number(mw.style.opacity);
       assert.ok(originalOpacity > 0); assert.ok(radii > 8 ? originalOpacity === 1 : originalOpacity < 1);
       const completedContribution = originalOpacity;
       assert.ok(Math.abs(alpha - (completedContribution * multiplier)) < 10 ** -12 / 2, `${alpha} is not close to ${completedContribution * multiplier}`);
       assert.ok(Math.abs(((1 - alpha) * Number(sky.style.opacity)) - (1 - completedContribution)) < 10 ** -12 / 2, `${((1 - alpha) * Number(sky.style.opacity))} is not close to ${1 - completedContribution}`);
-      assert.ok(Math.abs(Number(sky.dataset.skyContribution) - (1 - completedContribution)) < 10 ** -12 / 2, `${Number(sky.dataset.skyContribution)} is not close to ${1 - completedContribution}`);
+      assert.ok(Math.abs(Number(readout(sky, 'skyContribution')) - (1 - completedContribution)) < 10 ** -12 / 2, `${Number(readout(sky, 'skyContribution'))} is not close to ${1 - completedContribution}`);
       if (multiplier > 0) await waitFor(() => {
         mounted.publish(camera(radii), viewport, spatialFrame);
         assert.ok(Number(findBank('warm-bank').style.opacity) > 0);
@@ -704,12 +714,12 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     mounted.publish({ ...near, pose: { ...near.pose, positionM: [imageFrame.originM[0], near.pose.positionM[1], near.pose.positionM[2]] } }, viewport, spatialFrame);
     assert.equal(imageRoot.style.display, ''); assert.equal(findBank('focus-bank').style.display, 'none');
     select(context.focus.id); mounted.publish(near, viewport, spatialFrame);
-    assert.equal(mw.style.display, '');
+    assert.equal(mw.parentNode, root);
     await waitFor(() => {
       mounted.publish(near, viewport, spatialFrame);
       assert.equal(findBank('focus-bank').style.display, 'block');
     });
     select('no-bank'); mounted.publish(near, viewport, spatialFrame);
-    assert.equal(mw.style.display, '');
+    assert.equal(mw.parentNode, root);
   } finally { mounted.destroy(); }
 });

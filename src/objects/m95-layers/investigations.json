@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m95-layers",
+  "entries": [
+    {
+      "id": "sdss-colour",
+      "subject": "SDSS DR9 colour HiPS",
+      "status": "included",
+      "finding": "A 3000 x 3000 px hips2fits cutout of CDS/P/SDSS9/color, 12 arcmin wide. The ring and the bar are not saturated. Shallow: the outer arms are faint.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "https://www.sdss.org/collaboration/#image-use"
+      ]
+    },
+    {
+      "id": "press-images",
+      "subject": "Observatory press images of M95",
+      "status": "excluded",
+      "finding": "ESO potw1935a is a 1 arcmin view of the centre. NOIRLab noao-m95 is a 1600 x 2100 px collage whose page gives no coordinates or field.",
+      "evidence": [
+        "https://www.eso.org/public/images/potw1935a/",
+        "https://noirlab.edu/public/images/noao-m95/"
+      ],
+      "revisitWhen": "A whole-disc photograph is published under an attribution licence."
+    },
+    {
+      "id": "legus-clusters",
+      "subject": "LEGUS star cluster catalogue of NGC 3351",
+      "status": "deferred",
+      "finding": "The Hubble LEGUS programme publishes a star cluster catalogue for NGC 3351 on MAST. It is not on CDS, so it needs its own restore route; not drawn here.",
+      "evidence": [
+        "https://archive.stsci.edu/prepds/legus/dataproducts-public.html"
+      ],
+      "revisitWhen": "Star clusters are wanted as a fourth kind of dot."
+    }
+  ]
+}

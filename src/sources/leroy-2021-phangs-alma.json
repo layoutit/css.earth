@@ -35,6 +35,11 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/257/43/ReadMe",
       "checkedOn": "2026-10-01",
       "locator": "galaxies, row NGC1637: centre 70.3675, -2.8580556, distance 11.7 Mpc, position angle 20.6 +/- 10.0 deg, inclination 31.1 +/- 5.0 deg, stellar scale length lstar 1.8 kpc. Query: SELECT * FROM \"J/ApJS/257/43/galaxies\" WHERE 1=CONTAINS(POINT('ICRS', RAJ2000, DEJ2000), CIRCLE('ICRS', 70.367, -2.858, 0.1))"
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/257/43/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "galaxies: row NGC3521: distance 13.24 Mpc, stellar scale length lstar 4.9 kpc; row NGC3351: distance 9.96 Mpc, lstar 2.1 kpc."
     }
   ],
   "creators": [

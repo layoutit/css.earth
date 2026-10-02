@@ -171,6 +171,12 @@
     },
     {
       "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 12123,
+      "sha256": "8754c16cca879081985682edd8666571cb900e639ce183a5e9799c99e6b094c5"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps.json",
       "bytes": 402,
       "sha256": "9c5c4f2b710d90c6937c3cd84ca1759218a83126d4306e804efe47ee3b22dad9"
@@ -4648,14 +4654,14 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 932464,
-      "sha256": "bd03b08ea1708b00f4838677402a56bdbeb051184971b64e2b77e912d6b26809"
+      "bytes": 933709,
+      "sha256": "0102b4479cd4bb883fff5530fa57fda18c081960df4dc063b18bf50de00be0a7"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 54768691,
-      "sha256": "0f03e8484f28d006f44cac1cfe9af07d7c9adc57b6ce7db4fc90b4a95d2cc192"
+      "bytes": 54801556,
+      "sha256": "5fe5c855bcd7c78330cade03b3d690ba1a7ebdda61d7889d399497ea60e82177"
     },
     {
       "location": "prepared",

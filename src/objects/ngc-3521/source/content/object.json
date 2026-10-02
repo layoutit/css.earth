@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-3521",
+  "displayName": "NGC 3521",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "10.715 Mpc",
+        "source": {
+          "catalogueId": "publication-karachentsev2013aj-145-101k",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145..101K",
+          "label": "Karachentsev2013AJ....145..101K: Updated Nearby Galaxy Catalog",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 166.5°, Dec -0.03583°",
+        "source": {
+          "catalogueId": "lvdb-v1-1-1",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "ESO · optical",
+        "thumbnail": "ngc-3521-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-3521-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-3521-layers-optical",
+          "path": "../../ngc-3521-layers/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1129a/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Karachentsev2013AJ....145..101K: Updated Nearby Galaxy Catalog",
+      "href": "https://ui.adsabs.harvard.edu/abs/2013AJ....145..101K"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+      "href": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145..101K",
+      "credit": "Karachentsev2013AJ....145..101K: Updated Nearby Galaxy Catalog"
+    }
+  }
+}
