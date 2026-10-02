@@ -34,7 +34,7 @@ of the sky: nothing in it has depth, and seen from the side it is a line.
 ![Abell 2744 in the app](evidence/2026-10-02/views.jpg)
 
 The Abell 2744 page in headless Chromium at 1440 × 900, device pixel ratio 2, on this branch on 2026-10-02: the default
-arrival, the camera turned part of the way round, and the picture seen from the side, where it is a line.
+arrival, the camera turned part of the way round, and the picture seen from the side, where it is a line. The white dots are the [member galaxies](../abell-2744-members/README.md), which have an assumed depth and so stand off the picture.
 
 ## Measured, chosen and inferred
 
