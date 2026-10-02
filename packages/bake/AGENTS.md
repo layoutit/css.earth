@@ -21,8 +21,8 @@ its validators accept); the renderer never imports the bake.
   It imports `raster`. The host passes the physical scene and Sun directions in (`ScenePreparationAdapters`).
 - `src/presentation/` is published as `@cssearth/bake/presentation` (Node only): the retained node tree with its
   projective layouts and leaf boxes, offline CSSOM reads (Playwright's Chromium), activation groups, and the row-bank
-  cutaway, composite and emissive presentations; and the prepared-presentation contract with its schemas, and the cubic-sky
-  and directional-Sun contracts and preparers it validates, and the material-track source planning (frame lookups and banks)
+  cutaway, composite and emissive presentations; and authored presentation-envelope checks using shared sky/Sun validators from `@cssearth/objects`,
+  and the cubic-sky and directional-Sun authored standards and preparers, and the material-track source planning (frame lookups and banks)
   the layer presentations build on. It imports `scene` and `raster`. The host passes material
   tracks and dataset navigation in (`PresentationHostAdapters`); nothing here loads tools or platform modules itself. Its
   tests are `node --test` suites in `src/presentation/` (the activation groups, node tree, CSSOM, leaf boxes and layouts).
@@ -166,8 +166,8 @@ its validators accept); the renderer never imports the bake.
     camera; also the authored presentation basis and drawn node chain the world-navigation stage solves, the physical
     projection it adds to rotating material tracks, a recipe's camera source, and the seams and projection block every generated
     sphere is written with. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
-    so the host passes it in (`SolarGeometry`). The prepared sky and Sun contracts and their preparers belong to
-    `presentation` (`src/presentation/{cubic-sky,directional-sun}-contract.ts`), which the scene imports as a lower topic.
+    so the host passes it in (`SolarGeometry`). The prepared sky and Sun contracts belong to `@cssearth/objects`; their authored standards and preparers
+    belong to `presentation`, which the scene imports as a lower topic.
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed color rasters and their
     photometric composition, a planet's whole-disc color record and the band-ratio tie to it, the source records they read, the WISE atlas mosaic grid, FITS binary tables (OIFITS and archive

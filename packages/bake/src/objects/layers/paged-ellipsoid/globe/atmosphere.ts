@@ -1,11 +1,10 @@
 import type {SourceManifest} from '@cssearth/objects/node';
-import type {PreparedDirectionalSunPlan} from '../../../../presentation/index.ts';
+import { type PreparedDirectionalSunPlan, readAtmosphereModel as parseAtmosphereModelRecord } from '@cssearth/objects';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {viewSunDirectionToPreparedLightDirection} from '@cssearth/renderer/solar-system/directional-sun-coordinate.ts';
 import {requireFiniteNumber, requireRecord} from '@cssearth/core';
-import {readAtmosphereModel as parseAtmosphereModelRecord} from '@cssearth/objects';
 import {limbFactors, limbOverlay, loadLimbLaw, parseLimbBlock, scatteringAngles, silhouetteColorWeight, type Channels, type LimbBlock} from '../../../../photometry/index.ts';
 import {compositePreparedAtmosphere, prepareAtmosphereFrame, type PreparedAtmosphereProfile} from '../../../../raster/index.ts';
 import {readJsonSource} from '../../../sources/index.ts';

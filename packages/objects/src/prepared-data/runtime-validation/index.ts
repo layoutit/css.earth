@@ -4,7 +4,7 @@ import { choice, fail, parsedJsonNumbersFinite, record, requireJsonData, text } 
 import { requireAssets, requireTree } from './resources-tree.js';
 import { requireCamera } from './camera.js';
 import { requireControls } from './controls.js';
-import { requireSky, requireSun } from './sky.js';
+import { validatePreparedCubicSky, validateDirectionalSunPlan } from '../sky-contract.js';
 import { requireMaterials } from './materials.js';
 import { requireAnimations, requireOptionalPresentation, requireVariants, requireViewBindings } from './presentation.js';
 import { requireTextureLevels } from './prepared-texture-levels.js';
@@ -24,8 +24,8 @@ function requireDefinition(value: unknown, parsedJson: boolean): asserts value i
     'viewBindings', 'animations', 'motion', 'depthPartitions', 'resourceOrder', 'destinations', 'motionFrame', 'surfaceHit', 'textureLevels', 'features', 'deferredDatasets']);
   if (plan.schema !== OBJECT_RUNTIME_SCHEMA) fail('runtime schema is incompatible');
   const id = text(plan.id, 'object id'); if (!/^[a-z][a-z0-9-]*$/.test(id)) fail('object identity is invalid');
-  requireControls(plan.controls); requireCamera(plan.camera); requireSky(plan.sky);
-  if (plan.sun !== undefined && plan.sun !== null) requireSun(plan.sun);
+  requireControls(plan.controls); requireCamera(plan.camera); validatePreparedCubicSky(plan.sky, 'runtime');
+  if (plan.sun !== undefined && plan.sun !== null) validateDirectionalSunPlan(plan.sun, 'runtime');
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, ['content-first', 'materials-first'], 'resource order');
   requireAssets(plan.assets); requireTree(plan.tree);
   if (!Array.isArray(plan.tree.activationGroups)) fail('activation groups must be prepared before transport');

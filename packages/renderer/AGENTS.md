@@ -49,3 +49,6 @@ Object runtime definitions, control metadata, prepared dataset tables and their 
 
 Leaf bounds and their validator, prepared material/selection records and serialized pose keyframes belong to
 `@cssearth/objects`; frustum computation, CSS publication and live Web Animations interfaces stay here.
+
+Prepared CSS sky/parallax, cubic-sky and directional-Sun data and validation belong to `@cssearth/objects`;
+retained sky mounting, camera projection and direction computation remain here.

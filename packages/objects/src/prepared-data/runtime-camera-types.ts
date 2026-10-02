@@ -40,7 +40,20 @@ export interface CubicSkyPlan {cameraPitchResponse:number;cameraZoomResponse:num
 
 export interface DirectionalSunPlan { localDirection: readonly number[]; referenceViewDirection: readonly number[]; }
 
-/** Minimal sky/Sun identifiers required by the runtime envelope's validator. */
+export interface PreparedCubicSkyPlan extends CubicSkyPlan {
+  schema: string; standard: string; model: string; runtimeRasterization: boolean; orientation: string; qualification: string;
+  projection?: NonNullable<CubicSkyPlan["projection"]> & { axis: string; runtimeProjection: boolean };
+}
+
+
+export interface PreparedDirectionalSunPlan extends DirectionalSunPlan {
+  schema: string; model: string; localDirection: readonly number[]; referenceViewDirection: readonly number[];
+  provenance: { source: string; sourcePath: string; qualification: string };
+}
+
+export const DIRECTIONAL_SUN_PRESENTATION_STANDARD_SCHEMA = 'cssearth-directional-sun-presentation-standard@2';
+
+/** Sky/Sun identifiers required by the runtime envelope's validator. */
 export const PREPARED_CUBIC_SKY_SCHEMA = 'cssearth-prepared-cubic-sky@3';
 export const CUBIC_SKY_STANDARD_SCHEMA = 'cssearth-cubic-sky-standard@3';
 export const PREPARED_DIRECTIONAL_SUN_SCHEMA = 'cssearth-prepared-directional-sun@4';
