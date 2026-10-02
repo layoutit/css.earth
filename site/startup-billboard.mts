@@ -18,7 +18,11 @@ export function usesDefaultStartupView(url: string, sceneId: string): boolean {
  * a saved camera: a page URL also carries `overview`, `focus`, `dataset` and the rest, which the shared-view parser refuses. */
 export function readStartupSavedView(url: string, preparedView?: string) {
   const saved = preparedView ?? new URL(url).searchParams.get('v');
-  return saved === null ? null : parseSharedView(new URLSearchParams({ v: saved }).toString());
+  if (saved === null) return null;
+  // An unreadable view (a damaged copy, an older format) opens the page's default view, as the server renders it
+  // (search-response.mts). Thrown from here it failed the whole mount: `/earth/?v=garbage` never became ready (2026-10-01).
+  try { return parseSharedView(new URLSearchParams({ v: saved }).toString()); }
+  catch { return null; }
 }
 
 /** The same prepared cover and resource lease as fly-to, owned by the initial session. */
