@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngc-1275-volume",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1.0213979739489411e+24,
+        1.2151419002927143e+24,
+        1.404985720212578e+24
+      ],
+      "localToReferenceXyzw": [
+        0.14060738025897176,
+        0.38580202420151966,
+        0.8566819207472199,
+        0.3122217952090676
+      ],
+      "metersPerUnit": 411094537588651260000,
+      "boundsUnits": {
+        "min": [
+          -5,
+          -5,
+          -5
+        ],
+        "max": [
+          5,
+          5,
+          5
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "ngc-1275"
+  },
+  "prepared": {
+    "format": "cssearth-volume-datasets@1",
+    "url": "prepared/datasets.json"
+  }
+}

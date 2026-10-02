@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-stellar-extent@1",
+  "objectId": "ngc-1275-volume",
+  "radiusPc": 66613,
+  "definition": "Where the survey image of NGC 1275 fades into its sky, measured here on the cleaned cutout in 10 arcsec elliptical annuli: 200 arcsec along the major axis, 66.6 kpc at 68.7 Mpc. Not a published size of the galaxy.",
+  "quote": "200 arcsec",
+  "source": "sdss-dr9-color-hips",
+  "presentation": "Where the volume ends: while the camera is inside this radius the galaxy's caption hides; outside it the caption hangs under what is drawn of the galaxy. Not a boundary of the galaxy."
+}

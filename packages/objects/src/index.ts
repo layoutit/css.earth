@@ -56,3 +56,9 @@ export type { LevelOfDetailPlan, OrbitLineFade } from './prepared-data/world-pre
 export type { PreparedOrbitCenter } from './prepared-data/prepared-orbit-centers.js';
 
 export { PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA, PREPARED_WORLD_SYSTEM_VIEW_SCHEMA, PREPARED_WORLD_ORBITS_SCHEMA } from './prepared-data/world-schemas.js';
+
+export { CATALOGUE_BANK_BINARY_MAGIC, CATALOGUE_POSITION_SCALE, encodeCatalogueBankBinary, decodeCatalogueBankBinary } from './prepared-data/catalogue-bank-binary.js';
+export { PREPARED_CSS_POINT_FIELD_SCHEMA, PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA, POINT_FIELD_BANK_ENCODING } from './stars/point-field-schemas.js';
+export { POINT_FIELD_BANK_MAGIC, POINT_FIELD_BANK_VERSION, POINT_FIELD_BANK_HEADER_BYTES, POINT_FIELD_MAGNITUDE_DIVISOR, POINT_FIELD_MAGNITUDE_BOUND, POINT_FIELD_BANK_QUANTIZATION, decodeStarMagnitude, pointFieldBankLayout, pointFieldBankHeader, pointFieldBankRegions, decodePointFieldBank } from './stars/point-field-bank.js';
+export { parsePreparedCssPointFieldManifest, decodePreparedCssPointField } from './stars/point-field-validation.js';
+export type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedPointFieldStar, PreparedPointFieldNode, PreparedPointFieldResource, PreparedPointFieldBank, PreparedPointFieldQuantization, PreparedPointAppearance } from './stars/point-field-types.js';

@@ -1,6 +1,6 @@
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import type { PreparedCssVolume } from '../volume/types.js';
-import type { PreparedPointAppearance } from '../stars/types.js';
+import type { PreparedPointAppearance } from '@cssearth/objects';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 import type { BackgroundPointBank } from './background-points.js';

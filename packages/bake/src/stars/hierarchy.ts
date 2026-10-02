@@ -1,12 +1,13 @@
-import type { Point3, PreparedStar, PreparedStarNode, Rgb } from './types.ts';
+import type { PreparedPointFieldStar, PreparedPointFieldNode } from '@cssearth/objects';
+import type { Point3, Rgb } from './types.ts';
 import { nearestColor } from './color.ts';
 import { hierarchyPosition, hierarchyMagnitude, hierarchyRadius } from './precision.ts';
 
 /** Every input row occurs exactly once in the reordered array. Internal bounds contain its actual members. */
-export function prepareStarHierarchy(input: readonly PreparedStar[], colors: readonly Rgb[], leafSize: number, maximumDepth: number) {
+export function prepareStarHierarchy(input: readonly PreparedPointFieldStar[], colors: readonly Rgb[], leafSize: number, maximumDepth: number) {
   if (!input.length || !Number.isSafeInteger(leafSize) || leafSize < 1) throw new TypeError('Star hierarchy requires rows and a positive leaf size.');
-  const stars: PreparedStar[] = [], nodes: PreparedStarNode[] = [];
-  function append(rows: readonly PreparedStar[], min: Point3, max: Point3, depth: number): number {
+  const stars: PreparedPointFieldStar[] = [], nodes: PreparedPointFieldNode[] = [];
+  function append(rows: readonly PreparedPointFieldStar[], min: Point3, max: Point3, depth: number): number {
     const index = nodes.length, first = stars.length;
     let flux = 0, px = 0, py = 0, pz = 0, red = 0, green = 0, blue = 0;
     for (const row of rows) {
@@ -23,7 +24,7 @@ export function prepareStarHierarchy(input: readonly PreparedStar[], colors: rea
     if (rows.length <= leafSize) stars.push(...rows);
     else {
       const mid: Point3 = [(min[0]+max[0])/2,(min[1]+max[1])/2,(min[2]+max[2])/2];
-      const bins: PreparedStar[][] = Array.from({ length: 8 }, () => []);
+      const bins: PreparedPointFieldStar[][] = Array.from({ length: 8 }, () => []);
       for (const row of rows) { const p = row.positionUnits; bins[(p[0]>=mid[0]?1:0)|(p[1]>=mid[1]?2:0)|(p[2]>=mid[2]?4:0)]!.push(row); }
       if (depth >= maximumDepth) {
         // Coincident rows still need bounded leaves; stable source order breaks ties without fabricated positions.

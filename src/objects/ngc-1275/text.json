@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-1275",
+  "card": {
+    "text": "The central giant galaxy of the Perseus Cluster (Abell 426), 68.7 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-kluge2020apjs-247-43k",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/247/43",
+        "label": "Kluge et al. (2020), ApJS 247, 43 (Structure of brightest cluster galaxies and intracluster light), Table 1 (CDS J/ApJS/247/43): Abell 426, brightest cluster galaxy NGC 1275, z = 0.017560.",
+        "checked": "2026-10-02",
+        "locator": "membership: Galaxy cluster, Perseus"
+      },
+      {
+        "catalogueId": "publication-tully2023apj-944-94t",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94): group 1PGC 12429 (NGC 1275) DMzp = 34.185 +/- 0.036, 68.7 Mpc; group 1PGC 44715 (NGC 4889; Table 2 puts NGC 4874, PGC 44628, in it) DMzp = 34.891 +/- 0.025, 95.1 Mpc. A group's distance averages its members'.",
+        "checked": "2026-10-02",
+        "locator": "distance: 68.7 Mpc (−1,100,000 / +1,100,000 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The central giant galaxy of the Perseus Cluster (Abell 426), 68.7 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-kluge2020apjs-247-43k",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/247/43",
+        "label": "Kluge et al. (2020), ApJS 247, 43 (Structure of brightest cluster galaxies and intracluster light), Table 1 (CDS J/ApJS/247/43): Abell 426, brightest cluster galaxy NGC 1275, z = 0.017560.",
+        "checked": "2026-10-02",
+        "locator": "membership: Galaxy cluster, Perseus"
+      },
+      {
+        "catalogueId": "publication-tully2023apj-944-94t",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94): group 1PGC 12429 (NGC 1275) DMzp = 34.185 +/- 0.036, 68.7 Mpc; group 1PGC 44715 (NGC 4889; Table 2 puts NGC 4874, PGC 44628, in it) DMzp = 34.891 +/- 0.025, 95.1 Mpc. A group's distance averages its members'.",
+        "checked": "2026-10-02",
+        "locator": "distance: 68.7 Mpc (−1,100,000 / +1,100,000 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "sdss-optical": {
+      "title": "NGC 1275 in visible light",
+      "detail": "1500 × 1500 px",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://www.sdss.org/",
+          "label": "SDSS9 color (g, r, i); Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "SDSS9 color (g, r, i)"
+        }
+      ]
+    }
+  }
+}

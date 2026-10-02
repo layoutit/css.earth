@@ -65,7 +65,8 @@ export function applyIsophoteMasks(diffuse:Buffer,width:number,height:number,mas
   }
   applyRecordedPointMasks(diffuse, source, width, height, unresolved);
 }
-export function emissionInputChannels(resized:Uint8Array,pixels:number,blackLevel:number) {return Array.from({length:3},(_,c)=>Float32Array.from({length:pixels},(_,p)=>Math.max(0,(resized[p*3+c]!/255-blackLevel)/(1-blackLevel))));}
+/** A black level per channel (red, green, blue) is for a survey composite whose sky is not grey. */
+export function emissionInputChannels(resized:Uint8Array,pixels:number,blackLevel:number|readonly [number,number,number]) {return Array.from({length:3},(_,c)=>{const black=typeof blackLevel==='number'?blackLevel:blackLevel[c]!;return Float32Array.from({length:pixels},(_,p)=>Math.max(0,(resized[p*3+c]!/255-black)/(1-black)));});}
 export function emissionRasterPixels(channels:Float32Array[],pixels:number,gain=1){
  const bytes=Buffer.alloc(pixels*3);
  for(let p=0;p<pixels;p++)for(let c=0;c<3;c++)bytes[p*3+c]=Math.round(Math.max(0,Math.min(1,channels[c]![p]!*gain))*255);

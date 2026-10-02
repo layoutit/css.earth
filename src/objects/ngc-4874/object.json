@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngc-4874",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "NGC 4874",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3414425671023457300
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "NGC 4874",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 19615783074098.863,
+      "description": "One of the two giant galaxies at the centre of the Coma Cluster (Abell 1656), 95.1 million parsecs away.",
+      "aliases": [
+        "PGC 44628"
+      ],
+      "order": 5158,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2.504829328567454e+24,
+        -6.664268151022046e+23,
+        1.3758177938751512e+24
+      ],
+      "presentationToReference": [
+        -0.9996720506901433,
+        0,
+        -0.025608417931676362,
+        -0.023495264090283848,
+        0.3977771559319137,
+        0.9171811744601204,
+        -0.01018644365277803,
+        -0.9174820620691818,
+        0.3976467051881491
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 11014276358140185000,
+      "bodyRadiusM": 3.414425671023457e+21
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

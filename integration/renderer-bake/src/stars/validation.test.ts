@@ -3,9 +3,9 @@ import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { loadPreparedCssPointField, loadPreparedPointAppearance } from '@cssearth/renderer/stars/loader.ts';
-import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/renderer/stars/validation.ts';
+import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/objects';
 import { readCanonicalPointFieldFiles } from '@cssearth/renderer/test/canonical-point-field-fixture.ts';
-import { POINT_FIELD_MAGNITUDE_BOUND } from '@cssearth/renderer/stars/point-field-bank.ts';
+import { POINT_FIELD_MAGNITUDE_BOUND } from '@cssearth/objects';
 import { IMPERCEPTIBLE_LUMINANCE } from '@cssearth/renderer/stars/point-field-projection.ts';
 import { magnitudeDisplayAlphaChange } from '@cssearth/bake/stars';
 

@@ -1,0 +1,921 @@
+{
+  "schema": "cssearth-compact-symmetry@1",
+  "recipe": {
+    "schema": "cssearth-emission-inference@1",
+    "id": "ngc-4874-inferred",
+    "source": {
+      "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=1800&height=1800&fov=0.133333&projection=TAN&coordsys=icrs&ra=194.898788&dec=27.959389&format=jpg",
+      "width": 1800,
+      "height": 1800,
+      "publisher": "https://www.sdss.org/",
+      "credit": "Sloan Digital Sky Survey DR9, g, r and i color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+    },
+    "crop": {
+      "left": 0,
+      "top": 0,
+      "width": 1800,
+      "height": 1800
+    },
+    "pointMasks": [],
+    "neighbourMasks": {
+      "source": "paturel-2003-hyperleda-pgc and the 2MASS Extended Source Catalog (galaxies), gaia-2023-dr3 (stars)",
+      "fill": "isophote",
+      "masks": [
+        {
+          "name": "PGC 44715 (NGC4889)",
+          "x": -695,
+          "y": 650,
+          "radius": 807
+        },
+        {
+          "name": "PGC 44566 (NGC4864)",
+          "x": 2028,
+          "y": 655,
+          "radius": 268
+        },
+        {
+          "name": "PGC 44587 (NGC4869)",
+          "x": 1516,
+          "y": 1544,
+          "radius": 262
+        },
+        {
+          "name": "PGC 44612 (IC3973)",
+          "x": 1149,
+          "y": 1907,
+          "radius": 250
+        },
+        {
+          "name": "PGC 44682 (NGC4883)",
+          "x": -98,
+          "y": -129,
+          "radius": 250
+        },
+        {
+          "name": "PGC 44568 (NGC4867)",
+          "x": 1928,
+          "y": 745,
+          "radius": 223
+        },
+        {
+          "name": "PGC 44675 (DRCG27-123)",
+          "x": -139,
+          "y": 1288,
+          "radius": 213
+        },
+        {
+          "name": "PGC 44581 (DRCG27-107)",
+          "x": 1690,
+          "y": 1889,
+          "radius": 190
+        },
+        {
+          "name": "PGC 44658 (NGC4876)",
+          "x": 477,
+          "y": 1536,
+          "radius": 185
+        },
+        {
+          "name": "PGC 44664 (IC3998)",
+          "x": 353,
+          "y": 696,
+          "radius": 185
+        },
+        {
+          "name": "PGC 44621 (NGC4873)",
+          "x": 1054,
+          "y": 572,
+          "radius": 181
+        },
+        {
+          "name": "PGC 44652 (DRCG27-126)",
+          "x": 483,
+          "y": 906,
+          "radius": 154
+        },
+        {
+          "name": "PGC 44606 (NGC4871)",
+          "x": 1188,
+          "y": 932,
+          "radius": 145
+        },
+        {
+          "name": "PGC 44636 (DRCG27-154)",
+          "x": 776,
+          "y": 520,
+          "radius": 144
+        },
+        {
+          "name": "PGC 44597 (DRCG27-132)",
+          "x": 1422,
+          "y": 775,
+          "radius": 134
+        },
+        {
+          "name": "PGC 44598 (DRCG27-157)",
+          "x": 1412,
+          "y": 719,
+          "radius": 134
+        },
+        {
+          "name": "PGC 44640 (NGC4875)",
+          "x": 791,
+          "y": 1604,
+          "radius": 117
+        },
+        {
+          "name": "PGC 1821898",
+          "x": 935,
+          "y": 1225,
+          "radius": 102
+        },
+        {
+          "name": "PGC 1822852",
+          "x": 1700,
+          "y": 704,
+          "radius": 102
+        },
+        {
+          "name": "PGC 44644 (DRCG27-128)",
+          "x": 716,
+          "y": 977,
+          "radius": 97
+        },
+        {
+          "name": "PGC 44624 (NGC4872)",
+          "x": 989,
+          "y": 1064,
+          "radius": 94
+        },
+        {
+          "name": "PGC 44576 (DRCG27-158)",
+          "x": 1615,
+          "y": 707,
+          "radius": 93
+        },
+        {
+          "name": "PGC 44651 (DRCG27-127)",
+          "x": 671,
+          "y": 782,
+          "radius": 89
+        },
+        {
+          "name": "PGC 44594 (DRCG27-156)",
+          "x": 1362,
+          "y": 374,
+          "radius": 89
+        },
+        {
+          "name": "PGC 1821555",
+          "x": 1089,
+          "y": 1409,
+          "radius": 87
+        },
+        {
+          "name": "PGC 44635 ([RB67]37)",
+          "x": 796,
+          "y": 336,
+          "radius": 87
+        },
+        {
+          "name": "PGC 1822726",
+          "x": 1705,
+          "y": 775,
+          "radius": 83
+        },
+        {
+          "name": "PGC 44656 (DRCG27-153)",
+          "x": 503,
+          "y": 430,
+          "radius": 81
+        },
+        {
+          "name": "PGC 1821341",
+          "x": 184,
+          "y": 1525,
+          "radius": 79
+        },
+        {
+          "name": "PGC 126792",
+          "x": 1436,
+          "y": 389,
+          "radius": 74
+        },
+        {
+          "name": "PGC 44649 (CGCG160-233)",
+          "x": 582,
+          "y": 1375,
+          "radius": 72
+        },
+        {
+          "name": "PGC 44666 ([RB67]55)",
+          "x": 184,
+          "y": 1367,
+          "radius": 59
+        },
+        {
+          "name": "PGC 44595 ([RB67]11)",
+          "x": 1417,
+          "y": 1240,
+          "radius": 55
+        },
+        {
+          "name": "2MASX J13000809+2758372",
+          "x": -709,
+          "y": 661,
+          "radius": 727
+        },
+        {
+          "name": "2MASX J12592333+2754418",
+          "x": 1515,
+          "y": 1544,
+          "radius": 196
+        },
+        {
+          "name": "2MASX J12593276+2759008",
+          "x": 1046,
+          "y": 573,
+          "radius": 167
+        },
+        {
+          "name": "2MASX J12595601+2802052",
+          "x": -109,
+          "y": -119,
+          "radius": 163
+        },
+        {
+          "name": "2MASX J12593079+2753028",
+          "x": 1144,
+          "y": 1916,
+          "radius": 161
+        },
+        {
+          "name": "2MASX J12591525+2758147",
+          "x": 1916,
+          "y": 745,
+          "radius": 160
+        },
+        {
+          "name": "2MASX J12594681+2758252",
+          "x": 348,
+          "y": 706,
+          "radius": 155
+        },
+        {
+          "name": "2MASX J12594438+2754447",
+          "x": 468,
+          "y": 1533,
+          "radius": 146
+        },
+        {
+          "name": "2MASX J12592544+2758238",
+          "x": 1409,
+          "y": 712,
+          "radius": 131
+        },
+        {
+          "name": "2MASX J12593789+2754267",
+          "x": 791,
+          "y": 1601,
+          "radius": 124
+        },
+        {
+          "name": "2MASX J12593827+2759137",
+          "x": 772,
+          "y": 525,
+          "radius": 106
+        },
+        {
+          "name": "2MASX J12592016+2753098",
+          "x": 1672,
+          "y": 1889,
+          "radius": 102
+        },
+        {
+          "name": "2MASX J12592529+2758048",
+          "x": 1417,
+          "y": 783,
+          "radius": 99
+        },
+        {
+          "name": "2MASX J12592265+2753488",
+          "x": 1549,
+          "y": 1743,
+          "radius": 98
+        },
+        {
+          "name": "2MASX J12594423+2757307",
+          "x": 476,
+          "y": 911,
+          "radius": 96
+        },
+        {
+          "name": "2MASX J12592657+2759548",
+          "x": 1353,
+          "y": 371,
+          "radius": 80
+        },
+        {
+          "name": "2MASX J12592136+2758248",
+          "x": 1612,
+          "y": 708,
+          "radius": 79
+        },
+        {
+          "name": "2MASX J12595013+2755292",
+          "x": 182,
+          "y": 1366,
+          "radius": 73
+        },
+        {
+          "name": "2MASX J12594234+2755287",
+          "x": 570,
+          "y": 1368,
+          "radius": 69
+        },
+        {
+          "name": "2MASX J12592536+2756038",
+          "x": 1413,
+          "y": 1237,
+          "radius": 56
+        },
+        {
+          "name": "Gaia DR3 1460810534484815360 (G 7.1)",
+          "x": 1035,
+          "y": -535,
+          "radius": 720
+        },
+        {
+          "name": "Gaia DR3 1460807575250809216 (G 12.1)",
+          "x": 1245,
+          "y": 1193,
+          "radius": 103
+        },
+        {
+          "name": "Gaia DR3 1460807064151234048 (G 14.8)",
+          "x": 1546,
+          "y": 1494,
+          "radius": 29
+        }
+      ]
+    },
+    "nativeRemoval": {
+      "directory": ".local/nebula-lab/ngc-4874/nox",
+      "model": {
+        "path": ".local/open-star-removal/noxGeneratorColor.pb"
+      }
+    },
+    "grid": {
+      "width": 150,
+      "height": 150,
+      "depth": 150
+    },
+    "prior": {
+      "axis": [
+        -0.573576,
+        0.819152,
+        0
+      ],
+      "center": [
+        74.5,
+        74.5,
+        74.5
+      ],
+      "binWidth": 1
+    },
+    "tau": 0.001,
+    "iterations": 100,
+    "blackLevel": [
+      0.039,
+      0.039,
+      0.027
+    ],
+    "displayExposure": 1.5,
+    "slices": 48,
+    "assumptions": [
+      "Depth follows the deprojected density (Prugniel & Simien 1997) of Kluge et al.'s (2020) single Sérsic fit to the semimajor-axis profile of Abell 1656's brightest cluster galaxy, NGC 4874, and the intracluster light around it (Table 4, row A1656: n = 9.00 +/- 0.90, r_e = 784 (+291, -228) kpc at their Table 1 scale of 0.469 kpc per arcsec, 1671.6 arcsec; 770.7 kpc at 95.1 Mpc), on an oblate spheroid whose axis is the galaxy's minor axis (position angle 145 degrees: the 2MASS Extended Source Catalog K-band 3-sigma isophote of 2MASX J12593570+2757338 has its major axis at 55 degrees and axis ratio 0.94) in the plane of the sky. The half-light radius is seven times the radius drawn, so only the fit's inner slope shapes the depth. The survey image's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
+      "The prior ends at 0.144 half-light radii (240 arcsec, 110.7 kpc). That edge is chosen here, not published: it is where the cutout's light reaches its sky level, measured on the cleaned cutout in 10 arcsec elliptical annuli. Light beyond that spheroid is not drawn.",
+      "The 1800 x 1800 px cutout is requested on NGC 4874's 2MASS Extended Source Catalog position (2MASX J12593570+2757338: 194.898788, +27.959389) in a tangent projection, north up and east left, 0.133333 degrees wide (twice 240 arcsec, 0.2667 arcsec per px), oversampling the survey's 0.396 arcsec pixel, so its registration is the request's.",
+      "NOX removes stars; what it leaves is masked afterwards: 33 neighbouring galaxies from HyperLEDA PGC (Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) at 3 times their D25 radius, M87's rule; 20 from the 2MASS Extended Source Catalog (CDS VII/233), which sizes the galaxies HyperLEDA gives no D25, at 3 times their K-band 20 mag isophotal radius; and the 3 Gaia DR3 stars brighter than G = 15, whose haloes NOX leaves, at 45 arcsec for G = 11, scaled with brightness (a factor 10 in radius per 5 magnitudes; chosen here from the haloes left in the cleaned cutouts). No mask reaches beyond half its distance from NGC 4874's centre, so every isophote keeps unmasked light. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the measured axis ratio and position angle), never more than it held.",
+      "Every pixel is clamped to the median of the 75 px square around it, so star haloes and small background galaxies that NOX and the masks leave are not spread through the spheroid.",
+      "Black level per channel: the median of the cleaned cutout on the isophote where the prior ends (230 to 240 arcsec), red 0.039, green 0.039, blue 0.027 (10, 10 and 7 of 255), so the light fades to nothing at the spheroid's edge.",
+      "The color is the survey's published g, r, i display composite, not calibrated photometry. Single-image depth is modelled by the prior, not measured."
+    ],
+    "compactClamp": {
+      "windowPx": 75,
+      "basis": "75 px (20.0 arcsec, 9.2 kpc), chosen here: about twice the width of the largest uncatalogued galaxies the masks leave in the cleaned cutout, so they drop out."
+    },
+    "shapePrior": {
+      "components": [
+        {
+          "kind": "sersic",
+          "axis": [
+            -0.573576,
+            0.819152,
+            0
+          ],
+          "radius": 522.376,
+          "radialSigma": 1,
+          "axialSigma": 1,
+          "weight": 1,
+          "sersicIndex": 9,
+          "axisRatio": 0.94
+        }
+      ],
+      "sigmaCutoff": 0.144
+    },
+    "modelReference": {
+      "paper": "https://arxiv.org/abs/1908.08544"
+    }
+  },
+  "channels": [
+    {
+      "path": "src/objects/ngc-4874-volume/source/compact/emission-0.f32.gz",
+      "bytes": 13500000
+    },
+    {
+      "path": "src/objects/ngc-4874-volume/source/compact/emission-1.f32.gz",
+      "bytes": 13500000
+    },
+    {
+      "path": "src/objects/ngc-4874-volume/source/compact/emission-2.f32.gz",
+      "bytes": 13500000
+    }
+  ],
+  "provenance": {
+    "method": "Image-conditioned emission in an authored geometric prior; no image-only depth inference",
+    "doi": "https://arxiv.org/abs/1908.08544",
+    "recipePath": "labs/nebula/models/ngc-4874/experiment.json",
+    "recipe": {
+      "schema": "cssearth-emission-inference@1",
+      "id": "ngc-4874-inferred",
+      "source": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=1800&height=1800&fov=0.133333&projection=TAN&coordsys=icrs&ra=194.898788&dec=27.959389&format=jpg",
+        "width": 1800,
+        "height": 1800,
+        "publisher": "https://www.sdss.org/",
+        "credit": "Sloan Digital Sky Survey DR9, g, r and i color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+      },
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 1800,
+        "height": 1800
+      },
+      "pointMasks": [],
+      "neighbourMasks": {
+        "source": "paturel-2003-hyperleda-pgc and the 2MASS Extended Source Catalog (galaxies), gaia-2023-dr3 (stars)",
+        "fill": "isophote",
+        "masks": [
+          {
+            "name": "PGC 44715 (NGC4889)",
+            "x": -695,
+            "y": 650,
+            "radius": 807
+          },
+          {
+            "name": "PGC 44566 (NGC4864)",
+            "x": 2028,
+            "y": 655,
+            "radius": 268
+          },
+          {
+            "name": "PGC 44587 (NGC4869)",
+            "x": 1516,
+            "y": 1544,
+            "radius": 262
+          },
+          {
+            "name": "PGC 44612 (IC3973)",
+            "x": 1149,
+            "y": 1907,
+            "radius": 250
+          },
+          {
+            "name": "PGC 44682 (NGC4883)",
+            "x": -98,
+            "y": -129,
+            "radius": 250
+          },
+          {
+            "name": "PGC 44568 (NGC4867)",
+            "x": 1928,
+            "y": 745,
+            "radius": 223
+          },
+          {
+            "name": "PGC 44675 (DRCG27-123)",
+            "x": -139,
+            "y": 1288,
+            "radius": 213
+          },
+          {
+            "name": "PGC 44581 (DRCG27-107)",
+            "x": 1690,
+            "y": 1889,
+            "radius": 190
+          },
+          {
+            "name": "PGC 44658 (NGC4876)",
+            "x": 477,
+            "y": 1536,
+            "radius": 185
+          },
+          {
+            "name": "PGC 44664 (IC3998)",
+            "x": 353,
+            "y": 696,
+            "radius": 185
+          },
+          {
+            "name": "PGC 44621 (NGC4873)",
+            "x": 1054,
+            "y": 572,
+            "radius": 181
+          },
+          {
+            "name": "PGC 44652 (DRCG27-126)",
+            "x": 483,
+            "y": 906,
+            "radius": 154
+          },
+          {
+            "name": "PGC 44606 (NGC4871)",
+            "x": 1188,
+            "y": 932,
+            "radius": 145
+          },
+          {
+            "name": "PGC 44636 (DRCG27-154)",
+            "x": 776,
+            "y": 520,
+            "radius": 144
+          },
+          {
+            "name": "PGC 44597 (DRCG27-132)",
+            "x": 1422,
+            "y": 775,
+            "radius": 134
+          },
+          {
+            "name": "PGC 44598 (DRCG27-157)",
+            "x": 1412,
+            "y": 719,
+            "radius": 134
+          },
+          {
+            "name": "PGC 44640 (NGC4875)",
+            "x": 791,
+            "y": 1604,
+            "radius": 117
+          },
+          {
+            "name": "PGC 1821898",
+            "x": 935,
+            "y": 1225,
+            "radius": 102
+          },
+          {
+            "name": "PGC 1822852",
+            "x": 1700,
+            "y": 704,
+            "radius": 102
+          },
+          {
+            "name": "PGC 44644 (DRCG27-128)",
+            "x": 716,
+            "y": 977,
+            "radius": 97
+          },
+          {
+            "name": "PGC 44624 (NGC4872)",
+            "x": 989,
+            "y": 1064,
+            "radius": 94
+          },
+          {
+            "name": "PGC 44576 (DRCG27-158)",
+            "x": 1615,
+            "y": 707,
+            "radius": 93
+          },
+          {
+            "name": "PGC 44651 (DRCG27-127)",
+            "x": 671,
+            "y": 782,
+            "radius": 89
+          },
+          {
+            "name": "PGC 44594 (DRCG27-156)",
+            "x": 1362,
+            "y": 374,
+            "radius": 89
+          },
+          {
+            "name": "PGC 1821555",
+            "x": 1089,
+            "y": 1409,
+            "radius": 87
+          },
+          {
+            "name": "PGC 44635 ([RB67]37)",
+            "x": 796,
+            "y": 336,
+            "radius": 87
+          },
+          {
+            "name": "PGC 1822726",
+            "x": 1705,
+            "y": 775,
+            "radius": 83
+          },
+          {
+            "name": "PGC 44656 (DRCG27-153)",
+            "x": 503,
+            "y": 430,
+            "radius": 81
+          },
+          {
+            "name": "PGC 1821341",
+            "x": 184,
+            "y": 1525,
+            "radius": 79
+          },
+          {
+            "name": "PGC 126792",
+            "x": 1436,
+            "y": 389,
+            "radius": 74
+          },
+          {
+            "name": "PGC 44649 (CGCG160-233)",
+            "x": 582,
+            "y": 1375,
+            "radius": 72
+          },
+          {
+            "name": "PGC 44666 ([RB67]55)",
+            "x": 184,
+            "y": 1367,
+            "radius": 59
+          },
+          {
+            "name": "PGC 44595 ([RB67]11)",
+            "x": 1417,
+            "y": 1240,
+            "radius": 55
+          },
+          {
+            "name": "2MASX J13000809+2758372",
+            "x": -709,
+            "y": 661,
+            "radius": 727
+          },
+          {
+            "name": "2MASX J12592333+2754418",
+            "x": 1515,
+            "y": 1544,
+            "radius": 196
+          },
+          {
+            "name": "2MASX J12593276+2759008",
+            "x": 1046,
+            "y": 573,
+            "radius": 167
+          },
+          {
+            "name": "2MASX J12595601+2802052",
+            "x": -109,
+            "y": -119,
+            "radius": 163
+          },
+          {
+            "name": "2MASX J12593079+2753028",
+            "x": 1144,
+            "y": 1916,
+            "radius": 161
+          },
+          {
+            "name": "2MASX J12591525+2758147",
+            "x": 1916,
+            "y": 745,
+            "radius": 160
+          },
+          {
+            "name": "2MASX J12594681+2758252",
+            "x": 348,
+            "y": 706,
+            "radius": 155
+          },
+          {
+            "name": "2MASX J12594438+2754447",
+            "x": 468,
+            "y": 1533,
+            "radius": 146
+          },
+          {
+            "name": "2MASX J12592544+2758238",
+            "x": 1409,
+            "y": 712,
+            "radius": 131
+          },
+          {
+            "name": "2MASX J12593789+2754267",
+            "x": 791,
+            "y": 1601,
+            "radius": 124
+          },
+          {
+            "name": "2MASX J12593827+2759137",
+            "x": 772,
+            "y": 525,
+            "radius": 106
+          },
+          {
+            "name": "2MASX J12592016+2753098",
+            "x": 1672,
+            "y": 1889,
+            "radius": 102
+          },
+          {
+            "name": "2MASX J12592529+2758048",
+            "x": 1417,
+            "y": 783,
+            "radius": 99
+          },
+          {
+            "name": "2MASX J12592265+2753488",
+            "x": 1549,
+            "y": 1743,
+            "radius": 98
+          },
+          {
+            "name": "2MASX J12594423+2757307",
+            "x": 476,
+            "y": 911,
+            "radius": 96
+          },
+          {
+            "name": "2MASX J12592657+2759548",
+            "x": 1353,
+            "y": 371,
+            "radius": 80
+          },
+          {
+            "name": "2MASX J12592136+2758248",
+            "x": 1612,
+            "y": 708,
+            "radius": 79
+          },
+          {
+            "name": "2MASX J12595013+2755292",
+            "x": 182,
+            "y": 1366,
+            "radius": 73
+          },
+          {
+            "name": "2MASX J12594234+2755287",
+            "x": 570,
+            "y": 1368,
+            "radius": 69
+          },
+          {
+            "name": "2MASX J12592536+2756038",
+            "x": 1413,
+            "y": 1237,
+            "radius": 56
+          },
+          {
+            "name": "Gaia DR3 1460810534484815360 (G 7.1)",
+            "x": 1035,
+            "y": -535,
+            "radius": 720
+          },
+          {
+            "name": "Gaia DR3 1460807575250809216 (G 12.1)",
+            "x": 1245,
+            "y": 1193,
+            "radius": 103
+          },
+          {
+            "name": "Gaia DR3 1460807064151234048 (G 14.8)",
+            "x": 1546,
+            "y": 1494,
+            "radius": 29
+          }
+        ]
+      },
+      "nativeRemoval": {
+        "directory": ".local/nebula-lab/ngc-4874/nox",
+        "model": {
+          "path": ".local/open-star-removal/noxGeneratorColor.pb"
+        }
+      },
+      "grid": {
+        "width": 150,
+        "height": 150,
+        "depth": 150
+      },
+      "prior": {
+        "axis": [
+          -0.573576,
+          0.819152,
+          0
+        ],
+        "center": [
+          74.5,
+          74.5,
+          74.5
+        ],
+        "binWidth": 1
+      },
+      "tau": 0.001,
+      "iterations": 100,
+      "blackLevel": [
+        0.039,
+        0.039,
+        0.027
+      ],
+      "displayExposure": 1.5,
+      "slices": 48,
+      "assumptions": [
+        "Depth follows the deprojected density (Prugniel & Simien 1997) of Kluge et al.'s (2020) single Sérsic fit to the semimajor-axis profile of Abell 1656's brightest cluster galaxy, NGC 4874, and the intracluster light around it (Table 4, row A1656: n = 9.00 +/- 0.90, r_e = 784 (+291, -228) kpc at their Table 1 scale of 0.469 kpc per arcsec, 1671.6 arcsec; 770.7 kpc at 95.1 Mpc), on an oblate spheroid whose axis is the galaxy's minor axis (position angle 145 degrees: the 2MASS Extended Source Catalog K-band 3-sigma isophote of 2MASX J12593570+2757338 has its major axis at 55 degrees and axis ratio 0.94) in the plane of the sky. The half-light radius is seven times the radius drawn, so only the fit's inner slope shapes the depth. The survey image's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
+        "The prior ends at 0.144 half-light radii (240 arcsec, 110.7 kpc). That edge is chosen here, not published: it is where the cutout's light reaches its sky level, measured on the cleaned cutout in 10 arcsec elliptical annuli. Light beyond that spheroid is not drawn.",
+        "The 1800 x 1800 px cutout is requested on NGC 4874's 2MASS Extended Source Catalog position (2MASX J12593570+2757338: 194.898788, +27.959389) in a tangent projection, north up and east left, 0.133333 degrees wide (twice 240 arcsec, 0.2667 arcsec per px), oversampling the survey's 0.396 arcsec pixel, so its registration is the request's.",
+        "NOX removes stars; what it leaves is masked afterwards: 33 neighbouring galaxies from HyperLEDA PGC (Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) at 3 times their D25 radius, M87's rule; 20 from the 2MASS Extended Source Catalog (CDS VII/233), which sizes the galaxies HyperLEDA gives no D25, at 3 times their K-band 20 mag isophotal radius; and the 3 Gaia DR3 stars brighter than G = 15, whose haloes NOX leaves, at 45 arcsec for G = 11, scaled with brightness (a factor 10 in radius per 5 magnitudes; chosen here from the haloes left in the cleaned cutouts). No mask reaches beyond half its distance from NGC 4874's centre, so every isophote keeps unmasked light. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the measured axis ratio and position angle), never more than it held.",
+        "Every pixel is clamped to the median of the 75 px square around it, so star haloes and small background galaxies that NOX and the masks leave are not spread through the spheroid.",
+        "Black level per channel: the median of the cleaned cutout on the isophote where the prior ends (230 to 240 arcsec), red 0.039, green 0.039, blue 0.027 (10, 10 and 7 of 255), so the light fades to nothing at the spheroid's edge.",
+        "The color is the survey's published g, r, i display composite, not calibrated photometry. Single-image depth is modelled by the prior, not measured."
+      ],
+      "compactClamp": {
+        "windowPx": 75,
+        "basis": "75 px (20.0 arcsec, 9.2 kpc), chosen here: about twice the width of the largest uncatalogued galaxies the masks leave in the cleaned cutout, so they drop out."
+      },
+      "shapePrior": {
+        "components": [
+          {
+            "kind": "sersic",
+            "axis": [
+              -0.573576,
+              0.819152,
+              0
+            ],
+            "radius": 522.376,
+            "radialSigma": 1,
+            "axialSigma": 1,
+            "weight": 1,
+            "sersicIndex": 9,
+            "axisRatio": 0.94
+          }
+        ],
+        "sigmaCutoff": 0.144
+      },
+      "modelReference": {
+        "paper": "https://arxiv.org/abs/1908.08544"
+      }
+    },
+    "nativeRemoval": {
+      "settings": {
+        "directory": ".local/nebula-lab/ngc-4874/nox",
+        "model": {
+          "path": ".local/open-star-removal/noxGeneratorColor.pb"
+        }
+      },
+      "source": ".local/nebula-lab/ngc-4874/nox-source.png",
+      "receipt": ".local/nebula-lab/ngc-4874/nox/result.json",
+      "diffuse": ".local/nebula-lab/ngc-4874/nox/diffuse.png",
+      "timing": {
+        "modelLoadSeconds": 0.19759387499652803,
+        "inferenceSeconds": 5.186754207068589,
+        "inferredTiles": 25,
+        "batchSize": 2,
+        "threads": 6
+      }
+    },
+    "uncoveredSignalFractions": [
+      0.004845080653163656,
+      0.003778131193702414,
+      0.007459515024032996
+    ],
+    "projectionCaveat": "Agreement on supported rays is imposed by normalization and does not validate depth geometry.",
+    "coordinateMeaning": "Image x right, y up in display; dimensionless units. No measured gas density, scale, distance or sky registration.",
+    "reports": [
+      {
+        "iteration": 0,
+        "relativeChange": 0,
+        "relativeProjectionError": 0.01621778658672771
+      },
+      {
+        "iteration": 0,
+        "relativeChange": 0,
+        "relativeProjectionError": 0.015142701752509688
+      },
+      {
+        "iteration": 0,
+        "relativeChange": 0,
+        "relativeProjectionError": 0.023920344077755878
+      }
+    ]
+  },
+  "interpretation": "Three RGB emissivity voxel fields before optical integration, not rendered slices."
+}

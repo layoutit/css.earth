@@ -15,7 +15,7 @@ import { CATALOGUE_POINTS_SCHEMA } from '@cssearth/objects';
 import { publishedCatalogueBankPath, readCatalogueBank, writeCatalogueBank } from '@cssearth/bake/volume/node';
 import { inventoryPreparedAssets, packPreparedBinary, readInventory } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/objects';
-import { POINT_FIELD_BANK_MAGIC, pointFieldBankRegions } from '@cssearth/renderer/stars/point-field-bank.ts';
+import { POINT_FIELD_BANK_MAGIC, pointFieldBankRegions } from '@cssearth/objects';
 
 const objects = process.argv.slice(2);
 if (!objects.length) throw new TypeError('Usage: pack-prepared-banks.mts <object-directory>...');

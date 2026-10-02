@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "ngc-4889-volume",
+  "method": "axial-symmetry",
+  "request": {
+    "path": "labs/nebula/models/ngc-4889/experiment.json"
+  },
+  "inputPins": [],
+  "sky": {
+    "centerIcrsDegrees": [
+      195.033737,
+      27.977024
+    ],
+    "distancePc": 95100000,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 47.99988
+  },
+  "sourceUrl": "https://www.sdss.org/",
+  "description": "NGC 4889's starlight as a volume: the survey image with the Milky Way stars removed (NOX) and neighbouring galaxies masked, its light along each sight line spread in depth by the deprojected density of Dullo's published Sérsic fit, on an oblate spheroid about NGC 4889's minor axis in the plane of the sky. Depth follows that stated shape; it is not measured.",
+  "defaultDataset": "sdss-optical",
+  "framingRadiusUnits": 5,
+  "attachedTo": "ngc-4889",
+  "acceptedLabResult": "ngc-4889-inferred",
+  "symmetryDirectory": ".local/nebula-lab/planetary/ngc-4889-inferred",
+  "compactInputs": {
+    "path": "src/objects/ngc-4889-volume/source/compact/model.json"
+  },
+  "compactMethod": "symmetry"
+}

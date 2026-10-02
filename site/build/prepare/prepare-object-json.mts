@@ -40,6 +40,11 @@ export async function writeObjectJson(id:string, definitionValue:unknown, option
   return pin;
 }
 
+/** Each motion's target and first-keyframe transform: what the orientation solve reads of a definition's spins. */
+export function spinStarts(definition: { readonly motion?: readonly { readonly target: number; readonly keyframes: readonly { readonly offset?: number | null; readonly transform?: unknown }[] }[] }): string {
+  return JSON.stringify((definition.motion ?? []).map(motion => [motion.target, motion.keyframes.find(frame => frame.offset === 0)?.transform ?? null]));
+}
+
 /** Finalize into explicit destinations. Source/style reads still use the real project. */
 export async function finalizeObjectJson(id: string, definitionValue: unknown, target: {
   projectRoot: string; objectDirectory: string; preparedDirectory: string; descriptorPath: string;
@@ -55,10 +60,22 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
     throw new TypeError('Prepared object descriptor identity is invalid.');
   }
   const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./prepare-world-navigation.ts');
-  const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot });
+  let preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot });
+  const solvedSpins = spinStarts(definition);
   definition = requireObjectRuntimeDefinition(preparedNavigation.definition);
   if (options?.keepBindings) refuseStaleKeptBindings(id, preparedNavigation.systemTransform);
-  else definition = await preparePresentationBindings(definition, projectRoot, { ...options, pageStyles: objectPageStyles });
+  else {
+    definition = await preparePresentationBindings(definition, projectRoot, { ...options, pageStyles: objectPageStyles });
+    // The solve reads each spin at its first keyframe, and the binding is what resolves the spins from the page's styles.
+    // A fresh bake reaches here with none, and was solved as if the body did not spin: Mars came out 145° off, Pluto
+    // 180°, Venus and Mercury 118° (2026-10-02). Solve again with the spins the binding found, and bind to that solve.
+    if (spinStarts(definition) !== solvedSpins) {
+      // The second solve replaces the first one's transform, so the scene on disk takes the first before it runs.
+      await writeWorldNavigationArtifacts(preparedDirectory, { ...preparedNavigation, definition }, requireRecord(JSON.parse(await readFile(resolve(preparedDirectory, 'scene.json'), 'utf8'))));
+      preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot });
+      definition = await preparePresentationBindings(requireObjectRuntimeDefinition(preparedNavigation.definition), projectRoot, { ...options, pageStyles: objectPageStyles });
+    }
+  }
   const scene:unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'scene.json'), 'utf8'));
   await writeWorldNavigationArtifacts(preparedDirectory, { ...preparedNavigation, definition }, requireRecord(scene));
   descriptor = parseObjectDescriptor({ ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } });

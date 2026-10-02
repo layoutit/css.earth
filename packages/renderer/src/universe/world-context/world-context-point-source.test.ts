@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { readFile } from 'node:fs/promises';
-import type { PreparedCssPointField } from '../../stars/types.js';
+import type { PreparedCssPointField } from '@cssearth/objects';
 import { parsePreparedWorldContext } from '@cssearth/objects';
 import { mountWorldContextPointSource, worldContextPointAppearance, worldContextPointSourceFade, worldContextPointSourceGain } from './world-context-point-source.js';
 
