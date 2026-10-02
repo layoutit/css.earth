@@ -1,0 +1,131 @@
+{
+  "schema": "cssearth-emission-inference@1",
+  "id": "ngc-4696-inferred",
+  "source": {
+    "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&width=2500&height=2500&fov=0.182667&projection=TAN&coordsys=icrs&ra=192.205322&dec=-41.311089&format=jpg",
+    "width": 2500,
+    "height": 2500,
+    "publisher": "https://www.legacysurvey.org/dr10/",
+    "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z colour HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+  },
+  "crop": {
+    "left": 0,
+    "top": 0,
+    "width": 2500,
+    "height": 2500
+  },
+  "pointMasks": [],
+  "neighbourMasks": {
+    "source": "paturel-2003-hyperleda-pgc",
+    "fill": "isophote",
+    "masks": [
+      {
+        "name": "PGC 43323 (ESO322-93)",
+        "x": 619,
+        "y": 1634,
+        "radius": 441
+      },
+      {
+        "name": "PGC 43322 ([DCL86]249)",
+        "x": 662,
+        "y": 2349,
+        "radius": 216
+      },
+      {
+        "name": "PGC 43269 (DRCG56-40)",
+        "x": 2037,
+        "y": 1193,
+        "radius": 184
+      },
+      {
+        "name": "PGC 43340 (DRCG56-36)",
+        "x": 11,
+        "y": 1581,
+        "radius": 156
+      },
+      {
+        "name": "PGC 43294 ([DCL86]241)",
+        "x": 1274,
+        "y": 683,
+        "radius": 139
+      },
+      {
+        "name": "PGC 43280 ([DCL86]236)",
+        "x": 1664,
+        "y": 664,
+        "radius": 121
+      },
+      {
+        "name": "PGC 577429",
+        "x": 704,
+        "y": 554,
+        "radius": 111
+      }
+    ]
+  },
+  "nativeRemoval": {
+    "directory": ".local/nebula-lab/ngc-4696/nox",
+    "model": {
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
+    }
+  },
+  "grid": {
+    "width": 150,
+    "height": 150,
+    "depth": 150
+  },
+  "prior": {
+    "axis": [
+      0.036644,
+      0.999328,
+      0
+    ],
+    "center": [
+      74.5,
+      74.5,
+      74.5
+    ],
+    "binWidth": 1
+  },
+  "tau": 0.001,
+  "iterations": 100,
+  "blackLevel": 0.089,
+  "displayExposure": 1.5,
+  "slices": 48,
+  "assumptions": [
+    "Depth follows the deprojected density (Prugniel & Simien 1997) of Gao et al.'s (2020) Table 2 single-Sérsic R-band fit to NGC 4696: n = 2.99 +/- 0.13, effective radius 16.65 +/- 1.46 kpc, which is 91.3 arcsec at the Carnegie-Irvine Galaxy Survey's own scale for this galaxy (10.94 kpc per arcmin, Ho et al. 2011, CDS J/ApJS/197/21), ellipticity 0.219 (axis ratio 0.781). The spheroid is oblate about NGC 4696's minor axis (position angle 2.1 degrees: the survey's photometric major axis is at 92.1 +/- 1.3 degrees, Ho et al. 2011; Gao et al.'s table gives no angle), placed in the plane of the sky. The survey image's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
+    "The prior ends at 3.601 half-light radii, 328.8 arcsec (64.2 kpc at 40.3 Mpc): half of Ho et al.'s (2011) diameter at 26.5 B mag per square arcsec, 10.96 arcmin. A presentation choice of where to stop a fit its authors integrate to infinity; light beyond that spheroid is not drawn.",
+    "The 2500 x 2500 px cutout is requested on NGC 4696's 2MASS Extended Source Catalog position (2MASX J12484927-4118399: 192.205322, -41.311089) in a tangent projection, north up and east left, 0.182667 degrees wide (twice 328.8 arcsec), 0.263 arcsec per pixel, so its registration is the request's. The centroid of the bright core falls within 1 px (0.2 arcsec) of the image centre.",
+    "NOX removes stars; 7 catalogued neighbouring galaxies (HyperLEDA PGC, Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) are masked afterwards at 3 times their D25 radius, never more than three quarters of their distance from the centre. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the fit's axis ratio and the survey's position angle), never more than it held.",
+    "Every pixel takes the median of the 41 px square around it, so star haloes and small background galaxies that NOX and the masks leave, and the survey's saturation bleed trails and the dark holes it leaves at bright stars, are not spread through the spheroid. The same median removes the dust lane across the core, which is narrower than the window.",
+    "Black level 0.089 is the median of the cutout's four 150 px corners (23 of 255).",
+    "The colour is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes NGC 4696's faint outer light and leaves straight edges where its coadded tiles meet. Single-image depth is modelled by the prior, not measured."
+  ],
+  "compactClamp": {
+    "windowPx": 41,
+    "basis": "41 px (10.8 arcsec, 2.1 kpc) is about two and a half of the grid's 16.7 px cells, the proportion M87's recipe uses: light more compact than that cannot be NGC 4696's smooth light at this grid.",
+    "fillDark": true
+  },
+  "shapePrior": {
+    "components": [
+      {
+        "kind": "sersic",
+        "axis": [
+          0.036644,
+          0.999328,
+          0
+        ],
+        "radius": 20.829,
+        "radialSigma": 1,
+        "axialSigma": 1,
+        "weight": 1,
+        "sersicIndex": 2.99,
+        "axisRatio": 0.781
+      }
+    ],
+    "sigmaCutoff": 3.601
+  },
+  "modelReference": {
+    "paper": "https://arxiv.org/abs/2001.00331"
+  }
+}

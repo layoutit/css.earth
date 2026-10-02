@@ -271,12 +271,28 @@
       "bytes": 15188
     },
     {
+      "path": "src/objects/ngc-3311-volume/prepared/presentation.json",
+      "bytes": 1474
+    },
+    {
+      "path": "public/scenes/ngc-3311-volume/datasets/legacy-optical.webp",
+      "bytes": 19904
+    },
+    {
       "path": "src/objects/ngc-3521-layers/prepared/presentation.json",
       "bytes": 1395
     },
     {
       "path": "public/scenes/ngc-3521-layers/datasets/optical.webp",
       "bytes": 7360
+    },
+    {
+      "path": "src/objects/ngc-4696-volume/prepared/presentation.json",
+      "bytes": 1426
+    },
+    {
+      "path": "public/scenes/ngc-4696-volume/datasets/legacy-optical.webp",
+      "bytes": 34258
     },
     {
       "path": "src/objects/ngc-6744-layers/prepared/presentation.json",
@@ -364,7 +380,7 @@
     },
     {
       "path": "src/objects/local-group-galaxies/prepared/catalogue.json",
-      "bytes": 706427
+      "bytes": 709374
     }
   ],
   "images": {
@@ -971,6 +987,24 @@
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1037a/"
     },
+    "ngc-3311-volume/legacy-optical": {
+      "url2x": "/navigation/focus-ngc-3311-volume-legacy-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-3311-volume/prepared/presentation.json",
+        "public/scenes/ngc-3311-volume/datasets/legacy-optical.webp"
+      ],
+      "credit": "Legacy Surveys / CDS",
+      "sourceUrl": "https://www.legacysurvey.org/dr10/"
+    },
+    "ngc-3311-volume": {
+      "url2x": "/navigation/focus-object-ngc-3311-volume@2x.webp",
+      "inputs": [
+        "src/objects/ngc-3311-volume/prepared/presentation.json",
+        "public/scenes/ngc-3311-volume/datasets/legacy-optical.webp"
+      ],
+      "credit": "Legacy Surveys / CDS",
+      "sourceUrl": "https://www.legacysurvey.org/dr10/"
+    },
     "ngc-3521-layers/optical": {
       "url2x": "/navigation/focus-ngc-3521-layers-optical@2x.webp",
       "inputs": [
@@ -988,6 +1022,24 @@
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1129a/"
+    },
+    "ngc-4696-volume/legacy-optical": {
+      "url2x": "/navigation/focus-ngc-4696-volume-legacy-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4696-volume/prepared/presentation.json",
+        "public/scenes/ngc-4696-volume/datasets/legacy-optical.webp"
+      ],
+      "credit": "Legacy Surveys / CDS",
+      "sourceUrl": "https://www.legacysurvey.org/dr10/"
+    },
+    "ngc-4696-volume": {
+      "url2x": "/navigation/focus-object-ngc-4696-volume@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4696-volume/prepared/presentation.json",
+        "public/scenes/ngc-4696-volume/datasets/legacy-optical.webp"
+      ],
+      "credit": "Legacy Surveys / CDS",
+      "sourceUrl": "https://www.legacysurvey.org/dr10/"
     },
     "ngc-6744-layers/optical": {
       "url2x": "/navigation/focus-ngc-6744-layers-optical@2x.webp",
@@ -1189,7 +1241,9 @@
     "ngc-253-layers": "ngc-253-layers",
     "ngc-2903-layers": "ngc-2903-layers",
     "ngc-300-layers": "ngc-300-layers",
+    "ngc-3311-volume": "ngc-3311-volume",
     "ngc-3521-layers": "ngc-3521-layers",
+    "ngc-4696-volume": "ngc-4696-volume",
     "ngc-6744-layers": "ngc-6744-layers",
     "ngc-6946-layers": "ngc-6946-layers",
     "omega-centauri-volume": "omega-centauri-volume",

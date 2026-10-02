@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-3311-volume",
+  "name": "NGC 3311",
+  "defaultDataset": "legacy-optical",
+  "bank": {
+    "path": "src/objects/ngc-3311-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "labs/nebula/models/ngc-3311/experiment.json"
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/ngc-3311-volume/source/delivery.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "legacy-optical",
+      "label": "Legacy Surveys · optical",
+      "title": "NGC 3311 in visible light",
+      "description": "The DESI Legacy Imaging Surveys' view of NGC 3311 with the Milky Way stars removed (NOX) and neighbouring galaxies masked, among them NGC 3309, which is not drawn. Its light is spread in depth through the spheroid of Arnaboldi et al.'s published fit. Depth is modelled, not measured, and the survey's sky subtraction removes the faint outer light.",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "detail": "2200 × 2200 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "DECam g, r, i, z"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "9.3 × 9.3 arcmin"
+        },
+        {
+          "id": "distance",
+          "label": "Distance",
+          "value": "54.3 Mpc"
+        }
+      ],
+      "input": "legacy-optical",
+      "preview": {
+        "path": ".local/nebula-lab/planetary/ngc-3311-inferred-original.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&width=2200&height=2200&fov=0.155644&projection=TAN&coordsys=icrs&ra=159.178421&dec=-27.528339&format=jpg"
+      }
+    }
+  ]
+}
