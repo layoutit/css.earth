@@ -13,6 +13,8 @@ PSR J0437−4715 is a neutron star 157 parsecs away, 1.4 times the Sun's mass in
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law (u1 0.939, u2 0.029) fitted to the bolometric intensity of the NSX hydrogen atmosphere table nsx_H_v200804.out (Ho & Lai 2001, MNRAS 327, 1081; Ho & Heinke 2009, Nature 462, 71), distributed with X-PSI, at log g 14.26 and 250,000 K ([photometry/nsx-limb-darkening.json](source/photometry/nsx-limb-darkening.json) keeps the profile; least-squares fit to the table's 62 emission cosines of 0.05 and above; largest miss 0.003 of the centre intensity). The hot regions' own laws differ little: u1 0.870, u2 -0.006 at 1.19 million K; u1 0.836, u2 -0.015 at 1.58 million K; u1 0.925, u2 0.019 at 0.53 million K.
 
+**Posterior.** The map draws the mean over 2,006 of the fit's 218,553 posterior samples (every 109th), so an edge is sharp where the samples agree and graded where they differ. [science/choudhury-2024/posterior-samples.tsv](source/science/choudhury-2024/posterior-samples.tsv) keeps those samples: Choudhury et al. (2024), reproduction package (Zenodo) (https://doi.org/10.5281/zenodo.13766753). The regions listed above are the single best sample, which the paper's figure draws; the average differs from it wherever the posterior is wide.
+
 **Spin.** 173.6879456649439 turns a second; the north pole is 137.506° from the line of sight (Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: spin frequency, and the orbital inclination 137.506(16) degrees that Choudhury et al. (2024) use as the spin axis's inclination). Longitude 0 is the meridian facing Earth at the fit's phase zero. The star is drawn at that instant and does not turn.
 
 ## Evidence
@@ -20,13 +22,13 @@ PSR J0437−4715 is a neutron star 157 parsecs away, 1.4 times the Sun's mass in
 Generated 2026-10-02 by [pulsar.mts](../../../packages/telescope-cli/src/new-object/pulsar.mts) from the spec kept in [new-object.json](source/preparation/new-object.json).
 
 - [hot-region-map.test.mts](../../../packages/bake/src/objects/raster/hot-region-map.test.mts) reads the record and checks it against what the paper says of its own fit.
-- The page as it opens, seen from Earth at the fit's phase zero. The paper's [Figure 11](https://arxiv.org/abs/2407.06789), left panel, draws the same view: the two-temperature spot just west of the Earth-facing meridian in the south, the ring out of sight around the north pole.
+- The page as it opens, seen from Earth at the fit's phase zero. The paper's [Figure 11](https://arxiv.org/abs/2407.06789), left panel, draws the best sample from the same view: the two-temperature spot just west of the Earth-facing meridian in the south, the ring out of sight around the north pole.
 
-![PSR J0437−4715 as the page opens: a small hot spot inside a warm patch on the cooler surface, dimmed toward the limb](evidence/default-view.jpg)
+![PSR J0437−4715 as the page opens: a soft warm patch with a brighter core on the cooler surface, dimmed toward the limb](evidence/default-view.jpg)
 
 ## Known problems
 
-- **A fit, not an image.** The regions are the shapes the model allows: circles, rings and overlapping circles, each at one temperature. Their sharp edges are the model's.
+- **A fit, not an image.** The regions are the shapes the model allows: circles, rings and overlapping circles, each at one temperature. The soft edges are the spread of the posterior, not a temperature gradient the fit resolves.
 - **Two papers in one map.** The hot regions and the temperature of the rest of the surface come from different fits to different telescopes; no single fit made this map. The rest of the surface is drawn uniform.
 - **Assumptions of the frame.** The axis's position angle on the sky is a convention. The bending of light by the star's gravity and its rotational flattening are not drawn.
 - **Model limb.** The limb darkening is a model atmosphere's, at one temperature for the whole disc, not a measurement of this star. The table is the fully ionized atmosphere of the hot-region fit, applied here to the cooler surface too.

@@ -25,10 +25,11 @@
       "id": "hot-regions",
       "subject": "Hot regions",
       "status": "included",
-      "finding": "Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021, transcribed as science/choudhury-2024/hot-regions.json and drawn without refitting: 2 regions, 0.53 million K to 1.58 million K. The surface outside them is at 250,000 K: Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions (https://arxiv.org/abs/2605.05429).",
+      "finding": "Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021, transcribed as science/choudhury-2024/hot-regions.json and drawn without refitting as the mean over 2,006 of the fit's 218,553 posterior samples (every 109th), so an edge is sharp where the samples agree and graded where they differ: 2 regions, 0.53 million K to 1.58 million K. The surface outside them is at 250,000 K: Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions (https://arxiv.org/abs/2605.05429).",
       "evidence": [
         "https://arxiv.org/abs/2407.06789",
-        "https://arxiv.org/abs/2605.05429"
+        "https://arxiv.org/abs/2605.05429",
+        "https://doi.org/10.5281/zenodo.13766753"
       ]
     },
     {

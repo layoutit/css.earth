@@ -81,5 +81,66 @@
     },
     "source": "Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions",
     "url": "https://arxiv.org/abs/2605.05429"
+  },
+  "posterior": {
+    "path": "science/choudhury-2024/posterior-samples.tsv",
+    "source": "Choudhury et al. (2024), reproduction package, https://doi.org/10.5281/zenodo.13766753: equal-weight posterior samples of the headline CST+PDT run (nlive20000_expf3.3_noCONST_noMM_tol0.1post_equal_weights.dat)",
+    "columns": [
+      {
+        "id": "primary",
+        "antiphased": false,
+        "phaseCycles": {
+          "column": "p__phase_shift"
+        },
+        "superseding": {
+          "colatitudeRadians": {
+            "column": "p__super_colatitude"
+          },
+          "radiusRadians": {
+            "column": "p__super_radius"
+          },
+          "log10TemperatureK": {
+            "column": "p__super_temperature"
+          }
+        },
+        "omit": {
+          "radiusRadians": {
+            "column": "p__omit_radius"
+          }
+        }
+      },
+      {
+        "id": "secondary",
+        "antiphased": true,
+        "phaseCycles": {
+          "column": "s__phase_shift"
+        },
+        "superseding": {
+          "colatitudeRadians": {
+            "column": "s__super_colatitude"
+          },
+          "radiusRadians": {
+            "column": "s__super_radius"
+          },
+          "log10TemperatureK": {
+            "column": "s__super_temperature"
+          }
+        },
+        "cede": {
+          "colatitudeRadians": {
+            "column": "s__cede_colatitude"
+          },
+          "azimuthRadians": {
+            "column": "s__cede_azimuth"
+          },
+          "radiusRadians": {
+            "column": "s__cede_radius"
+          },
+          "log10TemperatureK": {
+            "column": "s__cede_temperature"
+          }
+        }
+      }
+    ]
   }
 }

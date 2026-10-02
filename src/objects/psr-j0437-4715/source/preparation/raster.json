@@ -36,7 +36,7 @@
         "outputLongitudeOrigin": 0,
         "units": "K",
         "minimum": 200000,
-        "maximum": 1600000,
+        "maximum": 1300000,
         "colors": [
           "#0d0887",
           "#7e03a8",
@@ -46,8 +46,8 @@
         ],
         "labels": [
           "0.2",
-          "0.9",
-          "1.6"
+          "0.75",
+          "1.3"
         ],
         "limbDarkening": {
           "law": "quadratic",

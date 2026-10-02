@@ -82,8 +82,8 @@
           "title": "Surface temperature",
           "labels": [
             "0.2",
-            "0.9",
-            "1.6"
+            "0.75",
+            "1.3"
           ],
           "recipe": {
             "palette": [
@@ -115,14 +115,14 @@
             ],
             "labels": [
               "0.2",
-              "0.9",
-              "1.6"
+              "0.75",
+              "1.3"
             ]
           },
           "meta": "million K",
           "sourceUrl": "https://arxiv.org/abs/2407.06789"
         },
-        "notes": "The hot regions of PSR J0437−4715 in Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021: 2 regions built from circles, 0.53 million K to 1.58 million K, covering 4.9% of the surface. They are the shapes the fit allows, not an image. The rest of the surface is drawn at 250,000 K, the temperature Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions for the surface outside the hot regions. The disc is dimmed toward the limb by the quadratic law (u1 0.939, u2 0.029) fitted to the bolometric intensity of the NSX hydrogen atmosphere table nsx_H_v200804.out (Ho & Lai 2001, MNRAS 327, 1081; Ho & Heinke 2009, Nature 462, 71), distributed with X-PSI, at log g 14.26 and 250,000 K. The false colour runs from 0.2 to 1.6 million K."
+        "notes": "The hot regions of PSR J0437−4715 in Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021: 2 regions built from circles, 0.53 million K to 1.58 million K, covering 4.9% of the surface. The map draws the mean over 2,006 of the fit's 218,553 posterior samples (every 109th), so an edge is sharp where the samples agree and graded where they differ. They are the shapes the fit allows, not an image. The rest of the surface is drawn at 250,000 K, the temperature Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions for the surface outside the hot regions. The disc is dimmed toward the limb by the quadratic law (u1 0.939, u2 0.029) fitted to the bolometric intensity of the NSX hydrogen atmosphere table nsx_H_v200804.out (Ho & Lai 2001, MNRAS 327, 1081; Ho & Heinke 2009, Nature 462, 71), distributed with X-PSI, at log g 14.26 and 250,000 K. The false colour runs from 0.2 to 1.3 million K."
       }
     ]
   },

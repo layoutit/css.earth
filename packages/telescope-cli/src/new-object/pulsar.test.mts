@@ -69,3 +69,19 @@ test('a pulsar package is its cited values and its hot-region map, with no tempe
   assert.ok(files.has('src/objects/test-pulsar/source/science/a-paper/hot-regions.json') && files.has('src/sources/arxiv-2407-06789.json'));
   assert.ok(![...files.values()].some(value => String(value).includes('TODO(new-object)')), 'nothing is left for a person to fill in');
 });
+
+test("posterior samples are thinned into the package and the map draws their mean", async () => {
+  const column = (name: string) => ({ column: name });
+  const record = { ...pulsar.hotRegions.record, bulk: { temperatureK: cell(250000), source: 'Another paper, Table 1 measure', url: paper },
+    posterior: { path: 'science/a-paper/posterior-samples.tsv', source: 'a deposit', columns: [{ id: 'spot', phaseCycles: column('phase'), superseding: { colatitudeRadians: column('colatitude'), radiusRadians: column('radius'), log10TemperatureK: column('temperature') } }] } };
+  const spec = { ...pulsar, hotRegions: { ...pulsar.hotRegions, record }, posterior: { samples: 'post_equal_weights.dat', parameters: ['mass', 'phase', 'colatitude', 'radius', 'temperature'], keep: 100, url: 'https://doi.org/10.5281/zenodo.13766753', credit: 'A deposit' } };
+  assert.throws(() => parsePulsarSpec({ ...spec, hotRegions: pulsar.hotRegions }), /need hotRegions.record.posterior/u);
+  // 300 samples of one spot whose radius grows from 0.1 to 0.4 rad: every third is kept.
+  const posteriorText = Array.from({ length: 300 }, (_, i) => `1.4 0.25 1 ${(0.1 + 0.001 * i).toFixed(4)} 6.1`).join('\n');
+  const { files } = await generatePulsar(parsePulsarSpec(spec), { archive, order: 9000, epochJdTt: 2461286.5, nsxTable: nsxTable(), posteriorText });
+  const rows = String(files.get('src/objects/test-pulsar/source/science/a-paper/posterior-samples.tsv')).trim().split('\n');
+  assert.deepEqual([rows[0], rows.length], ['phase\tcolatitude\tradius\ttemperature', 101]);
+  const stored = JSON.parse(String(files.get('src/objects/test-pulsar/source/preparation/new-object.json'))) as { posterior: { samples: string } };
+  assert.equal(stored.posterior.samples, 'post_equal_weights.dat');
+  assert.match(String(files.get('src/objects/test-pulsar/README.md')), /the mean over 100 of the fit's 300 posterior samples \(every 3rd\)/u);
+});

@@ -13,19 +13,26 @@
  *     "spin": { "frequencyHz", "inclinationDegrees", "source", "url" },
  *     "hotRegions": { "label", "path", "url", "credit", "observed", "record" },
  *     "limb": { "nsxTable": path to nsx_H_v200804.out on this machine },
+ *     "posterior"?: { "samples": path to the fit's equal-weight posterior samples on this machine, "parameters": [its column names, in order],
+ *       "keep": how many evenly spaced samples to keep, "url", "credit" },
  *     "text": { "card", "introduction", "locator" }, "notes"?: [ … ] }] }
  *
  * `spin.inclinationDegrees` is the angle from the north rotation pole to the line of sight toward Earth, 0 to 180, in the fit's own
  * frame; the map's longitude 0 is the meridian that faces Earth at the fit's phase zero, and the star is drawn at that phase.
  *
+ * With `posterior`, and a record whose own `posterior` says which column feeds which region parameter, the map is the mean over a
+ * thinned set of the fit's posterior samples instead of its single best sample: the samples are kept beside the star as a small
+ * tab-separated file, every k-th row of the deposit, with only the columns the regions read.
+ *
  * The limb: the fits read a hydrogen atmosphere's emergent intensity from the NSX table (nsx-atmosphere.ts in @cssearth/bake). Its
  * bolometric intensity against the emission angle, at the star's gravity and the temperature most of the disc is at, is fitted with
  * the quadratic law and kept beside the star with the profile it was fitted to, so the law can be checked without the 256 MB table
  * (X-PSI's tutorial files, https://doi.org/10.5281/zenodo.7113931, hold it). */
+import { readFile } from 'node:fs/promises';
 import { skyBasis, directionFromRaDec } from '@cssearth/astronomy';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { NEUTRAL_CATALOGUE_COLOUR } from '@cssearth/objects';
-import { parsePublishedHotRegions, publishedHotRegionMap } from '@cssearth/bake/objects/raster';
+import { parseHotRegionSamples, parsePublishedHotRegions, publishedHotRegionMap } from '@cssearth/bake/objects/raster';
 import { checkLimbLaw, fitQuadraticLimb, neutronStarLog10Gravity, nsxLimbProfile, readNsxTable, type NsxTable } from '@cssearth/bake/objects/stellar';
 import { CHECKED } from './color.mts';
 import { bindInputs, json, type PackageFiles } from './dataset.mts';
@@ -50,13 +57,14 @@ export interface PulsarSpec {
   readonly spin: { readonly frequencyHz: number; readonly inclinationDegrees: number; readonly source: string; readonly url: string };
   readonly hotRegions: { readonly label: string; readonly path: string; readonly url: string; readonly credit: string; readonly observed: string; readonly record: Readonly<Record<string, unknown>> };
   readonly limb: { readonly nsxTable: string };
+  readonly posterior?: { readonly samples: string; readonly parameters: readonly string[]; readonly keep: number; readonly url: string; readonly credit: string };
   readonly text: DraftText; readonly notes: readonly string[];
 }
 
 export function parsePulsarSpec(value: unknown): PulsarSpec {
   const input = requireRecord(value, 'pulsar spec'), id = requireString(input.id, 'id'), at = (label: string) => `${id}.${label}`;
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a pulsar id is lowercase letters, digits and hyphens.`);
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'aliases', 'paper', 'position', 'distance', 'radialVelocity', 'radius', 'mass', 'spin', 'hotRegions', 'limb', 'text', 'notes']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'aliases', 'paper', 'position', 'distance', 'radialVelocity', 'radius', 'mass', 'spin', 'hotRegions', 'limb', 'posterior', 'text', 'notes']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown pulsar spec fields ${unknown.join(', ')}.`);
   const url = (source: unknown, label: string) => { const text = requireString(source, label); if (!URL_PATTERN.test(text)) throw new TypeError(`${label} must be an https URL, not ${text}.`); return text; };
@@ -91,6 +99,13 @@ export function parsePulsarSpec(value: unknown): PulsarSpec {
     spin: { frequencyHz: within(requireFiniteNumber(spin.frequencyHz, at('spin.frequencyHz')), at('spin.frequencyHz'), 0.01, 2000), inclinationDegrees: within(requireFiniteNumber(spin.inclinationDegrees, at('spin.inclinationDegrees')), at('spin.inclinationDegrees'), 0, 180),
       source: requireString(spin.source, at('spin.source')), url: url(spin.url, at('spin.url')) },
     hotRegions: { label: requireString(regions.label, at('hotRegions.label')), path, url: url(regions.url, at('hotRegions.url')), credit: requireString(regions.credit, at('hotRegions.credit')), observed: requireString(regions.observed, at('hotRegions.observed')), record },
+    ...(input.posterior === undefined ? {} : { posterior: (() => {
+      const p = requireRecord(input.posterior, at('posterior')), keep = requireFiniteNumber(p.keep, at('posterior.keep'));
+      if (!(Number.isInteger(keep) && keep >= 100 && keep <= 20000)) throw new RangeError(`${at('posterior.keep')} ${keep} is outside 100 to 20,000 samples.`);
+      if (requireRecord(record, at('hotRegions.record')).posterior === undefined) throw new TypeError(`${id}: posterior samples need hotRegions.record.posterior, which says which column feeds which region parameter.`);
+      return { samples: requireString(p.samples, at('posterior.samples')), parameters: requireArray(p.parameters, at('posterior.parameters')).map(name => requireString(name, at('posterior.parameters'))), keep,
+        url: url(p.url, at('posterior.url')), credit: requireString(p.credit, at('posterior.credit')) };
+    })() }),
     limb: { nsxTable: requireString(requireRecord(input.limb, `${at('limb')} (a pulsar is drawn with its atmosphere's limb: give limb.nsxTable, the path of nsx_H_v200804.out from ${NSX.url})`).nsxTable, at('limb.nsxTable')) },
     text: { card, introduction, locator: requireString(text.locator, at('text.locator')) },
     notes: input.notes === undefined ? [] : requireArray(input.notes, at('notes')).map(note => requireString(note, at('notes'))) };
@@ -125,12 +140,25 @@ export function tiltedOrientation(rightAscensionDegrees: number, declinationDegr
     displayMeridianDegrees: Math.atan2(dot(pole, cross), dot(node, toEarth)) * 180 / Math.PI };
 }
 
+const ordinal = (n: number) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] ?? 'th'}`;
 const millionKelvin = (kelvin: number) => `${(kelvin / 1e6).toFixed(2).replace(/0$/u, '')} million K`;
 
 /** Every file of the package and its shared records. Pure apart from the publication lookups; the caller writes. */
-export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, order, epochJdTt, nsxTable }: { archive?: Archive; order: number; epochJdTt: number; nsxTable?: NsxTable }) {
+export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, order, epochJdTt, nsxTable, posteriorText }: { archive?: Archive; order: number; epochJdTt: number; nsxTable?: NsxTable; posteriorText?: string }) {
   const id = spec.id, o = `src/objects/${id}`, s = `${o}/source`, body = pulsarRecord(spec, order);
-  const map = publishedHotRegionMap(parsePublishedHotRegions(spec.hotRegions.record)), regions = map.report.regions, bulk = map.report.bulk;
+  const parsed = parsePublishedHotRegions(spec.hotRegions.record);
+  // The posterior: every k-th row of the deposit's equal-weight samples, with only the columns the record's regions read.
+  const thinned = spec.posterior && parsed.posterior ? await (async () => {
+    const rows = (posteriorText ?? await readFile(spec.posterior!.samples, 'utf8')).split('\n').filter(line => line.trim()), names = spec.posterior!.parameters;
+    const used = [...new Set(JSON.stringify(parsed.posterior!.columns).match(/"column":"[^"]+"/gu)?.map(match => match.slice(10, -1)) ?? [])], indices = used.map(name => names.indexOf(name));
+    if (indices.some(index => index < 0)) throw new TypeError(`${id}: posterior.parameters lacks ${used.filter((_, i) => indices[i]! < 0).join(', ')}.`);
+    const step = Math.max(1, Math.floor(rows.length / spec.posterior!.keep)), kept = rows.filter((_, index) => index % step === 0).map(row => { const cells = row.trim().split(/\s+/u);
+      if (cells.length < names.length) throw new TypeError(`${id}: a posterior row has ${cells.length} columns, fewer than the ${names.length} named.`);
+      return indices.map(index => Number(cells[index]).toPrecision(7)).join('\t'); });
+    const tsv = `${[used.join('\t'), ...kept].join('\n')}\n`;
+    return { tsv, rows: rows.length, step, samples: parseHotRegionSamples(parsed, tsv) };
+  })() : null;
+  const map = publishedHotRegionMap(parsed, thinned?.samples), regions = map.report.regions, bulk = map.report.bulk;
   const urls = [...new Set([...bulk ? [bulk.url] : [], spec.paper.url, spec.position.url, spec.distance.url, spec.radialVelocity.url, spec.radius.url, spec.mass.url, spec.spin.url, spec.hotRegions.url])];
   const publications = new Map<string, Publication>();
   for (const link of urls) { const publication = await fetchPublication(archive, link); if (!publication) throw new TypeError(`${id}: no publication record was read for ${link}; cite the paper by arXiv, DOI or ADS link.`); publications.set(link, publication); }
@@ -140,11 +168,16 @@ export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, 
   const read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   files.set(`packages/astronomy/data/bodies/${id}.json`, `${JSON.stringify(body, null, 1)}\n`);
   files.set(`${s}/${spec.hotRegions.path}`, json(spec.hotRegions.record));
+  if (thinned) files.set(`${s}/${parsed.posterior!.path}`, thinned.tsv);
 
   // The map: its range is the drawn temperatures rounded out to 100,000 K.
   const kelvins = regions.flatMap(region => [region.superseding.kelvin, ...region.ceding ? [region.ceding.kelvin] : []]), hottest = Math.max(...kelvins), coolest = Math.min(...kelvins);
-  const minimum = Math.floor((bulk?.kelvin ?? coolest) / 1e5) * 1e5, maximum = Math.ceil(hottest / 1e5) * 1e5, labels = [minimum, (minimum + maximum) / 2, maximum].map(value => String(Number((value / 1e6).toFixed(2))));
+  // The drawn range: the best sample's temperatures, or with a posterior the map's own extremes on a one-degree grid.
+  let drawnHigh = hottest;
+  if (thinned) { drawnHigh = 0; for (let latitude = -89.5; latitude < 90; latitude++) for (let longitude = -179.5; longitude < 180; longitude++) drawnHigh = Math.max(drawnHigh, map.sample(longitude, latitude)!); }
+  const minimum = Math.floor((bulk?.kelvin ?? coolest) / 1e5) * 1e5, maximum = Math.ceil(drawnHigh / 1e5) * 1e5, labels = [minimum, (minimum + maximum) / 2, maximum].map(value => String(Number((value / 1e6).toFixed(2))));
   const share = regions.reduce((sum, region) => sum + region.superseding.sphereShare, 0), dataset = 'temperature', consumer = `${dataset}-hot-region-map`, input = `${id}-${dataset}-hot-regions`;
+  const drawnWords = thinned ? `the mean over ${thinned.samples.length.toLocaleString('en-US')} of the fit's ${thinned.rows.toLocaleString('en-US')} posterior samples (every ${ordinal(thinned.step)}), so an edge is sharp where the samples agree and graded where they differ` : "the fit's single best sample";
   const angularDiameterMas = 2 * spec.radius.value / (spec.distance.value * PARSEC_KM) / MAS_RAD;
 
   // The limb: the bolometric profile of the atmosphere table at the star's gravity, fitted at the temperature most of the disc is at.
@@ -209,7 +242,7 @@ export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, 
   content.datasets = { titleKey: 'datasets', defaultDataset: dataset, controls: [{ id: dataset, label: spec.hotRegions.label, qualification: `Published fit · ${spec.hotRegions.credit} · ${spec.hotRegions.observed}`,
     thumbnail: `${id}-dataset-${dataset}.webp`, surface: `${id}-surface-${dataset}@2x.webp`, poles: `${id}-poles-${dataset}@2x.webp`, source: { id: input, path: '../manifest.json', url: spec.hotRegions.url }, falseColor: true,
     legend: { kind: 'scale', title: bulk ? 'Surface temperature' : 'Hot-region temperature', labels, recipe: { palette, labels }, meta: 'million K', sourceUrl: spec.hotRegions.url },
-    notes: `The hot regions of ${spec.name} in ${spec.hotRegions.credit}'s fit to ${spec.hotRegions.observed}: ${regions.length} regions built from circles, ${millionKelvin(coolest)} to ${millionKelvin(hottest)}, covering ${(100 * share).toFixed(1)}% of the surface. They are the shapes the fit allows, not an image. ${bulk ? `The rest of the surface is drawn at ${Math.round(bulk.kelvin).toLocaleString('en-US')} K, the temperature ${bulk.source} for the surface outside the hot regions.` : 'The gray grid is surface the fit gives no temperature.'} The disc is ${limbSentence}. The false colour runs from ${labels[0]} to ${labels[2]} million K.` }] };
+    notes: `The hot regions of ${spec.name} in ${spec.hotRegions.credit}'s fit to ${spec.hotRegions.observed}: ${regions.length} regions built from circles, ${millionKelvin(coolest)} to ${millionKelvin(hottest)}, covering ${(100 * share).toFixed(1)}% of the surface. The map draws ${drawnWords}. They are the shapes the fit allows, not an image. ${bulk ? `The rest of the surface is drawn at ${Math.round(bulk.kelvin).toLocaleString('en-US')} K, the temperature ${bulk.source} for the surface outside the hot regions.` : 'The gray grid is surface the fit gives no temperature.'} The disc is ${limbSentence}. The false colour runs from ${labels[0]} to ${labels[2]} million K.` }] };
   content.provenance.physical.credit = `${spec.radius.source} radius; ${spec.position.source} position, motion and distance; published spin tilt, axis direction a display convention`;
   files.set(`${s}/content/object.json`, json(content));
 
@@ -225,11 +258,15 @@ export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, 
     { id: `${id}-nsx-limb-darkening`, path: NSX.path, origin: NSX.url, credit: NSX.credit, license: 'Project-computed model values; the table is distributed under CC BY 4.0 with X-PSI\'s tutorial files',
       acquisition: `Computed by packages/telescope-cli/src/new-object/pulsar.mts from nsx_H_v200804.out (${NSX.url}): nsxLimbProfile and fitQuadraticLimb in @cssearth/bake/objects/stellar.`,
       redistribution: 'Model coefficients and the profile they are fitted to, with the model cited.', consumers: [consumer],
-      sourceBinding: { kind: 'local', reason: 'Computed from the cited table; generating the package again recomputes it.' } }];
+      sourceBinding: { kind: 'local', reason: 'Computed from the cited table; generating the package again recomputes it.' } },
+    ...thinned ? [{ id: `${id}-hot-region-posterior`, path: parsed.posterior!.path, origin: spec.posterior!.url, credit: spec.posterior!.credit, license: 'Creative Commons Attribution 4.0 International',
+      acquisition: `Every ${ordinal(thinned.step)} of the ${thinned.rows.toLocaleString('en-US')} equal-weight posterior samples of the deposit (${spec.posterior!.samples.split('/').at(-1)}), the columns the hot regions read, to seven significant figures; written by packages/telescope-cli/src/new-object/pulsar.mts.`,
+      redistribution: 'A thinned copy of deposited posterior samples, with the deposit cited.', consumers: [consumer],
+      sourceBinding: { kind: 'local', reason: 'Thinned from the cited deposit; generating the package again from the deposit rewrites it.' } }] : []];
   manifest.documents = [...manifest.documents, storedSpecDocument];
   files.set(`${s}/manifest.json`, json(manifest));
   // The table's place on the machine that generated the package is not part of the spec: only its file name is kept.
-  files.set(`${o}/${STORED_SPEC}`, json({ ...spec, limb: { nsxTable: spec.limb.nsxTable.split('/').at(-1) }, order }));
+  files.set(`${o}/${STORED_SPEC}`, json({ ...spec, limb: { nsxTable: spec.limb.nsxTable.split('/').at(-1) }, ...(spec.posterior ? { posterior: { ...spec.posterior, samples: spec.posterior.samples.split('/').at(-1) } } : {}), order }));
   bindInputs(files, id);
   datasetMarkerEntry(files, id);
 
@@ -243,10 +280,11 @@ export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, 
     ...bulk ? [`- The rest of the surface: ${Math.round(bulk.kelvin).toLocaleString('en-US')} K, ${bulk.source} (${bulk.url}). It is another paper's measurement, placed here under the first paper's regions.`] : [],
     ...regions.map(region => `- \`${region.id}\`: centred ${where(region)}, radius ${region.superseding.radiusDegrees.toFixed(1)}°, ${millionKelvin(region.superseding.kelvin)}${region.omitRadiusDegrees === undefined ? '' : `, with a middle of radius ${region.omitRadiusDegrees.toFixed(1)}° that does not emit (a ring)`}${region.ceding ? `, inside a circle of radius ${region.ceding.radiusDegrees.toFixed(1)}° at ${millionKelvin(region.ceding.kelvin)}` : ''}.`), '',
     `**Limb.** The disc is ${limbSentence} ([${NSX.path}](source/${NSX.path}) keeps the profile; ${fitted}). The hot regions' own laws differ little: ${others.map(other => `u1 ${other.u1.toFixed(3)}, u2 ${other.u2.toFixed(3)} at ${millionKelvin(other.kelvin)}`).join('; ')}.`, '',
+    ...thinned ? [`**Posterior.** The map draws ${drawnWords}. [${parsed.posterior!.path}](source/${parsed.posterior!.path}) keeps those samples: ${spec.posterior!.credit} (${spec.posterior!.url}). The regions listed above are the single best sample, which the paper's figure draws; the average differs from it wherever the posterior is wide.`, ''] : [],
     `**Spin.** ${spec.spin.frequencyHz} turns a second; the north pole is ${spec.spin.inclinationDegrees}° from the line of sight (${spec.spin.source}). Longitude 0 is the meridian facing Earth at the fit's phase zero. The star is drawn at that instant and does not turn.`, '',
     '## Evidence', '', `Generated ${CHECKED} by [pulsar.mts](../../../packages/telescope-cli/src/new-object/pulsar.mts) from the spec kept in [new-object.json](${STORED_SPEC}).`, '',
     '- [hot-region-map.test.mts](../../../packages/bake/src/objects/raster/hot-region-map.test.mts) reads the record and checks it against what the paper says of its own fit.', '',
-    '## Known problems', '', '- **A fit, not an image.** The regions are the shapes the model allows: circles, rings and overlapping circles, each at one temperature. Their sharp edges are the model\'s.',
+    '## Known problems', '', `- **A fit, not an image.** The regions are the shapes the model allows: circles, rings and overlapping circles, each at one temperature.${thinned ? ' The soft edges are the spread of the posterior, not a temperature gradient the fit resolves.' : " Their sharp edges are the model's."}`,
     bulk ? '- **Two papers in one map.** The hot regions and the temperature of the rest of the surface come from different fits to different telescopes; no single fit made this map. The rest of the surface is drawn uniform.' : '- **No temperature elsewhere.** The fit gives the rest of the surface no temperature; it is drawn as the gray no-data grid, not as cold.',
     '- **Assumptions of the frame.** The axis\'s position angle on the sky is a convention. The bending of light by the star\'s gravity and its rotational flattening are not drawn.',
     `- **Model limb.** The limb darkening is a model atmosphere's, at one temperature for the whole disc, not a measurement of this star.${bulk ? ' The table is the fully ionized atmosphere of the hot-region fit, applied here to the cooler surface too.' : ''}`,
@@ -258,7 +296,7 @@ export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, 
   writeLedger(files, id, [
     { id: 'placement', subject: 'Placement', evidence: [spec.position.url, spec.distance.url, spec.radialVelocity.url], finding: `${String(body.star.sources.position)} Distance: ${String(body.star.sources.distance)} Radial velocity: ${String(body.star.sources.radialVelocity)}` },
     { id: 'radius-and-mass', subject: 'Radius and mass', evidence: [spec.radius.url, spec.mass.url], finding: `Radius ${spec.radius.value} km from ${spec.radius.source}. Mass ${spec.mass.value} solar masses from ${spec.mass.source}.` },
-    { id: 'hot-regions', subject: 'Hot regions', evidence: [spec.hotRegions.url, ...bulk ? [bulk.url] : []], finding: `${spec.hotRegions.credit}'s fit to ${spec.hotRegions.observed}, transcribed as ${spec.hotRegions.path} and drawn without refitting: ${regions.length} regions, ${millionKelvin(coolest)} to ${millionKelvin(hottest)}.${bulk ? ` The surface outside them is at ${Math.round(bulk.kelvin).toLocaleString('en-US')} K: ${bulk.source} (${bulk.url}).` : ''}` },
+    { id: 'hot-regions', subject: 'Hot regions', evidence: [spec.hotRegions.url, ...bulk ? [bulk.url] : [], ...thinned ? [spec.posterior!.url] : []], finding: `${spec.hotRegions.credit}'s fit to ${spec.hotRegions.observed}, transcribed as ${spec.hotRegions.path} and drawn without refitting as ${drawnWords}: ${regions.length} regions, ${millionKelvin(coolest)} to ${millionKelvin(hottest)}.${bulk ? ` The surface outside them is at ${Math.round(bulk.kelvin).toLocaleString('en-US')} K: ${bulk.source} (${bulk.url}).` : ''}` },
     { id: 'limb-darkening', subject: 'Limb darkening', evidence: [NSX.url], finding: `The disc is ${limbSentence}; ${fitted}.` },
     { id: 'spin', subject: 'Spin', evidence: [spec.spin.url], finding: `${spec.spin.frequencyHz} turns a second, north pole ${spec.spin.inclinationDegrees} degrees from the line of sight, from ${spec.spin.source}; the axis's direction on the sky is a convention.` }]);
   return { id, files, regions: regions.length, minimum, maximum };

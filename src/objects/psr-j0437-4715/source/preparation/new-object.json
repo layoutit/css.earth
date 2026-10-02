@@ -140,8 +140,96 @@
         },
         "source": "Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions",
         "url": "https://arxiv.org/abs/2605.05429"
+      },
+      "posterior": {
+        "path": "science/choudhury-2024/posterior-samples.tsv",
+        "source": "Choudhury et al. (2024), reproduction package, https://doi.org/10.5281/zenodo.13766753: equal-weight posterior samples of the headline CST+PDT run (nlive20000_expf3.3_noCONST_noMM_tol0.1post_equal_weights.dat)",
+        "columns": [
+          {
+            "id": "primary",
+            "antiphased": false,
+            "phaseCycles": {
+              "column": "p__phase_shift"
+            },
+            "superseding": {
+              "colatitudeRadians": {
+                "column": "p__super_colatitude"
+              },
+              "radiusRadians": {
+                "column": "p__super_radius"
+              },
+              "log10TemperatureK": {
+                "column": "p__super_temperature"
+              }
+            },
+            "omit": {
+              "radiusRadians": {
+                "column": "p__omit_radius"
+              }
+            }
+          },
+          {
+            "id": "secondary",
+            "antiphased": true,
+            "phaseCycles": {
+              "column": "s__phase_shift"
+            },
+            "superseding": {
+              "colatitudeRadians": {
+                "column": "s__super_colatitude"
+              },
+              "radiusRadians": {
+                "column": "s__super_radius"
+              },
+              "log10TemperatureK": {
+                "column": "s__super_temperature"
+              }
+            },
+            "cede": {
+              "colatitudeRadians": {
+                "column": "s__cede_colatitude"
+              },
+              "azimuthRadians": {
+                "column": "s__cede_azimuth"
+              },
+              "radiusRadians": {
+                "column": "s__cede_radius"
+              },
+              "log10TemperatureK": {
+                "column": "s__cede_temperature"
+              }
+            }
+          }
+        ]
       }
     }
+  },
+  "posterior": {
+    "samples": "nlive20000_expf3.3_noCONST_noMM_tol0.1post_equal_weights.dat",
+    "parameters": [
+      "mass",
+      "radius",
+      "cos_inclination",
+      "p__phase_shift",
+      "p__super_colatitude",
+      "p__super_radius",
+      "p__super_temperature",
+      "p__omit_radius",
+      "s__phase_shift",
+      "s__super_colatitude",
+      "s__super_radius",
+      "s__super_temperature",
+      "s__cede_colatitude",
+      "s__cede_radius",
+      "s__cede_azimuth",
+      "s__cede_temperature",
+      "XTI__alpha",
+      "neutral_hydrogen_column_density",
+      "log_likelihood"
+    ],
+    "keep": 2000,
+    "url": "https://doi.org/10.5281/zenodo.13766753",
+    "credit": "Choudhury et al. (2024), reproduction package (Zenodo)"
   },
   "limb": {
     "nsxTable": "nsx_H_v200804.out"
