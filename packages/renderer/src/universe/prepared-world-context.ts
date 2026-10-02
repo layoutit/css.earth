@@ -131,20 +131,25 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
   };
 }
 
+/** What the application knows about bodies beyond their prepared rows: each body's annotation strength and tier. The
+ * first plan's come with the mount; a system added later brings its own bodies' (`addBodies`, `addSystems`). */
+export interface WorldBodyAnnotations {
+  readonly annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
+  /** Each body's annotation priority (the planner's): the fixed order its marker paints and picks in. */
+  readonly annotationPriorities?: Readonly<Record<string, number>>;
+}
+
 /** Existing retained segment/sprite rendering, driven by the same observer as the detailed body. */
-export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationOpacities = {}, annotationPriorities = {}, nonNavigableIds = [], plainDots, opacityClock, orbitRenderer = 'bars', depthBase = 0 }: {
+export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationOpacities: initialOpacities = {}, annotationPriorities: initialPriorities = {}, nonNavigableIds = [], plainDots, opacityClock, orbitRenderer = 'bars', depthBase = 0 }: WorldBodyAnnotations & {
   host: HTMLElement; before: Element; plan: PreparedWorldContext; sprites: Readonly<Record<string, SpriteWithUrl>>;
   /** Presentation may live outside the input host's changing CSS scope. */
   presentationHost?: HTMLElement;
   requestPublication?: () => boolean;
-  annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
-  /** Each body's annotation priority (the planner's): the fixed order its marker paints and picks in. */
-  annotationPriorities?: Readonly<Record<string, number>>;
   /** Bodies that keep their marker but are never a hover or navigation target: they are reached through search. */
   nonNavigableIds?: readonly string[];
-  /** Bodies drawn as a dot in their color, at least `minimumDiameterPixels` wide: no sprite, and never a hover or
-   * navigation target. */
-  plainDots?: { readonly ids: readonly string[]; readonly minimumDiameterPixels: number };
+  /** A body its row marks `plainDot` is drawn as a dot in its color, at least `minimumDiameterPixels` wide: no sprite,
+   * and never a hover or navigation target. */
+  plainDots?: { readonly minimumDiameterPixels: number };
   opacityClock?: OpacityClock;
   /** Which retained paint owner draws the prepared orbit lines. */
   orbitRenderer?: OrbitRenderer;
@@ -152,7 +157,11 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   depthBase?: number;
 }) {
   const nonNavigable = new Set(nonNavigableIds);
-  const plainDotIds = new Set(plainDots?.ids ?? []);
+  // A plain dot is at least this wide; a mount that names no width draws it as small as any marker.
+  const plainDotMinimumPixels = plainDots?.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS;
+  // Each body's annotation strength and tier: the first plan's, then each added system's for its own bodies.
+  const annotationOpacities: Record<string, { line: number; label: number }> = { ...initialOpacities };
+  const annotationPriorities: Record<string, number> = { ...initialPriorities };
   const root = host.ownerDocument.createElement('div');
   // The emphasised body's corner locator: one element, moved between markers (context-locator.ts).
   const locator = createContextLocator(host.ownerDocument);
@@ -180,7 +189,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // A body drawn from its astronomy record has no package, so no prepared sprite and no page: it keeps its ring,
     // name and orbit and is never a navigation target.
     const unpackaged = 'unpackaged' in body && body.unpackaged === true;
-    const plainDot = plainDotIds.has(body.id);
+    const plainDot = body.plainDot === true;
     const sprite = plainDot ? undefined : spriteTable[body.id];
     const approximate = 'placement' in body && body.placement === 'approximate';
     // The body billboard is set only when resolved and visible. Unresolved bodies remain color dots and never fetch an image.
@@ -268,9 +277,19 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // The inertia gate (docs/performance/motion-freezes-membership.md): while the camera coasts, shown bodies only move and
   // fade; nothing is revealed, retired, restyled, restacked or re-announced until the coast stops.
   let coasting = false;
+  let plainPlaces: readonly (readonly number[])[] = [], plainPlacesFor = -1;
+  // Systems that arrived while the camera coasted, in order, each joined once the coast has stopped (addBodies).
+  const heldAdditions: { next: PreparedWorldContext; nextSprites: Readonly<Record<string, SpriteWithUrl>>; annotations: WorldBodyAnnotations }[] = [];
+  let joining = false;
+  const joinHeldSystems = () => {
+    if (!heldAdditions.length) return;
+    joining = true;
+    try { for (const held of heldAdditions.splice(0)) layer.addBodies(held.next, held.nextSprites, held.annotations); }
+    finally { joining = false; }
+  };
   // The camera sees the galaxy from outside (setOutsideGalaxy): names over its bright bulge turn dark (world-context.css).
   // A restyle, so like any other it waits for a coast to stop.
-  let outsideGalaxy = false, publishedOutsideGalaxy = false;
+  let outsideGalaxy = false, publishedOutsideGalaxy = false, highlighting = false;
   const publishOutsideGalaxy = () => {
     if (coasting || outsideGalaxy === publishedOutsideGalaxy) return;
     publishedOutsideGalaxy = outsideGalaxy;
@@ -428,11 +447,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         }
       }
       if (next.highlighted) {
-        if (bodies.some(entry => entry.highlighted)) root.dataset.contextHighlighting = 'true'; else delete root.dataset.contextHighlighting;
+        highlighting = bodies.some(entry => entry.highlighted);
+        if (highlighting) root.dataset.contextHighlighting = 'true'; else delete root.dataset.contextHighlighting;
       }
       if (depthChanged) refreshDepthBodies();
       if (changed) { invalidatePolicy(); refresh(); }
     },
+    /** Whether a category is highlighted: every marker outside it is dimmed, and so are the dots drawn for other stars. */
+    highlighting: () => highlighting,
     /** Whether the camera is outside the galaxy, looking at it as a whole rather than from among its stars. */
     setOutsideGalaxy(outside: boolean) {
       if (destroyed) return;
@@ -445,6 +467,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       coasting = active;
       if (active) { hoverIntent = false; settleHover(); return; }
       publishOutsideGalaxy();
+      joinHeldSystems();
       invalidatePolicy();
       refresh();
     },
@@ -474,9 +497,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       })));
     },
     /** Another system's bodies (`extendWorldContext`): `next` is the extended plan, whose new bodies take the next indices.
-     * Each is retained detached, as a mounted body is, with the flags its id was last given. */
-    addBodies(next: PreparedWorldContext, nextSprites: Readonly<Record<string, SpriteWithUrl>> = {}) {
+     * Each is retained detached, as a mounted body is, with the flags its id was last given. While the camera coasts the
+     * world's membership holds (motion-freezes-membership.md): the system waits, and joins when the coast stops or a
+     * selection needs it. */
+    addBodies(next: PreparedWorldContext, nextSprites: Readonly<Record<string, SpriteWithUrl>> = {}, annotations: WorldBodyAnnotations = {}) {
       if (destroyed) return;
+      if (coasting && !joining) { heldAdditions.push({ next, nextSprites, annotations }); return; }
+      Object.assign(annotationOpacities, annotations.annotationOpacities); Object.assign(annotationPriorities, annotations.annotationPriorities);
       const added = next.bodies.filter(body => !entriesById.has(body.id));
       if (!added.length) return;
       Object.assign(spriteTable, nextSprites);
@@ -496,7 +523,15 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
       refreshDepthBodies(); invalidatePolicy(); refresh();
     },
+    /** The places of the stars this layer draws as plain dots: a dot bank that also holds them leaves them out. The same
+     * list until a system joins. */
+    plainStarPlaces() {
+      if (plainPlacesFor !== bodies.length) { plainPlacesFor = bodies.length; plainPlaces = bodies.filter(entry => entry.plainDot && entry.body.classification === 'star').map(entry => entry.body.positionM); }
+      return plainPlaces;
+    },
     selectObject(id: string) {
+      // A selection is a membership change of its own: a system held back by a coast joins for it.
+      joinHeldSystems();
       const entry = bodies.find(entry => entry.body.id === id);
       if (!entry) throw new TypeError('Selected context body is unavailable.');
       settleHover();
@@ -604,7 +639,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         // A twentieth of a pixel is below what a scaled sprite shows. Rotation changes
         // every marker's distance a little each frame; without this step every marker
         // and its ring and caption pseudo-elements would restyle on every frame.
-        const markerDiameter = Math.round((entry.plainDot ? Math.max(plainDots!.minimumDiameterPixels, diameter) : flatDot ? entry.drawnDotDiameter ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS :
+        const markerDiameter = Math.round((entry.plainDot ? Math.max(plainDotMinimumPixels, diameter) : flatDot ? entry.drawnDotDiameter ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS :
           Math.max(entry.sprite?.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS, diameter)) * 20) / 20;
         const wasShown = entry.paint.billboardShown === true;
         const hoverChanged = entry.paint.indicatorHovered !== entry.hovered;

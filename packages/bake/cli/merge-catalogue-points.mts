@@ -6,6 +6,11 @@
  * `uncapped`, the bank's points pass the density cap and take none of its room, so another bank's count does not change; with
  * `fadePcFromSun: [from, to]`, a point is kept whole within `from` parsecs of the Sun and with a chance falling linearly to none
  * at `to` (by a fixed hash of its order in the bank), so a census's edge fades into the level around it instead of ending.
+ * With `shellPcFromSun: [from, to]`, only the bank's points from `from` up to `to` parsecs from the Sun are taken: a bank
+ * that spans the galaxy gives each nested level the stars of that level's own region. `apart: { bank, pc, basis }` (on the
+ * recipe) names a bank whose points are particular stars with a place of their own (a star that has a page): a point of
+ * any other bank within `pc` parsecs of one is that same star from another catalogue, and is left out after the density
+ * cap has counted it, so no other dot changes.
  * A kinematic distance whose uncertainty (prepare-catalogue-points.mts `kinematicUncertainty`) exceeds `maxKinematicSigmaKpc` is left
  * out: those are the sources the rotation curve cannot place, and they pile onto a circle through the Sun and the
  * centre. `colorTowardWhite` mixes each color that fraction of the way to white first (presentation: the catalogue
@@ -53,16 +58,17 @@ const positive = (value: unknown) => typeof value === 'number' && value > 0;
 const text = (value: unknown) => typeof value === 'string' && value.length > 0;
 const pair = (value: unknown): value is [number, number] => Array.isArray(value) && value.length === 2 && value[0] >= 0 && value[1] > value[0];
 
-type Entry = { bank: string; withinPcOfCentre?: number; keepEvery?: number; uncapped?: boolean; fadePcFromSun?: [number, number]; basis?: string };
+type Entry = { bank: string; withinPcOfCentre?: number; keepEvery?: number; uncapped?: boolean; fadePcFromSun?: [number, number]; shellPcFromSun?: [number, number]; basis?: string };
 const bankId = (value: unknown): value is string => typeof value === 'string' && /^[a-z][a-z0-9-]*$/u.test(value);
 const entry = (value: unknown): value is string | Entry => bankId(value) || (typeof value === 'object' && value !== null && bankId((value as Entry).bank) &&
   text((value as Entry).basis) && ((value as Entry).withinPcOfCentre === undefined || positive((value as Entry).withinPcOfCentre)) &&
   ((value as Entry).keepEvery === undefined || (Number.isInteger((value as Entry).keepEvery) && (value as Entry).keepEvery! >= 1)) &&
   ((value as Entry).uncapped === undefined || (value as Entry).uncapped === true) &&
+  ((value as Entry).shellPcFromSun === undefined || pair((value as Entry).shellPcFromSun)) &&
   ((value as Entry).fadePcFromSun === undefined || (Array.isArray((value as Entry).fadePcFromSun) && (value as Entry).fadePcFromSun!.length === 2 &&
     positive((value as Entry).fadePcFromSun![0]) && positive((value as Entry).fadePcFromSun![1]) && (value as Entry).fadePcFromSun![1] > (value as Entry).fadePcFromSun![0])));
 if (recipe.schema !== 'cssearth-catalogue-points-merge@1' || recipe.id !== id) fail(`needs schema cssearth-catalogue-points-merge@1 and id ${id}.`);
-if (!Array.isArray(recipe.banks) || !recipe.banks.length || !recipe.banks.every(entry)) fail('banks lists bank ids or { bank, withinPcOfCentre?, keepEvery?, uncapped?: true, fadePcFromSun?: [from, to], basis } entries.');
+if (!Array.isArray(recipe.banks) || !recipe.banks.length || !recipe.banks.every(entry)) fail('banks lists bank ids or { bank, withinPcOfCentre?, keepEvery?, uncapped?: true, fadePcFromSun?: [from, to], shellPcFromSun?: [from, to], basis } entries.');
 if (!text(recipe.meaning)) fail('needs its meaning.');
 if ((recipe.maxKinematicSigmaKpc !== undefined || recipe.maxKinematicSigmaBasis !== undefined) && (!positive(recipe.maxKinematicSigmaKpc) || !text(recipe.maxKinematicSigmaBasis))) {
   fail('maxKinematicSigmaKpc is a positive number with its basis.');
@@ -101,6 +107,10 @@ const cap = ((): DiscCap | VolumeCap | undefined => {
   return { mode: 'disc', atSunPerKpc2: value.atSunPerKpc2 as number, scaleLengthKpc: value.scaleLengthKpc as number, kernel: value.kernelKpc as number,
     ...(value.taperKpc ? { taper: value.taperKpc as [number, number] } : {}) };
 })();
+const apart = recipe.apart as { bank?: unknown; pc?: unknown; basis?: unknown } | undefined;
+if (apart !== undefined && (typeof apart !== 'object' || apart === null || !bankId(apart.bank) || !positive(apart.pc) || !text(apart.basis))) {
+  fail(`apart is { bank, pc, basis }: a bank id, a positive distance in parsecs and its basis; got ${JSON.stringify(apart)}.`);
+}
 if (recipe.within !== undefined && (!Array.isArray(recipe.within) || !recipe.within.every(bankId))) fail('within lists the enclosing levels\' ids.');
 
 const entries = (recipe.banks as (string | Entry)[]).map(value => typeof value === 'string' ? { bank: value } as Entry : value);
@@ -134,7 +144,7 @@ const merged: { reference: number[]; color: string; radius: number; bank: string
 // Whether any bank sizes its dots: only then is each palette entry a (color, radius) pair with paletteRadiusPx.
 let sized = false;
 let bankFrame: ReturnType<typeof parseDensityVolumeFrame> | null = null, rawFrame: unknown = null;
-for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1, fadePcFromSun } of entries) {
+for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1, fadePcFromSun, shellPcFromSun } of entries) {
   const bank = await readCatalogueBank(objectDirectory, bankIdValue) as { schema?: unknown; frame?: unknown; source?: unknown;
     appearance?: { colorCss?: unknown; radiusPx?: unknown; opacity?: unknown; palette?: unknown; paletteTone?: unknown; paletteRadiusPx?: unknown }; points?: unknown; kinematicSigmaKpc?: unknown; groups?: unknown };
   const parsedFrame = parseDensityVolumeFrame(bank?.frame), appearance = bank?.appearance;
@@ -178,6 +188,10 @@ for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1, fadePcFromSun }
     if (sigma !== null && sigma > maxSigma!) { unplaced[bankIdValue] = (unplaced[bankIdValue] ?? 0) + 1; return; }
     const position = point.slice(0, 3) as number[];
     if (withinPcOfCentre !== undefined && Math.hypot(...position.map((value, axis) => value - centreKpc![axis]!)) * 1000 > withinPcOfCentre) return;
+    if (shellPcFromSun) {
+      const fromSunPc = Math.hypot(...position) * unit / 3.0856775814913673e16;
+      if (fromSunPc < shellPcFromSun[0] || fromSunPc >= shellPcFromSun[1]) return;
+    }
     if (near++ % keepEvery) return;
     if (fadePcFromSun) {
       // Sun-centred positions, in the bank's unit.
@@ -198,6 +212,16 @@ const shuffled = merged.map((point, index) => ({ point, key: hash(index) })).sor
 const capped: Record<string, number> = {};
 // The enclosing levels' dots are already drawn: a dot at one of their positions is theirs, and under a cap they count
 // toward it.
+// The bank of particular stars (`apart`): read before the levels, so its dots in an enclosing level take no room here either.
+const apartStars = apart ? await (async () => {
+  const stars = await readCatalogueBank(objectDirectory, apart.bank as string) as { schema?: unknown; frame?: unknown; points?: unknown };
+  const starsFrame = parseDensityVolumeFrame(stars.frame);
+  if (stars.schema !== CATALOGUE_POINTS_SCHEMA || !Array.isArray(stars.points) || starsFrame.metersPerUnit !== bankFrame!.metersPerUnit || starsFrame.originM.some(value => value !== 0)) {
+    throw new TypeError(`${String(apart.bank)}: the apart bank must be a catalogue point bank in this level's frame and unit.`);
+  }
+  return (stars.points as number[][]).map(point => point.slice(0, 3));
+})() : [];
+const apartKeys = new Set(apartStars.map(point => point.join(',')));
 const enclosing = new Set<string>(), enclosingPoints: number[][] = [];
 for (const level of (recipe.within ?? []) as string[]) {
   const outer = await readCatalogueBank(objectDirectory, level) as { schema?: unknown; frame?: unknown; points?: unknown };
@@ -206,7 +230,8 @@ for (const level of (recipe.within ?? []) as string[]) {
       outerFrame.referenceFrame !== bankFrame!.referenceFrame || outerFrame.originM.some(value => value !== 0)) {
     throw new TypeError(`${level}: an enclosing level must be a merged bank in this level's frame and unit.`);
   }
-  for (const point of outer.points as number[][]) { enclosing.add(point.slice(0, 3).join(',')); enclosingPoints.push(point.slice(0, 3)); }
+  // An enclosing level's dot is drawn already; one that is a particular star (`apart`) took no room there and takes none here.
+  for (const point of outer.points as number[][]) { const key = point.slice(0, 3).join(','); enclosing.add(key); if (!apartKeys.has(key)) enclosingPoints.push(point.slice(0, 3)); }
 }
 const drawnOutside: Record<string, number> = {};
 let ordered = shuffled.filter(point => {
@@ -264,6 +289,24 @@ if (cap?.mode === 'volume' && cap.shell !== undefined) {
     return true;
   });
 }
+// A particular star's own dot stands for it: another catalogue's point within `apart.pc` of one is left out. The cap has
+// already counted it, so every other dot is kept or left as it was.
+const apartLeft: Record<string, number> = {};
+if (apart) {
+  const reach = (apart.pc as number) * 3.0856775814913673e16 / bankFrame!.metersPerUnit, cellOf = (position: readonly number[]) => position.slice(0, 3).map(value => Math.floor(value / reach));
+  const cells = new Map<string, number[][]>();
+  for (const point of apartStars) { const key = cellOf(point).join(','), list = cells.get(key); if (list) list.push(point); else cells.set(key, [point]); }
+  const offsets = [-1, 0, 1].flatMap(i => [-1, 0, 1].flatMap(j => [-1, 0, 1].map(k => [i, j, k])));
+  ordered = ordered.filter(point => {
+    if (point.bank === apart.bank) return true;
+    const home = cellOf(point.reference);
+    const near = offsets.some(offset => (cells.get(home.map((value, axis) => value + offset[axis]!).join(',')) ?? [])
+      .some(star => Math.hypot(...point.reference.map((value, axis) => value - star[axis]!)) <= reach));
+    if (!near) return true;
+    apartLeft[point.bank] = (apartLeft[point.bank] ?? 0) + 1; kept[point.bank]!--; return false;
+  });
+  console.log(`The same star as a ${String(apart.bank)} dot, left out: ${JSON.stringify(apartLeft)}.`);
+}
 // A palette entry is a color, or with sized banks a color at one radius.
 const entryOf = (point: { color: string; radius: number }) => sized ? `${point.color}|${point.radius}` : point.color;
 const paletteEntries = [...new Set(ordered.map(entryOf))], paletteIndex = new Map(paletteEntries.map((entry, index) => [entry, index]));
@@ -277,6 +320,7 @@ const output = { schema: CATALOGUE_POINTS_SCHEMA, id, source: 'merge', meaning: 
   ...(recipe.within ? { within: recipe.within } : {}),
   ...(maxSigma === undefined ? {} : { unplaced: { maxKinematicSigmaKpc: maxSigma, basis: recipe.maxKinematicSigmaBasis, left: unplaced } }),
   ...(cap ? { densityCap: { ...recipe.densityCap as object, left: capped } } : {}),
+  ...(apart ? { apart: { ...apart, left: apartLeft } } : {}),
   frame: outputFrame, appearance: { colorCss: '#ffffff', radiusPx: 0.75, opacity: 1, palette, ...(paletteRadiusPx ? { paletteRadiusPx } : {}) },
   counts: { points: ordered.length }, points: ordered.map((point, index) => [...written[index]!, paletteIndex.get(entryOf(point))!]) };
 // A merged bank is published only when its recipe says the app fetches it; a level of a later stack is a bake input.

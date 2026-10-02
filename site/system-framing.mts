@@ -21,7 +21,7 @@ import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-
 import { systemFramingRadii } from './system-framing-radii.mts';
 export { systemFramingRadii } from './system-framing-radii.mts';
 import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/engine';
-import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT as context, loadWorldSystemOf, onWorldSystems, worldSystemHeld } from './world-context-plan.mts';
 import { readApplicationSystemView } from './world-system-views.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 
@@ -36,34 +36,59 @@ export function systemCenters(plan: Pick<PreparedWorldContext, 'bodies' | 'focus
   }));
 }
 
-/** Each system host's framing radius. A system whose file the page has not read keeps the radius preparation measured
- * over the whole world (site/build/prepare/prepare-world-presentation.mts); the rest are measured here from the same
- * prepared bounds, so a page has every system's radius before it reads that system. */
-export const SYSTEM_FRAMING_RADII: ReadonlyMap<string, number> = new Map([...PREPARED_WORLD_PRESENTATION.systemFramingRadii, ...systemFramingRadii(context)]);
-export const SYSTEM_CENTERS = systemCenters(context);
+/** What a plan says about framing its systems: each host's framing radius from its prepared bounds, each bound pair's
+ * centre, the stars whose systems open out of edge-on, the hosts whose overview is framed by prepared candidates, and
+ * each host's authored orbit range. */
+export function systemFramingTables(plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>) {
+  return {
+    radii: systemFramingRadii(plan), centers: systemCenters(plan),
+    stellar: new Set(plan.bodies.filter(body => body.systemView && !body.orbit).map(body => body.id)),
+    viewHosts: new Set([plan.focus, ...plan.bodies].filter(body => body.systemView).map(body => body.id)),
+    ranges: new Map(plan.bodies.flatMap(body => 'orbitsWithinM' in body && body.orbitsWithinM !== undefined ? [[body.id, body.orbitsWithinM] as const] : [])),
+  };
+}
+const tables = systemFramingTables(context);
+/** Each system host's framing radius, measured from the prepared orbit bounds of the bodies the plan holds: a system has
+ * its radius once its holder is read. */
+export const SYSTEM_FRAMING_RADII: ReadonlyMap<string, number> = tables.radii;
+export const SYSTEM_CENTERS: ReadonlyMap<string, { readonly centerM: PositionM; readonly separationM: number }> = tables.centers;
 /** Systems of other stars: placed stars, which have no orbit of their own, that planets orbit. They are reached from light
  * years away, where a turn out of edge-on reads as an approach; the Sun's and a planet's moons keep the departure angle. */
-export const STELLAR_SYSTEMS: ReadonlySet<string> = new Set(context.bodies.filter(body => body.systemView && !body.orbit).map(body => body.id));
+export const STELLAR_SYSTEMS: ReadonlySet<string> = tables.stellar;
 /** System overview camera candidates by host, each added when `loadSystemView` reads it; navigation awaits the one it frames. */
 export const SYSTEM_VIEWS = new Map<string, SystemView>();
 /** Hosts whose overview is framed by prepared candidates. */
-export const SYSTEM_VIEW_HOSTS: ReadonlySet<string> = new Set([context.focus, ...context.bodies].filter(body => body.systemView).map(body => body.id));
-/** Whether framing `id` can proceed: it is no system host, or its candidates are read. */
-export const systemViewLoaded = (id: string) => !SYSTEM_VIEW_HOSTS.has(id) || SYSTEM_VIEWS.has(id);
+export const SYSTEM_VIEW_HOSTS: ReadonlySet<string> = tables.viewHosts;
+/** A host's authored orbit range: its system overview never places the camera beyond the distance its orbits are drawn to. */
+export const SYSTEM_RANGES: ReadonlyMap<string, number> = tables.ranges;
+// The tables follow the application's plan: a system read later adds its hosts' entries in place, so navigation, which
+// holds these by reference, frames it as a system read at startup.
+onWorldSystems(plan => {
+  const next = systemFramingTables(plan);
+  const radii = SYSTEM_FRAMING_RADII as Map<string, number>, centers = SYSTEM_CENTERS as Map<string, { centerM: PositionM; separationM: number }>;
+  const stellar = STELLAR_SYSTEMS as Set<string>, viewHosts = SYSTEM_VIEW_HOSTS as Set<string>, ranges = SYSTEM_RANGES as Map<string, number>;
+  for (const [id, radius] of next.radii) radii.set(id, radius);
+  for (const [id, centre] of next.centers) centers.set(id, centre);
+  for (const id of next.stellar) stellar.add(id);
+  for (const id of next.viewHosts) viewHosts.add(id);
+  for (const [id, range] of next.ranges) ranges.set(id, range);
+});
+/** Whether framing `id` can proceed: the world holds it with its system, and it is no system host or its candidates are read. */
+export const systemViewLoaded = (id: string) => worldSystemHeld(id) && (!SYSTEM_VIEW_HOSTS.has(id) || SYSTEM_VIEWS.has(id));
 const systemViewsLoading = new Map<string, Promise<void>>();
-/** Read one host's candidates once; a failed read is forgotten so the next navigation retries it. */
+/** Read what framing `id` needs, once: its holder when the world does not hold it yet (world-context-plan.mts), then its
+ * candidates when it hosts a system; they are checked against the host's row. A failed read is forgotten so the next
+ * navigation retries it. */
 export function loadSystemView(id: string, read?: (id: string) => Promise<unknown>): Promise<void> {
   if (systemViewLoaded(id)) return Promise.resolve();
   let loading = systemViewsLoading.get(id);
   if (!loading) {
-    loading = readApplicationSystemView(id, read).then(view => { SYSTEM_VIEWS.set(id, view); })
+    loading = (loadWorldSystemOf(id) ?? Promise.resolve()).then(() => SYSTEM_VIEW_HOSTS.has(id) && !SYSTEM_VIEWS.has(id) ? readApplicationSystemView(id, read).then(view => { SYSTEM_VIEWS.set(id, view); }) : undefined)
       .catch(error => { systemViewsLoading.delete(id); throw error; });
     systemViewsLoading.set(id, loading);
   }
   return loading;
 }
-/** A host's authored orbit range: its system overview never places the camera beyond the distance its orbits are drawn to. */
-export const SYSTEM_RANGES = new Map(context.bodies.flatMap(body => 'orbitsWithinM' in body && body.orbitsWithinM !== undefined ? [[body.id, body.orbitsWithinM] as const] : []));
 export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);
 /** Volumes a body shows through one of its datasets, by volume id, each with the object it is the extent of when it
  * names one (site/build/prepare/prepare-catalog.mts). */

@@ -236,14 +236,17 @@ const orbit = (position: readonly [number, number, number], scale: number) => ({
   verticesM: [[position[0], position[1], position[2]], [0, 100, 0], [-100, 0, 0], [0, -100, 0], [100, 0, 0], [0, 100, 0], [-100, 0, 0], [0, -100, 0]].map(v => v.map(n => n * scale)),
   trail: [1, 1, 1, 1, 1, 1, 1, 1],
 });
-function plan(scale: number) {
-  const point = (id: string, name: string, color: string, position: readonly [number, number, number], radius: number) => ({ id, name, color, positionM: position.map(value => value * scale), radiusM: radius * scale });
+/** `extended`: the same world with Earth added after the first two bodies, as another system's file extends a plan. */
+function plan(scale: number, plainDots: readonly string[] = [], extended = false) {
+  const point = (id: string, name: string, color: string, position: readonly [number, number, number], radius: number) =>
+    ({ id, name, color, positionM: position.map(value => value * scale), radiusM: radius * scale, ...(plainDots.includes(id) ? { plainDot: true } : {}) });
   const focus = point('sun', 'Sun', '#f5a623', [0, 0, 0], 10);
   const front = point('mercury', 'Mercury', '#9d9388', [100, 0, 0], 1);
   const hidden = point('venus', 'Venus', '#d6aa69', [0, 0, -20], 1);
+  const added = point('earth', 'Earth', '#4a90d9', [0, 60, 0], 1);
   return parsePreparedWorldContext({ schema: 'cssearth-world-context@2',
     frame: { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0, 0, 0], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: scale, bodyRadiusM: 10 * scale },
-    focus, bodies: [{ ...front, orbit: orbit([100, 0, 0], scale) }, { ...hidden, orbit: orbit([0, 0, -20], scale) }],
+    focus, bodies: [{ ...front, orbit: orbit([100, 0, 0], scale) }, { ...hidden, orbit: orbit([0, 0, -20], scale) }, ...(extended ? [{ ...added, orbit: orbit([0, 60, 0], scale) }] : [])],
     camera: { minimumDistanceM: 12 * scale, maximumDistanceM: 10_000 * scale, framingReferenceZoom: 1, presentation },
     volume: { objectId: 'milky-way', fadeStartDistanceM: 100 * scale, fullDistanceM: 1_000 * scale }, system: { fadeOutStartDistanceM: scale, hiddenDistanceM: 1e30 * scale },
     stars: { objectId: 'stellar-neighbourhood', fadeStartDistanceM: 10 * scale, fullDistanceM: 50 * scale },
@@ -2107,8 +2110,8 @@ test('billboard zoom alpha owns dot, circle and caption without per-label clocks
 test('a plain dot needs no sprite, paints its color and is never a pick or navigation target', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
-  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(1),
-    sprites: { sun: sprite, venus: sprite }, plainDots: { ids: ['mercury'], minimumDiameterPixels: 2 } });
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(1, ['mercury']),
+    sprites: { sun: sprite, venus: sprite }, plainDots: { minimumDiameterPixels: 2 } });
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1_000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [30, -20] });
   const marker = layer.inspect().find(body => body.id === 'mercury')!.billboard, leaf = marker.children[0] as HTMLElement;
   assert.deepEqual(([leaf.style.backgroundImage ?? '', leaf.style.backgroundColor, declared(leaf, 'borderRadius')]), ['', '#9d9388', '50%']);
@@ -2116,6 +2119,31 @@ test('a plain dot needs no sprite, paints its color and is never a pick or navig
   assert.equal(marker.dataset.objectNavigate, undefined);
   assert.equal(screenPicking(host as unknown as HTMLElement).pick(70, -20), null);
   layer.destroy();
+});
+
+test('a system added while the camera coasts joins when the coast stops or a selection needs it, with its annotations', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(1), sprites: { sun: sprite, venus: sprite } });
+  const ids = () => layer.inspect().map(body => body.id);
+  const annotations = { annotationOpacities: { earth: { line: .5, label: .25 } }, annotationPriorities: { earth: 4 } };
+  // Membership holds through a coast (motion-freezes-membership.md): the bodies wait.
+  layer.setCoasting(true);
+  layer.addBodies(plan(1, [], true), {}, annotations);
+  assert.deepEqual(ids(), ['sun', 'mercury', 'venus']);
+  layer.setCoasting(false);
+  assert.deepEqual(ids(), ['sun', 'mercury', 'venus', 'earth']);
+  const earth = layer.inspect().find(body => body.id === 'earth')!.billboard;
+  assert.equal(earth.dataset.contextLineAlpha, '0.5', 'the added body carries its own annotation strength');
+  assert.equal(earth.dataset.contextLabelAlpha, '0.25');
+  layer.destroy();
+  // A selection of a body that arrived during a coast is a membership change of its own.
+  const selecting = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(1), sprites: { sun: sprite, venus: sprite } });
+  selecting.setCoasting(true);
+  selecting.addBodies(plan(1, [], true));
+  selecting.selectObject('earth');
+  assert.ok(selecting.inspect().some(body => body.id === 'earth'));
+  selecting.destroy();
 });
 
 test('suppression retires the whole annotation while flight preserves admission and disables picking', () => {
@@ -2749,7 +2777,8 @@ test('the orbit banks decode to the orbits of the full prepared file, each verte
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
   // Every system's file read, as Node reads the world (site/world-context-plan.mts).
   const summary = await parseCompleteWorldContext(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')),
-    async id => JSON.parse(await readFile(new URL(`world-systems/${id}.json`, prepared), 'utf8')));
+    async id => JSON.parse(await readFile(new URL(`world-systems/${id}.json`, prepared), 'utf8')),
+    JSON.parse(await readFile(new URL('world-index.json', prepared), 'utf8')));
   const bankOf = async (id: string) => unpackPreparedBinary(await readFile(new URL(`world-orbits/${id}.bin`, prepared)), `world-orbits/${id}.bin`);
   const banks = new Map(await Promise.all(Object.keys(summary.orbitBanks!).map(async id => [id, await bankOf(id)] as const)));
   const decoded = decodeWorldOrbits(summary, banks);

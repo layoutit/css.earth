@@ -17,7 +17,8 @@ export interface CatalogueRow {
   }>;
   readonly source: Readonly<{ subject: string; document: string; label: string }>;
   readonly marker: Readonly<
-    { kind: 'scene'; id: string; color: string }
+    // `preview`: the object has a prepared search thumbnail. `sprite`: the styles of its sprite of the marker sheet.
+    { kind: 'scene'; id: string; color: string; preview?: true; sprite?: Readonly<{ style: string; innerStyle: string; ringStyle?: string }> }
     | { kind: 'thumbnail'; thumbnail: string | null }
   >;
 }
@@ -56,7 +57,10 @@ export function parseCatalogueRow(input: unknown, index: number): CatalogueRow {
   };
   if ((detail.value === undefined) !== (detail.unit === undefined)) throw new TypeError(`Catalogue detail parts are incomplete: ${index}.`);
   const marker = input.marker.kind === 'scene'
-    ? { kind: 'scene' as const, id: text(input.marker.id, 'marker id'), color: text(input.marker.color, 'marker color') }
+    ? { kind: 'scene' as const, id: text(input.marker.id, 'marker id'), color: text(input.marker.color, 'marker color'),
+      ...(input.marker.preview === true ? { preview: true as const } : {}),
+      ...(isRecord(input.marker.sprite) ? { sprite: Object.freeze({ style: text(input.marker.sprite.style, 'marker sprite style'), innerStyle: text(input.marker.sprite.innerStyle, 'marker sprite inner style'),
+        ...(input.marker.sprite.ringStyle === undefined ? {} : { ringStyle: text(input.marker.sprite.ringStyle, 'marker sprite ring style') }) }) } : {}) }
     : input.marker.kind === 'thumbnail' && (input.marker.thumbnail === null || typeof input.marker.thumbnail === 'string')
       ? { kind: 'thumbnail' as const, thumbnail: input.marker.thumbnail }
       : null;

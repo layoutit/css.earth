@@ -3,7 +3,7 @@ import { catalogueObject, levelOf } from '@cssearth/objects';
 import type { OverviewObject } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './objects.mts';
 import overviews from './prepared-overview-objects.json' with { type: 'json' };
-import { startupFetch } from './startup-requests.mts';
+import { readObjectEntry } from './object-entries.mts';
 
 /** The objects a page knows, read one at a time from their prepared entries (`pages/objects/[id]/entry.json.ts`) the first
  * time the page needs them: its own, the Sun's, and whatever it navigates to. A page never loads the whole registry, so an
@@ -56,12 +56,7 @@ export function loadObject(id: string, read: (id: string) => Promise<unknown | n
   }
   return pending;
 }
-async function fetchEntry(id: string): Promise<unknown | null> {
-  const response = await startupFetch(`/objects/${id}/entry.json`);
-  if (response.status === 404) return null;
-  if (!response.ok) throw new Error(`Object entry request for ${id} failed: ${response.status}.`);
-  return response.json();
-}
+const fetchEntry = readObjectEntry;
 
 /** The build, the search function and tests hold the full registry; they seed the directory with it. */
 export function seedObjectDirectory(objects: readonly NavigableObject[]) {

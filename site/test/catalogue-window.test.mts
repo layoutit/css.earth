@@ -10,7 +10,7 @@ const entry = (index: number): CatalogueRow => ({
   kind: 'scene', id: `earth-${index}`, name: `Earth ${index}`,
   classificationName: 'planet', route: `/earth-${index}/`, detail: { text: `${index} au`, value: String(index), unit: 'au', title: 'Distance', ariaLabel: `${index} au. Distance` },
   source: { subject: `object:earth-${index}`, document: `/sources/${index}/`, label: `Sources ${index}` },
-  marker: { kind: 'scene', id: 'earth', color: '#fff' },
+  marker: { kind: 'scene', id: 'earth', color: '#fff', preview: true },
 });
 
 test('catalogue window bounds connected rows, reuses them while scrolling, and clears on close', () => {

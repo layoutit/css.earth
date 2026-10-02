@@ -111,7 +111,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       if (typeof target?.fetch === 'function') void prefetchPreparedResources(prefetchUrls, target.fetch.bind(target), prefetchAbort.signal);
     },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, distanceM: number,
-      selectedPositionM: readonly number[], detailContextOpacity: number): number {
+      selectedPositionM: readonly number[], detailContextOpacity: number, withoutM: readonly (readonly number[])[] | null = null): number {
       if (lifetime.disposed) return 0;
       // Every placed body starts inside the galaxy, so its own distance gates the volume.
       const volumeDistanceM = eyeDistanceM(world.pose, selectedPositionM);
@@ -142,7 +142,8 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       // them past the system (world-context-planner.ts); measured like them from the selected body. The backing shows with them.
       const starField = detailContextOpacity * starFieldFade(volumeDistanceM, plan.system);
       const shownDots = detailContextOpacity * SOLAR_SYSTEM_DOTS + (1 - SOLAR_SYSTEM_DOTS) * starField;
-      for (const points of cataloguePoints) points.publish({ world, viewport }, shownDots);
+      // A star the world draws as a body is its marker's to draw: its own dot in the galaxy's bank is left out.
+      for (const points of cataloguePoints) points.publish({ world, viewport }, shownDots, withoutM);
       const shownBacking = starField * volumeSize * logarithmicFade(volumeDistanceM, BACKING_FADE_IN_M[0], BACKING_FADE_IN_M[1]);
       backingFrame = { world, viewport, distanceM: volumeDistanceM, shown: shownBacking };
       if (backing) publishBacking(backingFrame);

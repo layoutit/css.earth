@@ -1,12 +1,15 @@
 import { startupFetch } from './startup-requests.mts';
+import { readWorldPlace } from './object-entries.mts';
 
 /** The world summary's address: bundled by Vite for the browser, the checked-in file in Node (`world-context-plan.mts`). */
 export const WORLD_SUMMARY_SOURCE = new URL('../src/objects/sun/prepared/world-context-summary.json', import.meta.url);
 
-/** The star whose system file holds `id` or its planets (a star's own id), or null when the summary holds them all: the
- * Sun's system, or a star without planets. Read from the summary's list of the bodies it leaves to system files. */
-export function worldSystemHost(deferred: readonly { readonly id: string; readonly host: string }[] | undefined, id: string): string | null {
-  return deferred?.find(body => body.id === id)?.host ?? (deferred?.some(body => body.host === id) ? id : null);
+/** The holder of a page's own body, as the page names it (`ObjectLayout.astro`): `<meta name="cssearth-world-holder">`,
+ * absent when the summary holds the body whole. `row` says the body is a star that is its own holder of one body: its row
+ * is in its object entry, not a file. */
+export function pageWorldPlace(document: Document | undefined): { readonly holder: string; readonly row: boolean } | null {
+  const meta = document?.querySelector<HTMLMetaElement>('meta[name="cssearth-world-holder"]');
+  return meta?.content ? { holder: meta.content, row: meta.dataset.row !== undefined } : null;
 }
 
 /** What a page read before its application loaded: the world summary, and the page's own system when another file holds it. */
@@ -34,10 +37,13 @@ export async function loadStartupWorld(windowTarget: Window): Promise<void> {
     if (!response.ok) throw new Error(`${name} request ${String(url)} failed: ${response.status}.`);
     return response.json() as Promise<unknown>;
   };
-  const summary = await read(WORLD_SUMMARY_SOURCE, 'Prepared world context');
-  // A page's own body: the first path segment of its address (`/<id>/`).
-  const deferred = (summary as { deferred?: readonly { id: string; host: string }[] } | null)?.deferred;
-  const own = worldSystemHost(Array.isArray(deferred) ? deferred : undefined, windowTarget.location.pathname.split('/')[1] ?? '');
-  const world: StartupWorld = { summary, system: own ? { id: own, value: await read(`/world/systems/${own}.json`, 'Prepared world system') } : null };
+  // The summary and the page's own holder are asked for together: the page names its holder, so neither waits for the other.
+  const place = pageWorldPlace(windowTarget.document);
+  const [summary, value] = await Promise.all([read(WORLD_SUMMARY_SOURCE, 'Prepared world context'),
+    !place ? null : place.row ? readWorldPlace(place.holder).then(own => {
+      if (own?.row === undefined) throw new TypeError(`/objects/${place.holder}/entry.json carries no world row for a star that is its own holder.`);
+      return own.row;
+    }) : read(`/world/systems/${place.holder}.json`, 'Prepared world system')]);
+  const world: StartupWorld = { summary, system: place ? { id: place.holder, value } : null };
   Reflect.set(windowTarget, KEY, world);
 }

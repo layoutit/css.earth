@@ -6,14 +6,15 @@ import datasetBillboardText from './prepared-dataset-billboards.json?raw';
 import datasetBillboardAtlasUrl from './prepared-dataset-billboards.webp?url';
 import galaxyDisplaySample from '../src/objects/local-group-galaxies/prepared/display-sample.json' with { type: 'json' };
 import { createPreparedUniverse, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
-import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE, onWorldSystems } from './world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE, WORLD_DOT_BANKS, onWorldSystems } from './world-context-plan.mts';
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { createInFlightLoader } from './in-flight-loader.mts';
+import { startupFetch } from './startup-requests.mts';
 import { loadDotCatalogues } from './dot-catalogues.mts';
-import { worldVisibilityPolicy } from './application-world-visibility.mts';
+import { annotationsForBodies, worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
 import { CONTEXT_DATASETS } from './context-datasets.mts';
 import { KNOWN_OVERVIEWS } from './object-directory.mts';
@@ -32,7 +33,7 @@ function meshView(descriptor: { id: string; properties: Record<string, unknown> 
 
 // An asteroid sprite's smallest drawn size, and a plain asteroid dot's (see world-context.css for its opacity).
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
-const { annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, compact: phone } = worldVisibilityPolicy;
+const { annotationOpacities, annotationPriorities, ordinaryAsteroidIds, compact: phone } = worldVisibilityPolicy;
 const PARSEC_M = 3.085677581491367e16;
 
 // Published catalogues drawn through a volume bank, with its opacity (src/objects/m87-volume/README.md).
@@ -55,10 +56,10 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // Only the context objects' folders are globbed; bodies share src/objects but are not world resources.
     const descriptors = CONTEXT_OBJECT_DESCRIPTORS, assets = CONTEXT_OBJECT_ASSET_URLS;
     const parsedDescriptors = Object.values(descriptors).map(parseObjectDescriptor);
-    const resourceSet = (objectId: string) => {
+    const resourceSet = (objectId: string, files: Record<string, unknown> = assets) => {
       const base = `../src/objects/${objectId}/`;
       const resolve = (path: string) => {
-        const url = assets[`${base}${path}`];
+        const url = files[`${base}${path}`];
         if (typeof url !== 'string') throw new Error(`Prepared context resource unavailable: ${path}.`);
         return url;
       };
@@ -68,6 +69,15 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
           if (!response.ok) throw new Error(`Prepared context request failed: ${response.status}.`);
           return response.arrayBuffer();
         } } };
+    };
+    // A bank a body's dataset shows names its files when it is first loaded (prepare-catalog.mts CONTEXT_BANK_TYPES).
+    const bankSet = async (objectId: string) => {
+      // The page's head asked for its own default bank's list already (startup-requests.mts).
+      const response = await startupFetch(`/world/context-assets/${encodeURIComponent(objectId)}.json`, { signal: AbortSignal.timeout(15_000) });
+      if (!response.ok) throw new Error(`Prepared context bank ${objectId}: its file list request failed (${response.status}).`);
+      const files: unknown = await response.json();
+      if (!isRecord(files)) throw new TypeError(`Prepared context bank ${objectId}: /world/context-assets/${objectId}.json is not a file list.`);
+      return resourceSet(objectId, files);
     };
     const volumeSet = resourceSet(applicationContext.volume.objectId), starSet = resourceSet(applicationContext.stars.objectId);
     // Every galaxy point field draws its dots, and its far banks (`properties.farBanks`) once the camera is that far out.
@@ -101,7 +111,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const imageLayerBanks = imageLayerDescriptors.map(descriptor => ({ id: descriptor.id, frame: descriptor.frame }));
     const loadImageLayer = createInFlightLoader(async (id: string) => {
       if (!imageLayerIds.has(id)) throw new TypeError(`Unknown prepared image-layer bank: ${id}.`);
-      const set = resourceSet(id);
+      const set = await bankSet(id);
       return { payload: await loadPreparedCssImageLayers(set.descriptor, set.transport),
         resolveResource: (path: string) => set.resolve(`prepared/${path}`),
         cataloguePointUrls: imageLayerCataloguePoints.get(id)!.map(bank => set.resolve(`prepared/${bank}.bin`)) };
@@ -110,9 +120,12 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // body's (a planet's moons without a page) while that body or one that orbits it is.
     const pointBanks = parsedDescriptors.filter(descriptor => descriptor.type === 'catalogue-point-bank').map(parseCataloguePointBankDescriptor).map(bank =>
       ({ id: bank.id, url: resourceSet(bank.id).resolve(bank.url), ...(bank.host === undefined ? {} : { host: bank.host }) }));
-    const plainDots = new Set(plainDotIds), asteroids = new Set(asteroidIds);
-    const billboards = (bodies: Parameters<typeof preparedBodyBillboards>[0]) => preparedBodyBillboards(bodies, plainDots,
-      id => asteroids.has(id) ? ASTEROID_MINIMUM_PIXELS : 2.4);
+    // A body's row says whether it is a plain dot (no billboard) and what it is (an asteroid's sprite stays smaller).
+    const billboards = (bodies: readonly (Parameters<typeof preparedBodyBillboards>[0][number] & { readonly plainDot?: true; readonly classification?: string })[]) => {
+      const asteroids = new Set(bodies.filter(body => body.classification === 'asteroid').map(body => body.id));
+      return preparedBodyBillboards(bodies, new Set(bodies.filter(body => body.plainDot === true).map(body => body.id)),
+        id => asteroids.has(id) ? ASTEROID_MINIMUM_PIXELS : 2.4);
+    };
 
     // Bank declarations do not fetch payloads. Deduplicate pending loads only; the
     // mounted layer owns residency and can release banks after they leave view.
@@ -124,7 +137,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const datasetBillboards = { plan: parseDatasetBillboards(JSON.parse(datasetBillboardText)), atlasUrl: datasetBillboardAtlasUrl };
     const loadVolumeDataset = createInFlightLoader(async (id: string) => {
       if (!volumeDatasetIds.has(id)) throw new TypeError(`Unknown prepared volume dataset bank: ${id}.`);
-      const set = resourceSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport);
+      const set = await bankSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport);
       return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`),
         cataloguePointUrls: (VOLUME_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.bin`)) };
     });
@@ -150,6 +163,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       context: plan, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, pointBanks, volumeDatasetBanks, loadVolumeDataset,
       backgroundCataloguePoints,
+      starCataloguePoints: WORLD_DOT_BANKS.map(id => `/world/dots/${id}.bin`),
       // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
       // open unless its page's dataset shows it whole or hides it. Hidden, its caption names the overview it bounds.
       imageMeshes: parsedDescriptors.filter(descriptor => descriptor.prepared?.format === IMAGE_MESH_SCHEMA).map(descriptor => {
@@ -159,7 +173,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       }),
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       nonNavigableIds: ordinaryAsteroidIds,
-      plainDots: { ids: plainDotIds, minimumDiameterPixels: PLAIN_DOT_MINIMUM_PIXELS },
+      plainDots: { minimumDiameterPixels: PLAIN_DOT_MINIMUM_PIXELS },
       datasetVisibility: DATASET_VISIBILITY, datasetBillboards,
       // Phones draw no celestial sky cube: about 60 MB of layers and 27 MB of decoded faces behind the body.
       sky: !phone,
@@ -170,12 +184,13 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       },
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
       resolvePointResource: path => starSet.resolve(`prepared/${path}`) });
-    // Other systems' bodies join the world as their files arrive (site/world-context-plan.mts), with their billboards.
+    // Other systems' bodies join the world as their files arrive (site/world-context-plan.mts), with their billboards and
+    // their annotation strengths and tiers, which the first plan's tables did not hold.
     let drawn = plan.bodies.length;
     onWorldSystems(next => {
       const added = next.bodies.slice(drawn);
       drawn = next.bodies.length;
-      universe.addSystems(next, billboards(added));
+      universe.addSystems(next, billboards(added), annotationsForBodies(added));
     });
     // The first world mount adopts a planner made now: its worker builds the planner from the summary while the first body
     // still prepares, so the world's first frame waits only for its own plan. Later mounts make their own.

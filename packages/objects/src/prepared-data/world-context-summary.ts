@@ -17,7 +17,7 @@ export function expandWorldContextSummary(value: unknown): unknown {
   const input = record(value, 'world context summary');
   // A value without the tables (a copy of a parsed summary a caller changed) is already in that shape, for the checks to read.
   if (input.schema !== PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA || input.systemNames === undefined) return value;
-  const { systemNames, discoveries, billboard, bodies, deferred, ...rest } = input;
+  const { systemNames, discoveries, billboard, bodies, ...rest } = input;
   const tables = readTables({ systemNames, discoveries, billboard }, 'world context summary');
   const rows = transpose(bodies, 'world context summary bodies');
   const placed = new Map<string, unknown>([...[rest.focus, ...rows].map(row => {
@@ -25,12 +25,7 @@ export function expandWorldContextSummary(value: unknown): unknown {
     return [String(body.id), body.positionM] as const;
   }), ...centres(rest.orbitCenters, 'world context summary')]);
   return { ...rest, focus: expandBody(rest.focus, tables, placed, 'world context summary focus'),
-    bodies: rows.map((row, index) => expandBody(row, tables, placed, `world context summary body ${index}`)),
-    ...(deferred === undefined ? {} : { deferred: transpose(deferred, 'world context summary deferred').map((row, index) => {
-      const where = `world context summary deferred ${index} ${String(row.id)}`, { system, discovery, ...kept } = row;
-      return { ...kept, ...(system === undefined ? {} : { systemName: listed(tables.systemNames, system, `${where} system`) }),
-        ...(discovery === undefined ? {} : { discovery: listed(tables.discoveries, discovery, `${where} discovery`) }) };
-    }) }) };
+    bodies: rows.map((row, index) => expandBody(row, tables, placed, `world context summary body ${index}`)) };
 }
 
 /** One system's file in the shape `parsePreparedWorldSystem` checks. `placed` gives each body the world context already

@@ -10,6 +10,15 @@
         100
       ],
       "basis": "Presentation choice, 2026-09-30: the census is whole within 50 pc of the Sun and thins linearly to nothing at its 100 pc reach, so it fades into the 800 pc level around it instead of ending in a ball of dense stars at its edge."
+    },
+    {
+      "bank": "packaged-stars",
+      "uncapped": true,
+      "shellPcFromSun": [
+        20,
+        100
+      ],
+      "basis": "The star packages that are plain dots, each in the level of its own distance from the Sun (20 to 100 pc here), so a star appears with its neighbours as their region fills the view. Each is a star with a page of its own, so none is thinned by the density cap and none takes another dot's room."
     }
   ],
   "maxKinematicSigmaKpc": 1,
@@ -23,5 +32,10 @@
     "local-3kpc",
     "local-800pc"
   ],
-  "basis": "Every star of the Gaia Catalogue of Nearby Stars within 100 pc not already drawn by an outer level, unthinned: inside the galaxy the census is drawn as measured, so its real clumps and gaps show. Its own 100 pc reach would be a hard edge, so it fades out from 50 pc (the bank's fadePcFromSun)."
+  "basis": "Every star of the Gaia Catalogue of Nearby Stars within 100 pc not already drawn by an outer level, unthinned: inside the galaxy the census is drawn as measured, so its real clumps and gaps show. Its own 100 pc reach would be a hard edge, so it fades out from 50 pc (the bank's fadePcFromSun).",
+  "apart": {
+    "bank": "packaged-stars",
+    "pc": 0.2,
+    "basis": "A star package is that star at the place its page uses. A catalogue row within 0.2 pc of one (twice the 0.1 pc grid every dot of this bank is rounded to) is the same star from that catalogue, drawn once: 85 of the 2,108 packaged stars had such a dot on 2026-10-02."
+  }
 }

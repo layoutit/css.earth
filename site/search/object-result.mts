@@ -1,10 +1,6 @@
-import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
 import type { CatalogueRow } from './catalogue-index.mts';
-import { markerStyle } from '@cssearth/renderer/navigation/marker-presentation.ts';
 
 const PREVIEW_PIXELS = 40;
-const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS)
-  .map(({ presentation }) => presentation.size));
 
 /** Inline overview rows have no observer distance; every row uses the same retained view. */
 export type ObjectResultEntry = Omit<CatalogueRow, 'kind' | 'detail'> & {
@@ -19,13 +15,13 @@ export interface ObjectResultView {
   readonly kind: HTMLSpanElement; readonly value: HTMLSpanElement; readonly unit: HTMLSpanElement;
 }
 
-/** The prepared search thumbnail of a scene object with a context sprite. */
-export function searchPreviewUrl(objectId: string): string | null {
-  return PREPARED_NAVIGATION_MARKERS[objectId]?.context ? `/navigation/search/${objectId}@2x.webp` : null;
+/** The prepared search thumbnail of a scene object with a context sprite, as its row's marker says (`preview`). */
+export function searchPreviewUrl(marker: ObjectResultEntry['marker']): string | null {
+  return marker.kind === 'scene' && marker.preview ? `/navigation/search/${marker.id}@2x.webp` : null;
 }
 
 function renderMarker(documentTarget: Document, entry: ObjectResultEntry) {
-  const preview = entry.marker.kind === 'scene' ? searchPreviewUrl(entry.marker.id) : null;
+  const preview = searchPreviewUrl(entry.marker);
   if (preview) {
     const image = documentTarget.createElement('img');
     image.className = 'object-search-preview';
@@ -53,19 +49,19 @@ function renderMarker(documentTarget: Document, entry: ObjectResultEntry) {
     }
     return marker;
   }
-  const prepared = PREPARED_NAVIGATION_MARKERS[entry.marker.id];
-  if (!prepared) throw new Error(`Prepared catalogue marker is missing: ${entry.marker.id}.`);
-  const presentation = markerStyle(prepared, { color: entry.marker.color, scale: THUMBNAIL_SCALE });
-  marker.className = `object-navigation-marker ${entry.marker.id}${presentation.ringed ? ' ringed' : ''}`;
-  marker.style.cssText = presentation.style;
+  // The row carries its sprite's styles (prepared-catalogue-index.mts): a page holds no table of every object's marker.
+  const sprite = entry.marker.sprite;
+  if (!sprite) throw new Error(`Result row ${entry.id} carries no prepared marker for ${entry.marker.id}: neither a search thumbnail nor a sprite.`);
+  marker.className = `object-navigation-marker ${entry.marker.id}${sprite.ringStyle === undefined ? '' : ' ringed'}`;
+  marker.style.cssText = sprite.style;
   marker.setAttribute('aria-hidden', 'true');
   const disk = documentTarget.createElement('i');
-  disk.style.cssText = presentation.innerStyle;
+  disk.style.cssText = sprite.innerStyle;
   marker.append(disk);
-  if (presentation.ringed) {
+  if (sprite.ringStyle !== undefined) {
     const ring = documentTarget.createElement('b');
     ring.className = 'object-navigation-ring';
-    ring.style.cssText = presentation.ringStyle;
+    ring.style.cssText = sprite.ringStyle;
     marker.append(ring);
   }
   return marker;

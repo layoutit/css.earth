@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { contextObjectAssetUrls, contextObjectJsonModule, contextObjectModule, prepareCatalog } from '../build/prepare/prepare-catalog.mts';
+import { contextObjectAssetUrls, contextObjectJsonModule, contextObjectModule, prepareCatalog, splitContextObjectAssets } from '../build/prepare/prepare-catalog.mts';
 import { readCatalog } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { prepareBodyRecords } from '../../packages/astronomy/cli/body-records.mts';
@@ -31,6 +31,14 @@ test('dev context resources are their inventory files on the dev server, never a
   const source = contextObjectModule([{ id: 'nebula' }], assets);
   assert.match(source, /"\.\.\/src\/objects\/nebula\/prepared\/atlases\/x\.webp":"\/src\/objects\/nebula\/prepared\/atlases\/x\.webp"/u);
   assert.doesNotMatch(source, /\?url|prepared\/\*\*/u, 'No prepared file enters the runtime module graph.');
+});
+
+test('a dataset bank lists its files apart; the application names only the other context objects\' files', () => {
+  const assets = { '../src/objects/m31-layers/prepared/a.webp': '/a', '../src/objects/m1-volume/prepared/b.webp': '/b', '../src/objects/milky-way-volume/prepared/c.bin': '/c' };
+  const { inline, banks } = splitContextObjectAssets([{ id: 'm31-layers', type: 'image-layer-bank' }, { id: 'm1-volume', type: 'volume-dataset-bank' },
+    { id: 'milky-way-volume', type: 'density-volume' }, { id: 'empty-layers', type: 'image-layer-bank' }], assets);
+  assert.deepEqual(inline, { '../src/objects/milky-way-volume/prepared/c.bin': '/c' });
+  assert.deepEqual(banks, { 'empty-layers': {}, 'm1-volume': { '../src/objects/m1-volume/prepared/b.webp': '/b' }, 'm31-layers': { '../src/objects/m31-layers/prepared/a.webp': '/a' } });
 });
 
 test('the build reads three named prepared files and the source manifest per context object, never a catalogue bank', () => {

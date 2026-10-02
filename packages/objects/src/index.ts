@@ -41,8 +41,8 @@ export { expandWorldContextSummary, expandWorldSystem } from './prepared-data/wo
 export type { Cancellation } from './volume/cancellation.js';
 export type { ObservationMapping } from './volume/observation-mapping.js';
 export type { SimulationDepthPrior } from './volume/simulation-prior.js';
-export { parsePreparedWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldContextPlan, worldContextGeometry, orbitVertices, parsePreparedWorldSystem, extendWorldContext, parseCompleteWorldContext } from './prepared-data/world-context.js';
-export type { PreparedContextPoint, PreparedContextPointSource, PreparedContextBody, PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedContextCameraPresentation, PreparedVolumeOpacityProfile, PreparedWorldContext, PreparedWorldSystem, PreparedWorldContextGeometry } from './prepared-data/world-context.js';
+export { parsePreparedWorldIndex, parsePreparedWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldContextPlan, worldContextGeometry, orbitVertices, parsePreparedWorldSystem, extendWorldContext, parseCompleteWorldContext } from './prepared-data/world-context.js';
+export type { PreparedContextPoint, PreparedContextPointSource, PreparedContextBody, PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedContextCameraPresentation, PreparedVolumeOpacityProfile, PreparedWorldContext, PreparedWorldIndex, PreparedWorldSystem, PreparedWorldContextGeometry } from './prepared-data/world-context.js';
 export { worldCameraOf, parsePreparedWorldCamera } from './prepared-data/world-camera.js';
 export { parsePreparedWorldCameraFrame } from './prepared-data/world-frame.js';
 export type { PreparedWorldCameraFrame } from './prepared-data/world-frame.js';
