@@ -50,6 +50,20 @@ export function publishDatasetPreview(root: ParentNode | null, buttons: readonly
   }
 }
 
+/** The list shows three rows and scrolls the rest: a saved link to a later dataset (the Moon's gravity) opened on a list
+ * whose visible rows all looked unselected (2026-10-01). Bring the pressed row into the list's own scroll. A change of
+ * the pressed row asks; the first three rows of an unscrolled list need no layout read. */
+function revealPressedDataset(buttons: readonly HTMLButtonElement[], revealed: HTMLButtonElement | null): HTMLButtonElement | null {
+  const listed = buttons.filter(button => !button.closest('[hidden]'));
+  const button = listed.find(button => button.getAttribute('aria-pressed') === 'true') ?? null;
+  const list = button?.closest<HTMLElement>('.object-observation-controls');
+  if (!button || button === revealed || !list || (revealed === null && listed.indexOf(button) < 3)) return button;
+  const row = button.getBoundingClientRect(), box = list.getBoundingClientRect();
+  if (row.top < box.top) list.scrollTop -= box.top - row.top;
+  else if (row.bottom > box.bottom) list.scrollTop += row.bottom - box.bottom;
+  return button;
+}
+
 /** Native responses and retained controls publish the same committed dataset presentation. */
 export function publishDatasetSelection(buttons: readonly HTMLButtonElement[], details: readonly { id: string; panel: HTMLElement }[],
   contexts: readonly HTMLElement[], pressed: ReadonlySet<string | null>, previewRoot: ParentNode | null = null) {
@@ -151,6 +165,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     }
   }
   let ready = false, destroyed = false, lastState: Readonly<ObjectSelectionState> | null = null, actions = 0;
+  let revealedDataset: HTMLButtonElement | null = null;
   let playing: string | null = null, currentGroup: string | null = null;
   let playTimer: ReturnType<typeof setTimeout> | null = null;
   function clearPlayTimer() {
@@ -214,6 +229,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     }
     const focusedPlay = playInputs.find(input => input === document.activeElement);
     publishDatasetSelection(datasetInputs, details, contexts, pressed, datasetRoot);
+    revealedDataset = revealPressedDataset(datasetInputs, revealedDataset);
     publishPlayback(next);
     // Each date owns its details panel; carry keyboard focus to its matching Pause button when it changes.
     if (focusedPlay && !focusedPlay.isConnected) {

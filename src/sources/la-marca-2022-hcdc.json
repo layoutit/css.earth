@@ -1,0 +1,51 @@
+{
+  "id": "la-marca-2022-hcdc",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Catalog of Hydra I cluster members (Hydra I Cluster Dwarf galaxy Catalogue)",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2022A&A...659A..92L"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/659/A92"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...659A..92L",
+      "label": "2022A&A...659A..92L"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A92",
+      "label": "CDS J/A+A/659/A92"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/659/A92/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "hcdc: 317 dwarf members of the Hydra I cluster with J2000 positions, r magnitude and g-r colour."
+    }
+  ],
+  "creators": [
+    "A. La Marca",
+    "R. Peletier",
+    "E. Iodice"
+  ],
+  "publisher": "A&A 659, A92",
+  "publicationDate": "2022",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite La Marca et al. (2022), A&A 659, A92.",
+      "scope": "Hydra I cluster dwarf members",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/659/A92/ReadMe"
+    }
+  ]
+}

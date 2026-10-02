@@ -3,6 +3,7 @@ import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import { projectCatalogPosition } from './galaxy-catalog-layout.js';
+import { setReadout } from '../rendering/readouts.js';
 
 interface Dot { readonly object: PreparedCatalogObject; readonly element: HTMLElement; transform: string }
 
@@ -31,12 +32,11 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
   // Membership is a prepared scientific fact, never a runtime distance cut. A row with a package is drawn by the world context.
   const dots: Dot[] = catalog.objects.filter(object => object.name && !object.detailedObjectId && object.membership.group === 'local-group' && (!sampleIds || sampleIds.has(object.id))).map(object => {
     const element = document.createElement('span');
-    element.dataset.galaxyDot = object.id;
+    setReadout(element, 'galaxyDot', object.id);
     element.style.cssText = 'opacity:0;visibility:hidden';
     root.append(element);
     return { object, element, transform: '' };
   });
-  root.dataset.catalogueCount = String(dots.length);
   let destroyed = false, dormant = false;
   return Object.freeze({ root, catalog,
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number) {
