@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { compileCssSky } from '@cssearth/bake/sky';
 import { preparedSkyCameraTransform } from '@cssearth/renderer/sky/prepared-sky-runtime.ts';
-import { validatePreparedCssSky } from '@cssearth/renderer/sky/validation.ts';
+import { validatePreparedCssSky } from '@cssearth/objects';
 import type { BakedSky } from '@cssearth/bake/sky';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';

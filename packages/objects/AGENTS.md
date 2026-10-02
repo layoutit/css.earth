@@ -69,4 +69,9 @@ resource loading and in-place dataset installation remain in renderer. Contract 
 serialized pose keyframes and leaf bounds validation. Frustum computation, DOM animation and CSS publication
 stay in renderer; leaf-box extraction stays in bake and imports the shared record. Leaf bounds contract tests
 run in the packages lane; writer/frustum conformance remains in `integration/renderer-bake/`.
-The bake presentation-envelope validator still depends on bake-owned sky/Sun validation pending their format split.
+Prepared CSS sky, parallax, cubic-sky and directional-Sun contracts and validators live in `src/prepared-data/`,
+exported by the main entry. Sky/Sun validators default to the historical authored bake acceptance and diagnostics. The single 'runtime' policy
+opts into runtime checks; there are no independent validation flags.
+Sky/Sun authored standards and direction computation stay with bake and renderer.
+Bake retains the authored presentation-envelope checks: runtime validation is stricter in several fields and cannot
+replace them without changing accepted authored input.

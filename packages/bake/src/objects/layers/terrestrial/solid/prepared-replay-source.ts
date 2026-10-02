@@ -1,4 +1,4 @@
-import { type CameraPlan } from '@cssearth/objects';
+import { type CameraPlan, type PreparedCubicSkyPlan, type PreparedDirectionalSunPlan, validatePreparedCubicSky, validateDirectionalSunPlan } from '@cssearth/objects';
 
 import type {PreparedProjectiveTextureLeaf} from '../../../../presentation/index.ts';
 import { type Decoder, requireRecord, shape, text, number, array, optional, dictionary } from '@cssearth/core';
@@ -9,22 +9,20 @@ export interface ReplayRings {
 }
 export interface SolidReplayScene {
  rings?: ReplayRings;
- camera:CameraPlan;sky:ReturnType<typeof validatePreparedCubicSky>;sun:ReturnType<typeof validateDirectionalSunPlan>;systemTransform:string;
+ camera:CameraPlan;sky:PreparedCubicSkyPlan;sun:PreparedDirectionalSunPlan;systemTransform:string;
  bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[];
  surfaceTriangles?:number[][][];surfaceDatasetRanges?:readonly {datasetId:string;start:number;count:number}[];
 }
 import {camera} from '../../../scene/index.ts';
 import {parse} from '@cssearth/core/schema';
-import {validatePreparedCubicSky} from '../../../../presentation/index.ts';
-import {validateDirectionalSunPlan} from '../../../../presentation/index.ts';
 
 const cameraPlan=(value:unknown)=>parse(value,camera,'saved camera');
 const matrix=(value:unknown)=>typeof value==='string'?value:array(number)(value);
 const leaf=shape({tag:optional(text),className:optional(text),style:text,attributes:optional(dictionary(text)),
   projectiveTextureLayer:optional(shape({schema:text,rasterScale:optional(number),textureMatrix:matrix,frameMatrix:matrix}))});
 const parseReplayRings:Decoder<ReplayRings>=shape({leaves:array(leaf),resource:shape({key:text,url:text,pool:text}),coverage:requireRecord,qualification:array(shape({id:text,qualification:text}))});
-export const parseSolidReplayScene:Decoder<SolidReplayScene>=shape({rings:optional(parseReplayRings),camera:cameraPlan,sky:validatePreparedCubicSky,
-  sun:validateDirectionalSunPlan,systemTransform:text,bodyLeaves:array(leaf),
+export const parseSolidReplayScene:Decoder<SolidReplayScene>=shape({rings:optional(parseReplayRings),camera:cameraPlan,sky:value=>validatePreparedCubicSky(value),
+  sun:value=>validateDirectionalSunPlan(value),systemTransform:text,bodyLeaves:array(leaf),
   surfaceTriangles:optional(array(array(array(number)))),surfaceDatasetRanges:optional(array(shape({datasetId:text,start:number,count:number})))});
 /** Git and the runtime inventory identify every prepared byte; a digest recorded beside an asset is refused. */
 const absent=(value:unknown):undefined=>{if(value!==undefined)throw new TypeError(`is a recorded digest (${JSON.stringify(value)}); prepared assets carry none`);return undefined;};

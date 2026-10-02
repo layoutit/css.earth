@@ -1,23 +1,21 @@
-import type { PreparedContractTrack, PreparedContractVariant, PreparedMaterialAddress, PreparedMaterialFrameMapping, EllipsoidProjectionPlan } from '@cssearth/objects';
-import { requireTextureBindings, requireTextureLevels, requireTexturePlacements, type ObjectRuntimeDefinition, type PreparedWrite, type PreparedAssets, type PreparedPresentationDefinition, type PreparedDepthOrder, requirePreparedData } from '@cssearth/objects';
+import {
+  type PreparedPoseKeyframe, type PreparedContractTrack, type PreparedContractVariant, type PreparedMaterialAddress,
+  type PreparedMaterialFrameMapping, type EllipsoidProjectionPlan, requireTextureBindings, requireTextureLevels,
+  requireTexturePlacements, type ObjectRuntimeDefinition, type PreparedWrite, type PreparedAssets,
+  type PreparedPresentationDefinition, type PreparedDepthOrder, requirePreparedData, type PreparedCubicSkyPlan,
+  type PreparedDirectionalSunPlan, validatePreparedCubicSky, validateDirectionalSunPlan, PREPARED_PRESENTATION_SCHEMA,
+} from '@cssearth/objects';
 
 import { isArray } from '@cssearth/core';
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 
-import type { PreparedCubicSkyPlan } from "./cubic-sky-contract.ts";
-import type { PreparedDirectionalSunPlan } from "./directional-sun-contract.ts";
-
 export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema" | "id" | "controls" | "sky" | "sun" | "materials" | "variants" | "animations" | "destinations"> & {
   schema: string; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan | null;
   materials: readonly PreparedContractTrack[]; variants: readonly PreparedContractVariant[];
-  animations: readonly (Omit<PreparedPresentationDefinition["animations"][number], "keyframes"> & { keyframes: { offset: number; transform: string }[] })[];
+  animations: readonly (Omit<PreparedPresentationDefinition["animations"][number], "keyframes"> & { keyframes: PreparedPoseKeyframe[] })[];
   destinations?: { catalog: { url: string; bytes: number; count: number; sourcePage?: string; license?: string; snapshotDate?: string }; defaultDataset: string; statuses: { detail: string; overview: string } };
 };
 
-import { validatePreparedCubicSky } from "./cubic-sky-contract.ts";
-import { validateDirectionalSunPlan } from "./directional-sun-contract.ts";
-
-import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 const tags = new Set(["div", "span", "s", "b", "u"]);
 function fail(message: string): never { throw new TypeError(`Prepared presentation: ${message}.`); }
 function string(value: unknown, label: string): asserts value is string { if (typeof value !== "string" || !value.length) fail(`${label} must be a nonempty string`); }
@@ -41,7 +39,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
-  validatePreparedCubicSky(plan.sky);
+  validatePreparedCubicSky(plan.sky, 'authored');
   if (plan.sun !== null) validateDirectionalSunPlan(plan.sun);
   if (!(plan.camera?.sceneScale > 0) || !(plan.camera.minimumZoom > 0) || !(plan.camera.maximumZoom >= plan.camera.minimumZoom)) fail("camera plan is incomplete");
   if (!isArray(assets?.entries)) fail("resource catalog is missing");

@@ -1,4 +1,4 @@
-import type { PreparedCubicSkyPlan } from '../../presentation/index.ts';
+import type { PreparedCubicSkyPlan } from '@cssearth/objects';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../presentation/index.ts';
 
 function skyFieldOfView(sky: PreparedCubicSkyPlan) {

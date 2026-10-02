@@ -2,12 +2,11 @@ import { readFileSync } from 'node:fs';
 import { afterEach, beforeEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import type { PreparedCssSky } from './types.js';
+import { type PreparedCssSky, type DensityVolumeFrame } from '@cssearth/objects';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 import type { PreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
-import type { DensityVolumeFrame } from '@cssearth/objects';
 import { stubGlobal, unstubAllGlobals, waitFor } from '@cssearth/objects/node/contract';
 
 // linkedom has no layout delivery; caption geometry has explicit observer tests.
@@ -42,7 +41,6 @@ mock.module('../universe/prepared-world-context.js', { namedExports: { ...await 
   mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, setOverview() {}, setSystemRetired() {}, setBodyVisibility() {}, setOutsideGalaxy() {}, backgroundExclusionRects: () => foregroundRects, bodyLabelRects: () => [], destroy() {} }) } });
 // The modules under test import the mocked ones, so they load after the mocks.
 const { mountPreparedCssSky, preparedSkyCameraTransform } = await import('./prepared-sky-runtime.js');
-const { validatePreparedCssSky } = await import('./validation.js');
 const { validatePreparedCssVolume } = await import('../volume/validation.js');
 const { preparedVolumeCameraTransform } = await import('../volume/prepared-volume-runtime.js');
 const { worldRotationCss } = await import('../navigation/world-camera-math.js');
@@ -193,15 +191,6 @@ test('sky and volume project ICRF directions identically, with CSS y down', () =
   assert.deepEqual(([css[0]! * 2 + css[4]! * 1, css[1]! * 2 + css[5]! * 1, css[10]! * -3]), [1, -2, -3]);
   assert.throws(() => preparedSkyCameraTransform(world(), { ...viewport, focalPixels: Infinity }));
   assert.throws(() => preparedSkyCameraTransform(world([0, 0, 0], [0, 0, 0, 2]), viewport));
-});
-
-test('validates six inward orthonormal faces, exact resource metadata and URL-free numeric CSS', () => {
-  const sky = fixture(); assert.equal(validatePreparedCssSky(sky, resources), sky);
-  for (const replacement of [{ ...sky, extra: true }, { ...sky, faces: sky.faces.slice(1) }, { ...sky, faces: [...sky.faces.slice(0, 5), sky.faces[0]] },
-    ...[{ upIcrf: [0, 1, 0] }, { rightIcrf: [0, 1, 0] }, { texturePath: '../sky/px.webp' }, { widthPx: 1 },
-      { style: { ...sky.faces[0]!.style, transform: 'matrix3d(1,0,0)' } }, { style: { ...sky.faces[0]!.style, backgroundImage: 'url(remote)' } }]
-      .map(face => ({ ...sky, faces: [{ ...sky.faces[0], ...face }, ...sky.faces.slice(1)] }))]) assert.throws(() => validatePreparedCssSky(replacement, resources));
-  assert.throws(() => validatePreparedCssSky(sky, resources.slice(1)), /resource/);
 });
 
 test('optional sky is validated as part of the existing volume capability and shared resource bank', () => {

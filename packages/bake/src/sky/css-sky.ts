@@ -1,10 +1,8 @@
+import { PREPARED_CSS_SKY_SCHEMA, type DensityVolumeFrame, type PreparedCssSky, validatePreparedCssSky } from '@cssearth/objects';
 /** Static PolyCSS cube geometry in physical ICRF axes; the renderer owns its one axis reflection. */
 import { compileVolumeLeaf } from '../volume-leaves/index.ts';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
-import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { BakedSky } from './bake.ts';
-import type { PreparedCssSky } from '@cssearth/renderer/sky/types.ts';
-import { validatePreparedCssSky } from '@cssearth/renderer/sky/validation.ts';
 const RADIUS_UNITS = 1, CSS_PIXELS_PER_UNIT = 50;
 function compileFaces(faces: BakedSky['faces']): PreparedCssSky['faces'] {
   return faces.map((face, index) => {
@@ -23,7 +21,7 @@ function compileFaces(faces: BakedSky['faces']): PreparedCssSky['faces'] {
 export function compileCssSky(baked: BakedSky, frame: DensityVolumeFrame) {
   const resource = (face: BakedSky['faces'][number]) => ({ path: face.texturePath, width: face.widthPx, height: face.heightPx, bytes: face.bytes });
   const resources = baked.faces.map(resource);
-  const sky: PreparedCssSky = { schema: 'cssearth-css-sky@1', referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, radiusUnits: RADIUS_UNITS,
+  const sky: PreparedCssSky = { schema: PREPARED_CSS_SKY_SCHEMA, referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, radiusUnits: RADIUS_UNITS,
     ...(baked.parallax ? { parallax: { originM: [...baked.parallax.originM] as [number, number, number],
       metersPerCssPixel: baked.parallax.radiusM / (RADIUS_UNITS * CSS_PIXELS_PER_UNIT) } } : {}),
     faces: compileFaces(baked.faces),

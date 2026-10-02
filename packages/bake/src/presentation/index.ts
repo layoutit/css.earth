@@ -1,7 +1,7 @@
 // `@cssearth/bake/presentation`: the CSS presentation compilers (Node only). The retained node tree and its projective
 // layouts and leaf boxes, offline CSSOM reads, activation groups, and the row-bank cutaway, composite and emissive
 // presentations, which take the host's material and navigation adapters; the prepared-presentation contract with its
-// validator, and the cubic-sky and directional-Sun contracts and preparers it validates. Shared format records and
+// authored validator, and the cubic-sky and directional-Sun standards and preparers. Shared format records and
 // the presentation schema identifier are imported directly from @cssearth/objects.
 export * from './projective-layout.ts';
 export * from './leaf-box.ts';

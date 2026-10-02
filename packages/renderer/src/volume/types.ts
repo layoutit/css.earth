@@ -1,8 +1,6 @@
-import type { PreparedLeafBounds } from '@cssearth/objects';
-import type { DensityVolumeFrame } from '@cssearth/objects';
+import { type PreparedLeafBounds, type DensityVolumeFrame, type PreparedCssSky } from '@cssearth/objects';
 import type { PhysicalCameraPose, PositionM } from '@cssearth/engine';
 import type { WorldCameraViewport, WorldCameraPose } from '../navigation/world-camera.js';
-import type { PreparedCssSky } from '../sky/types.js';
 
 /** The retained-DOM cost of one volume topology, measured by the renderer's conformance tests. The renderer declares it;
  * the bake's element budget (`@cssearth/objects`) validates it and allocates slabs within it. */
