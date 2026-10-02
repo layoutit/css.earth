@@ -8,6 +8,7 @@ Abell 2744 as an object of the world: its place, its card and its list marker. I
 | --- | --- |
 | [MCXC-II, Sadibekova et al. (2024)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/688/A187) | [Record](../../sources/mcxc-ii-2024.json). Row MCXC J0014.3-3023: J2000 position 3.5783°, -30.3834° and redshift 0.3066 (spectroscopic; its reference is [2004A&A...425..367B](https://ui.adsabs.harvard.edu/abs/2004A&A...425..367B), [record](../../sources/publication-2004a-a-425-367b.json)). |
 | [Planck Collaboration (2020)](https://arxiv.org/abs/1807.06209) | [Record](../../sources/planck-2018-cosmology.json). The cosmology that turns the redshift into a distance: comoving distance 1,258 Mpc and light travel time 3.59 billion years (Astropy 8.0.1, `Planck18`). |
+| [Bergamini et al. (2023)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/670/A60) | [Record](../../sources/bergamini-2023-a2744-members.json). The 202 spectroscopic cluster members of its table B1, drawn as dots by the [Abell 2744 members](../abell-2744-members/README.md) bank while the cluster is selected. |
 
 ## Processing
 

@@ -70,6 +70,17 @@
           "label": "ESA/Webb weic2305a: NASA, ESA, CSA, I. Labbe (Swinburne University of Technology), R. Bezanson (University of Pittsburgh), A. Pagan (STScI)",
           "checked": "2026-10-02"
         }
+      },
+      {
+        "id": "members",
+        "label": "Member dots",
+        "value": "202 spectroscopic members",
+        "source": {
+          "catalogueId": "bergamini-2023-a2744-members",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/670/A60",
+          "label": "Bergamini et al. (2023), A&A 670, A60; CDS J/A+A/670/A60, table B1",
+          "checked": "2026-10-02"
+        }
       }
     ],
     "moreFacts": []
@@ -125,6 +136,12 @@
       "role": "facts",
       "description": "ESA/Webb weic2305a: NASA, ESA, CSA, I. Labbe (Swinburne University of Technology), R. Bezanson (University of Pittsburgh), A. Pagan (STScI)",
       "href": "https://esawebb.org/images/weic2305a/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bergamini et al. (2023), A&A 670, A60; CDS J/A+A/670/A60, table B1",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/670/A60"
     }
   ],
   "provenance": {
