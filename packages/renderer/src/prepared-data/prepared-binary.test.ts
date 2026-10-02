@@ -9,4 +9,3 @@ test('the page reads a packed file through the platform stream to exactly its or
   assert.deepEqual((new Uint8Array(await readPreparedBinary(packed, 'x.bin'))), bytes);
   await assert.rejects(readPreparedBinary(bytes, 'x.bin'), /x.bin: a prepared binary file is gzip-compressed; this one starts 0, 7/u);
 });
-
