@@ -1,3 +1,4 @@
+import { writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
 import { MAX_CATALOGUE_POINTS, parseCatalogueCells, parseCataloguePointSpread, parseDensityVolumeFrame } from '@cssearth/objects';
 import { decodeCatalogueBankBinary } from '../prepared-data/catalogue-bank-binary.js';
@@ -245,7 +246,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         }
       }
       const display = alpha > 0 ? '' : 'none';
-      if (root.style.opacity !== String(alpha)) root.style.opacity = String(alpha);
+      writeStyle(root, 'opacity', String(alpha));
       if (root.style.display !== display) {
         root.style.display = display;
         if (display === '' && runtime) revealLayers(runtime.layers);
@@ -337,7 +338,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
             const filled = from > to ? Math.max(0, Math.min(1, Math.log(from / (distanceUnits * halfWidthPerDistance)) / Math.log(from / to))) : 0;
             shares.forEach((entry, index) => {
               const group = field.parts[index]!.group, opacity = String(1 - (1 - entry.nearOpacity) * filled);
-              if (group.style.opacity !== opacity) group.style.opacity = opacity;
+              writeStyle(group, 'opacity', opacity);
             });
             field.publish(publication);
             rebudget(field.parts.map(entry => entry.stats().candidates), distanceUnits, shares);

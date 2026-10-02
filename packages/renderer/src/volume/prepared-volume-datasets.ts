@@ -1,3 +1,4 @@
+import { writeData, writeStyle } from '../rendering/retained-write.js';
 import { preparedVolumeTexturePaths } from './prepared-volume-runtime.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import { preparedDomAdoption } from '../rendering/prepared-dom-adoption.js';
@@ -194,6 +195,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
       let stars: ReturnType<typeof mountPreparedCataloguePoints> | null = null;
       const mountStars = () => {
         stars = mountPreparedCataloguePoints({ host: root, before: end, payload: datasetById.get(selected)!.stars, createElement: create, nativeFocalCss });
+        // Written directly while the points are built: the first publication's write through writeStyle always lands.
         stars.root.style.display = starsVisible ? 'block' : 'none';
       };
       const state = (): PreparedVolumeDatasetState => Object.freeze({ id: selected, defaultDataset: data.defaultDataset, selectedDataset: selected,
@@ -231,7 +233,9 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
         updateResidencyMetadata();
         return family;
       };
-      const publish = (publication: VolumeCameraPublication, visible = true) => {
+      /** `holdMembership`: the camera coasts, so the surface keeps the root it is in until the coast stops
+       * (motion-freezes-membership.md). */
+      const publish = (publication: VolumeCameraPublication, visible = true, holdMembership = false) => {
         if (destroyed) return;
         // A hidden bank must forget its last near camera; otherwise selecting a
         // dataset while zoomed out could load detail using that stale publication.
@@ -250,7 +254,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
             const nearer = Math.hypot(px - centre[0], py - centre[1], pz - centre[2]) < Math.hypot(px, py, pz);
             if (nearer) { target = frontRoot; marker = frontEnd; }
           }
-          if (bank.surface.parentNode !== target) target.insertBefore(bank.surface, marker);
+          if (bank.surface.parentNode !== target && !holdMembership) target.insertBefore(bank.surface, marker);
         }
         const builtRoots = bank.runtime.roots.length;
         bank.runtime.publish(publication);
@@ -263,24 +267,24 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
           axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
         })), dataset.brightness);
         // Impostors contain the saved exposure; their detail wrapper owns the matching full-volume exposure.
-        bank.surface.style.opacity = dataset.volume.impostors ? '1' : String(opacity);
+        writeStyle(bank.surface, 'opacity', dataset.volume.impostors ? '1' : String(opacity));
         const pointOpacity = projectedVolumeOpacity(publication.world, publication.viewport, dataset.volume.frame,
           data.framingRadiusUnits, data.pointVisibility!);
         const showPoints = starsVisible && (nativeFocalCss !== undefined || pointOpacity > 0);
         // Points are built the first time they show: a distant or disabled cluster keeps no hidden star nodes.
         if (showPoints && !stars) { mountStars(); updateResidencyMetadata(); }
         if (stars) {
-          stars.root.style.opacity = nativeFocalCss === undefined ? String(pointOpacity)
+          writeStyle(stars.root, 'opacity', nativeFocalCss === undefined ? String(pointOpacity)
             : nativeProjectedFade(projectedVolumeRadiusPixels(publication.world, publication.viewport, dataset.volume.frame, data.framingRadiusUnits),
-              publication.viewport.focalPixels, nativeFocalCss, data.pointVisibility!.hiddenBelowRadiusPixels, data.pointVisibility!.fullAboveRadiusPixels);
-          stars.root.style.display = showPoints ? 'block' : 'none';
+              publication.viewport.focalPixels, nativeFocalCss, data.pointVisibility!.hiddenBelowRadiusPixels, data.pointVisibility!.fullAboveRadiusPixels));
+          writeStyle(stars.root, 'display', showPoints ? 'block' : 'none');
           // Hidden points leave layout; projecting them only wrote styles nobody draws.
           if (showPoints) stars.publish(publication);
         }
         // Test hooks: rounded and written only on change, so a steady frame writes no attributes.
         const pointHook = String(Math.round(pointOpacity * 1000) / 1000), cloudHook = String(Math.round(opacity * 1000) / 1000);
-        if (root.dataset.pointOpacity !== pointHook) root.dataset.pointOpacity = pointHook;
-        if (root.dataset.cloudOpacity !== cloudHook) root.dataset.cloudOpacity = cloudHook;
+        writeData(root, 'pointOpacity', pointHook);
+        writeData(root, 'cloudOpacity', cloudHook);
       };
       try {
         const selectedDataset = datasetById.get(selected)!;
@@ -319,7 +323,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
             if (typeof visible !== 'boolean') throw new TypeError('Catalogue point visibility must be a boolean.');
             if (visible === starsVisible) return;
             starsVisible = visible;
-            if (stars) stars.root.style.display = visible ? 'block' : 'none';
+            if (stars) writeStyle(stars.root, 'display', visible ? 'block' : 'none');
             if (latest) publish(latest);
             notify();
           },
