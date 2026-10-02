@@ -5,7 +5,7 @@ import { closeOrbitFades, contextEmphasis, contextSubject, inSubjectFamily, name
 
 const saturn = { id: 'saturn', centreId: 'sun' }, titan = { id: 'titan', centreId: 'saturn' }, jupiter = { id: 'jupiter', centreId: 'sun' };
 const sun = { id: 'sun', centreId: undefined }, isStar = (id: string) => id === 'sun';
-const page = (body: typeof sun) => contextSubject(body, undefined, undefined, false, false, isStar);
+const page = (body: { id: string; centreId: string | undefined }) => contextSubject(body, undefined, undefined, false, false, isStar);
 const fades = { context: .8, own: .5 }, dim = .25;
 
 test('a frame has one subject, and a satellite shares its host\'s family', () => {
