@@ -62,6 +62,16 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/albedo_arrokoth4_fp36h2_masked1.fits — Simon Porter / New Horizons science team; NASA PDS2024"
+          }
+        ]
       }
     },
     {
@@ -111,7 +121,17 @@
           }
         ]
       },
-      "redistribution": "Retain the original source attribution and notices with published derivatives."
+      "redistribution": "Retain the original source attribution and notices with published derivatives.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408625591_0x630_sci.fit — NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team"
+          }
+        ]
+      }
     },
     {
       "id": "lorri-ca05-label",
@@ -133,7 +153,17 @@
           }
         ]
       },
-      "redistribution": "Retain the original source attribution and notices with published derivatives."
+      "redistribution": "Retain the original source attribution and notices with published derivatives.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408625591_0x630_sci.lbl — NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team"
+          }
+        ]
+      }
     },
     {
       "id": "lorri-ca06",
@@ -155,7 +185,17 @@
           }
         ]
       },
-      "redistribution": "Retain the original source attribution and notices with published derivatives."
+      "redistribution": "Retain the original source attribution and notices with published derivatives.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.fit — NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team"
+          }
+        ]
+      }
     },
     {
       "id": "lorri-ca06-label",
@@ -177,7 +217,17 @@
           }
         ]
       },
-      "redistribution": "Retain the original source attribution and notices with published derivatives."
+      "redistribution": "Retain the original source attribution and notices with published derivatives.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.lbl — NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team"
+          }
+        ]
+      }
     },
     {
       "id": "ca05-registered-camera",
@@ -247,6 +297,16 @@
             "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.fit — Grundy et al.; NASA / JHUAPL / SwRI; New Horizons science team"
+          }
+        ]
       }
     },
     {
@@ -270,6 +330,16 @@
             "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx — Grundy et al.; NASA / JHUAPL / SwRI; New Horizons science team"
+          }
+        ]
       }
     },
     {
@@ -286,6 +356,16 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera transferred from the qualified CA05 LORRI image through the fitted MVIC similarity; native inputs and source mesh are hash bound."
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "Source-bound image registration — cssEarth; New Horizons science team"
+          }
+        ]
       }
     },
     {
@@ -308,6 +388,16 @@
             "evidence": "An adjacent exposure reserved for the frozen camera prediction; native label identifies the product."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626333_0x636_sci.fit — NASA / JHUAPL / SwRI; New Horizons science team"
+          }
+        ]
       }
     },
     {
@@ -328,6 +418,16 @@
             "catalogueId": "source-new-horizons-kem1-lorri-v6",
             "role": "reference",
             "evidence": "An adjacent exposure reserved for the frozen camera prediction; native label identifies the product."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626333_0x636_sci.lbl — NASA / JHUAPL / SwRI; New Horizons science team"
           }
         ]
       }

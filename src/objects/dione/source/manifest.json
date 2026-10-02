@@ -715,6 +715,16 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://doi.org/10.17189/ctqe-ta30 — Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS"
+          }
+        ]
       }
     },
     {

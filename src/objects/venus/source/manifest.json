@@ -655,6 +655,16 @@
             "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/freeair.dat"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/freeair.dat — NASA/JPL Magellan Gravity Science Team (W. L. Sjogren); PDS Geosciences Node"
+          }
+        ]
       }
     },
     {
@@ -677,6 +687,16 @@
             "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/bouguer.dat"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/bouguer.dat — NASA/JPL Magellan Gravity Science Team (W. L. Sjogren); PDS Geosciences Node"
+          }
+        ]
       }
     },
     {
@@ -697,6 +717,16 @@
             "catalogueId": "magellan-gravity-shgj120p",
             "role": "material",
             "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/geoid.dat"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/geoid.dat — NASA/JPL Magellan Gravity Science Team (W. L. Sjogren); PDS Geosciences Node"
           }
         ]
       }

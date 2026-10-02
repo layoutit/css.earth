@@ -200,6 +200,16 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx — New Horizons geology and geophysics team; NASA/JHUAPL/SwRI; NASA PDS Small Bodies Node"
+          }
+        ]
       }
     },
     {

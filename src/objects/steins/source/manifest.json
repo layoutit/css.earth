@@ -99,6 +99,16 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "rosetta",
+            "missionId": "rosetta",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osiwac-4-ast1-steins-str-refl-v1.0/data/img/w20080905t183606461id4df17.img — ESA/Rosetta/MPS OSIRIS team; PDS; NAIF"
+          }
+        ]
       }
     },
     {
@@ -219,6 +229,16 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera geometry calculated from the pinned image and mission kernels for 2867 STEINS at 2008-09-05T18:36:22.008."
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "rosetta",
+            "missionId": "rosetta",
+            "evidence": "Prepared camera derived from the pinned mission image, kernels and source control evidence. — ESA/Rosetta/MPS OSIRIS team; PDS; NAIF"
+          }
+        ]
       }
     },
     {
@@ -235,6 +255,16 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera geometry calculated from the pinned image and mission kernels for 2867 STEINS at 2008-09-05T18:36:46.044."
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "rosetta",
+            "missionId": "rosetta",
+            "evidence": "Prepared camera derived from the pinned mission image, kernels and source control evidence. — ESA/Rosetta/MPS OSIRIS team; PDS; NAIF"
+          }
+        ]
       }
     },
     {
@@ -255,6 +285,16 @@
             "catalogueId": "source-steins-steins-w20080905t183630497id4df17-img",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "rosetta",
+            "missionId": "rosetta",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osiwac-4-ast1-steins-str-refl-v1.0/data/img/w20080905t183630497id4df17.img — ESA/Rosetta/MPS OSIRIS team; PDS; NAIF"
           }
         ]
       }
