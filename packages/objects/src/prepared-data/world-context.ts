@@ -435,7 +435,10 @@ function parseDeferred(value: unknown, bodies: readonly PreparedContextBody[], w
     const input = record(entry, 'deferred body', ['id', 'name', 'host', 'order', 'systemName', 'classification', 'discovery', 'plainDot', 'unpackaged']);
     const id = text(input.id, 'deferred body id'), host = text(input.host, `deferred body ${id} host`), order = finite(input.order, `deferred body ${id} order`);
     if (!/^[a-z][a-z0-9-]*$/.test(id) || held.has(id)) throw new TypeError(`Deferred body ${id} is not an identity apart from the summary's bodies.`);
-    if (!held.has(host) || held.get(host)!.orbit !== undefined) throw new TypeError(`Deferred body ${id} names host ${host}, which is no star the summary places.`);
+    // A plain-dot star nothing orbits hosts itself: its row is in its own object entry (`/objects/<id>/entry.json`).
+    if (host === id) {
+      if (input.plainDot !== true || input.classification !== 'star') throw new TypeError(`Deferred body ${id} hosts itself but is no plain-dot star (plainDot ${JSON.stringify(input.plainDot)}, classification ${JSON.stringify(input.classification)}).`);
+    } else if (!held.has(host) || held.get(host)!.orbit !== undefined) throw new TypeError(`Deferred body ${id} names host ${host}, which is no star the summary places.`);
     if (!Number.isSafeInteger(order) || order < 0 || order >= worldBodyCount) throw new TypeError(`Deferred body ${id} order ${order} lies outside the world's ${worldBodyCount} bodies.`);
     if ([input.plainDot, input.unpackaged].some(flag => flag !== undefined && flag !== true)) throw new TypeError(`Deferred body ${id} flags must be true when present.`);
     return Object.freeze({ id, name: text(input.name, `deferred body ${id} name`), host, order,
@@ -515,10 +518,17 @@ export function extendWorldContext(plan: PreparedWorldContext, systems: readonly
 }
 /** The whole world, every system read, in the full context's order: for build tools and tests. `read` gives a system's
  * `world-systems/<id>.json`. */
-export async function parseCompleteWorldContext(summary: unknown, read: (id: string) => Promise<unknown>): Promise<PreparedWorldContext> {
+export async function parseCompleteWorldContext(summary: unknown, read: (id: string) => Promise<unknown>,
+  /** The bake's `world-stars.json`: each star that hosts itself, as a system of one body. Such a star has no file. */
+  stars: Readonly<Record<string, unknown>> = {}): Promise<PreparedWorldContext> {
   const plan = parsePreparedWorldContextSummary(summary);
+  const own = new Set((plan.deferred ?? []).filter(body => body.host === body.id).map(body => body.id));
   const hosts = [...new Set((plan.deferred ?? []).map(body => body.host))].sort();
-  return extendWorldContext(plan, await Promise.all(hosts.map(async id => parsePreparedWorldSystem(await read(id), plan, id))), true);
+  return extendWorldContext(plan, await Promise.all(hosts.map(async id => {
+    if (!own.has(id)) return parsePreparedWorldSystem(await read(id), plan, id);
+    if (stars[id] === undefined) throw new TypeError(`The world summary leaves ${id} to its own row, and world-stars.json holds none for it.`);
+    return parsePreparedWorldSystem(stars[id], plan, id);
+  })), true);
 }
 function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (value && typeof value === 'object' && validatedContexts.has(value) &&

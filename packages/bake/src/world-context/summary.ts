@@ -11,7 +11,10 @@ type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][numbe
 /** The browser's copy of a prepared world context, split by the object hierarchy. Every body belongs to the system of the
  * body its orbit chain ends at: a star or black hole that orbits nothing, or the focus (the Sun).
  * - `summary` (`world-context-summary.json`, read by every page) holds the camera and frame facts, the focus's own system
- *   in full, and every body that orbits nothing (each other system's star, drawn from afar as one point). Each body of
+ *   in full, and every body that orbits nothing (each other system's star, drawn from afar as one point), but a star
+ *   drawn as a plain dot that nothing orbits: 1,841 of the summary's 3,202 bodies, 78 KB of its 230 KB compressed
+ *   (2026-10-02). Those hold no file: `stars` gives each one's row, which the build puts in the star's own object entry
+ *   (`/objects/<id>/entry.json`), read when the star is opened; the map draws them from a dot bank. Each body of
  *   another system is only listed (`deferred`): its name, classification, discovery record, the star whose system file
  *   holds it and its place in the full context (`order`), which is what navigation, search and world visibility read before
  *   that system loads, and what puts every body back in its place once it has.
@@ -43,9 +46,16 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   };
   const positions = new Map<string, Vector3>([...[focus, ...bodies].map(body => [body.id, body.positionM] as const),
     ...Object.entries(orbitCenters).map(([id, centre]) => [id, centre.positionM] as const)]);
-  const local = (body: Body) => !('orbit' in body && body.orbit) || hostOf(body.id) === focus.id;
+  // A star something orbits, or another body is bound to, stays in the summary: its system and its companion read its place.
+  const hosts = new Set([...bodies.filter(body => body.orbit).map(body => hostOf(body.id)), ...Object.keys(orbitCenters).map(hostOf),
+    ...bodies.flatMap(body => 'boundTo' in body && body.boundTo ? [body.boundTo.hostId] : [])]);
+  const plainStar = (body: Body) => body !== focus && !('orbit' in body && body.orbit) && !('boundTo' in body && body.boundTo) && body.plainDot === true
+    && body.classification === 'star' && !hosts.has(body.id);
+  const local = (body: Body) => !plainStar(body) && (!('orbit' in body && body.orbit) || hostOf(body.id) === focus.id);
+  /** The file that holds a body the summary only lists: its star's, or a plain-dot star's own. */
+  const fileOf = (body: Body) => plainStar(body) ? body.id : hostOf(body.id);
   const systems = new Map<string, PreparedWorldContext['bodies'][number][]>();
-  for (const body of bodies) if (!local(body)) (systems.get(hostOf(body.id)) ?? systems.set(hostOf(body.id), []).get(hostOf(body.id))!).push(body);
+  for (const body of bodies) if (!local(body)) (systems.get(fileOf(body)) ?? systems.set(fileOf(body), []).get(fileOf(body))!).push(body);
   const centresOf = (host: string) => Object.fromEntries(Object.entries(orbitCenters).filter(([id]) => hostOf(id) === host));
   const pinsOf = (members: readonly Body[]) => Object.fromEntries(members.flatMap(body => orbitBanks[body.id] === undefined ? [] : [[body.id, orbitBanks[body.id]!] as const]));
   const rootBodies = bodies.filter(local), rootCentres = centresOf(focus.id);
@@ -55,16 +65,20 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
     ...(body.systemName === undefined ? {} : { system: root.systemName(body.systemName) }),
     ...(body.classification === undefined ? {} : { classification: body.classification }),
     ...(body.discovery === undefined ? {} : { discovery: root.discovery(body.discovery) }),
-    host: hostOf(body.id), ...(body.plainDot ? { plainDot: true } : {}), ...(body.unpackaged ? { unpackaged: true } : {}) }]);
+    host: fileOf(body), ...(body.plainDot ? { plainDot: true } : {}), ...(body.unpackaged ? { unpackaged: true } : {}) }]);
   const [focusRow, ...rows] = root.rows;
   const summary = { schema: PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA as typeof PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, ...rest, worldBodyCount: bodies.length,
     ...(Object.keys(rootCentres).length ? { orbitCenters: rootCentres } : {}), orbitBanks: pinsOf(rootBodies),
     ...root.tables(), focus: focusRow!, bodies: columns(rows), deferred: columns(deferred) };
-  return { summary, systems: [...systems].map(([id, members]) => {
+  const files = [...systems].map(([id, members]) => {
     const file = encodeBodies(members, positions), centres = centresOf(id);
     return { id, file: { schema: PREPARED_WORLD_SYSTEM_SCHEMA as typeof PREPARED_WORLD_SYSTEM_SCHEMA, id, ...(Object.keys(centres).length ? { orbitCenters: centres } : {}),
       orbitBanks: pinsOf(members), ...file.tables(), bodies: columns(file.rows) } };
-  }) };
+  });
+  const starIds = new Set(bodies.filter(plainStar).map(body => body.id));
+  return { summary, systems: files.filter(system => !starIds.has(system.id)),
+    /** Each plain-dot star nothing orbits, as the system of one body its object entry carries. */
+    stars: Object.fromEntries(files.filter(system => starIds.has(system.id)).map(system => [system.id, system.file])) };
 }
 
 /** The world draws every body but its focus as a billboard of a few to a hundred CSS pixels: its arrival photograph at

@@ -59,7 +59,19 @@ export async function checkPublishedWorldPair(root: string, fetchText: (url: str
     }));
   }
   // Every system the summary defers has its published file, and it holds the bodies the summary lists for it.
-  const systems = [...new Set((summary.deferred ?? []).map(body => body.host))], systemFiles = systems.map(id => `world-systems/${id}.json`);
+  // A star that hosts itself has no file: its row is in the published `world-stars.json`, which the build copies into the
+  // star's object entry.
+  const ownRows = (summary.deferred ?? []).filter(body => body.host === body.id).map(body => body.id);
+  if (ownRows.length) {
+    const [table] = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: ['world-stars.json'] });
+    if (!table) throw disagree('the inventory lacks world-stars.json.');
+    const stars = JSON.parse(await fetchText(table.url)) as Record<string, unknown>;
+    for (const id of ownRows) {
+      try { parsePreparedWorldSystem(stars[id], summary, id); }
+      catch (error) { throw disagree(error instanceof Error ? error.message : String(error)); }
+    }
+  }
+  const systems = [...new Set((summary.deferred ?? []).filter(body => body.host !== body.id).map(body => body.host))], systemFiles = systems.map(id => `world-systems/${id}.json`);
   const systemAssets = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: systemFiles });
   const unpublished = systemFiles.filter(name => !systemAssets.some(entry => entry.filename === name));
   if (unpublished.length) throw disagree(`the inventory lacks ${unpublished.join(', ')}.`);

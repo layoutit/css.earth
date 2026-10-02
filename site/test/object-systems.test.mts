@@ -62,7 +62,8 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
 test('every system a page reads later has its prepared framing, measured as a page holding it would', () => {
   // A page holds only the Sun's system and one point per other star until it reads the rest (site/world-context-plan.mts);
   // planetarySystems needs each system's radius before then, from site/prepared-world-presentation.json.
-  const hosts = new Set((APPLICATION_WORLD_CONTEXT.deferred ?? []).map(body => body.host));
+  // A plain-dot star left to its own file is no system: nothing orbits it.
+  const hosts = new Set((APPLICATION_WORLD_CONTEXT.deferred ?? []).filter(body => body.host !== body.id).map(body => body.host));
   assert.ok(hosts.size > 0);
   const measured = systemFramingRadii(APPLICATION_WORLD_CONTEXT);
   for (const host of hosts) assert.equal(PREPARED_WORLD_PRESENTATION.systemFramingRadii.get(host), measured.get(host), host);

@@ -4,3 +4,4 @@ export * from './hyperbolic-path.ts';
 export * from './spatial-context.ts';
 export * from './system-view.ts';
 export * from './summary.ts';
+export * from './plain-star-dots.ts';

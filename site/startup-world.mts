@@ -9,6 +9,24 @@ export function worldSystemHost(deferred: readonly { readonly id: string; readon
   return deferred?.find(body => body.id === id)?.host ?? (deferred?.some(body => body.host === id) ? id : null);
 }
 
+/** Whether the summary leaves `id` to its own object entry: a plain-dot star nothing orbits, which hosts itself. */
+export function ownsItsWorldRow(deferred: readonly { readonly id: string; readonly host: string }[] | undefined, id: string): boolean {
+  return deferred?.some(body => body.id === id && body.host === id) === true;
+}
+/** Such a star's world row, as a system of one body, from its object entry (`pages/objects/[id]/entry.json.ts`). The
+ * page's head may have asked for the entry already (startup-requests.mts): its answer is read without taking it from the
+ * object directory, which reads the same entry. */
+export async function readOwnWorldRow(id: string): Promise<unknown> {
+  const url = `/objects/${encodeURIComponent(id)}/entry.json`;
+  const started = typeof window === 'undefined' ? undefined : window.__cssEarthStartupRequests?.get(new URL(url, window.location.href).href);
+  const response = started ? (await started).clone() : await fetch(url);
+  if (!response.ok) throw new Error(`Object entry request ${url} failed: ${response.status}.`);
+  const entry: unknown = await response.json();
+  const system = entry && typeof entry === 'object' && 'worldSystem' in entry ? entry.worldSystem : undefined;
+  if (system === undefined) throw new TypeError(`${url}: the entry of a star the world summary leaves to it carries no worldSystem.`);
+  return system;
+}
+
 /** What a page read before its application loaded: the world summary, and the page's own system when another file holds it. */
 export interface StartupWorld { readonly summary: unknown; readonly system: { readonly id: string; readonly value: unknown } | null }
 const KEY = '__cssEarthWorld';
@@ -37,7 +55,9 @@ export async function loadStartupWorld(windowTarget: Window): Promise<void> {
   const summary = await read(WORLD_SUMMARY_SOURCE, 'Prepared world context');
   // A page's own body: the first path segment of its address (`/<id>/`).
   const deferred = (summary as { deferred?: readonly { id: string; host: string }[] } | null)?.deferred;
-  const own = worldSystemHost(Array.isArray(deferred) ? deferred : undefined, windowTarget.location.pathname.split('/')[1] ?? '');
-  const world: StartupWorld = { summary, system: own ? { id: own, value: await read(`/world/systems/${own}.json`, 'Prepared world system') } : null };
+  const listed = Array.isArray(deferred) ? deferred : undefined;
+  const own = worldSystemHost(listed, windowTarget.location.pathname.split('/')[1] ?? '');
+  const world: StartupWorld = { summary, system: own ? { id: own,
+    value: ownsItsWorldRow(listed, own) ? await readOwnWorldRow(own) : await read(`/world/systems/${own}.json`, 'Prepared world system') } : null };
   Reflect.set(windowTarget, KEY, world);
 }

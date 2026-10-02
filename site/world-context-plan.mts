@@ -1,6 +1,6 @@
 import { parseCompleteWorldContext } from '@cssearth/objects';
 import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
-import { WORLD_SUMMARY_SOURCE, startupWorld, worldSystemHost } from './startup-world.mts';
+import { WORLD_SUMMARY_SOURCE, ownsItsWorldRow, readOwnWorldRow, startupWorld, worldSystemHost } from './startup-world.mts';
 import type { PreparedWorldContext, PreparedWorldSystem } from '@cssearth/objects';
 import { startupFetch } from './startup-requests.mts';
 
@@ -61,9 +61,14 @@ async function fetchJson(url: string): Promise<unknown> {
 }
 
 const summary = parsePreparedWorldContextSummary(startup ? startup.summary : await readPreparedWorldContext());
-/** Each deferred body's star, and every star whose system is its own file, in id order. */
-const hostOf = new Map((summary.deferred ?? []).map(body => [body.id, body.host]));
-export const WORLD_SYSTEM_HOSTS: readonly string[] = Object.freeze([...new Set(hostOf.values())].sort());
+/** A plain-dot star nothing orbits hosts itself: the map draws it from a dot bank, and its row comes from its own object
+ * entry when the star is opened (startup-world.mts `readOwnWorldRow`). */
+const ownRow = (id: string) => ownsItsWorldRow(summary.deferred, id);
+/** The world's own dot banks (`pages/world/dots/[id].bin.ts`): the stars that host themselves, near the Sun and in other
+ * galaxies (packages/bake/src/world-context/plain-star-dots.ts). A world without such stars has none. */
+export const WORLD_DOT_BANKS: readonly string[] = Object.freeze((summary.deferred ?? []).some(body => body.host === body.id) ? ['plain-stars', 'plain-stars-far'] : []);
+/** Every star whose system is its own file, in id order. */
+export const WORLD_SYSTEM_HOSTS: readonly string[] = Object.freeze([...new Set((summary.deferred ?? []).filter(body => body.host !== body.id).map(body => body.host))].sort());
 /** The systems batch `index` holds (`pages/world/systems/batch-[index].json.ts`), in id order. */
 export function worldSystemBatch(index: number): readonly string[] {
   const size = Math.ceil(WORLD_SYSTEM_HOSTS.length / SYSTEM_BATCHES);
@@ -87,12 +92,14 @@ const parseSystem = (value: unknown, id: string) => parsePreparedWorldSystem(val
 /** The application's world: the summary, with every system file Node reads, or a page's own system in the browser. */
 export let APPLICATION_WORLD_CONTEXT: PreparedWorldContext = summary;
 if (node) {
-  APPLICATION_WORLD_CONTEXT = await parseCompleteWorldContext(summary, id => readNodeJson(`src/objects/sun/prepared/world-systems/${id}.json`));
-  for (const id of WORLD_SYSTEM_HOSTS) loaded.add(id);
+  // The bake's table of the stars that host themselves (`world-stars.json`), which the build puts in their object entries.
+  const stars = (summary.deferred ?? []).some(body => body.host === body.id) ? await readNodeJson('src/objects/sun/prepared/world-stars.json') as Record<string, unknown> : {};
+  APPLICATION_WORLD_CONTEXT = await parseCompleteWorldContext(summary, id => readNodeJson(`src/objects/sun/prepared/world-systems/${id}.json`), stars);
+  for (const body of summary.deferred ?? []) loaded.add(body.host);
 } else {
   // A page's own body: the first path segment of its address (`/<id>/`).
   const own = worldSystemOf(globalThis.location?.pathname.split('/')[1] ?? '');
-  if (own) adopt([parseSystem(startup?.system?.id === own ? startup.system.value : await fetchJson(`/world/systems/${own}.json`), own)], true);
+  if (own) adopt([parseSystem(startup?.system?.id === own ? startup.system.value : ownRow(own) ? await readOwnWorldRow(own) : await fetchJson(`/world/systems/${own}.json`), own)], true);
 }
 
 /** Calls `listener` with the extended plan each time other systems' bodies are added; returns the unsubscribe. */
@@ -107,7 +114,7 @@ export function loadWorldSystemOf(id: string): Promise<void> | null {
   if (!host || loaded.has(host)) return null;
   let pending = loading.get(host);
   if (!pending) {
-    pending = fetchJson(`/world/systems/${host}.json`).then(value => adopt([parseSystem(value, host)]))
+    pending = (ownRow(host) ? readOwnWorldRow(host) : fetchJson(`/world/systems/${host}.json`)).then(value => adopt([parseSystem(value, host)]))
       .finally(() => loading.delete(host));
     loading.set(host, pending);
   }

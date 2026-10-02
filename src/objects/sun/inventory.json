@@ -219,6 +219,18 @@
     },
     {
       "location": "prepared",
+      "filename": "plain-stars-far.bin",
+      "bytes": 4265,
+      "sha256": "2d52388d67721c14fabe1dbe5021dd1353b184614b99caa336e4548406e982b7"
+    },
+    {
+      "location": "prepared",
+      "filename": "plain-stars.bin",
+      "bytes": 19435,
+      "sha256": "c126064cd1bf1a68f45369aad277e2e77323fc10aa4ca72e3b0100d9393901b4"
+    },
+    {
+      "location": "prepared",
       "filename": "provenance.json",
       "bytes": 89168,
       "sha256": "9a7a704b2c3b11451e430871f24b5f6054d9f9b85fa92ecc2c13e42293acc6be"
@@ -4654,8 +4666,8 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 936652,
-      "sha256": "6d6e989d8933ca38cd00f8d2b5bf0addfc7287ce8e32b82a93cdee5d850fc196"
+      "bytes": 713944,
+      "sha256": "8b86245a9fbd39738d99070299d3032117bc53c9bc949173df98660bfe0722ac"
     },
     {
       "location": "prepared",
@@ -13470,6 +13482,12 @@
       "filename": "world-orbits/zachia.bin",
       "bytes": 2266,
       "sha256": "e8274a2816a112ada4c5d174ef93427a919a2fdb724931fab84e3a3f0283860b"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-stars.json",
+      "bytes": 1208913,
+      "sha256": "54dee1cbb277cd7e0f18368f8d3908de6c8b33a2d29040e7570c61d7cd7bbe12"
     },
     {
       "location": "prepared",

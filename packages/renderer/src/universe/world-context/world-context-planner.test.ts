@@ -632,8 +632,9 @@ test('inside its authored range a system draws every member orbit, named or not,
 });
 
 /** The summary with every system's file read, as Node reads it (site/world-context-plan.mts). */
-const readWholeSummary = (prepared: URL) => readFile(new URL('world-context-summary.json', prepared), 'utf8').then(text => parseCompleteWorldContext(JSON.parse(text),
-  async id => JSON.parse(await readFile(new URL(`world-systems/${id}.json`, prepared), 'utf8'))));
+const readWholeSummary = async (prepared: URL) => parseCompleteWorldContext(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')),
+  async id => JSON.parse(await readFile(new URL(`world-systems/${id}.json`, prepared), 'utf8')),
+  JSON.parse(await readFile(new URL('world-stars.json', prepared), 'utf8')));
 
 test('the planner plans from the summary alone, names the paths it lacked, and draws them once their bank arrives', async () => {
   const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);

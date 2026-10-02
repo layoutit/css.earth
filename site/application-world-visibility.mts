@@ -33,7 +33,7 @@ const plainDotIds = [...applicationContext.bodies, ...deferred].filter(body => b
 const minorMoonIds = prepared.moons.minor, minorMoons: ReadonlySet<string> = new Set(minorMoonIds);
 // Each body's orbit centre, and each named centre's own parent: a circumbinary planet's barycentre leads to its host star.
 // A body of a system not read yet leads straight to its star.
-const orbitCenters = new Map([...deferred.map(body => [body.id, body.host] as const), ...applicationContext.bodies.flatMap(body => 'orbit' in body && body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []),
+const orbitCenters = new Map([...deferred.filter(body => body.host !== body.id).map(body => [body.id, body.host] as const), ...applicationContext.bodies.flatMap(body => 'orbit' in body && body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []),
   ...Object.entries(applicationContext.orbitCenters ?? {}).map(([id, center]) => [id, center.centerBodyId] as const)]);
 const placedStarIds = new Set(SCENE_OBJECTS.filter(object => (object.classification === 'star' || object.classification === 'black-hole') && object.id !== applicationContext.focus.id).map(object => object.id));
 // Each body's root and each placed star's members, walked once on the first selection that needs them.

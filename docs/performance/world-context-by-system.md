@@ -15,6 +15,13 @@ drawn there. The context now loads the way the objects nest.
   classification, discovery record, its star and its place among the world's bodies.
 - `world-systems/<star id>.json` holds one other system's bodies, named orbit centres and orbit-bank pins. The build
   serves each one at `/world/systems/<id>.json` and serves them in four batches at `/world/systems/batch-<n>.json`.
+- A star the map draws as a plain dot, with no label, hover or click, and that nothing orbits, is not a body of the
+  summary: 1,840 of its 3,202 on 2026-10-02, when the summary went from 230 KB to 168 KB compressed. The summary lists
+  it like a deferred body, as its own host. The map draws these stars from two dot banks
+  ([plain-star-dots.ts](../../packages/bake/src/world-context/plain-star-dots.ts), served at `/world/dots/<id>.bin`),
+  and a star's own row travels in its object entry (`/objects/<id>/entry.json`), read when the star is opened by search
+  or on its own page. The bake keeps the rows in `world-stars.json` for the build, Node tools and the deploy check; no
+  page reads that file.
 
 The application reads them in [world-context-plan.mts](../../site/world-context-plan.mts):
 
