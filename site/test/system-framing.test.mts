@@ -6,7 +6,9 @@ import contextInput from '../../src/objects/sun/prepared/world-context.json' wit
 import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { bodyViewAtCamera } from '../overview-context.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
-import { createWorldSelectionTarget, presentWorldCamera, parseSharedView, savedWorldCamera, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
+import { createWorldSelectionTarget, parseSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
+import { worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/engine';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { SYSTEM_FRAMING_ANGLES } from '../runtime-policy.mts';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 

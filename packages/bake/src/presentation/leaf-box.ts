@@ -16,7 +16,7 @@ import { rebuildPropertyTable, appendPropertyTable } from './property-table.ts';
 // write they inherit the body's initial step from the system node. The node builder writes the lengths and transform;
 // the presentation bindings, measured in a browser, write each factor, the groups and the steps
 // (`prepared-presentation/prepared-presentation-bindings.ts`), so every generator shares one rule.
-import { walkSilhouetteLevels } from '@cssearth/renderer/rendering/prepared-silhouette-steps.ts';
+import { walkSilhouetteLevels } from '@cssearth/objects';
 
 /** The step every leaf reads; `<property>-<block>` names a block in the binding's placements and groups. */
 export const LEAF_BOX_PROPERTY = '--silhouette-step';

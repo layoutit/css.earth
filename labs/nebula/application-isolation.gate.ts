@@ -32,7 +32,7 @@ for (const path of inputs) {
   const destination = resolve(sandbox, path); await mkdir(dirname(destination), { recursive: true }); await cp(resolve(root, path), destination);
 }
 // Runtime host fingerprints include validation owners even when esbuild removes type-only imports.
-for (const path of ['packages/renderer/src/volume/types.ts', 'packages/renderer/src/navigation/world-camera-math.ts',
+for (const path of ['packages/renderer/src/volume/types.ts', 'packages/engine/src/navigation/world-camera-math.ts',
   'packages/renderer/src/stars/prepared-catalogue-points.ts', 'src/objects/m42-volume/object.json',
   'src/objects/m42-volume/source', 'src/objects/m2-9-volume/object.json', 'src/objects/m2-9-volume/source',
   'src/objects/lmc-volume/object.json', 'src/objects/lmc-volume/prepared/datasets.json', 'src/objects/lmc-volume/source', 'src/objects/stellar-neighbourhood/source/stars.json']) {

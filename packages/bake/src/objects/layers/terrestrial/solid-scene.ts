@@ -11,7 +11,7 @@ import type { createSourceManifest } from '@cssearth/objects/node';
 import type { MaterialSourceTrack } from '../../../presentation/index.ts';
 
 import { requireString, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
+import { requireObjectControls } from '@cssearth/objects';
 import { prepareScientificNavigation } from './scientific-focus.ts';
 import { prepareTerrestrialRings } from './rings.ts';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -20,7 +20,7 @@ import { BASE_TILE } from '@layoutit/polycss';
 import { prepareSolidBodySurface, preparePerspectiveCamera } from '../../../scene/index.ts';
 import { prepareAstrometricSkySceneRegistration, prepareEclipticPresentationFrame, photographDirections, prepareDefaultCameraAngles, prepareSunReferenceViewDirection, type SolarGeometry } from '../../scene/index.ts';
 import { loadAstronomyPackage } from '../../../astronomy/index.ts';
-import { preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
+import { preparedResourcePool } from '@cssearth/objects';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '../../../presentation/index.ts';
 import { prepareMaterialTracks } from '../../../presentation/index.ts';
 import { requirePreparedPresentation } from '../../../presentation/index.ts';

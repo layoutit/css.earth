@@ -4,7 +4,8 @@ import { availableParallelism } from 'node:os';
 import { resolve } from 'node:path';
 import { lightingFrame, type LambertRasterConfig } from '@cssearth/objects';
 import { limbSphereFrame, type Channels, type LimbLaw } from '../photometry/index.ts';
-import { RASTER_DENSITY, type RasterRecipe, type LightingRecipe } from './config.ts';
+import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
+import { type RasterRecipe, type LightingRecipe } from './config.ts';
 import { raster, fileBytes, outputName } from './io.ts';
 import { LIGHTING_BANK_ROOT } from './lighting-banks.ts';
 /** Rows encoding at once. Each waiting row holds its RGBA, so this stays below the thread pool (`src/thread-pool/`). */

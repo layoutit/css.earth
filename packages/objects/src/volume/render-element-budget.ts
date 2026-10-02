@@ -1,6 +1,7 @@
+export const RENDER_ELEMENT_PROFILE_SCHEMA = 'cssearth-render-element-profile@1';
 /** Platform-neutral accounting. The host supplies its tested retained-DOM cost profile. */
 export interface RenderElementProfile {
-  schema: 'cssearth-render-element-profile@1';
+  schema: typeof RENDER_ELEMENT_PROFILE_SCHEMA;
   id: string;
   maximumElements: number;
   elementsPerSlab: number;
@@ -18,7 +19,7 @@ export interface RenderElementBudget {
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 const integer = (value: unknown, minimum: number): value is number => typeof value === 'number' && Number.isSafeInteger(value) && value >= minimum;
 export function readRenderElementProfile(value: unknown): RenderElementProfile {
-  if (!record(value) || value.schema !== 'cssearth-render-element-profile@1' || typeof value.id !== 'string' || !value.id ||
+  if (!record(value) || value.schema !== RENDER_ELEMENT_PROFILE_SCHEMA || typeof value.id !== 'string' || !value.id ||
       !integer(value.maximumElements, 1) || !integer(value.elementsPerSlab, 1) || !integer(value.elementsPerStar, 1) ||
       !integer(value.reservedElements, 0) || value.reservedElements >= value.maximumElements)
     throw new TypeError('Invalid retained render-element profile.');

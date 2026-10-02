@@ -20,7 +20,7 @@ import localGroupGalaxies from './prepared-local-group-galaxies.json' with { typ
 import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
 import { systemFramingRadii } from './system-framing-radii.mts';
 export { systemFramingRadii } from './system-framing-radii.mts';
-import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
+import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/engine';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 import { readApplicationSystemView } from './world-system-views.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
@@ -221,8 +221,6 @@ function openedOrientation(orientationXyzw: readonly number[], view: SystemView)
     turn[row * 3]! * rotation[column]! + turn[row * 3 + 1]! * rotation[3 + column]! + turn[row * 3 + 2]! * rotation[6 + column]!));
   return [...worldQuaternionFromRotation(turned as unknown as Parameters<typeof worldQuaternionFromRotation>[0])] as [number, number, number, number];
 }
-
-
 
 /** Fit the prepared bounds through the current perspective projection. */
 function fitSystemDepth(frame: FramingFrame, optics: Optics, view: FramingCandidate, rect: MapViewport, minimumRangeM: number, referenceToCamera: WorldRotation) {

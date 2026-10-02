@@ -4,7 +4,7 @@ import { PREPARED_SURFACE_FEATURES_SCHEMA, type SurfaceFeatureKind, type Surface
 import type { Vector3 } from './catalog.ts';
 import { surfaceDirection, round, scaled, rimVectors, extentPolygon, normalizeExtent, projectRadial, meshRadiusBand, triaxialSurfacePoint } from './geometry.ts';
 import { unzipMember } from './archive.ts';
-import { surfaceFeatureBankIndex } from '@cssearth/renderer/labels/surface-feature-banks.ts';
+import { surfaceFeatureBankIndex } from '@cssearth/objects';
 import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
 import { extname, relative, resolve } from 'node:path';
 import { parseDbf } from './dbf.ts';
@@ -224,7 +224,6 @@ export function nodeIndex(tree: SurfaceFeaturePreparationContext['tree'], { clas
 }
 
 interface LoadedTrace { readonly className: string; readonly lengthM: number; readonly parts: readonly (readonly (readonly [number, number])[])[]; }
-
 
 /** Read the pinned tectonic archive: Plate Carrée metres on the declared sphere become east longitude and latitude. */
 async function loadTraces(sourceDirectory: string, config: SurfaceFeatureTracesConfig): Promise<{ manifest: SurfaceFeaturesSourceManifest; traces: readonly LoadedTrace[] }> {

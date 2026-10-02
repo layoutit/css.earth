@@ -1,12 +1,9 @@
 // Camera values and navigation math. Importing this entry never mounts a scene.
 export { formatSharedView, parseSharedView } from './view-url.js';
 export type { SharedView, SharedPlayback } from './view-url.js';
-export { worldCameraFromCenteredPresentation, worldCameraFromPresentation, presentWorldCamera, worldCameraViewport } from './world-camera.js';
-export { cssCameraAxesFromOrientation, cssViewFromOrientation, worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './world-camera-math.js';
-export type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 
 export { createWorldSelectionTarget } from './selection-target.js';
-export { preparedDefaultViewRotation } from './prepared-arrival-view.js';
+
 export { savedWorldCamera } from './saved-world-camera.js';
 export type { PerspectiveWorldContext } from './perspective-dolly.js';
 export { bindObjectNavigationTarget, supportsObjectNavigation } from '../solar-system/heliocentric-navigation.js';
@@ -17,3 +14,7 @@ export { cameraMotionSignalFor } from './camera-motion-signal.js';
 export type { CameraMotionSignal, CameraMotionSource, CameraMotionState } from './camera-motion-signal.js';
 export type { CameraMotion } from './camera-motion.js';
 export { createCameraFlight } from './camera-flight.js';
+
+export { worldCameraFromCenteredPresentation, worldCameraFromPresentation, presentWorldCamera, worldCameraViewport } from './world-camera.js';
+export type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
+export { preparedDefaultViewRotation } from './prepared-arrival-view.js';

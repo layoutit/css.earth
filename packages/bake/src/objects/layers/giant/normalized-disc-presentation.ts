@@ -8,7 +8,7 @@ import type {MaterialSourceTrack} from '../../../presentation/index.ts';
 import { type PreparedCubicSkyPlan, type PreparedDirectionalSunPlan, PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 import{BASE_TILE,worldPositionToCss,createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform}from'@layoutit/polycss';
 import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4, serializePreparedMatrix4 } from '@cssearth/core';
-import{preparedResourcePool}from'@cssearth/renderer/rendering/prepared-object-assets.ts';
+import { preparedResourcePool } from '@cssearth/objects';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from '../../../presentation/index.ts';
 import{prepareMaterialTracks}from'../../../presentation/index.ts';
 import{rotateSequence}from'../../geometry/index.ts';

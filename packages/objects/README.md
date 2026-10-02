@@ -141,3 +141,5 @@ material receipts live in `src/volume/`, alongside the cloud-parts catalogue. Th
 parsers and little-endian compact color/emission decoders are exported through `@cssearth/objects`. Sampling,
 fitting, selection, decompression, compilation and file I/O stay with bake, reconstruction, lab and volume-viewer.
 Contract tests use node:test in the packages lane; replay and selection conformance stay with their owners.
+
+Preparation and runtime share canonical resource addresses/pools and image density, tile leaf styles/keys, silhouette-step walking, interior-disc size, shell material addresses, marker/control validation, surface fly-to conventions, feature-bank hashing, point luminance threshold, CSS compiler budget and volume topology equality through the browser-safe main entry. Numeric camera and solar geometry live in `@cssearth/engine`.

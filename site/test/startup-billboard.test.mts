@@ -5,7 +5,7 @@ import { test } from 'node:test';
 import { loadPreparedCssObject } from '@cssearth/renderer';
 import { createPreparedObjectNavigation } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
 import { selectPreparedTextureLevel } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
-import { presentWorldCamera } from '@cssearth/renderer/navigation';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { readPreparedObjectBytes } from '../object-page-data.mts';
 import { requireSceneObject } from '../objects.mts';
 import { usesDefaultStartupView, readStartupSavedView } from '../startup-billboard.mts';

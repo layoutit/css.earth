@@ -6,9 +6,7 @@ prepared delivery. Nothing here runs in the application. The runtime (`@cssearth
 
 Each topic is one subpath entry. Topics must not import each other sideways. A topic may import a lower topic, and only
 through that topic's `index.ts`, when `LOWER_TOPICS` in `src/entries.test.ts` declares it; the declared order has no
-cycle. Share anything else through `@cssearth/core` or another package. Build-time code may import `@cssearth/renderer`
-(the raster lane reads the prepared-asset constants the renderer owns, and the scene and presentation compilers write what
-its validators accept); the renderer never imports the bake.
+cycle. Share anything else through `@cssearth/core` or another package. Prepared-format conventions and validators come from `@cssearth/objects`; numeric camera orientation and solar geometry come from `@cssearth/engine`. Remaining renderer loaders and runtime test fixtures await their separate ownership migrations; the renderer never imports bake.
 
 - `src/photometry/` is published as `@cssearth/bake/photometry` (Node only): published photometric models, their
   records and normalization, and the limb laws and PSG limb profiles preparation draws from them. It imports no topic.

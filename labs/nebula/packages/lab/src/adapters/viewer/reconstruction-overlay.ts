@@ -2,7 +2,7 @@
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { preparedVolumeCameraTransform } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
 import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
-import { worldRotationCss } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import { worldRotationCss } from '@cssearth/engine';
 import type { DensityOverlay } from '../../features/legacy-viewer/controller';
 import { parseOverlayCatalogue, sameOverlayFrame } from '../../features/legacy-viewer/overlay-catalogue';
 import { defaultOverlayPlacement } from '@cssearth/bake/volume';

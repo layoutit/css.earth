@@ -1,6 +1,6 @@
 import { type PreparedVariant, type PreparedWrite } from '@cssearth/objects';
 
-import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
+import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool } from '@cssearth/objects';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.ts';

@@ -4,7 +4,8 @@ import { isDeepStrictEqual } from 'node:util';
 import { parseObjectDescriptor, prepareObject, validatePreparedVolumeDatasets, type PreparedVolumeDatasets, type PreparedCssVolume, type VolumeVector, validatePreparedCataloguePoints, type PreparedCataloguePoints, createRenderElementBudget } from '@cssearth/objects';
 import { createPreparedVolumeDatasets, loadPreparedVolumeDatasets, volumeDatasetCompositeOpacity } from './prepared-volume-datasets.js';
 
-import { mountPreparedVolumeLod, samePreparedVolumeTopology } from './prepared-volume-lod.js';
+import { mountPreparedVolumeLod } from './prepared-volume-lod.js';
+import { samePreparedVolumeTopology } from '@cssearth/objects';
 
 import type { VolumeCameraPublication } from './types.js';
 
@@ -13,7 +14,7 @@ import { mountPreparedCataloguePoints } from '../stars/prepared-catalogue-points
 import { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
 import { createPreparedResidency } from '../rendering/prepared-residency.js';
 import { cloudCompositeOpacity } from '@cssearth/volume-viewer/scene/cloud-inspection';
-import { CSS_COMPILER_RENDER_BUDGET } from './compiler-render-budget.js';
+import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/objects';
 
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 
@@ -163,7 +164,6 @@ test('catalogue points project prepared positions, cull hidden support and keep 
   assert.throws(() => mount.publish({ ...publication(), world: { ...publication().world, epochJdTt: 124 } }), /frame and epoch/);
   mount.destroy(); mount.destroy(); assert.deepEqual(f.host.children, [f.before]);
 });
-
 
 test('same-topology datasets reuse one retained cloud and replace all selected material', () => {
   const f = dom(), data = payload();
@@ -375,7 +375,6 @@ test('angular compact-light footprints zoom and change dataset material without 
   assert.throws(() => validatePreparedCataloguePoints({ ...angular, points: [{ ...angular.points[0], diameterUnits: NaN }] }));
   mount.destroy();
 });
-
 
 test('native mounts build every node at mount, as the server-rendered DOM they adopt was built', () => {
   const lazy = dom(), eager = dom(), data = { ...budgetPayload(30, 3), starsEnabled: true };

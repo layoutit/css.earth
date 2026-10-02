@@ -2,7 +2,8 @@ import { type ObjectRuntimeDefinition } from '@cssearth/objects';
 
 import { initialObjectSelection } from '../runtime/object-contract.js';
 import { resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-asset-origin.js';
-import { textureTileGroups, textureTileLeafStyles } from './prepared-texture-levels.js';
+import { textureTileGroups } from './prepared-texture-levels.js';
+import { textureTileLeafStyles } from '@cssearth/objects';
 import { leafBoxBindings, leafBoxStyles } from './prepared-leaf-box-direct.js';
 import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { preparedDatasetPending } from '../prepared-data/dataset-tables.js';

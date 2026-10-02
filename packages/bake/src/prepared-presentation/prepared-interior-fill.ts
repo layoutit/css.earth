@@ -3,7 +3,7 @@ import { type PreparedInteriorDisc, type PreparedPresentationDefinition, type Pr
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { PREPARED_INTERIOR_DISC_SIZE } from '@cssearth/renderer/rendering/prepared-interior-disc.ts';
+import { PREPARED_INTERIOR_DISC_SIZE } from '@cssearth/objects';
 
 /** The complete disc, including two raster pixels of edge clearance, fits
  * inside the prepared inner ellipsoid at every camera orientation. */

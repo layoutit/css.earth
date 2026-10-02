@@ -25,7 +25,7 @@ the elements that own stacking; an inherited depth variable on the shared stage 
 | `@cssearth/renderer` | the object runtime (`createObjectRuntime`), the object contract, prepared-object loading, parsing and asset origins |
 | `@cssearth/renderer/navigation` | the world camera and its rotation maths, view URLs, selection targets |
 | `@cssearth/renderer/universe` | the universe context (`createPreparedUniverse`), the world-frame queue and the loaders of volumes, point appearances, surface shells, image layers and volume datasets |
-| `@cssearth/renderer/platform/*` | single modules the application and tools import on their own (`object-orbit`, `camera-input`, `camera-layout`, `prepared-wheel-zoom`, `prepared-residency`, `object-contract`, `prepared-image-store`, `object-selection-runtime`, `prepared-presentation`, `perspective-dolly`, `solar-view-direction`, `prepared-object-assets`, `surface-fly-to`, `directional-sun-coordinate`) |
+| `@cssearth/renderer/platform/*` | single modules the application and tools import on their own (`object-orbit`, `camera-input`, `camera-layout`, `prepared-wheel-zoom`, `prepared-residency`, `object-contract`, `prepared-image-store`, `object-selection-runtime`, `prepared-presentation`, `perspective-dolly`, `surface-fly-to`) |
 | `@cssearth/renderer/testing` | the same implementations, exposed for tests |
 | `@cssearth/renderer/scene-native-waits`, `…/prepared-object-worker`, `…/world-context-planner-worker` | native wait helpers and the two worker entries |
 | `@cssearth/renderer/<folder>/<file>.ts` | a TypeScript source module, for the types and small functions the entries above do not publish |
@@ -37,12 +37,8 @@ Node bundles that keep packages external still bundle this one ([bundle-renderer
 because its sources name their siblings `.js`. `src/runtime/shell-contract.ts` and `src/labels/universe-label-policy.ts` name
 theirs `.ts` instead, so plain-Node tools can load them without a bundler.
 
-Three small modules moved in from `src/platform` with the runtime, since the renderer was their only runtime owner:
-`@cssearth/objects` (the setting names the shared shell owns), `src/labels/surface-feature-banks.ts` (the
-feature-bank address that preparation writes and the labels read) and `src/validation/prepared-texture-levels.ts` (the
-texture-level validators). None is generic enough for `@cssearth/core`. The shell's object-controls and scene-lifecycle
-contract (`src/runtime/shell-contract.ts`) moved in later from `site/scene`, so `src/platform` and the tools can check a
-scene against it without importing the site.
+Shared setting names, feature-bank addresses, texture-level validation and object-control validation live in
+`@cssearth/objects`. Scene lifecycle validation stays in `src/runtime/shell-contract.ts` alongside the concrete scene.
 
 ```text
 packages/renderer/
@@ -123,3 +119,7 @@ format contracts and schema identifiers in `packages/objects/src/prepared-data/`
 The complete catalogue bank is `PreparedCataloguePointBank`; embedded volume stars keep `PreparedCataloguePoints`.
 Counting, projection, transport and retained mounting stay in renderer; image/geometry preparation and file I/O stay in bake.
 Contract tests use node:test in the packages lane.
+
+Shared prepared resource addresses, texture tile styles, silhouette thresholds, shell material addresses, feature-bank addresses, marker validation, fly-to conventions and volume topology equality live in `@cssearth/objects`. Numeric camera orientation and solar geometry live in `@cssearth/engine`.
+
+Validated world-camera pose/presentation conversion and the default-view reader remain here: they combine objects-owned validation with engine math.

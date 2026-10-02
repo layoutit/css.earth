@@ -20,7 +20,7 @@ import { prepareSolarSystemScene, prepareSolarSystemSunPresentation, type SolarG
 import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
 import { requirePreparedPresentation } from '../../../presentation/index.ts';
-import { preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
+import { preparedResourcePool } from '@cssearth/objects';
 import { createPreparedNodeTree, prepareCssomDeclarationReads } from '../../../presentation/index.ts';
 import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-composition/index.ts';
 

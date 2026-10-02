@@ -7,7 +7,7 @@ import type { prepareTextureLevels, TextureLevelConfiguration } from './texture-
 import type { SurfaceBankDatasets } from './contracts.ts';
 import type { PreparedNode } from '../../../presentation/index.ts';
 import type { MaterialSourceTrack } from '../../../presentation/index.ts';
-import type { ShellObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
+import type { ShellObjectControls } from '@cssearth/objects';
 import type { preparePagedEllipsoidScene } from './globe/scene.ts';
 import type { preparePlaces } from './geographic/places.ts';
 
@@ -21,10 +21,10 @@ export interface PagedPresentationInput { config: PresentationConfiguration; pla
   textureLevels?: Awaited<ReturnType<typeof prepareTextureLevels>>; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan; controls: ShellObjectControls;
   catalog?: Awaited<ReturnType<typeof preparePlaces>>; }
 const materialIds = ['atmosphere'] as const;
-import { canonicalPreparedAsset, preparedResourcePool } from "@cssearth/renderer/rendering/prepared-object-assets.ts";
+import { canonicalPreparedAsset, preparedResourcePool } from '@cssearth/objects';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from "../../../presentation/index.ts";
 import { seamOutsetBinding, seamOutsetInitialValue } from "../../../scene/index.ts";
-import { tiledTextureKeys } from "@cssearth/renderer/rendering/prepared-texture-levels.ts";
+import { tiledTextureKeys } from '@cssearth/objects';
 import { textureTileVariables } from "../../../presentation/index.ts";
 import { prepareMaterialTracks } from "../../../presentation/index.ts";
 import { surfaceBankInventory } from "./surface-banks.ts";

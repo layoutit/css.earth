@@ -13,7 +13,7 @@ import { scanCssDeclarations } from './css-declaration-scanner.ts';
 // prepared values are literal, resolved at the initial tile; the runtime writes a leaf's final values on each level
 // switch (packages/renderer/src/rendering/prepared-texture-levels.ts, createTextureTileWriter), so no variable or
 // `calc()` reaches the page. A later bindings run expands the records back to the variable form first.
-import { textureTileLeafStyles } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
+import { textureTileLeafStyles } from '@cssearth/objects';
 
 interface Property { name: string; value: string; custom: boolean }
 interface TreeNode { parent: number; style: string; properties: readonly number[] }

@@ -4,7 +4,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { parseHTML } from 'linkedom';
-import { createTextureTileWriter, selectPreparedTextureLevel, textureTileLeafStyles, tiledTextureKeys } from './prepared-texture-levels.js';
+import { createTextureTileWriter, selectPreparedTextureLevel } from './prepared-texture-levels.js';
+import { textureTileLeafStyles, tiledTextureKeys } from '@cssearth/objects';
 
 import { mountPreparedPresentation, preparedTextureLevelKeys, resolvePreparedPresentation } from './prepared-presentation.js';
 

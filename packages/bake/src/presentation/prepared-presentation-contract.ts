@@ -7,7 +7,7 @@ import {
 } from '@cssearth/objects';
 
 import { isArray } from '@cssearth/core';
-import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
+import { requireObjectControls } from '@cssearth/objects';
 
 export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema" | "id" | "controls" | "sky" | "sun" | "materials" | "variants" | "animations" | "destinations"> & {
   schema: string; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan | null;

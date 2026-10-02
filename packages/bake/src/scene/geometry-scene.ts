@@ -4,7 +4,8 @@ import { buildPolyMeshTransform, buildSeamBleedPolygonEdges } from '@layoutit/po
 import { createSurfacePatches, createPolarPatch } from '@cssearth/objects';
 import type { Pole } from '@cssearth/objects';
 import type { prepareAtmosphere, RasterRecipe } from '../raster/index.ts';
-import { RASTER_DENSITY, rasterPagePlan } from '../raster/index.ts';
+import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
+import { rasterPagePlan } from '../raster/index.ts';
 import type { GeometryProfile } from './profile.ts';
 import { createLeafProjector, rendererPolygon, type LeafImagePixels } from './projector.ts';
 import { prepareCutaway } from './cutaway.ts';

@@ -1,5 +1,5 @@
 import type { OrientationXyzw, PhysicalCameraPose } from '@cssearth/engine';
-import type { WorldCameraPose } from '../../packages/renderer/src/navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import { required } from '@cssearth/objects/node/contract';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -1631,7 +1631,6 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
   layer.destroy();
 });
 
-
 for (const interaction of ['pointer', 'keyboard']) test(`a hidden moon annotation reveals together on ${interaction} interaction`, () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
@@ -1739,7 +1738,6 @@ for (const { y, extent, weight, shown } of [
   layer.destroy();
 });
 
-
 test('switching to the Solar System card immediately reveals the Sun ring without another camera frame', () => {
   const root = mount(1), layer = mounted.get(root)!;
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
@@ -1756,7 +1754,6 @@ test('switching to the Solar System card immediately reveals the Sun ring withou
   assert.equal(annotationVisibility(ring, 'indicator'), 'hidden');
   layer.destroy();
 });
-
 
 for (const closed of [true, false]) test(`crowding retires complete annotations and their orbits, and the dots under another body's (closed=${closed})`, () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
@@ -2511,7 +2508,6 @@ test('opacity-only ticks do not reproject, republish picking or measure retained
   layer.destroy();
 });
 
-
 test('the main thread draws worker frames from the orbit summary exactly as from the full context', () => {
   const full = plan(1);
   const summaryInput = { ...full, schema: 'cssearth-world-context-summary@2', bodies: full.bodies.map(({ orbit, ...body }) => !orbit ? body : { ...body,
@@ -2921,7 +2917,6 @@ test('a driven drag around Earth keeps revealing and retiring bodies', { timeout
   assert.equal(sun.measurements, 1); assert.equal(mercury.measurements, 1); assert.equal(venus.measurements, 0);
   layer.destroy();
 });
-
 
 test('world owners stay detached until requested, attach before measurement, and retain identity across views', () => {
   const document = new FakeDocument(), host = document.createElement('section');

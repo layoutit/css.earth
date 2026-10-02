@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { encodePointFieldBank, magnitudeDisplayAlphaChange } from '@cssearth/bake/stars';
 import { POINT_FIELD_BANK_HEADER_BYTES, POINT_FIELD_MAGNITUDE_BOUND, decodePointFieldBank } from '@cssearth/objects';
-import { IMPERCEPTIBLE_LUMINANCE } from '@cssearth/renderer/stars/point-field-projection.ts';
+import { IMPERCEPTIBLE_LUMINANCE } from '@cssearth/objects';
+import { pointLuminanceVisible } from '@cssearth/renderer/stars/point-field-projection.ts';
 import type { PreparedPointFieldBank } from '@cssearth/objects';
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
@@ -72,5 +73,6 @@ test('encoder refuses rows outside the declared storage and bounds', () => {
   // A photometry table steep enough for half a millimagnitude to be visible fails preparation.
   const steep = { ...photometry, step: 1e-4 };
   assert.ok(magnitudeDisplayAlphaChange(steep, atlas, POINT_FIELD_MAGNITUDE_BOUND) > IMPERCEPTIBLE_LUMINANCE);
+  assert.equal(pointLuminanceVisible(magnitudeDisplayAlphaChange(steep, atlas, POINT_FIELD_MAGNITUDE_BOUND)), true);
   assert.throws(() => encode({ photometry: steep }), /display threshold/);
 });

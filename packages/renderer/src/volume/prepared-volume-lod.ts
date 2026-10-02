@@ -1,3 +1,4 @@
+import { samePreparedVolumeTopology } from '@cssearth/objects';
 import { writeData, writeStyle } from '../rendering/retained-write.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
@@ -14,30 +15,6 @@ export interface PreparedVolumeLodRuntime extends PreparedVolumeRuntime {
   /** Whether the slice stack may present at all. Denied, the billboard views carry the cloud at every size; the
    * universe denies its unselected galaxy, whose slices are for the observer who selected it. */
   setDetail(allowed: boolean): void;
-}
-
-/** Geometry equality excludes resource identity and atlas sampling, which are presentation material. */
-export function samePreparedVolumeTopology(leftInput: PreparedVolumeMountOptions['payload'], rightInput: PreparedVolumeMountOptions['payload']): boolean {
-  const left = validatePreparedCssVolume(leftInput), right = validatePreparedCssVolume(rightInput);
-  if (!frameEquals(left.frame, right.frame) || !anchorsEqual(left.anchors, right.anchors)) return false;
-  for (const axis of AXES) {
-    const a = left.stacks.find(stack => stack.axis === axis), b = right.stacks.find(stack => stack.axis === axis);
-    if (!a || !b || !vectorEquals(a.normalUnits, b.normalUnits) || a.leaves.length !== b.leaves.length) return false;
-    for (let index = 0; index < a.leaves.length; index++) {
-      const x = a.leaves[index]!, y = b.leaves[index]!, prepared = x.style, other = y.style;
-      if (x.id !== y.id || x.widthPx !== y.widthPx || x.heightPx !== y.heightPx ||
-          !vectorEquals(x.centerUnits, y.centerUnits) || prepared.width !== other.width || prepared.height !== other.height ||
-          prepared.transform !== other.transform || !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
-    }
-  }
-  const a = left.impostors, b = right.impostors;
-  if (!a || !b) return a === b;
-  if (a.radiusUnits !== b.radiusUnits || a.fullBelowDiameterPixels !== b.fullBelowDiameterPixels ||
-      a.volumeAboveDiameterPixels !== b.volumeAboveDiameterPixels || a.views.length !== b.views.length) return false;
-  return a.views.every((view, index) => {
-    const other = b.views[index]!;
-    return view.id === other.id && vectorEquals(view.back, other.back) && vectorEquals(view.right, other.right) && vectorEquals(view.down, other.down);
-  });
 }
 
 /** Retain the full geometry, but publish it only when depth can occupy visible screen pixels. */
@@ -185,22 +162,5 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     if (destroyed) return; destroyed = true;
     runtime?.destroy(); full.remove(); distant.remove();
   } });
-}
-
-function frameEquals(left: PreparedVolumeMountOptions['payload']['frame'], right: PreparedVolumeMountOptions['payload']['frame']): boolean {
-  return left.referenceFrame === right.referenceFrame && left.epochJdTt === right.epochJdTt && left.metersPerUnit === right.metersPerUnit &&
-    vectorEquals(left.originM, right.originM) && vectorEquals(left.localToReferenceXyzw, right.localToReferenceXyzw) &&
-    vectorEquals(left.boundsUnits.min, right.boundsUnits.min) && vectorEquals(left.boundsUnits.max, right.boundsUnits.max);
-}
-function anchorsEqual(left: PreparedVolumeMountOptions['payload']['anchors'], right: PreparedVolumeMountOptions['payload']['anchors']): boolean {
-  const a = left ?? [], b = right ?? [];
-  return a.length === b.length && a.every((anchor, index) => anchor.id === b[index]!.id && vectorEquals(anchor.positionUnits, b[index]!.positionUnits));
-}
-function vectorEquals(left: readonly number[] | undefined, right: readonly number[] | undefined): boolean {
-  return left === undefined || right === undefined ? left === right : left.length === right.length && left.every((value, index) => value === right[index]);
-}
-function boundsEqual(left: { min: readonly number[]; max: readonly number[] } | undefined,
-  right: { min: readonly number[]; max: readonly number[] } | undefined): boolean {
-  return left === undefined || right === undefined ? left === right : vectorEquals(left.min, right.min) && vectorEquals(left.max, right.max);
 }
 function escapeUrl(value: string): string { return value.replace(/["\\\n\r]/gu, character => `\\${character}`); }

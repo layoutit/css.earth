@@ -18,7 +18,7 @@ import { publishObjectDiagnostics } from "./object-diagnostics.js";
 export type { ObjectMountOptions, ObjectRuntimeView } from './object-runtime-types.js';
 export type ObjectRuntimeServices = typeof nativeServices;
 
-import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../rendering/prepared-object-assets.js";
+import { CANONICAL_PREPARED_IMAGE_DENSITY } from '@cssearth/objects';
 import { createSceneLifetime } from "@cssearth/engine";
 import { waitForSceneDocument, waitForScenePaint } from "./scene-native-waits.js";
 import { createPreparedResidency } from "../rendering/prepared-residency.js";

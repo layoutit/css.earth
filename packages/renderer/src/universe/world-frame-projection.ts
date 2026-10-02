@@ -1,6 +1,6 @@
-import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
+import { rayHitsSphereBefore } from '@cssearth/engine';
 import { createSphereChordTest } from '../solar-system/prepared-ring-projection.js';
-import type { Vector3 } from '../solar-system/types.js';
+import type { Vector3 } from '@cssearth/engine';
 
 interface WorldPoint {
   readonly id: string;

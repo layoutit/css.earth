@@ -13,7 +13,7 @@ import { requirePreparedPresentation} from "../presentation/index.ts";
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.ts";
 import { requireAuthoredWorldFrame } from '../sources/index.ts';
 
-import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
+import { requireObjectControls } from '@cssearth/objects';
 import { nodeName, staticObjectProperties } from '../runtime-source/index.ts';
 import type { RuntimeSourceReader } from '../runtime-source/index.ts';
 import { readPreparedObjects } from "@cssearth/objects/node";

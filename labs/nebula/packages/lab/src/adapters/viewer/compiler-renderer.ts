@@ -3,7 +3,7 @@ import { volumeRenderer } from './volume-renderer';
 import type { CompilerViewerBackend } from '@cssearth/volume-viewer/scene/compiler-viewer';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { projectPreparedPoint } from '@cssearth/volume-viewer/camera/point-projection';
-import { cssViewFromOrientation } from '@cssearth/renderer/navigation/world-camera-math.ts';
+import { cssViewFromOrientation } from '@cssearth/engine';
 import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
 import type { PreparedCssVolume } from '@cssearth/objects';
 import { assertCompilerBankIdentity, assertCompilerDatasetGeometry } from '../../server/workflows/compiler/bank-validation.ts';

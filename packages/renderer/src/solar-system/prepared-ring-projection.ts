@@ -1,6 +1,6 @@
-import { clipSegmentToRectangle, eyeFraction, lerp, splitVisible } from './heliocentric-geometry.js';
-import type { Vector3 } from './types.js';
-import type { OrbitSegment } from './types.js';
+import { clipSegmentToRectangle, eyeFraction, lerp, splitVisible } from '@cssearth/engine';
+import type { Vector3 } from '@cssearth/engine';
+import type { OrbitSegment } from '@cssearth/engine';
 
 const DISTANCE_FADE_STEPS = 16;
 export interface OrbitDepthFade { readonly start: number; readonly end: number }

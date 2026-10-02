@@ -1,7 +1,8 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { createPreparedInteriorDisc, PREPARED_INTERIOR_DISC_SIZE } from './prepared-interior-disc.js';
+import { createPreparedInteriorDisc } from './prepared-interior-disc.js';
+import { PREPARED_INTERIOR_DISC_SIZE } from '@cssearth/objects';
 import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from '@cssearth/core';
 
 const identity = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];

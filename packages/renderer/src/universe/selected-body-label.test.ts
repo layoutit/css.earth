@@ -87,7 +87,6 @@ test('a new name waits for layout and requests publication; disposal releases it
   owner.destroy(); assert.equal(observations.has(owner.label), false);
 });
 
-
 test('a flattened mesh caption follows its projected lower edge instead of its largest sphere', () => {
   const owner = mountSelectedBodyLabel(host, clock), flattened = body(5);
   owner.prepare(flattened); deliverSize(owner.label);

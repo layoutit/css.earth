@@ -10,7 +10,7 @@ import { prepareEclipticPresentationFrame } from
   "@cssearth/bake/objects/scene";
 import { prepareSunReferenceViewDirection } from
   "@cssearth/bake/objects/scene";
-import { cssDirectionToViewDirection } from "@cssearth/renderer/platform/solar-view-direction";
+import { cssDirectionToViewDirection } from '@cssearth/engine';
 import * as solarGeometry from './solar-geometry.mts';
 
 const BODIES = [

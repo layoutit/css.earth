@@ -1,4 +1,4 @@
-import type { Vector3 } from "./types.js";
+import type { Vector3 } from '../navigation/math-types.js';
 
 // Both maps take a Sun direction in the sprite's view frame (+x right, +y up,
 // +z toward the viewer) and return a light direction in the prepared material

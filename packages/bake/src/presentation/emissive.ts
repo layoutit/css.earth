@@ -4,7 +4,7 @@ import { type PreparedVariant } from '@cssearth/objects';
 // (scene/index.ts body-container layout) with the composite node conventions (composite.ts).
 // An emissive body has no material track, no Shadows toggle and no directional Sun; its off-limb context and
 // limb plate are silhouette-fitted roots beside the camera, exactly as the retired static presentation mounted them.
-import { canonicalPreparedAsset, preparedResourcePool } from '@cssearth/renderer/rendering/prepared-object-assets.ts';
+import { canonicalPreparedAsset, preparedResourcePool } from '@cssearth/objects';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 
 import type { PresentationInputs, PresentationDraft } from './types.ts';

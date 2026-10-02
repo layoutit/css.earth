@@ -10,7 +10,8 @@ import { prepareSurfaceShellObject } from './prepare.ts';
 import { sourceBytes } from '../volume/node/index.ts';
 import { SHELL_CORNER_PERMUTATIONS, type PreparedCssSurfaceShell, validatePreparedCssSurfaceShell } from '@cssearth/objects';
 import { compileCssSurfaceShell } from './css-shell.ts';
-import { nearestFacingIndex, shellMaterialAddress } from '@cssearth/renderer/shell/material-address.ts';
+import { nearestFacingIndex } from '@cssearth/renderer/shell/material-address.ts';
+import { shellMaterialAddress } from '@cssearth/objects';
 import { shellRim } from './atlas.ts';
 
 import { dotN as dot } from '@cssearth/core';

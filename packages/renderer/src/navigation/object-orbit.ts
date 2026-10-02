@@ -34,7 +34,7 @@ import { createSceneLifetime } from "@cssearth/engine";
 import { multiplyPreparedMatrix4, readPreparedMatrix4 } from "@cssearth/core";
 import { readPreparedTransform } from "./prepared-camera-basis.js";
 import { sampleDestinationFlight } from "@cssearth/engine";
-import { viewSunDirectionToPhysicalLightDirection } from "../solar-system/directional-sun-coordinate.js";
+import { viewSunDirectionToPhysicalLightDirection } from '@cssearth/engine';
 import { createPerspectiveDolly, validatePerspectiveCameraPlan } from "./perspective-dolly.js";
 import { createPreparedWheelZoomControls } from "./prepared-wheel-zoom.js";
 import { createCameraOrientation } from "./camera-orientation.js";

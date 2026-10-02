@@ -2,7 +2,7 @@ import { PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_IMPOSTORS_SCHEMA, PREPARED_
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
+import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/objects';
 
 import { assertCompilerDeliveryElementBudget } from '../index.js';
 

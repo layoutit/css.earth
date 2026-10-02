@@ -4,7 +4,7 @@ const test = sourceTest();
 import preparedContext from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { bodyViewAtCamera, overviewFrameDistanceM, overviewScopeAtCamera, overviewsReachableFrom, viewDistance } from '../overview-context.mts';
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
-import { presentWorldCamera } from '@cssearth/renderer/navigation';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { parsePreparedWorldContext } from '@cssearth/objects';
 import { systemOverviewDistance, SYSTEM_FRAMING_RADII } from '../system-framing.mts';
 import { OVERVIEWS } from '../objects.mts';
@@ -151,7 +151,6 @@ test('prepared focus distance follows its catalogue position independently of th
   assert.equal(viewDistance(world, frame, 'system', undefined, focus).meters, value.meters);
   assert.equal(viewDistance(world, frame, 'milky-way').label, 'Distance from Sun:');
 });
-
 
 test('extragalactic overview cards follow zoom with hysteresis and preserve distance meaning', () => {
   const pc = 3.085677581491367e16;
