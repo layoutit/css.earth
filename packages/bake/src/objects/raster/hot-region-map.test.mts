@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { hotRegionTemperature, parsePublishedHotRegions, publishedHotRegionMap } from '@cssearth/bake/objects/raster';
+import { hotRegionTemperature, parseHotRegionSamples, parsePublishedHotRegions, publishedHotRegionMap } from '@cssearth/bake/objects/raster';
 
 const test = sourceTest();
 const cell = (value: number) => ({ value, cell: 'test' });
@@ -31,6 +31,23 @@ test('a circle is hot inside its angular radius; a ring has a cold middle; a ced
   const spot = { id: 'a', phaseCycles: cell(0), superseding: circle(1, 0.3, 6) }, bulk = (kelvin: number) => ({ temperatureK: cell(kelvin), source: 'another paper', url: 'https://arxiv.org/abs/0000.00000' });
   assert.equal(hotRegionTemperature(parsePublishedHotRegions({ ...record([spot]), bulk: bulk(250000) }), 180, -80), 250000);
   assert.throws(() => parsePublishedHotRegions({ ...record([spot]), bulk: bulk(2e6) }), /below the coolest hot region/u);
+});
+
+test('a posterior draws the mean of its samples: sharp where they agree, graded where they differ', () => {
+  const degree = Math.PI / 180, column = (name: string) => ({ column: name });
+  const posterior = { path: 'science/a-paper/samples.tsv', source: 'a paper\'s samples',
+    columns: [{ id: 'spot', phaseCycles: column('phase'), superseding: { colatitudeRadians: column('colatitude'), radiusRadians: column('radius'), log10TemperatureK: column('temperature') } }] };
+  const map = parsePublishedHotRegions({ ...record([{ id: 'spot', phaseCycles: cell(0), superseding: circle(Math.PI / 2, 15 * degree, 6) }]),
+    bulk: { temperatureK: cell(250000), source: 'another paper', url: 'https://arxiv.org/abs/0000.00000' }, posterior });
+  // Two samples of one spot on the equator at longitude 0: 10 and 20 degrees in radius, both at a million kelvin.
+  const samples = parseHotRegionSamples(map, ['phase\tcolatitude\tradius\ttemperature', `0\t${Math.PI / 2}\t${10 * degree}\t6`, `0\t${Math.PI / 2}\t${20 * degree}\t6`, ''].join('\n'));
+  const drawn = publishedHotRegionMap(map, samples);
+  assert.ok(Math.abs(drawn.sample(5, 0)! - 1e6) < 1e-6, 'inside both samples');
+  assert.ok(Math.abs(drawn.sample(15, 0)! - (1e6 + 250000) / 2) < 1e-6, 'inside one of the two');
+  assert.equal(drawn.sample(25, 0), 250000, 'outside both: the bulk surface');
+  assert.equal(drawn.report.posterior?.samples, 2);
+  assert.throws(() => parseHotRegionSamples(map, 'phase\tcolatitude\n0\t1\n'), /no column radius/u);
+  assert.throws(() => parsePublishedHotRegions({ ...record([{ id: 'spot', phaseCycles: cell(0), superseding: circle(1, 0.2, 6) }]), posterior }), /needs bulk/u);
 });
 
 test("PSR J0437-4715's record draws what Choudhury et al. (2024) describe: a ring around the north pole and a two-temperature spot in the south", async () => {

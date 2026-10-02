@@ -16,7 +16,13 @@
  *
  * These fits give the surface outside the regions no temperature. A record may add `bulk`: the temperature another measurement
  * gives the whole surface apart from the hot regions (a far-ultraviolet and soft X-ray spectrum), with its own source. The surface
- * outside every region then has that temperature; without it, it has no value. */
+ * outside every region then has that temperature; without it, it has no value.
+ *
+ * A record may also add `posterior`: a thinned set of the fit's own posterior samples, one row of region parameters each, and
+ * which column feeds which parameter. The map is then the mean, over those samples, of the temperature each one gives a point:
+ * where every sample agrees a region's edge is sharp, and where they differ it grades by how many samples put the region there.
+ * The record's own `regions` stay the fit's single best sample, for the words that describe it. A posterior needs `bulk`: a mean
+ * over samples that give a point no temperature has no meaning. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -33,7 +39,9 @@ export interface HotRegion {
 }
 export interface PublishedHotRegions { readonly source: string; readonly regions: readonly HotRegion[];
   /** The measured temperature of the surface outside the hot regions, from its own source. */
-  readonly bulk?: { readonly kelvin: number; readonly source: string; readonly url: string } }
+  readonly bulk?: { readonly kelvin: number; readonly source: string; readonly url: string };
+  /** Where the thinned posterior samples are, and the column of each region parameter. */
+  readonly posterior?: { readonly path: string; readonly source: string; readonly columns: unknown } }
 
 const DEGREES = 180 / Math.PI;
 const wrap = (degrees: number) => ((degrees + 180) % 360 + 360) % 360 - 180;
@@ -85,7 +93,73 @@ export function parsePublishedHotRegions(value: unknown): PublishedHotRegions {
     if (!(kelvin > 0 && kelvin < coolest)) throw new RangeError(`bulk.temperatureK ${kelvin} must be positive and below the coolest hot region's ${Math.round(coolest)} K.`);
     return { kelvin, source: requireString(b.source, 'bulk.source'), url: requireString(b.url, 'bulk.url') };
   })();
-  return { source: requireString(input.source, 'source'), regions, ...(bulk ? { bulk } : {}) };
+  const posterior = input.posterior === undefined ? undefined : (() => {
+    const p = requireRecord(input.posterior, 'posterior'), path = requireString(p.path, 'posterior.path');
+    if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('posterior.path must be inside the source directory.');
+    if (!bulk) throw new TypeError('A posterior mean needs bulk: the temperature of the surface outside the regions.');
+    return { path, source: requireString(p.source, 'posterior.source'), columns: requireArray(p.columns, 'posterior.columns') };
+  })();
+  return { source: requireString(input.source, 'source'), regions, ...(bulk ? { bulk } : {}), ...(posterior ? { posterior } : {}) };
+}
+
+/** One posterior sample as a regions record: the record's `posterior.columns` (its `regions` with a column name in place of
+ * each table cell) filled from one row. */
+function sampleRecord(columns: unknown, row: ReadonlyMap<string, number>): unknown {
+  if (Array.isArray(columns)) return columns.map(entry => sampleRecord(entry, row));
+  if (typeof columns !== 'object' || columns === null) return columns;
+  const record = columns as Record<string, unknown>;
+  if (typeof record.column === 'string') {
+    const value = row.get(record.column);
+    if (value === undefined) throw new TypeError(`The posterior samples have no column ${record.column}.`);
+    return { value };
+  }
+  return Object.fromEntries(Object.entries(record).map(([key, value]) => [key, sampleRecord(value, row)]));
+}
+
+/** The posterior samples of a record, read from its tab-separated file: a header of column names, then one sample a row. */
+export function parseHotRegionSamples(record: PublishedHotRegions, tsv: string): PublishedHotRegions[] {
+  if (!record.posterior) throw new TypeError('The record has no posterior.');
+  const lines = tsv.split('\n').filter(line => line.trim() && !line.startsWith('#')), header = lines[0]!.split('\t');
+  if (lines.length < 2) throw new TypeError(`${record.posterior.path} holds no samples.`);
+  return lines.slice(1).map((line, index) => {
+    const cells = line.split('\t').map(Number);
+    if (cells.length !== header.length || !cells.every(Number.isFinite)) throw new TypeError(`${record.posterior!.path}: sample ${index + 1} is not ${header.length} numbers.`);
+    return parsePublishedHotRegions({ schema: 'cssearth-published-hot-regions@1', source: record.posterior!.source,
+      regions: sampleRecord(record.posterior!.columns, new Map(header.map((name, column) => [name, cells[column]!]))) });
+  });
+}
+
+/** The mean temperature map of a set of samples over a bulk surface: each sample's circles as unit vectors, so a point is tested
+ * against each by one dot product. */
+export function hotRegionSampleMean(samples: readonly PublishedHotRegions[], bulkKelvin: number) {
+  const vector = (colatitudeRadians: number, longitudeDegrees: number) => { const sine = Math.sin(colatitudeRadians), longitude = longitudeDegrees / DEGREES;
+    return [sine * Math.cos(longitude), sine * Math.sin(longitude), Math.cos(colatitudeRadians)] as const; };
+  // Per region of every sample: superseding centre, cos radius, kelvin, cos omit radius (2 when none), ceding centre, cos radius (2 when none), kelvin.
+  const WIDTH = 13, packed = new Float64Array(samples.reduce((count, sample) => count + sample.regions.length, 0) * WIDTH), ends: number[] = [];
+  let at = 0;
+  for (const sample of samples) {
+    for (const region of sample.regions) {
+      const s = region.superseding, c = region.ceding;
+      packed.set([...vector(s.colatitudeRadians, s.longitudeDegrees), Math.cos(s.radiusRadians), s.kelvin, region.omitRadiusRadians === undefined ? 2 : Math.cos(region.omitRadiusRadians),
+        ...(c ? [...vector(c.colatitudeRadians, c.longitudeDegrees), Math.cos(c.radiusRadians), c.kelvin] : [0, 0, 1, 2, 0]), 0, 0], at);
+      at += WIDTH;
+    }
+    ends.push(at);
+  }
+  return (longitude: number, latitude: number) => {
+    const [x, y, z] = vector((90 - latitude) / DEGREES, longitude);
+    let total = 0, start = 0;
+    for (const end of ends) {
+      let kelvin = bulkKelvin;
+      for (let i = start; i < end; i += WIDTH) {
+        const cosine = x * packed[i]! + y * packed[i + 1]! + z * packed[i + 2]!;
+        if (cosine >= packed[i + 3]! && !(cosine > packed[i + 5]!)) { kelvin = packed[i + 4]!; break; }
+        if (packed[i + 9]! <= 1 && x * packed[i + 6]! + y * packed[i + 7]! + z * packed[i + 8]! >= packed[i + 9]!) { kelvin = packed[i + 10]!; break; }
+      }
+      total += kelvin; start = end;
+    }
+    return total / ends.length;
+  };
 }
 
 /** Effective temperature in kelvin at a point; outside every region, the bulk temperature when the record has one, else null. */
@@ -102,13 +176,15 @@ export function hotRegionTemperature(record: PublishedHotRegions, longitude: num
 const capShare = (radians: number) => (1 - Math.cos(radians)) / 2;
 
 /** The map of a parsed record, as `loadPublishedHotRegionMap` reads it from a file. */
-export function publishedHotRegionMap(record: PublishedHotRegions) {
+export function publishedHotRegionMap(record: PublishedHotRegions, samples?: readonly PublishedHotRegions[]) {
+  const mean = samples?.length ? hotRegionSampleMean(samples, record.bulk!.kelvin) : null;
   return {
     sample(longitude: number, latitude: number) {
       if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
-      return hotRegionTemperature(record, longitude, latitude);
+      return mean ? mean(longitude, latitude) : hotRegionTemperature(record, longitude, latitude);
     },
     report: { format: 'published-hot-region-map', units: 'K', source: record.source, ...(record.bulk ? { bulk: record.bulk } : {}),
+      ...(samples?.length ? { posterior: { source: record.posterior!.source, samples: samples.length, drawn: 'the mean over the samples of the temperature each gives a point' } } : {}),
       regions: record.regions.map(region => ({ id: region.id,
         superseding: { latitudeDegrees: 90 - region.superseding.colatitudeRadians * DEGREES, eastLongitudeDegrees: region.superseding.longitudeDegrees, radiusDegrees: region.superseding.radiusRadians * DEGREES, kelvin: region.superseding.kelvin,
           sphereShare: capShare(region.superseding.radiusRadians) - (region.omitRadiusRadians === undefined ? 0 : capShare(region.omitRadiusRadians)) },
@@ -120,5 +196,6 @@ export function publishedHotRegionMap(record: PublishedHotRegions) {
 export async function loadPublishedHotRegionMap(root: string, value: unknown) {
   const dataset = requireRecord(value, 'published hot-region dataset'), path = requireString(dataset.path, 'path');
   if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('Published hot regions must be inside the source directory.');
-  return publishedHotRegionMap(parsePublishedHotRegions(JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown));
+  const record = parsePublishedHotRegions(JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown);
+  return publishedHotRegionMap(record, record.posterior ? parseHotRegionSamples(record, await readFile(resolve(root, record.posterior.path), 'utf8')) : undefined);
 }
