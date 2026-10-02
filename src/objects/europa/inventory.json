@@ -9,6 +9,12 @@
     },
     {
       "location": "public",
+      "filename": "europa-billboard.webp",
+      "bytes": 8648,
+      "sha256": "b4537ca3391bd927318626b798d923596692aa87d37037a4a5d034a664f26e6a"
+    },
+    {
+      "location": "public",
       "filename": "europa-carbon-dioxide-page-0-level-130.webp",
       "bytes": 3132,
       "sha256": "15927aa372847fddb297ed28cc1ba72611d642a05aca8661218f39e907fc030f"
@@ -1416,12 +1422,6 @@
       "filename": "world-navigation.json",
       "bytes": 1219,
       "sha256": "82397d48d5e97cb528655c5dc03718f355c46607305c658f610e797d43ed09f1"
-    },
-    {
-      "location": "public",
-      "filename": "europa-billboard.webp",
-      "bytes": 8648,
-      "sha256": "b4537ca3391bd927318626b798d923596692aa87d37037a4a5d034a664f26e6a"
     }
   ]
 }
