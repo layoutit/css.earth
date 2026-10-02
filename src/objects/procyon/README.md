@@ -16,6 +16,8 @@ Generated 2026-10-02 by [new-object-cli.mts](../../../packages/telescope-cli/src
 
 - The colour's cross-check differs by 6 levels at most in any channel (threshold 12); [object-package-consistency.test.mts](../../../src/objects/object-package-consistency.test.mts) recomputes it after preparation.
 
+![Procyon, Procyon B, Sirius B, Barnard's Star, Lalande 21185 and Merak as their pages open, 1 October 2026](evidence/2026-10-01/pages.jpg)
+
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
