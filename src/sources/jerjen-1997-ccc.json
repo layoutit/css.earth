@@ -1,0 +1,50 @@
+{
+  "id": "jerjen-1997-ccc",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Centaurus Cluster Catalogue",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "1997A&AS..124....1J"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+AS/124/1"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/1997A&AS..124....1J",
+      "label": "1997A&AS..124....1J"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+AS/124/1",
+      "label": "CDS J/A+AS/124/1"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+AS/124/1/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "table6: 296 cluster galaxies with B1950 positions, morphological type, membership class (1 = 100%, 2 = 75%, 3 = 50%) and total B magnitude; 198 rows have class 1. VizieR adds ICRS positions computed from the B1950 ones."
+    }
+  ],
+  "creators": [
+    "H. Jerjen",
+    "A. Dressler"
+  ],
+  "publisher": "A&AS 124, 1",
+  "publicationDate": "1997",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Jerjen & Dressler (1997), A&AS 124, 1.",
+      "scope": "Centaurus cluster member galaxies",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+AS/124/1/ReadMe"
+    }
+  ]
+}

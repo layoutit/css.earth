@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "dots",
+  "published": true,
+  "table": {
+    "path": "members.csv.gz",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+Seq%2C+objID%2C+RAJ2000%2C+DEJ2000%2C+rmag%2C+z+FROM+%22J%2FApJS%2F272%2F22%2Ftable2%22+WHERE+Mm%3D1",
+    "generator": "packages/bake/authoring/galaxy-clusters/members.mts",
+    "bytes": 5184,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 6
+    },
+    "distanceUnit": "distance-modulus",
+    "groupDistance": {
+      "group": 5,
+      "distance": 6,
+      "depth": "isotropic",
+      "source": "cosmicflows-4",
+      "basis": "Every member sits at the cluster's Cosmicflows-4 group distance (table 3, DMzp), as the Nearby Universe places the members Cosmicflows-4 holds, spread in depth as widely as the members spread across the sky: that the cluster is as deep as it is wide is an assumption, not a measurement of any member's depth."
+    }
+  },
+  "sample": "The 418 galaxies Kang et al.'s (2024) caustic analysis keeps as members of the Perseus cluster within 60 arcmin of its centre (table2, Mm = 1), less those within 10 arcsec of a Cosmicflows-4 galaxy, which the Nearby Universe field draws already: 391 kept.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "unit": "Mpc",
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "kang-2024-perseus-redshifts",
+  "meaning": "Perseus Cluster member galaxies from the redshift survey of Kang et al. (2024) that the Nearby Universe field does not draw, one dot each at the cluster's Cosmicflows-4 group distance. Drawn when the cluster is selected.",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "toneBy": {
+      "magnitudeColumn": 7,
+      "band": "B from SDSS DR16 model g and r (CDS V/154, by the table's SDSS objID) through Jester et al. (2005, AJ 130, 873: B = g + 0.39 (g - r) + 0.21), not corrected for extinction",
+      "brightMagnitude": -21.5,
+      "faintMagnitude": -17.5,
+      "faintTone": 0.3,
+      "steps": 8,
+      "basis": "The Nearby Universe field's tone scale (its galaxies' recipe), so a member is as bright as a field galaxy of the same absolute magnitude: each galaxy's absolute B magnitude (its B magnitude minus the group's distance modulus) darkens its colour, from full at M_B -21.5 to 30% at -17.5, linear in magnitude; a member without a magnitude takes the faintest tone. Galactic extinction toward the cluster is not removed."
+    },
+    "fullDetail": {
+      "units": 250,
+      "basis": "Presentation choice: whole within 250 Mpc of the Sun, three times the cluster's distance, so every member shows while the cluster is selected and framed (the bank's origin is the Sun; the renderer's default of 10 kpc suits a galaxy's own dots)."
+    }
+  }
+}
