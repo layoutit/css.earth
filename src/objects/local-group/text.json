@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "local-group",
+  "card": {
+    "text": "Our galaxy group: the Milky Way, Andromeda and their neighbouring galaxies.",
+    "sources": [
+      {
+        "catalogueId": "publication-mcconnachie2012aj-144-4m",
+        "url": "https://arxiv.org/abs/1204.1562",
+        "label": "McConnachie (2012), AJ 144, 4",
+        "checked": "2026-10-01",
+        "locator": "Section 1"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Our galaxy group, including the Milky Way, Andromeda and their neighboring galaxies.",
+    "sources": [
+      {
+        "catalogueId": "publication-mcconnachie2012aj-144-4m",
+        "url": "https://arxiv.org/abs/1204.1562",
+        "label": "McConnachie (2012), AJ 144, 4",
+        "checked": "2026-10-01",
+        "locator": "Section 1"
+      }
+    ]
+  },
+  "datasets": {
+    "galaxies": {
+      "title": "Galaxies of the Local Volume",
+      "detail": "One dot per galaxy",
+      "summary": "Each catalogued galaxy as a dot at its published position and distance.",
+      "sources": [
+        {
+          "catalogueId": "lvdb-v1-1-1",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "checked": "2026-10-01",
+          "locator": "comb_all.csv"
+        }
+      ]
+    }
+  }
+}

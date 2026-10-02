@@ -23,8 +23,8 @@ import { gunzipSync, gzipSync } from 'node:zlib';
 
 const repository = resolve(import.meta.dirname, '../../../..');
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/2mrs/table3.dat.gz'));
-const fieldPath = resolve(repository, 'src/objects/nearby-universe/source/galaxies/cf4-hyperleda.csv.gz');
-const outputPath = resolve(repository, 'src/objects/nearby-universe/source/galaxies-2mrs/twomrs-sample.csv.gz');
+const fieldPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz');
+const outputPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies-2mrs/twomrs-sample.csv.gz');
 const C_KM_S = 299792.458, DIPOLE_KM_S = 369.82, DIPOLE_L = 264.021, DIPOLE_B = 48.253, Z_FROM = 0.0007, Z_TO = 0.05, MATCH_ARCSEC = 10;
 
 const unit = (lDeg: number, bDeg: number) => {

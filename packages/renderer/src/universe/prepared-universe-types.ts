@@ -40,6 +40,9 @@ export interface PreparedUniverseOptions {
   datasetVisibility?: PreparedPointVisibility;
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
   environmentLinks?: Readonly<Record<string, string>>;
+  /** The context packages a level object's datasets name (its `overview.packages`): the world always draws them, so each
+   * answers as a bank with nothing to load. */
+  contextBanks?: readonly string[];
   /** Published stellar extents, radius in metres by object id: each such galaxy's caption hangs under what is drawn of
    * it and hides while the camera is inside the extent. Objects without one keep their ordinary caption. */
   stellarExtents?: Readonly<Record<string, number>>;

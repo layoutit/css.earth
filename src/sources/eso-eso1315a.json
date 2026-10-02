@@ -1,0 +1,41 @@
+{
+  "id": "eso-eso1315a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Spiral galaxy NGC 1637",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "eso1315a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1315a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/large/eso1315a.jpg",
+      "label": "Large JPEG, 1964 x 1964 px"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso1315a/",
+      "checkedOn": "2026-10-01",
+      "locator": "1964 x 1964 px; B, V and R with FORS1 on the Very Large Telescope. The page states a field of 7.19 x 7.19 arcmin, centre RA 4 41 28.25, Dec -2 51 29.47 and north 6.2 deg right of vertical; the Large JPEG does not match that. A blind match of its star peaks to Gaia DR3 over every rotation, both mirrors and pixel scales from 0.18 to 0.27 arcsec finds one solution, refined on the star contrast of 78 Gaia stars: centre 70.3678848, -2.8606559, 0.2000 arcsec per pixel (a field of 6.55 arcmin), north up; 27 of the 32 Gaia stars in the frame have a star within 4 px, and the galaxy's catalogued centre lands on the nucleus (the recipe's observation). Found in the ESO image archive search for NGC 1637."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/eso1315a/"
+    }
+  ]
+}

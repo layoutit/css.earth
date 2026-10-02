@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-sky-provenance@1",
+  "title": "NASA Deep Star Maps 2020 — Milky Way-only celestial map",
+  "sourcePage": "https://svs.gsfc.nasa.gov/4851/",
+  "source": {
+    "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_8k.exr",
+    "bytes": 137307727,
+    "width": 8192,
+    "height": 4096
+  },
+  "sourceFrame": "ICRF/J2000, right ascension increases left, centre RA 0h, north at top",
+  "sourceColour": "Linear RGB, OpenEXR HALF",
+  "credits": [
+    "NASA/Goddard Space Flight Center Scientific Visualization Studio",
+    "Ernie Wright (USRA), visualizer",
+    "ESA/Gaia/DPAC, Gaia Data Release 2"
+  ],
+  "license": {
+    "notice": "NOTICE.md",
+    "terms": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+    "statement": "NASA media usage guidelines apply; NASA and Gaia source credits retained. No NASA endorsement is implied."
+  },
+  "catalogSeparation": "NASA Milky Way-only image omits bright Hipparcos/Tycho stars. Faint Gaia stars remain in its diffuse background; separate bright catalogue stars remain visible in the application.",
+  "display": {
+    "exposure": 4.5,
+    "transfer": "linear-to-srgb, clamp to display range",
+    "whiteBalance": "source RGB unchanged",
+    "photometricCalibration": false,
+    "reference": {
+      "path": "nasa-preview.jpg",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_4k_print.jpg"
+    },
+    "measurement": "Before display attenuation, exposure 4.5 matches NASA preview mean RGB within 0.001 with RGB RMSE 0.01387 at 1024x512. Final display gain 0.12 dims bright and faint background regions alike. An additional smooth shadow floor suppresses faint texture grain: zero below display luminance 0.04, full contribution above 0.12. This suppresses faint image detail intentionally; source HDR pixels and white balance remain unchanged. Display calibration, not photometry.",
+    "displayGain": 0.12,
+    "shadowFloor": {
+      "blackPoint": 0.04,
+      "fullSignal": 0.12,
+      "space": "post-transfer display RGB luminance",
+      "curve": "one smoothstep factor multiplies all three RGB channels before quantization; opaque alpha unchanged"
+    }
+  },
+  "presentation": {
+    "model": "finite-origin-cube",
+    "originM": [
+      0,
+      0,
+      0
+    ],
+    "radiusM": 6.171355162982735e+20,
+    "handoffCompleteDistanceM": 3085677581491367,
+    "meaning": "NASA supplies angular radiance observed from the Sun, not measured depths. The prepared Solar sky begins retiring at 100 AU and is absent by 0.1 pc so the same angular image is not presented from another stellar location."
+  },
+  "sourceBinding": {
+    "kind": "catalogued",
+    "references": [
+      {
+        "catalogueId": "nasa-deep-star-maps-2020",
+        "role": "material",
+        "evidence": "src/objects/milky-way-volume/source/sky/provenance.json#/sourcePage"
+      }
+    ]
+  },
+  "catalogueDisplay": {
+    "feature": "sky",
+    "label": "NASA SVS",
+    "credit": "Deep Star Maps 2020 · NASA/Goddard, Ernie Wright (USRA), ESA/Gaia/DPAC.",
+    "description": "NASA Deep Star Maps 2020 — Milky Way-only celestial map. NASA/Goddard Space Flight Center Scientific Visualization Studio; Ernie Wright (USRA), visualizer; ESA/Gaia/DPAC, Gaia Data Release 2."
+  }
+}

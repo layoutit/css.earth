@@ -7,7 +7,7 @@ import type { DestinationPresentation } from './destination-browser.mts';
 import { requiredElement, sectionElement } from './browser/browser-types.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
-import { presentOverviewResults, createSearchPresentation } from './search/search-results-presentation.mts';
+import { createSearchPresentation } from './search/search-results-presentation.mts';
 import { WORLD_OBJECTS } from './world-objects.mts';
 import { SEARCH_SUGGESTION_MIN_CHARACTERS } from './runtime-policy.mts';
 
@@ -57,7 +57,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   let open = searchCard.hasAttribute('data-search-submitted');
   let showingSearchResults = false;
   const searchPresentation = createSearchPresentation(documentTarget);
-  const presentation = createSelectionPresentation(documentTarget, { windowTarget });
+  const presentation = createSelectionPresentation(documentTarget);
   const resultsPanel = requiredElement(browser, '#object-category-results');
   browser.dataset.retained = '';
   information.dataset.retained = '';
@@ -133,7 +133,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       return;
     }
     showingSearchResults = searching;
-    const visibleOverviews = presentOverviewResults(browser, query);
     presentBrowser();
     if (resetScroll) resetResultsScroll();
     if (!searching) {
@@ -148,7 +147,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     const pill = categoryButtons.find(button => button.dataset.searchQuery?.toLocaleLowerCase('en') === query);
     const classification = pill?.dataset.searchClassification ?? null;
     markCategory(classification);
-    Object.assign(shown, { query, classification, overviews: visibleOverviews, objects: 'pending', features: 0 } satisfies ShownSearch);
+    Object.assign(shown, { query, classification, overviews: 0, objects: 'pending', features: 0 } satisfies ShownSearch);
     void results.search(query, readIllustrationModels());
     presentEmpty();
   };
@@ -304,7 +303,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     refreshSelection() {
       const subject = readSelection();
       subjectOverride = null;
-      if (subject.kind === 'overview') destinations?.present(null);
+      if (subject.view === 'system') destinations?.present(null);
       refreshSelection();
     },
     bindObject(id: string) {

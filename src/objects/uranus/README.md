@@ -19,7 +19,8 @@ Ring radii, widths, and normal optical depths come from the
 No ring colour is measured here, so every ring is the neutral gray of a body
 without a measured colour. Physical facts are checked against
 [NASA Uranus facts](https://science.nasa.gov/uranus/facts/) and the JPL
-physical-parameter page.
+physical-parameter page. Four of the five moons without a page are drawn as plain dots at their JPL
+Horizons positions by [Uranus's moons without a page](../uranus-minor-moons/README.md).
 
 The NASA/JPL Voyager 2 PIA18182 full-disc observation supplies the navigation
 disc and the visible-color baseline for unobserved areas. The source records

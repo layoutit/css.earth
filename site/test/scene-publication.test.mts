@@ -12,7 +12,7 @@ test('readiness stays observable without publishing body lifecycle classes', () 
   let state: SceneSessionState = { kind: 'loading', activation: 'idle', mount: null };
   const publication = createScenePublication({ stage, documentTarget: document, windowTarget: window as unknown as BrowserWindow,
     getShell: () => null, getWorld: () => null,
-    read: () => ({ state, pending: null, objectId: 'earth', subject: { kind: 'object', objectId: 'earth' },
+    read: () => ({ state, pending: null, objectId: 'earth', subject: { objectId: 'earth', view: 'body' },
       motionEnabled: false, lightCurvesEnabled: true, reducedMotionActive: false, mountedObjectCount: 0, playing: false, hasPresented: true }),
   });
   publication.publish();

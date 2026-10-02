@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-stellar-extent@1",
+  "objectId": "milky-way-volume",
+  "radiusPc": 26000,
+  "definition": "Galactocentric radius beyond which disc stars are still detected at 99.7% confidence (LAMOST and APOGEE metallicity distributions); the same analysis finds them beyond 31 kpc at 95.4%.",
+  "quote": "Disk stars at R > 26 kpc (99.7% C.L.)",
+  "source": "lopez-corredoira-2018-outer-disc",
+  "presentation": "Where the galaxy's stars are still measured: while the camera is inside this radius the galaxy's caption hides; outside it the caption hangs under what is drawn of the galaxy. Not a boundary."
+}

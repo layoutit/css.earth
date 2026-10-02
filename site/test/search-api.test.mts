@@ -77,9 +77,17 @@ test('one answer carries a page of objects, their total and the feature rows; la
 test('objects still answer when the feature data cannot load', async context => {
   context.mock.method(console, 'error', () => {});
   const broken: SearchData = { ...data, read: async () => { throw new Error('missing'); } };
-  const result = parseFindResponse(await (await find('object=earth&q=europa', broken)).json());
+  const degraded = await find('object=earth&q=europa', broken);
+  const result = parseFindResponse(await degraded.json());
   assert.equal(result.objects.total, 2);
   assert.equal(result.features, null);
+  // An answer without its features is not kept anywhere; a whole one is kept by the CDN for the deploy's life.
+  assert.equal(degraded.headers.get('cache-control'), 'no-store');
+  assert.equal(degraded.headers.get('netlify-cdn-cache-control'), null);
+  const whole = await find('object=earth&q=europa');
+  assert.equal(whole.headers.get('cache-control'), 'public, max-age=300');
+  assert.equal(whole.headers.get('netlify-cdn-cache-control'), 'public, durable, max-age=31536000');
+  assert.equal((await find('object=earth')).headers.get('netlify-cdn-cache-control'), null);
 });
 
 test('a place is opened by its id; malformed requests are refused', async () => {
@@ -130,6 +138,41 @@ test('keystrokes queued before a frame send one request, and its answer shows ob
   assert.deepEqual(names(), ['Mars']);
   client.clear();
   assert.deepEqual(names(), []);
+});
+
+test('the first request of a word being typed lands and shows while the rest is typed', async () => {
+  const { document, client, settle, names, resultsPanel, outcomes } = searchFixture();
+  const held = new Map<string, () => void>(), cancelled: string[] = [];
+  const window = document.defaultView as unknown as { fetch: (input: string | URL, init?: RequestInit) => Promise<Response> };
+  const answerNow = window.fetch;
+  window.fetch = (input, init?: RequestInit) => new Promise(resolve => {
+    const query = new URL(String(input)).searchParams.get('q')!;
+    init?.signal?.addEventListener('abort', () => cancelled.push(query));
+    held.set(query, () => resolve(answerNow(input)));
+  });
+  // One letter per frame, each request slower than the typing.
+  for (const value of ['e', 'eu', 'eur', 'europa']) { void client.search(value, false); await settle(); }
+  // The first letter's request is left to finish; the ones between are cancelled as before.
+  assert.deepEqual(cancelled, ['eu', 'eur']);
+  assert.deepEqual(names(), []);
+  held.get('e')!();
+  await settle();
+  assert.ok(names().includes('Europa'), 'the first letter already lists the body');
+  assert.equal(resultsPanel.ariaBusy, 'true', 'the search is still running');
+  held.get('europa')!();
+  await settle();
+  assert.deepEqual(names(), ['Europa', '52 Europa']);
+  assert.equal(resultsPanel.ariaBusy, 'false');
+  assert.equal(outcomes.at(-1)?.objects, 2);
+
+  // A lead whose word was abandoned never shows: "mars" is not what "e" began.
+  client.clear();
+  void client.search('e', false); await settle();
+  void client.search('eu', false); await settle();
+  void client.search('mars', false); await settle();
+  held.get('e')!(); held.get('mars')!();
+  await settle();
+  assert.deepEqual(names(), ['Mars']);
 });
 
 test('a newer search cancels the older request, whose late answer never replaces the newer one', async () => {

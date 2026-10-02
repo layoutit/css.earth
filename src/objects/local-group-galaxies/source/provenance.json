@@ -1,0 +1,159 @@
+{
+  "schema": "cssearth-source-provenance@1",
+  "description": "Pinned nearby-galaxy catalogue; Local Group membership is a separate evidence-based classification, never a radius cut.",
+  "sources": [
+    {
+      "id": "lvdb-v1.1.1",
+      "path": "lvdb/comb_all.csv",
+      "bytes": 835074,
+      "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+      "citation": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1."
+    },
+    {
+      "id": "lvdb-author-inputs",
+      "path": "lvdb/v1.1.1.tar.gz",
+      "bytes": 3949330,
+      "url": "https://codeload.github.com/apace7/local_volume_database/tar.gz/refs/tags/v1.1.1",
+      "citation": "Unmodified author repository v1.1.1, commit 72dabf7862bf9e9f1cbf6846e8c1a684fdec904c. Original per-object YAML and bibliography."
+    },
+    {
+      "id": "lvdb-license",
+      "path": "lvdb/LICENSE",
+      "bytes": 7048,
+      "url": "https://raw.githubusercontent.com/apace7/local_volume_database/v1.1.1/LICENSE",
+      "citation": "Pace LVDB CC0 1.0 dedication; original scientific papers retain their separate rights."
+    },
+    {
+      "id": "lvdb-bibliography",
+      "archiveMember": "local_volume_database-1.1.1/table/lvdb.bib",
+      "bytes": 876966,
+      "url": "https://raw.githubusercontent.com/apace7/local_volume_database/v1.1.1/table/lvdb.bib",
+      "citation": "Original paper references for the catalogue measurements, read from table/lvdb.bib inside the v1.1.1 author archive."
+    },
+    {
+      "id": "mcconnachie-table1-2019",
+      "path": "mcconnachie/table1_OCT2019.txt",
+      "bytes": 14694,
+      "url": "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/table1_OCT2019.pdf",
+      "citation": "McConnachie (2012), AJ 144, 4, DOI 10.1088/0004-6256/144/1/4; author October 2019 Table 1 update, read from its text transcription (first seven pages, pypdf 5.9.0; numeric membership classifications unchanged)."
+    },
+    {
+      "id": "mcconnachie-2021-audit",
+      "path": "mcconnachie/NearbyGalaxies_Jan2021_PUBLIC.fits",
+      "bytes": 60480,
+      "url": "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/NearbyGalaxies_Jan2021_PUBLIC.fits",
+      "citation": "Author January2021 catalogue: independent audit input, no membership column; astrometry here comes from LVDB."
+    },
+    {
+      "id": "mcconnachie-2012-audit",
+      "path": "mcconnachie/table1.dat",
+      "bytes": 13027,
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/table1.dat",
+      "citation": "Original 2012 machine-readable membership table; retained for audit, superseded for selection by author October2019 table; byte columns defined by the CDS ReadMe https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/ReadMe."
+    },
+    {
+      "id": "smc-distance-citation",
+      "url": "https://doi.org/10.3847/1538-4357/abbb2b",
+      "citation": "Graczyk et al. (2020), ApJ 904, 13; DOI 10.3847/1538-4357/abbb2b. Cited for the adopted SMC direct distance and its separate statistical and systematic errors.",
+      "references": [
+        {
+          "id": "Graczyk2020ApJ...904...13G",
+          "url": "https://arxiv.org/abs/2010.08754",
+          "citation": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b"
+        }
+      ]
+    },
+    {
+      "id": "membership-extractor",
+      "path": "mcconnachie/extract.py",
+      "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/community/nearby/",
+      "citation": "Local deterministic extraction receipt, pypdf5.9.0; fetches the unchanged author PDF from its origin and checks it against the checked text. Not a scientific data source.",
+      "bytes": 816
+    },
+    {
+      "id": "m87-citations",
+      "url": "https://arxiv.org/abs/1906.11238",
+      "citation": "M87's row, written from its papers because the Local Volume Database stops short of the Virgo Cluster: position from ICRF3, distance from EHT M87 Paper I, membership from the Virgo Cluster Catalog.",
+      "references": [
+        {
+          "id": "Charlot2020A&A...644A.159C",
+          "url": "https://doi.org/10.1051/0004-6361/202038368",
+          "citation": "Charlot et al. (2020), A&A 644, A159: ICRF3, the position SIMBAD adopts for M 87."
+        },
+        {
+          "id": "EHT2019ApJ...875L...1E",
+          "url": "https://arxiv.org/abs/1906.11238",
+          "citation": "Event Horizon Telescope Collaboration (2019), ApJL 875, L1 (M87 Paper I), Table 1: D = 16.8 +/- 0.8 Mpc, rederived from likelihood distributions in Paper VI."
+        },
+        {
+          "id": "Binggeli1985AJ.....90.1681B",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681",
+          "citation": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 1316 = NGC 4486, membership M (member)."
+        },
+        {
+          "id": "Skrutskie2006AJ....131.1163S",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
+          "citation": "Skrutskie et al. (2006), AJ 131, 1163: the Two Micron All Sky Survey; Extended Source Catalog (CDS VII/233) row 2MASX J12294679+0800014."
+        },
+        {
+          "id": "Blakeslee2009ApJ...694..556B",
+          "url": "https://arxiv.org/abs/0901.1138",
+          "citation": "Blakeslee et al. (2009), ApJ 694, 556 (ACS Fornax Cluster Survey V), Table 2: VCC 1226 = NGC 4472, surface brightness fluctuation distance modulus 31.116 +/- 0.075, d = 16.7 +/- 0.6 Mpc."
+        }
+      ]
+    },
+    {
+      "id": "m101-distance-citation",
+      "url": "https://arxiv.org/abs/1604.01424",
+      "citation": "M101's distance, from its Cepheids: the distance its nearby-universe dot is placed at, in place of the catalogue's 2009 Extragalactic Distance Database modulus (29.21).",
+      "references": [
+        {
+          "id": "Riess2016ApJ...826...56R",
+          "url": "https://arxiv.org/abs/1604.01424",
+          "citation": "Riess et al. (2016), ApJ 826, 56, Table 5 (Approximations for Distance Parameters), row M101: Cepheid distance modulus mu_Ceph = 29.135 +/- 0.045, d = 6.71 Mpc."
+        }
+      ]
+    }
+  ],
+  "release": {
+    "tag": "v1.1.1",
+    "commit": "72dabf7862bf9e9f1cbf6846e8c1a684fdec904c",
+    "publishedDate": "2026-08-12",
+    "inputRows": 1727
+  },
+  "distanceOverride": {
+    "smc": {
+      "publication": "Graczyk et al. (2020), ApJ904,13",
+      "doi": "10.3847/1538-4357/abbb2b",
+      "url": "https://arxiv.org/abs/2010.08754",
+      "valuePc": 62440,
+      "statisticalPc": 470,
+      "systematicPc": 810,
+      "reason": "Direct published eclipsing-binary distance replaces older Cioni2000 modulus in this pinned LVDB release; errors remain separate."
+    },
+    "m_101": {
+      "publication": "Riess et al. (2016), ApJ 826, 56",
+      "url": "https://arxiv.org/abs/1604.01424",
+      "valuePc": 6714288.52926,
+      "minusPc": 137710.155706,
+      "plusPc": 140593.735267,
+      "reason": "Published Cepheid distance modulus 29.135 +/- 0.045 (Table 5) replaces the Tully2009 modulus 29.21 in this pinned LVDB release, so M101 sits where its nearby-universe dot does."
+    }
+  },
+  "selection": {
+    "eligible": "All rows in authored galaxy/candidate/host tables with usable ICRS coordinates, finite sourced distance modulus (or explicit measured override), no confirmed cluster or author false positive. Candidates remain candidates.",
+    "excludedDistanceMethods": [
+      "host",
+      "nam",
+      "redshift",
+      "hubble"
+    ],
+    "unspecifiedMethods": "A blank method stays unspecified with the original distance paper reference; no Hubble-law conversion is performed.",
+    "membership": "143 exact name bindings into the author October2019 table. Canis Major has no matching release row. G/A/L and mixed G/L,A/L,L/G,L/A preserve published association; N preserves nearby-neighbor classification. New satellite host chains supplement the historical membership table. Unmatched field membership remains uncertain.",
+    "halfLightRadius": "Projected semi-major angular half-light radius converted using small-angle radians at the adopted distance. Its reported errors transport angular-fit errors only; distance uncertainty is separate. It is neither full diameter nor a spherical galaxy boundary.",
+    "precision": "Derived parsec distances and metre coordinates rounded to12 significant digits for cross-platform reproducibility; vastly below reported astronomical uncertainties. Source angles and original input bytes are preserved.",
+    "epoch": "Shared navigation epoch2461286.5; catalogue coordinates are retained ICRS/J2000 directions without proper-motion propagation.",
+    "milkyWay": "Release MW row has no independent heliocentric distance, so it is excluded from this positional bank. The existing Milky Way renderer retains its scientific registration and is not duplicated.",
+    "yamlCompatibility": "Original archive contains duplicate keys in some unused fields, including one duplicate display name. Released CSV supplies labels and measurements. Duplicate keys in consumed metadata (positions, aliases, hosts, source references and classification exclusions) are rejected. Original bytes remain unchanged."
+  }
+}

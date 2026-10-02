@@ -92,7 +92,7 @@ Every contributing sample must be valid. Aggregate uncertainties are omitted unl
 telescope export MEASUREMENT/output.product.json --output body-map --geometry navigation.json --out MAP
 telescope export MAP/map.fits.product.json --output sphere --out SPHERE
 telescope export src/objects/stellar-neighbourhood/object.json --output points --out stars
-telescope export src/objects/milky-way/object.json --output volume --out galaxy
+telescope export src/objects/milky-way-volume/object.json --output volume --out galaxy
 telescope export src/objects/lmc-volume/object.json --output volume-dataset-bank --out lmc-datasets
 ```
 

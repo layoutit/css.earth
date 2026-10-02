@@ -1,9 +1,0 @@
----
-import { OVERVIEWS } from '../objects.mts';
-import { overviewResult } from '../server/overview-result.mts';
-import { objectResultMarkup } from '../server/object-result-markup.mts';
----
-
-{OVERVIEWS.map(overview => <li class="object-item" data-search-overview={overview.name.toLocaleLowerCase('en')} hidden>
-  <Fragment set:html={objectResultMarkup(overviewResult(overview))} />
-</li>)}

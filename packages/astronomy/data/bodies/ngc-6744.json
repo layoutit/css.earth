@@ -1,0 +1,28 @@
+{
+  "id": "ngc-6744",
+  "classification": "galaxy",
+  "order": 5156,
+  "physical": {
+    "name": "NGC 6744",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 6744 is recorded: it is an extended galaxy, and its package frames it at 27900 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 287.44125,
+    "declinationDegrees": -63.857778,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 9506047.93656,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 838.3,
+    "sources": {
+      "position": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. (https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv); catalogue reference lvdb-v1.1.1:ngc_6744:location",
+      "distance": "Tully2009AJ....138..323T: The Extragalactic Distance Database (https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T); catalogue reference Tully2009AJ....138..323T: 9506047.93656 pc (-593538.555223/+633065.920807); trgb",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NGC 6744: 838.3 km/s, from 2004MNRAS.350.1195M (https://ui.adsabs.harvard.edu/abs/2004MNRAS.350.1195M/abstract)"
+    }
+  }
+}

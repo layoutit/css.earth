@@ -1,7 +1,5 @@
 import { isRecord } from '@cssearth/core';
 import type { ObjectClassification, ObjectWorldFrame } from './object-schema.js';
-import type { NavigationDistance } from './navigation-distance.js';
-import type { ObjectDiscovery } from './object-discovery.js';
 
 /**
  * A distance on the zoom ladder, measured from the star the zoom is centred on: a fixed distance, a point of the world
@@ -34,9 +32,10 @@ export interface OverviewZoom {
 export interface OverviewHolding { readonly classifications: readonly string[]; readonly list?: string }
 
 /**
- * A level above the star systems (the Milky Way, the Local Group, the nearby and the observable universe). It is a view of
- * a scene, not an object: the camera, far enough out from the star it is centred on, shows the level, and its page
- * `/<id>/` is the world host's scene at that zoom. Its package authors it under `properties.overview`.
+ * A level above the star systems (the Milky Way, the Local Group, the nearby and the observable universe), as the zoom
+ * ladder reads it. Each is an object of the registry with a scene of its own, seen from inside around the star the zoom is
+ * centred on; its package authors its place on the ladder under `properties.overview`. This is that object's ladder data
+ * with the identity the ladder needs.
  */
 export interface OverviewObject {
   readonly id: string;
@@ -47,19 +46,12 @@ export interface OverviewObject {
   readonly order: number;
   readonly zoom: OverviewZoom;
   readonly holds: readonly OverviewHolding[];
-  /** The context packages it draws besides its own (the stars of the Milky Way, the catalogue of galaxy clusters). */
+  /** The context packages the world draws for it (the galaxy's volume, the catalogue of galaxy clusters). */
   readonly packages: readonly string[];
-  /** What it is as a member of a larger level (the Milky Way is a galaxy of the Local Group). */
-  readonly classification?: ObjectClassification;
+  readonly classification: ObjectClassification;
   readonly classificationLabel?: string;
-  /** Where it is, for a level that is a member of another: its package's volume origin, Sun-centred ICRF metres. */
-  readonly originM?: readonly [number, number, number];
-  /** A level with a catalogue entry (the Local Group) has a place of its own: the world context draws and names it. */
-  readonly worldFrame?: ObjectWorldFrame;
-  readonly systemName?: string;
-  readonly color?: string;
-  readonly distance?: NavigationDistance;
-  readonly discovery?: Readonly<ObjectDiscovery>;
+  /** Where it is: the Galactic centre, the Local Group's barycentre, or the observer. */
+  readonly worldFrame: ObjectWorldFrame;
   readonly route: string;
 }
 
@@ -107,31 +99,18 @@ function holds(value: unknown, at: string): readonly OverviewHolding[] {
   }));
 }
 
-/** The level a package's descriptor authors under `properties.overview`: its zoom, what it holds and the packages it draws.
- * Null when it authors none. A level that is not placed names itself and describes itself there; a placed one is named by
- * its catalogue block. A package with a volume is at its origin. */
-export function overviewLevel(descriptor: unknown): { readonly name?: string; readonly description?: string; readonly order: number; readonly zoom: OverviewZoom;
-  readonly holds: readonly OverviewHolding[]; readonly packages: readonly string[]; readonly classification?: ObjectClassification;
-  readonly originM?: readonly [number, number, number] } | null {
+/** The ladder data a package's descriptor authors under `properties.overview`: its order, zoom, what it holds and the
+ * context packages the world draws for it. Null when it authors none. Its name and description are its catalogue entry's. */
+export function overviewLevel(descriptor: unknown): { readonly order: number; readonly zoom: OverviewZoom;
+  readonly holds: readonly OverviewHolding[]; readonly packages: readonly string[] } | null {
   if (!isRecord(descriptor) || !isRecord(descriptor.properties) || descriptor.properties.overview === undefined) return null;
-  const overview = descriptor.properties.overview, volume = descriptor.properties.volume, id = String(descriptor.id);
-  if (!isRecord(overview) || !only(overview, ['name', 'description', 'order', 'zoom', 'holds', 'packages', 'classification'])) {
-    throw new TypeError(`Invalid overview metadata: ${id}; it names only its name, description, order, zoom, holds, packages and classification.`);
+  const overview = descriptor.properties.overview, id = String(descriptor.id);
+  if (!isRecord(overview) || !only(overview, ['order', 'zoom', 'holds', 'packages']) || !Number.isSafeInteger(overview.order) || Number(overview.order) < 1
+      || (overview.packages !== undefined && !(Array.isArray(overview.packages) && overview.packages.every(identifier)))) {
+    throw new TypeError(`Invalid overview metadata: ${id}; it names its order (from 1), zoom and holds, with optional packages.`);
   }
-  const placed = descriptor.properties.catalog !== undefined;
-  const originM = isRecord(volume) ? volume.originM : undefined;
-  if ((placed ? overview.name !== undefined || overview.description !== undefined : !text(overview.name) || !text(overview.description))
-      || !Number.isSafeInteger(overview.order) || Number(overview.order) < 1
-      || (overview.packages !== undefined && !(Array.isArray(overview.packages) && overview.packages.every(identifier)))
-      || (overview.classification !== undefined && (placed || !identifier(overview.classification)))
-      || (originM !== undefined && !(Array.isArray(originM) && originM.length === 3 && originM.every(Number.isFinite)))) {
-    throw new TypeError(`Invalid overview metadata: ${id}; it needs an order from 1, zoom and holds, with optional packages; a level without a catalogue entry also names and describes itself and may state its classification, and one with a catalogue entry leaves those to it.`);
-  }
-  return Object.freeze({ ...(placed ? {} : { name: overview.name as string, description: overview.description as string }),
-    order: overview.order as number, zoom: zoom(overview.zoom, `${id} zoom`), holds: holds(overview.holds, `${id} holds`),
-    packages: Object.freeze([...(overview.packages ?? []) as string[]]),
-    ...(overview.classification === undefined ? {} : { classification: overview.classification as ObjectClassification }),
-    ...(originM === undefined ? {} : { originM: Object.freeze([...originM as number[]]) as unknown as readonly [number, number, number] }) });
+  return Object.freeze({ order: overview.order as number, zoom: zoom(overview.zoom, `${id} zoom`), holds: holds(overview.holds, `${id} holds`),
+    packages: Object.freeze([...(overview.packages ?? []) as string[]]) });
 }
 
 /** The level that holds registry subjects of `classification`, among `overviews`; undefined when none does. */

@@ -7,7 +7,7 @@ import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { startupRequestsBootstrap } from '../startup-requests.mts';
 import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
 import { resolveBuildSceneAddress } from '../asset-origin.mts';
-import { SCENE_OBJECTS, requirePage, requireSceneObject } from "../objects.mts";
+import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
 import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
 import { pageTrail } from "../seo-trail.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
@@ -60,7 +60,7 @@ const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId =
 // connection, 2026-09-30). An image preload is not used: Safari downloaded the photograph twice with one.
 const assetPreconnect = startupImage && /^https?:\/\//.test(startupImage) ? new URL(startupImage).origin : undefined;
 const seoOptions = { socialImages: availableSocialImages(SCENE_OBJECTS), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
-const pageRecord = requirePage(pageId);
+const pageRecord = requireObject(pageId);
 const pageSeo = objectSeo(pageRecord, seoOptions);
 const seo = home ? homeSeo(pageSeo) : pageSeo;
 const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(pageTrail(pageRecord))).replace(/</g, '\\u003c');

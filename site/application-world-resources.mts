@@ -3,7 +3,7 @@ import { isRecord } from '@cssearth/core';
 // Generated after the prepared dataset payloads are restored: text now, validated below.
 import datasetBillboardText from './prepared-dataset-billboards.json?raw';
 import datasetBillboardAtlasUrl from './prepared-dataset-billboards.webp?url';
-import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sample.json' with { type: 'json' };
+import galaxyDisplaySample from '../src/objects/local-group-galaxies/prepared/display-sample.json' with { type: 'json' };
 import { parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { createPreparedUniverse, parseDatasetBillboards, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE, onWorldSystems } from './world-context-plan.mts';
@@ -15,20 +15,20 @@ import { createInFlightLoader } from './in-flight-loader.mts';
 import { loadDotCatalogues } from './dot-catalogues.mts';
 import { worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
-import { readPageDatasets, selectedPageDataset } from './page-datasets.mts';
+import { CONTEXT_DATASETS } from './context-datasets.mts';
 import { KNOWN_OVERVIEWS } from './object-directory.mts';
 import { navigationHref } from './navigation/navigation-history.mts';
 
-/** The view the page `page` shows its image mesh in: its selected dataset's (page-datasets.mts), read from the address. The
- * shell presents the cards (object-shell-client.mts); a page without datasets shows its mesh cut open. */
-let cards: ReturnType<typeof readPageDatasets> | null = null;
-// The cards are retained shell markup: read once.
-const pageDatasets = () => cards ??= readPageDatasets(document);
-function meshView(page: string): string {
-  const datasets = pageDatasets().find(candidate => candidate.page === page);
-  return datasets ? datasets.views.get(selectedPageDataset(navigationHref(window), datasets))! : 'cutaway';
+/** The view an image mesh package is drawn in: the view of the dataset the mounted object shows of it (context-datasets.mts),
+ * or of its default dataset; its descriptor names each dataset's view (`properties.views`). A package without views is cut open. */
+function meshView(descriptor: { id: string; properties: Record<string, unknown> }): string {
+  const views = descriptor.properties.views;
+  if (views === undefined) return 'cutaway';
+  if (!isRecord(views) || !isRecord(views.datasets) || typeof views.default !== 'string') throw new TypeError(`src/objects/${descriptor.id}/object.json properties.views: expected its datasets' views and the default dataset.`);
+  const view = views.datasets[CONTEXT_DATASETS.get(descriptor.id) ?? views.default];
+  if (view !== 'cutaway' && view !== 'full' && view !== 'hidden') throw new TypeError(`src/objects/${descriptor.id}/object.json properties.views: a view is cutaway, full or hidden, not ${String(view)}.`);
+  return view;
 }
-import { isOverviewPage, withOverviewScope } from './navigation/navigation-scope.mts';
 
 // An asteroid sprite's smallest drawn size, and a plain asteroid dot's (see world-context.css for its opacity).
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
@@ -139,8 +139,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const plan = applicationContext, sprites = billboards([plan.focus, ...plan.bodies]);
     const universe = createPreparedUniverse({
       // The world's volume is an overview's package (the Milky Way): clicking it opens that overview's page.
-      environmentLinks: isOverviewPage(applicationContext.volume.objectId) ? { [applicationContext.volume.objectId]: (link => link.pathname + link.search)(
-        withOverviewScope(new URL(`/${applicationContext.focus.id}/`, location.origin), applicationContext.focus.id, applicationContext.volume.objectId)) } : {},
+      environmentLinks: (level => level ? { [applicationContext.volume.objectId]: level.route } : {})(KNOWN_OVERVIEWS.find(level => level.packages.includes(applicationContext.volume.objectId))),
+      contextBanks: KNOWN_OVERVIEWS.flatMap(level => level.packages),
       stellarExtents: STELLAR_EXTENTS,
       // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
       // Cepheids), star-forming regions on both sides of the centre (Anderson et al. 2014 WISE HII regions, Reid et al.
@@ -155,7 +155,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       imageMeshes: parsedDescriptors.filter(descriptor => descriptor.prepared?.format === 'cssearth-image-mesh@1').map(descriptor => {
         const set = resourceSet(descriptor.id);
         return { url: set.resolve(descriptor.prepared!.url), resolveResource: (path: string) => set.resolve(`prepared/${path}`),
-          cutaway: () => meshView(descriptor.id) === 'cutaway', hidden: () => meshView(descriptor.id) === 'hidden', hiddenCaption: KNOWN_OVERVIEWS.find(overview => overview.id === descriptor.id)?.name };
+          cutaway: () => meshView(descriptor) === 'cutaway', hidden: () => meshView(descriptor) === 'hidden', hiddenCaption: KNOWN_OVERVIEWS.find(overview => overview.packages.includes(descriptor.id))?.name };
       }),
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       nonNavigableIds: ordinaryAsteroidIds,

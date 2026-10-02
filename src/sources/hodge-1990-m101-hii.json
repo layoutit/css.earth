@@ -1,0 +1,52 @@
+{
+  "id": "hodge-1990-m101-hii",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The H II regions of M 101. I. An atlas of 1264 emission regions",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "1990ApJS...73..661H"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/73/661"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/1990ApJS...73..661H",
+      "label": "1990ApJS...73..661H"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/73/661",
+      "label": "CDS J/ApJS/73/661"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/73/661/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "hii (table1 and table2): 1264 HII regions of M101 with J2000 positions, from CCD frames (660) and image tube plates (604)."
+    }
+  ],
+  "creators": [
+    "P. Hodge",
+    "M. Gurwell",
+    "J. D. Goldader",
+    "R. C. Kennicutt Jr."
+  ],
+  "publisher": "ApJS 73, 661",
+  "publicationDate": "1990",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Hodge et al. (1990), ApJS 73, 661.",
+      "scope": "M101 HII regions",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/73/661/ReadMe"
+    }
+  ]
+}
