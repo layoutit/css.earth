@@ -1,3 +1,4 @@
+import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA } from '@cssearth/objects';
 import type { PreparedWorldContextData as PreparedWorldContext } from '@cssearth/objects';
 import { outwardSphere } from './spatial-context.ts';
 import type { Vector3 } from './spatial-context.ts';
@@ -56,12 +57,12 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
     ...(body.discovery === undefined ? {} : { discovery: root.discovery(body.discovery) }),
     host: hostOf(body.id), ...(body.plainDot ? { plainDot: true } : {}), ...(body.unpackaged ? { unpackaged: true } : {}) }]);
   const [focusRow, ...rows] = root.rows;
-  const summary = { schema: 'cssearth-world-context-summary@2' as const, ...rest, worldBodyCount: bodies.length,
+  const summary = { schema: PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA as typeof PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, ...rest, worldBodyCount: bodies.length,
     ...(Object.keys(rootCentres).length ? { orbitCenters: rootCentres } : {}), orbitBanks: pinsOf(rootBodies),
     ...root.tables(), focus: focusRow!, bodies: columns(rows), deferred: columns(deferred) };
   return { summary, systems: [...systems].map(([id, members]) => {
     const file = encodeBodies(members, positions), centres = centresOf(id);
-    return { id, file: { schema: 'cssearth-world-system@1' as const, id, ...(Object.keys(centres).length ? { orbitCenters: centres } : {}),
+    return { id, file: { schema: PREPARED_WORLD_SYSTEM_SCHEMA as typeof PREPARED_WORLD_SYSTEM_SCHEMA, id, ...(Object.keys(centres).length ? { orbitCenters: centres } : {}),
       orbitBanks: pinsOf(members), ...file.tables(), bodies: columns(file.rows) } };
   }) };
 }

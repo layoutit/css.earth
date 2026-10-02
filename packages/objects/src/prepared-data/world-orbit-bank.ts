@@ -1,3 +1,4 @@
+import { PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_ORBITS_SCHEMA } from './world-schemas.js';
 import { array, finite, numbers, positive, record, text } from './world-guards.js';
 import { validateOrbitGeometry, vector } from './world-context.js';
 import type { PreparedContextGeometryBody, PreparedContextOrbitGeometry, PreparedWorldContext, PreparedWorldContextGeometry } from './world-context.js';
@@ -13,7 +14,7 @@ export function decodeWorldOrbitBank(plan: PreparedWorldContext, centreId: strin
   if (view.getUint32(0, true) !== WORLD_ORBITS_MAGIC || view.getUint32(4, true) !== WORLD_ORBITS_VERSION) throw new TypeError(`Unsupported orbit bank ${centreId}.`);
   const headerLength = view.getUint32(8, true), dataStart = 12 + headerLength + (8 - (12 + headerLength) % 8) % 8;
   const header = record(JSON.parse(new TextDecoder().decode(new Uint8Array(bytes, 12, headerLength))), 'orbit bank header', ['schema', 'bodies']);
-  if (header.schema !== 'cssearth-world-orbits@2') throw new TypeError(`Unsupported orbit bank ${centreId}.`);
+  if (header.schema !== PREPARED_WORLD_ORBITS_SCHEMA) throw new TypeError(`Unsupported orbit bank ${centreId}.`);
   const section = <T extends Float64Array | Uint32Array | Int32Array>(value: unknown, type: { new(buffer: ArrayBuffer, offset: number, length: number): T; BYTES_PER_ELEMENT: number }, label: string): T => {
     const [offset, length] = numbers(value, label, 2);
     if (!Number.isSafeInteger(offset) || !Number.isSafeInteger(length) || offset < 0 || length < 0 || offset % 8 !== 0 ||
@@ -61,5 +62,5 @@ export function decodeWorldOrbits(plan: PreparedWorldContext, banks: ReadonlyMap
   });
   // The full context holds every body: the summary's bank pins and its list of other systems' bodies stay behind.
   const { orbitBanks: _pins, deferred: _deferred, worldBodyCount: _count, ...rest } = plan;
-  return Object.freeze({ ...rest, schema: 'cssearth-world-context@2', bodies: Object.freeze(bodies) });
+  return Object.freeze({ ...rest, schema: PREPARED_WORLD_CONTEXT_SCHEMA, bodies: Object.freeze(bodies) });
 }

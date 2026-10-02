@@ -1,3 +1,4 @@
+import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA } from '@cssearth/objects';
 import type { PreparedWorldContext, PreparedWorldContextGeometry } from '@cssearth/objects';
 import { parsePreparedWorldContextPlan, worldContextGeometry } from '@cssearth/objects';
 import type { WorldContextView } from './world-context-planner.js';
@@ -71,7 +72,7 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
   worker.onerror = event => destroy(new Error(event.message));
   // A plan validated on this thread returns at once (its mark); anything else is validated here, before it is vouched for.
   const validatedPlan = parsePreparedWorldContextPlan(plan);
-  if (source && validatedPlan.schema !== 'cssearth-world-context-summary@2') throw new TypeError('Orbit banks complete the world context summary only.');
+  if (source && validatedPlan.schema !== PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA) throw new TypeError('Orbit banks complete the world context summary only.');
   const initialise: WorldPlannerInitialise = source ? { source, validatedPlan, annotationPriorities, annotationLandmarks }
     : { validatedPlan: worldContextGeometry(validatedPlan), annotationPriorities, annotationLandmarks };
   worker.postMessage(initialise);
@@ -103,7 +104,7 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
   /** Plan with `next`, an extension of this client's plan, from the first view whose columns hold its bodies. */
   extend(next: PreparedWorldContext) {
     const validated = parsePreparedWorldContextPlan(next);
-    if (source && validated.schema !== 'cssearth-world-context-summary@2') throw new TypeError('Orbit banks complete the world context summary only.');
+    if (source && validated.schema !== PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA) throw new TypeError('Orbit banks complete the world context summary only.');
     extensions.push(validated);
   },
   /** Call `listener` whenever an orbit centre's paths arrive after a frame that lacked them; returns the unsubscribe. */

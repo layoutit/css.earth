@@ -28,7 +28,7 @@ export type { ObjectDatasets } from './runtime/object-scene.js';
 export type { ObjectSharedView, ObjectSceneLifecycle } from './runtime/object-scene.js';
 export { loadNavigableObject } from './runtime/navigable-object-mount.js';
 export { worldCameraFromCenteredPresentation, presentWorldCamera } from './navigation/world-camera.js';
-export { cssCameraAxesFromOrientation, cssViewFromOrientation, validateWorldReflection, worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './navigation/world-camera-math.js';
+export { cssCameraAxesFromOrientation, cssViewFromOrientation, worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './navigation/world-camera-math.js';
 export type { WorldCameraPose } from './navigation/world-camera.js';
 
 export type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './runtime/world-navigation-types.js';

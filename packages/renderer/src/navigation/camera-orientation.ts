@@ -1,9 +1,10 @@
+import { validateWorldRotation } from '@cssearth/objects';
 import type { CameraPlan, CameraAngles, CameraPose, Quaternion, Vector3 } from './types.js';
 export interface CameraOrientationOptions extends CameraAngles { cameraPlan: CameraPlan; sunDirection?: Vector3 | null; }
 export type CameraOrientation = ReturnType<typeof createCameraOrientation>;
 import { rotationAxisAngle } from "@cssearth/engine";
 import { cssDirectionToViewDirection } from "../solar-system/solar-view-direction.js";
-import { nearestWorldRotation, validateWorldRotation } from './world-camera-math.js';
+import { nearestWorldRotation} from './world-camera-math.js';
 import { preparedSceneMatrix } from './prepared-camera-basis.js';
 
 export function createCameraOrientation({

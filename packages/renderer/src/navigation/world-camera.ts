@@ -1,12 +1,12 @@
+import { validateWorldReflection, validateWorldRotation, type WorldRotation } from '@cssearth/objects';
 import { cameraPoseFromReferenceFrame, cameraPoseToReferenceFrame } from '@cssearth/engine';
 import type { FocusFrame, PhysicalCameraPose, PositionM } from '@cssearth/engine';
 import { offAxisFrame, silhouetteEllipse } from '../solar-system/heliocentric-geometry.js';
 import type { SilhouetteEllipse } from '../solar-system/types.js';
 import {
   flipWorldRotationY, referenceRotationFromPresentation, rotateWorldPosition, scaleWorldPosition, transposeWorldRotation, validateWorldPosition,
-  validateWorldReflection, validateWorldRotation, worldQuaternionFromRotation, worldRotationCss, worldRotationFromQuaternion,
+  worldQuaternionFromRotation, worldRotationCss, worldRotationFromQuaternion,
 } from './world-camera-math.js';
-import type { WorldRotation } from './world-camera-math.js';
 
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 

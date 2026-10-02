@@ -5,7 +5,7 @@
     "noUncheckedIndexedAccess": false,
     "lib": [
       "ES2022",
-      "DOM"
+      "DOM" // TextEncoder/TextDecoder for the browser-safe orbit-bank codec only.
     ],
     "rootDir": "src",
     "outDir": "dist",

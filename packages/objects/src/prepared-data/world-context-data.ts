@@ -1,10 +1,11 @@
+import { PREPARED_WORLD_CONTEXT_SCHEMA } from './world-schemas.js';
 import type { PreparedWorldCameraFrame, WorldPosition as Vector3 } from './world-frame.js';
 import type { PreparedContextFocus, PreparedWorldContext } from './world-context.js';
 import type { PreparedOrbitCenter } from './prepared-orbit-centers.js';
 import type { PreparedSystemView } from './world-system-view.js';
 
 export interface PreparedWorldContextData {
-  readonly schema: 'cssearth-world-context@2';
+  readonly schema: typeof PREPARED_WORLD_CONTEXT_SCHEMA;
   readonly orbitCenters?: Readonly<Record<string, PreparedOrbitCenter>>;
   readonly sky: { readonly sceneRegistration: string };
   readonly frame: PreparedWorldCameraFrame;

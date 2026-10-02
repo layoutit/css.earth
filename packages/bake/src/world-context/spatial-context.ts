@@ -1,3 +1,4 @@
+import { PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_SYSTEM_VIEW_SCHEMA } from '@cssearth/objects';
 import type { PreparedWorldCameraFrame, PreparedContextCameraPresentation as WorldContextCameraPresentation, PreparedContextPointSource as WorldContextPointSource, PreparedVolumeOpacityProfile as VolumeOpacityProfile, PreparedOrbitCenter as WorldContextOrbitCenter, PreparedWorldContextData as PreparedWorldContext, PreparedOrbitDataLod as PreparedOrbitLod } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { prepareGroupView, prepareSystemView } from './system-view.ts';
@@ -213,7 +214,7 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
       { ...systemViewPolicy, minimumRadiusShare: 0 });
     return view ? [[classification, view] as const] : [];
   }));
-  return freeze({ schema: 'cssearth-world-context@2',
+  return freeze({ schema: PREPARED_WORLD_CONTEXT_SCHEMA,
     ...(Object.keys(orbitCenters).length ? { orbitCenters: freeze(Object.fromEntries(Object.entries(orbitCenters).map(([id, center]) =>
       [id, freeze({ positionM: copy(center.positionM), centerBodyId: center.centerBodyId })]))) } : {}),
     sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...focus, ...(focusView ? { systemView: focusView } : {}) }),
@@ -246,7 +247,7 @@ export function outwardSphere(sphere: { readonly centerM: Vector3; readonly radi
  * downloads the candidates of systems it does not open (all 74 were 635 KB brotli on every page). */
 export function worldSystemViews(prepared: PreparedWorldContext) {
   return freeze([prepared.focus, ...prepared.bodies].flatMap(body => body.systemView
-    ? [freeze({ schema: 'cssearth-world-system-view@1' as const, id: body.id, candidates: body.systemView.candidates })] : []));
+    ? [freeze({ schema: PREPARED_WORLD_SYSTEM_VIEW_SCHEMA as typeof PREPARED_WORLD_SYSTEM_VIEW_SCHEMA, id: body.id, candidates: body.systemView.candidates })] : []));
 }
 
 // Coarser chord banks for small projections. Each level keeps every step-th

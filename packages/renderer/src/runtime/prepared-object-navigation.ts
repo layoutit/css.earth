@@ -2,7 +2,7 @@ import { initialStageSelection } from './initial-stage-selection.js';
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
 import type { SharedView } from '../navigation/view-url.js';
 import { preparedLabelEdge } from '../navigation/prepared-label-edge.js';
-import type { WorldRotation } from '../navigation/world-camera-math.js';
+import type { WorldRotation } from '@cssearth/objects';
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import type { ObjectRuntimeDefinition } from './object-runtime-types.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';

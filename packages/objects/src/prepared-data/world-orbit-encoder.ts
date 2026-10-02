@@ -1,3 +1,4 @@
+import { PREPARED_WORLD_ORBITS_SCHEMA } from './world-schemas.js';
 import type { PreparedWorldContextData as PreparedWorldContext } from './world-context-data.js';
 import type { WorldPosition as Vector3 } from './world-frame.js';
 import { WORLD_ORBITS_MAGIC, WORLD_ORBITS_VERSION } from './world-orbit-bank.js';
@@ -13,17 +14,17 @@ import { WORLD_ORBITS_MAGIC, WORLD_ORBITS_VERSION } from './world-orbit-bank.js'
 const INT32_STEPS = 0x7fffffff;
 /** A path's vertex origin and step, so every vertex is an Int32 count of steps. The origin is the vertex that pins the body
  * (the first, or an open trajectory's epoch vertex), so the body's own position decodes exactly. */
-export function orbitVertexQuantum(verticesM: readonly Vector3[], pinnedIndex = 0) {
+function orbitVertexQuantum(verticesM: readonly Vector3[], pinnedIndex = 0) {
   const originM = verticesM[pinnedIndex]!;
   const reach = Math.max(...verticesM.flatMap(vertex => vertex.map((value, axis) => Math.abs(value - originM[axis]!))));
   return { originM, stepM: reach > 0 ? reach / INT32_STEPS : 1 };
 }
 /** The largest distance between a path's vertices and their Int32 encoding, in metres. */
-export function orbitVertexError(verticesM: readonly Vector3[], pinnedIndex = 0): number {
+function orbitVertexError(verticesM: readonly Vector3[], pinnedIndex = 0): number {
   const { originM, stepM } = orbitVertexQuantum(verticesM, pinnedIndex);
   return Math.max(...verticesM.map(vertex => Math.hypot(...vertex.map((value, axis) => originM[axis]! + Math.round((value - originM[axis]!) / stepM) * stepM - value))));
 }
-export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body: PreparedWorldContext['bodies'][number]) => boolean = () => true): Uint8Array {
+function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body: PreparedWorldContext['bodies'][number]) => boolean = () => true): Uint8Array {
   const sections: (Float64Array | Uint32Array | Int32Array)[] = [];
   let offset = 0;
   const section = (values: Float64Array | Uint32Array | Int32Array) => { const at = offset; sections.push(values); offset += values.byteLength; offset += (8 - offset % 8) % 8; return [at, values.length] as const; };
@@ -43,7 +44,7 @@ export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body
       levels: orbit.lod.levels.map(level => ({ vertexIndices: u32(level.vertexIndices), trail: f64(level.trail),
         activeChords: u32(level.activeChords), deviationM: level.deviationM })) }];
   });
-  const header = new TextEncoder().encode(JSON.stringify({ schema: 'cssearth-world-orbits@2', bodies }));
+  const header = new TextEncoder().encode(JSON.stringify({ schema: PREPARED_WORLD_ORBITS_SCHEMA, bodies }));
   const dataStart = 12 + header.byteLength + (8 - (12 + header.byteLength) % 8) % 8;
   const bytes = new Uint8Array(dataStart + offset);
   const view = new DataView(bytes.buffer);
