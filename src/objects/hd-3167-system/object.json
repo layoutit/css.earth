@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-3167-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-3167",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 3167 system",
+      "systemName": "HD 3167 system",
+      "classification": "planetary-system",
+      "color": "#ffe9dd",
+      "distanceAu": 9758845.6,
+      "description": "2 planets cross HD 3167 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1438733810196169200,
+        221197692614734750,
+        111498861869244860
+      ],
+      "presentationToReference": [
+        0.9854992330502179,
+        0.07549613274785638,
+        0.15195919056625226,
+        0.1515152802311227,
+        0.011606698678591243,
+        -0.9883867686297045,
+        0.0763831232270381,
+        -0.997078541783897,
+        4.2506366085200176e-7
+      ],
+      "orbitUpReference": [
+        -0.07549613274785638,
+        -0.011606698678591243,
+        0.997078541783897
+      ],
+      "metersPerUnit": 1954692.5806451612,
+      "bodyRadiusM": 605954700
+    }
+  }
+}

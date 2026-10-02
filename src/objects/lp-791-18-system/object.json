@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lp-791-18-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "lp-791-18",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "LP 791-18 system",
+      "systemName": "LP 791-18 system",
+      "classification": "planetary-system",
+      "color": "#ffb66b",
+      "distanceAu": 5497099.2,
+      "description": "3 planets cross LP 791-18 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -764391810167188400,
+        194986403907897630,
+        -232275968510719200
+      ],
+      "presentationToReference": [
+        -0.929517188468041,
+        0.2736863732490094,
+        0.24717112582231832,
+        0.23710773916092429,
+        -0.06981035367854162,
+        0.968971844043609,
+        -0.28244949348947945,
+        -0.9592821710096987,
+        0.000003233522987928842
+      ],
+      "orbitUpReference": [
+        -0.2736863732490094,
+        0.06981035367854162,
+        0.9592821710096987
+      ],
+      "metersPerUnit": 408443.22580645164,
+      "bodyRadiusM": 126617400
+    }
+  }
+}

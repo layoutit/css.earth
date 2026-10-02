@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1203-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1203",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1203 system",
+      "systemName": "TOI-1203 system",
+      "classification": "planetary-system",
+      "color": "#fff5f7",
+      "distanceAu": 13399710.4,
+      "description": "TOI-1203 d crosses TOI-1203 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1619070198603035600,
+        337420499385536000,
+        -1132719097802007800
+      ],
+      "presentationToReference": [
+        -0.8076915499260243,
+        0.5531796078030382,
+        0.2040261789304837,
+        0.16832604688803357,
+        -0.11529537588892129,
+        0.9789654326061161,
+        -0.5650669890527534,
+        -0.8250450277466734,
+        -0.000008564250468157833
+      ],
+      "orbitUpReference": [
+        -0.5531796078030382,
+        0.11529537588892129,
+        0.8250450277466734
+      ],
+      "metersPerUnit": 2645904.193548387,
+      "bodyRadiusM": 820230300
+    }
+  }
+}

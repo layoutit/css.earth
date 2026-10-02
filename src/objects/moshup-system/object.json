@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "moshup-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "moshup",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Moshup–Squannit system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#9a9a9a",
+      "distanceAu": 0.642389793312345,
+      "description": "Moshup and its small moon Squannit form a near-Earth asteroid pair. Radar echoes revealed Squannit."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -47550610805.77602,
+        -148152760523.42596,
+        -44752533797.00918
+      ],
+      "presentationToReference": [
+        -0.29550119156199384,
+        0,
+        -0.9553423709777777,
+        -0.8765094885067528,
+        0.39777715593191376,
+        0.2711170425781984,
+        -0.38001337126879153,
+        -0.9174820620691819,
+        0.11754362355402148
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191376,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 2.8630434782608694,
+      "bodyRadiusM": 658.5
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-232-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-232",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-232 system",
+      "systemName": "K2-232 system",
+      "classification": "planetary-system",
+      "color": "#fff5f8",
+      "distanceAu": 26767039.6,
+      "description": "K2-232's planets b, c are placed on the orbits their papers measured."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1060571844110634100,
+        3642678886765641000,
+        1280794014401764900
+      ],
+      "presentationToReference": [
+        0.2648585366685596,
+        0.08941539692851623,
+        0.9601327212140544,
+        0.9096928273835948,
+        0.30710552283180886,
+        -0.2795445539677753,
+        0.31985764858860327,
+        -0.9474656113222881,
+        0.000001025863462504149
+      ],
+      "orbitUpReference": [
+        -0.08941539692851623,
+        -0.30710552283180886,
+        0.9474656113222881
+      ],
+      "metersPerUnit": 2715474.193548387,
+      "bodyRadiusM": 841797000
+    }
+  }
+}

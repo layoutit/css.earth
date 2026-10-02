@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1723-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1723",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1723 system",
+      "systemName": "TOI-1723 system",
+      "classification": "planetary-system",
+      "color": "#fff3f1",
+      "distanceAu": 20750188.8,
+      "description": "TOI-1723 b crosses TOI-1723 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -513437666103642500,
+        1016555490483622000,
+        2887724949794304500
+      ],
+      "presentationToReference": [
+        -0.16540208007246332,
+        -0.4193965274931469,
+        0.8926078112107201,
+        0.32747966060131517,
+        0.8303648454305479,
+        0.4508339997887801,
+        0.9302683611733498,
+        -0.3668797843978221,
+        2.401724362410186e-7
+      ],
+      "orbitUpReference": [
+        0.4193965274931469,
+        -0.8303648454305479,
+        0.3668797843978221
+      ],
+      "metersPerUnit": 2446170.9677419355,
+      "bodyRadiusM": 758313000
+    }
+  }
+}

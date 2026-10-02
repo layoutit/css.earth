@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-6158-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-6158",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-6158 system",
+      "systemName": "TOI-6158 system",
+      "classification": "planetary-system",
+      "color": "#ffc689",
+      "distanceAu": 37539535.7,
+      "description": "TOI-6158 b crosses TOI-6158 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4840605691008849000,
+        -2371953032499186700,
+        1574793240308333300
+      ],
+      "presentationToReference": [
+        0.8619561387707547,
+        0.251814578086447,
+        -0.4400239005992247,
+        -0.4223685232256883,
+        -0.12339312658142,
+        -0.8979860616404985,
+        0.2804219061050026,
+        -0.9598768434417023,
+        9.114658993623399e-7
+      ],
+      "orbitUpReference": [
+        -0.251814578086447,
+        0.12339312658142,
+        0.9598768434417023
+      ],
+      "metersPerUnit": 1068236.1290322582,
+      "bodyRadiusM": 331153200
+    }
+  }
+}

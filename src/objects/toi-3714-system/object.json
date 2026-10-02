@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-3714-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-3714",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-3714 system",
+      "systemName": "TOI-3714 system",
+      "classification": "planetary-system",
+      "color": "#ffc587",
+      "distanceAu": 23337087.9,
+      "description": "TOI-3714 b crosses TOI-3714 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        941678760082934100,
+        2525676326974759400,
+        2218677230086386200
+      ],
+      "presentationToReference": [
+        0.2697300865714951,
+        0.22201718512750696,
+        0.9369920223279343,
+        0.7234429863054468,
+        0.5954698107142578,
+        -0.3493507551063588,
+        0.6355123334472673,
+        -0.772090716195956,
+        6.51825104326583e-7
+      ],
+      "orbitUpReference": [
+        -0.22201718512750696,
+        -0.5954698107142578,
+        0.772090716195956
+      ],
+      "metersPerUnit": 1144538.7096774194,
+      "bodyRadiusM": 354807000
+    }
+  }
+}

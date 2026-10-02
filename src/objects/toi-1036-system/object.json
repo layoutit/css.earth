@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1036-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1036",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1036 system",
+      "systemName": "TOI-1036 system",
+      "classification": "planetary-system",
+      "color": "#fff1ec",
+      "distanceAu": 37704795.4,
+      "description": "TOI-1036 b crosses TOI-1036 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3868155455176476700,
+        1573278491633300500,
+        -3791840276924145700
+      ],
+      "presentationToReference": [
+        -0.6857772785788273,
+        0.6227075803444174,
+        0.37675561517596323,
+        0.2789232891355148,
+        -0.25327177565727865,
+        0.9263126936586993,
+        -0.6722434997549948,
+        -0.7403301135554395,
+        -3.825717931282729e-7
+      ],
+      "orbitUpReference": [
+        -0.6227075803444174,
+        0.25327177565727865,
+        0.7403301135554395
+      ],
+      "metersPerUnit": 2638139.35483871,
+      "bodyRadiusM": 817823200
+    }
+  }
+}

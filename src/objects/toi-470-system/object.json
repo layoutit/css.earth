@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-470-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-470",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-470 system",
+      "systemName": "TOI-470 system",
+      "classification": "planetary-system",
+      "color": "#ffe3d1",
+      "distanceAu": 26840464.5,
+      "description": "TOI-470 b crosses TOI-470 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -254422525212932000,
+        3629232135585909000,
+        -1698937107831784400
+      ],
+      "presentationToReference": [
+        -0.06336374303772686,
+        0.029588046479230586,
+        0.9975517949328706,
+        0.9038575978565697,
+        -0.4220794076617185,
+        0.06993151238808229,
+        -0.42311520755605153,
+        -0.9060758914867318,
+        -0.0000011505126071956387
+      ],
+      "orbitUpReference": [
+        -0.029588046479230586,
+        0.4220794076617185,
+        0.9060758914867318
+      ],
+      "metersPerUnit": 1864924.8387096773,
+      "bodyRadiusM": 578126700
+    }
+  }
+}

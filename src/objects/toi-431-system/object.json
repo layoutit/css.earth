@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-431-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-431",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-431 system",
+      "systemName": "TOI-431 system",
+      "classification": "planetary-system",
+      "color": "#ffd8be",
+      "distanceAu": 6729426.9,
+      "description": "2 planets cross TOI-431 as seen from Earth: b, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        105386255164909170,
+        892982107381416300,
+        -452700301092266430
+      ],
+      "presentationToReference": [
+        0.10468363015148463,
+        -0.052705424928405485,
+        0.9931079879657718,
+        0.887028469868439,
+        -0.44659150171541956,
+        -0.1172029190695449,
+        -0.44969081736362276,
+        -0.8931842860119532,
+        -3.928336363020685e-7
+      ],
+      "orbitUpReference": [
+        0.052705424928405485,
+        0.44659150171541956,
+        0.8931842860119532
+      ],
+      "metersPerUnit": 1640505.4838709678,
+      "bodyRadiusM": 508556700
+    }
+  }
+}

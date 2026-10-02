@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-654-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-654",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-654 system",
+      "systemName": "TOI-654 system",
+      "classification": "planetary-system",
+      "color": "#ffcd8f",
+      "distanceAu": 11932276.7,
+      "description": "TOI-654 b crosses TOI-654 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1713913257368644400,
+        468074387888806800,
+        -172588773416412900
+      ],
+      "presentationToReference": [
+        -0.9601535489508262,
+        0.09325696038804555,
+        0.26345455353118485,
+        0.2622205545026357,
+        -0.025469247591807773,
+        0.9646718085563802,
+        -0.09667234989108153,
+        -0.995316259671412,
+        -4.966001978796208e-7
+      ],
+      "orbitUpReference": [
+        -0.09325696038804555,
+        0.025469247591807773,
+        0.995316259671412
+      ],
+      "metersPerUnit": 965003.2258064516,
+      "bodyRadiusM": 299151000
+    }
+  }
+}

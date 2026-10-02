@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-5278-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-5278",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 5278 system",
+      "systemName": "HD 5278 system",
+      "classification": "planetary-system",
+      "color": "#f7f3ff",
+      "distanceAu": 11842184.8,
+      "description": "HD 5278 b crosses HD 5278 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        188445923149960450,
+        41952609783341700,
+        -1761014742099819000
+      ],
+      "presentationToReference": [
+        0.10637100689540331,
+        -0.9703050056224146,
+        0.2172404312188318,
+        0.02368075302412807,
+        -0.21594588892540983,
+        -0.9761181255321638,
+        -0.994044481312717,
+        -0.10897508486025816,
+        -0.000007171556300833264
+      ],
+      "orbitUpReference": [
+        0.9703050056224146,
+        0.21594588892540983,
+        0.10897508486025816
+      ],
+      "metersPerUnit": 2679567.0967741935,
+      "bodyRadiusM": 830665800
+    }
+  }
+}

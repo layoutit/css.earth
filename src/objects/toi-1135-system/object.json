@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1135-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1135",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1135 system",
+      "systemName": "TOI-1135 system",
+      "classification": "planetary-system",
+      "color": "#fef7ff",
+      "distanceAu": 23551855.9,
+      "description": "TOI-1135 b crosses TOI-1135 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -291001675443754940,
+        -69310229717153350,
+        3510585392071703600
+      ],
+      "presentationToReference": [
+        -0.08259358890634896,
+        -0.9692778294328364,
+        -0.2316868326891677,
+        -0.01967198508630446,
+        -0.23085017098773833,
+        0.9727904253012034,
+        0.9963891368708981,
+        -0.08490399239671438,
+        8.748835666924895e-7
+      ],
+      "orbitUpReference": [
+        0.9692778294328364,
+        0.23085017098773833,
+        0.08490399239671438
+      ],
+      "metersPerUnit": 2697520.64516129,
+      "bodyRadiusM": 836231400
+    }
+  }
+}

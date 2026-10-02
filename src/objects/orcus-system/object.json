@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "orcus-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "orcus",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Orcus–Vanth system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#9a9a9a",
+      "distanceAu": 47.98129781525766,
+      "description": "Orcus and its moon Vanth form a pair in the Kuiper Belt. Vanth circles Orcus about every 9.5 days."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6575561489745.661,
+        2326097021356.9663,
+        -1694799979495.9963
+      ],
+      "presentationToReference": [
+        -0.9762259130930209,
+        2.4356826039297786e-17,
+        0.21675554573227765,
+        0.19886932506338093,
+        0.3977771559319137,
+        0.8956697637899547,
+        0.08622040451385526,
+        -0.9174820620691818,
+        0.3883203672571774
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1978.2608695652166,
+      "bodyRadiusM": 454999.9999999998
+    }
+  }
+}

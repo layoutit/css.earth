@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-118203-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-118203",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 118203 system",
+      "systemName": "HD 118203 system",
+      "classification": "planetary-system",
+      "color": "#fff3f2",
+      "distanceAu": 18985472.9,
+      "description": "HD 118203's planets b, c are placed on the orbits their papers measured."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1540835136679695400,
+        -670278173817001200,
+        2289806228973534200
+      ],
+      "presentationToReference": [
+        -0.5425089749148045,
+        -0.7392957911553645,
+        -0.39890568473870097,
+        -0.23599664642078816,
+        -0.3216074131729775,
+        0.9169919599812898,
+        0.8062193219062848,
+        -0.5916167720510885,
+        -0.000003580619804614946
+      ],
+      "orbitUpReference": [
+        0.7392957911553645,
+        0.3216074131729775,
+        0.5916167720510885
+      ],
+      "metersPerUnit": 4578154.838709678,
+      "bodyRadiusM": 1419228000
+    }
+  }
+}

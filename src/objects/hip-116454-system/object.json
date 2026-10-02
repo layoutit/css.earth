@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hip-116454-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hip-116454",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HIP 116454 system",
+      "systemName": "HIP 116454 system",
+      "classification": "planetary-system",
+      "color": "#ffe7d1",
+      "distanceAu": 12916085.6,
+      "description": "HIP 116454 b crosses HIP 116454 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1921412194141181400,
+        -203520923739821120,
+        14977230716003248
+      ],
+      "presentationToReference": [
+        0.9944070222654163,
+        0.0077178560597013475,
+        -0.1053333222065522,
+        -0.10533015058595288,
+        -0.0008174011368806047,
+        -0.9944369719760634,
+        0.007761020987479567,
+        -0.9999698828230894,
+        -9.351044724375709e-8
+      ],
+      "orbitUpReference": [
+        -0.0077178560597013475,
+        0.0008174011368806047,
+        0.9999698828230894
+      ],
+      "metersPerUnit": 1701098.7096774194,
+      "bodyRadiusM": 527340600
+    }
+  }
+}

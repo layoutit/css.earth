@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2518-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2518",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2518 system",
+      "systemName": "TOI-2518 system",
+      "classification": "planetary-system",
+      "color": "#fff4f3",
+      "distanceAu": 33221824.1,
+      "description": "TOI-2518 b crosses TOI-2518 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1085244270824573600,
+        3927945264472602600,
+        -2844914324623963000
+      ],
+      "presentationToReference": [
+        -0.21836271194259405,
+        0.152443598630202,
+        0.9638872731132773,
+        0.7903444444454857,
+        -0.5517556836172269,
+        0.2663105794560993,
+        -0.5724276243921431,
+        -0.8199552517258247,
+        8.386426001648165e-8
+      ],
+      "orbitUpReference": [
+        -0.152443598630202,
+        0.5517556836172269,
+        0.8199552517258247
+      ],
+      "metersPerUnit": 2229323.5483870967,
+      "bodyRadiusM": 691090300
+    }
+  }
+}

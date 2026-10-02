@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-110113-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-110113",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 110113 system",
+      "systemName": "HD 110113 system",
+      "classification": "planetary-system",
+      "color": "#fff2ed",
+      "distanceAu": 21827310.2,
+      "description": "HD 110113 b crosses HD 110113 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2300727006335754500,
+        -407193614097072260,
+        -2281043108748208000
+      ],
+      "presentationToReference": [
+        -0.7045953274345581,
+        0.6878758191694003,
+        -0.1742764526819805,
+        -0.12470263402142684,
+        0.12174372685091736,
+        0.9846967645120845,
+        -0.69856615837407,
+        -0.7155454719124954,
+        1.3455355459609353e-7
+      ],
+      "orbitUpReference": [
+        -0.6878758191694003,
+        -0.12174372685091736,
+        0.7155454719124954
+      ],
+      "metersPerUnit": 2172379.35483871,
+      "bodyRadiusM": 673437600
+    }
+  }
+}

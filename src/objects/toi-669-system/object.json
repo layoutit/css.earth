@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-669-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-669",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-669 system",
+      "systemName": "TOI-669 system",
+      "classification": "planetary-system",
+      "color": "#ffeee4",
+      "distanceAu": 29390989.1,
+      "description": "TOI-669 b crosses TOI-669 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4085297393306462000,
+        1576325133250726100,
+        -397055353112984450
+      ],
+      "presentationToReference": [
+        -0.9291459024117943,
+        0.08425416871425183,
+        0.35998489841331266,
+        0.3585139336067965,
+        -0.03250979076257854,
+        0.9329581303115134,
+        -0.09030864543970407,
+        -0.9959138258699112,
+        -4.54267975385058e-8
+      ],
+      "orbitUpReference": [
+        -0.08425416871425183,
+        0.03250979076257854,
+        0.9959138258699112
+      ],
+      "metersPerUnit": 2217711.935483871,
+      "bodyRadiusM": 687490700
+    }
+  }
+}

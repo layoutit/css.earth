@@ -4,13 +4,15 @@ import type { SceneFactory } from './browser/browser-types.mts';
 import type { CameraViewport } from '@cssearth/renderer/navigation/camera-viewport.ts';
 import { prepareArrivalBillboard } from './arrival-billboard.mts';
 import { createPreparedArrival } from './prepared-arrival.mts';
+import { namesSystem } from './navigation/navigation-scope.mts';
 import { MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
 import { releaseStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
 
-/** A custom view never borrows the default arrival photograph. */
+/** A custom view never borrows the default arrival photograph, and neither does a system's page: it shows its host out
+ * to its members, not the host's own opening view. */
 export function usesDefaultStartupView(url: string, sceneId: string): boolean {
   const query = new URL(url).searchParams;
-  return !['v', 'view', 'overview', 'feature', 'dataset', 'settings'].some(key => query.has(key));
+  return !namesSystem(url) && !['v', 'feature', 'dataset', 'settings'].some(key => query.has(key));
 }
 
 /** Static previews restore from the URL; server-rendered focus responses carry a resolved camera. Only the `v` parameter is

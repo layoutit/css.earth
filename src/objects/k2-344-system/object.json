@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-344-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-344",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-344 system",
+      "systemName": "K2-344 system",
+      "classification": "planetary-system",
+      "color": "#ffbe88",
+      "distanceAu": 15571110.9,
+      "description": "K2-344 b crosses K2-344 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1566684195620805000,
+        1493939758649142500,
+        860100246472237400
+      ],
+      "presentationToReference": [
+        -0.6725680339921932,
+        -0.2672200511986517,
+        0.690105559961131,
+        0.6413392878954866,
+        0.25481287583450984,
+        0.7237087232517354,
+        0.36923726444332017,
+        -0.9293351615786075,
+        2.7758877437265033e-7
+      ],
+      "orbitUpReference": [
+        0.2672200511986517,
+        -0.25481287583450984,
+        0.9293351615786075
+      ],
+      "metersPerUnit": 1099654.8387096773,
+      "bodyRadiusM": 340893000
+    }
+  }
+}

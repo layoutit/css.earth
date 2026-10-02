@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-426-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-426",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-426 system",
+      "systemName": "TOI-426 system",
+      "classification": "planetary-system",
+      "color": "#fff1ee",
+      "distanceAu": 23273519.4,
+      "description": "TOI-426 b crosses TOI-426 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        634264349499691400,
+        3294372789687584000,
+        -931039891624668000
+      ],
+      "presentationToReference": [
+        0.18217257069914644,
+        -0.050556086525003215,
+        0.9819660058271574,
+        0.9462054116895321,
+        -0.2625881861196157,
+        -0.18905756636499127,
+        -0.26741068298463233,
+        -0.9635826516836459,
+        -7.776316595399959e-8
+      ],
+      "orbitUpReference": [
+        0.050556086525003215,
+        0.2625881861196157,
+        0.9635826516836459
+      ],
+      "metersPerUnit": 2221751.6129032257,
+      "bodyRadiusM": 688743000
+    }
+  }
+}

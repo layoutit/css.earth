@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-7394-b-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-7394-b",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-7394 B system",
+      "systemName": "TOI-7394 B system",
+      "classification": "planetary-system",
+      "color": "#ffc088",
+      "distanceAu": 39832373.7,
+      "description": "TOI-7394 B b crosses TOI-7394 B as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1735944759414423000,
+        -2578984434240605000,
+        5083609826115087000
+      ],
+      "presentationToReference": [
+        -0.29132268621498025,
+        -0.4763777315654926,
+        -0.8295754030617132,
+        -0.4327998739678076,
+        -0.7077284920502781,
+        0.558394708636901,
+        0.853120953669489,
+        -0.5217131763802357,
+        -0.0000011432323490246172
+      ],
+      "orbitUpReference": [
+        0.4763777315654926,
+        0.7077284920502781,
+        0.5217131763802357
+      ],
+      "metersPerUnit": 1366713.8709677418,
+      "bodyRadiusM": 423681300
+    }
+  }
+}

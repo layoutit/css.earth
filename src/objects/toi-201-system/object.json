@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-201-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-201",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-201 system",
+      "systemName": "TOI-201 system",
+      "classification": "planetary-system",
+      "color": "#f8f4ff",
+      "distanceAu": 23139085.4,
+      "description": "2 planets cross TOI-201 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        90204867748662100,
+        1987863371597416700,
+        -2832427480565791000
+      ],
+      "presentationToReference": [
+        0.02605890977183765,
+        -0.03709299769176724,
+        0.9989719929726467,
+        0.5742655971470381,
+        -0.8174130330972299,
+        -0.045331636371772746,
+        -0.818254213038258,
+        -0.5748565410996256,
+        -3.399936315677171e-7
+      ],
+      "orbitUpReference": [
+        0.03709299769176724,
+        0.8174130330972299,
+        0.5748565410996256
+      ],
+      "metersPerUnit": 2939893.5483870967,
+      "bodyRadiusM": 911367000
+    }
+  }
+}

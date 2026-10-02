@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-486-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-486",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 486 system",
+      "systemName": "GJ 486 system",
+      "classification": "planetary-system",
+      "color": "#ffcd89",
+      "distanceAu": 1666484.3,
+      "description": "GJ 486 b crosses GJ 486 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -240353148049291420,
+        -50993750852859480,
+        42210637971278230
+      ],
+      "presentationToReference": [
+        -0.9640984971924971,
+        -0.16564937315935657,
+        -0.2075436650034899,
+        -0.204544849568452,
+        -0.03515362678466753,
+        0.9782257546389297,
+        0.169338395605332,
+        -0.9855579676994126,
+        -0.00000883263997491751
+      ],
+      "orbitUpReference": [
+        0.16564937315935657,
+        0.03515362678466753,
+        0.9855579676994126
+      ],
+      "metersPerUnit": 727791.9354838709,
+      "bodyRadiusM": 225615500
+    }
+  }
+}

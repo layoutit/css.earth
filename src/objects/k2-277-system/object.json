@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-277-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-277",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-277 system",
+      "systemName": "K2-277 system",
+      "classification": "planetary-system",
+      "color": "#fff0eb",
+      "distanceAu": 23223946.5,
+      "description": "K2-277 b crosses K2-277 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3097095551832948000,
+        -1252305855039304400,
+        -954024502700697300
+      ],
+      "presentationToReference": [
+        -0.8914426318846788,
+        0.25457255107106674,
+        -0.37486377565681966,
+        -0.3604534663740659,
+        0.10293759702158171,
+        0.9270799046998823,
+        -0.2745966726627208,
+        -0.9615594975666308,
+        0.0000014039315483333402
+      ],
+      "orbitUpReference": [
+        -0.25457255107106674,
+        -0.10293759702158171,
+        0.9615594975666308
+      ],
+      "metersPerUnit": 2183600.3225806453,
+      "bodyRadiusM": 676916100
+    }
+  }
+}

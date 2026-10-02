@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-6080-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-6080",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-6080 system",
+      "systemName": "TOI-6080 system",
+      "classification": "planetary-system",
+      "color": "#ffefe8",
+      "distanceAu": 39044453.1,
+      "description": "TOI-6080 b crosses TOI-6080 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -272327857913156480,
+        -4589731617724691500,
+        3602373835833097000
+      ],
+      "presentationToReference": [
+        -0.04662373190034722,
+        -0.03652930804565774,
+        -0.9982443775335729,
+        -0.7857823216385176,
+        -0.6156606047798315,
+        0.05922974525112871,
+        0.6167433588001302,
+        -0.7871642963040419,
+        -3.1049489497549316e-7
+      ],
+      "orbitUpReference": [
+        0.03652930804565774,
+        0.6156606047798315,
+        0.7871642963040419
+      ],
+      "metersPerUnit": 2383804.8387096776,
+      "bodyRadiusM": 738979500
+    }
+  }
+}

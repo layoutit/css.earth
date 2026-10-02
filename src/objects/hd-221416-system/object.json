@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-221416-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-221416",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 221416 system",
+      "systemName": "HD 221416 system",
+      "classification": "planetary-system",
+      "color": "#ffe7d3",
+      "distanceAu": 19683700.7,
+      "description": "HD 221416 b crosses HD 221416 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2713847913916103700,
+        -331638691319308500,
+        -1093594215751909100
+      ],
+      "presentationToReference": [
+        0.9216221042273929,
+        -0.3686450577822699,
+        -0.12129929254607957,
+        -0.1126244204710508,
+        0.04504728947664372,
+        -0.9926159789285922,
+        -0.3713871792523707,
+        -0.9284780897164533,
+        0.0000018582750403107776
+      ],
+      "orbitUpReference": [
+        0.3686450577822699,
+        -0.04504728947664372,
+        0.9284780897164533
+      ],
+      "metersPerUnit": 6604661.612903226,
+      "bodyRadiusM": 2047445100
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-480-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-480",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-480 system",
+      "systemName": "TOI-480 system",
+      "classification": "planetary-system",
+      "color": "#f8f4ff",
+      "distanceAu": 11196064.6,
+      "description": "TOI-480 b crosses TOI-480 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        45502355380309090,
+        1607222355762226000,
+        -469127631727763260
+      ],
+      "presentationToReference": [
+        0.027167123563781634,
+        -0.00792577100306137,
+        0.9995994845693335,
+        0.9595900689842791,
+        -0.2799750507784843,
+        -0.028299654562049033,
+        -0.28008721303197043,
+        -0.9599745585668362,
+        6.256556938587471e-7
+      ],
+      "orbitUpReference": [
+        0.00792577100306137,
+        0.2799750507784843,
+        0.9599745585668362
+      ],
+      "metersPerUnit": 3338686.7741935486,
+      "bodyRadiusM": 1034992900
+    }
+  }
+}

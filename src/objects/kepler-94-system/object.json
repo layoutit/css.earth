@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-94-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-94",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-94 system",
+      "systemName": "Kepler-94 system",
+      "classification": "planetary-system",
+      "color": "#ffcfad",
+      "distanceAu": 39306118.2,
+      "description": "Kepler-94 b crosses Kepler-94 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        771283905620319000,
+        -3897158126767480000,
+        4335088466907688000
+      ],
+      "presentationToReference": [
+        0.13116842849652294,
+        0.1431318047902375,
+        -0.98097305254693,
+        -0.6627703539046459,
+        -0.7232175245445845,
+        -0.1941439419006261,
+        0.7372450755012631,
+        -0.675625412968675,
+        -2.1076017770188953e-7
+      ],
+      "orbitUpReference": [
+        -0.1431318047902375,
+        0.7232175245445845,
+        0.675625412968675
+      ],
+      "metersPerUnit": 1705587.0967741935,
+      "bodyRadiusM": 528732000
+    }
+  }
+}

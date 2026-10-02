@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-220-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-220",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-220 system",
+      "systemName": "TOI-220 system",
+      "classification": "planetary-system",
+      "color": "#ffebe1",
+      "distanceAu": 18756617.9,
+      "description": "TOI-220 b crosses TOI-220 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -41371707414136056,
+        1316775496982394600,
+        -2477447612174740000
+      ],
+      "presentationToReference": [
+        -0.014744375665269205,
+        0.027728618444517832,
+        0.9995067419009238,
+        0.46928284568809625,
+        -0.8824892848351988,
+        0.031404981992381585,
+        -0.8829248066110295,
+        -0.4695144149759597,
+        8.114344578302267e-7
+      ],
+      "orbitUpReference": [
+        -0.027728618444517832,
+        0.8824892848351988,
+        0.4695144149759597
+      ],
+      "metersPerUnit": 1925518.064516129,
+      "bodyRadiusM": 596910600
+    }
+  }
+}

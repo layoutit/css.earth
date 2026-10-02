@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-3896-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-3896",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-3896 system",
+      "systemName": "TOI-3896 system",
+      "classification": "planetary-system",
+      "color": "#ffe4d1",
+      "distanceAu": 37777299.9,
+      "description": "TOI-3896 b crosses TOI-3896 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2461753179857967600,
+        -342887350438686140,
+        5075486425114992000
+      ],
+      "presentationToReference": [
+        -0.4356000835979905,
+        -0.88950459759731,
+        -0.13796426357093758,
+        -0.06067292193651126,
+        -0.12390695941611726,
+        0.9904372074755363,
+        0.8980931820880891,
+        -0.4398052253685717,
+        -0.000005038867844046852
+      ],
+      "orbitUpReference": [
+        0.88950459759731,
+        0.12390695941611726,
+        0.4398052253685717
+      ],
+      "metersPerUnit": 1678100.322580645,
+      "bodyRadiusM": 520211100
+    }
+  }
+}

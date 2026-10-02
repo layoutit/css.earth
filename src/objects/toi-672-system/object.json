@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-672-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-672",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-672 system",
+      "systemName": "TOI-672 system",
+      "classification": "planetary-system",
+      "color": "#ffc289",
+      "distanceAu": 13789783.1,
+      "description": "TOI-672 b crosses TOI-672 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1560804140290060800,
+        332009611968318460,
+        -1307405079264793300
+      ],
+      "presentationToReference": [
+        -0.7566010340537694,
+        0.6198904820942442,
+        0.20806408983227306,
+        0.16094192042987812,
+        -0.1318649450530893,
+        0.978115194910338,
+        -0.633760659489929,
+        -0.7735292020829667,
+        -0.0000027891381601886745
+      ],
+      "orbitUpReference": [
+        -0.6198904820942442,
+        0.1318649450530893,
+        0.7735292020829667
+      ],
+      "metersPerUnit": 1211864.5161290322,
+      "bodyRadiusM": 375678000
+    }
+  }
+}

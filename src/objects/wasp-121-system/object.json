@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-121-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-121",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-121 system",
+      "systemName": "WASP-121 system",
+      "classification": "planetary-system",
+      "color": "#f1efff",
+      "distanceAu": 54285571.2,
+      "description": "F6 star in Puppis, 263 parsecs away, circled every 31 hours by a giant planet passing over its poles."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1905717538712700200,
+        6007504192733174000,
+        -5121412925656596000
+      ],
+      "presentationToReference": [
+        -0.23466495574904475,
+        0.19068859963831652,
+        0.9531894966433887,
+        0.7397479830633884,
+        -0.6011182396708159,
+        0.3023735826567996,
+        -0.6306387873394308,
+        -0.7760764910129911,
+        1.21863330920061e-7
+      ],
+      "orbitUpReference": [
+        -0.19068859963831652,
+        0.6011182396708159,
+        0.7760764910129911
+      ],
+      "metersPerUnit": 3219291.6129032257,
+      "bodyRadiusM": 997980400
+    }
+  }
+}

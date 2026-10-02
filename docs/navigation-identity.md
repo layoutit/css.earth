@@ -57,18 +57,19 @@ star without orbiting bodies, such as Betelgeuse, belongs to no system.
 
 Inside a stellar system, every nonstellar host with prepared satellite children
 has a [satellite-system view](satellite-system-navigation.md). Its
-`?view=satellites` URL and `satellite-system:<host-id>` identity name the family;
+`/<host>-system/` address and `satellite-system:<host-id>` identity name the family;
 the plain host and satellite routes name individual bodies. The family uses the
 host's mounted scene and the same world camera.
 
 There is one selection: an object and how far out it is seen (`site/scene/scene-selection.mts`,
 `{ objectId, view }`). The view is `body`, `moons` (a host out to its moons) or `system` (a star
-out to its planetary system, `?overview=system`). All three show the same card, the object's:
+out to its planetary system). The two wider views are objects of their own, the host's system
+(`/jupiter-system/`, `/trappist-1-system/`, `/solar-system/`), whose page mounts the host's scene. All three show the same card, the object's:
 its moons and its planetary system are parts of it, mounted while they are the view.
 
 ![The WASP-43 system overview: the star, WASP-43b and its orbit, with the system's card](images/wasp-43-system-overview.png)
 
-Each system has the same overview, `?overview=system` on its star's route:
+Each system has the same overview, its own object's route (`/<star>-system/`):
 
 - Zooming out of a member past the system's exit distance opens that system's
   overview, never another's. The Sun's exit is 100 AU; other systems scale it
@@ -89,7 +90,7 @@ Each system has the same overview, `?overview=system` on its star's route:
 - Breadcrumbs, the overview card and its results name the object's own system. The Milky Way, Local Group and Nearby Universe
   are pages of the Sun's scene, `/milky-way/` and so on, measured from the Sun
   there.
-  Another star's scene zoomed out that far keeps its route, `?overview=system`,
+  Another star's scene zoomed out that far takes its system's route, `/<star>-system/`,
   so its URL reopens the scene it shows.
 
 A star or body outside every system keeps its scene until the camera is as far

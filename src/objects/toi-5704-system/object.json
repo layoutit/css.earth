@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5704-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5704",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5704 system",
+      "systemName": "TOI-5704 system",
+      "classification": "planetary-system",
+      "color": "#ffd2b4",
+      "distanceAu": 18475603.7,
+      "description": "TOI-5704 b crosses TOI-5704 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1924011970113359000,
+        345315080788833800,
+        1954005971042899000
+      ],
+      "presentationToReference": [
+        -0.6961188104950844,
+        -0.6958529869025718,
+        0.17665566023673906,
+        0.12493702067077796,
+        0.12489180582649344,
+        0.9842727151065944,
+        0.7069719531500657,
+        -0.7072415835173769,
+        0.000001736304052463269
+      ],
+      "orbitUpReference": [
+        0.6958529869025718,
+        -0.12489180582649344,
+        0.7072415835173769
+      ],
+      "metersPerUnit": 1699976.7741935486,
+      "bodyRadiusM": 526992800.00000006
+    }
+  }
+}

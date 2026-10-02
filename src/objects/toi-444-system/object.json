@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-444-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-444",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-444 system",
+      "systemName": "TOI-444 system",
+      "classification": "planetary-system",
+      "color": "#ffe4d3",
+      "distanceAu": 11850929.7,
+      "description": "TOI-444 b crosses TOI-444 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        689329878535876700,
+        1424925922923734800,
+        -798431050467710100
+      ],
+      "presentationToReference": [
+        0.38882178252559246,
+        -0.19612149398251635,
+        0.9001966346480567,
+        0.8037403492524031,
+        -0.40540773551533543,
+        -0.43548366096554414,
+        -0.45035438536473255,
+        -0.8928498908452606,
+        6.003033259072765e-7
+      ],
+      "orbitUpReference": [
+        0.19612149398251635,
+        0.40540773551533543,
+        0.8928498908452606
+      ],
+      "metersPerUnit": 1748226.7741935484,
+      "bodyRadiusM": 541950300
+    }
+  }
+}

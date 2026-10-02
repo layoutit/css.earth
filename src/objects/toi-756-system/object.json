@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-756-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-756",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-756 system",
+      "systemName": "TOI-756 system",
+      "classification": "planetary-system",
+      "color": "#ffc68a",
+      "distanceAu": 17765613.9,
+      "description": "TOI-756 b crosses TOI-756 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1822358635678150400,
+        -390772326652146370,
+        -1894641050621104000
+      ],
+      "presentationToReference": [
+        -0.6856895816745039,
+        0.6970413443533622,
+        -0.2096739417407459,
+        -0.147033908646812,
+        0.14947973647587448,
+        0.9777713628917265,
+        -0.7128890708175327,
+        -0.7012768159900631,
+        0.000007984624254139971
+      ],
+      "orbitUpReference": [
+        -0.6970413443533622,
+        -0.14947973647587448,
+        0.7012768159900631
+      ],
+      "metersPerUnit": 1133317.7419354839,
+      "bodyRadiusM": 351328500
+    }
+  }
+}

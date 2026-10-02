@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "sirius-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "sirius",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Canis Major",
+      "systemName": "Canis Major",
+      "classification": "planetary-system",
+      "color": "#b3c8ff",
+      "distanceAu": 543910,
+      "description": "A-type star 2.64 parsecs away; its photosphere is not imaged here."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -15246456424903312,
+        76419534514890450,
+        -23416131422225716
+      ],
+      "presentationToReference": [
+        -0.18738598890549668,
+        0.05629674096880656,
+        0.9806717942911382,
+        0.9392313457203586,
+        -0.28206674342599247,
+        0.1956599894443927,
+        -0.2876299191291365,
+        -0.9577416296733406,
+        0.000020308125570031725
+      ],
+      "orbitUpReference": [
+        -0.05629674096880656,
+        0.28206674342599247,
+        0.9577416296733406
+      ],
+      "metersPerUnit": 3842545.1612903224,
+      "bodyRadiusM": 1191189000
+    }
+  }
+}

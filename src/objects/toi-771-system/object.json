@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-771-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-771",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-771 system",
+      "systemName": "TOI-771 system",
+      "classification": "planetary-system",
+      "color": "#ffc77b",
+      "distanceAu": 5228932.4,
+      "description": "TOI-771 b crosses TOI-771 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -220152928583392800,
+        62652781746496940,
+        -747998848482091000
+      ],
+      "presentationToReference": [
+        -0.28144376990020953,
+        0.9197086146264146,
+        0.27372516977128564,
+        0.08009539191209035,
+        -0.26174452575851037,
+        0.9618079493484659,
+        -0.9562291213819033,
+        -0.2926189799336566,
+        -0.000001944146789309961
+      ],
+      "orbitUpReference": [
+        -0.9197086146264146,
+        0.26174452575851037,
+        0.2926189799336566
+      ],
+      "metersPerUnit": 520652.9032258064,
+      "bodyRadiusM": 161402400
+    }
+  }
+}

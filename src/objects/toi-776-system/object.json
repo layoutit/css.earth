@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-776-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-776",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-776 system",
+      "systemName": "TOI-776 system",
+      "classification": "planetary-system",
+      "color": "#ffbf89",
+      "distanceAu": 5600703.7,
+      "description": "2 planets cross TOI-776 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -664030183108884100,
+        16472314392243794,
+        -510676806100469200
+      ],
+      "presentationToReference": [
+        -0.7925420577356417,
+        0.6093125612408432,
+        0.024805028407131776,
+        0.01966025389493154,
+        -0.015124943427958054,
+        0.9996923079143343,
+        -0.6095002552394395,
+        -0.7927858719732742,
+        -0.000007914132163046768
+      ],
+      "orbitUpReference": [
+        -0.6093125612408432,
+        0.015124943427958054,
+        0.7927858719732742
+      ],
+      "metersPerUnit": 1227573.8709677418,
+      "bodyRadiusM": 380547900
+    }
+  }
+}

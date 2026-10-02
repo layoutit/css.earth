@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1444-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1444",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1444 system",
+      "systemName": "TOI-1444 system",
+      "classification": "planetary-system",
+      "color": "#ffebe2",
+      "distanceAu": 25854447.8,
+      "description": "TOI-1444 b crosses TOI-1444 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        732880953527942400,
+        -1028396132933676300,
+        3655808289032892400
+      ],
+      "presentationToReference": [
+        0.18948350363055091,
+        0.5485428528850956,
+        -0.8143689215586333,
+        -0.2658877972485111,
+        -0.7697404885284884,
+        -0.5803475334609932,
+        0.9451982231924824,
+        -0.3264970426644078,
+        0.000002273802637738576
+      ],
+      "orbitUpReference": [
+        -0.5485428528850956,
+        0.7697404885284884,
+        0.3264970426644078
+      ],
+      "metersPerUnit": 2043338.064516129,
+      "bodyRadiusM": 633434800
+    }
+  }
+}

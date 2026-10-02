@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-27-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-27",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HAT-P-27 system",
+      "systemName": "HAT-P-27 system",
+      "classification": "planetary-system",
+      "color": "#ffebdb",
+      "distanceAu": 41646402,
+      "description": "HAT-P-27 b crosses HAT-P-27 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4549095587791298000,
+        -4207678801349052400,
+        645541080782222000
+      ],
+      "presentationToReference": [
+        -0.7301669255122828,
+        -0.07606538086376248,
+        -0.6790215892900542,
+        -0.6753667481003167,
+        -0.07035676429752813,
+        0.7341183019636448,
+        0.10361475014853655,
+        -0.9946175061558251,
+        -1.533591471327267e-7
+      ],
+      "orbitUpReference": [
+        0.07606538086376248,
+        0.07035676429752813,
+        0.9946175061558251
+      ],
+      "metersPerUnit": 1940493.5483870967,
+      "bodyRadiusM": 601553000
+    }
+  }
+}

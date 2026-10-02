@@ -70,7 +70,9 @@ export function parseObjectDescriptor(value: unknown): ObjectDescriptor {
     catch { throw new TypeError('Object descriptor is not valid JSON.'); }
   }
   const input = record(parsed, 'object');
-  allowedKeys(input, ['schema', 'id', 'type', 'properties', 'prepared'], 'object');
+  // `generator`: the script that writes a generated package (a system's, site/build/prepare/system-packages.mts).
+  allowedKeys(input, ['schema', 'id', 'type', 'generator', 'properties', 'prepared'], 'object');
+  if (input.generator !== undefined && (typeof input.generator !== 'string' || !input.generator)) throw new TypeError(`object.generator must name the script that writes the package; got ${JSON.stringify(input.generator)}.`);
   if (input.schema !== schema) throw new TypeError(`Unsupported object schema: ${String(input.schema)}.`);
   return Object.freeze({ schema, id: named(input.id, 'object.id'), type: named(input.type, 'object.type'),
     properties: properties(input.properties),

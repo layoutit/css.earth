@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5817-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5817",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5817 system",
+      "systemName": "TOI-5817 system",
+      "classification": "planetary-system",
+      "color": "#fff5f6",
+      "distanceAu": 16571391.3,
+      "description": "TOI-5817 b crosses TOI-5817 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1827230154238814000,
+        -1408286677492494600,
+        907536196561609200
+      ],
+      "presentationToReference": [
+        0.7370688815684445,
+        0.2899606251857948,
+        -0.6104525367834143,
+        -0.5680752826355435,
+        -0.22347879748175645,
+        -0.7920528393577386,
+        0.3660873353203989,
+        -0.9305804978173415,
+        -1.9679146011425189e-7
+      ],
+      "orbitUpReference": [
+        -0.2899606251857948,
+        0.22347879748175645,
+        0.9305804978173415
+      ],
+      "metersPerUnit": 3202464.193548387,
+      "bodyRadiusM": 992763900
+    }
+  }
+}

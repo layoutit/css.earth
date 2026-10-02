@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lhs-1815-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "lhs-1815",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "LHS 1815 system",
+      "systemName": "LHS 1815 system",
+      "classification": "planetary-system",
+      "color": "#ffc88f",
+      "distanceAu": 6146234.6,
+      "description": "LHS 1815 b crosses LHS 1815 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -9988399135583774,
+        523198246929891800,
+        -756027214569408000
+      ],
+      "presentationToReference": [
+        -0.010863012366767797,
+        0.01564395781974268,
+        0.999818614322645,
+        0.5690109573636951,
+        -0.8221093557350775,
+        0.01904567176307702,
+        -0.8222581865584379,
+        -0.5691146402936669,
+        -0.000029000682216604047
+      ],
+      "orbitUpReference": [
+        -0.01564395781974268,
+        0.8221093557350775,
+        0.5691146402936669
+      ],
+      "metersPerUnit": 1124340.9677419355,
+      "bodyRadiusM": 348545700
+    }
+  }
+}

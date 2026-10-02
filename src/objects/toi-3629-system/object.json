@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-3629-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-3629",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-3629 system",
+      "systemName": "TOI-3629 system",
+      "classification": "planetary-system",
+      "color": "#ffc28a",
+      "distanceAu": 26903045.7,
+      "description": "TOI-3629 b crosses TOI-3629 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3113772410515440600,
+        -11188176725269002,
+        2549903933220685000
+      ],
+      "presentationToReference": [
+        0.7736776005785729,
+        0.6335692733473094,
+        -0.0035980874287029987,
+        -0.0027799211322263625,
+        -0.002284361769466138,
+        -0.9999935268439516,
+        0.6335733914879008,
+        -0.7736825948420119,
+        0.000006086920946498416
+      ],
+      "orbitUpReference": [
+        -0.6335692733473094,
+        0.002284361769466138,
+        0.7736825948420119
+      ],
+      "metersPerUnit": 1346516.1290322582,
+      "bodyRadiusM": 417420000
+    }
+  }
+}

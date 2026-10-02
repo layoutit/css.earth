@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2000-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2000",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2000 system",
+      "systemName": "TOI-2000 system",
+      "classification": "planetary-system",
+      "color": "#ffeade",
+      "distanceAu": 35807107,
+      "description": "2 planets cross TOI-2000 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1765685167872644000,
+        1173274389706161000,
+        -4919315403916001000
+      ],
+      "presentationToReference": [
+        -0.3296233468642721,
+        0.7648903132698491,
+        0.5534358660838201,
+        0.21903034480558314,
+        -0.5082489212328896,
+        0.8328917949649592,
+        -0.9183540478793261,
+        -0.3957598296082564,
+        0.0000034785970047382173
+      ],
+      "orbitUpReference": [
+        -0.7648903132698491,
+        0.5082489212328896,
+        0.3957598296082564
+      ],
+      "metersPerUnit": 2544915.4838709678,
+      "bodyRadiusM": 788923800
+    }
+  }
+}

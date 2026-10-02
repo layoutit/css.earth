@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-415-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-415",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-415 system",
+      "systemName": "K2-415 system",
+      "classification": "planetary-system",
+      "color": "#ffc978",
+      "distanceAu": 4497508.9,
+      "description": "K2-415 b crosses K2-415 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -483123692406203700,
+        447376036055987600,
+        138310909681976850
+      ],
+      "presentationToReference": [
+        -0.7180617662255161,
+        -0.15082904200211306,
+        0.6794394012521037,
+        0.664930392845552,
+        0.13966199435727167,
+        0.7337316266881302,
+        0.20555990016380205,
+        -0.9786445357845075,
+        -0.000004875808222729281
+      ],
+      "orbitUpReference": [
+        0.15082904200211306,
+        -0.13966199435727167,
+        0.9786445357845075
+      ],
+      "metersPerUnit": 440984.1935483871,
+      "bodyRadiusM": 136705100
+    }
+  }
+}

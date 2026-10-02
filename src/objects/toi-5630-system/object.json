@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5630-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5630",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5630 system",
+      "systemName": "TOI-5630 system",
+      "classification": "planetary-system",
+      "color": "#ffebde",
+      "distanceAu": 27670810.6,
+      "description": "TOI-5630 b crosses TOI-5630 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1742684483663082000,
+        -2628314360108688400,
+        2681497312210826000
+      ],
+      "presentationToReference": [
+        -0.420988832912617,
+        -0.3579717695399692,
+        -0.8334414285211024,
+        -0.6349347833003754,
+        -0.5398911332212717,
+        0.5526078041652654,
+        0.6477856308364502,
+        -0.7618226673455406,
+        5.898458188609989e-7
+      ],
+      "orbitUpReference": [
+        0.3579717695399692,
+        0.5398911332212717,
+        0.7618226673455406
+      ],
+      "metersPerUnit": 2094642.5806451612,
+      "bodyRadiusM": 649339200
+    }
+  }
+}

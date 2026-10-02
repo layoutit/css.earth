@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-677-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-677",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-677 system",
+      "systemName": "TOI-677 system",
+      "classification": "planetary-system",
+      "color": "#fff7ff",
+      "distanceAu": 29259781.4,
+      "description": "TOI-677 b crosses TOI-677 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2257668810944849200,
+        1633124653893444900,
+        -3375755321534681600
+      ],
+      "presentationToReference": [
+        -0.5157777285056693,
+        0.624868684682383,
+        0.5860993616110161,
+        0.3730969397627401,
+        -0.45200789287522253,
+        0.8102391858693206,
+        -0.7712146318095958,
+        -0.6365752050479268,
+        9.89754749507245e-7
+      ],
+      "orbitUpReference": [
+        -0.624868684682383,
+        0.45200789287522253,
+        0.6365752050479268
+      ],
+      "metersPerUnit": 2872567.7419354836,
+      "bodyRadiusM": 890496000
+    }
+  }
+}

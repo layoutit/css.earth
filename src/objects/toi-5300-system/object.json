@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5300-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5300",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5300 system",
+      "systemName": "TOI-5300 system",
+      "classification": "planetary-system",
+      "color": "#ffe0c0",
+      "distanceAu": 33565787.6,
+      "description": "TOI-5300 b crosses TOI-5300 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5011742973458599000,
+        -308183120058221250,
+        40196372349586240
+      ],
+      "presentationToReference": [
+        0.9980827005900262,
+        0.007992243442391782,
+        -0.06137627251371474,
+        -0.06137430478235882,
+        -0.0004914673538976849,
+        -0.9981146994069982,
+        0.008007340095334846,
+        -0.9999679407384007,
+        6.678901873560696e-9
+      ],
+      "orbitUpReference": [
+        -0.007992243442391782,
+        0.0004914673538976849,
+        0.9999679407384007
+      ],
+      "metersPerUnit": 1458725.8064516129,
+      "bodyRadiusM": 452205000
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ogle-smc-ecl-1421-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "ogle-smc-ecl-1421-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "OGLE-SMC-ECL-1421 system",
+      "systemName": "OGLE-SMC-ECL-1421 system",
+      "classification": "planetary-system",
+      "color": "#ffecde",
+      "distanceAu": 12794605931.5,
+      "description": "The primary star of OGLE-SMC-ECL-1421, a pair that eclipse each other every 102.834 days."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        553010528365535760000,
+        118500374723992440000,
+        -1.8285809677856995e+21
+      ],
+      "presentationToReference": [
+        0.28892236359656065,
+        -0.9341428140635005,
+        0.20952582358101168,
+        0.061910952135978546,
+        -0.20017018947115606,
+        -0.9778031137466775,
+        -0.9553485760806855,
+        -0.2954811299907422,
+        -2.6786075896809076e-8
+      ],
+      "orbitUpReference": [
+        0.9341428140635005,
+        0.20017018947115606,
+        0.2954811299907422
+      ],
+      "metersPerUnit": 39722225.80645161,
+      "bodyRadiusM": 12313890000
+    }
+  }
+}

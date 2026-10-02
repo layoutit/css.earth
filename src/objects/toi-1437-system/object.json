@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1437-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1437",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1437 system",
+      "systemName": "TOI-1437 system",
+      "classification": "planetary-system",
+      "color": "#fdf6ff",
+      "distanceAu": 21335997.2,
+      "description": "TOI-1437 b crosses TOI-1437 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -418228180684688900,
+        -1694904406438177500,
+        2672096106119327000
+      ],
+      "presentationToReference": [
+        -0.13103105464256426,
+        -0.2005621601345994,
+        -0.9708788197511574,
+        -0.5310142217865631,
+        -0.8127912271315617,
+        0.23957111127675773,
+        0.8371706868850987,
+        -0.5469417162917025,
+        4.676884338285629e-7
+      ],
+      "orbitUpReference": [
+        0.2005621601345994,
+        0.8127912271315617,
+        0.5469417162917025
+      ],
+      "metersPerUnit": 2625706.4516129033,
+      "bodyRadiusM": 813969000
+    }
+  }
+}

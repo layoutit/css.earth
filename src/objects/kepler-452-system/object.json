@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-452-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-452",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-452 system",
+      "systemName": "Kepler-452 system",
+      "classification": "planetary-system",
+      "color": "#ffece1",
+      "distanceAu": 114254911.2,
+      "description": "Sun-like star about 554 parsecs away that hosts Kepler-452 b."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5365291960139772000,
+        -10998629554231015000,
+        11932737184749636000
+      ],
+      "presentationToReference": [
+        0.3139016222155825,
+        0.30608257409404627,
+        -0.8987653917493644,
+        -0.6434855148403225,
+        -0.6274596573468978,
+        -0.43842989244895114,
+        0.6981347747828573,
+        -0.7159663652980329,
+        9.015414662558591e-7
+      ],
+      "orbitUpReference": [
+        -0.30608257409404627,
+        0.6274596573468978,
+        0.7159663652980329
+      ],
+      "metersPerUnit": 2491054.8387096776,
+      "bodyRadiusM": 772227000
+    }
+  }
+}

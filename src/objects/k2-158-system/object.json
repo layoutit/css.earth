@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-158-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-158",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-158 system",
+      "systemName": "K2-158 system",
+      "classification": "planetary-system",
+      "color": "#ffede1",
+      "distanceAu": 40467681.1,
+      "description": "2 planets cross K2-158 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6023714772555486000,
+        6359188638126615,
+        -603547728325537500
+      ],
+      "presentationToReference": [
+        -0.9950173509358696,
+        0.09969632350273966,
+        0.0010556593208899193,
+        0.0010504320460708637,
+        -0.00010492484056044879,
+        0.9999994427914921,
+        -0.09969637871598593,
+        -0.9950179054021163,
+        3.221761808993204e-7
+      ],
+      "orbitUpReference": [
+        -0.09969632350273966,
+        0.00010492484056044879,
+        0.9950179054021163
+      ],
+      "metersPerUnit": 2131983.870967742,
+      "bodyRadiusM": 660915000
+    }
+  }
+}

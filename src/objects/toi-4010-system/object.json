@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-4010-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-4010",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-4010 system",
+      "systemName": "TOI-4010 system",
+      "classification": "planetary-system",
+      "color": "#ffdbc1",
+      "distanceAu": 36413233.4,
+      "description": "3 planets cross TOI-4010 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2073273720027187500,
+        763437197221225200,
+        4979180306983535000
+      ],
+      "presentationToReference": [
+        0.3806018941821551,
+        0.8577546230207828,
+        0.3455419002544128,
+        0.14014823057625295,
+        0.3158443893772497,
+        -0.9384033222262472,
+        0.9140572583877343,
+        -0.40558516785674886,
+        0.000001819821176173431
+      ],
+      "orbitUpReference": [
+        -0.8577546230207828,
+        -0.3158443893772497,
+        0.40558516785674886
+      ],
+      "metersPerUnit": 1862680.6451612904,
+      "bodyRadiusM": 577431000
+    }
+  }
+}

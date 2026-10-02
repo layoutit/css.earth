@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1758-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1758",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1758 system",
+      "systemName": "TOI-1758 system",
+      "classification": "planetary-system",
+      "color": "#ffe6d6",
+      "distanceAu": 19795881.6,
+      "description": "TOI-1758 b crosses TOI-1758 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        729121294378910800,
+        -67118207239415070,
+        2869476602032732000
+      ],
+      "presentationToReference": [
+        0.2462077515444526,
+        0.9648741141765561,
+        -0.09164980562680487,
+        -0.022664298798619215,
+        -0.0888032457098389,
+        -0.9957912999777438,
+        0.968952048679083,
+        -0.24724871555460903,
+        -0.000004147770681511968
+      ],
+      "orbitUpReference": [
+        -0.9648741141765561,
+        0.0888032457098389,
+        0.24724871555460903
+      ],
+      "metersPerUnit": 1817796.7741935484,
+      "bodyRadiusM": 563517000
+    }
+  }
+}

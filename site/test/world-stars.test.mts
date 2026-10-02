@@ -8,8 +8,8 @@ const test = sourceTest();
 
 const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
 const json = async (name: string) => JSON.parse(await readFile(new URL(name, prepared), 'utf8')) as unknown;
-/** The plain-dot stars: each is its own holder (the build's index). */
-const plainStars = (index: ReturnType<typeof parsePreparedWorldIndex>) => Object.keys(index.holders).filter(id => index.holders[id] === id);
+/** The plain-dot stars: one nothing orbits is its own holder, one with planets is in its system's (the build's index). */
+const plainStars = (index: ReturnType<typeof parsePreparedWorldIndex>) => Object.keys(index.holders).filter(id => index.holders[id] === id || index.holders[id] === `${id}-system`);
 
 test('a plain-dot star is its own holder, never a body of the summary; one nothing orbits holds no file and its row is in the index', async () => {
   const raw = await json('world-context-summary.json'), summary = parsePreparedWorldContextSummary(raw);
@@ -23,7 +23,7 @@ test('a plain-dot star is its own holder, never a body of the summary; one nothi
   for (const id of alone) await assert.rejects(access(new URL(`world-systems/${id}.json`, prepared)), `${id} has no holder file`);
   // A star with planets is in its own holder's file with them.
   const host = stars.find(id => !alone.includes(id))!;
-  const file = await json(`world-systems/${host}.json`) as { bodies: { id: string[] } };
+  const file = await json(`world-systems/${host}-system.json`) as { bodies: { id: string[] } };
   assert.ok(file.bodies.id.includes(host) && file.bodies.id.length > 1, host);
   const whole = await parseCompleteWorldContext(raw, id => json(`world-systems/${id}.json`), rawIndex);
   assert.equal(whole.bodies.length, summary.worldBodyCount);
@@ -31,7 +31,7 @@ test('a plain-dot star is its own holder, never a body of the summary; one nothi
   for (const id of stars) { const body = whole.bodies.find(body => body.id === id)!; assert.equal(body.plainDot, true, id); assert.equal(body.classification, 'star', id); }
   // An index that gives a body to another holder than the file that has it is refused, with both named.
   const moved = { ...index, holders: { ...index.holders, [`${host}`]: alone[0]! } };
-  await assert.rejects(parseCompleteWorldContext(raw, id => json(`world-systems/${id}.json`), moved), new RegExp(`holds ${host}; the world index gives it to ${alone[0]!}`, 'u'));
+  await assert.rejects(parseCompleteWorldContext(raw, id => json(`world-systems/${id}.json`), moved), new RegExp(`${host}-system holds ${host}; the world index gives it to ${alone[0]!}`, 'u'));
 });
 
 test('every plain-dot star is a dot once: of the Milky Way\'s own bank when the galaxy holds it, else of the world\'s banks', async () => {

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-18-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-18",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-18 system",
+      "systemName": "K2-18 system",
+      "classification": "planetary-system",
+      "color": "#ffc796",
+      "distanceAu": 7858629.1,
+      "description": "Red dwarf 38 parsecs away that hosts the planet K2-18 b."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1155529687749567500,
+        150899772136679260,
+        155229248388803070
+      ],
+      "presentationToReference": [
+        -0.982896773654451,
+        -0.13094415097402737,
+        0.1294896199135734,
+        0.12835576686478276,
+        0.017098502267849966,
+        0.9915807775127298,
+        0.13205578159332562,
+        -0.9912422865000703,
+        -0.000001374201336123386
+      ],
+      "orbitUpReference": [
+        0.13094415097402737,
+        -0.017098502267849966,
+        0.9912422865000703
+      ],
+      "metersPerUnit": 922364.5161290322,
+      "bodyRadiusM": 285933000
+    }
+  }
+}

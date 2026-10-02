@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hip-56998-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hip-56998",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HIP 56998 system",
+      "systemName": "HIP 56998 system",
+      "classification": "planetary-system",
+      "color": "#ffd3b9",
+      "distanceAu": 2636785.7,
+      "description": "2 planets cross HIP 56998 as seen from Earth: HD 101581 b, HD 101581 c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -280846273572427600,
+        23319574741564750,
+        -276004179688945860
+      ],
+      "presentationToReference": [
+        -0.7119722928758265,
+        0.6973177232405594,
+        0.08272512938485396,
+        0.05911736340521799,
+        -0.0578669590321079,
+        0.9965724019841167,
+        -0.699714650068979,
+        -0.7144224295939895,
+        0.00002391374986999534
+      ],
+      "orbitUpReference": [
+        -0.6973177232405594,
+        0.0578669590321079,
+        0.7144224295939895
+      ],
+      "metersPerUnit": 1413841.935483871,
+      "bodyRadiusM": 438291000
+    }
+  }
+}

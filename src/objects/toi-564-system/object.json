@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-564-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-564",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-564 system",
+      "systemName": "TOI-564 system",
+      "classification": "planetary-system",
+      "color": "#ffeee6",
+      "distanceAu": 41005389.4,
+      "description": "TOI-564 b crosses TOI-564 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3812840297133994000,
+        4496719349815677000,
+        -1694589292213852700
+      ],
+      "presentationToReference": [
+        -0.6215589620923583,
+        0.17865578185167258,
+        0.7627231268642889,
+        0.7330430844409692,
+        -0.21069979735849176,
+        0.6467251593577914,
+        -0.2762467972591547,
+        -0.9610867323005027,
+        3.802254867106942e-8
+      ],
+      "orbitUpReference": [
+        -0.17865578185167258,
+        0.21069979735849176,
+        0.9610867323005027
+      ],
+      "metersPerUnit": 2441682.580645161,
+      "bodyRadiusM": 756921600
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-216-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-216",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-216 system",
+      "systemName": "K2-216 system",
+      "classification": "planetary-system",
+      "color": "#ffceaf",
+      "distanceAu": 23740104.9,
+      "description": "K2-216 b crosses K2-216 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3459083194013438000,
+        702515525933987100,
+        392617440215080770
+      ],
+      "presentationToReference": [
+        0.9739866135124657,
+        0.10833844352535824,
+        0.1990297926266858,
+        0.19780984719552105,
+        0.022002788584774134,
+        -0.9799934395938468,
+        0.11055017435989595,
+        -0.9938705443612847,
+        -1.0582363195786838e-8
+      ],
+      "orbitUpReference": [
+        -0.10833844352535824,
+        -0.022002788584774134,
+        0.9938705443612847
+      ],
+      "metersPerUnit": 1615819.3548387096,
+      "bodyRadiusM": 500904000
+    }
+  }
+}

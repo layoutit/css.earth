@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-206893-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-206893",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 206893 system",
+      "systemName": "HD 206893 system",
+      "classification": "planetary-system",
+      "color": "#eaebff",
+      "distanceAu": 8409494.2,
+      "description": "A star 41 parsecs away with two companions imaged directly: a brown dwarf and an inner giant planet."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1021189944642265300,
+        -679968379865690000,
+        -278360976144860350
+      ],
+      "presentationToReference": [
+        0.8117293446844344,
+        -0.18417175831757981,
+        -0.5542348188416077,
+        -0.5404971820280703,
+        0.1226337255295836,
+        -0.8323603580075458,
+        -0.2212651513408601,
+        -0.9752136857124933,
+        -0.0000010772805329760443
+      ],
+      "orbitUpReference": [
+        0.18417175831757981,
+        -0.1226337255295836,
+        0.9752136857124933
+      ],
+      "metersPerUnit": 3080601.806451613,
+      "bodyRadiusM": 954986560
+    }
+  }
+}

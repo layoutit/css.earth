@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2407-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2407",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2407 system",
+      "systemName": "TOI-2407 system",
+      "classification": "planetary-system",
+      "color": "#ffc88f",
+      "distanceAu": 19018898.7,
+      "description": "TOI-2407 b crosses TOI-2407 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1266490488474223600,
+        1495858654148383200,
+        -2062400624901605400
+      ],
+      "presentationToReference": [
+        0.445136779620784,
+        -0.46838926142842535,
+        0.7631937809019225,
+        0.5257534187025577,
+        -0.553216133107225,
+        -0.6461696780199935,
+        -0.7248700505272725,
+        -0.6888856290041354,
+        -4.0755394750689495e-7
+      ],
+      "orbitUpReference": [
+        0.46838926142842535,
+        0.553216133107225,
+        0.6888856290041354
+      ],
+      "metersPerUnit": 1272457.7419354839,
+      "bodyRadiusM": 394461900
+    }
+  }
+}

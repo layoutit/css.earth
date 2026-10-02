@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1080-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1080",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1080 system",
+      "systemName": "TOI-1080 system",
+      "classification": "planetary-system",
+      "color": "#ffc676",
+      "distanceAu": 5270830.8,
+      "description": "TOI-1080 b crosses TOI-1080 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        53575911865830800,
+        -480139627224561860,
+        -623165953069248300
+      ],
+      "presentationToReference": [
+        0.0679465010759736,
+        -0.08766007857415235,
+        -0.9938304601972643,
+        -0.6089267831441505,
+        0.7854343744118738,
+        -0.11090994663214453,
+        -0.7903109804129318,
+        -0.612705927926768,
+        0.000011052090239036113
+      ],
+      "orbitUpReference": [
+        0.08766007857415235,
+        -0.7854343744118738,
+        0.612705927926768
+      ],
+      "metersPerUnit": 453102.5806451613,
+      "bodyRadiusM": 140461800
+    }
+  }
+}

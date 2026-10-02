@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-140-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-140",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-140 system",
+      "systemName": "WASP-140 system",
+      "classification": "planetary-system",
+      "color": "#ffe9da",
+      "distanceAu": 24087363.5,
+      "description": "WASP-140 b crosses WASP-140 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1668440511977241300,
+        2935253877689035000,
+        -1259052919861326000
+      ],
+      "presentationToReference": [
+        0.4630158718098229,
+        -0.17266300933015072,
+        0.8693697646348453,
+        0.8145745223780687,
+        -0.3037632880285237,
+        -0.49416213163155437,
+        -0.34940613896257056,
+        -0.9369713709901474,
+        3.352728776956627e-7
+      ],
+      "orbitUpReference": [
+        0.17266300933015072,
+        0.3037632880285237,
+        0.9369713709901474
+      ],
+      "metersPerUnit": 1952448.3870967743,
+      "bodyRadiusM": 605259000
+    }
+  }
+}
