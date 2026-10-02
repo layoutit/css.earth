@@ -60,6 +60,9 @@ export async function prepareStartupBillboard(stage: HTMLElement, factory: Scene
       removeLoader();
     }, input);
     await pending.prepare(factory, { getView: () => view, cameraViewport: viewport, selectionStage: stage, ownerDocument: document });
-    return pending.handoff(() => view);
+    // Behind the photograph nothing is seen until the reveal, so every texture activates together: paced an atlas a
+    // frame, Earth's 77 took 148 frames, 1.35 s at 120 Hz and 2.6 s at 60 Hz (2026-10-02). Without a cover the mesh is
+    // in view while it fills, and stays paced.
+    return pending.handoff(() => view, { progressiveActivation: !cover });
   } catch (error) { pending?.dispose(); removeLoader(); throw error; }
 }

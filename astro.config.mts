@@ -30,6 +30,9 @@ export default defineConfig({
   outDir: "./dist",
   output: "static",
   devToolbar: { enabled: false },
+  // The one stylesheet blocks the first paint: inline, Earth painted at 292 ms against 768 ms linked, on a 1.6 Mbps,
+  // 150 ms link (2026-10-02). Navigation between bodies never reads another page's HTML, so nothing is sent twice.
+  build: { inlineStylesheets: 'always' },
   integrations: [{ name: 'prepared-context-availability', hooks: {
     'astro:config:setup': async ({ command, logger, updateConfig }) => {
       // Deploy builds only (CSSEARTH_ALLOW_MISSING_ASSETS=1, set by .github/workflows/deploy.yml): tolerate a
