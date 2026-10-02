@@ -1,0 +1,99 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "shapley-supercluster",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Shapley Supercluster",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 660335002439152600000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Shapley Supercluster",
+      "systemName": "Large-scale structure",
+      "classification": "galaxy-cluster",
+      "classificationLabel": "Supercluster",
+      "color": "#9a9a9a",
+      "distanceAu": 39158417566038,
+      "description": "A supercluster of galaxies, placed at its central cluster Abell 3558, 189.8 million parsecs away.",
+      "aliases": [
+        "Shapley Concentration",
+        "Abell 3558",
+        "A3558",
+        "MCXC J1327.9-3130"
+      ],
+      "order": 5440,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4.631291484393925e+24,
+        -1.8701948221511788e+24,
+        -3.0610228352803056e+24
+      ],
+      "presentationToReference": [
+        -0.8447923690483566,
+        0,
+        -0.5350942470235175,
+        -0.49093937316049296,
+        0.3977771559319137,
+        0.7750818447747955,
+        -0.21284826773654367,
+        -0.9174820620691818,
+        0.3360391059130389
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 2.1301129110940405e+21,
+      "bodyRadiusM": 6.603350024391526e+23
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

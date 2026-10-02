@@ -1,6 +1,6 @@
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();import assert from 'node:assert/strict';
-import {areaSampler,parseControlledFrames,parseControlledMapProfile,controlledMapPoint,controlledMapBounds,samplePolarCell,matchControlledMapLevels} from '@cssearth/bake/objects/layers/observation';
+import {areaSampler,parseControlledFrames,parseControlledMapProfile,controlledMapPoint,controlledMapBounds,samplePolarCell,matchControlledMapLevels,parseSubSolarPoints,controlledMapSunGain} from '@cssearth/bake/objects/layers/observation';
 const profile=parseControlledMapProfile({referenceRadiusMeters:100,wavelengthMicrometers:.611,filter:'CLEAR',displayRange:[0,2],polarBoundaryDegrees:78.75});
 const base={id:'frame',path:'frame.tif',width:40,height:40,noData:-999,transform:[-20,1,0,20,0,-1],projection:'polar-stereographic',centerLongitude:0,poleLatitude:90};
 test('area integration agrees with direct source-square intersections',()=>{
@@ -55,4 +55,17 @@ test('photographic inserts preserve the global base and cap fitted exposure agai
  assert.equal(result.rgb[3],255);assert.equal(result.missing[1],0);assert.equal(result.missing[0],1);
  assert.equal(result.values[12],.25,'Calibrated source value stays unchanged');
  assert.throws(()=>matchControlledMapLevels(result,base,width,height,{boundaryPixels:0}));
+});
+test('sub-solar points turn Horizons west longitudes east and match photographs by capture time',()=>{
+ const table={requests:[{response:{result:' Date__(UT)__HR:MN:SC.fff, , , SunSub-LON, SunSub-LAT,\n$$SOE\n 1996-Nov-06 19:50:52.696, , , 270.000000,  0.000000,\n$$EOE'}}]};
+ const frame={id:'image',observedAt:'1996-11-06T19:50:52.696000Z'},sun=parseSubSolarPoints(table,[frame],'west-positive').get('image')!;
+ assert.ok(Math.hypot(sun[0],sun[1]-1,sun[2])<1e-12,'270 W is 90 E');
+ assert.ok(Math.hypot(parseSubSolarPoints(table,[frame],'east-positive').get('image')![1]+1)<1e-12);
+ assert.throws(()=>parseSubSolarPoints(table,[{...frame,observedAt:'1996-11-06T19:50:52.697000Z'}],'west-positive'),/No sub-solar point for image/);
+ assert.throws(()=>parseSubSolarPoints(table,[frame],'west'));
+ // Lambert carried to normal incidence: 1 under the Sun, 2 at 60 degrees, withheld past the limit.
+ const photometry={disk:{family:'lambert'} as const,cosineLimit:Math.cos(85*Math.PI/180)};
+ assert.equal(controlledMapSunGain(photometry,sun,90,0),1);
+ assert.ok(Math.abs(controlledMapSunGain(photometry,sun,90,60)!-2)<1e-12);
+ assert.equal(controlledMapSunGain(photometry,sun,180,0),null);assert.equal(controlledMapSunGain(photometry,sun,270,0),null);
 });

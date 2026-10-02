@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "shapley-supercluster-dataset-galaxies.webp",
+      "bytes": 7132,
+      "sha256": "4065e5bfd0f183e68f7d0060b88464bd4199f273f9a6a470861af8d955505c77"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 3006,
+      "sha256": "b56a218811b1733c759ba9aefdfe03d0ec260d848406c82e788790ea7d444395"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 512,
+      "sha256": "308cda27f00c91bbc36f824b6987b19517eadcc9e9cb4f71f27e0e56857f688d"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 652,
+      "sha256": "7deca0a8d34779346353c07663507c7bfac82ee3b409ca0ef253c688de2938e3"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 4688,
+      "sha256": "6ccd6f43a46407ca58361e8db10a36e9413dfac8789c65d1cb9889783942d6a2"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 3893,
+      "sha256": "9079c927b56a8d8249b25420445546d9400f5b44648d11486857084a5fa23cc7"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1727,
+      "sha256": "e1604f23bbef4d0b302451056273ac0c7c8a72af8985550ec500013840fc8be7"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 666,
+      "sha256": "9746babab2e1e120084f9a4687099cd579bd896f1821fa2bcb9973f7f0121a87"
+    }
+  ]
+}

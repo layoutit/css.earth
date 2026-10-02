@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "geissler-2022-lambert",
+  "instrument": "Galileo SSI",
+  "filter": "CLEAR, 611 nm",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "lambert"
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      0,
+      180
+    ],
+    "incidenceDegrees": [
+      0,
+      90
+    ]
+  }
+}

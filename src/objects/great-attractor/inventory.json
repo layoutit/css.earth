@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "great-attractor-dataset-galaxies.webp",
+      "bytes": 7132,
+      "sha256": "4065e5bfd0f183e68f7d0060b88464bd4199f273f9a6a470861af8d955505c77"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 2494,
+      "sha256": "31d1a9d14a5f2d9615204fe8d35fd5711fce8b10a63801108d39924e340e10a5"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 502,
+      "sha256": "e10feecebb137c7338d1272ed32dd57a584f85c10e1dc78cb861453032f277f6"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 637,
+      "sha256": "989d694835e292d80d373be11f1b890ff9e79df2c54a1cdc1d09764a64965b2c"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 4661,
+      "sha256": "a8edbe4e78ad6525f1a8c20ffa2a48282fd4e212f634afd68e6e76edacf691e8"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 3903,
+      "sha256": "27fe1e9b6edc8606dcac84c78670a092ff31faefcf56c8a1e39acf99f4a43058"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1626,
+      "sha256": "d548c4dbfbd90ee378f0c408e092b64fa5afb6a825d4583a7afdc652db09b2bc"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 659,
+      "sha256": "8c7d0031d07a8103f59c49a0ee6011d232a4d4ea4da24c1eb20bdbe29fd67581"
+    }
+  ]
+}
