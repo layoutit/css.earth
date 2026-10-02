@@ -11,9 +11,14 @@ import ObjectCard from './ObjectCard.astro';
 import InformationTabs from './InformationTabs.astro';
 import SelectedContent from './SelectedContent.astro';
 const { objectId, datasets, directSourceIdsByDataset } = Astro.props;
-const contexts = (datasets?.controls ?? []).map(dataset => ({ dataset,
-  ...datasetContributors(objectId, dataset.id, EXPLORATION.graph, EXPLORATION.catalog, directSourceIdsByDataset?.[dataset.id]),
-}));
+// A dataset drawn from a bank (a nebula's volume, a galaxy's layers) is recorded under the bank, not the body that shows
+// it: the Crab's six observation datasets had no telescope card (2026-10-02). A bank records every input against every
+// dataset it bakes, so the dataset's own input, which carries its id, is the one its card credits.
+const contexts = (datasets?.controls ?? []).map(dataset => {
+  const owner = dataset.volume?.objectId ?? objectId, datasetId = dataset.volume?.datasetId ?? dataset.id;
+  const own = dataset.volume && (EXPLORATION.graph.byObject[owner] ?? []).some(index => EXPLORATION.graph.edges[index].sourceId === datasetId) ? [datasetId] : undefined;
+  return { dataset, ...datasetContributors(owner, datasetId, EXPLORATION.graph, EXPLORATION.catalog, directSourceIdsByDataset?.[dataset.id] ?? own) };
+});
 const span = (from?: { value: string }, to?: { value: string }) =>
   from ? `${from.value}${to ? `–${to.value}` : ''}` : null;
 // Missions and facilities share one contributor shape, so a body that credits
