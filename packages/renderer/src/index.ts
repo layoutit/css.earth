@@ -61,7 +61,6 @@ export type { PreparedVolumeCameraTransform, PreparedVolumeMountOptions, Prepare
 export { prepareObjectResources } from './runtime/prepared-resource-lease.js';
 export { createPreparedObjectNavigation } from './runtime/prepared-object-navigation.js';
 export { createPreparedUniverse } from './universe/prepared-universe-runtime.js';
-export { parseDatasetBillboards } from './universe/dataset-billboards.js';
 
 export { PREPARED_INTERIOR_DISC_SIZE } from './rendering/prepared-interior-disc.js';
 export { publishDatasetSelection, publishDatasetPreview } from './rendering/object-control-binding.js';

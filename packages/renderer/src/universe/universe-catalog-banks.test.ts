@@ -14,7 +14,7 @@ mock.module('../image-layers/prepared-image-layer-runtime.js', { namedExports: {
 } });
 // The modules under test import the mocked ones, so they load after the mocks.
 const { createUniverseCatalogBanks } = await import('./universe-catalog-banks.js');
-const { parseDatasetBillboards } = await import('./dataset-billboards.js');
+const { parseDatasetBillboards } = await import('@cssearth/objects');
 
 const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
   metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1] as const, max: [1, 1, 1] as const } };

@@ -1,11 +1,10 @@
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
-import { type PreparedCssVolume, type PreparedPointAppearance, type PreparedCssSurfaceShell, type PreparedCssImageLayers, type PreparedPointVisibility, type DensityVolumeFrame } from '@cssearth/objects';
+import { type PreparedCssVolume, type PreparedPointAppearance, type PreparedCssSurfaceShell, type PreparedCssImageLayers, type PreparedPointVisibility, type DensityVolumeFrame, type DatasetBillboards } from '@cssearth/objects';
 
 import type { BackgroundPointBank } from './background-points.js';
 import type { createPreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
 
 import type { WorldPlannerSource } from './world-context/world-context-planner-client.js';
-import type { DatasetBillboards } from './dataset-billboards.js';
 
 export type PreparedImageLayerMount = { payload: PreparedCssImageLayers; resolveResource(path: string): string;
   /** Published catalogues placed in the bank's own frame, drawn as dots over its layers and faded with them. */
@@ -48,7 +47,7 @@ export interface PreparedUniverseOptions {
   /** Prepared catalogue-point banks of stars inside the galaxy, by URL: drawn as dust with the galaxy
    * volume, fetched the first time it shows. */
   galaxyCataloguePoints?: readonly string[];
-  /** A prepared `cssearth-galaxy-backing@1` face-on image drawn under the galaxy's catalogue dots, by URL. */
+  /** A prepared `GALAXY_BACKING_SCHEMA` face-on image drawn under the galaxy's catalogue dots, by URL. */
   galaxyBacking?: string;
   imageLayers?: readonly PreparedImageLayerMount[];
   /** Descriptor-only image banks. Their JSON and DOM are admitted only on projected visibility or explicit focus. */

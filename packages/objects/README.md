@@ -124,3 +124,9 @@ pure validators, catalogue geometry/frame comparisons and shell atlas corner con
 browser-safe main entry. Image generation, transport, projection, compositing, volume topology comparisons and
 retained mounting stay with their implementation owners.
 Contract tests use node:test and run in the packages lane.
+
+Universe catalogue point banks, galaxy backings, image meshes and dataset billboards have browser-safe
+format contracts and schema identifiers in `packages/objects/src/prepared-data/`, exported by `@cssearth/objects`.
+The complete catalogue bank is `PreparedCataloguePointBank`; embedded volume stars keep `PreparedCataloguePoints`.
+Counting, projection, transport and retained mounting stay in renderer; image/geometry preparation and file I/O stay in bake.
+Contract tests use node:test in the packages lane.
