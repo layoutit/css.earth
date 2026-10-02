@@ -145,11 +145,14 @@ export async function resolveBuildSceneAddress(address: string, root = process.c
   return resolvePreparedAssetUrl(address, { origin, assets });
 }
 
-/** A WebP scene image as a data URI, from the installed public copy (`pnpm setup:assets`; the deploy restores every one
- * before it builds). Null when this installation has no copy: the page then names the image's address instead. */
-export async function inlineSceneImage(address: string, root = process.cwd()): Promise<string | null> {
-  if (!/^\/scenes\/[a-z][a-z0-9-]*\/[^/]+\.webp$/u.test(address)) return null;
-  const bytes = await readFile(resolve(root, 'public', `.${address}`)).catch(() => null);
+/** An object's WebP scene image as a data URI, from the installed public copy (`pnpm setup:assets`; the deploy restores
+ * every one before it builds). `address` is the image's `/scenes/<id>/<file>` address or its published one: a deploy's
+ * discovery already names the bucket (prepare-object-discovery.mts), and the file name is the same in both. Null when
+ * this installation has no copy: the page then names the image's address instead. */
+export async function inlineSceneImage(objectId: string, address: string, root = process.cwd()): Promise<string | null> {
+  const file = /\/([^/?#]+\.webp)$/u.exec(address)?.[1];
+  if (!file || !/^[a-z][a-z0-9-]*$/u.test(objectId)) return null;
+  const bytes = await readFile(resolve(root, 'public/scenes', objectId, file)).catch(() => null);
   return bytes && `data:image/webp;base64,${bytes.toString('base64')}`;
 }
 
