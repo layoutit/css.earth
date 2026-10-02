@@ -9,4 +9,3 @@ export function validatePreparedLeafBounds(value: unknown): void {
     throw new TypeError('Prepared leaf bounds must be finite ordered CSS coordinates.');
   }
 }
-

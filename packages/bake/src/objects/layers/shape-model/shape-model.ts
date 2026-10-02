@@ -1,5 +1,4 @@
-import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
-import { OBJECT_RUNTIME_SCHEMA, NEUTRAL_CATALOGUE_RGB, type AuthoredObjectDescriptor } from '@cssearth/objects';
+import { OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA, NEUTRAL_CATALOGUE_RGB, type AuthoredObjectDescriptor } from '@cssearth/objects';
 
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
 import { parseShapeModelConfig, parseShapeContent } from './source.ts';
