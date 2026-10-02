@@ -12,8 +12,9 @@ type PickingGesture = { selected: SelectedClick | null; second: SecondPress | nu
 const gestures = new WeakMap<HTMLElement, PickingGesture>();
 const DOUBLE_CLICK_MILLISECONDS = 500;
 const CLICK_SLOP_PIXELS = 5;
-/** A fingertip covers its target: a tap that lands on nothing takes the nearest label or marker within this reach. */
-const TOUCH_REACH_PIXELS = 16;
+/** A fingertip covers its target: a tap that lands on nothing takes the nearest label or marker within this reach.
+ * 9 px around a marker's 13 px pick circle makes the 44 px target a name already has (WCAG 2.5.5, Apple HIG). */
+const TOUCH_REACH_PIXELS = 9;
 
 export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElement,
   readBounds: () => { left: number; top: number; width: number; height: number },
