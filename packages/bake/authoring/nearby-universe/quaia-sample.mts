@@ -18,7 +18,7 @@ import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 
 const repository = resolve(import.meta.dirname, '../../../..');
-const sourceDirectory = resolve(repository, 'src/objects/nearby-universe/source');
+const sourceDirectory = resolve(repository, 'src/objects/nearby-universe-galaxies/source');
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/quaia/quaia-g20.csv'));
 const outputPath = resolve(sourceDirectory, 'quaia-quasars/quaia-sample.csv.gz');
 const desiPath = resolve(sourceDirectory, 'desi-quasars/qso-sample.csv.gz');

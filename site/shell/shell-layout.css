@@ -304,8 +304,6 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   padding-block-start: 0;
 }
 
-.object-context { display: contents; }
-.object-context[hidden] { display: none; }
 .object-selected-content { display: contents; }
 .object-selected-content[hidden],
 .object-browser:not([hidden]) ~ .object-selected-content { display: none; }

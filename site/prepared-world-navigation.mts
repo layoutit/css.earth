@@ -96,7 +96,9 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       return worldCameraFromCenteredPresentation({ rotation: projection.rotation,
         distanceUnits: Math.max(current.distanceM, minimumDistance) / frame.metersPerUnit }, frame, optics);
     },
-    overviewTarget({ scope, objectId, fromId, mount }: TargetRequest & {scope: string}) {
+    /** `view: 'default'` frames the level as `objectId`'s own page looks, not as the camera looks now: a level opened by its
+     * page or a link shows its centre from that body's default direction, whatever scene the camera was in. */
+    overviewTarget({ scope, objectId, fromId, mount, view }: TargetRequest & {scope: string; view?: 'default'}) {
       if (scope === 'system') {
         const world = this.systemTarget({ objectId, fromId, mount, force: true });
         return world ? { world, focusPositionM: frames.get(objectId)!.originM } : null;
@@ -111,10 +113,12 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const optics = worldCameraViewport({ projectionScale: 1 }, current);
       // Its `zoom.frame` (object.json): fit what it draws, or a distance from the centre, looking the way the camera looks.
       const distanceM = overviewFrameDistanceM(overview);
-      if (distanceM === null) return drawnGalaxiesZoomTarget(from, optics, systemFramingRect(optics, documentTarget));
-      const frame = frames.get(objectId);
+      const frame = frames.get(objectId), arrival = view === 'default' ? arrivals.get(objectId) : undefined;
+      // The centre's own default view, at its body: what a fit backs out from when the level opens by its page.
+      const origin = arrival && frame ? worldCameraFromCenteredPresentation({ rotation: arrival.rotation, distanceUnits: 4 * frame.bodyRadiusM / frame.metersPerUnit }, frame, optics) : from;
+      if (distanceM === null) return drawnGalaxiesZoomTarget(origin, optics, systemFramingRect(optics, documentTarget));
       if (!frame) return null;
-      const projection = presentWorldCamera(from, frame, optics);
+      const projection = arrival ? { rotation: arrival.rotation } : presentWorldCamera(from, frame, optics);
       return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation, distanceUnits: distanceM / frame.metersPerUnit },
         frame, optics), focusPositionM: frame.originM };
     },

@@ -27,7 +27,9 @@ export async function prepareSurfacelessScene({ source, controls, solarGeometry 
       node(0, 'polycss-scene', `transform:${camera.defaultTransform}`, { 'aria-hidden': 'true', 'data-polycss-lighting': 'baked' }),
       node(1, `polycss-mesh ${id}-system`, `transform:${scene.systemTransform}`)],
       properties: [{ name: 'scale', value: '1', custom: false }], camera: 0, scene: 1, stageClasses: [], activationGroups: [], textureBindings: [] },
-    variants: (controls.datasets?.controls ?? []).map(control => ({ when: { datasetId: control.id }, required: [], writes: [], materials: [] })),
+    // An object none of whose datasets shows a bank (the Milky Way: the world always draws its volume) has the one view.
+    variants: controls.datasets?.controls.length ? controls.datasets.controls.map(control => ({ when: { datasetId: control.id }, required: [], writes: [], materials: [] }))
+      : [{ when: {}, required: [], writes: [], materials: [] }],
     materials: [], viewBindings: [{ kind: 'view-attribute', target: -1, property: 'data-lod', source: 'level-of-detail-stage', precision: null }],
     animations: [], id, controls, motion: [] };
   parsePreparedObjectRuntime(definition, { parsedJson: true });
@@ -42,6 +44,11 @@ export async function dotsPicture(bankDirectory: string, outputPath: string): Pr
   const bank = decodeCatalogueBankBinary(unpackPreparedBinary(await readFile(resolve(bankDirectory, 'prepared/dots.bin'))), `${bankDirectory}/prepared/dots.bin`);
   const points = bank.points as readonly (readonly number[])[], appearance = bank.appearance as { colorCss: string; palette?: readonly string[] };
   if (!Array.isArray(points) || !points.length) throw new TypeError(`${bankDirectory}/prepared/dots.bin: a bank of dots has points.`);
+  await pointsPicture(points, appearance, outputPath);
+}
+
+/** Points as seen from the Sun, each in its colour, on the plane across the line of sight to their middle. */
+async function pointsPicture(points: readonly (readonly number[])[], appearance: { colorCss: string; palette?: readonly string[] }, outputPath: string): Promise<void> {
   const centre = [0, 1, 2].map(axis => points.reduce((sum, point) => sum + point[axis]!, 0) / points.length);
   const distance = Math.hypot(...centre), sight: number[] = centre.map(value => value / distance);
   // East and north on the sky at the bank's middle, from the ICRF pole.
@@ -71,6 +78,28 @@ export async function companionThumbnails({ objectDirectory, publicDirectory, co
     const bankDirectory = resolve(objectDirectory, '..', control.volume.objectId), output = resolve(publicDirectory, control.thumbnail);
     const bank = JSON.parse(await readFile(resolve(bankDirectory, 'object.json'), 'utf8')) as { prepared?: { format?: string } };
     if (bank.prepared?.format === 'cssearth-catalogue-points-bin@1') { await dotsPicture(bankDirectory, output); continue; }
+    // The galaxy's own volume publishes one picture of itself, its backing.
+    if (bank.prepared?.format === 'cssearth-density-volume@1') {
+      await mkdir(dirname(output), { recursive: true });
+      const sharp = (await import('sharp')).default;
+      await sharp(resolve(bankDirectory, 'prepared/backing/backing.webp')).resize(160, 160, { fit: 'cover' }).webp({ quality: 80 }).toFile(output);
+      continue;
+    }
+    // A sphere of sky (the microwave background) publishes a picture of each of its datasets.
+    if (bank.prepared?.format === 'cssearth-image-mesh@1') {
+      const datasets = JSON.parse(await readFile(resolve(bankDirectory, 'prepared/datasets.json'), 'utf8')) as { controls: { id: string; thumbnailUrl: string }[] };
+      const picture = datasets.controls.find(candidate => candidate.id === control.volume!.datasetId)?.thumbnailUrl;
+      if (!picture) throw new TypeError(`${bankDirectory}/prepared/datasets.json: dataset ${control.volume.datasetId} names no picture.`);
+      await mkdir(dirname(output), { recursive: true });
+      await copyFile(resolve(bankDirectory, 'prepared', picture), output);
+      continue;
+    }
+    // A catalogue of galaxies is drawn as its dots lie on the sky, like a bank of dots.
+    if (bank.prepared?.format === 'cssearth-galaxy-catalog@1') {
+      const catalogue = JSON.parse(await readFile(resolve(bankDirectory, 'prepared/catalogue.json'), 'utf8')) as { objects: { positionM: number[] }[] };
+      await pointsPicture(catalogue.objects.map(object => object.positionM), { colorCss: '#d8d8d8' }, output);
+      continue;
+    }
     const presentation = JSON.parse(await readFile(resolve(bankDirectory, 'prepared/presentation.json'), 'utf8')) as { controls: { id: string; thumbnailUrl: string }[] };
     const picture = presentation.controls.find(candidate => candidate.id === control.volume!.datasetId)?.thumbnailUrl;
     const prefix = `/scenes/${control.volume.objectId}/`;

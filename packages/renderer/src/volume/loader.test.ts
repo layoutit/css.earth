@@ -7,7 +7,7 @@ import { requireInventory } from '@cssearth/objects/node';
 import { loadPreparedCssVolume } from './loader.js';
 
 async function fixture() {
-  const base = new URL('../../../../src/objects/milky-way/', import.meta.url);
+  const base = new URL('../../../../src/objects/milky-way-volume/', import.meta.url);
   const descriptor = JSON.parse(await readFile(new URL('object.json', base), 'utf8'));
   const recipe = JSON.parse(await readFile(new URL('source/volume.json', base), 'utf8'));
   const inventory = requireInventory('milky-way', JSON.parse(await readFile(new URL('inventory.json', base), 'utf8')));

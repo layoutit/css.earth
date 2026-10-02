@@ -42,16 +42,16 @@ test('every prepared satellite family derives from orbit parents and has a prepa
 
 test('system URL and body URL keep distinct selection identities', () => {
   const system = selectionTargetFromUrl(new URL('https://css.earth/earth/?view=satellites'), 'earth', SCENE_OBJECTS);
-  assert.deepEqual(system, { kind: 'satellite-system', hostId: 'earth' });
+  assert.deepEqual(system, { objectId: 'earth', view: 'moons' });
   assert.deepEqual(selectionTargetFromUrl(new URL('https://css.earth/earth/'), 'earth', SCENE_OBJECTS),
-    { kind: 'object', objectId: 'earth' });
+    { objectId: 'earth', view: 'body' });
   assert.deepEqual(selectionTargetFromUrl(new URL('https://css.earth/sun/?overview=system'), 'sun', SCENE_OBJECTS),
-    { kind: 'overview', overview: { scope: 'system', systemId: 'sun' } });
+    { objectId: 'sun', view: 'system' });
   assert.deepEqual(selectionTargetFromUrl(new URL('https://css.earth/mercury/?view=satellites'), 'mercury', SCENE_OBJECTS),
-    { kind: 'object', objectId: 'mercury' });
+    { objectId: 'mercury', view: 'body' });
   const selection = createSceneSelection({ initial: system, objectId: 'earth', onChange() {} });
   assert.equal(new URL(selection.url('https://css.earth/earth/')).searchParams.get('view'), 'satellites');
-  selection.commit({ kind: 'object', objectId: 'earth' }, 'earth');
+  selection.commit({ objectId: 'earth', view: 'body' }, 'earth');
   assert.equal(new URL(selection.url('https://css.earth/earth/?view=satellites')).searchParams.has('view'), false);
 });
 
@@ -69,11 +69,11 @@ test('camera crosses the system and body cards at the selected body, including a
   const radius = SYSTEM_FRAMING_RADII.get('earth')!;
   const threshold = systemOverviewDistance(earth.worldFrame.bodyRadiusM, radius, optics);
   assert.equal(satelliteSelectionAtCamera(camera(earth.worldFrame.originM, threshold * .8), optics, SCENE_OBJECTS,
-    { kind: 'satellite-system', hostId: 'earth' })?.kind, 'object');
+    { objectId: 'earth', view: 'moons' })?.view, 'body');
   assert.equal(satelliteSelectionAtCamera(camera(earth.worldFrame.originM, threshold * 1.3), optics, SCENE_OBJECTS,
-    { kind: 'object', objectId: 'earth' })?.kind, 'satellite-system');
+    { objectId: 'earth', view: 'body' })?.view, 'moons');
   assert.equal(satelliteSelectionAtCamera(camera(moon.worldFrame.originM, 20e6), optics, SCENE_OBJECTS,
-    { kind: 'object', objectId: 'moon' }), null);
+    { objectId: 'moon', view: 'body' }), null);
   assert.deepEqual(satelliteSelectionAtCamera(camera(moon.worldFrame.originM, 400e6), optics, SCENE_OBJECTS,
-    { kind: 'object', objectId: 'moon' }), { kind: 'satellite-system', hostId: 'earth' });
+    { objectId: 'moon', view: 'body' }), { objectId: 'earth', view: 'moons' });
 });

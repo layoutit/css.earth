@@ -1,22 +1,74 @@
 {
   "schema": "cssearth-object@2",
   "id": "nearby-universe",
-  "type": "galaxy-point-field",
+  "type": "layered-body",
   "properties": {
-    "overview": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Nearby Universe",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 695700
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
       "name": "Nearby Universe",
-      "description": "Selected nearby galaxy clusters. This view is not a complete map of the observable universe.",
+      "systemName": "Universe",
+      "classification": "galaxy-cluster",
+      "classificationLabel": "Scale of the universe",
+      "color": "#9a9a9a",
+      "distanceAu": 0,
+      "description": "Galaxies and clusters of galaxies near the Milky Way, not a complete map.",
+      "order": 5156
+    },
+    "overview": {
       "order": 3,
       "zoom": {
         "enter": {
-          "distancePc": 5000000.0
+          "distancePc": 5000000
         },
         "returnBelow": {
-          "distancePc": 4000000.0
+          "distancePc": 4000000
         },
         "frame": {
           "distance": {
-            "distancePc": 100000000.0
+            "distancePc": 100000000
           }
         }
       },
@@ -29,23 +81,40 @@
         }
       ],
       "packages": [
+        "nearby-universe-galaxies",
         "galaxy-clusters"
       ]
     },
-    "preparation": {
-      "source": "source/dots/stack.json"
-    },
-    "farBanks": {
-      "banks": [
-        "prepared/bright-galaxy-dots.bin",
-        "prepared/quasar-dots.bin"
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        0,
+        0,
+        0
       ],
-      "fromDistancePc": 300000000.0,
-      "basis": "DESI's shells begin past the Cosmicflows-4 field, so they load only once the camera is 300 Mpc from the Sun: the Local Group and Nearby Universe pages never download them."
+      "presentationToReference": [
+        1,
+        0,
+        0,
+        0,
+        0.3977771559319137,
+        -0.9174820620691818,
+        0,
+        -0.9174820620691818,
+        -0.3977771559319137
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 2244193.5483870967,
+      "bodyRadiusM": 695700000
     }
   },
   "prepared": {
-    "format": "cssearth-catalogue-points-bin@1",
-    "url": "prepared/dots.bin"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }

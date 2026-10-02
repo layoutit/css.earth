@@ -34,7 +34,7 @@ test('every header pill has a prepared frame, and the galaxy frame holds the Mag
     return value >= galaxy.centreM[axis]! + galaxy.minimumM[axis]! - tolerance && value <= galaxy.centreM[axis]! + galaxy.maximumM[axis]! + tolerance;
   });
   // LMC (50 kpc) and M31 (776 kpc) are both galaxies the Local Group layer draws.
-  const catalogue = JSON.parse(await readFile(resolve(import.meta.dirname, '../../src/objects/local-group/prepared/catalogue.json'), 'utf8')) as { objects: { detailedObjectId?: string; positionM: number[] }[] };
+  const catalogue = JSON.parse(await readFile(resolve(import.meta.dirname, '../../src/objects/local-group-galaxies/prepared/catalogue.json'), 'utf8')) as { objects: { detailedObjectId?: string; positionM: number[] }[] };
   for (const id of ['lmc', 'm31']) {
     const row = catalogue.objects.find(object => object.detailedObjectId === id);
     assert.ok(row && holds(row.positionM), `${id} lies outside the galaxy frame`);

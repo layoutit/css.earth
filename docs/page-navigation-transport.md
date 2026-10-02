@@ -111,10 +111,8 @@ without publishing the default dataset first.
 
 A galaxy, cluster or nebula with a package is an ordinary object: `/m42/` is its own
 scene's page, with its card and dataset buttons as on every page. A level of the zoom
-ladder has no scene of its own; its page is the world host's page framed on it, and the
-deploy build renders each level page through the search function once
-(`site/build/prerender-level-pages.mts`), so the static page opens on its card with or
-without JavaScript. Catalogue transport is separate pinned JSON, shared by the response and
+ladder is an object too: `/milky-way/` is its own scene's page, built like any other.
+Catalogue transport is separate pinned JSON, shared by the response and
 browser. Construction-order identities let the live volume publisher adopt
 the response's elements and selected dataset. Responsive CSS lengths retain the
 prepared camera's projection until the browser resolves its viewport. A galaxy,

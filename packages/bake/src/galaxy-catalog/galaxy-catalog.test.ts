@@ -11,7 +11,7 @@ import { galaxyPositionM, classifyMembership, prepareGalaxyCatalog } from './pre
 import { parseGalaxyCsv, readAuthorMetadata } from './source.ts';
 import type { AuthorMetadata, CsvRow } from './types.ts';
 
-const directory = resolve('src/objects/local-group');
+const directory = resolve('src/objects/local-group-galaxies');
 const json = async (path: string) => JSON.parse(await readFile(resolve(directory, path), 'utf8')) as unknown;
 const recipe = () => json('source/catalogue.json').then(parseGalaxyRecipe);
 function sourceArchive(yaml: string): Buffer {

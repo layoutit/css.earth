@@ -2,22 +2,52 @@
   "schema": "cssearth-inventory@1",
   "assets": [
     {
-      "location": "prepared",
-      "filename": "bright-galaxy-dots.bin",
-      "bytes": 333411,
-      "sha256": "a73564d0ae77c85b2d2adbe46c6a3e38f2964f84d7eac213038afbefeee7e87a"
+      "location": "public",
+      "filename": "nearby-universe-dataset-galaxies.webp",
+      "bytes": 7134,
+      "sha256": "84df340ef2d6d7da8de5a6af3fafac58a6da662750238a5060725dab6f7fc087"
     },
     {
       "location": "prepared",
-      "filename": "dots.bin",
-      "bytes": 443168,
-      "sha256": "05e3e952b4820a0411df662076a162540525232b001ad6b044d36cef0a42d0ac"
+      "filename": "content.json",
+      "bytes": 773,
+      "sha256": "c2ea41e45e184b199583d0f054ffeff3d5e84a223bb283c70d4dceef82520ff6"
     },
     {
       "location": "prepared",
-      "filename": "quasar-dots.bin",
-      "bytes": 438525,
-      "sha256": "f55eb7b66ecadb3dd7dfb0e98729cf1569700d8de844adda1f49a724c411dafc"
+      "filename": "controls.json",
+      "bytes": 502,
+      "sha256": "0dff11dcece1bc11b1ea1398671720ff9fbed7c809f5c9b7ff7b1d1068b706b1"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 637,
+      "sha256": "996e88804e35a61307aff8bc463aea8bbb2cc865bf27f06ecac82cf5f2d9a8b3"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 4441,
+      "sha256": "aebda537d967bfb3c26676e45df215e803e04c2a31060b58f769416350ed8390"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 3460,
+      "sha256": "42e2439910ecdeed79a7ca92ce1a3959ec27cb28d432711d639dd44c508d045a"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1113,
+      "sha256": "3652cbbccdb414f0f6ef8a50d630ae6b69c927ec71aef4c50df00f839cc00489"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 508,
+      "sha256": "b3590c3d3c0c246515bfb6ed016e7d43f608e071a3784c4694ea32c61f847e67"
     }
   ]
 }

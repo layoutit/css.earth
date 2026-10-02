@@ -5,8 +5,8 @@
  * detailed objects (`detailedObjectId`: M31, M33, the Magellanic Clouds) are left out. Each row keeps the catalogue's
  * adopted distance and sky position, and LVDB's apparent V magnitude for its tone.
  *
- * Inputs: `src/objects/local-group/prepared/catalogue.json` (restored by `pnpm setup:prepared`) and its source table
- * `src/objects/local-group/source/lvdb/comb_all.csv`.
+ * Inputs: `src/objects/local-group-galaxies/prepared/catalogue.json` (restored by `pnpm setup:prepared`) and its source table
+ * `src/objects/local-group-galaxies/source/lvdb/comb_all.csv`.
  * Output: `source/local-group-galaxies/lvdb-sample.csv.gz`. It prints what it kept.
  */
 import { readFile, writeFile } from 'node:fs/promises';
@@ -14,10 +14,10 @@ import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 
 const repository = resolve(import.meta.dirname, '../../../..');
-const catalogPath = resolve(repository, 'src/objects/local-group/prepared/catalogue.json');
-const tablePath = resolve(repository, 'src/objects/local-group/source/lvdb/comb_all.csv');
-const outputPath = resolve(repository, 'src/objects/nearby-universe/source/local-group-galaxies/lvdb-sample.csv.gz');
-const fieldPath = resolve(repository, 'src/objects/nearby-universe/source/galaxies/points.json');
+const catalogPath = resolve(repository, 'src/objects/local-group-galaxies/prepared/catalogue.json');
+const tablePath = resolve(repository, 'src/objects/local-group-galaxies/source/lvdb/comb_all.csv');
+const outputPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/local-group-galaxies/lvdb-sample.csv.gz');
+const fieldPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/points.json');
 
 // The field's inner edge, measured: its nearest galaxy, from the tracked Cosmicflows-4 table its recipe reads (distance
 // moduli), so the Local Group dots stop where Cosmicflows-4's start.
