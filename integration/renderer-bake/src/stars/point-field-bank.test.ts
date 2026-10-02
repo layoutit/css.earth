@@ -2,9 +2,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { encodePointFieldBank, magnitudeDisplayAlphaChange } from '@cssearth/bake/stars';
-import { POINT_FIELD_BANK_HEADER_BYTES, POINT_FIELD_MAGNITUDE_BOUND, decodePointFieldBank } from '@cssearth/renderer/stars/point-field-bank.ts';
+import { POINT_FIELD_BANK_HEADER_BYTES, POINT_FIELD_MAGNITUDE_BOUND, decodePointFieldBank } from '@cssearth/objects';
 import { IMPERCEPTIBLE_LUMINANCE } from '@cssearth/renderer/stars/point-field-projection.ts';
-import type { PreparedPointFieldBank } from '@cssearth/renderer/stars/types.ts';
+import type { PreparedPointFieldBank } from '@cssearth/objects';
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: 3.085677581491367e16, boundsUnits: { min: [-1024, -1024, -1024], max: [1024, 1024, 1024] } } as const;

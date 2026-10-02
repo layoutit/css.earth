@@ -50,14 +50,11 @@ export { savedWorldCamera } from './navigation/saved-world-camera.js';
 export { mountPreparedCssVolume } from './volume/prepared-volume-runtime.js';
 export { validatePreparedCssVolume } from './volume/validation.js';
 export { loadPreparedCssVolume } from './volume/loader.js';
-export { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from './stars/validation.js';
 export { loadPreparedCssPointField } from './stars/loader.js';
-export type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedPointFieldNode, PreparedPointFieldResource, PreparedPointFieldStar, PointFieldRgb, PointFieldVector } from './stars/types.js';
 export { createWorldContextObjectRuntime } from './universe/world-context/world-context-runtime.js';
 export { mountWorldContextPointSource, worldContextPointAppearance, worldContextPointSourceFade, worldContextPointSourceGain } from './universe/world-context/world-context-point-source.js';
 export type { PointSourcePublication, WorldContextPointAppearance, WorldContextPointSourceGain } from './universe/world-context/world-context-point-source.js';
 export { readPreparedBinary } from './prepared-data/prepared-binary.js';
-export { decodeCatalogueBankBinary, encodeCatalogueBankBinary } from './prepared-data/catalogue-bank-binary.js';
 // Named so declaration builds of site modules that return world-context handles can reference them.
 export type { WorldBodyPresentation } from './universe/world-context/world-context-planner.js';
 export type { QueuedRequest } from './navigation/world-frame-queue.js';

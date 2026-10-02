@@ -53,3 +53,9 @@ Preparation must remain reproducible from source inputs and provenance outside p
 - Every source file, test, tool, and generated source is limited to 600 physical lines, including blanks/comments.
 - `pnpm lint:packages` enforces the limit. Split code by responsibility; keep bulk prepared data outside source code.
 - Maintain README.md and CLAUDE.md as a symlink to this guide. Test behavior and package boundaries.
+
+`src/prepared-data/catalogue-bank-binary.ts` owns the catalogue bank magic, position scale and binary codec.
+`src/stars/` owns point-field data/manifest schemas, bank layout, quantization, decoding and validation,
+exported through the browser-safe main entry. Hierarchy construction and encoding star rows remain in bake;
+loading, selection and projection remain with their runtime owners. Contract tests run in the packages lane;
+writer/reader conformance stays in `integration/renderer-bake/src/stars/`.

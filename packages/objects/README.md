@@ -96,3 +96,9 @@ billboards and orbit centres before validation. Full world-context validation, w
 orbit-bank codecs live here too. JSON orbit arrays (`PreparedWorldContextData`) and decoded typed arrays
 (`PreparedWorldContextGeometry`) have distinct contracts. Projection, navigation and spatial preparation
 stay with their owners.
+
+`src/prepared-data/catalogue-bank-binary.ts` owns the catalogue bank magic, position scale and binary codec.
+`src/stars/` owns point-field data/manifest schemas, bank layout, quantization, decoding and validation,
+exported through the browser-safe main entry. Hierarchy construction and encoding star rows remain in bake;
+loading, selection and projection remain with their runtime owners. Contract tests run in the packages lane;
+writer/reader conformance stays in `integration/renderer-bake/src/stars/`.

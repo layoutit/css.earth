@@ -1,8 +1,9 @@
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { PreparedStar, PreparedStarNode, StarsRecipe } from './types.ts';
-import type { PreparedCssPointField, PreparedPointFieldBank, PreparedPointFieldQuantization } from '@cssearth/renderer/stars/types.ts';
+import type { PreparedPointFieldStar, PreparedPointFieldNode } from '@cssearth/objects';
+import type { StarsRecipe } from './types.ts';
+import type { PreparedCssPointField, PreparedPointFieldBank, PreparedPointFieldQuantization } from '@cssearth/objects';
 import { POINT_FIELD_BANK_ENCODING, POINT_FIELD_BANK_QUANTIZATION, POINT_FIELD_MAGNITUDE_BOUND, POINT_FIELD_MAGNITUDE_DIVISOR,
-  decodePointFieldBank, decodeStarMagnitude, pointFieldBankHeader, pointFieldBankLayout } from '@cssearth/renderer/stars/point-field-bank.ts';
+  decodePointFieldBank, decodeStarMagnitude, pointFieldBankHeader, pointFieldBankLayout } from '@cssearth/objects';
 import { IMPERCEPTIBLE_LUMINANCE } from '@cssearth/renderer/stars/point-field-projection.ts';
 
 type Photometry = PreparedCssPointField['photometry'];
@@ -40,7 +41,7 @@ export function magnitudeDisplayAlphaChange(photometry: Photometry, atlas: Stars
  * asserts every field against its declared bound. Any drift fails preparation. */
 export function encodePointFieldBank(input: {
   readonly path: string; readonly idPrefix: string; readonly frame: DensityVolumeFrame; readonly colorCount: number;
-  readonly stars: readonly PreparedStar[]; readonly nodes: readonly PreparedStarNode[];
+  readonly stars: readonly PreparedPointFieldStar[]; readonly nodes: readonly PreparedPointFieldNode[];
   readonly photometry: Photometry; readonly atlas: StarsRecipe['atlas'];
 }): { readonly bytes: Buffer; readonly bank: PreparedPointFieldBank } {
   const { stars, nodes, idPrefix } = input;

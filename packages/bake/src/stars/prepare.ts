@@ -1,8 +1,9 @@
+import { PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA } from '@cssearth/objects';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import { packPreparedBinary } from '@cssearth/objects/node';
-import { pointFieldBankRegions } from '@cssearth/renderer/stars/point-field-bank.ts';
+import { pointFieldBankRegions } from '@cssearth/objects';
 import { M_PER_PC } from '@cssearth/astronomy';
 import { parseStarsRecipe } from './config.ts';
 import { requireRecord as record, requireNonemptyText as text } from '@cssearth/core';
@@ -11,7 +12,7 @@ import { loadStarSource } from './source.ts';
 import { prepareStarHierarchy } from './hierarchy.ts';
 import { preparePointAtlas, preparePointPhotometry } from './material.ts';
 import { containedPath, sourceBytes } from '../volume/node/index.ts';
-import type { PreparedCssPointFieldManifest } from './types.ts';
+import type { PreparedCssPointFieldManifest } from '@cssearth/objects';
 import { prepareDiffuseSky } from './diffuse-sky.ts';
 import { encodePointFieldBank } from './point-field-bank.ts';
 import sharp from 'sharp';
@@ -45,14 +46,14 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
     stars:hierarchy.stars,nodes:hierarchy.nodes,photometry,atlas:recipe.atlas});
   // Packed for delivery (@cssearth/objects prepared-binary.ts); the manifest pins the unpacked bank's bytes.
   await writeFile(resolve(outputDirectory,encoded.bank.path),packPreparedBinary(encoded.bytes,pointFieldBankRegions(encoded.bytes,encoded.bank.path),encoded.bank.path));
-  const data: PreparedCssPointFieldManifest = { schema:'cssearth-css-point-field-bank@1',id,frame,bank:encoded.bank,
+  const data: PreparedCssPointFieldManifest = { schema:PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA,id,frame,bank:encoded.bank,
     atlas:{path:atlasPath,columns:colors.length,tileSize:recipe.atlas.tileSize,colors,haloRadii:recipe.atlas.haloRadii},
     photometry,policy:recipe.policy,labels:recipe.labels,
     ...(recipe.diffuseSky ? {diffuseSky:diffuse.diffuseSky} : {}),
     resources:[{path:atlasPath,bytes:atlas.length,width:colors.length*recipe.atlas.tileSize,height:recipe.atlas.tileSize},...diffuse.resources], };
   // The baked provenance is published beside the manifest, not inside it: the page never reads it.
   const provenance = {source:source.provenance,catalogueMetadata:source.catalogueMetadata,reconciliation:source.reconciliation,qualification:'All catalogue rows retained; explicitly cross-identified detailed stars use body astrometry at the navigation epoch, with HYG apparent brightness preserved. Remaining rows retain HYG J2000.0 positions. Internal nodes approximate unresolved luminosity and position; no fixed pixel-error guarantee when the point pool is saturated.'};
-  const envelope = {schema:'cssearth-prepared-object@1',id,type:'point-field',format:'cssearth-css-point-field-bank@1',data};
+  const envelope = {schema:'cssearth-prepared-object@1',id,type:'point-field',format:PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA,data};
   const bytes = Buffer.from(JSON.stringify(envelope)+'\n'), outputPath = resolve(outputDirectory,'stars.json');
   await writeFile(outputPath,bytes);
   await writeFile(resolve(outputDirectory,'stars-provenance.json'),JSON.stringify({schema:'cssearth-point-field-provenance@1',id,provenance})+'\n');

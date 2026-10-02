@@ -1,9 +1,10 @@
+import { PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA } from '@cssearth/objects';
 import { parseDensityVolumeFrame, parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
 import { readPreparedBinary } from '../prepared-data/prepared-binary.js';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
-import type { PreparedCssPointField, PreparedPointAppearance } from './types.js';
-import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from './validation.js';
+import type { PreparedCssPointField, PreparedPointAppearance } from '@cssearth/objects';
+import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/objects';
 
 /** Loads one prepared point-field manifest and the binary column bank it names. Image
  * resources stay in the prepared asset bank. */
@@ -41,7 +42,7 @@ async function loadManifest(input: unknown, transport: PreparedCssTransport) {
 
 function parsePointFieldDescriptor(input: unknown): { readonly descriptor: ObjectDescriptor; readonly frame: PreparedCssPointField['frame'] } {
   const descriptor = parseObjectDescriptor(input);
-  if (descriptor.type !== 'point-field' || descriptor.prepared?.format !== 'cssearth-css-point-field-bank@1') {
+  if (descriptor.type !== 'point-field' || descriptor.prepared?.format !== PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA) {
     throw new TypeError('A point field requires its prepared artifact.');
   }
   const properties = descriptor.properties as Record<string, unknown>;
