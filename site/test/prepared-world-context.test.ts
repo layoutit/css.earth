@@ -375,6 +375,28 @@ test('semantic changes invalidate worker snapshots without synchronously republi
   layer.destroy();
 });
 
+test('a flight frame that attaches markers waits for the flight to republish; a still view asks at once', () => {
+  const first = { referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
+  const context = (request: () => boolean) => {
+    const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+    host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+    return mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite }, requestPublication: request });
+  };
+  const still = mock.fn(() => true), resting = context(still);
+  resting.publish(first, viewport);
+  assert.equal(still.mock.calls.length, 1);
+  resting.destroy();
+  const request = mock.fn(() => true), flying = context(request);
+  flying.setNavigationInFlight(true);
+  const started = request.mock.calls.length;
+  flying.publish(first, viewport);
+  assert.equal(request.mock.calls.length, started);
+  flying.setNavigationInFlight(false);
+  assert.equal(request.mock.calls.length, started + 1);
+  flying.destroy();
+});
+
 test('inactive annotations retain emphasis until their reveal publication', () => {
   const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
   const nodes = all(root), groups = ['sun', 'mercury', 'venus'].map(id => find(root, 'contextGroup', id));
