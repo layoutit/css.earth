@@ -1,11 +1,8 @@
-import { PREPARED_CSS_SKY_SCHEMA } from '@cssearth/objects';
+import { PREPARED_CSS_SKY_SCHEMA, type DensityVolumeFrame, type PreparedCssSky, validatePreparedCssSky } from '@cssearth/objects';
 /** Static PolyCSS cube geometry in physical ICRF axes; the renderer owns its one axis reflection. */
 import { compileVolumeLeaf } from '../volume-leaves/index.ts';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
-import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { BakedSky } from './bake.ts';
-import type { PreparedCssSky } from '@cssearth/objects';
-import { validatePreparedCssSky } from '@cssearth/objects';
 const RADIUS_UNITS = 1, CSS_PIXELS_PER_UNIT = 50;
 function compileFaces(faces: BakedSky['faces']): PreparedCssSky['faces'] {
   return faces.map((face, index) => {

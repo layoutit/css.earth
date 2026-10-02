@@ -1,7 +1,6 @@
 import type {BodyId} from '@cssearth/astronomy';
-import type {PreparedCubicSkyPlan} from '@cssearth/objects';
+import { type PreparedCubicSkyPlan, parsePreparedWorldContext } from '@cssearth/objects';
 import {requireFiniteNumber} from '@cssearth/core';
-import { parsePreparedWorldContext } from '@cssearth/objects';
 interface SolarCameraOptions {bodyRadiusUnits:number;defaultZoom:number;skyProjection:{horizontalFovDegrees:number;focalLengthOverViewportWidth:number;cssPerspective:string};geometryScale?:number;initialScenePitchDegrees:number;defaultControlYawDegrees:number;
   /** The closest framing, in the default framing's units (4 unless the body says otherwise). A black hole stops at its
    * default framing: closer, its shadow fills the view and the ring around it leaves the frame. */
@@ -171,4 +170,3 @@ function prepareWorldFrame(solarGeometry: SolarGeometry, bodyId:string, frame:Re
     metersPerUnit: bodyRadiusKilometers * 1000 / bodyRadiusUnits,
     bodyRadiusM: bodyRadiusKilometers * 1000 });
 }
-

@@ -2,12 +2,11 @@ import { readFileSync } from 'node:fs';
 import { afterEach, beforeEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import type { PreparedCssSky } from '@cssearth/objects';
+import { type PreparedCssSky, type DensityVolumeFrame } from '@cssearth/objects';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 import type { PreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
-import type { DensityVolumeFrame } from '@cssearth/objects';
 import { stubGlobal, unstubAllGlobals, waitFor } from '@cssearth/objects/node/contract';
 
 // linkedom has no layout delivery; caption geometry has explicit observer tests.

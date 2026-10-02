@@ -1,11 +1,12 @@
-import { OBJECT_RUNTIME_SCHEMA, type CameraPlan } from '@cssearth/objects';
+import {
+  OBJECT_RUNTIME_SCHEMA, type CameraPlan, type PreparedCubicSkyPlan, type PreparedDirectionalSunPlan,
+  PREPARED_PRESENTATION_SCHEMA,
+} from '@cssearth/objects';
 
 import type { prepareTextureLevels, TextureLevelConfiguration } from './texture-levels.ts';
 import type { SurfaceBankDatasets } from './contracts.ts';
 import type { PreparedNode } from '../../../presentation/index.ts';
 import type { MaterialSourceTrack } from '../../../presentation/index.ts';
-import type { PreparedCubicSkyPlan } from '@cssearth/objects';
-import type { PreparedDirectionalSunPlan } from '@cssearth/objects';
 import type { ShellObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import type { preparePagedEllipsoidScene } from './globe/scene.ts';
 import type { preparePlaces } from './geographic/places.ts';
@@ -21,7 +22,6 @@ export interface PagedPresentationInput { config: PresentationConfiguration; pla
   catalog?: Awaited<ReturnType<typeof preparePlaces>>; }
 const materialIds = ['atmosphere'] as const;
 import { canonicalPreparedAsset, preparedResourcePool } from "@cssearth/renderer/rendering/prepared-object-assets.ts";
-import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 import { prepareCssomDeclarationReads, createPreparedNodeTree } from "../../../presentation/index.ts";
 import { seamOutsetBinding, seamOutsetInitialValue } from "../../../scene/index.ts";
 import { tiledTextureKeys } from "@cssearth/renderer/rendering/prepared-texture-levels.ts";

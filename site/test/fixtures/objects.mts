@@ -1,11 +1,9 @@
-import { parsePreparedObjectRuntime } from '@cssearth/objects';
+import { type PreparedCubicSkyPlan, type PreparedDirectionalSunPlan, parsePreparedObjectRuntime, validatePreparedCubicSky, validateDirectionalSunPlan } from '@cssearth/objects';
 
 import {parseSaturnScene,parseSaturnViews,parseSaturnDatasets,parseSaturnLayouts} from './saturn-prepared.mts';
 import {parseTitle,parsePanel,parseContent} from './prepared-schemas.mts';
 
 import {requireObjectRuntimeDefinition} from '@cssearth/bake/contract';
-import {validatePreparedCubicSky} from '@cssearth/objects';
-import {validateDirectionalSunPlan} from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -20,8 +18,8 @@ export async function readPreparedFixture(id:string,artifact:'title'):Promise<Re
 export async function readPreparedFixture(id:string,artifact:'panel'):Promise<ReturnType<typeof parsePanel>>;
 export async function readPreparedFixture(id:string,artifact:'content'):Promise<ReturnType<typeof parseContent>>;
 export async function readPreparedFixture(id:string,artifact:'runtime'):Promise<ReturnType<typeof checkedRuntime>>;
-export async function readPreparedFixture(id:string,artifact:'sky'):Promise<ReturnType<typeof validatePreparedCubicSky>>;
-export async function readPreparedFixture(id:string,artifact:'sun'):Promise<ReturnType<typeof validateDirectionalSunPlan>>;
+export async function readPreparedFixture(id:string,artifact:'sky'):Promise<PreparedCubicSkyPlan>;
+export async function readPreparedFixture(id:string,artifact:'sun'):Promise<PreparedDirectionalSunPlan>;
 export async function readPreparedFixture(id:string,artifact:string):Promise<unknown>;
 export async function readPreparedFixture(id: string, artifact: string): Promise<unknown> {
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !/^[a-z][a-z0-9-]*$/.test(artifact)) throw new TypeError('Unsafe prepared fixture address.');

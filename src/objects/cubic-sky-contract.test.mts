@@ -1,4 +1,4 @@
-import { PREPARED_CUBIC_SKY_SCHEMA } from '@cssearth/objects';
+import { PREPARED_CUBIC_SKY_SCHEMA, validatePreparedCubicSky } from '@cssearth/objects';
 import { requireRecord, requireFiniteNumber } from '@cssearth/core';
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
@@ -7,8 +7,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import PREPARED_MERCURY_SKY from "./mercury/prepared/sky.json" with {type: "json"};
 import PREPARED_VENUS_SKY from "./venus/prepared/sky.json" with {type: "json"};
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, CUBIC_SKY_STANDARD} from '@cssearth/bake/presentation';
-import { validatePreparedCubicSky } from '@cssearth/objects';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, CUBIC_SKY_STANDARD } from '@cssearth/bake/presentation';
 
 const runtimeSky = async (id: string) => requireRecord(await loadObjectTestDefinition(id)).sky;
 const OBJECT_SKIES = Object.freeze({

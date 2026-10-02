@@ -3,12 +3,11 @@ import { PREPARED_CUBIC_SKY_SCHEMA, CUBIC_SKY_STANDARD_SCHEMA, PREPARED_DIRECTIO
 import type { CubicSkyPlan, DirectionalSunPlan, PreparedCubicSkyPlan, PreparedDirectionalSunPlan } from './runtime-camera-types.js';
 import { fail as runtimeFail } from './runtime-validation/guards.js';
 
-// Writers and readers share the stricter camera checks. The authored envelope
-// keeps its historical acceptance and diagnostic policy explicitly.
-export function validatePreparedCubicSky(value: unknown, options: { runtime: true }): CubicSkyPlan;
-export function validatePreparedCubicSky(value: unknown, options: { preparation: true }): PreparedCubicSkyPlan;
-export function validatePreparedCubicSky(value: unknown): PreparedCubicSkyPlan;
-export function validatePreparedCubicSky(value: unknown, { runtime = false, preparation = false }: { runtime?: boolean; preparation?: boolean } = {}): CubicSkyPlan {
+// Authored validation is the historical bake boundary; runtime opts into stricter camera checks.
+export function validatePreparedCubicSky<Policy extends 'authored' | 'runtime' = 'authored'>(
+  value: unknown, policy: Policy = 'authored' as Policy,
+): Policy extends 'runtime' ? CubicSkyPlan : PreparedCubicSkyPlan {
+  const runtime = policy === 'runtime';
   const fail: Fail = runtime ? runtimeFail : () => { throw new TypeError('Prepared retained cubic sky is incompatible.'); };
   const { record: plainRecord, finite, positive, text, numbers } = checks(fail);
   const record = runtime ? plainRecord : (input: unknown, label: string): Record<string, unknown> => {
@@ -20,16 +19,16 @@ export function validatePreparedCubicSky(value: unknown, { runtime = false, prep
       sky.runtimeRasterization !== false || sky.orientation !== 'camera-rotation-only-no-translation-or-parallax') fail('retained cubic sky is incompatible');
   if (!runtime) { text(sky.model, 'sky model'); text(sky.qualification, 'sky qualification'); }
   for (const name of ['cameraPitchResponse', 'cameraZoomResponse', 'presentationPitchOffsetDegrees', 'presentationYawOffsetDegrees']) finite(sky[name], `sky ${name}`);
-  if (!preparation && (sky.sceneRegistration !== undefined || sky.cameraContract === 'scene-locked-unbounded-accumulated-matrix3d')) {
+  if (runtime && (sky.sceneRegistration !== undefined || sky.cameraContract === 'scene-locked-unbounded-accumulated-matrix3d')) {
     const match = text(sky.sceneRegistration, 'scene registration').match(/^matrix3d\(([^)]+)\)$/u);
     if (!match) fail('scene registration requires matrix3d');
     const matrix = numbers(match[1].split(',').map(Number), 'scene registration', 16);
     if (matrix[12] !== 0 || matrix[13] !== 0 || matrix[14] !== 0) fail('scene registration must be a rotation without translation');
-  } else if (preparation && sky.sceneRegistration !== undefined && typeof sky.sceneRegistration !== 'string') fail('scene registration must be a string');
+  } else if (!runtime && sky.sceneRegistration !== undefined && typeof sky.sceneRegistration !== 'string') fail('scene registration must be a string');
   if (sky.cameraContract !== undefined && typeof sky.cameraContract !== 'string') {
     const contract = record(sky.cameraContract, 'sky camera contract');
     for (const name of ['source', 'sourcePath', 'qualification']) {
-      if (!preparation) text(contract[name], `sky camera ${name}`);
+      if (runtime) text(contract[name], `sky camera ${name}`);
       else if (typeof contract[name] !== 'string') fail(`sky camera ${name} must be a string`);
     }
     for (const name of ['rotationResponse', 'zoomResponse', 'horizontalFovDegrees', 'focalLengthOverViewportWidth']) finite(contract[name], `sky camera ${name}`);
@@ -37,7 +36,7 @@ export function validatePreparedCubicSky(value: unknown, { runtime = false, prep
   if (sky.projection !== undefined) {
     const projection = record(sky.projection, 'sky projection');
     if (projection.axis !== 'horizontal' || projection.runtimeProjection !== false) fail('sky projection is incompatible');
-    if (!preparation) {
+    if (runtime) {
       if (positive(projection.horizontalFovDegrees, 'sky field of view') >= 180) fail('sky field of view must be below 180 degrees');
       positive(projection.focalLengthOverViewportWidth, 'sky focal length');
     } else {
@@ -45,12 +44,13 @@ export function validatePreparedCubicSky(value: unknown, { runtime = false, prep
     }
     text(projection.cssPerspective, 'sky CSS perspective');
   }
-  return value as CubicSkyPlan;
+  return value as Policy extends 'runtime' ? CubicSkyPlan : PreparedCubicSkyPlan;
 }
 
-export function validateDirectionalSunPlan(value: unknown, options: { runtime: true }): DirectionalSunPlan;
-export function validateDirectionalSunPlan(value: unknown): PreparedDirectionalSunPlan;
-export function validateDirectionalSunPlan(value: unknown, { runtime = false }: { runtime?: boolean } = {}): DirectionalSunPlan {
+export function validateDirectionalSunPlan<Policy extends 'authored' | 'runtime' = 'authored'>(
+  value: unknown, policy: Policy = 'authored' as Policy,
+): Policy extends 'runtime' ? DirectionalSunPlan : PreparedDirectionalSunPlan {
+  const runtime = policy === 'runtime';
   const fail: Fail = runtime ? runtimeFail : () => { throw new TypeError('Prepared directional Sun is incompatible.'); };
   const { record: plainRecord, numbers } = checks(fail);
   const record = runtime ? plainRecord : (input: unknown, label: string): Record<string, unknown> => {
@@ -61,12 +61,12 @@ export function validateDirectionalSunPlan(value: unknown, { runtime = false }: 
   if (sun.schema !== PREPARED_DIRECTIONAL_SUN_SCHEMA) fail('directional Sun is incompatible');
   for (const [field, label] of [['localDirection', 'Sun local direction'], ['referenceViewDirection', 'Sun reference direction']]) {
     const direction = numbers(sun[field], label, 3), error = Math.abs(Math.hypot(...direction) - 1);
-    if (runtime ? error > 1e-9 : error >= 1e-9) fail(`${label} must be a unit direction`);
+    if (runtime ? error > 1e-9 : !(error < 1e-9)) fail(`${label} must be a unit direction`);
   }
   if (!runtime) {
     if (typeof sun.model !== 'string') fail('Sun model must be a string');
     const provenance = record(sun.provenance, 'Sun provenance');
     for (const field of ['source', 'sourcePath', 'qualification']) if (typeof provenance[field] !== 'string') fail(`Sun ${field} must be a string`);
   }
-  return value as DirectionalSunPlan;
+  return value as Policy extends 'runtime' ? DirectionalSunPlan : PreparedDirectionalSunPlan;
 }
