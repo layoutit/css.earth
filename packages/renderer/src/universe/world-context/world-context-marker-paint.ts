@@ -24,7 +24,9 @@ interface MarkerFrame {
 
 // Every marker's constant geometry is a world-context.css rule (.context-mover, [data-context-body], its sprite `> i`):
 // only what a body or a frame changes is written inline. A bare mover carries the per-frame transform, opacity and paint
-// order, and starts hidden: a publication clears its visibility to show it. The marker, with its ring pseudo-element,
+// order, and starts hidden: a publication clears its visibility to show it, and its marker inherits that. A marker's
+// state attributes exist only while they differ from the resting state (animating, cued, named, selected, body hidden).
+// The marker, with its ring pseudo-element,
 // caption and attribute rules, keeps a stable style, so motion restyles one plain leaf instead of three nodes. The
 // sprite scales alone: scaling the marker made its ring and caption counter-scale through an inherited custom property,
 // which re-resolved the marker and both annotations for every moving body on every frame.
@@ -44,9 +46,6 @@ export function createWorldContextMarkerFactory(document: Document) {
     mover.className = 'context-mover';
     mover.style.visibility = 'hidden';
     const marker = document.createElement('s');
-    marker.dataset.contextIndicatorVisible = 'false';
-    marker.dataset.contextLabelVisible = 'false';
-    marker.dataset.contextAnnotationsAnimate = 'false';
     if (plainDot) marker.dataset.contextPlainDot = '';
     const spriteLeaf = document.createElement('i');
     const caption = document.createElement('u');
@@ -74,8 +73,11 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
   let markerTransform = '', spriteTransform = '', labelOffset = '';
   // The marker's state attributes as last written: a frame compares with these, not the dataset, whose read is a DOM call
   // per marker per frame (the hottest line of a zoom out from the Sun through the stars, 2026-09-30). Only this painter
-  // writes them; the template starts them at 'false', and selection starts unset.
-  let animateState = 'false', indicatorState = 'false', labelState = 'false', selectedState: string | undefined;
+  // writes them; the template starts without them.
+  let animateState = false, indicatorState = false, labelState = false, selectedState: boolean | undefined;
+  const flag = (key: 'contextAnnotationsAnimate' | 'contextIndicatorHovered' | 'contextIndicatorVisible' | 'contextLabelVisible' | 'contextSelected', on: boolean) => {
+    if (on) marker.dataset[key] = 'true'; else delete marker.dataset[key];
+  };
   return {
     get billboardShown() { return billboardShown; },
     get markerShown() { return markerShown; },
@@ -87,16 +89,17 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
       const { projected, plannedShown, zIndex, selected, hovered, animated, coast, policyChanged, emphasis } = frame;
       const { x, y, markerOpacity } = projected;
       const wasShown = billboardShown === true, hoverChanged = indicatorHovered !== hovered;
-      const animationState = String(animated);
-      if (animateState !== animationState) { marker.dataset.contextAnnotationsAnimate = animationState; animateState = animationState; }
+      if (animateState !== animated) { flag('contextAnnotationsAnimate', animated); animateState = animated; }
       fader.visible(mover, frame.billboardShown);
       // The hidden mover must not keep a compositor layer.
       if (billboardShown !== frame.billboardShown) {
-        marker.style.visibility = mover.style.visibility = frame.billboardShown ? '' : 'hidden';
+        mover.style.visibility = frame.billboardShown ? '' : 'hidden';
         mover.style.willChange = frame.billboardShown ? 'transform' : '';
       }
       billboardShown = frame.billboardShown;
-      if (markerShown !== frame.markerShown) marker.dataset.contextBodyVisible = String(frame.markerShown);
+      if (markerShown !== frame.markerShown) {
+        if (frame.markerShown) delete marker.dataset.contextBodyVisible; else marker.dataset.contextBodyVisible = 'false';
+      }
       markerShown = frame.markerShown; markerDiameter = frame.markerDiameter;
       if (!frame.billboardShown) return;
 
@@ -111,8 +114,7 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
         }
       }
       if (!coast && mover.style.zIndex !== zIndex) mover.style.zIndex = zIndex;
-      const selection = String(selected);
-      if (selectedState !== selection) {
+      if (selectedState !== selected) {
         if (selected && body.contextColor) {
           const holder = locator.parentElement as HTMLElement | null;
           if (holder && holder !== marker) delete holder.dataset.contextLocator;
@@ -122,11 +124,11 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
           locator.remove();
           delete marker.dataset.contextLocator;
         }
-        marker.dataset.contextSelected = selection; selectedState = selection;
+        flag('contextSelected', selected); selectedState = selected;
       }
       if (!coast && indicatorHovered !== hovered) {
         indicatorHovered = hovered;
-        marker.dataset.contextIndicatorHovered = String(hovered);
+        flag('contextIndicatorHovered', hovered);
       }
       // Opacity lives on the mover so its marker pseudos do not restyle on camera motion.
       if (policyChanged || !wasShown || hoverChanged) fader.multiply(mover, emphasis, animated ? 120 : 0);
@@ -140,14 +142,14 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
       center = [x, y];
     },
     /** Ends the marker's hover animation (prepared-world-context.ts settleHover). */
-    stopAnimating() { if (animateState !== 'false') { marker.dataset.contextAnnotationsAnimate = 'false'; animateState = 'false'; } },
+    stopAnimating() { if (animateState) { flag('contextAnnotationsAnimate', false); animateState = false; } },
     publishIndicator(visible: boolean, suppressedByFlight: boolean, coast: boolean) {
-      const state = String(visible && !suppressedByFlight);
-      if (!coast && indicatorState !== state) { marker.dataset.contextIndicatorVisible = state; indicatorState = state; }
+      const state = visible && !suppressedByFlight;
+      if (!coast && indicatorState !== state) { flag('contextIndicatorVisible', state); indicatorState = state; }
     },
     publishLabel(projected: ProjectedBody, visible: boolean, suppressedByFlight: boolean) {
-      const state = String(visible && !suppressedByFlight);
-      if (labelState !== state) { marker.dataset.contextLabelVisible = state; labelState = state; }
+      const state = visible && !suppressedByFlight;
+      if (labelState !== state) { flag('contextLabelVisible', state); labelState = state; }
       if (!visible || !projected.labelPosition) return;
       const [x, y] = projected.labelPosition;
       const offset = `translate(${Math.round((x - projected.x) * 1e6) / 1e6}px,${Math.round((y - projected.y) * 1e6) / 1e6}px)`;

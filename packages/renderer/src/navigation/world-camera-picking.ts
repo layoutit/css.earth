@@ -41,9 +41,9 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     if (target === hovered) return;
     if (hovered) delete hovered.dataset.objectHovered;
     if (hoveredGroup) delete hoveredGroup.dataset.objectHovered;
-    hoveredGroup = target?.closest<HTMLElement>('[data-context-group]') ??
+    hoveredGroup = target?.closest<HTMLElement>('[data-context-body]') ??
       (target?.dataset.objectNavigate
-        ? host.querySelector<HTMLElement>(`[data-context-group="${target.dataset.objectNavigate}"]`) : null);
+        ? host.querySelector<HTMLElement>(`[data-context-body="${target.dataset.objectNavigate}"]`) : null);
     if (hoveredGroup) hoveredGroup.dataset.objectHovered = 'true';
     if (target) {
       target.dataset.objectHovered = 'true';

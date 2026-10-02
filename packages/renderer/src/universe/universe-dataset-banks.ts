@@ -10,6 +10,7 @@ import { mountDatasetBillboards } from './dataset-billboards.js';
 import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
 import type { DatasetBankBillboard, DatasetBillboards } from './dataset-billboards.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
+import { setReadout, readout } from '../rendering/readouts.js';
 
 type DatasetMount = ReturnType<ReturnType<typeof createPreparedVolumeDatasets>['mount']>;
 interface DatasetBank {
@@ -80,17 +81,17 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     const visible = resident.filter(bank => bank.visible);
     const pinned = resident.filter(bank => !bank.visible && bank.subscribers > 0);
     const warm = resident.filter(bank => !bank.visible && bank.subscribers === 0);
-    root.dataset.volumeDatasetDeclaredBankCount = String(banks.length);
-    root.dataset.volumeDatasetResidentBankCount = String(resident.length);
-    root.dataset.volumeDatasetVisibleBankCount = String(visible.length);
-    root.dataset.volumeDatasetPinnedBankCount = String(pinned.length);
-    root.dataset.volumeDatasetWarmBankCount = String(warm.length);
-    root.dataset.volumeDatasetPinnedDomNodes = String(pinned.reduce((nodes, bank) => nodes + bank.residentNodes, 0));
-    root.dataset.volumeDatasetWarmDomNodes = String(warm.reduce((nodes, bank) => nodes + bank.residentNodes, 0));
-    root.dataset.volumeDatasetWarmDomNodeBudget = String(warmDomNodeBudget);
+    setReadout(root, 'volumeDatasetDeclaredBankCount', String(banks.length));
+    setReadout(root, 'volumeDatasetResidentBankCount', String(resident.length));
+    setReadout(root, 'volumeDatasetVisibleBankCount', String(visible.length));
+    setReadout(root, 'volumeDatasetPinnedBankCount', String(pinned.length));
+    setReadout(root, 'volumeDatasetWarmBankCount', String(warm.length));
+    setReadout(root, 'volumeDatasetPinnedDomNodes', String(pinned.reduce((nodes, bank) => nodes + bank.residentNodes, 0)));
+    setReadout(root, 'volumeDatasetWarmDomNodes', String(warm.reduce((nodes, bank) => nodes + bank.residentNodes, 0)));
+    setReadout(root, 'volumeDatasetWarmDomNodeBudget', String(warmDomNodeBudget));
   }
   function updateWeight(bank: DatasetBank) {
-    bank.residentNodes = bank.mounted ? Number(bank.mounted.root.dataset.volumeResidentDomNodes) || 1 : 0;
+    bank.residentNodes = bank.mounted ? Number(readout(bank.mounted.root, 'volumeResidentDomNodes')) || 1 : 0;
   }
   function evict(bank: DatasetBank) {
     if (!bank.mounted || bank.visible || bank.subscribers > 0) return false;

@@ -4,6 +4,7 @@ import { nativeProjectedLength, nativeProjectedFade, nativeProjectedMix } from '
 import { validatePreparedCssVolume } from './validation.js';
 import { revealLayer } from '../rendering/layer-reveal.js';
 import { LARGE_IMAGE_PIXELS, mountPreparedCssVolume } from './prepared-volume-runtime.js';
+import { setReadout } from '../rendering/readouts.js';
 
 const AXES = ['x', 'y', 'z'] as const;
 
@@ -114,9 +115,9 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
   if (!options.lazyDetail) detail();
   const views = new Map(bank.views.map(view => {
     const node = create('s');
-    node.dataset.volumeImpostor = view.id;
-    Object.assign(node.style, { position: 'absolute', left: '50%', top: '50%', display: 'none',
-      pointerEvents: 'none', transformOrigin: '50% 50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%' });
+    setReadout(node, 'volumeImpostor', view.id);
+    // A view's fixed placement is a volume.css rule; its display is inline.
+    node.style.display = 'none';
     distant.append(node);
     return [view.id, node] as const;
   }));
@@ -128,8 +129,8 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     const { visible, volumeMix, diameterPixels, x, y } = projection;
     // Test hooks: rounded and written only on change, so a steady frame writes no attributes.
     const mixHook = String(Math.round(volumeMix * 1000) / 1000), diameterHook = String(Math.round(diameterPixels * 10) / 10);
-    if (options.host.dataset.volumeDetailMix !== mixHook) options.host.dataset.volumeDetailMix = mixHook;
-    if (options.host.dataset.volumeDiameterPixels !== diameterHook) options.host.dataset.volumeDiameterPixels = diameterHook;
+    setReadout(options.host, 'volumeDetailMix', mixHook);
+    setReadout(options.host, 'volumeDiameterPixels', diameterHook);
     const responsive = options.nativeFocalCss !== undefined && Number.isFinite(diameterPixels);
     // A presentation faded to zero still rasterises every node it keeps displayed: on an iPhone the full slice
     // volume cost hundreds of milliseconds a frame while its CSS opacity was 0. An impostor-sized cloud now leaves
@@ -170,7 +171,7 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
       node.style.transform = `translate(${length(x - diameterPixels / 2)},${length(y - diameterPixels / 2)}) matrix(${view.matrix.join(',')},0,0)`;
     }
     active = next;
-    if (distant.dataset.activeViews !== String(next.length)) distant.dataset.activeViews = String(next.length);
+    setReadout(distant, 'activeViews', String(next.length));
   };
   return Object.freeze({ roots, publish, setDetail(allowed: boolean) { detailAllowed = allowed; }, setPresentation(payload: PreparedVolumeMountOptions['payload']) {
     const next = validatePreparedCssVolume(payload);

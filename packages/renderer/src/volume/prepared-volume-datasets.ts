@@ -14,6 +14,7 @@ import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { mountPreparedCataloguePoints, samePreparedCatalogueGeometry, samePreparedPhysicalFrame,
   validatePreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
 import type { PreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
+import { setReadout } from '../rendering/readouts.js';
 
 export interface PreparedVolumeDatasetBrightness { readonly overall: number; readonly x: number; readonly y: number; readonly z: number }
 export interface PreparedVolumeDataset {
@@ -207,10 +208,10 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
       const countDescendants = (node: Element): number => [...node.children]
         .reduce((count, child) => count + 1 + countDescendants(child), 0);
       const updateResidencyMetadata = () => {
-        root.dataset.volumeDatasetCount = String(data.datasets.length);
-        root.dataset.volumeTopologyCount = String(topologyFamilies.length);
-        root.dataset.volumeResidentTopologyCount = String(families.length);
-        root.dataset.volumeResidentDomNodes = String(1 + countDescendants(root) + (frontRoot ? 1 + countDescendants(frontRoot) : 0));
+        setReadout(root, 'volumeDatasetCount', String(data.datasets.length));
+        setReadout(root, 'volumeTopologyCount', String(topologyFamilies.length));
+        setReadout(root, 'volumeResidentTopologyCount', String(families.length));
+        setReadout(root, 'volumeResidentDomNodes', String(1 + countDescendants(root) + (frontRoot ? 1 + countDescendants(frontRoot) : 0)));
       };
       const ensureFamily = (dataset: PreparedVolumeDataset) => {
         const datasets = topologyFamilies.find(candidate => candidate.includes(dataset))!;
@@ -279,8 +280,8 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
         }
         // Test hooks: rounded and written only on change, so a steady frame writes no attributes.
         const pointHook = String(Math.round(pointOpacity * 1000) / 1000), cloudHook = String(Math.round(opacity * 1000) / 1000);
-        if (root.dataset.pointOpacity !== pointHook) root.dataset.pointOpacity = pointHook;
-        if (root.dataset.cloudOpacity !== cloudHook) root.dataset.cloudOpacity = cloudHook;
+        setReadout(root, 'pointOpacity', pointHook);
+        setReadout(root, 'cloudOpacity', cloudHook);
       };
       try {
         const selectedDataset = datasetById.get(selected)!;

@@ -32,10 +32,12 @@ export function mountPointPaths(host: HTMLElement, palette: readonly string[], i
   const svg = into ?? mountPointPathSvg(host);
   const part = document.createElementNS(SVG_NS, 'g'), group = document.createElementNS(SVG_NS, 'g');
   part.append(group); svg.append(part);
+  // What every dot path shares is said once, on their group: a path carries only its colour, width and dots.
+  group.setAttribute('fill', 'none'); group.setAttribute('stroke-linecap', 'round');
   const paths = new Map([...new Set(palette)].map(color => {
     const path = document.createElementNS(SVG_NS, 'path');
     // A paint is `#rrggbbaa@radius` (batched-spatial-points.ts pointPaint): the path strokes its colour.
-    path.setAttribute('fill', 'none'); path.setAttribute('stroke', color.split('@')[0]!); path.setAttribute('stroke-linecap', 'round'); group.append(path);
+    path.setAttribute('stroke', color.split('@')[0]!); group.append(path);
     const entry = { path, text: '', published: '', width: 0 };
     return [color, entry] as const;
   }));
