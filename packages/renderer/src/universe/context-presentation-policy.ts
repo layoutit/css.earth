@@ -11,40 +11,45 @@ const UNHIGHLIGHTED_OPACITY = .3;
 /** Other stars' bodies seen from inside the focus star's system, in steps so a dolly rewrites few opacities. */
 const OTHER_SYSTEM_OPACITY = .3, OTHER_SYSTEM_STEPS = 16;
 
-/** A star orbits nothing. A planet orbits a system's star, directly or about a barycentre: a planet, a dwarf planet, an
- * asteroid, a comet or a companion star. A satellite orbits a body that itself orbits. */
-export type BodyRole = 'star' | 'planet' | 'satellite';
-
-/** What the reader is looking at. `body`: one object's page, or the destination of a flight. `system`: a host with its
- * moons (the moons view). `none`: an overview of a star's system, or wider. */
+/** What the reader is looking at, resolved once per frame. Every rule about what belongs to the selection reads it. */
 export interface ContextSubject {
+  /** How paths are framed. `body`: one object's page, or a flight to one. `system`: a host with its moons (the moons
+   * view). `none`: an overview. */
   readonly kind: 'none' | 'system' | 'body';
-  /** The subject body; null in an overview. */
+  /** The emphasised body: the flight's destination, else the selected body; null in an overview and on a flight to one. */
   readonly id: string | null;
-  /** The host of the focused body's family: that body, or the one it circles when it is a satellite. An overview keeps the
-   * family of the body it was opened from, so a framed planet's moons stay named. */
+  /** The body whose detail is drawn or flown to: the previewed body, else the selected one. */
+  readonly focusId: string;
+  /** The host of the focused body's family: that body, or the one it circles when that is not a system's star. */
   readonly hostId: string;
-  /** The subject is its family's host, not one of the host's satellites. */
-  readonly hostIsSubject: boolean;
-  /** The family's host is a star. */
+  /** The family's host is a system's star. */
   readonly hostIsStar: boolean;
+  /** The hosts whose satellites are planned and named: the focused body's and, through a flight, the selected body's. */
+  readonly families: ReadonlySet<string>;
+  /** A selected body's own page, with no flight: a host's page fades its moons' paths with the host. */
+  readonly page: boolean;
+  /** A moons view is selected: the dimming outside the family holds at every range, the host's own path included. */
+  readonly held: boolean;
+  /** Beside the page of a body that is not a system's star, that star's minor bodies are not named. */
+  readonly quietMinors: boolean;
 }
 
-/** A body against the subject: the subject itself, a member of its family (it circles the family's host), or outside. */
-export type SubjectRelation = 'subject' | 'family' | 'outside';
+interface SubjectBody { readonly id: string; readonly centreId: string | undefined }
 
-interface FocusBody { readonly id: string; readonly role: BodyRole; readonly hostId: string | undefined }
-
-/** The one subject of a frame. `focus` is the body whose detail is drawn or flown to: the previewed body, else the selected
- * one. A flight previews its destination: a body, or an overview (`preview` null). */
-export function contextSubject(focus: FocusBody, overview: boolean, overviewSelection: boolean, preview: string | null | undefined): ContextSubject {
-  const kind = preview === null ? 'none' : preview !== undefined || !overview ? 'body' : overviewSelection ? 'system' : 'none';
-  const hostId = focus.role === 'satellite' && focus.hostId !== undefined ? focus.hostId : focus.id;
-  return { kind, id: kind === 'none' ? null : focus.id, hostId, hostIsSubject: hostId === focus.id, hostIsStar: hostId === focus.id && focus.role === 'star' };
+/** The one subject of a frame. A flight previews its destination: a body, or an overview (`preview` null). */
+export function contextSubject(selected: SubjectBody, previewed: SubjectBody | undefined, preview: string | null | undefined,
+  overview: boolean, overviewSelection: boolean, isSystemStar: (id: string) => boolean): ContextSubject {
+  const focus = previewed ?? selected, kind = previewed || !overview ? 'body' : overviewSelection ? 'system' : 'none';
+  const id = preview === undefined ? (overview && !overviewSelection ? null : selected.id) : preview;
+  const hostOf = (body: SubjectBody) => body.centreId !== undefined && !isSystemStar(body.centreId) ? body.centreId : body.id;
+  const hostId = hostOf(focus), families = new Set([hostOf(selected), ...(id === null ? [] : [hostId])]);
+  return { kind, id, focusId: focus.id, hostId, hostIsStar: isSystemStar(hostId), families, page: !overview && preview == null,
+    held: overview && overviewSelection, quietMinors: !overview && !isSystemStar(selected.id) };
 }
 
-export function subjectRelation(subject: ContextSubject, id: string, hostId: string | undefined): SubjectRelation {
-  return id === subject.id ? 'subject' : hostId === subject.hostId ? 'family' : 'outside';
+/** A body is in the subject's family when it circles the family's host. */
+export function inSubjectFamily(subject: ContextSubject, centreId: string | undefined): boolean {
+  return centreId === subject.hostId;
 }
 
 /** At close range retain the nearby orbit, then soften its distant continuation.
@@ -63,8 +68,8 @@ export function closeOrbitFades(fade: OrbitLineFade, discHeightShare: number) {
 
 /** An orbit belongs to the family it circles, not the body travelling on it, so a path outside the subject's family is
  * dim context: the other planets', and the host's own path about its star when the subject is not the host itself.
- * `host` is the family's host, absent in an overview or when it is a star. On a body's page the dimming relaxes from half
- * to twice the host's distance from its star, where the subject is the parent system again; a moons view keeps it.
+ * `host` is the family's host, absent without an emphasised body or when it is a star. The dimming relaxes from half to
+ * twice the host's distance from its star, where the subject is the parent system again; a moons view holds it.
  * 1/64 steps avoid rewriting opacity for tiny camera changes. */
 export function outsideFamilyOrbitOpacity<Host extends { readonly positionM: readonly number[]; readonly orbit?: { readonly centerPositionM: readonly number[] } | null }>(
   host: Host | undefined, cameraDistanceM: (host: Host) => number, held: boolean): number {
@@ -74,21 +79,20 @@ export function outsideFamilyOrbitOpacity<Host extends { readonly positionM: rea
   return 1 - (1 - OUTSIDE_FAMILY_OPACITY) * Math.round((1 - t * t * (3 - 2 * t)) * 64) / 64;
 }
 
-/** The opacity of one path, before its size on screen and its system's fade. `flagged`: hovered or highlighted.
- * The subject's own path fades with its growth. A host's page is its close detail, not its satellite system, so its
- * moons' paths fade with it too; a moon's page and a moons view keep the family's paths. Everything else is context. */
-export function pathOpacity(subject: ContextSubject, relation: SubjectRelation, flagged: boolean,
+/** The opacity of one path, before its size on screen and its system's fade. `emphasised`: the subject's own body.
+ * `flagged`: hovered or highlighted. `fadesWithFocus`: the focused body's own path on its page or flight, and a moon's
+ * path on its host's page; such a path fades out with the body's growth. Everything else softens as context, and a path
+ * outside the family also dims. */
+export function pathOpacity(subject: ContextSubject, inFamily: boolean, emphasised: boolean, fadesWithFocus: boolean, flagged: boolean,
   fades: { readonly context: number; readonly own: number }, outsideFamily: number): number {
-  if (subject.kind === 'none') return fades.context;
-  if (relation === 'subject' && subject.kind === 'body') return fades.own;
-  if (relation === 'family') return subject.kind === 'body' && subject.hostIsSubject && !subject.hostIsStar && !flagged ? fades.own : fades.context;
-  return flagged ? fades.context : fades.context * fades.own * outsideFamily;
+  const close = fadesWithFocus ? fades.own : subject.kind === 'body' && !inFamily && !emphasised && !flagged ? fades.context * fades.own : fades.context;
+  return !inFamily && !flagged && (subject.held || !emphasised) ? close * outsideFamily : close;
 }
 
-/** A moon outside the subject's family is not named, and beside a planet's or a moon's page neither are the minor bodies
- * of its star. A target, a resolved disc and an orientation reference are named whatever this says. */
-export function namedBesideSubject(subject: ContextSubject, relation: SubjectRelation, role: BodyRole, minor: boolean): boolean {
-  return relation !== 'outside' || !(role === 'satellite' || subject.kind !== 'none' && !subject.hostIsStar && minor);
+/** A moon is named inside the families the subject keeps, and beside a planet's or a moon's page the minor bodies of its
+ * star are not. A target, a resolved disc and an orientation reference are named whatever this says. */
+export function namedBesideSubject(subject: ContextSubject, satelliteOf: string | undefined, minor: boolean): boolean {
+  return satelliteOf === undefined ? !(minor && subject.quietMinors) : subject.families.has(satelliteOf);
 }
 
 /** Inside the focus star's system, other systems' bodies stay clickable but read as not belonging to it; they come up to

@@ -914,9 +914,12 @@ for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer}
       const actual = opacity(body.id), normal = baseline.get(body.id)!;
       assert.ok(normal.marker > 0); assert.ok(normal.line > 0);
       assert.ok(Math.abs((actual.marker / normal.marker) - (expected)) < 10 ** -1 / 2, `${id} -> ${body.id} marker`);
-      // A path belongs to the family it circles (a barycentre's included): the other planet's, and the host's own about
-      // the star while one of its moons is the subject, are dim context.
-      const outside = body.id === unrelated.id || body.id === parent.id && id !== parent.id, ratio = actual.line / normal.line;
+      // A path belongs to the family it circles: the other planet's, and the host's own about the star while one of
+      // its moons is the subject, are dim context. A family is read by a path's own centre, so the moon that circles
+      // the barycentre is outside the host's family, and with that moon as the subject (its host an unrendered
+      // origin) nothing dims.
+      const family = body.id === id || id === parent.id && body.id === 'moon-a';
+      const outside = id !== 'moon-b' && !family, ratio = actual.line / normal.line;
       if (outside) assert.ok(ratio >= .25 - 10 ** -2 / 2 && ratio < .95, `${id} -> ${body.id} orbit ${ratio}`);
       else assert.ok(Math.abs(ratio - 1) < 10 ** -1 / 2, `${id} -> ${body.id} orbit`);
     }

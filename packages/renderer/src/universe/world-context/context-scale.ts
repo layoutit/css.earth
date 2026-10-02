@@ -109,12 +109,6 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
     /** A system's star: the focus or a placed star that bodies orbit. */
     // A set: the planner asks this several times per body per frame, and a scan grew with systems times bodies.
     isSystemStar(id: string) { return rootSet.has(id); },
-    /** The rendered point a body circles: its centre, or past a coordinate origin (a barycentre) that origin's own centre. */
-    centreOf(id: string) {
-      let centre = parentOf(id);
-      while (centre !== undefined && !byId.has(centre)) centre = parentOf(centre);
-      return centre;
-    },
     /** The indexed point belongs to a system this camera still draws; a star outside every system never does. */
     inShownSystem(pointIndex: number) { const root = rootIndex[pointIndex]!; return root >= 0 && values[root]! > 0; },
     /** The indexed point belongs to the focus star's own system. */

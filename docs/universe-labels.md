@@ -69,26 +69,28 @@ moon and surface-feature labels; camera frames do not measure the panels.
 holds every dimming of the world context, and the planner applies each one in a
 single place.
 
-Each frame has one subject: a body's page (or the destination of a flight), a
-moons view, or none in an overview. Each body has one relation to it: it is the
-subject, it is in the subject's family (it circles the family's host, directly
-or about a barycentre), or it is outside. A moon shares its planet's family.
+Each frame has one subject, resolved once: a body's page (or the destination of
+a flight), a moons view, or none in an overview. A body is in the subject's
+family when it circles the family's host; a moon shares its planet's family.
 Hover and a highlighted category count as pointing at a body.
 
-A path's opacity follows from that relation:
+A path's opacity follows from that:
 
 | Path | Opacity |
 | --- | --- |
-| The subject's own, on its page | Fades out as its disc grows from 12% to 30% of the viewport height. |
-| The family's, on the host's page | Fades with the host in the same way. |
-| The family's, on a moon's page or in a moons view | Softens to 30% over the same range and stays there. |
-| Outside the family | 25% of that, fading out up close. This includes the host's own path about its star unless the host is the subject. |
+| The focused body's own, on its page or a flight to it | Fades out as its disc grows from 12% to 30% of the viewport height. |
+| A moon's, on its host's page | Fades with the host in the same way. |
+| The family's, on a moon's page, in a moons view or during a flight | Softens to 30% over the same range and stays there. |
+| Outside the family | 25% of the context value; on a body's page it also fades out up close. In a moons view this includes the host's own path about its star. |
 | Any path in an overview, or one the reader points at | Softens to 30% up close; never dimmed by family. |
 
-On a body's page the outside dimming eases away between half and twice the
-host's distance from its star as the camera pulls back; a moons view holds it.
-Viewport clipping, body occlusion, the system's distance fade, the on-screen
-size fade and explicit hidden-orbit settings still apply.
+The outside dimming eases away between half and twice the host's distance from
+its star as the camera pulls back; a moons view holds it. Viewport clipping,
+body occlusion, the system's distance fade, the on-screen size fade and explicit
+hidden-orbit settings still apply.
+
+A family is read by a path's own centre. A body that circles an unrendered
+barycentre is therefore outside its host's family; this is a known gap.
 
 Markers, circles and captions do not dim with selection. They share one
 emphasis with their path: 30% outside a highlighted category, and 30% for

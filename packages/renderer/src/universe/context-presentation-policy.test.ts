@@ -1,52 +1,56 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { closeOrbitFades, contextEmphasis, contextSubject, namedBesideSubject, otherSystemsOpacity, outsideFamilyOrbitOpacity, pathOpacity,
-  subjectRelation } from './context-presentation-policy.js';
+import { closeOrbitFades, contextEmphasis, contextSubject, inSubjectFamily, namedBesideSubject, otherSystemsOpacity, outsideFamilyOrbitOpacity,
+  pathOpacity } from './context-presentation-policy.js';
 
-const saturn = { id: 'saturn', role: 'planet', hostId: 'sun' } as const, titan = { id: 'titan', role: 'satellite', hostId: 'saturn' } as const;
-const sun = { id: 'sun', role: 'star', hostId: undefined } as const;
+const saturn = { id: 'saturn', centreId: 'sun' }, titan = { id: 'titan', centreId: 'saturn' }, jupiter = { id: 'jupiter', centreId: 'sun' };
+const sun = { id: 'sun', centreId: undefined }, isStar = (id: string) => id === 'sun';
+const page = (body: typeof sun) => contextSubject(body, undefined, undefined, false, false, isStar);
 const fades = { context: .8, own: .5 }, dim = .25;
 
 test('a frame has one subject, and a satellite shares its host\'s family', () => {
-  assert.deepEqual(contextSubject(saturn, false, false, undefined), { kind: 'body', id: 'saturn', hostId: 'saturn', hostIsSubject: true, hostIsStar: false });
-  assert.deepEqual(contextSubject(titan, false, false, undefined), { kind: 'body', id: 'titan', hostId: 'saturn', hostIsSubject: false, hostIsStar: false });
-  assert.deepEqual(contextSubject(sun, false, false, undefined), { kind: 'body', id: 'sun', hostId: 'sun', hostIsSubject: true, hostIsStar: true });
-  assert.equal(contextSubject(saturn, true, true, undefined).kind, 'system');
-  // An overview has no subject but keeps the family it was opened from; a flight previews a body or an overview.
-  assert.deepEqual(contextSubject(saturn, true, false, undefined), { kind: 'none', id: null, hostId: 'saturn', hostIsSubject: true, hostIsStar: false });
-  assert.equal(contextSubject(titan, true, false, 'titan').kind, 'body');
-  assert.equal(contextSubject(saturn, false, false, null).kind, 'none');
+  assert.deepEqual(page(saturn), { kind: 'body', id: 'saturn', focusId: 'saturn', hostId: 'saturn', hostIsStar: false,
+    families: new Set(['saturn']), page: true, held: false, quietMinors: true });
+  assert.deepEqual(page(titan), { kind: 'body', id: 'titan', focusId: 'titan', hostId: 'saturn', hostIsStar: false,
+    families: new Set(['saturn']), page: true, held: false, quietMinors: true });
+  assert.deepEqual(page(sun), { kind: 'body', id: 'sun', focusId: 'sun', hostId: 'sun', hostIsStar: true,
+    families: new Set(['sun']), page: true, held: false, quietMinors: false });
+  // A moons view holds its host as the subject; an overview has no subject but keeps the family it was opened from.
+  const moons = contextSubject(saturn, undefined, undefined, true, true, isStar), overview = contextSubject(saturn, undefined, undefined, true, false, isStar);
+  assert.deepEqual([moons.kind, moons.id, moons.held, moons.page, moons.quietMinors], ['system', 'saturn', true, false, false]);
+  assert.deepEqual([overview.kind, overview.id, overview.hostId, [...overview.families]], ['none', null, 'saturn', ['saturn']]);
+  // A flight previews its destination and keeps the selected body's family until it lands; a flight to an overview has no subject.
+  const flight = contextSubject(titan, jupiter, 'jupiter', false, false, isStar), leaving = contextSubject(saturn, undefined, null, false, false, isStar);
+  assert.deepEqual([flight.kind, flight.id, flight.focusId, flight.hostId, [...flight.families], flight.page], ['body', 'jupiter', 'jupiter', 'jupiter', ['saturn', 'jupiter'], false]);
+  assert.deepEqual([leaving.kind, leaving.id, leaving.focusId, leaving.page], ['body', null, 'saturn', true]);
 });
 
-test('a body is the subject, in its family, or outside it, by what it circles', () => {
-  for (const focus of [saturn, titan]) {
-    const subject = contextSubject(focus, false, false, undefined);
-    assert.equal(subjectRelation(subject, focus.id, focus.hostId), 'subject');
-    assert.equal(subjectRelation(subject, 'rhea', 'saturn'), 'family');
-    assert.equal(subjectRelation(subject, 'jupiter', 'sun'), 'outside');
-    assert.equal(subjectRelation(subject, 'io', 'jupiter'), 'outside');
+test('a body is in the family when it circles the family\'s host', () => {
+  for (const subject of [page(saturn), page(titan)]) {
+    assert.equal(inSubjectFamily(subject, 'saturn'), true);
+    assert.equal(inSubjectFamily(subject, 'sun'), false);
+    assert.equal(inSubjectFamily(subject, 'jupiter'), false);
+    assert.equal(inSubjectFamily(subject, undefined), false);
   }
-  // The host of a selected moon travels a path about the star: outside the family it hosts.
-  assert.equal(subjectRelation(contextSubject(titan, false, false, undefined), 'saturn', 'sun'), 'outside');
-  assert.equal(subjectRelation(contextSubject(saturn, true, false, undefined), 'saturn', 'sun'), 'outside');
 });
 
 test('one rule gives every path its opacity', () => {
-  const page = contextSubject(saturn, false, false, undefined), moon = contextSubject(titan, false, false, undefined);
-  const moons = contextSubject(saturn, true, true, undefined), overview = contextSubject(saturn, true, false, undefined), star = contextSubject(sun, false, false, undefined);
-  // A body's own path fades with its growth; in a moons view the host's path is context.
-  assert.equal(pathOpacity(page, 'subject', false, fades, dim), .5);
-  assert.equal(pathOpacity(moons, 'subject', false, fades, dim), .8 * .5 * .25);
-  // A host's page fades its moons' paths with it; a moon's page, a moons view and a star's page keep the family's.
-  assert.equal(pathOpacity(page, 'family', false, fades, dim), .5);
-  for (const subject of [moon, moons, star]) assert.equal(pathOpacity(subject, 'family', false, fades, dim), .8);
+  const host = page(saturn), moons = contextSubject(saturn, undefined, undefined, true, true, isStar), overview = contextSubject(saturn, undefined, undefined, true, false, isStar);
+  const path = (subject: typeof host, o: { family?: boolean; emphasised?: boolean; fadesWithFocus?: boolean; flagged?: boolean }) =>
+    pathOpacity(subject, o.family ?? false, o.emphasised ?? false, o.fadesWithFocus ?? false, o.flagged ?? false, fades, dim);
+  // A body's own path on its page, and a moon's on its host's page, fade with the body's growth.
+  assert.equal(path(host, { emphasised: true, fadesWithFocus: true }), .5);
+  assert.equal(path(host, { family: true, fadesWithFocus: true }), .5);
+  // The family's paths on a moon's page and in a moons view soften as context.
+  for (const subject of [page(titan), moons]) assert.equal(path(subject, { family: true }), .8);
   // Outside the family a path is dim context, unless the reader points at it.
-  for (const subject of [page, moon, moons]) {
-    assert.equal(pathOpacity(subject, 'outside', false, fades, dim), .8 * .5 * .25);
-    assert.equal(pathOpacity(subject, 'outside', true, fades, dim), .8);
-  }
-  assert.equal(pathOpacity(page, 'family', true, fades, dim), .8);
-  for (const relation of ['family', 'outside'] as const) assert.equal(pathOpacity(overview, relation, false, fades, dim), .8);
+  assert.equal(path(host, {}), .8 * .5 * .25);
+  assert.equal(path(host, { flagged: true }), .8);
+  // A moons view keeps overview framing and dims the host's own path about its star too.
+  assert.equal(path(moons, {}), .8 * .25);
+  assert.equal(path(moons, { emphasised: true }), .8 * .25);
+  // An overview frames every path as context; its dimming is absent because no host is passed (outsideFamilyOrbitOpacity).
+  assert.equal(pathOpacity(overview, false, false, false, false, fades, 1), .8);
 });
 
 test('the close-up fades keep a floor for context and none for the focused body\'s own path', () => {
@@ -65,13 +69,13 @@ test('the dimming outside a family relaxes as the camera reaches the parent syst
   assert.equal(outsideFamilyOrbitOpacity({ positionM: [0, 0, 0] }, () => 1, false), 1);
 });
 
-test('a moon outside the family is unnamed, and beside a planet or a moon so are its star\'s minor bodies', () => {
-  const page = contextSubject(saturn, false, false, undefined), overview = contextSubject(saturn, true, false, undefined), star = contextSubject(sun, false, false, undefined);
-  assert.equal(namedBesideSubject(page, 'family', 'satellite', false), true);
-  for (const subject of [page, overview, star]) assert.equal(namedBesideSubject(subject, 'outside', 'satellite', false), false);
-  assert.equal(namedBesideSubject(page, 'outside', 'planet', false), true);
-  assert.equal(namedBesideSubject(page, 'outside', 'planet', true), false);
-  for (const subject of [overview, star]) assert.equal(namedBesideSubject(subject, 'outside', 'planet', true), true);
+test('a moon is named inside the kept families, and beside a planet or a moon its star\'s minor bodies are not', () => {
+  const host = page(saturn), overview = contextSubject(saturn, undefined, undefined, true, false, isStar);
+  assert.equal(namedBesideSubject(host, 'saturn', false), true);
+  for (const subject of [host, overview, page(sun)]) assert.equal(namedBesideSubject(subject, 'jupiter', false), false);
+  assert.equal(namedBesideSubject(host, undefined, false), true);
+  assert.equal(namedBesideSubject(host, undefined, true), false);
+  for (const subject of [overview, page(sun)]) assert.equal(namedBesideSubject(subject, undefined, true), true);
 });
 
 test('a marker, its caption and its path share one emphasis, and a hovered body is never dimmed', () => {
