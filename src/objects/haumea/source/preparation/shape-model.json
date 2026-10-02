@@ -15,7 +15,7 @@
     "innerRadiusKm": 2252,
     "outerRadiusKm": 2322,
     "segments": 128,
-    "qualification": "Ring dimensions and the 0.5 opacity from the 2017 occultation (Ortiz et al. 2017). No ring colour is measured: it is the neutral gray of a body without a measured colour.",
+    "qualification": "Ring dimensions and the 0.5 opacity from the 2017 occultation (Ortiz et al. 2017). No ring color is measured: it is the neutral gray of a body without a measured color.",
     "normalOpacity": 0.5
   },
   "surfaces": [
@@ -25,7 +25,7 @@
       "science": {
         "kind": "disc-integrated-color",
         "illuminant": "reference/CIE_std_illum_D65.csv",
-        "qualification": "Uniform whole-disc colour and V geometric albedo from published photometry; the surface is unresolved and no map is implied."
+        "qualification": "Uniform whole-disc color and V geometric albedo from published photometry; the surface is unresolved and no map is implied."
       }
     },
     {

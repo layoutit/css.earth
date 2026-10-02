@@ -26,7 +26,7 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Photosphere colour from the white dwarf's Gaia DR3 BP/RP spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law (u1 0.05, u2 0.52) Vanderburg et al. (2020), Nature 585, 363, Methods, transit light-curve fitting (https://arxiv.org/abs/2009.07282) fixed from model atmospheres for this star (GTC g' band; the coefficients Gianninas et al. (2013) compute from white-dwarf model atmospheres, not a visible-band measurement).",
+        "qualification": "Photosphere color from the white dwarf's Gaia DR3 BP/RP spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law (u1 0.05, u2 0.52) Vanderburg et al. (2020), Nature 585, 363, Methods, transit light-curve fitting (https://arxiv.org/abs/2009.07282) fixed from model atmospheres for this star (GTC g' band; the coefficients Gianninas et al. (2013) compute from white-dwarf model atmospheres, not a visible-band measurement).",
         "limbDarkening": {
           "law": "quadratic",
           "published": true,

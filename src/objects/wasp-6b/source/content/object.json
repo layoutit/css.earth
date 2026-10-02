@@ -54,7 +54,7 @@
       {
         "id": "thermal",
         "label": "Thermal glow",
-        "qualification": "Black-body colour at its measured dayside temperature, 1,235 K. The disc itself is unresolved.",
+        "qualification": "Black-body color at its measured dayside temperature, 1,235 K. The disc itself is unresolved.",
         "thumbnail": "wasp-6b-dataset-thermal.webp",
         "surface": "wasp-6b-surface-thermal@2x.webp",
         "poles": "wasp-6b-poles-thermal@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810..118K/abstract"
         },
         "falseColor": false,
-        "notes": "The colour of WASP-6 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+        "notes": "The color of WASP-6 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
       }
     ]
   },

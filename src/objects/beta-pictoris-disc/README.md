@@ -12,9 +12,9 @@ orbit to its outer reaches.
   [arXiv:2302.04273](https://arxiv.org/abs/2302.04273)). It is deposited at CDS as
   [`Beta_Pic_STIS.fits`](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/672/A114). It reaches 0.8 arcseconds from the
   star, covering the orbit of planet d, 26 au out.
-- **Colour, 29 to 135 au.** Hubble's ACS/HRC coronagraph through F435W, F606W and F814W on 1 October 2003, programme
+- **Color, 29 to 135 au.** Hubble's ACS/HRC coronagraph through F435W, F606W and F814W on 1 October 2003, programme
   9987, the run of Golimowski et al. (2006, AJ 131, 3109, [arXiv:astro-ph/0602292](https://arxiv.org/abs/astro-ph/0602292)).
-  The starlight was removed here from the raw exposures ([below](#the-hubble-colour-dataset)).
+  The starlight was removed here from the raw exposures ([below](#the-hubble-color-dataset)).
 - **2.1 and 4.1 micrometres, 49 to 124 au.** MAST's level-3 coronagraph mosaics of JWST/NIRCam F210M and F410M behind
   MASK335R, 21 March 2025, GO programme 4758 (PI Y. Zhou), the run of [Zhou et al. (2026)](https://arxiv.org/abs/2607.13133).
   They are listed in [`beta-pictoris-4758.json`](../../../packages/telescope-cli/src/archives/jwst/imaging/programs/beta-pictoris-4758.json).
@@ -44,12 +44,12 @@ symmetry axis is the disc's normal, tilted 1° from the sky: planet b's orbital 
 **One grid.** All three datasets share a grid 270 au across, 156 cells of 1.7 au, so switching dataset does not move
 or resize the object.
 
-**Stretch.** The visible dataset is one filter in grey, in counts per pixel per second. The colour and JWST datasets
+**Stretch.** The visible dataset is one filter in gray, in counts per pixel per second. The color and JWST datasets
 are each filter's contrast to the star; the JWST star fluxes are Kammerer et al.'s (2024, Table 2) 26.14 Jy in F210M
 and 8.20 Jy in F410M. No published figure fixes a stretch, so each is stated: its top is the 99.5th percentile in the
 midplane strip, with log strength 10.
 
-## The Hubble colour dataset
+## The Hubble color dataset
 
 The archive's ACS/HRC products still carry the star.
 [`psf-subtract.mts`](../../../packages/telescope-cli/src/archives/hst/psf-subtract.mts) removes it, as described in
@@ -66,7 +66,7 @@ Nothing is drawn within 1.5 arcseconds (29 au), where Golimowski et al. find the
 
 ## Evidence
 
-| | STIS, visible | ACS, colour | NIRCam, 2.1 and 4.1 µm |
+| | STIS, visible | ACS, color | NIRCam, 2.1 and 4.1 µm |
 |---|---|---|---|
 | midplane position angle | 29.6° | 29.8° | 30.7° |
 | star from the midplane | 1.5 au | 1.0 au | 0.9 au |
@@ -75,7 +75,7 @@ Nothing is drawn within 1.5 arcseconds (29 au), where Golimowski et al. find the
 | dataset | reprojection error | light at the tangent point, reconstructed | same, for an extrusion |
 |---|---|---|---|
 | visible | 6.8% | 0.64 to 0.83 | 0.29 to 0.42 |
-| colour | 8.0 to 8.4% | 0.46 to 0.58 | 0.33 to 0.47 |
+| color | 8.0 to 8.4% | 0.46 to 0.58 | 0.33 to 0.47 |
 | 2.1 and 4.1 µm | 8.3 to 11.8% | 0.48 to 0.79 | 0.37 to 0.46 |
 
 The tangent share is the fraction of a midplane column's light within 20 au of the radius the column projects to. An
@@ -84,12 +84,12 @@ relative difference of 1.5e-5.
 
 ## Known problems
 
-- **The colour dataset is cut at 135 au, and the disc goes on.** Against a per-channel noise of 0.0026 to 0.0035, the
+- **The color dataset is cut at 135 au, and the disc goes on.** Against a per-channel noise of 0.0026 to 0.0035, the
   midplane measures 0.44 at 120 to 140 au and 0.007 at 300 to 320, still twice the noise
-  ([ledger entry](investigations.json) `dataset-colour-extent`).
-- **The colour dataset is bluer than Golimowski et al. measure.** Along the midplane 40 to 100 au out, F606W/F435W is
+  ([ledger entry](investigations.json) `dataset-color-extent`).
+- **The color dataset is bluer than Golimowski et al. measure.** Along the midplane 40 to 100 au out, F606W/F435W is
   0.94 and F814W/F435W 0.92 against the star; the paper measures near 1.07 in F606W/F435W. Leftover light beside the
-  disc, 16 to 19% of the midplane and bluer than the star, pulls the colour blue. How much of the gap it explains is
+  disc, 16 to 19% of the midplane and bluer than the star, pulls the color blue. How much of the gap it explains is
   not measured.
 - **The paper's flux ratio leaves starlight.** Far from the disc, Beta Pic's raw F435W halo is 0.81 of alpha Pic's
   where the ratio predicts 0.61. The paper does not print its final factors, so about a quarter of the halo stays in

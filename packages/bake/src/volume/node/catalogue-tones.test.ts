@@ -5,7 +5,7 @@ import { checkCatalogueSizeBy, toneCataloguePalette } from './catalogue-tones.ts
 const toneBy = { brightMagnitude: -22, faintMagnitude: -18, faintTone: 0.5, steps: 3, band: 'B', basis: 'test' };
 const sizeBy = { shells: 1, tiers: [{ brightestShare: 0.25, radiusPx: 1 }, { brightestShare: 0.75, radiusPx: 0.7 }], radiusPx: 0.5, basis: 'test' };
 
-test('a toned palette pairs each colour with its tone, in order of first use', () => {
+test('a toned palette pairs each color with its tone, in order of first use', () => {
   const toned = toneCataloguePalette({ basePalette: ['#ff0000', '#0000ff'], baseIndices: [0, 0, 1, 0], magnitudes: [-22, -18, -22, null], toneBy });
   assert.deepEqual(toned, { palette: ['#ff0000', '#ff0000', '#0000ff'], paletteTone: [1, 0.5, 1], indices: [0, 1, 2, 1] });
 });

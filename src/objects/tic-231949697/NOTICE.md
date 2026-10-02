@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 0.492584 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TIC 231949697 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract); Mass 0.541 (0.501 to 0.581) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); temperature from Lafarga et al. 2026, the stellar temperature of the default parameter set of TIC 231949697 b in the NASA Exoplanet Archive.
 
-Colour: Gaia DR3 XP spectrum, source 5568467262960106624, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: Gaia DR3 XP spectrum, source 5568467262960106624, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret (2017), A&A 600, A30, via VizieR J/A+A/600/A30.
 

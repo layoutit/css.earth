@@ -8,7 +8,7 @@ It is one of 3 planets known around K2-155. Its orbit and size follow Díez Alon
 
 **Orbit.** Hirano et al. 2018 (2018AJ....155..124H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2018): P 6.34365 d Díez Alonso et al. 2018 (2018MNRAS.476L..50D), via the NASA Exoplanet Archive ps table (pl_refname D_IACUTE_EZ_ALONSO_ET_AL__2018): a/R* 18.5; Díez Alonso et al. 2018 (2018MNRAS.476L..50D), via the NASA Exoplanet Archive ps table (pl_refname D_IACUTE_EZ_ALONSO_ET_AL__2018): inclination 88.3 degrees No archive row states an eccentricity; the orbit is taken as circular Hirano et al. 2018 (2018AJ....155..124H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2018): transit mid-time 2457818.7153 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 205 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-155's measured colour (#ffc49a, the colour dataset of k2-155 (src/objects/k2-155/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by k2-155's measured color (#ffc49a, the color dataset of k2-155 (src/objects/k2-155/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-155's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (43, 44, 71), folded onto its orbit. Upper limits and rows without an error are left out.
 

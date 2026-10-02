@@ -8,7 +8,7 @@ It is one of 2 planets known around HD 5278. Its orbit and size follow Sozzetti 
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 14.33913866687 d Sozzetti et al. 2021 (2021A&A...648A..75S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL__2021): a/R* 22.4; Sozzetti et al. 2021 (2021A&A...648A..75S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL__2021): inclination 89.27 degrees Sozzetti et al. 2021 (2021A&A...648A..75S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL__2021): e 0.08 Sozzetti et al. 2021 (2021A&A...648A..75S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL__2021): omega 135 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460888.931342 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-5278's measured colour (#f7f3ff, the colour dataset of hd-5278 (src/objects/hd-5278/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by hd-5278's measured color (#f7f3ff, the color dataset of hd-5278 (src/objects/hd-5278/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 5278's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (93, 94, 95), folded onto its orbit. Upper limits and rows without an error are left out.
 

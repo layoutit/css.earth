@@ -28,15 +28,15 @@
         "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4439085988769170432&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
         "label": "Gaia DR3 sampled XP spectrum",
         "checked": "2026-09-27",
-        "locator": "source_id 4439085988769170432; sampled flux integrated through CIE colour matching functions."
+        "locator": "source_id 4439085988769170432; sampled flux integrated through CIE color matching functions."
       }
     ]
   },
   "datasets": {
     "color": {
-      "title": "Colour",
+      "title": "Photosphere color",
       "detail": "From its Gaia spectrum",
-      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
     }
   }
 }

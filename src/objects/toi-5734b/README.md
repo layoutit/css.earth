@@ -8,7 +8,7 @@ It is the only planet known around TOI-5734. Its orbit and size follow Filomeno 
 
 **Orbit.** Morello et al. 2026 (2026MNRAS.549ag183M), via the NASA Exoplanet Archive ps table (pl_refname MORELLO_ET_AL_2026): P 6.1842161 d Filomeno et al. 2026 (2026A&A...708A..90F), via the NASA Exoplanet Archive ps table (pl_refname FILOMENO_ET_AL_2026): a/R* derived from its semi-major axis 0.05921 au and stellar radius 0.639 solar radii; Filomeno et al. 2026 (2026A&A...708A..90F), via the NASA Exoplanet Archive ps table (pl_refname FILOMENO_ET_AL_2026): inclination 89.88 degrees No archive row states an eccentricity; the orbit is taken as circular Morello et al. 2026 (2026MNRAS.549ag183M), via the NASA Exoplanet Archive ps table (pl_refname MORELLO_ET_AL_2026): transit mid-time 2458848.6877 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-5734's measured colour (#ffe2c6, the colour dataset of toi-5734 (src/objects/toi-5734/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-5734's measured color (#ffe2c6, the color dataset of toi-5734 (src/objects/toi-5734/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-5734's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (20, 47, 60), folded onto its orbit. Upper limits and rows without an error are left out.
 

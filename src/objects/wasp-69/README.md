@@ -6,7 +6,7 @@ Its radius and temperature follow Allart et al. 2025. The introduction is genera
 
 **Star.** Placement: Gaia DR3 source 6910753016653587840, parallax 19.886 ± 0.017 mas (50.29 pc). Radius 0.801 +/- 0.015 solar radii from Allart et al. 2025, the stellar radius of the default parameter set of WASP-69 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...700A...7A/abstract). Mass 0.83 +/- 0.05 solar masses from Allart et al. 2025, the stellar mass of the default parameter set of WASP-69 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...700A...7A/abstract). Temperature 4,792 K from Allart et al. 2025, the stellar temperature of the default parameter set of WASP-69 b in the NASA Exoplanet Archive. log g 4.55 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 6910753016653587840, through the CIE 1931 2° observer: #ffd7be. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 6910753016653587840, through the CIE 1931 2° observer: #ffd7be. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,792 K and log g 4.55 (u1 0.715, u2 0.072): a model, because no fit of this star's limb is used.
 

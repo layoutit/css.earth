@@ -30,7 +30,7 @@ that interprets only the instructions numpy uses to store float arrays, never
 running code a file names.
 [npy-dictionary-map.ts](../../../packages/bake/src/objects/raster/numpy/npy-dictionary-map.ts)
 checks the grid and samples it bilinearly. Both datasets paint 700 to 2,000 K
-with the plasma palette, which is false colour. The body is drawn emissive: the
+with the plasma palette, which is false color. The body is drawn emissive: the
 map is the planet's own heat glow.
 
 The MIRI dataset is fitted during preparation by the `eclipse-map-fit` format

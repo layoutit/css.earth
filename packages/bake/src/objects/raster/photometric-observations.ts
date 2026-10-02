@@ -65,7 +65,7 @@ export function colorPhotometricGain(normal: readonly number[], geometry: Observ
 
 
 type CorrectedSample = Float32Array | 'withheld' | null;
-/** One observation's complete, geometry-corrected colour at a map cell: null where a channel has no sample, withheld where the view or the Sun is too steep. */
+/** One observation's complete, geometry-corrected color at a map cell: null where a channel has no sample, withheld where the view or the Sun is too steep. */
 function correctedSampler(bands: readonly ColorBand[], filters: readonly string[], weight: number, profile: PhotometryProfile, referenceRadiusMeters: number, centerLongitude: number,
   sampleColorBand: (band: ColorBand, easting: number, northing: number) => number | null) {
   const channels = filters.map(filter => bands.filter(band => band.filter === filter));
@@ -221,11 +221,11 @@ export function composeCorrectedColor({groups,profile,width,height,sourceIds,pho
 }
 
 /**
- * Tie the composed footprint's whole-disc colour to a published one. The Voyager filter calibration carried by the archive
+ * Tie the composed footprint's whole-disc color to a published one. The Voyager filter calibration carried by the archive
  * products is not the last word on these bands (Bell and McCord 1991 apply per-filter factors of up to 19 % to reach
  * ground-based spectra), so a recipe may name the published whole-disc ratios; each named band is scaled by one gain so its
- * cosine-weighted mean over every coloured texel, against the reference band's mean, equals the published ratio. Spatial
- * colour differences are untouched. The measured ratios, the published ones and the gains are reported.
+ * cosine-weighted mean over every colored texel, against the reference band's mean, equals the published ratio. Spatial
+ * color differences are untouched. The measured ratios, the published ones and the gains are reported.
  */
 export function tieBandRatios(rgb: Float32Array, owners: Uint8Array, width: number, height: number, filters: readonly string[], policy: BandRatioPolicy) {
   const reference = filters.indexOf(policy.reference);
@@ -233,7 +233,7 @@ export function tieBandRatios(rgb: Float32Array, owners: Uint8Array, width: numb
   const sums = filters.map(() => 0); let weightSum = 0;
   for (let y = 0; y < height; y++) { const w = Math.cos((90 - (y + 0.5) * 180 / height) * Math.PI / 180);
     for (let x = 0; x < width; x++) { const i = y * width + x; if (!owners[i]) continue; weightSum += w; for (let c = 0; c < filters.length; c++) sums[c]! += w * rgb[i * 3 + c]!; } }
-  if (!(weightSum > 0)) throw new Error('Band ratios need a coloured footprint.');
+  if (!(weightSum > 0)) throw new Error('Band ratios need a colored footprint.');
   const measured: Record<string, number> = {}, published: Record<string, number> = {}, gains = filters.map(() => 1);
   for (const [filter, ratio] of Object.entries(policy.ratios)) {
     const c = filters.indexOf(filter);
@@ -245,7 +245,7 @@ export function tieBandRatios(rgb: Float32Array, owners: Uint8Array, width: numb
 }
 
 /**
- * Brightness-match the corrected colour to the monochrome base along footprint boundaries. Per observation by default, each
+ * Brightness-match the corrected color to the monochrome base along footprint boundaries. Per observation by default, each
  * clamped so its brightest value encodes without clipping. `pooled` fits one gain for the whole dataset from every boundary sample,
  * for observations already on one calibration (band levels solved): a per-observation fit would re-open the seams, and an
  * observation that never borders the base would get none. The pooled clamp keeps 99.9 % of the texels within range.

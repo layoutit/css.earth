@@ -2063,7 +2063,7 @@
       "credit": "Mest, Yingst, Berman, Garry, Williams and Gregg; Yingst et al. (2023), The Planetary Science Journal 4:157, doi:10.3847/PSJ/acebe9",
       "license": "CC BY 4.0; cite Yingst et al. (2023)",
       "acquisition": "Checked-in compact lossless unit grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the shapefile using geology/prepare-grid.json; outputFrame names the Claudia central meridian (-150) for the source's Claudia Double Prime 0, so no pixel moves.",
-      "redistribution": "Retain authors and interpretation; unit colours come from the authors' ArcMap layer and are not observations.",
+      "redistribution": "Retain authors and interpretation; unit colors come from the authors' ArcMap layer and are not observations.",
       "consumers": [
         "geology"
       ],
@@ -2731,7 +2731,7 @@
     },
     {
       "path": "geology/prepare-grid.json",
-      "purpose": "Rasterization plan: unit codes, labels and the colours read from 0005GeoUnits.lyr, and the 210-degree output frame.",
+      "purpose": "Rasterization plan: unit codes, labels and the colors read from 0005GeoUnits.lyr, and the 210-degree output frame.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities."

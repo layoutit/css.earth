@@ -20,7 +20,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 The original mosaic is 7200 × 3600, north up and east-positive. Its 20 pixels/degree grid is approximately 5.4 m/pixel at a 6.2 km equator; much of the map has markedly poorer effective resolution. The photographic atlas samples the original grid directly ([shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation)).
 
-Preparation simplifies the original mesh to a 1,600-face native triangle presentation. Every one of the 196,608 facet-science rows is registered to its source triangle, and display colours use the nearest source triangle within 100 m.
+Preparation simplifies the original mesh to a 1,600-face native triangle presentation. Every one of the 196,608 facet-science rows is registered to its source triangle, and display colors use the nearest source triangle within 100 m.
 
 Gazetteer anchors are cast onto the prepared shape, not a reference sphere. Craters and faculae trace a rim circle, other types their published extent box.
 

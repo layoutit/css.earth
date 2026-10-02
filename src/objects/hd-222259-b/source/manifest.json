@@ -115,7 +115,7 @@
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6387058411482257280&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the color computation applied",
       "redistribution": "Method record only",
       "consumers": [
         "assets",
@@ -123,7 +123,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored colour recipe naming the Gaia DR3 spectrum bound above; repinned when edited."
+        "reason": "Project-authored color recipe naming the Gaia DR3 spectrum bound above; repinned when edited."
       }
     },
     {
@@ -183,7 +183,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6387058411482257280&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
-      "credit": "The colour dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -200,7 +200,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

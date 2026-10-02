@@ -93,12 +93,12 @@ this color repair does not promote its unresolved registration cases:
   then one pooled gain for the dataset, clamped so 99.9 % of texels encode
   without clipping, instead of one gain per observation. The reference is chosen from evidence
   recorded in the body README, never by preference for a look. `bandRatios` ties the
-  composed footprint's whole-disc band ratios to a published whole-disc colour
+  composed footprint's whole-disc band ratios to a published whole-disc color
   named in the recipe (the Uranian moons use Bell and McCord 1991): each named
   band takes one gain so its cosine-weighted mean against the reference band's
   mean equals the published ratio, and the report carries the measured ratios,
   the published ones and the gains. It answers a documented filter-calibration
-  defect of the archive product, never a preference for a look; spatial colour
+  defect of the archive product, never a preference for a look; spatial color
   differences stay the observation's own.
 - `pds4-float-rgb`: Charon's archive-produced, pan-sharpened MVIC composite.
   Its values are derived band values, not untouched I/F. The reader validates
@@ -168,7 +168,7 @@ and fits read. Plate-to-plate background steps are a separate defect and are not
 are not in the pinned inputs, and a segmentation of the plate's own background map cannot separate a seam from
 the extended light of the object on it.
 
-Two routes extend this. Two bands display as red and blue, with their mean as green, following the [CDS DSS2 colour survey](https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fcolor&get=record&fmt=json). Bands without a documented flux calibration, the DSS2 photographic plates and the ESASky Herschel HiPS, keep `toMJyPerSr: null` and record their levels in relative source units. Dividing by each band's range means the image looks the same either way. The missing calibration only limits what the recorded levels can claim.
+Two routes extend this. Two bands display as red and blue, with their mean as green, following the [CDS DSS2 color survey](https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fcolor&get=record&fmt=json). Bands without a documented flux calibration, the DSS2 photographic plates and the ESASky Herschel HiPS, keep `toMJyPerSr: null` and record their levels in relative source units. Dividing by each band's range means the image looks the same either way. The missing calibration only limits what the recorded levels can claim.
 
 JWST bands come either from MAST's level-3 mosaics or from the pipeline's level-3 stage re-run onto the recipe grid; both are
 already MJy/sr, so the route applies no factor. [JWST imaging](jwst-imaging.md) describes both routes, the reproduction check
@@ -177,20 +177,20 @@ against MAST and what they cost. A recipe may set `pointSources: "mask"` to repo
 
 ## Star photospheres
 
-A star whose surface is not imaged still has a measured colour: its spectrum. The `stellar-photometric-color` kind
+A star whose surface is not imaged still has a measured color: its spectrum. The `stellar-photometric-color` kind
 ([stellar-photometric-color.ts](../packages/bake/src/objects/stellar/stellar-photometric-color.ts)) reads one archived spectrum
 in its own layout, averages it into 1 nm bins from 380 to 780 nm, weights it by the CIE 1931 2° observer and converts it to
 sRGB with the D65 white, brightest channel full. It reads HST CALSPEC and the STIS libraries, Gaia DR3 XP, X-Shooter, UVES,
-LAMOST and the Pulkovo, Kiehling, Burnashev and Kharitonov spectrophotometric catalogues. Plain column tables can carry a one-sigma error column: a bin below zero within three errors counts as no light, and the colour range is the spectrum moved one error down and up. A record may set `gamut: 'desaturate'` when a measured colour falls outside sRGB; the least white needed to bring it inside is mixed in and reported. A stretch with no data inside
+LAMOST and the Pulkovo, Kiehling, Burnashev and Kharitonov spectrophotometric catalogues. Plain column tables can carry a one-sigma error column: a bin below zero within three errors counts as no light, and the color range is the spectrum moved one error down and up. A record may set `gamut: 'desaturate'` when a measured color falls outside sRGB; the least white needed to bring it inside is mixed in and reported. A stretch with no data inside
 380-780 nm must be declared as a gap, with its reason. Checked against the Sun, the route turns CALSPEC's solar spectrum
-into #fff2ee, the colour the Sun's swatch takes from a different spectrum (ASTM E490) with Colour Science.
+into #fff2ee, the color the Sun's swatch takes from a different spectrum (ASTM E490) with Color Science.
 
 For a new star, [new-object/color.mts](../packages/telescope-cli/src/new-object/color.mts) (run by `telescope new-object`) tries the archives in
 this order and keeps the first spectrum the reader accepts, with the next as its cross-check: the STIS Next Generation Spectral
 Library, Gaia DR3 XP (from the ARI Heidelberg mirror when ESA's DataLink is down), Pulkovo, Kiehling, Kharitonov, then Burnashev's
-part 2. With none, the colour is a Planck spectrum at the cited temperature.
+part 2. With none, the color is a Planck spectrum at the cited temperature.
 
-A planet nobody has imaged takes its colour from what is measured
+A planet nobody has imaged takes its color from what is measured
 ([new-object/planet-datasets.mts](../packages/telescope-cli/src/new-object/planet-datasets.mts)). Where the NASA Exoplanet Archive's
 emission-spectroscopy table holds a measured dayside brightness temperature from a secondary eclipse, the planet gets the
 "Thermal glow" dataset: a black body at that temperature over the disc, lit by the sphere lighting so the day side faces its
@@ -198,21 +198,21 @@ star, with reflected starlight left out because nothing measured says how much t
 smallest relative uncertainty and the longest wavelength on a tie, every row is kept in the package, and the choice is
 stated in the record. Below about 1,800 K a black body lies outside sRGB and is shown mixed with the least white that brings
 it inside, hue kept, which the dataset says. A planet with nothing measured keeps the neutral gray, lit by its host's measured
-colour instead of a white lamp: the gray's brightness with the host colour dataset's chromaticity (`hostLitGray` in
+color instead of a white lamp: the gray's brightness with the host color dataset's chromaticity (`hostLitGray` in
 [color-transfer.ts](../packages/bake/src/objects/color/color-transfer.ts)). `telescope new-object --from-archive` does both; `node packages/telescope-cli/src/new-object/new-object-cli.mts --thermal <id>...`
 and `--host-light <id>...` (that entry only) give them to planets already in the tree.
 
-![Dataset thumbnails: HD 219134 c gray, HD 219134 b the same gray under its host's light, HD 209458 b and WASP-39 b glowing at their measured dayside temperatures](images/planet-colour-routes.png)
+![Dataset thumbnails: HD 219134 c gray, HD 219134 b the same gray under its host's light, HD 209458 b and WASP-39 b glowing at their measured dayside temperatures](images/planet-color-routes.png)
 
-![Before and after on the page: TRAPPIST-1 e, Kepler-186 f and HD 219134 b under their stars' light, HD 209458 b at its measured dayside heat; the flat gray discs on main had no stylesheet sizing their lighting frame](images/planet-colour-before-after.png)
+![Before and after on the page: TRAPPIST-1 e, Kepler-186 f and HD 219134 b under their stars' light, HD 209458 b at its measured dayside heat; the flat gray discs on main had no stylesheet sizing their lighting frame](images/planet-color-before-after.png)
 
-The star's catalogue swatch, minimap dot and navigation marker take the same colour
+The star's catalogue swatch, minimap dot and navigation marker take the same color
 ([stellar-spectra/author.mts](../packages/telescope-cli/authoring/stellar-spectra/author.mts)). A star with no usable
 spectrum keeps the star field's temperature fit at a cited effective temperature
 ([star-catalogue-color.ts](../packages/bake/src/objects/color/star-catalogue-color.ts)).
 
-**Cross-checks.** A colour record may name a second spectrum from a different instrument. Preparation records its colour
-beside the dataset colour, and [object-package-consistency.test.mts](../src/objects/object-package-consistency.test.mts) fails when
+**Cross-checks.** A color record may name a second spectrum from a different instrument. Preparation records its color
+beside the dataset color, and [object-package-consistency.test.mts](../src/objects/object-package-consistency.test.mts) fails when
 the two differ by more than 12 levels in any channel unless the record states the disagreement.
 
 **Limb darkening**, in this order of preference:
@@ -233,7 +233,7 @@ fit (ω, β, the polar temperature, the radii and the pole's orientation), [grav
 rebuilds the surface from those numbers and writes a temperature for each latitude row. Its tests require the paper's
 equatorial radius and temperature to come back within their errors. The measured flattening is drawn as an ellipsoid.
 
-![The placed stars' colour datasets, each from a measured spectrum](images/star-colours.png)
+![The placed stars' color datasets, each from a measured spectrum](images/star-colors.png)
 
 **Pulsation.** A Cepheid's brightness follows Gaia DR3's published harmonic model through each period; [light-curve.ts](../packages/bake/src/photometry/light-curve.ts)
 reads it as published and checks it against the same row's amplitude and epoch of maximum.

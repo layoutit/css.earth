@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from a measured spectrum of the star (HST/STIS). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+        "qualification": "Color from a measured spectrum of the star (HST/STIS). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
         "thumbnail": "polaris-dataset-color.webp",
         "surface": "polaris-surface-color@2x.webp",
         "poles": "polaris-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://archive.stsci.edu/prepds/stisngsl/"
         },
         "falseColor": false,
-        "notes": "The colour of Polaris's HST/STIS spectrum. Hubble observed it on 20 September 2001; Polaris pulsates slightly over four days, so this is one moment of that cycle. No resolved image of the surface is cast here."
+        "notes": "The color of Polaris's HST/STIS spectrum. Hubble observed it on 20 September 2001; Polaris pulsates slightly over four days, so this is one moment of that cycle. No resolved image of the surface is cast here."
       }
     ]
   },

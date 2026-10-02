@@ -38,7 +38,7 @@ export async function prepareSurfacelessScene({ source, controls, solarGeometry 
   return { definition, scene };
 }
 
-/** A bank of dots as seen from the Sun: each dot in its own colour on the plane across the line of sight to the bank's
+/** A bank of dots as seen from the Sun: each dot in its own color on the plane across the line of sight to the bank's
  * middle, north up and east left as the sky is drawn, fitted to the picture. Returns the picture's public address. */
 export async function dotsPicture(bankDirectory: string, outputPath: string): Promise<void> {
   const { unpackPreparedBinary } = await import('@cssearth/objects/node');
@@ -49,7 +49,7 @@ export async function dotsPicture(bankDirectory: string, outputPath: string): Pr
   await pointsPicture(points, appearance, outputPath);
 }
 
-/** Points as seen from the Sun, each in its colour, on the plane across the line of sight to their middle. */
+/** Points as seen from the Sun, each in its color, on the plane across the line of sight to their middle. */
 async function pointsPicture(points: readonly (readonly number[])[], appearance: { colorCss: string; palette?: readonly string[] }, outputPath: string): Promise<void> {
   const centre = [0, 1, 2].map(axis => points.reduce((sum, point) => sum + point[axis]!, 0) / points.length);
   const distance = Math.hypot(...centre), sight: number[] = centre.map(value => value / distance);
@@ -61,9 +61,9 @@ async function pointsPicture(points: readonly (readonly number[])[], appearance:
     return { x: -along(offset, east), y: -along(offset, north), palette: point[3] }; });
   const SIZE = 160, reach = Math.max(...flat.map(dot => Math.max(Math.abs(dot.x), Math.abs(dot.y)))) * 1.05, pixels = Buffer.alloc(SIZE * SIZE * 3);
   for (const dot of flat) {
-    const colour = (dot.palette === undefined ? appearance.colorCss : appearance.palette?.[dot.palette]) ?? appearance.colorCss;
+    const color = (dot.palette === undefined ? appearance.colorCss : appearance.palette?.[dot.palette]) ?? appearance.colorCss;
     const column = Math.round((dot.x / reach + 1) / 2 * (SIZE - 1)), row = Math.round((dot.y / reach + 1) / 2 * (SIZE - 1));
-    for (let channel = 0; channel < 3; channel++) pixels[(row * SIZE + column) * 3 + channel] = Number.parseInt(colour.slice(1 + channel * 2, 3 + channel * 2), 16);
+    for (let channel = 0; channel < 3; channel++) pixels[(row * SIZE + column) * 3 + channel] = Number.parseInt(color.slice(1 + channel * 2, 3 + channel * 2), 16);
   }
   const sharp = (await import('sharp')).default, { mkdir } = await import('node:fs/promises');
   await mkdir(dirname(outputPath), { recursive: true });

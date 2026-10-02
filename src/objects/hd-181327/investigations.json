@@ -6,7 +6,7 @@
       "id": "resolved-photosphere",
       "subject": "Disc-resolved images or interferometric imaging of HD 181327",
       "status": "excluded",
-      "finding": "The disc is 0.27 mas across at 47.8 pc. The JMMC diameter catalogue lists no measured diameter for this star, and no interferometric image of its surface is published. The sphere carries the colour of its Gaia spectrum only.",
+      "finding": "The disc is 0.27 mas across at 47.8 pc. The JMMC diameter catalogue lists no measured diameter for this star, and no interferometric image of its surface is published. The sphere carries the color of its Gaia spectrum only.",
       "revisitWhen": "A reconstructed image of the star's surface is published, or public calibrated interferometry resolves it.",
       "evidence": [
         "https://jmmc.fr/jmdc",
@@ -27,7 +27,7 @@
       "id": "debris-disc-volume",
       "subject": "The debris ring imaged by JWST/NIRCam behind the MASK335R coronagraph (programme 2780)",
       "status": "included",
-      "finding": "The ring is drawn as the attached volume hd-181327-disc, in the star's own frame, from the six NIRCam coronagraph mosaics in the reflectance colour of Gáspár et al. (2026) Figure 1; see that package's ledger and README for the fit and its limits.",
+      "finding": "The ring is drawn as the attached volume hd-181327-disc, in the star's own frame, from the six NIRCam coronagraph mosaics in the reflectance color of Gáspár et al. (2026) Figure 1; see that package's ledger and README for the fit and its limits.",
       "evidence": [
         "https://arxiv.org/abs/2608.27437",
         "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html"

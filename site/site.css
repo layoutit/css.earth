@@ -69,7 +69,7 @@ body {
   overflow: hidden;
   isolation: isolate;
   contain: layout paint;
-  /* No background: html and body paint the same colour, and a painted fixed viewport gets its own full-screen layer. */
+  /* No background: html and body paint the same color, and a painted fixed viewport gets its own full-screen layer. */
 }
 
 .object-world-stage {

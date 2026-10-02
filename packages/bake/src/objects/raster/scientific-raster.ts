@@ -248,9 +248,9 @@ export function sourceSurfaceBrightness({ point, normal }: {point:readonly numbe
  * A numeric palette on a lossless (nearest-sampled) surface is looked up through 256 steps across its declared range: finer
  * than any legend stop and than the 8-bit channels, and it trims the noise between steps that lossless WebP pays for (baked
  * 2026-09-22 against 1024 steps: Moon heat anomalies 9.35 → 7.52 MB, rock abundance 9.02 → 7.87 MB, Titan interpolated
- * 2.59 → 1.19 MB). A lossy surface keeps 1024 steps: its size does not depend on colour count, and the flat one-level steps
+ * 2.59 → 1.19 MB). A lossy surface keeps 1024 steps: its size does not depend on color count, and the flat one-level steps
  * a coarser ramp leaves on smooth slopes raised the q88 encoder's own error on Miranda's elevation from 41 to 66 at its worst
- * texel (raw pixels differ by at most 2). Relief shading multiplies the looked-up colour afterwards.
+ * texel (raw pixels differ by at most 2). Relief shading multiplies the looked-up color afterwards.
  */
 export const LOSSLESS_PALETTE_STEPS = 256, LOSSY_PALETTE_STEPS = 1024;
 export const paletteSteps = (dataset: SciencePalette) => dataset.displaySampling === 'nearest' ? LOSSLESS_PALETTE_STEPS : LOSSY_PALETTE_STEPS;
@@ -271,7 +271,7 @@ export function createSourceSurfacePainter(dataset: SciencePalette) {
   };
 }
 
-/** The colour of drawn boundaries: black, as the contours of the papers' figures. */
+/** The color of drawn boundaries: black, as the contours of the papers' figures. */
 const OUTLINE = [0, 0, 0] as const;
 
 export function paintScienceSurface(source: SourceScalar, dataset: SciencePalette, width: number, height: number) {
@@ -306,7 +306,7 @@ export function sampleColorBand(band: Omit<ColorBand, "filter">, easting: number
 }
 
 export async function prepareObservedColor({ sourceDirectory, entries:values, profile:profileValue, width, height, photometry }: {sourceDirectory:string;entries:readonly unknown[];profile:unknown;width:number;height:number;photometry?:{geometry:ReadonlyMap<string,ObservationGeometry>;profile:PhotometryProfile}|null}) {
-  // The filters name the bands. Corrected colour is matched in display-linear I/F, so only uncorrected colour declares a range.
+  // The filters name the bands. Corrected color is matched in display-linear I/F, so only uncorrected color declares a range.
   checkKeys(profileValue,['sampleFormat','sampleBytes','noData','referenceRadiusMeters','centerLongitude','standardParallel','filters'],['specialValueMagnitude','displayRange'],'observed color profile');
   const entries=values.map(parseColorEntry),profile=parseColorSourceProfile(profileValue);
   if(!photometry===(profile.displayRange===undefined))throw new TypeError('Observed calibrated color declares a display range exactly when it is not photometrically matched.');

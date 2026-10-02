@@ -67,7 +67,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from the star's X-shooter spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "qualification": "Color from the star's X-shooter spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
         "thumbnail": "pds-70-dataset-color.webp",
         "surface": "pds-70-surface-color@2x.webp",
         "poles": "pds-70-poles-color@2x.webp",
@@ -77,7 +77,7 @@
           "url": "https://archive.eso.org/"
         },
         "falseColor": false,
-        "notes": "The colour of the star's spectrum measured with ESO's X-shooter on 26 December 2020, through a slit wide enough to keep all its light: an orange K7 star. It is still accreting gas from its disc, and that light is part of its colour. The darkening toward the edge is the quadratic law Claret and Bloemen (2011) compute from ATLAS model atmospheres for a star of 3,972 K and log g 4.22: a model, because no image measures this star's limb. No spin axis is measured on the sky, so the display axis is celestial north."
+        "notes": "The color of the star's spectrum measured with ESO's X-shooter on 26 December 2020, through a slit wide enough to keep all its light: an orange K7 star. It is still accreting gas from its disc, and that light is part of its color. The darkening toward the edge is the quadratic law Claret and Bloemen (2011) compute from ATLAS model atmospheres for a star of 3,972 K and log g 4.22: a model, because no image measures this star's limb. No spin axis is measured on the sky, so the display axis is celestial north."
       },
       {
         "id": "dust-ring",
@@ -89,7 +89,7 @@
           "datasetId": "dust",
           "surface": "color"
         },
-        "notes": "The star in the colour of its spectrum, with the ring of dust around it in its own glow at 0.87 millimetres, as ALMA imaged it on 27 July 2019 (project 2018.A.00030.S). It is the ALMA pipeline's image from the public archive, shown in the colour map and scale Benisty et al. (2021) use in their Figure 1. The ring lies 50 to 100 au from the star, outside the orbits of planets b (21 au) and c (34 au), which have cleared the gap inside it; it is brighter on its north-west side. Measured on this image it is 73.5 au in radius and tilted 50°, against 74 au and 51.7° in Keppler et al. (2019). The image has no third axis, so the depth is inferred: a tilted ring of that geometry projects to it better than a spherical shell or a constant depth, and each line of sight is placed on it. Its west side is drawn nearer, the side Keppler et al. (2018) find nearer in scattered light; its thickness is a stated convention. The faint dust around planet c that Benisty et al. found is at the edge of this image's noise and is not claimed.",
+        "notes": "The star in the color of its spectrum, with the ring of dust around it in its own glow at 0.87 millimetres, as ALMA imaged it on 27 July 2019 (project 2018.A.00030.S). It is the ALMA pipeline's image from the public archive, shown in the color map and scale Benisty et al. (2021) use in their Figure 1. The ring lies 50 to 100 au from the star, outside the orbits of planets b (21 au) and c (34 au), which have cleared the gap inside it; it is brighter on its north-west side. Measured on this image it is 73.5 au in radius and tilted 50°, against 74 au and 51.7° in Keppler et al. (2019). The image has no third axis, so the depth is inferred: a tilted ring of that geometry projects to it better than a spherical shell or a constant depth, and each line of sight is placed on it. Its west side is drawn nearer, the side Keppler et al. (2018) find nearer in scattered light; its thickness is a stated convention. The faint dust around planet c that Benisty et al. found is at the edge of this image's noise and is not claimed.",
         "falseColor": true,
         "legend": {
           "kind": "categories",

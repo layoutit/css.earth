@@ -8,7 +8,7 @@ It is the only planet known around TOI-1105. Its orbit and size follow Lafarga e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 10.86797977741 d Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): a/R* 25.793619; Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): inclination 88.95536 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460847.732013 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1105's measured colour (#ffd5b9, the colour dataset of toi-1105 (src/objects/toi-1105/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1105's measured color (#ffd5b9, the color dataset of toi-1105 (src/objects/toi-1105/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1105's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (67, 93, 94), folded onto its orbit. Upper limits and rows without an error are left out.
 

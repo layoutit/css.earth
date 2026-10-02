@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by XO-2 N; the neutral gray is a display convention, not a measured colour.",
+        "qualification": "A sphere of the published radius, lit by XO-2 N; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "xo-2-n-b-dataset-shape.webp",
         "surface": "xo-2-n-b-surface-shape@2x.webp",
         "poles": "xo-2-n-b-poles-shape@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of XO-2 N b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of xo-2-n's light, as its colour dataset measures it."
+        "notes": "No image or color of XO-2 N b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of xo-2-n's light, as its color dataset measures it."
       }
     ]
   },

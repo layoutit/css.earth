@@ -31,7 +31,7 @@ test('OPUS rows parse in column order, and a row without a centre resolution is 
     { opusId: 'nh-lorri-lor_0299174108', instrument: 'New Horizons LORRI', time: '2015-07-14T10:03:09.806', centerKmPerPixel: 0.30188, phaseDegrees: null }]);
 });
 
-test('imagery is each photograph dataset\'s finest frame and each map dataset\'s native scale; false colour, science and shape are not', () => {
+test('imagery is each photograph dataset\'s finest frame and each map dataset\'s native scale; false color, science and shape are not', () => {
   const surfaces = { surfaces: [
     { id: 'shape', appearance: 'neutral', source: { id: 'shape', width: 100 }, projection: 'x' },
     { id: 'normal', observation: { frames: [{ id: 'a', footprint: { nadirMedianMeters: 900 } }, { id: 'b', footprint: { nadirMedianMeters: 450 } }] } },
@@ -46,7 +46,7 @@ test('imagery is each photograph dataset\'s finest frame and each map dataset\'s
 });
 
 test('the verdict: too few pixels first, then no dataset, then the upgrade factor', () => {
-  // Hydra's best MVIC colour scan: about 50 km across at 4.6 km/px is 11 px.
+  // Hydra's best MVIC color scan: about 50 km across at 4.6 km/px is 11 px.
   assert.equal(imageryVerdict({ shippedMeters: 1137, opusKmPerPixel: 4.6, diameterKm: 50, minimumPixels: 50 }).verdict, 'too-small');
   assert.equal(imageryVerdict({ shippedMeters: null, opusKmPerPixel: 0.3, diameterKm: 50, minimumPixels: 50 }).verdict, 'candidate');
   assert.equal(imageryVerdict({ shippedMeters: 300, opusKmPerPixel: 0.30023, diameterKm: 50, minimumPixels: 50 }).verdict, 'no-upgrade', 'Nix already ships its finest LORRI frame');

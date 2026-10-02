@@ -220,7 +220,7 @@ test('shared-opacity actual 64-slab source-over preserves photo RGB through nonu
   for (let x = 0; x < width; x++) {
     const peak = 1 - .2 ** factors[x]!;
     for (let channel = 0; channel < 3; channel++) {
-      // RGBA8 slab alpha and straight-colour rounding limit numerical recovery.
+      // RGBA8 slab alpha and straight-color rounding limit numerical recovery.
       assert.ok(Math.abs(forward[x]![channel]! - peak * [1,.5,.25][channel]!) < .006,
         `column ${x}, channel ${channel}: ${forward[x]![channel]} versus ${peak * [1,.5,.25][channel]!}`);
     }

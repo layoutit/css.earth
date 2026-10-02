@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 7.2622 +/- 0.2592 solar radii from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 212324691 (K2 campaign 6): PARAM radius (solar radii) 7.262224 (16th-84th percentiles 7.009513-7.527828), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196); Mass 1.1404 +/- 0.0984 solar masses from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 212324691 (K2 campaign 6): PARAM mass (solar masses) 1.140387 (16th-84th percentiles 1.046918-1.24374), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196); temperature from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 212324691: APOGEE DR17 effective temperature 4943.5586 +/- 50 K (the catalogue's final uncertainty).
 
-Colour: a Planck spectrum at the temperature of Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 212324691: APOGEE DR17 effective temperature 4943.5586 +/- 50 K (the catalogue's final uncertainty), through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: a Planck spectrum at the temperature of Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 212324691: APOGEE DR17 effective temperature 4943.5586 +/- 50 K (the catalogue's final uncertainty), through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 

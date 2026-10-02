@@ -30,11 +30,11 @@ export function parseObservedSurfaceRecipe(input: unknown) {
     if(dataset.decode.kind==='raster'&&![3,4].includes(dataset.decode.channels))throw new TypeError('Invalid raster channels.');
     if(dataset.decode.kind==='fits'){
       const color=dataset.decode.color;
-      if(dataset.decode.bitpix!==-32||!dimensions(dataset.decode.width,dataset.decode.height)||!color||![3,4].includes(color.channels)||!isArray(color.palette)||color.palette.length!==3||color.palette.some(rgb=>!isArray(rgb)||rgb.length!==3||rgb.some(c=>!Number.isSafeInteger(c)||c<0||c>255))||!isArray(color.percentiles)||color.percentiles.length!==2||!color.percentiles.every(fraction)||color.percentiles[0]>=color.percentiles[1]||color.percentiles[1]===1||!['sqrt','power'].includes(color.transfer)||!positive(color.exponent)||!fraction(color.minimumCoverage))throw new TypeError('Invalid scientific colour mapping.');
+      if(dataset.decode.bitpix!==-32||!dimensions(dataset.decode.width,dataset.decode.height)||!color||![3,4].includes(color.channels)||!isArray(color.palette)||color.palette.length!==3||color.palette.some(rgb=>!isArray(rgb)||rgb.length!==3||rgb.some(c=>!Number.isSafeInteger(c)||c<0||c>255))||!isArray(color.percentiles)||color.percentiles.length!==2||!color.percentiles.every(fraction)||color.percentiles[0]>=color.percentiles[1]||color.percentiles[1]===1||!['sqrt','power'].includes(color.transfer)||!positive(color.exponent)||!fraction(color.minimumCoverage))throw new TypeError('Invalid scientific color mapping.');
     }
     if(dataset.coverage?.kind==='component-fits'&&(dataset.decode.kind!=='raster'||dataset.decode.crop||dataset.calibration||dataset.coverage.sources.some(path=>!sourcePaths.has(path))))throw new TypeError('Component coverage requires an uncropped RGB map and declared FITS sources.');
     for(const continuation of[dataset.decode.continuation,dataset.coverage?.kind==='boundary-mean'?dataset.coverage:null])if(continuation&&(!positive(continuation.exponent)||!positive(continuation.boundaryFraction)||continuation.boundaryFraction>=1||!Number.isFinite(continuation.minimumBoundarySum ?? 0)))throw new TypeError('Invalid boundary continuation.');
-    if(dataset.calibration&&(!sourcePaths.has(dataset.calibration.source)||(dataset.decode.kind !== 'raster' || dataset.decode.channels!==3)))throw new TypeError('Invalid true-colour calibration input.');
+    if(dataset.calibration&&(!sourcePaths.has(dataset.calibration.source)||(dataset.decode.kind !== 'raster' || dataset.decode.channels!==3)))throw new TypeError('Invalid true-color calibration input.');
     operations(dataset.transforms);
     if(!isArray(dataset.products)||!dataset.products.length)throw new TypeError('Observation has no products.');
     for(const product of dataset.products){
@@ -60,13 +60,13 @@ export async function verifyObservationSources(directory: string, sources: reado
 }
 
 export function rgbMoments(source: Uint8Array,width: number,height: number,sample: Region) {
-  if(sample.left<0||sample.top<0||sample.left+sample.width>width||sample.top+sample.height>height) throw new RangeError('Colour sample is outside its observation.');
+  if(sample.left<0||sample.top<0||sample.left+sample.width>width||sample.top+sample.height>height) throw new RangeError('Color sample is outside its observation.');
   const sum=[0,0,0],squaredSum=[0,0,0],count=sample.width*sample.height;
   for(let y=sample.top;y<sample.top+sample.height;y++) for(let x=sample.left;x<sample.left+sample.width;x++) for(let channel=0;channel<3;channel++) {
     const value=source[(y*width+x)*3+channel]; sum[channel]+=value;squaredSum[channel]+=value**2;
   }
   const mean=sum.map(value=>value/count),standardDeviation=squaredSum.map((value,channel)=>Math.sqrt(value/count-mean[channel]**2));
-  if(standardDeviation.some(value=>!Number.isFinite(value)||value<=0)) throw new Error('Colour sample variance drifted.');
+  if(standardDeviation.some(value=>!Number.isFinite(value)||value<=0)) throw new Error('Color sample variance drifted.');
   return {mean,standardDeviation};
 }
 

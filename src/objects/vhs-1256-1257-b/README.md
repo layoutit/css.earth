@@ -12,7 +12,7 @@ VHS 1256-1257 b is a young companion of about 12 Jupiter masses, 8 arcseconds (a
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray. No paper gives its flux in three bands comparable with HR 8799's planets, whose false colour comes from JWST (the [ledger](investigations.json) says what would change that).
+**Shape dataset.** A sphere of the model radius in the shared neutral gray. No paper gives its flux in three bands comparable with HR 8799's planets, whose false color comes from JWST (the [ledger](investigations.json) says what would change that).
 
 **Rotation.** No spin axis on the sky is measured; the display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -26,6 +26,6 @@ Run of 2026-09-23 (this version):
 
 - The planet moves across the sky at about 10 mas a year, close to the fastest a bound orbit this far out allows, so the orbits that fit crowd toward high eccentricity and the recorded one is eccentric (e 0.64). The orbit is about the pair's centre of mass but is drawn around A, which lies up to about 50 mas from that centre on the sky; on an 8-arcsecond separation neither offset is visible.
 - The radius and mass are model values; the planet is a point in every image.
-- No colour is measured in bands comparable with HR 8799's, and no spin axis is measured.
+- No color is measured in bands comparable with HR 8799's, and no spin axis is measured.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -14,7 +14,7 @@ The orbit goes around the centre of mass of [star A](../kepler-16-a/README.md) a
 
 The year is 225.885 days, the mean period of the planet's transits in the Villanova Kepler Eclipsing Binary Catalogue. Doyle et al.'s 228.776 days is an instantaneous (osculating) period: the stars' pull changes it by about ±5 days within years (Triaud et al. 2022, Sect. 3.5), and a fixed ellipse at that period would place the planet about 80 days off by 2026.
 
-Not measured and not shown: colour, albedo, surface, atmosphere, rotation. The display axis is the orbit normal, a convention.
+Not measured and not shown: color, albedo, surface, atmosphere, rotation. The display axis is the orbit normal, a convention.
 
 ## Evidence
 

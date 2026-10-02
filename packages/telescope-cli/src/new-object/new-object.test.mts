@@ -1,4 +1,4 @@
-/** The object generator's decisions, offline: the spec it accepts, the colour route it picks and the gaps it declares, the orbits it
+/** The object generator's decisions, offline: the spec it accepts, the color route it picks and the gaps it declares, the orbits it
  * writes from each route, checked against packages that already ship. */
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -21,8 +21,8 @@ test('a spec is checked before any archive is read', () => {
   assert.equal(parseStarSpec(star).system, 'Test Star system');
   assert.throws(() => parseStarSpec({ ...star, gaia: undefined }), /give target \(a SIMBAD name\), gaia \(a Gaia DR3 source_id\) or position/u);
   assert.throws(() => parseStarSpec({ ...star, temperature: { ...star.temperature, url: 'a paper' } }), /https URL/u);
-  assert.throws(() => parseStarSpec({ ...star, colour: {} }), /unknown spec fields colour/u);
-  assert.throws(() => parseStarSpec({ ...star, color: { skip: ['hubble'], reason: 'x' } }), /hubble are not colour routes/u);
+  assert.throws(() => parseStarSpec({ ...star, hue: {} }), /unknown spec fields hue/u);
+  assert.throws(() => parseStarSpec({ ...star, color: { skip: ['hubble'], reason: 'x' } }), /hubble are not color routes/u);
   const planet = { id: 'test-star-b', name: 'Test Star b', description: 'A planet.', paper: star.paper, orbit: { elements: { periodDays: 3, semiMajorAxisStellarRadii: 9, inclinationDegrees: 88, eccentricity: 0, transitTimeBmjdTdb: 59000 }, source: 's', url: 'https://arxiv.org/abs/2110.06729' } };
   assert.throws(() => parseStarSpec({ ...star, planets: [planet] }), /give radius and mass/u);
   const sized = { ...planet, radius: { value: 1, source: 's', url: star.paper.url }, mass: { value: 1, source: 's', url: star.paper.url } };
@@ -49,7 +49,7 @@ const kharitonovLine = (record: number, hr: number, flux: (nm: number) => number
   `${String(record).padStart(4, '0')} 05 54 23.5 +20 16 38 ${String(hr).padStart(5, '0')}     039587     4.41     G0V`.padEnd(79)
   + Array.from({ length: 88 }, (_, k) => String(Math.round(flux(322.5 + 5 * k))).padStart(7)).join('');
 
-test('the colour comes from the first route that reads, the cross-check from the next, and Planck only when none does', async () => {
+test('the color comes from the first route that reads, the cross-check from the next, and Planck only when none does', async () => {
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const catalog = Buffer.from([kharitonovLine(1, 15, () => 500), kharitonovLine(2, 2047, nm => 400 + nm / 10)].join('\n'));
   const archive: Archive = {
@@ -69,7 +69,7 @@ test('the colour comes from the first route that reads, the cross-check from the
   const none = await chooseColor(spec, row, { main: 'x' }, archive, cmf);
   assert.equal(none.route, 'planck');
   assert.match(String((none.record.temperature as { published: { citation: string } }).published.citation), /no uncertainty/u);
-  // Routes the spec skips are not archives that lack the star: the spec's reason is the Planck colour's reason, said once.
+  // Routes the spec skips are not archives that lack the star: the spec's reason is the Planck color's reason, said once.
   const reason = 'Dust reddens every spectrum of this star';
   const skipped = await chooseColor(parseStarSpec({ ...star, color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'], reason } }), row, { main: 'x', hd: 39587, hr: 2047 }, archive, cmf);
   assert.equal(skipped.route, 'planck');
@@ -227,7 +227,7 @@ test('reader quotes come verbatim from the Wikipedia lead: the sentence naming t
     ['55 Cancri e', 'Epsilon Indi A', 'HU Aquarii', 'Upsilon Andromedae b', 'Mu2 Scorpii', 'HD 219134 b', 'Kepler-62 f', 'TOI-700'], 'as Wikipedia titles the articles');
 });
 
-test('a planet takes its colour from what is measured: the emission row with the smallest relative uncertainty, else its host\'s light on the gray', async () => {
+test('a planet takes its color from what is measured: the emission row with the smallest relative uncertainty, else its host\'s light on the gray', async () => {
   const { EMISSION_COLUMNS, parseEmissionRows, pickThermalRow } = await import('./planet-datasets.mts');
   const { hostLitGray } = await import('@cssearth/bake/objects/color');
   const csv = [EMISSION_COLUMNS,
@@ -304,7 +304,7 @@ test('a generated planet with a measured dayside temperature keeps its thermal d
   assert.match(shape.notes, /the gray marks an unresolved surface/u);
   // Host light adds its sentence to the base note; the scaffold's TODO never survives (a regression #691 introduced).
   assert.doesNotMatch(shape.notes, /TODO/u);
-  assert.match(shape.notes, /takes the colour of hd-219134's light/u);
+  assert.match(shape.notes, /takes the color of hd-219134's light/u);
   // A mass that is only an upper limit is shown as one.
   assert.equal((await build({}, { ...cited, value: 0.12, limit: true })).facts.find(fact => fact.id === 'mass')!.value, 'Under 0.12 Jupiter masses');
   assert.equal((await build({}, { ...cited, value: 0, unmeasured: true })).facts.find(fact => fact.id === 'mass')!.value, 'Not measured');
@@ -332,7 +332,7 @@ test('a planet whose archive mass is only an upper limit gets GM 0, the records\
   assert.match(String(none.body.physicalNotes), /No mass is measured: the NASA Exoplanet Archive's composite table, which adopts no mass for Kepler-62 f/u);
 });
 
-test('a Planck colour outside sRGB (a cool companion) is shown desaturated and the record says so; one inside keeps its record plain', async () => {
+test('a Planck color outside sRGB (a cool companion) is shown desaturated and the record says so; one inside keeps its record plain', async () => {
   const { planckChoice } = await import('./color.mts');
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const cool = planckChoice('x', { value: 1300, source: 's', url: star.paper.url }, 'why', [], cmf);
@@ -372,11 +372,11 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   assert.deepEqual([planets[0]!.thermal !== undefined, planets[1]!.thermal !== undefined], [true, false]);
   assert.match(skipped.join('; '), /HD 1 d: found by radial velocity, and the archive gives no orbit rows for it/u);
   assert.match(notes.join('; '), /HD 1 c: no measured dayside brightness temperature/u);
-  // WASP-8 b's dayside, 938 K (archive, 2026-09-29), is too cool for a black-body colour: it takes its host's light, and says why.
+  // WASP-8 b's dayside, 938 K (archive, 2026-09-29), is too cool for a black-body color: it takes its host's light, and says why.
   const cool = { ...archive, async text(url: string) { return (await archive.text(url)).replace(',1400,80,-80,', ',938,40,-40,'); } };
   const cooled = await archiveSpec(cool, 'HD 1', { ids: new Set(), names: new Map(), stars: [] });
   assert.equal((cooled.spec.planets as { thermal?: unknown }[])[0]!.thermal, undefined);
-  assert.match(cooled.notes.join('; '), /HD 1 b: its dayside brightness temperature, 938 K \(Four et al\. 2022\), is too cool to glow \(a black-body colour needs over 1000 K\); its gray takes the host's light/u);
+  assert.match(cooled.notes.join('; '), /HD 1 b: its dayside brightness temperature, 938 K \(Four et al\. 2022\), is too cool to glow \(a black-body color needs over 1000 K\); its gray takes the host's light/u);
   assert.equal((spec.temperature as { value: number }).value, 5000);
   assert.equal(spec.gaia, '123456789', 'the archive\'s Gaia DR3 id, which SIMBAD must agree with');
   // A host the universe holds under another id, found by the name its planets use: its new planets become an addition to it.
@@ -606,7 +606,7 @@ test('a whole star package from fixtures is what the bake accepts: declared file
   assertWholePackage(generated.files, spec.id, true);
   const { parseInvestigationLedger } = await import('@cssearth/bake/sources');
   const ledger = parseInvestigationLedger(JSON.parse(String(generated.files.get(`src/objects/${spec.id}/investigations.json`))), spec.id);
-  assert.deepEqual(ledger.entries.map(entry => entry.id), ['placement', 'radius-mass-and-temperature', 'colour'], 'the ledger records each choice the generator made');
+  assert.deepEqual(ledger.entries.map(entry => entry.id), ['placement', 'radius-mass-and-temperature', 'color'], 'the ledger records each choice the generator made');
   const stored = parseObjectSpecs({ stars: [JSON.parse(String(generated.files.get(`src/objects/${spec.id}/${STORED_SPEC}`)))] }).stars[0]!;
   assert.deepEqual(stored, { ...spec, order: 9999 }, 'the stored spec reads back to the spec that made the package');
 });
@@ -651,7 +651,7 @@ test('a star beyond Gaia\'s parallax is placed at its cited distance; a weak or 
   assert.match(String(generated.files.get(`src/objects/${spec.id}/README.md`)), /distance 964,000 pc from Bonanos et al\. \(2006\), ApJ 652, 313; Gaia DR3 gives it no parallax/u);
 });
 
-test('an imaged planet\'s K, H and J magnitudes become the band colour, each cited to its paper; a planet missing a band is named', async () => {
+test('an imaged planet\'s K, H and J magnitudes become the band color, each cited to its paper; a planet missing a band is named', async () => {
   const { draftUltracoolPhotometry, readCsv, ULTRACOOL } = await import('./ultracool.mts');
   const { parsePhotometryEntries } = await import('./spec.mts');
   assert.deepEqual(readCsv('a,b\n"x, y",2\n'), [{ a: 'x, y', b: '2' }]);

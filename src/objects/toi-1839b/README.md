@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-1839. Its orbit and size follow Castro-G
 
 **Orbit.** Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2026): P 1.4237828 d Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2026): a/R* 5.69; Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2026): inclination 87.8 degrees No archive row states an eccentricity; the orbit is taken as circular Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2026): transit mid-time 2459690.239 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1839's measured colour (#ffe9da, the colour dataset of toi-1839 (src/objects/toi-1839/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1839's measured color (#ffe9da, the color dataset of toi-1839 (src/objects/toi-1839/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1839's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (23, 46, 50), folded onto its orbit. Upper limits and rows without an error are left out.
 

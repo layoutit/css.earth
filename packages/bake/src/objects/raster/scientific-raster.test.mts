@@ -172,10 +172,10 @@ test('a nearest-sampled numeric palette resolves through 256 steps, a lossy one 
     const dataset = { minimum: -1, maximum: 1, colors: ['#000000', '#ff0000', '#ffffff'], ...(displaySampling ? { displaySampling } : {}) } as never;
     const lookup = paletteLookup(dataset), seen = new Set<string>();
     let previous = -1;
-    for (let i = 0; i <= 8000; i++) { const c = lookup(-1 + 2 * i / 8000); seen.add(c.join(',')); const rank = c[0]! * 2 + c[1]!; assert.ok(rank >= previous, 'colour never runs backwards'); previous = rank; }
-    assert.ok(seen.size <= steps, `${seen.size} colours for ${steps} steps`);
+    for (let i = 0; i <= 8000; i++) { const c = lookup(-1 + 2 * i / 8000); seen.add(c.join(',')); const rank = c[0]! * 2 + c[1]!; assert.ok(rank >= previous, 'color never runs backwards'); previous = rank; }
+    assert.ok(seen.size <= steps, `${seen.size} colors for ${steps} steps`);
     assert.ok(displaySampling ? seen.size <= LOSSLESS_PALETTE_STEPS : seen.size > LOSSLESS_PALETTE_STEPS, 'the lossy ramp keeps its finer steps');
     assert.deepEqual(lookup(-5), [0, 0, 0]); assert.deepEqual(lookup(5), [255, 255, 255]);
-    for (const [c, exact] of lookup(0).map((v, i) => [v, colorForValue(0, dataset)[i]!] as const)) assert.ok(Math.abs(c - exact) <= 2, 'a step lands within two of the exact colour');
+    for (const [c, exact] of lookup(0).map((v, i) => [v, colorForValue(0, dataset)[i]!] as const)) assert.ok(Math.abs(c - exact) <= 2, 'a step lands within two of the exact color');
   }
 });

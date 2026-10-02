@@ -6,7 +6,7 @@ Its radius and temperature follow Barros et al. 2017. The introduction is genera
 
 **Star.** Placement: Gaia DR3 source 3698307419878650240, parallax 9.172 ± 0.022 mas (109.02 pc). Radius 1.296 +/- 0.058 solar radii from Barros et al. 2017, the stellar radius of the default parameter set of HD 106315 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract). Mass 1.091 +/- 0.036 solar masses from Barros et al. 2017, the stellar mass of the default parameter set of HD 106315 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract). Temperature 6,327 K from Barros et al. 2017, the stellar temperature of the default parameter set of HD 106315 b in the NASA Exoplanet Archive. log g 4.25 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 3698307419878650240, through the CIE 1931 2° observer: #efeeff. Routes tried in order: stis-ngsl: HD 106315 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 3698307419878650240, through the CIE 1931 2° observer: #efeeff. Routes tried in order: stis-ngsl: HD 106315 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,327 K and log g 4.25 (u1 0.368, u2 0.308): a model, because no fit of this star's limb is used.
 

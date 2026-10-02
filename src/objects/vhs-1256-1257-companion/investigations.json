@@ -3,8 +3,8 @@
   "objectId": "vhs-1256-1257-companion",
   "entries": [
     {
-      "id": "photosphere-colour",
-      "subject": "The colour of the photosphere",
+      "id": "photosphere-color",
+      "subject": "The color of the photosphere",
       "status": "included",
       "finding": "A Planck spectrum at the published 2,700 K (Dupuy et al. 2023, the pair's combined spectrum), through the CIE 1931 2-degree observer into sRGB with the D65 white.",
       "evidence": [
@@ -13,9 +13,9 @@
     },
     {
       "id": "own-spectrum",
-      "subject": "A spectrum of this star alone as the colour",
+      "subject": "A spectrum of this star alone as the color",
       "status": "excluded",
-      "finding": "Gaia does not resolve this star from VHS 1256-1257 A, so no spectrum or catalogue row of its own exists; the paper temperature gives the colour.",
+      "finding": "Gaia does not resolve this star from VHS 1256-1257 A, so no spectrum or catalogue row of its own exists; the paper temperature gives the color.",
       "revisitWhen": "A spectrum of this star alone is published.",
       "evidence": [
         "https://gea.esac.esa.int/archive/",

@@ -9,6 +9,12 @@
     },
     {
       "location": "public",
+      "filename": "mars-billboard.webp",
+      "bytes": 11678,
+      "sha256": "516c1b72c3c61af887d910a17f386065247684e80dfd4a3fa9438a97e4859bdd"
+    },
+    {
+      "location": "public",
       "filename": "mars-dataset-albedo.webp",
       "bytes": 3548,
       "sha256": "ecea8754b59d5e286994b4f20f789a8dab409503dbf96aed04604074f64ce1c5"
@@ -1168,14 +1174,14 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 51089,
-      "sha256": "0c2550fdce6cc73488708526a66887349ce22f75405066fc286071a93108d1e7"
+      "bytes": 51008,
+      "sha256": "80a0749e2bb4e7304c9ca31a20c77eaca48cf1f00db313ad17c4e66723c55809"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 69434,
-      "sha256": "ae83554df61ec2701fe858aecee4b42456a0d5c76b7b625ac57ab54262951735"
+      "bytes": 69353,
+      "sha256": "c7b5d96ccc548cd3973d5644e61d6c6122d3fb9bd36da5de2a1f9c31c45cb97b"
     },
     {
       "location": "prepared",
@@ -1348,14 +1354,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 447918,
-      "sha256": "ad8c1cf6db25598a39e38894e2f109b7120c0c985077c6cefbbf2c061581125b"
+      "bytes": 447837,
+      "sha256": "7cf198ed8a4b1b46453abf1f12090a8d1e1d1eb8637bcdfc006484c7920f1392"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 393599,
-      "sha256": "d3c0c4ebad2ffe8f5b45e16b416215d6ab59ea7d2fafc248c3cc2360ade4d276"
+      "bytes": 393598,
+      "sha256": "91bcdfd4a4ea067e0d6ca23dac39fa2c6852339af818335f68f65368ea7b8cc6"
     },
     {
       "location": "prepared",
@@ -1372,20 +1378,14 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 5482,
-      "sha256": "47088662ee5339377dc2d744060a3ce03c21359f09f0dc6381347621453be0a6"
+      "bytes": 5480,
+      "sha256": "b5f79f1a47bb495744b0f03b155a5665105389a0e0d391050c64981cdb85d756"
     },
     {
       "location": "prepared",
       "filename": "world-navigation.json",
       "bytes": 1217,
       "sha256": "3524ba368f18215f01ec65d75a41594f2f0bc52c2d01613504c264094f716d89"
-    },
-    {
-      "location": "public",
-      "filename": "mars-billboard.webp",
-      "bytes": 11678,
-      "sha256": "516c1b72c3c61af887d910a17f386065247684e80dfd4a3fa9438a97e4859bdd"
     }
   ]
 }

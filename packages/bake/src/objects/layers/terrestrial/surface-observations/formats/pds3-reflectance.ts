@@ -1,6 +1,6 @@
 import { pds3Keyword, pds3Values } from '@cssearth/telescope';
 
-/** Archive-specific evidence for the calibrated VICAR band-colour lane. */
+/** Archive-specific evidence for the calibrated VICAR band-color lane. */
 export function pds3LabelHasReflectance(label: string): boolean {
   const units = pds3Keyword(label, 'UNITS');
   if (units !== undefined) return units === 'I/F';

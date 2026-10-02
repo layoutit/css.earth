@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Subtract a reference star's coronagraphic PSF from a Hubble coronagraph observation: reference-star differential imaging for
  * ACS/HRC, the stage the archive does not run. A coronagraph blocks the star's core, but its diffracted and scattered light is
- * still far brighter than a debris disc; a star of similar colour observed behind the same occulter in the same orbit sequence
+ * still far brighter than a debris disc; a star of similar color observed behind the same occulter in the same orbit sequence
  * carries the same pattern, and scaled and shifted onto the science star it removes it.
  *
  *   node packages/telescope-cli/src/archives/hst/psf-subtract.mts <subtraction id> <work directory> [--raw <dir>]...

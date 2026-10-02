@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured color or brightness.",
         "thumbnail": "eps-indi-ba-dataset-shape.webp",
         "surface": "eps-indi-ba-surface-shape@2x.webp",
         "poles": "eps-indi-ba-poles-shape@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://arxiv.org/abs/2205.08077"
         },
         "falseColor": false,
-        "notes": "No image of the photosphere exists, and a blackbody colour would misrepresent a brown dwarf's absorbed visible spectrum (see the ledger). Neutral gray marks an unresolved surface; the display axis is a convention."
+        "notes": "No image of the photosphere exists, and a blackbody color would misrepresent a brown dwarf's absorbed visible spectrum (see the ledger). Neutral gray marks an unresolved surface; the display axis is a convention."
       }
     ]
   },

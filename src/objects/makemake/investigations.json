@@ -27,8 +27,8 @@
       "id": "neutral-gray-shape-dataset",
       "subject": "Shared neutral gray for the unresolved surface",
       "status": "excluded",
-      "finding": "Replaced by the measured whole-disc colour. The gray was a display convention; published colour indices and a V geometric albedo now give Makemake a measured uniform colour, which the shape-only convention does not supersede.",
-      "revisitWhen": "The published colour or albedo is withdrawn or shown not to describe the whole disc.",
+      "finding": "Replaced by the measured whole-disc color. The gray was a display convention; published color indices and a V geometric albedo now give Makemake a measured uniform color, which the shape-only convention does not supersede.",
+      "revisitWhen": "The published color or albedo is withdrawn or shown not to describe the whole disc.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/makemake/source/photometry/disc-color.json",
         "https://github.com/layoutit/css.earth/blob/main/docs/shape-only-material.md"
@@ -45,10 +45,10 @@
       ]
     },
     {
-      "id": "hromakina-2019-colours",
-      "subject": "Hromakina et al. (2019) BVRI colours and V geometric albedo",
+      "id": "hromakina-2019-colors",
+      "subject": "Hromakina et al. (2019) BVRI colors and V geometric albedo",
       "status": "included",
-      "finding": "B-V 0.91 +/-0.03, V-R 0.41 +/-0.02, V-I 0.65 +/-0.03 (section 3.4, no colour variation detected) and p_V 0.82 +/-0.02 (section 4) give the uniform Color dataset through the disc-integrated-color method.",
+      "finding": "B-V 0.91 +/-0.03, V-R 0.41 +/-0.02, V-I 0.65 +/-0.03 (section 3.4, no color variation detected) and p_V 0.82 +/-0.02 (section 4) give the uniform Color dataset through the disc-integrated-color method.",
       "evidence": [
         "https://arxiv.org/abs/1904.03679",
         "https://doi.org/10.26093/cds/vizier.36250046",
@@ -56,11 +56,11 @@
       ]
     },
     {
-      "id": "mboss-rabinowitz-2007-colours",
-      "subject": "MBOSS mean colours from Rabinowitz et al. (2007)",
+      "id": "mboss-rabinowitz-2007-colors",
+      "subject": "MBOSS mean colors from Rabinowitz et al. (2007)",
       "status": "excluded",
       "finding": "The MBOSS catalogue (J/A+A/546/A115) lists one epoch for Makemake with B-V 0.828 +/-0.022 and V-I 0.812 +/-0.021 but no V-R. Hromakina et al. (2019) give all three indices from several nights and say they agree with it. Measured with the same method and Hromakina's V-R, the MBOSS values change only blue, from 211 to 218 of 255.",
-      "revisitWhen": "A newer multi-epoch colour set disagrees with Hromakina et al. (2019) beyond their uncertainties.",
+      "revisitWhen": "A newer multi-epoch color set disagrees with Hromakina et al. (2019) beyond their uncertainties.",
       "evidence": [
         "https://doi.org/10.26093/cds/vizier.35460115"
       ]

@@ -1,25 +1,25 @@
-/** The colour an object's world-context marker, orbit and label take.
+/** The color an object's world-context marker, orbit and label take.
  *
- * A provenance-bearing swatch (src/objects/<id>/swatch.json) wins. Otherwise the object's catalogue colour is used, the one its
+ * A provenance-bearing swatch (src/objects/<id>/swatch.json) wins. Otherwise the object's catalogue color is used, the one its
  * distant point already shows, unless it is achromatic: red, green and blue equal is the shared neutral gray of a body with no
- * measured colour, a display convention, so the context keeps its own default instead.
+ * measured color, a display convention, so the context keeps its own default instead.
  *
- * The label is text on the black sky, drawn at the object's label opacity (contextAnnotationOpacity), so the colour as it reaches
+ * The label is text on the black sky, drawn at the object's label opacity (contextAnnotationOpacity), so the color as it reaches
  * the screen, each encoded channel times that opacity over black, must meet the WCAG 2.2 contrast minimum for text, 4.5:1 (success
- * criterion 1.4.3, https://www.w3.org/TR/WCAG22/#contrast-minimum). A colour that meets it is used as it is. The minimum, not the
+ * criterion 1.4.3, https://www.w3.org/TR/WCAG22/#contrast-minimum). A color that meets it is used as it is. The minimum, not the
  * gray default's higher contrast, is the target: lightening further washes distinct hues toward the same pastel. One that does not keeps its hue
  * and has only its Oklab lightness raised (Ottosson 2020, https://bottosson.github.io/posts/oklab/) to the first value that meets
- * it; a lighter colour outside sRGB has its chroma reduced, as CSS Color 4 gamut mapping does
- * (https://www.w3.org/TR/css-color-4/#gamut-mapping). The measured colour itself stays in the catalogue and on the body. */
+ * it; a lighter color outside sRGB has its chroma reduced, as CSS Color 4 gamut mapping does
+ * (https://www.w3.org/TR/css-color-4/#gamut-mapping). The measured color itself stays in the catalogue and on the body. */
 export const SKY_BACKGROUND = '#000000';
 export const TEXT_CONTRAST_MINIMUM = 4.5;
-/** The catalogue colour of every body with no measured colour: one neutral gray, so no two unmeasured bodies differ by a
- * colour nobody measured. It is achromatic, which is how the context tells it from a measured colour (contextColour). */
-export const NEUTRAL_CATALOGUE_COLOUR = '#9a9a9a';
-/** The same gray as sRGB bytes, for prepared images (a ring with no measured colour). */
+/** The catalogue color of every body with no measured color: one neutral gray, so no two unmeasured bodies differ by a
+ * color nobody measured. It is achromatic, which is how the context tells it from a measured color (contextColor). */
+export const NEUTRAL_CATALOGUE_COLOR = '#9a9a9a';
+/** The same gray as sRGB bytes, for prepared images (a ring with no measured color). */
 export const NEUTRAL_CATALOGUE_RGB: readonly [number, number, number] = [0x9a, 0x9a, 0x9a];
-/** The world context's own marker, orbit and label colour for a body with no colour of its own. */
-export const DEFAULT_CONTEXT_COLOUR = '#dfdfdf';
+/** The world context's own marker, orbit and label color for a body with no color of its own. */
+export const DEFAULT_CONTEXT_COLOR = '#dfdfdf';
 
 type Rgb = readonly [number, number, number];
 const channel = (hex: string, offset: number) => parseInt(hex.slice(offset, offset + 2), 16) / 255;
@@ -27,12 +27,12 @@ const toLinear = (value: number) => value <= 0.04045 ? value / 12.92 : ((value +
 const toEncoded = (value: number) => value <= 0.0031308 ? 12.92 * value : 1.055 * value ** (1 / 2.4) - 0.055;
 const linearOf = (hex: string): Rgb => [toLinear(channel(hex, 1)), toLinear(channel(hex, 3)), toLinear(channel(hex, 5))];
 
-/** WCAG 2.2 relative luminance of an sRGB colour. */
+/** WCAG 2.2 relative luminance of an sRGB color. */
 export function relativeLuminance(hex: string): number {
   const [r, g, b] = linearOf(hex);
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
-/** WCAG 2.2 contrast ratio of two sRGB colours. */
+/** WCAG 2.2 contrast ratio of two sRGB colors. */
 export function contrastRatio(first: string, second: string): number {
   const a = relativeLuminance(first), b = relativeLuminance(second);
   return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
@@ -55,7 +55,7 @@ function fromOklab([L, a, b]: Rgb): Rgb {
 const inGamut = (rgb: Rgb) => rgb.every(value => value >= -1e-6 && value <= 1 + 1e-6);
 const hexOf = (rgb: Rgb) => `#${rgb.map(value => Math.round(toEncoded(Math.min(1, Math.max(0, value))) * 255).toString(16).padStart(2, '0')).join('')}`;
 
-/** The colour at Oklab lightness L with the hue of (a, b), its chroma reduced only as far as sRGB requires. */
+/** The color at Oklab lightness L with the hue of (a, b), its chroma reduced only as far as sRGB requires. */
 function atLightness(L: number, a: number, b: number): string {
   if (inGamut(fromOklab([L, a, b]))) return hexOf(fromOklab([L, a, b]));
   let low = 0, high = 1;
@@ -63,7 +63,7 @@ function atLightness(L: number, a: number, b: number): string {
   return hexOf(fromOklab([L, a * low, b * low]));
 }
 
-/** The colour as it reaches the screen at an opacity over the black sky: each sRGB-encoded channel times the opacity. */
+/** The color as it reaches the screen at an opacity over the black sky: each sRGB-encoded channel times the opacity. */
 export function composited(hex: string, opacity: number): string {
   return `#${[1, 3, 5].map(offset => Math.round(parseInt(hex.slice(offset, offset + 2), 16) * opacity).toString(16).padStart(2, '0')).join('')}`;
 }
@@ -73,7 +73,7 @@ const readable = (hex: string, opacity: number) => contrastRatio(composited(hex,
 export function readableOnSky(hex: string, opacity: number): string {
   if (!(opacity > 0 && opacity <= 1)) throw new TypeError(`A label opacity is in (0, 1], not ${opacity}.`);
   if (readable(hex, opacity)) return hex.toLowerCase();
-  if (!readable('#ffffff', opacity)) throw new TypeError(`No colour meets ${TEXT_CONTRAST_MINIMUM}:1 on the sky at label opacity ${opacity}.`);
+  if (!readable('#ffffff', opacity)) throw new TypeError(`No color meets ${TEXT_CONTRAST_MINIMUM}:1 on the sky at label opacity ${opacity}.`);
   const [L, a, b] = toOklab(linearOf(hex));
   let low = L, high = 1;
   for (let step = 0; step < 40; step++) {
@@ -83,10 +83,10 @@ export function readableOnSky(hex: string, opacity: number): string {
   return atLightness(high, a, b);
 }
 
-export function contextColour(swatchHex: string | undefined, catalogueHex: string | undefined, labelOpacity: number): string | undefined {
+export function contextColor(swatchHex: string | undefined, catalogueHex: string | undefined, labelOpacity: number): string | undefined {
   const hex = swatchHex ?? catalogueHex;
   if (hex === undefined) return undefined;
-  if (!/^#[0-9a-f]{6}$/iu.test(hex)) throw new TypeError(`A context colour must be #rrggbb, not ${hex}.`);
+  if (!/^#[0-9a-f]{6}$/iu.test(hex)) throw new TypeError(`A context color must be #rrggbb, not ${hex}.`);
   if (swatchHex === undefined) {
     const [red, green, blue] = [1, 3, 5].map(offset => hex.slice(offset, offset + 2).toLowerCase());
     if (red === green && green === blue) return undefined;

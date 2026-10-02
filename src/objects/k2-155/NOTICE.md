@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 0.58 +/- 0.06 solar radii from Díez Alonso et al. 2018, the stellar radius of the default parameter set of K2-155 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D/abstract); Mass 0.65 +/- 0.06 solar masses from Díez Alonso et al. 2018, the stellar mass of the default parameter set of K2-155 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D/abstract); temperature from Díez Alonso et al. 2018, the stellar temperature of the default parameter set of K2-155 b in the NASA Exoplanet Archive.
 
-Colour: Gaia DR3 XP spectrum, source 145333927996558976, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: Gaia DR3 XP spectrum, source 145333927996558976, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 

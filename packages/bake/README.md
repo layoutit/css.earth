@@ -40,16 +40,16 @@ layer (the raster lane uses the photometric models), never sideways. Command ent
 | `@cssearth/bake/surface-previews` | the records a surface minimap or preview raster is drawn from | Node only (`node:*`) |
 | `@cssearth/bake/preparation` | the stale-build check and the renderer bundling plugin | Node only (`node:*`) |
 | `@cssearth/bake/thread-pool` | sizes libuv's thread pool to the cores; imported for its side effect before other entries | Node only (`node:os`) |
-| `@cssearth/bake/objects/color` | the sRGB transfer, band-colour and asinh displays, palettes, whole-disc colour | Node only |
+| `@cssearth/bake/objects/color` | the sRGB transfer, band-color and asinh displays, palettes, whole-disc color | Node only |
 | `@cssearth/bake/objects/geometry` | shape models, radial meshes, shape cameras, ellipsoids, the radial-layer contract | Node only (`node:*`, meshoptimizer) |
 | `@cssearth/bake/objects/cameras` | observer-computed cameras, SPICE kernel banks | Node only |
 | `@cssearth/bake/objects/scene` | the physical world frame, authored rotations, default camera, directional Sun, generated sphere seams | Node only |
-| `@cssearth/bake/objects/raster` | scientific surfaces (PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot), categorical geology, eclipse and phase-curve maps, observed colour rasters | Node only (`node:*`, `sharp`, `geotiff`) |
+| `@cssearth/bake/objects/raster` | scientific surfaces (PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot), categorical geology, eclipse and phase-curve maps, observed color rasters | Node only (`node:*`, `sharp`, `geotiff`) |
 | `@cssearth/bake/objects/sources` | source references read through the manifest, pinned source files, reference banks, the download relay | Node only |
 | `@cssearth/bake/objects/charts` | chart renderers and readers and their shared SVG style | Node only |
 | `@cssearth/bake/objects/content` | the object-content contract, dataset vocabulary, prepared legends | Node only |
 | `@cssearth/bake/objects/surface-features` | surface-feature banks, feature notes, image-control fits | Node only |
-| `@cssearth/bake/objects/stellar` | a star's colour dataset, limb darkening, starspots, gravity darkening | Node only |
+| `@cssearth/bake/objects/stellar` | a star's color dataset, limb darkening, starspots, gravity darkening | Node only |
 | `@cssearth/bake/objects/lineage` | which manifest sources each prepared product of a layered body reads, built in memory | Node only |
 | `@cssearth/bake/objects/candidates` | read-only public-archive searches and imagery and resolved-star candidates | Node only (network) |
 | `@cssearth/bake/objects/default-view` | what the default camera looks at and the turn toward a partial dataset's data | Node only (`node:*`, `sharp`) |

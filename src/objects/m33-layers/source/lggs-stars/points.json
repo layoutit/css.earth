@@ -65,7 +65,7 @@
     }
   },
   "source": "massey-2006-lggs-m33-stars",
-  "meaning": "Stars of M33 in the Local Group Galaxies Survey (Massey et al. 2006), UBVRI photometry over the whole optical disc, after the Gaia foreground cut: one dot per star at its catalogue sky position, coloured by its measured B-V. The survey is limited by crowding in the bright centre, so its density there is a floor.",
+  "meaning": "Stars of M33 in the Local Group Galaxies Survey (Massey et al. 2006), UBVRI photometry over the whole optical disc, after the Gaia foreground cut: one dot per star at its catalogue sky position, colored by its measured B-V. The survey is limited by crowding in the bright centre, so its density there is a floor.",
   "appearance": {
     "colorCss": "#ffffff",
     "radiusPx": 0.5,
@@ -80,7 +80,7 @@
         2.0
       ],
       "steps": 32,
-      "basis": "Measured B-V, observed (not dereddened), through the app's catalogue star colour so these dots match its stars. The range covers M33's blue and red supergiants; a colour beyond it takes the end colour."
+      "basis": "Measured B-V, observed (not dereddened), through the app's catalogue star color so these dots match its stars. The range covers M33's blue and red supergiants; a color beyond it takes the end color."
     },
     "note": "Presentation only: the Milky Way hot-star layer's size and opacity."
   }

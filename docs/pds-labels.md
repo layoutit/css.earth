@@ -40,12 +40,12 @@ archive-conformance validator.
 ## Calibration text is an explicit archive convention
 
 Cassini RMS labels retain CISSCAL's `UNITS = 'I/F'` inside the root `DESCRIPTION`.
-The [calibrated-colour check](../packages/bake/src/objects/layers/terrestrial/surface-observations/formats/pds3-reflectance.ts)
+The [calibrated-color check](../packages/bake/src/objects/layers/terrestrial/surface-observations/formats/pds3-reflectance.ts)
 reads that report only for Cassini ISS, requires its CISSCAL heading and one
 unambiguous units line, and never exposes the line as a general PDS3 attribute.
 An explicit non-I/F units field cannot be overridden by this report.
 Voyager's IMAGE `REFLECTANCE_SCALING_FACTOR` remains a real attribute.
-This preserves existing calibration evidence; it introduces no new colour claim.
+This preserves existing calibration evidence; it introduces no new color claim.
 
 ## PDS4 numbers
 
@@ -62,7 +62,7 @@ duplicates, quoted commas, multiline values, comments, malformed inputs and limi
 They read the original tracked Tethys and Proteus labels for source-backed cases.
 [Calibration tests](../packages/bake/src/objects/layers/terrestrial/surface-observations/pds3-reflectance.test.mts)
 preserve the native CISSCAL and Voyager evidence and reject contradictory units.
-[PDS4 colour tests](../packages/bake/src/objects/raster/observed/observed-pds4.test.mts)
+[PDS4 color tests](../packages/bake/src/objects/raster/observed/observed-pds4.test.mts)
 pass corrupted offsets and projection fields through the actual decoder while
 retaining its existing exact RGB and missing-pixel expectations.
 

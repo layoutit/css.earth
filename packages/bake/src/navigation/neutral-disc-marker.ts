@@ -1,5 +1,5 @@
 /** A flat disc in the shared neutral gray on a transparent field: the marker of an unresolved, self-luminous surface. A body whose
- * marker takes a colour from its data (an emission map's palette at its dayside mean) passes that colour. */
+ * marker takes a color from its data (an emission map's palette at its dayside mean) passes that color. */
 export async function neutralDiscMarker(size = 512, fill = 0.9, color: readonly [number, number, number] = [128, 128, 128]) {
   const { default: sharp } = await import('sharp');
   const rgba = Buffer.alloc(size * size * 4), c = (size - 1) / 2, radius = size * fill / 2;

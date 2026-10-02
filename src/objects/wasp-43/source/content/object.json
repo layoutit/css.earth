@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Gaia's photometric temperature; darkening toward the edge measured from TESS transits of WASP-43b. The disc itself is unresolved.",
+        "qualification": "Color from Gaia's photometric temperature; darkening toward the edge measured from TESS transits of WASP-43b. The disc itself is unresolved.",
         "thumbnail": "wasp-43-dataset-color.webp",
         "surface": "wasp-43-surface-color@2x.webp",
         "poles": "wasp-43-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://doi.org/10.1051/0004-6361/202243462"
         },
         "falseColor": false,
-        "notes": "The colour of a 4,416 K blackbody, Gaia DR3's photometric temperature. The darkening toward the edge is Patel & Espinoza (2022)'s fit to TESS transits (600–1000 nm): the edge is 45% as bright as the centre, anywhere from about 25 to 80% within their uncertainty. The star is magnetically active (Esposito et al. 2017), so it has spots, but no map of them exists. Its axis follows the planet's orbit, as measured."
+        "notes": "The color of a 4,416 K blackbody, Gaia DR3's photometric temperature. The darkening toward the edge is Patel & Espinoza (2022)'s fit to TESS transits (600–1000 nm): the edge is 45% as bright as the centre, anywhere from about 25 to 80% within their uncertainty. The star is magnetically active (Esposito et al. 2017), so it has spots, but no map of them exists. Its axis follows the planet's orbit, as measured."
       }
     ]
   },

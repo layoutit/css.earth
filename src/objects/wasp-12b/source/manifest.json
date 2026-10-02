@@ -20,7 +20,7 @@
     {
       "id": "wasp-12b-preparation-raster",
       "path": "preparation/raster.json",
-      "origin": "Repository-authored raster recipe: the dayside thermal colour and the Bell et al. (2019) 3.6 um phase-curve maps of 2010 and 2013 on the reference sphere, lit by the host star",
+      "origin": "Repository-authored raster recipe: the dayside thermal color and the Bell et al. (2019) 3.6 um phase-curve maps of 2010 and 2013 on the reference sphere, lit by the host star",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
@@ -89,7 +89,7 @@
       "origin": "https://ui.adsabs.harvard.edu/abs/2010ApJ...716L..36L/abstract",
       "credit": "López-Morales et al. 2010, dayside brightness temperature at 0.9 µm (NASA Exoplanet Archive emission table); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Authored method record: names the archive row chosen and the colour computation applied",
+      "acquisition": "Authored method record: names the archive row chosen and the color computation applied",
       "redistribution": "Method record only",
       "consumers": [
         "assets",
@@ -97,7 +97,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored colour recipe naming the cited brightness temperature; repinned when edited."
+        "reason": "Project-authored color recipe naming the cited brightness temperature; repinned when edited."
       }
     },
     {
@@ -344,10 +344,10 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "dataset-colour-context-marker",
+      "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract",
-      "credit": "The default dataset's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"

@@ -1,6 +1,6 @@
-// A uniform false colour for an unresolved body from published photometry in three infrared bands: each band's measured flux
+// A uniform false color for an unresolved body from published photometry in three infrared bands: each band's measured flux
 // density drives one display channel, longest wavelength red and shortest blue, through one common range shared by every body
-// the range names, so band ratios and the bodies' relative brightness survive. It is not a natural colour and not a map.
+// the range names, so band ratios and the bodies' relative brightness survive. It is not a natural color and not a map.
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { bandColorByte, bandColorDisplay, type BandColorDisplay } from '../../color/index.ts';
 
@@ -18,8 +18,8 @@ export interface DiscBandColorRecord {
 }
 export interface DiscBandColor { readonly srgb: readonly [number, number, number]; readonly linear: readonly [number, number, number]; readonly display: BandColorDisplay }
 
-/** Validate the cited record down to the numbers the colour uses, and name the field and value of anything refused. */
-export function parseDiscBandColorRecord(value: unknown, path = 'disc band colour record'): DiscBandColorRecord {
+/** Validate the cited record down to the numbers the color uses, and name the field and value of anything refused. */
+export function parseDiscBandColorRecord(value: unknown, path = 'disc band color record'): DiscBandColorRecord {
   const record = requireRecord(value, path);
   if (record.schema !== DISC_BAND_COLOR_SCHEMA) throw new TypeError(`${path}: schema is ${String(record.schema)}, not ${DISC_BAND_COLOR_SCHEMA}.`);
   const source = requireRecord(record.source, `${path} source`);
@@ -30,7 +30,7 @@ export function parseDiscBandColorRecord(value: unknown, path = 'disc band colou
     if (!(parsed.value > 0) || !(parsed.error >= 0)) throw new TypeError(`${path}: ${parsed.band} needs a positive value and a non-negative error, not ${parsed.value} ± ${parsed.error}.`);
     return parsed;
   });
-  if (bands.length !== 3) throw new TypeError(`${path}: a band colour binds three bands, not ${bands.length}.`);
+  if (bands.length !== 3) throw new TypeError(`${path}: a band color binds three bands, not ${bands.length}.`);
   if (!(bands[0]!.wavelengthMicrometres > bands[1]!.wavelengthMicrometres && bands[1]!.wavelengthMicrometres > bands[2]!.wavelengthMicrometres))
     throw new TypeError(`${path}: bands must run red, green, blue from the longest wavelength, not ${bands.map(band => `${band.band} ${band.wavelengthMicrometres} µm`).join(', ')}.`);
   const range = requireArray(record.displayRange, `${path} displayRange`).map((entry, index) => requireFiniteNumber(entry, `${path} displayRange[${index}]`));
@@ -41,7 +41,7 @@ export function parseDiscBandColorRecord(value: unknown, path = 'disc band colou
     bands: [bands[0]!, bands[1]!, bands[2]!], displayRange: [range[0]!, range[1]!], displayRangeSource: requireString(record.displayRangeSource, `${path} displayRangeSource`) };
 }
 
-/** The colour: each flux density over the common range, sRGB-encoded once. */
+/** The color: each flux density over the common range, sRGB-encoded once. */
 export function discBandColor(record: DiscBandColorRecord): DiscBandColor {
   const display = bandColorDisplay(record.bands.map(band => band.band), 'flux-density', record.displayRange);
   const linear = record.bands.map(band => (band.value - record.displayRange[0]) / (record.displayRange[1] - record.displayRange[0])) as [number, number, number];

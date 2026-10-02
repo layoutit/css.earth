@@ -67,7 +67,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "qualification": "Color from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
         "thumbnail": "hd-29391-dataset-color.webp",
         "surface": "hd-29391-surface-color@2x.webp",
         "poles": "hd-29391-poles-color@2x.webp",
@@ -77,7 +77,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The colour of Gaia DR3's measured spectrum of the star: a white F-type star, a little warmer than Beta Pictoris. The darkening toward the edge is the quadratic law Claret and Bloemen (2011) compute from ATLAS model atmospheres for a star of 7,422 K and log g 4.31: a model, because no image measures this star's limb. The star is 0.45 milliarcseconds across, which the CHARA interferometer measures as a size only (Elliott et al. 2024). No spin axis is measured, so the display axis is celestial north."
+        "notes": "The color of Gaia DR3's measured spectrum of the star: a white F-type star, a little warmer than Beta Pictoris. The darkening toward the edge is the quadratic law Claret and Bloemen (2011) compute from ATLAS model atmospheres for a star of 7,422 K and log g 4.31: a model, because no image measures this star's limb. The star is 0.45 milliarcseconds across, which the CHARA interferometer measures as a size only (Elliott et al. 2024). No spin axis is measured, so the display axis is celestial north."
       }
     ]
   },

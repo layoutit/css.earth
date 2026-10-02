@@ -8,7 +8,7 @@ It is the only planet known around K2-406. Its orbit and size follow Christianse
 
 **Orbit.** Christiansen et al. 2022 (2022AJ....163..244C), via the NASA Exoplanet Archive ps table (pl_refname CHRISTIANSEN_ET_AL_2022): P 22.549406 d Christiansen et al. 2022 (2022AJ....163..244C), via the NASA Exoplanet Archive ps table (pl_refname CHRISTIANSEN_ET_AL_2022): a/R* 32.15; Christiansen et al. 2022 (2022AJ....163..244C), via the NASA Exoplanet Archive ps table (pl_refname CHRISTIANSEN_ET_AL_2022): inclination derived from its impact parameter 0.544 with its a/R* 32.15 (Winn 2010, eq. 7) No archive row states an eccentricity; the orbit is taken as circular Christiansen et al. 2022 (2022AJ....163..244C), via the NASA Exoplanet Archive ps table (pl_refname CHRISTIANSEN_ET_AL_2022): transit mid-time 2458010.3895 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 266 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-406's measured colour (#fff1ea, the colour dataset of k2-406 (src/objects/k2-406/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by k2-406's measured color (#fff1ea, the color dataset of k2-406 (src/objects/k2-406/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-406's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (11, 38, 91), folded onto its orbit. Upper limits and rows without an error are left out.
 

@@ -89,7 +89,7 @@
       "origin": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
       "credit": "Crossfield et al. 2016, the stellar temperature of the default parameter set of K2-71 b in the NASA Exoplanet Archive; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Authored method record: names the published temperature and the colour computation applied",
+      "acquisition": "Authored method record: names the published temperature and the color computation applied",
       "redistribution": "Method record only",
       "consumers": [
         "assets",
@@ -97,7 +97,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored colour recipe naming the cited temperature; repinned when edited."
+        "reason": "Project-authored color recipe naming the cited temperature; repinned when edited."
       }
     },
     {
@@ -157,7 +157,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
-      "credit": "The colour dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -173,7 +173,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

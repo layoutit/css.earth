@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "Derived: Kepler's third law with a = 0.12495 arcsec x 8277 pc = 1034.21 au and the central mass 4.297e6 solar masses (GRAVITY 2022, Table 1): sqrt(1034.21^3 / 4.297e6) = 16.0447 yr of 365.25 d. The table prints no period.",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of S2 is measured; only its size, mass and orbit are."
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of S2 is measured; only its size, mass and orbit are."
   },
   "effectiveTemperatureK": 28513,
   "effectiveTemperatureSource": "Habibi et al. (2017), ApJ 847, 120, Table 3: Teff 28,513 (+2,388/-2,923) K (https://arxiv.org/abs/1708.06353)",

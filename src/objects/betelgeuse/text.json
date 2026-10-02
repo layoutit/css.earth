@@ -36,7 +36,7 @@
     "dust-2024": {
       "title": "Polarised dust, 2024",
       "detail": "VLT/SPHERE-ZIMPOL",
-      "summary": "Dust one to four stellar radii out, in the paper's own colour scale. Its depth is the shell that best fits its profile.",
+      "summary": "Dust one to four stellar radii out, in the paper's own color scale. Its depth is the shell that best fits its profile.",
       "sources": [
         {
           "catalogueId": "source-betelgeuse-shell-sphere-zimpol-betelgeuse-p1-v-dolp",
@@ -73,9 +73,9 @@
       ]
     },
     "color": {
-      "title": "Photosphere colour",
+      "title": "Photosphere color",
       "detail": "VLT/X-shooter",
-      "summary": "The colour of a measured spectrum of the star. No surface picture or edge darkening is measured."
+      "summary": "The color of a measured spectrum of the star. No surface picture or edge darkening is measured."
     },
     "matisse-2018-12": {
       "title": "Photosphere at 4 µm",

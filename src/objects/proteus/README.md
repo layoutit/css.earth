@@ -45,7 +45,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 The Stooke archive supplies a 5-degree west-positive longitude / planetocentric latitude / radius grid in kilometres. Preparation keeps its origin (which is not necessarily the centre of figure), welds its duplicated seam and poles, and triangulates the published grid: 2,522 vertices and 5,040 source triangles. Meshoptimizer simplifies that to 1,100 displayed triangles with a 2 km simplification-error ceiling. The archive warns that the old model can exaggerate facets and depressions.
 
-Elevation is radius relative to the stated reference sphere, coloured with the shared elevation palette and prepared relief. It communicates broad shape, not a geoid, altimetry, or a high-resolution terrain survey.
+Elevation is radius relative to the stated reference sphere, colored with the shared elevation palette and prepared relief. It communicates broad shape, not a geoid, altimetry, or a high-resolution terrain survey.
 
 ### Monochrome
 

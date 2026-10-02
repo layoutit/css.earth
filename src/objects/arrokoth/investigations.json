@@ -13,10 +13,10 @@
       ]
     },
     {
-      "id": "mvic-ca05-colour-cube",
-      "subject": "MVIC CA05 colour cube",
+      "id": "mvic-ca05-color-cube",
+      "subject": "MVIC CA05 color cube",
       "status": "included",
-      "finding": "The MVIC dataset uses the provider-aligned, blur-matched cube at 340 m per native pixel: NIR, red and blue share one zero-based 0-0.17 display scale followed by the shared IEC sRGB transfer, the original PDS label validates band order, wavelengths and data-number units, and no separate channel stretch or photometric correction changes their ratios, so this fixes screen encoding without reconstructing natural colour or claiming absolute reflectance.",
+      "finding": "The MVIC dataset uses the provider-aligned, blur-matched cube at 340 m per native pixel: NIR, red and blue share one zero-based 0-0.17 display scale followed by the shared IEC sRGB transfer, the original PDS label validates band order, wavelengths and data-number units, and no separate channel stretch or photometric correction changes their ratios, so this fixes screen encoding without reconstructing natural color or claiming absolute reflectance.",
       "evidence": [
         "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx"
       ]

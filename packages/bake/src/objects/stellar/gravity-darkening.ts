@@ -4,9 +4,9 @@
 // potential, and the local temperature follows T = T_pole (g / g_pole)^β. The papers do not print the shape equation; this one
 // reproduces their equatorial radii and temperatures from their polar values, ω and β, which the tests check.
 //
-// The surface texture carries the result: each latitude row is the measured disc colour, scaled per linear channel by the ratio of
+// The surface texture carries the result: each latitude row is the measured disc color, scaled per linear channel by the ratio of
 // a Planck spectrum at the row's temperature to one at the model's surface-mean temperature, then normalised so the brightest row's
-// brightest channel is 1. The hot poles are brighter and bluer, the cool equator dimmer and redder; the disc-integrated colour stays
+// brightest channel is 1. The hot poles are brighter and bluer, the cool equator dimmer and redder; the disc-integrated color stays
 // the measured one. Limb darkening stays on the limb plate, which darkens every latitude alike.
 import { directionFromRaDec, skyBasis } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString, dot3 as dot } from '@cssearth/core';
@@ -69,8 +69,8 @@ export function rocheGravity(omega: number, colatitude: number) {
 export const surfaceTemperature = (record: GravityDarkeningRecord, colatitude: number) =>
   record.poleTemperatureK * rocheGravity(record.omega, colatitude).gravity ** record.beta;
 
-/** The surface-mean temperature, (∫T⁴ dA / ∫dA)^¼ over the Roche surface: the temperature whose Planck colour the measured disc
- * colour is taken to be, so the rows scale around it. */
+/** The surface-mean temperature, (∫T⁴ dA / ∫dA)^¼ over the Roche surface: the temperature whose Planck color the measured disc
+ * color is taken to be, so the rows scale around it. */
 export function meanSurfaceTemperature(record: GravityDarkeningRecord, steps = 2000) {
   let flux = 0, area = 0;
   for (let i = 0; i < steps; i++) {
@@ -81,7 +81,7 @@ export function meanSurfaceTemperature(record: GravityDarkeningRecord, steps = 2
   return (flux / area) ** 0.25;
 }
 
-/** One sRGB colour per texture row, north to south, for an equirectangular map `height` rows tall. */
+/** One sRGB color per texture row, north to south, for an equirectangular map `height` rows tall. */
 export function gravityDarkenedRows(record: GravityDarkeningRecord, color: StellarColor, colorMatching: Map<number, readonly number[]>, height: number) {
   const reference = planckLinearSrgb(meanSurfaceTemperature(record), colorMatching);
   const rows = Array.from({ length: height }, (_, row) => {

@@ -174,7 +174,7 @@ const trimCaption = (text: string): string => text.length <= CAPTION_LIMIT ? tex
 
 const LABEL = /^(fig(?:ure)?\.?|table)\s*([A-Z]?\d+[A-Za-z]?)\s*[.:|]?/iu;
 const LABEL_ONLY = /^(fig(?:ure)?\.?|table)\s*([A-Z]?\d+[A-Za-z]?)\s*[.:|]?$/iu;
-/** A map, mosaic, radiance, scale or colour bar, or a list of observations (orbit, time, distance). */
+/** A map, mosaic, radiance, scale or color bar, or a list of observations (orbit, time, distance). */
 export const CAPTION_TOPIC = /\bmaps?\b|\bmapped\b|\bmosaics?\b|\bradiances?\b|\bscales?\b|\bcolou?r[ -]?bars?\b|\borbits?\b|\bperijoves?\b|\btimes?\b|\bdistances?\b/iu;
 const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
 const labelOf = (match: RegExpExecArray): { readonly kind: 'figure' | 'table'; readonly label: string } => {
@@ -236,7 +236,7 @@ export function relevantCaptions(captions: readonly PaperCaption[]): PaperCaptio
 
 const MAP_CAPTION = /\bmaps?\b|\bmapped\b|\bmosaics?\b|\bcolou?r[ -]?bars?\b|\bcolou?r scales?\b/iu;
 const OBSERVATION_TABLE = /\borbits?\b|\bperijoves?\b|\bobservations?\b|\bdistances?\b|\bresolution\b/iu;
-/** What a fetched paper shows it did: 3 per map or colour-scale caption, 2 per table listing observations, 2 when the
+/** What a fetched paper shows it did: 3 per map or color-scale caption, 2 per table listing observations, 2 when the
  * title names the instrument, and 1 when it names the target. Papers that made the product rise above ones that cite it. */
 export function evidenceScore(report: Pick<PaperReport, 'title' | 'captions'>, target: string, instrument: string | null): number {
   const captions = report.captions ?? [];

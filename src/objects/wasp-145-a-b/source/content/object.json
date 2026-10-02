@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by WASP-145; the neutral gray is a display convention, not a measured colour.",
+        "qualification": "A sphere of the published radius, lit by WASP-145; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "wasp-145-a-b-dataset-shape.webp",
         "surface": "wasp-145-a-b-surface-shape@2x.webp",
         "poles": "wasp-145-a-b-poles-shape@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of WASP-145 A b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of wasp-145-a's light, as its colour dataset measures it."
+        "notes": "No image or color of WASP-145 A b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of wasp-145-a's light, as its color dataset measures it."
       }
     ]
   },

@@ -13,7 +13,7 @@
     },
     {
       "id": "usgs-mdis-enhanced-color",
-      "subject": "USGS MESSENGER MDIS 665 m enhanced-colour mosaic",
+      "subject": "USGS MESSENGER MDIS 665 m enhanced-color mosaic",
       "status": "included",
       "finding": "The exterior Enhanced color view now uses the native USGS RGB GeoTIFF. Missing polar coverage is gray grid; the former Trek image and modeled completion are retired.",
       "evidence": [
@@ -33,7 +33,7 @@
     },
     {
       "id": "enhanced-color-polar-completion",
-      "subject": "Modelled completion of the enhanced-colour polar no-data pixels",
+      "subject": "Modelled completion of the enhanced-color polar no-data pixels",
       "status": "excluded",
       "finding": "Retired the modeled polar completion. Native enhanced-color observations are reduced directly; missing source footprints are gray grid.",
       "revisitWhen": "Do not synthesize missing observations. A future observed product may replace the gaps.",
@@ -41,7 +41,7 @@
     },
     {
       "id": "usgs-shaded-relief-topography",
-      "subject": "USGS MESSENGER global colour shaded relief (DEM v2 hillshade)",
+      "subject": "USGS MESSENGER global color shaded relief (DEM v2 hillshade)",
       "status": "excluded",
       "finding": "The numeric DEM replaced the colored hillshade in PR #835. Its last remaining use, as a fallback for enhanced-color polar reconstruction, is now retired.",
       "evidence": [
@@ -53,7 +53,7 @@
       "id": "nasa-facts-interior",
       "subject": "NASA Science Mercury facts for the interior cutaway",
       "status": "included",
-      "finding": "The Interior view and the retained 3D cutaway use the NASA Science facts record retrieved 2026-08-30; the only radial boundary claimed is the 0.85-radius metallic core, mantle and crust stay one combined shell, and colours and fine texture are illustrative.",
+      "finding": "The Interior view and the retained 3D cutaway use the NASA Science facts record retrieved 2026-08-30; the only radial boundary claimed is the 0.85-radius metallic core, mantle and crust stay one combined shell, and colors and fine texture are illustrative.",
       "evidence": [
         "https://science.nasa.gov/mercury/facts/"
       ]

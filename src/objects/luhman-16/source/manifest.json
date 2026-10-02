@@ -114,7 +114,7 @@
       "path": "photometry/stellar-color.json",
       "origin": "https://arxiv.org/abs/1406.1518",
       "credit": "cssEarth; the MagE spectrum it names",
-      "license": "Project-authored colour record; the spectrum retains its terms",
+      "license": "Project-authored color record; the spectrum retains its terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
@@ -123,7 +123,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored colour recipe naming the MagE spectrum bound above; repinned when edited."
+        "reason": "Project-authored color recipe naming the MagE spectrum bound above; repinned when edited."
       }
     },
     {
@@ -149,7 +149,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/1406.1518",
-      "credit": "The colour of Faherty et al. (2014)'s MagE spectrum of Luhman 16 A as a uniform disc (no limb law is measured); rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The color of Faherty et al. (2014)'s MagE spectrum of Luhman 16 A as a uniform disc (no limb law is measured); rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -167,7 +167,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour dataset rendered as a disc; `context-markers.mts --check` recomputes it."
+        "reason": "The color dataset rendered as a disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],

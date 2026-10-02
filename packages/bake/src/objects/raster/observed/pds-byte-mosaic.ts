@@ -75,7 +75,7 @@ export async function preparePdsByteMosaic(sourceDirectory: string, sourceEntrie
   }
   if (!grid || !mosaic) throw new Error('PDS mosaic has no pinned tiles.');
   const data = await sharp(mosaic, { raw: { width: grid.width, height: grid.height, channels: 2 } })
-    .resize(width, height, { fit: 'fill', kernel: 'lanczos3' }).toColourspace('srgb').raw().toBuffer();
+    .resize(width, height, { fit: 'fill', kernel: 'lanczos3' }).toColorspace('srgb').raw().toBuffer();
   const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
   for (let i = 0; i < missing.length; i++) {
     rgb.set(data.subarray(i * 4, i * 4 + 3), i * 3);

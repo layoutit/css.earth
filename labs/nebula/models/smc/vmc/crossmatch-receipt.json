@@ -158,7 +158,7 @@
   "matching": {
     "radiusArcsec": 0.5,
     "colorToleranceMag": null,
-    "method": "Nearest angular match within 0.5 arcsec; reject second distinct PSF source within 0.05 arcsec of the nearest separation. Per-tile colour-offset residual is diagnostic only; all matched published RC rows retained, including original overlap measurements.",
+    "method": "Nearest angular match within 0.5 arcsec; reject second distinct PSF source within 0.05 arcsec of the nearest separation. Per-tile color-offset residual is diagnostic only; all matched published RC rows retained, including original overlap measurements.",
     "separationMedianArcsec": 0.09212667987207604,
     "separationP90Arcsec": 0.16854894357226288,
     "separationMaxArcsec": 0.4987576987981583,
@@ -373,8 +373,8 @@
   "limits": [
     "Apparent depth includes red-clump intrinsic luminosity scatter, photometric errors, reddening errors and population contamination; no deconvolution or claim that each distance is geometrically measured.",
     "Published reddening predates the public DR5.1 photometric zero-point alignment. DR5.1 documentation reports mean Ks shift -0.007 mag with tile scatter 0.008 and Y-Ks shift -0.022 with scatter 0.018; individual original Ks tile shifts are not supplied, so exact Tatton distances cannot be reproduced. No empirical image-fitting correction is applied.",
-    "Per-tile colour offsets are matching diagnostics only; they do not alter magnitudes, reddening or distances.",
-    "Input retrieval magnitude and colour bounds are broad matching preselection, not an astrophysical boundary. Unmatched rows are explicitly counted.",
+    "Per-tile color offsets are matching diagnostics only; they do not alter magnitudes, reddening or distances.",
+    "Input retrieval magnitude and color bounds are broad matching preselection, not an astrophysical boundary. Unmatched rows are explicitly counted.",
     "All matched catalogue entries retained. Tile-overlap measurements can repeat physical stars; unique source counts are not a calibrated stellar mass density.",
     "Published source selection and survey footprint impose completeness limits. Quality columns are retained rather than imposing new sample cuts."
   ],

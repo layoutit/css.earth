@@ -119,6 +119,6 @@
     "path": "0005GeoUnits.lyr",
     "extractor": "packages/telescope-cli/src/source-authoring/esri-symbology.mts",
     "headingByteOffset": 3340,
-    "note": "All 39 stored L*a*b* colours convert to integer RGB within 1.0e-6 under Apple RGB primaries, gamma 1.8 and D65; plain sRGB leaves up to 0.498."
+    "note": "All 39 stored L*a*b* colors convert to integer RGB within 1.0e-6 under Apple RGB primaries, gamma 1.8 and D65; plain sRGB leaves up to 0.498."
   }
 }

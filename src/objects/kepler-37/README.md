@@ -6,7 +6,7 @@ Its radius and temperature follow Bonomo et al. 2023. The introduction is genera
 
 **Star.** Placement: Gaia DR3 source 2106674071344722688, parallax 15.625 ± 0.010 mas (64.00 pc). Radius 0.789 +/- 0.0064 solar radii from Bonomo et al. 2023, the stellar radius of the default parameter set of Kepler-37 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). Mass 0.79 +/- 0.033 solar masses from Bonomo et al. 2023, the stellar mass of the default parameter set of Kepler-37 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). Temperature 5,357 K from Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-37 b in the NASA Exoplanet Archive. log g 4.54 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2106674071344722688, through the CIE 1931 2° observer: #ffeee7. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2106674071344722688, through the CIE 1931 2° observer: #ffeee7. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,357 K and log g 4.54 (u1 0.558, u2 0.194): a model, because no fit of this star's limb is used.
 

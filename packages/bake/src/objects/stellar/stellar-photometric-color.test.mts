@@ -20,7 +20,7 @@ test('a Planck spectrum warms from blue-white through white to orange as it cool
   assert.ok(cool.linear[0] === 1 && cool.linear[1] > cool.linear[2], 'a 3,500 K star is orange');
 });
 
-test("WASP-43's Gaia DR3 photometric temperature gives a pale warm sRGB colour, stable across its percentiles", async () => {
+test("WASP-43's Gaia DR3 photometric temperature gives a pale warm sRGB color, stable across its percentiles", async () => {
   const { temperature, color, range } = await loadStellarPhotometricColor(read, {}, 'photometry/stellar-color.json');
   assert.deepEqual(temperature, { kelvin: 4416.3687, lowerKelvin: 4406.5312, upperKelvin: 4424.338 });
   assert.deepEqual(color.srgb, [255, 220, 184]);
@@ -57,7 +57,7 @@ test("WASP-43's TESS limb darkening is read from its pinned catalogue row and da
   assert.ok(alphaAt(0) <= 1 / 255, 'the centre is not dimmed');
   assert.equal(plate.data[3], 0, 'outside the disc the plate is transparent');
   assert.ok(plate.data.every((value, i) => i % 4 === 3 || value === 0), 'the plate is black');
-  // Displayed luminance under the plate matches the colour dimmed by I(mu) in linear light, at several radii.
+  // Displayed luminance under the plate matches the color dimmed by I(mu) in linear light, at several radii.
   for (const radial of [0.5, 0.8, 0.95]) {
     const texel = (Math.floor(size / 2 + radial * size / 2) + 0.5 - size / 2) / (size / 2), ratio = quadraticIntensity(Math.sqrt(1 - texel ** 2), 0.55, 0);
     const luminance = (linear: readonly number[]) => linear.reduce((sum, value, c) => sum + [0.2126, 0.7152, 0.0722][c]! * linearToSrgb(value), 0);
@@ -70,7 +70,7 @@ test("WASP-43's TESS limb darkening is read from its pinned catalogue row and da
   assert.throws(() => readQuadraticLimbDarkening('Name\tu1-j\nOTHER\t0.5\n', table), /exactly one row/u);
 });
 
-test('a Gaia XP sampled spectrum gives the colour of the star\'s own light: HD 189733 A pale orange-white, B, a red dwarf, orange', async () => {
+test('a Gaia XP sampled spectrum gives the color of the star\'s own light: HD 189733 A pale orange-white, B, a red dwarf, orange', async () => {
   const { readXpSampledSpectrum, xpSampledColor, XP_SAMPLED_WAVELENGTHS_NM } = await import('@cssearth/bake/objects/stellar');
   assert.deepEqual([XP_SAMPLED_WAVELENGTHS_NM[0], XP_SAMPLED_WAVELENGTHS_NM.at(-1), XP_SAMPLED_WAVELENGTHS_NM.length], [336, 1020, 343]);
   for (const [id, sourceId, srgb] of [['hd-189733', '1827242816201846144', [255, 226, 207]], ['hd-189733-companion', '1827242816176111360', [255, 201, 123]]] as const) {
@@ -105,7 +105,7 @@ test('a cool dwarf too faint to measure in blue: TRAPPIST-1 keeps its own spectr
   const nonPositive = flux.flux.filter((value, index) => value <= 0 && index >= visible(380) && index <= visible(780));
   assert.equal(nonPositive.length, 16);
   assert.ok(flux.flux.every((value, index) => value > 0 || Math.abs(value) <= NOISE_FLOOR_SIGMA * flux.fluxError[index]!));
-  // A sample below zero by more than the floor is a spectrum no colour is taken from.
+  // A sample below zero by more than the floor is a spectrum no color is taken from.
   const broken = [...flux.flux]; broken[visible(500)] = -1e6 * flux.fluxError[visible(500)]!;
   assert.throws(() => xpSampledColor(broken, colorMatching, flux.fluxError), /consistent with zero/u);
 });

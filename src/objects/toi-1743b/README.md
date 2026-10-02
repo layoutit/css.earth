@@ -8,7 +8,7 @@ It is the only planet known around TOI-1743. Its orbit and size follow Yalçinka
 
 **Orbit.** Yalçinkaya et al. 2025 (2025A&A...702A.209Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2025): P 4.266046 d Yalçinkaya et al. 2025 (2025A&A...702A.209Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2025): a/R* 22.81; Yalçinkaya et al. 2025 (2025A&A...702A.209Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2025): inclination 87.92 degrees No archive row states an eccentricity; the orbit is taken as circular Yalçinkaya et al. 2025 (2025A&A...702A.209Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2025): transit mid-time 2459575.1723 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1743's measured colour (#ffcf89, the colour dataset of toi-1743 (src/objects/toi-1743/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1743's measured color (#ffcf89, the color dataset of toi-1743 (src/objects/toi-1743/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1743's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (83, 85, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

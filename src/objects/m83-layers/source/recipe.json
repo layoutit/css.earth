@@ -128,10 +128,10 @@
     "edgeTaperFraction": 0.08,
     "diffuseFraction": 0.65,
     "diffuseSigmaPixels": 2,
-    "colourTie": {
+    "colorTie": {
       "bv": 0.66,
       "source": "rc3-1991",
-      "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives a total (B-V)T of 0.66 as observed; red and blue are scaled in linear light so the disc's mean colour matches the engine's catalogue colour for that index, the function that colours the star dots."
+      "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives a total (B-V)T of 0.66 as observed; red and blue are scaled in linear light so the disc's mean color matches the engine's catalogue color for that index, the function that colors the star dots."
     }
   },
   "provenance": {

@@ -158,10 +158,10 @@
     "bulgeSlices": 40,
     "bulgeFacePixels": 256,
     "bulgeCrossSlices": 24,
-    "colourTie": {
+    "colorTie": {
       "bv": 0.92,
       "source": "rc3-1991",
-      "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives NGC 224 a total (B-V)T of 0.92 +/- 0.02 as observed from Earth, through the Milky Way; corrected for Galactic and internal extinction it is 0.68 ((B-V)oT). The composite's own colour comes from its publisher's UBVI and H-alpha mapping, which runs red; red and blue are scaled in linear light so the disc's mean colour matches the engine's catalogue colour for B-V 0.92, the function that colours the star dots."
+      "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives NGC 224 a total (B-V)T of 0.92 +/- 0.02 as observed from Earth, through the Milky Way; corrected for Galactic and internal extinction it is 0.68 ((B-V)oT). The composite's own color comes from its publisher's UBVI and H-alpha mapping, which runs red; red and blue are scaled in linear light so the disc's mean color matches the engine's catalogue color for B-V 0.92, the function that colors the star dots."
     }
   },
   "provenance": {
@@ -231,6 +231,6 @@
     },
     "featherArcsec": 120,
     "noDataLevel": 2,
-    "basis": "The survey panorama is about three times sharper than the DSS2 view and in true UBVI and H-alpha colour, but it is a strip 55 arcmin wide whose notches reach 11.8 kpc into the disc; the DSS2 view fills them and the outer disc, its light histogram-matched to the survey's over the pixels both cover. The frame runs along the survey's strip at 2 arcsec per pixel. The 2 arcmin fade and the no-data level are presentation choices."
+    "basis": "The survey panorama is about three times sharper than the DSS2 view and in true UBVI and H-alpha color, but it is a strip 55 arcmin wide whose notches reach 11.8 kpc into the disc; the DSS2 view fills them and the outer disc, its light histogram-matched to the survey's over the pixels both cover. The frame runs along the survey's strip at 2 arcsec per pixel. The 2 arcmin fade and the no-data level are presentation choices."
   }
 }

@@ -3,7 +3,7 @@
 HD 189733 A is a K2 dwarf in Vulpecula, 19.8 parsecs away. It hosts the hot Jupiter
 [HD 189733b](../hd-189733b/README.md), and the red dwarf [HD 189733 B](../hd-189733-companion/README.md) moves with it
 through space. No image of the star's surface exists. The package draws it as a sphere of the size its planet's map
-assumes, in the colour of its measured spectrum, darkened toward its edge as the planet's transits show, and turning
+assumes, in the color of its measured spectrum, darkened toward its edge as the planet's transits show, and turning
 on the spin axis measured against the planet's orbit. The default dataset overlays a published spot-band illustration.
 
 ## Sources
@@ -14,7 +14,7 @@ on the spin axis measured against the planet's orbit. The default dataset overla
 - **Radius and mass.** 0.752 solar radii and 0.807 solar masses, from Lally et al. (2025,
   [arXiv:2503.20895](https://arxiv.org/abs/2503.20895), Table 1), whose eclipse map of HD 189733b is fitted in units of
   this radius.
-- **Colour.** The Gaia DR3 BP/RP spectrum (Montegriffo et al. 2023), 336 to 1020 nm every 2 nm, pinned as
+- **Color.** The Gaia DR3 BP/RP spectrum (Montegriffo et al. 2023), 336 to 1020 nm every 2 nm, pinned as
   `photometry/gaia-dr3-xp-sampled.csv`.
 - **Limb darkening.** Three TESS SPOC 2-minute light curves, sectors 41, 54 and 81, restored from MAST.
 - **Spot bands.** [Narrett, Rackham & de Wit (2024)](https://doi.org/10.3847/1538-3881/ad1f6c), their
@@ -24,7 +24,7 @@ on the spin axis measured against the planet's orbit. The default dataset overla
 
 ## Processing
 
-**Colour.** [stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)
+**Color.** [stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)
 weights the spectrum from 380 to 780 nm by the CIE 1931 2° observer and converts to sRGB with its D65 white, scaled so
 the brightest channel is full: 255, 226, 207 (#ffe2cf). The method record is
 [`stellar-color.json`](source/photometry/stellar-color.json). This is the star's own measured light, not a blackbody.
@@ -39,7 +39,7 @@ the fit. The result is u₁ = 0.216, u₂ = 0.440: the edge is 34% as bright as 
 intensity ratio in the TESS band. Their Figure 7 is a hypothetical example of dense latitudinal bands. The
 `activity-model` dataset extracts the figure's dark pattern with the
 [extraction record](source/photometry/narrett-2024-band-model.json), removes the dotted transit guides and bakes it into
-the limb plate. Spots keep about 10% of the nearby photospheric light, applied achromatically over the Gaia colour. The
+the limb plate. Spots keep about 10% of the nearby photospheric light, applied achromatically over the Gaia color. The
 `color` dataset shows the star without spots.
 
 **2021 spot.** Haris et al. report a dark-region occultation during transit 2165 (BJD−2450000 9435.46), with minimum

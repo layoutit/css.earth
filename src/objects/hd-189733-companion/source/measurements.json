@@ -12,6 +12,6 @@
   "radiusSource": "0.224 solar radii (155,836.8 km at 695,700 km per solar radius) from the TESS Input Catalog v8.2 (photometry/tic-8.2.tsv; Stassun et al. 2019, AJ 158, 138), which derives the radius of a cool dwarf from its Ks magnitude and distance (Mann et al. 2015). A model value, not a measured diameter.",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the catalogue radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured. A star's limb is not a sharp surface."
+    "qualification": "A sphere at the catalogue radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured. A star's limb is not a sharp surface."
   }
 }

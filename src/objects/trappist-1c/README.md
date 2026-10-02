@@ -35,4 +35,4 @@ The Illustration is resized unchanged onto the sphere with its left edge at 0° 
 
 **The orbit is circular here.** The measured eccentricity is under 0.01, and transit-timing variations of -0.9 to +1.2 minutes are not drawn. The orbit's position angle on the sky is not measured, so the ascending node is drawn at celestial north.
 
-**The Illustration dataset is art, not data.** Its colours, clouds and terrain are the artist's, and its longitudes are arbitrary.
+**The Illustration dataset is art, not data.** Its colors, clouds and terrain are the artist's, and its longitudes are arbitrary.

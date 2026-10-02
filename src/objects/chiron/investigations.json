@@ -32,10 +32,10 @@
       ]
     },
     {
-      "id": "whole-disc-colour",
+      "id": "whole-disc-color",
       "subject": "MBOSS-2, Hainaut, Boehnhardt and Protopapa (2012), A&A 546, A115",
       "status": "included",
-      "finding": "Weighted means over 34 epochs: spectral gradient 0.114 +/- 0.996 percent per 100 nm, B-V 0.700 +/- 0.020, V-R 0.361 +/- 0.017, R-I 0.325 +/- 0.023. The gradient is measured against the solar spectrum, so Chiron is solar-coloured within its errors. The shared neutral material is used rather than a derived display colour: a colour from these indices would be indistinguishable from neutral, and the indices mix nucleus and coma across epochs of varying activity. The B-V agrees with the independent PDS value 0.704 +/- 0.024.",
+      "finding": "Weighted means over 34 epochs: spectral gradient 0.114 +/- 0.996 percent per 100 nm, B-V 0.700 +/- 0.020, V-R 0.361 +/- 0.017, R-I 0.325 +/- 0.023. The gradient is measured against the solar spectrum, so Chiron is solar-colored within its errors. The shared neutral material is used rather than a derived display color: a color from these indices would be indistinguishable from neutral, and the indices mix nucleus and coma across epochs of varying activity. The B-V agrees with the independent PDS value 0.704 +/- 0.024.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/201219566",
         "https://www.eso.org/~ohainaut/MBOSS/MBOSS2.dat"

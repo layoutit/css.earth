@@ -6,7 +6,7 @@
 Gaia publishes externally calibrated *sampled* spectra only for the brightest sources; fainter ones carry the continuous
 basis-function coefficients instead. GaiaXPy is the archive's own library for that conversion (Ruz-Mieres 2022,
 doi:10.5281/zenodo.6674521), and `calibrate` applies the same external calibration (Montegriffo et al. 2023, A&A 674, A3).
-The output is written in the DataLink XP_SAMPLED CSV layout, 343 samples from 336 to 1020 nm in 2 nm steps, so the colour
+The output is written in the DataLink XP_SAMPLED CSV layout, 343 samples from 336 to 1020 nm in 2 nm steps, so the color
 pipeline reads it exactly as it reads an archive-sampled spectrum.
 """
 import csv

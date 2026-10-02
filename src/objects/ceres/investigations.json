@@ -26,9 +26,9 @@
     },
     {
       "id": "pia19977-enhanced-color",
-      "subject": "NASA PIA19977 false-colour map",
+      "subject": "NASA PIA19977 false-color map",
       "status": "included",
-      "finding": "Enhanced color uses the 3078 by 1537 false-colour image from 920, 750 and 440 nm filters, retained as a distinct map interpretation rather than calibrated monochrome; it keeps its published equirectangular map frame, and the review asserts no pixel-for-pixel pairing with the DTM.",
+      "finding": "Enhanced color uses the 3078 by 1537 false-color image from 920, 750 and 440 nm filters, retained as a distinct map interpretation rather than calibrated monochrome; it keeps its published equirectangular map frame, and the review asserts no pixel-for-pixel pairing with the DTM.",
       "evidence": [
         "https://science.nasa.gov/resource/hints-at-ceres-composition-from-color/"
       ]
@@ -37,8 +37,8 @@
       "id": "pia19977-edge-columns",
       "subject": "Bright final columns of the PIA19977 source map",
       "status": "unresolved",
-      "finding": "The last two columns of the enhanced-colour source are brighter than their neighbours, mean brightness 173 and 193 against about 135, so a thin light line can show along 0 degrees at close zoom.",
-      "revisitWhen": "A corrected release of the enhanced-colour map removes the bright edge columns.",
+      "finding": "The last two columns of the enhanced-color source are brighter than their neighbours, mean brightness 173 and 193 against about 135, so a thin light line can show along 0 degrees at close zoom.",
+      "revisitWhen": "A corrected release of the enhanced-color map removes the bright edge columns.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L69"
       ]
@@ -66,7 +66,7 @@
       "id": "coverage-black-heuristic",
       "subject": "Southern-edge-connected black as a fill indicator",
       "status": "unresolved",
-      "finding": "Both pinned rasters have three colour channels and no alpha or validity mask, so southern-edge-connected exact black is used as a conservative indication of fill and marked with the neutral gray grid; the README calls this a heuristic, not a surveyed coverage boundary, and JPEG compression can make fill pixels nonzero.",
+      "finding": "Both pinned rasters have three color channels and no alpha or validity mask, so southern-edge-connected exact black is used as a conservative indication of fill and marked with the neutral gray grid; the README calls this a heuristic, not a surveyed coverage boundary, and JPEG compression can make fill pixels nonzero.",
       "revisitWhen": "A validity mask or alpha channel is published with these maps.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L64",
@@ -170,7 +170,7 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Hapke model of Li et al. (2019), Table 1, F3 at 749 nm (w 0.139, b 0.364, c 0.048, roughness 19.2 degrees; B0 1.6 and h 0.06 held fixed), fitted to incidence and emission up to 80 degrees and phase from about 7 to about 95 degrees, relative to the flood-lit disc centre. F3 is the colour filter nearest the clear-filter mosaic. Its radiance factor at the flood-lit centre, 0.089, matches the paper's geometric albedo.",
+      "finding": "Hapke model of Li et al. (2019), Table 1, F3 at 749 nm (w 0.139, b 0.364, c 0.048, roughness 19.2 degrees; B0 1.6 and h 0.06 held fixed), fitted to incidence and emission up to 80 degrees and phase from about 7 to about 95 degrees, relative to the flood-lit disc centre. F3 is the color filter nearest the clear-filter mosaic. Its radiance factor at the flood-lit centre, 0.089, matches the paper's geometric albedo.",
       "evidence": [
         "https://doi.org/10.1016/j.icarus.2018.12.038",
         "https://arxiv.org/abs/1812.08361"
@@ -326,7 +326,7 @@
       "id": "photojournal-pia21914-faculae-map",
       "subject": "NASA PIA21914 Map of Ceres' Bright Spots (Dawn framing camera)",
       "status": "excluded",
-      "finding": "Global simple-cylindrical picture (2000 x 989 px) with no printed grid. Three gazetteer landmarks (Occator floor, Haulani, Ahuna Mons markers) fit 5.47 px per degree with the left edge near 177.5 E, residuals up to 3.7 px. The markers are not crater centres, so this is only a rough frame check. The content is coloured dots in four classes (floor faculae, rim/wall faculae, bright ejecta, Ahuna Mons) over a camera mosaic. That is a categorical point overlay, not a mapped quantity with a scale and units. As a dataset it would burn dots into a photograph; as features it would need each spot's coordinates, which the figure gives only as digitised dot positions.",
+      "finding": "Global simple-cylindrical picture (2000 x 989 px) with no printed grid. Three gazetteer landmarks (Occator floor, Haulani, Ahuna Mons markers) fit 5.47 px per degree with the left edge near 177.5 E, residuals up to 3.7 px. The markers are not crater centres, so this is only a rough frame check. The content is colored dots in four classes (floor faculae, rim/wall faculae, bright ejecta, Ahuna Mons) over a camera mosaic. That is a categorical point overlay, not a mapped quantity with a scale and units. As a dataset it would burn dots into a photograph; as features it would need each spot's coordinates, which the figure gives only as digitised dot positions.",
       "revisitWhen": "The faculae catalogue behind the figure (coordinates and class for each of the 300+ spots) is found in a published table or archive product, for use as feature content rather than a dataset.",
       "evidence": [
         "https://science.nasa.gov/photojournal/map-of-ceres-bright-spots/",

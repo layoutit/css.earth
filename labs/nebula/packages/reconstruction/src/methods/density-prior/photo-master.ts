@@ -68,7 +68,7 @@ async function decodePhoto(photo: PhotoEmissionImage): Promise<{
     return photo;
   }
   if (!photo.bytes.length) throw new TypeError('Encoded photo bytes must not be empty.');
-  const decoded = await sharp(photo.bytes).rotate().ensureAlpha().toColourspace('srgb').raw()
+  const decoded = await sharp(photo.bytes).rotate().ensureAlpha().toColorspace('srgb').raw()
     .toBuffer({ resolveWithObject: true });
   if (decoded.info.channels !== 4) throw new TypeError('Photo decoder must produce RGBA8.');
   return { rgba: decoded.data, width: decoded.info.width, height: decoded.info.height };
@@ -275,7 +275,7 @@ export async function createPhotoMasterEmissionSampler(
         0.7152 * photo.rgba[offset + 1]! + 0.0722 * photo.rgba[offset + 2]!));
     }
     const blurred = await sharp(luma, { raw: { width: photo.width, height: photo.height, channels: 1 } })
-      .blur(blurSigmaPixels).greyscale().toColourspace('b-w').raw().toBuffer({ resolveWithObject: true });
+      .blur(blurSigmaPixels).greyscale().toColorspace('b-w').raw().toBuffer({ resolveWithObject: true });
     if (blurred.info.channels !== 1 || blurred.data.length !== luma.length) {
       throw new TypeError('Detail blur must remain single-channel.');
     }

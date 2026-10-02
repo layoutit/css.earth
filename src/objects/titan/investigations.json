@@ -121,9 +121,9 @@
     },
     {
       "id": "vims-le-mouelic-2019-color-ratio",
-      "subject": "Le Mouélic et al. (2019) VIMS band-ratio colour mosaic (1.59/1.27, 2.03/1.27, 1.27/1.08 µm), 32 px/deg",
+      "subject": "Le Mouélic et al. (2019) VIMS band-ratio color mosaic (1.59/1.27, 2.03/1.27, 1.27/1.08 µm), 32 px/deg",
       "status": "included",
-      "finding": "Selected as a false-colour image dataset: three 8-bit display bands of empirically airmass-corrected ratios, not visible colour and not numeric ratios. Same corrected frame; equatorial features agree within about 8-12 km; the polar pink is residual haze according to the paper.",
+      "finding": "Selected as a false-color image dataset: three 8-bit display bands of empirically airmass-corrected ratios, not visible color and not numeric ratios. Same corrected frame; equatorial features agree within about 8-12 km; the polar pink is residual haze according to the paper.",
       "evidence": [
         "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_ColorRatio_v2",
         "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=7186b3f4-27a9-4219-8312-5a05808158d0",

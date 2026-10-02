@@ -107,7 +107,7 @@ async function decodePhoto(photo: PhotoEmissionImage): Promise<{
   const decoded = await sharp(photo.bytes)
     .rotate()
     .ensureAlpha()
-    .toColourspace('srgb')
+    .toColorspace('srgb')
     .raw()
     .toBuffer({ resolveWithObject: true });
   if (decoded.info.channels !== 4) throw new TypeError('Photo decoder must produce RGBA8.');

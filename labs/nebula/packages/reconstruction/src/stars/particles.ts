@@ -94,7 +94,7 @@ async function loadColor(constraint: ParticleColorConstraint | undefined) {
   const right = norm(constraint.rightDirection), up = norm(constraint.upDirection);
   if (Math.abs(dot(right, up)) > 1e-4) throw new TypeError('Color projection directions must be orthogonal.');
   const imageBytes = await readFile(constraint.imagePath);
-  const decoded = await sharp(imageBytes).rotate().ensureAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  const decoded = await sharp(imageBytes).rotate().ensureAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
   return { ...decoded, right, up };
 }
 

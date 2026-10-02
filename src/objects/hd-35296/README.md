@@ -13,7 +13,7 @@ HD 35296 is a young Sun-like star that turns in 3.5 days. Unlike the other fast 
 - **Azimuthal field**: the field running one way or the other around the spin axis.
 - **Brightness**: the photosphere's brightness relative to its unspotted surface; dark is spotted.
 
-Each map uses its paper figure's colour bar: the field linear from minus to plus the strongest value of any component in that map, through white at 0; the brightness from the map's darkest to its brightest point, in the figure's black-red-orange-white colours. A thin black line marks 65° S, below which the star never faces us, as the paper's horizontal line does. [latitude-belt-map.ts](../../../packages/bake/src/objects/raster/latitude-belt-map.ts) reads the tables and interpolates around each belt and between belts, so every cell keeps its deposited value.
+Each map uses its paper figure's color bar: the field linear from minus to plus the strongest value of any component in that map, through white at 0; the brightness from the map's darkest to its brightest point, in the figure's black-red-orange-white colors. A thin black line marks 65° S, below which the star never faces us, as the paper's horizontal line does. [latitude-belt-map.ts](../../../packages/bake/src/objects/raster/latitude-belt-map.ts) reads the tables and interpolates around each belt and between belts, so every cell keeps its deposited value.
 
 **Directions.** The paper's Fig. 1 caption says the phases are inverted so that the map longitudes turn like the Earth's; its dashed lines sit at 360° × (1 − φ) for the observed phases φ of Table 1. So the maps' longitude is east longitude.
 
@@ -21,7 +21,7 @@ Each map uses its paper figure's colour bar: the field linear from minus to plus
 
 **Star.** Placement: Gaia DR3 source 3400292798990117888, parallax 68.591 ± 0.104 mas (14.58 pc). Radius 1.1 solar radii from Waite et al. (2015), MNRAS 449, 8, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729). Mass 1.096 (1.056 to 1.136) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Temperature 6,170 K from Casagrande et al. (2011), A&A 530, A138, as listed by Willamo et al. (2022), Table 2. log g 4.39 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 3400292798990117888, through the CIE 1931 2° observer: #f7f2ff. Routes tried in order: stis-ngsl: HD 35296 is not in the library; pulkovo: HR 1780 is not in the catalogue; kiehling: HR 1780 is not among its 60 stars; kharitonov: HR 1780 is not in the catalogue; burnashev: BS 1780 is not in part2; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 3400292798990117888, through the CIE 1931 2° observer: #f7f2ff. Routes tried in order: stis-ngsl: HD 35296 is not in the library; pulkovo: HR 1780 is not in the catalogue; kiehling: HR 1780 is not among its 60 stars; kharitonov: HR 1780 is not in the catalogue; burnashev: BS 1780 is not in part2; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,170 K and log g 4.39 (u1 0.389, u2 0.299): a model, because no fit of this star's limb is used.
 

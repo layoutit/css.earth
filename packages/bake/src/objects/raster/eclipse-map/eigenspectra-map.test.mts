@@ -59,7 +59,7 @@ test('the temperature maps are read on their node grid, over the observed longit
     assert.ok(Math.abs(map.sample(report.hottestObserved.longitude, report.hottestObserved.latitude)! - report.hottestObserved.value) < 1e-6);
     highest = Math.max(highest, report.hottestObserved.value);
   }
-  // Figure 1's colour scale tops at the hottest observed node of the 25 maps: 3,711 K, at 2.79 µm.
+  // Figure 1's color scale tops at the hottest observed node of the 25 maps: 3,711 K, at 2.79 µm.
   assert.ok(Math.abs(highest - 3710.95) < 0.01, `${highest}`);
 });
 

@@ -26,11 +26,11 @@
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#fcf6ff, the colour dataset of hd-73344 (src/objects/hd-73344/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured color in this package; a sphere of the published radius, lit by its own star, whose measured color (#fcf6ff, the color dataset of hd-73344 (src/objects/hd-73344/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "hd-73344",
           "srgb": "#fcf6ff",
-          "source": "the colour dataset of hd-73344 (src/objects/hd-73344/source/photometry/stellar-color.json)"
+          "source": "the color dataset of hd-73344 (src/objects/hd-73344/source/photometry/stellar-color.json)"
         }
       }
     }

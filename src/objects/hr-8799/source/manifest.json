@@ -89,7 +89,7 @@
       "origin": "https://arxiv.org/abs/1210.0556",
       "credit": "Baines et al. (2012, ApJ 761, 57; arXiv:1210.0556): effective temperature 7193 +/- 87 K from the CHARA limb-darkened diameter and bolometric flux, https://arxiv.org/abs/1210.0556; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Authored method record: names the published temperature and the colour computation applied",
+      "acquisition": "Authored method record: names the published temperature and the color computation applied",
       "redistribution": "Method record only",
       "consumers": [
         "assets",
@@ -97,7 +97,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored colour recipe naming the cited temperature; repinned when edited."
+        "reason": "Project-authored color recipe naming the cited temperature; repinned when edited."
       }
     },
     {
@@ -134,7 +134,7 @@
       "origin": "https://dx.doi.org/10.17909/e4x8-ft26",
       "credit": "JWST GTO 1194 (PI C. Beichman); reduced with spaceKLIP following Balmer et al. (2025), AJ, arXiv:2503.13608",
       "license": "JWST data are public; reduction is project-authored",
-      "acquisition": "packages/telescope-cli/src/archives/jwst/klip/reduce.mts hr-8799-1194 NIRCAM-F410M-MASKLWB; KL 5 plane, 93 x 93 pixels about the star, north up, 8x nearest enlargement, mapped through the colour scale of Balmer et al. Figure 4 (arXiv source figures/imaging_summary/NIRCam_Bar_NARROW_F410M_summary_altcolor.pdf): its colour-bar image (object 16, 491 steps decoded through its indexed palette) spanning -10 to 48.434 MJy/sr, read from the bar and its tick marks",
+      "acquisition": "packages/telescope-cli/src/archives/jwst/klip/reduce.mts hr-8799-1194 NIRCAM-F410M-MASKLWB; KL 5 plane, 93 x 93 pixels about the star, north up, 8x nearest enlargement, mapped through the color scale of Balmer et al. Figure 4 (arXiv source figures/imaging_summary/NIRCam_Bar_NARROW_F410M_summary_altcolor.pdf): its color-bar image (object 16, 491 steps decoded through its indexed palette) spanning -10 to 48.434 MJy/sr, read from the bar and its tick marks",
       "redistribution": "Project-authored derivative of public JWST data",
       "consumers": [
         "panel-content"
@@ -149,7 +149,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/1210.0556",
-      "credit": "The colour dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -165,7 +165,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],
@@ -197,7 +197,7 @@
       "path": "jwst/gallery.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored gallery record: the picture, its grey range and reader text."
+        "reason": "Project-authored gallery record: the picture, its gray range and reader text."
       }
     }
   ]

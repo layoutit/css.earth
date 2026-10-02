@@ -8,7 +8,7 @@
       "width": 2200,
       "height": 2200,
       "publisher": "https://www.legacysurvey.org/dr10/",
-      "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z colour HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+      "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z color HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
     },
     "crop": {
       "left": 0,
@@ -155,7 +155,7 @@
       "NOX removes stars; 16 catalogued neighbouring galaxies (HyperLEDA PGC, Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) are masked afterwards at 3 times their D25 radius, never more than half their distance from the centre, so no mask covers NGC 3311's own halo on the far side of its core. NGC 3309, 103 arcsec from the centre and inside NGC 3311's light, is the exception: it is masked to 95 arcsec, as far as a mask reaches without covering NGC 3311's innermost isophotes whole (its outer quarter is feathered). Both limits are presentation choices. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the fit's axis ratio and position angle), never more than it held. NGC 3309 is not drawn; an arc of its outer light remains west of its mask.",
       "Every pixel takes the median of the 37 px square around it, so star haloes and small background galaxies that NOX and the masks leave, and the survey's saturation bleed trails and the dark holes it leaves at bright stars, are not spread through the spheroid.",
       "Black level 0.098 (25 of 255) is the median of the cutout's bottom-right 150 px corner and of the 150 px square at the middle of its bottom edge. The other three corners hold NGC 3312, the galaxies around NGC 3308 and a bright star's ghost and are not sky.",
-      "The colour is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes NGC 3311's faint outer light. Single-image depth is modelled by the prior, not measured."
+      "The color is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes NGC 3311's faint outer light. Single-image depth is modelled by the prior, not measured."
     ],
     "compactClamp": {
       "windowPx": 37,
@@ -211,7 +211,7 @@
         "width": 2200,
         "height": 2200,
         "publisher": "https://www.legacysurvey.org/dr10/",
-        "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z colour HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+        "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z color HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
       },
       "crop": {
         "left": 0,
@@ -358,7 +358,7 @@
         "NOX removes stars; 16 catalogued neighbouring galaxies (HyperLEDA PGC, Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) are masked afterwards at 3 times their D25 radius, never more than half their distance from the centre, so no mask covers NGC 3311's own halo on the far side of its core. NGC 3309, 103 arcsec from the centre and inside NGC 3311's light, is the exception: it is masked to 95 arcsec, as far as a mask reaches without covering NGC 3311's innermost isophotes whole (its outer quarter is feathered). Both limits are presentation choices. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the fit's axis ratio and position angle), never more than it held. NGC 3309 is not drawn; an arc of its outer light remains west of its mask.",
         "Every pixel takes the median of the 37 px square around it, so star haloes and small background galaxies that NOX and the masks leave, and the survey's saturation bleed trails and the dark holes it leaves at bright stars, are not spread through the spheroid.",
         "Black level 0.098 (25 of 255) is the median of the cutout's bottom-right 150 px corner and of the 150 px square at the middle of its bottom edge. The other three corners hold NGC 3312, the galaxies around NGC 3308 and a bright star's ghost and are not sky.",
-        "The colour is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes NGC 3311's faint outer light. Single-image depth is modelled by the prior, not measured."
+        "The color is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes NGC 3311's faint outer light. Single-image depth is modelled by the prior, not measured."
       ],
       "compactClamp": {
         "windowPx": 37,

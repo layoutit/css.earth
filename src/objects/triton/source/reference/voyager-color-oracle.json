@@ -4,7 +4,7 @@
   "method": "Recorded pointing plus limb fit, no datum shift; high-passed detail cross-correlated against the controlled orthophoto over ±3° at 0.05° cells.",
   "stepDegrees": 0.05,
   "searchCells": 60,
-  "framesDirectory": "PDS Ring-Moon Systems Node GEOMED products of the controlled release's own colour frames (not pinned; same volume as the pinned approach frames)",
+  "framesDirectory": "PDS Ring-Moon Systems Node GEOMED products of the controlled release's own color frames (not pinned; same volume as the pinned approach frames)",
   "recipeDatumShiftDegrees": {
     "longitude": 0.78,
     "latitude": -0.8

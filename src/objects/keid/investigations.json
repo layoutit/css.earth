@@ -21,8 +21,8 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 3195919528989223040, cross-checked against Kiehling (1987), spectrophotometry of 60 bright F, G, K and M stars, 320-880 nm in 1 nm steps as normalised magnitudes: Kiehling (1987), A&AS 69, 465; VizieR III/124. * omi02 Eri is HR 1325. (3 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffe9de. Routes tried in order: stis-ngsl: HD 26965 is not in the library; pulkovo: HR 1325 is not in the catalogue; kharitonov: HR 1325 is not in the catalogue; burnashev: BS 1325 is not in part2; gaia-xp: used.",
       "evidence": [

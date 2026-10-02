@@ -3,8 +3,8 @@
   "objectId": "ngc-4696-volume",
   "entries": [
     {
-      "id": "legacy-surveys-colour",
-      "subject": "DESI Legacy Imaging Surveys DR10 colour HiPS",
+      "id": "legacy-surveys-color",
+      "subject": "DESI Legacy Imaging Surveys DR10 color HiPS",
       "status": "included",
       "finding": "A 2500 x 2500 px hips2fits cutout of CDS/P/DESI-Legacy-Surveys/DR10/color, 11.0 arcmin wide on the 2MASS position, at the survey's 0.262 arcsec pixel. The core saturates only within about 3 arcsec. Its sky subtraction ends the galaxy's light about 200 arcsec out and leaves straight tile edges.",
       "evidence": [
@@ -14,7 +14,7 @@
     },
     {
       "id": "other-survey-composites",
-      "subject": "DSS2 and SkyMapper colour HiPS",
+      "subject": "DSS2 and SkyMapper color HiPS",
       "status": "excluded",
       "finding": "Looked at as 900 px previews of the same field on 2026-10-02. DSS2 is photographic and shallower; SkyMapper is shallower than the Legacy Surveys composite. Pan-STARRS does not reach declination -41."
     },

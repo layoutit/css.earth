@@ -43,7 +43,7 @@
     {
       "id": "hr-8799-c-preparation-raster",
       "path": "preparation/raster.json",
-      "origin": "Repository-authored raster recipe: the published whole-disc infrared colour on the reference sphere, self-luminous with transparent plates",
+      "origin": "Repository-authored raster recipe: the published whole-disc infrared color on the reference sphere, self-luminous with transparent plates",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
@@ -109,10 +109,10 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "dataset-colour-context-marker",
+      "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/0811.2606",
-      "credit": "The default dataset's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"

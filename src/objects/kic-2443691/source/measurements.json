@@ -13,6 +13,6 @@
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 2443691 (Gold): Asteroseismic log g 2.5293 +/- 0.0043 (https://arxiv.org/abs/2410.00102)",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
   }
 }

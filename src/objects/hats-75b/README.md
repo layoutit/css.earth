@@ -8,7 +8,7 @@ It is the only planet known around HATS-75. Its orbit and size follow Jordán et
 
 **Orbit.** Jordán et al. 2022 (2022AJ....163..125J), via the NASA Exoplanet Archive ps table (pl_refname JORD_AACUTE_N_ET_AL__2022): P 2.7886556 d Jordán et al. 2022 (2022AJ....163..125J), via the NASA Exoplanet Archive ps table (pl_refname JORD_AACUTE_N_ET_AL__2022): a/R* 12.037; Jordán et al. 2022 (2022AJ....163..125J), via the NASA Exoplanet Archive ps table (pl_refname JORD_AACUTE_N_ET_AL__2022): inclination 88.07 degrees No archive row states an eccentricity; the orbit is taken as circular Jordán et al. 2022 (2022AJ....163..125J), via the NASA Exoplanet Archive ps table (pl_refname JORD_AACUTE_N_ET_AL__2022): transit mid-time 2458611.05487 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hats-75's measured colour (#ffc38a, the colour dataset of hats-75 (src/objects/hats-75/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by hats-75's measured color (#ffc38a, the color dataset of hats-75 (src/objects/hats-75/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HATS-75's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (5, 31, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 

@@ -8,9 +8,9 @@
       "origin": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=1500&height=1500&fov=0.111111&projection=TAN&coordsys=icrs&ra=49.950981&dec=41.511681&format=jpg",
       "sourceUrl": "https://www.sdss.org/",
       "title": "SDSS9 color (g, r, i)",
-      "credit": "Sloan Digital Sky Survey; colour HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+      "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
       "displayCredit": "SDSS",
-      "acquisition": "A 1500 x 1500 px tangent-plane cutout of the colour HiPS CDS/P/SDSS9/color from the CDS hips2fits service, downloaded unchanged by the Nebula Lab recipe (labs/nebula/models/ngc-1275/experiment.json) into its ignored cache.",
+      "acquisition": "A 1500 x 1500 px tangent-plane cutout of the color HiPS CDS/P/SDSS9/color from the CDS hips2fits service, downloaded unchanged by the Nebula Lab recipe (labs/nebula/models/ngc-1275/experiment.json) into its ignored cache.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -30,7 +30,7 @@
             "kind": "unresolved",
             "label": "SDSS g, r, i",
             "evidence": "https://www.sdss.org/",
-            "reason": "The survey's colour composite of coadded images; the retained record does not identify the individual exposures."
+            "reason": "The survey's color composite of coadded images; the retained record does not identify the individual exposures."
           }
         ]
       }

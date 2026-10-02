@@ -40,7 +40,7 @@ export async function draftsFromM33Cepheids(names: readonly string[], archive: A
     stars.push(draftGalaxyCepheid({ name, target: survey, raDeg: Number(row.RAJ2000), decDeg: Number(row.DEJ2000), periodDays: days, periodSource: `${BREUVAL_2023.credit}, table 9 (log P ${row.logP})`, paper: { url: BREUVAL_2023.paper, credit: BREUVAL_2023.credit },
       position: { catalogue: BREUVAL_2023.catalogue, row: { ID: row.ID! }, credit: `${BREUVAL_2023.credit}, table 9`, url: BREUVAL_2023.paper },
       aliases: name === survey ? [] : [survey], ...(row.ID === featured ? { featured: true as const } : {}),
-      found: `The Hubble Space Telescope measured its brightness in three colours; its pulsation takes ${days.toFixed(days < 10 ? 2 : 1)} days.`,
+      found: `The Hubble Space Telescope measured its brightness in three colors; its pulsation takes ${days.toFixed(days < 10 ? 2 : 1)} days.`,
       locator: `table 9, ID ${row.ID}: logP; ${BREUVAL_2023.credit}: mu` }, M33, placed, velocity));
   }
   return { stars, report: [`${stars.length} Cepheid${stars.length === 1 ? '' : 's'} of ${BREUVAL_2023.credit} in M33; radius and temperature from Groenewegen (2020)'s period relations.`] };

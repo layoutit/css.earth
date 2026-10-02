@@ -3,8 +3,8 @@
   "objectId": "ngc-3311-volume",
   "entries": [
     {
-      "id": "legacy-surveys-colour",
-      "subject": "DESI Legacy Imaging Surveys DR10 colour HiPS",
+      "id": "legacy-surveys-color",
+      "subject": "DESI Legacy Imaging Surveys DR10 color HiPS",
       "status": "included",
       "finding": "A 2200 x 2200 px hips2fits cutout of CDS/P/DESI-Legacy-Surveys/DR10/color, 9.3 arcmin wide on the 2MASS position. The two bright stars 8 and 10 arcmin away fall outside it; the ghost of one reddens the north-east corner.",
       "evidence": [
@@ -14,7 +14,7 @@
     },
     {
       "id": "other-survey-composites",
-      "subject": "DSS2, Pan-STARRS DR1 and SkyMapper colour HiPS",
+      "subject": "DSS2, Pan-STARRS DR1 and SkyMapper color HiPS",
       "status": "excluded",
       "finding": "Looked at as 900 px previews of the same field on 2026-10-02. DSS2 is photographic and shallower, SkyMapper is shallower, and Pan-STARRS at declination -27.5 is at the edge of its coverage and subtracts the galaxies' own light as sky."
     },

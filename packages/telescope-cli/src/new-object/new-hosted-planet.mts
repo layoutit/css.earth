@@ -10,11 +10,11 @@
  * circular synchronous rotation the orbit implies and the light direction its star gives. A planet seen by its own heat (a young
  * giant imaged directly) takes --self-luminous with its cited effective temperature: it is built emissive, like the stars, with no
  * light from its host. A star on a hosted orbit (the second star of a pair that a planet orbits) is scaffolded the same way,
- * --self-luminous with its cited temperature, and keeps its star class and a temperature catalogue colour. The package starts shape-only, in the
- * shared neutral gray, lit by its own star: no colour of these planets is measured. Prose the scaffold cannot know
+ * --self-luminous with its cited temperature, and keeps its star class and a temperature catalogue color. The package starts shape-only, in the
+ * shared neutral gray, lit by its own star: no color of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node packages/bake/cli/prepare-object.mts <id> */
-import { NEUTRAL_CATALOGUE_COLOUR } from '@cssearth/objects';
+import { NEUTRAL_CATALOGUE_COLOR } from '@cssearth/objects';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -30,7 +30,7 @@ const AU_M = 149597870700, BODY_RADIUS_UNITS = 248;
 /** A hosted planet's sphere is drawn 1.25 times its logical size (solar-system.json geometryScale). */
 const GEOMETRY_SCALE = 1.25;
 /** The shared neutral gray of an unresolved surface, as the shape-only bodies use. */
-const NEUTRAL_GRAY = NEUTRAL_CATALOGUE_COLOUR;
+const NEUTRAL_GRAY = NEUTRAL_CATALOGUE_COLOR;
 
 /** A lit hosted planet's page stylesheet: the shared lane template that sizes its 460px lighting frames. It names no dataset
  * image: each dataset's variant writes the textures every leaf reads (scene/projector.ts, presentation/composite.ts). */
@@ -62,8 +62,8 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     positionEpochJulianYear: requireFiniteNumber(star.positionEpochJulianYear), distanceParsecs: requireFiniteNumber(star.distanceParsecs),
     properMotionRaMasPerYear: requireFiniteNumber(star.properMotionRaMasPerYear), properMotionDecMasPerYear: requireFiniteNumber(star.properMotionDecMasPerYear),
     radialVelocityKmPerS: requireFiniteNumber(star.radialVelocityKmPerS) };
-  // A companion star on a hosted orbit (the second star of a pair a planet orbits) keeps its class, and its catalogue colour is its
-  // cited temperature through the star field's colour fit, as new-object gives a placed star.
+  // A companion star on a hosted orbit (the second star of a pair a planet orbits) keeps its class, and its catalogue color is its
+  // cited temperature through the star field's color fit, as new-object gives a placed star.
   const classification = body.classification === 'star' ? 'star' : 'exoplanet';
   if (classification === 'star' && !spec.selfLuminous) throw new TypeError(`${spec.id} is a star on a hosted orbit: scaffold it --self-luminous with its cited temperature.`);
   const radiusKm = requireFiniteNumber(physical.meanRadiusKm), { id, name } = spec;
@@ -101,8 +101,8 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` }, thumbnail: { size: 64, centerLongitudeDegrees: 0 },
     surfaces: [{ id: 'shape', output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-dataset-{id}.webp`, source: 'measurements.json', falseColor: false,
       science: { kind: 'neutral-shape', qualification: glow
-        ? `Shared neutral gray display convention for a self-luminous planet with no image or measured visible colour in this package; a sphere of the published radius that glows with its own heat (${glow.temperatureK.toLocaleString('en-US')} K), so no lighting.`
-        : 'Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star.' } }],
+        ? `Shared neutral gray display convention for a self-luminous planet with no image or measured visible color in this package; a sphere of the published radius that glows with its own heat (${glow.temperatureK.toLocaleString('en-US')} K), so no lighting.`
+        : 'Shared neutral gray display convention for a planet with no image or measured color in this package; a sphere of the published radius, lit by its own star.' } }],
     ...(glow ? { emission: { offLimbSize: 600, limbSize: 512, bodyDiameter: 496, offLimbOutput: `${id}-context-{id}{suffix}.webp`, limbOutput: `${id}-limb-{id}{suffix}.webp`, metadata: {
       schema: `css${id}-prepared-emission@1`, presentation: 'prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate',
       offLimbContext: { logicalSize: 600, source: 'none: no observation, a transparent plate', composition: 'transparent', rotation: 'none', runtimeAlphaProcessing: false },
@@ -151,7 +151,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm, defaultZoom: 1.25, geometryScale: GEOMETRY_SCALE });
   put(`${o}/source/measurements.json`, { schema: 'cssearth-hosted-planet@1', id, radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
     orbitalPeriodDays: periodDays, orbitalPeriodSource: requireString(requireRecord(orbit.sources).period, 'hosted orbit period source'),
-    shape: { kind: 'sphere', qualification: `A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of ${name} is measured; only its size, mass and orbit are.` },
+    shape: { kind: 'sphere', qualification: `A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of ${name} is measured; only its size, mass and orbit are.` },
     ...(glow ? { effectiveTemperatureK: glow.temperatureK, effectiveTemperatureSource: glow.source } : {}) });
   put(`${o}/source/content/object.json`, { schema: 'cssearth-object-content@2', version: 1, id, displayName: name,
     panel: { facts: [
@@ -159,10 +159,10 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
         source: { catalogueId: `${TODO}-radius-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'radiusKm; radiusSource' } },
       { id: 'period', label: 'Year', value: `${TODO}: the orbital period in days`,
         source: { catalogueId: `${TODO}-period-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'orbitalPeriodDays; orbitalPeriodSource' } }], moreFacts: [] },
-    datasets: { titleKey: 'datasets', defaultDataset: 'shape', controls: [{ id: 'shape', label: 'Shape', qualification: glow ? 'A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.' : `A sphere of the published radius, lit by ${spec.system.replace(' system', '')}; the neutral gray is a display convention, not a measured colour.`,
+    datasets: { titleKey: 'datasets', defaultDataset: 'shape', controls: [{ id: 'shape', label: 'Shape', qualification: glow ? 'A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured color.' : `A sphere of the published radius, lit by ${spec.system.replace(' system', '')}; the neutral gray is a display convention, not a measured color.`,
       thumbnail: `${id}-dataset-shape.webp`, surface: `${id}-surface-shape@2x.webp`, poles: `${id}-poles-shape@2x.webp`,
       source: { id: `${id}-observational-measurements`, path: '../manifest.json', url: spec.paper }, falseColor: false,
-      notes: `No image or colour of this planet exists (${TODO}: say why, and point at the ledger). The gray marks an unresolved surface; ${glow ? 'it glows with its own heat, so no starlight falls on it' : "the lighting is its own star's, at the measured orbit"}.` }] },
+      notes: `No image or color of this planet exists (${TODO}: say why, and point at the ledger). The gray marks an unresolved surface; ${glow ? 'it glows with its own heat, so no starlight falls on it' : "the lighting is its own star's, at the measured orbit"}.` }] },
     // A lit body's prepared variants bind the shared shadows toggle; a self-luminous one has no shadows.
     settings: { titleKey: 'settings', controls: glow ? [] : [{ kind: 'toggle', name: 'shadows', label: 'Shadows', checked: false }] }, charts: [],
     resources: [{ label: 'Research', role: 'facts', description: spec.paperCredit, href: spec.paper }],

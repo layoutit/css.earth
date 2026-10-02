@@ -15,7 +15,7 @@
 ## Known problems
 
 - The grid marks an unmapped surface. The ellipsoid resolves no terrain, and integrated JWST spectra provide no mapped colors.
-- Rings are fixed circular annuli at their measured normal opacity (0.425 and 0.048), in the neutral gray of a body without a measured colour; there is no reflected-light, scattering or ring-shadow model.
+- Rings are fixed circular annuli at their measured normal opacity (0.425 and 0.048), in the neutral gray of a body without a measured color; there is no reflected-light, scattering or ring-shadow model.
 - Spin alignment with the ring normal is assumed; spin direction is unknown, and display longitude and phase are arbitrary. Orbit context is fixed at 2026-09-03 TT.
 - Settings is hidden; optional Shadows were checked through the checkbox event. These reports do not establish a full-suite pass or physical-device performance.
 

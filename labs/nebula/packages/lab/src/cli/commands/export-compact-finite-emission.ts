@@ -3,7 +3,7 @@ import { isNonemptyText, isRecord } from '@cssearth/core';
  * Export the minimal checked-in surface that regenerates an accepted finite-emission dataset bank.
  *
  * The delivered inputs are the fitted emission field, its envelope gain map, the neutral alpha bank, the
- * pinned depth density and, per dataset, the registered colour raster with its coverage mask. The mask keeps
+ * pinned depth density and, per dataset, the registered color raster with its coverage mask. The mask keeps
  * only the alpha the bake reads, which resizes identically to the registered original's alpha at both the
  * native and the envelope grid, so a few kilobytes replace megabytes of unread RGB.
  *
@@ -129,7 +129,7 @@ for (const { dataset, result, finite, channelGain, toneCurve } of datasetInputs)
   const original = resolve(root, sourceDirectory, 'source/original-image.png');
   const meta = await sharp(original).metadata();
   assert.ok(meta.width && meta.height, 'The registered original needs pixel dimensions.');
-  const alpha = await sharp(original).ensureAlpha().extractChannel(3).toColourspace('b-w').raw().toBuffer();
+  const alpha = await sharp(original).ensureAlpha().extractChannel(3).toColorspace('b-w').raw().toBuffer();
   const mask = Buffer.alloc(meta.width * meta.height * 4);
   for (let p = 0; p < meta.width * meta.height; p++) mask[p * 4 + 3] = alpha[p]!;
   const coverage = await put(`${compact}/datasets/${dataset.imageId}/coverage.png`,

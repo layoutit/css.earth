@@ -25,9 +25,9 @@ export interface ImageLayerRecipe {
   bake: { maxFacePixels: number; diffuseFacePixels: number;
     /** A levels adjustment of the photograph (0-1 black and white points, then gamma), after star and companion removal. */
     levels?: { black: number; white: number; gamma: number; basis: string };
-    /** Ties the photograph's whole-galaxy colour to a published integrated B-V: red and blue are scaled in linear light so
-     * the light-weighted mean over the disc matches the catalogue colour of that index; green and all structure stay. */
-    colourTie?: { bv: number; source: string; basis: string }; bulgeSlices?: number; bulgeFacePixels?: number; bulgeCrossSlices?: number; crossAxisSlices: number; crossAxisAlongPixels: number; crossAxisDepthPixels: number;
+    /** Ties the photograph's whole-galaxy color to a published integrated B-V: red and blue are scaled in linear light so
+     * the light-weighted mean over the disc matches the catalogue color of that index; green and all structure stay. */
+    colorTie?: { bv: number; source: string; basis: string }; bulgeSlices?: number; bulgeFacePixels?: number; bulgeCrossSlices?: number; crossAxisSlices: number; crossAxisAlongPixels: number; crossAxisDepthPixels: number;
     backgroundFloor: number; edgeTaperFraction: number; diffuseFraction: number; diffuseSigmaPixels: number;
     /** One midplane image holding the whole observation, as the Milky Way's backing is: no depth slabs, no side banks. */
     flat?: boolean;
@@ -69,10 +69,10 @@ const flatOf = (v: unknown): boolean => { if (typeof v !== 'boolean') throw new 
 const alphaQualityOf = (v: unknown): number => {
   const n = finite(v, 'encoding.alphaQuality'); if (!Number.isInteger(n) || n < 0 || n > 100) throw new TypeError(`encoding.alphaQuality must be an integer 0-100; got ${n}.`); return n;
 };
-const colourTieOf = (v: unknown): NonNullable<ImageLayerRecipe['bake']['colourTie']> => {
-  const t = object(v, 'bake.colourTie'), bv = finite(t.bv, 'bake.colourTie.bv');
-  if (bv < -0.4 || bv > 4) throw new TypeError(`bake.colourTie.bv must be a B-V index in [-0.4, 4]; got ${bv}.`);
-  return { bv, source: text(t.source, 'bake.colourTie.source'), basis: text(t.basis, 'bake.colourTie.basis') };
+const colorTieOf = (v: unknown): NonNullable<ImageLayerRecipe['bake']['colorTie']> => {
+  const t = object(v, 'bake.colorTie'), bv = finite(t.bv, 'bake.colorTie.bv');
+  if (bv < -0.4 || bv > 4) throw new TypeError(`bake.colorTie.bv must be a B-V index in [-0.4, 4]; got ${bv}.`);
+  return { bv, source: text(t.source, 'bake.colorTie.source'), basis: text(t.basis, 'bake.colorTie.basis') };
 };
 const levelsOf = (v: unknown): NonNullable<ImageLayerRecipe['bake']['levels']> => {
   const l = object(v, 'bake.levels'), black = finite(l.black, 'bake.levels.black'), white = finite(l.white, 'bake.levels.white'), gamma = positive(l.gamma, 'bake.levels.gamma');
@@ -140,7 +140,7 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       supportTaperFraction, depthWeights: weights, depthScales: scales, ...(g.bulge===undefined?{}:{bulge:bulgeOf(g.bulge)}) },
     bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true),
       ...(b.levels===undefined?{}:{levels:levelsOf(b.levels)}),
-      ...(b.colourTie===undefined?{}:{colourTie:colourTieOf(b.colourTie)}),
+      ...(b.colorTie===undefined?{}:{colorTie:colorTieOf(b.colorTie)}),
       ...(g.bulge===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
       crossAxisAlongPixels:positive(b.crossAxisAlongPixels,'crossAxisAlongPixels',true),crossAxisDepthPixels: positive(b.crossAxisDepthPixels, 'crossAxisDepthPixels', true), backgroundFloor,edgeTaperFraction,diffuseFraction,diffuseSigmaPixels:positive(b.diffuseSigmaPixels,'diffuseSigmaPixels'),
       ...(b.flat===undefined?{}:{flat:flatOf(b.flat)}),

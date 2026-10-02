@@ -29,9 +29,9 @@
   },
   "datasets": {
     "color": {
-      "title": "Colour",
+      "title": "Photosphere color",
       "detail": "Willamo et al. (2022)",
-      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
     },
     "radial-field": {
       "title": "Radial field, Dec 2017",

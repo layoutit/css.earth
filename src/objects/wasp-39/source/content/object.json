@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Gaia's spectrum of the star. The disc is unresolved; its darker edge is half measured from transits of its planet.",
+        "qualification": "Color from Gaia's spectrum of the star. The disc is unresolved; its darker edge is half measured from transits of its planet.",
         "thumbnail": "wasp-39-dataset-color.webp",
         "surface": "wasp-39-surface-color@2x.webp",
         "poles": "wasp-39-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The colour of Gaia DR3's measured spectrum of WASP-39. No resolved image of the surface is cast; the display axis is celestial north, a convention."
+        "notes": "The color of Gaia DR3's measured spectrum of WASP-39. No resolved image of the surface is cast; the display axis is celestial north, a convention."
       }
     ]
   },

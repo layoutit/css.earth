@@ -6,8 +6,8 @@ export type SourcePin = s.Infer<typeof sourcePin>;
 export const webpEncoding = obj({quality: opt(n), alphaQuality: opt(n), lossless: opt(s.boolean), nearLossless: opt(s.boolean), smartSubsample: opt(s.boolean), effort: opt(n), preset: opt(s.literal('default', 'picture', 'photo', 'drawing', 'icon', 'text'))});
 const radiusMapping = s.union(obj({kind: s.literal('linear'), scale: n}), obj({kind: s.literal('piecewise-log'), knots: arr(vector2)}));
 export type RadiusMapping = s.Infer<typeof radiusMapping>;
-/** A ring band is drawn from its published normal optical depth alone: its opacity is 1 - exp(-opticalDepth) and its colour
- * the neutral gray of a body with no measured colour (rings.ts). A recipe sets neither. */
+/** A ring band is drawn from its published normal optical depth alone: its opacity is 1 - exp(-opticalDepth) and its color
+ * the neutral gray of a body with no measured color (rings.ts). A recipe sets neither. */
 const bandCommon = {opticalDepth: n, arcs: opt(obj({centers: arr(n), halfWidth: n}))};
 const band = s.union(
   obj({...bandCommon, envelope: s.literal('constant'), bounds: vector2, inclusive: opt(s.tuple(s.boolean, s.boolean))}),

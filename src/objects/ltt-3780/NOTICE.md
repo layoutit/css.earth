@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 0.38 +/- 0.012 solar radii from Bonfanti et al. 2024, the stellar radius of the default parameter set of LTT 3780 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract); Mass 0.381 +/- 0.024 solar masses from Bonfanti et al. 2024, the stellar mass of the default parameter set of LTT 3780 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract); temperature from Bonfanti et al. 2024, the stellar temperature of the default parameter set of LTT 3780 b in the NASA Exoplanet Archive.
 
-Colour: Gaia DR3 XP spectrum, source 3767281845873242112, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: Gaia DR3 XP spectrum, source 3767281845873242112, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret (2017), A&A 600, A30, via VizieR J/A+A/600/A30.
 

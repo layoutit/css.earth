@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by AU Mic; the neutral gray is a display convention, not a measured colour.",
+        "qualification": "A sphere of the published radius, lit by AU Mic; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "au-mic-b-dataset-shape.webp",
         "surface": "au-mic-b-surface-shape@2x.webp",
         "poles": "au-mic-b-poles-shape@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of AU Mic b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of au-mic's light, as its colour dataset measures it."
+        "notes": "No image or color of AU Mic b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of au-mic's light, as its color dataset measures it."
       }
     ]
   },

@@ -6,7 +6,7 @@ Its radius and temperature follow Heidari et al. 2024. It is also HD 88986, HR 4
 
 **Star.** Placement: Gaia DR3 source 741184091114529792, parallax 29.986 ± 0.021 mas (33.35 pc). Radius 1.543 +/- 0.01 solar radii from Heidari et al. 2024, the stellar radius of the default parameter set of HD 88986 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract). Mass 1.25 +/- 0.05 solar masses from Heidari et al. 2024, the stellar mass of the default parameter set of HD 88986 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract). Temperature 5,861 K from Heidari et al. 2024, the stellar temperature of the default parameter set of HD 88986 b in the NASA Exoplanet Archive. log g 4.16 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 741184091114529792, through the CIE 1931 2° observer: #fff5f7. Routes tried in order: stis-ngsl: HD 88986 is not in the library; pulkovo: HR 4027 is not in the catalogue; kiehling: HR 4027 is not among its 60 stars; kharitonov: HR 4027 is not in the catalogue; burnashev: BS 4027 is not in part2; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 741184091114529792, through the CIE 1931 2° observer: #fff5f7. Routes tried in order: stis-ngsl: HD 88986 is not in the library; pulkovo: HR 4027 is not in the catalogue; kiehling: HR 4027 is not among its 60 stars; kharitonov: HR 4027 is not in the catalogue; burnashev: BS 4027 is not in part2; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,861 K and log g 4.16 (u1 0.439, u2 0.272): a model, because no fit of this star's limb is used.
 

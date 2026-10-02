@@ -1,4 +1,4 @@
-/** A scientific surface is interpreted before packing: numeric grids become colour ramps, categorical maps keep their
+/** A scientific surface is interpreted before packing: numeric grids become color ramps, categorical maps keep their
  * palette, photographs get their tonal presentation and missing coverage its grid. The interpretation lives with the
  * source decoders in tools; the raster lane only receives finished pixels and whether they must stay nearest-sampled. */
 export interface InterpretedPlate { readonly data: Uint8Array; readonly size: number; readonly lossless: boolean; }

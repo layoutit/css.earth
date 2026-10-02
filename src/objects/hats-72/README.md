@@ -6,7 +6,7 @@ Its radius and temperature follow Hartman et al. 2020. The introduction is gener
 
 **Star.** Placement: Gaia DR3 source 2594869603582993792, parallax 7.888 ± 0.015 mas (126.77 pc). Radius 0.7214 +/- 0.0021 solar radii from Hartman et al. 2020, the stellar radius of the default parameter set of HATS-72 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract). Mass 0.7311 +/- 0.0028 solar masses from Hartman et al. 2020, the stellar mass of the default parameter set of HATS-72 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract). Temperature 4,656.1 K from Hartman et al. 2020, the stellar temperature of the default parameter set of HATS-72 b in the NASA Exoplanet Archive. log g 4.59 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2594869603582993792, through the CIE 1931 2° observer: #ffceaf. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2594869603582993792, through the CIE 1931 2° observer: #ffceaf. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,656.1 K and log g 4.59 (u1 0.746, u2 0.045): a model, because no fit of this star's limb is used.
 

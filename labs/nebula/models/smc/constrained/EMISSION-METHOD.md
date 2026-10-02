@@ -6,7 +6,7 @@ This is a new inferred-emission model. It does not repaint the unchanged stellar
 
 | Input | Constrains | Does not establish |
 | --- | --- | --- |
-| Registered, star-removed Horálek optical image | Projected relative emission and component colour | Absolute luminosity, gas mass or depth |
+| Registered, star-removed Horálek optical image | Projected relative emission and component color | Absolute luminosity, gas mass or depth |
 | Observation-conditioned Garver stellar simulation | Conditional locations along the line of sight | Measured gas/dust structures |
 | Authored finite-component settings | Local thickness and bounded approximation detail | Additional observations |
 
@@ -17,8 +17,8 @@ The image registration and full source pins are inherited from the inspected rec
 1. Fit the covered optical image with positive multiscale finite emission components. Keep the residual, including faint light the bounded basis cannot explain.
 2. Sample the simulation along each component's observer rays. Place supported components at local density modes, splitting their projected weight by prior basin mass when more than one mode is retained.
 3. Bound component thickness by local feature size and the prior mode width. Unsupported image features retain an explicitly authored finite depth and are counted separately.
-4. Assign one footprint-integrated chromaticity to each finite 3D component. Mix colours by local emission. Do not sample the same image coordinate through the complete depth of the galaxy.
-5. Bake the resulting emission into XYZ stacks. The neutral and coloured versions of this new field share alpha; they do not claim to preserve the original stellar-density alpha.
+4. Assign one footprint-integrated chromaticity to each finite 3D component. Mix colors by local emission. Do not sample the same image coordinate through the complete depth of the galaxy.
+5. Bake the resulting emission into XYZ stacks. The neutral and colored versions of this new field share alpha; they do not claim to preserve the original stellar-density alpha.
 
 The fit operates in angular tangent coordinates. The bake maps physical positions through the same perspective observer transform, including the depth-dependent transverse scale. Arcseconds-to-kiloparsecs conversion also converts emission per unit path length. Empty image margins are not a cloud shape.
 
@@ -26,15 +26,15 @@ The fit operates in angular tangent coordinates. The bake maps physical position
 
 Try at most three fit/bake iterations. Inspect the actual shared viewer from Earth, obliquely, and at both exact 90-degree side axes. Compare the original-image overlay at the same observer pose. Check rotation brightness and bank handoffs separately from front-image fit.
 
-Reject photographic extrusion, repeated silhouettes, disconnected coloured beads, loss of important front structures, or substantial whitening. A successful numerical fit is not visual acceptance, and visual acceptance is not recovery of the real three-dimensional SMC.
+Reject photographic extrusion, repeated silhouettes, disconnected colored beads, loss of important front structures, or substantial whitening. A successful numerical fit is not visual acceptance, and visual acceptance is not recovery of the real three-dimensional SMC.
 
 The existing VMC comparison preferred a simple ellipsoid over the conditioned simulation. Consequently the simulation remains a conditional spatial prior, not a scientifically validated SMC gas model. This experiment must not be promoted to the application without its own recorded inspection.
 
 ## Previous rejected approaches
 
 - The projection-only baseline repeated image material along the stellar volume's depth.
-- Fixed-density finite-region colouring avoided that exact repetition but failed to reproduce the observed structures satisfactorily.
-- The present experiment changes finite emission support explicitly, addressing the spatial model rather than concealing the mismatch with colour or opacity controls.
+- Fixed-density finite-region coloring avoided that exact repetition but failed to reproduce the observed structures satisfactorily.
+- The present experiment changes finite emission support explicitly, addressing the spatial model rather than concealing the mismatch with color or opacity controls.
 
 ## Executed prototype, 2026-09-16
 
@@ -44,7 +44,7 @@ Final local result: `smc-constrained-emission`.
 
 - 478 finite components; strongest conditional depth mode per feature. Thickness remains authored and bounded by feature size and local prior width.
 - 384-pixel preview, 94/75/128 XYZ slabs, four samples per slab. All 297 material textures preserve the corresponding newly fitted neutral alpha exactly.
-- Target uses relative RGB peak consistently with peak-normalized component colour. Quantile background removal and display stretch are authored, recorded settings; they are not photometric calibration.
+- Target uses relative RGB peak consistently with peak-normalized component color. Quantile background removal and display stretch are authored, recorded settings; they are not photometric calibration.
 - Front, oblique and both exact side axes were inspected. The two-mode trial visibly duplicated the main cloud and was rejected. The dominant-mode trial removes that duplicate; fine structure remains soft and separate features may select different depth modes.
 - The actual shared renderer's bank-transition checks passed: Y/Z brightness disagreement 3.045%, normalized image disagreement 3.323%; X/Z brightness disagreement 2.886%, normalized image disagreement 3.029%. Limits were unchanged at 5% and 4% respectively. These two camera checks do not prove stability at every possible angle.
 - Those captures tested `smc-constrained-emission`. Final packaging changes provenance only; all 297 geometries and texture hashes were verified identical. The final route loads without browser errors. Local captures and the machine report are under ignored `output/smc-vmc/`.
@@ -62,12 +62,12 @@ The result remains **reviewable research, not qualified application material**. 
 2. Envelope gain per sky position = 0.85 × smoothed image ÷ smoothed simulation column. The envelope is gain × simulation density, so its depth distribution is the simulation's own; image brightness never changes depth. A 3% floor keeps faint simulation wings. The gain tapers to zero across the observed footprint edge.
 3. Depth is trimmed to the image-weighted 0.5–99.5% simulation mass, so a faint 45 kpc tail does not coarsen the slabs.
 4. Finite components fit only the remaining detail (image − envelope projection), placed at the strongest prior mode with thickness up to 2× their on-sky size.
-5. Colour: components keep footprint chromaticity. The envelope takes smoothed, sky-subtracted chromaticity that fades to neutral where the signal is faint. Every texel's colour fades to neutral below alpha byte 24 (`fullChromaAlphaByte`). The browser composites premultiplied 8-bit colour, and at alpha 1–3 channel rounding across 128 stacked slabs produced strong false red/blue tints.
+5. Color: components keep footprint chromaticity. The envelope takes smoothed, sky-subtracted chromaticity that fades to neutral where the signal is faint. Every texel's color fades to neutral below alpha byte 24 (`fullChromaAlphaByte`). The browser composites premultiplied 8-bit color, and at alpha 1–3 channel rounding across 128 stacked slabs produced strong false red/blue tints.
 6. Exposure gain 2.5 (was 1). At 1, 95% of textured texels had alpha 1–3, which caused contour banding.
 
 **Result.** Model `smc-constrained-emission-envelope`: total front-projection relative squared error 0.0063 (the dominant-mode prototype had 0.0060); envelope carries 85% of image light, with 4.1% excess over the image. Slabs 91 × 78 × 128 at 0.178 kpc. Front, ±60° and both exact 90° side views were inspected in the shared viewer against the simulation and the previous prototype. The side views now follow the simulation's elongated body, and the front matches the photograph's blue core, pink star-forming region and knots.
 
-**Datasets.** `finite-datasets.json` bakes nine datasets onto this one model: VISTA, SMASH, DSS2, AllWISE and Horálek from publisher images, and four composites built from pinned survey bands on one exact 10° TAN grid — DSS2 blue/red plates, AllWISE W2/W1, AllWISE W4/W3/W1 and Herschel SPIRE 250 µm. Each dataset recolours the same neutral alpha with its own component and envelope chromaticity; the Model tab switches between them without changing geometry. The two dust and PAH composites keep their compact emission: their baselines use the identity stellar treatment instead of NOX, recorded per image in `../processing-plan.json`. The DSS2 and SPIRE composites declare their own coverage: masked saturated plate stars and the unobserved sky outside the SPIRE footprint reach the material as no coverage instead of black. The other candidates remain excluded for the reasons listed in the recipe.
+**Datasets.** `finite-datasets.json` bakes nine datasets onto this one model: VISTA, SMASH, DSS2, AllWISE and Horálek from publisher images, and four composites built from pinned survey bands on one exact 10° TAN grid — DSS2 blue/red plates, AllWISE W2/W1, AllWISE W4/W3/W1 and Herschel SPIRE 250 µm. Each dataset recolors the same neutral alpha with its own component and envelope chromaticity; the Model tab switches between them without changing geometry. The two dust and PAH composites keep their compact emission: their baselines use the identity stellar treatment instead of NOX, recorded per image in `../processing-plan.json`. The DSS2 and SPIRE composites declare their own coverage: masked saturated plate stars and the unobserved sky outside the SPIRE footprint reach the material as no coverage instead of black. The other candidates remain excluded for the reasons listed in the recipe.
 
 **Known problems.** Faint concentric ripples remain in the outer halo, where alpha is still quantized. Detail resolution is bounded by the 384-pixel fit and 128 slabs. The envelope is the simulation's shape hypothesis, not measured gas depth. The VMC comparison still prefers a simple ellipsoid to this simulation.
 

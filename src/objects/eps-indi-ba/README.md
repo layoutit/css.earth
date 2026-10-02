@@ -8,7 +8,7 @@ Epsilon Indi Ba is a brown dwarf 1,460 au from Epsilon Indi A. With Bb, a second
 
 **Mass, temperature and radius.** Mass 66.92 ± 0.36 Jupiter masses, measured from ten years of VLT orbit monitoring (Chen et al. [2022](https://arxiv.org/abs/2205.08077), Table 4). Temperature 1,312 ± 13 K from the SM08 hybrid evolutionary models at that mass and its luminosity (Chen et al. 2022). Radius 0.080 to 0.081 solar radii from COND03 models constrained by the dynamical system mass (King et al. [2010](https://arxiv.org/abs/0911.3143), A&A 510, A99); the lower bound is drawn. Model values, not a measured disc.
 
-**Surface.** The shared neutral gray. King et al.'s resolved spectra start at 630 nm, and the missing blue part of the visible band, about two thirds of what the eye would see, would decide the colour, so no measured colour exists; a blackbody would misrepresent a brown dwarf's absorbed spectrum ([ledger](investigations.json)).
+**Surface.** The shared neutral gray. King et al.'s resolved spectra start at 630 nm, and the missing blue part of the visible band, about two thirds of what the eye would see, would decide the color, so no measured color exists; a blackbody would misrepresent a brown dwarf's absorbed spectrum ([ledger](investigations.json)).
 
 **Rotation.** No spin axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 
@@ -20,7 +20,7 @@ Run of 2026-09-23 (this version): the four bodies in the app, headless Chromium 
 
 - **Ba is drawn at the pair's light centre.** It is off by up to 1.1 au, less than half the pair's separation.
 - **Borrowed distance and radial velocity.** Both are Epsilon Indi A's; the depth between A and B is not measured.
-- **No surface.** The sphere is neutral gray. Model spectra (cloud-free Bobcat, cloudy Diamondback) were tested and miss a measured dwarf's colour, so none is used, and with no colour dataset there is no limb to draw ([ledger](investigations.json)).
+- **No surface.** The sphere is neutral gray. Model spectra (cloud-free Bobcat, cloudy Diamondback) were tested and miss a measured dwarf's color, so none is used, and with no color dataset there is no limb to draw ([ledger](investigations.json)).
 - **The spin axis is a display convention.**
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

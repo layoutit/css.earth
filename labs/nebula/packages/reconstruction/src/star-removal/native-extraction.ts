@@ -37,7 +37,7 @@ export async function extractNativeSource(options: ExtractionOptions, createSupp
   const id = options.id ?? basename(options.inputPath).replace(/\.[^.]+$/, '');
   const before = await stat(options.inputPath);
   const metadata = await sharp(options.inputPath).metadata();
-  const decoded = await sharp(options.inputPath).rotate().removeAlpha().toColourspace('srgb')
+  const decoded = await sharp(options.inputPath).rotate().removeAlpha().toColorspace('srgb')
     .raw().toBuffer({ resolveWithObject: true });
   const { width, height, channels } = decoded.info, rgb = decoded.data;
   if (channels !== 3 || rgb.length !== width * height * 3) throw new TypeError('Expected native 8-bit sRGB pixels.');

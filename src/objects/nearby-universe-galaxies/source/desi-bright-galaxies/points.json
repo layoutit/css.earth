@@ -44,7 +44,7 @@
         "scale": 6.0
       },
       "levels": 8,
-      "basis": "The Legacy Surveys' own colour rendering of these bands (legacypipe sdss_rgb, https://github.com/legacysurvey/legacypipe/blob/main/py/legacypipe/survey.py): z to red times 2.2, r to green times 3.4, g to blue times 6.0. The stretch there changes brightness only, so the channel ratios are the colour; the brightest channel is drawn full. The fluxes are observed, so the colour is the one the galaxy's light arrives with."
+      "basis": "The Legacy Surveys' own color rendering of these bands (legacypipe sdss_rgb, https://github.com/legacysurvey/legacypipe/blob/main/py/legacypipe/survey.py): z to red times 2.2, r to green times 3.4, g to blue times 6.0. The stretch there changes brightness only, so the channel ratios are the color; the brightest channel is drawn full. The fluxes are observed, so the color is the one the galaxy's light arrives with."
     },
     "toneBy": {
       "magnitudeColumn": 6,

@@ -1,7 +1,7 @@
 /**
  * The difference-map tool: a round toggle under Levels that lays the server's prepared render-minus-source
- * map over the Earth view, and its compact legend. Every number and colour comes from
- * `/__nebula/reconstruction-difference`; nothing is measured or coloured here.
+ * map over the Earth view, and its compact legend. Every number and color comes from
+ * `/__nebula/reconstruction-difference`; nothing is measured or colored here.
  */
 import { useEffect, useState } from 'react';
 import type { DatasetDifference } from '../../server/services/dataset-difference.ts';
@@ -47,7 +47,7 @@ function DifferenceLegend({ resultId, state, onOpacity }: { resultId: string; st
   const { value } = legend;
   return <div className="difference-legend" data-difference-legend={resultId}>
     <p className="difference-legend-title">Render − image, luminance levels</p>
-    <ol className="difference-legend-scale" aria-label="Colour scale">
+    <ol className="difference-legend-scale" aria-label="Color scale">
       {value.swatches.map(item => <li key={item.levels} data-levels={item.levels}>
         <span className="difference-legend-swatch" style={{ background: item.levels === 0 ? 'transparent' : item.rgba }} />
         <span>{item.levels > 0 ? `+${item.levels}` : item.levels === 0 ? `±${value.toleranceLevels}` : item.levels}</span>

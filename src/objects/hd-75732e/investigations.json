@@ -6,7 +6,7 @@
       "id": "nasa-vtad-illustration",
       "subject": "NASA VTAD 55 Cnc e 3D model texture as an illustration dataset",
       "status": "included",
-      "finding": "Shown as the non-default Illustration dataset, never as imagery: the base-colour texture of NASA's 55 Cnc e 3D Model (55_Cancri_e_1_24364.glb), carried through the model's own UVs onto the sphere, unrepainted, with arbitrary longitudes. No image resolves this planet; nothing in the texture was observed. The resource page gives the credit and a one-line description; it does not say how the texture was made.",
+      "finding": "Shown as the non-default Illustration dataset, never as imagery: the base-color texture of NASA's 55 Cnc e 3D Model (55_Cancri_e_1_24364.glb), carried through the model's own UVs onto the sphere, unrepainted, with arbitrary longitudes. No image resolves this planet; nothing in the texture was observed. The resource page gives the credit and a one-line description; it does not say how the texture was made.",
       "evidence": [
         "https://science.nasa.gov/resource/55-cancri-e-3d-model/",
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
@@ -16,7 +16,7 @@
       "id": "spitzer-phase-curve-maps",
       "subject": "Demory et al. (2016) band map and Mercier et al. (2022) sinusoid fit of the 2013 Spitzer 4.5 um phase curve",
       "status": "excluded",
-      "finding": "The two papers reduce the same data and disagree (hot spot 41 +/- 12 degrees east against -12 +21/-18). Both were drawn and checked against their tables, then not shipped. Demory et al.'s 1-free-band map is a two-block step: 0.72 of the star's mean brightness from 5 +/- 18 degrees west to 85 +/- 18 degrees east, 0.15 elsewhere. Mercier et al.'s first-order fit (A 0.493, B 0.108, Table 1) inverts through Cowan & Agol (2008) to a map below zero around the antistellar point, which has no temperature and would show as a grey patch. The rotation record stays a display orientation.",
+      "finding": "The two papers reduce the same data and disagree (hot spot 41 +/- 12 degrees east against -12 +21/-18). Both were drawn and checked against their tables, then not shipped. Demory et al.'s 1-free-band map is a two-block step: 0.72 of the star's mean brightness from 5 +/- 18 degrees west to 85 +/- 18 degrees east, 0.15 elsewhere. Mercier et al.'s first-order fit (A 0.493, B 0.108, Table 1) inverts through Cowan & Agol (2008) to a map below zero around the antistellar point, which has no temperature and would show as a gray patch. The rotation record stays a display orientation.",
       "evidence": [
         "https://arxiv.org/abs/1604.05725",
         "https://arxiv.org/abs/2209.02090"

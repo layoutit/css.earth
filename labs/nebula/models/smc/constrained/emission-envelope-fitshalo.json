@@ -29,7 +29,7 @@
       "reason": "Authored exclusion of foreground globular cluster identified in registered optical image; not SMC gas."
     }
   ],
-  "depthInterpretation": "Authored dominant conditional ray-mode hypothesis. Select the strongest prior mode per image component and assign its complete projected weight there. Not a recovered gas depth; no duplicated secondary-mode feature or artificial bridge. Two-scale variant: smoothed image light is carried along the simulation's own density (envelope); finite components fit only the remaining detail. Envelope light and colour come from the calibrated DSS2 FITS composite; fine structure stays with the Horalek photograph.",
+  "depthInterpretation": "Authored dominant conditional ray-mode hypothesis. Select the strongest prior mode per image component and assign its complete projected weight there. Not a recovered gas depth; no duplicated secondary-mode feature or artificial bridge. Two-scale variant: smoothed image light is carried along the simulation's own density (envelope); finite components fit only the remaining detail. Envelope light and color come from the calibrated DSS2 FITS composite; fine structure stays with the Horalek photograph.",
   "envelope": {
     "scalePixels": 10,
     "fraction": 0.85,

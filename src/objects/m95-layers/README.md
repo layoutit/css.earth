@@ -1,14 +1,14 @@
 # M95
 
-A survey image of M95 (NGC 3351), cleaned of the Milky Way stars in front of it and colour-tied to its measured integrated
-colour, lies flat on its measured disc. Published catalogues of its ionised nebulae, planetary nebulae and supernova
+A survey image of M95 (NGC 3351), cleaned of the Milky Way stars in front of it and color-tied to its measured integrated
+color, lies flat on its measured disc. Published catalogues of its ionised nebulae, planetary nebulae and supernova
 remnants are drawn as dots on the same disc. Image brightness does not measure per-pixel distance.
 
 ## Sources
 
 | Selected source | Input and meaning |
 | --- | --- |
-| [Sloan Digital Sky Survey](https://www.sdss.org/) | [Record](../../sources/sdss-dr9-color-hips.json). The survey's g, r, i colour composite as the CDS HiPS `CDS/P/SDSS9/color`, cut out by the CDS hips2fits service: 3000 × 3000 px over 12 × 12 arcmin, tangent projection, north up (`source/source.jpg`, restored from its origin). A display composite, not calibrated photometry. The observatory photographs found cover the centre only (ESO potw1935a, 1 arcmin) or carry no coordinates (NOIRLab noao-m95). |
+| [Sloan Digital Sky Survey](https://www.sdss.org/) | [Record](../../sources/sdss-dr9-color-hips.json). The survey's g, r, i color composite as the CDS HiPS `CDS/P/SDSS9/color`, cut out by the CDS hips2fits service: 3000 × 3000 px over 12 × 12 arcmin, tangent projection, north up (`source/source.jpg`, restored from its origin). A display composite, not calibrated photometry. The observatory photographs found cover the centre only (ESO potw1935a, 1 arcmin) or carry no coordinates (NOIRLab noao-m95). |
 | [Walter et al. (2008)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/136/2563) | [Record](../../sources/walter-2008-things.json). THINGS Table 1, row NGC 3351: centre 160.99042°, +11.70389°, inclination 41°, position angle 192°: the disc the image and dots lie on. |
 | [Leroy et al. (2021)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43) | [Record](../../sources/leroy-2021-phangs-alma.json). Row NGC3351: stellar scale length 2.1 kpc at their 9.96 Mpc, 43.5″, which is 2.10 kpc at the distance used here. It sets the thickness the dots' heights are drawn from. |
 | [Gaia DR3](https://doi.org/10.1051/0004-6361/202243940) with [Ren et al. (2021)](https://doi.org/10.3847/1538-4357/abcda5) | The 141 Gaia DR3 sources within 0.15° of M95's centre that Ren et al.'s criterion marks as Milky Way stars (`source/gaia-dr3-foreground.csv`, restored by the query in the Gaia record). |
@@ -21,7 +21,7 @@ remnants are drawn as dots on the same disc. Image brightness does not measure p
   4 px of their requested places.
 - **Foreground stars:** 60 of the 80 Gaia foreground stars in the image are removed where they show; 14 on extended
   light are left.
-- **Colour:** tied to RC3's B-V of 0.80: red/green 1.19 and blue/green 0.549 against 1.227 and 0.834, so red × 1.031
+- **Color:** tied to RC3's B-V of 0.80: red/green 1.19 and blue/green 0.549 against 1.227 and 0.834, so red × 1.031
   and blue × 1.519. in linear light.
 - **Disc:** inclination 41°, line of nodes 192°, drawn as one flat image on the midplane. The support radius, 12 kpc, is where the image's ring median reaches its sky level, 4′ from the centre; the frame reaches 17.4 kpc.
 - **Near side:** the catalogue gives the tilt, not which edge is nearer. The arms are read as opening counter-clockwise on the
@@ -44,7 +44,7 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 dot is a catalogued object at its published sky position, placed where its sight line meets the disc. Its height above
 the disc is drawn from a 287 pc layer, the scale length over 7.3 ([Kregel et al. 2002](https://arxiv.org/abs/astro-ph/0204154),
 [record](../../sources/kregel-2002-disc-flattening.json)); that height is not measured. Each dot takes its tone from the
-image's brightness under it and moves halfway from its kind's colour to the image's colour there.
+image's brightness under it and moves halfway from its kind's color to the image's color there.
 
 ## Evidence
 
@@ -53,7 +53,7 @@ image's brightness under it and moves halfway from its kind's colour to the imag
 The M95 page in headless Chromium at 1440 × 900, device pixel ratio 2, on this branch on 2026-10-02: the default
 arrival, then the camera turned toward the side and to above the disc.
 
-- The prepared bank's `approximation.limitations` records the foreground and colour-tie counts quoted above.
+- The prepared bank's `approximation.limitations` records the foreground and color-tie counts quoted above.
 
 ## Measured, chosen and inferred
 
@@ -66,7 +66,7 @@ arrival, then the camera turned toward the side and to above the disc.
 | Dot positions | Measured: the catalogues' sky positions |
 | Dot heights, from a 287 pc layer | Inferred: the scale length over 7.3, the mean of other galaxies; not measured here |
 | Support 12 kpc | Presentation: where the image's light reaches its sky level |
-| One flat image, 1,024 px on its face, background floor, dot colours and tones | Presentation |
+| One flat image, 1,024 px on its face, background floor, dot colors and tones | Presentation |
 
 ## Known problems
 

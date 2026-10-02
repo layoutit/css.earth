@@ -3,7 +3,7 @@
  * Every picture in docs/telescopes comes from this one renderer and from the checked-in recipe beside it (examples.json).
  * A recipe states, and this module enforces, everything that turns stored numbers into a picture: which file and which
  * extension or plane, the pixel window, the unit those numbers are in, the two values drawn as black and white, the
- * stretch between them, which way up the picture is, the whole-number enlargement, and the colours. Nothing is smoothed,
+ * stretch between them, which way up the picture is, the whole-number enlargement, and the colors. Nothing is smoothed,
  * sharpened, interpolated, denoised or normalised: every source sample becomes a square block of equal output pixels, and
  * a sample outside the stated range is clipped, not rescaled.
  *
@@ -43,17 +43,17 @@ export type ExampleSource =
   /** A JunoCam PDS3 image with its label, in the reflectance the RDR records. */
   | { readonly kind: 'junocam-image'; readonly path: string; readonly labelPath: string };
 
-export type ExampleColour =
+export type ExampleColor =
   | { readonly kind: 'greys'; readonly missing?: string }
   /** A stated ramp: stops at positions 0 to 1 through the stretched range, interpolated in sRGB. */
   | { readonly kind: 'ramp'; readonly stops: readonly (readonly [number, string])[]; readonly missing?: string }
   /** Three channels, each stretched on its own limits in its own unit, put straight into red, green and blue. This is
-   * representative colour: it says which measurement is which channel, not what an eye would see. */
+   * representative color: it says which measurement is which channel, not what an eye would see. */
   | { readonly kind: 'channels'; readonly missing: string };
 
 export interface ExampleStretch { readonly kind: 'linear' | 'asinh'; readonly black: number; readonly white: number; readonly softening?: number }
 
-/** One measurement drawn into the picture: a single grey or ramped channel, or one of three colour channels. */
+/** One measurement drawn into the picture: a single grey or ramped channel, or one of three color channels. */
 export interface ExampleChannel {
   /** What this channel is, for the caption: a band, a filter or an energy range. */
   readonly label: string;
@@ -81,7 +81,7 @@ export interface ExampleRecipe {
   readonly window: { readonly x: number; readonly y: number; readonly width: number; readonly height: number };
   /** `sky` reads the WCS and draws north up and east left; the other two state which stored row is drawn at the top. */
   readonly orientation: { readonly mode: 'sky' | 'first-row-top' | 'first-row-bottom'; readonly note: string };
-  readonly colour: ExampleColour;
+  readonly color: ExampleColor;
   /** Output pixels per source sample, across and down. The two differ only where the instrument's samples are not
    * square on the sky, and a rectangle of equal pixels is still a block of equal pixels. */
   readonly enlarge: readonly [number, number];
@@ -106,9 +106,9 @@ const record = (value: unknown, label: string): Record<string, unknown> => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`Example ${label} must be an object.`);
   return value as Record<string, unknown>;
 };
-function colourValue(value: unknown, label: string) {
+function colorValue(value: unknown, label: string) {
   const text = nonEmpty(value, label).toLowerCase();
-  if (!RGB.test(text)) throw new TypeError(`Example ${label} must be an #rrggbb colour.`);
+  if (!RGB.test(text)) throw new TypeError(`Example ${label} must be an #rrggbb color.`);
   return text;
 }
 
@@ -137,25 +137,25 @@ function parseSource(value: unknown): ExampleSource {
   throw new TypeError(`Unsupported example source kind: ${kind}.`);
 }
 
-function parseColour(value: unknown): ExampleColour {
-  const colour = record(value, 'colour'), kind = nonEmpty(colour.kind, 'colour.kind');
-  const missing = colour.missing === undefined ? undefined : colourValue(colour.missing, 'colour.missing');
+function parseColor(value: unknown): ExampleColor {
+  const color = record(value, 'color'), kind = nonEmpty(color.kind, 'color.kind');
+  const missing = color.missing === undefined ? undefined : colorValue(color.missing, 'color.missing');
   if (kind === 'channels') {
-    if (missing === undefined) throw new TypeError('A three-channel picture states the colour for a sample missing from any channel.');
+    if (missing === undefined) throw new TypeError('A three-channel picture states the color for a sample missing from any channel.');
     return { kind, missing };
   }
   if (kind === 'greys') return { kind, ...(missing === undefined ? {} : { missing }) };
-  if (kind !== 'ramp') throw new TypeError(`Unsupported example colour kind: ${kind}.`);
-  const stops = colour.stops;
-  if (!Array.isArray(stops) || stops.length < 2) throw new TypeError('Example colour.stops needs at least two stops.');
+  if (kind !== 'ramp') throw new TypeError(`Unsupported example color kind: ${kind}.`);
+  const stops = color.stops;
+  if (!Array.isArray(stops) || stops.length < 2) throw new TypeError('Example color.stops needs at least two stops.');
   const parsed = stops.map((stop, index) => {
-    if (!Array.isArray(stop) || stop.length !== 2) throw new TypeError('Example colour stop is a position and an #rrggbb colour.');
-    const at = finite(stop[0], `colour.stops[${index}][0]`);
-    if (at < 0 || at > 1) throw new RangeError('Example colour stop positions run from 0 to 1.');
-    return [at, colourValue(stop[1], `colour.stops[${index}][1]`)] as const;
+    if (!Array.isArray(stop) || stop.length !== 2) throw new TypeError('Example color stop is a position and an #rrggbb color.');
+    const at = finite(stop[0], `color.stops[${index}][0]`);
+    if (at < 0 || at > 1) throw new RangeError('Example color stop positions run from 0 to 1.');
+    return [at, colorValue(stop[1], `color.stops[${index}][1]`)] as const;
   });
   if (parsed[0]![0] !== 0 || parsed.at(-1)![0] !== 1 || parsed.some((stop, index) => index > 0 && stop[0] <= parsed[index - 1]![0]))
-    throw new TypeError('Example colour stops rise from 0 to 1.');
+    throw new TypeError('Example color stops rise from 0 to 1.');
   return { kind, stops: parsed, ...(missing === undefined ? {} : { missing }) };
 }
 
@@ -202,14 +202,14 @@ export function parseExampleRecipe(value: unknown): ExampleRecipe {
   if (size.width * enlarge[0] > MAX_OUTPUT_EDGE || size.height * enlarge[1] > MAX_OUTPUT_EDGE) throw new RangeError(`An example picture is larger than ${MAX_OUTPUT_EDGE} pixels on an edge.`);
   const mode = nonEmpty(orientation.mode, 'orientation.mode');
   if (mode !== 'sky' && mode !== 'first-row-top' && mode !== 'first-row-bottom') throw new TypeError(`Unsupported example orientation: ${mode}.`);
-  const colour = parseColour(recipe.colour);
+  const color = parseColor(recipe.color);
   let channels: ExampleChannel[];
   if (recipe.channels === undefined) {
-    if (colour.kind === 'channels') throw new TypeError('A three-channel picture states its three channels.');
+    if (color.kind === 'channels') throw new TypeError('A three-channel picture states its three channels.');
     channels = [{ label: nonEmpty(recipe.unit, 'unit'), source: parseSource(recipe.source), unit: nonEmpty(recipe.unit, 'unit'),
       stretch: parseStretch(recipe.stretch, 'stretch') }];
   } else {
-    if (colour.kind !== 'channels') throw new TypeError('A recipe with three channels draws them as channels.');
+    if (color.kind !== 'channels') throw new TypeError('A recipe with three channels draws them as channels.');
     if (recipe.source !== undefined || recipe.unit !== undefined || recipe.stretch !== undefined)
       throw new TypeError('A three-channel recipe states its source, unit and stretch once per channel, not once for the picture.');
     if (!Array.isArray(recipe.channels) || recipe.channels.length !== 3) throw new TypeError('A three-channel picture states exactly three channels, red first.');
@@ -221,7 +221,7 @@ export function parseExampleRecipe(value: unknown): ExampleRecipe {
     title: nonEmpty(recipe.title, 'title'), target: nonEmpty(recipe.target, 'target'), date: nonEmpty(recipe.date, 'date'),
     channels, producedIn: recipe.producedIn === undefined ? undefined : nonEmpty(recipe.producedIn, 'producedIn'), window: size,
     orientation: { mode, note: nonEmpty(orientation.note, 'orientation.note') },
-    colour, enlarge,
+    color, enlarge,
     product: { command: nonEmpty(product.command, 'product.command'), definition: nonEmpty(product.definition, 'product.definition') },
     note: nonEmpty(recipe.note, 'note'),
   };
@@ -337,21 +337,21 @@ export function stretchSample(value: number, stretch: ExampleStretch) {
   return Math.min(1, Math.max(0, fraction));
 }
 
-/** The three sRGB bytes of an #rrggbb colour. */
-const sRgb = (colour: string) => [1, 3, 5].map(at => Number.parseInt(colour.slice(at, at + 2), 16)) as [number, number, number];
+/** The three sRGB bytes of an #rrggbb color. */
+const sRgb = (color: string) => [1, 3, 5].map(at => Number.parseInt(color.slice(at, at + 2), 16)) as [number, number, number];
 
 /** Red, green and blue for a stretched position, or for a missing sample. */
-export function colourOf(fraction: number, colour: ExampleColour): [number, number, number] {
+export function colorOf(fraction: number, color: ExampleColor): [number, number, number] {
   if (!Number.isFinite(fraction)) {
-    if (!colour.missing) throw new Error('A sample has no value and the recipe states no colour for missing samples.');
-    return sRgb(colour.missing);
+    if (!color.missing) throw new Error('A sample has no value and the recipe states no color for missing samples.');
+    return sRgb(color.missing);
   }
-  if (colour.kind === 'greys') { const grey = Math.round(255 * fraction); return [grey, grey, grey]; }
-  if (colour.kind === 'channels') throw new Error('A three-channel picture is composed from its channels, not from one value.');
-  const stops = colour.stops, next = stops.findIndex(stop => stop[0] >= fraction);
+  if (color.kind === 'greys') { const grey = Math.round(255 * fraction); return [grey, grey, grey]; }
+  if (color.kind === 'channels') throw new Error('A three-channel picture is composed from its channels, not from one value.');
+  const stops = color.stops, next = stops.findIndex(stop => stop[0] >= fraction);
   if (next <= 0) return sRgb(stops[Math.max(next, 0)]![1]);
-  const [aAt, aColour] = stops[next - 1]!, [bAt, bColour] = stops[next]!, t = (fraction - aAt) / (bAt - aAt);
-  const [a, b] = [sRgb(aColour), sRgb(bColour)];
+  const [aAt, aColor] = stops[next - 1]!, [bAt, bColor] = stops[next]!, t = (fraction - aAt) / (bAt - aAt);
+  const [a, b] = [sRgb(aColor), sRgb(bColor)];
   return [0, 1, 2].map(index => Math.round(a[index]! + t * (b[index]! - a[index]!))) as [number, number, number];
 }
 
@@ -359,7 +359,7 @@ export function colourOf(fraction: number, colour: ExampleColour): [number, numb
 const GRID_CARDS = ['NAXIS1', 'NAXIS2', 'CRPIX1', 'CRPIX2', 'CRVAL1', 'CRVAL2', 'CDELT1', 'CDELT2',
   'CD1_1', 'CD1_2', 'CD2_1', 'CD2_2', 'PC1_1', 'PC1_2', 'PC2_1', 'PC2_2'] as const;
 
-/** Display-ordered red, green and blue samples, before enlargement. One window is drawn with the recipe's colour; three
+/** Display-ordered red, green and blue samples, before enlargement. One window is drawn with the recipe's color; three
  * are put straight into red, green and blue, each stretched on its own limits, once their grids are shown to agree. */
 export function examplePixels(windows: readonly SourceWindow[], recipe: ExampleRecipe) {
   if (windows.length !== recipe.channels.length) throw new Error('A picture needs one window for each channel.');
@@ -378,8 +378,8 @@ export function examplePixels(windows: readonly SourceWindow[], recipe: ExampleR
   const display = windows.map(window => displayOrder(window, recipe)), pixels = new Uint8Array(display[0]!.length * 3);
   for (let index = 0; index < display[0]!.length; index++) {
     const fractions = display.map((values, channel) => stretchSample(values[index]!, recipe.channels[channel]!.stretch));
-    if (fractions.length === 1) { pixels.set(colourOf(fractions[0]!, recipe.colour), index * 3); continue; }
-    if (fractions.some(fraction => !Number.isFinite(fraction))) { pixels.set(sRgb((recipe.colour as { missing: string }).missing), index * 3); continue; }
+    if (fractions.length === 1) { pixels.set(colorOf(fractions[0]!, recipe.color), index * 3); continue; }
+    if (fractions.some(fraction => !Number.isFinite(fraction))) { pixels.set(sRgb((recipe.color as { missing: string }).missing), index * 3); continue; }
     pixels.set(fractions.map(fraction => Math.round(255 * fraction)), index * 3);
   }
   return { pixels, width: first.width, height: first.height };

@@ -20,7 +20,7 @@ export interface SimulationEnvelopeSettings {
   depthTrim: number;
   /**
    * Quantile of the smoothed envelope signal at which its chromaticity reaches half trust, so fainter
-   * light keeps proportionally less of its measured colour and the rest is neutral. Lower keeps colour
+   * light keeps proportionally less of its measured color and the rest is neutral. Lower keeps color
    * further out into the halo; higher neutralises more of it. Omitted means the long-standing 0.9.
    */
   chromaHalfSaturationQuantile?: number;
@@ -33,11 +33,11 @@ export interface SimulationEnvelopeSettings {
   chromaSkyQuantile?: number;
   /**
    * Blurred-coverage fraction below which a pixel's chromaticity is fully neutral, ramping to its measured
-   * colour at twice that fraction. `fitSimulationEnvelope` already tapers its GAIN across the observed
+   * color at twice that fraction. `fitSimulationEnvelope` already tapers its GAIN across the observed
    * footprint edge on exactly this fraction, so unobserved sky does not end in a hard cut; the chromaticity
-   * had no such taper and therefore reported a full-strength colour from however few covered pixels a
+   * had no such taper and therefore reported a full-strength color from however few covered pixels a
    * boundary pixel has, which the outer annulus displays as false saturated patches. Setting this to the
-   * gain's own 0.5 trusts colour exactly where the gain carries light. Omitted means no taper.
+   * gain's own 0.5 trusts color exactly where the gain carries light. Omitted means no taper.
    */
   chromaCoverageTaper?: number;
 }
@@ -144,15 +144,15 @@ export function createEnvelopeSampler(grid: SimulationEnvelopeGrid, prior: Simul
  * Smoothed, peak-normalized chromaticity of one registered image at envelope scale; neutral where
  * unobserved or black.
  *
- * Three authored settings shape what colour this reports; each default is the long-standing behaviour and
+ * Three authored settings shape what color this reports; each default is the long-standing behaviour and
  * `SimulationEnvelopeSettings` documents why each one is authored rather than fixed.
  *  - `halfSaturationQuantile` places the trust ramp: the smoothed signal at that quantile is where a pixel
- *    keeps half its measured colour. At the default 0.9 the whole faint halo of a body whose light spans a
- *    wide dynamic range is neutralised, which reads as a grey halo around a coloured core.
- *  - `skyQuantile` is the per-channel level removed as this image's sky before any colour is measured.
- *  - `coverageTaper` fades colour to neutral across the observed footprint edge, the way the gain already
+ *    keeps half its measured color. At the default 0.9 the whole faint halo of a body whose light spans a
+ *    wide dynamic range is neutralised, which reads as a grey halo around a colored core.
+ *  - `skyQuantile` is the per-channel level removed as this image's sky before any color is measured.
+ *  - `coverageTaper` fades color to neutral across the observed footprint edge, the way the gain already
  *    fades light there.
- * None of them can invent colour where the image has none, and none of them changes alpha or level.
+ * None of them can invent color where the image has none, and none of them changes alpha or level.
  */
 export function envelopeChromaticity(rgb: ArrayLike<number>, coverage: Uint8Array, width: number, height: number, bounds: SkyBounds, scalePixels: number,
   halfSaturationQuantile: number = DEFAULT_CHROMA_HALF_SATURATION_QUANTILE, skyQuantile: number = DEFAULT_CHROMA_SKY_QUANTILE,
@@ -173,12 +173,12 @@ export function envelopeChromaticity(rgb: ArrayLike<number>, coverage: Uint8Arra
   for (let p = 0; p < n; p++) signal[p] = weight[p]! > 1e-6 ? Math.max(channels[0]![p]!, channels[1]![p]!, channels[2]![p]!) / weight[p]! : 0;
   const observed = Array.from(signal).filter((_, p) => coverage[p] && signal[p]! > 0).sort((a, b) => a - b);
   const halfSaturation = observed.length ? observed[Math.min(observed.length - 1, Math.floor(observed.length * halfSaturationQuantile))]! : 1;
-  // The footprint-edge taper reads the same blurred coverage fraction the gain tapers on, so colour and
-  // light fade out together instead of a tapered gain carrying a full-strength extrapolated colour.
+  // The footprint-edge taper reads the same blurred coverage fraction the gain tapers on, so color and
+  // light fade out together instead of a tapered gain carrying a full-strength extrapolated color.
   const blurredOnes = coverageTaper > 0 ? blurWeighted(new Float32Array(n).fill(1), new Float32Array(n).fill(1), width, height, scalePixels) : null;
   for (let p = 0; p < n; p++) {
     const values = channels.map(channel => weight[p]! > 1e-6 ? channel[p]! / weight[p]! : 0), peak = Math.max(...values);
-    // Faint light is increasingly neutral: its colour is dominated by noise and residual sky, not the galaxy.
+    // Faint light is increasingly neutral: its color is dominated by noise and residual sky, not the galaxy.
     let trust = signal[p]! / (signal[p]! + halfSaturation);
     if (blurredOnes) {
       const inside = blurredOnes[p]! > 0 ? weight[p]! / blurredOnes[p]! : 0;

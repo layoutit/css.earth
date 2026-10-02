@@ -27,7 +27,7 @@ A headless browser capture of this version at 1440 × 900, device pixel ratio 2,
 | Sky positions, membership and F160W magnitudes | Measured: Bergamini et al. (2023), table B1 |
 | Distance 1,258 Mpc | Derived: the redshift's comoving distance in the Planck 2018 cosmology |
 | Depth of each member within the cluster | Assumed: as deep as the members are wide on the sky; not measured |
-| Tone scale, dot size, white colour | Presentation |
+| Tone scale, dot size, white color | Presentation |
 
 ## Known problems
 
@@ -35,4 +35,4 @@ A headless browser capture of this version at 1440 × 900, device pixel ratio 2,
 - The catalogue covers the cluster's core only, the field of the strong-lensing model, about 4 arcmin across. The wider redshift catalogue of Owers et al. (2011, CDS J/ApJ/728/27) carries no membership column, and its 343 members come from an iterative procedure, so it is not used.
 - Each member is also a galaxy in the picture, so from the Sun's side a dot lies over its own galaxy.
 - The tone scale subtracts the distance modulus of the comoving distance from the observed F160W magnitude. It is a display scale, not a rest-frame luminosity.
-- No types or colours are in the table, so every dot is white.
+- No types or colors are in the table, so every dot is white.

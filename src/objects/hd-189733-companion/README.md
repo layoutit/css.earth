@@ -2,13 +2,13 @@
 
 ## Sources
 
-HD 189733 B is a red dwarf 11.4 arcseconds from [HD 189733 A](../hd-189733/README.md), the host of the hot Jupiter [HD 189733b](../hd-189733b/README.md). The two stars share their path through space. No image of B's surface exists, and no diameter, limb darkening or rotation axis of it is measured. The package draws it as a sphere of its catalogue radius in the colour of its own measured spectrum.
+HD 189733 B is a red dwarf 11.4 arcseconds from [HD 189733 A](../hd-189733/README.md), the host of the hot Jupiter [HD 189733b](../hd-189733b/README.md). The two stars share their path through space. No image of B's surface exists, and no diameter, limb darkening or rotation axis of it is measured. The package draws it as a sphere of its catalogue radius in the color of its own measured spectrum.
 
 **Placement.** The position and proper motion are the Gaia DR3 values for source 1827242816176111360, archived in `photometry/gaia-dr3-source.csv` (its [acquisition record](../../sources/gaia-dr3-hd-189733-companion.json), epoch J2016.0). At that epoch B lies 11.44 arcsec from A at position angle 244°, 226 au across the sky at A's distance. The star is placed at A's distance, 19.776 pc. Its own parallax, 50.629 ± 0.014 mas, differs from A's 50.567 ± 0.016 mas by 0.06 mas; taken literally it would put B 5,000 au nearer than A, although the pair moves together. The radial velocity is A's: B's own Gaia value, 1.5 ± 1.2 km/s, is too uncertain to separate the pair.
 
 **Radius and mass.** 0.224 solar radii and 0.193 solar masses from the TESS Input Catalog v8.2 (TIC 256364937; Stassun et al. 2019, AJ 158, 138), kept as one VizieR row in [`photometry/tic-8.2.tsv`](source/photometry/tic-8.2.tsv). The catalogue derives both from the star's Ks magnitude and distance with relations calibrated on nearby M dwarfs (Mann et al. 2015, 2019). They are model values, not a measured diameter.
 
-**Colour dataset.** Gaia DR3 published a BP/RP spectrum of B, calibrated to absolute flux and sampled every 2 nm from 336 to 1020 nm, kept unchanged as `photometry/gaia-dr3-xp-sampled.csv` (same acquisition record). The colour is computed as for A ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **255, 201, 123 (#ffc97b)**. The catalogue swatch and minimap use the same colour. The disc is uniform: no limb darkening is measured for this star.
+**Color dataset.** Gaia DR3 published a BP/RP spectrum of B, calibrated to absolute flux and sampled every 2 nm from 336 to 1020 nm, kept unchanged as `photometry/gaia-dr3-xp-sampled.csv` (same acquisition record). The color is computed as for A ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **255, 201, 123 (#ffc97b)**. The catalogue swatch and minimap use the same color. The disc is uniform: no limb darkening is measured for this star.
 
 **No orbit is drawn.** No orbit of the pair is published: the 2006 discovery paper says it is "premature to derive specific orbital parameters". Gaia DR3 measures the pair's separation and relative motion across the sky precisely (−8.98, −3.67 mas/yr, 0.91 km/s at their distance), but not how far apart they lie along the line of sight. Many orbits fit, so the package draws none. It fits them once, to record how open the orbit is.
 
@@ -25,7 +25,7 @@ The one firm result is the inclination: 293 of the 300 orbits lie within 30° of
 
 **Axis.** No rotation axis or period is measured. The display axis is celestial north at the star, placed in the plane of the sky ([rotation.json](source/preparation/rotation.json)), a convention.
 
-**On the map.** B has no surface image, but its colour comes from its own spectrum, so preparation marks it `sourceColor` ([prepare-object-discovery.mts](../../../site/build/prepare/prepare-object-discovery.mts)) and it stays visible.
+**On the map.** B has no surface image, but its color comes from its own spectrum, so preparation marks it `sourceColor` ([prepare-object-discovery.mts](../../../site/build/prepare/prepare-object-discovery.mts)) and it stays visible.
 
 **In the system.** The pair is bound: El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list it in their Gaia EDR3 wide-binary catalogue with a chance-alignment probability of 1.3e-4. Preparation carries the pair's centre of mass into the world context, 19.3% of the way from A to B for masses 0.807 and 0.193 solar, 44 au from A ([object-systems.mts](../../../site/object-systems.mts)). Once the camera is farther out than the stars are from each other, the view turns onto the pair's centre of mass ([prepared-world-navigation.mts](../../../site/prepared-world-navigation.mts)), so A and B sit either side of it as the view widens.
 

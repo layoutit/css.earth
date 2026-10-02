@@ -8,10 +8,10 @@ CO-SR-UVIS-HSP-2/4-OCC-V3.0), from the PDS Ring-Moon Systems Node.
 
 The globe's limb law is the Minnaert table of the Hubble OPAL Saturn 2025
 README (NASA, ESA and the OPAL team), transcribed as facts in
-`source/photometry/`. The visible map's colour balance is tied to a colour
+`source/photometry/`. The visible map's color balance is tied to a color
 computed from E. Karkoschka's 1995 full-disc albedo spectrum of Saturn
 (Icarus 133, 1998), archived by the NASA PDS Atmospheres Node; the computed
-colour is recorded in `source/photometry/`, and the table is cited, not
+color is recorded in `source/photometry/`, and the table is cited, not
 redistributed.
 
 The ultraviolet and methane observation inputs are Hubble OPAL products from

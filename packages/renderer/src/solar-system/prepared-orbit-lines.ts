@@ -29,7 +29,7 @@ export interface PreparedOrbitLines {
   stats(): Record<string, number>;
   destroy(): void;
 }
-/** `color`: an orbit's own colour, for a body no swatch stylesheet colours (one drawn from its astronomy record). */
+/** `color`: an orbit's own color, for a body no swatch stylesheet colors (one drawn from its astronomy record). */
 export function mountPreparedOrbitLines(host: HTMLElement, { renderer = 'bars', dashed = false, capacity = 0, id, color, depthBase = 0, strokeHost }:
   { renderer?: OrbitRenderer; dashed?: boolean; capacity?: number; id?: string; color?: string; depthBase?: number; strokeHost?: HTMLElement } = {}): PreparedOrbitLines {
   // An orbit-less body's root is never inserted; it has nothing to share.
@@ -91,7 +91,7 @@ function sharedSvg(root: HTMLElement, depthBase: number): SVGSVGElement {
 /** One orbit's strokes: a group in the shared svg with one polyline per contiguous
  * run of chords per opacity level. `points` is not a CSS property, so a write
  * invalidates layout and paint only, never style. Only a run whose points changed
- * is written. The group carries the orbit id, so the published swatch rules colour
+ * is written. The group carries the orbit id, so the published swatch rules color
  * it like its marker, and an approximate placement dashes it by stylesheet. */
 function mountOrbitStrokes(host: HTMLElement, root: HTMLElement, dashed: boolean, depthBase: number, id?: string, color?: string): PreparedOrbitLines {
   const document = host.ownerDocument, group = document.createElementNS(SVG, 'g');

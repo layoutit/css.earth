@@ -6,7 +6,7 @@ Its radius and temperature follow MacDougall et al. 2023. The introduction is ge
 
 **Star.** Placement: Gaia DR3 source 541725187117160960, parallax 11.344 ± 0.015 mas (88.16 pc). Radius 1.4286 +/- 0.0267 solar radii from MacDougall et al. 2023, the stellar radius of the default parameter set of TOI-1736 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). Mass 1.0373 +/- 0.0368 solar masses from MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1736 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). Temperature 5,636 K from MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1736 b in the NASA Exoplanet Archive. log g 4.14 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 541725187117160960, through the CIE 1931 2° observer: #fff1ef. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 541725187117160960, through the CIE 1931 2° observer: #fff1ef. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,636 K and log g 4.14 (u1 0.486, u2 0.243): a model, because no fit of this star's limb is used.
 

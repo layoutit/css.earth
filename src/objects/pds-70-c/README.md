@@ -14,7 +14,7 @@ PDS 70 c is a gas giant still forming inside the gap of [PDS 70](../pds-70/READM
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray: the planet is a point in every image, and no colour of it in comparable bands is measured.
+**Shape dataset.** A sphere of the model radius in the shared neutral gray: the planet is a point in every image, and no color of it in comparable bands is measured.
 
 **Rotation.** None measured. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 

@@ -8,7 +8,7 @@ It is the only planet known around TOI-470. Its orbit and size follow Oddo et al
 
 **Orbit.** Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): P 12.19148 d Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): a/R* 30.917; Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): inclination 89.527 degrees No archive row states an eccentricity; the orbit is taken as circular Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): transit mid-time 2459205.9825 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 7 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-470's measured colour (#ffe3d1, the colour dataset of toi-470 (src/objects/toi-470/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-470's measured color (#ffe3d1, the color dataset of toi-470 (src/objects/toi-470/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-470's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (6, 33, 87), folded onto its orbit. Upper limits and rows without an error are left out.
 

@@ -173,7 +173,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             // prepared raster, never the WebP. A grayscale map has one channel.
             const { encoder, progressive, quality, grayscale = false, chromaSubsampling } = surface.encoding;
             const pixels = image.clone().removeAlpha();
-            await (grayscale ? pixels.grayscale().toColourspace('b-w') : pixels).jpeg({ quality, mozjpeg: encoder === 'mozjpeg', progressive, ...(chromaSubsampling ? { chromaSubsampling } : {}) }).toFile(output);
+            await (grayscale ? pixels.grayscale().toColorspace('b-w') : pixels).jpeg({ quality, mozjpeg: encoder === 'mozjpeg', progressive, ...(chromaSubsampling ? { chromaSubsampling } : {}) }).toFile(output);
             // Dataset thumbnails come from the WebP encoding of the prepared map, held in memory only.
             if (config.thumbnail.crop)
                 thumbnailSource = await encodeLossyWebp(image.clone(), { effort: 6 });

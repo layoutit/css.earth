@@ -6,7 +6,7 @@ import { pds4Block, pds4Blocks, pds4Number } from '@cssearth/telescope';
 import { checkKeys } from '../record-keys.ts';
 
 export function validatePds4ObservationPolicy(value: unknown) {
-  // The wavelengths name the bands, so the policy declares one display range and nothing else about colour.
+  // The wavelengths name the bands, so the policy declares one display range and nothing else about color.
   checkKeys(value, ['kind', 'labelPath', 'lidvid', 'bands', 'wavelengthsNm', 'displayRange'], [], 'PDS4 color observation policy');
   const p=parsePds4Policy(value);
   if (p.kind !== 'pds4-float-rgb' || typeof p.labelPath !== 'string' || !p.labelPath || p.labelPath.startsWith('/') ||
@@ -69,7 +69,7 @@ export function decodePds4Color(bytes: Buffer, xml: string, sourceEntry: unknown
 // clamp only within the outer half-cell and require a valid complete RGB footprint.
 export function mapPds4Color(source: ReturnType<typeof decodePds4Color>, value: unknown, width: number, height: number) {
   const policy=validatePds4ObservationPolicy(value);
-  // The archive publishes derived band values at these wavelengths, not I/F or natural colour.
+  // The archive publishes derived band values at these wavelengths, not I/F or natural color.
   const display=bandColorDisplay(policy.wavelengthsNm.map(n=>`${n} nm`),'derived-band-value',policy.displayRange);
   if (![width, height].every(n => Number.isSafeInteger(n) && n > 0)) throw new Error('Invalid output dimensions.');
   const { grid, values, selected, valid } = source, rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);

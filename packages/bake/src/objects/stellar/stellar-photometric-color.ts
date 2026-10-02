@@ -1,4 +1,4 @@
-// A photosphere colour for a star with no image: its measured spectrum (Gaia XP, or an archived spectrophotometric file) where one
+// A photosphere color for a star with no image: its measured spectrum (Gaia XP, or an archived spectrophotometric file) where one
 // is published, otherwise a Planck spectrum at its catalogued photometric effective temperature, through the CIE 1931 2° observer
 // into sRGB (D65 white), scaled so the brightest linear channel is 1. A self-luminous disc shows chromaticity only; its brightness
 // is not modelled. Limb darkening is drawn where a measurement gives it, or from a named model grid (below).
@@ -18,27 +18,27 @@ export type StellarColorRecord = {
 } | { readonly spectrum: 'gaia-xp-sampled'; readonly spectrumPath: string; readonly sourceId: string }
   | { readonly spectrum: 'measured'; readonly measured: MeasuredSpectrumRecord; readonly gamut?: 'desaturate' };
 export interface StellarTemperature { readonly kelvin: number; readonly lowerKelvin: number; readonly upperKelvin: number }
-/** `gamut`, only when a record asks for it: the colour was more saturated than sRGB and was mixed with `whiteFraction` of the white
+/** `gamut`, only when a record asks for it: the color was more saturated than sRGB and was mixed with `whiteFraction` of the white
  * point to fit; `unmapped` is its linear sRGB before, with the brightest channel 1 and a channel below zero. */
 export interface StellarColor { readonly linear: readonly [number, number, number]; readonly srgb: readonly [number, number, number];
   readonly gamut?: { readonly whiteFraction: number; readonly unmapped: readonly [number, number, number] } }
 
 export function parseStellarColorRecord(value: unknown): StellarColorRecord {
-  const input = requireRecord(value, 'stellar colour record');
-  if (input.schema !== 'cssearth-stellar-photometric-color@1') throw new TypeError('The stellar colour record must use cssearth-stellar-photometric-color@1.');
+  const input = requireRecord(value, 'stellar color record');
+  if (input.schema !== 'cssearth-stellar-photometric-color@1') throw new TypeError('The stellar color record must use cssearth-stellar-photometric-color@1.');
   const integer = (id: string) => { if (!/^\d+$/u.test(id)) throw new TypeError('The catalogue source id must be an integer string.'); return id; };
   if (input.spectrum === 'measured') {
-    if (input.temperature !== undefined) throw new TypeError('A colour from a measured spectrum takes no temperature.');
-    if (input.gamut !== undefined && input.gamut !== 'desaturate') throw new TypeError(`A colour record's gamut mapping is 'desaturate', not ${String(input.gamut)}.`);
+    if (input.temperature !== undefined) throw new TypeError('A color from a measured spectrum takes no temperature.');
+    if (input.gamut !== undefined && input.gamut !== 'desaturate') throw new TypeError(`A color record's gamut mapping is 'desaturate', not ${String(input.gamut)}.`);
     return { spectrum: 'measured', measured: parseMeasuredSpectrumRecord(input.measuredSpectrum), ...(input.gamut === 'desaturate' ? { gamut: 'desaturate' as const } : {}) };
   }
   if (input.spectrum === 'gaia-xp-sampled') {
-    if (input.temperature !== undefined) throw new TypeError('A colour from a measured spectrum takes no temperature.');
+    if (input.temperature !== undefined) throw new TypeError('A color from a measured spectrum takes no temperature.');
     const spectrum = requireRecord(input.sampledSpectrum, 'sampledSpectrum');
     return { spectrum: 'gaia-xp-sampled', spectrumPath: requireString(spectrum.path, 'sampledSpectrum.path'), sourceId: integer(requireString(spectrum.sourceId, 'sampledSpectrum.sourceId')) };
   }
   const temperature = requireRecord(input.temperature, 'temperature');
-  if (input.spectrum !== 'planck') throw new TypeError('The stellar colour record must name the Planck spectrum or the Gaia XP sampled spectrum it applies.');
+  if (input.spectrum !== 'planck') throw new TypeError('The stellar color record must name the Planck spectrum or the Gaia XP sampled spectrum it applies.');
   if (temperature.published !== undefined) {
     const published = requireRecord(temperature.published, 'temperature.published');
     const bounds = { kelvin: requireFiniteNumber(published.kelvin, 'temperature.published.kelvin'), lowerKelvin: requireFiniteNumber(published.lowerKelvin, 'temperature.published.lowerKelvin'),
@@ -46,7 +46,7 @@ export function parseStellarColorRecord(value: unknown): StellarColorRecord {
     checkStellarTemperature(bounds, `published temperature ${bounds.kelvin} K (${bounds.lowerKelvin} to ${bounds.upperKelvin})`);
     const citation = requireString(published.citation, 'temperature.published.citation');
     if (!/https?:\/\//u.test(citation)) throw new TypeError(`The published temperature ${bounds.kelvin} K names its paper by URL, not "${citation}".`);
-    if (input.gamut !== undefined && input.gamut !== 'desaturate') throw new TypeError(`A colour record's gamut mapping is 'desaturate', not ${String(input.gamut)}.`);
+    if (input.gamut !== undefined && input.gamut !== 'desaturate') throw new TypeError(`A color record's gamut mapping is 'desaturate', not ${String(input.gamut)}.`);
     return { spectrum: 'planck', published: { ...bounds, citation }, ...(input.gamut === 'desaturate' ? { gamut: 'desaturate' as const } : {}) };
   }
   const sourceId = integer(requireString(temperature.sourceId, 'temperature.sourceId'));
@@ -55,8 +55,8 @@ export function parseStellarColorRecord(value: unknown): StellarColorRecord {
       upper: requireString(temperature.upperColumn, 'temperature.upperColumn') } };
 }
 
-/** The coolest black body a colour is drawn from. Cooler than this, it gives off almost no visible light, so a body's visible
- * colour is its reflected light, not its glow (a planet's dayside at 938 K, WASP-8 b, takes its host's light instead). */
+/** The coolest black body a color is drawn from. Cooler than this, it gives off almost no visible light, so a body's visible
+ * color is its reflected light, not its glow (a planet's dayside at 938 K, WASP-8 b, takes its host's light instead). */
 export const PLANCK_FLOOR_KELVIN = 1000;
 
 /** Read the temperature and its bounds from the archived catalogue row, by source id. */
@@ -100,7 +100,7 @@ export function planckLinearSrgb(kelvin: number, colorMatching: Map<number, read
     const metres = wavelength * 1e-9; return 1 / (metres ** 5 * Math.expm1(PLANCK_H * LIGHT_C / (metres * BOLTZMANN_K * kelvin))); }, colorMatching);
 }
 
-/** Spectral power at each wavelength (nm) through the observer into sRGB, brightest linear channel 1. A colour outside the sRGB
+/** Spectral power at each wavelength (nm) through the observer into sRGB, brightest linear channel 1. A color outside the sRGB
  * gamut fails, unless the record asks to `desaturate` it: then it is mixed with the least white (1, 1, 1 in normalised linear sRGB,
  * the D65 white point) that brings every channel to zero or above, which keeps its hue, and the report says how much. */
 function spectrumColor(wavelengths: readonly number[], power: (wavelength: number) => number, colorMatching: Map<number, readonly number[]>, label: string,
@@ -120,7 +120,7 @@ function spectrumColor(wavelengths: readonly number[], power: (wavelength: numbe
 export function planckColor(kelvin: number, colorMatching: Map<number, readonly number[]>, gamut?: 'desaturate'): StellarColor {
   const wavelengths = Array.from({ length: 401 }, (_, i) => 380 + i);
   return spectrumColor(wavelengths, wavelength => { const metres = wavelength * 1e-9; return 1 / (metres ** 5 * Math.expm1(PLANCK_H * LIGHT_C / (metres * BOLTZMANN_K * kelvin))); },
-    colorMatching, `A ${kelvin} K Planck colour`, gamut);
+    colorMatching, `A ${kelvin} K Planck color`, gamut);
 }
 
 /** Gaia DR3 XP sampled mean spectra (Gaia Collaboration, De Angeli et al. 2023, A&A 674, A2; Montegriffo et al. 2023, A&A 674, A3)
@@ -152,12 +152,12 @@ export function readXpSampledSpectrum(csv: string, sourceId: string) {
 /** How far below zero a sample may scatter and still be read as no emission, in its own standard errors. */
 export const NOISE_FLOOR_SIGMA = 3;
 
-/** The colour of a measured spectrum: its samples at the even wavelengths from 380 to 780 nm through the observer, as the Planck
- * colour takes every nanometre. The samples are 2 nm apart, so the odd wavelengths add nothing a finer grid would change.
+/** The color of a measured spectrum: its samples at the even wavelengths from 380 to 780 nm through the observer, as the Planck
+ * color takes every nanometre. The samples are 2 nm apart, so the odd wavelengths add nothing a finer grid would change.
  *
  * A cool star can be too faint to measure at the blue end, where its samples scatter around zero. With `fluxError`, a sample
  * that is not positive but lies within three times its own error of zero is read as no emission at that wavelength: ordinary
- * noise across hundreds of samples. A sample below zero by more than that is a spectrum this colour cannot be taken from, and
+ * noise across hundreds of samples. A sample below zero by more than that is a spectrum this color cannot be taken from, and
  * fails. Without `fluxError` every visible sample must be positive, which is what the one-sigma bounds pass. */
 export function xpSampledColor(flux: readonly number[], colorMatching: Map<number, readonly number[]>, fluxError?: readonly number[]): StellarColor {
   const index = (wavelength: number) => (wavelength - 336) / 2;
@@ -170,10 +170,10 @@ export function xpSampledColor(flux: readonly number[], colorMatching: Map<numbe
     return 0;
   };
   if (!wavelengths.some(wavelength => sample(wavelength) > 0)) throw new TypeError('The XP spectrum has no visible emission.');
-  return spectrumColor(wavelengths, sample, colorMatching, 'The XP spectrum colour');
+  return spectrumColor(wavelengths, sample, colorMatching, 'The XP spectrum color');
 }
 
-/** An independent second spectrum of the same star, read the same way: its colour is reported beside the dataset colour so a reader
+/** An independent second spectrum of the same star, read the same way: its color is reported beside the dataset color so a reader
  * sees whether two instruments agree. `disagreement` states why, when they differ by more than the agreement threshold. */
 export const CROSS_CHECK_AGREEMENT = 12;
 export interface StellarColorCrossCheck { readonly source: string; readonly record: MeasuredSpectrumRecord; readonly disagreement?: string }
@@ -227,7 +227,7 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
   if (record.spectrum === 'gaia-xp-sampled') {
     const spectrum = readXpSampledSpectrum((await read(record.spectrumPath)).toString('utf8'), record.sourceId);
     return { temperature: null, spectrum: { samples: spectrum.flux.length }, color: xpSampledColor(spectrum.flux, colorMatching, spectrum.fluxError), limbDarkening,
-      // The colours of the spectrum one standard error fainter and brighter at every sample, a bound on what the noise can move. A faint
+      // The colors of the spectrum one standard error fainter and brighter at every sample, a bound on what the noise can move. A faint
       // red dwarf's bluest samples are within their errors of zero; the fainter spectrum stops at zero there rather than going negative.
       range: [xpSampledColor(spectrum.flux.map((value, i) => Math.max(Number.MIN_VALUE, value - spectrum.fluxError[i]!)), colorMatching),
         xpSampledColor(spectrum.flux.map((value, i) => Math.max(Number.MIN_VALUE, value + spectrum.fluxError[i]!)), colorMatching)] as const };
@@ -236,7 +236,7 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
     const spectrum = await loadMeasuredSpectrum(read, record.measured);
     const error = 'error' in spectrum ? spectrum.error : undefined, shifted = (errors: number[], sign: number) => ({ wavelengthsNm: spectrum.wavelengthsNm, flux: spectrum.flux.map((value, i) => Math.max(0, value + sign * errors[i]!)) });
     return { temperature: null, spectrum: { samples: spectrum.wavelengthsNm.length }, color: measuredSpectrumColor(spectrum, colorMatching, record.measured.gaps, record.gamut), limbDarkening,
-      // With sample errors, as for an XP spectrum: the colours one standard error fainter and brighter at every sample.
+      // With sample errors, as for an XP spectrum: the colors one standard error fainter and brighter at every sample.
       range: error ? [measuredSpectrumColor(shifted(error, -1), colorMatching, record.measured.gaps, record.gamut), measuredSpectrumColor(shifted(error, 1), colorMatching, record.measured.gaps, record.gamut)] as const : null };
   }
   const temperature = 'published' in record ? record.published : readStellarTemperature((await read(record.temperaturePath)).toString('utf8'), record);
@@ -246,7 +246,7 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
 }
 
 // A measured, flux-calibrated spectrum from an archive or a published catalogue, read in the file's own layout. Only its shape
-// matters: the colour is normalised to its brightest channel, so relative calibration is enough.
+// matters: the color is normalised to its brightest channel, so relative calibration is enough.
 // - fits-table: a FITS binary table with one sample per row (CALSPEC, the STIS Next Generation Spectral Library).
 // - fits-table-array: a FITS binary table whose one row holds every sample in array cells (X-shooter Spectral Library, LAMOST).
 // - tsv-columns: a VizieR ASU tab-separated response with one row per wavelength; the column names come first and any unit or
@@ -270,7 +270,7 @@ export interface MeasuredSpectrumRecord {
   readonly extension?: string;
   readonly wavelength: { readonly column: string; readonly unit: 'angstrom' | 'nm' | 'um' };
   /** `error` (ascii-columns): the column of each sample's one-sigma flux error. With it, a 1 nm bin below zero within its noise reads as
-   * no emission, as an XP sample does, and the report carries the colours one sigma fainter and brighter. */
+   * no emission, as an XP sample does, and the report carries the colors one sigma fainter and brighter. */
   readonly flux: { readonly column: string; readonly kind: 'flux' | 'magnitude' | 'log10'; readonly missing?: number; readonly error?: string };
   /** FITS rows (or array samples) whose quality value differs from `good` are left out. */
   readonly quality?: { readonly column: string; readonly good: number };
@@ -457,14 +457,14 @@ export function measuredSpectrumColor(spectrum: { wavelengthsNm: readonly number
     });
   }
   if (binned.some(value => !(value >= 0)) || !binned.some(value => value > 0)) throw new TypeError('The measured spectrum must be positive across the visible range, or zero where a faint star is not detected.');
-  return spectrumColor(binned.map((_, i) => 380 + i), wavelength => binned[wavelength - 380]!, colorMatching, 'The measured spectrum colour', gamut);
+  return spectrumColor(binned.map((_, i) => 380 + i), wavelength => binned[wavelength - 380]!, colorMatching, 'The measured spectrum color', gamut);
 }
 
 // Limb darkening measured from a transiting planet: the planet crosses the disc and the depth of the transit at each point measures
 // the star's intensity there. A quadratic law gives I(mu) / I(1) = 1 - u1 (1 - mu) - u2 (1 - mu)^2, with mu the cosine of the angle
 // from the disc centre. The emissive route draws it as a limb plate: black, fitted edge to edge to the sphere's outline and composited
-// over it, so its alpha scales the displayed colour. Compositing happens on sRGB-encoded values, so the alpha is chosen for the
-// displayed luminance of the photosphere colour at each intensity ratio, not the linear ratio itself.
+// over it, so its alpha scales the displayed color. Compositing happens on sRGB-encoded values, so the alpha is chosen for the
+// displayed luminance of the photosphere color at each intensity ratio, not the linear ratio itself.
 export type LimbDarkeningRecipe = {
   readonly law: 'quadratic'; readonly source: 'table'; readonly path: string; readonly star: string;
   readonly columns: { readonly u1: string; readonly u2: string; readonly u1Upper: string; readonly u1Lower: string; readonly u2Upper: string; readonly u2Lower: string };
@@ -573,8 +573,8 @@ const SRGB_LUMINANCE = [0.2126, 0.7152, 0.0722] as const;
 const BAYER_4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map(value => (value + 0.5) / 16);
 export const displayedLuminance = (linear: readonly number[]) => linear.reduce((sum, value, channel) => sum + SRGB_LUMINANCE[channel]! * linearToSrgb(value), 0);
 
-/** A square RGBA limb plate `size` texels across whose disc fills it edge to edge: black, with alpha such that the photosphere colour
- * under it shows the displayed luminance of the colour dimmed by I(mu) / I(1), dithered to within one 8-bit step. Outside the disc it
+/** A square RGBA limb plate `size` texels across whose disc fills it edge to edge: black, with alpha such that the photosphere color
+ * under it shows the displayed luminance of the color dimmed by I(mu) / I(1), dithered to within one 8-bit step. Outside the disc it
  * is transparent. */
 export function limbDarkeningPlate(size: number, coefficients: LimbLaw | Pick<QuadraticLimbDarkening, 'u1' | 'u2'>, color: StellarColor) {
   const data = new Uint8Array(size * size * 4), centre = size / 2, full = displayedLuminance(color.linear);

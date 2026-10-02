@@ -8,7 +8,7 @@ It is one of 3 planets known around HD 22946. Its orbit and size follow Garai et
 
 **Orbit.** Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive ps table (pl_refname GARAI_ET_AL__2023): P 47.42489 d Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive ps table (pl_refname GARAI_ET_AL__2023): a/R* 57; Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive ps table (pl_refname GARAI_ET_AL__2023): inclination derived from its impact parameter 0.456 with its a/R* 57 (Winn 2010, eq. 7) No archive row states an eccentricity; the orbit is taken as circular Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive ps table (pl_refname GARAI_ET_AL__2023): transit mid-time 2459136.5372 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-411's measured colour (#f9f4ff, the colour dataset of toi-411 (src/objects/toi-411/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-411's measured color (#f9f4ff, the color dataset of toi-411 (src/objects/toi-411/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-411's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (31, 97, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 

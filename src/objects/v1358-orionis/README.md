@@ -11,7 +11,7 @@ V1358 Orionis is a young Sun-like star that turns in 33 hours. Between its maps 
 - **Azimuthal field**, stepped Sep 2013 and Dec 2017: the field running one way or the other around the spin axis.
 - **Brightness**, stepped Sep 2013 and Dec 2017: the photosphere's brightness relative to its unspotted surface; dark is spotted.
 
-Each map uses its paper figure's colour bar: the field linear from minus to plus the strongest value of any component in that map, through white at 0; the brightness from the map's darkest to its brightest point, in the figure's black-red-orange-white colours. A thin black line marks 59° S, below which the star never faces us, as the paper's horizontal line does. [latitude-belt-map.ts](../../../packages/bake/src/objects/raster/latitude-belt-map.ts) reads the tables and interpolates around each belt and between belts, so every cell keeps its deposited value.
+Each map uses its paper figure's color bar: the field linear from minus to plus the strongest value of any component in that map, through white at 0; the brightness from the map's darkest to its brightest point, in the figure's black-red-orange-white colors. A thin black line marks 59° S, below which the star never faces us, as the paper's horizontal line does. [latitude-belt-map.ts](../../../packages/bake/src/objects/raster/latitude-belt-map.ts) reads the tables and interpolates around each belt and between belts, so every cell keeps its deposited value.
 
 **Directions.** The paper's Fig. 1 caption says the phases are inverted so that the map longitudes turn like the Earth's; its dashed lines sit at 360° × (1 − φ) for the observed phases φ of Table 1. So the maps' longitude is east longitude.
 
@@ -19,7 +19,7 @@ Each map uses its paper figure's colour bar: the field linear from minus to plus
 
 **Star.** Placement: Gaia DR3 source 3116883781327753216, parallax 19.353 ± 0.022 mas (51.67 pc). Radius 1.05 solar radii from Vican & Schneider (2014), ApJ 780, 154, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729). Mass 1.059 (1.019 to 1.099) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Temperature 6,032 K from McDonald et al. (2012), MNRAS 427, 343, as listed by Willamo et al. (2022), Table 2. log g 4.42 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 3116883781327753216, through the CIE 1931 2° observer: #fdf7ff. Routes tried in order: stis-ngsl: HD 43989 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 3116883781327753216, through the CIE 1931 2° observer: #fdf7ff. Routes tried in order: stis-ngsl: HD 43989 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,032 K and log g 4.42 (u1 0.410, u2 0.289): a model, because no fit of this star's limb is used.
 

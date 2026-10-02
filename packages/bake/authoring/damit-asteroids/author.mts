@@ -15,7 +15,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import sharp from 'sharp';
 import { createSourceManifest } from '@cssearth/objects/node';
-import { NEUTRAL_CATALOGUE_COLOUR } from '@cssearth/objects';
+import { NEUTRAL_CATALOGUE_COLOR } from '@cssearth/objects';
 import { ENTRY_EVIDENCE } from '@cssearth/bake/sources';
 import { shapeMaterialRaster, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/cli/lib/horizons.mts';
@@ -378,7 +378,7 @@ async function authorBody(body: Body) {
       worldFrame: { referenceFrame: 'sun-icrf', epochJdTt: EPOCH_JD, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1],
         metersPerUnit: radiusMeters / geometryRadius, bodyRadiusM: radiusMeters },
       page: { stylesheets: ['src/renderers/css/styles/templates/small-body.css'], metadata: { url: 'prepared/page.json' } },
-      catalog: { name, classification: 'asteroid', color: NEUTRAL_CATALOGUE_COLOUR, distanceAu: semiMajorAxisAu, description: body.text.card, systemName: 'Solar System', context: {} },
+      catalog: { name, classification: 'asteroid', color: NEUTRAL_CATALOGUE_COLOR, distanceAu: semiMajorAxisAu, description: body.text.card, systemName: 'Solar System', context: {} },
     },
     schema: descriptor.schema, type: descriptor.type,
     prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' },

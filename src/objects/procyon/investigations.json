@@ -24,10 +24,10 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
-      "finding": "Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Procyon is HR 2943., cross-checked against Kiehling (1987), spectrophotometry of 60 bright F, G, K and M stars, 320-880 nm in 1 nm steps as normalised magnitudes: Kiehling (1987), A&AS 69, 465; VizieR III/124. * alf CMi is HR 2943. (6 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #f0f0ff. Routes tried in order: stis-ngsl: HD 61421 is not in the library; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; kharitonov: found, not needed after the colour and its cross-check; burnashev: found, not needed after the colour and its cross-check; pulkovo: used.",
+      "finding": "Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Procyon is HR 2943., cross-checked against Kiehling (1987), spectrophotometry of 60 bright F, G, K and M stars, 320-880 nm in 1 nm steps as normalised magnitudes: Kiehling (1987), A&AS 69, 465; VizieR III/124. * alf CMi is HR 2943. (6 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #f0f0ff. Routes tried in order: stis-ngsl: HD 61421 is not in the library; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; kharitonov: found, not needed after the color and its cross-check; burnashev: found, not needed after the color and its cross-check; pulkovo: used.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"
       ]

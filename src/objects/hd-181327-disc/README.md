@@ -5,7 +5,7 @@ This package draws the ring of debris around [HD 181327](../hd-181327/README.md)
 ## Sources
 
 - **Images:** MAST's level-3 coronagraph mosaics of JWST/NIRCam F182M, F210M, F250M, F300M, F335M and F444W behind the MASK335R coronagraph, 11 October 2023, observation c1014 of GTO programme 2780 (Gáspár et al. 2026, [arXiv:2608.27437](https://arxiv.org/abs/2608.27437)). They are pinned with the coron3 associations and exposures they were built from in [`hd-181327-2780.json`](../../../packages/telescope-cli/src/archives/jwst/imaging/programs/hd-181327-2780.json) and in the [manifest](source/manifest.json).
-- **Colour:** the paper's own recipe for its Figure 1, the reflectance colour of the dust. Each filter is divided by the star's flux in it (their Table 9), which leaves the dust's albedo at that wavelength. The filters are averaged in pairs into blue (F182M, F210M), green (F250M, F300M) and red (F335M, F444W). Figure 1 prints no scale, so its stretch, log(1 + a u) / log(1 + a) with a = 14.1 and u = reflectance / 7.15, was fitted to the published panel by [`fit-figure-stretch.mts`](../../../packages/telescope-cli/authoring/circumstellar/fit-figure-stretch.mts).
+- **Color:** the paper's own recipe for its Figure 1, the reflectance color of the dust. Each filter is divided by the star's flux in it (their Table 9), which leaves the dust's albedo at that wavelength. The filters are averaged in pairs into blue (F182M, F210M), green (F250M, F300M) and red (F335M, F444W). Figure 1 prints no scale, so its stretch, log(1 + a u) / log(1 + a) with a = 14.1 and u = reflectance / 7.15, was fitted to the published panel by [`fit-figure-stretch.mts`](../../../packages/telescope-cli/authoring/circumstellar/fit-figure-stretch.mts).
 - **Recipe:** [`source/circumstellar.json`](source/circumstellar.json) names the bands, the stellar fluxes and where they are published, the fitted stretch, the drawn inner edge and the published geometry the measurement is checked against. [`author.mts`](../../../packages/telescope-cli/authoring/circumstellar/author.mts) writes the rest of `source/` from it.
 
 ## Processing
@@ -33,7 +33,7 @@ The author refuses a ring more than 5° or a tenth of the radius from the publis
 | spherical shell | 0.654 |
 | constant depth, what an extrusion assumes | 1.131 |
 
-Each sky column's colour is spread along the disc and normalised so the view from Earth reproduces the images, and every other direction shows a disc. The light is drawn to 237 au, where the ring's deprojected median reaches the per-pixel noise.
+Each sky column's color is spread along the disc and normalised so the view from Earth reproduces the images, and every other direction shows a disc. The light is drawn to 237 au, where the ring's deprojected median reaches the per-pixel noise.
 
 **Opacity** is the one setting the source cannot give. The top of the stretch reaches an alpha of 0.5, the value whose rendered profile matches the figure best. The median drawn line of sight hides 6% of what is behind it.
 
@@ -51,7 +51,7 @@ Rendered from Earth in the application, the ring's long axis lies 77.9° clockwi
 - **The disc's thickness is a convention** (0.1 of its radius): the images change by 0.6% across heights from 0.02 to 0.2.
 - **Softer than the printed figure.** The images carry 1.5 au per pixel (F182M) to 3 au (the long filters); the grid samples at 2.9 au.
 - **Darker than the printed figure:** the render is at 0.48 of its brightness, because the renderer ties brightness to how much a column hides.
-- **The colours are infrared reflectance, not what an eye would see,** and the composite does not measure the water ice the paper finds.
+- **The colors are infrared reflectance, not what an eye would see,** and the composite does not measure the water ice the paper finds.
 - **Nothing is drawn inside 1″**, where the subtraction leaves more starlight than there is dust.
 - MIRI coronagraphy of this disc is excluded: the pipeline's alignment does not converge on it ([JWST imaging](../../../docs/jwst-imaging.md#measured)).
 

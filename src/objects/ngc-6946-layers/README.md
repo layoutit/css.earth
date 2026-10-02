@@ -1,7 +1,7 @@
 # Fireworks Galaxy (NGC 6946)
 
-A ground-based photograph of NGC 6946, cleaned of the Milky Way stars in front of it and colour-tied to its measured
-integrated colour, lies flat on its measured disc. Published catalogues of its supernova remnant candidates and HII
+A ground-based photograph of NGC 6946, cleaned of the Milky Way stars in front of it and color-tied to its measured
+integrated color, lies flat on its measured disc. Published catalogues of its supernova remnant candidates and HII
 regions are drawn as dots on the same disc. Image brightness does not measure per-pixel distance.
 
 ## Sources
@@ -29,8 +29,8 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 - **Foreground stars:** NGC 6946 lies behind the Milky Way's disc. 2,239 of the 3,219 Gaia foreground stars in the image
   are removed where they show; 448 on the galaxy's light are left, and stars too faint for Gaia's parallaxes and
   proper motions remain.
-- **Colour:** tied to B-V 0.51: RC3's 0.80 as observed, less the Milky Way's reddening of 0.29, so the galaxy has its own
-  colour and not our dust's. Red/green 0.947 and blue/green 1.165 against 1.027 and 0.947, so red × 1.084 and
+- **Color:** tied to B-V 0.51: RC3's 0.80 as observed, less the Milky Way's reddening of 0.29, so the galaxy has its own
+  color and not our dust's. Red/green 0.947 and blue/green 1.165 against 1.027 and 0.947, so red × 1.084 and
   blue × 0.813. in linear light. Removing the reddening is a choice; the other galaxies sit at high latitudes, where it is
   within RC3's error.
 - **Disc:** inclination 33°, line of nodes 243°, support 17.5 kpc (where the frame stops on its tightest side), drawn as one flat image on the midplane. No bulge: [Kormendy et al. (2010)](https://arxiv.org/abs/1009.3015) find a pseudobulge of
@@ -49,9 +49,9 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 | Supernova remnant candidates (Long et al. 2019) | 147 | none |
 | HII regions (Cedrés et al. 2012) | 226 | none |
 
-Dots keep their place in the disc and rise along its axis to heights drawn from the 449 pc layer. Colours are the Milky
+Dots keep their place in the disc and rise along its axis to heights drawn from the 449 pc layer. Colors are the Milky
 Way's and M31's for each kind; each dot takes its tone from the photograph's brightness under it (never below 15%) and
-moves halfway from its kind's colour to the photograph's colour there.
+moves halfway from its kind's color to the photograph's color there.
 
 ## Evidence
 
@@ -60,7 +60,7 @@ moves halfway from its kind's colour to the photograph's colour there.
 The NGC 6946 page in headless Chromium at 1440 × 900, device pixel ratio 2, on this branch on 2026-10-01: the default
 arrival, then the camera turned to the side and to above the disc.
 
-- The prepared bank's `approximation.limitations` records the foreground and colour-tie counts quoted above.
+- The prepared bank's `approximation.limitations` records the foreground and color-tie counts quoted above.
 
 ## Measured, chosen and inferred
 
@@ -73,7 +73,7 @@ arrival, then the camera turned to the side and to above the disc.
 | Near side at 333° | Inferred: trailing arms and the receding side |
 | B-V 0.51 | Measured values combined: RC3's 0.80 less Schlafly & Finkbeiner's 0.29; removing the reddening is a choice |
 | Support 17.5 kpc, fade from 13.1 kpc | Presentation: where the frame stops |
-| One flat image, 1,024 px on its face, background floor, dot colours and tones | Presentation |
+| One flat image, 1,024 px on its face, background floor, dot colors and tones | Presentation |
 
 ## Known problems
 

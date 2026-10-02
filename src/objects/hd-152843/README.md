@@ -6,7 +6,7 @@ Its radius and temperature follow Nicholson et al. 2024. The introduction is gen
 
 **Star.** Placement: Gaia DR3 source 4564566554995619072, parallax 9.161 ± 0.015 mas (109.16 pc). Radius 1.43 +/- 0.02 solar radii from Nicholson et al. 2024, the stellar radius of the default parameter set of HD 152843 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N/abstract). Mass 1.15 +/- 0.04 solar masses from Nicholson et al. 2024, the stellar mass of the default parameter set of HD 152843 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N/abstract). Temperature 6,310 K from Nicholson et al. 2024, the stellar temperature of the default parameter set of HD 152843 b in the NASA Exoplanet Archive. log g 4.19 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 4564566554995619072, through the CIE 1931 2° observer: #f6f2ff. Routes tried in order: stis-ngsl: HD 152843 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 4564566554995619072, through the CIE 1931 2° observer: #f6f2ff. Routes tried in order: stis-ngsl: HD 152843 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,310 K and log g 4.19 (u1 0.370, u2 0.307): a model, because no fit of this star's limb is used.
 

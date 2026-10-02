@@ -6,7 +6,7 @@ Its radius and temperature follow Murgas et al. 2021. The introduction is genera
 
 **Star.** Placement: Gaia DR3 source 5400949450924312576, parallax 21.623 ± 0.016 mas (46.25 pc). Radius 0.42 +/- 0.013 solar radii from Murgas et al. 2021, the stellar radius of the default parameter set of TOI-674 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract). Mass 0.42 +/- 0.01 solar masses from Murgas et al. 2021, the stellar mass of the default parameter set of TOI-674 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract). Temperature 3,514 K from Murgas et al. 2021, the stellar temperature of the default parameter set of TOI-674 b in the NASA Exoplanet Archive. log g 4.81 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 5400949450924312576, through the CIE 1931 2° observer: #ffca8a. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 5400949450924312576, through the CIE 1931 2° observer: #ffca8a. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,514 K and log g 4.81 (u1 0.396, u2 0.375): a model, because no fit of this star's limb is used.
 

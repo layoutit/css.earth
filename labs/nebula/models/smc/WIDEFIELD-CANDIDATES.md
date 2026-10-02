@@ -6,7 +6,7 @@ These are inspection inputs, not new cloud materials. Native bytes remain in the
 | --- | --- | --- |
 | NOIRLab / Petr Horálek, iotw2615a | 6069 × 4045 full-resolution JPEG, 7.1 MB | Wide optical view, approximately 9.28° × 6.18°. Strongest new candidate for surrounding projected structure. |
 | IRIDA / Popov & Ivanov | 4000 × 3067 JPEG, 7.6 MB | Central optical detail, approximately 2.55° × 1.95°. Upper-right hatched corner is missing coverage. All rights reserved: local inspection only; redistribution rights unresolved. |
-| ESO / Beletsky & Martínez-Delgado, potw1630a | 3599 × 2477 TIFF, 14.7 MB | Both Clouds and surrounding context. Inverted luminance with colour insets: reference only, not a calibrated image or cloud skin. No complete embedded sky solution, so not placed as an overlay. |
+| ESO / Beletsky & Martínez-Delgado, potw1630a | 3599 × 2477 TIFF, 14.7 MB | Both Clouds and surrounding context. Inverted luminance with color insets: reference only, not a calibrated image or cloud skin. No complete embedded sky solution, so not placed as an overlay. |
 
 ## Registration
 

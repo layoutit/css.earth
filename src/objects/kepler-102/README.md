@@ -6,7 +6,7 @@ Its radius and temperature follow Bonomo et al. 2023. The introduction is genera
 
 **Star.** Placement: Gaia DR3 source 2119583201145735808, parallax 9.252 ± 0.010 mas (108.09 pc). Radius 0.724 +/- 0.018 solar radii from Bonomo et al. 2023, the stellar radius of the default parameter set of Kepler-102 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). Mass 0.803 +/- 0.021 solar masses from Bonomo et al. 2023, the stellar mass of the default parameter set of Kepler-102 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). Temperature 4,909 K from Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-102 b in the NASA Exoplanet Archive. log g 4.62 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2119583201145735808, through the CIE 1931 2° observer: #ffd7bd. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2119583201145735808, through the CIE 1931 2° observer: #ffd7bd. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,909 K and log g 4.62 (u1 0.682, u2 0.098): a model, because no fit of this star's limb is used.
 

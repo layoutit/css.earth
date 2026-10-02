@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "OGLE-LMC-ECL-10567: P 117.9747 d and primary-eclipse time HJD 2452168.4 (arXiv:1805.04952, Table 1 (tbl:1), column $T_0$ (HJD-2450000) and table comment); i 83.7 degrees (arXiv:1805.04952, Table 6, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/1805.04952): P 117.9747 d",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of OGLE-LMC-ECL-10567 B is measured; only its size, mass and orbit are."
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of OGLE-LMC-ECL-10567 B is measured; only its size, mass and orbit are."
   },
   "effectiveTemperatureK": 4710,
   "effectiveTemperatureSource": "Secondary log Teff 3.673 +/- 0.007, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G): 4710 K (https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G)",

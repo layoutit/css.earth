@@ -14,13 +14,13 @@ GJ 504 is a Sun-like star whose measured size allows two ages, 21 million or 4 b
 
 **Radial velocity.** Gaia DR3's -27.25 ± 0.13 km/s.
 
-**Colour dataset.** Gaia DR3 publishes no sampled spectrum of this bright star, so the colour is a Planck spectrum at its published temperature, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)). Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 6,200 K (the record) and log g 4.26 (from the record's mass and radius (packages/astronomy/data/bodies/gj-504.json)): a model, since no fit of this star's limb exists.
+**Color dataset.** Gaia DR3 publishes no sampled spectrum of this bright star, so the color is a Planck spectrum at its published temperature, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)). Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 6,200 K (the record) and log g 4.26 (from the record's mass and radius (packages/astronomy/data/bodies/gj-504.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** No axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 
 ## Evidence
 
-Run of 2026-09-23 (this version): see the planet's README for its placement against the measured positions. The four stars in the app, headless Chromium at 800 × 600 on this version: each is drawn in its measured colour.
+Run of 2026-09-23 (this version): see the planet's README for its placement against the measured positions. The four stars in the app, headless Chromium at 800 × 600 on this version: each is drawn in its measured color.
 
 ## Known problems
 

@@ -9,9 +9,9 @@ Eight source fields were acquired and visually inspected on 2026-09-16. Exact UR
 | DSS2 optical | 13096 × 13616 | Main cloud, tighter field than VISTA/SMASH; conspicuous photographic bright-star halos. Full-resolution JPEG; 421.7 MB TIFF deferred. |
 | WISE press image | 5855 × 4596 | Main cloud, four infrared bands; satellite streaks visible. Publisher **SIN** AVM must not be treated as TAN. |
 | Spitzer SAGE-SMC | 11200 × 6600 | Main body and long tidal-tail region within a stepped survey footprint. Black exterior is no-data. Publisher band table and caption disagree; retain the ambiguity. No embedded AVM. |
-| Herschel/Spitzer | 10000 × 5000 | Bar and wing dust; 24–250 micron false colour. Embedded TAN AVM. Compact dust emission is not a foreground-star catalogue. |
+| Herschel/Spitzer | 10000 × 5000 | Bar and wing dust; 24–250 micron false color. Embedded TAN AVM. Compact dust emission is not a foreground-star catalogue. |
 | Herschel/gas PIA25164 | 4950 × 4950 | Broad dust and hydrogen distribution, supplemented by Planck/IRAS/COBE and radio observations. No embedded astrometry in PIA TIFF; TAN WCS recovered from the official same-grid Herschel companion. Independent registration remains unverified. |
-| AllWISE wide survey | 4000 × 4000 | 10-degree TAN field, W4/W2/W1 logarithmic colour. Same mission as the press image with different field and rendering; not independent depth evidence. |
+| AllWISE wide survey | 4000 × 4000 | 10-degree TAN field, W4/W2/W1 logarithmic color. Same mission as the press image with different field and rendering; not independent depth evidence. |
 
 Publisher WCS is an initial transform, not a passed star-registration gate. AVM values are preserved verbatim. The AllWISE FITS companion supplies an inspected ICRS/TAN header; sampled JPEG comparison supports reversing FITS axis 2 (mean absolute channel difference 1.18 versus 2.62 without reversal). This is an orientation check, not an independent astrometric verification.
 
@@ -31,12 +31,12 @@ Four composites were built on 2026-09-17 from calibrated or archival survey band
 
 | Composite | Bands and channels | Acquisition and units | Known limits |
 | --- | --- | --- | --- |
-| `smc-dss2-fits` | DSS2 red plate → red, DSS2 blue plate → blue, green = their mean (the convention of the CDS DSS2 colour survey) | CDS hips2fits, checked by byte count. Relative photographic units, with no flux calibration | Saturated plate stars are masked as no coverage (below). Plate-to-plate level steps remain: plate footprints are not in the pinned inputs |
+| `smc-dss2-fits` | DSS2 red plate → red, DSS2 blue plate → blue, green = their mean (the convention of the CDS DSS2 color survey) | CDS hips2fits, checked by byte count. Relative photographic units, with no flux calibration | Saturated plate stars are masked as no coverage (below). Plate-to-plate level steps remain: plate footprints are not in the pinned inputs |
 | `smc-wise-stellar` | W2 → red, W1 → blue, green = mean | 61 AllWISE atlas tiles per band, background-matched. MJy/sr from Explanatory Supplement factors | A smooth W2 background gradient toward the south-east remains |
 | `smc-wise-starforming` | W4 → red, W3 → green, W1 → blue | As above | In faint regions W4 is dominated by noise and small leftover tile levels. W3 shows Galactic cirrus and scattered-light streaks to the east |
 | `smc-herschel-dust` | SPIRE 250 µm, monochrome | ESASky Herschel HiPS through hips2fits. The HiPS declares no unit, so values are relative | Only the main body is covered. NaN stays missing, shown as black. Dark stripes from individual scans remain |
 
-W1 is the blue channel of the star-forming composite. This follows the WISE colour convention of wavelength order, with the shortest band as blue. It also puts the catalogue stars in the channel the registration gate reads. PACS 100 and 160 were inspected and left out. In these HiPS the extended emission is filtered out: the maps show only compact knots, with dark bowls around them. SPIRE 250 already shows the extended dust. The per-band comparison is in the ignored `output/smc-vmc/fits-datasets/work/herschel-compare.png`.
+W1 is the blue channel of the star-forming composite. This follows the WISE color convention of wavelength order, with the shortest band as blue. It also puts the catalogue stars in the channel the registration gate reads. PACS 100 and 160 were inspected and left out. In these HiPS the extended emission is filtered out: the maps show only compact knots, with dark bowls around them. SPIRE 250 already shows the extended dust. The per-band comparison is in the ignored `output/smc-vmc/fits-datasets/work/herschel-compare.png`.
 
 Changes the shared tools needed:
 

@@ -1,6 +1,6 @@
 # Juno
 
-Juno is an irregular main-belt asteroid with broad departures from an ellipsoid. It shows the survey's published shape, an elevation view and a photograph built from deconvolved VLT/SPHERE frames. Shape-only views use the shared neutral gray (#808080 sRGB), a display convention, not a measured colour.
+Juno is an irregular main-belt asteroid with broad departures from an ellipsoid. It shows the survey's published shape, an elevation view and a photograph built from deconvolved VLT/SPHERE frames. Shape-only views use the shared neutral gray (#808080 sRGB), a display convention, not a measured color.
 
 ## Sources
 
@@ -61,10 +61,10 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ## Known problems
 
-- Shape is neutral gray, not photographed colour, reflectance or composition. Reduction softens small features.
+- Shape is neutral gray, not photographed color, reflectance or composition. Reduction softens small features.
 - Elevation includes the global shape, not height above a gravitational equipotential.
 - Source constraints are uneven and ground-based; the 4096 × 2048 display map adds no observational resolution.
-- The SPHERE photograph is photographed illumination, not albedo or colour. The frames see Juno from 29° to 30° south, so unseen surface keeps the missing-imagery grid.
+- The SPHERE photograph is photographed illumination, not albedo or color. The frames see Juno from 29° to 30° south, so unseen surface keeps the missing-imagery grid.
 - The rotation's display meridian is arbitrary, not an absolute rotational phase.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)

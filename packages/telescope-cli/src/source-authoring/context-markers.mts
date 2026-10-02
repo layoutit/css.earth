@@ -2,10 +2,10 @@
 /** Navigation markers for placed stars and hosted planets, rendered from each body's own default dataset instead of the scaffold's
  * flat gray disc:
  *
- * - a star: the photosphere colour of its colour dataset, dimmed toward the limb by the dataset's limb-darkening law (a uniform disc
+ * - a star: the photosphere color of its color dataset, dimmed toward the limb by the dataset's limb-darkening law (a uniform disc
  *   when it has none);
- * - a planet whose default dataset is one colour (the neutral gray under its host's light, the black-body colour of its measured day side,
- *   or the false colour of its band photometry): a uniform disc of that colour, as the dataset draws the sphere;
+ * - a planet whose default dataset is one color (the neutral gray under its host's light, the black-body color of its measured day side,
+ *   or the false color of its band photometry): a uniform disc of that color, as the dataset draws the sphere;
  * - a body whose default dataset is a map (a hosted planet, or a brown dwarf with a surface map): that map in an orthographic view
  *   centred on longitude 0 (a hosted planet's substellar point, as seen from its star), north up and east to the right, in the
  *   dataset's palette and range, with any borders the dataset draws.
@@ -63,13 +63,13 @@ function disc(shade: (x: number, y: number) => readonly [number, number, number]
   return sharp(rgba, { raw: { width: MARKER_SIZE, height: MARKER_SIZE, channels: 4 } }).png({ compressionLevel: 9 }).toBuffer();
 }
 
-/** A placed star's marker: its colour dataset, dimmed toward the limb where a limb-darkening law is given, a uniform disc where not. */
+/** A placed star's marker: its color dataset, dimmed toward the limb where a limb-darkening law is given, a uniform disc where not. */
 export async function starMarker(id: string, { requireLimbDarkening = true } = {}) {
   const source = resolve(objects, id, 'source'), { science } = await defaultSurface(id);
   const { color, limbDarkening } = await loadStellarPhotometricColor(path => readFile(resolve(source, path)), science, 'photometry/stellar-color.json');
   if (!limbDarkening && requireLimbDarkening) throw new Error(`${id} has no limb-darkening record.`);
   const law = limbDarkening?.coefficients ?? { u1: 0, u2: 0 };
-  // Intensity scales every linear channel; the colour's chromaticity stays.
+  // Intensity scales every linear channel; the color's chromaticity stays.
   return disc((x, y) => {
     const ratio = Math.max(0, limbIntensity(Math.sqrt(Math.max(0, 1 - x * x - y * y)), law));
     return color.linear.map(value => Math.round(255 * linearToSrgb(value * ratio))) as unknown as [number, number, number];
@@ -97,7 +97,7 @@ export async function planetMarker(id: string) {
   });
 }
 
-/** The one colour a flat planet dataset paints the sphere with, read the way interpret.mts reads it; undefined for a map dataset. */
+/** The one color a flat planet dataset paints the sphere with, read the way interpret.mts reads it; undefined for a map dataset. */
 async function flatDatasetColor(id: string, science: Record<string, unknown>, surfaceSource: string): Promise<readonly [number, number, number] | undefined> {
   const source = resolve(objects, id, 'source'), read = (path: string) => readFile(resolve(source, path));
   if (science.kind === 'neutral-shape') return science.hostLight === undefined ? [128, 128, 128] : hostLitGray(requireString(requireRecord(science.hostLight).srgb, `${id} hostLight.srgb`));
@@ -106,13 +106,13 @@ async function flatDatasetColor(id: string, science: Record<string, unknown>, su
   return undefined;
 }
 
-/** A body whose default dataset is a photosphere colour is drawn as a star; a planet whose dataset is one colour as a disc of it; a body
+/** A body whose default dataset is a photosphere color is drawn as a star; a planet whose dataset is one color as a disc of it; a body
  * whose default dataset is a map (a hosted planet, or a brown dwarf with a surface map) as that map. */
 async function markerFor(id: string) {
   const { science, source } = await defaultSurface(id);
   const flat = await flatDatasetColor(id, science, source);
   if (flat) return disc(() => flat);
-  // A colour dataset without a limb-darkening law (none measured) is drawn as the uniform disc it is on the sphere.
+  // A color dataset without a limb-darkening law (none measured) is drawn as the uniform disc it is on the sphere.
   return science.kind === 'stellar-photometric-color' ? starMarker(id, { requireLimbDarkening: science.limbDarkening !== undefined }) : planetMarker(id);
 }
 

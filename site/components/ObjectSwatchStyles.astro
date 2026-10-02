@@ -1,9 +1,9 @@
 ---
-import { DEFAULT_CONTEXT_COLOUR } from '@cssearth/objects';
+import { DEFAULT_CONTEXT_COLOR } from '@cssearth/objects';
 
-// The world's default marker, orbit and caption colour, for a body with no colour of its own. Each body's own colour and
+// The world's default marker, orbit and caption color, for a body with no color of its own. Each body's own color and
 // caption case are prepared into the world summary and set inline on its elements
 // (packages/renderer/src/universe/prepared-world-context.ts), so no page carries a stylesheet rule per body.
 ---
 
-<style is:inline data-object-style="site/components/ObjectSwatchStyles.astro" set:html={`.prepared-world-context { color: ${DEFAULT_CONTEXT_COLOUR}; }`}></style>
+<style is:inline data-object-style="site/components/ObjectSwatchStyles.astro" set:html={`.prepared-world-context { color: ${DEFAULT_CONTEXT_COLOR}; }`}></style>

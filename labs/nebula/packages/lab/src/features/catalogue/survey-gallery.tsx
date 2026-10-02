@@ -16,7 +16,7 @@ export function SurveyGallery({ object, majorArcsec }: { object: MessierObject; 
   useEffect(() => { if (opened) dialog.current?.showModal(); else dialog.current?.close(); }, [opened]);
   return <section className="catalogue-surveys" aria-label="Survey images">
     <p className="catalogue-survey-note">Centered mosaics · north up · {field.toFixed(2)}° field{majorArcsec === null ? ' (size unknown)' : ' including margin'}.
-      <span title="These are rendered sky-survey cutouts, not previews of the archive rows. Colour stretches are for inspection. Native detail and signal differ between surveys; registration and processing acceptance are still required."> Survey resolution limits detail ⓘ</span></p>
+      <span title="These are rendered sky-survey cutouts, not previews of the archive rows. Color stretches are for inspection. Native detail and signal differ between surveys; registration and processing acceptance are still required."> Survey resolution limits detail ⓘ</span></p>
     <div className="catalogue-survey-grid">{surveyImages.map(survey => <article key={survey.id} className="catalogue-survey-card">
       <div className="catalogue-survey-open">
         <SurveyPreview key={`${object.id}:${survey.id}:${field}`} url={surveyImageUrl(survey, object, field, 512)} title={`M${object.messier} — ${survey.title}`} />

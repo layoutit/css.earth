@@ -16,7 +16,7 @@
       "id": "opal-cycle32-single-band-datasets",
       "subject": "Hubble OPAL Cycle 32 F275W and FQ889N maps",
       "status": "included",
-      "finding": "The ultraviolet and methane-band datasets use the single-band FITS products observed 11 December 2025, preserving measured values including dark and finite negative samples, with a measured-pixel percentile stretch and false-colour palette for relative display contrast.",
+      "finding": "The ultraviolet and methane-band datasets use the single-band FITS products observed 11 December 2025, preserving measured values including dark and finite negative samples, with a measured-pixel percentile stretch and false-color palette for relative display contrast.",
       "evidence": [
         "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
       ]
@@ -37,7 +37,7 @@
       "id": "juno-polar-structure",
       "subject": "JunoCam and JIRAM polar structure products",
       "status": "excluded",
-      "finding": "The default map once carried Juno polar structure (PIA23808, PIA23556) coloured from PIA24239 and PIA21382 and blended into the Hubble map from 64 degrees poleward. The south-pole structure was a 5-micron infrared image and neither pole was registered to the Hubble longitudes, so the graft was removed; the map now shows the gray grid over the caps it never observed.",
+      "finding": "The default map once carried Juno polar structure (PIA23808, PIA23556) colored from PIA24239 and PIA21382 and blended into the Hubble map from 64 degrees poleward. The south-pole structure was a 5-micron infrared image and neither pole was registered to the Hubble longitudes, so the graft was removed; the map now shows the gray grid over the caps it never observed.",
       "evidence": [
         "https://www.jpl.nasa.gov/images/pia23808-cyclones-of-color-at-jupiters-north-pole/",
         "https://science.nasa.gov/photojournal/jupiters-south-pole-cyclones-in-2016/"
@@ -89,7 +89,7 @@
       "id": "ring-visibility-presentation",
       "subject": "Contrast emphasis for the faint rings",
       "status": "excluded",
-      "finding": "The rings are drawn at their published normal optical depths, 1e-9 to 8e-6: opacity 1 - exp(-optical depth) is below one display level for every ring, so nothing shows. The earlier log-optical-depth contrast emphasis capped at 0.4 alpha, and its hand-picked greys, were removed.",
+      "finding": "The rings are drawn at their published normal optical depths, 1e-9 to 8e-6: opacity 1 - exp(-optical depth) is below one display level for every ring, so nothing shows. The earlier log-optical-depth contrast emphasis capped at 0.4 alpha, and its hand-picked grays, were removed.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L22",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L175",
@@ -121,7 +121,7 @@
       "id": "photometric-overlay-limits",
       "subject": "Source-over photometric overlay",
       "status": "included",
-      "finding": "The prepared overlay keeps a 0.05 neutral-light ambient floor and a smoothstep terminator computed in linear light and re-encoded through sRGB as one source-over colour plus alpha; it is exact for the declared neutral reference channel value of 160 and otherwise a bounded photometric overlay, not per-texel spectral radiative transfer, which avoids inventing an unvalidated volumetric haze model.",
+      "finding": "The prepared overlay keeps a 0.05 neutral-light ambient floor and a smoothstep terminator computed in linear light and re-encoded through sRGB as one source-over color plus alpha; it is exact for the declared neutral reference channel value of 160 and otherwise a bounded photometric overlay, not per-texel spectral radiative transfer, which avoids inventing an unvalidated volumetric haze model.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L224",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L233"
@@ -131,7 +131,7 @@
       "id": "absent-exterior-halo",
       "subject": "Gaseous halo around the disc",
       "status": "excluded",
-      "finding": "The Hubble global map is already a visible-light map of the cloud atmosphere rather than a solid surface needing an Earth-like halo, and the checked 5 January 2024 full-disc Hubble view is the silhouette authority: 44,312 pixels in the normalized 1.005-to-1.03 exterior annulus are zero in every sampled channel, so the exterior halo is explicitly absent rather than artistically coloured.",
+      "finding": "The Hubble global map is already a visible-light map of the cloud atmosphere rather than a solid surface needing an Earth-like halo, and the checked 5 January 2024 full-disc Hubble view is the silhouette authority: 44,312 pixels in the normalized 1.005-to-1.03 exterior annulus are zero in every sampled channel, so the exterior halo is explicitly absent rather than artistically colored.",
       "revisitWhen": "A measured exterior halo is published for Jupiter at this geometry.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L197",
@@ -197,7 +197,7 @@
       "id": "opal-dated-visible",
       "subject": "OPAL dated visible maps",
       "status": "included",
-      "finding": "Eleven released RGB maps from 2015 through 2025 use the shared date stepper and intersection of their three component footprints. The release sequence has no 2023 and two 2024 dates; no quantitative storm-size or colour trend is claimed.",
+      "finding": "Eleven released RGB maps from 2015 through 2025 use the shared date stepper and intersection of their three component footprints. The release sequence has no 2023 and two 2024 dates; no quantitative storm-size or color trend is claimed.",
       "evidence": [
         "https://archive.stsci.edu/hlsp/opal"
       ]

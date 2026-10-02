@@ -6,16 +6,16 @@
       "id": "opal-cycle33-visible-map",
       "subject": "Hubble OPAL Uranus Cycle 33 rotation-A global map",
       "status": "included",
-      "finding": "The visible-colour surface is the October 2025 rotation-A composite of F467M, F547M and F657N from the OPAL Cycle 33 release.",
+      "finding": "The visible-color surface is the October 2025 rotation-A composite of F467M, F547M and F657N from the OPAL Cycle 33 release.",
       "evidence": [
         "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
       ]
     },
     {
       "id": "opal-single-filter-datasets",
-      "subject": "OPAL FQ727N and F845M maps as false-colour datasets",
+      "subject": "OPAL FQ727N and F845M maps as false-color datasets",
       "status": "included",
-      "finding": "The FQ727N and F845M FITS maps supply two separately prepared false-colour observation datasets whose palettes and percentile stretches are declared in the observation recipe; no browser filtering is used.",
+      "finding": "The FQ727N and F845M FITS maps supply two separately prepared false-color observation datasets whose palettes and percentile stretches are declared in the observation recipe; no browser filtering is used.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits"
       ]
@@ -60,14 +60,14 @@
       ]
     },
     {
-      "id": "nasa-ring-colour-interpretation",
-      "subject": "NASA public Uranus facts ring colours",
+      "id": "nasa-ring-color-interpretation",
+      "subject": "NASA public Uranus facts ring colors",
       "status": "excluded",
-      "finding": "NASA's facts page describes the inner rings as gray, Nu as reddish and Mu as blue, in words; no ring colour is measured as a value, so the hex colours once made from those words were removed and every ring is the neutral gray of a body without a measured colour.",
+      "finding": "NASA's facts page describes the inner rings as gray, Nu as reddish and Mu as blue, in words; no ring color is measured as a value, so the hex colors once made from those words were removed and every ring is the neutral gray of a body without a measured color.",
       "evidence": [
         "https://science.nasa.gov/uranus/facts/"
       ],
-      "revisitWhen": "A measured ring colour, as a spectrum or band ratios, is published."
+      "revisitWhen": "A measured ring color, as a spectrum or band ratios, is published."
     },
     {
       "id": "psg-charts",
@@ -120,7 +120,7 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Hubble OPAL Minnaert coefficients of the colour map per channel (F657N 0.57, F547M 0.80, F467M 0.85), the correction OPAL removed before projection, put back relative to the flood-lit disc centre.",
+      "finding": "Hubble OPAL Minnaert coefficients of the color map per channel (F657N 0.57, F547M 0.80, F467M 0.85), the correction OPAL removed before projection, put back relative to the flood-lit disc centre.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025_all_v1_readme.txt"
       ]
@@ -137,7 +137,7 @@
       "id": "authored-limb-lighting",
       "subject": "Authored limb lighting: a 0.35 flood-light limb floor, an ambient term and a terminator ramp",
       "status": "excluded",
-      "finding": "Replaced by the OPAL Minnaert law of the colour map.",
+      "finding": "Replaced by the OPAL Minnaert law of the color map.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
       ],
@@ -145,7 +145,7 @@
     },
     {
       "id": "opal-dated-visible-maps",
-      "subject": "Dated Hubble OPAL visible-colour sequence (12 rotations)",
+      "subject": "Dated Hubble OPAL visible-color sequence (12 rotations)",
       "status": "included",
       "finding": "One publisher RGB composite per included cycle, component FITS coverage, source-backed map frame and observation dates. Gray grid preserves missing coverage. Current scene lighting and rings remain a presentation, not the historical observing geometry. See the Hubble dates section of the README.",
       "evidence": [

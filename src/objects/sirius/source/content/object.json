@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Hubble's spectrum of the star. The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+        "qualification": "Color from Hubble's spectrum of the star. The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
         "thumbnail": "sirius-dataset-color.webp",
         "surface": "sirius-surface-color@2x.webp",
         "poles": "sirius-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
         },
         "falseColor": false,
-        "notes": "The colour of the Hubble Space Telescope's calibrated STIS spectrum of Sirius A, the CALSPEC flux standard. No resolved image of the surface is cast; the display axis is celestial north, a convention."
+        "notes": "The color of the Hubble Space Telescope's calibrated STIS spectrum of Sirius A, the CALSPEC flux standard. No resolved image of the surface is cast; the display axis is celestial north, a convention."
       }
     ]
   },

@@ -949,7 +949,7 @@
       "limitations": [
         "A synoptic map combines different observation times; it is not an instantaneous surface measurement.",
         "Filter width, achieved ground resolution and per-pixel uncertainty are not qualified.",
-        "Native grid is retained. This is not a shared body-map product and no display colour transform is applied."
+        "Native grid is retained. This is not a shared body-map product and no display color transform is applied."
       ]
     },
     {
@@ -976,7 +976,7 @@
       "limitations": [
         "A synoptic map combines different observation times; it is not an instantaneous surface measurement.",
         "Filter width, achieved ground resolution and per-pixel uncertainty are not qualified.",
-        "Native grid is retained. This is not a shared body-map product and no display colour transform is applied."
+        "Native grid is retained. This is not a shared body-map product and no display color transform is applied."
       ],
       "centralWavelengthMicrometres": 0.0304
     },
@@ -1004,7 +1004,7 @@
       "limitations": [
         "A synoptic map combines different observation times; it is not an instantaneous surface measurement.",
         "Filter width, achieved ground resolution and per-pixel uncertainty are not qualified.",
-        "Native grid is retained. This is not a shared body-map product and no display colour transform is applied."
+        "Native grid is retained. This is not a shared body-map product and no display color transform is applied."
       ],
       "centralWavelengthMicrometres": 0.0171
     },
@@ -1083,7 +1083,7 @@
       "limitations": [
         "A synoptic map combines different observation times; it is not an instantaneous surface measurement.",
         "Filter width, achieved ground resolution and per-pixel uncertainty are not qualified.",
-        "Native grid is retained. This is not a shared body-map product and no display colour transform is applied.",
+        "Native grid is retained. This is not a shared body-map product and no display color transform is applied.",
         "The released WAVELNTH card lacks a closing quote. The reader accepts the label with a warning and retains the original card."
       ],
       "centralWavelengthMicrometres": 0.0193

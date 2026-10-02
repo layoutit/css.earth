@@ -3,15 +3,15 @@
 π¹ Gruis is placed at its catalogue position, 162 parsecs from the Sun, and
 shown as a sphere of the fitted radius carrying one image reconstructed from the
 public VLTI/PIONIER visibilities of September 2014, the data behind the first
-resolved granulation on a star other than the Sun. A colour dataset shows the
-colour of its Gaia spectrum.
+resolved granulation on a star other than the Sun. A color dataset shows the
+color of its Gaia spectrum.
 
 ## Sources
 
 - **Placement:** the ICRS position, proper motion and parallax are SIMBAD's, from Gaia DR3 (Gaia Collaboration 2020): parallax 6.19 ± 0.45 mas, 161.7 pc, with RUWE 2.9 because the star is a wide binary. No catalogue lists a radial velocity for the star; the record assumes zero. The mass behind the display GM is the 1.5 solar masses of Mayer et al. (2014, A&A 570, A113).
 - **PIONIER photograph:** Paladini et al. (2018, [Nature 553, 310](https://doi.org/10.1038/nature25001); ESO release [eso1741](https://www.eso.org/public/news/eso1741/)) imaged π¹ Gruis in the H band over four nights in September 2014. Their image-ready calibrated file is public in the [JMMC OiDB](https://oidb.jmmc.fr/) (`PI_GRU_forImage.fits`, data PI C. Paladini) and is read as is.
 - **Reconstruction code:** the public [SQUEEZE](https://github.com/fabienbaron/squeeze) code; `source/reference/squeeze-command.txt` records the build and the command.
-- **Colour dataset:** Gaia DR3's measured spectrum of π¹ Gruis; the file and the full citation are in [stellar-color.json](source/photometry/stellar-color.json).
+- **Color dataset:** Gaia DR3's measured spectrum of π¹ Gruis; the file and the full citation are in [stellar-color.json](source/photometry/stellar-color.json).
 
 ## Processing
 
@@ -57,8 +57,8 @@ crop of the reconstruction, centred and sized from the matching frame in
 
 - **The image is a reconstruction.** An interferometer records no picture. The image is the maximum-entropy solution SQUEEZE prefers; a different regulariser changes the fine structure. The published image was made from the same file with a different code and is not redistributed here.
 - **The axis is a convention.** Where the pole really points is unknown. Longitudes on this sphere mean nothing beyond the image.
-- **One hemisphere, one band, one week.** The far hemisphere and the poles carry the no-data grid. The heat scale is not colour, temperature or albedo. The granulation pattern changes on a timescale of months.
-- **The colour's blue end is uncertain.** At G = 3.6 the star is bright enough for Gaia XP photometry to saturate, blue first (Montegriffo et al. 2023, A&A 674, A33), and its RUWE is high. No usable second spectrum was found.
+- **One hemisphere, one band, one week.** The far hemisphere and the poles carry the no-data grid. The heat scale is not color, temperature or albedo. The granulation pattern changes on a timescale of months.
+- **The color's blue end is uncertain.** At G = 3.6 the star is bright enough for Gaia XP photometry to saturate, blue first (Montegriffo et al. 2023, A&A 674, A33), and its RUWE is high. No usable second spectrum was found.
 - **The radius is a fit.** Mayer et al. (2014) list 370 solar radii from the bolometric luminosity.
 - **The limb law depends on the baselines.** Inside the first lobe it is 1.29 ± 0.11; fitted to every baseline it is 0.42 ([record](source/photometry/pi1-gruis-pionier-2014-09-first-lobe-limb-darkening.json)). It is measured in the H band, not the visible band.
 - **The sky is the Sun's.** The star field behind π¹ Gruis is the shared cube baked from the Sun's position.

@@ -22,14 +22,14 @@
       "id": "optical",
       "label": "NOIRLab · optical",
       "title": "Galaxies M81 & M82",
-      "description": "T.A. Rector's Mayall 4-meter view of M81 and M82 with Milky Way foreground stars removed and the whole-galaxy colour tied to RC3's measured B-V of 0.95. M81's bulge is spread through a round volume from S4G's bulge-plus-disc fit, and its disc through a 368 pc layer; depth is modelled, not measured per pixel.",
+      "description": "T.A. Rector's Mayall 4-meter view of M81 and M82 with Milky Way foreground stars removed and the whole-galaxy color tied to RC3's measured B-V of 0.95. M81's bulge is spread through a round volume from S4G's bulge-plus-disc fit, and its disc through a 368 pc layer; depth is modelled, not measured per pixel.",
       "summary": "Visible-light image on an approximate depth model with a round bulge; individual depths are not measured.",
       "detail": "8315 × 4642 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Mayall 4-m Mosaic, colour composite"
+          "value": "Mayall 4-m Mosaic, color composite"
         },
         {
           "id": "source-pixels",

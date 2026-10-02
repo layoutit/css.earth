@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from a measured spectrum of the star (LAMOST). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+        "qualification": "Color from a measured spectrum of the star (LAMOST). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
         "thumbnail": "k2-18-dataset-color.webp",
         "surface": "k2-18-surface-color@2x.webp",
         "poles": "k2-18-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://www.lamost.org/dr11/v2.0/"
         },
         "falseColor": false,
-        "notes": "The colour of K2-18's LAMOST spectrum. The LAMOST survey telescope observed it on 21 March 2014, with a relative flux calibration and a fibre warning in the file. No resolved image of the surface is cast here."
+        "notes": "The color of K2-18's LAMOST spectrum. The LAMOST survey telescope observed it on 21 March 2014, with a relative flux calibration and a fibre warning in the file. No resolved image of the surface is cast here."
       }
     ]
   },

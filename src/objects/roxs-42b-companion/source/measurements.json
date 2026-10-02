@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "Inglis et al. (2026, AJ 171, 280; doi:10.3847/1538-3881/ae4b34), Table 2: the orbitize! MCMC fit to Keck NIRC speckle, SPHERE and NIRC2 relative astrometry of B around A, 2001-2022; posterior medians. P = 31 +3/-2 yr of 365.25 d.",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published model radius. ROXs 42B B's disc is not resolved and no image of it exists; its colour is a blackbody at the published temperature, 2,600 K."
+    "qualification": "A sphere at the published model radius. ROXs 42B B's disc is not resolved and no image of it exists; its color is a blackbody at the published temperature, 2,600 K."
   },
   "effectiveTemperatureK": 2600,
   "effectiveTemperatureSource": "2600 +/- 20 K: the SPHINX model fit of Inglis et al. (2024, AJ), Table 1, https://arxiv.org/abs/2402.09533"

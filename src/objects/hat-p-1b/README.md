@@ -8,7 +8,7 @@ It is the only planet known around HAT-P-1. Its orbit and size follow Nikolov et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.4652986 d Nikolov et al. 2014 (2014MNRAS.437...46N), via the NASA Exoplanet Archive ps table (pl_refname NIKOLOV_ET_AL__2014): a/R* 9.853; Nikolov et al. 2014 (2014MNRAS.437...46N), via the NASA Exoplanet Archive ps table (pl_refname NIKOLOV_ET_AL__2014): inclination 85.634 degrees Ment et al. 2018 (2018AJ....156..213M), via the NASA Exoplanet Archive ps table (pl_refname MENT_ET_AL__2018): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460606.436882 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hat-p-1's measured colour (#fff4f6, the colour dataset of hat-p-1 (src/objects/hat-p-1/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by hat-p-1's measured color (#fff4f6, the color dataset of hat-p-1 (src/objects/hat-p-1/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HAT-P-1's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (56, 83, 84), folded onto its orbit. Upper limits and rows without an error are left out.
 

@@ -42,8 +42,8 @@ import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProje
 import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../../delivery/index.ts';
 import { verifyObservationSources } from '../observed-surfaces/index.ts';
 import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from '../../geometry/index.ts';
-import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '../../../photometry/index.ts';
-import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour } from '../../raster/index.ts';
+import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColor, outsideSilhouette, scatteringAngles, type Channels } from '../../../photometry/index.ts';
+import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColor } from '../../raster/index.ts';
 import { tieBandRatios } from '../../raster/index.ts';
 import type { BandRatioPolicy } from '../../raster/index.ts';
 
@@ -84,12 +84,12 @@ function fillUnobservedRows(data: Buffer, info: { width: number; height: number;
 
 /**
  * The prepared surface map before it is encoded: unobserved rows filled, resampled once to the prepared grid, rows moved
- * from planetographic latitude (the OPAL readme) to the mesh's own latitude, and the Sun's colour multiplied in linear light.
- * When the recipe names a whole-disc colour, the band-ratio tie then scales green and blue over every texel, cosine-weighted
+ * from planetographic latitude (the OPAL readme) to the mesh's own latitude, and the Sun's color multiplied in linear light.
+ * When the recipe names a whole-disc color, the band-ratio tie then scales green and blue over every texel, cosine-weighted
  * by latitude, the map gets back its untied mean luminance with a soft shoulder, and both reports are returned. One sRGB
  * encoding at the end.
  */
-export async function prepareSurfaceColour({ sourcePath, unobservedRows, width, height, equatorialToPolar, channelFactors, tie }: {sourcePath:string;
+export async function prepareSurfaceColor({ sourcePath, unobservedRows, width, height, equatorialToPolar, channelFactors, tie }: {sourcePath:string;
   unobservedRows:readonly (readonly [number, number])[];width:number;height:number;equatorialToPolar:number;channelFactors:readonly number[];tie?:BandRatioPolicy}) {
   const source = await sharp(sourcePath)
     .removeAlpha()
@@ -123,12 +123,12 @@ export async function createLayeredOblatePreparation({ sourceDirectory, publicDi
   const readSourceJson = async (path:string): Promise<unknown> => JSON.parse(await readFile(resolve(sourceDirectory,path),'utf8'));
   const PREPARED_RING_SOURCE = preparedInputs.ringSource;
   // The globe's limb: the published photometric models of its map (packages/bake/src/photometry/limb.ts). The overlay's reference
-  // colour is measured from the prepared surface once it is written.
+  // color is measured from the prepared surface once it is written.
   const LIMB_LAW = await loadLimbLaw(sourceDirectory, config.limb.models);
   let limbReference: Channels<number> | undefined;
-  // A map with arbitrary archive scaling names the planet's published whole-disc colour (packages/bake/src/objects/raster/whole-disc-colour.ts).
+  // A map with arbitrary archive scaling names the planet's published whole-disc color (packages/bake/src/objects/raster/whole-disc-color.ts).
   // The tinted map's band ratios are tied to it through the limb law's disc means, so the flood-lit disc integrates to it.
-  const COLOUR_TIE = config.colourTie === undefined ? undefined : displayBandRatios(await loadWholeDiscColour(sourceDirectory, config.colourTie), floodDiscMean(LIMB_LAW));
+  const COLOR_TIE = config.colorTie === undefined ? undefined : displayBandRatios(await loadWholeDiscColor(sourceDirectory, config.colorTie), floodDiscMean(LIMB_LAW));
   await Promise.all([mkdir(publicDirectory,{recursive:true}),mkdir(stagingDirectory,{recursive:true})]);
 
 const DEFAULT_DATASET_ID = config.parameters.defaultDatasetId;
@@ -1756,7 +1756,7 @@ function publicTexturePath(textureUrl:string) {
 }
 
 /** The widest image each dataset-swapped leaf family can show, read from the files this preparation published: the default
- * body surface, poles and @2x rings, and each false-colour dataset's own. */
+ * body surface, poles and @2x rings, and each false-color dataset's own. */
 async function publishedLeafImagePixels():Promise<LeafImagePixels> {
   const datasets = requireDatasets().controls
     .filter((dataset): dataset is Extract<typeof dataset,{falseColor:boolean}> => 'falseColor' in dataset && dataset.falseColor);
@@ -1784,7 +1784,7 @@ async function prepareNormalMaterialMasters() {
       approvedReferenceFixedMaterialInfo.height !== PLANET_FIXED_MATERIAL_SIZE) {
     throw new Error("Ellipsoid approved reference material source changed.");
   }
-  // The Sun's colour on the map: the directional light's tint normalized by its brightest channel.
+  // The Sun's color on the map: the directional light's tint normalized by its brightest channel.
   const maximumTint = textureTintFactors(
     LIGHTING.directionalLight.intensity,
     LIGHTING.directionalLight.color,
@@ -1801,7 +1801,7 @@ async function prepareNormalMaterialMasters() {
     maximumLightingFactor,
   );
   await prepareSolarTintedSurface(surfaceChannelFactors);
-  limbReference = await meanObservedColour(PLANET_SURFACE_TEXTURE_PATH);
+  limbReference = await meanObservedColor(PLANET_SURFACE_TEXTURE_PATH);
   const [metadata, preparedSurface] = await Promise.all([
     sharp(PLANET_SOURCE_TEXTURE_PATH).metadata(),
     sharp(PLANET_SURFACE_TEXTURE_PATH)
@@ -2637,8 +2637,8 @@ function prepareSurfaceChannelFactors(maximumTint:ReturnType<typeof textureTintF
 }
 
 async function prepareSolarTintedSurface(channelFactors:readonly number[]) {
-  const { data, info } = await prepareSurfaceColour({ sourcePath: PLANET_SOURCE_TEXTURE_PATH, unobservedRows: config.surfaceUnobservedRows ?? [],
-    width: PLANET_SOURCE_TEXTURE_WIDTH, height: PLANET_SOURCE_TEXTURE_HEIGHT, equatorialToPolar: EQUATORIAL_RADIUS / POLAR_RADIUS, channelFactors, tie: COLOUR_TIE });
+  const { data, info } = await prepareSurfaceColor({ sourcePath: PLANET_SOURCE_TEXTURE_PATH, unobservedRows: config.surfaceUnobservedRows ?? [],
+    width: PLANET_SOURCE_TEXTURE_WIDTH, height: PLANET_SOURCE_TEXTURE_HEIGHT, equatorialToPolar: EQUATORIAL_RADIUS / POLAR_RADIUS, channelFactors, tie: COLOR_TIE });
   await sharp(data, {
     raw: {
       width: info.width,
@@ -2861,10 +2861,10 @@ function preparePolarMaterialSample({
 
 /**
  * The globe's overlay at a surface point: the published models' factor for its incidence, emission and phase, times
- * the ring shadow's direct transmission, as one source-over colour and alpha against the surface's mean colour.
+ * the ring shadow's direct transmission, as one source-over color and alpha against the surface's mean color.
  */
 function globeLimbOverlay(normal:ReadonlyVector3, objectLight:ReadonlyVector3, objectView:ReadonlyVector3, emissionFloor:number, directTransmission:number) {
-  if (!limbReference) throw new Error("Saturn's limb overlay needs the prepared surface's reference colour first.");
+  if (!limbReference) throw new Error("Saturn's limb overlay needs the prepared surface's reference color first.");
   const { incidence, emission, phase } = scatteringAngles(normal, objectLight, objectView, emissionFloor);
   return limbOverlay(limbFactors(LIMB_LAW, incidence, emission, phase).map((factor) => factor * directTransmission), limbReference);
 }

@@ -10,7 +10,7 @@ Callisto is a moon of Jupiter, shown as a mean-radius sphere with three surface 
 - **Named features** come from the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Callisto (public domain per its FGDC metadata), kept under `source/features/`. 12 labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0), kept with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 - [NASA's facts](https://science.nasa.gov/jupiter/jupiter-moons/callisto/facts/) provide the brief introductory content.
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json). NASA Photojournal figure PIA00844 did not qualify as a map view: it lacks a labelled map grid and a colour scale with units. See [NOTICE.md](NOTICE.md) for credits.
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json). NASA Photojournal figure PIA00844 did not qualify as a map view: it lacks a labelled map grid and a color scale with units. See [NOTICE.md](NOTICE.md) for credits.
 
 ## Processing
 

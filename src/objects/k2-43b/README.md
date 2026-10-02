@@ -8,7 +8,7 @@ It is one of 2 planets known around K2-43. Its orbit and size follow Hedges et a
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.4712802624 d Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive ps table (pl_refname HEDGES_ET_AL__2019): a/R* 8; Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive ps table (pl_refname HEDGES_ET_AL__2019): inclination 89.6 degrees Dressing et al. 2017 (2017AJ....154..207D), via the NASA Exoplanet Archive ps table (pl_refname DRESSING_ET_AL__2017): e 0.07 Dressing et al. 2017 (2017AJ....154..207D), via the NASA Exoplanet Archive ps table (pl_refname DRESSING_ET_AL__2017): omega -25.11 degrees, stored as 334.89 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459281.403586 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 15 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-43's measured colour (#ffd09d, the colour dataset of k2-43 (src/objects/k2-43/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by k2-43's measured color (#ffd09d, the color dataset of k2-43 (src/objects/k2-43/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-43's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (46, 63, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 

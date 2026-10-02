@@ -21,13 +21,13 @@ test('limb factors are 1 at the flood-lit disc centre, follow the law elsewhere 
   assert.ok(Math.abs(side - Math.exp(-0.5628 * Math.PI / 3) * (0.6424 * 2 * 0.5 / 1.5 + 0.3576 * 0.5)) < 1e-12);
 });
 
-test('the overlay is exact for the reference colour and for the channel that sets its alpha', () => {
+test('the overlay is exact for the reference color and for the channel that sets its alpha', () => {
   const reference = [180, 120, 60] as const, factors = [0.9, 0.5, 1.4];
   const [r, g, b, alpha] = limbOverlay(factors, reference);
-  const over = (base: number, colour: number) => base * (1 - alpha) + colour * alpha;
-  [r, g, b].forEach((colour, channel) => {
+  const over = (base: number, color: number) => base * (1 - alpha) + color * alpha;
+  [r, g, b].forEach((color, channel) => {
     const expected = Math.min(255, linearToSrgb(Math.min(1, srgbToLinear(reference[channel]) * factors[channel])));
-    assert.ok(Math.abs(over(reference[channel], colour) - expected) < 1e-9, `channel ${channel}`);
+    assert.ok(Math.abs(over(reference[channel], color) - expected) < 1e-9, `channel ${channel}`);
   });
   assert.deepEqual(limbOverlay([1, 1, 1], reference), [0, 0, 0, 0]);
   const night = limbOverlay([0, 0, 0], reference);

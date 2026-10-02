@@ -4,4 +4,4 @@ Radius: Maciejewski et al. 2014 (2014AcA....64..323M), via the NASA Exoplanet Ar
 
 Orbit: Maciejewski et al. 2014 (2014AcA....64..323M), via the NASA Exoplanet Archive.
 
-Colour: a black body at the 1,120 K dayside brightness temperature of Stevenson et al. 2010, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table), through the CIE 1931 2° colour-matching functions.
+Color: a black body at the 1,120 K dayside brightness temperature of Stevenson et al. 2010, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table), through the CIE 1931 2° color-matching functions.

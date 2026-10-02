@@ -1,6 +1,6 @@
 # Pluto
 
-Pluto shows New Horizons colour and monochrome mosaics, a stereo elevation model and three modeled surface-ice maps, grouped under one **Surface ices** entry ([dataset groups](../../../docs/reader-text.md#dataset-groups)). It opens on the side New Horizons approached. Charon and the other moons are not mounted.
+Pluto shows New Horizons color and monochrome mosaics, a stereo elevation model and three modeled surface-ice maps, grouped under one **Surface ices** entry ([dataset groups](../../../docs/reader-text.md#dataset-groups)). It opens on the side New Horizons approached. Charon and the other moons are not mounted.
 
 ## Sources
 
@@ -22,7 +22,7 @@ Source selections, trials and open questions are in the [investigation ledger](i
 
 All maps use 0–360° east longitude and are painted into the shared raster lane of 450 leaves ([seam treatment](../../../docs/surface-preparation.md#reduce-geometry-and-bake-the-atlas)). The missing-coverage grid is painted before packing, so no gap is interpolated.
 
-The DEM uses a blue/tan/red palette linear at −8/0/+8 km with northwest hillshade and no exaggeration. Colour encodes height; brightness encodes relief.
+The DEM uses a blue/tan/red palette linear at −8/0/+8 km with northwest hillshade and no exaggeration. Color encodes height; brightness encodes relief.
 
 **LEISA ices.** We use the authors' preferred least-squares solution, `params_ls.fits`, with `params_ls_errors.fits`: 1,067 × 534 area fractions in percent. The headers omit WCS, so the array covers the full sphere with east longitude from 0° to 360° and north up, as the paper's Figure 6 shows. We withhold uncomputed cells (335,273 carry a fixed initialization tuple) and, as a display choice, cells whose error is not between 0 and 100 percentage points. Sampling is nearest-cell.
 
@@ -32,7 +32,7 @@ The DEM uses a blue/tan/red palette linear at −8/0/+8 km with northwest hillsh
 | Nitrogen | 210,515 | 34.04% |
 | Water | 204,625 | 32.58% |
 
-All three use one linear viridis palette; colours are a numeric scale, not surface colour.
+All three use one linear viridis palette; colors are a numeric scale, not surface color.
 
 ## Lighting law
 
@@ -45,12 +45,12 @@ The globe is lit with the Buratti et al. (2017) law, fitted to LORRI approach im
 ## Evidence
 
 - The LEISA reader matches 192 independent Astropy/NumPy sample decisions and the accepted cell counts for all three maps ([reference values](../../../src/objects/pluto/fixtures/leisa-astropy.json)). The native maps give 69.31% methane-rich and 19.88% nitrogen-rich ice averaged over 60–90° N, matching the paper's rounded 69% and 20%. This checks decoding and masking, not the authors' spectral inversion.
-- The Gazetteer map edge was fixed by drawing rims under both edge hypotheses and keeping the one where Sputnik Planitia coincides with the colour mosaic.
+- The Gazetteer map edge was fixed by drawing rims under both edge hypotheses and keeping the one where Sputnik Planitia coincides with the color mosaic.
 
 ## Known problems
 
 - LEISA fractions depend on the assumed ice optical properties and fitting method. The paper reports residual scan seams and sensitivity of Sputnik Planitia's nitrogen fraction to the assumed nitrogen absorption. Gray means no usable fit, not zero ice. The nominal 7 km cells cannot support close-up geological detail.
-- The mosaics and DEM have incomplete, uneven coverage, and a gray grid marks identified gaps. In the colour JPEG only exactly-black pixels connected to the southern border are marked, so a dark boundary fringe can remain. No terrain is filled.
+- The mosaics and DEM have incomplete, uneven coverage, and a gray grid marks identified gaps. In the color JPEG only exactly-black pixels connected to the southern border are marked, so a dark boundary fringe can remain. No terrain is filled.
 - One lighting law lights the whole body. The authors say it under-corrects the brightest regions and over-corrects the darkest, and it does not describe the haze-lit limb at high phase. Pluto's haze layers are not modelled.
 - The camera, the 180° spin origin and the 84-second retrograde rotation are presentation choices; pole and Sun direction come from the IAU/WGCCRE model.
 - Feature outlines are not published nomenclature boundaries.

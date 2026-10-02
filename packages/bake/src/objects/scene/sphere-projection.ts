@@ -3,7 +3,7 @@
  * exactly, read a half-texel raster overscan, and the body publishes a stepped silhouette outset that closes antialiased
  * seams. The generators used to write a 24-unit seam bleed instead: every band grew by about a tenth of the radius, and
  * near a pole on the silhouette that growth reached past the outline (a lemon-shaped planet in Safari on iPad).
- * The raster scale stays the generators' own 2: a one-colour sphere gains nothing from denser leaves.
+ * The raster scale stays the generators' own 2: a one-color sphere gains nothing from denser leaves.
  */
 export const SPHERE_SEAMS = Object.freeze({
   seamBleed: 0,

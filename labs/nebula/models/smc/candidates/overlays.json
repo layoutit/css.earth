@@ -130,7 +130,7 @@
         "backgroundPosition": "0px 0px"
       },
       "sourcePageUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
-      "credit": "IPAC/NASA; colour HiPS CDS (CNRS/Unistra)",
+      "credit": "IPAC/NASA; color HiPS CDS (CNRS/Unistra)",
       "registrationNote": "Fixed publisher TAN WCS independently checked against 7,172 bright AllWISE catalogue W1 stars, with unchanged control thresholds and no fitted transform. Survey coordinates and image share mission data; diffuse emission and depth are not validated."
     },
     {
@@ -154,7 +154,7 @@
       },
       "sourcePageUrl": "https://www.herschel.caltech.edu/image/nhsc2012-001b",
       "credit": "ESA/NASA/JPL-Caltech/STScI",
-      "registrationNote": "Inspection candidate only; not approved for reconstruction. Whole bar and wing; dust-temperature colour composite. Same observation as Spitzer ssc2012-01b, excluded duplicate. Nonstellar compact dust structures must be preserved."
+      "registrationNote": "Inspection candidate only; not approved for reconstruction. Whole bar and wing; dust-temperature color composite. Same observation as Spitzer ssc2012-01b, excluded duplicate. Nonstellar compact dust structures must be preserved."
     },
     {
       "id": "smc-spitzer",

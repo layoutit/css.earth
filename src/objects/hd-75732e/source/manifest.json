@@ -89,7 +89,7 @@
       "origin": "https://ui.adsabs.harvard.edu/abs/2012ApJ...751L..28D/abstract",
       "credit": "Demory et al. 2012, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Authored method record: names the archive row chosen and the colour computation applied",
+      "acquisition": "Authored method record: names the archive row chosen and the color computation applied",
       "redistribution": "Method record only",
       "consumers": [
         "assets",
@@ -97,7 +97,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored colour recipe naming the cited brightness temperature; repinned when edited."
+        "reason": "Project-authored color recipe naming the cited brightness temperature; repinned when edited."
       }
     },
     {
@@ -131,7 +131,7 @@
       "sourceUrl": "https://science.nasa.gov/resource/55-cancri-e-3d-model/",
       "credit": "NASA Visualization Technology Applications and Development (VTAD)",
       "license": "NASA images and media usage guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/); NASA acknowledged as the source",
-      "acquisition": "Original GLB from the NASA Science resource page https://science.nasa.gov/resource/55-cancri-e-3d-model/, unchanged; its base-colour texture is the dataset.",
+      "acquisition": "Original GLB from the NASA Science resource page https://science.nasa.gov/resource/55-cancri-e-3d-model/, unchanged; its base-color texture is the dataset.",
       "redistribution": "NASA media; an illustrative model, not photographed terrain or a measured map",
       "consumers": [
         "assets",
@@ -276,10 +276,10 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "dataset-colour-context-marker",
+      "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract",
-      "credit": "The default dataset's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"

@@ -202,7 +202,7 @@
         "https://doi.org/10.1016/j.asr.2013.11.006"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py (cellPresence circle) from the five ArcGIS REST response pages using craters/prepare-grid.json.",
-      "redistribution": "Retain the authors; the rim colour is the Trek layer symbol for its smallest class, not an observation.",
+      "redistribution": "Retain the authors; the rim color is the Trek layer symbol for its smallest class, not an observation.",
       "consumers": [
         "crater-catalogue"
       ],
@@ -225,7 +225,7 @@
         "latitudeType": "planetocentric",
         "referenceRadiusMeters": 11080
       },
-      "coverage": "Every 0.125 degree cell (24 m on the 11.08 km sphere) that a catalogued rim circle crosses, plus each centre cell: 220,719 of 4,147,200 cells for 9,224 craters. Other cells have no catalogued rim and show the Monochrome mosaic in grey at 35% brightness at bake.",
+      "coverage": "Every 0.125 degree cell (24 m on the 11.08 km sphere) that a catalogued rim circle crosses, plus each centre cell: 220,719 of 4,147,200 cells for 9,224 craters. Other cells have no catalogued rim and show the Monochrome mosaic in gray at 35% brightness at bake.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -383,7 +383,7 @@
         "https://trek.nasa.gov/phobos/TrekWS/rest/cat/metadata/fgdc/html?label=PH9224GT_Phobos2000",
         "https://doi.org/10.1016/j.asr.2013.11.006"
       ],
-      "acquisition": "ArcGIS REST layer description: field list, native spatial reference and the class-break symbol the rim colour is taken from.",
+      "acquisition": "ArcGIS REST layer description: field list, native spatial reference and the class-break symbol the rim color is taken from.",
       "redistribution": "Public scientific input; preserve source attribution.",
       "consumers": [
         "mapped-science-inputs"
@@ -477,7 +477,7 @@
     },
     {
       "path": "craters/prepare-grid.json",
-      "purpose": "Rasterization plan: rim circles of the catalogue radius field, the one category and its Trek symbol colour.",
+      "purpose": "Rasterization plan: rim circles of the catalogue radius field, the one category and its Trek symbol color.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities."

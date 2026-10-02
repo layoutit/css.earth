@@ -8,7 +8,7 @@ It is the only planet known around TOI-913. Its orbit and size follow Mistry et 
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 11.09936463697 d Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): a/R* 24.352; Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): inclination 89.1 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460833.983615 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-913's measured colour (#ffe0cd, the colour dataset of toi-913 (src/objects/toi-913/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-913's measured color (#ffe0cd, the color dataset of toi-913 (src/objects/toi-913/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-913's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (100, 101, 102), folded onto its orbit. Upper limits and rows without an error are left out.
 

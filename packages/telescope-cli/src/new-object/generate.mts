@@ -1,5 +1,5 @@
-/** Generate a complete placed-star package from a star spec (spec.mts): the astronomy record from Gaia DR3 and SIMBAD, the colour
- * dataset from the best archived spectrum (color.mts) with its limb-darkening law (limb.mts), the catalogue colour and navigation
+/** Generate a complete placed-star package from a star spec (spec.mts): the astronomy record from Gaia DR3 and SIMBAD, the color
+ * dataset from the best archived spectrum (color.mts) with its limb-darkening law (limb.mts), the catalogue color and navigation
  * marker from that dataset, the manifest, acquisition plan, source records, credits and the README sections the data determine. Prose
  * only a person can write (the reader card and introduction, the README's account of the star) is marked TODO(new-object), which
  * src/objects/object-package-consistency.test.mts refuses. The package's own readers check every choice as it is made. */
@@ -169,7 +169,7 @@ export function eclipsingPeriodAgrees(paperDays: number, gaiaDays: number | unde
 
 /** Compose every file of the package and its shared records. Pure apart from the archive reads; the caller writes. */
 export async function generateStar(spec: StarSpec, { archive = liveArchive, root = process.cwd(), resolver = telescopeResolver(root), order, universe, refresh = false, solarEpoch }: { archive?: Archive; root?: string; resolver?: Resolver; order: number; universe?: Existing; refresh?: boolean; solarEpoch: SolarEpoch }): Promise<Generated> {
-  // The Gaia row waits only for the identity; everything else (colour, limb, the papers) is read at once. A star Gaia cannot see has
+  // The Gaia row waits only for the identity; everything else (color, limb, the papers) is read at once. A star Gaia cannot see has
   // no identifiers to search the archives by: its catalogue row is its identity and its evidence. A star too bright for Gaia (a
   // Hipparcos row, with its motion) is in the bright-star spectral catalogues under the HD and HR numbers SIMBAD lists for it.
   const bright = spec.position?.motion && spec.target ? await resolver(spec.target) : undefined;
@@ -228,7 +228,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     else if (key === 'effectiveTemperatureSource' && gravity?.kind === 'bounded' && limb.limbDarkening) { out.limbDisplayGravityLogg = gravity.logg; out.limbDisplayGravitySource = `${gravity.sentence} (${gravity.url})`; }
   }
   out.angularDiameterSource = `Computed here from the record's radius and distance: 2 x ${Math.round(physical.radiusKm).toLocaleString('en-US')} km at ${distance.toFixed(2)} pc = ${measurements.angularDiameterMas} mas. No interferometric diameter of this star is used.`;
-  out.shape = { kind: 'uniform-disc-sphere', qualification: `A sphere at the published radius, coloured from ${colorWords} (photometry/stellar-color.json); no image of the photosphere exists.` };
+  out.shape = { kind: 'uniform-disc-sphere', qualification: `A sphere at the published radius, colored from ${colorWords} (photometry/stellar-color.json); no image of the photosphere exists.` };
   files.set(`${s}/measurements.json`, json(out));
 
   // Spin: a tilt the spec cites is used, with the visible pole north and toward us; its position angle stays a convention.
@@ -305,11 +305,11 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '',
     spec.text ? `${spec.text.introduction}${names ? ` It is also ${names}.` : ''} The introduction is generated from ${spec.paper.credit}'s published values; the sections below are the data's own.` : `${spec.name}${names ? ` (${names})` : ''} is ${distance.toFixed(1)} parsecs away. ${TODO}: what the star is and why it is here, from ${spec.paper.credit}.`, '',
     `**Star.** Placement: ${gaia ? `Gaia DR3 source ${gaia.sourceId}` : `${spec.position!.credit}, VizieR ${catalogueRow!.words}${spec.target ? ` (SIMBAD ${spec.target})` : ''}; placed by that row, not by a Gaia source`}, ${place.readme}. ${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value.toLocaleString('en-US')} K from ${spec.temperature.source}.${Number.isFinite(physical.logg) ? ` log g ${physical.logg}${spec.gravity ? ` from ${spec.gravity.source}` : ' from the mass and radius'}.` : gravity?.kind === 'published' ? ` log g ${gravity.logg} from ${gravity.source}.` : ' No surface gravity of this star is published.'}`, '',
-    `**Colour.** ${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2° observer: ${colorHex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.`, '',
+    `**Color.** ${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2° observer: ${colorHex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.`, '',
     `**Limb.** ${limb.limbDarkening ? `The disc is ${limb.sentence}.` : `${limb.sentence}.`}${gravity && limb.limbDarkening ? ` Gravity: ${gravity.sentence}.` : ''}`, '',
     ...spec.spin ? [`**Spin.** ${spec.spin.inclinationDegrees}° from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''} (${spec.spin.source}). The axis's direction on the sky is unmeasured and set toward celestial north.`, ''] : [],
     '## Evidence', '', `Generated ${CHECKED} by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from ${gaia ? 'Gaia DR3, SIMBAD' : `VizieR ${spec.position!.catalogue}`} and the archives named above; each choice was read with the dataset's own reader.`, '',
-    ...color.crossCheck ? [`- The colour's cross-check differs by ${color.crossCheck.difference} levels at most in any channel (threshold ${CROSS_CHECK_AGREEMENT}); [object-package-consistency.test.mts](../../../src/objects/object-package-consistency.test.mts) recomputes it after preparation.`] : [],
+    ...color.crossCheck ? [`- The color's cross-check differs by ${color.crossCheck.difference} levels at most in any channel (threshold ${CROSS_CHECK_AGREEMENT}); [object-package-consistency.test.mts](../../../src/objects/object-package-consistency.test.mts) recomputes it after preparation.`] : [],
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the rest of the package.`], '',
     '## Known problems', '', '- **Assumptions of the frame.** The axis\'s position angle and the rotation phase are conventions.',
     ...limb.limbDarkening ? [`- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and ${gravity?.kind === 'bounded' ? 'a display gravity inside its class\'s published range (see Limb)' : 'gravity'}, not a measurement of this star.`] : [],
@@ -336,7 +336,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
       finding: `${gaia ? `Gaia DR3 source ${gaia.sourceId}: position at J2016.0` : `${spec.position!.credit}, VizieR ${catalogueRow!.words}: ${catalogueRow!.epoch === 2000 ? 'J2000 position' : `position at J${catalogueRow!.epoch}`}; Gaia cannot see the star`}. Distance: ${place.source}. Proper motion: ${place.properMotion.source}. Radial velocity ${gaia?.radialVelocity !== undefined ? 'from the same row' : `from ${spec.radialVelocity!.source}`}.` },
     { id: 'radius-mass-and-temperature', subject: 'Radius, mass and temperature', evidence: [...spec.radius === 'gaia-flame' || spec.mass === 'gaia-flame' ? [gaiaArchive] : [], spec.temperature.url],
       finding: `${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value}${spec.temperature.uncertainty ? ` +/- ${spec.temperature.uncertainty}` : ''} K from ${spec.temperature.source}.` },
-    { id: 'colour', subject: 'Colour', evidence: color.route === 'planck' ? [spec.temperature.url] : colorLinks,
+    { id: 'color', subject: 'Color', evidence: color.route === 'planck' ? [spec.temperature.url] : colorLinks,
       finding: `${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2-degree observer: ${colorHex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.` },
     ...limb.limbDarkening && vizier(limb.credit) ? [{ id: 'limb-darkening', subject: 'Limb darkening', evidence: [`https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=${vizier(limb.credit)}`], finding: `The disc is ${limb.sentence}.` }] : [],
     ...spec.spin ? [{ id: 'spin', subject: 'Spin', evidence: [spec.spin.url], finding: `Inclination ${spec.spin.inclinationDegrees} degrees from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''}, from ${spec.spin.source}; the axis's direction on the sky is a convention.` }] : [],
@@ -406,7 +406,7 @@ export async function writePackageFiles(files: Map<string, string | Buffer>, id:
 export async function writeGenerated(generated: Pick<Generated, 'id' | 'files'>, root = process.cwd(), refresh = false) {
   const { written, kept } = await writePackageFiles(generated.files, generated.id, root, refresh);
   const presentation = resolve(root, `src/objects/${generated.id}/source/presentation`);
-  // The marker needs the package on disk: a placeholder first, then the colour dataset as a disc.
+  // The marker needs the package on disk: a placeholder first, then the color dataset as a disc.
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
   const { authorContextMarkers } = await import('../source-authoring/context-markers.mts');
   await authorContextMarkers([generated.id]);
@@ -469,7 +469,7 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
     const result: NewObjectResult = { id: spec.id, kind: 'star', files: written.written.length, hex: generated.hex, color: generated.color.route, ...(generated.color.crossCheck ? { crossCheck: generated.color.crossCheck } : {}),
       limb: generated.limb.grid ?? 'none', todo: generated.todo, ...(written.kept.length ? { kept: written.kept } : {}) };
     results.push(result);
-    progress(`  ${spec.id}: colour ${result.hex} from ${result.color}${result.crossCheck ? ` (cross-check ${result.crossCheck.route}, ${result.crossCheck.difference} levels)` : ''}, limb ${result.limb}, ${written.written.length} files${written.kept.length ? `; kept ${written.kept.join(', ')}` : ''} (${elapsed()})`);
+    progress(`  ${spec.id}: color ${result.hex} from ${result.color}${result.crossCheck ? ` (cross-check ${result.crossCheck.route}, ${result.crossCheck.difference} levels)` : ''}, limb ${result.limb}, ${written.written.length} files${written.kept.length ? `; kept ${written.kept.join(', ')}` : ''} (${elapsed()})`);
     const body = JSON.parse(String(generated.files.get(`packages/astronomy/data/bodies/${spec.id}.json`))) as Record<string, any>;
     await Promise.all([...spec.planets, ...spec.companions].map(entry => hostedRecordFor(entry, { spec, body })));
   };
@@ -535,7 +535,7 @@ export async function runHostedPhase(handoff: string, { SOLAR_GEOMETRY_EPOCH_JD_
       const presentation = resolve(root, `src/objects/${record.spec.id}/source/presentation`);
       await mkdir(presentation, { recursive: true });
       await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
-      // Every hosted body's marker is drawn from its default dataset: a companion's colour, a planet's colour or map.
+      // Every hosted body's marker is drawn from its default dataset: a companion's color, a planet's color or map.
       const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([record.spec.id]);
       return { id: record.spec.id, kind: record.spec.kind, files: written.length, ...(hex ? { hex } : {}), ...(kept.length ? { kept } : {}),
         orbit: 'whereistheplanet' in record.spec.orbit ? `whereistheplanet ${record.spec.orbit.whereistheplanet}` : 'archive' in record.spec.orbit ? `NASA Exoplanet Archive (${record.orbitCitation.label})` : 'record' in record.spec.orbit ? `its kept record (${record.orbitCitation.label})` : 'cited elements',
@@ -553,7 +553,7 @@ export async function runHostedPhase(handoff: string, { SOLAR_GEOMETRY_EPOCH_JD_
   for (const saved of records) results.push(written.get(saved)!);
   return results;
 }
-export const formatNewObject = (results: readonly NewObjectResult[]) => `${results.map(result => result.failed ? `${result.id} (${result.kind}): FAILED, not written: ${result.failed}` : `${result.id} (${result.kind}): ${result.files} files.${result.kept?.length ? ` Kept what a person wrote: ${result.kept.join('; ')}.` : ''}${result.hex ? ` Colour ${result.hex}${result.color ? ` from ${result.color}` : ''}${result.crossCheck ? `, cross-checked against ${result.crossCheck.route} (${result.crossCheck.difference} levels)` : ''}.` : ''}${result.limb ? ` Limb ${result.limb}.` : ''}${result.orbit ? ` Orbit from ${result.orbit}.` : ''}\n${result.todo.length ? `  Still to write: ${result.todo.join('; ')}.` : ''}`).join('\n')}\nReplace every ${TODO}, then bake: node packages/bake/cli/prepare-object.mts <id>\n`;
+export const formatNewObject = (results: readonly NewObjectResult[]) => `${results.map(result => result.failed ? `${result.id} (${result.kind}): FAILED, not written: ${result.failed}` : `${result.id} (${result.kind}): ${result.files} files.${result.kept?.length ? ` Kept what a person wrote: ${result.kept.join('; ')}.` : ''}${result.hex ? ` Color ${result.hex}${result.color ? ` from ${result.color}` : ''}${result.crossCheck ? `, cross-checked against ${result.crossCheck.route} (${result.crossCheck.difference} levels)` : ''}.` : ''}${result.limb ? ` Limb ${result.limb}.` : ''}${result.orbit ? ` Orbit from ${result.orbit}.` : ''}\n${result.todo.length ? `  Still to write: ${result.todo.join('; ')}.` : ''}`).join('\n')}\nReplace every ${TODO}, then bake: node packages/bake/cli/prepare-object.mts <id>\n`;
 
 /** A spec file for planet hosts, from the NASA Exoplanet Archive (from-archive.mts); hosts already in the universe get their
  * new planets as host additions. */

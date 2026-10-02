@@ -22,7 +22,7 @@ test('each column integrates back to its measured value, and an empty model colu
   assert.ok(Math.abs(result.droppedShare[0]! - dropped / total) < 1e-12);
 });
 
-test('channels share one depth profile, so a column keeps its colour at every depth', () => {
+test('channels share one depth profile, so a column keeps its color at every depth', () => {
   const a = channel(() => 2), b = channel(x => 1 + x / 2), result = spreadColumns({ width, height, depth, channels: [a, b], profile, depthStep });
   const p = 1 * width + 3;
   const ratios: number[] = [];

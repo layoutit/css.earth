@@ -67,7 +67,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "qualification": "Color from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
         "thumbnail": "beta-pictoris-dataset-color.webp",
         "surface": "beta-pictoris-surface-color@2x.webp",
         "poles": "beta-pictoris-poles-color@2x.webp",
@@ -77,7 +77,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The colour of Gaia DR3's measured spectrum of the star: a blue-white A-type dwarf, the same hue Fomalhaut's ground-based spectrum gives. The darkening toward the edge is the quadratic law Claret and Bloemen (2011) compute from ATLAS model atmospheres for a star of 8,090 K and log g 4.30: a model, because no image measures this star's limb. The spin axis is measured only in projection, so the display axis is celestial north."
+        "notes": "The color of Gaia DR3's measured spectrum of the star: a blue-white A-type dwarf, the same hue Fomalhaut's ground-based spectrum gives. The darkening toward the edge is the quadratic law Claret and Bloemen (2011) compute from ATLAS model atmospheres for a star of 8,090 K and log g 4.30: a model, because no image measures this star's limb. The spin axis is measured only in projection, so the display axis is celestial north."
       },
       {
         "id": "debris-disc-visible",
@@ -89,7 +89,7 @@
           "datasetId": "visible",
           "surface": "color"
         },
-        "notes": "The star in its Gaia colour, with the edge-on disc of dust around it in visible light, as Hubble's STIS coronagraph imaged it in 1997, 2012 and 2013, combined by Ren et al. (2023). It reaches 0.8 arcseconds (16 au) from the star, so the disc is drawn where planet d orbits, 26 au out; planets b and c, at 10 and 2.7 au, orbit inside the part no image reaches. It is one filter shown in grey, brightness only. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Seen from Earth this reproduces the image. Near the star the subtraction leaves some starlight off the disc, which is drawn with it.",
+        "notes": "The star in its Gaia color, with the edge-on disc of dust around it in visible light, as Hubble's STIS coronagraph imaged it in 1997, 2012 and 2013, combined by Ren et al. (2023). It reaches 0.8 arcseconds (16 au) from the star, so the disc is drawn where planet d orbits, 26 au out; planets b and c, at 10 and 2.7 au, orbit inside the part no image reaches. It is one filter shown in gray, brightness only. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Seen from Earth this reproduces the image. Near the star the subtraction leaves some starlight off the disc, which is drawn with it.",
         "falseColor": false,
         "legend": {
           "kind": "categories",
@@ -109,20 +109,20 @@
         }
       },
       {
-        "id": "debris-disc-colour",
-        "label": "Debris disc · Hubble colour",
+        "id": "debris-disc-color",
+        "label": "Debris disc · Hubble color",
         "scope": "system",
         "thumbnail": "beta-pictoris-dataset-color.webp",
         "volume": {
           "objectId": "beta-pictoris-disc",
-          "datasetId": "colour",
+          "datasetId": "color",
           "surface": "color"
         },
-        "notes": "The star in its Gaia colour, with the edge-on disc of dust around it in blue, visible and near-infrared light, as Hubble's ACS coronagraph imaged it on 1 October 2003 (programme 9987, Golimowski et al. 2006). The starlight was removed here from the raw exposures with a reference star, alpha Pictoris, scaled by the brightness ratio the paper states. Each filter is divided by the star's own brightness in it, so the colour is the disc's against the star's: F435W is drawn blue, F606W green and F814W red, and a disc that scattered like the star shines looks white. The paper's scaling leaves some of the star's glow beside the disc, a little bluer than the star, which is drawn with it; the disc comes out slightly bluer than the paper measures. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Seen from Earth this reproduces the image. Nothing is drawn within 1.5 arcseconds (29 au) of the star, and nothing beyond 135 au, where the volume ends; the images themselves show the disc to 320 au.",
+        "notes": "The star in its Gaia color, with the edge-on disc of dust around it in blue, visible and near-infrared light, as Hubble's ACS coronagraph imaged it on 1 October 2003 (programme 9987, Golimowski et al. 2006). The starlight was removed here from the raw exposures with a reference star, alpha Pictoris, scaled by the brightness ratio the paper states. Each filter is divided by the star's own brightness in it, so the color is the disc's against the star's: F435W is drawn blue, F606W green and F814W red, and a disc that scattered like the star shines looks white. The paper's scaling leaves some of the star's glow beside the disc, a little bluer than the star, which is drawn with it; the disc comes out slightly bluer than the paper measures. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Seen from Earth this reproduces the image. Nothing is drawn within 1.5 arcseconds (29 au) of the star, and nothing beyond 135 au, where the volume ends; the images themselves show the disc to 320 au.",
         "falseColor": false,
         "legend": {
           "kind": "categories",
-          "title": "Colour of the dust against the star",
+          "title": "Color of the dust against the star",
           "items": [
             {
               "label": "White",
@@ -152,11 +152,11 @@
           "datasetId": "contrast",
           "surface": "color"
         },
-        "notes": "The star in its Gaia colour, with the edge-on disc of dust around it as JWST/NIRCam imaged it behind a coronagraph on 21 March 2025 (programme 4758), at 2.1 and 4.1 micrometres. Each filter is divided by the star's own brightness in it, which leaves the disc's contrast to the star; 2.1 micrometres is drawn blue, 4.1 red and their mean green. The disc comes out nearly white: its contrast at 4.1 micrometres is within 15% of its contrast at 2.1. These are infrared colours, not what an eye would see. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Seen from Earth this reproduces the image. Nothing is drawn within 2.5 arcseconds (49 au) of the star, where the starlight left after subtraction outweighs the disc, and the light fades into the noise 124 au out.",
+        "notes": "The star in its Gaia color, with the edge-on disc of dust around it as JWST/NIRCam imaged it behind a coronagraph on 21 March 2025 (programme 4758), at 2.1 and 4.1 micrometres. Each filter is divided by the star's own brightness in it, which leaves the disc's contrast to the star; 2.1 micrometres is drawn blue, 4.1 red and their mean green. The disc comes out nearly white: its contrast at 4.1 micrometres is within 15% of its contrast at 2.1. These are infrared colors, not what an eye would see. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Seen from Earth this reproduces the image. Nothing is drawn within 2.5 arcseconds (49 au) of the star, where the starlight left after subtraction outweighs the disc, and the light fades into the noise 124 au out.",
         "falseColor": true,
         "legend": {
           "kind": "categories",
-          "title": "Colour of the dust (contrast to the star)",
+          "title": "Color of the dust (contrast to the star)",
           "items": [
             {
               "label": "White",

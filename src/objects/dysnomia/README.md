@@ -37,7 +37,7 @@ The pole is illustrative (right ascension **0°**, declination **+90°**) and th
 
 The retained state is an osculating geometric snapshot at one epoch, never propagated at runtime. The 110 km uncertainty is Horizons' statement at 2025-Jan-01, not a measured uncertainty at the 2026 scene epoch.
 
-The surface is unmapped. The grid marks that absence; it is not observed colour or terrain.
+The surface is unmapped. The grid marks that absence; it is not observed color or terrain.
 
 ## Preparation
 

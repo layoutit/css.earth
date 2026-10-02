@@ -81,20 +81,20 @@ export function removeForegroundStars(rgb: Buffer, width: number, height: number
     const mask = Math.ceil(radius * (1 + MARGIN)), edge = mask + 1.5;
     const samples = Array.from({ length: FILL_SAMPLES }, (_, k) => {
       const angle = 2 * Math.PI * k / FILL_SAMPLES, x = Math.round(cx + edge * Math.cos(angle)), y = Math.round(cy + edge * Math.sin(angle)), p = 3 * (y * width + x);
-      return inside(x, y) ? [{ x, y, colour: [rgb[p]!, rgb[p + 1]!, rgb[p + 2]!], light: at(x, y) }] : [];
+      return inside(x, y) ? [{ x, y, color: [rgb[p]!, rgb[p + 1]!, rgb[p + 2]!], light: at(x, y) }] : [];
     }).flat();
     // A neighbouring star crossing the ring would be smeared into the fill: samples far above the ring's median are left out.
     const ringMedian = median(samples.map(sample => sample.light)), ringSigma = 1.4826 * median(samples.map(sample => Math.abs(sample.light - ringMedian)));
     const fill = samples.filter(sample => sample.light - ringMedian <= Math.max(PEAK_SIGMAS * ringSigma, PEAK_LEVELS));
     for (let dy = -mask; dy <= mask; dy++) for (let dx = -mask; dx <= mask; dx++) {
       if (dx * dx + dy * dy > mask * mask || !inside(cx + dx, cy + dy)) continue;
-      const x = cx + dx, y = cy + dy, p = y * width + x, colour = [0, 0, 0];
+      const x = cx + dx, y = cy + dy, p = y * width + x, color = [0, 0, 0];
       let total = 0;
       for (const sample of fill) {
         const weight = 1 / ((sample.x - x) ** 2 + (sample.y - y) ** 2);
-        total += weight; for (let c = 0; c < 3; c++) colour[c]! += weight * sample.colour[c]!;
+        total += weight; for (let c = 0; c < 3; c++) color[c]! += weight * sample.color[c]!;
       }
-      for (let c = 0; c < 3; c++) rgb[3 * p + c] = Math.round(colour[c]! / total);
+      for (let c = 0; c < 3; c++) rgb[3 * p + c] = Math.round(color[c]! / total);
       luminance[p] = lum(p);
     }
     removed++; radii.push(mask);
@@ -139,14 +139,14 @@ export function removeCompanionGalaxies(rgb: Buffer, width: number, height: numb
     const samples = Array.from({ length: FILL_SAMPLES * 2 }, (_, k) => {
       const angle = Math.PI * k / FILL_SAMPLES, a = fillAt * galaxy.halfLightPx * Math.cos(angle), b = fillAt * galaxy.halfLightPx * galaxy.axisRatio * Math.sin(angle);
       const x = Math.round(galaxy.x + a * mx - b * my), y = Math.round(galaxy.y + a * my + b * mx), p = y * width + x;
-      return inside(x, y) ? [{ x, y, colour: [rgb[3 * p]!, rgb[3 * p + 1]!, rgb[3 * p + 2]!] }] : [];
+      return inside(x, y) ? [{ x, y, color: [rgb[3 * p]!, rgb[3 * p + 1]!, rgb[3 * p + 2]!] }] : [];
     }).flat();
     for (let dy = -reach; dy <= reach; dy++) for (let dx = -reach; dx <= reach; dx++) {
       const x = cx + dx, y = cy + dy;
       if (!inside(x, y) || radius(dx, dy) > mask) continue;
-      const colour = [0, 0, 0]; let total = 0;
-      for (const sample of samples) { const weight = 1 / ((sample.x - x) ** 2 + (sample.y - y) ** 2 + 1); total += weight; for (let c = 0; c < 3; c++) colour[c]! += weight * sample.colour[c]!; }
-      for (let c = 0; c < 3; c++) rgb[3 * (y * width + x) + c] = Math.round(colour[c]! / total);
+      const color = [0, 0, 0]; let total = 0;
+      for (const sample of samples) { const weight = 1 / ((sample.x - x) ** 2 + (sample.y - y) ** 2 + 1); total += weight; for (let c = 0; c < 3; c++) color[c]! += weight * sample.color[c]!; }
+      for (let c = 0; c < 3; c++) rgb[3 * (y * width + x) + c] = Math.round(color[c]! / total);
     }
     extents.push(Number(mask.toFixed(2)));
   }

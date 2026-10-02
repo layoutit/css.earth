@@ -49,7 +49,7 @@ for (const c of candidates) {
   const bytes = await load(c.path);
   const targetScale = 1; // arcsec/px, matching DSS2 native
   const newWidth = Math.round(c.width * (c.fieldArcminutes[0] * 60 / c.width) / targetScale);
-  const resized = await sharp(bytes).resize({ width: newWidth }).removeAlpha().toColourspace('srgb').png().toBuffer({ resolveWithObject: true });
+  const resized = await sharp(bytes).resize({ width: newWidth }).removeAlpha().toColorspace('srgb').png().toBuffer({ resolveWithObject: true });
   const { data: resizedInfo } = { data: resized.data };
   const actualW = resized.info.width, actualH = resized.info.height;
   const scaleXArcsec = c.fieldArcminutes[0] * 60 / actualW, scaleYArcsec = c.fieldArcminutes[1] * 60 / actualH;

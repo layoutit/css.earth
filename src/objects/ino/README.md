@@ -66,6 +66,6 @@ The maximum sampled source-to-display distance is **951.06 m**. This is a sample
 
 - The pinned mesh is an inverse model, not a directly sampled surface. Fine-scale craters, regolith and albedo are unresolved.
 - DAMIT's 144 ±3 km differs from the publication summary's 145 ±3 km, because the summary can average ADAM and MPCD outputs; the selected mesh has raw volume diameter 144.329.
-- The SPHERE photograph is not albedo or colour. The frames see Ino from 56° to 58° south, so surface the survey did not see keeps the missing-imagery grid.
+- The SPHERE photograph is not albedo or color. The frames see Ino from 56° to 58° south, so surface the survey did not see keeps the missing-imagery grid.
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)

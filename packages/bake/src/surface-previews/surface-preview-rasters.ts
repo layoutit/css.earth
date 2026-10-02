@@ -45,7 +45,7 @@ export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory,
   // One-channel grayscale maps are expanded to sRGB before the RGBA unpacking.
   const read = async (file:string) => {
     const image = sharp(resolve(publicDirectory, basename(file))), { channels = 3 } = await image.metadata();
-    return (channels < 3 ? image.toColourspace('srgb') : image).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    return (channels < 3 ? image.toColorspace('srgb') : image).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   };
   const packed = async (file:string, layout:Parameters<typeof createProjectiveSurfaceRasterLayout>[0]) => unpackSurfacePreview(await read(file), layout);
   if (rawObservations?.schema === 'cssearth-observed-polar-surfaces@2') {

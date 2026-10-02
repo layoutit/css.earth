@@ -1,7 +1,7 @@
 # Andromeda Galaxy (M31)
 
-A survey photograph of M31, cleaned of the Milky Way stars and companion galaxies in front of it and colour-tied to its
-measured integrated colour, is spread through a modelled disc and a round bulge. Published catalogues of its HII regions,
+A survey photograph of M31, cleaned of the Milky Way stars and companion galaxies in front of it and color-tied to its
+measured integrated color, is spread through a modelled disc and a round bulge. Published catalogues of its HII regions,
 Cepheids, supernova remnants, planetary nebulae and stars are drawn as dots on the same disc. Image brightness does not
 measure per-pixel distance.
 
@@ -37,7 +37,7 @@ The image-layer bake ([`prepare.ts`](../../../packages/bake/src/image-layers/pre
 - **Removes foreground stars** ([`foreground.ts`](../../../packages/bake/src/image-layers/foreground.ts)), replacing
   30,084 of the 52,363 Gaia foreground stars in the image with the light around them.
 - **Removes M32 and NGC 205** the same way, out to 8.4 and 3 half-light radii.
-- **Ties the colour** to RC3's B-V of 0.92 by scaling red and blue in linear light (gains red 0.896, blue 1.154).
+- **Ties the color** to RC3's B-V of 0.92 by scaling red and blue in linear light (gains red 0.896, blue 1.154).
 - **Splits bulge from disc** by Dorman et al.'s fitted share of the light at each sky position. Where the photograph is
   saturated, the fit's own light stands in.
 
@@ -68,7 +68,7 @@ places each object on the image layers' disc ([`disc.ts`](../../../packages/bake
 
 Each dot keeps its place in the disc at a height drawn from its population's layer: Braun's gas layer for young objects,
 770 pc for planetary nebulae. Dots are toned by the photograph beneath them so they sit in the galaxy's light; stars are
-coloured by their measured B-V. These are presentation choices.
+colored by their measured B-V. These are presentation choices.
 
 ## Evidence
 

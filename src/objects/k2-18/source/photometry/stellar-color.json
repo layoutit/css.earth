@@ -18,7 +18,7 @@
       "kind": "flux"
     },
     "gaps": [],
-    "note": "Ground-based fibre spectrum taken 2014-03-21, 370-910 nm with a relative flux calibration, which is all a colour needs. The header carries a fibre warning (FIB_MASK 192); both pixel masks are zero."
+    "note": "Ground-based fibre spectrum taken 2014-03-21, 370-910 nm with a relative flux calibration, which is all a color needs. The header carries a fibre warning (FIB_MASK 192); both pixel masks are zero."
   },
   "whitePoint": "sRGB D65",
   "normalization": "brightest linear sRGB channel = 1",

@@ -6,7 +6,7 @@ Its radius and temperature follow Crossfield et al. 2025. It is also HD 96735, H
 
 **Star.** Placement: Gaia DR3 source 761300339243646848, parallax 16.068 ± 0.019 mas (62.23 pc). Radius 0.957 +/- 0.046 solar radii from Crossfield et al. 2025, the stellar radius of the default parameter set of TOI-1799 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract). Mass 1.01 +/- 0.13 solar masses from Crossfield et al. 2025, the stellar mass of the default parameter set of TOI-1799 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract). Temperature 5,690 K from Crossfield et al. 2025, the stellar temperature of the default parameter set of TOI-1799 b in the NASA Exoplanet Archive. log g 4.48 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 761300339243646848, through the CIE 1931 2° observer: #fff2f0. Routes tried in order: stis-ngsl: HD 96735 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 761300339243646848, through the CIE 1931 2° observer: #fff2f0. Routes tried in order: stis-ngsl: HD 96735 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,690 K and log g 4.48 (u1 0.478, u2 0.248): a model, because no fit of this star's limb is used.
 

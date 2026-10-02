@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 0.86 +/- 0.01 solar radii from Santerne et al. 2016, the stellar radius of the default parameter set of K2-29 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...824...55S/abstract); Mass 0.94 +/- 0.02 solar masses from Santerne et al. 2016, the stellar mass of the default parameter set of K2-29 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...824...55S/abstract); temperature from Santerne et al. 2016, the stellar temperature of the default parameter set of K2-29 b in the NASA Exoplanet Archive.
 
-Colour: Gaia DR3 XP spectrum, source 150054788545735424, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: Gaia DR3 XP spectrum, source 150054788545735424, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 

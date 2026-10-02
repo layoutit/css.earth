@@ -3,10 +3,10 @@
   "objectId": "hr-8799-b",
   "entries": [
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
-      "finding": "The planet's flux densities in JWST/NIRCam F460M, F430M and F410M, 64.5, 72.6 and 164.6 µJy (Balmer et al. 2025, Table 2), drive red, green and blue. The result, #6e75aa, is infrared false colour, not what an eye would see, and one colour for the whole disc.",
+      "finding": "The planet's flux densities in JWST/NIRCam F460M, F430M and F410M, 64.5, 72.6 and 164.6 µJy (Balmer et al. 2025, Table 2), drive red, green and blue. The result, #6e75aa, is infrared false color, not what an eye would see, and one color for the whole disc.",
       "evidence": [
         "https://doi.org/10.3847/1538-3881/adb1c6",
         "https://arxiv.org/abs/2503.13608"

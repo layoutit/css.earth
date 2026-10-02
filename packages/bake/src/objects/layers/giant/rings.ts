@@ -77,8 +77,8 @@ function bandCoverage(radius: number, angle: number, band: ReturnType<typeof pre
     (1 - smoothstep(band.outer, band.outer + band.outerFade, radius));
 }
 
-/** A band's colour: no ring here has a measured colour, so each takes the one neutral gray. */
-const RING_COLOUR: readonly number[] = NEUTRAL_CATALOGUE_RGB;
+/** A band's color: no ring here has a measured color, so each takes the one neutral gray. */
+const RING_COLOR: readonly number[] = NEUTRAL_CATALOGUE_RGB;
 /** The fraction of light a band of normal optical depth tau stops, seen face-on: 1 - exp(-tau). */
 export const bandOpacity = (opticalDepth: number) => 1 - Math.exp(-opticalDepth);
 
@@ -101,7 +101,7 @@ function annularTexel(recipe: AnnularLayer, setup: ReturnType<typeof annularSetu
     : Math.hypot(dx * pixelScale, dy * pixelScale);
   const angle = grid.scaleOrder === 'divide-multiply' ? Math.atan2(dy, dx) : Math.atan2(dy * pixelScale, dx * pixelScale);
   let alpha = 0;
-  let color: readonly number[] = RING_COLOUR;
+  let color: readonly number[] = RING_COLOR;
   const premultiplied = [0, 0, 0];
   for (const band of preparedBands) {
     const coverage = bandCoverage(radius, angle, band);
@@ -109,7 +109,7 @@ function annularTexel(recipe: AnnularLayer, setup: ReturnType<typeof annularSetu
     const bandAlpha = recipe.alphaUnits * bandOpacity(band.opticalDepth) * coverage;
     if (recipe.composition === 'front-to-back') {
       const contribution = bandAlpha * (1 - alpha);
-      for (let channel = 0; channel < 3; channel++) premultiplied[channel] += RING_COLOUR[channel]! * contribution;
+      for (let channel = 0; channel < 3; channel++) premultiplied[channel] += RING_COLOR[channel]! * contribution;
       alpha += contribution;
     } else {
       alpha = Math.max(alpha, bandAlpha);
@@ -270,8 +270,8 @@ function fillGaps(values: Float64Array) {
 }
 
 /**
- * The colour and transparency rows an observed radial layer samples. Two forms exist: a pair of one-row RGB images, or a
- * PDS occultation table with a uniform colour. In the table form each 1 km bin's normal optical depth becomes a
+ * The color and transparency rows an observed radial layer samples. Two forms exist: a pair of one-row RGB images, or a
+ * PDS occultation table with a uniform color. In the table form each 1 km bin's normal optical depth becomes a
  * transmission byte, 255·exp(−τ); a bin whose depth is the table's missing value and whose flag is clean is below the
  * instrument's detection floor and counts as empty, a bin flagged corrupted is interpolated from its neighbours.
  */
@@ -285,7 +285,7 @@ export async function loadObservedProfile(layer: ObservedRadialLayer, inputs: Re
     return { color: color.data, transparency: transparency.data, width: color.info.width };
   }
   const profile = layer.opticalDepthProfile, bytes = inputs.get(profile.path);
-  if (!bytes || !layer.color) throw new TypeError('An optical depth profile needs its table and a uniform colour.');
+  if (!bytes || !layer.color) throw new TypeError('An optical depth profile needs its table and a uniform color.');
   const [inner, outer] = layer.sourceBounds, width = Math.round(outer - inner) + 1;
   const depth = new Float64Array(width).fill(Number.NaN);
   let measured = 0;

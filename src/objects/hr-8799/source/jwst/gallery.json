@@ -4,7 +4,7 @@
   "label": "Telescope images",
   "sourcePage": "https://arxiv.org/abs/2503.13608",
   "credit": "JWST GTO programme 1194 (PI C. Beichman), raw frames from MAST; reduced here with spaceKLIP (packages/telescope-cli/src/archives/jwst/klip) following Balmer et al. (2025)",
-  "qualification": "Our reduction of the raw JWST frames, following Balmer et al. (2025), in the paper's own colour scale. North up, 5.8 arcseconds across.",
+  "qualification": "Our reduction of the raw JWST frames, following Balmer et al. (2025), in the paper's own color scale. North up, 5.8 arcseconds across.",
   "items": [
     {
       "id": "nircam-f410m-2023-11",

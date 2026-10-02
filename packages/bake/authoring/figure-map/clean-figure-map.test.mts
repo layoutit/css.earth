@@ -17,9 +17,9 @@ test('annotation rectangles and background become exact black; data pixels, howe
   const width = 10, height = 10, rgb = new Uint8Array(width * height * 3);
   const set = (x: number, y: number, c: number[]) => rgb.set(c, (y * width + x) * 3);
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) set(x, y, [200, 100, 20]);
-  set(2, 2, [255, 253, 220]);   // the palest data colour is not an annotation
+  set(2, 2, [255, 253, 220]);   // the palest data color is not an annotation
   set(4, 8, [10, 0, 19]);       // background halo
-  set(4, 7, [0, 0, 20]);        // darkest data colour survives
+  set(4, 7, [0, 0, 20]);        // darkest data color survives
   const { rgb: out, report } = cleanFigure(rgb, width, height, recipe);
   const at = (x: number, y: number) => [...out.subarray((y * 8 + x) * 3, (y * 8 + x) * 3 + 3)];
   assert.deepEqual(at(0, 3), [0, 0, 0], 'grid line row');

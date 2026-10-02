@@ -57,8 +57,8 @@ unmapped terrain.
 The adopted Q1R and Q2R radii are 4057.2 km and 2520 km. Q1R uses the 76.4 km width
 of the tenuous component measured at one Gemini chord as a circular schematic.
 Its actual width varies with azimuth; the dense arc is not reconstructed. Q2R uses
-the published typical 10 km width. Each ring's opacity is 1 − exp(−0.004), and its colour
-the neutral gray of a body without a measured colour; a display opacity of 0.4 was removed on 2026-10-01. Both bands use the shared terrestrial ring preparation capability.
+the published typical 10 km width. Each ring's opacity is 1 − exp(−0.004), and its color
+the neutral gray of a body without a measured color; a display opacity of 0.4 was removed on 2026-10-01. Both bands use the shared terrestrial ring preparation capability.
 
 The [table tool](../../../packages/telescope-cli/src/source-authoring/README.md) reproduces the
 pinned radii from [measurements](source/measurements.json).

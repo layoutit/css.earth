@@ -14,5 +14,5 @@
     "node": "22.23.2",
     "zstd": "1.5.7"
   },
-  "preservation": "Every decoded RGB HALF bit is preserved. Two row chunks keep individual Git blobs below 100 MiB; no resolution, dynamic-range or colour reduction."
+  "preservation": "Every decoded RGB HALF bit is preserved. Two row chunks keep individual Git blobs below 100 MiB; no resolution, dynamic-range or color reduction."
 }

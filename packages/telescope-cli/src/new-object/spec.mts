@@ -14,7 +14,7 @@
  *     "spin": { "inclinationDegrees": 62, "periodDays": 2.32, "source": "…", "url": "…" },
  *     "radialVelocity": { "value": 18.2, "source": "…", "url": "…" },
  *     "limb": { "none": "why no law is drawn" },
- *     "color": { "skip": ["gaia-xp"], "reason": "why those routes are not used", "disagreement": "why the colour and its cross-check differ" },
+ *     "color": { "skip": ["gaia-xp"], "reason": "why those routes are not used", "disagreement": "why the color and its cross-check differ" },
  *     "planets": [{ "id": "wasp-121b", "name": "WASP-121b", "description": "…", "paper": { … }, "orbit": { "archive": "nasa-ps", "reference": "BOURRIER_ET_AL__2020" } }],
  *     "companions": [{ "id": "…", "name": "…", "description": "…", "paper": { … }, "temperature": { … }, "radius": { … }, "mass": { … }, "orbit": { … } }]
  *   }]
@@ -28,7 +28,7 @@
  * S-stars of packages/astronomy/cli/generate-s-stars.mts): the record is kept as it is and only the package is written, and the spec's
  * cited radius and mass must reproduce the record's. A planet's radius and mass are in Jupiter units and default to the archive row's;
  * a planet with a cited `temperature` glows with its own heat (a young giant imaged directly). A companion is a star: solar units,
- * temperature required; `colorReason` says why its colour is a Planck spectrum when that is not because the archives cannot separate it
+ * temperature required; `colorReason` says why its color is a Planck spectrum when that is not because the archives cannot separate it
  * from its star. A companion with `"blackHole": true` is a black hole: no temperature, a radius only if a source measures one (else the
  * records' unmeasured 0), and an astronomy record only, drawn in its star's system, with no package of its own.
  *
@@ -56,8 +56,8 @@
  * `text` ({ card, introduction, locator }) is drafted reader text cited to the paper, as `--from-archive` writes it; without it the
  * card and introduction stay marked for a person. `notes` are sentences for the README's "Not shown" list. A planet may carry
  * `thermal` (a measured dayside brightness temperature from the archive's emission table, for the "Thermal glow" dataset) or
- * `photometry` (three-band flux densities for the band-colour dataset); planet-datasets.mts. `phaseCurves` adds a heat-map dataset per
- * published phase-curve fit beside the colour dataset (phase-curve-dataset.mts).
+ * `photometry` (three-band flux densities for the band-color dataset); planet-datasets.mts. `phaseCurves` adds a heat-map dataset per
+ * published phase-curve fit beside the color dataset (phase-curve-dataset.mts).
  *
  * A file may also hold `"pulsars": [ … ]`: neutron stars with a published hot-region map, written whole from cited values (pulsar.mts). */
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -87,7 +87,7 @@ export interface StarSpec {
   readonly position?: CataloguePosition;
   readonly spin?: { readonly inclinationDegrees: number; readonly periodDays?: number; readonly source: string; readonly url: string };
   readonly limb?: { readonly none: string };
-  /** `disagreement` says why the colour and its cross-check differ by more than the agreement threshold, for the colour record. */
+  /** `disagreement` says why the color and its cross-check differ by more than the agreement threshold, for the color record. */
   readonly color?: { readonly skip: readonly ColorRoute[]; readonly reason: string; readonly disagreement?: string };
   readonly planets: readonly HostedSpec[]; readonly companions: readonly HostedSpec[];
   /** Drafted reader text, cited to the paper at `locator`; without it the card and introduction stay marked for a person. */
@@ -137,7 +137,7 @@ export type OrbitSpec =
   | { readonly record: true; readonly source: string; readonly url: string };
 /** A measured dayside brightness temperature (secondary eclipse) for the "Thermal glow" dataset (planet-datasets.mts). */
 export interface ThermalSpec { readonly temperatureK: number; readonly uncertaintyK?: number; readonly wavelengthMicrometres: number; readonly facility: string; readonly source: string; readonly url: string; readonly chosen: string }
-/** Published flux densities in three infrared bands for the band-colour dataset of an imaged planet (planet-datasets.mts): red, green,
+/** Published flux densities in three infrared bands for the band-color dataset of an imaged planet (planet-datasets.mts): red, green,
  * blue from the longest wavelength, on one display range shared with the bodies it names. */
 export interface PhotometrySpec {
   readonly unit: string; readonly source: { readonly citation: string; readonly url: string; readonly locator: string };
@@ -149,11 +149,11 @@ export interface HostedSpec {
   readonly kind: 'planet' | 'companion'; readonly id: string; readonly name: string; readonly description: string; readonly order?: number;
   readonly paper: { readonly url: string; readonly credit: string };
   readonly radius?: Cited; readonly mass?: Cited; readonly temperature?: Cited; readonly orbit: OrbitSpec; readonly text?: DraftText; readonly thermal?: ThermalSpec; readonly photometry?: PhotometrySpec;
-  /** Heat maps from published phase-curve fits, added beside the colour dataset (phase-curve-dataset.mts). */
+  /** Heat maps from published phase-curve fits, added beside the color dataset (phase-curve-dataset.mts). */
   readonly phaseCurves?: readonly PhaseCurveEntry[];
   /** A companion that is a black hole: an astronomy record only (spec header). */
   readonly blackHole?: true;
-  /** Why a companion's colour is a Planck spectrum at its temperature, when not because the archives cannot separate it. */
+  /** Why a companion's color is a Planck spectrum at its temperature, when not because the archives cannot separate it. */
   readonly colorReason?: string;
 }
 const ELEMENT_KEYS = ['periodDays', 'semiMajorAxisStellarRadii', 'inclinationDegrees', 'eccentricity', 'argumentOfPeriapsisDegrees', 'transitTimeBmjdTdb', 'ascendingNodePositionAngleDegrees'];
@@ -193,14 +193,14 @@ function hostedSpec(value: unknown, kind: HostedSpec['kind'], label: string): Ho
   const thermal = input.thermal === undefined ? undefined : thermalSpec(input.thermal, at('thermal'));
   if (thermal && kind !== 'planet') throw new TypeError(`${id}: a thermal dataset is a planet's; a companion star has its temperature.`);
   const photometry = input.photometry === undefined ? undefined : photometrySpec(input.photometry, at('photometry'));
-  if (photometry && (kind !== 'planet' || thermal)) throw new TypeError(`${id}: band photometry is a planet's one colour dataset; not with a companion star or a thermal dataset.`);
+  if (photometry && (kind !== 'planet' || thermal)) throw new TypeError(`${id}: band photometry is a planet's one color dataset; not with a companion star or a thermal dataset.`);
   const phaseCurves = input.phaseCurves === undefined ? undefined : requireArray(input.phaseCurves, at('phaseCurves')).map((entry, i) => phaseCurveEntry(entry, at(`phaseCurves[${i}]`)));
   if (phaseCurves && kind !== 'planet') throw new TypeError(`${id}: a phase-curve map is a planet's.`);
   if (input.blackHole !== undefined && input.blackHole !== true) throw new TypeError(`${id}.blackHole is true or absent, not ${JSON.stringify(input.blackHole)}.`);
   const blackHole = input.blackHole === true;
   if (blackHole && kind !== 'companion') throw new TypeError(`${id}: only a companion may be a black hole.`);
   if (blackHole && input.temperature !== undefined) throw new TypeError(`${id}: a black hole has no effective temperature.`);
-  if (input.colorReason !== undefined && (kind !== 'companion' || blackHole)) throw new TypeError(`${id}: colorReason explains a companion star's Planck colour.`);
+  if (input.colorReason !== undefined && (kind !== 'companion' || blackHole)) throw new TypeError(`${id}: colorReason explains a companion star's Planck color.`);
   const range = kind === 'planet' ? { radius: [0.01, 5] as const, mass: [0.0001, 100] as const } : { radius: [0.005, 3000] as const, mass: [0.01, 300] as const };
   const out: HostedSpec = { kind, id, name: requireString(input.name, at('name')), description: requireString(input.description, at('description')),
     ...(input.order === undefined ? {} : { order: requireFiniteNumber(input.order, at('order')) }), paper: { url: requireString(paper.url, at('paper.url')), credit: requireString(paper.credit, at('paper.credit')) },
@@ -266,7 +266,7 @@ export function parseStarSpec(value: unknown): StarSpec {
   const color = input.color === undefined ? undefined : (() => {
     const c = requireRecord(input.color, at('color')), skip = requireArray(c.skip ?? [], at('color.skip')).map(route => requireString(route, at('color.skip')));
     const bad = skip.filter(route => !COLOR_ROUTES.includes(route as ColorRoute));
-    if (bad.length) throw new TypeError(`${at('color.skip')}: ${bad.join(', ')} are not colour routes (${COLOR_ROUTES.join(', ')}).`);
+    if (bad.length) throw new TypeError(`${at('color.skip')}: ${bad.join(', ')} are not color routes (${COLOR_ROUTES.join(', ')}).`);
     return { skip: skip as ColorRoute[], reason: skip.length ? requireString(c.reason, at('color.reason')) : '', ...(c.disagreement === undefined ? {} : { disagreement: requireString(c.disagreement, at('color.disagreement')) }) };
   })();
   const limb = input.limb === undefined ? undefined : { none: requireString(requireRecord(input.limb, at('limb')).none, at('limb.none')) };

@@ -4,7 +4,7 @@
  * column integral reproduces the value. It is never extruded: a column the model leaves empty has no depth to go to and is
  * dropped, and its share of the light is reported.
  *
- * Up to four channels (bands or colour stops) share one depth profile per column, so a column's chromaticity is the same at
+ * Up to four channels (bands or color stops) share one depth profile per column, so a column's chromaticity is the same at
  * every depth; shared-opacity compositing then reproduces the image exactly from the front. The grid is encoded as
  * sqrt-density-unorm8 RGBA, x fastest, then y, then depth. */
 export interface ColumnDepthInput {

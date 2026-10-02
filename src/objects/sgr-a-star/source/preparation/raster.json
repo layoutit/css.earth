@@ -26,7 +26,7 @@
       "falseColor": false,
       "science": {
         "kind": "black-shadow",
-        "qualification": "The measured shadow drawn as a black disc that always faces the viewer. A display convention; not an event horizon, a surface or a measured colour. No lighting. Around it, on the off-limb plate, the EHT's 1.3 mm image of 2017 April 7: the mean of 200 reconstructions drawn at random from the 5594 of EHT Sgr A* Paper III's eht-imaging Top Set, on eht-imaging's own display colour map (matplotlib afmhot, linear, sampled at quarter steps), a legend for relative intensity and not a colour.",
+        "qualification": "The measured shadow drawn as a black disc that always faces the viewer. A display convention; not an event horizon, a surface or a measured color. No lighting. Around it, on the off-limb plate, the EHT's 1.3 mm image of 2017 April 7: the mean of 200 reconstructions drawn at random from the 5594 of EHT Sgr A* Paper III's eht-imaging Top Set, on eht-imaging's own display color map (matplotlib afmhot, linear, sampled at quarter steps), a legend for relative intensity and not a color.",
         "offLimb": {
           "path": "observations/eht-2017-04-07-topset-mean.fits",
           "encoding": "fits-oi-reconstruction",

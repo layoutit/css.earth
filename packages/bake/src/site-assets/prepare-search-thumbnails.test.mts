@@ -36,7 +36,7 @@ test('featured-star previews reuse arrival pixels, including an older restored a
     assert.equal(star.info.width, 80);
     assert.equal(star.info.height, 80);
     const centre = 4 * (40 * 80 + 40);
-    assert.ok(Math.abs(star.data[centre]! - star.data[centre + 1]!) < 3, 'arrival colour replaces the red catalogue disc');
+    assert.ok(Math.abs(star.data[centre]! - star.data[centre + 1]!) < 3, 'arrival color replaces the red catalogue disc');
     const other = await readFile(otherPath);
     await writeFile(arrival, await picture(190, 190, 190));
     await utimes(arrival, new Date(0), new Date(0));

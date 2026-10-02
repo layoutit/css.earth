@@ -54,8 +54,8 @@ const NACO_LEDGER = { schema: 'cssearth-naco-ledger@2', measured: '2026-09-19',
       { id: '076.C-0580-A-VESTA-2006-01-01-imaging', programme: '076.C-0580(A)', archiveTarget: 'VESTA', mode: 'imaging', night: '2006-01-01',
         startIso: '2006-01-01T01:00:00Z', endIso: '2006-01-01T02:00:00Z', frames: 100 }] }] };
 const JUNO_LEDGER = { schema: 'cssearth-junocam-ledger@1', measured: '2026-09-19', objects: [
-  { id: 'europa', target: 'EUROPA', colourImages: 52, measuredImages: 4, programs: ['europa-pj45'], state: 'measured', why: '4 image(s) registered.' },
-  { id: 'io', target: 'IO', colourImages: 247, measuredImages: 0, programs: [], state: 'not measured', why: 'No program of this target is pinned.' }] };
+  { id: 'europa', target: 'EUROPA', colorImages: 52, measuredImages: 4, programs: ['europa-pj45'], state: 'measured', why: '4 image(s) registered.' },
+  { id: 'io', target: 'IO', colorImages: 247, measuredImages: 0, programs: [], state: 'not measured', why: 'No program of this target is pinned.' }] };
 const SPITZER_LEDGER = { schema: 'cssearth-spitzer-ledger@4', archiveDate: '2026-09-19', searched: ['itokawa'], modes: [
   { mode: 'IRAC Map PC', tool: null, programs: [], checked: [], receipts: [] }, { mode: 'IRS Stare', tool: null, programs: [], checked: [], receipts: [] }], holdings: [{ object: 'itokawa', modes: { 'IRAC Map PC': 1, 'IRS Stare': 2 }, records: [
     { id: '1', programme: '292', mode: 'IRS Stare', title: 'epoch one', startIso: '2007-05-03T23:01:47.812Z', endIso: '2007-05-03T23:36:43.455Z' },
@@ -409,7 +409,7 @@ test('evidence that names no single mode is set aside with what it could mean', 
   const investigations = { path: 'src/objects/europa/investigations.json', value: { schema: 'cssearth-investigation-ledger@1', objectId: 'europa',
     entries: [{ id: 'jwst-carbon-dioxide', status: 'unresolved', subject: 'JWST NIRSpec carbon dioxide', finding: 'The released map is a figure, not a grid.' },
       { id: 'nirspec-ifu-short-gratings', status: 'excluded', subject: 'The NIRSPEC/IFU short gratings', finding: 'They saturate on Europa below 2.3 micrometres.' },
-      { id: 'galileo-colour', status: 'included', subject: 'Controlled Galileo colour', finding: 'No telescope of this repository is involved.' }] } };
+      { id: 'galileo-color', status: 'included', subject: 'Controlled Galileo color', finding: 'No telescope of this repository is involved.' }] } };
   const answer = queryCapabilities({ target: 'europa', wavelengthMicrometres: [3.4, 3.6] },
     inputs([{ telescope: 'jwst', value: JWST_LEDGER }], { bodyMaps: [{ path: 'src/objects/europa/source/jwst/co2.body-map.json', value: bodyMap('JWST', 'NIRSPEC', 'jw01250-o001') },
       { path: 'src/objects/europa/source/other/sphere.body-map.json', value: bodyMap('VLT/SPHERE', 'IRDIS', 'sphere-1') }], investigations }));

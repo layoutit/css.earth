@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-1450 A. Its orbit and size follow Brady 
 
 **Orbit.** Brady et al. 2024 (2024AJ....168...67B), via the NASA Exoplanet Archive ps table (pl_refname BRADY_ET_AL_2024): P 2.0439274 d Brady et al. 2024 (2024AJ....168...67B), via the NASA Exoplanet Archive ps table (pl_refname BRADY_ET_AL_2024): a/R* 11.23; Brady et al. 2024 (2024AJ....168...67B), via the NASA Exoplanet Archive ps table (pl_refname BRADY_ET_AL_2024): inclination 86.245 degrees No archive row states an eccentricity; the orbit is taken as circular Brady et al. 2024 (2024AJ....168...67B), via the NASA Exoplanet Archive ps table (pl_refname BRADY_ET_AL_2024): transit mid-time 2458685.34221 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1450-a's measured colour (#ffcb8c, the colour dataset of toi-1450-a (src/objects/toi-1450-a/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1450-a's measured color (#ffcb8c, the color dataset of toi-1450-a (src/objects/toi-1450-a/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1450 A's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (84, 85, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

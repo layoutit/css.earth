@@ -9,6 +9,12 @@
     },
     {
       "location": "public",
+      "filename": "eris-billboard.webp",
+      "bytes": 5560,
+      "sha256": "6f4794f9fd8addced7cb436078f4cc855703034f3f702526bc3ec2735c8e44be"
+    },
+    {
+      "location": "public",
       "filename": "eris-color-page-0-level-1040.webp",
       "bytes": 78,
       "sha256": "0ace6a1bcafae3c304f0df40233fa19b4a474e5ab0fa55c197fac56f2c319738"
@@ -310,8 +316,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 80929,
-      "sha256": "d4c75e77f16dda3856710e337c9c440cb700509aa2d6b71bc42415e337c39555"
+      "bytes": 80928,
+      "sha256": "779d9f58316394900b69b24091a0aad9be6b7875729bf1988252221e4856d01c"
     },
     {
       "location": "prepared",
@@ -334,8 +340,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1332,
-      "sha256": "d17193a8f7ccfe3e86e99e317e680103d1fba81cb0e25b54c08e2a68b32b4769"
+      "bytes": 1331,
+      "sha256": "bba05c6c01a7e25d1424647d9411c91d6b348ba83bc4921075b68e66fae650a8"
     },
     {
       "location": "prepared",
@@ -382,20 +388,14 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 982,
-      "sha256": "5330d780bcda01b6d87012d4789a3c99df18fbc8a5d713a405552306d84541f3"
+      "bytes": 979,
+      "sha256": "f043225e6e49c013c0afb1a9de13d8f64067d747bcd0278acdc0229ee959b9db"
     },
     {
       "location": "prepared",
       "filename": "world-navigation.json",
       "bytes": 1174,
       "sha256": "00c2510bbba907295aef626ff2d4448228a473ca3df06fa52dec284f9b446248"
-    },
-    {
-      "location": "public",
-      "filename": "eris-billboard.webp",
-      "bytes": 5560,
-      "sha256": "6f4794f9fd8addced7cb436078f4cc855703034f3f702526bc3ec2735c8e44be"
     }
   ]
 }

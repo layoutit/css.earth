@@ -90,7 +90,7 @@ test('a dataset channel gain scales its own chromaticity and never tints the zon
     read(alphaLimitedSlabMaterial(compilerSlabMaterial(dense, orange), dense, 1, 24)));
   assert.deepEqual(read(datasetChannelGainMaterial(compilerSlabMaterial(dense, orange), dense, 1, undefined, null)),
     read(compilerSlabMaterial(dense, orange)));
-  // Where alpha carries colour, the gain is the plain per-channel multiplier it claims to be.
+  // Where alpha carries color, the gain is the plain per-channel multiplier it claims to be.
   assert.deepEqual(read(datasetChannelGainMaterial(compilerSlabMaterial(dense, orange), dense, 1, 24, [.5, .5, .5])).map(Math.round), [128, 64, 0]);
   const bluer = (_x: number, _y: number, _z: number, o: [number, number, number]) => { o[0] = 200; o[1] = 100; o[2] = 100; return true; };
   assert.deepEqual(read(datasetChannelGainMaterial(compilerSlabMaterial(dense, bluer), dense, 1, 24, [1, 1, 1.5])).map(Math.round), [200, 100, 150]);
@@ -132,11 +132,11 @@ test('a dataset tone curve moves the render onto its curve, stays neutral in the
   const identity = validateDatasetToneCurve({ schema: 'cssearth-dataset-tone-curve@1', knots, channels: [knots, knots, knots] });
   const dim = validateDatasetToneCurve({ schema: 'cssearth-dataset-tone-curve@1', knots, channels: [[0, 64, 127.5], [0, 128, 255], [0, 96, 191.25]] });
   const level = 200, levelAt = () => level;
-  // Absent: exactly the accepted composition. Identity: the same colours (up to float rounding).
+  // Absent: exactly the accepted composition. Identity: the same colors (up to float rounding).
   assert.deepEqual(read(datasetChannelGainMaterial(compilerSlabMaterial(dense, orange), dense, 1, 24, null, null)),
     read(datasetChannelGainMaterial(compilerSlabMaterial(dense, orange), dense, 1, 24, null)));
   assert.deepEqual(read(datasetChannelGainMaterial(compilerSlabMaterial(dense, orange), dense, 1, 24, null, { curve: identity, levelAt })).map(Math.round), [255, 128, 0]);
-  // Where alpha carries colour the painted render level is exactly the curve's value: red halves.
+  // Where alpha carries color the painted render level is exactly the curve's value: red halves.
   const toned = read(datasetChannelGainMaterial(compilerSlabMaterial(dense, orange), dense, 1, 24, null, { curve: dim, levelAt }));
   assert.ok(Math.abs(level * toned[0] / 255 - datasetToneRender(dim, 0, level, level)) < 1e-9, `red on the curve: ${toned}`);
   assert.ok(Math.abs(toned[1] - 128) < 1e-9, `green identity: ${toned}`);

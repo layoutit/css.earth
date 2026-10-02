@@ -25,12 +25,12 @@
       "id": "neutral-gray-shape-dataset",
       "subject": "Shared neutral gray for the unresolved surface",
       "status": "excluded",
-      "finding": "Replaced by the measured whole-disc colour. The gray was a display convention; published rotation-corrected colour indices and an occultation-based V geometric albedo now give Haumea a measured uniform colour (sRGB 188, 189, 191).",
+      "finding": "Replaced by the measured whole-disc color. The gray was a display convention; published rotation-corrected color indices and an occultation-based V geometric albedo now give Haumea a measured uniform color (sRGB 188, 189, 191).",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/haumea/source/photometry/disc-color.json",
         "https://github.com/layoutit/css.earth/blob/main/docs/shape-only-material.md"
       ],
-      "revisitWhen": "The published colour or albedo is withdrawn or shown not to describe the whole disc."
+      "revisitWhen": "The published color or albedo is withdrawn or shown not to describe the whole disc."
     },
     {
       "id": "resolved-surface-imagery",
@@ -104,7 +104,7 @@
       "subject": "Light curves and rotationally resolved spectra as a surface map",
       "status": "excluded",
       "finding": "Disc-integrated data taken as Haumea spins constrain brightness or composition by rotational phase only: optical light curves (Lacerda 2010), Herschel thermal light curves (Santos-Sanz et al. 2017), VLT/SINFONI spectra from 2006 to 2013 (Gourgeot et al. 2016, spectral slope 1.45 +/- 0.82 % per 100 nm redder at the Dark Red Spot, no significant water-ice band difference) and JWST NIRSpec IFU spectra from program 1273 (March and July 2023). None gives latitude. Lacerda (2010) shows the spot's size and darkness are degenerate: from a few percent of the cross-section at about 20% of the surrounding albedo to a full hemisphere only 5% darker. A texture drawn from these would be one chosen model, not a measurement.",
-      "revisitWhen": "A published two-dimensional albedo or colour map of Haumea with stated uncertainties.",
+      "revisitWhen": "A published two-dimensional albedo or color map of Haumea with stated uncertainties.",
       "evidence": [
         "https://arxiv.org/abs/0911.0009",
         "https://arxiv.org/abs/1705.09117",
@@ -113,10 +113,10 @@
       ]
     },
     {
-      "id": "rabinowitz-2006-colours",
-      "subject": "Rabinowitz et al. (2006) rotation-corrected BVRI colours",
+      "id": "rabinowitz-2006-colors",
+      "subject": "Rabinowitz et al. (2006) rotation-corrected BVRI colors",
       "status": "included",
-      "finding": "The weighted average of three nights (2005 January 25-27) after subtracting the rotational light curve, B-V 0.626 +/-0.025, V-R 0.343 +/-0.020, V-I 0.683 +/-0.020 (section 3.4, Table 3), gives the Color dataset with the Ortiz et al. (2017) albedo through the disc-integrated-color method: linear sRGB 0.504, 0.511, 0.522, sRGB 188, 189, 191. Each colour uncertainty moves a channel by at most 2 of 255.",
+      "finding": "The weighted average of three nights (2005 January 25-27) after subtracting the rotational light curve, B-V 0.626 +/-0.025, V-R 0.343 +/-0.020, V-I 0.683 +/-0.020 (section 3.4, Table 3), gives the Color dataset with the Ortiz et al. (2017) albedo through the disc-integrated-color method: linear sRGB 0.504, 0.511, 0.522, sRGB 188, 189, 191. Each color uncertainty moves a channel by at most 2 of 255.",
       "evidence": [
         "https://arxiv.org/abs/astro-ph/0509401",
         "https://doi.org/10.1086/499575",
@@ -135,11 +135,11 @@
       ]
     },
     {
-      "id": "mboss-colours",
-      "subject": "MBOSS mean colours (Hainaut et al. 2012)",
+      "id": "mboss-colors",
+      "subject": "MBOSS mean colors (Hainaut et al. 2012)",
       "status": "excluded",
-      "finding": "The MBOSS catalogue (J/A+A/546/A115) lists a three-epoch mean for Haumea of B-V 0.631 +/-0.025, V-R 0.370 +/-0.020, V-I 0.687 +/-0.020 from Jewitt et al. (2007, AJ 134, 2046), Rabinowitz et al. (2007, AJ 133, 26) and Trujillo et al. (2007, ApJ 655, 1172). Whether each epoch removes Haumea's rotational light curve is not verified; Rabinowitz et al. (2006) state that they subtract it, so their colours are used. Measured with the same method, the MBOSS values give sRGB 190, 189, 191.",
-      "revisitWhen": "A newer rotation-corrected colour set disagrees with Rabinowitz et al. (2006) beyond their uncertainties.",
+      "finding": "The MBOSS catalogue (J/A+A/546/A115) lists a three-epoch mean for Haumea of B-V 0.631 +/-0.025, V-R 0.370 +/-0.020, V-I 0.687 +/-0.020 from Jewitt et al. (2007, AJ 134, 2046), Rabinowitz et al. (2007, AJ 133, 26) and Trujillo et al. (2007, ApJ 655, 1172). Whether each epoch removes Haumea's rotational light curve is not verified; Rabinowitz et al. (2006) state that they subtract it, so their colors are used. Measured with the same method, the MBOSS values give sRGB 190, 189, 191.",
+      "revisitWhen": "A newer rotation-corrected color set disagrees with Rabinowitz et al. (2006) beyond their uncertainties.",
       "evidence": [
         "https://doi.org/10.26093/cds/vizier.35460115"
       ]
@@ -155,11 +155,11 @@
       ]
     },
     {
-      "id": "dark-red-spot-colour-variation",
+      "id": "dark-red-spot-color-variation",
       "subject": "The darker, redder region seen in Haumea's light curve",
       "status": "unresolved",
-      "finding": "Lacerda (2010) models an asymmetry in the light curve as a region darker and redder than the mean surface. A uniform colour hides it. Its fitted size, latitude and contrast are not unique from the light curve and the display meridian is arbitrary, so it is not drawn.",
-      "revisitWhen": "A published surface map or rotationally resolved colour model fixes the region's extent and contrast in a body-fixed frame.",
+      "finding": "Lacerda (2010) models an asymmetry in the light curve as a region darker and redder than the mean surface. A uniform color hides it. Its fitted size, latitude and contrast are not unique from the light curve and the display meridian is arbitrary, so it is not drawn.",
+      "revisitWhen": "A published surface map or rotationally resolved color model fixes the region's extent and contrast in a body-fixed frame.",
       "evidence": [
         "https://arxiv.org/abs/0911.0009"
       ]

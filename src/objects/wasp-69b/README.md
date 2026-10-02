@@ -8,7 +8,7 @@ It is the only planet known around WASP-69. Its orbit and size follow Allart et 
 
 **Orbit.** Allart et al. 2025 (2025A&A...700A...7A), via the NASA Exoplanet Archive ps table (pl_refname ALLART_ET_AL__2025): P 3.86813881 d Allart et al. 2025 (2025A&A...700A...7A), via the NASA Exoplanet Archive ps table (pl_refname ALLART_ET_AL__2025): a/R* 12.17; Allart et al. 2025 (2025A&A...700A...7A), via the NASA Exoplanet Archive ps table (pl_refname ALLART_ET_AL__2025): inclination 86.79 degrees Allart et al. 2025 (2025A&A...700A...7A), via the NASA Exoplanet Archive ps table (pl_refname ALLART_ET_AL__2025): e 0 Allart et al. 2025 (2025A&A...700A...7A), via the NASA Exoplanet Archive ps table (pl_refname ALLART_ET_AL__2025): transit mid-time 2455748.83428 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by wasp-69's measured colour (#ffd7be, the colour dataset of wasp-69 (src/objects/wasp-69/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by wasp-69's measured color (#ffd7be, the color dataset of wasp-69 (src/objects/wasp-69/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of WASP-69's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (55, 81, 92), folded onto its orbit. Upper limits and rows without an error are left out.
 

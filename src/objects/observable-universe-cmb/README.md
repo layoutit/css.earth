@@ -13,10 +13,10 @@ microwave background, light from 372,000 years after the Big Bang, on the sphere
 
 | Source | Measurement used |
 | --- | --- |
-| [Planck 2018 IV](https://arxiv.org/abs/1807.06208) | The SMICA map of the cosmic microwave background (PR3, HEALPix Nside 2048), and the collaboration's style-guide colour table. |
+| [Planck 2018 IV](https://arxiv.org/abs/1807.06208) | The SMICA map of the cosmic microwave background (PR3, HEALPix Nside 2048), and the collaboration's style-guide color table. |
 | [Planck 2018 VI](https://arxiv.org/abs/1807.06209) | The cosmology that turns a redshift into a distance (Astropy's Planck18) and the redshift of last scattering, z* = 1089.80. |
 
-The [recipe](source/cmb/sphere.json) names the map, colour table, range, radius, mesh, limb, cutaway and datasets; the
+The [recipe](source/cmb/sphere.json) names the map, color table, range, radius, mesh, limb, cutaway and datasets; the
 [manifest](source/manifest.json) binds the inputs to their source records. The
 [investigation ledger](investigations.json) records why this map was used.
 
@@ -39,7 +39,7 @@ quotes.
    bands closed by round polar caps, 450 PolyCSS leaves in all, each showing its own tile of one atlas (64 texels a side
    for a cell, 192 for a cap, so a cap's texels are no coarser than the equator's).
 2. Each texel averages 2 by 2 samples of the map at its direction, taken through the same projective mapping the leaf
-   draws its tile with and turned from ICRS into the map's Galactic coordinates. It takes the Planck style-guide colour
+   draws its tile with and turned from ICRS into the map's Galactic coordinates. It takes the Planck style-guide color
    for its temperature over ±300 µK, each channel raised to the power 1.6 so the table's pale middle does not glare
    beside the dots.
 3. Each patch shows only its front, so from outside the far side never shows through. The sphere fades in as the camera
@@ -47,7 +47,7 @@ quotes.
 4. Like a body it has a limb plate, a prepared image that faces the camera and is fitted each frame to the sphere's
    outline, and its name below it in the selected body's caption. The limb is a presentation choice, not a measurement:
    nothing sees this surface from outside, so it takes the linear limb law, 1 - 0.6(1 - μ), drawn as the bodies' limb
-   plates are (`limbOverlay`, over the atlas's mean colour).
+   plates are (`limbOverlay`, over the atlas's mean color).
 5. The patches of the ICRS northern hemisphere are marked for the cutaway. Nothing is removed from the data.
 
 ## Datasets
@@ -62,7 +62,7 @@ The page has three datasets, shown with the shared dataset card in its overview 
 - **Full sphere** (`?dataset=full`): the closed shell, which hides everything inside it.
 
 The opening and both opacities are presentation choices, recorded in the recipe's `cutaway`. The bake writes the cards
-to `prepared/datasets.json`, with the colour table's legend at nine stops from −300 to +300 µK and a picture of each
+to `prepared/datasets.json`, with the color table's legend at nine stops from −300 to +300 µK and a picture of each
 view: the sphere from far away along a line 30° above the ICRS equator at right ascension 0h, north up, composed as
 the page draws it from the same map, limb law and opacities
 ([`map-sphere-preview.ts`](../../../packages/bake/src/raster/map-sphere-preview.ts)).

@@ -8,7 +8,7 @@ It is the only planet known around TIC 393818343. Its orbit and size follow Sgro
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 16.249935683 d Sgro et al. 2024 (2024AJ....168...26S), via the NASA Exoplanet Archive ps table (pl_refname SGRO_ET_AL_2024): a/R* 25.6; Sgro et al. 2024 (2024AJ....168...26S), via the NASA Exoplanet Archive ps table (pl_refname SGRO_ET_AL_2024): inclination 89.57 degrees Sgro et al. 2024 (2024AJ....168...26S), via the NASA Exoplanet Archive ps table (pl_refname SGRO_ET_AL_2024): e 0.6058 Sgro et al. 2024 (2024AJ....168...26S), via the NASA Exoplanet Archive ps table (pl_refname SGRO_ET_AL_2024): omega 1.69 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460509.987562 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by tic-393818343's measured colour (#fff1ed, the colour dataset of tic-393818343 (src/objects/tic-393818343/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by tic-393818343's measured color (#fff1ed, the color dataset of tic-393818343 (src/objects/tic-393818343/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TIC 393818343's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (55), folded onto its orbit. Upper limits and rows without an error are left out.
 

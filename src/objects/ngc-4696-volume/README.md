@@ -9,7 +9,7 @@ profile. **Depth is modelled, not measured.**
 
 | Selected source | Input and meaning |
 | --- | --- |
-| [DESI Legacy Imaging Surveys DR10](https://www.legacysurvey.org/dr10/) | [Record](../../sources/desi-legacy-surveys-dr10-color-hips.json). The surveys' g, r, i, z colour composite as the CDS HiPS `CDS/P/DESI-Legacy-Surveys/DR10/color`, cut out by the CDS hips2fits service: 2500 × 2500 px over 11.0 × 11.0 arcmin (0.263″ per pixel, the survey's own scale), tangent projection, north up. A display composite, not calibrated photometry. |
+| [DESI Legacy Imaging Surveys DR10](https://www.legacysurvey.org/dr10/) | [Record](../../sources/desi-legacy-surveys-dr10-color-hips.json). The surveys' g, r, i, z color composite as the CDS HiPS `CDS/P/DESI-Legacy-Surveys/DR10/color`, cut out by the CDS hips2fits service: 2500 × 2500 px over 11.0 × 11.0 arcmin (0.263″ per pixel, the survey's own scale), tangent projection, north up. A display composite, not calibrated photometry. |
 | [Gao et al. (2020)](https://arxiv.org/abs/2001.00331) | [Record](../../sources/gao-2020-cgs-ellipticals.json). Table 2 ([CDS J/ApJS/247/20](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/247/20)), row NGC 4696: single-Sérsic fit to the Carnegie-Irvine Galaxy Survey's R-band image, n = 2.99 ± 0.13, effective radius 16.65 ± 1.46 kpc, ellipticity 0.219. |
 | [Ho et al. (2011)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/197/21) | [Record](../../sources/ho-2011-cgs.json). The same survey's row NGC 4696: scale 10.94 kpc per arcmin (37.6 Mpc), diameter at 26.5 B mag per square arcsec 10.96′, photometric major axis at position angle 92.1 ± 1.3°. |
 | [HyperLEDA PGC](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237) (Paturel et al. 2003) | [Record](../../sources/paturel-2003-hyperleda-pgc.json). Positions and D25 sizes of the 7 neighbouring galaxies masked in the image. |
@@ -50,7 +50,7 @@ The NGC 4696 page in headless Chromium at 1440 × 900, device pixel ratio 2, on 
 arrival, then the camera turned to the side and to above the galaxy.
 
 - The volume reproduces the cleaned image along every sight line it covers (the method conditions on it); 0.2 to 1.7%
-  of the image's light, by colour channel, lies outside the spheroid and is not drawn.
+  of the image's light, by color channel, lies outside the spheroid and is not drawn.
 - The cutout's registration is its request: the centroid of the bright core falls within 1 px (0.2″) of the image
   centre, the 2MASS position.
 - The core is not saturated beyond 3″ (490 px at 250 of 255 or above), against M49's 35″.

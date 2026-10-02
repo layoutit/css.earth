@@ -95,7 +95,7 @@
             "wavelengthUnit": "angstrom",
             "endsNm": {
               "value": 766,
-              "basis": "The Sc template's optical spectrum ends at 766 nm. Cutting the other four templates at 766 nm leaves each colour the same to the sRGB step (checked 2026-09-29), since the eye's response there is under 0.1% of its peak."
+              "basis": "The Sc template's optical spectrum ends at 766 nm. Cutting the other four templates at 766 nm leaves each color the same to the sRGB step (checked 2026-09-29), since the eye's response there is under 0.1% of its peak."
             }
           }
         }
@@ -103,7 +103,7 @@
       "missing": {
         "label": "no type in 2MRS",
         "colorCss": "#ffffff",
-        "basis": "The D65 white point: a galaxy with no measured type is drawn without a colour."
+        "basis": "The D65 white point: a galaxy with no measured type is drawn without a color."
       }
     },
     "toneBy": {
@@ -113,7 +113,7 @@
       "faintMagnitude": -22.5,
       "faintTone": 0.3,
       "steps": 8,
-      "basis": "Presentation of a measured quantity, on the pattern of the field's B tone: each galaxy's absolute Ks magnitude (Kcmag at its Planck 2018 luminosity distance) darkens its colour, full at -25.5 and 30% at -22.5, the 5th and 95th percentiles of these galaxies (-25.46 and -22.56). 2MRS has no B magnitude, so the tone is ranked within this sample, not on the field's scale."
+      "basis": "Presentation of a measured quantity, on the pattern of the field's B tone: each galaxy's absolute Ks magnitude (Kcmag at its Planck 2018 luminosity distance) darkens its color, full at -25.5 and 30% at -22.5, the 5th and 95th percentiles of these galaxies (-25.46 and -22.56). 2MRS has no B magnitude, so the tone is ranked within this sample, not on the field's scale."
     },
     "sizeBy": {
       "shells": 16,

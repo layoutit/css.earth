@@ -7,7 +7,7 @@ of the sky: nothing in it has depth, and seen from the side it is a line.
 
 | Selected source | Input and meaning |
 | --- | --- |
-| [ESA/Webb weic2327a](https://esawebb.org/images/weic2327a/) | [Record](../../sources/esawebb-weic2327a.json). Visible light from Hubble and infrared from Webb, 0.4 to 5 µm, shown as colour: the shortest wavelengths blue, the longest red. The publisher's Large JPEG, 4457 × 4133 px (`source/source.jpg`, restored from its origin; not tracked). [CC BY 4.0](https://esawebb.org/copyright/), credit: NASA, ESA, CSA, STScI, J. Diego (Instituto de Física de Cantabria, Spain), J. D’Silva (U. Western Australia), A. Koekemoer (STScI), J. Summers & R. Windhorst (ASU), and H. Yan (U. Missouri). A display composite, not calibrated photometry. |
+| [ESA/Webb weic2327a](https://esawebb.org/images/weic2327a/) | [Record](../../sources/esawebb-weic2327a.json). Visible light from Hubble and infrared from Webb, 0.4 to 5 µm, shown as color: the shortest wavelengths blue, the longest red. The publisher's Large JPEG, 4457 × 4133 px (`source/source.jpg`, restored from its origin; not tracked). [CC BY 4.0](https://esawebb.org/copyright/), credit: NASA, ESA, CSA, STScI, J. Diego (Instituto de Física de Cantabria, Spain), J. D’Silva (U. Western Australia), A. Koekemoer (STScI), J. Summers & R. Windhorst (ASU), and H. Yan (U. Missouri). A display composite, not calibrated photometry. |
 | [MCXC-II, Sadibekova et al. (2024)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/688/A187) | [Record](../../sources/mcxc-ii-2024.json). Row MCXC J0416.1-2403: position 64.0375°, -24.0661° and redshift 0.3972, from [2016ApJS..224...33B](https://ui.adsabs.harvard.edu/abs/2016ApJS..224...33B). |
 | [Planck Collaboration (2020)](https://arxiv.org/abs/1807.06209) | [Record](../../sources/planck-2018-cosmology.json). The redshift's comoving distance in the Planck 2018 cosmology, 1,590 Mpc (Astropy 8.0.1, `Planck18`): the distance the picture stands at. |
 | [Gaia DR3](https://doi.org/10.1051/0004-6361/202243940) | [Record](../../sources/gaia-2023-dr3.json). The 5 sources in the frame (CDS `I/355/gaiadr3`, a cone query on the picture's centre), used only to measure where the picture lies on the sky. |
@@ -51,7 +51,7 @@ arrival, the camera turned part of the way round, and the picture seen from the 
 - The picture is flat: seen from the side it is a line, and from behind it is mirrored.
 - Everything in the frame stands on the cluster's plane, whatever its own distance: Milky Way stars in front of the cluster and the
   far galaxies behind it are part of the picture.
-- Only 5 Gaia DR3 sources lie in the frame, so the registration rests on 5 positions. The colours are visible and infrared light shown as colour.
+- Only 5 Gaia DR3 sources lie in the frame, so the registration rests on 5 positions. The colors are visible and infrared light shown as color.
 - The page opens with ecliptic north up, as every page does, so the picture arrives turned from the publisher's orientation.
 - A flight from another page keeps the travelling camera's angle, so it can arrive seeing the picture from an oblique angle or
   nearly from the side. Opening the page directly faces the picture.

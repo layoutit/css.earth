@@ -46,7 +46,7 @@ There is no 2023 release; two observations belong to 2024.
 
 **Ultraviolet and methane.** The 11 December 2025 OPAL maps `F275W` (275 nm) and `FQ889N` (889 nm) keep their measured
 values, including dark and negative samples. Only exact-zero regions connected to a polar edge, and non-finite
-samples, are gaps. A percentile stretch and false-colour palette give relative contrast.
+samples, are gaps. A percentile stretch and false-color palette give relative contrast.
 
 **Magnetic field.** JRM33 through degree/order 13 is evaluated at the 1-bar ellipsoid (71,492 × 66,854 km) as the
 radial field on a 720 × 360 grid. The range is −13.94 to 21.68 gauss on a fixed linear −25 to 25 scale, blue inward
@@ -67,7 +67,7 @@ to 129,100 km, Amalthea gossamer to 181,350 km, Thebe to 221,900 km and its exte
 establish the three-part structure, the gossamer components and the truncation in Jupiter's shadow. The components are
 composited once into a 4 by 4 tile grid. Their radial mapping keeps the Thebe extension inside Io. Each ring's opacity
 is 1 − exp(−optical depth). The published depths run from 10⁻⁹ to 8 × 10⁻⁶, below one display level for every
-ring, so nothing shows and the map marker carries no ring. Hand-picked greys and a contrast emphasis capped at 0.4
+ring, so nothing shows and the map marker carries no ring. Hand-picked grays and a contrast emphasis capped at 0.4
 alpha were removed on 2026-10-01.
 
 **Scene.** The scene uses the IAU radii (71,492 and 66,854 km), the JUP365 ephemeris, 3.13° axial tilt and NASA's
@@ -97,14 +97,14 @@ with its gray polar cap and the rings at true opacity on the right.
 
 - The default map has no data beyond 80° north or south; the gray grid marks those caps.
 - Spectral gaps remain missing. The edge-fill mask is a heuristic without an independent validity mask.
-- The dated maps vary in filters and provider colour processing, so they are a morphological comparison, not a
-  calibrated colour trend or a measurement of the Great Red Spot's shrinkage.
+- The dated maps vary in filters and provider color processing, so they are a morphological comparison, not a
+  calibrated color trend or a measurement of the Great Red Spot's shrinkage.
 - The magnetic map is an inferred internal field. It excludes external currents, and its grid follows the mesh's
   parametric latitude, not planetographic latitude.
 - The rings are invisible at their true opacity. An empty ring layer is still mounted.
 - Atmosphere lighting and charts are models, and the display rotation is accelerated.
-- The photometric overlay has one colour and alpha per pixel, so the per-channel limb law is exact for the 2019 map's
-  mean colour and approximate for colours far from it. The coefficients are for near-zero phase; directional frames use
+- The photometric overlay has one color and alpha per pixel, so the per-channel limb law is exact for the 2019 map's
+  mean color and approximate for colors far from it. The coefficients are for near-zero phase; directional frames use
   them at every phase.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)

@@ -1,6 +1,6 @@
 # HR 8799 e credits
 
-Colour: JWST/NIRCam flux densities in F410M, F430M and F460M, Balmer et al. (2025), AJ, doi:10.3847/1538-3881/adb1c6, Table 2; infrared false colour of the whole disc.
+Color: JWST/NIRCam flux densities in F410M, F430M and F460M, Balmer et al. (2025), AJ, doi:10.3847/1538-3881/adb1c6, Table 2; infrared false color of the whole disc.
 
 Radius and temperature: Nasedkin et al. (2024), A&A 687, A298, Table 4. Orbit and mass: Zurlo et al. (2022), A&A 666, A133.
 

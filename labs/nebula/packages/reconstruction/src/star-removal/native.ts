@@ -19,7 +19,7 @@ export async function prepareNativeRemovalSource(source: Buffer, dimensions: [nu
   const metadata = await native.metadata();
   if (metadata.width !== dimensions[0] || metadata.height !== dimensions[1] || (metadata.pages ?? 1) !== 1)
     throw new TypeError('Native removal source dimensions differ.');
-  return native.removeAlpha().toColourspace('srgb').png().toBuffer();
+  return native.removeAlpha().toColorspace('srgb').png().toBuffer();
 }
 export async function decodeNativeDiffuse(bytes: Buffer, dimensions: [number, number]) {
   const diffuse = await sharp(bytes, { limitInputPixels: 40000 * 40000 }).removeAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -46,7 +46,7 @@ export async function runNativeRemoval(request: NativeRemovalRequest, execution:
 }
 /** Preserve compact scientific emission with exact native RGB accounting. */
 export async function prepareNativePreservation(source: Buffer, dimensions: [number, number]) {
-  const decoded = await sharp(source).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  const decoded = await sharp(source).removeAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
   if (decoded.info.width !== dimensions[0] || decoded.info.height !== dimensions[1] || decoded.info.channels !== 3) throw new Error('Native preserved grid differs.');
   const raw = { width: dimensions[0], height: dimensions[1], channels: 3 as const };
   const expectedDiffuse = await sharp(decoded.data, { raw }).png().toBuffer();

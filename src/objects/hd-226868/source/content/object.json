@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
         "thumbnail": "hd-226868-dataset-color.webp",
         "surface": "hd-226868-surface-color@2x.webp",
         "poles": "hd-226868-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://arxiv.org/abs/2102.09091"
         },
         "falseColor": false,
-        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Reeve & Howarth (2016), MNRAS 456, 1294 compute from non-LTE TLUSTY model atmospheres for the Bessell V band at 31,138 K and log g 3.348 (u1 0.124, u2 0.330): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Reeve & Howarth (2016), MNRAS 456, 1294 compute from non-LTE TLUSTY model atmospheres for the Bessell V band at 31,138 K and log g 3.348 (u1 0.124, u2 0.330): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
       }
     ]
   },

@@ -8,7 +8,7 @@
       "width": 1500,
       "height": 1500,
       "publisher": "https://www.sdss.org/",
-      "credit": "Sloan Digital Sky Survey DR9, g, r and i colour HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+      "credit": "Sloan Digital Sky Survey DR9, g, r and i color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service."
     },
     "crop": {
       "left": 0,
@@ -291,7 +291,7 @@
       "NOX removes stars; what it leaves is masked afterwards: 13 neighbouring galaxies from HyperLEDA PGC (Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) at 3 times their D25 radius, M87's rule; 14 from the 2MASS Extended Source Catalog (CDS VII/233), which sizes the galaxies HyperLEDA gives no D25, at 3 times their K-band 20 mag isophotal radius; and the 11 Gaia DR3 stars brighter than G = 15, whose haloes NOX leaves, at 45 arcsec for G = 11, scaled with brightness (a factor 10 in radius per 5 magnitudes; chosen here from the haloes left in the cleaned cutout). No mask reaches beyond half its distance from NGC 1275's centre, so every isophote keeps unmasked light. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the measured axis ratio and position angle), never more than it held.",
       "Every pixel is clamped to the median of the 75 px square around it, so star haloes, small background galaxies, the active nucleus and the knots of the foreground system that NOX and the masks leave are not spread through the spheroid.",
       "Black level per channel: the median of the cleaned cutout on the isophote where the prior ends (190 to 200 arcsec), red 0.059, green 0.024, blue 0.020 (15, 6 and 5 of 255), so the light fades to nothing at the spheroid's edge. The survey's i band, shown as red, has a brighter sky than g and r around NGC 1275, so one level for the three would leave a red haze out to that edge.",
-      "The colour is the survey's published g, r, i display composite, not calibrated photometry. NGC 1275's line-emitting filaments, its dust and the foreground high-velocity system are part of the image and are spread in depth like the starlight. Single-image depth is modelled by the prior, not measured."
+      "The color is the survey's published g, r, i display composite, not calibrated photometry. NGC 1275's line-emitting filaments, its dust and the foreground high-velocity system are part of the image and are spread in depth like the starlight. Single-image depth is modelled by the prior, not measured."
     ],
     "compactClamp": {
       "windowPx": 75,
@@ -346,7 +346,7 @@
         "width": 1500,
         "height": 1500,
         "publisher": "https://www.sdss.org/",
-        "credit": "Sloan Digital Sky Survey DR9, g, r and i colour HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+        "credit": "Sloan Digital Sky Survey DR9, g, r and i color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service."
       },
       "crop": {
         "left": 0,
@@ -629,7 +629,7 @@
         "NOX removes stars; what it leaves is masked afterwards: 13 neighbouring galaxies from HyperLEDA PGC (Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) at 3 times their D25 radius, M87's rule; 14 from the 2MASS Extended Source Catalog (CDS VII/233), which sizes the galaxies HyperLEDA gives no D25, at 3 times their K-band 20 mag isophotal radius; and the 11 Gaia DR3 stars brighter than G = 15, whose haloes NOX leaves, at 45 arcsec for G = 11, scaled with brightness (a factor 10 in radius per 5 magnitudes; chosen here from the haloes left in the cleaned cutout). No mask reaches beyond half its distance from NGC 1275's centre, so every isophote keeps unmasked light. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the measured axis ratio and position angle), never more than it held.",
         "Every pixel is clamped to the median of the 75 px square around it, so star haloes, small background galaxies, the active nucleus and the knots of the foreground system that NOX and the masks leave are not spread through the spheroid.",
         "Black level per channel: the median of the cleaned cutout on the isophote where the prior ends (190 to 200 arcsec), red 0.059, green 0.024, blue 0.020 (15, 6 and 5 of 255), so the light fades to nothing at the spheroid's edge. The survey's i band, shown as red, has a brighter sky than g and r around NGC 1275, so one level for the three would leave a red haze out to that edge.",
-        "The colour is the survey's published g, r, i display composite, not calibrated photometry. NGC 1275's line-emitting filaments, its dust and the foreground high-velocity system are part of the image and are spread in depth like the starlight. Single-image depth is modelled by the prior, not measured."
+        "The color is the survey's published g, r, i display composite, not calibrated photometry. NGC 1275's line-emitting filaments, its dust and the foreground high-velocity system are part of the image and are spread in depth like the starlight. Single-image depth is modelled by the prior, not measured."
       ],
       "compactClamp": {
         "windowPx": 75,

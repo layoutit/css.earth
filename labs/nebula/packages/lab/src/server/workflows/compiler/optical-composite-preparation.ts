@@ -114,7 +114,7 @@ async function prepareComposite(root: string, recipePath: string, previewOnly: b
     supplied?.signal.throwIfAborted();
     await writeFile(resolve(root, `${path}.pending`), bytes); await rename(resolve(root, `${path}.pending`), resolve(root, path));
     return { path }; };
-  progress(`Optical detail fusion: ${recipe.lowFrequencyArcsec} arcsec Gaussian scale; ${recipe.featherArcsec} arcsec edge feather; wide-field colour retained.`);
+  progress(`Optical detail fusion: ${recipe.lowFrequencyArcsec} arcsec Gaussian scale; ${recipe.featherArcsec} arcsec edge feather; wide-field color retained.`);
   const original = await compilerImagePanel(image, base.scene.skyBoundsArcsec, true, 2048);
   const starless = await compilerImagePanel(image, base.scene.skyBoundsArcsec, false, 2048);
   const originalPin = await save('optical-composite-original.png', original.bytes), starlessPin = await save('optical-composite-starless.png', starless.bytes);

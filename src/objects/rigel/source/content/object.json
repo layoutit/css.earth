@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a model atmosphere; darkening toward the edge from a model atmosphere.",
+        "qualification": "Color from a measured spectrum of the star (Pulkovo catalogue). The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a model atmosphere; darkening toward the edge from a model atmosphere.",
         "thumbnail": "rigel-dataset-color.webp",
         "surface": "rigel-surface-color@2x.webp",
         "poles": "rigel-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
         },
         "falseColor": false,
-        "notes": "The colour of Rigel's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. No resolved image of the surface is cast; the display axis is celestial north, a convention. The darkening toward the edge is the quadratic law Howarth (2011), MNRAS 413, 1515 computes from ATLAS9 model atmospheres for the Bessell V band at 12,100 K and log g 1.91, read between the models t12000g15, t12000g20, t12250g15, t12250g20 (u1 0.233, u2 0.330): a model, because no fit of this star's limb is used. The darkening toward the edge is the quadratic law Howarth (2011), MNRAS 413, 1515 computes from ATLAS9 model atmospheres for the Bessell V band at 12,100 K and log g 1.91, read between the models t12000g15, t12000g20, t12250g15, t12250g20 (u1 0.233, u2 0.330): a model, because no fit of this star's limb is used."
+        "notes": "The color of Rigel's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. No resolved image of the surface is cast; the display axis is celestial north, a convention. The darkening toward the edge is the quadratic law Howarth (2011), MNRAS 413, 1515 computes from ATLAS9 model atmospheres for the Bessell V band at 12,100 K and log g 1.91, read between the models t12000g15, t12000g20, t12250g15, t12250g20 (u1 0.233, u2 0.330): a model, because no fit of this star's limb is used. The darkening toward the edge is the quadratic law Howarth (2011), MNRAS 413, 1515 computes from ATLAS9 model atmospheres for the Bessell V band at 12,100 K and log g 1.91, read between the models t12000g15, t12000g20, t12250g15, t12250g20 (u1 0.233, u2 0.330): a model, because no fit of this star's limb is used."
       }
     ]
   },

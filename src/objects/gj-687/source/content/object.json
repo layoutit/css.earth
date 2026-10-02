@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "qualification": "Color from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
         "thumbnail": "gj-687-dataset-color.webp",
         "surface": "gj-687-surface-color@2x.webp",
         "poles": "gj-687-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1637645127018395776&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
         },
         "falseColor": false,
-        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,413 K and log g 4.81 (u1 0.167, u2 0.440): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+        "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,413 K and log g 4.81 (u1 0.167, u2 0.440): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
       }
     ]
   },

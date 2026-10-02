@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 54.4 +/- 1.9 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 1345: Baade-Wesselink mean radius (solar radii) 54.4 +/- 1.9 (Monte-Carlo) (https://arxiv.org/abs/1212.5478); No mass is measured, so GM is 0, the records' unpublished value; temperature from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=SMC0368, columns Teffp, e_Teffp: Teff 5375 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic).
 
-Colour: a Planck spectrum at the temperature of Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=SMC0368, columns Teffp, e_Teffp: Teff 5375 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic), through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: a Planck spectrum at the temperature of Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=SMC0368, columns Teffp, e_Teffp: Teff 5375 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic), through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 

@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "qualification": "Color from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
         "thumbnail": "wasp-76-dataset-color.webp",
         "surface": "wasp-76-surface-color@2x.webp",
         "poles": "wasp-76-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The colour of Gaia DR3's measured spectrum of the star, an F7 dwarf. Its fainter companion, WASP-76 B, 0.44 arcseconds away, falls inside Gaia's spectrum window and adds a little of its redder light. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for the TESS band, at the star's ESPRESSO temperature and gravity (6,329 K, log g 4.20): a model. The spin axis is measured only on the sky, 61° from the orbit, so the display axis is celestial north."
+        "notes": "The color of Gaia DR3's measured spectrum of the star, an F7 dwarf. Its fainter companion, WASP-76 B, 0.44 arcseconds away, falls inside Gaia's spectrum window and adds a little of its redder light. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for the TESS band, at the star's ESPRESSO temperature and gravity (6,329 K, log g 4.20): a model. The spin axis is measured only on the sky, 61° from the orbit, so the display axis is celestial north."
       }
     ]
   },

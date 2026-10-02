@@ -35,7 +35,7 @@
     "brightnessNormalization": "Divide all three linear sRGB channels by their maximum, preserving channel ratios; apply the standard sRGB transfer function, multiply by 255, and round half up. No hue adjustment or gamut clipping.",
     "brightnessNormalizationReference": "https://users.ox.ac.uk/~atmp0035/colorimetry.html",
     "standard": "https://registry.color.org/rgb-registry/srgb",
-    "implementation": "Colour Science 0.4.7: sd_to_XYZ(method=\"Integration\"), XYZ_to_sRGB(chromatic_adaptation_transform=\"Bradford\", apply_cctf_encoding=False), eotf_inverse_sRGB.",
+    "implementation": "Color Science 0.4.7: sd_to_XYZ(method=\"Integration\"), XYZ_to_sRGB(chromatic_adaptation_transform=\"Bradford\", apply_cctf_encoding=False), eotf_inverse_sRGB.",
     "xyzSolarWhiteY1": [
       0.1375904225,
       0.1393687452,

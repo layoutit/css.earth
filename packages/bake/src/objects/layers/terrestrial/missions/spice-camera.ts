@@ -80,7 +80,7 @@ function decodeVicarSpiceFrame(bytes: Buffer, label: string | undefined, set: Ke
   let flagged = 0;
   for (let i = 0; i < count; i++) { const value = image.data[i]; values[i] = value; if (!Number.isFinite(value)) flagged++; }
   const { schema, matrix, rayMatrix, positionKm, sunDirection, report } = camera;
-  // A VICAR frame carries one band; the colour field exists so both decoders share one shape.
+  // A VICAR frame carries one band; the color field exists so both decoders share one shape.
   return { width: image.width, height: image.height, planes: { IMAGE: values }, camera: { schema, matrix, rayMatrix, positionKm, sunDirection }, startTime, filter,
     colorPlanes: undefined as readonly Float32Array[] | undefined,
     acceptPixel: (i: number) => Number.isFinite(values[i]),
@@ -127,7 +127,7 @@ export function decodeSpiceCameraFrame(bytes: Buffer, set: KernelSet, spice: Spi
     const value = image.values[i]; values[i] = value;
     if (value === saturation) saturated++; else if (!Number.isFinite(value) || missing.includes(value)) flagged++;
   }
-  // A colour product carries its bands as further planes of the same array. Each is read through the same
+  // A color product carries its bands as further planes of the same array. Each is read through the same
   // reader and held to the same flag values, and a pixel is only accepted where every band is valid.
   const declaredColorPlanes = spice.image.colorPlanes ?? [];
   const colorPlanes = declaredColorPlanes.map(plane => {

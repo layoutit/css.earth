@@ -8,7 +8,7 @@ It is the only planet known around HD 110082. Its orbit and size follow Tofflemi
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 10.1826982735 d Tofflemire et al. 2021 (2021AJ....161..171T), via the NASA Exoplanet Archive ps table (pl_refname TOFFLEMIRE_ET_AL__2021): a/R* 20; Tofflemire et al. 2021 (2021AJ....161..171T), via the NASA Exoplanet Archive ps table (pl_refname TOFFLEMIRE_ET_AL__2021): inclination 88.2 degrees Tofflemire et al. 2021 (2021AJ....161..171T), via the NASA Exoplanet Archive ps table (pl_refname TOFFLEMIRE_ET_AL__2021): e 0.2 Tofflemire et al. 2021 (2021AJ....161..171T), via the NASA Exoplanet Archive ps table (pl_refname TOFFLEMIRE_ET_AL__2021): omega 138 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458629.909082 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hd-110082's measured colour (#f7f3ff, the colour dataset of hd-110082 (src/objects/hd-110082/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by hd-110082's measured color (#f7f3ff, the color dataset of hd-110082 (src/objects/hd-110082/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HD 110082's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (67, 93, 94), folded onto its orbit. Upper limits and rows without an error are left out.
 

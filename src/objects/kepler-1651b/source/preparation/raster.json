@@ -26,11 +26,11 @@
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffc085, the colour dataset of kepler-1651 (src/objects/kepler-1651/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured color in this package; a sphere of the published radius, lit by its own star, whose measured color (#ffc085, the color dataset of kepler-1651 (src/objects/kepler-1651/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "kepler-1651",
           "srgb": "#ffc085",
-          "source": "the colour dataset of kepler-1651 (src/objects/kepler-1651/source/photometry/stellar-color.json)"
+          "source": "the color dataset of kepler-1651 (src/objects/kepler-1651/source/photometry/stellar-color.json)"
         }
       }
     }

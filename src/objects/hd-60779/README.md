@@ -6,7 +6,7 @@ Its radius and temperature follow DiTomasso et al. 2026. It is also HD 60779, HI
 
 **Star.** Placement: Gaia DR3 source 3060787930730737920, parallax 28.221 ± 0.019 mas (35.43 pc). Radius 1.129 +/- 0.013 solar radii from DiTomasso et al. 2026, the stellar radius of the default parameter set of HD 60779 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract). Mass 1.05 +/- 0.044 solar masses from DiTomasso et al. 2026, the stellar mass of the default parameter set of HD 60779 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract). Temperature 6,081 K from DiTomasso et al. 2026, the stellar temperature of the default parameter set of HD 60779 b in the NASA Exoplanet Archive. log g 4.35 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 3060787930730737920, through the CIE 1931 2° observer: #fff7ff. Routes tried in order: stis-ngsl: HD 60779 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 3060787930730737920, through the CIE 1931 2° observer: #fff7ff. Routes tried in order: stis-ngsl: HD 60779 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,081 K and log g 4.35 (u1 0.402, u2 0.293): a model, because no fit of this star's limb is used.
 

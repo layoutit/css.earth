@@ -36,8 +36,8 @@ const fillView = imageLayerView(input({ path: fill.path, dimensions: fill.dimens
 // The survey resampled to the output scale before sampling, so each output pixel averages the pixels it covers.
 const surveyScale = survey.observation.fieldOfViewDeg[0] * 3600 / frame.arcsecPerPixel / survey.dimensions[0];
 const surveyImage = await sharp(resolve(sourceDirectory, survey.path), { limitInputPixels: false })
-  .resize({ width: Math.round(survey.dimensions[0] * surveyScale) }).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
-const fillImage = await sharp(resolve(sourceDirectory, fill.path)).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  .resize({ width: Math.round(survey.dimensions[0] * surveyScale) }).removeAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
+const fillImage = await sharp(resolve(sourceDirectory, fill.path)).removeAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
 
 // The mosaic's no-data area: pixels at or below the no-data level joined to its border.
 const { data: sd, info: si } = surveyImage, noData = new Uint8Array(si.width * si.height), stack: number[] = [];

@@ -36,7 +36,7 @@ about the physics of any one subject.
 One fitted field becomes three stacks of leaves, one per axis (X, Y, Z). The viewer shows
 whichever stack faces the camera and swaps at the handoff, so the volume reads solid from any
 angle — leaves on every side. Slabs pack into per-axis atlases for delivery. Inspect the
-handoff explicitly: brightness and colour agreement between banks is an acceptance criterion,
+handoff explicitly: brightness and color agreement between banks is an acceptance criterion,
 not a detail.
 
 New compiler and sampled-volume deliveries target **500 total retained scene elements**,
@@ -85,13 +85,13 @@ Pick by what the evidence supports, not by habit.
 | --- | --- | --- | --- |
 | **Repaint** `alignment-density-material-v1` | fixed density + one registered image | the Earth-facing view only | legacy; historical comparisons |
 | **Sampled / compiler** | qualified spatial tables, symmetry or kinematics | real 3D structure from measurements | a measured spatial product exists (`docs/sampled-volumes.md`, `docs/nebula-compiler.md`) |
-| **Fixed-density finite region** | density + image, finite regions | colour on finite supports | superseded by the two-scale fit |
+| **Fixed-density finite region** | density + image, finite regions | color on finite supports | superseded by the two-scale fit |
 | **Two-scale finite emission** `simulation-guided-finite-emission@1` | image + spatial prior | broad shape from the prior, detail fitted from the image | the current default for clouds and galaxies |
 | **Axial symmetry** | one image + a symmetry hypothesis | rotationally symmetric shells | planetary nebulae (`docs/planetary-nebulae.md`) |
 
 Two-scale in one line: broad light is `gain(x,y) × prior(x,y,z)` with `gain = fraction × blur(image) / blur(column)`; finite components fit the residual at prior-supported depths, so image brightness scales the envelope and never moves it in depth. Example recipe: `labs/nebula/models/smc/constrained/emission-envelope-ellipsoid.json`, with its method note beside it.
 
-**RGB-only datasets:** every image recolours one shared geometry, so switching dataset changes colour, never shape. **The prior is a hypothesis, never a measurement** — prefer one that scores better against observations; for the SMC a VMC-constrained ellipsoid beat the tidal simulation (withheld deviance 0.457 vs 0.601).
+**RGB-only datasets:** every image recolors one shared geometry, so switching dataset changes color, never shape. **The prior is a hypothesis, never a measurement** — prefer one that scores better against observations; for the SMC a VMC-constrained ellipsoid beat the tidal simulation (withheld deviance 0.457 vs 0.601).
 
 ## Numerical alignment before image inspection
 
@@ -116,7 +116,7 @@ and brightness are expected, so do not force their pixels to match.
 
 ## Matching a dataset to its image
 
-Colour and tone are measured, then fitted — never tuned by eye.
+Color and tone are measured, then fitted — never tuned by eye.
 
 **Measure.** The lab server exposes the comparison as JSON; the Reconstruction tab's round
 histogram button shows the same data.
@@ -134,7 +134,7 @@ projection wearing that dataset's chromaticity. Dataset result ids come from the
 `.local/nebula-lab/finite-datasets-<modelResultId>.json`.
 
 **Read it.** On the identity diagonal = matched. Above it = painting too bright. A bend =
-mid-tones off, which a single gain cannot fix. Mismatched channels = colour cast. The signed
+mid-tones off, which a single gain cannot fix. Mismatched channels = color cast. The signed
 delta says where; the ratios say how much.
 
 **Fit.** Invert and smooth the transfer into a monotone per-channel lookup table from *paired*
@@ -147,7 +147,7 @@ LMC Horálek dataset matched p50 to 4% while its core plateaued (red p99.9 0.72,
 p99, p99.9 and the core-disc mean too, each against a tolerance stated up front.
 
 **Highlights need exposure, not a curve.** The render can never exceed the projection byte
-`255·(1 − e^(−E·I))` (the shared opacity), so a curve can only dim or recolour beneath it. A core
+`255·(1 − e^(−E·I))` (the shared opacity), so a curve can only dim or recolor beneath it. A core
 riding that shoulder is lifted by *raising* the shared exposure E, and the curve dims the
 mid-tones back down; lowering E only lowers the ceiling. Solve E jointly with the curve on the
 exposure-free integral: re-expose the byte analytically, `1 − P'/255 = (1 − P/255)^(E'/E)`,
@@ -170,7 +170,7 @@ slabs matches the analytic projection within 0.5%). It comes from the browser's 
 and depends on level: delivered ÷ analytic is 0.6–0.8 in the faint mid-tones and 0.90–0.92 from
 source level 144 up. The uniform 1.12 therefore holds for the highlights and under-corrects the
 faint zone. And every dataset shares one opacity bank, so a table can only
-move colour and brightness inside that opacity: a dataset far off its image (VISTA +163%, WISE
+move color and brightness inside that opacity: a dataset far off its image (VISTA +163%, WISE
 +987% on the LMC) needs a per-dataset opacity scale, which trades away part of "switch dataset, never
 shape". Matching a publisher-processed image matches its stretch, not physical flux — say so.
 
@@ -211,14 +211,14 @@ alpha 1–3 for banding risk.
 
 Planned, each with its control: star residual arrows (catalogue star → matched photo star; radial
 = scale, swirl = rotation, mirrored = flip), headroom map (where opacity saturates), hue-error map
-(colour angle only), banding-risk map (alpha 1–3 texels), footprint outline (registered vs placed),
+(color angle only), banding-risk map (alpha 1–3 texels), footprint outline (registered vs placed),
 then depth-coded view, bank isolation (force X, Y or Z leaves) and a coverage mask. Build them as
 prepared images or SVG — never canvas, WebGL or CSS filters.
 
 ## Defects that cost whole rounds
 
-- **Premultiplied 8-bit compositing.** At alpha 1–3 a slab's colour rounds to a few levels and stacked leaves turn that into strong false tints, plus contour banding. Fade chroma to neutral below a threshold and keep exposure out of that band. Judge on the artefact (faint-annulus roughness, α1–3 share), not the histogram. The delivered bank also loses ~12% of the analytic light there, so compare like with like.
-- **Ordering of colour operations.** A non-uniform channel gain applied *after* the alpha chroma limit re-tints the neutral zone that limit protects. White balance before the limit, exposure after.
+- **Premultiplied 8-bit compositing.** At alpha 1–3 a slab's color rounds to a few levels and stacked leaves turn that into strong false tints, plus contour banding. Fade chroma to neutral below a threshold and keep exposure out of that band. Judge on the artefact (faint-annulus roughness, α1–3 share), not the histogram. The delivered bank also loses ~12% of the analytic light there, so compare like with like.
+- **Ordering of color operations.** A non-uniform channel gain applied *after* the alpha chroma limit re-tints the neutral zone that limit protects. White balance before the limit, exposure after.
 - **No-coverage must stay no-coverage.** NaN or alpha 0 read as measured zero paints black sky into the model; carry the mask through rectification.
 - **Placement is not a free parameter.** The overlay transform already comes from the measured WCS/homography; a hand-typed Alignment scale/rotation is a display fit. Feeding it into geometry once put the LMC on the sky 3× too large; identity placement reproduced the registered corners to 0.000″.
 - **Star layers are optional overlays.** A missing `stars.json`, answered by the dev server's HTML page, once aborted the whole material load. Treat absence as absence.

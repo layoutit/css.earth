@@ -41,7 +41,7 @@ In a terminal, outputs asks which available operation to run, then asks only for
 reported inputs and a new output directory. Press Enter at any prompt to cancel before an export
 starts. With --json or redirected input/output it never prompts; the listed command templates remain.
 New-object turns a star spec into a complete object package: SIMBAD (through the same resolver as explore) names it and gives
-its Gaia DR3 source; the colour dataset comes from the best archived spectrum (STIS NGSL, Gaia XP, then the ground catalogues),
+its Gaia DR3 source; the color dataset comes from the best archived spectrum (STIS NGSL, Gaia XP, then the ground catalogues),
 cross-checked against the next; a model limb law from Claret's grids; manifest, acquisition plan, source records and credits.
 Only prose is left marked TODO(new-object), unless the spec carries drafted text. --from-archive writes a spec for planet hosts from the
 NASA Exoplanet Archive's default parameter sets (their transiting planets, with drafted text); --from-debcat drafts both stars of

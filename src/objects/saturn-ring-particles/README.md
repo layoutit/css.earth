@@ -30,7 +30,7 @@ A headless capture of this version's Saturn default view.
 
 - **No dot is a measured particle.** Nobody has measured where single ring particles are; they are centimetres to metres across and uncounted. Only the radial density of the dots is measured. Their longitudes are drawn from a seed.
 - The 4,000 dots and the 1.5 px size are display choices.
-- The dots take the ring image's colour, #fff1ea: white under the same solar tint. No ring colour is measured.
+- The dots take the ring image's color, #fff1ea: white under the same solar tint. No ring color is measured.
 - Bins the occultation flags as corrupted get no dots, though the ring image interpolates across them.
 - The dot layer sits behind the planet. Where the near side of the rings crosses in front of Saturn's disc, the ring image shows but its dots do not.
 - The dots do not orbit; the positions hold for the world's one epoch.

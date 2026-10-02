@@ -92,8 +92,8 @@ const readers: Record<Cluster, () => Promise<Member[]>> = {
     const giants = (await table('hydra-cabanillas-2025')).map(row => ({ name: (row.Name ?? '').replaceAll('_', ' ') || `Cabanillas2025 ${row.ID}`,
       ra: number(row, 'RAJ2000', input('hydra-cabanillas-2025')), dec: number(row, 'DEJ2000', input('hydra-cabanillas-2025')), stage: '', b: '' }));
     const dwarfs = (await table('hydra-hcdc')).map(row => {
-      const r = number(row, 'rmag', input('hydra-hcdc')), colour = number(row, 'g-r', input('hydra-hcdc'));
-      return { name: (row.Name ?? '').replaceAll('_', ' '), ra: number(row, 'RAJ2000', input('hydra-hcdc')), dec: number(row, 'DEJ2000', input('hydra-hcdc')), stage: '', b: jesterB(r + colour, r) };
+      const r = number(row, 'rmag', input('hydra-hcdc')), color = number(row, 'g-r', input('hydra-hcdc'));
+      return { name: (row.Name ?? '').replaceAll('_', ' '), ra: number(row, 'RAJ2000', input('hydra-hcdc')), dec: number(row, 'DEJ2000', input('hydra-hcdc')), stage: '', b: jesterB(r + color, r) };
     });
     // A dwarf the redshift table also lists is drawn once, with the dwarf catalogue's magnitude.
     const repeated = giants.filter(giant => dwarfs.some(dwarf => arcsecBetween(giant.ra, giant.dec, dwarf.ra, dwarf.dec) <= MATCH_ARCSEC));

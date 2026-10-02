@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by GJ 1214; the neutral gray is a display convention, not a measured colour.",
+        "qualification": "A sphere of the published radius, lit by GJ 1214; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "gj-1214b-dataset-shape.webp",
         "surface": "gj-1214b-surface-shape@2x.webp",
         "poles": "gj-1214b-poles-shape@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of GJ 1214 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of gj-1214's light, as its colour dataset measures it."
+        "notes": "No image or color of GJ 1214 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of gj-1214's light, as its color dataset measures it."
       }
     ]
   },

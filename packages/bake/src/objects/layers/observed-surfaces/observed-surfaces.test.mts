@@ -44,7 +44,7 @@ test('boundary continuation retains observed rows and varies only source-derived
   assert.deepEqual([...result.slice(0,4)],[4,4,3.75,4.25]);assert.deepEqual(result.slice(4),input.slice(4));assert.equal(input[0],0);
   assert.throws(()=>continueBoundaryMean(new Float32Array(12),{width:2,height:6,channels:1,boundaryFraction:1/3,exponent:3,minimumBoundarySum:0}),/not fully observed/);
 });
-test('scalar mapping carries explicit missingness and declared false colour',()=>{
+test('scalar mapping carries explicit missingness and declared false color',()=>{
   const result=percentileFalseColor(new Float32Array([NaN,1,2,3,4,5]),3,2,{percentiles:[0,0.8],minimumCoverage:0.5,positiveValidity:true,channels:4,transfer:'sqrt',exponent:0.5,palette:[[0,0,0],[0,100,0],[200,200,200]]});
   assert.deepEqual(result.stretch,[1,5]);assert.equal(result.data[3],0);assert.deepEqual([...result.data.slice(-4)],[200,200,200,255]);
 });

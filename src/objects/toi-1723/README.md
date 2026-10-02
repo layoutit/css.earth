@@ -6,7 +6,7 @@ Its radius and temperature follow Crossfield et al. 2025. The introduction is ge
 
 **Star.** Placement: Gaia DR3 source 1096515188009314688, parallax 9.940 ± 0.013 mas (100.60 pc). Radius 1.09 +/- 0.05 solar radii from Crossfield et al. 2025, the stellar radius of the default parameter set of TOI-1723 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract). Mass 1.04 +/- 0.13 solar masses from Crossfield et al. 2025, the stellar mass of the default parameter set of TOI-1723 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract). Temperature 5,777 K from Crossfield et al. 2025, the stellar temperature of the default parameter set of TOI-1723 b in the NASA Exoplanet Archive. log g 4.38 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 1096515188009314688, through the CIE 1931 2° observer: #fff3f1. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 1096515188009314688, through the CIE 1931 2° observer: #fff3f1. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,777 K and log g 4.38 (u1 0.458, u2 0.261): a model, because no fit of this star's limb is used.
 

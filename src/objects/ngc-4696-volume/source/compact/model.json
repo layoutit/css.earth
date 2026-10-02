@@ -8,7 +8,7 @@
       "width": 2500,
       "height": 2500,
       "publisher": "https://www.legacysurvey.org/dr10/",
-      "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z colour HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+      "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z color HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
     },
     "crop": {
       "left": 0,
@@ -101,7 +101,7 @@
       "NOX removes stars; 7 catalogued neighbouring galaxies (HyperLEDA PGC, Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) are masked afterwards at 3 times their D25 radius, never more than three quarters of their distance from the centre. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the fit's axis ratio and the survey's position angle), never more than it held.",
       "Every pixel takes the median of the 41 px square around it, so star haloes and small background galaxies that NOX and the masks leave, and the survey's saturation bleed trails and the dark holes it leaves at bright stars, are not spread through the spheroid. The same median removes the dust lane across the core, which is narrower than the window.",
       "Black level 0.089 is the median of the cutout's four 150 px corners (23 of 255).",
-      "The colour is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes NGC 4696's faint outer light and leaves straight edges where its coadded tiles meet. Single-image depth is modelled by the prior, not measured."
+      "The color is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes NGC 4696's faint outer light and leaves straight edges where its coadded tiles meet. Single-image depth is modelled by the prior, not measured."
     ],
     "compactClamp": {
       "windowPx": 41,
@@ -157,7 +157,7 @@
         "width": 2500,
         "height": 2500,
         "publisher": "https://www.legacysurvey.org/dr10/",
-        "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z colour HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+        "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z color HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
       },
       "crop": {
         "left": 0,
@@ -250,7 +250,7 @@
         "NOX removes stars; 7 catalogued neighbouring galaxies (HyperLEDA PGC, Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) are masked afterwards at 3 times their D25 radius, never more than three quarters of their distance from the centre. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the fit's axis ratio and the survey's position angle), never more than it held.",
         "Every pixel takes the median of the 41 px square around it, so star haloes and small background galaxies that NOX and the masks leave, and the survey's saturation bleed trails and the dark holes it leaves at bright stars, are not spread through the spheroid. The same median removes the dust lane across the core, which is narrower than the window.",
         "Black level 0.089 is the median of the cutout's four 150 px corners (23 of 255).",
-        "The colour is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes NGC 4696's faint outer light and leaves straight edges where its coadded tiles meet. Single-image depth is modelled by the prior, not measured."
+        "The color is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes NGC 4696's faint outer light and leaves straight edges where its coadded tiles meet. Single-image depth is modelled by the prior, not measured."
       ],
       "compactClamp": {
         "windowPx": 41,

@@ -158,11 +158,11 @@ test('relocating catalogue metadata preserves saved native output; a changed sou
 test('16-bit imported images get a separate full-size RGB8 input while their original is preserved', async () => {
   const f = await fixture();
   try {
-    const original = await sharp(f.sourceBytes).toColourspace('rgb16').tiff({ compression: 'none' }).toBuffer();
+    const original = await sharp(f.sourceBytes).toColorspace('rgb16').tiff({ compression: 'none' }).toBuffer();
     assert.equal((await sharp(original).metadata()).depth, 'ushort');
-    await f.write('.local/colour16.tif', original);
+    await f.write('.local/color16.tif', original);
     await f.json('labs/nebula/models/image-candidates.json', { targets: [{ directory: 'models/test',
-      images: [{ id: request.imageId, path: '.local/colour16.tif' }] }] });
+      images: [{ id: request.imageId, path: '.local/color16.tif' }] }] });
     await rm(join(f.root, planPath));
     const overview = await f.remove({ ...request, action: 'overview' }) as any;
     assert.equal(f.calls.length, 0); assert.deepEqual(overview.nativeDimensions, [16, 12]);
@@ -170,7 +170,7 @@ test('16-bit imported images get a separate full-size RGB8 input while their ori
     const converted = await readFile(join(f.root, convertedPath));
     const metadata = await sharp(converted).metadata();
     assert.equal(metadata.depth, 'uchar'); assert.equal(metadata.channels, 3);
-    assert.deepEqual(await readFile(join(f.root, '.local/colour16.tif')), original);
+    assert.deepEqual(await readFile(join(f.root, '.local/color16.tif')), original);
     assert.deepEqual(await f.remove({ ...request, action: 'overview' }), overview);
     f.source.path = convertedPath;
     const applied = await f.remove({ ...request, action: 'apply' }) as any;

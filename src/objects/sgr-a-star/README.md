@@ -17,7 +17,7 @@ The sphere's radius is half the shadow diameter at 8277 pc: 0.2015 au, 30,150,69
 
 ## The EHT image
 
-The collaboration released its calibrated 2017 data (release 2022-D02-01) and its imaging pipelines, not the image. The image here runs EHT's eht-imaging pipeline on the April 7 low- and high-band data for 200 parameter combinations, drawn with a fixed seed from the 5594 of its Top Set (EHT Collaboration 2022, Sgr A* Paper III, [arXiv:2311.09479](https://arxiv.org/abs/2311.09479)), then averages them. It sits behind the shadow disc with celestial north where the scene's sky has it, in eht-imaging's own colour map (matplotlib afmhot), with opacity following the light. `node packages/bake/authoring/eht/topset-mean.mts sgr-a-star` remakes it from [the recipe](source/preparation/eht-topset.json).
+The collaboration released its calibrated 2017 data (release 2022-D02-01) and its imaging pipelines, not the image. The image here runs EHT's eht-imaging pipeline on the April 7 low- and high-band data for 200 parameter combinations, drawn with a fixed seed from the 5594 of its Top Set (EHT Collaboration 2022, Sgr A* Paper III, [arXiv:2311.09479](https://arxiv.org/abs/2311.09479)), then averages them. It sits behind the shadow disc with celestial north where the scene's sky has it, in eht-imaging's own color map (matplotlib afmhot), with opacity following the light. `node packages/bake/authoring/eht/topset-mean.mts sgr-a-star` remakes it from [the recipe](source/preparation/eht-topset.json).
 
 ## The S-stars
 

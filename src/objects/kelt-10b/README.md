@@ -8,7 +8,7 @@ It is the only planet known around KELT-10. Its orbit and size follow Kuhn et al
 
 **Orbit.** Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 4.1662541 d Kuhn et al. 2016 (2016MNRAS.459.4281K), via the NASA Exoplanet Archive ps table (pl_refname KUHN_ET_AL__2016): a/R* 9.34; Kuhn et al. 2016 (2016MNRAS.459.4281K), via the NASA Exoplanet Archive ps table (pl_refname KUHN_ET_AL__2016): inclination 88.61 degrees No archive row states an eccentricity; the orbit is taken as circular Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2457612.49947 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by kelt-10's measured colour (#fff3f2, the colour dataset of kelt-10 (src/objects/kelt-10/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by kelt-10's measured color (#fff3f2, the color dataset of kelt-10 (src/objects/kelt-10/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of KELT-10's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (67, 94, 104), folded onto its orbit. Upper limits and rows without an error are left out.
 

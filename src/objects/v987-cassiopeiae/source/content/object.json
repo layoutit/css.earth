@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "qualification": "Color from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
         "thumbnail": "v987-cassiopeiae-dataset-color.webp",
         "surface": "v987-cassiopeiae-surface-color@2x.webp",
         "poles": "v987-cassiopeiae-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd010780/h_stis_ngsl_hd010780_v2.fits"
         },
         "falseColor": false,
-        "notes": "The colour of the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 10780). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,396 K and log g 4.55 (u1 0.548, u2 0.201): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+        "notes": "The color of the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 10780). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,396 K and log g 4.55 (u1 0.548, u2 0.201): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
       }
     ]
   },

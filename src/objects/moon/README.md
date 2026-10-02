@@ -28,7 +28,7 @@ PDS archives these NASA mission products without a separate Creative Commons lic
 
 ## Processing
 
-The surface photograph is the WAC float map of observations from 7 November 2009 to 31 January 2011, which [LROC's README](https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_README.TXT) documents. The reader integrates the original pixel footprints into 4,096 × 2,048 and 8,192 × 4,096 maps. PDS special values are withheld and no gap is painted as terrain. It was chosen over the NASA CGI Moon Kit and the LROC colour tiles for sharper terrain and polar coverage.
+The surface photograph is the WAC float map of observations from 7 November 2009 to 31 January 2011, which [LROC's README](https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_README.TXT) documents. The reader integrates the original pixel footprints into 4,096 × 2,048 and 8,192 × 4,096 maps. PDS special values are withheld and no gap is painted as terrain. It was chosen over the NASA CGI Moon Kit and the LROC color tiles for sharper terrain and polar coverage.
 
 Elevation reads the [LOLA LDEM_16 grid](https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml) of David E. Smith and the GSFC LOLA team: height above the 1,737.4 km reference sphere, not a geoid, shown from −12 to +12 km. The night views read the Diviner GHRM mosaics of Powell and the UCLA Diviner team through the [shared converter](../../../packages/bake/src/objects/acquisition/diviner-ghrm.py). Midnight temperature spans 80 to 140 K, heat anomalies −10 to +10 K and rock abundance 0 to 2%. All numeric views are painted from the source grid with nearest sampling, stored lossless, and never filled.
 
@@ -74,7 +74,7 @@ The photograph replaced a 2K CGI texture; the same Copernicus camera before and 
 
 - Atlas seams can show at extreme close zoom. The mosaic keeps photographed shadows and strip differences that the Shadows control cannot relight.
 - Diviner night maps combine 2009–2022 observations. Anomalies keep terrain effects and do not show geothermal activity. Rock abundance is area fraction, not boulder counts.
-- Christiansen values are wavelengths, not mineral abundances. Geology colours are interpretations; the crust display depends on model assumptions.
+- Christiansen values are wavelengths, not mineral abundances. Geology colors are interpretations; the crust display depends on model assumptions.
 - Kaguya can assign too much plagioclase to mature soils; read mineral maps with OMAT.
 - Gravity is in the principal-axis frame, about 1 km from the other views ([LRO coordinate white paper](https://science.nasa.gov/wp-content/uploads/2024/01/luncoordwhitepaper-10-08.pdf)). The Bouguer view assumes one density, so part of its mare signal is basalt fill.
 - Daytime temperatures are many-day averages; noon gaps show as gray streaks. One PDS3 label swaps its latitude limits.

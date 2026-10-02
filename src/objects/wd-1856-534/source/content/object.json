@@ -53,8 +53,8 @@
     "controls": [
       {
         "id": "color",
-        "label": "Colour",
-        "qualification": "Gaia DR3 spectrum colour on a uniform disc; darkening toward the edge from a published law.",
+        "label": "Color",
+        "qualification": "Gaia DR3 spectrum color on a uniform disc; darkening toward the edge from a published law.",
         "thumbnail": "wd-1856-534-dataset-color.webp",
         "surface": "wd-1856-534-surface-color@2x.webp",
         "poles": "wd-1856-534-poles-color@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "No image of this white dwarf exists: at 24.76 parsecs its disc is about 4.5 microarcseconds across. The colour is its measured Gaia spectrum through the CIE 1931 observer. The disc is drawn without limb darkening: the only law fitted to its transits (Gendreau-Distler et al. 2026, Bessel R, u1 = u2 = 0.52) puts the edge below zero brightness, so it cannot be drawn. The darkening toward the edge is the quadratic law (u1 0.05, u2 0.52) Vanderburg et al. (2020), Nature 585, 363, Methods, transit light-curve fitting (https://arxiv.org/abs/2009.07282) fixed from model atmospheres for this star (GTC g' band; the coefficients Gianninas et al. (2013) compute from white-dwarf model atmospheres, not a visible-band measurement)."
+        "notes": "No image of this white dwarf exists: at 24.76 parsecs its disc is about 4.5 microarcseconds across. The color is its measured Gaia spectrum through the CIE 1931 observer. The disc is drawn without limb darkening: the only law fitted to its transits (Gendreau-Distler et al. 2026, Bessel R, u1 = u2 = 0.52) puts the edge below zero brightness, so it cannot be drawn. The darkening toward the edge is the quadratic law (u1 0.05, u2 0.52) Vanderburg et al. (2020), Nature 585, 363, Methods, transit light-curve fitting (https://arxiv.org/abs/2009.07282) fixed from model atmospheres for this star (GTC g' band; the coefficients Gianninas et al. (2013) compute from white-dwarf model atmospheres, not a visible-band measurement)."
       }
     ]
   },

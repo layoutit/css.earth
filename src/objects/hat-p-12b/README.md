@@ -8,7 +8,7 @@ It is the only planet known around HAT-P-12. Its orbit and size follow Hartman e
 
 **Orbit.** Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 3.21305762 d Hartman et al. 2009 (2009ApJ...706..785H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2009): a/R* 11.77; Hartman et al. 2009 (2009ApJ...706..785H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2009): inclination 89 degrees Hartman et al. 2009 (2009ApJ...706..785H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2009): e 0 Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2456851.481119 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hat-p-12's measured colour (#ffd1b6, the colour dataset of hat-p-12 (src/objects/hat-p-12/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by hat-p-12's measured color (#ffd1b6, the color dataset of hat-p-12 (src/objects/hat-p-12/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HAT-P-12's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (50, 76, 77), folded onto its orbit. Upper limits and rows without an error are left out.
 

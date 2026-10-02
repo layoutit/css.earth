@@ -6,7 +6,7 @@ Its radius and temperature follow Hartman et al. 2009. The introduction is gener
 
 **Star.** Placement: Gaia DR3 source 1499514786891168640, parallax 7.045 ± 0.010 mas (141.95 pc). Radius 0.701 +/- 0.017 solar radii from Hartman et al. 2009, the stellar radius of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract). Mass 0.733 +/- 0.018 solar masses from Hartman et al. 2009, the stellar mass of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract). Temperature 4,650 K from Hartman et al. 2009, the stellar temperature of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive. log g 4.61 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 1499514786891168640, through the CIE 1931 2° observer: #ffd1b6. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 1499514786891168640, through the CIE 1931 2° observer: #ffd1b6. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,650 K and log g 4.61 (u1 0.747, u2 0.044): a model, because no fit of this star's limb is used.
 

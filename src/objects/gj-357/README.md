@@ -6,7 +6,7 @@ Its radius and temperature follow Oddo et al. 2023. It is also HIP 47103. The in
 
 **Star.** Placement: Gaia DR3 source 5664814198431308288, parallax 105.979 ± 0.023 mas (9.44 pc). Radius 0.337 +/- 0.015 solar radii from Oddo et al. 2023, the stellar radius of the default parameter set of GJ 357 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract). Mass 0.342 +/- 0.011 solar masses from Oddo et al. 2023, the stellar mass of the default parameter set of GJ 357 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract). Temperature 3,505 K from Oddo et al. 2023, the stellar temperature of the default parameter set of GJ 357 b in the NASA Exoplanet Archive. log g 4.92 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 5664814198431308288, through the CIE 1931 2° observer: #ffc484. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 5664814198431308288, through the CIE 1931 2° observer: #ffc484. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,505 K and log g 4.92 (u1 0.382, u2 0.386): a model, because no fit of this star's limb is used.
 

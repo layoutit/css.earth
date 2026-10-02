@@ -79,7 +79,7 @@ available content, not an uncertainty estimate or a qualification verdict.
 
 `catalog.illustrationDatasets` names a package's approximate stand-in datasets.
 A body is **Illustration only** when every exposed dataset is one of them. A body that
-also has a measured dataset, such as Makemake's whole-disc colour beside NASA's
+also has a measured dataset, such as Makemake's whole-disc color beside NASA's
 illustrative texture, stays **Shape only**, and the illustration never counts as
 imagery. The list is not a permanent blacklist of object identities. When replacing an
 approximation with a body-specific mesh, remove that dataset from this list as

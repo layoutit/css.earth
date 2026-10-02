@@ -6,7 +6,7 @@ Interferometry gives it 0.5773 solar radii; with its total light, that makes its
 
 **Star.** Placement: Gaia DR3 source 1022456139210632064, parallax 157.888 ± 0.020 mas (6.33 pc). Radius 0.5773 +/- 0.0131 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 338A: radius in solar radii, 0.5773 +/- 0.0131, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112). Mass 0.622 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 338A: mass 0.622 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112). Temperature 3,907 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 338A: effective temperature in K, 3907 +/- 35, from this work (CHARA). log g 4.71 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 1022456139210632064, through the CIE 1931 2° observer: #ffbf90. Routes tried in order: stis-ngsl: HD 79210 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 1022456139210632064, through the CIE 1931 2° observer: #ffbf90. Routes tried in order: stis-ngsl: HD 79210 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,907 K and log g 4.71 (u1 0.480, u2 0.276): a model, because no fit of this star's limb is used.
 

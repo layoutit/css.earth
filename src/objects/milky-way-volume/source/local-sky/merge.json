@@ -12,8 +12,8 @@
     "local-100pc",
     "local-20pc"
   ],
-  "colourTowardWhite": 0.5,
-  "colourTowardWhiteBasis": "Presentation choice: each catalogue colour mixed halfway to white before the gamma, because the saturated colours read as neon over the backing. The hue order of every catalogue is kept.",
-  "colourGamma": 1.6,
-  "colourGammaBasis": "Presentation choice, picked from three renders over the backing (full opacity, 65% opacity, gamma 1.6): each colour channel raised to the power 1.6, so the coloured dots sink into the painted arms and the whitest keep their sparkle."
+  "colorTowardWhite": 0.5,
+  "colorTowardWhiteBasis": "Presentation choice: each catalogue color mixed halfway to white before the gamma, because the saturated colors read as neon over the backing. The hue order of every catalogue is kept.",
+  "colorGamma": 1.6,
+  "colorGammaBasis": "Presentation choice, picked from three renders over the backing (full opacity, 65% opacity, gamma 1.6): each color channel raised to the power 1.6, so the colored dots sink into the painted arms and the whitest keep their sparkle."
 }

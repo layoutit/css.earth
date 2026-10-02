@@ -55,9 +55,9 @@
       "id": "eris-disc-color",
       "path": "photometry/disc-color.json",
       "origin": "https://doi.org/10.1051/0004-6361:20066526",
-      "credit": "Carraro et al. (2006), A&A 460, L39; albedo Sicardy et al. (2011), Nature 478, 493; solar colours Ramírez et al. (2012), ApJ 752, 5; filter wavelengths SVO Filter Profile Service",
+      "credit": "Carraro et al. (2006), A&A 460, L39; albedo Sicardy et al. (2011), Nature 478, 493; solar colors Ramírez et al. (2012), ApJ 752, 5; filter wavelengths SVO Filter Profile Service",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed B-V, V-R and V-I (Carraro 2006 section 4), V geometric albedo (Sicardy 2011 abstract), solar colour indices (Ramírez 2012 abstract) and Generic/Bessell effective wavelengths (SVO, checked 2026-09-16)",
+      "acquisition": "Transcribed B-V, V-R and V-I (Carraro 2006 section 4), V geometric albedo (Sicardy 2011 abstract), solar color indices (Ramírez 2012 abstract) and Generic/Bessell effective wavelengths (SVO, checked 2026-09-16)",
       "redistribution": "Factual parameter transcription only; no article text or figures",
       "consumers": [
         "assets",
@@ -256,7 +256,7 @@
       "path": "presentation/navigation-marker.svg",
       "id": "eris-shape-marker",
       "origin": "https://doi.org/10.1038/nature10550",
-      "credit": "cssEarth schematic; fill is the measured whole-disc colour",
+      "credit": "cssEarth schematic; fill is the measured whole-disc color",
       "license": "MIT, cssEarth authored schematic; factual measurements attributed"
     },
     {

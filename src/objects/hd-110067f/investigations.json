@@ -14,9 +14,9 @@
     },
     {
       "id": "unresolved-appearance",
-      "subject": "Surface colour, map and rotation",
+      "subject": "Surface color, map and rotation",
       "status": "excluded",
-      "finding": "The selected transit/RV evidence supplies a radius and orbit, not a resolved surface, colour or spin. Neutral gray and a fixed display axis are conventions.",
+      "finding": "The selected transit/RV evidence supplies a radius and orbit, not a resolved surface, color or spin. Neutral gray and a fixed display axis are conventions.",
       "evidence": [
         "https://doi.org/10.1038/s41586-023-06692-3"
       ],

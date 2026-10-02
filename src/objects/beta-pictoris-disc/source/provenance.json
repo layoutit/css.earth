@@ -35,46 +35,46 @@
       "role": "MAST level-3 coronagraph mosaic jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F210M band of the contrast leaves; reproduced by packages/telescope-cli/src/archives/jwst/imaging/coron3.mts in programs/beta-pictoris-4758.NIRCAM-F210M-MASK335R.reproduction.json"
     },
     {
-      "id": "colour-f435w-roll1",
+      "id": "color-f435w-roll1",
       "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "bytes": 17507520,
-      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F435W image of roll 1, PSF-subtracted and drizzled here, the colour leaves"
+      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F435W image of roll 1, PSF-subtracted and drizzled here, the color leaves"
     },
     {
-      "id": "colour-f435w-roll2",
+      "id": "color-f435w-roll2",
       "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "bytes": 14402880,
-      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F435W image of roll 2, PSF-subtracted and drizzled here, the colour leaves"
+      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F435W image of roll 2, PSF-subtracted and drizzled here, the color leaves"
     },
     {
-      "id": "colour-f606w-roll1",
+      "id": "color-f606w-roll1",
       "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "bytes": 17507520,
-      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F606W image of roll 1, PSF-subtracted and drizzled here, the colour leaves"
+      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F606W image of roll 1, PSF-subtracted and drizzled here, the color leaves"
     },
     {
-      "id": "colour-f606w-roll2",
+      "id": "color-f606w-roll2",
       "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "bytes": 14402880,
-      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F606W image of roll 2, PSF-subtracted and drizzled here, the colour leaves"
+      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F606W image of roll 2, PSF-subtracted and drizzled here, the color leaves"
     },
     {
-      "id": "colour-f814w-roll1",
+      "id": "color-f814w-roll1",
       "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "bytes": 17507520,
-      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F814W image of roll 1, PSF-subtracted and drizzled here, the colour leaves"
+      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F814W image of roll 1, PSF-subtracted and drizzled here, the color leaves"
     },
     {
-      "id": "colour-f814w-roll2",
+      "id": "color-f814w-roll2",
       "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "bytes": 14402880,
-      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F814W image of roll 2, PSF-subtracted and drizzled here, the colour leaves"
+      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F814W image of roll 2, PSF-subtracted and drizzled here, the color leaves"
     }
   ],
   "paper": [
@@ -89,7 +89,7 @@
       "url": "https://arxiv.org/abs/2401.05271"
     },
     {
-      "dataset": "colour",
+      "dataset": "color",
       "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
       "url": "https://arxiv.org/abs/2401.05271"
     }
@@ -140,7 +140,7 @@
         "stellarFluxJy": {
           "HST-STIS-50CCD": 1
         },
-        "stellarFluxSource": "Not divided by the star: the deposit is in counts per pixel per second, and it is shown in those units, one filter in grey.",
+        "stellarFluxSource": "Not divided by the star: the deposit is in counts per pixel per second, and it is shown in those units, one filter in gray.",
         "stretch": {
           "a": 10,
           "top": 530,
@@ -830,7 +830,7 @@
         "noiseFade": {
           "fromNoise": 1,
           "toNoise": 3,
-          "source": "Stated, a display choice: a column fades in as the mean contrast rises from one to three times its per-pixel noise (the scatter measured 4 to 5.5 arcseconds out), so empty sky is not drawn as speckle. Every channel of a column is scaled alike, so no colour ratio changes."
+          "source": "Stated, a display choice: a column fades in as the mean contrast rises from one to three times its per-pixel noise (the scatter measured 4 to 5.5 arcseconds out), so empty sky is not drawn as speckle. Every channel of a column is scaled alike, so no color ratio changes."
         },
         "innerMaskUnits": 49.08677596384379,
         "midplaneHalfHeightUnits": 20,
@@ -1425,7 +1425,7 @@
         ],
         "filledVoxels": 285664
       },
-      "colour": {
+      "color": {
         "geometry": "edge-on",
         "bands": [
           {
@@ -1535,7 +1535,7 @@
           "HST-ACS-HRC-F606W": 681082936.7676408,
           "HST-ACS-HRC-F814W": 293494522.22697985
         },
-        "stellarFluxSource": "Golimowski et al. (2006, AJ 131, 3109; arXiv:astro-ph/0602292, Section 2.2 and its footnote): beta Pic's Vega magnitudes from Synphot, F435W 4.05, F606W 3.81 and F814W 3.68, the magnitudes all their colours rest on, with zero-point errors under 2%",
+        "stellarFluxSource": "Golimowski et al. (2006, AJ 131, 3109; arXiv:astro-ph/0602292, Section 2.2 and its footnote): beta Pic's Vega magnitudes from Synphot, F435W 4.05, F606W 3.81 and F814W 3.68, the magnitudes all their colors rest on, with zero-point errors under 2%",
         "stretch": {
           "a": 10,
           "top": 6.3,
@@ -2135,7 +2135,7 @@
           "positionAngleDeg": 0.26052816453955074
         },
         "reconstruction": {
-          "path": "reconstruction-colour.json",
+          "path": "reconstruction-color.json",
           "method": {
             "name": "axial-symmetry emission inference",
             "paper": "Wenger, Lorenz & Magnor (2013), Computer Graphics Forum 32, 93; doi:10.1111/cgf.12216",
@@ -2223,7 +2223,7 @@
   "models": {
     "visible": "Fitted edge-on disc. The deposited image (Ren et al. (2023), VizieR J/A+A/672/A114, Beta_Pic_STIS.fits) is read about its star at the array centre with 50.72 mas pixels, north up and east left (The deposit's ReadMe puts the star at the array's centre; the plate scale, 50.72 mas per pixel, is the STIS value Ren et al. (2023, Section 2) state. The orientation is measured here: the disc's midplane lies at position angle 29.8 degrees north up and east left, against 29.6 +/- 1.1 in Rebollido et al. (2024), where a mirror would put it at 150.2; and the half of the image's brightness that is not symmetric about the star correlates with the registered JWST F210M and F410M images at +0.21 to +0.47 in every window from 49 to 80 au, where a 180-degree turn would give the opposite sign.), onto a sky plane in astronomical units; its background, the median in the 3.6–4.1″ annulus, is subtracted, and it is shown in its own counts per pixel per second in every channel. The midplane is measured on the mean of the channels: the ridge of each vertical profile along a trial direction, a line through the ridges, the direction turned until it settles, at position angle 29.60° (published 29.6°) with the star -1.5 au from the line. The depth is reconstructed, not fitted to a shape: each displayed channel is solved for emission in three dimensions by the axially symmetric method of Wenger, Lorenz & Magnor (2013) as the lab implements it (labs/nebula/packages/reconstruction, methods/symmetry), with the symmetry axis the disc's normal, tilted 1.0° from the sky toward the north-west side, voxels grouped by their height above the midplane and their radius about that axis, and pixels with no data given no weight. The volume reprojects to the image to [0.0676,0.0676,0.0676] (relative error by channel); density-visible.ktx2 and reconstruction-visible.json record it.",
     "contrast": "Fitted edge-on disc. Each of the 2 mosaics is read about the star through its own WCS onto a sky plane in astronomical units; the star is placed by planet beta-pictoris-b's orbit. Each band's background, the median in the 4–5.5″ annulus, is subtracted, and the band is divided by the star's own flux in it (Kammerer et al. (2024, AJ 168, 51, arXiv:2405.18422), Table 2: planet b's MCRDI flux and its contrast to a stellar model atmosphere of Beta Pictoris give the star's flux, F_star = F_b 10^(0.4 dmag): F210M 6.10e-3 Jy at 9.08 mag is 26.14 Jy. F410M, which that programme did not observe, is interpolated in log flux and log wavelength between its F335M (7.85e-3 Jy, 7.91 mag: 11.45 Jy) and F444W (6.06e-3 Jy, 7.68 mag: 7.15 Jy) at the pivot wavelengths 3.362, 4.082 and 4.421 micrometres: 8.20 Jy.), its contrast. The channels: red F410M, green F210M + F410M, blue F210M. The midplane is measured on the mean of the channels: the ridge of each vertical profile along a trial direction, a line through the ridges, the direction turned until it settles, at position angle 30.71° (published 29.6°) with the star -0.9 au from the line. The depth is reconstructed, not fitted to a shape: each displayed channel is solved for emission in three dimensions by the axially symmetric method of Wenger, Lorenz & Magnor (2013) as the lab implements it (labs/nebula/packages/reconstruction, methods/symmetry), with the symmetry axis the disc's normal, tilted 1.0° from the sky toward the north-west side, voxels grouped by their height above the midplane and their radius about that axis, and pixels with no data given no weight. The volume reprojects to the image to [0.0825,0.0992,0.1178] (relative error by channel); density-contrast.ktx2 and reconstruction-contrast.json record it.",
-    "colour": "Fitted edge-on disc. Each band's two telescope rolls, PSF-subtracted and drizzled north up here (packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987, the reference star divided by the flux ratio the paper states), are read about the star where that subtraction found it, through each product's own WCS, onto a sky plane in astronomical units. Each roll's background, the median in the 10–13″ annulus, is subtracted; the rolls are averaged, each one standing alone where the other is blank; and the band is divided by the star's own count rate in it, F435W 2.844e+8 e-/s, F606W 6.811e+8 e-/s, F814W 2.935e+8 e-/s (Golimowski et al. (2006, AJ 131, 3109; arXiv:astro-ph/0602292, Section 2.2 and its footnote): beta Pic's Vega magnitudes from Synphot, F435W 4.05, F606W 3.81 and F814W 3.68, the magnitudes all their colours rest on, with zero-point errors under 2%; Sirianni et al. (2005, PASP 117, 1049; arXiv:astro-ph/0507614), Table 11: HRC VEGAMAG zero points 25.185, 25.893 and 24.849 for F435W, F606W and F814W, for the total count rate in electrons per second (Section 7), the zero points Golimowski et al. (2006) cite for their magnitudes), its contrast. The channels: red F814W, green F606W, blue F435W. The midplane is measured on the mean of the channels: the ridge of each vertical profile along a trial direction, a line through the ridges, the direction turned until it settles, at position angle 29.86° (published 29.6°) with the star -1.1 au from the line. The depth is reconstructed, not fitted to a shape: each displayed channel is solved for emission in three dimensions by the axially symmetric method of Wenger, Lorenz & Magnor (2013) as the lab implements it (labs/nebula/packages/reconstruction, methods/symmetry), with the symmetry axis the disc's normal, tilted 1.0° from the sky toward the north-west side, voxels grouped by their height above the midplane and their radius about that axis, and pixels with no data given no weight. The volume reprojects to the image to [0.0799,0.0811,0.0835] (relative error by channel); density-colour.ktx2 and reconstruction-colour.json record it."
+    "color": "Fitted edge-on disc. Each band's two telescope rolls, PSF-subtracted and drizzled north up here (packages/telescope-cli/src/archives/hst/psf-subtract.mts beta-pictoris-9987, the reference star divided by the flux ratio the paper states), are read about the star where that subtraction found it, through each product's own WCS, onto a sky plane in astronomical units. Each roll's background, the median in the 10–13″ annulus, is subtracted; the rolls are averaged, each one standing alone where the other is blank; and the band is divided by the star's own count rate in it, F435W 2.844e+8 e-/s, F606W 6.811e+8 e-/s, F814W 2.935e+8 e-/s (Golimowski et al. (2006, AJ 131, 3109; arXiv:astro-ph/0602292, Section 2.2 and its footnote): beta Pic's Vega magnitudes from Synphot, F435W 4.05, F606W 3.81 and F814W 3.68, the magnitudes all their colors rest on, with zero-point errors under 2%; Sirianni et al. (2005, PASP 117, 1049; arXiv:astro-ph/0507614), Table 11: HRC VEGAMAG zero points 25.185, 25.893 and 24.849 for F435W, F606W and F814W, for the total count rate in electrons per second (Section 7), the zero points Golimowski et al. (2006) cite for their magnitudes), its contrast. The channels: red F814W, green F606W, blue F435W. The midplane is measured on the mean of the channels: the ridge of each vertical profile along a trial direction, a line through the ridges, the direction turned until it settles, at position angle 29.86° (published 29.6°) with the star -1.1 au from the line. The depth is reconstructed, not fitted to a shape: each displayed channel is solved for emission in three dimensions by the axially symmetric method of Wenger, Lorenz & Magnor (2013) as the lab implements it (labs/nebula/packages/reconstruction, methods/symmetry), with the symmetry axis the disc's normal, tilted 1.0° from the sky toward the north-west side, voxels grouped by their height above the midplane and their radius about that axis, and pixels with no data given no weight. The volume reprojects to the image to [0.0799,0.0811,0.0835] (relative error by channel); density-color.ktx2 and reconstruction-color.json record it."
   },
   "limitations": [
     "No third axis was observed. The depth is reconstructed by assuming the disc is symmetric about its normal: each ring of radius and height carries one emission, fitted so the volume reprojects to the image. Real asymmetries the image shows are kept where the fit allows, but anything the symmetry cannot place is not measured.",
@@ -2232,9 +2232,9 @@
     "Inside each dataset’s inner edge the image is not data and is not drawn; the star and planets are their own spheres.",
     "Opacity is the renderer’s convention, not the dust’s: brightness and blocking are one number in its emission model, and the real disc blocks a small fraction of a percent of what is behind it.",
     "Nothing finer than an image’s pixels or the grid’s cells is in the drawn volume.",
-    "colour: the ACS images show the disc above the noise to the edge of the camera's field, 320 au out, and the volume ends at the grid's 135 au: its midplane is still twice the noise 300 to 320 au out. The grid is the one all three datasets share, so switching dataset does not move the object, and its 1.7 au cells are what the inner datasets need. The light beyond 135 au is measured (source/provenance.json, the midplane profile) and not drawn.",
-    "visible: the HST/STIS behind its coronagraph image is the authors’ own reduction (Ren et al. (2023), VizieR J/A+A/672/A114, Beta_Pic_STIS.fits), combined from observations made in 1997, 2012 and 2013 (HST programmes 7125, 12551 and 12923), and carries no sky coordinates; its orientation is stated and checked, not read from a header. Close to the star its PSF subtraction leaves light off the disc too, which is drawn with the disc. It is one visible filter shown in grey, brightness only.",
-    "contrast: the colours are the disc’s contrast to the star in F410M and F210M, mapped to blue and red by wavelength: infrared colours, not what an eye would see. MAST’s coronagraphy products are drawn as the pipeline made them, and the stellar flux the contrast is computed against is a model atmosphere.",
-    "colour: the colours are the disc’s contrast to the star in F435W, F606W, F814W, blue, green and red, which the eye would see as its colour against the star’s: a white disc scatters like the star shines. The reference star’s light was removed at the flux ratio the paper states, not at the scale that best cancels it here, and what that leaves near the star and along the occulting finger is drawn with the disc (beta-pictoris-9987.psf-subtraction.json records the scale a free fit would choose)."
+    "color: the ACS images show the disc above the noise to the edge of the camera's field, 320 au out, and the volume ends at the grid's 135 au: its midplane is still twice the noise 300 to 320 au out. The grid is the one all three datasets share, so switching dataset does not move the object, and its 1.7 au cells are what the inner datasets need. The light beyond 135 au is measured (source/provenance.json, the midplane profile) and not drawn.",
+    "visible: the HST/STIS behind its coronagraph image is the authors’ own reduction (Ren et al. (2023), VizieR J/A+A/672/A114, Beta_Pic_STIS.fits), combined from observations made in 1997, 2012 and 2013 (HST programmes 7125, 12551 and 12923), and carries no sky coordinates; its orientation is stated and checked, not read from a header. Close to the star its PSF subtraction leaves light off the disc too, which is drawn with the disc. It is one visible filter shown in gray, brightness only.",
+    "contrast: the colors are the disc’s contrast to the star in F410M and F210M, mapped to blue and red by wavelength: infrared colors, not what an eye would see. MAST’s coronagraphy products are drawn as the pipeline made them, and the stellar flux the contrast is computed against is a model atmosphere.",
+    "color: the colors are the disc’s contrast to the star in F435W, F606W, F814W, blue, green and red, which the eye would see as its color against the star’s: a white disc scatters like the star shines. The reference star’s light was removed at the flux ratio the paper states, not at the scale that best cancels it here, and what that leaves near the star and along the occulting finger is drawn with the disc (beta-pictoris-9987.psf-subtraction.json records the scale a free fit would choose)."
   ]
 }

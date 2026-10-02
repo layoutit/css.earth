@@ -343,7 +343,7 @@ async function prepareMaterialBanks() {
         `${config.namespace}-${role}-row-${String(shardIndex).padStart(2, "0")}` +
         `${suffix}.webp`,
       );
-      // The atmosphere carries colour in RGB, so use the lossy lane with exact alpha.
+      // The atmosphere carries color in RGB, so use the lossy lane with exact alpha.
       await writeLossyWebp(rowImage, rowPath, { alphaQuality: 100, effort: 6 });
     }
     if (mine()) {

@@ -6,7 +6,7 @@ Its radius and temperature follow Lund et al. 2019. The introduction is generate
 
 **Star.** Placement: Gaia DR3 source 600698184764497664, parallax 9.436 ± 0.021 mas (105.98 pc). Radius 1.3 +/- 0.009 solar radii from Lund et al. 2019, the stellar radius of the default parameter set of HIP 41378 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..248L/abstract). Mass 1.22 +/- 0.03 solar masses from Lund et al. 2019, the stellar mass of the default parameter set of HIP 41378 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..248L/abstract). Temperature 6,290 K from Lund et al. 2019, the stellar temperature of the default parameter set of HIP 41378 b in the NASA Exoplanet Archive. log g 4.3 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 600698184764497664, through the CIE 1931 2° observer: #f4f1ff. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 600698184764497664, through the CIE 1931 2° observer: #f4f1ff. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,290 K and log g 4.3 (u1 0.372, u2 0.307): a model, because no fit of this star's limb is used.
 

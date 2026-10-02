@@ -6,7 +6,7 @@ import { validateSurfaceObservation } from '@cssearth/bake/objects/layers/terres
 const geometry = { path: 'shape/iau-ellipsoid.tab', format: 'pds-radius-table', simplification: { method: 'source-mesh', maximumErrorMeters: 480 } };
 const frame = (n: number, startTime: string) => ({ id: `jncr_2022272_45c0000${n}_v01`, path: `observations/junocam/JNCR_2022272_45C0000${n}_V01.IMG`, labelPath: `observations/junocam/JNCR_2022272_45C0000${n}_V01.LBL`, startTime });
 /** Europa's dataset as its package states it, with two of its four photographs. */
-const dataset = () => ({ id: 'junocam', format: 'junocam-camera', consumer: 'junocam-observation', metadata: { label: 'JunoCam', falseColor: true, coverage: 'Two colour photographs.' },
+const dataset = () => ({ id: 'junocam', format: 'junocam-camera', consumer: 'junocam-observation', metadata: { label: 'JunoCam', falseColor: true, coverage: 'Two color photographs.' },
   frames: [frame(1, '2022-09-29T09:38:05.691Z'), frame(2, '2022-09-29T09:39:06.757Z')],
   spice: { kernelSet: 'juno', kernels: ['lsk/naif0012.tls', 'pck/pck00011.tpc', 'sclk/JNO_SCLKSCET.00211.tsc', 'fk/juno_v12.tf', 'ik/juno_junocam_v03.ti', 'spk/spk_rec_220909_221019_221027.bsp', 'ck/juno_sc_rec_220925_221001_v01.bc'],
     observer: -61, target: 502, targetName: 'EUROPA', bodyFrame: 'IAU_EUROPA', aberration: 'LT+S' },
@@ -27,9 +27,9 @@ test('a JunoCam dataset validates, and every undeclared or contradictory stateme
     ['an unnamed target', recipe => { recipe.spice.targetName = ''; }],
     ['an unknown aberration', recipe => { recipe.spice.aberration = 'XCN'; }],
     ['kernels outside a bank', recipe => { recipe.spice.kernelSet = 'Juno Bank'; }],
-    ['natural colour', recipe => { recipe.metadata.falseColor = false; }],
+    ['natural color', recipe => { recipe.metadata.falseColor = false; }],
     ['a range that does not start at zero', recipe => { recipe.display.displayRange = [0.02, 0.35]; }],
-    ['percentiles on band colour', recipe => { (recipe as Record<string, unknown>).display = { basis: 'authored', percentiles: [1, 99] }; }],
+    ['percentiles on band color', recipe => { (recipe as Record<string, unknown>).display = { basis: 'authored', percentiles: [1, 99] }; }],
     ['another refinement method', recipe => { recipe.epochRefinement.method = 'mesh-limb'; }],
     ['an ephemeris budget beyond five seconds', recipe => { recipe.epochRefinement.maximumEphemerisSeconds = 8; }],
     ['a disk function with a retained gain', recipe => { recipe.photometry.model = 'lommel-seeliger'; recipe.photometry.maximumGain = 4; }],

@@ -1,6 +1,6 @@
 # WASP-103 b
 
-The Temperature dataset explores a published **climate simulation**, with seven pressure levels on one 0–3,900 K colour scale. Lower pressure means higher atmosphere. This is the model's gas temperature, not an observed brightness-temperature map or a photograph.
+The Temperature dataset explores a published **climate simulation**, with seven pressure levels on one 0–3,900 K color scale. Lower pressure means higher atmosphere. This is the model's gas temperature, not an observed brightness-temperature map or a photograph.
 
 ## Source and processing
 
@@ -8,9 +8,9 @@ The Temperature dataset explores a published **climate simulation**, with seven 
 
 Columns 2–5 are longitude in degrees, latitude in degrees, pressure in bar and temperature in kelvin. Longitude zero is the substellar meridian; east is positive. The [authors' plotting code](https://github.com/lkreidberg/2017_wasp103/blob/425f2e8fe694760266398257a71eaa991ab322fd/Figures/fig7_model_comparison.py) selects this file at 0.11542 bar for the GCM panel of published Figure 8. Despite the `Drag3` filename, the paper describes that comparison as the 10⁴ s drag model. Its 923.14–3,359.4 K range agrees with section 6's rounded 920–3,360 K and section 6.1's 3,359 K reference.
 
-The shared [table reader](../../../packages/bake/src/objects/raster/lonlat-slice-table.ts) selects exact native pressure levels, verifies a complete periodic grid and interpolates temperature between the released geographic coordinates. It does no vertical interpolation, model fitting or figure digitization. The [raster recipe](source/preparation/raster.json) then applies one false-colour palette and prepares lossless textures, pole tiles, minimaps and the default navigation marker. Its simulation metadata produces the shared **Simulation** qualification rather than observational imagery status. Runtime uses the shared retained scene and dataset-step control, starting paused at the selected pressure.
+The shared [table reader](../../../packages/bake/src/objects/raster/lonlat-slice-table.ts) selects exact native pressure levels, verifies a complete periodic grid and interpolates temperature between the released geographic coordinates. It does no vertical interpolation, model fitting or figure digitization. The [raster recipe](source/preparation/raster.json) then applies one false-color palette and prepares lossless textures, pole tiles, minimaps and the default navigation marker. Its simulation metadata produces the shared **Simulation** qualification rather than observational imagery status. Runtime uses the shared retained scene and dataset-step control, starting paused at the selected pressure.
 
-Selected pressures are 0.00011051, 0.00088933, 0.010131, 0.11542, 0.92882, 10.581 and 85.152 bar. Display labels round those values; the default is 0.11542 bar. The table stops at ±81.562° latitude. Grey polar caps show that missing coverage; no temperatures are extrapolated.
+Selected pressures are 0.00011051, 0.00088933, 0.010131, 0.11542, 0.92882, 10.581 and 85.152 bar. Display labels round those values; the default is 0.11542 bar. The table stops at ±81.562° latitude. Gray polar caps show that missing coverage; no temperatures are extrapolated.
 
 ## Geometry and limits
 

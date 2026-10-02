@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+        "qualification": "Color from a measured spectrum of the star (Pulkovo catalogue). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
         "thumbnail": "arcturus-dataset-color.webp",
         "surface": "arcturus-surface-color@2x.webp",
         "poles": "arcturus-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
         },
         "falseColor": false,
-        "notes": "The colour of Arcturus's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. No resolved image of the surface is cast; the display axis is celestial north, a convention."
+        "notes": "The color of Arcturus's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. No resolved image of the surface is cast; the display axis is celestial north, a convention."
       }
     ]
   },

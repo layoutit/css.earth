@@ -57,7 +57,7 @@ products were corrected with ([Domingue et al. 2016](https://doi.org/10.1016/j.i
 at 748.7 nm), recorded in `source/photometry/domingue-2016-ks3-749nm.json`. Each frame is
 the model relative to the flood-lit disc centre, so the default shadowless view
 shows the 750 nm map as published at the centre and keeps 68% of that
-brightness near the limb, at 84° emission. The color, enhanced-colour and
+brightness near the limb, at 84° emission. The color, enhanced-color and
 topography datasets share this lighting bank
 ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)).
 

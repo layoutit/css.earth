@@ -24,7 +24,7 @@
         "reason": "the Crimean scan ends at 772.5 nm; the last value is held to 780 nm, where the observer adds almost nothing"
       }
     ],
-    "note": "Ground-based photoelectric scan of 1982-10-24, 327.5-772.5 nm in 2.5 nm steps, published as log10 flux. The second Crimean scan, record 647 of 1983-02-02, gives a paler colour (#ffb859); CE Tau is a semi-regular variable."
+    "note": "Ground-based photoelectric scan of 1982-10-24, 327.5-772.5 nm in 2.5 nm steps, published as log10 flux. The second Crimean scan, record 647 of 1983-02-02, gives a paler color (#ffb859); CE Tau is a semi-regular variable."
   },
   "whitePoint": "sRGB D65",
   "normalization": "brightest linear sRGB channel = 1",
@@ -43,6 +43,6 @@
       },
       "gaps": []
     },
-    "disagreement": "Gaia XP gives a paler colour (#ffbe5f), and so does the second Crimean night (record 647, #ffb859); CE Tau is a semi-regular variable and Gaia XP is unreliable this bright, so which colour is typical is not settled."
+    "disagreement": "Gaia XP gives a paler color (#ffbe5f), and so does the second Crimean night (record 647, #ffb859); CE Tau is a semi-regular variable and Gaia XP is unreliable this bright, so which color is typical is not settled."
   }
 }

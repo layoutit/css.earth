@@ -8,7 +8,7 @@ It is one of 4 planets known around K2-133. Its orbit and size follow Wells et a
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 11.0248821 d Wells et al. 2019 (2019MNRAS.487.1865W), via the NASA Exoplanet Archive ps table (pl_refname WELLS_ET_AL__2019): a/R* derived from its semi-major axis 0.07487 au and stellar radius 0.455 solar radii; Wells et al. 2019 (2019MNRAS.487.1865W), via the NASA Exoplanet Archive ps table (pl_refname WELLS_ET_AL__2019): inclination 89.4 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460251.64402 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-133's measured colour (#ffc08a, the colour dataset of k2-133 (src/objects/k2-133/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by k2-133's measured color (#ffc08a, the color dataset of k2-133 (src/objects/k2-133/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-133's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (44, 70, 71), folded onto its orbit. Upper limits and rows without an error are left out.
 

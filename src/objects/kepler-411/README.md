@@ -6,7 +6,7 @@ Its radius follows Sun et al. 2019, and its temperature TICv8. The introduction 
 
 **Star.** Placement: Gaia DR3 source 2132768956905956352, parallax 6.531 ± 0.008 mas (153.11 pc). Radius 0.82 +/- 0.018 solar radii from Sun et al. 2019, the stellar radius of the default parameter set of Kepler-411 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract). Mass 0.87 +/- 0.039 solar masses from Sun et al. 2019, the stellar mass of the default parameter set of Kepler-411 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract). Temperature 4,837 K from TICv8, the stellar temperature of Kepler-411 c's parameter set from TICv8 (the default leaves it empty) in the NASA Exoplanet Archive. log g 4.55 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2132768956905956352, through the CIE 1931 2° observer: #ffd7bc. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2132768956905956352, through the CIE 1931 2° observer: #ffd7bc. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,837 K and log g 4.55 (u1 0.702, u2 0.082): a model, because no fit of this star's limb is used.
 

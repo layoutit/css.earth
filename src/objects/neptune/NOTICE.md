@@ -2,7 +2,7 @@
 
 - Hubble OPAL products: NASA, ESA, Amy Simon (NASA-GSFC), Michael H. Wong
   (UC Berkeley), and the OPAL team; distributed by MAST/STScI.
-- Neptune true-colour calibration reference: Patrick Irwin, University of
+- Neptune true-color calibration reference: Patrick Irwin, University of
   Oxford, and NASA; distributed by the Royal Astronomical Society under
   CC BY 4.0.
 - Neptune facts and Planetary Spectrum Generator products: NASA.
@@ -11,7 +11,7 @@
 
 The observation datasets are source measurements prepared into declared display
 palettes. The normal dataset preserves OPAL weather detail with a prepare-time
-colour calibration against the cited true-colour reconstruction. The retained
+color calibration against the cited true-color reconstruction. The retained
 PolyCSS surface uses a declared, source-derived northern coverage treatment; no
 weather detail is invented.
 The datasets are not live telescope feeds. Orbital motion and apparent moon sizes

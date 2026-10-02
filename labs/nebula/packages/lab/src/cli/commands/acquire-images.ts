@@ -46,7 +46,7 @@ for (const image of recipe.images) {
   if (resizeWidth !== undefined && !(Number.isInteger(resizeWidth) && resizeWidth > 0 && resizeWidth < image.width)) {
     throw new TypeError(`Reference resizeWidth must be a positive integer below the native width: ${image.id}`);
   }
-  const pipe = sharp(original).rotate().toColourspace('srgb').removeAlpha();
+  const pipe = sharp(original).rotate().toColorspace('srgb').removeAlpha();
   await (resizeWidth === undefined ? pipe : pipe.resize({ width: resizeWidth }))
     .webp({ quality: image.output.quality, effort: image.output.effort }).toFile(`${output}.part`);
   await rename(`${output}.part`, output);

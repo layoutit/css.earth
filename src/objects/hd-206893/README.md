@@ -12,13 +12,13 @@ HD 206893 is a young star 41 parsecs away. VLTI/GRAVITY found its inner planet c
 
 **Radial velocity.** Gaia DR3's -11.80 ± 0.14 km/s.
 
-**Colour dataset.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)). Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 6,554 K (the record) and log g 4.28 (from the record's mass and radius (packages/astronomy/data/bodies/hd-206893.json)): a model, since no fit of this star's limb exists.
+**Color dataset.** The color of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)). Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 6,554 K (the record) and log g 4.28 (from the record's mass and radius (packages/astronomy/data/bodies/hd-206893.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** No axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 
 ## Evidence
 
-Run of 2026-09-23 (this version): see the planet's README for its placement against the measured positions. The four stars in the app, headless Chromium at 800 × 600 on this version: each is drawn in its measured colour.
+Run of 2026-09-23 (this version): see the planet's README for its placement against the measured positions. The four stars in the app, headless Chromium at 800 × 600 on this version: each is drawn in its measured color.
 
 ## Known problems
 

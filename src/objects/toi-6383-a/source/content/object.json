@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
         "thumbnail": "toi-6383-a-dataset-color.webp",
         "surface": "toi-6383-a-surface-color@2x.webp",
         "poles": "toi-6383-a-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract"
         },
         "falseColor": false,
-        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,444 K and log g 4.78 (u1 0.171, u2 0.435): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,444 K and log g 4.78 (u1 0.171, u2 0.435): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
       }
     ]
   },

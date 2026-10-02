@@ -424,10 +424,10 @@ test('inactive annotations retain emphasis until their reveal publication', () =
   layer.destroy();
 });
 
-test('a body carries its prepared colour inline, and the emphasised one wears the one corner locator by inheritance', () => {
-  const base = plan(1), colours: Record<string, string> = { mercury: '#abcdef', venus: '#123456' };
+test('a body carries its prepared color inline, and the emphasised one wears the one corner locator by inheritance', () => {
+  const base = plan(1), colors: Record<string, string> = { mercury: '#abcdef', venus: '#123456' };
   const prepared = { ...base, focus: { ...base.focus, contextColor: '#fedcba' },
-    bodies: base.bodies.map(body => ({ ...body, contextColor: colours[body.id]!, labelCase: 'upper' as const })) };
+    bodies: base.bodies.map(body => ({ ...body, contextColor: colors[body.id]!, labelCase: 'upper' as const })) };
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: prepared,
@@ -436,13 +436,13 @@ test('a body carries its prepared colour inline, and the emphasised one wears th
   const world = { referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const, widthPixels: 800, heightPixels: 600 };
   const mercury = find(root, 'contextGroup', 'mercury'), venus = find(root, 'contextGroup', 'venus'), sun = find(root, 'contextGroup', 'sun');
-  // No stylesheet rule per body: the colour and caption case are on the marker and its orbit.
+  // No stylesheet rule per body: the color and caption case are on the marker and its orbit.
   assert.deepEqual(([mercury.style.color, venus.style.color, find(root, 'contextOrbit', 'mercury').style.color]), ['#abcdef', '#123456', '#abcdef']);
   assert.equal(mercury.dataset.contextLabelCase, 'upper');
   const locatorIn = (marker: FakeElement) => marker.children.find(child => child.getAttribute('class') === 'context-locator');
   layer.selectObject('mercury'); layer.publish(world, viewport);
   const locator = locatorIn(mercury)!;
-  // It sits under the sprite, as the ring does, and has no colour of its own: its paths fill with currentColor.
+  // It sits under the sprite, as the ring does, and has no color of its own: its paths fill with currentColor.
   assert.equal(mercury.children.indexOf(locator), mercury.children.findIndex(child => child.tagName === 'i') - 1);
   assert.deepEqual(([locator.style.color ?? '', ...locator.children.map(path => path.getAttribute('fill'))]), ['', 'currentColor', 'currentColor']);
   assert.deepEqual(([mercury.dataset.contextLocator, venus.dataset.contextLocator]), ['', undefined]);
@@ -2107,7 +2107,7 @@ test('billboard zoom alpha owns dot, circle and caption without per-label clocks
   layer.destroy();
 });
 
-test('a plain dot needs no sprite, paints its colour and is never a pick or navigation target', () => {
+test('a plain dot needs no sprite, paints its color and is never a pick or navigation target', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(1),
@@ -2802,7 +2802,7 @@ test('circle dots grow with radius from 1,000 km to the system star, and stop th
   assert.ok((sun(695_700_000) - sun(69_911_000)) > 2);
 });
 
-test('a body circle holds a dot in the body colour until its own disc outgrows the dot', () => {
+test('a body circle holds a dot in the body color until its own disc outgrows the dot', () => {
   // At this scale the plan's Mercury has a 1,000 km radius, the smallest dot, and its star a 10,000 km radius.
   const scale = 1e6, root = mount(scale), layer = mounted.get(root)!, marker = find(root, 'contextBody', 'mercury'), leaf = marker.children[0]!;
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,

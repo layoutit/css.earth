@@ -2,14 +2,14 @@
 
 ## Night lights
 
-NASA Black Marble 2016 colour map, 3 km edition, by NASA Earth Observatory
+NASA Black Marble 2016 color map, 3 km edition, by NASA Earth Observatory
 from Suomi NPP VIIRS day/night band data over MODIS Blue Marble imagery.
 [NASA Earth at Night maps](https://science.nasa.gov/earth/earth-observatory/earth-at-night/maps).
 Used under NASA's media guidelines with credit; no endorsement is implied.
 
 ## Blue Marble deep ocean
 
-The deep ocean of the visible colour and cloud views is taken from NASA Earth
+The deep ocean of the visible color and cloud views is taken from NASA Earth
 Observatory's Blue Marble Next Generation topography and bathymetry edition for
 July 2004, `source/blue-marble-july-bathymetry.jpg`, on the same grid as the
 plain July mosaic. Only its ocean is used, where the plain edition carries the

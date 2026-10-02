@@ -1,7 +1,7 @@
-// `@cssearth/bake/objects/stellar` (Node only): a star's colour dataset from its measured, Gaia XP or Planck spectrum and its
+// `@cssearth/bake/objects/stellar` (Node only): a star's color dataset from its measured, Gaia XP or Planck spectrum and its
 // limb darkening, starspots drawn from a published figure or occultation, and Roche-von Zeipel gravity darkening. A topic of
 // its own, not part of `objects/layers/observation`, so code that reaches the observation layer does not reach the source
-// manifests the colour records are read through.
+// manifests the color records are read through.
 export * from './gravity-darkening.ts';
 export * from './limb-laws.ts';
 export * from './nsx-atmosphere.ts';

@@ -8,7 +8,7 @@ It is the only planet known around HATS-6. Its orbit and size follow Hartman et 
 
 **Orbit.** Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 3.32526424 d Hartman et al. 2015 (2015AJ....149..166H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2015): a/R* 13.65; Hartman et al. 2015 (2015AJ....149..166H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2015): inclination 88.21 degrees Hartman et al. 2015 (2015AJ....149..166H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2015): e 0 Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2457112.60363 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hats-6's measured colour (#ffc08a, the colour dataset of hats-6 (src/objects/hats-6/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by hats-6's measured color (#ffc08a, the color dataset of hats-6 (src/objects/hats-6/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HATS-6's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (33, 87, 98), folded onto its orbit. Upper limits and rows without an error are left out.
 

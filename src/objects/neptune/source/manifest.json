@@ -49,7 +49,7 @@
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
       ],
       "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "prepared false-colour derivative with source credit",
+      "redistribution": "prepared false-color derivative with source credit",
       "consumers": [
         "datasets"
       ],
@@ -85,7 +85,7 @@
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
       ],
       "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "prepared false-colour derivative with source credit",
+      "redistribution": "prepared false-color derivative with source credit",
       "consumers": [
         "datasets"
       ],
@@ -112,7 +112,7 @@
       }
     },
     {
-      "id": "ras-oxford-neptune-true-colour-reference",
+      "id": "ras-oxford-neptune-true-color-reference",
       "path": "color/ras-oxford-neptune-true-colors-2024.jpg",
       "origin": "https://ras.ac.uk/sites/default/files/2024-01/Combined_figures_crop.jpg",
       "credit": "Patrick Irwin, University of Oxford, and NASA",
@@ -121,7 +121,7 @@
         "https://ras.ac.uk/media/1488"
       ],
       "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked true-colour calibration reference with attribution",
+      "redistribution": "checked true-color calibration reference with attribution",
       "consumers": [
         "scene",
         "datasets"
@@ -131,7 +131,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-neptune-ras-oxford-neptune-true-colour-reference",
+            "catalogueId": "source-neptune-ras-oxford-neptune-true-color-reference",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
@@ -1688,7 +1688,7 @@
     },
     {
       "path": "photometry/opal-2025b-minnaert-f657n.json",
-      "purpose": "Hubble OPAL Minnaert coefficient of the 2025b colour map (F467M, F547M, F657N), red channel (F657N): the correction OPAL divided out of the map, which the lighting overlay puts back.",
+      "purpose": "Hubble OPAL Minnaert coefficient of the 2025b color map (F467M, F547M, F657N), red channel (F657N): the correction OPAL divided out of the map, which the lighting overlay puts back.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1706,7 +1706,7 @@
     },
     {
       "path": "photometry/opal-2025b-minnaert-f547m.json",
-      "purpose": "Hubble OPAL Minnaert coefficient of the 2025b colour map (F467M, F547M, F657N), green channel (F547M): the correction OPAL divided out of the map, which the lighting overlay puts back.",
+      "purpose": "Hubble OPAL Minnaert coefficient of the 2025b color map (F467M, F547M, F657N), green channel (F547M): the correction OPAL divided out of the map, which the lighting overlay puts back.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1724,7 +1724,7 @@
     },
     {
       "path": "photometry/opal-2025b-minnaert-f467m.json",
-      "purpose": "Hubble OPAL Minnaert coefficient of the 2025b colour map (F467M, F547M, F657N), blue channel (F467M): the correction OPAL divided out of the map, which the lighting overlay puts back.",
+      "purpose": "Hubble OPAL Minnaert coefficient of the 2025b color map (F467M, F547M, F657N), blue channel (F467M): the correction OPAL divided out of the map, which the lighting overlay puts back.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

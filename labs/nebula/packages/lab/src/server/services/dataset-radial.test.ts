@@ -13,7 +13,7 @@ const SIZE = 41, CENTER = (SIZE - 1) / 2, WIDTH = SIZE, HEIGHT = SIZE, PIXELS = 
 const radiusAt = (index: number) => { const x = index % WIDTH, y = Math.floor(index / WIDTH); return Math.hypot(x - CENTER, y - CENTER); };
 /** A centrally concentrated brightness profile, like the branch's subject: bright core, smooth falloff. Always
  * positive over this 41x41 domain (minimum ~22 at the corners, radius <= 28.3), so the render's chromaticity
- * normalisation (level * raw/peak) never hits the "no colour information" zero-clamp — the one thing that would
+ * normalisation (level * raw/peak) never hits the "no color information" zero-clamp — the one thing that would
  * make a raw pixel value, rather than the deliberate render target below, decide what gets delivered. */
 const profile = (r: number) => Math.round(220 - 7 * r);
 const sourceValues = Array.from({ length: PIXELS }, (_, p) => profile(radiusAt(p)));
