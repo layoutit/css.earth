@@ -10,8 +10,9 @@
  * oversampled and the cubic interpolation only reads between samples it is given.
  *
  * --check recomputes every output and fails if any differs from the file on disk. */
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
 import { readFitsImage } from '@cssearth/fits';
 import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
@@ -88,11 +89,7 @@ export async function authorRDoradus({ check = false } = {}) {
 
   const marker = await contextMarker(readReconstruction(frame), PALETTE, PERCENTILES, BACKGROUND_MAXIMUM);
   const outputs: [string, Buffer][] = [[FRAME_PATH, frame], [CONTEXT_PATH, marker]];
-  for (const [path, bytes] of outputs) {
-    const target = resolve(root, path);
-    if (check) { if (!(await readFile(target)).equals(bytes)) throw new Error(`${path} differs from its authored recomputation.`); }
-    else await writeFile(target, bytes);
-  }
+  await writeOrCheckAuthoredOutputs(root, outputs, { check, missingFile: 'propagate-read-error', mkdir: 'none' });
   const beamMas = number('BMAJ') * 3.6e6, minorMas = number('BMIN') * 3.6e6;
   return { size, pixelMas: Math.abs(number('CDELT1')) * 3.6e6 / UPSAMPLE, peak: star.peak, beamMas, minorMas,
     centre: [(star.centreX - originX) * UPSAMPLE + (UPSAMPLE - 1) / 2, (star.centreY - originY) * UPSAMPLE + (UPSAMPLE - 1) / 2] as [number, number] };
