@@ -1,0 +1,47 @@
+{
+  "id": "arxiv-1905-08329",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Tully et al. (2019): Cosmicflows-3: Cosmography of the Local Void",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1905.08329"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ab2597"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1905.08329",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/ab2597",
+      "label": "The Astrophysical Journal 880, 24"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1905.08329",
+      "checkedOn": "2026-10-02",
+      "locator": "Section on the Local Void: lowest density at SGX, SGY, SGZ = [+22, -9, +22] Mpc; dimensions 69, 51, 60 Mpc at the -0.7 density contour; H0 = 75 km/s/Mpc"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal 880, 24",
+  "creators": [
+    "R. B. Tully",
+    "D. Pomarède",
+    "R. Graziani",
+    "H. M. Courtois",
+    "Y. Hoffman",
+    "E. J. Shaya"
+  ],
+  "publicationDate": "2019"
+}
