@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-3521-layers",
+  "name": "NGC 3521",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-3521-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-3521-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-3521-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "ESO · optical",
+      "title": "NGC 3521 in visible light",
+      "description": "The Very Large Telescope's FORS1 view of NGC 3521 with Milky Way foreground stars removed and the whole-galaxy colour tied to RC3's measured B-V of 0.81, on a disc tilted 73°.",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "detail": "2046 × 2046 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "VLT FORS1 B, V, I"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "2046 × 2046"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "6.82 × 6.82 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/ngc-3521-layers/source/source.jpg",
+        "url": "https://cdn.eso.org/images/large/eso1129a.jpg"
+      }
+    }
+  ]
+}

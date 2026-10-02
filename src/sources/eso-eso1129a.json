@@ -1,0 +1,41 @@
+{
+  "id": "eso-eso1129a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "A spiral galaxy in Leo",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "eso1129a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1129a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/large/eso1129a.jpg",
+      "label": "Large JPEG, 2046 x 2046 px"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso1129a/",
+      "checkedOn": "2026-10-02",
+      "locator": "2046 x 2046 px; B, V and I with FORS1 on the Very Large Telescope; the page gives a 6.83 arcmin field, centre RA 11 5 46.32, Dec 0 1 52.04 and north 90.0 deg right of vertical. A blind match of the Large JPEG's star peaks to Gaia DR3 agrees: north 90.08 deg right of vertical at 0.2000 arcsec per pixel, centre 166.4526949, -0.0375137 (the recipe's observation); 19 of the 21 Gaia stars in the frame have a star within 4 px, and the galaxy's catalogued centre lands on the nucleus. Found in the ESO image archive search for NGC 3521."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/O. Maliy",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/eso1129a/"
+    }
+  ]
+}

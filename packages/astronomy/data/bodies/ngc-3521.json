@@ -1,0 +1,28 @@
+{
+  "id": "ngc-3521",
+  "classification": "galaxy",
+  "order": 5158,
+  "physical": {
+    "name": "NGC 3521",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 3521 is recorded: it is an extended galaxy, and its package frames it at 10900 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 166.4525,
+    "declinationDegrees": -0.035833,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 10715193.0524,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 797.2,
+    "sources": {
+      "position": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. (https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv); catalogue reference lvdb-v1.1.1:ngc_3521:location",
+      "distance": "Karachentsev2013AJ....145..101K: Updated Nearby Galaxy Catalog (https://ui.adsabs.harvard.edu/abs/2013AJ....145..101K); catalogue reference Karachentsev2013AJ....145..101K: 10715193.0524 pc; tf",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NGC 3521: 797.2 km/s, from 2004MNRAS.350.1195M (https://ui.adsabs.harvard.edu/abs/2004MNRAS.350.1195M/abstract)"
+    }
+  }
+}

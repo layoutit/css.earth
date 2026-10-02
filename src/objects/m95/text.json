@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m95",
+  "card": {
+    "text": "A spiral galaxy 10.0 million parsecs away, tilted 41° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "publication-tully2009aj-138-323t",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
+        "label": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
+        "checked": "2026-10-02",
+        "locator": "distance: 9.954 Mpc (−136,600 / +138,500 pc)"
+      },
+      {
+        "catalogueId": "walter-2008-things",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/136/2563",
+        "label": "Walter et al. (2008), THINGS: The H I Nearby Galaxy Survey, Table 1",
+        "checked": "2026-10-02",
+        "locator": "row NGC 3351: inclination 41 deg"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "More than a thousand of its glowing gas clouds have been mapped, and each is drawn here as a dot.",
+    "sources": [
+      {
+        "catalogueId": "groves-2023-phangs-muse-nebulae",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/520/4902",
+        "label": "Groves et al. (2023), MNRAS 520, 4902",
+        "checked": "2026-10-02",
+        "locator": "catalog: 1,277 nebulae with Galaxy = NGC3351"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M95 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "SDSS9 color; Sloan Digital Sky Survey; colour HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "SDSS9 color"
+        }
+      ]
+    }
+  }
+}

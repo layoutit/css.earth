@@ -39,6 +39,11 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/136/2563/ReadMe",
       "checkedOn": "2026-10-01",
       "locator": "table1 (properties of the THINGS sample galaxies): NGC 2903 at 143.04208, +21.50111, inclination 65 deg, position angle 204 deg (from de Blok et al. 2008); NGC 5457 (M101) at 210.80250, +54.34917, inclination 18 deg, position angle 39 deg (from Bosma et al. 1981); NGC 6946 at 308.71750, +60.15389, inclination 33 deg, position angle 243 deg (from de Blok et al. 2008). Query: SELECT * FROM \"J/AJ/136/2563/table1\" WHERE Name IN ('NGC 2903','NGC 6946','NGC 5457')"
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/136/2563/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "table1: NGC 3521 at 166.45250, -0.03583, inclination 73 deg, position angle 340 deg; NGC 3351 (M95) at 160.99042, +11.70389, inclination 41 deg, position angle 192 deg."
     }
   ],
   "creators": [

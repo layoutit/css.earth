@@ -1,0 +1,54 @@
+{
+  "id": "scheuermann-2022-phangs-pne",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Planetary nebula luminosity function distances for 19 galaxies observed by PHANGS-MUSE",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2022MNRAS.511.6087S"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/MNRAS/511/6087"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.6087S",
+      "label": "2022MNRAS.511.6087S"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/511/6087",
+      "label": "CDS J/MNRAS/511/6087"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "table2: planetary nebulae and supernova remnants of 19 galaxies with J2000 positions and a type; for Galaxy = NGC3351, 142 rows of type PN and 10 of type SNR. Query: SELECT ID, RAJ2000, DEJ2000 FROM \"J/MNRAS/511/6087/table2\" WHERE Galaxy='NGC3351' AND Type LIKE 'PN%' (or 'SNR%')"
+    }
+  ],
+  "creators": [
+    "F. Scheuermann",
+    "K. Kreckel",
+    "G. S. Anand",
+    "G. A. Blanc",
+    "E. Congiu",
+    "F. Santoro"
+  ],
+  "publisher": "MNRAS 511, 6087",
+  "publicationDate": "2022",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Scheuermann et al. (2022), MNRAS 511, 6087.",
+      "scope": "M95's planetary nebulae and supernova remnants",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe"
+    }
+  ]
+}
