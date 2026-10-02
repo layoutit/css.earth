@@ -31,6 +31,11 @@
       "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
       "checkedOn": "2026-10-01",
       "locator": "obs_title 'SDSS9 color'; hips_creator Boch T. (CDS); hips_license ODbL-1.0; hips_order 10; hips_pixel_scale 1.118E-4 deg (0.40 arcsec); prov_progenitor SLOAN. The NGC 2903 cutout is 3000 x 3000 px, 0.3333333 degrees wide, tangent projection on 143.04, +21.500556 through the CDS hips2fits service; 108 of the 121 Gaia DR3 stars brighter than G = 18.5 in it fall within 2.5 px of their requested places (median 0.5 px)."
+    },
+    {
+      "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+      "checkedOn": "2026-10-02",
+      "locator": "The M95 cutout is 3000 x 3000 px, 0.2 degrees wide, tangent projection on 160.990417, +11.703611 through the CDS hips2fits service; 53 of the 58 Gaia DR3 stars brighter than G = 19 in it have a star within 4 px of their requested places."
     }
   ],
   "creators": [
