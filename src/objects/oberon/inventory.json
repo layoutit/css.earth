@@ -219,12 +219,6 @@
     },
     {
       "location": "public",
-      "filename": "oberon-billboard.webp",
-      "bytes": 10040,
-      "sha256": "70bf056748ccc5fdf8e23554137cdfa2e02a972e4aacdec89fd0fd398fb0283e"
-    },
-    {
-      "location": "public",
       "filename": "oberon-dataset-normal.webp",
       "bytes": 250,
       "sha256": "f1c685a256f74d676085b3307bf5e1da70833cd76a67780704904d5aed59ba0e"
@@ -240,6 +234,30 @@
       "filename": "oberon-features.json",
       "bytes": 15898,
       "sha256": "5fa43ff7b64a83bc3a421a16975f03bcfeabc635ef44567b1d4865f3b0563ce0"
+    },
+    {
+      "location": "public",
+      "filename": "oberon-normal-page-0-level-1040.webp",
+      "bytes": 35292,
+      "sha256": "301879ed7e8aaca539992b5f8b515708403f4390da40bb7704ccbdc6c0a558ec"
+    },
+    {
+      "location": "public",
+      "filename": "oberon-normal-page-0-level-2080.webp",
+      "bytes": 81444,
+      "sha256": "7402d5219ee7ea1455aeef0f5e3eaf6d77f4337ae07c740043540a89e41caf6d"
+    },
+    {
+      "location": "public",
+      "filename": "oberon-normal-page-0-level-520.webp",
+      "bytes": 13884,
+      "sha256": "280907889d0a503deb1c9a9729c861d4b5f6181682a222fd7a43490bba57bed1"
+    },
+    {
+      "location": "public",
+      "filename": "oberon-normal-page-0.webp",
+      "bytes": 185434,
+      "sha256": "2f8c9ab4ea5a28ac744b2e03b7f5661e987c01cbcfc0bd09f096ae7fff4f0677"
     },
     {
       "location": "public",
@@ -261,6 +279,30 @@
     },
     {
       "location": "public",
+      "filename": "oberon-voyager-color-page-0-level-1040.webp",
+      "bytes": 21350,
+      "sha256": "070042de15b33a410d08fdbb07ee3c26a6a650743a90874eb94dc9f971fe15c0"
+    },
+    {
+      "location": "public",
+      "filename": "oberon-voyager-color-page-0-level-2080.webp",
+      "bytes": 52838,
+      "sha256": "1986d9a9b314384204b28cd3b18fb61c28b67377440fc9a8de3802c42c435e33"
+    },
+    {
+      "location": "public",
+      "filename": "oberon-voyager-color-page-0-level-520.webp",
+      "bytes": 8430,
+      "sha256": "12ea06fb4dbc64bc5343447ec01109d9397251221383b120a0afde1f710587e1"
+    },
+    {
+      "location": "public",
+      "filename": "oberon-voyager-color-page-0.webp",
+      "bytes": 129862,
+      "sha256": "714b0f0674d6ed3ab02512c619338aed7a36d8a28f49ce09f5f2833c77cd13f1"
+    },
+    {
+      "location": "public",
       "filename": "oberon-voyager-color@2x.webp",
       "bytes": 129862,
       "sha256": "714b0f0674d6ed3ab02512c619338aed7a36d8a28f49ce09f5f2833c77cd13f1"
@@ -274,14 +316,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 84964,
-      "sha256": "df4903ee97a1a079a90b0c52865f5dc39d415416ab17d5e13bb5b441aae6a4f9"
+      "bytes": 83301,
+      "sha256": "b11ddc526ce80edb3f61e902471e22a23e74480f67312d078d25604fda39d0e3"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 737,
-      "sha256": "f4a9e8c75462c2ae95cbe850d99ea3017e12c4ec39a5e2e7e868d36e4e123252"
+      "bytes": 675,
+      "sha256": "b25e3b86a2b14d04e0783a26a71ffeefceba6d1592ceaa987a574cad9a3d965c"
     },
     {
       "location": "prepared",
@@ -334,14 +376,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 354325,
-      "sha256": "69b0df3a3e26488c4c68bfd62437d0e10acd6e94a25133d8f26a19f00ff939c8"
+      "bytes": 356702,
+      "sha256": "08a5920e812df015ee21006386a3c2f242730674051317be199a6f35977dcb35"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 389022,
-      "sha256": "13a26b4246adb3ffe628a680b6fb4aa9f33974356e32e4f3dc392f2efb69844e"
+      "bytes": 389844,
+      "sha256": "3652f7a20764800bcda49f983543509812dae96ee0c6d84993802ae3d2ae188c"
     },
     {
       "location": "prepared",
