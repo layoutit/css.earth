@@ -63,7 +63,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
   // The backing's centre and the range it fades out over as the camera closes on it (galaxy-backing.ts centreFadeM).
   let backingCentre: { originM: readonly number[]; fadeM: readonly [number, number] } | null = null;
   const publishBacking = ({ world, viewport, distanceM, shown }: NonNullable<typeof backingFrame>) => {
-    const centre = backingCentre ? logarithmicFade(Math.hypot(...world.pose.positionM.map((value, axis) => value - backingCentre!.originM[axis]!)),
+    const centre = backingCentre ? logarithmicFade(eyeDistanceM(world.pose, backingCentre.originM),
       backingCentre.fadeM[1], backingCentre.fadeM[0]) : 1;
     // Close up the image's pixels blow up and blur: each layer dims toward its near opacity over its own range.
     for (const layer of backing ?? []) {
