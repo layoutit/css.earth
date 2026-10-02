@@ -96,8 +96,8 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       return worldCameraFromCenteredPresentation({ rotation: projection.rotation,
         distanceUnits: Math.max(current.distanceM, minimumDistance) / frame.metersPerUnit }, frame, optics);
     },
-    /** `view: 'default'` frames the level as `objectId`'s own page looks, not as the camera looks now: a level opened by its
-     * page or a link shows its centre from that body's default direction, whatever scene the camera was in. */
+    /** A rung of the zoom ladder framed around `objectId`: its own system, or a level. A level keeps the direction the camera
+     * looks in; a page opened cold has no view to keep and asks for `objectId`'s own default direction (`view: 'default'`). */
     overviewTarget({ scope, objectId, fromId, mount, view }: TargetRequest & {scope: string; view?: 'default'}) {
       if (scope === 'system') {
         const world = this.systemTarget({ objectId, fromId, mount, force: true });

@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-body-points-source@1",
+  "id": "dots",
+  "published": true,
+  "host": "neptune",
+  "source": "pds-rings-neptune-ring-table",
+  "meaning": "Dots along Neptune's rings, shared among the rings by each one's published width and normal optical depth. The rings are too thin to see at their true opacity, so the dots are far more than their share. The position of a single dot is not a measurement: it comes from a seeded generator.",
+  "table": {
+    "path": "positions.csv.gz",
+    "origin": "https://pds-rings.seti.org/neptune/neptune_rings_table.html",
+    "generator": "packages/bake/authoring/ring-particles/positions.mts"
+  },
+  "frame": {
+    "input": "host-centred-icrf-km",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "appearance": {
+    "colorCss": "#9a9a9a",
+    "radiusPx": 0.75,
+    "opacity": 1
+  }
+}

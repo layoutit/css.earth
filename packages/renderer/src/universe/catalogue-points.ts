@@ -201,12 +201,21 @@ function parseLevels(value: unknown, total: number, id: string): readonly Catalo
   return Object.freeze(parsed);
 }
 
+export interface CataloguePointOccluder { readonly centreM: readonly number[]; readonly normal: readonly number[]; readonly radiusM: number }
+/** A reference-frame vector in a bank's own axes: the inverse of its frame's local-to-reference rotation. */
+const toLocalAxes = ([x, y, z, w]: readonly number[], [vx, vy, vz]: readonly number[]): VolumeVector => {
+  const qx = -x!, qy = -y!, qz = -z!, tx = 2 * (qy * vz! - qz * vy!), ty = 2 * (qz * vx! - qx * vz!), tz = 2 * (qx * vy! - qy * vx!);
+  return [vx! + w! * tx + (qy * tz - qz * ty), vy! + w! * ty + (qz * tx - qx * tz), vz! + w! * tz + (qx * ty - qy * tx)];
+};
+
 /**
  * A published catalogue drawn as fixed dust: every point the same small dot, whatever the distance, so a population's
  * shape shows without any star claiming a size. Fetched on the first publication that shows it.
  */
-export function mountCataloguePoints({ host, before, url, loadBank }: {
+export function mountCataloguePoints({ host, before, url, loadBank, occluder }: {
   host: HTMLElement; before?: Node; url: string; loadBank(url: string): Promise<unknown>;
+  /** A disc in the world's reference frame (its centre, unit normal and radius, in metres) that dims the dots behind it. */
+  occluder?: CataloguePointOccluder;
 }) {
   const root = host.ownerDocument.createElement('div');
   root.dataset.cataloguePoints = 'loading';
@@ -298,8 +307,10 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
           // keeps a path only for the colours its own dots use.
           paintPalette: [...new Set(points.map(styleKey))].map(key => pointPaint(styles.get(key)!)),
           stylePoint: (point: (typeof bank.points)[number]) => styles.get(styleKey(point))! });
+        const local = occluder && { normal: toLocalAxes(bank.frame.localToReferenceXyzw, occluder.normal), radiusUnits: occluder.radiusM / bank.frame.metersPerUnit,
+          centreUnits: toLocalAxes(bank.frame.localToReferenceXyzw, occluder.centreM.map((value, axis) => (value - bank.frame.originM[axis]!) / bank.frame.metersPerUnit)) };
         const mount = (parts: ReturnType<typeof part>[]) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, parts,
-          onSettle: settled, className: `catalogue-points-${bank.id}` });
+          onSettle: settled, className: `catalogue-points-${bank.id}`, ...(local ? { occluder: local } : {}) });
         // Each level draws as its own part: it dims to its near opacity as the innermost level fills, and takes its share
         // of the budget after the levels outside it. The levels share one field, so they are one layer (batched-spatial-points.ts).
         const levels = bank.appearance.levels ?? [];

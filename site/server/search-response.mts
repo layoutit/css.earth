@@ -11,7 +11,7 @@ import { selectionTargetFromUrl } from '../scene/scene-selection.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
 import { presentFeatureResults, createSearchPresentation } from '../search/search-results-presentation.mts';
 import { objectIdAtPath } from '../root-object.mts';
-import { overviewScopeFromUrl, withOverviewScope } from '../navigation/navigation-scope.mts';
+import { viewFromUrl, withView } from '../navigation/navigation-scope.mts';
 
 /** Modify only the shared shell. Everything outside these boundaries, including
  * the authenticated scene, head, styles and application scripts, passes through byte for byte. */
@@ -52,7 +52,7 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
     if (value) clear.searchParams.set(name, value.slice(0, 2048));
   }
   // Clearing the search keeps the view context, normalized the way the router resolves it.
-  withOverviewScope(clear, overviewScopeFromUrl(url) !== null);
+  withView(clear, viewFromUrl(clear));
   document.querySelector('.object-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
   const browser = requiredSection(document, '.object-browser');
   const presentation = createSearchPresentation(document);

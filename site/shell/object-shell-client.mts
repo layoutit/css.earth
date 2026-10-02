@@ -1,6 +1,6 @@
-import { hasPlanetarySystem, presentCardSubject } from '../selection-presentation.mts';
+import { cardView, presentCardView } from '../selection-presentation.mts';
 import { createSystemBodiesPresentation } from '../system-bodies-fragment.mts';
-import { isLevelObject } from '../level-view.mts';
+import { ladderOf } from '../level-view.mts';
 import { isExtendedClassification } from '@cssearth/objects';
 import { bindTabPanels } from '../tab-panels.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
@@ -9,7 +9,7 @@ import { applySeoHead, objectSeo } from '../seo.mts';
 import { knownLevel, knownObject } from '../object-directory.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
 import type { SceneLifetime } from '@cssearth/engine';
-import { selectionKey } from '../scene/scene-selection.mts';
+import { selectionKey, type SceneView } from '../scene/scene-selection.mts';
 import type { DestinationPresentation } from '../destination-browser.mts';
 import type { ShellCamera, PlaybackState } from '../browser/browser-types.mts';
 import { errorMessage, requiredElement, sectionElement } from '../browser/browser-types.mts';
@@ -59,7 +59,7 @@ export function mountObjectShell({
   let boundCardMaps: HTMLElement[] = [];
   let surfaceReader: ReturnType<typeof createSurfaceMapReader>;
   let releaseArrivalControls = () => {};
-  let navigationTransition: (ShellNavigationTransition & { cardSubject: 'body' | 'satellite-system' | null; retainsSourceCard: boolean }) | null = null;
+  let navigationTransition: (ShellNavigationTransition & { cardView: SceneView | null; retainsSourceCard: boolean }) | null = null;
   let camera: ShellCamera | null = null;
   // The selected card panel stays retained across subject changes.
   let information: HTMLElement | null = null;
@@ -83,13 +83,11 @@ export function mountObjectShell({
     if (coasting || navigationTransition?.retainsSourceCard) return;
     if (!information || !drawer.contains(sectionPlaceholder(information))) information = sectionElement(drawer, '.object-information-panel');
     const selected = readSelection();
-    // A star's planetary system is a subject of the star's own card, as a host's moons are; the parts of the other subjects
-    // are mounted only while they are the subject (detached-sections.ts).
-    const subject = navigationTransition?.cardSubject ?? (selected.view === 'moons' ? 'satellite-system'
-      : selected.view === 'system' && information && hasPlanetarySystem(information) ? 'planetary-system' : 'body');
-    if (information) presentCardSubject(information, subject);
+    // The card shows the selected view of its object: the body, its moons, or (a star's) its planetary system.
+    const view = information ? navigationTransition?.cardView ?? cardView(information, selected.view) : 'body';
+    if (information) presentCardView(information, view);
     // The system's body list arrives the first time it is shown.
-    if (information && subject === 'planetary-system' && selected.view === 'system') {
+    if (information && view === 'system') {
       if (systemBodies?.card !== information) systemBodies = { card: information, presentation: createSystemBodiesPresentation(information, windowTarget) };
       systemBodies.presentation.show(selected.objectId);
     }
@@ -116,9 +114,9 @@ export function mountObjectShell({
     // A galaxy, a cluster or a nebula has no surface to stand above: the readout measures to its centre.
     const shown = knownObject(objectId);
     // A level is seen from inside, around the star it is centred on: its readout is an overview's, from that star.
-    const level = subject.view === 'body' && isLevelObject(objectId);
-    viewReadout.setExtendedSubject(!isLevelObject(objectId) && shown?.worldFrame && isExtendedClassification(shown.classification) ? { name: shown.name, positionM: shown.worldFrame.originM } : null);
-    viewReadout.setOverviewScope(level ? objectId : 'system');
+    const ladder = ladderOf(subject);
+    viewReadout.setExtendedSubject(!ladder && shown?.worldFrame && isExtendedClassification(shown.classification) ? { name: shown.name, positionM: shown.worldFrame.originM } : null);
+    viewReadout.setOverviewScope(ladder?.scope ?? 'system');
     updateBodyCard();
   }
   function own<T extends { destroy(): void }>(controller: T) {
@@ -207,7 +205,7 @@ export function mountObjectShell({
       // WebKit. Publish the prepared card only after the router retires that scene.
       retainsSourceCard,
       // A system's card is its star's: which parts it shows is read from the selection once the star's card is there.
-      cardSubject: target.view === 'system' ? null : target.view === 'moons' ? 'satellite-system' : 'body',
+      cardView: target.view === 'system' ? null : target.view,
       arrive({ subject, content }) {
         if (navigationTransition !== transition || arrived) return;
         const keep = content ? target.object.id === content.id : subject.view === target.view;

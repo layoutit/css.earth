@@ -3,14 +3,14 @@ import type { Props } from "../object-shell-types";
 import ObjectBreadcrumbs from "./ObjectBreadcrumbs.astro";
 import SatelliteSystemCard from './SatelliteSystemCard.astro';
 import SystemCard from './SystemCard.astro';
-import { overviewScopeFromUrl } from '../navigation/navigation-scope.mts';
 import { systemById } from '../object-systems.mts';
 import { orderScientificCharts } from "../scientific-chart-order.mts";
 import ObjectCard from "./ObjectCard.astro";
 import ObjectCardHeader from "./ObjectCardHeader.astro";
 import ObjectFactsheet from "./ObjectFactsheet.astro";
 import InformationTabs from './InformationTabs.astro';
-import { satelliteSystemFromUrl } from '../navigation/navigation-scope.mts';
+import { viewFromUrl } from '../navigation/navigation-scope.mts';
+import { satelliteSystemByHost } from '../satellite-systems.mts';
 import DatasetContextPanels from "./DatasetContextPanels.astro";
 import DatasetList from "./DatasetList.astro";
 import TreeDisclosure from './TreeDisclosure.astro';
@@ -60,15 +60,15 @@ const memberMarkup = (list: (typeof lists)[number], { member, distancePc }: (typ
 };
 const opening = bodies.length ? 'bodies' : lists[0]?.id ?? 'dataset';
 // The card's subject: the body, its moons, or (for a star with planets) its planetary system.
-const cardSubject = satelliteSystemFromUrl(Astro.url) ? 'satellite-system'
-  : overviewScopeFromUrl(Astro.url) === 'system' && systemById(SCENE_OBJECTS, objectId) ? 'planetary-system' : 'body';
+const asked = viewFromUrl(Astro.url);
+const cardSubject = asked === 'moons' && satelliteSystemByHost(objectId) || asked === 'system' && systemById(SCENE_OBJECTS, objectId) ? asked : 'body';
 // A dataset authored for the whole system (a debris disc) and the system's gallery pictures show on the system's card too.
 const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.systemDataset)) || galleries.length > 0;
 ---
 
 <ObjectCard class="object-information-panel" data-card-subject={cardSubject}
   data-card-view={cardSubject === 'body' ? undefined : 'overview'}>
-  <SatelliteSystemCard hostId={objectId} detached={!satelliteSystemFromUrl(Astro.url)} />
+  <SatelliteSystemCard hostId={objectId} detached={cardSubject !== 'moons'} />
   <SystemCard hostId={objectId} />
       <ObjectCardHeader {objectId} {title} {introduction} {articleUrl}>
           {level ? <ObjectBreadcrumbs scope={objectId} /> : <ObjectBreadcrumbs {objectId} />}
@@ -89,7 +89,7 @@ const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.system
           {list.rows.map(row => <li class="object-item"><Fragment set:html={row.member === list.home ? objectResultMarkup({ ...resultRows.get(row.member.id)!, detail: undefined }) : memberMarkup(list, row)} /></li>)}
         </ul>
       </section>)}
-      <TreeDisclosure title="Datasets" class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" data-planetary-system-datasets={systemDatasets || undefined} open>
+      <TreeDisclosure title="Datasets" class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" data-system-view-datasets={systemDatasets || undefined} open>
       <h2 class="object-mobile-information-heading">Datasets</h2>
       {hasDatasets && datasets && <DatasetList {objectId} {datasets} />}
       {galleries.map((gallery) => (

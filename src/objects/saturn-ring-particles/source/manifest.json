@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "positions",
+      "path": "src/objects/saturn-ring-particles/source/dots/positions.csv.gz",
+      "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+      "sourceUrl": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
+      "title": "4,000 dots in Saturn's ring plane, their radii drawn from the Cassini UVIS occultation profile",
+      "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
+      "acquisition": "Written 2026-10-02 by packages/bake/authoring/ring-particles/positions.mts saturn from Saturn's pinned occultation table: radii follow the measured opacity; longitudes come from a seeded generator and are not measurements.",
+      "generator": "packages/bake/authoring/ring-particles/positions.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-cassini-uvis-alpvir-2006-285-occultation",
+            "role": "material",
+            "evidence": "src/objects/saturn-ring-particles/source/dots/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "ring-occultation-profile"
+      ],
+      "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set"
+    },
+    {
+      "id": "ring-occultation-profile",
+      "path": "src/objects/saturn/source/rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+      "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
+      "sourceUrl": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
+      "title": "Cassini UVIS alpha Virginis occultation, 2006 day 285: normal optical depth of the rings in 1 km bins",
+      "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
+      "acquisition": "Read from Saturn's package, which pins this PDS Ring-Moon Systems Node product for its ring image.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-cassini-uvis-alpvir-2006-285-occultation",
+            "role": "material",
+            "evidence": "src/objects/saturn-ring-particles/README.md#processing"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set"
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/saturn-ring-particles/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/saturn-ring-particles/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

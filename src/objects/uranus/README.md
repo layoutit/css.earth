@@ -17,7 +17,8 @@ observation datasets. Their palettes and percentile stretches are declared in
 Ring radii, widths, and normal optical depths come from the
 [PDS Rings Node Uranus table](https://pds-rings.seti.org/uranus/uranus_rings_table.html).
 No ring colour is measured here, so every ring is the neutral gray of a body
-without a measured colour. Physical facts are checked against
+without a measured colour. [Uranus's ring particles](../uranus-ring-particles/README.md) draws 600 dots along the rings,
+shared out by these widths and optical depths; the position of a single dot is drawn from a seed. Physical facts are checked against
 [NASA Uranus facts](https://science.nasa.gov/uranus/facts/) and the JPL
 physical-parameter page. Four of the five moons without a page are drawn as plain dots at their JPL
 Horizons positions by [Uranus's moons without a page](../uranus-minor-moons/README.md).

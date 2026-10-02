@@ -183,7 +183,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           billboards: datasetBillboards, load: loadVolumeDataset, warmDomNodeBudget: warmVolumeDatasetDomNodeBudget, requestPublication, prepareBillboardAtlas });
         // A cut-open mesh draws the inside of its far wall here, behind the points it holds; its outer shell stays over them.
         const meshInterior = document.createElement('span'); meshInterior.hidden = true; root.insertBefore(meshInterior, end);
-        const additionalPoints = own(mountBackgroundPoints(root, end, backgroundCataloguePoints, target => fetchPreparedCatalogueBank(target)));
+        // Our galaxy's disc, as its volume frames it: the centre, the frame's z axis and its reach in the plane.
+        const [gx, gy, gz, gw] = payload.frame.localToReferenceXyzw;
+        const galaxyDisc = { centreM: payload.frame.originM, normal: [2 * (gx * gz + gw * gy), 2 * (gy * gz - gw * gx), 1 - 2 * (gx * gx + gy * gy)],
+          radiusM: Math.max(...[payload.frame.boundsUnits.min, payload.frame.boundsUnits.max].flatMap(bound => [Math.abs(bound[0]), Math.abs(bound[1])])) * payload.frame.metersPerUnit };
+        const additionalPoints = own(mountBackgroundPoints(root, end, backgroundCataloguePoints, target => fetchPreparedCatalogueBank(target), galaxyDisc));
         // Over the galaxies: a mesh seen from outside hides what lies inside it.
         const meshes = imageMeshes.map(mesh => ({ cutaway: () => mesh.cutaway?.() ?? true, hidden: () => mesh.hidden?.() ?? false,
           runtime: own(mountImageMesh({ host: root, before: end, interiorBefore: meshInterior, labelHost: frontRoot, url: mesh.url,
@@ -276,12 +280,13 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             publishSuppressedLabels();
             spatial.previewSelection(id);
           },
-          setOverview(enabled: boolean, scope?: string, preserveSelection = false) {
+          /** `scope`: the rung of the zoom ladder shown (a star's own `system`, or a level). `starsRetired`: the scope is past
+           * the level that holds the stars, as the host's ladder says. */
+          setOverview(enabled: boolean, scope?: string, preserveSelection = false, starsRetired = false) {
             overview = enabled;
             spatial.setOverview(enabled, preserveSelection);
-            // Past the system scope (the Milky Way's), the Solar System is its star; past the galaxy's (the Local Group's and
-            // beyond), the galaxy's stars retire too.
-            spatial.setSystemRetired(enabled && scope !== undefined && scope !== 'system', scope !== undefined && scope !== 'system' && scope !== 'milky-way');
+            // Past the system scope, a planetary system is drawn as its star; past the scope that holds the stars, they retire too.
+            spatial.setSystemRetired(enabled && scope !== undefined && scope !== 'system', starsRetired);
             publishSuppressedLabels();
           },
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },

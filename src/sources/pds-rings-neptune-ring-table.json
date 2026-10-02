@@ -1,0 +1,24 @@
+{
+  "id": "pds-rings-neptune-ring-table",
+  "title": "Vital Statistics for Neptune's Rings",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-rings.seti.org/neptune/neptune_rings_table.html",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds-rings.seti.org/neptune/neptune_rings_table.html",
+      "checkedOn": "2026-10-02",
+      "locator": "Ring table: radial location, width and optical depth"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA Planetary Data System, Ring-Moon Systems Node"
+}
