@@ -20,6 +20,40 @@ export function isPlainRecord(value: unknown): value is Record<string, unknown> 
 export function isFiniteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value);
 }
+/** Empty strings and whitespace are accepted; no coercion or trimming. */
+export function isTextAllowEmpty(value: unknown): value is string { return typeof value === 'string'; }
+/** Whitespace-only strings are accepted. */
+export function isNonemptyText(value: unknown): value is string { return isTextAllowEmpty(value) && value.length > 0; }
+/** Trimming is used only for acceptance; readers return the original string. */
+export function isNonblankText(value: unknown): value is string { return isTextAllowEmpty(value) && value.trim().length > 0; }
+export function isPositiveNumber(value: unknown): value is number { return isFiniteNumber(value) && value > 0; }
+/** Integer, not safe integer: finite represented integers above MAX_SAFE_INTEGER pass. */
+export function isPositiveInteger(value: unknown): value is number { return isPositiveNumber(value) && Number.isInteger(value); }
+export function isSafeIntegerAtLeast(value: unknown, minimum: number): value is number {
+  return isFiniteNumber(value) && Number.isSafeInteger(value) && value >= minimum;
+}
+
+// Explicit policies with caller-owned failure reporting. Unlike the two-argument getters these are not map callbacks.
+export function readNonArrayRecord(value: unknown, label: string, fail: Fail = report): Record<string, unknown> {
+  return recordOr(fail, value, label);
+}
+export function readFiniteNumber(value: unknown, label: string, fail: Fail = report): number { return finiteOr(fail, value, label); }
+export function readTextAllowEmpty(value: unknown, label: string, fail: Fail = report): string { return stringOr(fail, value, label); }
+export function readNonemptyText(value: unknown, label: string, fail: Fail = report): string { return stringOr(fail, value, label, false); }
+export function readNonblankText(value: unknown, label: string, fail: Fail = report): string {
+  if (!isNonblankText(value)) fail(`${label} must be nonblank text`);
+  return value;
+}
+export function readPositiveNumber(value: unknown, label: string, fail: Fail = report): number { return positiveOr(fail, value, label); }
+export function readPositiveInteger(value: unknown, label: string, fail: Fail = report): number {
+  const result = positiveOr(fail, value, label);
+  if (!Number.isInteger(result)) fail(`${label} must be a positive integer`);
+  return result;
+}
+export function readSafeIntegerAtLeast(value: unknown, minimum: number, label: string, fail: Fail = report): number {
+  if (!isSafeIntegerAtLeast(value, minimum)) fail(`${label} must be a safe integer at least ${minimum}`);
+  return value;
+}
 /** A thrown Node system error, such as ENOENT, carries a string `code`. */
 export function hasErrorCode(error: unknown, ...codes: readonly string[]): boolean {
   return isRecord(error) && typeof error.code === 'string' && codes.includes(error.code);
@@ -34,7 +68,7 @@ function arrayOr(fail: Fail, value: unknown, label: string): unknown[] {
   return value;
 }
 function stringOr(fail: Fail, value: unknown, label: string, empty = true): string {
-  if (typeof value !== 'string' || (!empty && !value.length)) fail(`${label} must be a string${empty ? '' : ' with content'}`);
+  if (!isTextAllowEmpty(value) || (!empty && !isNonemptyText(value))) fail(`${label} must be a string${empty ? '' : ' with content'}`);
   return value;
 }
 function finiteOr(fail: Fail, value: unknown, label: string): number {
@@ -43,7 +77,7 @@ function finiteOr(fail: Fail, value: unknown, label: string): number {
 }
 function positiveOr(fail: Fail, value: unknown, label: string): number {
   const result = finiteOr(fail, value, label);
-  if (!(result > 0)) fail(`${label} must be positive`);
+  if (!isPositiveNumber(result)) fail(`${label} must be positive`);
   return result;
 }
 function booleanOr(fail: Fail, value: unknown, label: string): boolean {
@@ -61,7 +95,7 @@ export function requirePositive(value: unknown, label = 'Source value'): number 
 export function requireBoolean(value: unknown, label = 'Source value'): boolean { return booleanOr(report, value, label); }
 /** A string with at least one character: `<label> must be nonempty text.` */
 export function requireNonemptyText(value: unknown, label = 'Source value'): string {
-  if (typeof value !== 'string' || !value) report(`${label} must be nonempty text`);
+  if (!isNonemptyText(value)) report(`${label} must be nonempty text`);
   return value;
 }
 
