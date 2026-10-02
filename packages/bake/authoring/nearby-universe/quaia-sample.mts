@@ -13,6 +13,7 @@
  * `keepEvery` in source id order (Gaia's source ids follow position, so the share is even across the sky), where
  * `keepEvery` is the ratio of the median per-cell counts of the two samples on their own cells.
  */
+import { medianUpperMiddle as median } from '@cssearth/core';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
@@ -47,11 +48,6 @@ const counts = (points: readonly { ra: number; dec: number }[]) => {
   const count = new Uint32Array(BANDS * CELLS_PER_BAND);
   for (const { ra, dec } of points) count[cell(ra, dec)]!++;
   return count;
-};
-const median = (values: readonly number[]) => {
-  if (!values.length) throw new TypeError('No occupied cells to take a median of.');
-  const sorted = [...values].sort((a, b) => a - b);
-  return sorted[sorted.length >> 1]!;
 };
 
 const desi = rows(gunzipSync(await readFile(desiPath)).toString('utf8'), desiPath, ['TARGETID', 'RA', 'DEC', 'Z']);

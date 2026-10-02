@@ -1,6 +1,6 @@
+import { requiredFiniteCard as cardNumber, requiredTrimmedTextCard as cardText } from '@cssearth/fits';
 /** The STIS line frames a stack is made from: their headers and read regions, where the body sits along and across the slit,
  * the sky level and the reflected sunlight each frame carries. */
-import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { clippedMean, median, robustScatter, type LineStackDefinition } from './line-stack-reduction.mts';
 import type { FrameEphemeris } from './line-stack-ephemeris.mts';
@@ -27,16 +27,6 @@ export interface FrameHeader {
   readonly width: number; readonly height: number; readonly hdu: FitsFileHdu;
 }
 
-const cardNumber = (header: FitsHeader, key: string, name: string) => {
-  const value = header[key];
-  if (typeof value !== 'number' || !Number.isFinite(value)) throw new Error(`${name} carries no numeric ${key}.`);
-  return value;
-};
-const cardText = (header: FitsHeader, key: string, name: string) => {
-  const value = header[key];
-  if (typeof value !== 'string' || !value.trim()) throw new Error(`${name} carries no ${key}.`);
-  return value.trim();
-};
 
 /** One rectified frame's headers. Only header blocks are read; the image itself is read a region at a time, later. */
 export async function readFrameHeader(path: string, name: string): Promise<FrameHeader> {

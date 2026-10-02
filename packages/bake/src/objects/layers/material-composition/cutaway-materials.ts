@@ -1,3 +1,4 @@
+import { normalize3OrZeroNonPositive as normalize3 } from '@cssearth/core';
 import {parse} from '@cssearth/core/schema';
 import { cutawayRecipe, interiorSource, type InteriorSource } from '../cutaway/index.ts';
 import type {ReadonlyVector3, Vector3} from '../../geometry/index.ts';
@@ -563,11 +564,6 @@ function softBand(value:number, center:number, width:number) {
 }
 
 
-
-function normalize3(vector:ReadonlyVector3):Vector3 {
-  const length = Math.hypot(...vector);
-  return length > 0 ? [vector[0]/length,vector[1]/length,vector[2]/length] : [0, 0, 0];
-}
 
 function smoothstep(start:number, end:number, value:number) {
   const amount = Math.max(0, Math.min(1, (value - start) / (end - start)));

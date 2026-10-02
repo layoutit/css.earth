@@ -13,6 +13,7 @@ import it. Reading files, and writing the transport image as a `Buffer`, need No
 |---|---|---|
 | `@cssearth/fits` | cards and headers: `scanFitsCards`, `fitsCardValue`, `esoHierarchy`, `readFitsHeader`, `MAX_HEADER_RECORDS`, `fitsHeaderLiterals` | `Error` naming the FITS rule, such as `Unsupported FITS CONTINUE convention.` |
 | | HDUs and images: `readFitsHdu`, `readFitsHdus`, `imageExtent`, `fitsImageAccessor`, `readFitsImage`, `assertUnscaledFitsTable` | `Truncated or unbounded FITS data or padding.`, `Invalid FITS plane selection.` … |
+| | decoded required cards: `requiredFiniteCard`, `requiredTrimmedTextCard` | `Error` naming the source and missing key; numeric strings and blank text refused |
 | | quoted-literal headers for older product adapters: `readFitsPrimary` (one 2D primary or IMAGE extension), `readFitsPlane` (one primary-array plane) | as `readFitsImage`, plus the dimension or primary check |
 | | `readRiceCompressedImage`, `riceDecompress`: lossless RICE_1 tile-compressed integer images | `Unsupported FITS tile compression.` … |
 | | `skyImageAxes`, `skyDisplayRaster`, `skyProjection`: which way an axis-aligned sky image faces, its display raster, and TAN or SIN pixel ↔ ICRS | `TypeError` naming the refused WCS |

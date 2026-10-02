@@ -1,3 +1,5 @@
+export { normalize3Unchecked as normalizeVector } from '@cssearth/core';
+import { normalize3Unchecked as normalizeVector } from '@cssearth/core';
 import type {Vec3} from '@layoutit/polycss';
 import { worldPositionToCss } from "@layoutit/polycss";
 import type { AtmosphereConfiguration } from './atmosphere.ts';
@@ -241,11 +243,6 @@ export function prepareScreenMaterialPlane(ctx: PagedSceneContext, {
       `;--polycss-atlas-height:${outputSize}px` +
       ";backface-visibility:visible",
   });
-}
-
-export function normalizeVector(vector: Vec3): Vec3 {
-  const length = Math.hypot(...vector);
-  return [vector[0] / length, vector[1] / length, vector[2] / length];
 }
 
 export function scaleVector(vector: Vec3, scale: number): Vec3 {

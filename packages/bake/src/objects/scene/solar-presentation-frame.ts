@@ -1,4 +1,4 @@
-import { cross3 as cross } from '@cssearth/core';
+import { normalizeOrThrow, cross3 as cross } from '@cssearth/core';
 import type { Vector3, Matrix3 } from "@cssearth/renderer/solar-system/types.ts";
 import type { SolarGeometry } from "./solar-geometry.ts";
 // Builds the ecliptic presentation frame of a body: where each body-fixed direction (+Z north pole, +X prime meridian)
@@ -72,7 +72,5 @@ function scale(vector: Vector3, factor: number) {
 }
 
 function normalize(vector: Vector3) {
-  const magnitude = Math.hypot(...vector);
-  if (!(magnitude > 0)) throw new RangeError("Direction has no magnitude.");
-  return Object.freeze(vector.map((component) => component / magnitude));
+  return Object.freeze(normalizeOrThrow(vector, () => new RangeError("Direction has no magnitude.")));
 }

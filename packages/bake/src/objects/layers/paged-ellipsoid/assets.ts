@@ -1,3 +1,4 @@
+import { normalizeOrZero as normalizeVector } from '@cssearth/core';
 import { applyLinearTint } from '../../color/index.ts';
 import { isArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import {basename} from 'node:path';
@@ -394,11 +395,6 @@ function rotateZ([x, y, z]: readonly number[], radians: number) {
   const cosine = Math.cos(radians);
   const sine = Math.sin(radians);
   return [x * cosine - y * sine, x * sine + y * cosine, z];
-}
-
-function normalizeVector(vector: readonly number[]) {
-  const length = Math.hypot(...vector) || 1;
-  return vector.map((component) => component / length);
 }
 
 async function prepareInteriorAssets({ exterior = true, thumbnailsOnly = false } = {}) {

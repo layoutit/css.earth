@@ -1,4 +1,4 @@
-import { isArray } from '@cssearth/core';
+import { normalizeOrThrow, isArray } from '@cssearth/core';
 import type { Vector3, Matrix3 } from "@cssearth/renderer/solar-system/types.ts";
 // Converts a scene-frame Sun direction into the view-space direction the
 // retained sky uses at the default camera pose.
@@ -49,7 +49,5 @@ function rotateX([x, y, z]: Vector3, degrees: number) {
 }
 
 function normalize(vector: Vector3) {
-  const magnitude = Math.hypot(...vector);
-  if (!(magnitude > 0)) throw new RangeError("Direction has no magnitude.");
-  return Object.freeze(vector.map((component) => component / magnitude));
+  return Object.freeze(normalizeOrThrow(vector, () => new RangeError("Direction has no magnitude.")));
 }
