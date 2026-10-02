@@ -33,13 +33,13 @@ export type PreparedNavigableObject = NavigableObject<never, AbortSignal>;
 export interface PreparedObjectRegistry {
   /** The catalogue entries as written, in registry order. */
   readonly entries: readonly Readonly<Record<string, unknown>>[];
-  /** Every object, as `OBJECTS` lists them. Each has a scene of its own. */
+  /** Every object, as `OBJECTS` lists them, the systems included. */
   readonly objects: readonly PreparedNavigableObject[];
-  /** The same list, under the name the body lanes read. */
+  /** The objects with a scene of their own, which the body lanes read: every object but a system. */
   readonly sceneObjects: readonly PreparedSceneObject[];
   /** The levels of the zoom ladder, from the nearest out: the objects that are levels, as the ladder reads them. */
   readonly levels: readonly OverviewObject[];
-  /** What the world context draws and names: every object. */
+  /** What the world context draws and names: every object with a scene; a system's host stands for it. */
   readonly worldObjects: readonly WorldBody[];
   requireSceneObject(id: string): PreparedSceneObject;
 }

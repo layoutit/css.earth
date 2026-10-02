@@ -16,6 +16,9 @@ export const OBJECTS = defineObjects<NavigableObject>(CATALOGUE_ENTRIES.map(obje
 /** The objects with a scene of their own: every object but a system, which mounts its host's scene. */
 export const SCENE_OBJECTS = Object.freeze(OBJECTS.filter(object => !object.system));
 
+/** Every page a build can prerender, each with the scene it mounts: a system's is its host's (built-pages.mts). */
+export const PAGES = Object.freeze(OBJECTS.map(object => Object.freeze({ id: object.id, ...(object.system ? { sceneHostId: object.system.host } : {}) })));
+
 /** The levels of the zoom ladder, from the nearest out: the objects that are levels, as the ladder reads them. */
 export const OVERVIEWS = Object.freeze(OBJECTS.filter(object => object.level).map(levelOf).sort((a, b) => a.order - b.order));
 

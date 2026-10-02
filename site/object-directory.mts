@@ -11,7 +11,8 @@ import { readObjectEntry } from './object-entries.mts';
  * them (a path names either an object or a level), so the directory starts with their few entries. Both lists are live: consumers that search them find
  * every object loaded so far. The build and the search function seed them from the full registry (`seedObjectDirectory`). */
 export const NAVIGABLE_OBJECTS: NavigableObject[] = [];
-/** Every object has a scene of its own: the same live list, under the name the scene code reads. */
+/** The same live list, under the name the scene code reads: it only ever holds the objects a page mounted or loaded,
+ * and the scene code asks it for hosts (a system mounts its host's scene). */
 export const SCENE_OBJECTS: ObjectEntry[] = NAVIGABLE_OBJECTS;
 
 const loading = new Map<string, Promise<NavigableObject | null>>();

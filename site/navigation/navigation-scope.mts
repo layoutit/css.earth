@@ -29,6 +29,8 @@ export function withView(url: URL, view: PageView): URL {
   const id = pageIdAtPath(url.pathname);
   if (id === undefined) return url;
   const host = systemHostId(id) ?? id;
+  // The front page (`/`) shows its object's body under its own address.
+  if (view === 'body' && url.pathname === '/') return url;
   url.pathname = view === 'body' ? `/${host}/` : systemRoute(host);
   return url;
 }

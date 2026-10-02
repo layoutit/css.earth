@@ -38,3 +38,15 @@ test('selecting a view moves the address between the object and its system and k
   assert.equal(address(withView(url('/jupiter-system/?v=abc'), 'body')), '/jupiter/?v=abc');
   assert.equal(address(withView(url('/jupiter-system/'), 'moons')), '/jupiter-system/');
 });
+
+test('a build of named pages builds the scene routes a system page mounts', async () => {
+  const { builtScenePaths } = await import('../built-pages.mts');
+  const { PAGES } = await import('../objects.mts');
+  const paths = ['jupiter', 'earth', 'mars'].map(id => ({ params: { id } }));
+  assert.deepEqual(builtScenePaths(paths, PAGES, 'earth', { CSSEARTH_BUILD_PAGES: '/jupiter-system/' }).map(path => path.params.id), ['jupiter']);
+});
+
+test('the front page keeps its own address for its body', () => {
+  assert.equal(address(withView(url('/'), 'body')), '/');
+  assert.equal(address(withView(url('/'), 'moons')), '/earth-system/');
+});

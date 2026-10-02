@@ -58,7 +58,9 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   const plainAsteroid = (body: Body) => asteroidHolder !== undefined && body !== focus && body.plainDot === true && body.classification === 'asteroid'
     && 'orbit' in body && body.orbit?.centerBodyId === focus.id && !orbited.has(body.id);
   const local = (body: Body) => !plainStar(body) && !plainAsteroid(body) && (!('orbit' in body && body.orbit) || hostOf(body.id) === focus.id);
-  /** The holder whose file has a body the summary does not: its star, a plain-dot star's own, or the asteroid dot bank. */
+  /** The holder whose file has a body the summary does not: its star's system, a plain-dot star's own, or the asteroid dot
+   * bank. A holder is named after its star's system; Epsilon Indi Ba's has no package of its own, as Ba is bound to A,
+   * whose system holds it on the map (planetary-system-members.mts). */
   // A star with the bodies that orbit it is a system, an object of its own (system-address.ts in @cssearth/objects): its
   // holder is that object. A plain-dot star with planets is in it with them; one nothing orbits is its own holder.
   const systemStars = new Set(bodies.filter(body => 'orbit' in body && body.orbit && hostOf(body.id) !== focus.id).map(body => hostOf(body.id)));
