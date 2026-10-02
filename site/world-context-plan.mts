@@ -67,7 +67,7 @@ const summary = parsePreparedWorldContextSummary(startup ? startup.summary : awa
 const rowless = new Set(starsWithoutSystem(summary.deferred));
 const ownRow = (id: string) => rowless.has(id);
 /** The world's own dot banks (`pages/world/dots/[id].bin.ts`), as the bake names them in the summary: the stars drawn as
- * plain dots, near the Sun and in other galaxies (packages/bake/src/world-context/plain-star-dots.ts). */
+ * plain dots, near the Sun and in other galaxies, written by the bake as `plainStarDotBanks`. */
 export const WORLD_DOT_BANKS: readonly string[] = summary.dotBanks ?? [];
 /** Every star whose system is its own file, in id order. */
 export const WORLD_SYSTEM_HOSTS: readonly string[] = Object.freeze([...new Set((summary.deferred ?? []).filter(body => body.host !== body.id).map(body => body.host))].sort());

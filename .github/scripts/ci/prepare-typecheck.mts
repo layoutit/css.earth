@@ -128,7 +128,13 @@ export async function restoreTypecheckInputs({ root = projectRoot, fetcher = fet
   const imports = await collectTypecheckPreparedImports(root);
   const catalogue = await volumeMetadataAssets(root);
   const features = await typecheckFeatureAssets(root);
-  const initial = uniqueAssets([...await typecheckAssetsForPaths(imports, root), ...catalogue.assets, ...features.assets]);
+  // The world summary names the files that hold its other bodies, which Node reads by computed path. They restore with it:
+  // the world step of build:tools bakes without the bodies' imagery, so its own copies place stars in different files.
+  const summary = resolve(root, 'src/objects/sun/prepared/world-context-summary.json');
+  const world = imports.includes(summary)
+    ? (await inventoryAssets(root, ['sun'], { location: 'prepared' })).filter(asset => /^(?:world-systems\/.+|world-(?:stars|index|hosts))\.json$/u.test(relative(dirname(summary), asset.file).split(sep).join('/')))
+    : [];
+  const initial = uniqueAssets([...await typecheckAssetsForPaths(imports, root), ...world, ...catalogue.assets, ...features.assets]);
   const first = await installRuntimeAssets(initial, { fetcher });
   const landmarkRuntimes: string[] = [];
   for (const asset of features.catalogues) {
