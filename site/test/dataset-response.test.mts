@@ -79,6 +79,11 @@ test('a billboard startup page takes the selected scene and its prepared mark', 
   assert.equal(document.querySelector('.object-stage')?.getAttribute('data-prepared-object'), 'saturn');
   assert.equal(document.querySelector('.object-stage')?.getAttribute('data-prepared-dataset'), 'ultraviolet');
   assert.equal(document.querySelectorAll('.polycss-scene').length, 1);
+  // No saved view: the scene takes the fresh-mount pose at the default framing, depth scaled with width and height, and
+  // names no saved view for the client to restore.
+  assert.match(document.querySelector('.polycss-scene')?.getAttribute('style') ?? '', /transform:\s*translate3d\(.*cqw.*\) scale3d\(([0-9.]+),\1,\1\) matrix3d\(/u);
+  assert.match(document.querySelector('.polycss-camera')?.getAttribute('style') ?? '', /perspective:\s*[0-9.]+cqw/u);
+  assert.equal(document.querySelector('.object-stage')?.hasAttribute('data-prepared-view'), false);
   // Without the startup marker a stage that lost its prepared mark is still refused.
   const unmarked = startup.replace('<script type="application/json" data-startup-discovery>{}</script>', '');
   await assert.rejects(renderDatasetResponse(unmarked, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', read), /identity drifted: requested saturn/);

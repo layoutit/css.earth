@@ -29,6 +29,8 @@ import worldSummary from '../../src/objects/sun/prepared/world-context-summary.j
 import worldSummaryUrl from '../../src/objects/sun/prepared/world-context-summary.json?url';
 import { worldCameraOf } from '@cssearth/objects';
 import { MOBILE_VIEWPORT_QUERY } from '../runtime-policy.mts';
+import { defaultWidthShare } from '../default-width-share.mts';
+import { billboardBodyRadiusPixels } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 const worldCamera = worldCameraOf(worldSummary);
 
 interface Props {
@@ -49,11 +51,18 @@ const objectRecord = requireSceneObject(objectId);
 // Rules for a page without script. The phone sheet waits, hidden, for its controller to publish a snap state
 // (shell-layout.css); without script it rests at its peek, and the checkbox of its handle opens it.
 const sheetWithoutScript = 'body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: visible !important; }';
-// Only the empty stage of the default view shows the photograph: a native dataset, settings or saved-view response draws
-// its scene into the stage and marks it (dataset-response.mts).
-const billboardWithoutScript = '.object-stage:not([data-prepared-object]) ~ img[data-startup-billboard] { opacity: 1 !important; width: 70vmin; height: auto; left: 50%; top: 50%; transform: translate(-50%, -50%); }';
+
 const startup = !navigation && scene && objectRecord.discovery?.arrival?.billboard ? objectRecord.discovery : undefined;
 const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddress(startup.arrival.billboard.url) : undefined;
+// Only the empty stage of the default view shows the photograph: a native dataset, settings or saved-view response draws
+// its scene into the stage and marks it (dataset-response.mts). The photograph shows the body at the share of the viewport
+// width that response frames it at, so choosing a dataset does not resize the body.
+const billboardWidthWithoutScript = (() => {
+  const billboard = startup?.arrival?.billboard, share = scene?.coverPlan && defaultWidthShare(scene.coverPlan);
+  return billboard && share
+    ? `${share.diameterOverWidth * 100 * billboard.size / 2 / billboardBodyRadiusPixels(billboard, objectRecord.worldFrame.bodyRadiusM)}vw` : '70vmin';
+})();
+const billboardWithoutScript = `.object-stage:not([data-prepared-object]) ~ img[data-startup-billboard] { opacity: 1 !important; width: ${billboardWidthWithoutScript}; height: auto; left: 50%; top: 50%; transform: translate(-50%, -50%); }`;
 // A page that is its own scene places its arrival photograph from the HTML (startup-cover.mts); a level's page, drawn by
 // the world host's scene, leaves it to that scene's startup.
 const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId === objectId ? {

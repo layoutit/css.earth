@@ -257,6 +257,14 @@ hidden waiting for its controller; it now rests at its peek, and its handle open
 
 ![Saturn at phone width with JavaScript disabled: the search field and the card's sheet at its peek](images/native-phone.png)
 
+A dataset, settings or feature response without a saved view used to keep the prepared tree's mount pose: depth was
+left unscaled, which drew each polar cap as a hole, and the body had one fixed size that overflowed a phone. It now takes
+the pose of a fresh mount, framed at the share of the viewport width the live camera fits a body to
+(`site/default-width-share.mts`), and the photograph of a page without script is sized by the same share. The pairs
+below are the Moon's Tycho link at 1280×800 and Europa with shadows at 390×844, before and after.
+
+![The Moon and Europa drawn by a native response, before and after the default view](images/native-default-view.png)
+
 The earlier continuous Saturn capture
 was recorded, before native dataset submits were added.
 At 1280×900, application scripts are held for the first ten seconds,

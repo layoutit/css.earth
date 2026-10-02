@@ -57,6 +57,8 @@ test('without JavaScript the phone sheet shows, and the arrival photograph only 
     assert.equal(rules.length, 1, `${route}: one noscript billboard rule`);
     // A native dataset, settings or saved-view response marks the stage it draws (dataset-response.mts).
     assert.ok(rules[0]!.startsWith('.object-stage:not([data-prepared-object]) ~ img[data-startup-billboard]'), `${route}: ${rules[0]!.slice(0, 80)}`);
+    // Sized by the share of the viewport width a native response frames the body at (default-width-share.mts).
+    assert.match(rules[0]!, /width: [0-9.]+vw;/u, `${route}: ${rules[0]!.slice(0, 160)}`);
     const { document } = parseHTML(html);
     const stage = document.querySelector('.object-stage');
     assert.ok(stage && !stage.hasAttribute('data-prepared-object'), `${route}: the default page ships an unmarked stage`);
