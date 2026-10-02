@@ -219,9 +219,27 @@
     },
     {
       "location": "public",
-      "filename": "makemake-billboard.webp",
-      "bytes": 5566,
-      "sha256": "ddc96350f8a662c2069d42a96e7d4b6e56a24570f806fab8e49b08ca2997251d"
+      "filename": "makemake-color-page-0-level-1040.webp",
+      "bytes": 78,
+      "sha256": "453c5321226f58126800dbfc58d865c605c93bb7746f16d66b3980378e96574d"
+    },
+    {
+      "location": "public",
+      "filename": "makemake-color-page-0-level-2080.webp",
+      "bytes": 178,
+      "sha256": "abcc28dc817c8051d048b9c854d2e5862ebae027fc11bac82c2b2cdc64ded68f"
+    },
+    {
+      "location": "public",
+      "filename": "makemake-color-page-0-level-520.webp",
+      "bytes": 52,
+      "sha256": "3297f8ed7f6f40d032e208e6e1eb97429343bd116533c200ae16c713deb87ce7"
+    },
+    {
+      "location": "public",
+      "filename": "makemake-color-page-0.webp",
+      "bytes": 558,
+      "sha256": "8c44ecf55aaa511765bc671e669e03a2a4db3aff311a8f8bd2862f8e60f1e545"
     },
     {
       "location": "public",
@@ -240,6 +258,30 @@
       "filename": "makemake-dataset-illustration.webp",
       "bytes": 1050,
       "sha256": "74292052264eefe97b925e817d2caf70e9d1354d16f7ae5a7deed3a01f9fee2c"
+    },
+    {
+      "location": "public",
+      "filename": "makemake-illustration-page-0-level-1040.webp",
+      "bytes": 173800,
+      "sha256": "9e8cf774baa6d0db6f2e8ada0da9c5814f8cac3c87dd46ed75a8accce68703e7"
+    },
+    {
+      "location": "public",
+      "filename": "makemake-illustration-page-0-level-2080.webp",
+      "bytes": 511604,
+      "sha256": "d11c4c178fab51a7f215838c6d09c351acdcba058b46777da133405a6f0a427d"
+    },
+    {
+      "location": "public",
+      "filename": "makemake-illustration-page-0-level-520.webp",
+      "bytes": 47906,
+      "sha256": "9a360c5382a8cccd45eed39d56661a0fe789d3b297f2f1510517809b0ea0af6e"
+    },
+    {
+      "location": "public",
+      "filename": "makemake-illustration-page-0.webp",
+      "bytes": 1217612,
+      "sha256": "3a0101cd4cc59d244059a5cff579f5bf7f846a4f620c7c6a675f82f8a7b43538"
     },
     {
       "location": "public",
@@ -268,14 +310,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 84830,
-      "sha256": "5e6864c1f2c6f04514cb26ae17377c07436a697811cd6c68f09a6ac92fd2d522"
+      "bytes": 83163,
+      "sha256": "9f878dd07382dbfb3fd2498ab82c1e98fc4acafa8e450236eecf52d4aa766c00"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 723,
-      "sha256": "1398e39e82d3c130b924152daa17e590726d7562000774801abf3853b9ff2b12"
+      "bytes": 661,
+      "sha256": "76a6ddcc1986323d9d1e8d036c5cae61146d71600003a85528faf8dff132b4e8"
     },
     {
       "location": "prepared",
@@ -298,8 +340,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 165,
-      "sha256": "881402eca6a5283a595a76111ee199ecb53892099d20a253240e9a7e833258cb"
+      "bytes": 203,
+      "sha256": "e7c3b959a32d743287a479928a5594e18b587bd586116b70c5b64b8801fec4b3"
     },
     {
       "location": "prepared",
@@ -310,20 +352,20 @@
     {
       "location": "prepared",
       "filename": "minimaps/illustration.webp",
-      "bytes": 24784,
-      "sha256": "d0d62fbd8fecb9313dc1025f675609e3b61848b9b81d122fcaf0f52f40c9edf9"
+      "bytes": 25918,
+      "sha256": "3f5301acffe2419ec3ca29c714ec68de9444178315d9c10491554fc61077865e"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 354536,
-      "sha256": "e37769695704a8f92a0cc8c643c14aff65a8c311716775861775b4d5c2c74599"
+      "bytes": 356912,
+      "sha256": "c6c9dcf0386635b93fdab52eede8c3eb5af2e6586ed86bf171cb43fb7de9b566"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 389836,
-      "sha256": "e7f6b96b8cfd985a22e7c1c6b471a3539c48c705e531666cabadd669cb233f93"
+      "bytes": 390660,
+      "sha256": "d58bd78a8b5582bf9566e8e2681ec629da1593f5c39e255f21301a8b504d02c8"
     },
     {
       "location": "prepared",
