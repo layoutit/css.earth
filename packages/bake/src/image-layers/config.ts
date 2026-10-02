@@ -5,7 +5,9 @@ export interface ImageLayerRecipe {
   schema: 'cssearth-image-layer-recipe@1';
   id: string;
   source: { path: string; dimensions: [number, number]; originalDimensions: [number, number];
-    parentPixelWindow?: [number, number, number, number]; publisherUrl: string; downloadUrl: string; credit: string; license: 'CC-BY-4.0';
+    parentPixelWindow?: [number, number, number, number]; publisherUrl: string; downloadUrl: string; credit: string;
+    /** `CC-BY` is an attribution licence stated without a version, as the Sloan Digital Sky Survey states its images'. */
+    license: 'CC-BY-4.0' | 'CC-BY';
     /** Milky Way stars in front of the galaxy, removed from the photograph before its layers are cut (./foreground.ts). */
     foregroundStars?: { path: string; raDegColumn: string; decDegColumn: string; gMagColumn: string; source: string; basis: string };
     /** Companion galaxies removed the same way, by their rows (key column) in a repository catalogue with the Local Volume
@@ -27,6 +29,8 @@ export interface ImageLayerRecipe {
      * the light-weighted mean over the disc matches the catalogue colour of that index; green and all structure stay. */
     colourTie?: { bv: number; source: string; basis: string }; bulgeSlices?: number; bulgeFacePixels?: number; bulgeCrossSlices?: number; crossAxisSlices: number; crossAxisAlongPixels: number; crossAxisDepthPixels: number;
     backgroundFloor: number; edgeTaperFraction: number; diffuseFraction: number; diffuseSigmaPixels: number;
+    /** One midplane image holding the whole observation, as the Milky Way's backing is: no depth slabs, no side banks. */
+    flat?: boolean;
     /** `alphaQuality` (0-100, default 100: lossless) is WebP's alpha quality; a lower one trades faint alpha noise for bytes. */
     encoding: { format: 'webp'; quality: number; alphaQuality?: number } };
   provenance: { path: string };
@@ -61,6 +65,7 @@ const bulgeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['bulge']>
     extentKpc: { radius: positive(e.radius, 'geometry.bulge.extentKpc.radius'), height: positive(e.height, 'geometry.bulge.extentKpc.height'),
       ...(e.fadeFrom===undefined?{}:{fadeFrom:(()=>{const f=positive(e.fadeFrom,'geometry.bulge.extentKpc.fadeFrom');if(f>=Number(e.radius))throw new TypeError(`geometry.bulge.extentKpc.fadeFrom (${f}) must be inside radius (${String(e.radius)}).`);return f;})()}) } };
 };
+const flatOf = (v: unknown): boolean => { if (typeof v !== 'boolean') throw new TypeError(`bake.flat must be true or false; got ${JSON.stringify(v)}.`); return v; };
 const alphaQualityOf = (v: unknown): number => {
   const n = finite(v, 'encoding.alphaQuality'); if (!Number.isInteger(n) || n < 0 || n > 100) throw new TypeError(`encoding.alphaQuality must be an integer 0-100; got ${n}.`); return n;
 };
@@ -105,7 +110,7 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
   const kind = g.kind;
   if (kind !== 'inclined-disk' && kind !== 'line-of-sight-envelope') throw new TypeError('Unsupported image-layer geometry.');
   if (e.format !== 'webp') throw new TypeError('Image layers require WebP.');
-  if (s.license !== 'CC-BY-4.0') throw new TypeError('Unsupported source license declaration.');
+  if (s.license !== 'CC-BY-4.0' && s.license !== 'CC-BY') throw new TypeError(`Unsupported source license declaration: ${JSON.stringify(s.license)}; expected CC-BY-4.0 or CC-BY.`);
   if (!Array.isArray(g.depthWeights) || g.depthWeights.length < 3 || g.depthWeights.length > 64) throw new TypeError('depthWeights must contain 3-64 values.');
   const weights = g.depthWeights.map((v, i) => positive(v, `depthWeights[${i}]`));
   if(!Array.isArray(g.depthScales)||g.depthScales.length!==weights.length)throw new TypeError('depthScales must align with depthWeights.');
@@ -138,5 +143,6 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       ...(b.colourTie===undefined?{}:{colourTie:colourTieOf(b.colourTie)}),
       ...(g.bulge===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
       crossAxisAlongPixels:positive(b.crossAxisAlongPixels,'crossAxisAlongPixels',true),crossAxisDepthPixels: positive(b.crossAxisDepthPixels, 'crossAxisDepthPixels', true), backgroundFloor,edgeTaperFraction,diffuseFraction,diffuseSigmaPixels:positive(b.diffuseSigmaPixels,'diffuseSigmaPixels'),
+      ...(b.flat===undefined?{}:{flat:flatOf(b.flat)}),
       encoding: { format: 'webp', quality, ...(e.alphaQuality===undefined?{}:{alphaQuality:alphaQualityOf(e.alphaQuality)}) } }, provenance: { path: path(p.path) } };
 }

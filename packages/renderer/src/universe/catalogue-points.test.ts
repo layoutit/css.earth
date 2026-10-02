@@ -21,7 +21,7 @@ const bank = { schema: 'cssearth-catalogue-points@1', id: 'test-stars', frame,
 test('the prepared catalogues the app draws are valid banks of every selected row with a distance', () => {
   // The published banks: what each recipe marks `published: true` and the app fetches. Their inputs (a survey's stars,
   // one catalogue's masers) are bake inputs in output/catalogue-points/, so they are not read here.
-  for (const [object, id] of [['milky-way-volume', 'globular-clusters'], ['milky-way-volume', 'dots'], ['milky-way-volume', 'old-star-dots'], ['nearby-universe-galaxies', 'dots'], ['nearby-universe-galaxies', 'bright-galaxy-dots'],
+  for (const [object, id] of [['milky-way-volume', 'globular-clusters'], ['milky-way-volume', 'dots'], ['milky-way-volume', 'old-star-dots'], ['nuclear-star-cluster', 'dots'], ['nearby-universe-galaxies', 'dots'], ['nearby-universe-galaxies', 'bright-galaxy-dots'],
     ['nearby-universe-galaxies', 'quasar-dots'], ['m31-layers', 'stars'], ['m31-layers', 'dots'], ['m33-layers', 'stars'], ['m33-layers', 'dots'], ['m81-layers', 'dots'], ['ngc-253-layers', 'dots']]) {
     const path = new URL(`../../../../src/objects/${object}/prepared/${id}.bin`, import.meta.url);
     const prepared = decodeCatalogueBankBinary(unpackPreparedBinary(readFileSync(path), path.pathname), path.pathname) as {

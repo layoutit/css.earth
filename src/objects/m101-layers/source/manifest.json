@@ -1,0 +1,245 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/m101-layers/source/source.jpg",
+      "origin": "https://noirlab.edu/public/images/noao-m101ubviha/",
+      "sourceUrl": "https://noirlab.edu/public/images/noao-m101ubviha/",
+      "title": "M101; Pinwheel Galaxy",
+      "credit": "T.A. Rector (University of Alaska Anchorage) and H. Schweiker (WIYN and NOIRLab/NSF/AURA)",
+      "displayCredit": "NOIRLab",
+      "acquisition": "The publisher Large JPEG (7296 x 7353 px), restored from its origin; not tracked. Registration re-measured against Gaia stars (recipe observation). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-noao-m101ubviha",
+            "role": "material",
+            "evidence": "src/objects/m101-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Mayall 4-m Mosaic U B V I, Hα",
+            "evidence": "https://noirlab.edu/public/images/noao-m101ubviha/",
+            "reason": "The publisher's colour composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaia-foreground",
+      "path": "src/objects/m101-layers/source/gaia-dr3-foreground.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=500000&QUERY=SELECT+Source%2C+RA_ICRS%2C+DE_ICRS%2C+Plx%2C+e_Plx%2C+pmRA%2C+e_pmRA%2C+pmDE%2C+e_pmDE%2C+Gmag+FROM+%22I%2F355%2Fgaiadr3%22+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2C+RA_ICRS%2C+DE_ICRS%29%2C+CIRCLE%28%27ICRS%27%2C+210.8033333%2C+54.35055556%2C+0.45%29%29+AND+Gmag+IS+NOT+NULL+AND+%28%28Plx+%3E+0.02+AND+e_Plx+%3C+0.2+*+Plx%29+OR+%28ABS%28pmRA%29+%3E+0.2+%2B+2+*+e_pmRA+AND+e_pmRA+%3C+0.2+*+ABS%28pmRA%29%29+OR+%28ABS%28pmDE%29+%3E+0.2+%2B+2+*+e_pmDE+AND+e_pmDE+%3C+0.2+*+ABS%28pmDE%29%29%29",
+      "title": "Gaia DR3 foreground stars, gaia-dr3-foreground.csv",
+      "credit": "Gaia Collaboration, Vallenari et al. (2023), A&A 674, A1",
+      "acquisition": "Query result downloaded unchanged from its CDS origin; read by the image-layer bake to remove Milky Way stars from the photograph.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hodge-hii-table",
+      "path": "src/objects/m101-layers/source/hodge-hii/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+HII%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJS%2F73%2F661%2Fhii%22",
+      "title": "The H II regions of M 101. I. An atlas of 1264 emission regions, table.csv",
+      "credit": "P. Hodge, M. Gurwell, J. D. Goldader, R. C. Kennicutt Jr.; ApJS 73, 661",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through hodge-hii/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hodge-1990-m101-hii",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+HII%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJS%2F73%2F661%2Fhii%22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vucetic-snr-table",
+      "path": "src/objects/m101-layers/source/vucetic-snr/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F446%2F943%2Fm101%22",
+      "title": "Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission, table.csv",
+      "credit": "M. M. Vucetic, B. Arbutina, D. Urosevic; MNRAS 446, 943",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through vucetic-snr/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vucetic-2015-optical-snr",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F446%2F943%2Fm101%22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "feldmeier-pne-table",
+      "path": "src/objects/m101-layers/source/feldmeier-pne/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+PN%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F479%2F231%2Ftab2-4%22+WHERE+Gal%3D%27M+101%27",
+      "title": "Planetary nebulae as standard candles. XI. Application to spiral galaxies, table.csv",
+      "credit": "J. J. Feldmeier, R. Ciardullo, G. H. Jacoby; ApJ 479, 231",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through feldmeier-pne/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "feldmeier-1997-spiral-pne",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+PN%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F479%2F231%2Ftab2-4%22+WHERE+Gal%3D%27M+101%27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "simanton-gc-table",
+      "path": "src/objects/m101-layers/source/simanton-gc/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F805%2F160%2Ftable1%22",
+      "title": "Two populations of old star clusters in the spiral galaxy M101 based on HST/ACS observations, table.csv",
+      "credit": "L. A. Simanton, R. Chandar, B. C. Whitmore; ApJ 805, 160",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through simanton-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "simanton-2015-m101-old-clusters",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F805%2F160%2Ftable1%22"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/m101-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/m101-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/m101-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "stellar-extent",
+      "path": "src/objects/m101-layers/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mihos-2013-m101-outer-disc",
+            "role": "reference",
+            "evidence": "https://arxiv.org/abs/1211.3095"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dots-merge",
+      "kind": "authored-document",
+      "path": "src/objects/m101-layers/source/dots/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored merge of the catalogue dot banks into one layer.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "hodge-hii-points",
+      "kind": "authored-document",
+      "path": "src/objects/m101-layers/source/hodge-hii/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the The H II regions of M 101. I. An atlas of 1264 emission regions rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "vucetic-snr-points",
+      "kind": "authored-document",
+      "path": "src/objects/m101-layers/source/vucetic-snr/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "feldmeier-pne-points",
+      "kind": "authored-document",
+      "path": "src/objects/m101-layers/source/feldmeier-pne/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Planetary nebulae as standard candles. XI. Application to spiral galaxies rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "simanton-gc-points",
+      "kind": "authored-document",
+      "path": "src/objects/m101-layers/source/simanton-gc/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Two populations of old star clusters in the spiral galaxy M101 based on HST/ACS observations rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

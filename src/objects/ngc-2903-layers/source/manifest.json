@@ -1,0 +1,171 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/ngc-2903-layers/source/source.jpg",
+      "origin": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.3333333&projection=TAN&coordsys=icrs&ra=143.04&dec=21.500556&format=jpg",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+      "title": "SDSS9 color",
+      "credit": "Sloan Digital Sky Survey; colour HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+      "displayCredit": "SDSS",
+      "acquisition": "The CDS hips2fits cutout (3000 x 3000 px), restored from its origin; not tracked. Registration is the request, checked against Gaia stars (recipe observation). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "sdss-dr9-color-hips",
+            "role": "material",
+            "evidence": "src/objects/ngc-2903-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "SDSS images: CC-BY (https://www.sdss.org/collaboration/#image-use); the CDS HiPS distribution: ODbL-1.0. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "SDSS g r i",
+            "evidence": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+            "reason": "The publisher's colour composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaia-foreground",
+      "path": "src/objects/ngc-2903-layers/source/gaia-dr3-foreground.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=500000&QUERY=SELECT+Source%2C+RA_ICRS%2C+DE_ICRS%2C+Plx%2C+e_Plx%2C+pmRA%2C+e_pmRA%2C+pmDE%2C+e_pmDE%2C+Gmag+FROM+%22I%2F355%2Fgaiadr3%22+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2C+RA_ICRS%2C+DE_ICRS%29%2C+CIRCLE%28%27ICRS%27%2C+143.04%2C+21.500556%2C+0.24%29%29+AND+Gmag+IS+NOT+NULL+AND+%28%28Plx+%3E+0.02+AND+e_Plx+%3C+0.2+*+Plx%29+OR+%28ABS%28pmRA%29+%3E+0.2+%2B+2+*+e_pmRA+AND+e_pmRA+%3C+0.2+*+ABS%28pmRA%29%29+OR+%28ABS%28pmDE%29+%3E+0.2+%2B+2+*+e_pmDE+AND+e_pmDE+%3C+0.2+*+ABS%28pmDE%29%29%29",
+      "title": "Gaia DR3 foreground stars, gaia-dr3-foreground.csv",
+      "credit": "Gaia Collaboration, Vallenari et al. (2023), A&A 674, A1",
+      "acquisition": "Query result downloaded unchanged from its CDS origin; read by the image-layer bake to remove Milky Way stars from the photograph.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync"
+          }
+        ]
+      }
+    },
+    {
+      "id": "popping-hii-table",
+      "path": "src/objects/ngc-2903-layers/source/popping-hii/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+HII%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F521%2FA8%2Ftable2%22",
+      "title": "Multiwavelength study of the star-formation in the bar of NGC 2903, table.csv",
+      "credit": "G. Popping, I. Pérez, A. Zurita; A&A 521, A8",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through popping-hii/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "popping-2010-ngc2903-bar",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+HII%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F521%2FA8%2Ftable2%22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vucetic-snr-table",
+      "path": "src/objects/ngc-2903-layers/source/vucetic-snr/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F446%2F943%2Fngc2903%22",
+      "title": "Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission, table.csv",
+      "credit": "M. M. Vucetic, B. Arbutina, D. Urosevic; MNRAS 446, 943",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through vucetic-snr/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vucetic-2015-optical-snr",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F446%2F943%2Fngc2903%22"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/ngc-2903-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/ngc-2903-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/ngc-2903-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "dots-merge",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-2903-layers/source/dots/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored merge of the catalogue dot banks into one layer.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "popping-hii-points",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-2903-layers/source/popping-hii/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Multiwavelength study of the star-formation in the bar of NGC 2903 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "vucetic-snr-points",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-2903-layers/source/vucetic-snr/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

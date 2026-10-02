@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-6744",
+  "displayName": "NGC 6744",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "9.506 Mpc (−593,500 / +633,100 pc)",
+        "source": {
+          "catalogueId": "publication-tully2009aj-138-323t",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
+          "label": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 287.4°, Dec -63.86°",
+        "source": {
+          "catalogueId": "lvdb-v1-1-1",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "ESO · optical",
+        "thumbnail": "ngc-6744-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-6744-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-6744-layers-optical",
+          "path": "../../ngc-6744-layers/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1118a/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
+      "href": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+      "href": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
+      "credit": "Tully2009AJ....138..323T: The Extragalactic Distance Database"
+    }
+  }
+}

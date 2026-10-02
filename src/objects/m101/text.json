@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m101",
+  "card": {
+    "text": "A spiral galaxy 6.7 million parsecs away, seen almost face-on.",
+    "sources": [
+      {
+        "catalogueId": "publication-riess2016apj-826-56r",
+        "url": "https://arxiv.org/abs/1604.01424",
+        "label": "Riess et al. (2016), ApJ 826, 56, Table 5, row M101",
+        "checked": "2026-10-01",
+        "locator": "distance: 6.714 Mpc (−137,700 / +140,600 pc)"
+      },
+      {
+        "catalogueId": "walter-2008-things",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/136/2563",
+        "label": "Walter et al. (2008), THINGS: The H I Nearby Galaxy Survey, Table 1",
+        "checked": "2026-10-01",
+        "locator": "row NGC 5457: inclination 18 deg"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its distance comes from its Cepheid variable stars. Deep images trace its disc of stars to nearly 50 kiloparsecs from the centre.",
+    "sources": [
+      {
+        "catalogueId": "publication-riess2016apj-826-56r",
+        "url": "https://arxiv.org/abs/1604.01424",
+        "label": "Riess et al. (2016), ApJ 826, 56, Table 5, row M101",
+        "checked": "2026-10-01",
+        "locator": "Cepheid distance modulus mu_Ceph = 29.135 +/- 0.045"
+      },
+      {
+        "catalogueId": "mihos-2013-m101-outer-disc",
+        "url": "https://arxiv.org/abs/1211.3095",
+        "label": "Mihos et al. (2013), The Extended Optical Disk of M101",
+        "checked": "2026-10-01",
+        "quote": "has revealed the stellar structure of M101's disk out to nearly 25 arcminutes (50 kpc)"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M101 in visible light",
+      "detail": "7296 × 7353 px",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "noirlab-noao-m101ubviha",
+          "url": "https://noirlab.edu/public/images/noao-m101ubviha/",
+          "label": "M101; Pinwheel Galaxy; T.A. Rector (University of Alaska Anchorage) and H. Schweiker (WIYN and NOIRLab/NSF/AURA)",
+          "checked": "2026-10-01",
+          "locator": "M101; Pinwheel Galaxy"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "id": "leroy-2008-things-star-formation-efficiency",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Star Formation Efficiency in Nearby Galaxies: Measuring Where Gas Forms Stars Effectively",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2008AJ....136.2782L"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/AJ/136/2782"
+    },
+    {
+      "type": "arxiv",
+      "value": "0810.2556"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2008AJ....136.2782L",
+      "label": "2008AJ....136.2782L"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/136/2782",
+      "label": "CDS J/AJ/136/2782"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/0810.2556",
+      "label": "arXiv:0810.2556"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/136/2782/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "sample (table4, properties of sample galaxies): NGC 6946 at their distance 5.9 Mpc has stellar scale length l* = 2.5 kpc, from the Spitzer 3.6 micron profile."
+    }
+  ],
+  "creators": [
+    "A. K. Leroy",
+    "F. Walter",
+    "E. Brinks",
+    "F. Bigiel",
+    "W. J. G. de Blok",
+    "B. Madore",
+    "M. D. Thornley"
+  ],
+  "publisher": "AJ 136, 2782",
+  "publicationDate": "2008",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Leroy et al. (2008), AJ 136, 2782.",
+      "scope": "NGC 6946 disc scale length",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/136/2782/ReadMe"
+    }
+  ]
+}

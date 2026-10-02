@@ -115,6 +115,14 @@
       "bytes": 4464
     },
     {
+      "path": "src/objects/m101-layers/prepared/presentation.json",
+      "bytes": 1391
+    },
+    {
+      "path": "public/scenes/m101-layers/datasets/optical.webp",
+      "bytes": 11168
+    },
+    {
       "path": "src/objects/m2-9-volume/prepared/presentation.json",
       "bytes": 1863
     },
@@ -223,6 +231,14 @@
       "bytes": 33532
     },
     {
+      "path": "src/objects/ngc-1637-layers/prepared/presentation.json",
+      "bytes": 1397
+    },
+    {
+      "path": "public/scenes/ngc-1637-layers/datasets/optical.webp",
+      "bytes": 9762
+    },
+    {
       "path": "src/objects/ngc-253-layers/prepared/presentation.json",
       "bytes": 1549
     },
@@ -231,12 +247,36 @@
       "bytes": 5324
     },
     {
+      "path": "src/objects/ngc-2903-layers/prepared/presentation.json",
+      "bytes": 1424
+    },
+    {
+      "path": "public/scenes/ngc-2903-layers/datasets/optical.webp",
+      "bytes": 5180
+    },
+    {
       "path": "src/objects/ngc-300-layers/prepared/presentation.json",
       "bytes": 1424
     },
     {
       "path": "public/scenes/ngc-300-layers/datasets/optical.webp",
       "bytes": 15188
+    },
+    {
+      "path": "src/objects/ngc-6744-layers/prepared/presentation.json",
+      "bytes": 1451
+    },
+    {
+      "path": "public/scenes/ngc-6744-layers/datasets/optical.webp",
+      "bytes": 24660
+    },
+    {
+      "path": "src/objects/ngc-6946-layers/prepared/presentation.json",
+      "bytes": 1460
+    },
+    {
+      "path": "public/scenes/ngc-6946-layers/datasets/optical.webp",
+      "bytes": 26340
     },
     {
       "path": "src/objects/omega-centauri-volume/prepared/presentation.json",
@@ -291,24 +331,24 @@
       "bytes": 1836
     },
     {
-      "path": "src/objects/milky-way/object.json",
-      "bytes": 1888
+      "path": "src/objects/milky-way-volume/object.json",
+      "bytes": 889
     },
     {
-      "path": "src/objects/milky-way/prepared/backing.json",
+      "path": "src/objects/milky-way-volume/prepared/backing.json",
       "bytes": 1743
     },
     {
-      "path": "src/objects/milky-way/source/backing/recipe.json",
+      "path": "src/objects/milky-way-volume/source/backing/recipe.json",
       "bytes": 2972
     },
     {
-      "path": "src/objects/milky-way/prepared/backing/backing.webp",
+      "path": "src/objects/milky-way-volume/prepared/backing/backing.webp",
       "bytes": 183564
     },
     {
-      "path": "src/objects/local-group/prepared/catalogue.json",
-      "bytes": 705298
+      "path": "src/objects/local-group-galaxies/prepared/catalogue.json",
+      "bytes": 706269
     }
   ],
   "images": {
@@ -564,6 +604,24 @@
       "credit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
       "sourceUrl": "https://esahubble.org/images/heic0515a/"
     },
+    "m101-layers/optical": {
+      "url2x": "/navigation/focus-m101-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/m101-layers/prepared/presentation.json",
+        "public/scenes/m101-layers/datasets/optical.webp"
+      ],
+      "credit": "NOIRLab",
+      "sourceUrl": "https://noirlab.edu/public/images/noao-m101ubviha/"
+    },
+    "m101-layers": {
+      "url2x": "/navigation/focus-object-m101-layers@2x.webp",
+      "inputs": [
+        "src/objects/m101-layers/prepared/presentation.json",
+        "public/scenes/m101-layers/datasets/optical.webp"
+      ],
+      "credit": "NOIRLab",
+      "sourceUrl": "https://noirlab.edu/public/images/noao-m101ubviha/"
+    },
     "m2-9-volume/hst-optical": {
       "url2x": "/navigation/focus-m2-9-volume-hst-optical@2x.webp",
       "inputs": [
@@ -807,6 +865,24 @@
       "credit": "Chris Mihos/ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1525a/"
     },
+    "ngc-1637-layers/optical": {
+      "url2x": "/navigation/focus-ngc-1637-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-1637-layers/prepared/presentation.json",
+        "public/scenes/ngc-1637-layers/datasets/optical.webp"
+      ],
+      "credit": "ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso1315a/"
+    },
+    "ngc-1637-layers": {
+      "url2x": "/navigation/focus-object-ngc-1637-layers@2x.webp",
+      "inputs": [
+        "src/objects/ngc-1637-layers/prepared/presentation.json",
+        "public/scenes/ngc-1637-layers/datasets/optical.webp"
+      ],
+      "credit": "ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso1315a/"
+    },
     "ngc-253-layers/optical": {
       "url2x": "/navigation/focus-ngc-253-layers-optical@2x.webp",
       "inputs": [
@@ -825,6 +901,24 @@
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso0902c/"
     },
+    "ngc-2903-layers/optical": {
+      "url2x": "/navigation/focus-ngc-2903-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-2903-layers/prepared/presentation.json",
+        "public/scenes/ngc-2903-layers/datasets/optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+    },
+    "ngc-2903-layers": {
+      "url2x": "/navigation/focus-object-ngc-2903-layers@2x.webp",
+      "inputs": [
+        "src/objects/ngc-2903-layers/prepared/presentation.json",
+        "public/scenes/ngc-2903-layers/datasets/optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+    },
     "ngc-300-layers/optical": {
       "url2x": "/navigation/focus-ngc-300-layers-optical@2x.webp",
       "inputs": [
@@ -842,6 +936,42 @@
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1037a/"
+    },
+    "ngc-6744-layers/optical": {
+      "url2x": "/navigation/focus-ngc-6744-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-6744-layers/prepared/presentation.json",
+        "public/scenes/ngc-6744-layers/datasets/optical.webp"
+      ],
+      "credit": "ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso1118a/"
+    },
+    "ngc-6744-layers": {
+      "url2x": "/navigation/focus-object-ngc-6744-layers@2x.webp",
+      "inputs": [
+        "src/objects/ngc-6744-layers/prepared/presentation.json",
+        "public/scenes/ngc-6744-layers/datasets/optical.webp"
+      ],
+      "credit": "ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso1118a/"
+    },
+    "ngc-6946-layers/optical": {
+      "url2x": "/navigation/focus-ngc-6946-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-6946-layers/prepared/presentation.json",
+        "public/scenes/ngc-6946-layers/datasets/optical.webp"
+      ],
+      "credit": "NOIRLab",
+      "sourceUrl": "https://noirlab.edu/public/images/noao-ngc6946kpno/"
+    },
+    "ngc-6946-layers": {
+      "url2x": "/navigation/focus-object-ngc-6946-layers@2x.webp",
+      "inputs": [
+        "src/objects/ngc-6946-layers/prepared/presentation.json",
+        "public/scenes/ngc-6946-layers/datasets/optical.webp"
+      ],
+      "credit": "NOIRLab",
+      "sourceUrl": "https://noirlab.edu/public/images/noao-ngc6946kpno/"
     },
     "omega-centauri-volume/eso1119b": {
       "url2x": "/navigation/focus-omega-centauri-volume-eso1119b@2x.webp",
@@ -960,24 +1090,24 @@
       "credit": "NASA STEREO Science Center",
       "sourceUrl": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
     },
-    "milky-way/volume": {
-      "url2x": "/navigation/focus-milky-way-volume@2x.webp",
+    "milky-way-volume/volume": {
+      "url2x": "/navigation/focus-milky-way-volume-volume@2x.webp",
       "inputs": [
-        "src/objects/milky-way/object.json",
-        "src/objects/milky-way/prepared/backing.json",
-        "src/objects/milky-way/prepared/backing/backing.webp",
-        "src/objects/milky-way/source/backing/recipe.json"
+        "src/objects/milky-way-volume/object.json",
+        "src/objects/milky-way-volume/prepared/backing.json",
+        "src/objects/milky-way-volume/prepared/backing/backing.webp",
+        "src/objects/milky-way-volume/source/backing/recipe.json"
       ],
       "credit": "An artist's impression of the Milky Way seen from above, by ESA, drawn under the catalogue dots as a backing that shows the galaxy's overall shape. It is artwork, not a measurement; every dot on it is a catalogued object at its published position.",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Gaia%E2%80%99s_star-formation_map_%28slider%29_ESA512394_-_slider.jpg"
     },
-    "milky-way": {
-      "url2x": "/navigation/focus-object-milky-way@2x.webp",
+    "milky-way-volume": {
+      "url2x": "/navigation/focus-object-milky-way-volume@2x.webp",
       "inputs": [
-        "src/objects/milky-way/object.json",
-        "src/objects/milky-way/prepared/backing.json",
-        "src/objects/milky-way/prepared/backing/backing.webp",
-        "src/objects/milky-way/source/backing/recipe.json"
+        "src/objects/milky-way-volume/object.json",
+        "src/objects/milky-way-volume/prepared/backing.json",
+        "src/objects/milky-way-volume/prepared/backing/backing.webp",
+        "src/objects/milky-way-volume/source/backing/recipe.json"
       ],
       "credit": "An artist's impression of the Milky Way seen from above, by ESA, drawn under the catalogue dots as a backing that shows the galaxy's overall shape. It is artwork, not a measurement; every dot on it is a catalogued object at its published position.",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Gaia%E2%80%99s_star-formation_map_%28slider%29_ESA512394_-_slider.jpg"
@@ -991,6 +1121,7 @@
     "helix-volume": "helix-volume",
     "lmc-volume": "lmc-volume",
     "m1-volume": "m1-volume",
+    "m101-layers": "m101-layers",
     "m2-9-volume": "m2-9-volume",
     "m31-layers": "m31-layers",
     "m33-layers": "m33-layers",
@@ -1001,12 +1132,16 @@
     "m81-layers": "m81-layers",
     "m83-layers": "m83-layers",
     "m87-volume": "m87-volume",
+    "ngc-1637-layers": "ngc-1637-layers",
     "ngc-253-layers": "ngc-253-layers",
+    "ngc-2903-layers": "ngc-2903-layers",
     "ngc-300-layers": "ngc-300-layers",
+    "ngc-6744-layers": "ngc-6744-layers",
+    "ngc-6946-layers": "ngc-6946-layers",
     "omega-centauri-volume": "omega-centauri-volume",
     "pds-70-disc": "pds-70-disc",
     "smc-volume": "smc-volume",
     "sun-cor1-density": "sun-cor1-density",
-    "milky-way": "milky-way"
+    "milky-way-volume": "milky-way-volume"
   }
 }
