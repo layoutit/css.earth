@@ -52,6 +52,8 @@ test('selectors deliberately preserve lexical versus Number coercion policies', 
     }
   }
   for (const raw of ['0','-1','9007199254740992','NaN']) assert.throws(() => parseCli(['fetch','input','--pick',raw,'--out','out']));
+  assert.throws(() => parseCli(['wwt-fits','input','--pick','9007199254740992','--level','0','--x','0','--y','0','--out','out']), { message:'--pick must be a nonnegative whole number.' });
+  assert.throws(() => parseCli(['export','input','--output','image','--hdu','9007199254740992','--out','out']), { message:'Selectors must be nonnegative whole numbers' });
   // Unlike selectors, orbit draws are only lexical: unsafe integers remain accepted.
   const draws = parseCli(['candidates','star','--epoch','date','--out','out','--orbit-draws','9007199254740992']);
   assert.equal(draws.command, 'candidates');
