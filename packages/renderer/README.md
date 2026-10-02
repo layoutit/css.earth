@@ -110,3 +110,6 @@ image-layer billboard banks. First visible demand starts its asynchronous decode
 CSS receives the atlas only after readiness, followed by a requested publication.
 The lease ends with the universe. Cold body close-ups do not request this atlas,
 and decoding never reveals a new billboard during an inertial coast.
+
+Prepared leaf bounds validation and serialized pose keyframes live in `@cssearth/objects`.
+Frustum computation and live animation interfaces remain in renderer.

@@ -1,4 +1,4 @@
-import type { PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
+import type { PreparedLeafBounds } from '@cssearth/objects';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { PhysicalCameraPose, PositionM } from '@cssearth/engine';
 import type { WorldCameraViewport, WorldCameraPose } from '../navigation/world-camera.js';

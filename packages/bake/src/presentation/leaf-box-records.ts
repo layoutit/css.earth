@@ -1,3 +1,4 @@
+import type { LeafBoxComponent, PreparedLeafBox } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { scanCssDeclarations } from './css-declaration-scanner.ts';
 
@@ -12,22 +13,6 @@ import { scanCssDeclarations } from './css-declaration-scanner.ts';
 // the page. A later bindings run expands the records back to the variable form first, so it measures what it always did.
 import { LEAF_BOX_FACTOR, LEAF_BOX_PROPERTY } from './leaf-box.ts';
 import { SURFACE_SEAM_OUTSET_PROPERTY } from '../scene/index.ts';
-
-/** A length the box factor scales (px), or a component kept as written. */
-export type LeafBoxComponent = number | string;
-export interface PreparedLeafBox {
-  node: number;
-  /** The leaf's factor per step: min(1, step × density). Absent on a seam-only leaf, whose box factor is always 1. */
-  density?: number;
-  /** Full box width and height (px). `atlas` when the stylesheet reads them as --polycss-atlas-width/-height. */
-  box?: readonly [number, number]; atlas?: true;
-  backgroundSize?: readonly [LeafBoxComponent, LeafBoxComponent];
-  backgroundPosition?: readonly [LeafBoxComponent, LeafBoxComponent];
-  /** The leaf's placement, before the box factor's inverse scale. */
-  matrix: string;
-  /** Scale about the leaf centre, 1 + outset × seam, per axis; absent on a leaf the seam outset does not reach. */
-  seam?: readonly [number, number];
-}
 
 interface Property { name: string; value: string; custom: boolean }
 interface TreeNode { parent: number; style: string; properties: readonly number[] }
@@ -132,7 +117,7 @@ export function withLeafBoxRecords<D extends Definition>(definition: D): D {
   const seamBoxes: PreparedLeafBox[] = [];
   function leafRecord(node: TreeNode, index: number, density: number | undefined, into: PreparedLeafBox[]): TreeNode {
     const where = (name: string) => () => `${definition.id}: prepared node ${index} ${name}`;
-    const box: Partial<PreparedLeafBox> & { node: number } = { node: index };
+    const box: { -readonly [K in keyof PreparedLeafBox]?: PreparedLeafBox[K] } & { node: number } = { node: index };
     let width: number | undefined, height: number | undefined, atlas = false, matrix: string | undefined;
     const kept: number[] = [];
     for (const id of node.properties) {

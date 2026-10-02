@@ -57,7 +57,7 @@ export function requirePreparedDefinitionSource(source: string): string {
   const id = values.get('id');
   if (values.size !== 3 || !["schema", "id", "controls"].every(key => values.has(key)) ||
       bindings.get(nodeName(values.get("schema")) ?? '')?.name !== "OBJECT_RUNTIME_SCHEMA" ||
-      bindings.get(nodeName(values.get("schema")) ?? '')?.path !== "../../../../packages/bake/src/presentation/prepared-schema.ts" ||
+      bindings.get(nodeName(values.get("schema")) ?? '')?.path !== "@cssearth/objects" ||
       bindings.get(nodeName(values.get("controls")) ?? '')?.name !== "objectControls" ||
       bindings.get(nodeName(values.get("controls")) ?? '')?.path !== "../site/control-content.mjs" ||
       id?.type !== "Literal" || typeof id.value !== "string" || imports.length !== 3) {

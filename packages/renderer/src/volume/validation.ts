@@ -1,4 +1,4 @@
-import { validatePreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
+import { validatePreparedLeafBounds } from '@cssearth/objects';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import type { PreparedCssVolume, VolumeAxis, VolumeVector } from './types.js';
 import { validatePreparedCssSky } from '../sky/validation.js';

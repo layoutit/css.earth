@@ -1,4 +1,5 @@
-import { requireTextureBindings, requireTextureLevels, requireTexturePlacements, type ObjectRuntimeDefinition, type PreparedWrite, type PreparedAssets, type EllipsoidProjectionPlan, type PreparedMaterialAddress, type PreparedMaterialFrameMapping, type PreparedMaterialTrack, type PreparedMaterialSelection, type PreparedMaterialBank, type PreparedVariant, type PreparedPresentationDefinition, type PreparedSelectionNavigation, type PreparedDepthOrder, requirePreparedData } from '@cssearth/objects';
+import type { PreparedContractTrack, PreparedContractVariant, PreparedMaterialAddress, PreparedMaterialFrameMapping, EllipsoidProjectionPlan } from '@cssearth/objects';
+import { requireTextureBindings, requireTextureLevels, requireTexturePlacements, type ObjectRuntimeDefinition, type PreparedWrite, type PreparedAssets, type PreparedPresentationDefinition, type PreparedDepthOrder, requirePreparedData } from '@cssearth/objects';
 
 import { isArray } from '@cssearth/core';
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
@@ -6,24 +7,6 @@ import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract
 import type { PreparedCubicSkyPlan } from "./cubic-sky-contract.ts";
 import type { PreparedDirectionalSunPlan } from "./directional-sun-contract.ts";
 
-type PreparedContractRotation = {
-  reference: "prepared" | "initial"; baseDegrees: number; zeroAtPole: boolean;
-  onlyWhenEnabled?: boolean; publishWithAddress?: boolean; systemTransform?: string; polePolicy?: "azimuth";
-  physical?: { width: number; height: number; systemTransform: string; projection: EllipsoidProjectionPlan };
-} & ({ kind: "angle"; property: string } | { kind: "planar"; width: number; height: number } |
-  { kind: "ellipsoid"; width: number; height: number; projection: EllipsoidProjectionPlan; systemTransform:string });
-interface PreparedContractBank extends Omit<PreparedMaterialBank, "default" | "fixed"> {
-  default: PreparedMaterialAddress | null; fixed: PreparedMaterialAddress | null;
-  rows?: readonly { row: number; resource: string; firstFrame: number; lastFrame: number }[];
-}
-export interface PreparedContractTrack extends Omit<PreparedMaterialTrack, "banks" | "rotation" | "frame" | "frameAttribute" | "modeAttribute"> {
-  frame: PreparedMaterialFrameMapping & { count: number }; banks: readonly PreparedContractBank[];
-  rotation: PreparedContractRotation | null; frameAttribute: string | null; modeAttribute: string | null;
-}
-export interface PreparedContractVariant extends Omit<PreparedVariant, "navigation" | "materials"> {
-  navigation?: { maximumZoom: number; camera: NonNullable<PreparedSelectionNavigation["camera"]> | null };
-  materials: readonly (PreparedMaterialSelection & { frameOverride: number | null })[];
-}
 export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema" | "id" | "controls" | "sky" | "sun" | "materials" | "variants" | "animations" | "destinations"> & {
   schema: string; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan | null;
   materials: readonly PreparedContractTrack[]; variants: readonly PreparedContractVariant[];
@@ -34,8 +17,7 @@ export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema
 import { validatePreparedCubicSky } from "./cubic-sky-contract.ts";
 import { validateDirectionalSunPlan } from "./directional-sun-contract.ts";
 
-import { PREPARED_PRESENTATION_SCHEMA } from "./prepared-schema.ts";
-export { PREPARED_PRESENTATION_SCHEMA} from "./prepared-schema.ts";
+import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 const tags = new Set(["div", "span", "s", "b", "u"]);
 function fail(message: string): never { throw new TypeError(`Prepared presentation: ${message}.`); }
 function string(value: unknown, label: string): asserts value is string { if (typeof value !== "string" || !value.length) fail(`${label} must be a nonempty string`); }

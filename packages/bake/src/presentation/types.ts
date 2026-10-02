@@ -1,4 +1,4 @@
-import { type CameraPlan, type CubicSkyPlan, type DirectionalSunPlan, type DatasetVolume, type ObjectControls, type ObjectRuntimeDefinition, type PreparedAssets, type PreparedTree, type PreparedVariant, type PreparedViewBinding, type PreparedMaterialTrack, type PreparedMaterialAddress, type PreparedMaterialRotation, type PreparedTextureLevels } from '@cssearth/objects';
+import { type PreparedPoseKeyframe, type CameraPlan, type CubicSkyPlan, type DirectionalSunPlan, type DatasetVolume, type ObjectControls, type ObjectRuntimeDefinition, type PreparedAssets, type PreparedTree, type PreparedVariant, type PreparedViewBinding, type PreparedMaterialTrack, type PreparedMaterialAddress, type PreparedMaterialRotation, type PreparedTextureLevels } from '@cssearth/objects';
 
 import type { PreparedLeaf, PreparedSeamOutset } from '../scene/index.ts';
 
@@ -38,7 +38,7 @@ export interface Scene {
   starfield: CubicSkyPlan;
   bodyLeaves: PreparedLeaf[]; body: {leaves: PreparedLeaf[]; seamRepair?: SeamRepair; surfacePages?: RasterPagePlan}; preparedSurface?: {seamRepair?: SeamRepair};
   interior?: {bodyTransform: string; outerBodyLeaves: PreparedLeaf[]; coreLeaves: PreparedLeaf[]; sectionLeaves: PreparedLeaf[];
-    presentationOrbit: {durationMilliseconds: number; millisecondsPerControlDegree: number; keyframes: Keyframe[]}};
+    presentationOrbit: {durationMilliseconds: number; millisecondsPerControlDegree: number; keyframes: PreparedPoseKeyframe[]}};
   /** Flat discs in the body's equatorial plane, such as a ring, drawn under the same system node as the surface. */
   planes?: {id: string; className: string; url: string; color: string; radius: number; leaves: PreparedLeaf[]}[];
   material: CompositeMaterial;

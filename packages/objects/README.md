@@ -107,3 +107,9 @@ writer/reader conformance stays in `integration/renderer-bake/src/stars/`.
 and its JSON validators, deferred dataset transports, splitting and validated merging. Presentation, resource, material,
 texture, camera, picking and feature-plan data needed by these validators live here; mounting, selection, projection,
 resource loading and in-place dataset installation remain in renderer. Contract tests run in `pnpm test:packages`.
+
+`src/prepared-data/` owns the presentation schema identifier, narrowed prepared material/selection records,
+serialized pose keyframes and leaf bounds validation. Frustum computation, DOM animation and CSS publication
+stay in renderer; leaf-box extraction stays in bake and imports the shared record. Leaf bounds contract tests
+run in the packages lane; writer/frustum conformance remains in `integration/renderer-bake/`.
+The bake presentation-envelope validator still depends on bake-owned sky/Sun validation pending their format split.

@@ -1,4 +1,4 @@
-import { OBJECT_RUNTIME_SCHEMA, NEUTRAL_CATALOGUE_RGB, type AuthoredObjectDescriptor } from '@cssearth/objects';
+import { OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA, NEUTRAL_CATALOGUE_RGB, type AuthoredObjectDescriptor } from '@cssearth/objects';
 
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
 import { parseShapeModelConfig, parseShapeContent } from './source.ts';
@@ -148,7 +148,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
       [{ kind: 'silhouette-fit', target: index(requiredMaterialRoot()), minimumRadius: 1.5, unitScale: 2 / scene.camera.logicalBodyDiameter }],
   })));
   const { id: _id, controls: _controls, ...presentation } = definition;
-  requirePreparedPresentation({ ...presentation, schema: 'cssearth-prepared-presentation@3' }, { controls: preparedContent.controls });
+  requirePreparedPresentation({ ...presentation, schema: PREPARED_PRESENTATION_SCHEMA }, { controls: preparedContent.controls });
   const geometry = { ...scene, bodyLeaves, ringLeaves,
     ...(ringRaster ? { ringCoverage: { sourceFaceCount: sourceRingLeaves.length, preparedTileCount: ringLeaves.length,
       width: ringRaster.width, height: ringRaster.height, sourceFaces: ringFaces } } : {}),

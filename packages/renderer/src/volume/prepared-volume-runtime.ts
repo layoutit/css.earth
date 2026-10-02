@@ -1,4 +1,5 @@
-import { createPreparedLeafFrustum, preparedLeafMayContribute, type PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
+import { type PreparedLeafBounds } from '@cssearth/objects';
+import { createPreparedLeafFrustum, preparedLeafMayContribute } from '../rendering/prepared-leaf-frustum.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { cssViewFromOrientation, worldRotationFromQuaternion, worldRotationCss } from '../navigation/world-camera-math.js';
 import type { PreparedVolumeMountOptions, PreparedMaterialVolumeRuntime, PreparedCssVolume, VolumeCameraPublication, VolumeLocalCamera, VolumeVector, PreparedVolumeCameraTransform } from './types.js';
