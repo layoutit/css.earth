@@ -57,7 +57,8 @@ export interface CompilerBakeResult {
   datasets: CompilerDatasetVolume[];
   stars: PreparedCompilerStar[];
   starSprites?: CompilerStarSprites;
-  sampling: { sliceCounts: { x: number; y: number; z: number }; imageWidth: 512; samplesPerSlab: 4;
+  /** `imageWidth` is the slab raster width in pixels: 512 by default, less for a field that fills every slab. */
+  sampling: { sliceCounts: { x: number; y: number; z: number }; imageWidth: number; samplesPerSlab: 4;
     layerPlan?: VolumeLayerPlan; layerOptimization?: LayerOptimizationReport; renderBudget?: RenderElementBudget };
 }
 
@@ -65,6 +66,11 @@ const record = (v: unknown): v is Record<string, unknown> => v !== null && typeo
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const triple = (v: unknown): v is EmissionVector3 => Array.isArray(v) && v.length === 3 && v.every(finite);
 const safeId = (v: unknown): v is string => typeof v === 'string' && /^[a-z0-9][a-z0-9-]{0,95}$/.test(v);
+/** Slab rasters are 512 pixels wide unless a scene saves a smaller width. A cloud that fills its bounds keeps every
+ * slab at full size, so its three atlases grow with the square of this width. */
+export const COMPILER_IMAGE_WIDTH = 512, COMPILER_MINIMUM_IMAGE_WIDTH = 128;
+export const validCompilerImageWidth = (v: unknown): v is number => typeof v === 'number' && Number.isInteger(v) &&
+  v >= COMPILER_MINIMUM_IMAGE_WIDTH && v <= COMPILER_IMAGE_WIDTH;
 /** A scene, field or bank is named by its id. */
 export const validCompilerName = (v: unknown): v is string => safeId(v) && !/^[a-f0-9]{64}$/.test(v);
 
@@ -146,7 +152,7 @@ export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
       !same(frame.boundsUnits.min, local.min) || !same(frame.boundsUnits.max, local.max) ||
       !Array.isArray(coordinates.axes) || coordinates.axes.join(',') !== 'west,north,away' ||
       !same(coordinates.localOriginArcsec, origin) || coordinates.earthView !== 'observer-at-negative-z-looking-away' ||
-      sampling.imageWidth !== 512 || sampling.samplesPerSlab !== 4 || !record(counts) ||
+      !validCompilerImageWidth(sampling.imageWidth) || sampling.samplesPerSlab !== 4 || !record(counts) ||
       ['x', 'y', 'z'].some(axis => !Number.isInteger(counts[axis]) || Number(counts[axis]) < 1 || Number(counts[axis]) > COMPILER_LONGEST_AXIS_SLICES))
     throw new TypeError('Compiler bake frame or sampling is invalid.');
   if (sampling.layerPlan !== undefined) {
