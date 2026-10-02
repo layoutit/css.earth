@@ -72,6 +72,9 @@ cross-checked against the PDS
 [Saturn ring statistics](https://pds-rings.seti.org/saturn/saturn_rings_table.html).
 Nothing is drawn inside 66,900 km, where the profile starts.
 
+[Saturn's ring particles](../saturn-ring-particles/README.md) draws 4,000 dots over the ring image. Their radial
+density follows this same profile; the position of a single dot is drawn from a seed and is not a measurement.
+
 For readability, 29 named narrow features (5 dark gaps and 24 bright hairlines)
 get a minimum width of 6 texels in the 4,096-pixel ring image, and the bright
 ones an opacity gain. Their radii and the rest of the profile are unchanged.
