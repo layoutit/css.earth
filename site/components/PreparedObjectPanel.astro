@@ -28,7 +28,7 @@ const authoredDatasets = authoredSource === undefined
 const minimap = await minimapFiles[`${objectRoot}/source/presentation/surface-map.json`]?.();
 const previews = await previewFiles[`${objectRoot}/prepared/minimaps.json`]?.();
 const raster = await rasterFiles[`${objectRoot}/source/preparation/raster.json`]?.();
-// One colour over the whole disc has no map to show: the hex joins the row's detail instead.
+// One color over the whole disc has no map to show: the hex joins the row's detail instead.
 const uniformColors = raster === undefined ? new Map<string, string>()
   : uniformDatasetColors(raster, await preparedDatasetFiles[`${objectRoot}/prepared/datasets.json`]?.(), content.objectId);
 const titled = withDatasetText(controls.datasets && {

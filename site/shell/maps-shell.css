@@ -746,7 +746,7 @@
   padding: calc(var(--explorer-divider-gap) + var(--explorer-divider-width) + 1px) 0 0;
   border: 0;
 }
-/* A card that shows its factsheet and its one colour dataset together (ObjectInformationPanel.astro): "Datasets" reads as
+/* A card that shows its factsheet and its one color dataset together (ObjectInformationPanel.astro): "Datasets" reads as
    the tab it stands for, and the row and its description are one block with no line between them. */
 .object-card-section-title {
   margin: 0;

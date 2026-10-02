@@ -23,7 +23,7 @@ import { PREPARED_CATALOGUE_INDEX } from '../search/prepared-catalogue-index.mts
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], datasets } = Astro.props;
 const hasDatasets = Boolean(datasets && datasets.controls.length > 0);
 const hasFacts = facts.length + moreFacts.length > 0;
-// A body whose only dataset is one colour has nothing to choose between: its factsheet and that dataset show together,
+// A body whose only dataset is one color has nothing to choose between: its factsheet and that dataset show together,
 // factsheet first, without tabs.
 const stacked = hasFacts && datasets?.controls.length === 1 && datasets.controls[0]!.color !== undefined && galleries.length === 0;
 const articleUrl = await readObjectArticleUrl(objectId);

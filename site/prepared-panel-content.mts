@@ -138,7 +138,7 @@ export function withDatasetText(datasets: PanelControls['datasets'], readerTexts
   }) };
 }
 
-/** The datasets a body's raster recipe declares as one uniform colour, with the colour its prepared surface holds. */
+/** The datasets a body's raster recipe declares as one uniform color, with the color its prepared surface holds. */
 export function uniformDatasetColors(raster: unknown, prepared: unknown, objectId: string): Map<string, string> {
   const colors = new Map<string, string>();
   const surfaces = raster === undefined ? [] : array(object(raster, `${objectId} raster recipe`).surfaces ?? [], `${objectId} raster surfaces`);
@@ -150,7 +150,7 @@ export function uniformDatasetColors(raster: unknown, prepared: unknown, objectI
   for (const id of uniform) {
     const color = controls.find(control => control.id === id)?.billboardColor;
     if (typeof color !== 'string' || !/^#[0-9a-f]{6}$/iu.test(color)) {
-      throw new TypeError(`${objectId}: src/objects/${objectId}/prepared/datasets.json dataset ${id} billboardColor is ${JSON.stringify(color ?? null)}; expected a #rrggbb colour for a uniform surface.`);
+      throw new TypeError(`${objectId}: src/objects/${objectId}/prepared/datasets.json dataset ${id} billboardColor is ${JSON.stringify(color ?? null)}; expected a #rrggbb color for a uniform surface.`);
     }
     colors.set(id, color.toLowerCase());
   }

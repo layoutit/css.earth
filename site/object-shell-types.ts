@@ -63,7 +63,7 @@ export interface DatasetControl {
   /** This dataset describes the whole host system, so its reader row belongs on the system card. */
   systemDataset?: boolean;
   texture?: { url: string; width: number; height: number; minimap?: unknown; attribution?: { label: string; url?: string } };
-  /** A dataset that is one colour over the whole body (an unresolved star's): its hex is named beside its label, and its
+  /** A dataset that is one color over the whole body (an unresolved star's): its hex is named beside its label, and its
    * details carry no map and no second title, which would only repeat the row. */
   color?: string;
   /** The surface marks missing observations with the shared no-data grid. */
