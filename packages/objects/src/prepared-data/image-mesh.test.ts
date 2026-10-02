@@ -17,4 +17,3 @@ test('an image mesh bank names its texture, radius and leaves, and refuses a mal
   assert.equal(parseImageMesh({ ...mesh, leaves: [{ style: { ...leaf.style, borderRadius: '50%' } }] }).leaves[0]!.style.borderRadius, '50%', 'a polar cap is a disc');
   assert.throws(() => parseImageMesh({ ...mesh, leaves: [{ style: { ...leaf.style, borderRadius: '3px' } }] }), /rounds only to a disc/);
 });
-

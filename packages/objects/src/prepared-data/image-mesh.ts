@@ -56,4 +56,3 @@ export function parseImageMesh(value: unknown, at = 'image mesh'): PreparedImage
       exteriorOpacity: (cutaway.exteriorOpacity as number | undefined) ?? 1 }) : null,
     leaves: Object.freeze(leaves) });
 }
-

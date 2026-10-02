@@ -20,4 +20,3 @@ test('prepared billboards carry every bank once, with an in-atlas cell and no ha
   assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...input.banks[0], billboard: { ...input.banks[0]!.billboard, cell: 4 } }] }), /outside its atlas/);
   assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...input.banks[1], attached: undefined }] }), /attached/);
 });
-

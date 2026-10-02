@@ -52,4 +52,3 @@ test('catalogue point banks refuse malformed points and appearances, naming the 
   assert.throws(() => parseCataloguePoints({ ...bank, spread: { normal: [1, 1, 0], across: 1, along: 0 } }), /test-stars \(catalogue points\): catalogue point bank field spread/);
   assert.throws(() => parseCataloguePoints({ ...bank, spread: { ...bank.spread, across: -1 } }), /test-stars \(catalogue points\): catalogue point bank field spread/);
 });
-

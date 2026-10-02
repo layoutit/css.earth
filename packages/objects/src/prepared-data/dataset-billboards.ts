@@ -59,4 +59,3 @@ export function parseDatasetBillboards(value: unknown): DatasetBillboards {
   }
   return Object.freeze({ atlas, banks });
 }
-

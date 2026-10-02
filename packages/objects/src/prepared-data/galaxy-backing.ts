@@ -52,4 +52,3 @@ export function parseGalaxyBacking(value: unknown, at = 'galaxy backing'): Prepa
     ...(centreFade === undefined ? {} : { centreFadeM: Object.freeze([centreFade[0], centreFade[1]]) as unknown as readonly [number, number] }),
     ...(sections ? { sections: Object.freeze(sections) } : {}) });
 }
-
