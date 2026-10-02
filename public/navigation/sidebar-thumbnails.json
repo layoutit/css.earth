@@ -271,6 +271,14 @@
       "bytes": 17250
     },
     {
+      "path": "src/objects/ngc-1275-volume/prepared/presentation.json",
+      "bytes": 1390
+    },
+    {
+      "path": "public/scenes/ngc-1275-volume/datasets/sdss-optical.webp",
+      "bytes": 8276
+    },
+    {
       "path": "src/objects/ngc-1637-layers/prepared/presentation.json",
       "bytes": 1397
     },
@@ -309,6 +317,22 @@
     {
       "path": "public/scenes/ngc-3521-layers/datasets/optical.webp",
       "bytes": 7360
+    },
+    {
+      "path": "src/objects/ngc-4874-volume/prepared/presentation.json",
+      "bytes": 1382
+    },
+    {
+      "path": "public/scenes/ngc-4874-volume/datasets/sdss-optical.webp",
+      "bytes": 5832
+    },
+    {
+      "path": "src/objects/ngc-4889-volume/prepared/presentation.json",
+      "bytes": 1375
+    },
+    {
+      "path": "public/scenes/ngc-4889-volume/datasets/sdss-optical.webp",
+      "bytes": 5072
     },
     {
       "path": "src/objects/ngc-6744-layers/prepared/presentation.json",
@@ -396,7 +420,7 @@
     },
     {
       "path": "src/objects/local-group-galaxies/prepared/catalogue.json",
-      "bytes": 706427
+      "bytes": 710271
     }
   ],
   "images": {
@@ -1003,6 +1027,24 @@
       "credit": "ESA/Webb",
       "sourceUrl": "https://esawebb.org/images/weic2327a/"
     },
+    "ngc-1275-volume/sdss-optical": {
+      "url2x": "/navigation/focus-ngc-1275-volume-sdss-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-1275-volume/prepared/presentation.json",
+        "public/scenes/ngc-1275-volume/datasets/sdss-optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://www.sdss.org/"
+    },
+    "ngc-1275-volume": {
+      "url2x": "/navigation/focus-object-ngc-1275-volume@2x.webp",
+      "inputs": [
+        "src/objects/ngc-1275-volume/prepared/presentation.json",
+        "public/scenes/ngc-1275-volume/datasets/sdss-optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://www.sdss.org/"
+    },
     "ngc-1637-layers/optical": {
       "url2x": "/navigation/focus-ngc-1637-layers-optical@2x.webp",
       "inputs": [
@@ -1092,6 +1134,42 @@
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1129a/"
+    },
+    "ngc-4874-volume/sdss-optical": {
+      "url2x": "/navigation/focus-ngc-4874-volume-sdss-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4874-volume/prepared/presentation.json",
+        "public/scenes/ngc-4874-volume/datasets/sdss-optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://www.sdss.org/"
+    },
+    "ngc-4874-volume": {
+      "url2x": "/navigation/focus-object-ngc-4874-volume@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4874-volume/prepared/presentation.json",
+        "public/scenes/ngc-4874-volume/datasets/sdss-optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://www.sdss.org/"
+    },
+    "ngc-4889-volume/sdss-optical": {
+      "url2x": "/navigation/focus-ngc-4889-volume-sdss-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4889-volume/prepared/presentation.json",
+        "public/scenes/ngc-4889-volume/datasets/sdss-optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://www.sdss.org/"
+    },
+    "ngc-4889-volume": {
+      "url2x": "/navigation/focus-object-ngc-4889-volume@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4889-volume/prepared/presentation.json",
+        "public/scenes/ngc-4889-volume/datasets/sdss-optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://www.sdss.org/"
     },
     "ngc-6744-layers/optical": {
       "url2x": "/navigation/focus-ngc-6744-layers-optical@2x.webp",
@@ -1293,11 +1371,14 @@
     "m87-volume": "m87-volume",
     "m95-layers": "m95-layers",
     "macs-j0416-layers": "macs-j0416-layers",
+    "ngc-1275-volume": "ngc-1275-volume",
     "ngc-1637-layers": "ngc-1637-layers",
     "ngc-253-layers": "ngc-253-layers",
     "ngc-2903-layers": "ngc-2903-layers",
     "ngc-300-layers": "ngc-300-layers",
     "ngc-3521-layers": "ngc-3521-layers",
+    "ngc-4874-volume": "ngc-4874-volume",
+    "ngc-4889-volume": "ngc-4889-volume",
     "ngc-6744-layers": "ngc-6744-layers",
     "ngc-6946-layers": "ngc-6946-layers",
     "omega-centauri-volume": "omega-centauri-volume",
