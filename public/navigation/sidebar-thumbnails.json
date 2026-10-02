@@ -331,23 +331,23 @@
       "bytes": 1836
     },
     {
-      "path": "src/objects/milky-way/object.json",
-      "bytes": 1888
+      "path": "src/objects/milky-way-volume/object.json",
+      "bytes": 889
     },
     {
-      "path": "src/objects/milky-way/prepared/backing.json",
+      "path": "src/objects/milky-way-volume/prepared/backing.json",
       "bytes": 1743
     },
     {
-      "path": "src/objects/milky-way/source/backing/recipe.json",
+      "path": "src/objects/milky-way-volume/source/backing/recipe.json",
       "bytes": 2972
     },
     {
-      "path": "src/objects/milky-way/prepared/backing/backing.webp",
+      "path": "src/objects/milky-way-volume/prepared/backing/backing.webp",
       "bytes": 183564
     },
     {
-      "path": "src/objects/local-group/prepared/catalogue.json",
+      "path": "src/objects/local-group-galaxies/prepared/catalogue.json",
       "bytes": 706269
     }
   ],
@@ -1090,24 +1090,24 @@
       "credit": "NASA STEREO Science Center",
       "sourceUrl": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
     },
-    "milky-way/volume": {
-      "url2x": "/navigation/focus-milky-way-volume@2x.webp",
+    "milky-way-volume/volume": {
+      "url2x": "/navigation/focus-milky-way-volume-volume@2x.webp",
       "inputs": [
-        "src/objects/milky-way/object.json",
-        "src/objects/milky-way/prepared/backing.json",
-        "src/objects/milky-way/prepared/backing/backing.webp",
-        "src/objects/milky-way/source/backing/recipe.json"
+        "src/objects/milky-way-volume/object.json",
+        "src/objects/milky-way-volume/prepared/backing.json",
+        "src/objects/milky-way-volume/prepared/backing/backing.webp",
+        "src/objects/milky-way-volume/source/backing/recipe.json"
       ],
       "credit": "An artist's impression of the Milky Way seen from above, by ESA, drawn under the catalogue dots as a backing that shows the galaxy's overall shape. It is artwork, not a measurement; every dot on it is a catalogued object at its published position.",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Gaia%E2%80%99s_star-formation_map_%28slider%29_ESA512394_-_slider.jpg"
     },
-    "milky-way": {
-      "url2x": "/navigation/focus-object-milky-way@2x.webp",
+    "milky-way-volume": {
+      "url2x": "/navigation/focus-object-milky-way-volume@2x.webp",
       "inputs": [
-        "src/objects/milky-way/object.json",
-        "src/objects/milky-way/prepared/backing.json",
-        "src/objects/milky-way/prepared/backing/backing.webp",
-        "src/objects/milky-way/source/backing/recipe.json"
+        "src/objects/milky-way-volume/object.json",
+        "src/objects/milky-way-volume/prepared/backing.json",
+        "src/objects/milky-way-volume/prepared/backing/backing.webp",
+        "src/objects/milky-way-volume/source/backing/recipe.json"
       ],
       "credit": "An artist's impression of the Milky Way seen from above, by ESA, drawn under the catalogue dots as a backing that shows the galaxy's overall shape. It is artwork, not a measurement; every dot on it is a catalogued object at its published position.",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Gaia%E2%80%99s_star-formation_map_%28slider%29_ESA512394_-_slider.jpg"
@@ -1142,6 +1142,6 @@
     "pds-70-disc": "pds-70-disc",
     "smc-volume": "smc-volume",
     "sun-cor1-density": "sun-cor1-density",
-    "milky-way": "milky-way"
+    "milky-way-volume": "milky-way-volume"
   }
 }
