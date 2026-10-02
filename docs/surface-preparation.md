@@ -64,8 +64,16 @@ closest approach follows the atlas density, so a denser atlas also lets the came
 The texture-level implementation and measurements
 record that change; [Earth's README](../src/objects/earth/README.md) describes the
 current datasets and retained source history. The shared raster lane prepares
-each image once, at the canonical @2x density, so its bodies have no texture
-levels; the lane refuses a `densities` field and a presentation `textureLevels`.
+each image once, at the canonical @2x density; the lane refuses a `densities`
+field and a presentation `textureLevels`. A raster body whose packed atlas is over
+8 MP is published as pages of whole latitude bands, each also reduced by 8, 4 and 2
+(`packages/bake/src/raster/pages.ts`). The silhouette's size on screen picks the
+reduction, so an arrival waits only for the pixels its view shows: at 4 Mbps the
+Moon's arrival waited 22.2 s for its 9.4 MB atlas and 5.2 s for 0.66 MB of pages
+(2026-10-02). A dataset drawn at a `resolutionScale` steps through the same list
+shifted by its scale. Below, the Moon on a phone before and after.
+
+![The Moon on a phone: the whole atlas, left, and the level its silhouette picks, right](images/raster-levels-moon-phone.jpg)
 
 ## Decode the source before choosing its display
 
