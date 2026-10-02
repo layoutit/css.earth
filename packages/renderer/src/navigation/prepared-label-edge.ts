@@ -1,6 +1,5 @@
-import { type ObjectRuntimeDefinition, type PreparedWorldCameraFrame, cssMatrix } from '@cssearth/objects';
+import { cssMatrix, type ObjectRuntimeDefinition, type PreparedWorldCameraFrame, type WorldCameraPose } from '@cssearth/objects';
 
-import type { WorldCameraPose } from '@cssearth/objects';
 import type { WorldCameraViewport } from './world-camera.js';
 
 import { presentWorldCamera, worldCameraViewport } from './world-camera.js';

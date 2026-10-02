@@ -1,6 +1,5 @@
-import type { WorldCameraPose } from '@cssearth/objects';
+import { type WorldCameraPose, type PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
-import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 
 export type ObjectWorldNavigationListener = (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 

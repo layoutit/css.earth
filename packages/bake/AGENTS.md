@@ -347,4 +347,4 @@ Renderer-behavior runtime, selection, material and feature transport suites and 
 `src/contract/fixtures/`. Leaf-box bake checks stay in `src/presentation/`; renderer visibility conformance
 lives in `integration/renderer-bake/src/presentation/leaf-box.test.mts`. These node:test suites run in
 the packages CI lane on changes to either owner. Shell facing/material conformance lives in
-`integration/renderer-bake/src/shell/shell.test.ts`; bake-owned shell assertions stay in `src/shell/`. Validated camera conversions come from `@cssearth/objects`; bake imports no renderer behavior helpers.
+`integration/renderer-bake/src/shell/shell.test.ts`; bake-owned shell assertions stay in `src/shell/`. Validated camera conversions come from `@cssearth/objects`; bake imports no renderer behavior helpers except the volume loader and the renderer bundling plugin, which phase C1c retires.

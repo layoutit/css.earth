@@ -3,10 +3,9 @@ import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { worldRotationCss } from '@cssearth/engine';
-import type { WorldCameraPose } from '@cssearth/objects';
+import { validatePreparedCssSurfaceShell, type WorldCameraPose, type PreparedCssSurfaceShell } from '@cssearth/objects';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
 import { mountPreparedCssSurfaceShell } from './prepared-shell-runtime.js';
-import { type PreparedCssSurfaceShell, validatePreparedCssSurfaceShell } from '@cssearth/objects';
 
 function fixture(): PreparedCssSurfaceShell {
   return {

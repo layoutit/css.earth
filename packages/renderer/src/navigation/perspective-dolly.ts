@@ -1,4 +1,4 @@
-import { type CameraPlan, type PerspectiveCameraPlan, type LevelOfDetailPlan, type OrbitLineFade, type PreparedWorldCameraFrame } from '@cssearth/objects';
+import { type CameraPlan, type PerspectiveCameraPlan, type LevelOfDetailPlan, type OrbitLineFade, type PreparedWorldCameraFrame, type WorldCameraPose } from '@cssearth/objects';
 
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
@@ -9,7 +9,6 @@ import type { BodyProjection } from '@cssearth/engine';
 import type { VisibleRect } from '@cssearth/engine';
 import type { CameraViewport } from './camera-viewport.js';
 import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from './world-camera.js';
-import type { WorldCameraPose } from '@cssearth/objects';
 import type { WorldCameraViewport } from './world-camera.js';
 
 import { createPreparedCamera } from './prepared-camera.js';

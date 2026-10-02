@@ -1,5 +1,4 @@
-import { cameraProjectionScale, worldCameraFocusFrame as focusFrame, validateWorldCameraViewport as validateViewport } from '@cssearth/objects';
-import type { WorldCameraPose, LocalWorldCameraPresentation } from '@cssearth/objects';
+import { cameraProjectionScale, worldCameraFocusFrame as focusFrame, validateWorldCameraViewport as validateViewport, type WorldCameraPose, type LocalWorldCameraPresentation, type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { cameraPoseFromReferenceFrame } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
 import { silhouetteEllipse } from '@cssearth/engine';
@@ -9,7 +8,6 @@ import {
   worldRotationCss, worldRotationFromQuaternion,
 } from '@cssearth/engine';
 
-import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 
 export interface WorldCameraViewport {
   readonly focalPixels: number;
