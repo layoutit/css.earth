@@ -138,6 +138,13 @@ test('test exceptions and preparation wrappers cannot be used as inbound runtime
     f.write('site/runtime.mts', "import './build/prepare.mts';");
     assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes('via site/build/prepare.mts')));
     f.write('site/runtime.mts', 'export {};');
+    f.write('site/build/prepare.mts', 'export {};');
+    f.write('integration/renderer-bake/src/contract/fixtures/helper.mts', "import '@cssearth/bake/public'; export const helper = 1;");
+    f.write('site/test/helper.test.mts', "import '../../integration/renderer-bake/src/contract/fixtures/helper.mts';");
+    assert.deepEqual(f.check(), [], 'the moved integration harness is test code');
+    f.write('site/runtime.mts', "import '../integration/renderer-bake/src/contract/fixtures/helper.mts';");
+    assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes('via integration/renderer-bake/src/contract/fixtures/helper.mts')));
+    f.write('site/runtime.mts', 'export {};');
     f.write('src/check.test.ts', "import '../labs/nebula/packages/lab/src/public.ts';");
     assert.ok(f.check().some(error => error.includes('direct path into labs/nebula')), 'tests must use public exports too');
   } finally { f.cleanup(); }

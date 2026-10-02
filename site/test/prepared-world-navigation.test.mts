@@ -10,14 +10,13 @@ import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.t
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 
 import { required, position, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
-import type { WorldCameraPose, WorldCameraPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
-import type { PreparedWorldCameraFrame } from '@cssearth/objects';
+import { type WorldCameraPose, type PreparedWorldCameraFrame, type PreparedArrivalView } from '@cssearth/objects';
+import type { WorldCameraPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 import type { ObjectPreparationView } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
 import type { SceneFactory } from '../browser/browser-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
-import type { PreparedArrivalView } from '@cssearth/objects';
 import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));

@@ -143,3 +143,9 @@ fitting, selection, decompression, compilation and file I/O stay with bake, reco
 Contract tests use node:test in the packages lane; replay and selection conformance stay with their owners.
 
 Preparation and runtime share canonical resource addresses/pools and image density, tile leaf styles/keys, silhouette-step walking, interior-disc size, shell material addresses, marker/control validation, surface fly-to conventions, feature-bank hashing, point luminance threshold, CSS compiler budget and volume topology equality through the browser-safe main entry. Numeric camera and solar geometry live in `@cssearth/engine`.
+
+`src/prepared-data/world-camera-conversion.ts` owns validated presentation-to-world pose conversion,
+its shared pose and presentation data shapes, projection-scale, focus-frame and viewport validation.
+`prepared-arrival-view.ts` owns the validated default-view rotation reader. Both use browser-safe engine
+math; objects depends on engine, which never imports objects. Runtime viewport/layout and presentation
+projection stay in renderer. Shell facing-level selection remains in renderer.

@@ -1,8 +1,7 @@
 import { createSystemFade, extendedRetirement, logarithmicFade, starFieldFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './context-scale.js';
 import { eyeAnchor, eyeDistanceM, type PositionM } from '@cssearth/engine';
-import { isExtendedClassification } from '@cssearth/objects';
-import type { PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedWorldContext, PreparedWorldContextGeometry } from '@cssearth/objects';
-import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/world-camera.js';
+import { isExtendedClassification, type PreparedContextOrbit, type PreparedContextOrbitGeometry, type PreparedWorldContext, type PreparedWorldContextGeometry, type WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '../../navigation/world-camera.js';
 import { cssViewFromOrientation } from '@cssearth/engine';
 import { levelOfDetailFor } from '../../navigation/perspective-dolly.js';
 import { closeOrbitFades, contextEmphasis, contextSubject, namedBesideSubject, otherSystemsOpacity, outsideFamilyOrbitOpacity, pathOpacity, selectedOrbitDepthFade, inSubjectFamily } from '../context-presentation-policy.js';

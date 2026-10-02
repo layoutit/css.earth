@@ -22,7 +22,7 @@ const referenceSchema = object({ source: object({}), records: array(object({
 const nativeElement = (element: ReturnType<ReturnType<typeof retainedPresentationFixture>['document']['createElement']>) => element as unknown as HTMLElement;
 
 test("Venus preserves roll and shadow boundaries while selecting physical directional phases",()=>{
-  const reference=parse(JSON.parse(readFileSync(new URL("./fixtures/venus-material-reference.json",import.meta.url), "utf8")), referenceSchema, "Venus material reference");
+  const reference=parse(JSON.parse(readFileSync(new URL("../../../../packages/bake/src/contract/fixtures/venus-material-reference.json",import.meta.url), "utf8")), referenceSchema, "Venus material reference");
   assert.ok(reference.records.length>400);
   const f=retainedPresentationFixture(definition);
   try{

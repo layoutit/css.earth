@@ -4,11 +4,9 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { selectionAtCamera, watchOverviewSelection } from '../overview-selection.mts';
 import { systemById } from '../object-systems.mts';
-import { worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
+import { worldCameraFromCenteredPresentation, type WorldCameraPose, type PreparedWorldCameraFrame } from '@cssearth/objects';
 
 import { required, objectFixture, navigationFixture } from './navigation-test-values.mts';
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
-import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { ObjectWorldNavigationListener } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { OverviewSelection } from '../overview-selection.mts';
 import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../system-framing.mts';

@@ -1,5 +1,5 @@
 import type { PositionM } from '@cssearth/engine';
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/objects';
 import type { ShellCamera } from '../browser/browser-types.mts';
 import type { ObjectEntry } from '../objects.mts';
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
