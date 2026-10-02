@@ -51,10 +51,17 @@ export function compileContributions(objects: readonly ContributionObject[], cat
     for (const source of document.sources) if (source.capture) validateCapture(source.capture, catalog);
     for (const product of document.products) {
       if (product.observationAttribution === 'none') continue;
-      for (const [sourceId, roles] of productInputRoles(document, product.id, product => product.observationAttribution === 'source-lineage')) {
+      const inputs = [...productInputRoles(document, product.id, product => product.observationAttribution === 'source-lineage')];
+      // A dataset that a credited input names is credited to that input alone;
+      // the product's other inputs keep the datasets no credited input names.
+      const named = new Set(inputs.flatMap(([sourceId]) => { const source = sources.get(sourceId); return source?.capture?.attributions.length ? source.datasetId ?? [] : []; }));
+      for (const [sourceId, roles] of inputs) {
+        const own = sources.get(sourceId)?.datasetId;
+        const credited = product.datasetIds.filter(id => id === own || !named.has(id));
+        if (!credited.length) continue;
         for (const attribution of sources.get(sourceId)?.capture?.attributions ?? []) {
-          edges.push(Object.freeze({ objectId: object.id, productId: product.id, sourceId, roles, ...(sources.get(sourceId)?.capture?.observation ? { observation: sources.get(sourceId)!.capture!.observation } : {}), datasetIds: Object.freeze([...product.datasetIds]), attribution }));
-          for (const id of product.datasetIds) linked.add(id);
+          edges.push(Object.freeze({ objectId: object.id, productId: product.id, sourceId, roles, ...(sources.get(sourceId)?.capture?.observation ? { observation: sources.get(sourceId)!.capture!.observation } : {}), datasetIds: Object.freeze(credited), attribution }));
+          for (const id of credited) linked.add(id);
         }
       }
     }

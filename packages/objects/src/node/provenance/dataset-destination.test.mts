@@ -41,6 +41,31 @@ test('observation attribution is explicit and independent of descriptive process
   assert.equal(compileContributions([excludedParent], catalog, DATASET_ROUTES).edges.length, 0, 'a derived preview cannot reintroduce excluded illustration credit');
 });
 
+test('a dataset an input names is credited to that input alone', () => {
+  const volume = object('m1', '/m1/', 'src/objects/m1');
+  const [image] = volume.lineage.sources, [product] = volume.lineage.products;
+  const credit = (label: string) => ({ attributions: [{ kind: 'unresolved' as const, label, reason: 'Individual telescope not identified.', evidence: 'Native image credit.' }] });
+  const sources = [
+    { ...image!, id: 'optical', datasetId: 'optical', capture: credit('Optical telescope') },
+    { ...image!, id: 'xray', datasetId: 'xray', capture: credit('X-ray telescope') },
+    { ...image!, id: 'shape', capture: credit('Spectrograph') },
+    { ...image!, id: 'painted', datasetId: 'model', capture: undefined },
+  ];
+  const inputs = sources.map(source => source.id);
+  const graph = compileContributions([{ ...volume,
+    controls: [{ id: 'optical', label: 'Optical' }, { id: 'xray', label: 'X-ray' }, { id: 'model', label: 'Model' }],
+    lineage: { ...volume.lineage, sources, products: [
+      { ...product!, id: 'optical', inputs, datasetIds: ['optical'] },
+      { ...product!, id: 'xray', inputs, datasetIds: ['xray'] },
+      { ...product!, id: 'model', inputs, datasetIds: ['model'] },
+    ] } }], catalog, DATASET_ROUTES);
+  const credited = (datasetId: string) => graph.edges.filter(edge => edge.datasetIds.includes(datasetId)).map(edge => edge.sourceId);
+  assert.deepEqual(credited('optical'), ['optical']);
+  assert.deepEqual(credited('xray'), ['xray']);
+  assert.deepEqual(credited('model'), ['optical', 'xray', 'shape'], 'a dataset only an uncredited input names keeps every credited input of its product');
+  assert.deepEqual(parseContributionGraph(graph, catalog, DATASET_ROUTES), graph);
+});
+
 test('both graph compilers give every object the same page dataset URLs', () => {
   const objects = [object('mercury', '/mercury/', 'src/objects/mercury'), object('m42', '/m42/', 'src/objects/m42')];
   const usage = compileSourceUsage(objects, sources, DATASET_ROUTES), contributions = compileContributions(objects, catalog, DATASET_ROUTES);
