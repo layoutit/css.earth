@@ -1,0 +1,76 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "positions",
+      "path": "src/objects/catalogue-asteroids/source/dots/positions.csv.gz",
+      "origin": "https://ssd-api.jpl.nasa.gov/sbdb_query.api",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_query.html",
+      "title": "Positions of the asteroids that draw no marker, relative to the Sun, at the world's epoch",
+      "credit": "NASA/JPL Solar System Dynamics, Small-Body Database and Horizons System",
+      "acquisition": "Written 2026-10-02 by packages/bake/authoring/small-body-dots/positions.mts: one Small-Body Database query for each population in query.json, each orbit carried to the world's epoch as an unperturbed ellipse, joined with the rows of paged-positions.csv.gz.",
+      "generator": "packages/bake/authoring/small-body-dots/positions.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "material",
+            "evidence": "src/objects/catalogue-asteroids/source/dots/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "paged-positions"
+      ],
+      "license": "NASA/JPL United States government data; cite the JPL Small-Body Database."
+    },
+    {
+      "id": "paged-positions",
+      "path": "src/objects/catalogue-asteroids/source/dots/paged-positions.csv.gz",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
+      "title": "Positions of the asteroids that have a page and no map marker, relative to the Sun, at the world's epoch",
+      "credit": "NASA/JPL Solar System Dynamics, Horizons System",
+      "acquisition": "Written 2026-10-02 by site/build/prepare/paged-asteroid-dot-positions.mts from each asteroid package's prepared world position, which its own preparation took from JPL Horizons.",
+      "generator": "site/build/prepare/paged-asteroid-dot-positions.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "src/objects/catalogue-asteroids/README.md#processing"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "NASA/JPL United States government data; cite JPL Horizons."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/catalogue-asteroids/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/catalogue-asteroids/source/dots/query.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/catalogue-asteroids/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

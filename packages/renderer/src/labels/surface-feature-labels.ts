@@ -1,3 +1,4 @@
+import { writeData, writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
 import { bindInputEvent } from '../navigation/shared-input-surface.js';
 import type { SceneLifetime } from '@cssearth/engine';
@@ -142,7 +143,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     for (let index = 0; index < plan.outline.pieces; index++) {
       const piece = document.createElement('s');
       piece.dataset.featureOutlinePiece = '';
-      piece.style.visibility = 'hidden';
+      writeStyle(piece, 'visibility', 'hidden');
       root.insertBefore(piece, tooltip);
       outline.push(piece);
     }
@@ -327,7 +328,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
       next.add(index); nextRects.set(entry.feature!.id, rect);
       const anchor = entry.feature!.kind === 'point' ? `translate(${format(entry.x + POINT_LABEL_GAP_PX)}px,${format(entry.y)}px) translate(0,-50%)`
         : `translate(${format(entry.x)}px,${format(entry.y)}px) translate(-50%,-50%)`;
-      entry.element.style.transform = anchor;
+      writeStyle(entry.element, 'transform', anchor);
       fadeTo(entry, opacity);
       targets.push({ element: entry.element, rank: SURFACE_PICK_RANK, shape: { kind: 'rect', ...rect } });
     }
@@ -349,9 +350,9 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
       tooltip.hidden = false;
       shownIndex = index;
     }
-    tooltip.dataset.featureTooltipPinned = pinnedIndex === index ? 'true' : 'false';
+    writeData(tooltip, 'featureTooltipPinned', pinnedIndex === index ? 'true' : 'false');
     const rect = rects.get(feature.id)!;
-    tooltip.style.transform = `translate(${format((rect.left + rect.right) / 2)}px,${format(rect.top)}px) translate(-50%,-100%)`;
+    writeStyle(tooltip, 'transform', `translate(${format((rect.left + rect.right) / 2)}px,${format(rect.top)}px) translate(-50%,-100%)`);
     presentOutline(feature);
   }
   /** The published diameter, traced as retained screen chords like the orbit lines; the stroke
@@ -362,10 +363,10 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const chords = projectSurfaceOutline(feature.outline, matrix, projection.focalPixels, projection.principalOffsetPixels, outline.length);
     chords.forEach((chord, index) => {
       const piece = outline[index]!;
-      piece.style.transform = orbitSegmentTransform(chord);
-      piece.style.visibility = '';
+      writeStyle(piece, 'transform', orbitSegmentTransform(chord));
+      writeStyle(piece, 'visibility', '');
     });
-    for (let index = chords.length; index < outline.length; index++) outline[index]!.style.visibility = 'hidden';
+    for (let index = chords.length; index < outline.length; index++) writeStyle(outline[index]!, 'visibility', 'hidden');
     outlinePieces = chords.length;
   }
   /** Pin the feature and fly the observer over it, framing its published diameter. */
@@ -402,23 +403,23 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   }
   function hideOutline(): void {
     if (outlinePieces === 0) return;
-    for (const piece of outline) piece.style.visibility = 'hidden';
+    for (const piece of outline) writeStyle(piece, 'visibility', 'hidden');
     outlinePieces = 0;
   }
   function fadeTo(entry: Entry, opacity: number): void {
-    if (entry.targetOpacity === opacity) { if (opacity > 0) entry.element.style.visibility = ''; fader.set(entry.element, opacity, LABEL_FADE_MS); return; }
+    if (entry.targetOpacity === opacity) { if (opacity > 0) writeStyle(entry.element, 'visibility', ''); fader.set(entry.element, opacity, LABEL_FADE_MS); return; }
     if (entry.hideTimer !== null) { clearTimeout(entry.hideTimer); entry.hideTimer = null; }
     entry.targetOpacity = opacity;
-    if (opacity > 0) entry.element.style.visibility = '';
+    if (opacity > 0) writeStyle(entry.element, 'visibility', '');
     fader.set(entry.element, opacity, LABEL_FADE_MS);
     if (opacity === 0) entry.hideTimer = setTimeout(() => {
       entry.hideTimer = null;
-      if (entry.targetOpacity === 0) entry.element.style.visibility = 'hidden';
+      if (entry.targetOpacity === 0) writeStyle(entry.element, 'visibility', 'hidden');
     }, LABEL_FADE_MS);
   }
   function hideNow(entry: Entry): void {
     if (entry.hideTimer !== null) clearTimeout(entry.hideTimer);
-    entry.hideTimer = null; entry.targetOpacity = 0; fader.set(entry.element, 0); entry.element.style.visibility = 'hidden';
+    entry.hideTimer = null; entry.targetOpacity = 0; fader.set(entry.element, 0); writeStyle(entry.element, 'visibility', 'hidden');
   }
   function destroy() {
     if (destroyed) return;

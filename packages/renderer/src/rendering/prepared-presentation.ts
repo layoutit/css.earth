@@ -1,3 +1,4 @@
+import { writeStyle as writeRetainedStyle } from './retained-write.js';
 import { createPreparedInteriorDisc, type PreparedInteriorDisc } from './prepared-interior-disc.js';
 import { buildPreparedTree, type PreparedTreeLease } from './prepared-tree.js';
 import { bindPreparedSurfaceHit, type PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
@@ -487,7 +488,7 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
       const transform = interiorDiscs.get(binding.target)!(view.projection);
       const visibility = transform ? "visible" : "hidden";
       if (element.style.visibility !== visibility) { element.style.visibility = visibility; styleWrites++; }
-      if (transform && element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
+      if (transform && writeRetainedStyle(element, 'transform', transform)) transformWrites++;
     } else if (binding.kind === "silhouette-fit") {
       // The overlay fitted to the projected silhouette: an ellipse,
       // slightly elongated and shifted outward when off-axis, exactly the
@@ -513,11 +514,11 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
           `rotate(${formatNumber(radialAngle)}deg) ` +
           `scale(${formatNumber(radial * binding.unitScale)}, ${formatNumber(tangential * binding.unitScale)}) ` +
           `rotate(${formatNumber(-radialAngle)}deg)`;
-        if (element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
+        if (writeRetainedStyle(element, 'transform', transform)) transformWrites++;
       }
     } else if (binding.kind === "counter-rotation") {
       const counter = binding.systemTransform === null ? view.counterRotation : view.counterRotationFor(binding.systemTransform);
-      if (element.style.transform !== counter) { element.style.transform = counter; transformWrites++; }
+      if (writeRetainedStyle(element, 'transform', counter)) transformWrites++;
     } else return false;
     return true;
   }

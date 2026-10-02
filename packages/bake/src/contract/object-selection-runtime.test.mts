@@ -71,13 +71,13 @@ function harness({ definition = earthDefinition, onTicket, onChange, initialDiam
     onFatalError(error) { fatal.push(error); f.lifetime.destroy(); }, onMaterialError: error => materialErrors.push(error) });
   f.lifetime.onDispose(() => coordinator.destroy());
   let revision = 0, currentView: PreparedView | undefined;
-  function view(row: number, withinRow = 0, silhouetteDiameter = 100): PreparedView {
+  function view(row: number, withinRow = 0, silhouetteDiameter = 100, counterRotation = matrix): PreparedView {
     const track = definition.materials[0] ?? earthDefinition.materials[0], frame = 20 + row * 32 + withinRow;
     const z = frame / (track.frame.indices.length - 1) * 2 - 1;
     const direction: readonly [number, number, number] = [Math.sqrt(1 - z * z), 0, z];
     const next: PreparedView = { ...f.view, controlPitch: 37, controlYaw: 10, zoom: definition.camera.defaultZoom,
       levelOfDetail: { stage: 'geometry', silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0 },
-      revision: ++revision, sceneMatrix: matrix, counterRotation: matrix, counterRotationFor: () => matrix,
+      revision: ++revision, sceneMatrix: matrix, counterRotation, counterRotationFor: () => counterRotation,
       sunViewDirection: direction, reference: currentView?.reference, };
     next.reference = currentView?.reference ?? next; currentView = next; coordinator.setView(next); return next;
   }
@@ -250,8 +250,10 @@ test("same-row facts advance only after a successful shared native frame publica
   h.view(0, 1); const sameRowPlan = h.coordinator.state().plan; assert.ok(sameRowPlan); assert.equal(sameRowPlan.materials.atmosphere.frame, 127);
   assert.equal(h.jobs.length, jobs); assert.equal(h.commits.length, commits); const successful = h.coordinator.state().plan;
   const binding = earthDefinition.viewBindings.find(binding => binding.kind === "counter-rotation"); assert.ok(binding);
-  Object.defineProperty(h.created[binding.target].style, "transform", { configurable: true, get() { throw new Error("native frame failed"); } });
-  assert.throws(() => h.view(0, 2), /native frame failed/); assert.equal(h.coordinator.state().plan, successful);
+  // The frame's write fails. The publisher never reads a transform back and skips an unchanged one (retained-write.ts),
+  // so the failing frame carries a new counter-rotation.
+  Object.defineProperty(h.created[binding.target].style, "transform", { configurable: true, set() { throw new Error("native frame failed"); } });
+  assert.throws(() => h.view(0, 2, 100, "matrix3d(0,1,0,0,-1,0,0,0,0,0,1,0,0,0,0,1)"), /native frame failed/); assert.equal(h.coordinator.state().plan, successful);
   assert.equal(h.fatal.length, 1); assert.equal(h.lifetime.disposed, true);
 });
 

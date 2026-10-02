@@ -14,6 +14,10 @@ this package. Shared format identifiers and compact world-summary/system table d
   Node built-ins. `eslint.config.mts` enforces it for everything but tests.
 - Keep runtime DOM retained and stable. Decode and transport prepared state; never derive source data, geometry,
   charts, atlases or scene assets at runtime.
+- A publication of an unchanged view writes nothing and asks for no frame. Guard a write with the value last written
+  (`src/rendering/retained-write.ts`), never with a value read back from the page: the browser normalizes transforms,
+  opacities and lengths, so a read-back compare rewrites them every frame. Statistics belong in `stats()` or
+  `inspect()`, not in attributes written on each publication.
 - No runtime `clip-path`, CSS masks, filters, CSS gradients, blend modes, canvas or WebGL. Detailed bodies are PolyCSS.
 - No per-object folders, planet-specific implementations or branches on named object ids: every object fact arrives in
   its prepared data. Object page stylesheets (`src/renderers/css/styles/*-surfaces.css`) belong to the objects, not here.
