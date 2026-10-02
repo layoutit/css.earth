@@ -1,0 +1,82 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "local-group",
+  "displayName": "Local Group",
+  "panel": {
+    "facts": [
+      {
+        "id": "zero-velocity-radius",
+        "label": "Zero-velocity radius",
+        "value": "1,060 ± 70 kpc",
+        "source": {
+          "catalogueId": "publication-mcconnachie2012aj-144-4m",
+          "url": "https://arxiv.org/abs/1204.1562",
+          "label": "McConnachie (2012), AJ 144, 4",
+          "checked": "2026-10-01",
+          "locator": "Section 3, R_LG"
+        }
+      },
+      {
+        "id": "barycentre",
+        "label": "Barycentre",
+        "value": "Mid-point of the Milky Way and M31",
+        "source": {
+          "catalogueId": "publication-mcconnachie2012aj-144-4m",
+          "url": "https://arxiv.org/abs/1204.1562",
+          "label": "McConnachie (2012), AJ 144, 4",
+          "checked": "2026-10-01",
+          "locator": "Table 2, notes to columns 8 to 10"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "galaxies",
+    "controls": [
+      {
+        "id": "galaxies",
+        "label": "Local Volume Database · galaxies",
+        "thumbnail": "local-group-dataset-galaxies.webp",
+        "volume": {
+          "objectId": "local-group-galaxies",
+          "datasetId": "galaxies",
+          "surface": "galaxies"
+        },
+        "source": {
+          "id": "local-group-galaxies-galaxies",
+          "path": "../../local-group-galaxies/source/manifest.json",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "McConnachie (2012), AJ 144, 4",
+      "href": "https://arxiv.org/abs/1204.1562"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+      "href": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1204.1562",
+      "credit": "McConnachie (2012), AJ 144, 4"
+    }
+  }
+}

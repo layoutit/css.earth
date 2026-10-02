@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-stellar-extent@1",
+  "objectId": "m101-layers",
+  "radiusPc": 48800,
+  "definition": "Projected radius from the M101 centre to which Mihos et al.'s (2013) deep imaging traces the disc's starlight: 25 arcmin, 48.8 kpc at 6.71 Mpc (50 kpc at their 6.9 Mpc).",
+  "quote": "has revealed the stellar structure of M101's disk out to nearly 25 arcminutes (50 kpc)",
+  "source": "mihos-2013-m101-outer-disc",
+  "presentation": "Where the galaxy's stars are still measured: while the camera is inside this radius the galaxy's caption hides; outside it the caption hangs under what is drawn of the galaxy. Not a boundary."
+}

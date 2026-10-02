@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-6744-layers",
+  "entries": [
+    {
+      "id": "eso-wfi",
+      "subject": "ESO eso1118a (MPG/ESO 2.2-metre Wide Field Imager)",
+      "status": "included",
+      "finding": "The whole disc in B, V, a red filter and H-alpha, 21.1 arcmin wide at 0.238 arcsec per pixel, CC BY 4.0. Its stars are saturated discs, so the registration is fitted to the brightness at the predicted places of 1,741 Gaia stars; it matches the page to a few pixels.",
+      "evidence": [
+        "https://www.eso.org/public/images/eso1118a/"
+      ]
+    },
+    {
+      "id": "dot-catalogues",
+      "subject": "Catalogues of NGC 6744's nebulae and clusters",
+      "status": "excluded",
+      "finding": "Looked for on CDS on 2026-10-01: the PHANGS-MUSE nebula, planetary-nebula and supernova-remnant catalogues do not include NGC 6744; the PHANGS-JWST cloud catalogue (J/A+A/706/A40) and the LEGUS cluster classifications (J/MNRAS/512/1294) have no rows inside its disc; no HII-region or supernova-remnant table names it. The bank therefore has no dots.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/706/A40",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/512/1294"
+      ],
+      "revisitWhen": "A catalogue of its HII regions, clusters or remnants with sky positions is published."
+    },
+    {
+      "id": "bulge-fit",
+      "subject": "Bulge-plus-disc decomposition",
+      "status": "excluded",
+      "finding": "CDS J/ApJS/219/4 table7 (S4G, Salo et al. 2015) has no row for NGC 6744: the survey kept to Galactic latitudes above 30 degrees, and the galaxy is at -26. Without a published fit the bright centre is drawn in the disc, with no spheroid. The scale length is Leroy et al.'s (2021).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4"
+      ],
+      "revisitWhen": "A published bulge fit is found, for example in the Carnegie-Irvine survey's decompositions."
+    },
+    {
+      "id": "rc3-colour",
+      "subject": "RC3 integrated colour",
+      "status": "excluded",
+      "finding": "VII/155 has NGC 6744 (PGC 62836) with BT 9.14 and no B-V. The colour tie uses the Carnegie-Irvine Galaxy Survey's total B and V magnitudes instead, whose difference is uncertain by about 0.24 magnitudes.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/155"
+      ]
+    }
+  ]
+}

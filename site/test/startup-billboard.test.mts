@@ -17,7 +17,6 @@ test('default startup never overwrites a saved camera, dataset or context', () =
   assert.equal(usesDefaultStartupView('https://css.earth/earth/?embed', 'earth'), true);
   for (const key of ['v', 'dataset', 'feature', 'view', 'overview', 'settings'])
     assert.equal(usesDefaultStartupView(`https://css.earth/earth/?${key}=custom`, 'earth'), false, key);
-  assert.equal(usesDefaultStartupView('https://css.earth/m31/', 'sun'), false, 'a catalogue focus page');
 });
 
 test('startup uses the baked perspective and viewport texture demand before mounting', async () => {
@@ -64,4 +63,10 @@ test('startup uses the baked perspective and viewport texture demand before moun
   assert.equal(view.viewport.focalPixels, 900 * (saved.camera.projectionScale ?? 1));
   assert.equal(view.viewport.widthPixels, 820);
   assert.equal(view.viewport.heightPixels, 1180);
+});
+
+test('an unreadable saved view opens the default view instead of failing the mount', () => {
+  for (const value of ['garbage', 'UcM-', '']) assert.equal(readStartupSavedView(`https://css.earth/earth/?v=${value}`), null, value);
+  assert.equal(readStartupSavedView('https://css.earth/earth/', 'garbage'), null);
+  assert.equal(readStartupSavedView('https://css.earth/earth/'), null);
 });

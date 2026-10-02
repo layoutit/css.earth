@@ -15,13 +15,34 @@ dataset names its preview `datasets/<dataset id>.webp`, and fits the complete im
 It preserves the image's aspect ratio and published display colors, with transparent
 padding. The Milky Way icon resamples its published face-on backing, the same
 ESA artist's impression used by the map. It is artwork, not an observation;
-its [source recipe](../src/objects/milky-way/source/backing/recipe.json) retains that qualification.
+its [source recipe](../src/objects/milky-way-volume/source/backing/recipe.json) retains that qualification.
 The former slab-derived icon no longer matched the delivered galaxy view.
 
 The [prepared receipt](../public/navigation/sidebar-thumbnails.json) records every
 input path and byte count, source credit and image URL. Original datasets and repaired
 runtime assets are read-only inputs. The preparer writes only its sidebar images
 and receipt under `public/navigation/`.
+
+An object's own row (a galaxy, cluster or nebula in an overview list or in search) shows
+its default dataset's image under one framing rule, `packages/bake/src/site-assets/object-thumbnail.ts`,
+written as `focus-object-<id>@2x.webp`. The preparer measures the object's light above the
+image's median sky (its centroid and 2.25 standard deviations of its second moments),
+cuts the tile to that extent inside a 4 px margin, and fades the light to nothing before
+the extent's edge and before the image's own frame. Sky darker than level 32 becomes
+transparency in proportion, with the colour divided back, so over black the pixels are the
+image's own. No edge of the photograph reaches the panel, and a photograph that fills its
+frame (the LMC) fades out instead of ending in a rectangle. These tiles are decoration and
+take the decorative WebP encoding; dataset rows keep the complete lossless tiles.
+
+A galaxy, cluster or nebula with its own page has an opaque context sprite, the marker's
+picture cut to a square. `pnpm prepare:search-thumbnails` gives its search preview the same
+framing, read from the complete marker picture (`source/presentation/context.png`) so a wide
+disc such as M 31 is not cut at the sprite's sides. To remake those previews after a change
+to the rule, delete them first: a preview newer than its sprite is left as it is.
+
+![The Local Group list before and after the framing rule](images/sidebar-thumbnails/galaxy-framing.png)
+
+The capture is headless Chromium at 1280 × 900, DPR 2, of the local development server.
 
 Catalogue-only galaxies and clusters without prepared imagery keep the ordinary
 circle marker. Their catalogue identity does not imply a photographic dataset.
@@ -34,9 +55,9 @@ existing package views, including their model qualifications; no new surface det
 The shared shell renders each subject's header, tabs and content with `ObjectCard`,
 `ObjectCardHeader`, `InformationTabs` and the common tab-panel padding. Bodies,
 planetary systems and overview members all use the search row renderer
-(`site/search/object-result.mts`); overview navigation levels show their classification
-without an invented observer distance. `OverviewCard` keeps its prepared neighbor
-distances and uses the same row for galaxies and clusters. Page datasets use the
+(`site/search/object-result.mts`). A level's card is the object card: it lists the
+galaxies or clusters it holds with the same row, each with its distance from the
+member that holds the stars. Its datasets use the
 same `DatasetList` inside a padded, scrollable tab panel, including the Observable
 Universe. The shell reads the shared navigation address while native history waits
 for camera rest, so the selected dataset's card follows the current choice.

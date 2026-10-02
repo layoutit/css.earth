@@ -1,0 +1,28 @@
+{
+  "id": "m101",
+  "classification": "galaxy",
+  "order": 5153,
+  "physical": {
+    "name": "M101",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M101 is recorded: it is an extended galaxy, and its package frames it at 29200 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 210.8033333,
+    "declinationDegrees": 54.35055556,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 6714288.52926,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 243.0330935727467,
+    "sources": {
+      "position": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. (https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv); catalogue reference lvdb-v1.1.1:m_101:location",
+      "distance": "Riess et al. (2016), ApJ 826, 56, Table 5 (Approximations for Distance Parameters), row M101: Cepheid distance modulus mu_Ceph = 29.135 +/- 0.045, d = 6.71 Mpc. (https://arxiv.org/abs/1604.01424); catalogue reference Riess2016ApJ...826...56R: 6714288.52926 pc (-137710.155706/+140593.735267); cepheids",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD M 101: 243.0330935727467 km/s +/- 0.000016, from 2012A&A...545A..15S (https://ui.adsabs.harvard.edu/abs/2012A%26A...545A..15S/abstract)"
+    }
+  }
+}

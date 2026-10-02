@@ -5,20 +5,23 @@ import type { CameraViewport } from '@cssearth/renderer/navigation/camera-viewpo
 import { prepareArrivalBillboard } from './arrival-billboard.mts';
 import { createPreparedArrival } from './prepared-arrival.mts';
 import { MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
-import { drawnPageFromUrl } from './navigation/navigation-scope.mts';
 import { releaseStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
 
 /** A custom view never borrows the default arrival photograph. */
 export function usesDefaultStartupView(url: string, sceneId: string): boolean {
   const query = new URL(url).searchParams;
-  return drawnPageFromUrl(url, sceneId) === null && !['v', 'view', 'overview', 'feature', 'dataset', 'settings'].some(key => query.has(key));
+  return !['v', 'view', 'overview', 'feature', 'dataset', 'settings'].some(key => query.has(key));
 }
 
 /** Static previews restore from the URL; server-rendered focus responses carry a resolved camera. Only the `v` parameter is
  * a saved camera: a page URL also carries `overview`, `focus`, `dataset` and the rest, which the shared-view parser refuses. */
 export function readStartupSavedView(url: string, preparedView?: string) {
   const saved = preparedView ?? new URL(url).searchParams.get('v');
-  return saved === null ? null : parseSharedView(new URLSearchParams({ v: saved }).toString());
+  if (saved === null) return null;
+  // An unreadable view (a damaged copy, an older format) opens the page's default view, as the server renders it
+  // (search-response.mts). Thrown from here it failed the whole mount: `/earth/?v=garbage` never became ready (2026-10-01).
+  try { return parseSharedView(new URLSearchParams({ v: saved }).toString()); }
+  catch { return null; }
 }
 
 /** The same prepared cover and resource lease as fly-to, owned by the initial session. */

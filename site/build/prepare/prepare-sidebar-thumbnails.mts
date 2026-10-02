@@ -4,6 +4,7 @@ import sharp from 'sharp';
 import { parseDatasetControl } from '../../prepared-panel-content.mts';
 import { sourceArray, sourceId, sourceObject, sourcePath, sourceText } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
+import { objectThumbnail } from '@cssearth/bake/site-assets';
 
 const root = process.cwd();
 const check = process.argv.includes('--check');
@@ -34,6 +35,15 @@ const makeThumbnail = async (id: string, dataset: string, bytes: Buffer, evidenc
   await output(`public${url2x}`, tile);
   images[`${id}/${dataset}`] = { url2x, ...evidence };
 };
+// An object's own row shows its default dataset's image under the shared framing rule (`@cssearth/bake/site-assets`): the whole
+// image inside a margin, faded out before its frame. Dataset rows keep the complete tile above for their round crop.
+const makeObjectThumbnail = async (id: string, dataset: string, bytes: Buffer) => {
+  const { inputs, credit, sourceUrl } = images[`${id}/${dataset}`]!;
+  const url2x = `/navigation/focus-object-${id}@2x.webp`;
+  await output(`public${url2x}`, await objectThumbnail(bytes));
+  images[id] = { url2x, inputs, credit, sourceUrl };
+  defaults[id] = id;
+};
 
 if (!check) await mkdir(resolve(root, 'public/navigation'), { recursive: true });
 for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
@@ -46,16 +56,18 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
   await read(path);
   const id = sourceId(presentation.objectId), defaultDataset = sourceId(presentation.defaultDataset);
   if (id !== folder.name) throw new Error(`Mismatched sidebar image owner: ${id}`);
+  let defaultBytes: Buffer | undefined;
   for (const dataset of sourceArray(presentation.controls, parseDatasetControl)) {
     const expected = `/scenes/${id}/datasets/${dataset.id}.webp`;
     if (!dataset.texture || dataset.texture.url !== expected)
       throw new Error(`${path}: dataset ${dataset.id} texture.url is ${JSON.stringify(dataset.texture?.url ?? null)}; expected ${expected}.`);
-    const previewPath = `public${dataset.texture.url}`;
-    await makeThumbnail(id, dataset.id, await read(previewPath), { inputs: [path, previewPath],
+    const previewPath = `public${dataset.texture.url}`, bytes = await read(previewPath);
+    if (dataset.id === defaultDataset) defaultBytes = bytes;
+    await makeThumbnail(id, dataset.id, bytes, { inputs: [path, previewPath],
       credit: dataset.texture.attribution?.label ?? '', sourceUrl: dataset.texture.attribution?.url ?? '' });
   }
-  if (!images[`${id}/${defaultDataset}`]) throw new Error(`Missing default sidebar image: ${id}`);
-  defaults[id] = `${id}/${defaultDataset}`;
+  if (!defaultBytes) throw new Error(`Missing default sidebar image: ${id}`);
+  await makeObjectThumbnail(id, defaultDataset, defaultBytes);
 }
 
 // A galaxy volume's navigation image is its published face-on backing. The old slab textures are no longer
@@ -73,19 +85,20 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
   const texturePath = `src/objects/${id}/prepared/${sourcePath(sourceObject(backing.leaf).texturePath)}`;
   const recipePath = `src/objects/${id}/source/backing/recipe.json`, recipe = sourceObject(await json(recipePath));
   if (sourceText(backing.source) !== sourceText(recipe.source)) throw new TypeError(`${backingPath}: source differs from its recipe.`);
-  await makeThumbnail(id, 'volume', await read(texturePath), { inputs: [descriptorPath, backingPath, texturePath, recipePath],
+  const texture = await read(texturePath);
+  await makeThumbnail(id, 'volume', texture, { inputs: [descriptorPath, backingPath, texturePath, recipePath],
     credit: sourceText(recipe.meaning), sourceUrl: sourceText(sourceObject(recipe.image).origin) });
-  defaults[id] = `${id}/volume`;
+  await makeObjectThumbnail(id, 'volume', texture);
 }
 
 // Catalogue IDs and detailed package IDs can differ (for example M 31).
-const cataloguePath = 'src/objects/local-group/prepared/catalogue.json';
+const cataloguePath = 'src/objects/local-group-galaxies/prepared/catalogue.json';
 const catalogue = sourceObject(await json(cataloguePath));
 for (const object of sourceArray(catalogue.objects, sourceObject)) {
   if (typeof object.detailedObjectId === 'string' && defaults[object.detailedObjectId])
     defaults[sourceText(object.id)] = defaults[object.detailedObjectId];
 }
-const manifest = { schema: 'cssearth-sidebar-thumbnails@1', method: 'Complete prepared dataset previews at 80 px for 40 CSS px; Galaxy volumes use their published face-on backing, preserving existing source qualifications.',
+const manifest = { schema: 'cssearth-sidebar-thumbnails@1', method: 'Complete prepared dataset previews at 80 px for 40 CSS px; Galaxy volumes use their published face-on backing, preserving existing source qualifications. Each object row shows its default image inside a margin, faded out before the image frame.',
   inputs: [...inputs.values()], images, defaults };
 await output('public/navigation/sidebar-thumbnails.json', JSON.stringify(manifest, null, 2) + '\n');
 console.log(`${check ? 'Verified' : 'Prepared'} ${Object.keys(images).length} sidebar images at 80 px.`);

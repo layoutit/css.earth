@@ -1,0 +1,51 @@
+{
+  "id": "simanton-2015-m101-old-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Two populations of old star clusters in the spiral galaxy M101 based on HST/ACS observations",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2015ApJ...805..160S"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/805/160"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...805..160S",
+      "label": "2015ApJ...805..160S"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/805/160",
+      "label": "CDS J/ApJ/805/160"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/805/160/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "table1: 326 candidate globular clusters of M101 with J2000 positions, selected from B, V and I images of ten HST/ACS fields (each 3.3 x 3.4 arcmin)."
+    }
+  ],
+  "creators": [
+    "L. A. Simanton",
+    "R. Chandar",
+    "B. C. Whitmore"
+  ],
+  "publisher": "ApJ 805, 160",
+  "publicationDate": "2015",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Simanton et al. (2015), ApJ 805, 160.",
+      "scope": "M101 old star clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/805/160/ReadMe"
+    }
+  ]
+}

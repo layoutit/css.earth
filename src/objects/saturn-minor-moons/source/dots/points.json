@@ -8,7 +8,7 @@
   "table": {
     "path": "positions.csv.gz",
     "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
-    "generator": "packages/bake/authoring/saturn-minor-moons/positions.mts"
+    "generator": "packages/bake/authoring/minor-moons/positions.mts"
   },
   "frame": {
     "input": "host-centred-icrf-km",

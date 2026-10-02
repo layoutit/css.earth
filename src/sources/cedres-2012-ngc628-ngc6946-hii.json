@@ -1,0 +1,54 @@
+{
+  "id": "cedres-2012-ngc628-ngc6946-hii",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Two-dimensional metallicity distribution of the ionized gas in NGC 628 and NGC 6946",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2012A&A...545A..43C"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/545/A43"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012A&A...545A..43C",
+      "label": "2012A&A...545A..43C"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/545/A43",
+      "label": "CDS J/A+A/545/A43"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/545/A43/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "ngc6946: 226 HII regions of NGC 6946 from narrowband imaging at the 2.5 m Nordic Optical Telescope; the table gives each region as offsets from the centre (Xoff, Yoff), and VizieR adds the positions computed from them (_RA, _DE)."
+    }
+  ],
+  "creators": [
+    "B. Cedrés",
+    "J. Cepa",
+    "A. Bongiovanni",
+    "H. Castañeda",
+    "M. Sánchez-Portal",
+    "A. Tomita"
+  ],
+  "publisher": "A&A 545, A43",
+  "publicationDate": "2012",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Cedrés et al. (2012), A&A 545, A43.",
+      "scope": "NGC 6946 HII regions",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/545/A43/ReadMe"
+    }
+  ]
+}

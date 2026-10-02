@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "milky-way",
+  "card": {
+    "text": "Our galaxy: a barred spiral of stars, planetary systems, gas and dust.",
+    "sources": [
+      {
+        "catalogueId": "nasa-science-galaxies",
+        "url": "https://science.nasa.gov/universe/galaxies/",
+        "label": "NASA Science · Galaxies",
+        "checked": "2026-09-07",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.",
+    "sources": [
+      {
+        "catalogueId": "nasa-science-galaxies",
+        "url": "https://science.nasa.gov/universe/galaxies/",
+        "label": "NASA Science · Galaxies",
+        "checked": "2026-09-07",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "galaxy": {
+      "title": "The galaxy as catalogues place it",
+      "detail": "Dots, bulge model, backing",
+      "summary": "Catalogued objects as dots at their published positions, a simulated bulge, and an artist's impression as backing.",
+      "sources": [
+        {
+          "catalogueId": "esa-gaia-2025-milky-way-artist-impression",
+          "url": "https://www.esa.int/ESA_Multimedia/Images/2025/09/Gaia_s_star-formation_map_slider",
+          "label": "Artist's impression: ESA/Gaia/DPAC, S. Payne-Wardenaar, L. McCallum et al. (2025), CC BY-SA 3.0 IGO.",
+          "checked": "2026-10-01",
+          "locator": "Milky Way backing image"
+        },
+        {
+          "catalogueId": "openspace-milky-way-volume",
+          "url": "https://docs.openspaceproject.com/latest/content/milky-way/galaxy/milky-way-volume/index.html",
+          "label": "OpenSpace Milky Way volume",
+          "checked": "2026-10-01",
+          "locator": "Bulge volume"
+        }
+      ]
+    }
+  }
+}

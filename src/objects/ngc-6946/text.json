@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-6946",
+  "card": {
+    "text": "A spiral galaxy 7.7 million parsecs away, seen nearly face-on through the stars of the Milky Way.",
+    "sources": [
+      {
+        "catalogueId": "publication-anand2018aj-156-105a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..105A",
+        "label": "Anand2018AJ....156..105A: A Robust Tip of the Red Giant Branch Distance to the Fireworks Galaxy (NGC 6946)",
+        "checked": "2026-10-01",
+        "locator": "distance: 7.727 Mpc (−449,000 / +476,700 pc)"
+      },
+      {
+        "catalogueId": "walter-2008-things",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/136/2563",
+        "label": "Walter et al. (2008), THINGS: The H I Nearby Galaxy Survey, Table 1",
+        "checked": "2026-10-01",
+        "locator": "row NGC 6946: inclination 33 deg"
+      },
+      {
+        "catalogueId": "lvdb-v1-1-1",
+        "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+        "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+        "checked": "2026-10-01",
+        "locator": "row ngc_6946: Galactic latitude bb = 11.68 deg"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Ten supernovae have been seen in it since 1917. It lies 12° from the plane of the Milky Way, so thousands of our galaxy's stars stand in front of it.",
+    "sources": [
+      {
+        "catalogueId": "long-2019-ngc6946-snr",
+        "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/875/85/ReadMe",
+        "label": "Long et al. (2019), ApJ 875, 85",
+        "checked": "2026-10-01",
+        "quote": "Ten supernovae (SNe) have been observed since 1917"
+      },
+      {
+        "catalogueId": "lvdb-v1-1-1",
+        "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+        "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+        "checked": "2026-10-01",
+        "locator": "row ngc_6946: Galactic latitude bb = 11.68 deg"
+      },
+      {
+        "catalogueId": "gaia-2023-dr3",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355",
+        "label": "Gaia Collaboration, Vallenari et al. (2023), A&A 674, A1",
+        "checked": "2026-10-01",
+        "locator": "7,379 Gaia DR3 sources within 0.28 deg of NGC 6946 meet the foreground criterion (the query in the source record)"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "NGC 6946 in visible light",
+      "detail": "5430 × 3757 px",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "noirlab-noao-ngc6946kpno",
+          "url": "https://noirlab.edu/public/images/noao-ngc6946kpno/",
+          "label": "Spiral Galaxy NGC 6946; KPNO/NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage)/H. Schweiker (WIYN)",
+          "checked": "2026-10-01",
+          "locator": "Spiral Galaxy NGC 6946"
+        }
+      ]
+    }
+  }
+}

@@ -6,7 +6,6 @@ import { requiredElement, requiredSection } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
 import { readSceneDatasetUrl } from './dataset-url.mts';
 import { preparedObjectUrl } from './prepared-object-path.mts';
-import { drawnPageFromUrl } from './navigation/navigation-scope.mts';
 
 function region(html: string, name: string) {
   const marker = `<!--${name}:start-->`, start = html.indexOf(marker) + marker.length;
@@ -45,7 +44,7 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   const descriptorRegion = region(html, 'prepared-descriptor');
   const descriptor = parseObjectDescriptor(JSON.parse(requiredElement(descriptorRegion.document, 'script[data-prepared-descriptor]').textContent ?? ''));
   const objectId = descriptor.id;
-  if ((pageId !== objectId && drawnPageFromUrl(url, objectId) !== pageId) || descriptor.prepared?.url !== 'prepared/object.json') {
+  if (pageId !== objectId || descriptor.prepared?.url !== 'prepared/object.json') {
     throw new Error(`Prepared dataset descriptor identity drifted: page ${pageId}, scene ${objectId}.`);
   }
   const dataset = readSceneDatasetUrl(url, objectId);
@@ -63,8 +62,19 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
     read: reference => read(preparedObjectUrl(objectId, reference)),
   });
   if (definition.id !== objectId) throw new Error('Prepared dataset object identity drifted.');
+  // The page embeds only its first view's hashes: read the groups of the files this view needs before fetching them.
+  const published = createPreparedAssetResolver(definition.assetOrigin, async path => {
+    const response = await fetcher(new URL(path, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
+    if (!response.ok) throw new Error(`${objectId}: hash group ${path} answered ${response.status}.`);
+    return response.json();
+  });
+  // A feature catalogue is a published file like any texture. Read from the page's own origin it answered 404 on the
+  // deployed site, and every feature link was a crashed function (2026-10-01).
   const feature = featureIds.length && definition.features ? await loadPreparedSurfaceFeature(definition.features, objectId, featureIds[0]!,
-    AbortSignal.timeout(15_000), (path, init) => fetcher(new URL(path, url.origin), { ...init, redirect: 'error' })) : null;
+    AbortSignal.timeout(15_000), async (path, init) => {
+      await published.ensure('features', path);
+      return fetcher(new URL(published.url(path), url.origin), { ...init, redirect: 'error' });
+    }) : null;
   if (featureIds.length && !feature) throw new RangeError('Feature unavailable on this object.');
   if (feature && definition.features && !definition.features.datasetIds.includes(datasetId ?? definition.controls.datasets?.defaultDataset ?? '')) {
     datasetId = definition.features.datasetIds[0];
@@ -81,12 +91,6 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
       else if (values.length) settings[control.name] = Number(values[0]);
     }
   }
-  // The page embeds only its first view's hashes: read the groups of the textures this view writes before rendering it.
-  const published = createPreparedAssetResolver(definition.assetOrigin, async path => {
-    const response = await fetcher(new URL(path, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
-    if (!response.ok) throw new Error(`${objectId}: hash group ${path} answered ${response.status}.`);
-    return response.json();
-  });
   const written = serializePreparedScene(definition, datasetId, settings, (_key, address) => address).textures;
   await Promise.all(written.map(({ key, address }) => published.ensure(key, address)));
   const selected = serializePreparedScene(definition, datasetId, settings, (_key, address) => published.url(address));

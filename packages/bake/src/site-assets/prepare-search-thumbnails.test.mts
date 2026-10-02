@@ -47,3 +47,29 @@ test('featured-star previews reuse arrival pixels, including an older restored a
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test('an opaque sprite previews its complete marker picture, faded out before the frame', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-search-preview-'));
+  try {
+    await Promise.all(['site', 'public/navigation', 'src/objects/galaxy/source/preparation', 'src/objects/galaxy/source/presentation']
+      .map(path => mkdir(join(root, path), { recursive: true })));
+    // A wide photograph that fills its frame, and the square sprite the marker cuts from its middle.
+    const photograph = (width: number, height: number) => sharp({ create: { width, height, channels: 3, background: { r: 200, g: 180, b: 160 } } });
+    await Promise.all([
+      photograph(600, 200).png().toFile(join(root, 'src/objects/galaxy/source/presentation/context.png')),
+      photograph(200, 200).webp({ lossless: true }).toFile(join(root, 'public/navigation/galaxy-context.webp')),
+      writeFile(join(root, 'src/objects/galaxy/source/preparation/navigation.json'), JSON.stringify({ source: { path: 'presentation/context.png' } })),
+      writeFile(join(root, 'site/prepared-navigation-markers.mjs'), `export const PREPARED_NAVIGATION_MARKERS = ${JSON.stringify({
+        galaxy: { context: { url: '/navigation/galaxy-context.webp' } } })};`),
+      writeFile(join(root, 'site/prepared-catalogue.mjs'), 'export const CATALOGUE_ENTRIES = [];'),
+    ]);
+    assert.equal((await prepareSearchThumbnails(root)).written, 1);
+    const { data } = await sharp(join(root, 'public/navigation/search/galaxy@2x.webp')).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    const alpha = (x: number, y: number) => data[4 * (y * 80 + x) + 3]!;
+    assert.ok(alpha(40, 40) > 250, 'the centre is drawn');
+    assert.ok(alpha(20, 40) > 100 && alpha(40, 20) === 0, 'the preview keeps the wide picture, not the square sprite');
+    for (let at = 0; at < 80; at++) assert.equal(alpha(at, 0) + alpha(at, 79) + alpha(0, at) + alpha(79, at), 0, 'nothing reaches the tile edge');
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});

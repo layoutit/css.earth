@@ -1,0 +1,52 @@
+{
+  "id": "cote-2003-m49-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Dynamics of the globular cluster system associated with M49 (NGC 4472): cluster orbital properties and the distribution of dark matter",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2003ApJ...591..850C"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/591/850"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2003ApJ...591..850C",
+      "label": "2003ApJ...591..850C"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/591/850",
+      "label": "CDS J/ApJ/591/850"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/591/850/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "table2: 345 radial-velocity rows of confirmed and candidate M49 globular clusters with J2000 positions from Geisler et al. (1996); the 263 distinct objects of class GC are used. 33 of them lie within 0.8 arcsec of a Jordán et al. (2009) cluster (median 0.7 arcsec) and are drawn from that catalogue; the next nearest pair is 2.6 arcsec apart."
+    }
+  ],
+  "creators": [
+    "P. Côté",
+    "D. E. McLaughlin",
+    "J. G. Cohen",
+    "J. P. Blakeslee"
+  ],
+  "publisher": "ApJ 591, 850",
+  "publicationDate": "2003",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Côté et al. (2003), ApJ 591, 850.",
+      "scope": "M49 globular clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/591/850/ReadMe"
+    }
+  ]
+}

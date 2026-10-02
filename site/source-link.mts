@@ -6,7 +6,7 @@ export interface SourceDocumentReference {
 /** Reuse document links prepared on the retained navigation rows. */
 export function sourceDocuments(document: Document): Map<string, SourceDocumentReference> {
   // The browser, context and body card may wait off the page (detached-sections.ts); their rows still name the sources.
-  return new Map(sectionElements(document, '.object-browser, .object-context, .object-information-panel')
+  return new Map(sectionElements(document, '.object-browser, .object-information-panel')
     .flatMap(root => [...root.querySelectorAll<HTMLElement>('[data-source-subject]')]).map(node => [node.dataset.sourceSubject!, node]));
 }
 

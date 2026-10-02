@@ -24,7 +24,7 @@
       "basis": "Milky Way foreground stars by the criterion of Ren et al. (2021, Sect. 3.2): a Gaia parallax measured to better than 20% that places the star within 50 kpc (parallax above 0.02 mas), or a proper motion in right ascension or declination above 0.2 mas/yr plus 2 sigma, measured to better than 20%. Applied to Gaia DR3 within 2.3 deg of M31's centre, which covers the photograph's crop; the query is in the Gaia DR3 source record. Laid on M31's 77.5 deg disc, each of these round stars becomes a dash 4.6 times longer than it is wide."
     },
     "companions": {
-      "catalogue": "src/objects/local-group/source/lvdb/comb_all.csv",
+      "catalogue": "src/objects/local-group-galaxies/source/lvdb/comb_all.csv",
       "keys": [
         "m_032",
         "ngc_0205"

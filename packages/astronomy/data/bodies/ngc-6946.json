@@ -1,0 +1,28 @@
+{
+  "id": "ngc-6946",
+  "classification": "galaxy",
+  "order": 5152,
+  "physical": {
+    "name": "NGC 6946",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 6946 is recorded: it is an extended galaxy, and its package frames it at 17500 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 308.712917,
+    "declinationDegrees": 60.154167,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 7726805.85096,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 44.96549603492654,
+    "sources": {
+      "position": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. (https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv); catalogue reference lvdb-v1.1.1:ngc_6946:location",
+      "distance": "Anand2018AJ....156..105A: A Robust Tip of the Red Giant Branch Distance to the Fireworks Galaxy (NGC 6946) (https://ui.adsabs.harvard.edu/abs/2018AJ....156..105A); catalogue reference Anand2018AJ....156..105A: 7726805.85096 pc (-449007.805592/+476709.592338); trgb",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NGC 6946: 44.96549603492654 km/s +/- 0.000023, from 2002LEDA.........0P (https://ui.adsabs.harvard.edu/abs/2002LEDA.........0P/abstract)"
+    }
+  }
+}

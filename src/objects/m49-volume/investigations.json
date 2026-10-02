@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m49-volume",
+  "entries": [
+    {
+      "id": "legacy-surveys-colour",
+      "subject": "DESI Legacy Imaging Surveys DR10 colour HiPS",
+      "status": "included",
+      "finding": "A 3000 x 3000 px hips2fits cutout of CDS/P/DESI-Legacy-Surveys/DR10/color, 35.1 arcmin wide on the 2MASS position. Colour from four bands, public with acknowledgment, and addressed by one URL. Its sky subtraction ends M49's light about 560 arcsec out.",
+      "evidence": [
+        "https://www.legacysurvey.org/dr10/",
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&get=record"
+      ]
+    },
+    {
+      "id": "burrell-schmidt-deep-virgo",
+      "subject": "Burrell Schmidt Deep Virgo Survey mosaics (Mihos et al. 2017)",
+      "status": "deferred",
+      "finding": "The survey behind M87's ESO image publishes B and Washington M mosaics at 1.45 arcsec per pixel (337 and 372 MB) that cover M49 to far fainter light than the Legacy Surveys composite. Not used: the lab recipe reads a published display image by URL, and these are calibrated FITS mosaics that need a cutout, a stated display transfer and a local-input route. The page asks users to cite the survey paper and to tell the team how the data are used; it states no licence.",
+      "evidence": [
+        "http://astroweb.case.edu/VirgoSurvey/",
+        "https://arxiv.org/abs/1611.04435"
+      ],
+      "revisitWhen": "The lab recipe can read a prepared local image, or the outer halo is wanted."
+    },
+    {
+      "id": "other-survey-composites",
+      "subject": "SDSS DR9, Pan-STARRS DR1 and DSS2 colour HiPS",
+      "status": "excluded",
+      "finding": "Looked at as 900 px previews of the same field on 2026-10-01. SDSS shows its frame mosaic as dark squares around M49, DSS2 is photographic and shows the galaxy only to about 3 arcmin, and Pan-STARRS subtracts the galaxy's own light as sky, leaving a dark ring about 1.5 arcmin out."
+    },
+    {
+      "id": "neighbour-catalogue",
+      "subject": "Catalogue for the neighbour masks",
+      "status": "included",
+      "finding": "RC3 lists 8 galaxies in the field and misses VCC 1254, VCC 1167 and VCC 1152, which then stayed in the image as blobs. HyperLEDA PGC (Paturel et al. 2003) lists 61 with a D25 within 0.5 degrees; the 29 whose masks reach the cutout are masked.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237"
+      ]
+    },
+    {
+      "id": "mask-fill",
+      "subject": "Filling a mask inside the galaxy",
+      "status": "included",
+      "finding": "M87's fill, the median of the light around the mask, left dark holes at NGC 4467 and UGC 7636, which lie inside M49's light. Taking the light opposite through the centre copied a survey artefact east of the core and failed where two masks face each other. The median of the unmasked light on the pixel's isophote left no hole."
+    },
+    {
+      "id": "sersic-fit",
+      "subject": "Spheroid",
+      "status": "included",
+      "finding": "Kormendy et al.'s own Table 1 fit to NGC 4472 (n = 5.99, r_e = 269.29 arcsec, major axis) is used as published; no fit was made here.",
+      "evidence": [
+        "https://arxiv.org/abs/0810.1681"
+      ]
+    },
+    {
+      "id": "globular-clusters",
+      "subject": "Globular cluster catalogues",
+      "status": "included",
+      "finding": "Jordán et al. (2009), the ACS Virgo Cluster Survey catalogue, for the Hubble field (765 with pGC >= 0.5) and Côté et al. (2003) for clusters with velocities out to 567 arcsec (263). M87's package uses Peng et al. (2009) and Strader et al. (2011), which cover M87 only.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/180/54",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/591/850"
+      ]
+    }
+  ]
+}

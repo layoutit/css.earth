@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-6946-layers",
+  "entries": [
+    {
+      "id": "mayall-mosaic",
+      "subject": "NOIRLab noao-ngc6946kpno (Mayall 4-meter Mosaic)",
+      "status": "included",
+      "finding": "The disc to 17.5 kpc in eight filters, 23.6 arcmin wide at 0.26 arcsec per pixel; the page's registration matches Gaia stars to a pixel.",
+      "evidence": [
+        "https://noirlab.edu/public/images/noao-ngc6946kpno/"
+      ]
+    },
+    {
+      "id": "other-images",
+      "subject": "Gemini GMOS (noao-ngc6946), Pan-STARRS DR1, DESI Legacy Surveys",
+      "status": "excluded",
+      "finding": "The Gemini image covers 5.8 x 5.6 arcmin, the inner disc only. Pan-STARRS subtracts the disc's faint light as sky, leaving dark patches between the arms. The Legacy Surveys do not cover this field, 12 degrees from the Galactic plane.",
+      "evidence": [
+        "https://noirlab.edu/public/images/noao-ngc6946/"
+      ]
+    },
+    {
+      "id": "s4g-decomposition",
+      "subject": "S4G bulge-plus-disc fit (Salo et al. 2015)",
+      "status": "excluded",
+      "finding": "CDS J/ApJS/219/4 table7 has no row for NGC 6946: the survey kept to Galactic latitudes above 30 degrees. The scale length is Leroy et al.'s (2008).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4"
+      ]
+    }
+  ]
+}

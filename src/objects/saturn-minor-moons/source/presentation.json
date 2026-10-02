@@ -5,12 +5,12 @@
       {
         "id": "dots",
         "label": "JPL Horizons, satellite ephemerides SAT455 to SAT459",
-        "process": "Take every confirmed Saturn moon in the retained JPL catalogue that has no object package and has a Horizons code; ask Horizons for its geometric position relative to Saturn's centre at the world's epoch; draw one dot at that position.",
+        "process": "Take every confirmed Saturn moon in the pinned JPL catalogue that has no object package and has a Horizons code; ask Horizons for its geometric position relative to Saturn's centre at the world's epoch; draw one dot at that position.",
         "recipe": "source/dots/points.json",
         "selector": "",
         "inputs": [
           "positions",
-          "saturn-moon-catalogue"
+          "moon-catalogue"
         ],
         "outputs": [
           "prepared/dots.bin"

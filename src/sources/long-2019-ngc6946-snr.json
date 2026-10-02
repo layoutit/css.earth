@@ -1,0 +1,51 @@
+{
+  "id": "long-2019-ngc6946-snr",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A new, larger sample of supernova remnants in NGC 6946",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2019ApJ...875...85L"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/875/85"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875...85L",
+      "label": "2019ApJ...875...85L"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/875/85",
+      "label": "CDS J/ApJ/875/85"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/875/85/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "table2: 147 supernova remnant candidates of NGC 6946 with J2000 positions, from WIYN narrowband images ([S II]:H-alpha above that of HII regions)."
+    }
+  ],
+  "creators": [
+    "K. S. Long",
+    "P. F. Winkler",
+    "W. P. Blair"
+  ],
+  "publisher": "ApJ 875, 85",
+  "publicationDate": "2019",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Long et al. (2019), ApJ 875, 85.",
+      "scope": "NGC 6946 supernova remnant candidates",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/875/85/ReadMe"
+    }
+  ]
+}

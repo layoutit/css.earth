@@ -121,7 +121,8 @@ its validators accept); the renderer never imports the bake.
   bundles from its source into a browser page. The command imports the canonical dataset routes from
   `@cssearth/objects/provenance` and passes them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `src/facility-renders/`.
 - `src/site-assets/` is published as `@cssearth/bake/site-assets` (Node only): the application's prepared assets that are
-  not an object's own: dataset sprites and search thumbnails (committed; `prepare-navigation` remakes them) cut from prepared page and navigation images, the planets'
+  not an object's own: dataset sprites and search thumbnails (committed; `prepare-navigation` remakes them) cut from prepared page and navigation images, the object-row
+  thumbnail framing (`object-thumbnail.ts`: an object's light cut to its measured extent and faded out before the image frame), the planets'
   photometric phase charts. It imports `raster`, `runtime-source`, `objects/raster` and `objects/charts`. Its commands are
   `packages/bake/cli/prepare-{dataset-sprites,search-thumbnails,scientific-charts}.mts`; its tests are in `src/site-assets/` and `site/test/`.
 - `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
@@ -290,7 +291,8 @@ its validators accept); the renderer never imports the bake.
   DOM, React, Vite, `sharp`, PolyCSS, renderer imports or file paths, and it never imports `node/`.
 - `src/volume/node/` is published as `@cssearth/bake/volume/node`: the compact-input replay, the XYZ slices, the
   compiler bake and the published catalogue point banks, with the galaxy groups' placement and the shell selection that
-  keeps them first (`catalogue-groups.ts`). `body-points.ts` builds a bank centred on a body from positions relative to it
+  keeps them first (`catalogue-groups.ts`). `catalogue-spheroid.ts` draws a sky catalogue's depths through a published spheroid, around the Sun in kpc or around an
+  object in pc. `body-points.ts` builds a bank centred on a body from positions relative to it
   (a planet's moons without a page); `packages/bake/cli/prepare-body-points.mts <object-directory> <id>` is its command. It may import `node:*`, `sharp`, the main volume entry and the
   renderer's catalogue bank codec (`@cssearth/renderer/prepared-data/catalogue-bank-binary.ts`), which packs a bank as the page decodes it. The main entry never imports it; the Node-only
   topics above may, as a lower layer.

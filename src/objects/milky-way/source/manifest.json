@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [],
+  "generatedIntermediates": [
+    {
+      "id": "companion-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Gaia%E2%80%99s_star-formation_map_%28slider%29_ESA512394_-_slider.jpg",
+      "credit": "Artist's impression: ESA/Gaia/DPAC, S. Payne-Wardenaar, L. McCallum et al. (2025), CC BY-SA 3.0 IGO; the galaxy backing as the Milky Way volume bank publishes it, saved by site/build/prepare/companion-context.mts",
+      "license": "CC BY-SA 3.0 IGO",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "site/build/prepare/companion-context.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A picture the Milky Way volume bank publishes; its sources are that bank's (src/objects/milky-way-volume/source/backing/recipe.json)."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet."
+      }
+    },
+    {
+      "path": "presentation/solar-system.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored framing: the sphere the camera stays outside of, the nominal solar radius (IAU 2015 Resolution B3), a presentation value."
+      }
+    },
+    {
+      "path": "preparation/navigation.json"
+    }
+  ]
+}
