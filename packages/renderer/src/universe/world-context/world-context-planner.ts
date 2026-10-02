@@ -348,8 +348,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const beyondLocalGroup = extendedRetirement(entry.kind, fromFocus) ?? logarithmicFade(Math.hypot(...eye), entry.scale.returnDistanceM, entry.scale.enterDistanceM);
         const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' &&
           entry.galaxyField && (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
-        // A retired galaxy level takes its own stars and nebulae with it; another galaxy's star, a galaxy and a cluster keep their dots.
-        const atGalaxyScale = view.galaxyRetired === true && body.id !== plan.focus.id && entry.orbit === null && entry.galaxyField && entry.kind !== 'galaxy' && entry.kind !== 'galaxy-cluster' ? 1 : galaxyHost ? galaxyHandoff : 0;
+        // A retired galaxy level takes its own stars and nebulae with it; another galaxy's star, a galaxy and a cluster keep their dots,
+        // and so does a black hole: a galaxy's centre is its landmark from outside, until the Local Group scale fades it (beyondLocalGroup).
+        const atGalaxyScale = view.galaxyRetired === true && body.id !== plan.focus.id && entry.orbit === null && entry.galaxyField && entry.kind !== 'galaxy' && entry.kind !== 'galaxy-cluster' && entry.kind !== 'black-hole' ? 1 : galaxyHost ? galaxyHandoff : 0;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
           (isSelected || flightDestination ? 1 : (1 - beyondLocalGroup) * (1 - atGalaxyScale));
