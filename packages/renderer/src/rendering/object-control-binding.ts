@@ -23,7 +23,9 @@ export function publishDatasetPreview(root: ParentNode | null, buttons: readonly
   if (!root) return;
   // Only the committed dataset's preview is mounted; the others wait off the page (detached-sections.ts).
   const previews = sectionElements(root, '[data-dataset-selected]');
-  const select = root.querySelector<HTMLSelectElement>('[data-dataset-native-select]');
+  // A wide layout keeps the native select off the page (mountDatasetPickerLayout); it still takes the committed value,
+  // or a resize to a phone's width shows the dataset it had before (2026-10-02).
+  const select = sectionElements<HTMLSelectElement>(root, '[data-dataset-native-select]')[0];
   if (previews.length === 0 && !select) return;
   const pressed = buttons.find(button => button.getAttribute('aria-pressed') === 'true');
   const visible = buttons.find(button => button.getAttribute('aria-pressed') === 'true' &&
