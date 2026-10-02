@@ -7,3 +7,6 @@
 - Keep methods object-agnostic. Recipes and evidence identify targets; no object-specific branches or repository path assumptions belong here.
 - Validate external values at the boundary. Host adapters enforce their filesystem policies; core validators retain schema and relative-path safety.
 - Test only affected numerical methods and direct consumers during iteration. Never rebake unrelated datasets or restart the user's lab.
+
+Photometric MGE recipes and simulation-envelope settings are parsed by `@cssearth/objects`; their
+scientific samplers stay in bake and fitting stays here.

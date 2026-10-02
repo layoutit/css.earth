@@ -1,5 +1,5 @@
+import { CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, type VolumeRecipe, type DensityVolumeFrame, type VolumeSlices, type PreparedCssVolume } from '@cssearth/objects';
 import { observationEnvelope as envelope, type ImageWcs } from '@cssearth/bake/volume';
-import { DENSITY_VOLUME_FORMAT, type VolumeRecipe, type DensityVolumeFrame, type VolumeSlices, type PreparedCssVolume } from '@cssearth/objects';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Offline preparation of frozen cloud-component inspection banks. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -160,7 +160,7 @@ for (const { data } of results) for (let axis = 0; axis < 3; axis++) {
 const combined: PreparedObject = { ...reference, data: { ...reference.data,
   frame: { ...reference.data.frame, boundsUnits: combinedBounds }, stacks,
   resources: [...reference.data.resources, ...partResources], provenance: { reference: reference.data.provenance,
-    inspection: { schema: 'cssearth-cloud-parts@1', recipe: recipePath,
+    inspection: { schema: CLOUD_PARTS_SCHEMA, recipe: recipePath,
       composition: 'Exact reference leaves remain the default. Filtered independent RGBA source-over is contribution inspection and is not an exact arbitrary-subset reconstruction.' } } } };
 await mkdir(resolve(targetDirectory, 'source'), { recursive: true });
 await json(resolve(targetDirectory, 'prepared/inspection.json'), combined);
@@ -168,7 +168,7 @@ const sourceTotal = decomposition.diagnostics.inputSum;
 const orderedParts = results.map(({ part }) => part).sort((a, b) =>
   Number(b.kind === 'extended') - Number(a.kind === 'extended') || b.integratedIntensity - a.integratedIntensity);
 let structure = 0;
-await json(resolve(targetDirectory, 'source/cloud-parts.json'), { schema: 'cssearth-cloud-parts@1', id: targetId,
+await json(resolve(targetDirectory, 'source/cloud-parts.json'), { schema: CLOUD_PARTS_SCHEMA, id: targetId,
   parts: orderedParts.map(part => ({ id: part.id, label: part.kind === 'extended' ? `Structure ${++structure}` :
     part.kind === 'compact' ? 'Compact candidates' : 'Diffuse remainder', kind: part.kind,
     ...(part.scale === undefined ? {} : { scale: part.scale }), ...(part.radius === undefined ? {} : { radius: part.radius }),

@@ -1,3 +1,4 @@
+import { type SimulationEnvelopeSettings, type SkyBounds, type SimulationDepthPrior } from '@cssearth/objects';
 /**
  * Low-frequency emission that keeps a pinned density's own 3D shape, scaled per sky position to the image.
  *
@@ -5,77 +6,11 @@
  * depending on the fitting methods. Arithmetic order, coordinate conventions and validator bounds are
  * unchanged; the fit itself stays with its scientific owner.
  */
-import type { SkyBounds } from '@cssearth/objects';
-import type { SimulationDepthPrior } from '@cssearth/objects';
 
-export interface SimulationEnvelopeSettings {
-  /** Gaussian sigma, in fit pixels, of the sky-plane smoothing that separates envelope from detail. */
-  scalePixels: number;
-  /** Share of the smoothed image assigned to the simulation envelope; the rest is left for finite detail. */
-  fraction: number;
-  /** Minimum gain, as a share of the global image/simulation ratio, wherever the simulation has density. Zero adds no unobserved light. */
-  floor: number;
-  depthSamples: number;
-  /** Image-weighted simulation mass trimmed from each end of the depth range (0.005 keeps 99%). */
-  depthTrim: number;
-  /**
-   * Quantile of the smoothed envelope signal at which its chromaticity reaches half trust, so fainter
-   * light keeps proportionally less of its measured color and the rest is neutral. Lower keeps color
-   * further out into the halo; higher neutralises more of it. Omitted means the long-standing 0.9.
-   */
-  chromaHalfSaturationQuantile?: number;
-  /**
-   * Quantile of each observed channel taken as this image's sky before its chromaticity is measured.
-   * The long-standing 0.5 is the median of every covered pixel, which for a body that fills much of its
-   * own footprint subtracts real body light, unevenly per channel, and so shifts the hue it reports. A low
-   * quantile is the sky of a footprint the body fills. Omitted means the long-standing 0.5.
-   */
-  chromaSkyQuantile?: number;
-  /**
-   * Blurred-coverage fraction below which a pixel's chromaticity is fully neutral, ramping to its measured
-   * color at twice that fraction. `fitSimulationEnvelope` already tapers its GAIN across the observed
-   * footprint edge on exactly this fraction, so unobserved sky does not end in a hard cut; the chromaticity
-   * had no such taper and therefore reported a full-strength color from however few covered pixels a
-   * boundary pixel has, which the outer annulus displays as false saturated patches. Setting this to the
-   * gain's own 0.5 trusts color exactly where the gain carries light. Omitted means no taper.
-   */
-  chromaCoverageTaper?: number;
-}
 export interface SimulationEnvelopeGrid {
   width: number; height: number; bounds: SkyBounds; zRange: [number, number];
   /** Row-major gain per fit pixel (top row first, like the image). */
   gain: Float32Array;
-}
-
-export function validateEnvelopeSettings(value: unknown): SimulationEnvelopeSettings {
-  if (!value || typeof value !== 'object') throw new TypeError('Envelope settings must be an object.');
-  const s = value as Record<string, unknown>;
-  const { scalePixels, fraction, floor, depthSamples, depthTrim, chromaHalfSaturationQuantile, chromaSkyQuantile, chromaCoverageTaper } = s;
-  if (typeof scalePixels !== 'number' || !Number.isFinite(scalePixels) || scalePixels < .5 || scalePixels > 128 ||
-    typeof fraction !== 'number' || !Number.isFinite(fraction) || fraction < 0 || fraction > 1 ||
-    typeof floor !== 'number' || !Number.isFinite(floor) || floor < 0 || floor > 1 ||
-    typeof depthSamples !== 'number' || !Number.isInteger(depthSamples) || depthSamples < 8 || depthSamples > 4096 ||
-    typeof depthTrim !== 'number' || !Number.isFinite(depthTrim) || depthTrim < 0 || depthTrim >= .25)
-    throw new TypeError('Invalid simulation envelope settings.');
-  const bounded = (value: unknown, name: string) => {
-    if (typeof value !== 'number' || !Number.isFinite(value) || value <= 0 || value > 1)
-      throw new TypeError(`Envelope ${name} must be in (0,1].`);
-    return value;
-  };
-  const taper = (value: unknown) => {
-    if (typeof value !== 'number' || !Number.isFinite(value) || value < 0 || value >= 1)
-      throw new TypeError('Envelope chroma coverage taper must be in [0,1).');
-    return value;
-  };
-  // Each key is appended only when authored, so an accepted record without them keeps its exact stored bytes.
-  return {
-    scalePixels, fraction, floor, depthSamples, depthTrim,
-    ...(chromaHalfSaturationQuantile === undefined ? {}
-      : { chromaHalfSaturationQuantile: bounded(chromaHalfSaturationQuantile, 'chroma half-saturation quantile') }),
-    ...(chromaSkyQuantile === undefined ? {} : { chromaSkyQuantile: bounded(chromaSkyQuantile, 'chroma sky quantile') }),
-    // A taper of zero means no taper, so unlike the quantiles its range is closed below and open above.
-    ...(chromaCoverageTaper === undefined ? {} : { chromaCoverageTaper: taper(chromaCoverageTaper) }),
-  };
 }
 
 /** The trust ramp's half-saturation quantile: an authored envelope setting, else the long-standing 0.9. */

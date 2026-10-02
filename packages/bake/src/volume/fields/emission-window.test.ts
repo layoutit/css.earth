@@ -1,10 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createEmissionWindowSampler, readEmissionWindow, type EmissionWindow } from './emission-window.ts';
+import { createEmissionWindowSampler } from './emission-window.ts';
+import { readRetainedEmissionField, type EmissionWindow, type EmissionFieldModel, type EmissionVector3 } from '@cssearth/objects';
 import { createEmissionField, prepareEmissionComponent, projectEmissionComponent, samplePreparedEmissionComponent } from './emission.ts';
-import { readRetainedEmissionField } from './retained-emission.ts';
-import type { EmissionFieldModel } from '../contracts/emission.ts';
-import type { EmissionVector3 } from '@cssearth/objects';
+
+
 
 const window: EmissionWindow = { sourceId: 'optical', polygonArcsec: [[-5, -4], [-2, -1], [-5, 2], [-8, -1]],
   featherArcsec: .5, interpretation: 'Authored display footprint, not a physical edge.' };
@@ -31,19 +31,6 @@ test('rotated negative-coordinate footprint accepts either winding and tapers in
   const saved = structuredClone(window), fixed = createEmissionWindowSampler(saved);
   saved.polygonArcsec[0][0] = 200;
   assert.equal(fixed(-5, -1), 1, 'Sampling retains the validated snapshot.');
-});
-
-test('external window decoder rejects nonfinite, concave, crossing, degenerate and unknown data', () => {
-  for (const invalid of [null, {}, { ...window, sourceId: '' }, { ...window, interpretation: '' }, { ...window, featherArcsec: -1 },
-    { ...window, featherArcsec: Infinity }, { ...window, featherArcsec: '1' }, { ...window, extra: true },
-    { ...window, polygonArcsec: [[0, 0], [1, 0], [1, 1]] },
-    { ...window, polygonArcsec: [[0, 0], [1, 1], [0, 1], [1, 0]] },
-    { ...window, polygonArcsec: [[0, 0], [2, 0], [.5, .5], [0, 2]] },
-    { ...window, polygonArcsec: [[0, 0], [1, 0], [2, 0], [0, 1]] },
-    { ...window, polygonArcsec: [[0, 0], [1, 0], [1, Infinity], [0, 1]] },
-    { ...window, polygonArcsec: [[-1e308, 0], [1e308, 0], [1e308, 1], [-1e308, 1]] },
-    { ...window, polygonArcsec: [[-1e308, 0], [0, -1e308], [1e308, 0], [0, 1e308]] }])
-    assert.throws(() => readEmissionWindow(invalid), /[Ee]mission window/);
 });
 
 test('window acts on the actual XYZ field, preserves interior material, and limits integrated projection', () => {

@@ -1,3 +1,4 @@
+import { CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, parseVolumeRecipe, type VolumeSlices } from '@cssearth/objects';
 import { collectArtifacts } from '../workflows/density/io.ts';
 /** Offline material replacement on the exact named Alignment density cloud. Never infer new shape from an image. */
 import { mkdir, readFile, writeFile, readdir } from 'node:fs/promises';
@@ -5,13 +6,11 @@ import { dirname, resolve, relative, isAbsolute, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import { parseDensityPlacement, densityPlacementTransform, createAlignedObservationMapping, parseCloudAppearance, prepareCloudDetail, CLOUD_DETAIL_METHOD } from '@cssearth/bake/volume';
-import { DENSITY_VOLUME_FORMAT, parseVolumeRecipe } from '@cssearth/objects';
 import type { ReconstructionWork } from '../../features/reconstruction/reconstruction-types.ts';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { rectifyObservation, writeObservationPanel } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
 import { registeredImageSampler, registeredScalarSampler, writeOriginalOverlay } from '../workflows/density/registered-image.ts';
 import { recolorCloudSlices, containedPath, loadVolumeSource } from '@cssearth/bake/volume/node';
-import { type VolumeSlices } from '@cssearth/objects';
 import { prepareDensityProjection } from '../workflows/density/density-projection.ts';
 import { prepareReconstructionStars } from '../workflows/density/reconstruction-stars.ts';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
@@ -124,7 +123,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   const referenceLeafIds=data.stacks.flatMap(stack=>stack.leaves.map(leaf=>leaf.id)),partLeafIds=referenceLeafIds.map(id=>'all-light::'+id);
   const inspection={...prepared,data:{...data,stacks:data.stacks.map(stack=>({...stack,leaves:stack.leaves.flatMap(leaf=>[leaf,{...leaf,id:'all-light::'+leaf.id}])}))}};
   await json(resolve(output,'prepared/inspection.json'),inspection);
-  await json(resolve(output,'source/cloud-parts.json'),{schema:'cssearth-cloud-parts@1',id:work.id,
+  await json(resolve(output,'source/cloud-parts.json'),{schema:CLOUD_PARTS_SCHEMA,id:work.id,
     parts:[{id:'all-light',label:'Reference cloud',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,
     composition:'One immutable Alignment density cloud; candidate images replace material colors only.'});
   await json(resolve(output,'inspection-object.json'),{...resultDescriptor,properties:{...resultDescriptor.properties,

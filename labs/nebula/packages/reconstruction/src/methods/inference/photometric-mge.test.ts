@@ -1,8 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createPhotometricMgePrior, readPhotometricMgeRecipe, type PhotometricMgeRecipe } from './photometric-mge.ts';
+import { createPhotometricMgePrior } from './photometric-mge.ts';
+import { readPhotometricMgeRecipe, type PhotometricMgeRecipe, type EmissionComponent } from '@cssearth/objects';
 import { conditionSimulationComponents, type SimulationDepthSettings } from './simulation-guided.ts';
-import { projectEmissionComponent, type EmissionComponent } from '@cssearth/bake/volume';
+import { projectEmissionComponent } from '@cssearth/bake/volume';
 
 const recipe: PhotometricMgeRecipe = {
   schema: 'cssearth-photometric-mge@1', id: 'fixture', centerIcrsDegrees: [201, -47], distancePc: 5426,

@@ -2,8 +2,9 @@ import { useSyncExternalStore } from 'react';
 import type { ControlPortals } from '../../ui/control-portals';
 import { createControlStore } from '../../state/control-store.ts';
 
-import type { CloudPartKind, CloudPart, CloudSelection, CloudBrightness, CloudContext } from '@cssearth/volume-viewer/scene/cloud-types';
-export type { CloudPartKind, CloudPart, CloudSelection, CloudBrightness, CloudContext } from '@cssearth/volume-viewer/scene/cloud-types';
+import type { CloudSelection, CloudBrightness, CloudContext } from '@cssearth/volume-viewer/scene/cloud-types';
+import type { CloudPartKind, CloudPart } from '@cssearth/objects';
+export type { CloudSelection, CloudBrightness, CloudContext } from '@cssearth/volume-viewer/scene/cloud-types';
 
 interface SavedValue { enabledIds: string[]; brightness: CloudBrightness; }
 interface BrightnessSpec { key: keyof CloudBrightness; label: string; }

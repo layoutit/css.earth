@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { fitEmissionField } from './fit.ts';
-import { createEmissionField, emissionKernel, EMISSION_KERNEL_INTEGRAL, projectEmissionComponent, type EmissionFieldModel, type EmissionFitInput, createEmissionWindowSampler, type EmissionWindow } from '@cssearth/bake/volume';
-import { readCompilerControls } from '@cssearth/objects';
+import { createEmissionField, emissionKernel, EMISSION_KERNEL_INTEGRAL, projectEmissionComponent, type EmissionFitInput, createEmissionWindowSampler } from '@cssearth/bake/volume';
+import { readCompilerControls, type EmissionFieldModel, type EmissionWindow } from '@cssearth/objects';
 
 function target(size = 128): EmissionFitInput {
   const values = new Float32Array(size * size);

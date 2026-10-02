@@ -1,3 +1,4 @@
+import { readCompactFiniteEmission, readCompactFiniteDataset, readCompactToneProjection, readSimulationEnvelopeRecord, validateDatasetToneCurve, type EmissionFieldModel, type VolumeSlices, type Vector3 } from '@cssearth/objects';
 /**
  * Offline replay of an accepted simulation-guided finite-emission delivery.
  *
@@ -14,36 +15,16 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { createEmissionField } from '../../fields/emission.ts';
 import { createEmissionMaterial } from '../../materials/component-material.ts';
-import { compilerSlabMaterial, datasetChannelGainMaterial, validateChannelGain, validateDatasetToneCurve, type DatasetTone } from '../../materials/slab-material.ts';
-import { createEnvelopeSampler, envelopeChromaticity, envelopeChromaSettings, validateEnvelopeSettings } from '../../fields/simulation-envelope.ts';
+import { compilerSlabMaterial, datasetChannelGainMaterial, validateChannelGain, type DatasetTone } from '../../materials/slab-material.ts';
+import { createEnvelopeSampler, envelopeChromaticity, envelopeChromaSettings } from '../../fields/simulation-envelope.ts';
 import { physicalToField, angularScale } from '../../coordinates/observer-tangent.ts';
 import { parseCloudAppearance } from '../../materials/cloud-appearance.ts';
-import type { EmissionFieldModel } from '../../contracts/emission.ts';
-import type { VolumeSlices } from '@cssearth/objects';
-import type { Vector3 } from '@cssearth/objects';
-import { requireRecord as record } from '@cssearth/core';
+
 import { recolorCloudSlices } from '../slices/material.ts';
 import { loadSimulationPrior } from './simulation-prior.ts';
 import { localPath, pinned, type Pin } from './io.ts';
 import { containedPath } from './density-grid.ts';
 
-export const COMPACT_FINITE_EMISSION_SCHEMA = 'cssearth-compact-finite-emission@2';
-
-const parsePin = (value: unknown, label: string): Pin => {
-  const pin = record(value, label);
-  assert.ok(typeof pin.path === 'string', `${label} needs a path`);
-  return { path: pin.path };
-};
-const numbers = (value: unknown, length: number, label: string): number[] => {
-  assert.ok(Array.isArray(value) && value.length === length && value.every(entry => typeof entry === 'number' && Number.isFinite(entry)), `Invalid ${label}`);
-  return value as number[];
-};
-function bounds2(value: unknown, label: string) {
-  const raw = record(value, label);
-  const min = numbers(raw.min, 2, `${label} minimum`), max = numbers(raw.max, 2, `${label} maximum`);
-  assert.ok(min[0]! < max[0]! && min[1]! < max[1]!, `Invalid ${label}`);
-  return { min: [min[0]!, min[1]!] as [number, number], max: [max[0]!, max[1]!] as [number, number] };
-}
 /** Delivered JSON may be gzipped; the path says which. */
 async function json(root: string, pin: Pin): Promise<unknown> {
   const bytes = await pinned(root, pin);
@@ -64,58 +45,27 @@ export interface CompactFiniteDataset {
  * Returns the painted banks; the delivery owner compiles, packs and verifies them.
  */
 export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, destination: string): Promise<CompactFiniteDataset[]> {
-  const input = record(await json(root, inputPin), 'compact finite emission');
-  assert.equal(input.schema, COMPACT_FINITE_EMISSION_SCHEMA);
-  assert.equal(input.method, 'simulation-guided-finite-material@1');
-  const geometry = record(input.geometry, 'delivered geometry');
-  const distance = geometry.observerDistanceKpc;
-  assert.ok(typeof distance === 'number' && Number.isFinite(distance) && distance > 0, 'Delivered observer distance must be positive kpc.');
-  const modelTangent = bounds2(geometry.tangentBoundsKpc, 'model tangent bounds');
-  const material = record(input.material, 'delivered material settings');
-  const exposureGain = material.exposureGain, fullChromaAlphaByte = material.fullChromaAlphaByte;
-  assert.ok(typeof exposureGain === 'number' && exposureGain > 0, 'Delivered exposure gain must be positive.');
-  assert.ok(typeof fullChromaAlphaByte === 'number' && fullChromaAlphaByte >= 1 && fullChromaAlphaByte <= 255, 'Delivered chroma alpha limit must be a byte.');
+  const input = readCompactFiniteEmission(await json(root, inputPin));
+  const { distance, modelTangent, exposureGain, fullChromaAlphaByte, encoding, datasets } = input;
   const appearance = parseCloudAppearance(input.appearance);
   assert.equal(appearance.detailStrength, 0, 'Finite component material does not support projected detail enhancement');
-  const encoding = record(input.encoding, 'delivered encoding');
-  assert.equal(encoding.format, 'webp');
-  assert.ok(typeof encoding.quality === 'number' && Number.isInteger(encoding.quality), 'Delivered encoder quality must be an integer.');
-
-  const field = await json(root, parsePin(input.emissionField, 'emission field')) as EmissionFieldModel;
+  const field = await json(root, input.emissionField) as EmissionFieldModel;
   const preparedField = createEmissionField(field);
-  const slices = await json(root, parsePin(input.neutralSlices, 'neutral slices')) as VolumeSlices;
-  const neutralDirectory = localPath(root, (() => {
-    const value = input.neutralTextures;
-    assert.ok(typeof value === 'string' && value.length > 0, 'Delivered neutral texture directory is missing.');
-    return value;
-  })());
+  const slices = await json(root, input.neutralSlices) as VolumeSlices;
+  const neutralDirectory = localPath(root, input.neutralTextures);
   const A = angularScale(distance);
 
-  const envelopeRecord = record(await json(root, parsePin(input.envelope, 'envelope')), 'envelope record');
-  assert.equal(envelopeRecord.schema, 'cssearth-simulation-envelope@1');
-  const settings = validateEnvelopeSettings(envelopeRecord.settings), chroma = envelopeChromaSettings(settings);
-  const gw = envelopeRecord.width, gh = envelopeRecord.height;
-  assert.ok(Number.isInteger(gw) && Number.isInteger(gh), 'Envelope grid must be integral.');
-  const gain = envelopeRecord.gain;
-  assert.ok(Array.isArray(gain) && gain.length === Number(gw) * Number(gh) &&
-    gain.every(value => typeof value === 'number' && Number.isFinite(value) && value >= 0), 'Invalid simulation envelope record');
-  const prior = record(input.priorCloud, 'prior cloud');
-  const depthPrior = await loadSimulationPrior(root, parsePin(prior.recipe, 'prior recipe'), distance, modelTangent);
-  const zRange = numbers(envelopeRecord.zRange, 2, 'envelope depth range');
-  const envelopeGrid = { width: Number(gw), height: Number(gh), bounds: bounds2(envelopeRecord.bounds, 'envelope bounds'),
-    zRange: [zRange[0]!, zRange[1]!] as [number, number], gain: Float32Array.from(gain as number[]) };
+  const envelopeRecord = readSimulationEnvelopeRecord(await json(root, input.envelope));
+  const settings = envelopeRecord.settings, chroma = envelopeChromaSettings(settings);
+  const depthPrior = await loadSimulationPrior(root, input.priorRecipe, distance, modelTangent);
+  const envelopeGrid = { ...envelopeRecord, gain: Float32Array.from(envelopeRecord.gain) };
   const envelopeAt = createEnvelopeSampler(envelopeGrid, depthPrior);
 
-  const datasets = input.datasets;
-  assert.ok(Array.isArray(datasets) && datasets.length > 0, 'A delivered finite model has at least one dataset.');
   // A dataset tone curve is indexed by the model's own front-projection byte at the texel's sky position, read
   // from the delivered projection exactly as the accepted bake read the model's `fit-projection.png`.
   const levelAt = input.toneProjection === undefined ? null : await (async () => {
-    const grid = record(input.toneProjection, 'delivered tone projection');
-    const pw = grid.width, ph = grid.height;
-    assert.ok(Number.isInteger(pw) && Number.isInteger(ph) && Number(pw) > 0 && Number(ph) > 0, 'A tone projection needs its pinned grid.');
-    const pb = bounds2(grid.tangentBoundsKpc, 'tone projection bounds'), w = Number(pw), h = Number(ph);
-    const projection = await sharp(await pinned(root, parsePin(grid.image, 'tone projection image'))).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+    const grid = readCompactToneProjection(input.toneProjection), pb = grid.bounds, w = grid.width, h = grid.height;
+    const projection = await sharp(await pinned(root, grid.image)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
     assert.ok(projection.info.width === w && projection.info.height === h, 'Front projection differs from its pinned grid.');
     const pc = projection.info.channels, pd = projection.data;
     const at = (i: number, j: number) => pd[(Math.min(h - 1, Math.max(0, j)) * w + Math.min(w - 1, Math.max(0, i))) * pc]!;
@@ -129,21 +79,14 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
   })();
   const seen = new Set<string>(), results: CompactFiniteDataset[] = [];
   for (const value of datasets as unknown[]) {
-    const dataset = record(value, 'delivered dataset');
-    const imageId = dataset.imageId;
-    assert.ok(typeof imageId === 'string' && /^[a-z][a-z0-9-]*$/.test(imageId), 'Invalid delivered dataset id.');
-    assert.ok(!seen.has(imageId), 'Duplicate delivered dataset.'); seen.add(imageId);
-    const filter = record(dataset.densityFilter, 'delivered density filter');
-    assert.deepEqual({ cutoff: filter.cutoff, softness: filter.softness, showRemoved: filter.showRemoved },
-      { cutoff: 0, softness: .25, showRemoved: false }, 'Compact replay requires the accepted unchanged density filter.');
-    const bounds = bounds2(dataset.tangentBoundsKpc, `${imageId} tangent bounds`);
+    const dataset = readCompactFiniteDataset(value, seen), { imageId, bounds } = dataset;
 
-    const registered = await pinned(root, parsePin(dataset.registered, `${imageId} registered image`));
+    const registered = await pinned(root, dataset.registered);
     const decoded = await sharp(registered).removeAlpha().raw().toBuffer({ resolveWithObject: true });
     const { width, height } = decoded.info, rgb = decoded.data;
     // Only this mask's alpha is read, at the registered resolution and again at envelope scale, exactly
     // as the accepted bake read the registered original's alpha.
-    const maskBytes = await pinned(root, parsePin(dataset.coverage, `${imageId} coverage mask`));
+    const maskBytes = await pinned(root, dataset.coverage);
     const coverage = await sharp(maskBytes).resize(width, height, { fit: 'fill' }).ensureAlpha().raw().toBuffer();
 
     const datasetMaterial = createEmissionMaterial(field, { id: imageId, sampleRgb(x, y, out) {

@@ -1,3 +1,4 @@
+import { DATASET_TONE_CURVE_SCHEMA, type DatasetToneCurve } from '@cssearth/objects';
 /**
  * Pure pieces of the dataset tone fit: paired pixels, the monotone correction they imply, and its composition
  * onto the dataset's current tone curve. `dataset-tone-fit.ts` owns the loop, bakes and measurements.
@@ -10,7 +11,7 @@
  * that rides the opacity shoulder. Exposure is solved jointly: the projection is re-exposed analytically from
  * the exposure-free integral, the curve re-fitted, and the whole range (p99, p99.9, core) scored.
  */
-import { datasetToneRender, datasetToneValue, type DatasetToneCurve } from '@cssearth/bake/volume';
+import { datasetToneRender, datasetToneValue } from '@cssearth/bake/volume';
 import { datasetLevelPairs, datasetLevelStatistics, untonedRender, type DatasetLevelGrid, type DatasetLevelMaterial } from '../../server/services/dataset-levels.ts';
 
 /** Largest and smallest gain one knot may take against its input: past these a parameter is pinned. */
@@ -21,7 +22,7 @@ export function identityToneCurve(step = 16): DatasetToneCurve {
   const knots: number[] = [];
   for (let k = 0; k < 255; k += step) knots.push(k);
   knots.push(255);
-  return { schema: 'cssearth-dataset-tone-curve@1', knots, channels: [knots.slice(), knots.slice(), knots.slice()] };
+  return { schema: DATASET_TONE_CURVE_SCHEMA, knots, channels: [knots.slice(), knots.slice(), knots.slice()] };
 }
 
 /** Pool-adjacent-violators: the weighted least-squares nondecreasing sequence. */
@@ -112,7 +113,7 @@ export function composeToneCurve(current: DatasetToneCurve, corrections: readonl
     for (let k = 1; k < smooth.length; k++) values.push(Math.min(1020, Math.max(values[k - 1]!, smooth[k]!)));
     return values.map(value => Math.round(value * 1000) / 1000);
   }) as [number[], number[], number[]];
-  return { curve: { schema: 'cssearth-dataset-tone-curve@1' as const, knots: current.knots.slice(), channels }, pinned };
+  return { curve: { schema: DATASET_TONE_CURVE_SCHEMA, knots: current.knots.slice(), channels } satisfies DatasetToneCurve, pinned };
 }
 
 /** Share of target light the shared opacity cannot carry: a render level never exceeds its projection byte. */

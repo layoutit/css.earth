@@ -2,8 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createEmissionMaterial } from './component-material.ts';
 import { createEmissionField, prepareEmissionComponent, samplePreparedEmissionComponent } from '../fields/emission.ts';
-import type { EmissionComponent, EmissionFieldModel } from '../contracts/emission.ts';
-import type { EmissionVector3 } from '@cssearth/objects';
+
+import { type EmissionComponent, type EmissionFieldModel, type EmissionVector3 } from '@cssearth/objects';
 
 function model(): EmissionFieldModel {
   const component = (id: string, x: number, z: number): EmissionComponent => ({ id, basisId: id, center: [x, 0, z],

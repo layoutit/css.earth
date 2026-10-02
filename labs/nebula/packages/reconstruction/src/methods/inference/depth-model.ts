@@ -1,6 +1,7 @@
 import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 import {jointPath,jointRecord} from '../joint/model.ts';
-import type { EmissionComponent } from '@cssearth/bake/volume';
+
+import type { EmissionComponent } from '@cssearth/objects';
 type Pair = [number, number];
 type Triple = [number, number, number];
 export interface DepthSurface {

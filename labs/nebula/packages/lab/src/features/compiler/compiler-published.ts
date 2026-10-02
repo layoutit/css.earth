@@ -1,9 +1,9 @@
+import { PHOTOMETRIC_MGE_SCHEMA, verifySampledEvidence } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readCompilerRecipe, readCompilerRequest, type CompilerRequest } from './model.ts';
 import { readCompilerResult, type CompilerResult } from './result.ts';
 import { sampledOwnerPins } from '../sampled-prior/ownership.ts';
 import { readSampledRecipe } from '../sampled-prior/model.ts';
-import { verifySampledEvidence } from '@cssearth/objects';
 
 interface Pin { path: string }
 interface Published { recipePath: string; result: Pin; inputs: Pin[] }
@@ -64,7 +64,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
     throw new Error('Prepared nebula method does not match its current recipe.');
   if (recipe.photometricPriorRecipe) {
     const model: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.photometricPriorRecipe)![1]));
-    if (!record(model) || model.schema !== 'cssearth-photometric-mge@1' || model.id !== recipe.id || !record(method.photometricPrior))
+    if (!record(model) || model.schema !== PHOTOMETRIC_MGE_SCHEMA || model.id !== recipe.id || !record(method.photometricPrior))
       throw new Error('Prepared nebula omits its configured photometric model.');
     const evidence = pin(model.evidence), snapshot = pin(method.photometricPrior.recipe), evidenceSnapshot = pin(method.photometricPrior.evidence);
     if (!evidence.path.startsWith('labs/nebula/models/') ||

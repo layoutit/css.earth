@@ -95,3 +95,10 @@ catalog. Scientific classification and citation interpretation stay in catalog, 
 Surface-feature wire records, normalized reader projections and catalogue parsing also live in `src/prepared-data/`;
 feature geometry, sampling, file I/O, transport and label mounting remain with bake and renderer.
 Contract tests use node:test in the packages lane.
+
+Retained emission fields, photometric envelopes/colors and MGE recipes, emission windows, simulation-envelope
+settings/records, dataset tone curves, compact compiler/sampled/symmetry/finite-emission inputs and component
+material receipts live in `src/volume/`, alongside the cloud-parts catalogue. Their schema identifiers, pure
+parsers and little-endian compact color/emission decoders are exported through `@cssearth/objects`. Sampling,
+fitting, selection, decompression, compilation and file I/O stay with bake, reconstruction, lab and volume-viewer.
+Contract tests use node:test in the packages lane; replay and selection conformance stay with their owners.

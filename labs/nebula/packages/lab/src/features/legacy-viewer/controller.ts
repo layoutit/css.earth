@@ -1,14 +1,13 @@
-import { PREPARED_CSS_VOLUME_SCHEMA, validateCloudDensityFilter, type CloudDensityFilter, type PreparedCssImageLayers, type PreparedCssVolume } from '@cssearth/objects';
+import { PREPARED_CSS_VOLUME_SCHEMA, validateCloudDensityFilter, parseCloudCatalogue, type CloudDensityFilter, type PreparedCssImageLayers, type PreparedCssVolume } from '@cssearth/objects';
 import { materialResources, sharesMaterialGeometry } from './material-resources';
 import { createMaterialSlots, resyncCloudSupport } from './material-slots';
 import { mountOverlayLeaves } from '@cssearth/volume-viewer/scene/image-plane';
 import type { AppliedStarLayers } from '../star-removal/star-removal-types.ts';
 import { parseOverlayVariants, variantsForImage, type ImageLayer, type OverlayVariant } from './overlay-variants';
 import { defaultOverlayPlacement, updateOverlayPlacement, overlayPlacementTransform, type OverlayPlacement } from '@cssearth/bake/volume';
-
 import { readOverlaySessions, writeOverlaySessions, resolveSavedPlacement } from '../alignment/overlay-store';
 import { createToneResourceController, type ToneResource } from '../../adapters/viewer/tone-runtime';
-import { cloudCompositeOpacity, createCloudInspection, nativeCloudBrightness, parseCloudCatalogue, validateCloudBrightness } from '@cssearth/volume-viewer/scene/cloud-inspection';
+import { cloudCompositeOpacity, createCloudInspection, nativeCloudBrightness, validateCloudBrightness } from '@cssearth/volume-viewer/scene/cloud-inspection';
 import type { CloudBrightness, CloudStarOptions, CloudStarContext } from '@cssearth/volume-viewer/scene/cloud-types';
 import { mountPreparedLmcStars, parsePreparedLmcStars } from '../../adapters/viewer/catalogue-stars';
 import { loadRegisteredOverlay, mountReconstructionOverlay } from '../../adapters/viewer/reconstruction-overlay';

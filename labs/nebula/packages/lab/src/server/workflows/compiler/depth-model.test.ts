@@ -4,7 +4,8 @@ import { mkdir, mkdtemp, rm, writeFile, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { conditionDepthComponents, depthSurfaceAt, readDepthRecipe, verifyDepthEvidence, loadDepthModel, type DepthRecipe, type DepthSurface } from './depth-model.ts';
-import { createEmissionField, projectEmissionComponent, type EmissionComponent, type EmissionFieldModel, type EmissionFitInput } from '@cssearth/bake/volume';
+import { createEmissionField, projectEmissionComponent, type EmissionFitInput } from '@cssearth/bake/volume';
+import { type EmissionComponent, type EmissionFieldModel } from '@cssearth/objects';
 import { fitEmissionField } from './fit.ts';
 
 function recipe(features = false): DepthRecipe {

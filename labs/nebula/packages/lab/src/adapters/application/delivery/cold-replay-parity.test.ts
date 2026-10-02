@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
-import { readCompactCompiler } from './compact-compiler.ts';
+
+import { readCompactCompiler } from '@cssearth/objects';
 import { assertReplayScene } from './cold-replay-parity.ts';
 
 test('cold parity rejects independent field, frame, star, dataset and alpha mutations', async () => {

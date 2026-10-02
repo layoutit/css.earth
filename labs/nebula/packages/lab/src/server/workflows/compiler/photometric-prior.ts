@@ -1,10 +1,11 @@
+import { PHOTOMETRIC_ENVELOPE_SCHEMA, readPhotometricMgeRecipe as readScientificRecipe, type PhotometricMgeRecipe, type EnvelopeColors, type EmissionFieldModel } from '@cssearth/objects';
 import { readFile, realpath } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { jointPath, jointRecord } from '../../../features/joint-fit/model.ts';
-import { readPhotometricMgeRecipe as readScientificRecipe, createPhotometricMgePrior, type PhotometricMgeRecipe } from '@cssearth/nebula-reconstruction/methods/inference/photometric-mge';
+import { createPhotometricMgePrior } from '@cssearth/nebula-reconstruction/methods/inference/photometric-mge';
 import { fitSimulationGuidedEmission, type SimulationDepthSettings } from '@cssearth/nebula-reconstruction/methods/inference/simulation-guided';
 import { fitSimulationEnvelope } from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
-import { createPhotometricEmission, type EnvelopeColors, envelopeChromaticity, envelopeChromaSettings, pixelCenter, type MaterialImage, type EmissionFieldModel, type EmissionFitInput } from '@cssearth/bake/volume';
+import { createPhotometricEmission, envelopeChromaticity, envelopeChromaSettings, pixelCenter, type MaterialImage, type EmissionFitInput } from '@cssearth/bake/volume';
 export function readPhotometricMgeRecipe(value: unknown): PhotometricMgeRecipe {
   const recipe = readScientificRecipe(value);
   if (!recipe.evidence.path.startsWith('labs/nebula/models/')) throw new TypeError('Photometric evidence must be object-owned.');
@@ -47,7 +48,7 @@ export function fitPhotometricEmission(input: EmissionFitInput, controls: unknow
   const detail = envelope ? input.target.map((value, p) => Math.max(0, value - envelope.projection[p]!)) : input.target;
   const fitted = fitSimulationGuidedEmission({ ...input, target: detail }, controls, model.prior, settings, { signal, onProgress, maximumComponents: model.recipe.residualMaximumComponents });
   if (!envelope) return fitted;
-  fitted.field.photometricEnvelope = { schema: 'cssearth-photometric-envelope@1', priorIdentity: model.prior.identity,
+  fitted.field.photometricEnvelope = { schema: PHOTOMETRIC_ENVELOPE_SCHEMA, priorIdentity: model.prior.identity,
     recipe: model.recipe, ...envelope.grid, gain: Array.from(envelope.grid.gain) };
   fitted.field.identity = `${model.recipe.id}-photometric-envelope`;
   fitted.field.bounds = createPhotometricEmission(fitted.field).bounds;
