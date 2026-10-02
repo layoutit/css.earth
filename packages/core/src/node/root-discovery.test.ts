@@ -53,6 +53,13 @@ it('Git discovery starts in the supplied directory and preserves each missing po
     execFileSync('git', ['init', '-q', repo]);
     assert.equal(await discoverGitRoot({ startDirectory: nested, missing: { behavior: 'throw' } }), repo);
     assert.equal(await discoverGitRoot({ startDirectory: root, missing: { behavior: 'undefined' } }), undefined);
+    const cwd = process.cwd();
+    try {
+      process.chdir(nested);
+      assert.equal(await discoverGitRoot({ missing: { behavior: 'throw' } }), repo);
+      process.chdir(root);
+      assert.equal(await discoverGitRoot({ missing: { behavior: 'undefined' } }), undefined);
+    } finally { process.chdir(cwd); }
     assert.equal(await discoverGitRoot({ startDirectory: root, missing: { behavior: 'fallback', directory: 'fallback' } }), 'fallback');
     await assert.rejects(discoverGitRoot({ startDirectory: root, missing: { behavior: 'throw', error: () => new Error('missing git root') } }), { message: 'missing git root' });
   } finally { await rm(root, { recursive: true, force: true }); }

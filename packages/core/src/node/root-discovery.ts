@@ -36,10 +36,10 @@ export function discoverRoot(options: RootLocation & { missing: MissingRoot }): 
 }
 
 const execFileAsync = promisify(execFile);
-/** Git lookup remains asynchronous; callers own caching and when they capture their cwd. */
-export function discoverGitRoot(options: { startDirectory: string; missing: RequiredRoot }): Promise<string>;
-export function discoverGitRoot(options: { startDirectory: string; missing: MissingRoot }): Promise<string | undefined>;
-export async function discoverGitRoot(options: { startDirectory: string; missing: MissingRoot }): Promise<string | undefined> {
+/** Git lookup remains asynchronous; callers own caching. Without a `startDirectory` git inherits the process's cwd at call time. */
+export function discoverGitRoot(options: { startDirectory?: string; missing: RequiredRoot }): Promise<string>;
+export function discoverGitRoot(options: { startDirectory?: string; missing: MissingRoot }): Promise<string | undefined>;
+export async function discoverGitRoot(options: { startDirectory?: string; missing: MissingRoot }): Promise<string | undefined> {
   try {
     const { stdout } = await execFileAsync('git', ['rev-parse', '--show-toplevel'], { cwd: options.startDirectory });
     return stdout.trim();

@@ -26,7 +26,7 @@ const SHA256 = /^[0-9a-f]{64}$/u;
 
 let cachedRepoRoot: Promise<string | null> | undefined;
 function repoRoot(): Promise<string | null> {
-  cachedRepoRoot ??= discoverGitRoot({ startDirectory: process.cwd(), missing: { behavior: 'undefined' } }).then(root => root ?? null);
+  cachedRepoRoot ??= discoverGitRoot({ missing: { behavior: 'undefined' } }).then(root => root ?? null);
   return cachedRepoRoot;
 }
 
