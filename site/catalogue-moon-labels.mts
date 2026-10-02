@@ -1,3 +1,4 @@
+import { fromEyeM } from '@cssearth/engine';
 import { createOpacityFader } from '@cssearth/renderer';
 import type { OpacityClock } from '@cssearth/renderer/stars/opacity-clock.ts';
 import { admitStableLabels } from '@cssearth/renderer/labels/stable-label-layout.ts';
@@ -44,7 +45,7 @@ export function projectMoonLabels(moons: readonly Moon[], widths: readonly numbe
   budget = createLabelBudget(viewport.widthPixels ?? 1000, viewport.heightPixels ?? 800, [], exclusions), previous: ReadonlySet<number> = new Set(),
   projectedPoints?: Map<number, { x: number; y: number }>, measurementDemand?: Set<number>) {
   const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
-  const eye = (point: readonly number[]) => rotateWorldPosition(rotation, [point[0] - world.pose.positionM[0], point[1] - world.pose.positionM[1], point[2] - world.pose.positionM[2]]);
+  const eye = (point: readonly number[]) => rotateWorldPosition(rotation, fromEyeM(world.pose, point));
   const parentEyes = new Map([...parents].map(([id, point]) => [id, eye(point.positionM)]));
   const selectedEye = eye(selected.positionM);
   const halfWidth = (viewport.widthPixels ?? 1000) / 2, halfHeight = (viewport.heightPixels ?? 800) / 2;

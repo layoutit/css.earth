@@ -1,3 +1,4 @@
+import { fromEyeM } from '@cssearth/engine';
 import { createPreparedLeafFrustum, preparedLeafMayContribute, type PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import { cssViewFromOrientation, worldRotationCss } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -93,7 +94,7 @@ function preparedSkyCameraPose(world: WorldCameraPose, viewport: WorldCameraView
   const translation = [viewport.principalOffsetPixels[0], viewport.principalOffsetPixels[1], viewport.focalPixels];
   if (parallax !== undefined) {
     validatePreparedSkyParallax(parallax);
-    const displacement = world.pose.positionM.map((n, axis) => (n - parallax.originM[axis]) / parallax.metersPerCssPixel);
+    const displacement = fromEyeM(world.pose, parallax.originM).map(n => (0 - n) / parallax.metersPerCssPixel);
     for (let row = 0; row < 3; row++) translation[row] -= view[row * 3] * displacement[0] + view[row * 3 + 1] * displacement[1] + view[row * 3 + 2] * displacement[2];
     if (!translation.every(Number.isFinite)) throw new TypeError('Prepared sky observer displacement is invalid.');
   }

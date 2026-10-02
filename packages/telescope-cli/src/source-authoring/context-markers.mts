@@ -19,10 +19,11 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { hostLitGray, linearToSrgb } from '@cssearth/bake/objects/color';
+import { hostLitGray, linearToSrgb, srgbToLinear } from '@cssearth/bake/objects/color';
 import { loadDiscBandColor } from '@cssearth/bake/objects/layers/observation';
-import { limbIntensity, loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
+import { limbIntensity, loadStellarPhotometricColor, readPublishedLimbDarkening } from '@cssearth/bake/objects/stellar';
 import { colorForValue, loadScienceSurface } from '@cssearth/bake/objects/raster';
+import { MISSING_COVERAGE_STYLES } from '@cssearth/bake/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const objects = resolve(import.meta.dirname, '../../../../src/objects');
@@ -32,6 +33,7 @@ export const MARKER_SIZE = 512;
 const FILL = 0.9;
 /** Borders a dataset draws are black, as in the papers' figures and the prepared dataset. */
 const OUTLINE = [0, 0, 0] as const;
+const NO_DATA = MISSING_COVERAGE_STYLES.gray.base as readonly [number, number, number];
 
 const readJson = async (path: string) => JSON.parse(await readFile(path, 'utf8')) as unknown;
 const defaultSurface = async (id: string) => {
@@ -80,12 +82,18 @@ export async function planetMarker(id: string) {
   const map = await loadScienceSurface(source, science);
   const palette = { minimum: Number(science.minimum), maximum: Number(science.maximum), colors: science.colors as string[] };
   const pixel = 360 / (Math.PI * MARKER_SIZE * FILL);
+  // A map with a limb law is dimmed toward its edge as the sphere's limb plate dims it.
+  const law = science.limbDarkening === undefined ? null
+    : readPublishedLimbDarkening(await readJson(resolve(source, requireString(requireRecord(science.limbDarkening).path, `${id} limbDarkening.path`))));
+  const dim = (color: readonly [number, number, number], mu: number) => law === null ? color
+    : color.map(value => Math.round(255 * linearToSrgb(srgbToLinear(value / 255) * Math.max(0, limbIntensity(mu, law))))) as unknown as readonly [number, number, number];
   return disc((x, y) => {
     // Orthographic view from the host star: the substellar point (latitude 0, longitude 0) at the centre, east to the right.
     const z = Math.sqrt(Math.max(0, 1 - x * x - y * y)), latitude = Math.asin(y) * 180 / Math.PI, longitude = Math.atan2(x, z) * 180 / Math.PI;
     const value = map.sample(longitude, latitude);
-    if (value === null) return null;
-    return map.outline?.(longitude, latitude, pixel) ? OUTLINE : colorForValue(value, palette as never) as [number, number, number];
+    // Surface the dataset gives no value is the shared no-data gray, as the sphere draws it, not a hole in the disc.
+    if (value === null) return dim(NO_DATA, z);
+    return map.outline?.(longitude, latitude, pixel) ? OUTLINE : dim(colorForValue(value, palette as never) as [number, number, number], z);
   });
 }
 

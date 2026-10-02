@@ -1,3 +1,4 @@
+import { eyeDistanceM } from '@cssearth/engine';
 import { worldCameraViewport, type WorldCameraViewport } from '../navigation/world-camera.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 
@@ -11,7 +12,7 @@ const RESTORED_BY_RADII = 32;
 export function detailedFocusContextOpacity(world: WorldCameraPose,
   focus: SelectedBank | null): number {
   if (!focus) return 1;
-  const radii = Math.hypot(...world.pose.positionM.map((value, axis) => value - focus.positionM[axis])) / focus.framingRadiusM;
+  const radii = eyeDistanceM(world.pose, focus.positionM) / focus.framingRadiusM;
   const progress = Math.max(0, Math.min(1, (radii - HIDDEN_WITHIN_RADII) / (RESTORED_BY_RADII - HIDDEN_WITHIN_RADII)));
   return progress * progress * (3 - 2 * progress);
 }
@@ -22,7 +23,7 @@ export function selectedBodyContextOpacity(world: WorldCameraPose, viewport: Wor
   body: { positionM: readonly number[]; radiusM: number }): number {
   const extent = Math.min(viewport.widthPixels ?? Infinity, viewport.heightPixels ?? Infinity);
   if (!(extent > 0 && Number.isFinite(extent))) return 1;
-  const distance = Math.hypot(...world.pose.positionM.map((value, axis) => value - body.positionM[axis]!));
+  const distance = eyeDistanceM(world.pose, body.positionM);
   if (distance <= body.radiusM) return 0;
   const diameter = 2 * worldCameraViewport(world, viewport).focalPixels * body.radiusM /
     Math.sqrt(distance * distance - body.radiusM * body.radiusM);

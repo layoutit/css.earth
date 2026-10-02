@@ -1,0 +1,19 @@
+{
+  "schema": "cssearth-neutron-star@1",
+  "id": "psr-j0437-4715",
+  "radiusKm": 11.36,
+  "radiusSource": "Choudhury et al. (2024), ApJL 971, L20, Table A.1: equatorial radius 11.36 +0.95/-0.63 km (68% credible interval) from NICER pulse-profile modelling (https://arxiv.org/abs/2407.06789): 11.36 +/- 0.95 km, inferred from the pulse shape.",
+  "massSolar": 1.418,
+  "massSource": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: pulsar mass from the Shapiro delay (https://arxiv.org/abs/2407.07132)",
+  "distanceParsecs": 156.98,
+  "distanceSource": "156.98 +/- 0.15 pc from Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: distance from the Shklovskii effect on the orbital period (https://arxiv.org/abs/2407.07132).",
+  "spinFrequencyHz": 173.6879456649439,
+  "spinInclinationDegrees": 137.506,
+  "spinSource": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: spin frequency, and the orbital inclination 137.506(16) degrees that Choudhury et al. (2024) use as the spin axis's inclination (https://arxiv.org/abs/2407.07132)",
+  "angularDiameterMas": 9.67e-7,
+  "angularDiameterSource": "Computed here from the radius and distance: 2 x 11.36 km at 156.98 pc. No telescope resolves it.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the radius the pulse-profile fit infers. The star spins fast enough to be slightly flattened, and gravity bends its light so that more than half the surface is visible at once; neither is drawn."
+  }
+}

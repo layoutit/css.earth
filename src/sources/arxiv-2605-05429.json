@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-2605-05429",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Qi et al. (2026): Multiwavelength Analysis of PSR J0437-4715 with Pulse Profile Modeling",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2605.05429"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ae5c9c"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2605.05429",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/ae5c9c",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2605.05429",
+      "checkedOn": "2026-10-02",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Qi et al. (2026)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2605.05429"
+    }
+  ],
+  "creators": [
+    "Liqiang Qi",
+    "Juan Zhang",
+    "Weiwei Xu",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}
