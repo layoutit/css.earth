@@ -27,7 +27,7 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 import worldSummary from '../../src/objects/sun/prepared/world-context-summary.json';
 // The same hashed file the client's `world-context-plan.mts` fetches, requested by the head (startup-requests.mts).
 import worldSummaryUrl from '../../src/objects/sun/prepared/world-context-summary.json?url';
-import { worldCameraOf } from '@cssearth/renderer';
+import { worldCameraOf } from '@cssearth/objects';
 import { MOBILE_VIEWPORT_QUERY } from '../runtime-policy.mts';
 const worldCamera = worldCameraOf(worldSummary);
 

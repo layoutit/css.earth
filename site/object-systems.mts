@@ -1,5 +1,5 @@
 import type { PositionM } from '@cssearth/engine';
-import type { PreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
+import type { PreparedWorldContext } from '@cssearth/objects';
 import type { ObjectEntry } from './objects.mts';
 import { planetarySystemMembers, type PlanetarySystemMembers } from './planetary-system-members.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';

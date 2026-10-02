@@ -1,3 +1,5 @@
+import { scanCssDeclarations } from './css-declaration-scanner.ts';
+
 // Tiled page leaves as prepared records (the last step of the presentation bindings, prepared-presentation-bindings.ts).
 //
 // At a small level every page of a bank is one tile of a shared sheet (paged-ellipsoid texture-levels.ts). The node
@@ -34,17 +36,10 @@ const STYLE_NAMES: Readonly<Record<string, string>> = { backgroundPosition: 'bac
 
 /** A static style's declarations, split where CSS splits them: not inside quotes or parentheses (URLs). */
 function declarations(style: string) {
-  const parts: string[] = [];
-  let start = 0, depth = 0, quote = '';
-  for (let at = 0; at <= style.length; at++) {
-    const char = style[at];
-    if (quote) { if (char === quote && style[at - 1] !== '\\') quote = ''; continue; }
-    if (char === '"' || char === "'") quote = char;
-    else if (char === '(') depth++;
-    else if (char === ')') depth--;
-    else if ((char === ';' || at === style.length) && depth === 0) { const part = style.slice(start, at).trim(); if (part) parts.push(part); start = at + 1; }
-  }
-  return parts.map(part => { const colon = part.indexOf(':'); return { name: part.slice(0, colon).trim(), value: part.slice(colon + 1).trim(), text: part }; });
+  return [...scanCssDeclarations(style)].map(part => {
+    const colon = part.indexOf(':');
+    return { name: part.slice(0, colon).trim(), value: part.slice(colon + 1).trim(), text: part };
+  });
 }
 function interned(tree: Tree, nodes: readonly TreeNode[], properties: readonly Property[]): Tree {
   const kept: Property[] = [], ids = new Map<string, number>();

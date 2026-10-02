@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-4696",
+  "card": {
+    "text": "The central giant galaxy of the Centaurus Cluster (Abell 3526), 40.3 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-lauer2014apj-797-82l",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/797/82",
+        "label": "Lauer et al. (2014), ApJ 797, 82 (Brightest cluster galaxies at the present epoch), Table 1 (CDS J/ApJ/797/82/bcg): Abell 3526, BCG N4696, heliocentric velocity 2904 +/- 40 km/s; Abell 1060, BCG N3311, 3858 +/- 5 km/s.",
+        "checked": "2026-10-02",
+        "locator": "membership: Galaxy cluster, Centaurus"
+      },
+      {
+        "catalogueId": "publication-tully2023apj-944-94t",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94/groups): group 1PGC 43296 (NGC 4696, 49 galaxies) DMzp = 33.027 +/- 0.048, 40.3 Mpc; group 1PGC 31478 (NGC 3311, 67 galaxies) DMzp = 33.673 +/- 0.046, 54.3 Mpc. A group's distance averages its members'.",
+        "checked": "2026-10-02",
+        "locator": "distance: 40.3 Mpc (−900,000 / +900,000 pc)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The central giant galaxy of the Centaurus Cluster (Abell 3526), 40.3 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-lauer2014apj-797-82l",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/797/82",
+        "label": "Lauer et al. (2014), ApJ 797, 82 (Brightest cluster galaxies at the present epoch), Table 1 (CDS J/ApJ/797/82/bcg): Abell 3526, BCG N4696, heliocentric velocity 2904 +/- 40 km/s; Abell 1060, BCG N3311, 3858 +/- 5 km/s.",
+        "checked": "2026-10-02",
+        "locator": "membership: Galaxy cluster, Centaurus"
+      },
+      {
+        "catalogueId": "publication-tully2023apj-944-94t",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94/groups): group 1PGC 43296 (NGC 4696, 49 galaxies) DMzp = 33.027 +/- 0.048, 40.3 Mpc; group 1PGC 31478 (NGC 3311, 67 galaxies) DMzp = 33.673 +/- 0.046, 54.3 Mpc. A group's distance averages its members'.",
+        "checked": "2026-10-02",
+        "locator": "distance: 40.3 Mpc (−900,000 / +900,000 pc)"
+      }
+    ]
+  },
+  "datasets": {
+    "legacy-optical": {
+      "title": "NGC 4696 in visible light",
+      "detail": "2500 × 2500 px",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "sources": [
+        {
+          "catalogueId": "desi-legacy-surveys-dr10-color-hips",
+          "url": "https://www.legacysurvey.org/dr10/",
+          "label": "DESI Legacy Surveys color (g, r, i, z); DESI Legacy Imaging Surveys DR10; colour HiPS by CDS (CNRS/Unistra)",
+          "checked": "2026-10-02",
+          "locator": "DESI Legacy Surveys color (g, r, i, z)"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "leo-cluster",
+  "displayName": "Leo Cluster",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Group distance",
+        "value": "91.0 Mpc",
+        "source": {
+          "catalogueId": "cosmicflows-4",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table",
+          "checked": "2026-10-02",
+          "locator": "group 36487"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 176.15°, Dec 19.76°",
+        "source": {
+          "catalogueId": "mcxc-ii-2024",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+          "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+          "checked": "2026-10-02",
+          "locator": "MCXC J1144.6+1945"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "X-ray selected galaxy cluster",
+        "source": {
+          "catalogueId": "mcxc-ii-2024",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+          "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+          "checked": "2026-10-02",
+          "locator": "MCXC J1144.6+1945"
+        }
+      },
+      {
+        "id": "redshift",
+        "label": "Redshift",
+        "value": "0.0214",
+        "source": {
+          "catalogueId": "mcxc-ii-2024",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+          "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+          "checked": "2026-10-02",
+          "locator": "MCXC J1144.6+1945"
+        }
+      },
+      {
+        "id": "aperture",
+        "label": "R500 radius",
+        "value": "0.9034 Mpc",
+        "source": {
+          "catalogueId": "mcxc-ii-2024",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+          "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+          "checked": "2026-10-02",
+          "locator": "MCXC J1144.6+1945"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "galaxies",
+    "controls": [
+      {
+        "id": "galaxies",
+        "label": "Cosmicflows-4 · galaxies",
+        "thumbnail": "leo-cluster-dataset-galaxies.webp",
+        "volume": {
+          "objectId": "nearby-universe-galaxies",
+          "datasetId": "galaxies",
+          "surface": "galaxies"
+        },
+        "source": {
+          "id": "nearby-universe-galaxies-galaxies",
+          "path": "../../nearby-universe-galaxies/source/manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+      "href": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Böhringer & Chon (2021), CLASSIX IV: superclusters in the local Universe at z ≤ 0.03, A&A 656, A144",
+      "href": "https://arxiv.org/abs/2205.07984"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+      "credit": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table"
+    }
+  }
+}

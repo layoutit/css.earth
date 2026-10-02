@@ -1,0 +1,28 @@
+{
+  "id": "hercules-cluster",
+  "classification": "galaxy-cluster",
+  "order": 5441,
+  "physical": {
+    "name": "Hercules Cluster",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of the Hercules Cluster is recorded: it is an extended cluster of galaxies, and its package frames it at 5000000 pc (object.json worldFrame.bodyRadiusM), a presentation value: chosen to hold the Cosmicflows-4 group the field draws here, whose galaxies (Abell 2147, 2151 and 2152 as one group) lie within about 5 Mpc of this position; 1.5 times its R500 radius would be 1.19 Mpc and frames almost none of them.",
+  "star": {
+    "rightAscensionDegrees": 241.1489,
+    "declinationDegrees": 17.7244,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 158781536.42056125,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 11092.3,
+    "sources": {
+      "position": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe (https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz); catalogue reference mcxc-ii:MCXC J1604.5+1743",
+      "distance": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94); catalogue reference cosmicflows-4:56962: 158781536.42056125 pc; Cosmicflows-4 group distance: the weighted average of its members' distance moduli on the calibrated scale (table 3, DMzp).",
+      "properMotion": "Zero: the cluster of galaxies is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the catalogued redshift z = 0.037: Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe (https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz); catalogue reference mcxc-ii:MCXC J1604.5+1743"
+    }
+  }
+}

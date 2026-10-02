@@ -1,8 +1,8 @@
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { PlannedWorldContext, WorldContextView } from './world-context-planner.js';
 import { readPreparedBinary } from '../../prepared-data/prepared-binary.js';
-import { decodeWorldOrbitBank } from '../../prepared-data/world-context.js';
-import type { PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
+import { decodeWorldOrbitBank } from '@cssearth/objects';
+import type { PreparedWorldContext, PreparedWorldContextGeometry } from '@cssearth/objects';
 import type { WorldPlannerExtend, WorldPlannerInitialise, WorldPlannerSource } from './world-context-planner-client.js';
 import { createWorldContextFrameEncoder, contextFrameTransfers } from './world-context-frame.js';
 import { unpackWorldBodies } from './world-context-view-transport.js';

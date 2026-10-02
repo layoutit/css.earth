@@ -30,6 +30,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
+import { createRaDecCatalogueMatcher } from '@cssearth/astronomy';
 
 export const QUERIES = {
   'coma-kang-2025': 'SELECT Seq, ObjID, RAJ2000, DEJ2000, rmag, z FROM "J/ApJS/278/51/table2" WHERE Mm=1',
@@ -112,19 +113,9 @@ const moduli = new Set(field.filter(row => row[groupAt!] === CLUSTERS[cluster]).
 if (moduli.size !== 1) throw new TypeError(`${fieldPath}: group ${CLUSTERS[cluster]} has ${moduli.size} distance moduli, not one.`);
 const modulus = [...moduli][0]!;
 
-const radius = MATCH_ARCSEC / 3600, cells = new Map<string, [number, number][]>();
-const cell = (ra: number, dec: number) => [Math.floor(dec / radius), Math.floor(ra * Math.cos(dec * Math.PI / 180) / radius)];
-for (const row of field) {
-  const ra = Number(row[raAt!]), dec = Number(row[decAt!]), key = cell(ra, dec).join(',');
-  cells.set(key, [...cells.get(key) ?? [], [ra, dec]]);
-}
-const inField = (ra: number, dec: number) => {
-  const [y, x] = cell(ra, dec);
-  for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
-    for (const [fra, fdec] of cells.get(`${y! + dy},${x! + dx}`) ?? []) if (arcsecBetween(ra, dec, fra, fdec) <= MATCH_ARCSEC) return true;
-  }
-  return false;
-};
+const inField = createRaDecCatalogueMatcher(field.map(row => {
+  return [Number(row[raAt!]), Number(row[decAt!])];
+}), MATCH_ARCSEC, 'arcseconds');
 const members = await readers[cluster]();
 let drawnByField = 0;
 const kept = members.flatMap(member => {

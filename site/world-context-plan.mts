@@ -1,6 +1,7 @@
-import { extendWorldContext, parseCompleteWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/renderer';
+import { parseCompleteWorldContext } from '@cssearth/objects';
+import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
 import { WORLD_SUMMARY_SOURCE, startupWorld, worldSystemHost } from './startup-world.mts';
-import type { PreparedWorldContext, PreparedWorldSystem } from '@cssearth/renderer';
+import type { PreparedWorldContext, PreparedWorldSystem } from '@cssearth/objects';
 import { startupFetch } from './startup-requests.mts';
 
 // The application's prepared world context, validated once. Startup, framing and

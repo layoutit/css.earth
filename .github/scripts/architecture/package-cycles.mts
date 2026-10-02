@@ -1,13 +1,12 @@
 /** Manifest dependency cycles are separate from file imports: dev and peer dependencies also constrain
  * workspace build/install ordering. Record every directed elementary cycle, rotated to its smallest
- * name, and its SCC membership. Every cycle fails the architecture check without a baseline. */
+ * name. Every cycle fails the architecture check without a baseline. */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { requireRecord, requireString } from '@cssearth/core';
-import { stronglyConnected } from './folders.mts';
 import { byText } from './zones.mts';
 
-export interface PackageCycle { readonly nodes: readonly string[]; readonly scc: readonly string[] }
+export interface PackageCycle { readonly nodes: readonly string[] }
 const MANIFEST = /^packages\/[^/]+\/package\.json$/u;
 
 export function packageCycles(root: string, files: readonly string[]): PackageCycle[] {
@@ -21,23 +20,19 @@ export function packageCycles(root: string, files: readonly string[]): PackageCy
   const names = packages.map(pkg => pkg.name).sort(byText), known = new Set(names);
   if (known.size !== names.length) throw new TypeError('Workspace package names must be unique.');
   const next = new Map(packages.map(pkg => [pkg.name, [...new Set(pkg.dependencies.filter(name => known.has(name)))].sort(byText)]));
-  const edges = [...next].flatMap(([from, targets]) => targets.map(to => ({ from, to })));
   const cycles: PackageCycle[] = [];
-  for (const scc of stronglyConnected(names, edges)) {
-    const members = new Set(scc);
-    // Start only at the smallest member of each cycle: no duplicate rotations. Direction is preserved.
-    for (const start of scc) {
-      const path = [start], visited = new Set(path);
-      const visit = (from: string): void => {
-        for (const to of next.get(from) ?? []) {
-          if (to === start) cycles.push({ nodes: [...path], scc });
-          else if (members.has(to) && byText(to, start) > 0 && !visited.has(to)) {
-            path.push(to); visited.add(to); visit(to); visited.delete(to); path.pop();
-          }
+  // Start only at the smallest member of each cycle: no duplicate rotations. Direction is preserved.
+  for (const start of names) {
+    const path = [start], visited = new Set(path);
+    const visit = (from: string): void => {
+      for (const to of next.get(from) ?? []) {
+        if (to === start) cycles.push({ nodes: [...path] });
+        else if (byText(to, start) > 0 && !visited.has(to)) {
+          path.push(to); visited.add(to); visit(to); visited.delete(to); path.pop();
         }
-      };
-      visit(start);
-    }
+      }
+    };
+    visit(start);
   }
   return cycles.sort((a, b) => byText(JSON.stringify(a.nodes), JSON.stringify(b.nodes)));
 }

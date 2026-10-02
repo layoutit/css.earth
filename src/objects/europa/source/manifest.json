@@ -20837,6 +20837,43 @@
         "kind": "local",
         "reason": "Project recipe; source identities and acquisition routes are declared by its input records."
       }
+    },
+    {
+      "path": "photometry/geissler-2022-lambert.json",
+      "purpose": "Published Lambert disk function of Europa in the Galileo SSI CLEAR filter, used to carry the Monochrome photographic inserts to normal incidence.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "geissler-2022-europa-photometry",
+            "role": "method",
+            "evidence": "Geissler, Keszthelyi and Weller (2022) sampled 702 controlled Voyager and Galileo images of Europa, kept points with incidence below 90 degrees, and fitted I/F as a straight line through the origin against the cosine of incidence, over all illumination and viewing angles. Table 1 gives the Galileo CLEAR (611 nm) slope as 0.736. The record keeps the disk function only; the slope is a comparison value.",
+            "locator": "Approach, steps 4 to 6; Table 1, CLEAR GALILEO row"
+          }
+        ]
+      },
+      "origin": "https://www.hou.usra.edu/meetings/lpsc2022/pdf/1691.pdf",
+      "credit": "Published disk function: Geissler, Keszthelyi and Weller (2022), LPSC 53, abstract 1691. Selection and transcription: cssEarth.",
+      "acquisition": "Model family transcribed from the cited abstract into a project document; no data file was downloaded."
+    },
+    {
+      "path": "photometry/horizons-subsolar.json",
+      "purpose": "JPL Horizons sub-solar longitude and latitude on Europa (observer quantity 15, IAU planetographic, west-positive) at the capture time of each of the 332 controlled Galileo photographs. Seven requests of at most 50 UT epochs, captured 2026-10-02.",
+      "kind": "source-document",
+      "title": "JPL Horizons sub-solar points on Europa",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27502%27&CENTER=%27500%40-77%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&TLIST=%272450394.326998796%0A2450394.327099097%0A2450394.327199410%0A2450436.652505139%0A2450436.759233507%0A2450436.759333773%0A2450436.759434086%0A2450436.777489630%0A2450436.777589931%0A2450436.777690243%0A2450436.777790556%0A2450436.779696412%0A2450436.779796725%0A2450436.779897025%0A2450436.779997338%0A2450500.172714282%0A2450500.172814583%0A2450500.172914896%0A2450500.173015208%0A2450500.173115509%0A2450500.173215822%0A2450500.185342373%0A2450500.185373241%0A2450500.199396366%0A2450500.199496666%0A2450500.199596979%0A2450500.199697291%0A2450500.205002847%0A2450500.205033715%0A2450500.205056863%0A2450500.205087732%0A2450500.205110880%0A2450500.205141736%0A2450500.207120128%0A2450500.207220428%0A2450500.207320741%0A2450500.207421053%0A2450500.207521354%0A2450542.759737882%0A2450542.762762569%0A2450542.765787257%0A2450542.768811944%0A2450542.771836632%0A2450759.308384340%0A2450759.308484653%0A2450759.308584965%0A2450759.308685266%0A2450759.308785579%0A2450759.308885891%0A2450759.308986192%27&TIME_TYPE=%27UT%27&QUANTITIES=%2715%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27NO%27&ANG_FORMAT=%27DEG%27",
+      "credit": "NASA/JPL Solar System Dynamics — Horizons",
+      "acquisition": "Seven JPL Horizons requests and their JSON responses saved together on 2026-10-02, each with its full URL; the local JSON wrapper is not the original HTTP response bytes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "Horizons observer tables of Europa (502) seen from Galileo (-77); each request URL records the target, observer, UT epochs and quantity."
+          }
+        ]
+      }
     }
   ]
 }

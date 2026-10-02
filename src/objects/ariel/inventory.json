@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "ariel-billboard.webp",
-      "bytes": 14884,
-      "sha256": "b3dab6d17d59fc6481b5ef415b1de7af721e825dcd97d03f38985c41c937de9d"
-    },
-    {
-      "location": "public",
       "filename": "ariel-dataset-elevation.webp",
       "bytes": 364,
       "sha256": "33226f5ee48471ba27ef42b8fec98aa78db897540976070b8171a40767befffd"
@@ -33,6 +27,30 @@
     },
     {
       "location": "public",
+      "filename": "ariel-elevation-page-0-level-1040.webp",
+      "bytes": 50662,
+      "sha256": "f693c886d2e459a41d5cb808290fc0d85a5b560337cf34cc65a4bbebcbf27649"
+    },
+    {
+      "location": "public",
+      "filename": "ariel-elevation-page-0-level-2080.webp",
+      "bytes": 140806,
+      "sha256": "49aff798efcb1c153c53392a44b431613b73977862845862e727ca639674d8b1"
+    },
+    {
+      "location": "public",
+      "filename": "ariel-elevation-page-0-level-520.webp",
+      "bytes": 16336,
+      "sha256": "9d5d2b8f97da7f9d73c3576ef009c275c355a9960c40cf3be5a66be399f79a8e"
+    },
+    {
+      "location": "public",
+      "filename": "ariel-elevation-page-0.webp",
+      "bytes": 367182,
+      "sha256": "ef004c262c520433c4348a438a97d09306a69993798db6632f5cdd2eac387640"
+    },
+    {
+      "location": "public",
       "filename": "ariel-elevation@2x.webp",
       "bytes": 367182,
       "sha256": "ef004c262c520433c4348a438a97d09306a69993798db6632f5cdd2eac387640"
@@ -42,6 +60,30 @@
       "filename": "ariel-features.json",
       "bytes": 87439,
       "sha256": "557b035e94f5875987e0089029ac14152aae9361e13bf102f94d5b99213d0c7e"
+    },
+    {
+      "location": "public",
+      "filename": "ariel-normal-page-0-level-1040.webp",
+      "bytes": 69046,
+      "sha256": "b7e47167a2cd8bc107df8369aaa16470fe57be4efb585f9dc4ce1e18c47b8420"
+    },
+    {
+      "location": "public",
+      "filename": "ariel-normal-page-0-level-2080.webp",
+      "bytes": 202102,
+      "sha256": "4222e07df4c3420b610e47436cbb67719a9ce0cee1c664d0322ad959e2c91378"
+    },
+    {
+      "location": "public",
+      "filename": "ariel-normal-page-0-level-520.webp",
+      "bytes": 21102,
+      "sha256": "d7f4199feb4c2b24fa3b4a5790d3b6c1289e31c0b0242123219afc3bc7f90f8e"
+    },
+    {
+      "location": "public",
+      "filename": "ariel-normal-page-0.webp",
+      "bytes": 458756,
+      "sha256": "c162a0b4147aa2509b129aba750e77284dcc05efea6b85ac936139bff25cc44b"
     },
     {
       "location": "public",
@@ -66,6 +108,30 @@
       "filename": "ariel-poles-voyager-color@2x.webp",
       "bytes": 145710,
       "sha256": "750ef9ca5e82ac5f241e8eacee53a2e7a984f94612cf1ec6f628880ebafd5ca3"
+    },
+    {
+      "location": "public",
+      "filename": "ariel-voyager-color-page-0-level-1040.webp",
+      "bytes": 39604,
+      "sha256": "96c9df340711dd33f69e69663795959ebf795866ee8cdb83ef3166f47be4e59d"
+    },
+    {
+      "location": "public",
+      "filename": "ariel-voyager-color-page-0-level-2080.webp",
+      "bytes": 105136,
+      "sha256": "f0816568edcb9261be48b1176d1013506d7e5c02f4b4ec8b3f47102b57c3eba1"
+    },
+    {
+      "location": "public",
+      "filename": "ariel-voyager-color-page-0-level-520.webp",
+      "bytes": 13830,
+      "sha256": "dc0c01cbbe124235d12aace9b856d286b521ccef3db24c6e70b593142831f7c5"
+    },
+    {
+      "location": "public",
+      "filename": "ariel-voyager-color-page-0.webp",
+      "bytes": 247462,
+      "sha256": "e6485aeedbb29dbc1f51181ee271cbe24bc390e9aad3b52c67dbcbeaf99580fa"
     },
     {
       "location": "public",
@@ -292,14 +358,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 85775,
-      "sha256": "71bdd662b4bdd66337c5a9bf79004417580076da448e1e41675f6ddd19c00457"
+      "bytes": 83980,
+      "sha256": "134752c0a090e7609030dcb3d030f8466c38cfa265b7f919363d390c58109d5a"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 736,
-      "sha256": "bc779ba18694009d74e6fac4465e6558720107b4476bd5be3944c39656e5e678"
+      "bytes": 674,
+      "sha256": "b51d82c833bb1c6af27822bc2141634dcee3ab6d6bf1cc5e3f1085835520fb80"
     },
     {
       "location": "prepared",
@@ -358,14 +424,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 358049,
-      "sha256": "ad8e9454ea1e3da070ce5237ccd961cb5686b729a665d50475dd2fed2f33f3e8"
+      "bytes": 361077,
+      "sha256": "fc7c344f4035c79cc2b0eed073deebf3acc4d294c1d594454502bda7ee5152a1"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 388577,
-      "sha256": "6539ea5f983f5cf97062bfdf4ef0088a71401615ee37d8b6405c0ba93b9861b1"
+      "bytes": 389489,
+      "sha256": "7be1c36f5e5dc3de3fea78ac7af981e3d4db7469caedf91a6555e7cfdcc60e19"
     },
     {
       "location": "prepared",
@@ -396,6 +462,12 @@
       "filename": "world-navigation.json",
       "bytes": 1234,
       "sha256": "cd8d3e0903d5a6cc00ed97a091c4b1eab7caaecfe6200002f0a5903378f86ac3"
+    },
+    {
+      "location": "public",
+      "filename": "ariel-billboard.webp",
+      "bytes": 14884,
+      "sha256": "b3dab6d17d59fc6481b5ef415b1de7af721e825dcd97d03f38985c41c937de9d"
     }
   ]
 }

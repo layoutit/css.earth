@@ -3,6 +3,22 @@
   "method": "Complete prepared dataset previews at 80 px for 40 CSS px; Galaxy volumes use their published face-on backing, preserving existing source qualifications. Each object row shows its default image inside a margin, faded out before the image frame.",
   "inputs": [
     {
+      "path": "src/objects/abell-1689-layers/prepared/presentation.json",
+      "bytes": 1566
+    },
+    {
+      "path": "public/scenes/abell-1689-layers/datasets/optical.webp",
+      "bytes": 16042
+    },
+    {
+      "path": "src/objects/abell-2744-layers/prepared/presentation.json",
+      "bytes": 1625
+    },
+    {
+      "path": "public/scenes/abell-2744-layers/datasets/optical.webp",
+      "bytes": 18658
+    },
+    {
       "path": "src/objects/beta-pictoris-disc/prepared/presentation.json",
       "bytes": 9530
     },
@@ -37,6 +53,14 @@
     {
       "path": "public/scenes/betelgeuse-shell/datasets/sio-2023.webp",
       "bytes": 2456
+    },
+    {
+      "path": "src/objects/bullet-cluster-layers/prepared/presentation.json",
+      "bytes": 1705
+    },
+    {
+      "path": "public/scenes/bullet-cluster-layers/datasets/optical.webp",
+      "bytes": 24340
     },
     {
       "path": "src/objects/eps-eridani-disc/prepared/presentation.json",
@@ -239,6 +263,14 @@
       "bytes": 4326
     },
     {
+      "path": "src/objects/macs-j0416-layers/prepared/presentation.json",
+      "bytes": 1639
+    },
+    {
+      "path": "public/scenes/macs-j0416-layers/datasets/optical.webp",
+      "bytes": 17250
+    },
+    {
       "path": "src/objects/ngc-1637-layers/prepared/presentation.json",
       "bytes": 1397
     },
@@ -271,12 +303,28 @@
       "bytes": 15188
     },
     {
+      "path": "src/objects/ngc-3311-volume/prepared/presentation.json",
+      "bytes": 1474
+    },
+    {
+      "path": "public/scenes/ngc-3311-volume/datasets/legacy-optical.webp",
+      "bytes": 19904
+    },
+    {
       "path": "src/objects/ngc-3521-layers/prepared/presentation.json",
       "bytes": 1395
     },
     {
       "path": "public/scenes/ngc-3521-layers/datasets/optical.webp",
       "bytes": 7360
+    },
+    {
+      "path": "src/objects/ngc-4696-volume/prepared/presentation.json",
+      "bytes": 1426
+    },
+    {
+      "path": "public/scenes/ngc-4696-volume/datasets/legacy-optical.webp",
+      "bytes": 34258
     },
     {
       "path": "src/objects/ngc-6744-layers/prepared/presentation.json",
@@ -364,10 +412,46 @@
     },
     {
       "path": "src/objects/local-group-galaxies/prepared/catalogue.json",
-      "bytes": 706427
+      "bytes": 709374
     }
   ],
   "images": {
+    "abell-1689-layers/optical": {
+      "url2x": "/navigation/focus-abell-1689-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/abell-1689-layers/prepared/presentation.json",
+        "public/scenes/abell-1689-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/heic1317a/"
+    },
+    "abell-1689-layers": {
+      "url2x": "/navigation/focus-object-abell-1689-layers@2x.webp",
+      "inputs": [
+        "src/objects/abell-1689-layers/prepared/presentation.json",
+        "public/scenes/abell-1689-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/heic1317a/"
+    },
+    "abell-2744-layers/optical": {
+      "url2x": "/navigation/focus-abell-2744-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/abell-2744-layers/prepared/presentation.json",
+        "public/scenes/abell-2744-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Webb",
+      "sourceUrl": "https://esawebb.org/images/weic2305a/"
+    },
+    "abell-2744-layers": {
+      "url2x": "/navigation/focus-object-abell-2744-layers@2x.webp",
+      "inputs": [
+        "src/objects/abell-2744-layers/prepared/presentation.json",
+        "public/scenes/abell-2744-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Webb",
+      "sourceUrl": "https://esawebb.org/images/weic2305a/"
+    },
     "beta-pictoris-disc/visible": {
       "url2x": "/navigation/focus-beta-pictoris-disc-visible@2x.webp",
       "inputs": [
@@ -448,6 +532,24 @@
       ],
       "credit": "ESO/VLT/SPHERE-ZIMPOL",
       "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B"
+    },
+    "bullet-cluster-layers/optical": {
+      "url2x": "/navigation/focus-bullet-cluster-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/bullet-cluster-layers/prepared/presentation.json",
+        "public/scenes/bullet-cluster-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/opo0639a/"
+    },
+    "bullet-cluster-layers": {
+      "url2x": "/navigation/focus-object-bullet-cluster-layers@2x.webp",
+      "inputs": [
+        "src/objects/bullet-cluster-layers/prepared/presentation.json",
+        "public/scenes/bullet-cluster-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/opo0639a/"
     },
     "eps-eridani-disc/dust": {
       "url2x": "/navigation/focus-eps-eridani-disc-dust@2x.webp",
@@ -899,6 +1001,24 @@
       "credit": "SDSS",
       "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
     },
+    "macs-j0416-layers/optical": {
+      "url2x": "/navigation/focus-macs-j0416-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/macs-j0416-layers/prepared/presentation.json",
+        "public/scenes/macs-j0416-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Webb",
+      "sourceUrl": "https://esawebb.org/images/weic2327a/"
+    },
+    "macs-j0416-layers": {
+      "url2x": "/navigation/focus-object-macs-j0416-layers@2x.webp",
+      "inputs": [
+        "src/objects/macs-j0416-layers/prepared/presentation.json",
+        "public/scenes/macs-j0416-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Webb",
+      "sourceUrl": "https://esawebb.org/images/weic2327a/"
+    },
     "ngc-1637-layers/optical": {
       "url2x": "/navigation/focus-ngc-1637-layers-optical@2x.webp",
       "inputs": [
@@ -971,6 +1091,24 @@
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1037a/"
     },
+    "ngc-3311-volume/legacy-optical": {
+      "url2x": "/navigation/focus-ngc-3311-volume-legacy-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-3311-volume/prepared/presentation.json",
+        "public/scenes/ngc-3311-volume/datasets/legacy-optical.webp"
+      ],
+      "credit": "Legacy Surveys / CDS",
+      "sourceUrl": "https://www.legacysurvey.org/dr10/"
+    },
+    "ngc-3311-volume": {
+      "url2x": "/navigation/focus-object-ngc-3311-volume@2x.webp",
+      "inputs": [
+        "src/objects/ngc-3311-volume/prepared/presentation.json",
+        "public/scenes/ngc-3311-volume/datasets/legacy-optical.webp"
+      ],
+      "credit": "Legacy Surveys / CDS",
+      "sourceUrl": "https://www.legacysurvey.org/dr10/"
+    },
     "ngc-3521-layers/optical": {
       "url2x": "/navigation/focus-ngc-3521-layers-optical@2x.webp",
       "inputs": [
@@ -988,6 +1126,24 @@
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1129a/"
+    },
+    "ngc-4696-volume/legacy-optical": {
+      "url2x": "/navigation/focus-ngc-4696-volume-legacy-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4696-volume/prepared/presentation.json",
+        "public/scenes/ngc-4696-volume/datasets/legacy-optical.webp"
+      ],
+      "credit": "Legacy Surveys / CDS",
+      "sourceUrl": "https://www.legacysurvey.org/dr10/"
+    },
+    "ngc-4696-volume": {
+      "url2x": "/navigation/focus-object-ngc-4696-volume@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4696-volume/prepared/presentation.json",
+        "public/scenes/ngc-4696-volume/datasets/legacy-optical.webp"
+      ],
+      "credit": "Legacy Surveys / CDS",
+      "sourceUrl": "https://www.legacysurvey.org/dr10/"
     },
     "ngc-6744-layers/optical": {
       "url2x": "/navigation/focus-ngc-6744-layers-optical@2x.webp",
@@ -1166,8 +1322,11 @@
     }
   },
   "defaults": {
+    "abell-1689-layers": "abell-1689-layers",
+    "abell-2744-layers": "abell-2744-layers",
     "beta-pictoris-disc": "beta-pictoris-disc",
     "betelgeuse-shell": "betelgeuse-shell",
+    "bullet-cluster-layers": "bullet-cluster-layers",
     "eps-eridani-disc": "eps-eridani-disc",
     "hd-181327-disc": "hd-181327-disc",
     "helix-volume": "helix-volume",
@@ -1185,11 +1344,14 @@
     "m83-layers": "m83-layers",
     "m87-volume": "m87-volume",
     "m95-layers": "m95-layers",
+    "macs-j0416-layers": "macs-j0416-layers",
     "ngc-1637-layers": "ngc-1637-layers",
     "ngc-253-layers": "ngc-253-layers",
     "ngc-2903-layers": "ngc-2903-layers",
     "ngc-300-layers": "ngc-300-layers",
+    "ngc-3311-volume": "ngc-3311-volume",
     "ngc-3521-layers": "ngc-3521-layers",
+    "ngc-4696-volume": "ngc-4696-volume",
     "ngc-6744-layers": "ngc-6744-layers",
     "ngc-6946-layers": "ngc-6946-layers",
     "omega-centauri-volume": "omega-centauri-volume",

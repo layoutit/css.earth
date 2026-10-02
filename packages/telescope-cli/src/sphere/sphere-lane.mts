@@ -7,12 +7,12 @@ import { inventoryAssets } from '@cssearth/bake/delivery';
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { objectPageCss } from '@cssearth/objects';
-import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
+import { outputName, parseRasterRecipe, prepareRasterAssets, rasterPageOutput } from '@cssearth/bake/raster';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
 import { parseGeometryProfile } from '@cssearth/bake/scene';
 import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
-import { parsePreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
+import { parsePreparedWorldContext } from '@cssearth/objects';
 
 
 export async function inspectMeasurementSphere(root:string,target:string){
@@ -37,10 +37,11 @@ export async function inspectMeasurementSphere(root:string,target:string){
   const datasetId = original.controls.datasets?.defaultDataset;
   const surface = recipe.surfaces.find(item => item.id === datasetId);
   if (!datasetId || !surface) throw new Error('Standard sphere has no matching prepared surface dataset');
-  const replacementKeys=new Set([`surface:${datasetId}`,`poles:${datasetId}`,'poles']);
+  // A paged body binds each page of the dataset (`surface:<id>:<page>`); an unpaged one its whole atlas.
+  const replacementKeys=new Set([`surface:${datasetId}`,`poles:${datasetId}`,'poles']),pagePrefix=`surface:${datasetId}:`;
   const variant = original.variants.find(item => item.when.datasetId === datasetId && item.when.shadows !== true && item.when.atmosphere !== true);
   if (!variant) throw new Error('Standard sphere has no unshadowed surface variant');
-  const required = variant.required.filter(key => replacementKeys.has(key));
+  const required = variant.required.filter(key => replacementKeys.has(key) || key.startsWith(pagePrefix) && /^\d+$/.test(key.slice(pagePrefix.length)));
   if (!required.some(key => key.startsWith('surface:'))) throw new Error('Sphere surface binding is unavailable');
   const descriptor = requireRecord(await json(resolve(object, 'object.json'))),properties = requireRecord(descriptor.properties),worldFrame = properties.worldFrame;
   // The shared body rules and the shell, then the page's own stylesheets (a lane template names the object as __object__).
@@ -88,10 +89,13 @@ export async function measurementSphere(root: string, target: string, texture: s
   });
   const selected = assets.surfaces[datasetId];
   const poles = recipe.polesOutput.replaceAll('{id}', datasetId).replaceAll('{suffix}', '@2x').replaceAll('{density}', '2');
-  const surfaceFile = resolve(rasterDirectory, surfaces.find(item => item.id === datasetId)!.output.replaceAll('{id}', datasetId).replaceAll('{suffix}', '@2x').replaceAll('{density}', '2'));
+  const surfaceOutput = surfaces.find(item => item.id === datasetId)!.output;
   const dataUrl = async (file: string) => 'data:image/webp;base64,' + (await pinned(file)).toString('base64');
+  const pagePrefix = `surface:${datasetId}:`;
   const replacement = new Map([
-    [`surface:${datasetId}`, await dataUrl(surfaceFile)],
+    // The measurement shows its full pages at every size: the levels are dropped below.
+    ...await Promise.all(required.filter(key => key === `surface:${datasetId}` || key.startsWith(pagePrefix)).map(async key => [key, await dataUrl(resolve(rasterDirectory,
+      key.startsWith(pagePrefix) ? rasterPageOutput(surfaceOutput, 2, datasetId, Number(key.slice(pagePrefix.length))) : outputName(surfaceOutput, 2, datasetId)))] as const)),
     [`poles:${datasetId}`, await dataUrl(resolve(rasterDirectory, poles))],
     // Mercury's row-bank presentation shares a combined pole atlas across datasets.
     ['poles', await dataUrl(resolve(rasterDirectory, poles))],
@@ -105,7 +109,7 @@ export async function measurementSphere(root: string, target: string, texture: s
   const tree = { ...original.tree, properties: portableProperties };
   const navigation = prepareScientificNavigation(solarGeometry, id, focus, original.camera);
   // Apply the measurement view immediately, keeping the viewport's fitted zoom.
-  const { features: _features, ...portable } = original;
+  const { features: _features, textureLevels: _levels, ...portable } = original;
   const definition = parsePreparedObjectRuntime({ ...portable, tree,
     controls: { datasets: { defaultDataset: datasetId, controls: [{ id: datasetId, label: 'Measurement' }] }, settings: null },
     materials: [], motion: [], animations: [],

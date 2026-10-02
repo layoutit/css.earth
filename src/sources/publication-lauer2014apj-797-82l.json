@@ -1,0 +1,34 @@
+{
+  "id": "publication-lauer2014apj-797-82l",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lauer et al. (2014), ApJ 797, 82 (Brightest cluster galaxies at the present epoch), Table 1 (CDS J/ApJ/797/82/bcg): Abell 3526, BCG N4696, heliocentric velocity 2904 +/- 40 km/s; Abell 1060, BCG N3311, 3858 +/- 5 km/s.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "Lauer2014ApJ...797...82L"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/797/82",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/local-group-galaxies/prepared/catalogue.json",
+      "locator": "/sources/11/references/2"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "src/objects/local-group-galaxies/prepared/catalogue.json#/sources/11/references/2"
+    }
+  ]
+}

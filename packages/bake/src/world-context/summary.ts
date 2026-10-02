@@ -1,6 +1,8 @@
+import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA } from '@cssearth/objects';
+import type { PreparedWorldContextData as PreparedWorldContext } from '@cssearth/objects';
 import { outwardSphere } from './spatial-context.ts';
-import type { PreparedWorldContext, Vector3 } from './spatial-context.ts';
-import type { PreparedSystemView } from './system-view.ts';
+import type { Vector3 } from './spatial-context.ts';
+import type { PreparedSystemView } from '@cssearth/objects';
 
 export type Billboard = { readonly url: string; readonly size: number; readonly focalPixels: number; readonly distanceM: number };
 type Facts = Readonly<Record<string, unknown>>;
@@ -19,8 +21,8 @@ type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][numbe
  * Orbit paths and detail levels go to the planner worker as binary orbit banks (`worldOrbitBanks`), which these files pin
  * by byte length; each orbit here keeps its parent, bounds and size. Classification views are build-time only.
  *
- * Each file writes what many bodies repeat once, and `parsePreparedWorldContextSummary` and `parsePreparedWorldSystem` in
- * @cssearth/renderer put it back (`expandWorldContextSummary`, `expandWorldSystem`):
+ * Each file writes what many bodies repeat once. `expandWorldContextSummary` and `expandWorldSystem` in
+ * @cssearth/objects put it back before the renderer validates it:
  * - `bodies` is one column per field, a body's value at its index and `null` where it has none.
  * - A body names its system and discovery record by their place in `systemNames` and `discoveries`.
  * - A billboard writes only what differs from `billboard`, the size, focal length and distance (in body radii) most
@@ -55,12 +57,12 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
     ...(body.discovery === undefined ? {} : { discovery: root.discovery(body.discovery) }),
     host: hostOf(body.id), ...(body.plainDot ? { plainDot: true } : {}), ...(body.unpackaged ? { unpackaged: true } : {}) }]);
   const [focusRow, ...rows] = root.rows;
-  const summary = { schema: 'cssearth-world-context-summary@2' as const, ...rest, worldBodyCount: bodies.length,
+  const summary = { schema: PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA as typeof PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, ...rest, worldBodyCount: bodies.length,
     ...(Object.keys(rootCentres).length ? { orbitCenters: rootCentres } : {}), orbitBanks: pinsOf(rootBodies),
     ...root.tables(), focus: focusRow!, bodies: columns(rows), deferred: columns(deferred) };
   return { summary, systems: [...systems].map(([id, members]) => {
     const file = encodeBodies(members, positions), centres = centresOf(id);
-    return { id, file: { schema: 'cssearth-world-system@1' as const, id, ...(Object.keys(centres).length ? { orbitCenters: centres } : {}),
+    return { id, file: { schema: PREPARED_WORLD_SYSTEM_SCHEMA as typeof PREPARED_WORLD_SYSTEM_SCHEMA, id, ...(Object.keys(centres).length ? { orbitCenters: centres } : {}),
       orbitBanks: pinsOf(members), ...file.tables(), bodies: columns(file.rows) } };
   }) };
 }

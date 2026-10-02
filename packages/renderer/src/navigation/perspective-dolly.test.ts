@@ -3,7 +3,7 @@ import { it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import type { PerspectiveDolly } from './perspective-dolly.js';
-import type { PreparedWorldCameraFrame } from './world-camera.js';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { PositionM } from '@cssearth/engine';
 import { createPerspectiveDolly, levelOfDetailFor } from './perspective-dolly.js';
 import scene from '../../../../src/objects/mercury/prepared/scene.json' with { type: 'json' };

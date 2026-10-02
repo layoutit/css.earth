@@ -9,10 +9,10 @@
     "surface": {
       "url": "/scenes/mercury/mercury-surface-normal@2x.webp",
       "width": 2048,
-      "height": 1024
+      "height": 1536
     },
     "surfaceLatitudeHeight": 1024,
-    "packedBandGutter": 0,
+    "packedBandGutter": 16,
     "poles": {
       "url": "/scenes/mercury/mercury-poles-normal@2x.webp",
       "width": 512,
@@ -21,12 +21,8 @@
     "polarTileSize": 256,
     "polarRadiusScale": 1.035,
     "polarOffset": 0.1,
-    "uv": "global",
-    "color": "#aaa097",
-    "innerPoles": {
-      "radiusScale": 1.05,
-      "offset": -2.4
-    }
+    "uv": "cell",
+    "color": "#aaa097"
   },
   "projection": {
     "tileSize": 50,
@@ -41,7 +37,7 @@
       "firstDiameter": 16,
       "lastDiameter": 32768
     },
-    "fitToSource": true,
+    "fitToSource": false,
     "rasterScale": 4,
     "rasterGutter": 16.0,
     "rasterOverscan": 0.5,
@@ -51,20 +47,18 @@
   },
   "bodyRotationDegrees": 118,
   "output": {
-    "schema": "cssmercury-prepared-retained-scene@3",
-    "materialSchema": "cssmercury-prepared-material-presentation@2",
-    "layout": "retained",
-    "motion": {
-      "visualRotationSeconds": 72,
-      "physicalSiderealRotationEarthDays": 58.646,
-      "speedStates": {
-        "normal": 1,
-        "fast": 2,
-        "fastest": 4,
-        "superfast": 8,
-        "off": 0
-      }
+    "schema": "cssmercury-prepared-runtime-scene@1",
+    "materialSchema": "cssmercury-prepared-view-material@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0.034,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 58.646
     },
-    "retainedRootCount": 4
+    "animation": {
+      "cloudsVisualSeconds": 72,
+      "surfaceVisualSeconds": 72,
+      "direction": "prograde"
+    }
   }
 }

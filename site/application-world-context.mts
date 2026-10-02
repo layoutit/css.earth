@@ -4,7 +4,7 @@ import { afterStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
 import { prepareObjectResources, createRetainedGeometrySnapshot } from '@cssearth/renderer/universe';
 import { createCameraViewport } from '@cssearth/renderer/navigation';
 import type { PreparedLabelEdge } from '@cssearth/renderer/navigation/prepared-label-edge.ts';
-import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, streamWorldSystems } from './world-context-plan.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';

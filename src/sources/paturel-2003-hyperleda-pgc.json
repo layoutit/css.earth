@@ -30,6 +30,11 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/VII/237/ReadMe",
       "checkedOn": "2026-10-01",
       "locator": "pgc: J2000 positions and logD25 (the decimal logarithm of the apparent diameter in 0.1 arcmin). The 61 galaxies with a logD25 within 0.5 degrees of M49 were read on 2026-10-01; the 29 whose masks reach the M49 cutout are listed in labs/nebula/models/m49/experiment.json."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/VII/237/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "pgc: the 93 galaxies (OType G or GM) with a logD25 within 0.5 degrees of NGC 4696 and the 125 within 0.5 degrees of NGC 3311 were read on 2026-10-02; the 7 and 16 whose masks reach the cutouts are listed in labs/nebula/models/ngc-4696/experiment.json and labs/nebula/models/ngc-3311/experiment.json. Rows PGC 31466 (NGC 3309, logD25 1.62) and PGC 31513 (NGC 3312, logD25 1.52)."
     }
   ],
   "creators": [

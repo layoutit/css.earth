@@ -1,6 +1,7 @@
+import { validateWorldRotation } from '@cssearth/objects';
 import { it } from 'node:test';
 import assert from 'node:assert/strict';
-import { nearestWorldRotation, validateWorldRotation } from './world-camera-math.js';
+import { nearestWorldRotation} from './world-camera-math.js';
 
 const multiply = (a: readonly number[], b: readonly number[]) => Array.from({ length: 9 }, (_, index) => {
   const row = Math.floor(index / 3), column = index % 3;

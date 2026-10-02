@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Galaxy cluster MACS0416 (Hubble and Webb composite image)",
+  "publisher": "ESA/Webb",
+  "sourceId": "weic2327a",
+  "sourcePage": "https://esawebb.org/images/weic2327a/",
+  "download": "https://cdn.esawebb.org/archives/images/large/weic2327a.jpg",
+  "credit": "NASA, ESA, CSA, STScI, J. Diego (Instituto de Física de Cantabria, Spain), J. D’Silva (U. Western Australia), A. Koekemoer (STScI), J. Summers & R. Windhorst (ASU), and H. Yan (U. Missouri)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      4457,
+      4133
+    ],
+    "bands": [
+      "Hubble ACS",
+      "Hubble WFC3",
+      "Webb NIRCam",
+      "0.4 to 5 um"
+    ],
+    "fieldOfViewDeg": [
+      0.0370974,
+      0.0344006
+    ]
+  },
+  "checkedSource": {
+    "kind": "Large JPEG",
+    "dimensions": [
+      4457,
+      4133
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.008232,
+    "lineOfNodesPaDeg": 90.078,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 29.6 arcsec from the catalogue position, which is the whole of the recipe's inclination. Not a measured orientation of the cluster."
+  },
+  "registration": {
+    "catalogue": "Gaia DR3 (CDS I/355/gaiadr3)",
+    "sourcesInFrame": 5,
+    "matched": 5,
+    "rmsArcsec": 0.064,
+    "maxArcsec": 0.081,
+    "pixelArcsec": 0.02996,
+    "embeddedTags": {
+      "pixelArcsec": 0.02995,
+      "northClockwiseDeg": -67.64
+    },
+    "centreShiftFromTagsArcsec": 0.29
+  },
+  "displayModel": "The picture lies on one flat plane facing the Sun at the cluster's comoving distance. Nothing in the picture has depth: seen from the side it is a line.",
+  "coverage": "The whole published frame, the cluster's core. Foreground Milky Way stars and the galaxies behind the cluster are in the picture and stand on the same plane as the cluster.",
+  "acquisition": {
+    "url": "https://cdn.esawebb.org/archives/images/large/weic2327a.jpg",
+    "dimensions": [
+      4457,
+      4133
+    ],
+    "operation": "Download the publisher's Large JPEG; no crop or resample."
+  }
+}

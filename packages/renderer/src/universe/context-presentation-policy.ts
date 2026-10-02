@@ -1,4 +1,4 @@
-import type { OrbitLineFade } from '../navigation/types.js';
+import type { OrbitLineFade } from '@cssearth/objects';
 import { orbitLineOpacity } from '../navigation/perspective-dolly.js';
 
 // Every dimming of the world context is one of these four, and the planner applies each in one place.

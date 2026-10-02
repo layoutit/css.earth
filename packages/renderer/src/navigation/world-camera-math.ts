@@ -1,7 +1,5 @@
 import type { OrientationXyzw, PositionM } from '@cssearth/engine';
 
-export { validateWorldReflection, validateWorldRotation } from '@cssearth/objects';
-export type { WorldRotation } from '@cssearth/objects';
 import type { WorldRotation } from '@cssearth/objects';
 
 /** A physical camera pose keeps right-handed axes: +x right, +y up, +z toward the eye. CSS eye space differs only in +y, which

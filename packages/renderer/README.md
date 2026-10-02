@@ -4,8 +4,8 @@ The CSS renderer runtime. It loads, decodes and validates prepared objects, keep
 navigation, and renders bodies, skies, star fields, volumes, image layers and labels as retained PolyCSS and CSS, with
 the universe context around the focused object. The site mounts objects through it; the preparation tools import its
 validators so that what they write is what the browser reads. The prepared CSS format identifier and compact
-world-summary/system table decoders are shared through `@cssearth/objects`. The world-context parser remains here
-because its full/summary validation shares geometry and camera/projection dependencies.
+world-summary/system table decoders are shared through `@cssearth/objects`. World-context and camera-format validation, system views and orbit-bank codecs also live there;
+camera projection and navigation remain here.
 
 It was `src/renderers/css` until 2026-09-26. The compilers that write its prepared formats stayed there
 (`src/renderers/css/preparation`) until they moved into `@cssearth/bake`; the object page stylesheets
@@ -22,7 +22,7 @@ the elements that own stacking; an inherited depth variable on the shared stage 
 | entry | what it holds |
 |---|---|
 | `@cssearth/renderer` | the object runtime (`createObjectRuntime`), the object contract, prepared-object loading, parsing and asset origins |
-| `@cssearth/renderer/navigation` | the world camera and its rotation maths, view URLs, selection targets and the prepared world-camera frame parser |
+| `@cssearth/renderer/navigation` | the world camera and its rotation maths, view URLs, selection targets |
 | `@cssearth/renderer/universe` | the universe context (`createPreparedUniverse`), the world-frame queue and the loaders of volumes, point appearances, surface shells, image layers and volume datasets |
 | `@cssearth/renderer/platform/*` | single modules the application and tools import on their own (`object-orbit`, `camera-input`, `camera-layout`, `prepared-wheel-zoom`, `prepared-residency`, `object-contract`, `prepared-image-store`, `object-selection-runtime`, `prepared-presentation`, `perspective-dolly`, `solar-view-direction`, `prepared-object-assets`, `surface-fly-to`, `directional-sun-coordinate`) |
 | `@cssearth/renderer/testing` | the same implementations, exposed for tests |
@@ -51,7 +51,7 @@ packages/renderer/
 │   ├── navigation/     world camera, camera input, flights, view URLs, navigation marker presentation
 │   ├── rendering/      prepared presentation, residency, materials, leaf pools
 │   ├── validation/     parsers for every prepared format
-│   ├── prepared-data/  world context, ellipsoid projections
+│   ├── prepared-data/  ellipsoid projections
 │   ├── universe/       universe context and catalogues
 │   ├── solar-system/   heliocentric geometry, orbits, and the prepared cubic-sky and directional-Sun contracts
 │   ├── sky/, stars/, volume/, shell/, image-layers/, labels/

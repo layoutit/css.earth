@@ -2,7 +2,7 @@ import { fixedCameraOrientation } from '@cssearth/renderer/test/camera-orientati
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { parsePreparedWorldCameraFrame } from "@cssearth/renderer/navigation";
+import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
 
 import {
   createPerspectiveDolly,

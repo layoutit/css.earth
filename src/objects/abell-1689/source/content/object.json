@@ -1,0 +1,136 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "abell-1689",
+  "displayName": "Abell 1689",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance (comoving)",
+        "value": "776 Mpc",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "redshift",
+        "label": "Redshift",
+        "value": "0.1832",
+        "source": {
+          "catalogueId": "publication-1999apjs-125-35s",
+          "url": "https://ui.adsabs.harvard.edu/abs/1999ApJS..125...35S",
+          "label": "Struble & Rood (1999), a compilation of redshifts of Abell clusters, ApJS 125, 35; the redshift reference of the MCXC-II row",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "light-travel",
+        "label": "Light travel time",
+        "value": "2.3 billion years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 197.9°, Dec -1.335°",
+        "source": {
+          "catalogueId": "mcxc-ii-2024",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+          "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "classification",
+        "label": "Classification",
+        "value": "X-ray selected galaxy cluster",
+        "source": {
+          "catalogueId": "mcxc-ii-2024",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+          "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "3.33 arcmin, 0.75 Mpc comoving at the cluster",
+        "source": {
+          "catalogueId": "esahubble-heic1317a",
+          "url": "https://esahubble.org/images/heic1317a/",
+          "label": "ESA/Hubble heic1317a: NASA, ESA, the Hubble Heritage Team (STScI/AURA), J. Blakeslee (NRC Herzberg Astrophysics Program, Dominion Astrophysical Observatory), and H. Ford (JHU)",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Hubble · optical",
+        "thumbnail": "abell-1689-dataset-optical.webp",
+        "volume": {
+          "objectId": "abell-1689-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "abell-1689-layers-optical",
+          "path": "../../abell-1689-layers/source/manifest.json",
+          "url": "https://esahubble.org/images/heic1317a/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+      "href": "https://arxiv.org/abs/1807.06209"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Struble & Rood (1999), a compilation of redshifts of Abell clusters, ApJS 125, 35; the redshift reference of the MCXC-II row",
+      "href": "https://ui.adsabs.harvard.edu/abs/1999ApJS..125...35S"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+      "href": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Hubble heic1317a: NASA, ESA, the Hubble Heritage Team (STScI/AURA), J. Blakeslee (NRC Herzberg Astrophysics Program, Dominion Astrophysical Observatory), and H. Ford (JHU)",
+      "href": "https://esahubble.org/images/heic1317a/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+      "credit": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe"
+    }
+  }
+}

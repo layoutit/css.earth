@@ -185,17 +185,6 @@
 .prepared-world-context [data-context-indicator-hovered="true"][data-context-label-visible="true"] > .context-caption::after {
   opacity: 1;
 }
-/* A star seen as a point (world-context-point-source.ts): its own small layer, which moves and scales every camera
-   frame; the atlas tile's size, image, cell, transform, opacity and visibility are inline. */
-[data-world-context-point-source] {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  background-repeat: no-repeat;
-  text-decoration: none;
-  transform-origin: 0 0;
-  will-change: transform;
-}
 /* The galaxy catalogue (prepared-galaxy-catalog.ts): a zero-size root at the stage centre whose dots are placed from it.
    Their fade owns opacity and visibility and the camera their transforms; the rest is fixed here. */
 .prepared-galaxy-catalog {
@@ -206,7 +195,7 @@
   height: 0;
   pointer-events: none;
 }
-.prepared-galaxy-catalog > span {
+.prepared-galaxy-catalog [data-galaxy-dot] {
   position: absolute;
   left: 0;
   top: 0;
