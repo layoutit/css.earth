@@ -29,10 +29,14 @@ export function createSearchClient({ documentTarget, windowTarget, resultsPanel,
   let current: { query: string; illustrations: boolean } | null = null;
   // A newer search cancels the older request. Letting every keystroke's answer land made the final answer later on a
   // slow phone connection (2.84 s against 2.4 s): broad early queries return full pages that compete for bandwidth.
-  let inFlight: AbortController | null = null;
+  let inFlight: AbortController | null = null, inFlightQuery = '', inFlightSent = false;
+  // The one older request left to finish: the start of the word still being typed, when no answer for that word is on
+  // screen yet. Typing "jupiter" on the live site showed nothing for 1.06 s, since each letter cancelled the last
+  // (2026-10-01); its first letter's answer already lists Jupiter. One request, so the bandwidth cost above stays one page.
+  let lead: AbortController | null = null;
   const pages = new Map<number, AbortController>();
   const events = new AbortController();
-  lifetime.onDispose(() => { events.abort(); inFlight?.abort(); for (const page of pages.values()) page.abort(); });
+  lifetime.onDispose(() => { events.abort(); inFlight?.abort(); lead?.abort(); for (const page of pages.values()) page.abort(); });
 
   const request = async (query: string, illustrations: boolean, offset: number, signal: AbortSignal) => {
     const url = new URL(FIND_PATH, documentTarget.location?.href ?? 'http://localhost/');
@@ -74,8 +78,16 @@ export function createSearchClient({ documentTarget, windowTarget, resultsPanel,
   let lastRequest: { query: string; illustrations: boolean } | null = null;
   async function search(query: string, illustrations: boolean) {
     if (events.signal.aborted) return;
-    inFlight?.abort();
+    if (inFlight) {
+      const shown = current !== null && current.illustrations === illustrations && current.query !== '' && query.startsWith(current.query);
+      const extending = inFlightQuery !== '' && query.startsWith(inFlightQuery) && lastRequest?.illustrations === illustrations;
+      // Only a request already on the wire: keystrokes queued within one frame still send one request.
+      if (!lead && !shown && extending && inFlightSent) lead = inFlight;
+      else if (inFlight !== lead) inFlight.abort();
+    }
+    if (lead && !(lastRequest && query.startsWith(lastRequest.query))) { lead.abort(); lead = null; }
     const controller = inFlight = new AbortController();
+    inFlightQuery = query; inFlightSent = false;
     const signal = AbortSignal.any([events.signal, controller.signal]);
     lastRequest = { query, illustrations };
     setBusy(true);
@@ -84,8 +96,12 @@ export function createSearchClient({ documentTarget, windowTarget, resultsPanel,
       // queued keystroke has arrived, and ask only for the newest text.
       await nextFrame(documentTarget);
       if (signal.aborted) return;
+      if (inFlight === controller) inFlightSent = true;
       const result = await request(query, illustrations, 0, signal);
       if (signal.aborted) return;
+      // The newest answer ends the lead; a lead's answer shows only while the word it starts is still the one asked for.
+      if (inFlight === controller) { lead?.abort(); lead = null; }
+      else if (lead !== controller || !lastRequest?.query.startsWith(query)) return;
       cancelPages();
       current = { query, illustrations };
       showError(false);
@@ -93,11 +109,14 @@ export function createSearchClient({ documentTarget, windowTarget, resultsPanel,
       onResults({ objects: result.objects.total, classification: result.classification, features: result.features });
     } catch (reason) {
       if (signal.aborted) return;
+      // A lead that failed is only a missed preview: the newest request reports for the search.
+      if (inFlight !== controller) return;
       console.warn('Search results could not load.', reason);
       showError(true);
       onResults(null);
     } finally {
-      if (inFlight === controller) { inFlight = null; setBusy(false); }
+      if (lead === controller) lead = null;
+      if (inFlight === controller) { inFlight = null; inFlightQuery = ''; setBusy(false); }
     }
   }
   retry.addEventListener('click', () => { if (lastRequest) void search(lastRequest.query, lastRequest.illustrations); }, { signal: events.signal });
@@ -115,7 +134,8 @@ export function createSearchClient({ documentTarget, windowTarget, resultsPanel,
     /** Leave the search: nothing stays in flight and no rows stay connected. */
     clear() {
       inFlight?.abort();
-      inFlight = null;
+      lead?.abort();
+      inFlight = lead = null; inFlightQuery = '';
       cancelPages();
       current = lastRequest = null;
       setBusy(false);
