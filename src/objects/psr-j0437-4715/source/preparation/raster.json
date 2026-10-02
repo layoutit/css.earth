@@ -49,6 +49,11 @@
           "0.9",
           "1.6"
         ],
+        "limbDarkening": {
+          "law": "quadratic",
+          "published": true,
+          "path": "photometry/nsx-limb-darkening.json"
+        },
         "description": "Effective temperature of the hot regions in Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021. The rest of the surface is at the 250,000 K of Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions.",
         "title": "NICER · published hot-region fit",
         "sourceUrl": "https://arxiv.org/abs/2407.06789"
@@ -73,7 +78,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the surface according to the limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

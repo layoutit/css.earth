@@ -3,6 +3,7 @@
   "name": "PSR J0437−4715",
   "system": "PSR J0437−4715 system",
   "description": "The nearest millisecond pulsar: a neutron star 23 km across that turns 174 times a second.",
+  "order": 5349,
   "aliases": [
     "PSR J0437-4715",
     "J0437-4715"
@@ -142,6 +143,9 @@
       }
     }
   },
+  "limb": {
+    "nsxTable": "nsx_H_v200804.out"
+  },
   "text": {
     "card": "The nearest millisecond pulsar: a neutron star 23 km across that turns 174 times a second.",
     "introduction": "PSR J0437−4715 is a neutron star 157 parsecs away, 1.4 times the Sun's mass in a ball 23 km wide. Its surface is near 250,000 K, with patches over a million.",
@@ -150,6 +154,5 @@
   "notes": [
     "Its companion, a 0.22 solar-mass helium white dwarf on a 5.74-day orbit (Reardon et al. 2024), is not drawn",
     "The maximum-likelihood regions are drawn, as in the paper's Figure 11; the same fit's radius for that single vector is 13.17 km, and the sphere uses the posterior median 11.36 km"
-  ],
-  "order": 5349
+  ]
 }

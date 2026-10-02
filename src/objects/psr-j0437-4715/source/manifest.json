@@ -104,6 +104,22 @@
           }
         ]
       }
+    },
+    {
+      "id": "psr-j0437-4715-nsx-limb-darkening",
+      "path": "photometry/nsx-limb-darkening.json",
+      "origin": "https://doi.org/10.5281/zenodo.7113931",
+      "credit": "NSX hydrogen atmosphere table nsx_H_v200804.out (Ho & Lai 2001, MNRAS 327, 1081; Ho & Heinke 2009, Nature 462, 71), distributed with X-PSI",
+      "license": "Project-computed model values; the table is distributed under CC BY 4.0 with X-PSI's tutorial files",
+      "acquisition": "Computed by packages/telescope-cli/src/new-object/pulsar.mts from nsx_H_v200804.out (https://doi.org/10.5281/zenodo.7113931): nsxLimbProfile and fitQuadraticLimb in @cssearth/bake/objects/stellar.",
+      "redistribution": "Model coefficients and the profile they are fitted to, with the model cited.",
+      "consumers": [
+        "temperature-hot-region-map"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Computed from the cited table; generating the package again recomputes it."
+      }
     }
   ],
   "generatedIntermediates": [

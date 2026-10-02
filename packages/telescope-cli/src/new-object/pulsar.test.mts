@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { directionFromRaDec } from '@cssearth/astronomy';
+import type { NsxTable } from '@cssearth/bake/objects/stellar';
 import type { Archive } from './archives.mts';
 import { generatePulsar, parsePulsarSpec, pulsarRecord, tiltedOrientation } from './pulsar.mts';
 import { parseObjectSpecs } from './spec.mts';
@@ -12,14 +13,24 @@ const pulsar = { id: 'test-pulsar', name: 'Test Pulsar', description: 'A test.',
   distance: cited(157), radialVelocity: cited(-75), radius: cited(11.36), mass: cited(1.418), spin: { frequencyHz: 173.69, inclinationDegrees: 137.5, source: 'A paper, Table 1', url: paper },
   hotRegions: { label: 'NICER', path: 'science/a-paper/hot-regions.json', url: paper, credit: 'A paper', observed: 'NICER pulse profiles',
     record: { schema: 'cssearth-published-hot-regions@1', source: 'A paper', regions: [{ id: 'spot', phaseCycles: cell(0.25), superseding: { colatitudeRadians: cell(1), radiusRadians: cell(0.2), log10TemperatureK: cell(6.1) } }] } },
-  text: { card: 'A test pulsar.', introduction: 'A test pulsar with one hot spot.', locator: 'Abstract' } };
+  limb: { nsxTable: 'nsx_H_v200804.out' }, text: { card: 'A test pulsar.', introduction: 'A test pulsar with one hot spot.', locator: 'Abstract' } };
 const arxiv = '<feed><entry><title>A test paper</title><author><name>Ada Author</name></author><published>2024-07-09T00:00:00Z</published></entry></feed>';
 const archive: Archive = { text: async () => arxiv, bytes: async () => Buffer.alloc(0), exists: async () => true, redirect: async () => undefined } as Archive;
+
+/** A table whose law is u1 = 0.8, u2 = 0 at every node, in place of the 256 MB one. */
+function nsxTable(): NsxTable {
+  const log10Temperature = [5, 6.5], log10Gravity = [13.7, 15], log10EnergyOverKt = [-1, 0, 1], mu = [1, 0.75, 0.5, 0.25, 0.05, 0.000001];
+  const log10Intensity = new Float64Array(2 * 2 * 3 * mu.length);
+  let row = 0;
+  for (const _temperature of log10Temperature) for (const _gravity of log10Gravity) for (const energy of log10EnergyOverKt) for (const cosine of mu) log10Intensity[row++] = Math.log10(0.2 + 0.8 * cosine) - energy * energy;
+  return { log10Temperature, log10Gravity, log10EnergyOverKt, mu, log10Intensity };
+}
 
 test('a pulsar spec is checked before anything is written', () => {
   assert.equal(parsePulsarSpec(pulsar).system, 'Test Pulsar system');
   assert.throws(() => parsePulsarSpec({ ...pulsar, radius: cited(8000) }), /radius.value 8000 is outside 5 to 30/u);
   assert.throws(() => parsePulsarSpec({ ...pulsar, temperature: cited(1e6) }), /unknown pulsar spec fields temperature/u);
+  assert.throws(() => parsePulsarSpec({ ...pulsar, limb: undefined }), /a pulsar is drawn with its atmosphere's limb/u);
   assert.throws(() => parsePulsarSpec({ ...pulsar, spin: { ...pulsar.spin, inclinationDegrees: 190 } }), /outside 0 to 180/u);
   assert.throws(() => parsePulsarSpec({ ...pulsar, hotRegions: { ...pulsar.hotRegions, record: { schema: 'other' } } }), /cssearth-published-hot-regions@1/u);
   assert.deepEqual(parseObjectSpecs({ pulsars: [pulsar] }).pulsars.map(spec => spec.id), ['test-pulsar']);
@@ -44,13 +55,15 @@ test('the north pole is tilted from the line of sight by the published angle, an
 });
 
 test('a pulsar package is its cited values and its hot-region map, with no temperature or colour of its own', async () => {
-  const { files, regions, minimum, maximum } = await generatePulsar(parsePulsarSpec(pulsar), { archive, order: 9000, epochJdTt: 2461286.5 });
+  const { files, regions, minimum, maximum } = await generatePulsar(parsePulsarSpec(pulsar), { archive, order: 9000, epochJdTt: 2461286.5, nsxTable: nsxTable() });
   const read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   assert.equal(regions, 1);
   assert.deepEqual([minimum, maximum], [1200000, 1300000]);
   const raster = read('src/objects/test-pulsar/source/preparation/raster.json');
   assert.deepEqual(raster.surfaces.map((surface: { id: string; science: { format: string } }) => [surface.id, surface.science.format]), [['temperature', 'published-hot-region-map']]);
   assert.equal(read('src/objects/test-pulsar/source/measurements.json').schema, 'cssearth-neutron-star@1');
+  const limb = read('src/objects/test-pulsar/source/photometry/nsx-limb-darkening.json');
+  assert.deepEqual([limb.u1.value, limb.u2.value, raster.surfaces[0].science.limbDarkening.path], [0.8, 0, 'photometry/nsx-limb-darkening.json']);
   assert.equal(read('src/objects/test-pulsar/object.json').properties.recipe.shape.radiusKm, 11.36);
   assert.deepEqual(read('src/objects/test-pulsar/source/content/object.json').panel.facts.map((fact: { value: string }) => fact.value), ['11.36 km', '1.418 solar masses', '174 turns a second', '157 parsecs']);
   assert.ok(files.has('src/objects/test-pulsar/source/science/a-paper/hot-regions.json') && files.has('src/sources/arxiv-2407-06789.json'));

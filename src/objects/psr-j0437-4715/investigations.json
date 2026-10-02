@@ -32,6 +32,15 @@
       ]
     },
     {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law (u1 0.939, u2 0.029) fitted to the bolometric intensity of the NSX hydrogen atmosphere table nsx_H_v200804.out (Ho & Lai 2001, MNRAS 327, 1081; Ho & Heinke 2009, Nature 462, 71), distributed with X-PSI, at log g 14.26 and 250,000 K; least-squares fit to the table's 62 emission cosines of 0.05 and above; largest miss 0.003 of the centre intensity.",
+      "evidence": [
+        "https://doi.org/10.5281/zenodo.7113931"
+      ]
+    },
+    {
       "id": "spin",
       "subject": "Spin",
       "status": "included",

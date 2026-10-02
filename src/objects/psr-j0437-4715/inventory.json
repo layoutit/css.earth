@@ -4,20 +4,26 @@
     {
       "location": "public",
       "filename": "psr-j0437-4715-arrival.webp",
-      "bytes": 17930,
-      "sha256": "7a0602b9913505c15725b86f91838858179b472032bc62ec03134fd136010c6b"
+      "bytes": 24478,
+      "sha256": "e922005a668e400a08cd43d73d6927cd69887249324520001a15105c38f00fc8"
     },
     {
       "location": "public",
       "filename": "psr-j0437-4715-billboard.webp",
-      "bytes": 3328,
-      "sha256": "b74d0dc23b4ff4dfcfac234a26f07c79381922ba26d53ee4a78c868984dee897"
+      "bytes": 4054,
+      "sha256": "31d638698dfbf1b6715edf1f1f048aa14aab83263bdae893ecab14aca53a0b94"
     },
     {
       "location": "public",
       "filename": "psr-j0437-4715-dataset-temperature.webp",
       "bytes": 130,
       "sha256": "51caa6f6bf2d6b69d3d041ac8a6a7ce82ef3db7b77d0c4a5fb4e9bcb2593d160"
+    },
+    {
+      "location": "public",
+      "filename": "psr-j0437-4715-limb-temperature@2x.webp",
+      "bytes": 108620,
+      "sha256": "d01022207f13229d46d930a349e3374196172ae436399725a61786036cb21504"
     },
     {
       "location": "public",
@@ -40,8 +46,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1003,
-      "sha256": "070823713a0c123bdfa68cf4ecf50a5add267940c05ad18a7fa8c5e055a99725"
+      "bytes": 1154,
+      "sha256": "f05ebd9bb79f9dc071b4ba2ef6216bd450104a057c0f89b9853502dcead63327"
     },
     {
       "location": "prepared",
@@ -53,7 +59,7 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2511,
-      "sha256": "2b192dd4478642f85b29bd80da333c12d50f863644141d8c6945d2a535a6d8b8"
+      "sha256": "8e7acccda0186d531bff156f5e5a07a4aa782f7b14fe4982c78a20f9a24b3b13"
     },
     {
       "location": "prepared",
@@ -64,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 2212,
-      "sha256": "ee7814c8631877ee5e53f647f04324ba487ec61f4f4589a285bbc20c8f1edcea"
+      "bytes": 2364,
+      "sha256": "dca1c16ca61efb36856c554c9aff6fbae071bc3c8574f3a7cd6bb022e09eba96"
     },
     {
       "location": "prepared",
@@ -82,14 +88,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 274989,
-      "sha256": "1b425455fb0768437576777351a5045a135e382c9eaee50374d7fe5b95bdc14b"
+      "bytes": 275157,
+      "sha256": "3c6a746123510102c3613268c08c92453ab622ee83b156fb6a3f9ad55172a27d"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 396089,
-      "sha256": "d88c380ca10d6f9fc95d10114a4706d0b30cd7166db0b281590387d9f8eff175"
+      "bytes": 396088,
+      "sha256": "000ce2abc8282caeaf0af978c473826c35bfdc73343e727acc87d08ecf4883be"
     },
     {
       "location": "prepared",
@@ -107,7 +113,7 @@
       "location": "prepared",
       "filename": "text.json",
       "bytes": 968,
-      "sha256": "0454e97aae345d4c5d812314ac0fa2ab4fea57958b5b41f04783ba0e7dc278ad"
+      "sha256": "d29f9a5582601e676b017a91396c031853de06fae27fca389bd5b118b2466729"
     },
     {
       "location": "prepared",

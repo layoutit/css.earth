@@ -13,7 +13,7 @@
           "catalogueId": "arxiv-2407-06789",
           "url": "https://arxiv.org/abs/2407.06789",
           "label": "Choudhury et al. (2024), ApJL 971, L20, Table A.1: equatorial radius 11.36 +0.95/-0.63 km (68% credible interval) from NICER pulse-profile modelling",
-          "checked": "2026-10-01",
+          "checked": "2026-10-02",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "arxiv-2407-07132",
           "url": "https://arxiv.org/abs/2407.07132",
           "label": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: pulsar mass from the Shapiro delay",
-          "checked": "2026-10-01",
+          "checked": "2026-10-02",
           "path": "source/measurements.json",
           "locator": "massSolar; massSource"
         }
@@ -39,7 +39,7 @@
           "catalogueId": "arxiv-2407-07132",
           "url": "https://arxiv.org/abs/2407.07132",
           "label": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: spin frequency, and the orbital inclination 137.506(16) degrees that Choudhury et al. (2024) use as the spin axis's inclination",
-          "checked": "2026-10-01",
+          "checked": "2026-10-02",
           "path": "source/measurements.json",
           "locator": "spinFrequencyHz; spinSource"
         }
@@ -52,7 +52,7 @@
           "catalogueId": "arxiv-2407-07132",
           "url": "https://arxiv.org/abs/2407.07132",
           "label": "Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: distance from the Shklovskii effect on the orbital period",
-          "checked": "2026-10-01",
+          "checked": "2026-10-02",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
@@ -122,7 +122,7 @@
           "meta": "million K",
           "sourceUrl": "https://arxiv.org/abs/2407.06789"
         },
-        "notes": "The hot regions of PSR J0437−4715 in Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021: 2 regions built from circles, 0.53 million K to 1.58 million K, covering 4.9% of the surface. They are the shapes the fit allows, not an image. The rest of the surface is drawn at 250,000 K, the temperature Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions for the surface outside the hot regions. The false colour runs from 0.2 to 1.6 million K."
+        "notes": "The hot regions of PSR J0437−4715 in Choudhury et al. (2024)'s fit to NICER X-ray pulse profiles of 2017 to 2021: 2 regions built from circles, 0.53 million K to 1.58 million K, covering 4.9% of the surface. They are the shapes the fit allows, not an image. The rest of the surface is drawn at 250,000 K, the temperature Qi et al. (2026), arXiv:2605.05429, Table 1 measure from Hubble far-ultraviolet and ROSAT soft X-ray spectra, fitted without hot regions for the surface outside the hot regions. The disc is dimmed toward the limb by the quadratic law (u1 0.939, u2 0.029) fitted to the bolometric intensity of the NSX hydrogen atmosphere table nsx_H_v200804.out (Ho & Lai 2001, MNRAS 327, 1081; Ho & Heinke 2009, Nature 462, 71), distributed with X-PSI, at log g 14.26 and 250,000 K. The false colour runs from 0.2 to 1.6 million K."
       }
     ]
   },
