@@ -9,6 +9,12 @@
     },
     {
       "location": "public",
+      "filename": "mars-billboard.webp",
+      "bytes": 11678,
+      "sha256": "516c1b72c3c61af887d910a17f386065247684e80dfd4a3fa9438a97e4859bdd"
+    },
+    {
+      "location": "public",
       "filename": "mars-dataset-albedo.webp",
       "bytes": 3548,
       "sha256": "ecea8754b59d5e286994b4f20f789a8dab409503dbf96aed04604074f64ce1c5"
@@ -1348,26 +1354,26 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 439462,
-      "sha256": "7eaaf9e6f8114c473edaea30e8d08c207e6dff1101c56a0f0e1982380d15396c"
+      "bytes": 448058,
+      "sha256": "d4cd83e072da0cde1f6501f9f32fb666a70de5c08f53c69a9eb73a8977954c97"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 393599,
-      "sha256": "de9966f37e28af4db1904ad6e4c79868d77bfecf40a53d109c6954550fdc3c21"
+      "sha256": "066175ae62dc916236d880e7080c344ee7e497d94a750ca6998262757dadfdab"
     },
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1175,
-      "sha256": "9d7358581ce5835d5047d33f9ff10e8effaf8a826e5197e05975fec9bb747f39"
+      "bytes": 1176,
+      "sha256": "19508d3abe837b70f201183c202ef5ce0ba6650cba53a2f4a0c124d0f0114003"
     },
     {
       "location": "prepared",
       "filename": "sun.json",
-      "bytes": 613,
-      "sha256": "9bbda4d298e83b20ba88e8c4acdab6226de7fa2e2ac4708e64986a3132432444"
+      "bytes": 612,
+      "sha256": "ccdebb2f07eecda118c8f8586bc4ad7bf709447cc142d718c19293508c1b1f1a"
     },
     {
       "location": "prepared",
@@ -1378,14 +1384,8 @@
     {
       "location": "prepared",
       "filename": "world-navigation.json",
-      "bytes": 1214,
-      "sha256": "f0d6766349c780ccea17f792d27c0442b1335bea2fd2261837602193001a8f7a"
-    },
-    {
-      "location": "public",
-      "filename": "mars-billboard.webp",
-      "bytes": 11678,
-      "sha256": "516c1b72c3c61af887d910a17f386065247684e80dfd4a3fa9438a97e4859bdd"
+      "bytes": 1217,
+      "sha256": "3524ba368f18215f01ec65d75a41594f2f0bc52c2d01613504c264094f716d89"
     }
   ]
 }

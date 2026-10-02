@@ -219,6 +219,12 @@
     },
     {
       "location": "public",
+      "filename": "pluto-billboard.webp",
+      "bytes": 11368,
+      "sha256": "62d248ac3699be7e0e34c3a8c28c02d59898e60ed76d72786454a371a9488008"
+    },
+    {
+      "location": "public",
       "filename": "pluto-dataset-methane-ice.webp",
       "bytes": 2566,
       "sha256": "ece12a4b24eb6cd6ed591a10d3189658325f1519bab86155091341dab74a0527"
@@ -568,14 +574,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 375935,
-      "sha256": "6541f8a4a6a99d2f64c79310728ee10777c465c2368549e57935f157959dfeeb"
+      "bytes": 375974,
+      "sha256": "131487990bc4d443eca6f96fed2dff2c9bbee2af7099af8c49e377ca4b681cd0"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 389767,
-      "sha256": "a5e804da04bea26a0767352bee2b4609b610d02af9e5a38649668c4994628024"
+      "bytes": 389765,
+      "sha256": "5eec671b6cbd4ef12193f7e76513cdd6a2a4ac26180eccd8d0ce9535afa4614a"
     },
     {
       "location": "prepared",
@@ -612,12 +618,6 @@
       "filename": "world-navigation.json",
       "bytes": 1215,
       "sha256": "e0c6cf518ca18df46e07888594ccd72572d3df12c49fcedb9c0acf6f7936effd"
-    },
-    {
-      "location": "public",
-      "filename": "pluto-billboard.webp",
-      "bytes": 11368,
-      "sha256": "62d248ac3699be7e0e34c3a8c28c02d59898e60ed76d72786454a371a9488008"
     }
   ]
 }

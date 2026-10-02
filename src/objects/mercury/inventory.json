@@ -219,6 +219,12 @@
     },
     {
       "location": "public",
+      "filename": "mercury-billboard.webp",
+      "bytes": 9602,
+      "sha256": "664ec2881b7b12a3a99550f837f95dc6f180957770fce32ffac58301939219d7"
+    },
+    {
+      "location": "public",
       "filename": "mercury-dataset-color.webp",
       "bytes": 386,
       "sha256": "08a8b28b561a2171c10002ddfd480aca19704a7fe99ff181a0ea3137e87a1939"
@@ -628,26 +634,26 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 379186,
-      "sha256": "02599e03effcc3f271ea32a69e47d4fdf58c50089185aec2cbc107c44cfe56b8"
+      "bytes": 379195,
+      "sha256": "b826b69be8c7738efaf082d43d1de7e5c6ad9fd7990dc06c2044d9233cc1a78e"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 390799,
-      "sha256": "750255b3966b2604eec587cd5f7aff83e97871ba9335b9f69180377727fc3b75"
+      "bytes": 390795,
+      "sha256": "c80fedcd7fd0f1e1b7e768bb8eb68804167b3981f9771b271be175b95082698e"
     },
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1188,
-      "sha256": "c7ec8bec1add34385183dc6d25fcc627598820e74f2aea0dca8af4e2081e7a1b"
+      "bytes": 1186,
+      "sha256": "8ec3052d091f7dc429f66a8d436095b59d1674065f64976b806a58acf199af33"
     },
     {
       "location": "prepared",
       "filename": "sun.json",
       "bytes": 616,
-      "sha256": "e213b1fb2e6acb3779155fd40e0a591900dfa66a4feda4202b0f0bf1ad452d7b"
+      "sha256": "2e7c960b7e43c8ab2069a7d85ce85afaf0643f2ae10378fa20eca02a3c7e59ed"
     },
     {
       "location": "prepared",
@@ -658,14 +664,8 @@
     {
       "location": "prepared",
       "filename": "world-navigation.json",
-      "bytes": 1235,
-      "sha256": "49e4bf0024fc6ff7a88f4c688bf98349e1f3dd00a554d9379db3cc8015b96fa0"
-    },
-    {
-      "location": "public",
-      "filename": "mercury-billboard.webp",
-      "bytes": 9602,
-      "sha256": "664ec2881b7b12a3a99550f837f95dc6f180957770fce32ffac58301939219d7"
+      "bytes": 1233,
+      "sha256": "c66e94decb1d96e116cea5541881d42cc573ca9bf05c30b1318e9948eacdbb76"
     }
   ]
 }
