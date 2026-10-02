@@ -10,7 +10,7 @@ const earth: CatalogueRow = {
   kind: 'scene', id: 'earth', name: 'Earth', classificationName: 'planet', route: '/earth/',
   detail: { text: '1.009 AU', value: '1.009', unit: 'AU', title: 'Prepared distance', ariaLabel: '1.009 AU. Prepared distance' },
   source: { subject: 'object:earth', document: '/sources/earth/', label: 'Earth sources' },
-  marker: { kind: 'scene', id: 'earth', color: '#fff' },
+  marker: { kind: 'scene', id: 'earth', color: '#fff', preview: true },
 };
 
 test('system and search rows render the same component, including its metadata and preview', () => {
@@ -36,6 +36,18 @@ test('the shared server row escapes authored names and attributes', () => {
   assert.equal(document.querySelector('.object-distance')?.getAttribute('title'), '" onmouseover="bad()');
 });
 
+test('a row without a search thumbnail draws the sprite its marker carries, and one that carries neither is refused by name', () => {
+  // The row carries its marker (search/prepared-catalogue-index.mts): no page holds a table of every object's marker.
+  const sprite = { style: 'color:#abc', innerStyle: 'width:9px;height:9px', ringStyle: 'width:12px' };
+  const { document } = parseHTML(objectResultMarkup({ ...earth, marker: { kind: 'scene', id: 'earth', color: '#abc', sprite } }));
+  const marker = document.querySelector('.object-navigation-marker')!;
+  assert.equal(document.querySelector('img'), null);
+  assert.equal(marker.getAttribute('class'), 'object-navigation-marker earth ringed');
+  assert.equal(marker.getAttribute('style'), sprite.style);
+  assert.equal(marker.querySelector('i')?.getAttribute('style'), sprite.innerStyle);
+  assert.equal(marker.querySelector('.object-navigation-ring')?.getAttribute('style'), sprite.ringStyle);
+  assert.throws(() => objectResultMarkup({ ...earth, marker: { kind: 'scene', id: 'earth', color: '#fff' } }), /Result row earth carries no prepared marker for earth/u);
+});
 
 test('overview navigation shares the row without a fabricated distance or focus target', () => {
   const { document } = parseHTML(objectResultMarkup({ kind: 'overview', id: 'milky-way', name: 'Milky Way',
