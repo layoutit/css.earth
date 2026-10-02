@@ -1,5 +1,6 @@
 import { cardView, presentCardView } from '../selection-presentation.mts';
 import { createSystemBodiesPresentation } from '../system-bodies-fragment.mts';
+import { renderSourceLink } from '../source-link.mts';
 import { ladderOf } from '../level-view.mts';
 import { isExtendedClassification } from '@cssearth/objects';
 import { bindTabPanels } from '../tab-panels.mts';
@@ -86,6 +87,11 @@ export function mountObjectShell({
     // The card shows the selected view of its object: the body, its moons, or (a star's) its planetary system.
     const view = information ? navigationTransition?.cardView ?? cardView(information, selected.view) : 'body';
     if (information) presentCardView(information, view);
+    // The card names its subjects' source documents. The selection is presented before the card's new content arrives, so
+    // the footer link is read from the card whenever the card is: a system opened from a planet's breadcrumb kept the
+    // planet's README (2026-10-02). The link is written only when it differs.
+    const subject = selectionKey(selected), named = information && sectionElements(information, '[data-source-subject]').find(node => node.dataset.sourceSubject === subject);
+    if (named) renderSourceLink(documentTarget, subject, new Map([[subject, named]]));
     // The system's body list arrives the first time it is shown.
     if (information && view === 'system') {
       if (systemBodies?.card !== information) systemBodies = { card: information, presentation: createSystemBodiesPresentation(information, windowTarget) };
