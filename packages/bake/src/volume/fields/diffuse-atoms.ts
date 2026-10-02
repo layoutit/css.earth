@@ -1,6 +1,6 @@
 /** Evaluate and grid accepted finite 3D atoms; no fitting or image inference. */
 import type { EmissionVector3 } from '@cssearth/objects';
-import type { Cancellation } from '../contracts/cancellation.ts';
+import type { Cancellation } from '@cssearth/objects';
 import type { PreparedSampledField } from './sampled.ts';
 
 export interface DiffuseAtom { centerArcsec: EmissionVector3; sigmaArcsec: number }

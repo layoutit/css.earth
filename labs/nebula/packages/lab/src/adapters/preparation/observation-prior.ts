@@ -1,5 +1,6 @@
-import { type ObservationMapping, overlayCorners, type ImageWcs, type OverlayFrame, reprojectObservationPrior as reproject } from '@cssearth/bake/volume';
-export type { ObservationMapping } from '@cssearth/bake/volume';
+import type { ObservationMapping } from '@cssearth/objects';
+import { overlayCorners, type ImageWcs, type OverlayFrame, reprojectObservationPrior as reproject } from '@cssearth/bake/volume';
+export type { ObservationMapping } from '@cssearth/objects';
 /** Offline calibrated image/ray mapping and sampling of the unchanged neutral stellar prior. */
 import { prepareOverlayGeometry } from '../renderer/overlay-geometry.ts';
 import { sampleEncoded, type VolumeSource, channelDensity } from '@cssearth/bake/volume/node';

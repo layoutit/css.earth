@@ -1,8 +1,5 @@
-// `@cssearth/bake/volume`: the host-neutral implementation contracts, coordinates, fields, materials and sampling.
-export * from './contracts/cancellation.ts';
+// `@cssearth/bake/volume`: host-neutral emission interfaces, coordinates, fields, materials and sampling. Shared data contracts live in `@cssearth/objects`.
 export * from './contracts/emission.ts';
-export * from './contracts/observation-mapping.ts';
-export * from './contracts/simulation-prior.ts';
 export * from './coordinates/catalogue-position.ts';
 export * from './coordinates/compiler-frame.ts';
 export * from './coordinates/density-placement.ts';

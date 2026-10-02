@@ -1,4 +1,4 @@
-import type { Cancellation } from '../contracts/cancellation.ts';
+import type { Cancellation } from '@cssearth/objects';
 /** Offline normalized splatting of qualified points; analytic components never reposition those samples. */
 import type { EmissionBounds, EmissionVector3 } from '@cssearth/objects';
 import type { SampledRecipe, SampleTerm, ComponentWeights } from '@cssearth/objects';
