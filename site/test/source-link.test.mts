@@ -44,3 +44,13 @@ test('a card that arrived after the rows were read supplies its own subject', ()
   assert.equal(document.querySelector('[data-source-link]')?.getAttribute('href'), 'https://example.test/earth/README.md');
   assert.equal(document.querySelector('[data-source-link]')?.textContent, 'Sources: NASA');
 });
+
+test('a body reached by a map marker is named by its own card', () => {
+  const { document } = parseHTML(`<html><body><nav class="object-browser"></nav>
+    <aside class="object-information-panel"><section data-source-subject="object:m49" data-source-document="https://example.test/m49/README.md" data-source-label="Sources: Legacy Surveys"></section></aside>
+    <a data-source-link data-source-document="https://example.test/virgo-cluster/README.md" data-source-label="Sources: CDS"><span data-source-link-label></span></a></body></html>`);
+  // The rows read on the first page (the Virgo cluster) do not list M49.
+  renderSourceLink(document, 'object:m49', new Map());
+  assert.equal(document.querySelector('[data-source-link]')?.getAttribute('href'), 'https://example.test/m49/README.md');
+  assert.equal(document.querySelector('[data-source-link]')?.textContent, 'Sources: Legacy Surveys');
+});
