@@ -22,7 +22,7 @@ import { objectAdapter } from "../object-adapter.mts";
 import { createNavigationContent } from '../navigation/navigation-content.mts';
 import { createNavigationHistory, bindNavigationLinks, navigationHref } from '../navigation/navigation-history.mts';
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
-import { createWorldViewport } from '../world-viewport.mts';
+import { createWorldViewport, stageSized } from '../world-viewport.mts';
 import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
 import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
@@ -197,6 +197,12 @@ export function createSceneRouter({
     const session = scenes.start({ objectId, request, url: request?.url ?? windowTarget.location?.href,
       onFailure: fail, onCleanupError: report });
     try {
+      // The first view fits its camera to the stage, so it waits for a stage the layout has not sized yet.
+      const unsized = replacement ? null : stageSized(stage, session.signal);
+      if (unsized) {
+        const sized = await session.wait(unsized);
+        if (sized.cancelled || !scenes.isCurrent(session)) return;
+      }
       publication.publish();
       const requestMotion = (next: boolean) => {
         if (!scenes.isCurrent(session)) return;
