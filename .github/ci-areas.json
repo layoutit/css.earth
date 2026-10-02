@@ -7,7 +7,8 @@
     "in that order; a path matching no area also falls back to shared (unsure means shared). The final job set is",
     "the union of every touched area's `jobs`. Job ids match the workflow's job ids in universe.yml: typecheck,",
     "universe, universePreparation (job id universe-preparation), nebula. Contract lint and the object-scope gate",
-    "always run and are not listed here."
+    "always run and are not listed here.",
+    "integration/** includes the renderer-bake conformance suites, which remain in the universe packages lane."
   ],
   "shared": [
     "package.json",

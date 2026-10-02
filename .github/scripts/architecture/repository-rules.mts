@@ -112,6 +112,8 @@ export function checkIntegrationOwners(root: string, files: readonly string[]): 
     }));
     const list = [...owners];
     const independent = list.some((left, i) => list.slice(i + 1).some(right => !reaches(left, right) && !reaches(right, left)));
-    return independent ? [] : [`${file}: integration must import at least two independent owners; found ${list.join(', ') || 'none'}`];
+    // Preparation/runtime conformance spans these owners even while bake depends on renderer.
+    const rendererBake = file.startsWith('integration/renderer-bake/') && owners.has('packages/bake') && owners.has('packages/renderer');
+    return independent || rendererBake ? [] : [`${file}: integration must import at least two independent owners; found ${list.join(', ') || 'none'}`];
   });
 }

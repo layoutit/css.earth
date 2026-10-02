@@ -89,7 +89,7 @@ test('optical copies reuse canonical textures and transforms inside isolated unf
     }
   }
   assert.equal(resolver.mock.callCount(), 9);
-  const css = readFileSync(new URL('../../../renderer/src/styles/volume.css', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../../../../packages/renderer/src/styles/volume.css', import.meta.url), 'utf8');
   assert.match(css, /\.css-volume-projection\s*\{[^}]*background:\s*#000[^}]*transform-style:\s*flat/su);
   assert.match(css, /\.css-volume-camera,\s*\.css-volume-scene,\s*\.css-volume-mesh\s*\{[^}]*transform-style:\s*preserve-3d/su);
 });
