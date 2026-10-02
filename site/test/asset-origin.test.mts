@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { assetHashSplit, assetShaMap, resolveWorldBillboards } from '../asset-origin.mts';
+import { assetHashSplit, assetShaMap, inlineSceneImage, resolveWorldBillboards } from '../asset-origin.mts';
 
 test('an object without inventory.json has an empty asset map', async () => {
   const root = await mkdtemp(join(tmpdir(), 'asset-origin-'));
@@ -81,4 +81,13 @@ test('a world file gives the photographs it draws their published address, and p
   } finally {
     if (previous === undefined) delete process.env.ASSET_ORIGIN; else process.env.ASSET_ORIGIN = previous;
   }
+});
+
+test('an installed scene image is inlined as a data URI, and a missing one leaves its address to the page', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'asset-origin-inline-'));
+  await mkdir(join(root, 'public/scenes/body'), { recursive: true });
+  await writeFile(join(root, 'public/scenes/body/body-arrival.webp'), Buffer.from([1, 2, 3]));
+  assert.equal(await inlineSceneImage('/scenes/body/body-arrival.webp', root), 'data:image/webp;base64,AQID');
+  assert.equal(await inlineSceneImage('/scenes/other/other-arrival.webp', root), null);
+  assert.equal(await inlineSceneImage('/scenes/body/../../../secret.webp', root), null);
 });

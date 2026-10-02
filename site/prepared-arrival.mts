@@ -55,8 +55,8 @@ export function createPreparedArrival(signal: AbortSignal, cover: Cover | null =
           arriving: true,
           preparedResources: lease.resources, preparedTree: lease.tree,
           initialWorldCamera: view.world, initialProjection: lease.projection(view),
-          ...options,
           progressiveActivation: true,
+          ...options,
         },
         async afterMount(mount) {
           let failure: unknown;
