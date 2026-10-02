@@ -15,7 +15,7 @@ layer (the raster lane uses the photometric models), never sideways. Command ent
 | `@cssearth/bake/photometry` | disk and phase functions, the Hapke model, limb laws from published models, PSG limb profiles | Node only (`node:fs`, `sharp`) |
 | `@cssearth/bake/raster` | raster recipes, surface maps, pages and poles, lighting banks, atmospheres and halos, missing-coverage painting, the lossy WebP lane | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/scene` | geometry profiles, projected surface leaves, polar caps, ring wedges, cutaways, solid-body surfaces | Node only (`node:*`, PolyCSS) |
-| `@cssearth/bake/presentation` | the retained node tree, leaf boxes, offline CSSOM reads, activation groups, the prepared-presentation contract, the cubic-sky and directional-Sun contracts | Node only (`node:*`, Playwright) |
+| `@cssearth/bake/presentation` | the retained node tree, leaf boxes, offline CSSOM reads, activation groups, authored presentation-envelope checks, cubic-sky and directional-Sun standards and preparers (shared formats: `@cssearth/objects`) | Node only (`node:*`, Playwright) |
 | `@cssearth/bake/volume-leaves` | slice stacks as retained PolyCSS leaves, depth order, volume impostors | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/stars` | point-field recipes, catalogue sources, point atlas and photometry, the encoded point bank | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/shell` | surface-shell recipes, meshes and atlas, the CSS shell compiler | Node only (`node:*`, PolyCSS) |

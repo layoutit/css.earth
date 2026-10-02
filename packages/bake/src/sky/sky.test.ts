@@ -7,7 +7,7 @@ import { deflateSync, zstdCompressSync } from 'node:zlib';
 import { decodeExrRgbHalf, halfToFloat } from './exr.ts';
 import { parseSkyRecipe } from './config.ts';
 import { SKY_BASES, skyRay, skyUv, sampleLinearSky, displayByte, skyFacePixels, prepareSkyFaces } from './bake.ts';
-import type { PreparedCssSky } from '@cssearth/renderer/sky/types.ts';
+import type { PreparedCssSky } from '@cssearth/objects';
 
 function exrFixture(compressed: boolean): { bytes: Buffer; expected: Buffer } {
   const width = 32, height = 2, zero = Buffer.from([0]), int = (n: number) => { const b = Buffer.alloc(4); b.writeInt32LE(n); return b; };

@@ -4,7 +4,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import type { PreparedCubicSkyPlan } from '@cssearth/bake/presentation';
+import type { PreparedCubicSkyPlan } from '@cssearth/objects';
 import { focusedCameraProjection } from '@cssearth/bake/objects/scene';
 
 const prepared = (path: string): unknown => JSON.parse(readFileSync(new URL(`src/objects/${path}`, pathToFileURL(findProjectRoot(import.meta.url) + '/')), 'utf8'));

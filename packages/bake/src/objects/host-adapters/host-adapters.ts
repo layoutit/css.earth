@@ -1,3 +1,4 @@
+import { validatePreparedCubicSky } from '@cssearth/objects';
 import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, type BodyId } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import type { ScenePreparationAdapters } from '../../scene/index.ts';
@@ -13,14 +14,13 @@ export function presentationHostAdapters(solarGeometry: SolarGeometry): Presenta
 
 /** Validate external scene records, then call the native TypeScript owners with the solar geometry the host loads. */
 export async function loadGeometryAdapters(geometry: SolarGeometry): Promise<ScenePreparationAdapters> {
-  const [scene, skyContract] = await Promise.all([
+  const [scene] = await Promise.all([
     import('../scene/index.ts'),
-    import('../../presentation/index.ts'),
   ]);
   const optionalNumber = (value: unknown) => value === undefined ? undefined : requireFiniteNumber(value);
   return {
     async preparePhysicalScene(input) {
-      const starfield = skyContract.validatePreparedCubicSky(input.starfield);
+      const starfield = validatePreparedCubicSky(input.starfield);
       if (input.worldContext !== undefined) {
         // A body the ephemeris tables do not place (the Sun) carries an authored world context and star axis.
         const star = requireRecord(requireRecord(input).star, 'star presentation');

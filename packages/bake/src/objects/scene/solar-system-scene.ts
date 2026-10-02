@@ -1,5 +1,5 @@
 import type {BodyId} from '@cssearth/astronomy';
-import type {PreparedCubicSkyPlan} from '../../presentation/index.ts';
+import type {PreparedCubicSkyPlan} from '@cssearth/objects';
 import {requireFiniteNumber} from '@cssearth/core';
 import { parsePreparedWorldContext } from '@cssearth/objects';
 interface SolarCameraOptions {bodyRadiusUnits:number;defaultZoom:number;skyProjection:{horizontalFovDegrees:number;focalLengthOverViewportWidth:number;cssPerspective:string};geometryScale?:number;initialScenePitchDegrees:number;defaultControlYawDegrees:number;

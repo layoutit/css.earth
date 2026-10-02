@@ -1,7 +1,7 @@
 import { validatePreparedLeafBounds } from '@cssearth/objects';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import type { PreparedCssVolume, VolumeAxis, VolumeVector } from './types.js';
-import { validatePreparedCssSky } from '../sky/validation.js';
+import { validatePreparedCssSky } from '@cssearth/objects';
 import { validateVolumeImpostors } from './volume-impostor-validation.js';
 
 const AXES: readonly VolumeAxis[] = ['x', 'y', 'z'];

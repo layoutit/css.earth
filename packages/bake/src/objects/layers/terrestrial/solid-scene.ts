@@ -1,7 +1,7 @@
 import { OBJECT_RUNTIME_SCHEMA, type PreparedVariant, type PreparedPresentationDefinition } from '@cssearth/objects';
 
-import type { PreparedCubicSkyPlan } from '../../../presentation/index.ts';
-import type { PreparedDirectionalSunPlan } from '../../../presentation/index.ts';
+import type { PreparedCubicSkyPlan } from '@cssearth/objects';
+import type { PreparedDirectionalSunPlan } from '@cssearth/objects';
 import type { PreparedProjectiveTextureLeaf } from '../../../presentation/index.ts';
 import type { prepareSolidMaterial } from './solid/solid-raster.ts';
 import type { SolidRasterGrid } from './raster-grid.ts';

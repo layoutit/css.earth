@@ -4,8 +4,8 @@ import {parseSaturnScene,parseSaturnViews,parseSaturnDatasets,parseSaturnLayouts
 import {parseTitle,parsePanel,parseContent} from './prepared-schemas.mts';
 
 import {requireObjectRuntimeDefinition} from '@cssearth/bake/contract';
-import {validatePreparedCubicSky} from '@cssearth/bake/presentation';
-import {validateDirectionalSunPlan} from '@cssearth/bake/presentation';
+import {validatePreparedCubicSky} from '@cssearth/objects';
+import {validateDirectionalSunPlan} from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

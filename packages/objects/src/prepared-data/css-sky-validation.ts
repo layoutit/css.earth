@@ -1,15 +1,15 @@
-import { cssMatrix as matrix, CSS_NUMBER as NUMBER } from '@cssearth/objects';
+import { cssMatrix as matrix, CSS_NUMBER as NUMBER } from './runtime-validation/css-matrix.js';
 
-import { validatePreparedLeafBounds } from '@cssearth/objects';
-import type { PreparedCssVolume } from '../volume/types.js';
-import type { PreparedCssSky } from './types.js';
+import { validatePreparedLeafBounds } from './prepared-leaf-bounds.js';
+import { PREPARED_CSS_SKY_SCHEMA, type PreparedSkyResources } from './css-sky-types.js';
+import type { PreparedCssSky } from './css-sky-types.js';
 import { dot3 as dot } from '@cssearth/core';
 
 const FACE_IDS = ['px', 'nx', 'py', 'ny', 'pz', 'nz'];
 
-export function validatePreparedCssSky(input: unknown, resources: PreparedCssVolume['resources']): PreparedCssSky {
+export function validatePreparedCssSky(input: unknown, resources: PreparedSkyResources): PreparedCssSky {
   const sky = record(input, ['schema', 'referenceFrame', 'epochJdTt', 'radiusUnits', 'faces', 'provenance', 'approximation'], 'sky', ['parallax']);
-  if (sky.schema !== 'cssearth-css-sky@1' || typeof sky.referenceFrame !== 'string' || !sky.referenceFrame || !finite(sky.epochJdTt) || !positive(sky.radiusUnits)) {
+  if (sky.schema !== PREPARED_CSS_SKY_SCHEMA || typeof sky.referenceFrame !== 'string' || !sky.referenceFrame || !finite(sky.epochJdTt) || !positive(sky.radiusUnits)) {
     throw new TypeError('Prepared sky identity or frame is invalid.');
   }
   if ('parallax' in sky) validatePreparedSkyParallax(sky.parallax);
@@ -17,7 +17,7 @@ export function validatePreparedCssSky(input: unknown, resources: PreparedCssVol
   return sky as unknown as PreparedCssSky;
 }
 
-function validateSkyFaces(faces: unknown, resources: PreparedCssVolume['resources']) {
+function validateSkyFaces(faces: unknown, resources: PreparedSkyResources) {
   if (!Array.isArray(faces) || faces.length !== 6) throw new TypeError('Prepared sky needs six cube faces.');
   const ids = new Set<string>();
   for (const inputFace of faces) {

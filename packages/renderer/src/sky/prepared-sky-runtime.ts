@@ -4,8 +4,8 @@ import { createPreparedLeafFrustum, preparedLeafMayContribute } from '../renderi
 import { cssViewFromOrientation, worldRotationCss } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedCssVolume } from '../volume/types.js';
-import type { PreparedCssSky } from './types.js';
-import { validatePreparedCssSky, validatePreparedSkyParallax } from './validation.js';
+import type { PreparedCssSky } from '@cssearth/objects';
+import { validatePreparedCssSky, validatePreparedSkyParallax } from '@cssearth/objects';
 import { afterStartup, startupOpen } from '../rendering/startup-gate.js';
 
 /** Transports retained celestial images through the shared physical observer pose. The cube is the diffuse Milky Way

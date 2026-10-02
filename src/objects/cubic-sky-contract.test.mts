@@ -7,7 +7,8 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import PREPARED_MERCURY_SKY from "./mercury/prepared/sky.json" with {type: "json"};
 import PREPARED_VENUS_SKY from "./venus/prepared/sky.json" with {type: "json"};
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, CUBIC_SKY_STANDARD, validatePreparedCubicSky } from '@cssearth/bake/presentation';
+import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, CUBIC_SKY_STANDARD} from '@cssearth/bake/presentation';
+import { validatePreparedCubicSky } from '@cssearth/objects';
 
 const runtimeSky = async (id: string) => requireRecord(await loadObjectTestDefinition(id)).sky;
 const OBJECT_SKIES = Object.freeze({

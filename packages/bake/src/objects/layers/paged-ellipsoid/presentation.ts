@@ -4,8 +4,8 @@ import type { prepareTextureLevels, TextureLevelConfiguration } from './texture-
 import type { SurfaceBankDatasets } from './contracts.ts';
 import type { PreparedNode } from '../../../presentation/index.ts';
 import type { MaterialSourceTrack } from '../../../presentation/index.ts';
-import type { PreparedCubicSkyPlan } from '../../../presentation/index.ts';
-import type { PreparedDirectionalSunPlan } from '../../../presentation/index.ts';
+import type { PreparedCubicSkyPlan } from '@cssearth/objects';
+import type { PreparedDirectionalSunPlan } from '@cssearth/objects';
 import type { ShellObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import type { preparePagedEllipsoidScene } from './globe/scene.ts';
 import type { preparePlaces } from './geographic/places.ts';

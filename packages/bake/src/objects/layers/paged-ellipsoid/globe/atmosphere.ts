@@ -1,5 +1,5 @@
 import type {SourceManifest} from '@cssearth/objects/node';
-import type {PreparedDirectionalSunPlan} from '../../../../presentation/index.ts';
+import type {PreparedDirectionalSunPlan} from '@cssearth/objects';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';

@@ -54,7 +54,7 @@ packages/renderer/
 │   ├── validation/     parsers for every prepared format
 │   ├── prepared-data/  ellipsoid projections
 │   ├── universe/       universe context and catalogues
-│   ├── solar-system/   heliocentric geometry, orbits, and the prepared cubic-sky and directional-Sun contracts
+│   ├── solar-system/   heliocentric geometry, orbits, and Sun direction computation (prepared formats: `@cssearth/objects`)
 │   ├── sky/, stars/, volume/, shell/, image-layers/, labels/
 │   └── styles/         runtime stylesheets
 ├── test/node/          Node suites and fixtures
