@@ -67,3 +67,11 @@ test('a finger reach takes the nearest label or marker only when nothing is unde
   ring.ariaDisabled = 'true';
   assert.equal(registry.pick(0, 20, 16), orbit);
 });
+
+test('a pick keeps its target, so a see-through selection can leave its members reachable', () => {
+  const registry = screenPicking({} as HTMLElement), marker = {} as HTMLElement;
+  registry.publish({}, [{ element: marker, rank: 0, shape: { kind: 'circle', x: 0, y: 0, radius: 13 }, unoccluded: true }]);
+  assert.equal(registry.pickTarget(0, 0)?.unoccluded, true);
+  assert.equal(registry.pick(0, 0), marker);
+  assert.equal(registry.pickTarget(40, 0), null);
+});

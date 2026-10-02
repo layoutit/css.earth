@@ -10,6 +10,9 @@ export interface ScreenPickTarget {
   /** Same back-to-front rank as the retained presentation. */
   rank: number;
   shape: ScreenPickShape;
+  /** Nothing solid is drawn over it: the selected object is see-through (a galaxy, a cluster, a nebula), so the
+   * detailed object's own hit does not cancel this pick. */
+  unoccluded?: boolean;
 }
 
 const registries = new WeakMap<HTMLElement, ReturnType<typeof createRegistry>>();
@@ -26,7 +29,8 @@ function createRegistry() {
     },
     subscribe(listener: () => void) { listeners.add(listener); return () => { listeners.delete(listener); }; },
     /** `reach` is a finger's slop: when nothing is under the point, the nearest label or marker within it is picked. */
-    pick(x: number, y: number, reach = 0) {
+    pick(x: number, y: number, reach = 0) { return this.pickTarget(x, y, reach)?.element ?? null; },
+    pickTarget(x: number, y: number, reach = 0): ScreenPickTarget | null {
       let direct: ScreenPickTarget | null = null, near: ScreenPickTarget | null = null, nearest = reach;
       for (const targets of publications.values()) for (const target of targets) {
         if (target.shape.kind === 'segments') continue;
@@ -42,14 +46,14 @@ function createRegistry() {
       direct ??= near;
       // Direct labels/markers always win, regardless of orbit depth. Do not
       // traverse any chord banks when that decision is already resolved.
-      if (direct) return direct.element;
+      if (direct) return direct;
       let orbit: ScreenPickTarget | null = null;
       for (const targets of publications.values()) for (const target of targets) {
         if (target.shape.kind !== 'segments' || target.element.ariaDisabled === 'true' ||
             (orbit && orbit.rank > target.rank)) continue;
         if (hitsScreenShape(target.shape, x, y)) orbit = target;
       }
-      return orbit?.element ?? null;
+      return orbit;
     },
   };
 }

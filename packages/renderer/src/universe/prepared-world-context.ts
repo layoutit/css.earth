@@ -1,5 +1,6 @@
 import { writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
+import { isExtendedClassification } from '@cssearth/objects';
 import { createContextLocator } from './context-locator.js';
 import type { PreparedWorldContext, PreparedContextBody } from '../prepared-data/world-context.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
@@ -103,7 +104,7 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
     return element;
   };
   const caption = leaf('context-flight-caption', 'contextFlightLabel'), circle = leaf('context-flight-circle', 'contextFlightCircle');
-  type Entry = { readonly body: { readonly id: string }; readonly marker: HTMLElement; readonly baseAlpha: { readonly line: number; readonly label: number } };
+  type Entry = { readonly body: { readonly id: string }; readonly caption: HTMLElement; readonly baseAlpha: { readonly line: number; readonly label: number } };
   return {
     /** Returns the destination whose caption is drawn, so its footprint joins the label exclusions. */
     publish(flightBody: ProjectedBody | undefined, entry: Entry | undefined, width: number, height: number): ProjectedBody | undefined {
@@ -123,7 +124,7 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
       if (captionBody?.labelPosition && entry) {
         if (caption.dataset.contextFlightLabel !== entry.body.id) {
           caption.dataset.contextFlightLabel = entry.body.id;
-          caption.textContent = entry.marker.dataset.contextName!;
+          caption.textContent = entry.caption.dataset.contextName!;
           caption.style.opacity = String(entry.baseAlpha.label);
         }
         const [x, y] = captionBody.labelPosition;
@@ -189,8 +190,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     const approximate = 'placement' in body && body.placement === 'approximate';
     // The body billboard is set only when resolved and visible. Unresolved bodies remain colour dots and never fetch an image.
     const { mover, marker, spriteLeaf, caption } = createMarker(plainDot), data = marker.dataset;
-    data.contextGroup = data.contextBody = data.contextLabel = body.id;
-    data.contextName = caption.dataset.contextName = approximate ? `${body.name}${APPROXIMATE_NAME}` : body.name;
+    // One id on the marker and the name on its caption, whose ::after draws it (world-context.css).
+    data.contextBody = body.id;
+    caption.dataset.contextName = approximate ? `${body.name}${APPROXIMATE_NAME}` : body.name;
     if (plainDot) spriteLeaf.style.backgroundColor = body.color;
     // A body's world colour is prepared (its swatch, else its catalogue colour lifted for caption contrast) and set inline, as a
     // body drawn from its record carries its own; without either the world's default applies. Capitals mark a star, black
@@ -694,7 +696,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         paintMembershipChanged = false;
       }
       interactions.commit(paintedOrder, depthOrder.rank, captionBody,
-        captionBody ? bodies[captionBody.index].labelSize : undefined, pickingChanged, navigationInFlight);
+        captionBody ? bodies[captionBody.index].labelSize : undefined, pickingChanged, navigationInFlight,
+        isExtendedClassification(selectedEntry.body.classification));
       });
       // Publish first, then attach populated owners. A later view reads only requested caption sizes.
       for (const entry of attachMarkers) root.appendChild(entry.mover);

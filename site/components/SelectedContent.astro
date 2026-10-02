@@ -1,9 +1,9 @@
 ---
-interface Props { title: string; metadata?: string | null; lead?: string; description?: string; }
+interface Props { /** Omitted when the row that selected this content already says it. */ title?: string; metadata?: string | null; lead?: string; description?: string; }
 const { title, metadata, lead, description } = Astro.props;
 ---
 <slot name="header">
-  <h3 class="object-dataset-details-title">{title}{metadata && <span class="object-selected-content-meta"> ({metadata})</span>}</h3>
+  {title && <h3 class="object-dataset-details-title">{title}{metadata && <span class="object-selected-content-meta"> ({metadata})</span>}</h3>}
 </slot>
 <slot />
 <p class="object-dataset-details-copy">{lead && <><strong class="object-dataset-details-lead">{lead}.</strong> </>}{description}</p>

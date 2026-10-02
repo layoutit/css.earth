@@ -32,6 +32,10 @@ Measured on the reconstruction the pipeline wrote (2026-09-30), against the publ
 
 The χ² values use ehtim 1.2.4 on scan-averaged data with baselines under 0.1 Gλ removed, the pipeline's own cut. They show that the image fits the released data as well as the published fiducial image; they do not show that it matches that image pixel for pixel. The ring is brightest to the south, as in Paper I's images.
 
+The page opens on the shadow. Its dataset shows the galaxy M87's volume around it, and until 2026-10-02 the page opened on that whole volume, 6.3 million light-years out, with the image under a pixel (left before, right after).
+
+![M87* on arrival, before and after](evidence/2026-10-02/arrival-before-after.webp)
+
 ## Known problems
 
 - The image is one reconstruction. Paper I's image averages the three pipelines' fiducial images for each day; this uses one pipeline on one day.
