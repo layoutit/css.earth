@@ -236,19 +236,29 @@ export function createSceneRouter({
       const viewport = world.viewport;
       const factory = await (replacement?.factory ?? loadObject(objectId, readPreparedDescriptor(documentTarget, objectId), session.signal));
       if (!scenes.isCurrent(session)) return;
-      const startup = !replacement ? await prepareStartupBillboard(stage, factory, viewport, session.url ?? navigationHref(windowTarget), session.objectId, session.signal) : null;
-      handoff ??= startup ?? undefined;
-      publication.publish();
-      if (!scenes.isCurrent(session)) return;
       // Every initial URL prepares its world before detail, including restored
       // cameras that cannot use the default arrival photograph. Attaching world
       // styles and layers afterward invalidates the already-presented surface.
+      // Behind the photograph it is built while the first view's images download, not after them: the same order, as
+      // the detail still waits for it below, on a main thread that was otherwise idle: after them it was one 68 ms task
+      // before the mount (2026-10-02).
+      const prepareWorld = () => ensureContext().then(async loaded => {
+        if (!scenes.isCurrent(session)) return;
+        if (!session.shell) attachShell(session, loaded);
+        await Promise.all([world.ensure(), loaded.registry.loadSystemView(objectId)]);
+      });
+      let worldTask: Promise<void> | null = null;
+      const startup = !replacement ? await prepareStartupBillboard(stage, factory, viewport, session.url ?? navigationHref(windowTarget), session.objectId, session.signal,
+        () => { worldTask = prepareWorld(); worldTask.catch(() => {}); }) : null;
+      handoff ??= startup ?? undefined;
+      publication.publish();
+      if (!scenes.isCurrent(session)) return;
       if (!replacement) {
         const loaded = await session.wait(ensureContext());
         if (loaded.cancelled || !scenes.isCurrent(session)) return;
         ready = loaded.value;
         if (!session.shell) attachShell(session, ready);
-        const contextual = await session.wait(Promise.all([world.ensure(), ready.registry.loadSystemView(objectId)]));
+        const contextual = await session.wait(worldTask ?? prepareWorld());
         if (contextual.cancelled || !scenes.isCurrent(session)) return;
       }
       const framePresenter = world.createFramePresenter();
@@ -262,6 +272,14 @@ export function createSceneRouter({
         onMotionRequest: requestMotion,
         onFeatureSelect: id => { void navigate(objectId, { kind: 'feature', id }).catch(report); },
         datasetEffects: createDatasetEffects(session, () => world.current, () => world.ensure()),
+        // A cold page's world is planned while its detail activates and paints, from the selection and camera the
+        // world will draw once the detail connects below; the plan waits in the queue for that identical request
+        // (world-frame-queue.ts `warm`). A flight's mount keeps its own hook (prepared-world-navigation.mts).
+        ...(replacement ? {} : { onNavigationReady(owner: Parameters<typeof world.select>[1]) {
+          if (!scenes.isCurrent(session)) return;
+          world.select(session, owner);
+          framePresenter.warm();
+        } }),
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;

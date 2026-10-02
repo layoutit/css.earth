@@ -125,11 +125,13 @@ test('initial commit remains successful when its publication immediately request
   assert.equal(finalCommit.plan.textureLevel, 2);
   assert.deepEqual(h.fatal, []);
 });
-test('a close startup decodes its destination level without a coarse pass or input gate', async t => {
+test('a close startup draws its first level like every other, then decodes its destination level', async t => {
   const h = harness({ initialDiameter: 1000 }); t.after(h.restore); await h.ready();
-  assert.equal(h.commits[0].plan.textureLevel, 2);
-  assert(h.commits.every(commit => commit.plan.textureLevel === 2));
-  assert(!h.jobs.some(job => /-sheet-1024\.webp/.test(job.url)), 'startup never requests the coarse sheet');
+  // One start for every screen: the first commit is the first level, however large the body is drawn.
+  assert.equal(h.commits[0].plan.textureLevel, 0);
+  assert(h.jobs.some(job => /-sheet-1024\.webp/.test(job.url)), 'startup draws from the first level\'s sheet');
+  h.view(0, 0, 1000); await h.resolveJobs();
+  assert.equal(h.coordinator.state().plan?.textureLevel, 2, 'the next view sharpens to the level its size calls for');
   h.view(0, 0, 100); await h.resolveJobs();
   assert.equal(h.coordinator.state().plan?.textureLevel, 0, 'a distant view still selects its sufficient small level');
 });
