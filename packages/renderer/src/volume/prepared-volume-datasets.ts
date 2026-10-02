@@ -195,7 +195,8 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
       let stars: ReturnType<typeof mountPreparedCataloguePoints> | null = null;
       const mountStars = () => {
         stars = mountPreparedCataloguePoints({ host: root, before: end, payload: datasetById.get(selected)!.stars, createElement: create, nativeFocalCss });
-        writeStyle(stars.root, 'display', starsVisible ? 'block' : 'none');
+        // Written directly while the points are built: the first publication's write through writeStyle always lands.
+        stars.root.style.display = starsVisible ? 'block' : 'none';
       };
       const state = (): PreparedVolumeDatasetState => Object.freeze({ id: selected, defaultDataset: data.defaultDataset, selectedDataset: selected,
         objectId: data.id, starsVisible, datasets: datasetContent });

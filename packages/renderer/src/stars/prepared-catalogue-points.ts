@@ -81,8 +81,10 @@ export function mountPreparedCataloguePoints({ host, before, payload, createElem
     materials = data.points.map(point => points.get(point.id)!);
     data.points.forEach((point, index) => {
       const material = materials[index];
-      Object.assign(nodes[index].style, { width: `${material.sizePx}px`, height: `${material.sizePx}px`,
-        background: material.colorCss, opacity: String(material.opacity) });
+      // The size goes through the same writer as a projected size below: a direct write here would leave that writer
+      // remembering the size it last projected, and it would skip writing it again after a dataset switch.
+      writeStyle(nodes[index], 'width', `${material.sizePx}px`); writeStyle(nodes[index], 'height', `${material.sizePx}px`);
+      Object.assign(nodes[index].style, { background: material.colorCss, opacity: String(material.opacity) });
     });
   };
   const publish = (publication: VolumeCameraPublication) => {
