@@ -27,7 +27,8 @@ interface Recipe {
    * haloes, small background galaxies) drops out and the smooth light stays. Only for a window above the fit's cell. */
   compactClamp?: { windowPx: number; basis: string };
   grid: InferenceGrid; prior: SymmetryPrior; tau: number; iterations: number;
-  blackLevel: number; displayExposure: number; slices: number; assumptions: string[];
+  /** One level, or one per channel (red, green, blue) for a composite whose sky is not grey. */
+  blackLevel: number | [number, number, number]; displayExposure: number; slices: number; assumptions: string[];
   nativeRemoval?: NativeRemoval;
   shapePrior?: ShapePrior;
   modelReference?: { paper: string };
@@ -39,7 +40,7 @@ const recipeText = await readFile(recipePath, 'utf8'), rawRecipe: unknown = JSON
 const recipe = rawRecipe as Recipe;
 if (recipe.schema !== 'cssearth-emission-inference@1' || !/^[a-z0-9-]+$/.test(recipe.id) ||
     !/^https:\/\//.test(recipe.source.url) ||
-    !Number.isFinite(recipe.blackLevel) || recipe.blackLevel < 0 || recipe.blackLevel >= 1)
+    (Array.isArray(recipe.blackLevel) ? recipe.blackLevel.length !== 3 ? [NaN] : recipe.blackLevel : [recipe.blackLevel]).some(level => !Number.isFinite(level) || level < 0 || level >= 1))
   throw new TypeError('Invalid emission recipe.');
 const cache = resolve('.local/nebula-lab/planetary'), sourcePath = resolve(cache, `${recipe.id}-original.jpg`);
 await mkdir(cache, { recursive: true });
