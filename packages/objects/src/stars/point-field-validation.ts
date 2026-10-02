@@ -1,7 +1,8 @@
-import { parseDensityVolumeFrame } from '@cssearth/objects';
-import { POINT_FIELD_BANK_ENCODING, POINT_FIELD_BANK_QUANTIZATION, decodePointFieldBank, pointFieldBankLayout } from './point-field-bank.js';
+import { POINT_FIELD_BANK_ENCODING, PREPARED_CSS_POINT_FIELD_SCHEMA, PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA } from './point-field-schemas.js';
+import { parseDensityVolumeFrame } from '../density-volume.js';
+import { POINT_FIELD_BANK_QUANTIZATION, decodePointFieldBank, pointFieldBankLayout } from './point-field-bank.js';
 import type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedPointFieldBank, PreparedPointFieldNode,
-  PreparedPointFieldQuantization, PreparedPointFieldResource, PointFieldRgb } from './types.js';
+  PreparedPointFieldQuantization, PreparedPointFieldResource, PointFieldRgb } from './point-field-types.js';
 
 const IDENTIFIER = /^[a-z][a-z0-9-]*$/u;
 const ID_PREFIX = /^[a-z0-9][a-z0-9.-]*$/u;
@@ -14,7 +15,7 @@ export function parsePreparedCssPointFieldManifest(value: unknown): PreparedCssP
   for (const key of ['schema', 'id', 'frame', 'bank', 'atlas', 'photometry', 'policy', 'labels', 'resources']) if (!(key in input)) {
     throw new TypeError(`prepared CSS point field is missing ${key}.`);
   }
-  if (input.schema !== 'cssearth-css-point-field-bank@1' || typeof input.id !== 'string' || !IDENTIFIER.test(input.id)) {
+  if (input.schema !== PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA || typeof input.id !== 'string' || !IDENTIFIER.test(input.id)) {
     throw new TypeError('Prepared point field identity is invalid.');
   }
   const frame = parseDensityVolumeFrame(input.frame);
@@ -30,7 +31,7 @@ export function parsePreparedCssPointFieldManifest(value: unknown): PreparedCssP
   const photometry = parsePhotometry(input.photometry);
   const policy = parsePolicy(input.policy);
   const labels = parseLabels(input.labels);
-  return Object.freeze({ schema: 'cssearth-css-point-field-bank@1', id: input.id, frame, bank, atlas,
+  return Object.freeze({ schema: PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA, id: input.id, frame, bank, atlas,
     photometry, policy, labels, ...(diffuseSky === undefined ? {} : { diffuseSky }), resources });
 }
 
@@ -39,7 +40,7 @@ export function decodePreparedCssPointField(manifest: PreparedCssPointFieldManif
   const { stars, nodes } = decodePointFieldBank(bytes, manifest.bank, { frame: manifest.frame, colorCount: manifest.atlas.colors.length });
   validateHierarchy(nodes, stars.length);
   const { id, frame, atlas, photometry, policy, labels, diffuseSky, resources } = manifest;
-  return Object.freeze({ schema: 'cssearth-css-point-field@1', id, frame, stars, nodes, atlas,
+  return Object.freeze({ schema: PREPARED_CSS_POINT_FIELD_SCHEMA, id, frame, stars, nodes, atlas,
     photometry, policy, labels, ...(diffuseSky === undefined ? {} : { diffuseSky }), resources });
 }
 

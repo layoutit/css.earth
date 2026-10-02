@@ -6,7 +6,8 @@ around the focused object. The site and the preparation tools reach it through `
 The compilers that write the renderer's prepared formats are preparation code; they live in `@cssearth/bake` and import
 this package. Shared format identifiers and compact world-summary/system table decoders live in
 `@cssearth/objects`; world-context validation, camera frame/presentation data, system views and orbit-bank codecs also live there.
-Camera projection and navigation remain here.
+Catalogue bank codecs and point-field data, manifest and binary bank contracts live in `@cssearth/objects` too.
+Camera projection, star loading and navigation remain here.
 
 ## The runtime contract
 

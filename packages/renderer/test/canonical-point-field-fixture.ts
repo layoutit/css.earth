@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
-import type { PreparedCssPointField, PreparedCssPointFieldManifest } from '../src/stars/types.ts';
-import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '../src/stars/validation.ts';
+import type { PreparedCssPointField, PreparedCssPointFieldManifest } from '@cssearth/objects';
+import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 
 const base = new URL('./fixtures/point-field/', import.meta.url);

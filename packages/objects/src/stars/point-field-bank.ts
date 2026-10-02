@@ -1,13 +1,12 @@
-import type { DensityVolumeFrame } from '@cssearth/objects';
+import type { DensityVolumeFrame } from '../density-volume.js';
 import type { PointFieldBankStorage, PointFieldVector, PreparedPointFieldBank, PreparedPointFieldBankColumn,
-  PreparedPointFieldNode, PreparedPointFieldStar } from './types.js';
+  PreparedPointFieldNode, PreparedPointFieldStar } from './point-field-types.js';
 
 /** Binary column bank of one prepared point field. Little-endian, every column 8-byte aligned.
  * Header (64 bytes): magic "CSEPFB01", u16 header bytes, u16 version, u32 star count, u32 node count,
  * u32 child-link count, u32 anchor count, u16 column count, u16 zero, u32 total bytes, zero padding.
  * Directory: one (u32 offset, u32 byte length) pair per column, in POINT_FIELD_BANK_COLUMNS order.
  * Runtime only decodes these prepared values; it derives no position, magnitude or hierarchy. */
-export const POINT_FIELD_BANK_ENCODING = 'cssearth-point-field-bank@1';
 export const POINT_FIELD_BANK_MAGIC = 'CSEPFB01';
 export const POINT_FIELD_BANK_VERSION = 1;
 export const POINT_FIELD_BANK_HEADER_BYTES = 64;

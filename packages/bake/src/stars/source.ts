@@ -1,7 +1,8 @@
 import { STAR_IDS, starAstrometry, starStateKm, PARSEC_KM } from '@cssearth/astronomy';
 import { readCatalog } from '@cssearth/catalog';
 import type { Catalog } from '@cssearth/catalog';
-import type { PreparedStar, Rgb, StarsRecipe } from './types.ts';
+import type { PreparedPointFieldStar } from '@cssearth/objects';
+import type { Rgb, StarsRecipe } from './types.ts';
 import { sourceBytes } from '../volume/node/index.ts';
 import { catalogueColor } from '@cssearth/engine';
 import { nearestColor } from './color.ts';
@@ -28,7 +29,7 @@ export async function loadStarSource(sourceDirectory: string, recipe: StarsRecip
   }
   const reconciliations: { bodyId: string; hipparcosId: number; sourceRow: number; originalPositionPc: number[]; positionPc: number[]; originalAbsoluteMagnitude: number; absoluteMagnitude: number; astrometry: ReturnType<typeof starAstrometry> }[] = [];
   const seen = new Set<number>();
-  const stars: PreparedStar[] = [];
+  const stars: PreparedPointFieldStar[] = [];
   for (let i = 0; i < catalogue.count; i++) {
     const x = positions[i*3]!, y = positions[i*3+1]!, z = positions[i*3+2]!, absoluteMagnitude = magnitudes[i]!;
     if (![x,y,z,absoluteMagnitude].every(Number.isFinite) || !(Math.hypot(x,y,z) > 0)) throw new TypeError(`Star source row ${i} has no finite spatial/luminosity state.`);
@@ -55,7 +56,7 @@ export async function loadStarSource(sourceDirectory: string, recipe: StarsRecip
 }
 
 /** One real brightest apparent star in every deterministic all-sky cube cell. */
-function applyCoverageAnchors(stars: readonly PreparedStar[], divisions: number): PreparedStar[] {
+function applyCoverageAnchors(stars: readonly PreparedPointFieldStar[], divisions: number): PreparedPointFieldStar[] {
   const best = Array<number>(6 * divisions * divisions).fill(-1), magnitude = Array<number>(best.length).fill(Infinity);
   for (let index = 0; index < stars.length; index++) {
     const star = stars[index]!, [x, y, z] = star.positionUnits, cell = coverageCell(x, y, z, divisions), distance = Math.hypot(x, y, z);

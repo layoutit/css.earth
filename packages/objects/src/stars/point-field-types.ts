@@ -1,4 +1,6 @@
-import type { DensityVolumeFrame } from '@cssearth/objects';
+import type { POINT_FIELD_BANK_ENCODING } from './point-field-schemas.js';
+import { PREPARED_CSS_POINT_FIELD_SCHEMA, PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA } from './point-field-schemas.js';
+import type { DensityVolumeFrame } from '../density-volume.js';
 
 export type PointFieldVector = readonly [number, number, number];
 export type PointFieldRgb = readonly [number, number, number];
@@ -30,7 +32,7 @@ export interface PreparedPointFieldResource {
 }
 
 export interface PreparedCssPointField {
-  readonly schema: 'cssearth-css-point-field@1';
+  readonly schema: typeof PREPARED_CSS_POINT_FIELD_SCHEMA;
   readonly id: string;
   readonly frame: DensityVolumeFrame;
   readonly stars: readonly PreparedPointFieldStar[];
@@ -94,7 +96,7 @@ export interface PreparedPointFieldQuantization {
 }
 
 export interface PreparedPointFieldBank {
-  readonly encoding: 'cssearth-point-field-bank@1';
+  readonly encoding: typeof POINT_FIELD_BANK_ENCODING;
   readonly path: string;
   readonly bytes: number;
   readonly starIdPrefix: string;
@@ -110,7 +112,7 @@ export interface PreparedPointFieldBank {
 
 /** Prepared transport: this JSON manifest plus the binary column bank it names. */
 export interface PreparedCssPointFieldManifest extends Omit<PreparedCssPointField, 'schema' | 'stars' | 'nodes'> {
-  readonly schema: 'cssearth-css-point-field-bank@1';
+  readonly schema: typeof PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA;
   readonly bank: PreparedPointFieldBank;
 }
 

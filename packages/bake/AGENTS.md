@@ -295,7 +295,7 @@ its validators accept); the renderer never imports the bake.
   keeps them first (`catalogue-groups.ts`). `catalogue-spheroid.ts` draws a sky catalogue's depths through a published spheroid, around the Sun in kpc or around an
   object in pc. `body-points.ts` builds a bank centred on a body from positions relative to it
   (a planet's moons without a page); `packages/bake/cli/prepare-body-points.mts <object-directory> <id>` is its command. It may import `node:*`, `sharp`, the main volume entry and the
-  renderer's catalogue bank codec (`@cssearth/renderer/prepared-data/catalogue-bank-binary.ts`), which packs a bank as the page decodes it. The main entry never imports it; the Node-only
+  objects' catalogue bank codec (`@cssearth/objects`), which packs a bank as the page decodes it. The main entry never imports it; the Node-only
   topics above may, as a lower layer.
 
 ## Behaviour is part of the contract

@@ -1,13 +1,5 @@
 export type Point3 = readonly [number, number, number];
 export type Rgb = readonly [number, number, number];
-export interface PreparedStar {
-  readonly id: string; readonly positionUnits: Point3; readonly absoluteMagnitude: number;
-  readonly colorIndex: number; readonly name: string | null; readonly coverageAnchor: boolean;
-}
-export interface PreparedStarNode {
-  readonly positionUnits: Point3; readonly radiusUnits: number; readonly absoluteMagnitude: number;
-  readonly colorIndex: number; readonly first: number; readonly count: number; readonly children: readonly number[];
-}
 export interface RuntimeLabelPolicy {
   readonly activeSlots: number; readonly transitionSlots: number; readonly capHeightPx: number;
   readonly gapPx: number; readonly maxAlpha: number; readonly fadeMs: number;
@@ -26,5 +18,3 @@ export interface StarsRecipe {
   readonly labels: RuntimeLabelPolicy;
   readonly diffuseSky?: { readonly faces: readonly { readonly id: string; readonly path: string }[]; readonly width: number; readonly blurSigmaPixels: number };
 }
-/** The prepared transport (JSON manifest plus binary bank) is owned by the renderer decoder. */
-export type { PreparedCssPointFieldManifest } from '@cssearth/renderer/stars/types.ts';

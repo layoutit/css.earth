@@ -5,7 +5,7 @@ import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { mountCataloguePoints, parseCataloguePoints } from './catalogue-points.js';
 import { catalogueCells, cataloguePointSpread } from '@cssearth/objects';
-import { decodeCatalogueBankBinary } from '../prepared-data/catalogue-bank-binary.js';
+import { decodeCatalogueBankBinary } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 import { holdStartup, releaseStartup } from '../rendering/startup-gate.js';
 
