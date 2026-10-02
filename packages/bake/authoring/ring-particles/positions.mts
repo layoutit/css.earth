@@ -8,40 +8,63 @@
  * optical depth, get no dot. Each dot's place inside its bin and its longitude come from a seeded generator, so they are
  * not measurements; nothing else is authored. The dots lie in the planet's equatorial plane at its prepared epoch.
  *
- * Usage: node packages/bake/authoring/ring-particles/positions.mts <host id>
+ * A planet whose rings are a table of bands (an `annular-field` layer: each ring's radius, width and normal optical depth)
+ * is sampled the same way, one bin per band: opacity times the band's published width times its radius, the dot uniform
+ * across that width.
+ *
+ * Usage: node packages/bake/authoring/ring-particles/positions.mts <host id> [dots]
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { bodyPoleIcrf, bodyRotationAt, ROTATING_BODY_IDS, type RotatingBodyId } from '@cssearth/astronomy';
 
-/** How many dots are drawn, and the generator's seed. Both are display choices, not measurements. */
-const DOTS = 4000, SEED = 20061012;
+/** How many dots are drawn unless the command says, and the generator's seed. Both are display choices, not measurements. */
+const DEFAULT_DOTS = 4000, SEED = 20061012;
 
 const host = process.argv[2] ?? '';
 if (!(ROTATING_BODY_IDS as readonly string[]).includes(host)) throw new TypeError(`Usage: positions.mts <host id>; ${JSON.stringify(host)} has no rotation model.`);
 const root = resolve(import.meta.dirname, '../../../..'), hostDirectory = resolve(root, 'src/objects', host);
 const recipePath = resolve(hostDirectory, 'source/preparation/rings.json');
-const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as { sources?: { path?: string }[]; layers?: { kind?: string; bounds?: number[] }[] };
-const profile = recipe.layers?.find(layer => layer.kind === 'observed-radial-profile'), tablePath = recipe.sources?.[0]?.path;
-const [inner, outer] = profile?.bounds ?? [];
-if (!tablePath || !Number.isFinite(inner) || !Number.isFinite(outer)) throw new TypeError(`${recipePath}: needs a source table and an observed-radial-profile layer with bounds; ${host} has no measured ring profile.`);
+const DOTS = process.argv[3] === undefined ? DEFAULT_DOTS : Number(process.argv[3]);
+if (!Number.isInteger(DOTS) || DOTS < 1) throw new TypeError(`The dot count must be a whole number above zero, got ${JSON.stringify(process.argv[3])}.`);
+interface Band { id?: string; source?: { radiusKm?: number; widthKm?: number; opticalDepth?: number } }
+const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as { sources?: { path?: string }[]; layers?: { kind?: string; bounds?: number[]; bands?: Band[] }[] };
+const profile = recipe.layers?.find(layer => layer.kind === 'observed-radial-profile'), field = recipe.layers?.find(layer => layer.kind === 'annular-field');
+if (!profile && !field) throw new TypeError(`${recipePath}: needs an observed-radial-profile or an annular-field layer; ${host} has no measured rings.`);
 const descriptorPath = resolve(hostDirectory, 'object.json');
 const epochJdTt = (JSON.parse(await readFile(descriptorPath, 'utf8')) as { properties: { worldFrame: { epochJdTt: number } } }).properties.worldFrame.epochJdTt;
 if (!Number.isFinite(epochJdTt)) throw new TypeError(`${descriptorPath} properties.worldFrame.epochJdTt must be a Julian date, got ${JSON.stringify(epochJdTt)}.`);
 
+/** One sampling bin: a dot lands within `widthKm` centred on `radiusKm`, chosen in proportion to `weight`. */
+const bins: { radiusKm: number; widthKm: number; weight: number }[] = [];
+let described: string;
+if (profile) {
+const [inner, outer] = profile.bounds ?? [], tablePath = recipe.sources?.[0]?.path;
+if (!tablePath || !Number.isFinite(inner) || !Number.isFinite(outer)) throw new TypeError(`${recipePath}: the observed-radial-profile layer needs a source table and bounds.`);
 // The PDS occultation table: ring radius (km), ..., normal optical depth (column 5), its detectable maximum (column 6),
 // ..., note flag (column 12, 0 for a clean bin). -1 marks a missing optical depth.
 const table = resolve(hostDirectory, 'source', tablePath);
-const bins: { radiusKm: number; weight: number }[] = [];
 for (const [index, line] of (await readFile(table, 'latin1')).split('\n').entries()) {
   if (!line.trim()) continue;
   const fields = line.split(',').map(Number), [radiusKm, , , , tau, maximum, , , , , , flag] = fields;
   if (fields.length !== 12 || !Number.isFinite(radiusKm) || !Number.isFinite(tau)) throw new TypeError(`${table} row ${index + 1}: expected 12 numeric columns, got ${JSON.stringify(line)}.`);
   if (radiusKm! < inner! || radiusKm! > outer! || flag !== 0 || !(tau! > 0)) continue;
-  bins.push({ radiusKm: radiusKm!, weight: (1 - Math.exp(-(maximum! > 0 ? Math.min(tau!, maximum!) : tau!))) * radiusKm! });
+  bins.push({ radiusKm: radiusKm!, widthKm: 1, weight: (1 - Math.exp(-(maximum! > 0 ? Math.min(tau!, maximum!) : tau!))) * radiusKm! });
 }
 if (!bins.length) throw new TypeError(`${table}: no clean bin with a measured optical depth between ${inner} and ${outer} km.`);
+described = `${bins.length} clean bins of ${table} (${inner} to ${outer} km)`;
+} else {
+  for (const band of field!.bands ?? []) {
+    const { radiusKm, widthKm, opticalDepth } = band.source ?? {};
+    if (![radiusKm, widthKm, opticalDepth].every(value => typeof value === 'number' && value > 0)) {
+      throw new TypeError(`${recipePath}: band ${JSON.stringify(band.id)} needs a positive source radiusKm, widthKm and opticalDepth, got ${JSON.stringify(band.source)}.`);
+    }
+    bins.push({ radiusKm: radiusKm!, widthKm: widthKm!, weight: (1 - Math.exp(-opticalDepth!)) * widthKm! * radiusKm! });
+  }
+  if (!bins.length) throw new TypeError(`${recipePath}: the annular-field layer has no bands.`);
+  described = `the ${bins.length} bands of ${recipePath}`;
+}
 let total = 0;
 const cumulative = bins.map(bin => total += bin.weight);
 
@@ -64,9 +87,9 @@ for (let dot = 1; dot <= DOTS; dot++) {
   const pick = random() * total;
   let low = 0, high = cumulative.length - 1;
   while (low < high) { const middle = low + high >> 1; if (cumulative[middle]! < pick) low = middle + 1; else high = middle; }
-  const radiusKm = bins[low]!.radiusKm + random() - 0.5, longitude = random() * 2 * Math.PI;
+  const radiusKm = bins[low]!.radiusKm + (random() - 0.5) * bins[low]!.widthKm, longitude = random() * 2 * Math.PI;
   rows.push(`${dot},${[0, 1, 2].map(axis => (radiusKm * (Math.cos(longitude) * node[axis]! + Math.sin(longitude) * quarter[axis]!)).toFixed(1)).join(',')}`);
 }
 const output = resolve(root, `src/objects/${host}-ring-particles/source/dots/positions.csv.gz`);
 await writeFile(output, gzipSync(`name,xKm,yKm,zKm\n${rows.join('\n')}\n`));
-console.log(`Wrote ${rows.length} dots from ${bins.length} clean bins of ${table} (${inner} to ${outer} km), ring plane at JD ${epochJdTt} TT, to ${output}.`);
+console.log(`Wrote ${rows.length} dots from ${described}; opacity-weighted area ${Math.round(2 * Math.PI * total).toLocaleString('en')} km2; ring plane at JD ${epochJdTt} TT, to ${output}.`);

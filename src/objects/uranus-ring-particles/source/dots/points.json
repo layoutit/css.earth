@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-body-points-source@1",
+  "id": "dots",
+  "published": true,
+  "host": "uranus",
+  "source": "pds-rings-uranus-ring-table",
+  "meaning": "Dots along Uranus's rings whose density follows each ring's published width and normal optical depth. The position of a single dot is not a measurement: no ring particle has a measured position, so each dot's longitude and its place across its ring's width come from a seeded generator.",
+  "table": {
+    "path": "positions.csv.gz",
+    "origin": "https://pds-rings.seti.org/uranus/uranus_rings_table.html",
+    "generator": "packages/bake/authoring/ring-particles/positions.mts"
+  },
+  "frame": {
+    "input": "host-centred-icrf-km",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "appearance": {
+    "colorCss": "#9a9a9a",
+    "radiusPx": 0.75,
+    "opacity": 1
+  }
+}

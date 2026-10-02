@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "positions",
+      "path": "src/objects/uranus-ring-particles/source/dots/positions.csv.gz",
+      "origin": "https://pds-rings.seti.org/uranus/uranus_rings_table.html",
+      "sourceUrl": "https://pds-rings.seti.org/uranus/uranus_rings_table.html",
+      "title": "600 dots in Uranus's ring plane, sampled from the published ring widths and optical depths",
+      "credit": "NASA Planetary Data System, Ring-Moon Systems Node, Uranus ring table",
+      "acquisition": "Written 2026-10-02 by packages/bake/authoring/ring-particles/positions.mts uranus 600 from the bands of Uranus's ring recipe: each ring's share of the dots follows its opacity, width and radius; longitudes come from a seeded generator and are not measurements.",
+      "generator": "packages/bake/authoring/ring-particles/positions.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-rings-uranus-ring-table",
+            "role": "material",
+            "evidence": "src/objects/uranus-ring-particles/source/dots/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "ring-table"
+      ],
+      "license": "NASA PDS data; not copyrighted, cite the Ring-Moon Systems Node."
+    },
+    {
+      "id": "ring-table",
+      "path": "src/objects/uranus/source/preparation/rings.json",
+      "origin": "https://pds-rings.seti.org/uranus/uranus_rings_table.html",
+      "sourceUrl": "https://pds-rings.seti.org/uranus/uranus_rings_table.html",
+      "title": "Uranus's rings: radius, width and normal optical depth of each ring, as recorded in Uranus's ring recipe",
+      "credit": "NASA Planetary Data System, Ring-Moon Systems Node, Uranus ring table",
+      "acquisition": "Read from Uranus's package, whose ring recipe records the PDS Rings Node values.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-rings-uranus-ring-table",
+            "role": "material",
+            "evidence": "src/objects/uranus-ring-particles/README.md#sources"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "NASA PDS data; not copyrighted, cite the Ring-Moon Systems Node."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/uranus-ring-particles/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/uranus-ring-particles/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}
