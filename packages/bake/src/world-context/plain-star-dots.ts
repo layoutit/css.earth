@@ -6,6 +6,8 @@ const PARSEC_M = 3.0856775814913673e16;
 const UNITS = [{ id: 'plain-stars', name: 'parsecs', metersPerUnit: PARSEC_M, rounding: '1e-4 pc' },
   { id: 'plain-stars-far', name: 'kiloparsecs', metersPerUnit: PARSEC_M * 1e3, rounding: '0.1 pc' }] as const;
 const UNIT_REACH = 0x7fffffff / 1e4;
+/** Every bank this module may write, so a bake that leaves one empty removes its old file. */
+export const PLAIN_STAR_DOT_BANK_IDS: readonly string[] = UNITS.map(unit => unit.id);
 /** A plain dot's diameter as a body's marker drew it (site/application-world-resources.mts PLAIN_DOT_MINIMUM_PIXELS). */
 const DOT_RADIUS_PX = 0.75;
 
@@ -37,7 +39,7 @@ export function plainStarDotBanks(stars: readonly PlainStar[], frame: WorldFrame
       meaning: 'One dot per catalogued star the map does not label or open by click. Each star keeps its own page, reached by search.',
       frame: { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, originM: [...origin], localToReferenceXyzw: [0, 0, 0, 1],
         metersPerUnit: unit.metersPerUnit, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
-      // Every dot shows from anywhere inside the bank's reach: these are catalogued stars, never a sample to thin.
+      // Every dot shows from anywhere inside the bank's reach; from farther out the bank thins like any other.
       appearance: { colorCss: palette[0]!, radiusPx: DOT_RADIUS_PX, opacity: 1, palette, fullDetailUnits: reach },
       counts: { rows: members.length, points: members.length },
       conversion: `Prepared positions relative to the world's origin (${frame.referenceFrame}, JD ${frame.epochJdTt} TT), in ${unit.name} rounded to ${unit.rounding}.`,

@@ -1,4 +1,5 @@
 import { startupFetch } from './startup-requests.mts';
+import { readOwnWorldRow } from './object-entries.mts';
 
 /** The world summary's address: bundled by Vite for the browser, the checked-in file in Node (`world-context-plan.mts`). */
 export const WORLD_SUMMARY_SOURCE = new URL('../src/objects/sun/prepared/world-context-summary.json', import.meta.url);
@@ -9,22 +10,18 @@ export function worldSystemHost(deferred: readonly { readonly id: string; readon
   return deferred?.find(body => body.id === id)?.host ?? (deferred?.some(body => body.host === id) ? id : null);
 }
 
-/** Whether the summary leaves `id` to its own object entry: a plain-dot star nothing orbits, which hosts itself. */
-export function ownsItsWorldRow(deferred: readonly { readonly id: string; readonly host: string }[] | undefined, id: string): boolean {
-  return deferred?.some(body => body.id === id && body.host === id) === true;
+/** The summary's list of the bodies it leaves to other files, as rows: the file writes it as one column per field. */
+export function listedBodies(summary: unknown): readonly { readonly id: string; readonly host: string }[] | undefined {
+  const deferred = (summary as { deferred?: unknown } | null)?.deferred;
+  if (Array.isArray(deferred)) return deferred as { id: string; host: string }[];
+  const columns = deferred as { id?: unknown; host?: unknown } | undefined;
+  if (!columns || !Array.isArray(columns.id) || !Array.isArray(columns.host)) return undefined;
+  const hosts = columns.host as string[];
+  return (columns.id as string[]).map((id, index) => ({ id, host: hosts[index]! }));
 }
-/** Such a star's world row, as a system of one body, from its object entry (`pages/objects/[id]/entry.json.ts`). The
- * page's head may have asked for the entry already (startup-requests.mts): its answer is read without taking it from the
- * object directory, which reads the same entry. */
-export async function readOwnWorldRow(id: string): Promise<unknown> {
-  const url = `/objects/${encodeURIComponent(id)}/entry.json`;
-  const started = typeof window === 'undefined' ? undefined : window.__cssEarthStartupRequests?.get(new URL(url, window.location.href).href);
-  const response = started ? (await started).clone() : await fetch(url);
-  if (!response.ok) throw new Error(`Object entry request ${url} failed: ${response.status}.`);
-  const entry: unknown = await response.json();
-  const system = entry && typeof entry === 'object' && 'worldSystem' in entry ? entry.worldSystem : undefined;
-  if (system === undefined) throw new TypeError(`${url}: the entry of a star the world summary leaves to it carries no worldSystem.`);
-  return system;
+/** Whether `id` is a star the summary only lists and nothing orbits: its row is in its own object entry, not a system file. */
+export function ownsItsWorldRow(listed: readonly { readonly id: string; readonly host: string }[] | undefined, id: string): boolean {
+  return listed?.some(body => body.id === id && body.host === id) === true && !listed.some(body => body.host === id && body.id !== id);
 }
 
 /** What a page read before its application loaded: the world summary, and the page's own system when another file holds it. */
@@ -54,8 +51,7 @@ export async function loadStartupWorld(windowTarget: Window): Promise<void> {
   };
   const summary = await read(WORLD_SUMMARY_SOURCE, 'Prepared world context');
   // A page's own body: the first path segment of its address (`/<id>/`).
-  const deferred = (summary as { deferred?: readonly { id: string; host: string }[] } | null)?.deferred;
-  const listed = Array.isArray(deferred) ? deferred : undefined;
+  const listed = listedBodies(summary);
   const own = worldSystemHost(listed, windowTarget.location.pathname.split('/')[1] ?? '');
   const world: StartupWorld = { summary, system: own ? { id: own,
     value: ownsItsWorldRow(listed, own) ? await readOwnWorldRow(own) : await read(`/world/systems/${own}.json`, 'Prepared world system') } : null };

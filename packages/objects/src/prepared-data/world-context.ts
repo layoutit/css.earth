@@ -135,6 +135,8 @@ export interface PreparedWorldContext {
   readonly deferred?: readonly PreparedDeferredBody[];
   /** How many bodies the whole world holds, read or not: what stacking and ordering count on. */
   readonly worldBodyCount?: number;
+  /** The dot banks the bake wrote for the stars the summary only lists (plain-star-dots.ts in @cssearth/bake), by id. */
+  readonly dotBanks?: readonly string[];
 }
 /** A body of a system the summary does not hold yet (`world-systems/<host>.json`), listed with what navigation, search and
  * world visibility read before that system loads, and its place (`order`) among the world's bodies. */
@@ -431,14 +433,17 @@ function parseOrbitBanks(value: unknown): Readonly<Record<string, number>> | und
  * the summary places, at its own place among the world's bodies. */
 function parseDeferred(value: unknown, bodies: readonly PreparedContextBody[], worldBodyCount: number): readonly PreparedDeferredBody[] {
   const held = new Map(bodies.map(body => [body.id, body]));
+  // A plain-dot star hosts itself: the summary only lists it, with the bodies that orbit it.
+  const listedStars = new Set(array(value, 'deferred bodies').flatMap(entry => { const row = record(entry, 'deferred body'); return row.id === row.host ? [String(row.id)] : []; }));
   const deferred = array(value, 'deferred bodies').map(entry => {
     const input = record(entry, 'deferred body', ['id', 'name', 'host', 'order', 'systemName', 'classification', 'discovery', 'plainDot', 'unpackaged']);
     const id = text(input.id, 'deferred body id'), host = text(input.host, `deferred body ${id} host`), order = finite(input.order, `deferred body ${id} order`);
     if (!/^[a-z][a-z0-9-]*$/.test(id) || held.has(id)) throw new TypeError(`Deferred body ${id} is not an identity apart from the summary's bodies.`);
-    // A plain-dot star nothing orbits hosts itself: its row is in its own object entry (`/objects/<id>/entry.json`).
+    // A plain-dot star hosts itself: its row is in its system's file with its planets, or with none in its own object
+    // entry (`/objects/<id>/entry.json`).
     if (host === id) {
       if (input.plainDot !== true || input.classification !== 'star') throw new TypeError(`Deferred body ${id} hosts itself but is no plain-dot star (plainDot ${JSON.stringify(input.plainDot)}, classification ${JSON.stringify(input.classification)}).`);
-    } else if (!held.has(host) || held.get(host)!.orbit !== undefined) throw new TypeError(`Deferred body ${id} names host ${host}, which is no star the summary places.`);
+    } else if (!listedStars.has(host) && (!held.has(host) || held.get(host)!.orbit !== undefined)) throw new TypeError(`Deferred body ${id} names host ${host}, which is no star the summary places.`);
     if (!Number.isSafeInteger(order) || order < 0 || order >= worldBodyCount) throw new TypeError(`Deferred body ${id} order ${order} lies outside the world's ${worldBodyCount} bodies.`);
     if ([input.plainDot, input.unpackaged].some(flag => flag !== undefined && flag !== true)) throw new TypeError(`Deferred body ${id} flags must be true when present.`);
     return Object.freeze({ id, name: text(input.name, `deferred body ${id} name`), host, order,
@@ -518,11 +523,17 @@ export function extendWorldContext(plan: PreparedWorldContext, systems: readonly
 }
 /** The whole world, every system read, in the full context's order: for build tools and tests. `read` gives a system's
  * `world-systems/<id>.json`. */
+/** The stars the summary lists that nothing orbits: each hosts itself and no other listed body names it. Their rows are
+ * in their object entries, never in a system file. */
+export function starsWithoutSystem(deferred: readonly { readonly id: string; readonly host: string }[] | undefined): string[] {
+  const hosting = new Set((deferred ?? []).filter(body => body.host !== body.id).map(body => body.host));
+  return (deferred ?? []).filter(body => body.host === body.id && !hosting.has(body.id)).map(body => body.id);
+}
 export async function parseCompleteWorldContext(summary: unknown, read: (id: string) => Promise<unknown>,
   /** The bake's `world-stars.json`: each star that hosts itself, as a system of one body. Such a star has no file. */
   stars: Readonly<Record<string, unknown>> = {}): Promise<PreparedWorldContext> {
   const plan = parsePreparedWorldContextSummary(summary);
-  const own = new Set((plan.deferred ?? []).filter(body => body.host === body.id).map(body => body.id));
+  const own = new Set(starsWithoutSystem(plan.deferred));
   const hosts = [...new Set((plan.deferred ?? []).map(body => body.host))].sort();
   return extendWorldContext(plan, await Promise.all(hosts.map(async id => {
     if (!own.has(id)) return parsePreparedWorldSystem(await read(id), plan, id);
@@ -533,7 +544,7 @@ export async function parseCompleteWorldContext(summary: unknown, read: (id: str
 function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (value && typeof value === 'object' && validatedContexts.has(value) &&
       (!geometry || (value as PreparedWorldContext).schema === PREPARED_WORLD_CONTEXT_SCHEMA)) return value as PreparedWorldContext;
-  const input = record(geometry ? value : expandWorldContextSummary(value), 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'classificationViews', 'orbitBanks', 'camera', 'volume', 'stars', 'system', 'sky', 'deferred', 'worldBodyCount']);
+  const input = record(geometry ? value : expandWorldContextSummary(value), 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'classificationViews', 'orbitBanks', 'camera', 'volume', 'stars', 'system', 'sky', 'deferred', 'worldBodyCount', 'dotBanks']);
   const schema = geometry ? PREPARED_WORLD_CONTEXT_SCHEMA : PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA;
   if (input.schema !== schema) throw new TypeError(`Unsupported prepared world context: ${String(input.schema)}, not ${schema}.`);
   if (!geometry && input.classificationViews !== undefined) throw new TypeError('The world context summary carries no classification views.');
@@ -550,6 +561,12 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   const worldBodyCount = input.worldBodyCount === undefined ? undefined : finite(input.worldBodyCount, 'world body count');
   if (worldBodyCount !== undefined && (!Number.isSafeInteger(worldBodyCount) || worldBodyCount < bodies.length)) throw new TypeError(`World body count ${worldBodyCount} is fewer than the summary's ${bodies.length} bodies.`);
   const deferred = input.deferred === undefined ? undefined : parseDeferred(input.deferred, bodies, worldBodyCount ?? bodies.length);
+  const dotBanks = input.dotBanks === undefined ? undefined : Object.freeze(array(input.dotBanks, 'world dot banks').map((id, index) => {
+    const bank = text(id, `world dot bank ${index}`);
+    if (!/^[a-z][a-z0-9-]*$/.test(bank)) throw new TypeError(`World dot bank ${index} is ${JSON.stringify(bank)}, not a bank id.`);
+    return bank;
+  }));
+  if (geometry && dotBanks) throw new TypeError('Only the world context summary names dot banks.');
   const orbitCenters = checkBodies(focus, bodies, input.orbitCenters, orbitBanks, deferred);
   const classificationViews = geometry ? parseClassificationViews(input.classificationViews, bodies) : undefined;
   const camera = record(input.camera, 'context camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
@@ -577,7 +594,7 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   const objectId = text(volume.objectId, 'volume identity');
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
   const result: PreparedWorldContext = Object.freeze({ schema, frame, focus, bodies: Object.freeze(bodies),
-    ...(deferred ? { deferred } : {}), ...(worldBodyCount === undefined ? {} : { worldBodyCount }),
+    ...(deferred ? { deferred } : {}), ...(worldBodyCount === undefined ? {} : { worldBodyCount }), ...(dotBanks ? { dotBanks } : {}),
     ...(input.orbitCenters === undefined ? {} : { orbitCenters }),
     ...(classificationViews ? { classificationViews } : {}), ...(orbitBanks ? { orbitBanks } : {}),
     camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom, presentation }),

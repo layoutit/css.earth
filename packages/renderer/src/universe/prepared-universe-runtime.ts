@@ -3,6 +3,7 @@ import { parsePreparedWorldContextPlan, type PreparedWorldContext, type Prepared
 import { createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { mountBackgroundPoints } from './background-points.js';
+import { UNHIGHLIGHTED_OPACITY } from './context-presentation-policy.js';
 import { fetchPreparedCatalogueBank, fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
 import { mountImageMesh } from './image-mesh.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
@@ -345,7 +346,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const outsideGalaxy = galaxyOutsideFade(
                 eyeDistanceM(world.pose, selected.positionM), plan.volume.discHalfHeightM);
               additionalPoints.publish({world, viewport}, distanceM, outsideGalaxy);
-              for (const bank of starPoints) bank.publish({world, viewport});
+              // Dimmed like every marker outside a highlighted category; the selected star's own dot is its marker's to draw.
+              for (const bank of starPoints) bank.publish({world, viewport}, spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1, selected.positionM);
               // Past halfway out the galaxy is seen whole, as the universe background draws it (universe-background.ts).
               spatial.setOutsideGalaxy(outsideGalaxy > .5);
               // Loaded and drawn only far outside the galaxies' own scale.

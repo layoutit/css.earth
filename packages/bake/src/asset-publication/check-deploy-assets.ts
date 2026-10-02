@@ -5,7 +5,7 @@ import { dirname, extname, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry } from '../objects/sources/index.ts';
-import { parsePreparedSystemView, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
+import { parsePreparedSystemView, parsePreparedWorldContextSummary, parsePreparedWorldSystem, starsWithoutSystem } from '@cssearth/objects';
 
 const execFileAsync = promisify(execFile);
 /** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
@@ -61,7 +61,7 @@ export async function checkPublishedWorldPair(root: string, fetchText: (url: str
   // Every system the summary defers has its published file, and it holds the bodies the summary lists for it.
   // A star that hosts itself has no file: its row is in the published `world-stars.json`, which the build copies into the
   // star's object entry.
-  const ownRows = (summary.deferred ?? []).filter(body => body.host === body.id).map(body => body.id);
+  const ownRows = starsWithoutSystem(summary.deferred);
   if (ownRows.length) {
     const [table] = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: ['world-stars.json'] });
     if (!table) throw disagree('the inventory lacks world-stars.json.');

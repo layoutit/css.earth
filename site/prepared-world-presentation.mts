@@ -28,7 +28,15 @@ function planetarySystems(value: unknown) {
       if (seen.has(id)) throw new TypeError(`Prepared world presentation planetarySystems[${index}] (${input.id}) lists ${id}, which another system already lists.`);
       seen.add(id);
     }
-    return Object.freeze({ id: input.id, memberIds });
+    const { originM, orbitsWithinM } = input;
+    if (originM !== undefined && !(Array.isArray(originM) && originM.length === 3 && originM.every(value => typeof value === 'number' && Number.isFinite(value)))) {
+      throw new TypeError(`Prepared world presentation planetarySystems[${index}] (${input.id}).originM must be three finite metres; got ${JSON.stringify(originM)}.`);
+    }
+    if (orbitsWithinM !== undefined && !(typeof orbitsWithinM === 'number' && orbitsWithinM > 0 && Number.isFinite(orbitsWithinM))) {
+      throw new TypeError(`Prepared world presentation planetarySystems[${index}] (${input.id}).orbitsWithinM must be a positive distance; got ${JSON.stringify(orbitsWithinM)}.`);
+    }
+    return Object.freeze({ id: input.id, memberIds, ...(originM === undefined ? {} : { originM: Object.freeze([originM[0], originM[1], originM[2]] as const) }),
+      ...(orbitsWithinM === undefined ? {} : { orbitsWithinM }) });
   }));
 }
 

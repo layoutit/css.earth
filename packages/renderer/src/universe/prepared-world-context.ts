@@ -270,7 +270,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let coasting = false;
   // The camera sees the galaxy from outside (setOutsideGalaxy): names over its bright bulge turn dark (world-context.css).
   // A restyle, so like any other it waits for a coast to stop.
-  let outsideGalaxy = false, publishedOutsideGalaxy = false;
+  let outsideGalaxy = false, publishedOutsideGalaxy = false, highlighting = false;
   const publishOutsideGalaxy = () => {
     if (coasting || outsideGalaxy === publishedOutsideGalaxy) return;
     publishedOutsideGalaxy = outsideGalaxy;
@@ -428,11 +428,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         }
       }
       if (next.highlighted) {
-        if (bodies.some(entry => entry.highlighted)) root.dataset.contextHighlighting = 'true'; else delete root.dataset.contextHighlighting;
+        highlighting = bodies.some(entry => entry.highlighted);
+        if (highlighting) root.dataset.contextHighlighting = 'true'; else delete root.dataset.contextHighlighting;
       }
       if (depthChanged) refreshDepthBodies();
       if (changed) { invalidatePolicy(); refresh(); }
     },
+    /** Whether a category is highlighted: every marker outside it is dimmed, and so are the dots drawn for other stars. */
+    highlighting: () => highlighting,
     /** Whether the camera is outside the galaxy, looking at it as a whole rather than from among its stars. */
     setOutsideGalaxy(outside: boolean) {
       if (destroyed) return;

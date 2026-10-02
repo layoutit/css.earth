@@ -12,6 +12,7 @@ import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepare
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { createInFlightLoader } from './in-flight-loader.mts';
+import { startupFetch } from './startup-requests.mts';
 import { loadDotCatalogues } from './dot-catalogues.mts';
 import { worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
@@ -71,7 +72,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     };
     // A bank a body's dataset shows names its files when it is first loaded (prepare-catalog.mts CONTEXT_BANK_TYPES).
     const bankSet = async (objectId: string) => {
-      const response = await fetch(`/world/context-assets/${encodeURIComponent(objectId)}.json`, { signal: AbortSignal.timeout(15_000) });
+      // The page's head asked for its own default bank's list already (startup-requests.mts).
+      const response = await startupFetch(`/world/context-assets/${encodeURIComponent(objectId)}.json`, { signal: AbortSignal.timeout(15_000) });
       if (!response.ok) throw new Error(`Prepared context bank ${objectId}: its file list request failed (${response.status}).`);
       const files: unknown = await response.json();
       if (!isRecord(files)) throw new TypeError(`Prepared context bank ${objectId}: /world/context-assets/${objectId}.json is not a file list.`);

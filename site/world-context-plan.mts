@@ -1,6 +1,7 @@
-import { parseCompleteWorldContext } from '@cssearth/objects';
+import { parseCompleteWorldContext, starsWithoutSystem } from '@cssearth/objects';
 import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
-import { WORLD_SUMMARY_SOURCE, ownsItsWorldRow, readOwnWorldRow, startupWorld, worldSystemHost } from './startup-world.mts';
+import { WORLD_SUMMARY_SOURCE, startupWorld, worldSystemHost } from './startup-world.mts';
+import { readOwnWorldRow } from './object-entries.mts';
 import type { PreparedWorldContext, PreparedWorldSystem } from '@cssearth/objects';
 import { startupFetch } from './startup-requests.mts';
 
@@ -61,12 +62,13 @@ async function fetchJson(url: string): Promise<unknown> {
 }
 
 const summary = parsePreparedWorldContextSummary(startup ? startup.summary : await readPreparedWorldContext());
-/** A plain-dot star nothing orbits hosts itself: the map draws it from a dot bank, and its row comes from its own object
- * entry when the star is opened (startup-world.mts `readOwnWorldRow`). */
-const ownRow = (id: string) => ownsItsWorldRow(summary.deferred, id);
-/** The world's own dot banks (`pages/world/dots/[id].bin.ts`): the stars that host themselves, near the Sun and in other
- * galaxies (packages/bake/src/world-context/plain-star-dots.ts). A world without such stars has none. */
-export const WORLD_DOT_BANKS: readonly string[] = Object.freeze((summary.deferred ?? []).some(body => body.host === body.id) ? ['plain-stars', 'plain-stars-far'] : []);
+/** A plain-dot star hosts itself and the map draws it from a dot bank. One with planets is in its system's file with
+ * them; one without has its row in its own object entry, read when the star is opened (object-entry-row.mts). */
+const rowless = new Set(starsWithoutSystem(summary.deferred));
+const ownRow = (id: string) => rowless.has(id);
+/** The world's own dot banks (`pages/world/dots/[id].bin.ts`), as the bake names them in the summary: the stars drawn as
+ * plain dots, near the Sun and in other galaxies (packages/bake/src/world-context/plain-star-dots.ts). */
+export const WORLD_DOT_BANKS: readonly string[] = summary.dotBanks ?? [];
 /** Every star whose system is its own file, in id order. */
 export const WORLD_SYSTEM_HOSTS: readonly string[] = Object.freeze([...new Set((summary.deferred ?? []).filter(body => body.host !== body.id).map(body => body.host))].sort());
 /** The systems batch `index` holds (`pages/world/systems/batch-[index].json.ts`), in id order. */
@@ -93,7 +95,7 @@ const parseSystem = (value: unknown, id: string) => parsePreparedWorldSystem(val
 export let APPLICATION_WORLD_CONTEXT: PreparedWorldContext = summary;
 if (node) {
   // The bake's table of the stars that host themselves (`world-stars.json`), which the build puts in their object entries.
-  const stars = (summary.deferred ?? []).some(body => body.host === body.id) ? await readNodeJson('src/objects/sun/prepared/world-stars.json') as Record<string, unknown> : {};
+  const stars = rowless.size ? await readNodeJson('src/objects/sun/prepared/world-stars.json') as Record<string, unknown> : {};
   APPLICATION_WORLD_CONTEXT = await parseCompleteWorldContext(summary, id => readNodeJson(`src/objects/sun/prepared/world-systems/${id}.json`), stars);
   for (const body of summary.deferred ?? []) loaded.add(body.host);
 } else {

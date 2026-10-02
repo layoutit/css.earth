@@ -8,7 +8,7 @@ import { isRecord } from '@cssearth/core';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
-import { parseWorldContextSource, plainStarDotBanks, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
+import { parseWorldContextSource, PLAIN_STAR_DOT_BANK_IDS, plainStarDotBanks, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
 import { writeCatalogueBank } from '@cssearth/bake/volume/node';
 import { worldOrbitBanks } from '@cssearth/objects';
 import type { OrbitalState, Vector3, WorldContextBodyFact } from '@cssearth/bake/world-context';
@@ -219,15 +219,17 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
   // Every page reads the summary: the Sun's own system and one point per other system. Each other system's bodies are their
   // own file, read when a page shows that system or the camera approaches it (summarizeWorldContext).
-  const { summary, systems, stars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])));
-  await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify(summary)}\n`);
-  // Read by the build and Node tools only: each star's row goes to the page in the star's own object entry.
-  await writeIfChanged(worldStarsPath(options.outputPath), `${JSON.stringify(stars)}\n`);
+  const { summary, systems, stars, plainStars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])));
   // The map draws those stars as dots from these banks (`/world/dots/<id>.bin`), not as bodies.
-  const starBodies = prepared.bodies.filter(body => stars[body.id] !== undefined).map(body => ({ id: body.id, positionM: body.positionM, color: body.color }));
-  for (const bank of plainStarDotBanks(starBodies, prepared.frame)) {
+  const dotBanks = plainStarDotBanks(plainStars.map(body => ({ id: body.id, positionM: body.positionM, color: body.color })), prepared.frame);
+  for (const id of PLAIN_STAR_DOT_BANK_IDS) if (!dotBanks.some(bank => bank.id === id)) await rm(resolve(dirname(options.outputPath), `${id}.bin`), { force: true });
+  for (const bank of dotBanks) {
     await writeCatalogueBank({ objectDirectory: resolve(dirname(options.outputPath), '..'), id: bank.id, bank, published: true, inventory: async () => undefined });
   }
+  // The summary names the banks this bake wrote, so the site asks for no other.
+  await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify({ ...summary, ...(dotBanks.length ? { dotBanks: dotBanks.map(bank => bank.id) } : {}) })}\n`);
+  // Read by the build and Node tools only: each star's row goes to the page in the star's own object entry.
+  await writeIfChanged(worldStarsPath(options.outputPath), `${JSON.stringify(stars)}\n`);
   const systemDirectory = worldSystemsDirectory(options.outputPath), keptSystems = new Set<string>();
   for (const system of systems) {
     keptSystems.add(`${system.id}.json`);

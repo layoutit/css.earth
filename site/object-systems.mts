@@ -39,9 +39,11 @@ export function planetarySystems(objects: readonly (Pick<ObjectEntry, 'id' | 'na
   const hosts = candidates.filter(candidate => ['star', 'black-hole'].includes(registry.get(candidate.id)?.classification ?? ''));
   const solarRadiusM = radii.get(plan.focus.id);
   if (!solarRadiusM) throw new TypeError('The Solar System requires its prepared framing radius.');
-  return Object.freeze(hosts.map(({ id, memberIds }) => {
-    const host = points.get(id), star = registry.get(id), radiusM = radii.get(id);
-    if (!host) throw new TypeError(`site/prepared-world-presentation.json planetarySystems names ${id}, which the world context does not place; run pnpm prepare:world-context.`);
+  return Object.freeze(hosts.map(({ id, memberIds, originM, orbitsWithinM }) => {
+    // A host the page has not read (a star that is a dot of a bank until its system's file arrives) is placed by the table.
+    const placed = points.get(id), star = registry.get(id), radiusM = radii.get(id);
+    const host = placed ?? (originM ? { positionM: originM, ...(orbitsWithinM === undefined ? {} : { orbitsWithinM }) } : undefined);
+    if (!host) throw new TypeError(`site/prepared-world-presentation.json planetarySystems names ${id}, which the world context does not place and the table gives no originM; run pnpm prepare:world-context.`);
     if (!star || !radiusM) throw new TypeError(`Planetary system ${id} requires a registered star and its prepared framing (site/prepared-world-presentation.json systemFramingRadii); run pnpm prepare:world-presentation.`);
     for (const memberId of memberIds) {
       if (!points.has(memberId) && !listed.has(memberId)) throw new TypeError(`site/prepared-world-presentation.json planetarySystems ${id} lists ${memberId}, which the world context does not place; run pnpm prepare:world-context.`);

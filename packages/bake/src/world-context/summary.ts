@@ -11,10 +11,10 @@ type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][numbe
 /** The browser's copy of a prepared world context, split by the object hierarchy. Every body belongs to the system of the
  * body its orbit chain ends at: a star or black hole that orbits nothing, or the focus (the Sun).
  * - `summary` (`world-context-summary.json`, read by every page) holds the camera and frame facts, the focus's own system
- *   in full, and every body that orbits nothing (each other system's star, drawn from afar as one point), but a star
- *   drawn as a plain dot that nothing orbits: 1,841 of the summary's 3,202 bodies, 78 KB of its 230 KB compressed
- *   (2026-10-02). Those hold no file: `stars` gives each one's row, which the build puts in the star's own object entry
- *   (`/objects/<id>/entry.json`), read when the star is opened; the map draws them from a dot bank. Each body of
+ *   in full, and every body that orbits nothing and the map can open by click (a featured star, a galaxy), but no star
+ *   drawn as a plain dot: the map draws those from dot banks. One with planets is in its own system's file with them;
+ *   one without holds no file, and `stars` gives its row, which the build puts in the star's own object entry
+ *   (`/objects/<id>/entry.json`), read when the star is opened. Each body of
  *   another system is only listed (`deferred`): its name, classification, discovery record, the star whose system file
  *   holds it and its place in the full context (`order`), which is what navigation, search and world visibility read before
  *   that system loads, and what puts every body back in its place once it has.
@@ -46,11 +46,11 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   };
   const positions = new Map<string, Vector3>([...[focus, ...bodies].map(body => [body.id, body.positionM] as const),
     ...Object.entries(orbitCenters).map(([id, centre]) => [id, centre.positionM] as const)]);
-  // A star something orbits, or another body is bound to, stays in the summary: its system and its companion read its place.
-  const hosts = new Set([...bodies.filter(body => body.orbit).map(body => hostOf(body.id)), ...Object.keys(orbitCenters).map(hostOf),
-    ...bodies.flatMap(body => 'boundTo' in body && body.boundTo ? [body.boundTo.hostId] : [])]);
+  // A star another body is bound to stays in the summary: its companion reads its place. A star with planets leaves like
+  // any other plain dot, into its own system's file with them.
+  const bound = new Set(bodies.flatMap(body => 'boundTo' in body && body.boundTo ? [body.boundTo.hostId] : []));
   const plainStar = (body: Body) => body !== focus && !('orbit' in body && body.orbit) && !('boundTo' in body && body.boundTo) && body.plainDot === true
-    && body.classification === 'star' && !hosts.has(body.id);
+    && body.classification === 'star' && !bound.has(body.id);
   const local = (body: Body) => !plainStar(body) && (!('orbit' in body && body.orbit) || hostOf(body.id) === focus.id);
   /** The file that holds a body the summary only lists: its star's, or a plain-dot star's own. */
   const fileOf = (body: Body) => plainStar(body) ? body.id : hostOf(body.id);
@@ -75,10 +75,12 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
     return { id, file: { schema: PREPARED_WORLD_SYSTEM_SCHEMA as typeof PREPARED_WORLD_SYSTEM_SCHEMA, id, ...(Object.keys(centres).length ? { orbitCenters: centres } : {}),
       orbitBanks: pinsOf(members), ...file.tables(), bodies: columns(file.rows) } };
   });
-  const starIds = new Set(bodies.filter(plainStar).map(body => body.id));
-  return { summary, systems: files.filter(system => !starIds.has(system.id)),
+  const plainStars = bodies.filter(plainStar), alone = new Set(plainStars.filter(star => systems.get(star.id)!.length === 1).map(star => star.id));
+  return { summary, systems: files.filter(system => !alone.has(system.id)),
     /** Each plain-dot star nothing orbits, as the system of one body its object entry carries. */
-    stars: Object.fromEntries(files.filter(system => starIds.has(system.id)).map(system => [system.id, system.file])) };
+    stars: Object.fromEntries(files.filter(system => alone.has(system.id)).map(system => [system.id, system.file])),
+    /** Every star the summary leaves out, which the map draws from dot banks (plain-star-dots.ts). */
+    plainStars };
 }
 
 /** The world draws every body but its focus as a billboard of a few to a hundred CSS pixels: its arrival photograph at
