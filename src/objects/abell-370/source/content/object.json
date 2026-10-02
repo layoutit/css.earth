@@ -59,6 +59,17 @@
           "label": "ESA/Hubble heic1711a: NASA, ESA/Hubble, HST Frontier Fields",
           "checked": "2026-10-02"
         }
+      },
+      {
+        "id": "members",
+        "label": "Member dots",
+        "value": "129 flagged members",
+        "source": {
+          "catalogueId": "raney-2020-frontier-fields-galaxies",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/492/503",
+          "label": "Raney, Keeton & Brennan (2020), MNRAS 492, 503; CDS J/MNRAS/492/503",
+          "checked": "2026-10-02"
+        }
       }
     ],
     "moreFacts": []
@@ -108,6 +119,12 @@
       "role": "facts",
       "description": "ESA/Hubble heic1711a: NASA, ESA/Hubble, HST Frontier Fields",
       "href": "https://esahubble.org/images/heic1711a/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Raney, Keeton & Brennan (2020), MNRAS 492, 503; CDS J/MNRAS/492/503",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/492/503"
     }
   ],
   "provenance": {

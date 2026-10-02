@@ -1,6 +1,6 @@
 # SMACS 0723
 
-SMACS 0723 as an object of the world: its place, its card and its list marker. It has no surface. Its one dataset shows the [SMACS 0723 picture](../smacs-0723-layers/README.md) bank, whose README holds the picture's source, placement, evidence and known problems.
+SMACS 0723 as an object of the world: its place, its card and its list marker. It has no surface. Its one dataset shows the [SMACS 0723 picture](../smacs-0723-layers/README.md) bank, whose README holds the picture's source, placement, evidence and known problems. Its 93 flagged member galaxies are drawn as dots around the picture by the [members bank](../smacs-0723-members/README.md).
 
 ## Sources
 

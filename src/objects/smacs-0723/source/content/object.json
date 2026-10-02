@@ -59,6 +59,17 @@
           "label": "ESA/Webb weic2209a: NASA, ESA, CSA, and STScI",
           "checked": "2026-10-02"
         }
+      },
+      {
+        "id": "members",
+        "label": "Member dots",
+        "value": "93 flagged members",
+        "source": {
+          "catalogueId": "amrutha-2025-smacs-0723-redshifts",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/699/A105",
+          "label": "Amrutha et al. (2025), A&A 699, A105; CDS J/A+A/699/A105",
+          "checked": "2026-10-02"
+        }
       }
     ],
     "moreFacts": []
@@ -108,6 +119,12 @@
       "role": "facts",
       "description": "ESA/Webb weic2209a: NASA, ESA, CSA, and STScI",
       "href": "https://esawebb.org/images/weic2209a/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Amrutha et al. (2025), A&A 699, A105; CDS J/A+A/699/A105",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/699/A105"
     }
   ],
   "provenance": {

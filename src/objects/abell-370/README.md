@@ -1,6 +1,6 @@
 # Abell 370
 
-Abell 370 as an object of the world: its place, its card and its list marker. It has no surface. Its one dataset shows the [Abell 370 picture](../abell-370-layers/README.md) bank, whose README holds the picture's source, placement, evidence and known problems.
+Abell 370 as an object of the world: its place, its card and its list marker. It has no surface. Its one dataset shows the [Abell 370 picture](../abell-370-layers/README.md) bank, whose README holds the picture's source, placement, evidence and known problems. Its 129 flagged member galaxies are drawn as dots around the picture by the [members bank](../abell-370-members/README.md).
 
 ## Sources
 
