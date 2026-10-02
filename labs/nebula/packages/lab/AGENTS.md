@@ -7,3 +7,6 @@
 - Preserve accepted outputs, numerical order, frames, spectral distinctions and persisted state during ownership changes. Never change expected outputs to conceal regressions.
 - Keep object selection, UI state and filesystem/source configuration here; integration with application internals belongs only in explicit host adapters. Processing belongs to server jobs, not page lifecycle.
 - Run affected typechecks and behavior checks; preserve generated outputs and live sessions.
+
+Shared compact delivery, material receipt, simulation-envelope and cloud-parts formats are parsed by
+`@cssearth/objects`; lab owns orchestration, file I/O and publication adapters.

@@ -1,3 +1,4 @@
+import { COMPACT_SYMMETRY_SCHEMA } from '@cssearth/objects';
 /** Export accepted research voxels; renderer-specific replay is injected into the internal baker. */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -48,7 +49,7 @@ export async function exportCompactSymmetry(
     bytes = Buffer.from(
       JSON.stringify(
         {
-          schema: "cssearth-compact-symmetry@1",
+          schema: COMPACT_SYMMETRY_SCHEMA,
           recipe,
           channels,
           provenance: expected.provenance,

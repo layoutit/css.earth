@@ -1,5 +1,6 @@
 /** Neutral source-independent smooth finite field; all image datasets use this exact geometry. */
-import type { EmissionComponent, EmissionFieldModel } from '../contracts/emission.ts';
+
+import type { EmissionComponent, EmissionFieldModel } from '@cssearth/objects';
 import type { EmissionBounds, EmissionVector3 } from '@cssearth/objects';
 import { createEmissionWindowSampler } from './emission-window.ts';
 

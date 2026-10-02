@@ -1,8 +1,9 @@
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
-import { readCompilerControls } from '@cssearth/objects';
-import type { EmissionComponent, EmissionFieldModel } from '../contracts/emission.ts';
-import { readPhotometricEnvelope } from './photometric-emission.ts';
-import { readEmissionWindow } from './emission-window.ts';
+import { readCompilerControls } from './compiler-controls.js';
+import { EMISSION_FIELD_SCHEMA } from './emission-field-types.js';
+import type { EmissionComponent, EmissionFieldModel } from './emission-field-types.js';
+import { readPhotometricEnvelope } from './photometric-emission.js';
+import { readEmissionWindow } from './emission-window.js';
 const triple = (v: unknown): v is [number, number, number] => Array.isArray(v) && v.length === 3 && v.every(Number.isFinite);
 function component(v: unknown): v is EmissionComponent {
   return jointRecord(v) && typeof v.id === 'string' && typeof v.basisId === 'string' && triple(v.center) && triple(v.sigma) && v.sigma.every(n => n > 0) &&
@@ -12,7 +13,7 @@ function component(v: unknown): v is EmissionComponent {
 }
 /** Decode the spatial field consumed by independent stellar/material preparation. Original provenance stays immutable. */
 export function readRetainedEmissionField(v: unknown): EmissionFieldModel {
-  if (!jointRecord(v) || v.schema !== 'cssearth-conditional-emission-field@1' || typeof v.identity !== 'string' ||
+  if (!jointRecord(v) || v.schema !== EMISSION_FIELD_SCHEMA || typeof v.identity !== 'string' ||
       !jointRecord(v.bounds) || !triple(v.bounds.min) || !triple(v.bounds.max) ||
       !Array.isArray(v.components) || v.components.length > 10000 || !v.components.every(component)) throw new TypeError('Invalid retained emission field.');
   const maximum = v.bounds.max;

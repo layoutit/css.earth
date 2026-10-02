@@ -5,7 +5,8 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative, sep } from 'node:path';
 import { createCloudDensityPreparer } from '../../services/density-material.ts';
 
-import { createCloudInspection, parseCloudCatalogue, validateCloudBrightness } from '@cssearth/volume-viewer/scene/cloud-inspection';
+import { createCloudInspection, validateCloudBrightness } from '@cssearth/volume-viewer/scene/cloud-inspection';
+import { parseCloudCatalogue } from '@cssearth/objects';
 import { readPreparedReconstruction } from '../../services/density-reconstruction.ts';
 import { finiteModelStarsPath } from '../../services/finite-dataset-bundles.ts';
 import type { CloudBrightness, CloudStarOptions } from '@cssearth/volume-viewer/scene/cloud-types';

@@ -7,7 +7,8 @@ import sharp from 'sharp';
 import { createAlignedObservationMapping, defaultOverlayPlacement } from '@cssearth/bake/volume';
 import { prepareReconstruction } from './density-reconstruction.ts';
 import { prepareOverlayGeometry } from '../../adapters/renderer/overlay-geometry.ts';
-import { parseCloudCatalogue, createCloudInspection } from '@cssearth/volume-viewer/scene/cloud-inspection';
+import { createCloudInspection } from '@cssearth/volume-viewer/scene/cloud-inspection';
+import { parseCloudCatalogue } from '@cssearth/objects';
 const close=(a:readonly number[],b:readonly number[])=>a.forEach((n,i)=>assert.ok(Math.abs(n-b[i])<1e-10,`${n} != ${b[i]}`));
 
 test('actual prepared candidate matrices preserve Alignment CSS axes, pivot, all rotations and observer depth',async()=>{

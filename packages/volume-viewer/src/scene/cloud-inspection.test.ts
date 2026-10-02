@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cloudCompositeOpacity, createCloudInspection, parseCloudCatalogue, validateCloudBrightness } from './cloud-inspection.js';
+import { cloudCompositeOpacity, createCloudInspection, validateCloudBrightness } from './cloud-inspection.js';
+import { parseCloudCatalogue } from '@cssearth/objects';
 
 const catalogue = { schema: 'cssearth-cloud-parts@1', id: 'example', referenceLeafIds: ['r'], parts: [
   { id: 'a', label: 'Structure 1', kind: 'extended', signalFraction: .4, defaultEnabled: true, leafIds: ['a1', 'a2'] },
@@ -16,15 +17,6 @@ test('default uses exact reference; subsets select owned prepared leaves and emp
   cloud.setSelection([]); assert.deepEqual(leafIds.filter(id => cloud.includes(id)), []);
   cloud.setSelection(['b', 'a']); assert.deepEqual(leafIds.filter(id => cloud.includes(id)), ['r']);
   assert.throws(() => cloud.setSelection(['missing'])); assert.throws(() => cloud.setSelection(['a', 'a']));
-});
-test('catalogue rejects ambiguous, missing, duplicated or unrelated contributions', () => {
-  assert.throws(() => parseCloudCatalogue(catalogue, 'other', leafIds));
-  assert.throws(() => parseCloudCatalogue(catalogue, 'example', [...leafIds, 'unowned']));
-  for (const edit of [
-    (c: typeof catalogue) => { c.parts[0]!.leafIds.push('r'); },
-    (c: typeof catalogue) => { c.parts[0]!.signalFraction = .8; },
-    (c: typeof catalogue) => { c.parts[0]!.id = 'reference'; },
-  ]) { const copy = structuredClone(catalogue); edit(copy); assert.throws(() => parseCloudCatalogue(copy, 'example', leafIds)); }
 });
 test('brightness uses effective source-over contributions through axis handoffs', () => {
   const gains = { overall: .5, x: .2, y: .5, z: .8 };

@@ -1,3 +1,4 @@
+import { CLOUD_PARTS_SCHEMA } from '@cssearth/objects';
 import { collectArtifacts } from '../workflows/density/io.ts';
 /** Offline material replacement on the exact named Alignment density cloud. Never infer new shape from an image. */
 import { mkdir, readFile, writeFile, readdir } from 'node:fs/promises';
@@ -124,7 +125,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   const referenceLeafIds=data.stacks.flatMap(stack=>stack.leaves.map(leaf=>leaf.id)),partLeafIds=referenceLeafIds.map(id=>'all-light::'+id);
   const inspection={...prepared,data:{...data,stacks:data.stacks.map(stack=>({...stack,leaves:stack.leaves.flatMap(leaf=>[leaf,{...leaf,id:'all-light::'+leaf.id}])}))}};
   await json(resolve(output,'prepared/inspection.json'),inspection);
-  await json(resolve(output,'source/cloud-parts.json'),{schema:'cssearth-cloud-parts@1',id:work.id,
+  await json(resolve(output,'source/cloud-parts.json'),{schema:CLOUD_PARTS_SCHEMA,id:work.id,
     parts:[{id:'all-light',label:'Reference cloud',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,
     composition:'One immutable Alignment density cloud; candidate images replace material colors only.'});
   await json(resolve(output,'inspection-object.json'),{...resultDescriptor,properties:{...resultDescriptor.properties,

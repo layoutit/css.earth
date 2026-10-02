@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import type { EvidenceInputs, EvidenceSource } from '@cssearth/nebula-reconstruction/evidence/model';
 import { compilerTarget, readCompilerTargetControls } from '@cssearth/nebula-reconstruction/methods/inference/target';
-import { createEmissionWindowSampler, type EmissionWindow } from '@cssearth/bake/volume';
+import { createEmissionWindowSampler } from '@cssearth/bake/volume';
+import { type EmissionWindow } from '@cssearth/objects';
 import { readCompilerRecipe } from '../../../features/compiler/model.ts';
 function inputs(width = 100, height = 100): EvidenceInputs {
   const length = width * height;

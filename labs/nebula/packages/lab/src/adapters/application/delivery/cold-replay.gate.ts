@@ -12,7 +12,8 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gunzipSync } from 'node:zlib';
-import { replayCompactCompiler, readCompactCompiler, replayCompactSampled } from '@cssearth/bake/volume/node';
+import { replayCompactCompiler, replayCompactSampled } from '@cssearth/bake/volume/node';
+import { readCompactCompiler } from '@cssearth/objects';
 import { readCompilerBakeResult } from '@cssearth/objects';
 import { assertReplayScene, verifyReplayFiles } from './cold-replay-parity.ts';
 

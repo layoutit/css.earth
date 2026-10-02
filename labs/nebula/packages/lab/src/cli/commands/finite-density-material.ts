@@ -1,3 +1,4 @@
+import { CLOUD_PARTS_SCHEMA } from '@cssearth/objects';
 import { collectArtifacts } from '../../server/workflows/density/io.ts';
 import { parseFiniteMaterialSettings, verifyFiniteMaterialArtifacts } from './finite-density-material-artifacts.ts';
 /** One offline finite-material experiment on an existing reconstruction. All density slice alpha is retained. */
@@ -94,7 +95,7 @@ export async function finiteDensityMaterial(baselineId:string,settingsPath:strin
   const referenceLeafIds=data.stacks.flatMap(s=>s.leaves.map(l=>l.id)),partLeafIds=referenceLeafIds.map(id=>'all-light::'+id);
   const inspection={...prepared,data:{...data,stacks:data.stacks.map(s=>({...s,leaves:s.leaves.flatMap(l=>[l,{...l,id:'all-light::'+l.id}])}))}};
   await json(resolve(output,'prepared/inspection.json'),inspection);
-  await json(resolve(output,'source/cloud-parts.json'),{schema:'cssearth-cloud-parts@1',id,parts:[{id:'all-light',label:'Finite-region material experiment',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,composition:'Unchanged density and alpha; authored finite XYZ material regions.'});
+  await json(resolve(output,'source/cloud-parts.json'),{schema:CLOUD_PARTS_SCHEMA,id,parts:[{id:'all-light',label:'Finite-region material experiment',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,composition:'Unchanged density and alpha; authored finite XYZ material regions.'});
   await json(resolve(output,'inspection-object.json'),{...descriptor,properties:{...descriptor.properties,preparation:{source:'source/cloud-parts.json'}},prepared:{format:prepared.format,url:'prepared/inspection.json'}});
   const local=relative(root,output),oldLocal=relative(root,baseline);
   const subject=JSON.parse(JSON.stringify(oldResult.subject).replaceAll(oldLocal,local));subject.id=id;subject.name+=' · finite regions';subject.directory=local;subject.reconstructionImage={...subject.reconstructionImage,label:subject.reconstructionImage.label+' · finite regions',note:receipt.qualification.reason};

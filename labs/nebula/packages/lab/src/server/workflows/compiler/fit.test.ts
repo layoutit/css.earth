@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { fitEmissionField } from './fit.ts';
-import { createEmissionField, emissionKernel, EMISSION_KERNEL_INTEGRAL, projectEmissionComponent, type EmissionFieldModel, type EmissionFitInput, createEmissionWindowSampler, type EmissionWindow } from '@cssearth/bake/volume';
+import { createEmissionField, emissionKernel, EMISSION_KERNEL_INTEGRAL, projectEmissionComponent, type EmissionFitInput, createEmissionWindowSampler } from '@cssearth/bake/volume';
+import { type EmissionFieldModel, type EmissionWindow } from '@cssearth/objects';
 import { readCompilerControls } from '@cssearth/objects';
 
 function target(size = 128): EmissionFitInput {

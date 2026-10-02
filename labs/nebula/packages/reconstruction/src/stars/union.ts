@@ -1,5 +1,6 @@
 import type { CompilerImage } from '../observations/compiler-image.ts';
-import type { EmissionFieldModel } from '@cssearth/bake/volume';
+
+import type { EmissionFieldModel } from '@cssearth/objects';
 import type { CompilerStarInput } from '@cssearth/objects';
 import type { CompilerStarMaterial } from '@cssearth/objects';
 import { readCompilerStarCatalogue, type CompilerStarCatalogue } from './catalogue-model.ts';

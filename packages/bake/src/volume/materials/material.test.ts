@@ -122,7 +122,8 @@ test('a dataset channel gain scales its own chromaticity and never tints the zon
 });
 
 test('a dataset tone curve moves the render onto its curve, stays neutral in the faint zone, and is absent-exact', async () => {
-  const { validateDatasetToneCurve, datasetToneRender } = await import('./slab-material.ts');
+  const { validateDatasetToneCurve } = await import('@cssearth/objects');
+  const { datasetToneRender } = await import('./slab-material.ts');
   const orange = (_x: number, _y: number, _z: number, out: [number, number, number]) => { out[0] = 255; out[1] = 128; out[2] = 0; return true; };
   const slab = { axis: 'z' as const, pitch: 1, samples: 4 }, out: [number, number, number] = [0, 0, 0];
   const dense = (_x: number, _y: number, _z: number, o: [number, number, number]) => { o[0] = o[1] = o[2] = 2; };

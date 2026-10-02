@@ -9,3 +9,6 @@
 - Run affected typechecks and behavior checks; preserve generated outputs and live sessions.
 - Scene constructors receive a backend and path resolver per instance; never add a default repository root or global renderer registration.
 - Keep renderer-specific selectors and scientific input validation in host adapters or their canonical core contract. Camera controls and retained DOM/resource lifetimes belong here; lab subject and session policy do not.
+
+Cloud-parts records and catalogue validation belong to `@cssearth/objects`; contribution selection and
+composite attenuation remain here.

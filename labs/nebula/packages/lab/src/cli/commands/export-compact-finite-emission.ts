@@ -1,3 +1,4 @@
+import { COMPACT_FINITE_EMISSION_SCHEMA, COMPACT_FINITE_EMISSION_METHOD } from '@cssearth/objects';
 import { isNonemptyText, isRecord } from '@cssearth/core';
 /**
  * Export the minimal checked-in surface that regenerates an accepted finite-emission dataset bank.
@@ -19,7 +20,8 @@ import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { readPreparedReconstruction } from '../../server/services/density-reconstruction.ts';
 import { finiteModelStarsPath } from '../../server/services/finite-dataset-bundles.ts';
 import { parseVolumeDatasetPromotion } from '../../server/workflows/density/volume-dataset-promotion.ts';
-import { validateChannelGain, validateDatasetToneCurve } from '@cssearth/bake/volume';
+import { validateChannelGain } from '@cssearth/bake/volume';
+import { validateDatasetToneCurve } from '@cssearth/objects';
 
 const text = (value: unknown, at: string): string => { assert.ok(isNonemptyText(value), `Expected text: ${at}`); return value; };
 const record = (value: unknown, at: string): Record<string, unknown> => { assert.ok(isRecord(value), `Expected an object: ${at}`); return value; };
@@ -147,7 +149,7 @@ for (const { dataset, result, finite, channelGain, toneCurve } of datasetInputs)
 }
 
 const inputs = {
-  schema: 'cssearth-compact-finite-emission@2', method: 'simulation-guided-finite-material@1',
+  schema: COMPACT_FINITE_EMISSION_SCHEMA, method: COMPACT_FINITE_EMISSION_METHOD,
   bankId: recipe.id, defaultDataset: recipe.defaultDataset, framingRadiusUnits: recipe.framingRadiusUnits,
   modelResultId, frame: request.frame,
   geometry: { observerDistanceKpc: geometry.observerDistanceKpc, tangentBoundsKpc: geometry.tangentBoundsKpc,

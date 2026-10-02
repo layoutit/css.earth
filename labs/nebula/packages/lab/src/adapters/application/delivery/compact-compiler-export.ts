@@ -1,3 +1,5 @@
+import { COMPACT_COMPILER_SCHEMA } from '@cssearth/objects';
+import { readComponentMaterialReceipt } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Explicitly promote an already inspected compiler result to small, source-backed bake inputs. */
 import { readFile } from 'node:fs/promises';
@@ -6,7 +8,8 @@ import { validatePreparedCssVolume } from '@cssearth/objects';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { localPath, pinned } from '../../../server/workflows/density/io.ts';
 import { writeAtomic } from '@cssearth/bake/volume/node';
-import { readCompactCompiler } from './compact-compiler.ts';
+
+import { readCompactCompiler } from '@cssearth/objects';
 const record = coreIsRecord;
 export async function exportCompactCompiler(root: string, objectId: string) {
   if (!/^[a-z0-9][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid object identity.');
@@ -22,12 +25,9 @@ export async function exportCompactCompiler(root: string, objectId: string) {
   if (record(method.opticalComposite)) receipts.push(method.opticalComposite.material);
   const materials = result.scene.datasets.map(dataset => {
     const material = receipts.find(m => record(m) && m.sourceId === dataset.id);
-    if (!record(material) || material.schema !== 'cssearth-component-bound-material@1' || material.fieldIdentity !== result.scene.fieldIdentity || !Array.isArray(material.components))
-      throw new TypeError(`Missing accepted component colors for ${dataset.id}.`);
-    return { sourceId: dataset.id, ...(material.envelopeColors === undefined ? {} : { envelopeColors: material.envelopeColors }), components: material.components.map((color: unknown) => {
-      if (!record(color)) throw new TypeError('Invalid retained component.');
-      return { id: color.id, rgb: color.rgb, covered: color.covered };
-    }) };
+    const accepted = readComponentMaterialReceipt(material, dataset.id, result.scene.fieldIdentity);
+    return { sourceId: dataset.id, ...(accepted.envelopeColors === undefined ? {} : { envelopeColors: accepted.envelopeColors }),
+      components: accepted.components.map(color => ({ id: color.id, rgb: color.rgb, covered: color.covered })) };
   });
   const banks = [{ id: 'neutral', volume: result.scene.neutral }, ...result.scene.datasets];
   let minimumFeatureScaleArcsec: unknown;
@@ -37,7 +37,7 @@ export async function exportCompactCompiler(root: string, objectId: string) {
     if (bank.id === 'neutral' && record(volume.provenance)) minimumFeatureScaleArcsec = volume.provenance.minimumFeatureScaleArcsec;
     expected.push({ id: bank.id, resources: volume.resources });
   }
-  const input = { schema: 'cssearth-compact-compiler@1', objectId,
+  const input = { schema: COMPACT_COMPILER_SCHEMA, objectId,
     provenance: { resultPath,
       interpretation: 'Accepted fitted emission components, any retained photometric envelope with coarse source chromaticity, per-component colors, stars and sampling. Derived field inputs, not measured volumetric gas density. Full source acquisition remains available in the research recipes.' },
     field: JSON.parse(modelBytes.toString()), scene: result.scene, materials,

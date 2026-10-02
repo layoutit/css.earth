@@ -1,3 +1,5 @@
+import { encodeCompactPointColors } from '@cssearth/objects';
+import { COMPACT_SAMPLED_SCHEMA } from '@cssearth/objects';
 import { readCompactPin as pinned, replayCompactSampled as replay } from '@cssearth/bake/volume/node';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 import { compileCssVolume } from '@cssearth/bake/volume-leaves';
@@ -95,9 +97,7 @@ export async function exportCompactSampled(
         recipe.datasetComponents[image.id]!.ejecta > 0
           ? sampledPointColors(values, recipe, image)
           : new Float64Array(recipe.source.height * 4),
-      bytes = Buffer.alloc(colors.length * 8);
-    for (let i = 0; i < colors.length; i++)
-      bytes.writeDoubleLE(colors[i]!, i * 8);
+      bytes = encodeCompactPointColors(colors);
     const points = await save(
       root,
       `${outputDirectory}/${image.id}-colors.f64.gz`,
@@ -129,7 +129,7 @@ export async function exportCompactSampled(
   const bytes = Buffer.from(
     JSON.stringify(
       {
-        schema: "cssearth-compact-sampled@2",
+        schema: COMPACT_SAMPLED_SCHEMA,
         sourceResult,
         recipe,
         particles,

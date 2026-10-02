@@ -1,3 +1,4 @@
+import { readCompactSymmetry, decodeCompactSymmetryField } from '@cssearth/objects';
 import type { CompiledVolumeArtifact } from '../compiler/bake.ts';
 import type { VolumeSlices } from '@cssearth/objects';
 import { DENSITY_VOLUME_FORMAT, type DensityVolumeFrame, type CompilerPin } from '@cssearth/objects';
@@ -6,7 +7,6 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { gunzipSync } from "node:zlib";
 import { bakeMasterVolumeSlices } from "../slices/emission.ts";
-const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === "object" && !Array.isArray(v);
 async function pinned(root: string, pin: CompilerPin) {
   if (pin.path.startsWith("/") || pin.path.split("/").includes(".."))
     throw new Error("Invalid compact source path");
@@ -21,59 +21,15 @@ export async function replayCompactSymmetry<Volume extends CompiledVolumeArtifac
   outputDirectory: string,
   backend: SymmetryBakeBackend<Volume>,
 ) {
-  const input: unknown = JSON.parse((await pinned(root, pin)).toString());
-  if (
-    !jointRecord(input) ||
-    input.schema !== "cssearth-compact-symmetry@1" ||
-    !jointRecord(input.recipe) ||
-    !Array.isArray(input.channels) ||
-    input.channels.length !== 3
-  )
-    throw new Error("Invalid compact symmetry input");
-  const r = input.recipe,
-    g = r.grid;
-  if (
-    !jointRecord(g) ||
-    ![g.width, g.height, g.depth].every(
-      (n) => Number.isInteger(n) && Number(n) > 0 && Number(n) <= 512,
-    ) ||
-    typeof r.id !== "string" ||
-    !/^[a-z0-9-]+$/.test(r.id) ||
-    !Number.isInteger(r.slices) ||
-    Number(r.slices) < 1 ||
-    Number(r.slices) > 512 ||
-    typeof r.displayExposure !== "number" ||
-    !Number.isFinite(r.displayExposure) ||
-    r.displayExposure <= 0
-  )
-    throw new Error("Invalid compact symmetry dimensions");
-  const grid = {
-      width: Number(g.width),
-      height: Number(g.height),
-      depth: Number(g.depth),
-    },
-    count = grid.width * grid.height * grid.depth;
+  const input = readCompactSymmetry(JSON.parse((await pinned(root, pin)).toString()));
+  const r = input.recipe, { grid, count } = input;
   const fields = await Promise.all(
-    input.channels.map(async (p: unknown) => {
-      if (
-        !jointRecord(p) ||
-        typeof p.path !== "string" ||
-        p.bytes !== count * 4
-      )
-        throw new Error("Invalid emission pin");
+    input.channels.map(async (p) => {
       const b = gunzipSync(
         await pinned(root, { path: p.path }),
         { maxOutputLength: count * 4 },
       );
-      if (b.length !== count * 4)
-        throw new Error("Emission field differs");
-      const values = new Float32Array(count);
-      for (let i = 0; i < count; i++) {
-        values[i] = b.readFloatLE(i * 4);
-        if (!Number.isFinite(values[i]) || values[i]! < 0)
-          throw new Error("Invalid emission value");
-      }
-      return values;
+      return decodeCompactSymmetryField(b, count);
     }),
   );
   const voxelSize = 10 / grid.width;

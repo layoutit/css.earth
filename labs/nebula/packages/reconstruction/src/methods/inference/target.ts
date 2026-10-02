@@ -1,6 +1,7 @@
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import type { EvidenceInputs } from '../../evidence/model.ts';
-import { createEmissionWindowSampler, readEmissionWindow, type EmissionWindow } from '@cssearth/bake/volume';
+import { createEmissionWindowSampler } from '@cssearth/bake/volume';
+import { readEmissionWindow, type EmissionWindow } from '@cssearth/objects';
 import { type SkyBounds } from '@cssearth/objects';
 
 export interface CompilerTargetSourceControls { backgroundSpread: number; edgeTaperArcsec: number }

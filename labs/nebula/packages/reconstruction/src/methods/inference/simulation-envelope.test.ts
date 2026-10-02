@@ -1,5 +1,6 @@
 import { test } from 'node:test'; import assert from 'node:assert/strict';
-import { fitSimulationEnvelope, createEnvelopeSampler, envelopeChromaticity, validateEnvelopeSettings } from './simulation-envelope.ts';
+import { fitSimulationEnvelope, createEnvelopeSampler, envelopeChromaticity } from './simulation-envelope.ts';
+import { validateEnvelopeSettings } from '@cssearth/objects';
 import type { SimulationDepthPrior } from './simulation-guided.ts';
 
 // An elongated simulation: bright bar along z at x≈0, depth extent ±8.

@@ -1,6 +1,8 @@
+import { COMPONENT_MATERIAL_SCHEMA } from '@cssearth/objects';
 /** Assign observation color once to finite 3D emitters; never project an image through depth. */
 import { createEmissionField, emissionKernel, prepareEmissionComponent } from '../fields/emission.ts';
-import type { EmissionFieldModel } from '../contracts/emission.ts';
+
+import type { EmissionFieldModel, ComponentMaterialReceipt } from '@cssearth/objects';
 import type { EmissionVector3 } from '@cssearth/objects';
 
 const QUADRATURE_STEPS = 24;
@@ -34,8 +36,8 @@ export function createEmissionMaterial(model: EmissionFieldModel, image: Materia
     return { id: component.id, rgb, covered: positive > 0, observedKernelFraction: observed / total,
       coloredKernelFraction: positive / total };
   });
-  return { sampleMaterial: field.createMaterialSampler(components), receipt: {
-    schema: 'cssearth-component-bound-material@1', sourceId: image.id, fieldIdentity: model.identity,
+  const receipt = {
+    schema: COMPONENT_MATERIAL_SCHEMA, sourceId: image.id, fieldIdentity: model.identity,
     method: 'One source chromaticity per finite 3D emission component, mixed by its unchanged local emission.',
     quadrature: { rule: 'midpoint', samplesPerProjectedAxis: QUADRATURE_STEPS, supportSigma: [-4, 4] },
     components, assumptions: [
@@ -44,5 +46,6 @@ export function createEmissionMaterial(model: EmissionFieldModel, image: Materia
       'One chromaticity per existing component can smooth detail finer than its support; source imagery never extends that support or changes neutral alpha.',
       'Missing or black source coverage contributes neutral material and is counted separately; no nearest-pixel color extension.',
     ],
-  } };
+  } satisfies ComponentMaterialReceipt;
+  return { sampleMaterial: field.createMaterialSampler(components), receipt };
 }
