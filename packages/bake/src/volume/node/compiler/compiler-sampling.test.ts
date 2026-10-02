@@ -107,3 +107,21 @@ test('a small historical compiler replay keeps unreflected source geometry, samp
   assert.deepEqual(neutral.quads.filter(q => q.axis === 'z').map(q => q.center[2]), [-.5, .5]);
   for (const bank of compiled) assert.deepEqual(bank.quads.filter(q => q.axis === 'z').map(q => q.center[2]), [-.5, .5]);
 });
+
+test('a saved slab raster width below the default bakes at that width and an unsupported width is refused', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'compiler-image-width-'));
+  temporary.push(root);
+  const bake = (imageWidth: number) => bakeCompiler({ root, outputDirectory: `bake-${imageWidth}`, id: 'narrow', fieldIdentity: 'narrow-field',
+    boundsArcsec: { min: [0, 0, 0], max: [2, 1, 1] }, skyBoundsArcsec: { min: [0, 0], max: [2, 1] },
+    sampling: { sliceCounts: { x: 1, y: 1, z: 1 }, imageWidth, samplesPerSlab: 4 }, historicalReplay: true, preparedPhysical: false,
+    sampleEmission(_x, _y, _z, out) { out[0] = out[1] = out[2] = .2; },
+    datasets: [{ id: 'color', label: 'Color', sampleMaterial(_x, _y, _z, out) { out[0] = out[1] = out[2] = 255; return true; } }], progress() {},
+  }, { compileVolume({ slices }) { return { resources: slices.quads.map(q => ({ path: q.texturePath, bytes: q.bytes })) }; },
+    async prepareStarSprites() { return {}; } });
+  const scene = await bake(256);
+  assert.equal(scene.sampling.imageWidth, 256);
+  const neutral: VolumeSlices = JSON.parse(await readFile(join(root, 'bake-256/neutral/volume-slices.json'), 'utf8'));
+  assert.deepEqual(neutral.quads.filter(q => q.axis === 'z').map(q => [q.widthPx, q.heightPx]), [[256, 128]],
+    'The field fills its bounds, so the uncropped slab is the saved width across.');
+  for (const imageWidth of [127, 513, 255.5]) await assert.rejects(bake(imageWidth), /Invalid saved compiler sampling/);
+});
