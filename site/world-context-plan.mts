@@ -1,7 +1,8 @@
-import { parseCompleteWorldContext } from '@cssearth/objects';
+import { parseCompleteWorldContext, parsePreparedWorldIndex } from '@cssearth/objects';
 import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
-import { WORLD_SUMMARY_SOURCE, startupWorld, worldSystemHost } from './startup-world.mts';
-import type { PreparedWorldContext, PreparedWorldSystem } from '@cssearth/objects';
+import { WORLD_SUMMARY_SOURCE, pageWorldPlace, startupWorld } from './startup-world.mts';
+import { readWorldPlace, type WorldPlace } from './object-entries.mts';
+import type { PreparedWorldContext, PreparedWorldIndex, PreparedWorldSystem } from '@cssearth/objects';
 import { startupFetch } from './startup-requests.mts';
 
 // The application's prepared world context, validated once. Startup, framing and
@@ -26,17 +27,16 @@ import { startupFetch } from './startup-requests.mts';
 // reduced to its parent, bounds and size. Only the planner worker projects orbit
 // paths; it reads each orbit centre's binary bank when a frame first needs it. The full JSON is build-time only.
 //
-// The summary holds the Sun's own system and one point per other system (`summarizeWorldContext`, which writes it).
-// Each other system's bodies are their own file (`pages/world/systems/[id].json.ts`): a page whose body belongs to one reads
-// it before startup ends; navigation reads the one it flies to (`loadWorldSystemOf`), and the rest arrive in a few batches
-// once the first view is interactive (`streamWorldSystems`). Node tools, tests and the build read every file, so they see
-// the whole world in its prepared order.
+// The summary holds the Sun's own system and every body that orbits nothing and the map opens by click. It lists no other
+// body. Each other star is a holder: its own file (`pages/world/systems/[id].json.ts`) with the bodies that orbit it. A body
+// is found through its holder: the page names its own body's (`pageWorldPlace`), navigation reads the holder of the body it
+// flies to from that body's object entry (`loadWorldSystemOf`), and the camera reads the holder of a star it comes near
+// (world-approach.mts). Node tools, tests and the build read the bake's index and every holder, so they see the whole
+// world in its prepared order.
 const source = WORLD_SUMMARY_SOURCE;
 /** Orbit banks the planner worker reads on demand, served per centre by the build
  * (`pages/world/orbits/[id].bin.ts`). The main thread sends its validated summary to the worker. */
 export const APPLICATION_WORLD_PLANNER_SOURCE = Object.freeze({ orbitBanksUrl: '/world/orbits/' });
-/** How many requests the systems a page does not show arrive in, after its first view. */
-const SYSTEM_BATCHES = 4;
 const node = source.protocol === 'file:';
 // What the page read before it imported this module (`startup-world.mts`). With it the browser reads its world without
 // waiting, so nothing that imports this module can run before it has finished. Node, and a page that did not read it,
@@ -61,69 +61,78 @@ async function fetchJson(url: string): Promise<unknown> {
 }
 
 const summary = parsePreparedWorldContextSummary(startup ? startup.summary : await readPreparedWorldContext());
-/** Each deferred body's star, and every star whose system is its own file, in id order. */
-const hostOf = new Map((summary.deferred ?? []).map(body => [body.id, body.host]));
-export const WORLD_SYSTEM_HOSTS: readonly string[] = Object.freeze([...new Set(hostOf.values())].sort());
-/** The systems batch `index` holds (`pages/world/systems/batch-[index].json.ts`), in id order. */
-export function worldSystemBatch(index: number): readonly string[] {
-  const size = Math.ceil(WORLD_SYSTEM_HOSTS.length / SYSTEM_BATCHES);
-  return WORLD_SYSTEM_HOSTS.slice(index * size, (index + 1) * size);
-}
-export const WORLD_SYSTEM_BATCH_COUNT = SYSTEM_BATCHES;
-/** The star whose system file holds `id` or its planets (a star's own id), or null when the summary holds them all: the Sun's system, or a star without planets. */
-export const worldSystemOf = (id: string): string | null => worldSystemHost(summary.deferred, id);
+/** The world's own dot banks (`pages/world/dots/[id].bin.ts`), as the bake names them in the summary: the stars drawn as
+ * plain dots, near the Sun and in other galaxies, written by the bake as `plainStarDotBanks`. */
+export const WORLD_DOT_BANKS: readonly string[] = summary.dotBanks ?? [];
 
 const loaded = new Set<string>(), loading = new Map<string, Promise<void>>();
 const listeners = new Set<(plan: PreparedWorldContext) => void>();
-const adopt = (systems: readonly PreparedWorldSystem[], ordered = false) => {
+// The bodies the plan holds, by id, kept with it.
+let held = new Map(summary.bodies.map(body => [body.id, body] as const));
+const adopt = (systems: readonly PreparedWorldSystem[]) => {
   const fresh = systems.filter(system => !loaded.has(system.id));
   if (!fresh.length) return;
-  APPLICATION_WORLD_CONTEXT = extendWorldContext(APPLICATION_WORLD_CONTEXT, fresh, ordered);
+  APPLICATION_WORLD_CONTEXT = extendWorldContext(APPLICATION_WORLD_CONTEXT, fresh);
+  held = new Map(APPLICATION_WORLD_CONTEXT.bodies.map(body => [body.id, body] as const));
   for (const system of fresh) loaded.add(system.id);
   for (const listener of listeners) listener(APPLICATION_WORLD_CONTEXT);
 };
 const parseSystem = (value: unknown, id: string) => parsePreparedWorldSystem(value, APPLICATION_WORLD_CONTEXT, id);
-
-/** The application's world: the summary, with every system file Node reads, or a page's own system in the browser. */
-export let APPLICATION_WORLD_CONTEXT: PreparedWorldContext = summary;
-if (node) {
-  APPLICATION_WORLD_CONTEXT = await parseCompleteWorldContext(summary, id => readNodeJson(`src/objects/sun/prepared/world-systems/${id}.json`));
-  for (const id of WORLD_SYSTEM_HOSTS) loaded.add(id);
-} else {
-  // A page's own body: the first path segment of its address (`/<id>/`).
-  const own = worldSystemOf(globalThis.location?.pathname.split('/')[1] ?? '');
-  if (own) adopt([parseSystem(startup?.system?.id === own ? startup.system.value : await fetchJson(`/world/systems/${own}.json`), own)], true);
+/** Reads one holder once: its file, or the row a star that is its own holder of one body carries in its object entry. */
+function loadHolder({ holder, row }: WorldPlace): Promise<void> {
+  if (loaded.has(holder)) return Promise.resolve();
+  let pending = loading.get(holder);
+  if (!pending) {
+    pending = (row === undefined ? fetchJson(`/world/systems/${holder}.json`) : Promise.resolve(row)).then(value => adopt([parseSystem(value, holder)]))
+      .finally(() => loading.delete(holder));
+    loading.set(holder, pending);
+  }
+  return pending;
 }
 
-/** Calls `listener` with the extended plan each time other systems' bodies are added; returns the unsubscribe. */
+/** The application's world: the summary, with every holder Node reads, or a page's own in the browser. */
+export let APPLICATION_WORLD_CONTEXT: PreparedWorldContext = summary;
+/** The bake's index of the world's bodies, in Node only: the build's endpoints and tools read each body's holder from it. */
+export let APPLICATION_WORLD_INDEX: PreparedWorldIndex | null = null;
+if (node) {
+  const index = await readNodeJson('src/objects/sun/prepared/world-index.json');
+  APPLICATION_WORLD_INDEX = parsePreparedWorldIndex(index);
+  APPLICATION_WORLD_CONTEXT = await parseCompleteWorldContext(summary, id => readNodeJson(`src/objects/sun/prepared/world-systems/${id}.json`), index);
+  held = new Map(APPLICATION_WORLD_CONTEXT.bodies.map(body => [body.id, body] as const));
+} else if (startup?.system) {
+  adopt([parseSystem(startup.system.value, startup.system.id)]);
+} else {
+  // A page that did not read its world before its application reads its own body's holder here.
+  const place = pageWorldPlace(globalThis.document);
+  if (place) await loadHolder(place.row ? { holder: place.holder, row: (await readWorldPlace(place.holder))?.row } : { holder: place.holder });
+}
+
+/** Calls `listener` with the extended plan each time another holder's bodies are added; returns the unsubscribe. */
 export function onWorldSystems(listener: (plan: PreparedWorldContext) => void): () => void {
   listeners.add(listener);
   return () => { listeners.delete(listener); };
 }
-/** Reads the system that holds `id` before navigation flies to it; null when the plan already holds that body, so the
- * caller goes on at once. */
-export function loadWorldSystemOf(id: string): Promise<void> | null {
-  const host = worldSystemOf(id);
-  if (!host || loaded.has(host)) return null;
-  let pending = loading.get(host);
-  if (!pending) {
-    pending = fetchJson(`/world/systems/${host}.json`).then(value => adopt([parseSystem(value, host)]))
-      .finally(() => loading.delete(host));
-    loading.set(host, pending);
-  }
-  return pending;
+// Bodies asked for whose entries name no holder to read: nothing more of the world belongs to them.
+const settled = new Set<string>();
+/** Whether the plan holds `id` with everything that orbits it: a star's row names its system's members, and one of them
+ * missing means its holder's file is not read. */
+export function worldSystemHeld(id: string): boolean {
+  if (node || id === summary.focus.id || loaded.has(id) || settled.has(id)) return true;
+  const body = held.get(id);
+  return body !== undefined && (body.systemView?.memberIds ?? []).every(member => held.has(member));
 }
-let streaming: Promise<void> | null = null;
-/** Reads every system not yet read, in `SYSTEM_BATCHES` requests, each added as it arrives. A failed batch is logged and
- * left: navigation still reads any of its systems on its own. */
-export function streamWorldSystems(): Promise<void> {
-  streaming ??= Promise.all(Array.from({ length: SYSTEM_BATCHES }, async (_, index) => {
-    if (worldSystemBatch(index).every(id => loaded.has(id))) return;
-    try {
-      const batch = await fetchJson(`/world/systems/batch-${index}.json`);
-      if (!Array.isArray(batch)) throw new TypeError(`World system batch ${index} is not a list of systems.`);
-      adopt(batch.map((value, at) => parseSystem(value, worldSystemBatch(index)[at] ?? '')));
-    } catch (error) { console.error(`World system batch ${index} could not be read; its systems load when navigation reaches them.`, error); }
-  })).then(() => undefined);
-  return streaming;
+/** Reads the holder of `id` before navigation flies to it; null when the plan already holds that body and its system, so
+ * the caller goes on at once. A body the plan does not hold names its holder in its own object entry. */
+export function loadWorldSystemOf(id: string): Promise<void> | null {
+  if (worldSystemHeld(id)) return null;
+  // A star the plan holds without its planets is its own holder.
+  if (held.has(id)) return loadHolder({ holder: id });
+  return readWorldPlace(id).then(place => {
+    if (!place) { settled.add(id); return; }
+    return loadHolder(place);
+  });
+}
+/** Reads a holder by its id (world-approach.mts): the file of a star the camera has come near. */
+export function loadWorldHolder(id: string): Promise<void> {
+  return loadHolder({ holder: id });
 }

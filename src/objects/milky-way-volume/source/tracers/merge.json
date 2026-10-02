@@ -13,7 +13,16 @@
     "hou-han-masers",
     "hou-han-hii",
     "open-clusters",
-    "cepheids"
+    "cepheids",
+    {
+      "bank": "packaged-stars",
+      "uncapped": true,
+      "shellPcFromSun": [
+        3000,
+        1000000000.0
+      ],
+      "basis": "The star packages that are plain dots, each in the level of its own distance from the Sun (3000 to the galaxy's edge pc here), so a star appears with its neighbours as their region fills the view. Each is a star with a page of its own, so none is thinned by the density cap and none takes another dot's room."
+    }
   ],
   "maxKinematicSigmaKpc": 1,
   "maxKinematicSigmaBasis": "Presentation choice, not a paper value: a kinematic distance whose ±7 km/s uncertainty exceeds 1 kpc is left out. Those are the sources toward tangent points, the Galactic centre and the anticentre, which pile onto a circle through the Sun and the centre; 1 kpc drops 917 of the 7,589 tracers inside the frame and three quarters of the ones on that circle. Hou & Han (2014) weight a kinematic distance down from 0.5 kpc of uncertainty.",
@@ -48,5 +57,10 @@
     "scaleLengthKpc": 2.6,
     "kernelKpc": 0.25,
     "basis": "The disc's scale length is the thin disc's, 2.6 kpc (Bland-Hawthorn & Gerhard 2016, ARA&A 54, 529, table 5, https://arxiv.org/abs/1602.07702). The density at the Sun, 15 dots per kpc², is the highest that stays even out to 4 kpc from the Sun along the solar circle; past 4 to 6 kpc the catalogues thin out, since dust hides the far disc."
+  },
+  "apart": {
+    "bank": "packaged-stars",
+    "pc": 0.2,
+    "basis": "A star package is that star at the place its page uses. A catalogue row within 0.2 pc of one (twice the 0.1 pc grid every dot of this bank is rounded to) is the same star from that catalogue, drawn once: 85 of the 2,108 packaged stars had such a dot on 2026-10-02."
   }
 }

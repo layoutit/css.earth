@@ -61,7 +61,7 @@ scope.onmessage = ({ data }) => {
         banks.plan = plan;
         for (const body of plan.bodies) if (body.orbit && !banks.bankOf.has(body.id)) banks.bankOf.set(body.id, body.id);
       }
-      calculate.extend(plan);
+      calculate.extend(plan, data.annotationPriorities);
     } else {
       const view: WorldContextView = { ...data.view, bodies: unpackWorldBodies(data.bodies) };
       const frame: PlannedWorldContext = calculate(view);

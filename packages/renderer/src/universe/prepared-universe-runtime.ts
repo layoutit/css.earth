@@ -3,12 +3,13 @@ import { parsePreparedWorldContextPlan, type PreparedWorldContext, type Prepared
 import { createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { mountBackgroundPoints } from './background-points.js';
-import { fetchPreparedCatalogueBank, fetchPreparedJson } from './catalogue-points.js';
+import { UNHIGHLIGHTED_OPACITY } from './context-presentation-policy.js';
+import { fetchPreparedCatalogueBank, fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
 import { mountImageMesh } from './image-mesh.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 
 import { galaxyOutsideFade, logarithmicFade } from './world-context/context-scale.js';
-import { mountPreparedWorldContext, type BodyVisibility } from './prepared-world-context.js';
+import { mountPreparedWorldContext, type BodyVisibility, type WorldBodyAnnotations } from './prepared-world-context.js';
 
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -43,13 +44,17 @@ const IMAGE_MESH_LOAD_DISTANCE_M = 7e9 * 3.0856775814913673e16;
 /** Hidden, unsubscribed dataset banks are retained only within this measured DOM budget. */
 export const WARM_VOLUME_DATASET_DOM_NODE_BUDGET = 5_000;
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], contextBanks = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, nonNavigableIds, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], contextBanks = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], starCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities: initialPriorities = {}, annotationLandmarks, annotationOpacities: initialOpacities = {}, plannerSource, nonNavigableIds, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
   let plan = parsePreparedWorldContextPlan(context);
   const payload = validatePreparedCssVolume(volume);
   // What another system's bodies reach once read (addSystem): every planner made and every mounted world layer.
   const planners = new Set<ReturnType<typeof createWorldContextPlannerClient>>();
   const layers = new Set<ReturnType<typeof mountPreparedWorldContext>>();
   const spriteTable: Record<string, SpriteWithUrl> = { ...sprites };
+  // Every body's annotation tier and strength, the first plan's and each added system's: a planner or layer made after
+  // a system was added starts with that system's too.
+  const annotationPriorities: Record<string, number> = { ...initialPriorities };
+  const annotationOpacities: Record<string, { line: number; label: number }> = { ...initialOpacities };
   if (volumeDatasetBanks.length && !datasetBillboards) throw new TypeError('Volume dataset banks require their prepared billboards.');
   const datasetFacts = volumeDatasetBanks.map(bank => {
     const facts = datasetBillboards!.plan.banks.get(bank.id);
@@ -118,16 +123,18 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       return { ...client, destroy() { planners.delete(client); client.destroy(); } };
     },
     /** Draw `next`, an extension of this universe's plan with other systems' bodies (`extendWorldContext`), with their
-     * billboards: mounted layers add the bodies after their own, and planners plan them from the first view that holds them. */
-    addSystems(next: PreparedWorldContext, nextSprites: Readonly<Record<string, SpriteWithUrl>>) {
+     * billboards and annotations: mounted layers add the bodies after their own, and planners plan them from the first
+     * view that holds them. */
+    addSystems(next: PreparedWorldContext, nextSprites: Readonly<Record<string, SpriteWithUrl>>, annotations: WorldBodyAnnotations = {}) {
       const validated = parsePreparedWorldContextPlan(next);
       if (validated === plan) return;
       if (validated.focus.id !== plan.focus.id || plan.bodies.some((body, index) => validated.bodies[index] !== body)) {
         throw new TypeError('A universe only adds bodies after the ones its plan holds.');
       }
       plan = validated; Object.assign(spriteTable, nextSprites);
-      for (const layer of layers) layer.addBodies(plan, nextSprites);
-      for (const planner of planners) planner.extend(plan);
+      Object.assign(annotationPriorities, annotations.annotationPriorities); Object.assign(annotationOpacities, annotations.annotationOpacities);
+      for (const layer of layers) layer.addBodies(plan, nextSprites, annotations);
+      for (const planner of planners) planner.extend(plan, annotations.annotationPriorities);
     },
     mount(stage: HTMLElement, { requestPublication, presentationHost = stage }: {
       requestPublication?: () => boolean;
@@ -190,6 +197,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const galaxyDisc = { centreM: payload.frame.originM, normal: [2 * (gx * gz + gw * gy), 2 * (gy * gz - gw * gx), 1 - 2 * (gx * gx + gy * gy)],
           radiusM: Math.max(...[payload.frame.boundsUnits.min, payload.frame.boundsUnits.max].flatMap(bound => [Math.abs(bound[0]), Math.abs(bound[1])])) * payload.frame.metersPerUnit };
         const additionalPoints = own(mountBackgroundPoints(root, end, backgroundCataloguePoints, target => fetchPreparedCatalogueBank(target), galaxyDisc));
+        // The catalogued stars that are only dots: inside the galaxy or out, with every other star.
+        let starPlaces: readonly (readonly number[])[] = [], starPlacesFor: unknown = null, starPlacesSelected: unknown = null;
+        const starPoints = starCataloguePoints.map(url => own(mountCataloguePoints({ host: root, before: end, url, loadBank: target => fetchPreparedCatalogueBank(target) })));
         // Over the galaxies: a mesh seen from outside hides what lies inside it.
         const meshes = imageMeshes.map(mesh => ({ cutaway: () => mesh.cutaway?.() ?? true, hidden: () => mesh.hidden?.() ?? false,
           runtime: own(mountImageMesh({ host: root, before: end, interiorBefore: meshInterior, labelHost: frontRoot, url: mesh.url,
@@ -353,7 +363,15 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               for (const mesh of meshes) mesh.runtime.setHidden(mesh.hidden());
               const meshCover = Math.max(0, ...meshes.map(mesh => mesh.runtime.publish({ world, viewport }, logarithmicFade(distanceM, IMAGE_MESH_LOAD_DISTANCE_M / 2, IMAGE_MESH_LOAD_DISTANCE_M), meshCaptioned)));
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
-              const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity);
+              // The stars the world draws as bodies (the selected one, and each plain-dot star it holds): no dot bank draws them too.
+              const drawnPlaces = spatial.plainStarPlaces();
+              if (drawnPlaces !== starPlacesFor || selected.positionM !== starPlacesSelected) {
+                starPlacesFor = drawnPlaces; starPlacesSelected = selected.positionM; starPlaces = [selected.positionM, ...drawnPlaces];
+              }
+              const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity, starPlaces);
+              // The world's own star dots dim like every marker outside a highlighted category and like every body outside
+              // the focus star's system (the frame's `otherSystems`).
+              for (const bank of starPoints) bank.publish({world, viewport}, (spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1) * frame.otherSystems, starPlaces);
               // A body inside a galaxy other than the page's own stands among that galaxy's catalogue dots once the camera has left
               // the body's own system, over the band the stellar neighbourhood takes around the Sun.
               const insideGalaxy = catalogBanks.imageBankContaining(selected.positionM);

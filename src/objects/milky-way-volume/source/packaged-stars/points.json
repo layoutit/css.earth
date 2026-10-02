@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-packaged-points-source@1",
+  "id": "packaged-stars",
+  "source": "cssearth-star-packages",
+  "meaning": "The star packages of this repository that the map does not name or open by click: each is one more star of the galaxy, a dot at its own prepared place in its own color. Each keeps its page, reached by search.",
+  "table": {
+    "path": "positions.csv.gz",
+    "generator": "site/build/prepare/paged-star-dot-positions.mts"
+  },
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "appearance": {
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "colorLevels": 8,
+    "colorLevelsBasis": "Presentation choice, 2026-10-02: eight steps a channel leave 25 colors for the 2,108 stars, about as many as the rest of the galaxy's dots use (24); every star's own color would be 1,271 paint paths."
+  }
+}

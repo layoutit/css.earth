@@ -1,10 +1,13 @@
 ---
+import { worldPlaceOf } from '../world-places.mts';
 import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { webAnalyticsBootstrap } from "../web-analytics.mts";
 import { errorReportBootstrap } from "../error-report.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { startupRequestsBootstrap } from '../startup-requests.mts';
+import { defaultDatasetBank } from '../object-page-data.mts';
+import contextBankAssets from '../prepared-context-bank-assets.json';
 import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
 import { inlineSceneImage, resolveBuildSceneAddress } from '../asset-origin.mts';
 import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
@@ -48,6 +51,8 @@ const { objectId, pageId = objectId, navigation = false, scene, descriptor, home
 const objectUi = await Astro.slots.render('object-ui');
 const tabStyles = informationTabStyles(Astro.locals, objectUi);
 const objectRecord = requireSceneObject(objectId);
+// The holder of the page's own body, when the world summary does not hold it whole (site/world-places.mts).
+const worldPlace = worldPlaceOf(objectRecord.id);
 // Rules for a page without script. The phone sheet waits, hidden, for its controller to publish a snap state
 // (shell-layout.css); without script it rests at its peek, and the checkbox of its handle opens it.
 const sheetWithoutScript = 'body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: visible !important; }';
@@ -78,6 +83,9 @@ const startupImageSource = startupCover && startup?.arrival?.billboard
 // head, or the first request pays the DNS and TLS setup (430 ms of a cold iPad load against 33 ms on a warm connection,
 // 2026-09-30). An image preload is not used: Safari downloaded the photograph twice with one.
 const assetPreconnect = startupImage && /^https?:\/\//.test(startupImage) ? new URL(startupImage).origin : undefined;
+// The bank the page's default dataset shows names its files in a list of its own; the head asks for it with the page.
+const defaultBank = !navigation && scene ? await defaultDatasetBank(objectRecord.id) : null;
+const bankFiles = defaultBank && defaultBank in contextBankAssets ? `/world/context-assets/${defaultBank}.json` : undefined;
 const seoOptions = { socialImages: availableSocialImages(SCENE_OBJECTS), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
 const pageRecord = requireObject(pageId);
 const pageSeo = objectSeo(pageRecord, seoOptions);
@@ -91,7 +99,8 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     <meta charset="UTF-8" />
     {!navigation && <script is:inline set:html={initialShellContextBootstrap(objectId)}></script>}
     {/* The first view's documents download while the HTML parses, beside the modules that read them (startup-requests.mts). */}
-    {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id), summaryUrl: worldSummaryUrl })}></script>}
+    {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id), summaryUrl: worldSummaryUrl, ...(worldPlace && worldPlace.row === undefined ? { holder: worldPlace.holder } : {}), ...(bankFiles ? { bankFiles } : {}) })}></script>}
+    {!navigation && worldPlace && <meta name="cssearth-world-holder" content={worldPlace.holder} data-row={worldPlace.row === undefined ? undefined : ''} />}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     {!navigation && <script is:inline set:html={errorReportBootstrap}></script>}
     {/* One connection for the photograph (no CORS) and one for the scene's fetched files (CORS): browsers keep them apart. */}

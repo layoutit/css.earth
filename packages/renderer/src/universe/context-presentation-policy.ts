@@ -7,7 +7,7 @@ const CLOSE_ORBIT_OPACITY = .3;
 /** Paths outside the subject's family. */
 const OUTSIDE_FAMILY_OPACITY = .25;
 /** Bodies outside a highlighted category. */
-const UNHIGHLIGHTED_OPACITY = .3;
+export const UNHIGHLIGHTED_OPACITY = .3;
 /** Other stars' bodies seen from inside the focus star's system, in steps so a dolly rewrites few opacities. */
 const OTHER_SYSTEM_OPACITY = .3, OTHER_SYSTEM_STEPS = 16;
 

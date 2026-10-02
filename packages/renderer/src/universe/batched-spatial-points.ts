@@ -76,6 +76,9 @@ export interface BatchedSpatialPointPart<T extends BatchedSpatialPoint> {
   /** The share of visible points to draw: each point keeps its own fixed rank, so a smaller share drops the same points
    * every frame and nothing flickers. `stats().candidates` counts the visible points before it applies. */
   keepFraction?(): number;
+  /** The indices of the points not to draw now, or null: the dots of stars a body marker draws (catalogue-points.ts). The
+   * same set is returned until it changes. */
+  hidden?(): ReadonlySet<number> | null;
 }
 
 export interface BatchedSpatialPointStats { visiblePoints: number; candidates: number; skippedCells: number; residentElements: number; publishMs: number }
@@ -111,7 +114,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   // spreads the kept share evenly and stably. The cells' points in ascending order, each cell a run of `order` from
   // cellStart to cellStart of the next: the prefix a frame draws ends a run early, and a point keeps its own index for its
   // rank. One cell holds everything without cells.
-  const parts = inputs.map(({ points, cells, stylePoint, drawnCount, paintPalette, keepFraction }) => {
+  const parts = inputs.map(({ points, cells, stylePoint, drawnCount, paintPalette, keepFraction, hidden }) => {
     // Behind an occluder a dot is painted by a fainter path of its color, one for each level: more paths, no more dots.
     const dimmed = (style: BatchedSpatialPointStyle, factor: number) => pointPaint({ ...style, opacity: style.opacity * factor });
     const drawnStyle = (point: T) => { const style = stylePoint(point); return style && style.opacity > 0 && style.radiusPx > 0 ? style : null; };
@@ -137,7 +140,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     // The widest margin a drawn point has: a cell is out of view when even its nearest corner is beyond it.
     let widestMargin = 0;
     for (let index = 0; index < points.length; index++) if (paths[index]! >= 0) widestMargin = Math.max(widestMargin, margins[index]!);
-    return { points, cells, drawnCount, keepFraction, paint, positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order,
+    return { points, cells, drawnCount, keepFraction, hidden, paint, positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order,
       boxes: cells?.boxes ?? new Float64Array(6), widestMargin, culled: new Int32Array(cellCount),
       last: { visiblePoints: 0, candidates: 0, skippedCells: 0, residentElements: 0, publishMs: 0 } as BatchedSpatialPointStats };
   });
@@ -145,7 +148,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   // The last full paint: the camera's position and everything else it depended on, how many points each part drew and
   // the nearest of them. A camera that only moved (a zoom, a pan around a planet) moves no point by a visible amount while
   // its translation is far below that nearest distance, so the paint is kept (parallaxPixels).
-  let painted: { at: number; position: readonly number[]; rest: readonly number[]; counts: readonly number[]; nearestUnits: number; keeps: readonly number[];
+  let painted: { at: number; position: readonly number[]; rest: readonly number[]; counts: readonly number[]; nearestUnits: number; keeps: readonly number[]; hiddens: readonly (ReadonlySet<number> | null)[];
     axes: Matrix3; focal: number; cx: number; cy: number; width: number; height: number } | null = null, destroyed = false;
   // While the camera turns, the last paint is moved by one warp (a compositor transform) instead of repainted; the exact
   // paint follows once the publications pause.
@@ -173,6 +176,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     if(world.referenceFrame !== frame.referenceFrame || world.epochJdTt !== frame.epochJdTt) throw new TypeError('Point camera frame mismatch');
     const local = presentPhysicalPoseInVolume(world.pose,frame), r = cssCameraAxesFromOrientation(local.orientationXyzw);
     const keeps = parts.map(part => part.keepFraction ? Math.max(0, Math.min(1, part.keepFraction())) : 1);
+    const hiddens = parts.map(part => part.hidden ? part.hidden() : null);
     // The camera's turn and lens; the kept shares are part of the paint too (`same` below): a new share repaints at rest.
     const rest=[...local.orientationXyzw,viewport.focalPixels,...viewport.principalOffsetPixels,viewport.widthPixels??0,viewport.heightPixels??0];
     const distanceUnits = Math.hypot(...local.positionUnits);
@@ -182,7 +186,8 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     if (painted) {
       const shift = Math.hypot(...local.positionUnits.map((value, axis) => value - painted!.position[axis]!));
       const still = shift === 0 || parallaxPixels(viewport.focalPixels, shift, painted.nearestUnits) < MAX_PARALLAX_PIXELS;
-      const same = counts.every((count, index) => count === painted!.counts[index]) && keeps.every((keep, index) => keep === painted!.keeps[index]);
+      const same = counts.every((count, index) => count === painted!.counts[index]) && keeps.every((keep, index) => keep === painted!.keeps[index])
+        && hiddens.every((hidden, index) => hidden === painted!.hiddens[index]);
       const turned = !rest.every((value, i) => value === painted!.rest[i]);
       if (still && same && !turned && !behind) { setWarp(''); return; }
       // A turn or a zoom of the lens moves every far point by the same projective map of the screen. Warp the paint while
@@ -232,7 +237,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     parts.forEach((part, partIndex) => {
       const partStarted = performance.now();
       const { positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order, boxes, culled, paint, cells } = part;
-      const count = counts[partIndex]!, keep = keeps[partIndex]!;
+      const count = counts[partIndex]!, keep = keeps[partIndex]!, hiddenSet = hiddens[partIndex]!;
       let visible = 0, candidates = 0;
       paint.begin(viewport);
       // A cell is out of view when all of its box is behind the camera or beyond one edge of the painted view and its
@@ -271,7 +276,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
           const squared = x * x + y * y + z * z;
           if (squared < nearestSquared) nearestSquared = squared;
           const path = paths[index]!;
-          if (path < 0) continue;
+          if (path < 0 || hiddenSet?.has(index)) continue;
           const depth = -(r2 * x + r5 * y + r8 * z);
           if (depth <= 0) continue;
           const sx = focal * (r0 * x + r3 * y + r6 * z) / depth + ox, sy = focal * (r1 * x + r4 * y + r7 * z) / depth + oy;
@@ -317,7 +322,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     setWarp('');
     // Counts for probes and tests, kept here: a per-frame dataset write is a DOM write (motion-freezes-membership.md).
     behind = false;
-    painted={at:now(),position:[...local.positionUnits],rest,counts,nearestUnits,keeps,axes:axesMatrix(r),focal:viewport.focalPixels,cx,cy,width,height};
+    painted={at:now(),position:[...local.positionUnits],rest,counts,nearestUnits,keeps,hiddens,axes:axesMatrix(r),focal:viewport.focalPixels,cx,cy,width,height};
   };
   return Object.freeze({ root,
     /** Each part's group, whose opacity dims it, and its counts from the last paint. */

@@ -15,5 +15,10 @@
   "colorTowardWhite": 0.5,
   "colorTowardWhiteBasis": "Presentation choice: each catalogue color mixed halfway to white before the gamma, because the saturated colors read as neon over the backing. The hue order of every catalogue is kept.",
   "colorGamma": 1.6,
-  "colorGammaBasis": "Presentation choice, picked from three renders over the backing (full opacity, 65% opacity, gamma 1.6): each color channel raised to the power 1.6, so the colored dots sink into the painted arms and the whitest keep their sparkle."
+  "colorGammaBasis": "Presentation choice, picked from three renders over the backing (full opacity, 65% opacity, gamma 1.6): each color channel raised to the power 1.6, so the colored dots sink into the painted arms and the whitest keep their sparkle.",
+  "apart": {
+    "bank": "packaged-stars",
+    "pc": 0.2,
+    "basis": "A star package is that star at the place its page uses. A catalogue row within 0.2 pc of one (twice the 0.1 pc grid every dot of this bank is rounded to) is the same star from that catalogue, drawn once: 85 of the 2,108 packaged stars had such a dot on 2026-10-02."
+  }
 }

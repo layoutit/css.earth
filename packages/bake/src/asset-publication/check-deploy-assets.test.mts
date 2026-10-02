@@ -27,7 +27,8 @@ test('the published world summary and system views must describe the same system
   const root = projectRoot(import.meta.url), prepared = resolve(root, 'src/objects/sun/prepared');
   const summary = await readFile(resolve(prepared, 'world-context-summary.json'), 'utf8');
   // A system's bodies and its views share a file name; the address says which folder it is.
-  const view = async (url: string) => readFile(resolve(prepared, url.includes('/world-systems/') ? 'world-systems' : 'system-views', url.split('/').at(-1)!), 'utf8');
+  const view = async (url: string) => readFile(url.endsWith('/world-index.json') ? resolve(prepared, 'world-index.json')
+    : resolve(prepared, url.includes('/world-systems/') ? 'world-systems' : 'system-views', url.split('/').at(-1)!), 'utf8');
   const read = (alter?: (id: string, text: string) => string) => async (url: string) => url.endsWith('/world-context-summary.json') ? summary
     : (alter ?? ((_id, text) => text))(url.split('/').at(-1)!.replace(/\.json$/u, ''), await view(url));
   assert.ok(await checkPublishedWorldPair(root, read()) > 0);

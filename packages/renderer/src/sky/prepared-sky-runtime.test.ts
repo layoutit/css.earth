@@ -27,7 +27,7 @@ const datasetBanks = (banks: readonly { id: string; frame: DensityVolumeFrame; c
     banks: banks.map(bank => ({ id: bank.id, contextVisibility: bank.contextVisibility ?? 'galactic', attached: bank.attachedTo !== undefined })) }) },
 });
 
-const spatialFrame = { id: 1, baseId: 0, members: new Uint32Array(), updates: [], emphasizedId: null, opacity: 1, width: 800, height: 600 };
+const spatialFrame = { id: 1, baseId: 0, members: new Uint32Array(), updates: [], emphasizedId: null, otherSystems: 1, opacity: 1, width: 800, height: 600 };
 const spatialPublish = mock.fn(() => {});
 const catalogMount = mock.fn((): unknown => undefined);
 const foregroundRects = [{ left: 100, top: 100, right: 150, bottom: 114 }];
@@ -36,7 +36,7 @@ const foregroundRects = [{ left: 100, top: 100, right: 150, bottom: 114 }];
 mock.module('../universe/world-context/world-context-point-source.js', { namedExports: { mountWorldContextPointSource: () => null } });
 mock.module('../universe/prepared-galaxy-catalog.js', { namedExports: { mountPreparedGalaxyCatalog: catalogMount } });
 mock.module('../universe/prepared-world-context.js', { namedExports: { ...await import('../universe/prepared-world-context.js'),
-  mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, setOverview() {}, setSystemRetired() {}, setBodyVisibility() {}, setOutsideGalaxy() {}, backgroundExclusionRects: () => foregroundRects, bodyLabelRects: () => [], destroy() {} }) } });
+  mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, plainStarPlaces: () => [], setOverview() {}, setSystemRetired() {}, setBodyVisibility() {}, setOutsideGalaxy() {}, backgroundExclusionRects: () => foregroundRects, bodyLabelRects: () => [], destroy() {} }) } });
 // The modules under test import the mocked ones, so they load after the mocks.
 const { mountPreparedCssSky, preparedSkyCameraTransform } = await import('./prepared-sky-runtime.js');
 const { validatePreparedCssVolume } = await import('@cssearth/objects');

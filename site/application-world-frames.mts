@@ -9,10 +9,12 @@ interface WorldFramesOptions {
   moonLabels: ApplicationWorldMoonLabels;
   lifetime: SceneLifetime;
   heliosphereEnabled(): boolean;
+  /** Called with each published frame's camera. */
+  onFrame?(world: WorldCameraPose): void;
 }
 
 /** Camera commit and retained-world publication share one worker-planned frame. */
-export function createApplicationWorldFrames({ layer, planner, moonLabels, lifetime, heliosphereEnabled }: WorldFramesOptions) {
+export function createApplicationWorldFrames({ layer, planner, moonLabels, lifetime, heliosphereEnabled, onFrame }: WorldFramesOptions) {
 
   const queue = createWorldFrameQueue(async request => {
     const snapshot = layer.captureFrame(request.world, request.viewport);
@@ -23,6 +25,7 @@ export function createApplicationWorldFrames({ layer, planner, moonLabels, lifet
       moonLabels.publish(world, viewport, layer.labelBudget());
       // Camera subscribers observe the complete view; they never publish it.
       camera();
+      onFrame?.(world);
     } };
   }, layer.opacityClock);
 

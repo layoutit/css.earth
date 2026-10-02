@@ -100,8 +100,10 @@ const pathLevels = (orbit: PreparedContextOrbitGeometry) => [{ vertices: orbit.v
     (_, slot) => orbit.verticesM[level.vertexIndices[Math.floor(slot / 3)]! * 3 + slot % 3]!),
     trail: level.trail, activeChords: level.activeChords, deviationM: level.deviationM }))];
 
-export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedWorldContextGeometry, annotationPriorities: Readonly<Record<string, number>> = {},
+export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedWorldContextGeometry, initialPriorities: Readonly<Record<string, number>> = {},
   annotationLandmarks: readonly string[] = []) {
+  // Each body's annotation tier: the first plan's, and each extension's for the bodies it adds (`extend`).
+  const annotationPriorities: Record<string, number> = { ...initialPriorities };
   const wantedOrbits = new Set<string>(), landmarkMoonIds = new Set(annotationLandmarks), declutterMarkers = createMarkerDeclutter(annotationPriorities);
   const points = [plan.focus, ...plan.bodies].map(body => 'classification' in body && isExtendedClassification(body.classification) ? { ...body, radiusM: 0 } : body), byId = new Map(points.map(point => [point.id, point]));
   const indexById = new Map(points.map((point, index) => [point.id, index] as const).reverse()); // Each id's first slot, looked up per frame.
@@ -552,12 +554,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       output.indicatorCutout = entry.indicatorCutout; output.orbitAppearance = entry.orbitAppearance; output.emphasis = projected.emphasis;
       return output;
     };
-    return { emphasizedId, opacity, width, height, ...(labelMeasurements.length ? { labelMeasurements } : {}), projectedBodies: projectedBodies.map(plannedBody) };
+    // `otherSystems`: the dimming of every body outside the focus star's system, which the stars drawn as bank dots share.
+    return { emphasizedId, opacity, width, height, otherSystems, ...(labelMeasurements.length ? { labelMeasurements } : {}), projectedBodies: projectedBodies.map(plannedBody) };
   };
   return Object.assign(planFrame, {
     /** Another system's bodies, read after the plan was made (`extendWorldContext`): each takes the next index, so every
-     * body already planned keeps its own. `next` is the extended plan, for the systems' fades. */
-    extend(next: PreparedWorldContext | PreparedWorldContextGeometry) {
+     * body already planned keeps its own. `next` is the extended plan, for the systems' fades; `priorities` the added
+     * bodies' annotation tiers, which the first plan's table did not hold. */
+    extend(next: PreparedWorldContext | PreparedWorldContextGeometry, priorities: Readonly<Record<string, number>> = {}) {
+      Object.assign(annotationPriorities, priorities);
       const added = next.bodies.filter(body => !byId.has(body.id));
       for (const body of added) { points.push(body); byId.set(body.id, body); indexById.set(body.id, points.length - 1); }
       systemFade = createSystemFade(next);

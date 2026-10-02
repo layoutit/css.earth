@@ -97,9 +97,31 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
   let fadeOutM: readonly [number, number] | null = null;
   // The view's half-width at the bank's origin per unit of camera distance: a stacked bank's inner levels fill in by it.
   let halfWidthPerDistance = 1;
+  // The points at the places of stars a body marker draws (the selected body, and each star the world holds as a body):
+  // found once per list of places and per part, by the bank's own rounding (catalogue-bank-binary.ts
+  // CATALOGUE_POSITION_SCALE), and left out of the paint while the list names them.
+  let hiddenAtM: readonly (readonly number[])[] | null = null;
+  // A place in the world's frame as the loaded bank stores it, or null in a rotated bank (a galaxy's own dots), which is
+  // never asked for one.
+  let placeKey: ((positionM: readonly number[]) => string | null) | null = null;
+  /** The hidden points of one part, by the part's own indices. */
+  const hiddenIn = (points: readonly { readonly positionUnits: readonly number[] }[]) => {
+    let byPlace: Map<string, number> | null = null, forList: typeof hiddenAtM = null, indices: ReadonlySet<number> | null = null;
+    return () => {
+      if (forList === hiddenAtM) return indices;
+      forList = hiddenAtM;
+      if (!hiddenAtM?.length || !placeKey) return indices = null;
+      byPlace ??= new Map(points.map((point, index) => [point.positionUnits.join(','), index] as const));
+      const found = hiddenAtM.flatMap(positionM => { const key = placeKey!(positionM), index = key === null ? undefined : byPlace!.get(key); return index === undefined ? [] : [index]; });
+      return indices = found.length ? new Set(found) : null;
+    };
+  };
   return Object.freeze({ root,
-    publish(publication: VolumeCameraPublication, opacity = 1) {
+    /** `withoutM`: places in the world's frame, in metres, whose own dots are not drawn. The caller passes the same list
+     * until its places change. */
+    publish(publication: VolumeCameraPublication, opacity = 1, withoutM: readonly (readonly number[])[] | null = null) {
       if (destroyed) return;
+      hiddenAtM = withoutM;
       let alpha = Math.max(0, Math.min(1, opacity));
       if (extent) {
         const distanceM = eyeDistanceM(publication.world.pose, extent.originM);
@@ -136,6 +158,11 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         fadeOutM = fadeOut ? [fadeOut[0] * bank.frame.metersPerUnit, fadeOut[1] * bank.frame.metersPerUnit] : null;
         // One style object per palette entry (a color at one radius): the projection asks for a style per point on every
         // frame. An entry's alpha byte scales the bank's opacity.
+        // A world place as the bank would have stored it, compared axis by axis with every point. The bank's frame is
+        // unrotated here or no place is hidden: a rotated bank (a galaxy's own dots) is never asked for one.
+        const [qx, qy, qz, qw] = bank.frame.localToReferenceXyzw, unrotated = qx === 0 && qy === 0 && qz === 0 && qw === 1;
+        const stored = (meters: number, axis: number) => Math.round((meters - bank.frame.originM[axis]!) / bank.frame.metersPerUnit * 1e4) / 1e4;
+        placeKey = positionM => !unrotated ? null : positionM.map((value, axis) => stored(value, axis)).join(',');
         const styleKey = (point: { colorCss: string; radiusPx: number }) => `${point.colorCss}|${point.radiusPx}`;
         const styles = new Map([...new Map(bank.points.map(point => [styleKey(point), point] as const)).entries()].map(([key, { colorCss: color, radiusPx }]) =>
           [key, { colorCss: color.slice(0, 7), radiusPx,
@@ -173,6 +200,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
           cells: { boxes: bank.cells.boxes, of: cellOf },
           drawnCount: (distanceUnits: number, cameraUnits: VolumeVector) => count(drawn(distanceUnits, cameraUnits)),
           ...(budget === undefined ? {} : { keepFraction: share }),
+          hidden: hiddenIn(points),
           // One path per color unions its dots, so two translucent dots of one color that overlap do not add up; a part
           // keeps a path only for the colors its own dots use.
           paintPalette: [...new Set(points.map(styleKey))].map(key => pointPaint(styles.get(key)!)),

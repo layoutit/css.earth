@@ -37,6 +37,23 @@ export function contextObjectJsonModule(contexts: readonly { id: string }[]) {
     `export const CONTEXT_OBJECT_SOURCE_MANIFESTS: Record<string, unknown> = import.meta.glob([${contexts.map(({ id }) => `'../src/objects/${id}/source/manifest.json'`).join(', ')}], { eager: true, import: 'default' });\n`;
 }
 
+/** A bank a body's dataset shows (a galaxy's image layers, a nebula's volume). Its files are named when it is loaded, not
+ * in every page's code: of 2,393 addresses the application carried, 2,311 were these banks' (103 KB of its 189 KB
+ * compressed, 2026-10-02). */
+export const CONTEXT_BANK_TYPES: ReadonlySet<string> = new Set(['image-layer-bank', 'volume-dataset-bank']);
+
+/** `assets` (contextObjectAssetUrls) apart: what the application names in its code, and each bank's own list
+ * (`/world/context-assets/<id>.json`). */
+export function splitContextObjectAssets(contexts: readonly { id: string; type?: string }[], assets: Readonly<Record<string, string>>) {
+  const bankIds = new Set(contexts.filter(context => context.type !== undefined && CONTEXT_BANK_TYPES.has(context.type)).map(({ id }) => id));
+  const inline: Record<string, string> = {}, banks: Record<string, Record<string, string>> = Object.fromEntries([...bankIds].sort().map(id => [id, {}]));
+  for (const [path, url] of Object.entries(assets)) {
+    const id = /^\.\.\/src\/objects\/([^/]+)\//u.exec(path)?.[1];
+    if (id !== undefined && bankIds.has(id)) banks[id]![path] = url; else inline[path] = url;
+  }
+  return { inline, banks };
+}
+
 /** Context resources come exclusively from committed inventories, so dev and a deploy list the same files: an
  * asset-origin build addresses each by its content hash, dev by its restored path on the dev server. Neither discovers
  * the prepared payload on disk, so a deploy cannot silently regenerate a second package identity. */
@@ -183,8 +200,10 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'), descriptors);
   await writeGenerated(resolve(projectRoot, 'site/prepared-stellar-extents.json'), JSON.stringify(await readStellarExtents([...entries, ...contexts], projectRoot)) + '\n');
-  await writeGenerated(resolve(projectRoot, 'site/prepared-context-objects.mts'), contextObjectModule(contexts,
-    await contextObjectAssetUrls(contexts, projectRoot, assetOrigin())));
+  const { inline, banks } = splitContextObjectAssets(contexts, await contextObjectAssetUrls(contexts, projectRoot, assetOrigin()));
+  await writeGenerated(resolve(projectRoot, 'site/prepared-context-objects.mts'), contextObjectModule(contexts, inline));
+  // Read by the build only (site/pages/world/context-assets/[id].json.ts).
+  await writeGenerated(resolve(projectRoot, 'site/prepared-context-bank-assets.json'), JSON.stringify(banks) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-context-json.mts'), contextObjectJsonModule(contexts));
   return entries;
 }

@@ -23,7 +23,7 @@ const entry = (kind: 'scene' | 'bank', name: string, classification: string, dis
     route: `/${id}/`, illustration: false, distanceMeters,
     detail: { text: `${distanceMeters} m`, title: 'Observer distance', ariaLabel: `${distanceMeters} m. Observer distance` },
     source: { subject: `object:${id}`, document: `/sources/${id}/`, label: `Sources for ${name}` },
-    marker: kind === 'scene' ? { kind: 'scene', id: 'saturn', color: '#fff' } : { kind: 'thumbnail', thumbnail: null } };
+    marker: kind === 'scene' ? { kind: 'scene', id: 'saturn', color: '#fff', preview: true } : { kind: 'thumbnail', thumbnail: null } };
 };
 const entries = [entry('scene', 'Saturn', 'planet', 1), entry('scene', 'Titan', 'satellite', 2), entry('bank', 'M42', 'nebula', 3, ['orion nebula', 'm42'])];
 const reads: string[] = [];

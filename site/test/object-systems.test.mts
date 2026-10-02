@@ -59,20 +59,23 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
   assert.deepEqual(systemById(SCENE_OBJECTS, 'roxs-42b')!.memberIds, ['roxs-42b-companion', 'roxs-42b-b']);
 });
 
-test('every system a page reads later has its prepared framing, measured as a page holding it would', () => {
-  // A page holds only the Sun's system and one point per other star until it reads the rest (site/world-context-plan.mts);
-  // planetarySystems needs each system's radius before then, from site/prepared-world-presentation.json.
-  const hosts = new Set((APPLICATION_WORLD_CONTEXT.deferred ?? []).map(body => body.host));
-  assert.ok(hosts.size > 0);
-  const measured = systemFramingRadii(APPLICATION_WORLD_CONTEXT);
-  for (const host of hosts) assert.equal(PREPARED_WORLD_PRESENTATION.systemFramingRadii.get(host), measured.get(host), host);
-  assert.deepEqual([...PREPARED_WORLD_PRESENTATION.systemFramingRadii.keys()].sort(), [...hosts].sort());
+test('a page that holds only the summary has the systems whose members it holds, and each other one once its holder is read', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } = await import('@cssearth/objects');
+  const { worldObjects } = await import('../world-objects.mts');
+  const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
+  const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
+  // TRAPPIST-1 is a body of the summary; its planets are in its holder's file.
+  const before = planetarySystems(worldObjects(summary), summary, systemFramingRadii(summary));
+  assert.ok(before.some(system => system.id === SOLAR_SYSTEM_ID));
+  assert.equal(before.some(system => system.id === 'trappist-1'), false, 'no system until its planets are held');
+  const extended = extendWorldContext(summary, [parsePreparedWorldSystem(JSON.parse(await readFile(new URL('world-systems/trappist-1.json', prepared), 'utf8')), summary, 'trappist-1')]);
+  const after = planetarySystems(worldObjects(extended), extended, systemFramingRadii(extended));
+  // Read whole, it is the system the build sees.
+  assert.deepEqual(after.find(system => system.id === 'trappist-1'), systemById(WORLD_OBJECTS, 'trappist-1'));
 });
 
-test('the prepared system members are the orbit graph read at runtime', () => {
-  // The browser reads each system's members from site/prepared-world-presentation.json instead of walking every body's orbit
-  // chain once per star. The same rule, run here on the real world context, must give the same table and the same systems.
-  assert.deepEqual(PREPARED_WORLD_PRESENTATION.planetarySystems, planetarySystemMembers(APPLICATION_WORLD_CONTEXT));
+test('the system helpers read the orbit graph of the plan', () => {
   for (const objects of [SCENE_OBJECTS, WORLD_OBJECTS]) {
     const derived = planetarySystems(objects, APPLICATION_WORLD_CONTEXT, SYSTEM_FRAMING_RADII, planetarySystemMembers(APPLICATION_WORLD_CONTEXT));
     assert.deepEqual(allPlanetarySystems(objects), derived);
@@ -83,7 +86,7 @@ test('the prepared system members are the orbit graph read at runtime', () => {
   }
 });
 
-test('a plan without prepared members reads them from its own orbit graph', () => {
+test('a plan reads its systems from its own orbit graph', () => {
   const plan = { ...APPLICATION_WORLD_CONTEXT, bodies: APPLICATION_WORLD_CONTEXT.bodies.filter(body => body.id !== 'wasp-43b') };
   assert.deepEqual(planetarySystems(SCENE_OBJECTS, plan, SYSTEM_FRAMING_RADII).find(system => system.id === 'wasp-43')?.memberIds, []);
   // The Sun made to orbit the Earth closes every Solar System chain into a loop.
