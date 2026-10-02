@@ -6,7 +6,7 @@ import { errorReportBootstrap } from "../error-report.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { startupRequestsBootstrap } from '../startup-requests.mts';
 import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
-import { resolveBuildSceneAddress } from '../asset-origin.mts';
+import { inlineSceneImage, resolveBuildSceneAddress } from '../asset-origin.mts';
 import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
 import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
 import { pageTrail } from "../seo-trail.mts";
@@ -55,9 +55,13 @@ const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId =
   billboard: { size: startup.arrival.billboard.size, focalPixels: startup.arrival.billboard.focalPixels, distanceM: startup.arrival.billboard.distanceM },
   bodyRadiusM: objectRecord.worldFrame.bodyRadiusM,
 } : undefined;
-// The arrival photograph is the first thing a cold page shows, and it comes from the asset origin: dial that origin with
-// the head, or the photograph's request pays the DNS and TLS setup (430 ms of a cold iPad load against 33 ms on a warm
-// connection, 2026-09-30). An image preload is not used: Safari downloaded the photograph twice with one.
+// A page that places its own photograph carries the image itself: on a 1.6 Mbps, 150 ms link Earth's photograph showed at
+// 2.02 s inline against 2.42 s from the asset origin, for the same bytes (2026-10-02). Other pages name its address.
+const startupImageSource = startupCover && startup?.arrival?.billboard
+  ? await inlineSceneImage(startup.arrival.billboard.url) ?? startupImage : startupImage;
+// The scene's textures, and a photograph the page does not carry, come from the asset origin: dial that origin with the
+// head, or the first request pays the DNS and TLS setup (430 ms of a cold iPad load against 33 ms on a warm connection,
+// 2026-09-30). An image preload is not used: Safari downloaded the photograph twice with one.
 const assetPreconnect = startupImage && /^https?:\/\//.test(startupImage) ? new URL(startupImage).origin : undefined;
 const seoOptions = { socialImages: availableSocialImages(SCENE_OBJECTS), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
 const pageRecord = requireObject(pageId);
@@ -161,7 +165,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
         <!--prepared-scene:end-->
         {startup && <>
           <script is:inline type="application/json" data-startup-discovery set:html={JSON.stringify(startup).replace(/</g, '\u003c')} />
-          <img data-startup-billboard fetchpriority="high" src={startupImage} alt="" aria-hidden="true" draggable="false" style="position:absolute;opacity:0;pointer-events:none" />
+          <img data-startup-billboard fetchpriority="high" src={startupImageSource} alt="" aria-hidden="true" draggable="false" style="position:absolute;opacity:0;pointer-events:none" />
           {startupCover && <script is:inline type="application/json" data-startup-cover set:html={JSON.stringify(startupCover).replace(/</g, '\u003c')} />}
         </>}
       </div>

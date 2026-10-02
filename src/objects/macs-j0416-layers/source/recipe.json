@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "macs-j0416-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      4457,
+      4133
+    ],
+    "originalDimensions": [
+      4457,
+      4133
+    ],
+    "publisherUrl": "https://esawebb.org/images/weic2327a/",
+    "downloadUrl": "https://cdn.esawebb.org/archives/images/large/weic2327a.jpg",
+    "credit": "NASA, ESA, CSA, STScI, J. Diego (Instituto de Física de Cantabria, Spain), J. D’Silva (U. Western Australia), A. Koekemoer (STScI), J. Summers & R. Windhorst (ASU), and H. Yan (U. Missouri)",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 64.0374877,
+    "centerDecDeg": -24.0743322,
+    "fieldOfViewDeg": [
+      0.0370974,
+      0.0344006
+    ],
+    "northClockwiseDeg": -67.708
+  },
+  "target": {
+    "centerRaDeg": 64.0375,
+    "centerDecDeg": -24.0661,
+    "distancePc": 1590131952.1512513
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.008232,
+    "lineOfNodesPaDeg": 90.078,
+    "thicknessKpc": 1,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 716.1,
+    "supportTaperFraction": 0.995,
+    "depthScales": [
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.12,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

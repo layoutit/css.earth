@@ -106,7 +106,8 @@ releases them. Same-scene overview navigation keeps its existing selection behav
 
 A newly prepared detail tree receives its initial material, selection and camera values before its roots connect to
 the stage. Connection does not mean ready: the existing paced texture activation and paint gate still precede the
-billboard handoff. Shared scene CSS gives each mesh parent an identity 3D translation before connection.
+billboard handoff. A cold page's startup behind its arrival photograph is the exception: it is stationary and covered,
+so its textures activate together and only the paint gate precedes the handoff. Shared scene CSS gives each mesh parent an identity 3D translation before connection.
 This preserves its authored transform and makes its structural layer explicit while prepared leaves activate;
 otherwise WebKit can omit the parent layer and flatten the arriving faces. An adopted server-rendered tree
 is already connected and keeps its existing ownership.

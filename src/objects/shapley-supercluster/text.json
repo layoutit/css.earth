@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "shapley-supercluster",
+  "card": {
+    "text": "A supercluster of galaxies, placed at its central cluster Abell 3558, 189.8 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table",
+        "checked": "2026-10-02",
+        "locator": "group 47202: DMzp 36.392 mag, 189.8 Mpc"
+      },
+      {
+        "catalogueId": "arxiv-astro-ph-0509903",
+        "url": "https://arxiv.org/abs/astro-ph/0509903",
+        "label": "Proust et al. (2006), Structure and dynamics of the Shapley Supercluster, A&A 447, 133",
+        "checked": "2026-10-02",
+        "locator": "Section 4: the core holds A3562, A3558 and A3556"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its core holds the clusters Abell 3562, 3558 and 3556, all receding at about 14,400 km/s. Its main plane fills 12 by 30 degrees of sky, 30 by 75 h⁻¹ million parsecs.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-astro-ph-0509903",
+        "url": "https://arxiv.org/abs/astro-ph/0509903",
+        "label": "Proust et al. (2006), Structure and dynamics of the Shapley Supercluster, A&A 447, 133",
+        "checked": "2026-10-02",
+        "locator": "Abstract and section 4"
+      }
+    ]
+  },
+  "datasets": {
+    "galaxies": {
+      "title": "Galaxies at their measured distances",
+      "detail": "One dot per galaxy",
+      "summary": "The Nearby Universe field around this place: one dot per galaxy at its measured distance, coloured by type.",
+      "sources": [
+        {
+          "catalogueId": "cosmicflows-4",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94",
+          "checked": "2026-10-02",
+          "locator": "Tables 2 and 3"
+        }
+      ]
+    }
+  }
+}

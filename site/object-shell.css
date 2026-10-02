@@ -2009,7 +2009,7 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not([hidden]) { display: block; }
   /* Section headings: the label each tab used to carry, in the sheet's panel-heading type. */
   .object-information-panel > .object-dataset-content:not(.atlas-tree-disclosure):has(> .object-datasets)::before,
-  :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not(.object-dataset-content, .object-factsheet-content, .object-charts-content, .atlas-tree-disclosure)::before {
+  :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not(.object-dataset-content, .object-factsheet-content, .object-charts-content, .object-sources-content, .atlas-tree-disclosure)::before {
     content: attr(aria-label);
     display: flex;
     align-items: center;

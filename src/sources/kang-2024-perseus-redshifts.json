@@ -1,0 +1,54 @@
+{
+  "id": "kang-2024-perseus-redshifts",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Catalog of objects with redshift measured within 60 arcmin from the Perseus cluster center",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2024ApJS..272...22K"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/272/22"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...22K",
+      "label": "2024ApJS..272...22K"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/272/22",
+      "label": "CDS J/ApJS/272/22"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/272/22/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "table2: 2,160 objects with a redshift, J2000 positions, r magnitude and a membership flag Mm from the caustic technique; 418 rows have Mm = 1 (Perseus cluster member)."
+    }
+  ],
+  "creators": [
+    "W. Kang",
+    "H. S. Hwang",
+    "H. Song",
+    "C. Park",
+    "N. Hwang",
+    "B.-G. Park"
+  ],
+  "publisher": "ApJS 272, 22",
+  "publicationDate": "2024",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Kang et al. (2024), ApJS 272, 22.",
+      "scope": "Perseus cluster member galaxies",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/272/22/ReadMe"
+    }
+  ]
+}

@@ -100,9 +100,8 @@
     {
       "id": "global-photometric-model-trials",
       "subject": "Lambert and terrain-specific Minnaert correction for a global Europa mosaic",
-      "status": "excluded",
-      "finding": "The Lambert global trial produced unacceptable bright-edge clipping (roughly 19–25% in the tested variants). A Minnaert trial using ridged-plains parameters from Dhingra et al. (2021), followed by overlap gains, reduced some joins but did not qualify applying terrain-specific scattering parameters globally. Neither trial supplies production pixels. The regional inserts preserve original illumination and use bounded overlap-based display gains; no rejected physical correction supplies their pixels.",
-      "revisitWhen": "A model is supported for the selected filter, terrains and observation geometry, with source-backed applicability limits and improved matched browser evidence; do not retry globally extrapolated terrain parameters as a default.",
+      "status": "included",
+      "finding": "The Monochrome inserts are carried to normal incidence with the Lambert law Geissler, Keszthelyi and Weller (2022) fitted to 702 controlled Europa images, limited to 85 degrees incidence; the README gives the measured check and the limit's reason. An earlier Lambert trial without an incidence limit clipped 19 to 25% of bright edges, and a Minnaert trial with the ridged-plains parameters of Dhingra et al. (2021) did not qualify terrain-specific parameters for global use. The published global mosaic keeps its own USGS processing.",
       "evidence": [
         "https://www.hou.usra.edu/meetings/lpsc2022/pdf/1691.pdf",
         "https://doi.org/10.3847/PSJ/ac06d6",

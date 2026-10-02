@@ -31,7 +31,9 @@ Source selections, trials and open questions are in the [investigation ledger](i
 
 ## Processing
 
-**Monochrome.** The inserts are calibrated I/F CLEAR-filter (0.611 µm) images that USGS did not photometrically normalize. Selection takes 332 of the release's 481 Galileo observations, those below 800 m grid spacing. The [controlled-map decoder](../../../packages/bake/src/objects/layers/observation/controlled-map-mosaic.ts) checks each GeoTIFF's projection, grid and no-data value. One photograph supplies each output pixel, finer grids first; the global mosaic fills the rest. One display gain per image, matched against the global mosaic near its boundary, is capped so highlights stay in range. Values are encoded once with the [shared IEC sRGB transfer](../../../docs/color-preparation.md). This is display matching, not physical calibration, and blends no images.
+**Monochrome.** The inserts are calibrated I/F CLEAR-filter (0.611 µm) images that USGS released without photometric normalization. Selection takes 332 of the release's 481 Galileo observations, those below 800 m grid spacing. The [controlled-map decoder](../../../packages/bake/src/objects/layers/observation/controlled-map-mosaic.ts) checks each GeoTIFF's projection, grid and no-data value. One photograph supplies each output pixel, finer grids first; the global mosaic fills the rest.
+
+Each insert is carried to normal incidence with the Lambert law, I/F ÷ cos(incidence), that [Geissler, Keszthelyi and Weller (2022)](https://www.hou.usra.edu/meetings/lpsc2022/pdf/1691.pdf) fitted to 702 controlled Voyager and Galileo images of Europa ([model record](source/photometry/geissler-2022-lambert.json)). The Sun's direction for each image is the sub-solar point [JPL Horizons](https://ssd-api.jpl.nasa.gov/doc/horizons.html) gives at its capture time ([pinned tables](source/photometry/horizons-subsolar.json), west-positive longitude). Samples lit at more than 85° incidence are withheld, so a coarser photograph or the global mosaic shows there. The abstract reports that Europa's albedo also changes with phase angle and gives no formula for it. One display gain per image, matched against the global mosaic near its boundary and capped so highlights stay in range, stands in for that term. Values are encoded once with the [shared IEC sRGB transfer](../../../docs/color-preparation.md). No images are blended.
 
 **False color.** Values stay linear floating-point I/F. Each image gets one spherical [Lunar–Lambert disk normalization](https://isis.astrogeology.usgs.gov/9.0.0/Application/presentation/Tabbed/photomet/photomet.html), `D = (1-L)*mu0 + 2*L*mu0/(mu0+mu)`, scaled to incidence 30° and emission 0°:
 
@@ -53,7 +55,15 @@ These weights are visual choices, not fitted scattering parameters; the [USGS Eu
 
 ## Evidence
 
-The controlled photographs cover **15.224% of the sphere** with 330 contributing images. Their fitted gains span 0.306–11.534, with 110 limited by native highlights. These matched crops of Pwyll show the fractures gaining detail without moving the crater or filling missing observations:
+The controlled photographs cover **14.335% of the sphere** with 324 contributing images; the 85° limit withholds 0.889% that the uncorrected mosaic showed. Their fitted gains span 0.227–2.527, with 31 limited by highlights. Without the Lambert step the gains spanned 0.306–11.534, with 110 limited.
+
+Our own check of the law on these images: the area-weighted I/F ÷ cos(incidence) of the inserts, in 5° incidence bins, stays between 0.52 and 0.82 from 5° to 85° (0.768 at 80–85°), around the 0.736 slope the abstract reports for this filter. It rises to 0.862 at 85–90°, which is why the limit is 85°. 77% of the insert area was photographed at 70–85° incidence.
+
+| Original illumination | Carried to normal incidence |
+| --- | --- |
+| ![Inserts with their original illumination](evidence/insert-photometry/before.webp) | ![Inserts after the Lambert step](evidence/insert-photometry/after.webp) |
+
+These matched crops of Pwyll show the fractures gaining detail without moving the crater or filling missing observations:
 
 | Before | Current |
 | --- | --- |
@@ -65,7 +75,7 @@ The withheld composition grids match the original release exactly after float32 
 
 ## Known problems
 
-- **Monochrome inserts:** Original illumination and brightness joins remain. Relative control uncertainties are about 247 m in latitude and 307 m in longitude; the older global mosaic has different registration errors. The delivered grid is about 1.20 km at the equator, so finer native detail is not shown. Atlas seams can show at extreme close zoom.
+- **Monochrome inserts:** Smaller brightness steps remain where one gain per image cannot follow the phase-angle change in albedo, and shadows keep their original direction. Photographs beyond 85° incidence are not shown. Relative control uncertainties are about 247 m in latitude and 307 m in longitude; the older global mosaic has different registration errors. The delivered grid is about 1.20 km at the equator, so finer native detail is not shown. Atlas seams can show at extreme close zoom.
 - **False color:** 756 nm, 559 nm and 404 nm are shown as red, green and blue. This is not natural color. About 14.3% of the sphere has usable three-band coverage.
 - **Elevation:** Heights are relative, not tied to a global reference level. Effective resolved detail is about 3 km; source documentation gives nominal 52 m vertical precision.
 - **Illumination:** The disk correction is approximate: no phase-angle normalization, fitted scattering model, or removal of cast shadows.

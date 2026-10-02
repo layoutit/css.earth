@@ -884,7 +884,7 @@ test('prepared planetary systems retain identified moon paths and retire offscre
   layer.destroy();
 });
 
-for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer} keeps body markers and orbit opacity independent of selection`, () => {
+for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer} keeps body markers independent of selection and dims the paths outside the selected family`, () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const base = plan(1), parent = base.bodies[0]!;
@@ -914,14 +914,20 @@ for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer}
       const actual = opacity(body.id), normal = baseline.get(body.id)!;
       assert.ok(normal.marker > 0); assert.ok(normal.line > 0);
       assert.ok(Math.abs((actual.marker / normal.marker) - (expected)) < 10 ** -1 / 2, `${id} -> ${body.id} marker`);
-      assert.ok(Math.abs((actual.line / normal.line) - (1)) < 10 ** -1 / 2, `${id} -> ${body.id} orbit`);
+      // A path belongs to the family it circles: the other planet's, and the host's own about the star while one of
+      // its moons is the subject, are dim context. A family is read by a path's own centre, so the moon that circles
+      // the barycentre is outside the host's family, and with that moon as the subject (its host an unrendered
+      // origin) nothing dims.
+      const family = body.id === id || id === parent.id && body.id === 'moon-a';
+      const outside = id !== 'moon-b' && !family, ratio = actual.line / normal.line;
+      if (outside) assert.ok(ratio >= .25 - 10 ** -2 / 2 && ratio < .95, `${id} -> ${body.id} orbit ${ratio}`);
+      else assert.ok(Math.abs(ratio - 1) < 10 ** -1 / 2, `${id} -> ${body.id} orbit`);
     }
   }
-  // Finishing the preview preserves the same orbit appearance in the system overview.
+  // An overview has no subject: finishing the preview there returns every path to its overview appearance.
   layer.previewSelection(parent.id); document.defaultView.advance(200);
-  const arrival = new Map(context.bodies.map(body => [body.id, opacity(body.id).line]));
   layer.previewSelection(undefined); document.defaultView.advance(200);
-  for (const body of context.bodies) assert.ok(Math.abs(opacity(body.id).line - (arrival.get(body.id)!)) < 10 ** -2 / 2, `${opacity(body.id).line} is not close to ${arrival.get(body.id)!}`);
+  for (const body of context.bodies) assert.ok(Math.abs(opacity(body.id).line - baseline.get(body.id)!.line) < 10 ** -2 / 2, `${opacity(body.id).line} is not close to ${baseline.get(body.id)!.line}`);
   layer.previewSelection(parent.id); document.defaultView.advance(200);
   const marker = layer.inspect().find(body => body.id === unrelated.id)!.billboard;
   marker.dataset.objectHovered = 'true'; host.dispatchEvent(new Event('objecthoverchange'));
@@ -932,7 +938,7 @@ for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer}
   document.defaultView.advance(200); document.defaultView.advance(200);
   layer.previewSelection(null); document.defaultView.advance(200);
   for (const body of context.bodies) assert.deepEqual(opacity(body.id), baseline.get(body.id));
-  // Selection stays independent of opacity when zooming out and back in.
+  // Zooming out to the parent system relaxes the dimming; zooming back in returns it. Markers never follow selection.
   layer.previewSelection(parent.id);
   const publishDistance = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [100, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
@@ -944,7 +950,8 @@ for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer}
   layer.previewSelection(parent.id);
   publishDistance(40);
   assert.ok(Math.abs((opacity(unrelated.id).marker / baseline.get(unrelated.id)!.marker) - (1)) < 10 ** -1 / 2, `${(opacity(unrelated.id).marker / baseline.get(unrelated.id)!.marker)} is not close to ${1}`);
-  assert.ok(Math.abs((opacity(unrelated.id).line / baseline.get(unrelated.id)!.line) - (1)) < 10 ** -1 / 2, `${(opacity(unrelated.id).line / baseline.get(unrelated.id)!.line)} is not close to ${1}`);
+  const dimmed = opacity(unrelated.id).line / baseline.get(unrelated.id)!.line;
+  assert.ok(dimmed >= .25 - 10 ** -2 / 2 && dimmed < .95, `${dimmed} is not dimmed`);
   layer.destroy();
 });
 

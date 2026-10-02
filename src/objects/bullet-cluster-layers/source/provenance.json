@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Visible-light and x-ray composite image of galaxy cluster 1E 0657-556",
+  "publisher": "ESA/Hubble",
+  "sourceId": "opo0639a",
+  "sourcePage": "https://esahubble.org/images/opo0639a/",
+  "download": "https://cdn.esahubble.org/archives/images/large/opo0639a.jpg",
+  "credit": "X-ray: NASA/CXC/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      3000,
+      2168
+    ],
+    "bands": [
+      "Chandra ACIS X-ray",
+      "weak-lensing mass map",
+      "Hubble ACS F435W F606W F814W",
+      "Magellan optical"
+    ],
+    "fieldOfViewDeg": [
+      0.12412,
+      0.0896974
+    ]
+  },
+  "checkedSource": {
+    "kind": "Large JPEG",
+    "dimensions": [
+      3000,
+      2168
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.007592,
+    "lineOfNodesPaDeg": 201.973,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 27.3 arcsec from the catalogue position, which is the whole of the recipe's inclination. Not a measured orientation of the cluster."
+  },
+  "registration": {
+    "catalogue": "Gaia DR3 (CDS I/355/gaiadr3)",
+    "sourcesInFrame": 172,
+    "matched": 127,
+    "rmsArcsec": 0.159,
+    "maxArcsec": 0.306,
+    "pixelArcsec": 0.14894,
+    "embeddedTags": {
+      "pixelArcsec": 0.14869,
+      "northClockwiseDeg": -0.02
+    },
+    "centreShiftFromTagsArcsec": 0.42
+  },
+  "displayModel": "The picture lies on one flat plane facing the Sun at the cluster's comoving distance. Nothing in the picture has depth: seen from the side it is a line.",
+  "coverage": "The whole published frame. The pink and blue layers are the publisher's overlays of an X-ray image and a mass map, not light the eye would see; foreground Milky Way stars remain.",
+  "acquisition": {
+    "url": "https://cdn.esahubble.org/archives/images/large/opo0639a.jpg",
+    "dimensions": [
+      3000,
+      2168
+    ],
+    "operation": "Download the publisher's Large JPEG; no crop or resample."
+  }
+}

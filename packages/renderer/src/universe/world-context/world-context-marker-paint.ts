@@ -19,7 +19,6 @@ interface MarkerFrame {
   readonly animated: boolean;
   readonly coast: boolean;
   readonly policyChanged: boolean;
-  readonly emphasis: number;
 }
 
 // Every marker's constant geometry is a world-context.css rule (.context-mover, [data-context-body], its sprite `> i`):
@@ -68,7 +67,7 @@ export type WorldContextMarkerPaint = ReturnType<typeof createWorldContextMarker
 /** Retained DOM and cached writes for one world-context marker. Presentation decisions stay with the publisher. */
 export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLElement, spriteLeaf: HTMLElement, caption: HTMLElement,
   body: { readonly color: string; readonly contextColor?: string; readonly dotColor?: string }, sprite: SpriteWithUrl | undefined, locator: SVGSVGElement) {
-  let billboardShown: boolean | undefined, markerShown: boolean | undefined;
+  let billboardShown: boolean | undefined, markerShown: boolean | undefined, emphasisWritten: number | undefined;
   let markerDiameter = 0, flatDot = false, spriteApplied = false, indicatorHovered = false;
   let center: [number, number] = [0, 0];
   let markerTransform = '', spriteTransform = '', labelOffset = '';
@@ -84,8 +83,8 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
     get center() { return center; },
     get indicatorHovered() { return indicatorHovered; },
     publish(frame: MarkerFrame, fader: Fader) {
-      const { projected, plannedShown, zIndex, selected, hovered, animated, coast, policyChanged, emphasis } = frame;
-      const { x, y, markerOpacity } = projected;
+      const { projected, plannedShown, zIndex, selected, hovered, animated, coast, policyChanged } = frame;
+      const { x, y, markerOpacity, emphasis } = projected;
       const wasShown = billboardShown === true, hoverChanged = indicatorHovered !== hovered;
       const animationState = String(animated);
       if (animateState !== animationState) { marker.dataset.contextAnnotationsAnimate = animationState; animateState = animationState; }
@@ -129,7 +128,7 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
         marker.dataset.contextIndicatorHovered = String(hovered);
       }
       // Opacity lives on the mover so its marker pseudos do not restyle on camera motion.
-      if (policyChanged || !wasShown || hoverChanged) fader.multiply(mover, emphasis, animated ? 120 : 0);
+      if (policyChanged || !wasShown || hoverChanged || emphasisWritten !== emphasis) { fader.multiply(mover, emphasis, animated ? 120 : 0); emphasisWritten = emphasis; }
       fader.set(mover, frame.billboardShown && !plannedShown ? 0 : markerOpacity);
       // Positions to a thousandth of a pixel, what the stored transform keeps: a finer change writes a value CSS already
       // holds (4,414 of 20,913 marker transform writes in one stress run did, 2026-09-30).

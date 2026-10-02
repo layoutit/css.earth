@@ -1,0 +1,28 @@
+{
+  "provenance": {
+    "name": "Perseus Cluster members",
+    "products": [
+      {
+        "id": "dots",
+        "label": "Perseus cluster redshift survey, CDS J/ApJS/272/22",
+        "process": "Keep the catalogue's members that Cosmicflows-4 does not hold; place each at the cluster's Cosmicflows-4 group distance, spread in depth as widely as the members spread across the sky; tone by absolute B magnitude as the Nearby Universe field does.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "members",
+          "cosmicflows-4-groups"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "A member's depth within the cluster is assumed (as deep as wide), not measured."
+        ]
+      }
+    ]
+  }
+}

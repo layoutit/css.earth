@@ -24,4 +24,33 @@ test('a selected satellite overview retains its selected host locator', () => {
   assert.equal(selected.emphasizedId, 'jupiter');
   assert.equal(calculate({ ...view, overviewSelection: false }).emphasizedId, null);
   assert.equal(calculate({ ...view, overview: false, overviewSelection: false }).emphasizedId, 'jupiter');
+  // Orbits outside the selected family, the host's own included, are dim context; a hovered one is not.
+  // The planner retains its outputs, so each frame's values are read before the next is planned.
+  const index = (id: string) => 1 + plan.bodies.findIndex(body => body.id === id);
+  const moons = plan.bodies.filter(body => body.orbit?.centerBodyId === 'jupiter').map(body => body.id);
+  const ids = ['saturn', 'jupiter', ...moons];
+  const orbits = (next: WorldContextView) => { const frame = calculate(next); return new Map(ids.map(id => [id, frame.projectedBodies[index(id)]!.orbitVisibility])); };
+  // The moons' paths fill the close view; the planets' reach the screen from a hundred times further out.
+  const wide = { ...view, world: { ...view.world, pose: { ...view.world.pose, positionM: [positionM[0], positionM[1], host.positionM[2] + 1e12] as const } } };
+  const close = orbits(view), closePlain = orbits({ ...view, overviewSelection: false });
+  const dimmed = orbits(wide), plain = orbits({ ...wide, overviewSelection: false });
+  const hovered = orbits({ ...wide, bodies: wide.bodies.map((body, at) => at === index('saturn') ? { ...body, hovered: true } : body) });
+  for (const id of ['saturn', 'jupiter']) assert.deepEqual([dimmed.get(id), plain.get(id), hovered.get(id)], [.25, 1, id === 'saturn' ? 1 : .25], id);
+  // On the host's own page its path is the subject's and stays whole; the other planets' paths are still context.
+  const page = orbits({ ...wide, overview: false, overviewSelection: false });
+  assert.equal(page.get('jupiter'), 1);
+  assert.ok(page.get('saturn')! >= .25 && page.get('saturn')! < 1);
+  assert.ok(moons.some(id => close.get(id) === 1));
+  for (const id of moons) assert.equal(close.get(id), closePlain.get(id), id);
+  // One emphasis per body: a highlighted set dims the rest, another star's bodies read as not belonging inside the
+  // Sun's system, and a hovered body is never dimmed.
+  const other = 1 + plan.bodies.findIndex(star => !star.orbit && plan.bodies.some(body => body.orbit?.centerBodyId === star.id));
+  const emphasis = (next: WorldContextView) => { const frame = calculate(next); return (id: string | number) => frame.projectedBodies[typeof id === 'number' ? id : index(id)]!.emphasis; };
+  assert.ok(other > 0);
+  const flagged = (flags: Record<string, { hovered?: boolean; highlighted?: boolean }>) => ({ ...wide, bodies: wide.bodies.map((body, at) => ({ ...body, ...flags[[plan.focus, ...plan.bodies][at]!.id] })) });
+  const plainEmphasis = emphasis(wide);
+  assert.deepEqual([plainEmphasis('saturn'), plainEmphasis(other)], [1, .3]);
+  const highlighted = emphasis(flagged({ saturn: { highlighted: true }, mars: { hovered: true } }));
+  assert.deepEqual([highlighted('saturn'), highlighted('jupiter'), highlighted('mars')], [1, .3, 1]);
+  assert.ok(Math.abs(highlighted(other) - .09) < 1e-12);
 });

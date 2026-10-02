@@ -1,0 +1,112 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "local-void",
+  "displayName": "Local Void",
+  "panel": {
+    "facts": [
+      {
+        "id": "position",
+        "label": "Emptiest point (supergalactic)",
+        "value": "SGX +22, SGY −9, SGZ +22 Mpc",
+        "source": {
+          "catalogueId": "arxiv-1905-08329",
+          "url": "https://arxiv.org/abs/1905.08329",
+          "label": "Tully et al. (2019), Cosmicflows-3: Cosmography of the Local Void, ApJ 880, 24",
+          "checked": "2026-10-02",
+          "locator": "Local Void section"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance of that point",
+        "value": "32.4 Mpc",
+        "source": {
+          "catalogueId": "arxiv-1905-08329",
+          "url": "https://arxiv.org/abs/1905.08329",
+          "label": "Tully et al. (2019), Cosmicflows-3: Cosmography of the Local Void, ApJ 880, 24",
+          "checked": "2026-10-02",
+          "locator": "Length of [+22, −9, +22] Mpc; H0 = 75 km/s/Mpc"
+        }
+      },
+      {
+        "id": "dimensions",
+        "label": "Dimensions",
+        "value": "69 × 51 × 60 Mpc",
+        "source": {
+          "catalogueId": "arxiv-1905-08329",
+          "url": "https://arxiv.org/abs/1905.08329",
+          "label": "Tully et al. (2019), Cosmicflows-3: Cosmography of the Local Void, ApJ 880, 24",
+          "checked": "2026-10-02",
+          "locator": "Local Void section, −0.7 density contour"
+        }
+      },
+      {
+        "id": "volume",
+        "label": "Volume",
+        "value": "about 2 × 10⁵ Mpc³",
+        "source": {
+          "catalogueId": "arxiv-1905-08329",
+          "url": "https://arxiv.org/abs/1905.08329",
+          "label": "Tully et al. (2019), Cosmicflows-3: Cosmography of the Local Void, ApJ 880, 24",
+          "checked": "2026-10-02",
+          "locator": "Local Void section"
+        }
+      },
+      {
+        "id": "sky",
+        "label": "Sky position (J2000)",
+        "value": "RA 330.28°, Dec 40.56°",
+        "source": {
+          "catalogueId": "arxiv-1905-08329",
+          "url": "https://arxiv.org/abs/1905.08329",
+          "label": "Tully et al. (2019), Cosmicflows-3: Cosmography of the Local Void, ApJ 880, 24",
+          "checked": "2026-10-02",
+          "locator": "Local Void section, turned to J2000"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "galaxies",
+    "controls": [
+      {
+        "id": "galaxies",
+        "label": "Cosmicflows-4 · galaxies",
+        "thumbnail": "local-void-dataset-galaxies.webp",
+        "volume": {
+          "objectId": "nearby-universe-galaxies",
+          "datasetId": "galaxies",
+          "surface": "galaxies"
+        },
+        "source": {
+          "id": "nearby-universe-galaxies-galaxies",
+          "path": "../../nearby-universe-galaxies/source/manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tully et al. (2019), Cosmicflows-3: Cosmography of the Local Void, ApJ 880, 24",
+      "href": "https://arxiv.org/abs/1905.08329"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1905.08329",
+      "credit": "Tully et al. (2019), Cosmicflows-3: Cosmography of the Local Void, ApJ 880, 24"
+    }
+  }
+}

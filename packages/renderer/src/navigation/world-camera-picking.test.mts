@@ -194,6 +194,18 @@ test('a real close-body second press keeps its permitted surface flight and rele
   assert.equal(f.controls.stats().surfaceFlyTo.starts, 1); f.destroy();
 });
 
+test('a see-through selection (a cluster, a galaxy) leaves the markers inside its silhouette reachable', () => {
+  const f = fixture(() => true, () => true);
+  f.target.dataset.objectNavigate = 'm87-star';
+  f.registry.publish({}, [{ element: f.target as unknown as HTMLElement, rank: 0, unoccluded: true,
+    shape: { kind: 'rect', left: -100, top: -100, right: 100, bottom: 100 } }]);
+  f.fire('pointermove', 0, { buttons: 0 }); f.tick(1);
+  assert.equal(f.target.dataset.objectHovered, 'true');
+  f.fire('pointerdown', 50); f.fire('pointerup', 70); f.fire('click', 70);
+  assert.equal(f.selections, 1);
+  f.destroy();
+});
+
 test('a background target overlapping detailed surface pixels cannot steal hover or surface double-click', () => {
   let occluded = true;
   const f = fixture(() => true, () => occluded);
@@ -369,7 +381,7 @@ test('hover coalesces pointer events and follows the latest published targets wh
   const f = fixture();
   const intents: unknown[] = [];
   f.host.addEventListener('objecthoverchange', event => { intents.push(event instanceof CustomEvent ? event.detail.interactive : event); });
-  const pick = mock.method(f.registry, 'pick');
+  const pick = mock.method(f.registry, 'pickTarget');
   f.document.targets = [f.target];
   f.fire('pointermove', 1, { buttons: 0 });
   f.fire('pointermove', 2, { buttons: 0 });

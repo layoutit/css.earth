@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "bullet-cluster-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      3000,
+      2168
+    ],
+    "originalDimensions": [
+      3000,
+      2168
+    ],
+    "publisherUrl": "https://esahubble.org/images/opo0639a/",
+    "downloadUrl": "https://cdn.esahubble.org/archives/images/large/opo0639a.jpg",
+    "credit": "X-ray: NASA/CXC/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 104.6170272,
+    "centerDecDeg": -55.9440585,
+    "fieldOfViewDeg": [
+      0.12412,
+      0.0896974
+    ],
+    "northClockwiseDeg": -0.024
+  },
+  "target": {
+    "centerRaDeg": 104.6296,
+    "centerDecDeg": -55.9469,
+    "distancePc": 1219456028.6687474
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.007592,
+    "lineOfNodesPaDeg": 201.973,
+    "thicknessKpc": 1,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 1662.3,
+    "supportTaperFraction": 0.995,
+    "depthScales": [
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

@@ -9,7 +9,7 @@ import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { readRgba, paintMissingCoverage } from '../../raster/index.ts';
 import type { ObservationInterpretation, InterpretedSurface, RasterRecipe } from '../../raster/index.ts';
-import { createSolarSynopticInterpreter, type SynopticRecipe, offLimbPlate, observationRaster, parseObservationDataset, loadNativeObservationPoleSampler, preparePdsFloatMap, parsePdsFloatProfile, loadDiscBandColor, prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from '../layers/observation/index.ts';
+import { createSolarSynopticInterpreter, type SynopticRecipe, offLimbPlate, observationRaster, parseObservationDataset, loadNativeObservationPoleSampler, preparePdsFloatMap, parsePdsFloatProfile, loadDiscBandColor, prepareControlledMapMosaic, loadControlledMapPoles, loadControlledMapPhotometry, matchControlledMapLevels } from '../layers/observation/index.ts';
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '@cssearth/core/schema';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
@@ -297,9 +297,10 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           const detail=requireRecord(surface.science.detailMosaic);
           if(detail.format!=='controlled-geotiff'||!plan.nativePhotographicSampling)throw new TypeError('Controlled detail requires a native photographic base.');
           const tiles=await (await manifest).validateGroup(requireString(detail.consumer)),profile=requireRecord(detail.profile);
-          const result=await prepareControlledMapMosaic(sourceDirectory,tiles,profile,width,height);
+          const photometry=detail.photometry===undefined?undefined:await loadControlledMapPhotometry(sourceDirectory,tiles,detail.photometry);
+          const result=await prepareControlledMapMosaic(sourceDirectory,tiles,profile,width,height,undefined,photometry);
           const matching=matchControlledMapLevels(result,{rgb,missing},width,height,detail.levelMatching);
-          const poles=await loadControlledMapPoles(sourceDirectory,tiles,profile,new Map(matching.levels.map(level=>[level.id,level.gain])));
+          const poles=await loadControlledMapPoles(sourceDirectory,tiles,profile,new Map(matching.levels.map(level=>[level.id,level.gain])),photometry);
           const base=await nativePhotograph(surface,plan);
           return {...rgb3(result.rgb,result.missing,width,height,false, recipe.missingCoverage),report:{...result.report,levelMatching:matching,baseObservation:surface.science.input,baseMeaning:'Published global display mosaic outside controlled photographic coverage.'},
             nativePhotograph:{width:base.width,height:base.height,sample(longitude:number,latitude:number,color:number[]){return poles.sample(longitude,latitude,color)||base.sample(longitude,latitude,color);}}};

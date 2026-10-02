@@ -52,6 +52,12 @@
           },
           "levelMatching": {
             "boundaryPixels": 4
+          },
+          "photometry": {
+            "model": "photometry/geissler-2022-lambert.json",
+            "subSolarPoints": "photometry/horizons-subsolar.json",
+            "longitudeDirection": "west-positive",
+            "maximumIncidenceDegrees": 85
           }
         }
       },
