@@ -83,9 +83,9 @@ systems around other stars without creating another shell or camera contract.
 
 ## Selection and URL contract
 
-The selection kind `satellite-system:<host-id>` refers to the host's mounted scene and shares
-its camera. It is distinct from `object:<id>` and the existing stellar
-`overview:system:<star-id>`. That distinction must survive search previews,
+The selection is the host with the view `moons`; its identity `satellite-system:<host-id>` refers to the host's
+mounted scene and shares its camera. It is distinct from the host's own `object:<id>` (the view `body`) and a star's
+`overview:system:<star-id>` (the view `system`). That distinction must survive search previews,
 navigation, history, source links, reading position and reload.
 
 The canonical URL is `/<host>/?view=satellites`; `/earth/` remains the

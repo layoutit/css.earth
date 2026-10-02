@@ -70,7 +70,9 @@ export function readStarRecord(value: unknown): StarRecord {
   if (star.hipparcosId !== undefined && (!Number.isSafeInteger(star.hipparcosId) || star.hipparcosId <= 0)) throw new TypeError('Hipparcos identity must be a positive integer.');
   // A bound companion states the measurement that binds it; nothing else may claim one.
   if ((star.boundTo === undefined) !== (star.sources.binary === undefined)) throw new TypeError('A bound star names its companion and the measurement that binds it.');
-  if (star.rightAscensionDegrees < 0 || star.rightAscensionDegrees >= 360 || Math.abs(star.declinationDegrees) > 90 || !(star.distanceParsecs > 0) ||
+  if (star.rightAscensionDegrees < 0 || star.rightAscensionDegrees >= 360 || Math.abs(star.declinationDegrees) > 90 ||
+      // Zero is the observer's own place: a scale of the universe centred on the Sun (the Nearby Universe) has no other.
+      !(star.distanceParsecs >= 0) ||
       Object.values(star.sources).some(text => !text.trim())) throw new TypeError('Invalid star astrometry.');
   return star;
 }

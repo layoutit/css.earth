@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "cmb.json",
+      "bytes": 175111,
+      "sha256": "362b271949e4a904551f2e5d5a4975de1a826a0f11df7860f29bba3b8927e533"
+    },
+    {
+      "location": "prepared",
+      "filename": "cmb/cmb-cutaway.webp",
+      "bytes": 19774,
+      "sha256": "b05b627486dc39bad0b1d5af63f84a4d9981e89a5870ed1ed788b7cfd55b52aa"
+    },
+    {
+      "location": "prepared",
+      "filename": "cmb/cmb-full.webp",
+      "bytes": 32170,
+      "sha256": "40d11ee18c70b69035486d380ba50cef7e59160a95f36c0b846823103697c7ef"
+    },
+    {
+      "location": "prepared",
+      "filename": "cmb/cmb-hidden.webp",
+      "bytes": 222,
+      "sha256": "b8ae5a524e9c3504469d244ca8c849e500a3414b3e8283909391f47a9f332e8b"
+    },
+    {
+      "location": "prepared",
+      "filename": "cmb/cmb-limb.webp",
+      "bytes": 18414,
+      "sha256": "36ad0055a17ed2bbf08ef81d7d3280df2ac0935d47f3901cbab8362fe69a6327"
+    },
+    {
+      "location": "prepared",
+      "filename": "cmb/cmb.webp",
+      "bytes": 1300112,
+      "sha256": "a89dc3aaa796f01e733005814e5817b173cf7b740ec802091e9320e4d5c02538"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 4296,
+      "sha256": "03f83e7f75599c192b574bd37e3474a6c3b5fb840277d141f8dcf29c0a347908"
+    }
+  ]
+}

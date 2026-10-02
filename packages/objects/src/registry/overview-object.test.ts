@@ -4,19 +4,14 @@ import { isDeepStrictEqual } from 'node:util';
 import { overviewHolding, overviewLevel } from './overview-object.js';
 
 const zoom = { enter: { distancePc: 5e6 }, returnBelow: { distancePc: 4e6 }, frame: { distance: { distancePc: 1e8 } } };
-const authored = { name: 'Local Group', description: 'Our galaxy group.', order: 2, zoom, holds: [{ classifications: ['galaxy'], list: 'Galaxies' }] };
+const authored = { order: 2, zoom, holds: [{ classifications: ['galaxy'], list: 'Galaxies' }] };
 const descriptor = (overview: unknown, properties: Record<string, unknown> = {}) =>
-  ({ schema: 'cssearth-object@2', id: 'local-group', type: 'galaxy-catalog', properties: { overview, ...properties } });
+  ({ schema: 'cssearth-object@2', id: 'local-group', type: 'layered-body', properties: { overview, ...properties } });
 const level = (changes: Record<string, unknown> = {}) => overviewLevel(descriptor({ ...authored, ...changes }))!;
 
 describe('overview entries', () => {
   it('reads the level a package authors', () => {
-    assert.deepEqual(overviewLevel(descriptor(authored)), { name: 'Local Group', description: 'Our galaxy group.',
-      order: 2, zoom, holds: [{ classifications: ['galaxy'], list: 'Galaxies' }], packages: [] });
-  });
-
-  it('places a package with a volume at its origin', () => {
-    assert.deepEqual(overviewLevel(descriptor(authored, { volume: { originM: [1, 2, 3] } }))?.originM, [1, 2, 3]);
+    assert.deepEqual(overviewLevel(descriptor(authored)), { order: 2, zoom, holds: [{ classifications: ['galaxy'], list: 'Galaxies' }], packages: [] });
   });
 
   it('leaves a package without one out', () => {
@@ -24,15 +19,13 @@ describe('overview entries', () => {
   });
 
   it('refuses an incomplete overview, naming the package', () => {
-    assert.throws(() => overviewLevel(descriptor({ ...authored, description: undefined })), /local-group/);
-    assert.throws(() => overviewLevel(descriptor({ ...authored, order: 0 })), /order from 1/);
-    assert.throws(() => overviewLevel(descriptor({ ...authored, colour: 'red' })), /names only its name/);
+    assert.throws(() => overviewLevel(descriptor({ ...authored, zoom: undefined })), /local-group/);
+    assert.throws(() => overviewLevel(descriptor({ ...authored, order: 0 })), /order \(from 1\)/);
+    assert.throws(() => overviewLevel(descriptor({ ...authored, colour: 'red' })), /local-group; it names its order/);
   });
 
-  it('leaves a placed level\'s name and description to its catalogue entry', () => {
-    const { name: _name, description: _description, ...ladder } = authored;
-    assert.equal(overviewLevel(descriptor(ladder, { catalog: {} }))?.name, undefined);
-    assert.throws(() => overviewLevel(descriptor(authored, { catalog: {} })), /leaves those to it/);
+  it('leaves its name and description to its catalogue entry', () => {
+    assert.throws(() => overviewLevel(descriptor({ ...authored, name: 'Local Group' }, { catalog: {} })), /local-group; it names its order/);
   });
 
   it('refuses a zoom ladder distance or frame outside its vocabulary, naming the field', () => {

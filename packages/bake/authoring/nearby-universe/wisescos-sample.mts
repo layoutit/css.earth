@@ -20,7 +20,7 @@
  * - This catalogue has no g, r and z fluxes to colour a galaxy as DESI's are coloured, so each row carries its redshift
  *   bin (column C), and the script prints the median colour DESI's own galaxies show in each bin (each channel's median
  *   over the prepared DESI bank's untoned palette colours, `output/catalogue-points/nearby-universe/desi-bright-galaxies.json`,
- *   which `prepare-catalogue-points.mts src/objects/nearby-universe desi-bright-galaxies` writes): the recipe's colour
+ *   which `prepare-catalogue-points.mts src/objects/nearby-universe-galaxies desi-bright-galaxies` writes): the recipe's colour
  *   stops.
  */
 import { createReadStream } from 'node:fs';
@@ -30,7 +30,7 @@ import { createInterface } from 'node:readline';
 import { createGunzip, gunzipSync, gzipSync } from 'node:zlib';
 
 const repository = resolve(import.meta.dirname, '../../../..');
-const sourceDirectory = resolve(repository, 'src/objects/nearby-universe/source');
+const sourceDirectory = resolve(repository, 'src/objects/nearby-universe-galaxies/source');
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/wisescos/wiseScosPhotoz160708.csv.gz'));
 const outputPath = resolve(sourceDirectory, 'wisescos-galaxies/wisescos-sample.csv.gz');
 const desiPath = resolve(sourceDirectory, 'desi-bright-galaxies/bgs-bright-21.5-sample.csv.gz');

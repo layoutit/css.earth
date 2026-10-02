@@ -1176,7 +1176,7 @@ Format readers and serialization still need memory and disk space proportional t
 telescope export enceladus/pick-1/result.json --output spectrum --hdu 0 --pixel 10,10 --out enceladus-spectrum
 telescope export comet-67p/pick-10/result.json --output image --structure IMAGE --hdu 0 --out comet-image
 telescope export src/objects/stellar-neighbourhood/object.json --output points --out stars-handoff
-telescope export src/objects/milky-way/object.json --output volume --out volume-handoff
+telescope export src/objects/milky-way-volume/object.json --output volume --out volume-handoff
 ```
 
 ![Enceladus spectrum from the delivered ISIS3 cube](images/telescopes/enceladus-isis-spectrum.png)

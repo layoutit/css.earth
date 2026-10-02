@@ -12,7 +12,7 @@ type FramingFrame = Pick<PreparedWorldCameraFrame, 'referenceFrame' | 'epochJdTt
 interface FramingCandidate { originM?: PositionM; minimumM: PositionM; maximumM: PositionM; cameraToReference: readonly number[]; }
 interface SystemView { readonly candidates: readonly FramingCandidate[]; }
 const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map(2)];
-import galaxy from '../src/objects/milky-way/object.json' with { type: 'json' };
+import galaxy from '../src/objects/milky-way-volume/object.json' with { type: 'json' };
 import datasetVolumes from './prepared-dataset-volumes.json' with { type: 'json' };
 import localGroupGalaxies from './prepared-local-group-galaxies.json' with { type: 'json' };
 import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';

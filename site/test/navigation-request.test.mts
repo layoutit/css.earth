@@ -14,12 +14,12 @@ test('a body without a hosted system opens detail on the first click', () => {
     } as unknown as Parameters<typeof resolveNavigation>[1]['navigation'];
     const { destination, centeredObjectId } = resolveNavigation({ kind: 'object' }, {
       object: requireSceneObject(id), objects: WORLD_OBJECTS, navigation,
-      current: { objectId: 'sun', href: 'https://css.earth/sun/', subject: { kind: 'object', objectId: 'sun' },
+      current: { objectId: 'sun', href: 'https://css.earth/sun/', subject: { objectId: 'sun', view: 'body' },
         centeredObjectId: null, hasPresented: true, reuseScene: false, mount: null, pending: null },
     });
     assert.equal(destination.camera.kind, 'frame');
     if (destination.camera.kind === 'frame') assert.equal(destination.camera.framing, 'detail');
-    assert.equal(destination.subject.kind, 'object');
+    assert.equal(destination.subject.view, 'body');
     assert.equal(centeredObjectId, null);
     assert.equal(centerCalls, 0);
   }
@@ -34,7 +34,7 @@ test('a star hosting planets flies to frame its system on the first click and op
   } as unknown as Parameters<typeof resolveNavigation>[1]['navigation'];
   const select = (centeredObjectId: string | null) => resolveNavigation({ kind: 'object' }, {
     object: requireSceneObject('eps-eridani'), objects: WORLD_OBJECTS, navigation,
-    current: { objectId: 'milky-way', href: 'https://css.earth/milky-way/', subject: { kind: 'object', objectId: 'milky-way' },
+    current: { objectId: 'milky-way', href: 'https://css.earth/milky-way/', subject: { objectId: 'milky-way', view: 'body' },
       centeredObjectId, hasPresented: true, reuseScene: false, mount: null, pending: null },
   });
   const first = select(null);
@@ -53,10 +53,10 @@ test('a galaxy picked from another galaxy\'s page is a destination like any body
   // M 33, then LMC from search, then Back must return to M 33 (it left the site on 2026-10-01).
   const { destination } = resolveNavigation({ kind: 'object' }, {
     object: requireSceneObject('lmc'), objects: WORLD_OBJECTS, navigation,
-    current: { objectId: 'm33', href: 'https://css.earth/m33/', subject: { kind: 'object', objectId: 'm33' },
+    current: { objectId: 'm33', href: 'https://css.earth/m33/', subject: { objectId: 'm33', view: 'body' },
       centeredObjectId: null, hasPresented: true, reuseScene: false, mount: null, pending: null },
   });
   assert.equal(new URL(destination.url).pathname, '/lmc/');
   assert.deepEqual(destination.history, { history: 'push' });
-  assert.deepEqual(destination.subject, { kind: 'object', objectId: 'lmc' });
+  assert.deepEqual(destination.subject, { objectId: 'lmc', view: 'body' });
 });

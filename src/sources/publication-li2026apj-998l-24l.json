@@ -18,7 +18,7 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/local-group/prepared/catalogue.json",
+      "path": "src/objects/local-group-galaxies/prepared/catalogue.json",
       "locator": "/sources/3/references/196"
     }
   ],
@@ -28,7 +28,7 @@
       "kind": "limitation",
       "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
       "scope": "citation",
-      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/3/references/196"
+      "evidence": "src/objects/local-group-galaxies/prepared/catalogue.json#/sources/3/references/196"
     }
   ]
 }

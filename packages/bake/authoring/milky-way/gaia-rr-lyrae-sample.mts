@@ -10,7 +10,7 @@
  * The draw is by Gaia DR3 id, so it keeps the same stars on every run.
  *
  * Input: CDS's table 5, by default `output/rrlyrae/table5.dat.gz`, from https://cdsarc.cds.unistra.fr/ftp/J/ApJ/944/88/table5.dat.gz
- * (byte columns from its ReadMe). Output: `src/objects/milky-way/source/gaia-rr-lyrae/sample.csv.gz`. It prints what it kept.
+ * (byte columns from its ReadMe). Output: `src/objects/milky-way-volume/source/gaia-rr-lyrae/sample.csv.gz`. It prints what it kept.
  *
  * - A star keeps its photometric distance when that distance's uncertainty is at most a quarter of it.
  * - Stars of the Magellanic Clouds and of the Sagittarius dwarf galaxy's core are left out: they belong to those galaxies.
@@ -25,8 +25,8 @@ import { gunzipSync, gzipSync } from 'node:zlib';
 
 const repository = resolve(import.meta.dirname, '../../../..');
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/rrlyrae/table5.dat.gz'));
-const outputPath = resolve(repository, 'src/objects/milky-way/source/gaia-rr-lyrae/sample.csv.gz');
-const descriptorPath = resolve(repository, 'src/objects/milky-way/object.json');
+const outputPath = resolve(repository, 'src/objects/milky-way-volume/source/gaia-rr-lyrae/sample.csv.gz');
+const descriptorPath = resolve(repository, 'src/objects/milky-way-volume/object.json');
 const INNER_KPC = 3, OUTER_KPC = 30, SCALE_LENGTH_KPC = 2.6, MAX_RELATIVE_ERROR = 0.25, KPC_M = 3.0856775814913673e19;
 const descriptor = JSON.parse(await readFile(descriptorPath, 'utf8')) as { properties?: { volume?: { referenceFrame?: unknown; originM?: unknown } } };
 const volume = descriptor.properties?.volume, originM = volume?.originM;

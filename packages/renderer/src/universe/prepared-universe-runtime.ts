@@ -17,6 +17,7 @@ import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js
 import { mountEnvironmentLabels } from './environment-labels.js';
 import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog';
 import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
+import { createContextFocusBank } from './prepared-focus-bank.js';
 import { detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';
 import type { SelectedBank } from './detailed-focus-context.js';
 import { DEFAULT_POINT_VISIBILITY } from '../volume/projected-volume-visibility.js';
@@ -40,7 +41,7 @@ const IMAGE_MESH_LOAD_DISTANCE_M = 7e9 * 3.0856775814913673e16;
 /** Hidden, unsubscribed dataset banks are retained only within this measured DOM budget. */
 export const WARM_VOLUME_DATASET_DOM_NODE_BUDGET = 5_000;
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], contextBanks = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
   let plan = parsePreparedWorldContextPlan(context);
   const payload = validatePreparedCssVolume(volume);
   // What another system's bodies reach once read (addSystem): every planner made and every mounted world layer.
@@ -211,7 +212,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         let companion: string | null = null;
         // The banks that are a scene's whole subject: a galaxy's image layers, and a volume that is not attached to a body.
         const subjectBanks = new Set([...declaredImageLayers.map(bank => bank.id), ...volumeDatasetBanks.filter((_, index) => !datasetFacts[index]!.attached).map(bank => bank.id)]);
-        const bankOf = (id: string) => datasets.focusBank(id) ?? catalogBanks.focusBank(id);
+        // A level's context packages are banks too, for the object whose datasets name them (the Milky Way's volume).
+        const contextFocusBanks = new Map(contextBanks.map(id => [id, createContextFocusBank(id)]));
+        const bankOf = (id: string) => datasets.focusBank(id) ?? catalogBanks.focusBank(id) ?? contextFocusBanks.get(id) ?? null;
         background.mount();
         catalogBanks.loadInitialImages();
         for (const shell of shells) shellLayers.push(own(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell })));
