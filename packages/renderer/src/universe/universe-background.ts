@@ -8,7 +8,8 @@ import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/proj
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { fetchPreparedCatalogueBank, fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
-import { mountGalaxyBacking, parseGalaxyBacking, type BackingNearFade } from './galaxy-backing.js';
+import { mountGalaxyBacking } from './galaxy-backing.js';
+import { parseGalaxyBacking, type BackingNearFade } from '@cssearth/objects';
 import { revealLayer } from '../rendering/layer-reveal.js';
 import { afterStartup } from '../rendering/startup-gate.js';
 import { galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';

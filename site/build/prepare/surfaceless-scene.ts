@@ -1,3 +1,4 @@
+import { IMAGE_MESH_SCHEMA, CATALOGUE_POINTS_BINARY_SCHEMA } from '@cssearth/objects';
 import { DENSITY_VOLUME_FORMAT, OBJECT_RUNTIME_SCHEMA, parsePreparedObjectRuntime, requireControls } from '@cssearth/objects';
 
 // The scene of an authored object with no surface (`recipe.surfaces: []`): a galaxy, a nebula, a cluster of galaxies. It is
@@ -79,7 +80,7 @@ export async function companionThumbnails({ objectDirectory, publicDirectory, co
     if (!control.volume || !control.thumbnail || control.thumbnail.startsWith('/')) continue;
     const bankDirectory = resolve(objectDirectory, '..', control.volume.objectId), output = resolve(publicDirectory, control.thumbnail);
     const bank = JSON.parse(await readFile(resolve(bankDirectory, 'object.json'), 'utf8')) as { prepared?: { format?: string } };
-    if (bank.prepared?.format === 'cssearth-catalogue-points-bin@1') { await dotsPicture(bankDirectory, output); continue; }
+    if (bank.prepared?.format === CATALOGUE_POINTS_BINARY_SCHEMA) { await dotsPicture(bankDirectory, output); continue; }
     // The galaxy's own volume publishes one picture of itself, its backing.
     if (bank.prepared?.format === DENSITY_VOLUME_FORMAT) {
       await mkdir(dirname(output), { recursive: true });
@@ -88,7 +89,7 @@ export async function companionThumbnails({ objectDirectory, publicDirectory, co
       continue;
     }
     // A sphere of sky (the microwave background) publishes a picture of each of its datasets.
-    if (bank.prepared?.format === 'cssearth-image-mesh@1') {
+    if (bank.prepared?.format === IMAGE_MESH_SCHEMA) {
       const datasets = JSON.parse(await readFile(resolve(bankDirectory, 'prepared/datasets.json'), 'utf8')) as { controls: { id: string; thumbnailUrl: string }[] };
       const picture = datasets.controls.find(candidate => candidate.id === control.volume!.datasetId)?.thumbnailUrl;
       if (!picture) throw new TypeError(`${bankDirectory}/prepared/datasets.json: dataset ${control.volume.datasetId} names no picture.`);

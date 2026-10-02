@@ -1,9 +1,10 @@
+import { GALAXY_BACKING_SCHEMA } from '@cssearth/objects';
 /**
  * Prepare a face-on image of a galaxy as a flat backing plane in its volume frame. `source/<id>/recipe.json` names the
  * image, the pixels of the galaxy's centre and of the Sun on it, the view it was drawn from, and the levels that keep it
  * under the catalogue dots. The image is scaled so both anchors land on the app's own positions (the frame origin and
  * the Sun), laid in the plane through them normal to the Galactic north pole, and compiled with the same PolyCSS
- * volume compiler as the galaxy's other planes. Writes `prepared/<id>.json` (`cssearth-galaxy-backing@1`, read by
+ * volume compiler as the galaxy's other planes. Writes `prepared/<id>.json` (`GALAXY_BACKING_SCHEMA`, read by
  * packages/renderer/src/universe/galaxy-backing.ts) and `prepared/<id>/<id>.webp` through the lossy lane.
  *
  * Close up the image's texels blow up and blur. `nearFade` dims the whole image to `nearOpacity` as the camera closes
@@ -144,7 +145,7 @@ for (const section of sections) {
   bakedSections.push({ texturePath: sectionPath, nearOpacity: section.nearOpacity, fadeM: section.fadeKpc.map(kpc => kpc * KPC_M) });
   console.log(`Prepared section ${section.id}: whole within ${section.radiusKpc[0]} kpc, gone by ${section.radiusKpc[1]} kpc (${sectionWebp.length} bytes).`);
 }
-await writeFile(resolve(prepared, `${id}.json`), JSON.stringify({ schema: 'cssearth-galaxy-backing@1', id, source: recipe.source, meaning: recipe.meaning,
+await writeFile(resolve(prepared, `${id}.json`), JSON.stringify({ schema: GALAXY_BACKING_SCHEMA, id, source: recipe.source, meaning: recipe.meaning,
   frame, leaf: { texturePath: leaf.texturePath, style: leaf.style }, placement: { kpcPerSourcePx: kpcPerPx, crop: { left, top, width: cropWidth, height: cropHeight } },
   levelsNote: levels.note,
   ...(baseFade ? { nearFade: { nearOpacity: baseFade.nearOpacity, fadeM: baseFade.fadeKpc.map(kpc => kpc * KPC_M) } } : {}),

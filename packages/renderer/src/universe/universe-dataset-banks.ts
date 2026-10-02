@@ -9,7 +9,7 @@ import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits }
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
 import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
-import type { DatasetBankBillboard, DatasetBillboards } from './dataset-billboards.js';
+import type { DatasetBankBillboard, DatasetBillboards } from '@cssearth/objects';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 
 type DatasetMount = ReturnType<ReturnType<typeof createPreparedVolumeDatasets>['mount']>;

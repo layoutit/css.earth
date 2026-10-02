@@ -1,3 +1,4 @@
+import { IMAGE_MESH_SCHEMA } from '@cssearth/objects';
 /**
  * Prepare an all-sky HEALPix map as a sphere of image patches around the Sun, seen from outside: the cosmic microwave
  * background at the distance its light left from. `source/<id>/sphere.json` names the map (its FITS file, column and
@@ -10,7 +11,7 @@
  * Galactic coordinates), `samplesPerTexel`² samples averaged, through the same projective mapping PolyCSS draws the tile
  * with, and with a one-texel border sampled past the patch; each leaf reaches into that border, so neighbouring patches
  * overlap by a texel and no seam opens between them. The atlas goes through the lossy lane. Writes `prepared/<id>.json`
- * (`cssearth-image-mesh@1`, read by packages/renderer/src/universe/image-mesh.ts) and `prepared/<id>/<id>.webp`. A recipe
+ * (`IMAGE_MESH_SCHEMA`, read by packages/renderer/src/universe/image-mesh.ts) and `prepared/<id>/<id>.webp`. A recipe
  * `cutaway` marks the patches of the hemisphere it opens; the runtime hides them and draws the rest's inside behind what
  * the sphere holds, or shows the whole sphere. Its `datasets` are the page's datasets of the sphere, whole or cut open:
  * `prepared/datasets.json` carries their card text, the color table's legend and a picture of each view
@@ -303,7 +304,7 @@ if (datasets && rays && view) {
         labels: [inUnit(range!.min as number), inUnit((range!.min as number + (range!.max as number)) / 2), inUnit(range!.max as number)] } }) })) };
 }
 const extent = Math.ceil(R);
-const output = { schema: 'cssearth-image-mesh@1', id, name: recipe.name, source: recipe.source, meaning: recipe.meaning,
+const output = { schema: IMAGE_MESH_SCHEMA, id, name: recipe.name, source: recipe.source, meaning: recipe.meaning,
   frame: { referenceFrame: 'sun-icrf', epochJdTt: recipe.epochJdTt, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: MPC_M,
     boundsUnits: { min: [-extent, -extent, -extent], max: [extent, extent, extent] } },
   radiusUnits: Number(R.toFixed(3)), texture: { path: texturePath, width: atlasWidth, height: atlasHeight, bytes: webp.length },

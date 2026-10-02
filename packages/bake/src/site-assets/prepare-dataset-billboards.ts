@@ -1,3 +1,4 @@
+import { DATASET_BILLBOARDS_SCHEMA } from '@cssearth/objects';
 // `pnpm prepare:dataset-billboards` (`packages/bake/cli/prepare-dataset-billboards.mts`): what the universe knows about every volume dataset bank before fetching it.
 // Each bank gets its context visibility (whether it fades with the galaxy) and, when its default dataset has
 // prepared impostors, the one impostor view that faces the Sun, packed with the others into one atlas image.
@@ -161,7 +162,7 @@ export async function prepareDatasetBillboards(projectRoot = process.cwd()) {
   const atlas = await encodeLossyWebp(sharp({ create: { width: columns * CELL_PX, height: rows * CELL_PX, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
     .composite(drawn.map((bank, index) => ({ input: bank.image!, left: (index % columns) * CELL_PX, top: Math.floor(index / columns) * CELL_PX }))),
     { alphaQuality: 100, effort: 4 });
-  const metadata = { schema: 'cssearth-dataset-billboards@1', atlas: { columns, rows, cellPx: CELL_PX },
+  const metadata = { schema: DATASET_BILLBOARDS_SCHEMA, atlas: { columns, rows, cellPx: CELL_PX },
     banks: banks.map(bank => ({ id: bank.id, contextVisibility: bank.contextVisibility, attached: bank.attached,
       ...(bank.framingRadiusUnits === undefined ? {} : { framingRadiusUnits: bank.framingRadiusUnits }),
       ...(bank.view ? { billboard: { cell: drawn.indexOf(bank), radiusUnits: bank.radiusUnits, ...bank.view } } : {}) })) };

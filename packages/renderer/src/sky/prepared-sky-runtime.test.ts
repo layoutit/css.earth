@@ -45,7 +45,7 @@ const { worldRotationCss } = await import('../navigation/world-camera-math.js');
 const { createPreparedUniverse } = await import('../universe/prepared-universe-runtime.js');
 const { logarithmicFade } = await import('../universe/world-context/context-scale.js');
 const { readCanonicalPointField } = await import('../../test/canonical-point-field-fixture.js');
-const { parseDatasetBillboards } = await import('../universe/dataset-billboards.js');
+const { parseDatasetBillboards } = await import('@cssearth/objects');
 
 const bases = [
   ['px', [1, 0, 0], [0, -1, 0], [0, 0, 1]], ['nx', [-1, 0, 0], [0, 1, 0], [0, 0, 1]],
