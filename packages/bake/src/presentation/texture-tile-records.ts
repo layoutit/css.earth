@@ -1,5 +1,5 @@
 import { type PreparedTextureTile, type PreparedTextureTileLeaves, type PreparedVariant, requireTextureTileLeaves } from '@cssearth/objects';
-
+import { rebuildPropertyTable } from './property-table.ts';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { scanCssDeclarations } from './css-declaration-scanner.ts';
 
@@ -41,15 +41,6 @@ function declarations(style: string) {
     const colon = part.indexOf(':');
     return { name: part.slice(0, colon).trim(), value: part.slice(colon + 1).trim(), text: part };
   });
-}
-function interned(tree: Tree, nodes: readonly TreeNode[], properties: readonly Property[]): Tree {
-  const kept: Property[] = [], ids = new Map<string, number>();
-  const intern = (property: Property) => {
-    const key = JSON.stringify(property);
-    if (!ids.has(key)) { ids.set(key, kept.length); kept.push(property); }
-    return ids.get(key)!;
-  };
-  return { ...tree, nodes: nodes.map(node => ({ ...node, properties: node.properties.map(id => intern(properties[id]!)) })), properties: kept };
 }
 
 /** The variable form's tiled page leaves as records; every tile variable leaves the tree. */
@@ -131,7 +122,7 @@ export function withTextureTileRecords<D extends Definition>(definition: D): D {
   if (left >= 0) throw new TypeError(`${definition.id}: prepared node ${left} keeps a texture tile variable.`);
   const tileLeaves = [...groups.values()].sort((a, b) => a.target - b.target || a.name.localeCompare(b.name, 'en', { numeric: true }))
     .map(({ target, name, unit, width, initial, leaves }) => ({ target, name, unit, width, ...initial ? { initial } : {}, leaves }));
-  return { ...definition, tree: interned(tree, stripped, properties), textureLevels: { ...levels, tileLeaves } };
+  return { ...definition, tree: rebuildPropertyTable(tree, stripped, properties), textureLevels: { ...levels, tileLeaves } };
 }
 
 /** The records expanded back to the variable form the bindings measure (the inverse of withTextureTileRecords). */
@@ -157,5 +148,5 @@ export function withoutTextureTileRecords<D extends Definition>(definition: D): 
     const kept = values ? node.properties.filter(id => !(definition.tree.properties[id]!.name in STYLE_NAMES)) : node.properties;
     return { ...node, properties: [...kept, ...variables ?? [], ...values ?? []] };
   });
-  return { ...definition, tree: interned(definition.tree, nodes, properties), textureLevels: rest };
+  return { ...definition, tree: rebuildPropertyTable(definition.tree, nodes, properties), textureLevels: rest };
 }
