@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "ngc-6744-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      5312,
+      4472
+    ],
+    "originalDimensions": [
+      5312,
+      4472
+    ],
+    "publisherUrl": "https://www.eso.org/public/images/eso1118a/",
+    "downloadUrl": "https://cdn.eso.org/images/large/eso1118a.jpg",
+    "credit": "ESO",
+    "license": "CC-BY-4.0",
+    "foregroundStars": {
+      "path": "gaia-dr3-foreground.csv",
+      "raDegColumn": "RA_ICRS",
+      "decDegColumn": "DE_ICRS",
+      "gMagColumn": "Gmag",
+      "source": "gaia-2023-dr3",
+      "basis": "Milky Way foreground stars by the criterion of Ren et al. (2021, Sect. 3.2): a Gaia parallax measured to better than 20% that places the star within 50 kpc, or a proper motion above 0.2 mas/yr plus 2 sigma measured to better than 20%. Applied to Gaia DR3 over the photograph's field; the query is in the Gaia DR3 source record."
+    }
+  },
+  "observation": {
+    "centerRaDeg": 287.4409719,
+    "centerDecDeg": -63.846587,
+    "fieldOfViewDeg": [
+      0.3511875,
+      0.2956536
+    ],
+    "northClockwiseDeg": 89.993
+  },
+  "target": {
+    "centerRaDeg": 287.44208,
+    "centerDecDeg": -63.85754,
+    "distancePc": 9506047.93656
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 53.5,
+    "lineOfNodesPaDeg": 195.4,
+    "thicknessKpc": 3.996,
+    "depthWeights": [
+      0.005054043639887778,
+      0.006133325082786362,
+      0.007443085032793983,
+      0.00903254173839321,
+      0.01096142391177135,
+      0.013302215218429378,
+      0.01614287807329399,
+      0.01959015909832834,
+      0.023773600454352346,
+      0.028850407785172626,
+      0.03501135770195747,
+      0.04248796679970681,
+      0.05156119160360519,
+      0.06257198637243411,
+      0.07593411550089782,
+      0.09214970198618913,
+      0.09214970198618913,
+      0.07593411550089783,
+      0.0625719863724341,
+      0.05156119160360519,
+      0.04248796679970681,
+      0.035011357701957485,
+      0.02885040778517261,
+      0.023773600454352346,
+      0.01959015909832834,
+      0.016142878073294,
+      0.013302215218429378,
+      0.01096142391177135,
+      0.00903254173839321,
+      0.007443085032793986,
+      0.006133325082786362,
+      0.005054043639887778
+    ],
+    "supportRadiusKpc": 27.9,
+    "supportTaperFraction": 0.75,
+    "depthScales": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 3000,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.0706,
+    "encoding": {
+      "format": "webp",
+      "quality": 82,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.08,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "colourTie": {
+      "bv": 0.62,
+      "source": "ho-2011-cgs",
+      "basis": "The Carnegie-Irvine Galaxy Survey (Ho et al. 2011, CDS J/ApJS/197/21) gives total magnitudes B = 9.87 +/- 0.21 and V = 9.25 +/- 0.11 as observed, a B-V of 0.62; RC3 has no B-V for this galaxy. Red and blue are scaled in linear light so the disc's mean colour matches the engine's catalogue colour for that index, the function that colours the star dots."
+    }
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

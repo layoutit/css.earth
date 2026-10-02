@@ -70,6 +70,11 @@
       "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
       "checkedOn": "2026-10-01",
       "locator": "I/355/gaiadr3, the same columns and foreground criterion around NGC 2903, for sources with a G magnitude (477 rows, src/objects/ngc-2903-layers/source/gaia-dr3-foreground.csv). Query: SELECT Source, RA_ICRS, DE_ICRS, Plx, e_Plx, pmRA, e_pmRA, pmDE, e_pmDE, Gmag FROM \"I/355/gaiadr3\" WHERE 1=CONTAINS(POINT('ICRS', RA_ICRS, DE_ICRS), CIRCLE('ICRS', 143.04, 21.500556, 0.24)) AND Gmag IS NOT NULL AND ((Plx > 0.02 AND e_Plx < 0.2 * Plx) OR (ABS(pmRA) > 0.2 + 2 * e_pmRA AND e_pmRA < 0.2 * ABS(pmRA)) OR (ABS(pmDE) > 0.2 + 2 * e_pmDE AND e_pmDE < 0.2 * ABS(pmDE)))"
+    },
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-10-01",
+      "locator": "I/355/gaiadr3, the same columns and foreground criterion around NGC 6744, for sources with a G magnitude (5,768 rows, src/objects/ngc-6744-layers/source/gaia-dr3-foreground.csv). Query: SELECT Source, RA_ICRS, DE_ICRS, Plx, e_Plx, pmRA, e_pmRA, pmDE, e_pmDE, Gmag FROM \"I/355/gaiadr3\" WHERE 1=CONTAINS(POINT('ICRS', RA_ICRS, DE_ICRS), CIRCLE('ICRS', 287.44125, -63.857778, 0.3)) AND Gmag IS NOT NULL AND ((Plx > 0.02 AND e_Plx < 0.2 * Plx) OR (ABS(pmRA) > 0.2 + 2 * e_pmRA AND e_pmRA < 0.2 * ABS(pmRA)) OR (ABS(pmDE) > 0.2 + 2 * e_pmDE AND e_pmDE < 0.2 * ABS(pmDE)))"
     }
   ],
   "creators": [

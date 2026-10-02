@@ -1,0 +1,54 @@
+{
+  "id": "lang-2020-phangs-kinematics",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "PHANGS CO Kinematics: Disk Orientations and Rotation Curves at 150 pc Resolution",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2020ApJ...897..122L"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/897/122"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...897..122L",
+      "label": "2020ApJ...897..122L"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/897/122",
+      "label": "CDS J/ApJ/897/122"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/897/122/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "table1 (basic properties of the kinematic PHANGS sample), row NGC6744: centre 287.44208, -63.85754, distance 9.5 Mpc, systemic velocity 851.4 km/s, position angle 15.4 deg, inclination 53.5 deg, from the CO velocity field. Query: SELECT * FROM \"J/ApJ/897/122/table1\" WHERE 1=CONTAINS(POINT('ICRS', RAJ2000, DEJ2000), CIRCLE('ICRS', 287.442, -63.858, 0.1))"
+    }
+  ],
+  "creators": [
+    "P. Lang",
+    "S. E. Meidt",
+    "E. Rosolowsky",
+    "J. Nofech",
+    "E. Schinnerer",
+    "A. K. Leroy"
+  ],
+  "publisher": "ApJ 897, 122",
+  "publicationDate": "2020",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Lang et al. (2020), ApJ 897, 122.",
+      "scope": "NGC 6744's disc centre, tilt and position angle",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/897/122/ReadMe"
+    }
+  ]
+}

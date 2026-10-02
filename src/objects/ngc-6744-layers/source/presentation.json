@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-6744-layers",
+  "name": "NGC 6744",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-6744-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-6744-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-6744-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "ESO · optical",
+      "title": "NGC 6744 in visible light",
+      "description": "The MPG/ESO 2.2-metre Wide Field Imager view of NGC 6744 with Milky Way foreground stars removed and the whole-galaxy colour tied to the Carnegie-Irvine Galaxy Survey's measured B-V of 0.62, on a disc tilted 53.5° with a 666 pc layer.",
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "detail": "5312 × 4472 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "MPG/ESO 2.2-m WFI B, V, red, Hα"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "5312 × 4472"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "21.07 × 17.74 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/ngc-6744-layers/source/source.jpg",
+        "url": "https://cdn.eso.org/images/large/eso1118a.jpg"
+      }
+    }
+  ]
+}
