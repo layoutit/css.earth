@@ -7,3 +7,4 @@ export { readRiceCompressedImage, riceDecompress } from './rice.js';
 export { skyDisplayRaster, skyImageAxes, skyProjection, type SkyImageAxes, type SkyProjection } from './sky.js';
 export { sampleStatistics, type Statistics } from './sample-statistics.js';
 export { decodeFits } from './transport.js';
+export { requiredFiniteCard, requiredTrimmedTextCard } from './required-cards.js';
