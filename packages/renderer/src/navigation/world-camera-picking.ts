@@ -12,6 +12,8 @@ type PickingGesture = { selected: SelectedClick | null; second: SecondPress | nu
 const gestures = new WeakMap<HTMLElement, PickingGesture>();
 const DOUBLE_CLICK_MILLISECONDS = 500;
 const CLICK_SLOP_PIXELS = 5;
+/** A fingertip covers its target: a tap that lands on nothing takes the nearest label or marker within this reach. */
+const TOUCH_REACH_PIXELS = 16;
 
 export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElement,
   readBounds: () => { left: number; top: number; width: number; height: number },
@@ -26,10 +28,11 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   let pointer: { id: number; x: number; y: number; dragged: boolean } | null = null;
   let hovered: HTMLElement | null = null;
   const registry = screenPicking(host);
-  const pick = (event: MouseEvent) => {
+  let touch = false;
+  const pick = (event: MouseEvent, reach = 0) => {
     const bounds = readBounds();
     const target = registry.pick(event.clientX - bounds.left - bounds.width / 2,
-      event.clientY - bounds.top - bounds.height / 2);
+      event.clientY - bounds.top - bounds.height / 2, reach);
     // Context sprites paint behind the selected detailed surface. Their screen
     // bounds can overlap it even when their centres are not occluded. Reuse the
     // detail owner's existing hit contract for both hover and activation.
@@ -87,6 +90,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   const down = (event: PointerEvent) => {
     clearHover();
     if (event.target !== inputSurface || !event.isPrimary || event.button !== 0) return;
+    touch = event.pointerType === 'touch';
     if (event.pointerType === 'mouse' && matchesSelection(event)) {
       gesture.second = { pointerId: event.pointerId, pointerType: event.pointerType,
         x: event.clientX, y: event.clientY };
@@ -130,7 +134,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     }
     if (event.button !== 0 || pointer?.dragged || event.target !== inputSurface) { pointer = null; return; }
     pointer = null;
-    const target = pick(event);
+    const target = pick(event, touch ? TOUCH_REACH_PIXELS : 0);
     if (!(target instanceof HTMLElement)) return;
     if (target.dataset.objectNavigateActivation === 'dblclick') {
       consume(event);
@@ -149,7 +153,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
       consume(event);
       return;
     }
-    const target = pick(event);
+    const target = pick(event, touch ? TOUCH_REACH_PIXELS : 0);
     if (event.button !== 0 || target?.dataset.objectNavigateActivation !== 'dblclick') return;
     consume(event);
     target.dispatchEvent(new MouseEvent('dblclick', { bubbles: true, cancelable: true, button: 0 }));
