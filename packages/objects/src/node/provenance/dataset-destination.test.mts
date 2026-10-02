@@ -49,6 +49,7 @@ test('a dataset an input names is credited to that input alone', () => {
     { ...image!, id: 'optical', datasetId: 'optical', capture: credit('Optical telescope') },
     { ...image!, id: 'xray', datasetId: 'xray', capture: credit('X-ray telescope') },
     { ...image!, id: 'shape', capture: credit('Spectrograph') },
+    { ...image!, id: 'painted', datasetId: 'model', capture: undefined },
   ];
   const inputs = sources.map(source => source.id);
   const graph = compileContributions([{ ...volume,
@@ -61,7 +62,7 @@ test('a dataset an input names is credited to that input alone', () => {
   const credited = (datasetId: string) => graph.edges.filter(edge => edge.datasetIds.includes(datasetId)).map(edge => edge.sourceId);
   assert.deepEqual(credited('optical'), ['optical']);
   assert.deepEqual(credited('xray'), ['xray']);
-  assert.deepEqual(credited('model'), inputs, 'a dataset no input names keeps every input of its product');
+  assert.deepEqual(credited('model'), ['optical', 'xray', 'shape'], 'a dataset only an uncredited input names keeps every credited input of its product');
   assert.deepEqual(parseContributionGraph(graph, catalog, DATASET_ROUTES), graph);
 });
 

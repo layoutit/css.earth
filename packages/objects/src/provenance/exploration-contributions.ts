@@ -52,9 +52,9 @@ export function compileContributions(objects: readonly ContributionObject[], cat
     for (const product of document.products) {
       if (product.observationAttribution === 'none') continue;
       const inputs = [...productInputRoles(document, product.id, product => product.observationAttribution === 'source-lineage')];
-      // A dataset that one of the inputs names is credited to that input alone;
-      // the product's other inputs keep the datasets no input names.
-      const named = new Set(inputs.flatMap(([sourceId]) => sources.get(sourceId)?.datasetId ?? []));
+      // A dataset that a credited input names is credited to that input alone;
+      // the product's other inputs keep the datasets no credited input names.
+      const named = new Set(inputs.flatMap(([sourceId]) => { const source = sources.get(sourceId); return source?.capture?.attributions.length ? source.datasetId ?? [] : []; }));
       for (const [sourceId, roles] of inputs) {
         const own = sources.get(sourceId)?.datasetId;
         const credited = product.datasetIds.filter(id => id === own || !named.has(id));
