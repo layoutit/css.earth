@@ -7,11 +7,14 @@ import type { SourceKind, SourceRecord, SourceResolver } from '../sources/catalo
 import type { SourceUsage, SourceUseKind } from './source-usage.js';
 
 export const SOURCE_CREDITS_SCHEMA = 'cssearth-prepared-source-credits@2';
-/** One row of a Sources tab: the published title, what it is and who publishes it, and its landing page. */
-export interface SourceCreditRow { readonly title: string; readonly detail: string; readonly url: string }
+/** One row of a Sources tab: a published work (its title, what it is and who publishes it, its landing page), or the files one
+ * credit line supplied (the credit, how many files and the datasets they feed). A row of several files has no page of its own:
+ * the tab links it to the object's README, which lists them. */
+export interface SourceCreditRow { readonly title: string; readonly detail: string; readonly url?: string }
 export interface SourceCredits {
   readonly schema: typeof SOURCE_CREDITS_SCHEMA; readonly providers: Readonly<Record<string, readonly string[]>>;
-  /** Each used source once, by catalogue ID; `sources` lists an object's IDs, its inputs before its methods and citations. */
+  /** Rows by key: a catalogue ID, shared by every object that uses the work, or `<object>#<n>` for one object's files under one
+   * credit. `sources` lists an object's keys, its inputs before its methods and citations. */
   readonly records: Readonly<Record<string, SourceCreditRow>>; readonly sources: Readonly<Record<string, readonly string[]>>;
 }
 
@@ -38,12 +41,28 @@ export function sourceCredits(usage: SourceUsage, sources: SourceResolver): Sour
   const records: Record<string, SourceCreditRow> = {}, objectSources: Record<string, readonly string[]> = {};
   for (const objectId of [...owners].sort()) {
     const uses = (usage.byObject[objectId] ?? []).map(index => usage.edges[index]!);
-    const ids = [...new Set(USE_ORDER.flatMap(kind => uses.filter(use => use.kind === kind).map(use => use.catalogueId)))];
-    for (const id of ids) {
-      const source = sources[id];
-      if (!source) throw new TypeError(`${objectId} uses unknown source ${id}.`);
-      records[id] ??= creditRow(source);
+    // A single file has no published title: its record is named after its manifest input ID (author-source-records.ts). Its
+    // manifest entry does carry a credit line, so an object's files are listed once per credit instead of once per file.
+    const keys: string[] = [], files = new Map<string, { key: string; ids: Set<string>; datasets: Set<string> }>();
+    for (const use of USE_ORDER.flatMap(kind => uses.filter(candidate => candidate.kind === kind))) {
+      const source = sources[use.catalogueId];
+      if (!source) throw new TypeError(`${objectId} uses unknown source ${use.catalogueId}.`);
+      if ((source.kind === 'data-product' || source.kind === 'model') && !source.publisher && use.credit) {
+        let group = files.get(use.credit);
+        if (!group) { group = { key: `${objectId}#${files.size}`, ids: new Set(), datasets: new Set() }; files.set(use.credit, group); keys.push(group.key); }
+        group.ids.add(source.id);
+        group.datasets.add(use.consumerLabel.slice(use.consumerLabel.indexOf(' · ') + 3));
+      } else if (!keys.includes(source.id)) { records[source.id] ??= creditRow(source); keys.push(source.id); }
     }
+    for (const [credit, group] of files) {
+      const [first] = group.ids, only = group.ids.size === 1 ? sources[first!]! : null;
+      // One file that is a catalogued work of its own keeps its published title.
+      if (only && !only.id.startsWith('source-')) { records[only.id] ??= creditRow(only); keys[keys.indexOf(group.key)] = only.id; continue; }
+      const datasets = [...group.datasets].join(', ');
+      records[group.key] = Object.freeze(only ? { title: credit, detail: `${KIND_LABELS[only.kind]} · ${datasets}`, url: creditRow(only).url }
+        : { title: credit, detail: `${group.ids.size} files · ${datasets}` });
+    }
+    const ids = [...new Set(keys)];
     if (ids.length) objectSources[objectId] = Object.freeze(ids);
     const names = [...new Set([
       ...uses.flatMap(use => {
@@ -64,9 +83,9 @@ export function parseSourceCredits(input: unknown): SourceCredits {
   const providers: Record<string, readonly string[]> = {};
   const records: Record<string, SourceCreditRow> = {}, sources: Record<string, readonly string[]> = {};
   for (const [id, row] of Object.entries(input.records)) {
-    if (!isRecord(row) || typeof row.title !== 'string' || !row.title || typeof row.detail !== 'string' || !row.detail || typeof row.url !== 'string' || !/^https?:\/\//u.test(row.url))
-      throw new TypeError(`Invalid prepared source credit row ${id}: it needs a title, a detail and an http(s) url.`);
-    records[id] = Object.freeze({ title: row.title, detail: row.detail, url: row.url });
+    if (!isRecord(row) || typeof row.title !== 'string' || !row.title || typeof row.detail !== 'string' || !row.detail || row.url !== undefined && (typeof row.url !== 'string' || !/^https?:\/\//u.test(row.url)))
+      throw new TypeError(`Invalid prepared source credit row ${id}: it needs a title, a detail and, when it has a url, an http(s) one.`);
+    records[id] = Object.freeze({ title: row.title, detail: row.detail, ...(row.url === undefined ? {} : { url: row.url }) });
   }
   for (const [objectId, ids] of Object.entries(input.sources)) {
     const missing = Array.isArray(ids) ? ids.find(id => typeof id !== 'string' || !records[id]) : objectId;
