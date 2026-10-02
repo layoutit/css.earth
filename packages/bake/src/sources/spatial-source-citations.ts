@@ -1,9 +1,7 @@
-import { PREPARED_GALAXY_CATALOG_SCHEMA, PREPARED_CLUSTER_CATALOG_SCHEMA } from '@cssearth/objects';
+import { PREPARED_GALAXY_CATALOG_SCHEMA, PREPARED_CLUSTER_CATALOG_SCHEMA, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog } from '@cssearth/objects';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { resolveSpatialCitation } from '@cssearth/catalog';
-import { parsePreparedGalaxyCatalog } from '@cssearth/objects';
-import { parsePreparedClusterCatalog } from '@cssearth/objects';
 import { sourceObject } from '@cssearth/objects/sources';
 import type { SourceResolver } from '@cssearth/objects/sources';
 import type { SourceUse } from '@cssearth/objects/provenance';

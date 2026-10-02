@@ -1,6 +1,5 @@
 import type { PreparedSurfaceFeaturePlan, SurfaceFeatureCatalogDescriptor } from './runtime-presentation-types.js';
-import { type ParsedSurfaceFeature as PreparedSurfaceFeature, type ParsedSurfaceFeatureCatalog as PreparedSurfaceFeatureCatalog } from './surface-feature-types.js';
-import { PREPARED_SURFACE_FEATURES_SCHEMA, type SurfaceFeatureKind, type SurfaceFeatureOutline } from './surface-feature-types.js';
+import { PREPARED_SURFACE_FEATURES_SCHEMA, type ParsedSurfaceFeature as PreparedSurfaceFeature, type ParsedSurfaceFeatureCatalog as PreparedSurfaceFeatureCatalog, type SurfaceFeatureKind, type SurfaceFeatureOutline } from './surface-feature-types.js';
 
 const KINDS: readonly SurfaceFeatureKind[] = ['point', 'linear', 'region'];
 function object(value: unknown, label: string): Record<string, unknown> {

@@ -1,7 +1,6 @@
-import { PREPARED_CLUSTER_CATALOG_SCHEMA } from '@cssearth/objects';
+import { PREPARED_CLUSTER_CATALOG_SCHEMA, type PreparedClusterCatalog, type PreparedClusterRecord, type SpatialCatalogSource } from '@cssearth/objects';
 import { spatialPublicationId } from '@cssearth/catalog';
 import { M_PER_PC } from '@cssearth/astronomy';
-import type { PreparedClusterCatalog, PreparedClusterRecord, SpatialCatalogSource } from '@cssearth/objects';
 import { galaxyPositionM } from '../galaxy-catalog/index.ts';
 
 /** A cluster the recipe selects: its MCXC-II row, its Cosmicflows-4 group (the PGC number of the group's dominant galaxy),

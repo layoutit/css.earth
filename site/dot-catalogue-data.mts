@@ -1,7 +1,6 @@
-import { PREPARED_NEBULA_CATALOG_SCHEMA } from '@cssearth/objects';
+import { PREPARED_NEBULA_CATALOG_SCHEMA, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/objects';
 // Build-owned catalogue transport. The browser and native requests read the
 // same authenticated files; catalogue contents are not application JavaScript.
-import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/objects';
 import galaxies from '../src/objects/local-group-galaxies/prepared/catalogue.json' with { type: 'json' };
 import clusters from '../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
 
