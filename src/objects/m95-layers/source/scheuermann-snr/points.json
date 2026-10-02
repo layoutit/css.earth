@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "scheuermann-snr",
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F511%2F6087%2Ftable2%22+WHERE+Galaxy%3D%27NGC3351%27+AND+Type+LIKE+%27SNR%25%27",
+    "bytes": 426,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": 287,
+      "source": "kregel-2002-disc-flattening",
+      "basis": "The stellar disc's exponential scale height as its scale length over 7.3, the mean flattening Kregel et al. (2002) measured for edge-on discs, with Leroy et al.'s (2021) stellar scale length, 2.1 kpc at their 9.96 Mpc (43.5″): 287 pc. For young objects it is an upper value. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "scheuermann-2022-phangs-pne",
+  "meaning": "Supernova remnants of M95 that Scheuermann et al. (2022) separated from its planetary nebulae by their line ratios: one dot per remnant at its catalogue position.",
+  "appearance": {
+    "colorCss": "#9fe8ff",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the supernova-remnant colour M31's and M33's dots share. Each dot takes its tone and half its colour from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

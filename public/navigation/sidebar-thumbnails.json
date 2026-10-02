@@ -231,6 +231,14 @@
       "bytes": 33532
     },
     {
+      "path": "src/objects/m95-layers/prepared/presentation.json",
+      "bytes": 1399
+    },
+    {
+      "path": "public/scenes/m95-layers/datasets/optical.webp",
+      "bytes": 4326
+    },
+    {
       "path": "src/objects/ngc-1637-layers/prepared/presentation.json",
       "bytes": 1397
     },
@@ -261,6 +269,14 @@
     {
       "path": "public/scenes/ngc-300-layers/datasets/optical.webp",
       "bytes": 15188
+    },
+    {
+      "path": "src/objects/ngc-3521-layers/prepared/presentation.json",
+      "bytes": 1395
+    },
+    {
+      "path": "public/scenes/ngc-3521-layers/datasets/optical.webp",
+      "bytes": 7360
     },
     {
       "path": "src/objects/ngc-6744-layers/prepared/presentation.json",
@@ -336,11 +352,11 @@
     },
     {
       "path": "src/objects/milky-way-volume/prepared/backing.json",
-      "bytes": 1743
+      "bytes": 1800
     },
     {
       "path": "src/objects/milky-way-volume/source/backing/recipe.json",
-      "bytes": 2972
+      "bytes": 3369
     },
     {
       "path": "src/objects/milky-way-volume/prepared/backing/backing.webp",
@@ -348,7 +364,7 @@
     },
     {
       "path": "src/objects/local-group-galaxies/prepared/catalogue.json",
-      "bytes": 706269
+      "bytes": 706427
     }
   ],
   "images": {
@@ -865,6 +881,24 @@
       "credit": "Chris Mihos/ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1525a/"
     },
+    "m95-layers/optical": {
+      "url2x": "/navigation/focus-m95-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/m95-layers/prepared/presentation.json",
+        "public/scenes/m95-layers/datasets/optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+    },
+    "m95-layers": {
+      "url2x": "/navigation/focus-object-m95-layers@2x.webp",
+      "inputs": [
+        "src/objects/m95-layers/prepared/presentation.json",
+        "public/scenes/m95-layers/datasets/optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+    },
     "ngc-1637-layers/optical": {
       "url2x": "/navigation/focus-ngc-1637-layers-optical@2x.webp",
       "inputs": [
@@ -936,6 +970,24 @@
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1037a/"
+    },
+    "ngc-3521-layers/optical": {
+      "url2x": "/navigation/focus-ngc-3521-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-3521-layers/prepared/presentation.json",
+        "public/scenes/ngc-3521-layers/datasets/optical.webp"
+      ],
+      "credit": "ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso1129a/"
+    },
+    "ngc-3521-layers": {
+      "url2x": "/navigation/focus-object-ngc-3521-layers@2x.webp",
+      "inputs": [
+        "src/objects/ngc-3521-layers/prepared/presentation.json",
+        "public/scenes/ngc-3521-layers/datasets/optical.webp"
+      ],
+      "credit": "ESO",
+      "sourceUrl": "https://www.eso.org/public/images/eso1129a/"
     },
     "ngc-6744-layers/optical": {
       "url2x": "/navigation/focus-ngc-6744-layers-optical@2x.webp",
@@ -1132,10 +1184,12 @@
     "m81-layers": "m81-layers",
     "m83-layers": "m83-layers",
     "m87-volume": "m87-volume",
+    "m95-layers": "m95-layers",
     "ngc-1637-layers": "ngc-1637-layers",
     "ngc-253-layers": "ngc-253-layers",
     "ngc-2903-layers": "ngc-2903-layers",
     "ngc-300-layers": "ngc-300-layers",
+    "ngc-3521-layers": "ngc-3521-layers",
     "ngc-6744-layers": "ngc-6744-layers",
     "ngc-6946-layers": "ngc-6946-layers",
     "omega-centauri-volume": "omega-centauri-volume",
