@@ -1,9 +1,10 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 
 import {readFieldCatalogueTsv,mergeFieldCatalogue} from '@cssearth/nebula-reconstruction/stars/field-catalogue';
 export {readFieldCatalogueTsv,mergeFieldCatalogue,type ObservedFieldStar} from '@cssearth/nebula-reconstruction/stars/field-catalogue';
-const record = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+const record = coreIsRecord;
 const text = (v: unknown, label: string): string => { if (typeof v !== 'string' || !v) throw new TypeError(`Missing ${label}.`); return v; };
 /** Reproduce a bounded cone from its evidence file; a checked-in catalogue must be reproduced exactly. */
 export async function acquireFieldCatalogue(root: string, evidencePath: string) {

@@ -1,3 +1,4 @@
+import { readPositiveNumber } from '@cssearth/core';
 /** The arithmetic of stacking STIS long-slit line images of a moving target in the target's own frame.
  *
  * A long-slit exposure of a body that is smaller than the slit is already an image in one direction: along the slit the body
@@ -170,11 +171,7 @@ const ordered = (value: unknown, label: string): [number, number] => {
   if (!(low < high)) throw new TypeError(`${label} runs from low to high.`);
   return [low, high];
 };
-const positive = (value: unknown, label: string) => {
-  const number = requireFiniteNumber(value, label);
-  if (!(number > 0)) throw new TypeError(`${label} is positive.`);
-  return number;
-};
+const positive = (value: unknown, label: string) => { const number = requireFiniteNumber(value, label); return readPositiveNumber(number, label, () => { throw new TypeError(`${label} is positive.`); }); };
 
 /** A pinned stack definition, with every external value checked. */
 export function parseLineStack(value: unknown): LineStackDefinition {

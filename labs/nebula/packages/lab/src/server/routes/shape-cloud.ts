@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Explicit local jobs: validate the registered evidence, then bake and atomically publish one cloud. */
 import { readFile, mkdir, realpath, rename, rm, writeFile } from 'node:fs/promises';
 import { resolve, relative, dirname, isAbsolute } from 'node:path';
@@ -16,7 +17,7 @@ import { comparisonChannels, mapComparisonPins } from '../../features/shape-clou
 import type { ShapeCloudRequest, ShapeCloudPin, ShapeCloudResult } from '../../features/shape-cloud/types.ts';
 import { variantFor } from '../services/saved-variants.ts';
 
-const object = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const object = coreIsRecord;
 const path = (value: unknown): value is string => typeof value === 'string' && value.startsWith('.local/nebula-lab/') &&
   !/[\\?#\u0000]/.test(value) && value.split('/').every(part => part !== '..' && part !== '.' && part.length > 0);
 const cache = '.local/nebula-lab/shape-clouds';

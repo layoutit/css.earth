@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Node worker transport. Domain adapters validate progress and completion payloads. */
 import { spawn } from 'node:child_process';
 import { resolve } from 'node:path';
@@ -15,8 +16,7 @@ export interface WorkerOptions<Result> {
   onProgress: (event: Record<string, unknown>) => void;
   terminateGroup?: boolean;
 }
-const record = (value: unknown): value is Record<string, unknown> =>
-  !!value && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 
 export async function runProcessingWorker<Result>(options: WorkerOptions<Result>): Promise<Result> {
   const { root, signal, name } = options;

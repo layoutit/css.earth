@@ -1,9 +1,10 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import type { DetectionRequest } from './jobs-model.ts';
 import { readCloudJob, type CloudJob } from '../shape-cloud/shape-cloud-client';
 
 export type DetectionJob = CloudJob;
 export const detectionJobActive = (job: DetectionJob | null) => Boolean(job && ['queued', 'running', 'cancelling'].includes(job.status));
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 export class DetectionHttpError extends Error { readonly status: number; constructor(status: number, message: string) { super(message); this.status = status; } }
 
 /** Detaching a React observer leaves the server-owned detector running. */

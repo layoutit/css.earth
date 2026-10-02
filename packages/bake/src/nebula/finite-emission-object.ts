@@ -1,3 +1,4 @@
+import { isRecord, isNonemptyText } from '@cssearth/core';
 /** Restore a delivered finite-emission dataset bank from its checked-in compact inputs; no lab, no research services. */
 import assert from 'node:assert/strict';
 import { mkdir, readFile, rename, rm, readdir } from 'node:fs/promises';
@@ -10,11 +11,8 @@ import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index
 import { prepareVolumeAtlases } from '../density/index.ts';
 import { validatePreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 
-const record = (value: unknown, at: string): Record<string, unknown> => {
-  assert.ok(value && typeof value === 'object' && !Array.isArray(value), `Expected an object: ${at}`);
-  return value as Record<string, unknown>;
-};
-const text = (value: unknown, at: string): string => { assert.ok(typeof value === 'string' && value, `Expected text: ${at}`); return value; };
+const record = (value: unknown, at: string): Record<string, unknown> => { assert.ok(isRecord(value), `Expected an object: ${at}`); return value; };
+const text = (value: unknown, at: string): string => { assert.ok(isNonemptyText(value), `Expected text: ${at}`); return value; };
 const json = (bytes: Uint8Array, gzipped: boolean): unknown => JSON.parse((gzipped ? gunzipSync(bytes) : Buffer.from(bytes)).toString('utf8'));
 const stringify = (value: unknown) => Buffer.from(JSON.stringify(value, null, 2) + '\n');
 function parsePin(value: unknown, at: string): Pin {

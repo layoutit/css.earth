@@ -1,9 +1,10 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Source-pixel shape controls. Detection seeds the model; authored depth is never a measurement. */
 import type { GeometryCandidate, GeometryMap } from '../evidence/geometry/contracts.ts';
 import { ellipsePoint, radialError } from '@cssearth/nebula-reconstruction/evidence/geometry/ellipse';
 import type { ShapeCloudComponent, ShapeCloudSettings } from '@cssearth/objects';
 
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 const text = (value: unknown): value is string => typeof value === 'string' && value.length > 0 && value.length <= 120;
 function bounded(value: unknown, name: string, min: number, max: number): number {
   if (typeof value !== 'number' || !Number.isFinite(value) || value < min || value > max)

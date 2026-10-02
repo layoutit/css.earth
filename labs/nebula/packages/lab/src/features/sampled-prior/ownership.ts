@@ -1,8 +1,9 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Shared browser/CLI boundary for the source owners of a sampled-volume preparation, named by path. Git identifies the code. */
 export interface SampledOwnerPin { path: string }
 /** The shared FITS reader a sampled preparation reads its point source through. */
 export const isSampledFitsOwner = (path: string) => path === 'packages/fits/src/fits.ts' || path === 'packages/fits/src/transport.ts';
-const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
+const record = coreIsRecord;
 function pin(v: unknown, field: string): SampledOwnerPin {
   if (!record(v) || typeof v.path !== 'string' || !/^(labs\/nebula\/|\.local\/nebula-lab\/)/.test(v.path) ||
       /[\\?#\s]/.test(v.path) || v.path.split('/').some(p => !p || p === '..') || Object.keys(v).join() !== 'path')

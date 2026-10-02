@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import sharp from 'sharp';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import { readGeometryPin } from '../geometry/registered-source.ts';
@@ -10,7 +11,7 @@ import type { PreparedCssVolume } from '../../../adapters/renderer/volume-types.
 import type { CompilerBakeResult, CompilerPin } from '@cssearth/objects';
 
 type BankIdentity = Pick<CompilerBakeResult, 'id' | 'volumeId' | 'frame' | 'fieldIdentity'>;
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 
 /** The neutral bank and every dataset belong to the scene's volume, frame and fitted field. */
 export function assertCompilerBankIdentity(payload: PreparedCssVolume, result: BankIdentity) {

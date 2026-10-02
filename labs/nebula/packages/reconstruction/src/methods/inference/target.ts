@@ -1,10 +1,11 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import type { EvidenceInputs } from '../../evidence/model.ts';
 import { createEmissionWindowSampler, readEmissionWindow, type EmissionWindow } from '@cssearth/bake/volume';
 import { type SkyBounds } from '@cssearth/objects';
 
 export interface CompilerTargetSourceControls { backgroundSpread: number; edgeTaperArcsec: number }
 export interface CompilerTargetControls { sources: Record<string, CompilerTargetSourceControls>; minimumWeightNormalization?: number }
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 const range = (value: unknown, min: number, max: number): value is number => typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max;
 export function readCompilerTargetControls(value: unknown): CompilerTargetControls {
   if (!record(value) || Object.keys(value).some(key => !['sources', 'minimumWeightNormalization'].includes(key)) || !record(value.sources) || Object.keys(value.sources).length > 8 ||

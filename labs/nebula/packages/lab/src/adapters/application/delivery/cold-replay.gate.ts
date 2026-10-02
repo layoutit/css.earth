@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { nebulaBakeBackend } from '@cssearth/bake/nebula';
 /** Explicit expensive gate (not default unit-test discovery):
  * node labs/nebula/packages/lab/src/adapters/application/delivery/run-cold-replay.mts --timeout-seconds 1800
@@ -16,7 +17,7 @@ import { readCompilerBakeResult } from '@cssearth/objects';
 import { assertReplayScene, verifyReplayFiles } from './cold-replay-parity.ts';
 
 const ids = ['m42', 'helix', 'm45', 'm8', 'm1'];
-const isRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
+const isRecord = coreIsRecord;
 const record = (v: unknown): Record<string, unknown> => { assert.ok(isRecord(v)); return v; };
 const pin = (v: unknown): { path: string } => {
   const p = record(v);

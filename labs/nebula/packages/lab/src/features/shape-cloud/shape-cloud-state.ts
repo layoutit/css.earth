@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { GeometryMap } from '../observations/models/geometry-model';
 import type { StructureImage } from '../observations/models/structures-model';
@@ -26,7 +27,7 @@ export function editShapeComponents(settings: ShapeCloudSettings, selected: Shap
 const message = (error: unknown) => error instanceof Error ? error.message : 'Cloud preview failed.';
 type Scheduler = ReturnType<typeof createShapeCloudScheduler<ShapeCloudSettings, ShapeCloudResult>>;
 const settingsKey = (value: ShapeCloudSettings) => JSON.stringify(value);
-const object = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const object = coreIsRecord;
 
 /** Input schedules bounded drafts; release schedules a detailed result. Mount only observes a saved job before deciding whether work is needed. */
 export function useShapeCloudState(image: StructureImage, geometry: GeometryMap, cataloguePath: string, initialQuality: PreviewQuality = 'detailed', preset?: { id: string; settings: ShapeCloudSettings }) {

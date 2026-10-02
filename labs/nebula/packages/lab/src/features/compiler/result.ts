@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 import { readCompilerControls, type CompilerControls } from './model.ts';
 import { jointRecord, jointPath } from '../joint-fit/model.ts';
 import { readCompilerBakeResult, type CompilerBakeResult, type CompilerPin, type SkyBounds } from '@cssearth/objects';
@@ -10,7 +11,7 @@ export interface CompilerResult { schema: 'cssearth-nebula-compiler-result@1'; i
   inspectionBoundsArcsec?: SkyBounds;
   metrics: { components: number; unconstrainedComponents: number; stars: number; fitRmse: number; baselineRmse: number; missingSignalFraction: number; excessSignalFraction: number };
   model: CompilerPin; method: CompilerPin; target: CompilerPin; projection: CompilerPin; residual: CompilerPin; interpretation: string }
-const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+const finite = coreIsFiniteNumber;
 /** A compiler result is named by its recipe id. */
 const resultName = (v: unknown): v is string => typeof v === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(v);
 function pin(v: unknown): CompilerPin {

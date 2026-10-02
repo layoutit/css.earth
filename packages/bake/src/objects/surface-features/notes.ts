@@ -1,3 +1,4 @@
+import { readNonArrayRecord, readTextAllowEmpty } from '@cssearth/core';
 // Pin source-backed notes for named surface features: each IAU Gazetteer feature id is joined to its Wikidata item
 // (property P2824) and, when an English Wikipedia article exists, to that article's lead summary. The result is a
 // repository-pinned document beside the Gazetteer archive; preparation merges it into the feature catalogue and the
@@ -11,9 +12,9 @@ import { FEATURE_NOTES_SCHEMA, parseFeatureNotes, trimExtract, type FeatureNote,
 import { isRecord } from '@cssearth/core';
 
 
-const requireRecord = (value: unknown, label = 'Source value'): Record<string, unknown> => { if (!isRecord(value)) throw new TypeError(`${label} must be an object.`); return value; };
+const requireRecord = (value: unknown, label = 'Source value'): Record<string, unknown> => { return readNonArrayRecord(value, label, () => { throw new TypeError(`${label} must be an object.`); }); };
 const requireArray = (value: unknown, label = 'Source value'): unknown[] => { if (!Array.isArray(value)) throw new TypeError(`${label} must be an array.`); return value; };
-const requireString = (value: unknown, label = 'Source value'): string => { if (typeof value !== 'string') throw new TypeError(`${label} must be a string.`); return value; };
+const requireString = (value: unknown, label = 'Source value'): string => { return readTextAllowEmpty(value, label, () => { throw new TypeError(`${label} must be a string.`); }); };
 const USER_AGENT = 'cssEarth/0.6 (https://github.com/layoutit/css.earth; feature notes preparation)';
 const WIKIDATA_QUERY = 'SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }';
 

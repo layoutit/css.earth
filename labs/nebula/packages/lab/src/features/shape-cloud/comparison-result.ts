@@ -1,6 +1,7 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import type { ShapeCloudComparison, ShapeCloudPin } from './types.ts';
 
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 const nonnegative = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value) && value >= 0;
 export const comparisonChannels = ['source', 'model', 'sourceEdges', 'modelEdges', 'difference'] as const;
 export const comparisonGains = [1, 2, 4, 8] as const;

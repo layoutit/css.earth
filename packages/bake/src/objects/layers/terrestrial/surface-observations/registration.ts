@@ -1,3 +1,4 @@
+import { isFiniteNumber } from '@cssearth/core';
 /**
  * The registration stage: every camera route is measured after it loads, the same way, and the numbers go into the
  * dataset report instead of a body's prose.
@@ -88,7 +89,7 @@ export const VERDICT_DEGREES = 3;
  */
 export function offsetAgreementDegrees(frames: readonly { decisive?: boolean; exact?: { offsetDegrees: number } }[], minimumFrames: number) {
   const offsets = frames.filter(frame => frame.decisive).map(frame => frame.exact?.offsetDegrees)
-    .filter((value): value is number => typeof value === 'number' && Number.isFinite(value));
+    .filter(isFiniteNumber);
   if (offsets.length < minimumFrames) return null;
   const sorted = [...offsets].sort((a, b) => a - b), median = sorted[Math.floor(sorted.length / 2)];
   return Math.max(...sorted.map(value => Math.abs(value - median)));

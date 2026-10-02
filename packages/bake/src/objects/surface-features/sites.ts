@@ -1,3 +1,4 @@
+import { readNonblankText, readFiniteNumber, readNonArrayRecord } from '@cssearth/core';
 // Spacecraft landing, touchdown and impact sites, and rover or crew traverses, as surface-feature rows. The per-body
 // document is repository-authored: every coordinate quotes the public page it was read from (NASA NSSDCA, PDS, LROC,
 // mission releases, papers) and the traverse paths are pinned data products (PDS PLACES localisation tables, LROC
@@ -33,10 +34,10 @@ export interface SiteRow {
   readonly note: { readonly text: string; readonly title: string; readonly url: string; readonly credit: string } | null; readonly facilityId: string | null;
 }
 
-const text = (value: unknown, label: string): string => { if (typeof value !== 'string' || !value.trim()) throw new TypeError(`${label} must be a non-empty string.`); return value; };
+const text = (value: unknown, label: string): string => { return readNonblankText(value, label, () => { throw new TypeError(`${label} must be a non-empty string.`); }); };
 const optionalText = (value: unknown, label: string): string | null => value === null || value === undefined ? null : text(value, label);
-const finite = (value: unknown, label: string): number => { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${label} must be finite.`); return value; };
-const record = (value: unknown, label: string): Record<string, unknown> => { if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new TypeError(`${label} must be an object.`); return value as Record<string, unknown>; };
+const finite = (value: unknown, label: string): number => { return readFiniteNumber(value, label, () => { throw new TypeError(`${label} must be finite.`); }); };
+const record = (value: unknown, label: string): Record<string, unknown> => { return readNonArrayRecord(value, label, () => { throw new TypeError(`${label} must be an object.`); }); };
 const relativePath = (value: unknown, label: string): string => { const path = text(value, label); if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError(`${label} must stay inside the source directory.`); return path; };
 const date = (value: unknown, label: string): string => { const iso = text(value, label); if (!/^\d{4}(-\d{2}(-\d{2})?)?$/u.test(iso)) throw new TypeError(`${label} must be an ISO date.`); return iso; };
 function parseSource(value: unknown, label: string): SiteSource {

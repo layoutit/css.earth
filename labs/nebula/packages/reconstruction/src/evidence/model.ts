@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import type { Affine as Matrix } from '../registration/affine.ts';
 
 export const evidenceChannels = ['broad', 'ridges', 'compact'] as const;
@@ -31,7 +32,7 @@ export interface CombinedEvidence {
   planes: Float32Array[]; coverage: Uint8Array[];
   union: Float32Array; agreement: Float32Array; contributors: Uint8Array;
 }
-const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 const channel = (value: unknown): value is EvidenceSettings['channel'] => value === 'all' || evidenceChannels.some(id => id === value);
 export function readEvidenceSettings(value: unknown, sourceCount: number): EvidenceSettings {
   if (!record(value) || !channel(value.channel) ||

@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { createConcurrencyLimit } from './concurrency.ts';
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
@@ -25,7 +26,7 @@ export interface CloudDensityStats { native: boolean; resources: number; density
 
 /** A cache file name for one prepared resource path. */
 const cacheName = (path: string) => path.replace(/[^A-Za-z0-9._-]+/gu, '__');
-const record = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+const record = coreIsRecord;
 const px = (value: unknown): number => {
   const match = typeof value === 'string' && /^(-?(?:\d+\.?\d*|\.\d+))px$/u.exec(value.trim());
   if (!match) throw new TypeError('Cloud leaf geometry requires finite pixel lengths.');

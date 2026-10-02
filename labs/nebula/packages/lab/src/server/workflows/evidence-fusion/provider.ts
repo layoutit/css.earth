@@ -1,3 +1,4 @@
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { evidenceGrid, samplingArcseconds } from '@cssearth/nebula-reconstruction/evidence/grid';
 export {evidenceGrid} from '@cssearth/nebula-reconstruction/evidence/grid';
 /** Server/offline only: reads the NOX-derived working rasters, never native processing. */
@@ -16,7 +17,7 @@ export const evidenceMethodVersion = 'registered-multiscale-evidence@1';
 export interface PrepareEvidenceOptions { imageToFrame?: Record<string, Matrix> }
 const limitation = 'Uses the ~768px NOX-derived working rasters. Common angular smoothing accounts for working-pixel sampling using a 0.7-pixel blur proxy; instrumental PSFs are unknown. Small native knots and calibrated flux cannot be recovered.';
 
-function isRecord(value: unknown): value is Record<string, unknown> { return value !== null && typeof value === 'object' && !Array.isArray(value); }
+const isRecord = coreIsRecord;
 function cachedInputs(value: unknown, expected: string, grid: EvidenceGrid, count: number): value is EvidenceInputs {
   if (!isRecord(value) || value.identity !== expected || !isRecord(value.grid) || JSON.stringify(value.grid) !== JSON.stringify(grid) ||
       !Array.isArray(value.sources) || value.sources.length !== count || !isRecord(value.method) || value.method.version !== evidenceMethodVersion) return false;

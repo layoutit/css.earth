@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber, isRecord as coreIsRecord } from '@cssearth/core';
 import type { Matrix } from '../observations/models/model.ts';
 import { isVariantName } from '../variant-name.ts';
 
@@ -15,12 +16,12 @@ export interface FusionResult {
   sources: { id: string; label: string; color: string; source: FusionAsset; evidence: FusionAsset }[];
   union: FusionAsset; agreement: FusionAsset; colors: FusionAsset; samples: FusionAsset;
 }
-export const fusionRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
+export const fusionRecord = coreIsRecord;
 /** Fusion results and their input sets are named local variants. */
 export const fusionName = isVariantName;
 export const fusionPath = (v: unknown): v is string => typeof v === 'string' && v.startsWith('.local/nebula-lab/') &&
   !/[\\:?#]/.test(v) && v.split('/').every(part => part && part !== '..' && part !== '.');
-const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+const finite = coreIsFiniteNumber;
 const matrix = (v: unknown): v is Matrix => Array.isArray(v) && v.length === 6 && v.every(finite) && Math.abs(v[0] * v[3] - v[1] * v[2]) > 1e-12;
 export function readFusionSettings(v: unknown): FusionRequest['settings'] {
   if (!fusionRecord(v) || !['all','broad','ridges','compact'].includes(String(v.channel)) || !Array.isArray(v.weights) ||

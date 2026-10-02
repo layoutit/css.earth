@@ -1,3 +1,4 @@
+import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 import { jointPath, jointRecord, readJointControls, readJointParameters, type JointControls, type JointFit } from './model.ts';
 import { readJointVolumeResult, type JointVolumeResult } from '@cssearth/objects';
 import { isVariantName } from '../variant-name.ts';
@@ -11,7 +12,7 @@ export interface JointResult {
   accounting: { ridgePoints: number; excludedRidgePoints: number; pointings: number; components: number; upperLimits: number; evaluatedModels: number; beamFwhmArcsec: number };
   inputIdentity: string; interpretation: string;
 }
-const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+const finite = coreIsFiniteNumber;
 function pin(v: unknown): JointPin {
   if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith('.local/nebula-lab/') || Object.keys(v).join() !== 'path') throw new TypeError(`Invalid joint result asset: ${JSON.stringify(v)}`);
   return { path: v.path };
