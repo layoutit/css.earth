@@ -1,3 +1,4 @@
+import { eyeDistanceM } from '@cssearth/engine';
 import { cross3 as cross } from '@cssearth/core';
 import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';
 import type { PositionM } from '@cssearth/engine';
@@ -112,7 +113,7 @@ export function categoryZoomTarget(classification: string, from: WorldCameraPose
 
 /** Fit the volume along the current viewing ray, keeping its anchor and orientation. */
 export function volumeZoomTarget(from: WorldCameraPose, volume: DensityVolumeFrame, optics: Optics, rect: MapViewport, referencePositionM: PositionM) {
-  const range = Math.hypot(...from.pose.positionM.map((value, axis) => value - referencePositionM[axis]));
+  const range = eyeDistanceM(from.pose, referencePositionM);
   const [ox, oy] = (optics.principalOffsetPixels ?? [0, 0]), focal = optics.focalPixels;
   const ray = [ox / focal, oy / focal, 1];
   const depth = range / Math.hypot(...ray);
@@ -178,7 +179,7 @@ export function systemViewTarget(from: WorldCameraPose, frame: FramingFrame, opt
   const offset = rotateWorldPosition(cameraToReference, [ox / focal * depth, oy / focal * depth, depth]);
   return { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
     pose: { positionM: tuple(axis => frame.originM[axis] + offset[axis]),
-      orientationXyzw } };
+      orientationXyzw, focusOffset: { originM: frame.originM, offsetM: offset } } };
 }
 
 /** The departure angle, unless it sees the orbits nearly edge-on: a transiting system seen from the Sun is a line. Such a

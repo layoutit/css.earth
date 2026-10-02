@@ -1,3 +1,4 @@
+import { fromEyeM } from '@cssearth/engine';
 import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
@@ -29,7 +30,7 @@ export function placeSelectedBodyLabel(world: WorldCameraPose, viewport: WorldCa
   // The caption stays below the shell header where the viewport measures one, else below a fixed clearance.
   const headerClearance = viewport.coveredTopPixels ?? HEADER_CLEARANCE_PX;
   if (!(widthPixels && heightPixels && viewport.focalPixels > 0)) return null;
-  const delta = body.positionM.map((value, axis) => value - world.pose.positionM[axis]!);
+  const delta = fromEyeM(world.pose, body.positionM);
   const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
   const eyeX = rotation[0]! * delta[0]! + rotation[1]! * delta[1]! + rotation[2]! * delta[2]!;
   const eyeY = rotation[3]! * delta[0]! + rotation[4]! * delta[1]! + rotation[5]! * delta[2]!;

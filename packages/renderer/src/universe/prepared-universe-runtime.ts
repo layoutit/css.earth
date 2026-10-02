@@ -1,4 +1,4 @@
-import { createSceneLifetime } from '@cssearth/engine';
+import { createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { mountBackgroundPoints } from './background-points.js';
 import { fetchPreparedCatalogueBank, fetchPreparedJson } from './catalogue-points.js';
@@ -322,7 +322,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           publish(world: WorldCameraPose, viewport: WorldCameraViewport, frame: WorldContextFrame, shellVisibility: Readonly<Record<string, boolean>> = {}) {
             if (lifetime.disposed) return;
             opacityClock.batch(() => {
-              const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
+              const distanceM = eyeDistanceM(world.pose, plan.focus.positionM);
               // A companion that is its scene's whole subject (a galaxy's layers, a nebula's volume) is framed as a body is, by
               // the selected body's place and radius, and the context gives way to it. A volume attached to a body (a star's
               // disc) and a bank of dots (a cluster's members) show beside what is there and dim nothing. Until the scene's
@@ -332,7 +332,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const detailContextOpacity = detailedFocusContextOpacity(world, detailedFocus?.focus ?? null);
               if (detailContextOpacity > 0) background.prefetch(distanceM);
               const outsideGalaxy = galaxyOutsideFade(
-                Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]!)), plan.volume.discHalfHeightM);
+                eyeDistanceM(world.pose, selected.positionM), plan.volume.discHalfHeightM);
               additionalPoints.publish({world, viewport}, distanceM, outsideGalaxy);
               // Past halfway out the galaxy is seen whole, as the universe background draws it (universe-background.ts).
               spatial.setOutsideGalaxy(outsideGalaxy > .5);
@@ -349,7 +349,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               // the body's own system, over the band the stellar neighbourhood takes around the Sun.
               const insideGalaxy = catalogBanks.imageBankContaining(selected.positionM);
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId, insideGalaxy === undefined || insideGalaxy === detailedFocus?.objectId ? undefined
-                : { objectId: insideGalaxy, opacity: logarithmicFade(Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]!)), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) });
+                : { objectId: insideGalaxy, opacity: logarithmicFade(eyeDistanceM(world.pose, selected.positionM), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) });
               catalogBanks.publishPoints(world, viewport, companion ?? undefined, selectedSystem);
               datasets.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,
                 selectedBodyContextOpacity(world, viewport, captionBody));

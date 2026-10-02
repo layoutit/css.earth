@@ -1,3 +1,4 @@
+import { eyeDistanceM } from '@cssearth/engine';
 import { createContextLocator } from './context-locator.js';
 import type { PreparedWorldContext, PreparedContextBody } from '../prepared-data/world-context.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
@@ -539,7 +540,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       const { ranksChanged, changed: depthChanged } = depthOrder.update(world.pose.orientationXyzw, rotating, selectedEntry);
       const { emphasizedId, width, height } = frame;
       // Inside the focus star's system, other systems' bodies stay clickable but read as not belonging to it.
-      const starField = starFieldFade(Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]!)), plan.system);
+      const starField = starFieldFade(eyeDistanceM(world.pose, plan.focus.positionM), plan.system);
       const otherSystemOpacity = systemFade.of(0) > .5
         ? OTHER_SYSTEM_OPACITY + (1 - OTHER_SYSTEM_OPACITY) * Math.round(starField * OTHER_SYSTEM_STEPS) / OTHER_SYSTEM_STEPS : 1;
       cameraState.set(world.pose.positionM, 0); cameraState.set(world.pose.orientationXyzw, 3);

@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 69.31636835083003,
+  "declinationDegrees": -4.758584361110004,
+  "displayMeridianDegrees": 90,
+  "phase": "arbitrary-display-phase",
+  "source": "North rotation pole 137.506 degrees from the line of sight toward Earth: Reardon et al. (2024), ApJL 971, L18, Table 1, PPTA-DR3: spin frequency, and the orbital inclination 137.506(16) degrees that Choudhury et al. (2024) use as the spin axis's inclination (https://arxiv.org/abs/2407.07132). The direction of the axis on the sky is not used from any measurement; it is tilted toward celestial north as a convention: sin(i) x sky-north + cos(i) x (direction to Earth), RA 69.3164, Dec -4.7586. Longitude 0 is the meridian that faces Earth, the fit's phase zero.",
+  "coordinateSystem": "ICRF/J2000. +Z is the north rotation pole above; +X is the display meridian, set so that longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
+  "qualification": "The tilt of the axis is published; its position angle on the sky is a display convention. PSR J0437−4715 turns 173.7 times a second, so the star is drawn at one instant: the fit's phase zero."
+}

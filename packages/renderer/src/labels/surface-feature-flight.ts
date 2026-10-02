@@ -1,5 +1,5 @@
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-import { composeDragRotation } from '@cssearth/engine';
+import { composeDragRotation, eyeDistanceM, fromEyeM } from '@cssearth/engine';
 import type { OrientationXyzw, PositionM } from '@cssearth/engine';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
@@ -11,8 +11,8 @@ const unitQuaternion = (q: readonly number[]): OrientationXyzw => { const length
 /** The rotation that carries the observer from above one surface direction to above another,
  * the same navigation the shell minimap applies: distance, framing and roll are preserved. */
 export function surfaceOrbitRotation(world: WorldCameraPose, originM: PositionM, targetDirection: PositionM): OrientationXyzw {
-  const eye = world.pose.positionM;
-  const from = unit([eye[0] - originM[0], eye[1] - originM[1], eye[2] - originM[2]]), to = unit(targetDirection);
+  const fromOrigin = fromEyeM(world.pose, originM);
+  const from = unit([0 - fromOrigin[0], 0 - fromOrigin[1], 0 - fromOrigin[2]]), to = unit(targetDirection);
   const rotation = [...cross(from, to), 1 + dot(from, to)];
   if (Math.hypot(...rotation) < 1e-8) return [...unit(cross(from, Math.abs(from[0]) < .9 ? [1, 0, 0] : [0, 1, 0])), 0];
   return unitQuaternion(rotation);
@@ -24,8 +24,8 @@ export function surfaceOrbitPose(world: WorldCameraPose, originM: PositionM, rot
   const axisLength = Math.hypot(x, y, z);
   const partial: OrientationXyzw = axisLength < 1e-12 ? [0, 0, 0, 1]
     : [x / axisLength * Math.sin(share * angle / 2), y / axisLength * Math.sin(share * angle / 2), z / axisLength * Math.sin(share * angle / 2), Math.cos(share * angle / 2)];
-  const eye = world.pose.positionM;
-  const relative = unit([eye[0] - originM[0], eye[1] - originM[1], eye[2] - originM[2]]);
+  const fromOrigin = fromEyeM(world.pose, originM);
+  const relative = unit([0 - fromOrigin[0], 0 - fromOrigin[1], 0 - fromOrigin[2]]);
   const direction = rotateWorldPosition(worldRotationFromQuaternion(partial), relative);
   return { ...world, pose: {
     positionM: [originM[0] + direction[0] * distanceM, originM[1] + direction[1] * distanceM, originM[2] + direction[2] * distanceM],
@@ -46,7 +46,7 @@ export function flyToSurfaceDirection(navigation: ObjectWorldNavigation, { direc
   const origin = navigation.frame.originM;
   const start = navigation.capture();
   const rotation = surfaceOrbitRotation(start, origin, directionWorld);
-  const startDistance = Math.hypot(start.pose.positionM[0] - origin[0], start.pose.positionM[1] - origin[1], start.pose.positionM[2] - origin[2]);
+  const startDistance = eyeDistanceM(start.pose, origin);
   const duration = reducedMotion ? 0 : Math.max(0, durationMilliseconds);
   const ease = (t: number) => t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
   const flight = navigation.motion.fly({ windowTarget, signal, durationMilliseconds: duration, sample(progress, signal) {
