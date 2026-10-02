@@ -8,8 +8,7 @@ did before.
 
 These wait:
 
-- the galaxy's catalogue dots (`milky-way/prepared/dots.bin`, `old-star-dots.bin`, `globular-clusters.bin` and
-  `nuclear-cluster.bin`)
+- the galaxy's catalogue dots (`milky-way/prepared/dots.bin`, `old-star-dots.bin` and `globular-clusters.bin`)
 - the galaxies beyond and every other catalogue point bank
 - the celestial sky cube's faces (`milky-way/prepared/sky/*.webp`)
 - the galaxy's face-on backing image

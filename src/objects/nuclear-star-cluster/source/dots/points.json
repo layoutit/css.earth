@@ -1,11 +1,11 @@
 {
   "schema": "cssearth-catalogue-points-source@1",
-  "id": "nuclear-cluster",
+  "id": "dots",
   "published": true,
   "table": {
     "path": "sample.csv.gz",
     "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/631/A20/central&-c=266.4168166%20-29.0078250&-c.rm=6&-out=RAJ2000,DEJ2000,Jmag,Hmag,Ksmag&-out.max=999999&Ksmag=%3C16",
-    "generator": "packages/bake/authoring/milky-way/nuclear-cluster-sample.mts",
+    "generator": "packages/bake/authoring/nuclear-star-cluster/sample.mts",
     "bytes": 85556,
     "format": "csv",
     "gzip": true,
@@ -16,7 +16,7 @@
       "Ksmag": 4
     }
   },
-  "sample": "The tracked file keeps 5,610 of the 155,866 stars the GALACTICNUCLEUS central catalogue lists within 6 arcminutes of Sgr A* brighter than Ks 16 (nuclear-cluster-sample.mts): those brighter than Ks 14, where the survey is as complete in the crowded centre as around it, and redder than H - Ks 1.3, the Galactic centre's own stars; inside two half-light radii of the cluster, on ellipses flattened 0.71 along the Galactic plane; each kept with the chance that it is the cluster's, one minus the star density of the 5 to 6 arcminute ring over that of its own half-arcminute ring (0.88 at the centre, 0.11 at the edge), drawn by its position; with a name from its position, RA, DEC and Ks.",
+  "sample": "The tracked file keeps 5,610 of the 155,866 stars the GALACTICNUCLEUS central catalogue lists within 6 arcminutes of Sgr A* brighter than Ks 16 (sample.mts): those brighter than Ks 14, where the survey is as complete in the crowded centre as around it, and redder than H - Ks 1.3, the Galactic centre's own stars; inside two half-light radii of the cluster, on ellipses flattened 0.71 along the Galactic plane; each kept with the chance that it is the cluster's, one minus the star density of the 5 to 6 arcminute ring over that of its own half-arcminute ring (0.88 at the centre, 0.11 at the edge), drawn by its position; with a name from its position, RA, DEC and Ks.",
   "filters": [],
   "frame": {
     "input": "icrs",

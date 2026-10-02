@@ -21,7 +21,6 @@ Nobody has seen the Milky Way from outside. cssEarth draws its bulge as a simula
 | [Gaia RR Lyrae](source/gaia-rr-lyrae/points.json) | Li et al. (2023), Gaia DR3 photometric distances | Beyond 3 kpc of the centre, thinning outward, one in 8 |
 | [Stars within 100 pc](source/nearby-stars/points.json), [the sky sample](source/nearby-stars-sky/points.json), [within 20 pc](source/nearby-stars-20pc/points.json) | Gaia Catalogue of Nearby Stars (2021) | One row in 64; one in 16; every row within 20 pc |
 | [Globular clusters](source/globular-clusters/points.json) | Baumgardt & Vasiliev (2021) | All 165, drawn as their own bank |
-| [Nuclear star cluster](source/nuclear-cluster/points.json) | GALACTICNUCLEUS (Nogueras-Lara et al. 2019), central field | 5,610 stars within 10 pc of Sgr A*, drawn as their own bank; depth modelled |
 
 ## Processing
 
@@ -46,8 +45,6 @@ Add `--acquire-source .local/volume-source-cache` to `prepare:volume` to reacqui
 
 Inside the Solar System a faint 30% of the dots stays, so its sky is never empty; they rise to full from about Neptune's orbit and are whole by 670 AU. The overview reads Solar System until the planets fade, Milky Way while inside the galaxy, and Local Group about 19 kpc out.
 
-**Nuclear star cluster.** A fourth bank draws the cluster around Sgr A*, in parsecs around the black hole, so its stars and the [S-stars](../sgr-a-star/README.md) share a frame. [`nuclear-cluster-sample.mts`](../../../packages/bake/authoring/milky-way/nuclear-cluster-sample.mts) keeps the survey's stars brighter than Ks 14 and redder than H − Ks 1.3 (the Galactic centre's own, behind its dust) inside two half-light radii, and thins them to the cluster's share of the star counts: one minus the density of the ring 5 to 6 arcminutes out over the density of each star's own ring, 0.88 at the centre and 0.11 at the edge. Each star keeps its measured sky position. **Its depth is modelled, not measured:** drawn along the sight line from Gallego-Cano et al.'s (2020) Sérsic fit to the cluster (half-light radius 5.1 pc, index 2.2, flattened 0.71 along the Galactic plane). Tone follows Ks as observed, through the dust. The bank is whole within 100 pc of Sgr A* and fades out as it shrinks to a few pixels.
-
 **Backing.** [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) grades and crops the ESA image into one 2048 px plane. Close up its texels (19.9 pc each) blow up and blur, so the [recipe](source/backing/recipe.json) also bakes three rings of the same image about the centre and fades each on its own: the outer disc around the Sun goes entirely between 12 and 1.5 kpc from the viewed body, while the rings step down to 45 % (to 7 kpc), 70 % (to 5 kpc) and 100 % (the bulge, to 3 kpc) between 20 and 3 kpc. Around the centre those rings would fill the view as a blur, so every layer fades out as the camera closes on Sgr A* from 1.5 to 0.3 kpc. From among the local stars the flat plane is edge-on, a line across the view, so it fades in only as the camera pulls out from 0.05 to 5 pc. These are presentation choices.
 
 ## Evidence
@@ -60,14 +57,9 @@ Along one zoom path from 26,000 ly to 0.7 ly the Milky Way's dots on screen stay
 
 Four browser captures of this version zoom out from the Sun along one line of sight. Near the Sun the census dots are mostly dim red dwarfs. From 2,100 light-years the disc's hot stars gather toward its far side, as the Milky Way does in our sky. From 39,500 light-years the tracers and the RR Lyrae bulge sit on the backing around Sgr A*. No level's edge is on screen. They check the displayed composition, not frame rate.
 
-![The nuclear star cluster around Sgr A*, from two directions](evidence/2026-10-01/nuclear-cluster.jpg)
-
-The nuclear star cluster on the Sgr A* page, zoomed out to a 10 light-year scale bar, before and after a quarter turn. From outside its reach the app draws about one dot per 8 px, so these views show a share of the 5,610 stars; the backing image is faded out this close to the centre.
-
 ## Known problems
 
 - Dust hides the far side of the disc: past 4 to 6 kpc from the Sun the catalogues thin out, so the Sun's side is fuller. Distances carry their catalogues' errors. The disc has no warp.
-- Dust clouds in front of the nuclear star cluster hide its stars south-west of Sgr A*: 1 to 3 arcminutes out, the survey lists a third as many there as on the other sides. Because depth is drawn along each sight line, those gaps run through the cluster as empty lanes when it is seen from the side. Stars of the nuclear disc and bulge that the thinning keeps are drawn inside the cluster. The survey saturates on the brightest stars, so they are missing.
 - The volume slices keep finite-slice and axis-handoff artifacts and do not reproduce OpenSpace's additive HDR raymarching.
 - The colour grade matches the NASA palette, not its morphology or photometry.
 - The sky is a display fit, not calibrated photometry. Faint Gaia stars remain in it.

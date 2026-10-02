@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/authoring/milky-way/nuclear-cluster-sample.mts [central.tsv]
+// Entry script: node packages/bake/authoring/nuclear-star-cluster/sample.mts [central.tsv]
 /**
  * The Milky Way's nuclear star cluster sample: the stars of the GALACTICNUCLEUS survey (Nogueras-Lara et al. 2019, A&A
  * 631, A20, central field) around Sagittarius A*, thinned to the cluster's own share of the star counts.
@@ -6,7 +6,7 @@
  * Input: the survey's central catalogue within 6 arcminutes of Sgr A* and brighter than Ks 16, as VizieR serves it, by
  * default `output/sgr/gns6.tsv`, from
  * https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/631/A20/central&-c=266.4168166%20-29.0078250&-c.rm=6&-out=RAJ2000,DEJ2000,Jmag,Hmag,Ksmag&-out.max=999999&Ksmag=%3C16
- * Output: `src/objects/milky-way/source/nuclear-cluster/sample.csv.gz`. It prints what it kept.
+ * Output: `src/objects/nuclear-star-cluster/source/dots/sample.csv.gz`. It prints what it kept.
  *
  * - A star is kept when it is redder than H - Ks 1.3: the survey's stars split there into the dust-reddened stars of the
  *   Galactic centre and the bluer stars in front of it (in this field 637 of the 25,661 stars brighter than Ks 14 are bluer
@@ -30,7 +30,7 @@ import { gzipSync } from 'node:zlib';
 
 const repository = resolve(import.meta.dirname, '../../../..');
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/sgr/gns6.tsv'));
-const outputPath = resolve(repository, 'src/objects/milky-way/source/nuclear-cluster/sample.csv.gz');
+const outputPath = resolve(repository, 'src/objects/nuclear-star-cluster/source/dots/sample.csv.gz');
 const CENTRE_RA_DEG = 266.4168166, CENTRE_DEC_DEG = -29.0078250, DISTANCE_PC = 8277, HALF_LIGHT_PC = 5.1, AXIS_RATIO = 0.71;
 const MIN_H_KS = 1.3, MAX_KS = 14, RING_ARCMIN = 0.5, BACKGROUND_ARCMIN = [5, 6] as const, CUTOFF_HALF_LIGHT_RADII = 2;
 // The north Galactic pole in ICRS (the IAU 1958 system as Astropy's Galactic frame defines it).

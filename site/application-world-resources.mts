@@ -144,9 +144,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       stellarExtents: STELLAR_EXTENTS,
       // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
       // Cepheids), star-forming regions on both sides of the centre (Anderson et al. 2014 WISE HII regions, Reid et al.
-      // 2019 maser parallaxes), the local arms (Hunt & Reffert 2023 open clusters) and the halo (Baumgardt & Vasiliev 2021);
-      // and the nuclear star cluster around Sgr A* (Nogueras-Lara et al. 2019), its own bank in parsecs around the black hole.
-      galaxyCataloguePoints: ['globular-clusters', 'old-star-dots', 'dots', 'nuclear-cluster'].map(id => volumeSet.resolve(`prepared/${id}.bin`)),
+      // 2019 maser parallaxes), the local arms (Hunt & Reffert 2023 open clusters) and the halo (Baumgardt & Vasiliev 2021).
+      galaxyCataloguePoints: ['globular-clusters', 'old-star-dots', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.bin`)),
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: plan, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, pointBanks, volumeDatasetBanks, loadVolumeDataset,

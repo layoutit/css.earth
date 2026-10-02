@@ -34,7 +34,7 @@ An orbit is drawn when its paper judges it well measured: the 17 stars Gillessen
 
 ## The cluster around them
 
-Zooming out, the dots around the S-stars are the nuclear star cluster: 5,610 stars of the GALACTICNUCLEUS survey at their measured sky positions, at modelled depths. They belong to the [Milky Way package](../milky-way/README.md), which explains the selection and its gaps.
+Zooming out, the dots around the S-stars are the nuclear star cluster: 5,610 stars of the GALACTICNUCLEUS survey at their measured sky positions, at modelled depths. They are their own package, the [nuclear star cluster](../nuclear-star-cluster/README.md), loaded while Sgr A* or one of its stars is selected.
 
 ## Evidence
 

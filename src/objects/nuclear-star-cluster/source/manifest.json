@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "stars",
+      "path": "src/objects/nuclear-star-cluster/source/dots/sample.csv.gz",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/631/A20/central&-c=266.4168166%20-29.0078250&-c.rm=6&-out=RAJ2000,DEJ2000,Jmag,Hmag,Ksmag&-out.max=999999&Ksmag=%3C16",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/631/A20",
+      "title": "Stars of the nuclear star cluster from the GALACTICNUCLEUS central catalogue",
+      "credit": "Nogueras-Lara et al. (2019), A&A 631, A20; CDS J/A+A/631/A20",
+      "acquisition": "Written 2026-10-01 by packages/bake/authoring/nuclear-star-cluster/sample.mts from the VizieR query (the origin): the central catalogue within 6 arcminutes of Sgr A*, brighter than Ks 16.",
+      "generator": "packages/bake/authoring/nuclear-star-cluster/sample.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nogueras-lara-2019-galacticnucleus",
+            "role": "material",
+            "evidence": "src/objects/nuclear-star-cluster/source/dots/points.json#/table"
+          },
+          {
+            "catalogueId": "gallego-cano-2020-nuclear-star-cluster",
+            "role": "method",
+            "evidence": "src/objects/nuclear-star-cluster/source/dots/points.json#/frame/spheroid"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/nuclear-star-cluster/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/nuclear-star-cluster/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}
