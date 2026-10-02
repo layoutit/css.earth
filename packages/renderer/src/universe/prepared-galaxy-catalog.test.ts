@@ -26,7 +26,7 @@ const read = (path: string) => JSON.parse(readFileSync(new URL(`../../../../src/
 
 type Row = { id: string; name?: string; membership: { group: string }; detailedObjectId?: string };
 const mount = (extra: { galaxySample?: unknown } = {}) => {
-  const payload = read('local-group/prepared/catalogue.json');
+  const payload = read('local-group-galaxies/prepared/catalogue.json');
   const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
   const runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement, before: before as unknown as HTMLElement, payload, ...extra });
   const world = { ...payload.frame, pose: { positionM: [0, 0, 1e24] as const, orientationXyzw: [0, 0, 0, 1] as const } };
@@ -54,7 +54,7 @@ test('the catalogue draws one dot for each Local Group row without a package, an
 });
 
 test('the baked display sample limits the dots to its rows', () => {
-  const galaxySample = read('local-group/prepared/display-sample.json');
+  const galaxySample = read('local-group-galaxies/prepared/display-sample.json');
   const { payload, runtime } = mount({ galaxySample });
   const rows: Row[] = payload.objects;
   assert.equal(galaxySample.ids.length, 48);

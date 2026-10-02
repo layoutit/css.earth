@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "observable-universe-cmb",
+  "entries": [
+    {
+      "id": "planck-smica-pr3",
+      "subject": "Planck 2018 SMICA CMB map",
+      "status": "included",
+      "finding": "The standard component-separated CMB temperature map (PR3, Nside 2048), sampled onto the planets' standard sphere (450 leaves) at the comoving distance of z* = 1089.80. The 2015 SMICA map at Nside 1024 (176 MB) was the smaller option; the 2018 release is the final one.",
+      "evidence": [
+        "https://arxiv.org/abs/1807.06208",
+        "https://irsa.ipac.caltech.edu/data/Planck/release_3/all-sky-maps/maps/component-maps/cmb/"
+      ]
+    }
+  ]
+}

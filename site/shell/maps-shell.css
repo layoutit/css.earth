@@ -431,7 +431,6 @@
   font: inherit;
   cursor: pointer;
 }
-[data-system-results] > [data-system-header]:not([data-system-current]) { display: none; }
 #object-category-results { max-height: min(420px, 55dvh); }
 .object-results-scroll .object-result-row:not([aria-disabled="true"]) { color: var(--shell-text); }
 .object-result-row > .object-distance { color: var(--shell-text-secondary); }
@@ -578,9 +577,17 @@
   text-underline-offset: 3px;
 }
 
-/* The selected subject chooses either the system card or the body detail card. */
+/* The selected subject chooses the parts of the card: the body's, its moons' or its planetary system's. */
 .object-information-panel:not([data-card-subject="satellite-system"]) > [data-satellite-system],
-.object-information-panel[data-card-subject="satellite-system"] > :not([data-satellite-system]) {
+.object-information-panel[data-card-subject="satellite-system"] > :not([data-satellite-system]),
+.object-information-panel:not([data-card-subject="planetary-system"]) > [data-planetary-system],
+.object-information-panel[data-card-subject="planetary-system"] > :not([data-planetary-system], [data-planetary-system-datasets]) {
+  display: none !important;
+}
+/* The system's datasets come before its body list, as on the card it had. */
+.object-information-panel[data-card-subject="planetary-system"] > [data-system-bodies-slot] { order: 1; }
+/* The system's card shows the datasets authored for the whole system (a debris disc) and its gallery, not the star's own. */
+.object-information-panel[data-card-subject="planetary-system"] > [data-planetary-system-datasets] :is([data-dataset-option]:not([data-system-dataset]), [data-dataset-details]:not([data-system-dataset-details]), summary:has(> .atlas-tree-root), .object-mobile-information-heading) {
   display: none !important;
 }
 .object-results-scroll .object-empty {

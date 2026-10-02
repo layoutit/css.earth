@@ -65,7 +65,7 @@ export async function ciUniverseInputs(root = projectRoot): Promise<RuntimeAsset
     if (!asset.file.startsWith(preparedDirectory)) return false;
     // The shared context arrives from one publish with the orbit banks it describes (above): restoring the JSON halves
     // alone would pair a context with whatever banks a runner happens to hold.
-    return asset.id === 'milky-way' || asset.id === 'heliosphere' || asset.id === 'stellar-neighbourhood';
+    return asset.id === 'milky-way-volume' || asset.id === 'heliosphere' || asset.id === 'stellar-neighbourhood';
   }));
 }
 

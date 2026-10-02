@@ -1,5 +1,4 @@
 import { objectIdAtPath } from '../root-object.mts';
-import { isOverviewPage } from './navigation-scope.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 
 /**
@@ -156,7 +155,7 @@ export function bindNavigationIntent({ documentTarget, windowTarget, navigable, 
     if (!(anchor instanceof windowTarget.HTMLAnchorElement) || anchor.origin !== windowTarget.location.origin) return null;
     const id = anchor.pathname === '/' ? undefined : objectIdAtPath(anchor.pathname);
     // An overview keeps the mounted scene (navigation-scope.mts): there is nothing to prefetch.
-    return isOverviewPage(id) ? null : id ?? null;
+    return id ?? null;
   };
   const options = { capture: true, passive: true, signal: events.signal };
   documentTarget.addEventListener('pointerover', event => { const id = linked(event); if (id) soon(id); }, options);
