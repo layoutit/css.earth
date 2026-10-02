@@ -33,3 +33,8 @@ test('spaces and hyphens in a typed designation do not decide the match', () => 
   assert.deepEqual(found('st1'), []);
   assert.deepEqual(found('ist1'), ['trappist-1', 'trappist-1b']);
 });
+
+test("a system's name also lists a body that has it as a whole word of its own name", () => {
+  const items = [{ ...label('betelgeuse'), systemName: 'orion' }, { ...label('orion nebula'), systemName: 'milky way' }, label('orionid')];
+  assert.deepEqual(searchObjects(items, 'Orion').matches.map(item => item.name), ['betelgeuse', 'orion nebula']);
+});

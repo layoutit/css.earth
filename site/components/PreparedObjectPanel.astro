@@ -1,7 +1,7 @@
 ---
 import ObjectShell from "./ObjectShell.astro";
 import { parsePreparedText } from '../object-text.mts';
-import { authoredDatasetMetadata, parsePreparedPanelContent, parsePanelControls, withDatasetText } from '../prepared-panel-content.mts';
+import { authoredDatasetMetadata, parsePreparedPanelContent, parsePanelControls, uniformDatasetColors, withDatasetText } from '../prepared-panel-content.mts';
 interface Props { navigation?: boolean; preparedContent: unknown; preparedControls: unknown; }
 const { preparedContent, preparedControls } = Astro.props;
 const content = parsePreparedPanelContent(preparedContent);
@@ -17,6 +17,8 @@ const imageFiles = import.meta.glob<string>(
 const minimapFiles = import.meta.glob("../../src/objects/*/source/presentation/surface-map.json", { import: "default" });
 const textFiles = import.meta.glob("../../src/objects/*/prepared/text.json", { import: "default" });
 const sourceFiles = import.meta.glob("../../src/objects/*/source/content/object.json", { import: "default" });
+const rasterFiles = import.meta.glob("../../src/objects/*/source/preparation/raster.json", { import: "default" });
+const preparedDatasetFiles = import.meta.glob("../../src/objects/*/prepared/datasets.json", { import: "default" });
 const objectRoot = `../../src/objects/${content.objectId}`;
 const text = parsePreparedText(await textFiles[`${objectRoot}/prepared/text.json`]?.(), content.objectId);
 const authoredSource = await sourceFiles[`${objectRoot}/source/content/object.json`]?.();
@@ -25,18 +27,26 @@ const authoredDatasets = authoredSource === undefined
   : authoredDatasetMetadata(authoredSource, content.objectId);
 const minimap = await minimapFiles[`${objectRoot}/source/presentation/surface-map.json`]?.();
 const previews = await previewFiles[`${objectRoot}/prepared/minimaps.json`]?.();
-const datasets = withDatasetText(controls.datasets && {
+const raster = await rasterFiles[`${objectRoot}/source/preparation/raster.json`]?.();
+// One color over the whole disc has no map to show: the hex joins the row's detail instead.
+const uniformColors = raster === undefined ? new Map<string, string>()
+  : uniformDatasetColors(raster, await preparedDatasetFiles[`${objectRoot}/prepared/datasets.json`]?.(), content.objectId);
+const titled = withDatasetText(controls.datasets && {
   ...controls.datasets,
   controls: await Promise.all(controls.datasets.controls.map(async (dataset) => {
     const sourceUrl = authoredDatasets.sourceUrls.get(dataset.id);
     const systemDataset = authoredDatasets.systemDatasetIds.has(dataset.id);
     const metadata = { ...(sourceUrl ? { sourceUrl } : {}), ...(systemDataset ? { systemDataset } : {}) };
     const preview = previews?.images.find(image => image.id === dataset.id);
-    if (!preview) return { ...dataset, ...metadata };
+    if (!preview || uniformColors.has(dataset.id)) return { ...dataset, ...metadata };
     const url = await imageFiles[`${objectRoot}/prepared/${preview.path}`]();
     return { ...dataset, ...metadata, texture: { url, width: preview.width, height: preview.height, minimap, attribution: preview.attribution } };
   })),
 }, text.datasets);
+const datasets = titled && { ...titled, controls: titled.controls.map(dataset => {
+  const color = uniformColors.get(dataset.id);
+  return color === undefined ? dataset : { ...dataset, color, detail: dataset.detail ? `${dataset.detail} · ${color}` : color };
+}) };
 ---
 
 <ObjectShell

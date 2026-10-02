@@ -6,7 +6,7 @@ import SelectedContent from "./SelectedContent.astro";
 const { dataset } = Astro.props;
 const { title } = validateDatasetText(dataset);
 ---
-<SelectedContent {title} description={dataset.summary}>
+<SelectedContent title={dataset.color ? undefined : title} description={dataset.summary}>
   <slot />
 </SelectedContent>
 {dataset.sourceUrl && <a class="object-dataset-source-link" href={dataset.sourceUrl} target="_blank" rel="noopener noreferrer">View source ↗</a>}

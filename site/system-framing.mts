@@ -64,8 +64,14 @@ export function loadSystemView(id: string, read?: (id: string) => Promise<unknow
 /** A host's authored orbit range: its system overview never places the camera beyond the distance its orbits are drawn to. */
 export const SYSTEM_RANGES = new Map(context.bodies.flatMap(body => 'orbitsWithinM' in body && body.orbitsWithinM !== undefined ? [[body.id, body.orbitsWithinM] as const] : []));
 export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);
-/** Volumes a body shows through one of its datasets, by volume id (site/build/prepare/prepare-catalog.mts). */
-export const DATASET_VOLUMES: ReadonlyMap<string, DensityVolumeFrame> = new Map(Object.entries(datasetVolumes).map(([id, frame]) => [id, parseDensityVolumeFrame(frame)]));
+/** Volumes a body shows through one of its datasets, by volume id, each with the object it is the extent of when it
+ * names one (site/build/prepare/prepare-catalog.mts). */
+export const DATASET_VOLUMES: ReadonlyMap<string, { readonly frame: DensityVolumeFrame; readonly host?: string }> = new Map(
+  Object.entries(datasetVolumes).map(([id, bank]) => {
+    const host: unknown = 'host' in bank ? bank.host : undefined;
+    if (host !== undefined && typeof host !== 'string') throw new TypeError(`site/prepared-dataset-volumes.json: ${id}.host must be an object id.`);
+    return [id, { frame: parseDensityVolumeFrame(bank.frame), ...(host === undefined ? {} : { host }) }];
+  }));
 
 /** The Local Group as the universe draws it: the Milky Way's volume and the other galaxies the Local Group catalogue draws,
  * each a sphere of its recipe focus radius (site/build/prepare/prepare-catalog.mts), in one box in reference axes. */

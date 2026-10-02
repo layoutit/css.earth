@@ -26,10 +26,13 @@ test('prepared billboards carry every bank once, with an in-atlas cell and no ha
 });
 
 test('a billboard waits for its shared atlas decode, then samples its cell and obeys visibility', () => {
-  const nodes: { tag: string; style: Record<string, string> & { cssText?: string }; dataset: Record<string, string>; append(node: unknown): void }[] = [];
+  type Node = { tag: string; style: Record<string, string> & { cssText?: string }; dataset: Record<string, string>; children: Node[];
+    insertBefore(child: Node, before: Node | null): void; remove(): void; parent: Node | null };
+  const nodes: Node[] = [];
   const create = (tag: string) => {
-    const node = { tag, style: {} as Record<string, string>, dataset: {} as Record<string, string>, children: [] as unknown[],
-      append(child: unknown) { this.children.push(child); } };
+    const node: Node = { tag, style: {} as Record<string, string>, dataset: {} as Record<string, string>, children: [], parent: null,
+      insertBefore(child, before) { this.children.splice(before ? this.children.indexOf(before) : this.children.length, 0, child); child.parent = this; },
+      remove() { this.parent?.children.splice(this.parent.children.indexOf(this), 1); this.parent = null; } };
     nodes.push(node); return node;
   };
   const host = { ownerDocument: { createElement: create }, insertBefore() {} } as unknown as HTMLElement;
@@ -38,6 +41,9 @@ test('a billboard waits for its shared atlas decode, then samples its cell and o
   const layer = mountDatasetBillboards({ host, before: null, atlasUrl: '/atlas.webp', atlas, prepareAtlas,
     entries: [{ id: 'nebula', frame, billboard: banks.get('nebula')!.billboard! }] });
   const leaf = nodes.find(node => node.dataset.datasetBillboard === 'nebula')!;
+  // A billboard is in the document only while it shows.
+  const attached = () => leaf.parent !== null;
+  assert.equal(attached(), false);
   assert.ok(leaf.style.cssText?.includes('background-size:200% 200%;background-position:100% 100%'));
   assert.equal(leaf.style.backgroundImage, undefined);
   const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 400, heightPixels: 300 };
@@ -48,7 +54,7 @@ test('a billboard waits for its shared atlas decode, then samples its cell and o
   layer.publish(0, 0.5, world([0, 0, 0, 1]), viewport);
   assert.equal(prepareAtlas.mock.callCount(), 1);
   assert.equal(leaf.style.backgroundImage, undefined);
-  assert.notEqual(leaf.style.display, 'block');
+  assert.equal(attached(), false);
   prepareAtlas.mock.mockImplementation(() => true);
   layer.setCoasting(true);
   layer.publish(0, 0.5, world([0, 0, 0, 1]), viewport);
@@ -57,15 +63,16 @@ test('a billboard waits for its shared atlas decode, then samples its cell and o
   layer.publish(0, 0.5, world([0, 0, 0, 1]), viewport);
   // A fixed 128 px box (two texels per CSS pixel of a 256 px cell) scaled to the 20 px it projects to: the camera
   // changes only its transform (motion-freezes-membership.md).
-  assert.partialDeepStrictEqual(leaf.style, { display: 'block', opacity: '0.5', backgroundImage: 'url("/atlas.webp")' });
+  assert.partialDeepStrictEqual(leaf.style, { opacity: '0.5', backgroundImage: 'url("/atlas.webp")' }); assert.equal(attached(), true);
   assert.ok(leaf.style.cssText?.includes('width:128px;height:128px'));
   assert.ok(leaf.style.transform.includes(`scale(${20 / 128})`));
   // Seen off its prepared axis the one view still draws, turned toward the camera.
   layer.publish(0, 0.5, { ...world([0, 0, 0, 1]), pose: { positionM: [3, 0, 10] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport);
-  assert.equal(leaf.style.display, 'block');
+  assert.equal(attached(), true);
   layer.publish(0, 0.5, world([0, 1, 0, 0]), viewport);
-  assert.equal(leaf.style.display, 'none');
+  assert.equal(attached(), false);
   layer.publish(0, 0.5, world([0, 0, 0, 1]), viewport);
+  assert.equal(attached(), true);
   layer.publish(0, 0, world([0, 0, 0, 1]), viewport);
-  assert.equal(leaf.style.display, 'none');
+  assert.equal(attached(), false);
 });
