@@ -51,7 +51,8 @@ its validators accept); the renderer never imports the bake.
   it with its inventory. It imports `galaxy-catalog`. `packages/bake/cli/prepare-cluster-catalog.mts <object-directory>`
   is its command.
 - `src/world-context/` is published as `@cssearth/bake/world-context` (Node only): the spatial world context (sources,
-  bodies, orbit banks, system and group views, hyperbolic paths). It imports no topic.
+  bodies, system and group views, hyperbolic paths). Orbit-bank codecs and prepared world contracts live in
+  `@cssearth/objects`; spatial computation and authored-source validation stay here. It imports no topic.
 - `src/runtime-source/` is published as `@cssearth/bake/runtime-source` (Node only): the runtime-source reader that
   preparation and the runtime ownership checks share. It parses a runtime module into ESTree with its original ranges,
   resolves its imports to source files through each package's exports and tsup entries, and reads names, keys and static

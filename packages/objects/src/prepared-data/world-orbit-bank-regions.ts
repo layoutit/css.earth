@@ -1,5 +1,5 @@
-import { array, numbers, record } from '../validation/guards.js';
-import { WORLD_ORBITS_MAGIC, WORLD_ORBITS_VERSION } from './world-context.js';
+import { array, numbers, record } from './world-guards.js';
+import { WORLD_ORBITS_MAGIC, WORLD_ORBITS_VERSION } from './world-orbit-bank.js';
 
 /** An orbit bank's typed sections, as the packed file shuffles them (@cssearth/objects prepared-binary.ts): vertices are
  * Int32, trails Float64, chord and vertex indices Uint32, each at the [byteOffset, count] its header names. */

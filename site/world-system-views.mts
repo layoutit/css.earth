@@ -1,4 +1,4 @@
-import { parsePreparedSystemView } from '@cssearth/renderer';
+import { parsePreparedSystemView } from '@cssearth/objects';
 import { APPLICATION_WORLD_CONTEXT } from './world-context-plan.mts';
 import { startupFetch } from './startup-requests.mts';
 

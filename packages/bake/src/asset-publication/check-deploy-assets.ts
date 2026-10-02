@@ -5,7 +5,7 @@ import { dirname, extname, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry } from '../objects/sources/index.ts';
-import { parsePreparedSystemView, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/renderer/prepared-data/world-context.ts';
+import { parsePreparedSystemView, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
 
 const execFileAsync = promisify(execFile);
 /** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */

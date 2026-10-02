@@ -1,5 +1,5 @@
 import { orbitRoot } from './orbit-root.mts';
-import type { PreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
+import type { PreparedWorldContext } from '@cssearth/objects';
 
 /** The orbit graph a planetary system is read from. This module reads no prepared presentation file, so the preparation
  * step (site/build/prepare/prepare-world-presentation.mts) can run it before that file exists. */

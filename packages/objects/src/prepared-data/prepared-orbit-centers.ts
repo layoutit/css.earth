@@ -1,5 +1,5 @@
-import type { PositionM } from '@cssearth/engine';
-import { numbers, record, text } from '../validation/guards.js';
+import type { WorldPosition as PositionM } from './world-frame.js';
+import { numbers, record, text } from './world-guards.js';
 
 export interface PreparedOrbitCenter {
   readonly positionM: PositionM;

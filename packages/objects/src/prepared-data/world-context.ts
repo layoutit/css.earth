@@ -1,18 +1,17 @@
-import { parsePresentation } from '../universe/world-camera.js';
-import type { PositionM } from '@cssearth/engine';
-import { parsePreparedOrbitCenters } from '../universe/prepared-orbit-centers.js';
-import type { PreparedOrbitCenter } from '../universe/prepared-orbit-centers.js';
-import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
-import { array, finite, numbers, positive, record, text, unique } from '../validation/guards.js';
-import type { PreparedWorldCameraFrame } from '../navigation/world-camera.js';
-import { cssViewFromOrientation, validateWorldRotation } from '../navigation/world-camera-math.js';
-import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
-import type { PreparedOrbitStrokes } from '../solar-system/prepared-orbit-strokes.js';
-import { expandWorldContextSummary, expandWorldSystem } from '@cssearth/objects';
+import { PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA } from './world-schemas.js';
+import { parsePresentation } from './world-camera.js';
+import type { WorldPosition as PositionM } from './world-frame.js';
+import { parsePreparedOrbitCenters } from './prepared-orbit-centers.js';
+import type { PreparedOrbitCenter } from './prepared-orbit-centers.js';
+import { parsePreparedWorldCameraFrame } from './world-frame.js';
+import { array, finite, numbers, positive, record, text, unique } from './world-guards.js';
+import type { PreparedWorldCameraFrame } from './world-frame.js';
+import { validateWorldRotation } from '../registry/world-rotation.js';
+import type { LevelOfDetailPlan, OrbitLineFade } from './world-presentation.js';
+import type { PreparedOrbitStrokes } from './prepared-orbit-strokes.js';
+import { expandWorldContextSummary, expandWorldSystem } from './world-context-summary.js';
 import { parseClassificationViews, parseSystemView } from './world-system-view.js';
 import type { PreparedSystemViewCandidate } from './world-system-view.js';
-export { parsePreparedSystemView, type PreparedSystemViewCandidate } from './world-system-view.js';
-export { decodeWorldOrbitBank, decodeWorldOrbits, WORLD_ORBITS_MAGIC, WORLD_ORBITS_VERSION } from './world-orbit-bank.js';
 
 export interface PreparedContextPoint {
   readonly id: string;
@@ -114,7 +113,7 @@ export interface PreparedVolumeOpacityProfile {
 /** The world context the main thread holds: every body, placement and camera
  * fact, with each orbit reduced to `PreparedContextOrbit`. */
 export interface PreparedWorldContext {
-  readonly schema: 'cssearth-world-context@2' | 'cssearth-world-context-summary@2';
+  readonly schema: typeof PREPARED_WORLD_CONTEXT_SCHEMA | typeof PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA;
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: PreparedContextFocus;
   readonly bodies: readonly PreparedContextBody[];
@@ -151,7 +150,7 @@ export interface PreparedWorldSystem {
 }
 /** The full prepared file: orbit paths and detail levels for the planner worker and build tools. */
 export interface PreparedWorldContextGeometry extends PreparedWorldContext {
-  readonly schema: 'cssearth-world-context@2';
+  readonly schema: typeof PREPARED_WORLD_CONTEXT_SCHEMA;
   readonly bodies: readonly PreparedContextGeometryBody[];
   /** Each classification framed by its members' prepared positions. */
   readonly classificationViews?: Readonly<Record<string, NonNullable<PreparedContextBody['systemView']>>>;
@@ -256,11 +255,11 @@ export function parsePreparedWorldContextSummary(value: unknown): PreparedWorldC
 /** Either file, by its schema: runtimes that hold the plan accept the summary or the full context. */
 export function parsePreparedWorldContextPlan(value: unknown): PreparedWorldContext {
   const schema = value && typeof value === 'object' ? (value as { schema?: unknown }).schema : undefined;
-  return parseContext(value, schema === 'cssearth-world-context@2');
+  return parseContext(value, schema === PREPARED_WORLD_CONTEXT_SCHEMA);
 }
 /** A plan whose orbits carry their paths, for the synchronous planner. */
 export function worldContextGeometry(plan: PreparedWorldContext): PreparedWorldContextGeometry {
-  if (plan.schema !== 'cssearth-world-context@2') throw new TypeError('Planning orbits requires the full prepared world context.');
+  if (plan.schema !== PREPARED_WORLD_CONTEXT_SCHEMA) throw new TypeError('Planning orbits requires the full prepared world context.');
   return plan as PreparedWorldContextGeometry;
 }
 export type OrbitGeometryCandidate = Omit<PreparedContextOrbitGeometry, 'vertexCount' | 'fullTrail' | 'trailModel'> & { readonly trailModel?: unknown };
@@ -494,7 +493,7 @@ export function parsePreparedWorldSystem(value: unknown, plan: PreparedWorldCont
 /** A summary plan with more of its deferred systems' bodies, checked as a whole. `ordered` puts every body at its place in
  * the full context, for a plan that is being built; a mounted plan keeps its bodies' indices and adds the new ones after. */
 export function extendWorldContext(plan: PreparedWorldContext, systems: readonly PreparedWorldSystem[], ordered = false): PreparedWorldContext {
-  if (plan.schema !== 'cssearth-world-context-summary@2' || !validatedContexts.has(plan)) throw new TypeError('Only a validated world context summary takes other systems.');
+  if (plan.schema !== PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA || !validatedContexts.has(plan)) throw new TypeError('Only a validated world context summary takes other systems.');
   const held = new Set(plan.bodies.map(body => body.id));
   const added = systems.filter(system => !system.bodies.some(body => held.has(body.id)));
   if (!added.length) return plan;
@@ -523,9 +522,9 @@ export async function parseCompleteWorldContext(summary: unknown, read: (id: str
 }
 function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (value && typeof value === 'object' && validatedContexts.has(value) &&
-      (!geometry || (value as PreparedWorldContext).schema === 'cssearth-world-context@2')) return value as PreparedWorldContext;
+      (!geometry || (value as PreparedWorldContext).schema === PREPARED_WORLD_CONTEXT_SCHEMA)) return value as PreparedWorldContext;
   const input = record(geometry ? value : expandWorldContextSummary(value), 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'classificationViews', 'orbitBanks', 'camera', 'volume', 'stars', 'system', 'sky', 'deferred', 'worldBodyCount']);
-  const schema = geometry ? 'cssearth-world-context@2' : 'cssearth-world-context-summary@2';
+  const schema = geometry ? PREPARED_WORLD_CONTEXT_SCHEMA : PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA;
   if (input.schema !== schema) throw new TypeError(`Unsupported prepared world context: ${String(input.schema)}, not ${schema}.`);
   if (!geometry && input.classificationViews !== undefined) throw new TypeError('The world context summary carries no classification views.');
   if (geometry && [input.orbitBanks, input.deferred, input.worldBodyCount].some(field => field !== undefined)) {

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { savedWorldCamera } from './saved-world-camera.js';
 import { presentWorldCamera } from './world-camera.js';
-import type { PreparedWorldCameraFrame } from './world-camera.js';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { SharedView } from './view-url.js';
 
 const frame: PreparedWorldCameraFrame = { referenceFrame: 'world', epochJdTt: 1,

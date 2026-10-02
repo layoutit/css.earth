@@ -5,14 +5,15 @@ import preparedContext from '../../src/objects/sun/prepared/world-context.json' 
 import { bodyViewAtCamera, overviewFrameDistanceM, overviewScopeAtCamera, overviewsReachableFrom, viewDistance } from '../overview-context.mts';
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { presentWorldCamera } from '@cssearth/renderer/navigation';
-import { parsePreparedWorldContext } from '@cssearth/renderer';
+import { parsePreparedWorldContext } from '@cssearth/objects';
 import { systemOverviewDistance, SYSTEM_FRAMING_RADII } from '../system-framing.mts';
 import { OVERVIEWS } from '../objects.mts';
 
 // The same validated plan the application mounts; the raw JSON import is untyped.
 const context = parsePreparedWorldContext(preparedContext);
 
-import type { WorldCameraPose, PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 
 const camera = (distance: number, plan: Pick<typeof context, 'focus'> = context): WorldCameraPose => ({

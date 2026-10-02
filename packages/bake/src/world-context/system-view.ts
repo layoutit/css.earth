@@ -1,18 +1,6 @@
+import type { PreparedSystemViewCandidate, PreparedSystemView, PreparedWorldContextData as PreparedWorldContext } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-import type { OrbitalState, PreparedWorldContext, Vector3 } from './spatial-context.ts';
-
-export interface PreparedSystemView {
-  readonly memberIds: readonly string[];
-  readonly memberRadiiM: readonly number[];
-  readonly candidates: readonly PreparedSystemViewCandidate[];
-}
-
-export interface PreparedSystemViewCandidate {
-  readonly cameraToReference: readonly number[];
-  readonly minimumM: Vector3;
-  readonly maximumM: Vector3;
-  readonly memberPositionsM: readonly Vector3[];
-}
+import type { OrbitalState, Vector3 } from './spatial-context.ts';
 
 export interface SystemViewPolicy {
   readonly minimumRadiusShare: number;

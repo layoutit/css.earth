@@ -1,7 +1,8 @@
 import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { serializePreparedScene, createPreparedAssetResolver, loadPreparedCssObject, loadPreparedDataset,loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection, sectionElements } from '@cssearth/renderer';
-import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from '@cssearth/renderer/navigation';
+import { parseSharedView, formatSharedView } from '@cssearth/renderer/navigation';
+import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
 import { requiredElement, requiredSection } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
 import { readSceneDatasetUrl } from './dataset-url.mts';

@@ -9,7 +9,7 @@ import { screenPicking } from '../../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../../navigation/screen-picking.js';
 import { pointPhotometry } from '../../stars/point-field-projection.js';
 import type { PreparedPointAppearance } from '../../stars/types.js';
-import type { PreparedWorldContext } from '../../prepared-data/world-context.js';
+import type { PreparedWorldContext } from '@cssearth/objects';
 
 export interface PointSourcePublication {
   readonly opacity?: number;

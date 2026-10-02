@@ -1,5 +1,5 @@
-import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
-import { finite, positive, record, text } from '../validation/guards.js';
+import { parsePreparedWorldCameraFrame } from './world-frame.js';
+import { finite, positive, record, text } from './world-guards.js';
 import type { PreparedContextCameraPresentation, PreparedWorldContext } from '../prepared-data/world-context.js';
 
 // What a mounted body reads from the world, kept apart from the world context's parser so a body's first mount does

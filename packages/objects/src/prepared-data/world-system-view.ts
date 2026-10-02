@@ -1,6 +1,7 @@
-import type { PositionM } from '@cssearth/engine';
-import { array, numbers, positive, record, text, unique } from '../validation/guards.js';
-import { validateWorldRotation } from '../navigation/world-camera-math.js';
+import { PREPARED_WORLD_SYSTEM_VIEW_SCHEMA } from './world-schemas.js';
+import type { WorldPosition as PositionM } from './world-frame.js';
+import { array, numbers, positive, record, text, unique } from './world-guards.js';
+import { validateWorldRotation } from '../registry/world-rotation.js';
 import type { PreparedContextBody, PreparedWorldContext } from './world-context.js';
 
 function vector(value: unknown, label: string): PositionM {
@@ -39,7 +40,7 @@ export function parseSystemView(value: unknown, withCandidates = true): Prepared
 /** `system-views/<host id>.json`: one system's camera candidates, checked against that host's system view in the summary. */
 export function parsePreparedSystemView(value: unknown, plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>, id: string): { readonly candidates: readonly PreparedSystemViewCandidate[] } {
   const input = record(value, 'system view', ['schema', 'id', 'candidates']);
-  if (input.schema !== 'cssearth-world-system-view@1') throw new TypeError(`Unsupported prepared system view for ${id}: ${String(input.schema)}.`);
+  if (input.schema !== PREPARED_WORLD_SYSTEM_VIEW_SCHEMA) throw new TypeError(`Unsupported prepared system view for ${id}: ${String(input.schema)}.`);
   if (input.id !== id) throw new TypeError(`Prepared system view for ${id} names ${String(input.id)}.`);
   const host = [plan.focus, ...plan.bodies].find(body => body.id === id);
   if (!host?.systemView) throw new TypeError(`The world context has no system view for ${id}.`);
@@ -61,3 +62,5 @@ export function parseClassificationViews(value: unknown, bodies: readonly Prepar
   if (!entries.length) throw new TypeError('Classification views must name a classification.');
   return Object.freeze(Object.fromEntries(entries));
 }
+
+export interface PreparedSystemView { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[]; readonly candidates: readonly PreparedSystemViewCandidate[]; }

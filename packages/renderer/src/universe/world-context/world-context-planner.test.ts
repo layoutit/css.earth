@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { decodeWorldOrbitBank, parseCompleteWorldContext, parsePreparedWorldContext } from '../../prepared-data/world-context.js';
+import { decodeWorldOrbitBank, parseCompleteWorldContext, parsePreparedWorldContext } from '@cssearth/objects';
 import { createSystemFade } from './context-scale.js';
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
