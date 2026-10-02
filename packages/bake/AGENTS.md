@@ -331,3 +331,9 @@ validator remains here until its sky/Sun format dependencies can move without we
 Prepared CSS volume, impostor, dataset, embedded catalogue point, image-layer and surface-shell formats
 and validators belong to `@cssearth/objects`. Image and geometry generation and file I/O stay here;
 transport, projection, compositing, topology comparison and retained mounting stay in renderer.
+
+Universe catalogue point banks, galaxy backings, image meshes and dataset billboards have browser-safe
+format contracts and schema identifiers in `packages/objects/src/prepared-data/`, exported by `@cssearth/objects`.
+The complete catalogue bank is `PreparedCataloguePointBank`; embedded volume stars keep `PreparedCataloguePoints`.
+Counting, projection, transport and retained mounting stay in renderer; image/geometry preparation and file I/O stay in bake.
+Contract tests use node:test in the packages lane.

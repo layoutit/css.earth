@@ -1,7 +1,8 @@
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { mountDatasetBillboards, parseDatasetBillboards } from './dataset-billboards.js';
+import { mountDatasetBillboards } from './dataset-billboards.js';
+import { parseDatasetBillboards } from '@cssearth/objects';
 
 const input = {
   schema: 'cssearth-dataset-billboards@1', atlas: { columns: 2, rows: 2, cellPx: 256 },
@@ -13,17 +14,6 @@ const input = {
 };
 const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
   metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1] as const, max: [1, 1, 1] as const } };
-
-test('prepared billboards carry every bank once, with an in-atlas cell and no hash', () => {
-  const parsed = parseDatasetBillboards(input);
-  assert.deepEqual(parsed.banks.get('galaxy'), { id: 'galaxy', contextVisibility: 'galactic', attached: false });
-  assert.equal(parsed.banks.get('nebula')?.billboard?.cell, 3);
-  assert.throws(() => parseDatasetBillboards({ ...input, banks: [...input.banks, input.banks[1]] }), /galaxy is listed twice/);
-  assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...input.banks[1], payloadSha256: 'a'.repeat(64) }] }), /unsupported dataset billboard bank field payloadSha256/);
-  assert.throws(() => parseDatasetBillboards({ ...input, atlas: { ...input.atlas, sha256: 'a'.repeat(64) } }), /unsupported dataset billboard atlas field sha256/);
-  assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...input.banks[0], billboard: { ...input.banks[0]!.billboard, cell: 4 } }] }), /outside its atlas/);
-  assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...input.banks[1], attached: undefined }] }), /attached/);
-});
 
 test('a billboard waits for its shared atlas decode, then samples its cell and obeys visibility', () => {
   const nodes: { tag: string; style: Record<string, string> & { cssText?: string }; dataset: Record<string, string>; append(node: unknown): void }[] = [];

@@ -1,3 +1,4 @@
+import { GALAXY_BACKING_SCHEMA } from '@cssearth/objects';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -81,7 +82,7 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
   await read(descriptorPath);
   const id = folder.name, backingPath = `src/objects/${id}/prepared/backing.json`;
   const backing = sourceObject(await json(backingPath));
-  if (backing.schema !== 'cssearth-galaxy-backing@1') throw new TypeError(`${backingPath}: invalid galaxy backing.`);
+  if (backing.schema !== GALAXY_BACKING_SCHEMA) throw new TypeError(`${backingPath}: invalid galaxy backing.`);
   const texturePath = `src/objects/${id}/prepared/${sourcePath(sourceObject(backing.leaf).texturePath)}`;
   const recipePath = `src/objects/${id}/source/backing/recipe.json`, recipe = sourceObject(await json(recipePath));
   if (sourceText(backing.source) !== sourceText(recipe.source)) throw new TypeError(`${backingPath}: source differs from its recipe.`);

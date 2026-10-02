@@ -12,6 +12,7 @@ import type { PreparedBinaryRegion } from '../prepared-binary.js';
  * (Float64, six per cell), x, y and z (Int32), each point's cell (Uint16 or Uint32) and palette index (Uint8 or Uint16,
  * only for a bank with a palette). The header's `columns` says how many of each and how wide.
  */
+export const CATALOGUE_POINTS_BINARY_SCHEMA = 'cssearth-catalogue-points-bin@1';
 export const CATALOGUE_BANK_BINARY_MAGIC = 'CSCPTS01';
 export const CATALOGUE_POSITION_SCALE = 10_000;
 

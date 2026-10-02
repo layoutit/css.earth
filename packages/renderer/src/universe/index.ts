@@ -2,7 +2,6 @@
 export { createPreparedUniverse } from './prepared-universe-runtime.js';
 export { prestartWorldContextPlanner } from './world-context/world-context-planner-client.js';
 export { imageFocusDatasets } from './prepared-focus-bank.js';
-export { parseDatasetBillboards } from './dataset-billboards.js';
 export { createWorldFrameQueue } from '../navigation/world-frame-queue.js';
 export type { QueuedRequest } from '../navigation/world-frame-queue.js';
 export { loadPreparedCssVolume } from '../volume/loader.js';
