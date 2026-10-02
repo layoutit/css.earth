@@ -1,9 +1,10 @@
 import { execFileSync } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import credits from './prepared-source-credits.json' with { type: 'json' };
 import { parseSourceCredits } from '@cssearth/objects/provenance';
 import { projectRoot } from '@cssearth/core/node';
+import { parseSourceIcons } from './source-icons.mts';
 
 // Astro prepares these ordinary links. The browser never reads Markdown or
 // reconstructs a document from scientific citations.
@@ -19,8 +20,12 @@ if (!/^[a-f0-9]{40}$/u.test(revision)) throw new Error('Source documentation nee
 const checked = new Set<string>();
 // Each object's provider index, computed when the source catalogue was written (@cssearth/objects/provenance source-credits.ts).
 const CREDITS = parseSourceCredits(credits), PROVIDERS = CREDITS.providers;
-/** The rows of an object's Sources tab: each published source it uses, once. */
-export const objectSourceRows = (objectId: string) => (CREDITS.sources[objectId] ?? []).map(id => CREDITS.records[id]!);
+const ICONS = parseSourceIcons(JSON.parse(readFileSync(resolve(root, 'site/source/source-icons.json'), 'utf8')));
+/** The rows of an object's Sources tab: each published source it uses, once, with its site's favicon when one is recorded. */
+export const objectSourceRows = (objectId: string) => (CREDITS.sources[objectId] ?? []).map(id => {
+  const row = CREDITS.records[id]!;
+  return { ...row, iconSrc: ICONS[row.icon]?.src };
+});
 const sourceProviders = (objectId: string): readonly string[] => PROVIDERS[objectId] ?? [];
 const creditLabel = (providers: readonly string[]) => {
   if (!providers.length) return 'Sources';

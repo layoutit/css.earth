@@ -10,12 +10,23 @@ export const SOURCE_CREDITS_SCHEMA = 'cssearth-prepared-source-credits@2';
 /** One row of a Sources tab: a published work (its title, what it is and who publishes it, its landing page), or the files one
  * credit line supplied (the credit, how many files and the datasets they feed). A row of several files has no page of its own:
  * the tab links it to the object's README, which lists them. */
-export interface SourceCreditRow { readonly title: string; readonly detail: string; readonly url?: string }
+export interface SourceCreditRow { readonly title: string; readonly detail: string; readonly url?: string;
+  /** Whose site serves it (`sourceIconKey`): the key of its favicon in `site/source/source-icons.json`. */
+  readonly icon: string }
+/** The site a source link leads to: its host, or for a DOI the registrant prefix (`doi:10.3847`), since doi.org only redirects
+ * to the publisher. */
+export function sourceIconKey(url: string): string {
+  const doi = /^https?:\/\/(?:dx\.)?doi\.org\/(10\.\d+)\//u.exec(url)?.[1], host = /^https?:\/\/([^/:?#]+)/u.exec(url)?.[1];
+  if (!doi && !host) throw new TypeError(`Source link has no host: ${url}.`);
+  return doi ? `doi:${doi}` : host!.toLowerCase();
+}
 export interface SourceCredits {
   readonly schema: typeof SOURCE_CREDITS_SCHEMA; readonly providers: Readonly<Record<string, readonly string[]>>;
   /** Rows by key: a catalogue ID, shared by every object that uses the work, or `<object>#<n>` for one object's files under one
    * credit. `sources` lists an object's keys, its inputs before its methods and citations. */
   readonly records: Readonly<Record<string, SourceCreditRow>>; readonly sources: Readonly<Record<string, readonly string[]>>;
+  /** One link to each site the rows lead to, by icon key: where its favicon is looked for. */
+  readonly icons: Readonly<Record<string, string>>;
 }
 
 const KIND_LABELS: Readonly<Record<SourceKind, string>> = { 'data-product': 'Data product', publication: 'Publication', model: 'Model',
@@ -26,7 +37,7 @@ const creditRow = (source: SourceRecord): SourceCreditRow => {
   if (!url) throw new TypeError(`Source ${source.id} has no link for its Sources row.`);
   // A record without a publisher names the host that serves it.
   const from = source.publisher ?? /^https?:\/\/(?:www\.)?([^/:?#]+)/u.exec(url)?.[1];
-  return Object.freeze({ title: source.title, detail: `${KIND_LABELS[source.kind]}${from ? ` · ${from}` : ''}`, url });
+  return Object.freeze({ title: source.title, detail: `${KIND_LABELS[source.kind]}${from ? ` · ${from}` : ''}`, url, icon: sourceIconKey(url) });
 };
 
 const COMPACT_PROVIDERS = ['NASA', 'ESA', 'JPL', 'USGS', 'JAXA', 'CSA', 'ISRO', 'STScI', 'ESO', 'NOIRLab', 'NAOJ', 'AMNH', 'CDS', 'OpenSpace', 'DAMIT'];
@@ -39,6 +50,7 @@ export function sourceCredits(usage: SourceUsage, sources: SourceResolver): Sour
     ...usage.edges.flatMap(use => use.kind === 'shared-context' ? [/^src\/objects\/([^/]+)\//u.exec(use.ownerPath)?.[1] ?? ''] : []).filter(Boolean)]);
   const providers: Record<string, readonly string[]> = {};
   const records: Record<string, SourceCreditRow> = {}, objectSources: Record<string, readonly string[]> = {};
+  const iconLinks: Record<string, string> = {};
   for (const objectId of [...owners].sort()) {
     const uses = (usage.byObject[objectId] ?? []).map(index => usage.edges[index]!);
     // A single file has no published title: its record is named after its manifest input ID (author-source-records.ts). Its
@@ -59,8 +71,13 @@ export function sourceCredits(usage: SourceUsage, sources: SourceResolver): Sour
       // One file that is a catalogued work of its own keeps its published title.
       if (only && !only.id.startsWith('source-')) { records[only.id] ??= creditRow(only); keys[keys.indexOf(group.key)] = only.id; continue; }
       const datasets = [...group.datasets].join(', ');
-      records[group.key] = Object.freeze(only ? { title: credit, detail: `${KIND_LABELS[only.kind]} · ${datasets}`, url: creditRow(only).url }
-        : { title: credit, detail: `${group.ids.size} files · ${datasets}` });
+      const { url, icon } = creditRow(sources[first!]!);
+      records[group.key] = Object.freeze(only ? { title: credit, detail: `${KIND_LABELS[only.kind]} · ${datasets}`, url, icon }
+        : { title: credit, detail: `${group.ids.size} files · ${datasets}`, icon });
+    }
+    for (const id of new Set([...keys.filter(key => sources[key]), ...[...files.values()].map(group => [...group.ids][0]!)])) {
+      const { url, icon } = creditRow(sources[id]!);
+      iconLinks[icon] ??= url!;
     }
     const ids = [...new Set(keys)];
     if (ids.length) objectSources[objectId] = Object.freeze(ids);
@@ -74,19 +91,26 @@ export function sourceCredits(usage: SourceUsage, sources: SourceResolver): Sour
     ])];
     if (names.length) providers[objectId] = Object.freeze(names);
   }
-  return Object.freeze({ schema: SOURCE_CREDITS_SCHEMA, providers: Object.freeze(providers), records: Object.freeze(records), sources: Object.freeze(objectSources) });
+  return Object.freeze({ schema: SOURCE_CREDITS_SCHEMA, providers: Object.freeze(providers), records: Object.freeze(records), sources: Object.freeze(objectSources), icons: Object.freeze(iconLinks) });
 }
 
 export function parseSourceCredits(input: unknown): SourceCredits {
-  if (!isRecord(input) || input.schema !== SOURCE_CREDITS_SCHEMA || !isRecord(input.providers) || !isRecord(input.records) || !isRecord(input.sources))
-    throw new TypeError(`Invalid prepared source credits: expected ${SOURCE_CREDITS_SCHEMA} with providers, records and sources. Run node site/build/prepare/prepare-facilities.mts --catalog-only.`);
+  if (!isRecord(input) || input.schema !== SOURCE_CREDITS_SCHEMA || !isRecord(input.providers) || !isRecord(input.records) || !isRecord(input.sources) || !isRecord(input.icons))
+    throw new TypeError(`Invalid prepared source credits: expected ${SOURCE_CREDITS_SCHEMA} with providers, records, sources and icons. Run node site/build/prepare/prepare-facilities.mts --catalog-only.`);
   const providers: Record<string, readonly string[]> = {};
   const records: Record<string, SourceCreditRow> = {}, sources: Record<string, readonly string[]> = {};
   for (const [id, row] of Object.entries(input.records)) {
-    if (!isRecord(row) || typeof row.title !== 'string' || !row.title || typeof row.detail !== 'string' || !row.detail || row.url !== undefined && (typeof row.url !== 'string' || !/^https?:\/\//u.test(row.url)))
-      throw new TypeError(`Invalid prepared source credit row ${id}: it needs a title, a detail and, when it has a url, an http(s) one.`);
-    records[id] = Object.freeze({ title: row.title, detail: row.detail, ...(row.url === undefined ? {} : { url: row.url }) });
+    if (!isRecord(row) || typeof row.title !== 'string' || !row.title || typeof row.detail !== 'string' || !row.detail || typeof row.icon !== 'string' || !row.icon || row.url !== undefined && (typeof row.url !== 'string' || !/^https?:\/\//u.test(row.url)))
+      throw new TypeError(`Invalid prepared source credit row ${id}: it needs a title, a detail, an icon key and, when it has a url, an http(s) one.`);
+    records[id] = Object.freeze({ title: row.title, detail: row.detail, ...(row.url === undefined ? {} : { url: row.url }), icon: row.icon });
   }
+  const icons: Record<string, string> = {};
+  for (const [key, url] of Object.entries(input.icons)) {
+    if (typeof url !== 'string' || !/^https?:\/\//u.test(url)) throw new TypeError(`Invalid prepared source credits: icon ${key} needs an http(s) link.`);
+    icons[key] = url;
+  }
+  const unlinked = Object.entries(records).find(([, row]) => !icons[row.icon]);
+  if (unlinked) throw new TypeError(`Invalid prepared source credit row ${unlinked[0]}: its icon ${unlinked[1].icon} has no link in icons.`);
   for (const [objectId, ids] of Object.entries(input.sources)) {
     const missing = Array.isArray(ids) ? ids.find(id => typeof id !== 'string' || !records[id]) : objectId;
     if (!Array.isArray(ids) || missing !== undefined) throw new TypeError(`Invalid prepared source credits for ${objectId}: sources names ${String(missing)}, which records does not hold.`);
@@ -97,5 +121,5 @@ export function parseSourceCredits(input: unknown): SourceCredits {
       throw new TypeError(`Invalid prepared source credits for ${objectId}.`);
     providers[objectId] = Object.freeze([...names as string[]]);
   }
-  return Object.freeze({ schema: SOURCE_CREDITS_SCHEMA, providers: Object.freeze(providers), records: Object.freeze(records), sources: Object.freeze(sources) });
+  return Object.freeze({ schema: SOURCE_CREDITS_SCHEMA, providers: Object.freeze(providers), records: Object.freeze(records), sources: Object.freeze(sources), icons: Object.freeze(icons) });
 }

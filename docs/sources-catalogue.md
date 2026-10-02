@@ -31,7 +31,13 @@ from these records and the existing product lineage, with
 "Sources" link shows, and the rows of the body card's Sources tab. A published
 work is one row: its title, kind, publisher and landing page. Files that have no
 published title are one row per credit line, with their count and the datasets
-they feed; several files link to the body README, which lists them. The
+they feed; several files link to the body README, which lists them.
+Each row shows the favicon of the site it links to. `node site/build/prepare/refresh-source-icons.mts`
+fetches the icons of sites not yet recorded into `public/shell/source-icons/` and
+records each in [source-icons.json](../site/source/source-icons.json) with its
+site, the file taken and the prepared byte count. A DOI is keyed by its
+registrant prefix and resolved to its publisher. A site that refuses the request
+is recorded without an icon and its rows show the outbound mark. The
 pages read only that file: the whole catalogue is tens of megabytes. They are ignored build outputs; do not edit or commit them.
 The [provenance contract](provenance/CONTRACT.md) governs citations, retained data,
 evidence and plain language. Keep scientific tables in their existing records.

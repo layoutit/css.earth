@@ -489,7 +489,8 @@
   height: 40px;
   object-fit: contain;
 }
-/* A Sources row is a result row that leaves the site: its preview square holds the outbound mark. */
+/* A Sources row is a result row that leaves the site: its preview square holds that site's favicon, or the outbound mark. */
+.object-source-icon > img { display: block; width: 24px; height: 24px; border-radius: 4px; }
 .object-source-icon .material-symbol { width: 20px; height: 20px; fill: var(--shell-text-secondary); }
 .object-result-row:is(:hover, :focus-visible) .object-source-icon .material-symbol { fill: var(--shell-text); }
 .object-dataset-round-preview { position: relative; border-radius: 50%; }
