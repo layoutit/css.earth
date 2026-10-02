@@ -10,3 +10,23 @@ it('median averages the middle pair, sorts in place and gives NaN for an empty s
   assert.equal(median([5, 1, 3]), 3);
   assert.ok(Number.isNaN(median([])));
 });
+
+it('named median policies preserve distinct even, empty and mutation behavior', async () => {
+  const { medianAveraged, medianUpperMiddle } = await import('../index.js');
+  assert.equal(median, medianAveraged);
+  assert.equal(medianAveraged([1, 2]), 1.5);
+  assert.equal(medianUpperMiddle([1, 2]), 2);
+  const values = [10, 1, 3, 2];
+  assert.equal(medianUpperMiddle(Object.freeze(values)), 3);
+  assert.deepEqual(values, [10, 1, 3, 2]);
+  for (const [input, averaged, upper] of [
+    [[5, 1, 3], 3, 3], [[Number.MIN_VALUE], Number.MIN_VALUE, Number.MIN_VALUE],
+    [[1e300, 1e300], 1e300, 1e300], [[NaN], NaN, NaN],
+    [[Infinity, -Infinity], NaN, Infinity], [[-0], -0, -0],
+  ] as const) {
+    assert.ok(Object.is(medianAveraged([...input]), averaged));
+    assert.ok(Object.is(medianUpperMiddle(input), upper));
+  }
+  assert.ok(Number.isNaN(medianAveraged([])));
+  assert.throws(() => medianUpperMiddle([]), { name: 'TypeError', message: 'No occupied cells to take a median of.' });
+});

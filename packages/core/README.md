@@ -12,7 +12,10 @@ behind the separate `@cssearth/core/node` entry.
 | | `requireRecord`, `requireArray`, `requireString`, `requireFiniteNumber`, `requirePositive`, `requireBoolean`, `requireNonemptyText` | `<label> must be …` (label defaults to `Source value`) |
 | | `checks(failure(prefix))`: `record`, `array`, `text`, `finite`, `positive`, `integer`, `boolean`, `choice`, `unique`, `numbers` | `<prefix><label> must be ….` |
 | | decoders: `shape`, `optional`, `nullable`, `array`, `dictionary`, `boolean`, `choice`, `text`, `number` | `<context> <key>: <reason>` |
-| | `cross3`, `dot3`, `dotN`; `clamp`; `median` (sorts its argument in place) | no throw |
+| | `normalizeOrZero`, `normalize3OrZero`, `normalize3OrZeroNonPositive`, `normalize3Unchecked` | zero/NaN policies named explicitly |
+| | `medianUpperMiddle` (copies, upper middle) | `TypeError` for an empty sample |
+| | `normalizeOrThrow` | caller-supplied error for zero/NaN length |
+| | `cross3`, `dot3`, `dotN`; `clamp`; `medianAveraged` / `median` (sort in place) | no throw |
 | | prepared `matrix3d` transport: `requirePreparedMatrix4`, `readPreparedMatrix4`, `multiplyPreparedMatrix4`, `preparedRotationMatrix4`, `invertPreparedAffineMatrix4`, `transformPreparedPoint`, `serializePreparedMatrix4` | `Prepared projection requires …`, `Prepared rotation axis is invalid.`, `Prepared material parent became singular.` |
 | | `isArray`, `canonical` (recursively key-sorted copy for stable JSON), `flagValue`, `positionalArguments` | no throw |
 | `@cssearth/core/schema` | structural guards: `object`, `array`, `tuple`, `union`, `literal`, `json`, … and `parse` | `Invalid <label> structure at <path> (<value>).` |
