@@ -1,0 +1,43 @@
+{
+  "id": "mihos-2013-m101-outer-disc",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Extended Optical Disk of M101",
+  "identifiers": [
+    {
+      "type": "arxiv",
+      "value": "1211.3095"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1211.3095",
+      "label": "arXiv:1211.3095"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1211.3095",
+      "checkedOn": "2026-10-01",
+      "locator": "Abstract: deep wide-field imaging to a limiting surface brightness of about 29.5 mag per square arcsecond in B \"has revealed the stellar structure of M101's disk out to nearly 25 arcminutes (50 kpc)\"."
+    }
+  ],
+  "creators": [
+    "C. Mihos",
+    "P. Harding",
+    "C. Spengler",
+    "C. Rudick",
+    "J. Feldmeier"
+  ],
+  "publisher": "arXiv:1211.3095",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Mihos et al., arXiv:1211.3095.",
+      "scope": "Stellar extent",
+      "evidence": "https://arxiv.org/abs/1211.3095"
+    }
+  ]
+}

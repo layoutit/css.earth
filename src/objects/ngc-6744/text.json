@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-6744",
+  "card": {
+    "text": "A barred spiral galaxy 9.5 million parsecs away, tilted 54° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "publication-tully2009aj-138-323t",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
+        "label": "Tully2009AJ....138..323T: The Extragalactic Distance Database",
+        "checked": "2026-10-01",
+        "locator": "distance: 9.506 Mpc (−593,500 / +633,100 pc)"
+      },
+      {
+        "catalogueId": "lang-2020-phangs-kinematics",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/897/122",
+        "label": "Lang et al. (2020), ApJ 897, 122, Table 1",
+        "checked": "2026-10-01",
+        "locator": "row NGC6744: inclination 53.5 deg"
+      },
+      {
+        "catalogueId": "ho-2011-cgs",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/197/21",
+        "label": "Ho et al. (2011), ApJS 197, 21",
+        "checked": "2026-10-01",
+        "locator": "row NGC 6744: morphological type SAB(r)bc (RC3), SABb (HyperLeda)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of the largest spiral galaxies near us in the southern sky. It lies 26° from the plane of the Milky Way, so thousands of our galaxy's stars stand in front of it.",
+    "sources": [
+      {
+        "catalogueId": "ho-2011-cgs",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/197/21",
+        "label": "Ho et al. (2011), ApJS 197, 21",
+        "checked": "2026-10-01",
+        "locator": "row NGC 6744: isophotal diameter D25 9.84 arcmin, 27 kpc at 9.5 Mpc; the survey covers bright southern galaxies"
+      },
+      {
+        "catalogueId": "lvdb-v1-1-1",
+        "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+        "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+        "checked": "2026-10-01",
+        "locator": "row ngc_6744: Galactic latitude bb = -26.15 deg"
+      },
+      {
+        "catalogueId": "gaia-2023-dr3",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355",
+        "label": "Gaia Collaboration, Vallenari et al. (2023), A&A 674, A1",
+        "checked": "2026-10-01",
+        "locator": "5,768 Gaia DR3 sources within 0.3 deg of NGC 6744 meet the foreground criterion (the query in the source record)"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "NGC 6744 in visible light",
+      "detail": "5312 × 4472 px",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1118a",
+          "url": "https://www.eso.org/public/images/eso1118a/",
+          "label": "Wide Field Imager view of a Milky Way look-alike, NGC 6744; ESO",
+          "checked": "2026-10-01",
+          "locator": "Wide Field Imager view of a Milky Way look-alike, NGC 6744"
+        }
+      ]
+    }
+  }
+}

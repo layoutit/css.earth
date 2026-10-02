@@ -57,6 +57,10 @@ const nearFade = (value: unknown, name: string): NearFade => {
   return { nearOpacity: fade.nearOpacity, fadeKpc: fade.fadeKpc };
 };
 const baseFade = recipe.nearFade === undefined ? undefined : nearFade(recipe.nearFade, 'nearFade');
+const centreFadeKpc = (recipe as { centreFadeKpc?: unknown }).centreFadeKpc;
+if (centreFadeKpc !== undefined && !(pair(centreFadeKpc) && centreFadeKpc[0] > centreFadeKpc[1] && centreFadeKpc[1] > 0)) {
+  throw new TypeError(`${recipePath}: centreFadeKpc is [far, near], far above near above 0, got ${JSON.stringify(centreFadeKpc)}.`);
+}
 if (recipe.sections !== undefined && !Array.isArray(recipe.sections)) throw new TypeError(`${recipePath}: sections must be a list, got ${JSON.stringify(recipe.sections)}.`);
 const sections = ((recipe.sections ?? []) as unknown[]).map((raw, index) => {
   const section = raw as { id?: unknown; radiusKpc?: unknown } | null;
@@ -144,6 +148,7 @@ await writeFile(resolve(prepared, `${id}.json`), JSON.stringify({ schema: 'cssea
   frame, leaf: { texturePath: leaf.texturePath, style: leaf.style }, placement: { kpcPerSourcePx: kpcPerPx, crop: { left, top, width: cropWidth, height: cropHeight } },
   levelsNote: levels.note,
   ...(baseFade ? { nearFade: { nearOpacity: baseFade.nearOpacity, fadeM: baseFade.fadeKpc.map(kpc => kpc * KPC_M) } } : {}),
+  ...(centreFadeKpc ? { centreFadeM: centreFadeKpc.map(kpc => kpc * KPC_M) } : {}),
   ...(bakedSections.length ? { sections: bakedSections } : {}) }) + '\n');
 const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
 await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });

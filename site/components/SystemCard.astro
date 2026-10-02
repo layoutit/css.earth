@@ -1,0 +1,29 @@
+---
+import ObjectCardHeader from './ObjectCardHeader.astro';
+import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
+import SystemBodies from './SystemBodies.astro';
+import Detached from './Detached.astro';
+import { SCENE_OBJECTS } from '../objects.mts';
+import { SOLAR_SYSTEM_ID, systemById } from '../object-systems.mts';
+import { overviewScopeFromUrl } from '../navigation/navigation-scope.mts';
+
+interface Props { hostId: string }
+/** A star's planetary system, as parts of the star's own card: its header and its body list, mounted only while the system
+ * is the card's subject (`updateBodyCard` in object-shell-client.mts), as the satellite system's are. The body list of a
+ * system that is not the page's opening view arrives when it is first shown (system-bodies-fragment.mts): the Sun's is
+ * 549 rows. */
+const { hostId } = Astro.props;
+const system = systemById(SCENE_OBJECTS, hostId);
+const star = system ? SCENE_OBJECTS.find(object => object.id === hostId) : null;
+const shown = overviewScopeFromUrl(Astro.url) === 'system';
+---
+
+{system && star && <>
+  <Detached detached={!shown}><ObjectCardHeader heading={false} title={{ label: system.name }} data-planetary-system
+    introduction={system.id === SOLAR_SYSTEM_ID ? "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets." : star.description}>
+    <ObjectBreadcrumbs scope="system" systemId={system.id} />
+  </ObjectCardHeader></Detached>
+  <Detached detached={!shown}><div data-planetary-system data-system-bodies-slot>
+    {shown && <SystemBodies systemId={system.id} />}
+  </div></Detached>
+</>}

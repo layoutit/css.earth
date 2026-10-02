@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "positions",
+      "path": "src/objects/jupiter-minor-moons/source/dots/positions.csv.gz",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
+      "title": "Positions of Jupiter's moons without a page, relative to Jupiter, at the world's epoch",
+      "credit": "NASA/JPL Solar System Dynamics, Horizons System (JUP347, JUP348 and JUP349)",
+      "acquisition": "Written 2026-10-02 by packages/bake/authoring/minor-moons/positions.mts jupiter: one Horizons vector request for each moon, by the Horizons code in the pinned JPL moon catalogue.",
+      "generator": "packages/bake/authoring/minor-moons/positions.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "src/objects/jupiter-minor-moons/source/dots/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "moon-catalogue"
+      ],
+      "license": "NASA/JPL United States government data; cite JPL Horizons."
+    },
+    {
+      "id": "moon-catalogue",
+      "path": "site/source/moon-catalogues.json",
+      "origin": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "title": "Each planet's confirmed moons and their Horizons codes",
+      "credit": "NASA/JPL Solar System Dynamics",
+      "acquisition": "Read from the pinned JPL moon catalogue, which packages/bake/cli/acquire-moon-catalogues.mts refreshes from the JPL discovery and mean-elements tables.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-satellite-discovery",
+            "role": "method",
+            "evidence": "src/objects/jupiter-minor-moons/README.md#processing"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "NASA/JPL United States government data."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/jupiter-minor-moons/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/jupiter-minor-moons/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

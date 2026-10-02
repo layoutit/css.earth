@@ -9,8 +9,8 @@
       "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
       "title": "Positions of Saturn's moons without a page, relative to Saturn, at the world's epoch",
       "credit": "NASA/JPL Solar System Dynamics, Horizons System (satellite ephemerides SAT455, SAT456, SAT457 and SAT459)",
-      "acquisition": "Written 2026-10-01 by packages/bake/authoring/saturn-minor-moons/positions.mts: one Horizons vector request for each moon, by the Horizons code in Saturn's retained JPL moon catalogue.",
-      "generator": "packages/bake/authoring/saturn-minor-moons/positions.mts",
+      "acquisition": "Written 2026-10-01 by packages/bake/authoring/minor-moons/positions.mts saturn (then at packages/bake/authoring/saturn-minor-moons/): one Horizons vector request for each moon, by its Horizons code in the JPL moon catalogue.",
+      "generator": "packages/bake/authoring/minor-moons/positions.mts",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -22,18 +22,18 @@
         ]
       },
       "dependencies": [
-        "saturn-moon-catalogue"
+        "moon-catalogue"
       ],
       "license": "NASA/JPL United States government data; cite JPL Horizons."
     },
     {
-      "id": "saturn-moon-catalogue",
-      "path": "src/objects/saturn/source/moons/saturn-moons.json",
+      "id": "moon-catalogue",
+      "path": "site/source/moon-catalogues.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/discovery.html",
       "sourceUrl": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-      "title": "Saturn's confirmed moons and their Horizons codes, as retained in Saturn's package",
+      "title": "Each planet's confirmed moons and their Horizons codes",
       "credit": "NASA/JPL Solar System Dynamics",
-      "acquisition": "Read from Saturn's tracked moon catalogue, which its acquisition plan refreshes from the JPL discovery and mean-elements tables.",
+      "acquisition": "Read from the pinned JPL moon catalogue, which packages/bake/cli/acquire-moon-catalogues.mts refreshes from the JPL discovery and mean-elements tables.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

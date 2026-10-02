@@ -6,11 +6,11 @@ import { loadVolumeSource, sampleEncoded, decodeDensityKtx2, containedPath, bake
 import { parseVolumeAcquisition, reduceRawVolume, encodeDensityKtx2 } from './acquisition.ts';
 import sharp from 'sharp';
 import { sunBarycentricAu, M_PER_AU } from '@cssearth/astronomy';
-const sourceDirectory = 'src/objects/milky-way/source';
+const sourceDirectory = 'src/objects/milky-way-volume/source';
 const readRecipe = async () => parseVolumeRecipe(JSON.parse(await readFile(`${sourceDirectory}/volume.json`, 'utf8')) as unknown);
 
 test('the galaxy sits on Sgr A* in the Galactic plane: OpenSpace extent and in-plane rotation, measured centre, no tilt', async () => {
-  const descriptor=JSON.parse(await readFile('src/objects/milky-way/object.json','utf8')) as {properties:{volume:{referenceFrame:string;originM:number[];epochJdTt:number;localToReferenceXyzw:number[];metersPerUnit:number;boundsUnits:{min:number[];max:number[]}}}};
+  const descriptor=JSON.parse(await readFile('src/objects/milky-way-volume/object.json','utf8')) as {properties:{volume:{referenceFrame:string;originM:number[];epochJdTt:number;localToReferenceXyzw:number[];metersPerUnit:number;boundsUnits:{min:number[];max:number[]}}}};
   const provenance=JSON.parse(await readFile(`${sourceDirectory}/provenance.json`,'utf8')) as {frame:{centerIcrfM:number[];rotationRadians:number[];fullExtentM:number[]};references:{path:string}[]};
   const asset=await readFile(`${sourceDirectory}/openspace/volume.asset`,'utf8');
   assert.match(asset,/KiloParsec = 3\.086E19/);assert.match(asset,/8 \* KiloParsec, 0, 0/);

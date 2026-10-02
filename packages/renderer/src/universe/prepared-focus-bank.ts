@@ -10,6 +10,8 @@ export interface PreparedFocusBank {
   state(): PreparedFocusDatasets | null;
   load(): Promise<void>;
   selectDataset(id: string): void;
+  /** The world always draws it: it has no datasets of its own to load or switch (a level's context package). */
+  readonly always?: true;
   /** Keep the bank resident until the focus releases it. */
   subscribe(listener: () => void): () => void;
 }
@@ -27,6 +29,15 @@ export function createImageFocusBank(objectId: string, frame: DensityVolumeFrame
     objectId, framingRadiusM: () => radiusM, state: () => state, load,
     selectDataset(id) { if (id !== 'optical') throw new TypeError('Unknown image-layer dataset.'); },
     subscribe: () => () => {},
+  };
+}
+
+/** A context package the world always draws (the galaxy's volume, the Local Group's catalogue): the dataset a level object
+ * names it by has nothing to load or to switch. */
+export function createContextFocusBank(objectId: string): PreparedFocusBank {
+  return {
+    objectId, always: true, framingRadiusM: () => { throw new TypeError('A context package is framed by its scene.'); }, state: () => null, load: () => Promise.resolve(),
+    selectDataset() {}, subscribe: () => () => {},
   };
 }
 

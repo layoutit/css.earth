@@ -92,7 +92,7 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
 }
 
 // Catalogue IDs and detailed package IDs can differ (for example M 31).
-const cataloguePath = 'src/objects/local-group/prepared/catalogue.json';
+const cataloguePath = 'src/objects/local-group-galaxies/prepared/catalogue.json';
 const catalogue = sourceObject(await json(cataloguePath));
 for (const object of sourceArray(catalogue.objects, sourceObject)) {
   if (typeof object.detailedObjectId === 'string' && defaults[object.detailedObjectId])

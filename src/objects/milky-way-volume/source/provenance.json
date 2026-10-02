@@ -1,0 +1,194 @@
+{
+  "schema": "cssearth-volume-provenance@2",
+  "title": "OpenSpace Milky Way volume",
+  "kind": "scientific-simulation-adapted-for-visualization",
+  "authors": [
+    "Jon Parker",
+    "Emil Axelsson",
+    "Carter Emmart",
+    "OpenSpace Team"
+  ],
+  "organizations": [
+    "National Astronomical Observatory of Japan (simulation)",
+    "American Museum of Natural History (Dark Universe model)",
+    "OpenSpace Project (volume adaptation)"
+  ],
+  "license": {
+    "spdx": "MIT",
+    "dataLicenseDeclaration": "https://docs.openspaceproject.com/latest/content/milky-way/galaxy/milky-way-volume/index.html",
+    "notice": "openspace/LICENSE.md",
+    "note": "The official asset documentation explicitly licenses this volume MIT. The included OpenSpace MIT notice accompanies the pinned asset/shader; no separate data notice is listed by the synchronization response."
+  },
+  "upstream": {
+    "repository": "https://github.com/OpenSpace/OpenSpace",
+    "commit": "9ca759eb5a9f74537708c66842f159f1c4467ab1",
+    "asset": "data/assets/scene/milkyway/milkyway/volume.asset",
+    "shader": "modules/galaxy/shaders/galaxyraycast.glsl",
+    "reader": "modules/volume/rawvolumereader.inl",
+    "readerDeclaration": "modules/volume/rawvolumereader.h",
+    "indexing": "modules/volume/volumeutils.cpp",
+    "raymarch": "shaders/framebuffer/raycastframebuffer_fs.glsl",
+    "sync": {
+      "metadataUrl": "https://liu-se.bigbang.openspaceproject.com/request?identifier=milkyway_volume_data&file_version=1&application_version=1",
+      "identifier": "milkyway_volume_data",
+      "fileVersion": 1,
+      "applicationVersion": 1,
+      "response": "openspace/sync-response.txt",
+      "transport": "HTTPS equivalent of published HTTP CDN URL"
+    },
+    "raw": {
+      "url": "https://liu-se.cdn.openspaceproject.com/files/milkyway/milkyway/volume/1/MilkyWayRGBAVolume1024x1024x128.raw",
+      "bytes": 536870912,
+      "dimensions": [
+        1024,
+        1024,
+        128
+      ],
+      "layout": "x-fastest-rgba8",
+      "invertZ": false
+    }
+  },
+  "frame": {
+    "reference": "Galactic J2000 centered on Solar System barycenter",
+    "centerGalacticM": [
+      246880000000000000000,
+      0,
+      0
+    ],
+    "centerIcrfM": [
+      -13547678355555398000,
+      -215634148837188400000,
+      -119449188638666330000
+    ],
+    "rotationOrder": "Rx * Ry * Rz; column vectors",
+    "rotationRadians": [
+      3.141592653589793,
+      3.1248,
+      4.45741
+    ],
+    "fullExtentM": [
+      1.2e+21,
+      1.2e+21,
+      150000000000000000000
+    ],
+    "galacticToIcrf": [
+      -0.05487556041621597,
+      0.4941094278755833,
+      -0.8676661490190049,
+      -0.8734370902348849,
+      -0.44482962996001163,
+      -0.19807637343120094,
+      -0.4838350155487133,
+      0.7469822444972188,
+      0.45598377617506686
+    ],
+    "conversion": "ICRF center minus Sun barycentric position at descriptor epoch; orientation is Galactic-to-ICRF times authored volume rotation."
+  },
+  "transfer": {
+    "channelMeaning": [
+      "red emission",
+      "green emission",
+      "blue emission",
+      "dust absorption"
+    ],
+    "encodedFilter": "clamp-to-edge trilinear RGBA8 UNORM",
+    "rgbExponent": 2,
+    "alphaExponent": 1.4,
+    "emissionMultiply": 250,
+    "absorptionMultiply": 200,
+    "absorptionColor": [
+      0.3,
+      0.54,
+      0.85
+    ],
+    "cylinderSupport": {
+      "axis": "z",
+      "radiusSquared": 0.7,
+      "coordinates": "texture position * 2 - 1"
+    },
+    "pathMetric": "Euclidean distance in normalized texture coordinates; per-axis integration divides by that source-axis extent.",
+    "omitted": "OpenSpace camera-dependent volume fade, per-ray jitter, additive HDR display, and separate MilkyWayPoints/halo star renderer; cssEarth retains its independently sourced star field.",
+    "cssApproximation": "CSS slabs integrate common physical/source distance on all axes to avoid an axis-dependent optical coefficient. OpenSpace instead integrates normalized texture distance; exact additive raymarch photometry is not reproduced. Display exposure gain 16 is applied after integration and balanced against the NASA interior panorama. Display gain is an authored presentation parameter, not a published OpenSpace source parameter.",
+    "cssTextureEncoding": {
+      "format": "WebP",
+      "quality": 90,
+      "alphaQuality": 100,
+      "effort": 5,
+      "smartSubsample": true,
+      "note": "RGB is perceptually compressed; alpha texels are preserved exactly. Source RGBA scientific volume remains lossless and unchanged."
+    },
+    "cssSampling": "256 X/Y slabs and 32 Z slabs have equal physical/source pitch 0.0078125; each Z slab integrates 4 samples at the original 128 source Z texel centres. In-plane texture width remains 1024; no adaptive image resampling.",
+    "cssDisplayColorGrade": {
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0.951277424,
+        0,
+        0,
+        0,
+        0.709752511
+      ],
+      "space": "Ordinary display RGB after exponential transfer; one linear matrix on premultiplied emitted RGB with alpha unchanged. This is not linear-light photometry.",
+      "reference": "NASA original Milky Way-only preview; matched ICRF rays at the Sun, fit independently of luminance.",
+      "calibration": "color-calibration.json",
+      "scope": "Same coefficients for every slab and axis, observer position and distance. No added desaturation; source emission/absorption coefficients and scientific input bytes unchanged."
+    }
+  },
+  "derivative": {
+    "method": "encoded-box-average-round-half-up",
+    "factor": 1,
+    "dimensions": [
+      1024,
+      1024,
+      128
+    ],
+    "encoding": "Original RGBA8 bytes, unchanged",
+    "compression": {
+      "format": "ktx2-rgba8-zstd",
+      "level": 9
+    },
+    "nodeVersion": "22.23.2",
+    "zstdVersion": "1.5.7",
+    "bytes": 43800096,
+    "error": "Lossless container conversion: decoded bytes are identical to every byte of the original published raw volume; no source averaging or quantization."
+  },
+  "references": [
+    {
+      "path": "openspace/LICENSE.md",
+      "bytes": 1148
+    },
+    {
+      "path": "openspace/volume.asset",
+      "bytes": 1838
+    },
+    {
+      "path": "openspace/galaxyraycast.glsl",
+      "bytes": 3788
+    },
+    {
+      "path": "openspace/sync-response.txt",
+      "bytes": 279
+    },
+    {
+      "path": "color-calibration.json"
+    }
+  ],
+  "sourceBinding": {
+    "kind": "catalogued",
+    "references": [
+      {
+        "catalogueId": "openspace-milky-way-volume",
+        "role": "material",
+        "evidence": "src/objects/milky-way-volume/source/provenance.json#/title"
+      }
+    ]
+  },
+  "catalogueDisplay": {
+    "feature": "galaxy",
+    "label": "OpenSpace",
+    "credit": "Milky Way volume · Jon Parker, Emil Axelsson, Carter Emmart; NAOJ, AMNH & OpenSpace.",
+    "description": "OpenSpace Milky Way volume. Jon Parker, Emil Axelsson, Carter Emmart, OpenSpace Team. National Astronomical Observatory of Japan (simulation); American Museum of Natural History (Dark Universe model); OpenSpace Project (volume adaptation)."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-body-points-source@1",
+  "id": "dots",
+  "published": true,
+  "host": "neptune",
+  "source": "jpl-horizons",
+  "meaning": "Neptune's confirmed moons that have no page, one dot each at its JPL Horizons position relative to Neptune at the world's epoch. No colour is measured for these moons: the dot is the neutral grey the app gives every moon without a measured colour.",
+  "table": {
+    "path": "positions.csv.gz",
+    "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+    "generator": "packages/bake/authoring/minor-moons/positions.mts"
+  },
+  "frame": {
+    "input": "host-centred-icrf-km",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "appearance": {
+    "colorCss": "#9a9a9a",
+    "radiusPx": 1,
+    "opacity": 1
+  }
+}

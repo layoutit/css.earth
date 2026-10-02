@@ -189,7 +189,7 @@ test('the Local Group overview frames the Milky Way and every drawn member galax
   // The catalogue's Local Group members with a drawn object: M81, NGC 253, M83 and NGC 300 are drawn but belong elsewhere.
   // The association comes from the restored prepared catalogue (prepare-catalog.mts); without it only distance applies.
   const { existsSync } = await import('node:fs');
-  const associated = existsSync(new URL('../../src/objects/local-group/prepared/catalogue.json', import.meta.url));
+  const associated = existsSync(new URL('../../src/objects/local-group-galaxies/prepared/catalogue.json', import.meta.url));
   if (associated) assert.deepEqual(Object.keys(members).sort(), ['lmc', 'm31', 'm33', 'smc']);
   const { overviewScopeAtCamera } = await import('../overview-context.mts');
   for (const orientationXyzw of [[0, 0, 0, 1], [.5, -.5, .5, .5], [0, .7071067811865476, 0, .7071067811865476]] as const) {

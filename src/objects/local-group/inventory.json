@@ -2,16 +2,52 @@
   "schema": "cssearth-inventory@1",
   "assets": [
     {
-      "location": "prepared",
-      "filename": "catalogue.json",
-      "bytes": 705298,
-      "sha256": "9a742dead3a23c9fbdac1d39109028b176148a5938e476035ee39a4e79b25246"
+      "location": "public",
+      "filename": "local-group-dataset-galaxies.webp",
+      "bytes": 560,
+      "sha256": "0f170bf2810594976610a308d29c12017282689a263de7aa1291443f212202a3"
     },
     {
       "location": "prepared",
-      "filename": "display-sample.json",
+      "filename": "content.json",
+      "bytes": 1207,
+      "sha256": "8b9af25873ad3aff1c81bad7c2fa1f07039170fccd701bebed54645d07c964de"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 498,
+      "sha256": "58e95519be7e5aaa1fc978172ebd131cc0f0eda57c05ef806d006d36415ff897"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 652,
+      "sha256": "c75606e58d6355e48fbd9c8437f608ed792c1719eecc92f3837c342a192929e0"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 4639,
+      "sha256": "0d2968acb077cff7865546e870e044f1062aa204bca3ffbdeb9760bfc2142c5a"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 3851,
+      "sha256": "650de01cd0d59306db845422518df387b299644273333b6075f23f721c4dde37"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
       "bytes": 1107,
-      "sha256": "afb044113840a5e094a653e0e6d1dc20850face2444439f1677fbaeb94238333"
+      "sha256": "e533b84540390146fa5a0a510a8c877ad297e01e27a983349220c09004a1e004"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 633,
+      "sha256": "cb3ebf27ba87554d26b85755de0b61e146a476ec6080b767d915a62db5ebfee3"
     }
   ]
 }

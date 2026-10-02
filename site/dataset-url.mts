@@ -1,14 +1,11 @@
-import { drawnPageFromUrl } from './navigation/navigation-scope.mts';
-
-/** The mounted scene's own dataset. On the page of a level the scene draws the scene reads none: that page's `dataset` is
- * the level's own (page-datasets.mts). */
-export function readSceneDatasetUrl(url: URL, sceneId: string): { requested: boolean; id: string | null } {
-  return drawnPageFromUrl(url, sceneId) === null ? readDatasetUrl(url) : { requested: false, id: null };
+/** The mounted scene's own dataset. */
+export function readSceneDatasetUrl(url: URL, _sceneId: string): { requested: boolean; id: string | null } {
+  return readDatasetUrl(url);
 }
 
-/** Writes the mounted scene's dataset, except on the page of a subject the scene draws (navigation-scope.mts withPage). */
-export function withSceneDataset(url: URL, sceneId: string, id: string | null): URL {
-  return drawnPageFromUrl(url, sceneId) === null ? withDataset(url, id) : new URL(url);
+/** Writes the mounted scene's dataset. */
+export function withSceneDataset(url: URL, _sceneId: string, id: string | null): URL {
+  return withDataset(url, id);
 }
 
 /** Dataset selections are canonical query parameters. */

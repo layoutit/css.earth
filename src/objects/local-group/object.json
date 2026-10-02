@@ -1,8 +1,63 @@
 {
   "schema": "cssearth-object@2",
   "id": "local-group",
-  "type": "galaxy-catalog",
+  "type": "layered-body",
   "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Local Group",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 695700
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Local Group",
+      "systemName": "Galaxy clusters",
+      "classification": "galaxy-cluster",
+      "classificationLabel": "Galaxy group",
+      "color": "#9a9a9a",
+      "distanceAu": 79648329870,
+      "description": "Our galaxy group: the Milky Way, Andromeda and their neighbouring galaxies.",
+      "order": 5154,
+      "context": {}
+    },
     "overview": {
       "order": 2,
       "zoom": {
@@ -29,21 +84,9 @@
           "list": "Galaxies"
         }
       ],
-      "packages": []
-    },
-    "preparation": {
-      "source": "source/catalogue.json"
-    },
-    "catalog": {
-      "name": "Local Group",
-      "systemName": "Galaxy clusters",
-      "classification": "galaxy-cluster",
-      "classificationLabel": "Galaxy group",
-      "color": "#9a9a9a",
-      "distanceAu": 79648329870,
-      "description": "Our galaxy group, including the Milky Way, Andromeda and their neighboring galaxies.",
-      "order": 5154,
-      "context": {}
+      "packages": [
+        "local-group-galaxies"
+      ]
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -54,22 +97,27 @@
         7.837010763892267e+21
       ],
       "presentationToReference": [
+        0.889266394543635,
         0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1
+        0.4573896364538269,
+        0.41964678682273054,
+        0.3977771559319137,
+        -0.8158859653947208,
+        0.1819391487413352,
+        -0.9174820620691818,
+        -0.3537298572873942
       ],
-      "metersPerUnit": 3.2708182363808494e+22,
-      "bodyRadiusM": 3.2708182363808494e+22
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 2244193.5483870967,
+      "bodyRadiusM": 695700000
     }
   },
   "prepared": {
-    "format": "cssearth-galaxy-catalog@1",
-    "url": "prepared/catalogue.json"
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
   }
 }

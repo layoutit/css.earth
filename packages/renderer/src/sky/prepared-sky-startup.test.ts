@@ -8,7 +8,7 @@ import { mountPreparedCssSky } from './prepared-sky-runtime.js';
 import { holdStartup, releaseStartup } from '../rendering/startup-gate.js';
 
 // The Milky Way's prepared sky, as the app mounts it.
-const volume = JSON.parse(readFileSync(new URL('../../../../src/objects/milky-way/prepared/volume.json', import.meta.url), 'utf8')).data as PreparedCssVolume;
+const volume = JSON.parse(readFileSync(new URL('../../../../src/objects/milky-way-volume/prepared/volume.json', import.meta.url), 'utf8')).data as PreparedCssVolume;
 
 test('while a body\'s first view holds the gate, the sky faces in view wait for it, then take exactly their images', () => {
   const { document, window } = parseHTML('<div id="host"><i></i></div>');

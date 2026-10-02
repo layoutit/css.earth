@@ -238,7 +238,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const isSelected = !overview && ownsDetail;
         const nearSelected = entry.orbit?.centerBodyId === closeFamilyCenter;
         const isOrbitFocus = !orbitOverview && body.id === orbitFocus.body.id;
-        const bodyOrbitOpacity = isOrbitFocus ? ownOrbitOpacity : !orbitOverview && !nearSelected &&
+        // A host's object page is its close detail, not its satellite system: its moons' paths fade out with the host's
+        // growth, as its own orbit does, and return as the camera pulls back. A hover or preview shows a path at any range.
+        const hostDetailSatellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id) && !overview &&
+          selectedId === entry.parent.id && !entry.hovered && entry.highlighted !== true && selectionPreview == null;
+        const bodyOrbitOpacity = isOrbitFocus || hostDetailSatellite ? ownOrbitOpacity : !orbitOverview && !nearSelected &&
           !entry.hovered && entry.highlighted !== true && body.id !== emphasizedId ? orbitOpacity * ownOrbitOpacity : orbitOpacity;
         const systemOpacity = systemFade.of(entry.index);
         // A body of a faded-out system that nothing targets or shows has no marker, path or caption: the stub, unprojected.
@@ -282,10 +286,6 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const satellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id);
         const fullOrbit = satellite || hovered;
         const inactiveSatellite = satellite && !hovered && !activeSystems.has(entry.parent!.id);
-        // A host's object page is its close detail, not its satellite system. Keep satellite paths
-        // unrequested until the system overview or an explicit hover/preview needs them.
-        const hostDetailSatelliteOrbit = satellite && !overview && selectedId === entry.parent!.id &&
-          !hovered && !highlighted && selectionPreview == null;
         // Open trajectories have no physical apoapsis and read as unbounded
         // guide lines at system scale. Keep them quiet until the body itself
         // is hovered; closed orbits retain their normal category policy.
@@ -293,7 +293,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // untargeted one neither draws nor wants its path: a plain dot's bank is read only for the dot being named.
         const pathUnnamed = (annotationPriorities[body.id] ?? 2) < 2 && entry.labelHidden && !hovered && entry.highlighted !== true &&
           body.id !== emphasizedId;
-        let skipped = hostDetailSatelliteOrbit || pathUnnamed || !hovered && (entry.orbitHidden || entry.orbit?.closed === false);
+        let skipped = pathUnnamed || !hovered && (entry.orbitHidden || entry.orbit?.closed === false);
         // Prepared trail bounds enclose the faded trail; a complete orbit uses the
         // prepared sphere around every vertex. Either way a path that cannot reach
         // the fade's first visible extent inside the viewport is not projected.
@@ -314,7 +314,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
             // no projection at all: hundreds of small hidden orbits skip here.
             const sphereDiameter = bounds && boundsEye ? projectedSphereDiameter(boundsEye, bounds.radiusM, focal, near) : Infinity;
             const orbit = entry.orbit;
-            if (sphereDiameter >= ORBIT_FADE_START_PIXELS && !hasPath(orbit) && !pathUnnamed && !hostDetailSatelliteOrbit) wantedOrbits.add(body.id);
+            if (sphereDiameter >= ORBIT_FADE_START_PIXELS && !hasPath(orbit) && !pathUnnamed && !hostDetailSatellite) wantedOrbits.add(body.id);
             measuredExtent = sphereDiameter < ORBIT_FADE_START_PIXELS ? Math.max(1, sphereDiameter)
               // An orbit whose bank has not arrived is measured by its prepared sphere until its path can be.
               : !hasPath(orbit) ? Math.max(1, Math.min(sphereDiameter, ORBIT_FULL_PIXELS))
@@ -348,8 +348,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const beyondLocalGroup = extendedRetirement(entry.kind, fromFocus) ?? logarithmicFade(Math.hypot(...eye), entry.scale.returnDistanceM, entry.scale.enterDistanceM);
         const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' &&
           entry.galaxyField && (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
-        // A retired galaxy level takes its own stars and nebulae with it; another galaxy's star, a galaxy and a cluster keep their dots.
-        const atGalaxyScale = view.galaxyRetired === true && body.id !== plan.focus.id && entry.orbit === null && entry.galaxyField && entry.kind !== 'galaxy' && entry.kind !== 'galaxy-cluster' ? 1 : galaxyHost ? galaxyHandoff : 0;
+        // A retired galaxy level takes its own stars and nebulae with it; another galaxy's star, a galaxy, a cluster and a black hole (a galaxy's centre, its landmark from outside) keep their dots.
+        const atGalaxyScale = view.galaxyRetired === true && body.id !== plan.focus.id && entry.orbit === null && entry.galaxyField && entry.kind !== 'galaxy' && entry.kind !== 'galaxy-cluster' && entry.kind !== 'black-hole' ? 1 : galaxyHost ? galaxyHandoff : 0;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
           (isSelected || flightDestination ? 1 : (1 - beyondLocalGroup) * (1 - atGalaxyScale));

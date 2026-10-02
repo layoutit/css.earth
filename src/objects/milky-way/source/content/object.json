@@ -1,0 +1,114 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "milky-way",
+  "displayName": "Milky Way",
+  "panel": {
+    "facts": [
+      {
+        "id": "centre-distance",
+        "label": "Distance to the centre",
+        "value": "8,277 ± 9 pc",
+        "source": {
+          "catalogueId": "arxiv-2112-07478",
+          "url": "https://arxiv.org/abs/2112.07478",
+          "label": "GRAVITY Collaboration 2022",
+          "checked": "2026-10-01",
+          "locator": "Table 1, R0"
+        }
+      },
+      {
+        "id": "galaxy-type",
+        "label": "Galaxy type",
+        "value": "Barred spiral",
+        "source": {
+          "catalogueId": "nasa-science-galaxies",
+          "url": "https://science.nasa.gov/universe/galaxies/",
+          "label": "NASA Science · Galaxies",
+          "checked": "2026-09-07"
+        }
+      },
+      {
+        "id": "stellar-disk-diameter",
+        "label": "Stellar disk diameter",
+        "value": ">100,000 ly",
+        "source": {
+          "catalogueId": "nasa-science-galaxies",
+          "url": "https://science.nasa.gov/universe/galaxies/",
+          "label": "NASA Science · Galaxies",
+          "checked": "2026-09-07"
+        }
+      },
+      {
+        "id": "galaxy-group",
+        "label": "Galaxy group",
+        "value": "Local Group",
+        "source": {
+          "catalogueId": "nasa-science-galaxies",
+          "url": "https://science.nasa.gov/universe/galaxies/",
+          "label": "NASA Science · Galaxies",
+          "checked": "2026-09-07"
+        }
+      },
+      {
+        "id": "sun-location",
+        "label": "Sun’s location",
+        "value": "Orion Spur",
+        "source": {
+          "catalogueId": "nasa-science-galaxies",
+          "url": "https://science.nasa.gov/universe/galaxies/",
+          "label": "NASA Science · Galaxies",
+          "checked": "2026-09-07"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "galaxy",
+    "controls": [
+      {
+        "id": "galaxy",
+        "label": "Catalogues · simulated bulge",
+        "thumbnail": "milky-way-dataset-galaxy.webp",
+        "volume": {
+          "objectId": "milky-way-volume",
+          "datasetId": "galaxy",
+          "surface": "galaxy"
+        },
+        "source": {
+          "id": "milky-way-volume-galaxy",
+          "path": "../../milky-way-volume/README.md",
+          "url": "https://www.esa.int/ESA_Multimedia/Images/2025/09/Gaia_s_star-formation_map_slider"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "GRAVITY Collaboration 2022",
+      "href": "https://arxiv.org/abs/2112.07478"
+    },
+    {
+      "label": "Reference",
+      "role": "facts",
+      "description": "NASA Science · Galaxies",
+      "href": "https://science.nasa.gov/universe/galaxies/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://science.nasa.gov/universe/galaxies/",
+      "credit": "NASA Science · Galaxies"
+    }
+  }
+}

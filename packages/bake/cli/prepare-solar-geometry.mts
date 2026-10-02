@@ -47,7 +47,7 @@ export async function prepareSolarGeometry() {
     DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
     SMALL_BODY_IDS, asteroidElements,
     COMET_IDS, cometElements,
-    STAR_IDS, starAstrometry, starStateKm,
+    STAR_IDS, starAstrometry, starStateKm, directionFromRaDec,
     HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm, hostedPlanetStateAboutCentreKm, hostedOrbitCentreStateKm, hostedBarycentreCompanion, hostedOrbitCentreId, hostedOrbit, hostedKeplerElements,
     SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToParentKm,
     SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
@@ -219,10 +219,10 @@ export async function prepareSolarGeometry() {
       ? moonVelocity!.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
       ? (primaryStates.get(body) ?? kepler).velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : primaryVelocity(body);
-    const orbitPositionAu = isSatellite ? moonPosition!.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : heliocentricAu;
-    // Every body keeps its true Sun direction: the world context rebuilds heliocentric positions from it. A hosted planet's own
-    // light source is its host star, which its synchronous rotation record faces at longitude 0; its map is emissive.
-    const toSunIcrf = normalize(heliocentricAu.map((component) => -component));
+    // A scale of the universe centred on the observer (distance zero) has no place: its record's direction stands for its line of sight.
+    const orbitPositionAu = isSatellite ? moonPosition!.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : star && !Math.hypot(...heliocentricAu) ? (({ rightAscensionDegrees, declinationDegrees }) => [...directionFromRaDec(rightAscensionDegrees, declinationDegrees)])(starAstrometry(body as Parameters<typeof starAstrometry>[0])) : heliocentricAu;
+    // Every body keeps its true Sun direction: the world context rebuilds heliocentric positions from it. A hosted planet's own light source is its host star, which its synchronous rotation record faces at longitude 0; its map is emissive.
+    const toSunIcrf = normalize((isSatellite ? heliocentricAu : orbitPositionAu).map((component) => -component));
     // A placed source with no proper motion (an ICRF3 radio source such as M87*) moves straight along its line of sight: its
     // path is a line and sweeps no plane, and r x v is rounding noise. Its plane is taken through the ecliptic pole, a
     // convention the path does not depend on, and the path is measured from the body's own direction, as a circle's is.

@@ -32,7 +32,8 @@ export function parseDensityVolumeObjectDescriptor(value: unknown): DensityVolum
   if (descriptor.type !== 'density-volume') throw new TypeError('Object descriptor is not a density-volume.');
   const properties = record(descriptor.properties, 'object.properties');
   // `overview` is the package's registry entry (registry/overview-object.ts), read by the catalogue, not by the volume.
-  keys(properties, ['volume', 'preparation', 'overview'], 'object.properties');
+  // `host`: the object whose dataset names this volume (the Milky Way), where its source links lead.
+  keys(properties, ['volume', 'preparation', 'host'], 'object.properties');
   return Object.freeze({ ...descriptor, type: 'density-volume' as const,
     volume: parseDensityVolumeFrame(properties.volume), preparation: parsePreparation(properties.preparation) });
 }

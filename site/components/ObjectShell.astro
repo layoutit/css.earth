@@ -10,9 +10,7 @@ import ObjectResults from "./ObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
 import GitHubIcon from "./GitHubIcon.astro";
 import CssEarthWordmark from "./CssEarthWordmark.astro";
-import OverviewCard from './OverviewCard.astro';
 import ObjectCard from './ObjectCard.astro';
-import SystemHeaders from './SystemHeaders.astro';
 import SystemBodies from './SystemBodies.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import Accordion from './Accordion.astro';
@@ -229,24 +227,6 @@ import Detached from './Detached.astro';
       </ObjectResults>
     </nav></Detached>}
     <div class="object-selected-content">
-    {!navigation && <Detached detached><div class="object-context" hidden>
-      {OVERVIEWS.map(overview => <OverviewCard {overview} />)}
-      <Detached detached><ObjectCard class="object-overview-card" data-system-results>
-        {/* The Solar System's header and this page's own; the others arrive with the first overview of another system. */}
-        <SystemHeaders only={[SOLAR_SYSTEM_ID, ...(ownSystem ? [ownSystem.id] : [])]} />
-        <span data-system-headers-slot hidden></span>
-        {/* A dataset authored for the whole system, like a debris disc, belongs to the system, not to its star:
-            the shell moves those options here while the system is the selection, and back to the body card when it is not. */}
-        <div class="object-datasets object-system-datasets" data-system-datasets hidden>
-          <nav class="object-observation-controls" aria-label="Datasets" data-system-dataset-options></nav>
-          <div class="object-dataset-details" data-system-dataset-details></div>
-        </div>
-        {/* A telescope's picture of the whole system, kept in its star's gallery, is shown here while the system is the selection. */}
-        <div class="object-system-galleries" data-system-galleries hidden></div>
-        <div data-system-bodies-slot>
-          {Astro.url.searchParams.get('overview') === 'system' && <SystemBodies systemId={ownSystem?.id ?? SOLAR_SYSTEM_ID} />}
-        </div>
-      </ObjectCard></Detached></div></Detached>}
     {/* Every page carries the selected-city panel: a visit that starts on another body can open a city on Earth. */}
     <Detached detached><section class="object-destination-panel" aria-label="Selected city" hidden>
       <button class="object-destination-back" type="button">← Back to {activeObject?.name}</button>
@@ -254,8 +234,7 @@ import Detached from './Detached.astro';
       <p class="object-destination-context"></p>
       <p class="object-destination-status" role="status"></p>
     </section></Detached>
-    {/* A page that opens on an overview shows that card; the body's waits off the page. */}
-    <Detached detached={pageId !== objectId}><ObjectInformationPanel {...Astro.props} /></Detached>
+    <ObjectInformationPanel {...Astro.props} />
     <div class="object-sheet-sources"><SourcesLink objectId={objectId} name={Astro.props.title.label} /></div>
     </div>
   </div>

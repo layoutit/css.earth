@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-6946",
+  "displayName": "NGC 6946",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "7.727 Mpc (−449,000 / +476,700 pc)",
+        "source": {
+          "catalogueId": "publication-anand2018aj-156-105a",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..105A",
+          "label": "Anand2018AJ....156..105A: A Robust Tip of the Red Giant Branch Distance to the Fireworks Galaxy (NGC 6946)",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 308.7°, Dec 60.15°",
+        "source": {
+          "catalogueId": "lvdb-v1-1-1",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "NOIRLab · optical",
+        "thumbnail": "ngc-6946-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-6946-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-6946-layers-optical",
+          "path": "../../ngc-6946-layers/source/manifest.json",
+          "url": "https://noirlab.edu/public/images/noao-ngc6946kpno/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Anand2018AJ....156..105A: A Robust Tip of the Red Giant Branch Distance to the Fireworks Galaxy (NGC 6946)",
+      "href": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..105A"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+      "href": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..105A",
+      "credit": "Anand2018AJ....156..105A: A Robust Tip of the Red Giant Branch Distance to the Fireworks Galaxy (NGC 6946)"
+    }
+  }
+}

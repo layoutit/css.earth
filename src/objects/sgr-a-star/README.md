@@ -32,6 +32,10 @@ The 40 stars are astronomy records in `packages/astronomy/data/bodies/`, each ci
 
 An orbit is drawn when its paper judges it well measured: the 17 stars Gillessen et al. (2017) fit together, plus S29 as refitted by GRAVITY (2022). The other 21 are fitted from a short arc, so those stars are placed on their published orbit without a path. The 32 stars with no measured radius record 0, meaning "not measured". Orbits are placed at 8277 pc; Gillessen et al. fitted at 8320 pc, so physical sizes shift by 0.5%.
 
+## The cluster around them
+
+Zooming out, the dots around the S-stars are the nuclear star cluster: 5,610 stars of the GALACTICNUCLEUS survey at their measured sky positions, at modelled depths. They are their own package, the [nuclear star cluster](../nuclear-star-cluster/README.md), loaded while Sgr A* or one of its stars is selected.
+
 ## Evidence
 
 With i and Ω as published and ω + 180°, the hosted orbit reproduces the positions Gillessen et al. (2017, table5) measured for S2 (145 positions, 1992–2016) to 2.08 mas rms and for S1 (161) to 3.17 mas rms, and S2's 44 radial velocities to 31.9 km/s rms. The mirror orientation misses the radial velocities by 1551 km/s.
