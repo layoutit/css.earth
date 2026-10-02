@@ -40,7 +40,7 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
     <details class="object-feature-results" hidden><summary>Named features <span class="object-panel-heading-count"></span></summary><p class="object-destination-hint"></p>
       <ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></details></div>
   </nav><div class="object-selected-content">
-    <section class="object-information-panel"><div data-planetary-system>System header</div><div class="body-part">Saturn</div><div data-planetary-system data-system-bodies-slot></div></section></div></div><!--search-shell:end-->
+    <section class="object-information-panel"><div data-view-part="system">System header</div><div class="body-part">Saturn</div><div data-view-part="system" data-system-bodies-slot></div></section></div></div><!--search-shell:end-->
   <main class="object-stage"><u style='color: red;' data-prepared-node="0"></u></main><script type="module" src="/app.js"></script></body></html>`;
 const visibleNames = (document: Document) => [...document.querySelectorAll('[data-catalogue-list] .object-item .object-name')].map(element => element.textContent);
 const render = async (path: string, search = data(), source = html) => parseHTML(await renderSearchResponse(source, new URL(path, origin), search)).document;
@@ -126,7 +126,7 @@ test('the native response shows the card as its subject: the body, or the planet
   const mounted = (document: Document) => [...card(document).children].filter(child => child.tagName !== 'TEMPLATE').map(child => child.textContent);
   // A star's system view mounts its system parts; the body view keeps them off the page (detached-sections.ts).
   const system = await render('/trappist-1/?overview=system', data(), contextHtml.replace('data-search-object="saturn"', 'data-search-object="trappist-1"'));
-  assert.equal(card(system).dataset.cardSubject, 'planetary-system');
+  assert.equal(card(system).dataset.cardSubject, 'system');
   assert.equal(card(system).dataset.cardView, 'overview');
   assert.deepEqual(mounted(system), ['System header', 'Saturn', '']);
   const body = await render('/saturn/', data(), contextHtml);

@@ -276,12 +276,13 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             publishSuppressedLabels();
             spatial.previewSelection(id);
           },
-          setOverview(enabled: boolean, scope?: string, preserveSelection = false) {
+          /** `scope`: the rung of the zoom ladder shown (a star's own `system`, or a level). `starsRetired`: the scope is past
+           * the level that holds the stars, as the host's ladder says. */
+          setOverview(enabled: boolean, scope?: string, preserveSelection = false, starsRetired = false) {
             overview = enabled;
             spatial.setOverview(enabled, preserveSelection);
-            // Past the system scope (the Milky Way's), the Solar System is its star; past the galaxy's (the Local Group's and
-            // beyond), the galaxy's stars retire too.
-            spatial.setSystemRetired(enabled && scope !== undefined && scope !== 'system', scope !== undefined && scope !== 'system' && scope !== 'milky-way');
+            // Past the system scope, a planetary system is drawn as its star; past the scope that holds the stars, they retire too.
+            spatial.setSystemRetired(enabled && scope !== undefined && scope !== 'system', starsRetired);
             publishSuppressedLabels();
           },
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },

@@ -2077,7 +2077,7 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
     width: auto;
   }
 
-  .object-sidebar .object-information-panel[data-card-subject="satellite-system"]:not([hidden]) { display: block; }
+  .object-sidebar .object-information-panel[data-card-subject="moons"]:not([hidden]) { display: block; }
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel { max-height: none; overflow: visible; }
 
   /* Moons close the sheet at full width, in columns. */

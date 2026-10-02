@@ -5,7 +5,7 @@ import SystemBodies from './SystemBodies.astro';
 import Detached from './Detached.astro';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from '../object-systems.mts';
-import { overviewScopeFromUrl } from '../navigation/navigation-scope.mts';
+import { viewFromUrl } from '../navigation/navigation-scope.mts';
 
 interface Props { hostId: string }
 /** A star's planetary system, as parts of the star's own card: its header and its body list, mounted only while the system
@@ -15,15 +15,15 @@ interface Props { hostId: string }
 const { hostId } = Astro.props;
 const system = systemById(SCENE_OBJECTS, hostId);
 const star = system ? SCENE_OBJECTS.find(object => object.id === hostId) : null;
-const shown = overviewScopeFromUrl(Astro.url) === 'system';
+const shown = viewFromUrl(Astro.url) === 'system';
 ---
 
 {system && star && <>
-  <Detached detached={!shown}><ObjectCardHeader heading={false} title={{ label: system.name }} data-planetary-system
+  <Detached detached={!shown}><ObjectCardHeader heading={false} title={{ label: system.name }} data-view-part="system"
     introduction={system.id === SOLAR_SYSTEM_ID ? "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets." : star.description}>
     <ObjectBreadcrumbs scope="system" systemId={system.id} />
   </ObjectCardHeader></Detached>
-  <Detached detached={!shown}><div data-planetary-system data-system-bodies-slot>
+  <Detached detached={!shown}><div data-view-part="system" data-system-bodies-slot>
     {shown && <SystemBodies systemId={system.id} />}
   </div></Detached>
 </>}
