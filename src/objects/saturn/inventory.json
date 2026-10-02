@@ -3,21 +3,9 @@
   "assets": [
     {
       "location": "public",
-      "filename": "saturn-arrival.webp",
-      "bytes": 175096,
-      "sha256": "3d6ed2e3590e81b78b1fe662003c5e99c3e8d230b5744e85613c3e3c94dfdd7a"
-    },
-    {
-      "location": "public",
       "filename": "saturn-atmosphere-spectrum.svg",
       "bytes": 6637,
       "sha256": "dd6872803782e2cb9259b361329f5e598662a61e23ae81f8a4760c98a5124212"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-billboard.webp",
-      "bytes": 15440,
-      "sha256": "6243bb6438cb81b067ea5ebfcd0ab12ddfb40fb637138a5cbe24e17e727499aa"
     },
     {
       "location": "public",
@@ -801,6 +789,18 @@
     },
     {
       "location": "public",
+      "filename": "saturn-rings-level-1024.webp",
+      "bytes": 638038,
+      "sha256": "a29b12782acc079c9c95caf959e08b221f6d6c8c8508e71e77621795ae39b8af"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-rings-level-2048.webp",
+      "bytes": 2480996,
+      "sha256": "60b4fabfc5fc0e06afc4ee9ed0711efc91c97cb216a991ea5ddb597dd86669f3"
+    },
+    {
+      "location": "public",
       "filename": "saturn-rings@2x.webp",
       "bytes": 5326944,
       "sha256": "c35edf900189ba395d34e92da4be0860e8cf2c9503e0afb7458b7b0085b09dbf"
@@ -1000,8 +1000,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 565720,
-      "sha256": "0b639573c238db76cdd77770dae7ad3d43cc28099149244d62664a9ecd259e2e"
+      "bytes": 574379,
+      "sha256": "b60530b4222bf613eb243ed2778bd71c01e66a709f74ef2529c644f1a6ecd09e"
     },
     {
       "location": "prepared",
@@ -1038,6 +1038,18 @@
       "filename": "world-navigation.json",
       "bytes": 1078,
       "sha256": "cd48a683440eabcd4326d1a40f4714e3bc03bb1267db87f7a9f4eafe973ff99d"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-arrival.webp",
+      "bytes": 175096,
+      "sha256": "3d6ed2e3590e81b78b1fe662003c5e99c3e8d230b5744e85613c3e3c94dfdd7a"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-billboard.webp",
+      "bytes": 15440,
+      "sha256": "6243bb6438cb81b067ea5ebfcd0ab12ddfb40fb637138a5cbe24e17e727499aa"
     }
   ]
 }
