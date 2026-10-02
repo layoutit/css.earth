@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "bullet-cluster-layers",
+  "name": "Bullet Cluster",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/bullet-cluster-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/bullet-cluster-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/bullet-cluster-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Chandra · Hubble · composite",
+      "title": "Gas, mass and galaxies of the Bullet",
+      "description": "The 2006 composite of the Bullet Cluster: Chandra's X-ray image of the hot gas in pink and the mass map from gravitational lensing in blue, laid over a visible-light image from Magellan and Hubble. It stands as one flat picture facing the Sun at the cluster's distance.",
+      "summary": "Pink is X-ray gas and blue is the lensing mass map, over a visible-light image. A flat picture of the sky, with no depth.",
+      "detail": "3000 × 2168 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colours",
+          "value": "Pink: hot gas in X-rays (Chandra). Blue: mass from gravitational lensing. Orange and white: galaxies in visible light (Magellan, Hubble)"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3000 × 2168"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "7.45 × 5.38 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/bullet-cluster-layers/source/source.jpg",
+        "url": "https://cdn.esahubble.org/archives/images/large/opo0639a.jpg"
+      }
+    }
+  ]
+}
