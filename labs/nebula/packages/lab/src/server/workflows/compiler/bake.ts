@@ -1,7 +1,7 @@
 /** cssEarth renderer adapter for the deterministic internal baker. */
 import { bakeCompiler as bake, type BakeCompilerOptions } from '@cssearth/bake/volume/node';
-import { compileCssVolume, CSS_COMPILER_RENDER_BUDGET } from '../../../adapters/preparation/css-volume.ts';
-import { validatePreparedCssVolume } from '@cssearth/objects';
+import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
+import { CSS_COMPILER_RENDER_BUDGET, validatePreparedCssVolume } from '@cssearth/objects';
 import { prepareCompilerStarSprites } from '../../../adapters/application/star-sprites.ts';
 export * from '@cssearth/bake/volume/node';
 
