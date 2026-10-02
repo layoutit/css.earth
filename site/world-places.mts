@@ -11,8 +11,8 @@ const APPROACH_ROUNDING_M = 1e12;
 let holders: ReadonlySet<string> | null = null;
 const holderIds = () => holders ??= new Set(Object.values(index().holders));
 
-/** Every holder that is a file (`world-systems/<id>.json`), in id order: each star something orbits. A star that is its
- * own holder of one body has its row in the index and no file. */
+/** Every holder that is a file (`world-systems/<id>.json`), in id order: each star something orbits, and the asteroid dot
+ * bank. A star that is its own holder of one body has its row in the index and no file. */
 export function worldHolderFiles(): readonly string[] {
   return [...holderIds()].filter(id => !Object.hasOwn(index().rows, id)).sort();
 }
@@ -27,11 +27,17 @@ export function worldPlaceOf(id: string): { readonly holder: string; readonly ro
  * (`pages/world/hosts.json.ts`), as columns: what the camera's approach is measured against (world-approach.mts). */
 export function worldHolderReaches() {
   const bodies = new Map(APPLICATION_WORLD_CONTEXT.bodies.map(body => [body.id, body]));
-  const rows = worldHolderFiles().map(id => {
+  // A holder that is no body of the world (a dot bank's object) is never approached: its bodies are its dots until one is
+  // opened or their category is highlighted.
+  const rows = worldHolderFiles().flatMap(id => {
     const body = bodies.get(id);
-    if (!body) throw new TypeError(`World holder ${id} (src/objects/sun/prepared/world-systems/${id}.json) has no body of its own in the world. Run pnpm prepare:world-context.`);
     // To the nearest 1e12 m: an approach is measured against a system's fade distance, 1e16 m or more.
-    return { id, positionM: body.positionM.map(value => Math.round(value / APPROACH_ROUNDING_M) * APPROACH_ROUNDING_M), orbitsWithinM: body.orbitsWithinM ?? null };
+    return body ? [{ id, positionM: body.positionM.map(value => Math.round(value / APPROACH_ROUNDING_M) * APPROACH_ROUNDING_M), orbitsWithinM: body.orbitsWithinM ?? null }] : [];
   });
   return { id: rows.map(row => row.id), positionM: rows.map(row => row.positionM), orbitsWithinM: rows.map(row => row.orbitsWithinM) };
+}
+/** The holder files that have bodies of `ids` (a category's marked members): read when that category is highlighted. */
+export function worldHolderFilesOf(ids: Iterable<string>): readonly string[] {
+  const files = new Set(worldHolderFiles());
+  return [...new Set([...ids].flatMap(id => { const holder = index().holders[id]; return holder !== undefined && files.has(holder) ? [holder] : []; }))].sort();
 }

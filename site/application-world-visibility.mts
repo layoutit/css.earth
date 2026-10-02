@@ -4,7 +4,7 @@ import { WORLD_OBJECTS, worldObjects, type WorldObject } from './world-objects.m
 import { contextAnnotationOpacity } from '@cssearth/renderer/navigation/marker-presentation.ts';
 import { discoveryVisibility, parseObjectDiscovery, type ObjectClassification, type PreparedContextBody, type PreparedWorldContext } from '@cssearth/objects';
 import { labelImportance } from '@cssearth/renderer/labels/universe-label-policy.ts';
-import { APPLICATION_WORLD_CONTEXT as applicationContext, loadWorldSystemOf, onWorldSystems } from './world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT as applicationContext, loadWorldHolder, onWorldSystems } from './world-context-plan.mts';
 import { PREPARED_WORLD_PRESENTATION as prepared } from './prepared-world-presentation.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from './satellite-systems.mts';
 import type { SceneLifetime } from '@cssearth/engine';
@@ -152,10 +152,10 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
       if (lifetime.disposed || highlighted === classification) return;
       highlighted = classification;
       update();
-      // The category's marked members may orbit stars whose holders are not read: each joins the world as it arrives, and
-      // the policy built over the extended plan marks it (onWorldSystems above).
+      // The category's marked members may be in holders not read: each joins the world as it arrives, and the policy
+      // built over the extended plan marks it (onWorldSystems above).
       const frame = classification === null ? undefined : prepared.categoryFrames.get(classification);
-      for (const host of frame?.hostIds ?? []) void loadWorldSystemOf(host)?.catch(error => console.error(`The holder of ${host} could not be read for its category.`, error));
+      for (const holder of frame?.holderIds ?? []) void loadWorldHolder(holder).catch(error => console.error(`World holder ${holder} could not be read for its category.`, error));
     },
   };
 }

@@ -33,8 +33,10 @@ function categoryFrames(value: unknown) {
     const memberIds = frame.memberIds === undefined ? undefined : new Set(ids(frame.memberIds, `categoryFrames.${classification}.memberIds`));
     // The placed stars that carry the members' mark from afar.
     const hostIds = frame.hostIds === undefined ? undefined : ids(frame.hostIds, `categoryFrames.${classification}.hostIds`);
+    // The holder files that have marked members the world summary does not (site/world-places.mts).
+    const holderIds = frame.holderIds === undefined ? undefined : ids(frame.holderIds, `categoryFrames.${classification}.holderIds`);
     return [classification, Object.freeze({ centreM: vector(frame.centreM, `${classification}.centreM`), minimumM, maximumM,
-      ...(memberIds ? { memberIds } : {}), ...(hostIds ? { hostIds } : {}) })] as const;
+      ...(memberIds ? { memberIds } : {}), ...(hostIds ? { hostIds } : {}), ...(holderIds ? { holderIds } : {}) })] as const;
   }));
 }
 

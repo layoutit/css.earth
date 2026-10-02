@@ -17,6 +17,7 @@ type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][numbe
  *   orbit centres and orbit-bank pins. A star drawn as a plain dot is in its own holder, and the map draws it from a dot
  *   bank until that file is read. A page reads its own body's holder at startup and any other when navigation targets a
  *   body in it or the camera approaches it (site/world-context-plan.mts).
+ *   An asteroid drawn as a plain dot is a dot of the asteroid dot bank, whose object is its holder (`asteroidHolder`).
  * - `index` is the build's table of which holder has each body.
  * Orbit paths and detail levels go to the planner worker as binary orbit banks (`worldOrbitBanks`), which these files pin
  * by byte length; each orbit here keeps its parent, bounds and size. Classification views are build-time only.
@@ -29,7 +30,9 @@ type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][numbe
  *   billboards share; its address is its own world billboard, `/scenes/<id>/<id>-billboard.webp`, unless it says otherwise.
  * - An orbit leaves out its centre when that is its parent's prepared position (every orbit, as `prepareWorldContext`
  *   places them), and says `lod: true` when its detail levels share its bounds. */
-export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks: Readonly<Record<string, number>>) {
+export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks: Readonly<Record<string, number>>,
+  /** The dot bank object whose dots the plain-dot asteroids are: their holder. Without one they stay in the summary. */
+  asteroidHolder?: string) {
   const { classificationViews: _views, focus, bodies, orbitCenters = {}, schema: _schema, ...rest } = prepared;
   const parents = new Map<string, string>([...bodies.flatMap(body => body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []),
     ...Object.entries(orbitCenters).map(([id, centre]) => [id, centre.centerBodyId] as const)]);
@@ -48,9 +51,14 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   const bound = new Set(bodies.flatMap(body => 'boundTo' in body && body.boundTo ? [body.boundTo.hostId] : []));
   const plainStar = (body: Body) => body !== focus && !('orbit' in body && body.orbit) && !('boundTo' in body && body.boundTo) && body.plainDot === true
     && body.classification === 'star' && !bound.has(body.id);
-  const local = (body: Body) => !plainStar(body) && (!('orbit' in body && body.orbit) || hostOf(body.id) === focus.id);
-  /** The file that holds a body the summary only lists: its star's, or a plain-dot star's own. */
-  const fileOf = (body: Body) => plainStar(body) ? body.id : hostOf(body.id);
+  // An asteroid drawn as a plain dot is one of the dots of the asteroid dot bank, and has no marker of its own until it is
+  // opened or its category is highlighted: the bank's object holds its row. One with a moon stays with it in the summary.
+  const orbited = new Set(parents.values());
+  const plainAsteroid = (body: Body) => asteroidHolder !== undefined && body !== focus && body.plainDot === true && body.classification === 'asteroid'
+    && 'orbit' in body && body.orbit?.centerBodyId === focus.id && !orbited.has(body.id);
+  const local = (body: Body) => !plainStar(body) && !plainAsteroid(body) && (!('orbit' in body && body.orbit) || hostOf(body.id) === focus.id);
+  /** The holder whose file has a body the summary does not: its star, a plain-dot star's own, or the asteroid dot bank. */
+  const fileOf = (body: Body) => plainStar(body) ? body.id : plainAsteroid(body) ? asteroidHolder! : hostOf(body.id);
   const systems = new Map<string, PreparedWorldContext['bodies'][number][]>();
   for (const body of bodies) if (!local(body)) (systems.get(fileOf(body)) ?? systems.set(fileOf(body), []).get(fileOf(body))!).push(body);
   const centresOf = (host: string) => Object.fromEntries(Object.entries(orbitCenters).filter(([id]) => hostOf(id) === host));

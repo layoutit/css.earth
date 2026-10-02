@@ -219,7 +219,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
   // Every page reads the summary: the Sun's own system and the bodies that orbit nothing. Each other star is a holder, its
   // own file with the bodies that orbit it, read when a page shows that system or the camera approaches it (summarizeWorldContext).
-  const { summary, systems, index, plainStars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])));
+  const { summary, systems, index, plainStars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])), ASTEROID_DOT_BANK);
   // The map draws those stars as dots from these banks (`/world/dots/<id>.bin`), not as bodies.
   const dotBanks = plainStarDotBanks(plainStars.map(body => ({ id: body.id, positionM: body.positionM, color: body.color })), prepared.frame);
   for (const id of PLAIN_STAR_DOT_BANK_IDS) if (!dotBanks.some(bank => bank.id === id)) await rm(resolve(dirname(options.outputPath), `${id}.bin`), { force: true });
@@ -243,6 +243,10 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   for (const name of await readdir(directory).catch(() => [] as string[])) if (!kept.has(name)) await rm(resolve(directory, name));
   await rm(resolve(dirname(options.outputPath), 'world-system-views.json'), { force: true });
 }
+
+/** The dot bank the paged asteroids are dots of (paged-asteroid-dot-positions.mts writes their places into it): the
+ * holder of every asteroid the map draws as a plain dot. */
+const ASTEROID_DOT_BANK = 'catalogue-asteroids';
 
 /** `world-context.json` → `system-views/`, beside it: `<host id>.json` per system. */
 export function worldSystemViewsDirectory(outputPath: string): string {
