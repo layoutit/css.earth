@@ -788,7 +788,7 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
   const [{ readCatalog }, { parseNavigationDistance }] = await Promise.all([import('@cssearth/objects/node'), import('@cssearth/objects')]);
   // Each entry's distance as `prepare:catalog` placed it in the registry.
   // Every body of the world: the scenes, the packages the host draws (galaxies, clusters, nebulae) and the levels that are bodies.
-  const worldObjects = (await import('@cssearth/objects/node')).readPreparedObjects(fileURLToPath(new URL('../..', import.meta.url))).worldObjects;
+  const worldObjects = (await import('@cssearth/objects/node')).readPreparedObjects(fileURLToPath(new URL('../..', import.meta.url))).objects;
   const distance = (descriptor: unknown) => parseNavigationDistance(worldObjects.find(object => object.id === (descriptor as { id: string }).id)?.distance);
   const contextEntries = (await readCatalog(fileURLToPath(new URL('../../src/objects', import.meta.url)), distance)).filter(body => body.context && body.id !== 'sun')
     .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));

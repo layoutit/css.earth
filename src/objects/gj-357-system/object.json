@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-357-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-357",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 357 system",
+      "systemName": "GJ 357 system",
+      "classification": "planetary-system",
+      "color": "#ffc484",
+      "distanceAu": 1946202.8,
+      "description": "GJ 357 b crosses GJ 357 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -218921554183487680,
+        159009544221663900,
+        -107500496867168000
+      ],
+      "presentationToReference": [
+        -0.7519411570736627,
+        0.29870315888264526,
+        0.5876741607151454,
+        0.5461582855706587,
+        -0.21696093261642657,
+        0.8090976954736241,
+        -0.36918237146597377,
+        -0.9293569694104303,
+        -0.0000026495614911228454
+      ],
+      "orbitUpReference": [
+        -0.29870315888264526,
+        0.21696093261642657,
+        0.9293569694104303
+      ],
+      "metersPerUnit": 756293.2258064516,
+      "bodyRadiusM": 234450900
+    }
+  }
+}

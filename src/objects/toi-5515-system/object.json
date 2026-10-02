@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5515-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5515",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5515 system",
+      "systemName": "TOI-5515 system",
+      "classification": "planetary-system",
+      "color": "#ffede5",
+      "distanceAu": 27942041.1,
+      "description": "TOI-5515 b crosses TOI-5515 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3045078258130577000,
+        2590100741922581500,
+        1221417417025232400
+      ],
+      "presentationToReference": [
+        -0.7284745996860178,
+        -0.2225784759867499,
+        0.6479070763926815,
+        0.6196302496033196,
+        0.18931965935807307,
+        0.7617193842597622,
+        0.2922038866764509,
+        -0.9563560469866643,
+        -0.0000017935684307957497
+      ],
+      "orbitUpReference": [
+        0.2225784759867499,
+        -0.18931965935807307,
+        0.9563560469866643
+      ],
+      "metersPerUnit": 1875432.2580645161,
+      "bodyRadiusM": 581384000
+    }
+  }
+}

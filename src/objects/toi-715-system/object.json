@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-715-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-715",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-715 system",
+      "systemName": "TOI-715 system",
+      "classification": "planetary-system",
+      "color": "#ffca7b",
+      "distanceAu": 8772713.6,
+      "description": "TOI-715 b crosses TOI-715 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -150045238706117120,
+        339343831409155000,
+        -1258837383094507300
+      ],
+      "presentationToReference": [
+        -0.11433049880385822,
+        0.3878836734883106,
+        0.9145899588801937,
+        0.25857101393432436,
+        -0.8772775066387268,
+        0.40438250097984446,
+        -0.9592025686976845,
+        -0.2827197060463811,
+        -0.0000041001809677807275
+      ],
+      "orbitUpReference": [
+        -0.3878836734883106,
+        0.8772775066387268,
+        0.2827197060463811
+      ],
+      "metersPerUnit": 538606.4516129033,
+      "bodyRadiusM": 166968000
+    }
+  }
+}

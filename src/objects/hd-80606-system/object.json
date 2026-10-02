@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-80606-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-80606",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 80606 system",
+      "systemName": "HD 80606 system",
+      "classification": "planetary-system",
+      "color": "#ffeee5",
+      "distanceAu": 13620328.7,
+      "description": "HD 80606 b crosses HD 80606 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1000121894908020000,
+        819837939045121500,
+        1574586390371625000
+      ],
+      "presentationToReference": [
+        -0.4908403049341512,
+        -0.5976368694857719,
+        0.6339605407936648,
+        0.40236045830887607,
+        0.48991022532488876,
+        0.7733653940483683,
+        0.7727754244550099,
+        -0.6346795595837029,
+        0.000002239680249967064
+      ],
+      "orbitUpReference": [
+        0.5976368694857719,
+        -0.48991022532488876,
+        0.6346795595837029
+      ],
+      "metersPerUnit": 2356403.2258064514,
+      "bodyRadiusM": 730485000
+    }
+  }
+}

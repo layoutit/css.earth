@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "didymos-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "didymos",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Didymos–Dimorphos system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#9a9a9a",
+      "distanceAu": 1.6427722213006,
+      "description": "Didymos and its moon Dimorphos form a binary asteroid system. NASA's DART impact changed Dimorphos's orbit in 2022."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        75014299781.10619,
+        -196383452959.9806,
+        -93945311428.15709
+      ],
+      "presentationToReference": [
+        0.32598248071912084,
+        -1.3877787807814457e-17,
+        -0.9453758100693118,
+        -0.8673653476527154,
+        0.39777715593191365,
+        -0.2990830786086063,
+        -0.37604890101620003,
+        -0.9174820620691817,
+        -0.12966838406408177
+      ],
+      "orbitUpReference": [
+        1.3877787807814457e-17,
+        -0.39777715593191365,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 1.5869565217391304,
+      "bodyRadiusM": 365
+    }
+  }
+}

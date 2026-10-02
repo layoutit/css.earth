@@ -13,8 +13,8 @@ export type NavigableObject = RegistryNavigableObject<SceneFactory, AbortSignal>
  * object directory decodes the one entry it loads. */
 export const OBJECTS = defineObjects<NavigableObject>(CATALOGUE_ENTRIES.map(objectFromEntry));
 
-/** Every object has a scene of its own: the same list, under the name the scene code reads. */
-export const SCENE_OBJECTS = OBJECTS;
+/** The objects with a scene of their own: every object but a system, which mounts its host's scene. */
+export const SCENE_OBJECTS = Object.freeze(OBJECTS.filter(object => !object.system));
 
 /** The levels of the zoom ladder, from the nearest out: the objects that are levels, as the ladder reads them. */
 export const OVERVIEWS = Object.freeze(OBJECTS.filter(object => object.level).map(levelOf).sort((a, b) => a.order - b.order));

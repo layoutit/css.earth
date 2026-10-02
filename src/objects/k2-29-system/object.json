@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-29-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-29",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-29 system",
+      "systemName": "K2-29 system",
+      "classification": "planetary-system",
+      "color": "#ffdcbc",
+      "distanceAu": 36549170.1,
+      "description": "K2-29 b crosses K2-29 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2286016058130171100,
+        4423481110862351400,
+        2258859962426896100
+      ],
+      "presentationToReference": [
+        0.4180961036391095,
+        0.18967168748153135,
+        0.8883807174233935,
+        0.8090232832780992,
+        0.36701720150934314,
+        -0.4591075047417266,
+        0.4131306999433949,
+        -0.9106717436948171,
+        3.4943161980837264e-7
+      ],
+      "orbitUpReference": [
+        -0.18967168748153135,
+        -0.36701720150934314,
+        0.9106717436948171
+      ],
+      "metersPerUnit": 1930006.4516129033,
+      "bodyRadiusM": 598302000
+    }
+  }
+}

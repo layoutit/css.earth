@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-6330-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-6330",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-6330 system",
+      "systemName": "TOI-6330 system",
+      "classification": "planetary-system",
+      "color": "#ffc689",
+      "distanceAu": 29605063.6,
+      "description": "TOI-6330 b crosses TOI-6330 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2428945054055635000,
+        989641612536015000,
+        3568695475562658300
+      ],
+      "presentationToReference": [
+        0.5484346704597726,
+        0.7462220876003003,
+        0.3773221544186486,
+        0.2234524699200187,
+        0.30404111877193646,
+        -0.9260820653605987,
+        0.805784342069467,
+        -0.5922090796951351,
+        -0.000001522196747842999
+      ],
+      "orbitUpReference": [
+        -0.7462220876003003,
+        -0.30404111877193646,
+        0.5922090796951351
+      ],
+      "metersPerUnit": 1099654.8387096773,
+      "bodyRadiusM": 340893000
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-219134-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-219134",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 219134 system",
+      "systemName": "HD 219134 system",
+      "classification": "planetary-system",
+      "color": "#ffd9c3",
+      "distanceAu": 1349293.3,
+      "description": "2 planets cross HD 219134 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        107177078137388370,
+        -22099584641641176,
+        169613306915846050
+      ],
+      "presentationToReference": [
+        0.5309827101908374,
+        0.8229330865617156,
+        -0.20208536938729985,
+        -0.10948700812087915,
+        -0.16985611471277717,
+        -0.9793679060227666,
+        0.8402796894672225,
+        -0.5421531474931119,
+        0.00009017860135347818
+      ],
+      "orbitUpReference": [
+        -0.8229330865617156,
+        0.16985611471277717,
+        0.5421531474931119
+      ],
+      "metersPerUnit": 1745982.5806451612,
+      "bodyRadiusM": 541254600
+    }
+  }
+}

@@ -21,18 +21,14 @@ const bodies = SCENE_OBJECTS.filter(object => !object.system);
 const hostOf = (id: string) => { const host = bodies.find(object => object.id === id); if (!host) throw new TypeError(`System host ${id} has no object package.`); return host; };
 const descriptorOf = async (id: string) => JSON.parse(await readFile(resolve(objectsRoot, id, 'object.json'), 'utf8')) as { properties: { catalog: Record<string, unknown>; worldFrame: unknown } };
 const texts = JSON.parse(await readFile(resolve(objectsRoot, '../navigation/system-text.json'), 'utf8')) as { satellites: Record<string, { text: string }> };
-const plural = (count: number, one: string, many: string) => `${count} ${count === 1 ? one : many}`;
+/** The Solar System's card sentence. */
+const SOLAR_SYSTEM_DESCRIPTION = 'The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.';
 
 const systems = [
-  ...allPlanetarySystems(bodies).filter(system => system.memberIds.length > 0).map(system => {
-    const members = system.memberIds.map(id => bodies.find(object => object.id === id)).filter(member => member !== undefined);
-    const planets = members.filter(member => member.classification === 'planet' || member.classification === 'exoplanet').length;
-    const host = hostOf(system.id);
-    return { hostId: system.id, members: 'planets' as const, name: system.name, classification: 'planetary-system',
-      // Counted from the packages this repository holds, not a census of the system.
-      description: system.id === SOLAR_SYSTEM_ID ? `The Sun and the ${plural(members.length, 'body', 'bodies')} of its system in this atlas, ${plural(planets, 'planet', 'planets')} among them.`
-        : `${host.name} and the ${plural(members.length, 'body', 'bodies')} of its system in this atlas${planets && planets !== members.length ? `, ${plural(planets, 'planet', 'planets')} among them` : ''}.` };
-  }),
+  ...allPlanetarySystems(bodies).filter(system => system.memberIds.length > 0).map(system => ({ hostId: system.id, members: 'planets' as const, name: system.name,
+    classification: 'planetary-system',
+    // What the system's card has always said: its star's own description; the Solar System's is its own sentence.
+    description: system.id === SOLAR_SYSTEM_ID ? SOLAR_SYSTEM_DESCRIPTION : hostOf(system.id).description })),
   ...allSatelliteSystems().map(system => {
     const text = texts.satellites[system.hostId]?.text;
     if (!text) throw new TypeError(`src/navigation/system-text.json satellites.${system.hostId}: the ${system.name} has no introduction.`);

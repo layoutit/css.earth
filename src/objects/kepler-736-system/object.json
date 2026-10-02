@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-736-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-736",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-736 system",
+      "systemName": "Kepler-736 system",
+      "classification": "planetary-system",
+      "color": "#ffe9d7",
+      "distanceAu": 208977616.4,
+      "description": "Kepler-736 b crosses Kepler-736 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5744979248878390000,
+        -20869402860095330000,
+        22556901356676202000
+      ],
+      "presentationToReference": [
+        0.18376519423393572,
+        0.1915011297115856,
+        -0.9641357117684993,
+        -0.6675515618060105,
+        -0.6956526310147367,
+        -0.2654097385037535,
+        0.7215298093069477,
+        -0.6923833723317314,
+        -1.373688128507078e-7
+      ],
+      "orbitUpReference": [
+        -0.1915011297115856,
+        0.6956526310147367,
+        0.6923833723317314
+      ],
+      "metersPerUnit": 1817796.7741935484,
+      "bodyRadiusM": 563517000
+    }
+  }
+}

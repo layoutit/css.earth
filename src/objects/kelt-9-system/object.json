@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kelt-9-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kelt-9",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "KELT-9 system",
+      "systemName": "KELT-9 system",
+      "classification": "planetary-system",
+      "color": "#b5c9ff",
+      "distanceAu": 42741730.6,
+      "description": "Hot A star spinning so fast it is flattened, with hot bright poles and a cooler equator."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3008840323828361700,
+        -3870601803770405000,
+        4104811428835544600
+      ],
+      "presentationToReference": [
+        0.6217094810758895,
+        0.11142619430458124,
+        0.7752815774692093,
+        -0.7549629789383752,
+        -0.1783492546051985,
+        0.6310486857717593,
+        -0.20858624492723066,
+        0.9776378402069796,
+        0.026758770946916803
+      ],
+      "orbitUpReference": [
+        -0.11142619430458124,
+        0.1783492546051985,
+        -0.9776378402069796
+      ],
+      "metersPerUnit": 5363622.580645162,
+      "bodyRadiusM": 1662723000
+    }
+  }
+}

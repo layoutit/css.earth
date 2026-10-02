@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-6061-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-6061",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 6061 system",
+      "systemName": "HD 6061 system",
+      "classification": "planetary-system",
+      "color": "#fff7fc",
+      "distanceAu": 13963824.2,
+      "description": "HD 6061 b crosses HD 6061 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1602947917413888500,
+        447493987960461950,
+        1262558574146578700
+      ],
+      "presentationToReference": [
+        0.7673428585110913,
+        0.582137500610359,
+        0.2688882070213415,
+        0.21421863565085167,
+        0.16251536547395087,
+        -0.9631713929123705,
+        0.6043966525651141,
+        -0.7966835547242032,
+        -3.03952808227464e-7
+      ],
+      "orbitUpReference": [
+        -0.582137500610359,
+        -0.16251536547395087,
+        0.7966835547242032
+      ],
+      "metersPerUnit": 2260351.6129032257,
+      "bodyRadiusM": 700709000
+    }
+  }
+}

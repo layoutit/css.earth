@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-7009-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-7009",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-7009 system",
+      "systemName": "TOI-7009 system",
+      "classification": "planetary-system",
+      "color": "#ffc59f",
+      "distanceAu": 38071475.8,
+      "description": "TOI-7009 b crosses TOI-7009 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1583050021218593800,
+        -2796558146444789000,
+        4702226045414769000
+      ],
+      "presentationToReference": [
+        0.2779519401892126,
+        0.4067175350419039,
+        -0.8702433944790905,
+        -0.49101971020171203,
+        -0.7184867499336981,
+        -0.4926219994713373,
+        0.8256163534829474,
+        -0.5642318998950248,
+        -0.0000015400459173352979
+      ],
+      "orbitUpReference": [
+        -0.4067175350419039,
+        0.7184867499336981,
+        0.5642318998950248
+      ],
+      "metersPerUnit": 1265725.1612903227,
+      "bodyRadiusM": 392374800
+    }
+  }
+}

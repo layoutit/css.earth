@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-73344-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-73344",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 73344 system",
+      "systemName": "HD 73344 system",
+      "classification": "planetary-system",
+      "color": "#fcf6ff",
+      "distanceAu": 7269076,
+      "description": "HD 73344's planets b, d are placed on the orbits their papers measured."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -635968803196983600,
+        766319687825508000,
+        436829303677694200
+      ],
+      "presentationToReference": [
+        -0.5848301176297218,
+        -0.25654368778903586,
+        0.7695187260676687,
+        0.7046993986627916,
+        0.30912429101266353,
+        0.6386242480756726,
+        0.4017119503294693,
+        -0.9157660776429316,
+        -9.870405281120666e-7
+      ],
+      "orbitUpReference": [
+        0.25654368778903586,
+        -0.30912429101266353,
+        0.9157660776429316
+      ],
+      "metersPerUnit": 2737916.129032258,
+      "bodyRadiusM": 848754000
+    }
+  }
+}

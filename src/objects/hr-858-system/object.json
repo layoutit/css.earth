@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hr-858-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hr-858",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HR 858 system",
+      "systemName": "HR 858 system",
+      "classification": "planetary-system",
+      "color": "#f2f0ff",
+      "distanceAu": 6539439.8,
+      "description": "3 planets cross HR 858 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        614620792927965800,
+        572850902577901800,
+        -501125887322256200
+      ],
+      "presentationToReference": [
+        0.6282606636838483,
+        -0.37472990039682313,
+        0.6818108536948628,
+        0.5855638019477358,
+        -0.34925789049831174,
+        -0.731528509200552,
+        -0.5122534258704803,
+        -0.8588343423927902,
+        -0.0000032710985699328972
+      ],
+      "orbitUpReference": [
+        0.37472990039682313,
+        0.34925789049831174,
+        0.8588343423927902
+      ],
+      "metersPerUnit": 2823195.4838709678,
+      "bodyRadiusM": 875190600
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1105-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1105",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1105 system",
+      "systemName": "TOI-1105 system",
+      "classification": "planetary-system",
+      "color": "#ffd5b9",
+      "distanceAu": 16377471.4,
+      "description": "TOI-1105 b crosses TOI-1105 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -18746457060552710,
+        12621906026686268,
+        -2449930621774526500
+      ],
+      "presentationToReference": [
+        -0.007651113904660737,
+        0.8295259422952537,
+        0.5584157694005333,
+        0.0051514609663412545,
+        -0.558392007433849,
+        0.8295612264829574,
+        -0.9999574605481626,
+        -0.009223724473767436,
+        9.496599729031216e-7
+      ],
+      "orbitUpReference": [
+        -0.8295259422952537,
+        0.558392007433849,
+        0.009223724473767436
+      ],
+      "metersPerUnit": 1696235.4838709678,
+      "bodyRadiusM": 525833000
+    }
+  }
+}

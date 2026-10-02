@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-277-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-277",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-277 system",
+      "systemName": "TOI-277 system",
+      "classification": "planetary-system",
+      "color": "#ffc186",
+      "distanceAu": 13388839.8,
+      "description": "TOI-277 b crosses TOI-277 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1767763185366704000,
+        611324629773504900,
+        -716290375232182900
+      ],
+      "presentationToReference": [
+        0.8825877033911549,
+        -0.33796802836674655,
+        0.32682802453985055,
+        0.3052148644907239,
+        -0.1168779026295509,
+        -0.9450838282241563,
+        -0.3576070920949922,
+        -0.93387213668618,
+        0.0000021336788366651134
+      ],
+      "orbitUpReference": [
+        0.33796802836674655,
+        0.1168779026295509,
+        0.93387213668618
+      ],
+      "metersPerUnit": 812398.0645161291,
+      "bodyRadiusM": 251843400
+    }
+  }
+}

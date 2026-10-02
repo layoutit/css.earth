@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-17156-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-17156",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 17156 system",
+      "systemName": "HD 17156 system",
+      "classification": "planetary-system",
+      "color": "#fff7fd",
+      "distanceAu": 15971923.6,
+      "description": "HD 17156 b crosses HD 17156 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        552140986119404200,
+        504837310013017660,
+        2269217559972209400
+      ],
+      "presentationToReference": [
+        0.23108145943718902,
+        0.7009130281797071,
+        0.6747757301743535,
+        0.21128397515691613,
+        0.6408442618094873,
+        -0.7380228410745463,
+        0.9497159790938924,
+        -0.31311269382413476,
+        0.000004463542195728881
+      ],
+      "orbitUpReference": [
+        -0.7009130281797071,
+        -0.6408442618094873,
+        0.31311269382413476
+      ],
+      "metersPerUnit": 3404441.6129032252,
+      "bodyRadiusM": 1055376899.9999999
+    }
+  }
+}

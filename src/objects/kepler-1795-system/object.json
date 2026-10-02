@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-1795-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-1795",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-1795 system",
+      "systemName": "Kepler-1795 system",
+      "classification": "planetary-system",
+      "color": "#ffdebc",
+      "distanceAu": 90450617,
+      "description": "Kepler-1795 b crosses Kepler-1795 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2971564108549620000,
+        -10045207390164208000,
+        8564900579271816000
+      ],
+      "presentationToReference": [
+        0.21960784735932437,
+        0.17955455035447343,
+        -0.9589226021036351,
+        -0.7423721281624154,
+        -0.6069729649275035,
+        -0.2836678395143199,
+        0.6329739463088587,
+        -0.7741730964675267,
+        -2.674348602634568e-7
+      ],
+      "orbitUpReference": [
+        -0.17955455035447343,
+        0.6069729649275035,
+        0.7741730964675267
+      ],
+      "metersPerUnit": 1544005.1612903227,
+      "bodyRadiusM": 478641600
+    }
+  }
+}

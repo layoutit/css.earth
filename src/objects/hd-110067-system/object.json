@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-110067-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-110067",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 110067 system",
+      "systemName": "HD 110067 system",
+      "classification": "planetary-system",
+      "color": "#ffdad4",
+      "distanceAu": 6645743.4,
+      "description": "A nearby K star orbited by six sub-Neptunes in a resonant chain."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -920333337313771500,
+        -159613634229914100,
+        340473114086992700
+      ],
+      "presentationToReference": [
+        -0.9257080281786892,
+        -0.3374380323112082,
+        -0.17088072131010945,
+        -0.1605457681192459,
+        -0.058525868362249316,
+        0.9852917228270246,
+        0.3424758428043132,
+        -0.9395266345784906,
+        -0.0000036181090135069493
+      ],
+      "orbitUpReference": [
+        0.3374380323112082,
+        0.058525868362249316,
+        0.9395266345784906
+      ],
+      "metersPerUnit": 1768424.5161290322,
+      "bodyRadiusM": 548211600
+    }
+  }
+}

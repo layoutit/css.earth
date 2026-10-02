@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "g-9-40-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "g-9-40",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "G 9-40 system",
+      "systemName": "G 9-40 system",
+      "classification": "planetary-system",
+      "color": "#ffc67f",
+      "distanceAu": 5740802.5,
+      "description": "G 9-40 b crosses G 9-40 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -563874558765789100,
+        569424104346752640,
+        308803216898724860
+      ],
+      "presentationToReference": [
+        -0.6565710464386951,
+        -0.2530148435025608,
+        0.7105617143822004,
+        0.6630328930435337,
+        0.2555099463793557,
+        0.7036348840439485,
+        0.3595856556103412,
+        -0.9331120813003084,
+        0.000003269199328634566
+      ],
+      "orbitUpReference": [
+        0.2530148435025608,
+        -0.2555099463793557,
+        0.9331120813003084
+      ],
+      "metersPerUnit": 679092.9032258064,
+      "bodyRadiusM": 210518800
+    }
+  }
+}

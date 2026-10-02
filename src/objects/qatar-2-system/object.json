@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "qatar-2-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "qatar-2",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Qatar-2 system",
+      "systemName": "Qatar-2 system",
+      "classification": "planetary-system",
+      "color": "#ffcba8",
+      "distanceAu": 37623504.4,
+      "description": "Qatar-2 b crosses Qatar-2 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4950277356966189000,
+        -2594020087148722700,
+        -666826169301180200
+      ],
+      "presentationToReference": [
+        -0.8795183718033494,
+        0.10493938339694332,
+        -0.46414993210454636,
+        -0.4608809080699353,
+        0.0549904359828037,
+        0.8857566485931975,
+        -0.1184745636709309,
+        -0.9929570875736224,
+        5.404080694869805e-7
+      ],
+      "orbitUpReference": [
+        -0.10493938339694332,
+        -0.0549904359828037,
+        0.9929570875736224
+      ],
+      "metersPerUnit": 1741494.1935483871,
+      "bodyRadiusM": 539863200
+    }
+  }
+}

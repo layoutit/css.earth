@@ -1,4 +1,4 @@
-import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA } from '@cssearth/objects';
+import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA, systemHostId, systemObjectId } from '@cssearth/objects';
 import type { PreparedWorldContextData as PreparedWorldContext } from '@cssearth/objects';
 import { outwardSphere } from './spatial-context.ts';
 import type { Vector3 } from './spatial-context.ts';
@@ -13,7 +13,8 @@ type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][numbe
  * - `summary` (`world-context-summary.json`, read by every page) holds the camera and frame facts, the focus's own system
  *   in full, and every body that orbits nothing and the map can open by click (a featured star, a galaxy). It lists no
  *   other body: a body is found through its holder.
- * - `systems` (`world-systems/<holder id>.json`) is one holder each: a star with the bodies that orbit it, their named
+ * - `systems` (`world-systems/<holder id>.json`) is one holder each: a system object (`<star>-system`), the star's
+ *   planets with everything that orbits them, their named
  *   orbit centres and orbit-bank pins. A star drawn as a plain dot is in its own holder, and the map draws it from a dot
  *   bank until that file is read. A page reads its own body's holder at startup and any other when navigation targets a
  *   body in it or the camera approaches it (site/world-context-plan.mts).
@@ -58,7 +59,10 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
     && 'orbit' in body && body.orbit?.centerBodyId === focus.id && !orbited.has(body.id);
   const local = (body: Body) => !plainStar(body) && !plainAsteroid(body) && (!('orbit' in body && body.orbit) || hostOf(body.id) === focus.id);
   /** The holder whose file has a body the summary does not: its star, a plain-dot star's own, or the asteroid dot bank. */
-  const fileOf = (body: Body) => plainStar(body) ? body.id : plainAsteroid(body) ? asteroidHolder! : hostOf(body.id);
+  // A star with the bodies that orbit it is a system, an object of its own (system-address.ts in @cssearth/objects): its
+  // holder is that object. A plain-dot star with planets is in it with them; one nothing orbits is its own holder.
+  const systemStars = new Set(bodies.filter(body => 'orbit' in body && body.orbit && hostOf(body.id) !== focus.id).map(body => hostOf(body.id)));
+  const fileOf = (body: Body) => plainAsteroid(body) ? asteroidHolder! : plainStar(body) ? systemStars.has(body.id) ? systemObjectId(body.id) : body.id : systemObjectId(hostOf(body.id));
   const systems = new Map<string, PreparedWorldContext['bodies'][number][]>();
   for (const body of bodies) if (!local(body)) (systems.get(fileOf(body)) ?? systems.set(fileOf(body), []).get(fileOf(body))!).push(body);
   const centresOf = (host: string) => Object.fromEntries(Object.entries(orbitCenters).filter(([id]) => hostOf(id) === host));
@@ -70,11 +74,11 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
     ...(Object.keys(rootCentres).length ? { orbitCenters: rootCentres } : {}), orbitBanks: pinsOf(rootBodies),
     ...root.tables(), focus: focusRow!, bodies: columns(rows) };
   const files = [...systems].map(([id, members]) => {
-    const file = encodeBodies(members, positions), centres = centresOf(id);
+    const file = encodeBodies(members, positions), centres = centresOf(systemHostId(id) ?? id);
     return { id, file: { schema: PREPARED_WORLD_SYSTEM_SCHEMA as typeof PREPARED_WORLD_SYSTEM_SCHEMA, id, ...(Object.keys(centres).length ? { orbitCenters: centres } : {}),
       orbitBanks: pinsOf(members), ...file.tables(), bodies: columns(file.rows) } };
   });
-  const plainStars = bodies.filter(plainStar), alone = new Set(plainStars.filter(star => systems.get(star.id)!.length === 1).map(star => star.id));
+  const plainStars = bodies.filter(plainStar), alone = new Set(plainStars.filter(star => !systemStars.has(star.id)).map(star => star.id));
   return { summary, systems: files.filter(system => !alone.has(system.id)),
     /** The build's own table (`world-index.json`), never served: each body outside the summary with the holder whose file
      * has it, every body in the full context's order, and the row of each plain-dot star nothing orbits, as the holder of

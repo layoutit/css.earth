@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-72-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-72",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-72 system",
+      "systemName": "K2-72 system",
+      "classification": "planetary-system",
+      "color": "#ffc383",
+      "distanceAu": 13719240.9,
+      "description": "4 planets cross K2-72 as seen from Earth: b, c, d, e."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1828304757791522800,
+        -867229356539700400,
+        -342687020516941500
+      ],
+      "presentationToReference": [
+        0.8908258540875982,
+        -0.15086306680890343,
+        -0.4285669524848061,
+        -0.422550085768617,
+        0.07156156637406781,
+        -0.9035100260843951,
+        -0.16697521584365757,
+        -0.9859610931933888,
+        -0.0000016916656065459026
+      ],
+      "orbitUpReference": [
+        0.15086306680890343,
+        -0.07156156637406781,
+        0.9859610931933888
+      ],
+      "metersPerUnit": 742803.2258064516,
+      "bodyRadiusM": 230269000
+    }
+  }
+}

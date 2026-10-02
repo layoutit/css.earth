@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5736-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5736",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5736 system",
+      "systemName": "TOI-5736 system",
+      "classification": "planetary-system",
+      "color": "#ffbe8c",
+      "distanceAu": 19069077.7,
+      "description": "TOI-5736 b crosses TOI-5736 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1540274474097676000,
+        -1029498888827420000,
+        2169227118475163400
+      ],
+      "presentationToReference": [
+        -0.5399342072715134,
+        -0.6322013149189345,
+        -0.5556910555631184,
+        -0.36088481355612595,
+        -0.4225573340732798,
+        0.8313888685599796,
+        0.7604164669197024,
+        -0.6494357526619957,
+        -0.0000013055351630417782
+      ],
+      "orbitUpReference": [
+        0.6322013149189345,
+        0.4225573340732798,
+        0.6494357526619957
+      ],
+      "metersPerUnit": 1301632.2580645161,
+      "bodyRadiusM": 403506000
+    }
+  }
+}

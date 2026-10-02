@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-205-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-205",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-205 system",
+      "systemName": "TOI-205 system",
+      "classification": "planetary-system",
+      "color": "#f5f1ff",
+      "distanceAu": 36374616.9,
+      "description": "TOI-205 b crosses TOI-205 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2937776488973693400,
+        411604112748776000,
+        -4561872805739266000
+      ],
+      "presentationToReference": [
+        0.5398769161733085,
+        -0.8302296927239939,
+        0.13875003676619638,
+        0.07564073029748992,
+        -0.11631875439738741,
+        -0.9903274343849627,
+        -0.8383384729948047,
+        -0.5451500753873768,
+        -0.0000013698551215815615
+      ],
+      "orbitUpReference": [
+        0.8302296927239939,
+        0.11631875439738741,
+        0.5451500753873768
+      ],
+      "metersPerUnit": 3262653.5483870967,
+      "bodyRadiusM": 1011422600
+    }
+  }
+}

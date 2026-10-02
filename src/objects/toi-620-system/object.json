@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-620-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-620",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-620 system",
+      "systemName": "TOI-620 system",
+      "classification": "planetary-system",
+      "color": "#ffc58b",
+      "distanceAu": 6809643.4,
+      "description": "TOI-620 b crosses TOI-620 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -786570590575219800,
+        610708275637310800,
+        -214728664321124200
+      ],
+      "presentationToReference": [
+        -0.7721289084976616,
+        0.16647758053892048,
+        0.6132716884384254,
+        0.5994954806809084,
+        -0.1292568469499262,
+        0.7898720378388705,
+        -0.21076555056597016,
+        -0.9775366400777368,
+        -3.9098352101858516e-7
+      ],
+      "orbitUpReference": [
+        -0.16647758053892048,
+        0.1292568469499262,
+        0.9775366400777368
+      ],
+      "metersPerUnit": 1234306.4516129033,
+      "bodyRadiusM": 382635000
+    }
+  }
+}

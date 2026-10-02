@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-285-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-285",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-285 system",
+      "systemName": "K2-285 system",
+      "classification": "planetary-system",
+      "color": "#ffe6cf",
+      "distanceAu": 32044693.1,
+      "description": "4 planets cross K2-285 as seen from Earth: b, c, d, e."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4710559783547487000,
+        -882885470764166800,
+        108762848490215150
+      ],
+      "presentationToReference": [
+        0.9826321612940623,
+        0.02230156988823353,
+        -0.1842190966514607,
+        -0.184171669223275,
+        -0.00417993141009806,
+        -0.9828852040950254,
+        0.022689906259669216,
+        -0.9997425509369535,
+        1.768295009974599e-8
+      ],
+      "orbitUpReference": [
+        -0.02230156988823353,
+        0.00417993141009806,
+        0.9997425509369535
+      ],
+      "metersPerUnit": 1766180.322580645,
+      "bodyRadiusM": 547515900
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-512-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-512",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-512 system",
+      "systemName": "TOI-512 system",
+      "classification": "planetary-system",
+      "color": "#ffebdf",
+      "distanceAu": 13860322.5,
+      "description": "TOI-512 b crosses TOI-512 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -187544054194741920,
+        1609402104093806000,
+        -1293812023015470300
+      ],
+      "presentationToReference": [
+        -0.09044956996240812,
+        0.07222349069063959,
+        0.9932787336322442,
+        0.7761895136483149,
+        -0.6197842217969709,
+        0.11574695379972393,
+        -0.6239781359919655,
+        -0.7814417993708694,
+        -1.0021787064643373e-7
+      ],
+      "orbitUpReference": [
+        -0.07222349069063959,
+        0.6197842217969709,
+        0.7814417993708694
+      ],
+      "metersPerUnit": 1997332.2580645161,
+      "bodyRadiusM": 619173000
+    }
+  }
+}

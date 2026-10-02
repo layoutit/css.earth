@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ltt-9779-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "ltt-9779",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "LTT 9779 system",
+      "systemName": "LTT 9779 system",
+      "classification": "planetary-system",
+      "color": "#ffeade",
+      "distanceAu": 16717708.7,
+      "description": "LTT 9779 b crosses LTT 9779 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1980172391052393200,
+        -45979053341764120,
+        -1526915917689812000
+      ],
+      "presentationToReference": [
+        0.7917754715642468,
+        -0.6103707543400871,
+        -0.023219493438216332,
+        -0.018384806735433582,
+        0.01418251804176006,
+        -0.9997303911871919,
+        -0.6105355038902448,
+        -0.7919888878187042,
+        -0.000007821554979698174
+      ],
+      "orbitUpReference": [
+        0.6103707543400871,
+        -0.01418251804176006,
+        0.7919888878187042
+      ],
+      "metersPerUnit": 2129739.6774193547,
+      "bodyRadiusM": 660219300
+    }
+  }
+}

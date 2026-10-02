@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-145-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-145-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-145 system",
+      "systemName": "WASP-145 system",
+      "classification": "planetary-system",
+      "color": "#ffd6bd",
+      "distanceAu": 18796021.1,
+      "description": "WASP-145 A b crosses WASP-145 A as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1150597212135697900,
+        -890746003418492500,
+        -2406069088005474000
+      ],
+      "presentationToReference": [
+        0.4091961783914037,
+        -0.6766205439902003,
+        -0.6121626638731535,
+        -0.3167831945569107,
+        0.5238239539283089,
+        -0.7907318590630019,
+        -0.8556908876669126,
+        -0.5174872991111165,
+        -0.000004742669288326835
+      ],
+      "orbitUpReference": [
+        0.6766205439902003,
+        -0.5238239539283089,
+        0.5174872991111165
+      ],
+      "metersPerUnit": 1526051.6129032257,
+      "bodyRadiusM": 473076000
+    }
+  }
+}

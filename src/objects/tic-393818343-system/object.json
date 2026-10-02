@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tic-393818343-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "tic-393818343",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TIC 393818343 system",
+      "systemName": "TIC 393818343 system",
+      "classification": "planetary-system",
+      "color": "#fff1ed",
+      "distanceAu": 19436717,
+      "description": "TIC 393818343 b crosses TIC 393818343 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1876547871138362000,
+        -2213413006373983000,
+        184501090478101820
+      ],
+      "presentationToReference": [
+        0.6453736026112,
+        0.04103656323090708,
+        -0.7627639959586691,
+        -0.7612266907563656,
+        -0.048402880193060396,
+        -0.6466769568100666,
+        0.06345737414007432,
+        -0.9979845498138796,
+        -1.8606132406025835e-7
+      ],
+      "orbitUpReference": [
+        -0.04103656323090708,
+        0.048402880193060396,
+        0.9979845498138796
+      ],
+      "metersPerUnit": 2437194.193548387,
+      "bodyRadiusM": 755530200
+    }
+  }
+}

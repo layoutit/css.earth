@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-3493-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-3493",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-3493 system",
+      "systemName": "TOI-3493 system",
+      "classification": "planetary-system",
+      "color": "#fff5f7",
+      "distanceAu": 20036427.9,
+      "description": "TOI-3493 b crosses TOI-3493 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2491671763343424500,
+        -1204477131303108000,
+        -1151197252938309200
+      ],
+      "presentationToReference": [
+        -0.8312770587060198,
+        0.3457800685095261,
+        -0.435217871750019,
+        -0.4018403313424984,
+        0.16714946604134914,
+        0.9003251657643715,
+        -0.38406093237352285,
+        -0.9233077494658211,
+        -8.608063653106134e-7
+      ],
+      "orbitUpReference": [
+        -0.3457800685095261,
+        -0.16714946604134914,
+        0.9233077494658211
+      ],
+      "metersPerUnit": 2755869.6774193547,
+      "bodyRadiusM": 854319600
+    }
+  }
+}

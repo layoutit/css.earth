@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-1656-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-1656",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-1656 system",
+      "systemName": "Kepler-1656 system",
+      "classification": "planetary-system",
+      "color": "#fff0eb",
+      "distanceAu": 38790217.7,
+      "description": "Kepler-1656 b crosses Kepler-1656 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1112365506425084500,
+        -4309795306253947400,
+        3723217699935375000
+      ],
+      "presentationToReference": [
+        0.19169033202369137,
+        0.1603451456716578,
+        -0.9682686873322828,
+        -0.7426930163152212,
+        -0.6212498164063414,
+        -0.24991148259270912,
+        0.6416088373185377,
+        -0.7670320070731221,
+        3.6368620182176064e-7
+      ],
+      "orbitUpReference": [
+        -0.1603451456716578,
+        0.6212498164063414,
+        0.7670320070731221
+      ],
+      "metersPerUnit": 2468612.9032258065,
+      "bodyRadiusM": 765270000
+    }
+  }
+}

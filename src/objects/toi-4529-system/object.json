@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-4529-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-4529",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-4529 system",
+      "systemName": "TOI-4529 system",
+      "classification": "planetary-system",
+      "color": "#ffc389",
+      "distanceAu": 5854751.3,
+      "description": "TOI-4529 b crosses TOI-4529 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        816641918197488900,
+        249200708015947550,
+        195250613307288100
+      ],
+      "presentationToReference": [
+        0.9323901669633088,
+        0.21322059387663223,
+        0.29186564528397246,
+        0.28452163008057335,
+        0.06506148571500947,
+        -0.9564593274639802,
+        0.22292603833205932,
+        -0.9748353611884685,
+        0.000003181407828703748
+      ],
+      "orbitUpReference": [
+        -0.21322059387663223,
+        -0.06506148571500947,
+        0.9748353611884685
+      ],
+      "metersPerUnit": 1077212.9032258065,
+      "bodyRadiusM": 333936000
+    }
+  }
+}

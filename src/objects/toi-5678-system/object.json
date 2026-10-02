@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5678-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5678",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5678 system",
+      "systemName": "TOI-5678 system",
+      "classification": "planetary-system",
+      "color": "#ffeee4",
+      "distanceAu": 33820980.9,
+      "description": "TOI-5678 b crosses TOI-5678 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2833383812824345000,
+        3079573268442919000,
+        -2843796353743169500
+      ],
+      "presentationToReference": [
+        0.5600091954164406,
+        -0.3805601845646651,
+        0.7359100807660804,
+        0.60866774931256,
+        -0.41362690666825247,
+        -0.6770792811974351,
+        -0.5620616265106643,
+        -0.8270953560528319,
+        1.6018893213025363e-7
+      ],
+      "orbitUpReference": [
+        0.3805601845646651,
+        0.41362690666825247,
+        0.8270953560528319
+      ],
+      "metersPerUnit": 2105053.5483870967,
+      "bodyRadiusM": 652566600
+    }
+  }
+}

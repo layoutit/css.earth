@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2133-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2133",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2133 system",
+      "systemName": "TOI-2133 system",
+      "classification": "planetary-system",
+      "color": "#ffc399",
+      "distanceAu": 15534889.4,
+      "description": "TOI-2133 b crosses TOI-2133 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -297382542756782850,
+        -1930728068015152600,
+        1258874659576139300
+      ],
+      "presentationToReference": [
+        -0.12796253188641082,
+        -0.08246060285565197,
+        -0.9883450001947204,
+        -0.8307846509109924,
+        -0.5353715562306697,
+        0.15223061646676592,
+        0.541684829253986,
+        -0.8405816710801118,
+        -4.966779016464335e-7
+      ],
+      "orbitUpReference": [
+        0.08246060285565197,
+        0.5353715562306697,
+        0.8405816710801118
+      ],
+      "metersPerUnit": 1391400,
+      "bodyRadiusM": 431334000
+    }
+  }
+}

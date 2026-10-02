@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "mars-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "mars",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Mars system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#a95e47",
+      "distanceAu": 1.52,
+      "description": "Mars has two small moons, Phobos and Deimos. Phobos is the larger, inner moon; Deimos is the smaller, outer moon."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        74050034133.59143,
+        196535839890.89764,
+        88149252209.19586
+      ],
+      "presentationToReference": [
+        0.3251289203114236,
+        -1.1102230246251565e-16,
+        0.9456697019452024,
+        0.8676349881770327,
+        0.3977771559319137,
+        -0.29829995224565165,
+        0.3761658044907431,
+        -0.9174820620691819,
+        -0.1293288572326921
+      ],
+      "orbitUpReference": [
+        5.551115123125783e-17,
+        -0.39777715593191365,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 14766.04347826087,
+      "bodyRadiusM": 3396190
+    }
+  }
+}

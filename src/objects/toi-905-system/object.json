@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-905-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-905",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-905 system",
+      "systemName": "TOI-905 system",
+      "classification": "planetary-system",
+      "color": "#ffe9db",
+      "distanceAu": 32418596.2,
+      "description": "TOI-905 b crosses TOI-905 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1043961510668334500,
+        -1145627533249129500,
+        -4595409198031930400
+      ],
+      "presentationToReference": [
+        -0.21526211611887372,
+        0.638221584249294,
+        -0.7391450674680485,
+        -0.23622538243436159,
+        0.7003806104238679,
+        0.673546263619679,
+        -0.9475546369776069,
+        -0.3195938202478445,
+        0.00000127447131671542
+      ],
+      "orbitUpReference": [
+        -0.638221584249294,
+        -0.7003806104238679,
+        0.3195938202478445
+      ],
+      "metersPerUnit": 2060169.677419355,
+      "bodyRadiusM": 638652600
+    }
+  }
+}

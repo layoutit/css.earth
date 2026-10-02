@@ -3,8 +3,9 @@ import ObjectCardHeader from './ObjectCardHeader.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import SystemBodies from './SystemBodies.astro';
 import Detached from './Detached.astro';
-import { SCENE_OBJECTS } from '../objects.mts';
-import { SOLAR_SYSTEM_ID, systemById } from '../object-systems.mts';
+import { SCENE_OBJECTS, requireObject } from '../objects.mts';
+import { systemObjectId } from '../navigation/system-address.mts';
+import { systemById } from '../object-systems.mts';
 import { PAGE_VIEWS, namesSystem } from '../navigation/navigation-scope.mts';
 import { systemSourceDocumentation } from '../source-documentation.mts';
 
@@ -25,7 +26,7 @@ const source = system ? systemSourceDocumentation(system) : null;
 {system && star && source && <>
   <Detached detached={!shown}><ObjectCardHeader heading={false} title={{ label: system.name }} data-view-part="system"
     data-source-subject={`${PAGE_VIEWS.system.identity}:${system.id}`} data-source-document={source.href} data-source-label={source.label}
-    introduction={system.id === SOLAR_SYSTEM_ID ? "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets." : star.description}>
+    introduction={requireObject(systemObjectId(system.id)).description}>
     <ObjectBreadcrumbs scope="system" systemId={system.id} />
   </ObjectCardHeader></Detached>
   <Detached detached={!shown}><div data-view-part="system" data-system-bodies-slot>

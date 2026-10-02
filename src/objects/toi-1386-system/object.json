@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1386-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1386",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1386 system",
+      "systemName": "TOI-1386 system",
+      "classification": "planetary-system",
+      "color": "#fff1ed",
+      "distanceAu": 30554183.2,
+      "description": "TOI-1386 b crosses TOI-1386 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2406414585096859600,
+        -1147574216895531400,
+        3712792407771087400
+      ],
+      "presentationToReference": [
+        0.5264712853356255,
+        0.7331748096610418,
+        -0.43044475161807877,
+        -0.25106433310969273,
+        -0.3496417950433272,
+        -0.9026169263863077,
+        0.8122774688228399,
+        -0.5832712179058513,
+        0.0000023206031404397607
+      ],
+      "orbitUpReference": [
+        -0.7331748096610418,
+        0.3496417950433272,
+        0.5832712179058513
+      ],
+      "metersPerUnit": 2296932.2580645164,
+      "bodyRadiusM": 712049000
+    }
+  }
+}

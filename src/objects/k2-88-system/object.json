@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-88-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-88",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-88 system",
+      "systemName": "K2-88 system",
+      "classification": "planetary-system",
+      "color": "#ffc487",
+      "distanceAu": 23007357.6,
+      "description": "K2-88 b crosses K2-88 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1876803365471741200,
+        2655750529896821000,
+        1127360374648379900
+      ],
+      "presentationToReference": [
+        0.5452883830257544,
+        0.18903543303742096,
+        0.8166554869671256,
+        0.7716044945388415,
+        0.2674933427230493,
+        -0.5771254764835014,
+        0.3275470704259427,
+        -0.9448348621082967,
+        -4.2256483529016195e-7
+      ],
+      "orbitUpReference": [
+        -0.18903543303742096,
+        -0.2674933427230493,
+        0.9448348621082967
+      ],
+      "metersPerUnit": 574513.5483870967,
+      "bodyRadiusM": 178099200
+    }
+  }
+}

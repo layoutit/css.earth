@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-124-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-124",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-124 system",
+      "systemName": "K2-124 system",
+      "classification": "planetary-system",
+      "color": "#ffc98f",
+      "distanceAu": 28352433.1,
+      "description": "K2-124 b crosses K2-124 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2691831259905298000,
+        2822658950116871000,
+        1666329651269550300
+      ],
+      "presentationToReference": [
+        -0.6346469625616536,
+        -0.2711318694890505,
+        0.7236786180747913,
+        0.665491910923307,
+        0.28430838671178754,
+        0.690137129664088,
+        0.39286607057229117,
+        -0.9195956995292622,
+        -6.118810368555584e-7
+      ],
+      "orbitUpReference": [
+        0.2711318694890505,
+        -0.28430838671178754,
+        0.9195956995292622
+      ],
+      "metersPerUnit": 870747.0967741936,
+      "bodyRadiusM": 269931600
+    }
+  }
+}

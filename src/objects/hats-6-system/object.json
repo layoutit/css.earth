@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hats-6-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hats-6",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HATS-6 system",
+      "systemName": "HATS-6 system",
+      "classification": "planetary-system",
+      "color": "#ffc08a",
+      "distanceAu": 35004864.3,
+      "description": "HATS-6 b crosses HATS-6 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        160090432753792400,
+        4947822432478345000,
+        -1707618376128071200
+      ],
+      "presentationToReference": [
+        0.030571131387233,
+        -0.010545317631415708,
+        0.999476964317716,
+        0.9448442799610369,
+        -0.3259194514395675,
+        -0.032338797105659824,
+        -0.3260900068242113,
+        -0.9453387263036377,
+        4.3327198521841876e-8
+      ],
+      "orbitUpReference": [
+        0.010545317631415708,
+        0.3259194514395675,
+        0.9453387263036377
+      ],
+      "metersPerUnit": 1279190.322580645,
+      "bodyRadiusM": 396549000
+    }
+  }
+}

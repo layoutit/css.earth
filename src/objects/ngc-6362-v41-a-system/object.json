@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngc-6362-v41-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "ngc-6362-v41-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "NGC 6362 V41 system",
+      "systemName": "NGC 6362 V41 system",
+      "classification": "planetary-system",
+      "color": "#fff5f4",
+      "distanceAu": 1577719503,
+      "description": "The primary star of NGC 6362 V41, a pair that eclipse each other every 17.889 days."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -11371407266121470000,
+        -91259640775739130000,
+        -217369389123240130000
+      ],
+      "presentationToReference": [
+        -0.04817916388740273,
+        0.1138755558640534,
+        -0.992326118745125,
+        -0.38665515062096467,
+        0.9138976531549404,
+        0.1236481866271056,
+        -0.9209650170692641,
+        -0.389645271156401,
+        2.546030029625128e-7
+      ],
+      "orbitUpReference": [
+        -0.1138755558640534,
+        -0.9138976531549404,
+        0.389645271156401
+      ],
+      "metersPerUnit": 2410039.35483871,
+      "bodyRadiusM": 747112200
+    }
+  }
+}

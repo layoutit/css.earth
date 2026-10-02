@@ -1,4 +1,5 @@
 import { APPLICATION_WORLD_CONTEXT, APPLICATION_WORLD_INDEX } from './world-context-plan.mts';
+import { systemHostId, systemObjectId } from '@cssearth/objects';
 
 /** The build's reading of the bake's world index (`world-index.json`), in Node only: what each page, object entry and
  * world endpoint says of a body's holder. A page never reads the index. */
@@ -19,7 +20,8 @@ export function worldHolderFiles(): readonly string[] {
 /** Where the world keeps `id`: its holder, with its own row when it is a star that is its own holder of one body. Null
  * for a body the summary holds with everything that orbits it, and for an object that is no world body. */
 export function worldPlaceOf(id: string): { readonly holder: string; readonly row?: unknown } | null {
-  const holder = index().holders[id] ?? (holderIds().has(id) ? id : undefined);
+  // A body outside the summary names its holder; a star the summary holds, with planets, names its system's.
+  const holder = index().holders[id] ?? (holderIds().has(systemObjectId(id)) ? systemObjectId(id) : holderIds().has(id) ? id : undefined);
   if (holder === undefined) return null;
   return Object.hasOwn(index().rows, holder) ? { holder, row: index().rows[holder] } : { holder };
 }
@@ -30,7 +32,8 @@ export function worldHolderReaches() {
   // A holder that is no body of the world (a dot bank's object) is never approached: its bodies are its dots until one is
   // opened or their category is highlighted.
   const rows = worldHolderFiles().flatMap(id => {
-    const body = bodies.get(id);
+    // A system's holder is approached at its star.
+    const body = bodies.get(systemHostId(id) ?? id);
     // To the nearest 1e12 m: an approach is measured against a system's fade distance, 1e16 m or more.
     return body ? [{ id, positionM: body.positionM.map(value => Math.round(value / APPROACH_ROUNDING_M) * APPROACH_ROUNDING_M), orbitsWithinM: body.orbitsWithinM ?? null }] : [];
   });

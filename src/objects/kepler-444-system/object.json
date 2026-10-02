@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-444-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-444",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-444 system",
+      "systemName": "Kepler-444 system",
+      "classification": "planetary-system",
+      "color": "#ffe7dc",
+      "distanceAu": 7539250.9,
+      "description": "5 planets cross Kepler-444 as seen from Earth: b, c, d, e, f."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        284914299745569630,
+        -793411623594323800,
+        749253436427894700
+      ],
+      "presentationToReference": [
+        0.25260853176505943,
+        0.22452306378064685,
+        -0.9411579694769912,
+        -0.7034485295419357,
+        -0.6252507415476781,
+        -0.33796697542713716,
+        0.6643410991085751,
+        -0.7474295311429902,
+        0.000003252742627305334
+      ],
+      "orbitUpReference": [
+        -0.22452306378064685,
+        0.6252507415476781,
+        0.7474295311429902
+      ],
+      "metersPerUnit": 1687633.5483870967,
+      "bodyRadiusM": 523166400
+    }
+  }
+}

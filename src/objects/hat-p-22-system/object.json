@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-22-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-22",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HAT-P-22 system",
+      "systemName": "HAT-P-22 system",
+      "classification": "planetary-system",
+      "color": "#ffe9dc",
+      "distanceAu": 16806341.6,
+      "description": "HAT-P-22 b crosses HAT-P-22 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1468740450853283300,
+        663737898236058900,
+        1929616422056029400
+      ],
+      "presentationToReference": [
+        -0.5841827260131661,
+        -0.699387553270081,
+        0.41181014188423765,
+        0.2639977774924256,
+        0.31605816939109543,
+        0.91126966757388,
+        0.7674866227543552,
+        -0.6410649607426999,
+        -0.0000010366955456122767
+      ],
+      "orbitUpReference": [
+        0.699387553270081,
+        -0.31605816939109543,
+        0.6410649607426999
+      ],
+      "metersPerUnit": 2491054.8387096776,
+      "bodyRadiusM": 772227000
+    }
+  }
+}

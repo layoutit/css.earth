@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1443-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1443",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1443 system",
+      "systemName": "TOI-1443 system",
+      "classification": "planetary-system",
+      "color": "#ffe9de",
+      "distanceAu": 17694207.3,
+      "description": "TOI-1443 b crosses TOI-1443 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        291801068274719170,
+        -563000509384077400,
+        2569936749162694000
+      ],
+      "presentationToReference": [
+        0.1102382500447392,
+        0.446778355627022,
+        -0.8878269139704473,
+        -0.2126935013732384,
+        -0.8619733775838914,
+        -0.46017754270521566,
+        0.9708805295713093,
+        -0.2395641819634825,
+        -0.000004416066087783954
+      ],
+      "orbitUpReference": [
+        -0.446778355627022,
+        0.8619733775838914,
+        0.2395641819634825
+      ],
+      "metersPerUnit": 1685613.8709677418,
+      "bodyRadiusM": 522540300
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-4641-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-4641",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-4641 system",
+      "systemName": "TOI-4641 system",
+      "classification": "planetary-system",
+      "color": "#e3e6ff",
+      "distanceAu": 18079190.8,
+      "description": "TOI-4641 b crosses TOI-4641 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1800599891575122700,
+        1653326069237864200,
+        1157263930283548700
+      ],
+      "presentationToReference": [
+        0.665752193834367,
+        0.3151774370237938,
+        0.6763410379356262,
+        0.6112993024561372,
+        0.2893965487256723,
+        -0.7365886235900673,
+        0.42788687666411057,
+        -0.903832296821032,
+        0.0000013602003477199005
+      ],
+      "orbitUpReference": [
+        -0.3151774370237938,
+        -0.2893965487256723,
+        0.903832296821032
+      ],
+      "metersPerUnit": 3860012.9032258065,
+      "bodyRadiusM": 1196604000
+    }
+  }
+}

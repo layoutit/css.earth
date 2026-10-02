@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-4860-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-4860",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-4860 system",
+      "systemName": "TOI-4860 system",
+      "classification": "planetary-system",
+      "color": "#ffc07d",
+      "distanceAu": 16665429.5,
+      "description": "TOI-4860 b crosses TOI-4860 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2422798365142545400,
+        -150875665501945150,
+        -568239313367471040
+      ],
+      "presentationToReference": [
+        -0.9717966030701484,
+        0.22748256497027386,
+        -0.062153398103933694,
+        -0.06051698784829556,
+        0.01416824202231118,
+        0.9980666085486313,
+        -0.22792335651067047,
+        -0.973679076263089,
+        0.000002089848752565646
+      ],
+      "orbitUpReference": [
+        -0.22748256497027386,
+        -0.01416824202231118,
+        0.973679076263089
+      ],
+      "metersPerUnit": 803421.2903225806,
+      "bodyRadiusM": 249060600
+    }
+  }
+}

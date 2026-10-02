@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-63-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-63",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-63 system",
+      "systemName": "Kepler-63 system",
+      "classification": "planetary-system",
+      "color": "#ffede4",
+      "distanceAu": 40319566.5,
+      "description": "Kepler-63 b crosses Kepler-63 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1288692410299377000,
+        -3695146585311064000,
+        4589861145719410000
+      ],
+      "presentationToReference": [
+        0.21365281525029736,
+        0.2505817838669826,
+        -0.9442252083743916,
+        -0.612619787630276,
+        -0.718511127216426,
+        -0.3293004036894225,
+        0.7609530013998618,
+        -0.6488070049407774,
+        5.659018473474966e-7
+      ],
+      "orbitUpReference": [
+        -0.2505817838669826,
+        0.718511127216426,
+        0.6488070049407774
+      ],
+      "metersPerUnit": 2022018.3870967743,
+      "bodyRadiusM": 626825700
+    }
+  }
+}

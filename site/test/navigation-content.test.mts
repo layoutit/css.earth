@@ -11,7 +11,7 @@ function link(href: string) {
 test('object navigation leaves overview links to the same scene unselected', () => {
   assert.equal(objectLinkIsCurrent(link('/sun/'), origin, '/sun/'), true);
   assert.equal(objectLinkIsCurrent(link('/sun/?dataset=corona'), origin, '/sun/'), true);
-  assert.equal(objectLinkIsCurrent(link('/sun/?overview=system'), origin, '/sun/'), false);
+  assert.equal(objectLinkIsCurrent(link('/solar-system/'), origin, '/sun/'), false);
   assert.equal(objectLinkIsCurrent(link('/m42/'), origin, '/sun/'), false);
   assert.equal(objectLinkIsCurrent(link('https://elsewhere.test/sun/'), origin, '/sun/'), false);
 });

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2969-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2969",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2969 system",
+      "systemName": "TOI-2969 system",
+      "classification": "planetary-system",
+      "color": "#ffcfb0",
+      "distanceAu": 33522460.4,
+      "description": "TOI-2969 b crosses TOI-2969 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2939014498173205000,
+        1692556593332136000,
+        -3694124340711108600
+      ],
+      "presentationToReference": [
+        -0.5860577897346049,
+        0.6383436707335981,
+        0.49905272780112664,
+        0.3375063228526377,
+        -0.3676181540137075,
+        0.8665716213181951,
+        -0.7366313522555776,
+        -0.6762945001062108,
+        -4.577820373805714e-7
+      ],
+      "orbitUpReference": [
+        -0.6383436707335981,
+        0.3676181540137075,
+        0.6762945001062108
+      ],
+      "metersPerUnit": 1570935.4838709678,
+      "bodyRadiusM": 486990000
+    }
+  }
+}

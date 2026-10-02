@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-7333-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-7333",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-7333 system",
+      "systemName": "TOI-7333 system",
+      "classification": "planetary-system",
+      "color": "#ffd1b3",
+      "distanceAu": 32523169,
+      "description": "TOI-7333 b crosses TOI-7333 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -527668170510743900,
+        -1059846640402351400,
+        4719150109431350000
+      ],
+      "presentationToReference": [
+        -0.10845117814256972,
+        -0.43230157452646556,
+        -0.8951836072121894,
+        -0.21782935428216343,
+        -0.8682764899731157,
+        0.44569755369867314,
+        0.9699426345782024,
+        -0.24333369191689136,
+        0.0000023645431830363432
+      ],
+      "orbitUpReference": [
+        0.43230157452646556,
+        0.8682764899731157,
+        0.24333369191689136
+      ],
+      "metersPerUnit": 1494780.9677419355,
+      "bodyRadiusM": 463382100
+    }
+  }
+}

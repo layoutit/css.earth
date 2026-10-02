@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-26-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-26",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-26 system",
+      "systemName": "K2-26 system",
+      "classification": "planetary-system",
+      "color": "#ffc188",
+      "distanceAu": 20586432.3,
+      "description": "K2-26 b crosses K2-26 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -205395065560113470,
+        2792720495999542000,
+        1281793139147985000
+      ],
+      "presentationToReference": [
+        -0.06669331667532177,
+        -0.030529355405407473,
+        0.9973063521152242,
+        0.9068172690932335,
+        0.4150932430719966,
+        0.0733487561602958,
+        0.4162144182811733,
+        -0.9092664944968019,
+        -6.01585921360328e-7
+      ],
+      "orbitUpReference": [
+        0.030529355405407473,
+        -0.4150932430719966,
+        0.9092664944968019
+      ],
+      "metersPerUnit": 1166980.6451612904,
+      "bodyRadiusM": 361764000
+    }
+  }
+}

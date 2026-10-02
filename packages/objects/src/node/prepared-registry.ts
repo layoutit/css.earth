@@ -77,9 +77,12 @@ function decodeRegistry(checkout: string): PreparedObjectRegistry {
     const id = isRecord(row.descriptor) ? row.descriptor.id : undefined;
     if (!levels.some(level => level.id === id)) throw new TypeError(`${PREPARED_CATALOGUE.overviews}: ${String(id)} is not a level object of ${PREPARED_CATALOGUE.entries}.`);
   }
-  const worldObjects = objects;
-  return Object.freeze({ entries: Object.freeze(entries), objects, sceneObjects: objects, levels, worldObjects, requireSceneObject(id: string) {
-    const object = objects.find(candidate => candidate.id === id);
+  // A system is an object with a page and an address, and nothing to prepare or place: it mounts its host's scene and
+  // the world draws its host. Preparation steps that walk the scenes or the world's bodies do not see it.
+  const scenes = Object.freeze(objects.filter(object => !object.system));
+  const worldObjects = scenes;
+  return Object.freeze({ entries: Object.freeze(entries), objects, sceneObjects: scenes, levels, worldObjects, requireSceneObject(id: string) {
+    const object = scenes.find(candidate => candidate.id === id);
     if (object) return object;
     throw new Error(`Unknown cssEarth object: ${id}`);
   } });

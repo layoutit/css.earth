@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-6383-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-6383-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-6383 system",
+      "systemName": "TOI-6383 system",
+      "classification": "planetary-system",
+      "color": "#ffc588",
+      "distanceAu": 35279360.8,
+      "description": "TOI-6383 A b crosses TOI-6383 A as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1267197654665468400,
+        2232935355897372400,
+        4611128842631203300
+      ],
+      "presentationToReference": [
+        0.2401022173004512,
+        0.4312288320072344,
+        0.8697083532386495,
+        0.4230853238179623,
+        0.7598627694961582,
+        -0.4935659837382217,
+        0.8736988806317981,
+        -0.48646712733678615,
+        0.000001854229333206353
+      ],
+      "orbitUpReference": [
+        -0.4312288320072344,
+        -0.7598627694961582,
+        0.48646712733678615
+      ],
+      "metersPerUnit": 1025596.4516129033,
+      "bodyRadiusM": 317934900
+    }
+  }
+}

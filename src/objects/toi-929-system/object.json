@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-929-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-929",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-929 system",
+      "systemName": "TOI-929 system",
+      "classification": "planetary-system",
+      "color": "#ffcbac",
+      "distanceAu": 23421921.2,
+      "description": "TOI-929 b crosses TOI-929 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1869538984835439000,
+        1929755347207680800,
+        -2248993103925469700
+      ],
+      "presentationToReference": [
+        0.5335631057905571,
+        -0.4466216941722724,
+        0.7182196561176979,
+        0.550748748690878,
+        -0.4609938072241127,
+        -0.6958164452759434,
+        -0.6418615333189606,
+        -0.7668205604935922,
+        -0.000007051670868040044
+      ],
+      "orbitUpReference": [
+        0.4466216941722724,
+        0.4609938072241127,
+        0.7668205604935922
+      ],
+      "metersPerUnit": 1610015.8064516129,
+      "bodyRadiusM": 499104900
+    }
+  }
+}

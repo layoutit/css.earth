@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5143-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5143",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5143 system",
+      "systemName": "TOI-5143 system",
+      "classification": "planetary-system",
+      "color": "#ffe9d6",
+      "distanceAu": 36871498.5,
+      "description": "TOI-5143 c crosses TOI-5143 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5315476854809753000,
+        1388049228857371600,
+        494117596559423360
+      ],
+      "presentationToReference": [
+        -0.9636648792434327,
+        -0.08667422793402783,
+        0.25266099565382205,
+        0.2516452105892288,
+        0.02263330979630748,
+        0.9675548673202813,
+        0.08958062569687258,
+        -0.9959795738365845,
+        -2.2858937940151237e-7
+      ],
+      "orbitUpReference": [
+        0.08667422793402783,
+        -0.02263330979630748,
+        0.9959795738365845
+      ],
+      "metersPerUnit": 1912052.9032258065,
+      "bodyRadiusM": 592736400
+    }
+  }
+}

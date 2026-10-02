@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-128-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-128",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-128 system",
+      "systemName": "TOI-128 system",
+      "classification": "planetary-system",
+      "color": "#fef7ff",
+      "distanceAu": 14072990.7,
+      "description": "TOI-128 b crosses TOI-128 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        60140569406316100,
+        325121874689462200,
+        -2079163904054901000
+      ],
+      "presentationToReference": [
+        0.02856599200301052,
+        -0.17962000139490317,
+        0.9833212288971388,
+        0.1544286818647878,
+        -0.9711191592299802,
+        -0.18187732347371033,
+        -0.9875908901556294,
+        -0.15704850739612736,
+        0.000002502084567671216
+      ],
+      "orbitUpReference": [
+        0.17962000139490317,
+        0.9711191592299802,
+        0.15704850739612736
+      ],
+      "metersPerUnit": 2535938.709677419,
+      "bodyRadiusM": 786141000
+    }
+  }
+}

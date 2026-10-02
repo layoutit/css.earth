@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-3757-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-3757",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-3757 system",
+      "systemName": "TOI-3757 system",
+      "classification": "planetary-system",
+      "color": "#ffbd8b",
+      "distanceAu": 36845724.2,
+      "description": "TOI-3757 b crosses TOI-3757 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -55347988387632620,
+        3159528479091101700,
+        4516295176707705000
+      ],
+      "presentationToReference": [
+        -0.010041253867679139,
+        -0.01435170947382408,
+        0.9998465890605139,
+        0.5732029020319969,
+        0.8192262414975411,
+        0.017515659962149766,
+        0.8193519428932002,
+        -0.5732908456246196,
+        -3.8285357463638486e-7
+      ],
+      "orbitUpReference": [
+        0.01435170947382408,
+        -0.8192262414975411,
+        0.5732908456246196
+      ],
+      "metersPerUnit": 1391400,
+      "bodyRadiusM": 431334000
+    }
+  }
+}

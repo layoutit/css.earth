@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-283-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-283",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-283 system",
+      "systemName": "TOI-283 system",
+      "classification": "planetary-system",
+      "color": "#ffe8da",
+      "distanceAu": 17019957.6,
+      "description": "TOI-283 b crosses TOI-283 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -506068728944708740,
+        929388866796832000,
+        -2315816839096292000
+      ],
+      "presentationToReference": [
+        -0.19875809636027086,
+        0.43496007474607384,
+        0.8782396896679922,
+        0.3650167484784685,
+        -0.7987914157278125,
+        0.47822071001762717,
+        -0.9095372408326378,
+        -0.4156224338705104,
+        0.0000014510227777554599
+      ],
+      "orbitUpReference": [
+        -0.43496007474607384,
+        0.7987914157278125,
+        0.4156224338705104
+      ],
+      "metersPerUnit": 1907564.5161290322,
+      "bodyRadiusM": 591345000
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1752-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1752",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1752 system",
+      "systemName": "TOI-1752 system",
+      "classification": "planetary-system",
+      "color": "#ffc68e",
+      "distanceAu": 21294144.9,
+      "description": "2 planets cross TOI-1752 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -443662432472859840,
+        -1493986741143214600,
+        2778300148628777500
+      ],
+      "presentationToReference": [
+        -0.1392746414088447,
+        -0.2482671967012476,
+        -0.9586271294421735,
+        -0.46899275794391626,
+        -0.8360692353856747,
+        0.28466476184763784,
+        0.8721515735562236,
+        -0.4892357639050085,
+        -0.000007725663383971958
+      ],
+      "orbitUpReference": [
+        0.2482671967012476,
+        0.8360692353856747,
+        0.4892357639050085
+      ],
+      "metersPerUnit": 1189422.5806451612,
+      "bodyRadiusM": 368721000
+    }
+  }
+}

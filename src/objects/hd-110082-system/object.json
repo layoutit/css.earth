@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-110082-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-110082",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 110082 system",
+      "systemName": "HD 110082 system",
+      "classification": "planetary-system",
+      "color": "#f7f3ff",
+      "distanceAu": 21686479.8,
+      "description": "HD 110082 b crosses HD 110082 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -103809307219582720,
+        -23180372439648336,
+        -3242507085413540000
+      ],
+      "presentationToReference": [
+        -0.031998828198529256,
+        0.9754331344909993,
+        -0.21795934283940438,
+        -0.00714526257858267,
+        0.21784219140149835,
+        0.9759578499443899,
+        -0.9994623655829189,
+        -0.032786884305419386,
+        9.689832595386711e-7
+      ],
+      "orbitUpReference": [
+        -0.9754331344909993,
+        -0.21784219140149835,
+        0.032786884305419386
+      ],
+      "metersPerUnit": 2670590.3225806453,
+      "bodyRadiusM": 827883000
+    }
+  }
+}

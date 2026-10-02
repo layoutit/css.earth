@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-4666-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-4666",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-4666 system",
+      "systemName": "TOI-4666 system",
+      "classification": "planetary-system",
+      "color": "#ffc189",
+      "distanceAu": 31792332.7,
+      "description": "TOI-4666 b crosses TOI-4666 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2049498981523530200,
+        3071921146512604000,
+        -2997167203063836700
+      ],
+      "presentationToReference": [
+        0.4309236249083974,
+        -0.3497427332296582,
+        0.8318562676621816,
+        0.6458960984226483,
+        -0.5242166346953078,
+        -0.5549911260111525,
+        -0.6301770065134141,
+        -0.7764515055441482,
+        -1.343845261594463e-7
+      ],
+      "orbitUpReference": [
+        0.3497427332296582,
+        0.5242166346953078,
+        0.7764515055441482
+      ],
+      "metersPerUnit": 1312853.2258064516,
+      "bodyRadiusM": 406984500
+    }
+  }
+}

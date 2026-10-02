@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-219666-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-219666",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 219666 system",
+      "systemName": "HD 219666 system",
+      "classification": "planetary-system",
+      "color": "#ffefe8",
+      "distanceAu": 19417786.1,
+      "description": "HD 219666 b crosses HD 219666 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1559923923811290400,
+        -287395904820687580,
+        -2433567217613473000
+      ],
+      "presentationToReference": [
+        0.5370058161799094,
+        -0.8238861082611113,
+        -0.18120826141020677,
+        -0.0989364097315657,
+        0.15181574693636882,
+        -0.9834447446662067,
+        -0.8377567309299145,
+        -0.5460436425749438,
+        -0.0000136055134609394
+      ],
+      "orbitUpReference": [
+        0.8238861082611113,
+        -0.15181574693636882,
+        0.5460436425749438
+      ],
+      "metersPerUnit": 2376600.9677419355,
+      "bodyRadiusM": 736746300
+    }
+  }
+}

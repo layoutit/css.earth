@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-4184-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-4184",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-4184 system",
+      "systemName": "TOI-4184 system",
+      "classification": "planetary-system",
+      "color": "#ffbf7c",
+      "distanceAu": 14273849.2,
+      "description": "TOI-4184 b crosses TOI-4184 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        282989640109283600,
+        271660112951133500,
+        -2098995873489848600
+      ],
+      "presentationToReference": [
+        0.1325208067157554,
+        -0.7091387103742959,
+        0.6925030868061788,
+        0.1272153191923499,
+        -0.6807178474339484,
+        -0.7214149116477151,
+        -0.9829824506827141,
+        -0.1836994872980662,
+        -0.000004029104158140686
+      ],
+      "orbitUpReference": [
+        0.7091387103742959,
+        0.6807178474339484,
+        0.1836994872980662
+      ],
+      "metersPerUnit": 526712.2580645161,
+      "bodyRadiusM": 163280800
+    }
+  }
+}

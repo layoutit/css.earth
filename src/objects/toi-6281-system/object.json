@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-6281-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-6281",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-6281 system",
+      "systemName": "TOI-6281 system",
+      "classification": "planetary-system",
+      "color": "#ffccac",
+      "distanceAu": 11921622.3,
+      "description": "TOI-6281 b crosses TOI-6281 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1341972449500857000,
+        179580800382640350,
+        -1160841134694541300
+      ],
+      "presentationToReference": [
+        -0.7524569658404274,
+        0.6451488490648731,
+        0.13263286586848536,
+        0.10069269622591405,
+        -0.0863276204404308,
+        0.9911652349007449,
+        -0.6508989902319514,
+        -0.7591643461723967,
+        0.000003957734556729959
+      ],
+      "orbitUpReference": [
+        -0.6451488490648731,
+        0.0863276204404308,
+        0.7591643461723967
+      ],
+      "metersPerUnit": 1961916.7741935484,
+      "bodyRadiusM": 608194200
+    }
+  }
+}

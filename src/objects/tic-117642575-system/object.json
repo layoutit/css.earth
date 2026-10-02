@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tic-117642575-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "tic-117642575",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TIC 117642575 system",
+      "systemName": "TIC 117642575 system",
+      "classification": "planetary-system",
+      "color": "#fff4f4",
+      "distanceAu": 38949670.2,
+      "description": "TIC 117642575 b crosses TIC 117642575 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4585918505005805600,
+        765806141079205000,
+        -3512028980022114300
+      ],
+      "presentationToReference": [
+        0.7870404683442521,
+        -0.5945069694687146,
+        0.16470811893038317,
+        0.13142850734946493,
+        -0.09927392358556714,
+        -0.9863423521028686,
+        -0.6027386238199375,
+        -0.797938688966171,
+        -0.0000025682929707922305
+      ],
+      "orbitUpReference": [
+        0.5945069694687146,
+        0.09927392358556714,
+        0.797938688966171
+      ],
+      "metersPerUnit": 2426018.064516129,
+      "bodyRadiusM": 752065600
+    }
+  }
+}

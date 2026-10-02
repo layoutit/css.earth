@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2094-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2094",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2094 system",
+      "systemName": "TOI-2094 system",
+      "classification": "planetary-system",
+      "color": "#ffc885",
+      "distanceAu": 10359237.8,
+      "description": "TOI-2094 b crosses TOI-2094 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -144644379895416350,
+        -509195452406202000,
+        1456512888960093400
+      ],
+      "presentationToReference": [
+        -0.09333581916109492,
+        -0.2568113769512917,
+        -0.9619440428267693,
+        -0.3285725632601386,
+        -0.9040887192138838,
+        0.27324651592080984,
+        0.9398555716354454,
+        -0.34157210726079607,
+        -0.000002688802881362774
+      ],
+      "orbitUpReference": [
+        0.2568113769512917,
+        0.9040887192138838,
+        0.34157210726079607
+      ],
+      "metersPerUnit": 861770.3225806452,
+      "bodyRadiusM": 267148800
+    }
+  }
+}

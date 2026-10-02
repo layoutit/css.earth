@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-54-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-54",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HAT-P-54 system",
+      "systemName": "HAT-P-54 system",
+      "classification": "planetary-system",
+      "color": "#ffc298",
+      "distanceAu": 29592700,
+      "description": "HAT-P-54 b crosses HAT-P-54 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -686948867733139100,
+        3936854048489907700,
+        1904640096233718500
+      ],
+      "presentationToReference": [
+        -0.1551722485105027,
+        -0.07395485199589212,
+        0.9851153501790846,
+        0.8892808816728025,
+        0.4238298793734385,
+        0.17189458060549648,
+        0.4302337583028995,
+        -0.9027175157359927,
+        -6.185769665537987e-10
+      ],
+      "orbitUpReference": [
+        0.07395485199589212,
+        -0.4238298793734385,
+        0.9027175157359927
+      ],
+      "metersPerUnit": 1384667.4193548388,
+      "bodyRadiusM": 429246900
+    }
+  }
+}

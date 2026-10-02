@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-100-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-100",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-100 system",
+      "systemName": "K2-100 system",
+      "classification": "planetary-system",
+      "color": "#fff6fb",
+      "distanceAu": 37692694.5,
+      "description": "K2-100 b crosses K2-100 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3375300875603836000,
+        4079897616268350500,
+        1938361490406958000
+      ],
+      "presentationToReference": [
+        -0.5985904575038431,
+        -0.21912467370492372,
+        0.7705023306642561,
+        0.723546691302425,
+        0.2648660549499937,
+        0.637437179995441,
+        0.3437581267267048,
+        -0.9390582251963601,
+        -6.396321663229767e-7
+      ],
+      "orbitUpReference": [
+        0.21912467370492372,
+        -0.2648660549499937,
+        0.9390582251963601
+      ],
+      "metersPerUnit": 2782800,
+      "bodyRadiusM": 862668000
+    }
+  }
+}

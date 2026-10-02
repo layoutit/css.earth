@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-1542-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-1542",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-1542 system",
+      "systemName": "Kepler-1542 system",
+      "classification": "planetary-system",
+      "color": "#ffefe6",
+      "distanceAu": 80629267.2,
+      "description": "4 planets cross Kepler-1542 as seen from Earth: b, c, d, e."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2404744317776960000,
+        -8538864324426296000,
+        8172884503401078000
+      ],
+      "presentationToReference": [
+        0.1993657115607608,
+        0.1836763557390206,
+        -0.9625571720143714,
+        -0.707915909968636,
+        -0.6522050090344232,
+        -0.27107875350843336,
+        0.6775753666324873,
+        -0.7354533449056035,
+        -9.880307143735292e-8
+      ],
+      "orbitUpReference": [
+        -0.1836763557390206,
+        0.6522050090344232,
+        0.7354533449056035
+      ],
+      "metersPerUnit": 2221751.6129032257,
+      "bodyRadiusM": 688743000
+    }
+  }
+}

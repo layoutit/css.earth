@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "eps-eridani-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "eps-eridani",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "ε Eridani system",
+      "systemName": "ε Eridani system",
+      "classification": "planetary-system",
+      "color": "#ffe6d0",
+      "distanceAu": 664170.4,
+      "description": "ε Eridani is a star of 5,039 K, 3.2 parsecs away, with 1 known planet."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        58674240692610440,
+        78503906579137940,
+        -16327222453164896
+      ],
+      "presentationToReference": [
+        0.590530658375399,
+        -0.09837104489268046,
+        0.8009973027703903,
+        0.7901076024008707,
+        -0.13163075530607696,
+        -0.5986679554526861,
+        -0.16432747228344227,
+        -0.986405840303206,
+        0.000008286167524485432
+      ],
+      "orbitUpReference": [
+        0.09837104489268046,
+        0.13163075530607696,
+        0.986405840303206
+      ],
+      "metersPerUnit": 1660703.2258064516,
+      "bodyRadiusM": 514818000
+    }
+  }
+}

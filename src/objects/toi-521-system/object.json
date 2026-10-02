@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-521-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-521",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-521 system",
+      "systemName": "TOI-521 system",
+      "classification": "planetary-system",
+      "color": "#ffc889",
+      "distanceAu": 12586530.2,
+      "description": "TOI-521 b crosses TOI-521 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1011528480640134000,
+        1537299100377804800,
+        398625435221507400
+      ],
+      "presentationToReference": [
+        -0.5372136940550731,
+        -0.11636597055121595,
+        0.8353803970751146,
+        0.8164457495716368,
+        0.17685232773352125,
+        0.5496722588794559,
+        0.2117021136552744,
+        -0.9773342391796722,
+        9.902326448980242e-7
+      ],
+      "orbitUpReference": [
+        0.11636597055121595,
+        -0.17685232773352125,
+        0.9773342391796722
+      ],
+      "metersPerUnit": 944805.4838709678,
+      "bodyRadiusM": 292889700
+    }
+  }
+}

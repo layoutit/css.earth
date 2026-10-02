@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "quaoar-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "quaoar",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Quaoar–Weywot system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#9a9a9a",
+      "distanceAu": 43.16573948799057,
+      "description": "Quaoar has a small moon, Weywot, and two narrow rings. Stellar occultations revealed the rings."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1261604907550.4744,
+        -6026290815632.511,
+        -1647891916745.3525
+      ],
+      "presentationToReference": [
+        0.1998779585899762,
+        0,
+        -0.9798208007946675,
+        -0.8989680087713688,
+        0.39777715593191376,
+        -0.18338444160930992,
+        -0.38975033146303306,
+        -0.9174820620691819,
+        -0.07950688590139753
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191376,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 2379.018845256929,
+      "bodyRadiusM": 547174.3344090937
+    }
+  }
+}

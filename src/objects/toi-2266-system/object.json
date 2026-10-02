@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2266-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2266",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2266 system",
+      "systemName": "TOI-2266 system",
+      "classification": "planetary-system",
+      "color": "#ffcc80",
+      "distanceAu": 10694209.2,
+      "description": "TOI-2266 b crosses TOI-2266 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -569960857759039400,
+        -1238057339655127000,
+        837745565785737100
+      ],
+      "presentationToReference": [
+        -0.35626361031853243,
+        -0.2189795129435579,
+        -0.9083634805923271,
+        -0.7738685413189433,
+        -0.4756592200644803,
+        0.41818152413101795,
+        0.5236446511898081,
+        -0.8519367812688055,
+        0.0000012852388947488149
+      ],
+      "orbitUpReference": [
+        0.2189795129435579,
+        0.4756592200644803,
+        0.8519367812688055
+      ],
+      "metersPerUnit": 538606.4516129033,
+      "bodyRadiusM": 166968000
+    }
+  }
+}

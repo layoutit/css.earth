@@ -53,7 +53,7 @@ for (const [width, height, mobile] of [[390, 844, true], [820, 1080, true], [144
       const handoff = await navigation.prepare({ fromId: 'earth', toId: hostId,
         fromMount: { sharedView: unusedSharedView, navigation: owner }, toFactory: factory,
         targetWorldCamera: provisional, centerSelection: true, cameraViewport,
-        url: `https://css.earth/${hostId}/?view=satellites`, reducedMotion: true, signal: controller.signal });
+        url: `https://css.earth/${hostId}-system/`, reducedMotion: true, signal: controller.signal });
       const target = required(handoff.mountOptions.initialWorldCamera);
       assert.equal(satelliteSelectionAtCamera(target, { ...optics, framingRadiusPixels }, SCENE_OBJECTS,
         { objectId: hostId, view: 'moons' }), null, `${hostId} must not change its card at rest`);

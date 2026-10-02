@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-700-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-700",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-700 system",
+      "systemName": "TOI-700 system",
+      "classification": "planetary-system",
+      "color": "#ffc789",
+      "distanceAu": 6419122.6,
+      "description": "4 planets cross TOI-700 as seen from Earth: b, c, d, e."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -49039098979754750,
+        393992734963858300,
+        -874366140989245700
+      ],
+      "presentationToReference": [
+        -0.05106618293916271,
+        0.11247466740120506,
+        0.99234152092564,
+        0.41027884968935174,
+        -0.903555731360258,
+        0.12352451507134768,
+        -0.9105292474476624,
+        -0.41344466318845813,
+        0.000004834887186948411
+      ],
+      "orbitUpReference": [
+        -0.11247466740120506,
+        0.903555731360258,
+        0.41344466318845813
+      ],
+      "metersPerUnit": 921017.0967741936,
+      "bodyRadiusM": 285515300
+    }
+  }
+}

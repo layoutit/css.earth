@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-228-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-228",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-228 system",
+      "systemName": "K2-228 system",
+      "classification": "planetary-system",
+      "color": "#ffd3b7",
+      "distanceAu": 33467437.1,
+      "description": "K2-228 b crosses K2-228 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4930849200862212000,
+        -631188946510227000,
+        -595772036103405000
+      ],
+      "presentationToReference": [
+        -0.984858451785431,
+        0.11803352293852475,
+        -0.12697211272371858,
+        -0.12606992088403593,
+        0.01510935001336867,
+        0.9919062872018033,
+        -0.11899665959638053,
+        -0.9928946545353612,
+        9.416312659520897e-8
+      ],
+      "orbitUpReference": [
+        -0.11803352293852475,
+        -0.01510935001336867,
+        0.9928946545353612
+      ],
+      "metersPerUnit": 1458725.8064516129,
+      "bodyRadiusM": 452205000
+    }
+  }
+}

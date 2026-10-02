@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngc-6362-v40-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "ngc-6362-v40-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "NGC 6362 V40 system",
+      "systemName": "NGC 6362 V40 system",
+      "classification": "planetary-system",
+      "color": "#fff5f5",
+      "distanceAu": 1577719503,
+      "description": "The primary star of NGC 6362 V40, a pair that eclipse each other every 5.296 days."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -11183099909848881000,
+        -91301669179605800000,
+        -217361509350123400000
+      ],
+      "presentationToReference": [
+        -0.04738132926367859,
+        0.11196303827908133,
+        -0.9925821314614343,
+        -0.3868332112393316,
+        0.9141002977676251,
+        0.1215759528171819,
+        -0.9209316349868071,
+        -0.38972416358298334,
+        2.6555094525658055e-7
+      ],
+      "orbitUpReference": [
+        -0.11196303827908133,
+        -0.9141002977676251,
+        0.38972416358298334
+      ],
+      "metersPerUnit": 2974229.6774193547,
+      "bodyRadiusM": 922011200
+    }
+  }
+}

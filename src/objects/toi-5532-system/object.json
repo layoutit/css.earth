@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5532-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5532",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5532 system",
+      "systemName": "TOI-5532 system",
+      "classification": "planetary-system",
+      "color": "#ffc091",
+      "distanceAu": 18682485.7,
+      "description": "TOI-5532 b crosses TOI-5532 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2088603197470750500,
+        1840116450813133000,
+        250900385621310720
+      ],
+      "presentationToReference": [
+        0.7473012562353444,
+        0.06736227167742286,
+        0.6610621429060459,
+        0.6583928134295538,
+        0.05934694607535817,
+        -0.7503311557011647,
+        0.08977603050588236,
+        -0.9959619793676793,
+        7.88212857980407e-7
+      ],
+      "orbitUpReference": [
+        -0.06736227167742286,
+        -0.05934694607535817,
+        0.9959619793676793
+      ],
+      "metersPerUnit": 1485772.9032258065,
+      "bodyRadiusM": 460589600
+    }
+  }
+}

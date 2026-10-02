@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-80653-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-80653",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 80653 system",
+      "systemName": "HD 80653 system",
+      "classification": "planetary-system",
+      "color": "#fff4f5",
+      "distanceAu": 22274927,
+      "description": "HD 80653 b crosses HD 80653 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2485067597958364000,
+        2060288671573470700,
+        826892168529965600
+      ],
+      "presentationToReference": [
+        -0.7457554288961631,
+        -0.19103198738339075,
+        0.6382441696312252,
+        0.6182815562773906,
+        0.15837783063182467,
+        0.7698339950480009,
+        0.24814664502891876,
+        -0.968722479640433,
+        -4.2744768535862025e-7
+      ],
+      "orbitUpReference": [
+        0.19103198738339075,
+        -0.15837783063182467,
+        0.968722479640433
+      ],
+      "metersPerUnit": 2690788.064516129,
+      "bodyRadiusM": 834144300
+    }
+  }
+}

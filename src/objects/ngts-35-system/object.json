@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngts-35-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "ngts-35",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "NGTS-35 system",
+      "systemName": "NGTS-35 system",
+      "classification": "planetary-system",
+      "color": "#ffd6b9",
+      "distanceAu": 37819053.8,
+      "description": "NGTS-35 b crosses NGTS-35 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5009159445535017000,
+        858374277486092300,
+        -2486064736509431000
+      ],
+      "presentationToReference": [
+        -0.8853784181945021,
+        0.4331031348006187,
+        0.16889858265029567,
+        0.1517192791084037,
+        -0.07421584446115281,
+        0.9856334352982068,
+        -0.4394158815316397,
+        -0.8982837430660733,
+        9.884175549841058e-7
+      ],
+      "orbitUpReference": [
+        -0.4331031348006187,
+        0.07421584446115281,
+        0.8982837430660733
+      ],
+      "metersPerUnit": 1689877.7419354839,
+      "bodyRadiusM": 523862100
+    }
+  }
+}

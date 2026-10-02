@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-969-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-969",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-969 system",
+      "systemName": "TOI-969 system",
+      "classification": "planetary-system",
+      "color": "#ffc8a3",
+      "distanceAu": 16052828.7,
+      "description": "TOI-969 b crosses TOI-969 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1019405948729918700,
+        2172586755012850700,
+        87929453494754200
+      ],
+      "presentationToReference": [
+        -0.42449259371525655,
+        -0.01555493906661408,
+        0.905297786229221,
+        0.9046906071682953,
+        0.03315097363567753,
+        0.4247774926340469,
+        0.03661889105851385,
+        -0.9993293034919173,
+        -6.448584608656721e-8
+      ],
+      "orbitUpReference": [
+        0.01555493906661408,
+        -0.03315097363567753,
+        0.9993293034919173
+      ],
+      "metersPerUnit": 1505853.8709677418,
+      "bodyRadiusM": 466814700
+    }
+  }
+}

@@ -12,6 +12,7 @@ import { isRecord } from '@cssearth/core';
 import { resolveSpatialCitation } from '@cssearth/catalog';
 import { parsePreparedGalaxyCatalog } from '@cssearth/objects';
 import { resolve } from 'node:path';
+import { systemHostId, systemObjectId } from '../navigation/system-address.mts';
 
 test('every scene and every package the host draws has exactly one searchable destination, built from its own descriptor', async () => {
   const descriptors = await readObjectDescriptors(resolve('src/objects'));
@@ -24,8 +25,20 @@ test('every scene and every package the host draws has exactly one searchable de
   // A bank is context the world draws, never an object: none carries a catalogue entry.
   for (const [id, descriptor] of descriptors) if (isRecord(descriptor) && typeof descriptor.type === 'string' && /-bank$/u.test(descriptor.type)) assert.ok(isRecord(descriptor.properties) && descriptor.properties.catalog === undefined, id);
   const overviews = await readOverviews(resolve('src/objects'));
-  // The registry holds objects only, each with its own scene. A level of the zoom ladder is one of them.
-  assert.equal(OBJECTS, SCENE_OBJECTS);
+  // The registry holds objects only. A level of the zoom ladder is one of them, and so is a system: a host with the bodies
+  // that orbit it, with an address and a page of its own, which mounts its host's scene (navigation/system-address.mts).
+  const systems = OBJECTS.filter(object => object.system);
+  assert.deepEqual(SCENE_OBJECTS, OBJECTS.filter(object => !object.system));
+  assert.ok(systems.length > 700 && systems.some(object => object.id === 'solar-system') && systems.some(object => object.id === 'jupiter-system'));
+  for (const system of systems) {
+    const host = requireSceneObject(system.system!.host);
+    assert.equal(system.id, systemObjectId(host.id), `${system.id} is named after its host`);
+    assert.equal(system.route, `/${system.id}/`);
+    assert.equal(system.classification, system.system!.members === 'moons' ? 'satellite-system' : 'planetary-system', system.id);
+    assert.equal(host.system, undefined, `${host.id} hosts a system and is not one`);
+  }
+  // No other object's id reads as a system's.
+  for (const object of SCENE_OBJECTS) assert.equal(systemHostId(object.id), null, object.id);
   for (const id of hosted) assert.equal(requireSceneObject(id).id, id);
   assert.deepEqual(OVERVIEWS.map(level => level.id), overviews.map(overview => overview.id));
   assert.deepEqual(OVERVIEWS.map(level => level.id), ['milky-way', 'local-group', 'nearby-universe', 'observable-universe']);

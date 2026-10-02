@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1732-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1732",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1732 system",
+      "systemName": "TOI-1732 system",
+      "classification": "planetary-system",
+      "color": "#ffbe8b",
+      "distanceAu": 15458991.1,
+      "description": "TOI-1732 b crosses TOI-1732 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -516349361591107650,
+        1290873039313200000,
+        1848052374879629600
+      ],
+      "presentationToReference": [
+        -0.2232740993745587,
+        -0.2967828193151909,
+        0.9284765127389096,
+        0.5581850907493519,
+        0.7419555506720245,
+        0.3713911217195571,
+        0.7991108064678001,
+        -0.601183764739451,
+        -2.8758004727720693e-7
+      ],
+      "orbitUpReference": [
+        0.2967828193151909,
+        -0.7419555506720245,
+        0.601183764739451
+      ],
+      "metersPerUnit": 1419611.6129032257,
+      "bodyRadiusM": 440079600
+    }
+  }
+}

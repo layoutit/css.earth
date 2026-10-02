@@ -9,7 +9,7 @@ import { allPlanetarySystems } from '../object-systems.mts';
 import { SCENE_OBJECTS } from '../objects.mts';
 import type { CatalogueIndex, CatalogueIndexEntry } from './catalogue-index.mts';
 import { listDistance } from './list-distance.mts';
-import { systemRoute } from '../navigation/system-address.mts';
+import { systemObjectId } from '@cssearth/objects';
 
 /** A row's sprite is drawn at this share of its prepared size: the largest marker is 14 px. */
 const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS).map(({ presentation }) => presentation.size));
@@ -70,7 +70,7 @@ function systemEntries(): CatalogueIndexEntry[] {
       classification: 'planetary-system',
       classificationName: 'planetary system',
       systemName: system.name.toLocaleLowerCase('en'),
-      route: systemRoute(system.id),
+      route: `/${systemObjectId(system.id)}/`,
       illustration: false,
       candidate: false,
       distanceMeters: star.distance.meters,

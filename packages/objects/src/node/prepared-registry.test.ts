@@ -53,7 +53,8 @@ async function checkout(records: { scenes?: PreparedCatalogueRow[]; focuses?: un
 test('reads the registry in catalogue order, with distances, discoveries and overviews', async () => {
   const registry = readPreparedObjects(await checkout());
   assert.deepEqual(registry.objects.map(object => object.id), ['sun', 'mars', 'helix', 'milky-way']);
-  assert.equal(registry.sceneObjects, registry.objects);
+  // Every object here has a scene of its own: a system (an object that mounts its host's scene) is the only one left out.
+  assert.deepEqual(registry.sceneObjects, registry.objects.filter(object => !object.system));
   assert.deepEqual(registry.levels.map(level => level.id), ['milky-way']);
   const mars = registry.requireSceneObject('mars');
   assert.equal(mars.distance.value, 1.5);
@@ -64,7 +65,7 @@ test('reads the registry in catalogue order, with distances, discoveries and ove
   await assert.rejects(mars.loadScene(), /cannot mount a scene/);
   // A nebula is a scene and a body of the world like any other.
   assert.equal(registry.requireSceneObject('helix').id, 'helix');
-  assert.equal(registry.worldObjects, registry.objects);
+  assert.deepEqual(registry.worldObjects, registry.sceneObjects);
   const helix = registry.objects.find(object => object.id === 'helix')!;
   assert.partialDeepStrictEqual(helix, { classification: 'nebula', route: '/helix/', systemName: 'Solar System' });
   // A level is one of the objects, with a scene of its own; the ladder reads it from the registry.

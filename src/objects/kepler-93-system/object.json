@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-93-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-93",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-93 system",
+      "systemName": "Kepler-93 system",
+      "classification": "planetary-system",
+      "color": "#fff1ee",
+      "distanceAu": 19805008.6,
+      "description": "Kepler-93 b crosses Kepler-93 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        844689841271939300,
+        -2153401316943015200,
+        1851342584130424800
+      ],
+      "presentationToReference": [
+        0.28509967361359606,
+        0.22818289541505624,
+        -0.9309407834794985,
+        -0.7268159064111495,
+        -0.5817124551993199,
+        -0.3651701762928053,
+        0.6248654369487564,
+        -0.7807324674342554,
+        -9.268443249018284e-7
+      ],
+      "orbitUpReference": [
+        -0.22818289541505624,
+        0.5817124551993199,
+        0.7807324674342554
+      ],
+      "metersPerUnit": 2062413.8709677418,
+      "bodyRadiusM": 639348300
+    }
+  }
+}

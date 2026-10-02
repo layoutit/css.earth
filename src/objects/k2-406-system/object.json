@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-406-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-406",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-406 system",
+      "systemName": "K2-406 system",
+      "classification": "planetary-system",
+      "color": "#fff1ea",
+      "distanceAu": 17604973,
+      "description": "K2-406 b crosses K2-406 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1501211085651844900,
+        -1846393653671096000,
+        -1128447988632920300
+      ],
+      "presentationToReference": [
+        -0.5700076357717891,
+        0.2703009058057877,
+        -0.7759050943784463,
+        -0.7010729478954055,
+        0.33245366175137164,
+        0.6308496528629863,
+        -0.4284717223937901,
+        -0.9035551909588452,
+        4.7288651157843006e-7
+      ],
+      "orbitUpReference": [
+        -0.2703009058057877,
+        -0.33245366175137164,
+        0.9035551909588452
+      ],
+      "metersPerUnit": 2156670,
+      "bodyRadiusM": 668567700
+    }
+  }
+}

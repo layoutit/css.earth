@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-23472-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-23472",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 23472 system",
+      "systemName": "HD 23472 system",
+      "classification": "planetary-system",
+      "color": "#ffd6bf",
+      "distanceAu": 8063046.4,
+      "description": "5 planets cross HD 23472 as seen from Earth: b, c, d, e, f."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        312969061211717700,
+        454664191678003000,
+        -1072513141861609000
+      ],
+      "presentationToReference": [
+        0.25946498582038374,
+        -0.5041472436121571,
+        0.8237192955682734,
+        0.37693642177594117,
+        -0.7324154639631972,
+        -0.5669978148867281,
+        -0.8891551355483349,
+        -0.4576058838190773,
+        0.0000047099164705008695
+      ],
+      "orbitUpReference": [
+        0.5041472436121571,
+        0.7324154639631972,
+        0.4576058838190773
+      ],
+      "metersPerUnit": 1593377.4193548388,
+      "bodyRadiusM": 493947000
+    }
+  }
+}

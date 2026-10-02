@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-15906-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-15906",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 15906 system",
+      "systemName": "HD 15906 system",
+      "classification": "planetary-system",
+      "color": "#ffe2c6",
+      "distanceAu": 9434197.5,
+      "description": "2 planets cross HD 15906 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1089992351207144700,
+        859919642871548400,
+        -253621367460328700
+      ],
+      "presentationToReference": [
+        0.7723131894525573,
+        -0.14107893713223624,
+        0.6193779709476733,
+        0.6092953600402293,
+        -0.11130244890067953,
+        -0.7850929429705499,
+        -0.17969836290591454,
+        -0.9837217586118293,
+        0.0000016075102853386971
+      ],
+      "orbitUpReference": [
+        0.14107893713223624,
+        0.11130244890067953,
+        0.9837217586118293
+      ],
+      "metersPerUnit": 1710075.4838709678,
+      "bodyRadiusM": 530123400
+    }
+  }
+}

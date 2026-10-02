@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-436-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-436",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 436 system",
+      "systemName": "GJ 436 system",
+      "classification": "planetary-system",
+      "color": "#ffc78c",
+      "distanceAu": 2016266.4,
+      "description": "GJ 436 b crosses GJ 436 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -268654587008608300,
+        20890497496420624,
+        135530265578454140
+      ],
+      "presentationToReference": [
+        -0.8906595629888785,
+        -0.44801082213273175,
+        0.07753609551953099,
+        0.06925741084046058,
+        0.03486054481880917,
+        0.9969895453105873,
+        0.4493650563852687,
+        -0.8933482219531697,
+        0.000020808044455675487
+      ],
+      "orbitUpReference": [
+        0.44801082213273175,
+        -0.03486054481880917,
+        0.8933482219531697
+      ],
+      "metersPerUnit": 1021108.0645161291,
+      "bodyRadiusM": 316543500
+    }
+  }
+}

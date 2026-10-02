@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2010-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2010",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2010 system",
+      "systemName": "TOI-2010 system",
+      "classification": "planetary-system",
+      "color": "#fff4f4",
+      "distanceAu": 22366734.4,
+      "description": "TOI-2010 b crosses TOI-2010 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        751177976062995100,
+        -1843726070987322000,
+        2689280177563141600
+      ],
+      "presentationToReference": [
+        0.22449940331025675,
+        0.3032510804141277,
+        -0.9260879008717277,
+        -0.5510217498346489,
+        -0.7443210539498568,
+        -0.37730783169202287,
+        0.8037257300363726,
+        -0.5949999587181822,
+        0.0000016915139637806257
+      ],
+      "orbitUpReference": [
+        -0.3032510804141277,
+        0.7443210539498568,
+        0.5949999587181822
+      ],
+      "metersPerUnit": 2421484.8387096776,
+      "bodyRadiusM": 750660300
+    }
+  }
+}

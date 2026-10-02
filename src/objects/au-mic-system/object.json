@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "au-mic-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "au-mic",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "AU Mic system",
+      "systemName": "AU Mic system",
+      "classification": "planetary-system",
+      "color": "#ffc08b",
+      "distanceAu": 2003660.5,
+      "description": "2 planets cross AU Mic as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        168934016292838460,
+        -192346637053374270,
+        -155917104264292500
+      ],
+      "presentationToReference": [
+        0.5636019446459606,
+        -0.34324156016749985,
+        -0.7513574910554044,
+        -0.6417117233734152,
+        0.39082495251391086,
+        -0.6598953860860225,
+        -0.5201527776302006,
+        -0.8540732333156683,
+        -0.000007570144539240594
+      ],
+      "orbitUpReference": [
+        0.34324156016749985,
+        -0.39082495251391086,
+        0.8540732333156683
+      ],
+      "metersPerUnit": 1934494.8387096773,
+      "bodyRadiusM": 599693400
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "earth-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "earth",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Earth–Moon system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#5b82a7",
+      "distanceAu": 1,
+      "description": "Earth has one natural satellite, the Moon. The Moon always turns the same face toward Earth."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        141959829376.2084,
+        -46998944626.07853,
+        -20374557418.61388
+      ],
+      "presentationToReference": [
+        0.9406344136044074,
+        -6.071532165918825e-17,
+        -0.3394214193934923,
+        -0.3114130637755899,
+        0.39777715593191376,
+        -0.8630152014470074,
+        -0.1350140868687167,
+        -0.9174820620691819,
+        -0.37416288181524454
+      ],
+      "orbitUpReference": [
+        3.2959746043559335e-17,
+        -0.3977771559319137,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 27731.03043478261,
+      "bodyRadiusM": 6378137
+    }
+  }
+}

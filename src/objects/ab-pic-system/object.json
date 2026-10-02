@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ab-pic-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "ab-pic",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "AB Pic system",
+      "systemName": "AB Pic system",
+      "classification": "planetary-system",
+      "color": "#ffe4d3",
+      "distanceAu": 10341608.8,
+      "description": "Young orange dwarf 50 parsecs away in Pictor, with a companion at the planet and brown-dwarf boundary."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -68555071909005890,
+        815716802603991800,
+        -1312772275412951600
+      ],
+      "presentationToReference": [
+        -0.04431231540182412,
+        0.071062601679363,
+        0.9964870924132883,
+        0.527259314690213,
+        -0.8455673482455973,
+        0.08374649039402009,
+        -0.8485481917817845,
+        -0.529118102339609,
+        -6.283673784464578e-7
+      ],
+      "orbitUpReference": [
+        -0.071062601679363,
+        0.8455673482455973,
+        0.529118102339609
+      ],
+      "metersPerUnit": 2453910.9677419355,
+      "bodyRadiusM": 760712400
+    }
+  }
+}

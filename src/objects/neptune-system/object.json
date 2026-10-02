@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "neptune-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "neptune",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Neptune system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#5279bd",
+      "distanceAu": 30.05,
+      "description": "Neptune's largest moon, Triton, travels backward around the planet. Its smaller moons include Proteus and Nereid."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4464334846306.145,
+        219822342604.74338,
+        -21165005940.397877
+      ],
+      "presentationToReference": [
+        0.9990642734414455,
+        5.551115123125783e-17,
+        0.04325017379059422,
+        0.03968125863424485,
+        0.39777715593191376,
+        -0.9166235497367065,
+        0.017203931123983468,
+        -0.9174820620691819,
+        -0.39740494528272197
+      ],
+      "orbitUpReference": [
+        -5.551115123125783e-17,
+        -0.39777715593191376,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 112563.63636363637,
+      "bodyRadiusM": 24764000
+    }
+  }
+}

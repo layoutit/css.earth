@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-25463-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-25463",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 25463 system",
+      "systemName": "HD 25463 system",
+      "classification": "planetary-system",
+      "color": "#fff7fa",
+      "distanceAu": 9320046.9,
+      "description": "HD 25463 b crosses HD 25463 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        672516201673750700,
+        1200796171799292400,
+        223090041051686240
+      ],
+      "presentationToReference": [
+        0.4823459492495087,
+        0.07819056415878166,
+        0.872484166572163,
+        0.8612419565641649,
+        0.13960986058729632,
+        -0.4886423836307336,
+        0.160014616507742,
+        -0.9871146450657731,
+        7.437313939600939e-7
+      ],
+      "orbitUpReference": [
+        -0.07819056415878166,
+        -0.13960986058729632,
+        0.9871146450657731
+      ],
+      "metersPerUnit": 3182715.1612903224,
+      "bodyRadiusM": 986641700
+    }
+  }
+}

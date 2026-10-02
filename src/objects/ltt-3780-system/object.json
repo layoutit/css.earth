@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ltt-3780-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "ltt-3780",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "LTT 3780 system",
+      "systemName": "LTT 3780 system",
+      "classification": "planetary-system",
+      "color": "#ffce8c",
+      "distanceAu": 4543559,
+      "description": "2 planets cross LTT 3780 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -601423610458812800,
+        285013438642626700,
+        -138051603698190610
+      ],
+      "presentationToReference": [
+        -0.8848304216255906,
+        0.1835284068754352,
+        0.4282434457591201,
+        0.4193193560516599,
+        -0.08696968718434257,
+        0.9036634058937425,
+        -0.20309210375172398,
+        -0.9791596383536355,
+        0.000003588408226955256
+      ],
+      "orbitUpReference": [
+        -0.1835284068754352,
+        0.08696968718434257,
+        0.9791596383536355
+      ],
+      "metersPerUnit": 852793.5483870967,
+      "bodyRadiusM": 264366000
+    }
+  }
+}
