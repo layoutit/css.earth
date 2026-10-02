@@ -1,0 +1,54 @@
+{
+  "id": "groves-2023-phangs-muse-nebulae",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The PHANGS-MUSE nebular catalogue",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2023MNRAS.520.4902G"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/MNRAS/520/4902"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.4902G",
+      "label": "2023MNRAS.520.4902G"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/520/4902",
+      "label": "CDS J/MNRAS/520/4902"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/520/4902/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "catalog: ionised nebulae of 19 galaxies with J2000 positions, from PHANGS-MUSE H-alpha maps; 1,277 rows have Galaxy = NGC3351. Query: SELECT RegionID, RAJ2000, DEJ2000 FROM \"J/MNRAS/520/4902/catalog\" WHERE Galaxy='NGC3351'"
+    }
+  ],
+  "creators": [
+    "B. Groves",
+    "K. Kreckel",
+    "F. Santoro",
+    "F. Belfiore",
+    "E. Zavodnik",
+    "E. Congiu"
+  ],
+  "publisher": "MNRAS 520, 4902",
+  "publicationDate": "2023",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Groves et al. (2023), MNRAS 520, 4902.",
+      "scope": "M95's ionised nebulae",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/520/4902/ReadMe"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-3521-layers",
+  "entries": [
+    {
+      "id": "eso-fors1",
+      "subject": "ESO eso1129a (Very Large Telescope FORS1)",
+      "status": "included",
+      "finding": "The inner disc in B, V and I, 2046 px across at 0.200 arcsec per pixel, CC BY 4.0. It covers 6.8 arcmin of a disc about 11 arcmin long.",
+      "evidence": [
+        "https://www.eso.org/public/images/eso1129a/"
+      ],
+      "revisitWhen": "A whole-disc photograph of comparable quality is published under an attribution licence."
+    },
+    {
+      "id": "dot-catalogues",
+      "subject": "Catalogues of NGC 3521's nebulae and clusters",
+      "status": "excluded",
+      "finding": "Looked for on CDS on 2026-10-02: the PHANGS-MUSE nebula, planetary-nebula and supernova-remnant catalogues have no rows for NGC 3521. The bank has no dots.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/520/4902"
+      ],
+      "revisitWhen": "A catalogue of its HII regions, clusters or remnants with sky positions is published."
+    }
+  ]
+}

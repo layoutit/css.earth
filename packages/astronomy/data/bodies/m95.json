@@ -1,0 +1,28 @@
+{
+  "id": "m95",
+  "classification": "galaxy",
+  "order": 5159,
+  "physical": {
+    "name": "M95",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M95 is recorded: it is an extended galaxy, and its package frames it at 12000 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 160.990417,
+    "declinationDegrees": 11.703611,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 9954054.17352,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 779,
+    "sources": {
+      "position": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. (https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv); catalogue reference lvdb-v1.1.1:ngc_3351:location",
+      "distance": "Tully2009AJ....138..323T: The Extragalactic Distance Database (https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T); catalogue reference Tully2009AJ....138..323T: 9954054.17352 pc (-136574.74332/+138474.687247); trgb",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD M 95: 779 km/s +/- 3, from 2022ApJS..261...21Y (https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract)"
+    }
+  }
+}
