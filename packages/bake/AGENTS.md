@@ -111,7 +111,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   supernova and action marker sources in `marker-descriptors.ts`) that writes the marker atlases, action markers and
   `site/prepared-navigation-markers.mjs`, and the flat neutral disc (`neutral-disc-marker.ts`) that marks an unresolved,
   self-luminous surface in generated and authored packages. It reads the registry on first use, not at import, and validates marker
-  presentation with the renderer's rules (`@cssearth/renderer/navigation/marker-presentation.ts`, which the shell uses to
+  presentation with the shared rules in `@cssearth/objects` (`marker-presentation.ts`, which the shell also uses to
   draw them). It imports `raster`, `delivery`, `sources`, `astronomy`, and `objects/raster` (loaded only when a marker is
   drawn from a science raster). `packages/bake/cli/prepare-navigation.mts` is its command. Its tests are `node --test`
   suites in `src/navigation/`, with the navigation preparation's in `site/test/`.

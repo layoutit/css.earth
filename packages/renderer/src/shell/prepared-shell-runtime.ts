@@ -3,10 +3,9 @@ import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { worldRotationCss } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
-import { type PreparedCssSurfaceShell, validatePreparedCssSurfaceShell } from '@cssearth/objects';
+import { validatePreparedCssSurfaceShell, shellMaterialAddress, type PreparedCssSurfaceShell } from '@cssearth/objects';
 
 import { nearestFacingIndex } from './material-address.js';
-import { shellMaterialAddress } from '@cssearth/objects';
 
 export interface PreparedSurfaceShellStats {
   readonly visible: boolean;

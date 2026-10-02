@@ -1,8 +1,6 @@
-import { textureTileLeafStyles } from '@cssearth/objects';
-import { type PreparedTexturePlacements, type PreparedTextureLevels, type PreparedTextureTile, type PreparedTextureTileLeaves } from '@cssearth/objects';
+import { textureTileLeafStyles, walkSilhouetteLevels, type PreparedTexturePlacements, type PreparedTextureLevels, type PreparedTextureTile, type PreparedTextureTileLeaves } from '@cssearth/objects';
 
 import { invertPreparedAffineMatrix4, transformPreparedPoint } from '@cssearth/core';
-import { walkSilhouetteLevels } from '@cssearth/objects';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 
 type Vector3 = readonly [number, number, number];

@@ -1,9 +1,8 @@
-import { samePreparedVolumeTopology } from '@cssearth/objects';
+import { samePreparedVolumeTopology, validatePreparedCssVolume } from '@cssearth/objects';
 import { writeData, writeStyle } from '../rendering/retained-write.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
 import { nativeProjectedLength, nativeProjectedFade, nativeProjectedMix } from '../rendering/native-projection.js';
-import { validatePreparedCssVolume } from '@cssearth/objects';
 import { revealLayer } from '../rendering/layer-reveal.js';
 import { LARGE_IMAGE_PIXELS, mountPreparedCssVolume } from './prepared-volume-runtime.js';
 

@@ -1,10 +1,8 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { buildPolyMeshTransform, buildSeamBleedPolygonEdges } from '@layoutit/polycss';
-import { createSurfacePatches, createPolarPatch } from '@cssearth/objects';
-import type { Pole } from '@cssearth/objects';
+import { createSurfacePatches, createPolarPatch, CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, type Pole } from '@cssearth/objects';
 import type { prepareAtmosphere, RasterRecipe } from '../raster/index.ts';
-import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
 import { rasterPagePlan } from '../raster/index.ts';
 import type { GeometryProfile } from './profile.ts';
 import { createLeafProjector, rendererPolygon, type LeafImagePixels } from './projector.ts';

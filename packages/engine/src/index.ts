@@ -25,7 +25,6 @@ export type { OffAxisFrame } from './solar-system/heliocentric-geometry.js';
 
 export { cssViewFromOrientation, cssCameraAxesFromOrientation, flipWorldRotationY, referenceRotationFromPresentation, validateWorldPosition, transposeWorldRotation, rotateWorldPosition, scaleWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion, worldRotationCss, nearestWorldRotation } from './navigation/world-camera-math.js';
 
-
 export type { Matrix3dLike, SilhouetteEllipse, BodyProjection, OrbitSegment } from './solar-system/types.js';
 
 export { preparedSceneMatrix } from './navigation/prepared-scene-matrix.js';

@@ -1,5 +1,4 @@
-import { IMPERCEPTIBLE_LUMINANCE } from '@cssearth/objects';
-import type { PreparedCssPointField } from '@cssearth/objects';
+import { IMPERCEPTIBLE_LUMINANCE, type PreparedCssPointField } from '@cssearth/objects';
 export function pointLuminanceVisible(luminance: number, coverageAnchor = false) {
   return coverageAnchor ? luminance > 0 : luminance >= IMPERCEPTIBLE_LUMINANCE;
 }

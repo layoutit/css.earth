@@ -1,11 +1,9 @@
-import { OBJECT_RUNTIME_SCHEMA, type PreparedAssets } from '@cssearth/objects';
+import { OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA, requireObjectControls, type PreparedAssets } from '@cssearth/objects';
 
-import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 
 import { requirePreparedPresentation } from "../presentation/index.ts";
 import type { PreparedPresentationContract } from "../presentation/index.ts";
 
-import { requireObjectControls } from '@cssearth/objects';
 import { isRecord, requireRecord } from '@cssearth/core';
 
 export type CheckedObjectRuntimeDefinition = Omit<PreparedPresentationContract, 'schema'> & {

@@ -1,5 +1,4 @@
-import { parsePreparedSurfaceFeatureCatalog, type PreparedSurfaceFeaturePlan, type SurfaceFeatureCatalogDescriptor, type ParsedSurfaceFeature as PreparedSurfaceFeature, type ParsedSurfaceFeatureCatalog as PreparedSurfaceFeatureCatalog } from '@cssearth/objects';
-import { surfaceFeatureBankIndex } from '@cssearth/objects';
+import { parsePreparedSurfaceFeatureCatalog, surfaceFeatureBankIndex, type PreparedSurfaceFeaturePlan, type SurfaceFeatureCatalogDescriptor, type ParsedSurfaceFeature as PreparedSurfaceFeature, type ParsedSurfaceFeatureCatalog as PreparedSurfaceFeatureCatalog } from '@cssearth/objects';
 
 export type SurfaceFeatureTransport = (url: string, init: { signal: AbortSignal }) => Promise<Response>;
 

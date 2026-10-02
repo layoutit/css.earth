@@ -1,8 +1,7 @@
-import { PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_IMPOSTORS_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, type CompilerBakeResult, createRenderElementBudget, type PreparedCssVolume, type VolumeVector, type PreparedVolumeDatasets } from '@cssearth/objects';
+import { PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_IMPOSTORS_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, createRenderElementBudget, CSS_COMPILER_RENDER_BUDGET, type CompilerBakeResult, type PreparedCssVolume, type VolumeVector, type PreparedVolumeDatasets } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/objects';
 
 import { assertCompilerDeliveryElementBudget } from '../index.js';
 

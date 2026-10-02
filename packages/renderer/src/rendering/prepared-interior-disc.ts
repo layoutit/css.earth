@@ -1,5 +1,4 @@
-import { PREPARED_INTERIOR_DISC_SIZE } from '@cssearth/objects';
-import { type PreparedInteriorDisc } from '@cssearth/objects';
+import { PREPARED_INTERIOR_DISC_SIZE, type PreparedInteriorDisc } from '@cssearth/objects';
 
 import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, serializePreparedMatrix4 } from '@cssearth/core';
 

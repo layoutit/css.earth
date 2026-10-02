@@ -1,7 +1,6 @@
-import { type PreparedSilhouetteSteps, type PreparedTexturePlacements } from '@cssearth/objects';
+import { walkSilhouetteLevels, type PreparedSilhouetteSteps, type PreparedTexturePlacements } from '@cssearth/objects';
 
 import { transformPreparedPoint } from '@cssearth/core';
-import { walkSilhouetteLevels } from '@cssearth/objects';
 
 import { unseenTextureWrites } from './prepared-texture-levels.js';
 

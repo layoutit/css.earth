@@ -1,4 +1,4 @@
-import { OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA, NEUTRAL_CATALOGUE_RGB, type AuthoredObjectDescriptor } from '@cssearth/objects';
+import { OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA, NEUTRAL_CATALOGUE_RGB, preparedResourcePool, type AuthoredObjectDescriptor } from '@cssearth/objects';
 
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
 import { parseShapeModelConfig, parseShapeContent } from './source.ts';
@@ -20,7 +20,6 @@ import { prepareSolarSystemScene, prepareSolarSystemSunPresentation, type SolarG
 import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
 import { requirePreparedPresentation } from '../../../presentation/index.ts';
-import { preparedResourcePool } from '@cssearth/objects';
 import { createPreparedNodeTree, prepareCssomDeclarationReads } from '../../../presentation/index.ts';
 import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-composition/index.ts';
 

@@ -3,10 +3,8 @@ import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { loadPreparedCssPointField, loadPreparedPointAppearance } from '@cssearth/renderer/stars/loader.ts';
-import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/objects';
+import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest, POINT_FIELD_MAGNITUDE_BOUND, IMPERCEPTIBLE_LUMINANCE } from '@cssearth/objects';
 import { readCanonicalPointFieldFiles } from '@cssearth/renderer/test/canonical-point-field-fixture.ts';
-import { POINT_FIELD_MAGNITUDE_BOUND } from '@cssearth/objects';
-import { IMPERCEPTIBLE_LUMINANCE } from '@cssearth/objects';
 import { magnitudeDisplayAlphaChange } from '@cssearth/bake/stars';
 
 const copy = (bytes: Uint8Array) => new Uint8Array(bytes).buffer;

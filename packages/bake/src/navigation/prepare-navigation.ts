@@ -4,9 +4,8 @@ import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
 
 import sharp from "sharp";
-import type { ObjectEntry } from '@cssearth/objects';
+import { validateMarkerPresentation, type ObjectEntry, type MarkerPresentation } from '@cssearth/objects';
 import type { MarkerDescriptor } from './marker-recipe.ts';
-import type { MarkerPresentation } from '@cssearth/objects';
 import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 
 type MarkerPlanet = Pick<ObjectEntry, 'id' | 'classification'>;
@@ -33,7 +32,6 @@ import {
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
 } from "./marker-recipe.ts";
-import { validateMarkerPresentation } from '@cssearth/objects';
 import { optimizePreparedQ75Webp } from "../delivery/index.ts";
 import { encodeLossyWebp } from '../raster/index.ts';
 import { loadAstronomyPackage } from "../astronomy/index.ts";

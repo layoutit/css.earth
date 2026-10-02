@@ -1,11 +1,10 @@
-import { type PreparedTextureTileLeaves, type PreparedPresentationDefinition, requireTextureLevels } from '@cssearth/objects';
+import { requireTextureLevels, textureTileLeafStyles, tiledTextureKeys, type PreparedTextureTileLeaves, type PreparedPresentationDefinition } from '@cssearth/objects';
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { parseHTML } from 'linkedom';
 import { createTextureTileWriter, selectPreparedTextureLevel } from './prepared-texture-levels.js';
-import { textureTileLeafStyles, tiledTextureKeys } from '@cssearth/objects';
 
 import { mountPreparedPresentation, preparedTextureLevelKeys, resolvePreparedPresentation } from './prepared-presentation.js';
 

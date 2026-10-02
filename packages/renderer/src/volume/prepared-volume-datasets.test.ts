@@ -1,11 +1,10 @@
 import { afterEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { parseObjectDescriptor, prepareObject, validatePreparedVolumeDatasets, type PreparedVolumeDatasets, type PreparedCssVolume, type VolumeVector, validatePreparedCataloguePoints, type PreparedCataloguePoints, createRenderElementBudget } from '@cssearth/objects';
+import { parseObjectDescriptor, prepareObject, validatePreparedVolumeDatasets, validatePreparedCataloguePoints, createRenderElementBudget, samePreparedVolumeTopology, CSS_COMPILER_RENDER_BUDGET, type PreparedVolumeDatasets, type PreparedCssVolume, type VolumeVector, type PreparedCataloguePoints } from '@cssearth/objects';
 import { createPreparedVolumeDatasets, loadPreparedVolumeDatasets, volumeDatasetCompositeOpacity } from './prepared-volume-datasets.js';
 
 import { mountPreparedVolumeLod } from './prepared-volume-lod.js';
-import { samePreparedVolumeTopology } from '@cssearth/objects';
 
 import type { VolumeCameraPublication } from './types.js';
 
@@ -14,7 +13,6 @@ import { mountPreparedCataloguePoints } from '../stars/prepared-catalogue-points
 import { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
 import { createPreparedResidency } from '../rendering/prepared-residency.js';
 import { cloudCompositeOpacity } from '@cssearth/volume-viewer/scene/cloud-inspection';
-import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/objects';
 
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 

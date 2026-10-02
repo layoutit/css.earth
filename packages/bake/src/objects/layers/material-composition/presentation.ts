@@ -11,8 +11,7 @@ import type { prepareCubicSky, prepareDirectionalSun } from '../../../presentati
 import type { PreparedNode } from '../../../presentation/index.ts';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
 
-import { canonicalPreparedAsset, preparedResourcePool } from '@cssearth/objects';
-import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
+import { canonicalPreparedAsset, preparedResourcePool, PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 import sharp from 'sharp';
 import { basename, resolve } from 'node:path';
 
