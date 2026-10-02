@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "sigma-bootis",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sigma Bootis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 995546.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/sigma-bootis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Sigma Bootis",
+      "classification": "star",
+      "color": "#e2e6ff",
+      "distanceAu": 3265792.4,
+      "description": "A naked-eye star 16 parsecs away whose disc the CHARA Array measured: 1.4 times the Sun's width.",
+      "systemName": "Sigma Bootis system",
+      "aliases": [
+        "HD 128167"
+      ],
+      "order": 5350,
+      "context": {
+        "order": 5347
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -331173911064321860,
+        -265051698069859460,
+        242400484936260320
+      ],
+      "presentationToReference": [
+        -0.6778659608636676,
+        -0.38736849733278245,
+        -0.6248546922097319,
+        -0.5425231818447168,
+        -0.3100193277217264,
+        0.7807410669358011,
+        0.496151525507542,
+        -0.8682359493323868,
+        0.000004840246991555523
+      ],
+      "orbitUpReference": [
+        0.38736849733278245,
+        0.3100193277217264,
+        0.8682359493323868
+      ],
+      "metersPerUnit": 3211440.9677419355,
+      "bodyRadiusM": 995546700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

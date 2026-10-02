@@ -1,0 +1,30 @@
+{
+ "id": "theta-ursae-majoris",
+ "classification": "star",
+ "order": 5411,
+ "physical": {
+  "name": "Theta Ursae Majoris",
+  "horizonsCode": null,
+  "meanRadiusKm": 1645330.5,
+  "gravitationalParameterKm3PerS2": 199864934703.1607,
+  "parent": null,
+  "effectiveTemperatureK": 6300
+ },
+ "physicalNotes": "Radius 2.365 +/- 0.008 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 82328: radius in solar radii, from the limb-darkened angular diameter 1.632 +/- 0.005 mas (CHARA) and the Hipparcos parallax, 2.365 +/- 0.008 (https://doi.org/10.1088/0004-637X/746/1/101): 1,645,331 km at 695,700 km per solar radius. Mass 1.506 +/- 0.095 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 82328: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.506 +/- 0.095 (https://doi.org/10.1088/0004-637X/746/1/101); GM is that mass times the JPL solar GM. Temperature 6300 +/- 33 K from Boyajian et al. (2012), ApJ 746, 101, HD 82328: effective temperature in K, from the angular diameter and the bolometric flux, 6300 +/- 33 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 143.20753978122536,
+  "declinationDegrees": 51.67490604097004,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 13.481,
+  "properMotionRaMasPerYear": -942.5671400184004,
+  "properMotionDecMasPerYear": -542.0162846102697,
+  "radialVelocityKmPerS": 14.356,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1018776176872261248 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/theta-ursae-majoris/source/photometry/gaia-dr3-source.csv; cross-identification HD 82328, HR 3775, HIP 46853: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+1018776176872261248",
+   "distance": "Boyajian et al. (2012), ApJ 746, 101, HD 82328: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 74.18 +/- 0.13 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 13.481 +/- 0.024 pc; Gaia DR3 parallax 73.8284 +/- 0.2046 mas (same row, RUWE 3.75), 360.8 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): -942.567, -542.016 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 1018776176872261248 (quality A), from 2018A&A...616A...7S; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...7S/abstract)"
+  }
+ }
+}

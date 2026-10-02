@@ -1,0 +1,47 @@
+{
+  "id": "alpha-lacertae",
+  "name": "Alpha Lacertae",
+  "system": "Alpha Lacertae system",
+  "description": "A naked-eye star 31.4 parsecs away, 2.1 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 213558"
+  ],
+  "order": 5362,
+  "target": "HD 213558",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 2.143,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 213558: radius in solar radii, from the limb-darkened angular diameter 0.634 +/- 0.022 mas (CHARA) and the Hipparcos parallax, 2.143 +/- 0.074",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.074
+  },
+  "mass": {
+    "value": 2.209,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 213558: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 2.209 +/- 0.037",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.037
+  },
+  "temperature": {
+    "value": 9131,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 213558: effective temperature in K, from the angular diameter and the bolometric flux, 9131 +/- 167",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 167
+  },
+  "distance": {
+    "value": 31.447,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 213558: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 31.8 +/- 0.12 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.119
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 31 parsecs away whose disc the CHARA Array measured: 2.1 times the Sun's width.",
+    "introduction": "Its disc spans 0.634 milliarcseconds, which gives 2.143 solar radii and 9,131 K at its surface.",
+    "locator": "Tables 5 and 10, HD 213558: limb-darkened diameter, R, Teff"
+  },
+  "notes": []
+}

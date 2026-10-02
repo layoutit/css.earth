@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-86728",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "20 Leonis Minoris A",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 867537.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-86728-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "20 Leonis Minoris A",
+      "classification": "star",
+      "color": "#fff3f3",
+      "distanceAu": 3103173.8,
+      "description": "A naked-eye star 15 parsecs away whose disc the CHARA Array measured: 1.2 times the Sun's width.",
+      "systemName": "20 Leonis Minoris A system",
+      "aliases": [
+        "HD 86728"
+      ],
+      "order": 5413,
+      "context": {
+        "order": 5410
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -342088956791782100,
+        195534832638035420,
+        245456894097282700
+      ],
+      "presentationToReference": [
+        -0.7368880883685016,
+        -0.45906930910682703,
+        0.49623715565926313,
+        0.4211983062316995,
+        0.26238007106794764,
+        0.8681870104614133,
+        0.5287607512364763,
+        -0.8487709159381931,
+        -0.000014466443500512733
+      ],
+      "orbitUpReference": [
+        0.45906930910682703,
+        -0.26238007106794764,
+        0.8487709159381931
+      ],
+      "metersPerUnit": 2798509.35483871,
+      "bodyRadiusM": 867537900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

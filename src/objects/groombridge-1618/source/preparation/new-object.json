@@ -1,0 +1,41 @@
+{
+  "id": "groombridge-1618",
+  "name": "Groombridge 1618",
+  "system": "Groombridge 1618 system",
+  "description": "A nearby orange dwarf, 64% of the Sun's width: its disc was measured by interferometry.",
+  "aliases": [
+    "GJ 380"
+  ],
+  "featured": true,
+  "target": "GJ 380",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+    "credit": "Boyajian et al. (2012), ApJ 757, 112"
+  },
+  "radius": {
+    "value": 0.6398,
+    "source": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 380: radius in solar radii, 0.6398 +/- 0.0046, from the weighted mean of the interferometric measurements the table lists",
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+    "uncertainty": 0.0046
+  },
+  "mass": {
+    "value": 0.66,
+    "source": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 380: mass 0.66 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass",
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112"
+  },
+  "temperature": {
+    "value": 4085,
+    "source": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 380: effective temperature in K, 4085 +/- 14, from the weighted mean of the interferometric measurements the table lists",
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+    "uncertainty": 14
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A nearby orange dwarf whose disc was measured by interferometry: 64% of the Sun's width.",
+    "introduction": "Interferometry gives it 0.6398 solar radii; with its total light, that makes its surface 4,085 K.",
+    "locator": "Table 6, GJ 380: R, TEFF"
+  },
+  "notes": [],
+  "order": 5372
+}

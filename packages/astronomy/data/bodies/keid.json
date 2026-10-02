@@ -1,0 +1,30 @@
+{
+ "id": "keid",
+ "classification": "star",
+ "order": 5368,
+ "physical": {
+  "name": "Keid",
+  "horizonsCode": null,
+  "meanRadiusKm": 560108.1,
+  "gravitationalParameterKm3PerS2": 108293351074.22252,
+  "parent": null,
+  "effectiveTemperatureK": 5147
+ },
+ "physicalNotes": "Radius 0.8051 +/- 0.0035 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 166A: radius in solar radii, 0.8051 +/- 0.0035, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112): 560,108 km at 695,700 km per solar radius. Mass 0.816 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 166A: mass 0.816 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112); GM is that mass times the JPL solar GM. Temperature 5147 +/- 14 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 166A: effective temperature in K, 5147 +/- 14, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 63.80795300602079,
+  "declinationDegrees": -7.6680778150199815,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 5.009818934047725,
+  "properMotionRaMasPerYear": -2240.0849838923477,
+  "properMotionDecMasPerYear": -3421.8086201704023,
+  "radialVelocityKmPerS": -42.46972,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3195919528989223040 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/keid/source/photometry/gaia-dr3-source.csv; cross-identification HD 26965, HR 1325, HIP 19849: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+3195919528989223040",
+   "distance": "Gaia DR3 parallax 199.6080 +/- 0.1208 mas (same row, RUWE 1.94): 5.01 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+   "properMotion": "Gaia DR3 (same row): -2240.085, -3421.809 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -42.47 +/- 0.12 km/s"
+  }
+ }
+}

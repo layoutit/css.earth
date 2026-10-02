@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-33",
+  "card": {
+    "text": "A nearby orange dwarf whose disc was measured by interferometry: 70% of the Sun's width.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-757-2-112",
+        "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+        "label": "Boyajian et al. (2012), The Astrophysical Journal 757 112",
+        "checked": "2026-10-02",
+        "locator": "Table 6, GJ 33: R, TEFF"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Interferometry gives it 0.6954 solar radii; with its total light, that makes its surface 4,950 K.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-757-2-112",
+        "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+        "label": "Boyajian et al. (2012), The Astrophysical Journal 757 112",
+        "checked": "2026-10-02",
+        "locator": "Table 6, GJ 33: R, TEFF"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

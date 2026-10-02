@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "barnards-star",
+  "angularDiameterMas": 0.95,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 130,026 km at 1.83 pc = 0.95 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 1.828233981355542,
+  "distanceSource": "Gaia DR3 parallax 546.9759 +/- 0.0401 mas (same row, RUWE 1.08): 1.83 pc, no zero-point correction",
+  "radiusKm": 130026.3,
+  "radiusSource": "Radius 0.1869 +/- 0.0012 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 699: radius in solar radii, 0.1869 +/- 0.0012, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112): 130,026 km at 695,700 km per solar radius. Mass 0.146 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 699: mass 0.146 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112); GM is that mass times the JPL solar GM. Temperature 3222 +/- 10 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 699: effective temperature in K, 3222 +/- 10, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3222,
+  "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 699: effective temperature in K, 3222 +/- 10, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112)",
+  "surfaceGravityLogg": 5.06,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/barnards-star.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.059, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

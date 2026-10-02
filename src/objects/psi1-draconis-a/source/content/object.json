@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "psi1-draconis-a",
+  "displayName": "Psi1 Draconis A",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.3 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-746-1-101",
+          "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+          "label": "Boyajian et al. (2012), The Astrophysical Journal 746 101",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "22.8 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-746-1-101",
+          "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+          "label": "Boyajian et al. (2012), ApJ 746, 101, HD 162003: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 43.79 +/- 0.45 mas, inverted",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "psi1-draconis-a-dataset-color.webp",
+        "surface": "psi1-draconis-a-surface-color@2x.webp",
+        "poles": "psi1-draconis-a-poles-color@2x.webp",
+        "source": {
+          "id": "psi1-draconis-a-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1088/0004-637X/746/1/101"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,014 K and log g 3.82 (u1 0.408, u2 0.289): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Boyajian et al. (2012), ApJ 746, 101",
+      "href": "https://doi.org/10.1088/0004-637X/746/1/101"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+      "credit": "Boyajian et al. (2012), ApJ 746, 101"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/psi1-draconis-a.json",
+      "credit": "Boyajian et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

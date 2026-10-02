@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "theta-cygni",
+  "angularDiameterMas": 0.86,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,180,603 km at 18.33 pc = 0.86 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 18.332,
+  "distanceSource": "Boyajian et al. (2012), ApJ 746, 101, HD 185395: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 54.55 +/- 0.15 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 18.332 +/- 0.05 pc; Gaia DR3 parallax 54.2702 +/- 0.0860 mas (same row, RUWE 0.84), 631.2 standard errors, is not used",
+  "radiusKm": 1180602.9,
+  "radiusSource": "Radius 1.697 +/- 0.03 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 185395: radius in solar radii, from the limb-darkened angular diameter 0.861 +/- 0.015 mas (CHARA) and the Hipparcos parallax, 1.697 +/- 0.03 (https://doi.org/10.1088/0004-637X/746/1/101): 1,180,603 km at 695,700 km per solar radius. Mass 1.342 +/- 0.011 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 185395: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.342 +/- 0.011 (https://doi.org/10.1088/0004-637X/746/1/101); GM is that mass times the JPL solar GM. Temperature 6381 +/- 65 K from Boyajian et al. (2012), ApJ 746, 101, HD 185395: effective temperature in K, from the angular diameter and the bolometric flux, 6381 +/- 65 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6381,
+  "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 185395: effective temperature in K, from the angular diameter and the bolometric flux, 6381 +/- 65 (https://doi.org/10.1088/0004-637X/746/1/101)",
+  "surfaceGravityLogg": 4.11,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/theta-cygni.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.106, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

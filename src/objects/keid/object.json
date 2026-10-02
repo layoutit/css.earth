@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "keid",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Keid",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 560108.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/keid-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Keid",
+      "classification": "star",
+      "color": "#ffe9de",
+      "distanceAu": 1033253.8,
+      "description": "A nearby orange dwarf whose disc was measured by interferometry: 81% of the Sun's width.",
+      "systemName": "40 Eridani system",
+      "aliases": [
+        "GJ 166 A"
+      ],
+      "order": 5368,
+      "context": {
+        "order": 5365
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        67629808138408090,
+        137449502943263940,
+        -20652361616461028
+      ],
+      "presentationToReference": [
+        0.4375383322367514,
+        -0.05889529100290978,
+        0.8972689410211215,
+        0.8892443785243799,
+        -0.11973298636178584,
+        -0.44148436805812014,
+        -0.13343404020815466,
+        -0.9910576959363017,
+        0.000015464720566455888
+      ],
+      "orbitUpReference": [
+        0.05889529100290978,
+        0.11973298636178584,
+        0.9910576959363017
+      ],
+      "metersPerUnit": 1806800.322580645,
+      "bodyRadiusM": 560108100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

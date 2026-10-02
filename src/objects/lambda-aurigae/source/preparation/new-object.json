@@ -1,0 +1,47 @@
+{
+  "id": "lambda-aurigae",
+  "name": "Lambda Aurigae",
+  "system": "Lambda Aurigae system",
+  "description": "A naked-eye star 12.6 parsecs away, 1.3 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 34411"
+  ],
+  "target": "HD 34411",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 1.331,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 34411: radius in solar radii, from the limb-darkened angular diameter 0.981 +/- 0.015 mas (CHARA) and the Hipparcos parallax, 1.331 +/- 0.021",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.021
+  },
+  "mass": {
+    "value": 1.041,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 34411: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.041 +/- 0.015",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.015
+  },
+  "temperature": {
+    "value": 5749,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 34411: effective temperature in K, from the angular diameter and the bolometric flux, 5749 +/- 48",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 48
+  },
+  "distance": {
+    "value": 12.629,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 34411: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 79.18 +/- 0.28 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.045
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 13 parsecs away whose disc the CHARA Array measured: 1.3 times the Sun's width.",
+    "introduction": "Its disc spans 0.981 milliarcseconds, which gives 1.331 solar radii and 5,749 K at its surface.",
+    "locator": "Tables 5 and 10, HD 34411: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5406
+}

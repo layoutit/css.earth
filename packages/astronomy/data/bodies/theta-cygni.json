@@ -1,0 +1,30 @@
+{
+ "id": "theta-cygni",
+ "classification": "star",
+ "order": 5360,
+ "physical": {
+  "name": "Theta Cygni",
+  "horizonsCode": null,
+  "meanRadiusKm": 1180602.9,
+  "gravitationalParameterKm3PerS2": 178100094536.28265,
+  "parent": null,
+  "effectiveTemperatureK": 6381
+ },
+ "physicalNotes": "Radius 1.697 +/- 0.03 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 185395: radius in solar radii, from the limb-darkened angular diameter 0.861 +/- 0.015 mas (CHARA) and the Hipparcos parallax, 1.697 +/- 0.03 (https://doi.org/10.1088/0004-637X/746/1/101): 1,180,603 km at 695,700 km per solar radius. Mass 1.342 +/- 0.011 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 185395: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.342 +/- 0.011 (https://doi.org/10.1088/0004-637X/746/1/101); GM is that mass times the JPL solar GM. Temperature 6381 +/- 65 K from Boyajian et al. (2012), ApJ 746, 101, HD 185395: effective temperature in K, from the angular diameter and the bolometric flux, 6381 +/- 65 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 294.1105137988449,
+  "declinationDegrees": 50.22227321404957,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 18.332,
+  "properMotionRaMasPerYear": -5.854439709270821,
+  "properMotionDecMasPerYear": 263.6604096992894,
+  "radialVelocityKmPerS": -27.18602,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2135110401277424384 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/theta-cygni/source/photometry/gaia-dr3-source.csv; cross-identification HD 185395, HR 7469, HIP 96441: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+2135110401277424384",
+   "distance": "Boyajian et al. (2012), ApJ 746, 101, HD 185395: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 54.55 +/- 0.15 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 18.332 +/- 0.05 pc; Gaia DR3 parallax 54.2702 +/- 0.0860 mas (same row, RUWE 0.84), 631.2 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): -5.854, 263.660 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -27.19 +/- 0.13 km/s"
+  }
+ }
+}

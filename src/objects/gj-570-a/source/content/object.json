@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "gj-570-a",
+  "displayName": "GJ 570 A",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.74 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-757-2-112",
+          "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+          "label": "Boyajian et al. (2012), The Astrophysical Journal 757 112",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "5.9 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-gj-570-a",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "gj-570-a-dataset-color.webp",
+        "surface": "gj-570-a-surface-color@2x.webp",
+        "poles": "gj-570-a-poles-color@2x.webp",
+        "source": {
+          "id": "gj-570-a-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1088/0004-637X/757/2/112"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,507 K and log g 4.57 (u1 0.779, u2 0.016): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Boyajian et al. (2012), ApJ 757, 112",
+      "href": "https://doi.org/10.1088/0004-637X/757/2/112"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+      "credit": "Boyajian et al. (2012), ApJ 757, 112"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gj-570-a.json",
+      "credit": "Boyajian et al. radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

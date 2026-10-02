@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "sirius-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sirius B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5633.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/sirius-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Sirius B",
+      "classification": "star",
+      "color": "#a5bdff",
+      "distanceAu": 543905,
+      "description": "A white dwarf of one solar mass within 0.8% of the Sun's width, orbiting Sirius every 50 years.",
+      "systemName": "Canis Major",
+      "order": 5427,
+      "context": {
+        "order": 5427
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -15249999024761884,
+        76418821559086780,
+        -23413555720165744
+      ],
+      "presentationToReference": [
+        0.33980821030834146,
+        0.5833393679528539,
+        -0.737730006169877,
+        0.89315681198456,
+        -0.4458808091143286,
+        0.05883207687247499,
+        0.29462058552080017,
+        0.6789002031667958,
+        0.6725274899418345
+      ],
+      "orbitUpReference": [
+        -0.5833393679528539,
+        0.4458808091143286,
+        -0.6789002031667958
+      ],
+      "metersPerUnit": 18173.548387096773,
+      "bodyRadiusM": 5633800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "h-ursae-majoris",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "h Ursae Majoris",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2018921.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/h-ursae-majoris-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "h Ursae Majoris",
+      "classification": "star",
+      "color": "#dee4ff",
+      "distanceAu": 4912193.3,
+      "description": "A naked-eye star 24 parsecs away whose disc the CHARA Array measured: 2.9 times the Sun's width.",
+      "systemName": "h Ursae Majoris system",
+      "aliases": [
+        "HD 81937"
+      ],
+      "order": 5410,
+      "context": {
+        "order": 5407
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -265464921250680600,
+        200886974680718880,
+        655120362817406300
+      ],
+      "presentationToReference": [
+        -0.36124967786968426,
+        -0.7108858139110926,
+        0.6034401625836755,
+        0.27337078870831666,
+        0.5379669522607612,
+        0.7974082832252627,
+        0.8914971015769162,
+        -0.45302639862951827,
+        0.000004972578306762407
+      ],
+      "orbitUpReference": [
+        0.7108858139110926,
+        -0.5379669522607612,
+        0.45302639862951827
+      ],
+      "metersPerUnit": 6512649.677419355,
+      "bodyRadiusM": 2018921400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "rho-geminorum",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Rho Geminorum",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1151383.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/rho-geminorum-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Rho Geminorum",
+      "classification": "star",
+      "color": "#e5e6ff",
+      "distanceAu": 3722454.9,
+      "description": "A naked-eye star 18 parsecs away whose disc the CHARA Array measured: 1.7 times the Sun's width.",
+      "systemName": "Rho Geminorum system",
+      "aliases": [
+        "HD 58946"
+      ],
+      "order": 5409,
+      "context": {
+        "order": 5406
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -179458442610300600,
+        438016210531382100,
+        293329418771818940
+      ],
+      "presentationToReference": [
+        -0.322263284890174,
+        -0.19969421485837563,
+        0.9253478242066016,
+        0.7865695299802293,
+        0.4874186806891112,
+        0.37911924802358377,
+        0.5267397362250886,
+        -0.850026617387587,
+        0.000003760434784347769
+      ],
+      "orbitUpReference": [
+        0.19969421485837563,
+        -0.4874186806891112,
+        0.850026617387587
+      ],
+      "metersPerUnit": 3714140.3225806453,
+      "bodyRadiusM": 1151383500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

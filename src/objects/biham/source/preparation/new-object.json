@@ -1,0 +1,48 @@
+{
+  "id": "biham",
+  "name": "Biham",
+  "system": "Biham system",
+  "description": "A naked-eye star 28.3 parsecs away, 2.6 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 210418"
+  ],
+  "featured": true,
+  "order": 5361,
+  "target": "HD 210418",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 2.623,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 210418: radius in solar radii, from the limb-darkened angular diameter 0.862 +/- 0.018 mas (CHARA) and the Hipparcos parallax, 2.623 +/- 0.083",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.083
+  },
+  "mass": {
+    "value": 1.858,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 210418: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.858 +/- 0.024",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.024
+  },
+  "temperature": {
+    "value": 7951,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 210418: effective temperature in K, from the angular diameter and the bolometric flux, 7951 +/- 97",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 97
+  },
+  "distance": {
+    "value": 28.297,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 210418: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 35.34 +/- 0.85 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.681
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 28 parsecs away whose disc the CHARA Array measured: 2.6 times the Sun's width.",
+    "introduction": "Its disc spans 0.862 milliarcseconds, which gives 2.623 solar radii and 7,951 K at its surface.",
+    "locator": "Tables 5 and 10, HD 210418: limb-darkened diameter, R, Teff"
+  },
+  "notes": []
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "merak",
+  "angularDiameterMas": 1.15,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 2,101,710 km at 24.46 pc = 1.15 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 24.456,
+  "distanceSource": "Boyajian et al. (2012), ApJ 746, 101, HD 95418: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 40.89 +/- 0.16 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 24.456 +/- 0.096 pc; Gaia DR3 parallax 38.6031 +/- 1.1285 mas (same row, RUWE 5.99), 34.2 standard errors, is not used",
+  "radiusKm": 2101709.7,
+  "radiusSource": "Radius 3.021 +/- 0.038 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 95418: radius in solar radii, from the limb-darkened angular diameter 1.149 +/- 0.014 mas (CHARA) and the Hipparcos parallax, 3.021 +/- 0.038 (https://doi.org/10.1088/0004-637X/746/1/101): 2,101,710 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 9377 +/- 75 K from Boyajian et al. (2012), ApJ 746, 101, HD 95418: effective temperature in K, from the angular diameter and the bolometric flux, 9377 +/- 75 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 9377,
+  "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 95418: effective temperature in K, from the angular diameter and the bolometric flux, 9377 +/- 75 (https://doi.org/10.1088/0004-637X/746/1/101)",
+  "surfaceGravityLogg": 3.68,
+  "surfaceGravitySource": "log g 3.68 from 2023ApJS..266...41P; the 10 published values span log g 3.1 to 4.3, across which the limb law changes by at most 0.3% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2023ApJS..266...41P)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 95418) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "procyon",
+  "card": {
+    "text": "A nearby subgiant twice the Sun's width, orbited every 41 years by the white dwarf Procyon B.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-813-2-106",
+        "url": "https://doi.org/10.1088/0004-637X/813/2/106",
+        "label": "Bond et al. (2015), The Astrophysical Journal 813 106",
+        "checked": "2026-10-02",
+        "locator": "Abstract and Table 10"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Hubble tracked its white dwarf companion for two decades; the orbit weighs Procyon A at 1.478 solar masses.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-813-2-106",
+        "url": "https://doi.org/10.1088/0004-637X/813/2/106",
+        "label": "Bond et al. (2015), The Astrophysical Journal 813 106",
+        "checked": "2026-10-02",
+        "locator": "Abstract and Table 10"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

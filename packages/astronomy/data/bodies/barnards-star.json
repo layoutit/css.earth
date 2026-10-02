@@ -1,0 +1,30 @@
+{
+ "id": "barnards-star",
+ "classification": "star",
+ "order": 5378,
+ "physical": {
+  "name": "Barnard's Star",
+  "horizonsCode": null,
+  "meanRadiusKm": 130026.3,
+  "gravitationalParameterKm3PerS2": 19376016246.12315,
+  "parent": null,
+  "effectiveTemperatureK": 3222
+ },
+ "physicalNotes": "Radius 0.1869 +/- 0.0012 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 699: radius in solar radii, 0.1869 +/- 0.0012, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112): 130,026 km at 695,700 km per solar radius. Mass 0.146 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 699: mass 0.146 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112); GM is that mass times the JPL solar GM. Temperature 3222 +/- 10 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 699: effective temperature in K, 3222 +/- 10, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 269.44850252543836,
+  "declinationDegrees": 4.739420051112412,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 1.828233981355542,
+  "properMotionRaMasPerYear": -801.5509783684709,
+  "properMotionDecMasPerYear": 10362.394206546573,
+  "radialVelocityKmPerS": -110.46822,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4472832130942575872 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/barnards-star/source/photometry/gaia-dr3-source.csv; cross-identification HIP 87937: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+4472832130942575872",
+   "distance": "Gaia DR3 parallax 546.9759 +/- 0.0401 mas (same row, RUWE 1.08): 1.83 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -801.551, 10362.394 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -110.47 +/- 0.13 km/s"
+  }
+ }
+}

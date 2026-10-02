@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alpha-lacertae",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alpha Lacertae",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1490885.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alpha-lacertae-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alpha Lacertae",
+      "classification": "star",
+      "color": "#b4cbff",
+      "distanceAu": 6486380.9,
+      "description": "A naked-eye star 31 parsecs away whose disc the CHARA Array measured: 2.1 times the Sun's width.",
+      "systemName": "Alpha Lacertae system",
+      "aliases": [
+        "HD 213558"
+      ],
+      "order": 5362,
+      "context": {
+        "order": 5359
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        574189926756107700,
+        -234036040864929730,
+        746397873788668200
+      ],
+      "presentationToReference": [
+        0.5917362647886915,
+        0.7123055204156652,
+        -0.3774507100527117,
+        -0.24118781294987737,
+        -0.2903402786965291,
+        -0.9260296763337971,
+        0.7692051948722024,
+        -0.6390018530112337,
+        0.000005461412413325938
+      ],
+      "orbitUpReference": [
+        -0.7123055204156652,
+        0.2903402786965291,
+        0.6390018530112337
+      ],
+      "metersPerUnit": 4809306.774193549,
+      "bodyRadiusM": 1490885100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

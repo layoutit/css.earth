@@ -1,0 +1,54 @@
+{
+  "id": "zosma",
+  "name": "Zosma",
+  "system": "Zosma system",
+  "description": "A naked-eye star 17.9 parsecs away, 2.6 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 97603"
+  ],
+  "featured": true,
+  "order": 5349,
+  "target": "HD 97603",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 2.557,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 97603: radius in solar radii, from the limb-darkened angular diameter 1.328 +/- 0.009 mas (CHARA) and the Hipparcos parallax, 2.557 +/- 0.02",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 2.061,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 97603: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 2.061 +/- 0.006",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.006
+  },
+  "temperature": {
+    "value": 8085,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 97603: effective temperature in K, from the angular diameter and the bolometric flux, 8085 +/- 42",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 42
+  },
+  "radialVelocity": {
+    "value": -20.9,
+    "source": "SIMBAD's radial velocity for Gaia DR3 3990320597065899776 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract",
+    "uncertainty": 0.6
+  },
+  "distance": {
+    "value": 17.915,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 97603: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 55.82 +/- 0.25 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.08
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 18 parsecs away whose disc the CHARA Array measured: 2.6 times the Sun's width.",
+    "introduction": "Its disc spans 1.328 milliarcseconds, which gives 2.557 solar radii and 8,085 K at its surface.",
+    "locator": "Tables 5 and 10, HD 97603: limb-darkened diameter, R, Teff"
+  },
+  "notes": []
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "epsilon-serpentis",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 4426032591025363200: position at J2016.0. Distance: Boyajian et al. (2012), ApJ 746, 101, HD 141795: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 46.28 +/- 0.19 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 21.608 +/- 0.089 pc; Gaia DR3 parallax 45.3293 +/- 0.2499 mas (same row, RUWE 4.19), 181.4 standard errors, is not used. Proper motion: Gaia DR3 (same row): 127.257, 62.017 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1088/0004-637X/746/1/101"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 1.783 +/- 0.04 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 141795: radius in solar radii, from the limb-darkened angular diameter 0.768 +/- 0.017 mas (CHARA) and the Hipparcos parallax, 1.783 +/- 0.04 (https://doi.org/10.1088/0004-637X/746/1/101). Mass 1.82 +/- 0.026 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 141795: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.82 +/- 0.026 (https://doi.org/10.1088/0004-637X/746/1/101). Temperature 8084 +/- 102 K from Boyajian et al. (2012), ApJ 746, 101, HD 141795: effective temperature in K, from the angular diameter and the bolometric flux, 8084 +/- 102.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/746/1/101"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 141795: 168-1020 nm, cross-checked against Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Epsilon Serpentis is HR 5892. (5 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #c6d5ff. Routes tried in order: kiehling: HR 5892 is not among its 60 stars; kharitonov: found, not needed after the colour and its cross-check; burnashev: BS 5892 is not in part2; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; stis-ngsl: used.",
+      "evidence": [
+        "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd141795/h_stis_ngsl_hd141795_v2.fits",
+        "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 8,084 K and log g 4.2 (u1 0.295, u2 0.336): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

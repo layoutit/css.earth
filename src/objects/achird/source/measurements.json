@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "achird",
+  "angularDiameterMas": 1.62,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 722,832 km at 5.95 pc = 1.62 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 5.952,
+  "distanceSource": "Boyajian et al. (2012), ApJ 746, 101, HD 4614: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 168.01 +/- 0.48 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 5.952 +/- 0.017 pc; Gaia DR3 parallax 168.8322 +/- 0.1663 mas (same row, RUWE 3.12), 1015.0 standard errors, is not used",
+  "radiusKm": 722832.3,
+  "radiusSource": "Radius 1.039 +/- 0.004 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 4614: radius in solar radii, from the limb-darkened angular diameter 1.623 +/- 0.004 mas (CHARA) and the Hipparcos parallax, 1.039 +/- 0.004 (https://doi.org/10.1088/0004-637X/746/1/101): 722,832 km at 695,700 km per solar radius. Mass 0.972 +/- 0.012 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 4614: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 0.972 +/- 0.012 (https://doi.org/10.1088/0004-637X/746/1/101); GM is that mass times the JPL solar GM. Temperature 6003 +/- 24 K from Boyajian et al. (2012), ApJ 746, 101, HD 4614: effective temperature in K, from the angular diameter and the bolometric flux, 6003 +/- 24 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6003,
+  "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 4614: effective temperature in K, from the angular diameter and the bolometric flux, 6003 +/- 24 (https://doi.org/10.1088/0004-637X/746/1/101)",
+  "surfaceGravityLogg": 4.39,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/achird.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.393, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

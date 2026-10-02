@@ -1,0 +1,23 @@
+# 11 Leonis Minoris
+
+## Sources
+
+Its disc spans 0.821 milliarcseconds, which gives 1.003 solar radii and 5,434 K at its surface. It is also HD 82885, HR 3815, HIP 47080. The introduction is generated from Boyajian et al. (2012), ApJ 746, 101's published values; the sections below are the data's own.
+
+**Star.** Placement: Gaia DR3 source 798068905726303232, distance 11 pc from Boyajian et al. (2012), ApJ 746, 101, HD 82885: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 87.96 +/- 0.32 mas, inverted; Gaia DR3's parallax, 89.009 ± 0.094 mas (950.2 standard errors), is not used. Radius 1.003 +/- 0.016 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 82885: radius in solar radii, from the limb-darkened angular diameter 0.821 +/- 0.013 mas (CHARA) and the Hipparcos parallax, 1.003 +/- 0.016 (https://doi.org/10.1088/0004-637X/746/1/101). Mass 0.91 +/- 0.02 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 82885: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 0.91 +/- 0.02 (https://doi.org/10.1088/0004-637X/746/1/101). Temperature 5,434 K from Boyajian et al. (2012), ApJ 746, 101, HD 82885: effective temperature in K, from the angular diameter and the bolometric flux, 5434 +/- 45. log g 4.39 from the mass and radius.
+
+**Colour.** Gaia DR3 XP spectrum, source 798068905726303232, through the CIE 1931 2° observer: #ffede4. Routes tried in order: stis-ngsl: HD 82885 is not in the library; pulkovo: HR 3815 is not in the catalogue; kiehling: HR 3815 is not among its 60 stars; kharitonov: HR 3815 is not in the catalogue; burnashev: BS 3815 is not in part2; gaia-xp: used.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,434 K and log g 4.39 (u1 0.537, u2 0.209): a model, because no fit of this star's limb is used.
+
+## Evidence
+
+Generated 2026-10-02 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+
+
+## Known problems
+
+- **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
+- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
+
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

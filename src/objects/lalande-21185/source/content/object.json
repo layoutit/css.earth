@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "lalande-21185",
+  "displayName": "Lalande 21185",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.39 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-757-2-112",
+          "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+          "label": "Boyajian et al. (2012), The Astrophysical Journal 757 112",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "2.5 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-lalande-21185",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "lalande-21185-dataset-color.webp",
+        "surface": "lalande-21185-surface-color@2x.webp",
+        "poles": "lalande-21185-poles-color@2x.webp",
+        "source": {
+          "id": "lalande-21185-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd095735/h_stis_ngsl_hd095735_v2.fits"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 95735). The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,464 K and log g 4.86 (u1 0.168, u2 0.434): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Boyajian et al. (2012), ApJ 757, 112",
+      "href": "https://doi.org/10.1088/0004-637X/757/2/112"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+      "credit": "Boyajian et al. (2012), ApJ 757, 112"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/lalande-21185.json",
+      "credit": "Boyajian et al. radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "procyon",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Procyon",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1412966.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/procyon-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Procyon",
+      "classification": "star",
+      "color": "#f0f0ff",
+      "distanceAu": 723763,
+      "description": "A nearby subgiant twice the Sun's width, orbited every 41 years by the white dwarf Procyon B.",
+      "systemName": "Procyon system",
+      "aliases": [
+        "Alpha Canis Minoris",
+        "HD 61421"
+      ],
+      "order": 5425,
+      "context": {
+        "order": 5422
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -45261789459600550,
+        97865029134463100,
+        9845708584905946
+      ],
+      "presentationToReference": [
+        -0.4180255698464347,
+        -0.03825589028019103,
+        0.9076293901221102,
+        0.9038547807342907,
+        0.08269005552606597,
+        0.41977242651329943,
+        0.09111069255762902,
+        -0.9958407711958605,
+        -0.000011211739080096757
+      ],
+      "orbitUpReference": [
+        0.03825589028019103,
+        -0.08269005552606597,
+        0.9958407711958605
+      ],
+      "metersPerUnit": 4557957.096774193,
+      "bodyRadiusM": 1412966700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

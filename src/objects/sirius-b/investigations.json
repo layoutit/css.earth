@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "sirius-b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.008098 +/- 0.000046 solar radii from Bond et al. (2017), ApJ 840, 70, section 8: radius 0.008098 +/- 0.000046 solar radii from model-atmosphere fits to STIS spectra and the absolute flux (internal error).",
+      "evidence": [
+        "https://doi.org/10.3847/1538-4357/aa6af8"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "1.018 solar masses: Bond et al. (2017), ApJ 840, 70, Table 6: dynamical mass 1.018 +/- 0.011 solar masses (https://doi.org/10.3847/1538-4357/aa6af8).",
+      "evidence": [
+        "https://doi.org/10.3847/1538-4357/aa6af8"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Bond et al. (2017), ApJ 840, 70, Table 4: relative visual orbit P 50.1284 yr, a 7.4957 arcsec, i 136.336, node 45.4, T0 1994.5715 (Besselian year), e 0.59142, omega 149.161 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.3789 arcsec is 19.783 au, in units of the Sirius record's radius, 1,191,189 km (https://doi.org/10.3847/1538-4357/aa6af8): P 18309.4 d; Bond et al. (2017), ApJ 840, 70, Table 4: relative visual orbit P 50.1284 yr, a 7.4957 arcsec, i 136.336, node 45.4, T0 1994.5715 (Besselian year), e 0.59142, omega 149.161 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.3789 arcsec is 19.783 au, in units of the Sirius record's radius, 1,191,189 km (https://doi.org/10.3847/1538-4357/aa6af8): a/R* 2484.5, inclination 136.336 degrees; Bond et al. (2017), ApJ 840, 70, Table 4: relative visual orbit P 50.1284 yr, a 7.4957 arcsec, i 136.336, node 45.4, T0 1994.5715 (Besselian year), e 0.59142, omega 149.161 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.3789 arcsec is 19.783 au, in units of the Sirius record's radius, 1,191,189 km (https://doi.org/10.3847/1538-4357/aa6af8): e 0.59142; Bond et al. (2017), ApJ 840, 70, Table 4: relative visual orbit P 50.1284 yr, a 7.4957 arcsec, i 136.336, node 45.4, T0 1994.5715 (Besselian year), e 0.59142, omega 149.161 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.3789 arcsec is 19.783 au, in units of the Sirius record's radius, 1,191,189 km (https://doi.org/10.3847/1538-4357/aa6af8): omega 329.161 degrees (the star's); Bond et al. (2017), ApJ 840, 70, Table 4: relative visual orbit P 50.1284 yr, a 7.4957 arcsec, i 136.336, node 45.4, T0 1994.5715 (Besselian year), e 0.59142, omega 149.161 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.3789 arcsec is 19.783 au, in units of the Sirius record's radius, 1,191,189 km (https://doi.org/10.3847/1538-4357/aa6af8): periastron passage at 49561.32 BMJD_TDB; Bond et al. (2017), ApJ 840, 70, Table 4: relative visual orbit P 50.1284 yr, a 7.4957 arcsec, i 136.336, node 45.4, T0 1994.5715 (Besselian year), e 0.59142, omega 149.161 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.3789 arcsec is 19.783 au, in units of the Sirius record's radius, 1,191,189 km (https://doi.org/10.3847/1538-4357/aa6af8): ascending node 45.4 degrees east of north.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-4357/aa6af8"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 25369 K from Bond et al. (2017), ApJ 840, 70, section 8: Teff 25,369 +/- 46 K from model-atmosphere fits to STIS spectra (internal error): #a5bdff, because the archives do not resolve this companion from its star. The disc is No limb darkening is drawn: at 25,369 K and log g 8.63 no model grid used here reaches it (Claret & Bloemen (2011), A&A 529, A75 (ATLAS): The limb-darkening grid is empty.; Reeve & Howarth (2016), MNRAS 456, 1294 (non-LTE TLUSTY): 25369 is outside the grid 27500, 30000, 32500, 35000, 37500, 40000, 42500, 45000, 47500, 50000, 52500, 55000.; Neilson & Lester (2013), A&A 554, A98 (spherical ATLAS (SATLAS)): the grid is of spherical models, read by mass, and the star has no measured mass; Howarth (2011), MNRAS 413, 1515: 25369 is outside the grid .; Claret (2017), A&A 600, A30 (PHOENIX): The limb-darkening grid is empty.; PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) (Sonora Bobcat cloud-free (Marley et al. 2021, ApJ 920, 85)): the PICASO toolchain holds no Bobcat profiles: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install).",
+      "evidence": [
+        "https://doi.org/10.3847/1538-4357/aa6af8"
+      ]
+    }
+  ]
+}
