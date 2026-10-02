@@ -1,5 +1,5 @@
 import { writeStyle } from '../rendering/retained-write.js';
-import { eyeDistanceM } from '@cssearth/engine';
+import { isExtendedClassification } from '@cssearth/objects';
 import { createContextLocator } from './context-locator.js';
 import type { PreparedWorldContext, PreparedContextBody } from '../prepared-data/world-context.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
@@ -8,7 +8,7 @@ import { createWorldContextMarkerFactory, createWorldContextMarkerPaint, type Wo
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import type { PlannedWorldContext } from './world-context/world-context-planner.js';
 import { bindWorldBodyColumns, createWorldBodyColumns, type PackedWorldContextView } from './world-context/world-context-view-transport.js';
-import { createSystemFade, indicatorDotDiameter, starFieldFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
+import { createSystemFade, indicatorDotDiameter, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../solar-system/heliocentric-sprites.js';
 import type { OrientationXyzw } from '@cssearth/engine';
@@ -22,10 +22,6 @@ import { createOpacityFader } from '../stars/opacity-fader.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 import type { OpacityClock } from '../stars/opacity-clock.js';
 
-/** Bodies of other systems, seen from inside the focus star's system; hover restores them. They come up to full as the
- * stars around the system fill the view (starFieldFade), in sixteenths so a zoom restyles them a few times, not per frame. */
-const OTHER_SYSTEM_OPACITY = .3;
-const OTHER_SYSTEM_STEPS = 16;
 /** The largest dot a star is drawn as, whatever its radius. */
 const STAR_DOT_MAX_DIAMETER_PIXELS = 2;
 /** The stylesheet's base annotation strength (world-context.css); other prepared levels carry an attribute. */
@@ -103,7 +99,7 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
     return element;
   };
   const caption = leaf('context-flight-caption', 'contextFlightLabel'), circle = leaf('context-flight-circle', 'contextFlightCircle');
-  type Entry = { readonly body: { readonly id: string }; readonly marker: HTMLElement; readonly baseAlpha: { readonly line: number; readonly label: number } };
+  type Entry = { readonly body: { readonly id: string }; readonly caption: HTMLElement; readonly baseAlpha: { readonly line: number; readonly label: number } };
   return {
     /** Returns the destination whose caption is drawn, so its footprint joins the label exclusions. */
     publish(flightBody: ProjectedBody | undefined, entry: Entry | undefined, width: number, height: number): ProjectedBody | undefined {
@@ -123,7 +119,7 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
       if (captionBody?.labelPosition && entry) {
         if (caption.dataset.contextFlightLabel !== entry.body.id) {
           caption.dataset.contextFlightLabel = entry.body.id;
-          caption.textContent = entry.marker.dataset.contextName!;
+          caption.textContent = entry.caption.dataset.contextName!;
           caption.style.opacity = String(entry.baseAlpha.label);
         }
         const [x, y] = captionBody.labelPosition;
@@ -170,7 +166,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // Captured frames go stale on every presentation change; the planner's policy only on semantic ones.
   let presentationRevision = 0, policyDirty = true;
   const contextFrames = createWorldContextFrameReceiver();
-  let previousHeader: { emphasizedId: string | null; otherSystemOpacity: number; width: number; height: number } | null = null;
+  let previousHeader: { emphasizedId: string | null; width: number; height: number } | null = null;
   let publishCount = 0;
   const createMarker = createWorldContextMarkerFactory(host.ownerDocument);
   // Orbit roots clone one template too. Bars draw inside the root, which places and orders them (.context-orbit-bars in
@@ -189,8 +185,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     const approximate = 'placement' in body && body.placement === 'approximate';
     // The body billboard is set only when resolved and visible. Unresolved bodies remain colour dots and never fetch an image.
     const { mover, marker, spriteLeaf, caption } = createMarker(plainDot), data = marker.dataset;
-    data.contextGroup = data.contextBody = data.contextLabel = body.id;
-    data.contextName = caption.dataset.contextName = approximate ? `${body.name}${APPROXIMATE_NAME}` : body.name;
+    // One id on the marker and the name on its caption, whose ::after draws it (world-context.css).
+    data.contextBody = body.id;
+    caption.dataset.contextName = approximate ? `${body.name}${APPROXIMATE_NAME}` : body.name;
     if (plainDot) spriteLeaf.style.backgroundColor = body.color;
     // A body's world colour is prepared (its swatch, else its catalogue colour lifted for caption contrast) and set inline, as a
     // body drawn from its record carries its own; without either the world's default applies. Capitals mark a star, black
@@ -265,7 +262,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // Hidden bodies leave the paint order, except the selected one.
   const refreshDepthBodies = () => depthOrder.setMembers(bodies.filter(entry => !entry.bodyHidden || entry === selectedEntry));
   let overview = false, overviewSelection = false;
-  let highlighting = false;
   let selectionPreview: string | null | undefined;
   let navigationInFlight = false;
   // A released rotation keeps the committed system landmarks until the next published frame.
@@ -433,8 +429,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         }
       }
       if (next.highlighted) {
-        highlighting = bodies.some(entry => entry.highlighted);
-        if (highlighting) root.dataset.contextHighlighting = 'true'; else delete root.dataset.contextHighlighting;
+        if (bodies.some(entry => entry.highlighted)) root.dataset.contextHighlighting = 'true'; else delete root.dataset.contextHighlighting;
       }
       if (depthChanged) refreshDepthBodies();
       if (changed) { invalidatePolicy(); refresh(); }
@@ -540,18 +535,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       presentationRevision++;
       const { ranksChanged, changed: depthChanged } = depthOrder.update(world.pose.orientationXyzw, rotating, selectedEntry);
       const { emphasizedId, width, height } = frame;
-      // Inside the focus star's system, other systems' bodies stay clickable but read as not belonging to it.
-      const starField = starFieldFade(eyeDistanceM(world.pose, plan.focus.positionM), plan.system);
-      const otherSystemOpacity = systemFade.of(0) > .5
-        ? OTHER_SYSTEM_OPACITY + (1 - OTHER_SYSTEM_OPACITY) * Math.round(starField * OTHER_SYSTEM_STEPS) / OTHER_SYSTEM_STEPS : 1;
       cameraState.set(world.pose.positionM, 0); cameraState.set(world.pose.orientationXyzw, 3);
       cameraState[7] = viewport.focalPixels; cameraState[8] = width; cameraState[9] = height;
       cameraState.set(viewport.principalOffsetPixels, 10);
       const resized = previousHeader?.width !== width || previousHeader?.height !== height;
-      const policyChanged = resized || policyDirty || previousHeader?.emphasizedId !== emphasizedId ||
-        previousHeader?.otherSystemOpacity !== otherSystemOpacity;
+      const policyChanged = resized || policyDirty || previousHeader?.emphasizedId !== emphasizedId;
       policyDirty = false;
-      previousHeader = { emphasizedId, otherSystemOpacity, width, height };
+      previousHeader = { emphasizedId, width, height };
       if (!cameraChanged && !policyChanged && !depthChanged && !interactiveHover && delta.changes.size === 0) {
         skippedPublications++;
         return;
@@ -591,10 +581,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           orbitVisibility, segments, index, coveredBy } = projected;
         const { body } = entry;
         if (mask === 0) continue;
-        const contextEmphasis = (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1) *
-          (!entry.hovered && !systemFade.inFocusSystem(entry.index) ? otherSystemOpacity : 1);
-        const emphasis = contextEmphasis;
-        // All three visual parts share this one zoom/context alpha and
+        // The marker, its caption and its path share the planner's one context alpha (projected.emphasis) and
         // movement transform. The pseudos only own annotation visibility.
         const plannedShown = (visible || (annotationVisible && (entry.indicatorShown || entry.labelShown))) && markerOpacity > 0;
         // Coasting holds membership: a shown body stays shown and fades out if the plan drops it; a hidden one waits.
@@ -642,7 +629,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const selection = String(emphasizedId !== null && body.id === emphasizedId);
         entry.paint.publish({ projected, billboardShown, plannedShown, markerShown, markerDiameter, flatDot, zIndex: markerZIndex,
           selected: selection === 'true', hovered: entry.hovered, animated: animatedAnnotations.has(entry), coast,
-          policyChanged, emphasis }, fader);
+          policyChanged }, fader);
         entry.interaction.updateMarker(projected, rank, entry, navigationSuppressed);
         const indicatorVisible = entry.indicatorShown;
         entry.paint.publishIndicator(indicatorVisible, navigationInFlight && body.id === emphasizedId, coast);
@@ -660,8 +647,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const orbitPaint = entry.piecePool.presentation;
         if (entry.orbit && orbitShown) {
           if (orbitRenderer === 'bars' && entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
-          if (orbitPaint.dataset.contextSelected !== selection) orbitPaint.dataset.contextSelected = selection;
-          fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * contextEmphasis, animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
+          // In a moons view the host's own path about its star is context, not the subject: it is not drawn as selected.
+          const orbitSelection = overviewSelection ? 'false' : selection;
+          if (orbitPaint.dataset.contextSelected !== orbitSelection) orbitPaint.dataset.contextSelected = orbitSelection;
+          fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * projected.emphasis, animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
         }
         if (entry.orbit && (mask & ContextChange.orbit)) {
           const orbitTransform = 'none';
@@ -694,7 +683,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         paintMembershipChanged = false;
       }
       interactions.commit(paintedOrder, depthOrder.rank, captionBody,
-        captionBody ? bodies[captionBody.index].labelSize : undefined, pickingChanged, navigationInFlight);
+        captionBody ? bodies[captionBody.index].labelSize : undefined, pickingChanged, navigationInFlight,
+        isExtendedClassification(selectedEntry.body.classification));
       });
       // Publish first, then attach populated owners. A later view reads only requested caption sizes.
       for (const entry of attachMarkers) root.appendChild(entry.mover);

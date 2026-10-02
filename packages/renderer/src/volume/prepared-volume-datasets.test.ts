@@ -15,6 +15,7 @@ import { cloudCompositeOpacity } from '@cssearth/volume-viewer/scene/cloud-inspe
 import { CSS_COMPILER_RENDER_BUDGET } from './compiler-render-budget.js';
 import { createRenderElementBudget } from '@cssearth/objects';
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
+import { readout, readoutsOf } from '../rendering/readouts.js';
 
 class FakeElement {
   readonly nodeType = 1;
@@ -114,19 +115,19 @@ for (const [slabCount, starCount] of [[151, 0], [150, 3]]) test(`the compiler DO
   // Mounted distant, the bank holds its impostors and stars only; the slice leaves wait for the first close publication.
   const mounted = descendants(root);
   assert.equal(mounted.filter(node => node.parentNode?.className === 'css-volume-mesh').length, 0);
-  assert.equal(mounted.filter(node => node.dataset.volumeImpostor !== undefined).length, 26);
+  assert.equal(mounted.filter(node => readout(node, 'volumeImpostor') !== undefined).length, 26);
   runtime.setStarsVisible(true); runtime.publish(publication(4));
   const initial = descendants(root);
   const predicted = createRenderElementBudget(CSS_COMPILER_RENDER_BUDGET, starCount, slabCount).totalElements;
   assert.equal(data.datasets[0]!.volume.stacks.map(stack => stack.leaves.length).reduce((a, b) => a + b, 0), slabCount);
   assert.equal(initial.filter(node => node.parentNode?.className === 'css-volume-mesh').length, slabCount * 3);
-  assert.equal(initial.filter(node => node.dataset.volumeImpostor !== undefined).length, 26);
-  assert.equal(initial.filter(node => node.dataset.catalogueSource !== undefined).length, starCount);
+  assert.equal(initial.filter(node => readout(node, 'volumeImpostor') !== undefined).length, 26);
+  assert.equal(initial.filter(node => readout(node, 'catalogueSource') !== undefined).length, starCount);
   assert.equal(initial.length, 499); // Includes the bank root, markers, empty star wrapper and hidden nodes.
   assert.equal((initial.length - slabCount * 3 - starCount), 46);
   assert.equal(predicted, CSS_COMPILER_RENDER_BUDGET.maximumElements);
   assert.ok(initial.length <= predicted);
-  assert.equal(Number(root.dataset.volumeResidentDomNodes), initial.length);
+  assert.equal(Number(readout(root, 'volumeResidentDomNodes')), initial.length);
   for (const id of ['second', 'third', 'first']) for (const distance of [4, 100]) {
     runtime.selectDataset(id);
     for (const direction of [[0, 0, 1], [1, 0, 0], [0, 1, 0], [1, 1, 1], [1, 1, .4], [0, 0, -1]] as const) {
@@ -136,7 +137,7 @@ for (const [slabCount, starCount] of [[151, 0], [150, 3]]) test(`the compiler DO
       assert.ok(current.length <= CSS_COMPILER_RENDER_BUDGET.maximumElements);
       assert.equal(current.every((node, index) => node === initial[index]), true);
       assert.equal(current.length, initial.length);
-      assert.equal(root.dataset.volumeResidentTopologyCount, '1');
+      assert.equal(readout(root, 'volumeResidentTopologyCount'), '1');
     }
   }
   assert.equal(initial.some(node => node.style.display === 'none' || node.style.visibility === 'hidden' || node.hidden), true);
@@ -150,12 +151,12 @@ test('catalogue points project prepared positions, cull hidden support and keep 
   mount.publish(publication(10));
   assert.equal(nodes[0].style.transform, 'translate(-11px,-11px)');
   assert.deepEqual(nodes.map(node => node.style.visibility), ['visible', 'hidden', 'hidden']);
-  assert.equal(root.dataset.visiblePoints, '1');
+  assert.equal(readout(root, 'visiblePoints'), '1');
   const changed = { ...initial, points: initial.points.map(point => ({ ...point, sizePx: 4, opacity: .3 })).reverse() };
   mount.setPresentation(changed);
   assert.deepEqual(root.children, nodes); assert.equal(nodes[0].style.transform, 'translate(-12px,-12px)');
   assert.equal(nodes[0].style.opacity, '0.3'); assert.equal(nodes[0].style.width, '4px');
-  assert.equal(root.dataset.visiblePoints, '2');
+  assert.equal(readout(root, 'visiblePoints'), '2');
   const moved = { ...changed, points: changed.points.map(point => ({ ...point, positionUnits: [1, 1, 1] as VolumeVector })) };
   assert.throws(() => mount.setPresentation(moved), /same prepared point geometry/);
   assert.equal(nodes[0].style.transform, 'translate(-12px,-12px)');
@@ -186,7 +187,7 @@ test('same-topology datasets reuse one retained cloud and replace all selected m
   const catalogue = root.children.find(node => node.className === 'prepared-catalogue-points')!;
   const pointsBefore = [...catalogue.children], leaves = initial.filter(node => node.style.backgroundImage);
   assert.equal(cloudRoots.length, 1); assert.equal(leaves.length, 3);
-  assert.partialDeepStrictEqual(root.dataset, { volumeDatasetCount: '3', volumeTopologyCount: '1', volumeResidentTopologyCount: '1' });
+  assert.partialDeepStrictEqual(readoutsOf(root), { volumeDatasetCount: '3', volumeTopologyCount: '1', volumeResidentTopologyCount: '1' });
   const geometry = leaves.map(node => node.style.transform);
   for (const id of ['second', 'third', 'first']) {
     runtime.selectDataset(id);
@@ -216,13 +217,13 @@ test('a distinct topology is allocated only on first selection and then retained
   const root = runtime.root as unknown as FakeElement;
   runtime.publish(publication());
   assert.equal(root.children.filter(node => node.className === 'prepared-volume-dataset-cloud').length, 1);
-  assert.partialDeepStrictEqual(root.dataset, { volumeTopologyCount: '2', volumeResidentTopologyCount: '1' });
+  assert.partialDeepStrictEqual(readoutsOf(root), { volumeTopologyCount: '2', volumeResidentTopologyCount: '1' });
   assert.equal(descendants(root).length, 29); // Three shared stars and one three-slab topology, all optical copies retained.
   runtime.selectDataset('second');
   const families = root.children.filter(node => node.className === 'prepared-volume-dataset-cloud');
-  assert.equal(families.length, 2); assert.equal(root.dataset.volumeResidentTopologyCount, '2');
+  assert.equal(families.length, 2); assert.equal(readout(root, 'volumeResidentTopologyCount'), '2');
   assert.equal(descendants(root).length, 52); // A second topology costs its wrappers and leaves even when hidden.
-  assert.equal(root.dataset.volumeResidentDomNodes, '52');
+  assert.equal(readout(root, 'volumeResidentDomNodes'), '52');
   assert.deepEqual(families.filter(node => node.style.display !== 'none').map(node => node.dataset.volumeDataset), ['second']);
   runtime.selectDataset('third');
   assert.deepEqual(root.children.filter(node => node.className === 'prepared-volume-dataset-cloud'), families);
@@ -287,9 +288,9 @@ test('distant prepared images suspend the retained slice renderer and hand off b
   // While only impostors contribute, the slice renderer is not built at all.
   assert.equal(sceneNodes().length, 0);
   runtime.publish(publication(100));
-  assert.equal(descendants(root).filter(node => node.style.backgroundImage && !node.dataset.volumeImpostor).length, 0);
+  assert.equal(descendants(root).filter(node => node.style.backgroundImage && !readout(node, 'volumeImpostor')).length, 0);
   assert.equal(detail.style.display, 'none'); assert.equal(distant.style.display, 'block');
-  assert.equal(distant.dataset.activeViews, '1');
+  assert.equal(readout(distant, 'activeViews'), '1');
   runtime.publish(publication(50));
   assert.equal(sceneNodes().length, 0);
   runtime.publish(publication(200 / 24));
@@ -400,10 +401,10 @@ test('native mounts build every node at mount, as the server-rendered DOM they a
   const lazyRoot = bank.mount(lazy.options).root as unknown as FakeElement;
   const eagerRoot = bank.mount({ ...eager.options, nativeFocalCss: '1000px' }).root as unknown as FakeElement;
   const count = (root: FakeElement, test: (node: FakeElement) => boolean) => descendants(root).filter(test).length;
-  const leaves = (node: FakeElement) => node.parentNode?.className === 'css-volume-mesh', points = (node: FakeElement) => node.dataset.catalogueSource !== undefined;
+  const leaves = (node: FakeElement) => node.parentNode?.className === 'css-volume-mesh', points = (node: FakeElement) => readout(node, 'catalogueSource') !== undefined;
   assert.deepEqual(([count(lazyRoot, leaves), count(lazyRoot, points)]), [0, 0]);
   assert.deepEqual(([count(eagerRoot, leaves), count(eagerRoot, points)]), [90, 3]);
-  assert.equal(count(eagerRoot, node => node.dataset.volumeImpostor !== undefined), 26);
+  assert.equal(count(eagerRoot, node => readout(node, 'volumeImpostor') !== undefined), 26);
 });
 
 test('a phone hands an impostor-sized cloud to its billboards instead of fading a live slice volume', () => {
@@ -476,7 +477,7 @@ test('a cloud denied its detail is carried by its billboards at every size, unti
   lod.setDetail(false);
   lod.publish(publication(4.01));
   assert.equal(detail.style.display, 'none'); assert.equal(distant.style.display, 'block'); assert.equal(distant.style.opacity, '');
-  assert.ok(Number(distant.dataset.activeViews) > 0);
+  assert.ok(Number(readout(distant, 'activeViews')) > 0);
   assert.equal(distant.children.some(node => node.style.display === 'block' && node.style.backgroundImage), true);
   lod.setDetail(true);
   lod.publish(publication(4));

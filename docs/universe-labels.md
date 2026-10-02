@@ -66,18 +66,37 @@ moon and surface-feature labels; camera frames do not measure the panels.
 ## Orbit and selection emphasis
 
 [`context-presentation-policy.ts`](../packages/renderer/src/universe/context-presentation-policy.ts)
-keeps zoom fading separate from selection emphasis. As the selected disc grows
-from 12% to 30% of viewport height, orbit lines soften to 30% of their normal
-strength and remain there at closer distances. Viewport clipping, body occlusion,
-distance fading and explicit hidden-orbit settings still apply.
+holds every dimming of the world context, and the planner applies each one in a
+single place.
 
-Selecting a planet or moon keeps its planet and satellite family at normal
-brightness. Unrelated bodies, circles, captions and orbit lines use 25% of their
-normal strength nearby. That dimming eases away between half and twice the
-primary body's orbit radius as the camera pulls back; moons use their
-planet's scale. Hover restores emphasis. A planetary system's overview and its
-star's selection retain normal emphasis across the system. These paint multipliers do
-not decide label admission or navigation availability.
+Each frame has one subject, resolved once: a body's page (or the destination of
+a flight), a moons view, or none in an overview. A body is in the subject's
+family when it circles the family's host; a moon shares its planet's family.
+Hover and a highlighted category count as pointing at a body.
+
+A path's opacity follows from that:
+
+| Path | Opacity |
+| --- | --- |
+| The focused body's own, on its page or a flight to it | Fades out as its disc grows from 12% to 30% of the viewport height. |
+| A moon's, on its host's page | Fades with the host in the same way. |
+| The family's, on a moon's page, in a moons view or during a flight | Softens to 30% over the same range and stays there. |
+| Outside the family | 25% of the context value; on a body's page it also fades out up close. In a moons view this includes the host's own path about its star. |
+| Any path in an overview, or one the reader points at | Softens to 30% up close; never dimmed by family. |
+
+The outside dimming eases away between half and twice the host's distance from
+its star as the camera pulls back; a moons view holds it. Viewport clipping,
+body occlusion, the system's distance fade, the on-screen size fade and explicit
+hidden-orbit settings still apply.
+
+A family is read by a path's own centre. A body that circles an unrendered
+barycentre is therefore outside its host's family; this is a known gap.
+
+Markers, circles and captions do not dim with selection. They share one
+emphasis with their path: 30% outside a highlighted category, and 30% for
+another star's bodies seen from inside the focus star's system, rising to full
+as the surrounding stars fill the view. A hovered body is never dimmed. These
+multipliers do not decide label admission or navigation availability.
 
 ## Verification
 
