@@ -30,3 +30,36 @@ test('information tab rules belong to the prepared scene head, never the replace
     }
   }
 });
+
+test('Enter in the search field submits the typed query, never a browse pill', async () => {
+  for (const route of ['earth', 'saturn', 'navigation/earth']) {
+    const document = await page(route);
+    assert.ok(document, `${route} has no dist build`);
+    const form = document.querySelector('.object-sidebar-search-card');
+    assert.ok(form?.id, `${route}: search form`);
+    // The browser presses the first submit button the form owns, in document order.
+    const submits = [...document.querySelectorAll('button[type="submit"]')]
+      .filter(button => button.getAttribute('form') === form.id || !button.hasAttribute('form') && button.closest('form') === form);
+    assert.ok(submits.some(button => button.getAttribute('name') === 'browse'), `${route}: browse pills submit the search form`);
+    assert.equal(submits[0]?.getAttribute('name'), null, `${route}: the default submit button carries no browse value`);
+  }
+});
+
+test('without JavaScript the phone sheet shows, and the arrival photograph only over the empty default stage', async () => {
+  for (const route of ['earth', 'saturn']) {
+    const html = await readFile(resolve(DIST, route, 'index.html'), 'utf8').catch(() => null);
+    assert.ok(html, `${route} has no dist build`);
+    const noscript = [...html.matchAll(/<noscript><style>([^<]*)<\/style><\/noscript>/gu)].map(match => match[1]!.trim());
+    // The phone sheet is hidden until its controller publishes a snap state (shell-layout.css); no script ever does.
+    assert.ok(noscript.some(rule => rule.startsWith('body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: visible')),
+      `${route}: the phone sheet shows without JavaScript`);
+    const rules = noscript.filter(rule => rule.includes('data-startup-billboard'));
+    assert.equal(rules.length, 1, `${route}: one noscript billboard rule`);
+    // A native dataset, settings or saved-view response marks the stage it draws (dataset-response.mts).
+    assert.ok(rules[0]!.startsWith('.object-stage:not([data-prepared-object]) ~ img[data-startup-billboard]'), `${route}: ${rules[0]!.slice(0, 80)}`);
+    const { document } = parseHTML(html);
+    const stage = document.querySelector('.object-stage');
+    assert.ok(stage && !stage.hasAttribute('data-prepared-object'), `${route}: the default page ships an unmarked stage`);
+    assert.ok(stage.parentElement?.querySelector(':scope > img[data-startup-billboard]'), `${route}: the photograph is the stage's sibling`);
+  }
+});
