@@ -227,6 +227,15 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       const busy = !ready || next.pending === true;
       setAttribute(root, "aria-busy", String(busy));
     }
+    // The chosen dataset stays unpressed until it commits; its row, or the row listing its sequence, shows the load.
+    const loading = ready && next.pending === true && next.desired.datasetId !== committed.datasetId ? next.desired.datasetId : null;
+    const loadingGroup = stepGroup(loading);
+    for (const input of datasetInputs) {
+      const option = input.closest<HTMLElement>('[data-step-group]');
+      setAttribute(input, 'aria-busy', String(loading !== null && (input.value === loading ||
+        loadingGroup !== null && option?.dataset.stepGroup === loadingGroup && option.dataset.stepListed === 'true')));
+    }
+    if (datasetRoot) setAttribute(datasetRoot, 'data-dataset-loading', String(loading !== null));
     for (const input of datasetInputs) {
       const disabled = input.type === 'submit' ? false : !ready;
       if (input.disabled !== disabled) input.disabled = disabled;
