@@ -35,3 +35,15 @@ test('an arrival cancelled while its camera publishes fails without revealing', 
 test('an acknowledged arrival reveals once', async () => {
   assert.deepEqual((await arrive(true)).revealed, ['reveal']);
 });
+
+test('an arrival paces its texture activation unless its caller is a covered, stationary startup', async () => {
+  const lease = { resources: {}, tree: {}, projection: () => ({}), destroy() {} };
+  const factory = { navigation: { prepare: async () => lease } } as unknown as SceneFactory;
+  const view = () => ({ world: {} } as ObjectPreparationView);
+  for (const [activation, paced] of [[undefined, true], ['paced', true], ['whole', false]] as const) {
+    const arrival = createPreparedArrival(new AbortController().signal);
+    await arrival.prepare(factory, {} as never);
+    // A flight's own options never switch the pacing off.
+    assert.equal(arrival.handoff(view, { progressiveActivation: false }, {}, activation).mountOptions.progressiveActivation, paced);
+  }
+});

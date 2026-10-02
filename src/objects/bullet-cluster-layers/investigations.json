@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "bullet-cluster-layers",
+  "entries": [
+    {
+      "id": "opo0639a",
+      "subject": "ESA/Hubble opo0639a (Chandra, Hubble, Magellan composite)",
+      "status": "included",
+      "finding": "The 2006 composite: X-ray gas in pink, lensing mass map in blue, over a visible-light image; 3000 x 2168 px over 7.45 x 5.38 arcmin, north up, CC BY 4.0. Registered against Gaia DR3.",
+      "evidence": [
+        "https://esahubble.org/images/opo0639a/",
+        "https://esahubble.org/copyright/"
+      ]
+    },
+    {
+      "id": "webb-nircam",
+      "subject": "ESA/Webb bullet-cluster (NIRCam, 2025)",
+      "status": "deferred",
+      "finding": "Webb's near-infrared image, 11235 x 4714 px over 5.85 x 2.45 arcmin, CC BY 4.0. It carries no X-ray or mass overlay; not drawn here.",
+      "evidence": [
+        "https://esawebb.org/images/bullet-cluster/"
+      ],
+      "revisitWhen": "A second dataset of the cluster is wanted."
+    }
+  ]
+}

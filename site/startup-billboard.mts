@@ -60,6 +60,8 @@ export async function prepareStartupBillboard(stage: HTMLElement, factory: Scene
       removeLoader();
     }, input);
     await pending.prepare(factory, { getView: () => view, cameraViewport: viewport, selectionStage: stage, ownerDocument: document });
-    return pending.handoff(() => view);
+    // Paced an atlas a frame, Earth's 77 images took 148 frames before the reveal: 1.35 s in headless Chromium and 2.63 s
+    // in headless WebKit, against 0.11 s and 0.26 s whole (2026-10-02).
+    return pending.handoff(() => view, {}, {}, cover ? 'whole' : 'paced');
   } catch (error) { pending?.dispose(); removeLoader(); throw error; }
 }

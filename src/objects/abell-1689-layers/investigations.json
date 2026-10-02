@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "abell-1689-layers",
+  "entries": [
+    {
+      "id": "heic1317a",
+      "subject": "ESA/Hubble heic1317a (Hubble ACS)",
+      "status": "included",
+      "finding": "The 2013 Hubble Heritage image in visible and near-infrared light; 4002 x 3863 px over 3.33 x 3.22 arcmin, CC BY 4.0. Registered against Gaia DR3.",
+      "evidence": [
+        "https://esahubble.org/images/heic1317a/",
+        "https://esahubble.org/copyright/"
+      ]
+    },
+    {
+      "id": "heic0805d",
+      "subject": "ESA/Hubble heic0805d (Hubble ACS, 2008)",
+      "status": "excluded",
+      "finding": "The earlier Hubble image of the same core, 3853 x 4000 px over 3.21 x 3.33 arcmin, with fewer bands and shorter exposure than heic1317a.",
+      "evidence": [
+        "https://esahubble.org/images/heic0805d/"
+      ]
+    }
+  ]
+}
