@@ -1,3 +1,4 @@
+import { containedPath } from '@cssearth/core/node';
 import { spawn } from 'node:child_process';
 import { writeAtomic } from '@cssearth/bake/volume/node';
 import { readFile, readdir, stat } from 'node:fs/promises';
@@ -7,8 +8,9 @@ import { parseLabModelJson, resolveLabModelPath } from '../../../resources/model
 export interface Pin { path: string }
 export const json = async (path: string) => parseLabModelJson(await readFile(path, 'utf8'));
 export function localPath(root: string, path: string) {
-  const full = resolve(root, resolveLabModelPath(path)), offset = relative(root, full);
-  if (isAbsolute(path) || !offset || offset === '..' || offset.startsWith('../')) throw new Error(`Invalid recipe path: ${path}`);
+  const full = resolve(root, resolveLabModelPath(path));
+  if (isAbsolute(path) || containedPath(root, full, { policy: 'lexical', rootPath: 'reject',
+    parentSeparator: 'posix', absoluteOffset: 'allow' }) === undefined) throw new Error(`Invalid recipe path: ${path}`);
   return full;
 }
 export async function pinned(root: string, pin: Pin) {

@@ -1,7 +1,8 @@
+import { containedPath } from '@cssearth/core/node';
 import { readNonArrayRecord, readNonblankText, readFiniteNumber, readPositiveNumber } from '@cssearth/core';
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { resolve, relative, sep } from 'node:path';
+import { resolve, relative } from 'node:path';
 import { decodeEncounterFits, encounterCamera, validateEncounterControls } from '../layers/terrestrial/index.ts';
 import { loadPdsPlateShape } from '../geometry/index.ts';
 import { fitImageControls } from './image-controls.ts';
@@ -21,8 +22,9 @@ const pixel = (value: unknown, at: string): Pixel => { if (!Array.isArray(value)
 const safePath = (base: string, path: unknown, at: string) => {
   const candidate = text(path, at);
   if (candidate.startsWith('/') || candidate.includes('\\') || candidate.split('/').some(part => !part || part === '..')) throw new TypeError(`${at} must stay inside the object source tree.`);
-  const absolute = resolve(base, candidate), rel = relative(base, absolute);
-  if (rel === '' || rel.startsWith(`..${sep}`) || rel === '..') throw new TypeError(`${at} must stay inside the object source tree.`);
+  const absolute = resolve(base, candidate);
+  if (containedPath(base, absolute, { policy: 'lexical', rootPath: 'reject',
+    parentSeparator: 'native', absoluteOffset: 'allow' }) === undefined) throw new TypeError(`${at} must stay inside the object source tree.`);
   return absolute;
 };
 const json = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;

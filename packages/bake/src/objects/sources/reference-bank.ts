@@ -3,18 +3,15 @@
  * a copy in each body that uses it. A bank's `manifest.json` has the shape of a body's source manifest and is verified the
  * same way, under the identity `reference-<set>`, as the SPICE kernel banks are (`kernel-banks.ts` in objects/cameras).
  */
-import { existsSync } from 'node:fs';
+import { discoverRoot } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { resolve } from 'node:path';
 import { createSourceManifest } from '@cssearth/objects/node';
 
 /** The banks' directory, found upward from this module: it runs from its bake source and bundled into packages/bake/dist. */
 function findReferenceBankRoot(from: string): string {
-  for (let directory = from; ; directory = dirname(directory)) {
-    const candidate = resolve(directory, 'src/references');
-    if (existsSync(candidate)) return candidate;
-    if (dirname(directory) === directory) throw new Error(`No src/references directory above ${from}.`);
-  }
+  return resolve(discoverRoot({ strategy: 'ancestor-marker', startDirectory: from, marker: 'src/references',
+    missing: { behavior: 'throw', error: () => new Error(`No src/references directory above ${from}.`) } }), 'src/references');
 }
 
 // Found on first use rather than at import, so importing the sources entry never needs a checkout's src/references.
