@@ -1,4 +1,4 @@
-import type { BodyProjection } from '../solar-system/types.js';
+import type { BodyProjection } from '@cssearth/engine';
 
 type Bounds = Pick<DOMRect, 'x' | 'y' | 'width' | 'height'>;
 export interface PhysicalBodyHit { focalPixels: number; principalOffsetPixels: readonly [number, number]; bodyRadiusUnits: number; }

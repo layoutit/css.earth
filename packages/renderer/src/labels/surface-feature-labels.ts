@@ -1,10 +1,9 @@
-import { type PreparedSurfaceFeaturePlan } from '@cssearth/objects';
+import { surfaceFeatureBankIndex, type PreparedSurfaceFeaturePlan, type ParsedSurfaceFeature as PreparedSurfaceFeature, type ParsedSurfaceFeatureCatalog as PreparedSurfaceFeatureCatalog } from '@cssearth/objects';
 
 import { writeData, writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
 import { bindInputEvent } from '../navigation/shared-input-surface.js';
 import type { SceneLifetime } from '@cssearth/engine';
-import { surfaceFeatureBankIndex } from './surface-feature-banks.js';
 import { requirePhysicalProjection } from '../prepared-data/physical-projection.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
@@ -19,10 +18,9 @@ import type { SurfaceLabelCandidate } from './surface-feature-layout.js';
 import { loadPreparedSurfaceFeatureBank, loadPreparedSurfaceFeatureCatalog } from './surface-feature-catalog.js';
 import { flyToSurfaceDirection } from './surface-feature-flight.js';
 import type { SurfaceFlightHandle } from './surface-feature-flight.js';
-import { rotateWorldPosition } from '../navigation/world-camera-math.js';
+import { rotateWorldPosition } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '../runtime/world-navigation-types.js';
 import type { SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats } from './surface-feature-types.js';
-import type { ParsedSurfaceFeature as PreparedSurfaceFeature, ParsedSurfaceFeatureCatalog as PreparedSurfaceFeatureCatalog } from '@cssearth/objects';
 
 import { surfaceFeatureCaption } from './surface-feature-caption.js';
 

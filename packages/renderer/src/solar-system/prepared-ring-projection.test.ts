@@ -2,8 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { createPreparedRingProjector, createRetainedRingProjection, createSphereChordTest, orbitBoundsMayContribute, orbitProjectionCapacity } from './prepared-ring-projection.js';
-import { rayHitsSphereBefore } from './heliocentric-geometry.js';
-import type { Vector3 } from './types.js';
+import { rayHitsSphereBefore } from '@cssearth/engine';
+import type { Vector3 } from '@cssearth/engine';
 
 // The projector reads prepared vertices as consecutive x, y, z; these fixtures are written as points.
 type Projector = ReturnType<typeof createPreparedRingProjector>;
@@ -250,7 +250,6 @@ test('a saturated hidden orbit stops transforming chords while its visible path 
   assert.equal(transforms, 128);
   for (const invalid of [0, NaN, Infinity]) assert.throws(() => projector.measureExtent(vertices, trail, invalid));
 });
-
 
 test('interior prepared chords share one camera projection per endpoint without reusing a stale view', () => {
   const vertices: Vector3[] = Array.from({ length: 128 }, (_, index) => [

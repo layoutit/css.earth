@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, rotationFromMatrix3d,
-  offAxisFrame, silhouetteEllipse, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle } from './heliocentric-geometry.js';
+import { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, rotationFromMatrix3d, offAxisFrame, silhouetteEllipse, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle } from '@cssearth/engine';
 
 test('off-axis physical distance preserves the requested tangential apparent radius', () => {
   for (const bodyRadius of [1, 243.97, 605.18]) for (const focal of [300, 1247]) {

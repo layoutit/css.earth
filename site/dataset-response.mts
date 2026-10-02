@@ -4,9 +4,9 @@ import { parseHTML } from 'linkedom';
 
 import { serializePreparedScene, createPreparedAssetResolver, loadPreparedCssObject, loadPreparedDataset,loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection, sectionElements } from '@cssearth/renderer';
 import { parseSharedView, formatSharedView, type SharedView } from '@cssearth/renderer/navigation';
-import { preparedSceneMatrix } from '@cssearth/renderer/navigation/prepared-camera-basis.ts';
+import { preparedSceneMatrix } from '@cssearth/engine';
 import { serializePreparedMatrix4 } from '@cssearth/core';
-import { distanceForSilhouetteRadius } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
+import { distanceForSilhouetteRadius } from '@cssearth/engine';
 
 import { requiredElement, requiredSection } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';

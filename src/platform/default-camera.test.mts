@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import type { Vector3 } from '@cssearth/renderer/solar-system/types.ts';
+import type { Vector3 } from '@cssearth/engine';
 import { LIT_DEFAULT_VIEW, LOPSIDED_COVERAGE, openingDirection, prepareDefaultCameraAngles, prepareFacingCameraAngles } from '@cssearth/bake/objects/scene';
 import { detectMissingCoverage, missingCoverageColor } from '@cssearth/bake/raster';
 import * as solarGeometry from './solar-geometry.mts';

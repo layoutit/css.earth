@@ -1,4 +1,4 @@
-import type { Matrix3 } from "@cssearth/renderer/solar-system/types.ts";
+import type { FlatMatrix3 as Matrix3 } from '@cssearth/engine';
 // Astrometric registration of an object's sky: the derived rotation from the
 // ICRF cube frame of the shared universe sky into the object's ecliptic
 // presentation frame, in place of hand-tuned Euler angles.

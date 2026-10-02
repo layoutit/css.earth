@@ -1,16 +1,10 @@
+import { preparedSceneMatrix } from '@cssearth/engine';
 import { type CameraPlan } from '@cssearth/objects';
 
-import { preparedScenePitch } from '@cssearth/engine';
-
-import type { Matrix4 } from '../solar-system/types.js';
+import type { Matrix4 } from '@cssearth/engine';
 import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4, serializePreparedMatrix4 } from '@cssearth/core';
 
 const identity = (): Matrix4 => [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
-
-/** The authored camera calibration, shared by native publication and live orbiting. */
-export function preparedSceneMatrix(camera: CameraPlan, pitch: number, yaw: number): Matrix4 {
-  return multiplyPreparedMatrix4(preparedRotationMatrix4('x', preparedScenePitch(pitch, camera)), preparedRotationMatrix4('y', yaw));
-}
 
 /** Decode prepared affine transforms; no layout, style discovery or geometry generation. */
 export function readPreparedTransform(value: string | null): Matrix4 {

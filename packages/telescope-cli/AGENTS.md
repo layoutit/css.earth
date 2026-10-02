@@ -55,3 +55,5 @@ The workspace's tools import it only through the subpaths `package.json` exports
 - Every source file, test, tool, and generated source is limited to 600 physical lines, including blanks/comments.
   `pnpm lint:packages` enforces the limit.
 - Maintain README.md and CLAUDE.md as a symlink to this guide.
+
+Sphere framing reads numeric silhouette geometry from `@cssearth/engine`. Its runtime publication, scene serialization and prepared loaders remain renderer consumers.

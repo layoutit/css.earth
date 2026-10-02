@@ -7,8 +7,8 @@ import { preparedControlPitch } from '@cssearth/engine';
 import { isRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { SURFACE_FLY_TO } from '@cssearth/renderer/navigation/surface-fly-to.ts';
-import type { Vector3 } from '@cssearth/renderer/solar-system/types.ts';
+import { SURFACE_FLY_TO } from '@cssearth/objects';
+import type { Vector3 } from '@cssearth/engine';
 import { LOPSIDED_COVERAGE, prepareDefaultCameraAngles, type SolarGeometry } from '../scene/index.ts';
 
 /** Each dataset's recorded coverage direction in the surface map's frame (longitude 0 at the map's left edge). */
@@ -73,4 +73,3 @@ export function faceDatasetData<T extends object>(definition: T, { geometry, bod
   });
   return Object.assign({}, definition, { variants });
 }
-

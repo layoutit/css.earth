@@ -1,4 +1,5 @@
-import { RASTER_DENSITY, type LightingRecipe, type RasterRecipe } from './config.ts';
+import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
+import { type LightingRecipe, type RasterRecipe } from './config.ts';
 import { resolveLightingRecipe } from './lighting-banks.ts';
 import { parseLimbBlock } from '../photometry/index.ts';
 type RecordValue = Record<string, unknown>;

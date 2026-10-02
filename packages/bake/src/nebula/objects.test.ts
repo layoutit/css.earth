@@ -7,9 +7,8 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import ts from 'typescript';
 import { sanitizeVolumeProvenance, applicationDeliveryKind, prepareNebulaObject, type NebulaResearchBackend, assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';
-import { createRenderElementBudget, type CompilerBakeResult, type PreparedCssVolume, validatePreparedVolumeDatasets } from '@cssearth/objects';
+import { createRenderElementBudget, validatePreparedVolumeDatasets, CSS_COMPILER_RENDER_BUDGET, type CompilerBakeResult, type PreparedCssVolume } from '@cssearth/objects';
 
-import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 
 // Run from the repository root with Node's test runner and the tsx loader.
 const root = projectRoot(import.meta.url);

@@ -1,6 +1,6 @@
 import { createRetainedLeafPool, registerRetainedPaintMembership } from '../rendering/retained-leaf-pool.js';
 import { formatLineNumber, orbitSegmentTransform } from './orbit-segment-presentation.js';
-import type { OrbitSegment } from './types.js';
+import type { OrbitSegment } from '@cssearth/engine';
 import type { FadeTarget } from '../stars/opacity-fader.js';
 
 /** Two paint owners for the same planned chords, selectable at mount for focused

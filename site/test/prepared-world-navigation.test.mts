@@ -5,7 +5,8 @@ import { getEventListeners } from 'node:events';
 import { parseHTML } from 'linkedom';
 import { setImmediate as nextTurn } from 'node:timers/promises';
 import { createSelectionFlight, sampleSelectionFlight, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
-import { createWorldSelectionTarget, presentWorldCamera, formatSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
+import { createWorldSelectionTarget, formatSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 
 import { required, position, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
@@ -621,7 +622,6 @@ test('saved camera endpoints survive the early owner handoff unchanged', async (
   closePose(f.navigation.capture().pose, target.pose);
 });
 
-
 test('refocusing the selected object paints one existing owner without reloading its prepared bank', async () => {
   const f = fixtureFactory();
   const initial = f.navigation.capture();
@@ -740,7 +740,6 @@ test('replacement departure uses the retained world while its previous detail ow
   assertFlightInputReleased(f);
 });
 
-
 test('the current body accepts wide-view centering only while below its prepared detail threshold', () => {
   const f = fixtureFactory(), mount = { sharedView: unusedSharedView, navigation: f.navigation };
   const close = f.navigation.capture();
@@ -821,7 +820,6 @@ test('a wheel, click or key between bodies hurries a prepared navigation to the 
     closePose(hurried.pose, normal.pose);
   }
 });
-
 
 test('only the departing owner receives departure publications', async () => {
   const f = fixtureFactory(), modes: (boolean | undefined)[] = [];

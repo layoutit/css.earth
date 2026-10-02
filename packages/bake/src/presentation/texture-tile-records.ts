@@ -1,4 +1,4 @@
-import { type PreparedTextureTile, type PreparedTextureTileLeaves, type PreparedVariant, requireTextureTileLeaves } from '@cssearth/objects';
+import { requireTextureTileLeaves, textureTileLeafStyles, type PreparedTextureTile, type PreparedTextureTileLeaves, type PreparedVariant } from '@cssearth/objects';
 import { rebuildPropertyTable } from './property-table.ts';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { scanCssDeclarations } from './css-declaration-scanner.ts';
@@ -13,7 +13,6 @@ import { scanCssDeclarations } from './css-declaration-scanner.ts';
 // prepared values are literal, resolved at the initial tile; the runtime writes a leaf's final values on each level
 // switch (packages/renderer/src/rendering/prepared-texture-levels.ts, createTextureTileWriter), so no variable or
 // `calc()` reaches the page. A later bindings run expands the records back to the variable form first.
-import { textureTileLeafStyles } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
 
 interface Property { name: string; value: string; custom: boolean }
 interface TreeNode { parent: number; style: string; properties: readonly number[] }

@@ -1,5 +1,5 @@
 import { normalizeOrThrow, cross3 as cross } from '@cssearth/core';
-import type { Vector3, Matrix3 } from "@cssearth/renderer/solar-system/types.ts";
+import type { Vector3, FlatMatrix3 as Matrix3 } from '@cssearth/engine';
 import type { SolarGeometry } from "./solar-geometry.ts";
 // Builds the ecliptic presentation frame of a body: where each body-fixed direction (+Z north pole, +X prime meridian)
 // lands in the CSS scene the retained camera orbits (+x right, +y down, +z toward the viewer). Prepared once per body

@@ -1,5 +1,5 @@
 import { TRACKBALL_DRAG_INERTIA } from "@cssearth/engine";
-import { SURFACE_FLY_TO } from './surface-fly-to.js';
+import { SURFACE_FLY_TO } from '@cssearth/objects';
 export type ActiveMode = 'idle' | 'drag' | 'inertia' | 'fly-to';
 export type InterruptionMode = 'drag' | 'pointer' | 'wheel' | 'fly-to' | 'programmatic' | 'disabled' | 'destroy';
 interface DragDiagnostics {

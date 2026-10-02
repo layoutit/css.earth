@@ -1,5 +1,6 @@
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-import type { Vector2, Vector3, Matrix3, Matrix3dLike } from './types.js';
+import type { Vector3 } from '../navigation/math-types.js';
+import type { Vector2, Matrix3, Matrix3dLike } from './types.js';
 import type { SilhouetteEllipse } from './types.js';
 export interface OffAxisFrame {radial:Vector2;sinTheta:number;cosTheta:number;tanTheta:number;}
 // Distance at which the body's silhouette has the given on-screen radius

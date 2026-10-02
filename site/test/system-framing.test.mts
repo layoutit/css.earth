@@ -6,7 +6,9 @@ import contextInput from '../../src/objects/sun/prepared/world-context.json' wit
 import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { bodyViewAtCamera } from '../overview-context.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
-import { createWorldSelectionTarget, presentWorldCamera, parseSharedView, savedWorldCamera, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
+import { createWorldSelectionTarget, parseSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
+import { worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/engine';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { SYSTEM_FRAMING_ANGLES } from '../runtime-policy.mts';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 
@@ -160,7 +162,7 @@ test('selecting the Milky Way from Local Group zooms in to the galaxy while keep
 
 test('galactic breadcrumbs zoom straight out from the current view without panning or turning', async () => {
   const { GALACTIC_VOLUME, volumeZoomTarget } = await import('../system-framing.mts');
-  const { rotateWorldPosition, worldRotationFromQuaternion } = await import('@cssearth/renderer/navigation');
+  const { rotateWorldPosition, worldRotationFromQuaternion } = await import('@cssearth/engine');
   for (const orientationXyzw of [[0, 0, 0, 1], [.5, -.5, .5, .5]] as const) {
     const from: WorldCameraPose = { ...world, pose: { positionM: [2e12, -3e12, 1e13], orientationXyzw } };
     const viewport = { ...optics, principalOffsetPixels: [40, -20] as const };
@@ -207,7 +209,7 @@ test('a Solar System breadcrumb always restores the system framing from a Sun cl
 test('the Local Group overview frames the Milky Way and every drawn member galaxy from any angle', async () => {
   const { GALACTIC_VOLUME, drawnGalaxiesZoomTarget } = await import('../system-framing.mts');
   const members = (await import('../prepared-local-group-galaxies.json', { with: { type: 'json' } })).default as Record<string, { originM: number[] }>;
-  const { cssViewFromOrientation, rotateWorldPosition } = await import('@cssearth/renderer/navigation');
+  const { cssViewFromOrientation, rotateWorldPosition } = await import('@cssearth/engine');
   // The catalogue's Local Group members with a drawn object: M81, NGC 253, M83 and NGC 300 are drawn but belong elsewhere.
   // The association comes from the restored prepared catalogue (prepare-catalog.mts); without it only distance applies.
   const { existsSync } = await import('node:fs');

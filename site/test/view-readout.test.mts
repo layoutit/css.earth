@@ -73,7 +73,6 @@ test('prepared focus uses its own depth plane for scale and never supplies plane
   assert.equal(measureExtendedSubjectView({ ...world, pose: { ...world.pose, orientationXyzw: [0,1,0,0] } }, focus, 1000).scale, null);
 });
 
-
 test('sphere picking keeps the front hit, tangent, surface and away cases', () => {
   assert.deepEqual(pickUnitSphere([0, 0, 4], [0, 0, -2]), [0, 0, 1]);
   assert.deepEqual(pickUnitSphere([1, 0, 2], [0, 0, -1]), [1, 0, 0]);

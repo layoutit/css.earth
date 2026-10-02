@@ -1,11 +1,11 @@
 import { writeStyle } from '../rendering/retained-write.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import { worldRotationCss } from '../navigation/world-camera-math.js';
+import { worldRotationCss } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
-import { type PreparedCssSurfaceShell, validatePreparedCssSurfaceShell } from '@cssearth/objects';
+import { validatePreparedCssSurfaceShell, shellMaterialAddress, type PreparedCssSurfaceShell } from '@cssearth/objects';
 
-import { nearestFacingIndex, shellMaterialAddress } from './material-address.js';
+import { nearestFacingIndex } from './material-address.js';
 
 export interface PreparedSurfaceShellStats {
   readonly visible: boolean;

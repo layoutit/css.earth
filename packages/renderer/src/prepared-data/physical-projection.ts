@@ -1,4 +1,4 @@
-import type { Matrix4 } from '../solar-system/types.js';
+import type { Matrix4 } from '@cssearth/engine';
 
 /** Complete raw scene coordinates to CSS eye coordinates (+Z toward the eye).
  * The matrix includes scene scale and the physical translation, without the

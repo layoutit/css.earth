@@ -1,4 +1,4 @@
-import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
+import { requireObjectControls } from '@cssearth/objects';
 
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
 import { readJsonSource } from '../../sources/index.ts';

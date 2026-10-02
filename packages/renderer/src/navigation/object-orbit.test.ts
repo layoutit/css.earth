@@ -7,7 +7,7 @@ import scene from '../../../../src/objects/mercury/prepared/scene.json' with { t
 import { createRetainedCubicSkyOrbit } from './object-orbit.js';
 import { createPerspectiveDolly } from './perspective-dolly.js';
 import { presentWorldCamera } from './world-camera.js';
-import { worldRotationCss, worldRotationFromQuaternion } from './world-camera-math.js';
+import { worldRotationCss, worldRotationFromQuaternion } from '@cssearth/engine';
 
 const frame = Object.freeze({ referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [3e7, 4e7, 5e7] as const,
   presentationToReference: [0,1,0,1,0,0,0,0,1], metersPerUnit: 2, bodyRadiusM: 200 });
