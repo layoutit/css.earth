@@ -53,5 +53,7 @@ arrival, the camera turned part of the way round, and the picture seen from the 
   far galaxies behind it are part of the picture.
 - The pink and blue are the publisher's overlays of an X-ray image and a lensing mass map on a visible-light image: they show where the gas and the mass are, not light the eye would see. The overlays' own registration to the visible-light image is the publisher's and is not measured here.
 - The page opens with ecliptic north up, as every page does, so the picture arrives turned from the publisher's orientation.
+- A flight from another page keeps the travelling camera's angle, so it can arrive seeing the picture from an oblique angle or
+  nearly from the side. Opening the page directly faces the picture.
 - The size is a comoving size. The cluster is bound and does not expand with the universe; its proper size at its redshift is
   smaller by 1 + z.

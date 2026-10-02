@@ -7,7 +7,7 @@ of the sky: nothing in it has depth, and seen from the side it is a line.
 
 | Selected source | Input and meaning |
 | --- | --- |
-| [ESA/Hubble heic1317a](https://esahubble.org/images/heic1317a/) | [Record](../../sources/esahubble-heic1317a.json). Visible and near-infrared light: Hubble ACS at 475, 625, 775, 814 and 850 nm. The publisher's Large JPEG, 4002 × 3863 px (`source/source.jpg`, restored from its origin; not tracked). [CC BY 4.0](https://esahubble.org/copyright/), credit: NASA, ESA, the Hubble Heritage Team (STScI/AURA), J. Blakeslee (NRC Herzberg Astrophysics Program, Dominion Astrophysical Observatory), and H. Ford (JHU) A display composite, not calibrated photometry. |
+| [ESA/Hubble heic1317a](https://esahubble.org/images/heic1317a/) | [Record](../../sources/esahubble-heic1317a.json). Visible and near-infrared light: Hubble ACS at 475, 625, 775, 814 and 850 nm. The publisher's Large JPEG, 4002 × 3863 px (`source/source.jpg`, restored from its origin; not tracked). [CC BY 4.0](https://esahubble.org/copyright/), credit: NASA, ESA, the Hubble Heritage Team (STScI/AURA), J. Blakeslee (NRC Herzberg Astrophysics Program, Dominion Astrophysical Observatory), and H. Ford (JHU). A display composite, not calibrated photometry. |
 | [MCXC-II, Sadibekova et al. (2024)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/688/A187) | [Record](../../sources/mcxc-ii-2024.json). Row MCXC J1311.5-0120: position 197.875°, -1.3354° and redshift 0.1832, from [1999ApJS..125...35S](https://ui.adsabs.harvard.edu/abs/1999ApJS..125...35S). |
 | [Planck Collaboration (2020)](https://arxiv.org/abs/1807.06209) | [Record](../../sources/planck-2018-cosmology.json). The redshift's comoving distance in the Planck 2018 cosmology, 776 Mpc (Astropy 8.0.1, `Planck18`): the distance the picture stands at. |
 | [Gaia DR3](https://doi.org/10.1051/0004-6361/202243940) | [Record](../../sources/gaia-2023-dr3.json). The 71 sources in the frame (CDS `I/355/gaiadr3`, a cone query on the picture's centre), used only to measure where the picture lies on the sky. |
@@ -53,5 +53,7 @@ arrival, the camera turned part of the way round, and the picture seen from the 
   far galaxies behind it are part of the picture.
 - The frame covers the cluster's core only, 0.75 Mpc across.
 - The page opens with ecliptic north up, as every page does, so the picture arrives turned from the publisher's orientation.
+- A flight from another page keeps the travelling camera's angle, so it can arrive seeing the picture from an oblique angle or
+  nearly from the side. Opening the page directly faces the picture.
 - The size is a comoving size. The cluster is bound and does not expand with the universe; its proper size at its redshift is
   smaller by 1 + z.
