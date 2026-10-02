@@ -1,0 +1,32 @@
+{
+  "id": "artwork-photo-vlti",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "vlti photograph",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://commons.wikimedia.org/wiki/File:Three_Auxiliary_Telescopes_and_VLTI_building_(img_0681).jpg",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/39/Three_Auxiliary_Telescopes_and_VLTI_building_%28img_0681%29.jpg",
+      "label": "Original file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Three_Auxiliary_Telescopes_and_VLTI_building_(img_0681).jpg",
+      "checkedOn": "2026-10-02",
+      "locator": "File licence, author and original file size"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Wikimedia Commons",
+  "creators": [
+    "ESO/H.H.Heyer"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "artwork-photo-dart",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "dart artwork",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://commons.wikimedia.org/wiki/File:DART_collision-1.png",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d4/DART_collision-1.png",
+      "label": "Original file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:DART_collision-1.png",
+      "checkedOn": "2026-10-02",
+      "locator": "File licence, author and original file size"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Wikimedia Commons",
+  "creators": [
+    "NASA/Johns Hopkins APL"
+  ]
+}

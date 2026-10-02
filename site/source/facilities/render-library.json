@@ -184,6 +184,40 @@
       }
     },
     {
+      "id": "blanco-4m",
+      "path": "images/blanco-4m.webp",
+      "url": "/shell/facility-renders/blanco-4m.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 16144,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-blanco-4m",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/42"
+          }
+        ]
+      },
+      "source": {
+        "id": "blanco-4m",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/92/V%C3%ADctor_M_Blanco_4-meter_Telescope_%28noirlab-tololo-02%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Víctor_M_Blanco_4-meter_Telescope_(noirlab-tololo-02).jpg",
+        "credit": "CTIO/NOIRLab/NSF/AURA/D. Munizaga",
+        "license": "CC BY 4.0",
+        "bytes": 2966289,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
+      }
+    },
+    {
       "id": "cassini",
       "path": "images/cassini.webp",
       "url": "/shell/facility-renders/cassini.webp",
@@ -224,6 +258,80 @@
       }
     },
     {
+      "id": "chandra",
+      "path": "images/chandra.webp",
+      "url": "/shell/facility-renders/chandra.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 18828,
+      "subject": {
+        "left": 60,
+        "top": 15,
+        "width": 473,
+        "height": 267
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-chandra",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/34"
+          }
+        ]
+      },
+      "source": {
+        "id": "chandra",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/chandra.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 437749,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
+      }
+    },
+    {
+      "id": "dart",
+      "path": "images/dart.webp",
+      "url": "/shell/facility-renders/dart.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 4722,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-dart",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/36"
+          }
+        ]
+      },
+      "source": {
+        "id": "dart",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d4/DART_collision-1.png",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:DART_collision-1.png",
+        "credit": "NASA/Johns Hopkins APL",
+        "license": "Public domain",
+        "bytes": 1771611,
+        "kind": "published-artwork",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
+      }
+    },
+    {
       "id": "dawn",
       "path": "images/dawn.webp",
       "url": "/shell/facility-renders/dawn.webp",
@@ -261,6 +369,40 @@
         "bytes": 3162323,
         "kind": "official-prerendered-artwork",
         "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
+      }
+    },
+    {
+      "id": "eso-3-6m",
+      "path": "images/eso-3-6m.webp",
+      "url": "/shell/facility-renders/eso-3-6m.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 26326,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-eso-3-6m",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/40"
+          }
+        ]
+      },
+      "source": {
+        "id": "eso-3-6m",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/The_Milky_Way_and_Alpha_and_Beta_Centauri_behind_the_ESO_3_6-metre_telescope_at_La_Silla_%28eso1241c%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:The_Milky_Way_and_Alpha_and_Beta_Centauri_behind_the_ESO_3_6-metre_telescope_at_La_Silla_(eso1241c).jpg",
+        "credit": "S. Brunier/ESO",
+        "license": "CC BY 4.0",
+        "bytes": 2988593,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     },
     {
@@ -910,6 +1052,40 @@
       }
     },
     {
+      "id": "mpg-eso-2-2m",
+      "path": "images/mpg-eso-2-2m.webp",
+      "url": "/shell/facility-renders/mpg-eso-2-2m.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 23630,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-mpg-eso-2-2m",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/39"
+          }
+        ]
+      },
+      "source": {
+        "id": "mpg-eso-2-2m",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/The_MPG-ESO_2_2-metre_telescope_at_La_Silla_%28dsc_0049%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:The_MPG-ESO_2_2-metre_telescope_at_La_Silla_(dsc_0049).jpg",
+        "credit": "ESO",
+        "license": "CC BY 4.0",
+        "bytes": 1689499,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
+      }
+    },
+    {
       "id": "mro",
       "path": "images/mro.webp",
       "url": "/shell/facility-renders/mro.webp",
@@ -1378,6 +1554,40 @@
       }
     },
     {
+      "id": "vla",
+      "path": "images/vla.webp",
+      "url": "/shell/facility-renders/vla.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 16990,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-vla",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/37"
+          }
+        ]
+      },
+      "source": {
+        "id": "vla",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Rare_Nighttime_Photography_of_Very_Large_Array_Featured_in_Exhibition_at_Warehouse_1-10.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Rare_Nighttime_Photography_of_Very_Large_Array_Featured_in_Exhibition_at_Warehouse_1-10.jpg",
+        "credit": "Bettymaya Foott, NRAO/AUI/NSF",
+        "license": "CC BY 4.0",
+        "bytes": 875248,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
+      }
+    },
+    {
       "id": "vlba",
       "path": "images/vlba.webp",
       "url": "/shell/facility-renders/vlba.webp",
@@ -1441,6 +1651,40 @@
         "credit": "ESO/Y. Beletsky",
         "license": "CC BY 4.0",
         "bytes": 2381531,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
+      }
+    },
+    {
+      "id": "vlti",
+      "path": "images/vlti.webp",
+      "url": "/shell/facility-renders/vlti.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 15558,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-vlti",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/38"
+          }
+        ]
+      },
+      "source": {
+        "id": "vlti",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/39/Three_Auxiliary_Telescopes_and_VLTI_building_%28img_0681%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Three_Auxiliary_Telescopes_and_VLTI_building_(img_0681).jpg",
+        "credit": "ESO/H.H.Heyer",
+        "license": "CC BY 4.0",
+        "bytes": 3161346,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
@@ -1555,6 +1799,120 @@
         "credit": "ESO/INAF-VST/OmegaCAM/G. Lombardi",
         "license": "CC BY 4.0",
         "bytes": 6700160,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
+      }
+    },
+    {
+      "id": "webb",
+      "path": "images/webb.webp",
+      "url": "/shell/facility-renders/webb.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 15568,
+      "subject": {
+        "left": 120,
+        "top": 15,
+        "width": 352,
+        "height": 267
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-webb",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/33"
+          }
+        ]
+      },
+      "source": {
+        "id": "webb",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/webb_1.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 3166647,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
+      }
+    },
+    {
+      "id": "wise",
+      "path": "images/wise.webp",
+      "url": "/shell/facility-renders/wise.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 15574,
+      "subject": {
+        "left": 120,
+        "top": 15,
+        "width": 352,
+        "height": 267
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-wise",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/35"
+          }
+        ]
+      },
+      "source": {
+        "id": "wise",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/wise.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 5514728,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
+      }
+    },
+    {
+      "id": "wiyn-0-9m",
+      "path": "images/wiyn-0-9m.webp",
+      "url": "/shell/facility-renders/wiyn-0-9m.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 36278,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-wiyn-0-9m",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/41"
+          }
+        ]
+      },
+      "source": {
+        "id": "wiyn-0-9m",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/The_WIYN_0_9-meter_Telescope_on_Kitt_Peak_National_Observatory_%28noirlab2018g%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:The_WIYN_0_9-meter_Telescope_on_Kitt_Peak_National_Observatory_(noirlab2018g).jpg",
+        "credit": "KPNO/NOIRLab/NSF/AURA/P. Marenfeld",
+        "license": "CC BY 4.0",
+        "bytes": 2820819,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
