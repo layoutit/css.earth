@@ -36,7 +36,7 @@
     "lineOfNodesPaDeg": 20.6,
     "reference": "Leroy et al. 2021"
   },
-  "displayModel": "The photograph's light is decomposed into a midplane residual and a diffuse component spread through 32 slabs with an exponential profile of 196 pc (leroy et al.'s (2021) stellar scale length, 1.8 kpc at their 11.7 Mpc (31.7″), over 7.3, Kregel et al. 2002). Depth is modelled, not measured per pixel.",
+  "displayModel": "The photograph lies on one flat plane, the disc's midplane, as the Milky Way's backing image does. Nothing in the image has depth.",
   "coverage": "Milky Way foreground stars (Gaia DR3) are removed where they show; fainter and uncatalogued stars remain.",
   "acquisition": {
     "url": "https://cdn.eso.org/images/large/eso1315a.jpg",

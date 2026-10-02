@@ -1,7 +1,7 @@
 # Fireworks Galaxy (NGC 6946)
 
 A ground-based photograph of NGC 6946, cleaned of the Milky Way stars in front of it and colour-tied to its measured
-integrated colour, is spread through a modelled disc. Published catalogues of its supernova remnant candidates and HII
+integrated colour, lies flat on its measured disc. Published catalogues of its supernova remnant candidates and HII
 regions are drawn as dots on the same disc. Image brightness does not measure per-pixel distance.
 
 ## Sources
@@ -33,15 +33,14 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
   colour and not our dust's. Red/green 0.947 and blue/green 1.165 against 1.027 and 0.947, so red × 1.084 and
   blue × 0.813. in linear light. Removing the reddening is a choice; the other galaxies sit at high latitudes, where it is
   within RC3's error.
-- **Disc:** inclination 33°, line of nodes 243°, support 17.5 kpc (where the frame stops on its tightest side), 32 slabs with
-  an exponential of 449 pc over ±3 scale heights. No bulge: [Kormendy et al. (2010)](https://arxiv.org/abs/1009.3015) find a pseudobulge of
+- **Disc:** inclination 33°, line of nodes 243°, support 17.5 kpc (where the frame stops on its tightest side), drawn as one flat image on the midplane. No bulge: [Kormendy et al. (2010)](https://arxiv.org/abs/1009.3015) find a pseudobulge of
   under 3% of the stars in NGC 6946 and no classical bulge.
 - **Near side:** the catalogue gives the tilt, not which edge is nearer. The arms open counter-clockwise on the sky, so if they trail, as
   spiral arms do, the disc turns clockwise; with the receding side at position angle 243° that puts the near side at 333° (north-north-west).
   This is an inference from the photograph and the velocity field, not a published statement.
 - **Sky:** the photograph's sky, (2, 3, 5) of 255 at its edges, is subtracted as the background floor (5 of 255).
-- **Bytes:** 78 layer images, 2.12 MB. WebP alpha quality 80 changes no alpha value by more than 1 of 255 against lossless
-  alpha; at 70 the error jumps to 10 and the faint disc shows contours.
+- **Bytes:** one image, 584 × 638 px, 170 KB (WebP quality 70, alpha quality 80), the scale of the Milky Way's own
+  backing image. It is one flat plane, as the Milky Way's is: no slabs through the disc's thickness.
 
 ## Dots
 
@@ -74,7 +73,7 @@ arrival, then the camera turned to the side and to above the disc.
 | Near side at 333° | Inferred: trailing arms and the receding side |
 | B-V 0.51 | Measured values combined: RC3's 0.80 less Schlafly & Finkbeiner's 0.29; removing the reddening is a choice |
 | Support 17.5 kpc, fade from 13.1 kpc | Presentation: where the frame stops |
-| 32 slabs over ±3 scale heights, background floor, dot colours and tones | Presentation |
+| One flat image, 1,024 px on its face, background floor, dot colours and tones | Presentation |
 
 ## Known problems
 
@@ -84,4 +83,5 @@ arrival, then the camera turned to the side and to above the disc.
   smooth patches.
 - One flat disc with no bulge, bar or warp. THINGS rounds the tilt to whole degrees; de Blok et al. give 32.6° and 242.7°.
 - The HII regions' positions come from offsets, so they can sit a few arcseconds from their nebulae.
-- Depth is modelled: slabs are the photograph along our sight lines, so side views are approximate.
+- The image is flat: seen edge-on it is a line. Only the dots have height, and that height is drawn from the modelled
+  thickness, not measured.

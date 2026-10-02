@@ -1,7 +1,7 @@
 # NGC 1637
 
 An observatory photograph of NGC 1637, cleaned of the Milky Way stars in front of it and colour-tied to its measured
-integrated colour, is spread through a modelled disc. No catalogue of its nebulae or clusters was found, so it has no
+integrated colour, lies flat on its measured disc. No catalogue of its nebulae or clusters was found, so it has no
 dots. Image brightness does not measure per-pixel distance.
 
 ## Sources
@@ -10,7 +10,6 @@ dots. Image brightness does not measure per-pixel distance.
 | --- | --- |
 | [ESO eso1315a](https://www.eso.org/public/images/eso1315a/) | [Record](../../sources/eso-eso1315a.json). FORS1 on the Very Large Telescope in B, V and R: the publisher's Large JPEG, 1964 × 1964 px (`source/source.jpg`, restored from its origin). CC BY 4.0, credit ESO. A display composite, not calibrated photometry. |
 | [Leroy et al. (2021)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43) | [Record](../../sources/leroy-2021-phangs-alma.json). Row NGC1637: centre 70.3675°, −2.85806°, inclination 31.1 ± 5.0°, position angle 20.6 ± 10.0°: the disc the image lies on. The same row gives the stellar scale length, 1.8 kpc at their 11.7 Mpc, 31.7″, which is 1.43 kpc at the distance used here. |
-| [Kregel et al. (2002)](https://arxiv.org/abs/astro-ph/0204154) | [Record](../../sources/kregel-2002-disc-flattening.json). Sect. 4.3: discs are on average 7.3 ± 2.2 times longer than thick, so the 1.43 kpc scale length gives a 196 pc scale height. |
 | [Gaia DR3](https://doi.org/10.1051/0004-6361/202243940) with [Ren et al. (2021)](https://doi.org/10.3847/1538-4357/abcda5) | The 216 Gaia DR3 sources within 0.12° of NGC 1637's centre that Ren et al.'s criterion marks as Milky Way stars (`source/gaia-dr3-foreground.csv`, restored by the query in the Gaia record). |
 | [RC3](../../sources/rc3-1991.json) | NGC 1637's total B-V, 0.64 ± 0.02 as observed. |
 | [Local Volume Database](../../sources/lvdb-v1-1-1.json) | Distance: modulus 29.84 ± 0.11 ([Jones et al. 2009](https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J), from the expanding photosphere of its supernova 1999em), 9.29 Mpc. |
@@ -25,7 +24,7 @@ dots. Image brightness does not measure per-pixel distance.
   light are left.
 - **Colour:** tied to RC3's B-V of 0.64: red/green 1.071 and blue/green 1.031 against 1.116 and 0.900, so red × 1.042
   and blue × 0.873 in linear light.
-- **Disc:** inclination 31.1°, line of nodes 20.6°, 32 slabs with an exponential of 196 pc over ±3 scale heights. The
+- **Disc:** inclination 31.1°, line of nodes 20.6°, drawn as one flat image on the midplane. The
   support radius, 8.5 kpc, is where the frame stops on its tightest side; the image's ring median reaches its sky level
   about 7 kpc out. No bulge component: S4G's fit of this galaxy (Salo et al. 2015, model `_dbarn`) is a disc, a bar and
   a nucleus, with no spheroid.
@@ -34,8 +33,8 @@ dots. Image brightness does not measure per-pixel distance.
   the near side at 111° (east-south-east). This is an inference from the photograph and the velocity field, not a
   published statement; it reads Leroy et al.'s position angle as the receding side's, and that angle is uncertain by 10°.
 - **Sky:** the image's sky, (12, 12, 11) of 255, is subtracted as the background floor (12 of 255).
-- **Bytes:** 84 layer images, 2.10 MB, at WebP alpha quality 80, the value measured on NGC 6946, M101 and NGC 2903 in
-  this same change; it was not measured again here.
+- **Bytes:** one image, 849 × 942 px, 473 KB (WebP quality 70, alpha quality 80), the scale of the Milky Way's own
+  backing image. It is one flat plane, as the Milky Way's is: no slabs through the disc's thickness.
 
 ## Evidence
 
@@ -53,12 +52,10 @@ this tilt the side drag does not reach edge-on.
 | --- | --- |
 | Centre, inclination 31.1° ± 5°, position angle 20.6° ± 10° | Measured: Leroy et al. (2021) |
 | Distance 9.29 Mpc | Measured: Jones et al. (2009), through the Local Volume Database |
-| Scale length 1.8 kpc at 11.7 Mpc | Measured: Leroy et al. (2021) |
-| Scale height 196 pc | Inferred: the scale length over 7.3, the mean of other galaxies (Kregel et al. 2002); not measured in NGC 1637 |
 | Near side at 111° | Inferred: trailing arms and the receding side |
 | B-V 0.64 | Measured: RC3 |
 | Support 8.5 kpc, fade from 6.4 kpc | Presentation: where the frame stops |
-| 32 slabs over ±3 scale heights, background floor, alpha quality | Presentation |
+| One flat image, 1,024 px on its face, background floor | Presentation |
 
 ## Known problems
 
@@ -69,6 +66,5 @@ this tilt the side drag does not reach edge-on.
 - A faint green patch shows beside the disc's north-east edge in the app, and the field's stars and background
   galaxies inside the support radius are drawn on the disc's plane with the rest of the image. Neither was traced to
   its cause in this change.
-- One flat disc: the bar and the bright centre are spread through the disc's thickness like the rest of the light.
 - No dots: no published catalogue of the galaxy's nebulae or clusters was found on CDS.
-- Depth is modelled: slabs are the image along our sight lines, so side views are approximate.
+- The image is flat: seen edge-on it is a line. Nothing here has height.

@@ -1,7 +1,7 @@
 # Pinwheel Galaxy (M101)
 
 A ground-based photograph of M101, cleaned of the Milky Way stars in front of it and colour-tied to its measured
-integrated colour, is spread through a modelled disc. Published catalogues of its HII regions, old star clusters,
+integrated colour, lies flat on its measured disc. Published catalogues of its HII regions, old star clusters,
 supernova remnants and planetary nebulae are drawn as dots on the same disc. Image brightness does not measure per-pixel
 distance.
 
@@ -33,16 +33,15 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
   galaxy's light are left.
 - **Colour:** tied to RC3's B-V of 0.45: red/green 1.299 and blue/green 1.035 against 1.037 and 1.037, so red × 0.798
   and blue × 1.002. in linear light. The publisher's composite ran red, its H-alpha in pink.
-- **Disc:** inclination 18°, line of nodes 219°, support 29.2 kpc (where the frame stops on its tightest side), 32 slabs
-  with an exponential of 568 pc over ±3 scale heights. No bulge: S4G's bulge is flattened on the sky (axis ratio 0.59), which
+- **Disc:** inclination 18°, line of nodes 219°, support 29.2 kpc (where the frame stops on its tightest side), drawn as one flat image on the midplane. No bulge: S4G's bulge is flattened on the sky (axis ratio 0.59), which
   an oblate spheroid in a disc tilted 18° cannot be, and it holds 5% of the light. [Kormendy et al. (2010)](https://arxiv.org/abs/1009.3015) find a
   pseudobulge of under 3% of the stars in M101 and no classical bulge.
 - **Near side:** the catalogue gives the tilt, not which edge is nearer. The arms open clockwise on the sky, so if they trail, as
   spiral arms do, the disc turns counter-clockwise; with the receding side at position angle 39° that puts the near side at 309° (north-west).
   This is an inference from the photograph and the velocity field, not a published statement.
 - **Sky:** the photograph's sky, (3, 4, 4) of 255, is subtracted as the background floor (4 of 255).
-- **Bytes:** 85 layer images, 3.24 MB, from a 2,600 px face (0.73″, 24 pc per pixel). WebP alpha quality 80 changes no alpha
-  value by more than 1 of 255 against lossless alpha; at 70 the error jumps to 11.
+- **Bytes:** one image, 916 × 901 px, 409 KB (WebP quality 70, alpha quality 80), the scale of the Milky Way's own
+  backing image. It is one flat plane, as the Milky Way's is: no slabs through the disc's thickness.
 
 ## Dots
 
@@ -78,7 +77,7 @@ arrival, then the camera turned to the side and to above the disc.
 | Near side at 309° | Inferred: trailing arms and the receding side |
 | B-V 0.45 | Measured: RC3 |
 | Support 29.2 kpc, fade from 21.9 kpc | Presentation: where the frame stops |
-| 32 slabs over ±3 scale heights, background floor, face size, dot colours and tones | Presentation |
+| One flat image, 1,024 px on its face, background floor, face size, dot colours and tones | Presentation |
 
 ## Known problems
 
@@ -88,4 +87,5 @@ arrival, then the camera turned to the side and to above the disc.
 - The clusters cover ten Hubble fields over the inner disc only, so they end in straight edges.
 - The Hodge et al. positions are from 1990 plates and can sit a few arcseconds from their nebulae.
 - Foreground stars on the galaxy's light and those too faint for Gaia remain.
-- Depth is modelled: slabs are the photograph along our sight lines, so side views are approximate.
+- The image is flat: seen edge-on it is a line. Only the dots have height, and that height is drawn from the modelled
+  thickness, not measured.

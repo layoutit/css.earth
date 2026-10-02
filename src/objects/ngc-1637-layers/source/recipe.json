@@ -115,13 +115,13 @@
     ]
   },
   "bake": {
-    "maxFacePixels": 1964,
+    "maxFacePixels": 1024,
     "crossAxisSlices": 32,
     "crossAxisDepthPixels": 97,
     "backgroundFloor": 0.0471,
     "encoding": {
       "format": "webp",
-      "quality": 82,
+      "quality": 70,
       "alphaQuality": 80
     },
     "diffuseFacePixels": 80,
@@ -133,7 +133,8 @@
       "bv": 0.64,
       "source": "rc3-1991",
       "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives a total (B-V)T of 0.64 as observed; red and blue are scaled in linear light so the disc's mean colour matches the engine's catalogue colour for that index, the function that colours the star dots."
-    }
+    },
+    "flat": true
   },
   "provenance": {
     "path": "provenance.json"

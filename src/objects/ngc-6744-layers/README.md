@@ -1,7 +1,7 @@
 # NGC 6744
 
 An observatory photograph of NGC 6744, cleaned of the Milky Way stars in front of it and colour-tied to its measured
-integrated colour, is spread through a modelled disc. No catalogue of its nebulae or clusters was found, so it has no
+integrated colour, lies flat on its measured disc. No catalogue of its nebulae or clusters was found, so it has no
 dots. Image brightness does not measure per-pixel distance.
 
 ## Sources
@@ -11,7 +11,6 @@ dots. Image brightness does not measure per-pixel distance.
 | [ESO eso1118a](https://www.eso.org/public/images/eso1118a/) | [Record](../../sources/eso-eso1118a.json). The Wide Field Imager on the MPG/ESO 2.2-metre telescope, in B, V, a red filter and Hα: the publisher's Large JPEG, 5312 × 4472 px over 21.07 × 17.74 arcmin (`source/source.jpg`, restored from its origin). CC BY 4.0, credit ESO. A display composite, not calibrated photometry. |
 | [Lang et al. (2020)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/897/122) | [Record](../../sources/lang-2020-phangs-kinematics.json). Table 1, row NGC6744: centre 287.44208°, −63.85754°, inclination 53.5°, position angle 15.4°, from the CO velocity field: the disc the image lies on. |
 | [Leroy et al. (2021)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43) | [Record](../../sources/leroy-2021-phangs-alma.json). Row NGC6744: stellar scale length 4.8 kpc at their 9.39 Mpc, 105.4″, which is 4.86 kpc at the distance used here. The same row gives inclination 52.7 ± 2.2° and position angle 14.0 ± 0.2°, within a degree and a half of Lang et al.'s. |
-| [Kregel et al. (2002)](https://arxiv.org/abs/astro-ph/0204154) | [Record](../../sources/kregel-2002-disc-flattening.json). Sect. 4.3: discs are on average 7.3 ± 2.2 times longer than thick, so the 4.86 kpc scale length gives a 666 pc scale height. |
 | [Gaia DR3](https://doi.org/10.1051/0004-6361/202243940) with [Ren et al. (2021)](https://doi.org/10.3847/1538-4357/abcda5) | The 5,768 Gaia DR3 sources within 0.3° of NGC 6744's centre that Ren et al.'s criterion marks as Milky Way stars (`source/gaia-dr3-foreground.csv`, restored by the query in the Gaia record). |
 | [Ho et al. (2011)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/197/21) | [Record](../../sources/ho-2011-cgs.json). The Carnegie-Irvine Galaxy Survey's total magnitudes, B = 9.87 ± 0.21 and V = 9.25 ± 0.11 as observed: a B-V of 0.62. RC3 has no B-V for this galaxy. |
 | [Local Volume Database](../../sources/lvdb-v1-1-1.json) | Distance: modulus 29.89 ± 0.14 ([Tully et al. 2009](https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T), tip of the red giant branch), 9.51 Mpc. |
@@ -26,7 +25,7 @@ dots. Image brightness does not measure per-pixel distance.
   image are removed where they show; 563 on extended light are left.
 - **Colour:** tied to a B-V of 0.62: red/green 1.118 and blue/green 1.186 against 1.105 and 0.909, so red × 0.989 and
   blue × 0.767 in linear light. The publisher's composite ran blue.
-- **Disc:** inclination 53.5°, line of nodes 195.4°, 32 slabs with an exponential of 666 pc over ±3 scale heights. The
+- **Disc:** inclination 53.5°, line of nodes 195.4°, drawn as one flat image on the midplane. The
   support radius, 27.9 kpc, is where the frame stops on its tightest side. No bulge component: no published
   bulge-plus-disc fit was found (the galaxy is outside S4G, which kept to Galactic latitudes above 30°).
 - **Near side:** the catalogue gives the tilt, not which edge is nearer. The arms open clockwise on the sky, so if they
@@ -34,8 +33,8 @@ dots. Image brightness does not measure per-pixel distance.
   the near side at 285° (west-north-west). This is an inference from the photograph and the velocity field, not a
   published statement, and it reads Lang et al.'s position angle as the receding side's.
 - **Sky:** the image's sky, (18, 14, 16) of 255 at the frame's edge, is subtracted as the background floor (18 of 255).
-- **Bytes:** 83 layer images, 3.45 MB, at WebP alpha quality 80, the value measured on NGC 6946, M101 and NGC 2903 in
-  this same change; it was not measured again here.
+- **Bytes:** one image, 932 × 609 px, 281 KB (WebP quality 70, alpha quality 80), the scale of the Milky Way's own
+  backing image. It is one flat plane, as the Milky Way's is: no slabs through the disc's thickness.
 
 ## Evidence
 
@@ -52,12 +51,10 @@ arrival, then the camera turned to the side and to above the disc.
 | --- | --- |
 | Centre, inclination 53.5°, position angle 15.4° | Measured: Lang et al. (2020) Table 1 |
 | Distance 9.51 Mpc | Measured: Tully et al. (2009), through the Local Volume Database |
-| Scale length 4.8 kpc at 9.39 Mpc | Measured: Leroy et al. (2021) |
-| Scale height 666 pc | Inferred: the scale length over 7.3, the mean of other galaxies (Kregel et al. 2002); not measured in NGC 6744 |
 | Near side at 285° | Inferred: trailing arms and the receding side |
 | B-V 0.62 | Measured: the difference of two total magnitudes of Ho et al. (2011), uncertain by about 0.24 |
 | Support 27.9 kpc, fade from 20.9 kpc | Presentation: where the frame stops |
-| 32 slabs over ±3 scale heights, background floor, alpha quality | Presentation |
+| One flat image, 1,024 px on its face, background floor | Presentation |
 
 ## Known problems
 
@@ -65,6 +62,5 @@ arrival, then the camera turned to the side and to above the disc.
   Removed stars leave smooth pale patches up close.
 - The colour tie rests on a B-V uncertain by about 0.24 magnitudes.
 - The companion NGC 6744A, in the frame's corner, is spread into the disc's plane like the rest of the image.
-- One flat disc: the bar and the bright centre are spread through the disc's thickness like the rest of the light.
 - No dots: no published catalogue of the galaxy's nebulae or clusters was found on CDS.
-- Depth is modelled: slabs are the image along our sight lines, so side views are approximate.
+- The image is flat: seen edge-on it is a line. Nothing here has height.

@@ -1,7 +1,7 @@
 # NGC 2903
 
 A survey image of NGC 2903, cleaned of the Milky Way stars in front of it and colour-tied to its measured integrated
-colour, is spread through a modelled disc. Published catalogues of the HII regions of its bar and of its supernova
+colour, lies flat on its measured disc. Published catalogues of the HII regions of its bar and of its supernova
 remnants are drawn as dots on the same disc. Image brightness does not measure per-pixel distance.
 
 ## Sources
@@ -28,7 +28,7 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
   extended light are left, most of them the galaxy's own knots that the criterion takes for stars.
 - **Colour:** tied to RC3's B-V of 0.67: red/green 1.18 and blue/green 0.615 against 1.137 and 0.882, so red × 0.963
   and blue × 1.434. in linear light. The survey's composite ran yellow.
-- **Disc:** inclination 65°, line of nodes 204°, 32 slabs with an exponential of 334 pc over ±3 scale heights. The support
+- **Disc:** inclination 65°, line of nodes 204°, drawn as one flat image on the midplane. The support
   radius, 20 kpc, is where the image's ring median reaches its sky level, 7.3′ from the centre; the frame reaches 28.5 kpc.
   No bulge: S4G's central component is the 0.32 kpc star-forming centre (n = 0.50), not a spheroid, and holds 7% of the
   light.
@@ -36,8 +36,8 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
   spiral arms do, the disc turns clockwise; with the receding side at position angle 204° that puts the near side at 294° (west-north-west).
   This is an inference from the photograph and the velocity field, not a published statement.
 - **Sky:** the image's sky, (8, 7, 5) of 255, is subtracted as the background floor (8 of 255).
-- **Bytes:** 65 layer images, 1.03 MB. WebP alpha quality 80 changes no alpha value by more than 2 of 255 against lossless
-  alpha; at 70 the error jumps to 11 and the faint disc shows contours.
+- **Bytes:** one image, 418 × 693 px, 137 KB (WebP quality 70, alpha quality 80), the scale of the Milky Way's own
+  backing image. It is one flat plane, as the Milky Way's is: no slabs through the disc's thickness.
 
 ## Dots
 
@@ -70,13 +70,13 @@ arrival, then the camera turned to the side and to above the disc.
 | Near side at 294° | Inferred: trailing arms and the receding side |
 | B-V 0.67 | Measured: RC3 |
 | Support 20 kpc, fade from 15.0 kpc | Presentation: where the image's light reaches its sky level |
-| 32 slabs over ±3 scale heights, background floor, dot colours and tones | Presentation |
+| One flat image, 1,024 px on its face, background floor, dot colours and tones | Presentation |
 
 ## Known problems
 
 - The survey image is shallow: the outer arms are faint and grainy, and the survey's sky subtraction removes some of the
   galaxy's faint outer light.
-- One flat disc: the bar and the star-forming centre are spread through the disc's thickness like the rest of the light.
 - The dot catalogues are small: the HII regions cover the bar zone only, and five supernova remnants are known.
 - A few foreground stars remain, with the survey's coloured rings around the brightest.
-- Depth is modelled: slabs are the image along our sight lines, so side views are approximate.
+- The image is flat: seen edge-on it is a line. Only the dots have height, and that height is drawn from the modelled
+  thickness, not measured.

@@ -115,13 +115,13 @@
     ]
   },
   "bake": {
-    "maxFacePixels": 3000,
+    "maxFacePixels": 1024,
     "crossAxisSlices": 32,
     "crossAxisDepthPixels": 97,
     "backgroundFloor": 0.0706,
     "encoding": {
       "format": "webp",
-      "quality": 82,
+      "quality": 70,
       "alphaQuality": 80
     },
     "diffuseFacePixels": 80,
@@ -133,7 +133,8 @@
       "bv": 0.62,
       "source": "ho-2011-cgs",
       "basis": "The Carnegie-Irvine Galaxy Survey (Ho et al. 2011, CDS J/ApJS/197/21) gives total magnitudes B = 9.87 +/- 0.21 and V = 9.25 +/- 0.11 as observed, a B-V of 0.62; RC3 has no B-V for this galaxy. Red and blue are scaled in linear light so the disc's mean colour matches the engine's catalogue colour for that index, the function that colours the star dots."
-    }
+    },
+    "flat": true
   },
   "provenance": {
     "path": "provenance.json"

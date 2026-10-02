@@ -42,7 +42,7 @@
     "lineOfNodesPaDeg": 243,
     "reference": "Walter et al. 2008"
   },
-  "displayModel": "The photograph's light is decomposed into a midplane residual and a diffuse component spread through 32 slabs with an exponential profile of 449 pc (leroy et al.'s (2008) stellar scale length, 2.5 kpc at their 5.9 Mpc (87.4″), over 7.3, Kregel et al. 2002). Depth is modelled, not measured per pixel.",
+  "displayModel": "The photograph lies on one flat plane, the disc's midplane, as the Milky Way's backing image does. Nothing in the image has depth.",
   "coverage": "Milky Way foreground stars (Gaia DR3) are removed where they show; fainter and uncatalogued stars remain.",
   "acquisition": {
     "url": "https://storage.noirlab.edu/media/archives/images/large/noao-ngc6946kpno.jpg",
