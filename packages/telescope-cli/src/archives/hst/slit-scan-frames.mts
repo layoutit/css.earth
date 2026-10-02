@@ -1,8 +1,8 @@
+import { requiredFiniteCard as cardNumber, requiredTrimmedTextCard as cardText } from '@cssearth/fits';
 /** The STIS slit-scan frames a map is read from: their headers, background-subtracted read windows and row spectra, the
  * geometry of every exposure from Horizons, and where the body sat in each visit, measured from the scan itself. */
 import { stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses, type HorizonsResponses } from './line-stack-ephemeris.mts';
@@ -14,16 +14,6 @@ export const MJD_TO_JD = 2400000.5, ARCSEC_PER_RADIAN = 206264.806247, DEGREE = 
 const VISIT_LENGTH = 6;
 export const REPOSITORY = WORKSPACE;
 
-const cardNumber = (header: FitsHeader, key: string, name: string) => {
-  const value = header[key];
-  if (typeof value !== 'number' || !Number.isFinite(value)) throw new Error(`${name} carries no numeric ${key}.`);
-  return value;
-};
-const cardText = (header: FitsHeader, key: string, name: string) => {
-  const value = header[key];
-  if (typeof value !== 'string' || !value.trim()) throw new Error(`${name} carries no ${key}.`);
-  return value.trim();
-};
 
 // ---- frames -----------------------------------------------------------------------------------------------------------
 export interface ScanFrameHeader {

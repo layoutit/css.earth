@@ -23,6 +23,7 @@
  *   which `prepare-catalogue-points.mts src/objects/nearby-universe-galaxies desi-bright-galaxies` writes): the recipe's colour
  *   stops.
  */
+import { medianUpperMiddle as median } from '@cssearth/core';
 import { createReadStream } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -42,11 +43,6 @@ const cell = (ra: number, dec: number) => {
   return band * CELLS_PER_BAND + Math.min(CELLS_PER_BAND - 1, Math.floor((ra % 360 + 360) % 360 / 360 * CELLS_PER_BAND));
 };
 const bin = (z: number) => z >= Z_FROM && z < Z_TO ? Math.min(BINS - 1, Math.floor((z - Z_FROM) / Z_BIN)) : -1;
-const median = (values: readonly number[]) => {
-  if (!values.length) throw new TypeError('No occupied cells to take a median of.');
-  const sorted = [...values].sort((a, b) => a - b);
-  return sorted[sorted.length >> 1]!;
-};
 // Planck 2018 (Planck Collaboration 2020, A&A 641, A6; Astropy's Planck18): H0 67.66 km/s/Mpc, Omega_m 0.30966, flat. The
 // luminosity distance only sets the magnitude cut, so the radiation term Astropy adds is left out (under 0.01 mag here).
 const H0 = 67.66, OMEGA_M = 0.30966, C_KM_S = 299792.458;

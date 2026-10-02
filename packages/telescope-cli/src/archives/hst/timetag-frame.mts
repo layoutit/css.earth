@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { requiredFiniteCard as cardNumber, requiredTrimmedTextCard as cardText } from '@cssearth/fits';
 /** Rebuild one STIS TIME-TAG exposure in a moving target's own rest frame.
  *
  *   node packages/telescope-cli/src/archives/hst/timetag-frame.mts <definition id> <files directory> <output directory> [--fetch] [--receipt]
@@ -63,16 +64,6 @@ export interface EventsFile {
   readonly intervals: readonly GoodTimeInterval[];
 }
 
-const cardNumber = (header: Record<string, unknown>, key: string, name: string) => {
-  const value = header[key];
-  if (typeof value !== 'number' || !Number.isFinite(value)) throw new Error(`${name} carries no numeric ${key}.`);
-  return value;
-};
-const cardText = (header: Record<string, unknown>, key: string, name: string) => {
-  const value = header[key];
-  if (typeof value !== 'string' || !value.trim()) throw new Error(`${name} carries no ${key}.`);
-  return value.trim();
-};
 
 /** What the file says about itself, and its good-time intervals. The events themselves are read later, in blocks.
  *

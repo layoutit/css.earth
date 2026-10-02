@@ -1,3 +1,5 @@
+export { normalize3OrZero as normalizeVector } from '@cssearth/core';
+import { normalize3OrZero as normalizeVector } from '@cssearth/core';
 export type Vector3 = [number, number, number];
 export type ReadonlyVector3 = readonly [number, number, number];
 export interface EllipsoidShape {equatorialRadius: number; polarRadius: number}
@@ -7,11 +9,6 @@ export interface EllipsoidHit {position: Vector3; normal: Vector3; distance?: nu
 export interface Point2 {x: number; y: number}
 export interface SilhouetteOptions extends EllipsoidShape {latitudeSegments: number; longitudeSegments: number; right: ReadonlyVector3; down: ReadonlyVector3; scaledRadiusX: number; scaledRadiusY: number; outputSize: number; supersampling: number}
 /** Preparation-only oblate geometry. Callers supply physical/display facts. */
-export function normalizeVector(vector: ReadonlyVector3): Vector3 {
-  const length = Math.hypot(...vector) || 1;
-  return [vector[0] / length, vector[1] / length, vector[2] / length];
-}
-
 export function dotVector(left: ReadonlyVector3, right: ReadonlyVector3) {
   return left[0] * right[0] + left[1] * right[1] + left[2] * right[2];
 }

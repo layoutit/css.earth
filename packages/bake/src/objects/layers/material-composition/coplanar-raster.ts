@@ -1,4 +1,4 @@
-import { cross3 as cross, dotN as dot } from '@cssearth/core';
+import { normalizeOrThrow, cross3 as cross, dotN as dot } from '@cssearth/core';
 import sharp from 'sharp';
 import { leafRasterScale } from '../../../scene/index.ts';
 
@@ -6,9 +6,7 @@ const SAMPLE_OFFSETS = [[.25, .25], [.75, .25], [.25, .75], [.75, .75]];
 // Four premultiplied RGBA float samples per pixel: bound preparation memory.
 const MAX_PIXELS = 8 * 1024 * 1024;
 function normalize(vector: readonly number[]) {
-  const length = Math.hypot(...vector);
-  if (!(length > 0)) throw new Error('Degenerate prepared plane');
-  return vector.map(value => value / length);
+  return normalizeOrThrow(vector, () => new Error('Degenerate prepared plane'));
 }
 function contains(points: readonly (readonly number[])[], x: number, y: number) {
   let inside = false;
