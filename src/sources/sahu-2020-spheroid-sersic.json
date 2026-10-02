@@ -1,0 +1,42 @@
+{
+  "id": "sahu-2020-spheroid-sersic",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Defining the (black hole)-spheroid connection with the discovery of morphology-dependent substructure in the MBH-nsph and MBH-Re,sph diagrams: new tests for advanced theories and realistic simulations",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2020ApJ...903...97S"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...903...97S",
+      "label": "2020ApJ...903...97S"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2101.04895",
+      "checkedOn": "2026-10-02",
+      "locator": "Table A1 (Galaxy Sample), row 49, NGC 1275: 3.6 micron, type E, major-axis spheroid Sérsic index n_maj = 4.78, R_e,maj = 70.69 arcsec, mu_e,maj = 22.62 mag per square arcsec, from the decomposition in Sahu, Graham & Davis (2019, ApJ 876, 155: an inclined central disk plus an extended Sérsic spheroid). Row 33, NGC 4889: n_maj = 8.10, R_e,maj = 119.70 arcsec, from Savorgnan & Graham (2016); not used."
+    }
+  ],
+  "creators": [
+    "N. Sahu",
+    "A. W. Graham",
+    "B. L. Davis"
+  ],
+  "publisher": "ApJ 903, 97",
+  "publicationDate": "2020",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Sahu et al. (2020), ApJ 903, 97.",
+      "scope": "NGC 1275's Sérsic fit",
+      "evidence": "https://arxiv.org/abs/2101.04895"
+    }
+  ]
+}

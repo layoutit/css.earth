@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-4874-volume",
+  "name": "NGC 4874",
+  "defaultDataset": "sdss-optical",
+  "bank": {
+    "path": "src/objects/ngc-4874-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "labs/nebula/models/ngc-4874/experiment.json"
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/ngc-4874-volume/source/delivery.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "sdss-optical",
+      "label": "SDSS · optical",
+      "title": "NGC 4874 in visible light",
+      "description": "The Sloan Digital Sky Survey's view of NGC 4874 with the Milky Way stars removed (NOX) and neighbouring galaxies masked, its light spread in depth through the spheroid of Kluge et al.'s published Sérsic fit. Depth is modelled, not measured, and the spheroid ends where the survey image fades into its sky.",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "detail": "1800 × 1800 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "SDSS g, r, i"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "8.0 × 8.0 arcmin"
+        },
+        {
+          "id": "distance",
+          "label": "Distance",
+          "value": "95.1 Mpc"
+        }
+      ],
+      "input": "sdss-optical",
+      "preview": {
+        "path": ".local/nebula-lab/planetary/ngc-4874-inferred-original.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=1800&height=1800&fov=0.133333&projection=TAN&coordsys=icrs&ra=194.898788&dec=27.959389&format=jpg"
+      }
+    }
+  ]
+}

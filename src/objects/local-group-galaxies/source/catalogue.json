@@ -18,7 +18,7 @@
   },
   "provenance": {
     "path": "provenance.json",
-    "bytes": 9162
+    "bytes": 11032
   },
   "catalogueSourceId": "lvdb-v1.1.1",
   "membershipSourceId": "mcconnachie-table1-2019",
@@ -257,6 +257,18 @@
     "ngc_3351": {
       "id": "m95",
       "focusRadiusM": 370281309778964050000
+    },
+    "ngc_1275": {
+      "id": "ngc-1275",
+      "focusRadiusM": 2.0554624073588445e+21
+    },
+    "ngc_4889": {
+      "id": "ngc-4889",
+      "focusRadiusM": 3.414425671023457e+21
+    },
+    "ngc_4874": {
+      "id": "ngc-4874",
+      "focusRadiusM": 3.414425671023457e+21
     }
   },
   "distanceOverrides": {
@@ -324,6 +336,75 @@
         "subgroup": "virgo",
         "basis": "The Virgo Cluster Catalog classes VCC 1226 (NGC 4472) a member; it is the brightest galaxy of the cluster.",
         "sourceRef": "Binggeli1985AJ.....90.1681B"
+      }
+    },
+    "ngc_1275": {
+      "name": "NGC 1275",
+      "aliases": [
+        "Perseus A",
+        "3C 84",
+        "UGC 2669",
+        "PGC 12429"
+      ],
+      "raDeg": 49.950981,
+      "decDeg": 41.511681,
+      "positionRef": "Skrutskie2006AJ....131.1163S",
+      "distance": {
+        "valuePc": 68700000,
+        "minusPc": 1100000,
+        "plusPc": 1100000,
+        "method": "group-average",
+        "sourceRef": "Tully2023ApJ...944...94T"
+      },
+      "membership": {
+        "group": "galaxy-cluster",
+        "subgroup": "perseus",
+        "basis": "Kluge et al. (2020) list NGC 1275 as the brightest cluster galaxy of Abell 426, the Perseus Cluster.",
+        "sourceRef": "Kluge2020ApJS..247...43K"
+      }
+    },
+    "ngc_4889": {
+      "name": "NGC 4889",
+      "aliases": [
+        "PGC 44715"
+      ],
+      "raDeg": 195.033737,
+      "decDeg": 27.977024,
+      "positionRef": "Skrutskie2006AJ....131.1163S",
+      "distance": {
+        "valuePc": 95100000,
+        "minusPc": 1100000,
+        "plusPc": 1100000,
+        "method": "group-average",
+        "sourceRef": "Tully2023ApJ...944...94T"
+      },
+      "membership": {
+        "group": "galaxy-cluster",
+        "subgroup": "coma",
+        "basis": "Lauer et al. (2014) list NGC 4889 as the brightest cluster galaxy of Abell 1656, the Coma Cluster.",
+        "sourceRef": "Lauer2014ApJ...797...82L"
+      }
+    },
+    "ngc_4874": {
+      "name": "NGC 4874",
+      "aliases": [
+        "PGC 44628"
+      ],
+      "raDeg": 194.898788,
+      "decDeg": 27.959389,
+      "positionRef": "Skrutskie2006AJ....131.1163S",
+      "distance": {
+        "valuePc": 95100000,
+        "minusPc": 1100000,
+        "plusPc": 1100000,
+        "method": "group-average",
+        "sourceRef": "Tully2023ApJ...944...94T"
+      },
+      "membership": {
+        "group": "galaxy-cluster",
+        "subgroup": "coma",
+        "basis": "Lauer et al. (2014) list NGC 4874 as the second-ranked galaxy of Abell 1656, the Coma Cluster.",
+        "sourceRef": "Lauer2014ApJ...797...82L"
       }
     }
   },

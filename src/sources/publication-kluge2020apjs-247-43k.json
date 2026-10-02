@@ -1,0 +1,56 @@
+{
+  "id": "publication-kluge2020apjs-247-43k",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kluge et al. (2020), ApJS 247, 43: Structure of brightest cluster galaxies and intracluster light",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "Kluge2020ApJS..247...43K"
+    },
+    {
+      "type": "ads",
+      "value": "2020ApJS..247...43K"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/247/43"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/247/43",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/247/43/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "table1.dat, row A426: BCG NGC 1275, z = 0.017560, 0.359 kpc per arcsec; row A1656: BCG NGC 4874, z = 0.023100, 0.469 kpc per arcsec. table4.dat (Sérsic fits to the semimajor-axis g' profiles of the BCG and intracluster light), row A1656: single Sérsic n1 = 9.00 +/- 0.90, re1 = 784 (+291.1, -227.6) kpc, SBe1 = 29.30 +/- 0.62; row A426: double Sérsic n1 = 4.25 +/- 0.28, re1 = 14.55 kpc, n2 = 0.44 +/- 0.04, re2 = 97.04 kpc."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Kluge et al. (2020), ApJS 247, 43.",
+      "scope": "NGC 1275's cluster membership and NGC 4874's Sérsic fit",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/247/43/ReadMe"
+    }
+  ],
+  "creators": [
+    "M. Kluge",
+    "B. Neureiter",
+    "A. Riffeser",
+    "R. Bender",
+    "C. Goessl",
+    "U. Hopp",
+    "M. Schmidt",
+    "C. Ries",
+    "N. Brosch"
+  ],
+  "publisher": "ApJS 247, 43",
+  "publicationDate": "2020"
+}

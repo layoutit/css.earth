@@ -1,0 +1,115 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "sdss-optical",
+      "path": ".local/nebula-lab/planetary/ngc-4874-inferred-original.jpg",
+      "origin": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=1800&height=1800&fov=0.133333&projection=TAN&coordsys=icrs&ra=194.898788&dec=27.959389&format=jpg",
+      "sourceUrl": "https://www.sdss.org/",
+      "title": "SDSS9 color (g, r, i)",
+      "credit": "Sloan Digital Sky Survey; colour HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+      "displayCredit": "SDSS",
+      "acquisition": "A 1800 x 1800 px tangent-plane cutout of the colour HiPS CDS/P/SDSS9/color from the CDS hips2fits service, downloaded unchanged by the Nebula Lab recipe (labs/nebula/models/ngc-4874/experiment.json) into its ignored cache.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "sdss-dr9-color-hips",
+            "role": "material",
+            "evidence": "https://www.sdss.org/"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "sdss-optical",
+      "license": "SDSS images: CC-BY (https://www.sdss.org/collaboration/#image-use); the CDS HiPS distribution: ODbL-1.0. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "SDSS g, r, i",
+            "evidence": "https://www.sdss.org/",
+            "reason": "The survey's colour composite of coadded images; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-1",
+      "path": "src/objects/ngc-4874-volume/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/ngc-4874-volume/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/ngc-4874-volume/source/replay-references.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/ngc-4874-volume/source/bake-inputs/references/00-experiment.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-5",
+      "path": "src/objects/ngc-4874-volume/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "compact-compact-emission-0-f32-gz",
+      "path": "src/objects/ngc-4874-volume/source/compact/emission-0.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-emission-1-f32-gz",
+      "path": "src/objects/ngc-4874-volume/source/compact/emission-1.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-emission-2-f32-gz",
+      "path": "src/objects/ngc-4874-volume/source/compact/emission-2.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-model-json",
+      "path": "src/objects/ngc-4874-volume/source/compact/model.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    }
+  ]
+}

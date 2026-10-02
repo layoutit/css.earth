@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-4889",
+  "displayName": "NGC 4889",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "95.1 Mpc (−1,100,000 / +1,100,000 pc)",
+        "source": {
+          "catalogueId": "publication-tully2023apj-944-94t",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "label": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94): group 1PGC 12429 (NGC 1275) DMzp = 34.185 +/- 0.036, 68.7 Mpc; group 1PGC 44715 (NGC 4889; Table 2 puts NGC 4874, PGC 44628, in it) DMzp = 34.891 +/- 0.025, 95.1 Mpc. A group's distance averages its members'.",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 195.0°, Dec 27.98°",
+        "source": {
+          "catalogueId": "publication-skrutskie2006aj-131-1163s",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
+          "label": "Skrutskie et al. (2006), AJ 131, 1163: the Two Micron All Sky Survey; Extended Source Catalog (CDS VII/233) rows 2MASX J12294679+0800014 (M49), 2MASX J03194823+4130420 (NGC 1275), 2MASX J13000809+2758372 (NGC 4889) and 2MASX J12593570+2757338 (NGC 4874).",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Galaxy cluster, Coma",
+        "source": {
+          "catalogueId": "publication-lauer2014apj-797-82l",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/797/82",
+          "label": "Lauer et al. (2014), ApJ 797, 82 (Brightest cluster galaxies at the present epoch), Table 1 (CDS J/ApJ/797/82): Abell 1656, BCG N4889, heliocentric velocity 6498 +/- 10 km/s; Table 3: Abell 1656, second-ranked galaxy N4874, 7176 +/- 15 km/s.",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "sdss-optical",
+    "controls": [
+      {
+        "id": "sdss-optical",
+        "label": "SDSS · optical",
+        "thumbnail": "ngc-4889-dataset-sdss-optical.webp",
+        "volume": {
+          "objectId": "ngc-4889-volume",
+          "datasetId": "sdss-optical",
+          "surface": "sdss-optical"
+        },
+        "source": {
+          "id": "ngc-4889-volume-sdss-optical",
+          "path": "../../ngc-4889-volume/source/manifest.json",
+          "url": "https://www.sdss.org/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94): group 1PGC 12429 (NGC 1275) DMzp = 34.185 +/- 0.036, 68.7 Mpc; group 1PGC 44715 (NGC 4889; Table 2 puts NGC 4874, PGC 44628, in it) DMzp = 34.891 +/- 0.025, 95.1 Mpc. A group's distance averages its members'.",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Skrutskie et al. (2006), AJ 131, 1163: the Two Micron All Sky Survey; Extended Source Catalog (CDS VII/233) rows 2MASX J12294679+0800014 (M49), 2MASX J03194823+4130420 (NGC 1275), 2MASX J13000809+2758372 (NGC 4889) and 2MASX J12593570+2757338 (NGC 4874).",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Lauer et al. (2014), ApJ 797, 82 (Brightest cluster galaxies at the present epoch), Table 1 (CDS J/ApJ/797/82): Abell 1656, BCG N4889, heliocentric velocity 6498 +/- 10 km/s; Table 3: Abell 1656, second-ranked galaxy N4874, 7176 +/- 15 km/s.",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/797/82"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+      "credit": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94): group 1PGC 12429 (NGC 1275) DMzp = 34.185 +/- 0.036, 68.7 Mpc; group 1PGC 44715 (NGC 4889; Table 2 puts NGC 4874, PGC 44628, in it) DMzp = 34.891 +/- 0.025, 95.1 Mpc. A group's distance averages its members'."
+    }
+  }
+}

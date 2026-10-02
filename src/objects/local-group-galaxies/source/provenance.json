@@ -93,12 +93,34 @@
         {
           "id": "Skrutskie2006AJ....131.1163S",
           "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
-          "citation": "Skrutskie et al. (2006), AJ 131, 1163: the Two Micron All Sky Survey; Extended Source Catalog (CDS VII/233) row 2MASX J12294679+0800014."
+          "citation": "Skrutskie et al. (2006), AJ 131, 1163: the Two Micron All Sky Survey; Extended Source Catalog (CDS VII/233) rows 2MASX J12294679+0800014 (M49), 2MASX J03194823+4130420 (NGC 1275), 2MASX J13000809+2758372 (NGC 4889) and 2MASX J12593570+2757338 (NGC 4874)."
         },
         {
           "id": "Blakeslee2009ApJ...694..556B",
           "url": "https://arxiv.org/abs/0901.1138",
           "citation": "Blakeslee et al. (2009), ApJ 694, 556 (ACS Fornax Cluster Survey V), Table 2: VCC 1226 = NGC 4472, surface brightness fluctuation distance modulus 31.116 +/- 0.075, d = 16.7 +/- 0.6 Mpc."
+        }
+      ]
+    },
+    {
+      "id": "perseus-coma-giants-citations",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+      "citation": "The rows of NGC 1275, NGC 4889 and NGC 4874, written from their papers because the Local Volume Database stops short of the Perseus and Coma clusters: positions from the 2MASS Extended Source Catalog (the reference M49's row already cites), distances from their Cosmicflows-4 groups, membership from Kluge et al.'s and Lauer et al.'s brightest cluster galaxies.",
+      "references": [
+        {
+          "id": "Tully2023ApJ...944...94T",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "citation": "Tully et al. (2023), ApJ 944, 94 (Cosmicflows-4), Table 3 (CDS J/ApJ/944/94): group 1PGC 12429 (NGC 1275) DMzp = 34.185 +/- 0.036, 68.7 Mpc; group 1PGC 44715 (NGC 4889; Table 2 puts NGC 4874, PGC 44628, in it) DMzp = 34.891 +/- 0.025, 95.1 Mpc. A group's distance averages its members'."
+        },
+        {
+          "id": "Lauer2014ApJ...797...82L",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/797/82",
+          "citation": "Lauer et al. (2014), ApJ 797, 82 (Brightest cluster galaxies at the present epoch), Table 1 (CDS J/ApJ/797/82): Abell 1656, BCG N4889, heliocentric velocity 6498 +/- 10 km/s; Table 3: Abell 1656, second-ranked galaxy N4874, 7176 +/- 15 km/s."
+        },
+        {
+          "id": "Kluge2020ApJS..247...43K",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/247/43",
+          "citation": "Kluge et al. (2020), ApJS 247, 43 (Structure of brightest cluster galaxies and intracluster light), Table 1 (CDS J/ApJS/247/43): Abell 426, brightest cluster galaxy NGC 1275, z = 0.017560."
         }
       ]
     },

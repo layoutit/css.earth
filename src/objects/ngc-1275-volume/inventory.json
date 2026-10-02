@@ -1,0 +1,203 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "datasets/sdss-optical.webp",
+      "bytes": 8276,
+      "sha256": "b4f264d6fa8e6adb3bfa6cdabe864d2176d0e8248f5ecafa86af9a5b043ce8c8"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 173659,
+      "sha256": "d525d13733daf6f7fc461a5507d9b5cf70299c06063bd6505ea6943390db5efe"
+    },
+    {
+      "location": "prepared",
+      "filename": "delivery.json",
+      "bytes": 1442,
+      "sha256": "4e2fbefc91a92550698ff2e0db24863edef2cea2f52e163b3bc4e4c456fc05c9"
+    },
+    {
+      "location": "prepared",
+      "filename": "presentation.json",
+      "bytes": 1390,
+      "sha256": "93ebfe1d9aa8f4dfbeb5a2396f2bcb5f7e0deab19b7e1cc10c4fdcc3a76db4f0"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/atlases/x.webp",
+      "bytes": 189948,
+      "sha256": "1cb5a0d3521f8b038b71e4c7cb9b40108885f2999bfc1528b24b3aa49779af66"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/atlases/y.webp",
+      "bytes": 178554,
+      "sha256": "8c7c4d18c7feeea82f6f79227224e1414f1755df3ed40f26b7c8e37e98df2267"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/atlases/z.webp",
+      "bytes": 234218,
+      "sha256": "b63070824f2cf348004dba4a1588ecbad589c193ce0c4f82a5b2bb14c0ff6a41"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-00n.png",
+      "bytes": 38945,
+      "sha256": "3497145df850e3fc167b044ddb59e772dff164e384c038a00680e9d71853c9af"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-00p.png",
+      "bytes": 38896,
+      "sha256": "9187296bba07ccde2cb56ac719c02518cd2e4b93ce7493a195f1b55fbc03eb74"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-0n0.png",
+      "bytes": 41140,
+      "sha256": "aa92449a50e97c7c1a0564b3aa3e51f673d7e995a14761c67a1b187363f8add5"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-0nn.png",
+      "bytes": 51489,
+      "sha256": "c2fbe4243731436fca5d44b3618705ebc21b933e6010760e796fadfa1cf772a9"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-0np.png",
+      "bytes": 50599,
+      "sha256": "a8d4cbf66832fe5ad33b3a51a15272180a0b9eac853ab97cfe0312c7a1f281ad"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-0p0.png",
+      "bytes": 41054,
+      "sha256": "a75c702d9a62432a71e4262defe46f1984add867852334baf3767c3b613ba402"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-0pn.png",
+      "bytes": 50508,
+      "sha256": "a73bc98a41f0e18078bd7db6e1036bc2f39d973f30f59cad918e47924e7301e5"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-0pp.png",
+      "bytes": 51447,
+      "sha256": "21a5adb22829d994f29f8b28e624f52dad6e069eeb5f38d46552e071fbb497b1"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-n00.png",
+      "bytes": 29496,
+      "sha256": "e77327c6fa260dafacb07733467dd8de5e50906d9a7b12be16f0f74f107f0b30"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-n0n.png",
+      "bytes": 43347,
+      "sha256": "b96526ca308962686e3f9d1d44984079e33abaf1fa2034ac69c6ba4410906082"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-n0p.png",
+      "bytes": 44261,
+      "sha256": "57c1c8c2cac7ef5d6d44d314bdec8946a36d7aad8570a068311836c86810d221"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-nn0.png",
+      "bytes": 37220,
+      "sha256": "50c19679bbe33ff88642f997bbbe8765a29bd8033d7c00a08e7bd6f44b3472ec"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-nnn.png",
+      "bytes": 50177,
+      "sha256": "0c665b7727e9a72cfb6328ced353a20c456ac3fa15a145759af2bd57924d722b"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-nnp.png",
+      "bytes": 50065,
+      "sha256": "4f5a52bc659ef8d5cdca7cd98a95c39d31d606103feaa61bed0542aa28d6a717"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-np0.png",
+      "bytes": 39376,
+      "sha256": "471719d502cb760d44577e6a322e3e03791a2746259819b223181d219dbe69f7"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-npn.png",
+      "bytes": 50814,
+      "sha256": "6bf39d30f99dd95e821774ef4b5bfcdc8caeeb856d9a72a119a3274acc26d5a0"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-npp.png",
+      "bytes": 51055,
+      "sha256": "0725645f27e61f3893d81de188505a5d191874140033f839fe0304e212938baa"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-p00.png",
+      "bytes": 29294,
+      "sha256": "dca1dc532b02cdc293891a1c066cd43c9fec44b145ebb1c00861b8d21885259e"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-p0n.png",
+      "bytes": 44353,
+      "sha256": "ddde590bb8bc3efda71ebf16de564e1ddf723b742b277a0071048906021b103b"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-p0p.png",
+      "bytes": 43399,
+      "sha256": "7bfff45b2636fa02df8b7267aa72400187be010e3767d56d1e9ecc3e25216443"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-pn0.png",
+      "bytes": 39242,
+      "sha256": "4c3ee36fe737177e3c2866feeecf057055db11c965a931dbc58b216757b67957"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-pnn.png",
+      "bytes": 51023,
+      "sha256": "cf8dbd8c129a32ba1f2fd5593c34104a8c98ddd0d9531a81ecd90eea12790932"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-pnp.png",
+      "bytes": 50824,
+      "sha256": "95f0bff97d8603fef610047d4f2e8c9ef55ddab475c83d3a4f72ecaa39332541"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-pp0.png",
+      "bytes": 37386,
+      "sha256": "3230006cd732fb3f63698a4728b0c4d27ebfbfedcdde4a028e26ea15a0ce4077"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-ppn.png",
+      "bytes": 50134,
+      "sha256": "6db62392d48f8d111935490c238469ade13df49583f665e5df63ce4103fac87b"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/impostors/view-ppp.png",
+      "bytes": 50118,
+      "sha256": "a69e0ef6e5f77fb14cd562f6f5b1f69da59ae5fed29215349573023434103057"
+    }
+  ]
+}
