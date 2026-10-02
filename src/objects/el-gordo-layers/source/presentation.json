@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "el-gordo-layers",
+  "name": "El Gordo",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/el-gordo-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/el-gordo-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/el-gordo-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · near infrared",
+      "title": "El Gordo in near infrared",
+      "description": "Webb's image of the cluster and the far galaxies it magnifies. A flat picture of the sky, with no depth. It stands as one flat picture facing the Sun at the object's distance.",
+      "summary": "Webb's image of the cluster and the far galaxies it magnifies. A flat picture of the sky, with no depth.",
+      "detail": "4422 × 4421 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "Webb NIRCam, six filters from 1.15 to 4.4 µm, the shortest wavelengths blue and the longest red"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4422 × 4421"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "2.21 arcmin across"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/el-gordo-layers/source/source.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/large/elgordo1.jpg"
+      }
+    }
+  ]
+}

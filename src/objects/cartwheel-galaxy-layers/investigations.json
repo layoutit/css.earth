@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "cartwheel-galaxy-layers",
+  "entries": [
+    {
+      "id": "weic2211a",
+      "subject": "ESA/Webb weic2211a",
+      "status": "included",
+      "finding": "Cartwheel Galaxy (NIRCam and MIRI Composite Image): Webb NIRCam and MIRI, from 0.9 to 18 µm: near-infrared blue to yellow, mid-infrared orange and red; 4685 × 4312 px over 2.34 arcmin, CC BY 4.0. The file's embedded sky tags, used as they are: 0.03000 arcsec per pixel, north 28.0° left of vertical, the frame's centre at 9.4234792°, -33.7132367°. Not measured against Gaia here; the same publishers' tags were within 0.4 arcsec on four cluster pictures and 1.5 arcsec off on one deep field.",
+      "evidence": [
+        "https://esawebb.org/images/weic2211a/",
+        "https://esawebb.org/copyright/"
+      ]
+    }
+  ]
+}

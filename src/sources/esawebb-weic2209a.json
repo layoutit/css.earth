@@ -1,0 +1,52 @@
+{
+  "id": "esawebb-weic2209a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Webb's First Deep Field (NIRCam Image)",
+  "identifiers": [
+    {
+      "type": "ESA/Webb image",
+      "value": "weic2209a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esawebb.org/images/weic2209a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esawebb.org/archives/images/large/weic2209a.jpg",
+      "label": "JPEG, 4537 x 4630 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esawebb.org/images/weic2209a/",
+      "checkedOn": "2026-10-02",
+      "locator": "4537 x 4630 px; Webb NIRCam, six filters from 0.9 to 4.4 µm, the shortest wavelengths blue and the longest red. The file's embedded sky tags, used as they are: 0.02999 arcsec per pixel, north 35.0° left of vertical, the frame's centre at 110.8277933°, -73.4539034°. Not measured against Gaia here; the same publishers' tags were within 0.4 arcsec on four cluster pictures and 1.5 arcsec off on one deep field."
+    }
+  ],
+  "publisher": "ESA/Webb",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, and STScI",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/images/weic2209a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/copyright/"
+    }
+  ]
+}

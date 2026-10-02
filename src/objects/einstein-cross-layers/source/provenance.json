@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Seeing quadruple",
+  "publisher": "ESA/Hubble",
+  "sourceId": "potw1204a",
+  "sourcePage": "https://esahubble.org/images/potw1204a/",
+  "download": "https://cdn.esahubble.org/archives/images/large/potw1204a.jpg",
+  "credit": "ESA/Hubble & NASA",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      498,
+      498
+    ],
+    "bands": [
+      "Hubble"
+    ],
+    "fieldOfViewDeg": [
+      0.006829444,
+      0.006829444
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      498,
+      498
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 46.285,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 3.1 arcsec from the object's position, which is the whole of the recipe's inclination. Not a measured orientation of the object."
+  },
+  "registration": {
+    "method": "The file's embedded sky tags, used as they are: 0.04937 arcsec per pixel, north 124.3° right of vertical, the frame's centre at 340.125539°, 3.3592354°. Not measured against Gaia here; the same publishers' tags were within 0.4 arcsec on four cluster pictures and 1.5 arcsec off on one deep field.",
+    "pixelArcsec": 0.04937,
+    "northClockwiseDeg": 124.26
+  },
+  "displayModel": "The picture lies on one flat plane facing the Sun at the object's comoving distance. Nothing in the picture has depth: seen from the side it is a line.",
+  "coverage": "The published frame inside a circle: the picture fades out between 70% and 98% of half its short side, so its corners are not drawn and no straight edge shows. The lensing galaxy is some ten times closer than the quasar (the publisher's caption) but stands on the quasar's plane here.",
+  "acquisition": {
+    "url": "https://cdn.esahubble.org/archives/images/large/potw1204a.jpg",
+    "dimensions": [
+      498,
+      498
+    ],
+    "operation": "Download the publisher's JPEG; no crop or resample."
+  }
+}
