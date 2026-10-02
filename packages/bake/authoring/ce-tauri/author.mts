@@ -4,8 +4,9 @@
  * J/A+A/614/A12) and are restored by the acquisition plan, not written here.
  *
  *   node packages/bake/authoring/ce-tauri/author.mts [--check] */
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
 import { readReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
@@ -26,12 +27,7 @@ export async function authorCeTauri({ check = false } = {}) {
   const image = readReconstruction(await readFile(resolve(root, MARKER_IMAGE_PATH)));
   const marker = await contextMarker(image, palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum));
   const outputs: [string, Buffer][] = [[CONTEXT_PATH, marker]];
-  for (const [path, bytes] of outputs) {
-    const target = resolve(root, path);
-    if (check) {
-      if (!(await readFile(target)).equals(bytes)) throw new Error(`${path} differs from its authored recomputation.`);
-    } else await writeFile(target, bytes);
-  }
+  await writeOrCheckAuthoredOutputs(root, outputs, { check, missingFile: 'propagate-read-error', mkdir: 'none' });
   return { width: image.width, height: image.height };
 }
 

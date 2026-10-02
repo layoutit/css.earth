@@ -7,7 +7,9 @@ export function createSearchPresentation(documentTarget: Document) {
   const browser = requiredSection(documentTarget, '.object-browser');
   const selectedContent = requiredElement<HTMLElement>(documentTarget, '.object-selected-content');
   const results = requiredElement<HTMLElement>(browser, '#object-category-results');
-  const empty = requiredElement<HTMLElement>(browser, '.object-empty');
+  // Named, not the first `.object-empty`: that is the "Searching…" line, which this hid while a search was pending and
+  // showed in place of "No matching results" (2026-10-02).
+  const empty = requiredElement<HTMLElement>(browser, '[data-search-empty]');
   const categories = [...documentTarget.querySelectorAll<HTMLElement>('.object-search-category')];
   return {
     present(open: boolean, searching: boolean) {

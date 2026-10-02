@@ -6,8 +6,9 @@
  *   node packages/bake/authoring/pi1-gruis/author.mts [--check]
  *
  * --check recomputes every output and fails if any differs from the file on disk. */
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
 import { convolveGaussian, readReconstruction, writeReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
@@ -42,12 +43,7 @@ export async function authorPi1Gruis({ check = false } = {}) {
   const palette = requireArray(display.palette).map(value => requireString(value)), percentiles = requireArray(display.percentiles).map(value => requireFiniteNumber(value));
   const marker = await contextMarker(readReconstruction(beam), palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum));
   const outputs: [string, Buffer][] = [[BEAM_IMAGE_PATH, beam], [CONTEXT_PATH, marker]];
-  for (const [path, bytes] of outputs) {
-    const target = resolve(root, path);
-    if (check) {
-      if (!(await readFile(target)).equals(bytes)) throw new Error(`${path} differs from its authored recomputation.`);
-    } else await writeFile(target, bytes);
-  }
+  await writeOrCheckAuthoredOutputs(root, outputs, { check, missingFile: 'propagate-read-error', mkdir: 'none' });
   return { vis2: rows.vis2.length, t3: rows.t3.length, flagged: rows.flagged, channels: rows.wavelengthsMetres.length, longestBaselineMetres: longest, beamMas };
 }
 

@@ -1,4 +1,4 @@
-import { worldSubject } from '../level-view.mts';
+import { worldSubject, worldSubjectFrame } from '../level-view.mts';
 import type { createApplicationWorldContext } from '../application-world-context.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { SceneSession } from './scene-session.mts';
@@ -104,7 +104,7 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     const world = mounted();
     if (!world || !isCurrent(session)) return;
     // A level is the world seen around its centre: the world selects that star, and the level is its overview scope.
-    world.selectObject?.(worldSubject(session.objectId), navigation.frame, navigation.framingScale, navigation.labelEdge);
+    world.selectObject?.(worldSubject(session.objectId), worldSubjectFrame(session.objectId, navigation.frame), navigation.framingScale, navigation.labelEdge);
   }
 
   function connect(session: SceneSession) {

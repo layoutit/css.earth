@@ -1,4 +1,5 @@
 import type { LeafBoxComponent, PreparedLeafBox } from '@cssearth/objects';
+import { rebuildPropertyTable } from './property-table.ts';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { scanCssDeclarations } from './css-declaration-scanner.ts';
 
@@ -61,15 +62,6 @@ function withoutDeclarations(style: string, names: readonly string[]) {
     const colon = part.indexOf(':');
     return colon < 0 || !names.includes(part.slice(0, colon).trim());
   }).map(part => `${part};`).join('');
-}
-function interned(tree: Tree, nodes: readonly TreeNode[]): Tree {
-  const properties: Property[] = [], ids = new Map<string, number>();
-  const intern = (property: Property) => {
-    const key = JSON.stringify(property);
-    if (!ids.has(key)) { ids.set(key, properties.length); properties.push(property); }
-    return ids.get(key)!;
-  };
-  return { ...tree, nodes: nodes.map(node => ({ ...node, properties: node.properties.map(id => intern(tree.properties[id]!)) })), properties };
 }
 
 /** Static atlas sizes as the leaf's own width and height: every stylesheet reads --polycss-atlas-width/-height as exactly
@@ -154,7 +146,7 @@ export function withLeafBoxRecords<D extends Definition>(definition: D): D {
     if (density === undefined) throw new TypeError(`${definition.id}: prepared node ${index} ${LEAF_BOX_FACTOR}: unexpected factor: ${factor}`);
     return leafRecord(node, index, Number(density), boxes);
   });
-  if (!boxes.length && !seamBoxes.length) return nodes.every((node, index) => node === tree.nodes[index]) ? definition : { ...definition, tree: interned({ ...tree, properties }, nodes) };
+  if (!boxes.length && !seamBoxes.length) return nodes.every((node, index) => node === tree.nodes[index]) ? definition : { ...definition, tree: rebuildPropertyTable({ ...tree, properties }, nodes) };
   if (boxes.length && !binding) throw new TypeError(`${definition.id}: leaf boxes have no ${LEAF_BOX_PROPERTY} binding.`);
   const initial = binding ? valueOn(binding.target, LEAF_BOX_PROPERTY) : undefined;
   if (boxes.length && initial === undefined) throw new TypeError(`${definition.id}: the ${LEAF_BOX_PROPERTY} binding target ${binding!.target} carries no initial step.`);
@@ -165,7 +157,7 @@ export function withLeafBoxRecords<D extends Definition>(definition: D): D {
     ? { ...node, properties: node.properties.filter(id => ![LEAF_BOX_PROPERTY, SURFACE_SEAM_OUTSET_PROPERTY].includes(tree.properties[id]!.name)) } : node);
   const bindings = definition.viewBindings.map(entry => entry === binding && boxes.length ? { ...binding, initial, boxes }
     : entry === seam ? { ...seam, initial: seamInitial, ...seamBoxes.length ? { boxes: seamBoxes } : {} } : entry);
-  return { ...definition, tree: interned({ ...tree, properties }, stripped), viewBindings: bindings };
+  return { ...definition, tree: rebuildPropertyTable({ ...tree, properties }, stripped), viewBindings: bindings };
 }
 
 /** The records expanded back to the variable form the bindings measure (the inverse of withLeafBoxRecords). */
@@ -198,7 +190,7 @@ export function withoutLeafBoxRecords<D extends Definition>(definition: D): D {
     if (seam && entry === seam) { const { initial: _initial, boxes: _boxes, ...rest } = seam; return rest; }
     return entry;
   });
-  return { ...definition, tree: interned({ ...definition.tree, properties }, nodes), viewBindings: bindings };
+  return { ...definition, tree: rebuildPropertyTable({ ...definition.tree, properties }, nodes), viewBindings: bindings };
 }
 
 /** withoutLeafBoxRecords for a value read from disk: checks the shape it reads before expanding, so a reader needs no cast. */

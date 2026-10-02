@@ -6,8 +6,9 @@
  *   node packages/bake/authoring/betelgeuse/author.mts [--check]
  *
  * --check recomputes both outputs and fails if either differs from the file on disk. */
-import { readFile, readdir, writeFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
 import { mergeContinuum, mergedOifits, type ContinuumRecipe } from '@cssearth/bake/objects/layers/observation';
 import { convolveGaussian, readReconstruction, writeReconstruction } from '@cssearth/bake/objects/layers/observation';
@@ -90,9 +91,7 @@ export async function authorUniformDiscSphere(sourceRoot: string, label: string,
   const shape = requireRecord(measurements.shape, 'shape');
   if (requireString(shape.path) !== SPHERE_PATH) throw new TypeError(`${label} sphere path differs from the authoring tool.`);
   const bytes = Buffer.from(uniformDiscTable(requireFiniteNumber(measurements.radiusKm), requireFiniteNumber(shape.stepDegrees)), 'latin1');
-  const target = resolve(sourceRoot, SPHERE_PATH);
-  if (check) { if (!(await readFile(target)).equals(bytes)) throw new Error(`${SPHERE_PATH} differs from its authored recomputation.`); }
-  else await writeFile(target, bytes);
+  await writeOrCheckAuthoredOutputs(sourceRoot, [[SPHERE_PATH, bytes]], { check, missingFile: 'propagate-read-error', mkdir: 'none' });
   return measurements;
 }
 
@@ -116,12 +115,7 @@ export async function authorBetelgeuse({ check = false } = {}) {
     if (epoch.id === '2020-02') outputs.push([CONTEXT_PATH, await contextMarker(readReconstruction(beam), palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum))]);
     counts[epoch.id] = { vis2: merged.vis2.length, t3: merged.t3.length, files: merged.files.length };
   }
-  for (const [path, bytes] of outputs) {
-    const target = resolve(root, path);
-    if (check) {
-      if (!(await readFile(target)).equals(bytes)) throw new Error(`${path} differs from its authored recomputation.`);
-    } else await writeFile(target, bytes);
-  }
+  await writeOrCheckAuthoredOutputs(root, outputs, { check, missingFile: 'propagate-read-error', mkdir: 'none' });
   return counts;
 }
 

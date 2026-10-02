@@ -17,8 +17,10 @@ const bodies = [system.id, ...system.memberIds].flatMap(id => {
   return object && listedInSystemCard(object, system.id) ? [object] : [];
 }).sort((a, b) => {
   // The Solar System starts with planets; retain search's distance order within each group.
-  const planetOrder = solar ? Number(b.classification === 'planet') - Number(a.classification === 'planet') : 0;
-  return planetOrder || a.distance.meters - b.distance.meters;
+  if (solar) return Number(b.classification === 'planet') - Number(a.classification === 'planet') || a.distance.meters - b.distance.meters;
+  // Another star's bodies are all one distance from the Sun, which left TRAPPIST-1's as h, g, d, c, the star, b, f, e
+  // (2026-10-02): the star leads, then its bodies by name.
+  return Number(b.id === system.id) - Number(a.id === system.id) || a.name.localeCompare(b.name, 'en', { numeric: true });
 });
 const prefix = `${systemId}-system-bodies`;
 const tabs = [{ id: 'bodies', label: 'Celestial bodies' }, ...(solar ? [{ id: 'factsheet', label: 'Factsheet' }] : [])];

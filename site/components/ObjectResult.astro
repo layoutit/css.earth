@@ -5,16 +5,17 @@ import { objectTypeLabel } from '../object-classification-label.mts';
 import { sourceDocumentation } from '../source-documentation.mts';
 import { objectResultMarkup } from '../server/object-result-markup.mts';
 import { objectResultMarker } from '../search/prepared-catalogue-index.mts';
+import { listDistance } from '../search/list-distance.mts';
 interface Props { object: ObjectEntry; }
 const { object } = Astro.props;
 const source = sourceDocumentation(object.id, object.name);
-const value = String(Number(object.distance.value.toFixed(3)));
+const { value, unit } = listDistance(object.distance);
 const description = distanceDescription(object.distance);
 const markup = objectResultMarkup({
   kind: 'scene', id: object.id, name: object.name, route: object.route,
   classificationName: objectTypeLabel(object),
-  detail: { text: `${value} ${object.distance.unit}`, value, unit: object.distance.unit,
-    title: description, ariaLabel: `${value} ${object.distance.unit}. ${description}` },
+  detail: { text: `${value} ${unit}`, value, unit,
+    title: description, ariaLabel: `${value} ${unit}. ${description}` },
   source: { subject: `object:${object.id}`, document: source.href, label: source.label },
   marker: objectResultMarker(object),
 });

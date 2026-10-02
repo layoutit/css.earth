@@ -1,3 +1,4 @@
+import { rebuildPropertyTable } from './property-table.ts';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { scanCssDeclarations } from './css-declaration-scanner.ts';
 
@@ -53,16 +54,6 @@ function declarations(style: string) {
 const classes = (className: string | null) => className?.split(/\s+/u).filter(Boolean) ?? [];
 const sides = (name: string) => /^padding(?:-|$)/u.test(name) || /^border(?:-|$)/u.test(name) && !/radius/u.test(name);
 
-function interned<T extends Tree>(tree: T, nodes: readonly T['nodes'][number][], table: readonly Property[]): T {
-  const properties: Property[] = [], ids = new Map<string, number>();
-  const intern = (property: Property) => {
-    const key = JSON.stringify(property);
-    if (!ids.has(key)) { ids.set(key, properties.length); properties.push(property); }
-    return ids.get(key)!;
-  };
-  return { ...tree, nodes: nodes.map(node => ({ ...node, properties: node.properties.map(id => intern(table[id]!)) })), properties };
-}
-
 /** One node's clean record: declarations once, and the shared leaf markers as a class. */
 function cleanNode<N extends TreeNode>(node: N, table: readonly Property[]): N {
   const properties = node.properties.map(id => ({ id, property: table[id]!, name: preparedPropertyName(table[id]!) }));
@@ -96,7 +87,7 @@ function cleanNode<N extends TreeNode>(node: N, table: readonly Property[]): N {
 
 /** The tree's clean form; idempotent. The property table is interned again in node order, as the builder's finish writes it. */
 export function cleanPreparedTree<T extends Tree>(tree: T): T {
-  return interned(tree, tree.nodes.map(node => cleanNode(node, tree.properties)), tree.properties);
+  return rebuildPropertyTable(tree, tree.nodes.map(node => cleanNode(node, tree.properties)), tree.properties);
 }
 export function withCleanLeaves<D extends { tree: Tree }>(definition: D): D {
   return { ...definition, tree: cleanPreparedTree(definition.tree) };
@@ -118,7 +109,7 @@ export function withoutCleanLeaves<D extends { tree: Tree }>(definition: D): D {
     return { ...node, className: rest.length ? rest.join(' ') : null, properties: [...node.properties, ...restored],
       attributes: { ...node.attributes, [PROJECTION[0]]: PROJECTION[1] } };
   });
-  return { ...definition, tree: interned(tree, nodes, properties) };
+  return { ...definition, tree: rebuildPropertyTable(tree, nodes, properties) };
 }
 
 /** withoutCleanLeaves for a value read from disk: checks the shape it reads before expanding, so a reader needs no cast. */
