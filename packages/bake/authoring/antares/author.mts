@@ -3,8 +3,8 @@
  * the photosphere is cast in this package (see the object's investigations.json).
  *
  *   node packages/bake/authoring/antares/author.mts [--check] */
-import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 
@@ -14,9 +14,7 @@ export const CONTEXT_SIZE = 512;
 
 export async function authorAntares({ check = false } = {}) {
   const marker = await neutralDiscMarker(CONTEXT_SIZE);
-  const target = resolve(root, CONTEXT_PATH);
-  if (check) { if (!(await readFile(target)).equals(marker)) throw new Error(`${CONTEXT_PATH} differs from its authored recomputation.`); }
-  else await writeFile(target, marker);
+  await writeOrCheckAuthoredOutputs(root, [[CONTEXT_PATH, marker]], { check, missingFile: 'propagate-read-error', mkdir: 'none' });
   return { size: CONTEXT_SIZE };
 }
 

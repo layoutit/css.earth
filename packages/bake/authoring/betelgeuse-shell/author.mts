@@ -14,9 +14,10 @@
  * extinction it causes and the starlight it scatters.
  *
  * Every grid shares one frame anchored on Betelgeuse's prepared scene origin, so one volume unit is one stellar radius. */
-import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { resolve } from 'node:path';
+import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
 import { fitsImageAccessor, readFitsHdu, readFitsImage, skyImageAxes } from '@cssearth/fits';
 import { encodeDensityKtx2 } from '@cssearth/bake/density';
@@ -1018,13 +1019,7 @@ if (direct) {
   const check = process.argv.includes('--check');
   const selected = process.argv.find(arg => arg.startsWith('--default='))?.slice(10);
   const result = await author(selected);
-  await mkdir(root, { recursive: true });
-  for (const [name, bytes] of result.outputs) {
-    const target = resolve(root, name);
-    if (check) {
-      const existing = await readFile(target).catch(() => null);
-      if (!existing || !existing.equals(bytes)) throw new Error(`Authored output differs: ${name}`);
-    } else await writeFile(target, bytes);
-  }
+  await writeOrCheckAuthoredOutputs(root, result.outputs, { check, missingFile: 'mismatch-on-read-error',
+    mkdir: 'root-before-write-or-check', mismatchMessage: name => `Authored output differs: ${name}` });
   console.log(`${check ? 'CHECKED' : 'AUTHORED'} betelgeuse-shell: ${JSON.stringify(result.measured)}; grid ${GRID.size}^3; ${JSON.stringify(result.grids)}`);
 }
