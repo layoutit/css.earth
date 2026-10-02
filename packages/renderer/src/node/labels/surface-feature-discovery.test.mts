@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readdir, readFile } from "node:fs/promises";
-import { parsePreparedSurfaceFeatureCatalog } from '@cssearth/renderer';
+import { parsePreparedSurfaceFeatureCatalog } from '@cssearth/objects';
 
 const root = pathToFileURL(projectRoot(import.meta.url) + '/');
 const bodies = new URL("src/objects/", root);

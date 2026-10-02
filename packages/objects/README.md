@@ -130,3 +130,7 @@ format contracts and schema identifiers in `packages/objects/src/prepared-data/`
 The complete catalogue bank is `PreparedCataloguePointBank`; embedded volume stars keep `PreparedCataloguePoints`.
 Counting, projection, transport and retained mounting stay in renderer; image/geometry preparation and file I/O stay in bake.
 Contract tests use node:test in the packages lane.
+
+Spatial catalogue and surface-feature formats live in `src/prepared-data/`, exported by `@cssearth/objects`.
+Their contract tests run with `pnpm test:packages`. Scientific classification and citation interpretation stay in catalog;
+sampling and geometry stay in bake; transport and label mounting stay in renderer.

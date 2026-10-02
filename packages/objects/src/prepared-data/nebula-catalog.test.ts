@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { parsePreparedNebulaCatalog, isPreparedNebula } from './nebulae.js';
+import { parsePreparedNebulaCatalog, isPreparedNebula } from './nebula-catalog.js';
 const fixture=()=>({schema:'cssearth-nebula-catalog@1',frame:{referenceFrame:'sun-icrf',epochJdTt:2461286.5},
   sources:[{id:'paper',url:'https://example.org/paper',bytes:10,citation:'Original measurement'}],
   objects:[{id:'fixture',kind:'nebula',name:'Example',aliases:[],positionM:[3.085677581491367e18,0,0],skyPosition:{raDeg:0,decDeg:0,sourceRef:'paper'},

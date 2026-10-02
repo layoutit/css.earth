@@ -1,3 +1,4 @@
+import { PREPARED_GALAXY_CATALOG_SCHEMA } from '@cssearth/objects';
 import { IMAGE_MESH_SCHEMA, CATALOGUE_POINTS_BINARY_SCHEMA, DENSITY_VOLUME_FORMAT, OBJECT_RUNTIME_SCHEMA, parsePreparedObjectRuntime, requireControls } from '@cssearth/objects';
 
 // The scene of an authored object with no surface (`recipe.surfaces: []`): a galaxy, a nebula, a cluster of galaxies. It is
@@ -97,7 +98,7 @@ export async function companionThumbnails({ objectDirectory, publicDirectory, co
       continue;
     }
     // A catalogue of galaxies is drawn as its dots lie on the sky, like a bank of dots.
-    if (bank.prepared?.format === 'cssearth-galaxy-catalog@1') {
+    if (bank.prepared?.format === PREPARED_GALAXY_CATALOG_SCHEMA) {
       const catalogue = JSON.parse(await readFile(resolve(bankDirectory, 'prepared/catalogue.json'), 'utf8')) as { objects: { positionM: number[] }[] };
       await pointsPicture(catalogue.objects.map(object => object.positionM), { colorCss: '#d8d8d8' }, output);
       continue;

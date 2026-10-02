@@ -1,6 +1,8 @@
 import { readNonArrayRecord, readNonblankText, readFiniteNumber } from '@cssearth/core';
-import { PREPARED_SURFACE_FEATURES_SCHEMA, featureDiscoveryZoomShare, normalizeSearchText } from './catalog.ts';
-import type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, SurfaceFeaturePolicy, PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, SurfaceFeatureCatalogDescriptor, SurfaceFeatureSelectionPlan, PreparedSurfaceFeaturePlan, Vector3 } from './catalog.ts';
+import { featureDiscoveryZoomShare, normalizeSearchText } from './catalog.ts';
+import { PREPARED_SURFACE_FEATURES_SCHEMA } from '@cssearth/objects';
+import type { Vector3 } from './catalog.ts';
+import type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, SurfaceFeaturePolicy, PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, SurfaceFeatureCatalogDescriptor, SurfaceFeatureSelectionPlan, PreparedSurfaceFeaturePlan } from '@cssearth/objects';
 import { surfaceDirection, round, scaled, rimVectors, extentPolygon, normalizeExtent, projectRadial, meshRadiusBand, triaxialSurfacePoint } from './geometry.ts';
 import { unzipMember } from './archive.ts';
 import { surfaceFeatureBankIndex } from '@cssearth/renderer/labels/surface-feature-banks.ts';

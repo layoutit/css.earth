@@ -9,7 +9,8 @@ import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
 import { distanceDescription, isExtendedClassification, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
-import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
+import { resolveSpatialCitation } from '@cssearth/catalog';
+import { parsePreparedGalaxyCatalog } from '@cssearth/objects';
 import { resolve } from 'node:path';
 
 test('every scene and every package the host draws has exactly one searchable destination, built from its own descriptor', async () => {

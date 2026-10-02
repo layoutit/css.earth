@@ -1,7 +1,9 @@
+import { PREPARED_GALAXY_CATALOG_SCHEMA, PREPARED_CLUSTER_CATALOG_SCHEMA } from '@cssearth/objects';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
-import { parsePreparedClusterCatalog } from '@cssearth/catalog';
+import { resolveSpatialCitation } from '@cssearth/catalog';
+import { parsePreparedGalaxyCatalog } from '@cssearth/objects';
+import { parsePreparedClusterCatalog } from '@cssearth/objects';
 import { sourceObject } from '@cssearth/objects/sources';
 import type { SourceResolver } from '@cssearth/objects/sources';
 import type { SourceUse } from '@cssearth/objects/provenance';
@@ -22,8 +24,8 @@ export async function spatialSourceCitations(root: string, sources: SourceResolv
     try { raw = JSON.parse((await input(path)).toString('utf8')); }
     catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
     const schema = sourceObject(raw).schema;
-    if (schema !== 'cssearth-galaxy-catalog@1' && schema !== 'cssearth-cluster-catalog@1') continue;
-    const catalog = schema === 'cssearth-galaxy-catalog@1' ? parsePreparedGalaxyCatalog(raw) : parsePreparedClusterCatalog(raw);
+    if (schema !== PREPARED_GALAXY_CATALOG_SCHEMA && schema !== PREPARED_CLUSTER_CATALOG_SCHEMA) continue;
+    const catalog = schema === PREPARED_GALAXY_CATALOG_SCHEMA ? parsePreparedGalaxyCatalog(raw) : parsePreparedClusterCatalog(raw);
     for (const source of catalog.sources) for (const ref of source.references ?? []) {
       const canonical = ref.catalogueId && sources[ref.catalogueId];
       if (!canonical || !canonical.identifiers.some(id => id.type === 'bibliography-key' && id.value === ref.id)) {

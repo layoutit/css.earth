@@ -4,7 +4,7 @@ import { decodeVtkCategories } from '../raster/index.ts';
 import { createIndexedShape } from '../geometry/index.ts';
 import { normalizeSearchText } from './catalog.ts';
 import { projectRadial, surfaceDirection } from './geometry.ts';
-import type { PreparedSurfaceFeature, SurfaceFeatureAxes } from './catalog.ts';
+import type { PreparedSurfaceFeature, SurfaceFeatureAxes } from '@cssearth/objects';
 import type { SurfaceFeaturePreparationContext } from './surface-features.ts';
 import { dot3 as dot } from '@cssearth/core';
 

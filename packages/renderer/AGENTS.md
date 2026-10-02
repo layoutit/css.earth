@@ -62,3 +62,7 @@ format contracts and schema identifiers in `packages/objects/src/prepared-data/`
 The complete catalogue bank is `PreparedCataloguePointBank`; embedded volume stars keep `PreparedCataloguePoints`.
 Counting, projection, transport and retained mounting stay in renderer; image/geometry preparation and file I/O stay in bake.
 Contract tests use node:test in the packages lane.
+
+Prepared spatial catalogue and surface-feature parsers belong to `@cssearth/objects`; import their records there.
+Surface-feature parsers retain normalized reader projections of the shared wire records. Transport, projection and
+label mounting stay here.

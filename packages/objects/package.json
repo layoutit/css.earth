@@ -46,7 +46,6 @@
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json"
   },
   "dependencies": {
-    "@cssearth/catalog": "workspace:*",
     "@cssearth/core": "workspace:*"
   },
   "devDependencies": {

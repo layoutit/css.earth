@@ -6,7 +6,8 @@ import { parseGalaxyCsv, parseMembershipTable, readArchiveMember, readAuthorMeta
 import { readInventory, updateInventory } from '@cssearth/objects/node';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { parsePreparedGalaxyCatalog, spatialPublicationId } from '@cssearth/catalog';
+import { spatialPublicationId } from '@cssearth/catalog';
+import { parsePreparedGalaxyCatalog } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
 import { sourceBytes } from '../volume/node/index.ts';
 import { sha256 } from '@cssearth/core/node';

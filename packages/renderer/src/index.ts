@@ -36,7 +36,7 @@ export { preparedObjectCapabilities } from './runtime/capabilities.js';
 export { mountSurfaceFeatureLabels } from './labels/surface-feature-labels.js';
 export { labelOcclusionFor } from './labels/label-occlusion.js';
 export { createOpacityFader } from './stars/opacity-fader.js';
-export { parsePreparedSurfaceFeatureCatalog, loadPreparedSurfaceFeatureCatalog, loadPreparedSurfaceFeatureBank, loadPreparedSurfaceFeature } from './labels/surface-feature-catalog.js';
+export { loadPreparedSurfaceFeatureCatalog, loadPreparedSurfaceFeatureBank, loadPreparedSurfaceFeature } from './labels/surface-feature-catalog.js';
 export { surfaceFeatureCaption } from './labels/surface-feature-caption.js';
 export { serializePreparedScene } from './rendering/prepared-scene-serialization.js';
 export { omittedPreparedNodes } from './rendering/prepared-omitted-nodes.js';
@@ -44,7 +44,7 @@ export { selectedPreparedVariant } from './rendering/prepared-presentation.js';
 export { sectionElements, sectionPlaceholder, showSection } from './rendering/detached-sections.js';
 export type { PreparedSceneMarkup, SerializedPreparedScene, PreparedTextureResolver } from './rendering/prepared-scene-serialization.js';
 export { publishPreparedNativeView } from './rendering/prepared-native-view.js';
-export type { PreparedSurfaceFeatureCatalog, PreparedSurfaceFeature, SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats, SurfaceFeatureNavigationRuntime } from './labels/surface-feature-types.js';
+export type { SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats, SurfaceFeatureNavigationRuntime } from './labels/surface-feature-types.js';
 export { savedWorldCamera } from './navigation/saved-world-camera.js';
 export { mountPreparedCssVolume } from './volume/prepared-volume-runtime.js';
 

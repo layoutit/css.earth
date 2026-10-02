@@ -46,3 +46,6 @@ outside this package.
 All source files, tests, tools, and generated code are limited to 600 physical
 lines. Run `pnpm lint:packages` from the repository root. Package instructions
 live in AGENTS.md; CLAUDE.md links to the same file.
+
+Prepared galaxy, cluster and nebula delivery formats are exported by `@cssearth/objects`.
+Catalog retains scientific classification and citation interpretation; the package dependency is catalog → objects.

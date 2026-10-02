@@ -1,4 +1,4 @@
-import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
+import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/objects';
 
 /** The three spatial catalogues the world draws as dots, served at `/catalogues/<id>.json` (`site/pages/catalogues/[id].json.ts`). */
 export async function loadDotCatalogues(origin: string, fetcher: typeof fetch = fetch, signal?: AbortSignal) {

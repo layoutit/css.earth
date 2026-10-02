@@ -1,6 +1,7 @@
+import { PREPARED_CLUSTER_CATALOG_SCHEMA } from '@cssearth/objects';
 import { spatialPublicationId } from '@cssearth/catalog';
 import { M_PER_PC } from '@cssearth/astronomy';
-import type { PreparedClusterCatalog, PreparedClusterRecord, SpatialCatalogSource } from '@cssearth/catalog';
+import type { PreparedClusterCatalog, PreparedClusterRecord, SpatialCatalogSource } from '@cssearth/objects';
 import { galaxyPositionM } from '../galaxy-catalog/index.ts';
 
 /** A cluster the recipe selects: its MCXC-II row, its Cosmicflows-4 group (the PGC number of the group's dominant galaxy),
@@ -89,7 +90,7 @@ export function prepareClusterCatalog(rows: readonly McxcRow[], recipe: ClusterR
       aperture: { definition: 'R500', properRadiusM, comovingRadiusM, sourceRef: ref },
       presentation: { focusRadiusM: comovingRadiusM * 1.5 } };
   });
-  return { schema: 'cssearth-cluster-catalog@1', frame: recipe.frame, cosmology: recipe.cosmology,
+  return { schema: PREPARED_CLUSTER_CATALOG_SCHEMA, frame: recipe.frame, cosmology: recipe.cosmology,
     sources: recipe.sources.map(({ path: _path, ...source }) => source.id === recipe.catalogueSourceId
       ? { ...source, references: [...new Set(objects.map(row => row.redshift.sourceRef))].map(id => ({ id, catalogueId: spatialPublicationId(id), url: `https://ui.adsabs.harvard.edu/abs/${id}`, citation: `Redshift reference ${id}, transcribed from MCXC-II.` })) } : source), objects,
     selection: { description: recipe.description, distanceCaveat: recipe.distanceCaveat } };

@@ -1,39 +1,6 @@
+import type { ParsedSurfaceFeatureCatalog as PreparedSurfaceFeatureCatalog } from '@cssearth/objects';
 import type { LabelScreenRect } from './screen-label-layout.js';
 
-/** Prepared nomenclature labels anchored to a body mesh. Every anchor, priority and
- * caption is prepared; the runtime projects them through the current camera only. */
-export type SurfaceFeatureKind = 'point' | 'linear' | 'region';
-/** Prepared boundary in mesh units: a small circle of the sphere for circular features, rim(φ) = center + east·cos φ + north·sin φ,
- * or the Gazetteer's published extent as a closed polygon for everything else. */
-export type SurfaceFeatureOutline =
-  | { readonly kind: 'circle'; readonly center: readonly [number, number, number]; readonly east: readonly [number, number, number]; readonly north: readonly [number, number, number] }
-  | { readonly kind: 'box'; readonly points: readonly (readonly [number, number, number])[] }
-  /** Mapped structural traces associated with the feature: open polylines on the sphere. */
-  | { readonly kind: 'trace'; readonly paths: readonly (readonly (readonly [number, number, number])[])[] };
-export interface PreparedSurfaceFeature {
-  readonly id: string; readonly name: string; readonly kind: SurfaceFeatureKind; readonly type: string; readonly code: string;
-  readonly diameterKm: number; readonly longitudeDeg: number; readonly latitudeDeg: number;
-  readonly anchorUnits: readonly [number, number, number]; readonly normal: readonly [number, number, number]; readonly radiusUnits: number;
-  readonly outline: SurfaceFeatureOutline;
-  /** Prepared search keys: the normalised name and clean name, and the normalised type. */
-  readonly searchNames: readonly string[]; readonly searchContext: string;
-  readonly origin: string; readonly approved: string; readonly quad: string; readonly link: string;
-  /** Who published the name or site and when, for the caption's credit line. */
-  readonly credit: string;
-  /** A source-backed caption note (a Wikipedia lead summary or a site's quoted source sentence) with its page and credit. */
-  readonly note: { readonly text: string; readonly title: string; readonly url: string; readonly credit: string } | null;
-  /** The facilities-catalogue id of the spacecraft at a site, when catalogued. */
-  readonly facilityId: string | null;
-  /** Discovery tier: the share of the zoom range (0 whole body, 1 closest) from which this name competes for a label. */
-  readonly minimumZoomShare: number;
-  /** Found by search and labelled when selected, never by default. */
-  readonly searchOnly: boolean;
-}
-export interface PreparedSurfaceFeatureCatalog {
-  readonly schema: 'cssearth-prepared-surface-features@1'; readonly objectId: string;
-  readonly source: string; readonly snapshotDate: string; readonly sourcePage: string; readonly license: string; readonly qualification: string;
-  readonly features: readonly PreparedSurfaceFeature[];
-}
 export interface SurfaceFeatureLayerStats {
   readonly loaded: boolean; readonly count: number; readonly visible: number; readonly eligible: number; readonly hovered: string | null; readonly pinned: string | null;
   readonly enabled: boolean; readonly playing: boolean; readonly frames: number; readonly error: string | null;

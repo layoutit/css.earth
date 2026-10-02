@@ -1,5 +1,5 @@
 import { spatialPublicationId } from '@cssearth/catalog';
-import type { SpatialCitation } from '@cssearth/catalog';
+import type { SpatialCitation } from '@cssearth/objects';
 
 /** Read the retained ADS BibTeX fields; balanced braces preserve nested titles.
  * Unsupported concatenation/macros fail instead of silently inventing a citation. */

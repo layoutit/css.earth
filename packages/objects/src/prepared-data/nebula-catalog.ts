@@ -1,5 +1,6 @@
-import { validateSpatialPosition } from './spatial-relations.ts';
-import type { PreparedGalaxyRecord, SpatialCatalogSource } from './spatial.js';
+export const PREPARED_NEBULA_CATALOG_SCHEMA = 'cssearth-nebula-catalog@1';
+import { validateSpatialPosition } from './spatial-relations.js';
+import type { PreparedGalaxyRecord, SpatialCatalogSource } from './galaxy-catalog.js';
 
 /** A sourced Galactic volume. The legacy nebula transport also carries stellar clusters;
  * the row kind preserves their scientific identity independently of the shared renderer. */
@@ -11,7 +12,7 @@ export interface PreparedNebulaRecord extends Pick<PreparedGalaxyRecord,
   readonly classification: { readonly name: string; readonly basis: string; readonly sourceRef: string };
 }
 export interface PreparedNebulaCatalog {
-  readonly schema: 'cssearth-nebula-catalog@1';
+  readonly schema: typeof PREPARED_NEBULA_CATALOG_SCHEMA;
   readonly frame: { readonly referenceFrame: string; readonly epochJdTt: number };
   readonly sources: readonly SpatialCatalogSource[];
   readonly objects: readonly PreparedNebulaRecord[];
@@ -31,7 +32,7 @@ const array = (v: unknown): readonly unknown[] => { if (!Array.isArray(v)) throw
 /** A separate catalogue avoids misclassifying Galactic volumes as Local Group galaxies. */
 export function parsePreparedNebulaCatalog(input: unknown): PreparedNebulaCatalog {
   const v = record(input), frame = record(v.frame), sources = array(v.sources), objects = array(v.objects);
-  if (v.schema !== 'cssearth-nebula-catalog@1' || objects.length > 10000) throw new TypeError('Invalid nebula catalogue.');
+  if (v.schema !== PREPARED_NEBULA_CATALOG_SCHEMA || objects.length > 10000) throw new TypeError('Invalid nebula catalogue.');
   text(frame.referenceFrame); finite(frame.epochJdTt);
   const sourceIds = new Set<string>(), ids = new Set<string>(), details = new Set<string>();
   for (const value of sources) {
