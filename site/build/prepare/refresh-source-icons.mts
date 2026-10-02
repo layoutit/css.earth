@@ -34,7 +34,8 @@ function candidates(html: string, page: string): string[] {
   })).filter(link => link.href && /\bicon\b/u.test(link.rel) && !link.rel.includes('mask'));
   const rank = (link: (typeof links)[number]) => (link.href!.endsWith('.svg') ? 1000 : link.size || (link.rel.includes('apple') ? 180 : 16));
   const urls = links.sort((a, b) => rank(b) - rank(a)).flatMap(link => { try { return [new URL(link.href!.replaceAll('&amp;', '&'), page).href]; } catch { return []; } });
-  return [...new Set([...urls, new URL('/favicon.ico', page).href])];
+  // An address that carries a content fingerprint changes with the site's next deploy: it would not last as a recorded link.
+  return [...new Set([...urls, new URL('/favicon.ico', page).href])].filter(url => !/[0-9a-f]{32,}/iu.test(url));
 }
 
 /** A site's icon: from its own pages, else from the parent domains that serve it (vizier.cds.unistra.fr → cds.unistra.fr, then www.cds.unistra.fr). */
