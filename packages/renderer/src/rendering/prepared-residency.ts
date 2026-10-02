@@ -12,9 +12,6 @@ export interface PreparedResidencyOptions {
   schedule?: typeof setTimeout; unschedule?: typeof clearTimeout; assetOrigin?: PreparedAssetOrigin;
   /** Reads a hash group the page did not embed (`createPreparedAssetResolver`); tests replace the network. */
   readAssetHashes?: (url: string) => Promise<unknown>;
-  /** The image store's download and decode windows (prepared-image-store.ts). */
-  downloadWindow?: () => number | undefined;
-  decodeWindow?: () => number | undefined;
 }
 interface CacheEntry { key: string; lease: PreparedImageLease; ready: boolean; retired: boolean; timer: ReturnType<typeof setTimeout> | null; order: number;
   promise: Promise<PreparedImage | null>; resolve(value: PreparedImage | null): void; reject(reason: unknown): void; }
@@ -27,7 +24,7 @@ import { createPreparedAssetResolver } from "./prepared-asset-origin.js";
 // leases, not planets, texture rows, dataset semantics, or presentation elements.
 export function createPreparedResidency({
   assets, createImage, onReady = () => {}, onWarmError = () => {}, onCleanupError = onWarmError,
-  schedule = setTimeout, unschedule = clearTimeout, assetOrigin, readAssetHashes, downloadWindow, decodeWindow,
+  schedule = setTimeout, unschedule = clearTimeout, assetOrigin, readAssetHashes,
 }: PreparedResidencyOptions) {
   // The single chokepoint every image load and material `url()` reads through
   // (`resources.read`/`resources.url` below). Entries keep their prepared `/scenes/` address as their identity; a load
@@ -42,8 +39,7 @@ export function createPreparedResidency({
   const published = createPreparedAssetResolver(assetOrigin, ...(readAssetHashes ? [readAssetHashes] : []));
   const publishedUrl = (key: string) => published.url(assetFor(key).url);
   const policies = new Map(assets.pools.map(pool => [pool.id, pool]));
-  const images = createPreparedImageStore({ pools: assets.pools, ...(createImage ? { createImage } : {}),
-    ...(downloadWindow ? { downloadWindow } : {}), ...(decodeWindow ? { decodeWindow } : {}) });
+  const images = createPreparedImageStore({ pools: assets.pools, ...(createImage ? { createImage } : {}) });
   const cache = new Map<string, CacheEntry>(), mount = new Set<string>(), warmed = new Set<string>(), tickets = new WeakMap<PreparedResidencyTicket, TicketState>();
   let committed = new Set<string>(), used = new Set<string>(), startup = new Set<string>(), warm: string[] = [];
   let pending: TicketState | null = null, destroyed = false, frameReads: Set<string> | null = null, sequence = 0, decodes = 0, paintDecodeChecks = 0;

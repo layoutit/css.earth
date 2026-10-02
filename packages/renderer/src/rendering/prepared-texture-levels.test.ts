@@ -18,13 +18,15 @@ const variants = ['a', 'b'].map(datasetId => ({ when: { datasetId }, required: [
   writes: [{ kind: 'texture' as const, resource: datasetId, target: 2, name: 'backgroundImage', quoted: true }] }));
 const definition = { textureLevels, variants, materials: [] } as unknown as PreparedPresentationDefinition;
 
-test('startup demands the camera texture level and only the selected dataset', () => {
+test('a body first demands its first texture level, then the level of its camera, and only the selected dataset', () => {
   const view = { sceneMatrix: '', sunViewDirection: null, levelOfDetail: { stage: 'geometry', silhouetteDiameter: 900, billboardOpacity: 0, markerOpacity: 0 } };
+  // The same start on every screen: a large silhouette does not pick a larger first demand.
   const initial = resolvePreparedPresentation(definition, { selection: { datasetId: 'a' }, view });
-  assert.deepEqual(initial.required, ['a']);
+  assert.deepEqual(initial.required, ['a-small']);
   const refined = resolvePreparedPresentation(definition, { selection: { datasetId: 'a' }, view, previousPlan: initial });
   assert.deepEqual(refined.required, ['a']);
-  assert.deepEqual(resolvePreparedPresentation(definition, { selection: { datasetId: 'b' }, view }).required, ['b']);
+  assert.deepEqual(resolvePreparedPresentation(definition, { selection: { datasetId: 'b' }, view }).required, ['b-small']);
+  assert.deepEqual(resolvePreparedPresentation(definition, { selection: { datasetId: 'b' }, view, previousPlan: refined }).required, ['b']);
 });
 
 test('a level names the selected dataset\'s textures there, and nothing beyond the prepared levels', () => {

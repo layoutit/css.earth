@@ -7,14 +7,7 @@ export interface PreparedImage {
 export interface PreparedImagePool { id: string | null; capacity: number; concurrency: number; reuse: boolean; decoding?: PreparedImage["decoding"];
   /** A pool that budgets decoded bytes holds images large enough to overflow the browser's own decode budget. */
   maximumDecodedBytes?: number; }
-export interface PreparedImageStoreOptions { createImage?: () => PreparedImage; decoding?: PreparedImage["decoding"]; pools?: readonly PreparedImagePool[];
-  /** How many of a pool's images may be downloading or decoding at once, read whenever a download could start: the
-   * default window (6, or the pool's decode concurrency) when undefined. A startup behind its photograph reveals nothing
-   * until every image of the first view is resident, so it asks for them all at once (prepared-resource-lease.ts). */
-  downloadWindow?: () => number | undefined;
-  /** How many of a pool's images may decode at once, read whenever a decode could start: the pool's own concurrency
-   * when undefined. The same startup raises it with its download window (prepared-resource-lease.ts). */
-  decodeWindow?: () => number | undefined; }
+export interface PreparedImageStoreOptions { createImage?: () => PreparedImage; decoding?: PreparedImage["decoding"]; pools?: readonly PreparedImagePool[]; }
 export interface PreparedImageLease {
   readonly role: string; load(url: string, options?: { pool?: string | null }): Promise<PreparedImage | null>;
   handoff(url: string): boolean; release(url: string): boolean; destroy(): void; keys(): readonly string[];
@@ -62,7 +55,7 @@ export function releasePreparedImage(image: PreparedImage) {
 // One store belongs to one mounted object. Leases own URLs independently; an
 // abandoned consumer cannot release another consumer's committed material.
 export function createPreparedImageStore({
-  createImage = () => new Image(), decoding = "async", pools = [], downloadWindow = () => undefined, decodeWindow = () => undefined,
+  createImage = () => new Image(), decoding = "async", pools = [],
 }: PreparedImageStoreOptions = {}) {
   const entries = new Map<string, ImageEntry>(), leases = new Set<PreparedImageLease>(), poolStates = new Map<string | null, PoolState>();
   let destroyed = false, pumping = false, retiringOwners = 0, allocations = 0, releases = 0;
@@ -120,8 +113,7 @@ export function createPreparedImageStore({
 
   // A small window overlaps transport with decoding without accumulating every
   // requested image. Pool capacity and decode concurrency remain authoritative.
-  const downloadLimit = (pool: PoolState) => Math.min(pool.capacity, Math.max(6, pool.concurrency, downloadWindow() ?? 0));
-  const decodeLimit = (pool: PoolState) => Math.min(pool.capacity, Math.max(pool.concurrency, decodeWindow() ?? 0));
+  const downloadLimit = (pool: PoolState) => Math.min(pool.capacity, Math.max(6, pool.concurrency));
 
   function startDownload(entry: ImageEntry, image: PreparedImage) {
     // Decode-only image adapters have no separate load notification.
@@ -163,7 +155,7 @@ export function createPreparedImageStore({
         const destination = [...entry.owners.values()].map(owner => owner.pool).find(pool =>
           pool.slots.filter(slot => slot.entry !== null).length < pool.capacity &&
           (entry.ready || pool.pending < downloadLimit(pool)) &&
-          (!entry.started || entry.ready || pool.active < decodeLimit(pool)));
+          (!entry.started || entry.ready || pool.active < pool.concurrency));
         if (!destination) continue;
         const previous = entry.pool;
         previous.slots.splice(previous.slots.indexOf(entry.slot), 1);
@@ -194,7 +186,7 @@ export function createPreparedImageStore({
             pool.pending++;
             startDownload(entry, slot.image);
           }
-          if (entry.retired || !entry.loaded || pool.active >= decodeLimit(pool)) continue;
+          if (entry.retired || !entry.loaded || pool.active >= pool.concurrency) continue;
           entry.started = true;
           pool.active++;
           const slot = entry.slot;

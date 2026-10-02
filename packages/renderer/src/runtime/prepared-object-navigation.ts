@@ -90,16 +90,14 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
       const fit = selectPreparedResponsiveZoom({ plan: camera, viewport, mobile });
       return fit.zoom / camera.defaultZoom * camera.logicalBodyDiameter / 2;
     },
-    async prepare({ signal, getView, cameraViewport, selectionStage, ownerDocument = typeof document === 'undefined' ? undefined : document, burstDownloads = false }: {
+    async prepare({ signal, getView, cameraViewport, selectionStage, ownerDocument = typeof document === 'undefined' ? undefined : document }: {
       signal: AbortSignal; getView: () => ObjectPreparationView; cameraViewport?: CameraViewport; selectionStage?: HTMLElement; ownerDocument?: Document;
-      /** Download the view's images all at once (prepared-resource-lease.ts): a stationary startup behind its photograph. */
-      burstDownloads?: boolean;
     }) {
       const definition = await abortable(load(signal), signal);
       // Resolve a new authored projection while the outgoing scene is intact.
       // Attachment only consumes this application-owned snapshot.
       cameraViewport?.read(definition.camera.projection.cssPerspective);
-      const resources = prepareObjectResources(definition.assets, { signal, startup: false, assetOrigin: definition.assetOrigin, burstDownloads });
+      const resources = prepareObjectResources(definition.assets, { signal, startup: false, assetOrigin: definition.assetOrigin });
       let tree: PreparedTreeLease | undefined;
       // A server-rendered scene is already prepared DOM; attachment adopts it.
       const construction = ownerDocument && !selectionStage?.dataset.preparedObject ? preparePresentationTree(definition.tree, ownerDocument, signal, undefined, definition.assetOrigin).then(value => { tree = value; }) : Promise.resolve();

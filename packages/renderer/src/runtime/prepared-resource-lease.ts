@@ -18,17 +18,9 @@ export interface PreparedResourceLease {
   destroy(): void;
 }
 
-export const BURST_DECODE_WINDOW = 8;
-
 export function prepareObjectResources(assets: PreparedAssets, {
-  signal, createResources = createPreparedResidency, assetOrigin, startup = true, burstDownloads = false,
-}: { signal?: AbortSignal; createResources?: typeof createPreparedResidency; assetOrigin?: PreparedAssetOrigin; startup?: boolean;
-  /** Download every image of the lease's demand at once instead of a window of six (prepared-image-store.ts): a startup
-   * behind its photograph shows nothing until all of them are resident. Earth's 75 first-view pages from R2 took about
-   * 490 ms through the window and 145 to 200 ms at once; with the decode window below, the last page was resident 11 ms
-   * after its bytes instead of 103 ms (local preview, headless Chromium, fastest of 5, 2026-10-02). Both windows return
-   * once the mount claims the lease. */
-  burstDownloads?: boolean } = {}): PreparedResourceLease {
+  signal, createResources = createPreparedResidency, assetOrigin, startup = true,
+}: { signal?: AbortSignal; createResources?: typeof createPreparedResidency; assetOrigin?: PreparedAssetOrigin; startup?: boolean } = {}): PreparedResourceLease {
   let state: LeaseState = { kind: 'starting' };
   const callbacks = () => state.kind === 'claimed' ? state.callbacks : null;
   const resources = createResources({ assets,
@@ -36,10 +28,6 @@ export function prepareObjectResources(assets: PreparedAssets, {
     onWarmError(error) { callbacks()?.onWarmError?.(error); },
     onCleanupError(error) { callbacks()?.onCleanupError?.(error); },
     ...(assetOrigin ? { assetOrigin } : {}),
-    // Decodes stay bounded: at the largest page level, 8 of Earth's 7.2 MB pages in flight stay well inside Chromium's
-    // decoded-image budget (about 256 MB, prepared-image-store.ts), where every page at once would not.
-    ...(burstDownloads ? { downloadWindow: () => state.kind === 'claimed' ? undefined : Infinity,
-      decodeWindow: () => state.kind === 'claimed' ? undefined : BURST_DECODE_WINDOW } : {}),
   });
   signal?.addEventListener('abort', destroy, { once: true });
   if (signal?.aborted) destroy();
