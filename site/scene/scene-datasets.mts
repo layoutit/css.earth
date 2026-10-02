@@ -1,3 +1,4 @@
+import { CONTEXT_DATASETS } from '../context-datasets.mts';
 import type { DatasetVolume } from '@cssearth/renderer/runtime/object-contract.ts';
 import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import type { PreparedFocusBank } from '@cssearth/renderer/universe/prepared-focus-bank.ts';
@@ -18,7 +19,7 @@ export function createDatasetEffects(session: SceneSession, getWorld: () => Comp
   let active: { volume: DatasetVolume; release(): void } | null = null;
   let prepared: { volume: DatasetVolume; signal: AbortSignal; release(): void } | null = null;
   session.own(() => {
-    if (active) { getWorld()?.setVolumeDatasetEnabled?.(active.volume.objectId, false); active.release(); }
+    if (active) { CONTEXT_DATASETS.delete(active.volume.objectId); getWorld()?.setVolumeDatasetEnabled?.(active.volume.objectId, false); active.release(); }
     prepared?.release(); active = null; prepared = null;
   });
   return {
@@ -41,7 +42,7 @@ export function createDatasetEffects(session: SceneSession, getWorld: () => Comp
       if (ownership.aborted) { pin.release(); return; }
       await bank.load();
       if (ownership.aborted) return;
-      if (!bank.state()?.datasets.some(dataset => dataset.id === volume.datasetId)) {
+      if (!bank.always && !bank.state()?.datasets.some(dataset => dataset.id === volume.datasetId)) {
         throw new RangeError(`Dataset cloud dataset “${volume.datasetId}” is unavailable.`);
       }
     },
@@ -50,7 +51,9 @@ export function createDatasetEffects(session: SceneSession, getWorld: () => Comp
       const pin = prepared;
       if (volume && (!pin || pin.volume !== volume)) throw new Error('Dataset companion was not prepared.');
       if (active && active.volume.objectId !== volume?.objectId) getWorld()?.setVolumeDatasetEnabled?.(active.volume.objectId, false);
+      if (active) CONTEXT_DATASETS.delete(active.volume.objectId);
       if (volume) {
+        CONTEXT_DATASETS.set(volume.objectId, volume.datasetId);
         getWorld()?.selectVolumeDataset?.(volume.objectId, volume.datasetId);
         getWorld()?.setVolumeDatasetEnabled?.(volume.objectId, true);
       }

@@ -1,8 +1,10 @@
+import { sectionElements } from '@cssearth/renderer';
 import type { BrowserWindow } from './browser/browser-types.mts';
 
 /** Only the selected system's body list travels to the shell, alongside its retained headers. */
 export function createSystemBodiesPresentation(card: HTMLElement | null | undefined, windowTarget?: BrowserWindow) {
-  const slot = card?.querySelector<HTMLElement>('[data-system-bodies-slot]');
+  // The slot waits off the page until the system is the card's subject (detached-sections.ts).
+  const slot = card ? sectionElements(card, '[data-system-bodies-slot]')[0] : undefined;
   let requestedId: string | null = null, loadingId: string | null = null;
   return { show(id: string | null) {
     requestedId = id;

@@ -18,7 +18,7 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/local-group/source/provenance.json",
+      "path": "src/objects/local-group-galaxies/source/provenance.json",
       "locator": "/"
     }
   ],
@@ -29,7 +29,7 @@
       "kind": "limitation",
       "text": "Release identity transcribed from the retained source record; hashes identify the retained files separately.",
       "scope": "release",
-      "evidence": "src/objects/local-group/source/provenance.json"
+      "evidence": "src/objects/local-group-galaxies/source/provenance.json"
     }
   ]
 }

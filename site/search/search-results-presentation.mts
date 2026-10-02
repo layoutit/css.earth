@@ -1,17 +1,6 @@
 import type { FindResult } from './find-protocol.mts';
 import { requiredElement, requiredSection, setPanelHidden, setSectionShown } from '../browser/browser-types.mts';
 
-/** Keep existing overview destinations reachable as ordinary search rows. */
-export function presentOverviewResults(browser: HTMLElement, value: string) {
-  const query = value.trim().toLocaleLowerCase('en');
-  let count = 0;
-  for (const row of browser.querySelectorAll<HTMLElement>('[data-search-overview]')) {
-    row.hidden = !query || !row.dataset.searchOverview?.includes(query);
-    if (!row.hidden) count++;
-  }
-  return count;
-}
-
 /** Native requests and live interactions publish the same retained sidebar. */
 export function createSearchPresentation(documentTarget: Document) {
   // The browser is mounted only while search is open (detached-sections.ts).

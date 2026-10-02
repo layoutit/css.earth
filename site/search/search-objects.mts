@@ -14,7 +14,6 @@ export function objectNavigation<T extends { distance: { meters: number }; class
   });
 }
 
-// A level of the zoom ladder is listed in its own rows (CatalogueOverviewRows.astro), placed or not.
 const navigation = objectNavigation(OBJECTS);
 export const SEARCH_OBJECTS = navigation.search;
 export const PLANET_NAVIGATION_OBJECTS = navigation.planets;

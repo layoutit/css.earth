@@ -9,16 +9,16 @@ import type { SceneContext } from './scene/scene-selection.mts';
 /** The selected body's own close-up leads into its nearest prepared satellite family. */
 export function satelliteSelectionAtCamera(world: WorldCameraPose, optics: ReturnType<ObjectWorldNavigation['optics']>,
   objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[], selection: SceneContext): SceneContext | null {
-  if (selection.kind === 'overview') return null;
-  const id = selection.kind === 'satellite-system' ? selection.hostId : selection.objectId;
+  if (selection.view === 'system') return null;
+  const id = selection.objectId;
   const family = satelliteSystemByHost(id) ?? satelliteSystemOfMember(id);
   if (!family) return null;
   const frame = objects.find(object => object.id === id)?.worldFrame;
   if (!frame) return null;
   const card = bodyViewAtCamera(world, frame, optics, id,
-    selection.kind === 'satellite-system' ? 'overview' : 'detail');
-  if (selection.kind === 'satellite-system' && card === 'detail') return { kind: 'object', objectId: id };
-  if (selection.kind === 'object' && card === 'overview') return { kind: 'satellite-system', hostId: family.hostId };
+    selection.view === 'moons' ? 'overview' : 'detail');
+  if (selection.view === 'moons' && card === 'detail') return { objectId: id, view: 'body' };
+  if (selection.view === 'body' && card === 'overview') return { objectId: family.hostId, view: 'moons' };
   return null;
 }
 
@@ -32,9 +32,7 @@ export function watchSatelliteSelection({ navigation, objects, getSelection, isA
   let latest: { world: WorldCameraPose; optics: ReturnType<ObjectWorldNavigation['optics']> } | null = null;
   let candidate: SceneContext | null = null;
   const cancel = () => { if (timer !== null) windowTarget.clearTimeout(timer); timer = null; candidate = null; };
-  const same = (a: SceneContext | null, b: SceneContext | null) => a?.kind === b?.kind
-    && (a?.kind === 'object' && b?.kind === 'object' ? a.objectId === b.objectId
-      : a?.kind === 'satellite-system' && b?.kind === 'satellite-system' ? a.hostId === b.hostId : a === b);
+  const same = (a: SceneContext | null, b: SceneContext | null) => a?.view === b?.view && a?.objectId === b?.objectId;
   const inspect = () => {
     timer = null; candidate = null;
     if (disposed || coasting || !isAvailable() || !latest) return;

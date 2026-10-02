@@ -109,7 +109,7 @@ test('offline sky shadow suppression removes black noise, rolls soft signal, and
   assert(Math.abs(colored[1]! / colored[2]! - omitted[1]! / omitted[2]!) < .08);
 });
 test('sky recipe display controls default safely and reject malformed values', async () => {
-  const raw = JSON.parse(await readFile('src/objects/milky-way/source/sky/recipe.json', 'utf8'));
+  const raw = JSON.parse(await readFile('src/objects/milky-way-volume/source/sky/recipe.json', 'utf8'));
   const { displayGain: _gain, shadowFloor: _floor, ...bake } = raw.bake;
   const omitted = parseSkyRecipe({ ...raw, bake });
   assert.equal(omitted.bake.displayGain, 1);
@@ -151,7 +151,7 @@ test('optional authored sky parallax validates physical placement and survives t
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 test('actual compiled sky image corners retain ICRF orientation after PolyCSS reflection', async () => {
-  const volume = JSON.parse(await readFile('src/objects/milky-way/prepared/volume.json', 'utf8')) as { data: { sky: PreparedCssSky } };
+  const volume = JSON.parse(await readFile('src/objects/milky-way-volume/prepared/volume.json', 'utf8')) as { data: { sky: PreparedCssSky } };
   assert(volume.data.sky);
   for (const face of volume.data.sky.faces) {
     const m = face.style.transform.slice(9, -1).split(',').map(Number), width = parseFloat(face.style.width), height = parseFloat(face.style.height);

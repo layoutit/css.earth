@@ -38,7 +38,7 @@ export const M31: CepheidGalaxy = { name: GALAXY, objectId: 'm31', reader: 'the 
 export interface GalaxyCepheid { readonly name: string; readonly target: string; readonly raDeg: number; readonly decDeg: number; readonly periodDays: number; readonly periodSource: string; readonly paper: { url: string; credit: string };
   readonly position: { catalogue: string; row: Record<string, string>; credit: string; url: string }; readonly found: string; readonly locator: string; readonly aliases?: readonly string[]; readonly featured?: true }
 
-/** The Local Volume Database release the Local Group's galaxies are placed by (src/objects/local-group). */
+/** The Local Volume Database release the Local Group's galaxies are placed by (src/objects/local-group-galaxies). */
 const LVDB = { credit: 'the Local Volume Database v1.1.1 (Pace 2025)', url: 'https://doi.org/10.33232/001c.144859' };
 /** The disc the app draws `galaxy` on, from its package's recipe: the same construction its layers and catalogue dots use. */
 export async function galaxyDisc(root: string, galaxy: CepheidGalaxy) {
