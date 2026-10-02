@@ -25,6 +25,26 @@
       "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
       "checkedOn": "2026-09-29",
       "locator": "VII/155/rc3 row NGC 224 (PGC 2557): B-VT = 0.92 +/- 0.02, B-VoT = 0.68, U-BT = 0.50 +/- 0.02. Query: SELECT name, PGC, BT, \"B-VT\", \"e_B-VT\", \"B-VoT\", \"U-BT\" FROM \"VII/155/rc3\" WHERE 1=CONTAINS(POINT('ICRS', RA2000, DE2000), CIRCLE('ICRS', 10.6847, 41.2687, 0.1))"
+    },
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-10-01",
+      "locator": "VII/155/rc3 row NGC 2903 (PGC 27077): B-VT = 0.67 +/- 0.01, B-VoT = 0.55. Query: SELECT name, PGC, BT, \"B-VT\", \"e_B-VT\", \"B-VoT\" FROM \"VII/155/rc3\" WHERE 1=CONTAINS(POINT('ICRS', RA2000, DE2000), CIRCLE('ICRS', 143.042, 21.501, 0.1))"
+    },
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-10-01",
+      "locator": "VII/155/rc3 row NGC 5457 (PGC 50063): B-VT = 0.45 +/- 0.04, B-VoT = 0.44. Query: SELECT name, PGC, BT, \"B-VT\", \"e_B-VT\", \"B-VoT\" FROM \"VII/155/rc3\" WHERE 1=CONTAINS(POINT('ICRS', RA2000, DE2000), CIRCLE('ICRS', 210.802, 54.349, 0.1))"
+    },
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-10-01",
+      "locator": "VII/155/rc3 row NGC 6946 (PGC 65001): B-VT = 0.80 +/- 0.04, B-VoT = 0.40. Query: SELECT name, PGC, BT, \"B-VT\", \"e_B-VT\", \"B-VoT\" FROM \"VII/155/rc3\" WHERE 1=CONTAINS(POINT('ICRS', RA2000, DE2000), CIRCLE('ICRS', 308.718, 60.154, 0.1))"
+    },
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-10-01",
+      "locator": "VII/155/rc3 row NGC 1637 (PGC 15821): B-VT = 0.64 +/- 0.02. Query: SELECT name, PGC, BT, \"B-VT\", \"e_B-VT\" FROM \"VII/155/rc3\" WHERE 1=CONTAINS(POINT('ICRS', RA2000, DE2000), CIRCLE('ICRS', 70.367, -2.858, 0.1))"
     }
   ],
   "creators": [
@@ -42,7 +62,7 @@
     {
       "kind": "credit",
       "text": "Cite de Vaucouleurs et al. (1991), Third Reference Catalogue of Bright Galaxies.",
-      "scope": "M31 integrated colour",
+      "scope": "Integrated colours of galaxies",
       "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/155"
     }
   ]

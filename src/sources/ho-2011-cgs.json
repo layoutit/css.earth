@@ -1,0 +1,53 @@
+{
+  "id": "ho-2011-cgs",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Carnegie-Irvine Galaxy Survey. I. Overview and Atlas of Optical Images",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2011ApJS..197...21H"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/197/21"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...21H",
+      "label": "2011ApJS..197...21H"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/197/21",
+      "label": "CDS J/ApJS/197/21"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/197/21/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "cgs, row NGC 6744 (Seq 530): total apparent magnitudes Btmag 9.87 +/- 0.21 and Vtmag 9.25 +/- 0.11, Galactic extinction AB 0.185. Query: SELECT * FROM \"J/ApJS/197/21/cgs\" WHERE Name LIKE '%6744%'"
+    }
+  ],
+  "creators": [
+    "L. C. Ho",
+    "Z.-Y. Li",
+    "A. J. Barth",
+    "M. S. Seigar",
+    "C. Y. Peng"
+  ],
+  "publisher": "ApJS 197, 21",
+  "publicationDate": "2011",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Ho et al. (2011), ApJS 197, 21.",
+      "scope": "NGC 6744's integrated colour",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/197/21/ReadMe"
+    }
+  ]
+}

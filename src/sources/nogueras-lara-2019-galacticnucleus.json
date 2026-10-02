@@ -1,0 +1,58 @@
+{
+  "id": "nogueras-lara-2019-galacticnucleus",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "GALACTICNUCLEUS: A high-angular-resolution JHKs imaging survey of the Galactic centre. II. First data release of the catalogue and the most detailed CMDs of the GC",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2019A&A...631A..20N"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/631/A20"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...631A..20N",
+      "label": "2019A&A...631A..20N"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/631/A20",
+      "label": "CDS J/A+A/631/A20"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/631/A20",
+      "checkedOn": "2026-10-01",
+      "locator": "Table central (pointings 1-30, corrected version of 2020-03-31): J2000 positions and J, H and Ks magnitudes. VizieR lists 155,866 stars brighter than Ks 16 within 6 arcminutes of Sgr A*."
+    }
+  ],
+  "creators": [
+    "F. Nogueras-Lara",
+    "R. Schödel",
+    "A. T. Gallego-Calvente",
+    "H. Dong",
+    "E. Gallego-Cano",
+    "B. Shahzamanian",
+    "J. H. V. Girard",
+    "S. Nishiyama",
+    "F. Najarro",
+    "N. Neumayer"
+  ],
+  "publisher": "A&A 631, A20",
+  "publicationDate": "2019",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Nogueras-Lara et al. (2019), A&A 631, A20, distributed by CDS/VizieR.",
+      "scope": "Stars of the Milky Way's nuclear star cluster",
+      "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/631/A20"
+    }
+  ]
+}

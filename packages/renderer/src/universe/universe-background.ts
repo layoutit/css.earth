@@ -60,11 +60,15 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
   let backingLoading = false;
   // The last frame the backing was published for: a layer that loads while the camera rests is placed from it at once.
   let backingFrame: { world: WorldCameraPose; viewport: WorldCameraViewport; distanceM: number; shown: number } | null = null;
+  // The backing's centre and the range it fades out over as the camera closes on it (galaxy-backing.ts centreFadeM).
+  let backingCentre: { originM: readonly number[]; fadeM: readonly [number, number] } | null = null;
   const publishBacking = ({ world, viewport, distanceM, shown }: NonNullable<typeof backingFrame>) => {
+    const centre = backingCentre ? logarithmicFade(Math.hypot(...world.pose.positionM.map((value, axis) => value - backingCentre!.originM[axis]!)),
+      backingCentre.fadeM[1], backingCentre.fadeM[0]) : 1;
     // Close up the image's pixels blow up and blur: each layer dims toward its near opacity over its own range.
     for (const layer of backing ?? []) {
       const fade = layer.fade, far = fade ? logarithmicFade(distanceM, fade.fadeM[1], fade.fadeM[0]) : 1;
-      const opacity = shown * (fade ? fade.nearOpacity + (1 - fade.nearOpacity) * far : 1);
+      const opacity = shown * centre * (fade ? fade.nearOpacity + (1 - fade.nearOpacity) * far : 1);
       // The camera first, then the layer shows: a plane never paints before it is placed.
       if (opacity > 0) layer.plane.publish({ world, viewport });
       if (opacity !== layer.opacity) {
@@ -155,6 +159,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
             plane: mountGalaxyBacking({ host: backingHost, before: backingEnd, payload: { ...payload, leaf: { ...payload.leaf, texturePath: layer.texturePath } }, resolveResource }),
             fade: layer.fade, opacity: NaN, image: resolveResource(layer.texturePath) }));
           for (const layer of backing) layer.plane.root.style.display = 'none';
+          if (payload.centreFadeM) backingCentre = { originM: payload.frame.originM, fadeM: payload.centreFadeM };
           lifetime.onDispose(() => { for (const layer of backing ?? []) layer.plane.destroy(); });
           if (backingFrame) publishBacking(backingFrame);
         }).catch(error => console.error(`Galaxy backing ${backingUrl} failed`, error)); });

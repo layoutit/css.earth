@@ -1,0 +1,28 @@
+{
+  "provenance": {
+    "name": "Nuclear star cluster",
+    "products": [
+      {
+        "id": "dots",
+        "label": "GALACTICNUCLEUS central catalogue, CDS J/A+A/631/A20",
+        "process": "Keep the stars brighter than Ks 14 and redder than H - Ks 1.3 inside two half-light radii of the cluster, thinned to the cluster's share of the star counts; place each at its sky position, at a depth along the sight line drawn from the cluster's published Sérsic fit; tone by Ks as observed.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "stars"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "A star's depth within the cluster is drawn from the cluster's measured shape, not measured.",
+          "Dust in front of the cluster hides its stars south-west of Sgr A*."
+        ]
+      }
+    ]
+  }
+}

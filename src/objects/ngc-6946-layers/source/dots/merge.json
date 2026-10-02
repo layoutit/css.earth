@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "dots",
+  "published": true,
+  "meaning": "NGC 6946's catalogued objects as dots on its photograph's disc: supernova remnant candidates and hii regions.",
+  "centreOnGalaxy": true,
+  "banks": [
+    {
+      "bank": "long-snr",
+      "withinPcOfCentre": 17500,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 17.5 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "cedres-hii",
+      "withinPcOfCentre": 17500,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 17.5 kpc support radius (recipe.json)."
+    }
+  ],
+  "colourTowardWhite": 0.5,
+  "colourTowardWhiteBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), so both galaxies' dots read as the same tints of starlight.",
+  "colourGamma": 1.6,
+  "colourGammaBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), picked there from three renders over its backing."
+}

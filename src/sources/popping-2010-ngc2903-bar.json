@@ -1,0 +1,51 @@
+{
+  "id": "popping-2010-ngc2903-bar",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Multiwavelength study of the star-formation in the bar of NGC 2903",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2010A&A...521A...8P"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/521/A8"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...521A...8P",
+      "label": "2010A&A...521A...8P"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/521/A8",
+      "label": "CDS J/A+A/521/A8"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/521/A8/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "table2: 67 HII regions of the bar zone of NGC 2903 with J2000 positions, from H-alpha imaging."
+    }
+  ],
+  "creators": [
+    "G. Popping",
+    "I. Pérez",
+    "A. Zurita"
+  ],
+  "publisher": "A&A 521, A8",
+  "publicationDate": "2010",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Popping et al. (2010), A&A 521, A8.",
+      "scope": "NGC 2903 HII regions",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/521/A8/ReadMe"
+    }
+  ]
+}

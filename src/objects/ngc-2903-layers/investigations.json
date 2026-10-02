@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-2903-layers",
+  "entries": [
+    {
+      "id": "sdss-colour",
+      "subject": "SDSS DR9 colour HiPS",
+      "status": "included",
+      "finding": "A 3000 x 3000 px hips2fits cutout of CDS/P/SDSS9/color, 20 arcmin wide at the survey's 0.4 arcsec per pixel. The bar and the star-forming centre are not saturated. Shallow: the outer arms are faint.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "https://www.sdss.org/collaboration/#image-use"
+      ]
+    },
+    {
+      "id": "legacy-surveys-colour",
+      "subject": "DESI Legacy Imaging Surveys DR9 and DR10 colour composites",
+      "status": "excluded",
+      "finding": "Looked at as 700 px previews on 2026-10-01. The DR10 colour HiPS has a purple band of corrupt coadd across the southern half of the disc. The DR9 viewer cutout is clean and deeper than SDSS, but its display stretch saturates the bar and the inner disc to white.",
+      "evidence": [
+        "https://www.legacysurvey.org/viewer/cutout.jpg?ra=143.042&dec=21.501&layer=ls-dr9&pixscale=0.4&size=700"
+      ],
+      "revisitWhen": "A Legacy Surveys composite with an unsaturated centre is published, or the bake composes two images as M31's does."
+    },
+    {
+      "id": "pan-starrs-colour",
+      "subject": "Pan-STARRS DR1 colour HiPS",
+      "status": "excluded",
+      "finding": "Its sky subtraction leaves dark blocks across and around the disc (700 px preview, 2026-10-01).",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FPanSTARRS%2FDR1%2Fcolor-z-zg-g&get=record"
+      ]
+    },
+    {
+      "id": "press-images",
+      "subject": "Observatory press images of NGC 2903",
+      "status": "excluded",
+      "finding": "The NOIRLab and ESO image archives return no photograph of NGC 2903. ESA/Hubble's potw2143a (5903 x 3959 px) and heic0102a cover the inner disc only.",
+      "evidence": [
+        "https://esahubble.org/images/potw2143a/"
+      ],
+      "revisitWhen": "A whole-disc photograph is published under an attribution licence."
+    }
+  ]
+}
