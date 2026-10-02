@@ -1,3 +1,4 @@
+import { fromEyeM } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
 
@@ -12,7 +13,7 @@ export interface SphereSilhouette { readonly x: number; readonly y: number; read
 export function sphereSilhouette(world: WorldCameraPose, viewport: WorldCameraViewport, centreM: readonly number[], radiusM: number): SphereSilhouette | null {
   const f = viewport.focalPixels;
   if (!(f > 0) || !(radiusM > 0)) return null;
-  const delta = centreM.map((value, axis) => value - world.pose.positionM[axis]!);
+  const delta = fromEyeM(world.pose, centreM);
   const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
   const eyeX = rotation[0]! * delta[0]! + rotation[1]! * delta[1]! + rotation[2]! * delta[2]!;
   const eyeY = rotation[3]! * delta[0]! + rotation[4]! * delta[1]! + rotation[5]! * delta[2]!;

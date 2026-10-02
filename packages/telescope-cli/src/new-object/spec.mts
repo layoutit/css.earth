@@ -57,8 +57,11 @@
  * card and introduction stay marked for a person. `notes` are sentences for the README's "Not shown" list. A planet may carry
  * `thermal` (a measured dayside brightness temperature from the archive's emission table, for the "Thermal glow" dataset) or
  * `photometry` (three-band flux densities for the band-colour dataset); planet-datasets.mts. `phaseCurves` adds a heat-map dataset per
- * published phase-curve fit beside the colour dataset (phase-curve-dataset.mts). */
+ * published phase-curve fit beside the colour dataset (phase-curve-dataset.mts).
+ *
+ * A file may also hold `"pulsars": [ … ]`: neutron stars with a published hot-region map, written whole from cited values (pulsar.mts). */
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { parsePulsarSpec, type PulsarSpec } from './pulsar.mts';
 import { DISC_BAND_COLOR_SCHEMA, parseDiscBandColorRecord } from '@cssearth/bake/objects/layers/observation';
 import { phaseCurveEntry, type PhaseCurveEntry } from './phase-curve-dataset.mts';
 
@@ -307,13 +310,15 @@ export function parseHostAddition(value: unknown): HostAddition {
 }
 
 /** A spec file's entries: new stars with their systems, and additions to stars that exist. */
-export function parseObjectSpecs(value: unknown): { readonly stars: StarSpec[]; readonly additions: HostAddition[] } {
-  const entries = isRecord(value) ? requireArray(value.stars, 'stars') : requireArray(value, 'object specs');
+export function parseObjectSpecs(value: unknown): { readonly stars: StarSpec[]; readonly additions: HostAddition[]; readonly pulsars: PulsarSpec[] } {
+  // `pulsars` are neutron stars with a published surface map (pulsar.mts); a file may hold only them.
+  const pulsars = isRecord(value) && value.pulsars !== undefined ? requireArray(value.pulsars, 'pulsars').map(parsePulsarSpec) : [];
+  const entries = isRecord(value) ? (value.stars === undefined && pulsars.length ? [] : requireArray(value.stars, 'stars')) : requireArray(value, 'object specs');
   const stars = entries.filter(entry => !(isRecord(entry) && entry.host !== undefined)).map(parseStarSpec), additions = entries.filter(entry => isRecord(entry) && entry.host !== undefined).map(parseHostAddition);
-  const ids = [...stars.flatMap(spec => [spec.id, ...spec.planets.map(p => p.id), ...spec.companions.map(c => c.id)]), ...additions.flatMap(entry => [...entry.planets, ...entry.companions].map(body => body.id))];
+  const ids = [...pulsars.map(spec => spec.id), ...stars.flatMap(spec => [spec.id, ...spec.planets.map(p => p.id), ...spec.companions.map(c => c.id)]), ...additions.flatMap(entry => [...entry.planets, ...entry.companions].map(body => body.id))];
   const repeated = ids.filter((id, i) => ids.indexOf(id) !== i);
   if (repeated.length) throw new TypeError(`Object ids repeat: ${repeated.join(', ')}.`);
-  return { stars, additions };
+  return { stars, additions, pulsars };
 }
 
 /** `--photometry entries.json`: a list of { id, photometry } for planets already in the tree. */

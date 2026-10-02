@@ -1,3 +1,4 @@
+import { eyeDistanceM } from '@cssearth/engine';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -61,7 +62,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
   // The backing's centre and the range it fades out over as the camera closes on it (galaxy-backing.ts centreFadeM).
   let backingCentre: { originM: readonly number[]; fadeM: readonly [number, number] } | null = null;
   const publishBacking = ({ world, viewport, distanceM, shown }: NonNullable<typeof backingFrame>) => {
-    const centre = backingCentre ? logarithmicFade(Math.hypot(...world.pose.positionM.map((value, axis) => value - backingCentre!.originM[axis]!)),
+    const centre = backingCentre ? logarithmicFade(eyeDistanceM(world.pose, backingCentre.originM),
       backingCentre.fadeM[1], backingCentre.fadeM[0]) : 1;
     // Close up the image's pixels blow up and blur: each layer dims toward its near opacity over its own range.
     for (const layer of backing ?? []) {
@@ -112,7 +113,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       selectedPositionM: readonly number[], detailContextOpacity: number): number {
       if (lifetime.disposed) return 0;
       // Every placed body starts inside the galaxy, so its own distance gates the volume.
-      const volumeDistanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - selectedPositionM[axis]!));
+      const volumeDistanceM = eyeDistanceM(world.pose, selectedPositionM);
       // The galaxy's nebulae and catalogue images keep their own distance fade; it is what this returns.
       const volumeOpacity = preparedVolumeOpacity(volumeDistanceM, plan.volume.opacityProfile);
       // Inside the galaxy the NASA band is the sky; outside it the galaxy is its slices and face-on image.

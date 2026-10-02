@@ -1,0 +1,309 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "psr-j0437-4715",
+  "source": "NSX hydrogen atmosphere table nsx_H_v200804.out (Ho & Lai 2001, MNRAS 327, 1081; Ho & Heinke 2009, Nature 462, 71), distributed with X-PSI (https://doi.org/10.5281/zenodo.7113931)",
+  "band": "Bolometric: the table's specific intensity integrated over photon energy",
+  "law": "I(mu)/I(1) = 1 - u1 (1 - mu) - u2 (1 - mu)^2",
+  "basis": "model-prior",
+  "u1": {
+    "value": 0.9388,
+    "fixed": "least-squares fit to the table's 62 emission cosines of 0.05 and above; largest miss 0.003 of the centre intensity"
+  },
+  "u2": {
+    "value": 0.0293,
+    "fixed": "least-squares fit to the table's 62 emission cosines of 0.05 and above; largest miss 0.003 of the centre intensity"
+  },
+  "computed": {
+    "log10Gravity": 14.2637,
+    "gravity": "GM/R^2 (1 - 2GM/Rc^2)^(-1/2) from the cited mass and radius, in cgs",
+    "temperatureK": 250000,
+    "profile": [
+      {
+        "mu": 1,
+        "intensity": 1
+      },
+      {
+        "mu": 0.999999995,
+        "intensity": 1
+      },
+      {
+        "mu": 0.9999995,
+        "intensity": 1
+      },
+      {
+        "mu": 0.99995,
+        "intensity": 0.99995
+      },
+      {
+        "mu": 0.999657325,
+        "intensity": 0.99968
+      },
+      {
+        "mu": 0.998629535,
+        "intensity": 0.9987
+      },
+      {
+        "mu": 0.996917334,
+        "intensity": 0.99708
+      },
+      {
+        "mu": 0.994521895,
+        "intensity": 0.99482
+      },
+      {
+        "mu": 0.991444861,
+        "intensity": 0.9919
+      },
+      {
+        "mu": 0.987688341,
+        "intensity": 0.98835
+      },
+      {
+        "mu": 0.983254908,
+        "intensity": 0.98414
+      },
+      {
+        "mu": 0.978147601,
+        "intensity": 0.97931
+      },
+      {
+        "mu": 0.97236992,
+        "intensity": 0.97383
+      },
+      {
+        "mu": 0.965925826,
+        "intensity": 0.96774
+      },
+      {
+        "mu": 0.958819735,
+        "intensity": 0.961
+      },
+      {
+        "mu": 0.951056516,
+        "intensity": 0.95365
+      },
+      {
+        "mu": 0.942641491,
+        "intensity": 0.94567
+      },
+      {
+        "mu": 0.933580426,
+        "intensity": 0.93709
+      },
+      {
+        "mu": 0.923879533,
+        "intensity": 0.92789
+      },
+      {
+        "mu": 0.913545458,
+        "intensity": 0.9181
+      },
+      {
+        "mu": 0.902585284,
+        "intensity": 0.9077
+      },
+      {
+        "mu": 0.891006524,
+        "intensity": 0.89672
+      },
+      {
+        "mu": 0.878817113,
+        "intensity": 0.88515
+      },
+      {
+        "mu": 0.866025404,
+        "intensity": 0.87302
+      },
+      {
+        "mu": 0.852640164,
+        "intensity": 0.86031
+      },
+      {
+        "mu": 0.838670568,
+        "intensity": 0.84704
+      },
+      {
+        "mu": 0.824126189,
+        "intensity": 0.83322
+      },
+      {
+        "mu": 0.809016994,
+        "intensity": 0.81885
+      },
+      {
+        "mu": 0.79335334,
+        "intensity": 0.80396
+      },
+      {
+        "mu": 0.777145961,
+        "intensity": 0.78855
+      },
+      {
+        "mu": 0.760405966,
+        "intensity": 0.77262
+      },
+      {
+        "mu": 0.743144825,
+        "intensity": 0.75619
+      },
+      {
+        "mu": 0.725374371,
+        "intensity": 0.73926
+      },
+      {
+        "mu": 0.707106781,
+        "intensity": 0.72185
+      },
+      {
+        "mu": 0.688354576,
+        "intensity": 0.70396
+      },
+      {
+        "mu": 0.669130606,
+        "intensity": 0.68561
+      },
+      {
+        "mu": 0.649448048,
+        "intensity": 0.66682
+      },
+      {
+        "mu": 0.629320391,
+        "intensity": 0.64758
+      },
+      {
+        "mu": 0.608761429,
+        "intensity": 0.62792
+      },
+      {
+        "mu": 0.587785252,
+        "intensity": 0.60784
+      },
+      {
+        "mu": 0.566406237,
+        "intensity": 0.58736
+      },
+      {
+        "mu": 0.544639035,
+        "intensity": 0.56647
+      },
+      {
+        "mu": 0.522498565,
+        "intensity": 0.54521
+      },
+      {
+        "mu": 0.5,
+        "intensity": 0.52358
+      },
+      {
+        "mu": 0.47715876,
+        "intensity": 0.50159
+      },
+      {
+        "mu": 0.4539905,
+        "intensity": 0.47926
+      },
+      {
+        "mu": 0.430511097,
+        "intensity": 0.45659
+      },
+      {
+        "mu": 0.406736643,
+        "intensity": 0.43359
+      },
+      {
+        "mu": 0.382683432,
+        "intensity": 0.41029
+      },
+      {
+        "mu": 0.35836795,
+        "intensity": 0.38668
+      },
+      {
+        "mu": 0.333806859,
+        "intensity": 0.36277
+      },
+      {
+        "mu": 0.309016994,
+        "intensity": 0.33858
+      },
+      {
+        "mu": 0.284015345,
+        "intensity": 0.31411
+      },
+      {
+        "mu": 0.258819045,
+        "intensity": 0.28937
+      },
+      {
+        "mu": 0.233445364,
+        "intensity": 0.26436
+      },
+      {
+        "mu": 0.207911691,
+        "intensity": 0.23908
+      },
+      {
+        "mu": 0.182235525,
+        "intensity": 0.21352
+      },
+      {
+        "mu": 0.156434465,
+        "intensity": 0.18767
+      },
+      {
+        "mu": 0.130526192,
+        "intensity": 0.16152
+      },
+      {
+        "mu": 0.104528463,
+        "intensity": 0.13502
+      },
+      {
+        "mu": 0.0784590957,
+        "intensity": 0.10812
+      },
+      {
+        "mu": 0.0523359562,
+        "intensity": 0.08073
+      },
+      {
+        "mu": 0.0261769483,
+        "intensity": 0.05282
+      },
+      {
+        "mu": 0.00999983333,
+        "intensity": 0.03614
+      },
+      {
+        "mu": 0.000999999833,
+        "intensity": 0.03744
+      },
+      {
+        "mu": 0.0000999999998,
+        "intensity": 0.06341
+      },
+      {
+        "mu": 0.000001,
+        "intensity": 0.15848
+      }
+    ],
+    "otherTemperatures": [
+      {
+        "temperatureK": 1188502,
+        "u1": 0.8698,
+        "u2": -0.0056
+      },
+      {
+        "temperatureK": 1581248,
+        "u1": 0.8365,
+        "u2": -0.0151
+      },
+      {
+        "temperatureK": 529663,
+        "u1": 0.9251,
+        "u2": 0.0193
+      }
+    ]
+  },
+  "note": "One law is drawn over the whole disc, at the temperature most of it is at. The table is the fully ionized atmosphere the hot-region fit uses; the paper that measures the cooler surface models it with a partially ionized one, which this table does not hold. The hot regions' own laws are in otherTemperatures."
+}

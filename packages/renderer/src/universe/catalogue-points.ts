@@ -1,3 +1,4 @@
+import { eyeDistanceM } from '@cssearth/engine';
 import { MAX_CATALOGUE_POINTS, parseCatalogueCells, parseCataloguePointSpread, parseDensityVolumeFrame } from '@cssearth/objects';
 import { decodeCatalogueBankBinary } from '../prepared-data/catalogue-bank-binary.js';
 import { readPreparedBinary } from '../prepared-data/prepared-binary.js';
@@ -231,8 +232,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
       if (destroyed) return;
       let alpha = Math.max(0, Math.min(1, opacity));
       if (extent) {
-        const position = publication.world.pose.positionM;
-        const distanceM = Math.hypot(...position.map((value, axis) => value - extent!.originM[axis]!));
+        const distanceM = eyeDistanceM(publication.world.pose, extent.originM);
         const pixels = distanceM > extent.radiusM ? publication.viewport.focalPixels * extent.radiusM / distanceM : Infinity;
         const t = Math.max(0, Math.min(1, (pixels - EXTENT_FADE_PIXELS[0]) / (EXTENT_FADE_PIXELS[1] - EXTENT_FADE_PIXELS[0])));
         alpha *= t * t * (3 - 2 * t);
@@ -295,7 +295,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
           return value;
         };
         const distanceOf = (publication: VolumeCameraPublication) =>
-          Math.hypot(...publication.world.pose.positionM.map((value, axis) => value - bank.frame.originM[axis]!)) / bank.frame.metersPerUnit;
+          eyeDistanceM(publication.world.pose, bank.frame.originM) / bank.frame.metersPerUnit;
         // A level's exact repaint after a pause measures the view the camera stopped at: the shares are recomputed from it and
         // published once more, so a still view keeps the same dots however the frames before it were paced.
         const settled = () => { if (latest && runtime) { runtime.publish(latest); runtime.publish(latest); } };

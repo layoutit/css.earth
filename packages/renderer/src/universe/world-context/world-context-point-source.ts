@@ -1,3 +1,4 @@
+import { fromEyeM } from '@cssearth/engine';
 import { presentWorldCamera } from '../../navigation/world-camera.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/world-camera.js';
 import { cssViewFromOrientation, rotateWorldPosition } from '../../navigation/world-camera-math.js';
@@ -154,8 +155,6 @@ function occludesFocus(world: WorldCameraPose, plan: PreparedWorldContext,
       !occluder.positionM.every(Number.isFinite) ||
       (occluder.radiusM === plan.focus.radiusM && occluder.positionM.every((value, axis) => value === plan.focus.positionM[axis]))) return false;
   const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
-  const toEye = (positionM: readonly [number, number, number]) => rotateWorldPosition(rotation, [
-    positionM[0] - world.pose.positionM[0], positionM[1] - world.pose.positionM[1], positionM[2] - world.pose.positionM[2],
-  ]);
+  const toEye = (positionM: readonly [number, number, number]) => rotateWorldPosition(rotation, fromEyeM(world.pose, positionM));
   return rayHitsSphereBefore(toEye(plan.focus.positionM), toEye(occluder.positionM), occluder.radiusM);
 }
