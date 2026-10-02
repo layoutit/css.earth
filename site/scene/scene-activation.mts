@@ -28,8 +28,8 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
     const { objectId, request, mount, shell } = session;
     if (!mount || !shell) return false;
     const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS) : null;
-    if (initialSelection?.subject.kind === 'overview' && !initialSelection.savedView) {
-      const target = navigation.overviewTarget({ scope: initialSelection.subject.overview.scope, objectId, fromId: objectId, mount });
+    if (initialSelection?.subject.view === 'system' && !initialSelection.savedView) {
+      const target = navigation.overviewTarget({ scope: 'system', objectId, fromId: objectId, mount });
       if (target) {
         const framed = await session.wait(navigation.focus({ objectId, mount,
           signal: session.signal, reducedMotion: true,
@@ -38,7 +38,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
       }
     }
     // A level's page opens framed as its ladder says, around its centre (the world's host on a page opened cold).
-    if (initialSelection?.subject.kind === 'object' && isLevelObject(objectId) && !initialSelection.savedView) {
+    if (initialSelection?.subject.view === 'body' && isLevelObject(objectId) && !initialSelection.savedView) {
       const target = navigation.overviewTarget({ scope: objectId, objectId: levelCentre(), fromId: objectId, mount, view: 'default' });
       if (target) {
         const framed = await session.wait(navigation.focus({ objectId, mount, signal: session.signal, reducedMotion: true,
@@ -46,7 +46,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
         if (framed.cancelled || !isCurrent(session)) return false;
       }
     }
-    if (initialSelection?.subject.kind === 'satellite-system' && !initialSelection.savedView) {
+    if (initialSelection?.subject.view === 'moons' && !initialSelection.savedView) {
       await loadSystemView(objectId);
       const target = navigation.systemTarget({ objectId, fromId: objectId, mount, force: true });
       if (!target) throw new Error(`No prepared satellite-system target for ${objectId}.`);
@@ -106,7 +106,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
     const { objectId, request, mount } = session;
     if (!mount || !session.url || request?.camera.kind === 'restore') return true;
     const selection = readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS);
-    if (selection.subject.kind !== 'object' || selection.savedView || selection.feature) return true;
+    if (selection.subject.view !== 'body' || selection.savedView || selection.feature) return true;
     const datasets = mount.datasets, volume = datasets?.volumeOf(datasets.current() ?? datasets.defaultId);
     const target = volume ? navigation.datasetVolumeTarget({ objectId, volumeId: volume.objectId, mount }) : null;
     if (!target) return true;

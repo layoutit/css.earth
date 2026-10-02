@@ -85,13 +85,13 @@ export function mountObjectShell({
     const selected = readSelection();
     // A star's planetary system is a subject of the star's own card, as a host's moons are; the parts of the other subjects
     // are mounted only while they are the subject (detached-sections.ts).
-    const subject = navigationTransition?.cardSubject ?? (selected.kind === 'satellite-system' ? 'satellite-system'
-      : selected.kind === 'overview' && information && hasPlanetarySystem(information) ? 'planetary-system' : 'body');
+    const subject = navigationTransition?.cardSubject ?? (selected.view === 'moons' ? 'satellite-system'
+      : selected.view === 'system' && information && hasPlanetarySystem(information) ? 'planetary-system' : 'body');
     if (information) presentCardSubject(information, subject);
     // The system's body list arrives the first time it is shown.
-    if (information && subject === 'planetary-system' && selected.kind === 'overview') {
+    if (information && subject === 'planetary-system' && selected.view === 'system') {
       if (systemBodies?.card !== information) systemBodies = { card: information, presentation: createSystemBodiesPresentation(information, windowTarget) };
-      systemBodies.presentation.show(selected.overview.systemId);
+      systemBodies.presentation.show(selected.objectId);
     }
   }
   /** The page the shell shows changed in place: its head, and the forms and links that return to it. */
@@ -116,9 +116,9 @@ export function mountObjectShell({
     // A galaxy, a cluster or a nebula has no surface to stand above: the readout measures to its centre.
     const shown = knownObject(objectId);
     // A level is seen from inside, around the star it is centred on: its readout is an overview's, from that star.
-    const level = subject.kind === 'object' && isLevelObject(objectId);
+    const level = subject.view === 'body' && isLevelObject(objectId);
     viewReadout.setExtendedSubject(!isLevelObject(objectId) && shown?.worldFrame && isExtendedClassification(shown.classification) ? { name: shown.name, positionM: shown.worldFrame.originM } : null);
-    viewReadout.setOverviewScope(subject.kind === 'overview' ? subject.overview.scope : level ? objectId : 'system');
+    viewReadout.setOverviewScope(level ? objectId : 'system');
     updateBodyCard();
   }
   function own<T extends { destroy(): void }>(controller: T) {
@@ -201,16 +201,16 @@ export function mountObjectShell({
     const settlePreview = (keep: boolean) => {
       if (!keep) restoreBrowser();
     };
-    const retainsSourceCard = target.kind !== 'overview' && target.object.id !== objectId;
+    const retainsSourceCard = target.object.id !== objectId;
     const transition: NonNullable<typeof navigationTransition> = {
       // Removing the offscreen context rail repaints the resident 3D surface in
       // WebKit. Publish the prepared card only after the router retires that scene.
       retainsSourceCard,
-      cardSubject: target.kind === 'overview' ? null : target.kind === 'satellite-system' ? 'satellite-system' : 'body',
+      // A system's card is its star's: which parts it shows is read from the selection once the star's card is there.
+      cardSubject: target.view === 'system' ? null : target.view === 'moons' ? 'satellite-system' : 'body',
       arrive({ subject, content }) {
         if (navigationTransition !== transition || arrived) return;
-        const keep = content ? target.kind !== 'overview' && target.object.id === content.id
-          : (subject.kind === 'overview') === (target.kind === 'overview');
+        const keep = content ? target.object.id === content.id : subject.view === target.view;
         arrived = true;
         transition.retainsSourceCard = false;
         settlePreview(keep);
@@ -231,13 +231,11 @@ export function mountObjectShell({
     };
     navigationTransition = transition;
     try {
-      if (target.kind === 'overview') {
-        if (target.preview) restoreBrowser = objectBrowser.previewSelection({ kind: 'overview', overview: target.overview });
+      if (target.view === 'system') {
+        if (target.preview) restoreBrowser = objectBrowser.previewSelection({ objectId: target.object.id, view: 'system' });
       } else {
-        const object = target.object;
         if (!retainsSourceCard) sheet.showSelection();
-        restoreBrowser = objectBrowser.previewSelection(target.kind === 'satellite-system'
-          ? { kind: 'satellite-system', hostId: object.id } : { kind: 'object', objectId: object.id });
+        restoreBrowser = objectBrowser.previewSelection({ objectId: target.object.id, view: target.view });
         updateBodyCard();
       }
       return transition;

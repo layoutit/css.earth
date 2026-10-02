@@ -108,7 +108,7 @@ export function createSceneRouter({
   // after a cold page's first body has mounted. Publish them together once ready.
   let context: RouterContext | null = null, contextTask: Promise<RouterContext> | null = null;
   const cameraMotion = createCameraMotion();
-  const subject = (): SceneSubject => context?.selection.current ?? { kind: 'object', objectId };
+  const subject = (): SceneSubject => context?.selection.current ?? { objectId, view: 'body' };
   const contentTransport = createNavigationContent({ documentTarget, windowTarget });
   const reducedMotion = windowTarget.matchMedia?.("(prefers-reduced-motion: reduce)");
   let reducedMotionActive = reducedMotion?.matches === true;
@@ -422,7 +422,7 @@ export function createSceneRouter({
     centeredObjectId = resolved.centeredObjectId;
     // Snapshot the departed view before cancelling: a superseded navigation records nothing.
     if (resolved.destination.history.history === 'pop') historyOwner?.remember();
-    else if (intent.kind === 'overview' && intent.departed) historyOwner?.keep(intent.departed);
+    else if (intent.kind === 'object' && intent.departed) historyOwner?.keep(intent.departed);
     else historyOwner?.checkpoint();
     requests.cancel(); cancelHandover();
     scenes.current?.setViewUrl(null);
@@ -440,14 +440,13 @@ export function createSceneRouter({
         const release = source?.mount?.navigation?.holdPresentation?.();
         if (release) request.own(release);
       }
-      world.current?.previewSelection?.(request.subject.kind === 'overview' ? null : object.id);
+      world.current?.previewSelection?.(request.subject.view === 'system' ? null : object.id);
       request.own(() => {
         if (!requests.current || requests.owns(request)) world.current?.previewSelection?.();
       });
-      const selectionTransition = shellOwner?.shell?.beginNavigation?.(request.subject.kind === 'overview'
-        ? { kind: 'overview', overview: request.subject.overview,
-          preview: request.camera.kind === 'frame' && request.camera.framing === 'center' }
-        : { kind: request.subject.kind === 'satellite-system' ? 'satellite-system' : 'object', object,
+      const selectionTransition = shellOwner?.shell?.beginNavigation?.(request.subject.view === 'system'
+        ? { view: 'system', object, preview: request.camera.kind === 'frame' && request.camera.framing === 'center' }
+        : { view: request.subject.view, object,
           targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined });
       if (selectionTransition) request.own(() => selectionTransition.dispose());
       if (source && request.scene === 'reuse') {
@@ -518,7 +517,7 @@ export function createSceneRouter({
     if (mounted && session.mount?.navigation) followSelectionCamera(session, session.mount.navigation.capture());
     // Retained arrivals commit their URL after selection; page datasets must follow that committed address too.
     publishSelection();
-    if (mounted && ready.selection.current.kind === 'overview') aimAtSystemCenter(ready);
+    if (mounted && ready.selection.current.view === 'system') aimAtSystemCenter(ready);
     syncPlayback();
     if (mounted) {
       connectOverviewSelection(ready, session);
@@ -603,35 +602,33 @@ export function createSceneRouter({
       if (again.to === 'level') {
         setLevelCentre(again.centreId);
         void navigate(again.objectId, { kind: 'object', camera: 'preserve' }).catch(report);
-      } else void navigate(again.objectId, { kind: 'overview', scope: 'system', camera: 'preserve' }).catch(report);
+      } else void navigate(again.objectId, { kind: 'object', view: 'system', camera: 'preserve' }).catch(report);
     }, OVERVIEW_SELECTION_POLICY.settleMilliseconds);
     pendingHandover = { timer, to };
   }
   function publishSelection() {
     const selection = context?.selection;
     // A mounted level is the world seen around its centre: the world draws it as that overview scope.
-    const level = selection?.context.kind === 'object' && isLevelObject(objectId);
-    const overview = selection?.context.kind === 'overview' || level;
+    const level = selection?.context.view === 'body' && isLevelObject(objectId);
+    const overview = selection?.context.view === 'system' || level;
     scenes.current?.mount?.navigation?.setZoomOutCentering?.(overview);
     shellOwner?.shell?.presentSelection();
     const subject = selection?.current;
     // The system has its own shell selection, but its world paths use the shared overview policy.
-    world.current?.setOverview?.(overview || selection?.context.kind === 'satellite-system',
-      subject?.kind === 'overview' ? subject.overview.scope : level ? objectId : undefined, subject?.kind === 'satellite-system');
+    world.current?.setOverview?.(overview || subject?.view === 'moons',
+      subject?.view === 'system' ? 'system' : level ? objectId : undefined, subject?.view === 'moons');
     if (stage.dataset) {
-      const current = subject ?? { kind: 'object' as const, objectId };
-      const value = current.kind === 'overview' ? current.overview.scope
-        : current.kind === 'satellite-system' ? current.hostId : current.objectId;
+      const value = subject?.view === 'system' ? 'system' : subject?.objectId ?? objectId;
       if (stage.dataset.selection !== value) stage.dataset.selection = value;
     }
     publication.publish();
   }
   function commitSelection(ready: RouterContext, request: NavigationRequest, transition?: ShellNavigationTransition | null) {
-    const current = ready.selection, wasOverview = current.context.kind === 'overview';
+    const current = ready.selection, wasOverview = current.context.view === 'system';
     current.commit(request.subject, objectId, false);
     transition?.arrive({ subject: current.current });
     publishSelection();
-    if (!wasOverview && current.current.kind === 'overview') aimAtSystemCenter(ready);
+    if (!wasOverview && current.current.view === 'system') aimAtSystemCenter(ready);
   }
   /** A binary's overview is centred on the pair's centre of mass, not on the star the scene mounts. Entering the overview
    * turns the camera onto that centre at the same distance; zooming out then keeps the pair centred. */
@@ -650,7 +647,7 @@ export function createSceneRouter({
     const { selection: current, objects, registry } = ready;
     const watch = registry.watchOverviewSelection({ navigation: owner, objects: registry.SCENE_OBJECTS, systems: objects, objectId,
       // A level's scene is left by the zoom ladder (followSelectionCamera), not by this watcher.
-      getOverview: () => current.context.kind === 'overview' || isLevelObject(objectId),
+      getOverview: () => current.context.view === 'system' || isLevelObject(objectId),
       // The pending flight owns the camera; repeat-click bookkeeping must not
       // suppress zoom-out deselection after that flight has finished.
       isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current && !categoryFlight,
@@ -659,8 +656,7 @@ export function createSceneRouter({
         if (!next.overview || next.objectId === objectId) {
           // A mounted star and its system overview share the same camera, detail and
           // subscriptions. Change their selection in place in either direction.
-          current.commit(next.overview ? { kind: 'overview', overview: { scope: 'system', systemId: objectId } }
-            : { kind: 'object', objectId }, objectId);
+          current.commit({ objectId, view: next.overview ? 'system' : 'body' }, objectId);
           if (next.overview) aimAtSystemCenter(ready);
           view.replace(session, current.url(navigationHref(windowTarget)));
           view.syncDataset(session);
@@ -669,7 +665,7 @@ export function createSceneRouter({
         }
         // A pill's landing is a place the reader chose, so it is its own entry: as a replacement, Back from the Planets
         // pill skipped Earth for the page before it (2026-10-01).
-        void navigate(next.objectId, { kind: 'overview', scope: 'system', camera: 'preserve', ...(categoryDeparture ? { departed: categoryDeparture } : {}) });
+        void navigate(next.objectId, { kind: 'object', view: 'system', camera: 'preserve', ...(categoryDeparture ? { departed: categoryDeparture } : {}) });
       },
     });
     session.own(watch);
@@ -686,8 +682,8 @@ export function createSceneRouter({
       isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current,
       documentTarget, windowTarget,
       onChange(next) {
-        if (next.kind === 'satellite-system' && next.hostId !== objectId) {
-          void navigate(next.hostId, { kind: 'satellite-system', camera: 'preserve' }).catch(report);
+        if (next.view === 'moons' && next.objectId !== objectId) {
+          void navigate(next.objectId, { kind: 'object', view: 'moons', camera: 'preserve' }).catch(report);
           return;
         }
         current.commit(next, objectId);

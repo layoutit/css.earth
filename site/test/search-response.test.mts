@@ -137,7 +137,7 @@ test('the native response shows the card as its subject: the body, or the planet
   assert.equal(card(planet).dataset.cardSubject, 'body');
   // The live shell presents the card itself (updateBodyCard), so the shared presentation leaves it alone there.
   const live = parseHTML(contextHtml).document;
-  createSelectionPresentation(live).present({ kind: 'overview', overview: { scope: 'system', systemId: 'trappist-1' } });
+  createSelectionPresentation(live).present({ objectId: 'trappist-1', view: 'system' });
   assert.equal(card(live).dataset.cardSubject, undefined);
 });
 

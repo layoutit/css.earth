@@ -26,13 +26,12 @@ export function createSelectionPresentation(documentTarget: Document, { card: pr
   const present = (subject: SelectionTarget, sourceLinks?: ReadonlyMap<string, SourceDocumentReference>): CatalogueSelection => {
     if (presentsCard) {
       const card = sectionElements(documentTarget, '.object-information-panel')[0];
-      if (card) presentCardSubject(card, subject.kind === 'satellite-system' ? 'satellite-system' : subject.kind === 'overview' && hasPlanetarySystem(card) ? 'planetary-system' : 'body');
+      if (card) presentCardSubject(card, subject.view === 'moons' ? 'satellite-system' : subject.view === 'system' && hasPlanetarySystem(card) ? 'planetary-system' : 'body');
     }
     renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);
-    const kind = subject.kind === 'overview' ? subject.overview.scope : subject.kind === 'satellite-system' ? 'satellite-system' : 'object';
+    const kind = subject.view === 'system' ? 'system' : subject.view === 'moons' ? 'satellite-system' : 'object';
     if (documentTarget.documentElement.dataset.selection !== kind) documentTarget.documentElement.dataset.selection = kind;
-    const selection = subject.kind === 'object' ? { kind: 'scene', id: subject.objectId } as const
-      : subject.kind === 'satellite-system' ? { kind: 'scene', id: subject.hostId } as const : null;
+    const selection = subject.view === 'system' ? null : { kind: 'scene', id: subject.objectId } as const;
     for (const anchor of browser.querySelectorAll<HTMLElement>('.object-link')) {
       const selected = selection?.kind === 'scene' && anchor.dataset.objectId === selection.id;
       setLinkSelected(anchor, selected);

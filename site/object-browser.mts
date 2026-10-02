@@ -303,7 +303,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     refreshSelection() {
       const subject = readSelection();
       subjectOverride = null;
-      if (subject.kind === 'overview') destinations?.present(null);
+      if (subject.view === 'system') destinations?.present(null);
       refreshSelection();
     },
     bindObject(id: string) {

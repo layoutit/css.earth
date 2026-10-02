@@ -54,7 +54,7 @@ for (const [width, height, mobile] of [[390, 844, true], [820, 1080, true], [144
         url: `https://css.earth/${hostId}/?view=satellites`, reducedMotion: true, signal: controller.signal });
       const target = required(handoff.mountOptions.initialWorldCamera);
       assert.equal(satelliteSelectionAtCamera(target, { ...optics, framingRadiusPixels }, SCENE_OBJECTS,
-        { kind: 'satellite-system', hostId }), null, `${hostId} must not change its card at rest`);
+        { objectId: hostId, view: 'moons' }), null, `${hostId} must not change its card at rest`);
       assert.deepEqual(target.pose.orientationXyzw, from.pose.orientationXyzw, `${hostId} keeps the departure angle`);
       controller.abort();
     }
