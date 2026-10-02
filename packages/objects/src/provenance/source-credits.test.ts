@@ -32,7 +32,7 @@ test('files without a published title are listed once per credit, with their cou
     use('source-body-c', 'product-input', { credit: 'An observatory' }), use('atlas', 'product-input', { credit: 'An agency' })];
   const credits = sourceCredits({ edges, datasets: [], ...sourceUsageIndexes(edges) }, sources);
   assert.deepEqual(credits.sources, { body: ['body#0', 'body#1', 'atlas'] });
-  assert.deepEqual(credits.records['body#0'], { title: 'A survey team', detail: '2 files · Map, Elevation', icon: 'archive.example.org' });
+  assert.deepEqual(credits.records['body#0'], { title: 'A survey team', detail: '2 files · Map, Elevation', url: 'https://archive.example.org/source-body-a', icon: 'archive.example.org' });
   assert.deepEqual(credits.records['body#1'], { title: 'An observatory', detail: 'Data product · Map', url: 'https://archive.example.org/source-body-c', icon: 'archive.example.org' });
   assert.equal(credits.records.atlas?.title, 'An atlas');
   assert.deepEqual(credits.icons, { 'archive.example.org': 'https://archive.example.org/atlas' });

@@ -8,9 +8,9 @@ import type { SourceUsage, SourceUseKind } from './source-usage.js';
 
 export const SOURCE_CREDITS_SCHEMA = 'cssearth-prepared-source-credits@2';
 /** One row of a Sources tab: a published work (its title, what it is and who publishes it, its landing page), or the files one
- * credit line supplied (the credit, how many files and the datasets they feed). A row of several files has no page of its own:
- * the tab links it to the object's README, which lists them. */
-export interface SourceCreditRow { readonly title: string; readonly detail: string; readonly url?: string;
+ * credit line supplied (the credit, how many files and the datasets they feed), which links to the first of them. Every link
+ * leads to the source's own site; the object's README is the footer's link. */
+export interface SourceCreditRow { readonly title: string; readonly detail: string; readonly url: string;
   /** Whose site serves it (`sourceIconKey`): the key of its favicon in `site/source/source-icons.json`. */
   readonly icon: string }
 /** The site a source link leads to: its host, or for a DOI the registrant prefix (`doi:10.3847`), since doi.org only redirects
@@ -73,11 +73,11 @@ export function sourceCredits(usage: SourceUsage, sources: SourceResolver): Sour
       const datasets = [...group.datasets].join(', ');
       const { url, icon } = creditRow(sources[first!]!);
       records[group.key] = Object.freeze(only ? { title: credit, detail: `${KIND_LABELS[only.kind]} · ${datasets}`, url, icon }
-        : { title: credit, detail: `${group.ids.size} files · ${datasets}`, icon });
+        : { title: credit, detail: `${group.ids.size} files · ${datasets}`, url, icon });
     }
     for (const id of new Set([...keys.filter(key => sources[key]), ...[...files.values()].map(group => [...group.ids][0]!)])) {
       const { url, icon } = creditRow(sources[id]!);
-      iconLinks[icon] ??= url!;
+      iconLinks[icon] ??= url;
     }
     const ids = [...new Set(keys)];
     if (ids.length) objectSources[objectId] = Object.freeze(ids);
@@ -100,9 +100,9 @@ export function parseSourceCredits(input: unknown): SourceCredits {
   const providers: Record<string, readonly string[]> = {};
   const records: Record<string, SourceCreditRow> = {}, sources: Record<string, readonly string[]> = {};
   for (const [id, row] of Object.entries(input.records)) {
-    if (!isRecord(row) || typeof row.title !== 'string' || !row.title || typeof row.detail !== 'string' || !row.detail || typeof row.icon !== 'string' || !row.icon || row.url !== undefined && (typeof row.url !== 'string' || !/^https?:\/\//u.test(row.url)))
-      throw new TypeError(`Invalid prepared source credit row ${id}: it needs a title, a detail, an icon key and, when it has a url, an http(s) one.`);
-    records[id] = Object.freeze({ title: row.title, detail: row.detail, ...(row.url === undefined ? {} : { url: row.url }), icon: row.icon });
+    if (!isRecord(row) || typeof row.title !== 'string' || !row.title || typeof row.detail !== 'string' || !row.detail || typeof row.icon !== 'string' || !row.icon || typeof row.url !== 'string' || !/^https?:\/\//u.test(row.url))
+      throw new TypeError(`Invalid prepared source credit row ${id}: it needs a title, a detail, an icon key and an http(s) url.`);
+    records[id] = Object.freeze({ title: row.title, detail: row.detail, url: row.url, icon: row.icon });
   }
   const icons: Record<string, string> = {};
   for (const [key, url] of Object.entries(input.icons)) {

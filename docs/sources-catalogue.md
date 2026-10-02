@@ -31,7 +31,8 @@ from these records and the existing product lineage, with
 "Sources" link shows, and the rows of the body card's Sources tab. A published
 work is one row: its title, kind, publisher and landing page. Files that have no
 published title are one row per credit line, with their count and the datasets
-they feed; several files link to the body README, which lists them.
+they feed, linked to the first of them. Every row leads to the source's own
+site; the README is the footer's link.
 The pages read only the credits file: the whole catalogue is tens of megabytes.
 The three prepared files are ignored build outputs; do not edit or commit them.
 
