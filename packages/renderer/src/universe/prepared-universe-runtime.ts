@@ -198,6 +198,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           radiusM: Math.max(...[payload.frame.boundsUnits.min, payload.frame.boundsUnits.max].flatMap(bound => [Math.abs(bound[0]), Math.abs(bound[1])])) * payload.frame.metersPerUnit };
         const additionalPoints = own(mountBackgroundPoints(root, end, backgroundCataloguePoints, target => fetchPreparedCatalogueBank(target), galaxyDisc));
         // The catalogued stars that are only dots: inside the galaxy or out, with every other star.
+        let starPlaces: readonly (readonly number[])[] = [], starPlacesFor: unknown = null, starPlacesSelected: unknown = null;
         const starPoints = starCataloguePoints.map(url => own(mountCataloguePoints({ host: root, before: end, url, loadBank: target => fetchPreparedCatalogueBank(target) })));
         // Over the galaxies: a mesh seen from outside hides what lies inside it.
         const meshes = imageMeshes.map(mesh => ({ cutaway: () => mesh.cutaway?.() ?? true, hidden: () => mesh.hidden?.() ?? false,
@@ -353,7 +354,13 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 eyeDistanceM(world.pose, selected.positionM), plan.volume.discHalfHeightM);
               additionalPoints.publish({world, viewport}, distanceM, outsideGalaxy);
               // Dimmed like every marker outside a highlighted category; the selected star's own dot is its marker's to draw.
-              for (const bank of starPoints) bank.publish({world, viewport}, spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1, selected.positionM);
+              // and like every body outside the focus star's system (the frame's `otherSystems`). A star the world draws
+              // as a body is its marker's to draw, as the selected star is.
+              const drawnPlaces = spatial.plainStarPlaces();
+              if (drawnPlaces !== starPlacesFor || selected.positionM !== starPlacesSelected) {
+                starPlacesFor = drawnPlaces; starPlacesSelected = selected.positionM; starPlaces = [selected.positionM, ...drawnPlaces];
+              }
+              for (const bank of starPoints) bank.publish({world, viewport}, (spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1) * frame.otherSystems, starPlaces);
               // Past halfway out the galaxy is seen whole, as the universe background draws it (universe-background.ts).
               spatial.setOutsideGalaxy(outsideGalaxy > .5);
               // Loaded and drawn only far outside the galaxies' own scale.

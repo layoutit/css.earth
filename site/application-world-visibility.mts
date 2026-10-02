@@ -86,7 +86,8 @@ export function createWorldVisibilityPolicy(objects: readonly WorldObject[], pla
     return new Set([root, ...placedSystems.members.get(root) ?? []]);
   };
   // Every body that orbits another and every centre something orbits; a barycentre's own centre is its host star.
-  const systemMembers: ReadonlySet<string> = new Set([...orbitCenters].flat());
+  // A star whose row lists its system's members is one too, while its planets are still in a holder not read.
+  const systemMembers: ReadonlySet<string> = new Set([...[...orbitCenters].flat(), ...plan.bodies.filter(body => body.systemView?.memberIds.length).map(body => body.id)]);
   return Object.freeze({
     compact: phone, objects, ...bodyAnnotations(objects, plan.bodies.filter(body => 'unpackaged' in body && body.unpackaged === true).map(body => body.id)),
     asteroidIds, ordinaryAsteroidIds, ordinaryAsteroids: new Set(ordinaryAsteroidIds) as ReadonlySet<string>, plainDotIds, minorMoonIds, hiddenOrbitIds, systemMembers, placedSystemOf,

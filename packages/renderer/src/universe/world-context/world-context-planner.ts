@@ -554,7 +554,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       output.indicatorCutout = entry.indicatorCutout; output.orbitAppearance = entry.orbitAppearance; output.emphasis = projected.emphasis;
       return output;
     };
-    return { emphasizedId, opacity, width, height, ...(labelMeasurements.length ? { labelMeasurements } : {}), projectedBodies: projectedBodies.map(plannedBody) };
+    // `otherSystems`: the dimming of every body outside the focus star's system, which the stars drawn as bank dots share.
+    return { emphasizedId, opacity, width, height, otherSystems, ...(labelMeasurements.length ? { labelMeasurements } : {}), projectedBodies: projectedBodies.map(plannedBody) };
   };
   return Object.assign(planFrame, {
     /** Another system's bodies, read after the plan was made (`extendWorldContext`): each takes the next index, so every

@@ -97,19 +97,25 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
   let fadeOutM: readonly [number, number] | null = null;
   // The view's half-width at the bank's origin per unit of camera distance: a stacked bank's inner levels fill in by it.
   let halfWidthPerDistance = 1;
-  // The point at the selected body's place, which that body's marker draws: found once per place, by the bank's own
-  // rounding (catalogue-bank-binary.ts CATALOGUE_POSITION_SCALE), and left out of the paint while it is selected.
-  let hiddenAtM: readonly number[] | null = null, hiddenIndex = -1, hiddenFor: readonly number[] | null = null;
+  // The points at the places of stars a body marker draws (the selected body, and each star the world holds as a body):
+  // found once per list of places, by the bank's own rounding (catalogue-bank-binary.ts CATALOGUE_POSITION_SCALE), and
+  // left out of the paint while the list names them.
+  let hiddenAtM: readonly (readonly number[])[] | null = null, hiddenIndices: ReadonlySet<number> | null = null, hiddenFor: readonly (readonly number[])[] | null = null;
   let indexAtM: ((positionM: readonly number[]) => number) | null = null;
   const hidden = () => {
-    if (hiddenFor !== hiddenAtM) { hiddenFor = hiddenAtM; hiddenIndex = hiddenAtM && indexAtM ? indexAtM(hiddenAtM) : -1; }
-    return hiddenIndex;
+    if (hiddenFor !== hiddenAtM) {
+      hiddenFor = hiddenAtM;
+      const found = hiddenAtM && indexAtM ? hiddenAtM.map(indexAtM).filter(index => index >= 0) : [];
+      hiddenIndices = found.length ? new Set(found) : null;
+    }
+    return hiddenIndices;
   };
   return Object.freeze({ root,
-    /** `withoutM`: a place in the world's frame, in metres, whose own dot is not drawn (the selected body's). */
-    publish(publication: VolumeCameraPublication, opacity = 1, withoutM: readonly number[] | null = null) {
+    /** `withoutM`: places in the world's frame, in metres, whose own dots are not drawn. The caller passes the same list
+     * until its places change. */
+    publish(publication: VolumeCameraPublication, opacity = 1, withoutM: readonly (readonly number[])[] | null = null) {
       if (destroyed) return;
-      if (withoutM !== hiddenAtM && !(withoutM && hiddenAtM && withoutM.every((value, axis) => value === hiddenAtM![axis]))) hiddenAtM = withoutM;
+      hiddenAtM = withoutM;
       let alpha = Math.max(0, Math.min(1, opacity));
       if (extent) {
         const distanceM = eyeDistanceM(publication.world.pose, extent.originM);
@@ -150,7 +156,9 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         // unrotated here or no place is hidden: a rotated bank (a galaxy's own dots) is never asked for one.
         const [qx, qy, qz, qw] = bank.frame.localToReferenceXyzw, unrotated = qx === 0 && qy === 0 && qz === 0 && qw === 1;
         const stored = (meters: number, axis: number) => Math.round((meters - bank.frame.originM[axis]!) / bank.frame.metersPerUnit * 1e4) / 1e4;
-        indexAtM = positionM => !unrotated ? -1 : bank.points.findIndex(point => point.positionUnits.every((value, axis) => value === stored(positionM[axis]!, axis)));
+        // Each stored place's index, by its rounded coordinates.
+        const byPlace = new Map(bank.points.map((point, index) => [point.positionUnits.join(','), index] as const));
+        indexAtM = positionM => !unrotated ? -1 : byPlace.get(positionM.map((value, axis) => stored(value, axis)).join(',')) ?? -1;
         hiddenFor = null;
         const styleKey = (point: { colorCss: string; radiusPx: number }) => `${point.colorCss}|${point.radiusPx}`;
         const styles = new Map([...new Map(bank.points.map(point => [styleKey(point), point] as const)).entries()].map(([key, { colorCss: color, radiusPx }]) =>

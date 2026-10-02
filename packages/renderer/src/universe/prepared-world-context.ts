@@ -277,6 +277,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // The inertia gate (docs/performance/motion-freezes-membership.md): while the camera coasts, shown bodies only move and
   // fade; nothing is revealed, retired, restyled, restacked or re-announced until the coast stops.
   let coasting = false;
+  let plainPlaces: readonly (readonly number[])[] = [], plainPlacesFor = -1;
   // Systems that arrived while the camera coasted, in order, each joined once the coast has stopped (addBodies).
   const heldAdditions: { next: PreparedWorldContext; nextSprites: Readonly<Record<string, SpriteWithUrl>>; annotations: WorldBodyAnnotations }[] = [];
   let joining = false;
@@ -521,6 +522,12 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       systemFade = createSystemFade(next);
       anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
       refreshDepthBodies(); invalidatePolicy(); refresh();
+    },
+    /** The places of the stars this layer draws as plain dots: a dot bank that also holds them leaves them out. The same
+     * list until a system joins. */
+    plainStarPlaces() {
+      if (plainPlacesFor !== bodies.length) { plainPlacesFor = bodies.length; plainPlaces = bodies.filter(entry => entry.plainDot && entry.body.classification === 'star').map(entry => entry.body.positionM); }
+      return plainPlaces;
     },
     selectObject(id: string) {
       // A selection is a membership change of its own: a system held back by a coast joins for it.

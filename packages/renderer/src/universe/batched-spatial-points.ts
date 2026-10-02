@@ -76,8 +76,9 @@ export interface BatchedSpatialPointPart<T extends BatchedSpatialPoint> {
   /** The share of visible points to draw: each point keeps its own fixed rank, so a smaller share drops the same points
    * every frame and nothing flickers. `stats().candidates` counts the visible points before it applies. */
   keepFraction?(): number;
-  /** The index of a point not to draw now, or -1: the selected body's own dot, which its marker draws (catalogue-points.ts). */
-  hidden?(): number;
+  /** The indices of the points not to draw now, or null: the dots of stars a body marker draws (catalogue-points.ts). The
+   * same set is returned until it changes. */
+  hidden?(): ReadonlySet<number> | null;
 }
 
 export interface BatchedSpatialPointStats { visiblePoints: number; candidates: number; skippedCells: number; residentElements: number; publishMs: number }
@@ -147,7 +148,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   // The last full paint: the camera's position and everything else it depended on, how many points each part drew and
   // the nearest of them. A camera that only moved (a zoom, a pan around a planet) moves no point by a visible amount while
   // its translation is far below that nearest distance, so the paint is kept (parallaxPixels).
-  let painted: { at: number; position: readonly number[]; rest: readonly number[]; counts: readonly number[]; nearestUnits: number; keeps: readonly number[]; hiddens: readonly number[];
+  let painted: { at: number; position: readonly number[]; rest: readonly number[]; counts: readonly number[]; nearestUnits: number; keeps: readonly number[]; hiddens: readonly (ReadonlySet<number> | null)[];
     axes: Matrix3; focal: number; cx: number; cy: number; width: number; height: number } | null = null, destroyed = false;
   // While the camera turns, the last paint is moved by one warp (a compositor transform) instead of repainted; the exact
   // paint follows once the publications pause.
@@ -175,7 +176,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     if(world.referenceFrame !== frame.referenceFrame || world.epochJdTt !== frame.epochJdTt) throw new TypeError('Point camera frame mismatch');
     const local = presentPhysicalPoseInVolume(world.pose,frame), r = cssCameraAxesFromOrientation(local.orientationXyzw);
     const keeps = parts.map(part => part.keepFraction ? Math.max(0, Math.min(1, part.keepFraction())) : 1);
-    const hiddens = parts.map(part => part.hidden ? part.hidden() : -1);
+    const hiddens = parts.map(part => part.hidden ? part.hidden() : null);
     // The camera's turn and lens; the kept shares are part of the paint too (`same` below): a new share repaints at rest.
     const rest=[...local.orientationXyzw,viewport.focalPixels,...viewport.principalOffsetPixels,viewport.widthPixels??0,viewport.heightPixels??0];
     const distanceUnits = Math.hypot(...local.positionUnits);
@@ -236,7 +237,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     parts.forEach((part, partIndex) => {
       const partStarted = performance.now();
       const { positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order, boxes, culled, paint, cells } = part;
-      const count = counts[partIndex]!, keep = keeps[partIndex]!, hiddenIndex = hiddens[partIndex]!;
+      const count = counts[partIndex]!, keep = keeps[partIndex]!, hiddenSet = hiddens[partIndex]!;
       let visible = 0, candidates = 0;
       paint.begin(viewport);
       // A cell is out of view when all of its box is behind the camera or beyond one edge of the painted view and its
@@ -275,7 +276,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
           const squared = x * x + y * y + z * z;
           if (squared < nearestSquared) nearestSquared = squared;
           const path = paths[index]!;
-          if (path < 0 || index === hiddenIndex) continue;
+          if (path < 0 || hiddenSet?.has(index)) continue;
           const depth = -(r2 * x + r5 * y + r8 * z);
           if (depth <= 0) continue;
           const sx = focal * (r0 * x + r3 * y + r6 * z) / depth + ox, sy = focal * (r1 * x + r4 * y + r7 * z) / depth + oy;
