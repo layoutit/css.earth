@@ -81,3 +81,25 @@ test('budgeted pools overlap admitted downloads without raising explicit decode 
   assert.partialDeepStrictEqual(store.ownershipStats().pools[0], { pending: 6, active: 2 });
   store.destroy();
 });
+
+test('a raised window downloads and decodes more at once, and the defaults return when it is withdrawn', async () => {
+  const images: NetworkImage[] = [];
+  let burst = true;
+  const store = createPreparedImageStore({ createImage: () => { const image = new NetworkImage(); images.push(image); return image; },
+    pools: [{ id: 'pages', capacity: 40, concurrency: 2, reuse: true }],
+    downloadWindow: () => burst ? Infinity : undefined, decodeWindow: () => burst ? 4 : undefined });
+  const lease = store.createLease();
+  const requests = Array.from({ length: 12 }, (_, i) => lease.load(`/${i}.webp`, { pool: 'pages' }));
+  assert.equal(images.length, 12, 'every image is requested at once');
+  for (const image of images) image.emit('load');
+  assert.equal(images.reduce((sum, image) => sum + image.decodeCalls, 0), 4, 'decodes stay bounded by the decode window');
+  burst = false;
+  const later = Array.from({ length: 9 }, (_, i) => lease.load(`/later-${i}.webp`, { pool: 'pages' }));
+  assert.equal(images.length, 12, 'the default window admits nothing while twelve are still pending');
+  for (const image of images.slice(0, 12)) image.completeDecode?.();
+  await flush();
+  for (let round = 0; round < 6; round++) { for (const image of images) if (image.decodeCalls && image.completeDecode) image.completeDecode(); await flush(); }
+  assert.ok(store.ownershipStats().pools[0]!.pending <= 6 && store.ownershipStats().pools[0]!.active <= 2, 'the default windows are back');
+  store.destroy();
+  await Promise.all([...requests, ...later]);
+});

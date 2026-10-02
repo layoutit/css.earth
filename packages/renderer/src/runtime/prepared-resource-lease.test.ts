@@ -261,3 +261,19 @@ test('view-driven preflight skips the close-up startup bank until detail is requ
   assert.equal(decode.mock.callCount(), 1);
   lease.destroy();
 });
+test('a burst lease raises the image windows until a scene claims it', async () => {
+  let windows: { downloadWindow?: () => number | undefined; decodeWindow?: () => number | undefined } = {};
+  const native = createPreparedResidency({ assets });
+  const lease = prepareObjectResources(assets, { burstDownloads: true, createResources: options => { windows = options; return native; } });
+  assert.equal(windows.downloadWindow?.(), Infinity);
+  assert.equal(windows.decodeWindow?.(), 8);
+  await lease.ready;
+  lease.claim(assets, {});
+  assert.equal(windows.downloadWindow?.(), undefined);
+  assert.equal(windows.decodeWindow?.(), undefined);
+  native.destroy();
+  let plain: typeof windows = {};
+  const ordinary = prepareObjectResources(assets, { createResources: options => { plain = options; return createPreparedResidency({ assets }); } });
+  assert.equal(plain.downloadWindow, undefined, 'a flight keeps the default windows');
+  ordinary.destroy();
+});
