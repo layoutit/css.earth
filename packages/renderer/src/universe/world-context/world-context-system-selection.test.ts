@@ -24,4 +24,18 @@ test('a selected satellite overview retains its selected host locator', () => {
   assert.equal(selected.emphasizedId, 'jupiter');
   assert.equal(calculate({ ...view, overviewSelection: false }).emphasizedId, null);
   assert.equal(calculate({ ...view, overview: false, overviewSelection: false }).emphasizedId, 'jupiter');
+  // Orbits outside the selected family, the host's own included, are dim context; a hovered one is not.
+  // The planner retains its outputs, so each frame's values are read before the next is planned.
+  const index = (id: string) => 1 + plan.bodies.findIndex(body => body.id === id);
+  const moons = plan.bodies.filter(body => body.orbit?.centerBodyId === 'jupiter').map(body => body.id);
+  const ids = ['saturn', 'jupiter', ...moons];
+  const orbits = (next: WorldContextView) => { const frame = calculate(next); return new Map(ids.map(id => [id, frame.projectedBodies[index(id)]!.orbitVisibility])); };
+  // The moons' paths fill the close view; the planets' reach the screen from a hundred times further out.
+  const wide = { ...view, world: { ...view.world, pose: { ...view.world.pose, positionM: [positionM[0], positionM[1], host.positionM[2] + 1e12] as const } } };
+  const close = orbits(view), closePlain = orbits({ ...view, overviewSelection: false });
+  const dimmed = orbits(wide), plain = orbits({ ...wide, overviewSelection: false });
+  const hovered = orbits({ ...wide, bodies: wide.bodies.map((body, at) => at === index('saturn') ? { ...body, hovered: true } : body) });
+  for (const id of ['saturn', 'jupiter']) assert.deepEqual([dimmed.get(id), plain.get(id), hovered.get(id)], [.25, 1, id === 'saturn' ? 1 : .25], id);
+  assert.ok(moons.some(id => close.get(id) === 1));
+  for (const id of moons) assert.equal(close.get(id), closePlain.get(id), id);
 });
