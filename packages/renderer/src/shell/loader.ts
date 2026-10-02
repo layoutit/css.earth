@@ -1,7 +1,5 @@
-import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject } from '@cssearth/objects';
+import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject, validatePreparedCssSurfaceShell, type PreparedCssSurfaceShell } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
-import { validatePreparedCssSurfaceShell } from './validation.js';
-import type { PreparedCssSurfaceShell } from './types.js';
 
 /** Load only the prepared shell; no source geometry enters the browser. */
 export async function loadPreparedCssSurfaceShell(input: unknown, transport: PreparedCssTransport): Promise<PreparedCssSurfaceShell> {

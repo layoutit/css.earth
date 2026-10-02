@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { readGeometryPin } from '../geometry/registered-source.ts';
 import { variantFor } from '../../services/saved-variants.ts';
-import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
+import { validatePreparedCssVolume } from '@cssearth/objects';
 import { prepareJointInput } from './input.ts';
 import { fitJointModels } from '@cssearth/nebula-reconstruction/methods/joint/fitter';
 import { jointBounds, sampleJointEmission } from '@cssearth/nebula-reconstruction/methods/joint/geometry';

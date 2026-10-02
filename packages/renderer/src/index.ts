@@ -47,7 +47,7 @@ export { publishPreparedNativeView } from './rendering/prepared-native-view.js';
 export type { PreparedSurfaceFeatureCatalog, PreparedSurfaceFeature, SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats, SurfaceFeatureNavigationRuntime } from './labels/surface-feature-types.js';
 export { savedWorldCamera } from './navigation/saved-world-camera.js';
 export { mountPreparedCssVolume } from './volume/prepared-volume-runtime.js';
-export { validatePreparedCssVolume } from './volume/validation.js';
+
 export { loadPreparedCssVolume } from './volume/loader.js';
 export { loadPreparedCssPointField } from './stars/loader.js';
 export { createWorldContextObjectRuntime } from './universe/world-context/world-context-runtime.js';
@@ -57,7 +57,7 @@ export { readPreparedBinary } from './prepared-data/prepared-binary.js';
 // Named so declaration builds of site modules that return world-context handles can reference them.
 export type { WorldBodyPresentation } from './universe/world-context/world-context-planner.js';
 export type { QueuedRequest } from './navigation/world-frame-queue.js';
-export type { PreparedCssVolume, PreparedVolumeCameraTransform, PreparedVolumeLeaf, PreparedVolumeLeafStyle, PreparedVolumeMountOptions, PreparedVolumeRuntime, PreparedVolumeStack, VolumeCameraPublication, VolumeAxis } from './volume/types.js';
+export type { PreparedVolumeCameraTransform, PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './volume/types.js';
 export { prepareObjectResources } from './runtime/prepared-resource-lease.js';
 export { createPreparedObjectNavigation } from './runtime/prepared-object-navigation.js';
 export { createPreparedUniverse } from './universe/prepared-universe-runtime.js';

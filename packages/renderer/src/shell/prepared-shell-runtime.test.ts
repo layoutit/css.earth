@@ -6,8 +6,7 @@ import { worldRotationCss } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
 import { mountPreparedCssSurfaceShell } from './prepared-shell-runtime.js';
-import type { PreparedCssSurfaceShell } from './types.js';
-import { validatePreparedCssSurfaceShell } from './validation.js';
+import { type PreparedCssSurfaceShell, validatePreparedCssSurfaceShell } from '@cssearth/objects';
 
 function fixture(): PreparedCssSurfaceShell {
   return {
@@ -87,70 +86,6 @@ test('retains one leaf while addressing sorted vertex gradients and all-prepared
   assert.equal(leaves[0]!.dataset.shellFrame, '7');
   assert.equal(leaves[0]!.style.transform, payload.faces[0]!.materialTransforms![0]);
   assert.equal(document.created, created); assert.equal(leaves.length, 1);
-});
-
-for (const [_name, mutate] of [
-  ['missing prepared vertices', (data: any) => { delete data.vertices; }],
-  ['unsorted facing levels', (data: any) => { data.atlas.facingLevels = [-1, .5, 0, 1]; }],
-  ['incomplete triple bank', (data: any) => { data.atlas.frames = 19; }],
-  ['out-of-range vertex', (data: any) => { data.faces[0].vertexIndices[2] = 3; }],
-  ['missing corner permutation', (data: any) => { data.faces[0].materialTransforms.pop(); }],
-  ['runtime transform expression', (data: any) => { data.faces[0].materialTransforms[1] = 'rotate(20deg)'; }],
-  ['wrong initial permutation', (data: any) => { data.faces[0].materialTransforms[0] = data.faces[0].materialTransforms[1]; }],
-  ['nonunit vertex normal', (data: any) => { data.vertices[0].radialNormal = [2, 0, 0]; }],
-] as const) test(`rejects vertex material ${_name}`, () => {
-  const payload = structuredClone(vertexFixture()); mutate(payload);
-  assert.throws(() => validatePreparedCssSurfaceShell(payload), TypeError);
-});
-
-test('validates the complete shell with strict compiled material and geometry fields', () => {
-  const payload = fixture();
-  assert.deepEqual(validatePreparedCssSurfaceShell(payload), payload);
-  const exponential = { ...payload, faces: [{ ...payload.faces[0], style: { ...payload.faces[0]!.style, transform: 'matrix3d(1e0,0,0,0,0,+1,0,0,0,0,1,0,-1e-3,2.5,3,1)' } }] };
-  assert.equal(validatePreparedCssSurfaceShell(exponential).faces.length, 1);
-});
-
-for (const [_name, mutate] of [
-  ['missing key', (data: any) => { delete data.unitScale; }],
-  ['extra top-level key', (data: any) => { data.shader = ''; }],
-  ['nonpositive unit scale', (data: any) => { data.unitScale = 0; }],
-  ['bad reference quaternion', (data: any) => { data.frame.localToReferenceXyzw = [0, 0, 0, 2]; }],
-  ['nonfinite camera frame', (data: any) => { data.frame.originM[0] = Infinity; }],
-  ['reversed distance gates', (data: any) => { data.visibility.fullUntilM = 200; }],
-  ['nonfinite distance gate', (data: any) => { data.visibility.hiddenBeyondM = Infinity; }],
-  ['extra visibility key', (data: any) => { data.visibility.focusRange = 1; }],
-  ['empty faces', (data: any) => { data.faces = []; }],
-  ['unbounded faces', (data: any) => { data.faces = Array(20_001).fill(data.faces[0]); }],
-  ['duplicate face id', (data: any) => { data.faces[1].id = data.faces[0].id; }],
-  ['nonfinite center', (data: any) => { data.faces[0].centerUnits[0] = NaN; }],
-  ['nonunit geometric normal', (data: any) => { data.faces[0].faceNormal = [0, 0, 2]; }],
-  ['nonunit radial normal', (data: any) => { data.faces[0].radialNormal = [0, 0, 0]; }],
-  ['extra face key', (data: any) => { data.faces[0].texturePath = 'other.png'; }],
-  ['invalid atlas step', (data: any) => { data.faces[0].atlasStepPixels[0] = -1; }],
-  ['nonfinite atlas origin', (data: any) => { data.faces[0].atlasOriginPixels[0] = Infinity; }],
-  ['runtime style property', (data: any) => { data.faces[0].style.opacity = '0.2'; }],
-  ['runtime style expression', (data: any) => { data.faces[0].style.width = 'calc(10px + 1px)'; }],
-  ['zero face dimension', (data: any) => { data.faces[0].style.height = '0px'; }],
-  ['negative background size', (data: any) => { data.faces[0].style.backgroundSize = '-1px 1px'; }],
-  ['runtime transform URL', (data: any) => { data.faces[0].style.transform = 'url(/generated.png)'; }],
-  ['short matrix', (data: any) => { data.faces[0].style.transform = 'matrix3d(1,0,0,0)'; }],
-  ['blank matrix element', (data: any) => { data.faces[0].style.transform = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,,2,3,1)'; }],
-  ['non-numeric matrix element', (data: any) => { data.faces[0].style.transform = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,null,2,3,1)'; }],
-  ['nonfinite matrix element', (data: any) => { data.faces[0].style.transform = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,1e999,2,3,1)'; }],
-  ['atlas path traversal', (data: any) => { data.atlas.path = '../rim.png'; data.resources[0].path = '../rim.png'; }],
-  ['encoded atlas traversal', (data: any) => { data.atlas.path = '%2e%2e/rim.png'; data.resources[0].path = '%2e%2e/rim.png'; }],
-  ['atlas external URL', (data: any) => { data.atlas.path = 'https://host/rim.png'; data.resources[0].path = data.atlas.path; }],
-  ['atlas wrong format', (data: any) => { data.atlas.path = 'rim.svg'; data.resources[0].path = 'rim.svg'; }],
-  ['missing atlas resource', (data: any) => { data.resources = []; }],
-  ['resource mismatch', (data: any) => { data.resources[0].path = 'other.png'; }],
-  ['stray resource hash', (data: any) => { data.resources[0].sha256 = 'a'.repeat(64); }],
-  ['invalid resource byte length', (data: any) => { data.resources[0].bytes = 0; }],
-  ['wrong atlas dimensions', (data: any) => { data.resources[0].height = 64; }],
-  ['fractional atlas frame count', (data: any) => { data.atlas.frames = 1.5; }],
-  ['missing provenance', (data: any) => { data.provenance = null; }],
-] as const) test(`rejects ${_name}`, () => {
-  const payload = structuredClone(fixture()); mutate(payload);
-  assert.throws(() => validatePreparedCssSurfaceShell(payload), TypeError);
 });
 
 test('retains one transparent perspective scene and applies the prepared CSS verbatim', () => {

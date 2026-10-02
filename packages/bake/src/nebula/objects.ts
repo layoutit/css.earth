@@ -1,7 +1,7 @@
+import { PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset } from '@cssearth/objects';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
-import { parseVolumeRecipe } from '@cssearth/objects';
-import { type CompilerBakeResult, type DensityVolumeFrame } from '@cssearth/objects';
+
 /** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
 import { replayCompactCompiler, replayCompactSymmetry, replayCompactSampled, prepareVolumeSlices } from '../volume/node/index.ts';
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
@@ -10,10 +10,9 @@ import { resolve, dirname, relative, isAbsolute, sep } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';
 import { parsePreparedNebulaCatalog } from '@cssearth/catalog';
-import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
-import { validatePreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
+
 import { prepareVolumeAtlases } from '../density/index.ts';
-import type { PreparedVolumeDataset } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
+
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.ts';
 import { sanitizeVolumeProvenance } from './volume-provenance.ts';
 import { assertCompilerDeliveryElementBudget } from './element-budget.ts';
@@ -223,11 +222,11 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       await add(recipe.defaultDataset,'Hubble · optical',recipe.sourceUrl,result.path,frame,{frame,points:[]});
     }
     await rm(resolve(staging, 'compact'), { recursive: true, force: true });
-    const data = validatePreparedVolumeDatasets({schema:'cssearth-volume-datasets@1',id:recipe.id,defaultDataset:recipe.defaultDataset,
+    const data = validatePreparedVolumeDatasets({schema:PREPARED_VOLUME_DATASETS_SCHEMA,id:recipe.id,defaultDataset:recipe.defaultDataset,
       framingRadiusUnits:recipe.framingRadiusUnits,contextVisibility:'independent',starsEnabled:datasets[0]!.stars.points.length>0,
       ...(recipe.attachedTo === undefined ? {} : {attachedTo:recipe.attachedTo}),datasets});
     const renderElements = assertCompilerDeliveryElementBudget(compilerSampling, data);
-    const envelope = json({schema:'cssearth-prepared-object@1',id:recipe.id,type:'volume-dataset-bank',format:'cssearth-volume-datasets@1',data});
+    const envelope = json({schema:'cssearth-prepared-object@1',id:recipe.id,type:'volume-dataset-bank',format:PREPARED_VOLUME_DATASETS_SCHEMA,data});
     await put(resolve(staging,'datasets.json'),envelope);
     await put(resolve(staging,'delivery.json'),json({schema:'cssearth-nebula-delivery-receipt@2',recipe:JSON.parse(recipeBytes.toString()),sourceResult,
       acceptedLabResult:recipe.acceptedLabResult,...(fieldStars ? {fieldStars} : {}), ...(renderElements ? { renderElements } : {}),
@@ -239,7 +238,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     const host = await read(directory,'object.json').then(value => record(record(value).properties).host, (error: unknown) => {
       if (error instanceof SyntaxError || error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined; throw error; });
     await put(resolve(directory,'object.json'),json({schema:'cssearth-object@2',id:recipe.id,type:'volume-dataset-bank',properties:{frame:datasets[0]!.volume.frame,
-      preparation:{source:'source/delivery.json'},...(host === undefined ? {} : {host:text(host)})},prepared:{format:'cssearth-volume-datasets@1',url:'prepared/datasets.json'}}));
+      preparation:{source:'source/delivery.json'},...(host === undefined ? {} : {host:text(host)})},prepared:{format:PREPARED_VOLUME_DATASETS_SCHEMA,url:'prepared/datasets.json'}}));
     return { id:recipe.id,status:'prepared',sourceResult,datasets:datasets.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length})) };
   } finally { await rm(staging,{recursive:true,force:true}); }
 }

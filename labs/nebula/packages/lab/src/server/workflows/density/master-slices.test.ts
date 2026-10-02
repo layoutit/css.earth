@@ -4,10 +4,8 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { bakeMasterVolumeSlices, deriveMasterVolumeSlices, type MasterVolumeOptions } from '@cssearth/bake/volume/node';
-import { type VolumeSliceQuad } from '@cssearth/objects';
+import { type VolumeSliceQuad, validatePreparedCssVolume, type VolumeRecipe } from '@cssearth/objects';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
-import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
-import type { VolumeRecipe } from '@cssearth/objects';
 
 async function temporary(t: { after(fn: () => Promise<void>): void }) {
   await mkdir(resolve('.local/nebula-lab'), { recursive: true });

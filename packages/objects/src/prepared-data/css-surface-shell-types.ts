@@ -1,9 +1,9 @@
-import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { PositionM } from '@cssearth/engine';
+import { PREPARED_CSS_SURFACE_SHELL_SCHEMA } from '../volume/volume-schemas.js';
+import type { DensityVolumeFrame, VolumeVector } from '../density-volume.js';
 
 /** Prepared transparent surface geometry and a view-facing material bank. */
 export interface PreparedCssSurfaceShell {
-  readonly schema: 'cssearth-css-surface-shell@1';
+  readonly schema: typeof PREPARED_CSS_SURFACE_SHELL_SCHEMA;
   readonly id: string;
   readonly frame: DensityVolumeFrame;
   readonly unitScale: number;
@@ -12,13 +12,13 @@ export interface PreparedCssSurfaceShell {
     readonly facingLevels?: readonly number[];
     /** Pixel-area coverage surrounds all three edges inside this transparent image guard. */
     readonly triangleInsetPixels?: number };
-  readonly vertices?: readonly { readonly positionUnits: PositionM; readonly radialNormal: PositionM }[];
+  readonly vertices?: readonly { readonly positionUnits: VolumeVector; readonly radialNormal: VolumeVector }[];
   readonly visibility: { readonly hiddenInsideM: number; readonly fullUntilM: number; readonly hiddenBeyondM: number };
   readonly faces: readonly {
     readonly id: string;
-    readonly centerUnits: PositionM;
-    readonly radialNormal: PositionM;
-    readonly faceNormal: PositionM;
+    readonly centerUnits: VolumeVector;
+    readonly radialNormal: VolumeVector;
+    readonly faceNormal: VolumeVector;
     readonly style: { readonly width: string; readonly height: string; readonly transform: string; readonly backgroundSize: string };
     readonly atlasStepPixels: readonly [number, number];
     readonly atlasOriginPixels: readonly [number, number];

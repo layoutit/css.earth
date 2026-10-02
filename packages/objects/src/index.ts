@@ -99,3 +99,18 @@ export { validatePreparedCssSky, validatePreparedSkyParallax } from './prepared-
 export type { PreparedCubicSkyPlan, PreparedDirectionalSunPlan } from './prepared-data/runtime-camera-types.js';
 export { DIRECTIONAL_SUN_PRESENTATION_STANDARD_SCHEMA } from './prepared-data/runtime-camera-types.js';
 export { validatePreparedCubicSky, validateDirectionalSunPlan } from './prepared-data/sky-contract.js';
+
+export type { VolumeAxis, PreparedVolumeLeafStyle, PreparedVolumeLeaf, PreparedVolumeStack, PreparedVolumeImpostors, PreparedCssVolume } from './volume/css-volume-types.js';
+export { validatePreparedCssVolume } from './volume/css-volume-validation.js';
+export { validateVolumeImpostors } from './volume/volume-impostor-validation.js';
+export { validatePreparedCataloguePoints } from './volume/prepared-catalogue-points.js';
+export type { PreparedCataloguePoint, PreparedCataloguePoints } from './volume/prepared-catalogue-points.js';
+export { DEFAULT_POINT_VISIBILITY } from './volume/point-visibility.js';
+export type { PreparedPointVisibility } from './volume/point-visibility.js';
+export { validatePreparedVolumeDatasets } from './volume/prepared-volume-datasets.js';
+export type { PreparedVolumeDatasetBrightness, PreparedVolumeDataset, PreparedVolumeDatasets, PreparedVolumeDatasetBank } from './volume/prepared-volume-datasets.js';
+export type { PreparedImageLayerBank, PreparedImageLayerLeaf, PreparedImageLayerView, PreparedCssImageLayers } from './volume/image-layer-bank-types.js';
+export { validatePreparedImageLayerBank } from './volume/image-layer-bank-validation.js';
+export type { PreparedCssSurfaceShell } from './prepared-data/css-surface-shell-types.js';
+export { validatePreparedCssSurfaceShell } from './prepared-data/css-surface-shell-validation.js';
+export { PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_IMPOSTORS_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, PREPARED_CSS_SURFACE_SHELL_SCHEMA } from './volume/volume-schemas.js';

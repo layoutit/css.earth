@@ -2,9 +2,9 @@ import { bakePaintedField, sourceBytes } from '@cssearth/bake/volume/node';
 /** Explicit offline preview: one neutral shape field, then RGB-only painting of its exact slabs. */
 import { isAbsolute } from 'node:path';
 import sharp from 'sharp';
-import type { DensityVolumeFrame } from '@cssearth/objects';
+import { type DensityVolumeFrame, validatePreparedCssVolume } from '@cssearth/objects';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
-import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
+
 import type { GeometryMap } from '../../../features/observations/models/geometry-model.ts';
 import type { StructureImage } from '../../../features/observations/models/structures-model.ts';
 import { createShapeCloudField, createShapeImageSampler } from '@cssearth/bake/volume';

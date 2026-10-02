@@ -2,7 +2,7 @@ import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
 import { worldRotationCss, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
 import type { VolumeCameraPublication } from '../volume/types.js';
-import type { PreparedCssImageLayers, PreparedImageLayerView } from './loader.js';
+import type { PreparedCssImageLayers, PreparedImageLayerView } from '@cssearth/objects';
 import { revealLayer } from '../rendering/layer-reveal.js';
 import { LARGE_IMAGE_PIXELS } from '../volume/prepared-volume-runtime.js';
 

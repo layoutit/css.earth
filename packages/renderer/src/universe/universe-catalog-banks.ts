@@ -8,7 +8,8 @@ import { outsideVolumeOpacity, projectedVolumeOpacity, volumeFramingRadiusUnits 
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
 import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
-import type { PreparedCatalogBank, PreparedImageLayerBank, PreparedUniverseOptions } from './prepared-universe-types.js';
+import type { PreparedCatalogBank, PreparedUniverseOptions } from './prepared-universe-types.js';
+import type { PreparedImageLayerBank } from './prepared-universe-types.js';
 
 interface ImageBank {
   readonly id: string;

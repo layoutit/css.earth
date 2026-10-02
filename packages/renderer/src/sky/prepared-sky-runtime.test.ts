@@ -2,10 +2,8 @@ import { readFileSync } from 'node:fs';
 import { afterEach, beforeEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { type PreparedCssSky, type DensityVolumeFrame } from '@cssearth/objects';
-import type { PreparedCssVolume } from '../volume/types.js';
-import type { PreparedCssImageLayers } from '../image-layers/loader.js';
-import type { PreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
+import { type PreparedCssSky, type DensityVolumeFrame, type PreparedCssVolume, type PreparedCssImageLayers, type PreparedVolumeDatasets } from '@cssearth/objects';
+
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import { stubGlobal, unstubAllGlobals, waitFor } from '@cssearth/objects/node/contract';
 
@@ -41,7 +39,7 @@ mock.module('../universe/prepared-world-context.js', { namedExports: { ...await 
   mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, setOverview() {}, setSystemRetired() {}, setBodyVisibility() {}, setOutsideGalaxy() {}, backgroundExclusionRects: () => foregroundRects, bodyLabelRects: () => [], destroy() {} }) } });
 // The modules under test import the mocked ones, so they load after the mocks.
 const { mountPreparedCssSky, preparedSkyCameraTransform } = await import('./prepared-sky-runtime.js');
-const { validatePreparedCssVolume } = await import('../volume/validation.js');
+const { validatePreparedCssVolume } = await import('@cssearth/objects');
 const { preparedVolumeCameraTransform } = await import('../volume/prepared-volume-runtime.js');
 const { worldRotationCss } = await import('../navigation/world-camera-math.js');
 const { createPreparedUniverse } = await import('../universe/prepared-universe-runtime.js');

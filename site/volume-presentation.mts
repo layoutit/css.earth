@@ -1,6 +1,6 @@
 import { parseDatasetControl } from './prepared-panel-content.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
-import type { PreparedVolumeDatasetBank } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
+import type { PreparedVolumeDatasetBank } from '@cssearth/objects';
 import type { LineageSource } from '@cssearth/objects/provenance';
 
 /** The shell consumes the same dataset shape for surfaces and prepared volumes. */

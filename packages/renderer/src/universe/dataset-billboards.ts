@@ -1,11 +1,10 @@
-import { type DensityVolumeFrame, array, finite, positive, record, text } from '@cssearth/objects';
+import { PREPARED_VOLUME_IMPOSTORS_SCHEMA, type DensityVolumeFrame, array, finite, positive, record, text, type VolumeVector, type PreparedVolumeImpostors } from '@cssearth/objects';
 
 import { writeStyle } from '../rendering/retained-write.js';
 
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 
 import { projectVolumeImpostors } from '../volume/volume-impostor-projection.js';
-import type { VolumeVector } from '../volume/types.js';
 
 type Vector = readonly [number, number, number];
 /** What the universe knows about a volume dataset bank before fetching its datasets: prepared by
@@ -93,7 +92,7 @@ export function mountDatasetBillboards({ host, before, atlasUrl, atlas, entries,
     node.style.cssText = `width:${box}px;height:${box}px;display:none;` +
       `background-size:${atlas.columns * 100}% ${atlas.rows * 100}%;background-position:${percent(column, atlas.columns)} ${percent(row, atlas.rows)}`;
     layer.append(node);
-    const bank = { schema: 'cssearth-volume-impostors@1' as const, radiusUnits: entry.billboard.radiusUnits,
+    const bank: PreparedVolumeImpostors = { schema: PREPARED_VOLUME_IMPOSTORS_SCHEMA, radiusUnits: entry.billboard.radiusUnits,
       // A billboard never hands over to a volume here; the bank's own fetch gate decides that.
       fullBelowDiameterPixels: 0, volumeAboveDiameterPixels: 1,
       views: [{ id: entry.id, texturePath: '', back: entry.billboard.back as unknown as VolumeVector,

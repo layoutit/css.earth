@@ -1,10 +1,11 @@
 import { writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
-import { MAX_CATALOGUE_POINTS, parseCatalogueCells, parseCataloguePointSpread, parseDensityVolumeFrame } from '@cssearth/objects';
-import { decodeCatalogueBankBinary } from '@cssearth/objects';
+import { MAX_CATALOGUE_POINTS, parseCatalogueCells, parseCataloguePointSpread, parseDensityVolumeFrame, decodeCatalogueBankBinary, type CatalogueCells, type CataloguePointSpread, type DensityVolumeFrame, type VolumeVector } from '@cssearth/objects';
+
 import { readPreparedBinary } from '../prepared-data/prepared-binary.js';
-import type { CatalogueCells, CataloguePointSpread, DensityVolumeFrame } from '@cssearth/objects';
-import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
+
+import type { VolumeCameraPublication } from '../volume/types.js';
+
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
 import { revealLayer } from '../rendering/layer-reveal.js';
 import { afterStartup } from '../rendering/startup-gate.js';

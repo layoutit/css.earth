@@ -6,11 +6,10 @@ import { join } from 'node:path';
 import sharp from 'sharp';
 import { bakeMasterVolumeSlices, sourceBytes, registerComponentBanks } from '@cssearth/bake/volume/node';
 import { compilerFrame, compilerPreparedSlices } from '@cssearth/bake/volume';
-import { validateVolumeLayerSlices } from '@cssearth/objects';
-import { readCompilerBakeResult, type CompilerPin, type VolumeLayerPlan } from '@cssearth/objects';
+import { validateVolumeLayerSlices, readCompilerBakeResult, type CompilerPin, type VolumeLayerPlan, validatePreparedCssVolume } from '@cssearth/objects';
+
 import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
-import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 
 async function fixture(t: { after(fn: () => Promise<void>): void }) {
   const root = await mkdtemp(join(tmpdir(), 'registered-empty-layers-'));

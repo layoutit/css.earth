@@ -1,5 +1,9 @@
-import { validatePreparedLeafBounds, parseDensityVolumeFrame, validatePreparedCssSky } from '@cssearth/objects';
-import type { PreparedCssVolume, VolumeAxis, VolumeVector } from './types.js';
+import { PREPARED_CSS_VOLUME_SCHEMA } from './volume-schemas.js';
+import type { VolumeVector } from '../density-volume.js';
+import { validatePreparedLeafBounds } from '../prepared-data/prepared-leaf-bounds.js';
+import { parseDensityVolumeFrame } from '../density-volume.js';
+import { validatePreparedCssSky } from '../prepared-data/css-sky-validation.js';
+import type { PreparedCssVolume, VolumeAxis } from './css-volume-types.js';
 import { validateVolumeImpostors } from './volume-impostor-validation.js';
 
 const AXES: readonly VolumeAxis[] = ['x', 'y', 'z'];
@@ -7,7 +11,7 @@ const AXES: readonly VolumeAxis[] = ['x', 'y', 'z'];
 export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   const value = record(input, 'prepared CSS volume');
   exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', 'provenance', 'approximation', ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : [])], 'prepared CSS volume');
-  if (value.schema !== 'cssearth-css-volume@1' || typeof value.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.id)) {
+  if (value.schema !== PREPARED_CSS_VOLUME_SCHEMA || typeof value.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.id)) {
     throw new TypeError('Prepared CSS volume identity is invalid.');
   }
   const stacks = value.stacks;

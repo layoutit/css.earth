@@ -1,11 +1,13 @@
+import { PREPARED_VOLUME_IMPOSTORS_SCHEMA } from './volume-schemas.js';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-import type { PreparedVolumeImpostors, VolumeVector } from './types.js';
+import type { PreparedVolumeImpostors } from './css-volume-types.js';
+import type { VolumeVector } from '../density-volume.js';
 
 export function validateVolumeImpostors(input: unknown, resources: ReadonlySet<string>): PreparedVolumeImpostors {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Invalid prepared volume impostors.');
   const value = input as Record<string, unknown>;
   if (Object.keys(value).sort().join(',') !== 'fullBelowDiameterPixels,radiusUnits,schema,views,volumeAboveDiameterPixels' ||
-      value.schema !== 'cssearth-volume-impostors@1' || !positive(value.radiusUnits) || !positive(value.fullBelowDiameterPixels) ||
+      value.schema !== PREPARED_VOLUME_IMPOSTORS_SCHEMA || !positive(value.radiusUnits) || !positive(value.fullBelowDiameterPixels) ||
       !positive(value.volumeAboveDiameterPixels) || value.volumeAboveDiameterPixels <= value.fullBelowDiameterPixels ||
       !Array.isArray(value.views) || value.views.length < 4) throw new TypeError('Invalid prepared volume impostor bank or screen thresholds.');
   const ids = new Set<string>();

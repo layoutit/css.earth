@@ -2,11 +2,11 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, ARCSECOND_RADIANS, METERS_PER_PARSEC } from './nebula-frame.ts';
 import { worldRotationFromQuaternion } from '@cssearth/renderer/navigation/world-camera-math.ts';
-import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
-import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
+import { validatePreparedCssVolume, type PreparedCssVolume, type VolumeSlices } from '@cssearth/objects';
+
 import { compileCssVolume } from '@cssearth/bake/volume-leaves';
 import { compilerFrame, compilerPreparedPoint, compilerPreparedSlices } from '@cssearth/bake/volume';
-import { type VolumeSlices } from '@cssearth/objects';
+
 const frame = { referenceFrame:'lab',epochJdTt:0,originM:[0,0,0] as const,localToReferenceXyzw:[0,0,0,1] as const,
   metersPerUnit:1,boundsUnits:{min:[-3,-2,-1] as const,max:[4,2,1] as const} };
 const sky = { centerIcrsDegrees:[0,0] as [number,number],distancePc:100,imageRotationDegrees:0,arcsecPerUnit:1 };

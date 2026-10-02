@@ -113,3 +113,7 @@ the site's build reads only `datasets` and `presentation` from a context object'
 
 Presentation compilers import `PREPARED_PRESENTATION_SCHEMA`, prepared material/selection records and the
 leaf-box data shape from `@cssearth/objects`. The sky/Sun-dependent presentation-envelope validator remains in bake.
+
+Prepared CSS volume, impostor, dataset, embedded catalogue point, image-layer and surface-shell formats
+and validators belong to `@cssearth/objects`. Image and geometry generation and file I/O stay here;
+transport, projection, compositing, topology comparison and retained mounting stay in renderer.

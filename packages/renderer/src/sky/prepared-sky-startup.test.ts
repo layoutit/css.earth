@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
-import type { PreparedCssVolume } from '../volume/types.js';
+import type { PreparedCssVolume } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { mountPreparedCssSky } from './prepared-sky-runtime.js';
 import { holdStartup, releaseStartup } from '../rendering/startup-gate.js';

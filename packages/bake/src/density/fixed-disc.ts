@@ -1,10 +1,9 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import sharp from 'sharp';
-import type { VolumeSlices, VolumeSliceQuad, VolumeRecipe } from '@cssearth/objects';
-import type { Vector3 } from '@cssearth/objects';
+import { type VolumeSlices, type VolumeSliceQuad, type VolumeRecipe, type Vector3, type PreparedCssVolume } from '@cssearth/objects';
+
 import { compileCssVolume } from '../volume-leaves/index.ts';
-import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 
 /** Display support only: preserve the original colors and split each slab's optical depth. */
 export function coreSupport(position: readonly number[], fadeStart: number, radius: number): number {

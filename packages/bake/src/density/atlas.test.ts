@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
 import { prepareVolumeAtlases } from './atlas.ts';
-import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
+import type { PreparedCssVolume } from '@cssearth/objects';
 
 const AXES = ['x', 'y', 'z'] as const;
 const TRANSFORM = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,3,4,5,1)';

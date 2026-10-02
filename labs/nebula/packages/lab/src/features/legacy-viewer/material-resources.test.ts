@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createToneResourceController } from '@cssearth/volume-viewer/scene/tone-resources';
 import { materialResources, sharesMaterialGeometry } from './material-resources.ts';
-import type { PreparedCssVolume } from '../../adapters/viewer/prepared-loaders';
+import type { PreparedCssVolume } from '@cssearth/objects';
 
 type Leaf = PreparedCssVolume['stacks'][number]['leaves'][number];
 /** One prepared bank: identical leaves and frame, material differs only through its texture directory and names. */

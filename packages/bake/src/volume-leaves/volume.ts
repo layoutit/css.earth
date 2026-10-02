@@ -1,14 +1,10 @@
+import { PREPARED_CSS_VOLUME_SCHEMA, type DensityVolumeFrame, type Axis, type Vector3, type VolumeRecipe, type VolumeSlices, type PreparedLeafBounds, type PreparedCssVolume, type PreparedVolumeLeafStyle } from '@cssearth/objects';
 /** Actual PolyCSS preparation of static image geometry; no runtime image or mesh generation. */
 import { balanceVolumeSlices } from './volume-order.ts';
 import { compileLeafBounds } from './leaf-bounds.ts';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
-import { type DensityVolumeFrame, type Axis, type Vector3 } from '@cssearth/objects';
-import type { VolumeRecipe } from '@cssearth/objects';
-import type { VolumeSlices } from '@cssearth/objects';
+
 import { fitTextureGeometry, leafRasterScale, type ProjectiveGeometry } from '../scene/index.ts';
-import type { PreparedLeafBounds } from '@cssearth/objects';
-import type { PreparedCssVolume, PreparedVolumeLeafStyle } from '@cssearth/renderer/volume/types.ts';
-export type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 
 /** A PolyCSS image leaf drawn at TEXELS_PER_CSS_PIXEL. PolyCSS gives the leaf one CSS pixel per texel of the image its
  * background spans, `imagePixels` wide, and WebKit backs every composited leaf at that box times the device pixel ratio,
@@ -57,7 +53,7 @@ export function compileCssVolume(options: { id: string; frame: DensityVolumeFram
       widthPx: quad.widthPx, heightPx: quad.heightPx, ...compileVolumeLeaf(geometry, quad.widthPx) }];
   });
   const axes: Axis[] = ['x', 'y', 'z'];
-  return { schema: 'cssearth-css-volume@1' as const, id, frame,
+  return { schema: PREPARED_CSS_VOLUME_SCHEMA, id, frame,
     anchors: recipe.anchors.map(anchor => ({ id: anchor.id, positionUnits: referencePositionToUnits(anchor.referencePositionM, frame) })),
     stacks: axes.map((axis, index) => {
       const quads = slices.quads.filter(quad => quad.axis === axis), normal = quads[0]?.normal;

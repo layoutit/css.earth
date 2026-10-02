@@ -1,7 +1,5 @@
-import { parseDensityVolumeObjectDescriptor, readPreparedObject } from '@cssearth/objects';
+import { parseDensityVolumeObjectDescriptor, readPreparedObject, validatePreparedCssVolume, type PreparedCssVolume } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
-import { validatePreparedCssVolume } from './validation.js';
-import type { PreparedCssVolume } from './types.js';
 
 /** Transport a prepared density object; never bake a missing runtime resource. */
 export async function loadPreparedCssVolume(input: unknown, transport: PreparedCssTransport): Promise<PreparedCssVolume> {

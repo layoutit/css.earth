@@ -1,12 +1,9 @@
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
-import type { PreparedCssVolume } from '../volume/types.js';
-import type { PreparedPointAppearance } from '@cssearth/objects';
-import type { PreparedCssSurfaceShell } from '../shell/types.js';
-import type { PreparedCssImageLayers } from '../image-layers/loader.js';
+import { type PreparedCssVolume, type PreparedPointAppearance, type PreparedCssSurfaceShell, type PreparedCssImageLayers, type PreparedPointVisibility, type DensityVolumeFrame } from '@cssearth/objects';
+
 import type { BackgroundPointBank } from './background-points.js';
 import type { createPreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
-import type { PreparedPointVisibility } from '../volume/projected-volume-visibility.js';
-import type { DensityVolumeFrame } from '@cssearth/objects';
+
 import type { WorldPlannerSource } from './world-context/world-context-planner-client.js';
 import type { DatasetBillboards } from './dataset-billboards.js';
 

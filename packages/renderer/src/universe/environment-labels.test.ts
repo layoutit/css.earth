@@ -3,8 +3,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { screenPicking } from '../navigation/screen-picking.js';
 import { mountEnvironmentLabels } from './environment-labels.js';
-import type { PreparedCssSurfaceShell } from '../shell/types.js';
-import type { PreparedCssVolume } from '../volume/types.js';
+import { type PreparedCssSurfaceShell, type PreparedCssVolume } from '@cssearth/objects';
 
 class FakeElement {
   readonly children: FakeElement[] = []; readonly style: Record<string, string> = {}; readonly dataset: Record<string, string> = {};
@@ -146,7 +145,6 @@ test('retained environment captions keep fixed 3D anchors while visibility, phys
   labels.destroy();
   assert.equal(clock.pending.size, 0);  assert.deepEqual(host.children, [retained[1]]); labels.destroy();
 });
-
 
 test('an authored environment link is interactive only while its caption is admitted', () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);

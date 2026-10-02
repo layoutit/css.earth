@@ -1,7 +1,7 @@
 import { readCompactPin as pinned, replayCompactSampled as replay } from '@cssearth/bake/volume/node';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 import { compileCssVolume } from '@cssearth/bake/volume-leaves';
-import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
+import { validatePreparedCssVolume, readCompilerBakeResult, type CompilerPin } from '@cssearth/objects';
 /** Retained measured particles and per-emitter materials; never stores rendered slices. */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -11,7 +11,7 @@ import { readSampledRecipe } from "../../../features/sampled-prior/model.ts";
 import { readCompilerResult } from "../../../features/compiler/result.ts";
 import { readCompilerRequest } from "../../../features/compiler/model.ts";
 import { sampledPointColors, prepareSampledMaterial, type SampledColor, prepareSampledField } from '@cssearth/bake/volume';
-import { readCompilerBakeResult, type CompilerPin } from '@cssearth/objects';
+
 import { loadCompilerImages } from "../../../server/workflows/compiler/images.ts";
 import { decodeFits } from "@cssearth/fits";
 import {

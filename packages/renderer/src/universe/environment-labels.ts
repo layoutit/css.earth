@@ -2,7 +2,7 @@ import { writeStyle } from '../rendering/retained-write.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import type { DensityVolumeFrame } from '@cssearth/objects';
+import { type DensityVolumeFrame, type PreparedCssSurfaceShell, type PreparedCssVolume } from '@cssearth/objects';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { cssCameraAxesFromOrientation } from '../navigation/world-camera-math.js';
@@ -10,8 +10,7 @@ import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-c
 import type { OpacityClock } from '../stars/opacity-clock.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import type { PreparedSurfaceShellStats } from '../shell/prepared-shell-runtime.js';
-import type { PreparedCssSurfaceShell } from '../shell/types.js';
-import type { PreparedCssVolume } from '../volume/types.js';
+
 import { projectGalaxyCaptionAnchor } from './galaxy-caption-anchor.js';
 
 const LABEL_GAP_PX = 8;

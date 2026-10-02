@@ -1,7 +1,6 @@
-import { type CompilerBakeResult, readRenderElementBudget } from '@cssearth/objects';
+import { type CompilerBakeResult, readRenderElementBudget, validatePreparedVolumeDatasets, type PreparedVolumeDatasets } from '@cssearth/objects';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 import { samePreparedVolumeTopology } from '@cssearth/renderer/volume/prepared-volume-lod.ts';
-import { validatePreparedVolumeDatasets, type PreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
 
 const AXES = ['x', 'y', 'z'] as const;
 // Renderer conformance counts these retained wrappers/markers, including the bank root and empty star wrapper.

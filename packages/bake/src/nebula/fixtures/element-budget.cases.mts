@@ -1,9 +1,9 @@
+import { PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_IMPOSTORS_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, type CompilerBakeResult, createRenderElementBudget, type PreparedCssVolume, type VolumeVector, type PreparedVolumeDatasets } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { type CompilerBakeResult, createRenderElementBudget } from '@cssearth/objects';
+
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
-import type { PreparedCssVolume, VolumeVector } from '@cssearth/renderer/volume/types.ts';
-import type { PreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
+
 import { assertCompilerDeliveryElementBudget } from '../index.js';
 
 const axes = ['x', 'y', 'z'] as const;
@@ -18,19 +18,19 @@ function volume(id: string, counts: Record<typeof axes[number], number>, imposto
   const resource = (path: string) => ({ path, width: 1, height: 1, bytes: 1 });
   const views = Array.from({ length: impostorCount }, (_, index) => ({ id: `view-${index}`, texturePath: `${id}/view-${index}.png`,
     back: [0, 0, 1] as VolumeVector, right: [1, 0, 0] as VolumeVector, down: [0, -1, 0] as VolumeVector }));
-  return { schema: 'cssearth-css-volume@1', id, frame, anchors: [], provenance: {}, approximation: {},
+  return { schema: PREPARED_CSS_VOLUME_SCHEMA, id, frame, anchors: [], provenance: {}, approximation: {},
     stacks: axes.map(axis => ({ axis, leaves: Array.from({ length: counts[axis] }, (_, index) => ({
       id: `${axis}-${index}`, centerUnits: [0, 0, 0], texturePath: `${id}/${axis}.png`, widthPx: 1, heightPx: 1,
       style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
         backgroundSize: '1px 1px', backgroundPosition: '0px 0px' },
     })) })),
     resources: [...axes.map(axis => resource(`${id}/${axis}.png`)), ...views.map(view => resource(view.texturePath))],
-    ...(impostorCount ? { impostors: { schema: 'cssearth-volume-impostors@1' as const, radiusUnits: 1,
+    ...(impostorCount ? { impostors: { schema: PREPARED_VOLUME_IMPOSTORS_SCHEMA, radiusUnits: 1,
       fullBelowDiameterPixels: 16, volumeAboveDiameterPixels: 32, views } } : {}),
   };
 }
 function bank(counts = { x: 50, y: 50, z: 50 }, stars = 3, impostors = 26): PreparedVolumeDatasets {
-  return { schema: 'cssearth-volume-datasets@1', id: 'fixture', defaultDataset: 'first', framingRadiusUnits: 1, starsEnabled: false,
+  return { schema: PREPARED_VOLUME_DATASETS_SCHEMA, id: 'fixture', defaultDataset: 'first', framingRadiusUnits: 1, starsEnabled: false,
     datasets: ['first', 'second'].map(id => ({ id, label: id, title: id, description: 'Test delivery', sourceUrl: 'https://example.org/source',
       volume: volume(id, counts, impostors), brightness: { overall: 1, x: 1, y: 1, z: 1 },
       stars: { frame, points: Array.from({ length: stars }, (_, index) => ({ id: `star-${index}`,

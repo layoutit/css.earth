@@ -3,12 +3,12 @@ import {applyIsophoteMasks,applyRecordedPointMasks,emissionInputChannels,emissio
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import type { DensityVolumeFrame } from '@cssearth/objects';
-import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
+import { type DensityVolumeFrame, parseDensityVolumeObjectDescriptor, validatePreparedCssVolume } from '@cssearth/objects';
+
 import { inferEmission, projectEmission, type InferenceGrid, type SymmetryPrior } from '@cssearth/nebula-reconstruction/methods/symmetry/solver';
 import { bakeMasterVolumeSlices } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
-import { validatePreparedCssVolume } from '../../adapters/renderer/volume-validation.ts';
+
 import { geometricDepth, conditionEmission, type ShapePrior } from '@cssearth/nebula-reconstruction/methods/symmetry/shape-prior';
 import { nativeStarless, type NativeRemoval } from '../../server/workflows/emission-inference/native-source.ts';
 

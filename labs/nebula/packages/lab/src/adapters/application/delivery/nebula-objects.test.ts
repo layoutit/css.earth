@@ -4,8 +4,8 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { test } from 'node:test';
 import sharp from 'sharp';
-import type { PreparedCssVolume, VolumeAxis } from '@cssearth/renderer/volume/types.ts';
-import { validatePreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
+import { type PreparedCssVolume, type VolumeAxis, validatePreparedVolumeDatasets } from '@cssearth/objects';
+
 import { prepareNebulaObject, readNebulaDelivery } from './nebula-objects.ts';
 
 test('a pinned optical composite is a compiler delivery stage, never a symmetry fallback', async () => {

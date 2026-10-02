@@ -1,3 +1,4 @@
+import { PREPARED_IMAGE_LAYER_BANK_SCHEMA } from '@cssearth/objects';
 /** Generic offline preparation entry point for retained extruded image layers. */
 import { mkdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -18,7 +19,7 @@ export async function prepareImageLayerObject(objectDirectory: string) {
   const prepared=await prepareImageLayers({sourceDirectory,outputDirectory,recipe});
   const preparedPath=resolve(outputDirectory,'image-layers.json'),preparedBytes=await readFile(preparedPath);
   const nextDescriptor={schema:'cssearth-object@2',id:recipe.id,type:'image-layer-bank',properties:{...descriptor.properties,frame:prepared.frame,preparation:ref},
-    prepared:{format:'cssearth-image-layer-bank@1',url:'prepared/image-layers.json'}};
+    prepared:{format:PREPARED_IMAGE_LAYER_BANK_SCHEMA,url:'prepared/image-layers.json'}};
   await writeFile(resolve(root,'object.json'),JSON.stringify(nextDescriptor,null,2)+'\n');
   const retained=new Set(prepared.resources.map(resource=>resource.path));
   for(const path of previous)if(!retained.has(path)){if(!path.startsWith('layers/')||path.split('/').includes('..'))throw new TypeError('Refusing to retire an uncontained image-layer resource.');try{await unlink(resolve(outputDirectory,path));}catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;}}

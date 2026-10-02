@@ -1,4 +1,4 @@
-import type { RenderElementProfile } from './types.js';
+import type { RenderElementProfile } from '@cssearth/objects';
 
 /** One topology, at most 26 impostors, no separate occulting root. Conformance tests count the actual mounted DOM.
  * Current inclusive overhead is 46 elements; reserve one more element before allocating the retained XYZ slabs. */

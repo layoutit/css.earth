@@ -1,3 +1,4 @@
+import { PREPARED_VOLUME_DATASETS_SCHEMA, parseDensityVolumeObjectDescriptor, validatePreparedVolumeDatasets, type PreparedCssVolume } from '@cssearth/objects';
 /**
  * Package an already-prepared physical density volume as one selectable dataset.
  *
@@ -10,10 +11,8 @@
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
-import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
+
 import { loadPreparedCssVolume } from '@cssearth/renderer/volume/loader.ts';
-import { validatePreparedVolumeDatasets } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
-import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 
 export interface DensityVolumeDatasetBankSource {
   /** Directory containing the authored density-volume object.json. */
@@ -177,11 +176,11 @@ export async function promoteDensityVolumeDatasetBank(request: DensityVolumeData
         : 'Promoted prepared physical density volume. No depth was inferred or reconstructed.' }
     : { sources: sourceReceipts.map(({ datasetId, provenance: sourceDensityVolume, frame: measurementFrame }) => ({ datasetId, sourceDensityVolume, measurementFrame })),
       presentationFrame, interpretation: 'Each selectable dataset retains its authenticated physical source, measurement frame and resources. All datasets share the explicitly authored presentation scale and bounds; no depth was inferred or reconstructed.' };
-  const data = validatePreparedVolumeDatasets({ schema: 'cssearth-volume-datasets@1', id: request.id, defaultDataset,
+  const data = validatePreparedVolumeDatasets({ schema: PREPARED_VOLUME_DATASETS_SCHEMA, id: request.id, defaultDataset,
     framingRadiusUnits: request.framingRadiusUnits, contextVisibility: 'independent', starsEnabled: false,
     ...(request.attachedTo === undefined ? {} : { attachedTo: request.attachedTo }),
     provenance, datasets });
-  const envelope = json({ schema: 'cssearth-prepared-object@1', id: request.id, type: 'volume-dataset-bank', format: 'cssearth-volume-datasets@1', data });
+  const envelope = json({ schema: 'cssearth-prepared-object@1', id: request.id, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA, data });
   const delivery = json({ schema: 'cssearth-density-volume-dataset-bank-source@1',
     ...(request.attachedTo === undefined ? {} : { attachedTo: request.attachedTo }),
     ...(sourceReceipts.length === 1 ? { source: sourceReceipts[0] } : { sources: sourceReceipts }),
@@ -201,7 +200,7 @@ export async function promoteDensityVolumeDatasetBank(request: DensityVolumeData
   await writeFile(preparedOutput, envelope);
   const destinationDescriptor = json({ schema: 'cssearth-object@2', id: request.id, type: 'volume-dataset-bank', properties: {
     frame: presentationFrame, preparation: { source: 'source/delivery.json' },
-  }, prepared: { format: 'cssearth-volume-datasets@1', url: 'prepared/datasets.json' } });
+  }, prepared: { format: PREPARED_VOLUME_DATASETS_SCHEMA, url: 'prepared/datasets.json' } });
   const destinationDescriptorPath = local(destinationDirectory, 'object.json');
   await writeFile(destinationDescriptorPath, destinationDescriptor);
   return Object.freeze({ descriptorPath: destinationDescriptorPath, preparedPath: preparedOutput, deliveryPath,

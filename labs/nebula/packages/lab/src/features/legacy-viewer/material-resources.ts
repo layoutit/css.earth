@@ -1,5 +1,5 @@
 /** Match two prepared material banks without changing the retained scene geometry. */
-import type { PreparedCssVolume } from '../../adapters/viewer/prepared-loaders';
+import type { PreparedCssVolume } from '@cssearth/objects';
 import type { ToneResource } from '../../adapters/viewer/tone-runtime';
 
 /** Saved results may swap materials in place only when they claim the same model geometry and the same star layer. */

@@ -4,8 +4,8 @@ import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promis
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { PreparedCataloguePoint } from '@cssearth/renderer/stars/prepared-catalogue-points.ts';
+import { type DensityVolumeFrame, type PreparedCataloguePoint } from '@cssearth/objects';
+
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';
 import { embedNebulaFrame, METERS_PER_PARSEC } from './nebula-frame.ts';
 import { samePreparedCatalogueGeometry } from '@cssearth/renderer/stars/prepared-catalogue-points.ts';

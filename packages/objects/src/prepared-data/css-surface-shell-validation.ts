@@ -1,13 +1,15 @@
-import { cssMatrix as matrix, CSS_NUMBER as NUMBER, parseDensityVolumeFrame } from '@cssearth/objects';
+import { PREPARED_CSS_SURFACE_SHELL_SCHEMA } from '../volume/volume-schemas.js';
+import { cssMatrix as matrix, CSS_NUMBER as NUMBER } from './runtime-validation/css-matrix.js';
+import { parseDensityVolumeFrame } from '../density-volume.js';
 
-import type { PreparedCssSurfaceShell } from './types.js';
+import type { PreparedCssSurfaceShell } from './css-surface-shell-types.js';
 
 /** Accepts prepared geometry and material addresses, never authored runtime CSS. */
 export function validatePreparedCssSurfaceShell(input: unknown): PreparedCssSurfaceShell {
   const value = record(input, 'prepared CSS surface shell');
   exactKeys(value, ['schema', 'id', 'frame', 'unitScale', 'atlas', 'visibility', 'faces', 'resources', 'provenance',
     ...(value.vertices === undefined ? [] : ['vertices'])], 'prepared CSS surface shell');
-  if (value.schema !== 'cssearth-css-surface-shell@1' || typeof value.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.id) || !positive(value.unitScale)) {
+  if (value.schema !== PREPARED_CSS_SURFACE_SHELL_SCHEMA || typeof value.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.id) || !positive(value.unitScale)) {
     throw new TypeError('Prepared CSS surface shell identity or unit scale is invalid.');
   }
   const frame = parseDensityVolumeFrame(value.frame);

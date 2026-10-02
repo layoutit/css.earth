@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import type { PreparedCssVolume, PreparedVolumeLeaf } from '../../../adapters/renderer/volume-types.ts';
-import type { CompilerBakeResult } from '@cssearth/objects';
+import { type PreparedCssVolume, type PreparedVolumeLeaf, type CompilerBakeResult } from '@cssearth/objects';
+
 import { assertCompilerBankIdentity, assertCompilerDatasetGeometry } from './bank-validation.ts';
 
 const result: Pick<CompilerBakeResult, 'id' | 'frame' | 'fieldIdentity'> = {

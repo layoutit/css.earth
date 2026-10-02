@@ -1,16 +1,14 @@
+import { PREPARED_VOLUME_DATASETS_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, type PreparedCssVolume, validatePreparedCssVolume } from '@cssearth/objects';
 /** Offline handoff of existing cloud geometry, prepared pixels and saved display choices. */
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative, sep } from 'node:path';
 import { createCloudDensityPreparer } from '../../services/density-material.ts';
-import { parsePreparedLmcStars } from '@cssearth/objects';
-import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter } from '@cssearth/objects';
+
 import { createCloudInspection, parseCloudCatalogue, validateCloudBrightness } from '@cssearth/volume-viewer/scene/cloud-inspection';
 import { readPreparedReconstruction } from '../../services/density-reconstruction.ts';
 import { finiteModelStarsPath } from '../../services/finite-dataset-bundles.ts';
 import type { CloudBrightness, CloudStarOptions } from '@cssearth/volume-viewer/scene/cloud-types';
-import type { PreparedCssVolume } from '../../../adapters/renderer/volume-types.ts';
-import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 
 export interface DatasetPromotion {
   imageId: string; resultId: string; label: string; description: string;
@@ -124,15 +122,15 @@ export async function promoteVolumeDatasets(root: string, input: VolumeDatasetPr
     await output(`source/lenses/${dataset.imageId}/provenance.json`, await readFile(resolve(directory, 'source/provenance.json')));
     await output(`source/lenses/${dataset.imageId}/selection.json`, bytes({ settings: dataset, sourceParts: catalogue, densityFilter: filtered.stats }));
   }
-  const data = { schema: 'cssearth-volume-datasets@1', id: recipe.id, defaultDataset: recipe.defaultDataset,
+  const data = { schema: PREPARED_VOLUME_DATASETS_SCHEMA, id: recipe.id, defaultDataset: recipe.defaultDataset,
     framingRadiusUnits: recipe.framingRadiusUnits, starsEnabled: recipe.datasets.find(dataset => dataset.imageId === recipe.defaultDataset)!.stars.enabled, datasets };
-  const envelope = { schema: 'cssearth-prepared-object@1', id: recipe.id, type: 'volume-dataset-bank', format: 'cssearth-volume-datasets@1', data };
+  const envelope = { schema: 'cssearth-prepared-object@1', id: recipe.id, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA, data };
   const recipeBytes = bytes(recipe), preparedBytes = bytes(envelope);
   await output('source/lenses.json', recipeBytes);
   await output('prepared/datasets.json', preparedBytes);
   await output('object.json', bytes({ schema: 'cssearth-object@2', id: recipe.id, type: 'volume-dataset-bank',
     properties: { frame: commonFrame, preparation: { source: 'source/lenses.json' } },
-    prepared: { format: 'cssearth-volume-datasets@1', url: 'prepared/datasets.json' } }));
+    prepared: { format: PREPARED_VOLUME_DATASETS_SCHEMA, url: 'prepared/datasets.json' } }));
   await put(resolve(destination, 'source/lens-manifest.json'), bytes({ schema: 'cssearth-volume-dataset-manifest@1', outputs }));
   return { id: recipe.id, datasets: datasets.map(dataset => ({ id: dataset.id, stars: dataset.stars.points.length,
     slices: dataset.volume.stacks.reduce((sum, stack) => sum + stack.leaves.length, 0) })),

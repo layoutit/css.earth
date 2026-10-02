@@ -1,7 +1,8 @@
 /** Lab validation and URL binding for the generic retained shape scene. */
 import { createShapeCloudViewer as createScene, type ShapeCloudViewerOptions as SceneOptions,
   type ShapeCloudViewer } from '@cssearth/volume-viewer/scene/shape-cloud-viewer';
-import type { PreparedCssVolume, VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+import type { PreparedCssVolume } from '@cssearth/objects';
 import type { ShapeCloudResult } from '../../features/shape-cloud/types.ts';
 import { readShapeCloudResult } from '../../features/shape-cloud/result.ts';
 import { volumeRenderer } from './volume-renderer';
