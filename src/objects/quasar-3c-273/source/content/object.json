@@ -1,0 +1,136 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "quasar-3c-273",
+  "displayName": "3C 273",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance (comoving)",
+        "value": "672 Mpc, 2.2 billion light years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "redshift",
+        "label": "Redshift",
+        "value": "0.1576",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-ac6c05",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261....2K",
+          "label": "Koss et al. (2022), BASS XXII: The BASS DR2 AGN Catalog and Data, ApJS 261, 2; redshift as SIMBAD records it",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "light-travel",
+        "label": "Light travel time",
+        "value": "2.04 billion years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age of the universe then",
+        "value": "11.8 billion years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 187.2779°, Dec 2.0524°",
+        "source": {
+          "catalogueId": "gaia-2023-dr3",
+          "url": "https://doi.org/10.1051/0004-6361/202243940",
+          "label": "Gaia Collaboration (2023), Gaia Data Release 3, A&A 674, A1; position as SIMBAD records it",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "1.17 arcmin, 228.9 kpc comoving at its distance",
+        "source": {
+          "catalogueId": "esahubble-potw1346a",
+          "url": "https://esahubble.org/images/potw1346a/",
+          "label": "ESA/Hubble potw1346a: ESA/Hubble & NASA",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Hubble · visible",
+        "thumbnail": "quasar-3c-273-dataset-optical.webp",
+        "volume": {
+          "objectId": "quasar-3c-273-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "quasar-3c-273-layers-optical",
+          "path": "../../quasar-3c-273-layers/source/manifest.json",
+          "url": "https://esahubble.org/images/potw1346a/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+      "href": "https://arxiv.org/abs/1807.06209"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Koss et al. (2022), BASS XXII: The BASS DR2 AGN Catalog and Data, ApJS 261, 2; redshift as SIMBAD records it",
+      "href": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261....2K"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Gaia Collaboration (2023), Gaia Data Release 3, A&A 674, A1; position as SIMBAD records it",
+      "href": "https://doi.org/10.1051/0004-6361/202243940"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Hubble potw1346a: ESA/Hubble & NASA",
+      "href": "https://esahubble.org/images/potw1346a/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1051/0004-6361/202243940",
+      "credit": "Gaia Collaboration (2023), Gaia Data Release 3, A&A 674, A1; position as SIMBAD records it"
+    }
+  }
+}

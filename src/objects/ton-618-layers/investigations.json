@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ton-618-layers",
+  "entries": [
+    {
+      "id": "cds-p-sdss9-color",
+      "subject": "CDS (SDSS) CDS/P/SDSS9/color",
+      "status": "included",
+      "finding": "SDSS9 color HiPS (CDS), a cutout on TON 618: SDSS g, r and i as blue, green and red; 512 × 512 px over 1.00 arcmin. The cutout is asked of the CDS hips2fits service as a tangent-plane image centred on the catalogue position, 60 arcsec across at 512 px (0.117 arcsec per pixel, finer than the survey's 0.396 arcsec pixels), north up. Its geometry is the request's; no registration was measured.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "https://www.sdss.org/collaboration/#image-use"
+      ]
+    }
+  ]
+}

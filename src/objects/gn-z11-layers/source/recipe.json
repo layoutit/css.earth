@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "gn-z11-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      300,
+      300
+    ],
+    "originalDimensions": [
+      300,
+      300
+    ],
+    "publisherUrl": "https://esawebb.org/images/weic2406a/",
+    "downloadUrl": "https://cdn.esawebb.org/archives/images/large/weic2406a.jpg",
+    "credit": "NASA, ESA, CSA, B. Robertson (UC Santa Cruz), B. Johnson (CfA), S. Tacchella (Cambridge), M. Rieke (University of Arizona), D. Eisenstein (CfA)",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 189.1061444,
+    "centerDecDeg": 62.2421449,
+    "fieldOfViewDeg": [
+      0.0002038889,
+      0.0002038889
+    ],
+    "northClockwiseDeg": 61.4
+  },
+  "target": {
+    "centerRaDeg": 189.106083,
+    "centerDecDeg": 62.242056,
+    "distancePc": 9762148825.546518
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 107.842,
+    "thicknessKpc": 0.0174,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 25.055,
+    "supportTaperFraction": 0.995,
+    "depthScales": [
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.133,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "ton-618-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      512,
+      512
+    ],
+    "originalDimensions": [
+      512,
+      512
+    ],
+    "publisherUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+    "downloadUrl": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=512&height=512&fov=0.0166667&projection=TAN&coordsys=icrs&ra=187.104039&dec=31.477127&format=jpg",
+    "credit": "Sloan Digital Sky Survey DR9; color HiPS by CDS (CNRS/Unistra)",
+    "license": "CC-BY"
+  },
+  "observation": {
+    "centerRaDeg": 187.104039,
+    "centerDecDeg": 31.477127,
+    "fieldOfViewDeg": [
+      0.01666667,
+      0.01666667
+    ],
+    "northClockwiseDeg": 0
+  },
+  "target": {
+    "centerRaDeg": 187.104039,
+    "centerDecDeg": 31.477127,
+    "distancePc": 5615820567.245126
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 0,
+    "thicknessKpc": 0.817,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 1178.2,
+    "supportTaperFraction": 0.995,
+    "depthScales": [
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.047,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

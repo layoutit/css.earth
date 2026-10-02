@@ -1,0 +1,52 @@
+{
+  "id": "esawebb-sunrisearc1",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Galaxy cluster WHL0137-08",
+  "identifiers": [
+    {
+      "type": "ESA/Webb image",
+      "value": "sunrisearc1"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esawebb.org/images/sunrisearc1/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esawebb.org/archives/images/large/sunrisearc1.jpg",
+      "label": "Large JPEG, 6507 x 6612 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esawebb.org/images/sunrisearc1/",
+      "checkedOn": "2026-10-02",
+      "locator": "6507 x 6612 px; Webb NIRCam, 0.9 to 4.4 µm, the shortest wavelengths blue and the longest red. The file's embedded tags give 0.02003 arcsec per pixel and north 17.2° left of vertical; the window is centred on the pixel where they place the paper's position. The same publisher's tags placed another galaxy 1.5 arcsec off (JADES-GS-z14-0), so the window's centre is the paper's position to about an arcsec; the arc passes through it."
+    }
+  ],
+  "publisher": "ESA/Webb",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, D. Coe (AURA/STScI for ESA), Z. Levay",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/images/sunrisearc1/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/copyright/"
+    }
+  ]
+}

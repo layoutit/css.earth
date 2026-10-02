@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "gn-z11-layers",
+  "name": "GN-z11",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/gn-z11-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/gn-z11-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/gn-z11-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · near infrared",
+      "title": "GN-z11 in near infrared",
+      "description": "The publisher's enlarged view, 0.73 arcsec across, with GN-z11 at lower left. A flat picture of the sky, with no depth. It stands as one flat picture facing the Sun at the object's distance.",
+      "summary": "The publisher's enlarged view, 0.73 arcsec across, with GN-z11 at lower left. A flat picture of the sky, with no depth.",
+      "detail": "300 × 300 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "Webb NIRCam: 0.9 to 1.5 µm blue, 2.0 to 3.4 µm green, 3.6 to 4.4 µm red"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "300 × 300"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "0.73 arcsec across"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/gn-z11-layers/source/source.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/large/weic2406a.jpg"
+      }
+    }
+  ]
+}

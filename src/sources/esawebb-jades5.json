@@ -1,0 +1,52 @@
+{
+  "id": "esawebb-jades5",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Webb finds most distant known galaxy (JADES-GS-z14-0 environment NIRCam image)",
+  "identifiers": [
+    {
+      "type": "ESA/Webb image",
+      "value": "jades5"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esawebb.org/images/jades5/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esawebb.org/archives/images/large/jades5.jpg",
+      "label": "Large JPEG, 12407 x 12121 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esawebb.org/images/jades5/",
+      "checkedOn": "2026-10-02",
+      "locator": "12407 x 12121 px; Webb NIRCam: 0.9 to 1.5 µm blue, 2.0 and 2.8 µm green, 3.6 to 4.4 µm red. The file's embedded tags give 0.02991 arcsec per pixel and north 38.0° right of vertical. They place the paper's position 1.5 arcsec from the galaxy the publisher marks in its annotated version (ESA/Webb jades4), so the window is centred on that marked galaxy instead: its orange light and the pale galaxy beside it, as the publisher's enlarged view shows them. The window's centre is taken to be the paper's position, to about 0.1 arcsec."
+    }
+  ],
+  "publisher": "ESA/Webb",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, J. Olmsted (STScI), S. Carniani (Scuola Normale Superiore), JADES Collaboration",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/images/jades5/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/copyright/"
+    }
+  ]
+}

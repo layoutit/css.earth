@@ -1,0 +1,28 @@
+{
+  "id": "earendel",
+  "classification": "galaxy",
+  "order": 5448,
+  "physical": {
+    "name": "Earendel",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Earendel is recorded here: its package frames it at 248,585 pc (object.json worldFrame.bodyRadiusM), half the short side of its picture at its distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 24.3468,
+    "declinationDegrees": -8.4645,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 8393236234.589988,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 1776570.1,
+    "sources": {
+      "position": "Welch et al. (2022), A highly magnified star at redshift 6.2, Nature 603, 815 (https://arxiv.org/abs/2209.14866); text: a highly magnified star sitting atop the lensing critical curve at RA, Dec = 01:37:23.232, -8:27:52.20 (J2000), designated WHL0137-LS",
+      "distance": "Comoving distance of the redshift z = 5.926 (Pascale et al. (2025), Is Earendel a Star Cluster?: Metal Poor Globular Cluster Progenitors at z ~ 6, arXiv:2507.05483) in the Planck 2018 cosmology: 8393236234.589988 pc, from Astropy 8.0.1 Planck18.comoving_distance (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift (packages/bake/cli/prepare-catalogue-points.mts).",
+      "properMotion": "Zero: the object is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the redshift z = 5.926: the redshift written as a velocity, not a motion through space. Pascale et al. (2025), Is Earendel a Star Cluster?: Metal Poor Globular Cluster Progenitors at z ~ 6, arXiv:2507.05483 (https://arxiv.org/abs/2507.05483); abstract: a spectroscopic redshift of the Sunrise galaxy, z = 5.926 ± 0.013, from NIRSpec PRISM spectroscopy."
+    }
+  }
+}

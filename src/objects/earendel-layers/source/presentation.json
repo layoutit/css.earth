@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "earendel-layers",
+  "name": "Earendel",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/earendel-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/earendel-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/earendel-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · near infrared",
+      "title": "Earendel on the Sunrise Arc",
+      "description": "The far galaxy, stretched into an arc by a nearer cluster's gravity; Earendel is a point on it. A flat picture. It stands as one flat picture facing the Sun at the object's distance.",
+      "summary": "The far galaxy, stretched into an arc by a nearer cluster's gravity; Earendel is a point on it. A flat picture.",
+      "detail": "610 × 830 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "Webb NIRCam, 0.9 to 4.4 µm, the shortest wavelengths blue and the longest red"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "610 × 830"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "12.22 arcsec across"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/earendel-layers/source/source.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/large/sunrisearc1.jpg"
+      }
+    }
+  ]
+}

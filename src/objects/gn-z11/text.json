@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gn-z11",
+  "card": {
+    "text": "The most distant galaxy Hubble measured, announced in 2016, seen 430 million years after the Big Bang.",
+    "sources": [
+      {
+        "catalogueId": "publication-bunker-2023-gn-z11",
+        "url": "https://arxiv.org/abs/2302.07256",
+        "label": "Bunker et al. (2023), JADES NIRSpec Spectroscopy of GN-z11, A&A 677, A88",
+        "checked": "2026-10-02",
+        "locator": "abstract: a luminous galaxy at z = 10.60, 430 Myr after the Big Bang"
+      },
+      {
+        "catalogueId": "publication-bunker-2023-gn-z11",
+        "url": "https://arxiv.org/abs/2302.07256",
+        "label": "Bunker et al. (2023), JADES NIRSpec Spectroscopy of GN-z11, A&A 677, A88",
+        "checked": "2026-10-02",
+        "locator": "abstract: we derive a redshift of z = 10.603"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "z = 10.603: comoving distance 9,762 Mpc, lookback time 13.35 Gyr, age 435 Myr"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Webb's near-infrared view: GN-z11 is the small yellow point at lower left, and the red galaxy above it is nearer. The picture is flat and has no depth.",
+    "sources": [
+      {
+        "catalogueId": "esawebb-weic2406a",
+        "url": "https://esawebb.org/images/weic2406a/",
+        "label": "ESA/Webb weic2406a: NASA, ESA, CSA, B. Robertson (UC Santa Cruz), B. Johnson (CfA), S. Tacchella (Cambridge), M. Rieke (University of Arizona), D. Eisenstein (CfA)",
+        "checked": "2026-10-02",
+        "locator": "GN-z11 in the GOODS-North field; Webb NIRCam: 0.9 to 1.5 µm blue, 2.0 to 3.4 µm green, 3.6 to 4.4 µm red"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "z = 10.603: age of the universe 435 Myr of 13,787 Myr"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "GN-z11 in near infrared",
+      "detail": "300 × 300 px",
+      "summary": "The publisher's enlarged view, 0.73 arcsec across, with GN-z11 at lower left. A flat picture of the sky, with no depth.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-weic2406a",
+          "url": "https://esawebb.org/images/weic2406a/",
+          "label": "ESA/Webb weic2406a: NASA, ESA, CSA, B. Robertson (UC Santa Cruz), B. Johnson (CfA), S. Tacchella (Cambridge), M. Rieke (University of Arizona), D. Eisenstein (CfA)",
+          "checked": "2026-10-02",
+          "locator": "GN-z11 in the GOODS-North field"
+        }
+      ]
+    }
+  }
+}

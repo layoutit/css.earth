@@ -1,0 +1,42 @@
+{
+  "id": "publication-pascale-2025-earendel",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Is Earendel a Star Cluster?: Metal Poor Globular Cluster Progenitors at z ~ 6",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2507.05483"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2507.05483",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2507.05483",
+      "checkedOn": "2026-10-02",
+      "locator": "abstract: a spectroscopic redshift of the Sunrise galaxy, z = 5.926 ± 0.013, from archival NIRSpec PRISM spectroscopy; explores the hypothesis that Earendel may be a star cluster."
+    }
+  ],
+  "creators": [
+    "Pascale, Massimo",
+    "Dai, Liang",
+    "Frye, Brenda L."
+  ],
+  "publisher": "arXiv:2507.05483",
+  "publicationDate": "2025",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Read from the arXiv abstract; the journal reference was not recorded when checked.",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2507.05483"
+    }
+  ]
+}

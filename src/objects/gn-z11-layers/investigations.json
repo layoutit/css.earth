@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "gn-z11-layers",
+  "entries": [
+    {
+      "id": "weic2406a",
+      "subject": "ESA/Webb weic2406a",
+      "status": "included",
+      "finding": "GN-z11 in the GOODS-North field: Webb NIRCam: 0.9 to 1.5 µm blue, 2.0 to 3.4 µm green, 3.6 to 4.4 µm red; 300 × 300 px over 0.73 arcsec. The publisher's file carries no sky tags. Its compass version (ESA/Webb weic2406c) draws a 60 arcsec bar 1,200 px long at 4,000 px width, which is 0.0494 arcsec per pixel at this file's 4,049 px, and compass arrows that put north about 61° right of vertical (read from the arrows, to a degree or two). The small square the publisher draws on the field is 37 px inside (1.83 arcsec) and the enlarged view 747 px inside, so one pixel of the enlarged view is 0.00245 arcsec, to about 3%. The window is 300 px of the enlarged view, placed to keep the publisher's label and pointer line out; GN-z11 is 94 px left of and 100 px below the window's centre, so the centre is 0.34 arcsec from the paper's position.",
+      "evidence": [
+        "https://esawebb.org/images/weic2406a/",
+        "https://esawebb.org/copyright/"
+      ]
+    }
+  ]
+}

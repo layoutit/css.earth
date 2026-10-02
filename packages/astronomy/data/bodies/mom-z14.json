@@ -1,0 +1,28 @@
+{
+  "id": "mom-z14",
+  "classification": "galaxy",
+  "order": 5445,
+  "physical": {
+    "name": "MoM-z14",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of MoM-z14 is recorded here: its package frames it at 14,624 pc (object.json worldFrame.bodyRadiusM), half the short side of its picture at its distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 150.0933255,
+    "declinationDegrees": 2.2731627,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 10381694323.464087,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 4329003.1,
+    "sources": {
+      "position": "Naidu et al. (2025), A Cosmic Miracle: A Remarkably Luminous Galaxy at z = 14.44 Confirmed with JWST, Open Journal of Astrophysics; position as SIMBAD records it from the paper (https://arxiv.org/abs/2505.11263); RA 150.0933255°, Dec 2.2731627° (SIMBAD, coordinate reference arXiv:2505.11263)",
+      "distance": "Comoving distance of the redshift z = 14.44 (Naidu et al. (2025), Open Journal of Astrophysics, arXiv:2505.11263) in the Planck 2018 cosmology: 10381694323.464087 pc, from Astropy 8.0.1 Planck18.comoving_distance (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift (packages/bake/cli/prepare-catalogue-points.mts).",
+      "properMotion": "Zero: the object is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the redshift z = 14.44: the redshift written as a velocity, not a motion through space. Naidu et al. (2025), Open Journal of Astrophysics, arXiv:2505.11263 (https://arxiv.org/abs/2505.11263); abstract: z_spec = 14.44 +0.02 -0.02."
+    }
+  }
+}
