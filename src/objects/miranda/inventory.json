@@ -219,12 +219,6 @@
     },
     {
       "location": "public",
-      "filename": "miranda-billboard.webp",
-      "bytes": 11524,
-      "sha256": "f5c9fa60478c09a22b95dd5d22b53e1c2c88e7cd8446ace25bf1063e6261e804"
-    },
-    {
-      "location": "public",
       "filename": "miranda-dataset-elevation.webp",
       "bytes": 486,
       "sha256": "4599701fe7bfb209a6829b1fabd4b65d06cdf6ef551a577e21c82eb1e72edb81"
@@ -249,6 +243,42 @@
     },
     {
       "location": "public",
+      "filename": "miranda-elevation-page-0-level-1625.webp",
+      "bytes": 6714,
+      "sha256": "c88c2932f645f27d92e9c804e25bb4416a49b4e0c6fa9a23bf243dd2d85e7f8e"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-elevation-page-0-level-3250.webp",
+      "bytes": 16756,
+      "sha256": "69da26d367e613f04d69d62e0d079c9479abf3b3c555e0e8c2b0acbaf0de39a4"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-elevation-page-0.webp",
+      "bytes": 46346,
+      "sha256": "205b2e24ce6425518ee944afb0b7b6d00d5d0b1ac49e8f67566a7640ca0f8737"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-elevation-page-1-level-1625.webp",
+      "bytes": 145784,
+      "sha256": "af5728be890c7618f296dacc5669786e45b52f7f8ff4ae76b3ca29c33ca30ae2"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-elevation-page-1-level-3250.webp",
+      "bytes": 434016,
+      "sha256": "44c7719a684ae9e8ffb803c6aa2eb0cfda0f95c1ea778ea6229f4322bb2698f9"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-elevation-page-1.webp",
+      "bytes": 1164290,
+      "sha256": "7066e5dc59235a5edb820425a87d41e01acb75d2e330a826be451a60d816b414"
+    },
+    {
+      "location": "public",
       "filename": "miranda-elevation@2x.webp",
       "bytes": 1152836,
       "sha256": "d790d4f4429ba77feb4c18e5e55b197c852e37f2529499c8cb9cb8c0106841d1"
@@ -261,9 +291,81 @@
     },
     {
       "location": "public",
+      "filename": "miranda-geology-page-0-level-1625.webp",
+      "bytes": 6824,
+      "sha256": "5918f9754d53aca75cf453b3b32970ae18d1ceeda77a191bf845e03fda2e66bb"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-geology-page-0-level-3250.webp",
+      "bytes": 14200,
+      "sha256": "660ab27123de798899078afcd849ab8e153a10911200b7feebe364daa8762d66"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-geology-page-0.webp",
+      "bytes": 32518,
+      "sha256": "32d798d2597aa3de9c7b90ce77f441ad52b37b588871c2e244b10bc7e8dcb807"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-geology-page-1-level-1625.webp",
+      "bytes": 233908,
+      "sha256": "6dda701116e0a1cad0067efb54a5a057dc77c753c673eeae4005bb1a2ee63936"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-geology-page-1-level-3250.webp",
+      "bytes": 400860,
+      "sha256": "540d6107872560cb9826829436661e892bf113bbcee8b4f9116d275f27dec7a0"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-geology-page-1.webp",
+      "bytes": 31244,
+      "sha256": "a2b5d6041bcb116fcefea82650365a53ca9d164b50a875c610a3331d2a7ed9ba"
+    },
+    {
+      "location": "public",
       "filename": "miranda-geology@2x.webp",
       "bytes": 64004,
       "sha256": "cd87961f4c7a1ce34f976ac7dfe95e06ca53a18375fdb936774efef99611a07d"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-normal-page-0-level-1625.webp",
+      "bytes": 9916,
+      "sha256": "17e6774ab32148e2578dd259048d65d7a1173bf501474e63f2af3f93f1c6a83c"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-normal-page-0-level-3250.webp",
+      "bytes": 22912,
+      "sha256": "b0d862af0861d873916f89d7e83438c3f8d699389d67b2bf552821cc1f2d97a4"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-normal-page-0.webp",
+      "bytes": 60626,
+      "sha256": "2e39e268355cb464dc81b8062221c1f9c2838a11e23cb4ffa6ea149c5caf80ea"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-normal-page-1-level-1625.webp",
+      "bytes": 137918,
+      "sha256": "b7fad1a1cfb2847a945b480d9f24a7b877d6048a21c31a145cad24eb9e148b28"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-normal-page-1-level-3250.webp",
+      "bytes": 425370,
+      "sha256": "721fa50698aa138fa76e37d421fb146caa31e0a2e04cfa494c075350e444a718"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-normal-page-1.webp",
+      "bytes": 1057432,
+      "sha256": "9f875a62327d71fce352d5d424abef86d5650d71583f489ec8fba8a8611e8925"
     },
     {
       "location": "public",
@@ -297,6 +399,42 @@
     },
     {
       "location": "public",
+      "filename": "miranda-voyager-color-page-0-level-1625.webp",
+      "bytes": 9916,
+      "sha256": "17e6774ab32148e2578dd259048d65d7a1173bf501474e63f2af3f93f1c6a83c"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-voyager-color-page-0-level-3250.webp",
+      "bytes": 22912,
+      "sha256": "b0d862af0861d873916f89d7e83438c3f8d699389d67b2bf552821cc1f2d97a4"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-voyager-color-page-0.webp",
+      "bytes": 60626,
+      "sha256": "2e39e268355cb464dc81b8062221c1f9c2838a11e23cb4ffa6ea149c5caf80ea"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-voyager-color-page-1-level-1625.webp",
+      "bytes": 84840,
+      "sha256": "da19c05d8b4d9db8caba0e876b60e56cfe8cb0841a0353a55bb338b05a12f50a"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-voyager-color-page-1-level-3250.webp",
+      "bytes": 245682,
+      "sha256": "8f1d6328f1dbbb68c7415fb80cc76d5539658a4c238942c4fd354b1c496bbc86"
+    },
+    {
+      "location": "public",
+      "filename": "miranda-voyager-color-page-1.webp",
+      "bytes": 608200,
+      "sha256": "01e7120708978e4689a241438e87a4be5bc77684b934ea130dcd49c54d74bbf1"
+    },
+    {
+      "location": "public",
       "filename": "miranda-voyager-color@2x.webp",
       "bytes": 667404,
       "sha256": "e0511fd532e8d45cbb433ecc0b49760825b58c279fa47e983e72013f5603bdc5"
@@ -310,14 +448,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 86105,
-      "sha256": "38c552057a902d727da37cb314b6ba2136fd9fe7b32c60010944093ee718460d"
+      "bytes": 84154,
+      "sha256": "c216be7728ed49a4a3036a0bcf2296959f26f2a452faad7b12982b13369078aa"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 738,
-      "sha256": "8d5d54dc17f98b49442c8bd05607a9c3205bd308a3bdaf8f79ccf38ea582c0bc"
+      "bytes": 676,
+      "sha256": "2297122e2ce8e51d39895c21392879d48fd909cc62130230144ed09dae8fc219"
     },
     {
       "location": "prepared",
@@ -382,14 +520,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 370158,
-      "sha256": "955b4df3dd48071692b4c220c33d4c70939bfc21730c6b22ffe542825c265169"
+      "bytes": 377229,
+      "sha256": "e31de5e0176afeb88369233b1d93d8fe7905ab0df1a8a33bc7be53304309a08a"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 397890,
-      "sha256": "f8418d6456d07e9d02ae458c2e1bc93fee293c16b6edb3dae7ea53c3ee8f229d"
+      "bytes": 398773,
+      "sha256": "791b6b124223c8c619ca1fdf7466043cad39e9e3ef829c7c34060d820cc0a713"
     },
     {
       "location": "prepared",
