@@ -35,6 +35,12 @@ export const scopeHolds = (scope: string, classification: string) => KNOWN_OVERV
 /** The body the world selects and measures from while scene `objectId` is mounted: a level's centre, or the object itself. */
 export const worldSubject = (objectId: string) => isLevel(objectId) ? centreId : objectId;
 
+/** The frame the world checks its selection against while scene `objectId` is mounted: a level's centre's own frame, not
+ * the level's. A level keeps its own sphere at the centre's place (`levelViewDescriptor`), which is the Sun's radius: around
+ * any other star the world refused it and the page went black (ε Eridani's system, then the Galaxies pill, 2026-10-02). */
+export const worldSubjectFrame = <Frame,>(objectId: string, frame: Frame): Frame =>
+  isLevel(objectId) ? (knownObject(centreId)?.worldFrame as Frame | undefined) ?? frame : frame;
+
 /** A level object's descriptor with its frame moved to its centre: the same sphere and axes, at the centre's place. */
 export async function levelViewDescriptor(descriptor: unknown): Promise<unknown> {
   if (!isRecord(descriptor) || typeof descriptor.id !== 'string' || !isLevel(descriptor.id) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.worldFrame)) return descriptor;

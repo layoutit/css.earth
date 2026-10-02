@@ -310,7 +310,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             const body = [plan.focus, ...plan.bodies].find(body => body.id === id);
             if (!body || frame.referenceFrame !== plan.frame.referenceFrame || frame.epochJdTt !== plan.frame.epochJdTt ||
                 frame.bodyRadiusM !== body.radiusM || !body.positionM.every((value, axis) => Math.abs(value - frame.originM[axis]) < .001)) {
-              throw new TypeError('Selected detail does not match its prepared world context.');
+              // Name what disagrees: the bare sentence left a black page with nothing to act on (2026-10-02).
+              throw new TypeError(`Selected detail ${id} does not match its prepared world context (focus ${plan.focus.id}): ${!body ? 'the context has no such body'
+                : `frame ${frame.referenceFrame} at ${frame.epochJdTt}, radius ${frame.bodyRadiusM} m, origin ${frame.originM.join(', ')}; context ${plan.frame.referenceFrame} at ${plan.frame.epochJdTt}, radius ${body.radiusM} m, position ${body.positionM.join(', ')}`}.`);
             }
             if (!(framingScale > 0 && framingScale <= 1)) throw new TypeError(`Selected ${id} has an invalid framing scale ${framingScale}.`);
             selected = body;

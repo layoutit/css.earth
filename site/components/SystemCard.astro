@@ -5,7 +5,8 @@ import SystemBodies from './SystemBodies.astro';
 import Detached from './Detached.astro';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from '../object-systems.mts';
-import { viewFromUrl } from '../navigation/navigation-scope.mts';
+import { PAGE_VIEWS, viewFromUrl } from '../navigation/navigation-scope.mts';
+import { systemSourceDocumentation } from '../source-documentation.mts';
 
 interface Props { hostId: string }
 /** A star's planetary system, as parts of the star's own card: its header and its body list, mounted only while the system
@@ -16,10 +17,14 @@ const { hostId } = Astro.props;
 const system = systemById(SCENE_OBJECTS, hostId);
 const star = system ? SCENE_OBJECTS.find(object => object.id === hostId) : null;
 const shown = viewFromUrl(Astro.url) === 'system';
+// The header names the system's source document, as the moons' card does: a system opened from a breadcrumb has no row
+// in the lists to name it, and the footer link kept the previous page's (2026-10-02).
+const source = system ? systemSourceDocumentation(system) : null;
 ---
 
-{system && star && <>
+{system && star && source && <>
   <Detached detached={!shown}><ObjectCardHeader heading={false} title={{ label: system.name }} data-view-part="system"
+    data-source-subject={`${PAGE_VIEWS.system.identity}:${system.id}`} data-source-document={source.href} data-source-label={source.label}
     introduction={system.id === SOLAR_SYSTEM_ID ? "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets." : star.description}>
     <ObjectBreadcrumbs scope="system" systemId={system.id} />
   </ObjectCardHeader></Detached>

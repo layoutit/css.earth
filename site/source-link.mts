@@ -7,7 +7,8 @@ export interface SourceDocumentReference {
 export function sourceDocuments(document: Document): Map<string, SourceDocumentReference> {
   // The browser, context and body card may wait off the page (detached-sections.ts); their rows still name the sources.
   return new Map(sectionElements(document, '.object-browser, .object-information-panel')
-    .flatMap(root => [...root.querySelectorAll<HTMLElement>('[data-source-subject]')]).map(node => [node.dataset.sourceSubject!, node]));
+    // A card part that is not the card's subject yet (a star's system header) waits off the page too.
+    .flatMap(root => sectionElements<HTMLElement>(root, '[data-source-subject]')).map(node => [node.dataset.sourceSubject!, node]));
 }
 
 export function renderSourceLink(document: Document, subject: string,
