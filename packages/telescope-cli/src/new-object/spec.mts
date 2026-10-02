@@ -14,7 +14,7 @@
  *     "spin": { "inclinationDegrees": 62, "periodDays": 2.32, "source": "…", "url": "…" },
  *     "radialVelocity": { "value": 18.2, "source": "…", "url": "…" },
  *     "limb": { "none": "why no law is drawn" },
- *     "color": { "skip": ["gaia-xp"], "reason": "why those routes are not used" },
+ *     "color": { "skip": ["gaia-xp"], "reason": "why those routes are not used", "disagreement": "why the colour and its cross-check differ" },
  *     "planets": [{ "id": "wasp-121b", "name": "WASP-121b", "description": "…", "paper": { … }, "orbit": { "archive": "nasa-ps", "reference": "BOURRIER_ET_AL__2020" } }],
  *     "companions": [{ "id": "…", "name": "…", "description": "…", "paper": { … }, "temperature": { … }, "radius": { … }, "mass": { … }, "orbit": { … } }]
  *   }]
@@ -37,7 +37,8 @@
  * `position` anchors a star Gaia cannot see (a Cepheid in another galaxy, 25th magnitude) on one row of a published VizieR table
  * instead: { "catalogue": "J/ApJ/830/10/table5", "row": { "Gal": "N4536", "ID": "12345" }, "credit", "url" }, where `row` holds the
  * column values that pick exactly one row, whose RAJ2000 and DEJ2000 place the star (generate.mts catalogueAnchor). Such a star takes
- * no `gaia`, and cites its distance, radial velocity, radius and mass; `target` is then only its SIMBAD name, for the README.
+ * no `gaia`, and cites its distance, radial velocity, radius and mass; `target` is then only its SIMBAD name, for the README. A star
+ * too bright for Gaia is placed the same way on its Hipparcos row, whose `motion` names the position's epoch and the proper-motion columns.
  * `distance` (parsecs) places the star at a cited distance instead of Gaia DR3's parallax: for a star Gaia gives no parallax (a
  * two-parameter solution, as in other galaxies) or one under the placement floor (generate.mts PARALLAX_FLOOR_SIGMA), or when the
  * paper's own distance is the one its radius and mass assume. The README names the Gaia parallax it replaces.
@@ -83,14 +84,18 @@ export interface StarSpec {
   readonly position?: CataloguePosition;
   readonly spin?: { readonly inclinationDegrees: number; readonly periodDays?: number; readonly source: string; readonly url: string };
   readonly limb?: { readonly none: string };
-  readonly color?: { readonly skip: readonly ColorRoute[]; readonly reason: string };
+  /** `disagreement` says why the colour and its cross-check differ by more than the agreement threshold, for the colour record. */
+  readonly color?: { readonly skip: readonly ColorRoute[]; readonly reason: string; readonly disagreement?: string };
   readonly planets: readonly HostedSpec[]; readonly companions: readonly HostedSpec[];
   /** Drafted reader text, cited to the paper at `locator`; without it the card and introduction stay marked for a person. */
   readonly text?: DraftText;
   /** What the generator or a person chose not to show, one sentence each, for the README. */
   readonly notes: readonly string[];
 }
-export interface CataloguePosition { readonly catalogue: string; readonly row: Readonly<Record<string, string>>; readonly credit: string; readonly url: string }
+/** `motion` is for a catalogue that measures the star's proper motion (Hipparcos, for a star too bright for Gaia): the Julian year its
+ * RAJ2000 and DEJ2000 are given at and the columns holding the motion in right ascension (times cos declination) and declination, mas/yr. */
+export interface CataloguePosition { readonly catalogue: string; readonly row: Readonly<Record<string, string>>; readonly credit: string; readonly url: string;
+  readonly motion?: { readonly epoch: number; readonly ra: string; readonly dec: string } }
 /** Sentences of the body's Wikipedia article lead, verbatim (prose.mts), cited as quotes beside the drafted text. */
 export interface DraftQuotes { readonly url: string; readonly title: string; readonly revision: string; readonly card?: string; readonly introduction?: string }
 export interface DraftText { readonly card: string; readonly introduction: string; readonly locator: string; readonly quotes?: DraftQuotes }
@@ -223,7 +228,10 @@ function cataloguePosition(value: unknown, label: string): CataloguePosition {
   if (!entries.length) throw new TypeError(`${label}.row names no column: give the values that pick one row of ${catalogue}.`);
   const url = requireString(input.url, `${label}.url`);
   if (!URL_PATTERN.test(url)) throw new TypeError(`${label}.url must be an https URL, not ${url}.`);
-  return { catalogue, row: Object.fromEntries(entries), credit: requireString(input.credit, `${label}.credit`), url };
+  const motion = input.motion === undefined ? undefined : requireRecord(input.motion, `${label}.motion`), epoch = motion && requireFiniteNumber(motion.epoch, `${label}.motion.epoch`);
+  if (epoch !== undefined && !(epoch >= 1900 && epoch <= 2100)) throw new RangeError(`${label}.motion.epoch is the Julian year of the position, not ${epoch}.`);
+  return { catalogue, row: Object.fromEntries(entries), credit: requireString(input.credit, `${label}.credit`), url,
+    ...(motion ? { motion: { epoch: epoch!, ra: requireString(motion.ra, `${label}.motion.ra`), dec: requireString(motion.dec, `${label}.motion.dec`) } } : {}) };
 }
 const citedOrFlame = (value: unknown, label: string, range: readonly [number, number]) => value === 'gaia-flame' ? 'gaia-flame' as const : cited(value, label, range);
 
@@ -253,10 +261,10 @@ export function parseStarSpec(value: unknown): StarSpec {
     return { inclinationDegrees: inclination, ...(period === undefined ? {} : { periodDays: period }), source: requireString(s.source, at('spin.source')), url: requireString(s.url, at('spin.url')) };
   })();
   const color = input.color === undefined ? undefined : (() => {
-    const c = requireRecord(input.color, at('color')), skip = requireArray(c.skip, at('color.skip')).map(route => requireString(route, at('color.skip')));
+    const c = requireRecord(input.color, at('color')), skip = requireArray(c.skip ?? [], at('color.skip')).map(route => requireString(route, at('color.skip')));
     const bad = skip.filter(route => !COLOR_ROUTES.includes(route as ColorRoute));
     if (bad.length) throw new TypeError(`${at('color.skip')}: ${bad.join(', ')} are not colour routes (${COLOR_ROUTES.join(', ')}).`);
-    return { skip: skip as ColorRoute[], reason: requireString(c.reason, at('color.reason')) };
+    return { skip: skip as ColorRoute[], reason: skip.length ? requireString(c.reason, at('color.reason')) : '', ...(c.disagreement === undefined ? {} : { disagreement: requireString(c.disagreement, at('color.disagreement')) }) };
   })();
   const limb = input.limb === undefined ? undefined : { none: requireString(requireRecord(input.limb, at('limb')).none, at('limb.none')) };
   const aliases = input.aliases === undefined ? undefined : requireArray(input.aliases, at('aliases')).map(alias => requireString(alias, at('aliases')));

@@ -183,6 +183,12 @@ export interface ColorChoice {
   readonly tried: readonly string[]; readonly credits: readonly string[]; readonly summary: string; readonly todo?: string;
 }
 
+/** Below this G magnitude Gaia's BP/RP spectrum comes after the ground spectrophotometric catalogues, which were made for bright
+ * stars. Gaia shortens its exposure of a bright star with gates chosen from an on-board magnitude that is uncertain at the bright end,
+ * so some of its spectra are saturated (De Angeli et al. 2023, A&A 674, A2). Measured 2026-10-01 on 24 stars within 32 pc
+ * that have both a Gaia spectrum and a ground or STIS one: the two colours differ by more than CROSS_CHECK_AGREEMENT levels for 6 of
+ * the 11 stars brighter than G 4.0 (up to 52 levels, Theta Ursae Majoris, G 3.07) and for none of the 13 fainter (11 at most). */
+export const XP_SATURATION_G = 4;
 const channelDifference = (a: StellarColor, b: StellarColor) => Math.max(...a.srgb.map((value, i) => Math.abs(value - b.srgb[i]!)));
 
 /** Try every route in order and write the colour record for the first, with the second as its cross-check. */
@@ -193,8 +199,11 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow | undefined, ids:
     if (spec.color?.skip.includes(route)) return { route, found: 'skipped' as const };
     return { route, found: await ROUTES[route](context) };
   }));
+  // A star Gaia saturates on is read from the ground catalogues first, and Gaia's spectrum checks them.
+  const saturated = row !== undefined && row.g < XP_SATURATION_G;
+  const ordered = saturated ? [...probed.filter(entry => entry.route !== 'gaia-xp'), ...probed.filter(entry => entry.route === 'gaia-xp')] : probed;
   // The spec's reason for skipping routes is said once, in the summary.
-  for (const { route, found } of probed) {
+  for (const { route, found } of ordered) {
     if (found === 'skipped') { tried.push(`${route}: skipped`); continue; }
     if (typeof found === 'string') { tried.push(`${route}: ${found}`); continue; }
     if (candidates.length === 2) { tried.push(`${route}: found, not needed after the colour and its cross-check`); continue; }
@@ -228,10 +237,12 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow | undefined, ids:
   let todo: string | undefined, crossCheck: ColorChoice['crossCheck'];
   if (second) {
     const path = `photometry/crosscheck-${second.file}`, difference = channelDifference(primary.color, second.color);
+    // Why they differ: the spec's own account, or Gaia's saturation when its spectrum is the cross-check of a star it saturates on.
+    const explained = spec.color?.disagreement ?? (saturated && second.route === 'gaia-xp' ? `The ${second.label} colour differs from the ${primary.label} colour by ${difference} levels. The star is G ${row!.g.toFixed(2)}, brighter than the G ${XP_SATURATION_G} under which Gaia's spectra can be saturated (De Angeli et al. 2023, A&A 674, A2; color.mts XP_SATURATION_G), so the ${primary.label} colour is used.` : undefined);
     addFile(second, path, `${id}-crosscheck-spectrum`);
     record.crossCheck = { source: second.source, spectrum: { ...second.record(path), gaps: second.gaps },
-      ...(difference > CROSS_CHECK_AGREEMENT ? { disagreement: `TODO(new-object): the ${second.label} colour differs from the ${primary.label} colour by ${difference} levels; say why.` } : {}) };
-    if (difference > CROSS_CHECK_AGREEMENT) todo = `${second.label} disagrees with ${primary.label} by ${difference} levels`;
+      ...(difference > CROSS_CHECK_AGREEMENT ? { disagreement: explained ?? `TODO(new-object): the ${second.label} colour differs from the ${primary.label} colour by ${difference} levels; say why.` } : {}) };
+    if (difference > CROSS_CHECK_AGREEMENT && !explained) todo = `${second.label} disagrees with ${primary.label} by ${difference} levels`;
     crossCheck = { route: second.route, difference };
   }
   inputs.push({ id: `${id}-stellar-color`, path: 'photometry/stellar-color.json', origin: primary.origin, credit: `${primary.credit}; CIE 1931 2° observer`, license: 'Factual numerical measurements; source attribution retained',

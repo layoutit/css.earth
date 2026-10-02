@@ -121,8 +121,12 @@ export async function fetchGaiaRow(archive: Archive, sourceId: string) {
 
 /** One row of a VizieR table, for a star Gaia cannot see (spec `position`): the whole row as VizieR serves it, archived beside the
  * body, and the J2000 position it gives. */
-export interface CatalogueRow { readonly catalogue: string; readonly tsv: string; readonly form: Readonly<Record<string, string>>; readonly cells: Readonly<Record<string, string>>; readonly ra: number; readonly dec: number; readonly words: string }
-export const catalogueRowForm = (position: CataloguePosition): Record<string, string> => ({ '-source': position.catalogue, '-out.all': '', '-out.max': '2', ...position.row });
+export interface CatalogueRow { readonly catalogue: string; readonly tsv: string; readonly form: Readonly<Record<string, string>>; readonly cells: Readonly<Record<string, string>>; readonly ra: number; readonly dec: number; readonly words: string;
+  /** The Julian year of the position, 2000 unless the spec's `motion` says otherwise, and the row's proper motion (mas/yr) when it names the columns. */
+  readonly epoch: number; readonly pmra?: number; readonly pmdec?: number }
+export const catalogueRowForm = (position: CataloguePosition): Record<string, string> => ({ '-source': position.catalogue, '-out.all': '', '-out.max': '2',
+  // VizieR's answer holds a table's default columns; the proper-motion columns are asked for by name.
+  ...(position.motion ? { '-out.add': `${position.motion.ra},${position.motion.dec}` } : {}), ...position.row });
 /** The row `position.row` picks; exactly one, with a decimal J2000 position. */
 export function parseCatalogueRow(tsv: string, position: CataloguePosition, where: string): Omit<CatalogueRow, 'tsv' | 'form'> {
   const words = `${position.catalogue} row ${Object.entries(position.row).map(([column, cell]) => `${column} = ${cell}`).join(', ')}`;
@@ -132,7 +136,9 @@ export function parseCatalogueRow(tsv: string, position: CataloguePosition, wher
   const cells = Object.fromEntries(header.map((column, i) => [column, rows[0]![i] ?? '']));
   for (const [column, cell] of Object.entries(position.row)) if (cells[column] !== cell) throw new Error(`${where}: VizieR ${words}: the row found has ${column} = ${cells[column] ?? '(no such column)'}, not ${cell}.`);
   const degrees = (column: string) => { const value = Number(cells[column]); if (!cells[column] || !Number.isFinite(value)) throw new Error(`${where}: VizieR ${words} has no decimal ${column} (${cells[column] ?? 'no such column'}); the position must be decimal J2000 degrees.`); return value; };
-  return { catalogue: position.catalogue, cells, ra: degrees('RAJ2000'), dec: degrees('DEJ2000'), words };
+  const motion = (column: string) => { const value = Number(cells[column]); if (!cells[column] || !Number.isFinite(value)) throw new Error(`${where}: VizieR ${words} has no proper motion in ${column} (${cells[column] ?? 'no such column'}).`); return value; };
+  return { catalogue: position.catalogue, cells, ra: degrees('RAJ2000'), dec: degrees('DEJ2000'), words, epoch: position.motion?.epoch ?? 2000,
+    ...(position.motion ? { pmra: motion(position.motion.ra), pmdec: motion(position.motion.dec) } : {}) };
 }
 export const CATALOGUE_ROW_REPLACEMENTS = [{ pattern: '^#.*\\n', flags: 'gm', replacement: '' }, { pattern: '^\\s*\\n', flags: 'gm', replacement: '' }] as const;
 const stableVizier = (text: string) => CATALOGUE_ROW_REPLACEMENTS.reduce((out, { pattern, flags, replacement }) => out.replace(new RegExp(pattern, `${flags}u`), replacement), text);
