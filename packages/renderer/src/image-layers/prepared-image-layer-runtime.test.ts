@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { imageLayerAxisWeights, mountPreparedCssImageLayers } from './prepared-image-layer-runtime.js';
 import type { PreparedCssImageLayers, PreparedImageLayerView } from './loader.js';
-import { readout } from '../rendering/readouts.js';
 
 const views: readonly PreparedImageLayerView[] = [
   { axis: 'x', normalUnits: [1, 0, 0], samplingStepUnits: 1 },
@@ -35,17 +34,11 @@ class ImageElement {
   readonly dataset: Record<string, string> = {};
   className = '';
   removed = false;
-  parentNode: ImageElement | null = null;
   readonly ownerDocument: ImageDocument;
   constructor(ownerDocument: ImageDocument) { this.ownerDocument = ownerDocument; }
-  appendChild(child: ImageElement) { this.children.push(child); child.parentNode = this; }
-  insertBefore(child: ImageElement, before: ImageElement | null) {
-    this.children.splice(before ? this.children.indexOf(before) : this.children.length, 0, child); child.parentNode = this;
-  }
-  remove() {
-    this.removed = true;
-    if (this.parentNode) { this.parentNode.children.splice(this.parentNode.children.indexOf(this), 1); this.parentNode = null; }
-  }
+  appendChild(child: ImageElement) { this.children.push(child); }
+  insertBefore(child: ImageElement, before: ImageElement) { this.children.splice(this.children.indexOf(before), 0, child); }
+  remove() { this.removed = true; }
 }
 class ImageDocument {
   readonly elements: ImageElement[] = [];
@@ -68,7 +61,7 @@ test('image textures are demanded once when their retained axis first contribute
   const resolveResource = mock.fn((path: string) => `/prepared/${path}`);
   const runtime = mountPreparedCssImageLayers({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resolveResource });
   const retained = [...document.elements];
-  const leaf = (axis: string) => document.elements.find(element => readout(element, 'imageLayerLeaf') === axis)!;
+  const leaf = (axis: string) => document.elements.find(element => element.dataset.imageLayerLeaf === axis)!;
   const bank = (axis: string) => document.elements.find(element => element.dataset.imageLayerAxis === axis)!;
   const publish = (orientationXyzw: readonly [number, number, number, number]) => runtime.publish({
     world: { referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM: [0, 0, 10], orientationXyzw } },
@@ -81,12 +74,11 @@ test('image textures are demanded once when their retained axis first contribute
   assert.equal(leaf('z').style.backgroundImage, 'url("/prepared/z.png")');
   assert.equal(leaf('x').style.backgroundImage, undefined);
   assert.equal(leaf('y').style.backgroundImage, undefined);
-  // Only a contributing axis is in the document.
   assert.equal(bank('z').style.visibility, 'visible');
-  assert.deepEqual(['x', 'y', 'z'].map(axis => bank(axis).parentNode !== null), [false, false, true]);
+  assert.equal(bank('y').style.display, 'none');
   publish([Math.SQRT1_2, 0, 0, Math.SQRT1_2]);
   assert.deepEqual(resolveResource.mock.calls.map(call => call.arguments), [['z.png'], ['y.png']]);
-  assert.deepEqual(['x', 'y', 'z'].map(axis => bank(axis).parentNode !== null), [false, true, false]);
+  assert.equal(bank('z').style.display, 'none');
   assert.equal(bank('y').style.visibility, 'visible');
   publish([0, 0, 0, 1]);
   assert.equal(resolveResource.mock.callCount(), 2);
