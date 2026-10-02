@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-1637",
+  "displayName": "NGC 1637",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "9.290 Mpc (−458,900 / +482,700 pc)",
+        "source": {
+          "catalogueId": "publication-jones2009apj-696-1176j",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J",
+          "label": "Jones2009ApJ...696.1176J: Distance Determination to 12 Type II Supernovae Using the Expanding Photosphere Method",
+          "checked": "2026-10-01"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 70.37°, Dec -2.858°",
+        "source": {
+          "catalogueId": "lvdb-v1-1-1",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+          "checked": "2026-10-01"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "ESO · optical",
+        "thumbnail": "ngc-1637-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-1637-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-1637-layers-optical",
+          "path": "../../ngc-1637-layers/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1315a/"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Jones2009ApJ...696.1176J: Distance Determination to 12 Type II Supernovae Using the Expanding Photosphere Method",
+      "href": "https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+      "href": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J",
+      "credit": "Jones2009ApJ...696.1176J: Distance Determination to 12 Type II Supernovae Using the Expanding Photosphere Method"
+    }
+  }
+}

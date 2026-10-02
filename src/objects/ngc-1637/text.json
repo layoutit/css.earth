@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-1637",
+  "card": {
+    "text": "A spiral galaxy 9.3 million parsecs away, tilted 31° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "publication-jones2009apj-696-1176j",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J",
+        "label": "Jones2009ApJ...696.1176J: Distance Determination to 12 Type II Supernovae Using the Expanding Photosphere Method",
+        "checked": "2026-10-01",
+        "locator": "distance: 9.290 Mpc (−458,900 / +482,700 pc)"
+      },
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), ApJS 257, 43, galaxies table",
+        "checked": "2026-10-01",
+        "locator": "row NGC1637: inclination 31.1 +/- 5.0 deg"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its distance comes from a supernova seen in it: the speed of the expanding shell, set against how large the shell looked.",
+    "sources": [
+      {
+        "catalogueId": "publication-jones2009apj-696-1176j",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J",
+        "label": "Jones2009ApJ...696.1176J: Distance Determination to 12 Type II Supernovae Using the Expanding Photosphere Method",
+        "checked": "2026-10-01",
+        "locator": "title: the expanding photosphere method applied to Type II supernovae"
+      },
+      {
+        "catalogueId": "lvdb-v1-1-1",
+        "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+        "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
+        "checked": "2026-10-01",
+        "locator": "row ngc_1637: distance_modulus 29.84 +/- 0.11, ref_distance Jones2009ApJ...696.1176J, distance method sn"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "NGC 1637 in visible light",
+      "detail": "1964 × 1964 px",
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1315a",
+          "url": "https://www.eso.org/public/images/eso1315a/",
+          "label": "Spiral galaxy NGC 1637; ESO",
+          "checked": "2026-10-01",
+          "locator": "Spiral galaxy NGC 1637"
+        }
+      ]
+    }
+  }
+}

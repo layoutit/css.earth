@@ -17,7 +17,7 @@ test('every scene and every package the host draws has exactly one searchable de
   // A galaxy, a nebula or a cluster is an authored object like any body: its recipe declares no surface.
   const hosted = [...descriptors].filter(([, descriptor]) => isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe)
     && Array.isArray(descriptor.properties.recipe.surfaces) && !descriptor.properties.recipe.surfaces.length).map(([id]) => id);
-  assert.equal(hosted.length, 23);
+  assert.equal(hosted.length, 24);
   // A bank is context the world draws, never an object: none carries a catalogue entry.
   for (const [id, descriptor] of descriptors) if (isRecord(descriptor) && typeof descriptor.type === 'string' && /-bank$/u.test(descriptor.type)) assert.ok(isRecord(descriptor.properties) && descriptor.properties.catalog === undefined, id);
   const overviews = await readOverviews(resolve('src/objects'));

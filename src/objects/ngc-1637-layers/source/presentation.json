@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-1637-layers",
+  "name": "NGC 1637",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-1637-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-1637-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-1637-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "ESO · optical",
+      "title": "NGC 1637 in visible light",
+      "description": "The Very Large Telescope's FORS1 view of NGC 1637 with Milky Way foreground stars removed and the whole-galaxy colour tied to RC3's measured B-V of 0.64, on a disc tilted 31.1° with a 196 pc layer.",
+      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
+      "detail": "1964 × 1964 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "VLT FORS1 B, V, R"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "1964 × 1964"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "6.55 × 6.55 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/ngc-1637-layers/source/source.jpg",
+        "url": "https://cdn.eso.org/images/large/eso1315a.jpg"
+      }
+    }
+  ]
+}

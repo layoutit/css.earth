@@ -30,6 +30,11 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/257/43/ReadMe",
       "checkedOn": "2026-10-01",
       "locator": "galaxies (Tables 3, 4 and 16), row NGC6744: distance 9.39 +/- 0.42 Mpc, position angle 14.0 +/- 0.2 deg, inclination 52.7 +/- 2.2 deg, half-mass radius Re 7.0 kpc, stellar scale length lstar 4.8 kpc. Query: SELECT * FROM \"J/ApJS/257/43/galaxies\" WHERE 1=CONTAINS(POINT('ICRS', RAJ2000, DEJ2000), CIRCLE('ICRS', 287.442, -63.858, 0.2))"
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/257/43/ReadMe",
+      "checkedOn": "2026-10-01",
+      "locator": "galaxies, row NGC1637: centre 70.3675, -2.8580556, distance 11.7 Mpc, position angle 20.6 +/- 10.0 deg, inclination 31.1 +/- 5.0 deg, stellar scale length lstar 1.8 kpc. Query: SELECT * FROM \"J/ApJS/257/43/galaxies\" WHERE 1=CONTAINS(POINT('ICRS', RAJ2000, DEJ2000), CIRCLE('ICRS', 70.367, -2.858, 0.1))"
     }
   ],
   "creators": [
@@ -47,7 +52,7 @@
     {
       "kind": "credit",
       "text": "Cite Leroy et al. (2021), ApJS 257, 43.",
-      "scope": "NGC 6744's stellar scale length",
+      "scope": "NGC 6744's stellar scale length; NGC 1637's disc centre, tilt, position angle and stellar scale length",
       "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/257/43/ReadMe"
     }
   ]

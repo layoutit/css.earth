@@ -40,6 +40,11 @@
       "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
       "checkedOn": "2026-10-01",
       "locator": "VII/155/rc3 row NGC 6946 (PGC 65001): B-VT = 0.80 +/- 0.04, B-VoT = 0.40. Query: SELECT name, PGC, BT, \"B-VT\", \"e_B-VT\", \"B-VoT\" FROM \"VII/155/rc3\" WHERE 1=CONTAINS(POINT('ICRS', RA2000, DE2000), CIRCLE('ICRS', 308.718, 60.154, 0.1))"
+    },
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-10-01",
+      "locator": "VII/155/rc3 row NGC 1637 (PGC 15821): B-VT = 0.64 +/- 0.02. Query: SELECT name, PGC, BT, \"B-VT\", \"e_B-VT\" FROM \"VII/155/rc3\" WHERE 1=CONTAINS(POINT('ICRS', RA2000, DE2000), CIRCLE('ICRS', 70.367, -2.858, 0.1))"
     }
   ],
   "creators": [
