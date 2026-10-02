@@ -3,30 +3,6 @@ import type { LabelScreenRect } from './screen-label-layout.js';
 /** Prepared nomenclature labels anchored to a body mesh. Every anchor, priority and
  * caption is prepared; the runtime projects them through the current camera only. */
 export type SurfaceFeatureKind = 'point' | 'linear' | 'region';
-export interface SurfaceFeaturePolicy {
-  /** Share of the camera's logarithmic zoom range that must be reached before any label shows (1 = the last zoom only). */
-  readonly minimumZoomShare: number;
-  readonly minimumDiameterPixels: number; readonly alwaysVisibleCount: number; readonly maximumVisible: number; readonly limbCosine: number;
-}
-export interface SurfaceFeatureCatalogDescriptor {
-  readonly url: string; readonly bytes: number; readonly count: number;
-}
-export interface SurfaceFeatureSelectionPlan {
-  readonly count: number; readonly banks: readonly SurfaceFeatureCatalogDescriptor[];
-}
-export interface PreparedSurfaceFeaturePlan {
-  readonly catalog: SurfaceFeatureCatalogDescriptor;
-  readonly selection?: SurfaceFeatureSelectionPlan;
-  /** Mesh radius in the target node's raw coordinates; anchors sit on this sphere. */
-  readonly target: number; readonly datasetIds: readonly string[]; readonly meshRadiusUnits: number; readonly policy: SurfaceFeaturePolicy;
-  /** Shape-model bodies: the radius band of the prepared picking mesh that every anchor and outline point lies within. */
-  readonly surfaceRadiusUnits?: { readonly minimum: number; readonly maximum: number };
-  /** Ellipsoidal bodies: the reference semi-axes in mesh units, the polar axis, and the normalised-radius band
-   * (1 = on the ellipsoid) that every prepared anchor and outline point lies within on the rendered surface. */
-  readonly surfaceEllipsoidUnits?: { readonly equatorial: number; readonly polar: number; readonly north: readonly [number, number, number]; readonly minimumShare: number; readonly maximumShare: number };
-  /** Retained screen-space line pieces tracing the hovered feature's published diameter. */
-  readonly outline: { readonly pieces: number };
-}
 /** Prepared boundary in mesh units: a small circle of the sphere for circular features, rim(φ) = center + east·cos φ + north·sin φ,
  * or the Gazetteer's published extent as a closed polygon for everything else. */
 export type SurfaceFeatureOutline =

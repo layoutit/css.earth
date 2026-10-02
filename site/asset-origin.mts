@@ -7,7 +7,6 @@ import { preparedAssetGroup, preparedAssetGroupFile, resolvePreparedAssetUrl } f
 
 import { isRecord } from '@cssearth/core';
 
-export type { PreparedAssetOrigin };
 
 /** Build-time-only asset origin: unset in local dev and CI, so `pnpm build` reproduces
  * today's same-origin `/scenes/` output. Set (in deploys) it points every consumption

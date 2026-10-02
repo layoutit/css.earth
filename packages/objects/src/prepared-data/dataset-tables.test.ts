@@ -84,11 +84,12 @@ test('the parser rejects missing activation ownership and executable or sparse J
   assert.throws(() => parsePreparedObjectRuntime({ ...full, animations: new Array(1) }), /dense JSON array/);
 });
 
-test('preparation retains its JSON diagnostics and rejects sparse arrays with the shared traversal', () => {
+test('preparation retains its JSON diagnostics and accepts sparse arrays with the shared traversal', () => {
   for (const value of [NaN, { value: NaN }, () => {}, { value: undefined }]) {
     assert.throws(() => requirePreparedData(value), /must contain only acyclic JSON data/);
   }
-  assert.throws(() => requirePreparedData(new Array(1)), /dense JSON array/);
+  const sparse = new Array(1);
+  assert.equal(requirePreparedData(sparse), sparse);
   const value = { valid: true };
   assert.equal(requirePreparedData(value), value);
 });

@@ -22,7 +22,7 @@ function validateJsonData(value: unknown, label: string, seen: Set<object>, prep
   if (!value || typeof value !== 'object' || seen.has(value) ||
       ![Object.prototype, Array.prototype].includes(Object.getPrototypeOf(value))) fail(`${label} must contain only acyclic JSON data`);
   if (Object.getOwnPropertySymbols(value).length) fail(`${label} cannot contain symbols`);
-  if (Array.isArray(value) && (Object.keys(value).length !== value.length ||
+  if (!preparation && Array.isArray(value) && (Object.keys(value).length !== value.length ||
       Object.keys(value).some((key, index) => key !== String(index)))) fail(`${label} must be a dense JSON array`);
   seen.add(value);
   for (const [key, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(value))) {

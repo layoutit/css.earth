@@ -23,38 +23,6 @@ export interface NavigationCamera {
 export interface CameraDelta { controlPitchDelta: number; controlYawDelta: number; zoom?: number; distance?: number; rotation?: Quaternion; }
 export interface ControlsUpdate { drag?: boolean; wheel?: boolean; }
 export interface MotionCompletion { completed: boolean; }
-export interface PitchCalibration {
-  defaultControlPitchDegrees: number; maximumControlPitchDegrees: number; initialScenePitchDegrees: number; maximumScenePitchDegrees: number;
-}
-export interface ResponsiveFit {
-  model: string; portraitBaseWidthShare: number; narrowPortraitWidthShareGain: number;
-  landscapeWidthShareGain: number; narrowPortraitAspectRatio: number; portraitAspectRatio: number;
-  squareAspectRatio: number; maximumHeightShare: number; maximumMobilePreviewShare: number;
-  minimumZoom: number; maximumZoom: number;
-}
-import type { LevelOfDetailPlan, OrbitLineFade } from '@cssearth/objects';
-
-export interface CameraPlan extends PitchCalibration {
-  cameraModel: string; pitchBounded: boolean; yawBounded: boolean;
-  minimumControlPitchDegrees: number; defaultControlYawDegrees: number;
-  materialReferenceControlPitchDegrees?: number; materialReferenceControlYawDegrees?: number;
-  minimumZoom: number; maximumZoom: number; defaultZoom: number; sceneScale: number;
-  logicalBodyDiameter: number; responsiveFit: ResponsiveFit;
-  /** Volume-equivalent radius over the body's largest radius when below 1 (an elongated body); the fit is already scaled by it. */
-  framingScale?: number;
-  projection?: { model: string; cssPerspective: string };
-  dolly?: { model: string; wheelStepPerDelta: number; minimumDistanceRadii: number;
-    maximumDistanceOverOrbitExtent: number;
-    /** The least surface arc (seen from the body's centre) one CSS pixel may show before its prepared imagery only
-     * stretches: the body's sharpest texel times its texture levels' texels-per-CSS-pixel target. */
-    surfaceArcPerCssPixelRadians?: number };
-  levelOfDetail?: LevelOfDetailPlan; orbitLineFade?: OrbitLineFade;
-  drag?: { model: string };
-}
-export interface PerspectiveCameraPlan extends CameraPlan {
-  projection: NonNullable<CameraPlan['projection']>; dolly: NonNullable<CameraPlan['dolly']>;
-  levelOfDetail: LevelOfDetailPlan; orbitLineFade: OrbitLineFade;
-}
 export interface PhysicalCameraPose { schema: 'cssearth-camera-pose@2'; scene: string; }
 export type CameraPose = PhysicalCameraPose;
 export interface CameraAngles { controlPitch: number; controlYaw: number; }

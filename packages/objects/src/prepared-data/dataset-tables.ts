@@ -156,9 +156,8 @@ export function requirePreparedDatasetTables(value: unknown, definition: Pick<Ob
   }
 }
 
-/** Publish a dataset's tables into its decoded definition, after validating the definition they make. The definition
- * is extended in place, at once: its mount, residency and selection read the same object, and a stand-in variant is
- * replaced where it stood, so the variant order and every committed selection are unchanged. */
+/** Return a validated copy of the definition with a dataset's tables merged. Stand-in variants are replaced
+ * where they stood, preserving variant order and every committed selection; the input definition is unchanged. */
 export function mergePreparedDatasetTables(definition: ObjectRuntimeDefinition, value: unknown, datasetId: string) {
   requirePreparedDatasetTables(value, definition, datasetId);
   const tables = value;

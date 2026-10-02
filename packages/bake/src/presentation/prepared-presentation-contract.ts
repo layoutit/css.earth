@@ -1,6 +1,7 @@
-import { requireTextureBindings, requireTextureLevels, requireTexturePlacements, type ObjectRuntimeDefinition, type PreparedWrite, type PreparedAssets, type EllipsoidProjectionPlan, type PreparedMaterialAddress, type PreparedMaterialFrameMapping, type PreparedMaterialTrack, type PreparedMaterialSelection, type PreparedMaterialBank, type PreparedVariant, type PreparedPresentationDefinition, type PreparedSelectionNavigation, type PreparedDepthOrder, requireObjectControls, requirePreparedData, requireControls } from '@cssearth/objects';
+import { requireTextureBindings, requireTextureLevels, requireTexturePlacements, type ObjectRuntimeDefinition, type PreparedWrite, type PreparedAssets, type EllipsoidProjectionPlan, type PreparedMaterialAddress, type PreparedMaterialFrameMapping, type PreparedMaterialTrack, type PreparedMaterialSelection, type PreparedMaterialBank, type PreparedVariant, type PreparedPresentationDefinition, type PreparedSelectionNavigation, type PreparedDepthOrder, requirePreparedData } from '@cssearth/objects';
 
 import { isArray } from '@cssearth/core';
+import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 
 import type { PreparedCubicSkyPlan } from "./cubic-sky-contract.ts";
 import type { PreparedDirectionalSunPlan } from "./directional-sun-contract.ts";
@@ -51,7 +52,6 @@ function unique(values: readonly unknown[], label: string) { if (new Set(values)
 export function requirePreparedPresentation(input: unknown, options: { controls: unknown; assets?: PreparedAssets }): PreparedPresentationContract {
   // The candidate is exposed only after all structural and referential checks below succeed.
   const plan = input as PreparedPresentationContract;
-  requireControls(options.controls);
   const controls = requireObjectControls(options.controls);
   const assets = options.assets ?? plan?.assets;
   requirePreparedData(plan);
