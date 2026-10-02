@@ -1,4 +1,4 @@
-import type { ObservationMapping } from '@cssearth/bake/volume';
+import type { ObservationMapping } from '@cssearth/objects';
 import type { ObservationPhoto } from '@cssearth/objects';
 export type { ObservationPhoto } from '@cssearth/objects';
 /** Offline photographic targets and independent projection checks for the filled-volume experiment. */

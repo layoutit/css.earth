@@ -5,7 +5,8 @@
  * to `@cssearth/bake/volume`, so replay can use them without the fitting methods. They are re-exported here unchanged
  * for existing consumers; the arithmetic and coordinate conventions are identical.
  */
-import { type SimulationDepthPrior, blurWeighted, pixelCenter, validateEnvelopeSettings, type SimulationEnvelopeGrid, type SimulationEnvelopeSettings } from '@cssearth/bake/volume';
+import type { SimulationDepthPrior } from '@cssearth/objects';
+import { blurWeighted, pixelCenter, validateEnvelopeSettings, type SimulationEnvelopeGrid, type SimulationEnvelopeSettings } from '@cssearth/bake/volume';
 import { type SkyBounds } from '@cssearth/objects';
 
 export { blurWeighted, createEnvelopeSampler, DEFAULT_CHROMA_COVERAGE_TAPER, DEFAULT_CHROMA_HALF_SATURATION_QUANTILE, DEFAULT_CHROMA_SKY_QUANTILE, envelopeChromaSettings, envelopeChromaticity, pixelCenter, validateEnvelopeSettings } from '@cssearth/bake/volume';

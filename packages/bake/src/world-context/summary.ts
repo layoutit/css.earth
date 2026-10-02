@@ -19,8 +19,8 @@ type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][numbe
  * Orbit paths and detail levels go to the planner worker as binary orbit banks (`worldOrbitBanks`), which these files pin
  * by byte length; each orbit here keeps its parent, bounds and size. Classification views are build-time only.
  *
- * Each file writes what many bodies repeat once, and `parsePreparedWorldContextSummary` and `parsePreparedWorldSystem` in
- * @cssearth/renderer put it back (`expandWorldContextSummary`, `expandWorldSystem`):
+ * Each file writes what many bodies repeat once. `expandWorldContextSummary` and `expandWorldSystem` in
+ * @cssearth/objects put it back before the renderer validates it:
  * - `bodies` is one column per field, a body's value at its index and `null` where it has none.
  * - A body names its system and discovery record by their place in `systemNames` and `discoveries`.
  * - A billboard writes only what differs from `billboard`, the size, focal length and distance (in body radii) most

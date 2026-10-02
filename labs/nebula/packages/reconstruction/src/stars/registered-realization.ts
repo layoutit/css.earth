@@ -1,4 +1,5 @@
-import { type ObservationMapping, rayToOverlayPlane } from '@cssearth/bake/volume';
+import type { ObservationMapping } from '@cssearth/objects';
+import { rayToOverlayPlane } from '@cssearth/bake/volume';
 import { type DensityVolumeFrame } from '@cssearth/objects';
 export function realizeRegisteredStars<T extends {id:string;raDeg:number;decDeg:number}>(existing:readonly T[],options:{frame:DensityVolumeFrame;sourceMapping:ObservationMapping;mapping:ObservationMapping;depthAt(x:number,y:number,id:string):number;sampleSignal(x:number,y:number,z:number):number}){
  const {frame,sourceMapping,mapping,depthAt,sampleSignal}=options;

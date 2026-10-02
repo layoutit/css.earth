@@ -38,3 +38,6 @@ export * from './volume/volume-recipe.js';
 export * from './volume/volume-slices.js';
 export { PREPARED_CSS_OBJECT_FORMAT } from './prepared-data/object-format.js';
 export { expandWorldContextSummary, expandWorldSystem } from './prepared-data/world-context-summary.js';
+export type { Cancellation } from './volume/cancellation.js';
+export type { ObservationMapping } from './volume/observation-mapping.js';
+export type { SimulationDepthPrior } from './volume/simulation-prior.js';
