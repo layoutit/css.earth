@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Pandora's Cluster (Abell 2744)",
+  "publisher": "ESA/Webb",
+  "sourceId": "weic2305a",
+  "sourcePage": "https://esawebb.org/images/weic2305a/",
+  "download": "https://cdn.esawebb.org/archives/images/publicationjpg/weic2305a.jpg",
+  "credit": "NASA, ESA, CSA, I. Labbe (Swinburne University of Technology), R. Bezanson (University of Pittsburgh), A. Pagan (STScI)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      17644,
+      13422
+    ],
+    "bands": [
+      "Webb NIRCam 1.15 um",
+      "1.5 um",
+      "2.0 um",
+      "2.77 um",
+      "3.56 um",
+      "4.44 um"
+    ],
+    "fieldOfViewDeg": [
+      0.0980211,
+      0.0745696
+    ]
+  },
+  "checkedSource": {
+    "kind": "Publication JPEG",
+    "dimensions": [
+      4000,
+      3043
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.00477,
+    "lineOfNodesPaDeg": 247.45,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 17.2 arcsec from the catalogue position, which is the whole of the recipe's inclination. Not a measured orientation of the cluster."
+  },
+  "registration": {
+    "catalogue": "Gaia DR3 (CDS I/355/gaiadr3)",
+    "sourcesInFrame": 36,
+    "matched": 36,
+    "rmsArcsec": 0.061,
+    "maxArcsec": 0.215,
+    "pixelArcsec": 0.08822,
+    "embeddedTags": {
+      "pixelArcsec": 0.08821,
+      "northClockwiseDeg": 42.36
+    },
+    "centreShiftFromTagsArcsec": 0.12
+  },
+  "displayModel": "The picture lies on one flat plane facing the Sun at the cluster's comoving distance. Nothing in the picture has depth: seen from the side it is a line.",
+  "coverage": "The whole published frame, from the publisher's 4,000 px Publication JPEG of the 17,644 px original. The spiked star right of centre is a Milky Way star in front of the cluster; it and the galaxies behind the cluster stand on the same plane as the cluster.",
+  "acquisition": {
+    "url": "https://cdn.esawebb.org/archives/images/publicationjpg/weic2305a.jpg",
+    "dimensions": [
+      4000,
+      3043
+    ],
+    "operation": "Download the publisher's Publication JPEG; no crop or resample."
+  }
+}

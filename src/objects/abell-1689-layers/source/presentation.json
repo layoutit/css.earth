@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "abell-1689-layers",
+  "name": "Abell 1689",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/abell-1689-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/abell-1689-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/abell-1689-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Hubble · optical",
+      "title": "Abell 1689 in visible light",
+      "description": "Hubble's Advanced Camera for Surveys view of Abell 1689 in visible and near-infrared light, with the blue arcs of background galaxies its gravity distorts. It stands as one flat picture facing the Sun at the cluster's distance.",
+      "summary": "Hubble's visible and near-infrared view of the cluster and its lensed arcs. A flat picture of the sky, with no depth.",
+      "detail": "4002 × 3863 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colours",
+          "value": "Visible and near-infrared light: Hubble ACS at 475, 625, 775, 814 and 850 nm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4002 × 3863"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "3.33 × 3.22 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/abell-1689-layers/source/source.jpg",
+        "url": "https://cdn.esahubble.org/archives/images/large/heic1317a.jpg"
+      }
+    }
+  ]
+}

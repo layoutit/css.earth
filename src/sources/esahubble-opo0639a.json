@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-opo0639a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Visible-light and x-ray composite image of galaxy cluster 1E 0657-556",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "opo0639a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/opo0639a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esahubble.org/archives/images/large/opo0639a.jpg",
+      "label": "Large JPEG, 3000 x 2168 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/opo0639a/",
+      "checkedOn": "2026-10-02",
+      "locator": "3000 x 2168 px original; Pink: hot gas in X-rays (Chandra). Blue: mass from gravitational lensing. Orange and white: galaxies in visible light (Magellan, Hubble). The file's embedded AVM tags give 0.1487 arcsec per pixel and north -0.02 deg right of vertical, and state Creative Commons Attribution 4.0. Measured against Gaia DR3: 127 of the 172 catalogued sources in the frame have a peak at their place, rms 0.16 arcsec, giving 0.1489 arcsec per pixel, north -0.02 deg right of vertical, centre 104.617027, -55.944059, a field of 7.45 x 5.38 arcmin; the centre moves 0.42 arcsec from the tags' place."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "X-ray: NASA/CXC/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/opo0639a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}

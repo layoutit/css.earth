@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "bullet-cluster-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "bullet-cluster",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5.321755957779553e+24,
+        2.0387351723485413e+25,
+        -3.1175910694469915e+25
+      ],
+      "localToReferenceXyzw": [
+        -0.1217402425024393,
+        0.9483874736085832,
+        0.2904317628320713,
+        -0.03728142159349087
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -1468.7021568505472,
+          -894.8667048869718,
+          -0.2307584963273257
+        ],
+        "max": [
+          1168.9963570800815,
+          1015.7937193654503,
+          0.18793507432565093
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

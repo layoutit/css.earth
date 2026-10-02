@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-heic1317a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "New Hubble view of galaxy cluster Abell 1689",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "heic1317a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/heic1317a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esahubble.org/archives/images/large/heic1317a.jpg",
+      "label": "Large JPEG, 4002 x 3863 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/heic1317a/",
+      "checkedOn": "2026-10-02",
+      "locator": "4002 x 3863 px original; Visible and near-infrared light: Hubble ACS at 475, 625, 775, 814 and 850 nm. The file's embedded AVM tags give 0.0500 arcsec per pixel and north 25.039 deg right of vertical, and state Creative Commons Attribution 4.0. Measured against Gaia DR3: 66 of the 71 catalogued sources in the frame have a peak at their place, rms 0.07 arcsec, giving 0.0500 arcsec per pixel, north 25.03 deg right of vertical, centre 197.875359, -1.338610, a field of 3.33 x 3.22 arcmin; the centre moves 0.12 arcsec from the tags' place."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, the Hubble Heritage Team (STScI/AURA), J. Blakeslee (NRC Herzberg Astrophysics Program, Dominion Astrophysical Observatory), and H. Ford (JHU)",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/heic1317a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}
