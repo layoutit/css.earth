@@ -44,7 +44,7 @@ symmetry axis is the disc's normal, tilted 1° from the sky: planet b's orbital 
 **One grid.** All three datasets share a grid 270 au across, 156 cells of 1.7 au, so switching dataset does not move
 or resize the object.
 
-**Stretch.** The visible dataset is one filter in grey, in counts per pixel per second. The color and JWST datasets
+**Stretch.** The visible dataset is one filter in gray, in counts per pixel per second. The color and JWST datasets
 are each filter's contrast to the star; the JWST star fluxes are Kammerer et al.'s (2024, Table 2) 26.14 Jy in F210M
 and 8.20 Jy in F410M. No published figure fixes a stretch, so each is stated: its top is the 99.5th percentile in the
 midplane strip, with log strength 10.

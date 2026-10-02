@@ -4,7 +4,7 @@
   "published": true,
   "host": "jupiter",
   "source": "jpl-horizons",
-  "meaning": "Jupiter's confirmed moons that have no page, one dot each at its JPL Horizons position relative to Jupiter at the world's epoch. No color is measured for these moons: the dot is the neutral grey the app gives every moon without a measured color.",
+  "meaning": "Jupiter's confirmed moons that have no page, one dot each at its JPL Horizons position relative to Jupiter at the world's epoch. No color is measured for these moons: the dot is the neutral gray the app gives every moon without a measured color.",
   "table": {
     "path": "positions.csv.gz",
     "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",

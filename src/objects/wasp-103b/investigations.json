@@ -36,7 +36,7 @@
       "id": "polar-samples",
       "subject": "Latitude coverage of released GCM table",
       "status": "excluded",
-      "finding": "The released file stops at +/-81.562 degrees. No extrapolation into the polar caps; these are grey in every slice.",
+      "finding": "The released file stops at +/-81.562 degrees. No extrapolation into the polar caps; these are gray in every slice.",
       "revisitWhen": "The authors release the missing polar rows or a documented continuation.",
       "evidence": [
         "https://raw.githubusercontent.com/lkreidberg/2017_wasp103/425f2e8fe694760266398257a71eaa991ab322fd/Figures/GCM_From_Vivien/PTprofiles-WASP-103b-TiO-fix-3-Drag3-NEW-OPA-nit-1036800.dat"

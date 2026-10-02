@@ -20,12 +20,12 @@ The dots are the app's catalogue dots: not clickable and not named. A moon with 
 
 ## Evidence
 
-![The Jupiter system from 34 million km: the paged moons named, the others as 2 px grey dots](evidence/2026-10-02/jupiter-system.webp)
+![The Jupiter system from 34 million km: the paged moons named, the others as 2 px gray dots](evidence/2026-10-02/jupiter-system.webp)
 
 A headless capture of this version's Jupiter system overview at 33.8 million km.
 
 ## Known problems
 
-- No color is measured for these moons. Every dot is `#9a9a9a`, the one neutral grey the app gives a body without a measured color (`NEUTRAL_CATALOGUE_COLOR`).
+- No color is measured for these moons. Every dot is `#9a9a9a`, the one neutral gray the app gives a body without a measured color (`NEUTRAL_CATALOGUE_COLOR`).
 - The 2 px dot size is a display choice, the same as Saturn's. The moons are a few kilometres across and would be invisible at scale.
 - The positions hold for the world's one epoch; the dots do not move.

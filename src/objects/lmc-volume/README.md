@@ -42,7 +42,7 @@ A browser capture of this page: the 35 packaged stars of the Cloud draw as dots,
 
 ## Known problems
 
-- **VISTA and AllWISE are brighter than their own images:** +17% and +264% after fitting. Every dataset shares the one opacity fitted to Horálek, so a tone curve can only dim or recolor inside it. AllWISE's own composite spans about 19 grey levels inside its footprint.
+- **VISTA and AllWISE are brighter than their own images:** +17% and +264% after fitting. Every dataset shares the one opacity fitted to Horálek, so a tone curve can only dim or recolor inside it. AllWISE's own composite spans about 19 gray levels inside its footprint.
 - The envelope is the simulation's shape hypothesis and the detail components are conditioned on the same simulation; neither is measured gas geometry. The model records `materialGatePassed: false`. The LMC has no depth tracer here to test it.
 - The fit is cut along the Horálek image's bottom edge, and its black point still clips the faint outer halo. The brightest 0.1% of pixels reach only 0.89–0.96 of the image.
 - A violet-blue patch can remain on the western footprint edge, and a small detached knot group appears above the body at oblique and side poses.

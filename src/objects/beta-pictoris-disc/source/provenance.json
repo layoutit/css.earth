@@ -140,7 +140,7 @@
         "stellarFluxJy": {
           "HST-STIS-50CCD": 1
         },
-        "stellarFluxSource": "Not divided by the star: the deposit is in counts per pixel per second, and it is shown in those units, one filter in grey.",
+        "stellarFluxSource": "Not divided by the star: the deposit is in counts per pixel per second, and it is shown in those units, one filter in gray.",
         "stretch": {
           "a": 10,
           "top": 530,
@@ -2233,7 +2233,7 @@
     "Opacity is the renderer’s convention, not the dust’s: brightness and blocking are one number in its emission model, and the real disc blocks a small fraction of a percent of what is behind it.",
     "Nothing finer than an image’s pixels or the grid’s cells is in the drawn volume.",
     "color: the ACS images show the disc above the noise to the edge of the camera's field, 320 au out, and the volume ends at the grid's 135 au: its midplane is still twice the noise 300 to 320 au out. The grid is the one all three datasets share, so switching dataset does not move the object, and its 1.7 au cells are what the inner datasets need. The light beyond 135 au is measured (source/provenance.json, the midplane profile) and not drawn.",
-    "visible: the HST/STIS behind its coronagraph image is the authors’ own reduction (Ren et al. (2023), VizieR J/A+A/672/A114, Beta_Pic_STIS.fits), combined from observations made in 1997, 2012 and 2013 (HST programmes 7125, 12551 and 12923), and carries no sky coordinates; its orientation is stated and checked, not read from a header. Close to the star its PSF subtraction leaves light off the disc too, which is drawn with the disc. It is one visible filter shown in grey, brightness only.",
+    "visible: the HST/STIS behind its coronagraph image is the authors’ own reduction (Ren et al. (2023), VizieR J/A+A/672/A114, Beta_Pic_STIS.fits), combined from observations made in 1997, 2012 and 2013 (HST programmes 7125, 12551 and 12923), and carries no sky coordinates; its orientation is stated and checked, not read from a header. Close to the star its PSF subtraction leaves light off the disc too, which is drawn with the disc. It is one visible filter shown in gray, brightness only.",
     "contrast: the colors are the disc’s contrast to the star in F410M and F210M, mapped to blue and red by wavelength: infrared colors, not what an eye would see. MAST’s coronagraphy products are drawn as the pipeline made them, and the stellar flux the contrast is computed against is a model atmosphere.",
     "color: the colors are the disc’s contrast to the star in F435W, F606W, F814W, blue, green and red, which the eye would see as its color against the star’s: a white disc scatters like the star shines. The reference star’s light was removed at the flux ratio the paper states, not at the scale that best cancels it here, and what that leaves near the star and along the occulting finger is drawn with the disc (beta-pictoris-9987.psf-subtraction.json records the scale a free fit would choose)."
   ]

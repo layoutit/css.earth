@@ -9,6 +9,12 @@
     },
     {
       "location": "public",
+      "filename": "ariel-billboard.webp",
+      "bytes": 14884,
+      "sha256": "b3dab6d17d59fc6481b5ef415b1de7af721e825dcd97d03f38985c41c937de9d"
+    },
+    {
+      "location": "public",
       "filename": "ariel-dataset-elevation.webp",
       "bytes": 364,
       "sha256": "33226f5ee48471ba27ef42b8fec98aa78db897540976070b8171a40767befffd"
@@ -462,12 +468,6 @@
       "filename": "world-navigation.json",
       "bytes": 1234,
       "sha256": "cd8d3e0903d5a6cc00ed97a091c4b1eab7caaecfe6200002f0a5903378f86ac3"
-    },
-    {
-      "location": "public",
-      "filename": "ariel-billboard.webp",
-      "bytes": 14884,
-      "sha256": "b3dab6d17d59fc6481b5ef415b1de7af721e825dcd97d03f38985c41c937de9d"
     }
   ]
 }

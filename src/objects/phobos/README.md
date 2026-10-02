@@ -22,7 +22,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 Preparation simplifies the original mesh to a 1,600-face native triangle presentation; there is no radial remeshing, spherical substitute or invented terrain. The photographic atlas samples the original grid directly ([shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation)). Every one of the 196,608 facet-science rows is registered to its source triangle, and display colors use the nearest source triangle within 250 m.
 
-For the crater catalogue, `packages/bake/src/objects/acquisition/geology-grid.py` marks every 0.125° cell (24 m) each rim circle crosses, plus the centre cell, in `source/craters/phobos-crater-rims.tif` (220,719 rim cells). Other cells show the Monochrome mosaic in grey at 35% brightness.
+For the crater catalogue, `packages/bake/src/objects/acquisition/geology-grid.py` marks every 0.125° cell (24 m) each rim circle crosses, plus the centre cell, in `source/craters/phobos-crater-rims.tif` (220,719 rim cells). Other cells show the Monochrome mosaic in gray at 35% brightness.
 
 Gazetteer anchors are cast onto the prepared shape, not a reference sphere. Craters and faculae trace a rim circle, other types their published extent box.
 

@@ -30,5 +30,5 @@ A headless capture of this version's Uranus default view.
 - **The count is not comparable with Saturn's.** Uranus's rings have about 800 times less opaque area than Saturn's (21 million against 16,600 million km²). At the density of Saturn's 4,000 dots Uranus would have about 5. The 600 are a display choice for this planet.
 - The table gives the ε ring's optical depth as 0.5 to 2.3; Uranus's recipe, and so the dots, use 1.4.
 - The dots are uniform across each ring's published width; the real rings have structure the table does not give, and the ε ring's width varies around the planet (the table gives one value).
-- The dots are `#9a9a9a`, the neutral grey of the ring lines; no ring color is measured.
+- The dots are `#9a9a9a`, the neutral gray of the ring lines; no ring color is measured.
 - The dot layer sits behind the planet, and the dots do not orbit.

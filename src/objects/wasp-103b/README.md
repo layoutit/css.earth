@@ -10,7 +10,7 @@ Columns 2–5 are longitude in degrees, latitude in degrees, pressure in bar and
 
 The shared [table reader](../../../packages/bake/src/objects/raster/lonlat-slice-table.ts) selects exact native pressure levels, verifies a complete periodic grid and interpolates temperature between the released geographic coordinates. It does no vertical interpolation, model fitting or figure digitization. The [raster recipe](source/preparation/raster.json) then applies one false-color palette and prepares lossless textures, pole tiles, minimaps and the default navigation marker. Its simulation metadata produces the shared **Simulation** qualification rather than observational imagery status. Runtime uses the shared retained scene and dataset-step control, starting paused at the selected pressure.
 
-Selected pressures are 0.00011051, 0.00088933, 0.010131, 0.11542, 0.92882, 10.581 and 85.152 bar. Display labels round those values; the default is 0.11542 bar. The table stops at ±81.562° latitude. Grey polar caps show that missing coverage; no temperatures are extrapolated.
+Selected pressures are 0.00011051, 0.00088933, 0.010131, 0.11542, 0.92882, 10.581 and 85.152 bar. Display labels round those values; the default is 0.11542 bar. The table stops at ±81.562° latitude. Gray polar caps show that missing coverage; no temperatures are extrapolated.
 
 ## Geometry and limits
 

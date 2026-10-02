@@ -89,7 +89,7 @@
       "id": "ring-visibility-presentation",
       "subject": "Contrast emphasis for the faint rings",
       "status": "excluded",
-      "finding": "The rings are drawn at their published normal optical depths, 1e-9 to 8e-6: opacity 1 - exp(-optical depth) is below one display level for every ring, so nothing shows. The earlier log-optical-depth contrast emphasis capped at 0.4 alpha, and its hand-picked greys, were removed.",
+      "finding": "The rings are drawn at their published normal optical depths, 1e-9 to 8e-6: opacity 1 - exp(-optical depth) is below one display level for every ring, so nothing shows. The earlier log-optical-depth contrast emphasis capped at 0.4 alpha, and its hand-picked grays, were removed.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L22",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L175",

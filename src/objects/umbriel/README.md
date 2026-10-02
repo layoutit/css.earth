@@ -25,7 +25,7 @@ For the color dataset, [`author-color-frames.mts`](../../../packages/bake/author
 - The prepared normal map correlates 0.87 against its georeferenced source from 0° E and −0.10 from 180° E, so the map starts at 0° E ([where the prepared map starts](../../../docs/surface-preparation.md#where-the-prepared-map-starts)).
 - Of 24 color frames, 3 frames in 1 set were placed (set-19860123-0121, 16.9 km/px). Limb fits have an RMS of 0.39–1.14 pixels. See [the placement report](source/reference/voyager-color-placement.json).
 - The [oracle report](source/reference/voyager-color-oracle.json) compares 3 frames against the mosaic: mean correlation 0.21, mean residual 209.0 km.
-- The color ordering agrees with Karkoschka (2001, *Icarus* 151, 51), who finds the moons grey with a slightly red slope, and DeColibus et al. (2026, *Planet. Sci. J.*, [doi:10.3847/PSJ/ae4a1b](https://doi.org/10.3847/PSJ/ae4a1b)).
+- The color ordering agrees with Karkoschka (2001, *Icarus* 151, 51), who finds the moons gray with a slightly red slope, and DeColibus et al. (2026, *Planet. Sci. J.*, [doi:10.3847/PSJ/ae4a1b](https://doi.org/10.3847/PSJ/ae4a1b)).
 
 ## Known problems
 

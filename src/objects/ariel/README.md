@@ -28,7 +28,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - Map edge: read through its georeferenced source, the prepared map correlates 0.91 from 0° E and 0.14 from 180° E.
 - Color oracle: re-placing every frame and correlating its detail against the mosaic gives a mean correlation of 0.39 and a mean residual of 25.1 km over 9 frames ([report](source/reference/voyager-color-oracle.json)).
-- The color ordering agrees with Karkoschka (2001, *Icarus* 151, 51), who finds the moons grey with a slightly red slope, and DeColibus et al. (2026, *Planet. Sci. J.*, [doi:10.3847/PSJ/ae4a1b](https://doi.org/10.3847/PSJ/ae4a1b)), who measure V/B of 1.03–1.05.
+- The color ordering agrees with Karkoschka (2001, *Icarus* 151, 51), who finds the moons gray with a slightly red slope, and DeColibus et al. (2026, *Planet. Sci. J.*, [doi:10.3847/PSJ/ae4a1b](https://doi.org/10.3847/PSJ/ae4a1b)), who measure V/B of 1.03–1.05.
 
 ## Known problems
 

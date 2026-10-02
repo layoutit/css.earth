@@ -119,7 +119,7 @@
       "id": "ponds-over-dimmed-photograph",
       "subject": "Ponds drawn over the 550 nm photograph",
       "status": "included",
-      "finding": "The first Ponds bake drew non-pond ground as a flat grey category, so the 1 to 2 pixel ponds read as an empty body. The dataset now has one category and leaves non-pond surface missing; the missing texels show the 550 nm photograph in grey at 35% brightness and 6 bits, the catalogue-dataset rule used on Mars and Phobos. On the body the photograph is sampled exactly as the 550 nm view's native atlas samples it (same leaf transform and 2 × 2 texel footprint on the original Golish map), so both views share one texel grid. Contrast: the cyan pond color differs from every dimmed photograph value by at least 47.1 OKLab units (5th percentile 64.7, median 69.6) over 14,252,095 samples, every fourth native value of the 550 nm map.",
+      "finding": "The first Ponds bake drew non-pond ground as a flat gray category, so the 1 to 2 pixel ponds read as an empty body. The dataset now has one category and leaves non-pond surface missing; the missing texels show the 550 nm photograph in gray at 35% brightness and 6 bits, the catalogue-dataset rule used on Mars and Phobos. On the body the photograph is sampled exactly as the 550 nm view's native atlas samples it (same leaf transform and 2 × 2 texel footprint on the original Golish map), so both views share one texel grid. Contrast: the cyan pond color differs from every dimmed photograph value by at least 47.1 OKLab units (5th percentile 64.7, median 69.6) over 14,252,095 samples, every fourth native value of the 550 nm map.",
       "evidence": [
         "https://doi.org/10.26033/4dqc-8067"
       ]

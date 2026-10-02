@@ -20,10 +20,10 @@ The seven maps share 10,682 × 5,341 samples, 10 m pixels and a 17 km cartograph
 
 ## Ponds
 
-Ponds are smooth, flat deposits of fine material in the floors of small hollows, found mostly near the equator at both ends of the long axis, as the catalogue's [bundle description](https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/document/bundle_description.txt) summarises; [Roberts et al. (2014)](https://doi.org/10.1111/maps.12348) discuss their origin and flatness. The Ponds view draws the catalogue in cyan, the color the catalogue's own SBMT table uses, over the 550 nm photograph in grey at 35% brightness. The dimming is a presentation choice. The cyan differs by at least 47 OKLab units from every dimmed photograph value (median 69.6).
+Ponds are smooth, flat deposits of fine material in the floors of small hollows, found mostly near the equator at both ends of the long axis, as the catalogue's [bundle description](https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/document/bundle_description.txt) summarises; [Roberts et al. (2014)](https://doi.org/10.1111/maps.12348) discuss their origin and flatness. The Ponds view draws the catalogue in cyan, the color the catalogue's own SBMT table uses, over the 550 nm photograph in gray at 35% brightness. The dimming is a presentation choice. The cyan differs by at least 47 OKLab units from every dimmed photograph value (median 69.6).
 
 - Each pond is drawn at its published diameter (7.4 to 213.6 m, median 49.9 m). Ponds are rarely round and some catalogue rows are parts of one long deposit, so the circle shows size, not outline.
-- Grey ground is not proof that no pond is there. The count follows image resolution, especially below 30 m ([Roberts et al. 2014, Icarus](https://doi.org/10.1016/j.icarus.2014.07.004)).
+- Gray ground is not proof that no pond is there. The count follows image resolution, especially below 30 m ([Roberts et al. 2014, Icarus](https://doi.org/10.1016/j.icarus.2014.07.004)).
 - 8 of the 334 centres (ponds 1, 2, 10, 129, 216, 218, 219 and 255) lie 66 to 384 m from the Gaskell ver128q surface and are left out. The other 326 lie within 27.4 m of it (median 2.3 m).
 - The smallest ponds, a few metres across, can be smaller than one map pixel.
 

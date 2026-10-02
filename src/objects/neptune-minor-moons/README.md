@@ -20,6 +20,6 @@ The dots are the app's catalogue dots: not clickable and not named. A moon with 
 
 ## Known problems
 
-- No color is measured for these moons. Every dot is `#9a9a9a`, the one neutral grey the app gives a body without a measured color (`NEUTRAL_CATALOGUE_COLOR`).
+- No color is measured for these moons. Every dot is `#9a9a9a`, the one neutral gray the app gives a body without a measured color (`NEUTRAL_CATALOGUE_COLOR`).
 - The 2 px dot size is a display choice, the same as Saturn's. The moons are a few kilometres across and would be invisible at scale.
 - The positions hold for the world's one epoch; the dots do not move.

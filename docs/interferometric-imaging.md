@@ -160,7 +160,7 @@ Two things do not match the paper and are not explained here. Its Table 1 gives 
 
 **A sphere cannot hold light beyond the limb.** π¹ Gruis has 12.8 percent of its flux outside the disc. ROTIR fits it at reduced chi-squared 17.5 on squared visibilities where SQUEEZE reaches 2.45. The sphere backend suits compact photospheres.
 
-**Differential phases do not help a continuum surface.** Across a continuum window, a grey star's Fourier phase is linear in wavenumber on each baseline, and a differential phase has already removed that term. `oifits-observables.test.mts` proves the statistic is unchanged by shifting a grey image. They matter in spectral lines. SQUEEZE 3.0 at the pinned commit also fails to read AMBER's differential visibilities.
+**Differential phases do not help a continuum surface.** Across a continuum window, a gray star's Fourier phase is linear in wavenumber on each baseline, and a differential phase has already removed that term. `oifits-observables.test.mts` proves the statistic is unchanged by shifting a gray image. They matter in spectral lines. SQUEEZE 3.0 at the pinned commit also fails to read AMBER's differential visibilities.
 
 **CO wavelengths need a cool star.** The CO calibration refuses a spectrum whose absorption does not correlate at 0.5 or more with the lines: R Dor gives 0.68, Canopus 0.25. A hot target observed with AMBER near 2.3 µm has no wavelength calibration here.
 

@@ -1310,7 +1310,7 @@ is synthesized. Source request satisfaction is retained separately; projection
 
 The HTML preserves the target's prepared reference sphere and physical camera
 frame. It opens directly at the measurement with no startup flight; shared
-controls own drag and zoom. Color is not relit. Grey is unobserved.
+controls own drag and zoom. Color is not relit. Gray is unobserved.
 
 #### Europa projection, standalone sphere and independent checks
 

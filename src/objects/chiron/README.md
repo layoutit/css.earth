@@ -23,7 +23,7 @@ JPL's Small-Body Database returns the same record for `sstr=2060` and for `sstr=
 
 The rendering scale is the volume-equivalent radius, 98 ± 17 km, the geometric mean of the adopted semiaxes. The area-equivalent radius of 105 km is the apparent disc, not the volume. The widely quoted 218 ± 20 km diameter (Fornasier et al. 2013) is not adopted: its own authors bracket Chiron at **196 to 225 km** with a geometric albedo between about 5 and 17 %, because it depends on a nucleus magnitude for an active body. The 166 km diameter served by SBDB traces to a 1990s chord list with no stated uncertainty and is not used.
 
-### Why the surface is neutral grey
+### Why the surface is neutral gray
 
 At **0.1 ± 1.0 % per 100 nm** against the solar spectrum, Chiron's reflectance is solar-colored within its errors. A display color from these indices would be indistinguishable from neutral, and the indices mix nucleus and coma across epochs of varying activity. The package keeps the indices as data and renders the shared neutral material.
 

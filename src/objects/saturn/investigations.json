@@ -279,7 +279,7 @@
       "id": "opal-f467m-blue-limb",
       "subject": "Minnaert coefficient for the visible map's blue channel",
       "status": "included",
-      "finding": "The blue channel uses F467M's k 0.86 from the OPAL Cycle 32 README table (\"F467M 0.86 .00507\"), the README filter closest to the sRGB blue primary. F395N's 0.40 is violet light that carries 13 % of the true-color blue channel in Saturn's sunlit spectrum; with it the limb brightened in blue and turned grey-blue (b* -16 at the rim, 0.95-0.99 of the radius) in the app. The map's blue data are still F395N.",
+      "finding": "The blue channel uses F467M's k 0.86 from the OPAL Cycle 32 README table (\"F467M 0.86 .00507\"), the README filter closest to the sRGB blue primary. F395N's 0.40 is violet light that carries 13 % of the true-color blue channel in Saturn's sunlit spectrum; with it the limb brightened in blue and turned gray-blue (b* -16 at the rim, 0.95-0.99 of the radius) in the app. The map's blue data are still F395N.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt"
       ]

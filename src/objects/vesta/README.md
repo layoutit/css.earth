@@ -72,7 +72,7 @@ Each grid is read at Claudia longitude + 150°, so no cell is resampled. For sca
 - Clear-filter photography keeps the seams of the original mosaic. North of LAMO coverage the 60 m/pixel HAMO mosaic shows instead, so resolution and sun angle change, and the pole is very dark.
 - Spectral ratios are not mineral abundances.
 - GRaND maps resolve about 300 km; their pixels are sampling. The coarse maps show blocks 15° to 20° tall, the fast neutron level has an arbitrary offset, and uncertainties are not drawn.
-- The geology dataset leaves 2,753 cells (0.13%) grey where the source has no polygon.
+- The geology dataset leaves 2,753 cells (0.13%) gray where the source has no polygon.
 - Gravity resolves about 42 km at best (55 km for Bouguer). Radial gravity omits J2 and is not an anomaly. The geoid is withheld poleward of 60°. The frame is close to, not exactly, Claudia Double Prime.
 - Terrain polar interpolation is not independent stereo coverage. The 8 km allowance is not an error bound.
 - Feature outlines are not published nomenclature boundaries. Placement uses osculating elements with limited temporal validity.

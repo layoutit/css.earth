@@ -57,6 +57,6 @@ The clump dims the star behind it. The line of sight through its centre carries 
 - The polarisation color is the paper's `inferno` color map, a legend, not color.
 - The SiO outflow model places gas that is falling back as if it were leaving. A further 29 percent of the masked flux lies 8 to 14 stellar radii to the north, beyond the volume, and may be an artefact; it is not drawn.
 - The 4 micrometre light starts 1.19 stellar radii out and is one reconstruction of one epoch.
-- The clump is not clipped at the limb, and its extinction is grey.
+- The clump is not clipped at the limb, and its extinction is gray.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Prepared outputs](inventory.json) · [Credits](source/provenance.json)

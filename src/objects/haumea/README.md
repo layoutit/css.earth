@@ -32,7 +32,7 @@ The sidebar keeps the one picture that shows Haumea as more than a point. It is 
 | Image | Pipeline aggregate continuum at 343.5 GHz (0.87 mm), 3.2 mas pixels, restoring beam 22.6 × 16.3 mas at position angle 12.7°, noise 0.013 mJy/beam | FITS header and QA2 report |
 | Haumea in it | Peak 0.248 mJy/beam, 18 times the noise measured here beyond 150 mas (13.8 µJy/beam) | Measured here on the cutout, 2026-09-19 |
 
-The archive's cutout is kept unchanged in [source/alma](source/alma). [The gallery record](source/alma/gallery.json) states everything done to it, and [fits-gallery-image.ts](../../../packages/bake/src/objects/charts/fits-gallery-image.ts) does it: a 96 × 96 pixel window centred on the brightest pixel, north up and east left, linear greys from −0.026 mJy/beam to the peak, each pixel drawn as an 8 × 8 square, stored lossless. Nothing is smoothed, sharpened, interpolated or deconvolved.
+The archive's cutout is kept unchanged in [source/alma](source/alma). [The gallery record](source/alma/gallery.json) states everything done to it, and [fits-gallery-image.ts](../../../packages/bake/src/objects/charts/fits-gallery-image.ts) does it: a 96 × 96 pixel window centred on the brightest pixel, north up and east left, linear grays from −0.026 mJy/beam to the peak, each pixel drawn as an 8 × 8 square, stored lossless. Nothing is smoothed, sharpened, interpolated or deconvolved.
 
 ## Processing
 

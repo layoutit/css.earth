@@ -52,7 +52,7 @@ where Karkoschka's spectrum gives 0.863 and 0.593.
 Lighting. The material overlays put back the limb darkening OPAL removed, with
 the Cycle 32 readme's Minnaert coefficients: k 0.80 in F631N (red) and 0.65 in
 F502N (green). The blue channel takes F467M's k 0.86, not F395N's 0.40; with
-F395N's k the limb turned grey-blue. The coefficients are recorded in
+F395N's k the limb turned gray-blue. The coefficients are recorded in
 `source/photometry/opal-2025-minnaert-*.json`. A `#fff1ea` solar multiplier,
 from the 5,772 K photosphere of NASA's
 [Sun fact sheet](https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html),

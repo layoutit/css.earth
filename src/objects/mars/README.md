@@ -44,7 +44,7 @@ The disc is lit by Vincendon's mean surface law (Hapke with w 0.85 and 17° roug
 
 ### Landform and mineral catalogues (27 September 2026)
 
-These datasets draw catalogues over the Viking mosaic, shown grey at 35% brightness. The shared [`geology-grid.py`](../../../packages/bake/src/objects/acquisition/geology-grid.py) paints each into a 4,096 × 2,048 grid of 5.2 km cells.
+These datasets draw catalogues over the Viking mosaic, shown gray at 35% brightness. The shared [`geology-grid.py`](../../../packages/bake/src/objects/acquisition/geology-grid.py) paints each into a 4,096 × 2,048 grid of 5.2 km cells.
 
 | Dataset | Source | Drawn as |
 | --- | --- | --- |

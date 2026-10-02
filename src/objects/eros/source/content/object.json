@@ -310,7 +310,7 @@
         "legend": {
           "kind": "categories",
           "title": "Ponds",
-          "meta": "Roberts Eros Ponds Catalog V1.1 · published diameters · cyan is the catalogue's own SBMT color · grey ground is the 550 nm photograph at 35% brightness",
+          "meta": "Roberts Eros Ponds Catalog V1.1 · published diameters · cyan is the catalogue's own SBMT color · gray ground is the 550 nm photograph at 35% brightness",
           "sourceUrl": "https://doi.org/10.26033/4dqc-8067",
           "items": [
             {
@@ -319,12 +319,12 @@
             },
             {
               "label": "No catalogued pond",
-              "description": "550 nm photograph in grey at 35% brightness (median shown); not proof of absence",
+              "description": "550 nm photograph in gray at 35% brightness (median shown); not proof of absence",
               "color": "#1c1c1c"
             }
           ]
         },
-        "notes": "Ponds are smooth, flat deposits of fine material in the floors of small hollows. Each cyan circle is one pond from the Roberts Eros Ponds Catalog V1.1, drawn on the shape at the characteristic diameter P. C. Thomas measured; ponds are rarely round, so this shows size, not outline. 326 of the 334 ponds are drawn; 8 catalogued centres lie 66 to 384 m off the shape and are left out. Ponds were found in images of uneven resolution and small ones are missed where images are coarse, so unmarked ground is not proof that no pond is there. Unmarked ground is the 550 nm NEAR MSI photograph in grey at 35% brightness and 6 bits per channel, a presentation choice: the cyan differs by at least 47 OKLab units from every dimmed photograph value. The smallest ponds, a few metres across, can be smaller than one map pixel.",
+        "notes": "Ponds are smooth, flat deposits of fine material in the floors of small hollows. Each cyan circle is one pond from the Roberts Eros Ponds Catalog V1.1, drawn on the shape at the characteristic diameter P. C. Thomas measured; ponds are rarely round, so this shows size, not outline. 326 of the 334 ponds are drawn; 8 catalogued centres lie 66 to 384 m off the shape and are left out. Ponds were found in images of uneven resolution and small ones are missed where images are coarse, so unmarked ground is not proof that no pond is there. Unmarked ground is the 550 nm NEAR MSI photograph in gray at 35% brightness and 6 bits per channel, a presentation choice: the cyan differs by at least 47 OKLab units from every dimmed photograph value. The smallest ponds, a few metres across, can be smaller than one map pixel.",
         "noData": true
       }
     ]

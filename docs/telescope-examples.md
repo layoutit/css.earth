@@ -10,7 +10,7 @@ the numbers are in, the two values drawn as black and white, the stretch between
 whole-number enlargement and the colors. Three pictures are in color, because three measurements of the same target
 exist on one pixel grid: each measurement is stretched on its own limits in its own unit and put straight into red,
 green or blue. That is representative color, not what an eye would see, and each caption says which band is which
-channel. Channels that do not share a grid are refused rather than resampled onto one another. The rest are grey
+channel. Channels that do not share a grid are refused rather than resampled onto one another. The rest are gray
 because there is only one measurement to draw. Every source sample becomes a block of equal output pixels. Nothing is
 smoothed, sharpened, interpolated or cleaned up, and a value outside the stated range is clipped rather than rescaled.
 The recipe also names each product by path and byte count and records the command that made it.
@@ -52,7 +52,7 @@ One plane of a NIRSpec integral-field cube of SN 1987A, taken on 16 July 2022 wi
 the pipeline's level-3 spectral stage onto a 0.05 arcsecond grid. The plane is at 1.0842 microns, the helium line that
 is the brightest thing in this cube. Brightness is surface brightness in MJy/sr, from 0 to 19,200, asinh softened at
 100. North is up and east left. The knots on the ring are where the shock from the 1987 explosion is running into gas
-the star shed long before it died. Grey is outside the cube's footprint.
+the star shed long before it died. Gray is outside the cube's footprint.
 
 `node packages/telescope-cli/src/archives/jwst/cubes/spec3.mts sn-1987a-1232 NIRSPEC-G140M-F100LP .local/sn-1987a-1232/spec3-0.05`
 
@@ -72,12 +72,12 @@ comparison against the archive's mosaic agrees to about 2 parts in 10 million of
 
 ## Hubble, STIS: the 450 nm sodium chloride band on Europa
 
-![A longitude-latitude map in blue and cream, four overlapping circles on a grey background](images/telescopes/hubble-stis-europa-salt.webp)
+![A longitude-latitude map in blue and cream, four overlapping circles on a gray background](images/telescopes/hubble-stis-europa-salt.webp)
 
 Four STIS CCD slit scans of Europa, on 23 May, 29 June, 1 August and 6 August 2017, each scan stepped across the disc,
 turned into a longitude-latitude map. Color is the strength of the 450 nm absorption attributed to sodium chloride, as
 an equivalent width in Angstroms, from -150 (dark blue) to 200 (cream), linear, on the stated blue-to-cream ramp. Row 1
-is the north pole, column 1 starts at 0 degrees east longitude, east to the right. Grey is where no scan reached, or
+is the north pole, column 1 starts at 0 degrees east longitude, east to the right. Gray is where no scan reached, or
 where the surface was seen more than 60 degrees from face on. The strong side is the right-hand half of the map, around
 270 degrees east longitude, the hemisphere that faces the direction Europa travels.
 
@@ -154,7 +154,7 @@ are missing from channel 4. This is the same nebula as the NIRCam picture above,
 
 ## Keck II, KCWI: a patch of the Orion Nebula
 
-![A small coarse grey field of blocky light and dark patches with vertical striping](images/telescopes/keck-kcwi-m42.webp)
+![A small coarse gray field of blocky light and dark patches with vertical striping](images/telescopes/keck-kcwi-m42.webp)
 
 The only M42 science cube this toolkit has reduced so far: a 5 second KCWI exposure from 9 December 2023, run through
 the instrument's own data reduction pipeline here. The picture adds the eleven wavelength planes from 5004 to 5014
