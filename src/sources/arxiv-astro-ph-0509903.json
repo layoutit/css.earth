@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-astro-ph-0509903",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Proust et al. (2006): Structure and dynamics of the Shapley Supercluster. Velocity catalogue, general morphology and mass",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0509903"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:20052838"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0509903",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361:20052838",
+      "label": "Astronomy & Astrophysics 447, 133"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0509903",
+      "checkedOn": "2026-10-02",
+      "locator": "Abstract: the main plane fills 12 by 30 degrees (30 x 75 h^-1 Mpc); section 4: the core holds A3562, A3558 and A3556 near 14400 km/s"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics 447, 133",
+  "creators": [
+    "D. Proust",
+    "H. Quintana",
+    "E. R. Carrasco",
+    "A. Reisenegger",
+    "E. Slezak",
+    "H. Muriel",
+    "R. Dünner",
+    "L. Sodré Jr.",
+    "M. J. Drinkwater",
+    "Q. A. Parker",
+    "C. J. Ragone"
+  ],
+  "publicationDate": "2006"
+}

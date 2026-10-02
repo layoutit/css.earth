@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hydra-cluster",
+  "card": {
+    "text": "A cluster of galaxies 54.3 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table",
+        "checked": "2026-10-02",
+        "locator": "distance: 54.28 Mpc"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "An X-ray selected cluster of galaxies at redshift 0.0133, with an R500 radius of 0.720 million parsecs.",
+    "sources": [
+      {
+        "catalogueId": "mcxc-ii-2024",
+        "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+        "label": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+        "checked": "2026-10-02",
+        "locator": "MCXC J1036.6-2731 row: z 0.0133, R500 0.720 Mpc"
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hydra Cluster catalogue members",
+      "summary": "One dot per member galaxy the Nearby Universe field does not draw. A member's depth is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "cabanillas-2025-hydra-i",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/704/A264",
+          "label": "Cabanillas de la Casa et al. (2025), A&A 704, A264; CDS J/A+A/704/A264; Galaxies of the Hydra I cluster with a redshift, out to 1.75 r200",
+          "checked": "2026-10-02",
+          "locator": "tables12: 196 galaxies"
+        },
+        {
+          "catalogueId": "la-marca-2022-hcdc",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A92",
+          "label": "La Marca et al. (2022), A&A 659, A92; CDS J/A+A/659/A92; Hydra I Cluster Dwarf galaxy Catalogue",
+          "checked": "2026-10-02",
+          "locator": "hcdc: 317 dwarf members"
+        },
+        {
+          "catalogueId": "cosmicflows-4",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 3 (group distance modulus, DMzp)",
+          "checked": "2026-10-02",
+          "locator": "group 31478: DMzp 33.673 mag"
+        }
+      ]
+    }
+  }
+}

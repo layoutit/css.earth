@@ -37,7 +37,10 @@ export function searchObjects<T extends ObjectSearchLabels>(items: readonly T[],
     ? matchesObjectClassification(item.classification, classification) && (!item.illustration || illustrations)
     // A system's name lists its members, and the body that has that very name: "m87" is the black hole's system and
     // the galaxy's name, and listed only the black hole (2026-10-01).
+    // A body named after the system is listed with it: "orion" is Betelgeuse's and Rigel's system and a word of the
+    // Orion Nebula's name, and listed only the stars (2026-10-01). A whole word, so "m87" still leaves out "m870".
     : showAll || (systemName ? item.systemName === systemName || item.name === query || item.names.includes(normalized)
+      || ` ${item.name} `.includes(` ${query} `)
       : item.name.includes(query) || normalized.length > 0 && item.names.some(name => name.includes(normalized))
         || joinedMatch(item, name => name.includes(joined))));
   // A typed name lists exact names first, then names that begin with it, then the rest, each in catalogue order:

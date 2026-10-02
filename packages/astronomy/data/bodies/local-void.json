@@ -1,0 +1,28 @@
+{
+  "id": "local-void",
+  "classification": "galaxy-cluster",
+  "order": 5444,
+  "physical": {
+    "name": "Local Void",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of the Local Void is recorded: it is an extended region with few galaxies, and its package frames it at 30000000 pc (object.json worldFrame.bodyRadiusM), a presentation value: half the mean of the published dimensions, 69, 51 and 60 Mpc.",
+  "star": {
+    "rightAscensionDegrees": 330.28,
+    "declinationDegrees": 40.557,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 32390000,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 2436,
+    "sources": {
+      "position": "Supergalactic SGX, SGY, SGZ = [+22, -9, +22] Mpc: the lowest density of the Local Void in the Cosmicflows-3 reconstruction (Tully et al. (2019), Cosmicflows-3: Cosmography of the Local Void, ApJ 880, 24, https://arxiv.org/abs/1905.08329), turned to ICRS with the RC3 supergalactic frame (pole at galactic l 47.37, b 6.32; origin at l 137.37, b 0) and the IAU 1958 galactic frame.",
+      "distance": "32390000 pc: the length of the published position [+22, -9, +22] Mpc, which the paper converts from [+1650, -700, +1650] km/s with H0 = 75 km/s/Mpc (https://arxiv.org/abs/1905.08329).",
+      "properMotion": "Zero: the region with few galaxies is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "The length of the published velocity-space position [+1650, -700, +1650] km/s: Tully et al. (2019), Cosmicflows-3: Cosmography of the Local Void, ApJ 880, 24 (https://arxiv.org/abs/1905.08329)"
+    }
+  }
+}

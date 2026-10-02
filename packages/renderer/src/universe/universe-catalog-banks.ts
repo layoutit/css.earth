@@ -9,6 +9,7 @@ import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
 import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
 import type { PreparedCatalogBank, PreparedImageLayerBank, PreparedUniverseOptions } from './prepared-universe-types.js';
+import { setReadout } from '../rendering/readouts.js';
 
 interface ImageBank {
   readonly id: string;
@@ -87,11 +88,11 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
 
   function publishResidency() {
     if (lifetime.disposed) return;
-    root.dataset.imageLayerDeclaredBankCount = String(images.length);
-    root.dataset.imageLayerResidentBankCount = String(images.filter(bank => bank.mounted).length);
-    root.dataset.imageLayerLoadingBankCount = String(images.filter(bank => bank.loading).length);
-    root.dataset.catalogResident = String(Boolean(catalog));
-    root.dataset.catalogLoading = String(Boolean(catalogLoading));
+    setReadout(root, 'imageLayerDeclaredBankCount', String(images.length));
+    setReadout(root, 'imageLayerResidentBankCount', String(images.filter(bank => bank.mounted).length));
+    setReadout(root, 'imageLayerLoadingBankCount', String(images.filter(bank => bank.loading).length));
+    setReadout(root, 'catalogResident', String(Boolean(catalog)));
+    setReadout(root, 'catalogLoading', String(Boolean(catalogLoading)));
   }
   function mountCatalog(bank: PreparedCatalogBank) {
     if (catalog || lifetime.disposed) return;

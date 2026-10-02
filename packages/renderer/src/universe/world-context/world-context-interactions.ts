@@ -113,7 +113,7 @@ export function createWorldContextInteractions(host: HTMLElement, root: HTMLElem
     clearPicking() { picking.publish(root, []); },
     commit<Entry extends PaintedEntry>(paintedOrder: readonly Entry[], rankOf: (entry: Entry) => number | undefined,
       caption: ProjectedBody | undefined, captionSize: { readonly width: number; readonly height: number } | undefined,
-      pickingChanged: boolean, navigationInFlight: boolean) {
+      pickingChanged: boolean, navigationInFlight: boolean, selectionSeeThrough: boolean) {
       const targets: ScreenPickTarget[] = [], acceptedRects: LabelScreenRect[] = [], indicatorRects: LabelScreenRect[] = [];
       for (const entry of paintedOrder) {
         const rank = rankOf(entry)!;
@@ -123,6 +123,7 @@ export function createWorldContextInteractions(host: HTMLElement, root: HTMLElem
           indicatorRects.push({ left: x - radius, right: x + radius, top: y - radius, bottom: y + radius });
         }
       }
+      for (const target of targets) target.unoccluded = selectionSeeThrough;
       bodyLabels = [...acceptedRects];
       if (caption?.labelPosition && captionSize) {
         const [left, top] = caption.labelPosition;
