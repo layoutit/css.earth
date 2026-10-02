@@ -6,9 +6,10 @@
 /* Every prepared projective leaf: one raster plane that is never a hit target. The bake writes these once here instead of
  * on each leaf (packages/bake/src/presentation/clean-leaves.ts, PREPARED_LEAF_RULE); a leaf's inline style still wins. */
 .prepared-leaf { transform-style: preserve-3d; background-repeat: no-repeat; pointer-events: none; }
-/* A mesh whose `s` children are all projective leaves carries `prepared-leaves` and its leaves no class
- * (packages/renderer/src/rendering/prepared-leaf-class.ts); any other leaf keeps `prepared-leaf`. */
-.prepared-leaves > s { transform-style: preserve-3d; background-repeat: no-repeat; pointer-events: none; }
+/* In the document a mesh says once that it holds leaves, and its leaves carry no class for it
+ * (packages/renderer/src/rendering/prepared-leaf-class.ts): its other `s` children, a body's polar caps, are marked
+ * instead. The rule keeps the class rule's specificity, so whatever outranked that still does. */
+.prepared-leaves > :where(s:not(.prepared-other)) { transform-style: preserve-3d; background-repeat: no-repeat; pointer-events: none; }
 
 .object-cubic-sky {
   --object-cubic-sky-zoom: 1;

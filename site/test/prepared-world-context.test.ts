@@ -270,10 +270,11 @@ function expectRetained(root: FakeElement, retained: readonly FakeElement[]) {
   assert.equal(now.every(node => known.has(node) || demandedOwner(node)), true, 'only demanded world owners or orbit leaves are attached');
 }
 /** A marker's name is its caption's, whose ::after draws it. */
-function nameOf(marker: FakeElement): string | undefined {
-  return (marker.children.find(child => child.className === 'context-caption') ?? marker).dataset.contextName;
+function nameOf(marker: HTMLElement | FakeElement): string | undefined {
+  const element = marker as FakeElement;
+  return (element.children.find(child => child.className === 'context-caption') ?? element).dataset.contextName;
 }
-function captionName(element: FakeElement): string {
+function captionName(element: HTMLElement | FakeElement): string {
   const name = nameOf(element);
   if (name === undefined) throw new Error('A shown caption has no name.');
   return name;
@@ -1656,7 +1657,7 @@ test('an in-frame circle and caption stay visible and constrained at the viewpor
   assert.equal(annotationVisibility(label, 'label'), '');
   const [x, y] = captionPosition(label);
   assert.deepEqual(([x, y]), beforeHover);
-  assert.ok(x >= -396); assert.ok((x + nameOf(label).length * 6) <= 396);
+  assert.ok(x >= -396); assert.ok((x + nameOf(label)!.length * 6) <= 396);
   assert.ok(y >= -296); assert.ok((y + 14) <= 296);
   layer.destroy();
 });
@@ -1940,7 +1941,7 @@ test('the selected moon family shows readable labels, then fades at system dista
   const rect = child.labelRect!;
   // The caption's DOM position is written to a thousandth of a pixel (world-context-marker-paint.ts); its hit rect is exact.
   assert.ok(Math.abs(rect.left - (left)) < 10 ** -2 / 2, `${rect.left} is not close to ${left}`); assert.ok(Math.abs(rect.top - (top)) < 10 ** -2 / 2, `${rect.top} is not close to ${top}`);
-  assert.equal((rect.right - rect.left), nameOf(label).length * 6);
+  assert.equal((rect.right - rect.left), nameOf(label)!.length * 6);
   assert.ok(layer.labelExclusionRects().some(item => isDeepStrictEqual(item, rect)));
   layer.publish(camera(1000), viewport);
   document.defaultView.advance(200);
