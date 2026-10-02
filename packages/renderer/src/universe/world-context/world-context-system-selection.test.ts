@@ -42,4 +42,15 @@ test('a selected satellite overview retains its selected host locator', () => {
   assert.ok(page.get('saturn')! >= .25 && page.get('saturn')! < 1);
   assert.ok(moons.some(id => close.get(id) === 1));
   for (const id of moons) assert.equal(close.get(id), closePlain.get(id), id);
+  // One emphasis per body: a highlighted set dims the rest, another star's bodies read as not belonging inside the
+  // Sun's system, and a hovered body is never dimmed.
+  const other = 1 + plan.bodies.findIndex(star => !star.orbit && plan.bodies.some(body => body.orbit?.centerBodyId === star.id));
+  const emphasis = (next: WorldContextView) => { const frame = calculate(next); return (id: string | number) => frame.projectedBodies[typeof id === 'number' ? id : index(id)]!.emphasis; };
+  assert.ok(other > 0);
+  const flagged = (flags: Record<string, { hovered?: boolean; highlighted?: boolean }>) => ({ ...wide, bodies: wide.bodies.map((body, at) => ({ ...body, ...flags[[plan.focus, ...plan.bodies][at]!.id] })) });
+  const plainEmphasis = emphasis(wide);
+  assert.deepEqual([plainEmphasis('saturn'), plainEmphasis(other)], [1, .3]);
+  const highlighted = emphasis(flagged({ saturn: { highlighted: true }, mars: { hovered: true } }));
+  assert.deepEqual([highlighted('saturn'), highlighted('jupiter'), highlighted('mars')], [1, .3, 1]);
+  assert.ok(Math.abs(highlighted(other) - .09) < 1e-12);
 });

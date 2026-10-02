@@ -1,11 +1,11 @@
-import { createSystemFade, extendedRetirement, logarithmicFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './context-scale.js';
+import { createSystemFade, extendedRetirement, logarithmicFade, starFieldFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './context-scale.js';
 import { eyeAnchor, eyeDistanceM, type PositionM } from '@cssearth/engine';
 import { isExtendedClassification } from '@cssearth/objects';
 import type { PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../../navigation/perspective-dolly.js';
-import { contextOrbitOpacity, focusOwnOrbitOpacity, outsideFamilyOrbitOpacity, selectedOrbitDepthFade } from '../context-presentation-policy.js';
+import { closeOrbitFades, contextEmphasis, contextSubject, namedBesideSubject, otherSystemsOpacity, outsideFamilyOrbitOpacity, pathOpacity, selectedOrbitDepthFade, subjectRelation, type BodyRole, type SubjectRelation } from '../context-presentation-policy.js';
 import { rayHitsSphereBefore } from '../../solar-system/heliocentric-geometry.js';
 import { billboardImageScale } from '../../navigation/prepared-body-billboards.js';
 import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter, orbitProjectionCapacity } from '../../solar-system/prepared-ring-projection.js';
@@ -73,6 +73,8 @@ export interface PlannedBodyOutput {
   orbitBounds: { left: number; top: number; right: number; bottom: number } | null;
   index: number; labelShown: boolean; labelPlacement: number; indicatorShown: boolean; indicatorCutout: boolean;
   orbitAppearance: { width: number; opacity: number }; coveredBy: string | null;
+  /** The alpha the marker, its caption and its path share: the highlighted set and the other systems' dimming. */
+  emphasis: number;
 }
 interface ProjectedBody<Entry> {
   entry: Entry; x: number; y: number; depth: number; diameter: number; markerOpacity: number; circle: boolean; visible: boolean;
@@ -80,6 +82,8 @@ interface ProjectedBody<Entry> {
   coveredBy: string | null; // A nearer sphere hides part of the drawn image, rings included; the client stacks the billboard just below that sphere.
   /** The body reaches this camera's naming policy, whether or not a caption slot was free for it. */
   nameable: boolean;
+  /** The body against the frame's subject, and whether the reader points at it: the subject, hovered or highlighted. */
+  relation: SubjectRelation; targeted: boolean; emphasis: number;
   segments: readonly OrbitSegment[]; labelPosition?: readonly number[];
 }
 
@@ -107,7 +111,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
     const levels = orbit && hasPath(orbit) ? pathLevels(orbit) : [];
     const placedStar = orbit === null && 'classification' in body && body.classification === 'star'; // Placed by its own record: only such a star can be of another galaxy's field.
     const distanceFromSunM = Math.hypot(...body.positionM.map((value, axis) => value - plan.focus.positionM[axis]!));
-    return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null, scale: markerScale(distanceFromSunM, placedStar ? plan.volume : undefined),
+    // The body a path circles, read past a barycentre; its role and its standing among annotations never change.
+    const parent = orbit ? byId.get(systemFade.centreOf(body.id) ?? '') ?? null : null, tier = annotationPriorities[body.id];
+    const role: BodyRole = orbit === null ? 'star' : parent && !systemFade.isSystemStar(parent.id) ? 'satellite' : 'planet';
+    const prominent = role === 'planet' && (tier ?? 0) >= 3;
+    return { body, orbit, levels, parent, role, prominent, hosted: prominent && parent?.id !== plan.focus.id, minor: (tier ?? 2) < 2, scale: markerScale(distanceFromSunM, placedStar ? plan.volume : undefined),
       galaxyField: !placedStar || inGalaxyField(distanceFromSunM, plan.volume), kind: 'classification' in body ? body.classification : undefined, extended: 'classification' in body && isExtendedClassification(body.classification),
       closedOrbit: orbit?.fullTrail === true, drawnRadiusM: body.radiusM * ('billboard' in body && body.billboard ? Math.max(1, billboardImageScale(body.billboard, body.radiusM)) : 1),
       orbitProjection: createRetainedRingProjection(orbit ? orbit.vertexCount * 2 : 0),
@@ -151,7 +159,6 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         return [r0 * x + r1 * y + r2 * z, r3 * x + r4 * y + r5 * z, r6 * x + r7 * y + r8 * z];
       };
       const toEye = (position: readonly number[]): PositionM => toEyeAt(position[0]!, position[1]!, position[2]!);
-      const emphasizedId = selectionPreview === undefined ? (overview && !view.overviewSelection ? null : selectedId) : selectionPreview;
       const [ox, oy] = viewport.principalOffsetPixels, focal = viewport.focalPixels;
       // Publication shares the camera owner's resize snapshot. Reading layout
       // here would flush the preceding sky/shell writes on every flight frame.
@@ -161,7 +168,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // Orbit occlusion and close-up fading follow the destination during the
       // approach. Attaching its detail must not change a stationary orbit field.
       const orbitFocus = (selectionPreview ? bodies[indexById.get(selectionPreview) ?? -1] : undefined) ?? selectedEntry;
-      const orbitOverview = selectionPreview ? false : overview;
+      // The frame's one subject: every rule about what belongs to the reader's selection reads it and a body's relation to it.
+      const subject = contextSubject({ id: orbitFocus.body.id, role: orbitFocus.role, hostId: orbitFocus.parent?.id },
+        overview, view.overviewSelection === true, selectionPreview), emphasizedId = subject.id;
       const frame = createWorldFrameProjection(plan.focus, orbitFocus.body, toEye, project);
       const selectedEye = frame.eye(selected), fromFocus = Math.hypot(...frame.eye(plan.focus));
       // Past a system (bodies hidden, then ten times that), a star that is not featured gives way to the catalogue dots.
@@ -180,15 +189,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         Math.abs(selectedX) < width / 2 + focusDiameter / 2 &&
         Math.abs(selectedY) < height / 2 + focusDiameter / 2;
       const focusShare = focusInView ? focusDiameter / height : 0;
-      const orbitOpacity = contextOrbitOpacity(plan.camera.presentation.orbitLineFade, focusShare);
-      const ownOrbitOpacity = focusOwnOrbitOpacity(plan.camera.presentation.orbitLineFade, focusShare);
-      // Once detail fills the view, distant systems' coarse orbit bounds can surround the camera even though no
-      // stroke reaches the screen. Keep the selected host's direct orbiters, or a selected satellite's siblings;
-      // fetch other paths on a wider view or when the user targets them.
-      const closeFamilyCenter = orbitFocus.orbit && !systemFade.isSystemStar(orbitFocus.orbit.centerBodyId)
-        ? orbitFocus.orbit.centerBodyId : orbitFocus.body.id;
-      const systemSubject = overview && view.overviewSelection === true, outsideFamilyOpacity = outsideFamilyOrbitOpacity(emphasizedId !== null && !systemFade.isSystemStar(closeFamilyCenter) ? byId.get(closeFamilyCenter) : undefined, host => Math.hypot(...frame.eye(host)), systemSubject);
-      const near = opacity > 0 && orbitOpacity > 0
+      const fades = closeOrbitFades(plan.camera.presentation.orbitLineFade, focusShare);
+      const outsideFamily = outsideFamilyOrbitOpacity(subject.kind === 'none' || subject.hostIsStar ? undefined : byId.get(subject.hostId), host => Math.hypot(...frame.eye(host)), subject.kind === 'system');
+      const highlighting = bodies.some(entry => entry.highlighted === true), otherSystems = otherSystemsOpacity(systemFade.of(0), starFieldFade(focusDistanceM, plan.system));
+      const near = opacity > 0
         ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...frame.eye(entry.body)))) * 0.01) : 1;
       // The coarsest prepared chord bank within 0.1 px of the full path, bounded at
       // the orbit's nearest depth with the off-axis perspective margin. Selection
@@ -215,15 +219,6 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         }
         return 0;
       };
-      // A moon's orbit belongs to its planet's system. It is planned only while that
-      // system is selected or previewed (the planet, the moon or a sibling), or on
-      // hover; elsewhere it has no visible pixels and only its extent is measured.
-      const activeSystems = new Set<string>();
-      for (const id of [selectedId, emphasizedId]) if (id) {
-        activeSystems.add(id);
-        const point = byId.get(id), center = point && 'orbit' in point ? point.orbit?.centerBodyId : undefined;
-        if (center) activeSystems.add(center);
-      }
       let anchorLineWidth = CONTEXT_LINE_WIDTH;
       // Declutter annotations without changing physical paths. A label can lose
       // its slot during a drag without making its projected orbit blink.
@@ -235,27 +230,22 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // Shell context must not resurrect its proxy after the flight completes.
         const ownsDetail = body.id === selectedId;
         const isSelected = !overview && ownsDetail;
-        const nearSelected = entry.orbit?.centerBodyId === closeFamilyCenter;
-        const isOrbitFocus = !orbitOverview && body.id === orbitFocus.body.id;
-        // A host's object page is its close detail, not its satellite system: its moons' paths fade out with the host's
-        // growth, as its own orbit does, and return as the camera pulls back. A hover or preview shows a path at any range.
-        const hostDetailSatellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id) && !overview &&
-          selectedId === entry.parent.id && !entry.hovered && entry.highlighted !== true && selectionPreview == null;
-        const bodyOrbitOpacity = (isOrbitFocus || hostDetailSatellite ? ownOrbitOpacity : !orbitOverview && !nearSelected &&
-          !entry.hovered && entry.highlighted !== true && body.id !== emphasizedId ? orbitOpacity * ownOrbitOpacity : orbitOpacity) *
-          (!nearSelected && !entry.hovered && entry.highlighted !== true && (systemSubject || body.id !== emphasizedId) ? outsideFamilyOpacity : 1); // paths outside the subject's family are dim context
+        const hovered = entry.hovered, highlighted = entry.highlighted === true;
+        const relation = subjectRelation(subject, body.id, entry.parent?.id), targeted = hovered || highlighted || relation === 'subject';
+        const isOrbitFocus = subject.kind === 'body' && relation === 'subject';
+        const bodyOrbitOpacity = pathOpacity(subject, relation, hovered || highlighted, fades, outsideFamily);
+        const emphasis = contextEmphasis(hovered, highlighting && !highlighted, systemFade.inFocusSystem(entry.index), otherSystems);
         const systemOpacity = systemFade.of(entry.index);
         // A body of a faded-out system that nothing targets or shows has no marker, path or caption: the stub, unprojected.
-        const retiredWithSystem = entry.retired = systemOpacity === 0 && entry.orbit !== null && !ownsDetail && !isOrbitFocus && body.id !== emphasizedId &&
-          body.id !== selectionPreview && !entry.hovered && entry.highlighted !== true && !entry.indicatorShown && !entry.labelShown;
+        const retiredWithSystem = entry.retired = systemOpacity === 0 && entry.orbit !== null && !ownsDetail && !targeted && !entry.indicatorShown && !entry.labelShown;
         // Category visibility never removes the object the user is inspecting.
         if (entry.bodyHidden && !isSelected || retiredWithSystem) {
           // A hidden body's changing depth has no consumer. Keeping its
           // retirement state stable avoids a worker patch on every camera move.
           const stub = (prepared[entry.index]!.hiddenStub ??= { projected: { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false,
             visible: false, annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, coveredBy: null,
-            lineWidth: CONTEXT_LINE_WIDTH, orbitVisibility: 0, segments: [] } });
-          stub.projected.entry = entry;
+            lineWidth: CONTEXT_LINE_WIDTH, orbitVisibility: 0, segments: [], relation, targeted, emphasis: 1 } });
+          stub.projected.entry = entry; stub.projected.relation = relation; stub.projected.targeted = targeted;
           projectedBodies.push(stub.projected as ProjectedBody<Entry>);
           continue;
         }
@@ -265,8 +255,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const diameter = depth > body.radiusM ? 2 * focal * body.radiusM / Math.sqrt(depth * depth - body.radiusM ** 2) : Infinity;
         const isAnchor = body.id === plan.focus.id;
         const isLocator = isAnchor || entry.orbit === null;
-        const prominentOrbiter = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId) &&
-          (annotationPriorities[body.id] ?? 0) >= 3;
+        const prominentOrbiter = entry.prominent;
         const inFrame = depth > body.radiusM && Math.abs(bodyX) < width / 2 && Math.abs(bodyY) < height / 2;
         const cover = inFrame ? occlusion.cover(eye, prepared[entry.index]!.drawnRadiusM, body.id) : null, visible = inFrame && cover !== true && !(isSelected && entry.extended && !overview); // Up close a selected galaxy's image is its marker: a ring would cover what sits at its centre.
         // Planet circles and captions are orientation landmarks, not physical
@@ -280,19 +269,19 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const annotationVisible = prominentOrbiter ? depth > body.radiusM : isLocator ? inFrame && !(selectedId !== body.id &&
           selectedDiameter >= plan.camera.presentation.levelOfDetail.markerFullDiscPixels &&
           rayHitsSphereBefore(eye, selectedEye, selected.radiusM)) : inFrame && !occlusion.hidden(eye, body.id);
-        const hovered = entry.hovered, highlighted = entry.highlighted === true;
         // Satellites keep the complete, uniform path from the shared policy,
         // including selection previews and hover during navigation.
-        const satellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id);
+        const satellite = entry.role === 'satellite';
         const fullOrbit = satellite || hovered;
-        const inactiveSatellite = satellite && !hovered && !activeSystems.has(entry.parent!.id);
+        // A moon's orbit belongs to its planet's system. It is planned only inside the subject's family or on hover;
+        // elsewhere it has no visible pixels and only its extent is measured.
+        const inactiveSatellite = satellite && !hovered && relation === 'outside';
         // Open trajectories have no physical apoapsis and read as unbounded
         // guide lines at system scale. Keep them quiet until the body itself
         // is hovered; closed orbits retain their normal category policy.
         // A minor body whose caption is hidden shows its path only when targeted (the anonymous-minor rule below), so an
         // untargeted one neither draws nor wants its path: a plain dot's bank is read only for the dot being named.
-        const pathUnnamed = (annotationPriorities[body.id] ?? 2) < 2 && entry.labelHidden && !hovered && entry.highlighted !== true &&
-          body.id !== emphasizedId;
+        const pathUnnamed = entry.minor && entry.labelHidden && !targeted;
         let skipped = pathUnnamed || !hovered && (entry.orbitHidden || entry.orbit?.closed === false);
         // Prepared trail bounds enclose the faded trail; a complete orbit uses the
         // prepared sphere around every vertex. Either way a path that cannot reach
@@ -314,7 +303,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
             // no projection at all: hundreds of small hidden orbits skip here.
             const sphereDiameter = bounds && boundsEye ? projectedSphereDiameter(boundsEye, bounds.radiusM, focal, near) : Infinity;
             const orbit = entry.orbit;
-            if (sphereDiameter >= ORBIT_FADE_START_PIXELS && !hasPath(orbit) && !pathUnnamed && !hostDetailSatellite) wantedOrbits.add(body.id);
+            if (sphereDiameter >= ORBIT_FADE_START_PIXELS && !hasPath(orbit) && !pathUnnamed && !(relation === 'family' && subject.kind === 'body' && subject.hostIsSubject && !subject.hostIsStar && !highlighted)) wantedOrbits.add(body.id);
             measuredExtent = sphereDiameter < ORBIT_FADE_START_PIXELS ? Math.max(1, sphereDiameter)
               // An orbit whose bank has not arrived is measured by its prepared sphere until its path can be.
               : !hasPath(orbit) ? Math.max(1, Math.min(sphereDiameter, ORBIT_FULL_PIXELS))
@@ -338,11 +327,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // A planet of a placed star is the whole of its system on screen: its circle does not fade with the size of its orbit,
         // or the inner planet disappears at the very range that frames the system. The world's own focus keeps its rules: its
         // planets are measured against the focus distance, below, as they always were.
-        const hostedPlanet = entry.orbit !== null && entry.orbit.centerBodyId !== plan.focus.id &&
-          systemFade.isSystemStar(entry.orbit.centerBodyId) &&
-          (annotationPriorities[body.id] ?? 0) >= 3;
+        const hostedPlanet = entry.hosted;
         const proxyOpacity = highlighted || hostedPlanet ? 1 : 1 - bodyLod.markerOpacity * (1 - appearance.opacity);
-        const flightDestination = navigationInFlight && body.id === emphasizedId;
+        const flightDestination = navigationInFlight && relation === 'subject';
         // Past the Local Group scale the galaxies are the objects: a body's dot fades with its distance from the camera, as its name
         // does below (a star in no system has no other fade); a galaxy or a cluster fades at its own scale (extendedRetirement).
         const beyondLocalGroup = extendedRetirement(entry.kind, fromFocus) ?? logarithmicFade(Math.hypot(...eye), entry.scale.returnDistanceM, entry.scale.enterDistanceM);
@@ -353,24 +340,24 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
           (isSelected || flightDestination ? 1 : (1 - beyondLocalGroup) * (1 - atGalaxyScale));
-        const orbitVisibility = skipped ? 0 : appearance.opacity * bodyOrbitOpacity * systemOpacity;
+        const orbitVisibility = skipped || !entry.orbit ? 0 : appearance.opacity * bodyOrbitOpacity * systemOpacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         // A flight destination keeps its circle until the preview hands off to detail.
         const circle = (flightDestination ? systemOpacity * bodyLod.proxyOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN) :
           (isLocator || hostedPlanet) && overview || bodyLod.markerOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN)) &&
           (!entry.indicatorHidden || hovered || isSelected) && !(isSelected && entry.extended && !overview);
-        const primary = !entry.orbit || systemFade.isSystemStar(entry.orbit.centerBodyId);
+        const primary = entry.role !== 'satellite';
         const priority = (isAnchor ? 1000 : isLocator ? 500 : 0) + (primary ? 100 : 0) + body.radiusM / plan.focus.radiusM;
         const projected = (prepared[entry.index]!.projected ??= { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false, visible: false,
           annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, coveredBy: null,
-          lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
+          lineWidth: 0, orbitVisibility: 0, segments: [], relation, targeted, emphasis }) as ProjectedBody<Entry>;
         // In a system overview a planet of another star is a locator: its dot stays inside the indicator circle.
         projected.entry = entry; projected.x = x; projected.y = y; projected.depth = depth;
         projected.diameter = hostedPlanet && overview ? Math.min(diameter, BODY_INDICATOR_DIAMETER / 2) : diameter; projected.markerOpacity = markerOpacity;
         projected.circle = circle; projected.visible = visible; projected.annotationVisible = annotationVisible; projected.hovered = hovered;
         projected.inFrame = inFrame; projected.priority = priority; projected.coveredBy = typeof cover === 'string' ? cover : null;
         projected.lineWidth = appearance.width; projected.orbitVisibility = orbitVisibility;
-        projected.segments = segments; projected.labelPosition = undefined;
+        projected.segments = segments; projected.labelPosition = undefined; projected.relation = relation; projected.targeted = targeted; projected.emphasis = emphasis;
         projectedBodies.push(projected);
       }
       // Orbitless locators use the same stroke as the visible system, then thin as they recede.
@@ -382,25 +369,20 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const candidates: (StableLabelCandidate & { projected: ProjectedBody<Entry> })[] = [];
       for (const projected of projectedBodies) {
         if (projected.entry.retired) continue; // retired with its faded system: never named
-        const { entry, x, y, diameter, annotationVisible, hovered, priority } = projected;
+        const { entry, x, y, diameter, annotationVisible, hovered, priority, relation, targeted } = projected;
         let { circle } = projected;
         const { body, labelSize: size } = entry;
-        const prominentOrbiter = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId) &&
-          (annotationPriorities[body.id] ?? 0) >= 3;
+        const prominentOrbiter = entry.prominent;
         const bodySystemOpacity = systemFade.of(entry.index);
         // Preserve the established system landmarks through an edge-on orbit.
         if (prominentOrbiter && (rotationActive || preserveCommittedAnnotations) && entry.indicatorShown) projected.markerOpacity = 1;
         const markerOpacity = projected.markerOpacity;
-        const satellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id);
+        const satellite = entry.role === 'satellite';
         const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
         const highlighted = entry.highlighted === true;
-        const targeted = hovered || highlighted || body.id === emphasizedId;
         const localExtent = entry.parent ? Math.hypot(...body.positionM.map((value, axis) => value - entry.parent!.positionM[axis]!)) * focal /
           Math.max(1, -frame.eye(entry.parent)[2]) : Infinity;
-        const inContext = !satellite || activeSystems.has(entry.parent!.id);
-        const foregroundSystem = !systemFade.isSystemStar(selectedId) && !overview;
-        const unrelatedMinor = !satellite && body.id !== plan.focus.id && foregroundSystem && (annotationPriorities[body.id] ?? 2) < 2;
-        const flightDestination = navigationInFlight && body.id === emphasizedId;
+        const flightDestination = navigationInFlight && relation === 'subject';
         // Prepared orientation references (the Sun, then Earth) remain usable
         // landmarks while the Solar System is still the active scale. Camera
         // altitude is much larger than the orbital radius framed on screen, so
@@ -414,7 +396,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // the outer ones.
         // The prepared references are measured against the world's own focus. A planet of another star is measured against
         // that star instead, or it could never qualify: the camera is parsecs from the Sun whenever such a system is framed.
-        const hostedPlanet = prominentOrbiter && entry.orbit!.centerBodyId !== plan.focus.id;
+        const hostedPlanet = entry.hosted;
         const referenceAnnotationOnly = (focusDistanceM <= plan.system.fadeOutStartDistanceM &&
             ((annotationPriorities[body.id] ?? 0) >= 4 || landmarkMoon) || hostedPlanet && bodySystemOpacity > 0) &&
           !resolvedDisc && labelExtentOpacity(localExtent) <= .5 + ANNOTATION_ENTRY_MARGIN;
@@ -440,7 +422,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // or out of context here, and the body is not one this camera names at all.
         projected.nameable = !(entry.labelSuppressed || !annotationVisible ||
             alpha <= (entry.labelShown ? .5 : .5 + ANNOTATION_ENTRY_MARGIN) ||
-            (!targeted && !resolvedDisc && !referenceAnnotationOnly && (!inContext || unrelatedMinor)));
+            (!targeted && !resolvedDisc && !referenceAnnotationOnly && !namedBesideSubject(subject, relation, entry.role, entry.minor && body.id !== plan.focus.id)));
         if (referenceAnnotationOnly) { projected.orbitVisibility = 0; projected.segments = []; }
         // A presentation setting removes the body from annotation admission;
         // final admission below retires an on-screen context orbit with the caption.
@@ -450,7 +432,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const gap = Math.max(5, diameter / 2, circle || referenceAnnotationOnly ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
-        const primary = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId);
+        const primary = entry.role === 'planet';
         const radialSide = primary && entry.parent ? (() => {
           const [parentX, parentY] = project(frame.eye(entry.parent!));
           const dx = x - parentX, dy = y - parentY;
@@ -458,7 +440,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         })() : 0;
         const radialSides = [radialSide, ...[0, 1, 2, 3].filter(side => side !== radialSide)];
         const sides = body.id === plan.focus.id ? [2] : flightDestination ? [0, 1, 2, 3]
-          : resolvedDisc || body.id === emphasizedId ? [3, 2, 0, 1] : primary ? radialSides : [0, 1, 2, 3];
+          : resolvedDisc || relation === 'subject' ? [3, 2, 0, 1] : primary ? radialSides : [0, 1, 2, 3];
         const placements = sides.map(slot => {
           let [left, top] = positions[slot];
           left = Math.max(-width / 2 + 4, Math.min(left, width / 2 - size.width - 4));
@@ -473,7 +455,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
           ? { left: x - radius, right: x + radius, top: y - radius, bottom: y + radius }
           : undefined;
         candidates.push({ id: body.id, projected, navigable: true,
-          pinned: hovered ? 3 : highlighted ? 2 : body.id === emphasizedId ? 1 : 0,
+          pinned: hovered ? 3 : highlighted ? 2 : relation === 'subject' ? 1 : 0,
           priority, tier: annotationPriorities[body.id] ?? 0, shown: entry.labelShown,
           previousPlacement: entry.labelShown ? entry.labelPlacement : sides[0], placements,
           ...(anchor ? { anchor } : {}),
@@ -483,9 +465,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // marker/mesh. Suppressing the duplicate context caption must not remove
       // its selected locator. Reserve that fixed footprint before other labels;
       // the normal circle LOD still retires it when the surface resolves.
-      const selectedLocator = emphasizedId !== null ? projectedBodies.find(projected =>
-        projected.entry.body.id === emphasizedId && projected.entry.labelSuppressed && projected.circle &&
-        projected.annotationVisible && projected.markerOpacity > 0) : undefined;
+      const selectedLocator = projectedBodies.find(projected => projected.relation === 'subject' &&
+        projected.entry.labelSuppressed && projected.circle && projected.annotationVisible && projected.markerOpacity > 0);
       const locatorRadius = BODY_INDICATOR_DIAMETER / 2;
       const locatorRects = selectedLocator ? [{ left: selectedLocator.x - locatorRadius, right: selectedLocator.x + locatorRadius,
         top: selectedLocator.y - locatorRadius, bottom: selectedLocator.y + locatorRadius }] : [];
@@ -496,8 +477,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // Preserve the existing system landmark policy. It does not govern the
       // admission of unrelated stars in the surrounding field.
       const landmarks = candidates.filter(candidate => candidate.projected.entry.body.id === plan.focus.id ||
-        (rotationActive || preserveCommittedAnnotations) && candidate.projected.entry.orbit !== null && systemFade.isSystemStar(candidate.projected.entry.orbit.centerBodyId) &&
-        (candidate.tier ?? 0) >= 3);
+        (rotationActive || preserveCommittedAnnotations) && candidate.projected.entry.prominent);
       const acceptedLandmarks = landmarks.flatMap(candidate => admitStableLabels([candidate], worldLabelBudget()));
       for (const { candidate, rect } of acceptedLandmarks) labelBudget.admit(rect, candidate.anchor);
       const landmarkSet = new Set(landmarks), otherCandidates = candidates.filter(candidate => !landmarkSet.has(candidate));
@@ -509,7 +489,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // beyond it (a star named there is one with more to find), then the comets and asteroids orbiting its star, then the
       // rest of the field. A hovered or selected body keeps its place in the first pass.
       const ownSystem = (candidate: typeof candidates[number]) => candidate.pinned > 0 || systemFade.inShownSystem(candidate.projected.entry.index);
-      const moon = (candidate: typeof candidates[number]) => { const parent = candidate.projected.entry.parent; return parent !== null && !systemFade.isSystemStar(parent.id); };
+      const moon = (candidate: typeof candidates[number]) => candidate.projected.entry.role === 'satellite';
       const major = (candidate: typeof candidates[number]) => candidate.pinned > 0 || (ownSystem(candidate) ? moon(candidate) || (candidate.tier ?? 0) >= 2 : (candidate.tier ?? 0) >= 3);
       const passes = [(candidate: typeof candidates[number]) => ownSystem(candidate) && major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && major(candidate),
         (candidate: typeof candidates[number]) => ownSystem(candidate) && !major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && !major(candidate)];
@@ -528,17 +508,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // highly eccentric comet trails otherwise cross the stage as anonymous
         // near-straight rays while their bodies are off screen. Major bodies retain
         // the useful orbit field, and hover/highlight/selection reveal a minor path.
-        const anonymousMinor = (annotationPriorities[entry.body.id] ?? 2) < 2 && !entry.labelShown &&
-          !projected.hovered && entry.highlighted !== true && entry.body.id !== emphasizedId;
+        const anonymousMinor = entry.minor && !entry.labelShown && !projected.targeted;
         // Explicitly hidden or unnameable bodies also hide their on-screen paths.
         // Ordinary collision decluttering must not blink an orbit during camera motion.
         // The selected object's path and planets in a selected placed star's
         // system remain available when their captions are intentionally absent.
-        const selectedSystemHost = entry.orbit.centerBodyId === orbitFocus.body.id && entry.orbit.centerBodyId !== plan.focus.id &&
-          systemFade.isSystemStar(entry.orbit.centerBodyId);
+        const placedStarFamily = projected.relation === 'family' && subject.hostIsStar && subject.hostId !== plan.focus.id;
         if (anonymousMinor || projected.inFrame && !entry.labelShown && (entry.labelHidden || !projected.nameable) &&
-            !systemFade.hasAuthoredRange(entry.index) &&
-            !selectedSystemHost && (orbitOverview || entry.body.id !== orbitFocus.body.id)) projected.orbitVisibility = 0;
+            !systemFade.hasAuthoredRange(entry.index) && !placedStarFamily &&
+            !(subject.kind === 'body' && projected.relation === 'subject')) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout
           ? orbitOutsideMarker(projected.segments, x, y, entry.indicatorRadius) : projected.segments;
@@ -552,10 +530,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const { entry } = projected, slot = prepared[entry.index]!;
       const billboardShown = (projected.visible || (projected.annotationVisible &&
         (entry.indicatorShown || entry.labelShown))) && projected.markerOpacity > 0;
-      const flightCueShown = navigationInFlight && entry.body.id === emphasizedId && (entry.labelShown || entry.indicatorShown);
+      const flightCueShown = navigationInFlight && projected.relation === 'subject' && (entry.labelShown || entry.indicatorShown);
       const output = slot.output ??= { x: 0, y: 0, diameter: 0, markerOpacity: 0, visible: false, annotationVisible: false, hovered: false, lineWidth: 0,
         orbitVisibility: 0, segments: [], labelPosition: undefined, orbitBounds: null, index: entry.index, labelShown: false, labelPlacement: 0,
-        indicatorShown: false, indicatorCutout: false, orbitAppearance: entry.orbitAppearance, coveredBy: null };
+        indicatorShown: false, indicatorCutout: false, orbitAppearance: entry.orbitAppearance, coveredBy: null, emphasis: 1 };
       output.x = billboardShown || flightCueShown ? projected.x : 0; output.y = billboardShown || flightCueShown ? projected.y : 0;
       // Alphas travel in 1/64 steps: every rotation frame moves a marker's silhouette a
       // little, and a step this small cannot change a composited pixel, so unchanged
@@ -566,7 +544,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       output.labelPosition = projected.labelPosition;
       output.orbitBounds = orbitBounds(projected.segments, slot.bounds);
       output.labelShown = entry.labelShown; output.labelPlacement = entry.labelPlacement; output.indicatorShown = entry.indicatorShown;
-      output.indicatorCutout = entry.indicatorCutout; output.orbitAppearance = entry.orbitAppearance;
+      output.indicatorCutout = entry.indicatorCutout; output.orbitAppearance = entry.orbitAppearance; output.emphasis = projected.emphasis;
       return output;
     };
     return { emphasizedId, opacity, width, height, ...(labelMeasurements.length ? { labelMeasurements } : {}), projectedBodies: projectedBodies.map(plannedBody) };
@@ -577,8 +555,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
     extend(next: PreparedWorldContext | PreparedWorldContextGeometry) {
       const added = next.bodies.filter(body => !byId.has(body.id));
       for (const body of added) { points.push(body); byId.set(body.id, body); indexById.set(body.id, points.length - 1); }
-      for (const body of added) prepared.push(entryOf(body));
       systemFade = createSystemFade(next);
+      for (const body of added) prepared.push(entryOf(body));
       selectedOrbitProjection = createRetainedRingProjection(projectionCapacity());
     },
     /** Give bodies the paths their centre's bank decoded; each keeps its retained projection and per-frame state. */
