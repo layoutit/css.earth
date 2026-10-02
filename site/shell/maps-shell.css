@@ -541,7 +541,7 @@
 .object-information-panel [data-information-panel="moons"] .object-list {
   width: 100%;
 }
-.object-information-panel [data-satellite-system].object-results-scroll .object-list { width: 100%; }
+.object-information-panel [data-view-part="moons"].object-results-scroll .object-list { width: 100%; }
 .object-results-scroll .object-link[aria-disabled="true"] {
   color: var(--shell-text-muted);
   cursor: default;
@@ -578,16 +578,16 @@
 }
 
 /* The selected subject chooses the parts of the card: the body's, its moons' or its planetary system's. */
-.object-information-panel:not([data-card-subject="satellite-system"]) > [data-satellite-system],
-.object-information-panel[data-card-subject="satellite-system"] > :not([data-satellite-system]),
-.object-information-panel:not([data-card-subject="planetary-system"]) > [data-planetary-system],
-.object-information-panel[data-card-subject="planetary-system"] > :not([data-planetary-system], [data-planetary-system-datasets]) {
+.object-information-panel:not([data-card-subject="moons"]) > [data-view-part="moons"],
+.object-information-panel[data-card-subject="moons"] > :not([data-view-part="moons"]),
+.object-information-panel:not([data-card-subject="system"]) > [data-view-part="system"],
+.object-information-panel[data-card-subject="system"] > :not([data-view-part="system"], [data-system-view-datasets]) {
   display: none !important;
 }
 /* The system's datasets come before its body list, as on the card it had. */
-.object-information-panel[data-card-subject="planetary-system"] > [data-system-bodies-slot] { order: 1; }
+.object-information-panel[data-card-subject="system"] > [data-system-bodies-slot] { order: 1; }
 /* The system's card shows the datasets authored for the whole system (a debris disc) and its gallery, not the star's own. */
-.object-information-panel[data-card-subject="planetary-system"] > [data-planetary-system-datasets] :is([data-dataset-option]:not([data-system-dataset]), [data-dataset-details]:not([data-system-dataset-details]), summary:has(> .atlas-tree-root), .object-mobile-information-heading) {
+.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] :is([data-dataset-option]:not([data-system-dataset]), [data-dataset-details]:not([data-system-dataset-details]), summary:has(> .atlas-tree-root), .object-mobile-information-heading) {
   display: none !important;
 }
 .object-results-scroll .object-empty {

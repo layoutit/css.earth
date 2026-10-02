@@ -4,10 +4,10 @@ import type { ShellCamera } from '../browser/browser-types.mts';
 import type { ObjectEntry } from '../objects.mts';
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { withDataset } from '../dataset-url.mts';
-import { withOverviewScope, withSatelliteSystemView } from './navigation-scope.mts';
+import { withView } from './navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
-import { isLevelObject, levelCentre } from '../level-view.mts';
+import { ladderOf } from '../level-view.mts';
 import { selectionKey, selectionTargetFromUrl, type SelectionTarget, type SceneSubject, type SceneView } from '../scene/scene-selection.mts';
 
 export type NavigationHistory = { history: 'push' | 'replace' } | { history: 'pop'; entry: string };
@@ -62,11 +62,10 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   const family = satelliteSystemByHost(object.id);
   const view = intent.kind === 'object' ? intent.view ?? null : null;
   if (view === 'moons' && !family) throw new TypeError(`${object.id} has no satellite system.`);
-  const overviewTarget = view === 'system' && intent.kind === 'object' && intent.camera === 'frame'
-    ? navigation.overviewTarget({ ...targetRequest, scope: 'system' }) : null;
-  // A level opens framed as its ladder says (`zoom.frame`), around its centre; a hand-over keeps the camera.
-  const levelTarget = isLevelObject(object.id) && intent.kind !== 'history' && !(intent.kind === 'object' && intent.camera === 'preserve')
-    ? navigation.overviewTarget({ ...targetRequest, objectId: levelCentre(), scope: object.id, view: 'default' }) : null;
+  // A destination on the zoom ladder (a star's system, a level) opens framed as that rung says, around its centre; the
+  // ladder's own hand-over keeps the camera, and history restores its own.
+  const ladder = intent.kind !== 'history' && !(intent.kind === 'object' && intent.camera === 'preserve') ? ladderOf({ objectId: object.id, view: view ?? 'body' }) : null;
+  const overviewTarget = ladder ? navigation.overviewTarget({ ...targetRequest, objectId: ladder.centreId, scope: ladder.scope }) : null;
   const opensOverviewFocus = current.subject.view === 'system' && object.id === current.objectId;
   const opensFamilyFocus = current.subject.view === 'moons' && object.id === current.objectId;
   const plain = intent.kind === 'object' && view === null;
@@ -78,14 +77,14 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   // turning toward it kept the camera where it was, so a star picked from across the galaxy never came closer.
   const firstHostSelection = plain && (family !== null || systemById(objects, object.id) !== null)
     && !opensOverviewFocus && object.id !== current.centeredObjectId && current.hasPresented;
-  const center = overviewTarget?.world ?? levelTarget?.world ?? familyTarget
+  const center = overviewTarget?.world ?? familyTarget
     ?? (firstHostSelection && !family ? navigation.systemTarget(targetRequest) : null)
     ?? (firstHostSelection ? navigation.centerTarget(targetRequest) : null);
   if (!linked) {
     url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('feature');
     url = withDataset(url, null);
-    withOverviewScope(url, view === 'system' || Boolean(center && plain && systemById(objects, object.id)));
-    withSatelliteSystemView(url, view === 'moons' || plain && familyTarget !== null);
+    // A plain selection that flies to a host's moons, or to a star's system, lands on that view.
+    withView(url, view ?? (plain && familyTarget !== null ? 'moons' : center && plain && systemById(objects, object.id) ? 'system' : 'body'));
     if (intent.kind === 'feature' && intent.id !== null) url.searchParams.set('feature', intent.id);
   }
   const selection = readNavigationSelection(url, object.id, objects);
@@ -97,7 +96,7 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   const camera: NavigationCamera = current.reuseScene && (intent.kind === 'feature' || selection.feature !== null)
     ? { kind: 'surface' } : restore ? { kind: 'restore', animate: history.history === 'pop' }
     : keepCamera ? { kind: 'preserve' }
-    : { kind: 'frame', framing: center ? 'center' : 'detail', world: center, focusPositionM: overviewTarget?.focusPositionM ?? levelTarget?.focusPositionM ?? null };
+    : { kind: 'frame', framing: center ? 'center' : 'detail', world: center, focusPositionM: overviewTarget?.focusPositionM ?? null };
   if (current.reuseScene && !restore) {
     const changesSelection = selectionKey(current.subject) !== selectionKey(selection.subject);
     if (!changesSelection && !(linked && selection.dataset)) history = { history: 'replace' };

@@ -1,22 +1,22 @@
-import type { SelectionTarget } from './scene/scene-selection.mts';
+import type { SceneView, SelectionTarget } from './scene/scene-selection.mts';
 import { selectionKey } from './scene/scene-selection.mts';
 import { requiredSection, setLinkSelected } from './browser/browser-types.mts';
 import type { CatalogueSelection } from './search/catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
 
-/** Whether a card carries a planetary system's parts: its star's card does (SystemCard.astro). */
-export const hasPlanetarySystem = (card: HTMLElement) => sectionElements(card, '[data-planetary-system]').length > 0;
+/** The view a card can show of its object: the one asked for when the card carries that view's parts (a star's card
+ * carries its system's, a host's its moons'), otherwise the body. */
+export const cardView = (card: HTMLElement, view: SceneView): SceneView => view === 'body'
+  || sectionElements(card, '[data-view-part]').some(part => part.dataset.viewPart === view) ? view : 'body';
 
-/** Show a card as its subject: the body's parts, its moons' or its planetary system's. The parts of the other subjects are
- * not mounted (detached-sections.ts). The server's document and the live page share this. */
-export function presentCardSubject(card: HTMLElement, subject: 'body' | 'satellite-system' | 'planetary-system') {
-  const view = subject === 'body' ? 'detail' : 'overview';
-  if (card.dataset.cardView !== view) card.dataset.cardView = view;
-  if (card.dataset.cardSubject !== subject) card.dataset.cardSubject = subject;
-  for (const [selector, shown] of [['[data-satellite-system]', subject === 'satellite-system'], ['[data-planetary-system]', subject === 'planetary-system']] as const) {
-    for (const part of sectionElements(card, selector)) if (sectionPlaceholder(part).parentElement === card) showSection(part, shown);
-  }
+/** Show a card in one view of its object. Each part of the card that belongs to a view names it (`data-view-part`); the
+ * parts of the other views are not mounted (detached-sections.ts). The server's document and the live page share this. */
+export function presentCardView(card: HTMLElement, view: SceneView) {
+  const layout = view === 'body' ? 'detail' : 'overview';
+  if (card.dataset.cardView !== layout) card.dataset.cardView = layout;
+  if (card.dataset.cardSubject !== view) card.dataset.cardSubject = view;
+  for (const part of sectionElements(card, '[data-view-part]')) if (sectionPlaceholder(part).parentElement === card) showSection(part, part.dataset.viewPart === view);
 }
 
 /** Present the selected subject in the retained result rows and the source link. The card itself shows its subject's parts
@@ -26,7 +26,7 @@ export function createSelectionPresentation(documentTarget: Document, { card: pr
   const present = (subject: SelectionTarget, sourceLinks?: ReadonlyMap<string, SourceDocumentReference>): CatalogueSelection => {
     if (presentsCard) {
       const card = sectionElements(documentTarget, '.object-information-panel')[0];
-      if (card) presentCardSubject(card, subject.view === 'moons' ? 'satellite-system' : subject.view === 'system' && hasPlanetarySystem(card) ? 'planetary-system' : 'body');
+      if (card) presentCardView(card, cardView(card, subject.view));
     }
     renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);
     const kind = subject.view === 'system' ? 'system' : subject.view === 'moons' ? 'satellite-system' : 'object';
