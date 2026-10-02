@@ -138,6 +138,25 @@ export function withDatasetText(datasets: PanelControls['datasets'], readerTexts
   }) };
 }
 
+/** The datasets a body's raster recipe declares as one uniform colour, with the colour its prepared surface holds. */
+export function uniformDatasetColors(raster: unknown, prepared: unknown, objectId: string): Map<string, string> {
+  const colors = new Map<string, string>();
+  const surfaces = raster === undefined ? [] : array(object(raster, `${objectId} raster recipe`).surfaces ?? [], `${objectId} raster surfaces`);
+  const uniform = surfaces.map(value => object(value, `${objectId} raster surface`))
+    .filter(surface => surface.science !== undefined && object(surface.science, `${objectId} surface science`).kind === 'stellar-photometric-color')
+    .map(surface => text(surface.id, `${objectId} raster surface id`));
+  if (!uniform.length) return colors;
+  const controls = array(object(prepared, `${objectId} prepared datasets`).controls, `${objectId} prepared dataset controls`).map(value => object(value, `${objectId} prepared dataset`));
+  for (const id of uniform) {
+    const color = controls.find(control => control.id === id)?.billboardColor;
+    if (typeof color !== 'string' || !/^#[0-9a-f]{6}$/iu.test(color)) {
+      throw new TypeError(`${objectId}: src/objects/${objectId}/prepared/datasets.json dataset ${id} billboardColor is ${JSON.stringify(color ?? null)}; expected a #rrggbb colour for a uniform surface.`);
+    }
+    colors.set(id, color.toLowerCase());
+  }
+  return colors;
+}
+
 /** Validate the fields the shared Astro panel renders, before assigning display types. */
 export function parsePreparedPanelContent(value: unknown): Pick<Props, 'objectId' | 'title' | 'facts' | 'moreFacts' | 'charts' | 'galleries' | 'destinations' | 'features'> {
   const content = object(value, 'panel content');

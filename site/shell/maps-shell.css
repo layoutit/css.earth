@@ -478,7 +478,6 @@
   grid-row: 2;
   justify-self: start;
   overflow: hidden;
-  font-size: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -496,7 +495,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: inset 0 0 6px 2px rgb(0 0 0 / 75%);
+  box-shadow: inset 0 0 6px 1px rgb(0 0 0 / 45%);
   pointer-events: none;
 }
 #object-category-results:has(> .object-list > :not([hidden])) > .object-feature-results {
@@ -747,6 +746,19 @@
   padding: calc(var(--explorer-divider-gap) + var(--explorer-divider-width) + 1px) 0 0;
   border: 0;
 }
+/* A card that shows its factsheet and its one colour dataset together (ObjectInformationPanel.astro): "Datasets" reads as
+   the tab it stands for, and the row and its description are one block with no line between them. */
+.object-card-section-title {
+  margin: 0;
+  padding: 5px 0;
+  color: var(--shell-text);
+  font: var(--shell-font-introduction);
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.object-information-panel[data-card-stacked] > .object-dataset-content { border-top: var(--explorer-divider-width) solid var(--explorer-divider); }
+.object-information-panel[data-card-stacked] > .object-dataset-content > .object-dataset-details { margin-top: 15px; padding-top: 0; }
+.object-information-panel[data-card-stacked] > .object-dataset-content > .object-dataset-details::before { content: none; }
 .object-dataset-content > .object-dataset-details::before {
   content: '';
   position: absolute;
