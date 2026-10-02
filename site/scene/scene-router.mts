@@ -272,6 +272,14 @@ export function createSceneRouter({
         onMotionRequest: requestMotion,
         onFeatureSelect: id => { void navigate(objectId, { kind: 'feature', id }).catch(report); },
         datasetEffects: createDatasetEffects(session, () => world.current, () => world.ensure()),
+        // A cold page's world is planned while its detail activates and paints, from the selection and camera the
+        // world will draw once the detail connects below; the plan waits in the queue for that identical request
+        // (world-frame-queue.ts `warm`). A flight's mount keeps its own hook (prepared-world-navigation.mts).
+        ...(replacement ? {} : { onNavigationReady(owner: Parameters<typeof world.select>[1]) {
+          if (!scenes.isCurrent(session)) return;
+          world.select(session, owner);
+          framePresenter.warm();
+        } }),
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;

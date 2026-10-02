@@ -53,7 +53,20 @@ export function createApplicationWorldFrames({ layer, planner, moonLabels, lifet
         enabled = true;
         if (pending) { queue.remember(pending); pending = null; }
         queue.refresh();
-      }, destroy() { disposed = true; pending = null; },
+      },
+        /** Plan the world for the camera this mounting scene holds, before `enable` asks for it: a covered startup
+         * plans behind its paint gate instead of after it. The plan is used only if that camera, and everything the
+         * planner read, are still the same when the scene enables; otherwise `enable` plans as before. It is asked for at
+         * once, not a frame later: the detail's first paint holds the main thread (125 ms on the iPad), and a plan
+         * requested after it started at the end of the gate (reveal 60 to 90 ms after the paint, against 26 to 42 ms,
+         * 2026-10-02). The selected body's caption is measured by the next layout (selected-body-label.ts), so the
+         * world's labels keep clear of it from the plan that follows the reveal. */
+        warm() {
+          if (enabled || disposed || lifetime.disposed || !pending) return false;
+          queueMicrotask(() => { if (!enabled && !disposed && !lifetime.disposed && pending) queue.warm(pending); });
+          return true;
+        },
+        destroy() { disposed = true; pending = null; },
         present(request: Parameters<typeof queue.present>[0], signal?: AbortSignal) {
           if (disposed || lifetime.disposed || signal?.aborted || !request.current()) return signal ? Promise.resolve(false) : undefined;
           const owned = { ...request, current: () => !disposed && !lifetime.disposed && request.current() };
