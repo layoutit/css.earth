@@ -1,5 +1,7 @@
+import { type PreparedTree, type PreparedWrite } from '@cssearth/objects';
+
 import type { Page } from 'playwright';
-import type { PreparedTree, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+
 import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.ts';
 type MinimalPresentation = {id: string; tree: PreparedTree; variants: {writes: readonly PreparedWrite[]}[]};
 

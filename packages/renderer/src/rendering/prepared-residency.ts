@@ -1,11 +1,9 @@
-import { activeResourceFallbacks, type PreparedResourceFallback } from './prepared-resource-fallbacks.js';
-import type { PreparedImage, PreparedImageLease, PreparedImagePool } from "./prepared-image-store.js";
-import type { PreparedAssetOrigin } from "./prepared-asset-origin.js";
-export interface PreparedResourceEntry { key: string; url: string; pool: string; decodedBytes?: number; }
-export interface PreparedResourcePool extends PreparedImagePool { id: string; retention: "mount" | "warm" | "selection"; stabilityMilliseconds?: number; eviction?: "capacity" | "unused"; maximumDecodedBytes?: number; }
-export interface PreparedAssets { entries: readonly PreparedResourceEntry[]; pools: readonly PreparedResourcePool[]; startup: readonly string[];
-  /** Resources that stand in for others where the browser lacks a capability (prepared-resource-fallbacks.ts). */
-  fallbacks?: readonly PreparedResourceFallback[]; }
+import { type PreparedResourceEntry, type PreparedResourcePool, type PreparedAssets, type PreparedAssetOrigin } from '@cssearth/objects';
+
+import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
+
+import type { PreparedImage, PreparedImageLease } from './prepared-image-store.js';
+
 export interface PreparedResourceDemand { required: readonly string[]; prewarm?: readonly string[]; }
 export interface PreparedResources { has(key: string): boolean; read(key: string): PreparedImage | null; url(key: string): string | null; readyKeys(): readonly string[]; }
 export interface PreparedResidencyTicket { readonly required: readonly string[]; readonly ready: Promise<PreparedResidencyTicket | null>; }

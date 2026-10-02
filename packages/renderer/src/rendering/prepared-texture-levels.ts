@@ -1,33 +1,17 @@
+import { type PreparedTexturePlacements, type PreparedTextureLevels, type PreparedTextureTile, type PreparedTextureTileLeaves } from '@cssearth/objects';
+
 import { invertPreparedAffineMatrix4, transformPreparedPoint } from '@cssearth/core';
 import { walkSilhouetteLevels } from './prepared-silhouette-steps.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 
 type Vector3 = readonly [number, number, number];
 /** Where the faces behind each texture write sit, measured on the prepared scene at rest, in scene coordinates. */
-export interface PreparedTexturePlacements {
-  body: { center: Vector3; radius: number };
-  /** Keyed by the texture write's CSS name: the bounding sphere of its faces, their mean outward direction, and the
-   * largest angle between that direction and any face corner's. */
-  writes: Readonly<Record<string, { center: Vector3; radius: number; normal: Vector3; spread: number }>>;
-}
 
 /** Prepared addresses for one dataset; all levels share its retained geometry
  * and atlas coordinate system. Thresholds are CSS silhouette pixels, never DPR. */
-export interface PreparedTextureLevels {
-  hysteresis: number;
-  fixedLevel?: number;
-  /** `tiles`: at a small level every page of a bank is one tile of a shared sheet (paged-ellipsoid texture-levels.mts). */
-  levels: readonly { minimumDiameter: number; resources: Readonly<Record<string, string>>; tiles?: Readonly<Record<string, PreparedTextureTile>> }[];
-  /** A write whose faces are off screen or behind the body keeps the first level: sharper texels there are never seen,
-   * and a browser decodes a whole image to draw any of it. */
-  placements?: PreparedTexturePlacements;
-  /** The leaves that draw each tiled page, as records (packages/bake/src/presentation/texture-tile-records.ts). */
-  tileLeaves?: readonly PreparedTextureTileLeaves[];
-}
 
 /** Where a page sits in the sheet its level shares with the bank's other pages, in the page's own CSS atlas units: the
  * tile's offset, and the sheet's width over the page's. */
-export interface PreparedTextureTile { x: number; y: number; scale: number }
 
 /** The page textures some level draws from a sheet. Their writes carry the tile beside the image, at every level. */
 export function tiledTextureKeys(levels: PreparedTextureLevels | undefined): Set<string> {
@@ -37,15 +21,6 @@ export function tiledTextureKeys(levels: PreparedTextureLevels | undefined): Set
 /** The leaves of one texture write that draw its page from wherever the level puts it: the page itself, or a tile of a
  * sheet. Each leaf's background is `unit × tile offset − its own offset` and `width × tile scale` wide, so a level switch
  * writes every leaf's final values; no custom property or `calc()` reaches the page. */
-export interface PreparedTextureTileLeaves {
-  target: number; name: string;
-  /** Px per tile offset unit (negative: the sheet moves left and up), and the page's width in px. */
-  unit: number; width: number;
-  /** The tile preparation wrote on the target, which the leaves' prepared values already resolve. */
-  initial?: PreparedTextureTile;
-  /** [node, x, y]: each leaf's own background offset in its page, in px. */
-  leaves: readonly (readonly [number, number, number])[];
-}
 
 const format = (value: number) => String(Math.round(value * 1e6) / 1e6);
 

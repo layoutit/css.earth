@@ -1,9 +1,12 @@
+import { type PreparedAssetOrigin, type ObjectDescriptor } from '@cssearth/objects';
+
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireInventory } from '@cssearth/objects/node';
-import { preparedAssetGroup, preparedAssetGroupFile, resolvePreparedAssetUrl, type PreparedAssetOrigin } from '@cssearth/renderer';
+import { preparedAssetGroup, preparedAssetGroupFile, resolvePreparedAssetUrl } from '@cssearth/renderer';
+
 import { isRecord } from '@cssearth/core';
-import type { ObjectDescriptor } from '@cssearth/objects';
+
 export type { PreparedAssetOrigin };
 
 /** Build-time-only asset origin: unset in local dev and CI, so `pnpm build` reproduces

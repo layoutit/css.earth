@@ -1,5 +1,6 @@
+import { type PreparedPresentationDefinition, type PreparedTree } from '@cssearth/objects';
+
 import type { Page } from 'playwright';
-import type { PreparedPresentationDefinition, PreparedTree } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 
 /** Resolve image consumers against the actual scene CSS, after depth partitioning.
  * Sentinels are CSS values only: the preparation page blocks every request. */

@@ -1,11 +1,14 @@
+import { parsePreparedObjectRuntime, type ObjectControls, objectCycleStates } from '@cssearth/objects';
+
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createObjectControlBinding } from '@cssearth/renderer/testing';
-import { initialObjectSelection, reduceObjectSelection, objectCycleStates } from '@cssearth/renderer/testing';
-import { parsePreparedObjectRuntime } from '@cssearth/renderer';
-import type { ObjectAction, ObjectControls, ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
+import { initialObjectSelection, reduceObjectSelection } from '@cssearth/renderer/testing';
+
+import type { ObjectAction, ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
+
 import type { ObjectSelectionState } from '@cssearth/renderer/rendering/object-selection-runtime.ts';
 import type { ObjectControlBindingOptions } from '@cssearth/renderer/rendering/object-control-binding.ts';
 
@@ -186,7 +189,6 @@ test("one failed native listener removal does not stop the rest of control clean
   h.binding.destroy();
 });
 
-
 test("prepared dataset details follow committed selection through pending work", () => {
   const ids = moonControls.datasets?.controls.slice(0, 2).map(dataset => dataset.id) ?? []; assert.equal(ids.length, 2);
   const legends = ids.map(() => ({ hidden: true, querySelectorAll: (): never[] => [] }));
@@ -202,7 +204,6 @@ test("prepared dataset details follow committed selection through pending work",
   assert.deepEqual(legends.map(legend => legend.hidden), [true, false]);
   h.binding.destroy();
 });
-
 
 test("a preceding focused galaxy dataset bank cannot replace the mounted body's controls", () => {
   const focusInput = new Input({ name: "focusDataset", value: "vista-infrared", tagName: "BUTTON", type: "button" });

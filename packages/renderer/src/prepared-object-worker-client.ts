@@ -1,4 +1,4 @@
-import type { ObjectRuntimeDefinition } from './runtime/object-runtime-types.js';
+import { type ObjectRuntimeDefinition } from '@cssearth/objects';
 
 export interface PreparedObjectDecodeRequest { descriptor: unknown; bytes: ArrayBuffer; }
 export type PreparedObjectDecodeResult = { ok: true; definition: ObjectRuntimeDefinition } |

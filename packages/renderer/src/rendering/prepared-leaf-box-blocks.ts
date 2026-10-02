@@ -1,6 +1,10 @@
+import { type PreparedSilhouetteSteps, type PreparedTexturePlacements } from '@cssearth/objects';
+
 import { transformPreparedPoint } from '@cssearth/core';
-import { walkSilhouetteLevels, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
-import { unseenTextureWrites, type PreparedTexturePlacements } from './prepared-texture-levels.js';
+import { walkSilhouetteLevels } from './prepared-silhouette-steps.js';
+
+import { unseenTextureWrites } from './prepared-texture-levels.js';
+
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 import { createSettlePacer, SETTLE_PACING, type SettlePacerOptions } from './settle-pacer.js';
 

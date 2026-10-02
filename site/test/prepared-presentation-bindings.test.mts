@@ -1,3 +1,5 @@
+import { type PreparedTree } from '@cssearth/objects';
+
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
@@ -9,7 +11,6 @@ import { preparePresentationBindings } from '@cssearth/bake/prepared-presentatio
 import { objectPageStyles } from '../object-page-contract.mts';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 import type { PresentationSource } from '@cssearth/bake/prepared-presentation';
-import type { PreparedTree, PreparedWrite } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 
 interface Fixture { root: string; definition: PresentationSource; css: string; setCss(value: string): Promise<void>; }
 async function mimasRuntime(root: string): Promise<PresentationSource> {

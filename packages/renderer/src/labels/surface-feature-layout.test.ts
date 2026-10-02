@@ -1,8 +1,9 @@
+import { type SurfaceFeaturePolicy } from '@cssearth/objects';
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
+
 import { admitSurfaceFeatureLabels, passesZoomGate, projectSurfaceFeature, projectSurfaceOutline, surfaceLabelOpacity, surfaceLabelRect, zoomShare } from './surface-feature-layout.js';
-import type { SurfaceFeaturePolicy } from './surface-feature-types.js';
 
 const policy: SurfaceFeaturePolicy = { minimumZoomShare: 1, minimumDiameterPixels: 30, alwaysVisibleCount: 1, maximumVisible: 3, limbCosine: 0.12 };
 // Column-major eye matrix: uniform scale 0.02, no rotation, body centre 400px in front of the eye.

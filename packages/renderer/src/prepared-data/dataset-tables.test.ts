@@ -1,16 +1,17 @@
+import { parseObjectDescriptor, parsePreparedObjectRuntime, type ObjectRuntimeDefinition, deferredDatasetIds, preparedDatasetReference, splitPreparedDatasetTables } from '@cssearth/objects';
+
 import { readFile } from 'node:fs/promises';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseObjectDescriptor } from '@cssearth/objects';
-import { parsePreparedObjectRuntime } from '../validation/index.js';
+
 import { loadPreparedCssObject, loadPreparedDataset } from '../loader.js';
 import { selectedPreparedVariant } from '../rendering/prepared-presentation.js';
 import { serializePreparedScene } from '../rendering/prepared-scene-serialization.js';
 import { initialObjectSelection } from '../runtime/object-contract.js';
 import { createObjectControlBinding } from '../rendering/object-control-binding.js';
 import { parseHTML } from 'linkedom';
-import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
-import { adoptPreparedDatasetTables, deferredDatasetIds, preparedDatasetReference, splitPreparedDatasetTables } from './dataset-tables.js';
+
+import { adoptPreparedDatasetTables } from './dataset-tables.js';
 
 const root = new URL('../../../../', import.meta.url);
 async function runtime(id: string) {

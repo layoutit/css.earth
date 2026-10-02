@@ -38,7 +38,7 @@ because its sources name their siblings `.js`. `src/runtime/shell-contract.ts` a
 theirs `.ts` instead, so plain-Node tools can load them without a bundler.
 
 Three small modules moved in from `src/platform` with the runtime, since the renderer was their only runtime owner:
-`src/runtime/shell-settings.ts` (the setting names the shared shell owns), `src/labels/surface-feature-banks.ts` (the
+`@cssearth/objects` (the setting names the shared shell owns), `src/labels/surface-feature-banks.ts` (the
 feature-bank address that preparation writes and the labels read) and `src/validation/prepared-texture-levels.ts` (the
 texture-level validators). None is generic enough for `@cssearth/core`. The shell's object-controls and scene-lifecycle
 contract (`src/runtime/shell-contract.ts`) moved in later from `site/scene`, so `src/platform` and the tools can check a

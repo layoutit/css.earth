@@ -1,34 +1,22 @@
-import type { ObjectControls, ObjectSelection, DatasetVolume } from "./object-contract.js";
+import { type DatasetVolume } from '@cssearth/objects';
+
+import type { ObjectSelection } from './object-contract.js';
+
 import type { SceneLifetime } from "@cssearth/engine";
-import type { PerspectiveCameraPlan } from "../navigation/types.js";
+
 import type { OrbitPublication, OrbitStateUpdate, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import type { RuntimePolicy } from "../navigation/runtime-policy.js";
-import type { PreparedAssets } from "../rendering/prepared-residency.js";
-import type { PreparedPresentationDefinition } from "../rendering/prepared-presentation.js";
-import type { CubicSkyPlan } from "../solar-system/cubic-sky-plan.js";
-import type { DirectionalSunPlan } from "../solar-system/directional-sun-coordinate.js";
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import type { PreparedWorldCameraFrame } from '@cssearth/objects';
+
+import type { WorldCameraPose } from '../navigation/world-camera.js';
+
 import type { PreparedResourceLease } from './prepared-resource-lease.js';
 import type { PerspectiveWorldContext } from '../navigation/perspective-dolly.js';
-import type { PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
-import type { PreparedSurfaceFeaturePlan, SurfaceFeatureLayerRuntime, SurfaceFeatureNavigationRuntime } from '../labels/surface-feature-types.js';
+
+import type { SurfaceFeatureLayerRuntime, SurfaceFeatureNavigationRuntime } from '../labels/surface-feature-types.js';
+
 export type { SurfaceFeatureNavigationRuntime };
 import type { SurfaceFeatureMountOptions } from '../labels/surface-feature-labels.js';
-import type { PreparedAssetOrigin } from '../rendering/prepared-asset-origin.js';
-export type { PreparedAssetOrigin };
 
-export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition {
-  readonly schema: string; readonly id: string; readonly controls: ObjectControls;
-  readonly camera: PerspectiveCameraPlan; readonly assets: PreparedAssets; readonly sky: CubicSkyPlan;
-  readonly sun?: DirectionalSunPlan | null;
-  readonly destinations?: unknown;
-  readonly surfaceHit?: PreparedSurfaceHit;
-  readonly features?: PreparedSurfaceFeaturePlan;
-  /** Set only when the build published this object's textures and scene JSON to an
-   * asset origin (`ASSET_ORIGIN`); unset reproduces today's same-origin `/scenes/` behavior. */
-  readonly assetOrigin?: PreparedAssetOrigin;
-}
 export interface ObjectRuntimeView extends OrbitPublication { readonly reference: OrbitPublication; readonly previous: OrbitPublication | null; readonly revision: number;
   /** Every motion animation is paused at its prepared start (`PreparedView.motionAtRest`). */
   readonly motionAtRest: boolean; }

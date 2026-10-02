@@ -5,7 +5,7 @@ import { builtScenePaths } from '../../../../built-pages.mts';
 import { preparedDatasetIds, readPreparedDatasetBytes } from '../../../../object-page-data.mts';
 
 // A dataset's tables, which the object transport leaves out and a selection reads when it shows that dataset
-// (dataset-tables.ts in @cssearth/renderer). Only the scenes a build prerenders read their datasets.
+// (dataset-tables.ts in @cssearth/objects). Only the scenes a build prerenders read their datasets.
 export const getStaticPaths: GetStaticPaths = async () => {
   const scenes = builtScenePaths(SCENE_OBJECTS.map(({ id }) => ({ params: { id } })), OBJECTS, ROOT_OBJECT_ID);
   return (await Promise.all(scenes.map(async ({ params: { id } }) =>

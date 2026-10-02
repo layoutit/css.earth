@@ -27,7 +27,7 @@ ${['normal', 'ultraviolet', 'methane'].map(id => `<button type="submit" name="da
 const read: typeof fetch = async input => {
   const url = new URL(String(input));
   assert.equal(url.origin, origin);
-  // The object transport, and the tables of a dataset it leaves out (dataset-tables.ts in @cssearth/renderer).
+  // The object transport, and the tables of a dataset it leaves out (dataset-tables.ts in @cssearth/objects).
   const dataset = /^\/objects\/saturn\/datasets\/([a-z0-9-]+)\.json$/u.exec(url.pathname)?.[1];
   if (dataset !== undefined) return new Response(new Uint8Array(await readPreparedDatasetBytes('saturn', dataset)));
   assert.equal(url.pathname, '/objects/saturn/object.json', 'Only the prepared object and dataset requests are allowed');

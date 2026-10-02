@@ -1,9 +1,11 @@
+import { type PreparedViewBinding, type PreparedLeafBox } from '@cssearth/objects';
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
+
 import { parseHTML } from 'linkedom';
-import type { PreparedViewBinding } from './prepared-presentation.js';
-import { createLeafBoxWriter, leafBoxStyles, type PreparedLeafBox } from './prepared-leaf-box-direct.js';
+
+import { createLeafBoxWriter, leafBoxStyles } from './prepared-leaf-box-direct.js';
 
 // Two of Venus's leaf-box records (packages/bake/src/presentation/leaf-box-records.ts), under the system node 0.
 const matrix = 'matrix3d(7.503457,-0.739026,0,0,0.004556,0.046257,100.99439,-0.007833,0.028587,0.290248,-0.956524,0,-7.905404,2381.267936,-12169.276988,1)';

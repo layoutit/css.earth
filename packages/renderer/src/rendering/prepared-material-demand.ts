@@ -1,4 +1,7 @@
-import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialDemand, PreparedMaterialView } from "./prepared-material.js";
+import { type PreparedMaterialTrack, type PreparedMaterialSelection } from '@cssearth/objects';
+
+import type { PreparedMaterialDemand, PreparedMaterialView } from './prepared-material.js';
+
 import { preparedMaterialState } from "./prepared-material.js";
 
 export function resolvePreparedMaterialDemand(track: PreparedMaterialTrack, selected: PreparedMaterialSelection, view: PreparedMaterialView): PreparedMaterialDemand {

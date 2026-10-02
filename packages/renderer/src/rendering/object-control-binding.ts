@@ -1,7 +1,10 @@
+import { type ObjectControls, SHELL_SETTING_NAMES, requireObjectControls, objectCycleStates } from '@cssearth/objects';
+
 import { sectionElements, showSection } from './detached-sections.js';
-import type { ObjectControls, ObjectSelection, ObjectAction } from "../runtime/object-contract.js";
+import type { ObjectSelection, ObjectAction } from '../runtime/object-contract.js';
+
 import type { ObjectSelectionState } from "./object-selection-runtime.js";
-import { SHELL_SETTING_NAMES } from '../runtime/shell-settings.js';
+
 export interface ObjectControlBindingOptions {
   stage: HTMLElement; controls: ObjectControls; initialSelection: ObjectSelection; getState(): Readonly<ObjectSelectionState>;
   /** `frameCamera` false keeps the reader's camera: a step within the sequence already on screen. */
@@ -87,8 +90,7 @@ export function publishDatasetSelection(buttons: readonly HTMLButtonElement[], d
   publishDatasetPreview(previewRoot, buttons);
 }
 
-import { requireObjectControls } from "../runtime/object-contract.js";
-import { objectCycleStates, requireObjectAction } from "../runtime/object-contract.js";
+import { requireObjectAction } from '../runtime/object-contract.js';
 
 export function createObjectControlBinding({ stage, controls, initialSelection, getState, onAction, onError, onIntent }: ObjectControlBindingOptions) {
   requireObjectControls(controls);

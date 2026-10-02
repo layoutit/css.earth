@@ -1,12 +1,15 @@
-import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA } from "../presentation/index.ts";
+import { OBJECT_RUNTIME_SCHEMA, type PreparedAssets } from '@cssearth/objects';
+
+import { PREPARED_PRESENTATION_SCHEMA} from "../presentation/index.ts";
+
 import { requirePreparedPresentation } from "../presentation/index.ts";
 import type { PreparedPresentationContract } from "../presentation/index.ts";
-import type { PreparedAssets } from "@cssearth/renderer/rendering/prepared-residency.ts";
+
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
 import { isRecord, requireRecord } from '@cssearth/core';
 
 export type CheckedObjectRuntimeDefinition = Omit<PreparedPresentationContract, 'schema'> & {
-  schema: typeof PREPARED_OBJECT_RUNTIME_SCHEMA;
+  schema: typeof OBJECT_RUNTIME_SCHEMA;
   id: string;
   controls: ReturnType<typeof requireObjectControls>;
 };
@@ -57,7 +60,7 @@ function requireResourceKeys(values: unknown, entries: ReadonlyMap<string, unkno
 
 export function requireObjectRuntimeDefinition(input: unknown, { objectId = isRecord(input) ? input.id : undefined, controls }: {objectId?: unknown; controls?: unknown} = {}): CheckedObjectRuntimeDefinition {
   const definition = requireRecord(input, 'Object runtime');
-  if (definition.schema !== PREPARED_OBJECT_RUNTIME_SCHEMA) throw new TypeError("Object runtime requires the data-only prepared definition.");
+  if (definition.schema !== OBJECT_RUNTIME_SCHEMA) throw new TypeError("Object runtime requires the data-only prepared definition.");
   const { schema, id, controls: suppliedControls, ...prepared } = definition;
   if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(id) || id !== objectId) throw new TypeError(`Object runtime identity does not match ${objectId}.`);
   if (controls !== undefined && suppliedControls !== controls) throw new TypeError(`${objectId} must supply its actual control-content export.`);

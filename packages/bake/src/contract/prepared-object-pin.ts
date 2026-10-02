@@ -1,3 +1,5 @@
+import { OBJECT_RUNTIME_SCHEMA, parseObjectDescriptor, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+
 // Pinning a prepared object to its transport: the descriptor's `prepared` pin and page reference, and the body's inventory.
 // The `prepared/object.json` transport and the page data are built from the runtime when read (@cssearth/objects/node
 // prepared-transport), so no copy is written here. It prepares nothing; the world-navigation and spatial-context finalization that runs
@@ -6,9 +8,9 @@ import { mkdir, readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { requireRecord } from '@cssearth/core';
-import { parseObjectDescriptor } from '@cssearth/objects';
+
 import { inventoryPreparedAssets, readInventory } from '@cssearth/objects/node';
-import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+
 import { preparePageMetadata, writePreparedText } from '../delivery/index.ts';
 import { requireObjectRuntimeDefinition } from './object-runtime-contract.ts';
 
@@ -19,7 +21,7 @@ const format = PREPARED_CSS_OBJECT_FORMAT;
 export function serializeObjectJson(descriptorValue:unknown, definitionValue:unknown) {
   const descriptor=requireRecord(descriptorValue),definition=requireRecord(definitionValue);
   if (descriptor.schema !== 'cssearth-object@2' || typeof descriptor.type !== 'string' ||
-      definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@5') {
+      definition.id !== descriptor.id || definition.schema !== OBJECT_RUNTIME_SCHEMA) {
     throw new TypeError('Prepared object identity does not match its descriptor.');
   }
   return JSON.stringify({ schema: 'cssearth-prepared-object@1', id: descriptor.id,

@@ -1,13 +1,13 @@
+import { requireVariants, type PreparedTree, type ObjectControls, requireCamera } from '@cssearth/objects';
+
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import { test } from 'node:test';
-import {requireVariants} from '@cssearth/renderer/validation/presentation.ts';
-import type {PreparedTree} from '@cssearth/renderer/rendering/prepared-presentation.ts';
-import type {ObjectControls} from '@cssearth/renderer/runtime/object-contract.ts';
+
 import {prepareScientificNavigation} from '@cssearth/bake/objects/layers/terrestrial';
 import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
 import {preparedScenePitch} from '@cssearth/engine';
-import {requireCamera} from '@cssearth/renderer/validation/camera-controls.ts';
+
 import {requireRecord,requireString} from '@cssearth/core';
 
 // This small prepared carrier is independent of the focus helper's frame math.

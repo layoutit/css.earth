@@ -102,3 +102,8 @@ stay with their owners.
 exported through the browser-safe main entry. Hierarchy construction and encoding star rows remain in bake;
 loading, selection and projection remain with their runtime owners. Contract tests run in the packages lane;
 writer/reader conformance stays in `integration/renderer-bake/src/stars/`.
+
+`src/prepared-data/` also owns the object runtime schema, controls and dataset metadata, the data-only runtime definition
+and its JSON validators, deferred dataset transports, splitting and validated merging. Presentation, resource, material,
+texture, camera, picking and feature-plan data needed by these validators live here; mounting, selection, projection,
+resource loading and in-place dataset installation remain in renderer. Contract tests run in `pnpm test:packages`.

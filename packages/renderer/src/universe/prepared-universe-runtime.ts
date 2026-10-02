@@ -1,3 +1,5 @@
+import { parsePreparedWorldContextPlan, type PreparedWorldContext, type PreparedWorldCameraFrame, type PreparedAssets } from '@cssearth/objects';
+
 import { createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { mountBackgroundPoints } from './background-points.js';
@@ -7,16 +9,16 @@ import { opacityClockFor } from '../stars/opacity-clock.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import { galaxyOutsideFade, logarithmicFade } from './world-context/context-scale.js';
 import { mountPreparedWorldContext, type BodyVisibility } from './prepared-world-context.js';
-import { parsePreparedWorldContextPlan, type PreparedWorldContext } from '@cssearth/objects';
+
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import type { PreparedWorldCameraFrame } from '@cssearth/objects';
+
 import { mountWorldContextPointSource } from './world-context/world-context-point-source.js';
-import type { PreparedAssets } from '../rendering/prepared-residency.js';
+
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js';
 import { mountEnvironmentLabels } from './environment-labels.js';
-import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog';
+
 import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import { createContextFocusBank } from './prepared-focus-bank.js';
 import { detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';

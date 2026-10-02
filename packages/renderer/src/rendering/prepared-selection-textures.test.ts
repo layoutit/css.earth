@@ -1,7 +1,10 @@
+import { type PreparedPresentationDefinition } from '@cssearth/objects';
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
-import { mountPreparedPresentation, type PreparedPresentationDefinition } from './prepared-presentation.js';
+
+import { mountPreparedPresentation } from './prepared-presentation.js';
+
 import type { PreparedResources } from './prepared-residency.js';
 
 function fixture() {

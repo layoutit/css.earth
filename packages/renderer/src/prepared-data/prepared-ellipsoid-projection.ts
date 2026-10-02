@@ -1,9 +1,10 @@
+import { type CounterTransport, type EllipsoidProjectionPlan } from '@cssearth/objects';
+
 import { requirePreparedMatrix4, readPreparedMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4, invertPreparedAffineMatrix4, transformPreparedPoint, serializePreparedMatrix4 } from '@cssearth/core';
 import type { Matrix4 } from '../solar-system/types.js';
 import { projectEyeEllipsoid, requirePhysicalProjection } from './physical-projection.js';
 import type { PhysicalProjection } from './physical-projection.js';
-export interface CounterTransport { counterPrecision?:number;counterFractionDigits?:number;counterFractionScale?:number; }
-export interface EllipsoidProjectionPlan extends CounterTransport {equatorialRadius:number;polarRadius:number;coverageScale:number;bodySystemMatrix:Matrix4;bodyMeshMatrix:Matrix4;materialSystemMatrix:Matrix4;materialMeshMatrix:Matrix4;baseProjection:Matrix4;centerTranslation:Matrix4;inverseCenterTranslation:Matrix4;textureEllipse?:{center:readonly[number,number];covariance:readonly[number,number,number]};}
+
 export interface EllipsoidView {degrees:number;counterMatrix:Matrix4|string;projection:PhysicalProjection;}
 interface Covariance {xx:number;xy:number;yy:number;}
 type Matrix2 = readonly (readonly number[])[];

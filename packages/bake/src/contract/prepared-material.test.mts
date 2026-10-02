@@ -1,3 +1,5 @@
+import { parsePreparedObjectRuntime } from '@cssearth/objects';
+
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import { prepareFrameLookup } from "@cssearth/bake/presentation";
 import assert from "node:assert/strict";
@@ -9,8 +11,6 @@ import { selectedPreparedVariant } from '@cssearth/renderer/testing';
 import { initialObjectSelection } from '@cssearth/renderer/testing';
 import { retainedPresentationFixture } from "./fixtures/object-runtime-package.mts";
 
-
-import { parsePreparedObjectRuntime } from '@cssearth/renderer';
 import { parse, object, array, tuple, number, boolean, string } from '@cssearth/core/schema';
 const definition = parsePreparedObjectRuntime(await loadObjectTestDefinition('venus'));
 const referenceSchema = object({ source: object({}), records: array(object({

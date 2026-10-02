@@ -1,10 +1,6 @@
+import { PREPARED_DIRECTIONAL_SUN_SCHEMA } from '@cssearth/objects';
 import type { DirectionalSunPresentation, PreparedDirectionalSunPlan } from "./directional-sun-contract.ts";
-import {
-  DIRECTIONAL_SUN_PRESENTATION_STANDARD,
-  PREPARED_DIRECTIONAL_SUN_SCHEMA,
-  validateDirectionalSunPlan,
-  validateDirectionalSunPresentationStandard,
-} from "./directional-sun-contract.ts";
+import { DIRECTIONAL_SUN_PRESENTATION_STANDARD, validateDirectionalSunPlan, validateDirectionalSunPresentationStandard } from './directional-sun-contract.ts';
 
 export interface DirectionalSunPreparationOptions {
   presentation?: DirectionalSunPresentation; planMetadata?: Readonly<Record<string, unknown>>;

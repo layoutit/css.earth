@@ -1,18 +1,21 @@
 /// <reference types="vite/client" />
+import { type ObjectRuntimeDefinition, requireObjectRuntimeDefinition } from '@cssearth/objects';
+
 import { initialStageSelection } from './initial-stage-selection.js';
 import { preparedLabelEdge } from '../navigation/prepared-label-edge.js';
-import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView } from "./object-runtime-types.js";
+import type { ObjectMountOptions, ObjectRuntimeView } from './object-runtime-types.js';
+
 import type { ObjectSelectionState } from "../rendering/object-selection-runtime.js";
 import type { ObjectSelection } from "./object-contract.js";
 import type { OrbitPublication, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import type { SharedView } from "../navigation/view-url.js";
 import type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './world-navigation-types.js';
-import type { WorldCameraPose } from '../navigation/world-camera.js';
+
 import type { ObjectDatasets } from './object-scene.js';
 import type { SurfaceFeatureLayerRuntime } from '../labels/surface-feature-types.js';
 import { errorMessage } from "../navigation/types.js";
 import { publishObjectDiagnostics } from "./object-diagnostics.js";
-export type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView } from "./object-runtime-types.js";
+export type { ObjectMountOptions, ObjectRuntimeView } from './object-runtime-types.js';
 export type ObjectRuntimeServices = typeof nativeServices;
 
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../rendering/prepared-object-assets.js";
@@ -29,7 +32,8 @@ import { createRetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import { mountPreparedPresentation, preparedTextureLevelKeys } from "../rendering/prepared-presentation.js";
 import { afterStartup } from "../rendering/startup-gate.js";
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
-import { requireObjectRuntimeDefinition, selectedDatasetVolume } from "./object-contract.js";
+import { selectedDatasetVolume } from './object-contract.js';
+
 import { formatSharedView, parseSharedView } from "../navigation/view-url.js";
 /** A User Timing mark per mount step, so a trace splits a scene handoff (`cssEarth:mount:<step>`). */
 const mountMark = (step: string) => { globalThis.performance?.mark?.(`cssEarth:mount:${step}`); };

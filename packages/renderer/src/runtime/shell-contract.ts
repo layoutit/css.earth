@@ -1,7 +1,7 @@
-import type { DatasetControl, SettingControl } from './object-contract.js';
+import { type DatasetControl, type SettingControl, SHELL_SETTING_NAMES } from '@cssearth/objects';
+
 import type { ObjectSceneLifecycle } from './object-scene.js';
 // A `.ts` sibling, so Node tools can load this module from its source subpath without a bundler.
-import { SHELL_SETTING_NAMES } from './shell-settings.ts';
 
 // The shell checks this lifecycle shape. The renderer supplies the complete
 // scene contract, including shared-view and navigation capabilities.
@@ -23,7 +23,6 @@ export interface ShellObjectControls {
     readonly controls: readonly ShellSettingControl[];
   } | null | undefined;
 }
-
 
 function objectLike(value: unknown): value is Record<string, unknown> {
   return value !== null && (typeof value === "object" || typeof value === "function");

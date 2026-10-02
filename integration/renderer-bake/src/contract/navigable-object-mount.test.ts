@@ -1,16 +1,17 @@
+import { parsePreparedWorldCameraFrame, record, type ObjectRuntimeDefinition } from '@cssearth/objects';
+
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { preparedObjectText } from '@cssearth/objects/node';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
+
 import { loadNavigableObject } from '@cssearth/renderer/runtime/navigable-object-mount.ts';
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 import { requirePreparedCssDescriptor } from '@cssearth/renderer/prepared-object-decoder.ts';
-import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
-import { record } from '@cssearth/renderer/validation/guards.ts';
-import type { ObjectMountOptions, ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
+
+import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 
 async function preparedFixture() {
   const descriptor = requirePreparedCssDescriptor(JSON.parse(await readFile(new URL('../../../../src/objects/venus/object.json', import.meta.url), 'utf8')));
@@ -31,7 +32,6 @@ async function authenticateFixture({ descriptor, payload }: Awaited<ReturnType<t
   const bytes = new TextEncoder().encode(JSON.stringify(payload)).buffer;
   return { descriptor, bytes };
 }
-
 
 test('preflight and native mount share one authenticated definition and transfer its resource ownership once', async () => {
   const { descriptor, bytes } = await authenticateFixture(await preparedFixture());

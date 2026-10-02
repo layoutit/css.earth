@@ -1,6 +1,8 @@
-import type { PreparedTree } from './prepared-presentation.js';
+import { type PreparedTree, type PreparedAssetOrigin } from '@cssearth/objects';
+
 import { writePreparedStyle } from './style-access.js';
-import { rewritePreparedStyleUrls, type PreparedAssetOrigin } from './prepared-asset-origin.js';
+import { rewritePreparedStyleUrls } from './prepared-asset-origin.js';
+
 import { meshProfile } from './prepared-omitted-nodes.js';
 
 type Own = (cleanup: () => void) => unknown;

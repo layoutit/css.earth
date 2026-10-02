@@ -1,14 +1,22 @@
+import { type PreparedWrite, type PreparedSelectionNavigation, type PreparedVariant, type PreparedViewBinding, type PreparedPresentationDefinition, type PreparedTextureLevels, type PreparedTextureTile } from '@cssearth/objects';
+
 import { writeStyle as writeRetainedStyle } from './retained-write.js';
-import { createPreparedInteriorDisc, type PreparedInteriorDisc } from './prepared-interior-disc.js';
+import { createPreparedInteriorDisc } from './prepared-interior-disc.js';
+
 import { buildPreparedTree, type PreparedTreeLease } from './prepared-tree.js';
-import { bindPreparedSurfaceHit, type PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
-import { createPreparedDepthPartitions, type PreparedDepthPartitions } from './prepared-depth-partitions.js';
+import { bindPreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
+
+import { createPreparedDepthPartitions } from './prepared-depth-partitions.js';
+
 import type { ObjectSelection } from "../runtime/object-contract.js";
-import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialDemand } from "./prepared-material.js";
-import type { PreparedAssets, PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
+import type { PreparedMaterialDemand } from './prepared-material.js';
+
+import type { PreparedResources, PreparedResourceDemand } from './prepared-residency.js';
+
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle, samePreparedStyle } from "./style-access.js";
-import { createTextureTileWriter, selectPreparedTextureLevel, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements, type PreparedTextureTile } from './prepared-texture-levels.js';
+import { createTextureTileWriter, selectPreparedTextureLevel, unseenTextureWrites } from './prepared-texture-levels.js';
+
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
 import { createLeafBoxWriter, SEAM_OUTSET } from './prepared-leaf-box-direct.js';
 import { hiddenSubtreeRoots, meshProfile, omittedPreparedNodes } from './prepared-omitted-nodes.js';
@@ -16,9 +24,8 @@ import { createSettlePacer } from './settle-pacer.js';
 import type { CameraMotionSignal } from '../navigation/camera-motion-signal.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
 import { preparedDatasetPending } from '../prepared-data/dataset-tables.js';
-import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
-import type { PreparedSurfaceFeaturePlan } from '../labels/surface-feature-types.js';
-import type { PreparedAssetOrigin } from './prepared-asset-origin.js';
+import { selectPreparedSilhouetteStep } from './prepared-silhouette-steps.js';
+
 export type PreparedSelection = ObjectSelection;
 export interface PreparedView {
   readonly projection: import('../prepared-data/physical-projection.js').PhysicalProjection;
@@ -35,60 +42,13 @@ export interface PreparedView {
   /** Every motion animation is paused at its prepared start, where the prepared texture placements hold. */
   motionAtRest?: boolean;
 }
-export type PreparedWrite = { target: number; name: string } & (
-  { kind: "attribute"; value: string | null } | { kind: "class"; value: boolean } |
-  { kind: "style"; value: string } | { kind: "texture"; resource: string | null; quoted: boolean }
-);
-export interface PreparedSelectionNavigation { maximumZoom: number; camera?: { controlPitch: number; controlYaw: number; controlRoll?: number; zoom: number; transition?: { durationMilliseconds: number; preserveZoom: boolean } } | null; }
-export interface PreparedVariant { when: Readonly<Record<string, ObjectSelection[string]>>; required: readonly string[]; materials: readonly PreparedMaterialSelection[]; writes: readonly PreparedWrite[]; navigation?: PreparedSelectionNavigation;
-  /** Containers this selection does not show. Server markup for it omits their descendants; the runtime builds any it adopts without. */
-  hiddenSubtrees?: readonly number[]; }
-export interface PreparedTree {
-  /** Offline first-paint batches. Runtime restores these exact retained leaves. */
-  activationGroups?: readonly (readonly number[])[];
-  /** Offline CSS consumers of each selection-owned image binding. */
-  textureBindings?: readonly { target: number; name: string; leaves: readonly number[] }[];
-  nodes: readonly { tag: string; parent: number; className: string | null; style: string; properties: readonly number[]; attributes: Readonly<Record<string, string>> }[];
-  properties: readonly { name: string; value: string; custom: boolean }[]; camera: number; scene: number; stageClasses: readonly string[];
-}
-export type PreparedViewBinding = { target: number } & (
-  { kind: "view-attribute"; property: string; source: "scene-pitch" | "control-yaw" | "zoom" | "level-of-detail-stage" | "scene-matrix"; precision: number | null } |
-  { kind: "view-property"; property: string; source: "billboard-opacity" | "marker-opacity"; precision: number | null } |
-  { kind: "silhouette-fit"; minimumRadius: number; unitScale: number } |
-  ({ kind: "interior-disc" } & PreparedInteriorDisc) |
-  ({ kind: "silhouette-step-property"; property: string; placements?: PreparedTexturePlacements;
-    /** Leaf boxes (prepared-leaf-box-blocks.ts): the leaves that share each published step, by block or `property`. */
-    groups?: Readonly<Record<string, readonly number[]>>; groupSizes?: Readonly<Record<string, readonly number[]>>;
-    /** The step or outset in force before the camera publishes one. */
-    initial?: string;
-    /** Leaf boxes as prepared records (prepared-leaf-box-direct.ts). */
-    boxes?: readonly import('./prepared-leaf-box-direct.js').PreparedLeafBox[] } & PreparedSilhouetteSteps) |
-  { kind: "counter-rotation"; systemTransform: string | null }
-);
-export interface PreparedPresentationDefinition {
-  textureLevels?: PreparedTextureLevels;
-  /** The resource catalogue; presentation reads only its capability fallbacks. */
-  assets?: PreparedAssets;
-  camera: Parameters<typeof preparedScenePitch>[1]; tree: PreparedTree; variants: readonly PreparedVariant[]; materials: readonly PreparedMaterialTrack[];
-  /** Datasets whose tables travel in their own transport and have not arrived (dataset-tables.ts). Their variants stand
-   * in without demand or textures until `adoptPreparedDatasetTables` replaces them. */
-  deferredDatasets?: readonly string[];
-  resourceOrder?: "materials-first" | "content-first"; viewBindings: readonly PreparedViewBinding[]; motionFrame?: readonly number[];
-  animations: readonly { target: number; id: string; mode: "pose" | "motion"; keyframes: Keyframe[] | PropertyIndexedKeyframes; duration: number; sourceMinimum: number; millisecondsPerDegree: number }[];
-  /** Infinite motion: a spin resolved from source CSS, or a star's light curve as opacity. */
-  motion?: readonly { target: number; id: string; keyframes: ({ offset: number; transform: string } | { offset: number; opacity: string })[]; duration: number; timings: readonly { when: Readonly<Record<string, ObjectSelection[string]>>; duration: number }[] }[];
-  features?: PreparedSurfaceFeaturePlan;
-  depthPartitions?: PreparedDepthPartitions;
-  surfaceHit?: PreparedSurfaceHit;
-  assetOrigin?: PreparedAssetOrigin;
-}
+
 export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedDatasets: (string | null)[]; navigation?: PreparedSelectionNavigation; textureLevel?: number; textureResources?: Readonly<Record<string, string>>; textureTiles?: Readonly<Record<string, PreparedTextureTile>>;
   /** The mesh is not drawn at this level of detail: its textures only warm. */
   deferredTextures?: boolean; }
 export interface PreparedPresentationContext { own(cleanup: () => void): unknown; registerAnimation(animation: Animation, options: PreparedAnimationOptions): unknown; seekAnimation(animation: Animation, time: number): void; }
 export interface PreparedFramePublication { selection: ObjectSelection; view: PreparedView; resources: Pick<PreparedResources, "has" | "url">; }
 
-import { preparedScenePitch } from "@cssearth/engine";
 import { createPreparedMaterialPublisher } from "./prepared-material.js";
 import { prepareConnectedActivation } from './prepared-activation.js';
 import { prepareTextureActivation } from './prepared-texture-activation.js';

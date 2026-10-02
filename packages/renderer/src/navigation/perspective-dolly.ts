@@ -1,14 +1,16 @@
+import { type CameraPlan, type PerspectiveCameraPlan, type LevelOfDetailPlan, type OrbitLineFade, type PreparedWorldCameraFrame } from '@cssearth/objects';
+
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
 import { showSection } from '../rendering/detached-sections.js';
-import type { CameraPlan, PerspectiveCameraPlan, Vector3 } from './types.js';
-import type { LevelOfDetailPlan, OrbitLineFade } from '@cssearth/objects';
+import type { Vector3 } from './types.js';
+
 import type { BodyProjection } from '../solar-system/types.js';
 import type { VisibleRect } from '../solar-system/types.js';
 import type { CameraViewport } from './camera-viewport.js';
 import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from './world-camera.js';
 import type { WorldCameraPose, WorldCameraViewport } from './world-camera.js';
-import type { PreparedWorldCameraFrame } from '@cssearth/objects';
+
 import { createPreparedCamera } from './prepared-camera.js';
 import { createCameraOrientation } from './camera-orientation.js';
 export interface PerspectiveWorldContext {
@@ -32,7 +34,6 @@ export interface PerspectiveDollyOptions { sunDirection?: Vector3 | null; camera
   isCameraMoving?: () => boolean; }
 export type PerspectiveDolly = ReturnType<typeof createPerspectiveDolly>;
 export type PerspectivePublication = ReturnType<ReturnType<PerspectiveDolly['prepare']>['commit']>;
-
 
 // A true perspective camera for the shared orbit: the eye sits at the sky's
 // vanishing point (the camera root's CSS perspective, re-read whenever the
@@ -99,7 +100,6 @@ function assertPerspectiveCameraPlan(plan: CameraPlan): asserts plan is Perspect
       !Number.isFinite(plan.sceneScale)) {
     throw new TypeError("Perspective camera contract drifted.");
   }
-
 
 }
 

@@ -1,4 +1,5 @@
-import { requireControls } from '@cssearth/renderer';
+import { requireControls } from '@cssearth/objects';
+
 import { isRecord } from '@cssearth/core';
 import { sourceUrl } from '@cssearth/objects/sources';
 import type { Props, ObjectTitle, PreparedTitle, Fact, Chart, Gallery, Dataset, DatasetControl, DatasetReaderText } from './object-shell-types.js';

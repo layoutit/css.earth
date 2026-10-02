@@ -1,6 +1,8 @@
+import { type SurfaceFeaturePolicy } from '@cssearth/objects';
+
 import { labelRectsOverlap } from './screen-label-layout.js';
 import type { LabelScreenRect } from './screen-label-layout.js';
-import type { SurfaceFeatureKind, SurfaceFeaturePolicy, SurfaceFeatureOutline } from './surface-feature-types.js';
+import type { SurfaceFeatureKind, SurfaceFeatureOutline } from './surface-feature-types.js';
 
 /** Screen offset of a point label's text from its anchor dot, in CSS pixels. */
 export const POINT_LABEL_GAP_PX = 8;

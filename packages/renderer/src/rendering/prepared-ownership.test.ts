@@ -1,8 +1,11 @@
+import { type PreparedAssets } from '@cssearth/objects';
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
+
 import { createPreparedImageStore, type PreparedImage } from "./prepared-image-store.js";
-import { createPreparedResidency, type PreparedAssets } from "./prepared-residency.js";
+import { createPreparedResidency } from './prepared-residency.js';
+
 import { mountPreparedPresentation } from "./prepared-presentation.js";
 
 class PresentationElement {

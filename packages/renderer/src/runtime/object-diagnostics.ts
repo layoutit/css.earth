@@ -1,5 +1,8 @@
+import { type ObjectRuntimeDefinition } from '@cssearth/objects';
+
 import { createRetainedGeometrySnapshot } from '../rendering/retained-leaf-pool.js';
-import type { ObjectRuntimeDefinition, ObjectRuntimeView } from "./object-runtime-types.js";
+import type { ObjectRuntimeView } from './object-runtime-types.js';
+
 import type { SurfaceFeatureLayerRuntime } from "../labels/surface-feature-types.js";
 import type { ObjectSelection } from "./object-contract.js";
 import type { SceneLifetime } from "@cssearth/engine";

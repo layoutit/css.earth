@@ -1,4 +1,4 @@
-import type { PreparedViewBinding } from './prepared-presentation.js';
+import { type LeafBoxComponent, type PreparedLeafBox, type PreparedViewBinding } from '@cssearth/objects';
 
 /**
  * Leaf boxes written from their prepared records (packages/bake/src/presentation/leaf-box-records.ts).
@@ -12,15 +12,6 @@ import type { PreparedViewBinding } from './prepared-presentation.js';
 export const LEAF_BOX_STEP = '--silhouette-step';
 export const SEAM_OUTSET = '--surface-seam-outset';
 
-export type LeafBoxComponent = number | string;
-export interface PreparedLeafBox {
-  /** Absent on a seam-only leaf, whose box factor is always 1. */
-  readonly node: number; readonly density?: number;
-  readonly box?: readonly [number, number]; readonly atlas?: true;
-  readonly backgroundSize?: readonly [LeafBoxComponent, LeafBoxComponent];
-  readonly backgroundPosition?: readonly [LeafBoxComponent, LeafBoxComponent];
-  readonly matrix: string; readonly seam?: readonly [number, number];
-}
 type StepBinding = Extract<PreparedViewBinding, { kind: 'silhouette-step-property' }>;
 
 const format = (value: number) => String(Math.round(value * 1e6) / 1e6);

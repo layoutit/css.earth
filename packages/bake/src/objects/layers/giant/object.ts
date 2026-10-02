@@ -1,3 +1,5 @@
+import { OBJECT_RUNTIME_SCHEMA, parseAuthoredObjectDescriptor } from '@cssearth/objects';
+
 import { readAuthoredSources } from '../../sources/index.ts';
 import { parse } from '@cssearth/core/schema';
 import { bandedGeometryRecipe } from './geometry-contract.ts';
@@ -16,7 +18,7 @@ import { createSourceManifest } from '@cssearth/objects/node';
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
 import { mkdir, readFile, writeFile, realpath } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
-import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
+
 import { withFocusedCamera } from '../../scene/index.ts';
 import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
@@ -24,7 +26,6 @@ import { requirePreparedPresentation } from '../../../presentation/index.ts';
 import { prepareEllipsoidMaterials } from './ellipsoid-materials.ts';
 import { prepareLayeredSurfacePresentation } from './layered-surface-presentation.ts';
 import { prepareObservedPolarSurfaces, polarImageProjection } from './observed-polar.ts';
-
 
 const readJson=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
 const writeJson=(path:string,value:unknown)=>writeFile(path,`${JSON.stringify(value)}\n`);
@@ -104,7 +105,7 @@ export async function prepareLayeredGiantObject({objectDirectory,publicDirectory
   const rawPresentation=await (normalizedDisc?prepareNormalizedDiscPresentation:prepareLayeredSurfacePresentation)({config:presentationConfig,geometryConfig,geometry,observationConfig,materialConfig,sky:celestial.sky,sun:celestial.sun});
   const presentation=withFocusedCamera(rawPresentation,celestial.sky);
   requirePreparedPresentation(presentation,{controls:content.controls});
-  const definition={...presentation,schema:'cssearth-object-runtime@5',id:descriptor.id,controls:content.controls};
+  const definition={...presentation,schema:OBJECT_RUNTIME_SCHEMA,id:descriptor.id,controls:content.controls};
   const assetIdentity=<T extends {data?:Uint8Array;filename:string}>({data,...asset}:T)=>({...asset,url:`/scenes/${descriptor.id}/${asset.filename}`});
   const raster={schema:'cssearth-prepared-layered-raster@1',observations:observed.assets.map(assetIdentity),radial:radial.assets.map(assetIdentity),materials:material.assets.map(assetIdentity)};
   const scene={schema:'cssearth-prepared-layered-scene@1',...geometry};

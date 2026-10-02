@@ -1,5 +1,7 @@
+import { OBJECT_RUNTIME_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
+
 // Entry script: node site/build/prepare/prepare-object-json.mts [<object-id>...] [--keep-bindings].
-import {parseObjectDescriptor} from '@cssearth/objects';
+
 import {requireObjectRuntimeDefinition, pinPreparedObject} from '@cssearth/bake/contract';
 import {requireRecord,requireString,isRecord,hasErrorCode} from '@cssearth/core';
 import type {CheckedObjectRuntimeDefinition} from '@cssearth/bake/contract';
@@ -50,7 +52,7 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
   projectRoot: string; objectDirectory: string; preparedDirectory: string; descriptorPath: string;
 }, options?: BindingOptions) {
   let definition:RecompiledPresentation<CheckedObjectRuntimeDefinition>=requireObjectRuntimeDefinition(definitionValue);
-  if (!SCENE_OBJECTS.some(object => object.id === id) || definition.id !== id || definition.schema !== 'cssearth-object-runtime@5') {
+  if (!SCENE_OBJECTS.some(object => object.id === id) || definition.id !== id || definition.schema !== OBJECT_RUNTIME_SCHEMA) {
     throw new TypeError('Prepared object identity does not match the application registry.');
   }
   const { projectRoot, objectDirectory, preparedDirectory } = target;
@@ -91,7 +93,7 @@ export async function updateObjectJsonForPresentation(target:string|URL, present
   const id = match[1];
   try { await access(resolve(root, 'src/objects', id, 'object.json')); }
   catch (error) { if (hasErrorCode(error,'ENOENT')) return null; throw error; }
-  return writeObjectJson(id, { ...requireRecord(presentation), schema: 'cssearth-object-runtime@5', id, controls });
+  return writeObjectJson(id, { ...requireRecord(presentation), schema: OBJECT_RUNTIME_SCHEMA, id, controls });
 }
 
 export async function prepareObjectJson(ids?:readonly string[]|null, options?:BindingOptions) {

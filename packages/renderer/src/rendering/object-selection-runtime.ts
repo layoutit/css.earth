@@ -1,7 +1,11 @@
+import { type ObjectControls, type PreparedPresentationDefinition } from '@cssearth/objects';
+
 import type { CameraMotionSignal } from '../navigation/camera-motion-signal.js';
-import type { ObjectControls, ObjectSelection, ObjectAction } from "../runtime/object-contract.js";
+import type { ObjectSelection, ObjectAction } from '../runtime/object-contract.js';
+
 import type { SceneLifetime } from "@cssearth/engine";
-import type { PreparedPresentationDefinition, PreparedPresentationPlan, PreparedView, mountPreparedPresentation } from "./prepared-presentation.js";
+import type { PreparedPresentationPlan, PreparedView, mountPreparedPresentation } from './prepared-presentation.js';
+
 import type { createPreparedResidency, PreparedResidencyTicket } from "./prepared-residency.js";
 /** How a committed selection was requested: its kind, and whether it may move the camera. */
 export interface SelectionIntent { readonly kind: "initial" | "selection" | "frame"; readonly frameCamera: boolean; }

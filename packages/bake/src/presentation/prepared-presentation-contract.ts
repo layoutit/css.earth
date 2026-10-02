@@ -1,17 +1,10 @@
-import { requireTextureBindings } from '@cssearth/renderer/validation/texture-bindings.ts';
-import { requireTextureLevels, requireTexturePlacements } from '@cssearth/renderer/validation/prepared-texture-levels.ts';
+import { requireTextureBindings, requireTextureLevels, requireTexturePlacements, type ObjectRuntimeDefinition, type PreparedWrite, type PreparedAssets, type EllipsoidProjectionPlan, type PreparedMaterialAddress, type PreparedMaterialFrameMapping, type PreparedMaterialTrack, type PreparedMaterialSelection, type PreparedMaterialBank, type PreparedVariant, type PreparedPresentationDefinition, type PreparedSelectionNavigation, type PreparedDepthOrder, requireObjectControls, requirePreparedData, requireControls } from '@cssearth/objects';
+
 import { isArray } from '@cssearth/core';
-import type { ObjectControls } from "@cssearth/renderer/runtime/object-contract.ts";
-import type { ObjectRuntimeDefinition } from "@cssearth/renderer/runtime/object-runtime-types.ts";
-import type { PreparedWrite } from "@cssearth/renderer/rendering/prepared-presentation.ts";
-import type { PreparedAssets } from "@cssearth/renderer/rendering/prepared-residency.ts";
+
 import type { PreparedCubicSkyPlan } from "./cubic-sky-contract.ts";
 import type { PreparedDirectionalSunPlan } from "./directional-sun-contract.ts";
-import type { EllipsoidProjectionPlan } from '@cssearth/renderer/prepared-data/prepared-ellipsoid-projection.ts';
-import type { PreparedMaterialAddress, PreparedMaterialFrameMapping } from "@cssearth/renderer/rendering/prepared-material.ts";
-import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialBank } from "@cssearth/renderer/rendering/prepared-material.ts";
-import type { PreparedVariant, PreparedPresentationDefinition, PreparedSelectionNavigation } from "@cssearth/renderer/rendering/prepared-presentation.ts";
-import type { PreparedDepthOrder } from "@cssearth/renderer/rendering/prepared-depth-partitions.ts";
+
 type PreparedContractRotation = {
   reference: "prepared" | "initial"; baseDegrees: number; zeroAtPole: boolean;
   onlyWhenEnabled?: boolean; publishWithAddress?: boolean; systemTransform?: string; polePolicy?: "azimuth";
@@ -36,15 +29,14 @@ export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema
   animations: readonly (Omit<PreparedPresentationDefinition["animations"][number], "keyframes"> & { keyframes: { offset: number; transform: string }[] })[];
   destinations?: { catalog: { url: string; bytes: number; count: number; sourcePage?: string; license?: string; snapshotDate?: string }; defaultDataset: string; statuses: { detail: string; overview: string } };
 };
-import { requireObjectControls } from "@cssearth/renderer/runtime/shell-contract.ts";
+
 import { validatePreparedCubicSky } from "./cubic-sky-contract.ts";
 import { validateDirectionalSunPlan } from "./directional-sun-contract.ts";
 
 import { PREPARED_PRESENTATION_SCHEMA } from "./prepared-schema.ts";
-export { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA } from "./prepared-schema.ts";
+export { PREPARED_PRESENTATION_SCHEMA} from "./prepared-schema.ts";
 const tags = new Set(["div", "span", "s", "b", "u"]);
 function fail(message: string): never { throw new TypeError(`Prepared presentation: ${message}.`); }
-const scalar = (value: unknown) => value === null || ["string", "boolean"].includes(typeof value) || typeof value === "number" && Number.isFinite(value);
 function string(value: unknown, label: string): asserts value is string { if (typeof value !== "string" || !value.length) fail(`${label} must be a nonempty string`); }
 function finite(value: unknown, label: string): asserts value is number { if (!Number.isFinite(value)) fail(`${label} must be finite`); }
 const integer = (value: unknown, label: string, minimum = 0) => { if (typeof value !== "number" || !Number.isSafeInteger(value) || value < minimum) fail(`${label} must be an integer at least ${minimum}`); };
@@ -56,26 +48,10 @@ function record(value: unknown, label: string, fields: readonly string[]) {
 function array<T>(value: readonly T[] | undefined, label: string): readonly T[] { if (!isArray(value)) fail(`${label} must be an array`); return value!; }
 function unique(values: readonly unknown[], label: string) { if (new Set(values).size !== values.length) fail(`${label} has duplicate identities`); }
 
-// This is also used before serialization. Getters, cycles, symbols and callable
-// payloads are rejected before accessing values; JSON coercion is not validation.
-export function requirePreparedData<T>(value: T, label = "data", seen = new Set<object>()) {
-  if (scalar(value)) return value;
-  if (!value || typeof value !== "object" || seen.has(value) ||
-      ![Object.prototype, Array.prototype].includes(Object.getPrototypeOf(value))) fail(`${label} must contain only acyclic JSON data`);
-  if (Object.getOwnPropertySymbols(value).length) fail(`${label} cannot contain symbols`);
-  seen.add(value);
-  for (const [key, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(value))) {
-    if (isArray(value) && key === "length") continue;
-    if (!descriptor.enumerable || !Object.hasOwn(descriptor, "value")) fail(`${label}.${key} cannot be executable`);
-    requirePreparedData(descriptor.value, `${label}.${key}`, seen);
-  }
-  seen.delete(value);
-  return value;
-}
-
 export function requirePreparedPresentation(input: unknown, options: { controls: unknown; assets?: PreparedAssets }): PreparedPresentationContract {
   // The candidate is exposed only after all structural and referential checks below succeed.
   const plan = input as PreparedPresentationContract;
+  requireControls(options.controls);
   const controls = requireObjectControls(options.controls);
   const assets = options.assets ?? plan?.assets;
   requirePreparedData(plan);

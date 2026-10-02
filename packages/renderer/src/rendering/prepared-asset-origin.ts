@@ -1,14 +1,9 @@
+import { type PreparedAssetOrigin } from '@cssearth/objects';
+
 /** Runtime resolution of a prepared `/scenes/<id>/<file>` address to a published
  * `<origin>/runtime-assets/<sha256>/<file>` URL, mirroring `paging/city-index.ts`'s
  * `new URL(ref.url, plan.geometryOrigin)`: prepared data keeps its `/scenes/` address
  * unchanged, and only the value handed to a network read or a CSS `url()` is resolved. */
-export interface PreparedAssetOrigin {
-  readonly origin: string;
-  /** The hashes a page's first view reads. A hash is 64 characters that do not compress, so the rest stay out. */
-  readonly assets?: Readonly<Record<string, string>>;
-  /** Same-origin directory holding every other hash, one JSON per resource group (`preparedAssetGroupFile`). */
-  readonly groups?: string;
-}
 
 const INDEX_SEGMENT = /:\d+(?=:|$)/u;
 

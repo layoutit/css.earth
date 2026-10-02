@@ -1,8 +1,10 @@
+import { parseObjectDescriptor, type ObjectDescriptor, deferredDatasetIds, parsePreparedObjectRuntime, requireAssets, requireControls, splitPreparedDatasetTables } from '@cssearth/objects';
+
 import { readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseObjectDescriptor, type ObjectDescriptor } from '@cssearth/objects';
+
 import { preparedObjectText, preparedObjectTransport, preparedPageData } from '@cssearth/objects/node';
-import { deferredDatasetIds, parsePreparedObjectRuntime, requireAssets, requireControls, splitPreparedDatasetTables } from '@cssearth/renderer';
+
 import { isRecord } from '@cssearth/core';
 import { resolveSceneAddressesDeep } from './asset-origin.mts';
 
@@ -12,7 +14,7 @@ const recent = new Map<string, Promise<PreparedTransports>>(), RECENT = 4;
 
 /** A scene body's transports, built from its restored runtime when read; no copy is kept on disk (prepared-transport.ts).
  * A body with one dataset is served as its runtime. A body with several carries its default dataset's tables, and each
- * other dataset's tables are a transport of their own (dataset-tables.ts in `@cssearth/renderer`). */
+ * other dataset's tables are a transport of their own (dataset-tables.ts in `@cssearth/objects`). */
 async function preparedTransports(id: string, root: string): Promise<PreparedTransports> {
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid object page identity.');
   // A rebake during development changes the runtime under the same id.

@@ -1,7 +1,8 @@
+import { type CameraPlan } from '@cssearth/objects';
+
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import type { RuntimePolicy } from '@cssearth/renderer/navigation/runtime-policy.ts';
 import { createRetainedCubicSkyOrbit, type OrbitServices, type RetainedCubicSkyOrbit, type RetainedOrbitOptions } from '@cssearth/renderer/platform/object-orbit';
-import type { CameraPlan } from '@cssearth/renderer/navigation/types.ts';
 
 type Listener = (event: PointerEvent) => void;
 type DragOptions = Parameters<NonNullable<OrbitServices["createUnboundedMatrixDragControls"]>>[0];
