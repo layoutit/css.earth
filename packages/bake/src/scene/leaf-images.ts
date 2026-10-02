@@ -1,5 +1,5 @@
 import type { RasterRecipe } from '../raster/index.ts';
-import { RASTER_DENSITY, RASTER_LEVEL_FACTORS, rasterPageName, rasterPagePlan } from '../raster/index.ts';
+import { RASTER_DENSITY, rasterPageName, rasterPagePlan } from '../raster/index.ts';
 import type { GeometryProfile } from './profile.ts';
 import type { LeafImagePixels } from './projector.ts';
 
@@ -35,13 +35,13 @@ function urls(objectId: string, source: Record<string, unknown>, fields: readonl
 export function leafImageCandidates({ objectId, profile, raster, datasets, interior }: LeafImageSources): ReadonlyMap<string, readonly string[]> {
   const controls = record(objectId, datasets, 'prepared datasets').controls;
   if (!Array.isArray(controls) || !controls.length) throw new TypeError(`${objectId}: prepared datasets.controls must list the datasets.`);
-  const pages = rasterPagePlan(raster, RASTER_DENSITY), last = RASTER_LEVEL_FACTORS.length - 1;
+  const pages = rasterPagePlan(raster, RASTER_DENSITY);
   const surfaceFiles = (url: string) => {
     if (!pages) return [url];
     const cut = url.lastIndexOf('/') + 1, name = url.slice(cut), surface = pages.surfaces.find(entry => entry.name === name);
     if (!surface) throw new TypeError(`${objectId}: leaf image ${url} is not a paged surface of this body (${pages.surfaces.map(entry => entry.name).join(', ')}).`);
-    return Array.from({ length: pages.pageCount }, (_, page) => RASTER_LEVEL_FACTORS.map((factor, level) =>
-      url.slice(0, cut) + rasterPageName(name, page, level === last ? undefined : surface.width / factor))).flat();
+    return Array.from({ length: pages.pageCount }, (_, page) => pages.reductions.map(factor =>
+      url.slice(0, cut) + rasterPageName(name, page, factor === 1 ? undefined : surface.width / factor))).flat();
   };
   const candidates = new Map<string, Set<string>>();
   const add = (key: string, images: readonly string[]) => {

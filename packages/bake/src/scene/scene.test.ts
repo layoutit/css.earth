@@ -7,7 +7,7 @@ import { loadLimbProfile } from '../photometry/index.ts';
 import { prepareGeometryScene, parseGeometryProfile, leafImageCandidates, widestLeafImages } from './geometry-scene.ts';
 import type { GeometryProfile, GeometrySceneAssets, LeafImagePixels, SolarSceneSource } from './geometry-scene.ts';
 import { prepareLeafSeamOutset, prepareSeamOutsetSteps } from './seam-outset.ts';
-import { parseRasterRecipe, outputName, RASTER_DENSITY, packedRasterSize, rasterPageName } from '../raster/index.ts';
+import { parseRasterRecipe, outputName, RASTER_DENSITY, packedRasterSize, rasterPageName, rasterPagePlan } from '../raster/index.ts';
 import type { RasterRecipe } from '../raster/index.ts';
 import { TEXELS_PER_CSS_PIXEL } from './projective-surface-raster.ts';
 import { prepareComposite } from '../presentation/composite.ts';
@@ -93,7 +93,9 @@ for(const [id,direction,fixedOverlap] of fixtures){
   const {surface,projection}=parseGeometryProfile(await readJson(`src/objects/${id}/source/preparation/geometry.json`));
   const result=await prepareAuthored(id,direction),gutter=projection.rasterGutter;
   const cellWidth=surface.surface.width/surface.longitudeSegments,cellHeight=surface.surfaceLatitudeHeight/surface.latitudeSegments;
-  const packedWidth=surface.surface.width+2*gutter,packedHeight=surface.latitudeSegments*(cellHeight+2*gutter);
+  // A paged body's leaf samples its page, which holds `bandsPerPage` of the bands.
+  const rows=rasterPagePlan(parseRasterRecipe(await readJson(`src/objects/${id}/source/preparation/raster.json`)),RASTER_DENSITY)?.bandsPerPage??surface.latitudeSegments;
+  const packedWidth=surface.surface.width+2*gutter,packedHeight=rows*(cellHeight+2*gutter);
   const polar=(leaf:object)=>Boolean(('polar' in leaf&&leaf.polar)||('polarCap' in leaf&&leaf.polarCap));
   const bands=('bodyLeaves' in result?result.bodyLeaves:result.body.leaves).filter(leaf=>!polar(leaf));
   bands.forEach((leaf,index)=>{
@@ -102,7 +104,7 @@ for(const [id,direction,fixedOverlap] of fixtures){
    const [x=NaN,y=NaN]=position.split(' ').map(parseFloat),[width=NaN,height=NaN]=(style.get('background-size')??'').split(' ').map(parseFloat);
    // The matched overscan is drawn around the exact cell, which starts one gutter into its packed band.
    const cellX=gutter+index%surface.longitudeSegments*cellWidth;
-   const cellY=(surface.latitudeSegments-2-Math.floor(index/surface.longitudeSegments))*(cellHeight+2*gutter)+gutter;
+   const cellY=(surface.latitudeSegments-2-Math.floor(index/surface.longitudeSegments))%rows*(cellHeight+2*gutter)+gutter;
    const sampledX=-x/width*packedWidth+projection.rasterOverscan,sampledY=-y/height*packedHeight+projection.rasterOverscan;
    assert.ok(Math.abs(sampledX-cellX)<0.01&&Math.abs(sampledY-cellY)<0.01,`${id} band leaf ${index} samples (${sampledX}, ${sampledY}), its cell starts at (${cellX}, ${cellY})`);
   });
@@ -157,7 +159,9 @@ test('a plain cap whose image holds fewer than two texels per CSS pixel shrinks 
  });
 });
 test('leaf image candidates cover every dataset, page, level and cutaway image a leaf can show',async()=>{
- const venus=parseGeometryProfile(await readJson('src/objects/venus/source/preparation/geometry.json')),venusRaster=parseRasterRecipe(await readJson('src/objects/venus/source/preparation/raster.json'));
+ const venus=parseGeometryProfile(await readJson('src/objects/venus/source/preparation/geometry.json')),venusPaged=parseRasterRecipe(await readJson('src/objects/venus/source/preparation/raster.json'));
+ // Venus's radar is drawn at four times the scale, which pages the body; at one scale it publishes whole atlases.
+ const venusRaster={...venusPaged,surfaces:venusPaged.surfaces.map(({resolutionScale:_scale,...surface})=>surface)};
  const dataset=(id:string,extra:Record<string,unknown>={})=>({id,surfaceUrl:`/scenes/venus/venus-${id}@2x.webp`,surface2xUrl:`/scenes/venus/venus-${id}@2x.webp`,
   polesUrl:`/scenes/venus/venus-poles-${id}@2x.webp`,poles2xUrl:`/scenes/venus/venus-poles-${id}@2x.webp`,...extra});
  // An interior dataset draws the cutaway, and a dataset that borrows another dataset's surface draws that dataset's: neither adds images.
@@ -179,7 +183,8 @@ test('leaf image candidates cover every dataset, page, level and cutaway image a
  const mercury={...parseGeometryProfile(await readJson('src/objects/mercury/source/preparation/geometry.json')),cutaway:{} as never},mercuryRaster=parseRasterRecipe(await readJson('src/objects/mercury/source/preparation/raster.json'));
  const interior=Object.fromEntries(['outerSurface','outerSurfaceUnlit','outerPoles','outerPolesUnlit','core','corePoles','section'].map(name=>[`${name}Url`,`/scenes/mercury/${name}.webp`]));
  const cutaway=leafImageCandidates({objectId:'mercury',profile:mercury,raster:mercuryRaster,interior,datasets:{controls:[{id:'normal',surfaceUrl:mercury.surface.surface.url,polesUrl:mercury.surface.poles.url}]}});
- assert.deepEqual(cutaway.get(mercury.surface.surface.url),[mercury.surface.surface.url,'/scenes/mercury/outerSurface.webp','/scenes/mercury/outerSurfaceUnlit.webp']);
+ // Mercury is one page, published at three reductions and whole.
+ assert.deepEqual(cutaway.get(mercury.surface.surface.url),[...[520,1040,2080,undefined].map(width=>`/scenes/mercury/${rasterPageName('mercury-surface-normal@2x.webp',0,width)}`),'/scenes/mercury/outerSurface.webp','/scenes/mercury/outerSurfaceUnlit.webp']);
  assert.deepEqual(cutaway.get('/scenes/mercury/outerPoles.webp'),['/scenes/mercury/outerPoles.webp','/scenes/mercury/outerPolesUnlit.webp']);
  assert.deepEqual(['core','corePoles','section'].map(name=>cutaway.get(`/scenes/mercury/${name}.webp`)),['core','corePoles','section'].map(name=>[`/scenes/mercury/${name}.webp`]));
  const {coreUrl:_core,...coreless}=interior;

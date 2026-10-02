@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "mars-billboard.webp",
-      "bytes": 11678,
-      "sha256": "516c1b72c3c61af887d910a17f386065247684e80dfd4a3fa9438a97e4859bdd"
-    },
-    {
-      "location": "public",
       "filename": "mars-dataset-albedo.webp",
       "bytes": 3548,
       "sha256": "ecea8754b59d5e286994b4f20f789a8dab409503dbf96aed04604074f64ce1c5"
@@ -363,9 +357,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-albedo-page-0-level-1040.webp",
+      "bytes": 807834,
+      "sha256": "4da4eae1a6241cec17102cc19e68d8739b6b552903994735d9229b4e8d5cd2f3"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-albedo-page-0-level-2080.webp",
+      "bytes": 2708830,
+      "sha256": "a9a0aafa870a63ee0f11c4e768d36458a54273f900d85936f52801104f2fc2fe"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-albedo-page-0-level-520.webp",
+      "bytes": 239062,
+      "sha256": "0efc4939fea1196c832efdf0c8b2a7e0740b6e5b8bd79dc4475c47ce078c6b90"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-albedo-page-0.webp",
+      "bytes": 6075284,
+      "sha256": "9dbb42ee8016b5813d0118057eb350ee7af1cef4a5f283b898c3ca128676d49b"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-albedo@2x.webp",
       "bytes": 6075284,
       "sha256": "9dbb42ee8016b5813d0118057eb350ee7af1cef4a5f283b898c3ca128676d49b"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-alluvial-fans-page-0-level-1040.webp",
+      "bytes": 308088,
+      "sha256": "e7c10b4e307dfbaf2475c998e277f4e1f5104bb4ccc31f06f6a9afb0eda4000b"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-alluvial-fans-page-0-level-2080.webp",
+      "bytes": 1151526,
+      "sha256": "8cc537ca26b37a45ce9b8550f1bd3ebc8d5270b14a99d6e75a21c5d582b8a61c"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-alluvial-fans-page-0-level-520.webp",
+      "bytes": 77760,
+      "sha256": "42aa9f9652750db29036dd271f1852b319a09cf26b66b7dacb027f65c31dba0d"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-alluvial-fans-page-0.webp",
+      "bytes": 3207756,
+      "sha256": "83336073b815682766caec7cc5f40b868cabd8cdce0615361653afcd75597c86"
     },
     {
       "location": "public",
@@ -375,9 +417,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-aqueous-classes-page-0-level-1040.webp",
+      "bytes": 396946,
+      "sha256": "8da7de00193640264e54005fffa2a0df9c05121e11026831aa069751346567bb"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-aqueous-classes-page-0-level-2080.webp",
+      "bytes": 1251372,
+      "sha256": "4749ff25c149f544ed2cca794bf1788d6e09b27e63fc89fec1b9720e6f701d48"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-aqueous-classes-page-0-level-520.webp",
+      "bytes": 95598,
+      "sha256": "3de014b8365f18d8bbeffaa08e7c9cb9af2d7a765db9c4eda449e247fce77f3e"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-aqueous-classes-page-0.webp",
+      "bytes": 3212488,
+      "sha256": "ec071d0d1f6c8bf26312ea4dc7e33342748e406da5e7700413d5c554b2858c32"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-aqueous-classes@2x.webp",
       "bytes": 3212488,
       "sha256": "ec071d0d1f6c8bf26312ea4dc7e33342748e406da5e7700413d5c554b2858c32"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-chloride-deposits-page-0-level-1040.webp",
+      "bytes": 352142,
+      "sha256": "a0892b49ef91f8aa41132aa151237acc0a59b04bb3b0400a97b610c0240cd123"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-chloride-deposits-page-0-level-2080.webp",
+      "bytes": 1168798,
+      "sha256": "66439e2b2ef1f10c5e5d6cddd811c822f8cf44d1b0a83b47081fe6b7f93c3d8a"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-chloride-deposits-page-0-level-520.webp",
+      "bytes": 81410,
+      "sha256": "442527736aa273722576c3bb2bfe733bb5bff2c08c06205e78d3622da12199e3"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-chloride-deposits-page-0.webp",
+      "bytes": 3208566,
+      "sha256": "b1753c7ebe39cf7e9b6d82864517be2f7ff503ae8231e73b2daf258ae8e60de4"
     },
     {
       "location": "public",
@@ -387,9 +477,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-chlorine-page-0-level-130.webp",
+      "bytes": 17830,
+      "sha256": "552dc5d17cbaa36dfaafe3b19b82464e8376869ab1a8045e35a84a38551b850c"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-chlorine-page-0-level-260.webp",
+      "bytes": 38882,
+      "sha256": "c23e920e1a48e4bfd144c7c516299cf611c3defdbf60cc66f4fe48754293680e"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-chlorine-page-0-level-520.webp",
+      "bytes": 63222,
+      "sha256": "be3c3545ebb28acf68d97b69c73deeebd0556c81494415c34a52587ef48be565"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-chlorine-page-0.webp",
+      "bytes": 7926,
+      "sha256": "da12e20c418420a93b500ccbe1e52fa69400d8620ffd3ee47b40deb7544a3851"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-chlorine@2x.webp",
       "bytes": 7926,
       "sha256": "da12e20c418420a93b500ccbe1e52fa69400d8620ffd3ee47b40deb7544a3851"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-crust-page-0-level-1040.webp",
+      "bytes": 20506,
+      "sha256": "6fb92e26a8a66d3692e2b8a5075ac0a4de7e10b200ad21836b0da83a8a7e5fff"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-crust-page-0-level-260.webp",
+      "bytes": 4412,
+      "sha256": "ccdc5a8f5241768010e51d7ef1351165d50559ff726ea51ad5ff50d8f9251615"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-crust-page-0-level-520.webp",
+      "bytes": 9026,
+      "sha256": "b276d9c86c4b7e26bd9ef81c6f59b1757d474b6db62c0a116ab492ff68911d09"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-crust-page-0.webp",
+      "bytes": 46302,
+      "sha256": "a42baafe346a90cf542f3d5692412777d5880a29dc9b8fef3125ac74f7efc8b8"
     },
     {
       "location": "public",
@@ -399,9 +537,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-dune-fields-page-0-level-1040.webp",
+      "bytes": 362210,
+      "sha256": "780680dc555522c890501d92eb72b26e254df67f3e8a15e70991b453282dcf1b"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-dune-fields-page-0-level-2080.webp",
+      "bytes": 1185102,
+      "sha256": "2cb3b149bd75dc0181e075012479e2c0c7498f136bda8970698e4790c2b6f0fb"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-dune-fields-page-0-level-520.webp",
+      "bytes": 86112,
+      "sha256": "2a4e9f458622becda8499e9b2caf682f868aa0b98d8f8501e4c61bf4446e899f"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-dune-fields-page-0.webp",
+      "bytes": 3209118,
+      "sha256": "a11659ff5d0228d44369b5bf1566e3849f138ef52d3c909f4851a746efa7dbd3"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-dune-fields@2x.webp",
       "bytes": 3209118,
       "sha256": "a11659ff5d0228d44369b5bf1566e3849f138ef52d3c909f4851a746efa7dbd3"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-dust-cover-page-0-level-1040.webp",
+      "bytes": 960050,
+      "sha256": "3b99bd9041228a35945596a9849f17e69dcba3ca7b99e36ecff82b27144b3402"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-dust-cover-page-0-level-2080.webp",
+      "bytes": 3766960,
+      "sha256": "f7d65f28ccdf969022ff084cdb6e89446997c39c39cb34775217bcc422e839bf"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-dust-cover-page-0-level-520.webp",
+      "bytes": 248512,
+      "sha256": "db406f3de31a1dcaa5ffe0fa9829857fffd18c3965b10986107f19773fa1cfe7"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-dust-cover-page-0.webp",
+      "bytes": 7485358,
+      "sha256": "3f902877f08b87bb017b88fdb3bd6dd7c2d8081503463435e64ea8b0a4a727c5"
     },
     {
       "location": "public",
@@ -411,9 +597,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-elevation-page-0-level-1040.webp",
+      "bytes": 410840,
+      "sha256": "a30f711b44473d280ff5621b285f04bdd625b432390f861ac328c2dca49c0f29"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-elevation-page-0-level-2080.webp",
+      "bytes": 1054294,
+      "sha256": "3e28a75e3adc21e13a78918c9ba63a0de7941bdb66812b6d5f43292765597dbc"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-elevation-page-0-level-520.webp",
+      "bytes": 134260,
+      "sha256": "7818fbe8962b2aeeab1bf523052993dc6f270ee2911a9c1fd75ced94fe525321"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-elevation-page-0.webp",
+      "bytes": 1120324,
+      "sha256": "5db9c8c3a99fd51d81b463a0e12adad307d068bfa0311e465e398612e16374dc"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-elevation@2x.webp",
       "bytes": 1120324,
       "sha256": "5db9c8c3a99fd51d81b463a0e12adad307d068bfa0311e465e398612e16374dc"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-geology-page-0-level-1040.webp",
+      "bytes": 495650,
+      "sha256": "129a1a014c1e257f4aa47dfa98b892a7fea41f0e5106ea70d8cc9c8643eb60f3"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-geology-page-0-level-2080.webp",
+      "bytes": 998520,
+      "sha256": "2186eb1266ab17a9c3c15ddba040b5f602ac120cbd3aebc907c6af18dcef775f"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-geology-page-0-level-520.webp",
+      "bytes": 218396,
+      "sha256": "22fbe0438d6693a3e2d263be55c6365977dbd8002e5bbb0bbe23fc7133bcbe42"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-geology-page-0.webp",
+      "bytes": 225836,
+      "sha256": "57ef027cee8438ba96befac4376df95b21d169579a9bd944944ba8dd6176bca2"
     },
     {
       "location": "public",
@@ -423,9 +657,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-glacial-valleys-page-0-level-1040.webp",
+      "bytes": 341284,
+      "sha256": "63ee0f6a7c264aa68b8c7af36fd037d26e5a61644b3d382769be3bf67e007f88"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-glacial-valleys-page-0-level-2080.webp",
+      "bytes": 1186908,
+      "sha256": "736eff2e6d26a91bc4ba127de1fd6848bac3e4ef8a472c190e003396e65571ee"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-glacial-valleys-page-0-level-520.webp",
+      "bytes": 77142,
+      "sha256": "5721a1b768d4c8d77cb7c8c9c17efaac7302e99edbbffcb2b24eca293ceed75e"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-glacial-valleys-page-0.webp",
+      "bytes": 2873386,
+      "sha256": "31d11e361d9f17b9af30ac8f2d1aa3ab2d572c9449d68bab2cd39477daa12d75"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-glacial-valleys@2x.webp",
       "bytes": 2873386,
       "sha256": "31d11e361d9f17b9af30ac8f2d1aa3ab2d572c9449d68bab2cd39477daa12d75"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-glacier-like-forms-page-0-level-1040.webp",
+      "bytes": 365326,
+      "sha256": "eef706be1b94912a8a548bf8b621a0805a1cfb60be53d6bfca0d92d2332a49e7"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-glacier-like-forms-page-0-level-2080.webp",
+      "bytes": 1186586,
+      "sha256": "47e8c5633036cf95747497124de514b48d414d47575725ecbc17f13fae6cbaa8"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-glacier-like-forms-page-0-level-520.webp",
+      "bytes": 85966,
+      "sha256": "0ddffc0d1466ad81ccb3d19b7c8ceb4c6f7e8f726b10e60fa4fab5d97b2f918f"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-glacier-like-forms-page-0.webp",
+      "bytes": 3208568,
+      "sha256": "2d78cd29e98e0a32339c07ea3b7448ad6d476253f1504dc475a4930bbefbc2bb"
     },
     {
       "location": "public",
@@ -435,9 +717,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-gullies-page-0-level-1040.webp",
+      "bytes": 418100,
+      "sha256": "6e4e5ef1b3fd0e5958cc6027fc5ac3ed69d6c69fbcbcced648a1dc44ea588e1d"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-gullies-page-0-level-2080.webp",
+      "bytes": 1287502,
+      "sha256": "cd90d74faed6666185463479b9e709efe470ab37c22f411aa7382708551a0d2d"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-gullies-page-0-level-520.webp",
+      "bytes": 101502,
+      "sha256": "2295113a2c546ea520b4f067185896e33cee942c2b052ad6ca7e4d027baba900"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-gullies-page-0.webp",
+      "bytes": 3214904,
+      "sha256": "e107aada4cd6ff574fcc4a0d022c1d2c1f8e80d7cde8bc1683ffb0069cc4fac0"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-gullies@2x.webp",
       "bytes": 3214904,
       "sha256": "e107aada4cd6ff574fcc4a0d022c1d2c1f8e80d7cde8bc1683ffb0069cc4fac0"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-hydrous-minerals-page-0-level-1040.webp",
+      "bytes": 375378,
+      "sha256": "ce5c51dcb898e54b6c505e331c1cc33c2120dee6fbd61f0e927ce4e2d01112e0"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-hydrous-minerals-page-0-level-2080.webp",
+      "bytes": 1200328,
+      "sha256": "e51c9940834b579c37945870d3597ee62c714654f219fa181639b870bfcc67ed"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-hydrous-minerals-page-0-level-520.webp",
+      "bytes": 88972,
+      "sha256": "878963429960c1899d13db31cc9b3fc74b26fa9216395fa3d0848cfdbf7f982c"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-hydrous-minerals-page-0.webp",
+      "bytes": 3210342,
+      "sha256": "0fd060ad5236f309fb484497e3477bba512b84cd5b64ae780aacd5a54b8d53b2"
     },
     {
       "location": "public",
@@ -447,9 +777,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-iron-page-0-level-130.webp",
+      "bytes": 17046,
+      "sha256": "88b852e34c919b3151be1ab8f078fa083b8794b82a475f67db46e9b68ef1a126"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-iron-page-0-level-260.webp",
+      "bytes": 35778,
+      "sha256": "9e450b821f108a348599b7896f8bcc8fbc762d11d657c2fe728a7ec5fbfbf228"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-iron-page-0-level-520.webp",
+      "bytes": 53786,
+      "sha256": "a41921b7f62cb4f895982c904b58ff5640677431c8340c2a7560b3cec7b5a54c"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-iron-page-0.webp",
+      "bytes": 7946,
+      "sha256": "a77f18720f833cb9ef73d2285d92c3fc0d5ba04d6f9ec4dd2102df3754b439e5"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-iron@2x.webp",
       "bytes": 7946,
       "sha256": "a77f18720f833cb9ef73d2285d92c3fc0d5ba04d6f9ec4dd2102df3754b439e5"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-magnetic-page-0-level-1040.webp",
+      "bytes": 18854,
+      "sha256": "1e402142ea139ac573e8b7848804b80d752b83f65d26b57b36d3d45d77f20b05"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-magnetic-page-0-level-260.webp",
+      "bytes": 2462,
+      "sha256": "b46e9f6eedd9d7a46b163d527fced68c6b92b55f40efa684379096f6db40f88e"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-magnetic-page-0-level-520.webp",
+      "bytes": 7594,
+      "sha256": "4cb1b10b6eab7f571026d7ffe374c9af94ac694c70e210d502d898d9bb7df65a"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-magnetic-page-0.webp",
+      "bytes": 48070,
+      "sha256": "05fb684b2bcb533807298055cc61b30584d77190fae3748a2964d00fc5d6de9c"
     },
     {
       "location": "public",
@@ -459,9 +837,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-normal-page-0-level-1040.webp",
+      "bytes": 138500,
+      "sha256": "61c093ac43b9981fa39ef768d5471f9605dbdd86de3d12e5c4d9ca1debf32098"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-normal-page-0-level-2080.webp",
+      "bytes": 571700,
+      "sha256": "b52b7b5d95970a81015feb84d71a5d629b9a8e91be439e564e809e8a1fdfa14d"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-normal-page-0-level-520.webp",
+      "bytes": 26090,
+      "sha256": "66d738f29fa78f3c5f12311edcad3edef4a49319e3be22fff583f28e049a7c61"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-normal-page-0.webp",
+      "bytes": 1940690,
+      "sha256": "5f05635714009ea037390557948fdbb8b6a0544df7c544564f65a491ff4903a4"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-normal@2x.webp",
       "bytes": 1940690,
       "sha256": "5f05635714009ea037390557948fdbb8b6a0544df7c544564f65a491ff4903a4"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-potassium-page-0-level-130.webp",
+      "bytes": 19244,
+      "sha256": "709668adcccb815c5dcbf52977bc424b38dd5ede84c6352513c362c7f1b64b69"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-potassium-page-0-level-260.webp",
+      "bytes": 39344,
+      "sha256": "c57da336a022930c41fe8224f5bc69a57c6111022884e27a90d65d601bae6355"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-potassium-page-0-level-520.webp",
+      "bytes": 56832,
+      "sha256": "b14e1d42fce3c86b49cb1885dbf5707f9939929229839fabdb20d57bd8813cce"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-potassium-page-0.webp",
+      "bytes": 5974,
+      "sha256": "1079ecf5d842ae8cae6425f8ba472513ef2b99dda69f11c0ecc47c14f5ab8a60"
     },
     {
       "location": "public",
@@ -471,9 +897,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-recent-activity-page-0-level-1040.webp",
+      "bytes": 359316,
+      "sha256": "67470dfd0f1e0b9b20fd125282f56c51f57f7386105601ad2422c8f7a1b43674"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-recent-activity-page-0-level-2080.webp",
+      "bytes": 1178058,
+      "sha256": "0356ef58d6ffda798b5d74f4979d73954b7b44e7d6d349e40b20ca5cf8410bfb"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-recent-activity-page-0-level-520.webp",
+      "bytes": 83274,
+      "sha256": "63b7fa77f7d0a8b0f2f238bbcae670c3a57ba3ee1c3a7c8aefba75bf636cebbd"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-recent-activity-page-0.webp",
+      "bytes": 3209032,
+      "sha256": "e30916146ca6377ef665068824c59a970a170ceb4ae554a2aef9e6c029f8abcd"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-recent-activity@2x.webp",
       "bytes": 3209032,
       "sha256": "e30916146ca6377ef665068824c59a970a170ceb4ae554a2aef9e6c029f8abcd"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-recessional-glfs-page-0-level-1040.webp",
+      "bytes": 351108,
+      "sha256": "bde96dd0191696e7b85ac2013517d73de9a19246c670f4264009f46a868119f0"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-recessional-glfs-page-0-level-2080.webp",
+      "bytes": 1165818,
+      "sha256": "96568d4bfeda975eb5e8e7765194404a6249d6f5d80c0439d4b86ea36aaf17ef"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-recessional-glfs-page-0-level-520.webp",
+      "bytes": 80922,
+      "sha256": "ba529f3c0bc6112478d39e6ceaac121c5825f1e23c811efe2652a428b227abe2"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-recessional-glfs-page-0.webp",
+      "bytes": 3207666,
+      "sha256": "20bedf18bc8c0febbe5741cfaafff742fd2046816580749c970db6ab28eaa812"
     },
     {
       "location": "public",
@@ -483,9 +957,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-silicon-page-0-level-130.webp",
+      "bytes": 18086,
+      "sha256": "7165396c721eff647effc27f09dd68e6098a2fe4f01747ba80a600b2146aaf0f"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-silicon-page-0-level-260.webp",
+      "bytes": 38302,
+      "sha256": "89186ed3dd4628bdedc75a2f0a4f1b1f0fc3d47bcdc5a91f3c5fed69e20e8368"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-silicon-page-0-level-520.webp",
+      "bytes": 60672,
+      "sha256": "782092ae2fec2c90fd69ddacfc24cf185d7ed07e527ff053b209df384f861e75"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-silicon-page-0.webp",
+      "bytes": 7218,
+      "sha256": "631aa181149be714ac97b793d7b663479dce6a28bef023055d51baa530b5d20d"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-silicon@2x.webp",
       "bytes": 7218,
       "sha256": "631aa181149be714ac97b793d7b663479dce6a28bef023055d51baa530b5d20d"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-thermal-inertia-page-0-level-1040.webp",
+      "bytes": 1167058,
+      "sha256": "18aa5823d097a3d17f93686306ed58a703073221e3b0906b75e308cb715b74ca"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-thermal-inertia-page-0-level-2080.webp",
+      "bytes": 4616222,
+      "sha256": "4a0d6be361581f9fc87298ad916fb9fd1359f7cde88a3031f10ee0d059ef7da0"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-thermal-inertia-page-0-level-520.webp",
+      "bytes": 289780,
+      "sha256": "f804c935325a843a163109ae5839647125e0f899f1b50c0e50728e7f307b8818"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-thermal-inertia-page-0.webp",
+      "bytes": 15459460,
+      "sha256": "4a0768441b88efda9bbb1c0d49d23fee5982300074b2c79844f7d8a59d1483ee"
     },
     {
       "location": "public",
@@ -495,9 +1017,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-thermal-page-0-level-1040.webp",
+      "bytes": 178022,
+      "sha256": "1a9622ec6703fad7cd89733804d0178a9fd46d7879f7285bf725aecc2cee5406"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-thermal-page-0-level-2080.webp",
+      "bytes": 836586,
+      "sha256": "7c83b360d86c7363a80b43e6f45a24012d9a241e48147ba7681675a1f3a16cac"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-thermal-page-0-level-520.webp",
+      "bytes": 24186,
+      "sha256": "4ada3cf7422d7e80df763caaf0f64c61ed7510fa11001d118337a2f2de01bb13"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-thermal-page-0.webp",
+      "bytes": 3750322,
+      "sha256": "d2c5da7d5f190f551e440aaa176ba4b8e301a215cdece65ba12cb00226128cc5"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-thermal@2x.webp",
       "bytes": 3750322,
       "sha256": "d2c5da7d5f190f551e440aaa176ba4b8e301a215cdece65ba12cb00226128cc5"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-thorium-page-0-level-130.webp",
+      "bytes": 23278,
+      "sha256": "30ed45fd1bd591e9b4b5779e4be1f961e2a0d7841c33c40b7533ceb6a2f40bf9"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-thorium-page-0-level-260.webp",
+      "bytes": 45736,
+      "sha256": "6a99c4e6ee332c2a0d8a36f5e99f3a358cfbada0608de25d4c72853cfc54c859"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-thorium-page-0-level-520.webp",
+      "bytes": 68492,
+      "sha256": "8ba4edb6d168eae2d3285ef36710e98c75fa86ae95a57cd0a5a7f95ea558872f"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-thorium-page-0.webp",
+      "bytes": 5998,
+      "sha256": "06e9d2d375fd470f39c52045498b19e524a166ac96ae55dc8151032356ee2ab6"
     },
     {
       "location": "public",
@@ -507,9 +1077,57 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-valley-networks-page-0-level-1040.webp",
+      "bytes": 454438,
+      "sha256": "96b255a8dd9a2b1b4a5dbd044125ce148ca0c4965d1b541604b10bfbae0e5926"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-valley-networks-page-0-level-2080.webp",
+      "bytes": 1532768,
+      "sha256": "911f17d897801dc83286bfb301bd28e95115ba8a09325dc946759a56ebb593e2"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-valley-networks-page-0-level-520.webp",
+      "bytes": 130856,
+      "sha256": "c0fa16596301ca89d343234df467260903b7397d3dcc464e74e5aa6ec9b5a03d"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-valley-networks-page-0.webp",
+      "bytes": 3254470,
+      "sha256": "29b5c5ce902c9a7369dacb066c630fb42e9d5f9f337abea6c3886ace341ed5f1"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-valley-networks@2x.webp",
       "bytes": 3254470,
       "sha256": "29b5c5ce902c9a7369dacb066c630fb42e9d5f9f337abea6c3886ace341ed5f1"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-water-equivalent-page-0-level-130.webp",
+      "bytes": 16984,
+      "sha256": "85f1257734e38ee4db422ad9fbd5e05b8deadff9092888b69fbcdf495e2cf5e2"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-water-equivalent-page-0-level-260.webp",
+      "bytes": 35266,
+      "sha256": "c66ad6a68aa2bc595e4367315247be9511d1b9f95a7a40bf758251965ed97c90"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-water-equivalent-page-0-level-520.webp",
+      "bytes": 53062,
+      "sha256": "9a3efc3663ca6fb01989eb36265a128fe807095dc5af4f1ad49797a436022801"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-water-equivalent-page-0.webp",
+      "bytes": 7950,
+      "sha256": "a67730edd26da17577b5cd3eebd8f46dd8c47ff5fd7518f272ed3de207231c3d"
     },
     {
       "location": "public",
@@ -532,14 +1150,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 9212,
-      "sha256": "b9aee88faa7c765b5ac674c18faf1d1972ccd8e169c1c1633fd2afa7563a6c50"
+      "bytes": 5237,
+      "sha256": "e1e3fda9b0b8efe88d37ba5dab11e9b70ac50eb4652c8f333fd982af0bb714e9"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 787,
-      "sha256": "b54411b49dd58c5025b20bd5eba9b1994d10784bfc56a9f0e546b1d5f808400c"
+      "bytes": 725,
+      "sha256": "1962dd7d65bd1168efa383473b6032b33999bd02e49c163135a91dbab7bae1dc"
     },
     {
       "location": "prepared",
@@ -568,8 +1186,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 2111,
-      "sha256": "811ac2d12e8284fd72b0e665911bf58cdbd066ea95133287cb1281637791b489"
+      "bytes": 2893,
+      "sha256": "849cf8db111d38c1267fe01e72d6bd26c649cfc8cf9dc86ce863df7c6c6867a9"
     },
     {
       "location": "prepared",
@@ -730,14 +1348,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 419860,
-      "sha256": "663c9c9dcb51df138e9f52feac81dcebc4371c91eb738d59296554a914d84bac"
+      "bytes": 447918,
+      "sha256": "ad8c1cf6db25598a39e38894e2f109b7120c0c985077c6cefbbf2c061581125b"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 390348,
-      "sha256": "dcaeacf46c80d162d98a5b7517524f1b3dcc26412881c627667ee15693e90b7e"
+      "bytes": 393599,
+      "sha256": "d3c0c4ebad2ffe8f5b45e16b416215d6ab59ea7d2fafc248c3cc2360ade4d276"
     },
     {
       "location": "prepared",
@@ -762,6 +1380,12 @@
       "filename": "world-navigation.json",
       "bytes": 1217,
       "sha256": "3524ba368f18215f01ec65d75a41594f2f0bc52c2d01613504c264094f716d89"
+    },
+    {
+      "location": "public",
+      "filename": "mars-billboard.webp",
+      "bytes": 11678,
+      "sha256": "516c1b72c3c61af887d910a17f386065247684e80dfd4a3fa9438a97e4859bdd"
     }
   ]
 }
