@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngc-6946",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Fireworks Galaxy (NGC 6946)",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 539993576760989250
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "NGC 6946",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 1593768111800,
+      "description": "A spiral galaxy 7.7 million parsecs away, seen nearly face-on through the stars of the Milky Way.",
+      "aliases": [
+        "PGC 65001",
+        "UGC 11597",
+        "Fireworks Galaxy"
+      ],
+      "order": 5152,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        7.420975680251965e+22,
+        -9.258613405010718e+22,
+        2.0680153338749433e+23
+      ],
+      "presentationToReference": [
+        0.9993460082334892,
+        0,
+        -0.03616014142382283,
+        -0.0331762811182422,
+        0.3977771559319137,
+        -0.9168820363546673,
+        -0.014383678213664057,
+        -0.9174820620691818,
+        -0.3975170129470281
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1741914763745126700,
+      "bodyRadiusM": 539993576760989250000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

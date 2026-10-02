@@ -1,0 +1,41 @@
+{
+  "id": "noirlab-noao-m101ubviha",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "M101; Pinwheel Galaxy",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "noao-m101ubviha"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://noirlab.edu/public/images/noao-m101ubviha/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://storage.noirlab.edu/media/archives/images/large/noao-m101ubviha.jpg",
+      "label": "Large JPEG, 7296 x 7353 px"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://noirlab.edu/public/images/noao-m101ubviha/",
+      "checkedOn": "2026-10-01",
+      "locator": "7296 x 7353 px; 31.65 x 31.81 arcmin; north 89.9 deg left of vertical; U, B, V, I and H-alpha with the Mosaic I camera on the NSF Mayall 4-meter telescope; page centre RA 14h03m52.27s, Dec +54 09 54.51, which the Large JPEG does not match: 41 Gaia DR3 stars put its centre at 210.8425645, +54.3516374, 2577 and 1010 px from there, at 0.2605 arcsec per pixel with north 90.05 deg left of vertical (the recipe's observation). Found in the NOIRLab image archive search for M101."
+    }
+  ],
+  "publisher": "NSF NOIRLab",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "T.A. Rector (University of Alaska Anchorage) and H. Schweiker (WIYN and NOIRLab/NSF/AURA)",
+      "scope": "Published source",
+      "evidence": "https://noirlab.edu/public/images/noao-m101ubviha/"
+    }
+  ]
+}

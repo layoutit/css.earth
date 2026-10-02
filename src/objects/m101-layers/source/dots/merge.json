@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "dots",
+  "published": true,
+  "meaning": "M101's catalogued objects as dots on its photograph's disc: hii regions, supernova remnants, planetary nebulae and old star clusters.",
+  "centreOnGalaxy": true,
+  "banks": [
+    {
+      "bank": "hodge-hii",
+      "withinPcOfCentre": 29200,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 29.2 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "vucetic-snr",
+      "withinPcOfCentre": 29200,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 29.2 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "feldmeier-pne",
+      "withinPcOfCentre": 29200,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 29.2 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "simanton-gc",
+      "withinPcOfCentre": 29200,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 29.2 kpc support radius (recipe.json)."
+    }
+  ],
+  "colourTowardWhite": 0.5,
+  "colourTowardWhiteBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), so both galaxies' dots read as the same tints of starlight.",
+  "colourGamma": 1.6,
+  "colourGammaBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), picked there from three renders over its backing."
+}

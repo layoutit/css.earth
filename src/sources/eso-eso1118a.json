@@ -1,0 +1,41 @@
+{
+  "id": "eso-eso1118a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Wide Field Imager view of a Milky Way look-alike, NGC 6744",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "eso1118a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1118a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/large/eso1118a.jpg",
+      "label": "Large JPEG, 5312 x 4472 px"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso1118a/",
+      "checkedOn": "2026-10-01",
+      "locator": "5312 x 4472 px; 21.07 x 17.74 arcmin; page centre RA 19 9 46.19, Dec -63 51 28.80; north 90.0 deg right of vertical; B, V, 665/12 and H-alpha with the Wide Field Imager on the MPG/ESO 2.2-metre telescope (the caption: blue, yellow-green, red light and the glow of hydrogen, shown as blue, green, orange and red). Measured on the Large JPEG by the brightness at the predicted places of 1,741 Gaia DR3 stars (G 16 to 18.5): centre 287.4409719, -63.8465870, 0.2380 arcsec per pixel, north 89.99 deg right of vertical (the recipe's observation); the score halves 8 px off. Found in the ESO image archive search for NGC 6744."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/eso1118a/"
+    }
+  ]
+}

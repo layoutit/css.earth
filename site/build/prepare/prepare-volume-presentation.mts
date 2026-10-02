@@ -210,7 +210,8 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
     await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
   }
   if (bytes === null) throw new Error(`Preview is missing: ${pin.path}`);
-  let pipeline = sharp(bytes, { limitInputPixels: 50000000 });
+  // M101's Mayall mosaic, the largest preview source, is 7296 x 7353 px (53.6 megapixels).
+  let pipeline = sharp(bytes, { limitInputPixels: 60000000 });
   if (pin.crop) pipeline = pipeline.extract(pin.crop);
   // The sidebar shows the preview 300 CSS px wide: keep 2x of that, in the decorative encoding.
   const result = await pipeline.resize({ width: 600, height: 600, fit: 'inside', withoutEnlargement: true }).webp(DECORATIVE_WEBP).toBuffer({ resolveWithObject: true });
