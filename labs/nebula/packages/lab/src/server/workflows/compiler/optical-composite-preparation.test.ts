@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import sharp from 'sharp';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
-import { validatePreparedCssVolume } from '@cssearth/objects';
+import { validatePreparedCssVolume, readRetainedEmissionField } from '@cssearth/objects';
 import { readObservationRecipe } from '../../../features/observations/recipe.ts';
 import { readGeometryPin } from '../geometry/registered-source.ts';
 import { bakeMasterVolumeSlices } from '@cssearth/bake/volume/node';
@@ -15,7 +15,6 @@ import { assertCompilerDatasetGeometry } from './bank-validation.ts';
 import { readCompilerRecipe, defaultCompilerControls } from '../../../features/compiler/model.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { createEmissionField } from '@cssearth/bake/volume';
-import { readRetainedEmissionField } from '@cssearth/objects';
 import { opticalCompositeSourcePins, restoreOpticalCompositeSources } from './optical-composite-inputs.ts';
 import { prepareOpticalComposite, prepareOpticalCompositeForResult, readOpticalCompositeRecipe } from './optical-composite-preparation.ts';
 

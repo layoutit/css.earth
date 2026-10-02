@@ -1,13 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createEmissionWindowSampler } from './emission-window.ts';
-import { type EmissionWindow } from '@cssearth/objects';
+import { readRetainedEmissionField, type EmissionWindow, type EmissionFieldModel, type EmissionVector3 } from '@cssearth/objects';
 import { createEmissionField, prepareEmissionComponent, projectEmissionComponent, samplePreparedEmissionComponent } from './emission.ts';
 
-import { readRetainedEmissionField } from '@cssearth/objects';
 
-import type { EmissionFieldModel } from '@cssearth/objects';
-import type { EmissionVector3 } from '@cssearth/objects';
 
 const window: EmissionWindow = { sourceId: 'optical', polygonArcsec: [[-5, -4], [-2, -1], [-5, 2], [-8, -1]],
   featherArcsec: .5, interpretation: 'Authored display footprint, not a physical edge.' };

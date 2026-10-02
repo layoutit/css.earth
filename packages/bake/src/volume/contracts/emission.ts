@@ -1,12 +1,7 @@
-import type { EmissionFieldModel } from '@cssearth/objects';
+import { type EmissionFieldModel, type RetainedPhotometricEnvelope, type JointParameters, type CompilerControls, type EmissionWindow, type EmissionVector3, type EmissionBounds, type SkyBounds } from '@cssearth/objects';
 
-import type { RetainedPhotometricEnvelope } from '@cssearth/objects';
-import type { JointParameters } from '@cssearth/objects';
-import type { CompilerControls } from '@cssearth/objects';
 
-import type { EmissionWindow } from '@cssearth/objects';
 
-import type { EmissionVector3, EmissionBounds, SkyBounds } from '@cssearth/objects';
 export interface EmissionFitInput {
   /** Linear integrated relative emission (dimensionless display optical depth), never calibrated flux. */
   target: Float32Array; width: number; height: number; bounds: SkyBounds;

@@ -1,10 +1,9 @@
-import { readCompactCompiler } from '@cssearth/objects';
+import { readCompactCompiler, readCompilerBakeResult, type CompilerBakeResult } from '@cssearth/objects';
 /** Accepted analytic emission and component colors: no source images, fitting, or baked pixels. */
 import assert from 'node:assert/strict';
 import { dirname } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { bakeCompiler, type CompilerBakeProgress, type CompilerBakeBackend, type CompiledVolumeArtifact } from '../compiler/bake.ts';
-import { readCompilerBakeResult, type CompilerBakeResult } from '@cssearth/objects';
 import { createPhotometricEmission } from '../../fields/photometric-emission.ts';
 
 import { pinned, type Pin } from './io.ts';

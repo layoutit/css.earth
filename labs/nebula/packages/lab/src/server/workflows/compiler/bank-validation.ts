@@ -1,13 +1,12 @@
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import sharp from 'sharp';
-import { validatePreparedCssVolume, type PreparedCssVolume, type CompilerBakeResult, type CompilerPin } from '@cssearth/objects';
+import { validatePreparedCssVolume, readPhotometricMgeRecipe, type PreparedCssVolume, type CompilerBakeResult, type CompilerPin } from '@cssearth/objects';
 import { readGeometryPin } from '../geometry/registered-source.ts';
 import { jointRecord, jointPath } from '../../../features/joint-fit/model.ts';
 import { readCompilerRecipe } from '../../../features/compiler/model.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { readDepthRecipe, verifyDepthEvidence } from './depth-model.ts';
 import { verifyPhotometricEvidence } from './photometric-prior.ts';
-import { readPhotometricMgeRecipe } from '@cssearth/objects';
 
 type BankIdentity = Pick<CompilerBakeResult, 'id' | 'volumeId' | 'frame' | 'fieldIdentity'>;
 const record = coreIsRecord;

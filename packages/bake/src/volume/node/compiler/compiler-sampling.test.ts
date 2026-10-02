@@ -5,11 +5,9 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gunzipSync } from 'node:zlib';
-import { type CompilerBakeResult, createRenderElementBudget, type RenderElementProfile } from '@cssearth/objects';
+import { createRenderElementBudget, readCompactCompiler, validateVolumeLayerSlices, type CompilerBakeResult, type RenderElementProfile, type VolumeSlices } from '@cssearth/objects';
 import { bakeCompiler, compilerSampling } from './bake.ts';
 
-import { readCompactCompiler } from '@cssearth/objects';
-import { validateVolumeLayerSlices, type VolumeSlices } from '@cssearth/objects';
 
 // Temporary checkouts the tests make, removed once the file's tests finish.
 const temporary: string[] = [];

@@ -1,13 +1,10 @@
-import { readSimulationEnvelopeRecord } from '@cssearth/objects';
+import { readSimulationEnvelopeRecord, type DensityVolumeFrame, type Bounds3, type Vector3, type ObservationMapping, type EmissionFieldModel } from '@cssearth/objects';
 import { isFiniteNumber as coreIsFiniteNumber, isRecord as coreIsRecord } from '@cssearth/core';
 /** Offline, verified sampling context of one saved simulation-guided finite emission model for catalogue star depths. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { type DensityVolumeFrame, type Bounds3, type Vector3 } from '@cssearth/objects';
-import type { ObservationMapping } from '@cssearth/objects';
 import { createEmissionField, createIntegratedSignalSampler } from '@cssearth/bake/volume';
-import { type EmissionFieldModel } from '@cssearth/objects';
 import { createEnvelopeSampler } from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
 import { parseLabModelJson } from '../../../resources/model-paths.ts';
 import { verifyFiniteMaterialArtifacts } from '../../../cli/commands/finite-density-material-artifacts.ts';

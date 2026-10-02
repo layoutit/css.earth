@@ -1,15 +1,12 @@
-import { COMPACT_COMPILER_SCHEMA } from '@cssearth/objects';
-import { readComponentMaterialReceipt } from '@cssearth/objects';
+import { COMPACT_COMPILER_SCHEMA, readComponentMaterialReceipt, validatePreparedCssVolume, readCompactCompiler } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Explicitly promote an already inspected compiler result to small, source-backed bake inputs. */
 import { readFile } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
-import { validatePreparedCssVolume } from '@cssearth/objects';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { localPath, pinned } from '../../../server/workflows/density/io.ts';
 import { writeAtomic } from '@cssearth/bake/volume/node';
 
-import { readCompactCompiler } from '@cssearth/objects';
 const record = coreIsRecord;
 export async function exportCompactCompiler(root: string, objectId: string) {
   if (!/^[a-z0-9][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid object identity.');

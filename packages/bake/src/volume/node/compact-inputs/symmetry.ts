@@ -1,7 +1,5 @@
-import { readCompactSymmetry, decodeCompactSymmetryField } from '@cssearth/objects';
+import { readCompactSymmetry, decodeCompactSymmetryField, DENSITY_VOLUME_FORMAT, type VolumeSlices, type DensityVolumeFrame, type CompilerPin } from '@cssearth/objects';
 import type { CompiledVolumeArtifact } from '../compiler/bake.ts';
-import type { VolumeSlices } from '@cssearth/objects';
-import { DENSITY_VOLUME_FORMAT, type DensityVolumeFrame, type CompilerPin } from '@cssearth/objects';
 /** Losslessly retained RGB emission voxels; runtime slice images remain disposable. */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve, dirname } from "node:path";

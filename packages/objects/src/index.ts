@@ -142,8 +142,8 @@ export type { EmissionComponent, EmissionFieldModel } from './volume/emission-fi
 export { readRetainedEmissionField } from './volume/retained-emission.js';
 export { readEmissionWindow } from './volume/emission-window.js';
 export type { EmissionWindow } from './volume/emission-window.js';
-export { validateEnvelopeSettings } from './volume/simulation-envelope.js';
-export type { SimulationEnvelopeSettings } from './volume/simulation-envelope.js';
+export { validateEnvelopeSettings, SIMULATION_ENVELOPE_SCHEMA, readSimulationEnvelopeRecord } from './volume/simulation-envelope.js';
+export type { SimulationEnvelopeSettings, SimulationEnvelopeRecord } from './volume/simulation-envelope.js';
 export { PHOTOMETRIC_MGE_SCHEMA, readPhotometricMgeRecipe } from './volume/photometric-mge.js';
 export type { PhotometricGaussian, PhotometricMgeRecipe } from './volume/photometric-mge.js';
 export { PHOTOMETRIC_ENVELOPE_SCHEMA, readPhotometricEnvelope, readEnvelopeColors } from './volume/photometric-emission.js';
@@ -159,7 +159,5 @@ export { COMPACT_SYMMETRY_SCHEMA, readCompactSymmetry, decodeCompactSymmetryFiel
 export { COMPACT_SAMPLED_SCHEMA, readCompactSampled, decodeCompactPointColors, encodeCompactPointColors } from './volume/compact-sampled.js';
 export type { CompactSampledColor } from './volume/compact-sampled.js';
 export { COMPACT_FINITE_EMISSION_SCHEMA, COMPACT_FINITE_EMISSION_METHOD, readCompactFiniteEmission, readCompactFiniteDataset, readCompactToneProjection } from './volume/compact-finite-emission.js';
-export { SIMULATION_ENVELOPE_SCHEMA, readSimulationEnvelopeRecord } from './volume/simulation-envelope.js';
-export type { SimulationEnvelopeRecord } from './volume/simulation-envelope.js';
 export { COMPONENT_MATERIAL_SCHEMA, readComponentMaterialReceipt } from './volume/component-material-receipt.js';
 export type { ComponentMaterialColor, ComponentMaterialReceipt } from './volume/component-material-receipt.js';

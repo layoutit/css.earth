@@ -1,8 +1,6 @@
-import { readPhotometricEnvelope, readEnvelopeColors, type EnvelopeColors } from '@cssearth/objects';
+import { readPhotometricEnvelope, readEnvelopeColors, type EnvelopeColors, type EmissionFieldModel, type EmissionVector3 } from '@cssearth/objects';
 /** Retained two-scale light: an explicit smooth density plus finite 3D residual features. */
 
-import type { EmissionFieldModel } from '@cssearth/objects';
-import type { EmissionVector3 } from '@cssearth/objects';
 import { createEmissionField } from './emission.ts';
 import { samplePhotometricMge } from './photometric-mge.ts';
 import { createEnvelopeSampler, sampleEnvelopeGrid } from './simulation-envelope.ts';

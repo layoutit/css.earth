@@ -1,4 +1,4 @@
-import { CLOUD_PARTS_SCHEMA } from '@cssearth/objects';
+import { CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, parseVolumeRecipe, type VolumeSlices } from '@cssearth/objects';
 import { collectArtifacts } from '../workflows/density/io.ts';
 /** Offline material replacement on the exact named Alignment density cloud. Never infer new shape from an image. */
 import { mkdir, readFile, writeFile, readdir } from 'node:fs/promises';
@@ -6,13 +6,11 @@ import { dirname, resolve, relative, isAbsolute, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import { parseDensityPlacement, densityPlacementTransform, createAlignedObservationMapping, parseCloudAppearance, prepareCloudDetail, CLOUD_DETAIL_METHOD } from '@cssearth/bake/volume';
-import { DENSITY_VOLUME_FORMAT, parseVolumeRecipe } from '@cssearth/objects';
 import type { ReconstructionWork } from '../../features/reconstruction/reconstruction-types.ts';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { rectifyObservation, writeObservationPanel } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
 import { registeredImageSampler, registeredScalarSampler, writeOriginalOverlay } from '../workflows/density/registered-image.ts';
 import { recolorCloudSlices, containedPath, loadVolumeSource } from '@cssearth/bake/volume/node';
-import { type VolumeSlices } from '@cssearth/objects';
 import { prepareDensityProjection } from '../workflows/density/density-projection.ts';
 import { prepareReconstructionStars } from '../workflows/density/reconstruction-stars.ts';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';

@@ -1,4 +1,4 @@
-import { DATASET_TONE_CURVE_SCHEMA } from '@cssearth/objects';
+import { DATASET_TONE_CURVE_SCHEMA, type DatasetToneCurve } from '@cssearth/objects';
 /**
  * Pure pieces of the dataset tone fit: paired pixels, the monotone correction they imply, and its composition
  * onto the dataset's current tone curve. `dataset-tone-fit.ts` owns the loop, bakes and measurements.
@@ -12,7 +12,6 @@ import { DATASET_TONE_CURVE_SCHEMA } from '@cssearth/objects';
  * the exposure-free integral, the curve re-fitted, and the whole range (p99, p99.9, core) scored.
  */
 import { datasetToneRender, datasetToneValue } from '@cssearth/bake/volume';
-import { type DatasetToneCurve } from '@cssearth/objects';
 import { datasetLevelPairs, datasetLevelStatistics, untonedRender, type DatasetLevelGrid, type DatasetLevelMaterial } from '../../server/services/dataset-levels.ts';
 
 /** Largest and smallest gain one knot may take against its input: past these a parameter is pinned. */

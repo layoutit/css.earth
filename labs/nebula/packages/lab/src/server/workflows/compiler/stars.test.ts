@@ -2,8 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { compilerStars, compilerStarDatasetPoints, createCompilerStarPhotometer, detectCompilerStarCandidates } from '@cssearth/nebula-reconstruction/stars/compiler';
 
-import { type EmissionFieldModel } from '@cssearth/objects';
-import { compilerStarAppearance, validCompilerStarMaterials, validCompilerStarSize, type PreparedCompilerStar } from '@cssearth/objects';
+import { compilerStarAppearance, validCompilerStarMaterials, validCompilerStarSize, type EmissionFieldModel, type PreparedCompilerStar } from '@cssearth/objects';
 import type { CompilerImage } from './images.ts';
 import sharp from 'sharp';
 import { detectStars } from '@cssearth/nebula-reconstruction/registration/stellar';

@@ -1,4 +1,4 @@
-import { readCompactFiniteEmission, readCompactFiniteDataset, readCompactToneProjection, readSimulationEnvelopeRecord } from '@cssearth/objects';
+import { readCompactFiniteEmission, readCompactFiniteDataset, readCompactToneProjection, readSimulationEnvelopeRecord, validateDatasetToneCurve, type EmissionFieldModel, type VolumeSlices, type Vector3 } from '@cssearth/objects';
 /**
  * Offline replay of an accepted simulation-guided finite-emission delivery.
  *
@@ -16,14 +16,10 @@ import sharp from 'sharp';
 import { createEmissionField } from '../../fields/emission.ts';
 import { createEmissionMaterial } from '../../materials/component-material.ts';
 import { compilerSlabMaterial, datasetChannelGainMaterial, validateChannelGain, type DatasetTone } from '../../materials/slab-material.ts';
-import { validateDatasetToneCurve } from '@cssearth/objects';
 import { createEnvelopeSampler, envelopeChromaticity, envelopeChromaSettings } from '../../fields/simulation-envelope.ts';
 import { physicalToField, angularScale } from '../../coordinates/observer-tangent.ts';
 import { parseCloudAppearance } from '../../materials/cloud-appearance.ts';
 
-import type { EmissionFieldModel } from '@cssearth/objects';
-import type { VolumeSlices } from '@cssearth/objects';
-import type { Vector3 } from '@cssearth/objects';
 import { recolorCloudSlices } from '../slices/material.ts';
 import { loadSimulationPrior } from './simulation-prior.ts';
 import { localPath, pinned, type Pin } from './io.ts';

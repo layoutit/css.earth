@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { verifyPhotometricEvidence } from './photometric-prior.ts';
-import { readPhotometricMgeRecipe } from '@cssearth/objects';
+import { readPhotometricMgeRecipe, readRetainedEmissionField, type EmissionFieldModel } from '@cssearth/objects';
 
 test('photometric evidence validation rejects cross-subject or repinned source snapshots', async () => {
   const recipe = readPhotometricMgeRecipe(JSON.parse(await readFile('labs/nebula/models/omega-centauri/photometric-mge.json', 'utf8')));
@@ -15,7 +15,6 @@ test('photometric evidence validation rejects cross-subject or repinned source s
 import { fitPhotometricEmission } from './photometric-prior.ts';
 import { createPhotometricMgePrior } from '@cssearth/nebula-reconstruction/methods/inference/photometric-mge';
 import { createPhotometricEmission } from '@cssearth/bake/volume';
-import { readRetainedEmissionField, type EmissionFieldModel } from '@cssearth/objects';
 
 test('two-scale fit retains smooth light and finite residuals, including after JSON replay', async () => {
   const published = readPhotometricMgeRecipe(JSON.parse(await readFile('labs/nebula/models/omega-centauri/photometric-mge.json', 'utf8')));

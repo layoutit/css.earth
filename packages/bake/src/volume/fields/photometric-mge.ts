@@ -1,5 +1,4 @@
-import { readPhotometricMgeRecipe, type PhotometricMgeRecipe } from '@cssearth/objects';
-import type { SimulationDepthPrior } from '@cssearth/objects';
+import { readPhotometricMgeRecipe, type PhotometricMgeRecipe, type SimulationDepthPrior } from '@cssearth/objects';
 /** x is west, y north, z away. The density is relative light per angular-depth unit, not calibrated flux. */
 export function samplePhotometricMge(recipe: PhotometricMgeRecipe): SimulationDepthPrior {
   const parsed = readPhotometricMgeRecipe(recipe);

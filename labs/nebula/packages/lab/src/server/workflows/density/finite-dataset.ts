@@ -1,5 +1,4 @@
-import { CLOUD_PARTS_SCHEMA, COMPACT_FINITE_EMISSION_METHOD } from '@cssearth/objects';
-import { readSimulationEnvelopeRecord } from '@cssearth/objects';
+import { CLOUD_PARTS_SCHEMA, COMPACT_FINITE_EMISSION_METHOD, readSimulationEnvelopeRecord, validateDatasetToneCurve, DENSITY_VOLUME_FORMAT, validateEnvelopeSettings, type DatasetToneCurve, type EmissionFieldModel, type VolumeSlices, type Vector3 } from '@cssearth/objects';
 import { collectArtifacts } from './io.ts';
 /** Finite component colors on one immutable conditional emission field. */
 import {readFile,writeFile,mkdir,cp,rename,rm} from 'node:fs/promises';
@@ -10,11 +9,7 @@ import {compileCssVolume} from '../../../adapters/preparation/css-volume.ts';
 import {verifyFiniteMaterialArtifacts} from '../../../cli/commands/finite-density-material-artifacts.ts';
 import {physicalToField,angularScale} from '../../../cli/commands/simulation-guided-coordinates.ts';
 import { createEmissionField, createEmissionMaterial, compilerSlabMaterial, datasetChannelGainMaterial, validateChannelGain, type ChannelGain, parseCloudAppearance, type CloudAppearance } from '@cssearth/bake/volume';
-import { validateDatasetToneCurve, type DatasetToneCurve, type EmissionFieldModel } from '@cssearth/objects';
-import { DENSITY_VOLUME_FORMAT, type VolumeSlices } from '@cssearth/objects';
-import { type Vector3 } from '@cssearth/objects';
 import { createEnvelopeSampler, envelopeChromaticity, envelopeChromaSettings } from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
-import { validateEnvelopeSettings } from '@cssearth/objects';
 import {loadSimulationPrior} from '../../../cli/commands/simulation-prior.ts';
 import { recolorCloudSlices, sourceBytes, containedPath } from '@cssearth/bake/volume/node';
 import type {PreparedReconstruction} from '../../../features/reconstruction/reconstruction-types.ts';

@@ -1,4 +1,4 @@
-import { COMPACT_FINITE_EMISSION_SCHEMA, COMPACT_FINITE_EMISSION_METHOD } from '@cssearth/objects';
+import { COMPACT_FINITE_EMISSION_SCHEMA, COMPACT_FINITE_EMISSION_METHOD, validateDatasetToneCurve } from '@cssearth/objects';
 import { isNonemptyText, isRecord } from '@cssearth/core';
 /**
  * Export the minimal checked-in surface that regenerates an accepted finite-emission dataset bank.
@@ -21,7 +21,6 @@ import { readPreparedReconstruction } from '../../server/services/density-recons
 import { finiteModelStarsPath } from '../../server/services/finite-dataset-bundles.ts';
 import { parseVolumeDatasetPromotion } from '../../server/workflows/density/volume-dataset-promotion.ts';
 import { validateChannelGain } from '@cssearth/bake/volume';
-import { validateDatasetToneCurve } from '@cssearth/objects';
 
 const text = (value: unknown, at: string): string => { assert.ok(isNonemptyText(value), `Expected text: ${at}`); return value; };
 const record = (value: unknown, at: string): Record<string, unknown> => { assert.ok(isRecord(value), `Expected an object: ${at}`); return value; };

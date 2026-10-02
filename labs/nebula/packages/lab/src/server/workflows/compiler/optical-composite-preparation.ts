@@ -7,8 +7,7 @@ import { readCompilerRecipe, readCompilerRequest } from '../../../features/compi
 import { validateCompilerResult } from './bank-validation.ts';
 import { readCompilerResult, type CompilerResult } from '../../../features/compiler/result.ts';
 import { createEmissionField, createEmissionMaterial } from '@cssearth/bake/volume';
-import { readRetainedEmissionField } from '@cssearth/objects';
-import { type CompilerPin } from '@cssearth/objects';
+import { readRetainedEmissionField, type CompilerPin } from '@cssearth/objects';
 import { loadCompilerImages, compilerImagePanel } from './images.ts';
 import { createOpticalComposite } from '@cssearth/nebula-reconstruction/observations/optical-composite';
 import { prepareRetainedMaterialBank } from './retained-material-bank.ts';

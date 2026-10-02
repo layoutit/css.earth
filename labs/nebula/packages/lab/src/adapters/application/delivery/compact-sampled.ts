@@ -1,9 +1,7 @@
-import { encodeCompactPointColors } from '@cssearth/objects';
-import { COMPACT_SAMPLED_SCHEMA } from '@cssearth/objects';
+import { encodeCompactPointColors, COMPACT_SAMPLED_SCHEMA, validatePreparedCssVolume, readCompilerBakeResult, type CompilerPin } from '@cssearth/objects';
 import { readCompactPin as pinned, replayCompactSampled as replay } from '@cssearth/bake/volume/node';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 import { compileCssVolume } from '@cssearth/bake/volume-leaves';
-import { validatePreparedCssVolume, readCompilerBakeResult, type CompilerPin } from '@cssearth/objects';
 /** Retained measured particles and per-emitter materials; never stores rendered slices. */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";

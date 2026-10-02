@@ -1,4 +1,4 @@
-import { CLOUD_PARTS_SCHEMA } from '@cssearth/objects';
+import { CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, parseVolumeRecipe, type VolumeSlices, type VolumeSliceQuad, type Vector3 } from '@cssearth/objects';
 import { collectArtifacts } from '../../server/workflows/density/io.ts';
 import { parseFiniteMaterialSettings, verifyFiniteMaterialArtifacts } from './finite-density-material-artifacts.ts';
 /** One offline finite-material experiment on an existing reconstruction. All density slice alpha is retained. */
@@ -10,8 +10,6 @@ import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { fitFiniteRegionMaterial, type MaterialTransportSample } from '@cssearth/nebula-reconstruction/methods/sampled/finite-region-material';
 import { compilerSlabMaterial } from '@cssearth/bake/volume';
-import { DENSITY_VOLUME_FORMAT, parseVolumeRecipe, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/objects';
-import { type Vector3 } from '@cssearth/objects';
 import { recolorCloudSlices, loadVolumeSource, sampleEncoded, sourceBytes, containedPath, channelDensity } from '@cssearth/bake/volume/node';
 const json=async(path:string,value:unknown)=>{await writeFile(path,JSON.stringify(value,null,2)+'\n');};
 /** A reconstruction is named by what it was made from, like `<subject>-<image>`. */

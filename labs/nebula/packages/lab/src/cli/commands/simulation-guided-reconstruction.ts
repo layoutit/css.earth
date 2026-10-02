@@ -1,4 +1,4 @@
-import { CLOUD_PARTS_SCHEMA, SIMULATION_ENVELOPE_SCHEMA } from '@cssearth/objects';
+import { CLOUD_PARTS_SCHEMA, SIMULATION_ENVELOPE_SCHEMA, validateEnvelopeSettings, DENSITY_VOLUME_FORMAT, type Vector3, type SkyBounds, type EmissionBounds } from '@cssearth/objects';
 import { collectArtifacts } from '../../server/workflows/density/io.ts';
 /** Offline conditional emission experiment; originals and baseline remain immutable. */
 import {readFile,writeFile,mkdir,cp,rename} from 'node:fs/promises';
@@ -11,10 +11,8 @@ import {physicalToField,angularScale,physicalBounds} from './simulation-guided-c
 import {parseSimulationGuidedLevels} from './simulation-guided-levels.ts';
 import {fitSimulationGuidedEmission} from '@cssearth/nebula-reconstruction/methods/inference/simulation-guided';
 import { fitSimulationEnvelope, createEnvelopeSampler, envelopeChromaticity, envelopeChromaSettings } from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
-import { validateEnvelopeSettings } from '@cssearth/objects';
 import {loadSimulationPrior} from './simulation-prior.ts';
 import { compilerSlabMaterial, alphaLimitedSlabMaterial } from '@cssearth/bake/volume';
-import { DENSITY_VOLUME_FORMAT, type Vector3, type SkyBounds, type EmissionBounds } from '@cssearth/objects';
 import { bakeMasterVolumeSlices, recolorCloudSlices, sourceBytes, containedPath } from '@cssearth/bake/volume/node';
 const json=async(path:string,value:unknown)=>{await writeFile(path,JSON.stringify(value,null,2)+'\n');};
 /** Reconstructions are named by what they were made from, like `<subject>-<image>` or `<subject>-<settings>`. */
