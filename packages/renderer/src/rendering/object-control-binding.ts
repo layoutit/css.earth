@@ -83,7 +83,9 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   // The body card and settings may wait off the page (detached-sections.ts): mounted first, then where they wait.
   const information = document.querySelector(".object-information-panel") ?? sectionElements(document, ".object-information-panel")[0];
   // Form ownership survives moving a dataset from the body card to its system card.
-  const datasetForm = information?.querySelector<HTMLFormElement>('form[data-dataset-form]');
+  // The card may open on another tab (a level's opens on what it holds): its dataset panel then waits off the page.
+  const datasetForm = information?.querySelector<HTMLFormElement>('form[data-dataset-form]')
+    ?? (information ? sectionElements(information, 'form[data-dataset-form]')[0] as HTMLFormElement | undefined : undefined);
   const datasetRoot = datasetForm?.closest(".object-datasets");
   const settingsRoot = document.querySelector(".object-settings") ?? sectionElements(document, ".object-settings")[0];
   // A form owns only its connected controls (a `form` attribute associates nothing off the page), and its card or rows may

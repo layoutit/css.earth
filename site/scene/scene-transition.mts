@@ -102,7 +102,7 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   const factoryTask = contentTransport.descriptor(object, { signal: request.signal })
     .then(descriptor => loadObject(object.id, descriptor, request.signal))
     .then(async factory => {
-      if (factory.navigation && request.subject.kind !== 'overview') {
+      if (factory.navigation && request.subject.view !== 'system') {
         const framingScale = await factory.navigation.framingScale(request.signal);
         const edge = await factory.navigation.labelEdge?.(request.signal);
         if (systemTask) await systemTask;

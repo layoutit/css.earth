@@ -1,0 +1,156 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "observable-universe",
+  "displayName": "Observable Universe",
+  "panel": {
+    "facts": [
+      {
+        "id": "last-scattering",
+        "label": "Redshift of last scattering",
+        "value": "1089.80",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), A&A 641, A6",
+          "checked": "2026-10-01",
+          "locator": "Table 2, z*"
+        }
+      },
+      {
+        "id": "cmb-distance",
+        "label": "Microwave background sphere",
+        "value": "13.9 Gpc away (comoving)",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), A&A 641, A6",
+          "checked": "2026-10-01",
+          "locator": "The comoving distance of redshift 1089.80 in this cosmology (Astropy Planck18), as the bank's recipe computes it"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "off",
+    "controls": [
+      {
+        "id": "off",
+        "label": "Off",
+        "thumbnail": "observable-universe-dataset-off.webp",
+        "volume": {
+          "objectId": "observable-universe-cmb",
+          "datasetId": "off",
+          "surface": "off"
+        },
+        "source": {
+          "id": "observable-universe-cmb-off",
+          "path": "../../observable-universe-cmb/source/manifest.json",
+          "url": "https://arxiv.org/abs/1807.06208"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "cutaway",
+        "label": "Cut open",
+        "thumbnail": "observable-universe-dataset-cutaway.webp",
+        "volume": {
+          "objectId": "observable-universe-cmb",
+          "datasetId": "cutaway",
+          "surface": "cutaway"
+        },
+        "source": {
+          "id": "observable-universe-cmb-cutaway",
+          "path": "../../observable-universe-cmb/source/manifest.json",
+          "url": "https://arxiv.org/abs/1807.06208"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "CMB temperature",
+          "meta": "microkelvin around the mean",
+          "colors": [
+            "#0000ff",
+            "#002cff",
+            "#0082ff",
+            "#1dd1ef",
+            "#ffe0bc",
+            "#ffa516",
+            "#ff5400",
+            "#c21600",
+            "#390000"
+          ],
+          "labels": [
+            "−300 µK",
+            "0 µK",
+            "+300 µK"
+          ]
+        }
+      },
+      {
+        "id": "full",
+        "label": "Full sphere",
+        "thumbnail": "observable-universe-dataset-full.webp",
+        "volume": {
+          "objectId": "observable-universe-cmb",
+          "datasetId": "full",
+          "surface": "full"
+        },
+        "source": {
+          "id": "observable-universe-cmb-full",
+          "path": "../../observable-universe-cmb/source/manifest.json",
+          "url": "https://arxiv.org/abs/1807.06208"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "CMB temperature",
+          "meta": "microkelvin around the mean",
+          "colors": [
+            "#0000ff",
+            "#002cff",
+            "#0082ff",
+            "#1dd1ef",
+            "#ffe0bc",
+            "#ffa516",
+            "#ff5400",
+            "#c21600",
+            "#390000"
+          ],
+          "labels": [
+            "−300 µK",
+            "0 µK",
+            "+300 µK"
+          ]
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Planck Collaboration (2020), A&A 641, A6",
+      "href": "https://arxiv.org/abs/1807.06209"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Planck Collaboration (2020), A&A 641, A4",
+      "href": "https://arxiv.org/abs/1807.06208"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1807.06209",
+      "credit": "Planck Collaboration (2020), A&A 641, A6"
+    }
+  }
+}

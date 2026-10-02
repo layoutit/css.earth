@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { defineObjects, type CatalogEntry } from '@cssearth/objects';
+import type { CatalogEntry } from '@cssearth/objects';
 import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
@@ -78,7 +78,7 @@ async function readDatasetVolumes(entries: readonly CatalogEntry[], projectRoot:
  * overview reads its volume directly. A galaxy beyond the Local Group level's reach (its zoom's `centreWithin`, M87 in
  * Virgo) is drawn but not framed by it. */
 async function readLocalGroupGalaxies(projectRoot: string) {
-  const recipePath = 'src/objects/local-group/source/catalogue.json';
+  const recipePath = 'src/objects/local-group-galaxies/source/catalogue.json';
   let text: string;
   // A project without the Local Group object has no Local Group galaxies to frame.
   try { text = await readFile(resolve(projectRoot, recipePath), 'utf8'); }
@@ -95,8 +95,8 @@ async function readLocalGroupGalaxies(projectRoot: string) {
   // catalogue is restored the association is unknown and the distance rule alone applies.
   let members: Set<string> | null = null;
   try {
-    const prepared: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects/local-group/prepared/catalogue.json'), 'utf8'));
-    if (!isRecord(prepared) || !Array.isArray(prepared.objects)) throw new TypeError('src/objects/local-group/prepared/catalogue.json: objects is missing.');
+    const prepared: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects/local-group-galaxies/prepared/catalogue.json'), 'utf8'));
+    if (!isRecord(prepared) || !Array.isArray(prepared.objects)) throw new TypeError('src/objects/local-group-galaxies/prepared/catalogue.json: objects is missing.');
     members = new Set(prepared.objects.flatMap(object => isRecord(object) && typeof object.id === 'string' && isRecord(object.membership)
       && object.membership.group === 'local-group' ? [object.id] : []));
   } catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
@@ -151,12 +151,10 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   // Every descriptor once, shared by each read below.
   const descriptors = await readObjectDescriptors(resolve(projectRoot, 'src/objects'));
   const catalogued = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
-  // A level of the zoom ladder is a package's entry like any other; one that is placed too (the Local Group) is in both reads.
+  // A level of the zoom ladder is an object: its package is a catalogue entry that also authors its place on the ladder.
   const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), descriptors);
-  const levelIds = new Set(overviews.map(overview => overview.id));
-  const entries = catalogued.filter(entry => !levelIds.has(entry.id));
-  // The spatial catalogues are data: they name no destination. Every page is a package's own entry.
-  defineObjects<{ id: string; route: string }>([...entries, ...overviews.map(({ id }) => ({ id, route: `/${id}/` }))]);
+  const entries = catalogued;
+  for (const { id } of overviews) if (!entries.some(entry => entry.id === id)) throw new TypeError(`src/objects/${id}/object.json authors a level of the zoom ladder without a catalogue entry: a level is an object.`);
   const discoveries = await Promise.all(entries.map(async ({ id }) => {
     return prepareObjectDiscovery(descriptors.get(id), resolve(projectRoot, 'src/objects', id));
   }));
@@ -173,15 +171,10 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
     const descriptor = descriptors.get(id);
     return { descriptor, distance, discovery: discoveries[index]! };
   })));
-  // Every page reads the levels, so their rows are apart and carry only what an entry reads of a descriptor.
+  // Every page reads the levels, so their rows are written apart as well: the same rows as the catalogue's.
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews.map(({ id, descriptor }) => {
-    const { schema, type, properties } = descriptor as { schema: unknown; type: unknown; properties: Record<string, unknown> };
-    const placed = catalogued.find(entry => entry.id === id), volume = properties.volume;
-    return { descriptor: { schema, id, type, properties: { overview: properties.overview,
-      ...(properties.catalog === undefined ? {} : { catalog: properties.catalog, worldFrame: properties.worldFrame }),
-      ...(isRecord(volume) && volume.originM !== undefined ? { volume: { originM: volume.originM } } : {}) } },
-      // A placed level is a landmark of the scale above it, without imagery of its own.
-      ...(placed ? { distance: placed.distance, discovery: { featured: true, imagery: false, illustration: false } } : {}) };
+    const index = entries.findIndex(entry => entry.id === id);
+    return { descriptor, distance: entries[index]!.distance, discovery: discoveries[index]! };
   })) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-dataset-volumes.json'), JSON.stringify(await readDatasetVolumes(entries, projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');

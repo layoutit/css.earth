@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "observable-universe",
+  "card": {
+    "text": "Everything whose light has had time to reach us, out to the microwave background.",
+    "sources": [
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), A&A 641, A6",
+        "checked": "2026-10-01",
+        "locator": "Table 2"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Everything whose light has reached us: galaxies and quasars out to 6.6 Gpc and, at its edge, the cosmic microwave background, light from 372,000 years after the Big Bang.",
+    "sources": [
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), A&A 641, A6",
+        "checked": "2026-10-01",
+        "locator": "Table 2"
+      }
+    ]
+  },
+  "datasets": {
+    "off": {
+      "title": "Galaxies and quasars, without the sphere",
+      "detail": "No sphere",
+      "summary": "The galaxies and quasars inside the observable universe, with the cosmic microwave background left out of the view.",
+      "sources": [
+        {
+          "catalogueId": "planck-2018-smica-cmb",
+          "url": "https://arxiv.org/abs/1807.06208",
+          "label": "Planck Collaboration (2020), A&A 641, A4",
+          "checked": "2026-10-01",
+          "locator": "SMICA map, PR3"
+        }
+      ]
+    },
+    "cutaway": {
+      "title": "The microwave background, cut open",
+      "detail": "Northern half open",
+      "summary": "Planck's map of the oldest light, with its northern half open so the galaxies and quasars inside show.",
+      "sources": [
+        {
+          "catalogueId": "planck-2018-smica-cmb",
+          "url": "https://arxiv.org/abs/1807.06208",
+          "label": "Planck Collaboration (2020), A&A 641, A4",
+          "checked": "2026-10-01",
+          "locator": "SMICA map, PR3"
+        }
+      ]
+    },
+    "full": {
+      "title": "The whole cosmic microwave background",
+      "detail": "The whole shell",
+      "summary": "Planck's map of the oldest light on the whole sphere it left from: the edge of the observable universe, seen from outside.",
+      "sources": [
+        {
+          "catalogueId": "planck-2018-smica-cmb",
+          "url": "https://arxiv.org/abs/1807.06208",
+          "label": "Planck Collaboration (2020), A&A 641, A4",
+          "checked": "2026-10-01",
+          "locator": "SMICA map, PR3"
+        }
+      ]
+    }
+  }
+}

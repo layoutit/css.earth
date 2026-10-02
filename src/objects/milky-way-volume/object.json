@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "milky-way-volume",
+  "type": "density-volume",
+  "properties": {
+    "volume": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -13959703919334212000,
+        -222925557062698830000,
+        -123851787125810950000
+      ],
+      "localToReferenceXyzw": [
+        0.2623494562296844,
+        -0.45075589261645316,
+        -0.25430794857388334,
+        0.8144442002861071
+      ],
+      "metersPerUnit": 60000000000000000000,
+      "boundsUnits": {
+        "min": [
+          -10,
+          -10,
+          -1.25
+        ],
+        "max": [
+          10,
+          10,
+          1.25
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/volume.json"
+    },
+    "host": "milky-way"
+  },
+  "prepared": {
+    "format": "cssearth-density-volume@1",
+    "url": "prepared/volume.json"
+  }
+}

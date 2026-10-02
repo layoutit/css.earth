@@ -20,7 +20,7 @@ async function objects(packages: Record<string, unknown>) {
   return root;
 }
 const level = (order: number, classifications: string[], packages: string[] = []) =>
-  ({ name: `Level ${order}`, description: 'A level.', order, zoom, holds: [{ classifications }], packages });
+  ({ order, zoom, holds: [{ classifications }], packages });
 
 test('reads the overviews the packages author, from the nearest level out', async () => {
   const root = await objects({ outer: level(2, ['galaxy-cluster']), inner: level(1, ['nebula'], ['stars']), stars: null });

@@ -5,7 +5,7 @@ import { isDeepStrictEqual } from 'node:util';
 import { parseGalaxyBacking } from './galaxy-backing.js';
 
 const KPC_M = 3.0856775814913673e19;
-const prepared = () => JSON.parse(readFileSync(new URL('../../../../src/objects/milky-way/prepared/backing.json', import.meta.url), 'utf8')) as Record<string, unknown>;
+const prepared = () => JSON.parse(readFileSync(new URL('../../../../src/objects/milky-way-volume/prepared/backing.json', import.meta.url), 'utf8')) as Record<string, unknown>;
 
 test('the Milky Way backing dims its blurred outer disc close up while its rings about the centre step up to the bulge', () => {
   const backing = parseGalaxyBacking(prepared());

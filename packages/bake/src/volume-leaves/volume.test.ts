@@ -55,9 +55,9 @@ test('compiled slices hold their texture at TEXELS_PER_CSS_PIXEL and cover the p
   const { TEXELS_PER_CSS_PIXEL } = await import('@cssearth/bake/scene');
   const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
   const { parseVolumeRecipe } = await import('@cssearth/objects');
-  const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as VolumeSlices;
-  const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile('src/objects/milky-way/object.json', 'utf8')));
-  const recipe = parseVolumeRecipe(JSON.parse(await readFile('src/objects/milky-way/source/volume.json', 'utf8')));
+  const slices = JSON.parse(await readFile('src/objects/milky-way-volume/prepared/volume-slices.json', 'utf8')) as VolumeSlices;
+  const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile('src/objects/milky-way-volume/object.json', 'utf8')));
+  const recipe = parseVolumeRecipe(JSON.parse(await readFile('src/objects/milky-way-volume/source/volume.json', 'utf8')));
   const volume = compileCssVolume({ id: descriptor.id, frame: descriptor.volume, recipe, slices });
   const quads = new Map(slices.quads.map(quad => [quad.id, quad]));
   let leaves = 0, maximumError = 0;

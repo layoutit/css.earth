@@ -42,7 +42,7 @@ export const explorationCompilerClosure = [
   'packages/objects/src/provenance/dataset-destination.ts', 'packages/objects/src/provenance/dataset-routes.ts', ...volumePresentationCompilerClosure,
   'packages/bake/src/sources/factsheet-sources.ts', 'packages/objects/src/registry/fact-order.ts', 'packages/bake/src/objects/acquisition/restore-factsheet-evidence.ts',
   'packages/core/src/validate.ts', 'packages/bake/src/objects/acquisition/object-operations.ts', 'packages/bake/src/objects/acquisition/operations-acquisition.ts',
-  'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
+  'src/objects/milky-way-volume/source/sky/provenance.json', 'src/objects/milky-way-volume/source/provenance.json',
   'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',
   'packages/bake/src/objects/lineage/body-lineage.ts', 'packages/bake/src/objects/lineage/lineage-recipes.ts',
 ] as const;
