@@ -7,7 +7,7 @@ const ownerRules: [string, (a: Record<string, unknown>) => boolean][] = [
   ['detailed PolyCSS surface', a => classes(a.class).includes('polycss-scene')],
   ['starfield', a => classes(a.class).includes('prepared-point-field')],
   ['orbits', a => 'data-context-orbit' in a || classes(a.class).includes('context-orbit-block')],
-  ['world labels', a => 'data-context-label-visible' in a],
+  ['world labels', a => 'data-context-label' in a],
   ['world indicators', a => 'data-context-indicator' in a],
   ['world billboards', a => 'data-context-body' in a],
   ['minimap', a => classes(a.class).includes('space-minimap')],

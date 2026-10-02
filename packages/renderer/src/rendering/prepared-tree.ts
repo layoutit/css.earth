@@ -2,7 +2,6 @@ import type { PreparedTree } from './prepared-presentation.js';
 import { writePreparedStyle } from './style-access.js';
 import { rewritePreparedStyleUrls, type PreparedAssetOrigin } from './prepared-asset-origin.js';
 import { meshProfile } from './prepared-omitted-nodes.js';
-import { preparedClassNames } from './prepared-leaf-class.js';
 
 type Own = (cleanup: () => void) => unknown;
 interface BuiltTree { nodes: HTMLElement[]; roots: HTMLElement[]; }
@@ -30,8 +29,7 @@ function treeStyles(tree: PreparedTree, assetOrigin: PreparedAssetOrigin | null 
 function createPreparedNode(tree: PreparedTree, index: number, document: Document, resolved: ResolvedTreeStyles | null) {
   const record = tree.nodes[index];
   const node = document.createElement(record.tag);
-  const className = preparedClassNames(tree)[index]!;
-  if (className !== null) node.className = className;
+  if (record.className !== null) node.className = record.className;
   if (record.style) node.style.cssText = resolved ? resolved.styles[index] : record.style;
   // Preserve the prepared CSSOM assignment order and numeric precision.
   for (const propertyId of record.properties) {

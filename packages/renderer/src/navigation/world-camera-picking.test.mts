@@ -76,7 +76,7 @@ class FakeSurface extends EventTarget {
     };
   }
   closest(selector: string): FakeSurface | null {
-    const matches = selector === '[data-context-orbit]' ? this.dataset.contextOrbit : this.dataset.contextBody;
+    const matches = selector === '[data-context-orbit]' ? this.dataset.contextOrbit : this.dataset.contextGroup;
     return matches ? this : this.parentElement?.closest(selector) ?? null;
   }
   querySelector(): FakeSurface | null { return fakeDocument(this.ownerDocument).group; }
@@ -337,7 +337,7 @@ test('label, circle and visible orbit share hover, pointer cursor and single-cli
   const f = fixture();
   const group = new FakeSurface(), orbit = new FakeSurface();
   const circle = new FakeSurface(), chord = new FakeSurface();
-  group.dataset.contextBody = 'venus';
+  group.dataset.contextGroup = 'venus';
   orbit.dataset.contextOrbit = 'venus'; orbit.parentElement = group;
   orbit.dataset.objectNavigate = 'venus'; orbit.click = f.target.click;
   orbit.style.pointerEvents = 'none';

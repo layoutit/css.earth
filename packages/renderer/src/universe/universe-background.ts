@@ -1,3 +1,4 @@
+import { writeData } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedCssVolume } from '../volume/types.js';
@@ -12,7 +13,6 @@ import { revealLayer } from '../rendering/layer-reveal.js';
 import { afterStartup } from '../rendering/startup-gate.js';
 import { galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
 import type { PreparedWorldContext } from '../prepared-data/world-context.js';
-import { setReadout } from '../rendering/readouts.js';
 
 const PARSEC_M = 3.085677581491367e16;
 /** Inside the Solar System a faint share of the galaxy's dots stays, so its sky is never empty; past the planets they
@@ -36,9 +36,11 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
 }) {
   const document = root.ownerDocument;
   const volumeHost = document.createElement('div');
-  // The galaxy's opaque backdrop and its image layer fill the universe root (volume.css). The host is attached, just
-  // under the backing, only while the galaxy shows; both opacities change inline.
+  // The galaxy's opaque backdrop and its image layer fill the universe root (volume.css); the host's display and both
+  // opacities change inline.
   volumeHost.className = 'prepared-volume-context';
+  volumeHost.style.display = 'none';
+  root.insertBefore(volumeHost, end);
   const volumeImage = document.createElement('div');
   volumeImage.className = 'prepared-volume-image';
   volumeHost.appendChild(volumeImage);
@@ -90,7 +92,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
     // Separate host placement from layer mounting to retain startup and DOM order.
     mount() {
       if (sky && payload.sky) {
-        skyLayer = mountPreparedCssSky({ host: root, before: volumeHost.parentNode ? volumeHost : backingHost, payload: payload.sky, resources: payload.resources, resolveResource });
+        skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
         lifetime.onDispose(() => skyLayer?.destroy());
       }
       // The galaxy is its bulge slices and one flat disc plane at every distance; it has no impostor views.
@@ -120,16 +122,13 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       const outside = galaxyOutsideFade(volumeDistanceM, plan.volume.discHalfHeightM);
       const volumeSize = projectedVolumeOpacity(world, viewport, payload.frame, volumeFramingUnits);
       const volumeVisible = outside * detailContextOpacity > 0;
-      if (volumeVisible !== publishedVolumeVisible) {
-        if (volumeVisible) root.insertBefore(volumeHost, backingHost); else volumeHost.remove();
-        publishedVolumeVisible = volumeVisible;
-      }
-      if (outside !== publishedVolumeOpacity) { setReadout(volumeHost, 'volumeOpacity', String(outside)); publishedVolumeOpacity = outside; }
+      if (volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; publishedVolumeVisible = volumeVisible; }
+      if (outside !== publishedVolumeOpacity) { volumeHost.dataset.volumeOpacity = String(outside); publishedVolumeOpacity = outside; }
       // A detailed focus suppresses the volume without brightening the sky behind it.
       const completedContribution = outside;
       const alpha = completedContribution * detailContextOpacity;
       if (alpha !== publishedVolumeAlpha) { volumeHost.style.opacity = String(alpha); publishedVolumeAlpha = alpha; }
-      if (skyLayer) setReadout(skyLayer.root, 'skyContribution', String(1 - completedContribution));
+      if (skyLayer) writeData(skyLayer.root, 'skyContribution', String(1 - completedContribution));
       const imageAlpha = volumeSize;
       if (imageAlpha !== publishedImageAlpha) {
         volumeImage.style.opacity = skyLayer && imageAlpha === 1 ? '' : String(imageAlpha);
