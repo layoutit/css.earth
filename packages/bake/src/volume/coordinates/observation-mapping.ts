@@ -1,5 +1,5 @@
 /** Offline copy of Alignment's prepared CSS transform, transported back to physical observer rays. */
-import type { ObservationMapping } from '../contracts/observation-mapping.ts';
+import type { ObservationMapping } from '@cssearth/objects';
 import type { OverlayFrame } from './overlay-wcs.ts';
 import { defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement } from './overlay-placement.ts';
 

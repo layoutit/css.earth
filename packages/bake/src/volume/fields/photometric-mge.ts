@@ -1,7 +1,7 @@
 /** Published projected Gaussian light profiles, deprojected under an explicit oblate hypothesis. */
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 const jointPath = (v: unknown): v is string => typeof v === 'string' && /^[a-zA-Z0-9._/-]+$/.test(v) && !v.startsWith('/') && !v.split('/').includes('..');
-import type { SimulationDepthPrior } from '../contracts/simulation-prior.ts';
+import type { SimulationDepthPrior } from '@cssearth/objects';
 import { validateEnvelopeSettings, type SimulationEnvelopeSettings } from './simulation-envelope.ts';
 
 export interface PhotometricGaussian {

@@ -1,4 +1,4 @@
-import type {ObservationMapping} from '../contracts/observation-mapping.ts';
+import type {ObservationMapping} from '@cssearth/objects';
 type Vec3=[number,number,number];
 type Vec2=[number,number];
 export interface ObservationPriorSource {bounds:{min:Vec3;max:Vec3};densityAt(x:number,y:number,z:number):number}
