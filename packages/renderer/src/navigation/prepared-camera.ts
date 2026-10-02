@@ -125,7 +125,14 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
     cameraState.distance = distance;
     aliasZoom = null;
   }
+  // The world camera last adopted, while nothing has moved this camera since: its body centre is the same array, its scene
+  // rotation and projection scale the same values. Capturing then returns that pose itself. Rebuilding it from this body's
+  // local presentation would round it at this body's distance from the eye: a kilometre when a flight from here approaches a
+  // 23 km star 157 parsecs away, which made its label jump by up to 24 px a frame (2026-10-01).
+  let adopted: { world: WorldCameraPose; frame: PreparedWorldCameraFrame; bodyCenter: PositionM | null; rotation: readonly number[]; projectionScale: number } | null = null;
   function capture(frame: PreparedWorldCameraFrame): WorldCameraPose {
+    if (adopted && adopted.frame === frame && adopted.bodyCenter === bodyCenter && adopted.projectionScale === projectionScale &&
+        readRotation().every((value, index) => value === adopted!.rotation[index])) return adopted.world;
     const rotation = readRotation(), bodyCenterUnits = bodyCenter;
     return bodyCenterUnits === null
       ? worldCameraFromCenteredPresentation({ rotation, distanceUnits: detailState().distance }, frame, optics())
@@ -140,6 +147,7 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
     const presentation = presentWorldCamera(world, frame, optics());
     setBodyCenter(presentation.bodyCenterUnits);
     orientation.setSceneRotation(presentation.rotation);
+    adopted = { world, frame, bodyCenter, rotation: [...readRotation()], projectionScale };
   }
   const inputState = detailState, updateInput = updateDetail;
   return Object.freeze({

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "psr-j0437-4715",
+  "card": {
+    "text": "The nearest millisecond pulsar: a neutron star 23 km across that turns 174 times a second.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2407-06789",
+        "url": "https://arxiv.org/abs/2407.06789",
+        "label": "Choudhury et al. (2024), ApJL 971, L20",
+        "checked": "2026-10-02",
+        "locator": "Abstract and Table A.1"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "PSR J0437−4715 is a neutron star 157 parsecs away, 1.4 times the Sun's mass in a ball 23 km wide. Its surface is near 250,000 K, with patches over a million.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2407-06789",
+        "url": "https://arxiv.org/abs/2407.06789",
+        "label": "Choudhury et al. (2024), ApJL 971, L20",
+        "checked": "2026-10-02",
+        "locator": "Abstract and Table A.1"
+      }
+    ]
+  },
+  "datasets": {
+    "temperature": {
+      "title": "NICER hot regions",
+      "detail": "Published fit",
+      "summary": "Hot patches from a fit to the X-ray pulse, on a cooler surface measured in ultraviolet light. Fitted shapes, not an image."
+    }
+  }
+}

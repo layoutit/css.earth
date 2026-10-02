@@ -1,3 +1,4 @@
+import { eyeDistanceM } from '@cssearth/engine';
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from './system-framing.mts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { WorldCameraPose, PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
@@ -17,7 +18,7 @@ const distance = (position: readonly number[], origin: readonly number[]) => Mat
 /** Navigation switches between a body and its system at the shared camera detail threshold. */
 export function bodyViewAtCamera(world: WorldCameraPose | null | undefined, frame: PreparedWorldCameraFrame | null | undefined, optics: ReturnType<ObjectWorldNavigation['optics']> | null | undefined, objectId: string, previous?: 'detail' | 'overview') {
   if (!world || !frame || !optics) return 'detail';
-  const range = distance(world.pose.positionM, frame.originM);
+  const range = eyeDistanceM(world.pose, frame.originM);
   if (range <= frame.bodyRadiusM) return 'detail';
   const systemRadius = SYSTEM_FRAMING_RADII.get(objectId);
   if (systemRadius && optics.framingRadiusPixels) {
@@ -76,7 +77,7 @@ export function overviewHoldingAt(classification: string, positionM: readonly nu
 export function overviewScopeAtCamera(world: WorldCameraPose, previous: OverviewScope = 'system', plan = context,
   centre: { readonly originM: readonly number[]; readonly orbitsWithinM?: number } = { originM: plan.focus.positionM },
   overviews: readonly OverviewObject[] = KNOWN_OVERVIEWS): OverviewScope {
-  const range = distance(world.pose.positionM, centre.originM);
+  const range = eyeDistanceM(world.pose, centre.originM);
   const { fadeOutStartDistanceM, hiddenDistanceM } = systemFadeDistances(plan.system, centre.orbitsWithinM);
   const at = (value: OverviewDistance) => overviewDistanceM(value, plan, centre.orbitsWithinM);
   const centreDistance = distance(centre.originM, plan.focus.positionM);
@@ -95,15 +96,15 @@ export function overviewScopeAtCamera(world: WorldCameraPose, previous: Overview
 }
 
 export function viewDistance(world: WorldCameraPose, frame: PreparedWorldCameraFrame, scope: OverviewScope, plan = context, focus: { readonly name: string; readonly positionM: readonly number[] } | null = null) {
-  if (focus) return { label: `Distance to ${focus.name}:`, meters: distance(world.pose.positionM, focus.positionM),
+  if (focus) return { label: `Distance to ${focus.name}:`, meters: eyeDistanceM(world.pose, focus.positionM),
     title: `Camera distance from the prepared center of ${focus.name}` };
   return scope !== 'system' ? {
     label: 'Distance from Sun:',
-    meters: distance(world.pose.positionM, plan.focus.positionM),
+    meters: eyeDistanceM(world.pose, plan.focus.positionM),
     title: 'Camera distance from the center of the Sun',
   } : {
     label: 'Altitude:',
-    meters: Math.max(0, distance(world.pose.positionM, frame.originM) - frame.bodyRadiusM),
+    meters: Math.max(0, eyeDistanceM(world.pose, frame.originM) - frame.bodyRadiusM),
     title: "Camera altitude above the selected object's reference surface",
   };
 }

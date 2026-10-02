@@ -24,7 +24,7 @@ import { prepareAkatsukiUviMap } from './akatsuki-uvi-l3b.ts';
 import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '../color/index.ts';
 import { readCie1931ColorMatching } from '../sources/index.ts';
 import { prepareGlbSurface } from '../layers/shape-model/index.ts';
-import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, limbIntensity, loadStellarPhotometricColor, parseSpotFigureModel, parseSpotOccultation, spotDiscCentre } from '../stellar/index.ts';
+import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, limbIntensity, loadStellarPhotometricColor, parseSpotFigureModel, readPublishedLimbDarkening, parseSpotOccultation, spotDiscCentre } from '../stellar/index.ts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
 export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown>; nativeSourcePoles?: boolean }[]; readonly emission?: RasterRecipe['emission']; readonly missingCoverage?: RasterRecipe['missingCoverage']; }
@@ -326,7 +326,15 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const { rgb, missing } = paintScienceSurface(await raster, parsed, width, height);
         const painted = rgb3(rgb, missing, width, height, Boolean(parsed.categories) || parsed.displaySampling === 'nearest', recipe.missingCoverage);
         // A self-luminous body (a thermal emission map) owes the emissive presentation its plates; nothing lies beyond its limb.
-        return recipe.emission ? { ...painted, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) } : painted;
+        if (!recipe.emission) return painted;
+        const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
+        // A map of an atmosphere with a limb law (a neutron star's hot regions) is dimmed toward its edge by that law, as a star's disc is.
+        if (surface.science.limbDarkening !== undefined) {
+          const path = requireString(requireRecord(surface.science.limbDarkening, 'limbDarkening').path, 'limbDarkening.path');
+          await source.validatePath(path);
+          plates.limb = limbDarkeningPlate(recipe.emission.limbSize * density, readPublishedLimbDarkening(JSON.parse(await readFile(resolve(sourceDirectory, path), 'utf8')) as unknown), { linear: [1, 1, 1], srgb: [255, 255, 255] });
+        }
+        return { ...painted, plates };
       }
       case 'terrestrial-mosaic': {
         const { rgb, missing } = await mosaic(surface, width, height);

@@ -1,3 +1,4 @@
+import { eyeDistanceM } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
@@ -33,8 +34,8 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
       // A flight that lands as far from the body as its star is has left the body for its system: the Moons pill from
       // Earth framed the whole Solar System at 88 au under the "Earth–Moon system" card (2026-10-01). A zoom by hand
       // keeps the body's scene out to the exit distance, so a reader can come back in.
-      if (landed && outside > 0 && distance(world.pose.positionM, selected.originM) >= outside) return { overview: true, objectId: system.id };
-      return distance(world.pose.positionM, system.originM) >= exit ? { overview: true, objectId: system.id } : null;
+      if (landed && outside > 0 && eyeDistanceM(world.pose, selected.originM) >= outside) return { overview: true, objectId: system.id };
+      return eyeDistanceM(world.pose, system.originM) >= exit ? { overview: true, objectId: system.id } : null;
     }
     // A star or body outside every system keeps its scene until the camera is as far from it as the Sun is;
     // the Solar System overview then hands the camera to the galactic scopes.
@@ -42,7 +43,7 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
     if (!sun) return null;
     // A galaxy is a body too, and a near one is framed from farther than the Sun is: the LMC, 49.6 kpc away, opened as
     // "Local Group" the moment its flight landed (2026-10-01). A body keeps its scene out to twice the range it came to rest at.
-    return distance(world.pose.positionM, selected.originM) >= Math.max(policy.exitSunDistanceM, distance(selected.originM, sun.originM), 2 * restRangeM)
+    return eyeDistanceM(world.pose, selected.originM) >= Math.max(policy.exitSunDistanceM, distance(selected.originM, sun.originM), 2 * restRangeM)
       ? { overview: true, objectId: SOLAR_SYSTEM_ID } : null;
   }
   // An overview mounts its system's star; only approaching that star opens its card.
@@ -67,7 +68,7 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
   let restRangeM: number | null = null;
   const range = (world: WorldCameraPose) => {
     const origin = objects.find(object => object.id === objectId)?.worldFrame?.originM;
-    return origin ? distance(world.pose.positionM, origin) : 0;
+    return origin ? eyeDistanceM(world.pose, origin) : 0;
   };
   function inspect(landed = false) {
     timer = null;
