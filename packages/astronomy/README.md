@@ -9,8 +9,8 @@ RA/declination pairs and returns a position predicate. Catalogue coordinates sta
 in degrees to preserve the authoring arithmetic; `comparison` selects `degrees`
 (the default) or `arcseconds` for the historical rounding difference. Numeric
 non-finite positions remain accepted and do not match. The radius must be finite
-and positive. The legacy 3x3 cell lookup deliberately does not wrap RA at zero;
-the known seam defect is tracked in issue #1151.
+and positive. RA wraps at 360 degrees in both the cell lookup and the distance,
+so pairs across RA zero match like any others.
 
 Maintainers add physical values and retained orbit data in
 `data/bodies/<id>.json`. Acquisition choices and source URLs stay with each
