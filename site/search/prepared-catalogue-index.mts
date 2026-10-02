@@ -10,6 +10,7 @@ import { SCENE_OBJECTS } from '../objects.mts';
 import type { CatalogueIndex, CatalogueIndexEntry } from './catalogue-index.mts';
 import { listDistance } from './list-distance.mts';
 import { systemObjectId } from '@cssearth/objects';
+import { allSatelliteSystems } from '../satellite-systems.mts';
 
 /** A row's sprite is drawn at this share of its prepared size: the largest marker is 14 px. */
 const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS).map(({ presentation }) => presentation.size));
@@ -56,10 +57,10 @@ export function preparedCatalogueIndex(): CatalogueIndex {
   });
 }
 
-/** One row per planetary system, leading to its overview: search finds a system by name ("trappist" lists the TRAPPIST-1
+/** One row per system, leading to its own address: a star's planetary system or a planet's moons. search finds a system by name ("trappist" lists the TRAPPIST-1
  * system) and "planetary systems" lists them all, from the server, instead of a hidden row per system in every page. */
 function systemEntries(): CatalogueIndexEntry[] {
-  return allPlanetarySystems(SCENE_OBJECTS).map(system => {
+  return [...allPlanetarySystems(SCENE_OBJECTS).map(system => {
     const star = SCENE_OBJECTS.find(object => object.id === system.id)!, source = systemSourceDocumentation(system);
     const title = distanceDescription(star.distance), { value, unit } = listDistance(star.distance);
     return Object.freeze({
@@ -78,7 +79,27 @@ function systemEntries(): CatalogueIndexEntry[] {
       source: Object.freeze({ subject: `overview:system:${system.id}`, document: source.href, label: source.label }),
       marker: objectResultMarker(star),
     });
-  });
+  }), ...allSatelliteSystems().map(system => {
+    // A planet's moons are a system too, an object with its own address: search finds "Jupiter system" as it finds a star's.
+    const host = SCENE_OBJECTS.find(object => object.id === system.hostId)!, source = systemSourceDocumentation({ id: system.hostId, name: system.name, memberIds: system.memberIds });
+    const title = distanceDescription(host.distance), { value, unit } = listDistance(host.distance);
+    return Object.freeze({
+      kind: 'system' as const,
+      id: system.hostId,
+      name: system.name,
+      searchNames: Object.freeze([]),
+      classification: 'satellite-system',
+      classificationName: 'moon system',
+      systemName: host.systemName.toLocaleLowerCase('en'),
+      route: `/${systemObjectId(system.hostId)}/`,
+      illustration: false,
+      candidate: false,
+      distanceMeters: host.distance.meters,
+      detail: Object.freeze({ text: `${value} ${unit}`, value, unit, title, ariaLabel: `${value} ${unit}. ${title}` }),
+      source: Object.freeze({ subject: `satellite-system:${system.hostId}`, document: source.href, label: source.label }),
+      marker: objectResultMarker(host),
+    });
+  })];
 }
 
 export const PREPARED_CATALOGUE_INDEX = preparedCatalogueIndex();
