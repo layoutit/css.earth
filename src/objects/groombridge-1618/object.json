@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "groombridge-1618",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Groombridge 1618",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 445108.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/groombridge-1618-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Groombridge 1618",
+      "classification": "star",
+      "color": "#ffc195",
+      "distanceAu": 1004567.6,
+      "description": "A nearby orange dwarf whose disc was measured by interferometry: 64% of the Sun's width.",
+      "systemName": "Groombridge 1618 system",
+      "aliases": [
+        "GJ 380"
+      ],
+      "order": 5372,
+      "context": {
+        "order": 5369
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -86915475627599600,
+        44617274131453680,
+        114190315007348560
+      ],
+      "presentationToReference": [
+        -0.5783347247975775,
+        -0.6760327589579829,
+        0.45662747936251935,
+        0.29688290814105633,
+        0.346942641707563,
+        0.8896579917129317,
+        0.7598614906330097,
+        -0.6500850038115288,
+        -0.000053594265579671
+      ],
+      "orbitUpReference": [
+        0.6760327589579829,
+        -0.346942641707563,
+        0.6500850038115288
+      ],
+      "metersPerUnit": 1435835.1612903227,
+      "bodyRadiusM": 445108900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

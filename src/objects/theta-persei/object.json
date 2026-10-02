@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "theta-persei",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Theta Persei",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 917628.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/theta-persei-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Theta Persei",
+      "classification": "star",
+      "color": "#ffedf6",
+      "distanceAu": 2294957.5,
+      "description": "A naked-eye star 11 parsecs away whose disc the CHARA Array measured: 1.3 times the Sun's width.",
+      "systemName": "Theta Persei system",
+      "aliases": [
+        "HD 16895"
+      ],
+      "order": 5401,
+      "context": {
+        "order": 5398
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        169072967444572670,
+        147251535385751780,
+        260000880527072740
+      ],
+      "presentationToReference": [
+        0.4924609411523594,
+        0.5710997091979844,
+        0.6567551625935726,
+        0.42890138393505367,
+        0.49736399811793514,
+        -0.7541038762894263,
+        0.7573148779060981,
+        -0.6530499027870078,
+        0.000013113031463503237
+      ],
+      "orbitUpReference": [
+        -0.5710997091979844,
+        -0.49736399811793514,
+        0.6530499027870078
+      ],
+      "metersPerUnit": 2960091.290322581,
+      "bodyRadiusM": 917628300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

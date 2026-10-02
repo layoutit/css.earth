@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "gj-631",
+  "displayName": "GJ 631",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.76 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-757-2-112",
+          "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+          "label": "Boyajian et al. (2012), The Astrophysical Journal 757 112",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "9.9 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-gj-631",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "gj-631-dataset-color.webp",
+        "surface": "gj-631-surface-color@2x.webp",
+        "poles": "gj-631-poles-color@2x.webp",
+        "source": {
+          "id": "gj-631-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4358031335898505472&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,337 K and log g 4.59 (u1 0.564, u2 0.190): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Boyajian et al. (2012), ApJ 757, 112",
+      "href": "https://doi.org/10.1088/0004-637X/757/2/112"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+      "credit": "Boyajian et al. (2012), ApJ 757, 112"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gj-631.json",
+      "credit": "Boyajian et al. radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

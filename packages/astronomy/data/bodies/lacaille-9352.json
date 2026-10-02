@@ -1,0 +1,30 @@
+{
+ "id": "lacaille-9352",
+ "classification": "star",
+ "order": 5389,
+ "physical": {
+  "name": "Lacaille 9352",
+  "horizonsCode": null,
+  "meanRadiusKm": 327813.8,
+  "gravitationalParameterKm3PerS2": 69275893701.89236,
+  "parent": null,
+  "effectiveTemperatureK": 3676
+ },
+ "physicalNotes": "Radius 0.4712 +/- 0.0086 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 887: radius in solar radii, 0.4712 +/- 0.0086, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112): 327,814 km at 695,700 km per solar radius. Mass 0.522 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 887: mass 0.522 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112); GM is that mass times the JPL solar GM. Temperature 3676 +/- 35 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 887: effective temperature in K, 3676 +/- 35, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 346.5039166796005,
+  "declinationDegrees": -35.8471642082214,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 3.2880095551861235,
+  "properMotionRaMasPerYear": 6765.995136250774,
+  "properMotionDecMasPerYear": 1330.2852747179845,
+  "radialVelocityKmPerS": 8.306988,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 6553614253923452800 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/lacaille-9352/source/photometry/gaia-dr3-source.csv; cross-identification HD 217987, HIP 114046: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+6553614253923452800",
+   "distance": "Gaia DR3 parallax 304.1354 +/- 0.0200 mas (same row, RUWE 0.93): 3.29 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 6765.995, 1330.285 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 8.31 +/- 0.13 km/s"
+  }
+ }
+}

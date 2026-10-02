@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "zosma",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Zosma",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1778904.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/zosma-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Zosma",
+      "classification": "star",
+      "color": "#c8d8ff",
+      "distanceAu": 3695187,
+      "description": "A naked-eye star 18 parsecs away whose disc the CHARA Array measured: 2.6 times the Sun's width.",
+      "systemName": "Zosma system",
+      "aliases": [
+        "HD 97603"
+      ],
+      "order": 5349,
+      "context": {
+        "order": 5346
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -507363623340617500,
+        102968211635555650,
+        193800948867716000
+      ],
+      "presentationToReference": [
+        -0.9178199591305556,
+        -0.3435813273932,
+        0.19889292116189594,
+        0.18626932528752807,
+        0.06972899357685593,
+        0.9800212272760667,
+        0.3505855973632039,
+        -0.9365306929948882,
+        2.146717648190052e-17
+      ],
+      "orbitUpReference": [
+        0.3435813273932,
+        -0.06972899357685593,
+        0.9365306929948882
+      ],
+      "metersPerUnit": 5738402.903225807,
+      "bodyRadiusM": 1778904900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

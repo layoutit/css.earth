@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "alsafi",
+  "card": {
+    "text": "A naked-eye star 6 parsecs away whose disc the CHARA Array measured: 78% of the Sun's width.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-746-1-101",
+        "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+        "label": "Boyajian et al. (2012), The Astrophysical Journal 746 101",
+        "checked": "2026-10-02",
+        "locator": "Tables 5 and 10, HD 185144: limb-darkened diameter, R, Teff"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its disc spans 1.254 milliarcseconds, which gives 0.776 solar radii and 5,255 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-746-1-101",
+        "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+        "label": "Boyajian et al. (2012), The Astrophysical Journal 746 101",
+        "checked": "2026-10-02",
+        "locator": "Tables 5 and 10, HD 185144: limb-darkened diameter, R, Teff"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -12,7 +12,7 @@ import { bindInputs, installColorDataset, json } from './dataset.mts';
 import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
-import { CATALOGUE_ROW_REPLACEMENTS, citedName, isCollaboration, fetchGaiaEclipsingPeriod, fetchCatalogueRow, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, VIZIER_ASU, type Archive, type CatalogueRow, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
+import { CATALOGUE_ROW_REPLACEMENTS, citedName, isCollaboration, fetchGaiaEclipsingPeriod, fetchCatalogueRow, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, readIdentifiers, telescopeResolver, VIZIER_ASU, type Archive, type CatalogueRow, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
 import { chooseGravity } from './gravity.mts';
@@ -69,6 +69,12 @@ export async function fallbackRadialVelocity(archive: Archive, sourceId: string,
 /** The weakest Gaia DR3 parallax that places a star by itself, in standard errors: 20% on the distance. The weakest one placed before
  * this floor existed is CE Tauri's, 5.7 (2026-09-27). Below it, or with no parallax at all, the spec cites a distance. */
 export const PARALLAX_FLOOR_SIGMA = 5;
+/** The star's position at J2000, where SIMBAD lists it: the row's position carried back along its proper motion. A nearby star moves
+ * arcseconds a year, so its Gaia position (J2016) is tens of arcseconds from SIMBAD's, and a search at it finds nothing. */
+export function simbadPosition(row: { readonly ra: number; readonly dec: number; readonly epoch?: number }, properMotion: { readonly ra: number; readonly dec: number }) {
+  const years = 2000 - (row.epoch ?? 2016), degrees = (mas: number) => mas * years / 3.6e6;
+  return { ra: row.ra + degrees(properMotion.ra) / Math.cos(row.dec * Math.PI / 180), dec: row.dec + degrees(properMotion.dec) };
+}
 /** Where a star is: its Gaia DR3 position, at the spec's cited distance or else at its parallax distance, with Gaia's proper motion, or
  * none for a two-parameter solution (a star in another galaxy, whose motion across the sky is negligible at that distance). A star Gaia
  * cannot see sits at its catalogue row's J2000 position and the spec's cited distance, with no proper motion. */
@@ -78,8 +84,8 @@ export function placement(spec: StarSpec, row: GaiaRow | CatalogueRow) {
     if (!spec.distance) throw new TypeError(`${spec.id}: ${row.words} gives a position, not a distance; give distance with its source.`);
     const parsecs = spec.distance.value, kmPerSecondPerMas = 4.74047 * parsecs / 1000;
     return { parsecs, source: `${spec.distance.source} (${spec.distance.url}): ${spec.distance.value}${spec.distance.uncertainty ? ` +/- ${spec.distance.uncertainty}` : ''} pc; Gaia DR3 cannot see the star`,
-      readme: `distance ${Math.round(parsecs).toLocaleString('en-US')} pc from ${spec.distance.source}`,
-      properMotion: { ra: 0, dec: 0, source: `${row.words} measures no proper motion; zero is assumed (at ${Math.round(parsecs).toLocaleString('en-US')} pc, 1 mas/yr would be ${Math.round(kmPerSecondPerMas).toLocaleString('en-US')} km/s across the sky)` },
+      readme: `distance ${parsecs < 100 ? parsecs.toFixed(2) : Math.round(parsecs).toLocaleString('en-US')} pc from ${spec.distance.source}`,
+      properMotion: row.pmra !== undefined ? { ra: row.pmra, dec: row.pmdec!, source: `VizieR ${row.words} (same row): ${row.pmra}, ${row.pmdec} mas/yr` } : { ra: 0, dec: 0, source: `${row.words} measures no proper motion; zero is assumed (at ${Math.round(parsecs).toLocaleString('en-US')} pc, 1 mas/yr would be ${Math.round(kmPerSecondPerMas).toLocaleString('en-US')} km/s across the sky)` },
       cited: spec.distance };
   }
   const parallax = row.parallax === undefined ? undefined : { value: row.parallax, error: row.parallaxError!, sigma: row.parallax / row.parallaxError!, ruwe: row.ruwe! };
@@ -115,11 +121,11 @@ export function astronomyRecord(spec: StarSpec, row: GaiaRow | CatalogueRow, ids
       + `Temperature ${t.value}${t.uncertainty ? ` +/- ${t.uncertainty}` : ''} K from ${t.source} (${t.url}).`
       + (spec.spin ? ` Spin inclination ${spec.spin.inclinationDegrees} degrees${spec.spin.periodDays ? ` and rotation period ${spec.spin.periodDays} d` : ''} from ${spec.spin.source} (${spec.spin.url}).` : '')
       + ' presentationUp: the display axis is a sky-plane convention; the spin axis\'s position angle on the sky is not measured.',
-    star: { rightAscensionDegrees: row.ra, declinationDegrees: row.dec, positionEpochJulianYear: gaia ? 2016 : 2000, distanceParsecs: place.parsecs,
+    star: { rightAscensionDegrees: row.ra, declinationDegrees: row.dec, positionEpochJulianYear: gaia ? 2016 : catalogue!.epoch, distanceParsecs: place.parsecs,
       properMotionRaMasPerYear: place.properMotion.ra, properMotionDecMasPerYear: place.properMotion.dec, radialVelocityKmPerS: rv, presentationUp: 'display-axis',
       sources: {
         position: gaia ? `Gaia DR3 source ${gaia.sourceId} (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/${spec.id}/source/photometry/gaia-dr3-source.csv${cross ? `; cross-identification ${cross}: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+${gaia.sourceId}` : ''}`
-          : `${spec.position!.credit} (${spec.position!.url}), VizieR ${catalogue!.words}: RAJ2000 ${row.ra}, DEJ2000 ${row.dec}, from the archived row src/objects/${spec.id}/source/${CATALOGUE_ROW_PATH}${spec.target ? `; SIMBAD names it ${spec.target}` : ''}`,
+          : `${spec.position!.credit} (${spec.position!.url}), VizieR ${catalogue!.words}: RAJ2000 ${row.ra}, DEJ2000 ${row.dec}${catalogue!.epoch === 2000 ? '' : ` (ICRS at epoch J${catalogue!.epoch})`}, from the archived row src/objects/${spec.id}/source/${CATALOGUE_ROW_PATH}${spec.target ? `; SIMBAD names it ${spec.target}` : ''}`,
         distance: place.source,
         properMotion: place.properMotion.source,
         radialVelocity: gaia?.radialVelocity !== undefined ? `Gaia DR3 (same row): ${gaia.radialVelocity.toFixed(2)}${gaia.radialVelocityError ? ` +/- ${gaia.radialVelocityError.toFixed(2)}` : ''} km/s` : `${spec.radialVelocity!.source} (${spec.radialVelocity!.url})` } } };
@@ -164,8 +170,10 @@ export function eclipsingPeriodAgrees(paperDays: number, gaiaDays: number | unde
 /** Compose every file of the package and its shared records. Pure apart from the archive reads; the caller writes. */
 export async function generateStar(spec: StarSpec, { archive = liveArchive, root = process.cwd(), resolver = telescopeResolver(root), order, universe, refresh = false, solarEpoch }: { archive?: Archive; root?: string; resolver?: Resolver; order: number; universe?: Existing; refresh?: boolean; solarEpoch: SolarEpoch }): Promise<Generated> {
   // The Gaia row waits only for the identity; everything else (colour, limb, the papers) is read at once. A star Gaia cannot see has
-  // no identifiers to search the archives by: its catalogue row is its identity and its evidence.
-  const ids: Identifiers = spec.position ? { main: spec.target ?? spec.name } : await identify(resolver, spec.target, spec.gaia, spec.id);
+  // no identifiers to search the archives by: its catalogue row is its identity and its evidence. A star too bright for Gaia (a
+  // Hipparcos row, with its motion) is in the bright-star spectral catalogues under the HD and HR numbers SIMBAD lists for it.
+  const bright = spec.position?.motion && spec.target ? await resolver(spec.target) : undefined;
+  const ids: Identifiers = bright ? readIdentifiers(bright.mainId, bright.identifiers) : spec.position ? { main: spec.target ?? spec.name } : await identify(resolver, spec.target, spec.gaia, spec.id);
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...spec.position ? [spec.position.url] : [], ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.distance, spec.spin].flatMap(value => value && value !== 'gaia-flame' && value !== 'unmeasured' ? [value.url] : [])])];
   const [gaiaRead, catalogueRow, found] = await Promise.all([spec.position ? undefined : fetchGaiaRow(archive, ids.gaia!), spec.position ? fetchCatalogueRow(archive, spec.position, spec.id) : undefined,
@@ -179,7 +187,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
       throw new Error(`${id}: Gaia DR3 ${gaia.sourceId} eclipses every ${gaiaDays!.toFixed(4)} d, not on the orbit's ${paperDays} d (or half or twice it): it is probably another star of that name.`);
   }
   // A star already placed under another id (a common name, another catalogue) is the same star: never a second package.
-  const held = duplicateStar(universe ?? await existingBodies(root), { ra: row.ra, dec: row.dec, epoch: gaia ? 2016 : 2000, ...(catalogueRow ? { row: citedRow(`${label}:`)! } : {}) }, refresh ? id : undefined);
+  const held = duplicateStar(universe ?? await existingBodies(root), { ra: row.ra, dec: row.dec, epoch: gaia ? 2016 : catalogueRow!.epoch, ...(catalogueRow ? { row: citedRow(`${label}:`)! } : {}) }, refresh ? id : undefined);
   if (held) throw new Error(`${id}: ${label} is ${held}, already in the universe (${catalogueRow ? 'the same row' : `within ${DUPLICATE_ARCSEC}" of its position`}); add its bodies with { "host": "${held}" }.`);
   // Gaia DR3 measures no radial velocity for a faint or hot star (a quarter of the archive's transiting hosts): SIMBAD's, else zero.
   if (gaia && gaia.radialVelocity === undefined && !spec.radialVelocity) {
@@ -194,7 +202,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const gravityRange = spec.gravityRange ?? (cepheid?.type === 'DCEP' ? CEPHEID_GRAVITIES : undefined);
   // No mass: a published spectroscopic gravity, else a display gravity inside the class's cited range (gravity.mts).
   const gravity = Number.isFinite(physical.logg) || spec.limb?.none ? null
-    : await chooseGravity({ archive, ra: row.ra, dec: row.dec, teffK: spec.temperature.value, ...(gravityRange ? { range: gravityRange } : {}), where: id });
+    : await chooseGravity({ archive, ...simbadPosition(row, place.properMotion), teffK: spec.temperature.value, ...(gravityRange ? { range: gravityRange } : {}), where: id });
   const limbLogg = gravity?.logg ?? physical.logg;
   const [color, limb] = await Promise.all([chooseColor(spec, gaia, ids, archive, cmf), chooseLimb(id, spec.temperature.value, limbLogg, archive, spec.limb?.none ?? (Number.isFinite(limbLogg) ? undefined : 'no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class'), physical.gm > 0 ? Number((physical.gm / GM_SUN).toFixed(3)) : undefined)]);
   const publications = new Map<string, Publication>(found.flatMap(([url, publication]) => publication ? [[url, publication]] : []));
@@ -325,7 +333,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const colorLinks = color.inputs.map(input => String(input.origin)).filter(origin => origin.startsWith('https://') && !origin.includes('asu-tsv') && !origin.includes('/tap/'));
   writeLedger(files, id, [
     { id: 'placement', subject: 'Placement', evidence: [gaia ? gaiaArchive : `https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=${spec.position!.catalogue}`, ...place.cited ? [place.cited.url] : [], ...gaia?.radialVelocity === undefined && spec.radialVelocity ? [spec.radialVelocity.url] : []],
-      finding: `${gaia ? `Gaia DR3 source ${gaia.sourceId}: position at J2016.0` : `${spec.position!.credit}, VizieR ${catalogueRow!.words}: J2000 position; Gaia cannot see the star`}. Distance: ${place.source}. Proper motion: ${place.properMotion.source}. Radial velocity ${gaia?.radialVelocity !== undefined ? 'from the same row' : `from ${spec.radialVelocity!.source}`}.` },
+      finding: `${gaia ? `Gaia DR3 source ${gaia.sourceId}: position at J2016.0` : `${spec.position!.credit}, VizieR ${catalogueRow!.words}: ${catalogueRow!.epoch === 2000 ? 'J2000 position' : `position at J${catalogueRow!.epoch}`}; Gaia cannot see the star`}. Distance: ${place.source}. Proper motion: ${place.properMotion.source}. Radial velocity ${gaia?.radialVelocity !== undefined ? 'from the same row' : `from ${spec.radialVelocity!.source}`}.` },
     { id: 'radius-mass-and-temperature', subject: 'Radius, mass and temperature', evidence: [...spec.radius === 'gaia-flame' || spec.mass === 'gaia-flame' ? [gaiaArchive] : [], spec.temperature.url],
       finding: `${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value}${spec.temperature.uncertainty ? ` +/- ${spec.temperature.uncertainty}` : ''} K from ${spec.temperature.source}.` },
     { id: 'colour', subject: 'Colour', evidence: color.route === 'planck' ? [spec.temperature.url] : colorLinks,

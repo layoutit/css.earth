@@ -1,0 +1,37 @@
+{
+  "id": "gj-631",
+  "name": "GJ 631",
+  "system": "GJ 631 system",
+  "description": "A nearby orange dwarf, 76% of the Sun's width: its disc was measured by interferometry.",
+  "target": "GJ 631",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+    "credit": "Boyajian et al. (2012), ApJ 757, 112"
+  },
+  "radius": {
+    "value": 0.7591,
+    "source": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 631: radius in solar radii, 0.7591 +/- 0.0122, from this work (CHARA)",
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+    "uncertainty": 0.0122
+  },
+  "mass": {
+    "value": 0.821,
+    "source": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 631: mass 0.821 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass",
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112"
+  },
+  "temperature": {
+    "value": 5337,
+    "source": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 631: effective temperature in K, 5337 +/- 41, from this work (CHARA)",
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+    "uncertainty": 41
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A nearby orange dwarf whose disc was measured by interferometry: 76% of the Sun's width.",
+    "introduction": "Interferometry gives it 0.7591 solar radii; with its total light, that makes its surface 5,337 K.",
+    "locator": "Table 6, GJ 631: R, TEFF"
+  },
+  "notes": [],
+  "order": 5376
+}

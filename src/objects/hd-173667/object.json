@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-173667",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "110 Herculis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1435924.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-173667-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "110 Herculis",
+      "classification": "star",
+      "color": "#ecedff",
+      "distanceAu": 3962192.8,
+      "description": "A naked-eye star 19 parsecs away whose disc the CHARA Array measured: 2.1 times the Sun's width.",
+      "systemName": "110 Herculis system",
+      "aliases": [
+        "HD 173667"
+      ],
+      "order": 5357,
+      "context": {
+        "order": 5354
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        109854464773100200,
+        -544060136685626900,
+        208004966653034000
+      ],
+      "presentationToReference": [
+        0.1853334745890928,
+        0.06945880299284225,
+        -0.9802178216516653,
+        -0.9178739865268777,
+        -0.34399756211464677,
+        -0.19792175756201533,
+        0.3509399493559996,
+        -0.9363979666498541,
+        -1.6496554036597392e-7
+      ],
+      "orbitUpReference": [
+        -0.06945880299284225,
+        0.34399756211464677,
+        0.9363979666498541
+      ],
+      "metersPerUnit": 4632015.483870967,
+      "bodyRadiusM": 1435924800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lambda-geminorum",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Lambda Geminorum",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1931958.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/lambda-geminorum-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Lambda Geminorum",
+      "classification": "star",
+      "color": "#c0cfff",
+      "distanceAu": 6373960.5,
+      "description": "A naked-eye star 31 parsecs away whose disc the CHARA Array measured: 2.8 times the Sun's width.",
+      "systemName": "Lambda Geminorum system",
+      "aliases": [
+        "HD 56537"
+      ],
+      "order": 5408,
+      "context": {
+        "order": 5405
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -305468497807089200,
+        861522505212872600,
+        271457526486959700
+      ],
+      "presentationToReference": [
+        -0.3203549269746566,
+        -0.09513881964285402,
+        0.9425079977167446,
+        0.9035071741505626,
+        0.2683209123772396,
+        0.33418359361212063,
+        0.28468843851046655,
+        -0.9586200983590998,
+        -6.797971512446375e-7
+      ],
+      "orbitUpReference": [
+        0.09513881964285402,
+        -0.2683209123772396,
+        0.9586200983590998
+      ],
+      "metersPerUnit": 6232125.483870967,
+      "bodyRadiusM": 1931958900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

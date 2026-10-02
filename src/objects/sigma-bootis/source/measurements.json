@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "sigma-bootis",
+  "angularDiameterMas": 0.84,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 995,547 km at 15.83 pc = 0.84 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 15.833,
+  "distanceSource": "Boyajian et al. (2012), ApJ 746, 101, HD 128167: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 63.16 +/- 0.26 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 15.833 +/- 0.065 pc; Gaia DR3 parallax 63.4679 +/- 0.1173 mas (same row, RUWE 1.18), 540.9 standard errors, is not used",
+  "radiusKm": 995546.7,
+  "radiusSource": "Radius 1.431 +/- 0.023 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 128167: radius in solar radii, from the limb-darkened angular diameter 0.841 +/- 0.013 mas (CHARA) and the Hipparcos parallax, 1.431 +/- 0.023 (https://doi.org/10.1088/0004-637X/746/1/101): 995,547 km at 695,700 km per solar radius. Mass 1.194 +/- 0.013 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 128167: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.194 +/- 0.013 (https://doi.org/10.1088/0004-637X/746/1/101); GM is that mass times the JPL solar GM. Temperature 6594 +/- 55 K from Boyajian et al. (2012), ApJ 746, 101, HD 128167: effective temperature in K, from the angular diameter and the bolometric flux, 6594 +/- 55 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6594,
+  "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 128167: effective temperature in K, from the angular diameter and the bolometric flux, 6594 +/- 55 (https://doi.org/10.1088/0004-637X/746/1/101)",
+  "surfaceGravityLogg": 4.2,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/sigma-bootis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.204, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

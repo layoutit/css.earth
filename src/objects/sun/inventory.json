@@ -1893,6 +1893,12 @@
     },
     {
       "location": "prepared",
+      "filename": "system-views/procyon.json",
+      "bytes": 30373,
+      "sha256": "2f580d0bfdde709f08f188038dafb6720f53342fbb9e334a303d9f1901f7f894"
+    },
+    {
+      "location": "prepared",
       "filename": "system-views/qatar-1.json",
       "bytes": 30461,
       "sha256": "76d27142d57b278b8f565298f9c561b300e768e7e66a604d78a7add34e052625"
@@ -1938,6 +1944,12 @@
       "filename": "system-views/sgr-a-star.json",
       "bytes": 193558,
       "sha256": "514c80d30405a8774499d23bc15ac6bddae783e3ad9b41493d9922ab375bf0ab"
+    },
+    {
+      "location": "prepared",
+      "filename": "system-views/sirius.json",
+      "bytes": 30313,
+      "sha256": "19f2eb0e16c2eca0bb7259de5aaf93e0e22523b2a5067c792a2864fa7e8790d1"
     },
     {
       "location": "prepared",
@@ -4636,14 +4648,14 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 918433,
-      "sha256": "823e4d3e038ccd984e1fa03113f5cc8047fdb65afc91bc1b14c394adf5056f41"
+      "bytes": 932253,
+      "sha256": "1dce9c7f4a87914d63a14234ddf67d16ae97c9e9b47a559477f6820868eccb8f"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 54371436,
-      "sha256": "bfb56f53975df180eac63c56986af1f99219c7e0b63bd1d2368ef8b5da4623ba"
+      "bytes": 54763268,
+      "sha256": "378a6986e80221bce4557bbf5db896e7646705df9bfb4826a1379a42793a8a34"
     },
     {
       "location": "prepared",
@@ -9309,6 +9321,12 @@
     },
     {
       "location": "prepared",
+      "filename": "world-orbits/procyon-b.bin",
+      "bytes": 2263,
+      "sha256": "3fa8c1d232791aa72eacb87e41b552a268ef7d6f9d658e9f76a7de79a90b77ec"
+    },
+    {
+      "location": "prepared",
       "filename": "world-orbits/prometheus.bin",
       "bytes": 2254,
       "sha256": "da8a04bcfa85c66ea76012a2cd4685eb4c69071ec1d1bbd6f9b09e7d8200c53c"
@@ -9822,6 +9840,12 @@
       "filename": "world-orbits/sinope.bin",
       "bytes": 2257,
       "sha256": "2d9ed0b22e6d0d9ee724090df39cabf675938c523e1a7c4a5e5d37bfccd34d27"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/sirius-b.bin",
+      "bytes": 2267,
+      "sha256": "2d8b87dc65058ba47b9185514e8cae890baa6d9761e00117e572ad6cc9471ac7"
     },
     {
       "location": "prepared",
@@ -15009,6 +15033,12 @@
     },
     {
       "location": "prepared",
+      "filename": "world-systems/procyon.json",
+      "bytes": 888,
+      "sha256": "06b44049dc9c8a963ddd01532d34c47b6351d1601d1f4cdc5042230a6599b2d0"
+    },
+    {
+      "location": "prepared",
       "filename": "world-systems/qatar-1.json",
       "bytes": 695,
       "sha256": "fe81a2116c89a2f1c5fac20d11b7e2988543d57ea48c62bf48badcac24c49641"
@@ -15042,6 +15072,12 @@
       "filename": "world-systems/sgr-a-star.json",
       "bytes": 18855,
       "sha256": "a79a60522ea17b506c60b4f75205190c175ce58549ba30da7fe93e41abca25bf"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-systems/sirius.json",
+      "bytes": 886,
+      "sha256": "60103805f867961d9c819d418b8172f7ddc58533768b050470388463030bb68e"
     },
     {
       "location": "prepared",

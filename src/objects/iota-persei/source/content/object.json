@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "iota-persei",
+  "displayName": "Iota Persei",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.4 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-746-1-101",
+          "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+          "label": "Boyajian et al. (2012), The Astrophysical Journal 746 101",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "10.5 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-746-1-101",
+          "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+          "label": "Boyajian et al. (2012), ApJ 746, 101, HD 19373: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 94.87 +/- 0.23 mas, inverted",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "iota-persei-dataset-color.webp",
+        "surface": "iota-persei-surface-color@2x.webp",
+        "poles": "iota-persei-poles-color@2x.webp",
+        "source": {
+          "id": "iota-persei-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,915 K and log g 4.21 (u1 0.429, u2 0.278): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Boyajian et al. (2012), ApJ 746, 101",
+      "href": "https://doi.org/10.1088/0004-637X/746/1/101"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+      "credit": "Boyajian et al. (2012), ApJ 746, 101"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/iota-persei.json",
+      "credit": "Boyajian et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

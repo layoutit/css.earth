@@ -1,0 +1,47 @@
+{
+  "id": "hd-82885",
+  "name": "11 Leonis Minoris",
+  "system": "11 Leonis Minoris system",
+  "description": "A naked-eye star 11.4 parsecs away, the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 82885"
+  ],
+  "target": "HD 82885",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 1.003,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 82885: radius in solar radii, from the limb-darkened angular diameter 0.821 +/- 0.013 mas (CHARA) and the Hipparcos parallax, 1.003 +/- 0.016",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.016
+  },
+  "mass": {
+    "value": 0.91,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 82885: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 0.91 +/- 0.02",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 5434,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 82885: effective temperature in K, from the angular diameter and the bolometric flux, 5434 +/- 45",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 45
+  },
+  "distance": {
+    "value": 11.369,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 82885: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 87.96 +/- 0.32 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.041
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 11 parsecs away whose disc the CHARA Array measured: the Sun's width.",
+    "introduction": "Its disc spans 0.821 milliarcseconds, which gives 1.003 solar radii and 5,434 K at its surface.",
+    "locator": "Tables 5 and 10, HD 82885: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5412
+}

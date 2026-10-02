@@ -1,0 +1,30 @@
+{
+ "id": "merak",
+ "classification": "star",
+ "order": 5415,
+ "physical": {
+  "name": "Merak",
+  "horizonsCode": null,
+  "meanRadiusKm": 2101709.7,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 9377
+ },
+ "physicalNotes": "Radius 3.021 +/- 0.038 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 95418: radius in solar radii, from the limb-darkened angular diameter 1.149 +/- 0.014 mas (CHARA) and the Hipparcos parallax, 3.021 +/- 0.038 (https://doi.org/10.1088/0004-637X/746/1/101): 2,101,710 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 9377 +/- 75 K from Boyajian et al. (2012), ApJ 746, 101, HD 95418: effective temperature in K, from the angular diameter and the bolometric flux, 9377 +/- 75 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 165.46097417209683,
+  "declinationDegrees": 56.38257749355825,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 24.456,
+  "properMotionRaMasPerYear": 79.9586126663101,
+  "properMotionDecMasPerYear": 32.364540942038154,
+  "radialVelocityKmPerS": -13.1,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 856096765753549056 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/merak/source/photometry/gaia-dr3-source.csv; cross-identification HD 95418, HR 4295, HIP 53910: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+856096765753549056",
+   "distance": "Boyajian et al. (2012), ApJ 746, 101, HD 95418: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 40.89 +/- 0.16 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 24.456 +/- 0.096 pc; Gaia DR3 parallax 38.6031 +/- 1.1285 mas (same row, RUWE 5.99), 34.2 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): 79.959, 32.365 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 856096765753549056 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract)"
+  }
+ }
+}

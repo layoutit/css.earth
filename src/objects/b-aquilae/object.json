@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "b-aquilae",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "b Aquilae",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 959370.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/b-aquilae-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "b Aquilae",
+      "classification": "star",
+      "color": "#ffefe8",
+      "distanceAu": 3130255.1,
+      "description": "A naked-eye star 15 parsecs away whose disc the CHARA Array measured: 1.4 times the Sun's width.",
+      "systemName": "b Aquilae system",
+      "aliases": [
+        "HD 182572"
+      ],
+      "order": 5359,
+      "context": {
+        "order": 5356
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        166029512979000930,
+        -426989144262396900,
+        96954445259969220
+      ],
+      "presentationToReference": [
+        0.35455466347711245,
+        0.07501459125117638,
+        -0.9320213526019941,
+        -0.9118318168639121,
+        -0.19294180345478731,
+        -0.3624033639941432,
+        0.2070114208474709,
+        -0.9783385260629539,
+        0.000007725162715409094
+      ],
+      "orbitUpReference": [
+        -0.07501459125117638,
+        0.19294180345478731,
+        0.9783385260629539
+      ],
+      "metersPerUnit": 3094742.9032258065,
+      "bodyRadiusM": 959370300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

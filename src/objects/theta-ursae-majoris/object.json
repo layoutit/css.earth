@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "theta-ursae-majoris",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Theta Ursae Majoris",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1645330.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/theta-ursae-majoris-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Theta Ursae Majoris",
+      "classification": "star",
+      "color": "#fbf8ff",
+      "distanceAu": 2780688.2,
+      "description": "A naked-eye star 13 parsecs away whose disc the CHARA Array measured: 2.4 times the Sun's width.",
+      "systemName": "Theta Ursae Majoris system",
+      "aliases": [
+        "HD 82328"
+      ],
+      "order": 5411,
+      "context": {
+        "order": 5408
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -206573579644287500,
+        154519718097148670,
+        326335039276768100
+      ],
+      "presentationToReference": [
+        -0.4965713596526336,
+        -0.6282394789254961,
+        0.5989424362091538,
+        0.37144182274891646,
+        0.469854249388537,
+        0.8007920807828317,
+        0.7845048483506636,
+        -0.6201226825805968,
+        -0.000038253717482413415
+      ],
+      "orbitUpReference": [
+        0.6282394789254961,
+        -0.469854249388537,
+        0.6201226825805968
+      ],
+      "metersPerUnit": 5307517.741935484,
+      "bodyRadiusM": 1645330500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

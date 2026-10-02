@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "zeta-aquilae-a",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Zeta Aquilae A",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1703769.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/zeta-aquilae-a-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Zeta Aquilae A",
+      "classification": "star",
+      "color": "#b8cbff",
+      "distanceAu": 5252477,
+      "description": "A naked-eye star 25 parsecs away whose disc the CHARA Array measured: 2.4 times the Sun's width.",
+      "systemName": "Zeta Aquilae A system",
+      "aliases": [
+        "HD 177724"
+      ],
+      "order": 5358,
+      "context": {
+        "order": 5355
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        214783433025575520,
+        -732012212986050400,
+        188265759827835780
+      ],
+      "presentationToReference": [
+        0.2733447110701789,
+        0.0674590282186111,
+        -0.9595477833030313,
+        -0.9315973026420797,
+        -0.22990957820797525,
+        -0.2815458249703453,
+        0.23960203388110426,
+        -0.9708711888608249,
+        -8.149978835219706e-8
+      ],
+      "orbitUpReference": [
+        -0.0674590282186111,
+        0.22990957820797525,
+        0.9708711888608249
+      ],
+      "metersPerUnit": 5496030,
+      "bodyRadiusM": 1703769300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

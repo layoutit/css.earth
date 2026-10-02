@@ -1,0 +1,53 @@
+{
+  "id": "zeta-serpentis",
+  "name": "Zeta Serpentis",
+  "system": "Zeta Serpentis system",
+  "description": "A naked-eye star 23.6 parsecs away, 2.0 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 164259"
+  ],
+  "target": "HD 164259",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 1.961,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 164259: radius in solar radii, from the limb-darkened angular diameter 0.775 +/- 0.027 mas (CHARA) and the Hipparcos parallax, 1.961 +/- 0.071",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.071
+  },
+  "mass": {
+    "value": 1.429,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 164259: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.429 +/- 0.013",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.013
+  },
+  "temperature": {
+    "value": 6529,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 164259: effective temperature in K, from the angular diameter and the bolometric flux, 6529 +/- 118",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 118
+  },
+  "distance": {
+    "value": 23.563,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 164259: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 42.44 +/- 0.33 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.183
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 24 parsecs away whose disc the CHARA Array measured: 2.0 times the Sun's width.",
+    "introduction": "Its disc spans 0.775 milliarcseconds, which gives 1.961 solar radii and 6,529 K at its surface.",
+    "locator": "Tables 5 and 10, HD 164259: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -50.7,
+    "uncertainty": 0.2,
+    "source": "SIMBAD's radial velocity for Gaia DR3 4177224620176470912 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
+  },
+  "order": 5356
+}

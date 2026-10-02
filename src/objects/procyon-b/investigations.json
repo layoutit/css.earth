@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "procyon-b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.01232 +/- 0.00032 solar radii from Bond et al. (2015), ApJ 813, 106, section 8: R_B = 0.01232 +/- 0.00032 solar radii, the radius of Provencal et al. (2002) adjusted to the adopted parallax.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/813/2/106"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.592 solar masses: Bond et al. (2015), ApJ 813, 106, Table 10: dynamical mass 0.592 +/- 0.006 solar masses (https://doi.org/10.1088/0004-637X/813/2/106).",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/813/2/106"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Bond et al. (2015), ApJ 813, 106, Table 8: relative visual orbit P 40.84 yr, a 4.3075 arcsec, i 31.408, node 100.683, T0 1968.076 (Besselian year), e 0.39785, omega 89.23 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.285 arcsec is 15.114 au, in units of Procyon A's radius (https://doi.org/10.1088/0004-637X/813/2/106): P 14916.81 d; Bond et al. (2015), ApJ 813, 106, Table 8: relative visual orbit P 40.84 yr, a 4.3075 arcsec, i 31.408, node 100.683, T0 1968.076 (Besselian year), e 0.39785, omega 89.23 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.285 arcsec is 15.114 au, in units of Procyon A's radius (https://doi.org/10.1088/0004-637X/813/2/106): a/R* 1600.2, inclination 31.408 degrees; Bond et al. (2015), ApJ 813, 106, Table 8: relative visual orbit P 40.84 yr, a 4.3075 arcsec, i 31.408, node 100.683, T0 1968.076 (Besselian year), e 0.39785, omega 89.23 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.285 arcsec is 15.114 au, in units of Procyon A's radius (https://doi.org/10.1088/0004-637X/813/2/106): e 0.39785; Bond et al. (2015), ApJ 813, 106, Table 8: relative visual orbit P 40.84 yr, a 4.3075 arcsec, i 31.408, node 100.683, T0 1968.076 (Besselian year), e 0.39785, omega 89.23 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.285 arcsec is 15.114 au, in units of Procyon A's radius (https://doi.org/10.1088/0004-637X/813/2/106): omega 269.23 degrees (the star's); Bond et al. (2015), ApJ 813, 106, Table 8: relative visual orbit P 40.84 yr, a 4.3075 arcsec, i 31.408, node 100.683, T0 1968.076 (Besselian year), e 0.39785, omega 89.23 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.285 arcsec is 15.114 au, in units of Procyon A's radius (https://doi.org/10.1088/0004-637X/813/2/106): periastron passage at 39884.04 BMJD_TDB; Bond et al. (2015), ApJ 813, 106, Table 8: relative visual orbit P 40.84 yr, a 4.3075 arcsec, i 31.408, node 100.683, T0 1968.076 (Besselian year), e 0.39785, omega 89.23 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.285 arcsec is 15.114 au, in units of Procyon A's radius (https://doi.org/10.1088/0004-637X/813/2/106): ascending node 100.683 degrees east of north.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/813/2/106"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 7740 K from Provencal et al. (2002), ApJ 568, 324, as quoted by Bond et al. (2015), section 8: Teff 7740 +/- 50 K from STIS spectra: #e7eaff, because the archives do not resolve this companion from its star. The disc is No limb darkening is drawn: at 7,740 K and log g 8.03 no model grid used here reaches it (Claret & Bloemen (2011), A&A 529, A75 (ATLAS): The limb-darkening grid is empty.; Reeve & Howarth (2016), MNRAS 456, 1294 (non-LTE TLUSTY): 7740 is outside the grid 27500, 30000, 32500, 35000, 37500, 40000, 42500, 45000, 47500, 50000, 52500, 55000.; Neilson & Lester (2013), A&A 554, A98 (spherical ATLAS (SATLAS)): the grid is of spherical models, read by mass, and the star has no measured mass; Howarth (2011), MNRAS 413, 1515: 7740 is outside the grid .; Claret (2017), A&A 600, A30 (PHOENIX): The limb-darkening grid is empty.; PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) (Sonora Bobcat cloud-free (Marley et al. 2021, ApJ 920, 85)): the PICASO toolchain holds no Bobcat profiles: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install).",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/813/2/106"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "id": "procyon",
+  "name": "Procyon",
+  "system": "Procyon system",
+  "description": "A subgiant 3.5 parsecs away, twice the Sun's width, orbited every 40.84 years by a white dwarf.",
+  "aliases": [
+    "Alpha Canis Minoris",
+    "HD 61421"
+  ],
+  "featured": true,
+  "target": "Procyon",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/813/2/106",
+    "credit": "Bond et al. (2015), ApJ 813, 106"
+  },
+  "radius": {
+    "value": 2.031,
+    "source": "Aufdenberg, Ludwig & Kervella (2005), ApJ 633, 424, Table 7: radius 2.031 +/- 0.013 solar radii from the limb-darkened angular diameter and the parallax",
+    "url": "https://doi.org/10.1086/452622",
+    "uncertainty": 0.013
+  },
+  "mass": {
+    "value": 1.478,
+    "source": "Bond et al. (2015), ApJ 813, 106, Table 10: dynamical mass 1.478 +/- 0.012 solar masses",
+    "url": "https://doi.org/10.1088/0004-637X/813/2/106",
+    "uncertainty": 0.012
+  },
+  "temperature": {
+    "value": 6543,
+    "source": "Aufdenberg, Ludwig & Kervella (2005), ApJ 633, 424, Table 7: effective temperature 6543 +/- 84 K from the angular diameter and the bolometric flux",
+    "url": "https://doi.org/10.1086/452622",
+    "uncertainty": 84
+  },
+  "radialVelocity": {
+    "value": -2.7,
+    "source": "Anderson & Francis (2012), XHIP, HIP 37279: RV -2.70 +/- 1.01 km/s (quality D)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 1.01
+  },
+  "distance": {
+    "value": 3.509,
+    "source": "Bond et al. (2015), ApJ 813, 106, Table 9: adopted absolute parallax 0.2850 +/- 0.0007 arcsec, the weighted mean of three measurements, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/813/2/106",
+    "uncertainty": 0.009
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "37279"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A nearby subgiant twice the Sun's width, orbited every 41 years by the white dwarf Procyon B.",
+    "introduction": "Hubble tracked its white dwarf companion for two decades; the orbit weighs Procyon A at 1.478 solar masses.",
+    "locator": "Abstract and Table 10"
+  },
+  "notes": [],
+  "order": 5425
+}

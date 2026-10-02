@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kappa-ceti",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kappa Ceti",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 639348.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kappa-ceti-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kappa Ceti",
+      "classification": "star",
+      "color": "#fff3ee",
+      "distanceAu": 1885715,
+      "description": "A naked-eye star 9 parsecs away whose disc the CHARA Array measured: 92% of the Sun's width.",
+      "systemName": "Kappa Ceti system",
+      "aliases": [
+        "HD 20630"
+      ],
+      "order": 5403,
+      "context": {
+        "order": 5400
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        181608678648626500,
+        215227719975078400,
+        16587214321101018
+      ],
+      "presentationToReference": [
+        0.6437766915043533,
+        0.03791669759854068,
+        0.7642734428978478,
+        0.7629513661763884,
+        0.04493448975100484,
+        -0.6448923200662259,
+        0.058794424270430926,
+        -0.9982701115800461,
+        8.190873654298835e-7
+      ],
+      "orbitUpReference": [
+        -0.03791669759854068,
+        -0.04493448975100484,
+        0.9982701115800461
+      ],
+      "metersPerUnit": 2062413.8709677418,
+      "bodyRadiusM": 639348300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

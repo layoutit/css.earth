@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "sirius-b",
+  "card": {
+    "text": "A white dwarf of one solar mass within 0.8% of the Sun's width, orbiting Sirius every 50 years.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-aa6af8",
+        "url": "https://doi.org/10.3847/1538-4357/aa6af8",
+        "label": "Bond et al. 2017",
+        "checked": "2026-10-02",
+        "locator": "Tables 4 and 6; section 8"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Hubble and 150 years of measurements give its orbit and a mass of 1.018 solar masses; its surface is 25,369 K.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-aa6af8",
+        "url": "https://doi.org/10.3847/1538-4357/aa6af8",
+        "label": "Bond et al. 2017",
+        "checked": "2026-10-02",
+        "locator": "Tables 4 and 6; section 8"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light."
+    }
+  }
+}

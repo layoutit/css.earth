@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-702-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "70 Ophiuchi B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 465910.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gj-702-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "70 Ophiuchi B",
+      "classification": "star",
+      "color": "#ffdcb7",
+      "distanceAu": 1053122.1,
+      "description": "A nearby orange dwarf whose disc was measured by interferometry: 67% of the Sun's width.",
+      "systemName": "70 Ophiuchi system",
+      "aliases": [
+        "GJ 702 B"
+      ],
+      "order": 5380,
+      "context": {
+        "order": 5377
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3754625459997545.5,
+        -157351161956230240,
+        6847372993402069
+      ],
+      "presentationToReference": [
+        0.023832051809646048,
+        0.001037361382017936,
+        -0.999715438106217,
+        -0.9987683398698851,
+        -0.043505866983917646,
+        -0.02385461824325637,
+        0.04351823273176636,
+        -0.9990526329575138,
+        7.503706211110816e-7
+      ],
+      "orbitUpReference": [
+        -0.001037361382017936,
+        0.043505866983917646,
+        0.9990526329575138
+      ],
+      "metersPerUnit": 1502936.4516129033,
+      "bodyRadiusM": 465910300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

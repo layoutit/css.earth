@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "hd-90839",
+  "displayName": "36 Ursae Majoris",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-746-1-101",
+          "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+          "label": "Boyajian et al. (2012), The Astrophysical Journal 746 101",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "12.8 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-746-1-101",
+          "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+          "label": "Boyajian et al. (2012), ApJ 746, 101, HD 90839: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 78.26 +/- 0.29 mas, inverted",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hd-90839-dataset-color.webp",
+        "surface": "hd-90839-surface-color@2x.webp",
+        "poles": "hd-90839-poles-color@2x.webp",
+        "source": {
+          "id": "hd-90839-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=853819947756949120&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,233 K and log g 4.41 (u1 0.379, u2 0.304): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Boyajian et al. (2012), ApJ 746, 101",
+      "href": "https://doi.org/10.1088/0004-637X/746/1/101"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+      "credit": "Boyajian et al. (2012), ApJ 746, 101"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-90839.json",
+      "credit": "Boyajian et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

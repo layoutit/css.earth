@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "xi-geminorum",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Xi Geminorum",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1885347
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/xi-geminorum-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Xi Geminorum",
+      "classification": "star",
+      "color": "#f5efff",
+      "distanceAu": 3713240.3,
+      "description": "A naked-eye star 18 parsecs away whose disc the CHARA Array measured: 2.7 times the Sun's width.",
+      "systemName": "Xi Geminorum system",
+      "aliases": [
+        "HD 48737"
+      ],
+      "order": 5407,
+      "context": {
+        "order": 5404
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -106301060048847970,
+        530948769316207360,
+        123958790423922050
+      ],
+      "presentationToReference": [
+        -0.191363077123965,
+        -0.043810847613984585,
+        0.9805410661185954,
+        0.9558135191890571,
+        0.21881795831734396,
+        0.1963140791009628,
+        0.2231606803383548,
+        -0.9747816733757223,
+        -0.0000013226029876626087
+      ],
+      "orbitUpReference": [
+        0.043810847613984585,
+        -0.21881795831734396,
+        0.9747816733757223
+      ],
+      "metersPerUnit": 6081764.516129033,
+      "bodyRadiusM": 1885347000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "epsilon-serpentis",
+  "angularDiameterMas": 0.77,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,240,433 km at 21.61 pc = 0.77 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 21.608,
+  "distanceSource": "Boyajian et al. (2012), ApJ 746, 101, HD 141795: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 46.28 +/- 0.19 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 21.608 +/- 0.089 pc; Gaia DR3 parallax 45.3293 +/- 0.2499 mas (same row, RUWE 4.19), 181.4 standard errors, is not used",
+  "radiusKm": 1240433.1,
+  "radiusSource": "Radius 1.783 +/- 0.04 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 141795: radius in solar radii, from the limb-darkened angular diameter 0.768 +/- 0.017 mas (CHARA) and the Hipparcos parallax, 1.783 +/- 0.04 (https://doi.org/10.1088/0004-637X/746/1/101): 1,240,433 km at 695,700 km per solar radius. Mass 1.82 +/- 0.026 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 141795: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.82 +/- 0.026 (https://doi.org/10.1088/0004-637X/746/1/101); GM is that mass times the JPL solar GM. Temperature 8084 +/- 102 K from Boyajian et al. (2012), ApJ 746, 101, HD 141795: effective temperature in K, from the angular diameter and the bolometric flux, 8084 +/- 102 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 8084,
+  "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 141795: effective temperature in K, from the angular diameter and the bolometric flux, 8084 +/- 102 (https://doi.org/10.1088/0004-637X/746/1/101)",
+  "surfaceGravityLogg": 4.2,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epsilon-serpentis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.196, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 141795) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

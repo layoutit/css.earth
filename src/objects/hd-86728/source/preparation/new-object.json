@@ -1,0 +1,47 @@
+{
+  "id": "hd-86728",
+  "name": "20 Leonis Minoris A",
+  "system": "20 Leonis Minoris A system",
+  "description": "A naked-eye star 15.0 parsecs away, 1.2 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 86728"
+  ],
+  "target": "HD 86728",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 1.247,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 86728: radius in solar radii, from the limb-darkened angular diameter 0.771 +/- 0.012 mas (CHARA) and the Hipparcos parallax, 1.247 +/- 0.021",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.021
+  },
+  "mass": {
+    "value": 1.034,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 86728: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.034 +/- 0.036",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.036
+  },
+  "temperature": {
+    "value": 5612,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 86728: effective temperature in K, from the angular diameter and the bolometric flux, 5612 +/- 52",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 52
+  },
+  "distance": {
+    "value": 15.044,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 86728: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 66.47 +/- 0.32 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.072
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 15 parsecs away whose disc the CHARA Array measured: 1.2 times the Sun's width.",
+    "introduction": "Its disc spans 0.771 milliarcseconds, which gives 1.247 solar radii and 5,612 K at its surface.",
+    "locator": "Tables 5 and 10, HD 86728: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5413
+}

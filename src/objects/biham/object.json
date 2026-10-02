@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "biham",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Biham",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1824821.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/biham-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Biham",
+      "classification": "star",
+      "color": "#bfd1ff",
+      "distanceAu": 5836654.5,
+      "description": "A naked-eye star 28 parsecs away whose disc the CHARA Array measured: 2.6 times the Sun's width.",
+      "systemName": "Biham system",
+      "aliases": [
+        "HD 210418"
+      ],
+      "order": 5361,
+      "context": {
+        "order": 5358
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        770324835003902500,
+        -400132253524050300,
+        94268950907293100
+      ],
+      "presentationToReference": [
+        0.8822354498439826,
+        0.0958097642618053,
+        -0.4609567226005962,
+        -0.4582623364117405,
+        -0.04976676739688647,
+        -0.887422616282297,
+        0.10796407766029638,
+        -0.994154795761184,
+        6.610893106478911e-18
+      ],
+      "orbitUpReference": [
+        -0.0958097642618053,
+        0.04976676739688647,
+        0.994154795761184
+      ],
+      "metersPerUnit": 5886519.677419355,
+      "bodyRadiusM": 1824821100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

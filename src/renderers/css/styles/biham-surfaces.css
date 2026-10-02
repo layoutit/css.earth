@@ -1,0 +1,92 @@
+/* Biham: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+.object-stage[data-object-id="biham"] > :is(.polycss-camera, .biham-corona-layer, .biham-limb-layer) {
+  --biham-scene-side-padding: 16px;
+  --biham-reference-width: 1920px;
+  --biham-reference-height: 1080px;
+  --biham-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--biham-scene-side-padding) - var(--biham-scene-side-padding)) /
+        var(--biham-reference-width)
+    ),
+    calc(100cqh / var(--biham-reference-height))
+  );
+}
+
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+.object-stage[data-object-id="biham"] > :is(.biham-corona-layer, .biham-limb-layer) {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* Paint order: off-limb context behind the sphere, limb plate above it. */
+.object-stage[data-object-id="biham"] .biham-corona-layer {
+  z-index: 0;
+}
+
+.object-stage[data-object-id="biham"] .polycss-camera {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="biham"] .biham-limb-layer {
+  z-index: 2;
+}
+
+.object-stage[data-object-id="biham"] .biham-body {
+  transform-style: preserve-3d;
+}
+
+.object-stage[data-object-id="biham"] .polycss-scene s {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
+.object-stage[data-object-id="biham"] .biham-corona-layer {
+  background-image: var(--biham-corona-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    600px
+    600px;
+}
+
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+.object-stage[data-object-id="biham"] .biham-limb-layer {
+  background-image: var(--biham-limb-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    496px
+    496px;
+}
+
+.object-stage[data-object-id="biham"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="biham"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="biham"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
