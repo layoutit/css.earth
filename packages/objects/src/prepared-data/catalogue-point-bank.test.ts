@@ -3,8 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { parseCataloguePoints } from './catalogue-point-bank.js';
-import { catalogueCells, cataloguePointSpread } from '@cssearth/objects';
-import { decodeCatalogueBankBinary } from '@cssearth/objects';
+import { catalogueCells, cataloguePointSpread, decodeCatalogueBankBinary } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 
 /** What the bake adds to a published bank (catalogue-banks.ts): its spread and its cells, per level. */

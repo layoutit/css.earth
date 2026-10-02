@@ -1,11 +1,10 @@
-import { IMAGE_MESH_SCHEMA } from '@cssearth/objects';
+import { IMAGE_MESH_SCHEMA, parseDatasetBillboards, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { DATASET_VISIBILITY } from './runtime-policy.mts';
 import { isRecord } from '@cssearth/core';
 // Generated after the prepared dataset payloads are restored: text now, validated below.
 import datasetBillboardText from './prepared-dataset-billboards.json?raw';
 import datasetBillboardAtlasUrl from './prepared-dataset-billboards.webp?url';
 import galaxyDisplaySample from '../src/objects/local-group-galaxies/prepared/display-sample.json' with { type: 'json' };
-import { parseDatasetBillboards, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { createPreparedUniverse, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE, onWorldSystems } from './world-context-plan.mts';
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';

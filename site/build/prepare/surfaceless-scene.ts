@@ -1,5 +1,4 @@
-import { IMAGE_MESH_SCHEMA, CATALOGUE_POINTS_BINARY_SCHEMA } from '@cssearth/objects';
-import { DENSITY_VOLUME_FORMAT, OBJECT_RUNTIME_SCHEMA, parsePreparedObjectRuntime, requireControls } from '@cssearth/objects';
+import { IMAGE_MESH_SCHEMA, CATALOGUE_POINTS_BINARY_SCHEMA, DENSITY_VOLUME_FORMAT, OBJECT_RUNTIME_SCHEMA, parsePreparedObjectRuntime, requireControls } from '@cssearth/objects';
 
 // The scene of an authored object with no surface (`recipe.surfaces: []`): a galaxy, a nebula, a cluster of galaxies. It is
 // the scene every body has with no body in it: the camera, sky and world frame the shared scene preparers give its

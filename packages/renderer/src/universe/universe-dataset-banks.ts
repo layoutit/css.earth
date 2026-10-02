@@ -2,14 +2,13 @@ import { writeStyle } from '../rendering/retained-write.js';
 import { createVolumeTextureReadiness } from '../volume/volume-texture-readiness.js';
 import type { PreparedFocusBank } from './prepared-focus-bank.js';
 import type { SceneLifetime } from '@cssearth/engine';
-import { type DensityVolumeFrame, type PreparedPointVisibility } from '@cssearth/objects';
+import { type DensityVolumeFrame, type PreparedPointVisibility, type DatasetBankBillboard, type DatasetBillboards } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { createPreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
 import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
 import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
-import type { DatasetBankBillboard, DatasetBillboards } from '@cssearth/objects';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 
 type DatasetMount = ReturnType<ReturnType<typeof createPreparedVolumeDatasets>['mount']>;

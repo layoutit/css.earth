@@ -1,4 +1,4 @@
-import { IMAGE_MESH_SCHEMA } from '@cssearth/objects';
+import { IMAGE_MESH_SCHEMA, createSurfacePatches } from '@cssearth/objects';
 /**
  * Prepare an all-sky HEALPix map as a sphere of image patches around the Sun, seen from outside: the cosmic microwave
  * background at the distance its light left from. `source/<id>/sphere.json` names the map (its FITS file, column and
@@ -11,7 +11,7 @@ import { IMAGE_MESH_SCHEMA } from '@cssearth/objects';
  * Galactic coordinates), `samplesPerTexel`² samples averaged, through the same projective mapping PolyCSS draws the tile
  * with, and with a one-texel border sampled past the patch; each leaf reaches into that border, so neighbouring patches
  * overlap by a texel and no seam opens between them. The atlas goes through the lossy lane. Writes `prepared/<id>.json`
- * (`IMAGE_MESH_SCHEMA`, read by packages/renderer/src/universe/image-mesh.ts) and `prepared/<id>/<id>.webp`. A recipe
+ * (`IMAGE_MESH_SCHEMA`, parsed by `parseImageMesh` in packages/objects/src/prepared-data/image-mesh.ts) and `prepared/<id>/<id>.webp`. A recipe
  * `cutaway` marks the patches of the hemisphere it opens; the runtime hides them and draws the rest's inside behind what
  * the sphere holds, or shows the whole sphere. Its `datasets` are the page's datasets of the sphere, whole or cut open:
  * `prepared/datasets.json` carries their card text, the color table's legend and a picture of each view
@@ -24,7 +24,6 @@ import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
-import { createSurfacePatches } from '@cssearth/objects';
 import { POLAR_CAP_STYLE } from '@cssearth/bake/scene';
 import { compileVolumeLeaf } from '@cssearth/bake/volume-leaves';
 import { composeMapSpherePreview, encodeLossyWebp, mapSpherePreviewRays } from '@cssearth/bake/raster';

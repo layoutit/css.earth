@@ -1,11 +1,10 @@
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
-import { type PreparedCssVolume, type PreparedPointAppearance, type PreparedCssSurfaceShell, type PreparedCssImageLayers, type PreparedPointVisibility, type DensityVolumeFrame } from '@cssearth/objects';
+import { type PreparedCssVolume, type PreparedPointAppearance, type PreparedCssSurfaceShell, type PreparedCssImageLayers, type PreparedPointVisibility, type DensityVolumeFrame, type DatasetBillboards } from '@cssearth/objects';
 
 import type { BackgroundPointBank } from './background-points.js';
 import type { createPreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
 
 import type { WorldPlannerSource } from './world-context/world-context-planner-client.js';
-import type { DatasetBillboards } from '@cssearth/objects';
 
 export type PreparedImageLayerMount = { payload: PreparedCssImageLayers; resolveResource(path: string): string;
   /** Published catalogues placed in the bank's own frame, drawn as dots over its layers and faded with them. */

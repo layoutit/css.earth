@@ -1,11 +1,11 @@
-import { GALAXY_BACKING_SCHEMA } from '@cssearth/objects';
+import { GALAXY_BACKING_SCHEMA, parseDensityVolumeFrame, type VolumeSliceQuad } from '@cssearth/objects';
 /**
  * Prepare a face-on image of a galaxy as a flat backing plane in its volume frame. `source/<id>/recipe.json` names the
  * image, the pixels of the galaxy's centre and of the Sun on it, the view it was drawn from, and the levels that keep it
  * under the catalogue dots. The image is scaled so both anchors land on the app's own positions (the frame origin and
  * the Sun), laid in the plane through them normal to the Galactic north pole, and compiled with the same PolyCSS
- * volume compiler as the galaxy's other planes. Writes `prepared/<id>.json` (`GALAXY_BACKING_SCHEMA`, read by
- * packages/renderer/src/universe/galaxy-backing.ts) and `prepared/<id>/<id>.webp` through the lossy lane.
+ * volume compiler as the galaxy's other planes. Writes `prepared/<id>.json` (`GALAXY_BACKING_SCHEMA`, parsed by `parseGalaxyBacking` in
+   * packages/objects/src/prepared-data/galaxy-backing.ts) and `prepared/<id>/<id>.webp` through the lossy lane.
  *
  * Close up the image's texels blow up and blur. `nearFade` dims the whole image to `nearOpacity` as the camera closes
  * in from `fadeKpc[0]` to `fadeKpc[1]`; each of `sections` is the same image, transparent beyond a ring about the
@@ -19,8 +19,6 @@ import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import { compileCssVolume } from '@cssearth/bake/volume-leaves';
 import { encodeLossyWebp } from '@cssearth/bake/raster';
-import type { VolumeSliceQuad } from '@cssearth/objects';
-import { parseDensityVolumeFrame } from '@cssearth/objects';
 
 type Vector3 = [number, number, number];
 const KPC_M = 3.0856775814913673e19;
