@@ -39,7 +39,7 @@ import Detached from './Detached.astro';
 ---
 <section id={`${objectId}-dataset-list`} class="object-datasets">
   <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-drawn-page={page} hidden>
-    {['v', 'overview', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
+    {['v', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
   </form>
   <div id={`${objectId}-layers-menu`} class="object-layers-menu">
     <div class="object-dataset-picker" data-dataset-picker>

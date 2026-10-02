@@ -9,6 +9,7 @@ import { allPlanetarySystems } from '../object-systems.mts';
 import { SCENE_OBJECTS } from '../objects.mts';
 import type { CatalogueIndex, CatalogueIndexEntry } from './catalogue-index.mts';
 import { listDistance } from './list-distance.mts';
+import { systemRoute } from '../navigation/system-address.mts';
 
 /** A row's sprite is drawn at this share of its prepared size: the largest marker is 14 px. */
 const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS).map(({ presentation }) => presentation.size));
@@ -29,7 +30,8 @@ export function objectResultMarker(object: { readonly id: string; readonly color
 export function preparedCatalogueIndex(): CatalogueIndex {
   return Object.freeze({
     schema: 'cssearth-catalogue-index@1',
-    entries: Object.freeze([...SEARCH_OBJECTS.map((object): CatalogueIndexEntry => {
+    // A system object's row is its system's (systemEntries below), not a second row of its own.
+    entries: Object.freeze([...SEARCH_OBJECTS.filter(object => !object.system).map((object): CatalogueIndexEntry => {
       const title = distanceDescription(object.distance);
       const source = sourceDocumentation(object.id, object.name);
       const { value, unit } = listDistance(object.distance);
@@ -68,7 +70,7 @@ function systemEntries(): CatalogueIndexEntry[] {
       classification: 'planetary-system',
       classificationName: 'planetary system',
       systemName: system.name.toLocaleLowerCase('en'),
-      route: `${system.route}?overview=system`,
+      route: systemRoute(system.id),
       illustration: false,
       candidate: false,
       distanceMeters: star.distance.meters,

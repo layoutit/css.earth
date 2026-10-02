@@ -5,7 +5,7 @@ import SystemBodies from './SystemBodies.astro';
 import Detached from './Detached.astro';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from '../object-systems.mts';
-import { PAGE_VIEWS, viewFromUrl } from '../navigation/navigation-scope.mts';
+import { PAGE_VIEWS, namesSystem } from '../navigation/navigation-scope.mts';
 import { systemSourceDocumentation } from '../source-documentation.mts';
 
 interface Props { hostId: string }
@@ -16,7 +16,7 @@ interface Props { hostId: string }
 const { hostId } = Astro.props;
 const system = systemById(SCENE_OBJECTS, hostId);
 const star = system ? SCENE_OBJECTS.find(object => object.id === hostId) : null;
-const shown = viewFromUrl(Astro.url) === 'system';
+const shown = namesSystem(Astro.url) && system !== null;
 // The header names the system's source document, as the moons' card does: a system opened from a breadcrumb has no row
 // in the lists to name it, and the footer link kept the previous page's (2026-10-02).
 const source = system ? systemSourceDocumentation(system) : null;

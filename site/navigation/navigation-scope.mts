@@ -1,32 +1,34 @@
 import { SOLAR_SYSTEM_ID } from '../object-systems.mts';
+import { pageIdAtPath } from '../root-object.mts';
+import { systemHostId, systemRoute } from './system-address.mts';
 
-/** Every page is `/<id>/`, an object's own scene: a body, a star, a galaxy, a nebula, a cluster, or a level of the zoom
- * ladder. A page shows its object in one of three views: the body, a host out to its moons, or a star out to its planetary
- * system. This module owns the one table of what each view is called in an address and in a selection's identity. */
+/** Every page is `/<id>/`, an object: a body, a star, a galaxy, a nebula, a cluster, a level of the zoom ladder, or a
+ * system (a host with the bodies that orbit it). A system's page mounts its host's scene, seen out to its moons or to its
+ * planetary system: internally that is a view of the host, and this module owns how an address names it. */
 
 /** The star a level opens centred on when its page is opened cold: the world's host. */
 export const WORLD_HOST_ID = SOLAR_SYSTEM_ID;
 
 export type PageView = 'body' | 'moons' | 'system';
-/** Each view's query parameter (none for the body) and the prefix of its selection identity. */
-export const PAGE_VIEWS: Readonly<Record<PageView, { readonly query: readonly [name: string, value: string] | null; readonly identity: string }>> = Object.freeze({
-  body: { query: null, identity: 'object' },
-  moons: { query: ['view', 'satellites'], identity: 'satellite-system' },
-  system: { query: ['overview', 'system'], identity: 'overview:system' },
+/** The prefix of each view's selection identity. */
+export const PAGE_VIEWS: Readonly<Record<PageView, { readonly identity: string }>> = Object.freeze({
+  body: { identity: 'object' },
+  moons: { identity: 'satellite-system' },
+  system: { identity: 'overview:system' },
 });
-const VIEWS = Object.keys(PAGE_VIEWS) as PageView[];
 
-/** The view an address names. The system view wins when an address carries both parameters. */
-export function viewFromUrl(url: string | URL): PageView {
-  const query = new URL(url).searchParams;
-  const named = (view: PageView) => { const parameter = PAGE_VIEWS[view].query; return parameter !== null && query.get(parameter[0]) === parameter[1]; };
-  return named('system') ? 'system' : named('moons') && !query.has('overview') ? 'moons' : 'body';
+/** Whether an address names a system: an object whose page shows its host out to its members (system-address.mts). The
+ * host says which members those are, a planet's moons or a star's planets (scene-selection.mts `selectionTargetFromUrl`). */
+export function namesSystem(url: string | URL): boolean {
+  return systemHostId(pageIdAtPath(new URL(url).pathname)) !== null;
 }
 
-/** The address with `view` selected: its parameter set, the other views' cleared. */
+/** The address with `view` selected: the object's own for its body, its system's for its moons or its planetary system.
+ * The address keeps its other parameters. */
 export function withView(url: URL, view: PageView): URL {
-  for (const other of VIEWS) { const parameter = PAGE_VIEWS[other].query; if (parameter && other !== view) url.searchParams.delete(parameter[0]); }
-  const parameter = PAGE_VIEWS[view].query;
-  if (parameter) url.searchParams.set(parameter[0], parameter[1]);
+  const id = pageIdAtPath(url.pathname);
+  if (id === undefined) return url;
+  const host = systemHostId(id) ?? id;
+  url.pathname = view === 'body' ? `/${host}/` : systemRoute(host);
   return url;
 }

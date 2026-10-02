@@ -26,7 +26,7 @@ import { createWorldViewport, stageSized } from '../world-viewport.mts';
 import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
 import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
-import { WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
+import { WORLD_HOST_ID, namesSystem } from '../navigation/navigation-scope.mts';
 import { ladderOf, scopeHolds, setLadderCentre } from '../level-view.mts';
 import type { LadderHandover } from './scene-selection.mts';
 import { OVERVIEW_SELECTION_POLICY } from '../runtime-policy.mts';
@@ -591,7 +591,7 @@ export function createSceneRouter({
   /** A focus or overview arrival is placed by the world, so it cannot start before the world has loaded. */
   function worldOwnsArrival() {
     const url = new URL(navigationHref(windowTarget));
-    return ladderOf({ objectId, view: 'body' }) !== null || ['overview', 'view'].some(name => url.searchParams.has(name));
+    return ladderOf({ objectId, view: 'body' }) !== null || namesSystem(url);
   }
   function report(error: unknown) {
     try { reportError(error); } catch { /* Diagnostics cannot interrupt cleanup. */ }

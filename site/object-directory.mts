@@ -1,5 +1,5 @@
 import { importPackagedObjectRuntime } from './import-queue.mts';
-import { catalogueObject, levelOf } from '@cssearth/objects';
+import { catalogueObject, levelOf, objectSystem } from '@cssearth/objects';
 import type { OverviewObject } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './objects.mts';
 import overviews from './prepared-overview-objects.json' with { type: 'json' };
@@ -33,6 +33,13 @@ export const knownObject = (id: string): NavigableObject | undefined => NAVIGABL
 /** A prepared catalogue entry as the directory serves it (`@cssearth/objects` catalogueObject), bound to the shell's scene loader. */
 export function objectFromEntry(value: unknown): NavigableObject {
   return catalogueObject(value, descriptor => async (signal?: AbortSignal) => {
+    // A system mounts its host's scene (its package's `system.host`).
+    const system = objectSystem(descriptor);
+    if (system) {
+      const host = await loadObject(system.host);
+      if (!host) throw new Error(`System ${String(descriptor.id)} is hosted by ${system.host}, which has no prepared entry.`);
+      return host.loadScene(signal);
+    }
     const { loadPackagedObject } = await importPackagedObjectRuntime();
     return loadPackagedObject(descriptor, signal);
   });

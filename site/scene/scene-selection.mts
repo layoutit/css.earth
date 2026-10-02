@@ -1,6 +1,6 @@
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import { overviewScopeAtCamera } from '../overview-context.mts';
-import { PAGE_VIEWS, viewFromUrl, withView, type PageView } from '../navigation/navigation-scope.mts';
+import { PAGE_VIEWS, namesSystem, withView, type PageView } from '../navigation/navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
 import { SYSTEM_RANGES } from '../system-framing.mts';
@@ -19,10 +19,10 @@ export type SceneContext = SceneSubject;
 export type SelectionTarget = SceneSubject;
 
 export function selectionTargetFromUrl(url: URL, objectId: string, objects: SystemObjects): SelectionTarget {
-  // A view the object does not have (the moons of a body without any, the system of a body that is not a star with one)
-  // is the body.
-  const view = viewFromUrl(url), has = view === 'moons' ? satelliteSystemByHost(objectId) : view === 'system' ? systemById(objects, objectId) : true;
-  return { objectId, view: has ? view : 'body' };
+  // A system's address shows its host out to its members: a planet's moons, or a star's planetary system. An address that
+  // names the system of a host without one is the body.
+  if (!namesSystem(url)) return { objectId, view: 'body' };
+  return { objectId, view: satelliteSystemByHost(objectId) ? 'moons' : systemById(objects, objectId) ? 'system' : 'body' };
 }
 
 /** Identity used by navigation rows, source links and per-selection reading positions. */

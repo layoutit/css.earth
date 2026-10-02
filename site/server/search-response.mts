@@ -10,8 +10,8 @@ import { createSelectionPresentation } from '../selection-presentation.mts';
 import { selectionTargetFromUrl } from '../scene/scene-selection.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
 import { presentFeatureResults, createSearchPresentation } from '../search/search-results-presentation.mts';
-import { objectIdAtPath } from '../root-object.mts';
-import { viewFromUrl, withView } from '../navigation/navigation-scope.mts';
+import { pageIdAtPath } from '../root-object.mts';
+import { systemHostId } from '../navigation/system-address.mts';
 
 /** Modify only the shared shell. Everything outside these boundaries, including
  * the authenticated scene, head, styles and application scripts, passes through byte for byte. */
@@ -46,13 +46,12 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
       }
     }
   }
-  const clear = new URL(`/${objectId}/`, url.origin);
-  for (const name of ['v', 'overview', 'dataset', 'feature', 'settings', ...[...document.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')].map(input => input.name)]) {
+  // Clearing the search keeps the page: the object's own address, or its system's.
+  const clear = new URL(url.pathname, url.origin);
+  for (const name of ['v', 'dataset', 'feature', 'settings', ...[...document.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')].map(input => input.name)]) {
     const value = url.searchParams.get(name);
     if (value) clear.searchParams.set(name, value.slice(0, 2048));
   }
-  // Clearing the search keeps the view context, normalized the way the router resolves it.
-  withView(clear, viewFromUrl(clear));
   document.querySelector('.object-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
   const browser = requiredSection(document, '.object-browser');
   const presentation = createSearchPresentation(document);
@@ -84,16 +83,17 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
 export async function handleSearchRequest(request: Request, data: SearchData, fetcher: typeof fetch = fetch): Promise<Response> {
   if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
   const url = new URL(request.url);
-  const objectId = url.pathname === '/.netlify/functions/search' ? url.searchParams.get('object')
-    : objectIdAtPath(url.pathname);
-  if (!objectId || !/^[a-z0-9][a-z0-9_.+-]*$/u.test(objectId)) return new Response('Object not found', { status: 404 });
+  // The page the address names: an object's own, or a system's, whose scene is its host's (navigation/system-address.mts).
+  const pageId = url.pathname === '/.netlify/functions/search' ? url.searchParams.get('object') : pageIdAtPath(url.pathname);
+  if (!pageId || !/^[a-z0-9][a-z0-9_.+-]*$/u.test(pageId)) return new Response('Object not found', { status: 404 });
+  const objectId = systemHostId(pageId) ?? pageId;
   // No query on this fetch: it retrieves the static page without recursing into search.
-  const response = await fetcher(new URL(`/${objectId}/`, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
+  const response = await fetcher(new URL(`/${pageId}/`, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
   if (!response.ok || !response.headers.get('content-type')?.includes('text/html')) return response;
   const page = await response.text();
   // The page's own address: a level's page is named by its path, which the rewrite to the function drops.
   const address = new URL(url);
-  if (address.pathname === '/.netlify/functions/search') { address.pathname = `/${objectId}/`; address.searchParams.delete('object'); }
+  if (address.pathname === '/.netlify/functions/search') { address.pathname = `/${pageId}/`; address.searchParams.delete('object'); }
   const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher), target, data);
   let html: string;
   try {

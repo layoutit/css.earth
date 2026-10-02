@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "trappist-1-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "trappist-1",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TRAPPIST-1 system",
+      "systemName": "TRAPPIST-1 system",
+      "classification": "planetary-system",
+      "color": "#ffcd6a",
+      "distanceAu": 2571368.4,
+      "description": "TRAPPIST-1 and the 7 bodies of its system in this atlas."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        372794614150033150,
+        -88610827847518910,
+        -33826922007004276
+      ],
+      "presentationToReference": [
+        0.969127373513411,
+        -0.08552861895209767,
+        -0.23125092269468742,
+        -0.23035520267069431,
+        0.02033395848352065,
+        -0.972894141587323,
+        -0.08791253897789993,
+        -0.9961281973082267,
+        -0.0000042334254100688244
+      ],
+      "orbitUpReference": [
+        0.08552861895209767,
+        -0.02033395848352065,
+        0.9961281973082267
+      ],
+      "metersPerUnit": 267507.87096774194,
+      "bodyRadiusM": 82927440
+    }
+  }
+}
