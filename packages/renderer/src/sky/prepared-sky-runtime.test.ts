@@ -27,7 +27,7 @@ const datasetBanks = (banks: readonly { id: string; frame: DensityVolumeFrame; c
     banks: banks.map(bank => ({ id: bank.id, contextVisibility: bank.contextVisibility ?? 'galactic', attached: bank.attachedTo !== undefined })) }) },
 });
 
-const spatialFrame = { id: 1, baseId: 0, members: new Uint32Array(), updates: [], emphasizedId: null, opacity: 1, width: 800, height: 600 };
+const spatialFrame = { id: 1, baseId: 0, members: new Uint32Array(), updates: [], emphasizedId: null, otherSystems: 1, opacity: 1, width: 800, height: 600 };
 const spatialPublish = mock.fn(() => {});
 const catalogMount = mock.fn((): unknown => undefined);
 const foregroundRects = [{ left: 100, top: 100, right: 150, bottom: 114 }];
