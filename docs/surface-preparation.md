@@ -69,8 +69,8 @@ field and a presentation `textureLevels`. A raster body whose packed atlas is ov
 8 MP is published as pages of whole latitude bands, each also reduced by 8, 4 and 2
 (`packages/bake/src/raster/pages.ts`). The silhouette's size on screen picks the
 reduction, so an arrival waits only for the pixels its view shows: at 4 Mbps the
-Moon's arrival waited 22.2 s for its 9.4 MB atlas and 5.2 s for 0.66 MB of pages
-(2026-10-02). A dataset drawn at a `resolutionScale` steps through the same list
+flight from Earth to the Moon took 22.4 s and 9.96 MB of the Moon's images before, and
+7.2 s and 1.17 MB after (a phone-sized view, 2026-10-02). A dataset drawn at a `resolutionScale` steps through the same list
 shifted by its scale. Below, the Moon on a phone before and after.
 
 ![The Moon on a phone: the whole atlas, left, and the level its silhouette picks, right](images/raster-levels-moon-phone.jpg)
