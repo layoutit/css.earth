@@ -24,9 +24,12 @@ test('system preparation rejects missing descriptions, unknown citations and ove
   assert.throws(() => prepareSystemIntroductions(record({ ...block, text: 'a'.repeat(181) + '.' }), ['host'], new Set(['example'])), /characters/);
 });
 
-test('default comet orbits follow featured status', () => {
+test('default orbits leave out comets and asteroids and follow featured status for dwarf planets', () => {
   const comet = { id: 'example-comet', classification: 'comet', discovery: { featured: false } };
   assert.equal(showsDefaultContextOrbit(comet), false);
-  assert.equal(showsDefaultContextOrbit({ ...comet, discovery: { featured: true } }), true);
+  assert.equal(showsDefaultContextOrbit({ ...comet, discovery: { featured: true } }), false);
+  assert.equal(showsDefaultContextOrbit({ ...comet, id: 'bennu', classification: 'asteroid', discovery: { featured: true } }), false);
+  assert.equal(showsDefaultContextOrbit({ ...comet, classification: 'dwarf-planet' }), false);
+  assert.equal(showsDefaultContextOrbit({ ...comet, classification: 'dwarf-planet', discovery: { featured: true } }), true);
   assert.equal(showsDefaultContextOrbit({ ...comet, classification: 'planet' }), true);
 });

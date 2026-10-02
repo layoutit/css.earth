@@ -1,0 +1,29 @@
+{
+  "provenance": {
+    "name": "Asteroids without a map marker",
+    "products": [
+      {
+        "id": "dots",
+        "label": "JPL Small-Body Database (main belt, Hildas, Jupiter Trojans) and JPL Horizons (asteroids with a page)",
+        "process": "Take the main-belt asteroids of absolute magnitude 13 or brighter, the asteroids at 3.7 to 4.2 au of magnitude 13 to 16 and the Jupiter Trojans of magnitude 14 or brighter that have no object package and a condition code of 6 or better; carry each orbit to the world's epoch as an unperturbed ellipse; join the asteroids that have a package but are not mission targets at their prepared positions; draw one dot at each position.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "positions",
+          "paged-positions"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Only the asteroids inside each population's magnitude limit are drawn; the fainter ones, the great majority, are left out, and the limits differ between the populations.",
+          "No colour is taken from the database; every dot is the neutral grey the app gives a body without a measured colour, and its size and opacity are display choices."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "pageClassifications": [
+    "asteroid",
+    "dwarf-planet",
+    "trans-neptunian"
+  ],
+  "populations": [
+    {
+      "classes": [
+        "IMB",
+        "MBA",
+        "OMB"
+      ],
+      "loosestConditionCode": 6,
+      "faintestAbsoluteMagnitude": 13
+    },
+    {
+      "classes": [
+        "OMB"
+      ],
+      "loosestConditionCode": 6,
+      "faintestAbsoluteMagnitude": 16,
+      "constraints": [
+        "a|RG|3.7|4.2",
+        "H|GT|13"
+      ]
+    },
+    {
+      "classes": [
+        "TJN"
+      ],
+      "loosestConditionCode": 6,
+      "faintestAbsoluteMagnitude": 14
+    }
+  ],
+  "pagesTable": "paged-positions.csv.gz"
+}

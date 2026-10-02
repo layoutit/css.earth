@@ -50,8 +50,6 @@ export interface DiscoveryVisibilityOptions {
   highlightedIds?: ReadonlySet<string>;
   /** Objects the default view features (prepared: dwarf planets, featured discoveries, JPL mission-target asteroids). */
   defaultFeatures: ReadonlySet<string>;
-  /** Phones: an asteroid that is not a mission target draws nothing unless its category is highlighted. */
-  compact?: boolean;
   /** Bodies of a system: each body that orbits another, and each body something orbits. */
   systemMembers?: ReadonlySet<string>;
   /** Bodies the map shows as named dots, placed by their measured orbit, even when their page is only an illustration (extreme
@@ -60,7 +58,7 @@ export interface DiscoveryVisibilityOptions {
 }
 export interface DiscoveryVisibility { readonly hiddenBodies: readonly string[]; readonly hiddenLabels: readonly string[]; readonly highlightedBodies: readonly string[] }
 
-// A page's objects and sets are fixed once it loads, and its settings take a handful of values (illustrations, compact and one
+// A page's objects and sets are fixed once it loads, and its settings take a handful of values (illustrations and one
 // highlighted classification), so each combination is computed once over the page's ~3,600 bodies and then reused.
 const visibilityCache = new WeakMap<DiscoveryObjects, { defaultFeatures: ReadonlySet<string>; systemMembers?: ReadonlySet<string>;
   orbitFeatures?: ReadonlySet<string>; results: Map<string, DiscoveryVisibility> }[]>();
@@ -72,7 +70,7 @@ export function discoveryVisibility(objects: DiscoveryObjects, options: Discover
   if (!inputs) visibilityCache.set(objects, inputs = []);
   let entry = inputs.find(item => item.defaultFeatures === options.defaultFeatures && item.systemMembers === options.systemMembers && item.orbitFeatures === options.orbitFeatures);
   if (!entry) inputs.push(entry = { defaultFeatures: options.defaultFeatures, systemMembers: options.systemMembers, orbitFeatures: options.orbitFeatures, results: new Map() });
-  const key = JSON.stringify([options.illustrations, options.compact === true, options.highlighted ?? null, options.highlightedIds?.size ?? null]);
+  const key = JSON.stringify([options.illustrations, options.highlighted ?? null, options.highlightedIds?.size ?? null]);
   let result = entry.results.get(key);
   if (!result) entry.results.set(key, result = computeDiscoveryVisibility(objects, options));
   return result;
@@ -92,7 +90,9 @@ function computeDiscoveryVisibility(objects: DiscoveryObjects, options: Discover
       && (!options.highlightedIds || options.highlightedIds.has(object.id));
     if (highlighted) highlightedBodies.push(object.id);
     if (illustration && !options.illustrations) hiddenBodies.push(object.id);
-    else if (options.compact && object.classification === 'asteroid' && !options.defaultFeatures.has(object.id) && !highlighted) hiddenBodies.push(object.id);
+    // An asteroid that is not a mission target has no marker of its own unless its category is highlighted: it is one of
+    // the dots of a catalogue point bank.
+    else if (object.classification === 'asteroid' && !options.defaultFeatures.has(object.id) && !highlighted) hiddenBodies.push(object.id);
     if (!featured && object.classification !== 'satellite' && !highlighted &&
         !(illustration && options.illustrations)) hiddenLabels.push(object.id);
   }

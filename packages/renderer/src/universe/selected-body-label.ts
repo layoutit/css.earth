@@ -1,3 +1,4 @@
+import { writeStyle } from '../rendering/retained-write.js';
 import { fromEyeM } from '@cssearth/engine';
 import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -108,7 +109,7 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
       const placement = placeSelectedBodyLabel(world, viewport, body, flags, width, height);
       if (!placement) return hide();
       const transform = `translate(${Number(placement.left.toFixed(3))}px,${Number(placement.top.toFixed(3))}px) translate(-50%,0)`;
-      if (label.style.transform !== transform) label.style.transform = transform;
+      writeStyle(label, 'transform', transform);
       fader.set(label, DEFAULT_CONTEXT_LABEL_OPACITY);
       return placement.rect;
     },

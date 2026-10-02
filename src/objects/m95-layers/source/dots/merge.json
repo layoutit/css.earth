@@ -1,0 +1,28 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "dots",
+  "published": true,
+  "meaning": "M95's catalogued objects as dots on its photograph's disc: ionised nebulae, planetary nebulae and supernova remnants.",
+  "centreOnGalaxy": true,
+  "banks": [
+    {
+      "bank": "groves-nebulae",
+      "withinPcOfCentre": 12000,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 12 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "scheuermann-pne",
+      "withinPcOfCentre": 12000,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 12 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "scheuermann-snr",
+      "withinPcOfCentre": 12000,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 12 kpc support radius (recipe.json)."
+    }
+  ],
+  "colourTowardWhite": 0.5,
+  "colourTowardWhiteBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), so both galaxies' dots read as the same tints of starlight.",
+  "colourGamma": 1.6,
+  "colourGammaBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), picked there from three renders over its backing."
+}
