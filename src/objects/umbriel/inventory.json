@@ -219,12 +219,6 @@
     },
     {
       "location": "public",
-      "filename": "umbriel-billboard.webp",
-      "bytes": 8122,
-      "sha256": "d2b517274ff2fc1f7291eeab324bff46a3cfbcc67a20fc272af4e72c20c8b351"
-    },
-    {
-      "location": "public",
       "filename": "umbriel-dataset-normal.webp",
       "bytes": 174,
       "sha256": "849df619242a78384b74f3f54766d58c460170dbf104ffb93aa2f347ca3184e8"
@@ -240,6 +234,30 @@
       "filename": "umbriel-features.json",
       "bytes": 10344,
       "sha256": "a4dd7d2a59d7aea8b1b5ee7dfcc5c348c36720a3fbe9d5fa4e55b871d1145d00"
+    },
+    {
+      "location": "public",
+      "filename": "umbriel-normal-page-0-level-1040.webp",
+      "bytes": 26542,
+      "sha256": "2ad4a0092f0308ac4664dcc4f63e55aced1a5b3cfd1aa2a26b66c1f8992b5cb8"
+    },
+    {
+      "location": "public",
+      "filename": "umbriel-normal-page-0-level-2080.webp",
+      "bytes": 62816,
+      "sha256": "c1a3984f6ba16dec8ebc6423b67f7a0a74f674702a276457f156c966eee7bd5c"
+    },
+    {
+      "location": "public",
+      "filename": "umbriel-normal-page-0-level-520.webp",
+      "bytes": 9958,
+      "sha256": "9f19f14479a797574f184d6a744b1c4c293203f48305be6e16c7a0feead70b02"
+    },
+    {
+      "location": "public",
+      "filename": "umbriel-normal-page-0.webp",
+      "bytes": 145140,
+      "sha256": "0a2b2b24f43218309f366f839855ee326d0e8161d9cbf0aea76c81688361b7a1"
     },
     {
       "location": "public",
@@ -261,6 +279,30 @@
     },
     {
       "location": "public",
+      "filename": "umbriel-voyager-color-page-0-level-1040.webp",
+      "bytes": 18702,
+      "sha256": "45e80f2bf11b793918591f92e4b35085b2a3c07a439635635246c25f8070a90d"
+    },
+    {
+      "location": "public",
+      "filename": "umbriel-voyager-color-page-0-level-2080.webp",
+      "bytes": 47446,
+      "sha256": "34c94a0b6c87cb4db35deaa17af8517ffd513294cf831ef313a86f895c1b44f7"
+    },
+    {
+      "location": "public",
+      "filename": "umbriel-voyager-color-page-0-level-520.webp",
+      "bytes": 7114,
+      "sha256": "36fc2c75bd7e4e55c72d76584a0e0261a0d1805fefa787e8491c728e8ca7d202"
+    },
+    {
+      "location": "public",
+      "filename": "umbriel-voyager-color-page-0.webp",
+      "bytes": 117742,
+      "sha256": "adb167ddfe20a2485ca46c60b69e8b5363094701efee3ceba892453cd7d0aba9"
+    },
+    {
+      "location": "public",
       "filename": "umbriel-voyager-color@2x.webp",
       "bytes": 117742,
       "sha256": "adb167ddfe20a2485ca46c60b69e8b5363094701efee3ceba892453cd7d0aba9"
@@ -274,14 +316,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 85527,
-      "sha256": "e8af8bf70f9617ed3b5e8049a8548e5adc0892e09be8f429aefe5889d6d244f9"
+      "bytes": 83858,
+      "sha256": "82f3ace9016ebf2396863d38bb07da68f427b2f5331ac4421a656105ffb12f01"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 738,
-      "sha256": "594631a1291b4c8c90c032c1c958ee23349c74b87c9ed04acad6c927d76b4c90"
+      "bytes": 676,
+      "sha256": "e96cd4f41996a52900b787a191e3206387645fa5bf096b3e0df00de230bda94a"
     },
     {
       "location": "prepared",
@@ -334,14 +376,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 354862,
-      "sha256": "0776ff168261af98adbbb85e4e6fa118156f1cb64b865ddb9ccf0161bde821d4"
+      "bytes": 357254,
+      "sha256": "a93772492e0ede2631223cbc4363417d2d467388e75274c95cac6e7ff85614f9"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 389498,
-      "sha256": "8b483e3eb5d7c0af500083658ab117483c7c305128554f688b1f6ab27c6cb322"
+      "bytes": 390322,
+      "sha256": "5cf58a38e6ffa592333a8b40adacb18945616c33f0b7352f01cf429cd7f206d1"
     },
     {
       "location": "prepared",
