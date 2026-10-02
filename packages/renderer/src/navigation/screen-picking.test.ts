@@ -50,3 +50,20 @@ test('worker bounds preserve corridor edges, clipped endpoints and faded chord p
   for (let x = 0; x <= 100; x += .5) for (let y = 10; y <= 90; y += .5)
     assert.equal(hitsScreenShape(bounded, x, y), hitsScreenShape(shape, x, y));
 });
+
+test('a finger reach takes the nearest label or marker only when nothing is under the point, and before any orbit', () => {
+  const registry = screenPicking({} as HTMLElement), ring = {} as HTMLElement, label = {} as HTMLElement, orbit = {} as HTMLElement;
+  registry.publish({}, [
+    { element: ring, rank: 0, shape: { kind: 'circle', x: 0, y: 0, radius: 13 } },
+    { element: label, rank: 50, shape: { kind: 'rect', left: 40, top: -9, right: 90, bottom: 9 } },
+    { element: orbit, rank: 100, shape: { kind: 'segments', halfWidth: 8, segments: [[-100, 20, 100, 20, 1]] } },
+  ]);
+  assert.equal(registry.pick(0, 20), orbit);
+  assert.equal(registry.pick(0, 20, 16), ring);
+  assert.equal(registry.pick(24, 0, 16), ring);
+  assert.equal(registry.pick(30, 0, 16), label);
+  assert.equal(registry.pick(10, 0, 16), ring);
+  assert.equal(registry.pick(0, -29, 16), null);
+  ring.ariaDisabled = 'true';
+  assert.equal(registry.pick(0, 20, 16), orbit);
+});
