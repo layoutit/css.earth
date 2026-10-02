@@ -1,6 +1,7 @@
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { gunzipSync } from 'node:zlib';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { isPlacedClassification, mapLabel, NEUTRAL_CATALOGUE_COLOR, parseObjectDescriptor } from '@cssearth/objects';
@@ -220,8 +221,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   // Every page reads the summary: the Sun's own system and the bodies that orbit nothing. Each other star is a holder, its
   // own file with the bodies that orbit it, read when a page shows that system or the camera approaches it (summarizeWorldContext).
   const { summary, systems, index, plainStars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])), ASTEROID_DOT_BANK);
-  // The map draws those stars as dots from these banks (`/world/dots/<id>.bin`), not as bodies.
-  const dotBanks = plainStarDotBanks(plainStars.map(body => ({ id: body.id, positionM: body.positionM, color: body.color })), prepared.frame);
+  // The map draws those stars as dots, not as bodies. A star of the Milky Way is one of the galaxy's own dots
+  // (src/objects/milky-way-volume/source/packaged-stars, written by paged-star-dot-positions.mts); the world's own banks
+  // (`/world/dots/<id>.bin`) hold only the stars that table does not name: the ones in other galaxies.
+  const galaxyStars = await packagedGalaxyStars(dirname(dirname(dirname(options.outputPath))));
+  const dotBanks = plainStarDotBanks(plainStars.filter(body => !galaxyStars.has(body.id)).map(body => ({ id: body.id, positionM: body.positionM, color: body.color })), prepared.frame);
   for (const id of PLAIN_STAR_DOT_BANK_IDS) if (!dotBanks.some(bank => bank.id === id)) await rm(resolve(dirname(options.outputPath), `${id}.bin`), { force: true });
   for (const bank of dotBanks) {
     await writeCatalogueBank({ objectDirectory: resolve(dirname(options.outputPath), '..'), id: bank.id, bank, published: true, inventory: async () => undefined });
@@ -251,6 +255,17 @@ const ASTEROID_DOT_BANK = 'catalogue-asteroids';
 /** `world-context.json` → `system-views/`, beside it: `<host id>.json` per system. */
 export function worldSystemViewsDirectory(outputPath: string): string {
   return resolve(dirname(outputPath), 'system-views');
+}
+
+/** The star packages that are dots of the Milky Way's own bank, by id: the names of its tracked table. An object folder
+ * without the table (a fixture) has none. */
+async function packagedGalaxyStars(objectsRoot: string): Promise<ReadonlySet<string>> {
+  const path = resolve(objectsRoot, 'milky-way-volume/source/packaged-stars/positions.csv.gz');
+  const bytes = await readFile(path).catch((error: unknown) => { if (isMissingFile(error)) return null; throw error; });
+  if (bytes === null) return new Set();
+  const [header, ...rows] = gunzipSync(bytes).toString('utf8').trim().split('\n');
+  if (header !== 'name,xKpc,yKpc,zKpc,color') throw new TypeError(`${path}: the header is ${JSON.stringify(header)}, not name,xKpc,yKpc,zKpc,color.`);
+  return new Set(rows.map(row => row.slice(0, row.indexOf(','))));
 }
 
 /** `world-context.json` → `world-index.json`, beside it: the build's table of which holder has each body. */

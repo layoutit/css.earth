@@ -5,10 +5,19 @@
   "banks": [
     "hot-stars",
     "nearby-stars",
-    "open-clusters"
+    "open-clusters",
+    {
+      "bank": "packaged-stars",
+      "uncapped": true,
+      "shellPcFromSun": [
+        100,
+        800
+      ],
+      "basis": "The star packages that are plain dots, each in the level of its own distance from the Sun (100 to 800 pc here), so a star appears with its neighbours as their region fills the view. Each is a star with a page of its own, so none is thinned by the density cap and none takes another dot's room."
+    }
   ],
   "maxKinematicSigmaKpc": 1,
-  "maxKinematicSigmaBasis": "Presentation choice, not a paper value: a kinematic distance whose \u00b17 km/s uncertainty exceeds 1 kpc is left out. Those are the sources toward tangent points, the Galactic centre and the anticentre, which pile onto a circle through the Sun and the centre; 1 kpc drops 917 of the 7,589 tracers inside the frame and three quarters of the ones on that circle. Hou & Han (2014) weight a kinematic distance down from 0.5 kpc of uncertainty.",
+  "maxKinematicSigmaBasis": "Presentation choice, not a paper value: a kinematic distance whose ±7 km/s uncertainty exceeds 1 kpc is left out. Those are the sources toward tangent points, the Galactic centre and the anticentre, which pile onto a circle through the Sun and the centre; 1 kpc drops 917 of the 7,589 tracers inside the frame and three quarters of the ones on that circle. Hou & Han (2014) weight a kinematic distance down from 0.5 kpc of uncertainty.",
   "colorTowardWhite": 0.5,
   "colorTowardWhiteBasis": "Presentation choice: each catalogue color mixed halfway to white before the gamma, because the saturated colors read as neon over the backing. The hue order of every catalogue is kept.",
   "colorGamma": 1.6,
@@ -21,10 +30,15 @@
       0.4,
       0.8
     ],
-    "basis": "The same disc law as the galaxy level (tracers/merge.json): exponential in Galactocentric radius with the thin disc's 2.6 kpc scale length (Bland-Hawthorn & Gerhard 2016, ARA&A 54, 529, https://arxiv.org/abs/1602.07702). Presentation choice: ten times the 3 kpc level, inside the 800 pc where the tracked hot-star sample (one row in 4) still holds about 2,000 per kpc\u00b2; the taper softens the level's edge."
+    "basis": "The same disc law as the galaxy level (tracers/merge.json): exponential in Galactocentric radius with the thin disc's 2.6 kpc scale length (Bland-Hawthorn & Gerhard 2016, ARA&A 54, 529, https://arxiv.org/abs/1602.07702). Presentation choice: ten times the 3 kpc level, inside the 800 pc where the tracked hot-star sample (one row in 4) still holds about 2,000 per kpc²; the taper softens the level's edge."
   },
   "within": [
     "tracers",
     "local-3kpc"
-  ]
+  ],
+  "apart": {
+    "bank": "packaged-stars",
+    "pc": 0.2,
+    "basis": "A star package is that star at the place its page uses. A catalogue row within 0.2 pc of one (twice the 0.1 pc grid every dot of this bank is rounded to) is the same star from that catalogue, drawn once: 85 of the 2,108 packaged stars had such a dot on 2026-10-02."
+  }
 }

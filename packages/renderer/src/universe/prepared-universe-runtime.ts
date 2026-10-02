@@ -353,14 +353,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const outsideGalaxy = galaxyOutsideFade(
                 eyeDistanceM(world.pose, selected.positionM), plan.volume.discHalfHeightM);
               additionalPoints.publish({world, viewport}, distanceM, outsideGalaxy);
-              // Dimmed like every marker outside a highlighted category; the selected star's own dot is its marker's to draw.
-              // and like every body outside the focus star's system (the frame's `otherSystems`). A star the world draws
-              // as a body is its marker's to draw, as the selected star is.
-              const drawnPlaces = spatial.plainStarPlaces();
-              if (drawnPlaces !== starPlacesFor || selected.positionM !== starPlacesSelected) {
-                starPlacesFor = drawnPlaces; starPlacesSelected = selected.positionM; starPlaces = [selected.positionM, ...drawnPlaces];
-              }
-              for (const bank of starPoints) bank.publish({world, viewport}, (spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1) * frame.otherSystems, starPlaces);
               // Past halfway out the galaxy is seen whole, as the universe background draws it (universe-background.ts).
               spatial.setOutsideGalaxy(outsideGalaxy > .5);
               // Loaded and drawn only far outside the galaxies' own scale.
@@ -371,7 +363,15 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               for (const mesh of meshes) mesh.runtime.setHidden(mesh.hidden());
               const meshCover = Math.max(0, ...meshes.map(mesh => mesh.runtime.publish({ world, viewport }, logarithmicFade(distanceM, IMAGE_MESH_LOAD_DISTANCE_M / 2, IMAGE_MESH_LOAD_DISTANCE_M), meshCaptioned)));
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
-              const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity);
+              // The stars the world draws as bodies (the selected one, and each plain-dot star it holds): no dot bank draws them too.
+              const drawnPlaces = spatial.plainStarPlaces();
+              if (drawnPlaces !== starPlacesFor || selected.positionM !== starPlacesSelected) {
+                starPlacesFor = drawnPlaces; starPlacesSelected = selected.positionM; starPlaces = [selected.positionM, ...drawnPlaces];
+              }
+              const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity, starPlaces);
+              // The world's own star dots dim like every marker outside a highlighted category and like every body outside
+              // the focus star's system (the frame's `otherSystems`).
+              for (const bank of starPoints) bank.publish({world, viewport}, (spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1) * frame.otherSystems, starPlaces);
               // A body inside a galaxy other than the page's own stands among that galaxy's catalogue dots once the camera has left
               // the body's own system, over the band the stellar neighbourhood takes around the Sun.
               const insideGalaxy = catalogBanks.imageBankContaining(selected.positionM);

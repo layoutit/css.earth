@@ -3,10 +3,19 @@
   "id": "local-20pc",
   "meaning": "A nested level of the Milky Way's star dots around the Sun, out to 20 pc: the dots it adds to the levels around it bring it to its own even density, so zooming in never empties the view.",
   "banks": [
-    "nearby-stars-20pc"
+    "nearby-stars-20pc",
+    {
+      "bank": "packaged-stars",
+      "uncapped": true,
+      "shellPcFromSun": [
+        0,
+        20
+      ],
+      "basis": "The star packages that are plain dots, each in the level of its own distance from the Sun (0 to 20 pc here), so a star appears with its neighbours as their region fills the view. Each is a star with a page of its own, so none is thinned by the density cap and none takes another dot's room."
+    }
   ],
   "maxKinematicSigmaKpc": 1,
-  "maxKinematicSigmaBasis": "Presentation choice, not a paper value: a kinematic distance whose \u00b17 km/s uncertainty exceeds 1 kpc is left out. Those are the sources toward tangent points, the Galactic centre and the anticentre, which pile onto a circle through the Sun and the centre; 1 kpc drops 917 of the 7,589 tracers inside the frame and three quarters of the ones on that circle. Hou & Han (2014) weight a kinematic distance down from 0.5 kpc of uncertainty.",
+  "maxKinematicSigmaBasis": "Presentation choice, not a paper value: a kinematic distance whose ±7 km/s uncertainty exceeds 1 kpc is left out. Those are the sources toward tangent points, the Galactic centre and the anticentre, which pile onto a circle through the Sun and the centre; 1 kpc drops 917 of the 7,589 tracers inside the frame and three quarters of the ones on that circle. Hou & Han (2014) weight a kinematic distance down from 0.5 kpc of uncertainty.",
   "colorTowardWhite": 0.5,
   "colorTowardWhiteBasis": "Presentation choice: each catalogue color mixed halfway to white before the gamma, because the saturated colors read as neon over the backing. The hue order of every catalogue is kept.",
   "colorGamma": 1.6,
@@ -17,5 +26,10 @@
     "local-800pc",
     "local-100pc"
   ],
-  "basis": "Every star of the Gaia Catalogue of Nearby Stars within 20 pc not already drawn by an outer level, unthinned: inside the galaxy the census is drawn as measured, so its real clumps and gaps show. The census's own 20 pc reach is the level's edge."
+  "basis": "Every star of the Gaia Catalogue of Nearby Stars within 20 pc not already drawn by an outer level, unthinned: inside the galaxy the census is drawn as measured, so its real clumps and gaps show. The census's own 20 pc reach is the level's edge.",
+  "apart": {
+    "bank": "packaged-stars",
+    "pc": 0.2,
+    "basis": "A star package is that star at the place its page uses. A catalogue row within 0.2 pc of one (twice the 0.1 pc grid every dot of this bank is rounded to) is the same star from that catalogue, drawn once: 85 of the 2,108 packaged stars had such a dot on 2026-10-02."
+  }
 }

@@ -16,7 +16,9 @@ A page never reads a list of the world's bodies. A body is found through its hol
   orbit-bank pins, served at `/world/systems/<id>.json`. A featured star is a body of the summary and its file holds its
   planets. A star the map draws as a plain dot, with no label, hover or click, is in its own file with them.
 - A plain-dot star nothing orbits has no file: it is its own holder of one body, and its row travels in its object entry.
-  The map draws every plain-dot star from two dot banks
+  The map draws a plain-dot star of the Milky Way as one of the galaxy's own dots
+  ([packaged-stars](../../src/objects/milky-way-volume/source/packaged-stars/points.json)), and the ones in other
+  galaxies from the world's two dot banks
   ([plain-star-dots.ts](../../packages/bake/src/world-context/plain-star-dots.ts), served at `/world/dots/<id>.bin`).
 - `world-index.json` is the build's table of which holder has each body, with every body's place in the full context.
   Node tools, tests, the build and the deploy check read it; no page does.

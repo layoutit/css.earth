@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
+import { gunzipSync } from 'node:zlib';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { decodeCatalogueBankBinary, parseCataloguePoints, parseCompleteWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldIndex } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
@@ -33,11 +34,21 @@ test('a plain-dot star is its own holder, never a body of the summary; one nothi
   await assert.rejects(parseCompleteWorldContext(raw, id => json(`world-systems/${id}.json`), moved), new RegExp(`holds ${host}; the world index gives it to ${alone[0]!}`, 'u'));
 });
 
-test('the dot banks the summary names hold every plain-dot star once, at its prepared place to the bank\'s rounding', async () => {
+test('every plain-dot star is a dot once: of the Milky Way\'s own bank when the galaxy holds it, else of the world\'s banks', async () => {
   const raw = await json('world-context-summary.json'), summary = parsePreparedWorldContextSummary(raw);
   const rawIndex = await json('world-index.json');
   const whole = await parseCompleteWorldContext(raw, id => json(`world-systems/${id}.json`), rawIndex);
   const listed = new Set(plainStars(parsePreparedWorldIndex(rawIndex)));
+  // The galaxy's stars: the tracked table its dots are merged from (site/build/prepare/paged-star-dot-positions.mts).
+  const table = gunzipSync(await readFile(new URL('../../src/objects/milky-way-volume/source/packaged-stars/positions.csv.gz', import.meta.url))).toString('utf8').trim().split('\n');
+  assert.equal(table[0], 'name,xKpc,yKpc,zKpc,color');
+  const galaxy = new Map(table.slice(1).map(row => { const [name, x, y, z] = row.split(','); return [name!, [Number(x), Number(y), Number(z)]] as const; }));
+  const KPC_M = 3.0856775814913673e19;
+  for (const [id, kpc] of galaxy) {
+    const body = whole.bodies.find(body => body.id === id);
+    assert.ok(body && listed.has(id), `${id} of the galaxy's table is a plain-dot star of the world`);
+    assert.ok(kpc.every((value, axis) => Math.abs(value * KPC_M - body.positionM[axis]!) <= KPC_M * 0.5e-4 * 1.0001), `${id} is at its prepared place to the table's rounding`);
+  }
   assert.ok(summary.dotBanks?.length);
   const points: { positionM: number[]; toleranceM: number }[] = [];
   for (const id of summary.dotBanks!) {
@@ -46,8 +57,10 @@ test('the dot banks the summary names hold every plain-dot star once, at its pre
     for (const point of bank.points) points.push({ toleranceM: bank.frame.metersPerUnit * 1e-4,
       positionM: point.positionUnits.map((value, axis) => value * bank.frame.metersPerUnit + bank.frame.originM[axis]!) });
   }
-  assert.equal(points.length, listed.size);
-  for (const body of whole.bodies.filter(body => listed.has(body.id))) {
+  const outside = whole.bodies.filter(body => listed.has(body.id) && !galaxy.has(body.id));
+  assert.ok(galaxy.size > 0 && outside.length > 0, 'stars of the galaxy and stars of other galaxies');
+  assert.equal(points.length, outside.length, 'the world\'s banks hold the stars the galaxy\'s table does not name, and no other');
+  for (const body of outside) {
     assert.ok(points.some(point => point.positionM.every((value, axis) => Math.abs(value - body.positionM[axis]!) <= point.toleranceM)), `${body.id} has its dot`);
   }
 });
