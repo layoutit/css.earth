@@ -18,7 +18,7 @@
   "grid": {
     "width": 64,
     "height": 64,
-    "depth": 64
+    "depth": 128
   },
   "prior": {
     "axis": [
@@ -29,16 +29,16 @@
     "center": [
       31.5,
       31.5,
-      31.5
+      63.5
     ],
     "binWidth": 1
   },
   "tau": 0.001,
   "iterations": 100,
   "blackLevel": [
-    0.043,
-    0.043,
-    0.039
+    0.09,
+    0.086,
+    0.114
   ],
   "displayExposure": 1.5,
   "slices": 48,
@@ -46,11 +46,12 @@
     "Depth follows the deprojected density (Prugniel & Simien 1997) of Naidu et al.'s (2025) forcepho Sérsic fit (Section 3.2 and Table 1): index 1.0 +/- 0.2, semi-major axis 147 (+19, -20) pc, which is 45.0 mas at their scale of 98 pc per 30 mas, axis ratio 0.25 (+0.11, -0.06), circularized radius 74 (+15, -12) pc, on an oblate spheroid whose axis is the galaxy's minor axis in the plane of the sky. The paper gives no position angle: it says the source is extended along the north-south direction in its thumbnails, so the major axis is taken at position angle 0 degrees, a reading of that sentence with no error bar. The picture's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
     "MoM-z14 is a few native pixels of the telescope: the picture is the publisher's enlarged, resampled view, still blurred by the telescope, so the volume is almost entirely the published model, and the picture gives its color and brightness.",
     "The 488 x 488 px window of the publisher's enlarged view is centred on the galaxy's light. The publisher's file carries no sky tags; the project measured 0.0011915 arcsec per pixel of the enlarged view (to about 5%; 0.000194 arcsec per pixel of the 24,567 px Large JPEG) and north 90.14 degrees left of vertical (src/sources/esawebb-weic2603a.json), so the window is 0.581 arcsec across and the delivery turns it by 90.14 degrees.",
-    "The prior ends at 6.461 half-light radii, the window's half width (291 mas, 14.6 kpc comoving): chosen here, the edge of the picture that is drawn. Light beyond that spheroid is not drawn.",
+    "The prior ends at 12 half-light radii, chosen here so that no light is cut: after the black level, the farthest lit cell of the picture lies at 8.6 half-light radii of the spheroid, inside its end, and the prior's density has fallen to a few thousandths along every lit sight line before its end, so every edge that is drawn is light falling smoothly to zero.",
+    "The telescope's blur makes the picture wider than the published ellipse. What is drawn is therefore the blurred picture's extent on the published model's depth, not the deconvolved galaxy.",
     "Sizes are comoving, as the object's distance is: an angle times the comoving distance, 10,382 Mpc. Proper sizes at redshift 14.44 are smaller by 1 + z.",
-    "Black level per channel: the median of the window on the isophote where the prior ends, so the light fades to nothing at the spheroid's edge: red 0.043, green 0.043, blue 0.039 (11, 11 and 10 of 255). No star removal, masks or median clamp: the window holds only the galaxy.",
+    "Black level per channel, red 0.090, green 0.086, blue 0.114 (23, 22 and 29 of 255): a presentation choice, at or above the brightest background of the window (23, 22 and 29 of 255) so that no box or outline of the window is drawn. It keeps 51% of the light above the window's median background; the faint outer light is lost. No star removal or median clamp.",
     "The color is the publisher's display composite of the telescope's filters, not calibrated photometry. Single-image depth is modelled by the prior, not measured.",
-    "The grid has 64 cells a side, less than the 150 of the nearby ellipticals: the picture holds no finer detail, and the tracked inputs stay small."
+    "The grid has 64 cells across the picture and 128 in depth, so the spheroid's faint outer density is not cut by the box, less than the 150 of the nearby ellipticals: the picture holds no finer detail, and the tracked inputs stay small."
   ],
   "shapePrior": {
     "components": [
@@ -69,7 +70,7 @@
         "axisRatio": 0.25
       }
     ],
-    "sigmaCutoff": 6.461
+    "sigmaCutoff": 12
   },
   "modelReference": {
     "paper": "https://arxiv.org/abs/2505.11263"

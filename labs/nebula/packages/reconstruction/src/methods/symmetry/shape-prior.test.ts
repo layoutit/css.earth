@@ -40,4 +40,13 @@ test('a Sérsic spheroid falls outward, is flatter along its axis and ends at th
   assert.throws(() => geometricDepth(grid, [20, 20, 20], { sigmaCutoff: 2.8, components: [
     { kind: 'sersic', axis: [1, 0, 0], radius: 6, radialSigma: 1, axialSigma: 1, weight: 1, sersicIndex: 4 },
   ] }), /axisRatio/);
+  // A Sérsic spheroid may end beyond 8 half-light radii, so its end can lie outside all the image's light; a torus may not.
+  const far = geometricDepth(grid, [20, 20, 20], { sigmaCutoff: 12, components: [
+    { kind: 'sersic', axis: [1, 0, 0], radius: 1.5, radialSigma: 1, axialSigma: 1, weight: 1, sersicIndex: 1, axisRatio: 1 },
+  ] });
+  assert.ok(far[(20 * 41 + 20 + 15) * 41 + 20]! > 0, 'light at 10 half-light radii');
+  assert.equal(far[(20 * 41 + 20 + 19) * 41 + 20], 0, 'nothing beyond 12 half-light radii');
+  assert.throws(() => geometricDepth(grid, [20, 20, 20], { sigmaCutoff: 12, components: [
+    { kind: 'torus', axis: [1, 0, 0], radius: 6, radialSigma: 1, axialSigma: 1, weight: 1 },
+  ] }), /cutoff/);
 });

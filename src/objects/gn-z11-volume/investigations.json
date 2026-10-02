@@ -6,7 +6,7 @@
       "id": "weic2406a",
       "subject": "ESA/Webb weic2406a",
       "status": "included",
-      "finding": "GN-z11 in the GOODS-North field: Webb NIRCam: 0.9 to 1.5 µm blue, 2.0 to 3.4 µm green, 3.6 to 4.4 µm red. The lab reads a 120 x 120 px window of the Large JPEG, 0.29 arcsec across. The file carries no sky tags; the scale (0.002447 arcsec per pixel, to about 3%) and the direction of north (61.4° right of vertical) are the project's measurements, recorded in src/sources/esawebb-weic2406a.json.",
+      "finding": "GN-z11 in the GOODS-North field: Webb NIRCam: 0.9 to 1.5 µm blue, 2.0 to 3.4 µm green, 3.6 to 4.4 µm red. The lab reads a 160 x 160 px window of the Large JPEG, 0.39 arcsec across. The file carries no sky tags; the scale (0.002447 arcsec per pixel, to about 3%) and the direction of north (61.4° right of vertical) are the project's measurements, recorded in src/sources/esawebb-weic2406a.json.",
       "evidence": [
         "https://esawebb.org/images/weic2406a/",
         "https://esawebb.org/copyright/"

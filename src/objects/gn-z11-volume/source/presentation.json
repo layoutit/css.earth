@@ -24,7 +24,7 @@
       "title": "GN-z11 in near infrared",
       "description": "Webb's near-infrared picture of GN-z11, its light spread in depth through the spheroid of the extended component of Tacchella et al.'s published fit. The galaxy is a few native pixels of the telescope, so the volume is almost entirely the published model, with the picture giving color and brightness. Depth is modelled, not measured.",
       "summary": "A published model spheroid colored by Webb's picture of a few native pixels; depth is not measured.",
-      "detail": "120 × 120 px",
+      "detail": "160 × 160 px",
       "facts": [
         {
           "id": "bands",
@@ -34,7 +34,7 @@
         {
           "id": "coverage",
           "label": "Field",
-          "value": "0.29 × 0.29 arcsec"
+          "value": "0.39 × 0.39 arcsec"
         },
         {
           "id": "distance",
@@ -47,10 +47,10 @@
         "path": ".local/nebula-lab/planetary/gn-z11-inferred-original.jpg",
         "url": "https://cdn.esawebb.org/archives/images/large/weic2406a.jpg",
         "crop": {
-          "left": 3620,
-          "top": 301,
-          "width": 120,
-          "height": 120
+          "left": 3600,
+          "top": 281,
+          "width": 160,
+          "height": 160
         }
       }
     }

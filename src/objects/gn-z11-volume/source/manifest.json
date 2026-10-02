@@ -10,7 +10,7 @@
       "title": "GN-z11 in the GOODS-North field",
       "credit": "NASA, ESA, CSA, B. Robertson (UC Santa Cruz), B. Johnson (CfA), S. Tacchella (Cambridge), M. Rieke (University of Arizona), D. Eisenstein (CfA)",
       "displayCredit": "ESA/Webb",
-      "acquisition": "The publisher's Large JPEG (4049 x 1961 px), downloaded unchanged by the Nebula Lab recipe (labs/nebula/models/gn-z11/experiment.json) into its ignored cache; the recipe reads the window 3620, 301, 120, 120 (x, y, width, height). A display composite, not a calibrated scientific array.",
+      "acquisition": "The publisher's Large JPEG (4049 x 1961 px), downloaded unchanged by the Nebula Lab recipe (labs/nebula/models/gn-z11/experiment.json) into its ignored cache; the recipe reads the window 3600, 281, 160, 160 (x, y, width, height). A display composite, not a calibrated scientific array.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

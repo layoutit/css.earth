@@ -24,10 +24,13 @@ function sersicDensity(m: number, n: number): number {
   return r ** -p * Math.exp(-b * (r ** (1 / n) - 1));
 }
 export interface ShapePrior { components: ShapeComponent[]; sigmaCutoff: number; }
+/** The largest cutoff: 8 sigma for a torus or disk. A prior of Sérsic spheroids alone may end as far as 64 half-light
+ * radii, so that its end lies outside all the image's light and no light is cut at it. */
+const cutoffLimit = (prior: ShapePrior) => prior.components.length && prior.components.every(component => component.kind === 'sersic') ? 64 : 8;
 
 export function geometricDepth(grid: InferenceGrid, center: readonly number[], prior: ShapePrior): Float32Array {
   if (center.length !== 3 || center.some(v => !Number.isFinite(v)) ||
-      !Number.isFinite(prior.sigmaCutoff) || prior.sigmaCutoff <= 0 || prior.sigmaCutoff > 8 || !prior.components.length)
+      !Number.isFinite(prior.sigmaCutoff) || prior.sigmaCutoff <= 0 || prior.sigmaCutoff > cutoffLimit(prior) || !prior.components.length)
     throw new TypeError('Finite center, bounded positive cutoff and geometric components required.');
   const count = grid.width * grid.height * grid.depth;
   if ([grid.width, grid.height, grid.depth].some(v => !Number.isInteger(v) || v < 2) || count > 4_000_000)

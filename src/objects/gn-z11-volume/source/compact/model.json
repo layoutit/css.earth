@@ -11,16 +11,22 @@
       "credit": "NASA, ESA, CSA, B. Robertson (UC Santa Cruz), B. Johnson (CfA), S. Tacchella (Cambridge), M. Rieke (University of Arizona), D. Eisenstein (CfA). ESA/Webb, GN-z11 in the GOODS-North field."
     },
     "crop": {
-      "left": 3620,
-      "top": 301,
-      "width": 120,
-      "height": 120
+      "left": 3600,
+      "top": 281,
+      "width": 160,
+      "height": 160
     },
-    "pointMasks": [],
+    "pointMasks": [
+      {
+        "x": 3600,
+        "y": 441,
+        "radius": 48
+      }
+    ],
     "grid": {
       "width": 64,
       "height": 64,
-      "depth": 64
+      "depth": 128
     },
     "prior": {
       "axis": [
@@ -31,28 +37,29 @@
       "center": [
         31.5,
         31.5,
-        31.5
+        63.5
       ],
       "binWidth": 1
     },
     "tau": 0.001,
     "iterations": 100,
     "blackLevel": [
-      0.125,
-      0.082,
-      0.102
+      0.196,
+      0.173,
+      0.165
     ],
     "displayExposure": 1.5,
     "slices": 48,
     "assumptions": [
       "Depth follows the deprojected density (Prugniel & Simien 1997) of the extended component of Tacchella et al.'s (2023) ForcePho fit (Section 3): Sérsic index 0.9 +/- 0.1, half-light radius along the major axis 49 +/- 3 mas, axis ratio 0.67 +/- 0.05, position angle 34 +/- 5 degrees, on an oblate spheroid whose axis is the galaxy's minor axis in the plane of the sky. The fit's point source, which holds about two thirds of the light, is not modelled separately: its light is in the picture and is spread through the same spheroid. The picture's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
       "GN-z11 is a few native pixels of the telescope: the picture is the publisher's enlarged, resampled view, still blurred by the telescope, so the volume is almost entirely the published model, and the picture gives its color and brightness.",
-      "The 120 x 120 px window of the publisher's enlarged view is centred on the galaxy's light. The publisher's file carries no sky tags; the project measured 0.002447 arcsec per pixel of the enlarged view (to about 3%) and north 61.4 degrees right of vertical (src/sources/esawebb-weic2406a.json), so the window is 0.294 arcsec across and the delivery turns it by -61.4 degrees.",
-      "The prior ends at 2.996 half-light radii, the window's half width (147 mas, 6.9 kpc comoving): chosen here, the edge of the picture that is drawn. Light beyond that spheroid is not drawn.",
+      "The 160 x 160 px window of the publisher's enlarged view is centred on the galaxy's light. The publisher's file carries no sky tags; the project measured 0.002447 arcsec per pixel of the enlarged view (to about 3%) and north 61.4 degrees right of vertical (src/sources/esawebb-weic2406a.json), so the window is 0.392 arcsec across and the delivery turns it by -61.4 degrees.",
+      "The prior ends at 6.5 half-light radii, chosen here so that no light is cut: after the black level, the farthest lit cell of the picture lies at 2.6 half-light radii of the spheroid, inside its end, and the prior's density has fallen to a few thousandths along every lit sight line before its end, so every edge that is drawn is light falling smoothly to zero.",
+      "The telescope's blur makes the picture wider than the published ellipse. What is drawn is therefore the blurred picture's extent on the published model's depth, not the deconvolved galaxy.",
       "Sizes are comoving, as the object's distance is: an angle times the comoving distance, 9,762 Mpc. Proper sizes at redshift 10.603 are smaller by 1 + z.",
-      "Black level per channel: the median of the window on the isophote where the prior ends, so the light fades to nothing at the spheroid's edge: red 0.125, green 0.082, blue 0.102 (32, 21 and 26 of 255). No star removal, masks or median clamp: the window holds only the galaxy.",
+      "Black level per channel, red 0.196, green 0.173, blue 0.165 (50, 44 and 42 of 255): a presentation choice, at or above the brightest background of the window (50, 44 and 42, which takes in a faint bluish patch 0.1 arcsec from the core of 255) so that no box or outline of the window is drawn. It keeps 23% of the light above the window's median background; the faint outer light is lost. The publisher's pointer line in one corner of the window is masked with the light around it. No star removal or median clamp.",
       "The color is the publisher's display composite of the telescope's filters, not calibrated photometry. Single-image depth is modelled by the prior, not measured.",
-      "The grid has 64 cells a side, less than the 150 of the nearby ellipticals: the picture holds no finer detail, and the tracked inputs stay small."
+      "The grid has 64 cells across the picture and 128 in depth, so the spheroid's faint outer density is not cut by the box, less than the 150 of the nearby ellipticals: the picture holds no finer detail, and the tracked inputs stay small."
     ],
     "shapePrior": {
       "components": [
@@ -63,7 +70,7 @@
             -0.4602,
             0
           ],
-          "radius": 10.68,
+          "radius": 8.01,
           "radialSigma": 1,
           "axialSigma": 1,
           "weight": 1,
@@ -71,7 +78,7 @@
           "axisRatio": 0.67
         }
       ],
-      "sigmaCutoff": 2.996
+      "sigmaCutoff": 6.5
     },
     "modelReference": {
       "paper": "https://arxiv.org/abs/2302.07234"
@@ -80,15 +87,15 @@
   "channels": [
     {
       "path": "src/objects/gn-z11-volume/source/compact/emission-0.f32.gz",
-      "bytes": 1048576
+      "bytes": 2097152
     },
     {
       "path": "src/objects/gn-z11-volume/source/compact/emission-1.f32.gz",
-      "bytes": 1048576
+      "bytes": 2097152
     },
     {
       "path": "src/objects/gn-z11-volume/source/compact/emission-2.f32.gz",
-      "bytes": 1048576
+      "bytes": 2097152
     }
   ],
   "provenance": {
@@ -106,16 +113,22 @@
         "credit": "NASA, ESA, CSA, B. Robertson (UC Santa Cruz), B. Johnson (CfA), S. Tacchella (Cambridge), M. Rieke (University of Arizona), D. Eisenstein (CfA). ESA/Webb, GN-z11 in the GOODS-North field."
       },
       "crop": {
-        "left": 3620,
-        "top": 301,
-        "width": 120,
-        "height": 120
+        "left": 3600,
+        "top": 281,
+        "width": 160,
+        "height": 160
       },
-      "pointMasks": [],
+      "pointMasks": [
+        {
+          "x": 3600,
+          "y": 441,
+          "radius": 48
+        }
+      ],
       "grid": {
         "width": 64,
         "height": 64,
-        "depth": 64
+        "depth": 128
       },
       "prior": {
         "axis": [
@@ -126,28 +139,29 @@
         "center": [
           31.5,
           31.5,
-          31.5
+          63.5
         ],
         "binWidth": 1
       },
       "tau": 0.001,
       "iterations": 100,
       "blackLevel": [
-        0.125,
-        0.082,
-        0.102
+        0.196,
+        0.173,
+        0.165
       ],
       "displayExposure": 1.5,
       "slices": 48,
       "assumptions": [
         "Depth follows the deprojected density (Prugniel & Simien 1997) of the extended component of Tacchella et al.'s (2023) ForcePho fit (Section 3): Sérsic index 0.9 +/- 0.1, half-light radius along the major axis 49 +/- 3 mas, axis ratio 0.67 +/- 0.05, position angle 34 +/- 5 degrees, on an oblate spheroid whose axis is the galaxy's minor axis in the plane of the sky. The fit's point source, which holds about two thirds of the light, is not modelled separately: its light is in the picture and is spread through the same spheroid. The picture's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
         "GN-z11 is a few native pixels of the telescope: the picture is the publisher's enlarged, resampled view, still blurred by the telescope, so the volume is almost entirely the published model, and the picture gives its color and brightness.",
-        "The 120 x 120 px window of the publisher's enlarged view is centred on the galaxy's light. The publisher's file carries no sky tags; the project measured 0.002447 arcsec per pixel of the enlarged view (to about 3%) and north 61.4 degrees right of vertical (src/sources/esawebb-weic2406a.json), so the window is 0.294 arcsec across and the delivery turns it by -61.4 degrees.",
-        "The prior ends at 2.996 half-light radii, the window's half width (147 mas, 6.9 kpc comoving): chosen here, the edge of the picture that is drawn. Light beyond that spheroid is not drawn.",
+        "The 160 x 160 px window of the publisher's enlarged view is centred on the galaxy's light. The publisher's file carries no sky tags; the project measured 0.002447 arcsec per pixel of the enlarged view (to about 3%) and north 61.4 degrees right of vertical (src/sources/esawebb-weic2406a.json), so the window is 0.392 arcsec across and the delivery turns it by -61.4 degrees.",
+        "The prior ends at 6.5 half-light radii, chosen here so that no light is cut: after the black level, the farthest lit cell of the picture lies at 2.6 half-light radii of the spheroid, inside its end, and the prior's density has fallen to a few thousandths along every lit sight line before its end, so every edge that is drawn is light falling smoothly to zero.",
+        "The telescope's blur makes the picture wider than the published ellipse. What is drawn is therefore the blurred picture's extent on the published model's depth, not the deconvolved galaxy.",
         "Sizes are comoving, as the object's distance is: an angle times the comoving distance, 9,762 Mpc. Proper sizes at redshift 10.603 are smaller by 1 + z.",
-        "Black level per channel: the median of the window on the isophote where the prior ends, so the light fades to nothing at the spheroid's edge: red 0.125, green 0.082, blue 0.102 (32, 21 and 26 of 255). No star removal, masks or median clamp: the window holds only the galaxy.",
+        "Black level per channel, red 0.196, green 0.173, blue 0.165 (50, 44 and 42 of 255): a presentation choice, at or above the brightest background of the window (50, 44 and 42, which takes in a faint bluish patch 0.1 arcsec from the core of 255) so that no box or outline of the window is drawn. It keeps 23% of the light above the window's median background; the faint outer light is lost. The publisher's pointer line in one corner of the window is masked with the light around it. No star removal or median clamp.",
         "The color is the publisher's display composite of the telescope's filters, not calibrated photometry. Single-image depth is modelled by the prior, not measured.",
-        "The grid has 64 cells a side, less than the 150 of the nearby ellipticals: the picture holds no finer detail, and the tracked inputs stay small."
+        "The grid has 64 cells across the picture and 128 in depth, so the spheroid's faint outer density is not cut by the box, less than the 150 of the nearby ellipticals: the picture holds no finer detail, and the tracked inputs stay small."
       ],
       "shapePrior": {
         "components": [
@@ -158,7 +172,7 @@
               -0.4602,
               0
             ],
-            "radius": 10.68,
+            "radius": 8.01,
             "radialSigma": 1,
             "axialSigma": 1,
             "weight": 1,
@@ -166,16 +180,16 @@
             "axisRatio": 0.67
           }
         ],
-        "sigmaCutoff": 2.996
+        "sigmaCutoff": 6.5
       },
       "modelReference": {
         "paper": "https://arxiv.org/abs/2302.07234"
       }
     },
     "uncoveredSignalFractions": [
-      0.01591778166676479,
-      0.02537586787917231,
-      0.08774041657647888
+      0,
+      0,
+      0
     ],
     "projectionCaveat": "Agreement on supported rays is imposed by normalization and does not validate depth geometry.",
     "coordinateMeaning": "Image x right, y up in display; dimensionless units. No measured gas density, scale, distance or sky registration.",
@@ -183,17 +197,17 @@
       {
         "iteration": 0,
         "relativeChange": 0,
-        "relativeProjectionError": 0.040312920840295
+        "relativeProjectionError": 2.553927387315164e-7
       },
       {
         "iteration": 0,
         "relativeChange": 0,
-        "relativeProjectionError": 0.0510077051431187
+        "relativeProjectionError": 2.65811535062043e-7
       },
       {
         "iteration": 0,
         "relativeChange": 0,
-        "relativeProjectionError": 0.14616156788766824
+        "relativeProjectionError": 2.1164165065328545e-7
       }
     ]
   },
