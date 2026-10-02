@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-86728",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 746545172372256384: position at J2016.0. Distance: Boyajian et al. (2012), ApJ 746, 101, HD 86728: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 66.47 +/- 0.32 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 15.044 +/- 0.072 pc; Gaia DR3 parallax 66.9958 +/- 0.0921 mas (same row, RUWE 0.94), 727.0 standard errors, is not used. Proper motion: Gaia DR3 (same row): -528.871, -429.376 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1088/0004-637X/746/1/101"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 1.247 +/- 0.021 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 86728: radius in solar radii, from the limb-darkened angular diameter 0.771 +/- 0.012 mas (CHARA) and the Hipparcos parallax, 1.247 +/- 0.021 (https://doi.org/10.1088/0004-637X/746/1/101). Mass 1.034 +/- 0.036 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 86728: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.034 +/- 0.036 (https://doi.org/10.1088/0004-637X/746/1/101). Temperature 5612 +/- 52 K from Boyajian et al. (2012), ApJ 746, 101, HD 86728: effective temperature in K, from the angular diameter and the bolometric flux, 5612 +/- 52.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/746/1/101"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 746545172372256384, cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 561: HR 3951; VizieR III/202 (3 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #fff3f3. Routes tried in order: stis-ngsl: HD 86728 is not in the library; pulkovo: HR 3951 is not in the catalogue; kiehling: HR 3951 is not among its 60 stars; burnashev: BS 3951 is not in part2; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=746545172372256384&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+        "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,612 K and log g 4.26 (u1 0.493, u2 0.238): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

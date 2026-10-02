@@ -1,0 +1,42 @@
+{
+  "id": "cf-ursae-majoris",
+  "name": "CF Ursae Majoris",
+  "system": "CF Ursae Majoris system",
+  "description": "A naked-eye star 9.1 parsecs away, 68% of the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 103095"
+  ],
+  "target": "HD 103095",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 0.681,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 103095: radius in solar radii, from the limb-darkened angular diameter 0.696 +/- 0.005 mas (CHARA) and the Hipparcos parallax, 0.681 +/- 0.006",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.006
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4759,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 103095: effective temperature in K, from the angular diameter and the bolometric flux, 4759 +/- 20",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 20
+  },
+  "distance": {
+    "value": 9.093,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 103095: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 109.98 +/- 0.41 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.034
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 9 parsecs away whose disc the CHARA Array measured: 68% of the Sun's width.",
+    "introduction": "Its disc spans 0.696 milliarcseconds, which gives 0.681 solar radii and 4,759 K at its surface.",
+    "locator": "Tables 5 and 10, HD 103095: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5418
+}

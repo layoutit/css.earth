@@ -1,0 +1,140 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-5015",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 5015",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1212605.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-5015-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HD 5015",
+      "classification": "star",
+      "color": "#faf5ff",
+      "distanceAu": 3866274.1,
+      "description": "A naked-eye star 19 parsecs away whose disc the CHARA Array measured: 1.7 times the Sun's width.",
+      "systemName": "HD 5015 system",
+      "order": 5398,
+      "context": {
+        "order": 5395
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        271847392778208830,
+        64093883020572350,
+        506479775885414300
+      ],
+      "presentationToReference": [
+        0.4700174958734126,
+        0.8523028489634699,
+        0.2294850915019083,
+        0.11081675680589166,
+        0.20095535236025858,
+        -0.9733121764206939,
+        0.8756729983183851,
+        -0.4829045454399006,
+        -0.0000030939601745681305
+      ],
+      "orbitUpReference": [
+        -0.8523028489634699,
+        -0.20095535236025858,
+        0.4829045454399006
+      ],
+      "metersPerUnit": 3911629.35483871,
+      "bodyRadiusM": 1212605100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

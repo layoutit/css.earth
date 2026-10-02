@@ -1,0 +1,30 @@
+{
+ "id": "gj-570-a",
+ "classification": "star",
+ "order": 5386,
+ "physical": {
+  "name": "GJ 570 A",
+  "horizonsCode": null,
+  "meanRadiusKm": 514122.3,
+  "gravitationalParameterKm3PerS2": 98605342951.16095,
+  "parent": null,
+  "effectiveTemperatureK": 4507
+ },
+ "physicalNotes": "Radius 0.739 +/- 0.019 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 570A: radius in solar radii, 0.739 +/- 0.019, from the literature measurement the table lists (https://doi.org/10.1088/0004-637X/757/2/112): 514,122 km at 695,700 km per solar radius. Mass 0.743 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 570A: mass 0.743 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112); GM is that mass times the JPL solar GM. Temperature 4507 +/- 58 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 570A: effective temperature in K, 4507 +/- 58, from the literature measurement the table lists (https://doi.org/10.1088/0004-637X/757/2/112). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 224.37159427348143,
+  "declinationDegrees": -21.423140396261676,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 5.886360157633197,
+  "properMotionRaMasPerYear": 1031.4718694823848,
+  "properMotionDecMasPerYear": -1723.6189029383202,
+  "radialVelocityKmPerS": 26.751173,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 6232511606838403968 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/gj-570-a/source/photometry/gaia-dr3-source.csv; cross-identification HD 131977, HR 5568, HIP 73184: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+6232511606838403968",
+   "distance": "Gaia DR3 parallax 169.8843 +/- 0.0653 mas (same row, RUWE 1.30): 5.89 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 1031.472, -1723.619 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 26.75 +/- 0.12 km/s"
+  }
+ }
+}

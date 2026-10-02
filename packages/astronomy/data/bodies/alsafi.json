@@ -1,0 +1,30 @@
+{
+ "id": "alsafi",
+ "classification": "star",
+ "order": 5424,
+ "physical": {
+  "name": "Alsafi",
+  "horizonsCode": null,
+  "meanRadiusKm": 539863.2,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 5255
+ },
+ "physicalNotes": "Radius 0.776 +/- 0.008 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 185144: radius in solar radii, from the limb-darkened angular diameter 1.254 +/- 0.012 mas (CHARA) and the Hipparcos parallax, 0.776 +/- 0.008 (https://doi.org/10.1088/0004-637X/746/1/101): 539,863 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5255 +/- 31 K from Boyajian et al. (2012), ApJ 746, 101, HD 185144: effective temperature in K, from the angular diameter and the bolometric flux, 5255 +/- 31 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 293.09759805108064,
+  "declinationDegrees": 69.65345106254792,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 5.755,
+  "properMotionRaMasPerYear": 597.3842379704172,
+  "properMotionDecMasPerYear": -1738.2861023860867,
+  "radialVelocityKmPerS": 26.55193,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2261614264931057664 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/alsafi/source/photometry/gaia-dr3-source.csv; cross-identification HD 185144, HR 7462, HIP 96100: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+2261614264931057664",
+   "distance": "Boyajian et al. (2012), ApJ 746, 101, HD 185144: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 173.77 +/- 0.18 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 5.755 +/- 0.006 pc; Gaia DR3 parallax 173.4939 +/- 0.0748 mas (same row, RUWE 1.68), 2319.2 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): 597.384, -1738.286 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 26.55 +/- 0.13 km/s"
+  }
+ }
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gamma-serpentis",
+  "angularDiameterMas": 1.22,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,024,070 km at 11.26 pc = 1.22 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 11.255,
+  "distanceSource": "Boyajian et al. (2012), ApJ 746, 101, HD 142860: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 88.85 +/- 0.18 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 11.255 +/- 0.023 pc; Gaia DR3 parallax 89.5647 +/- 0.1835 mas (same row, RUWE 1.54), 488.2 standard errors, is not used",
+  "radiusKm": 1024070.4,
+  "radiusSource": "Radius 1.472 +/- 0.007 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 142860: radius in solar radii, from the limb-darkened angular diameter 1.217 +/- 0.005 mas (CHARA) and the Hipparcos parallax, 1.472 +/- 0.007 (https://doi.org/10.1088/0004-637X/746/1/101): 1,024,070 km at 695,700 km per solar radius. Mass 1.184 +/- 0.012 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 142860: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.184 +/- 0.012 (https://doi.org/10.1088/0004-637X/746/1/101); GM is that mass times the JPL solar GM. Temperature 6294 +/- 29 K from Boyajian et al. (2012), ApJ 746, 101, HD 142860: effective temperature in K, from the angular diameter and the bolometric flux, 6294 +/- 29 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6294,
+  "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 142860: effective temperature in K, from the angular diameter and the bolometric flux, 6294 +/- 29 (https://doi.org/10.1088/0004-637X/746/1/101)",
+  "surfaceGravityLogg": 4.18,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gamma-serpentis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.176, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 736) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

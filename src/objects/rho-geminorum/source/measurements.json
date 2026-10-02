@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "rho-geminorum",
+  "angularDiameterMas": 0.85,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,151,384 km at 18.05 pc = 0.85 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 18.047,
+  "distanceSource": "Boyajian et al. (2012), ApJ 746, 101, HD 58946: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 55.41 +/- 0.25 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 18.047 +/- 0.081 pc; Gaia DR3 parallax 56.1117 +/- 0.3924 mas (same row, RUWE 3.84), 143.0 standard errors, is not used",
+  "radiusKm": 1151383.5,
+  "radiusSource": "Radius 1.655 +/- 0.028 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 58946: radius in solar radii, from the limb-darkened angular diameter 0.853 +/- 0.014 mas (CHARA) and the Hipparcos parallax, 1.655 +/- 0.028 (https://doi.org/10.1088/0004-637X/746/1/101): 1,151,384 km at 695,700 km per solar radius. Mass 1.355 +/- 0.013 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 58946: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.355 +/- 0.013 (https://doi.org/10.1088/0004-637X/746/1/101); GM is that mass times the JPL solar GM. Temperature 6899 +/- 63 K from Boyajian et al. (2012), ApJ 746, 101, HD 58946: effective temperature in K, from the angular diameter and the bolometric flux, 6899 +/- 63 (https://doi.org/10.1088/0004-637X/746/1/101). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6899,
+  "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 58946: effective temperature in K, from the angular diameter and the bolometric flux, 6899 +/- 63 (https://doi.org/10.1088/0004-637X/746/1/101)",
+  "surfaceGravityLogg": 4.13,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/rho-geminorum.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.132, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 478) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

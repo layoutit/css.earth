@@ -1,6 +1,6 @@
 /** The surface gravity a star's limb law is read at, when its mass is unmeasured.
  *
- * 1. **Published.** SIMBAD's compilation of spectroscopic measurements (mesFe_h) is searched at the star's position. A paper
+ * 1. **Published.** SIMBAD's compilation of spectroscopic measurements (mesFe_h) is searched at the star's J2000 position. A paper
  *    that analysed the star's own spectra comes before a survey pipeline (SURVEY_PIPELINES). Within the chosen class the most
  *    recent paper is used; a paper that measured several spectra (a pulsating star through its cycle) gives the median of its
  *    values. When the spec gives the class's published range, a value outside it is not used.

@@ -1,0 +1,52 @@
+{
+  "host": "sirius",
+  "companions": [
+    {
+      "id": "sirius-b",
+      "name": "Sirius B",
+      "description": "A white dwarf of one solar mass within 0.8% of the Sun's width, orbiting Sirius every 50.13 years.",
+      "paper": {
+        "url": "https://doi.org/10.3847/1538-4357/aa6af8",
+        "credit": "Bond et al. (2017), ApJ 840, 70"
+      },
+      "radius": {
+        "value": 0.008098,
+        "source": "Bond et al. (2017), ApJ 840, 70, section 8: radius 0.008098 +/- 0.000046 solar radii from model-atmosphere fits to STIS spectra and the absolute flux (internal error)",
+        "url": "https://doi.org/10.3847/1538-4357/aa6af8",
+        "uncertainty": 0.000046
+      },
+      "mass": {
+        "value": 1.018,
+        "source": "Bond et al. (2017), ApJ 840, 70, Table 6: dynamical mass 1.018 +/- 0.011 solar masses",
+        "url": "https://doi.org/10.3847/1538-4357/aa6af8",
+        "uncertainty": 0.011
+      },
+      "temperature": {
+        "value": 25369,
+        "source": "Bond et al. (2017), ApJ 840, 70, section 8: Teff 25,369 +/- 46 K from model-atmosphere fits to STIS spectra (internal error)",
+        "url": "https://doi.org/10.3847/1538-4357/aa6af8",
+        "uncertainty": 46
+      },
+      "orbit": {
+        "elements": {
+          "periodDays": 18309.4,
+          "semiMajorAxisStellarRadii": 2484.5,
+          "inclinationDegrees": 136.336,
+          "eccentricity": 0.59142,
+          "argumentOfPeriapsisDegrees": 329.161,
+          "transitTimeBmjdTdb": 49561.32,
+          "ascendingNodePositionAngleDegrees": 45.4
+        },
+        "epoch": "periastron",
+        "source": "Bond et al. (2017), ApJ 840, 70, Table 4: relative visual orbit P 50.1284 yr, a 7.4957 arcsec, i 136.336, node 45.4, T0 1994.5715 (Besselian year), e 0.59142, omega 149.161 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.3789 arcsec is 19.783 au, in units of the Sirius record's radius, 1,191,189 km",
+        "url": "https://doi.org/10.3847/1538-4357/aa6af8"
+      },
+      "text": {
+        "card": "A white dwarf of one solar mass within 0.8% of the Sun's width, orbiting Sirius every 50 years.",
+        "introduction": "Hubble and 150 years of measurements give its orbit and a mass of 1.018 solar masses; its surface is 25,369 K.",
+        "locator": "Tables 4 and 6; section 8"
+      },
+      "order": 5427
+    }
+  ]
+}

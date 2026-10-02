@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "barnards-star",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Barnard's Star",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 130026.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/barnards-star-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Barnard's Star",
+      "classification": "star",
+      "color": "#ffc77a",
+      "distanceAu": 376851.7,
+      "description": "A nearby red dwarf whose disc was measured by interferometry: 19% of the Sun's width.",
+      "systemName": "Barnard's Star system",
+      "aliases": [
+        "GJ 699"
+      ],
+      "order": 5378,
+      "context": {
+        "order": 5375
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -543097526660307.06,
+        -56178319943647110,
+        4688176925348071
+      ],
+      "presentationToReference": [
+        -0.009633879434741336,
+        -0.0007952824156830792,
+        -0.999953276854932,
+        -0.9965342103375623,
+        -0.08262035785181289,
+        0.00966664860898951,
+        0.08262418528450473,
+        -0.9965807764523243,
+        -0.0000034284322914639055
+      ],
+      "orbitUpReference": [
+        0.0007952824156830792,
+        0.08262035785181289,
+        0.9965807764523243
+      ],
+      "metersPerUnit": 419439.67741935485,
+      "bodyRadiusM": 130026300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

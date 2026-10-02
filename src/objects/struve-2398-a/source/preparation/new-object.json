@@ -1,0 +1,41 @@
+{
+  "id": "struve-2398-a",
+  "name": "Struve 2398 A",
+  "system": "Struve 2398 system",
+  "description": "A nearby red dwarf, 36% of the Sun's width: its disc was measured by interferometry.",
+  "aliases": [
+    "GJ 725 A"
+  ],
+  "featured": true,
+  "target": "GJ 725 A",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+    "credit": "Boyajian et al. (2012), ApJ 757, 112"
+  },
+  "radius": {
+    "value": 0.3561,
+    "source": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 725A: radius in solar radii, 0.3561 +/- 0.0039, from this work (CHARA)",
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+    "uncertainty": 0.0039
+  },
+  "mass": {
+    "value": 0.318,
+    "source": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 725A: mass 0.318 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass",
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112"
+  },
+  "temperature": {
+    "value": 3407,
+    "source": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 725A: effective temperature in K, 3407 +/- 15, from this work (CHARA)",
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+    "uncertainty": 15
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A nearby red dwarf whose disc was measured by interferometry: 36% of the Sun's width.",
+    "introduction": "Interferometry gives it 0.3561 solar radii; with its total light, that makes its surface 3,407 K.",
+    "locator": "Table 6, GJ 725A: R, TEFF"
+  },
+  "notes": [],
+  "order": 5381
+}

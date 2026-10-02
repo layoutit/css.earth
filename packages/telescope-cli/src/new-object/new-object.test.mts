@@ -63,6 +63,9 @@ test('the colour comes from the first route that reads, the cross-check from the
   assert.deepEqual((found.record.measuredSpectrum as { flux: { column: string } }).flux.column, '2', 'the record whose HR is 2047');
   assert.deepEqual((found.record.measuredSpectrum as { gaps: { fromNm: number }[] }).gaps.map(gap => gap.fromNm), [757.5]);
   assert.match(found.tried.join('; '), /stis-ngsl: HD 39587 is not in the library; gaia-xp: Gaia DR3 published no sampled BP\/RP spectrum/u);
+  // A star Gaia saturates on (G under 4) is read from the ground catalogues first: Gaia's spectrum is tried last.
+  const bright = await chooseColor(spec, { ...row, g: 3.07 }, { main: 'x' }, archive, cmf), faint = await chooseColor(spec, { ...row, g: 4.3 }, { main: 'x' }, archive, cmf);
+  assert.match(bright.tried.at(-1)!, /^gaia-xp: /u); assert.match(faint.tried[1]!, /^gaia-xp: /u);
   const none = await chooseColor(spec, row, { main: 'x' }, archive, cmf);
   assert.equal(none.route, 'planck');
   assert.match(String((none.record.temperature as { published: { citation: string } }).published.citation), /no uncertainty/u);
@@ -810,8 +813,33 @@ test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one r
   const { physicalValues } = await import('./generate.mts'), values = physicalValues(measured, { sourceId: '1', ra: 0, dec: 0, g: 13, hasXpSampled: false });
   assert.deepEqual([values.gm, values.logg], [0, 1.2]);
   assert.match(values.massText, /No mass is measured, so GM is 0/u);
-  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'sh0es', 'm31cepheids', 'm33cepheids']);
+  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'chara', 'sh0es', 'm31cepheids', 'm33cepheids']);
   await assert.rejects(writeDrafts('gcvs', ['X'], 'output/x.json', { root, progress: () => {}, archive: {} as Archive }), /No draft route gcvs; the routes are --from-archive, --from-debcat, --from-apokasc, --from-cepheids, --from-k2, --from-tess, --from-gaia/u);
+});
+
+test('a fast-moving star is looked up in SIMBAD where it was at J2000, not where Gaia saw it in 2016', async () => {
+  const { simbadPosition } = await import('./generate.mts');
+  // Sigma Draconis: Gaia DR3 at J2016.0, proper motion 597.384, -1738.286 mas/yr; SIMBAD lists 293.08996, 69.66118 (J2000), 30 arcseconds away.
+  const at = simbadPosition({ ra: 293.09759805, dec: 69.65345106 }, { ra: 597.384, dec: -1738.286 });
+  assert.ok(Math.abs(at.ra - 293.08996) < 1e-5 && Math.abs(at.dec - 69.66118) < 1e-5, `${at.ra}, ${at.dec}`);
+  assert.deepEqual(simbadPosition({ ra: 10, dec: 0, epoch: 2000 }, { ra: 500, dec: 500 }), { ra: 10, dec: 0 }, 'a J2000 row is already there');
+});
+
+test('a CHARA row drafts a named star with its measured radius and temperature, and no mass when the paper fits none', async () => {
+  const { parseCharaRow, draftFromChara } = await import('./chara.mts');
+  // Rows as VizieR serves them, 2026-10-01: J/ApJ/746/101 targets.
+  const rows = ['HD\tSpT\tPlx\te_Plx\tD(LD)\te_D(LD)\tR\te_R\tTeff\te_Teff\tM\te_M', ' \t \tmas\tmas\tmas\tmas\tRsun\tRsun\tK\tK\tMsun\tMsun', '------\t------',
+    '102870\tF8.5IV-V  \t 91.50\t 0.22\t 1.431\t 0.006\t 1.681\t 0.008\t6132\t 26\t 1.324\t 0.005',
+    '185144\tG9V       \t173.77\t 0.18\t 1.254\t 0.012\t 0.776\t 0.008\t5255\t 31\t      \t      '].join('\n');
+  const named = draftFromChara(parseCharaRow(rows, '102870'), ['HD 102870', 'NAME Zavijava', '* bet Vir']);
+  assert.deepEqual([named.id, named.name, named.target, named.featured, named.aliases, named.radius.value, named.temperature.value], ['zavijava', 'Zavijava', 'HD 102870', true, ['HD 102870'], 1.681, 6132]);
+  assert.deepEqual([named.distance.value, named.distance.uncertainty], [10.929, 0.026], 'placed at the parallax the radius was computed with');
+  assert.match(typeof named.mass === 'string' ? '' : named.mass.source, /Yonsei-Yale isochrones.*a model value/u, 'the mass is cited as the model value it is');
+  assert.doesNotThrow(() => parseStarSpec(named), 'a CHARA draft is a whole spec');
+  const bare = draftFromChara(parseCharaRow(rows, '185144'), ['HD 185144', '*  61 Dra', '* sig Dra']);
+  assert.deepEqual([bare.id, bare.name, bare.mass, bare.featured], ['sigma-draconis', 'Sigma Draconis', 'unmeasured', undefined]);
+  assert.match(bare.description, /^A naked-eye star 5\.8 parsecs away, 78% of the Sun's width/u);
+  assert.throws(() => parseCharaRow(rows, '1'), /has 0 rows for HD 1, not one/u);
 });
 
 test('a K2 giant is drafted at its asteroseismic distance only when both pipelines agree on its radius', async () => {

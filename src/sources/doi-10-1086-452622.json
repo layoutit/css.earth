@@ -1,0 +1,42 @@
+{
+  "id": "doi-10-1086-452622",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Aufdenberg et al. (2005): On the Limb Darkening, Spectral Energy Distribution, and Temperature Structure of Procyon",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/452622"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1086/452622",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1086/452622",
+      "checkedOn": "2026-10-02",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Aufdenberg et al. (2005), The Astrophysical Journal 633 424-439",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1086/452622"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 633 424-439",
+  "creators": [
+    "J. P. Aufdenberg",
+    "H.‐G. Ludwig",
+    "P. Kervella"
+  ],
+  "publicationDate": "2005"
+}

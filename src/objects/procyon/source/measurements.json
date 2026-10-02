@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "procyon",
+  "angularDiameterMas": 5.38,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,412,967 km at 3.51 pc = 5.38 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 3.509,
+  "distanceSource": "Bond et al. (2015), ApJ 813, 106, Table 9: adopted absolute parallax 0.2850 +/- 0.0007 arcsec, the weighted mean of three measurements, inverted (https://doi.org/10.1088/0004-637X/813/2/106): 3.509 +/- 0.009 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 1412966.7,
+  "radiusSource": "Radius 2.031 +/- 0.013 solar radii from Aufdenberg, Ludwig & Kervella (2005), ApJ 633, 424, Table 7: radius 2.031 +/- 0.013 solar radii from the limb-darkened angular diameter and the parallax (https://doi.org/10.1086/452622): 1,412,967 km at 695,700 km per solar radius. Mass 1.478 +/- 0.012 solar masses from Bond et al. (2015), ApJ 813, 106, Table 10: dynamical mass 1.478 +/- 0.012 solar masses (https://doi.org/10.1088/0004-637X/813/2/106); GM is that mass times the JPL solar GM. Temperature 6543 +/- 84 K from Aufdenberg, Ludwig & Kervella (2005), ApJ 633, 424, Table 7: effective temperature 6543 +/- 84 K from the angular diameter and the bolometric flux (https://doi.org/10.1086/452622). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6543,
+  "effectiveTemperatureSource": "Aufdenberg, Ludwig & Kervella (2005), ApJ 633, 424, Table 7: effective temperature 6543 +/- 84 K from the angular diameter and the bolometric flux (https://doi.org/10.1086/452622)",
+  "surfaceGravityLogg": 3.99,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/procyon.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.992, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -134,3 +134,23 @@ describe('eclipsing binaries: each paper\'s periastron angle, checked against it
     }
   })
 })
+
+describe('Sirius B and Procyon B: white dwarfs on visual orbits', () => {
+  // Independent oracle: Hubble's own measurements of each white dwarf's separation and position angle from its star (Bond et al.
+  // 2017, ApJ 840, 70, Table 2; Bond et al. 2015, ApJ 813, 106, Table 3), not the orbital elements the records carry. A visual
+  // orbit's omega is the companion's; the records hold the star's, 180 degrees on, and these positions fail if that turn is lost.
+  const AU_KM = 149597870.7, besselian = (year: number) => 2415020.31352 + (year - 1900) * 365.242198781
+  const measured = [
+    { id: 'sirius-b', host: 'sirius', parallaxArcsec: 0.3789, rows: [[1997.2137, 3.6811, 191.864], [2003.2942, 5.8598, 121.202], [2008.0072, 7.9858, 97.585]] },
+    { id: 'procyon-b', host: 'procyon', parallaxArcsec: 0.2850, rows: [[1995.1745, 4.9389, 42.977], [1999.8342, 4.4583, 69.771], [2002.8537, 3.8584, 91.939]] },
+  ] as const
+  for (const { id, host, parallaxArcsec, rows } of measured) it(`${id} is where Hubble measured it`, () => {
+    const star = starAstrometry(host), { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees)
+    for (const [year, separation, angle] of rows) {
+      const position = hostedPlanetStateRelativeKm(id, besselian(year)).positionKm, e = dot(position, east), n = dot(position, north)
+      const arcsec = Math.hypot(e, n) / AU_KM * parallaxArcsec, degrees = (Math.atan2(e, n) * 180 / Math.PI + 360) % 360
+      assert.ok(Math.abs(arcsec - separation) < 0.02, `${id} ${year}: ${arcsec.toFixed(4)} arcsec, measured ${separation}`)
+      assert.ok(Math.abs(degrees - angle) < 0.2, `${id} ${year}: position angle ${degrees.toFixed(3)}, measured ${angle}`)
+    }
+  })
+})

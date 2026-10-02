@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lalande-21185",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Lalande 21185",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 272992.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/lalande-21185-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Lalande 21185",
+      "classification": "star",
+      "color": "#ffc887",
+      "distanceAu": 524985.4,
+      "description": "A nearby red dwarf whose disc was measured by interferometry: 39% of the Sun's width.",
+      "systemName": "Lalande 21185 system",
+      "aliases": [
+        "GJ 411"
+      ],
+      "order": 5373,
+      "context": {
+        "order": 5370
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -61655129247058110,
+        15568134199649202,
+        46090036803450080
+      ],
+      "presentationToReference": [
+        -0.7849079539056821,
+        -0.56920031641196,
+        0.24480707443233776,
+        0.19819198908738733,
+        0.14370260771565335,
+        0.9695718106449394,
+        0.5870599963863835,
+        -0.8095434270823558,
+        -0.000017623105852216837
+      ],
+      "orbitUpReference": [
+        0.56920031641196,
+        -0.14370260771565335,
+        0.8095434270823558
+      ],
+      "metersPerUnit": 880621.6129032258,
+      "bodyRadiusM": 272992700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

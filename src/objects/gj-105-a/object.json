@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-105-a",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "GJ 105 A",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 553011.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gj-105-a-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "GJ 105 A",
+      "classification": "star",
+      "color": "#ffe0c3",
+      "distanceAu": 1491055.7,
+      "description": "A nearby orange dwarf whose disc was measured by interferometry: 79% of the Sun's width.",
+      "systemName": "GJ 105 A system",
+      "aliases": [
+        "GJ 105"
+      ],
+      "order": 5367,
+      "context": {
+        "order": 5364
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        172012553847082020,
+        139460591137375940,
+        26788754342918296
+      ],
+      "presentationToReference": [
+        0.7711606578373063,
+        0.09323673592749214,
+        0.6297762704941496,
+        0.6252248374338883,
+        0.07557812947696248,
+        -0.7767765759859984,
+        0.12002142500279345,
+        -0.9927713016693979,
+        0.000011043017565164024
+      ],
+      "orbitUpReference": [
+        -0.09323673592749214,
+        -0.07557812947696248,
+        0.9927713016693979
+      ],
+      "metersPerUnit": 1783909.3548387096,
+      "bodyRadiusM": 553011900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

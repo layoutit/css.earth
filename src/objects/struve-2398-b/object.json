@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "struve-2398-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Struve 2398 B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 224850.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/struve-2398-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Struve 2398 B",
+      "classification": "star",
+      "color": "#ffcc87",
+      "distanceAu": 726701.6,
+      "description": "A nearby red dwarf whose disc was measured by interferometry: 32% of the Sun's width.",
+      "systemName": "Struve 2398 system",
+      "aliases": [
+        "GJ 725 B"
+      ],
+      "order": 5382,
+      "context": {
+        "order": 5379
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        10177940463683594,
+        -53995004829764776,
+        93805484003843120
+      ],
+      "presentationToReference": [
+        0.09363750846614341,
+        0.15994731047588648,
+        -0.98267434833712,
+        -0.49675640029514523,
+        -0.8478690686375048,
+        -0.18534055469211178,
+        0.8628239077436731,
+        -0.5055045997014276,
+        -0.00006250309616584292
+      ],
+      "orbitUpReference": [
+        -0.15994731047588648,
+        0.8478690686375048,
+        0.5055045997014276
+      ],
+      "metersPerUnit": 725323.2258064516,
+      "bodyRadiusM": 224850200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

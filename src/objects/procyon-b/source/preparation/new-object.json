@@ -1,0 +1,52 @@
+{
+  "host": "procyon",
+  "companions": [
+    {
+      "id": "procyon-b",
+      "name": "Procyon B",
+      "description": "The white dwarf that orbits Procyon every 40.84 years: 0.592 solar masses within 1.2% of the Sun's width.",
+      "paper": {
+        "url": "https://doi.org/10.1088/0004-637X/813/2/106",
+        "credit": "Bond et al. (2015), ApJ 813, 106"
+      },
+      "radius": {
+        "value": 0.01232,
+        "source": "Bond et al. (2015), ApJ 813, 106, section 8: R_B = 0.01232 +/- 0.00032 solar radii, the radius of Provencal et al. (2002) adjusted to the adopted parallax",
+        "url": "https://doi.org/10.1088/0004-637X/813/2/106",
+        "uncertainty": 0.00032
+      },
+      "mass": {
+        "value": 0.592,
+        "source": "Bond et al. (2015), ApJ 813, 106, Table 10: dynamical mass 0.592 +/- 0.006 solar masses",
+        "url": "https://doi.org/10.1088/0004-637X/813/2/106",
+        "uncertainty": 0.006
+      },
+      "temperature": {
+        "value": 7740,
+        "source": "Provencal et al. (2002), ApJ 568, 324, as quoted by Bond et al. (2015), section 8: Teff 7740 +/- 50 K from STIS spectra",
+        "url": "https://doi.org/10.1088/0004-637X/813/2/106",
+        "uncertainty": 50
+      },
+      "orbit": {
+        "elements": {
+          "periodDays": 14916.81,
+          "semiMajorAxisStellarRadii": 1600.2,
+          "inclinationDegrees": 31.408,
+          "eccentricity": 0.39785,
+          "argumentOfPeriapsisDegrees": 269.23,
+          "transitTimeBmjdTdb": 39884.04,
+          "ascendingNodePositionAngleDegrees": 100.683
+        },
+        "epoch": "periastron",
+        "source": "Bond et al. (2015), ApJ 813, 106, Table 8: relative visual orbit P 40.84 yr, a 4.3075 arcsec, i 31.408, node 100.683, T0 1968.076 (Besselian year), e 0.39785, omega 89.23 degrees for the companion (the star's is 180 degrees on); a over the adopted parallax 0.285 arcsec is 15.114 au, in units of Procyon A's radius",
+        "url": "https://doi.org/10.1088/0004-637X/813/2/106"
+      },
+      "text": {
+        "card": "A white dwarf that orbits Procyon every 41 years: 0.59 solar masses within 1.2% of the Sun's width.",
+        "introduction": "Its orbit, tracked by Hubble for two decades, gives a mass of 0.592 solar masses; its spectrum gives 7,740 K.",
+        "locator": "Tables 8 and 10; section 8"
+      },
+      "order": 5426
+    }
+  ]
+}

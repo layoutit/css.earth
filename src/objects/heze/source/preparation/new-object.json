@@ -1,0 +1,48 @@
+{
+  "id": "heze",
+  "name": "Heze",
+  "system": "Heze system",
+  "description": "A naked-eye star 22.7 parsecs away, 2.1 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 118098"
+  ],
+  "featured": true,
+  "order": 5421,
+  "target": "HD 118098",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 2.079,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 118098: radius in solar radii, from the limb-darkened angular diameter 0.852 +/- 0.009 mas (CHARA) and the Hipparcos parallax, 2.079 +/- 0.025",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.025
+  },
+  "mass": {
+    "value": 1.94,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 118098: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.94 +/- 0.006",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.006
+  },
+  "temperature": {
+    "value": 8247,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 118098: effective temperature in K, from the angular diameter and the bolometric flux, 8247 +/- 52",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 52
+  },
+  "distance": {
+    "value": 22.722,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 118098: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 44.01 +/- 0.19 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.098
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 23 parsecs away whose disc the CHARA Array measured: 2.1 times the Sun's width.",
+    "introduction": "Its disc spans 0.852 milliarcseconds, which gives 2.079 solar radii and 8,247 K at its surface.",
+    "locator": "Tables 5 and 10, HD 118098: limb-darkened diameter, R, Teff"
+  },
+  "notes": []
+}

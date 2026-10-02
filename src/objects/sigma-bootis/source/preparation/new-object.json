@@ -1,0 +1,47 @@
+{
+  "id": "sigma-bootis",
+  "name": "Sigma Bootis",
+  "system": "Sigma Bootis system",
+  "description": "A naked-eye star 15.8 parsecs away, 1.4 times the Sun's width: its disc was measured with the CHARA Array.",
+  "aliases": [
+    "HD 128167"
+  ],
+  "target": "HD 128167",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "credit": "Boyajian et al. (2012), ApJ 746, 101"
+  },
+  "radius": {
+    "value": 1.431,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 128167: radius in solar radii, from the limb-darkened angular diameter 0.841 +/- 0.013 mas (CHARA) and the Hipparcos parallax, 1.431 +/- 0.023",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.023
+  },
+  "mass": {
+    "value": 1.194,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 128167: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.194 +/- 0.013",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.013
+  },
+  "temperature": {
+    "value": 6594,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 128167: effective temperature in K, from the angular diameter and the bolometric flux, 6594 +/- 55",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 55
+  },
+  "distance": {
+    "value": 15.833,
+    "source": "Boyajian et al. (2012), ApJ 746, 101, HD 128167: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 63.16 +/- 0.26 mas, inverted",
+    "url": "https://doi.org/10.1088/0004-637X/746/1/101",
+    "uncertainty": 0.065
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 16 parsecs away whose disc the CHARA Array measured: 1.4 times the Sun's width.",
+    "introduction": "Its disc spans 0.841 milliarcseconds, which gives 1.431 solar radii and 6,594 K at its surface.",
+    "locator": "Tables 5 and 10, HD 128167: limb-darkened diameter, R, Teff"
+  },
+  "notes": [],
+  "order": 5350
+}

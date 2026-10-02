@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "heze",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 3662636823132300032: position at J2016.0. Distance: Boyajian et al. (2012), ApJ 746, 101, HD 118098: the Hipparcos parallax the radius was computed with (van Leeuwen 2007), 44.01 +/- 0.19 mas, inverted (https://doi.org/10.1088/0004-637X/746/1/101): 22.722 +/- 0.098 pc; Gaia DR3 parallax 43.7467 +/- 0.3330 mas (same row, RUWE 2.45), 131.4 standard errors, is not used. Proper motion: Gaia DR3 (same row): -276.903, 44.621 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1088/0004-637X/746/1/101"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 2.079 +/- 0.025 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 118098: radius in solar radii, from the limb-darkened angular diameter 0.852 +/- 0.009 mas (CHARA) and the Hipparcos parallax, 2.079 +/- 0.025 (https://doi.org/10.1088/0004-637X/746/1/101). Mass 1.94 +/- 0.006 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 118098: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.94 +/- 0.006 (https://doi.org/10.1088/0004-637X/746/1/101). Temperature 8247 +/- 52 K from Boyajian et al. (2012), ApJ 746, 101, HD 118098: effective temperature in K, from the angular diameter and the bolometric flux, 8247 +/- 52.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/746/1/101"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 659: HR 5107; VizieR III/202, cross-checked against Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 174 (BS 5107) (8 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #c1d0ff. Routes tried in order: stis-ngsl: HD 118098 is not in the library; pulkovo: HR 5107 is not in the catalogue; kiehling: HR 5107 is not among its 60 stars; gaia-xp: found, not needed after the colour and its cross-check; kharitonov: used.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+        "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 8,247 K and log g 4.09 (u1 0.316, u2 0.320): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

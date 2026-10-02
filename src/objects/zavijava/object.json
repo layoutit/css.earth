@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "zavijava",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Zavijava",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1169471.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/zavijava-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Zavijava",
+      "classification": "star",
+      "color": "#fff8f8",
+      "distanceAu": 2254277.9,
+      "description": "A naked-eye star 11 parsecs away whose disc the CHARA Array measured: 1.7 times the Sun's width.",
+      "systemName": "Zavijava system",
+      "aliases": [
+        "HD 102870"
+      ],
+      "order": 5417,
+      "context": {
+        "order": 5414
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -336799140322700540,
+        13649025156542596,
+        10373467367082060
+      ],
+      "presentationToReference": [
+        -0.9987065895323782,
+        -0.03074905761858917,
+        0.04049251140858627,
+        0.04047329617853938,
+        0.001247308305706948,
+        0.9991798419295872,
+        0.03077434517662456,
+        -0.9995263576702513,
+        0.0000011793078798626626
+      ],
+      "orbitUpReference": [
+        0.03074905761858917,
+        -0.001247308305706948,
+        0.9995263576702513
+      ],
+      "metersPerUnit": 3772489.35483871,
+      "bodyRadiusM": 1169471700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

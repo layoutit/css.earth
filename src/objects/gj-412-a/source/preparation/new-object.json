@@ -1,0 +1,37 @@
+{
+  "id": "gj-412-a",
+  "name": "GJ 412 A",
+  "system": "GJ 412 A system",
+  "description": "A nearby red dwarf, 40% of the Sun's width: its disc was measured by interferometry.",
+  "target": "GJ 412 A",
+  "paper": {
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+    "credit": "Boyajian et al. (2012), ApJ 757, 112"
+  },
+  "radius": {
+    "value": 0.3982,
+    "source": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 412A: radius in solar radii, 0.3982 +/- 0.0091, from this work (CHARA)",
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+    "uncertainty": 0.0091
+  },
+  "mass": {
+    "value": 0.403,
+    "source": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 412A: mass 0.403 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass",
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112"
+  },
+  "temperature": {
+    "value": 3497,
+    "source": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 412A: effective temperature in K, 3497 +/- 39, from this work (CHARA)",
+    "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+    "uncertainty": 39
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A nearby red dwarf whose disc was measured by interferometry: 40% of the Sun's width.",
+    "introduction": "Interferometry gives it 0.3982 solar radii; with its total light, that makes its surface 3,497 K.",
+    "locator": "Table 6, GJ 412A: R, TEFF"
+  },
+  "notes": [],
+  "order": 5374
+}
