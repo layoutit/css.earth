@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { setImmediate as nextTurn } from 'node:timers/promises';
 import { flyToSurfaceDirection, surfaceOrbitPose, surfaceOrbitRotation } from './surface-feature-flight.js';
-import type { WorldCameraPose } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '@cssearth/objects';
 import type { ObjectWorldNavigation } from '../runtime/world-navigation-types.js';
 
 const origin = [1000, -2000, 3000] as const;

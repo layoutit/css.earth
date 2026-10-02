@@ -1,4 +1,5 @@
-import { requireCamera, type WorldRotation } from '@cssearth/objects';
+import { requireCamera } from './runtime-validation/camera.js';
+import type { WorldRotation } from '../registry/world-rotation.js';
 
 import { preparedSceneMatrix } from '@cssearth/engine';
 

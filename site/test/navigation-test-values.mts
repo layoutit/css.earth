@@ -1,8 +1,7 @@
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import assert from 'node:assert/strict';
 import type { PositionM } from '@cssearth/engine';
-import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
-import type { PreparedWorldCameraFrame } from '@cssearth/objects';
+import { type WorldCameraPose, type PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectEntry } from '../objects.mts';
 

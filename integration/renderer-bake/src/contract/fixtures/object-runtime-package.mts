@@ -20,7 +20,7 @@ export function fixtureFeaturePlan(plan: NonNullable<ObjectRuntimeDefinition['fe
 }
 export async function fixtureFeatureTransport(url: string): Promise<Response> {
   if (url !== '/scenes/mercury/mercury-features.json') throw new Error('Invalid fixture catalogue URL');
-  return new Response(new Uint8Array(await readFile(new URL(`.${url}`, import.meta.url))));
+  return new Response(new Uint8Array(await readFile(new URL(`../../../../../packages/bake/src/contract/fixtures${url}`, import.meta.url))));
 }
 export const fixtureObjectCapabilities = { ...preparedObjectCapabilities,
   mountSurfaceFeatures(options: Parameters<NonNullable<typeof preparedObjectCapabilities.mountSurfaceFeatures>>[0]) {

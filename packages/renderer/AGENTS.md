@@ -69,4 +69,5 @@ label mounting stay here.
 
 Shared resource/address and image-density conventions, tile styles, silhouette walking, interior-disc size, shell material addresses, feature-bank hashing, marker/control validation, fly-to conventions and volume topology equality belong to objects. Numeric camera orientation math and solar geometry belong to engine; no re-export shims remain here.
 
-Validated world-camera pose/presentation conversion and the default-view reader remain here: they combine objects-owned validation with engine math.
+Validated presentation-to-world camera conversion, its pose/presentation data shapes and the default-view reader
+belong to `@cssearth/objects`, using engine math. Runtime viewport/layout and world-to-presentation projection stay here.

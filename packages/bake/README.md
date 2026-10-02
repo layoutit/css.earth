@@ -126,3 +126,10 @@ Contract tests use node:test in the packages lane.
 
 Volume replay reads retained emission, envelope, tone, material and compact delivery formats from
 `@cssearth/objects`; bake owns material arithmetic, sampling, decompression and file I/O.
+
+Renderer-behavior runtime, selection, material and feature transport suites and their DOM harness live in
+`integration/renderer-bake/src/contract/`; immutable material and feature JSON inputs remain in
+`src/contract/fixtures/`. Leaf-box bake checks stay in `src/presentation/`; renderer visibility conformance
+lives in `integration/renderer-bake/src/presentation/leaf-box.test.mts`. These node:test suites run in
+the packages CI lane on changes to either owner. Shell facing/material conformance lives in
+`integration/renderer-bake/src/shell/shell.test.ts`; bake-owned shell assertions stay in `src/shell/`. Validated camera conversions come from `@cssearth/objects`; bake imports no renderer behavior helpers.

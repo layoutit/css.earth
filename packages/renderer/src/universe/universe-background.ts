@@ -1,8 +1,8 @@
 import { writeData } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
 import type { SceneLifetime } from '@cssearth/engine';
-import { parseGalaxyBacking, type PreparedCssVolume, type PreparedWorldContext, type BackingNearFade } from '@cssearth/objects';
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import { parseGalaxyBacking, type PreparedCssVolume, type PreparedWorldContext, type BackingNearFade, type WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { mountPreparedVolumeLod } from '../volume/prepared-volume-lod.js';
 import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';

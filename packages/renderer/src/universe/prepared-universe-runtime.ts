@@ -1,4 +1,4 @@
-import { parsePreparedWorldContextPlan, type PreparedWorldContext, type PreparedWorldCameraFrame, type PreparedAssets, validatePreparedCssVolume, type PreparedCssSurfaceShell, DEFAULT_POINT_VISIBILITY } from '@cssearth/objects';
+import { parsePreparedWorldContextPlan, validatePreparedCssVolume, DEFAULT_POINT_VISIBILITY, type PreparedWorldContext, type PreparedWorldCameraFrame, type PreparedAssets, type PreparedCssSurfaceShell, type WorldCameraPose } from '@cssearth/objects';
 
 import { createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
@@ -12,7 +12,7 @@ import { galaxyOutsideFade, logarithmicFade } from './world-context/context-scal
 import { mountPreparedWorldContext, type BodyVisibility, type WorldBodyAnnotations } from './prepared-world-context.js';
 
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/world-camera.js';
 
 import { mountWorldContextPointSource } from './world-context/world-context-point-source.js';
 

@@ -2,8 +2,8 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
-import type { PreparedCssVolume } from '@cssearth/objects';
-import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import { type PreparedCssVolume, type WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { mountPreparedCssSky } from './prepared-sky-runtime.js';
 import { holdStartup, releaseStartup } from '../rendering/startup-gate.js';
 
