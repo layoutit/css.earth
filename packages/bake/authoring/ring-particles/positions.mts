@@ -28,7 +28,7 @@ const root = resolve(import.meta.dirname, '../../../..'), hostDirectory = resolv
 const recipePath = resolve(hostDirectory, 'source/preparation/rings.json');
 const DOTS = process.argv[3] === undefined ? DEFAULT_DOTS : Number(process.argv[3]);
 if (!Number.isInteger(DOTS) || DOTS < 1) throw new TypeError(`The dot count must be a whole number above zero, got ${JSON.stringify(process.argv[3])}.`);
-interface Band { id?: string; source?: { radiusKm?: number; widthKm?: number; innerRadiusKm?: number; outerRadiusKm?: number; opticalDepth?: number; verticalThicknessKm?: number } }
+interface Band { id?: string; opticalDepth?: number; source?: { radiusKm?: number; widthKm?: number; innerRadiusKm?: number; outerRadiusKm?: number; opticalDepth?: number; verticalThicknessKm?: number } }
 const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as { sources?: { path?: string }[]; layers?: { kind?: string; bounds?: number[]; bands?: Band[] }[] };
 const profile = recipe.layers?.find(layer => layer.kind === 'observed-radial-profile'), field = recipe.layers?.find(layer => layer.kind === 'annular-field');
 if (!profile && !field) throw new TypeError(`${recipePath}: needs an observed-radial-profile or an annular-field layer; ${host} has no measured rings.`);
@@ -58,10 +58,10 @@ described = `${bins.length} clean bins of ${table} (${inner} to ${outer} km)`;
   for (const band of field!.bands ?? []) {
     // A band states its centre and width, or its inner and outer edges; a published vertical thickness spreads its dots
     // evenly through that thickness, centred on the ring plane.
-    const source = band.source ?? {}, { opticalDepth, verticalThicknessKm: thicknessKm = 0 } = source;
+    const source = band.source ?? {}, opticalDepth = band.opticalDepth ?? source.opticalDepth, thicknessKm = source.verticalThicknessKm ?? 0;
     const radiusKm = source.radiusKm ?? (source.innerRadiusKm! + source.outerRadiusKm!) / 2, widthKm = source.widthKm ?? source.outerRadiusKm! - source.innerRadiusKm!;
     if (![radiusKm, widthKm, opticalDepth].every(value => typeof value === 'number' && value > 0) || !(thicknessKm >= 0)) {
-      throw new TypeError(`${recipePath}: band ${JSON.stringify(band.id)} needs a positive source radius and width (or inner and outer radius) and opticalDepth, got ${JSON.stringify(band.source)}.`);
+      throw new TypeError(`${recipePath}: band ${JSON.stringify(band.id)} needs a positive source radius and width (or inner and outer radius) and an opticalDepth, got ${JSON.stringify(band)}.`);
     }
     bins.push({ radiusKm, widthKm, thicknessKm, weight: (1 - Math.exp(-opticalDepth!)) * widthKm * radiusKm });
   }
