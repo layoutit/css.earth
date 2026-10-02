@@ -76,5 +76,10 @@
       ]
     }
   ],
+  "centreFadeKpc": [
+    1.5,
+    0.3
+  ],
+  "centreFadeNote": "Presentation only: around the centre the rings keep their near opacity, so beside Sgr A* the image would fill the view as a blur. Every layer fades out as the camera closes on the galaxy's centre from 1.5 kpc, where the outer disc is gone beside the Sun, to 0.3 kpc, the thin disc's scale height, inside which the view is the sky.",
   "nearFadeNote": "Presentation only, chosen by eye on 2026-09-30. Close up the image blurs, so its outer disc (around the Sun) fades out between 12 and 1.5 kpc from the viewed body, while rings about the centre step down to 45 % (to 7 kpc), 70 % (to 5 kpc) and 100 % (the bulge, to 3 kpc) between 20 and 3 kpc. Each ring is drawn over the result below it, so its own opacity is (target - below) / (1 - below): the inner ring's 0.4545 over 0.45 gives 0.70."
 }
