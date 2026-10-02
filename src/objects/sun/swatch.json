@@ -23,7 +23,7 @@
     "chromaticAdaptation": "None. Convert the emitted spectrum directly to the sRGB D65 display primaries; do not white-balance the emitter as a reflective surface.",
     "brightnessNormalization": "Divide all three linear sRGB channels by their maximum, preserving channel ratios; apply the standard sRGB transfer function, multiply by 255, and round half up. No hue adjustment or gamut clipping.",
     "standard": "https://registry.color.org/rgb-registry/srgb",
-    "implementation": "Colour Science 0.4.7: XYZ_to_sRGB(chromatic_adaptation_transform=None, apply_cctf_encoding=False), eotf_inverse_sRGB.",
+    "implementation": "Color Science 0.4.7: XYZ_to_sRGB(chromatic_adaptation_transform=None, apply_cctf_encoding=False), eotf_inverse_sRGB.",
     "xyzY1": [
       0.9727656028,
       1.0,

@@ -13,6 +13,6 @@
   "surfaceGravitySource": "Primary log g 3.85 +/- 0.02 (cgs), Vilardell et al. (2010), A&A 509, A70, Table 2 (https://arxiv.org/abs/0911.3391)",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
   }
 }

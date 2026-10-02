@@ -6,7 +6,7 @@ Its radius and temperature follow Ment et al. 2021. The introduction is generate
 
 **Star.** Placement: Gaia DR3 source 4785886941312921344, parallax 71.513 ± 0.021 mas (13.98 pc). Radius 0.1895 +/- 0.0079 solar radii from Ment et al. 2021, the stellar radius of the default parameter set of TOI-540 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....161...23M/abstract). Mass 0.159 +/- 0.014 solar masses from Ment et al. 2021, the stellar mass of the default parameter set of TOI-540 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....161...23M/abstract). Temperature 3,216 K from Ment et al. 2021, the stellar temperature of the default parameter set of TOI-540 b in the NASA Exoplanet Archive. log g 5.08 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 4785886941312921344, through the CIE 1931 2° observer: #ffc978. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 4785886941312921344, through the CIE 1931 2° observer: #ffc978. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,216 K and log g 5.08 (u1 0.154, u2 0.477): a model, because no fit of this star's limb is used.
 

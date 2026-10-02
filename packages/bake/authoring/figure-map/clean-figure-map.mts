@@ -4,11 +4,11 @@
  *   node packages/bake/authoring/figure-map/clean-figure-map.mts <recipe.json>
  *
  * A published figure draws its measurements inside a labelled longitude/latitude frame and adds annotations
- * (grid lines, ticks, symbols) plus lossy-compression halos around them. Annotation colour cannot separate them from
+ * (grid lines, ticks, symbols) plus lossy-compression halos around them. Annotation color cannot separate them from
  * data (a white line blended over pale data is darker than the palest data), so the recipe names each annotation as a
  * measured rectangle including its halo, and the measured background level. Every masked pixel becomes exact black,
  * which an `image-rgb-no-data` observation with `noData: 0` and a `grid` treats as missing. No kept pixel is
- * recoloured, interpolated or filled. The report counts each mask and the sphere fraction the kept pixels cover under
+ * recolored, interpolated or filled. The report counts each mask and the sphere fraction the kept pixels cover under
  * the recipe's grid (the same grid the raster recipe declares).
  *
  * Paths are relative to the recipe's directory and may not leave it. */
@@ -108,8 +108,8 @@ export async function cleanFigureMap(recipePath: string): Promise<FigureMapRepor
   const recipe = parseFigureMapRecipe(JSON.parse(await readFile(recipePath, 'utf8')));
   const root = dirname(resolve(recipePath)), source = resolve(root, recipe.source), output = resolve(root, recipe.output);
   for (const path of [source, output]) if (relative(root, path).startsWith('..')) throw new TypeError(`Figure map path leaves ${root}: ${path}`);
-  const { data, info } = await sharp(source).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
-  if (info.channels !== 3) throw new TypeError(`${source}: expected three colour channels, got ${info.channels}.`);
+  const { data, info } = await sharp(source).removeAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  if (info.channels !== 3) throw new TypeError(`${source}: expected three color channels, got ${info.channels}.`);
   const { rgb, report } = cleanFigure(data, info.width, info.height, recipe);
   await sharp(rgb, { raw: { width: report.width, height: report.height, channels: 3 } }).png({ compressionLevel: 9 }).toFile(output);
   return report;

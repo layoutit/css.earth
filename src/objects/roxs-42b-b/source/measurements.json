@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "Derived: Kepler's third law with the sample's semi-major axis 222.253 au and total mass 1.4175 solar masses, 2,783.0 years of 365.25 d. Inglis et al. (2026, AJ 171, 280; doi:10.3847/1538-3881/ae4b34), section 3.2: orbitize! OFTI on the three positions of b relative to A in their Table 1 (2001 to 2022), moved to the pair's centre of mass with their A-B orbit (Table 2) and the mass ratio 0.40 (Kraus et al. 2014), total mass 1.35 +/- 0.07 solar masses, parallax 6.83 +/- 0.03 mas, tau from MJD 55197. They release no posterior; their Table 3 medians are a 223 +150/-69 au, e 0.4 +0.2/-0.3, i 58 +15/-20 degrees. The maximum of orbitize!'s own posterior (ln L -27.79), refined with Nelder-Mead from the twenty best of 20,000 samples, from orbitize! 3.4.0 run on that paper's published measurements and priors (packages/telescope-cli/src/new-object/hosted-orbits/orbitize-fit.py, src/objects/roxs-42b-b/source/orbits/fit.json).",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of ROXs 42B b is measured; only its size, mass and orbit are."
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of ROXs 42B b is measured; only its size, mass and orbit are."
   },
   "effectiveTemperatureK": 1935,
   "effectiveTemperatureSource": "1935 +/- 12 K, the joint grey-cloud retrieval of Inglis et al. (2024, AJ), Table 3, https://arxiv.org/abs/2402.09533",

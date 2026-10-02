@@ -157,7 +157,7 @@
     {
       "id": "wasp-43b-preparation-raster",
       "path": "preparation/raster.json",
-      "origin": "Repository-authored raster recipe: the deposited temperature map on the reference sphere, false colour, transparent plates",
+      "origin": "Repository-authored raster recipe: the deposited temperature map on the reference sphere, false color, transparent plates",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."

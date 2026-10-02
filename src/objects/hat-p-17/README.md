@@ -6,7 +6,7 @@ Its radius and temperature follow Stassun et al. 2017. The introduction is gener
 
 **Star.** Placement: Gaia DR3 source 1849786481032616960, parallax 10.819 ± 0.018 mas (92.43 pc). Radius 0.87 +/- 0.04 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of HAT-P-17 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). Mass 0.99 +/- 0.15 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of HAT-P-17 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). Temperature 5,246 K from Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-17 b in the NASA Exoplanet Archive. log g 4.55 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 1849786481032616960, through the CIE 1931 2° observer: #ffe8d9. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 1849786481032616960, through the CIE 1931 2° observer: #ffe8d9. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,246 K and log g 4.55 (u1 0.587, u2 0.173): a model, because no fit of this star's limb is used.
 

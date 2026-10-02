@@ -101,7 +101,7 @@ export async function draftsFromM31Cepheids(names: readonly string[], archive: A
       const days = period(row, 'Per', `${LI_2021.catalogue} ${row.ID}`), own = row.ID!.startsWith('CEPH-') ? [row.ID!] : [];
       stars.push(draftGalaxyCepheid({ name, target: simbad || row.ID!, raDeg: degrees(row, 'RAJ2000'), decDeg: degrees(row, 'DEJ2000'), periodDays: days, periodSource: `${LI_2021.credit}, table 2`, paper: { url: LI_2021.paper, credit: LI_2021.credit },
         position: { catalogue: LI_2021.catalogue, row: { ID: row.ID!, Per: row.Per! }, credit: `${LI_2021.credit}, table 2`, url: LI_2021.paper }, aliases: [...own, ...simbad && simbad !== name ? [simbad] : []],
-        found: `The Hubble Space Telescope measured its brightness in three colours and its pulsation of ${days.toFixed(days < 10 ? 2 : 1)} days.`,
+        found: `The Hubble Space Telescope measured its brightness in three colors and its pulsation of ${days.toFixed(days < 10 ? 2 : 1)} days.`,
         locator: `table 2, ID ${row.ID}, Per ${row.Per}: Per; ${LI_2021.credit}: mu_0` }, M31, placed, velocity));
     }
     report.push(`${stars55.length} Cepheid${stars55.length === 1 ? '' : 's'} of ${LI_2021.credit} in M31; radius and temperature from Groenewegen (2020)'s period relations.`);

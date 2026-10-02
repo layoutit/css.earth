@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by K2-155; the neutral gray is a display convention, not a measured colour.",
+        "qualification": "A sphere of the published radius, lit by K2-155; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "k2-155c-dataset-shape.webp",
         "surface": "k2-155c-surface-shape@2x.webp",
         "poles": "k2-155c-poles-shape@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of K2-155 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of k2-155's light, as its colour dataset measures it."
+        "notes": "No image or color of K2-155 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of k2-155's light, as its color dataset measures it."
       }
     ]
   },

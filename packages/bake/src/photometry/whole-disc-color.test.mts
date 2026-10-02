@@ -4,12 +4,12 @@ import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw } from '@cssearth/bake/photometry';
-import { displayBandRatios, keepLuminance, tieBandRatios, latitudeWeightedLuminance, loadWholeDiscColour, parseWholeDiscColour, softShoulder, WHOLE_DISC_COLOUR_SCHEMA } from '@cssearth/bake/objects/raster';
+import { displayBandRatios, keepLuminance, tieBandRatios, latitudeWeightedLuminance, loadWholeDiscColor, parseWholeDiscColor, softShoulder, WHOLE_DISC_COLOR_SCHEMA } from '@cssearth/bake/objects/raster';
 
-const record = { schema: WHOLE_DISC_COLOUR_SCHEMA, id: 'fixture', quantity: 'fixture', spectrum: {}, illuminant: {}, observer: 'fixture', linearSrgb: [0.5, 0.4, 0.25] };
+const record = { schema: WHOLE_DISC_COLOR_SCHEMA, id: 'fixture', quantity: 'fixture', spectrum: {}, illuminant: {}, observer: 'fixture', linearSrgb: [0.5, 0.4, 0.25] };
 
-test('a whole-disc colour gives green and blue ratios to red, and the tie brings a map onto them', () => {
-  const policy = displayBandRatios(parseWholeDiscColour(record));
+test('a whole-disc color gives green and blue ratios to red, and the tie brings a map onto them', () => {
+  const policy = displayBandRatios(parseWholeDiscColor(record));
   assert.deepEqual(policy, { reference: 'red', ratios: { green: 0.8, blue: 0.5 }, source: 'fixture' });
   // A 4 x 2 map, bluer than the record, with one texel per row brighter: the tie scales green and blue once each.
   const rgb = new Float32Array([0.4, 0.4, 0.4, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.4, 0.4, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]);
@@ -18,10 +18,10 @@ test('a whole-disc colour gives green and blue ratios to red, and the tie brings
   for (let pixel = 0; pixel < 8; pixel++) assert.ok(Math.abs(rgb[pixel * 3 + 1]! / rgb[pixel * 3]! - 0.8) < 1e-6 && Math.abs(rgb[pixel * 3 + 2]! / rgb[pixel * 3]! - 0.5) < 1e-6);
 });
 
-test('a whole-disc colour record refuses unknown keys, a wrong schema and non-positive channels', () => {
-  assert.throws(() => parseWholeDiscColour({ ...record, gains: [1, 1, 1] }), /unknown keys: gains/u);
-  assert.throws(() => parseWholeDiscColour({ ...record, schema: 'other' }), /must use cssearth-whole-disc-colour@1/u);
-  assert.throws(() => parseWholeDiscColour({ ...record, linearSrgb: [0.5, 0, 0.2] }), /three positive linear sRGB channels/u);
+test('a whole-disc color record refuses unknown keys, a wrong schema and non-positive channels', () => {
+  assert.throws(() => parseWholeDiscColor({ ...record, gains: [1, 1, 1] }), /unknown keys: gains/u);
+  assert.throws(() => parseWholeDiscColor({ ...record, schema: 'other' }), /must use cssearth-whole-disc-color@1/u);
+  assert.throws(() => parseWholeDiscColor({ ...record, linearSrgb: [0.5, 0, 0.2] }), /three positive linear sRGB channels/u);
 });
 
 test('a map with its limb law divided out is tied through the law\'s disc means, which for Minnaert are 2 / (2k + 1)', async () => {
@@ -29,13 +29,13 @@ test('a map with its limb law divided out is tied through the law\'s disc means,
   const law = await loadLimbLaw(saturn, ['photometry/opal-2025-minnaert-f631n.json', 'photometry/opal-2025-minnaert-f502n.json', 'photometry/opal-2025-minnaert-f467m.json']);
   // Held at 86.3 degrees, the OPAL disc edge, the means stay within 0.001 of the full-disc Minnaert integral.
   floodDiscMean(law).forEach((mean, channel) => assert.ok(Math.abs(mean - 2 / (2 * [0.8, 0.65, 0.86][channel]! + 1)) < 1e-3, `channel ${channel}: ${mean}`));
-  assert.deepEqual(displayBandRatios(parseWholeDiscColour(record), [0.5, 1, 0.25]).ratios, { green: 0.4, blue: 1 });
-  assert.throws(() => displayBandRatios(parseWholeDiscColour(record), [1, 0, 1]), /disc means must be positive/u);
+  assert.deepEqual(displayBandRatios(parseWholeDiscColor(record), [0.5, 1, 0.25]).ratios, { green: 0.4, blue: 1 });
+  assert.throws(() => displayBandRatios(parseWholeDiscColor(record), [1, 0, 1]), /disc means must be positive/u);
 });
 
 test("Saturn's record is Karkoschka's sunlit disc, #ceb794", async () => {
-  const colour = await loadWholeDiscColour(resolve(projectRoot(import.meta.url), 'src/objects/saturn/source'), 'photometry/karkoschka-1998-whole-disc-colour.json');
-  assert.deepEqual(displayBandRatios(colour).ratios, { green: 0.764, blue: 0.4834 });
+  const color = await loadWholeDiscColor(resolve(projectRoot(import.meta.url), 'src/objects/saturn/source'), 'photometry/karkoschka-1998-whole-disc-color.json');
+  assert.deepEqual(displayBandRatios(color).ratios, { green: 0.764, blue: 0.4834 });
 });
 
 test('after a tie the map gets back its luminance with one factor, and texels past the knee are shouldered, never clipped, ratios kept', () => {

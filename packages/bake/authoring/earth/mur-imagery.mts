@@ -103,7 +103,7 @@ export async function prepareMurMosaic(directory: string, receipt: Pick<MurRecei
   return { width, height, sourceWidth: 40960, sourceHeight: 20480, sampling: 'nearest pixel centers', covered, missing };
 }
 
-/** The layer description, grid and colour table every date shares, written beside the dated directories. */
+/** The layer description, grid and color table every date shares, written beside the dated directories. */
 export async function acquireMurShared(scienceDirectory: string, capabilities: Buffer) {
   const fetchBytes = async (url: string) => {
     const response = await fetch(url, { signal: AbortSignal.timeout(60000) });

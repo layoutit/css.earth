@@ -119,7 +119,7 @@ async function loadGeoTiff(source: Record<string, unknown>, path: string, width:
       }
       const pipeline = sharp(path).removeAlpha();
       if (policy.channels === 'monochrome') pipeline.greyscale();
-      if (policy.colorSpace !== undefined) pipeline.toColourspace(policy.colorSpace);
+      if (policy.colorSpace !== undefined) pipeline.toColorspace(policy.colorSpace);
       const decoded = await pipeline.raw().toBuffer({resolveWithObject: true}), pixels = decoded.data;
       if (decoded.info.width !== width || decoded.info.height !== height || decoded.info.channels !== channels) {
         throw new Error(`Native photograph bands changed: ${path}`);
@@ -175,7 +175,7 @@ async function loadImage(source: Record<string, unknown>, path: string, width: n
   const metadata = await sharp(path, {limitInputPixels: false}).metadata();
   if (metadata.width !== width || metadata.height !== height || metadata.depth !== 'uchar' || metadata.hasAlpha || !['b-w', 'srgb'].includes(String(metadata.space)) ||
       (kind === 'image-monochrome-no-data' && metadata.space !== 'b-w')) throw new Error(`Native photograph dimensions changed: ${path}`);
-  const pixels = await sharp(path, {limitInputPixels: false}).toColourspace('srgb').raw().toBuffer();
+  const pixels = await sharp(path, {limitInputPixels: false}).toColorspace('srgb').raw().toBuffer();
   const fillRange = policy.connectedFillRange;
   if (fillRange !== undefined && (!policy.connectedEdge || fillRange.length !== 2 || !fillRange.every(value => Number.isInteger(value) && value >= 0 && value <= 255) ||
       fillRange[0] > fillRange[1] || policy.noData === null || policy.noData < fillRange[0] || policy.noData > fillRange[1])) throw new Error('Invalid connected source-fill range.');

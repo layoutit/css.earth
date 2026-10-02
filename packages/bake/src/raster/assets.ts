@@ -8,7 +8,7 @@ import { prepareAtmosphere } from './materials.ts';
 import { prepareLighting } from './lighting.ts';
 import { prepareInterior } from './interior.ts';
 import { outputName } from './io.ts';
-import { loadLimbLaw, meanObservedColour, type LimbBlock } from '../photometry/index.ts';
+import { loadLimbLaw, meanObservedColor, type LimbBlock } from '../photometry/index.ts';
 import type { PreparedLimb } from './lighting.ts';
 import type { ObservationInterpretation } from './science.ts';
 export type { ObservationInterpretation, InterpretedSurface } from './science.ts';
@@ -19,7 +19,7 @@ export async function prepareRasterAssets({ sourceDirectory, publicDirectory, ou
     publicDirectory: string;
     outputDirectory: string;
     config: RasterRecipe;
-    /** The body's polar-to-equatorial radius ratio, from its geometry record; required with a limb law, whose overlay fades its colour past it. */
+    /** The body's polar-to-equatorial radius ratio, from its geometry record; required with a limb law, whose overlay fades its color past it. */
     shape?: { polarToEquatorial: number };
     /** Required when any surface declares `science`; supplied by the preparation tools, never by src. */
     interpret?: ObservationInterpretation;
@@ -52,17 +52,17 @@ export async function prepareRasterAssets({ sourceDirectory, publicDirectory, ou
 }
 
 /**
- * Load a body's published models and the overlay's reference colour: the mean observed colour of the named source image,
+ * Load a body's published models and the overlay's reference color: the mean observed color of the named source image,
  * or of the first prepared surface (the default dataset) when the block names none.
  */
 export async function prepareLimb(block: LimbBlock, sourceDirectory: string, publicDirectory: string, config: RasterRecipe, where: string, polarToEquatorial: number): Promise<PreparedLimb> {
     if (!(polarToEquatorial > 0 && polarToEquatorial <= 1)) throw new TypeError(`${where}: the polar-to-equatorial radius ratio must lie in (0, 1], got ${polarToEquatorial}.`);
     const law = await loadLimbLaw(sourceDirectory, block.models);
-    if (block.reference !== undefined) return { law, reference: await meanObservedColour(resolve(sourceDirectory, block.reference)), referenceSource: block.reference, polarToEquatorial };
+    if (block.reference !== undefined) return { law, reference: await meanObservedColor(resolve(sourceDirectory, block.reference)), referenceSource: block.reference, polarToEquatorial };
     const surface = config.surfaces[0];
     if (!surface) throw new TypeError(`${where} names no reference image and the recipe has no surface to take one from.`);
     const prepared = outputName(surface.output, RASTER_DENSITY, surface.id);
-    return { law, reference: await meanObservedColour(resolve(publicDirectory, prepared)), referenceSource: `prepared surface ${surface.id} (${prepared})`, polarToEquatorial };
+    return { law, reference: await meanObservedColor(resolve(publicDirectory, prepared)), referenceSource: `prepared surface ${surface.id} (${prepared})`, polarToEquatorial };
 }
 
 /** Whether an image has no pixel with any opacity. */

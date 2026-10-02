@@ -6,7 +6,7 @@ Its radius and temperature follow Desidera et al. 2023. It is also HIP 13754. Th
 
 **Star.** Placement: Gaia DR3 source 4728513943538448512, parallax 25.885 ± 0.013 mas (38.63 pc). Radius 0.767 +/- 0.024 solar radii from Desidera et al. 2023, the stellar radius of the default parameter set of HD 18599 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.158D/abstract). Mass 0.863 +/- 0.02 solar masses from Desidera et al. 2023, the stellar mass of the default parameter set of HD 18599 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.158D/abstract). Temperature 5,145 K from Desidera et al. 2023, the stellar temperature of the default parameter set of HD 18599 b in the NASA Exoplanet Archive. log g 4.6 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 4728513943538448512, through the CIE 1931 2° observer: #ffe4d4. Routes tried in order: stis-ngsl: HD 18599 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 4728513943538448512, through the CIE 1931 2° observer: #ffe4d4. Routes tried in order: stis-ngsl: HD 18599 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,145 K and log g 4.6 (u1 0.616, u2 0.151): a model, because no fit of this star's limb is used.
 

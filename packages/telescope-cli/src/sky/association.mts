@@ -303,7 +303,7 @@ export async function previewAssociation(directory: string, association: Associa
 }
 
 /**
- * Every measurement of a system in one chart, each drawn in the colour of the body it is closest to, over the predicted
+ * Every measurement of a system in one chart, each drawn in the color of the body it is closest to, over the predicted
  * positions and the orbit draws. This is the figure a system paper prints: the whole system at once.
  */
 export async function previewSystem(directory: string, system: string, set: CandidateSet, associations: readonly Association[], options: FigureOptions = {}) {
@@ -403,6 +403,6 @@ export async function runAssociation(measurementsPath: string, system: string, d
     schema: 'cssearth-sky-association@1', system, measurements: resolve(measurementsPath),
     method: 'Candidate positions and their per-axis spread come from whereistheplanet, which propagates each planet published orbit posterior. SciPy measures the Mahalanobis distance R between the measurement and each candidate under their summed covariance, the chi-square tail p of R in two dimensions, and the one-sided normal sigma with the same tail.',
     ...(fitted.length ? { fitted } : {}),
-    limits: [...LIMITS, ...(fitted.length ? ['The orbits drawn are an orbitize! fit of these measurements alone, one body at a time, with the stellar mass and parallax held at the registry values. A short arc of a long orbit leaves that fit wide; the narrow bands a system paper prints come from fitting the bodies together with absolute astrometry, which this route does not do.'] : []), 'The system chart draws the predicted positions at the newest epoch it holds; every measurement is coloured by the body it is closest to, and a measurement closest to the star is left uncoloured.'], software, rows });
+    limits: [...LIMITS, ...(fitted.length ? ['The orbits drawn are an orbitize! fit of these measurements alone, one body at a time, with the stellar mass and parallax held at the registry values. A short arc of a long orbit leaves that fit wide; the narrow bands a system paper prints come from fitting the bodies together with absolute astrometry, which this route does not do.'] : []), 'The system chart draws the predicted positions at the newest epoch it holds; every measurement is colored by the body it is closest to, and a measurement closest to the star is left uncolored.'], software, rows });
   return { directory, rows, software };
 }

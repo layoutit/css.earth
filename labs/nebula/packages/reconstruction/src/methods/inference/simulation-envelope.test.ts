@@ -42,7 +42,7 @@ test('envelope projection matches the smoothed image scaled by fraction and floo
 test('chromaticity is peak-normalized, smoothed and neutral outside coverage', () => {
   const rgb = new Uint8Array(width * height * 3); for (let p = 0; p < width * height; p++) { rgb[p * 3] = 200; rgb[p * 3 + 1] = 100; rgb[p * 3 + 2] = 50; }
   const partial = coverage.map((_, p) => p % width < 16 ? 1 : 0);
-  // Uniform colour equals the sky level: nothing remains after sky removal, so it is neutral.
+  // Uniform color equals the sky level: nothing remains after sky removal, so it is neutral.
   const color = envelopeChromaticity(rgb, partial, width, height, bounds, 2), out: [number, number, number] = [0, 0, 0];
   assert.ok(color(-2, 0, out)); assert.deepEqual(out, [255, 255, 255]);
   // A bright orange patch on a grey sky keeps its hue where bright, and fades to neutral where faint.
@@ -83,22 +83,22 @@ test('the chroma trust ramp is an authored envelope setting whose default reprod
     assert.throws(() => validateEnvelopeSettings({ ...accepted, chromaHalfSaturationQuantile: bad }), `refuses ${String(bad)}`);
   for (const bad of [0, -.1, 1.5, Number.NaN])
     assert.throws(() => envelopeChromaticity(patch, partial, width, height, bounds, 2, bad), `refuses ${String(bad)}`);
-  // Lowering the quantile keeps measured colour further out: the faint wing gets saturated, the core cannot
-  // exceed its own measured hue, and nothing outside coverage gains colour.
+  // Lowering the quantile keeps measured color further out: the faint wing gets saturated, the core cannot
+  // exceed its own measured hue, and nothing outside coverage gains color.
   const trusting = envelopeChromaticity(patch, partial, width, height, bounds, 2, .2);
   const saturation = (c: [number, number, number]) => (Math.max(...c) - Math.min(...c)) / Math.max(1, Math.max(...c));
   const wingDefault = read(implicit, -1.5, 2), wingTrusting = read(trusting, -1.5, 2);
   assert.ok(saturation(wingTrusting) > saturation(wingDefault) + .05,
-    `faint wing keeps more colour at a lower quantile: ${wingDefault} -> ${wingTrusting}`);
+    `faint wing keeps more color at a lower quantile: ${wingDefault} -> ${wingTrusting}`);
   const coreDefault = read(implicit, -3, 0), coreTrusting = read(trusting, -3, 0);
   assert.ok(saturation(coreTrusting) >= saturation(coreDefault) - 1e-9, 'the bright core is never desaturated by more trust');
   assert.ok(coreTrusting[0]! >= coreTrusting[1]! && coreTrusting[1]! >= coreTrusting[2]!, `hue order is the image's own: ${coreTrusting}`);
-  assert.equal(trusting(9, 0, out), false, 'no colour outside the grid');
+  assert.equal(trusting(9, 0, out), false, 'no color outside the grid');
   assert.ok(trusting(3.5, 0, out)); assert.deepEqual(out, [255, 255, 255], 'uncovered sky stays neutral at any quantile');
 });
 
 test('an authored sky quantile and footprint-edge taper fix what the trust ramp alone could only trade off', () => {
-  // A coloured body that fills most of its own footprint, so the median of covered pixels is body light,
+  // A colored body that fills most of its own footprint, so the median of covered pixels is body light,
   // not sky: subtracting it reports a hue the image does not have.
   const rgb = new Uint8Array(width * height * 3);
   for (let p = 0; p < width * height; p++) {
@@ -117,14 +117,14 @@ test('an authored sky quantile and footprint-edge taper fix what the trust ramp 
   const centre = read(median, -2, 0), corrected = read(lowSky, -2, 0);
   assert.ok(Math.abs(ratio(corrected) - truth) < Math.abs(ratio(centre) - truth) - .02,
     `an authored sky quantile reports the image's own hue: ${ratio(centre).toFixed(3)} -> ${ratio(corrected).toFixed(3)} against ${truth.toFixed(3)}`);
-  // The gain tapers across the observed footprint edge; without the same taper on colour, a boundary pixel
-  // keeps a full-strength colour extrapolated from however few covered pixels it has.
+  // The gain tapers across the observed footprint edge; without the same taper on color, a boundary pixel
+  // keeps a full-strength color extrapolated from however few covered pixels it has.
   const tapered = envelopeChromaticity(rgb, partial, width, height, bounds, 2, .25, .1, .5);
   const saturation = (c: [number, number, number]) => (Math.max(...c) - Math.min(...c)) / Math.max(1, Math.max(...c));
   const edgeOpen = read(lowSky, -.3, 0), edgeTapered = read(tapered, -.3, 0);
   assert.ok(saturation(edgeTapered) < saturation(edgeOpen) * .6,
     `the footprint edge fades toward neutral: ${saturation(edgeOpen).toFixed(3)} -> ${saturation(edgeTapered).toFixed(3)}`);
-  // Well inside the footprint the taper changes nothing, so it removes false edge colour without paying
+  // Well inside the footprint the taper changes nothing, so it removes false edge color without paying
   // for it in the body: a taper that dimmed the interior would be a global desaturation in disguise.
   assert.deepEqual(read(tapered, -2, 0), corrected, 'a fully covered pixel is untouched by the taper');
   // Omitting the settings keeps the accepted arithmetic exactly, and both are validated and recorded only

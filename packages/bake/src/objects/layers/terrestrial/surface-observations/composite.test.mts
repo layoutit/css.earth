@@ -39,11 +39,11 @@ test('a band reports one frame for its strips', () => {
   assert.deepEqual(strips.map(s => s.asked), [0, 0, 2]);
 });
 
-test('three bands make one colour sample, and one withheld band withholds the point', () => {
+test('three bands make one color sample, and one withheld band withholds the point', () => {
   const band = (value: number, reason?: string) => stripFrame(`b${value}`, [strip(0, () => reason ? { reason } : accepted(value))], 'kernels');
-  const colour = bandSetFrame('image', [band(0.3), band(0.2), band(0.1)], 'kernels').sample([10, 50, 1]);
-  assert.ok(colour.reason === undefined);
-  assert.deepEqual(colour.color, [0.3, 0.2, 0.1]); assert.ok(Math.abs(colour.radiance - 0.2) < 1e-12);
+  const color = bandSetFrame('image', [band(0.3), band(0.2), band(0.1)], 'kernels').sample([10, 50, 1]);
+  assert.ok(color.reason === undefined);
+  assert.deepEqual(color.color, [0.3, 0.2, 0.1]); assert.ok(Math.abs(color.radiance - 0.2) < 1e-12);
   assert.deepEqual(bandSetFrame('image', [band(0.3), band(0.2, 'grazing'), band(0.1)], 'kernels').sample([10, 50, 1]), { reason: 'grazing' });
-  assert.equal(bandSetFrame('image', [band(0.3), band(0.2), band(0.1)]).cameraKind, 'control-network', 'the controlled colour format keeps its camera kind');
+  assert.equal(bandSetFrame('image', [band(0.3), band(0.2), band(0.1)]).cameraKind, 'control-network', 'the controlled color format keeps its camera kind');
 });

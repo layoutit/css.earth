@@ -92,7 +92,7 @@
       "licenseEvidence": [
         "https://www.cosmos.esa.int/web/gaia-users/credits"
       ],
-      "acquisition": "Gaia Archive TAP query in source/preparation/acquisition.json: the gaia_source row of source_id 5565050255701441664 (position, parallax, proper motion, radial velocity, G magnitude, colour).",
+      "acquisition": "Gaia Archive TAP query in source/preparation/acquisition.json: the gaia_source row of source_id 5565050255701441664 (position, parallax, proper motion, radial velocity, G magnitude, color).",
       "redistribution": "One catalogue row, retained unchanged with its credit.",
       "consumers": [
         "placement"
@@ -139,7 +139,7 @@
       "path": "photometry/stellar-color.json",
       "origin": "https://gea.esac.esa.int/archive/",
       "credit": "cssEarth; the Gaia DR3 spectrum it names",
-      "license": "Project-authored colour record; the spectrum retains its Gaia terms",
+      "license": "Project-authored color record; the spectrum retains its Gaia terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
@@ -148,7 +148,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored colour recipe naming the Gaia DR3 spectrum bound above; repinned when edited."
+        "reason": "Project-authored color recipe naming the Gaia DR3 spectrum bound above; repinned when edited."
       }
     },
     {
@@ -183,7 +183,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://gea.esac.esa.int/archive/",
-      "credit": "Photosphere colour from the Gaia DR3 BP/RP spectrum, dimmed toward the limb by the Claret (2017) TESS law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "Photosphere color from the Gaia DR3 BP/RP spectrum, dimmed toward the limb by the Claret (2017) TESS law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -201,7 +201,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

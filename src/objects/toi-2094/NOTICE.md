@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 0.384 +/- 0.018 solar radii from Jiang et al. 2026, the stellar radius of the default parameter set of TOI-2094 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract); Mass 0.425 +/- 0.059 solar masses from Jiang et al. 2026, the stellar mass of the default parameter set of TOI-2094 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract); temperature from Jiang et al. 2026, the stellar temperature of the default parameter set of TOI-2094 b in the NASA Exoplanet Archive.
 
-Colour: Gaia DR3 XP spectrum, source 1649377156604531712, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: Gaia DR3 XP spectrum, source 1649377156604531712, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret (2017), A&A 600, A30, via VizieR J/A+A/600/A30.
 

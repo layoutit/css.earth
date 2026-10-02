@@ -100,7 +100,7 @@ export interface PreparedCataloguePoints {
     /** Seen from outside its reach, the bank draws at most one dot per this many square pixels of its projected shape
      * (PIXELS_PER_DOT when absent): a bank inside a sparser field matches the field's density, so its edge does not show. */
     readonly outsidePixelsPerDot?: number };
-  /** Each point's position, and its palette colour (and radius, where the palette sizes its dots) when the bank has a palette. */
+  /** Each point's position, and its palette color (and radius, where the palette sizes its dots) when the bank has a palette. */
   readonly points: readonly { readonly positionUnits: VolumeVector; readonly colorCss: string; readonly radiusPx: number }[];
   /** The bank's prepared shape around its origin, written by the bake that published it. */
   readonly spread: CataloguePointSpread;
@@ -133,14 +133,14 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
   }
   const hex = (value: unknown): value is string => typeof value === 'string' && /^#[0-9a-f]{6}$/iu.test(value);
   if (!hex(colorCss) || typeof radiusPx !== 'number' || !(radiusPx > 0) ||
-      typeof opacity !== 'number' || !(opacity > 0 && opacity <= 1)) throw new TypeError(`${data.id}: catalogue point appearance needs a hex colour, a positive radius and an opacity in (0, 1].`);
+      typeof opacity !== 'number' || !(opacity > 0 && opacity <= 1)) throw new TypeError(`${data.id}: catalogue point appearance needs a hex color, a positive radius and an opacity in (0, 1].`);
   // A palette entry may carry its own opacity as a fourth byte (#rrggbbaa).
   const entry = (value: unknown): value is string => typeof value === 'string' && /^#[0-9a-f]{6}(?:[0-9a-f]{2})?$/iu.test(value);
-  if (palette !== undefined && (!Array.isArray(palette) || !palette.length || !palette.every(entry))) throw new TypeError(`${data.id}: a catalogue point palette is a list of hex colours, with an optional alpha byte.`);
+  if (palette !== undefined && (!Array.isArray(palette) || !palette.length || !palette.every(entry))) throw new TypeError(`${data.id}: a catalogue point palette is a list of hex colors, with an optional alpha byte.`);
   const paletteRadiusPx = appearance?.paletteRadiusPx;
   if (paletteRadiusPx !== undefined && (!Array.isArray(palette) || !Array.isArray(paletteRadiusPx) || paletteRadiusPx.length !== palette.length
       || !paletteRadiusPx.every(value => typeof value === 'number' && value > 0 && Number.isFinite(value)))) {
-    throw new TypeError(`${data.id}: paletteRadiusPx holds one positive radius per palette colour.`);
+    throw new TypeError(`${data.id}: paletteRadiusPx holds one positive radius per palette color.`);
   }
   if (!Array.isArray(data.points) || !data.points.length || data.points.length > MAX_CATALOGUE_POINTS) {
     throw new TypeError(`${data.id}: a catalogue point bank holds 1 to ${MAX_CATALOGUE_POINTS} points, got ${Array.isArray(data.points) ? data.points.length : 'none'}.`);
@@ -155,9 +155,9 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
     if (!Array.isArray(point) || point.length !== width || !point.every(axis => typeof axis === 'number' && Number.isFinite(axis))) {
       throw new TypeError(`${data.id}: point ${index} must be ${width} finite numbers${palette ? ' (x, y, z and a palette index)' : ''}.`);
     }
-    const colour = palette ? palette[point[3]] : colorCss;
-    if (!entry(colour)) throw new TypeError(`${data.id}: point ${index} names palette colour ${point[3]}, which the palette of ${palette!.length} lacks.`);
-    return Object.freeze({ positionUnits: Object.freeze([point[0], point[1], point[2]]) as unknown as VolumeVector, colorCss: colour,
+    const color = palette ? palette[point[3]] : colorCss;
+    if (!entry(color)) throw new TypeError(`${data.id}: point ${index} names palette color ${point[3]}, which the palette of ${palette!.length} lacks.`);
+    return Object.freeze({ positionUnits: Object.freeze([point[0], point[1], point[2]]) as unknown as VolumeVector, colorCss: color,
       radiusPx: paletteRadiusPx ? (paletteRadiusPx as number[])[point[3]]! : radiusPx });
   });
   const cells = parseCatalogueCells(data.cells, data.points as number[][], parsedLevels?.map(level => level.points) ?? [points.length], `${data.id} (${at})`);
@@ -265,12 +265,12 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         extent = { originM: bank.frame.originM, radiusM: Math.max(...bank.points.map(point => Math.hypot(...point.positionUnits))) * bank.frame.metersPerUnit };
         const fadeOut = bank.appearance.fadeOutUnits;
         fadeOutM = fadeOut ? [fadeOut[0] * bank.frame.metersPerUnit, fadeOut[1] * bank.frame.metersPerUnit] : null;
-        // One style object per palette entry (a colour at one radius): the projection asks for a style per point on every
+        // One style object per palette entry (a color at one radius): the projection asks for a style per point on every
         // frame. An entry's alpha byte scales the bank's opacity.
         const styleKey = (point: { colorCss: string; radiusPx: number }) => `${point.colorCss}|${point.radiusPx}`;
-        const styles = new Map([...new Map(bank.points.map(point => [styleKey(point), point] as const)).entries()].map(([key, { colorCss: colour, radiusPx }]) =>
-          [key, { colorCss: colour.slice(0, 7), radiusPx,
-            opacity: bank.appearance.opacity * (colour.length === 9 ? parseInt(colour.slice(7), 16) / 255 : 1) }] as const));
+        const styles = new Map([...new Map(bank.points.map(point => [styleKey(point), point] as const)).entries()].map(([key, { colorCss: color, radiusPx }]) =>
+          [key, { colorCss: color.slice(0, 7), radiusPx,
+            opacity: bank.appearance.opacity * (color.length === 9 ? parseInt(color.slice(7), 16) / 255 : 1) }] as const));
         // Zooming out draws a smaller share of the catalogue, always a prefix of its prepared order (sparse places first,
         // crowds last): points leave and return as the camera moves, and none is swapped for another. From outside the
         // bank's reach the share is also capped by how many dots its projected shape holds.
@@ -304,8 +304,8 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
           cells: { boxes: bank.cells.boxes, of: cellOf },
           drawnCount: (distanceUnits: number, cameraUnits: VolumeVector) => count(drawn(distanceUnits, cameraUnits)),
           ...(budget === undefined ? {} : { keepFraction: share }),
-          // One path per colour unions its dots, so two translucent dots of one colour that overlap do not add up; a part
-          // keeps a path only for the colours its own dots use.
+          // One path per color unions its dots, so two translucent dots of one color that overlap do not add up; a part
+          // keeps a path only for the colors its own dots use.
           paintPalette: [...new Set(points.map(styleKey))].map(key => pointPaint(styles.get(key)!)),
           stylePoint: (point: (typeof bank.points)[number]) => styles.get(styleKey(point))! });
         const local = occluder && { normal: toLocalAxes(bank.frame.localToReferenceXyzw, occluder.normal), radiusUnits: occluder.radiusM / bank.frame.metersPerUnit,

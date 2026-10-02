@@ -62,7 +62,7 @@ Independent nearest-triangle sampling (8192 area-stratified samples each way) me
 
 - Shape uses the neutral-gray material. It is not photographed color, reflectance, regolith or inferred composition.
 - Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution.
-- The SPHERE photograph is not albedo or colour. The frames see Daphne from 51° north, so surface the survey did not see keeps the missing-imagery grid.
+- The SPHERE photograph is not albedo or color. The frames see Daphne from 51° north, so surface the survey did not see keeps the missing-imagery grid.
 - The 2017-05-20 apparition (5 frames) is left out. The level fit found no accepted overlap between it and the 2018-08-06 frames: the best pair shared 59 display samples within its angle limit, fewer than the 128 it needs. Without one, their level cannot be placed, so the figure's 2017 column shows no dataset frame.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)

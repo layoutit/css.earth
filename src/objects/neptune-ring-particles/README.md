@@ -29,5 +29,5 @@ A headless capture of this version's Neptune default view.
 - **No dot is a measured particle.** Only each ring's share of the dots is measured. Their longitudes are drawn from a seed.
 - **The Adams arcs are not drawn.** The table gives the arcs an optical depth near 0.1 but no longitudes at this epoch, so the Adams ring's dots are spread evenly around it at the ring's 0.003.
 - The table gives Le Verrier's width as under 100 km; the recipe, and so the dots, use 100 km.
-- The dots are `#9a9a9a`, the neutral grey; no ring colour is measured.
+- The dots are `#9a9a9a`, the neutral grey; no ring color is measured.
 - The dot layer sits behind the planet, and the dots do not orbit.

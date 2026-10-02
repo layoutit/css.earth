@@ -1,7 +1,7 @@
 /** Band photometry for directly imaged planets, drafted from the UltracoolSheet (Best, Liu, Magnier & Dupuy 2024, v2.1 on Zenodo):
  * each planet's MKO K, H and J magnitudes, converted to flux densities with the zero points the SVO Filter Profile Service publishes
- * for the MKO filters (Rodrigo et al. 2012, 2020), become the red, green and blue of the band-colour dataset (planet-datasets.mts,
- * `--photometry`). A planet takes its own display range, zero to its brightest band, so the colour shows its band ratios; brightness
+ * for the MKO filters (Rodrigo et al. 2012, 2020), become the red, green and blue of the band-color dataset (planet-datasets.mts,
+ * `--photometry`). A planet takes its own display range, zero to its brightest band, so the color shows its band ratios; brightness
  * across planets at different distances is not compared. Each value is cited to the paper that measured it, through the sheet's
  * reference codes. A planet missing any of the three bands is left out and named. */
 import type { Archive } from './archives.mts';
@@ -37,7 +37,7 @@ export async function filterZeroPoint(archive: Archive, filter: string) {
 
 const normal = (name: string) => name.normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/gu, '');
 
-/** Photometry entries for the planets named (id and display name), and a note for each one the sheet cannot colour. */
+/** Photometry entries for the planets named (id and display name), and a note for each one the sheet cannot color. */
 export async function draftUltracoolPhotometry(archive: Archive, planets: readonly { readonly id: string; readonly name: string }[]) {
   const [sheet, references, ...points] = await Promise.all([archive.text(ULTRACOOL.main).then(readCsv), archive.text(ULTRACOOL.references).then(readCsv), ...BANDS.map(entry => filterZeroPoint(archive, entry.filter))]);
   const byName = new Map(sheet.map(row => [normal(row.name ?? ''), row])), paper = new Map(references.map(row => [row.code_ref, row]));
@@ -60,7 +60,7 @@ export async function draftUltracoolPhotometry(archive: Archive, planets: readon
       source: { citation: `${cited.map(entry => entry?.citetext_ref ?? '?').join('; ')}, as compiled in ${ULTRACOOL.credit}; zero points from the SVO Filter Profile Service`, url,
         locator: `UltracoolSheet Main.csv, ${row.name}: MKO ${BANDS.map(entry => `${entry.band} ${row[`${entry.band}_MKO`]} +/- ${row[`${entry.band}err_MKO`]} (${row[`ref_${entry.band}_MKO`]})`).join(', ')}; SVO ${BANDS.map((entry, i) => `${entry.filter} ${points[i]!.zeroPoint.toFixed(1)} Jy`).join(', ')}` },
       bands, displayRange: [0, Math.max(...bands.map(band => band.value))],
-      displayRangeSource: `This planet alone, from zero to its brightest band (${bands.reduce((a, b) => (b.value > a.value ? b : a)).band}), so the colour shows its band ratios; brightness is not compared across planets at different distances.` } });
+      displayRangeSource: `This planet alone, from zero to its brightest band (${bands.reduce((a, b) => (b.value > a.value ? b : a)).band}), so the color shows its band ratios; brightness is not compared across planets at different distances.` } });
   }
   return { entries, notes };
 }

@@ -8,7 +8,7 @@ It is one of 4 planets known around Kepler-1542. Its orbit and size follow Morto
 
 **Orbit.** Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 5.1011526855 d Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive ps table (pl_refname MORTON_ET_AL__2016): a/R* derived by Kepler's third law from its period 5.10115756 d, stellar mass 0.94 and radius 0.99 solar units; Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): inclination 89.95 degrees Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): e 0 Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): transit mid-time 2454965.43326 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 23 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by kepler-1542's measured colour (#ffefe6, the colour dataset of kepler-1542 (src/objects/kepler-1542/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by kepler-1542's measured color (#ffefe6, the color dataset of kepler-1542 (src/objects/kepler-1542/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of Kepler-1542's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
 

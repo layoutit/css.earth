@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 0.631 +/- 0.014 solar radii from Naponiello et al. 2025, the stellar radius of the default parameter set of TOI-2443 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract); Mass 0.642 +/- 0.026 solar masses from Naponiello et al. 2025, the stellar mass of the default parameter set of TOI-2443 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract); temperature from Naponiello et al. 2025, the stellar temperature of the default parameter set of TOI-2443 b in the NASA Exoplanet Archive.
 
-Colour: Gaia DR3 XP spectrum, source 2501948402746099456, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: Gaia DR3 XP spectrum, source 2501948402746099456, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 

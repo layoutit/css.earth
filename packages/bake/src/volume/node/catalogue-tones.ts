@@ -52,8 +52,8 @@ function sizeTiers(sizeBy: CatalogueSizeBy, magnitudes: readonly (number | null)
 }
 
 /**
- * Pairs each dot's base colour with its tone (and size): a palette entry is a (colour, tone) or (colour, tone, size)
- * combination, in order of first use. The colour stays the base colour; `paletteTone` says how dark and `paletteRadiusPx`
+ * Pairs each dot's base color with its tone (and size): a palette entry is a (color, tone) or (color, tone, size)
+ * combination, in order of first use. The color stays the base color; `paletteTone` says how dark and `paletteRadiusPx`
  * how large. A dot without a magnitude takes the faintest tone and size.
  */
 export function toneCataloguePalette({ basePalette, baseIndices, magnitudes, distances, toneBy, sizeBy }: { readonly basePalette: readonly string[];
@@ -66,9 +66,9 @@ export function toneCataloguePalette({ basePalette, baseIndices, magnitudes, dis
   const indices = baseIndices.map((base, index) => {
     const magnitude = magnitudes[index] ?? null, toneStep = step(magnitude), sizeTier = tiers?.[index] ?? 0, key = `${base},${toneStep},${sizeTier}`;
     if (!combos.has(key)) {
-      const colour = basePalette[base];
-      if (colour === undefined) throw new RangeError(`Dot ${index} names base colour ${base} of a ${basePalette.length}-colour palette.`);
-      combos.set(key, palette.length); palette.push(colour);
+      const color = basePalette[base];
+      if (color === undefined) throw new RangeError(`Dot ${index} names base color ${base} of a ${basePalette.length}-color palette.`);
+      combos.set(key, palette.length); palette.push(color);
       paletteTone.push(Number((1 - toneStep / (toneBy.steps - 1) * (1 - toneBy.faintTone)).toFixed(4)));
       if (sizeBy) paletteRadiusPx.push(sizeBy.tiers[sizeTier]?.radiusPx ?? sizeBy.radiusPx);
     }

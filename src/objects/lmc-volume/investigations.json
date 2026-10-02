@@ -6,7 +6,7 @@
       "id": "dataset-vista-infrared",
       "subject": "vista-infrared shipped image dataset",
       "status": "included",
-      "finding": "Shipped dataset, now recolouring the finite-emission model lmc-clouds-emission-envelope with its own fitted tone curve (result lmc-clouds-emission-envelope-vista-infrared). Registration unchanged: 5340 held-out matches qualify it inside its matched hull; exterior placement is extrapolated. After the tone fit its analytic render is still 16.6% brighter than its own image (hue error 5.70°), because every dataset shares the one opacity fitted to Horálek; a per-dataset opacity scale would be needed. Earlier finding (2026-09-14, repaint delivery): Default ESO Y/J/Ks display, 8954 by 10000 pixels, repaints the existing simulated density without changing geometry or alpha. The 5340 held-out matches qualify relative registration inside its matched hull; exterior placement is extrapolated.",
+      "finding": "Shipped dataset, now recoloring the finite-emission model lmc-clouds-emission-envelope with its own fitted tone curve (result lmc-clouds-emission-envelope-vista-infrared). Registration unchanged: 5340 held-out matches qualify it inside its matched hull; exterior placement is extrapolated. After the tone fit its analytic render is still 16.6% brighter than its own image (hue error 5.70°), because every dataset shares the one opacity fitted to Horálek; a per-dataset opacity scale would be needed. Earlier finding (2026-09-14, repaint delivery): Default ESO Y/J/Ks display, 8954 by 10000 pixels, repaints the existing simulated density without changing geometry or alpha. The 5340 held-out matches qualify relative registration inside its matched hull; exterior placement is extrapolated.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/lenses/vista-infrared/provenance.json",
@@ -30,7 +30,7 @@
       "id": "dataset-wise-wide-infrared",
       "subject": "wise-wide-infrared shipped image dataset",
       "status": "included",
-      "finding": "Shipped dataset, now recolouring the finite-emission model lmc-clouds-emission-envelope with its own fitted tone curve (result lmc-clouds-emission-envelope-wise-wide-infrared). Its fixed WCS check is unchanged. After the tone fit its analytic render is still 264% brighter than its own image (hue error 8.14°): its composite spans about 19 grey levels inside its footprint and the curve is pinned at its floor under the shared opacity, so a per-dataset opacity scale would be needed. Earlier finding (2026-09-14, repaint delivery): NASA/IPAC AllWISE W4/W2/W1 color HiPS mosaic, 6000² pixels across 24 degrees. Its fixed WCS passed 34,811 independently retrieved AllWISE W1 matches without fitting a transform. This validates W1 geometry, not diffuse photometry, visible seams or simulated gas depth.",
+      "finding": "Shipped dataset, now recoloring the finite-emission model lmc-clouds-emission-envelope with its own fitted tone curve (result lmc-clouds-emission-envelope-wise-wide-infrared). Its fixed WCS check is unchanged. After the tone fit its analytic render is still 264% brighter than its own image (hue error 8.14°): its composite spans about 19 grey levels inside its footprint and the curve is pinned at its floor under the shared opacity, so a per-dataset opacity scale would be needed. Earlier finding (2026-09-14, repaint delivery): NASA/IPAC AllWISE W4/W2/W1 color HiPS mosaic, 6000² pixels across 24 degrees. Its fixed WCS passed 34,811 independently retrieved AllWISE W1 matches without fitting a transform. This validates W1 geometry, not diffuse photometry, visible seams or simulated gas depth.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/lenses/wise-wide-infrared/provenance.json",
@@ -242,7 +242,7 @@
       "id": "per-dataset-opacity",
       "subject": "Per-dataset opacity for VISTA and AllWISE",
       "status": "deferred",
-      "finding": "Every dataset recolours one shared opacity fitted to Horálek, so a tone curve can only dim or recolour inside it. After fitting, VISTA stays 16.6% and AllWISE 264% brighter than their own images. Matching them needs a per-dataset opacity scale, which gives up part of the one-geometry dataset contract; not attempted here.",
+      "finding": "Every dataset recolors one shared opacity fitted to Horálek, so a tone curve can only dim or recolor inside it. After fitting, VISTA stays 16.6% and AllWISE 264% brighter than their own images. Matching them needs a per-dataset opacity scale, which gives up part of the one-geometry dataset contract; not attempted here.",
       "evidence": [
         "https://www.eso.org/public/images/eso1914a/",
         "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html"

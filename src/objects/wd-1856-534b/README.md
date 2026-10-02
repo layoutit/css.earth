@@ -23,7 +23,7 @@ See the system evidence.
 
 ## Known problems
 
-- No visible colour or image of the planet exists; the gray is a display convention.
+- No visible color or image of the planet exists; the gray is a display convention.
 - The ascending node on the sky is unmeasured and set to celestial north.
 - JWST programmes 9033 and 9157 (MIRI phase curve and IFU) are partly still exclusive and unpublished; see the ledger.
 

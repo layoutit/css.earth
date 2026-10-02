@@ -46,7 +46,7 @@
       "id": "hyperleda-2014",
       "subject": "HyperLEDA numerical morphological type T (Makarov et al. 2014)",
       "status": "included",
-      "finding": "T for 25,877 of the 27,277 galaxies, queried from the HyperLEDA mirror on 2026-09-29 and joined by PGC; it picks each galaxy's template colour.",
+      "finding": "T for 25,877 of the 27,277 galaxies, queried from the HyperLEDA mirror on 2026-09-29 and joined by PGC; it picks each galaxy's template color.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/201423496",
         "http://atlas.obs-hp.fr/hyperleda/"
@@ -56,7 +56,7 @@
       "id": "kinney-1996-templates",
       "subject": "Kinney et al. (1996) galaxy template spectra",
       "status": "included",
-      "finding": "The E, S0, Sa, Sb and Sc templates through the CIE 1931 observer give the type colours. HyperLEDA's measured B-V (bvtc) was tried first and is empty for most CF4 galaxies.",
+      "finding": "The E, S0, Sa, Sb and Sc templates through the CIE 1931 observer give the type colors. HyperLEDA's measured B-V (bvtc) was tried first and is empty for most CF4 galaxies.",
       "evidence": [
         "https://doi.org/10.1086/177583",
         "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/"
@@ -66,7 +66,7 @@
       "id": "count-clouds",
       "subject": "Authored galaxy-count clouds, brightness and morphology tints",
       "status": "excluded",
-      "finding": "The 160 fitted clouds, the brightness formula without photometry and the hand-picked morphology colours were replaced by even-density dots in template colours; none of them was a measurement.",
+      "finding": "The 160 fitted clouds, the brightness formula without photometry and the hand-picked morphology colors were replaced by even-density dots in template colors; none of them was a measurement.",
       "evidence": [
         "https://github.com/layoutit/css.earth/pull/958"
       ]
@@ -85,7 +85,7 @@
       "id": "desi-dr1-qso",
       "subject": "DESI DR1 QSO clustering catalogues",
       "status": "included",
-      "finding": "1,223,391 quasars from redshift 0.8 to 3.5; one in 150 drawn. No photometry in the clustering files, so the colour is the Francis et al. (1991) composite at each redshift and there is no tone.",
+      "finding": "1,223,391 quasars from redshift 0.8 to 3.5; one in 150 drawn. No photometry in the clustering files, so the color is the Francis et al. (1991) composite at each redshift and there is no tone.",
       "evidence": [
         "https://arxiv.org/abs/2503.14745",
         "https://doi.org/10.1086/170066"

@@ -2,7 +2,7 @@
 
 Saturn's moon Tethys on the Weirich et al. SPC shape model, with Cassini photographic mosaics, one Cassini ISS
 photograph, SPC elevation and relative albedo, and two Cassini VIMS infrared maps. Shape-only views use the shared
-neutral gray (#808080 sRGB), a display convention, not a measured colour; gaps keep the missing-data grid. The
+neutral gray (#808080 sRGB), a display convention, not a measured color; gaps keep the missing-data grid. The
 [navigation marker](source/preparation/navigation.json) is a stylized identifier, not the lighting at the scene epoch.
 
 ## Sources

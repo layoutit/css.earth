@@ -6,7 +6,7 @@
       "id": "resolved-photosphere",
       "subject": "Disc-resolved images or interferometric imaging of WASP-76",
       "status": "excluded",
-      "finding": "The disc is about 0.09 mas across at 189 pc; no image or interferometric diameter exists. The sphere carries its Gaia colour and a model limb.",
+      "finding": "The disc is about 0.09 mas across at 189 pc; no image or interferometric diameter exists. The sphere carries its Gaia color and a model limb.",
       "revisitWhen": "A reconstructed image of the star's surface is published.",
       "evidence": [
         "https://jmmc.fr/jmdc"
@@ -16,7 +16,7 @@
       "id": "companion-wasp-76-b",
       "subject": "WASP-76 B, the bound K-type companion 0.44 arcsec away",
       "status": "deferred",
-      "finding": "Its separation, contrast and temperature are published (Ehrenreich et al. 2020, Methods; Southworth et al. 2020) but not an orbit, so it is not placed. Its light is inside the Gaia BP/RP spectrum that colours WASP-76.",
+      "finding": "Its separation, contrast and temperature are published (Ehrenreich et al. 2020, Methods; Southworth et al. 2020) but not an orbit, so it is not placed. Its light is inside the Gaia BP/RP spectrum that colors WASP-76.",
       "revisitWhen": "An orbit or a separate object package for the companion is wanted.",
       "evidence": [
         "https://arxiv.org/abs/2003.05528"

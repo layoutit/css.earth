@@ -22,8 +22,8 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 1534011998572555776, cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 621: HR 4785; VizieR III/202 (2 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #fff8fd. Routes tried in order: stis-ngsl: HD 109358 is not in the library; pulkovo: HR 4785 is not in the catalogue; kiehling: HR 4785 is not among its 60 stars; burnashev: BS 4785 is not in part2; gaia-xp: used.",
       "evidence": [

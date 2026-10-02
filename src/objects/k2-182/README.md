@@ -6,7 +6,7 @@ Its radius and temperature follow Thygesen et al. 2023. The introduction is gene
 
 **Star.** Placement: Gaia DR3 source 601480723509077632, parallax 6.471 ± 0.029 mas (154.54 pc); its RUWE is 1.5, so the single-star astrometry fits poorly, and the parallax is used as published. Radius 0.789 +/- 0.025 solar radii from Thygesen et al. 2023, the stellar radius of the default parameter set of K2-182 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract). Mass 0.823 +/- 0.036 solar masses from Thygesen et al. 2023, the stellar mass of the default parameter set of K2-182 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract). Temperature 5,128 K from Thygesen et al. 2023, the stellar temperature of the default parameter set of K2-182 b in the NASA Exoplanet Archive. log g 4.56 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 601480723509077632, through the CIE 1931 2° observer: #ffe3d0. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 601480723509077632, through the CIE 1931 2° observer: #ffe3d0. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,128 K and log g 4.56 (u1 0.621, u2 0.147): a model, because no fit of this star's limb is used.
 

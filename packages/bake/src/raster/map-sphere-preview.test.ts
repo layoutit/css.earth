@@ -8,7 +8,7 @@ const view = { sizePx: 16, elevationDeg: 0, azimuthDeg: 0, samples: 1 };
 const rays = mapSpherePreviewRays(view), grey = new Uint8Array(rays.near.length).fill(200);
 const pixel = (rgba: Buffer, x: number, y: number) => [...rgba.subarray((y * view.sizePx + x) * 4, (y * view.sizePx + x) * 4 + 4)];
 const compose = (cut: Parameters<typeof composeMapSpherePreview>[0]['cut']) =>
-  composeMapSpherePreview({ view, rays, nearColours: grey, farColours: grey, limb: null, cut });
+  composeMapSpherePreview({ view, rays, nearColors: grey, farColors: grey, limb: null, cut });
 
 test('the whole shell is opaque inside its outline and transparent outside it', () => {
   const whole = compose(null);

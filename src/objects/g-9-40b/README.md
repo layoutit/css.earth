@@ -8,7 +8,7 @@ It is the only planet known around G 9-40. Its orbit and size follow Luque et al
 
 **Orbit.** Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2022): P 5.7459982 d Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2022): a/R* 30.46; Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2022): inclination 89.03 degrees Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2022): e 0 Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2022): transit mid-time 2459503.32682 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by g-9-40's measured colour (#ffc67f, the colour dataset of g-9-40 (src/objects/g-9-40/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by g-9-40's measured color (#ffc67f, the color dataset of g-9-40 (src/objects/g-9-40/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of G 9-40's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (45, 46, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 

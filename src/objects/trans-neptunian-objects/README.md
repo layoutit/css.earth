@@ -37,6 +37,6 @@ A headless capture of this version's Solar System overview at 211 au.
 - The dots are the objects found so far with well-known orbits, not the belt. Leaving out the loose orbits removes most of the deep search fields, such as the one made for New Horizons around Arrokoth. They gather where surveys have looked, and they thin out with distance because fainter objects go unseen.
 - The database's trans-Neptunian class is set by semi-major axis alone. 315 of the dots are now inside Neptune's distance, on stretched orbits.
 - Each orbit is carried as an unperturbed ellipse, without the planets' pulls. The script checks the result only for the 29 objects with pages.
-- No colour is taken from the database. Every dot is `#9a9a9a`, the one neutral grey the app gives a body without a measured colour (`NEUTRAL_CATALOGUE_COLOUR`). The 1.5 px dot size and half opacity are display choices.
+- No color is taken from the database. Every dot is `#9a9a9a`, the one neutral grey the app gives a body without a measured color (`NEUTRAL_CATALOGUE_COLOR`). The 1.5 px dot size and half opacity are display choices.
 - The dots do not draw while a moon is selected: a moon's system is the moon and its planet.
 - The positions hold for the world's one epoch; the dots do not move.

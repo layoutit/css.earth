@@ -9,7 +9,7 @@
       "upperKelvin": 5219.7,
       "citation": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6476479355707573376: teff_gspphot 5215.7285 K (16th-84th percentiles 5212.2505-5219.704), the temperature FLAME used: 5216 +/- 3.7 K, https://doi.org/10.1051/0004-6361/202243462"
     },
-    "note": "GSP-Phot fits an extinction A_G = 0.78 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the colour routes do not remove extinction; GSP-Phot measured its temperature, so the colour is a Planck spectrum at its published temperature."
+    "note": "GSP-Phot fits an extinction A_G = 0.78 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature, so the color is a Planck spectrum at its published temperature."
   },
   "whitePoint": "sRGB D65",
   "normalization": "brightest linear sRGB channel = 1"

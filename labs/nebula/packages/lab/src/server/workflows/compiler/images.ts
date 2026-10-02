@@ -15,7 +15,7 @@ export type {CompilerRaster,CompilerImage} from '@cssearth/nebula-reconstruction
 async function raster(root: string, v: unknown): Promise<CompilerRaster> {
   if (!jointRecord(v) || typeof v.path !== 'string' || typeof v.width !== 'number' || typeof v.height !== 'number') throw new TypeError('Missing source layer.');
   const bytes = await readGeometryPin(root, { path: v.path });
-  const { data, info } = await sharp(bytes).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  const { data, info } = await sharp(bytes).removeAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
   if (info.width !== v.width || info.height !== v.height || info.channels !== 3) throw new TypeError('Source layer dimensions changed.');
   return { width: info.width, height: info.height, data, path: v.path };
 }

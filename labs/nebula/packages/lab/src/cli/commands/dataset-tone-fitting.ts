@@ -37,7 +37,7 @@ export function monotone(values: readonly number[], weights: readonly number[]):
   return blocks.flatMap(block => new Array<number>(block.count).fill(block.value));
 }
 
-/** Checkerboard of square blocks: one colour fits, the other is held out. */
+/** Checkerboard of square blocks: one color fits, the other is held out. */
 export function splitFootprint(mask: Uint8Array, width: number, height: number, block = 16) {
   const fit = new Uint8Array(mask.length), heldOut = new Uint8Array(mask.length);
   for (let j = 0; j < height; j++) for (let i = 0; i < width; i++) {

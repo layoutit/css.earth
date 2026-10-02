@@ -8,7 +8,7 @@ It is the only planet known around TOI-6716. Its orbit and size follow Scott et 
 
 **Orbit.** Scott et al. 2026 (2026MNRAS.547ag070S), via the NASA Exoplanet Archive ps table (pl_refname SCOTT_ET_AL_2026): P 4.7185898 d Scott et al. 2026 (2026MNRAS.547ag070S), via the NASA Exoplanet Archive ps table (pl_refname SCOTT_ET_AL_2026): a/R* 29.9; Scott et al. 2026 (2026MNRAS.547ag070S), via the NASA Exoplanet Archive ps table (pl_refname SCOTT_ET_AL_2026): inclination 89.45 degrees No archive row states an eccentricity; the orbit is taken as circular Scott et al. 2026 (2026MNRAS.547ag070S), via the NASA Exoplanet Archive ps table (pl_refname SCOTT_ET_AL_2026): transit mid-time 2459632.34484 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-6716's measured colour (#ffc97a, the colour dataset of toi-6716 (src/objects/toi-6716/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-6716's measured color (#ffc97a, the color dataset of toi-6716 (src/objects/toi-6716/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-6716's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (61, 87, 88), folded onto its orbit. Upper limits and rows without an error are left out.
 

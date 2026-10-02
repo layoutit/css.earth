@@ -6,7 +6,7 @@ Its radius and temperature follow Bourrier et al. 2018. It is also HD 75732, HR 
 
 **Star.** Placement: Gaia DR3 source 704967037090946688, parallax 79.448 ± 0.043 mas (12.59 pc). Radius 0.943 +/- 0.01 solar radii from Bourrier et al. 2018, the stellar radius of the default parameter set of 55 Cnc e in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract). Mass 0.905 +/- 0.015 solar masses from Bourrier et al. 2018, the stellar mass of the default parameter set of 55 Cnc e in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract). Temperature 5,172 K from Bourrier et al. 2018, the stellar temperature of the default parameter set of 55 Cnc e in the NASA Exoplanet Archive. log g 4.45 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 704967037090946688, through the CIE 1931 2° observer: #ffe7d8. Routes tried in order: stis-ngsl: HD 75732 is not in the library; pulkovo: HR 3522 is not in the catalogue; kiehling: HR 3522 is not among its 60 stars; kharitonov: HR 3522 is not in the catalogue; burnashev: BS 3522 is not in part2; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 704967037090946688, through the CIE 1931 2° observer: #ffe7d8. Routes tried in order: stis-ngsl: HD 75732 is not in the library; pulkovo: HR 3522 is not in the catalogue; kiehling: HR 3522 is not among its 60 stars; kharitonov: HR 3522 is not in the catalogue; burnashev: BS 3522 is not in part2; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,172 K and log g 4.45 (u1 0.607, u2 0.158): a model, because no fit of this star's limb is used.
 

@@ -8,7 +8,7 @@
       "origin": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.2&projection=TAN&coordsys=icrs&ra=160.990417&dec=11.703611&format=jpg",
       "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
       "title": "SDSS9 color",
-      "credit": "Sloan Digital Sky Survey; colour HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+      "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
       "displayCredit": "SDSS",
       "acquisition": "The CDS hips2fits cutout (3000 x 3000 px), restored from its origin; not tracked. Registration is the request, checked against Gaia stars (recipe observation). A display composite, not a calibrated scientific array.",
       "sourceBinding": {
@@ -30,7 +30,7 @@
             "kind": "unresolved",
             "label": "SDSS g r i",
             "evidence": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
-            "reason": "The publisher's colour composite; the retained record does not identify the individual exposures."
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
           }
         ]
       }
@@ -166,7 +166,7 @@
       "path": "src/objects/m95-layers/source/groves-nebulae/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the The PHANGS-MUSE nebular catalogue rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the The PHANGS-MUSE nebular catalogue rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -178,7 +178,7 @@
       "path": "src/objects/m95-layers/source/scheuermann-pne/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Planetary nebula luminosity function distances for 19 galaxies observed by PHANGS-MUSE rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the Planetary nebula luminosity function distances for 19 galaxies observed by PHANGS-MUSE rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -190,7 +190,7 @@
       "path": "src/objects/m95-layers/source/scheuermann-snr/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Planetary nebula luminosity function distances for 19 galaxies observed by PHANGS-MUSE rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the Planetary nebula luminosity function distances for 19 galaxies observed by PHANGS-MUSE rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."

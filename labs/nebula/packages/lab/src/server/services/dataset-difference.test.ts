@@ -5,7 +5,7 @@ import { mkdtemp, mkdir, rm, writeFile, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { AGREEMENT_TOLERANCE, DELIVERY_FACTOR, DIFFERENCE_RANGE, differenceColour, differenceField, datasetDifference,
+import { AGREEMENT_TOLERANCE, DELIVERY_FACTOR, DIFFERENCE_RANGE, differenceColor, differenceField, datasetDifference,
   datasetDifferenceHandler } from './dataset-difference.ts';
 import type { DatasetLevelGrid } from './dataset-levels.ts';
 import type { PreparedReconstruction } from '../../features/reconstruction/reconstruction-types.ts';
@@ -33,34 +33,34 @@ test('the delivery factor is divided out: an analytic render exactly that much b
   assert.ok(Math.abs(DELIVERY_FACTOR - 61.0 / 53.5) < 1e-12, 'the measured horalek delivery ratio');
   const corrected = inside(differenceField(grid(DELIVERY_FACTOR), material));
   assert.ok(corrected.every(delta => Math.abs(delta) <= .5 / DELIVERY_FACTOR + 1e-9), `max |Δ| ${Math.max(...corrected.map(Math.abs))}`);
-  assert.ok(corrected.every(delta => differenceColour(delta)[3] === 0), 'agreement paints nothing');
+  assert.ok(corrected.every(delta => differenceColor(delta)[3] === 0), 'agreement paints nothing');
   // Mutation: drop the correction and the same dataset reads uniformly too bright.
   const raw = inside(differenceField(grid(DELIVERY_FACTOR), material, 1));
   const red = raw.filter(delta => delta > AGREEMENT_TOLERANCE).length, blue = raw.filter(delta => delta < -AGREEMENT_TOLERANCE).length;
   assert.ok(red / raw.length > .8 && blue === 0, `uncorrected: ${red} red, ${blue} blue of ${raw.length}`);
 });
 
-test('the tolerance is the stated one: 5 levels off stays clear, 8 levels off is coloured with its sign', () => {
+test('the tolerance is the stated one: 5 levels off stays clear, 8 levels off is colored with its sign', () => {
   assert.equal(AGREEMENT_TOLERANCE, 6);
   assert.equal(DIFFERENCE_RANGE, 64);
-  const colour = (offset: number) => inside(differenceField(grid(DELIVERY_FACTOR, offset * DELIVERY_FACTOR), material))
-    .filter(delta => delta !== 0).map(delta => differenceColour(delta));
-  for (const [r, , b, a] of colour(5)) assert.equal(a, 0, `5 levels bright painted ${r},${b},${a}`);
-  for (const [r, , b, a] of colour(-5)) assert.equal(a, 0, `5 levels dark painted ${r},${b},${a}`);
-  for (const [r, , b, a] of colour(8)) assert.ok(a > 0 && r > b, `8 levels bright must be red, got ${r},${b},${a}`);
-  for (const [r, , b, a] of colour(-8)) assert.ok(a > 0 && b > r, `8 levels dark must be blue, got ${r},${b},${a}`);
-  assert.deepEqual(differenceColour(AGREEMENT_TOLERANCE), [0, 0, 0, 0]);
-  assert.ok(differenceColour(AGREEMENT_TOLERANCE + .01)[3] > 0);
+  const color = (offset: number) => inside(differenceField(grid(DELIVERY_FACTOR, offset * DELIVERY_FACTOR), material))
+    .filter(delta => delta !== 0).map(delta => differenceColor(delta));
+  for (const [r, , b, a] of color(5)) assert.equal(a, 0, `5 levels bright painted ${r},${b},${a}`);
+  for (const [r, , b, a] of color(-5)) assert.equal(a, 0, `5 levels dark painted ${r},${b},${a}`);
+  for (const [r, , b, a] of color(8)) assert.ok(a > 0 && r > b, `8 levels bright must be red, got ${r},${b},${a}`);
+  for (const [r, , b, a] of color(-8)) assert.ok(a > 0 && b > r, `8 levels dark must be blue, got ${r},${b},${a}`);
+  assert.deepEqual(differenceColor(AGREEMENT_TOLERANCE), [0, 0, 0, 0]);
+  assert.ok(differenceColor(AGREEMENT_TOLERANCE + .01)[3] > 0);
   // The scale saturates at the stated range, never beyond it.
-  assert.deepEqual(differenceColour(DIFFERENCE_RANGE), differenceColour(DIFFERENCE_RANGE * 3));
-  assert.notDeepEqual(differenceColour(DIFFERENCE_RANGE / 2), differenceColour(DIFFERENCE_RANGE));
+  assert.deepEqual(differenceColor(DIFFERENCE_RANGE), differenceColor(DIFFERENCE_RANGE * 3));
+  assert.notDeepEqual(differenceColor(DIFFERENCE_RANGE / 2), differenceColor(DIFFERENCE_RANGE));
 });
 
 test('pixels outside the footprint stay transparent however far off they are', () => {
   const field = differenceField(grid(3, 0, 3 * WIDTH), material);
   for (let p = 0; p < 3 * WIDTH; p++) assert.ok(Number.isNaN(field[p]!), `pixel ${p} is outside`);
-  assert.deepEqual(differenceColour(Number.NaN), [0, 0, 0, 0]);
-  assert.ok(inside(field).some(delta => differenceColour(delta)[3] > 0));
+  assert.deepEqual(differenceColor(Number.NaN), [0, 0, 0, 0]);
+  assert.ok(inside(field).some(delta => differenceColor(delta)[3] > 0));
 });
 
 /** A saved dataset in the file shape `bakeFiniteDataset` publishes: a grey ramp whose projection is `over` × the image. */

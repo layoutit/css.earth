@@ -43,7 +43,7 @@ test('strokes share one svg per world context, name each group by its body and j
   // Its box is a world-context.css rule; only the stage's depth is inline.
   assert.deepEqual(svgs[0]!.style, { zIndex: '700' });
   const [groupA, groupB] = svgs[0]!.children;
-  // No inline colour: the published swatch rule for [data-context-orbit] colours the group like its marker.
+  // No inline color: the published swatch rule for [data-context-orbit] colors the group like its marker.
   assert.equal(groupA!.style.color, undefined); assert.equal(groupA!.dataset.contextOrbit, 'mars');
   assert.equal(groupB!.dataset.contextPlacement, 'approximate');
   assert.equal(a.presentation.dataset, groupA!.dataset); assert.equal(b.presentation.dataset, groupB!.dataset);

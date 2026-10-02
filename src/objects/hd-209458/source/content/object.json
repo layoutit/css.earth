@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Hubble's spectrum of the star. The disc is unresolved; its darker edge is measured from transits of its planet.",
+        "qualification": "Color from Hubble's spectrum of the star. The disc is unresolved; its darker edge is measured from transits of its planet.",
         "thumbnail": "hd-209458-dataset-color.webp",
         "surface": "hd-209458-surface-color@2x.webp",
         "poles": "hd-209458-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
         },
         "falseColor": false,
-        "notes": "The colour of the Hubble Space Telescope's calibrated STIS spectrum of HD 209458, a CALSPEC flux standard. No resolved image of the surface is cast; the display axis is celestial north, a convention."
+        "notes": "The color of the Hubble Space Telescope's calibrated STIS spectrum of HD 209458, a CALSPEC flux standard. No resolved image of the surface is cast; the display axis is celestial north, a convention."
       }
     ]
   },

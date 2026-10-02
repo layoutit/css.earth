@@ -22,10 +22,10 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
-      "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 1065: HR 8585; VizieR III/202, cross-checked against Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 547 (BS 8585), the widest of its 2 scans (5 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #b4cbff. Routes tried in order: stis-ngsl: HD 213558 is not in the library; pulkovo: HR 8585 is not in the catalogue; kiehling: HR 8585 is not among its 60 stars; gaia-xp: found, not needed after the colour and its cross-check; kharitonov: used.",
+      "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 1065: HR 8585; VizieR III/202, cross-checked against Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 547 (BS 8585), the widest of its 2 scans (5 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #b4cbff. Routes tried in order: stis-ngsl: HD 213558 is not in the library; pulkovo: HR 8585 is not in the catalogue; kiehling: HR 8585 is not among its 60 stars; gaia-xp: found, not needed after the color and its cross-check; kharitonov: used.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
         "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz"

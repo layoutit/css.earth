@@ -53,11 +53,11 @@
       ]
     },
     {
-      "id": "coma-colour-as-nucleus-colour",
-      "subject": "Measured colour as a whole-body Color dataset",
+      "id": "coma-color-as-nucleus-color",
+      "subject": "Measured color as a whole-body Color dataset",
       "status": "excluded",
-      "finding": "Published colours (spectral slopes of about 18 to 23% per 100 nm across the visible) were measured on the dust coma. The Hubble nucleus photometry used one filter, so no nucleus colour exists to paint on the body.",
-      "revisitWhen": "A nucleus colour is published; the disc-integrated colour route can then add a Color dataset.",
+      "finding": "Published colors (spectral slopes of about 18 to 23% per 100 nm across the visible) were measured on the dust coma. The Hubble nucleus photometry used one filter, so no nucleus color exists to paint on the body.",
+      "revisitWhen": "A nucleus color is published; the disc-integrated color route can then add a Color dataset.",
       "evidence": [
         "https://www.aanda.org/articles/aa/full_html/2025/10/aa56717-25/aa56717-25.html",
         "https://arxiv.org/abs/2507.11720",

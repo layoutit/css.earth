@@ -11,7 +11,7 @@
   "effectiveTemperatureSource": "Effective temperature 8090 +/- 59 K from Zwintz et al. 2019 (A&A 627, A28; https://arxiv.org/abs/1905.12545), Table 4, their seismic model fit; the average of earlier spectroscopic determinations they list is 8143 +/- 67 K",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json). A star's limb is not a sharp surface."
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json). A star's limb is not a sharp surface."
   },
   "surfaceGravityLogg": 4.3,
   "surfaceGravitySource": "log g from the dynamical mass 1.75 +/- 0.03 solar masses of Lacour et al. (2021, A&A 654, L2, Table 2) and the package radius, log10(GM/R^2) in cgs: 4.30 (Gaia DR3 GSP-Phot gives 4.21)."

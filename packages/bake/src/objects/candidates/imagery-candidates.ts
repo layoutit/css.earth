@@ -9,7 +9,7 @@
  * One public service, read only: the PDS Rings Node's OPUS, which computes surface geometry for the bodies imaged by Voyager,
  * Galileo, Cassini, New Horizons and the other missions it indexes. For every catalogued body OPUS covers, its finest body-centre
  * resolution among images is set against the finest imagery the body already ships: a photograph dataset's finest cast frame, or a
- * natural-colour or monochrome map dataset's native scale (their prepared reports).
+ * natural-color or monochrome map dataset's native scale (their prepared reports).
  * The verdict is advisory: finer frames still need a camera, registration and reuse terms before they can ship. */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -60,7 +60,7 @@ export function parseOpusFrames(page: unknown): { available: number; frames: Opu
 export interface ShippedImagery { readonly dataset: string; readonly kind: 'photograph' | 'map'; readonly source: string; readonly meters: number | null }
 
 /** The finest imagery each dataset ships, finest first, from the body's prepared surfaces report: a photograph dataset's finest cast frame, or a
- * map dataset's native scale (its georeference, else its source width at the equator; null when the report states neither). False-colour,
+ * map dataset's native scale (its georeference, else its source width at the equator; null when the report states neither). False-color,
  * scientific and shape datasets are not imagery. */
 export function shippedImagery(surfaces: unknown, radiusKm: number): ShippedImagery[] {
   const result: ShippedImagery[] = [];

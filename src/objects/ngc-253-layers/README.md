@@ -1,7 +1,7 @@
 # Sculptor Galaxy (NGC 253)
 
-A ground-based photograph of NGC 253, cleaned of the Milky Way stars in front of it and colour-tied to its measured
-integrated colour, is spread through a modelled disc and a round bulge. Published catalogues of its planetary nebulae,
+A ground-based photograph of NGC 253, cleaned of the Milky Way stars in front of it and color-tied to its measured
+integrated color, is spread through a modelled disc and a round bulge. Published catalogues of its planetary nebulae,
 globular clusters and young star groups are drawn as dots on the same disc. NGC 253 is seen nearly edge-on, so its
 face-on views are modelled more than seen; image brightness does not measure per-pixel distance.
 
@@ -29,7 +29,7 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
   opposite sides of the galaxy fit at 0.09°, with the centre moved 5 px. Their images then fall within a pixel.
 - **Foreground stars:** 501 of the 574 Gaia foreground stars in the image are removed where they show; 5 on extended
   light are left.
-- **Colour:** tied to RC3's B-V of 0.85: red/green 1.203 and blue/green 0.952 against 1.251 and 0.815, so red × 1.040 and
+- **Color:** tied to RC3's B-V of 0.85: red/green 1.203 and blue/green 0.952 against 1.251 and 0.815, so red × 1.040 and
   blue × 0.857 in linear light.
 - **Bulge:** at 76° the photograph's centre is thicker on the sky than S4G's bulge, and a share of it spread through the
   bulge made a box and a band seen from above. So the bulge takes the fit's own light, scaled to the photograph
@@ -47,12 +47,12 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 | Young star groups (Rodríguez et al. 2018) | 875 | none |
 
 Dots keep their place in the disc and rise along its axis to heights drawn from the 426 pc layer; old objects near the
-centre are bulge members. Colours are the Milky Way's and M31's for each kind; each dot takes its tone from the photograph's brightness under it (never below 15%) and moves halfway from its kind's colour to the photograph's colour there, so dots sit in the galaxy's light instead of on it; flat tints read as dark specks on the bright bulge. Most globular clusters lie in the halo, far off the disc: placed on it they land beyond the photograph.
+centre are bulge members. Colors are the Milky Way's and M31's for each kind; each dot takes its tone from the photograph's brightness under it (never below 15%) and moves halfway from its kind's color to the photograph's color there, so dots sit in the galaxy's light instead of on it; flat tints read as dark specks on the bright bulge. Most globular clusters lie in the halo, far off the disc: placed on it they land beyond the photograph.
 
 ## Evidence
 
-- Dots from the photograph: the default view (left) and tilted (right), in the app with each dot's tone and colour taken from the photograph. Captured on this branch on 2026-09-29.
-- The prepared bank's `approximation.limitations` records the foreground, colour-tie and saturation counts quoted above.
+- Dots from the photograph: the default view (left) and tilted (right), in the app with each dot's tone and color taken from the photograph. Captured on this branch on 2026-09-29.
+- The prepared bank's `approximation.limitations` records the foreground, color-tie and saturation counts quoted above.
 - Bytes: 166 layer images, 1.63 MB.
 - Tests: `packages/bake/src/image-layers/bulge.test.mts` pins the bulge model and its fade (`extentKpc.fadeFrom`), on M81's fit.
 

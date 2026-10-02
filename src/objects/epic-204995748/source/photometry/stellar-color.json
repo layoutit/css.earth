@@ -9,7 +9,7 @@
       "upperKelvin": 4786,
       "citation": "Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 204995748: GALAH DR3 effective temperature 4638.868 +/- 147 K (the catalogue's final uncertainty): 4639 +/- 147 K, https://doi.org/10.1051/0004-6361/202346196"
     },
-    "note": "PARAM fits an extinction A_V = 1.13 mag toward this star (Khan et al. (2023), A&A 677, A21, k2_gal, AV-M), and the colour routes do not remove extinction; GALAH measured its temperature, so the colour is a Planck spectrum at its published temperature."
+    "note": "PARAM fits an extinction A_V = 1.13 mag toward this star (Khan et al. (2023), A&A 677, A21, k2_gal, AV-M), and the color routes do not remove extinction; GALAH measured its temperature, so the color is a Planck spectrum at its published temperature."
   },
   "whitePoint": "sRGB D65",
   "normalization": "brightest linear sRGB channel = 1"

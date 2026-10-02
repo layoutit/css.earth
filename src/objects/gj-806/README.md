@@ -6,7 +6,7 @@ Its radius and temperature follow Palle et al. 2023. It is also HIP 102401. The 
 
 **Star.** Placement: Gaia DR3 source 2070115588901082368, parallax 82.890 ± 0.017 mas (12.06 pc). Radius 0.4144 +/- 0.0038 solar radii from Palle et al. 2023, the stellar radius of the default parameter set of GJ 806 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract). Mass 0.413 +/- 0.011 solar masses from Palle et al. 2023, the stellar mass of the default parameter set of GJ 806 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract). Temperature 3,600 K from Palle et al. 2023, the stellar temperature of the default parameter set of GJ 806 b in the NASA Exoplanet Archive. log g 4.82 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2070115588901082368, through the CIE 1931 2° observer: #ffc286. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2070115588901082368, through the CIE 1931 2° observer: #ffc286. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,600 K and log g 4.82 (u1 0.387, u2 0.374): a model, because no fit of this star's limb is used.
 

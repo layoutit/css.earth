@@ -8,7 +8,7 @@ It is the only planet known around WASP-104. Its orbit and size follow Smith et 
 
 **Orbit.** Chen et al. 2021 (2021MNRAS.500.5420C), via the NASA Exoplanet Archive ps table (pl_refname CHEN_ET_AL_2021): P 1.75540563 d Smith et al. 2014 (2014A&A...570A..64S), via the NASA Exoplanet Archive ps table (pl_refname SMITH_ET_AL__2014): a/R* 6.52; Smith et al. 2014 (2014A&A...570A..64S), via the NASA Exoplanet Archive ps table (pl_refname SMITH_ET_AL__2014): inclination 83.63 degrees Smith et al. 2014 (2014A&A...570A..64S), via the NASA Exoplanet Archive ps table (pl_refname SMITH_ET_AL__2014): e 0 Chen et al. 2021 (2021MNRAS.500.5420C), via the NASA Exoplanet Archive ps table (pl_refname CHEN_ET_AL_2021): transit mid-time 2457935.070228 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by wasp-104's measured colour (#ffede0, the colour dataset of wasp-104 (src/objects/wasp-104/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by wasp-104's measured color (#ffede0, the color dataset of wasp-104 (src/objects/wasp-104/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of WASP-104's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (45, 46), folded onto its orbit. Upper limits and rows without an error are left out.
 

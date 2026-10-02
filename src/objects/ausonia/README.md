@@ -67,4 +67,4 @@ Absolute phase is arbitrary; accelerated display spin is illustrative.
 
 An alternative archive solution, [Model 140](https://damit.cuni.cz/projects/damit/asteroid_models/view/140), has pole 120, -15.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Ausonia from 15° to 16° north, so surface the survey did not see keeps the missing-imagery grid.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or color. The frames see Ausonia from 15° to 16° north, so surface the survey did not see keeps the missing-imagery grid.

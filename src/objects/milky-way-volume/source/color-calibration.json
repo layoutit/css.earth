@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-colour-calibration@1",
+  "schema": "cssearth-volume-color-calibration@1",
   "reference": {
     "title": "Original NASA Deep Star Maps 2020 Milky Way-only preview",
     "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_4k_print.jpg",
@@ -18,7 +18,7 @@
     0.709752511
   ],
   "retainedSaturation": 1,
-  "colourChoice": "Fit one diagonal white balance to the matched original NASA palette. Preserve relative colour variation rather than minimize error with grayscale. This is an artistic display-RGB grade, not radiometric calibration.",
+  "colorChoice": "Fit one diagonal white balance to the matched original NASA palette. Preserve relative color variation rather than minimize error with grayscale. This is an artistic display-RGB grade, not radiometric calibration.",
   "method": {
     "observerIcrfM": [
       0,
@@ -32,7 +32,7 @@
     ],
     "rays": "512x256 equirectangular ICRF directions, RA increases left; each ray treated as camera centre",
     "volumeCompositor": "actual 544 prepared WebPs; premultiplied bilinear sample; far-to-near slab composition; per-axis central-ray optical gain1/abs(direction); three coincident copies with clamped fractional alpha; normalized runtime smoothstep axis weights over0.16band",
-    "referenceSampling": "original1024x512NASApreview resized512x256 with Sharp default Lanczos3; no colour/exposure modifications",
+    "referenceSampling": "original1024x512NASApreview resized512x256 with Sharp default Lanczos3; no color/exposure modifications",
     "patches": "paired8x8pixelpatchmeans, both display luminance>.10, abs Galactic latitude<15degrees; longitude blocks x%4<2 train, other blocks held-out",
     "patchCount": 508,
     "trainingPatchCount": 250,
@@ -91,7 +91,7 @@
     "The matrix is global and does not reproduce NASA-specific warm-core or dust-lane morphology.",
     "Diagnostic uses each ray as a narrow-camera centre; broad-FOV axis weighting, GPU mip filtering and 8-bit compositor quantization are not reconstructed.",
     "Diagonal white balance can warm originally neutral portions; it preserves source hue variation better than the rejected grayscale optimum.",
-    "Near-scene brightness must be evaluated separately; these colour metrics deliberately remove intensity.",
+    "Near-scene brightness must be evaluated separately; these color metrics deliberately remove intensity.",
     "Production bake applies matrix before lossy WebP encoding, so small codec differences are expected."
   ],
   "inputs": {

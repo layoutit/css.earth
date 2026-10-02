@@ -53,8 +53,8 @@
     "controls": [
       {
         "id": "color",
-        "label": "Colour",
-        "qualification": "Gaia DR3 spectrum colour with modeled I+z limb darkening from Gillon et al. (2016). The disc and its radial profile are unresolved; no rotation axis is measured.",
+        "label": "Color",
+        "qualification": "Gaia DR3 spectrum color with modeled I+z limb darkening from Gillon et al. (2016). The disc and its radial profile are unresolved; no rotation axis is measured.",
         "thumbnail": "trappist-1-dataset-color.webp",
         "surface": "trappist-1-surface-color@2x.webp",
         "poles": "trappist-1-poles-color@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "No image of this photosphere exists: at 12.47 parsecs its disc is about 0.09 milliarcseconds across. The colour is its measured spectrum through the CIE 1931 observer; below about 450 nm the star is too faint for Gaia to measure and those samples are read as no emission. Its I+z (about 750 to 1100 nm) limb plate uses Gillon et al. (2016) u1 = 0.65 and u2 = 0.28, inferred from atmosphere tables and used as transit priors; it is a model, not a resolved measurement."
+        "notes": "No image of this photosphere exists: at 12.47 parsecs its disc is about 0.09 milliarcseconds across. The color is its measured spectrum through the CIE 1931 observer; below about 450 nm the star is too faint for Gaia to measure and those samples are read as no emission. Its I+z (about 750 to 1100 nm) limb plate uses Gillon et al. (2016) u1 = 0.65 and u2 = 0.28, inferred from atmosphere tables and used as transit priors; it is a model, not a resolved measurement."
       }
     ]
   },

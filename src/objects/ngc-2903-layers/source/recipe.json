@@ -13,7 +13,7 @@
     ],
     "publisherUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
     "downloadUrl": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.3333333&projection=TAN&coordsys=icrs&ra=143.04&dec=21.500556&format=jpg",
-    "credit": "Sloan Digital Sky Survey; colour HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+    "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
     "license": "CC-BY",
     "foregroundStars": {
       "path": "gaia-dr3-foreground.csv",
@@ -129,10 +129,10 @@
     "edgeTaperFraction": 0.08,
     "diffuseFraction": 0.65,
     "diffuseSigmaPixels": 2,
-    "colourTie": {
+    "colorTie": {
       "bv": 0.67,
       "source": "rc3-1991",
-      "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives a total (B-V)T of 0.67 as observed; red and blue are scaled in linear light so the disc's mean colour matches the engine's catalogue colour for that index, the function that colours the star dots."
+      "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives a total (B-V)T of 0.67 as observed; red and blue are scaled in linear light so the disc's mean color matches the engine's catalogue color for that index, the function that colors the star dots."
     },
     "flat": true
   },

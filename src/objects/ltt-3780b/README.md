@@ -8,7 +8,7 @@ It is one of 2 planets known around LTT 3780. Its orbit and size follow Bonfanti
 
 **Orbit.** Bonfanti et al. 2024 (2024A&A...682A..66B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2024): P 0.76837931 d Bonfanti et al. 2024 (2024A&A...682A..66B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2024): a/R* 6.79; Bonfanti et al. 2024 (2024A&A...682A..66B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2024): inclination 86.1 degrees Bonfanti et al. 2024 (2024A&A...682A..66B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2024): e 0 Bonfanti et al. 2024 (2024A&A...682A..66B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2024): transit mid-time 2459606.58098 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by ltt-3780's measured colour (#ffce8c, the colour dataset of ltt-3780 (src/objects/ltt-3780/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by ltt-3780's measured color (#ffce8c, the color dataset of ltt-3780 (src/objects/ltt-3780/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of LTT 3780's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (62, 89, 100), folded onto its orbit. Upper limits and rows without an error are left out.
 

@@ -232,7 +232,7 @@ export function createPerspectiveDolly({
   // created across paints. Each frame admits whole groups up to a leaf budget:
   // a fixed frame count gave Uranus 384 leaves per frame, whose style, layerize
   // and paint took 15 ms and dropped the frame. The proxy beneath carries the
-  // body's colour.
+  // body's color.
   const revealView = cameraElement.ownerDocument.defaultView;
   const revealed = new Uint8Array(revealGroups.length).fill(1);
   let revealCount = revealGroups.length;

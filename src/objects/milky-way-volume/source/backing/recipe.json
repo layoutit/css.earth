@@ -28,7 +28,7 @@
     "black": 20,
     "gamma": 1.0,
     "white": 150,
-    "note": "Presentation only: the same levels on every channel, keeping the artwork's colours: input black point 20, gamma 1, output white 150 of 255, so the backing stays under the dots and its haze ends before the image's square edge."
+    "note": "Presentation only: the same levels on every channel, keeping the artwork's colors: input black point 20, gamma 1, output white 150 of 255, so the backing stays under the dots and its haze ends before the image's square edge."
   },
   "outputPx": 2048,
   "nearFade": {

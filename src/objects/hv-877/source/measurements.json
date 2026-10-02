@@ -13,6 +13,6 @@
   "surfaceGravitySource": "log g 1.52 from 2022AJ....163..152S (APOGEE Net, a survey pipeline: no analysis of this star's own spectra is published); the 2 published values span log g 0.805 to 1.52, across which the limb law changes by at most 0.8% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2022AJ....163..152S)",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
   }
 }

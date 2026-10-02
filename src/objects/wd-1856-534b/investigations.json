@@ -39,18 +39,18 @@
       "id": "jwst-holdings",
       "subject": "Other JWST and Keck data",
       "status": "deferred",
-      "finding": "MAST, queried 2026-09-23 by cone search: public NIRSpec slit data from programmes 2358 (the transmission spectrum of MacDonald et al. 2026) and 2507; MIRI slitless data from 9033; MIRI IFU data from 9157, part still exclusive; NIRSpec data from 9033 and 9157 still exclusive. KOA lists 1646 Keck NIRSPEC and 4 ESI frames. None of them images the planet or gives its visible colour.",
+      "finding": "MAST, queried 2026-09-23 by cone search: public NIRSpec slit data from programmes 2358 (the transmission spectrum of MacDonald et al. 2026) and 2507; MIRI slitless data from 9033; MIRI IFU data from 9157, part still exclusive; NIRSpec data from 9033 and 9157 still exclusive. KOA lists 1646 Keck NIRSPEC and 4 ESI frames. None of them images the planet or gives its visible color.",
       "evidence": [
         "https://mast.stsci.edu/api/v0/invoke",
         "https://koa.ipac.caltech.edu/TAP"
       ],
-      "revisitWhen": "A published phase curve or emission spectrum from programme 9033 or 9157 gives a day-night or colour measurement."
+      "revisitWhen": "A published phase curve or emission spectrum from programme 9033 or 9157 gives a day-night or color measurement."
     },
     {
-      "id": "visible-colour",
-      "subject": "Visible colour",
+      "id": "visible-color",
+      "subject": "Visible color",
       "status": "excluded",
-      "finding": "No visible colour or reflected-light measurement of the planet exists. The sphere is the shared neutral gray, lit by its white dwarf.",
+      "finding": "No visible color or reflected-light measurement of the planet exists. The sphere is the shared neutral gray, lit by its white dwarf.",
       "evidence": [
         "https://arxiv.org/abs/2504.16982",
         "https://doi.org/10.1038/s41586-026-10514-7"

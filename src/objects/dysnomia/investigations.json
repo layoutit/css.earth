@@ -72,11 +72,11 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Whole-disc colour",
+      "id": "color",
+      "subject": "Whole-disc color",
       "status": "unresolved",
-      "finding": "No absolute colour indices for Dysnomia were found. What is published is flux relative to Eris: about 0.2 to 0.4 percent at visible wavelengths against 1.9 +/- 0.5 percent in K', so Dysnomia is substantially redder than Eris. A flux ratio to a body whose own colour is the reference does not give a display colour, so the shared neutral material is used and no colour is claimed.",
-      "revisitWhen": "Resolved spectrophotometry of Dysnomia, such as a JWST NIRSpec extraction, supplies absolute colour.",
+      "finding": "No absolute color indices for Dysnomia were found. What is published is flux relative to Eris: about 0.2 to 0.4 percent at visible wavelengths against 1.9 +/- 0.5 percent in K', so Dysnomia is substantially redder than Eris. A flux ratio to a body whose own color is the reference does not give a display color, so the shared neutral material is used and no color is claimed.",
+      "revisitWhen": "Resolved spectrophotometry of Dysnomia, such as a JWST NIRSpec extraction, supplies absolute color.",
       "evidence": [
         "https://doi.org/10.3847/PSJ/acdd5f"
       ]
@@ -96,7 +96,7 @@
       "id": "jwst-followup",
       "subject": "JWST programmes on the Eris system",
       "status": "deferred",
-      "finding": "JWST GO 6064 observed Eris with NIRCam on 2024-08-23 and its exclusive-access period has passed; GTO 1191 holds NIRSpec from 2022-08-30 and MIRI from 2023-07-15. NIRSpec would give Dysnomia's resolved near-infrared spectrum, which is what its colour entry needs, and MIRI adds a thermal point that would tighten the radiometric diameter.",
+      "finding": "JWST GO 6064 observed Eris with NIRCam on 2024-08-23 and its exclusive-access period has passed; GTO 1191 holds NIRSpec from 2022-08-30 and MIRI from 2023-07-15. NIRSpec would give Dysnomia's resolved near-infrared spectrum, which is what its color entry needs, and MIRI adds a thermal point that would tighten the radiometric diameter.",
       "revisitWhen": "Dysnomia-resolved spectra or fluxes are extracted from these programmes, or a published analysis of them appears.",
       "evidence": [
         "https://www.stsci.edu/jwst-program-info/program/?program=6064",

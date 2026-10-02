@@ -64,6 +64,6 @@ The maximum sampled source-to-display distance is **438.92 m**. This is a sample
 
 - The geometry is a convex lightcurve model. Hanuš 2013 Table 3 confirms 115±12 km for the selected pole and 116±12 km for the mirror, from one adaptive-optics image, which constrains scale and silhouette but not a surface photograph. The DAMIT comment slightly prefers pole (74, +27), selected here. The alternative is [Model 186](https://damit.cuni.cz/projects/damit/asteroid_models/view/186), pole (237, 29).
 - Absolute phase is arbitrary, and the accelerated display spin is illustrative.
-- The SPHERE photograph shows photographed illumination, not albedo or colour. The frames see Athamantis from 5° north, so unseen surface keeps the missing-imagery grid.
+- The SPHERE photograph shows photographed illumination, not albedo or color. The frames see Athamantis from 5° north, so unseen surface keeps the missing-imagery grid.
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)

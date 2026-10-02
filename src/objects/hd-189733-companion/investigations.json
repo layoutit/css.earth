@@ -32,7 +32,7 @@
     },
     {
       "id": "gaia-dr3-xp-spectrum",
-      "subject": "Photosphere colour from the Gaia DR3 XP sampled spectrum",
+      "subject": "Photosphere color from the Gaia DR3 XP sampled spectrum",
       "status": "included",
       "finding": "has_xp_sampled is true. The sampled spectrum through the CIE 1931 2-degree observer gives sRGB 255, 201, 123; below about 400 nm the samples are within their errors of zero, and one standard error at every sample (stopping at zero) moves the blue channel from 121 to 126.",
       "evidence": [
@@ -53,7 +53,7 @@
       "id": "on-the-map",
       "subject": "Whether a star without imagery or planets stays on the map",
       "status": "included",
-      "finding": "User rule of 2026-09-17: a star whose colour comes from its own measurements stays on the map. Preparation marks B's discovery sourceColor and discoveryVisibility keeps it visible.",
+      "finding": "User rule of 2026-09-17: a star whose color comes from its own measurements stays on the map. Preparation marks B's discovery sourceColor and discoveryVisibility keeps it visible.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/packages/objects/src/registry/object-discovery.ts",
         "https://github.com/layoutit/css.earth/blob/main/site/build/prepare/prepare-object-discovery.mts"
@@ -63,7 +63,7 @@
       "id": "navigation-marker",
       "subject": "Distant marker for HD 189733 B",
       "status": "included",
-      "finding": "A uniform disc in the spectrum colour, rendered by packages/telescope-cli/authoring/hd-189733/author.mts; --check recomputes it.",
+      "finding": "A uniform disc in the spectrum color, rendered by packages/telescope-cli/authoring/hd-189733/author.mts; --check recomputes it.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/hd-189733-companion/source/presentation/context.png"
       ]

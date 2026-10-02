@@ -6,7 +6,7 @@ import sharp from 'sharp';
 import {viewSunDirectionToPreparedLightDirection} from '@cssearth/renderer/solar-system/directional-sun-coordinate.ts';
 import {requireFiniteNumber, requireRecord} from '@cssearth/core';
 import {readAtmosphereModel as parseAtmosphereModelRecord} from '@cssearth/objects';
-import {limbFactors, limbOverlay, loadLimbLaw, parseLimbBlock, scatteringAngles, silhouetteColourWeight, type Channels, type LimbBlock} from '../../../../photometry/index.ts';
+import {limbFactors, limbOverlay, loadLimbLaw, parseLimbBlock, scatteringAngles, silhouetteColorWeight, type Channels, type LimbBlock} from '../../../../photometry/index.ts';
 import {compositePreparedAtmosphere, prepareAtmosphereFrame, type PreparedAtmosphereProfile} from '../../../../raster/index.ts';
 import {readJsonSource} from '../../../sources/index.ts';
 import { applyDisplayGamma } from '../display-tone.ts';
@@ -40,7 +40,7 @@ async function readAtmosphereModel() {
     throw new Error(`Earth atmosphere: source id ${config.atmosphere.sourceId} is not declared in source/manifest.json.`);
   const [law, reference, text, response] = await Promise.all([
     loadLimbLaw(sourceDirectory, limb.models),
-    displayedMeanColour(resolve(sourceDirectory, limb.reference!), config.limb.referenceDisplayGamma),
+    displayedMeanColor(resolve(sourceDirectory, limb.reference!), config.limb.referenceDisplayGamma),
     readFile(resolve(sourceDirectory, config.atmosphere.sourcePath), 'utf8'),
     readJsonSource(resolve(sourceDirectory, config.atmosphere.responsePath)).then(parseAtmosphereResponse),
   ]);
@@ -68,8 +68,8 @@ function channels(values: readonly number[]): [number, number, number] {
   return [values[0], values[1], values[2]];
 }
 
-/** Mean colour of the default map as displayed: the lane's display gamma applied, archive black left out. */
-async function displayedMeanColour(path: string, gamma: number): Promise<Channels<number>> {
+/** Mean color of the default map as displayed: the lane's display gamma applied, archive black left out. */
+async function displayedMeanColor(path: string, gamma: number): Promise<Channels<number>> {
   const { data, info } = await sharp(await readFile(path)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   applyDisplayGamma(data, gamma);
   const sum = [0, 0, 0]; let count = 0;
@@ -77,7 +77,7 @@ async function displayedMeanColour(path: string, gamma: number): Promise<Channel
     if (!data[offset] && !data[offset + 1] && !data[offset + 2]) continue;
     sum[0] += data[offset]; sum[1] += data[offset + 1]; sum[2] += data[offset + 2]; count++;
   }
-  if (!count) throw new Error(`${path} has no observed pixel to take a reference colour from.`);
+  if (!count) throw new Error(`${path} has no observed pixel to take a reference color from.`);
   return [0, 1, 2].map(channel => Math.round(sum[channel] / count * 1000) / 1000) as unknown as Channels<number>;
 }
 
@@ -94,7 +94,7 @@ function atmosphereProfile(model: Awaited<ReturnType<typeof readAtmosphereModel>
 /**
  * One atmosphere frame: the disc lit by the measured law, with the model atmosphere composited over and around it (the
  * frame main drew). The plane spans the atmosphere's top; at a flattening of 0.3% the disc is drawn as a sphere, and its
- * colour fades out where the mesh may not reach.
+ * color fades out where the mesh may not reach.
  */
 function prepareAtmosphereMaterialFrame({ size, frame = ATMOSPHERE_DEFAULT_FRAME, model }: {size: number; frame?: number; model: Awaited<ReturnType<typeof readAtmosphereModel>>}) {
   const z = -1 + 2 * frame / (ATMOSPHERE_ILLUMINATION.frameCount - 1);
@@ -107,9 +107,9 @@ function prepareAtmosphereMaterialFrame({ size, frame = ATMOSPHERE_DEFAULT_FRAME
       const dx = (x + (sx + 0.5) / samples - centre) / radius, dy = (y + (sy + 0.5) / samples - centre) / radius, r = Math.hypot(dx, dy);
       if (r > 1) continue;
       const { incidence, emission, phase } = scatteringAngles([dx, dy, Math.sqrt(Math.max(0, 1 - r * r))], light, view, floor);
-      const [red, green, blue, alpha] = limbOverlay(limbFactors(model.law, incidence, emission, phase), model.reference), keep = silhouetteColourWeight(r, polarToEquatorial);
-      const colour = [red * keep, green * keep, blue * keep];
-      for (let channel = 0; channel < 3; channel++) sum[channel] += colour[channel] * alpha;
+      const [red, green, blue, alpha] = limbOverlay(limbFactors(model.law, incidence, emission, phase), model.reference), keep = silhouetteColorWeight(r, polarToEquatorial);
+      const color = [red * keep, green * keep, blue * keep];
+      for (let channel = 0; channel < 3; channel++) sum[channel] += color[channel] * alpha;
       sum[3] += alpha;
     }
     if (sum[3] <= 0) continue;

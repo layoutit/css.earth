@@ -13,7 +13,7 @@ export function prepareAtmosphericMaterial(profile:GeometryProfile,raster:Raster
   backgroundSize:`${material.columns*material.logicalSize}px ${material.rows*material.logicalSize}px`,backgroundPositions:Array.from({length:material.frameCount},(_,frame)=>`${-(frame%material.columns)*material.logicalSize}px ${-Math.floor(frame/material.columns)*material.logicalSize}px`),
   presentationScale:material.coverageScale,materialScale:material.contentScale,outerRadiusScale:prepared.halo?.outerRadiusScale??1,
   silhouetteCoverage:{model:'prepared-analytic-sphere-proportional-overscan',coverageScale:material.coverageScale,materialScale:material.contentScale,rimFill:'prepared-radial-binary-clamp-to-material-limb',runtime:false},
-  observationMaterial:{model:prepared.halo?'published-disc-law-and-psg-limb-halo-for-false-colour-datasets':'published-disc-law-for-false-colour-datasets',runtimeOpacity:false,runtimeRasterization:false},
+  observationMaterial:{model:prepared.halo?'published-disc-law-and-psg-limb-halo-for-false-color-datasets':'published-disc-law-for-false-color-datasets',runtimeOpacity:false,runtimeRasterization:false},
   limb:prepared.limb,halo:prepared.halo,
   lightingModel:{directionalLight:{direction:sunDirection,color:profile.projection.lightColor,intensity:Math.PI},surfaceResponse:{model:'published-photometric-models-with-dedicated-flood-frame',colorOverlay:true,textureExposureShoulder:raster.surfaces[0].exposure},presentationPhaseRemap:null,interpolation:'nearest-prepared-phase-with-runtime-css-roll'},runtimeLightingMath:false,runtimeRasterization:false};
 }

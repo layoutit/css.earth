@@ -81,7 +81,7 @@
       {
         "id": "color",
         "label": "NIRCam",
-        "qualification": "Infrared false colour of the whole disc from published JWST photometry; not a natural colour and not a map.",
+        "qualification": "Infrared false color of the whole disc from published JWST photometry; not a natural color and not a map.",
         "thumbnail": "hr-8799-d-dataset-color.webp",
         "surface": "hr-8799-d-surface-color@2x.webp",
         "poles": "hr-8799-d-poles-color@2x.webp",
@@ -91,7 +91,7 @@
           "url": "https://arxiv.org/abs/2503.13608"
         },
         "falseColor": true,
-        "notes": "Red, green and blue are the planet's brightness at 4.6, 4.3 and 4.1 micrometres measured by JWST (Balmer et al. 2025), on one scale shared with its three siblings. The planet is a point in every image, so this is one colour for the whole disc, not a map. It glows with its own heat."
+        "notes": "Red, green and blue are the planet's brightness at 4.6, 4.3 and 4.1 micrometres measured by JWST (Balmer et al. 2025), on one scale shared with its three siblings. The planet is a point in every image, so this is one color for the whole disc, not a map. It glows with its own heat."
       }
     ]
   },

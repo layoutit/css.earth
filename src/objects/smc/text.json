@@ -29,7 +29,7 @@
     "smc-horalek-wide": {
       "title": "Petr Horálek’s wide-field SMC",
       "detail": "6069 × 4045 px",
-      "summary": "Optical photograph colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "summary": "Optical photograph colors on an image-fitted emission model; gas and dust depth are not measured.",
       "sources": [
         {
           "catalogueId": "noirlab-iotw2615a",
@@ -43,7 +43,7 @@
     "smc-vista": {
       "title": "SMC in VISTA near infrared",
       "detail": "4000 × 3540 px",
-      "summary": "Near-infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
+      "summary": "Near-infrared false color on an image-fitted emission model; gas and dust depth are not measured.",
       "sources": [
         {
           "catalogueId": "eso-eso1714a",
@@ -57,7 +57,7 @@
     "smc-smash": {
       "title": "SMC in the SMASH DECam survey",
       "detail": "3827 × 3190 px",
-      "summary": "DECam survey colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "summary": "DECam survey colors on an image-fitted emission model; gas and dust depth are not measured.",
       "sources": [
         {
           "catalogueId": "noirlab-noirlab2030b",
@@ -71,7 +71,7 @@
     "smc-dss2": {
       "title": "SMC on Digitized Sky Survey 2 plates",
       "detail": "13096 × 13616 px",
-      "summary": "Photographic plate colours on an image-fitted emission model; gas and dust depth are not measured.",
+      "summary": "Photographic plate colors on an image-fitted emission model; gas and dust depth are not measured.",
       "sources": [
         {
           "catalogueId": "esahubble-heic0514c",
@@ -85,14 +85,14 @@
     "smc-allwise-wide": {
       "title": "SMC in AllWISE infrared",
       "detail": "4000 × 4000 px",
-      "summary": "AllWISE infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
+      "summary": "AllWISE infrared false color on an image-fitted emission model; gas and dust depth are not measured.",
       "sources": [
         {
           "catalogueId": "cds-allwise-color",
           "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
-          "label": "Small Magellanic Cloud · AllWISE colour HiPS, 10° TAN field; IPAC/NASA; colour HiPS CDS (CNRS/Unistra)",
+          "label": "Small Magellanic Cloud · AllWISE color HiPS, 10° TAN field; IPAC/NASA; color HiPS CDS (CNRS/Unistra)",
           "checked": "2026-10-01",
-          "locator": "Small Magellanic Cloud · AllWISE colour HiPS, 10° TAN field"
+          "locator": "Small Magellanic Cloud · AllWISE color HiPS, 10° TAN field"
         }
       ]
     }

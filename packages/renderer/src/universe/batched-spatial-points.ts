@@ -8,12 +8,12 @@ import { createSettlePacer } from '../rendering/settle-pacer.js';
 export interface BatchedSpatialPoint { readonly positionUnits: VolumeVector }
 export interface BatchedSpatialPointStyle { readonly colorCss: string; readonly opacity: number; readonly radiusPx: number }
 
-/** The paint of a style, `#rrggbbaa@radius`: the colour with its opacity as the alpha byte, at its dot radius. One path
- * strokes each paint (point-paths.ts), so dots of one colour at two sizes take two paths. */
+/** The paint of a style, `#rrggbbaa@radius`: the color with its opacity as the alpha byte, at its dot radius. One path
+ * strokes each paint (point-paths.ts), so dots of one color at two sizes take two paths. */
 export const pointPaint = (style: BatchedSpatialPointStyle) =>
   `${style.colorCss}${Math.max(0, Math.min(255, Math.round(style.opacity * 255))).toString(16).padStart(2, '0')}@${Math.max(.5, style.radiusPx)}`;
 
-/** Project a bounded 3D field into retained SVG circle paths, one per prepared paint colour (point-paths.ts).
+/** Project a bounded 3D field into retained SVG circle paths, one per prepared paint color (point-paths.ts).
  * Camera motion changes paint but never DOM shape.
  * `drawnCount`, given the camera's distance from the frame origin and its position in the frame, draws only the first
  * points of the list. */
@@ -70,7 +70,7 @@ export interface BatchedSpatialPointPart<T extends BatchedSpatialPoint> {
   /** A point's fixed style, read once when the field mounts. */
   stylePoint(point: T): BatchedSpatialPointStyle | null;
   drawnCount?(cameraDistanceUnits: number, cameraUnits: VolumeVector): number;
-  /** Every paint colour a style can give (`pointPaint`): one retained path each. */
+  /** Every paint color a style can give (`pointPaint`): one retained path each. */
   paintPalette: readonly string[];
   /** The share of visible points to draw: each point keeps its own fixed rank, so a smaller share drops the same points
    * every frame and nothing flickers. `stats().candidates` counts the visible points before it applies. */
@@ -91,7 +91,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
    * on it: the counts of the paint before may be a paced frame's. */
   onSettle?(): void;
   /** A disc that dims the dots behind it (OCCLUDED_FLOOR): a dot whose sight line from the camera crosses the disc
-   * before reaching the dot is painted by a fainter path of its own colour. */
+   * before reaching the dot is painted by a fainter path of its own color. */
   occluder?: BatchedSpatialPointOccluder;
 } & ({ parts: readonly BatchedSpatialPointPart<T>[] } | BatchedSpatialPointPart<T>)) {
   const { host, before, frame, className, now = () => performance.now(), onSettle, occluder } = options;
@@ -111,7 +111,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   // cellStart to cellStart of the next: the prefix a frame draws ends a run early, and a point keeps its own index for its
   // rank. One cell holds everything without cells.
   const parts = inputs.map(({ points, cells, stylePoint, drawnCount, paintPalette, keepFraction }) => {
-    // Behind an occluder a dot is painted by a fainter path of its colour, one for each level: more paths, no more dots.
+    // Behind an occluder a dot is painted by a fainter path of its color, one for each level: more paths, no more dots.
     const dimmed = (style: BatchedSpatialPointStyle, factor: number) => pointPaint({ ...style, opacity: style.opacity * factor });
     const drawnStyle = (point: T) => { const style = stylePoint(point); return style && style.opacity > 0 && style.radiusPx > 0 ? style : null; };
     const paint = mountPointPaths(root, occluder ? [...paintPalette, ...OCCLUDED_OPACITIES.flatMap(factor =>

@@ -33,10 +33,10 @@
       "revisitWhen": "A published bulge fit is found, for example in the Carnegie-Irvine survey's decompositions."
     },
     {
-      "id": "rc3-colour",
-      "subject": "RC3 integrated colour",
+      "id": "rc3-color",
+      "subject": "RC3 integrated color",
       "status": "excluded",
-      "finding": "VII/155 has NGC 6744 (PGC 62836) with BT 9.14 and no B-V. The colour tie uses the Carnegie-Irvine Galaxy Survey's total B and V magnitudes instead, whose difference is uncertain by about 0.24 magnitudes.",
+      "finding": "VII/155 has NGC 6744 (PGC 62836) with BT 9.14 and no B-V. The color tie uses the Carnegie-Irvine Galaxy Survey's total B and V magnitudes instead, whose difference is uncertain by about 0.24 magnitudes.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/155"
       ]

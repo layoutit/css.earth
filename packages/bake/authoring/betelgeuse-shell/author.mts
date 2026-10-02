@@ -89,7 +89,7 @@ export const ALMA_SIO = Object.freeze({
   quietBeyondUnits: 7,
 });
 /** ALMA line maps have no publisher's palette the way the two optical datasets do, so this one carries the perceptual
- * ramp such maps are conventionally printed in, sampled at the quarters of its bar, and is marked false colour. */
+ * ramp such maps are conventionally printed in, sampled at the quarters of its bar, and is marked false color. */
 export const SIO_MAP = Object.freeze({
   name: 'viridis',
   stops: Object.freeze([
@@ -143,7 +143,7 @@ export const EMISSION_2020 = Object.freeze({
 /** One unit is one stellar radius. Six radii each way holds the 2024 patches and the 2019 clump, in twenty-four half-radius slabs. */
 export const GRID = Object.freeze({ size: 96, halfUnits: 6, slabs: 24 });
 /** Polarisation stretch: the median degree beyond eight radii is instrumental floor, and the top is the top of the
- * published colourbar, so this volume carries the same transfer function as the figure it reproduces. */
+ * published colorbar, so this volume carries the same transfer function as the figure it reproduces. */
 export const STRETCH = Object.freeze({ backgroundAnnulusUnits: [8, 12] as const, topDegree: 0.10, intensityFloorOfPeak: 3e-3,
   innerMaskUnits: 1, taperFromUnits: 4.5 });
 /** The shape search. The map is a projection, so the depth comes from asking which simple three-dimensional shape,
@@ -153,11 +153,11 @@ export const STRETCH = Object.freeze({ backgroundAnnulusUnits: [8, 12] as const,
 export const SHELL_SEARCH = Object.freeze({ profileUnits: [1, 6] as const, bins: 44,
   radiusUnits: [1, 5] as const, widthUnits: [0.2, 3] as const, gridStep: 0.05, outflowExponents: [0.5, 12] as const });
 
-/** The figure's own colour map, sampled at the quarters of its bar: matplotlib `inferno`, which Montargès et al. 2026
+/** The figure's own color map, sampled at the quarters of its bar: matplotlib `inferno`, which Montargès et al. 2026
  * print the V-band degree of linear polarisation in (Fig. B.1). Four stops are all an RGBA8 grid can carry, and four is
  * enough: the slab compiler sums the channels' emission, so tent weights over these stops interpolate the bar linearly
  * and zero leaves black. The stops are the published map's, not chosen here. */
-export const COLOUR_MAP = Object.freeze({
+export const COLOR_MAP = Object.freeze({
   name: 'inferno',
   stops: Object.freeze([
     Object.freeze([0.258, 0.039, 0.406] as const), // inferno(0.25) #420a68
@@ -186,8 +186,8 @@ export function heatMapWeights(value: number): readonly [number, number, number,
 }
 
 /** Tent weights over the four stops. Their sum interpolates the bar, and below the first stop it fades to black. */
-export function colourMapWeights(value: number): readonly [number, number, number, number] {
-  const p = Math.max(0, Math.min(1, value)) * COLOUR_MAP.stops.length;
+export function colorMapWeights(value: number): readonly [number, number, number, number] {
+  const p = Math.max(0, Math.min(1, value)) * COLOR_MAP.stops.length;
   return [0, 1, 2, 3].map(k => Math.max(0, 1 - Math.abs(p - (k + 1)))) as unknown as readonly [number, number, number, number];
 }
 /** Montargès et al. 2021, Extended Data Table 3, December 2019: the optimised epoch. January and March 2020 are recorded
@@ -266,7 +266,7 @@ function encodeGrid(sample: (x: number, y: number, z: number) => number | readon
     const value = sample(-halfUnits + (i + 0.5) * step, -halfUnits + (j + 0.5) * step, -halfUnits + (k + 0.5) * step);
     // A scalar fills the first three channels. A pair puts extinction in the first channel and the light it scatters in
     // the second, which is how the slab compiler reads absorption and emission separately. Four are four emission
-    // channels, one per stop of a colour map.
+    // channels, one per stop of a color map.
     const channels = typeof value === 'number' ? [value, value, value, 0] : value;
     if (!channels.some(channel => channel > 0)) continue;
     peak = Math.max(peak, ...channels); filled++;
@@ -373,9 +373,9 @@ export async function author(defaultDataset = 'zimpol-v') {
     for (let k = 0; k < size; k++) { const z = -halfUnits + (k + 0.5) * step; sum += shellDensity(Math.hypot(r, z)) * step; }
     norm[j * size + i] = sum;
   }
-  // Each voxel carries the four colour-map weights of its sky value, placed along the line of sight on the fitted
+  // Each voxel carries the four color-map weights of its sky value, placed along the line of sight on the fitted
   // envelope rather than pushed back from the sky plane. The ray integral of channel k is still the weight itself, so a
-  // column reproduces the figure's colour at its own measured degree, and every channel shares one profile, which keeps
+  // column reproduces the figure's color at its own measured degree, and every channel shares one profile, which keeps
   // the composite's chromaticity constant along a column instead of only approximately so. The envelope is symmetric in
   // depth, so each patch is drawn both in front of the star and behind it; nothing here chooses between them.
   const zimpol = encodeGrid((x, y, z) => {
@@ -383,12 +383,12 @@ export async function author(defaultDataset = 'zimpol-v') {
     const value = plane[j * size + i] ?? 0; if (!(value > 0)) return 0;
     const column = norm[j * size + i]!; if (!(column > 0)) return 0;
     const profile = shellDensity(Math.hypot(x, y, z)) / column;
-    return colourMapWeights(value).map(weight => weight * profile);
+    return colorMapWeights(value).map(weight => weight * profile);
   });
   // The renderer turns a column into 1-exp(-gain * column) and takes its chromaticity from the same sum, so the gain is
   // fixed by one requirement: the top of the published bar reaches the stated alpha. Its column there is the brightest
   // channel of the last stop.
-  const zimpolGain = -Math.log(1 - COLOUR_MAP.topAlpha) / Math.max(...COLOUR_MAP.stops.at(-1)!);
+  const zimpolGain = -Math.log(1 - COLOR_MAP.topAlpha) / Math.max(...COLOR_MAP.stops.at(-1)!);
 
   // --- the third measured dataset: the 4 micrometre light outside the photosphere, given the same treatment ---
   // The reconstruction that paints the star's own sphere also carries a fifth of its flux outside the disc. On the
@@ -453,7 +453,7 @@ export async function author(defaultDataset = 'zimpol-v') {
     const profile = emissionFit.density(Math.hypot(x, y, z)) / column;
     return heatMapWeights(value).map(weight => weight * profile);
   });
-  const emissionGain = -Math.log(1 - COLOUR_MAP.topAlpha) / Math.max(...HEAT_MAP.stops.at(-1)!);
+  const emissionGain = -Math.log(1 - COLOR_MAP.topAlpha) / Math.max(...HEAT_MAP.stops.at(-1)!);
   // This dataset's own preview. There is no publisher figure of it: it is this repository's reconstruction, and the
   // part of it drawn here is the part the star's sphere does not show. So the package draws its own, from the same
   // sky plane the grid carries, in the same heat scale, with the removed disc left black.
@@ -651,7 +651,7 @@ export async function author(defaultDataset = 'zimpol-v') {
     const value = sioGrid[(k * size + j) * size + i] ?? 0; if (!(value > 0)) return 0;
     return sioMapWeights(value / sioPeak).map(weight => weight * (value / sioPeak));
   });
-  const sioGain = -Math.log(1 - COLOUR_MAP.topAlpha) / Math.max(...SIO_MAP.stops.at(-1)!);
+  const sioGain = -Math.log(1 - COLOR_MAP.topAlpha) / Math.max(...SIO_MAP.stops.at(-1)!);
   const sioMeasured = { starFromPhaseCentreMas: [starFromPhaseCentre.east, starFromPhaseCentre.north] as const, peakFromCentroidMas,
     continuumPeakJyBeam: continuumPeak, continuumNoiseJyBeam: continuumNoise, channelNoiseJyBeam: channelNoise, smoothedNoiseJyBeam: smoothedNoise,
     maskedVoxels, emissionPixels, emissionBeams: emissionPixels / beamPixels, lineFluxJyKmS: emissionFlux / beamPixels,
@@ -744,34 +744,34 @@ export async function author(defaultDataset = 'zimpol-v') {
       envelope: { shape: 'spherical-shell', radiusUnits: shell.radiusUnits, gaussianWidthUnits: shell.widthUnits,
         residualRms: shell.residual, signalRms, alternatives: { steadyOutflowExponent: outflow.exponent, steadyOutflowResidualRms: outflow.residual, constantDepthResidualRms: flatResidual } },
       productOffsetPixels, intensityPeak: peakValue, polarisationFloor: background, pixelsPerStellarRadius: pixelsPerUnit,
-      colourMap: COLOUR_MAP.name, colourScaleTopDegree: STRETCH.topDegree, zimpolExposureGain: zimpolGain,
+      colorMap: COLOR_MAP.name, colorScaleTopDegree: STRETCH.topDegree, zimpolExposureGain: zimpolGain,
       stellarRadiusArcsec: radiusArcsec, stellarRadiusAu: auPerUnit, sceneOriginRaDecDeg: [raDeg, decDeg], distancePc: distanceM / METERS_PER_PARSEC,
       veilCentreUnits: [...centre], veilRadiusUnits: veilRadius },
     models: {
-      'zimpol-v': `Fitted envelope, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to ${STRETCH.topDegree.toFixed(2)}. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius ${shell.radiusUnits.toFixed(2)} stellar radii and gaussian thickness ${shell.widthUnits.toFixed(2)}, which leaves a residual of ${shell.residual.toExponential(2)} against a profile of ${signalRms.toExponential(2)}. A steady outflow r^-${outflow.exponent.toFixed(2)} leaves ${outflow.residual.toExponential(2)} and a constant depth, which is what pushing the image backwards assumes, leaves ${flatResidual.toExponential(2)}. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Colour is matplotlib ${COLOUR_MAP.name} sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.`,
+      'zimpol-v': `Fitted envelope, drawn in the published figure's own color map. The degree map is floor-subtracted and carried on the same scale as that figure's colorbar, zero to ${STRETCH.topDegree.toFixed(2)}. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius ${shell.radiusUnits.toFixed(2)} stellar radii and gaussian thickness ${shell.widthUnits.toFixed(2)}, which leaves a residual of ${shell.residual.toExponential(2)} against a profile of ${signalRms.toExponential(2)}. A steady outflow r^-${outflow.exponent.toFixed(2)} leaves ${outflow.residual.toExponential(2)} and a constant depth, which is what pushing the image backwards assumes, leaves ${flatResidual.toExponential(2)}. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Color is matplotlib ${COLOR_MAP.name} sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar color of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.`,
       'sio-2023': `Measured on three axes, under one stated flow. ALMA observed SiO v=0 J=5-4 around the star from ${sioDateText}; the archive's pipeline cube was cut out, its residual continuum removed and ${channels} channels of ${channelKmS.toFixed(2)} km/s kept. The star is not at the observation's phase centre: the continuum image from the same observation and calibration puts it ${sioStarMas.toFixed(0)} mas away, ${(sioStarMas / radiusMas).toFixed(1)} stellar radii, at position angle ${sioStarAngle.toFixed(0)} degrees, and every position here is measured from it; the line's own absorption is centred ${absorptionFromStarMas.toFixed(1)} mas from that point. Against the star the line absorbs from ${absorbedFrom.toFixed(1)} to +${absorbedTo.toFixed(1)} km/s about the star's velocity, deepest ${(-deepestAbsorption * 1e3).toFixed(0)} mJy per beam: gas between us and the star, leaving it and, on the red side, falling back. Inside the star's continuum footprint emission cannot be told from that absorption and is not drawn. Outside it, moment masking (the cube smoothed by its beam and three channels, cut at ${ALMA_SIO.maskSigma} times its noise and grown by the smoothing) keeps ${emissionPixels} pixels within ${halfUnits} stellar radii of the star, ${(emissionPixels / beamPixels).toFixed(0)} beams carrying ${(emissionFlux / beamPixels).toFixed(2)} Jy km/s: a lopsided ring, brightest ${ringRadius.toFixed(2)} stellar radii from the star, with its weight toward position angle ${weightAngle.toFixed(0)} degrees. The star's velocity, ${systemicKmS.toFixed(1)} km/s LSRK, is the flux-weighted mean of that ring. The blue edge of the absorption, the fastest gas in front of the star coming toward us, gives the flow's terminal speed the way a P Cygni profile does: ${outflowKmS.toFixed(1)} km/s with half a channel. Every channel of every pixel is placed along the line of sight on a spherical outflow at that speed: a parcel at sky distance s moving at v lies at depth s v / sqrt(u^2 - v^2). ${(100 * placedFlux / emissionFlux).toFixed(1)} percent of the ring's flux lands inside the grid, the deepest ${deepest.toFixed(2)} stellar radii along the line of sight; ${(100 * fasterFlux / emissionFlux).toFixed(2)} percent is faster than the flow and cannot be placed on it. Each sample is drawn as a gaussian a quarter of the beam's minor axis in standard deviation. Beyond the ring, a further ${(100 * farShare).toFixed(0)} percent of the masked flux lies ${farNearest.toFixed(0)} to ${farFurthest.toFixed(0)} stellar radii to the ${compass(farAngle)}, beside a ${(otherPeak / continuumNoise).toFixed(1)}-sigma continuum peak, outside the volume; it is not drawn, and whether it is circumstellar gas or an artefact of the bright star in this image is open. The sky positions and velocities are measured; that the gas flows straight out at one speed is assumed.`,
-      'emission-2020': `The 4 micrometre light outside the photosphere, from the same reconstruction that paints the star's own sphere. Its disc and the first beam beyond it are removed: inside the disc the sphere is drawn, and within one beam of it the light is the star's edge smeared by that beam. What is left carries a fifth of the reconstruction's flux and falls too slowly to be that beam. The depth is fitted the same way as the polarisation: the best envelope is a ${emissionFit.shape} (${emissionFit.shape === 'spherical-shell' ? `radius ${emissionFit.shell.radiusUnits.toFixed(2)} stellar radii, gaussian thickness ${emissionFit.shell.widthUnits.toFixed(2)}` : `r^-${emissionFit.outflow.exponent.toFixed(2)}`}) leaving ${Math.min(emissionFit.shell.residual, emissionFit.outflow.residual).toExponential(2)}, against ${emissionFit.flatResidual.toExponential(2)} for the constant depth an extrusion assumes and a profile of ${emissionFit.signalRms.toExponential(2)}. The image is only 100 milliarcseconds across, so this dataset speaks for the inner envelope alone and fades at the edge of its own field. Colour is the reconstruction's own heat scale, the same one the sphere carries, because this is the same quantity.`,
+      'emission-2020': `The 4 micrometre light outside the photosphere, from the same reconstruction that paints the star's own sphere. Its disc and the first beam beyond it are removed: inside the disc the sphere is drawn, and within one beam of it the light is the star's edge smeared by that beam. What is left carries a fifth of the reconstruction's flux and falls too slowly to be that beam. The depth is fitted the same way as the polarisation: the best envelope is a ${emissionFit.shape} (${emissionFit.shape === 'spherical-shell' ? `radius ${emissionFit.shell.radiusUnits.toFixed(2)} stellar radii, gaussian thickness ${emissionFit.shell.widthUnits.toFixed(2)}` : `r^-${emissionFit.outflow.exponent.toFixed(2)}`}) leaving ${Math.min(emissionFit.shell.residual, emissionFit.outflow.residual).toExponential(2)}, against ${emissionFit.flatResidual.toExponential(2)} for the constant depth an extrusion assumes and a profile of ${emissionFit.signalRms.toExponential(2)}. The image is only 100 milliarcseconds across, so this dataset speaks for the inner envelope alone and fades at the edge of its own field. Color is the reconstruction's own heat scale, the same one the sphere carries, because this is the same quantity.`,
       'veil-2019-12': `The published December 2019 clump: a sphere of radius ${VEIL_2019_12.radiusAu} au centred at (${VEIL_2019_12.centreRaDecEarthAu.join(', ')}) au along right ascension, declination and toward Earth, of constant dust density ${VEIL_2019_12.densityGramsPerCubicCentimetre} g/cm3 in ${VEIL_2019_12.composition} grains centred on ${VEIL_2019_12.grainMicrometres} micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln ${VEIL_2019_12.dimmingFactor}, which is the ${VEIL_2019_12.dimmingFactor}-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at ${VEIL_2019_12.scatteredSurfaceBrightness} of the photosphere's surface brightness, which is a display choice.`,
     },
     limitations: [
       'The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed. Its depth is the envelope that best projects to the measured radial profile, which is an inference from that profile, not a measurement, and it cannot say which patches are in front and which behind.',
       'The degree of polarisation is a ratio; its instrumental floor was measured beyond eight radii and subtracted.',
       'The two released V-band products share one WCS but are not pixel-aligned to each other; each is read about its own stellar centre, the intensity centroid and the masked disc of the degree map respectively.',
-      `The 2024 colours are the publisher's ${COLOUR_MAP.name} colour map for that ratio, on the same zero-to-${STRETCH.topDegree.toFixed(2)} scale as their figure. They are a legend, not the colour of the dust and not a temperature.`,
-      `Brightness follows the renderer's 1-exp(-gain*column) transfer rather than the flat bar of a printed figure, so mid-scale values sit brighter than a linear colourbar would put them; the hue at every value is the published one.`,
-      'Four colour stops are the most an RGBA8 grid can carry, so the bar is interpolated between quarters rather than sampled continuously.',
+      `The 2024 colors are the publisher's ${COLOR_MAP.name} color map for that ratio, on the same zero-to-${STRETCH.topDegree.toFixed(2)} scale as their figure. They are a legend, not the color of the dust and not a temperature.`,
+      `Brightness follows the renderer's 1-exp(-gain*column) transfer rather than the flat bar of a printed figure, so mid-scale values sit brighter than a linear colorbar would put them; the hue at every value is the published one.`,
+      'Four color stops are the most an RGBA8 grid can carry, so the bar is interpolated between quarters rather than sampled continuously.',
       'Structure finer than the 16 mas beam, three quarters of a stellar radius, is not in the 2024 data.',
       'The 2019 clump is a model fitted to images, not an image. Its January and March 2020 epochs are recorded by its own authors as unoptimised best guesses and are not shipped.',
       'Silicates sublimate near 1500 K, so the real clump is emptier on the side facing the star than a uniform sphere; its authors record that this does not change their result, and the uniform sphere they published is what is drawn.',
-      'Scattered starlight is drawn warm because it is the star’s own light; no colour was measured.',
+      'Scattered starlight is drawn warm because it is the star’s own light; no color was measured.',
       'The four datasets span 2019 to 2024 and measure different things. None is a picture of another.',
       `The 4 micrometre light is one reconstruction of one epoch. Its depth is the envelope that best projects to its radial profile, an inference like the 2024 map\u2019s, drawn symmetric in depth. Within one beam of the published disc that light is the star\u2019s own edge smeared by the beam, so it is drawn only from ${emissionInnerUnits.toFixed(2)} stellar radii out.`,
       'The SiO depths assume every parcel moves straight out from the star at one speed, the blue edge of its absorption against the star. The same absorption shows gas falling back, and the inner wind of a red supergiant is turbulent, so a velocity is not a unique depth: the depths are this model\u2019s, not measured ones.',
       'Inside the star\u2019s continuum footprint the SiO line absorbs against the star and emission there is not drawn, so the envelope has an empty cylinder along the line of sight through the star.',
       `The SiO cube is the archive's pipeline image at its own beam, ${(sio.number('BMAJ') * 3.6e6).toFixed(0)} by ${(sio.number('BMIN') * 3.6e6).toFixed(0)} mas, with channels ${channelKmS.toFixed(2)} km/s wide; each sample is drawn narrower than a channel's worth of depth, at its measured velocity.`,
-      'The SiO colours are a false-colour ramp for integrated line brightness, not a colour, a temperature or a density.',
+      'The SiO colors are a false-color ramp for integrated line brightness, not a color, a temperature or a density.',
       'The clump dims the star by ordinary alpha compositing, which is exact for extinction but cannot be cut by the photosphere: it covers the whole silhouette it crosses rather than being clipped at the limb.',
-      'Its extinction is grey. Silicate dust reddens what it transmits; no colour was applied because the photosphere behind it is drawn in an infrared intensity palette, not in colour.',
+      'Its extinction is grey. Silicate dust reddens what it transmits; no color was applied because the photosphere behind it is drawn in an infrared intensity palette, not in color.',
       'The scattered light is a stated display level, not a measurement.',
       'The 2024 map always composites behind the star, because its emission surrounds the body instead of standing clear of it in depth.',
     ],
@@ -780,10 +780,10 @@ export async function author(defaultDataset = 'zimpol-v') {
   const grids = [
     { id: 'zimpol-v', label: 'SPHERE/ZIMPOL · polarised dust, 2024', file: 'density-zimpol-v.ktx2', built: zimpol,
       sourceUrl: 'https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B',
-      // Four emission channels, one per stop of the figure's colour map. The compiler sums them, so a column emits the
-      // interpolated bar colour at its own degree; shared opacity keeps that chromaticity exactly and turns the summed
-      // column into the alpha. This is the published false-colour map rendered in depth, not a colour of the dust.
-      material: { emission: COLOUR_MAP.stops.map((color, channel) => ({ channel, color: [...color], strength: 1 })),
+      // Four emission channels, one per stop of the figure's color map. The compiler sums them, so a column emits the
+      // interpolated bar color at its own degree; shared opacity keeps that chromaticity exactly and turns the summed
+      // column into the alpha. This is the published false-color map rendered in depth, not a color of the dust.
+      material: { emission: COLOR_MAP.stops.map((color, channel) => ({ channel, color: [...color], strength: 1 })),
         absorption: [], emissionTransfer: 'shared-opacity', exposureGain: zimpolGain } },
     { id: 'veil-2019-12', label: 'Great Dimming clump · December 2019', file: 'density-veil-2019-12.ktx2', built: veil,
       sourceUrl: 'https://arxiv.org/abs/2201.10551', occultingCentreUnits: [...centre] as [number, number, number],
@@ -842,13 +842,13 @@ export async function author(defaultDataset = 'zimpol-v') {
     ? [{ id: 'instrument', label: 'Instrument', value: 'VLTI/MATISSE, 3.94\u20134.00 \u00b5m, February 2020, 4 mas beam' },
        { id: 'extent', label: 'Drawn extent', value: `${emissionInnerUnits.toFixed(2)} to ${emissionFieldUnits.toFixed(2)} stellar radii: outside the disc and its first beam, to the edge of the 100 mas field` },
        { id: 'share', label: 'Share of the flux', value: 'A fifth of the reconstruction lies outside the disc' },
-       { id: 'scale', label: 'Colour scale', value: "The reconstruction's own heat scale, the one the star's sphere carries" },
+       { id: 'scale', label: 'Color scale', value: "The reconstruction's own heat scale, the one the star's sphere carries" },
        { id: 'depth', label: 'Depth', value: `Not measured; the steeply falling envelope r^\u2212${emissionFit.outflow.exponent.toFixed(1)} that best projects to the measured profile` }]
     : grid.id === 'zimpol-v'
     ? [{ id: 'instrument', label: 'Instrument', value: 'VLT/SPHERE-ZIMPOL, V band, 3 December 2024' },
        { id: 'resolution', label: 'Angular resolution', value: '16 mas, 0.76 stellar radii' },
        { id: 'extent', label: 'Drawn extent', value: '1 to 4.5 stellar radii, tapering to 6' },
-       { id: 'scale', label: 'Colour scale', value: `Degree of linear polarisation 0 to ${STRETCH.topDegree.toFixed(2)}, the paper's ${COLOUR_MAP.name} map` },
+       { id: 'scale', label: 'Color scale', value: `Degree of linear polarisation 0 to ${STRETCH.topDegree.toFixed(2)}, the paper's ${COLOR_MAP.name} map` },
        { id: 'depth', label: 'Depth', value: `Not measured; the spherical shell at ${shell.radiusUnits.toFixed(1)} stellar radii that best projects to the measured profile` }]
     : [{ id: 'model', label: 'Model', value: 'RADMC-3D sphere of constant density, Montarg\u00e8s et al. 2021, Extended Data Table 3' },
        { id: 'geometry', label: 'Centre and radius', value: '(\u22121.9, \u22123.0, +12.5) au along right ascension, declination and toward Earth; radius 6.5 au' },
@@ -868,11 +868,11 @@ export async function author(defaultDataset = 'zimpol-v') {
         : grid.id === 'emission-2020' ? 'The light outside Betelgeuse\u2019s disc at 4 micrometres'
         : grid.id === 'zimpol-v' ? 'Polarised dust around Betelgeuse in 2024' : 'The dust clump of the Great Dimming',
       description: grid.id === 'sio-2023'
-        ? `ALMA saw silicon monoxide around this star in August 2023, and this is the one dataset here whose depth comes from measured velocities rather than from a shape fitted to a picture. Measured from the star itself, found in the same observation\u2019s continuum, the molecule absorbs in front of the star and glows in a lopsided ring ${ringRadius.toFixed(1)} stellar radii out, heaviest to the ${compass(weightAngle)}. Every channel of the line cube is placed along the line of sight on a spherical outflow at ${outflowKmS.toFixed(1)} kilometres a second, the speed of the fastest gas it absorbs in front of the star, the usual first reading of an expanding stellar envelope. The same absorption shows gas falling back as well, and that gas is placed as if it were flowing out. Silicon monoxide is what silicate dust condenses from, so this is the material of the other datasets caught before it became dust. The colours are a false-colour ramp for line brightness.`
+        ? `ALMA saw silicon monoxide around this star in August 2023, and this is the one dataset here whose depth comes from measured velocities rather than from a shape fitted to a picture. Measured from the star itself, found in the same observation\u2019s continuum, the molecule absorbs in front of the star and glows in a lopsided ring ${ringRadius.toFixed(1)} stellar radii out, heaviest to the ${compass(weightAngle)}. Every channel of the line cube is placed along the line of sight on a spherical outflow at ${outflowKmS.toFixed(1)} kilometres a second, the speed of the fastest gas it absorbs in front of the star, the usual first reading of an expanding stellar envelope. The same absorption shows gas falling back as well, and that gas is placed as if it were flowing out. Silicon monoxide is what silicate dust condenses from, so this is the material of the other datasets caught before it became dust. The colors are a false-color ramp for line brightness.`
         : grid.id === 'emission-2020'
-        ? `The same reconstruction that paints this star\u2019s sphere carries a fifth of its flux outside the published disc. On the sphere that light is a flat plate behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star\u2019s own edge smeared by the beam. What is left falls far too slowly to be that beam: the envelope that best projects to it is r^\u2212${emissionFit.outflow.exponent.toFixed(1)}, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone. Its colours are the reconstruction\u2019s own heat scale, because this is the same quantity as the sphere.`
+        ? `The same reconstruction that paints this star\u2019s sphere carries a fifth of its flux outside the published disc. On the sphere that light is a flat plate behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star\u2019s own edge smeared by the beam. What is left falls far too slowly to be that beam: the envelope that best projects to it is r^\u2212${emissionFit.outflow.exponent.toFixed(1)}, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone. Its colors are the reconstruction\u2019s own heat scale, because this is the same quantity as the sphere.`
         : grid.id === 'zimpol-v'
-        ? `The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the colour map and on the zero-to-${STRETCH.topDegree.toFixed(2)} scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colours are the publisher's legend for a ratio, not the colour of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.`
+        ? `The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the color map and on the zero-to-${STRETCH.topDegree.toFixed(2)} scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colors are the publisher's legend for a ratio, not the color of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.`
         : 'The dust clump Montarg\u00e8s et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as the paper reports for the southern hemisphere, and the light it scatters back is drawn faintly over that. This is a model fitted to images, not an image.',
       summary: grid.id === 'sio-2023' ? 'Silicon monoxide around the star, placed in depth by its own measured velocities.'
         : grid.id === 'emission-2020' ? 'The fifth of the reconstruction that lies outside the disc, given the shape that best projects to it.'

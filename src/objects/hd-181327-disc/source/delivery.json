@@ -23,7 +23,7 @@
     "arcsecPerUnit": 0.020930630669558914
   },
   "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-  "description": "The debris ring around HD 181327 as JWST/NIRCam imaged it in six filters from 1.8 to 4.4 micrometres behind the MASK335R coronagraph on 11 October 2023 (programme 2780), in the reflectance colour of its dust as Gáspár et al. (2026) show it: each filter divided by the star's own brightness. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the images, not a measurement.",
+  "description": "The debris ring around HD 181327 as JWST/NIRCam imaged it in six filters from 1.8 to 4.4 micrometres behind the MASK335R coronagraph on 11 October 2023 (programme 2780), in the reflectance color of its dust as Gáspár et al. (2026) show it: each filter divided by the star's own brightness. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the images, not a measurement.",
   "defaultDataset": "reflectance",
   "framingRadiusUnits": 300,
   "attachedTo": "hd-181327",
@@ -35,7 +35,7 @@
   "grids": [
     {
       "id": "reflectance",
-      "label": "JWST/NIRCam · debris ring, reflectance colour",
+      "label": "JWST/NIRCam · debris ring, reflectance color",
       "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
       "recipe": {
         "path": "src/objects/hd-181327-disc/source/volume-reflectance.json"

@@ -93,7 +93,7 @@ receipts are hashed and checked alongside the base model before cached reuse.
 ## Registration and compact emission
 
 Stellar bands use verified native star correspondences. Sparse compact-source
-detection avoids promoting coloured filaments to stars. A documented common
+detection avoids promoting colored filaments to stars. A documented common
 publisher grid can transfer registration through a directly star-verified optical
 bridge; that transfer has **zero independent stellar matches in the nonstellar
 band**. Its receipt identifies the bridge, source hashes, pixel mapping and limits.

@@ -6,7 +6,7 @@ HD 226868 is the blue supergiant of Cygnus X-1, the first X-ray source widely ac
 
 **Star.** Placement: Gaia DR3 source 2059383668236814720, parallax 0.444 ± 0.015 mas (2252.75 pc). Radius 22.3 solar radii from Miller-Jones et al. (2021), Science 371, 1046, Table 1: R1 = 22.3 solar radii (median; 5th-95th percentile 20.6-24.1), derived from their dynamical model at 2.22 kpc (https://arxiv.org/abs/2102.09091). Mass 40.6 solar masses from Miller-Jones et al. (2021), Science 371, 1046, Table 1: M1 = 40.6 solar masses (median; 5th-95th percentile 33.5-48.3), fitted (https://arxiv.org/abs/2102.09091). Temperature 31,138 K from Miller-Jones et al. (2021), Science 371, 1046, Table 1: Teff = 31,138 K (median; 5th-95th percentile 30,398-31,840 K), fitted. log g 3.348 from Miller-Jones et al. (2021), Science 371, 1046, Table 1: log g1 = 3.348 (median; 5th-95th percentile 3.335-3.360), derived.
 
-**Colour.** A Planck spectrum at 31,138 K, because interstellar dust reddens every spectrum of this star: E(B-V) = 1.11 +/- 0.03 and A_V = 3.35 (Caballero-Nieves et al. 2009, as adopted by Orosz et al. 2011, ApJ 742, 84, section 3.2, https://arxiv.org/abs/1106.3689), which the colour routes do not remove, so a measured spectrum would show the dust's colour and not the star's, through the CIE 1931 2° observer: #a1bbff. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.
+**Color.** A Planck spectrum at 31,138 K, because interstellar dust reddens every spectrum of this star: E(B-V) = 1.11 +/- 0.03 and A_V = 3.35 (Caballero-Nieves et al. 2009, as adopted by Orosz et al. 2011, ApJ 742, 84, section 3.2, https://arxiv.org/abs/1106.3689), which the color routes do not remove, so a measured spectrum would show the dust's color and not the star's, through the CIE 1931 2° observer: #a1bbff. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Reeve & Howarth (2016), MNRAS 456, 1294 compute from non-LTE TLUSTY model atmospheres for the Bessell V band at 31,138 K and log g 3.348 (u1 0.124, u2 0.330): a model, because no fit of this star's limb is used.
 
@@ -26,7 +26,7 @@ HD 226868 is the blue supergiant of Cygnus X-1, the first X-ray source widely ac
 
 ## Evidence
 
-The rendered page (dev server, 900 × 900 headless Chromium, 2026-09-27): the blue-white disc at its Planck colour, dimmed toward the edge by the TLUSTY limb law.
+The rendered page (dev server, 900 × 900 headless Chromium, 2026-09-27): the blue-white disc at its Planck color, dimmed toward the edge by the TLUSTY limb law.
 
 Generated 2026-09-27 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 

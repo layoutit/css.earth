@@ -70,7 +70,7 @@ The outline is the measurement that reaches a verdict: all 30 frames match the p
 ## Known problems
 
 - Shape uses the shared neutral-gray material, not photographed color, reflectance or inferred composition. Elevation includes global shape, not height above a gravitational equipotential. Reduction softens small features.
-- The photograph is relative deconvolved intensity with the photographed illumination left in, not measured albedo or colour. The grid marks surface that was unphotographed, too grazing or rejected.
+- The photograph is relative deconvolved intensity with the photographed illumination left in, not measured albedo or color. The grid marks surface that was unphotographed, too grazing or rejected.
 - The survey released no ADAM reconstruction for this body, so the photograph rides the MPCD mesh rather than the reconstruction its rotation record was fitted alongside. Nothing registers the frames against surface markings.
 - Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution.
 - The Shape and Elevation views use an explicitly arbitrary display meridian. The photograph takes its absolute phase from the rotation record instead.

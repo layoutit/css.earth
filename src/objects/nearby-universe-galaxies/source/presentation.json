@@ -5,7 +5,7 @@
       {
         "id": "galaxies",
         "label": "Cosmicflows-4 galaxies by type",
-        "process": "Place every CF4 galaxy between 3 and 200 Mpc at its measured distance; colour it by its HyperLEDA type through the Kinney-Calzetti template of that type (CIE 1931 into sRGB).",
+        "process": "Place every CF4 galaxy between 3 and 200 Mpc at its measured distance; color it by its HyperLEDA type through the Kinney-Calzetti template of that type (CIE 1931 into sRGB).",
         "recipe": "source/galaxies/points.json",
         "selector": "",
         "inputs": [
@@ -173,7 +173,7 @@
       {
         "id": "desi-bright-galaxies",
         "label": "DESI bright galaxies",
-        "process": "Place each galaxy at its comoving distance in the Planck 2018 cosmology; colour it from its g, r, z fluxes as the Legacy Surveys draw them; tone it by its r magnitude.",
+        "process": "Place each galaxy at its comoving distance in the Planck 2018 cosmology; color it from its g, r, z fluxes as the Legacy Surveys draw them; tone it by its r magnitude.",
         "recipe": "source/desi-bright-galaxies/points.json",
         "inputs": [
           "desi-bright-galaxies-sample"
@@ -187,13 +187,13 @@
           "sourceKind": "published-catalogue"
         },
         "limitations": [
-          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+          "Presentation choices (shares, reach, color mapping and tone) are recorded with their basis in each recipe."
         ]
       },
       {
         "id": "desi-quasars",
         "label": "DESI quasars",
-        "process": "Place each quasar at its comoving distance in the Planck 2018 cosmology; colour it by the composite quasar spectrum stretched to its redshift.",
+        "process": "Place each quasar at its comoving distance in the Planck 2018 cosmology; color it by the composite quasar spectrum stretched to its redshift.",
         "recipe": "source/desi-quasars/points.json",
         "inputs": [
           "desi-quasars-sample",
@@ -208,13 +208,13 @@
           "sourceKind": "published-catalogue"
         },
         "limitations": [
-          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+          "Presentation choices (shares, reach, color mapping and tone) are recorded with their basis in each recipe."
         ]
       },
       {
         "id": "quaia-quasars",
         "label": "Quaia quasars",
-        "process": "Place each quasar at its comoving distance in the Planck 2018 cosmology; colour it by the composite quasar spectrum stretched to its redshift.",
+        "process": "Place each quasar at its comoving distance in the Planck 2018 cosmology; color it by the composite quasar spectrum stretched to its redshift.",
         "recipe": "source/quaia-quasars/points.json",
         "inputs": [
           "quaia-quasars-sample",
@@ -229,7 +229,7 @@
           "sourceKind": "published-catalogue"
         },
         "limitations": [
-          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+          "Presentation choices (shares, reach, color mapping and tone) are recorded with their basis in each recipe."
         ]
       },
       {
@@ -249,7 +249,7 @@
           "sourceKind": "published-catalogue"
         },
         "limitations": [
-          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+          "Presentation choices (shares, reach, color mapping and tone) are recorded with their basis in each recipe."
         ]
       },
       {
@@ -270,7 +270,7 @@
           "sourceKind": "published-catalogue"
         },
         "limitations": [
-          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+          "Presentation choices (shares, reach, color mapping and tone) are recorded with their basis in each recipe."
         ]
       },
       {
@@ -290,7 +290,7 @@
           "sourceKind": "published-catalogue"
         },
         "limitations": [
-          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+          "Presentation choices (shares, reach, color mapping and tone) are recorded with their basis in each recipe."
         ]
       },
       {
@@ -311,7 +311,7 @@
           "sourceKind": "published-catalogue"
         },
         "limitations": [
-          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+          "Presentation choices (shares, reach, color mapping and tone) are recorded with their basis in each recipe."
         ]
       }
     ]

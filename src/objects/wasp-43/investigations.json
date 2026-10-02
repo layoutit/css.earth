@@ -42,7 +42,7 @@
     },
     {
       "id": "gaia-dr3-xp-spectrum",
-      "subject": "A measured optical spectrum for the photosphere colour",
+      "subject": "A measured optical spectrum for the photosphere color",
       "status": "excluded",
       "finding": "Gaia DR3 published no BP/RP (XP) spectrum for WASP-43 (source_id 3767805209112436736, has_xp_sampled and has_xp_continuous false), so no flux-calibrated optical spectrum is available to integrate.",
       "revisitWhen": "Gaia DR4 publishes XP spectra, or a flux-calibrated optical spectrum of WASP-43 is released.",
@@ -52,9 +52,9 @@
     },
     {
       "id": "gaia-dr3-gsp-phot-color",
-      "subject": "Photosphere colour from the Gaia DR3 photometric temperature",
+      "subject": "Photosphere color from the Gaia DR3 photometric temperature",
       "status": "included",
-      "finding": "GSP-Phot gives 4,416 K (16th–84th percentiles 4,407–4,424 K; systematics not included). A Planck spectrum at that temperature through the CIE 1931 2° observer gives sRGB 255, 220, 184 (#ffdcb8); the percentiles move a channel by at most 1. The spectroscopic 4,520 K that Challener et al. (2024) use gives 255, 222, 189. A blackbody ignores the K dwarf's absorption bands, and the colour carries no brightness.",
+      "finding": "GSP-Phot gives 4,416 K (16th–84th percentiles 4,407–4,424 K; systematics not included). A Planck spectrum at that temperature through the CIE 1931 2° observer gives sRGB 255, 220, 184 (#ffdcb8); the percentiles move a channel by at most 1. The spectroscopic 4,520 K that Challener et al. (2024) use gives 255, 222, 189. A blackbody ignores the K dwarf's absorption bands, and the color carries no brightness.",
       "evidence": [
         "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20bp_rp%2C%20has_xp_sampled%2C%20teff_gspphot%2C%20teff_gspphot_lower%2C%20teff_gspphot_upper%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%203767805209112436736",
         "https://doi.org/10.1051/0004-6361/202243462"
@@ -74,7 +74,7 @@
       "id": "tess-limb-darkening",
       "subject": "Limb darkening measured from TESS transits",
       "status": "included",
-      "finding": "Patel & Espinoza (2022, AJ 163, 228; VizieR J/AJ/163/228 table 4) fitted a quadratic law to TESS transits of WASP-43b: u1 0.55 (+0.22 -0.31), u2 0.00 (+0.46 -0.30), so the limb is 45% as bright as the centre (about 25 to 80% within the uncertainty). The row is pinned and drawn as the colour dataset's limb plate. TESS covers 600-1000 nm; no visible-light measurement exists. The JWST transits in the WASP-43b package also constrain limb darkening, but in the infrared, where it is weaker.",
+      "finding": "Patel & Espinoza (2022, AJ 163, 228; VizieR J/AJ/163/228 table 4) fitted a quadratic law to TESS transits of WASP-43b: u1 0.55 (+0.22 -0.31), u2 0.00 (+0.46 -0.30), so the limb is 45% as bright as the centre (about 25 to 80% within the uncertainty). The row is pinned and drawn as the color dataset's limb plate. TESS covers 600-1000 nm; no visible-light measurement exists. The JWST transits in the WASP-43b package also constrain limb darkening, but in the infrared, where it is weaker.",
       "evidence": [
         "https://doi.org/10.3847/1538-3881/ac5f55",
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/163/228"
@@ -94,7 +94,7 @@
       "id": "navigation-marker",
       "subject": "Distant marker for WASP-43",
       "status": "included",
-      "finding": "The marker is the colour dataset as a disc with the measured TESS limb darkening, rendered from the pinned colour and limb-darkening records; it replaced the scaffold's flat disc.",
+      "finding": "The marker is the color dataset as a disc with the measured TESS limb darkening, rendered from the pinned color and limb-darkening records; it replaced the scaffold's flat disc.",
       "evidence": [
         "https://doi.org/10.3847/1538-3881/ac5f55"
       ]

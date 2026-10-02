@@ -7,7 +7,7 @@
  *    mass and radius in its astronomy record, else a published spectroscopic value (gravity.mts).
  * 3. the star's own calibrated interferometry, fitted inside the first lobe, when an observation season records it
  *    (interferometric-limb.mts); the record is written beside the star and read as in 1.
- * A star that already has a colour dataset gains the law on it; a placeholder that has none gains the colour dataset with it
+ * A star that already has a color dataset gains the law on it; a placeholder that has none gains the color dataset with it
  * (color.mts, dataset.mts). A star no source covers is reported and left unchanged. */
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -63,7 +63,7 @@ function readmeWithLimb(readme: string, paragraph: string, problem: string) {
   return lines.join('\n').replace(/\n{3,}/gu, '\n\n');
 }
 
-/** The law on an existing colour dataset: recipe, plate, dataset text, manifest, acquisition and credits. */
+/** The law on an existing color dataset: recipe, plate, dataset text, manifest, acquisition and credits. */
 function installLimbOnly(files: PackageFiles, id: string, limb: LimbChoice, progress: (line: string) => void) {
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   const raster = read(`${s}/preparation/raster.json`), surface = raster.surfaces.find((entry: { science?: { kind?: string } }) => entry.science?.kind === 'stellar-photometric-color');
@@ -86,7 +86,7 @@ function installLimbOnly(files: PackageFiles, id: string, limb: LimbChoice, prog
   const manifest = read(`${s}/manifest.json`), inputs = limb.inputs ?? [];
   manifest.inputs = [...manifest.inputs.filter((entry: { path: string }) => !inputs.some(input => input.path === entry.path)), ...inputs];
   manifest.generatedIntermediates = (manifest.generatedIntermediates ?? []).map((entry: Record<string, any>) => entry.path !== 'presentation/context.png' ? entry
-    : { ...entry, id: 'limb-darkened-disc-context-marker', credit: String(entry.credit).replace('The colour dataset as a disc;', 'The colour dataset as a disc, dimmed toward the limb by its law;'),
+    : { ...entry, id: 'limb-darkened-disc-context-marker', credit: String(entry.credit).replace('The color dataset as a disc;', 'The color dataset as a disc, dimmed toward the limb by its law;'),
       ...(entry.recipe ? { recipe: { ...entry.recipe, inputs: [...new Set([...entry.recipe.inputs ?? [], ...inputs.map(input => String(input.id))])] } } : {}) });
   files.set(`${s}/manifest.json`, json(manifest));
   const plan = read(`${s}/preparation/acquisition.json`), acquisitions = limb.acquisitions ?? [];
@@ -94,17 +94,17 @@ function installLimbOnly(files: PackageFiles, id: string, limb: LimbChoice, prog
   files.set(`${s}/preparation/acquisition.json`, json(plan));
 }
 
-/** A spec the colour routes can read, from a hand-made package's own records. */
+/** A spec the color routes can read, from a hand-made package's own records. */
 function specFromRecords(id: string, body: Record<string, any>, measurements: Record<string, any>): StarSpec {
   const source = String(measurements.effectiveTemperatureSource ?? ''), url = /https?:\/\/[^\s),;]+/u.exec(source)?.[0];
-  if (!url) throw new Error(`${id}: source/measurements.json effectiveTemperatureSource cites no URL, so the colour cannot cite its temperature.`);
+  if (!url) throw new Error(`${id}: source/measurements.json effectiveTemperatureSource cites no URL, so the color cannot cite its temperature.`);
   return { id, name: body.physical.name, system: `${body.physical.name} system`, description: '', paper: { url, credit: source.split(/[:(]/u)[0]!.trim() },
     radius: { value: body.physical.meanRadiusKm / 695700, source: 'the astronomy record', url }, mass: 'unmeasured',
     temperature: { value: Number(measurements.effectiveTemperatureK), source, url }, planets: [], companions: [], notes: [] } as StarSpec;
 }
 
 export async function starLimb(root: string, ids: readonly string[], { archive = liveArchive, resolver = telescopeResolver(root), progress = (_line: string) => {} }: { archive?: Archive; resolver?: Resolver; progress?: (line: string) => void } = {}) {
-  const results: { id: string; limb: string; gravity?: string; colour?: string }[] = [];
+  const results: { id: string; limb: string; gravity?: string; color?: string }[] = [];
   for (const id of ids) {
     const o = `src/objects/${id}`, s = `${o}/source`, files: PackageFiles = new Map();
     for (const path of PACKAGE_FILES) { const text = await readFile(resolve(root, o, path), 'utf8').catch(() => null); if (text !== null) files.set(`${o}/${path}`, text); }
@@ -127,7 +127,7 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
     if (!limb.limbDarkening && await fitInterferometricLimb(root, id, progress)) limb = (await publishedLaw(root, id)) ?? limb;
     if (!limb.limbDarkening) { results.push({ id, limb: `NONE: ${limb.sentence}` }); progress(`  ${id}: no law (${limb.sentence.slice(0, 160)})`); continue; }
     const raster = read(`${s}/preparation/raster.json`), hasColor = raster.surfaces.some((entry: { science?: { kind?: string } }) => entry.science?.kind === 'stellar-photometric-color');
-    let colour: string | undefined;
+    let colorNote: string | undefined;
     if (hasColor) installLimbOnly(files, id, limb, progress);
     else {
       const spec = specFromRecords(id, body, measurements), gaia = /Gaia DR3 (?:source )?(\d{6,})/u.exec(JSON.stringify(host.star?.sources ?? {}))?.[1];
@@ -136,23 +136,23 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
       const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
       const color = await chooseColor(spec, row, { ...ids2, ...(gaia ? { gaia } : {}) }, archive, cmf);
       const installed = await installColorDataset(files, id, color, limb);
-      colour = `${installed.hex} from ${color.route}`;
+      colorNote = `${installed.hex} from ${color.route}`;
       files.set(`${o}/NOTICE.md`, `${String(files.get(`${o}/NOTICE.md`) ?? '').trimEnd()}\n\n${color.credits.join('\n\n')}\n`);
-      files.set(`${o}/README.md`, readmeWithLimb(String(files.get(`${o}/README.md`) ?? ''), `**Colour dataset.** ${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2° observer: ${installed.hex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.`, ''));
+      files.set(`${o}/README.md`, readmeWithLimb(String(files.get(`${o}/README.md`) ?? ''), `**Color dataset.** ${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2° observer: ${installed.hex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.`, ''));
     }
     bindInputs(files, id);
     const measured = limb.limbDarkening && 'published' in limb.limbDarkening;
     files.set(`${o}/NOTICE.md`, `${String(files.get(`${o}/NOTICE.md`) ?? '').replace(/\n\nLimb darkening: [^\n]*/gu, '').trimEnd()}\n\n${limb.credit}\n`);
     files.set(`${o}/README.md`, readmeWithLimb(String(files.get(`${o}/README.md`) ?? ''), `**Limb.** The disc is ${limb.sentence}.${gravity ? ` Gravity: ${gravity.sentence}.` : ''}`,
-      measured ? '- **Measured limb, other band.** The law was measured or fixed outside the visible band the colour is drawn in; the visible limb is not measured.' : `- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and ${gravity?.kind === 'bounded' ? 'a display gravity' : 'gravity'}, not a measurement of this star.`));
+      measured ? '- **Measured limb, other band.** The law was measured or fixed outside the visible band the color is drawn in; the visible limb is not measured.' : `- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and ${gravity?.kind === 'bounded' ? 'a display gravity' : 'gravity'}, not a measurement of this star.`));
     if (gravity && !measurements.surfaceGravityLogg && gravity.kind !== 'bounded') { measurements.surfaceGravityLogg = gravity.logg; measurements.surfaceGravitySource = `${gravity.sentence}${gravity.url ? ` (${gravity.url})` : ''}`; files.set(`${s}/measurements.json`, json(measurements)); }
     const ledgerPath = `${o}/investigations.json`, ledger = files.has(ledgerPath) ? read(ledgerPath) : { schema: 'cssearth-investigation-ledger@1', objectId: id, entries: [] };
     ledger.entries = [...ledger.entries.filter((entry: { id: string }) => entry.id !== 'limb-darkening'), { id: 'limb-darkening', subject: 'Limb darkening', status: 'included',
       finding: `The disc is ${limb.sentence}.${gravity ? ` Gravity: ${gravity.sentence}.` : ''}`, evidence: [...new Set([...(limb.inputs ?? []).map(input => String(input.origin)).filter(Boolean), ...(gravity?.url ? [gravity.url] : [])])] }];
     files.set(ledgerPath, json(ledger));
     for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
-    results.push({ id, limb: limb.grid ?? 'published', ...(gravity ? { gravity: `${gravity.logg} (${gravity.kind})` } : {}), ...(colour ? { colour } : {}) });
-    progress(`  ${id}: limb ${limb.grid ?? 'published'}${gravity ? `, log g ${gravity.logg} (${gravity.kind})` : ''}${colour ? `, colour ${colour}` : ''}`);
+    results.push({ id, limb: limb.grid ?? 'published', ...(gravity ? { gravity: `${gravity.logg} (${gravity.kind})` } : {}), ...(colorNote ? { color: colorNote } : {}) });
+    progress(`  ${id}: limb ${limb.grid ?? 'published'}${gravity ? `, log g ${gravity.logg} (${gravity.kind})` : ''}${colorNote ? `, color ${colorNote}` : ''}`);
   }
   return results;
 }

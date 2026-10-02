@@ -36,10 +36,10 @@ export interface WorldContextPointSource {
     readonly brightnessMultiplier: number;
   };
 }
-/** `contextColor`: the colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour
- * (`contextColour` in @cssearth/objects). `labelCase: 'upper'`: a star, black hole or planet, captioned in capitals. */
+/** `contextColor`: the color its marker, orbit and caption take in the world, prepared from its swatch or catalogue color
+ * (`contextColor` in @cssearth/objects). `labelCase: 'upper'`: a star, black hole or planet, captioned in capitals. */
 /** `plainDot`: an asteroid that is not a map target (not a mission target, no real imagery). The world draws it as a plain
- * dot, and the planner reads its path only when it is named. `dotColor`: a star's colour dimmed by its luminosity, from its
+ * dot, and the planner reads its path only when it is named. `dotColor`: a star's color dimmed by its luminosity, from its
  * package's cited radius and effective temperature. */
 type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper'; readonly classification?: string; readonly systemName?: string; readonly discovery?: Readonly<Record<string, unknown>>; readonly plainDot?: true; readonly dotColor?: string };
 type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource } & WorldContextPresentation;
@@ -129,7 +129,7 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   const input = record(value, 'world context'); keys(input, ['schema', 'frame', 'focus', 'bodies', 'orbit', 'camera', 'system', 'volume', 'sky', 'stars'], 'world context');
   if (input.schema !== 'cssearth-world-context-source@1') throw new TypeError('Unsupported world context source schema.');
   const frame = parseFrame(input.frame);
-  // The prepared presentation a body carries into the world: its context colour and caption case.
+  // The prepared presentation a body carries into the world: its context color and caption case.
   const presentation = (value: Record<string, unknown>, label: string) => {
     if (value.labelCase !== undefined && value.labelCase !== 'upper') throw new TypeError(`${label} label case is ${String(value.labelCase)}, not upper.`);
     if (value.classification !== undefined && !/^[a-z][a-z-]*$/.test(String(value.classification))) throw new TypeError(`${label} classification is ${String(value.classification)}.`);

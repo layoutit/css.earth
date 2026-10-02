@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
-import { isPlacedClassification, mapLabel, NEUTRAL_CATALOGUE_COLOUR, parseObjectDescriptor } from '@cssearth/objects';
+import { isPlacedClassification, mapLabel, NEUTRAL_CATALOGUE_COLOR, parseObjectDescriptor } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/renderer';
@@ -41,7 +41,7 @@ export function parseSpatialContextCommand(args: readonly string[], cwd = proces
   return { sourcePath: resolve(cwd, sourcePath), outputPath: resolve(cwd, outputPath), solarGeometryPath: resolve(cwd, solarGeometryPath) };
 }
 
-/** The sRGB hex of a Planck spectrum at a temperature, through a CIE colour-matching table (the route a star without a measured
+/** The sRGB hex of a Planck spectrum at a temperature, through a CIE color-matching table (the route a star without a measured
  * spectrum takes in packages/bake/src/objects/stellar/stellar-photometric-color.ts). */
 async function planckHex(kelvin: number): Promise<string> {
   const [{ planckColor }, { parseCieTable }, { readCie1931ColorMatching }] = await Promise.all([import('@cssearth/bake/objects/stellar'), import('@cssearth/bake/objects/color'), import('@cssearth/bake/objects/sources')]);
@@ -61,9 +61,9 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
         ...(body.context!.labelPlacement === undefined ? {} : { labelPlacement: body.context!.labelPlacement }),
         ...(isSceneSatellite(body.id) && sceneSatelliteStateKm(body.id, input.frame.epochJdTt).provenance.placement === 'approximate'
           ? { placement: 'approximate' as const } : {}) }));
-    // A star on a hosted orbit around a packaged host is drawn from its astronomy record without a page. Its colour is the Planck
-    // colour at its measured effective temperature, through the CIE 1931 2° observer its host package keeps, as a star package
-    // without a measured spectrum is coloured; with no measured temperature it is the shared neutral gray. Adding its package
+    // A star on a hosted orbit around a packaged host is drawn from its astronomy record without a page. Its color is the Planck
+    // color at its measured effective temperature, through the CIE 1931 2° observer its host package keeps, as a star package
+    // without a measured spectrum is colored; with no measured temperature it is the shared neutral gray. Adding its package
     // later makes it an ordinary, clickable body.
     const packaged = new Set(objects.map(object => object.id));
     const records = BODIES as Readonly<Record<string, { readonly name: string; readonly parent: string | null; readonly effectiveTemperatureK?: number }>>;
@@ -71,17 +71,17 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     for (const id of HOSTED_PLANET_IDS as readonly string[]) {
       const record = records[id], parent = record?.parent;
       if (packaged.has(id) || !parent || !packaged.has(parent)) continue;
-      input.bodies.push({ id, name: mapLabel(record!.name), color: record!.effectiveTemperatureK === undefined ? NEUTRAL_CATALOGUE_COLOUR
+      input.bodies.push({ id, name: mapLabel(record!.name), color: record!.effectiveTemperatureK === undefined ? NEUTRAL_CATALOGUE_COLOR
         : await planckHex(record!.effectiveTemperatureK), unpackaged: true });
     }
   }
   // Each packaged body's world presentation, prepared here so no page carries a stylesheet rule or a registry entry per body:
-  // the colour its marker, orbit and caption take (its swatch, else its catalogue colour lifted for caption contrast,
-  // @cssearth/objects `contextColour`), capitals for a star, black hole or planet's caption, and its classification and system name.
+  // the color its marker, orbit and caption take (its swatch, else its catalogue color lifted for caption contrast,
+  // @cssearth/objects `contextColor`), capitals for a star, black hole or planet's caption, and its classification and system name.
   {
     // Every placed object the world draws: the scenes and the packages the world's host draws.
     const prepared = readPreparedObjects(process.cwd()), registry = prepared.worldObjects;
-    const { contextColour } = await import('@cssearth/objects');
+    const { contextColor } = await import('@cssearth/objects');
     const { contextAnnotationOpacity } = await import('@cssearth/renderer/navigation/marker-presentation.ts');
         const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/jpl-mission-targets.mts')).href) as typeof import('./jpl-mission-targets.mts');
     const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
@@ -93,7 +93,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       if (!object) return;
       const swatch = await readFile(resolve(objectsRoot, object.id, 'swatch.json'), 'utf8').then(text => JSON.parse(text) as { hex: string; display?: { hex: string } },
         (error: unknown) => { if (isMissingFile(error)) return undefined; throw error; });
-      const hex = contextColour(swatch ? swatch.display?.hex ?? swatch.hex : undefined, object.color, contextAnnotationOpacity(object.classification).label);
+      const hex = contextColor(swatch ? swatch.display?.hex ?? swatch.hex : undefined, object.color, contextAnnotationOpacity(object.classification).label);
       if (hex) body.contextColor = hex;
       if (object.classification === 'star' || object.classification === 'black-hole' || object.classification === 'planet') body.labelCase = 'upper';
       // The page needs these for every body without loading the registry: which bodies host systems, and what each is called.
@@ -108,9 +108,9 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       // ring and name, so a Cepheid in a Virgo Cluster galaxy is a target only when its package features it.
       const discovery = discoveries[object.id] as { featured?: unknown; hostsImagery?: unknown } | undefined;
       if (object.classification === 'star' && body !== input.focus && !imagery && discovery?.featured !== true && discovery?.hostsImagery !== true) body.plainDot = true;
-      // A star's dot is its colour dimmed by its luminosity, L/L☉ = (R/R☉)²(T/T☉)⁴ from the radius and effective temperature
+      // A star's dot is its color dimmed by its luminosity, L/L☉ = (R/R☉)²(T/T☉)⁴ from the radius and effective temperature
       // its package cites, against the IAU 2015 nominal solar values. Baked here, so the map writes nothing per frame for it.
-      // A star whose package cites neither keeps its full colour.
+      // A star whose package cites neither keeps its full color.
       if (object.classification === 'star' && body !== input.focus && typeof body.color === 'string') {
         const measured = await readFile(resolve(objectsRoot, object.id, 'source/measurements.json'), 'utf8').then(text => JSON.parse(text) as Record<string, unknown>,
           (error: unknown) => { if (isMissingFile(error)) return undefined; throw error; });
@@ -290,8 +290,8 @@ function positionToleranceM(a: Vector3, b: Vector3): number {
   return Math.max(.001, 8 * Number.EPSILON * Math.max(...a.map(Math.abs), ...b.map(Math.abs)));
 }
 
-/** Presentation choices, not measurements: a star of a thousand Suns or more draws its full colour, one of ten or fewer this
- * share of it, and the magnitudes between fall evenly. Over the black sky, scaling the colour is the dot at that opacity. */
+/** Presentation choices, not measurements: a star of a thousand Suns or more draws its full color, one of ten or fewer this
+ * share of it, and the magnitudes between fall evenly. Over the black sky, scaling the color is the dot at that opacity. */
 const STAR_DOT_FULL_LUMINOSITY = 1000, STAR_DOT_FLOOR_LUMINOSITY = 10, STAR_DOT_FLOOR_BRIGHTNESS = 0.6;
 function starDotBrightness(luminositySolar: number): number {
   const fall = Math.max(0, Math.min(1, Math.log10(STAR_DOT_FULL_LUMINOSITY / luminositySolar) / Math.log10(STAR_DOT_FULL_LUMINOSITY / STAR_DOT_FLOOR_LUMINOSITY)));

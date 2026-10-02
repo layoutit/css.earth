@@ -12,7 +12,7 @@ Betelgeuse is the first body here outside the Solar System and the first whose s
 
 **MATISSE images.** Drevon et al. (2024, [MNRAS Letters 527, L88](https://arxiv.org/abs/2401.12404)) imaged Betelgeuse with VLTI/MATISSE at three epochs. The calibrated visibilities are public in the [JMMC OiDB](https://oidb.jmmc.fr/): 29 files for February 2020, 111 for December 2018 and 48 for December 2020, pinned in `source/manifest.json`. `packages/bake/authoring/betelgeuse/author.mts` averages them in the paper's pseudo-continuum windows (3.942–3.974 and 3.992–3.998 µm). The images were reconstructed with the public [SQUEEZE](https://github.com/fabienbaron/squeeze) code with the paper's prior (maximum entropy, µ = 10, uniform-disc start); the command is in `source/reference/squeeze-command.txt`. The later epochs run through [image-star.mts](../../../packages/telescope-cli/src/archives/interferometry/image-star.mts) with the same recipe. Each dataset shows the image convolved to its interferometric beam (4 mas in February 2020), through the paper's heat palette from dark red to white.
 
-**Colour.** The colour dataset comes from Betelgeuse's VLT/X-shooter spectrum of 12 October 2009, weighted by the CIE 1931 2° observer and converted to sRGB ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#ffc876**. The citation is in [stellar-color.json](source/photometry/stellar-color.json), and [stellar-spectra/author.mts](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts) writes the colour. An independent scan by Kiehling (1987), HR 2061, gives #ffc36f.
+**Color.** The color dataset comes from Betelgeuse's VLT/X-shooter spectrum of 12 October 2009, weighted by the CIE 1931 2° observer and converted to sRGB ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#ffc876**. The citation is in [stellar-color.json](source/photometry/stellar-color.json), and [stellar-spectra/author.mts](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts) writes the color. An independent scan by Kiehling (1987), HR 2061, gives #ffc36f.
 
 **Limb.** The disc is dimmed by the quadratic law Neilson & Lester (2013), A&A 554, A98 compute from spherical ATLAS model atmospheres for the Johnson V band at 3,600 K and log g -0.08 (u1 1.114, u2 -0.025). The supergiant's gravity is below the Claret & Bloemen (2011) grid.
 
@@ -35,10 +35,10 @@ The [navigation marker](source/preparation/navigation.json) is a photosphere cro
 
 **Which side is brighter is weakly constrained.** Negating every closure phase gives an image that fits equally well.
 
-**One hemisphere, one band.** The far hemisphere and the poles were not observed. The colours are a legend for relative intensity at 4 µm, not colour, temperature or albedo.
+**One hemisphere, one band.** The far hemisphere and the poles were not observed. The colors are a legend for relative intensity at 4 µm, not color, temperature or albedo.
 
 **Silicon monoxide band not shipped.** Reconstructions from the flagged channels above 4.00 µm do not fit their closure phases.
 
-**Other limits.** The colour spectrum predates the Great Dimming and is not corrected for slit losses. The limb darkening is a model, not a measurement of this star. The background sky is the Sun's, not the sky from Betelgeuse. The star is self-luminous, so no lighting is applied.
+**Other limits.** The color spectrum predates the Great Dimming and is not corrected for slit losses. The limb darkening is a model, not a measurement of this star. The background sky is the Sun's, not the sky from Betelgeuse. The star is self-luminous, so no lighting is applied.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

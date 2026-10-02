@@ -1,8 +1,8 @@
 /**
- * JunoCam colour photographs. One recipe frame is one calibrated image: a stack of strips through the detector's red,
+ * JunoCam color photographs. One recipe frame is one calibrated image: a stack of strips through the detector's red,
  * green and blue filters, every strip with its own camera from the Juno kernels (`@cssearth/bake/objects/layers/terrestrial`, junocam.ts).
  * The image's two epochs are first fitted to the lit limb of the body's mesh (strip-refinement.mts). Each band then
- * becomes one frame made of its strips, and the three bands one colour photograph, so everything after the frame is the
+ * becomes one frame made of its strips, and the three bands one color photograph, so everything after the frame is the
  * shared route: footprints, photometry, selection between photographs, level matching, display and the report.
  */
 import type { LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.ts';
@@ -27,7 +27,7 @@ import { deriveLimits } from '../limits.ts';
 import { DATASET_KEYS, MOSAIC_KEYS, OPTIONAL_DATASET_KEYS, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer } from '../recipe.ts';
 
 const CONTEXT = 'JunoCam observation recipe';
-/** The bands of the colour photograph, in display order. */
+/** The bands of the color photograph, in display order. */
 const BANDS = ['RED', 'GREEN', 'BLUE'] as const;
 const MAXIMUM_FRAMES = 8;
 
@@ -53,7 +53,7 @@ function validateJunocamDataset(value: unknown, sourceGeometry: unknown) {
   validateEnvelope(recipe, framePaths(recipe), { selections: ['lowest-emission', 'recipe-order', 'finest-resolution'], displays: ['displayRange'], maximumFrames: MAXIMUM_FRAMES, maximumLevelGain: 1.5, samplesPerTriangle: 'required' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
   // Every band composite is a scientific visualization of calibrated bands: it says so and starts its range at zero.
-  if (recipe.display.displayRange?.[0] !== 0 || recipe.metadata.falseColor !== true) throw new TypeError('Band colour states false colour and starts its display range at zero.');
+  if (recipe.display.displayRange?.[0] !== 0 || recipe.metadata.falseColor !== true) throw new TypeError('Band color states false color and starts its display range at zero.');
   const { spice, photometry } = recipe;
   if (!/^[a-z][a-z0-9-]*$/u.test(spice.kernelSet) || spice.kernels.length < 2 || spice.kernels.length > 32 || !Number.isInteger(spice.observer) || !Number.isInteger(spice.target) || spice.observer === spice.target ||
       !spice.targetName || !spice.bodyFrame || !ABERRATIONS.includes(spice.aberration as typeof ABERRATIONS[number]) || recipe.frames.some(frame => !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/u.test(frame.startTime)))
@@ -109,7 +109,7 @@ export const junocamFormat: SurfaceObservationFormat = {
     const policy: SurfacePolicy = { format: recipe.format,
       selection: frames.length === 1 ? 'single' : recipe.selection === 'recipe-order' || recipe.selection === 'finest-resolution' ? recipe.selection : 'lowest-emission',
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
-      display: { range: 'stated-range', low: range[0], high: range[1], units: `reflectance in each filter${retained ? ', with original illumination' : ', disk-normalized'}; false colour`,
+      display: { range: 'stated-range', low: range[0], high: range[1], units: `reflectance in each filter${retained ? ', with original illumination' : ', disk-normalized'}; false color`,
         colorDisplay: bandColorDisplay(BANDS, 'radiance-factor', range), ...displayBasis(recipe.display) },
       photometry: photometry.report, retainsIllumination: photometry.retainsIllumination, limits };
     return { frames, policy, exceeded };

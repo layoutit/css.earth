@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by GJ 9827; the neutral gray is a display convention, not a measured colour.",
+        "qualification": "A sphere of the published radius, lit by GJ 9827; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "gj-9827b-dataset-shape.webp",
         "surface": "gj-9827b-surface-shape@2x.webp",
         "poles": "gj-9827b-poles-shape@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..22P/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of GJ 9827 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of gj-9827's light, as its colour dataset measures it."
+        "notes": "No image or color of GJ 9827 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of gj-9827's light, as its color dataset measures it."
       }
     ]
   },

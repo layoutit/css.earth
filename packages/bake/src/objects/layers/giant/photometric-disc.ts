@@ -2,8 +2,8 @@ import {parse} from '@cssearth/core/schema';
 import {photometricRecipe, type PhotometricRecipe} from './photometric-contract.ts';
 import type {MaterialAsset} from './material-contract.ts';
 import type {OverlayOptions} from 'sharp';
-import {loadLimbLaw,limbFactors,limbOverlay,meanObservedColour,outsideSilhouette,parseLimbBlock,scatteringAngles,type Channels,type LimbLaw} from '../../../photometry/index.ts';
-/** A recipe with its published models loaded and the overlay's reference colour measured from the colour map. */
+import {loadLimbLaw,limbFactors,limbOverlay,meanObservedColor,outsideSilhouette,parseLimbBlock,scatteringAngles,type Channels,type LimbLaw} from '../../../photometry/index.ts';
+/** A recipe with its published models loaded and the overlay's reference color measured from the color map. */
 export type ResolvedPhotometricRecipe = PhotometricRecipe & {law: LimbLaw; reference: Channels<number>};
 import {mkdir,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -41,7 +41,7 @@ export function phaseLightDirection(z: number,reference: readonly number[]):[num
 
 /**
  * One view-aligned overlay of the oblate disc for a light phase: the body's published photometric models relative to
- * the flood-lit disc centre (packages/bake/src/photometry/limb.ts), as one source-over colour and alpha per pixel.
+ * the flood-lit disc centre (packages/bake/src/photometry/limb.ts), as one source-over color and alpha per pixel.
  */
 export function rasterPhotometricDisc(config: ResolvedPhotometricRecipe,lightViewZ: number,{shadowless=false}: {shadowless?: boolean}={}){
   if(!Number.isFinite(lightViewZ)||lightViewZ<-1||lightViewZ>1)throw new TypeError(`Light phase must be within [-1, 1], got ${lightViewZ}.`);
@@ -50,7 +50,7 @@ export function rasterPhotometricDisc(config: ResolvedPhotometricRecipe,lightVie
     const localX=x+0.5-center,localY=y+0.5-center,radius=Math.hypot(localX,localY),boundary=projection.rasterCoverageRadiusX;
     if(radius>boundary+0.5)continue;
     const normal=projectedNormal(localX,localY*projection.rasterRadiusY/projection.rasterRadiusX,projection,config),coverage=clamp(boundary-radius+0.5);
-    // Past the textured ellipse the overlay only darkens: its colour would outline the planet on black space.
+    // Past the textured ellipse the overlay only darkens: its color would outline the planet on black space.
     const inside=Math.hypot(localX/projection.rasterRadiusX,localY/projection.rasterRadiusY)<=1;
     const{incidence,emission,phase}=scatteringAngles(normal,light,view,floor),overlay=limbOverlay(limbFactors(config.law,incidence,emission,phase),config.reference),[r,g,b,alpha]=inside?overlay:outsideSilhouette(overlay);
     if(alpha===0||coverage===0)continue;
@@ -74,7 +74,7 @@ export function parsePhotometricDiscRecipe(input: unknown){
 
 export async function resolvePhotometricDiscRecipe({sourceDirectory,config: input}: {sourceDirectory: string; config: unknown}): Promise<ResolvedPhotometricRecipe>{
   const config = parsePhotometricDiscRecipe(input);await verifyObservationSources(sourceDirectory,config.sources);
-  const law=await loadLimbLaw(sourceDirectory,config.limb.models),reference=await meanObservedColour(resolve(sourceDirectory,config.limb.reference));
+  const law=await loadLimbLaw(sourceDirectory,config.limb.models),reference=await meanObservedColor(resolve(sourceDirectory,config.limb.reference));
   return{...config,law,reference};
 }
 

@@ -30,7 +30,7 @@
             "kind": "unresolved",
             "label": "Danish 1.54-m B V R",
             "evidence": "https://www.eso.org/public/images/m83/",
-            "reason": "The publisher's colour composite; the retained record does not identify the individual exposures."
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
           }
         ]
       }
@@ -162,7 +162,7 @@
       "path": "src/objects/m83-layers/source/hadfield-wr/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the A spectroscopic search for the non-nuclear Wolf-Rayet population of the metal-rich spiral galaxy M83 rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the A spectroscopic search for the non-nuclear Wolf-Rayet population of the metal-rich spiral galaxy M83 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -174,7 +174,7 @@
       "path": "src/objects/m83-layers/source/long-hii/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Supernova remnants in M83 as observed with MUSE rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the Supernova remnants in M83 as observed with MUSE rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -186,7 +186,7 @@
       "path": "src/objects/m83-layers/source/winkler-snr/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the High-resolution spectra of supernova remnants in M83 rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the High-resolution spectra of supernova remnants in M83 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."

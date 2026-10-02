@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-815. Its orbit and size follow Psaridi e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 11.1972769 d Psaridi et al. 2024 (2024A&A...685A...5P), via the NASA Exoplanet Archive ps table (pl_refname PSARIDI_ET_AL__2024): a/R* 25.2; Psaridi et al. 2024 (2024A&A...685A...5P), via the NASA Exoplanet Archive ps table (pl_refname PSARIDI_ET_AL__2024): inclination 89.36 degrees No archive row states an eccentricity; the orbit is taken as circular ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460026.624284 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-815's measured colour (#ffdfca, the colour dataset of toi-815 (src/objects/toi-815/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-815's measured color (#ffdfca, the color dataset of toi-815 (src/objects/toi-815/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-815's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (90, 99, 100), folded onto its orbit. Upper limits and rows without an error are left out.
 

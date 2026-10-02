@@ -49,9 +49,9 @@ test('ISIS Lunar-Lambert gains equal the camera mosaic and observed-color arithm
     assert.equal(diskGain({ family: 'lunar-lambert', weight }, { mu0, mu, phase: 0 }, normal), legacy.shapeCamera(mu0, mu, weight), `weight ${weight} at ${mu0}, ${mu}`);
     compared++;
   }
-  // Triton's observed colours reference 30° incidence at nadir emission.
+  // Triton's observed colors reference 30° incidence at nadir emission.
   const radians = Math.PI / 180, reference = { mu0: Math.cos(30 * radians), mu: Math.cos(0 * radians), phase: 0 };
-  // Observed colours carry per-observation weights, so any weight must match.
+  // Observed colors carry per-observation weights, so any weight must match.
   for (const weight of [0.5, 0.123, 0.77]) for (const mu0 of cosines) for (const mu of cosines) {
     assert.equal(diskGain({ family: 'lunar-lambert', weight }, { mu0, mu, phase: 0 }, reference), legacy.observedColor(mu0, mu, weight, 30, 0));
     compared++;

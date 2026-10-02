@@ -6,7 +6,7 @@ Its radius and temperature follow Stassun et al. 2017. It is also HD 233731. The
 
 **Star.** Placement: Gaia DR3 source 846946629987527168, parallax 12.273 ± 0.016 mas (81.48 pc). Radius 1.11 +/- 0.05 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of HAT-P-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). Mass 1.13 +/- 0.22 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of HAT-P-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). Temperature 5,302 K from Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-22 b in the NASA Exoplanet Archive. log g 4.4 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 846946629987527168, through the CIE 1931 2° observer: #ffe9dc. Routes tried in order: stis-ngsl: HD 233731 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 846946629987527168, through the CIE 1931 2° observer: #ffe9dc. Routes tried in order: stis-ngsl: HD 233731 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,302 K and log g 4.4 (u1 0.571, u2 0.185): a model, because no fit of this star's limb is used.
 

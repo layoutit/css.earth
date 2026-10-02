@@ -9,7 +9,7 @@ const absent = (value: unknown): value is undefined => value === undefined;
 const dataset = union(
   object({id:string, operation:literal('rgb-observed-gaps'), source:string, files, control,
     polarDetails:absent, coverageSources:array(string), planetographicAxisRatio:number, projection}),
-  // A colour map with no per-band coverage maps: its measured rows are pinned, and every row outside them is missing.
+  // A color map with no per-band coverage maps: its measured rows are pinned, and every row outside them is missing.
   object({id: string, operation: literal('rgb-measured-rows'), source: string, files, control, polarDetails: absent,
     coverage: object({columnStride: number, minimumMean: number, firstMeasuredRow: number, lastMeasuredRow: number}), projection}),
   object({id: string, operation: literal('scalar-observed-gaps'), source: string, files, control: absent, polarDetails: absent,

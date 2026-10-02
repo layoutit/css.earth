@@ -18,7 +18,7 @@ Sgr A*'s disc uses a shadow diameter the EHT measured from its data alone. The 2
 
 ## The EHT image
 
-The collaboration released its calibrated 2017 data (release 2019-D01-01) and its three imaging pipelines (release 2019-D01-02). The eht-imaging pipeline ships with its fiducial parameters, and no Top Set parameter table was released for M87, so the image here is one run of that pipeline, as released, on the April 11 low- and high-band data. That is the day M87 Paper I shows. It sits behind the shadow disc with celestial north where the scene's sky has it, in eht-imaging's own colour map (matplotlib afmhot), with opacity following the light. `node packages/bake/authoring/eht/topset-mean.mts m87-star` remakes it from [the recipe](source/preparation/eht-fiducial.json).
+The collaboration released its calibrated 2017 data (release 2019-D01-01) and its three imaging pipelines (release 2019-D01-02). The eht-imaging pipeline ships with its fiducial parameters, and no Top Set parameter table was released for M87, so the image here is one run of that pipeline, as released, on the April 11 low- and high-band data. That is the day M87 Paper I shows. It sits behind the shadow disc with celestial north where the scene's sky has it, in eht-imaging's own color map (matplotlib afmhot), with opacity following the light. `node packages/bake/authoring/eht/topset-mean.mts m87-star` remakes it from [the recipe](source/preparation/eht-fiducial.json).
 
 ## Evidence
 

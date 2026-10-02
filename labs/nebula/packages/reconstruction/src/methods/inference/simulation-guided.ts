@@ -58,7 +58,7 @@ export function conditionSimulationComponents(components:readonly EmissionCompon
     }
     const modes:{center:number;sigma:number;priorWeight:number}[]=[];
     if(mass>0&&settings.placement==='conditional-quantile') {
-      // A fixed deterministic draw per fitted support, never image intensity or colour: SHA-256 is used here only as a
+      // A fixed deterministic draw per fitted support, never image intensity or color: SHA-256 is used here only as a
       // uniform pseudo-random generator seeded by the component ID; nothing is stored or compared.
       const quantile=(createHash('sha256').update('cssearth-conditional-depth@1:'+component.id).digest().readUInt32BE(0)+.5)/4294967296;
       let cumulative=0,index=0;
@@ -109,7 +109,7 @@ export function fitSimulationGuidedEmission(input:EmissionFitInput,requestedCont
   const field:EmissionFieldModel={...fitted.field,components:conditioned.components,identity:'',scaffold:null,
     assumptions:{...fitted.field.assumptions,equalNearFarSplit:false,velocityUncoveredComponents:conditioned.components.length,
       depth:settings.placement==='conditional-quantile'?
-        'Each finite image feature receives one deterministic conditional depth draw from the pinned density prior. This is an authored realization of a published bulk model, not measured individual stellar depths. Image intensity and colour do not choose the draw; no feature is copied through the line of sight. Finite feature thickness is authored.':
+        'Each finite image feature receives one deterministic conditional depth draw from the pinned density prior. This is an authored realization of a published bulk model, not measured individual stellar depths. Image intensity and color do not choose the draw; no feature is copied through the line of sight. Finite feature thickness is authored.':
         'Image-fitted emission weights on finite components; source density supplies conditional ray-depth modes, not gas measurements. Local component thickness is bounded by feature size and prior mode width. With one selected mode, the strongest prior peak receives the entire feature weight as an authored dominant-mode hypothesis. Multiple selected modes receive their normalized basin masses. Image intensity never sets depth.',
       halo:settings.placement==='conditional-quantile'?
         'Every finite feature requires positive conditional prior support; unsupported features or draws whose kernels exceed the prior bounds reject the fit. No midplane fallback or inward-clamped draws.':

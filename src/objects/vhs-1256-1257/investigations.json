@@ -3,8 +3,8 @@
   "objectId": "vhs-1256-1257",
   "entries": [
     {
-      "id": "photosphere-colour",
-      "subject": "The colour of the photosphere",
+      "id": "photosphere-color",
+      "subject": "The color of the photosphere",
       "status": "included",
       "finding": "A Planck spectrum at the published 2,700 K (Dupuy et al. 2023, the pair's combined spectrum), through the CIE 1931 2-degree observer into sRGB with the D65 white.",
       "evidence": [
@@ -22,9 +22,9 @@
     },
     {
       "id": "gaia-xp-spectrum",
-      "subject": "Gaia DR3's BP/RP spectrum of the pair as the colour",
+      "subject": "Gaia DR3's BP/RP spectrum of the pair as the color",
       "status": "excluded",
-      "finding": "Gaia DR3 source 3526198184723289472 has a BP/RP spectrum (has_xp_continuous true, no sampled spectrum published), but it is the combined light of A and B, which Gaia does not resolve, and the pair is faint in BP (18.0 mag), where the visible colour is weighted. The paper temperature is used for both stars instead.",
+      "finding": "Gaia DR3 source 3526198184723289472 has a BP/RP spectrum (has_xp_continuous true, no sampled spectrum published), but it is the combined light of A and B, which Gaia does not resolve, and the pair is faint in BP (18.0 mag), where the visible color is weighted. The paper temperature is used for both stars instead.",
       "revisitWhen": "Gaia resolves the pair, or a spectrum of A alone is published.",
       "evidence": [
         "https://gea.esac.esa.int/archive/",

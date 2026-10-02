@@ -1,5 +1,5 @@
 /**
- * Earth's limb law measured from DSCOVR EPIC Level 1B frames: one Minnaert coefficient per colour channel (680, 551
+ * Earth's limb law measured from DSCOVR EPIC Level 1B frames: one Minnaert coefficient per color channel (680, 551
  * and 443 nm), fitted to the whole sunlit disc as EPIC sees it from L1, clouds and atmosphere included. Each frame's
  * pixels are binned by the cosines of their Sun and view zenith angles; a bin's median brightness damps clouds and
  * glint, and the Minnaert law ln I = ln I0 + k ln mu0 + (k - 1) ln mu is fitted to the bin medians, weighted by pixel

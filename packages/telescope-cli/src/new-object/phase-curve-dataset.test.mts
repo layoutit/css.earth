@@ -28,9 +28,9 @@ test('the phase-curve route rebuilds HD 209458 b\'s hand-made Zellem heat map: t
   assert.deepEqual(control.legend, hand.control.legend);
   assert.deepEqual([control.thumbnail, control.surface, control.poles, control.falseColor], [hand.control.thumbnail, hand.control.surface, hand.control.poles, hand.control.falseColor]);
   assert.deepEqual(after('object.json').properties.recipe.surfaces[0].datasets, hand.datasets);
-  assert.equal(after('source/content/object.json').datasets.defaultDataset, 'thermal', 'the colour dataset stays the default');
+  assert.equal(after('source/content/object.json').datasets.defaultDataset, 'thermal', 'the color dataset stays the default');
   assert.equal(after('source/preparation/raster.json').surfaces.length, 2, 'the dataset is replaced, not added twice');
-  assert.match(control.notes, /The hottest longitude is 41° east of noon\. The false colour runs from 850 to 1,600 K\./u);
+  assert.match(control.notes, /The hottest longitude is 41° east of noon\. The false color runs from 850 to 1,600 K\./u);
   assert.throws(() => parsePhaseCurveEntries([{ id, dataset: 'map', label: 'x', path: 'phase.json', url: 'u', credit: 'c', observed: 'o', record }]), /science\/<paper>/u);
   assert.throws(() => parsePhaseCurveEntries([{ id, dataset: 'map', label: 'x', path: 'science/a/b.json', url: 'u', credit: 'c', observed: 'o', record: { ...record, model: { kind: 'starry' } } }]), /deposited spectra/u);
 });

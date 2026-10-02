@@ -1,4 +1,4 @@
-/** A star's display colour: display-space sRGB bytes, not spectral radiance. */
+/** A star's display color: display-space sRGB bytes, not spectral radiance. */
 export type StarRgb = readonly [number, number, number];
 /** The existing catalogue presentation's Tanner Helland fit; RGB is display-space, not spectral radiance. */
 export function temperatureColor(kelvin: number): StarRgb {

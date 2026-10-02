@@ -6,7 +6,7 @@ Its radius and temperature follow Lockley et al. 2025. The introduction is gener
 
 **Star.** Placement: Gaia DR3 source 6436995652638923392, parallax 5.995 ± 0.015 mas (166.80 pc). Radius 1.05 +/- 0.03 solar radii from Lockley et al. 2025, the stellar radius of the default parameter set of TOI-1117 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract). Mass 0.97 +/- 0.02 solar masses from Lockley et al. 2025, the stellar mass of the default parameter set of TOI-1117 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract). Temperature 5,635 K from Lockley et al. 2025, the stellar temperature of the default parameter set of TOI-1117 b in the NASA Exoplanet Archive. log g 4.38 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 6436995652638923392, through the CIE 1931 2° observer: #fff0eb. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 6436995652638923392, through the CIE 1931 2° observer: #fff0eb. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,635 K and log g 4.38 (u1 0.489, u2 0.241): a model, because no fit of this star's limb is used.
 

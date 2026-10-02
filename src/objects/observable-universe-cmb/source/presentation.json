@@ -5,11 +5,11 @@
       {
         "id": "cmb",
         "label": "Cosmic microwave background sphere",
-        "process": "Sample the SMICA temperature map onto the planets' standard sphere (16 latitude bands of 32 cells and two round polar caps, 450 leaves), coloured with the Planck table over plus and minus 300 microkelvin, at the comoving distance of z* = 1089.80; draw a camera-facing limb plate over it; mark the patches of the ICRS northern hemisphere the cutaway opens; render a preview of each dataset (cut open, full sphere) from the same map, limb and opacities; write the datasets' card content and the colour table's legend.",
+        "process": "Sample the SMICA temperature map onto the planets' standard sphere (16 latitude bands of 32 cells and two round polar caps, 450 leaves), colored with the Planck table over plus and minus 300 microkelvin, at the comoving distance of z* = 1089.80; draw a camera-facing limb plate over it; mark the patches of the ICRS northern hemisphere the cutaway opens; render a preview of each dataset (cut open, full sphere) from the same map, limb and opacities; write the datasets' card content and the color table's legend.",
         "recipe": "source/cmb/sphere.json",
         "inputs": [
           "planck-smica-map",
-          "planck-colour-table"
+          "planck-color-table"
         ],
         "outputs": [
           "prepared/cmb.json",
@@ -27,7 +27,7 @@
         "limitations": [
           "Texels are about 10.5 arcminutes at the equator, coarser than the map's 5 arcminute beam.",
           "The whole sky is drawn, including the 15.8% outside the map's own temperature confidence mask (TMASK), where Milky Way foreground remains.",
-          "The colour table's gamma of 1.6 and the linear limb (u = 0.6) are presentation choices recorded in the recipe; nothing sees this surface from outside.",
+          "The color table's gamma of 1.6 and the linear limb (u = 0.6) are presentation choices recorded in the recipe; nothing sees this surface from outside.",
           "The cutaway, its opacities and the preview view are presentation choices recorded in the recipe; nothing is cut in the data."
         ]
       }

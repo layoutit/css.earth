@@ -26,11 +26,11 @@
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffccac, the colour dataset of k2-141 (src/objects/k2-141/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured color in this package; a sphere of the published radius, lit by its own star, whose measured color (#ffccac, the color dataset of k2-141 (src/objects/k2-141/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "k2-141",
           "srgb": "#ffccac",
-          "source": "the colour dataset of k2-141 (src/objects/k2-141/source/photometry/stellar-color.json)"
+          "source": "the color dataset of k2-141 (src/objects/k2-141/source/photometry/stellar-color.json)"
         }
       }
     }

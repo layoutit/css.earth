@@ -64,10 +64,10 @@
       ]
     },
     {
-      "id": "dataset-colour",
+      "id": "dataset-color",
       "subject": "HST/ACS/HRC F435W, F606W and F814W, programme 9987, starlight removed here with alpha Pictoris as the reference",
       "status": "included",
-      "finding": "Drawn as the colour dataset, 29 to 135 au. The reference star is divided by the flux ratios Golimowski et al. (2006) state (1.65, 1.75, 1.90), and only the shift is fitted: 0.6 to 0.9 pixel against the paper's 0.8. A free fit would scale the reference 1.7 to 2.0 times higher, and far from the disc beta Pic's raw halo is 0.81 of alpha Pic's where the paper's ratio predicts 0.61, so about a quarter of the halo stays in the image. The paper's value is used because a published number outranks one fitted here; the free-fit scale is recorded in each product record.",
+      "finding": "Drawn as the color dataset, 29 to 135 au. The reference star is divided by the flux ratios Golimowski et al. (2006) state (1.65, 1.75, 1.90), and only the shift is fitted: 0.6 to 0.9 pixel against the paper's 0.8. A free fit would scale the reference 1.7 to 2.0 times higher, and far from the disc beta Pic's raw halo is 0.81 of alpha Pic's where the paper's ratio predicts 0.61, so about a quarter of the halo stays in the image. The paper's value is used because a published number outranks one fitted here; the free-fit scale is recorded in each product record.",
       "evidence": [
         "https://arxiv.org/abs/astro-ph/0602292",
         "https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/src/archives/hst/programs/beta-pictoris-9987.psf-subtraction.json",
@@ -75,8 +75,8 @@
       ]
     },
     {
-      "id": "dataset-colour-extent",
-      "subject": "How far the ACS colour dataset is drawn",
+      "id": "dataset-color-extent",
+      "subject": "How far the ACS color dataset is drawn",
       "status": "included",
       "finding": "Drawn to the grid's edge, 135 au, though the images show the disc farther. Measured on the subtracted, roll-averaged images in 20 au bins along the midplane (within 6 au of it), in units of MJy/sr per Jy of starlight, against a per-channel noise of 0.0026 to 0.0035: 2.93 at 40-60 au, 1.18 at 80-100, 0.441 at 120-140, 0.249 at 140-160, 0.137 at 160-180, 0.084 at 180-200, 0.054 at 200-220, 0.036 at 220-240, 0.026 at 240-260, 0.018 at 260-280, 0.011 at 280-300 and 0.007 at 300-320, where the camera's field ends. Every dataset of one bank must share a frame, so one grid holds all three; a grid wide enough for 320 au needs 4.1 au cells, and at that size the STIS dataset's midplane cannot be measured (only 5 bins above five times the noise), so the wide grid was rejected. The dataset states the cut in its recipe (beyondGrid) and the author keeps it as a limitation.",
       "evidence": [

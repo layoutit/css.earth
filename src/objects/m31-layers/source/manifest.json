@@ -36,7 +36,7 @@
             "kind": "unresolved",
             "label": "Local Group Survey (KPNO Mayall 4-m, Mosaic)",
             "evidence": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/",
-            "reason": "The publisher's colour composite of ten Mosaic pointings in U, B, V, I and H-alpha; the retained record does not identify the individual exposures."
+            "reason": "The publisher's color composite of ten Mosaic pointings in U, B, V, I and H-alpha; the retained record does not identify the individual exposures."
           },
           {
             "kind": "unresolved",
@@ -250,7 +250,7 @@
       "path": "src/objects/m31-layers/source/azimlu-hii/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the A new catalog of H II regions in M31 rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the A new catalog of H II regions in M31 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -274,7 +274,7 @@
       "path": "src/objects/m31-layers/source/lee-snr/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the A new optical survey of supernova remnant candidates in M31 rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the A new optical survey of supernova remnant candidates in M31 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -286,7 +286,7 @@
       "path": "src/objects/m31-layers/source/lggs-stars/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the A Survey of Local Group Galaxies Currently Forming Stars. I. UBVRI Photometry of Stars in M31 and M33 rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the A Survey of Local Group Galaxies Currently Forming Stars. I. UBVRI Photometry of Stars in M31 and M33 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -298,7 +298,7 @@
       "path": "src/objects/m31-layers/source/merrett-pne/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the A deep kinematic survey of planetary nebulae in the Andromeda galaxy using the Planetary Nebula Spectrograph rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the A deep kinematic survey of planetary nebulae in the Andromeda galaxy using the Planetary Nebula Spectrograph rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -310,7 +310,7 @@
       "path": "src/objects/m31-layers/source/pandromeda-cepheids/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Properties of M31. II. A Cepheid disk sample derived from the first year of PS1 PAndromeda data rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the Properties of M31. II. A Cepheid disk sample derived from the first year of PS1 PAndromeda data rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -322,7 +322,7 @@
       "path": "src/objects/m31-layers/source/phat-clusters/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the PHAT stellar cluster survey. II. Andromeda Project cluster catalog rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the PHAT stellar cluster survey. II. Andromeda Project cluster catalog rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."

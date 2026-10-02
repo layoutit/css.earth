@@ -6,8 +6,8 @@ import sharp from 'sharp';
 import { parseMurReceipt } from '../source-contract.ts';
 import type { EnsoRecipe } from '../contracts.ts';
 
-// The prepared NASA MUR anomaly image and its colour legend, read by the paged-ellipsoid assets. Acquiring and mosaicking the
-// tiles is Earth's authoring (packages/bake/authoring/earth/mur-imagery.mts), which reads the colour table through this module.
+// The prepared NASA MUR anomaly image and its color legend, read by the paged-ellipsoid assets. Acquiring and mosaicking the
+// tiles is Earth's authoring (packages/bake/authoring/earth/mur-imagery.mts), which reads the color table through this module.
 function demand(ok: unknown, why: string): asserts ok { if (!ok) throw new Error(`MUR imagery: ${why}`); };
 
 export function parseMurColors(xml: string) {

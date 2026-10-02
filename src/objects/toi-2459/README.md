@@ -6,7 +6,7 @@ Its radius and temperature follow Mistry et al. 2023. The introduction is genera
 
 **Star.** Placement: Gaia DR3 source 4807503030677131392, parallax 27.294 ± 0.013 mas (36.64 pc). Radius 0.6751 +/- 0.063 solar radii from Mistry et al. 2023, the stellar radius of the default parameter set of TOI-2459 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract). Mass 0.66 +/- 0.0763 solar masses from Mistry et al. 2023, the stellar mass of the default parameter set of TOI-2459 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract). Temperature 4,195 K from Mistry et al. 2023, the stellar temperature of the default parameter set of TOI-2459 b in the NASA Exoplanet Archive. log g 4.6 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 4807503030677131392, through the CIE 1931 2° observer: #ffc39c. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 4807503030677131392, through the CIE 1931 2° observer: #ffc39c. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,195 K and log g 4.6 (u1 0.708, u2 0.076): a model, because no fit of this star's limb is used.
 

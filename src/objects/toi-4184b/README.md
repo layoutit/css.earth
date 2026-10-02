@@ -8,7 +8,7 @@ It is the only planet known around TOI-4184. Its orbit and size follow Barkaoui 
 
 **Orbit.** Barkaoui et al. 2023 (2023A&A...677A..38B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2023): P 4.9019804 d Barkaoui et al. 2023 (2023A&A...677A..38B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2023): a/R* 30.79; Barkaoui et al. 2023 (2023A&A...677A..38B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2023): inclination 89.43 degrees No archive row states an eccentricity; the orbit is taken as circular Barkaoui et al. 2023 (2023A&A...677A..38B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2023): transit mid-time 2459483.65667 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-4184's measured colour (#ffbf7c, the colour dataset of toi-4184 (src/objects/toi-4184/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-4184's measured color (#ffbf7c, the color dataset of toi-4184 (src/objects/toi-4184/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-4184's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (93, 94, 95), folded onto its orbit. Upper limits and rows without an error are left out.
 

@@ -10,7 +10,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 Measured, from Torres et al. 2015, ApJ 800, 99 (2015), arXiv:1501.01101: radius 1.17 ± 0.08 Earth radii, period 129.9441 days, inclination 89.96 degrees, transit time (tau = BJD_UTC 2455789.4940 (the paper gives the time in UTC, not TDB; the difference of about a minute is not applied)). Scaled distance a/R* = 178.0. The orbit is drawn circular. The position angle of the orbit on the sky is not measured; the ascending node at celestial north is a display convention.
 
-Not measured and not shown: mass, colour, albedo, surface, atmosphere, rotation. The rotation is assumed synchronous.
+Not measured and not shown: mass, color, albedo, surface, atmosphere, rotation. The rotation is assumed synchronous.
 
 ## Evidence
 

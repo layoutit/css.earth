@@ -1,6 +1,6 @@
 {
-  "schema": "cssearth-whole-disc-colour@1",
-  "id": "karkoschka-1998-whole-disc-colour",
+  "schema": "cssearth-whole-disc-color@1",
+  "id": "karkoschka-1998-whole-disc-color",
   "quantity": "Linear sRGB (D65) of Saturn's disc in sunlight, divided by the luminance of the sunlight; only the channel ratios are used.",
   "spectrum": {
     "product": "1995LOW.TAB, PDS volume GBAT_0001, data set ESO-J/S/N/U-SPECTROPHOTOMETER-4-V2.0",
@@ -11,7 +11,7 @@
     "spectrum": "Planck, 5772 K: the Sun's effective temperature in NASA's Sun fact sheet, the temperature of the lane's solar tint",
     "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html"
   },
-  "observer": "CIE 1931 2 degree colour-matching functions (packages/bake/src/objects/sources/reference-bank.ts), summed at 1 nm and converted with the IEC 61966-2-1 XYZ-to-linear-sRGB matrix, as spectrumLinearSrgb in packages/bake/src/objects/stellar/stellar-photometric-color.ts",
+  "observer": "CIE 1931 2 degree color-matching functions (packages/bake/src/objects/sources/reference-bank.ts), summed at 1 nm and converted with the IEC 61966-2-1 XYZ-to-linear-sRGB matrix, as spectrumLinearSrgb in packages/bake/src/objects/stellar/stellar-photometric-color.ts",
   "linearSrgb": [
     0.616839,
     0.471292,

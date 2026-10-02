@@ -6,7 +6,7 @@ Its radius and temperature follow Nielsen et al. 2020. The introduction is gener
 
 **Star.** Placement: Gaia DR3 source 4698692748651744128, parallax 9.062 ± 0.010 mas (110.35 pc). Radius 0.848 +/- 0.011 solar radii from Nielsen et al. 2020, the stellar radius of the default parameter set of TOI-125 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract). Mass 0.859 +/- 0.044 solar masses from Nielsen et al. 2020, the stellar mass of the default parameter set of TOI-125 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract). Temperature 5,320 K from Nielsen et al. 2020, the stellar temperature of the default parameter set of TOI-125 b in the NASA Exoplanet Archive. log g 4.52 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 4698692748651744128, through the CIE 1931 2° observer: #ffe7d9. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 4698692748651744128, through the CIE 1931 2° observer: #ffe7d9. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,320 K and log g 4.52 (u1 0.568, u2 0.187): a model, because no fit of this star's limb is used.
 

@@ -8,7 +8,7 @@
       "origin": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.3333333&projection=TAN&coordsys=icrs&ra=143.04&dec=21.500556&format=jpg",
       "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
       "title": "SDSS9 color",
-      "credit": "Sloan Digital Sky Survey; colour HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+      "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
       "displayCredit": "SDSS",
       "acquisition": "The CDS hips2fits cutout (3000 x 3000 px), restored from its origin; not tracked. Registration is the request, checked against Gaia stars (recipe observation). A display composite, not a calibrated scientific array.",
       "sourceBinding": {
@@ -30,7 +30,7 @@
             "kind": "unresolved",
             "label": "SDSS g r i",
             "evidence": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
-            "reason": "The publisher's colour composite; the retained record does not identify the individual exposures."
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
           }
         ]
       }
@@ -148,7 +148,7 @@
       "path": "src/objects/ngc-2903-layers/source/popping-hii/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Multiwavelength study of the star-formation in the bar of NGC 2903 rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the Multiwavelength study of the star-formation in the bar of NGC 2903 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -160,7 +160,7 @@
       "path": "src/objects/ngc-2903-layers/source/vucetic-snr/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Fit the one display number a published colour image does not print: the brightness stretch that maps a reflectance-colour
+/** Fit the one display number a published color image does not print: the brightness stretch that maps a reflectance-color
  * dataset onto the publisher's own figure panel.
  *
  *   node packages/telescope-cli/authoring/circumstellar/fit-figure-stretch.mts <object id> <dataset id> <figure.png> [--raw <dir>]...
@@ -9,7 +9,7 @@
  * is read about the star onto exactly that panel's pixel grid, divided by the star's flux, and averaged into the red, green
  * and blue channels the recipe names; each channel is shown as log(1 + a u) / log(1 + a) with u = reflectance / top, the form
  * the same paper prints its single-filter scales in. `a`, `top` and the star's offset in the panel (up to six pixels either
- * way) are fitted to the panel's colours between 1 and 4.4 arcseconds, the ring and its halo; the mirrored image is fitted too,
+ * way) are fitted to the panel's colors between 1 and 4.4 arcseconds, the ring and its halo; the mirrored image is fitted too,
  * as a handedness check. The figure is read, never retained: only these numbers go into the recipe. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -49,7 +49,7 @@ export async function reflectanceChannels(options: { program: string; channels: 
   return { channels, planes, entries };
 }
 
-/** Fit `a`, `top` and the star's offset to the figure panel's colours; returns the fit and the mirrored fit's error. */
+/** Fit `a`, `top` and the star's offset to the figure panel's colors; returns the fit and the mirrored fit's error. */
 export async function fitFigureStretch(figure: string, panel: { x0: number; y0: number; width: number; height: number; pixelsPerArcsec: number }, channels: readonly Float32Array[], size: number) {
   const { data, info } = await sharp(await readFile(figure)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   if (size !== panel.width || size !== panel.height) throw new RangeError('The channels are sampled on the panel\'s own square grid.');

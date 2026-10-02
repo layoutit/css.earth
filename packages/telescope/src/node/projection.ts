@@ -65,7 +65,7 @@ fits.HDUList([fits.PrimaryHDU(),fits.ImageHDU(mapped,header=hdr,name='VALUE'),fi
 lo,hi=float(np.nanmin(mapped)),float(np.nanmax(mapped)); norm=ImageNormalize(vmin=lo,vmax=hi,stretch=LinearStretch())
 cmap=matplotlib.colormaps['viridis'].copy();cmap.set_bad('#333941')
 rgba=cmap(norm(np.ma.masked_invalid(mapped)),bytes=True);Image.fromarray(rgba).save(out/'texture.png')
-# Prepared polar plates use the same sample lookup and colour scale as the map.
+# Prepared polar plates use the same sample lookup and color scale as the map.
 n=128; yy,xx=np.mgrid[:n,:n]; xx=(xx+.5)/n*2-1;yy=(yy+.5)/n*2-1
 rho=np.hypot(xx,yy); angle=np.mod(np.degrees(np.arctan2(yy,xx)),360); polar=[]
 for sign in [1,-1]:

@@ -67,7 +67,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour of a blackbody at the star's published temperature. The disc itself is unresolved.",
+        "qualification": "Color of a blackbody at the star's published temperature. The disc itself is unresolved.",
         "thumbnail": "vhs-1256-1257-dataset-color.webp",
         "surface": "vhs-1256-1257-surface-color@2x.webp",
         "poles": "vhs-1256-1257-poles-color@2x.webp",
@@ -77,7 +77,7 @@
           "url": "https://arxiv.org/abs/2208.08448"
         },
         "falseColor": false,
-        "notes": "The colour of a 2,700 K blackbody, the model temperature Dupuy et al. (2023) fit to the combined light of A and B; the two are nearly equal in brightness."
+        "notes": "The color of a 2,700 K blackbody, the model temperature Dupuy et al. (2023) fit to the combined light of A and B; the two are nearly equal in brightness."
       }
     ]
   },

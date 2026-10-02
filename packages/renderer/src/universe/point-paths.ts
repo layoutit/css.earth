@@ -34,7 +34,7 @@ export function mountPointPaths(host: HTMLElement, palette: readonly string[], i
   part.append(group); svg.append(part);
   const paths = new Map([...new Set(palette)].map(color => {
     const path = document.createElementNS(SVG_NS, 'path');
-    // A paint is `#rrggbbaa@radius` (batched-spatial-points.ts pointPaint): the path strokes its colour.
+    // A paint is `#rrggbbaa@radius` (batched-spatial-points.ts pointPaint): the path strokes its color.
     path.setAttribute('fill', 'none'); path.setAttribute('stroke', color.split('@')[0]!); path.setAttribute('stroke-linecap', 'round'); group.append(path);
     const entry = { path, text: '', published: '', width: 0 };
     return [color, entry] as const;
@@ -47,13 +47,13 @@ export function mountPointPaths(host: HTMLElement, palette: readonly string[], i
     /** This palette's group: its opacity dims these paths alone. */
     part,
     residentElements: paths.size + (into ? 2 : 3),
-    /** A dot colour's path, stroked as wide as its dots: resolved once for each point before any frame, so a frame only
-     * adds positions. One path strokes all its dots at one width, so a paint (a colour at a radius) is one size. */
+    /** A dot color's path, stroked as wide as its dots: resolved once for each point before any frame, so a frame only
+     * adds positions. One path strokes all its dots at one width, so a paint (a color at a radius) is one size. */
     entry(color: string, radius: number) {
       const index = indexOf.get(color);
-      if (index === undefined) throw new TypeError(`Point colour ${color} is absent from the prepared paint palette.`);
+      if (index === undefined) throw new TypeError(`Point color ${color} is absent from the prepared paint palette.`);
       const entry = entries[index]!, width = radius * 2 * SUBPIXELS;
-      if (entry.width && entry.width !== width) throw new TypeError(`Point colour ${color} is drawn ${entry.width / SUBPIXELS} px wide; a dot of it asks for ${width / SUBPIXELS} px.`);
+      if (entry.width && entry.width !== width) throw new TypeError(`Point color ${color} is drawn ${entry.width / SUBPIXELS} px wide; a dot of it asks for ${width / SUBPIXELS} px.`);
       if (!entry.width) { entry.width = width; entry.path.setAttribute('stroke-width', String(width)); }
       return index;
     },

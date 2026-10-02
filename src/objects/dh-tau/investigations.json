@@ -3,8 +3,8 @@
   "objectId": "dh-tau",
   "entries": [
     {
-      "id": "photosphere-colour",
-      "subject": "The colour of the photosphere",
+      "id": "photosphere-color",
+      "subject": "The color of the photosphere",
       "status": "included",
       "finding": "A Planck spectrum at the published 3,600 K (Xuan et al. 2024), through the CIE 1931 2-degree observer into sRGB with the D65 white.",
       "evidence": [
@@ -13,9 +13,9 @@
     },
     {
       "id": "gaia-xp-spectrum",
-      "subject": "A Gaia BP/RP spectrum of this star as the colour",
+      "subject": "A Gaia BP/RP spectrum of this star as the color",
       "status": "excluded",
-      "finding": "Gaia DR3 has no BP/RP spectrum that describes this star alone, so the paper temperature gives the colour.",
+      "finding": "Gaia DR3 has no BP/RP spectrum that describes this star alone, so the paper temperature gives the color.",
       "revisitWhen": "Gaia publishes a spectrum of this star alone.",
       "evidence": [
         "https://gea.esac.esa.int/archive/"

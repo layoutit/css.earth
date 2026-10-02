@@ -8,7 +8,7 @@ It is the only planet known around TOI-1221. Its orbit and size follow Mann et a
 
 **Orbit.** Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2023): P 91.68278 d Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2023): a/R* 83.7; Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2023): inclination 89.75 degrees No archive row states an eccentricity; the orbit is taken as circular Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2023): transit mid-time 2458404.1791 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 14 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1221's measured colour (#ffeee7, the colour dataset of toi-1221 (src/objects/toi-1221/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1221's measured color (#ffeee7, the color dataset of toi-1221 (src/objects/toi-1221/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1221's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (96, 97, 98), folded onto its orbit. Upper limits and rows without an error are left out.
 

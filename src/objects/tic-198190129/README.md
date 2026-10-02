@@ -6,7 +6,7 @@ Its radius and temperature follow Lafarga et al. 2026. The introduction is gener
 
 **Star.** Placement: Gaia DR3 source 1624849045053798656, parallax 7.667 ± 0.010 mas (130.43 pc). Radius 0.640675 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TIC 198190129 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). Mass 0.638 +/- 0.081 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 198190129 (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME (https://doi.org/10.3847/1538-3881/ab3467). Temperature 4,377.53 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TIC 198190129 b in the NASA Exoplanet Archive. log g 4.63 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 1624849045053798656, through the CIE 1931 2° observer: #ffc094. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 1624849045053798656, through the CIE 1931 2° observer: #ffc094. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,377.53 K and log g 4.63 (u1 0.756, u2 0.035): a model, because no fit of this star's limb is used.
 

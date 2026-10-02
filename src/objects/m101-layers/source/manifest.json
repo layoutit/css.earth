@@ -30,7 +30,7 @@
             "kind": "unresolved",
             "label": "Mayall 4-m Mosaic U B V I, Hα",
             "evidence": "https://noirlab.edu/public/images/noao-m101ubviha/",
-            "reason": "The publisher's colour composite; the retained record does not identify the individual exposures."
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
           }
         ]
       }
@@ -198,7 +198,7 @@
       "path": "src/objects/m101-layers/source/hodge-hii/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the The H II regions of M 101. I. An atlas of 1264 emission regions rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the The H II regions of M 101. I. An atlas of 1264 emission regions rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -210,7 +210,7 @@
       "path": "src/objects/m101-layers/source/vucetic-snr/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -222,7 +222,7 @@
       "path": "src/objects/m101-layers/source/feldmeier-pne/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Planetary nebulae as standard candles. XI. Application to spiral galaxies rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the Planetary nebulae as standard candles. XI. Application to spiral galaxies rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -234,7 +234,7 @@
       "path": "src/objects/m101-layers/source/simanton-gc/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored selection, frame and colour of the Two populations of old star clusters in the spiral galaxy M101 based on HST/ACS observations rows drawn as dots.",
+      "acquisition": "Authored selection, frame and color of the Two populations of old star clusters in the spiral galaxy M101 based on HST/ACS observations rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."

@@ -4,7 +4,7 @@
   "entries": [
     {
       "id": "gaia-xp-sampled",
-      "subject": "A sampled Gaia spectrum for the colour dataset",
+      "subject": "A sampled Gaia spectrum for the color dataset",
       "status": "included",
       "finding": "Gaia DR3 releases externally calibrated sampled spectra only for the brighter sources; TRAPPIST-1 at G = 15.62 carries only the continuous basis-function coefficients (has_xp_sampled false, has_xp_continuous true). The coefficients are pinned and sampled here with GaiaXPy onto the archive's own grid, which is the same calibration the sampled product uses.",
       "evidence": [
@@ -16,7 +16,7 @@
       "id": "stellar-limb-model",
       "subject": "A source-backed radial brightness profile for TRAPPIST-1",
       "status": "included",
-      "finding": "Gillon et al. (2016), Extended Data Table 2, gives I+z quadratic coefficients u1 = 0.65 +/- 0.10 and u2 = 0.28 +/- 0.12, inferred from theoretical atmosphere tables and used as transit priors. The selected red-band model darkens the Gaia-coloured disc through a prepared black-alpha limb plate; it is not a resolved or directly measured stellar limb.",
+      "finding": "Gillon et al. (2016), Extended Data Table 2, gives I+z quadratic coefficients u1 = 0.65 +/- 0.10 and u2 = 0.28 +/- 0.12, inferred from theoretical atmosphere tables and used as transit priors. The selected red-band model darkens the Gaia-colored disc through a prepared black-alpha limb plate; it is not a resolved or directly measured stellar limb.",
       "evidence": [
         "https://pmc.ncbi.nlm.nih.gov/articles/PMC5321506/",
         "https://github.com/layoutit/css.earth/pull/565"
@@ -26,7 +26,7 @@
       "id": "surface-imagery",
       "subject": "Imagery of the photosphere",
       "status": "excluded",
-      "finding": "No image of this star's disc exists or is expected: at 12.47 pc it is about 0.09 milliarcseconds across, far below any interferometer's reach. The colour dataset is its own measured spectrum.",
+      "finding": "No image of this star's disc exists or is expected: at 12.47 pc it is about 0.09 milliarcseconds across, far below any interferometer's reach. The color dataset is its own measured spectrum.",
       "evidence": [
         "https://gea.esac.esa.int/archive/"
       ],

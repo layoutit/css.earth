@@ -83,11 +83,11 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     const observation = await loadSurfaceObservation({ sourceDirectory, source, recipe, radial:{...observationRadial,grid:requireTerrainMesh(observationRadial.grid)}, config:{geometry:shape({radius:number,radiusKm:number,radialTerrain:shape({path:text,simplification:shape({method:text,maximumErrorMeters:number})})})(observationConfig.geometry),raster:config.raster} });
     observationRadial.observationSurfaces ??= new Map();
     observationRadial.observationSurfaces.set(recipe.id, observation);
-    // The map of a photographed dataset only gives its billboard colour and coverage count; the atlas and thumbnail sample the
+    // The map of a photographed dataset only gives its billboard color and coverage count; the atlas and thumbnail sample the
     // photographs directly. A quarter of the map's width and height carries both.
     const previewWidth = Math.max(2, Math.round(width / OBSERVATION_PREVIEW_DIVISOR)), previewHeight = Math.max(1, Math.round(height / OBSERVATION_PREVIEW_DIVISOR));
     const { rgb, missing } = observation.preview(previewWidth, previewHeight);
-    // A palette dataset is false colour: its legend strip is emitted beside the surface, like a scientific dataset.
+    // A palette dataset is false color: its legend strip is emitted beside the surface, like a scientific dataset.
     const display = requireRecord(recipe).display, palette = display === undefined ? undefined : requireRecord(display).palette as readonly string[] | undefined;
     const legend = palette ? await emit(`${config.namespace}-${recipe.id}-legend.webp`, sharp(Buffer.concat(Array.from({ length: 256 }, (_, x) => Buffer.from(interpolatePalette(palette, x / 255)))),
       { raw: { width: 256, height: 1, channels: 3 } }).resize(256, 16, { fit: 'fill', kernel: 'lanczos3' })) : null;

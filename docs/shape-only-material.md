@@ -5,13 +5,13 @@ sRGB**. This is a cssEarth display convention, not measured color, physical
 albedo, or any external standard. The model supplies the shape; the material
 adds no craters, mottling, grid lines, or other invented surface detail.
 
-When published whole-disc photometry gives a body's colour indices and V
-geometric albedo, its shape view may use that measured colour instead, through
+When published whole-disc photometry gives a body's color indices and V
+geometric albedo, its shape view may use that measured color instead, through
 the raster `disc-integrated-color` science kind
 ([disc-integrated-color.ts](../packages/bake/src/objects/color/disc-integrated-color.ts)).
-Colour indices relative to the Sun give reflectance at the B, V, R and I effective
+Color indices relative to the Sun give reflectance at the B, V, R and I effective
 wavelengths; a piecewise-linear spectrum through them is integrated with the CIE
-1931 observer under D65 and scaled so V reflectance equals the albedo. The colour
+1931 observer under D65 and scaled so V reflectance equals the albedo. The color
 is uniform: it is one measured mean, not a map. Makemake and Eris use it on the raster
 route; Haumea uses the same method through the shape-model route's `surfaces` list.
 All three also carry NASA's illustrative model texture as a second, non-default
@@ -28,27 +28,27 @@ the published sphere and is not used ([ledger](../src/objects/wasp-12b/investiga
 
 ![The Illustration dataset of 55 Cancri e, Kepler-22 b, HAT-P-11 b and Kepler-7 b, in the app](images/illustrated-exoplanets-new-systems.webp)
 
-An unresolved body measured only in the infrared has no visible colour to reconstruct. When a paper
+An unresolved body measured only in the infrared has no visible color to reconstruct. When a paper
 publishes its flux densities in three bands, the raster `disc-integrated-band-color` science kind
-([disc-band-color.ts](../packages/bake/src/objects/layers/observation/disc-band-color.ts)) paints it one false colour:
+([disc-band-color.ts](../packages/bake/src/objects/layers/observation/disc-band-color.ts)) paints it one false color:
 the longest wavelength red and the shortest blue, each flux density over one range shared by the
 bodies the record names, encoded once through `encodeBandColor`, so band ratios and the bodies'
 brightness against each other survive. The surface must declare `falseColor`. The four planets of
 [HR 8799](../src/objects/hr-8799/README.md) use it with the JWST/NIRCam photometry of Balmer et al. (2025).
 
-A star with no image may instead show the colour of its catalogued photometric
+A star with no image may instead show the color of its catalogued photometric
 temperature, through the `stellar-photometric-color` science kind
 ([stellar-photometric-color.ts](../packages/bake/src/objects/stellar/stellar-photometric-color.ts)).
 A Planck spectrum at that temperature is integrated with the CIE 1931 observer and
 converted to sRGB with its D65 white, scaled so the brightest channel is full. The
-disc is self-luminous: the colour carries no brightness or spectral lines. WASP-43
+disc is self-luminous: the color carries no brightness or spectral lines. WASP-43
 uses it with its Gaia DR3 GSP-Phot temperature. Where Gaia DR3 published the star's
 BP/RP sampled spectrum, the record names that spectrum instead (`spectrum:
 gaia-xp-sampled`) and the measured flux replaces the Planck model: HD 189733 A and B.
 A limb-darkening law measured from a transiting planet draws a limb plate, either read
 from a published table (WASP-43) or fitted to pinned TESS light curves
 ([transit-limb-darkening.ts](../packages/bake/src/objects/raster/eclipse-map/transit-limb-darkening.ts),
-HD 189733 A). A star with such a colour stays on the map even without imagery
+HD 189733 A). A star with such a color stays on the map even without imagery
 (discovery `sourceColor`).
 
 Photographic, observed-color, and scientific datasets retain their own pixels.

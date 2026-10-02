@@ -167,10 +167,10 @@
     },
     {
       "id": "visible-rgb-from-albedo",
-      "subject": "Observed visible-colour globe inferred from Hubble and CHEOPS albedos",
+      "subject": "Observed visible-color globe inferred from Hubble and CHEOPS albedos",
       "status": "excluded",
       "finding": "The six Hubble bins stop at 570 nm; CHEOPS adds one overlapping broadband integral. They do not determine a full visible spectrum or an RGB surface map. The measurements are shown as charts, while NASA Illustration retains its artist-concept qualification.",
-      "revisitWhen": "A sufficiently sampled, calibrated visible reflectance spectrum and a justified colour-conversion method are available.",
+      "revisitWhen": "A sufficiently sampled, calibrated visible reflectance spectrum and a justified color-conversion method are available.",
       "evidence": [
         "https://arxiv.org/abs/1307.3239",
         "https://arxiv.org/abs/2301.07731"

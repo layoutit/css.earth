@@ -146,7 +146,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   annotationPriorities?: Readonly<Record<string, number>>;
   /** Bodies that keep their marker but are never a hover or navigation target: they are reached through search. */
   nonNavigableIds?: readonly string[];
-  /** Bodies drawn as a dot in their colour, at least `minimumDiameterPixels` wide: no sprite, and never a hover or
+  /** Bodies drawn as a dot in their color, at least `minimumDiameterPixels` wide: no sprite, and never a hover or
    * navigation target. */
   plainDots?: { readonly ids: readonly string[]; readonly minimumDiameterPixels: number };
   opacityClock?: OpacityClock;
@@ -187,16 +187,16 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     const plainDot = plainDotIds.has(body.id);
     const sprite = plainDot ? undefined : spriteTable[body.id];
     const approximate = 'placement' in body && body.placement === 'approximate';
-    // The body billboard is set only when resolved and visible. Unresolved bodies remain colour dots and never fetch an image.
+    // The body billboard is set only when resolved and visible. Unresolved bodies remain color dots and never fetch an image.
     const { mover, marker, spriteLeaf, caption } = createMarker(plainDot), data = marker.dataset;
     data.contextGroup = data.contextBody = data.contextLabel = body.id;
     data.contextName = caption.dataset.contextName = approximate ? `${body.name}${APPROXIMATE_NAME}` : body.name;
     if (plainDot) spriteLeaf.style.backgroundColor = body.color;
-    // A body's world colour is prepared (its swatch, else its catalogue colour lifted for caption contrast) and set inline, as a
+    // A body's world color is prepared (its swatch, else its catalogue color lifted for caption contrast) and set inline, as a
     // body drawn from its record carries its own; without either the world's default applies. Capitals mark a star, black
     // hole or planet caption. No page carries a stylesheet rule per body.
-    const colour = body.contextColor ?? (unpackaged ? body.color : undefined);
-    if (colour) marker.style.color = colour;
+    const color = body.contextColor ?? (unpackaged ? body.color : undefined);
+    if (color) marker.style.color = color;
     if (body.labelCase === 'upper') data.contextLabelCase = 'upper';
     if (approximate) {
       data.contextPlacement = 'approximate';
@@ -214,9 +214,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     const orbitRoot = orbitTemplate.cloneNode(false) as HTMLElement;
     orbitRoot.dataset.contextOrbit = body.id;
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
-    // The orbit owner sets the body's colour on its root.
+    // The orbit owner sets the body's color on its root.
     const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, depthBase, strokeHost: root, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id,
-      ...(colour ? { color: colour } : {}) });
+      ...(color ? { color: color } : {}) });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
@@ -603,9 +603,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         bodyPublications++;
         const navigationSuppressed = entry.alwaysNonNavigable;
         const { pointSource } = entry;
-        // A body's circle holds a dot in the body's colour, sized by its radius, until its own disc outgrows the dot.
+        // A body's circle holds a dot in the body's color, sized by its radius, until its own disc outgrows the dot.
         // The focus star's circle holds the same dot over its point of light.
-        // A plain dot is always its colour; the flat-dot swap is for bodies with a sprite.
+        // A plain dot is always its color; the flat-dot swap is for bodies with a sprite.
         const flatDot = coast ? entry.paint.flatDot : !entry.plainDot && (!entry.sprite ||
           diameter < (entry.sprite.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS) ||
           entry.indicatorShown && entry.dotDiameter !== null && diameter < entry.dotDiameter);

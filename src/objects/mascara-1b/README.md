@@ -8,7 +8,7 @@ It is the only planet known around MASCARA-1. Its orbit and size follow Hooton e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.1425095 d Hooton et al. 2022 (2022A&A...658A..75H), via the NASA Exoplanet Archive ps table (pl_refname HOOTON_ET_AL__2022): a/R* 4.1676; Hooton et al. 2022 (2022A&A...658A..75H), via the NASA Exoplanet Archive ps table (pl_refname HOOTON_ET_AL__2022): inclination 88.45 degrees Hooton et al. 2022 (2022A&A...658A..75H), via the NASA Exoplanet Archive ps table (pl_refname HOOTON_ET_AL__2022): e 0.00034 Hooton et al. 2022 (2022A&A...658A..75H), via the NASA Exoplanet Archive ps table (pl_refname HOOTON_ET_AL__2022): omega -16 degrees, stored as 344 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460556.771408 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by mascara-1's measured colour (#cdd9ff, the colour dataset of mascara-1 (src/objects/mascara-1/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by mascara-1's measured color (#cdd9ff, the color dataset of mascara-1 (src/objects/mascara-1/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of MASCARA-1's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (55, 82), folded onto its orbit. Upper limits and rows without an error are left out.
 

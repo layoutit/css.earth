@@ -202,7 +202,7 @@
         "https://doi.org/10.1016/j.asr.2013.11.006"
       ],
       "acquisition": "Checked-in compact lossless grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py (cellPresence circle) from the five ArcGIS REST response pages using craters/prepare-grid.json.",
-      "redistribution": "Retain the authors; the rim colour is the Trek layer symbol for its smallest class, not an observation.",
+      "redistribution": "Retain the authors; the rim color is the Trek layer symbol for its smallest class, not an observation.",
       "consumers": [
         "crater-catalogue"
       ],
@@ -383,7 +383,7 @@
         "https://trek.nasa.gov/phobos/TrekWS/rest/cat/metadata/fgdc/html?label=PH9224GT_Phobos2000",
         "https://doi.org/10.1016/j.asr.2013.11.006"
       ],
-      "acquisition": "ArcGIS REST layer description: field list, native spatial reference and the class-break symbol the rim colour is taken from.",
+      "acquisition": "ArcGIS REST layer description: field list, native spatial reference and the class-break symbol the rim color is taken from.",
       "redistribution": "Public scientific input; preserve source attribution.",
       "consumers": [
         "mapped-science-inputs"
@@ -477,7 +477,7 @@
     },
     {
       "path": "craters/prepare-grid.json",
-      "purpose": "Rasterization plan: rim circles of the catalogue radius field, the one category and its Trek symbol colour.",
+      "purpose": "Rasterization plan: rim circles of the catalogue radius field, the one category and its Trek symbol color.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities."

@@ -52,7 +52,7 @@ function integrate(options: FilledVolumeOptions, pixel: number, steps = 60_000):
   return { actual, expected };
 }
 
-test('selected channels map to optical space after selection and retain their exact projected colour', () => {
+test('selected channels map to optical space after selection and retain their exact projected color', () => {
   const result = decomposition(1, 1, [.2], [.1], [component('extended', [0], [.5], 1)]);
   const options = makeOptions(1, 1, result, { channels: { compact: false, diffuse: false, extended: true },
     target: { width: 1, height: 1, rgb: Uint8Array.from([255, 128, 64]), intensity: Float32Array.from([.8]) } });

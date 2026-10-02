@@ -1,9 +1,9 @@
-// Read the unique-value fill colours of one ArcMap renderer from a persisted .mxd or .lyr file.
+// Read the unique-value fill colors of one ArcMap renderer from a persisted .mxd or .lyr file.
 //
 // ArcMap stores each RgbColor as CIE L*a*b* doubles after the RgbColor CLSID. ArcGIS converts them to RGB with Apple RGB
 // primaries, gamma 1.8 and a D65 white: that conversion reproduces the RGB triples NASA Trek's ArcGIS server publishes for
-// the same SIM 3237 symbols exactly (20 shared units) and lands every SIM 3237 colour within 6e-7 of an integer.
-// Refuses a colour that does not land on an integer, so a wrong conversion cannot pass silently.
+// the same SIM 3237 symbols exactly (20 shared units) and lands every SIM 3237 color within 6e-7 of an integer.
+// Refuses a color that does not land on an integer, so a wrong conversion cannot pass silently.
 //
 // Usage: node esri-symbology.mts <file.mxd|file.lyr> <byte offset of the renderer heading> > renderer.json
 import {readFile} from 'node:fs/promises';
@@ -43,7 +43,7 @@ function items(bytes: Buffer, start: number, end: number): Item[] {
 export function readRenderer(bytes: Buffer, heading: number) {
   const list = items(bytes, heading, Math.min(bytes.length, heading + 0x2400));
   const stop = list.findIndex(item => item.kind === 'text' && item.text === 'Pastels');
-  if (stop < 0) throw new Error(`No renderer colour-ramp marker after byte ${heading}`);
+  if (stop < 0) throw new Error(`No renderer color-ramp marker after byte ${heading}`);
   const body = list.slice(0, stop), symbols: {label: string, lab: number[]}[] = [];
   let fill: number[] | null = null;
   for (const item of body) {
@@ -54,7 +54,7 @@ export function readRenderer(bytes: Buffer, heading: number) {
   const values = texts.slice(-symbols.length);
   return symbols.map(({label, lab}, i) => {
     const rgb = labToRgb(lab[0], lab[1], lab[2]);
-    if (rgb.some(v => Math.abs(v - Math.round(v)) > 1e-3)) throw new Error(`Colour of ${values[i]} at renderer ${heading} does not convert to integer RGB: ${rgb.join(',')}`);
+    if (rgb.some(v => Math.abs(v - Math.round(v)) > 1e-3)) throw new Error(`Color of ${values[i]} at renderer ${heading} does not convert to integer RGB: ${rgb.join(',')}`);
     const hex = '#' + rgb.map(v => Math.round(v).toString(16).padStart(2, '0')).join('');
     return {value: values[i], label, lab: lab.map(v => Number(v.toFixed(6))), rgb: rgb.map(Math.round), color: hex};
   });

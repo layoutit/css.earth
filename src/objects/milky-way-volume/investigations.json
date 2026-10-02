@@ -32,10 +32,10 @@
       ]
     },
     {
-      "id": "colour-grade-matrix",
+      "id": "color-grade-matrix",
       "subject": "Offline display-RGB grading matrix toward the NASA palette",
       "status": "included",
-      "finding": "A single offline matrix diag(1, 0.951277424, 0.709752511) grades every slab toward the original NASA interior palette from every viewing direction, following the exponential transfer and preserving emission and dust alpha; calibrated on paired patches within 15 degrees of the Galactic plane with held-out longitude blocks, it reduces held-out chromaticity error by 53.8 percent while retaining colour variation, and matches the palette rather than morphology or physical photometry.",
+      "finding": "A single offline matrix diag(1, 0.951277424, 0.709752511) grades every slab toward the original NASA interior palette from every viewing direction, following the exponential transfer and preserving emission and dust alpha; calibrated on paired patches within 15 degrees of the Galactic plane with held-out longitude blocks, it reduces held-out chromaticity error by 53.8 percent while retaining color variation, and matches the palette rather than morphology or physical photometry.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L83",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/milky-way-volume/README.md#L95"

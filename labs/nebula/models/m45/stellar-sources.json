@@ -255,7 +255,7 @@
   "limits": [
     "NOIRLab optical exposure dates are not published; 2020-06-30 is a release date, not an observation epoch. The catalogue is therefore epoch2000, never labelled exact photo-epoch astrometry.",
     "No distance or nebular membership inferred from position; catalogue parallax retained without naive inversion.",
-    "Display brightness/color must come from apparent magnitudes/colour indices, not star-removal residual.",
+    "Display brightness/color must come from apparent magnitudes/color indices, not star-removal residual.",
     "Named-star labels are optional identity metadata and not fabricated from brightness ordering."
   ]
 }

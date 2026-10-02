@@ -3,9 +3,9 @@
   "objectId": "makemake",
   "object": {
     "source": "Hromakina et al. (2019), Long-term photometric monitoring of the dwarf planet (136472) Makemake, A&A 625, A46, doi:10.1051/0004-6361/201935274, arXiv:1904.03679",
-    "locator": "Section 3.4, Magnitude phase dependence and colour indices",
+    "locator": "Section 3.4, Magnitude phase dependence and color indices",
     "system": "Johnson-Cousins BVRI",
-    "note": "Mean colours from near-simultaneous multi-filter data; no colour variation was detected within the uncertainties.",
+    "note": "Mean colors from near-simultaneous multi-filter data; no color variation was detected within the uncertainties.",
     "indices": {
       "B-V": { "value": 0.91, "uncertainty": 0.03 },
       "V-R": { "value": 0.41, "uncertainty": 0.02 },

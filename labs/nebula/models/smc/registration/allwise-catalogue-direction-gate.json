@@ -152,7 +152,7 @@
     "Centroids use sharp sigma4 Gaussian highpass and blue W1; no image transform is fitted.",
     "Association uses the unchanged 2.5-pixel window and LMC acceptance thresholds; the chance-excess control gates acceptance."
   ],
-  "compositeBlueChannel": "AllWISE W1 colour HiPS blue channel",
+  "compositeBlueChannel": "AllWISE W1 color HiPS blue channel",
   "implementation": {
     "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts"
   },

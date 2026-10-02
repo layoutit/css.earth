@@ -145,7 +145,7 @@ export async function plotProduct(directory:string,target:string,data:Record<str
  * units and Matplotlib owns the rendered figure; callers retain selection,
  * calibration and scientific interpretation in their family receipts.
  */
-/** Figure background for PNG and SVG outputs: transparent, or opaque in the figure's own face colour. */
+/** Figure background for PNG and SVG outputs: transparent, or opaque in the figure's own face color. */
 export type FigureBackground='transparent'|'opaque';
 export interface FigureOptions {readonly figureBackground?:FigureBackground}
 export function figureBackground(value:unknown):FigureBackground{if(value!=='transparent'&&value!=='opaque')throw new TypeError('figureBackground must be transparent or opaque.');return value;}
@@ -155,11 +155,11 @@ export interface EllipsePoint {readonly x:number;readonly y:number;readonly labe
   readonly role?:'measurement'|'candidate';
   /** Short text drawn inside a candidate's disc in the publication layout, such as a planet's letter. */
   readonly mark?:string;
-  /** Ties this point to a body so its colour matches that body's orbit and prediction. */
+  /** Ties this point to a body so its color matches that body's orbit and prediction. */
   readonly series?:string}
 /** A polyline drawn behind the points, such as a predicted orbit; it never sets the plot limits. */
 export interface PreviewTrack {readonly label:string;readonly points:readonly (readonly [number,number])[];
-  /** Ties this line to a body so its colour matches that body's points; several lines may share one series. */
+  /** Ties this line to a body so its color matches that body's points; several lines may share one series. */
   readonly series?:string}
 /** One drawn contour: k times the 1σ covariance ellipse, full axis lengths, major-axis angle in degrees from +x toward +y. */
 export interface DrawnEllipse {readonly label:string;readonly sigma:number;readonly x:number;readonly y:number;readonly width:number;readonly height:number;readonly angleDeg:number}
@@ -188,7 +188,7 @@ out.mkdir(parents=True,exist_ok=True)
 
 def publication(d):
  # The layout astrometry papers print: square equal-scale axes, a heavy frame with inward ticks on every side, no title,
- # the reference as a star, each body in its own colour for both its orbit draws and its predicted disc, measurements with
+ # the reference as a star, each body in its own color for both its orbit draws and its predicted disc, measurements with
  # k-sigma ellipses, and a frameless legend.
  from matplotlib.patches import Ellipse
  from matplotlib.lines import Line2D
@@ -202,7 +202,7 @@ def publication(d):
  for item in list(d.get('tracks',[]))+list(d['points']):
   key=item.get('series')
   if key and key not in order: order.append(key)
- colour={key:palette[index%len(palette)] for index,key in enumerate(order)}
+ color={key:palette[index%len(palette)] for index,key in enumerate(order)}
  navy='#000080'; handles=[]; labels=[]; extent=[]
  def half_width(c,k): det=c[0]*c[2]-c[1]**2; return k*np.sqrt(det/c[2])
  def ellipse(x,y,c,k,**kw):
@@ -218,14 +218,14 @@ def publication(d):
   q=np.asarray(t['points'],dtype=float)
   if q.ndim!=2 or q.shape[1]!=2 or not np.isfinite(q).all(): raise ValueError('Track '+t['label']+' is not a finite list of points')
   key=t.get('series'); count=bundle.get(key or t['label'],1)
-  ax.plot(q[:,0],q[:,1],lw=1.4 if count==1 else 1.1,color=colour.get(key,'0.6'),alpha=1 if count==1 else max(.18,.9/np.sqrt(count)),zorder=1,solid_capstyle='round')
+  ax.plot(q[:,0],q[:,1],lw=1.4 if count==1 else 1.1,color=color.get(key,'0.6'),alpha=1 if count==1 else max(.18,.9/np.sqrt(count)),zorder=1,solid_capstyle='round')
  origin=d.get('origin')
  if origin is not None:
   ax.axhline(0,ls=':',lw=1.5,color='k',zorder=1); ax.axvline(0,ls=':',lw=1.5,color='k',zorder=1)
   ax.plot([0],[0],ls='',marker='*',ms=19.7,mfc='#6baed6',mec='k',mew=1,zorder=6)
  measured=[q for q in d['points'] if q.get('role')!='candidate']
  for q in d['points']:
-  x,y=float(q['x']),float(q['y']); face=colour.get(q.get('series'),'#800000' if q.get('role')=='candidate' else navy); extent.append((x,x,y,y))
+  x,y=float(q['x']),float(q['y']); face=color.get(q.get('series'),'#800000' if q.get('role')=='candidate' else navy); extent.append((x,x,y,y))
   if q.get('role')=='candidate':
    if 'covariance' in q:
     for k,a in zip(levels,alphas): ellipse(x,y,q['covariance'],k,lw=1,color=face,alpha=a*.8,zorder=3)
@@ -265,7 +265,7 @@ def publication(d):
  for k,a,lx,ly,width,face in labels:
   # A contour narrower than a fiftieth of the frame has no room for its own label; the legend still names the levels.
   if width>span/50: ax.annotate(f'{k:g}$\sigma$',(lx,ly),xytext=(4,0),textcoords='offset points',fontsize=11,color=face,alpha=a,va='center',ha='left')
- for key in order: handles.append(Line2D([],[],ls='-',lw=1.2,marker='o',ms=8,mfc=colour[key],mec='k',color=colour[key],label=key))
+ for key in order: handles.append(Line2D([],[],ls='-',lw=1.2,marker='o',ms=8,mfc=color[key],mec='k',color=color[key],label=key))
  if any(q.get('role')!='candidate' for q in d['points']): handles.append(Line2D([],[],ls='',marker='D',ms=5.5,mfc='0.35',mec='k',label=d.get('measurementLabel','measured, with 1–3σ ellipses')))
  if origin is not None: handles.append(Line2D([],[],ls='',marker='*',ms=13,mfc='#6baed6',mec='k',label=origin['label']))
  for side in ax.spines.values(): side.set_linewidth(1.2); side.set_color('0.25')

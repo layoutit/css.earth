@@ -54,7 +54,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour of a blackbody at the star's published temperature. The disc itself is unresolved.",
+        "qualification": "Color of a blackbody at the star's published temperature. The disc itself is unresolved.",
         "thumbnail": "dh-tau-dataset-color.webp",
         "surface": "dh-tau-surface-color@2x.webp",
         "poles": "dh-tau-poles-color@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://arxiv.org/abs/2405.13128"
         },
         "falseColor": false,
-        "notes": "The colour of a 3,600 K blackbody, Xuan et al.'s (2024) temperature for the star."
+        "notes": "The color of a 3,600 K blackbody, Xuan et al.'s (2024) temperature for the star."
       }
     ]
   },

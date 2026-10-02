@@ -46,6 +46,6 @@ A headless capture of this version's Sun page at 19 au. The mission-target aster
 - Only the brighter asteroids of each population are drawn, and the magnitude limits differ: they are display choices that let each population show. The fainter asteroids, the great majority, are left out.
 - A Hilda brighter than magnitude 13 comes in with the main belt's query, so the Hilda cut starts there.
 - A new asteroid package gets its dot only when both scripts and the bank are run again.
-- No colour is taken from the database. Every dot is `#9a9a9a`, the one neutral grey the app gives a body without a measured colour (`NEUTRAL_CATALOGUE_COLOUR`). The 1.5 px dot size and half opacity are display choices.
+- No color is taken from the database. Every dot is `#9a9a9a`, the one neutral grey the app gives a body without a measured color (`NEUTRAL_CATALOGUE_COLOR`). The 1.5 px dot size and half opacity are display choices.
 - The dots do not draw while a moon is selected: a moon's system is the moon and its planet.
 - The positions hold for the world's one epoch; the dots do not move.

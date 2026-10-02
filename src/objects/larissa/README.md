@@ -63,7 +63,7 @@ Camera input is the original calibrated and geometrically corrected Voyager **GE
 
 A measured constant sky median is subtracted before the existing bounded lunar-Lambert illumination normalization (weight 0.5, maximum gain 2.5; incidence/emission below 75 degrees). Cast shadows, low-signal boundaries and unreliable samples remain gaps. No unseen terrain is painted into the photographic dataset. Shared flood lighting and directional Shadows both remain available.
 
-Elevation is radius relative to the stated reference sphere, coloured with the shared elevation palette and prepared relief. The minimap, surface, native triangle atlases and navigation portrait use the same interpretation. Navigation keeps the complete model silhouette while marking photographic gaps.
+Elevation is radius relative to the stated reference sphere, colored with the shared elevation palette and prepared relief. The minimap, surface, native triangle atlases and navigation portrait use the same interpretation. Navigation keeps the complete model silhouette while marking photographic gaps.
 
 ## Sources and restoration
 

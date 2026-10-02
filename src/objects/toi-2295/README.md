@@ -6,7 +6,7 @@ Its radius and temperature follow Heidari et al. 2025. The introduction is gener
 
 **Star.** Placement: Gaia DR3 source 2144184945615891712, parallax 7.946 ± 0.010 mas (125.85 pc). Radius 1.459 +/- 0.056 solar radii from Heidari et al. 2025, the stellar radius of the default parameter set of TOI-2295 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract). Mass 1.168 +/- 0.07 solar masses from Heidari et al. 2025, the stellar mass of the default parameter set of TOI-2295 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract). Temperature 5,730 K from Heidari et al. 2025, the stellar temperature of the default parameter set of TOI-2295 b in the NASA Exoplanet Archive. log g 4.18 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2144184945615891712, through the CIE 1931 2° observer: #fff0eb. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2144184945615891712, through the CIE 1931 2° observer: #fff0eb. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,730 K and log g 4.18 (u1 0.465, u2 0.257): a model, because no fit of this star's limb is used.
 

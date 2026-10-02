@@ -16,8 +16,8 @@
       "path": "src/objects/beta-pictoris-disc/source/volume-contrast.json"
     },
     {
-      "id": "colour",
-      "path": "src/objects/beta-pictoris-disc/source/volume-colour.json"
+      "id": "color",
+      "path": "src/objects/beta-pictoris-disc/source/volume-color.json"
     }
   ],
   "sharedInputs": [],
@@ -37,8 +37,8 @@
           "value": "HST/STIS behind its coronagraph, in 1997, 2012 and 2013 (HST programmes 7125, 12551 and 12923): stis-50ccd"
         },
         {
-          "id": "colour",
-          "label": "Colour",
+          "id": "color",
+          "label": "Color",
           "value": "Brightness only: one filter (50CCD, clear, centred on 0.58 micrometres) in every channel, in the deposit's counts per pixel per second"
         },
         {
@@ -67,8 +67,8 @@
       "id": "contrast",
       "label": "JWST/NIRCam · debris disc, 2.1 and 4.1 µm",
       "title": "The edge-on debris disc of Beta Pictoris in its contrast to the star at 2.1 and 4.1 micrometres",
-      "description": "JWST/NIRCam imaged Beta Pictoris for 16 hours on 21 and 22 March 2025 behind the MASK335R coronagraph, which blocks the star, to time the rotation of its planet b (programme 4758, Zhou et al. 2026). The same images show the disc of dust around the star edge-on. These are MAST's own coronagraphy products, from the first of the observation's two coronagraph visits; the star is placed in each by planet b, whose orbit is known to a milliarcsecond, because the mosaics' own pointing misses it by 80 to 90 mas. Each filter is divided by the star's own brightness in it, which leaves the disc's contrast to the star; F210M is drawn blue, F410M red and their mean green, and empty sky fades out below three times its noise. The disc comes out nearly white: its contrast at 4.1 micrometres is within 15% of its contrast at 2.1. These are infrared colours, not what an eye would see. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. The light seen near the star is placed on the far parts of the disc it passes through, not stacked along the sight line. Nothing is drawn within 2.5 arcseconds (49 au) of the star, where the starlight left after subtraction outweighs the disc; the planets are their own spheres.",
-      "summary": "The edge-on disc of dust 49 to 126 au from the star, from two JWST filters, in the colour of its contrast to the star.",
+      "description": "JWST/NIRCam imaged Beta Pictoris for 16 hours on 21 and 22 March 2025 behind the MASK335R coronagraph, which blocks the star, to time the rotation of its planet b (programme 4758, Zhou et al. 2026). The same images show the disc of dust around the star edge-on. These are MAST's own coronagraphy products, from the first of the observation's two coronagraph visits; the star is placed in each by planet b, whose orbit is known to a milliarcsecond, because the mosaics' own pointing misses it by 80 to 90 mas. Each filter is divided by the star's own brightness in it, which leaves the disc's contrast to the star; F210M is drawn blue, F410M red and their mean green, and empty sky fades out below three times its noise. The disc comes out nearly white: its contrast at 4.1 micrometres is within 15% of its contrast at 2.1. These are infrared colors, not what an eye would see. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. The light seen near the star is placed on the far parts of the disc it passes through, not stacked along the sight line. Nothing is drawn within 2.5 arcseconds (49 au) of the star, where the starlight left after subtraction outweighs the disc; the planets are their own spheres.",
+      "summary": "The edge-on disc of dust 49 to 126 au from the star, from two JWST filters, in the color of its contrast to the star.",
       "detail": "2025-03-21, 62.4 mas pixels",
       "facts": [
         {
@@ -77,8 +77,8 @@
           "value": "JWST/NIRCam behind the MASKA335R coronagraph, 2025-03-21: F410M, F210M"
         },
         {
-          "id": "colour",
-          "label": "Colour",
+          "id": "color",
+          "label": "Color",
           "value": "Reflectance: each filter over the star's own flux, red F410M, green F210M + F410M, blue F210M"
         },
         {
@@ -104,11 +104,11 @@
       }
     },
     {
-      "id": "colour",
-      "label": "HST/ACS · debris disc, colour 0.43 to 0.81 µm",
-      "title": "The edge-on debris disc of Beta Pictoris in its colour against the star, from Hubble's ACS coronagraph",
-      "description": "Hubble's ACS camera imaged Beta Pictoris behind its coronagraph on 1 October 2003 through blue, visible and near-infrared filters (F435W, F606W and F814W), at two telescope rolls, with the star alpha Pictoris as a reference for the starlight (programme 9987, Golimowski et al. 2006). Here the raw exposures were calibrated again, alpha Pic's light was scaled by the brightness ratio the paper states and subtracted, and each result was put on the sky north up. Each filter is then divided by the star's own brightness in it, so the colour is the disc's against the star's: a disc that scattered like the star shines would look white. F435W is drawn blue, F606W green and F814W red, and empty sky fades out below three times its noise. The paper's scaling leaves some of the star's glow beside the disc, which is drawn with it. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Nothing is drawn within 1.5 arcseconds (29 au) of the star, where the paper finds the subtraction too uncertain; planets b and c orbit inside that.",
-      "summary": "The edge-on disc of dust 29 to 135 au from the star in three visible filters, in its colour against the star's.",
+      "id": "color",
+      "label": "HST/ACS · debris disc, color 0.43 to 0.81 µm",
+      "title": "The edge-on debris disc of Beta Pictoris in its color against the star, from Hubble's ACS coronagraph",
+      "description": "Hubble's ACS camera imaged Beta Pictoris behind its coronagraph on 1 October 2003 through blue, visible and near-infrared filters (F435W, F606W and F814W), at two telescope rolls, with the star alpha Pictoris as a reference for the starlight (programme 9987, Golimowski et al. 2006). Here the raw exposures were calibrated again, alpha Pic's light was scaled by the brightness ratio the paper states and subtracted, and each result was put on the sky north up. Each filter is then divided by the star's own brightness in it, so the color is the disc's against the star's: a disc that scattered like the star shines would look white. F435W is drawn blue, F606W green and F814W red, and empty sky fades out below three times its noise. The paper's scaling leaves some of the star's glow beside the disc, which is drawn with it. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Nothing is drawn within 1.5 arcseconds (29 au) of the star, where the paper finds the subtraction too uncertain; planets b and c orbit inside that.",
+      "summary": "The edge-on disc of dust 29 to 135 au from the star in three visible filters, in its color against the star's.",
       "detail": "2003-10-01, 25.0 mas pixels",
       "facts": [
         {
@@ -117,8 +117,8 @@
           "value": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot, on 1 October 2003 (HST programme 9987): F435W, F606W, F814W"
         },
         {
-          "id": "colour",
-          "label": "Colour",
+          "id": "color",
+          "label": "Color",
           "value": "Reflectance: each filter over the star's own flux, red F814W, green F606W, blue F435W"
         },
         {
@@ -137,10 +137,10 @@
           "value": "Not measured; reconstructed from the image by axial symmetry about the disc's normal, tilted toward its north-west side by convention"
         }
       ],
-      "input": "colour-f435w-roll1",
+      "input": "color-f435w-roll1",
       "preview": {
-        "path": "src/objects/beta-pictoris-disc/source/previews/colour.png",
-        "authoredFrom": "colour-f435w-roll1"
+        "path": "src/objects/beta-pictoris-disc/source/previews/color.png",
+        "authoredFrom": "color-f435w-roll1"
       }
     }
   ]

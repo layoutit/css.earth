@@ -4,4 +4,4 @@ Radius: Chakrabarty & Sengupta 2019 (2019AJ....158...39C), via the NASA Exoplane
 
 Orbit: Chakrabarty & Sengupta 2019 (2019AJ....158...39C), via the NASA Exoplanet Archive.
 
-Colour: a black body at the 3,398 K dayside brightness temperature of von Essen et al. 2015, dayside brightness temperature at 1.05 µm (NASA Exoplanet Archive emission table), through the CIE 1931 2° colour-matching functions.
+Color: a black body at the 3,398 K dayside brightness temperature of von Essen et al. 2015, dayside brightness temperature at 1.05 µm (NASA Exoplanet Archive emission table), through the CIE 1931 2° color-matching functions.

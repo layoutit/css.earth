@@ -6,7 +6,7 @@ Its radius and temperature follow Lillo-Box et al. 2026. It is also HD 334718. T
 
 **Star.** Placement: Gaia DR3 source 1857593254122163712, parallax 7.002 ± 0.016 mas (142.82 pc). Radius 1.222 +/- 0.036 solar radii from Lillo-Box et al. 2026, the stellar radius of the default parameter set of TOI-4492 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract). Mass 1.067 +/- 0.055 solar masses from Lillo-Box et al. 2026, the stellar mass of the default parameter set of TOI-4492 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract). Temperature 5,711 K from Lillo-Box et al. 2026, the stellar temperature of the default parameter set of TOI-4492 b in the NASA Exoplanet Archive. log g 4.29 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 1857593254122163712, through the CIE 1931 2° observer: #fff0e9. Routes tried in order: stis-ngsl: HD 334718 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 1857593254122163712, through the CIE 1931 2° observer: #fff0e9. Routes tried in order: stis-ngsl: HD 334718 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,711 K and log g 4.29 (u1 0.471, u2 0.253): a model, because no fit of this star's limb is used.
 

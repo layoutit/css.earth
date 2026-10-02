@@ -34,7 +34,7 @@ Six datasets show the mission's own derived facet tables, one value per triangle
 
 OLA and thermal-inertia ranges cover the archived values. The OVIRS ranges are the [producer readme](https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/ovirs_eq3_maps_readme.txt)'s suggested stretch, mean ± 2 standard deviations.
 
-The shape is the OLA v20 model scaled to a 0.241 km radius, welded and simplified by meshoptimizer to 800 faces. Elevation colours use the nearest point on the full source surface within 10 m; ambiguous samples are withheld with the gray grid. The shared frame is fixed at 2026-09-03 TT and rotation follows the mission PCK. Named features are cast onto the shape model; rim circles and extent boxes are not published boundaries. One landing site is labelled from `source/features/sites.json`, quoting the page it was read from.
+The shape is the OLA v20 model scaled to a 0.241 km radius, welded and simplified by meshoptimizer to 800 faces. Elevation colors use the nearest point on the full source surface within 10 m; ambiguous samples are withheld with the gray grid. The shared frame is fixed at 2026-09-03 TT and rotation follows the mission PCK. Named features are cast onto the shape model; rim circles and extent boxes are not published boundaries. One landing site is labelled from `source/features/sites.json`, quoting the page it was read from.
 
 ## Evidence
 

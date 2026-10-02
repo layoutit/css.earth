@@ -88,7 +88,7 @@ export interface AsinhBandDisplay {
 /** Calibrated sky bands, each already divided by its own measured range, share one black level,
  * one linear stretch and one softening. The route names one band (monochrome), two distinct bands in
  * red, blue order, or three distinct bands in red, green, blue order. Two bands take green from their
- * mean, the convention of the CDS DSS2 colour survey. The display has no gains of its own; hue shows
+ * mean, the convention of the CDS DSS2 color survey. The display has no gains of its own; hue shows
  * where each band is bright relative to its own range, not physical band ratios. */
 export const TWO_BAND_GREEN_REFERENCE = 'https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fcolor&get=record&fmt=json';
 export function asinhBandDisplay(bands: readonly string[], value: unknown): AsinhBandDisplay {
@@ -128,18 +128,18 @@ export function encodeAsinhBands(values: Float32Array | Float64Array, missing: U
 
 export function asinhBandEvidence(display: AsinhBandDisplay) {
   return { ...display, interpretation: display.bands.length === 1 ? 'monochrome' : 'false-color', transferReference: LUPTON_ASINH_REFERENCE,
-    ...(display.bands.length === 2 ? { channels: 'Red is the first band, blue the second, green their mean (the CDS DSS2 colour survey convention).', channelReference: TWO_BAND_GREEN_REFERENCE } : {}),
+    ...(display.bands.length === 2 ? { channels: 'Red is the first band, blue the second, green their mean (the CDS DSS2 color survey convention).', channelReference: TWO_BAND_GREEN_REFERENCE } : {}),
     processing: 'Each band is calibrated to MJy/sr and divided by its own measured range, so hue shows where a band is bright relative to itself, not physical band ratios. One common minimum is subtracted; one asinh curve maps the mean of the bands and scales every band by the same factor. Pixels brighter than the display are scaled down as a whole, then quantized once to 8 bits. This does not reconstruct natural color.' };
 }
 
 /** Apply a linear-light gain to a known sRGB display byte and quantize once. */
-/** A neutral gray (`grayByte` in sRGB) with the chromaticity of `hostHex`: the host's sRGB colour scaled in linear light to the
- * gray's luminance (Rec. 709 weights), so the surface keeps its brightness and takes the colour of its star's light. */
+/** A neutral gray (`grayByte` in sRGB) with the chromaticity of `hostHex`: the host's sRGB color scaled in linear light to the
+ * gray's luminance (Rec. 709 weights), so the surface keeps its brightness and takes the color of its star's light. */
 export function hostLitGray(hostHex: string, grayByte = 128): readonly [number, number, number] {
-  if (!/^#[0-9a-f]{6}$/u.test(hostHex)) throw new TypeError(`A host light colour is a lowercase #rrggbb value, not ${hostHex}.`);
+  if (!/^#[0-9a-f]{6}$/u.test(hostHex)) throw new TypeError(`A host light color is a lowercase #rrggbb value, not ${hostHex}.`);
   const host = [1, 3, 5].map(at => srgbToLinear(parseInt(hostHex.slice(at, at + 2), 16) / 255));
   const luminance = 0.2126 * host[0]! + 0.7152 * host[1]! + 0.0722 * host[2]!, gray = srgbToLinear(grayByte / 255);
-  if (!(luminance > 0)) throw new TypeError(`Host light colour ${hostHex} has no luminance.`);
+  if (!(luminance > 0)) throw new TypeError(`Host light color ${hostHex} has no luminance.`);
   return host.map(value => Math.round(255 * linearToSrgb(Math.min(1, value * gray / luminance)))) as unknown as readonly [number, number, number];
 }
 

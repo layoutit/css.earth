@@ -5,7 +5,7 @@
       {
         "id": "dots",
         "label": "Extended Virgo Cluster Catalog, CDS J/ApJS/215/22",
-        "process": "Keep the catalogue's certain members that Cosmicflows-4 does not hold; place each at the cluster's Cosmicflows-4 group distance, spread in depth as widely as the members spread across the sky; colour by type and tone by absolute B magnitude as the Nearby Universe field does.",
+        "process": "Keep the catalogue's certain members that Cosmicflows-4 does not hold; place each at the cluster's Cosmicflows-4 group distance, spread in depth as widely as the members spread across the sky; color by type and tone by absolute B magnitude as the Nearby Universe field does.",
         "recipe": "source/dots/points.json",
         "selector": "",
         "inputs": [

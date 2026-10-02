@@ -28,7 +28,7 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
   const observed = new Set<string>();
   const photographed = new Set<string>();
   const sourceColors = new Set<string>();
-  // Measured datasets that are not imagery: a whole-disc or photometric colour, or measured geometry in neutral gray.
+  // Measured datasets that are not imagery: a whole-disc or photometric color, or measured geometry in neutral gray.
   const measured = new Set<string>();
   const simulated = new Set<string>();
   for (const recipe of recipes) {
@@ -65,7 +65,7 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
   }
   return { imagery, illustration, featured: !illustration && (policy.featured || imagery), ...(arrival ? { arrival } : {}),
     ...(illustration && simulated.size > 0 ? { simulation: true as const } : {}),
-    // A star's colour dataset from its spectrum or catalogued temperature is measured, though not an image of its surface.
+    // A star's color dataset from its spectrum or catalogued temperature is measured, though not an image of its surface.
     ...(!imagery && sourceColors.size ? { sourceColor: true as const } : {}),
     // An orientation reference outranks classification in universe annotations (the Sun, then Earth).
     ...(policy.orientationReference === undefined ? {} : { orientationReference: policy.orientationReference }) };
@@ -147,7 +147,7 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     const asset = parseArrivalBillboard(billboard);
     if (camera === null || !isRecord(controls) || !isRecord(controls.datasets)) throw new TypeError('An arrival billboard requires its prepared runtime and datasets.');
     // Every body can have an arrival image. This does not turn a shape model,
-    // measured colour or illustration into photographic evidence.
+    // measured color or illustration into photographic evidence.
     const view = { defaultDataset: controls.datasets.defaultDataset,
       datasetIds: [...new Set([controls.datasets.defaultDataset, ...(discovery.arrival?.datasetIds ?? [])])],
       rotation: preparedDefaultViewRotation(camera),

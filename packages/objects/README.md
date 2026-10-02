@@ -18,7 +18,7 @@ preparation tools share: `defineObjects()`, `catalogEntry()` and `catalogueObjec
 entry of the prepared catalogue, as the registry and a page's object directory both read it), `parseObjectDiscovery()`,
 `parseNavigationDistance()`, `parseArrivalView()` and `definePreparedFocus()` validate the prepared registry data,
 `orderFacts()` orders factsheets, `normalizeDestinationQuery()` is the name normalisation preparation writes and search
-reads, `contextColour()` picks a body's world-context colour, and `validateWorldRotation()` checks a rotation. The host
+reads, `contextColor()` picks a body's world-context color, and `validateWorldRotation()` checks a rotation. The host
 binds `loadScene` to its own scene type; the site's client build compiles these modules from source, one module each.
 Preparation reads the same registry through `readPreparedObjects(root)` in `@cssearth/objects/node`: it decodes the
 prepared catalogue `prepare:catalog` writes (`PREPARED_CATALOGUE`: `site/prepared-catalogue.mjs`, every scene object's

@@ -7,10 +7,10 @@ Counted on 2026-09-19, over volumes JNOJNC_0001 to JNOJNC_0035: 42,166 calibrate
 
 ## Shipped objects JunoCam photographed
 
-8 of this project's objects are a JunoCam target. A colour image holds the red, green and blue strips, which is what the `junocam-camera` format reads.
+8 of this project's objects are a JunoCam target. A color image holds the red, green and blue strips, which is what the `junocam-camera` format reads.
 The finest pixel is the lowest label altitude times the camera's 675.4 microradian pixel angle: the scale straight below the spacecraft.
 
-| object | calibrated images | colour | orbits | lowest altitude | finest pixel | state | why |
+| object | calibrated images | color | orbits | lowest altitude | finest pixel | state | why |
 | --- | ---: | ---: | --- | ---: | ---: | --- | --- |
 | jupiter | 41,339 | 16,420 | 81 orbits, 0 to 80 | 3,210 km | 2.17 km | not measured | No program of this target is pinned. |
 | io | 255 | 247 | 37 orbits, 8 to 76 | 1,506 km | 1.02 km | not measured | No program of this target is pinned. |

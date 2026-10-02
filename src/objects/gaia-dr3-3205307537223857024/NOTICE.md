@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 35.025 (31.547 to 38.834) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); Mass 4.601 (4.398 to 4.641) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); temperature from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 3205307537223857024: teff_gspphot 4342.8726 K (16th-84th percentiles 4338.9883-4346.6553), the temperature FLAME used.
 
-Colour: a Planck spectrum at the temperature of Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 3205307537223857024: teff_gspphot 4342.8726 K (16th-84th percentiles 4338.9883-4346.6553), the temperature FLAME used, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: a Planck spectrum at the temperature of Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 3205307537223857024: teff_gspphot 4342.8726 K (16th-84th percentiles 4338.9883-4346.6553), the temperature FLAME used, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 

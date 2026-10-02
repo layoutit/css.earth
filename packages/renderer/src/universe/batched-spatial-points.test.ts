@@ -4,7 +4,7 @@ import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
 
-test('a spatial point field reprojects through one retained SVG path per paint colour', () => {
+test('a spatial point field reprojects through one retained SVG path per paint color', () => {
   const {document}=parseHTML('<div id="host"><b></b></div>'),host=document.getElementById('host')!,before=host.firstElementChild!;
   const frame={referenceFrame:'sun-icrf',epochJdTt:2451545,originM:[0,0,0] as const,localToReferenceXyzw:[0,0,0,1] as const,
     metersPerUnit:1,boundsUnits:{min:[-20,-20,-20] as const,max:[20,20,20] as const}};
@@ -124,14 +124,14 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
     return [clump[0]! + (random() - .5) * 30, clump[1]! + (random() - .5) * 30, clump[2]! + (random() - .5) * 30, index % 2];
   });
   const cells = catalogueCells(rows, undefined, 32);
-  const points = rows.map(row => ({ positionUnits: [row[0], row[1], row[2]] as unknown as readonly [number, number, number], colour: row[3] }));
+  const points = rows.map(row => ({ positionUnits: [row[0], row[1], row[2]] as unknown as readonly [number, number, number], color: row[3] }));
   const styles = [{ colorCss: '#ffffff', opacity: .5, radiusPx: 1 }, { colorCss: '#ff8800', opacity: 1, radiusPx: 2.5 }];
   // A clock 100 ms on every trial: every publication may repaint, so both fields decide by their paint alone.
   let keep = 1, drawn = rows.length, clock = 0;
   const mount = (withCells: boolean) => { const { document } = parseHTML('<div id="host"></div>');
     return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
       ...(withCells ? { cells: { boxes: Float64Array.from(cells.boxes.flat()), of: Int32Array.from(cells.of) } } : {}),
-      stylePoint: point => styles[point.colour]!, paintPalette: styles.map(pointPaint), drawnCount: () => drawn, keepFraction: () => keep, now: () => clock }); };
+      stylePoint: point => styles[point.color]!, paintPalette: styles.map(pointPaint), drawnCount: () => drawn, keepFraction: () => keep, now: () => clock }); };
   const dots = (field: ReturnType<typeof mount>) => [...field.root.querySelectorAll('path')]
     .map(path => [...(path.getAttribute('d') ?? '').matchAll(/M-?\d+ -?\d+h0/g)].map(match => match[0]).sort().join(''));
   const plain = mount(false), celled = mount(true);
@@ -232,7 +232,7 @@ test('a turn warps the paint only while no dot grows or shrinks by more than a t
   field.destroy();
 });
 
-test('a dot seen through an occluding disc is painted by a fainter path of its colour, most at the disc\'s centre', () => {
+test('a dot seen through an occluding disc is painted by a fainter path of its color, most at the disc\'s centre', () => {
   const { document } = parseHTML('<div id="host"></div>');
   // The camera at the origin looks down -z at a disc of radius 2 at z = -5. Sight lines to the four points cross its plane
   // at the centre, at 0.95 of the radius, outside the disc, and not at all (the last point is in front of it).

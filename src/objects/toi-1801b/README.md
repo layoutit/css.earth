@@ -8,7 +8,7 @@ It is the only planet known around TOI-1801. Its orbit and size follow Mallorqu�
 
 **Orbit.** Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): P 10.643985 d Mallorquín et al. 2023 (2023A&A...680A..76M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQUIN_ET_AL_2023): a/R* 30.632; Mallorquín et al. 2023 (2023A&A...680A..76M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQUIN_ET_AL_2023): inclination 89.507 degrees Mallorquín et al. 2023 (2023A&A...680A..76M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQUIN_ET_AL_2023): e 0 Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): transit mid-time 2458903.548 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1801's measured colour (#ffd09e, the colour dataset of toi-1801 (src/objects/toi-1801/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1801's measured color (#ffd09e, the color dataset of toi-1801 (src/objects/toi-1801/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1801's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (22, 49), folded onto its orbit. Upper limits and rows without an error are left out.
 

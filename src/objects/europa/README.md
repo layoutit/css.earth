@@ -23,7 +23,7 @@ Four observation views were prepared with the current tools:
 | Carbon dioxide | Eight public JWST/NIRSpec cubes from programs 1250, 4023 and 9230, November 2022–February 2025; [Trumbo and Brown (2023)](https://doi.org/10.1126/science.adg4155) motivates the 4.26 µm feature. This is continuum-relative band depth, not abundance. |
 | Peroxide signature | The same cubes, a 3.50 µm continuum-relative feature motivated by [Wu et al. (2024)](https://doi.org/10.3847/PSJ/ad7468). [Yoffe and Shahaf (2026), Appendix A.4](https://arxiv.org/html/2603.10520v1) dispute a peroxide interpretation because of possible instrumental structure; the caption states this. Our straight-line continuum is not their band-area method. |
 | Salt signature | Sixty public HST/STIS frames from the [Trumbo et al. (2019) observations](https://doi.org/10.1126/sciadv.aaw7123): 450 nm absorption equivalent width in Å. Irradiated NaCl is an interpretation of the signature; it does not establish an ocean origin. |
-| JunoCam | Four RGB-strip observations from Juno's 29 September 2022 flyby, registered with the released Juno SPICE kernels. The images keep their observed illumination and uncovered regions. Their shared display range preserves band ratios, not natural colour. |
+| JunoCam | Four RGB-strip observations from Juno's 29 September 2022 flyby, registered with the released Juno SPICE kernels. The images keep their observed illumination and uncovered regions. Their shared display range preserves band ratios, not natural color. |
 
 Source selections, trials and open questions are in the [investigation ledger](investigations.json).
 
@@ -41,11 +41,11 @@ Source selections, trials and open questions are in the [investigation ledger](i
 | 12ESGLOCOL01, December 1997 | 0.5 |
 | G1ESGLOBAL01, June 1996 | 0.5 |
 
-These weights are visual choices, not fitted scattering parameters; the [USGS Europa photometry study](https://www.hou.usra.edu/meetings/lpsc2022/pdf/1691.pdf) motivated comparing Lambert. Colour appears only where all three bands are valid with incidence and emission at most 75°. Geometry comes from 20 controlled ISIS labels and [JPL Horizons](https://ssd-api.jpl.nasa.gov/doc/horizons.html) vectors in `source/photometry/`, oriented with [NAIF PCK equations](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/pck.html). One brightness multiplier per sequence softens steps against monochrome.
+These weights are visual choices, not fitted scattering parameters; the [USGS Europa photometry study](https://www.hou.usra.edu/meetings/lpsc2022/pdf/1691.pdf) motivated comparing Lambert. Color appears only where all three bands are valid with incidence and emission at most 75°. Geometry comes from 20 controlled ISIS labels and [JPL Horizons](https://ssd-api.jpl.nasa.gov/doc/horizons.html) vectors in `source/photometry/`, oriented with [NAIF PCK equations](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/pck.html). One brightness multiplier per sequence softens steps against monochrome.
 
 **Elevation.** The Agenor relative stereo heights stay in meters, with no globe displacement. The −700…+300 m scale spans the −641.9267578125…+218.51205444335938 m source range. Fixed northwest relief shading shows slopes.
 
-**Geology and infrared.** Geology colours use the released ArcGIS CMYK symbols converted to RGB. Infrared RGB takes bands near 1.50, 1.35 and 0.74 µm, pinned in `source/nims/prepare-composite.json`, with fixed I/F ranges R 0–0.6, G 0–1.2, B 0–1.5.
+**Geology and infrared.** Geology colors use the released ArcGIS CMYK symbols converted to RGB. Infrared RGB takes bands near 1.50, 1.35 and 0.74 µm, pinned in `source/nims/prepare-composite.json`, with fixed I/F ranges R 0–0.6, G 0–1.2, B 0–1.5.
 
 **Observation views.** The [JWST recipe](source/preparation/jwst-band-maps.json) is run by `packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts`. The STIS map comes from `packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map`. JunoCam uses the [raster recipe](source/preparation/raster.json).
 

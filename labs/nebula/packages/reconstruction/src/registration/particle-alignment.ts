@@ -125,7 +125,7 @@ export async function createParticleAlignmentDiagnostic(options: ParticleAlignme
   const [particleBytes, photoBytes] = await Promise.all([
     readFile(options.rotatedParticlePath), readFile(options.extractedPhotoPath),
   ]);
-  const photo = await sharp(photoBytes).rotate().ensureAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  const photo = await sharp(photoBytes).rotate().ensureAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
   const spanX = options.boundsKpc.max[0] - options.boundsKpc.min[0];
   const spanY = options.boundsKpc.max[1] - options.boundsKpc.min[1];
   const width = Math.max(1, Math.round(options.resolution * spanX / Math.max(spanX, spanY)));

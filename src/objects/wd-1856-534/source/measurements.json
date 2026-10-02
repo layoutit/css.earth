@@ -11,7 +11,7 @@
   "effectiveTemperatureSource": "Limbach et al. (2025), arXiv:2504.16982, Table 1: 4920 +/- 50 K. https://arxiv.org/abs/2504.16982",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured."
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured."
   },
   "planetCount": 1,
   "planetCountSource": "One known planet, WD 1856+534 b, transiting every 1.408 days (Vanderburg et al. 2020, Nature 585, 363).",

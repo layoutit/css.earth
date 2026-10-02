@@ -6,7 +6,7 @@ Its radius and temperature follow Basilicata et al. 2024. It is also HIP 97657. 
 
 **Star.** Placement: Gaia DR3 source 2086512227851023872, parallax 26.427 ± 0.011 mas (37.84 pc). Radius 0.76 +/- 0.01 solar radii from Basilicata et al. 2024, the stellar radius of HAT-P-11 b's parameter set from Basilicata et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract). Mass 0.811 +/- 0.03 solar masses from An et al. 2025, the stellar mass of the default parameter set of HAT-P-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract). Temperature 4,780 K from Basilicata et al. 2024, the stellar temperature of HAT-P-11 b's parameter set from Basilicata et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive. log g 4.59 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2086512227851023872, through the CIE 1931 2° observer: #ffd4b9. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2086512227851023872, through the CIE 1931 2° observer: #ffd4b9. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,780 K and log g 4.59 (u1 0.718, u2 0.069): a model, because no fit of this star's limb is used.
 

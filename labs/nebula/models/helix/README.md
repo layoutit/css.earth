@@ -8,9 +8,9 @@ Open `/reconstruction?subject=helix-model-prior&inspection=compiler`. **Nebula â
 
 [compiler.json](compiler.json) combines the registered ESO WFI optical, wider ESO field and VISTA infrared sources from [observations.json](observations.json), with WFI as the initial RGB dataset. [joint-fit.json](joint-fit.json) supplies the optional molecular scaffold from HCO+ measurements. Up to 650 compact lights are allowed; this is a display budget, not a measured stellar population.
 
-The three normalized starless images form one relative-luminosity target. A positive multiscale fit supplies projected emission, and the molecular surface conditions its depth. Equal front/back allocation, support thickness and the diffuse prior for unsupported emission are assumptions, not a measured shell. All three datasets share one 3D field; their colours are different observations, not extra viewpoints. Compact-light depths do not measure stellar distance or membership.
+The three normalized starless images form one relative-luminosity target. A positive multiscale fit supplies projected emission, and the molecular surface conditions its depth. Equal front/back allocation, support thickness and the diffuse prior for unsupported emission are assumptions, not a measured shell. All three datasets share one 3D field; their colors are different observations, not extra viewpoints. Compact-light depths do not measure stellar distance or membership.
 
-Known limits of the compiled cloud: VISTA shows oblique colour streaks, bright stellar halos survive in the inputs, and fine knots and depth are not recovered. Increasing slab sampling does not fix the source-to-volume colour interpretation.
+Known limits of the compiled cloud: VISTA shows oblique color streaks, bright stellar halos survive in the inputs, and fine knots and depth are not recovered. Increasing slab sampling does not fix the source-to-volume color interpretation.
 
 ## Combined observations and velocities
 

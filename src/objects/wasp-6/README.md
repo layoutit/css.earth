@@ -6,7 +6,7 @@ Its radius and temperature follow McGruder et al. 2023. The introduction is gene
 
 **Star.** Placement: Gaia DR3 source 2385171398768647552, parallax 5.007 ± 0.013 mas (199.71 pc). Radius 0.79 +/- 0.008 solar radii from McGruder et al. 2023, the stellar radius of the default parameter set of WASP-6 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract). Mass 0.854 +/- 0.027 solar masses from McGruder et al. 2023, the stellar mass of the default parameter set of WASP-6 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract). Temperature 5,438 K from McGruder et al. 2023, the stellar temperature of the default parameter set of WASP-6 b in the NASA Exoplanet Archive. log g 4.57 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2385171398768647552, through the CIE 1931 2° observer: #ffece0. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2385171398768647552, through the CIE 1931 2° observer: #ffece0. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,438 K and log g 4.57 (u1 0.538, u2 0.208): a model, because no fit of this star's limb is used.
 

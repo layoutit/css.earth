@@ -6,7 +6,7 @@ Its radius and temperature follow Peláez-Torres et al. 2024. The introduction i
 
 **Star.** Placement: Gaia DR3 source 2110345512468201344, parallax 20.458 ± 0.012 mas (48.88 pc). Radius 0.631 +/- 0.019 solar radii from Peláez-Torres et al. 2024, the stellar radius of the default parameter set of TOI-2274 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract). Mass 0.612 +/- 0.0202 solar masses from Peláez-Torres et al. 2024, the stellar mass of the default parameter set of TOI-2274 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract). Temperature 3,943 K from Peláez-Torres et al. 2024, the stellar temperature of the default parameter set of TOI-2274 b in the NASA Exoplanet Archive. log g 4.62 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2110345512468201344, through the CIE 1931 2° observer: #ffbe8e. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2110345512468201344, through the CIE 1931 2° observer: #ffbe8e. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,943 K and log g 4.62 (u1 0.532, u2 0.231): a model, because no fit of this star's limb is used.
 

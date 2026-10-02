@@ -2,7 +2,7 @@
 
 A photograph's brightness depends on its lighting and viewing angles as well as on the surface. This library carries an observed radiance factor (I/F) to one reference geometry with a published photometric model, so photographs taken under different illumination can be joined and relit. Preparation runs it; the runtime never evaluates a model.
 
-The models and the limb laws are the `@cssearth/bake/photometry` entry (this folder), and its tests sit beside them. The whole-disc colour policy is in [`whole-disc-colour.ts`](../objects/raster/whole-disc-colour.ts) (`@cssearth/bake/objects/raster`). The commands that make records, `fit-epic-limb.mts` and `acquire-psg-limb-table.mts`, are in [`packages/bake/cli/`](../../cli/).
+The models and the limb laws are the `@cssearth/bake/photometry` entry (this folder), and its tests sit beside them. The whole-disc color policy is in [`whole-disc-color.ts`](../objects/raster/whole-disc-color.ts) (`@cssearth/bake/objects/raster`). The commands that make records, `fit-epic-limb.mts` and `acquire-psg-limb-table.mts`, are in [`packages/bake/cli/`](../../cli/).
 
 ## Modules
 
@@ -15,7 +15,7 @@ The models and the limb laws are the `@cssearth/bake/photometry` entry (this fol
 | `normalization.ts` | A model, a reference geometry and the limits beyond which a pixel is withheld. |
 | `model-record.ts` | Reading and validating model records and the recipe block that names them. |
 | `light-curve.ts` | A pulsating star's published Gaia DR3 Cepheid harmonic model, turned into one period of veil opacity over the disc from the scene epoch. The display rate, three days per second, is its only presentation choice. See [HV 1345 through one cycle](../../../../docs/images/cepheid-light-curve-phases.png). |
-| `whole-disc-colour.ts` (`objects/raster`) | A planet's whole-disc colour record from a published spectrum, and the band-ratio policy that ties a colour map to it through its limb law's disc means (`floodDiscMean` in `limb.ts`); `keepLuminance` then restores the map's mean luminance with a soft shoulder. |
+| `whole-disc-color.ts` (`objects/raster`) | A planet's whole-disc color record from a published spectrum, and the band-ratio policy that ties a color map to it through its limb law's disc means (`floodDiscMean` in `limb.ts`); `keepLuminance` then restores the map's mean luminance with a soft shoulder. |
 
 Angles are radians in code and degrees in records and recipes.
 
@@ -43,7 +43,7 @@ A photograph recipe names the record, the geometry every pixel is carried to, an
 - Phase limits may extend past the fitted range. The prepared report then says the model is extrapolated.
 - A dataset names the model as its `photometry`; its display range and level matching stay in their own recipe blocks.
 
-Surface-observation datasets with Sun geometry (`packages/bake/src/objects/layers/terrestrial/surface-observations/`), controlled-camera datasets included, accept this block. Filter-colour datasets refuse it, because a model fitted in one filter would change band ratios. Observed-colour datasets keep their per-observation ISIS Lunar-Lambert weights, and ISIS2 orthographic images carry no Sun geometry to normalize with.
+Surface-observation datasets with Sun geometry (`packages/bake/src/objects/layers/terrestrial/surface-observations/`), controlled-camera datasets included, accept this block. Filter-color datasets refuse it, because a model fitted in one filter would change band ratios. Observed-color datasets keep their per-observation ISIS Lunar-Lambert weights, and ISIS2 orthographic images carry no Sun geometry to normalize with.
 
 The Shadows lighting option still bakes Lambert shading with cast shadows, because a Hapke model depends on the emission angle, which changes as the viewer rotates, and the runtime must not evaluate it.
 
@@ -69,5 +69,5 @@ Check each point against the source before merging a record:
 - `disk.test.mts` holds the disk functions to exact equality with frozen copies of the historical arithmetic.
 - `hapke.test.mts` and `normalization.test.mts` check defining limits: Chandrasekhar's H(1), phase-function normalization, opposition peaks, reciprocity, roughness continuity and the reference and limit rules.
 - `isis.oracle.test.mts` compares the library with the values printed by the unit tests of USGS ISIS 10.0.0_LTS, to six significant digits. [`photometric-truth.py`](fixtures/photometric-truth.py) reads those truth files, and the fixture records each file's URL.
-- `whole-disc-colour.test.mts` checks the record parser, the Minnaert disc means 2/(2k+1), the tie and the luminance shoulder on synthetic maps.
+- `whole-disc-color.test.mts` checks the record parser, the Minnaert disc means 2/(2k+1), the tie and the luminance shoulder on synthetic maps.
 - ISIS's truth files do not exercise the 2002 H function, coherent backscatter or porosity. Those terms are checked only against their defining limits.

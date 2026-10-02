@@ -6,7 +6,7 @@ Its radius and temperature follow Alsubai et al. 2018. The introduction is gener
 
 **Star.** Placement: Gaia DR3 source 1265513389372846848, parallax 9.905 ± 0.023 mas (100.96 pc). Radius 0.722 +/- 0.02 solar radii from Alsubai et al. 2018, the stellar radius of the default parameter set of Qatar-6 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract). Mass 0.822 +/- 0.021 solar masses from Alsubai et al. 2018, the stellar mass of the default parameter set of Qatar-6 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract). Temperature 5,052 K from Alsubai et al. 2018, the stellar temperature of the default parameter set of Qatar-6 b in the NASA Exoplanet Archive. log g 4.64 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 1265513389372846848, through the CIE 1931 2° observer: #ffddc5. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 1265513389372846848, through the CIE 1931 2° observer: #ffddc5. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,052 K and log g 4.64 (u1 0.643, u2 0.130): a model, because no fit of this star's limb is used.
 

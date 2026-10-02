@@ -40,7 +40,7 @@ test('square pages pack into the smallest square sheet, largest first, each page
 
 test('a small level draws every page of a bank from one sheet; the finest level keeps the pages', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'texture-sheet-'));
-  const page = (colour: string) => sharp({ create: { width: 32, height: 32, channels: 4, background: colour } }).webp({ lossless: true }).toBuffer();
+  const page = (color: string) => sharp({ create: { width: 32, height: 32, channels: 4, background: color } }).webp({ lossless: true }).toBuffer();
   await writeFile(join(directory, 'test-surface.webp'), await page('#ff0000'));
   await writeFile(join(directory, 'test-surface-page-1.webp'), await page('#0000ff'));
   const levels = await prepareTextureLevels({ publicDirectory: directory,
@@ -65,7 +65,7 @@ test('a small level draws every page of a bank from one sheet; the finest level 
 
 test('a bank prepared at lower density places its pages on the same CSS offsets as the full bank', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'texture-sheet-density-'));
-  const page = (size: number, colour: string) => sharp({ create: { width: size, height: size, channels: 4, background: colour } }).webp({ lossless: true }).toBuffer();
+  const page = (size: number, color: string) => sharp({ create: { width: size, height: size, channels: 4, background: color } }).webp({ lossless: true }).toBuffer();
   await writeFile(join(directory, 'test-surface.webp'), await page(32, '#ff0000'));
   await writeFile(join(directory, 'test-surface-page-1.webp'), await page(32, '#0000ff'));
   await writeFile(join(directory, 'test-outer.webp'), await page(16, '#00ff00'));
@@ -113,7 +113,7 @@ test('a reuse run drops a texture level width the recipe no longer lists, at the
 
 test('pages of different sizes in one bank keep their packed offsets; only a sparser bank of the same page scales', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'texture-sheet-mixed-'));
-  const page = (size: number, colour: string) => sharp({ create: { width: size, height: size, channels: 4, background: colour } }).webp({ lossless: true }).toBuffer();
+  const page = (size: number, color: string) => sharp({ create: { width: size, height: size, channels: 4, background: color } }).webp({ lossless: true }).toBuffer();
   await writeFile(join(directory, 'test-surface.webp'), await page(32, '#ff0000'));
   await writeFile(join(directory, 'test-surface-page-1.webp'), await page(16, '#0000ff'));
   const levels = await prepareTextureLevels({ publicDirectory: directory,

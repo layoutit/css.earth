@@ -218,9 +218,9 @@
         "format": "spice-camera-color",
         "consumer": "luke-photograph",
         "metadata": {
-          "label": "LICIACube colour",
+          "label": "LICIACube color",
           "falseColor": true,
-          "coverage": "Eight LICIACube/LUKE frames from 165 to 179 seconds after the DART impact, through closest approach at 60 km. The camera is computed from the mission's reconstructed SPICE kernels; the three planes of each frame are the detector's red, green and blue bands, composed as a band visualization rather than a qualified natural-colour reconstruction. Every frame looks through the impact ejecta, and the kernels place the body about half a degree from where the frames show it, so coverage is partial and the registration stage reaches no verdict. The unseen surface keeps the grid."
+          "coverage": "Eight LICIACube/LUKE frames from 165 to 179 seconds after the DART impact, through closest approach at 60 km. The camera is computed from the mission's reconstructed SPICE kernels; the three planes of each frame are the detector's red, green and blue bands, composed as a band visualization rather than a qualified natural-color reconstruction. Every frame looks through the impact ejecta, and the kernels place the body about half a degree from where the frames show it, so coverage is partial and the registration stage reaches no verdict. The unseen surface keeps the grid."
         },
         "selection": "recipe-order",
         "levelMatching": {

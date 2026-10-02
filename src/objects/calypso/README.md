@@ -1,6 +1,6 @@
 # Calypso
 
-Saturn's small moon Calypso on the Thomas 2018 shape model, with a Cassini monochrome mosaic, a three-filter false-colour
+Saturn's small moon Calypso on the Thomas 2018 shape model, with a Cassini monochrome mosaic, a three-filter false-color
 view and an elevation map.
 
 ## Sources
@@ -25,7 +25,7 @@ Photographs are projected with the release's camera records, not fitted by eye. 
 Preparation applies a bounded Lunar-Lambert illumination correction (maximum gain 2.5), source-mesh visibility and
 cast-shadow rejection, and overlap level matching (widest gain 1.59). Samples beyond 70° emission are withheld.
 Edge-connected sky below 0.003 I/F is excluded; isolated dark features are kept. Monochrome is displayed linearly over
-0–1.13 I/F, the 99.5th percentile. False color colours a point only where all three bands qualify, uses the same range
+0–1.13 I/F, the 99.5th percentile. False color colors a point only where all three bands qualify, uses the same range
 for all channels, then applies one final sRGB transfer.
 
 The shape is simplified to 600 native PolyCSS leaves (maximum estimated simplifier error 400 m). The shaded-relief
@@ -36,7 +36,7 @@ palette shows model slopes, not invented small craters. The initial view looks t
 - On the fixed 2,048 × 1,024 preparation grid, Monochrome covers 740,795 cells and False color 347,888. These are grid
   counts, not surface-area percentages.
 - The views were inspected in Chrome at DPR 1 and 2, with Shadows off and on, dragging, and a 390-pixel mobile selector.
-- A trial with an additional colour sequence gained roughly 0.5 percentage points of coverage and was not adopted; see
+- A trial with an additional color sequence gained roughly 0.5 percentage points of coverage and was not adopted; see
   the [investigation ledger](investigations.json).
 
 ### Registration

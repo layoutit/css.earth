@@ -65,6 +65,6 @@ Source and output are each one closed component. Nearest-triangle sampling betwe
 
 - Shape uses the shared neutral-gray material, not photographed color or inferred composition. Elevation includes global shape, not height above a gravitational equipotential. Reduction softens small features, and a 4096 × 2048 display map does not add observational resolution.
 - Rotation has an explicitly arbitrary display meridian for the Shape and Elevation views.
-- The SPHERE photograph is photographed illumination, not albedo or colour. The frames see Nemausa from 23° to 31° south, so surface the survey did not see keeps the missing-imagery grid.
+- The SPHERE photograph is photographed illumination, not albedo or color. The frames see Nemausa from 23° to 31° south, so surface the survey did not see keeps the missing-imagery grid.
 - Frame zimpol-20180428-010334 is left out: the level fit finds it 4.18× dimmer than the first frame, over the dataset's 4× budget.
 - The heliocentric conic serves the fixed-date context, not long-term perturbation ephemerides.

@@ -325,8 +325,8 @@ function selectBody(body: Body, mismatches: string[]): Outcome {
           pointer('tno', best.index, `${field}_DIAMETER`, `${field}_DIAMETER_ERROR_UPPER`, `${field}_DIAMETER_ERROR_LOWER`, 'METHOD_DIAMETER_ALBEDO', 'REFERENCE_CODE')) });
       const albedoValue = value(tno, best.row, 'ALBEDO'), albedoUpper = value(tno, best.row, 'ALBEDO_ERROR_UPPER');
       if (albedoValue !== undefined && significant(albedoValue, albedoUpper) && clean(value(tno, best.row, 'ALBEDO_CODE'))) {
-        const colour = value(tno, best.row, 'ALBEDO_COLOR');
-        albedo = factFromTable('geometric-albedo', 'Geometric albedo', `${interval(albedoValue, albedoUpper, value(tno, best.row, 'ALBEDO_ERROR_LOWER'))}${colour === 'V' ? ' (visible)' : colour === 'R' || colour === 'B' ? ` (band ${colour})` : ''}`,
+        const color = value(tno, best.row, 'ALBEDO_COLOR');
+        albedo = factFromTable('geometric-albedo', 'Geometric albedo', `${interval(albedoValue, albedoUpper, value(tno, best.row, 'ALBEDO_ERROR_LOWER'))}${color === 'V' ? ' (visible)' : color === 'R' || color === 'B' ? ` (band ${color})` : ''}`,
           'tno', tno, `${catalogue('tno').citation}, entry from ${cite(best.row)}`, pointer('tno', best.index, 'ALBEDO', 'ALBEDO_ERROR_UPPER', 'ALBEDO_ERROR_LOWER', 'ALBEDO_COLOR', 'REFERENCE_CODE'));
       }
     }

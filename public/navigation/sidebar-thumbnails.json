@@ -15,7 +15,7 @@
       "bytes": 4522
     },
     {
-      "path": "public/scenes/beta-pictoris-disc/datasets/colour.webp",
+      "path": "public/scenes/beta-pictoris-disc/datasets/color.webp",
       "bytes": 5534
     },
     {
@@ -386,11 +386,11 @@
       "credit": "NASA/ESA/CSA JWST, MAST",
       "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/4758.pdf"
     },
-    "beta-pictoris-disc/colour": {
-      "url2x": "/navigation/focus-beta-pictoris-disc-colour@2x.webp",
+    "beta-pictoris-disc/color": {
+      "url2x": "/navigation/focus-beta-pictoris-disc-color@2x.webp",
       "inputs": [
         "src/objects/beta-pictoris-disc/prepared/presentation.json",
-        "public/scenes/beta-pictoris-disc/datasets/colour.webp"
+        "public/scenes/beta-pictoris-disc/datasets/color.webp"
       ],
       "credit": "NASA/ESA HST, MAST",
       "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST"
@@ -1112,7 +1112,7 @@
         "src/objects/smc-volume/prepared/presentation.json",
         "public/scenes/smc-volume/datasets/smc-allwise-wide.webp"
       ],
-      "credit": "IPAC/NASA; colour HiPS CDS (CNRS/Unistra)",
+      "credit": "IPAC/NASA; color HiPS CDS (CNRS/Unistra)",
       "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json"
     },
     "smc-volume": {

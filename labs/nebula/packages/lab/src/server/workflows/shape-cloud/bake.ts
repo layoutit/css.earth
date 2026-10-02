@@ -35,7 +35,7 @@ export async function bakeShapeCloud(input: {
   const sampling = shapeCloudSampling(quality, field.bounds);
   cancellation(options.signal);
   const imageBytes = await sourceBytes(root, source);
-  const { data: rgb, info } = await sharp(imageBytes).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  const { data: rgb, info } = await sharp(imageBytes).removeAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
   if (info.width !== image.width || info.height !== image.height || info.channels !== 3)
     throw new TypeError('Shape cloud source must retain the complete registered working-image pixels.');
   const result: ShapeCloudResult = { schema: 'cssearth-shape-cloud-result@1', id, imageId: image.id,

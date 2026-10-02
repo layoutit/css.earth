@@ -152,8 +152,8 @@ its validators accept); the renderer never imports the bake.
   entry `package.json` lists under `sideEffects`.
 - `src/objects/` holds the shared object libraries the per-body preparation pipelines in `packages/bake/authoring/<body>/` (and `packages/telescope-cli/authoring/<body>/`) import. Each of
   its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only), importing another topic only as `LOWER_TOPICS` declares:
-  - `objects/color`: the sRGB transfer, band-colour and asinh displays, palettes and tints, a placed star's catalogue colour,
-    and the uniform colour of whole-disc photometry. The host passes the CIE 1931 colour-matching table in.
+  - `objects/color`: the sRGB transfer, band-color and asinh displays, palettes and tints, a placed star's catalogue color,
+    and the uniform color of whole-disc photometry. The host passes the CIE 1931 color-matching table in.
   - `objects/geometry`: shape models (OBJ, STL, PDS plate, vertex-facet and radius tables, FITS facet fields) and the records
     that describe them, radial meshes and their simplification, controlled shape cameras and band alignment, ellipsoids, the
     Lambert attenuation atlas and the radial-layer contract.
@@ -168,8 +168,8 @@ its validators accept); the renderer never imports the bake.
     so the host passes it in (`SolarGeometry`). The prepared sky and Sun contracts and their preparers belong to
     `presentation` (`src/presentation/{cubic-sky,directional-sun}-contract.ts`), which the scene imports as a lower topic.
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
-    categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed colour rasters and their
-    photometric composition, a planet's whole-disc colour record and the band-ratio tie to it, the source records they read, the WISE atlas mosaic grid, FITS binary tables (OIFITS and archive
+    categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed color rasters and their
+    photometric composition, a planet's whole-disc color record and the band-ratio tie to it, the source records they read, the WISE atlas mosaic grid, FITS binary tables (OIFITS and archive
     tables) and a star's limb darkening fitted to TESS transits. It imports `objects/scene`,
     `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
   - `objects/sources`: an object's authored source references read through its source manifest, and the pinned source
@@ -183,7 +183,7 @@ its validators accept); the renderer never imports the bake.
     `site/build/charts/`; the spectrum reader and compact spectrum are in `site/overview/`, because
     `site/prepare-body-overview.mts` uses them and the runtime may not import the bake.
   - `objects/content`: the object-content contract (facts, labels, dataset, legend and gallery recipes, the prepared shell
-    payload), the shared dataset vocabulary, dataset steps and prepared legends, each dataset control's billboard colour, and the legend
+    payload), the shared dataset vocabulary, dataset steps and prepared legends, each dataset control's billboard color, and the legend
     labels a palette dataset derives from the stretch its report states. It
     imports no topic. The content preparer that reads factsheets and writes the payload is site-owned preparation in `site/build/content/`
     (it reads the prepared shell titles).
@@ -192,7 +192,7 @@ its validators accept); the renderer never imports the bake.
     fits behind encounter and orthophoto landmarks and the projected-control check (`packages/bake/cli/` holds those three
     commands), and attaching the banks to a prepared globe (`attach.ts`). It imports `objects/geometry`, `objects/raster`,
     `objects/scene`, `objects/layers/paged-ellipsoid` and `objects/layers/terrestrial`.
-  - `objects/stellar`: a star's colour dataset from its measured, Gaia XP or Planck spectrum and its limb darkening, starspots
+  - `objects/stellar`: a star's color dataset from its measured, Gaia XP or Planck spectrum and its limb darkening, starspots
     from a published figure or occultation, and Roche-von Zeipel gravity darkening, with the GaiaXPy script that samples a
     continuous Gaia XP spectrum (`xp-continuous-sample.py`) the body READMEs name. It imports `objects/color`,
     `objects/raster` and `objects/sources`. It is not part of `objects/layers/observation`, whose code the nebula lab's
@@ -256,7 +256,7 @@ its validators accept); the renderer never imports the bake.
     asset worker, `packages/bake/cli/paged-ellipsoid-asset-worker.mts`, which loads the solar geometry itself. They reach the astronomy package through `astronomy`, the object runtime contract through
     `contract`, the depth-source restore through `prepared-presentation` and the content preparer's types through
     `objects/content`, as lower topics. Earth's MUR acquisition commands stay in `packages/bake/authoring/earth/`
-    for its per-body authoring and read the MUR colour table through `globe/mur-image.ts`; the mantle-tomography extraction script
+    for its per-body authoring and read the MUR color table through `globe/mur-image.ts`; the mantle-tomography extraction script
     (`extract-tomography.py`) sits beside `tomography.ts`. The terrestrial commands that derive
     observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`,
     with the band-alignment, camera-reference and L'LORRI overlap commands and the archived-camera Python that runs the
@@ -301,7 +301,7 @@ its validators accept); the renderer never imports the bake.
 
 Prepared volumes, nebula deliveries and the lab's accepted density bakes depend on exactly what this code returns.
 Preserve arithmetic order, finite support, frames, units, spectral semantics, missing-data handling and historical
-compatibility. A relocation must not change accepted pixels or relax a validator. Material colour does not define
+compatibility. A relocation must not change accepted pixels or relax a validator. Material color does not define
 density: keep component-bound 3D material distinct from historical image-ray samplers, and never add an XY fallback to
 the finite-emission compiler. Change an output only on purpose, together with every test and accepted bake that pins it.
 

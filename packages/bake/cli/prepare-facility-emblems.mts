@@ -25,7 +25,7 @@ for(const e of records){
  // Juno's vector uses negative space for the white features shown in the raster
  // insignia. Retain that white inside the circular badge, with no outer square.
  const renderInput=e.id==='juno'?Buffer.from(input.toString().replace('<path','<circle cx="513.75" cy="513.75" r="498.5" fill="white"/><path')):input;
- const {data,info}=await sharp(renderInput).toColourspace('srgb').ensureAlpha().raw().toBuffer({resolveWithObject:true});
+ const {data,info}=await sharp(renderInput).toColorspace('srgb').ensureAlpha().raw().toBuffer({resolveWithObject:true});
  const original=Buffer.from(data),{width,height}=info;
  if(info.channels!==4)throw Error('Expected RGBA: '+e.id);
  const corners=[0,width-1,(height-1)*width,width*height-1];
@@ -50,13 +50,13 @@ for(const e of records){
  const raw=await sharp(png).raw().toBuffer();let transparent=0;for(let n=0;n<SIZE*SIZE;n++)if(!raw[n*4+3])transparent++;
  if(transparent<SIZE*SIZE*.03)throw Error('Missing actual transparency: '+e.id);
  for(let y=0;y<SIZE;y++)for(let x=0;x<SIZE;x++)if(x===0||y===0||x===SIZE-1||y===SIZE-1)if(raw[(y*SIZE+x)*4+3]!==0)throw Error('Opaque frame edge: '+e.id);
- // The published file is the composite quantized to 128 colours. The quantizer can merge full transparency with a faint
- // colour, so every pixel transparent in the composite is set back to exact transparency and the result, at most 129
- // colours, is written as a palette PNG that keeps them exactly.
+ // The published file is the composite quantized to 128 colors. The quantizer can merge full transparency with a faint
+ // color, so every pixel transparent in the composite is set back to exact transparency and the result, at most 129
+ // colors, is written as a palette PNG that keeps them exactly.
  const palette={palette:true,dither:0,compressionLevel:9,effort:10} as const;
- const quantized=await sharp(await sharp(raw,{raw:{width:SIZE,height:SIZE,channels:4}}).png({...palette,colours:128}).toBuffer()).ensureAlpha().raw().toBuffer();
+ const quantized=await sharp(await sharp(raw,{raw:{width:SIZE,height:SIZE,channels:4}}).png({...palette,colors:128}).toBuffer()).ensureAlpha().raw().toBuffer();
  for(let n=0;n<SIZE*SIZE;n++)if(raw[n*4+3]===0)quantized.fill(0,n*4,n*4+4);
- const published=await sharp(quantized,{raw:{width:SIZE,height:SIZE,channels:4}}).png({...palette,colours:256}).toBuffer();
+ const published=await sharp(quantized,{raw:{width:SIZE,height:SIZE,channels:4}}).png({...palette,colors:256}).toBuffer();
  const shown=await sharp(published).ensureAlpha().raw().toBuffer();
  for(let y=0;y<SIZE;y++)for(let x=0;x<SIZE;x++)if(x===0||y===0||x===SIZE-1||y===SIZE-1)if(shown[(y*SIZE+x)*4+3]!==0)throw Error('Published emblem has an opaque frame edge: '+e.id+' at '+x+','+y);
  await fs.writeFile(path.join(output,e.id+'.png'),published);

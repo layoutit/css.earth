@@ -8,7 +8,7 @@ It is the only planet known around TOI-519. Its orbit and size follow Kagetani e
 
 **Orbit.** Hartman et al. 2023 (2023AJ....166..163H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2023): P 1.26523248 d Kagetani et al. 2023 (2023PASJ...75..713K), via the NASA Exoplanet Archive ps table (pl_refname KAGETANI_ET_AL_2023): a/R* derived from its semi-major axis 0.0159 au and stellar radius 0.35 solar radii; Kagetani et al. 2023 (2023PASJ...75..713K), via the NASA Exoplanet Archive ps table (pl_refname KAGETANI_ET_AL_2023): inclination 88.9 degrees No archive row states an eccentricity; the orbit is taken as circular Hartman et al. 2023 (2023AJ....166..163H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2023): transit mid-time 2459013.15299 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-519's measured colour (#ffc281, the colour dataset of toi-519 (src/objects/toi-519/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-519's measured color (#ffc281, the color dataset of toi-519 (src/objects/toi-519/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-519's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (34, 61, 88), folded onto its orbit. Upper limits and rows without an error are left out.
 

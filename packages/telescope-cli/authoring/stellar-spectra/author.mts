@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-/** Placed stars whose colour dataset is a measured spectrum (the `measured` spectrum of stellar-photometric-color.mts): the navigation
- * marker is that colour as a uniform disc, and the catalogue and surface colours are its hex. All three are deterministic
+/** Placed stars whose color dataset is a measured spectrum (the `measured` spectrum of stellar-photometric-color.mts): the navigation
+ * marker is that color as a uniform disc, and the catalogue and surface colors are its hex. All three are deterministic
  * functions of the pinned spectrum, its record and the CIE observer.
  *
  *   node packages/telescope-cli/authoring/stellar-spectra/author.mts [--check] [<id> ...]
@@ -14,10 +14,10 @@ import { MARKER_PATH, starMarker } from '../../src/source-authoring/context-mark
 import { requireArray, requireRecord, requireString, isRecord } from '@cssearth/core';
 
 const objects = resolve(import.meta.dirname, '../../../../src/objects');
-/** Stars whose default dataset is the measured-spectrum colour: marker, catalogue and surface colours. */
+/** Stars whose default dataset is the measured-spectrum color: marker, catalogue and surface colors. */
 export const SPECTRUM_STARS = ['sirius', 'vega', 'hd-209458', 'arcturus', 'altair', 'deneb', 'fomalhaut', 'rigel', 'alpha-centauri-a', 'alpha-centauri-b',
   'aldebaran', 'kepler-186', 'kepler-452', 'wasp-39', 'polaris', 'proxima-centauri', 'k2-18', 'regulus', 'alderamin', 'rasalhague', 'caph', 'beta-pictoris', 'wd-1856-534', 'pds-70'] as const;
-/** Stars with an image dataset and a measured-spectrum colour dataset beside it: the catalogue and surface colours follow the spectrum, and
+/** Stars with an image dataset and a measured-spectrum color dataset beside it: the catalogue and surface colors follow the spectrum, and
  * the marker stays the image. */
 export const IMAGE_STARS = ['pi1-gruis', 'betelgeuse', 'r-doradus', 'ce-tauri'] as const;
 
@@ -27,16 +27,16 @@ export async function spectrumColor(id: string) {
   const source = resolve(objects, id, 'source');
   const raster = requireRecord(JSON.parse(await readFile(resolve(source, 'preparation/raster.json'), 'utf8')) as unknown);
   const surface = requireArray(raster.surfaces).map(value => requireRecord(value)).find(value => isRecord(value.science) && value.science.kind === 'stellar-photometric-color');
-  if (!surface) throw new TypeError(`${id} has no colour dataset.`);
+  if (!surface) throw new TypeError(`${id} has no color dataset.`);
   const { color } = await loadStellarPhotometricColor(path => readFile(resolve(source, path)), requireRecord(surface.science), requireString(surface.source));
   return hex(color.srgb);
 }
 
-/** Replace the one quoted colour value that `current` reads from the file, keeping the file's own formatting. */
+/** Replace the one quoted color value that `current` reads from the file, keeping the file's own formatting. */
 async function setColor(path: string, current: (value: Record<string, any>) => string, color: string, check: boolean) {
   const text = await readFile(path, 'utf8'), old = current(JSON.parse(text) as Record<string, any>);
   if (old === color) return;
-  if (check) throw new Error(`${path}: ${old} differs from the spectrum colour ${color}.`);
+  if (check) throw new Error(`${path}: ${old} differs from the spectrum color ${color}.`);
   if (text.split(`"${old}"`).length !== 2) throw new Error(`${path}: ${old} is not a unique value.`);
   await writeFile(path, text.replace(`"${old}"`, `"${color}"`));
 }

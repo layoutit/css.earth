@@ -70,7 +70,7 @@ Source and output are each one closed component with Euler characteristic 2. Mes
 - Shape uses the shared neutral-gray material, not photographed color or composition. Elevation includes global shape, not height above a gravitational equipotential.
 - Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution.
 - Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
-- The SPHERE photograph shows photographed illumination, not albedo or colour. The frames see Egeria from 54° to 59° north, so unseen surface keeps the missing-imagery grid.
+- The SPHERE photograph shows photographed illumination, not albedo or color. The frames see Egeria from 54° to 59° north, so unseen surface keeps the missing-imagery grid.
 - Frame zimpol-20180515-071822 is left out. The level fit finds it 4.36× dimmer than the first frame and 4.09× dimmer than the median frame, beyond the dataset's 4× level budget, and the figure does not show it.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)

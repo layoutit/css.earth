@@ -36,7 +36,7 @@ export interface WorldContextMarkerLeaves {
 
 /** Every marker is a deep clone of one template per kind, so a world of thousands of bodies writes its constant
  * attributes once per mount, not once per body. A plain dot's sprite leaf is round (its rule) and never takes an image;
- * the caller sets its colour. */
+ * the caller sets its color. */
 export function createWorldContextMarkerFactory(document: Document) {
   const templates: { plain?: HTMLElement; sprite?: HTMLElement } = {};
   const template = (plainDot: boolean) => {

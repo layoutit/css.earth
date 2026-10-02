@@ -12,9 +12,9 @@ export async function resizeProjectedValidity(path: string | Buffer, options: Sh
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-observation-mask-'));
   try {
     const mask = join(directory, 'mask.png');
-    await sharp(path, options).bandbool('or').threshold(1).toColourspace('b-w').png().toFile(mask);
+    await sharp(path, options).bandbool('or').threshold(1).toColorspace('b-w').png().toFile(mask);
     return await sharp(mask, {limitInputPixels: false}).resize(width, height, {fit: 'fill', kernel: 'linear'})
-      .toColourspace('b-w').raw().toBuffer();
+      .toColorspace('b-w').raw().toBuffer();
   } finally { await rm(directory, {recursive: true, force: true}); }
 }
 
@@ -28,7 +28,7 @@ export async function prepareByteObservation(path: string, sourceEntry: unknown,
     throw new Error(`Byte observation format differs from its source: ${path}`);
   }
   if (policy.grid) return prepareProjectedByteObservation(path, entry, policy, width, height);
-  const source = await sharp(path).toColourspace('srgb').raw().toBuffer();
+  const source = await sharp(path).toColorspace('srgb').raw().toBuffer();
   const fillRange = policy.connectedFillRange;
   if (fillRange !== undefined && (!policy.connectedEdge || !Array.isArray(fillRange) || fillRange.length !== 2 ||
       !fillRange.every(v => Number.isInteger(v) && v >= 0 && v <= 255) || fillRange[0] > fillRange[1] ||
@@ -58,7 +58,7 @@ export async function prepareByteObservation(path: string, sourceEntry: unknown,
     sourceMissingPixels += Number(missing);
   }
   const data = await sharp(rgba, { raw: { width: entry.width, height: entry.height, channels: 4 } })
-    .resize(width, height, { fit: 'fill', kernel: 'lanczos3' }).toColourspace('srgb').raw().toBuffer();
+    .resize(width, height, { fit: 'fill', kernel: 'lanczos3' }).toColorspace('srgb').raw().toBuffer();
   const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
   const roll = (180 - policy.centerLongitude) / 360 * width;
   if (!Number.isInteger(roll)) throw new Error('Observed longitude roll must align with prepared texels.');
@@ -82,13 +82,13 @@ export async function prepareProjectedByteObservation(path: string | Buffer, sou
   // before interpolation; the alpha boundary never borrows fill as terrain.
   const intermediateHeight = Math.round(entry.height * width / entry.width);
   const largeMask = sourceAlpha === undefined && entry.width * entry.height > 64 * 1024 * 1024;
-  const alpha = largeMask ? undefined : sourceAlpha ?? await sharp(path, options).bandbool('or').threshold(1).toColourspace('b-w').raw().toBuffer();
+  const alpha = largeMask ? undefined : sourceAlpha ?? await sharp(path, options).bandbool('or').threshold(1).toColorspace('b-w').raw().toBuffer();
   // Separate pipelines are intentional: joinChannel happens after resize in
   // libvips and a native-sized joined band would restore the original extent.
-  const data = await sharp(path, options).resize(width, intermediateHeight, { fit: 'fill', kernel: 'linear' }).removeAlpha().toColourspace('srgb').raw().toBuffer();
+  const data = await sharp(path, options).resize(width, intermediateHeight, { fit: 'fill', kernel: 'linear' }).removeAlpha().toColorspace('srgb').raw().toBuffer();
   const validity = largeMask ? await resizeProjectedValidity(path, options, width, intermediateHeight)
     : await sharp(alpha, { ...options, raw: { width: entry.width, height: entry.height, channels: 1 } })
-      .resize(width, intermediateHeight, { fit: 'fill', kernel: 'linear' }).toColourspace('b-w').raw().toBuffer();
+      .resize(width, intermediateHeight, { fit: 'fill', kernel: 'linear' }).toColorspace('b-w').raw().toBuffer();
   if (data.length !== width * intermediateHeight * 3 || validity.length !== width * intermediateHeight) throw new Error('Projected observation resampling changed its layout.');
   const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
   const scaleX = width / entry.width, scaleY = intermediateHeight / entry.height;

@@ -5754,7 +5754,7 @@
         ]
       ]
     },
-    "toneCurveMeaning": "Per-channel monotone curve fitted from paired pixels against this dataset's own image, on the analytic render level (front-projection byte × chromaticity). Its channel ratios act as white balance inside the alpha chroma limit and its common factor after it. It can only dim or recolour inside the shared opacity; a display correction against a processed image, not photometry.",
+    "toneCurveMeaning": "Per-channel monotone curve fitted from paired pixels against this dataset's own image, on the analytic render level (front-projection byte × chromaticity). Its channel ratios act as white balance inside the alpha chroma limit and its common factor after it. It can only dim or recolor inside the shared opacity; a display correction against a processed image, not photometry.",
     "channelGainMeaning": "This dataset is displayed at the shared model exposure with its own hue only."
   },
   "identity": {

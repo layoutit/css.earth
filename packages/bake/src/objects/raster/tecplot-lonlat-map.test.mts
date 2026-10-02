@@ -34,7 +34,7 @@ test('a Tecplot map is bilinear between its nodes, keeps every node value, and d
 });
 
 const iota = sourceTest('iota-horologii');
-iota('ι Horologii: every deposited epoch reproduces the field energy of the paper\'s Table 3, and its maps span the paper\'s colour scale', async () => {
+iota('ι Horologii: every deposited epoch reproduces the field energy of the paper\'s Table 3, and its maps span the paper\'s color scale', async () => {
   const root = new URL('../../../../../src/objects/iota-horologii/source/science/alvarado-gomez-2025/', import.meta.url).pathname;
   // Alvarado-Gomez et al. (2025, A&A 704, A68), Table 3: <B^2> in G^2 for epochs 1-18, from the spherical-harmonic fits.
   const paper = [61.7, 217.2, 157.0, 38.8, 43.2, 68.3, 39.3, 61.1, 121.5, 39.6, 41.7, 42.9, 72.8, 167.0, 187.6, 91.8, 31.0, 135.4];
@@ -54,6 +54,6 @@ iota('ι Horologii: every deposited epoch reproduces the field energy of the pap
   // Measured 2026-09-23: the table is 2 pi times the maps' area-mean B^2 at every epoch, 0.02 % to 2.9 % above it and never below.
   // The paper does not state its normalisation; one factor across 18 unrelated maps shows these files are the maps it measured.
   for (const [i, ratio] of ratios.entries()) assert.ok(ratio / (2 * Math.PI) - 1 > 0 && ratio / (2 * Math.PI) - 1 < 0.03, `epoch ${i + 1}: ${ratio}`);
-  // The strongest radial or azimuthal field in the 18 maps is 16.4 G; the paper's colour bar runs to +/-12 G and saturates beyond.
+  // The strongest radial or azimuthal field in the 18 maps is 16.4 G; the paper's color bar runs to +/-12 G and saturates beyond.
   assert.ok(largest > 12 && largest < 17, `${largest}`);
 });

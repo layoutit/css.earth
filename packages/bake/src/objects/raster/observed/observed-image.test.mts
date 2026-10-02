@@ -11,11 +11,11 @@ test('disk-backed native validity preserves mixed edge footprints for gray and R
   for (const channels of [1, 3] as const) {
     const pixels = Buffer.from([0, 1, 90, 0, 20, 30, 40, 50].flatMap(value => channels === 1 ? [value] : [0, value, 0]));
     const options = {raw: {width: 4, height: 2, channels}};
-    const native = await sharp(pixels, options).bandbool('or').threshold(1).toColourspace('b-w').raw().toBuffer();
+    const native = await sharp(pixels, options).bandbool('or').threshold(1).toColorspace('b-w').raw().toBuffer();
     for (const width of [2, 4, 8]) {
       const height = width / 2;
       const expected = await sharp(native, {raw: {width: 4, height: 2, channels: 1}})
-        .resize(width, height, {fit: 'fill', kernel: 'linear'}).toColourspace('b-w').raw().toBuffer();
+        .resize(width, height, {fit: 'fill', kernel: 'linear'}).toColorspace('b-w').raw().toBuffer();
       assert.deepEqual(await resizeProjectedValidity(pixels, options, width, height), expected);
       if (width === 2) assert.ok(expected.some(value => value > 0 && value < 255), 'mixed fill footprints remain withheld');
     }
@@ -26,7 +26,7 @@ test('projected monochrome maps preserve byte brightness and declared gaps', asy
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-gray-projected-'));
   try {
     const path = join(directory, 'gray.png'), pixels = Buffer.from([0, 1, 90, 180, 20, 30, 40, 50]);
-    await sharp(pixels, {raw: {width: 4, height: 2, channels: 1}}).toColourspace('b-w').png().toFile(path);
+    await sharp(pixels, {raw: {width: 4, height: 2, channels: 1}}).toColorspace('b-w').png().toFile(path);
     const result = await prepareByteObservation(path, {width: 4, height: 2}, {
       kind: 'image-monochrome-no-data', noData: 0, centerLongitude: 180,
       grid: {pixelsPerDegree: 1 / 90, sampleOffset: 1.5, lineOffset: .5}
@@ -63,7 +63,7 @@ test('byte-map coverage preserves dark observations and rolls longitude without 
   try {
     const path = join(directory, 'source.png');
     await sharp(Buffer.from([0, 1, 90, 180, 20, 30, 40, 50]),
-      { raw: { width: 4, height: 2, channels: 1 } }).toColourspace('b-w').png().toFile(path);
+      { raw: { width: 4, height: 2, channels: 1 } }).toColorspace('b-w').png().toFile(path);
     const entry = { id: 'observed', width: 4, height: 2 };
     const normal = await prepareByteObservation(path, entry, { noData: 0, centerLongitude: 180 }, 4, 2);
     assert.deepEqual([...normal.missing], [1, 0, 0, 0, 0, 0, 0, 0]);
@@ -91,7 +91,7 @@ test('polar-connected coverage preserves enclosed photographic black before resa
     // The right-hand gap reaches the north via the longitude seam. The enclosed
     // black pixel is photographed terrain, not missing coverage.
     await sharp(Buffer.from([0,100,100,100, 0,100,100,0, 100,100,100,100, 100,0,100,100]),
-      {raw:{width:4,height:4,channels:1}}).toColourspace('b-w').png().toFile(path);
+      {raw:{width:4,height:4,channels:1}}).toColorspace('b-w').png().toFile(path);
     const entry = {id:'polar',width:4,height:4};
     const policy = {noData:0,centerLongitude:180,connectedEdge:'north'};
     const result = await prepareByteObservation(path,entry,policy,4,4);
@@ -108,7 +108,7 @@ test('a declared compressed gray exterior uses connected coverage without erasin
   try {
     const path = join(directory, 'source.png');
     const gray = [78,75,110,110, 79,110,110,81, 110,110,110,110, 110,78,110,110];
-    await sharp(Buffer.from(gray), {raw:{width:4,height:4,channels:1}}).toColourspace('b-w').png().toFile(path);
+    await sharp(Buffer.from(gray), {raw:{width:4,height:4,channels:1}}).toColorspace('b-w').png().toFile(path);
     const entry = {id:'gray-exterior',width:4,height:4};
     const policy = {kind:'image-monochrome-no-data',noData:78,centerLongitude:180,
       connectedEdge:'north',connectedFillRange:[75,81]};

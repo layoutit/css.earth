@@ -13,7 +13,7 @@ JPL's Small-Body Database returns the same record for `sstr=2060` and for `sstr=
 | [Braga-Ribas et al. (2023), A&A 676, A72](https://doi.org/10.1051/0004-6361/202346749) ([preprint](https://arxiv.org/abs/2308.10042)) | The adopted triaxial figure, semiaxes **126 ± 22, 109 ± 19 and 68 ± 13 km**, volume-equivalent radius **98 ± 17 km**, from the 2019 September 8 multi-chord stellar occultation. |
 | [Lellouch et al. (2017), A&A 608, A45](https://doi.org/10.1051/0004-6361/201731676) | The area-equivalent radius **105 (+6 / −7) km** that the occultation fit holds fixed. This is a radiometric result, from ALMA 1.29 mm plus mid- and far-infrared data, not an occultation measurement. |
 | [Marcialis and Buratti (1993), Icarus 104, 234](https://doi.org/10.1006/icar.1993.1098) | Synodic rotation period **5.917813 ± 0.000007 h**. |
-| [Hainaut, Boehnhardt and Protopapa (2012), A&A 546, A115](https://doi.org/10.1051/0004-6361/201219566) (MBOSS-2) | Whole-disc colour over 34 epochs: spectral gradient **0.1 ± 1.0 % per 100 nm**, B−V **0.700 ± 0.020**, V−R **0.361 ± 0.017**, R−I **0.325 ± 0.023**. |
+| [Hainaut, Boehnhardt and Protopapa (2012), A&A 546, A115](https://doi.org/10.1051/0004-6361/201219566) (MBOSS-2) | Whole-disc color over 34 epochs: spectral gradient **0.1 ± 1.0 % per 100 nm**, B−V **0.700 ± 0.020**, V−R **0.361 ± 0.017**, R−I **0.325 ± 0.023**. |
 | [JPL Small-Body Database](https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2060) | Identity, alternate designations, discovery circumstances and orbit. |
 | [JPL Horizons elements](source/reference/horizons-elements.txt) and [independent vectors](source/reference/horizons-vectors.txt) | Heliocentric geometric position at the fixed 2026-09-03 scene epoch. |
 
@@ -25,7 +25,7 @@ The rendering scale is the volume-equivalent radius, 98 ± 17 km, the geometric 
 
 ### Why the surface is neutral grey
 
-At **0.1 ± 1.0 % per 100 nm** against the solar spectrum, Chiron's reflectance is solar-coloured within its errors. A display colour from these indices would be indistinguishable from neutral, and the indices mix nucleus and coma across epochs of varying activity. The package keeps the indices as data and renders the shared neutral material.
+At **0.1 ± 1.0 % per 100 nm** against the solar spectrum, Chiron's reflectance is solar-colored within its errors. A display color from these indices would be indistinguishable from neutral, and the indices mix nucleus and coma across epochs of varying activity. The package keeps the indices as data and renders the shared neutral material.
 
 ## Processing
 

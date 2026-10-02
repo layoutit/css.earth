@@ -21,10 +21,10 @@ import { POLICY, RECEIPT_SCHEMA } from './measure.mts';
 import { isCommand, ledgerFiles, nameList, numberOrNull, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../ledger.mts';
 
 const SCHEMA = 'cssearth-junocam-ledger@1';
-const COLOUR = ['RED', 'GREEN', 'BLUE'];
+const COLOR = ['RED', 'GREEN', 'BLUE'];
 
-export interface TargetHoldings { target: string; images: number; colourImages: number; orbits: number[]; lowestAltitudeKm: number | null; finestNadirPixelKm: number | null; objectId: string | null }
-export interface ObjectState { id: string; target: string; colourImages: number; measuredImages: number; programs: string[]; castBy: string[]; state: 'cast' | 'measured' | 'not measured'; why: string }
+export interface TargetHoldings { target: string; images: number; colorImages: number; orbits: number[]; lowestAltitudeKm: number | null; finestNadirPixelKm: number | null; objectId: string | null }
+export interface ObjectState { id: string; target: string; colorImages: number; measuredImages: number; programs: string[]; castBy: string[]; state: 'cast' | 'measured' | 'not measured'; why: string }
 export interface Ledger { schema: typeof SCHEMA; measured: string; volumes: string[]; pixelAngleMicroradians: number; calibratedImages: number; byFilterCombination: Record<string, number>; targets: TargetHoldings[]; objects: ObjectState[];
   /** Receipts that could not be accepted, and so proved nothing. An empty list is the only passing state. */
   receiptProblems: string[] }
@@ -49,8 +49,8 @@ export function holdings(rows: readonly IndexRow[], shipped: ReadonlySet<string>
     if (!strips) continue;
     calibratedImages++; byFilterCombination[product.filterCombination] = (byFilterCombination[product.filterCombination] ?? 0) + 1;
     const name = row.TARGET_NAME.toUpperCase(), altitude = indexNumber(row.SPACECRAFT_ALTITUDE);
-    const entry = targets.get(name) ?? { target: name, images: 0, colourImages: 0, orbits: [], lowestAltitudeKm: null, finestNadirPixelKm: null, objectId: junoTargetObject(name, shipped) };
-    entry.images++; if (COLOUR.every(strip => strips.includes(strip))) entry.colourImages++;
+    const entry = targets.get(name) ?? { target: name, images: 0, colorImages: 0, orbits: [], lowestAltitudeKm: null, finestNadirPixelKm: null, objectId: junoTargetObject(name, shipped) };
+    entry.images++; if (COLOR.every(strip => strips.includes(strip))) entry.colorImages++;
     if (!entry.orbits.includes(product.orbit)) entry.orbits.push(product.orbit);
     if (altitude !== null && altitude > 0 && (entry.lowestAltitudeKm === null || altitude < entry.lowestAltitudeKm)) { entry.lowestAltitudeKm = altitude; entry.finestNadirPixelKm = Math.round(altitude * pixelAngle) / 1e6; }
     targets.set(name, entry);
@@ -127,8 +127,8 @@ export function objectStates(targets: readonly TargetHoldings[], measured: Await
     const state = castBy.length ? 'cast' : measuredImages ? 'measured' : 'not measured';
     const why = castBy.length ? `The ${castBy.join(', ')} package states a junocam-camera dataset.`
       : measuredImages ? `${measuredImages} image(s) registered within ${POLICY.maximumResidualPixels} px in ${programs.map(program => program.program).join(', ')}; no package dataset yet.`
-      : entry.colourImages ? 'No program of this target is pinned.' : 'No calibrated image holds the red, green and blue strips the format reads.';
-    return { id: entry.objectId!, target: entry.target, colourImages: entry.colourImages, measuredImages, programs: programs.map(program => program.program), castBy, state, why };
+      : entry.colorImages ? 'No program of this target is pinned.' : 'No calibrated image holds the red, green and blue strips the format reads.';
+    return { id: entry.objectId!, target: entry.target, colorImages: entry.colorImages, measuredImages, programs: programs.map(program => program.program), castBy, state, why };
   });
 }
 
@@ -154,7 +154,7 @@ export function parseJunoCamLedger(value: unknown): Ledger {
   return { schema: SCHEMA, measured: requireString(row.measured, 'Measured date'), volumes: names(row.volumes, 'Volumes'),
     pixelAngleMicroradians: requireFiniteNumber(row.pixelAngleMicroradians, 'Pixel angle'),
     targets: requireArray(row.targets, 'Targets').map(raw => { const entry = requireRecord(raw, 'Target');
-      return { target: requireString(entry.target, 'Target name'), images: requireFiniteNumber(entry.images, 'Images'), colourImages: requireFiniteNumber(entry.colourImages, 'Colour images'),
+      return { target: requireString(entry.target, 'Target name'), images: requireFiniteNumber(entry.images, 'Images'), colorImages: requireFiniteNumber(entry.colorImages, 'Color images'),
         orbits: requireArray(entry.orbits, 'Orbits').map(orbit => requireFiniteNumber(orbit, 'Orbit')), lowestAltitudeKm: orNull(entry.lowestAltitudeKm, 'Lowest altitude'),
         finestNadirPixelKm: orNull(entry.finestNadirPixelKm, 'Finest pixel'), objectId: entry.objectId === null ? null : requireString(entry.objectId, 'Object id') }; }),
     byFilterCombination: Object.fromEntries(Object.entries(requireRecord(row.byFilterCombination, 'Images by filter combination')).map(([key, n]) => [key, requireFiniteNumber(n, 'Images')])),
@@ -171,12 +171,12 @@ export function junoCamLedgerGuide(ledger: Ledger) {
     'index tables of the PDS JunoCam volumes, and every state from the pinned programs, their receipts and the packages. See [JunoCam](junocam.md) for what the toolkit does.', '',
     `Counted on ${ledger.measured}, over volumes ${ledger.volumes[0]} to ${ledger.volumes.at(-1)}: ${count(ledger.calibratedImages)} calibrated images. By filter combination: ${combinations}.`, '',
     '## Shipped objects JunoCam photographed', '',
-    `${ledger.objects.length} of this project's objects are a JunoCam target. A colour image holds the red, green and blue strips, which is what the \`junocam-camera\` format reads.`,
+    `${ledger.objects.length} of this project's objects are a JunoCam target. A color image holds the red, green and blue strips, which is what the \`junocam-camera\` format reads.`,
     `The finest pixel is the lowest label altitude times the camera's ${ledger.pixelAngleMicroradians} microradian pixel angle: the scale straight below the spacecraft.`, '',
-    '| object | calibrated images | colour | orbits | lowest altitude | finest pixel | state | why |', '| --- | ---: | ---: | --- | ---: | ---: | --- | --- |'];
+    '| object | calibrated images | color | orbits | lowest altitude | finest pixel | state | why |', '| --- | ---: | ---: | --- | ---: | ---: | --- | --- |'];
   for (const object of ledger.objects) {
     const held = ledger.targets.find(entry => entry.target === object.target)!, orbits = held.orbits.length > 6 ? `${held.orbits.length} orbits, ${held.orbits[0]} to ${held.orbits.at(-1)}` : held.orbits.join(', ');
-    lines.push(`| ${object.id} | ${count(held.images)} | ${count(held.colourImages)} | ${orbits} | ${held.lowestAltitudeKm === null ? 'not stated' : `${count(Math.round(held.lowestAltitudeKm))} km`} | ${held.finestNadirPixelKm === null ? 'not stated' : `${held.finestNadirPixelKm.toFixed(2)} km`} | ${object.state} | ${object.why} |`);
+    lines.push(`| ${object.id} | ${count(held.images)} | ${count(held.colorImages)} | ${orbits} | ${held.lowestAltitudeKm === null ? 'not stated' : `${count(Math.round(held.lowestAltitudeKm))} km`} | ${held.finestNadirPixelKm === null ? 'not stated' : `${held.finestNadirPixelKm.toFixed(2)} km`} | ${object.state} | ${object.why} |`);
   }
   const others = ledger.targets.filter(entry => entry.objectId === null);
   lines.push('', '## Other targets', '', others.length ? `Targets that are not an object here: ${others.map(entry => `${entry.target} (${count(entry.images)})`).join(', ')}.` : 'Every target is an object here.', '');

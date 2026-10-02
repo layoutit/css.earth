@@ -200,7 +200,7 @@
     "NOX removes stars; 27 catalogued neighbouring galaxies (RC3, CDS VII/155) are masked afterwards at 3 times their D25 radius with the median of the light around them.",
     "Every pixel is clamped to the median of the 61 px square around it, so star haloes and small background galaxies that NOX and the masks leave do not become rings in the axisymmetric fit.",
     "Black level 0.063 is the median sky in the photograph's corners (16 of 255).",
-    "One V band, tinted by ESO: the colour is display colour, not calibrated photometry. Single-image depth is inferred under the symmetry prior, not measured."
+    "One V band, tinted by ESO: the color is display color, not calibrated photometry. Single-image depth is inferred under the symmetry prior, not measured."
   ],
   "compactClamp": {
     "windowPx": 61,

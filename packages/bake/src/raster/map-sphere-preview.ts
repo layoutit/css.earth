@@ -34,18 +34,18 @@ export function mapSpherePreviewRays({ sizePx, elevationDeg, azimuthDeg, samples
   return { side, near, far, mu };
 }
 
-/** Compose the picture from the sampled colours of the near and far points, as the page stacks them: over black space the
+/** Compose the picture from the sampled colors of the near and far points, as the page stacks them: over black space the
  * inside copy (both faces of the shell that stays, the nearer in front) at the interior opacity, then the outside (the
  * near face that stays, under the limb plate's overlay) at the exterior opacity; the whole shell is the outside alone at
  * full opacity. Outside the disc the picture is transparent. Returns straight RGBA bytes, `sizePx` square. */
-export function composeMapSpherePreview({ view, rays, nearColours, farColours, limb, cut }: {
+export function composeMapSpherePreview({ view, rays, nearColors, farColors, limb, cut }: {
   view: MapSpherePreviewView; rays: ReturnType<typeof mapSpherePreviewRays>;
-  nearColours: Uint8Array; farColours: Uint8Array;
-  limb: { readonly coefficient: number; readonly referenceColour: Rgb } | null; cut: MapSpherePreviewCut;
+  nearColors: Uint8Array; farColors: Uint8Array;
+  limb: { readonly coefficient: number; readonly referenceColor: Rgb } | null; cut: MapSpherePreviewCut;
 }): Buffer {
   const { sizePx, samples } = view, { side, near, far, mu } = rays;
   const opened = (k: number, points: Float64Array) => cut !== null && (cut.hemisphere === 'north' ? points[k * 3 + 2]! > 0 : points[k * 3 + 2]! < 0);
-  const colour = (bytes: Uint8Array, k: number): Rgb => [bytes[k * 3]!, bytes[k * 3 + 1]!, bytes[k * 3 + 2]!];
+  const color = (bytes: Uint8Array, k: number): Rgb => [bytes[k * 3]!, bytes[k * 3 + 1]!, bytes[k * 3 + 2]!];
   const over = (top: Rgb, alpha: number, base: Rgb): Rgb => [0, 1, 2].map(c => top[c]! * alpha + base[c]! * (1 - alpha)) as unknown as Rgb;
   const out = Buffer.alloc(sizePx * sizePx * 4);
   for (let py = 0; py < sizePx; py++) for (let px = 0; px < sizePx; px++) {
@@ -54,9 +54,9 @@ export function composeMapSpherePreview({ view, rays, nearColours, farColours, l
       const k = (py * samples + sy) * side + px * samples + sx;
       if (mu[k]! < 0) continue;
       // The outside layer: the near face unless it is open, then the limb plate's overlay over the whole disc.
-      let outside: Rgb | null = opened(k, near) ? null : colour(nearColours, k), outsideAlpha = outside ? 1 : 0;
+      let outside: Rgb | null = opened(k, near) ? null : color(nearColors, k), outsideAlpha = outside ? 1 : 0;
       if (limb) {
-        const factor = 1 - limb.coefficient * (1 - mu[k]!), [r, g, b, a] = limbOverlay([factor, factor, factor], limb.referenceColour);
+        const factor = 1 - limb.coefficient * (1 - mu[k]!), [r, g, b, a] = limbOverlay([factor, factor, factor], limb.referenceColor);
         // Over a drawn face the layer stays opaque; over the opening it is the overlay alone, at its own alpha.
         if (outside) outside = over([r, g, b], a, outside);
         else if (a > 0) { outside = [r, g, b]; outsideAlpha = a; }
@@ -64,13 +64,13 @@ export function composeMapSpherePreview({ view, rays, nearColours, farColours, l
       let pixel: Rgb = [0, 0, 0];
       if (cut) {
         // The inside copy: the nearer face that stays in front of the farther one.
-        const inside = !opened(k, near) ? colour(nearColours, k) : !opened(k, far) ? colour(farColours, k) : null;
+        const inside = !opened(k, near) ? color(nearColors, k) : !opened(k, far) ? color(farColors, k) : null;
         if (inside) pixel = over(inside, cut.interiorOpacity, pixel);
         if (outside) pixel = over(outside, outsideAlpha * cut.exteriorOpacity, pixel);
       } else if (outside) pixel = over(outside, outsideAlpha, pixel);
       sum[0]! += pixel[0]; sum[1]! += pixel[1]; sum[2]! += pixel[2]; sum[3]! += 1;
     }
-    // Colour over black inside the disc; the edge's coverage becomes alpha, so the picture sits on any card.
+    // Color over black inside the disc; the edge's coverage becomes alpha, so the picture sits on any card.
     const coverage = sum[3]! / (samples * samples), offset = (py * sizePx + px) * 4;
     if (!coverage) continue;
     out.set([0, 1, 2].map(c => Math.round(sum[c]! / sum[3]!)), offset);

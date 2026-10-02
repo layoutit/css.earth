@@ -1,4 +1,4 @@
-/** Frames made of other frames: the filter bands of one colour photograph, and the strips of one push-frame band. */
+/** Frames made of other frames: the filter bands of one color photograph, and the strips of one push-frame band. */
 import type { CameraKind, FootprintSample, ObservationCamera, ObservationFrame } from './contract.ts';
 
 /** Three filter photographs shown together. Every band must qualify at a point, and the bands stay separate floats until display. */

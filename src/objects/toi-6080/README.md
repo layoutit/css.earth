@@ -6,7 +6,7 @@ Its radius and temperature follow Lafarga et al. 2026. The introduction is gener
 
 **Star.** Placement: Gaia DR3 source 1342779198193952000, parallax 5.283 ± 0.011 mas (189.29 pc). Radius 1.06221 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-6080 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). Mass 0.991 (0.951 to 1.032) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Temperature 5,775.46 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-6080 b in the NASA Exoplanet Archive. log g 4.38 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 1342779198193952000, through the CIE 1931 2° observer: #ffefe8. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 1342779198193952000, through the CIE 1931 2° observer: #ffefe8. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,775.46 K and log g 4.38 (u1 0.458, u2 0.261): a model, because no fit of this star's limb is used.
 

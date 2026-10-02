@@ -138,11 +138,11 @@ export async function installSetup(objectId: string, options: { root: string; le
   controls.splice(controlAt >= 0 ? controlAt : controls.length, 0, { id: DATASET_ID, label: 'SPHERE photograph', thumbnail: `/scenes/${objectId}/${objectId}-${DATASET_ID}-thumbnail.webp`,
     surface: `${objectId}-${DATASET_ID}-surface@2x.webp`, poles: `${objectId}-${DATASET_ID}-surface@2x.webp`, source: { id: meshSource, path: '../manifest.json' },
     falseColor: false, noData: true,
-    notes: `${datasetFrames} deconvolved VLT/SPHERE/ZIMPOL frames, ${nightsText(nights)}, cast onto ${meshWords} Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure ${figure}. Grayscale is photographed illumination and ${levelWords(castApparitions)}. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected.` });
+    notes: `${datasetFrames} deconvolved VLT/SPHERE/ZIMPOL frames, ${nightsText(nights)}, cast onto ${meshWords} Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure ${figure}. Grayscale is photographed illumination and ${levelWords(castApparitions)}. The deconvolution carries no radiometric calibration, so this is not measured albedo or color. The grid marks surface that was unphotographed, too grazing, or rejected.` });
   await writeJson(resolve(packageSource, 'content/object.json'), content);
   const text = await readJson(resolve(objectDirectory, 'text.json'));
   requireRecord(text.datasets)[DATASET_ID] = { title: 'ZIMPOL deconvolved imaging', detail: `${datasetFrames} frames, ${years(nights)}`,
-    summary: 'Telescope images of the lit surface, placed by the asteroid’s own measured spin. Grey is photographed light, not colour.' };
+    summary: 'Telescope images of the lit surface, placed by the asteroid’s own measured spin. Grey is photographed light, not color.' };
   await writeJson(resolve(objectDirectory, 'text.json'), text);
 
   // The ledger: the decision, and the entries it answers.
@@ -270,7 +270,7 @@ function datasetRows(dataset: DatasetWords) {
 /** The photograph's limits, as the Known problems section states them. */
 function datasetProblem(dataset: DatasetWords) {
   const levels = (dataset.apparitions ?? 1) > 1 ? 'with matched relative frame levels, each apparition placed through the surface it shares with another' : 'with matched relative frame levels';
-  return `The SPHERE photograph is photographed illumination from the survey's deconvolved frames, ${levels}, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see ${dataset.bodyName} from ${latitudeSpan(dataset.latitudes)}, so surface the survey did not see keeps the missing-imagery grid.${dataset.leftOut ? ` ${dataset.leftOut}` : ''}`;
+  return `The SPHERE photograph is photographed illumination from the survey's deconvolved frames, ${levels}, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or color. The frames see ${dataset.bodyName} from ${latitudeSpan(dataset.latitudes)}, so surface the survey did not see keeps the missing-imagery grid.${dataset.leftOut ? ` ${dataset.leftOut}` : ''}`;
 }
 
 /** The README with the dataset's source rows, a generated comparison section and the registration markers. */
@@ -313,7 +313,7 @@ export function latitudeSpan([low, high]: readonly [number, number]) {
 
 /** The credits with the photograph's source and the reproduced figure panels. */
 export function noticeWithDataset(notice: string, figure: string) {
-  const credit = `\`evidence/published-comparison.webp\` reproduces the photograph panels of the article’s Figure ${figure} with outlines drawn over them, under the article’s CC-BY-4.0 licence. The photographic surface is the survey’s own deconvolved VLT/SPHERE/ZIMPOL frames, credited to its authors and to ESO programme 199.C-0074; it carries their photographed illumination and no radiometric calibration, so it is not measured albedo or colour. Its placement reproduces the article’s Figure ${figure}. No photographic texture is attributed to NASA.`;
+  const credit = `\`evidence/published-comparison.webp\` reproduces the photograph panels of the article’s Figure ${figure} with outlines drawn over them, under the article’s CC-BY-4.0 licence. The photographic surface is the survey’s own deconvolved VLT/SPHERE/ZIMPOL frames, credited to its authors and to ESO programme 199.C-0074; it carries their photographed illumination and no radiometric calibration, so it is not measured albedo or color. Its placement reproduces the article’s Figure ${figure}. No photographic texture is attributed to NASA.`;
   const shapeOnly = 'This package does not attribute a photographic surface texture to NASA or ESO.';
   if (notice.includes(shapeOnly)) return notice.replace(shapeOnly, credit);
   const title = notice.indexOf('\n\n');

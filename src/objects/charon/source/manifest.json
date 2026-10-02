@@ -874,7 +874,7 @@
       },
       "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
       "license": "Public NASA scientific mission data; retain archive and author attribution",
-      "acquisition": "Downloaded from the PDS Small Bodies Node holdings beside the pinned colour mosaic; retained unmodified.",
+      "acquisition": "Downloaded from the PDS Small Bodies Node holdings beside the pinned color mosaic; retained unmodified.",
       "licenseEvidence": [
         "https://pds.nasa.gov/datastandards/citing/",
         "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/overview.pdf"
@@ -884,7 +884,7 @@
       "path": "observations/nh-charon-color-download.json",
       "purpose": "Actual full binary download HTTP headers and byte-count receipt.",
       "credit": "cssEarth",
-      "acquisition": "Recorded by the project when the colour mosaic was downloaded: the HTTP response headers and the byte count of the received bytes."
+      "acquisition": "Recorded by the project when the color mosaic was downloaded: the HTTP response headers and the byte count of the received bytes."
     },
     {
       "path": "validation/color-source-inspection.json",

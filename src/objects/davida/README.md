@@ -75,7 +75,7 @@ radial-height dataset.
 
 ## Known problems
 
-- The SPHERE photograph is photographed illumination, not albedo or colour. The frames see Davida from 12° to 13° south, so unseen surface keeps the missing-imagery grid.
+- The SPHERE photograph is photographed illumination, not albedo or color. The frames see Davida from 12° to 13° south, so unseen surface keeps the missing-imagery grid.
 - Two frames are left out by name: zimpol-20180831-033920 and zimpol-20180831-034324. The level fit finds them 7.0× and 5.4× dimmer than the median frame, outside the dataset’s 4× level budget; the figure shows neither.
 - Shape is not photographed color, reflectance or composition. Elevation includes global shape, not height above a gravitational equipotential.
 - Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution. Reduction softens small features.

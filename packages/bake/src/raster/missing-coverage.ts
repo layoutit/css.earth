@@ -84,7 +84,7 @@ export function paintMissingCoverage(data: Uint8Array, { width, height, channels
 }
 
 /** Find the gray gap fill in a lossy copy of a painted map, such as a minimap. A pixel is a candidate when it is within
- * `tolerance` of the fill colour at its own map position. The fill's graticule lines are the evidence: a candidate region inside
+ * `tolerance` of the fill color at its own map position. The fill's graticule lines are the evidence: a candidate region inside
  * one graticule cell is a gap when most of the line pixels bordering it carry the painted line, which a gray surface of the
  * fill's tone does not. `longitudeOffsetDegrees` is the map longitude of the copy's left edge when the copy was rolled (a framed
  * minimap). */
@@ -92,7 +92,7 @@ export function detectMissingCoverage(data: Uint8Array, { width, height, channel
   if (data.length !== width * height * channels || channels < 3) throw new Error("Coverage detection needs an RGB raster of the stated size.");
   const count = width * height, pixelDegrees = 180 / height, { base } = MISSING_COVERAGE_STYLES.gray;
   // `wall`: a pixel within a pixel of a graticule line, which separates cells. `onLine`: a wall pixel whose painted line is
-  // strong enough (a third of the way to the line colour) to tell a painted gap from a surface of the base tone.
+  // strong enough (a third of the way to the line color) to tell a painted gap from a surface of the base tone.
   const candidate = new Uint8Array(count), onLine = new Uint8Array(count), wall = new Uint8Array(count);
   const near = (angle: number, step: number) => Math.abs(angle - Math.round(angle / step) * step);
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {

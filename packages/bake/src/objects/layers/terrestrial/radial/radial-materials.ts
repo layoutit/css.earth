@@ -72,7 +72,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     config.geometry.radiusKm * 1000 / config.geometry.radius, sunDirection) : null;
   // Every surface at a given scale uses these exact plans, points and normals.
   // Keep double-precision results across banks; ray tracing depends on geometry,
-  // never on the selected photograph or scientific colour.
+  // never on the selected photograph or scientific color.
   const lightingByScale = new Map();
   let reusedLightingSamples = 0;
   const emit = createRasterEmitter(publicDirectory, config.publicBase);
@@ -302,7 +302,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         if (sampleSources) sampleSources[row + to] = sampleSources[row + from];
       });
     }
-    // Scientific colours retain exact palette values; the numeric source index is preparation-only.
+    // Scientific colors retain exact palette values; the numeric source index is preparation-only.
     // Photographs keep full chroma detail through sharp's smart subsampling.
     const encoding = scalarSources || nearest || scientific?.format === 'image-plane-dem' ? { lossless: true, effort: 4 }
       : { alphaQuality: 100, effort: 4 };
@@ -391,7 +391,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
 }
 
 /** Texels beyond a triangle that are still sampled: bilinear filtering reads one across an edge, and the second keeps a minified
- * edge from averaging in a copied colour. */
+ * edge from averaging in a copied color. */
 const UNDRAWN_MARGIN_TEXELS = 2;
 
 /** Give each unsampled texel of a rectangle the nearest sampled texel in its row, the left one on a tie. */

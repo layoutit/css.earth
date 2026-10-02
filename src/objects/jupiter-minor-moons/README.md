@@ -26,6 +26,6 @@ A headless capture of this version's Jupiter system overview at 33.8 million km.
 
 ## Known problems
 
-- No colour is measured for these moons. Every dot is `#9a9a9a`, the one neutral grey the app gives a body without a measured colour (`NEUTRAL_CATALOGUE_COLOUR`).
+- No color is measured for these moons. Every dot is `#9a9a9a`, the one neutral grey the app gives a body without a measured color (`NEUTRAL_CATALOGUE_COLOR`).
 - The 2 px dot size is a display choice, the same as Saturn's. The moons are a few kilometres across and would be invisible at scale.
 - The positions hold for the world's one epoch; the dots do not move.

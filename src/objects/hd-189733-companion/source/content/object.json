@@ -54,7 +54,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Gaia's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured.",
+        "qualification": "Color from Gaia's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured.",
         "thumbnail": "hd-189733-companion-dataset-color.webp",
         "surface": "hd-189733-companion-surface-color@2x.webp",
         "poles": "hd-189733-companion-poles-color@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The colour of Gaia DR3's measured spectrum of this red dwarf. It sits 11 arcseconds from HD 189733 A, 226 AU across the sky; how far it lies in front or behind is not measured, so it is placed at A's distance."
+        "notes": "The color of Gaia DR3's measured spectrum of this red dwarf. It sits 11 arcseconds from HD 189733 A, 226 AU across the sky; how far it lies in front or behind is not measured, so it is placed at A's distance."
       }
     ]
   },

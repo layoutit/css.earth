@@ -8,7 +8,7 @@ It is the only planet known around K2-212. Its orbit and size follow Duck et al.
 
 **Orbit.** Duck et al. 2021 (2021AJ....162..136D), via the NASA Exoplanet Archive ps table (pl_refname DUCK_ET_AL__2021): P 9.795647 d Duck et al. 2021 (2021AJ....162..136D), via the NASA Exoplanet Archive ps table (pl_refname DUCK_ET_AL__2021): a/R* 27.97; Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): inclination 89.19149 degrees No archive row states an eccentricity; the orbit is taken as circular Duck et al. 2021 (2021AJ....162..136D), via the NASA Exoplanet Archive ps table (pl_refname DUCK_ET_AL__2021): transit mid-time 2457399.64109 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 11 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-212's measured colour (#ffc298, the colour dataset of k2-212 (src/objects/k2-212/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by k2-212's measured color (#ffc298, the color dataset of k2-212 (src/objects/k2-212/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-212's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (42, 43, 70), folded onto its orbit. Upper limits and rows without an error are left out.
 

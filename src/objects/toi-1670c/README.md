@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-1670. Its orbit and size follow Tran et 
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 40.7501028 d Tran et al. 2022 (2022AJ....163..225T), via the NASA Exoplanet Archive ps table (pl_refname TRAN_ET_AL_2022): a/R* 40.68; Tran et al. 2022 (2022AJ....163..225T), via the NASA Exoplanet Archive ps table (pl_refname TRAN_ET_AL_2022): inclination 88.84 degrees Tran et al. 2022 (2022AJ....163..225T), via the NASA Exoplanet Archive ps table (pl_refname TRAN_ET_AL_2022): e 0.09 Tran et al. 2022 (2022AJ....163..225T), via the NASA Exoplanet Archive ps table (pl_refname TRAN_ET_AL_2022): omega 105.5 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460503.136603 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1670's measured colour (#f6f2ff, the colour dataset of toi-1670 (src/objects/toi-1670/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1670's measured color (#f6f2ff, the color dataset of toi-1670 (src/objects/toi-1670/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1670's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (84, 85, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

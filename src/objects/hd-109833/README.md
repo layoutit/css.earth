@@ -6,7 +6,7 @@ Its radius and temperature follow Wood et al. 2023. It is also HIP 61723. The in
 
 **Star.** Placement: Gaia DR3 source 5838450865699668736, parallax 12.569 ± 0.012 mas (79.56 pc). Radius 1 +/- 0.04 solar radii from Wood et al. 2023, the stellar radius of the default parameter set of HD 109833 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract). Mass 1.08 +/- 0.05 solar masses from Wood et al. 2023, the stellar mass of the default parameter set of HD 109833 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract). Temperature 5,881 K from Wood et al. 2023, the stellar temperature of the default parameter set of HD 109833 b in the NASA Exoplanet Archive. log g 4.47 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 5838450865699668736, through the CIE 1931 2° observer: #fff5f7. Routes tried in order: stis-ngsl: HD 109833 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 5838450865699668736, through the CIE 1931 2° observer: #fff5f7. Routes tried in order: stis-ngsl: HD 109833 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,881 K and log g 4.47 (u1 0.439, u2 0.272): a model, because no fit of this star's limb is used.
 

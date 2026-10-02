@@ -139,7 +139,7 @@
       },
       {
         "id": "luke",
-        "label": "LICIACube colour",
+        "label": "LICIACube color",
         "thumbnail": "/scenes/didymos/didymos-luke-thumbnail.webp",
         "surface": "didymos-luke-surface@2x.webp",
         "poles": "didymos-luke-surface@2x.webp",
@@ -150,7 +150,7 @@
         },
         "falseColor": true,
         "noData": true,
-        "notes": "Eight LICIACube/LUKE frames from 165 to 179 seconds after the DART impact, cast onto the released Didymos shape. Pointing is computed from the mission's reconstructed SPICE kernels and each frame's own header. The three planes are the detector's red, green and blue bands composed as a band visualization, not a qualified natural-colour reconstruction. Every frame looks through the ejecta and the registration reaches no verdict, so this is an investigation view. The grid marks surface that was unphotographed, too grazing, or rejected."
+        "notes": "Eight LICIACube/LUKE frames from 165 to 179 seconds after the DART impact, cast onto the released Didymos shape. Pointing is computed from the mission's reconstructed SPICE kernels and each frame's own header. The three planes are the detector's red, green and blue bands composed as a band visualization, not a qualified natural-color reconstruction. Every frame looks through the ejecta and the registration reaches no verdict, so this is an investigation view. The grid marks surface that was unphotographed, too grazing, or rejected."
       }
     ]
   },

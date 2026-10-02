@@ -8,7 +8,7 @@
       "width": 3000,
       "height": 3000,
       "publisher": "https://www.legacysurvey.org/dr10/",
-      "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z colour HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+      "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z color HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
     },
     "crop": {
       "left": 0,
@@ -233,7 +233,7 @@
       "NOX removes stars; 29 catalogued neighbouring galaxies (HyperLEDA PGC, Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) are masked afterwards at 3 times their D25 radius. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the measured axis ratio and position angle), never more than it held.",
       "Every pixel is clamped to the median of the 51 px square around it, so star haloes and small background galaxies that NOX and the masks leave are not spread through the spheroid.",
       "Black level 0.051 is the median of the cutout's four 150 px corners (13 of 255).",
-      "The colour is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes M49's faint outer light: the image fades into the sky about 560 arcsec from the centre, where Kormendy et al. still measure the galaxy to 1052 arcsec. Single-image depth is modelled by the prior, not measured."
+      "The color is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes M49's faint outer light: the image fades into the sky about 560 arcsec from the centre, where Kormendy et al. still measure the galaxy to 1052 arcsec. Single-image depth is modelled by the prior, not measured."
     ],
     "compactClamp": {
       "windowPx": 51,
@@ -288,7 +288,7 @@
         "width": 3000,
         "height": 3000,
         "publisher": "https://www.legacysurvey.org/dr10/",
-        "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z colour HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+        "credit": "DESI Legacy Imaging Surveys DR10 (Dey et al. 2019), g, r, i and z color HiPS CDS/P/DESI-Legacy-Surveys/DR10/color by T. Boch (CDS), cut out by the CDS hips2fits service."
       },
       "crop": {
         "left": 0,
@@ -513,7 +513,7 @@
         "NOX removes stars; 29 catalogued neighbouring galaxies (HyperLEDA PGC, Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) are masked afterwards at 3 times their D25 radius. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the measured axis ratio and position angle), never more than it held.",
         "Every pixel is clamped to the median of the 51 px square around it, so star haloes and small background galaxies that NOX and the masks leave are not spread through the spheroid.",
         "Black level 0.051 is the median of the cutout's four 150 px corners (13 of 255).",
-        "The colour is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes M49's faint outer light: the image fades into the sky about 560 arcsec from the centre, where Kormendy et al. still measure the galaxy to 1052 arcsec. Single-image depth is modelled by the prior, not measured."
+        "The color is the survey's published g, r, i, z display composite, not calibrated photometry. The survey's sky subtraction removes M49's faint outer light: the image fades into the sky about 560 arcsec from the centre, where Kormendy et al. still measure the galaxy to 1052 arcsec. Single-image depth is modelled by the prior, not measured."
       ],
       "compactClamp": {
         "windowPx": 51,

@@ -58,8 +58,8 @@
       ],
       "shapeMeaning": "Published triaxial figure from the 2019 September 8 multi-chord stellar occultation: semiaxes 126 ± 22, 109 ± 19 and 68 ± 13 km, volume-equivalent radius 98 ± 17 km (Braga-Ribas et al. 2023, A&A 676, A72). Only the apparent limb ellipse is fitted from the chords. The third axis follows from three stated assumptions: a Jacobi fluid-equilibrium figure at the 5.917813 h rotation period, the true light-curve amplitude 0.16 ± 0.03 mag of Groussin et al. 2004, and a body pole assumed equal to the Ortiz et al. 2015 ring pole. The area-equivalent radius was held fixed at 105 (+6/-7) km, the radiometric value of Lellouch et al. 2017, so the scale is radiometric, not occultation-measured. This is a model figure, not resolved terrain.",
       "orientationMeaning": "Illustrative ICRF north pole (right ascension 0 degrees, declination +90 degrees), arbitrary prime meridian and phase. Chiron has no measured spin pole. The published ring or disk pole near ecliptic longitude 151 degrees, latitude +20 degrees is a pole of the surrounding material; the shape paper assumes the body shares it, and this display does not adopt that assumption as an orientation.",
-      "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain. Chiron is about 0.015 arcsec across at its current distance and has never been resolved.",
-      "colour": {
+      "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain. Chiron is about 0.015 arcsec across at its current distance and has never been resolved.",
+      "color": {
         "spectralGradientPercentPer100nm": {
           "value": 0.114,
           "uncertainty": 0.996
@@ -78,7 +78,7 @@
         },
         "epochs": 34,
         "source": "https://doi.org/10.1051/0004-6361/201219566",
-        "meaning": "MBOSS-2 weighted means. The spectral gradient is measured against the solar spectrum, so 0.1 ± 1.0 percent per 100 nm means Chiron's reflectance is solar-coloured within its errors. The shared neutral material is used rather than a derived display colour, because a colour derived from these indices would be indistinguishable from neutral and the indices mix nucleus and coma across 34 epochs of varying activity."
+        "meaning": "MBOSS-2 weighted means. The spectral gradient is measured against the solar spectrum, so 0.1 ± 1.0 percent per 100 nm means Chiron's reflectance is solar-colored within its errors. The shared neutral material is used rather than a derived display color, because a color derived from these indices would be indistinguishable from neutral and the indices mix nucleus and coma across 34 epochs of varying activity."
       },
       "introduction": "Kowal found Chiron beyond Saturn in 1977, the first Centaur known. It later grew a coma, so one body carries both an asteroid number and a comet designation.",
       "card": "The first known Centaur, and a comet as well.",

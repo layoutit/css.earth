@@ -24,11 +24,11 @@
       "license": "ESA Planck data are public; cite Planck Collaboration (2020) and acknowledge Planck."
     },
     {
-      "id": "planck-colour-table",
+      "id": "planck-color-table",
       "path": "src/objects/observable-universe-cmb/source/cmb/Planck_Parchment_RGB.txt",
       "origin": "https://raw.githubusercontent.com/zonca/paperplots/master/data/Planck_Parchment_RGB.txt",
       "sourceUrl": "https://github.com/zonca/paperplots",
-      "title": "Planck style-guide colour table (parchment)",
+      "title": "Planck style-guide color table (parchment)",
       "credit": "Planck collaboration figure style guide, paperplots repository",
       "acquisition": "Downloaded 2026-09-29.",
       "sourceBinding": {
@@ -37,7 +37,7 @@
           {
             "catalogueId": "planck-2018-smica-cmb",
             "role": "method",
-            "evidence": "src/objects/observable-universe-cmb/source/cmb/sphere.json#/colourTable"
+            "evidence": "src/objects/observable-universe-cmb/source/cmb/sphere.json#/colorTable"
           }
         ]
       },

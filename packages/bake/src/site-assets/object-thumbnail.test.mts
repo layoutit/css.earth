@@ -28,7 +28,7 @@ test('an object on black sky is cut to its own extent and its sky is transparent
   assert.equal(marginAlpha(tile), 0);
   const centre = (size / 2 * size + size / 2) * 4;
   assert.equal(tile[centre + 3], 255);
-  assert.ok(tile[centre]! > 240 && Math.abs(tile[centre + 1]! - 160) < 12, 'the centre keeps the photograph\'s colour');
+  assert.ok(tile[centre]! > 240 && Math.abs(tile[centre + 1]! - 160) < 12, 'the centre keeps the photograph\'s color');
   let left = size, right = 0;
   for (let x = 0; x < size; x++) if (alphaAt(tile, x, size / 2) > 16) { left = Math.min(left, x); right = Math.max(right, x); }
   assert.ok(right - left > size / 2, `the object spans ${right - left + 1} of ${size} px`);

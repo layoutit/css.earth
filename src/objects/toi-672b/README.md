@@ -8,7 +8,7 @@ It is the only planet known around TOI-672. Its orbit and size follow Osborn et 
 
 **Orbit.** Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): P 3.633575 d Osborn et al. 2026 (2026A&A...709A..23O), via the NASA Exoplanet Archive ps table (pl_refname OSBORN_ET_AL_2026): a/R* 14.8; Osborn et al. 2026 (2026A&A...709A..23O), via the NASA Exoplanet Archive ps table (pl_refname OSBORN_ET_AL_2026): inclination 88 degrees Osborn et al. 2026 (2026A&A...709A..23O), via the NASA Exoplanet Archive ps table (pl_refname OSBORN_ET_AL_2026): e 0 Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): transit mid-time 2458546.4799 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-672's measured colour (#ffc289, the colour dataset of toi-672 (src/objects/toi-672/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-672's measured color (#ffc289, the color dataset of toi-672 (src/objects/toi-672/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-672's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (90, 99, 100), folded onto its orbit. Upper limits and rows without an error are left out.
 

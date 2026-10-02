@@ -15,7 +15,7 @@ of any star in this application. Gaia publishes no radial velocity for it — th
 **Radius and mass.** 0.1192 solar radii (82,927 km) and 0.0898 +/- 0.0023 solar masses, from Agol et al. (2021, PSJ 2, 1), who
 derive the radius from the photodynamic stellar density and the mass from the Mann et al. (2019) relation.
 
-**Colour dataset.** Gaia measured this star's BP/RP spectrum, but publishes the *sampled* product only for brighter sources; at G =
+**Color dataset.** Gaia measured this star's BP/RP spectrum, but publishes the *sampled* product only for brighter sources; at G =
 15.62 only the basis-function coefficients are released. They are pinned as
 `source/photometry/gaia-dr3-xp-continuous.csv` and sampled here onto the archive's own
 336-1020 nm grid with GaiaXPy, the archive's library, by
@@ -25,19 +25,19 @@ that gives **255, 205, 106 (#ffcd6a)**.
 The star is faint in blue light: from 380 to 450 nm its samples have a mean signal-to-noise of 0.2 and sixteen of them are at or
 below zero. A sample that is not positive but lies within three times its own error of zero is read as no emission at that
 wavelength; anything more negative would fail the build. Moving every sample one standard error down and up moves the blue channel
-from 34 to 156, which is the honest width of this colour.
+from 34 to 156, which is the honest width of this color.
 
 **Limb layer.** [Gillon et al. (2016), Extended Data Table 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC5321506/) gives TRAPPIST-1's
 I+z quadratic limb-darkening coefficients `u1 = 0.65 ± 0.10` and `u2 = 0.28 ± 0.12` (effective wavelength 885 ± 5 nm). The authors
 inferred them from theoretical atmosphere tables and used them as transit priors. The prepared black-alpha plate applies
-`I(μ)/I(1) = 1 - u1(1 - μ) - u2(1 - μ)²` to the Gaia-coloured sphere, with transparent pixels outside it. At the modeled edge,
+`I(μ)/I(1) = 1 - u1(1 - μ) - u2(1 - μ)²` to the Gaia-colored sphere, with transparent pixels outside it. At the modeled edge,
 the intensity is 7% of the centre. This is a **red-band model**, not a resolved image, a measured spatial profile or a visible-light
 broadband measurement. The plate changes brightness without claiming a new hue or off-limb glow.
 
 **Axis.** No rotation axis is measured. The period is known from spot modulation — 3.295 days (Luger et al. 2017) — but not the
 direction of the axis on the sky, so the display axis is celestial north at the star, a convention.
 
-**On the map.** The star has no surface image, but its colour comes from its own spectrum, so discovery marks it `sourceColor` and
+**On the map.** The star has no surface image, but its color comes from its own spectrum, so discovery marks it `sourceColor` and
 it stays on the map with its seven planets.
 
 **Light curve at 15 µm.** The page's chart is TRAPPIST-1's brightness over the 59 hours of JWST program 3077, reduced from raw in
@@ -46,11 +46,11 @@ the shallow eclipse of b and c together, the star's own flares, and the detector
 the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](../trappist-1b/README.md)'s temperature map and
 [TRAPPIST-1c](../trappist-1c/README.md)'s measured dayside come from the same data.
 
-**Catalogue colour.** the swatch that search, the catalogue and the minimap show is this dataset's prepared colour, #ffcd6a.
+**Catalogue color.** the swatch that search, the catalogue and the minimap show is this dataset's prepared color, #ffcd6a.
 
 ## Evidence
 
-- [`stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts) covers the colour
+- [`stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts) covers the color
   path, including the rule for samples consistent with zero and the quadratic limb plate.
 - `source.test.mts` checks every package's source pins, and that each planet turns
   synchronously with longitude 0 on the star and orbits it.
@@ -58,7 +58,7 @@ the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](..
 - Driven in a real browser: the system view draws the seven orbits, markers and labels around the star. The orbits are inclined
   89.7 to 89.9 degrees with the node at celestial north, so from the default angle they project onto a single line — the geometry
   that makes these planets transit.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue colour #ffcd6a is the colour dataset's prepared colour.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue color #ffcd6a is the color dataset's prepared color.
 
 ## Known problems
 

@@ -49,7 +49,7 @@ export function parseGeometryProfile(value: unknown): GeometryProfile {
   if (surface.innerPoles !== undefined) numbers(object(surface.innerPoles, 'inner poles'), ['radiusScale', 'offset'], 'inner poles');
   const projection = object(profile.projection, 'projection');
   numbers(projection, ['tileSize', 'layerElevation', 'seamBleed', 'interiorSeamBleed', 'overlap', 'rasterScale', 'rasterGutter', 'rasterOverscan', 'ambientIntensity'], 'projection');
-  if (typeof projection.lightColor !== 'string') throw new TypeError('Projection needs a light colour.');
+  if (typeof projection.lightColor !== 'string') throw new TypeError('Projection needs a light color.');
   for (const name of ['fitToSource', 'projectivePoles']) if (typeof projection[name] !== 'boolean') throw new TypeError(`projection.${name} must be boolean.`);
   // Every leaf writes its texture address inline; a dataset reaches it through the texture its variant writes on the body.
   if (projection.positionVariables !== undefined) throw new TypeError('projection.positionVariables is gone: remove it.');
@@ -68,7 +68,7 @@ export function parseGeometryProfile(value: unknown): GeometryProfile {
       const plane = object(value, 'plane');
       numbers(plane, ['radius', 'size'], 'plane');
       if (Number(plane.radius) <= 0 || !Number.isInteger(plane.size) || Number(plane.size) <= 0) throw new TypeError('A plane needs a positive radius and raster size.');
-      if (typeof plane.id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(plane.id) || typeof plane.color !== 'string') throw new TypeError('A plane needs an identifier and colour.');
+      if (typeof plane.id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(plane.id) || typeof plane.color !== 'string') throw new TypeError('A plane needs an identifier and color.');
       if (typeof plane.url !== 'string' || !plane.url.startsWith('/scenes/')) throw new TypeError('A plane needs a prepared asset.');
     }
   }
@@ -77,7 +77,7 @@ export function parseGeometryProfile(value: unknown): GeometryProfile {
     numbers(cutaway, ['coreLatitudeSegments', 'coreLongitudeSegments', 'surfaceWidth', 'surfaceHeight', 'polarTileSize', 'polarWidth', 'polarHeight',
       'polarRadiusScale', 'polarOffset', 'sectionWidth', 'sectionHeight', 'sectionPresentationWidth', 'sectionPresentationHeight',
       'rotationDegrees', 'assistStartDegrees', 'assistMaximumDegrees', 'controlMaximumDegrees', 'millisecondsPerDegree'], 'cutaway');
-    if (typeof cutaway.color !== 'string') throw new TypeError('Cutaway colour is invalid.');
+    if (typeof cutaway.color !== 'string') throw new TypeError('Cutaway color is invalid.');
   }
   const output=object(profile.output,'output');
   if (typeof output.schema!=='string'||typeof output.materialSchema!=='string'||!['retained','body-container'].includes(String(output.layout))) throw new TypeError('Scene output profile is invalid.');

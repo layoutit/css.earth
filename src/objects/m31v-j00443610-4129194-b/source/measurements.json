@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "M31V J00443610+4129194: P 2.048644 d, time of primary minimum HJD 2452908.694, i 69.9 degrees and a 22.6 +/- 0.5 solar radii (Vilardell et al. (2010), A&A 509, A70, Table 2); the fit follows the procedure of Ribas et al. (2005), which adopts a circular orbit, in a semi-detached configuration (Sect. 4). a/R = 22.6/9.2 = 2.4565 primary radii. HJD is taken as BJD_TDB (under a minute apart); at the primary minimum the primary is eclipsed, so the secondary is in front. (https://arxiv.org/abs/0911.3391): P 2.048644 d",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of DIRECT V12262 M31C B is measured; only its size, mass and orbit are."
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of DIRECT V12262 M31C B is measured; only its size, mass and orbit are."
   },
   "effectiveTemperatureK": 30100,
   "effectiveTemperatureSource": "Secondary Teff 30100 +/- 900 K, Vilardell et al. (2010), A&A 509, A70, Table 3 (https://arxiv.org/abs/0911.3391)",

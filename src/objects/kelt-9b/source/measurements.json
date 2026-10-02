@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "Gaudi et al. (2017), Extended Data Table 3, Model 1 (adopted): P = 1.4811235 +/- 0.0000011 d",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius, coloured by the brightness temperature of Mansfield et al. (2020)'s phase-curve fit (preparation/raster.json). Its tidal and rotational flattening are not modelled."
+    "qualification": "A sphere at the published radius, colored by the brightness temperature of Mansfield et al. (2020)'s phase-curve fit (preparation/raster.json). Its tidal and rotational flattening are not modelled."
   },
   "effectiveTemperatureK": 4566,
   "effectiveTemperatureSource": "Mansfield et al. (2020), ApJL 888, L15, Table 1: day side brightness temperature 4566 +140/-136 K at 4.5 um (https://arxiv.org/abs/1910.01567)",

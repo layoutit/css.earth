@@ -64,9 +64,9 @@ export function encodeCatalogueBankBinary(bank: Readonly<Record<string, unknown>
     if (!Number.isInteger(cell) || cell < 0 || cell >= boxes.length) fail(`point ${index} names cell ${cell}, outside its ${boxes.length} boxes.`);
     if (columns.cellBytes === 2) view.setUint16(place.of.offset + index * 2, cell, true); else view.setUint32(place.of.offset + index * 4, cell, true);
     if (place.palette) {
-      const colour = row[3]!;
-      if (!Number.isInteger(colour) || colour < 0) fail(`point ${index} names palette colour ${colour}.`);
-      if (columns.paletteBytes === 1) view.setUint8(place.palette.offset + index, colour); else view.setUint16(place.palette.offset + index * 2, colour, true);
+      const color = row[3]!;
+      if (!Number.isInteger(color) || color < 0) fail(`point ${index} names palette color ${color}.`);
+      if (columns.paletteBytes === 1) view.setUint8(place.palette.offset + index, color); else view.setUint16(place.palette.offset + index * 2, color, true);
     }
   });
   return { bytes, regions: [place.boxes, place.x, place.y, place.z, place.of, ...(place.palette ? [place.palette] : [])] };

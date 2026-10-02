@@ -1,5 +1,5 @@
-/** A star's colour dataset installed in a generated package: the colour record and its spectra, the limb law, the raster surface, the
- * catalogue and surface colour, the dataset control, the dataset text, the manifest entries, the acquisition steps and the marker
+/** A star's color dataset installed in a generated package: the color record and its spectra, the limb law, the raster surface, the
+ * catalogue and surface color, the dataset control, the dataset text, the manifest entries, the acquisition steps and the marker
  * recipe. Shared by placed stars (generate.mts) and companion stars on hosted orbits (hosted.mts), which are the same dataset. */
 import { loadStellarPhotometricColor, type StellarColor } from '@cssearth/bake/objects/stellar';
 import type { ColorChoice } from './color.mts';
@@ -10,7 +10,7 @@ const hex = (color: StellarColor) => `#${color.srgb.map(value => value.toString(
 
 export type PackageFiles = Map<string, string | Buffer>;
 
-/** Rewrite a scaffolded emissive package (its one `shape` dataset) into the colour dataset. Returns the prepared colour and the words
+/** Rewrite a scaffolded emissive package (its one `shape` dataset) into the color dataset. Returns the prepared color and the words
  * the rest of the package uses for it. */
 export async function installColorDataset(files: PackageFiles, id: string, color: ColorChoice, limb: LimbChoice) {
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
@@ -19,10 +19,10 @@ export async function installColorDataset(files: PackageFiles, id: string, color
   files.set(`${s}/photometry/stellar-color.json`, json(color.record));
 
   const words = color.route === 'planck' ? "a blackbody at the star's published temperature" : color.route === 'gaia-xp' ? "the star's Gaia DR3 BP/RP spectrum" : `the star's measured spectrum (${color.summary.split(':')[0]})`;
-  const short = color.route === 'planck' ? "Colour of a blackbody at the star's temperature" : color.route === 'gaia-xp' ? "Colour from Gaia's spectrum of the star" : 'Colour from its measured spectrum';
+  const short = color.route === 'planck' ? "Color of a blackbody at the star's temperature" : color.route === 'gaia-xp' ? "Color from Gaia's spectrum of the star" : 'Color from its measured spectrum';
   const science: Record<string, unknown> = { kind: 'stellar-photometric-color', ...(limb.limbDarkening ? { limbDarkening: limb.limbDarkening } : {}),
-    qualification: `${limb.limbDarkening ? 'Photosphere' : 'Uniform photosphere'} colour from ${words}${limb.limbDarkening ? `, ${limb.sentence}` : `. ${limb.sentence}`}. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.` };
-  // The prepared colour, through the dataset's own loader on the files as they will be written.
+    qualification: `${limb.limbDarkening ? 'Photosphere' : 'Uniform photosphere'} color from ${words}${limb.limbDarkening ? `, ${limb.sentence}` : `. ${limb.sentence}`}. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.` };
+  // The prepared color, through the dataset's own loader on the files as they will be written.
   const loaded = await loadStellarPhotometricColor(async path => { const value = files.get(`${s}/${path}`); if (value === undefined) throw new Error(`${id}: ${path} is not in the generated package.`); return Buffer.from(value); }, science, 'photometry/stellar-color.json');
   const colorHex = hex(loaded.color);
 
@@ -37,7 +37,7 @@ export async function installColorDataset(files: PackageFiles, id: string, color
   const geometry = read(`${s}/preparation/geometry.json`);
   geometry.surface.color = colorHex;
   geometry.surface.surface.url = `/scenes/${id}/${id}-surface-color@2x.webp`; geometry.surface.poles.url = `/scenes/${id}/${id}-poles-color@2x.webp`;
-  if (geometry.output?.body) { geometry.output.body.sourceProjection = 'the colour dataset: a uniform photosphere colour on the reference sphere'; geometry.output.body.polarPreparation = 'the same colour on the polar tiles'; }
+  if (geometry.output?.body) { geometry.output.body.sourceProjection = 'the color dataset: a uniform photosphere color on the reference sphere'; geometry.output.body.polarPreparation = 'the same color on the polar tiles'; }
   files.set(`${s}/preparation/geometry.json`, json(geometry));
 
   const content = read(`${s}/content/object.json`);
@@ -45,11 +45,11 @@ export async function installColorDataset(files: PackageFiles, id: string, color
     qualification: `${short}${limb.limbDarkening ? '; darkening toward the edge from a model atmosphere' : ''}. The disc itself is unresolved.`,
     thumbnail: `${id}-dataset-color.webp`, surface: `${id}-surface-color@2x.webp`, poles: `${id}-poles-color@2x.webp`,
     source: { id: `${id}-stellar-color`, path: '../manifest.json', url: String(color.inputs.find(entry => entry.id === `${id}-stellar-color`)?.origin) }, falseColor: false,
-    notes: `The colour of ${words}. ${limb.limbDarkening ? `The darkening toward the edge is ${limb.sentence.replace(/^dimmed toward the limb by /u, '')}.` : `${limb.sentence}.`} The spin axis's direction on the sky is a display convention.` }] };
+    notes: `The color of ${words}. ${limb.limbDarkening ? `The darkening toward the edge is ${limb.sentence.replace(/^dimmed toward the limb by /u, '')}.` : `${limb.sentence}.`} The spin axis's direction on the sky is a display convention.` }] };
   files.set(`${s}/content/object.json`, json(content));
   const text = read(`${o}/text.json`);
-  text.datasets = { color: { title: 'Colour', detail: color.route === 'planck' ? 'From its temperature' : color.route === 'gaia-xp' ? 'From its Gaia spectrum' : 'From its spectrum',
-    summary: `The colour of the star's light${limb.limbDarkening ? ', dimmed toward the edge by a model atmosphere' : ''}.` } };
+  text.datasets = { color: { title: 'Photosphere color', detail: color.route === 'planck' ? 'From its temperature' : color.route === 'gaia-xp' ? 'From its Gaia spectrum' : 'From its spectrum',
+    summary: `The color of the star's light${limb.limbDarkening ? ', dimmed toward the edge by a model atmosphere' : ''}.` } };
   files.set(`${o}/text.json`, json(text));
 
   const manifest = read(`${s}/manifest.json`);
@@ -58,9 +58,9 @@ export async function installColorDataset(files: PackageFiles, id: string, color
   const markerInputs = [`${id}-stellar-color`, ...color.inputs.filter(entry => entry.id !== `${id}-stellar-color` && entry.id !== `${id}-crosscheck-spectrum`).map(entry => String(entry.id)), ...(limb.inputs ?? []).map(input => String(input.id)), `${id}-preparation-raster`];
   manifest.generatedIntermediates = [...(manifest.generatedIntermediates ?? []).filter((entry: { path: string }) => entry.path !== 'presentation/context.png'), {
     id: limb.limbDarkening ? 'limb-darkened-disc-context-marker' : 'uniform-disc-context-marker', path: 'presentation/context.png', origin: String(color.inputs[0]?.origin),
-    credit: `The colour dataset as a disc${limb.limbDarkening ? ', dimmed toward the limb by its model law' : ''}; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts`, license: 'Project-authored display derivative.', consumers: ['navigation'],
+    credit: `The color dataset as a disc${limb.limbDarkening ? ', dimmed toward the limb by its model law' : ''}; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts`, license: 'Project-authored display derivative.', consumers: ['navigation'],
     recipe: { generator: 'packages/telescope-cli/src/source-authoring/context-markers.mts', inputs: markerInputs }, generator: 'packages/telescope-cli/src/source-authoring/context-markers.mts',
-    sourceBinding: { kind: 'local', reason: `The colour dataset rendered as a disc${limb.limbDarkening ? ' with its limb darkening' : ''}; \`context-markers.mts --check\` recomputes it.` } }];
+    sourceBinding: { kind: 'local', reason: `The color dataset rendered as a disc${limb.limbDarkening ? ' with its limb darkening' : ''}; \`context-markers.mts --check\` recomputes it.` } }];
   files.set(`${s}/manifest.json`, json(manifest));
   const plan = read(`${s}/preparation/acquisition.json`);
   plan.operations = [...plan.operations, ...color.acquisition, ...limb.acquisitions ?? []];

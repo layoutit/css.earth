@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 0.89 +/- 0.08 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of WASP-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); Mass 1.42 +/- 0.43 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of WASP-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); temperature from Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-11 b in the NASA Exoplanet Archive.
 
-Colour: Gaia DR3 XP spectrum, source 123376685084303360, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: Gaia DR3 XP spectrum, source 123376685084303360, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 

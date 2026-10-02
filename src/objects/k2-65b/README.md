@@ -8,7 +8,7 @@ It is the only planet known around K2-65. Its orbit and size follow Crossfield e
 
 **Orbit.** Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): P 12.64655 d Crossfield et al. 2016 (2016ApJS..226....7C), via the NASA Exoplanet Archive ps table (pl_refname CROSSFIELD_ET_AL__2016): a/R* derived from its semi-major axis 0.1014 au and stellar radius 0.84 solar radii; Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): inclination 89.14842 degrees No archive row states an eccentricity; the orbit is taken as circular Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): transit mid-time 2456986.3299 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 231 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-65's measured colour (#ffdbc6, the colour dataset of k2-65 (src/objects/k2-65/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by k2-65's measured color (#ffdbc6, the color dataset of k2-65 (src/objects/k2-65/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-65's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (92), folded onto its orbit. Upper limits and rows without an error are left out.
 

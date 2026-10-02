@@ -62,4 +62,4 @@ The maximum sampled source-to-display distance is **1027.70 m**. This is a sampl
 
 - The pinned mesh is an inverse model, not a directly sampled surface. Fine-scale craters, regolith and albedo are unresolved.
 - Absolute rotational phase is arbitrary and the accelerated display spin is illustrative.
-- The SPHERE photograph is photographed illumination, not albedo or colour. The frames see Lamberta from 4° south to 3° north, so surface the survey did not see keeps the missing-imagery grid.
+- The SPHERE photograph is photographed illumination, not albedo or color. The frames see Lamberta from 4° south to 3° north, so surface the survey did not see keeps the missing-imagery grid.

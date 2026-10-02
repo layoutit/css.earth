@@ -23,7 +23,7 @@ test('annular preparation is driven by physical band data for an unregistered bo
   const pixels = rasterAnnularField(layer,9);
   const pixel = (x: number,y: number) => [...pixels.subarray((y*9+x)*4,(y*9+x)*4+4)];
   assert.deepEqual(pixel(4,4),[0,0,0,0]);
-  // Optical depth 0.5 stops 1 - exp(-0.5) of the light: alpha 100 of 255, in the neutral gray of an unmeasured colour.
+  // Optical depth 0.5 stops 1 - exp(-0.5) of the light: alpha 100 of 255, in the neutral gray of an unmeasured color.
   assert.deepEqual(pixel(6,4),[154,154,154,100]);
   assert.deepEqual(pixel(7,4),[154,154,154,100]);
   assert.deepEqual(pixel(8,4),[0,0,0,0]);

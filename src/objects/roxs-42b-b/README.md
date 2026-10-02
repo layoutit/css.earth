@@ -12,7 +12,7 @@ ROXs 42B b is a young giant planet of about 10 to 13 Jupiter masses, 1.2 arcseco
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray. No paper gives its flux in three bands comparable with HR 8799's planets, whose false colour comes from JWST (the [ledger](investigations.json) says what would change that).
+**Shape dataset.** A sphere of the model radius in the shared neutral gray. No paper gives its flux in three bands comparable with HR 8799's planets, whose false color comes from JWST (the [ledger](investigations.json) says what would change that).
 
 **Rotation.** No spin axis on the sky is measured; the display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -26,6 +26,6 @@ Run of 2026-09-23 (this version):
 
 - Three positions over twenty years leave more free parameters than measurements, as Inglis et al. note: the recorded orbit is one of many that fit, not a measurement of the planet's path. The orbit is about the pair's centre of mass but is drawn around A, up to about 25 mas away on the sky.
 - The radius and mass are model values; the planet is a point in every image.
-- No colour is measured in bands comparable with HR 8799's, and no spin axis is measured.
+- No color is measured in bands comparable with HR 8799's, and no spin axis is measured.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

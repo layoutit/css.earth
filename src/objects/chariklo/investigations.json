@@ -17,7 +17,7 @@
       "id": "selected-2",
       "subject": "Santos-Sanz et al. (2025), Table 1",
       "status": "included",
-      "finding": "The package uses the 18 October 2022 JWST NIRCam F150W2 first-contact values as two circular-annulus approximations: C1R radius 385.9 km and width 7.04 km; C2R radius 400.3 km and width 1.009 km. They are occultation geometry, not observed reflected colour or a scattering model; neutral gray and fixed alpha remain authored schematic display choices.",
+      "finding": "The package uses the 18 October 2022 JWST NIRCam F150W2 first-contact values as two circular-annulus approximations: C1R radius 385.9 km and width 7.04 km; C2R radius 400.3 km and width 1.009 km. They are occultation geometry, not observed reflected color or a scattering model; neutral gray and fixed alpha remain authored schematic display choices.",
       "evidence": [
         "https://arxiv.org/html/2510.06366v1#S0.T1",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/chariklo/source/rings/occultation-2022.json",

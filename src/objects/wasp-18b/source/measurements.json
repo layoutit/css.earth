@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "Eigenspectra fitting script (Figure1.py, planetparams['per']) in Zenodo 10.5281/zenodo.14751570: 0.941452382 d, as Coulombe et al. (2023), Table 3 (0.941452382 +/- 0.000000069 d)",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius, coloured by the Eigenspectra regions and brightness-temperature maps of Challener, Weiner Mansfield et al. (2025) (preparation/raster.json). Its tidal and rotational flattening are not modelled."
+    "qualification": "A sphere at the published radius, colored by the Eigenspectra regions and brightness-temperature maps of Challener, Weiner Mansfield et al. (2025) (preparation/raster.json). Its tidal and rotational flattening are not modelled."
   },
   "effectiveTemperatureK": 2781,
   "effectiveTemperatureSource": "Coulombe et al. (2023), Nature 620, 292, Methods: a brightness-temperature plateau of 2781 +25/-13 K within about 40 degrees of the substellar point (https://arxiv.org/abs/2301.08192)"

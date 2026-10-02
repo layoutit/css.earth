@@ -54,7 +54,7 @@ test('the north pole is tilted from the line of sight by the published angle, an
   }
 });
 
-test('a pulsar package is its cited values and its hot-region map, with no temperature or colour of its own', async () => {
+test('a pulsar package is its cited values and its hot-region map, with no temperature or color of its own', async () => {
   const { files, regions, minimum, maximum } = await generatePulsar(parsePulsarSpec(pulsar), { archive, order: 9000, epochJdTt: 2461286.5, nsxTable: nsxTable() });
   const read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   assert.equal(regions, 1);

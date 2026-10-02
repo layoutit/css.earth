@@ -3,8 +3,8 @@
   "objectId": "pds-70",
   "entries": [
     {
-      "id": "star-colour-spectrum",
-      "subject": "Which measured spectrum gives the star its colour",
+      "id": "star-color-spectrum",
+      "subject": "Which measured spectrum gives the star its color",
       "status": "included",
       "finding": "Gaia DR3 publishes no BP/RP spectrum of this star (has_xp_continuous and has_xp_sampled are both false). ESO holds 12 X-shooter spectra from the PENELLOPE programme 105.205R.001, two nights with a 5 arcsecond wide-slit exposure for absolute flux calibration. On 2020-12-26 (ADP.2021-01-11T12:58:23.979 and .935) the UVB and VIS arms agree to 2.3% within 5 nm of the 545 nm join; that night is drawn, #ffcb9b. On 2021-03-08 the arms differ by 15.8% at the join, and the reader refuses it, so there is no cross-check. A 3,972 K blackbody gives #ffd3a4, a little less red; K2-18 (3,457 K) is #ffc796.",
       "evidence": [

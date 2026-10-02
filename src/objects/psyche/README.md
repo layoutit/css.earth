@@ -45,7 +45,7 @@ disc edge.
 
 The ALMA release has one value per 5-degree node, 73 × 37, with NaN where the
 authors dropped a node. 1,895 of 2,701 nodes are mapped, about 80% of the
-surface by area. Each dataset draws one colour per node with no smoothing. Each
+surface by area. Each dataset draws one color per node with no smoothing. Each
 mesh direction is carried into the map frame through the two published spin
 states at the ALMA midpoint ([alma-body-frame.json](source/thermal/alma-body-frame.json)).
 At that epoch the mesh prime meridian lies at map longitude −4.11° and the two
@@ -102,11 +102,11 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ## Known problems
 
-- The ALMA maps are coarse and uncertain: a median thermal-inertia uncertainty of 134, 75% of the median value. Neighbouring colours often differ by less than their uncertainty.
+- The ALMA maps are coarse and uncertain: a median thermal-inertia uncertainty of 134, 75% of the median value. Neighbouring colors often differ by less than their uncertainty.
 - Cambioni et al. (2022) hatch 60° to 120° west in their frame as possibly affected by model artifacts. Those nodes are drawn like the rest; the dataset notes say so.
 - The maps were fitted on the Shepard et al. (2021) shape, not the ADAM mesh. Their overall sizes agree to about 2%, but where the two shapes differ locally a value lands on slightly different ground.
 - The LAM parameter file does not state its time scale. It is read in UTC; read in TDB it would move the mesh prime meridian 1.65° in map longitude.
-- The SPHERE photograph is photographed illumination from deconvolved frames, not albedo or colour. The frames see Psyche from 10° south to 80° north, so unseen surface keeps the missing-imagery grid.
+- The SPHERE photograph is photographed illumination from deconvolved frames, not albedo or color. The frames see Psyche from 10° south to 80° north, so unseen surface keeps the missing-imagery grid.
 - Shape is not photographed color, reflectance or composition. Elevation includes global shape, not height above a gravitational equipotential.
 - Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution. Reduction softens small features.
 - Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.

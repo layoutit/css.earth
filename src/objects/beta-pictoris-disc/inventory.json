@@ -3,7 +3,7 @@
   "assets": [
     {
       "location": "public",
-      "filename": "datasets/colour.webp",
+      "filename": "datasets/color.webp",
       "bytes": 5534,
       "sha256": "1092ca8d84b849fa87ec2013e574a943665f1154feef4326beb0c984b47e042b"
     },
@@ -21,175 +21,175 @@
     },
     {
       "location": "prepared",
-      "filename": "colour/atlases/x.webp",
+      "filename": "color/atlases/x.webp",
       "bytes": 727744,
       "sha256": "72aa7832a4648d538d9089af9bfa44e6f5fe4a5842d6eaf68e39072b53431c6c"
     },
     {
       "location": "prepared",
-      "filename": "colour/atlases/y.webp",
+      "filename": "color/atlases/y.webp",
       "bytes": 764204,
       "sha256": "953761297df111672e91fbdd87291dc64b0b238fe3c55488331f14c30b48212b"
     },
     {
       "location": "prepared",
-      "filename": "colour/atlases/z.webp",
+      "filename": "color/atlases/z.webp",
       "bytes": 804018,
       "sha256": "2a0bff90fc0a5332aed49f8a971ebfdc9b68e47ed45ec69f88a21a8a6f14adcf"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-00n.png",
+      "filename": "color/impostors/view-00n.png",
       "bytes": 33147,
       "sha256": "88f94eb86989d9dc13d8d16cc532079e8c4c030023c559282078def4e5bf514a"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-00p.png",
+      "filename": "color/impostors/view-00p.png",
       "bytes": 33138,
       "sha256": "8686ef646a04f14f68b3f187509f17feb157d657af6319ec84f74fbeaa92281c"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-0n0.png",
+      "filename": "color/impostors/view-0n0.png",
       "bytes": 44348,
       "sha256": "a0eeb2fa8c71daa395d7a0f96574658704f2cee7742bcd145997b36fab900f14"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-0nn.png",
+      "filename": "color/impostors/view-0nn.png",
       "bytes": 39669,
       "sha256": "9f1571c62baea248e68d65460abb6eaf9756242727815b6659e0d3b653b498bf"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-0np.png",
+      "filename": "color/impostors/view-0np.png",
       "bytes": 40513,
       "sha256": "fb3a27763a4e1760a8a71ab1eacdc61caa90eeefdb10940703d2197de7e2cfab"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-0p0.png",
+      "filename": "color/impostors/view-0p0.png",
       "bytes": 44240,
       "sha256": "50087f1293b7622be4c852c9abb59a35c729200a549765058af349023798db99"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-0pn.png",
+      "filename": "color/impostors/view-0pn.png",
       "bytes": 40478,
       "sha256": "b3616a7d34528df841893934d65bdd0c414e10be7decda69d60086da6c504e95"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-0pp.png",
+      "filename": "color/impostors/view-0pp.png",
       "bytes": 39671,
       "sha256": "548d91e4000bd6208c049bc263791f36e922e817400ffe24f3fc679fc83ce016"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-n00.png",
+      "filename": "color/impostors/view-n00.png",
       "bytes": 58648,
       "sha256": "e4956d0209f0378ba77ca7a73be63aa22be3d4249d4649a7c46c6eec53d0df26"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-n0n.png",
+      "filename": "color/impostors/view-n0n.png",
       "bytes": 52189,
       "sha256": "6e3acaefe6127e619f1c1c1ba819ae81d8355cd38d17065cfffb985ad4e3cf88"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-n0p.png",
+      "filename": "color/impostors/view-n0p.png",
       "bytes": 51103,
       "sha256": "cdccb62884d6b4581093b40f7c84b4098cab5929436740f2a112c5da677708f1"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-nn0.png",
+      "filename": "color/impostors/view-nn0.png",
       "bytes": 37253,
       "sha256": "f598959b19ec6bdd498cbe37d69fd66becc7799f3a453c7abb40af8808fbc2ce"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-nnn.png",
+      "filename": "color/impostors/view-nnn.png",
       "bytes": 37260,
       "sha256": "26f8238654adf3afe984ea0513aba7c9130d6927dd4e9df55ec05660cdb922a0"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-nnp.png",
+      "filename": "color/impostors/view-nnp.png",
       "bytes": 36641,
       "sha256": "7c4d78ffca474f6ed6c9fc03bda3d0e42f8cb19205000115338e38e6249fc811"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-np0.png",
+      "filename": "color/impostors/view-np0.png",
       "bytes": 61667,
       "sha256": "6285929cc1ea4f00fe4602b8d6d7795e2860066630edbca33a89d8380a51fffc"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-npn.png",
+      "filename": "color/impostors/view-npn.png",
       "bytes": 58743,
       "sha256": "be7ae8ef330212d1c77176a6a114575608b6a9979d11ff6c7742d0c3c33e742b"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-npp.png",
+      "filename": "color/impostors/view-npp.png",
       "bytes": 57993,
       "sha256": "00b1bc4954de31752331a58a0f81ac81235129c676e880e1c29daccb6addf0d0"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-p00.png",
+      "filename": "color/impostors/view-p00.png",
       "bytes": 58732,
       "sha256": "b72067ab10668cd975a0e280dac8bb448f7d2352dce29b4131ad397a1e218e7a"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-p0n.png",
+      "filename": "color/impostors/view-p0n.png",
       "bytes": 51088,
       "sha256": "7e2909feff0badd1f7d22f59260877c06f68a6445a29aa424c392f2d8c2841a5"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-p0p.png",
+      "filename": "color/impostors/view-p0p.png",
       "bytes": 52256,
       "sha256": "d2dd9a0e648fd431f58015ed986cbb1369bc9512e728b61d154f843d5bdec0ab"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-pn0.png",
+      "filename": "color/impostors/view-pn0.png",
       "bytes": 61680,
       "sha256": "2e88c37780599caa4cbf0412aa5dbad2c53a41eea4a917a3cfd94014dd67f751"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-pnn.png",
+      "filename": "color/impostors/view-pnn.png",
       "bytes": 57989,
       "sha256": "7ee2af6b4c6aa3df03cc6a792bb0989d095026d73e299311f9d224616807b3b8"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-pnp.png",
+      "filename": "color/impostors/view-pnp.png",
       "bytes": 58750,
       "sha256": "a57e3187dc2ed842c61655e61c6a5c4b6745ce633c0b0a9b66de4cfba097cb23"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-pp0.png",
+      "filename": "color/impostors/view-pp0.png",
       "bytes": 37348,
       "sha256": "5329518f576ae66b661658ab8b6db4aba51d8812b4fe47a536b9829d7f2ff03c"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-ppn.png",
+      "filename": "color/impostors/view-ppn.png",
       "bytes": 36643,
       "sha256": "2e02cce4e69e74aac5bef1133b55e66846dca59887ed190bd7e3444eec25bf92"
     },
     {
       "location": "prepared",
-      "filename": "colour/impostors/view-ppp.png",
+      "filename": "color/impostors/view-ppp.png",
       "bytes": 37239,
       "sha256": "1cd37f0049d5e89df84aaf042ee3b38dc5671356cf2b3dd6ea877b2c9a8b0d44"
     },
@@ -370,26 +370,26 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 960629,
-      "sha256": "45e983ef14fb29244c50fbc3d2179edb9ff4dd3878f662fee71c8eca1aa2ff27"
+      "bytes": 960280,
+      "sha256": "3068b9e44112f8d48b7930929935a657a828a0e15e8387bd5c97c54e5e5c648b"
     },
     {
       "location": "prepared",
       "filename": "delivery.json",
-      "bytes": 2940,
-      "sha256": "c9d3626a375fa535f137626769b2e1d1e6c354fdb9fc597ceb37f845e811e3a1"
+      "bytes": 2935,
+      "sha256": "b7fe5f2e5b1b14ae7e11d75bd89b61c126ef2ae655a4b1c06e2641edf9bec207"
     },
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 9530,
-      "sha256": "2ac0ec072597aa31cebc40d5ee7ce231a408491401d0ce6bb4778cf81324999a"
+      "bytes": 9515,
+      "sha256": "a76a53ac8deee07a1cf410af319ef635f8b27ccdaa692c35cc80fc4ec2843848"
     },
     {
       "location": "prepared",
       "filename": "provenance.json",
-      "bytes": 42401,
-      "sha256": "6d14f2102da09f8def615366ba8b7a3d01d442f352da71248e02bf289f28405b"
+      "bytes": 42352,
+      "sha256": "5e35e216235f47acbb09f5272f66c6a07b396153a5a7ac999ff8607ddcaba9cd"
     },
     {
       "location": "prepared",

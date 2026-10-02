@@ -247,7 +247,7 @@ function junoModes(value: unknown, target: string): TargetMode[] {
   const object = requireArray(ledger.objects, 'objects').map(raw => requireRecord(raw, 'object')).find(entry => entry.id === target);
   if (!object) return [];
   const state = requireString(object.state, 'state'), programs = stringList(object.programs, 'programs');
-  return [{ telescope: 'Juno', mode: 'JUNOCAM', archiveDate, observations: { count: requireFiniteNumber(object.colourImages, 'colourImages'), scope: 'this-mode' as const }, programmes: programs, dates: [],
+  return [{ telescope: 'Juno', mode: 'JUNOCAM', archiveDate, observations: { count: requireFiniteNumber(object.colorImages, 'colorImages'), scope: 'this-mode' as const }, programmes: programs, dates: [],
     toolkit: { routeState: state, programs, checked: state === 'measured' ? programs : [], receipts: [] } }];
 }
 

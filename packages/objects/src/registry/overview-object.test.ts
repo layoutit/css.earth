@@ -21,7 +21,7 @@ describe('overview entries', () => {
   it('refuses an incomplete overview, naming the package', () => {
     assert.throws(() => overviewLevel(descriptor({ ...authored, zoom: undefined })), /local-group/);
     assert.throws(() => overviewLevel(descriptor({ ...authored, order: 0 })), /order \(from 1\)/);
-    assert.throws(() => overviewLevel(descriptor({ ...authored, colour: 'red' })), /local-group; it names its order/);
+    assert.throws(() => overviewLevel(descriptor({ ...authored, color: 'red' })), /local-group; it names its order/);
   });
 
   it('leaves its name and description to its catalogue entry', () => {

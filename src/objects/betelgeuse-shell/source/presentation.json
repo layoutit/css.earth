@@ -31,7 +31,7 @@
       "id": "zimpol-v",
       "label": "SPHERE/ZIMPOL · polarised dust, 2024",
       "title": "Polarised dust around Betelgeuse in 2024",
-      "description": "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the colour map and on the zero-to-0.10 scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colours are the publisher's legend for a ratio, not the colour of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
+      "description": "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the color map and on the zero-to-0.10 scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colors are the publisher's legend for a ratio, not the color of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
       "summary": "Measured polarised light from dust one to 4.5 stellar radii out; its depth is a fitted shell, not a measurement.",
       "detail": "1024 × 1024 px at 3.6 mas",
       "facts": [
@@ -52,7 +52,7 @@
         },
         {
           "id": "scale",
-          "label": "Colour scale",
+          "label": "Color scale",
           "value": "Degree of linear polarisation 0 to 0.10, the paper's inferno map"
         },
         {
@@ -117,7 +117,7 @@
       "id": "emission-2020",
       "label": "VLTI/MATISSE · off-limb light, 2020",
       "title": "The light outside Betelgeuse’s disc at 4 micrometres",
-      "description": "The same reconstruction that paints this star’s sphere carries a fifth of its flux outside the published disc. On the sphere that light is a flat plate behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star’s own edge smeared by the beam. What is left falls far too slowly to be that beam: the envelope that best projects to it is r^−7.9, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone. Its colours are the reconstruction’s own heat scale, because this is the same quantity as the sphere.",
+      "description": "The same reconstruction that paints this star’s sphere carries a fifth of its flux outside the published disc. On the sphere that light is a flat plate behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star’s own edge smeared by the beam. What is left falls far too slowly to be that beam: the envelope that best projects to it is r^−7.9, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone. Its colors are the reconstruction’s own heat scale, because this is the same quantity as the sphere.",
       "summary": "The fifth of the reconstruction that lies outside the disc, given the shape that best projects to it.",
       "detail": "128 × 128 px at 0.78 mas",
       "facts": [
@@ -138,7 +138,7 @@
         },
         {
           "id": "scale",
-          "label": "Colour scale",
+          "label": "Color scale",
           "value": "The reconstruction's own heat scale, the one the star's sphere carries"
         },
         {
@@ -157,7 +157,7 @@
       "id": "sio-2023",
       "label": "ALMA · SiO envelope, August 2023",
       "title": "Silicon monoxide around Betelgeuse, placed by its own velocities",
-      "description": "ALMA saw silicon monoxide around this star in August 2023, and this is the one dataset here whose depth comes from measured velocities rather than from a shape fitted to a picture. Measured from the star itself, found in the same observation’s continuum, the molecule absorbs in front of the star and glows in a lopsided ring 2.4 stellar radii out, heaviest to the east-south-east. Every channel of the line cube is placed along the line of sight on a spherical outflow at 22.0 kilometres a second, the speed of the fastest gas it absorbs in front of the star, the usual first reading of an expanding stellar envelope. The same absorption shows gas falling back as well, and that gas is placed as if it were flowing out. Silicon monoxide is what silicate dust condenses from, so this is the material of the other datasets caught before it became dust. The colours are a false-colour ramp for line brightness.",
+      "description": "ALMA saw silicon monoxide around this star in August 2023, and this is the one dataset here whose depth comes from measured velocities rather than from a shape fitted to a picture. Measured from the star itself, found in the same observation’s continuum, the molecule absorbs in front of the star and glows in a lopsided ring 2.4 stellar radii out, heaviest to the east-south-east. Every channel of the line cube is placed along the line of sight on a spherical outflow at 22.0 kilometres a second, the speed of the fastest gas it absorbs in front of the star, the usual first reading of an expanding stellar envelope. The same absorption shows gas falling back as well, and that gas is placed as if it were flowing out. Silicon monoxide is what silicate dust condenses from, so this is the material of the other datasets caught before it became dust. The colors are a false-color ramp for line brightness.",
       "summary": "Silicon monoxide around the star, placed in depth by its own measured velocities.",
       "detail": "87 × 87 px at 6.90 mas, 47 channels",
       "facts": [

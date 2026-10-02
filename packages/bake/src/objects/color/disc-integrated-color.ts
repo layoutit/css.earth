@@ -1,4 +1,4 @@
-// A uniform surface colour from published whole-disc photometry: colour indices relative to the Sun give reflectance at
+// A uniform surface color from published whole-disc photometry: color indices relative to the Sun give reflectance at
 // each filter's effective wavelength, a piecewise-linear spectrum joins them, and the CIE 1931 observer under D65 turns
 // it into linear sRGB scaled so the V reflectance is the published geometric albedo. No map, terrain or variation is implied.
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -25,8 +25,8 @@ const measured = (value: unknown, label: string) => requireFiniteNumber(requireR
 
 /** Validate the cited record down to the numbers the method consumes. */
 export function parseDiscColorRecord(value: unknown): DiscColorRecord {
-  const input = requireRecord(value, 'disc colour record');
-  if (input.schema !== 'cssearth-disc-integrated-color@1') throw new TypeError('The disc colour record must use cssearth-disc-integrated-color@1.');
+  const input = requireRecord(value, 'disc color record');
+  if (input.schema !== 'cssearth-disc-integrated-color@1') throw new TypeError('The disc color record must use cssearth-disc-integrated-color@1.');
   const indices = (record: unknown, label: string) => {
     const values = requireRecord(requireRecord(record, label).indices, `${label}.indices`);
     return Object.fromEntries(INDICES.map(name => [name, measured(values[name], `${label}.indices.${name}`)])) as Record<typeof INDICES[number], number>;
@@ -55,7 +55,7 @@ export function parseCieTable(text: string, columns: number): Map<number, readon
   return rows;
 }
 
-/** Relative reflectance (V = 1) at each effective wavelength, from object minus solar colour indices. */
+/** Relative reflectance (V = 1) at each effective wavelength, from object minus solar color indices. */
 export function filterReflectance(record: DiscColorRecord): readonly (readonly [number, number])[] {
   const relative = (name: typeof INDICES[number]) => record.colorIndices[name] - record.solarColorIndices[name];
   const { B, V, R, I } = record.effectiveWavelengthsNm;
@@ -93,11 +93,11 @@ export function discIntegratedColor(record: DiscColorRecord, colorMatching: Map<
   // Normalize to the illuminant's luminance, then scale so V-band reflectance equals the geometric albedo.
   const scaled = xyz.map(value => value / white[1]! * record.geometricAlbedo);
   const linear = XYZ_TO_LINEAR_SRGB.map(row => row[0] * scaled[0]! + row[1] * scaled[1]! + row[2] * scaled[2]!) as [number, number, number];
-  if (linear.some(value => value < 0 || value > 1)) throw new TypeError(`The disc colour falls outside the sRGB gamut: ${linear.join(', ')}.`);
+  if (linear.some(value => value < 0 || value > 1)) throw new TypeError(`The disc color falls outside the sRGB gamut: ${linear.join(', ')}.`);
   return { reflectance: points, linear, srgb: linear.map(value => Math.round(255 * linearToSrgb(value))) as [number, number, number] };
 }
 
-/** `readColorMatching` returns the CIE 1931 2° colour-matching table; the host reads it from the shared reference bank. */
+/** `readColorMatching` returns the CIE 1931 2° color-matching table; the host reads it from the shared reference bank. */
 export async function loadDiscIntegratedColor(read: (path: string) => Promise<Buffer>, science: Record<string, unknown>, sourcePath: string,
   readColorMatching: () => Promise<Buffer>) {
   const record = parseDiscColorRecord(JSON.parse((await read(sourcePath)).toString('utf8')));

@@ -51,7 +51,7 @@ catch {
   source = Buffer.from(await response.arrayBuffer());
   await writeFile(sourcePath, source);
 }
-const native = await sharp(source).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+const native = await sharp(source).removeAlpha().toColorspace('srgb').raw().toBuffer({ resolveWithObject: true });
 if (native.info.width !== recipe.source.width || native.info.height !== recipe.source.height || native.info.channels !== 3)
   throw new Error('Source dimensions differ from recipe.');
 const removed = recipe.nativeRemoval ? await nativeStarless(source, [recipe.source.width, recipe.source.height], recipe.nativeRemoval) : undefined;

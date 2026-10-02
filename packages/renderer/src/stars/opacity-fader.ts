@@ -49,7 +49,7 @@ export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityC
     dirty.clear();
     for (const entry of publishing) {
       const exact = entry.visible ? valueAt(entry.alpha, time) * valueAt(entry.multiplier, time) * valueAt(entry.suppression, time) : 0;
-      // An opacity that rounds to 0 in 8-bit colour draws nothing: it is written once as 0, not again for every faint value
+      // An opacity that rounds to 0 in 8-bit color draws nothing: it is written once as 0, not again for every faint value
       // (583 of 835 marker opacity writes in one stress run were below 1/255, 2026-09-30).
       const alpha = exact * 255 < .5 ? 0 : exact;
       if (entry.written !== alpha) {

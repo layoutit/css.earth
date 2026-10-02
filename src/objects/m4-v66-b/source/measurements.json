@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "M4 V66: P 8.11130346 d and primary-eclipse time HJD 2449900.41965 (Section II, Equations (1)); i 89.444 degrees (Table 11 (Photometric parameters), columns V65 | V66 | V69); e 0.0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/1301.2946): P 8.11130346 d",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of M4 V66 B is measured; only its size, mass and orbit are."
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of M4 V66 B is measured; only its size, mass and orbit are."
   },
   "effectiveTemperatureK": 5943,
   "effectiveTemperatureSource": "Secondary log Teff 3.774 +/- 0.008, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K): 5943 K (https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K)",

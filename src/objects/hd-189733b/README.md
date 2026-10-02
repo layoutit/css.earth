@@ -21,7 +21,7 @@ HD 189733b is a hot Jupiter that orbits the K dwarf [HD 189733 A](../hd-189733/R
 
 ## Processing
 
-**Map.** [npy-pickle.ts](../../../packages/bake/src/objects/raster/numpy/npy-pickle.ts) reads the deposit in place. It has no grid arrays, so the recipe states ThERESA's layout: south to north and west to east from −180°, values at cell centres. [npy-dictionary-map.ts](../../../packages/bake/src/objects/raster/numpy/npy-dictionary-map.ts) samples it bilinearly onto a 950 to 1,350 K plasma palette, false colour, on an emissive body.
+**Map.** [npy-pickle.ts](../../../packages/bake/src/objects/raster/numpy/npy-pickle.ts) reads the deposit in place. It has no grid arrays, so the recipe states ThERESA's layout: south to north and west to east from −180°, values at cell centres. [npy-dictionary-map.ts](../../../packages/bake/src/objects/raster/numpy/npy-dictionary-map.ts) samples it bilinearly onto a 950 to 1,350 K plasma palette, false color, on an emissive body.
 
 **Only observed longitudes.** ThERESA shows only cells within 90° of a sub-observer longitude seen during the observations ([`utils.vislon`](https://github.com/rychallener/ThERESA/blob/74a8fec0462f4583e336bbc44e2f2441b263a49f/theresa/lib/utils.py)). Preparation applies the same rule to the saved observation times: the range is −109.9° to +179.6°, so the four columns from −180° to −120° are missing data.
 
@@ -49,6 +49,6 @@ HD 189733b is a hot Jupiter that orbits the K dwarf [HD 189733 A](../hd-189733/R
 - The uncertainty is conditional on the fitted model. It excludes timing and model-choice uncertainty, and neighbouring cells are correlated.
 - Other maps of this planet (the SPARTA map `output_S.npy`, earlier Spitzer maps and this project's raw-exposure map) are not shown; see the [investigation ledger](investigations.json).
 - Tidal locking, a sky position angle of 0 and a spherical planet are assumptions.
-- The Illustration dataset is art. Nobody has resolved this planet's disc; its colours, clouds and terrain are the artist's, and its longitudes are arbitrary.
+- The Illustration dataset is art. Nobody has resolved this planet's disc; its colors, clouds and terrain are the artist's, and its longitudes are arbitrary.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

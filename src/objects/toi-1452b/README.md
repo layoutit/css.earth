@@ -8,7 +8,7 @@ It is the only planet known around TOI-1452. Its orbit and size follow Cadieux e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 11.06199374459 d Cadieux et al. 2022 (2022AJ....164...96C), via the NASA Exoplanet Archive ps table (pl_refname CADIEUX_ET_AL__2022): a/R* derived from its semi-major axis 0.061 au and stellar radius 0.275 solar radii; Cadieux et al. 2022 (2022AJ....164...96C), via the NASA Exoplanet Archive ps table (pl_refname CADIEUX_ET_AL__2022): inclination 89.77 degrees Cadieux et al. 2022 (2022AJ....164...96C), via the NASA Exoplanet Archive ps table (pl_refname CADIEUX_ET_AL__2022): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459731.359311 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1452's measured colour (#ffcb82, the colour dataset of toi-1452 (src/objects/toi-1452/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1452's measured color (#ffcb82, the color dataset of toi-1452 (src/objects/toi-1452/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1452's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (84, 85, 86), folded onto its orbit. Upper limits and rows without an error are left out.
 

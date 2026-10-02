@@ -8,7 +8,7 @@ It is the only planet known around WASP-157. Its orbit and size follow Livingsto
 
 **Orbit.** Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 3.95161588 d Livingston et al. 2018 (2018AJ....156..277L), via the NASA Exoplanet Archive ps table (pl_refname LIVINGSTON_ET_AL__2018): a/R* 10.49; Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): inclination 84.93 degrees Mo&#x10D;nik et al. 2016 (2016PASP..128l4403M), via the NASA Exoplanet Archive ps table (pl_refname MO__X10D_NIK_ET_AL__2016): e 0 Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2457846.594001 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by wasp-157's measured colour (#fff0ea, the colour dataset of wasp-157 (src/objects/wasp-157/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by wasp-157's measured color (#fff0ea, the color dataset of wasp-157 (src/objects/wasp-157/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of WASP-157's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
 

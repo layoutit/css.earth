@@ -23,7 +23,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   if (!billboard || typeof billboard.schema !== "string" || billboard.presentations.length !== assets.lighting.frameCount) {
     throw new Error("Object has no prepared billboard lighting atlas.");
   }
-  for (const dataset of datasets.controls) if (!/^#[0-9a-f]{6}$/u.test(dataset.billboardColor ?? "")) throw new Error(`Object dataset ${dataset.id} has no prepared billboard colour.`);
+  for (const dataset of datasets.controls) if (!/^#[0-9a-f]{6}$/u.test(dataset.billboardColor ?? "")) throw new Error(`Object dataset ${dataset.id} has no prepared billboard color.`);
   // A body without a cutaway (the recipe's `cutaway`, parked on Mercury) has no interior assets, nodes or pose.
   const interiorAssets = assets.interior, interiorPlan = interiorAssets ? plan.interior : null;
   const interiorKeys = interiorPlan ? ["outerSurface", "outerPoles", "outerSurfaceUnlit", "outerPolesUnlit", "core", "corePoles", "section"] : [];
@@ -76,7 +76,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
     for (const leaf of interiorPlan.sectionLeaves) b.append(sections, b.leaf(leaf));
   }
   // The overlay root carries the billboard (a flat disc of the surface's mean
-  // colour fitted to the same silhouette as the overlay above it, which
+  // color fitted to the same silhouette as the overlay above it, which
   // lights it) and the terminator overlay.
   const materialRoot = b.element("div", `${ns}-material-root object-render-root`);
   materialRoot.style.setProperty(`--${ns}-billboard-color`, normal.billboardColor);

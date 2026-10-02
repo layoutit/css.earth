@@ -1,8 +1,8 @@
-// The billboard colour of each dataset control: plain imports, so the full preparer and the observation refresh share one computation.
+// The billboard color of each dataset control: plain imports, so the full preparer and the observation refresh share one computation.
 import { access } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 
-/** The mean colour of each dataset control's surface image, the colour a sub-pixel body shows; an interior view shows its default dataset. */
+/** The mean color of each dataset control's surface image, the color a sub-pixel body shows; an interior view shows its default dataset. */
 export async function datasetBillboardColors(
   controls: readonly Record<string, unknown>[],
   defaultDataset: string,

@@ -13,16 +13,16 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "The colour of Luhman 16 A",
+      "id": "color",
+      "subject": "The color of Luhman 16 A",
       "status": "included",
-      "finding": "Faherty et al. (2014) published resolved MagE optical spectra of A and B, archived in the SIMPLE database; the colour dataset is taken from A's. A blackbody colour would have been wrong: the spectrum is dominated by sodium and potassium absorption.",
+      "finding": "Faherty et al. (2014) published resolved MagE optical spectra of A and B, archived in the SIMPLE database; the color dataset is taken from A's. A blackbody color would have been wrong: the spectrum is dominated by sodium and potassium absorption.",
       "evidence": [
         "https://arxiv.org/abs/1406.1518"
       ]
     },
     {
-      "id": "colour-hue-uncertainty",
+      "id": "color-hue-uncertainty",
       "subject": "The hue of Luhman 16 A below 650 nm",
       "status": "unresolved",
       "finding": "Below 650 nm the dwarf is so faint that single pixels of the MagE spectrum have a signal-to-noise ratio near 1. Moving the whole spectrum one standard error down or up gives #ff005e to #ff52c6, from red-pink to lilac.",

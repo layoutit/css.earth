@@ -1,6 +1,6 @@
 /**
  * Place a Voyager ISS narrow-angle GEOMED frame on a spherical body and write it as a per-frame equirectangular GeoTIFF,
- * the same product shape as USGS's controlled observations, so the existing observed-colour dataset consumes it unchanged.
+ * the same product shape as USGS's controlled observations, so the existing observed-color dataset consumes it unchanged.
  *
  *   recorded (SEDR) pointing → limb fit on the sunlit side → corrected camera → datum shift → equirectangular I/F
  *
@@ -142,7 +142,7 @@ export interface EquirectangularTile { data: Float32Array; width: number; height
 
 /**
  * Crop a whole-globe grid to its footprint. A footprint across 0 degrees longitude becomes two tiles, one on each side,
- * because the colour reader places a tile by a single easting range and cannot wrap it.
+ * because the color reader places a tile by a single easting range and cannot wrap it.
  */
 export function equirectangularTiles(full: Float32Array, columns: number, rows: number): EquirectangularTile[] {
   const used = new Uint8Array(columns);
@@ -167,7 +167,7 @@ export function equirectangularTiles(full: Float32Array, columns: number, rows: 
   });
 }
 
-/** An equirectangular float32 GeoTIFF with the filter named as its band description, as the observed-colour reader expects. */
+/** An equirectangular float32 GeoTIFF with the filter named as its band description, as the observed-color reader expects. */
 export function equirectangularGeoTiff(tile: EquirectangularTile, { radiusMeters, filter, wavelengthMicrometers, cellDegrees }:
   { radiusMeters: number; filter: string; wavelengthMicrometers: number; cellDegrees: number }) {
   const metresPerDegree = radiusMeters * Math.PI / 180, noData = -9999;

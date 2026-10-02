@@ -1,6 +1,6 @@
 # Metis
 
-Metis, a small inner moon of Jupiter, is shown as Galileo photographs projected onto a smooth reference ellipsoid. The soft appearance is the information in the original photographs; no crater detail or colour is added.
+Metis, a small inner moon of Jupiter, is shown as Galileo photographs projected onto a smooth reference ellipsoid. The soft appearance is the information in the original photographs; no crater detail or color is added.
 
 ## Sources
 

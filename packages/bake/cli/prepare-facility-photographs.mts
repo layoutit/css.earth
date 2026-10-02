@@ -73,7 +73,7 @@ async function photograph(entry: Pinned, source: Buffer) {
     preparation: `Centre-cover to ${WIDTH}x${HEIGHT} without upscaling${entry.flipX ? ', mirror horizontally' : ''}, flatten onto sidebar ${BACKGROUND}, encode WebP quality ${LOSSY_WEBP.quality} (lossy lane).` };
 }
 
-/** Keep the published angle, colours and transparency: clear the dark matte,
+/** Keep the published angle, colors and transparency: clear the dark matte,
  * trim the transparent margin, fit the box without upscaling, centre it, and
  * record the subject bounds the sidebar crops to. */
 async function artwork(entry: Pinned, source: Buffer) {

@@ -26,6 +26,6 @@ Run of 2026-09-23 (this version):
 
 - Twelve years of positions on a 2,800-year orbit: the orbit drawn is one of many that fit equally well.
 - The measured two-hour spin is not drawn, because its axis direction on the sky is unknown.
-- The radius and mass are model values; no colour is measured in bands comparable with HR 8799's.
+- The radius and mass are model values; no color is measured in bands comparable with HR 8799's.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

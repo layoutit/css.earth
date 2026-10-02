@@ -3,7 +3,7 @@
 The nucleus of Halley's comet, as a historical shape model with two views: **Historical model**, a neutral gray
 shape, and **Giotto + Vega**, which projects the Giotto close-up and two Vega 2 photographs onto it. About 28% of the
 nucleus model has accepted photographic coverage; uncertain and missing areas remain grid. Shadows is off by default.
-The gray (#808080 sRGB) is a display convention, not a measured colour or albedo. The package has no coma, tail or
+The gray (#808080 sRGB) is a display convention, not a measured color or albedo. The package has no coma, tail or
 outgassing.
 
 ## Sources
@@ -84,7 +84,7 @@ node site/build/prepare/prepare-authored.ts comet-1p --write
 - This is a highly uncertain historical inverse model. The label estimates about 500–1,000 m absolute and around
   100 m relative uncertainty, and warns that facets and depressions may be exaggerated.
 - The photographs keep their original lighting and dust. Mixing visible and near-infrared images does not make a
-  measured albedo or true-colour map.
+  measured albedo or true-color map.
 - Giotto + Vega is deferred for image-to-shape feature registration. The silhouette check supports an approximate
   projection only; Historical model remains the supported view.
 - Registration is approximate: rotation parameters are rounded, the Vega position is extrapolated for 148 seconds, and

@@ -191,11 +191,11 @@ than the 8-bit channels. Lossless WebP pays for the noise between steps, so this
 trims those files: baked on 2026-09-22 against 1024 steps, Moon heat anomalies
 9.35 → 7.52 MB, rock abundance 9.02 → 7.87 MB, Titan interpolated 2.59 → 1.19 MB,
 and pixelmatch finds no differing pixel ([Moon heat anomalies](images/moon-heat-anomalies-pixelmatch.png)).
-A lossy surface keeps 1024 steps. Its size does not depend on colour count, and a
+A lossy surface keeps 1024 steps. Its size does not depend on color count, and a
 coarser ramp's flat one-level steps raised the quality-88 encoder's own error on
 Miranda's elevation from 41 to 66 at the worst texel although the raw pixels
 differed by at most 2 ([Miranda worst crop](images/miranda-elevation-worst-crop.png)).
-Relief shading multiplies the looked-up colour afterwards.
+Relief shading multiplies the looked-up color afterwards.
 
 Validity comes from the selected product's mask, alpha or no-data rule. Numeric
 bilinear sampling rejects a footprint containing an invalid neighbor. Categorical
@@ -568,7 +568,7 @@ The per-body marker tiles the pages are packed from stay lossless.
 
 Facility thumbnails (spacecraft artwork and telescope photographs, 592×296) go
 through the lane too; the artwork keeps alpha quality 40. Measured on 2026-09-25
-against lossless encodes, artwork shown on the card colour:
+against lossless encodes, artwork shown on the card color:
 
 | Images | Quality 90 before | Lane | Flagged before → lane |
 |---|---|---|---|
@@ -636,7 +636,7 @@ at its viewing angle. The planets' lighting overlays put that back with the
 same published law, so the limb in the app is the limb the instrument saw.
 
 - **The law.** Each planet keeps its model in `source/photometry/`, one
-  [model record](../packages/bake/src/photometry/README.md#model-records) per colour channel.
+  [model record](../packages/bake/src/photometry/README.md#model-records) per color channel.
   [limb.mts](../packages/bake/src/photometry/limb.ts) evaluates it relative to the flood-lit
   disc centre, where incidence, emission and phase are all zero. The centre of
   the default view shows the map as published; every other pixel follows the
@@ -678,24 +678,24 @@ same published law, so the limb in the app is the limb the instrument saw.
   ![The Moon before and after](images/planet-limbs/moon-before-after.webp)
   ![Pluto before and after](images/planet-limbs/pluto-before-after.webp)
   ![Charon before and after](images/planet-limbs/charon-before-after.webp)
-- **One overlay per pixel.** A CSS overlay has one colour and one alpha, and
-  blend modes are not used. The overlay is exact for the map's mean colour,
+- **One overlay per pixel.** A CSS overlay has one color and one alpha, and
+  blend modes are not used. The overlay is exact for the map's mean color,
   measured at bake, and for every pixel in the channel that sets its alpha. A
-  pixel far from the mean colour is off by (mean − pixel) × (spread of the
+  pixel far from the mean color is off by (mean − pixel) × (spread of the
   channel factors), which is largest near the limb.
-- **Colour tie.** A colour map whose archive scaling is arbitrary (Saturn's
-  OPAL TIF) names a whole-disc colour computed once from a published spectrum
-  ([whole-disc-colour.ts](../packages/bake/src/objects/raster/whole-disc-colour.ts)). The map's
+- **Color tie.** A color map whose archive scaling is arbitrary (Saturn's
+  OPAL TIF) names a whole-disc color computed once from a published spectrum
+  ([whole-disc-color.ts](../packages/bake/src/objects/raster/whole-disc-color.ts)). The map's
   green and blue are scaled by one gain each so that, once the limb law is put
-  back, the flood-lit disc integrates to that colour: the target ratios are the
-  colour's divided by each channel's disc mean of the law, 2/(2k+1) for Minnaert.
+  back, the flood-lit disc integrates to that color: the target ratios are the
+  color's divided by each channel's disc mean of the law, 2/(2k+1) for Minnaert.
   The tie keeps red, so the map then gets back its untied mean luminance with
   one factor on all three channels, and texels whose brightest channel passes
   0.8 are compressed by a soft shoulder instead of clipping, ratios kept.
   The tie is the Uranian moons' band-ratio tie; the
   [Saturn README](../src/objects/saturn/README.md) reports its gains and factor.
 
-  ![Saturn in the app: the live site, main with the F395N blue limb, and the colour tie; swatches compare centre, limb and whole disc with Karkoschka's colour](images/planet-limbs/saturn-true-colour.webp)
+  ![Saturn in the app: the live site, main with the F395N blue limb, and the color tie; swatches compare centre, limb and whole disc with Karkoschka's color](images/planet-limbs/saturn-true-color.webp)
 - **Halo.** Venus and Mars draw a halo from a NASA [PSG](https://psg.gsfc.nasa.gov/)
   limb profile with the Sun behind the viewer, lit where the tangent point faces
   the Sun. [acquire-psg-limb-table.mts](../packages/bake/cli/acquire-psg-limb-table.mts)
@@ -791,7 +791,7 @@ The 2026-09-26 preparation covers all 722 body scenes:
 its receipt matched the runtime, default dataset, camera rotation and both
 inventory hashes. Quaoar's rings required a distance of 16 radii; the other
 721 captures used eight. The [representative sheet](images/arrival-billboards/overview.webp)
-shows the existing datasets, including their unobserved regions and modeled colours.
+shows the existing datasets, including their unobserved regions and modeled colors.
 
 The [Earth-to-Lutetia sequence](images/arrival-billboards/earth-to-lutetia.webp)
 contains eight of 50 native iPad frames from the performance build at that
@@ -821,8 +821,8 @@ node packages/bake/cli/refresh-surface-observations.mts lutetia osiris
 Update the recipe and declare its source inputs first. This command checks the retained atlas's
 layout and transform matrices, prepares only the selected datasets, and updates
 their photographs, thumbnails, minimaps, source indices and delivery pins.
-It records each refreshed surface's billboard colour and the dataset catalogue's
-control colour with the same steps as a full preparation.
+It records each refreshed surface's billboard color and the dataset catalogue's
+control color with the same steps as a full preparation.
 Geometry and other datasets remain retained. Provenance uses the
 existing `recovered` basis because this is a partial refresh. The run's timings,
 source recipe hash and changed asset list are kept in ignored

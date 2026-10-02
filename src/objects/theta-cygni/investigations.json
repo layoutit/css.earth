@@ -22,10 +22,10 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
-      "finding": "Gaia DR3 XP spectrum, source 2135110401277424384, cross-checked against Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Theta Cygni is HR 7469. (10 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #e5e8ff. Routes tried in order: stis-ngsl: HD 185395 is not in the library; kiehling: HR 7469 is not among its 60 stars; kharitonov: found, not needed after the colour and its cross-check; burnashev: BS 7469 is not in part2; gaia-xp: used.",
+      "finding": "Gaia DR3 XP spectrum, source 2135110401277424384, cross-checked against Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Theta Cygni is HR 7469. (10 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #e5e8ff. Routes tried in order: stis-ngsl: HD 185395 is not in the library; kiehling: HR 7469 is not among its 60 stars; kharitonov: found, not needed after the color and its cross-check; burnashev: BS 7469 is not in part2; gaia-xp: used.",
       "evidence": [
         "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2135110401277424384&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
         "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"

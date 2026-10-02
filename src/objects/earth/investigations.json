@@ -6,7 +6,7 @@
       "id": "blue-marble-july-surface",
       "subject": "NASA Blue Marble Next Generation, July 2004",
       "status": "included",
-      "finding": "Visible colour uses the pinned 21,600 by 10,800 cloud-free July JPEG, bilinearly sampled at each page or polar footprint with a display-only midtone lift of round(255*(v/255)^(1/1.25)) that leaves black and white endpoints unchanged; the README calls this a presentation adjustment, not radiometric calibration or recovered albedo.",
+      "finding": "Visible color uses the pinned 21,600 by 10,800 cloud-free July JPEG, bilinearly sampled at each page or polar footprint with a display-only midtone lift of round(255*(v/255)^(1/1.25)) that leaves black and white endpoints unchanged; the README calls this a presentation adjustment, not radiometric calibration or recovered albedo.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/source/manifest.json"
       ]
@@ -15,7 +15,7 @@
       "id": "blue-marble-july-bathymetry-ocean",
       "subject": "NASA Blue Marble topography and bathymetry edition, July 2004, for deep ocean only",
       "status": "included",
-      "finding": "Deep ocean in the plain July edition is not an observation: Stoeckli et al. (2005) section 2.4 says those pixels are replaced by an arbitrary ocean reflectance, and the pinned JPEG carries it as the exact value (2, 5, 20), with standard deviation 0.00 over three 256 by 256 deep tiles and only 1,476 of 134,955,917 fully surrounded pixels differing at all, never by more than two code values. The visible colour and cloud views now take the ocean sample from the bathymetry edition of the same month and the same 21,600 by 10,800 grid wherever every channel of the plain value is within two code values of that constant, which selects 64.4396% of the sphere by area against a 70.8% water share, so shallow and coastal water stays observed. The replacement weight rises from nothing at the edge of that region to full over 40 source pixels; at that width no output pixel outside the selection changes and the selection edge moves by at most one code value. Only the ocean is taken; the edition's relief-shaded land is not used.",
+      "finding": "Deep ocean in the plain July edition is not an observation: Stoeckli et al. (2005) section 2.4 says those pixels are replaced by an arbitrary ocean reflectance, and the pinned JPEG carries it as the exact value (2, 5, 20), with standard deviation 0.00 over three 256 by 256 deep tiles and only 1,476 of 134,955,917 fully surrounded pixels differing at all, never by more than two code values. The visible color and cloud views now take the ocean sample from the bathymetry edition of the same month and the same 21,600 by 10,800 grid wherever every channel of the plain value is within two code values of that constant, which selects 64.4396% of the sphere by area against a 70.8% water share, so shallow and coastal water stays observed. The replacement weight rises from nothing at the edge of that region to full over 40 source pixels; at that width no output pixel outside the selection changes and the selection edge moves by at most one code value. Only the ocean is taken; the edition's relief-shaded land is not used.",
       "evidence": [
         "https://assets.science.nasa.gov/content/dam/science/esd/eo/content-feature/bluemarble/bmng.pdf",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/source/preparation/paged-ellipsoid.json",
@@ -87,17 +87,17 @@
       "id": "blue-marble-relief-base",
       "subject": "Previous Blue Marble base plus relief as the elevation view",
       "status": "excluded",
-      "finding": "The previous Blue Marble base with relief shading is excluded because its land colours do not encode elevation. This still holds after the bathymetry edition was included for deep ocean: only its ocean is read, never its relief-shaded land.",
-      "revisitWhen": "A colour base is adopted whose values encode elevation directly.",
+      "finding": "The previous Blue Marble base with relief shading is excluded because its land colors do not encode elevation. This still holds after the bathymetry edition was included for deep ocean: only its ocean is read, never its relief-shaded land.",
+      "revisitWhen": "A color base is adopted whose values encode elevation directly.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L162"
       ]
     },
     {
-      "id": "black-marble-2016-colour",
-      "subject": "NASA Black Marble 2016 colour map",
+      "id": "black-marble-2016-color",
+      "subject": "NASA Black Marble 2016 color map",
       "status": "included",
-      "finding": "Night lights use NASA's 2016 colour map at 3 km, 13,500 by 6,750 pixels: Suomi NPP VIIRS night lights composited from the best cloud-free nights of each month over each land mass, over NASA MODIS Blue Marble land, ice and ocean added for context. The image is resampled to the 8,192-column surface grid without colour changes.",
+      "finding": "Night lights use NASA's 2016 color map at 3 km, 13,500 by 6,750 pixels: Suomi NPP VIIRS night lights composited from the best cloud-free nights of each month over each land mass, over NASA MODIS Blue Marble land, ice and ocean added for context. The image is resampled to the 8,192-column surface grid without color changes.",
       "evidence": [
         "https://science.nasa.gov/earth/earth-observatory/earth-at-night/maps",
         "https://viirsland.gsfc.nasa.gov/Products/NASA/BlackMarble.html"
@@ -107,8 +107,8 @@
       "id": "viirs-night-lights-2025",
       "subject": "NASA VJ146A4.002 NOAA-20 VIIRS annual radiance, 2025",
       "status": "excluded",
-      "finding": "The 2025 annual radiance, read from Jurij Stare's public Float32 mirror, area-averaged into the 8,192-column display grid and coloured on a warm logarithmic scale, rendered near-black on the globe: 87.5 percent of valid display cells are unlit and 90 percent of lit cells fall below 1.1 nW/cm2/sr. Lowering the scale cap from 100 to 21 nW/cm2/sr, the area-weighted 99.9th percentile, raised the default view's mean luminance only from 9.3 to 10.7 of 255 in same-build captures on 30 September 2026, so the night-lights view uses NASA's 2016 colour map instead.",
-      "revisitWhen": "NASA publishes a colour night-lights map newer than 2016.",
+      "finding": "The 2025 annual radiance, read from Jurij Stare's public Float32 mirror, area-averaged into the 8,192-column display grid and colored on a warm logarithmic scale, rendered near-black on the globe: 87.5 percent of valid display cells are unlit and 90 percent of lit cells fall below 1.1 nW/cm2/sr. Lowering the scale cap from 100 to 21 nW/cm2/sr, the area-weighted 99.9th percentile, raised the default view's mean luminance only from 9.3 to 10.7 of 255 in same-build captures on 30 September 2026, so the night-lights view uses NASA's 2016 color map instead.",
+      "revisitWhen": "NASA publishes a color night-lights map newer than 2016.",
       "evidence": [
         "https://doi.org/10.5067/VIIRS/VJ146A4.002"
       ]
@@ -117,7 +117,7 @@
       "id": "night-light-alternative-sources",
       "subject": "Other 2025 night-light sources",
       "status": "excluded",
-      "finding": "The source survey of 2026-09-09 found that direct NASA 2025 annual granules require Earthdata authentication, NASA GIBS annual display mosaics still offer only 2012 and 2016, the EOG VNL v2.2 download directory returns HTTP 401, and OpenGeoHub's public 2024 derivative is older and rescales the numeric values; NASA's newest colour night-lights map is therefore still the 2016 one.",
+      "finding": "The source survey of 2026-09-09 found that direct NASA 2025 annual granules require Earthdata authentication, NASA GIBS annual display mosaics still offer only 2012 and 2016, the EOG VNL v2.2 download directory returns HTTP 401, and OpenGeoHub's public 2024 derivative is older and rescales the numeric values; NASA's newest color night-lights map is therefore still the 2016 one.",
       "revisitWhen": "An account-free annual night-lights map newer than 2016 becomes available.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L201"
@@ -127,7 +127,7 @@
       "id": "mur-enso-imagery",
       "subject": "NASA GIBS MUR v4.1 sea-surface temperature anomaly images: the newest analysis and the same weekday one and two weeks before",
       "status": "included",
-      "finding": "The ENSO view steps through the newest daily analysis and the same weekday one and two weeks before it on the 1 km GIBS imagery grid of 40,960 by 20,480 pixels: 3,200 tiles per date that must attest the requested layer and date unless decoded alpha shows no observations, with the pinned NASA colour table supplying 0.1 degree bins and saturation below -3 and at +3 degrees. RGB is not inverted into continuous measurements; transparent land, ice and unavailable observations stay gray. The maps and the dated NOAA advisory are as current as the last refresh, not a live feed.",
+      "finding": "The ENSO view steps through the newest daily analysis and the same weekday one and two weeks before it on the 1 km GIBS imagery grid of 40,960 by 20,480 pixels: 3,200 tiles per date that must attest the requested layer and date unless decoded alpha shows no observations, with the pinned NASA color table supplying 0.1 degree bins and saturation below -3 and at +3 degrees. RGB is not inverted into continuous measurements; transparent land, ice and unavailable observations stay gray. The maps and the dated NOAA advisory are as current as the last refresh, not a live feed.",
       "evidence": [
         "https://doi.org/10.5067/GHGMR-4FJ04"
       ]
@@ -156,7 +156,7 @@
       "id": "google-earth-pro-presentation",
       "subject": "Google Earth Pro presentation operator",
       "status": "included",
-      "finding": "Google Earth Pro supplies only the presentation operator over those Earth facts, a captured Sun-direction uniform, 0.2 camera exposure, exponential tone mapping and luminance-driven opacity, with the checked response file recording shader hashes and test results; no Google pixels or shader bytes are redistributed, and its blue Mars result is deliberately not treated as a body-colour authority.",
+      "finding": "Google Earth Pro supplies only the presentation operator over those Earth facts, a captured Sun-direction uniform, 0.2 camera exposure, exponential tone mapping and luminance-driven opacity, with the checked response file recording shader hashes and test results; no Google pixels or shader bytes are redistributed, and its blue Mars result is deliberately not treated as a body-color authority.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L247",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L254"
@@ -176,7 +176,7 @@
       "id": "glad-m35-tomography",
       "subject": "GLAD-M35 r0.1 (2024) seismic model",
       "status": "included",
-      "finding": "Mantle tomography samples the published NetCDF's vsv field, 289 depths from 10 to 2,890 km, 181 latitudes and 361 longitudes, through a checked 520,307-byte subset that pins the original volume's URL and hash; the colour quantity is 100*(Vsv/horizontalMeanVsv(depth)-1) with area-weighted means, the display reference is not the inversion's STW105, Vsv must not be relabelled as isotropic shear speed, the r0.1 release flattens the 410/660 km boundary topography, and the 1 degree and 10 km sample spacing does not imply features of that size are resolved.",
+      "finding": "Mantle tomography samples the published NetCDF's vsv field, 289 depths from 10 to 2,890 km, 181 latitudes and 361 longitudes, through a checked 520,307-byte subset that pins the original volume's URL and hash; the color quantity is 100*(Vsv/horizontalMeanVsv(depth)-1) with area-weighted means, the display reference is not the inversion's STW105, Vsv must not be relabelled as isotropic shear speed, the r0.1 release flattens the 410/660 km boundary topography, and the 1 degree and 10 km sample spacing does not imply features of that size are resolved.",
       "evidence": [
         "https://doi.org/10.1093/gji/ggae270"
       ]
@@ -195,7 +195,7 @@
       "id": "schematic-interior-layers",
       "subject": "NASA Science schematic interior layers",
       "status": "included",
-      "finding": "The interior record supplies schematic layer geometry based on NASA Science: geometry stays schematic including its uniform 30 km crust, only mantle material receives data colours, source depths outside 10-2,890 km are gray with no extrapolation into the core, and crust, outer core and inner core remain illustrative.",
+      "finding": "The interior record supplies schematic layer geometry based on NASA Science: geometry stays schematic including its uniform 30 km crust, only mantle material receives data colors, source depths outside 10-2,890 km are gray with no extrapolation into the core, and crust, outer core and inner core remain illustrative.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L14",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/earth/README.md#L289",

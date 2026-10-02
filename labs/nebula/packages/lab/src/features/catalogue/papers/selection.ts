@@ -10,7 +10,7 @@ const terms: Record<PaperTopic,RegExp> = {
   Distance:/\b(distances?|parallaxes?|parallax|distance modulus|standard candle|tip of the red giant branch)\b/i,
   'Gas / dust':/\b(dust|extinction|molecular|ioniz\w*|ionis\w*|electron densit\w*|abundances?|gas)\b/i,
   Imaging:/\b(imag\w*|mosaics?|multi[- ]wavelength|infrared|optical|photometr\w*|spectroscop\w*)\b/i,
-  'Stellar populations':/\b(stellar populations?|star formation|star clusters?|initial mass function|colour[- ]magnitude|color[- ]magnitude|isochron\w*)\b/i,
+  'Stellar populations':/\b(stellar populations?|star formation|star clusters?|initial mass function|color[- ]magnitude|color[- ]magnitude|isochron\w*)\b/i,
 };
 export function topicsForPaper(paper: Paper) {
   const content = `${paper.title} ${paper.abstract ?? ''}`;

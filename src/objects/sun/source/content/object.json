@@ -64,7 +64,7 @@
           "url": "http://jsoc.stanford.edu/ajax/lookdata.html?ds=hmi.Ic_noLimbDark_720s"
         },
         "falseColor": true,
-        "qualification": "NASA SDO/HMI CR2311 continuum mosaic from 28 JSOC frames with limb darkening removed, placed by their recorded geometry, with qualified polar continuation; single-band 617.3 nm intensity shown in SDO's orange colour table",
+        "qualification": "NASA SDO/HMI CR2311 continuum mosaic from 28 JSOC frames with limb darkening removed, placed by their recorded geometry, with qualified polar continuation; single-band 617.3 nm intensity shown in SDO's orange color table",
         "legend": {
           "kind": "scale",
           "title": "Continuum intensity",
@@ -113,7 +113,7 @@
           "meta": "× disc centre",
           "sourceUrl": "https://jsoc.stanford.edu/HMI/"
         },
-        "notes": "HMI continuum intensity for Carrington Rotation 2311, 12 May–9 June 2026, with limb darkening removed by JSOC. It combines 28 observation dates. Colours follow SDO's own browse colour table, and the polar continuation is a prepared display adjustment."
+        "notes": "HMI continuum intensity for Carrington Rotation 2311, 12 May–9 June 2026, with limb darkening removed by JSOC. It combines 28 observation dates. Colors follow SDO's own browse color table, and the polar continuation is a prepared display adjustment."
       },
       {
         "id": "magnetic",
@@ -127,7 +127,7 @@
           "url": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html"
         },
         "falseColor": true,
-        "qualification": "False-colour NASA SDO/HMI CR2311 full-surface radial magnetic-field map",
+        "qualification": "False-color NASA SDO/HMI CR2311 full-surface radial magnetic-field map",
         "legend": {
           "kind": "scale",
           "title": "Radial magnetic field",

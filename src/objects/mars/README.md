@@ -30,11 +30,11 @@ The visible mosaic keeps its collective Viking-orbiter credit; the pinned image 
 
 Photographic datasets are resampled with Lanczos3 to 4,096 by 2,048 texels, packed into 16 latitude bands and encoded as WebP. Numeric datasets use nearest sampling and the lossless lane. No exposure or sharpening curve is applied. Each dataset also gets a 1,024 by 512 pole image sampled from the original photographs.
 
-- Elevation colours MOLA heights on a −9,000 to 22,000 m scale.
+- Elevation colors MOLA heights on a −9,000 to 22,000 m scale.
 - Albedo is read from the USGS float32 GeoTIFF and checked against [the raster recipe](source/preparation/raster.json).
 - Thermal inertia is read from the PDS3 grid by the `pds3-grid` reader. Infilled cells are withheld (8.46% of the planet).
 - Dust cover is read from a VICAR file by the `vicar-grid` reader. The fill value 0.85 is withheld.
-- Geology uses the published legend fills in [the colour table](source/geology/sim3292-colors.json).
+- Geology uses the published legend fills in [the color table](source/geology/sim3292-colors.json).
 - GRS maps keep their unsmoothed 5° bins, negative estimates and missing cells. Water equivalent is hydrogen expressed as H₂O, not a map of exposed ice. Thorium is shown in ppm.
 - The magnetic field is evaluated by pyshtools on the 3,393.5 km sphere through the [magnetic recipe](source/preparation/magnetic.json) and [the preparation command](../../../packages/bake/cli/prepare-magnetic-map.mts). It shows radial field, blue inward and red outward.
 - Crust thickness assumes 39 km beneath InSight and a crust density of 2,900 kg/m³. [The converter](../../../packages/bake/cli/prepare-mars-crust.mts) only reverses rows and adds coordinates. This example is not a unique consensus model.
@@ -60,7 +60,7 @@ These datasets draw catalogues over the Viking mosaic, shown grey at 35% brightn
 | Mineral classes | [Ehlmann and Edwards (2014)](https://doi.org/10.1146/annurev-earth-060313-055024), 4,572 in five classes | One cell per site, by class |
 | Chloride deposits | [Osterloo et al. (2010)](https://doi.org/10.1029/2010JE003613), 642 deposits | Cells inside a deposit outline |
 
-A coloured cell holds at least one catalogued feature; no size is drawn. A white cell holds features of more than one class. Unmarked ground is not proof of absence.
+A colored cell holds at least one catalogued feature; no size is drawn. A white cell holds features of more than one class. Unmarked ground is not proof of absence.
 
 ## Evidence
 

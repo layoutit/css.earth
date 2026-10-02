@@ -20,7 +20,7 @@ export interface PhaseCurveEntry {
   readonly record: Readonly<Record<string, unknown>>;
 }
 
-/** The false-colour palette every published-fit map uses (plasma). */
+/** The false-color palette every published-fit map uses (plasma). */
 const PLASMA = ['#0d0887', '#7e03a8', '#cc4778', '#f89540', '#f0f921'];
 
 export function phaseCurveEntry(value: unknown, label: string): PhaseCurveEntry {
@@ -81,7 +81,7 @@ export async function installPhaseCurveDataset(files: PackageFiles, id: string, 
     thumbnail: `${id}-dataset-${entry.dataset}.webp`, surface: `${id}-surface-${entry.dataset}@2x.webp`, poles: `${id}-poles-${entry.dataset}@2x.webp`,
     source: { id: `${id}-${entry.dataset}-phase-curve`, path: '../manifest.json', url: entry.url }, falseColor: true,
     legend: { kind: 'scale', title: 'Brightness temperature', labels, recipe: { palette, labels }, meta: 'K', sourceUrl: entry.url },
-    notes: `Brightness temperature ${band} of ${name} from ${entry.credit}'s published fit to ${entry.observed}. ${method}. The hottest longitude is ${where}.${blank ? ' Longitudes where the fit gives no emission are left blank.' : ''} The false colour runs from ${minimum.toLocaleString('en-US')} to ${maximum.toLocaleString('en-US')} K.${lit ? " With shadows on, the star's light darkens the night half." : ''}` };
+    notes: `Brightness temperature ${band} of ${name} from ${entry.credit}'s published fit to ${entry.observed}. ${method}. The hottest longitude is ${where}.${blank ? ' Longitudes where the fit gives no emission are left blank.' : ''} The false color runs from ${minimum.toLocaleString('en-US')} to ${maximum.toLocaleString('en-US')} K.${lit ? " With shadows on, the star's light darkens the night half." : ''}` };
   content.datasets.controls = [...content.datasets.controls.filter((existing: { id: string }) => existing.id !== entry.dataset), control];
   files.set(`${s}/content/object.json`, json(content));
   const text = read(`${o}/text.json`);

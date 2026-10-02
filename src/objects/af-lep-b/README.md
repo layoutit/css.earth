@@ -26,6 +26,6 @@ Run of 2026-09-23 (this version):
 
 - The posterior stores no likelihoods, so the orbit kept is the sample nearest the GRAVITY positions; it misses the first by 0.3 mas, several times that measurement's error.
 - The radius is a model value, and the paper's own atmosphere fits disagree with it.
-- No colour is measured in bands comparable with HR 8799's, and no spin axis is measured.
+- No color is measured in bands comparable with HR 8799's, and no spin axis is measured.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -8,7 +8,7 @@ It is one of 3 planets known around K2-198. Its orbit and size follow Hedges et 
 
 **Orbit.** Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 7.4500372 d Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive ps table (pl_refname HEDGES_ET_AL__2019): a/R* 14.9; Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive ps table (pl_refname HEDGES_ET_AL__2019): inclination 89.86 degrees No archive row states an eccentricity; the orbit is taken as circular Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2457824.48087 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-198's measured colour (#ffe6d5, the colour dataset of k2-198 (src/objects/k2-198/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by k2-198's measured color (#ffe6d5, the color dataset of k2-198 (src/objects/k2-198/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-198's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (46, 91), folded onto its orbit. Upper limits and rows without an error are left out.
 

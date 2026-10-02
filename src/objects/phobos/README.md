@@ -20,7 +20,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Processing
 
-Preparation simplifies the original mesh to a 1,600-face native triangle presentation; there is no radial remeshing, spherical substitute or invented terrain. The photographic atlas samples the original grid directly ([shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation)). Every one of the 196,608 facet-science rows is registered to its source triangle, and display colours use the nearest source triangle within 250 m.
+Preparation simplifies the original mesh to a 1,600-face native triangle presentation; there is no radial remeshing, spherical substitute or invented terrain. The photographic atlas samples the original grid directly ([shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation)). Every one of the 196,608 facet-science rows is registered to its source triangle, and display colors use the nearest source triangle within 250 m.
 
 For the crater catalogue, `packages/bake/src/objects/acquisition/geology-grid.py` marks every 0.125° cell (24 m) each rim circle crosses, plus the centre cell, in `source/craters/phobos-crater-rims.tif` (220,719 rim cells). Other cells show the Monochrome mosaic in grey at 35% brightness.
 
@@ -39,7 +39,7 @@ We checked the Phobos layers that [NASA Phobos Trek](https://trek.nasa.gov/phobo
 - **HRSC 100 m DEM** ([Willner et al. 2010](https://doi.org/10.1016/j.epsl.2009.07.033)) shows the same quantity as Elevation. HRSC minus SPC height has mean −15 m and RMS 284 m (r = 0.975).
 - **MExLab SRC and Viking DEM** ([Karachevtseva et al. 2014](https://doi.org/10.1016/j.pss.2013.12.015)) is the same quantity, coarser.
 - **Roughness, 1 km baseline** states no formula or unit and follows local relief from an older DEM.
-- **HRSC V/NIR spectral index** exists publicly only as a colour picture, not an index grid.
+- **HRSC V/NIR spectral index** exists publicly only as a color picture, not an index grid.
 
 ## Known problems
 

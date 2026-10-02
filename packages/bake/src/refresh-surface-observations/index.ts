@@ -50,7 +50,7 @@ export async function refreshSurfaceObservations(id: string, datasetIds: readonl
   await mkdir(stage, { recursive: true });
   const rasterConfig = { ...config, raster: { ...config.raster, observations: [], scientific: [], shapeViews: [], observedColors: [], surfaceObservations: selected } };
   const surfaces = await prepareSolidRasters({ config: rasterConfig, sourceDirectory, source, radial, publicDirectory: stage, outputDirectory: stage });
-  // Like the full preparer's material step, record each surface's billboard colour before the radial materials add its shadow surface.
+  // Like the full preparer's material step, record each surface's billboard color before the radial materials add its shadow surface.
   await prepareSolidSurfacePoles({ surfaces, publicDirectory: stage, config: rasterConfig });
   await prepareRadialMaterials({ radial, surfaces, config: { ...rasterConfig, geometry: { ...config.geometry, radialTerrain: { thumbnail: terrain.thumbnail } } }, source, sourceDirectory, publicDirectory: stage, outputDirectory: stage,
     sunDirection: solarGeometry.requireBodyFixedSunDirection(id), snapshotEntries: [] });
@@ -96,7 +96,7 @@ export async function refreshSurfaceObservations(id: string, datasetIds: readonl
   return report;
 }
 
-/** Refresh the refreshed datasets' no-data flags and billboard colours without rebaking any images. Reader text publishes separately with prepare:text. */
+/** Refresh the refreshed datasets' no-data flags and billboard colors without rebaking any images. Reader text publishes separately with prepare:text. */
 export async function refreshObservationControls(id: string, datasetIds: readonly string[], surfaceColors: ReadonlyMap<string, string> = new Map()) {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Invalid object id.');
   const objectDirectory = resolve('src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
@@ -111,7 +111,7 @@ export async function refreshObservationControls(id: string, datasetIds: readonl
     const content = requireRecord(JSON.parse(bytes.toString('utf8')));
     for (const dataset of records(requireRecord(content.datasets).controls)) if (datasetIds.includes(requireString(dataset.id))) noData.set(requireString(dataset.id), dataset.noData === true);
   }
-  // As in the full preparer, only the dataset catalogue carries control colours. Recolour each control whose image was refreshed, including an interior view of a refreshed default dataset; runtime variants take the surface billboard colour.
+  // As in the full preparer, only the dataset catalogue carries control colors. Recolor each control whose image was refreshed, including an interior view of a refreshed default dataset; runtime variants take the surface billboard color.
   const datasets = await json(resolve(outputDirectory, 'datasets.json')), defaultDataset = requireString(datasets.defaultDataset);
   const controlColors = await datasetBillboardColors(records(datasets.controls), defaultDataset, publicDirectory);
   const update = (controls: unknown, colored: boolean) => records(controls).map(control => {

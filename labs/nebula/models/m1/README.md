@@ -88,7 +88,7 @@ assumptions.
 Each dataset weights the ejecta and wind by tracer: Chandra uses the inner wind,
 optical filaments mainly the ejecta. There is no calibrated radio synchrotron
 volume, beaming, time variation, dust absorption or radiative transfer. JWST dust
-colours do not measure mass, opacity or density.
+colors do not measure mass, opacity or density.
 
 The 256-cell grid has about 1.4″ cells and Gaussian sigma 0.5 cell, coarser than
 the seeing. RGB, component strengths and peak optical depth are display

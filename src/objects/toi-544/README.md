@@ -6,7 +6,7 @@ Its radius and temperature follow Osborne et al. 2024. It is also HD 290498. The
 
 **Star.** Placement: Gaia DR3 source 3220926542276901888, parallax 24.440 ± 0.016 mas (40.92 pc). Radius 0.623 +/- 0.012 solar radii from Osborne et al. 2024, the stellar radius of the default parameter set of TOI-544 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52711138O/abstract). Mass 0.631 +/- 0.018 solar masses from Osborne et al. 2024, the stellar mass of the default parameter set of TOI-544 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52711138O/abstract). Temperature 4,169 K from Osborne et al. 2024, the stellar temperature of the default parameter set of TOI-544 b in the NASA Exoplanet Archive. log g 4.65 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 3220926542276901888, through the CIE 1931 2° observer: #ffc49e. Routes tried in order: stis-ngsl: HD 290498 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 3220926542276901888, through the CIE 1931 2° observer: #ffc49e. Routes tried in order: stis-ngsl: HD 290498 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,169 K and log g 4.65 (u1 0.672, u2 0.108): a model, because no fit of this star's limb is used.
 

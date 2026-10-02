@@ -1,7 +1,7 @@
 /** The off-limb plate of a surface-observation dataset: the frame's own light outside the body's silhouette, registered to the disc.
  *
  * The plate is the sky-plane image resampled so the body's disc has the emission plate's body diameter, rotated by the authored
- * angle that carries image-up (celestial north) to its screen direction at the default camera, and coloured through the dataset's
+ * angle that carries image-up (celestial north) to its screen direction at the default camera, and colored through the dataset's
  * palette on the dataset's display stretch. Alpha follows the light: fully opaque at the stretch's low end, fading to transparent as
  * the light falls to the frame's background maximum, so the halo is as faint as the reconstruction says. The part of the plate
  * inside the disc is hidden behind the sphere at runtime. */

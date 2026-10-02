@@ -14,7 +14,7 @@ WASP-121b (IAU name Tylos) is an ultra-hot gas giant 1.7 times Jupiter's size th
 
 **Orbit and rotation.** The orbit is the one the maps were fitted with (Supplementary Table 1): period 1.27492503 days, inclination 87.96°, transit at 2459867.64265 BJD_TDB, circular. a/R* 3.796 follows from the fit's stellar mass and radius and planet mass. The rotation record assumes the planet is tidally locked. The planet is drawn emissive, a sphere of radius ratio 0.122657 (NRS1).
 
-**Catalogue colour.** #fbc95a, the temperature palette at the 2,762 K NRS1 day side of Mikal-Evans et al. (2023).
+**Catalogue color.** #fbc95a, the temperature palette at the 2,762 K NRS1 day side of Mikal-Evans et al. (2023).
 
 ## Evidence
 

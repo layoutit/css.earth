@@ -3,7 +3,7 @@
  * factor relative to the flood-lit disc centre (incidence, emission and phase all zero). The map shows as published at
  * the centre of the default shadowless view, and every other pixel follows the paper's law: the limb, the terminator
  * and, where the source publishes one, the phase curve. Nothing here is authored: no floor, ambient term or terminator
- * ramp. A colour map names one record per channel; a grey map names the same record three times.
+ * ramp. A color map names one record per channel; a grey map names the same record three times.
  */
 import sharp from 'sharp';
 import { resolve } from 'node:path';
@@ -25,7 +25,7 @@ export interface LimbLaw {
 export interface LimbBlock {
   /** Model records per channel, source-relative: `photometry/<id>.json`. */
   readonly models: Channels<string>;
-  /** Source-relative image whose mean observed colour is the overlay's reference; absent, the caller supplies one. */
+  /** Source-relative image whose mean observed color is the overlay's reference; absent, the caller supplies one. */
   readonly reference?: string;
 }
 
@@ -81,7 +81,7 @@ export function limbFactors(law: LimbLaw, incidence: number, emission: number, p
 
 /**
  * Each channel's mean factor over the flood-lit disc, weighted by projected area: what the law does to a uniform map's
- * disc-integrated colour. A measured whole-disc colour includes it; a map with the law divided out does not.
+ * disc-integrated color. A measured whole-disc color includes it; a map with the law divided out does not.
  */
 export function floodDiscMean(law: LimbLaw, steps = 4096): [number, number, number] {
   const sum = [0, 0, 0];
@@ -105,9 +105,9 @@ export const linearToSrgb = (value: number) => 255 * (value <= 0.0031308 ? value
 
 /**
  * The source-over overlay that turns `reference` into reference × factor per channel, in linear light. One alpha serves
- * three channels, so the result is exact for a pixel of the reference colour and, whatever the pixel, for the channel
- * that sets the alpha; other colours differ by (reference − pixel)·(factor − the setting channel's factor). A factor
- * above 1 brightens toward white; a channel at 255 cannot brighten. Returns sRGB 0–255 colour and alpha 0–1.
+ * three channels, so the result is exact for a pixel of the reference color and, whatever the pixel, for the channel
+ * that sets the alpha; other colors differ by (reference − pixel)·(factor − the setting channel's factor). A factor
+ * above 1 brightens toward white; a channel at 255 cannot brighten. Returns sRGB 0–255 color and alpha 0–1.
  */
 export function limbOverlay(factors: readonly number[], reference: Channels<number>): [number, number, number, number] {
   const desired = [0, 1, 2].map(channel => Math.max(0, Math.min(255, linearToSrgb(Math.min(1, srgbToLinear(reference[channel]) * factors[channel])))));
@@ -120,42 +120,42 @@ export function limbOverlay(factors: readonly number[], reference: Channels<numb
   alpha = Math.min(1, alpha);
   // The sRGB round trip leaves ~1e-16 where a factor is exactly 1; that is no overlay.
   if (alpha <= 1e-9) return [0, 0, 0, 0];
-  const colour = desired.map((target, channel) => Math.max(0, Math.min(255, (target - reference[channel] * (1 - alpha)) / alpha)));
-  return [colour[0], colour[1], colour[2], alpha];
+  const color = desired.map((target, channel) => Math.max(0, Math.min(255, (target - reference[channel] * (1 - alpha)) / alpha)));
+  return [color[0], color[1], color[2], alpha];
 }
 
 /**
  * The overlay beyond the body's silhouette. Overlays reach slightly past the planet to cover its mesh edge; there the
- * base is often black space, where any overlay colour would show as a coloured outline. Outside the silhouette the
- * overlay keeps its alpha and loses its colour, so it only darkens, as the black lighting frames always did.
+ * base is often black space, where any overlay color would show as a colored outline. Outside the silhouette the
+ * overlay keeps its alpha and loses its color, so it only darkens, as the black lighting frames always did.
  */
 export const outsideSilhouette = ([, , , alpha]: readonly number[]): [number, number, number, number] => [0, 0, 0, alpha];
 
 /**
- * Mean sRGB colour of an image's observed pixels: opaque, and not the pure black that archives use for missing data.
- * The overlay's one alpha is exact for this colour; the body README reports it.
+ * Mean sRGB color of an image's observed pixels: opaque, and not the pure black that archives use for missing data.
+ * The overlay's one alpha is exact for this color; the body README reports it.
  */
-export async function meanObservedColour(path: string): Promise<[number, number, number]> {
+export async function meanObservedColor(path: string): Promise<[number, number, number]> {
   const { data, info } = await sharp(path).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   const sum = [0, 0, 0]; let count = 0;
   for (let offset = 0; offset < data.length; offset += info.channels) {
     if (data[offset + 3] < 255 || (data[offset] === 0 && data[offset + 1] === 0 && data[offset + 2] === 0)) continue;
     sum[0] += data[offset]; sum[1] += data[offset + 1]; sum[2] += data[offset + 2]; count++;
   }
-  if (!count) throw new Error(`${path} has no observed pixel to take a reference colour from.`);
+  if (!count) throw new Error(`${path} has no observed pixel to take a reference color from.`);
   return [sum[0] / count, sum[1] / count, sum[2] / count].map(value => Math.round(value * 1000) / 1000) as [number, number, number];
 }
 
 export const referenceImagePath = (sourceDirectory: string, block: LimbBlock) => block.reference === undefined ? undefined : resolve(sourceDirectory, block.reference);
 
 /**
- * How much of an overlay's colour to keep at a radius measured in the fitted silhouette's equatorial radius. The frame
+ * How much of an overlay's color to keep at a radius measured in the fitted silhouette's equatorial radius. The frame
  * is fitted to a circle of that radius, but a flattened body's mesh reaches only its polar radius toward the poles, and
  * a faceted mesh falls up to half a percent inside its circle. Beyond the smallest silhouette the mesh can have the
- * overlay may lie over space, so its colour is gone there, faded over the percent of radius just inside; past that
+ * overlay may lie over space, so its color is gone there, faded over the percent of radius just inside; past that
  * point the overlay only darkens.
  */
-export function silhouetteColourWeight(radius: number, polarToEquatorial: number) {
+export function silhouetteColorWeight(radius: number, polarToEquatorial: number) {
   const edge = polarToEquatorial * 0.995, start = edge - 0.01;
   return radius <= start ? 1 : radius >= edge ? 0 : (edge - radius) / (edge - start);
 }
@@ -174,7 +174,7 @@ export function limbSphereFrame(size: number, radiusScale: number, light: readon
     const normal = [nx, ny, Math.sqrt(1 - radial)];
     const { incidence, emission, phase } = scatteringAngles(normal, light, view, floor);
     const [r0, g0, b0, a] = limbOverlay(limbFactors(law, incidence, emission, phase), reference);
-    const keep = silhouetteColourWeight(Math.sqrt(radial) * radiusScale / 0.5, polarToEquatorial), r = r0 * keep, g = g0 * keep, b = b0 * keep;
+    const keep = silhouetteColorWeight(Math.sqrt(radial) * radiusScale / 0.5, polarToEquatorial), r = r0 * keep, g = g0 * keep, b = b0 * keep;
     const offset = (y * size + x) * 4;
     pixels[offset] = Math.round(r); pixels[offset + 1] = Math.round(g); pixels[offset + 2] = Math.round(b); pixels[offset + 3] = Math.round(a * 255);
   }

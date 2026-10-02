@@ -13,6 +13,6 @@
   "surfaceGravitySource": "log g 2.17 from 2011AJ....142..136L, the median of its 2 spectra; the 2 published values span log g 2.14 to 2.19, across which the limb law changes by at most 0.0% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2011AJ....142..136L)",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
   }
 }

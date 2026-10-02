@@ -8,7 +8,7 @@ It is the only planet known around K2-222. Its orbit and size follow Nava et al.
 
 **Orbit.** Palethorpe et al. 2026 (2026MNRAS.548ag520P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2026): P 15.3889274 d Palethorpe et al. 2026 (2026MNRAS.548ag520P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2026): a/R* 24; Palethorpe et al. 2026 (2026MNRAS.548ag520P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2026): inclination 88.91 degrees No archive row states an eccentricity; the orbit is taken as circular Palethorpe et al. 2026 (2026MNRAS.548ag520P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2026): transit mid-time 2459491.9547 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-222's measured colour (#fef7ff, the colour dataset of k2-222 (src/objects/k2-222/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by k2-222's measured color (#fef7ff, the color dataset of k2-222 (src/objects/k2-222/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-222's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (42, 43, 70), folded onto its orbit. Upper limits and rows without an error are left out.
 

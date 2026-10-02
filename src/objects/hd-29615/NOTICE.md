@@ -4,7 +4,7 @@ Magnetic and brightness maps: the Zeeman-Doppler imaging maps of Willamo, T., Le
 
 Radius, mass and temperature: Radius 0.96 solar radii from Vidotto et al. (2014), MNRAS 441, 2361, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729); Mass 0.983 (0.942 to 1.023) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); temperature from Waite et al. (2015), MNRAS 449, 8, as listed by Willamo et al. (2022), Table 2. Spin: Willamo et al. (2022), Table 2, the values of the ZDI inversion.
 
-Colour: Gaia DR3 XP spectrum, source 4891725758804030208, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: Gaia DR3 XP spectrum, source 4891725758804030208, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 

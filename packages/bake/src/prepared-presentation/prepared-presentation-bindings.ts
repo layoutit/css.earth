@@ -32,8 +32,8 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     if (!url.startsWith(`/scenes/${input.id}/`)) throw new Error(`Interior fill asset ${url} is not this object's scene asset.`);
     return resolve(publicDirectory, basename(url));
   } : resolve(root, 'public');
-  // A body that declares how it fills a data gap keeps that convention out of its interior colour: the disc stands in
-  // for the surface behind the leaves, and a map that is mostly gap would otherwise give it a colour nobody sees.
+  // A body that declares how it fills a data gap keeps that convention out of its interior color: the disc stands in
+  // for the surface behind the leaves, and a map that is mostly gap would otherwise give it a color nobody sees.
   const declaredFill: unknown = await readFile(resolve(root, 'src/objects', input.id, 'source/preparation/raster.json'), 'utf8')
     .then(text => (JSON.parse(text) as { missingCoverage?: unknown }).missingCoverage, () => undefined);
   const gapExclusion: SurfaceMeanExclusion | undefined = isMissingCoverageStyle(declaredFill)

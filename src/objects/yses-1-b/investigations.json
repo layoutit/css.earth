@@ -3,10 +3,10 @@
   "objectId": "yses-1-b",
   "entries": [
     {
-      "id": "band-colour",
-      "subject": "A false colour from three measured bands, as the HR 8799 planets have",
+      "id": "band-color",
+      "subject": "A false color from three measured bands, as the HR 8799 planets have",
       "status": "unresolved",
-      "finding": "Hoch et al. (2025) publish JWST spectra of this planet, but no paper gives its flux densities in the NIRCam F410M, F430M and F460M bands that colour HR 8799's planets. Band fluxes computed here from the spectrum would be a derived value, not a published one, so the planet is the shared neutral gray.",
+      "finding": "Hoch et al. (2025) publish JWST spectra of this planet, but no paper gives its flux densities in the NIRCam F410M, F430M and F460M bands that color HR 8799's planets. Band fluxes computed here from the spectrum would be a derived value, not a published one, so the planet is the shared neutral gray.",
       "revisitWhen": "Flux densities in three bands comparable with HR 8799's are published.",
       "evidence": [
         "https://arxiv.org/abs/2507.18861"

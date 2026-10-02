@@ -11,6 +11,6 @@
   "effectiveTemperatureSource": "Evans-Soma et al. (2025), Nature Astronomy, Supplementary Table 9: 6,481 K from their spectroscopic and isochrone analysis (https://arxiv.org/abs/2506.01771)",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json)."
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json)."
   }
 }

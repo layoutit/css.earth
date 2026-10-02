@@ -6,7 +6,7 @@ Its radius and temperature follow Addison et al. 2021. It is also HD 201033, HIP
 
 **Star.** Placement: Gaia DR3 source 2188906825165621120, parallax 6.685 ± 0.019 mas (149.59 pc). Radius 1.92 +/- 0.07 solar radii from Addison et al. 2021, the stellar radius of the default parameter set of TOI-1431 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract). Mass 1.9 +/- 0.1 solar masses from Addison et al. 2021, the stellar mass of the default parameter set of TOI-1431 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract). Temperature 7,690 K from Addison et al. 2021, the stellar temperature of the default parameter set of TOI-1431 b in the NASA Exoplanet Archive. log g 4.15 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 2188906825165621120, through the CIE 1931 2° observer: #d2dbff. Routes tried in order: stis-ngsl: HD 201033 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 2188906825165621120, through the CIE 1931 2° observer: #d2dbff. Routes tried in order: stis-ngsl: HD 201033 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 7,690 K and log g 4.15 (u1 0.283, u2 0.342): a model, because no fit of this star's limb is used.
 

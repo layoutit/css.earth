@@ -8,7 +8,7 @@ It is one of 5 planets known around TOI-5624. Its orbit and size follow Bonfanti
 
 **Orbit.** Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): P 21.489936 d Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): a/R* 37.7; Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): inclination 89.405 degrees Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): e 0 Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): transit mid-time 2459655.6215 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-5624's measured colour (#ffe9dc, the colour dataset of toi-5624 (src/objects/toi-5624/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-5624's measured color (#ffe9dc, the color dataset of toi-5624 (src/objects/toi-5624/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-5624's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (22, 75, 76), folded onto its orbit. Upper limits and rows without an error are left out.
 

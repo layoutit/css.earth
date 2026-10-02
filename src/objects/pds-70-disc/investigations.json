@@ -4,9 +4,9 @@
   "entries": [
     {
       "id": "dataset-dust",
-      "subject": "ALMA band 7 continuum of project 2018.A.00030.S, 27 July 2019: the ALMA pipeline image in the colour map of Benisty et al. (2021) Figure 1",
+      "subject": "ALMA band 7 continuum of project 2018.A.00030.S, 27 July 2019: the ALMA pipeline image in the color map of Benisty et al. (2021) Figure 1",
       "status": "included",
-      "finding": "Benisty et al. (2021) deposited no image: theirs is self-calibrated and combined with 2016 short-baseline data. The archive holds the pipeline's continuum image of the same observations (CASA 5.6.1-8, robust 0.5, beam 32 x 27 mas, 8.7 mas pixels); its noise is 18 microJy per beam in a 2 to 4 arcsec annulus against their 8.8, and the ring peaks at 18.8 times it. The star, at its Gaia DR3 position moved by proper motion to the observing date, lies 8 mas from the image's phase centre. The figure's colour bar, decoded from the PDF in the paper's arXiv source, is matplotlib's inferno map to 0 of 255 in every channel, linear from -24.71 to 389.56 microJy per beam; the dataset shows the image through it.",
+      "finding": "Benisty et al. (2021) deposited no image: theirs is self-calibrated and combined with 2016 short-baseline data. The archive holds the pipeline's continuum image of the same observations (CASA 5.6.1-8, robust 0.5, beam 32 x 27 mas, 8.7 mas pixels); its noise is 18 microJy per beam in a 2 to 4 arcsec annulus against their 8.8, and the ring peaks at 18.8 times it. The star, at its Gaia DR3 position moved by proper motion to the observing date, lies 8 mas from the image's phase centre. The figure's color bar, decoded from the PDF in the paper's arXiv source, is matplotlib's inferno map to 0 of 255 in every channel, linear from -24.71 to 389.56 microJy per beam; the dataset shows the image through it.",
       "evidence": [
         "https://arxiv.org/abs/2108.07123",
         "https://almascience.eso.org/aq/?projectCode=2018.A.00030.S"

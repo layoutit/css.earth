@@ -67,7 +67,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by TRAPPIST-1; the neutral gray is a display convention, not a measured colour.",
+        "qualification": "A sphere of the published radius, lit by TRAPPIST-1; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "trappist-1h-dataset-shape.webp",
         "surface": "trappist-1h-surface-shape@2x.webp",
         "poles": "trappist-1h-poles-shape@2x.webp",
@@ -77,7 +77,7 @@
           "url": "https://doi.org/10.3847/PSJ/abd022"
         },
         "falseColor": false,
-        "notes": "No image or colour of TRAPPIST-1h exists: it is known from the dips it makes in its star's light and from the way the seven planets pull on each other. The gray marks an unresolved surface; the lighting is TRAPPIST-1's, at the measured orbit. The gray takes the colour of trappist-1's light, as its colour dataset measures it."
+        "notes": "No image or color of TRAPPIST-1h exists: it is known from the dips it makes in its star's light and from the way the seven planets pull on each other. The gray marks an unresolved surface; the lighting is TRAPPIST-1's, at the measured orbit. The gray takes the color of trappist-1's light, as its color dataset measures it."
       },
       {
         "id": "illustration",
@@ -92,7 +92,7 @@
           "url": "https://eyes.nasa.gov/apps/exo/"
         },
         "falseColor": false,
-        "notes": "NASA's artist's concept of TRAPPIST-1h: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the colour, clouds or terrain in it was observed. Its longitudes are arbitrary."
+        "notes": "NASA's artist's concept of TRAPPIST-1h: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the color, clouds or terrain in it was observed. Its longitudes are arbitrary."
       }
     ]
   },

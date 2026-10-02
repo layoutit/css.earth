@@ -2,7 +2,7 @@
 
 Radius, mass and temperature: Radius 0.527 +/- 0.021 solar radii from Harris et al. 2023, the stellar radius of the default parameter set of TOI-904 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract); Mass 0.557 +/- 0.028 solar masses from Harris et al. 2023, the stellar mass of the default parameter set of TOI-904 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract); temperature from Harris et al. 2023, the stellar temperature of the default parameter set of TOI-904 b in the NASA Exoplanet Archive.
 
-Colour: Gaia DR3 XP spectrum, source 4620844400530949376, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+Color: Gaia DR3 XP spectrum, source 4620844400530949376, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 

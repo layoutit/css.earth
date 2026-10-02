@@ -8,7 +8,7 @@ It is the only planet known around TOI-521. Its orbit and size follow Lacedelli 
 
 **Orbit.** Lacedelli et al. 2026 (2026A&A...705A.260L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2026): P 1.54285047 d Lacedelli et al. 2026 (2026A&A...705A.260L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2026): a/R* 10.1; Lacedelli et al. 2026 (2026A&A...705A.260L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2026): inclination 88.6 degrees Lacedelli et al. 2026 (2026A&A...705A.260L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2026): e 0 Lacedelli et al. 2026 (2026A&A...705A.260L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2026): transit mid-time 2458492.7153 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-521's measured colour (#ffc889, the colour dataset of toi-521 (src/objects/toi-521/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-521's measured color (#ffc889, the color dataset of toi-521 (src/objects/toi-521/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-521's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (46, 71, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 

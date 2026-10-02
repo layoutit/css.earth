@@ -8,7 +8,7 @@ It is the only planet known around HATS-72. Its orbit and size follow Hartman et
 
 **Orbit.** Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 7.3279496 d Hartman et al. 2020 (2020AJ....159..173H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2020): a/R* 19.821; Hartman et al. 2020 (2020AJ....159..173H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2020): inclination 89.56 degrees No archive row states an eccentricity; the orbit is taken as circular Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2458124.28757 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hats-72's measured colour (#ffceaf, the colour dataset of hats-72 (src/objects/hats-72/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by hats-72's measured color (#ffceaf, the color dataset of hats-72 (src/objects/hats-72/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HATS-72's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (42, 92, 96), folded onto its orbit. Upper limits and rows without an error are left out.
 

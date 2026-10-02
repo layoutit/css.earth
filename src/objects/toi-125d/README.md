@@ -8,7 +8,7 @@ It is one of 3 planets known around TOI-125. Its orbit and size follow Nielsen e
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 19.9815709 d Nielsen et al. 2020 (2020MNRAS.492.5399N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): a/R* 34.77; Nielsen et al. 2020 (2020MNRAS.492.5399N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): inclination 88.795 degrees Nielsen et al. 2020 (2020MNRAS.492.5399N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): e 0.168 Nielsen et al. 2020 (2020MNRAS.492.5399N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): omega 46 degrees ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460181.146579 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-125's measured colour (#ffe7d9, the colour dataset of toi-125 (src/objects/toi-125/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-125's measured color (#ffe7d9, the color dataset of toi-125 (src/objects/toi-125/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-125's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (69, 95, 96), folded onto its orbit. Upper limits and rows without an error are left out.
 

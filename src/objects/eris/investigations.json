@@ -16,8 +16,8 @@
       "id": "neutral-gray-shape-dataset",
       "subject": "Shared neutral gray for the unresolved surface",
       "status": "excluded",
-      "finding": "Replaced by the measured whole-disc colour. The gray was a display convention; published colour indices and a V geometric albedo now give Eris a measured uniform colour, which the shape-only convention does not supersede.",
-      "revisitWhen": "The published colour or albedo is withdrawn or shown not to describe the whole disc.",
+      "finding": "Replaced by the measured whole-disc color. The gray was a display convention; published color indices and a V geometric albedo now give Eris a measured uniform color, which the shape-only convention does not supersede.",
+      "revisitWhen": "The published color or albedo is withdrawn or shown not to describe the whole disc.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/source/photometry/disc-color.json",
         "https://github.com/layoutit/css.earth/blob/main/docs/shape-only-material.md"
@@ -34,8 +34,8 @@
       ]
     },
     {
-      "id": "carraro-2006-colours",
-      "subject": "Carraro et al. (2006) BVRI colours",
+      "id": "carraro-2006-colors",
+      "subject": "Carraro et al. (2006) BVRI colors",
       "status": "included",
       "finding": "B-V 0.823 +/-0.023, V-R 0.391 +/-0.023, V-I 0.777 +/-0.013 (section 4, weighted means over five nights in 2005; V-R stable night to night) give the uniform Color dataset through the disc-integrated-color method.",
       "evidence": [
@@ -47,28 +47,28 @@
       "id": "sicardy-2011-albedo",
       "subject": "Sicardy et al. (2011) V geometric albedo",
       "status": "included",
-      "finding": "p_V 0.96 +0.09/-0.04 from the 2010 occultation radius scales the colour; the same value was already pinned in measurements.json.",
+      "finding": "p_V 0.96 +0.09/-0.04 from the 2010 occultation radius scales the color; the same value was already pinned in measurements.json.",
       "evidence": [
         "https://doi.org/10.1038/nature10550",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/source/measurements.json"
       ]
     },
     {
-      "id": "mboss-mean-colours",
-      "subject": "MBOSS mean colours",
+      "id": "mboss-mean-colors",
+      "subject": "MBOSS mean colors",
       "status": "excluded",
       "finding": "The MBOSS catalogue (J/A+A/546/A115) averages 64 epochs from Carraro et al. (2006), DeMeo et al. (2009) and Rabinowitz et al. (2007): B-V 0.805 +/-0.015, V-R 0.389 +/-0.049, V-I 0.792 +/-0.018. Measured with the same method and albedo, it gives sRGB 255, 250, 236 against 255, 250, 234 from Carraro; the single-run set is kept because its V-R is better constrained.",
-      "revisitWhen": "A newer multi-epoch colour set disagrees with Carraro et al. (2006) beyond their uncertainties.",
+      "revisitWhen": "A newer multi-epoch color set disagrees with Carraro et al. (2006) beyond their uncertainties.",
       "evidence": [
         "https://doi.org/10.26093/cds/vizier.35460115"
       ]
     },
     {
       "id": "srgb-gamut-edge",
-      "subject": "Colour at the top of the sRGB range",
+      "subject": "Color at the top of the sRGB range",
       "status": "unresolved",
-      "finding": "The nominal colour is linear sRGB 0.999, 0.952, 0.827. Measured with the same method: B-V +0.023, V-R +0.023 or an albedo of 1.00 put red above 1, and the method refuses the colour. B-V -0.023 gives 255, 250, 237; V-R -0.023 gives 253, 249, 235; the albedo's lower bound 0.92 gives 250, 245, 230.",
-      "revisitWhen": "The colour or albedo is revised, or the shared method gains a stated rule for colours brighter than sRGB white.",
+      "finding": "The nominal color is linear sRGB 0.999, 0.952, 0.827. Measured with the same method: B-V +0.023, V-R +0.023 or an albedo of 1.00 put red above 1, and the method refuses the color. B-V -0.023 gives 255, 250, 237; V-R -0.023 gives 253, 249, 235; the albedo's lower bound 0.92 gives 250, 245, 230.",
+      "revisitWhen": "The color or albedo is revised, or the shared method gains a stated rule for colors brighter than sRGB white.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/source/photometry/disc-color.json",
         "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/color/disc-integrated-color.ts"
@@ -78,8 +78,8 @@
       "id": "dysnomia-light",
       "subject": "Dysnomia light in the photometry",
       "status": "unresolved",
-      "finding": "Carraro et al. (2006) state that the unresolved moon Dysnomia may contribute about 0.02 mag to the total brightness. The colours include it; the occultation albedo does not. No correction is applied.",
-      "revisitWhen": "Published colours that separate Eris from Dysnomia.",
+      "finding": "Carraro et al. (2006) state that the unresolved moon Dysnomia may contribute about 0.02 mag to the total brightness. The colors include it; the occultation albedo does not. No correction is applied.",
+      "revisitWhen": "Published colors that separate Eris from Dysnomia.",
       "evidence": [
         "https://arxiv.org/abs/astro-ph/0610619"
       ]

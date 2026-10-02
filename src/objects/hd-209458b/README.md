@@ -1,6 +1,6 @@
 # HD 209458 b
 
-HD 209458 b was the first planet seen crossing its star. It is a gas giant 1.36 times as wide as Jupiter. It opens on its thermal colour; a second dataset maps its heat by longitude from a published Spitzer phase curve.
+HD 209458 b was the first planet seen crossing its star. It is a gas giant 1.36 times as wide as Jupiter. It opens on its thermal color; a second dataset maps its heat by longitude from a published Spitzer phase curve.
 
 ## Sources
 
@@ -8,7 +8,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 Measured, from Torres et al. 2008, ApJ 677, 1324 (2008), arXiv:0801.1841: radius 1.359 +0.016 −0.019 Jupiter radii, period 3.524746 days, inclination 86.71 degrees, scaled distance a/R* = 8.76. The transit time, T0 = BJD_TDB 2459893.75120 ± 0.00005, is measured here from the JWST NIRCam F322W2 white-light curve of programme 1274 observation 2 (MAST product jw01274-o002_t002_nircam_f322w2-grismr-subgrism64_whtlt.ecsv), by a trapezoid fit; the paper gives no transit time.
 
-**Thermal colour (default dataset).** The colour of a black body at the 1,499 K the NASA Exoplanet Archive lists for the day side (Zellem et al. 2014, the maximum of their 4.5 µm phase curve), uniform over the disc and lit by the star ([thermal-color.json](source/photometry/thermal-color.json)).
+**Thermal color (default dataset).** The color of a black body at the 1,499 K the NASA Exoplanet Archive lists for the day side (Zellem et al. 2014, the maximum of their 4.5 µm phase curve), uniform over the disc and lit by the star ([thermal-color.json](source/photometry/thermal-color.json)).
 
 **The map.** Zellem et al. (2014, [ApJ 790, 53](https://doi.org/10.1088/0004-637X/790/1/53); [arXiv:1405.5923](https://arxiv.org/abs/1405.5923)) observed a full orbit with Spitzer at 4.5 µm on 2010 January 17 to 21 (program 60021). They fitted the planet's light with one sinusoid, c1 cos(2πt/P) + c2 sin(2πt/P). Their table is transcribed in [phase-curve.json](source/science/zellem-2014/phase-curve.json).
 
@@ -20,7 +20,7 @@ Measured and not shown: mass, 0.685 (+0.015/−0.014) Jupiter masses (Torres et 
 
 ## Processing
 
-The paper does not say where t = 0 falls. Counted from mid-transit, their c1 = −0.0410% and c2 = 0.0354% put the curve's peak 40.8° before eclipse and its trough 40.8° before transit, as their Table 2 gives both; no other origin does. The Cowan & Agol (2008, [ApJ 678, L129](https://doi.org/10.1086/589232), equation 5) inversion turns that curve into one map of longitude, through the [`published-phase-curve-map`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.ts) format. The palette runs from 850 to 1,600 K in false colour.
+The paper does not say where t = 0 falls. Counted from mid-transit, their c1 = −0.0410% and c2 = 0.0354% put the curve's peak 40.8° before eclipse and its trough 40.8° before transit, as their Table 2 gives both; no other origin does. The Cowan & Agol (2008, [ApJ 678, L129](https://doi.org/10.1086/589232), equation 5) inversion turns that curve into one map of longitude, through the [`published-phase-curve-map`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.ts) format. The palette runs from 850 to 1,600 K in false color.
 
 The planet's intensity relative to the star's is 2J/rp², with rp = 0.12130, turned into a brightness temperature at 4.5 µm. The paper does not say which stellar spectrum it used; the star temperature that its deeper eclipse (0.1391%) and 1,443 K imply is 5,588 K.
 
@@ -46,5 +46,5 @@ The orbit is drawn circular. The ascending node at celestial north is a display 
 - **Only the largest pattern is real.** The fit has one sinusoid. Nothing finer than a hemisphere is measured.
 - **Brightness temperature, not temperature.** Each value is the temperature of a black body with the observed 4.5 µm brightness, against a star temperature the paper's own numbers imply.
 - **Residual systematics.** The paper notes bumps in its light curve before the first eclipse and near phase 0.2, likely instrumental. The fit does not model them.
-- **The colour dataset is not the map.** The thermal colour is one temperature, 1,499 K, over the whole disc.
+- **The color dataset is not the map.** The thermal color is one temperature, 1,499 K, over the whole disc.
 - **Assumptions of the frame.** Tidal locking and a pole on the orbit normal are assumed. The transit time is our own measurement from one JWST visit. The planet is a sphere.

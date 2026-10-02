@@ -6,7 +6,7 @@ Its radius and temperature follow Parc et al. 2025. The introduction is generate
 
 **Star.** Placement: Gaia DR3 source 6129327525817451648, parallax 11.610 ± 0.017 mas (86.13 pc). Radius 0.505 +/- 0.015 solar radii from Parc et al. 2025, the stellar radius of the default parameter set of TOI-756 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract). Mass 0.505 +/- 0.019 solar masses from Parc et al. 2025, the stellar mass of the default parameter set of TOI-756 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract). Temperature 3,657 K from Parc et al. 2025, the stellar temperature of the default parameter set of TOI-756 b in the NASA Exoplanet Archive. log g 4.73 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 6129327525817451648, through the CIE 1931 2° observer: #ffc68a. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 6129327525817451648, through the CIE 1931 2° observer: #ffc68a. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,657 K and log g 4.73 (u1 0.400, u2 0.360): a model, because no fit of this star's limb is used.
 

@@ -16,7 +16,7 @@ const repository = WORKSPACE;
 const seasonPath = resolve(import.meta.dirname, 'seasons/pi1-gruis-pionier-2014-09/season.json');
 const authorFile = resolve(repository, 'src/objects/pi1-gruis/source/observations/PI_GRU_forImage.fits');
 
-// The end of a real SQUEEZE log (one half of π¹ Gruis's season), colour codes included.
+// The end of a real SQUEEZE log (one half of π¹ Gruis's season), color codes included.
 const LOG = [
   'Output -- Best single-frame chi2: 1.844007 obtained at iteration: 1006 in chain number 0.',
   'Output --      pi1-odd-squeeze\tNframes: 500 Chi2r: 1.792861 [31mV2: 2.61 [0m[32mT3P: 0.59 [0m',

@@ -54,7 +54,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "qualification": "Color from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
         "thumbnail": "iota-horologii-dataset-color.webp",
         "surface": "iota-horologii-surface-color@2x.webp",
         "poles": "iota-horologii-poles-color@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The colour of Gaia DR3's measured spectrum of the star, an F8 to G0 dwarf. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for the TESS band, at 6,080 K and log g 4.40 (Bruntt et al. 2010): a model. The spin axis's direction on the sky is a display convention."
+        "notes": "The color of Gaia DR3's measured spectrum of the star, an F8 to G0 dwarf. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for the TESS band, at 6,080 K and log g 4.40 (Bruntt et al. 2010): a model. The spin axis's direction on the sky is a display convention."
       },
       {
         "id": "radial-field-01",

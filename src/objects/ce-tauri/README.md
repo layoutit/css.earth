@@ -10,7 +10,7 @@ CE Tauri (119 Tau) is a red supergiant in Taurus. It is placed at its catalogue 
 
 **Radius.** Montargès et al. (2018, [A&A 614, A12](https://doi.org/10.1051/0004-6361/201731471)) fit a power-law limb-darkened disc of 10.18 ± 0.07 mas at 1.62 µm to the December 2016 data (10.09 ± 0.09 mas in November). At the Gaia distance that is 720 solar radii; the paper's 593 solar radii come from the Hipparcos distance. `packages/bake/authoring/ce-tauri/author.mts` writes the reference sphere.
 
-**Colour.** The colour dataset is CE Tauri's Crimean photoelectric spectrum of 24 October 1982, weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): #ffa64f. The file and full citation are in [stellar-color.json](source/photometry/stellar-color.json), and [stellar-spectra/author.mts](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts) writes the colour; `--check` recomputes it.
+**Color.** The color dataset is CE Tauri's Crimean photoelectric spectrum of 24 October 1982, weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): #ffa64f. The file and full citation are in [stellar-color.json](source/photometry/stellar-color.json), and [stellar-spectra/author.mts](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts) writes the color; `--check` recomputes it.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Neilson & Lester (2013), A&A 554, A98 compute from spherical ATLAS (SATLAS) model atmospheres for the Johnson V band at 3,801 K and log g -0.12 (u1 1.111, u2 -0.000). The law reaches zero at 99.5% of the radius.
 
@@ -34,7 +34,7 @@ The [navigation marker](source/preparation/navigation.json) is a photosphere cro
 
 **The axis is a convention.** Where the pole really points is unknown.
 
-**The colour varies.** A second Crimean scan in February 1983 is paler (#ffb859), and Gaia XP gives #ffbe5f, though Gaia XP is unreliable this bright. CE Tau is a semi-regular variable, so which colour is typical is not settled.
+**The color varies.** A second Crimean scan in February 1983 is paler (#ffb859), and Gaia XP gives #ffbe5f, though Gaia XP is unreliable this bright. CE Tau is a semi-regular variable, so which color is typical is not settled.
 
 **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 

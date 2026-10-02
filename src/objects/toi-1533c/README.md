@@ -8,7 +8,7 @@ It is one of 2 planets known around TOI-1533. Its orbit and size follow Mantovan
 
 **Orbit.** Mantovan et al. 2026 (2026arXiv260630799M), via the NASA Exoplanet Archive ps table (pl_refname MANTOVAN_ET_AL_2026): P 8.0637926 d Mantovan et al. 2026 (2026arXiv260630799M), via the NASA Exoplanet Archive ps table (pl_refname MANTOVAN_ET_AL_2026): a/R* 19.11; Mantovan et al. 2026 (2026arXiv260630799M), via the NASA Exoplanet Archive ps table (pl_refname MANTOVAN_ET_AL_2026): inclination 86.64 degrees Mantovan et al. 2026 (2026arXiv260630799M), via the NASA Exoplanet Archive ps table (pl_refname MANTOVAN_ET_AL_2026): e 0 Mantovan et al. 2026 (2026arXiv260630799M), via the NASA Exoplanet Archive ps table (pl_refname MANTOVAN_ET_AL_2026): transit mid-time 2459853.8872 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-1533's measured colour (#ffdfc9, the colour dataset of toi-1533 (src/objects/toi-1533/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by toi-1533's measured color (#ffdfc9, the color dataset of toi-1533 (src/objects/toi-1533/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-1533's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (78, 84, 85), folded onto its orbit. Upper limits and rows without an error are left out.
 

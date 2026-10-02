@@ -1,7 +1,7 @@
 # Ida
 
 The asteroid 243 Ida on the Thomas shape model, with Galileo's processed monochrome mosaic, two calibrated
-green-filter reflectance frames, a three-filter false-colour view and an elevation map.
+green-filter reflectance frames, a three-filter false-color view and an elevation map.
 
 ## Sources
 
@@ -9,7 +9,7 @@ green-filter reflectance frames, a three-filter false-colour view and an elevati
 | --- | --- |
 | SSI reflectance | Galileo green-filter [0202561278](source/observations/0202561278rcal_gre.xml) and [0202560500](source/observations/0202560500rcal_gre.xml), 28 August 1993, 111–170 m/pixel. I/F normalized to 25° incidence and phase with a published Hapke model; fixed display stretch, no fitted gain. |
 | Monochrome and shape | [Thomas PDS release](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/), [Thomas et al. 1996](https://doi.org/10.1006/icar.1996.0033). The processed mosaic has broader coverage and finer contributing imagery than the I/F pair. |
-| SSI false colour | One Galileo pointing on 28 August 1993: [0202561352](source/observations/0202561352rcal_ir8.xml) 0.89 µm as red, [0202561278](source/observations/0202561278rcal_gre.xml) green as green and [0202561313](source/observations/0202561313rcal_vio.xml) violet as blue, the three exposures within 43 seconds. Calibrated I/F with the original illumination, displayed 0–0.11 in every filter; no albedo recovery and no fitted gain. |
+| SSI false color | One Galileo pointing on 28 August 1993: [0202561352](source/observations/0202561352rcal_ir8.xml) 0.89 µm as red, [0202561278](source/observations/0202561278rcal_gre.xml) green as green and [0202561313](source/observations/0202561313rcal_vio.xml) violet as blue, the three exposures within 43 seconds. Calibrated I/F with the original illumination, displayed 0–0.11 in every filter; no albedo recovery and no fitted gain. |
 | Elevation | Shape radius minus 16 km, false color from −13 to +16 km; not gravitational height. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/IDA/target) Ida centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
@@ -27,7 +27,7 @@ component. Against 3,200 equal-area samples the mean and maximum deviations are 
 
 **Monochrome.** `243idam.fit` is a 2520×1260 simple-cylindrical mosaic: high-pass detailed Galileo frames over a
 low-pass coarse background, best sampling about 25 m/pixel. It is a processed observation, not albedo or natural
-colour. Exactly zero marks the 2.3975% of pixels that could not be projected, drawn as the gray grid. The PDS4 label
+color. Exactly zero marks the 2.3975% of pixels that could not be projected, drawn as the gray grid. The PDS4 label
 says bottom-to-top, but Stooke's north-up crater positions show that a flip would invert the map, so rows are read
 north to south. On a detailed crop the Stooke map correlates 0.283 with the unflipped mosaic and −0.003 flipped.
 
@@ -39,7 +39,7 @@ threshold. Projection keeps incidence and emission under 65° with a five-pixel 
 frame's overlap gain is 0.994. The display range is 0–0.0931 I/F, the 99.5th percentile, shown linearly. Where frames
 overlap, the finer one wins.
 
-**False colour.** Three archived frames are composed through their catalog cameras with nothing refitted. The 0.89 µm
+**False color.** Three archived frames are composed through their catalog cameras with nothing refitted. The 0.89 µm
 frame was chosen over the 0.76 µm one because it has fewer dropped scan lines.
 
 **Orientation.** The pole is RA 348.76° ±7.5°, Dec +87.10° ±0.4°, with a retrograde period of 0.1930680 days, and
@@ -56,9 +56,9 @@ and faculae trace a rim circle, other types their published extent box. Outlines
   gives 1.414 px RMS and 2.236 px maximum. The mosaic shares mission observations, so these are not independent
   cartography. Results are in `source/reference/calibrated-registration*.json`; reproduce with
   `python packages/bake/cli/verify-catalog-camera.py src/objects/ida/source OUTPUT_DIRECTORY`.
-- False-colour band alignment against the green frame: violet lands at 0.37 px RMS over 17 held-out patches, worst
+- False-color band alignment against the green frame: violet lands at 0.37 px RMS over 17 held-out patches, worst
   0.58 px; 0.89 µm at 0.71 px RMS, worst 1.01 px. The composed dataset covers 17.2% of the surface.
-- The colour separation is mild: on the minimap, red minus blue over covered pixels runs from −11 to 46 of 255 with a
+- The color separation is mild: on the minimap, red minus blue over covered pixels runs from −11 to 46 of 255 with a
   median of 0. That is what these three filters record on Ida, not a display fault.
 
 ### Registration

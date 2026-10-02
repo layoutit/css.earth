@@ -56,7 +56,7 @@ Restart the development server after restoration; available banks are selected o
 
 The source-card previews never feed the cloud bake. Shared geometry and star positions do not depend on dataset selection; each dataset carries its registered color treatment. Each object owns `source/presentation.json` and a source manifest with image identities, credits and supporting references. `node site/build/prepare/prepare-facilities.mts --catalog-only` refreshes the shared catalogue from the installed presentations.
 
-Selecting a dataset recolours the retained cloud and updates its source context and URL while keeping the camera and scene. Horálek's camera remains unidentified, so its attribution names the photographer without inventing an instrument.
+Selecting a dataset recolors the retained cloud and updates its source context and URL while keeping the camera and scene. Horálek's camera remains unidentified, so its attribution names the photographer without inventing an instrument.
 
 ![Pleiades optical composite in the shared galaxy app](../images/nebulae/m45-galaxy.png)
 

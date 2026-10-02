@@ -84,7 +84,7 @@
         "innerRadiusKm": 4019.0,
         "outerRadiusKm": 4095.3999999999996,
         "segments": 128,
-        "qualification": "Circular band at the measured radius, 76.4 km wide as the tenuous component measured at one Gemini chord. Normal optical depth about 0.004 outside the dense arc (Pereira et al. 2023), so opacity 1 - exp(-0.004); the dense arc, up to 0.1-0.7, is not reconstructed. No ring colour is measured.",
+        "qualification": "Circular band at the measured radius, 76.4 km wide as the tenuous component measured at one Gemini chord. Normal optical depth about 0.004 outside the dense arc (Pereira et al. 2023), so opacity 1 - exp(-0.004); the dense arc, up to 0.1-0.7, is not reconstructed. No ring color is measured.",
         "normalOpacity": 0.003992
       },
       {
@@ -92,7 +92,7 @@
         "innerRadiusKm": 2515,
         "outerRadiusKm": 2525,
         "segments": 128,
-        "qualification": "Circular band at radius 2520 km with the typical 10 km width and normal optical depth about 0.004 (Pereira et al. 2023), so opacity 1 - exp(-0.004). No ring colour is measured.",
+        "qualification": "Circular band at radius 2520 km with the typical 10 km width and normal optical depth about 0.004 (Pereira et al. 2023), so opacity 1 - exp(-0.004). No ring color is measured.",
         "normalOpacity": 0.003992
       }
     ]

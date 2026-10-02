@@ -8,7 +8,7 @@ It is one of 3 planets known around TOI-469. Its orbit and size follow Egger et 
 
 **Orbit.** Egger et al. 2024 (2024A&A...688A.223E), via the NASA Exoplanet Archive ps table (pl_refname EGGER_ET_AL__2024): P 3.5379559 d Egger et al. 2024 (2024A&A...688A.223E), via the NASA Exoplanet Archive ps table (pl_refname EGGER_ET_AL__2024): a/R* 9.72; Damasso et al. 2023 (2023A&A...679A..33D), via the NASA Exoplanet Archive ps table (pl_refname DAMASSO_ET_AL_2023): inclination 86.3 degrees No archive row states an eccentricity; the orbit is taken as circular Egger et al. 2024 (2024A&A...688A.223E), via the NASA Exoplanet Archive ps table (pl_refname EGGER_ET_AL__2024): transit mid-time 2458471.36 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 10 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by hip-29442's measured colour (#ffe9db, the colour dataset of hip-29442 (src/objects/hip-29442/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by hip-29442's measured color (#ffe9db, the color dataset of hip-29442 (src/objects/hip-29442/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of HIP 29442's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (6, 33, 87), folded onto its orbit. Upper limits and rows without an error are left out.
 

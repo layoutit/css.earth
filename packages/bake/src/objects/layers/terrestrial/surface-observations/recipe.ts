@@ -24,8 +24,8 @@ const identifier = /^[a-z][a-z0-9-]*$/;
 const frameIdentifier = /^[a-z0-9][a-z0-9_-]*$/;
 
 
-/** A display maps either a percentile range of the qualified values or one stated display range to display levels; a colour product's bands share that range.
- * A monochrome dataset may present those levels through a palette of at least two hex colours instead of grey. `basis` says where the stretch comes from:
+/** A display maps either a percentile range of the qualified values or one stated display range to display levels; a color product's bands share that range.
+ * A monochrome dataset may present those levels through a palette of at least two hex colors instead of grey. `basis` says where the stretch comes from:
  * `authored` when a contributor chose it, `source` when a pinned input the dataset consumes states it, named by `sourceId`. */
 export const parseDisplay = shape({ percentiles: optional(array(number)), displayRange: optional(array(number)), palette: optional(array(text)), basis: text, sourceId: optional(text) });
 /** The stretch's basis as the policy and report carry it. */
@@ -61,7 +61,7 @@ export function validateEnvelope(recipe: DatasetEnvelope, paths: readonly string
   if (!(display.basis === 'authored' ? display.sourceId === undefined : display.basis === 'source' && typeof display.sourceId === 'string' && identifier.test(display.sourceId)))
     throw new TypeError(`Invalid source-bound ${context}: a display states its basis, authored or source, and only a source basis names its sourceId.`);
   if (display.palette !== undefined && (!rules.palette || !Array.isArray(display.palette) || display.palette.length < 2 || display.palette.some(color => !hexColor.test(color))))
-    throw new TypeError(`Invalid source-bound ${context}: a display palette needs at least two #rrggbb colours on a monochrome dataset.`);
+    throw new TypeError(`Invalid source-bound ${context}: a display palette needs at least two #rrggbb colors on a monochrome dataset.`);
   if (levels) checkKeys(levels, ['minimumPairs', 'maximumGain'], ['maximumAngleDegrees', 'samplesPerTriangle'], `${context} level matching`);
   const range = display.percentiles ?? display.displayRange, kind = display.percentiles ? 'percentiles' : 'displayRange';
   if (!identifier.test(recipe.id) || !identifier.test(recipe.consumer) || !recipe.metadata?.label || !recipe.metadata?.coverage ||

@@ -78,7 +78,7 @@ export async function prepareVolumeImpostors(options: {
     decodedBytes += count * 4;
     if (count > MAX_TEXTURE_PIXELS || decodedBytes > MAX_DECODED_BYTES) throw new TypeError('Impostor source textures exceed the bounded decode budget.');
     const bytes = await readResource(leaf.texturePath);
-    const { data, info } = await sharp(bytes, { limitInputPixels: MAX_TEXTURE_PIXELS }).toColourspace('srgb').ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    const { data, info } = await sharp(bytes, { limitInputPixels: MAX_TEXTURE_PIXELS }).toColorspace('srgb').ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     if (info.width !== resource.width || info.height !== resource.height || info.channels !== 4 || data.length !== count * 4) {
       throw new TypeError(`Impostor decoded texture dimensions mismatch: ${leaf.texturePath}.`);
     }

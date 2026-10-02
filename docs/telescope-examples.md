@@ -7,9 +7,9 @@ product that toolkit has already produced here. Nothing on this page is an archi
 Every picture comes from one renderer, `packages/telescope-cli/src/example-picture.mts`, and one checked-in recipe,
 `packages/telescope-cli/src/examples.json`. The recipe states the file, the extension or plane, the pixel window, the unit
 the numbers are in, the two values drawn as black and white, the stretch between them, which way up the picture is, the
-whole-number enlargement and the colours. Three pictures are in colour, because three measurements of the same target
+whole-number enlargement and the colors. Three pictures are in color, because three measurements of the same target
 exist on one pixel grid: each measurement is stretched on its own limits in its own unit and put straight into red,
-green or blue. That is representative colour, not what an eye would see, and each caption says which band is which
+green or blue. That is representative color, not what an eye would see, and each caption says which band is which
 channel. Channels that do not share a grid are refused rather than resampled onto one another. The rest are grey
 because there is only one measurement to draw. Every source sample becomes a block of equal output pixels. Nothing is
 smoothed, sharpened, interpolated or cleaned up, and a value outside the stated range is clipped rather than rescaled.
@@ -31,7 +31,7 @@ records that directory too. The commands below are written as they are run from 
 ![A cream and pink oval nebula with a ragged rim and two blue-white spiked stars at its centre](images/telescopes/jwst-nircam-ngc3132.webp)
 
 NGC 3132 on 3 June 2022, three NIRCam filters re-run here through the pipeline's level-3 image stage onto one grid.
-Representative colour, not what an eye would see: red is F405N at 4.05 microns from 0 to 45 MJy/sr, green is F187N at
+Representative color, not what an eye would see: red is F405N at 4.05 microns from 0 to 45 MJy/sr, green is F187N at
 1.87 microns from 0 to 180, blue is F090W at 0.90 microns from 0.2 to 25, each asinh softened at 2, 4 and 1. North is up
 and east left, from the mosaics' own world coordinates. F187N and F405N are narrow filters on hydrogen lines, which is
 why the shells stand out and the stars, bright in the wide blue filter, come out blue-white. The two stars in the middle
@@ -75,7 +75,7 @@ comparison against the archive's mosaic agrees to about 2 parts in 10 million of
 ![A longitude-latitude map in blue and cream, four overlapping circles on a grey background](images/telescopes/hubble-stis-europa-salt.webp)
 
 Four STIS CCD slit scans of Europa, on 23 May, 29 June, 1 August and 6 August 2017, each scan stepped across the disc,
-turned into a longitude-latitude map. Colour is the strength of the 450 nm absorption attributed to sodium chloride, as
+turned into a longitude-latitude map. Color is the strength of the 450 nm absorption attributed to sodium chloride, as
 an equivalent width in Angstroms, from -150 (dark blue) to 200 (cream), linear, on the stated blue-to-cream ramp. Row 1
 is the north pole, column 1 starts at 0 degrees east longitude, east to the right. Grey is where no scan reached, or
 where the surface was seen more than 60 degrees from face on. The strong side is the right-hand half of the map, around
@@ -88,7 +88,7 @@ where the surface was seen more than 60 degrees from face on. The strong side is
 ![A mottled orange disc on a black background, warmer across the middle and cooler at the edges](images/telescopes/alma-europa-brightness-temperature.webp)
 
 ALMA Band 6 continuum at 232 GHz, observed on 26 November 2015, calibrated, self-calibrated and imaged here, then
-converted to brightness temperature. Colour is temperature in Kelvin, from 55 K (black) to 102 K (pale yellow), linear,
+converted to brightness temperature. Color is temperature in Kelvin, from 55 K (black) to 102 K (pale yellow), linear,
 on the stated heat ramp, north up and east left. The warm band across the middle is the equator, where the Sun stands
 highest, and the cooler edges are the poles and the limb. The disc is 768 milliarcseconds across and the restoring beam
 is 48 by 21 milliarcseconds, so the soft edge is the beam, not the limb. Be careful with the fine east-west streaks:
@@ -126,7 +126,7 @@ around it is the adaptive optics halo, which is in the data, and there is no sur
 ![A grainy round shell of yellow-green and blue filaments filling the frame, on a black background](images/telescopes/chandra-acis-cassiopeia-a.webp)
 
 Cassiopeia A on 27 August 1999, a 3.6 ks ACIS-I observation reprocessed from level 1 on Chandra's own software, with
-the resulting events binned here into squares 2 by 2 sky pixels, 0.98 arcseconds a bin. Representative colour, not what
+the resulting events binned here into squares 2 by 2 sky pixels, 0.98 arcseconds a bin. Representative color, not what
 an eye would see: the same event list split by photon energy into the conventional soft, medium and hard bands, red 0.5
 to 1.5 keV from 0 to 25 counts a bin, green 1.5 to 3.0 keV from 0 to 30, blue 3.0 to 7.0 keV from 0 to 6, each asinh
 softened at 1. All three are the same bins of the same list, so nothing is resampled. North is up and east left. One dot
@@ -142,12 +142,12 @@ reprocessed, and the toolkit's event-by-event comparison against the archive mat
 ![A salmon-pink ring-shaped nebula with a bright pair of stars at its centre, among blue-white field stars](images/telescopes/spitzer-irac-ngc3132.webp)
 
 Three of the four IRAC channels of NGC 3132, re-made here from the archive's own twelve level-1 frames of AOR 4416768
-and mosaicked onto one grid. Representative colour, not what an eye would see: red is channel 4 at 8.0 microns from 2.6
+and mosaicked onto one grid. Representative color, not what an eye would see: red is channel 4 at 8.0 microns from 2.6
 to 25 MJy/sr, green is channel 2 at 4.5 microns from 0.07 to 20, blue is channel 1 at 3.6 microns from 0.05 to 20, each
 asinh softened at 0.5, 0.2 and 0.2. The mosaics keep the observation's own rotation: north lies 303.4 degrees and east
 213.4 degrees clockwise from up, and the picture is the stored rows with the first at the bottom. The nebula is pink
 because its shell is brightest at 8 microns, and the stars are blue-white because they are brightest at 3.6. The
-scattered single-colour specks are cosmic ray hits that survived in one channel only; a few dark pixels near the centre
+scattered single-color specks are cosmic ray hits that survived in one channel only; a few dark pixels near the centre
 are missing from channel 4. This is the same nebula as the NIRCam picture above, at nearly seven times the pixel size.
 
 `node packages/telescope-cli/src/archives/spitzer/mosaic.mts ngc3132-4416768`
@@ -188,7 +188,7 @@ into one smear rather than as a single object. Some of the points near it are or
 ![The curved limb of an icy moon crossed by long dark ridges, in three horizontal strips](images/telescopes/juno-junocam-europa.webp)
 
 The JunoCam flyby of Europa on 29 September 2022, from 1,515 km up. This is the archive's calibrated push-frame image as
-the instrument records it, not a cast or projected picture: JunoCam builds colour by sweeping three filter strips across
+the instrument records it, not a cast or projected picture: JunoCam builds color by sweeping three filter strips across
 the scene as the spacecraft spins, and this is one set of three strips from the sixth frame of the image, blue at the
 top, then green, then red, in the order they were read out. Brightness is reflectance, from 0 to 0.30, linear. Nothing
 is rotated and the strips are not combined, which is why the limb steps sideways between them: each strip was taken a

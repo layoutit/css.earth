@@ -25,13 +25,13 @@ Each sky column is spread along the shell, both in front of the star and behind 
 
 ## The 4 micrometre light outside the disc
 
-The VLTI/MATISSE reconstruction that paints Betelgeuse's sphere (see [Betelgeuse](../betelgeuse/README.md)) carries a fifth of its flux outside the published 42.45 mas disc. It is resolved emission, not the instrument. From 1.19 to 2.36 stellar radii the best-fitting envelope is a steep steady outflow, density as r^−7.95. Its colour is the reconstruction's own heat scale.
+The VLTI/MATISSE reconstruction that paints Betelgeuse's sphere (see [Betelgeuse](../betelgeuse/README.md)) carries a fifth of its flux outside the published 42.45 mas disc. It is resolved emission, not the instrument. From 1.19 to 2.36 stellar radii the best-fitting envelope is a steep steady outflow, density as r^−7.95. Its color is the reconstruction's own heat scale.
 
 ## The silicon monoxide around the star
 
 ALMA project 2022.A.00026.S observed Betelgeuse in band 6 from 3 to 27 August 2023 ([archive](https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S)), in the SiO v=0 J=5–4 line at 217.105 GHz. `packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts` cuts the archive cube and continuum image to the region around the star. The beam is 1.4 by 1.0 stellar radii.
 
-The star lies 4.8 stellar radii from the archive's phase centre, and every SiO position is measured from the star in the continuum image. Outside the star the gas forms a lopsided ring, brightest 2.4 stellar radii out, weighted toward the east-south-east. The absorption in front of the star gives a wind speed of 21.3 km/s, and each channel is placed along the line of sight on a spherical outflow at that speed. The colour is viridis, marked false colour.
+The star lies 4.8 stellar radii from the archive's phase centre, and every SiO position is measured from the star in the continuum image. Outside the star the gas forms a lopsided ring, brightest 2.4 stellar radii out, weighted toward the east-south-east. The absorption in front of the star gives a wind speed of 21.3 km/s, and each channel is placed along the line of sight on a spherical outflow at that speed. The color is viridis, marked false color.
 
 ## The December 2019 clump
 
@@ -54,7 +54,7 @@ The clump dims the star behind it. The line of sight through its centre carries 
 - This package is a proof of concept that a body can sit inside a prepared volume.
 - The 2024 shell and the 4 micrometre envelope are inferred from one projected profile each, and the 2019 clump is a published model. Nothing here measures how far along the line of sight any of this material lies.
 - The 2024 map's masked disc leaves an empty cap toward Earth and another away from it: that is the mask made visible, not a structure.
-- The polarisation colour is the paper's `inferno` colour map, a legend, not colour.
+- The polarisation color is the paper's `inferno` color map, a legend, not color.
 - The SiO outflow model places gas that is falling back as if it were leaving. A further 29 percent of the masked flux lies 8 to 14 stellar radii to the north, beyond the volume, and may be an artefact; it is not drawn.
 - The 4 micrometre light starts 1.19 stellar radii out and is one reconstruction of one epoch.
 - The clump is not clipped at the limb, and its extinction is grey.

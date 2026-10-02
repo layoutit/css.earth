@@ -6,7 +6,7 @@ Its radius and temperature follow Chaturvedi et al. 2025. It is also HD 119355. 
 
 **Star.** Placement: Gaia DR3 source 6192360843805622528, parallax 10.295 ± 0.021 mas (97.14 pc). Radius 1.228 +/- 0.017 solar radii from Chaturvedi et al. 2025, the stellar radius of the default parameter set of TOI-3493 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...697A.169C/abstract). Mass 1.023 +/- 0.041 solar masses from Chaturvedi et al. 2025, the stellar mass of the default parameter set of TOI-3493 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...697A.169C/abstract). Temperature 5,844 K from Chaturvedi et al. 2025, the stellar temperature of the default parameter set of TOI-3493 b in the NASA Exoplanet Archive. log g 4.27 from the mass and radius.
 
-**Colour.** Gaia DR3 XP spectrum, source 6192360843805622528, through the CIE 1931 2° observer: #fff5f7. Routes tried in order: stis-ngsl: HD 119355 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+**Color.** Gaia DR3 XP spectrum, source 6192360843805622528, through the CIE 1931 2° observer: #fff5f7. Routes tried in order: stis-ngsl: HD 119355 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,844 K and log g 4.27 (u1 0.443, u2 0.269): a model, because no fit of this star's limb is used.
 

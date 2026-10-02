@@ -1,6 +1,6 @@
 # Ryugu
 
-The asteroid Ryugu on the March 2020 SPC shape, with Hayabusa2 ONC reflectance and colour maps, an equatorial
+The asteroid Ryugu on the March 2020 SPC shape, with Hayabusa2 ONC reflectance and color maps, an equatorial
 close-up mosaic, thermal inertia, spectral slope and elevation.
 
 ## Sources
@@ -31,7 +31,7 @@ using spiceypy==7.0.0.
 Where two surfaces are equally close or the bound is exceeded, the texel keeps the gray grid, so undercuts do not pick
 the wrong surface.
 
-**Reflectance and colour.** The v-band map is 0.2 degrees/pixel with -1 as no-data, stretched 0–0.035. The colour
+**Reflectance and color.** The v-band map is 0.2 degrees/pixel with -1 as no-data, stretched 0–0.035. The color
 mosaic is a separately corrected, brightness-matched product. The 2018 SfM shape was considered; the newer SPC model
 was chosen for registration.
 

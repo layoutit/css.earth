@@ -7,7 +7,7 @@
   "orbitalPeriodSource": "Derived: Kepler's third law with the published semi-major axis 9.93 +/- 0.03 au and the fitted masses of Lacour et al. (2021, Table 2, RV + b and c astrometry): the star 1.75, planet b 11.90 and planet c 8.89 Jupiter masses in Jacobi coordinates (b orbits the star-and-c barycentre), 1.769846 solar masses in all: sqrt(9.93^3 / 1.769846) = 23.521 yr = 8591.0 d. The paper prints no period for b.",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the model radius in the shared neutral gray, self-luminous. No image, visible colour, map or oblateness of Beta Pictoris b is measured; its size comes from its luminosity and models, its mass and orbit from astrometry."
+    "qualification": "A sphere at the model radius in the shared neutral gray, self-luminous. No image, visible color, map or oblateness of Beta Pictoris b is measured; its size comes from its luminosity and models, its mass and orbit from astrometry."
   },
   "effectiveTemperatureK": 1742,
   "effectiveTemperatureSource": "1742 +/- 10 K, GRAVITY Collaboration (2020, A&A 633, A110; arXiv:1912.04651), the Exo-REM fit to the GRAVITY and GPI spectra (as cited by Ortiz Ceballos et al. 2026, Extended Data Table 3).",

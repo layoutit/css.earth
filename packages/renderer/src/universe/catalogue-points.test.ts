@@ -73,10 +73,10 @@ test('seen from outside, a bank draws only as many dots as its projected shape h
   assert.throws(() => parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, outsidePixelsPerDot: 0 } }), /test-stars: outsidePixelsPerDot is a positive number/);
 });
 
-test('a palette bank colours each point by its index and refuses an index outside the palette', () => {
-  const coloured = { ...bank, appearance: { ...bank.appearance, palette: ['#8ec9ff', '#ffc070'] }, points: [[1, 0, -10, 0], [-1, 0, -10, 1]] };
-  assert.deepEqual(parseCataloguePoints(coloured).points.map(point => point.colorCss), ['#8ec9ff', '#ffc070']);
-  assert.throws(() => parseCataloguePoints({ ...coloured, points: [[1, 0, -10, 2]] }), /test-stars: point 0 names palette colour 2/);
+test('a palette bank colors each point by its index and refuses an index outside the palette', () => {
+  const colored = { ...bank, appearance: { ...bank.appearance, palette: ['#8ec9ff', '#ffc070'] }, points: [[1, 0, -10, 0], [-1, 0, -10, 1]] };
+  assert.deepEqual(parseCataloguePoints(colored).points.map(point => point.colorCss), ['#8ec9ff', '#ffc070']);
+  assert.throws(() => parseCataloguePoints({ ...colored, points: [[1, 0, -10, 2]] }), /test-stars: point 0 names palette color 2/);
 });
 
 test('catalogue point banks refuse malformed points and appearances, naming the bank', () => {
@@ -211,11 +211,11 @@ test('a translucent catalogue draws its dots as paths with their alpha', async (
   points.destroy();
 });
 
-test('a sized palette draws one colour at two radii as two paths, and refuses a radius list that does not match', async () => {
+test('a sized palette draws one color at two radii as two paths, and refuses a radius list that does not match', async () => {
   const sized = { ...bank, appearance: { ...bank.appearance, palette: ['#ffffff', '#ffffff'], paletteRadiusPx: [1.1, 0.5] },
     points: [[1, 0, -10, 0], [-1, 0, -10, 1]] };
   assert.deepEqual(parseCataloguePoints(sized).points.map(point => point.radiusPx), [1.1, 0.5]);
-  assert.throws(() => parseCataloguePoints({ ...sized, appearance: { ...sized.appearance, paletteRadiusPx: [1] } }), /test-stars: paletteRadiusPx holds one positive radius per palette colour/);
+  assert.throws(() => parseCataloguePoints({ ...sized, appearance: { ...sized.appearance, paletteRadiusPx: [1] } }), /test-stars: paletteRadiusPx holds one positive radius per palette color/);
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   const points = mountCataloguePoints({ host, url: '/sized.json', loadBank: async () => sized });
   points.publish({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] } },

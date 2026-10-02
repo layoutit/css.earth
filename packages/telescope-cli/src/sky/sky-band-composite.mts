@@ -1,7 +1,7 @@
 /** Survey sky bands -> one asinh display raster and its TAN WCS.
  * The route owns every calibration factor, or states that a band has none, and which acquisition each band may use; a recipe names
  * bands, a grid, one background and one peak percentile for every band, and one common display.
- * Each band is divided by its own measured range, the usual survey false-colour practice, because
+ * Each band is divided by its own measured range, the usual survey false-color practice, because
  * infrared bands differ in brightness by an order of magnitude. No authored gain, crop or rotation. */
 import { plainName } from '@cssearth/telescope/node';
 import { createWriteStream } from 'node:fs';
@@ -69,7 +69,7 @@ function jwst(entry: JwstBand): SkyBand {
 }
 function wise(label: string, band: WiseBand, janskyPerDn: number): SkyBand {
   return { label, acquisition: { kind: 'wise-atlas', band }, toMJyPerSr: janskyPerDn / WISE_ATLAS_PIXEL_SR / 1e6, reference: WISE,
-    calibration: `AllWISE atlas DN x ${janskyPerDn} Jy/DN / 1.375 arcsec atlas pixel. No colour correction: it depends on the unknown spectrum.` };
+    calibration: `AllWISE atlas DN x ${janskyPerDn} Jy/DN / 1.375 arcsec atlas pixel. No color correction: it depends on the unknown spectrum.` };
 }
 function irac(label: string, channel: number, factor: number): SkyBand {
   return { label, acquisition: { kind: 'hips2fits', hips: `CDS/P/SPITZER/IRAC${channel}` }, toMJyPerSr: factor, reference: IRAC,
@@ -78,8 +78,8 @@ function irac(label: string, channel: number, factor: number): SkyBand {
 
 /** Scanned photographic plates: plate density, not flux. The digitized values respond nonlinearly and differ
  * from plate to plate, so the route claims no calibration and cannot remove plate-to-plate level steps. */
-function dss(label: string, colour: 'blue' | 'red'): SkyBand {
-  return { label, acquisition: { kind: 'hips2fits', hips: `CDS/P/DSS2/${colour}` }, toMJyPerSr: null, reference: DSS, saturates: true,
+function dss(label: string, color: 'blue' | 'red'): SkyBand {
+  return { label, acquisition: { kind: 'hips2fits', hips: `CDS/P/DSS2/${color}` }, toMJyPerSr: null, reference: DSS, saturates: true,
     calibration: 'Relative photographic units: CDS HiPS of STScI digitized Schmidt plate scans. Plate response is nonlinear and plate-dependent; no flux calibration, linearization or plate-level matching is applied.' };
 }
 /** ESASky HiPS of the public Herschel Science Archive maps. Neither the HiPS record nor the hips2fits header declares
@@ -405,7 +405,7 @@ export async function composeSkyBands(recipe: SkyBandComposite, io: SkyBandIo) {
     evidence: { schema: 'cssearth-sky-band-composite-evidence@1', grid: recipe.grid, wcs: gridWcs(recipe.grid),
       backgroundPercentile: recipe.backgroundPercentile, peakPercentile: recipe.peakPercentile, bands, display: asinhBandEvidence(recipe.display),
       coverage: recipe.coverage === 'alpha'
-        ? 'Pixels no band observed, including masked saturated plate stars, carry alpha 0. Consumers read that channel as no coverage; their colour bytes are black and must not be read as zero brightness.'
+        ? 'Pixels no band observed, including masked saturated plate stars, carry alpha 0. Consumers read that channel as no coverage; their color bytes are black and must not be read as zero brightness.'
         : 'Pixels no band observed are black bytes; this composite has no coverage channel.',
       limits: 'The survey products have no absolute zero level, so each band loses one measured background. Bands without a documented calibration stay in relative source units. Dividing each band by its own range means hue does not show physical band ratios. Missing pixels are black. Rows are reversed once from FITS order into top-down raster order.' } };
 }

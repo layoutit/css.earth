@@ -10,7 +10,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 | View or quantity | Source |
 | --- | --- |
 | Visible body | [Hubble OPAL Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32) rotation-A F395N/F502N/F631N global map, 2025-08-29; unobserved polar and ring-occluded rows are filled during preparation |
-| Visible body colour | [Karkoschka (1998)](https://doi.org/10.1006/icar.1998.5913) full-disc albedo spectrum, [PDS `1995LOW.TAB`](https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.lbl) (ESO, July 1995, rings edge-on) |
+| Visible body color | [Karkoschka (1998)](https://doi.org/10.1006/icar.1998.5913) full-disc albedo spectrum, [PDS `1995LOW.TAB`](https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.lbl) (ESO, July 1995, rings edge-on) |
 | Ring opacity profile | [Cassini UVIS HSP alpha Virginis occultation, 2006 day 285](https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL), 1 km bins, PDS CO-SR-UVIS-HSP-2/4-OCC-V3.0 |
 | Ultraviolet and methane bands | [Hubble OPAL Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32), 2025 |
 | Ring boundaries and motion | [PDS ring statistics](https://pds-rings.seti.org/saturn/saturn_rings_table.html) and JPL SAT441 |
@@ -37,15 +37,15 @@ latitude before resampling to a 2,880 x 1,440 grid. The fill supplies no
 measured cloud detail. The polar caps are projected from the nearest
 observed rows.
 
-Colour. The OPAL readme calls the colour TIF "arbitrarily scaled", so its
+Color. The OPAL readme calls the color TIF "arbitrarily scaled", so its
 channel balance is not a measurement. Preparation ties it to Karkoschka's
 full-disc albedo of Saturn, times a 5,772 K Planck spectrum, through the CIE
 1931 observer into linear sRGB: `#ceb794`, recorded in
-[`source/photometry/karkoschka-1998-whole-disc-colour.json`](source/photometry/karkoschka-1998-whole-disc-colour.json).
+[`source/photometry/karkoschka-1998-whole-disc-color.json`](source/photometry/karkoschka-1998-whole-disc-color.json).
 The tie allows for the limb law, so the flood-lit disc integrates to
-Karkoschka's colour. The map then gets back its untied luminance with one
+Karkoschka's color. The map then gets back its untied luminance with one
 factor on all three channels, 1.264, and a soft shoulder keeps bright texels
-from clipping. Spatial colour differences stay the map's own. An independent
+from clipping. Spatial color differences stay the map's own. An independent
 spectrum agrees: Payne et al. (2026) gives green/red 0.863 and blue/red 0.589,
 where Karkoschka's spectrum gives 0.863 and 0.593.
 
@@ -66,8 +66,8 @@ Colwell, Jerousek, Becker and Esposito). Of the 73,713 bins between 66,900
 and 140,612 km, 60,886 carry a measured normal optical depth, 4,518 are below
 the detection floor and count as empty, and 8,309 are flagged corrupted and
 are interpolated. The Encke and Keeler gaps, the Cassini division and the F
-ring come from the occultation. No qualified radial colour dataset exists, so
-the ring colour is uniform white under the solar tint. Boundaries are
+ring come from the occultation. No qualified radial color dataset exists, so
+the ring color is uniform white under the solar tint. Boundaries are
 cross-checked against the PDS
 [Saturn ring statistics](https://pds-rings.seti.org/saturn/saturn_rings_table.html).
 Nothing is drawn inside 66,900 km, where the profile starts.
@@ -83,7 +83,7 @@ Nothing is drawn on the rings beyond that profile, and every dataset shows the
 same rings: no ring brightness is measured here in ultraviolet or at 889 nm.
 Until 2026-10-01 four spinning plates added 190 seeded dots, grouped into
 authored wake arcs and spokes; no source placed them, so they were removed
-(left before, right after). The same change removed ring images recoloured per
+(left before, right after). The same change removed ring images recolored per
 dataset with hand-set band gains.
 
 ![Ring detail before and after removing the seeded dots](evidence/2026-10-01/ring-tracers-before-after.webp)
@@ -107,7 +107,7 @@ gives cloud-top periods, recorded on 16 latitude bands.
 
 The ultraviolet and methane views use OPAL Cycle 32 F225W and FQ889N maps.
 Preparation keeps rotation A, fills the same unmeasured rows and applies a
-false-colour palette. No visible-light detail is added.
+false-color palette. No visible-light detail is added.
 The FQ889N identification follows the
 [WFC3 UVIS filter reference](https://hst-docs.stsci.edu/wfc3ihb/chapter-6-uvis-imaging-with-wfc3/6-5-uvis-spectral-elements).
 There is no thermal view: no measured global thermal raster of Saturn is
@@ -134,7 +134,7 @@ at their JPL Horizons positions by [Saturn's moons without a page](../saturn-min
 
 ## Hubble dates
 
-The dataset stepper selects 8 dated OPAL visible-colour maps, one rotation per
+The dataset stepper selects 8 dated OPAL visible-color maps, one rotation per
 observing cycle.
 
 | Observation starts (UTC) | Rotation | Release |
@@ -150,7 +150,7 @@ observing cycle.
 
 They are restored by [the acquisition recipe](source/preparation/acquisition.json).
 These are publisher mosaics with contrast enhancement and arbitrary channel
-scaling, not calibrated colour comparisons between years. [The observation
+scaling, not calibrated color comparisons between years. [The observation
 recipe](source/preparation/observations.json) fills no missing coverage: a gray
 graticule marks it. The dates reuse the visible scene's rings and lighting.
 
@@ -167,6 +167,6 @@ component FITS rows in stored order than after a north/south flip.
 - Interior layers are illustrations.
 - Narrow ring features are widened and brightened for readability; they do not establish optical depth or fully resolved ringlets.
 - Rotation is accelerated. The camera, shadows and background orientation are presentation choices, and source observations come from different dates.
-- The visible map's colour balance is tied to one whole-disc spectrum from 1995; the 2025 map's own cloud colours are kept, but a seasonal change in Saturn's overall colour since 1995 would not show. The tie sets channel ratios only; the map's overall brightness is still the archive TIF's arbitrary scale, kept at its untied mean, and its brightest 4 % of texels are compressed by a soft shoulder.
+- The visible map's color balance is tied to one whole-disc spectrum from 1995; the 2025 map's own cloud colors are kept, but a seasonal change in Saturn's overall color since 1995 would not show. The tie sets channel ratios only; the map's overall brightness is still the archive TIF's arbitrary scale, kept at its untied mean, and its brightest 4 % of texels are compressed by a soft shoulder.
 - The map's blue channel is F395N (violet) data, displayed as sRGB blue with the F467M limb law. The navigation portrait and context image still crop the untied TIF.
-- The material overlay has one colour and alpha per texel, so the per-channel limb law is exact for the prepared surface's mean colour and approximate for colours far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). OPAL's coefficients are for near-zero phase; directional frames use them at every phase.
+- The material overlay has one color and alpha per texel, so the per-channel limb law is exact for the prepared surface's mean color and approximate for colors far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). OPAL's coefficients are for near-zero phase; directional frames use them at every phase.

@@ -23,8 +23,8 @@
       ]
     },
     {
-      "id": "colour",
-      "subject": "Colour",
+      "id": "color",
+      "subject": "Color",
       "status": "included",
       "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 448: HR 2484; VizieR III/202, cross-checked against Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 88 (BS 2484) (6 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #f5efff. Routes tried in order: stis-ngsl: HD 48737 is not in the library; pulkovo: HR 2484 is not in the catalogue; kiehling: HR 2484 is not among its 60 stars; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; kharitonov: used.",
       "evidence": [

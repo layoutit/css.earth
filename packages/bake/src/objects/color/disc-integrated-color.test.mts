@@ -15,7 +15,7 @@ const makemake = JSON.parse((await read('photometry/disc-color.json')).toString(
 const withObject = (indices: Record<string, number>) => ({ ...makemake, object: { ...makemake.object,
   indices: Object.fromEntries(Object.entries(indices).map(([name, value]) => [name, { value }])) } });
 
-test('an object with the Sun\'s colours is neutral at its geometric albedo', () => {
+test('an object with the Sun\'s colors is neutral at its geometric albedo', () => {
   const sun = Object.fromEntries(Object.entries(makemake.sun.indices).map(([name, value]) => [name, (value as { value: number }).value]));
   const color = discIntegratedColor(parseDiscColorRecord(withObject(sun)), colorMatching, illuminant);
   assert.deepEqual(color.reflectance.map(([, value]) => value), [1, 1, 1, 1]);
@@ -28,13 +28,13 @@ test('a redder B-V lowers blue reflectance and a redder V-R raises red', () => {
   assert.ok(Math.abs(b![1] - 10 ** (-0.4 * (0.91 - 0.653))) < 1e-12);
 });
 
-test('Makemake\'s published colours and albedo give a pale warm sRGB colour', () => {
+test('Makemake\'s published colors and albedo give a pale warm sRGB color', () => {
   const color = discIntegratedColor(parseDiscColorRecord(makemake), colorMatching, illuminant);
   assert.deepEqual(color.srgb, [240, 233, 211]);
   assert.ok(color.linear[0] > color.linear[1] && color.linear[1] > color.linear[2]);
 });
 
-test('Haumea\'s rotation-corrected colours and occultation albedo give a light, nearly neutral gray', async () => {
+test('Haumea\'s rotation-corrected colors and occultation albedo give a light, nearly neutral gray', async () => {
   const haumea = JSON.parse(await readFile(new URL('src/objects/haumea/source/photometry/disc-color.json', pathToFileURL(findProjectRoot(import.meta.url) + '/')), 'utf8'));
   const color = discIntegratedColor(parseDiscColorRecord(haumea), colorMatching, illuminant);
   assert.deepEqual(color.srgb, [188, 189, 191]);

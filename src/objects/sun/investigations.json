@@ -18,7 +18,7 @@
       "id": "jsoc-hmi-continuum-mosaic",
       "subject": "JSOC hmi.Ic_noLimbDark_720s continuum frames across Carrington Rotation 2311",
       "status": "included",
-      "finding": "The Photosphere dataset reads 28 QUALITY 0 hmi.Ic_noLimbDark_720s frames (daily 00:00 TAI, 13 May to 9 June 2026, plus 26 May 12:00 for the missing midnight), each placed by its pinned DRMS keywords CRPIX, CDELT, CROTA2, RSUN_OBS, CRLN_OBS and CRLT_OBS; each column blends the two frames whose central meridians bracket it. The rim plate uses the removed limb darkening measured as the 13 May hmi.Ic_720s to hmi.Ic_noLimbDark_720s ratio, because LDCoef0-5 do not follow a polynomial in 1 - mu (up to 6% off). Colours follow SDO's browse colour table measured from I/I0 0.56 to 1.08; below 0.56 the palette ramps to black because sunspots are too small in the browse JPEG to measure.",
+      "finding": "The Photosphere dataset reads 28 QUALITY 0 hmi.Ic_noLimbDark_720s frames (daily 00:00 TAI, 13 May to 9 June 2026, plus 26 May 12:00 for the missing midnight), each placed by its pinned DRMS keywords CRPIX, CDELT, CROTA2, RSUN_OBS, CRLN_OBS and CRLT_OBS; each column blends the two frames whose central meridians bracket it. The rim plate uses the removed limb darkening measured as the 13 May hmi.Ic_720s to hmi.Ic_noLimbDark_720s ratio, because LDCoef0-5 do not follow a polynomial in 1 - mu (up to 6% off). Colors follow SDO's browse color table measured from I/I0 0.56 to 1.08; below 0.56 the palette ramps to black because sunspots are too small in the browse JPEG to measure.",
       "evidence": [
         "https://jsoc1.stanford.edu/SUM96/D1995449626/S00003/continuum.fits",
         "https://jsoc1.stanford.edu/SUM11/D1995447909/S00003/continuum.fits",
@@ -29,7 +29,7 @@
       "id": "jsoc-hmi-radial-field-map",
       "subject": "JSOC hmi.mrsynop_small_720s radial magnetic-field map for CR2311",
       "status": "included",
-      "finding": "The Magnetic field dataset uses the 720 by 360 radial field synoptic map, whose FITS grid is equally spaced in sine latitude; preparation resamples it to equal latitude and applies a declared bipolar blue-to-amber false-colour scale.",
+      "finding": "The Magnetic field dataset uses the 720 by 360 radial field synoptic map, whose FITS grid is equally spaced in sine latitude; preparation resamples it to equal latitude and applies a declared bipolar blue-to-amber false-color scale.",
       "evidence": [
         "https://jsoc1.stanford.edu/SUM89/D2005165426/S00000/synopMr.fits"
       ]
@@ -38,7 +38,7 @@
       "id": "aia-304-synoptic-map",
       "subject": "SDO AIA 304 A CR2311 synoptic map",
       "status": "included",
-      "finding": "The Chromosphere dataset uses the 3,600 by 1,080 AIA 304 synoptic FITS map in false colour on a logarithmic intensity scale, with longitude used as stored: Carrington longitude grows to the right, which is the renderer's east-positive direction. The magnetic map and the photosphere use the same direction, so the datasets stay registered (correlation with |B| 0.57). The 2026-09-18 review reversed every Sun map, which kept them registered with each other but mirrored all of them; the Solar System audit removed the reversal.",
+      "finding": "The Chromosphere dataset uses the 3,600 by 1,080 AIA 304 synoptic FITS map in false color on a logarithmic intensity scale, with longitude used as stored: Carrington longitude grows to the right, which is the renderer's east-positive direction. The magnetic map and the photosphere use the same direction, so the datasets stay registered (correlation with |B| 0.57). The 2026-09-18 review reversed every Sun map, which kept them registered with each other but mirrored all of them; the Solar System audit removed the reversal.",
       "evidence": [
         "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0304/CR2311.fits",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/source/preparation/raster.json"
@@ -48,7 +48,7 @@
       "id": "aia-171-synoptic-map",
       "subject": "SDO AIA 171 A CR2311 synoptic map",
       "status": "included",
-      "finding": "The Corona dataset uses the 3,600 by 1,080 AIA 171 synoptic FITS map in false colour on a logarithmic intensity scale, with longitude used as stored: Carrington longitude grows to the right, which is the renderer's east-positive direction. The magnetic map and the photosphere use the same direction, so the datasets stay registered (correlation with |B| 0.55). The 2026-09-18 review reversed every Sun map, which kept them registered with each other but mirrored all of them; the Solar System audit removed the reversal.",
+      "finding": "The Corona dataset uses the 3,600 by 1,080 AIA 171 synoptic FITS map in false color on a logarithmic intensity scale, with longitude used as stored: Carrington longitude grows to the right, which is the renderer's east-positive direction. The magnetic map and the photosphere use the same direction, so the datasets stay registered (correlation with |B| 0.55). The 2026-09-18 review reversed every Sun map, which kept them registered with each other but mirrored all of them; the Solar System audit removed the reversal.",
       "evidence": [
         "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0171/CR2311.fits",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/source/preparation/raster.json"

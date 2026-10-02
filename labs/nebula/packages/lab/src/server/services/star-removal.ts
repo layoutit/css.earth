@@ -92,7 +92,7 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
     if (metadata.depth !== 'uchar' || metadata.channels !== 3 || metadata.space !== 'srgb' ||
         !['png', 'jpeg', 'tiff', 'webp'].includes(metadata.format ?? '')) {
       const path = `${cachePath}-inputs/${image.id}-rgb8-v1.png`;
-      const converted = await sharp(bytes, { unlimited: true }).toColourspace('srgb').removeAlpha().png().toBuffer();
+      const converted = await sharp(bytes, { unlimited: true }).toColorspace('srgb').removeAlpha().png().toBuffer();
       const existing = await readFile(resolve(root, path)).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
       if (!existing || !existing.equals(converted)) {
         await mkdir(dirname(resolve(root, path)), { recursive: true });

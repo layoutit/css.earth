@@ -1,7 +1,7 @@
 # NGC 6744
 
-An observatory photograph of NGC 6744, cleaned of the Milky Way stars in front of it and colour-tied to its measured
-integrated colour, lies flat on its measured disc. No catalogue of its nebulae or clusters was found, so it has no
+An observatory photograph of NGC 6744, cleaned of the Milky Way stars in front of it and color-tied to its measured
+integrated color, lies flat on its measured disc. No catalogue of its nebulae or clusters was found, so it has no
 dots. Image brightness does not measure per-pixel distance.
 
 ## Sources
@@ -23,7 +23,7 @@ dots. Image brightness does not measure per-pixel distance.
   score halves 8 px off, and the disc centre of Lang et al. lands on the nucleus.
 - **Foreground stars:** NGC 6744 lies 26° from the Galactic plane. 1,381 of the 2,119 Gaia foreground stars in the
   image are removed where they show; 563 on extended light are left.
-- **Colour:** tied to a B-V of 0.62: red/green 1.118 and blue/green 1.186 against 1.105 and 0.909, so red × 0.989 and
+- **Color:** tied to a B-V of 0.62: red/green 1.118 and blue/green 1.186 against 1.105 and 0.909, so red × 0.989 and
   blue × 0.767 in linear light. The publisher's composite ran blue.
 - **Disc:** inclination 53.5°, line of nodes 195.4°, drawn as one flat image on the midplane. The
   support radius, 27.9 kpc, is where the frame stops on its tightest side. No bulge component: no published
@@ -43,7 +43,7 @@ dots. Image brightness does not measure per-pixel distance.
 The NGC 6744 page in headless Chromium at 1440 × 900, device pixel ratio 2, on this branch on 2026-10-01: the default
 arrival, then the camera turned to the side and to above the disc.
 
-- The prepared bank's `approximation.limitations` records the foreground and colour-tie counts quoted above.
+- The prepared bank's `approximation.limitations` records the foreground and color-tie counts quoted above.
 
 ## Measured, chosen and inferred
 
@@ -60,7 +60,7 @@ arrival, then the camera turned to the side and to above the disc.
 
 - Many Milky Way stars remain: 563 catalogued ones on the galaxy's light, and every star too faint for the criterion.
   Removed stars leave smooth pale patches up close.
-- The colour tie rests on a B-V uncertain by about 0.24 magnitudes.
+- The color tie rests on a B-V uncertain by about 0.24 magnitudes.
 - The companion NGC 6744A, in the frame's corner, is spread into the disc's plane like the rest of the image.
 - No dots: no published catalogue of the galaxy's nebulae or clusters was found on CDS.
 - The image is flat: seen edge-on it is a line. Nothing here has height.

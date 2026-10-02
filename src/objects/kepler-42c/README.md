@@ -8,7 +8,7 @@ It is one of 3 planets known around Kepler-42. Its orbit and size follow Muirhea
 
 **Orbit.** Mann et al. 2017 (2017AJ....153..267M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2017): P 0.45328731 d Muirhead et al. 2012 (2012ApJ...750L..37M), via the NASA Exoplanet Archive ps table (pl_refname MUIRHEAD_ET_AL__2012): a/R* derived from its semi-major axis 0.00598 au and stellar radius 0.16 solar radii; Q1-Q8 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q8_KOI_TABLE): inclination 83.65 degrees Mann et al. 2017 (2017AJ....153..267M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2017): e 0 Mann et al. 2017 (2017AJ....153..267M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2017): transit mid-time 2454964.60346 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by kepler-42's measured colour (#ffbf6d, the colour dataset of kepler-42 (src/objects/kepler-42/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by kepler-42's measured color (#ffbf6d, the color dataset of kepler-42 (src/objects/kepler-42/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of Kepler-42's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (75, 81, 82), folded onto its orbit. Upper limits and rows without an error are left out.
 

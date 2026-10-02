@@ -17,10 +17,10 @@
  *   the catalogue's own mask leaves the Milky Way's disc and the Magellanic Clouds empty, and those stay empty.
  * - In each redshift bin 0.02 wide, the fill keeps as many candidates per cell as the DESI sample holds per footprint
  *   cell, a fixed share of each bin chosen by each galaxy's WISE id, so the ball's depth follows DESI's.
- * - This catalogue has no g, r and z fluxes to colour a galaxy as DESI's are coloured, so each row carries its redshift
- *   bin (column C), and the script prints the median colour DESI's own galaxies show in each bin (each channel's median
- *   over the prepared DESI bank's untoned palette colours, `output/catalogue-points/nearby-universe/desi-bright-galaxies.json`,
- *   which `prepare-catalogue-points.mts src/objects/nearby-universe-galaxies desi-bright-galaxies` writes): the recipe's colour
+ * - This catalogue has no g, r and z fluxes to color a galaxy as DESI's are colored, so each row carries its redshift
+ *   bin (column C), and the script prints the median color DESI's own galaxies show in each bin (each channel's median
+ *   over the prepared DESI bank's untoned palette colors, `output/catalogue-points/nearby-universe/desi-bright-galaxies.json`,
+ *   which `prepare-catalogue-points.mts src/objects/nearby-universe-galaxies desi-bright-galaxies` writes): the recipe's color
  *   stops.
  */
 import { createReadStream } from 'node:fs';
@@ -112,16 +112,16 @@ const target = [...desiBins].map(count => count / footprintCells * coveredCells)
 const kept = homes.flatMap((home, index) => covered[home] && share(ids[index]!) < target[bin(zs[index]!)]! / available[bin(zs[index]!)]!
   ? [`${ids[index]},${ras[index]},${decs[index]},${zs[index]},${rs[index]},${bin(zs[index]!)}`] : []);
 const csv = ['wiseID,RA,DEC,Z,R,C', ...kept].join('\n') + '\n';
-// DESI's median colour per bin, from its prepared bank (points in the sample's row order).
+// DESI's median color per bin, from its prepared bank (points in the sample's row order).
 const bankPath = resolve(repository, 'output/catalogue-points/nearby-universe/desi-bright-galaxies.json');
 const bank = JSON.parse(await readFile(bankPath, 'utf8')) as { points?: number[][]; appearance?: { palette?: string[] } };
 if (!bank.points || bank.points.length !== desi.length || !bank.appearance?.palette) throw new TypeError(`${bankPath}: expected ${desi.length} points with a palette, in the sample's order.`);
 const channels = Array.from({ length: BINS }, () => [[], [], []] as number[][]);
 bank.points.forEach((point, index) => {
-  const at = bin(desi[index]![2]), colour = bank.appearance!.palette![point[3]!]!;
-  if (at >= 0) for (let channel = 0; channel < 3; channel++) channels[at]![channel]!.push(parseInt(colour.slice(1 + channel * 2, 3 + channel * 2), 16));
+  const at = bin(desi[index]![2]), color = bank.appearance!.palette![point[3]!]!;
+  if (at >= 0) for (let channel = 0; channel < 3; channel++) channels[at]![channel]!.push(parseInt(color.slice(1 + channel * 2, 3 + channel * 2), 16));
 });
-const colourStops = channels.map((bands, index) => [index, '#' + bands.map(values => median(values).toString(16).padStart(2, '0')).join('')]);
+const colorStops = channels.map((bands, index) => [index, '#' + bands.map(values => median(values).toString(16).padStart(2, '0')).join('')]);
 await writeFile(outputPath, gzipSync(csv, { level: 9 }));
 console.log(JSON.stringify({
   cellDeg2: +CELL_DEG2.toFixed(3), desiRows: desi.length, desiFootprintDeg2: Math.round(footprintCells * CELL_DEG2),
@@ -129,5 +129,5 @@ console.log(JSON.stringify({
   coveredDeg2: Math.round(coveredCells * CELL_DEG2), kept: kept.length,
   bins: [...desiBins].map((count, index) => ({ z: +(Z_FROM + index * Z_BIN).toFixed(2), desiPerCell: +(count / footprintCells).toFixed(3),
     availablePerCell: +(available[index]! / coveredCells).toFixed(3), shortfall: available[index]! < target[index]! })),
-  colourStops, output: outputPath,
+  colorStops, output: outputPath,
 }, null, 2));

@@ -29,9 +29,9 @@
   },
   "datasets": {
     "color": {
-      "title": "Colour",
+      "title": "Photosphere color",
       "detail": "From its spectrum",
-      "summary": "The colour of its measured optical spectrum: magenta, because sodium and potassium absorb the yellow and green."
+      "summary": "The color of its measured optical spectrum: magenta, because sodium and potassium absorb the yellow and green."
     },
     "brightness": {
       "title": "Surface brightness",

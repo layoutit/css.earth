@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** WASP-43 system navigation markers, rendered from each body's own data by the shared context-marker module:
  *
- * - WASP-43: the photosphere colour of its colour dataset, dimmed toward the limb by the limb-darkening law measured from transits.
+ * - WASP-43: the photosphere color of its color dataset, dimmed toward the limb by the limb-darkening law measured from transits.
  * - WASP-43b: the published NIRSpec brightness-temperature map (the default dataset), seen from the host star.
  *
  *   node packages/telescope-cli/authoring/wasp-43/author.mts [--check]

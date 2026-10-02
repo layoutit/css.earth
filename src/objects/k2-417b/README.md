@@ -8,7 +8,7 @@ It is the only planet known around K2-417. Its orbit and size follow Incha et al
 
 **Orbit.** Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive ps table (pl_refname INCHA_ET_AL__2023): P 6.535 d Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive ps table (pl_refname INCHA_ET_AL__2023): a/R* 23.4; Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive ps table (pl_refname INCHA_ET_AL__2023): inclination 89 degrees No archive row states an eccentricity; the orbit is taken as circular Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive ps table (pl_refname INCHA_ET_AL__2023): transit mid-time 2458373.0321 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 823 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-417's measured colour (#ffd09e, the colour dataset of k2-417 (src/objects/k2-417/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** No image or measured color exists. The neutral gray is lit by k2-417's measured color (#ffd09e, the color dataset of k2-417 (src/objects/k2-417/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-417's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (42, 92), folded onto its orbit. Upper limits and rows without an error are left out.
 

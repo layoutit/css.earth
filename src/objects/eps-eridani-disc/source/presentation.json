@@ -19,7 +19,7 @@
       "id": "dust",
       "label": "ALMA · dust ring, 1.3 mm",
       "title": "The dust ring around ε Eridani in its own glow at 1.3 millimetres, from ALMA",
-      "description": "ALMA observed ε Eridani five times between 16 and 23 December 2019 at 1.3 millimetres, in six pointings around the star because the belt is wider than one antenna's field of view. What it sees is the dust's own faint heat, not starlight. This is the ALMA pipeline's image from the public archive, brought to the resolution of the image Booth et al. (2023) made from the same observations and shown in the colour map and scale of their Figure 1. It is noisier than theirs, and its ring is fainter. The star's own glow at the centre and the two sources Booth et al. find behind the disc are removed as they model them, so none is drawn as dust. The image has no third axis, so the depth is inferred: a tilted ring of the geometry measured on it projects to it better than a spherical shell or a constant depth, and each line of sight is placed on that ring. How thick it is comes from the model Wolff et al. (2025) run for this belt, and its east side is drawn nearer on their assumption that it shares planet b's orbital plane. The star itself is the sphere at the centre.",
+      "description": "ALMA observed ε Eridani five times between 16 and 23 December 2019 at 1.3 millimetres, in six pointings around the star because the belt is wider than one antenna's field of view. What it sees is the dust's own faint heat, not starlight. This is the ALMA pipeline's image from the public archive, brought to the resolution of the image Booth et al. (2023) made from the same observations and shown in the color map and scale of their Figure 1. It is noisier than theirs, and its ring is fainter. The star's own glow at the centre and the two sources Booth et al. find behind the disc are removed as they model them, so none is drawn as dust. The image has no third axis, so the depth is inferred: a tilted ring of the geometry measured on it projects to it better than a spherical shell or a constant depth, and each line of sight is placed on that ring. How thick it is comes from the model Wolff et al. (2025) run for this belt, and its east side is drawn nearer on their assumption that it shares planet b's orbital plane. The star itself is the sphere at the centre.",
       "summary": "The belt of dust 64 to 75 au from the star, far outside planet b's orbit, in its own glow at 1.3 mm, as ALMA imaged it.",
       "detail": "2019-12-22T02:21:14.207999, 190.0 mas pixels",
       "facts": [
@@ -29,9 +29,9 @@
           "value": "ALMA 12-m array, a six-pointing mosaic in a compact configuration, between 16 and 23 December 2019: b6-cont"
         },
         {
-          "id": "colour",
-          "label": "Colour",
-          "value": "Brightness in µJy/beam, from -50.66 to 90, in the publisher's colour map"
+          "id": "color",
+          "label": "Color",
+          "value": "Brightness in µJy/beam, from -50.66 to 90, in the publisher's color map"
         },
         {
           "id": "ring",

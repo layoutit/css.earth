@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /** HD 189733 system navigation markers, rendered from each body's own data with the WASP-43 system's renderers:
  *
- * - HD 189733 A: the colour of its Gaia XP spectrum, dimmed toward the limb by the law fitted to TESS transits of HD 189733b.
+ * - HD 189733 A: the color of its Gaia XP spectrum, dimmed toward the limb by the law fitted to TESS transits of HD 189733b.
  * - HD 189733b: Lally et al. (2025)'s MIRI brightness-temperature map seen from the host star, in the dataset's palette and range.
- * - HD 189733 B: the colour of its Gaia XP spectrum as a uniform disc; no limb darkening is measured.
+ * - HD 189733 B: the color of its Gaia XP spectrum as a uniform disc; no limb darkening is measured.
  *
  *   node packages/telescope-cli/authoring/hd-189733/author.mts [--check]
  *

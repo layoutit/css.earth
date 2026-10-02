@@ -1,6 +1,6 @@
 // The thumbnail of an object row: its default dataset's image, framed by one rule for every object. The object's light is
 // measured in the image, the tile is cut to that extent inside a margin, and the light fades to nothing before the
-// extent's edge and before the image's own frame, so no edge of the photograph shows on the panel. Colours are the
+// extent's edge and before the image's own frame, so no edge of the photograph shows on the panel. Colors are the
 // image's: over black the thumbnail composites to the same pixels, less the fade.
 import sharp from 'sharp';
 import { DECORATIVE_WEBP } from '../raster/index.ts';
@@ -80,7 +80,7 @@ export async function frameObjectThumbnail(image: Uint8Array) {
     const u = (region.left + (x + 0.5) / width * region.width) / full.width, v = (region.top + (y + 0.5) / height * region.height) / full.height;
     // Two fades: toward the edge of the object's extent, and toward the ellipse inscribed in the image's frame.
     const window = fade(Math.hypot(2 * u - 1, 2 * v - 1)) * (extent ? fade(extent.reach(u, v)) : 1);
-    // Empty sky becomes transparency; the colour is divided back so the pixel over black is unchanged.
+    // Empty sky becomes transparency; the color is divided back so the pixel over black is unchanged.
     const level = Math.max(data[from]!, data[from + 1]!, data[from + 2]!);
     const key = Math.min(1, level / SKY_LEVEL) * data[from + 3]! / 255;
     const alpha = Math.round(255 * window * key);

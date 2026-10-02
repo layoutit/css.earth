@@ -40,7 +40,7 @@ new route.
 | `llorri-camera` | `formats/geo.ts` | Archived closure with TAN-SIP distortion, bound to a body the frame lists in its field of view | Source-mesh rays |
 | `near-msi-camera` | `formats/geo.ts` | Reconstructed image table and bounded limb refinement | Source-mesh rays; paired raw detector validity |
 | `nh-lorri-camera` | `formats/geo.ts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
-| `nh-mvic-camera` | `formats/geo.ts` | Archived closure through a fitted image transform; three registered filters shown as colour | Source-mesh rays |
+| `nh-mvic-camera` | `formats/geo.ts` | Archived closure through a fitted image transform; three registered filters shown as color | Source-mesh rays |
 | `spice-camera` | `formats/geo.ts` | SPICE kernels | Source-mesh rays |
 | `junocam-camera` | `formats/junocam.ts` | SPICE kernels, one camera per strip of a push-frame image, with the kernel's radial distortion and two epochs fitted to the lit limb | Source-mesh rays, cast only where a strip can hold lit surface |
 | `encounter-fits` | `formats/encounter.ts` | Registered control network | Source-mesh rays |
@@ -113,7 +113,7 @@ Every format follows the same rules, and each dataset report records them.
   between source points as `ambiguous-source-point`.
 - **Display range.** A controlled-camera monochrome dataset uses a range from
   zero to its 99.5th percentile, so a uniformly bright body is not stretched. A
-  colour dataset shows its three bands on one authored `displayRange`, and the
+  color dataset shows its three bands on one authored `displayRange`, and the
   decoder checks each band and its units against the native labels. Floating
   samples receive the [shared IEC sRGB transfer](../../../color/color-transfer.ts)
   once, after surface transfer. Encoding does not qualify natural color.
