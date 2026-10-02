@@ -1,0 +1,28 @@
+{
+  "provenance": {
+    "name": "Neptune's moons without a page",
+    "products": [
+      {
+        "id": "dots",
+        "label": "JPL Horizons, satellite ephemerides NEP098 and NEP104",
+        "process": "Take every confirmed moon of Neptune in the pinned JPL catalogue that has no object package and has a Horizons code; ask Horizons for its geometric position relative to Neptune's centre at the world's epoch; draw one dot at that position.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "positions",
+          "moon-catalogue"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "No colour is measured for these moons; every dot is the neutral grey the app gives a moon without a measured colour, and its size is a display choice."
+        ]
+      }
+    ]
+  }
+}

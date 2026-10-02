@@ -2,9 +2,9 @@
   "schema": "cssearth-body-points-source@1",
   "id": "dots",
   "published": true,
-  "host": "saturn",
+  "host": "uranus",
   "source": "jpl-horizons",
-  "meaning": "Saturn's confirmed moons that have no page, one dot each at its JPL Horizons position relative to Saturn at the world's epoch. No colour is measured for these moons: the dot is the neutral grey the app gives every moon without a measured colour.",
+  "meaning": "Uranus's confirmed moons that have no page, one dot each at its JPL Horizons position relative to Uranus at the world's epoch. No colour is measured for these moons: the dot is the neutral grey the app gives every moon without a measured colour.",
   "table": {
     "path": "positions.csv.gz",
     "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",

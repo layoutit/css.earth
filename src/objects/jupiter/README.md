@@ -27,6 +27,8 @@ Source selections, recorded trials and open questions are in the [investigation 
   [satellite mean elements](https://ssd.jpl.nasa.gov/sats/elem/sep.html) and
   [physical parameters](https://ssd.jpl.nasa.gov/sats/phys_par/sep.html). The Galileo
   [PIA01299](https://science.nasa.gov/photojournal/the-galilean-satellites/) montage remains pinned source material.
+- Moons: 28 of Jupiter's 115 confirmed moons are separate object packages; the 87 others are drawn as plain dots at
+  their JPL Horizons positions by [Jupiter's moons without a page](../jupiter-minor-moons/README.md).
 
 ## Processing
 
