@@ -1,0 +1,28 @@
+{
+  "id": "abell-s1063",
+  "classification": "galaxy-cluster",
+  "order": 5459,
+  "physical": {
+    "name": "Abell S1063",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Abell S1063 is recorded here: its package frames it at 430,016 pc (object.json worldFrame.bodyRadiusM), half the short side of its picture at its distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 342.1907,
+    "declinationDegrees": -44.5269,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 1425199032.337357,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 105425,
+    "sources": {
+      "position": "NASA/IPAC Extragalactic Database (NED), Abell S1063: position from 2015ApJS..216...27B, redshift from 2024MNRAS.531.3973K (https://ned.ipac.caltech.edu/byname?objname=Abell%20S1063); NED preferred values of Abell S1063: RA 342.1907°, Dec -44.5269° (2015ApJS..216...27B); redshift 0.35166 ± 0.004934 (2024MNRAS.531.3973K)",
+      "distance": "Comoving distance of the redshift z = 0.35166 (NED, 2024MNRAS.531.3973K) in the Planck 2018 cosmology: 1425199032.337357 pc, from Astropy 8.0.1 Planck18.comoving_distance (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift (packages/bake/cli/prepare-catalogue-points.mts).",
+      "properMotion": "Zero: the object is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the redshift z = 0.35166: the redshift written as a velocity, not a motion through space. NASA/IPAC Extragalactic Database (NED), Abell S1063: position from 2015ApJS..216...27B, redshift from 2024MNRAS.531.3973K (https://ned.ipac.caltech.edu/byname?objname=Abell%20S1063)."
+    }
+  }
+}

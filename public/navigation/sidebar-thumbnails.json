@@ -27,6 +27,14 @@
       "bytes": 20058
     },
     {
+      "path": "src/objects/abell-s1063-layers/prepared/presentation.json",
+      "bytes": 1548
+    },
+    {
+      "path": "public/scenes/abell-s1063-layers/datasets/optical.webp",
+      "bytes": 18018
+    },
+    {
       "path": "src/objects/beta-pictoris-disc/prepared/presentation.json",
       "bytes": 9515
     },
@@ -303,6 +311,22 @@
       "bytes": 17250
     },
     {
+      "path": "src/objects/macs-j0717-layers/prepared/presentation.json",
+      "bytes": 1478
+    },
+    {
+      "path": "public/scenes/macs-j0717-layers/datasets/optical.webp",
+      "bytes": 15890
+    },
+    {
+      "path": "src/objects/macs-j1149-layers/prepared/presentation.json",
+      "bytes": 1522
+    },
+    {
+      "path": "public/scenes/macs-j1149-layers/datasets/optical.webp",
+      "bytes": 18602
+    },
+    {
       "path": "src/objects/ngc-1275-volume/prepared/presentation.json",
       "bytes": 1390
     },
@@ -541,6 +565,24 @@
       ],
       "credit": "ESA/Hubble",
       "sourceUrl": "https://esahubble.org/images/heic1711a/"
+    },
+    "abell-s1063-layers/optical": {
+      "url2x": "/navigation/focus-abell-s1063-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/abell-s1063-layers/prepared/presentation.json",
+        "public/scenes/abell-s1063-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/heic1615a/"
+    },
+    "abell-s1063-layers": {
+      "url2x": "/navigation/focus-object-abell-s1063-layers@2x.webp",
+      "inputs": [
+        "src/objects/abell-s1063-layers/prepared/presentation.json",
+        "public/scenes/abell-s1063-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/heic1615a/"
     },
     "beta-pictoris-disc/visible": {
       "url2x": "/navigation/focus-beta-pictoris-disc-visible@2x.webp",
@@ -1163,6 +1205,42 @@
       "credit": "ESA/Webb",
       "sourceUrl": "https://esawebb.org/images/weic2327a/"
     },
+    "macs-j0717-layers/optical": {
+      "url2x": "/navigation/focus-macs-j0717-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/macs-j0717-layers/prepared/presentation.json",
+        "public/scenes/macs-j0717-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/opo0917a/"
+    },
+    "macs-j0717-layers": {
+      "url2x": "/navigation/focus-object-macs-j0717-layers@2x.webp",
+      "inputs": [
+        "src/objects/macs-j0717-layers/prepared/presentation.json",
+        "public/scenes/macs-j0717-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/opo0917a/"
+    },
+    "macs-j1149-layers/optical": {
+      "url2x": "/navigation/focus-macs-j1149-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/macs-j1149-layers/prepared/presentation.json",
+        "public/scenes/macs-j1149-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/heic1505b/"
+    },
+    "macs-j1149-layers": {
+      "url2x": "/navigation/focus-object-macs-j1149-layers@2x.webp",
+      "inputs": [
+        "src/objects/macs-j1149-layers/prepared/presentation.json",
+        "public/scenes/macs-j1149-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/heic1505b/"
+    },
     "ngc-1275-volume/sdss-optical": {
       "url2x": "/navigation/focus-ngc-1275-volume-sdss-optical@2x.webp",
       "inputs": [
@@ -1559,6 +1637,7 @@
     "abell-1689-layers": "abell-1689-layers",
     "abell-2744-layers": "abell-2744-layers",
     "abell-370-layers": "abell-370-layers",
+    "abell-s1063-layers": "abell-s1063-layers",
     "beta-pictoris-disc": "beta-pictoris-disc",
     "betelgeuse-shell": "betelgeuse-shell",
     "bullet-cluster-layers": "bullet-cluster-layers",
@@ -1583,6 +1662,8 @@
     "m87-volume": "m87-volume",
     "m95-layers": "m95-layers",
     "macs-j0416-layers": "macs-j0416-layers",
+    "macs-j0717-layers": "macs-j0717-layers",
+    "macs-j1149-layers": "macs-j1149-layers",
     "ngc-1275-volume": "ngc-1275-volume",
     "ngc-1637-layers": "ngc-1637-layers",
     "ngc-253-layers": "ngc-253-layers",
