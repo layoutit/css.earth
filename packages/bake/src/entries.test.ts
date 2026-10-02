@@ -58,7 +58,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'objects/layers/giant': ['delivery', 'photometry', 'presentation', 'scene', 'objects/color', 'objects/content', 'objects/geometry', 'objects/scene', 'objects/sources', 'objects/layers/observed-surfaces'],
   'objects/layers/material-composition': ['delivery', 'photometry', 'presentation', 'raster', 'scene', 'objects/color', 'objects/content', 'objects/geometry', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/cutaway', 'objects/layers/giant', 'objects/layers/observed-surfaces'],
   'objects/layers/shape-model': ['astronomy', 'contract', 'presentation', 'scene', 'objects/color', 'objects/content', 'objects/geometry', 'objects/scene', 'objects/sources', 'objects/layers/material-composition'],
-  'objects/layers/observation': ['raster', 'objects/cameras', 'objects/color', 'objects/geometry', 'objects/raster'],
+  'objects/layers/observation': ['raster', 'photometry', 'objects/cameras', 'objects/color', 'objects/geometry', 'objects/raster'],
   'objects/stellar': ['objects/color', 'objects/raster', 'objects/sources'],
   'objects/acquisition': ['delivery', 'raster', 'objects/sources', 'objects/layers/observation', 'objects/layers/terrestrial'],
   'objects/sphere-survey': ['objects/cameras', 'objects/geometry', 'objects/layers/terrestrial', 'sources'],
