@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "positions",
+      "path": "src/objects/jupiter-ring-particles/source/dots/positions.csv.gz",
+      "origin": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
+      "sourceUrl": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
+      "title": "600 dots in Jupiter's rings, sampled from the published ring boundaries, optical depths and thicknesses",
+      "credit": "NASA Planetary Data System, Ring-Moon Systems Node, Jupiter ring table",
+      "acquisition": "Written 2026-10-02 by packages/bake/authoring/ring-particles/positions.mts jupiter 600 from the bands of Jupiter's ring recipe: each ring's share of the dots follows its opacity, width and radius; heights are spread through its thickness; longitudes come from a seeded generator and are not measurements.",
+      "generator": "packages/bake/authoring/ring-particles/positions.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-rings-jupiter-ring-table",
+            "role": "material",
+            "evidence": "src/objects/jupiter-ring-particles/source/dots/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "ring-table"
+      ],
+      "license": "NASA PDS data; not copyrighted, cite the Ring-Moon Systems Node."
+    },
+    {
+      "id": "ring-table",
+      "path": "src/objects/jupiter/source/preparation/rings.json",
+      "origin": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
+      "sourceUrl": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
+      "title": "Jupiter's rings: boundaries, normal optical depth and vertical thickness of each ring, as recorded in Jupiter's ring recipe",
+      "credit": "NASA Planetary Data System, Ring-Moon Systems Node, Jupiter ring table",
+      "acquisition": "Read from Jupiter's package, whose ring recipe records the PDS Rings Node values.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-rings-jupiter-ring-table",
+            "role": "material",
+            "evidence": "src/objects/jupiter-ring-particles/README.md#sources"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "NASA PDS data; not copyrighted, cite the Ring-Moon Systems Node."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/jupiter-ring-particles/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/jupiter-ring-particles/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

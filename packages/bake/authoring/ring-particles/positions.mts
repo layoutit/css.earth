@@ -28,7 +28,7 @@ const root = resolve(import.meta.dirname, '../../../..'), hostDirectory = resolv
 const recipePath = resolve(hostDirectory, 'source/preparation/rings.json');
 const DOTS = process.argv[3] === undefined ? DEFAULT_DOTS : Number(process.argv[3]);
 if (!Number.isInteger(DOTS) || DOTS < 1) throw new TypeError(`The dot count must be a whole number above zero, got ${JSON.stringify(process.argv[3])}.`);
-interface Band { id?: string; source?: { radiusKm?: number; widthKm?: number; opticalDepth?: number } }
+interface Band { id?: string; source?: { radiusKm?: number; widthKm?: number; innerRadiusKm?: number; outerRadiusKm?: number; opticalDepth?: number; verticalThicknessKm?: number } }
 const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as { sources?: { path?: string }[]; layers?: { kind?: string; bounds?: number[]; bands?: Band[] }[] };
 const profile = recipe.layers?.find(layer => layer.kind === 'observed-radial-profile'), field = recipe.layers?.find(layer => layer.kind === 'annular-field');
 if (!profile && !field) throw new TypeError(`${recipePath}: needs an observed-radial-profile or an annular-field layer; ${host} has no measured rings.`);
@@ -37,7 +37,7 @@ const epochJdTt = (JSON.parse(await readFile(descriptorPath, 'utf8')) as { prope
 if (!Number.isFinite(epochJdTt)) throw new TypeError(`${descriptorPath} properties.worldFrame.epochJdTt must be a Julian date, got ${JSON.stringify(epochJdTt)}.`);
 
 /** One sampling bin: a dot lands within `widthKm` centred on `radiusKm`, chosen in proportion to `weight`. */
-const bins: { radiusKm: number; widthKm: number; weight: number }[] = [];
+const bins: { radiusKm: number; widthKm: number; thicknessKm: number; weight: number }[] = [];
 let described: string;
 if (profile) {
 const [inner, outer] = profile.bounds ?? [], tablePath = recipe.sources?.[0]?.path;
@@ -50,17 +50,20 @@ for (const [index, line] of (await readFile(table, 'latin1')).split('\n').entrie
   const fields = line.split(',').map(Number), [radiusKm, , , , tau, maximum, , , , , , flag] = fields;
   if (fields.length !== 12 || !Number.isFinite(radiusKm) || !Number.isFinite(tau)) throw new TypeError(`${table} row ${index + 1}: expected 12 numeric columns, got ${JSON.stringify(line)}.`);
   if (radiusKm! < inner! || radiusKm! > outer! || flag !== 0 || !(tau! > 0)) continue;
-  bins.push({ radiusKm: radiusKm!, widthKm: 1, weight: (1 - Math.exp(-(maximum! > 0 ? Math.min(tau!, maximum!) : tau!))) * radiusKm! });
+  bins.push({ radiusKm: radiusKm!, widthKm: 1, thicknessKm: 0, weight: (1 - Math.exp(-(maximum! > 0 ? Math.min(tau!, maximum!) : tau!))) * radiusKm! });
 }
 if (!bins.length) throw new TypeError(`${table}: no clean bin with a measured optical depth between ${inner} and ${outer} km.`);
 described = `${bins.length} clean bins of ${table} (${inner} to ${outer} km)`;
 } else {
   for (const band of field!.bands ?? []) {
-    const { radiusKm, widthKm, opticalDepth } = band.source ?? {};
-    if (![radiusKm, widthKm, opticalDepth].every(value => typeof value === 'number' && value > 0)) {
-      throw new TypeError(`${recipePath}: band ${JSON.stringify(band.id)} needs a positive source radiusKm, widthKm and opticalDepth, got ${JSON.stringify(band.source)}.`);
+    // A band states its centre and width, or its inner and outer edges; a published vertical thickness spreads its dots
+    // evenly through that thickness, centred on the ring plane.
+    const source = band.source ?? {}, { opticalDepth, verticalThicknessKm: thicknessKm = 0 } = source;
+    const radiusKm = source.radiusKm ?? (source.innerRadiusKm! + source.outerRadiusKm!) / 2, widthKm = source.widthKm ?? source.outerRadiusKm! - source.innerRadiusKm!;
+    if (![radiusKm, widthKm, opticalDepth].every(value => typeof value === 'number' && value > 0) || !(thicknessKm >= 0)) {
+      throw new TypeError(`${recipePath}: band ${JSON.stringify(band.id)} needs a positive source radius and width (or inner and outer radius) and opticalDepth, got ${JSON.stringify(band.source)}.`);
     }
-    bins.push({ radiusKm: radiusKm!, widthKm: widthKm!, weight: (1 - Math.exp(-opticalDepth!)) * widthKm! * radiusKm! });
+    bins.push({ radiusKm, widthKm, thicknessKm, weight: (1 - Math.exp(-opticalDepth!)) * widthKm * radiusKm });
   }
   if (!bins.length) throw new TypeError(`${recipePath}: the annular-field layer has no bands.`);
   described = `the ${bins.length} bands of ${recipePath}`;
@@ -88,7 +91,8 @@ for (let dot = 1; dot <= DOTS; dot++) {
   let low = 0, high = cumulative.length - 1;
   while (low < high) { const middle = low + high >> 1; if (cumulative[middle]! < pick) low = middle + 1; else high = middle; }
   const radiusKm = bins[low]!.radiusKm + (random() - 0.5) * bins[low]!.widthKm, longitude = random() * 2 * Math.PI;
-  rows.push(`${dot},${[0, 1, 2].map(axis => (radiusKm * (Math.cos(longitude) * node[axis]! + Math.sin(longitude) * quarter[axis]!)).toFixed(1)).join(',')}`);
+  const heightKm = bins[low]!.thicknessKm ? (random() - 0.5) * bins[low]!.thicknessKm : 0;
+  rows.push(`${dot},${[0, 1, 2].map(axis => (radiusKm * (Math.cos(longitude) * node[axis]! + Math.sin(longitude) * quarter[axis]!) + heightKm * pole[axis]!).toFixed(1)).join(',')}`);
 }
 const output = resolve(root, `src/objects/${host}-ring-particles/source/dots/positions.csv.gz`);
 await writeFile(output, gzipSync(`name,xKm,yKm,zKm\n${rows.join('\n')}\n`));

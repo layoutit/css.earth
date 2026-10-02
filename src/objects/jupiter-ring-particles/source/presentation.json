@@ -1,0 +1,30 @@
+{
+  "provenance": {
+    "name": "Jupiter's ring particles",
+    "products": [
+      {
+        "id": "dots",
+        "label": "PDS Rings Node Jupiter ring table",
+        "process": "Choose a ring in proportion to its opacity, 1 - exp(-tau), times its width times its radius; place a dot between its boundaries and within its vertical thickness about Jupiter's ring plane; repeat 600 times. The dot's longitude, radius and height come from a seeded generator.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "positions",
+          "ring-table"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "No ring particle has a measured position. Only each ring's share of the dots, its boundaries and its thickness are measured; each dot's place is drawn from a seeded generator.",
+          "Jupiter's rings are invisible at their true opacity; the 600 dots are a display choice. At the density of Saturn's dots Jupiter would have none.",
+          "The dots are spread evenly through each ring's thickness, which is an assumption: the table gives only the total thickness."
+        ]
+      }
+    ]
+  }
+}
