@@ -30,10 +30,15 @@ test('a surface at resolution scale 2 or 4 steps that many reductions behind, an
   assert.deepEqual(moon.levelFactors, [8, 4, 2, 1, 0.5]);
   assert.deepEqual(moon.levelDiameters.map(value => Math.round(value)), [0, 81, 163, 326, 652]);
   assert.deepEqual(moon.surfaces.map(surface => surface.levelReductions), [[8, 8, 4, 2, 1], [8, 4, 2, 1, 1]]);
-  // Venus: a 1024-wide recipe at scale 4. Charon's 0.32 datasets step as scale 1.
+  // Venus: a 1024-wide recipe at scale 4.
   assert.deepEqual(rasterPagePlan({ width: 1024, height: 512, latitudeBands: 16, surfaces: surfaces([4]) }, 2)!.surfaces[0]!.levelReductions, [8, 8, 8, 4, 2, 1]);
+  // Titan: its default dataset is at scale 0.25, so it shows a reduction two steps finer and its own full pages from 163 pixels.
+  const titan = rasterPagePlan({ width: 4096, height: 2048, latitudeBands: 16, surfaces: surfaces([1, 0.25]) }, 2)!;
+  assert.deepEqual(titan.levelDiameters.map(value => Math.round(value)), [0, 163, 326, 652]);
+  assert.deepEqual(titan.surfaces.map(surface => surface.levelReductions), [[8, 4, 2, 1], [2, 1, 1, 1]]);
+  // Charon's 0.32 datasets fall between two reductions and take the finer one.
   assert.deepEqual(rasterPagePlan({ width: 6400, height: 3200, latitudeBands: 16, surfaces: surfaces([1, 0.32]) }, 2)!.surfaces.map(surface => surface.levelReductions),
-    [[8, 4, 2, 1], [8, 4, 2, 1]]);
+    [[8, 4, 2, 1], [2, 1, 1, 1]]);
 });
 
 test('a body publishes the reductions that divide its pages', () => {

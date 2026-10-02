@@ -65,16 +65,18 @@ export function rasterPagePlan(recipe: RasterPageRecipe, density: number): Raste
   // shows whole it shows its half-size pages, and its full pages only from twice that diameter. Without this the Moon's
   // 267-pixel phone silhouette took 4160-pixel-wide pages, 2.5 MB, where 2080 pixels (0.66 MB) already give 2.4 texels
   // per CSS pixel (2026-10-02).
-  const smallest = reductions[0]!, finest = 1 / Math.max(1, ...scales.filter(scale => Number.isInteger(Math.log2(scale))));
+  // A surface at half scale has half the texels, so it shows a reduction one step finer than a scale-1 surface does:
+  // Titan's and Iapetus's default datasets, at scale 0.25, took 520-pixel pages at a phone's 267 pixels, 0.6 texels per
+  // CSS pixel, and were visibly soft (2026-10-02). Each surface shows the coarsest published reduction that still
+  // gives the level's density: the largest one no greater than factor × scale.
+  const smallest = reductions[0]!, finest = Math.min(1, 1 / 2 ** Math.floor(Math.log2(Math.max(...scales))));
   const levelFactors: number[] = [];
   for (let factor: number = smallest; factor >= finest; factor /= 2) levelFactors.push(factor);
   const levelDiameters = levelFactors.map((_factor, index) => index === 0 ? 0 : recipe.width / (Math.PI * levelFactors[index - 1]!));
   const surfaces = recipe.surfaces.map(surface => {
     const scale = surface.resolutionScale ?? 1, size = packedRasterSize(recipe, density, scale);
-    // Only a whole power of two maps onto the published reductions; any other scale steps as a scale-1 surface does.
-    const texels = scale > 1 && Number.isInteger(Math.log2(scale)) ? scale : 1;
     return { name: outputName(surface.output, density, surface.id), width: size.width, pageRows: size.bandRows * bandsPerPage,
-      levelReductions: levelFactors.map(factor => Math.min(smallest, Math.max(1, factor * texels))) };
+      levelReductions: levelFactors.map(factor => reductions.find(reduction => reduction <= factor * scale) ?? 1) };
   });
   return { bandsPerPage, pageCount: bands / bandsPerPage, reductions, levelFactors, levelDiameters, surfaces };
 }
