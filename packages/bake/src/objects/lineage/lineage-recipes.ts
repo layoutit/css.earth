@@ -73,6 +73,8 @@ export function lineageProducts({ id, recipes, inputs, paths: declared, controls
       if (surfaceObservation) used.push(...group(text(record(surfaceObservation.dataset).consumer)), text(record(surfaceObservation.shape).path));
       const controlledDetail = maybeRecord(maybeRecord(plan.science)?.detailMosaic);
       if (controlledDetail?.format === 'controlled-geotiff') used.push(...group(text(controlledDetail.consumer)));
+      const detailPhotometry = maybeRecord(controlledDetail?.photometry);
+      if (detailPhotometry) used.push(text(detailPhotometry.model), text(detailPhotometry.subSolarPoints));
       add(plan.id, used, {
         inputRoles: frames ? {} : { [sourcePath]: { role: 'appearance', evidence: `Raster source at /surfaces/${index}/source.` } },
         ...(illustration(plan) ? { observationAttribution: 'none' as const, interpretation: kind('illustrative-model') } : {}),
