@@ -1,3 +1,4 @@
+import { eyeDistanceM } from '@cssearth/engine';
 import { createPreparedSceneOwnership } from './prepared-scene-ownership.mts';
 import { createPreparedArrival } from './prepared-arrival.mts';
 import { canUseArrivalBillboard, frameArrivalBillboard, prepareArrivalBillboard } from './arrival-billboard.mts';
@@ -140,7 +141,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
       if (!volume || !frame || !from || !optics) return null;
       const target = volumeZoomTarget(from, volume, optics, systemFramingRect(optics, documentTarget), frame.originM);
-      const distance = (camera: WorldCamera) => Math.hypot(...camera.pose.positionM.map((value, axis) => value - frame.originM[axis]!));
+      const distance = (camera: WorldCamera) => eyeDistanceM(camera.pose, frame.originM);
       return distance(target.world) > distance(from) ? target : null;
     },
     /** Turn onto a bound pair's centre of mass, keeping the distance: a binary's overview is centred on the pair, not on the
@@ -498,7 +499,8 @@ function worldSample(flight: Flight, from: WorldCamera, elapsedS: number, sample
     : Math.exp(Math.log(startScale) + (Math.log(targetProjectionScale) - Math.log(startScale)) * progress);
   return { referenceFrame: from.referenceFrame, epochJdTt: from.epochJdTt,
     ...(projectionScale === 1 ? {} : { projectionScale }),
-    pose: { positionM: [...sample.positionM], orientationXyzw: [...sample.orientationXyzw] } };
+    pose: { positionM: [...sample.positionM], orientationXyzw: [...sample.orientationXyzw],
+      ...(sample.hasFocusOffset ? { focusOffset: { originM: [...sample.focusOriginM], offsetM: [...sample.focusOffsetM] } } : {}) } };
 }
 // A flight held back by the clearance cap would meet its target at full speed and stop dead. The
 // progress still to go may shrink at most at the arrival ease rate of flight-clock time, so the
@@ -534,11 +536,11 @@ function easeArrivalInto(flight: Flight, fromElapsedS: number, toElapsedS: numbe
 // and that fraction of optical scale. A stationary pose can still be visibly zooming.
 function arrivalIsInvisible(flight: Flight, anchors: FlightAnchors, world: WorldCamera, targetProjectionScale: number) {
   if (Math.abs((world.projectionScale ?? 1) / targetProjectionScale - 1) > FLIGHT_ARRIVAL_TOLERANCE) return false;
-  const [x, y, z] = world.pose.positionM, end = flight.to.positionM, q = world.pose.orientationXyzw, r = flight.to.orientationXyzw;
+  const end = flight.to.positionM, q = world.pose.orientationXyzw, r = flight.to.orientationXyzw;
   let depthM = Infinity;
-  for (const anchor of anchors) depthM = Math.min(depthM, Math.hypot(x - anchor.positionM[0], y - anchor.positionM[1], z - anchor.positionM[2]) - anchor.radiusM);
+  for (const anchor of anchors) depthM = Math.min(depthM, eyeDistanceM(world.pose, anchor.positionM) - anchor.radiusM);
   const cosine = Math.min(1, Math.abs(q[0] * r[0] + q[1] * r[1] + q[2] * r[2] + q[3] * r[3]));
-  return depthM > 0 && Math.hypot(x - end[0], y - end[1], z - end[2]) <= FLIGHT_ARRIVAL_TOLERANCE * depthM
+  return depthM > 0 && eyeDistanceM(world.pose, end) <= FLIGHT_ARRIVAL_TOLERANCE * depthM
     && 2 * Math.acos(cosine) <= FLIGHT_ARRIVAL_TOLERANCE;
 }
 function isFlightInput(event: Event) {

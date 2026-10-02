@@ -1,3 +1,4 @@
+import { fromEyeM } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
@@ -50,7 +51,7 @@ function surfaceAxes(body: HTMLElement, scene: HTMLElement, config: SurfaceMapCo
 
 function surfaceSnapshot(body: HTMLElement, scene: HTMLElement, config: SurfaceMapConfig, navigation: ObjectWorldNavigation, windowTarget: BrowserWindow, axes = surfaceAxes(body, scene, config, navigation, windowTarget)) {
   const world = navigation.capture();
-  const relative: PositionM = [0, 1, 2].map(i => world.pose.positionM[i] - navigation.frame.originM[i]) as [number, number, number];
+  const relative: PositionM = fromEyeM(world.pose, navigation.frame.originM).map(value => 0 - value) as [number, number, number];
   return { world, relative, axes, scene, mapLeftEdgeLongitudeDeg: config.mapLeftEdgeLongitudeDeg };
 }
 

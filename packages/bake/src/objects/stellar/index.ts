@@ -4,6 +4,7 @@
 // manifests the colour records are read through.
 export * from './gravity-darkening.ts';
 export * from './limb-laws.ts';
+export * from './nsx-atmosphere.ts';
 export * from './stellar-photometric-color.ts';
 export * from './stellar-spot-figure.ts';
 export * from './stellar-spot-occultation.ts';

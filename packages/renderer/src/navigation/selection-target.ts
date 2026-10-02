@@ -16,11 +16,12 @@ export function createWorldSelectionTarget(from: WorldCameraPose, frame: Prepare
   const radius = viewport.framingRadiusPixels;
   const range = distanceForSilhouetteRadius(frame.bodyRadiusM, viewport.focalPixels,
     radius, viewport.principalOffsetPixels);
+  const offset = Object.freeze([direction[0] * range, direction[1] * range, direction[2] * range] as const);
   return Object.freeze({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
     ...(from.projectionScale === undefined ? {} : { projectionScale: from.projectionScale }),
-    pose: Object.freeze({ positionM: Object.freeze([frame.originM[0] + direction[0] * range,
-      frame.originM[1] + direction[1] * range, frame.originM[2] + direction[2] * range] as const),
-      orientationXyzw: Object.freeze([...from.pose.orientationXyzw] as const) }) });
+    // The pose keeps its exact offset from the body beside the world position, which cannot hold it for a small, far body.
+    pose: Object.freeze({ positionM: Object.freeze([frame.originM[0] + offset[0], frame.originM[1] + offset[1], frame.originM[2] + offset[2]] as const),
+      orientationXyzw: Object.freeze([...from.pose.orientationXyzw] as const), focusOffset: Object.freeze({ originM: frame.originM, offsetM: offset }) }) });
 }
 
 function unit(a: PositionM): PositionM {

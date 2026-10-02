@@ -1,4 +1,4 @@
-import { presentPhysicalPoseInVolume } from '@cssearth/engine';
+import { presentPhysicalPoseInVolume, eyeDistanceM } from '@cssearth/engine';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssCameraAxesFromOrientation } from '../navigation/world-camera-math.js';
@@ -34,13 +34,13 @@ export function projectedVolumeOpacity(world: WorldCameraPose, viewport: WorldCa
  * impostor has no view to take (M33's photograph drew a hundred pixels wide beside a star 5,600 light-years away inside it,
  * 2026-10-01), and what the volume holds there (a galaxy's catalogue dots) stands for it. */
 export function outsideVolumeOpacity(world: WorldCameraPose, frame: DensityVolumeFrame, framingRadiusUnits: number): number {
-  const distanceUnits = Math.hypot(...world.pose.positionM.map((value, axis) => value - frame.originM[axis]!)) / frame.metersPerUnit;
+  const distanceUnits = eyeDistanceM(world.pose, frame.originM) / frame.metersPerUnit;
   return Math.max(0, Math.min(1, Math.log(distanceUnits / framingRadiusUnits) / Math.log(1.25)));
 }
 
 export function projectedVolumeRadiusPixels(world: WorldCameraPose, viewport: WorldCameraViewport, frame: DensityVolumeFrame,
   framingRadiusUnits: number): number {
-  const distanceUnits = Math.hypot(...world.pose.positionM.map((value, axis) => value - frame.originM[axis]!)) / frame.metersPerUnit;
+  const distanceUnits = eyeDistanceM(world.pose, frame.originM) / frame.metersPerUnit;
   return viewport.focalPixels * framingRadiusUnits / Math.max(Number.MIN_VALUE, distanceUnits);
 }
 

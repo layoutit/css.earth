@@ -1,5 +1,5 @@
 import { createSystemFade, extendedRetirement, logarithmicFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './context-scale.js';
-import type { PositionM } from '@cssearth/engine';
+import { eyeAnchor, eyeDistanceM, type PositionM } from '@cssearth/engine';
 import { isExtendedClassification } from '@cssearth/objects';
 import type { PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/world-camera.js';
@@ -140,14 +140,14 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
     // Once the system retires, the anchor and every placed orbitless body (a star) stay as galactic locators.
     const publishingBodies = view.anchorOnly ? bodies.filter(entry => entry.index === 0 || entry.orbit === null) : bodies;
     const opacity = systemFade.update(world.pose.positionM, view.systemRetired === true);
-    const focusDistanceM = Math.hypot(world.pose.positionM[0] - plan.focus.positionM[0], world.pose.positionM[1] - plan.focus.positionM[1], world.pose.positionM[2] - plan.focus.positionM[2]);
+    const focusDistanceM = eyeDistanceM(world.pose, plan.focus.positionM);
     const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
       // The camera rotation applied to the camera-relative position, fused: one array per point instead of two, the same
       // arithmetic in the same order. toEyeAt reads a prepared vertex without building an input array.
-      const [cx, cy, cz] = world.pose.positionM;
+      const { originM: [ax, ay, az], offsetM: [ex, ey, ez] } = eyeAnchor(world.pose);
       const [r0, r1, r2, r3, r4, r5, r6, r7, r8] = rotation as readonly [number, number, number, number, number, number, number, number, number];
       const toEyeAt = (px: number, py: number, pz: number): PositionM => {
-        const x = px - cx, y = py - cy, z = pz - cz;
+        const x = (px - ax) - ex, y = (py - ay) - ey, z = (pz - az) - ez; // from the eye's exact anchor (eyeAnchor)
         return [r0 * x + r1 * y + r2 * z, r3 * x + r4 * y + r5 * z, r6 * x + r7 * y + r8 * z];
       };
       const toEye = (position: readonly number[]): PositionM => toEyeAt(position[0]!, position[1]!, position[2]!);

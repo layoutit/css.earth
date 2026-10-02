@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "psr-j0437-4715",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "PSR J0437−4715",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "temperature",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 11.36
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/psr-j0437-4715-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "PSR J0437−4715",
+      "classification": "star",
+      "color": "#9a9a9a",
+      "distanceAu": 32379198.1,
+      "description": "The nearest millisecond pulsar: a neutron star 23 km across that turns 174 times a second.",
+      "systemName": "PSR J0437−4715 system",
+      "aliases": [
+        "PSR J0437-4715",
+        "J0437-4715"
+      ],
+      "order": 5349,
+      "context": {
+        "order": 5346
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1161245959240305200,
+        3075933638503286000,
+        -3557121152789460000
+      ],
+      "presentationToReference": [
+        -0.029314173144299342,
+        -0.35199011349474835,
+        0.9355445682888766,
+        -0.07760559987388063,
+        -0.932320229488385,
+        -0.3532086643259767,
+        -0.9965530844471264,
+        0.08295751737292731,
+        -0.000013792725720149615
+      ],
+      "orbitUpReference": [
+        0.35199011349474835,
+        0.932320229488385,
+        -0.08295751737292731
+      ],
+      "metersPerUnit": 36.645161290322584,
+      "bodyRadiusM": 11360
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

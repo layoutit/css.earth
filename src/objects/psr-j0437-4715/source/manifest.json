@@ -1,0 +1,190 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [
+    {
+      "id": "psr-j0437-4715-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://arxiv.org/abs/2407.06789",
+      "credit": "Choudhury et al. (2024), ApJL 971, L20",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "psr-j0437-4715-preparation-raster",
+      "path": "preparation/raster.json",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "datasets"
+      ]
+    },
+    {
+      "id": "psr-j0437-4715-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "psr-j0437-4715-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "psr-j0437-4715-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "psr-j0437-4715-temperature-hot-regions",
+      "path": "science/choudhury-2024/hot-regions.json",
+      "origin": "https://arxiv.org/abs/2407.06789",
+      "credit": "Choudhury et al. (2024); NICER X-ray pulse profiles of 2017 to 2021",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "temperature-hot-region-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psr-j0437-4715-temperature-hot-regions",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "psr-j0437-4715-nsx-limb-darkening",
+      "path": "photometry/nsx-limb-darkening.json",
+      "origin": "https://doi.org/10.5281/zenodo.7113931",
+      "credit": "NSX hydrogen atmosphere table nsx_H_v200804.out (Ho & Lai 2001, MNRAS 327, 1081; Ho & Heinke 2009, Nature 462, 71), distributed with X-PSI",
+      "license": "Project-computed model values; the table is distributed under CC BY 4.0 with X-PSI's tutorial files",
+      "acquisition": "Computed by packages/telescope-cli/src/new-object/pulsar.mts from nsx_H_v200804.out (https://doi.org/10.5281/zenodo.7113931): nsxLimbProfile and fitQuadraticLimb in @cssearth/bake/objects/stellar.",
+      "redistribution": "Model coefficients and the profile they are fitted to, with the model cited.",
+      "consumers": [
+        "temperature-hot-region-map"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Computed from the cited table; generating the package again recomputes it."
+      }
+    },
+    {
+      "id": "psr-j0437-4715-hot-region-posterior",
+      "path": "science/choudhury-2024/posterior-samples.tsv",
+      "origin": "https://doi.org/10.5281/zenodo.13766753",
+      "credit": "Choudhury et al. (2024), reproduction package (Zenodo)",
+      "license": "Creative Commons Attribution 4.0 International",
+      "acquisition": "Every 109th of the 218,553 equal-weight posterior samples of the deposit (nlive20000_expf3.3_noCONST_noMM_tol0.1post_equal_weights.dat), the columns the hot regions read, to seven significant figures; written by packages/telescope-cli/src/new-object/pulsar.mts.",
+      "redistribution": "A thinned copy of deposited posterior samples, with the deposit cited.",
+      "consumers": [
+        "temperature-hot-region-map"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Thinned from the cited deposit; generating the package again from the deposit rewrites it."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "dataset-colour-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://arxiv.org/abs/2407.06789",
+      "credit": "The default dataset's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+        "inputs": [
+          "psr-j0437-4715-observational-measurements",
+          "psr-j0437-4715-preparation-raster"
+        ]
+      },
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The default dataset drawn as a disc; `context-markers.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/new-object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The spec telescope new-object generated this package from, with the order it was given; `telescope new-object --refresh` regenerates from it."
+      }
+    }
+  ]
+}

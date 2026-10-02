@@ -11,6 +11,7 @@ export interface FlightBodyAnchor {
 // control allows a nearby departing body to disappear in the first frame.
 const MAX_CLEARANCE_FRACTION = 10 ** .1 - 1;
 // The rounding of one sampled position, as a fraction of its focus distance plus its range: a sum and a product per axis.
+// A sample that carries its exact offset from the flight's focus (SelectionFlightSample.focusOffsetM) rounds only at its range.
 const POSITION_RESOLUTION = 4 * Number.EPSILON;
 
 /** Retimes the original curve without changing any position or orientation on it.
@@ -28,18 +29,25 @@ export function advanceSelectionFlightInto(flight: SelectionFlight, anchors: rea
       !anchor.positionM.every(Number.isFinite) || !Number.isFinite(anchor.radiusM) || anchor.radiusM <= 0)) {
     throw new TypeError('Flight advancement needs finite body positions and positive radii.');
   }
-  sampleSelectionFlightInto(flight, fromElapsedS, out);
-  const x = out.positionM[0], y = out.positionM[1], z = out.positionM[2];
-  const previousClearance = clearance(anchors, x, y, z);
+  // Every length is measured from the flight's focus: the step and the clearances are differences of offsets from it, which
+  // keep what the world positions cannot hold near a small body far from the frame origin (a kilometre at 157 parsecs).
   const [focusX, focusY, focusZ] = flight.focusPositionM, focusDistanceM = Math.hypot(focusX, focusY, focusZ);
+  const fromFocus = (): { x: number; y: number; z: number; exact: boolean } => {
+    const exact = out.hasFocusOffset && out.focusOriginM[0] === focusX && out.focusOriginM[1] === focusY && out.focusOriginM[2] === focusZ;
+    return exact ? { x: out.focusOffsetM[0], y: out.focusOffsetM[1], z: out.focusOffsetM[2], exact }
+      : { x: out.positionM[0] - focusX, y: out.positionM[1] - focusY, z: out.positionM[2] - focusZ, exact };
+  };
+  sampleSelectionFlightInto(flight, fromElapsedS, out);
+  const { x, y, z } = fromFocus();
+  const previousClearance = clearance(anchors, flight.focusPositionM, x, y, z);
   const allowed = (time: number): boolean => {
     sampleSelectionFlightInto(flight, time, out);
-    const [nextX, nextY, nextZ] = out.positionM;
-    const limit = MAX_CLEARANCE_FRACTION * Math.min(previousClearance, clearance(anchors, nextX, nextY, nextZ));
+    const { x: nextX, y: nextY, z: nextZ, exact } = fromFocus();
+    const limit = MAX_CLEARANCE_FRACTION * Math.min(previousClearance, clearance(anchors, flight.focusPositionM, nextX, nextY, nextZ));
     // A sample is its focus plus a direction times a range, so it resolves no finer than a few ulps of those two
     // lengths: 64 m when the focus is a star 3.85e17 m away. A cap below that would be decided by rounding, so the
     // cap is never smaller. Near the focus both lengths are small and the cap rules.
-    const resolution = POSITION_RESOLUTION * (focusDistanceM + Math.hypot(nextX - focusX, nextY - focusY, nextZ - focusZ));
+    const resolution = POSITION_RESOLUTION * ((exact ? 0 : focusDistanceM) + Math.hypot(nextX, nextY, nextZ));
     return Math.hypot(nextX - x, nextY - y, nextZ - z) <= Math.max(limit, resolution);
   };
   const requested = Math.min(flight.durationS, requestedElapsedS);
@@ -58,10 +66,11 @@ export function advanceSelectionFlightInto(flight: SelectionFlight, anchors: rea
   return low;
 }
 
-function clearance(anchors: readonly FlightBodyAnchor[], x: number, y: number, z: number): number {
+/** The nearest body's clearance from a place given as an offset from `focusM`. */
+function clearance(anchors: readonly FlightBodyAnchor[], focusM: PositionM, x: number, y: number, z: number): number {
   let nearest = Infinity;
   for (const anchor of anchors) {
-    const distance = Math.hypot(x - anchor.positionM[0], y - anchor.positionM[1], z - anchor.positionM[2]);
+    const distance = Math.hypot(x - (anchor.positionM[0] - focusM[0]), y - (anchor.positionM[1] - focusM[1]), z - (anchor.positionM[2] - focusM[2]));
     nearest = Math.min(nearest, Math.max(anchor.radiusM, distance - anchor.radiusM));
   }
   return nearest;
