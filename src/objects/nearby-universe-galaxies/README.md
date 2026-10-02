@@ -46,6 +46,15 @@ Past 200 Mpc the view is DESI's first data release, drawn as the same dots, in t
 
 ## Evidence
 
+![Before and after, from outside the Milky Way: the field's galaxies over the disc, then dimmed behind it](evidence/2026-10-01/behind-milky-way-before-after.jpg)
+
+The same camera before (left) and after (right) the renderer dims the galaxies seen through the Milky Way's disc, so they
+do not compete with the galaxy's own dots. A dot whose sight line crosses the disc keeps a quarter of its opacity at the
+disc's centre and all of it at the edge, in five steps, along (1 - (r/R)²)²; the field's backdrop opacity went from 0.75
+to 0.6. Both are presentation choices, set by eye in the app on 2026-10-01. In this view 679 of the 2,057 dots drawn are
+dimmed. The dimming gives each of the field's 356 dot colours five fainter paths (2,136 paths against 356); its cost in a
+trace has not been measured.
+
 ![Before and after, from 2.5 billion light years: the field as a dense ball, then at the density of the sky around it](evidence/2026-09-30/ball-edge-before-after.jpg)
 
 The same camera before (left) and after (right) the outside limit, the sizes and the backdrop opacity, in the app's renderer. The field drew 1,282 dots in a ball about twice as dense as the galaxies and quasars around it (104 to 112 dots per 10,000 square pixels against 40 to 56, measured from 1.6 to 6.7 billion light years); it now draws 482, within about a fifth of the ring around it. Counted on the baked bank, each quarter of the field by distance holds the same mix of sizes (about 2,450 large, 4,950 medium and 2,470 small dots). The bake's tone tests (`packages/bake/src/volume/node/catalogue-tones.test.ts`) check the ranking within shells.
