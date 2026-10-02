@@ -103,6 +103,15 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "nicer",
+            "evidence": "https://arxiv.org/abs/2407.06789 \u2014 Choudhury et al. (2024); NICER X-ray pulse profiles of 2017 to 2021"
+          }
+        ]
       }
     },
     {

@@ -953,6 +953,15 @@
             "evidence": "src/objects/moon/source/science/usgs/submicroscopic-iron-isis.lbl"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "kaguya",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Lunar_MI_mineral_maps/Lunar_Kaguya_MIMap_MineralDeconv_AbundanceSMFe_50N50S.tif \u2014 Lemelin et al.; SELENE/Kaguya MI team; ISAS/JAXA; USGS Astrogeology"
+          }
+        ]
       }
     },
     {
@@ -978,6 +987,15 @@
             "catalogueId": "usgs-moon-fit-quality-numeric",
             "role": "material",
             "evidence": "src/objects/moon/source/science/usgs/fit-quality-isis.lbl"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "kaguya",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Lunar_MI_mineral_maps/Lunar_Kaguya_MIMap_MineralDeconv_WeightedCriteriaValue_50N50S.tif \u2014 Lemelin et al.; SELENE/Kaguya MI team; ISAS/JAXA; USGS Astrogeology"
           }
         ]
       }
@@ -1008,6 +1026,15 @@
             "evidence": "src/objects/moon/source/science/usgs/plagioclase-grain-size-isis.lbl"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "kaguya",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Lunar_MI_mineral_maps/Lunar_Kaguya_MIMap_MineralDeconv_PlagioclaseGrainSizeMicrons_50N50S.tif \u2014 Lemelin et al.; SELENE/Kaguya MI team; ISAS/JAXA; USGS Astrogeology"
+          }
+        ]
       }
     },
     {
@@ -1034,6 +1061,15 @@
             "catalogueId": "usgs-moon-plagioclase-numeric",
             "role": "material",
             "evidence": "src/objects/moon/source/science/usgs/plagioclase-isis.lbl"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "kaguya",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Lunar_MI_mineral_maps/Lunar_Kaguya_MIMap_MineralDeconv_PlagioclasePercent_50N50S.tif \u2014 Lemelin et al.; SELENE/Kaguya MI team; ISAS/JAXA; USGS Astrogeology"
           }
         ]
       }
@@ -1064,6 +1100,15 @@
             "evidence": "src/objects/moon/source/science/usgs/iron-oxide-isis.lbl"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "kaguya",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Lunar_MI_mineral_maps/Lunar_Kaguya_MIMap_MineralDeconv_FeOWeightPercent_50N50S.tif \u2014 Lemelin et al.; SELENE/Kaguya MI team; ISAS/JAXA; USGS Astrogeology"
+          }
+        ]
       }
     },
     {
@@ -1090,6 +1135,15 @@
             "catalogueId": "usgs-moon-olivine-numeric",
             "role": "material",
             "evidence": "src/objects/moon/source/science/usgs/olivine-isis.lbl"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "kaguya",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Lunar_MI_mineral_maps/Lunar_Kaguya_MIMap_MineralDeconv_OlivinePercent_50N50S.tif \u2014 Lemelin et al.; SELENE/Kaguya MI team; ISAS/JAXA; USGS Astrogeology"
           }
         ]
       }
@@ -1120,6 +1174,15 @@
             "evidence": "src/objects/moon/source/science/usgs/orthopyroxene-isis.lbl"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "kaguya",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Lunar_MI_mineral_maps/Lunar_Kaguya_MIMap_MineralDeconv_OrthopyroxenePercent_50N50S.tif \u2014 Lemelin et al.; SELENE/Kaguya MI team; ISAS/JAXA; USGS Astrogeology"
+          }
+        ]
       }
     },
     {
@@ -1148,6 +1211,15 @@
             "evidence": "src/objects/moon/source/science/usgs/clinopyroxene-isis.lbl"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "kaguya",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Lunar_MI_mineral_maps/Lunar_Kaguya_MIMap_MineralDeconv_ClinopyroxenePercent_50N50S.tif \u2014 Lemelin et al.; SELENE/Kaguya MI team; ISAS/JAXA; USGS Astrogeology"
+          }
+        ]
       }
     },
     {
@@ -1174,6 +1246,15 @@
             "catalogueId": "usgs-moon-optical-maturity-numeric",
             "role": "material",
             "evidence": "src/objects/moon/source/science/usgs/optical-maturity-isis.lbl"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "kaguya",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Lunar_MI_mineral_maps/Lunar_Kaguya_MIMap_MineralDeconv_OpticalMaturityIndex_50N50S.tif \u2014 Lemelin et al.; SELENE/Kaguya MI team; ISAS/JAXA; USGS Astrogeology"
           }
         ]
       }
