@@ -35,6 +35,13 @@ export function projectSurfaceFeature(feature: SurfaceFeatureAnchor, m: ArrayLik
     facing, diameterPx: 2 * feature.radiusUnits * scale * focalPixels / depth };
 }
 
+/** What the label layer draws. With the names setting on, every admitted name. With it off, the default, only a selected
+ * feature: a search result or a feature link shows its name, outline and card without the reader turning names on. A
+ * feature picked from search drew nothing, while its link kept the server's card (2026-10-02). */
+export function surfaceLabelScope(labelsEnabled: boolean, selected: boolean): 'all' | 'selected' | 'none' {
+  return labelsEnabled ? 'all' : selected ? 'selected' : 'none';
+}
+
 /** Where the camera sits in its logarithmic zoom range; the policy gates labels on this share. */
 export function zoomShare(zoom: number, minimumZoom: number, maximumZoom: number): number {
   if (!(maximumZoom > minimumZoom) || !(minimumZoom > 0) || !(zoom > 0)) return 0;

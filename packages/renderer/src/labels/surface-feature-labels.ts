@@ -14,7 +14,7 @@ import { opacityClockFor } from '../stars/opacity-clock.js';
 import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
 import type { LabelScreenRect } from './screen-label-layout.js';
 import { labelOcclusionFor } from './label-occlusion.js';
-import { admitSurfaceFeatureLabels, passesZoomGate, projectSurfaceFeature, projectSurfaceOutline, zoomShare, POINT_LABEL_GAP_PX } from './surface-feature-layout.js';
+import { admitSurfaceFeatureLabels, passesZoomGate, projectSurfaceFeature, projectSurfaceOutline, surfaceLabelScope, zoomShare, POINT_LABEL_GAP_PX } from './surface-feature-layout.js';
 import type { SurfaceLabelCandidate } from './surface-feature-layout.js';
 import { loadPreparedSurfaceFeatureBank, loadPreparedSurfaceFeatureCatalog } from './surface-feature-catalog.js';
 import { flyToSurfaceDirection } from './surface-feature-flight.js';
@@ -88,6 +88,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   const fader = createOpacityFader(windowTarget);
   const controller = new AbortController();
   const labelsEnabled = () => document.body.dataset.surfaceLabels === 'on';
+  // With the names setting off, a selected feature is still drawn (surface-feature-layout.ts `surfaceLabelScope`).
+  const scope = () => surfaceLabelScope(labelsEnabled(), pinnedIndex !== null);
   let destroyed = false, playing = false, enabled = false, frames = 0, zoomGate = false, outlinePieces = 0;
   /** The default catalogue: requested (or held until a flight lands), fetched, written into the labels in batches, then loaded. */
   let load: { readonly kind: 'idle' } | { readonly kind: 'held' } | { readonly kind: 'fetching' }
@@ -130,7 +132,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     root.appendChild(element);
     const entry: Entry = { element, feature: null, width: 0, height: 0, measured: false, targetOpacity: 0, hideTimer: null, x: 0, y: 0 };
     const activate = (event: Event) => {
-      if (!labelsEnabled() || !visible.has(index)) return;
+      if ((!labelsEnabled() && pinnedIndex !== index) || !visible.has(index)) return;
       event.preventDefault();
       if (pinnedIndex === index) { clearSelection(); return; }
       if (onSelect) onSelect(entries[index]!.feature!.id);
@@ -201,7 +203,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   function canDraw() {
     const range = zoomRange();
     zoomGate = passesZoomGate(view?.zoom, range.minimum, range.maximum, plan.policy);
-    return labelsEnabled() && load.kind === 'loaded' && enabled && Boolean(view?.projection)
+    return scope() !== 'none' && load.kind === 'loaded' && enabled && Boolean(view?.projection)
       && (zoomGate || pinnedIndex !== null) && view?.levelOfDetail.stage === 'geometry';
   }
   function schedule() {
@@ -283,6 +285,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   const onLabelsChange = () => {
     // Labels turned off leave the document: 713 hidden names stayed mounted on Earth (2026-10-01).
     if (labelsEnabled()) { if (entries.length && !root.isConnected) host.appendChild(root); requestLoading(); schedule(); }
+    // A selected feature keeps its name and card: the next frame hides every other name.
+    else if (pinnedIndex !== null) { hoveredIndex = null; schedule(); }
     else { hoveredIndex = null; hideAll(); if (root.isConnected) root.remove(); }
     syncLoop();
   };
@@ -296,6 +300,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const currentShare = view?.zoom === undefined ? 0 : zoomShare(view.zoom, range.minimum, range.maximum);
     // The selected feature stays labelled at any zoom; the density gate applies to the rest.
     if (!canDraw() || !projection) { hideAll(); return; }
+    const selectedOnly = scope() === 'selected';
     requirePhysicalProjection(projection);
     // Retained mesh ancestors use zero transform origins; their current matrices
     // carry the body spin exactly as painted. Camera transforms are already in
@@ -307,7 +312,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     for (let index = 0; index < entries.length; index++) {
       const entry = entries[index]!, feature = entry.feature;
       // A search-only name labels the map only while it is the selected feature.
-      if (!feature || ((!zoomGate || feature.searchOnly || feature.minimumZoomShare > currentShare + 1e-6) && index !== pinnedIndex)) continue;
+      if (!feature || ((selectedOnly || !zoomGate || feature.searchOnly || feature.minimumZoomShare > currentShare + 1e-6) && index !== pinnedIndex)) continue;
       const projected = projectSurfaceFeature(feature, matrix, projection.focalPixels, projection.principalOffsetPixels);
       if (!projected) continue;
       entry.x = projected.x; entry.y = projected.y;
@@ -341,7 +346,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     presentCaption();
   }
   function presentCaption() {
-    const index = !labelsEnabled() ? null : pinnedIndex !== null && visible.has(pinnedIndex) ? pinnedIndex : hoveredIndex !== null && visible.has(hoveredIndex) ? hoveredIndex : null;
+    const index = pinnedIndex !== null && visible.has(pinnedIndex) ? pinnedIndex : labelsEnabled() && hoveredIndex !== null && visible.has(hoveredIndex) ? hoveredIndex : null;
     if (index === null) {
       if (shownIndex !== null) { tooltip.hidden = true; delete tooltip.dataset.featureTooltipFor; delete root.dataset.featureOutlineFor; hideOutline(); shownIndex = null; }
       return;
@@ -376,7 +381,9 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   async function selectIndex(index: number, signal?: AbortSignal): Promise<{ completed: boolean }> {
     const feature = entries[index]?.feature;
     if (!feature || destroyed || signal?.aborted) return { completed: false };
-    pinnedIndex = index;
+    pin(index);
+    // Names turned off left the document; a selection made then brings its own name and card back.
+    if (!root.isConnected) host.appendChild(root);
     flight?.cancel(); flight = null;
     schedule();
     const frame = navigation.frame;
@@ -401,8 +408,17 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     if (flight === handle) flight = null;
     return result;
   }
+  /** The selected name is marked: the shell keeps it visible while the names setting is off (site/object-shell.css). */
+  function pin(index: number | null): void {
+    if (pinnedIndex !== null) delete entries[pinnedIndex]!.element.dataset.featureSelected;
+    pinnedIndex = index;
+    if (index !== null) entries[index]!.element.dataset.featureSelected = '';
+  }
   function clearSelection(): void {
-    pinnedIndex = null; flight?.cancel(); flight = null; presentCaption(); schedule();
+    const selected = pinnedIndex !== null;
+    pin(null); flight?.cancel(); flight = null; presentCaption(); schedule();
+    // With the names setting off the selection was all the layer drew: it leaves the document with it.
+    if (selected && !labelsEnabled()) { hideAll(); if (root.isConnected) root.remove(); }
   }
   function hideOutline(): void {
     if (outlinePieces === 0) return;

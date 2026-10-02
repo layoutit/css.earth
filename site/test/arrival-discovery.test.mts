@@ -35,3 +35,26 @@ test('a shape-only body gets a prepared arrival without becoming photographic', 
     await assert.rejects(prepareObjectDiscovery(descriptor, directory), /Reprepare the arrival billboard/);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
+
+test('an object without a surface is reached on its default view when its dataset is pictured, not when it is dots', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'arrival-discovery-')), directory = join(root, 'galaxy');
+  try {
+    const runtime = JSON.parse(await readFile(new URL('../../src/objects/m31/prepared/runtime.json', import.meta.url), 'utf8'));
+    for (const path of ['galaxy/prepared', 'galaxy/source/content', 'layers', 'dots']) await mkdir(join(root, path), { recursive: true });
+    await writeFile(join(directory, 'prepared/runtime.json'), JSON.stringify({ camera: runtime.camera }));
+    await writeFile(join(root, 'layers/object.json'), JSON.stringify({ type: 'image-layer-bank' }));
+    await writeFile(join(root, 'dots/object.json'), JSON.stringify({ type: 'catalogue-point-bank' }));
+    const content = (volume: string) => writeFile(join(directory, 'source/content/object.json'),
+      JSON.stringify({ datasets: { defaultDataset: 'optical', controls: [{ id: 'optical', volume: { objectId: volume } }] } }));
+    const descriptor = { id: 'galaxy', properties: { catalog: {}, recipe: { surfaces: [], sources: [] } } };
+    await content('layers');
+    const pictured = await prepareObjectDiscovery(descriptor, directory);
+    assert.equal(pictured.imagery, true);
+    assert.deepEqual(pictured.arrival, { defaultDataset: 'optical', datasetIds: ['optical'], rotation: preparedDefaultViewRotation(runtime.camera) });
+    assert.equal(parseObjectDiscovery(pictured).arrival?.billboard, undefined, 'the view is not an arrival image');
+    await content('dots');
+    const dots = await prepareObjectDiscovery(descriptor, directory);
+    assert.equal(dots.imagery, false);
+    assert.equal(dots.arrival, undefined, 'a field of catalogue dots keeps the direction the flight came from');
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
