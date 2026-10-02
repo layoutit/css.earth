@@ -524,6 +524,16 @@
             "evidence": "src/objects/venus/source/science/usgs/emissivity-isis.lbl"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_MicrowaveEmissivity_Global_4641m.tif — NASA; mission team; USGS Astrogeology; Peter Ford, Gordon Pettengill, Fang Liu and Joan Quigley (MIT)"
+          }
+        ]
       }
     },
     {

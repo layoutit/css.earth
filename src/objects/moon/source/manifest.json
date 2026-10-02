@@ -382,6 +382,16 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.img \u2014 T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node"
+          }
+        ]
       }
     },
     {
@@ -413,6 +423,16 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.img \u2014 T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node"
+          }
+        ]
       }
     },
     {
@@ -437,6 +457,16 @@
             "catalogueId": "lro-diviner-ghrm-tbol-anomaly",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img \u2014 T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node"
           }
         ]
       }
@@ -470,6 +500,16 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img \u2014 T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node"
+          }
+        ]
       }
     },
     {
@@ -494,6 +534,16 @@
             "catalogueId": "lro-diviner-ghrm-roughness",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img \u2014 T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node"
           }
         ]
       }
@@ -525,6 +575,16 @@
             "catalogueId": "lro-diviner-ghrm-roughness",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img \u2014 T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node"
           }
         ]
       }

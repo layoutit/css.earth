@@ -1173,6 +1173,16 @@
             "evidence": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/global_ti_night_2007.img"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "mars-global-surveyor",
+            "missionId": "mars-global-surveyor",
+            "evidence": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/global_ti_night_2007.img — NASA/JPL/ASU MGS TES; N. E. Putzig and M. T. Mellon (2007); PDS Geosciences Node"
+          }
+        ]
       }
     },
     {
@@ -1195,6 +1205,16 @@
             "catalogueId": "pds-mgs-tes-thermal-inertia",
             "role": "material",
             "evidence": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/global_ti_night_2007.lbl"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "mars-global-surveyor",
+            "missionId": "mars-global-surveyor",
+            "evidence": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/global_ti_night_2007.lbl — NASA/JPL/ASU MGS TES; N. E. Putzig and M. T. Mellon (2007); PDS Geosciences Node"
           }
         ]
       }
@@ -1221,6 +1241,16 @@
             "evidence": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/global_ti_msk_night_2007.img"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "mars-global-surveyor",
+            "missionId": "mars-global-surveyor",
+            "evidence": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/global_ti_msk_night_2007.img — NASA/JPL/ASU MGS TES; N. E. Putzig and M. T. Mellon (2007); PDS Geosciences Node"
+          }
+        ]
       }
     },
     {
@@ -1245,6 +1275,16 @@
             "evidence": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/global_ti_msk_night_2007.lbl"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "mars-global-surveyor",
+            "missionId": "mars-global-surveyor",
+            "evidence": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/global_ti_msk_night_2007.lbl — NASA/JPL/ASU MGS TES; N. E. Putzig and M. T. Mellon (2007); PDS Geosciences Node"
+          }
+        ]
       }
     },
     {
@@ -1267,6 +1307,16 @@
             "catalogueId": "asu-tes-dust-cover-index",
             "role": "material",
             "evidence": "https://www.mars.asu.edu/~ruff/DCI/dci.html"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "mars-global-surveyor",
+            "missionId": "mars-global-surveyor",
+            "evidence": "https://www.mars.asu.edu/~ruff/DCI/dci_lo_ice_dust_16ppd_shifted.vicar — NASA/JPL/ASU MGS TES; S. W. Ruff and P. R. Christensen (2002)"
           }
         ]
       }
