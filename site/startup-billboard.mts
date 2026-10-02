@@ -63,9 +63,7 @@ export async function prepareStartupBillboard(stage: HTMLElement, factory: Scene
       releaseStartup(window);
       removeLoader();
     }, input);
-    // Behind the photograph nothing shows until every image of the first view is resident, so they are all requested at
-    // once (prepared-resource-lease.ts); a flight keeps the window that shares its link with the world's banks.
-    await pending.prepare(factory, { getView: () => view, cameraViewport: viewport, selectionStage: stage, ownerDocument: document, burstDownloads: cover !== null });
+    await pending.prepare(factory, { getView: () => view, cameraViewport: viewport, selectionStage: stage, ownerDocument: document });
     // Paced an atlas a frame, Earth's 77 images took 148 frames before the reveal: 1.35 s in headless Chromium and 2.63 s
     // in headless WebKit, against 0.11 s and 0.26 s whole (2026-10-02).
     return pending.handoff(() => view, {}, {}, cover ? 'whole' : 'paced');

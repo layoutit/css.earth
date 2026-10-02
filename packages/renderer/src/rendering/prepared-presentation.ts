@@ -125,8 +125,12 @@ function textureResourcesFor(levelResources: Readonly<Record<string, string>> | 
 
 export function resolvePreparedPresentation(definition: PreparedPresentationDefinition, { selection, view, previousPlan }: { selection: ObjectSelection; view: import('./prepared-material.js').PreparedMaterialView | null; previousPlan?: PreparedPresentationPlan | null }): PreparedPresentationPlan {
   const variant = selectedPreparedVariant(definition, selection);
-  const textureLevel = definition.textureLevels ? selectPreparedTextureLevel(definition.textureLevels,
-    view?.levelOfDetail?.silhouetteDiameter, previousPlan?.textureLevel) : undefined;
+  // A body first draws its first level on every screen, then follows its silhouette: one start for a phone, a tablet
+  // and a desktop. Chosen by size from the first plan, a 1280 px window waited for Earth's 80 images before it showed
+  // the body (775 to 841 ms) where a phone waited for 4; from the first level both show it on 4 to 8 (369 to 413 ms)
+  // and the larger window sharpens about 0.7 s later (2026-10-02).
+  const textureLevel = !definition.textureLevels ? undefined : previousPlan == null && definition.textureLevels.fixedLevel === undefined ? 0
+    : selectPreparedTextureLevel(definition.textureLevels, view?.levelOfDetail?.silhouetteDiameter, previousPlan?.textureLevel);
   // A level names the resource each texture reads; a capability fallback then replaces it where this browser needs one.
   const fallback = fallbacksFor(definition.assets?.fallbacks);
   const levelChoice = textureLevel === undefined ? undefined : textureLevelFor(definition.textureLevels!, textureLevel, variant, view);
