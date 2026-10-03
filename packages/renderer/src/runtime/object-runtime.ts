@@ -175,6 +175,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       labelEdge: preparedLabelEdge(definition, worldFrame),
       ...(definition.camera.framingScale === undefined ? {} : { framingScale: definition.camera.framingScale }),
       setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
+      setZoomOutOpen(open: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutOpen(open); },
       holdPresentation() { return getSelection().holdPresentation(); },
       capture() { return getOrbit().captureWorldCamera(worldFrame); },
       apply(pose: Parameters<ObjectWorldNavigation['apply']>[0], options?: { signal: AbortSignal; departing?: boolean }) {

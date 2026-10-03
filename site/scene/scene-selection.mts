@@ -1,5 +1,5 @@
 import type { WorldCameraPose } from '@cssearth/objects';
-import { overviewScopeAtCamera } from '../overview-context.mts';
+import { overviewScopeAtCamera, overviewsReachableFrom } from '../overview-context.mts';
 import { PAGE_VIEWS, namesSystem, withView, type PageView } from '../navigation/navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
@@ -64,6 +64,17 @@ export function createSceneSelection({ initial, objectId, systems = [], onChange
       // The rung the camera crossed into is a selection of the mounted scene (a star's own system), or of another scene.
       const next = subjectOfScope(scope, centreId);
       return next.objectId === scene ? publish(next) : { ...next, centreId };
+    },
+    /** Whether a wider scene takes the camera as it zooms out: a body's system does, and so does the next level out of a
+     * system or a level, up to the outermost its centre reaches. Such a scene's own far limit does not stop the zoom. */
+    zoomOutOpen(): boolean {
+      const ladder = ladderOf(subject);
+      if (!ladder) return true;
+      const star = systemById(systems, ladder.centreId);
+      if (!star) return true;
+      // The scopes a zoom centred on that star goes out through, nearest first: the last has nothing wider.
+      const reachable = overviewsReachableFrom(star.originM, undefined, SYSTEM_RANGES.get(star.id));
+      return ladder.scope === 'system' ? reachable.length > 0 : reachable.at(-1)?.id !== ladder.scope;
     },
     /** Project the committed identity while preserving camera, dataset and diagnostic URL payloads. */
     url(value: string | URL) {

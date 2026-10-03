@@ -302,6 +302,7 @@ export function createRetainedCubicSkyOrbit({
     initialResponsiveZoom: () => initialResponsiveZoom,
     currentResponsiveZoom: () => responsiveFit.zoom,
     setZoomOutCentering(enabled: boolean) { camera.setZoomOutCentering(enabled); },
+    setZoomOutOpen(open: boolean) { camera.setZoomOutOpen(open); },
     captureWorldCamera(frame: PreparedWorldCameraFrame): WorldCameraPose {
       validateWorldFrame(frame);
       return camera.capture(frame);

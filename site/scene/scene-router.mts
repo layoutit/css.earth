@@ -29,7 +29,7 @@ import { WORLD_HOST_ID, namesSystem } from '../navigation/navigation-scope.mts';
 import { ladderOf, scopeHolds, setLadderCentre } from '../level-view.mts';
 import type { LadderHandover } from './scene-selection.mts';
 import { OVERVIEW_SELECTION_POLICY } from '../runtime-policy.mts';
-import { createNavigationTiming } from '../navigation/navigation-timing.mts';
+import { createNavigationTiming, markHandover } from '../navigation/navigation-timing.mts';
 import { retainInitialScene } from '../initial-scene.mts';
 import { createNavigationLifecycle, type NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import { createNavigationReadiness } from '../navigation/navigation-readiness.mts';
@@ -116,7 +116,7 @@ export function createSceneRouter({
   // A header pill's flight holds the overview hand-over off until it lands, then settles it once.
   let categoryFlight = false, refreshOverviewSelection: ((landed?: boolean) => void) | null = null;
   // The zoom ladder's hand-over to another scene (a level, or back to the centre's system) waits until the crossing has held.
-  let pendingHandover: { timer: number; to: LadderHandover } | null = null;
+  let pendingHandover: { timer: number; to: LadderHandover; crossedAt: number } | null = null;
   // The view a header pill's flight left, while that flight's landing is being handed over.
   let categoryDeparture: string | null = null;
   const requests = createNavigationLifecycle({ onError: report, onCancel(request) {
@@ -614,6 +614,7 @@ export function createSceneRouter({
   }
   function cancelHandover() {
     if (!pendingHandover) return;
+    markHandover(windowTarget, 'cancelled', { source: 'zoom-ladder', from: subject().objectId, to: pendingHandover.to.objectId, waitedMs: (windowTarget.performance?.now?.() ?? 0) - pendingHandover.crossedAt });
     windowTarget.clearTimeout(pendingHandover.timer);
     pendingHandover = null;
   }
@@ -621,6 +622,8 @@ export function createSceneRouter({
   function holdHandover(session: Session, to: LadderHandover) {
     if (pendingHandover?.to.objectId === to.objectId && pendingHandover.to.view === to.view) return;
     cancelHandover();
+    const crossedAt = windowTarget.performance?.now?.() ?? 0;
+    markHandover(windowTarget, 'crossed', { source: 'zoom-ladder', from: subject().objectId, to: to.objectId });
     const timer = windowTarget.setTimeout(() => {
       pendingHandover = null;
       const navigation = session.mount?.navigation;
@@ -629,15 +632,18 @@ export function createSceneRouter({
       if (typeof again !== 'object' || again.objectId !== to.objectId || again.view !== to.view) return;
       // The next scene is seen around the same star, with the camera where it is.
       setLadderCentre(again.centreId);
+      markHandover(windowTarget, 'settled', { source: 'zoom-ladder', from: subject().objectId, to: again.objectId, waitedMs: (windowTarget.performance?.now?.() ?? 0) - crossedAt });
       void navigate(again.objectId, { kind: 'object', ...(again.view === 'system' ? { view: 'system' as const } : {}), camera: 'preserve' }).catch(report);
     }, OVERVIEW_SELECTION_POLICY.settleMilliseconds);
-    pendingHandover = { timer, to };
+    pendingHandover = { timer, to, crossedAt };
   }
   function publishSelection() {
     const selection = context?.selection;
     // A selection on the zoom ladder (a star's system, a level) is the world seen around its centre at that scope.
     const subject = selection?.current, ladder = subject ? ladderOf(subject) : null;
     scenes.current?.mount?.navigation?.setZoomOutCentering?.(ladder !== null);
+    // A scene with a wider one to hand the camera to as it zooms out does not stop the zoom at its own far limit.
+    scenes.current?.mount?.navigation?.setZoomOutOpen?.(selection?.zoomOutOpen() ?? false);
     shellOwner?.shell?.presentSelection();
     // The moons view has its own shell selection, but its world paths use the shared overview policy. Past the scope that
     // holds the stars, the galaxy's stars retire too.

@@ -5,6 +5,21 @@ let sequence = 0;
 // Disposing a settled navigation's scene still aborts its request, which used to add a late cancellation.
 const SETTLED_PHASES = ['finished', 'failed', 'cancelled'];
 
+/** What a hand-over's entry says: which owner saw the camera cross (a body's overview watcher or the zoom ladder), from
+ * which object to which, the camera's range from the object it is leaving, and, once settled, how long the crossing held. */
+export interface HandoverDetail { source: 'overview-watcher' | 'zoom-ladder'; from: string; to: string; rangeM?: number; waitedMs?: number }
+
+/** Named User Timing entries for a scene hand-over the camera causes by crossing a threshold: `crossed` when an owner
+ * first sees it, `settled` when it asks for the navigation, `cancelled` when the camera came back first. Only the latest
+ * of each phase is kept. A capture reads them beside `cssEarth:navigation:*` to see where a zoom's hold comes from. */
+export function markHandover(windowTarget: Window, phase: 'crossed' | 'settled' | 'cancelled', detail: HandoverDetail) {
+  const clock = windowTarget?.performance;
+  if (typeof clock?.mark !== 'function' || typeof clock?.clearMarks !== 'function') return;
+  const name = `cssEarth:handover:${phase}`;
+  clock.clearMarks(name);
+  clock.mark(name, { detail: { ...detail, phase } });
+}
+
 export function createNavigationTiming(windowTarget: Window, from: string, to: string) {
   const clock = windowTarget?.performance;
   if (typeof clock?.mark !== 'function' || typeof clock?.measure !== 'function') return { mark(_phase: string) {} };

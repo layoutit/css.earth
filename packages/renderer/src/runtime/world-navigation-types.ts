@@ -16,6 +16,8 @@ export interface ObjectWorldNavigation {
   capture(): WorldCameraPose;
   apply(pose: WorldCameraPose, options?: { signal: AbortSignal; departing?: boolean }): void | Promise<boolean>;
   setZoomOutCentering?(enabled: boolean): void;
+  /** A wider scene can take the camera over as it zooms out: this scene's own far limit does not stop the zoom. */
+  setZoomOutOpen?(open: boolean): void;
   /** True once every prepared detail group is connected and painted. */
   detailActivated?(): boolean;
   optics(): WorldCameraViewport & { framingRadiusPixels: number;

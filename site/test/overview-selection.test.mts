@@ -133,7 +133,7 @@ test('camera sampling settles before changing selection and releases timers and 
   assert.equal(listener, null); assert.equal(timers.size, 0);
 });
 
-test('continuous outward camera updates cannot postpone the Sun overview flip', () => {
+test('continuous outward camera updates cannot postpone the Sun overview flip, and clearly past the exit it flips at once', () => {
   let listener: ObjectWorldNavigationListener | null = null;
   const getListener = () => required(listener);
   const timers = new Map<number, () => void>(), changes: OverviewSelection[] = [];
@@ -142,9 +142,13 @@ test('continuous outward camera updates cannot postpone the Sun overview flip', 
     isAvailable: () => true, onChange: next => changes.push(next),
     navigation: { ...navigationFixture(ceres, () => camera(ceres, 100), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => {}; } },
     windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
-  for (let step = 0; step < 100; step++) getListener()(camera(sun, (101 + step) * au), viewport);
+  for (let step = 0; step < 20; step++) getListener()(camera(sun, (101 + step) * au), viewport);
   assert.equal(serial, 1, 'The first crossing keeps its original timer throughout continuous movement');
-  [...timers.values()][0](); timers.clear();
-  assert.deepEqual(changes, [{ objectId: 'sun', overview: true }]);
+  assert.deepEqual(changes, [], 'near the threshold the crossing still has to last');
+  // A quarter past the exit distance the camera is leaving: the flip starts without waiting for the timer, so it is done
+  // before the zoom reaches the scene's far limit.
+  for (let step = 20; step < 100; step++) getListener()(camera(sun, (101 + step) * au), viewport);
+  assert.deepEqual(changes, [{ objectId: 'sun', overview: true }], 'once, however long the zoom goes on');
+  assert.equal(timers.size, 0, 'and its timer is gone');
   dispose();
 });

@@ -134,6 +134,10 @@ export const OVERVIEW_SELECTION_POLICY = Object.freeze({
   enterSunDiameterPixels: 48,
   centerRadiusPixels: 160,
   settleMilliseconds: 180,
+  // This many times past an exit distance the camera is leaving, not hovering at the threshold: the switch starts at
+  // once. A switch takes about 120 ms; waiting the settle time first, a steady zoom out of Earth reached the scene's
+  // far limit before it began and the camera stood there for 6 frames on the iPad (2026-10-03).
+  clearExitScale: 1.25,
 });
 
 export const sceneCursor: RuntimePolicy["sceneCursor"] = ({ surface, pressed, enabled }) => {

@@ -11,17 +11,20 @@ import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.t
 import { OVERVIEW_SELECTION_POLICY as policy } from './runtime-policy.mts';
 import { SOLAR_SYSTEM_ID, systemOfObject } from './object-systems.mts';
 import { systemOverviewDistance } from './system-framing.mts';
+import { markHandover } from './navigation/navigation-timing.mts';
 
 const distance = (a: PositionM, b: PositionM) => Math.hypot(...a.map((value, axis) => value - b[axis]));
 /** The Solar System's star; the root of the galactic overviews. */
 export const solarSystemFocus = (objects: SystemObjects) => objects.find(object => object.id === SOLAR_SYSTEM_ID);
 
 /** `objects` are the loaded objects, for the mounted one's frame; `systems` are the world's bodies, for its system and the Sun. */
-export function selectionAtCamera({ world, viewport, objects, systems, objectId, overview, landed = false, restRangeM = 0 }: SelectionPublication & { objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; overview: boolean;
+export function selectionAtCamera({ world, viewport, objects, systems, objectId, overview, landed = false, restRangeM = 0, exitScale = 1 }: SelectionPublication & { objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; overview: boolean;
   /** A flight to a framing (a header pill's category) has just landed here. */
   landed?: boolean;
   /** How far from the body its scene came to rest: where its page loaded or its flight landed. */
-  restRangeM?: number }): OverviewSelection | null {
+  restRangeM?: number;
+  /** Ask for an exit distance this many times as far: whether the camera is clearly past it. */
+  exitScale?: number }): OverviewSelection | null {
   const selected = objects.find(object => object.id === objectId)?.worldFrame;
   if (!selected) return null;
   const system = systemOfObject(systems, objectId);
@@ -36,7 +39,7 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
       // Earth framed the whole Solar System at 88 au under the "Earth–Moon system" card (2026-10-01). A zoom by hand
       // keeps the body's scene out to the exit distance, so a reader can come back in.
       if (landed && outside > 0 && eyeDistanceM(world.pose, selected.originM) >= outside) return { overview: true, objectId: system.id };
-      return eyeDistanceM(world.pose, system.originM) >= exit ? { overview: true, objectId: system.id } : null;
+      return eyeDistanceM(world.pose, system.originM) >= exit * exitScale ? { overview: true, objectId: system.id } : null;
     }
     // A star or body outside every system keeps its scene until the camera is as far from it as the Sun is;
     // the Solar System overview then hands the camera to the galactic scopes.
@@ -44,7 +47,7 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
     if (!sun) return null;
     // A galaxy is a body too, and a near one is framed from farther than the Sun is: the LMC, 49.6 kpc away, opened as
     // "Local Group" the moment its flight landed (2026-10-01). A body keeps its scene out to twice the range it came to rest at.
-    return eyeDistanceM(world.pose, selected.originM) >= Math.max(policy.exitSunDistanceM, distance(selected.originM, sun.originM), 2 * restRangeM)
+    return eyeDistanceM(world.pose, selected.originM) >= Math.max(policy.exitSunDistanceM, distance(selected.originM, sun.originM), 2 * restRangeM) * exitScale
       ? { overview: true, objectId: SOLAR_SYSTEM_ID } : null;
   }
   // An overview mounts its system's star; only approaching that star opens its card.
@@ -61,12 +64,18 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
     ? { overview: false, objectId } : null;
 }
 
-/** Require a sustained threshold crossing, even while the camera keeps moving. */
+/** Require a sustained threshold crossing, even while the camera keeps moving; a camera clearly past an exit
+ * (policy.clearExitScale) switches at once, so the switch is done before the zoom reaches the scene's far limit. */
 export function watchOverviewSelection({ navigation, objects, systems, objectId, getOverview, isAvailable,
   onChange, windowTarget }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; getOverview(): boolean; isAvailable(): boolean; onChange(selection: OverviewSelection): void; windowTarget: Window }) {
   let timer: number | null = null, latest: SelectionPublication | null = null, candidate: OverviewSelection | null = null; let disposed = false;
   // Where the body's scene came to rest: the first camera it answers for, and each landing after it.
   let restRangeM: number | null = null;
+  // The exit the camera was last switched for by being clearly past it, until it comes back inside: one switch a crossing.
+  let left: OverviewSelection | null = null;
+  // When the pending crossing was first seen, for its timing entry.
+  let crossedAt = 0;
+  const now = () => windowTarget.performance?.now?.() ?? 0;
   const range = (world: WorldCameraPose) => {
     const origin = objects.find(object => object.id === objectId)?.worldFrame?.originM;
     return origin ? eyeDistanceM(world.pose, origin) : 0;
@@ -77,7 +86,7 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     if (disposed || !isAvailable() || !latest) return;
     if (landed || restRangeM === null) restRangeM = range(latest.world);
     const next = selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview(), landed, restRangeM });
-    if (next) onChange(next);
+    if (next) { markHandover(windowTarget, 'settled', { source: 'overview-watcher', from: objectId, to: next.objectId, rangeM: range(latest.world), waitedMs: landed ? 0 : now() - crossedAt }); onChange(next); }
   }
   const unsubscribe = navigation.subscribe((world, viewport) => {
     // Publications use the whole stage; selection uses the content centre
@@ -85,10 +94,25 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     latest = { world, viewport: navigation.optics?.() ?? viewport };
     if (isAvailable() && restRangeM === null) restRangeM = range(world);
     const next = isAvailable() ? selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview(), restRangeM: restRangeM ?? 0 }) : null;
+    if (!next) left = null;
+    else if (!getOverview() && next.overview && left?.objectId !== next.objectId
+        && selectionAtCamera({ ...latest, objects, systems, objectId, overview: false, restRangeM: restRangeM ?? 0, exitScale: policy.clearExitScale })) {
+      if (timer !== null) windowTarget.clearTimeout(timer);
+      timer = null; candidate = left = next;
+      markHandover(windowTarget, 'settled', { source: 'overview-watcher', from: objectId, to: next.objectId, rangeM: range(world), waitedMs: 0 });
+      onChange(next);
+      return;
+    }
     if (next?.objectId === candidate?.objectId && next?.overview === candidate?.overview) return;
     if (timer !== null) windowTarget.clearTimeout(timer);
+    // A crossing already handed over (left) is not cancelled by the flight that then holds this watcher off.
+    if (candidate && !next && candidate !== left) markHandover(windowTarget, 'cancelled', { source: 'overview-watcher', from: objectId, to: candidate.objectId, rangeM: range(world), waitedMs: now() - crossedAt });
     timer = null; candidate = next;
-    if (next) timer = windowTarget.setTimeout(() => inspect(), policy.settleMilliseconds);
+    if (next) {
+      crossedAt = now();
+      markHandover(windowTarget, 'crossed', { source: 'overview-watcher', from: objectId, to: next.objectId, rangeM: range(world) });
+      timer = windowTarget.setTimeout(() => inspect(), policy.settleMilliseconds);
+    }
   });
   // `refresh` settles at once on the last camera: a flight that held the watcher off (isAvailable) hands over where it landed.
   return Object.assign(() => { disposed = true; unsubscribe(); if (timer !== null) windowTarget.clearTimeout(timer); },

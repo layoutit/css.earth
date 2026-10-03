@@ -16,6 +16,10 @@ import { clamp } from '@cssearth/core';
 
 /** The live camera stays in its prepared local frame for float64 precision.
  * Input, focus changes and restored observers mutate this owner; frame capture is read-only. */
+/** How far past its own far limit a scene lets the zoom go while a wider scene can take the camera: ten doublings, more
+ * runway than any zoom covers in the fraction of a second a switch takes. */
+const OPEN_FAR_LIMIT = 1024;
+
 export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldContext: PerspectiveWorldContext,
   baseOptics: () => WorldCameraViewport, sunDirection: Vector3 | null | undefined,
   createOrientation = createCameraOrientation) {
@@ -23,6 +27,12 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
   const optics = () => worldCameraViewport({ projectionScale }, baseOptics());
   const bodyRadius = worldContext.bodyRadiusUnits, kilometersPerUnit = worldContext.kilometersPerUnit;
   const maximumDistance = cameraPlan.dolly.maximumDistanceOverOrbitExtent * worldContext.maximumExtentUnits;
+  // The camera is the world's, not this scene's. A scene with a wider one to hand it to (setZoomOutOpen) does not stop
+  // the zoom at its own far limit: the wider scene takes the camera over underneath, and a camera standing at the limit
+  // until that switch was done is a hold (6 frames of a steady zoom out of Earth on the iPad, 2026-10-03). The limit
+  // still ends the zoom of a scene with nowhere wider to go, and far out of one whose switch never comes.
+  let zoomOutOpen = false;
+  const farLimit = () => zoomOutOpen ? maximumDistance * OPEN_FAR_LIMIT : maximumDistance;
   const framingReferenceZoom = worldContext.framingReferenceZoom ?? cameraPlan.defaultZoom;
   const orientation = createOrientation({ cameraPlan, controlPitch: cameraPlan.defaultControlPitchDegrees,
     controlYaw: cameraPlan.defaultControlYawDegrees, sunDirection });
@@ -68,8 +78,8 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
     zoomToDistance(cameraPlan.maximumZoom),
   );
   const clampDistance = (distance: number) =>
-    clamp(distance, minimumDistance(), maximumDistance);
-  const minimumZoom = () => distanceToZoom(maximumDistance);
+    clamp(distance, minimumDistance(), farLimit());
+  const minimumZoom = () => distanceToZoom(farLimit());
   const maximumZoom = () => cameraPlan.maximumZoom;
   // The prepared default framing until the responsive fit is selected: the
   // camera is never inside the body, even before its first publication.
@@ -88,7 +98,7 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
   function updateDetail(partial: CameraUpdate) {
     const previousDistance = cameraState.distance;
     const constrain = bodyCenter === null ? clampDistance : (distance: number) => clamp(distance,
-      Math.min(minimumDistance(), previousDistance), Math.max(maximumDistance, previousDistance));
+      Math.min(minimumDistance(), previousDistance), Math.max(farLimit(), previousDistance));
     if (partial.rotX !== undefined) cameraState.rotX = partial.rotX;
     if (partial.rotY !== undefined) cameraState.rotY = partial.rotY;
     if (partial.distanceKilometers !== undefined) {
@@ -184,6 +194,7 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
     scene: orientation.scene,
     bodyCenter: () => bodyCenter,
     setZoomOutCentering(enabled: boolean) { zoomOutCentering = enabled; },
+    setZoomOutOpen(open: boolean) { zoomOutOpen = open; },
     minimumZoom, maximumZoom, minimumDistance, maximumDistance,
     /** Only the original centred framing follows a resize; a restored observer stays put. */
     reframe(zoom: number) { if (bodyCenter === null) updateDetail({ zoom }); },
