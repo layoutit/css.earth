@@ -614,7 +614,7 @@ export function createSceneRouter({
   }
   function cancelHandover() {
     if (!pendingHandover) return;
-    markHandover(windowTarget, 'cancelled', { source: 'zoom-ladder', from: subject().objectId, to: pendingHandover.to.objectId, waitedMs: (windowTarget.performance?.now?.() ?? 0) - pendingHandover.crossedAt });
+    markHandover(windowTarget, 'cancelled', { source: 'zoom-scope', from: subject().objectId, to: pendingHandover.to.objectId, waitedMs: (windowTarget.performance?.now?.() ?? 0) - pendingHandover.crossedAt });
     windowTarget.clearTimeout(pendingHandover.timer);
     pendingHandover = null;
   }
@@ -623,7 +623,7 @@ export function createSceneRouter({
     if (pendingHandover?.to.objectId === to.objectId && pendingHandover.to.view === to.view) return;
     cancelHandover();
     const crossedAt = windowTarget.performance?.now?.() ?? 0;
-    markHandover(windowTarget, 'crossed', { source: 'zoom-ladder', from: subject().objectId, to: to.objectId });
+    markHandover(windowTarget, 'crossed', { source: 'zoom-scope', from: subject().objectId, to: to.objectId });
     const timer = windowTarget.setTimeout(() => {
       pendingHandover = null;
       const navigation = session.mount?.navigation;
@@ -632,7 +632,7 @@ export function createSceneRouter({
       if (typeof again !== 'object' || again.objectId !== to.objectId || again.view !== to.view) return;
       // The next scene is seen around the same star, with the camera where it is.
       setLadderCentre(again.centreId);
-      markHandover(windowTarget, 'settled', { source: 'zoom-ladder', from: subject().objectId, to: again.objectId, waitedMs: (windowTarget.performance?.now?.() ?? 0) - crossedAt });
+      markHandover(windowTarget, 'settled', { source: 'zoom-scope', from: subject().objectId, to: again.objectId, waitedMs: (windowTarget.performance?.now?.() ?? 0) - crossedAt });
       void navigate(again.objectId, { kind: 'object', ...(again.view === 'system' ? { view: 'system' as const } : {}), camera: 'preserve' }).catch(report);
     }, OVERVIEW_SELECTION_POLICY.settleMilliseconds);
     pendingHandover = { timer, to, crossedAt };

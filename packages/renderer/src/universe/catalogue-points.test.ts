@@ -288,3 +288,23 @@ test('banks mounted next to each other are groups of one layer, each dimmed by i
   first.destroy(); second.destroy();
   assert.equal(host.children.length, 1, 'the layer goes with its last bank');
 });
+
+test('a bank that loads under a still view takes its own fades without another publication', async () => {
+  const { document } = parseHTML('<div id="host"></div>');
+  const host = document.getElementById('host')! as unknown as HTMLElement;
+  const faded = { ...bank, appearance: { ...bank.appearance, fadeOutUnits: [9, 3] } };
+  const at = (distance: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, distance] as const, orientationXyzw: [0, 0, 0, 1] as const } },
+    viewport: { focalPixels: 500, principalOffsetPixels: [0, 0] as const, widthPixels: 600, heightPixels: 800 } });
+  // Published once, before the bank is read: the view never changes again.
+  const half = mountCataloguePoints({ host, url: 'half.json', loadBank: async () => faded });
+  half.publish(at(Math.sqrt(27)));
+  assert.equal(half.root.style.strokeOpacity, '1', 'before it loads, what the caller asked for');
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.ok(Math.abs(Number(half.root.style.strokeOpacity) - 0.5) < 1e-9, `halfway through its window once loaded, got ${half.root.style.strokeOpacity}`);
+  assert.ok(half.root.querySelector('path'), 'and its dots are drawn');
+  const gone = mountCataloguePoints({ host, url: 'gone.json', loadBank: async () => faded });
+  gone.publish(at(2));
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.equal(gone.root.style.display, 'none', 'narrower than its window once loaded, not drawn');
+  half.destroy(); gone.destroy();
+});
