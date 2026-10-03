@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": 12.228948457013146,
   "radialVelocityKmPerS": 24.865961,
   "presentationUp": "display-axis",
+  "boundTo": "toi-451",
   "sources": {
    "position": "Gaia DR3 source 4844691297067064576 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/cd-38-1467-b/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 8.1199 +/- 0.0172 mas (same row, RUWE 1.22): 123.15 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): -11.481, 12.229 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): 24.87 +/- 4.15 km/s"
+   "radialVelocity": "Gaia DR3 (same row): 24.87 +/- 4.15 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-451 and CD-38 1467B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 4844691297067063424 and 4844691297067064576), 4,669 AU apart on the sky, with a chance-alignment probability of 8.0e-6: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

@@ -3,12 +3,13 @@ import assert from 'node:assert/strict';
 import { worldHolders } from './world-holders.js';
 
 // A small world: the Sun's planets and a moon, a featured star with a planet, a plain-dot star with one and one without, a
-// galaxy with a featured star, a bound companion and a plain-dot asteroid.
+// galaxy with a featured star, a named bound companion, a plain-dot one and a plain-dot asteroid.
 const parents: Record<string, string> = {
   sun: 'solar-system', 'solar-system': 'milky-way', earth: 'earth-system', 'earth-system': 'solar-system', moon: 'earth-system', mercury: 'solar-system',
   ceres: 'solar-system', 'asteroid-1': 'solar-system', sirius: 'sirius-system', 'sirius-system': 'milky-way', 'sirius-b': 'sirius-system',
   'toi-1': 'toi-1-system', 'toi-1-system': 'milky-way', 'toi-1b': 'toi-1-system', 'plain-star': 'milky-way', lmc: 'milky-way', 'hv-1': 'lmc',
   'eps-a': 'eps-a-system', 'eps-a-system': 'milky-way', 'eps-b': 'eps-a-system', 'milky-way': 'local-group',
+  'hat-1': 'hat-1-system', 'hat-1-system': 'milky-way', 'hat-1b': 'hat-1-system', 'hat-1-companion': 'hat-1-system',
 };
 const orbit = (centerBodyId: string) => ({ centerBodyId });
 const bodies = [
@@ -19,6 +20,8 @@ const bodies = [
   { id: 'toi-1', classification: 'star', plainDot: true }, { id: 'toi-1b', classification: 'exoplanet', orbit: orbit('toi-1') },
   { id: 'plain-star', classification: 'star', plainDot: true }, { id: 'lmc', classification: 'galaxy' }, { id: 'hv-1', classification: 'star' },
   { id: 'eps-a', classification: 'star' }, { id: 'eps-b', classification: 'star', boundTo: { hostId: 'eps-a' } },
+  { id: 'hat-1', classification: 'star' }, { id: 'hat-1b', classification: 'exoplanet', orbit: orbit('hat-1') },
+  { id: 'hat-1-companion', classification: 'star', plainDot: true, boundTo: { hostId: 'hat-1' } },
 ];
 const holders = worldHolders('sun', bodies, id => parents[id], 'asteroid-bank');
 
@@ -41,6 +44,13 @@ describe('the file each world body is in', () => {
     assert.equal(holders.holderOf('plain-star'), 'plain-star');
     assert.ok(holders.ownRow('plain-star') && !holders.ownRow('toi-1') && holders.plainDotStar('toi-1'));
     assert.equal(holders.holderOf('asteroid-1'), 'asteroid-bank');
+    // A plain-dot companion is in the file of the system it is bound into, still a dot of its galaxy, and brings that
+    // file to no page that is not near it.
+    assert.equal(holders.holderOf('hat-1-companion'), 'hat-1-system');
+    assert.ok(holders.plainDotStar('hat-1-companion') && !holders.ownRow('hat-1-companion'));
+    assert.equal(holders.drawnFromAnywhere('hat-1-system'), false);
+    const unpackaged = worldHolders('sun', bodies, id => id === 'hat-1-companion' ? undefined : parents[id], 'asteroid-bank');
+    assert.equal(unpackaged.holderOf('hat-1-companion'), 'hat-1-system', 'without a package, the system of the star it is bound to');
   });
 
   it('says which files are drawn from anywhere: one with a body that orbits nothing or the focus and is no plain dot or moon', () => {

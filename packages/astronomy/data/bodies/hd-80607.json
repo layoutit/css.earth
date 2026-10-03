@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": 9.937988536859617,
   "radialVelocityKmPerS": 3.5811973,
   "presentationUp": "display-axis",
+  "boundTo": "hd-80606",
   "sources": {
    "position": "Gaia DR3 source 1019003329101872896 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-80607/source/photometry/gaia-dr3-source.csv; cross-identification HD 80607, HIP 45983: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+1019003329101872896",
    "distance": "Gaia DR3 parallax 15.1482 +/- 0.0157 mas (same row, RUWE 0.99): 66.01 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): 52.656, 9.938 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): 3.58 +/- 0.19 km/s"
+   "radialVelocity": "Gaia DR3 (same row): 3.58 +/- 0.19 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list HD 80606 and HD 80607 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 1019003226022657920 and 1019003329101872896), 1,355 AU apart on the sky, with a chance-alignment probability of 3.6e-6: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

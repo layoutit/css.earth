@@ -4,7 +4,9 @@
  * Milky Way, the Local Group, the Nearby Universe and the Observable Universe. What a page loads, what a card lists, what a
  * breadcrumb shows and what the camera hands over to as it backs out all read this tree.
  *
- * A dataset bank is not in the tree: it is attached to the object it draws for (`properties.host`).
+ * A dataset bank is not in the tree: it is attached to the one object it draws for (`properties.host`), which
+ * `checkBankHosts` requires of every bank. A star measured to be bound to another is inside what that star is inside
+ * (`checkBoundStars`).
  */
 export const OBJECT_TREE_ROOT = 'observable-universe';
 
@@ -47,4 +49,32 @@ export function objectChildren(objects: readonly TreeNode[]): ReadonlyMap<string
   const children = new Map<string, string[]>();
   for (const object of objects) if (object.parent !== undefined) (children.get(object.parent) ?? children.set(object.parent, []).get(object.parent)!).push(object.id);
   return children;
+}
+
+/** A package outside the tree: a dataset bank, as its descriptor names its host. */
+export interface BankNode { readonly id: string; readonly host?: unknown }
+
+/** Checks that every bank names the one object it draws for (`properties.host`), an object of the tree, naming the bank and
+ * its file on refusal. */
+export function checkBankHosts(banks: readonly BankNode[], objects: ReadonlySet<string>): void {
+  for (const bank of banks) {
+    const where = `src/objects/${bank.id}/object.json`;
+    if (typeof bank.host !== 'string') throw new TypeError(`${where}: a dataset bank names the one object it draws for (properties.host); ${bank.id} names ${bank.host === undefined ? 'none' : JSON.stringify(bank.host)}.`);
+    if (!objects.has(bank.host)) throw new TypeError(`${where}: properties.host "${bank.host}" is no object of the registry.`);
+  }
+}
+
+/** Checks that each star measured to be bound to another (`bonds`: the star, then the star it is bound to, from the
+ * astronomy records' `boundTo`) is inside the same object as that star: the system the pair makes. The tree's own shape
+ * cannot tell a wrong parent from a right one; a measured bond can. */
+export function checkBoundStars(objects: readonly TreeNode[], bonds: Iterable<readonly [star: string, host: string]>): void {
+  const byId = new Map(objects.map(object => [object.id, object] as const));
+  for (const [star, host] of bonds) {
+    const where = `src/objects/${star}/object.json`, own = byId.get(star), other = byId.get(host);
+    if (!own) continue;
+    if (!other) throw new TypeError(`${where}: ${star} is bound to ${host}, which is no object of the registry.`);
+    if (own.parent !== other.parent) {
+      throw new TypeError(`${where}: ${star} is bound to ${host}, so it is inside what ${host} is inside ("${other.parent ?? 'nothing'}"); its parent is "${own.parent ?? 'none'}".`);
+    }
+  }
 }

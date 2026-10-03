@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": 50.60659550864666,
   "radialVelocityKmPerS": 80.33331,
   "presentationUp": "display-axis",
+  "boundTo": "toi-421",
   "sources": {
    "position": "Gaia DR3 source 2984582227215748224 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/bd-14-1137-b/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 13.3248 +/- 0.0215 mas (same row, RUWE 1.18): 75.05 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): -36.190, 50.607 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): 80.33 +/- 1.91 km/s"
+   "radialVelocity": "Gaia DR3 (same row): 80.33 +/- 1.91 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-421 and BD-14 1137B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2984582227215748864 and 2984582227215748224), 2,206 AU apart on the sky, with a chance-alignment probability of 1.1e-4: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }
