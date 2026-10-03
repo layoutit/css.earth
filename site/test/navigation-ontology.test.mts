@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
-import { OBJECTS, SCENE_OBJECTS, ancestorsOf, requireObject, requireSceneObject } from '../objects.mts';
+import { OBJECTS, SCENE_OBJECTS, ancestorsOf, requireObject } from '../objects.mts';
 import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
@@ -30,7 +30,7 @@ test('every scene and every package the host draws has exactly one searchable de
   assert.deepEqual(SCENE_OBJECTS, OBJECTS.filter(object => !object.system));
   assert.ok(systems.length > 700 && systems.some(object => object.id === 'solar-system') && systems.some(object => object.id === 'jupiter-system'));
   for (const system of systems) {
-    const host = requireSceneObject(system.system!.host);
+    const host = requireObject(system.system!.host);
     assert.equal(system.id, systemObjectId(host.id), `${system.id} is named after its host`);
     assert.equal(system.route, `/${system.id}/`);
     assert.equal(system.classification, system.system!.members === 'moons' ? 'satellite-system' : 'planetary-system', system.id);
@@ -38,7 +38,7 @@ test('every scene and every package the host draws has exactly one searchable de
   }
   // No other object's id reads as a system's.
   for (const object of SCENE_OBJECTS) assert.equal(systemHostId(object.id), null, object.id);
-  for (const id of hosted) assert.equal(requireSceneObject(id).id, id);
+  for (const id of hosted) assert.equal(requireObject(id).id, id);
   // The objects seen from inside author their zoom facts; the order the view hands over in is the tree: Earth's ancestors.
   const inside = OBJECTS.filter(object => object.zoom);
   assert.deepEqual(new Set(inside.map(object => object.id)), new Set(['milky-way', 'local-group', 'nearby-universe', 'observable-universe']));
@@ -57,7 +57,7 @@ test('every scene and every package the host draws has exactly one searchable de
   // Every object is searched through the catalogue.
   assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.map(object => object.id)));
   assert.deepEqual(objectAdapter.routes(SCENE_OBJECTS), SCENE_OBJECTS.map(object => object.route));
-  assert.equal(requireSceneObject('m31').id, 'm31');
+  assert.equal(requireObject('m31').id, 'm31');
   for (const [query, id] of [['Andromeda', 'm31'], ['M31', 'm31'], ['LMC', 'lmc'], ['SMC', 'smc'], ['NGC 1976', 'm42'], ['Virgo', 'virgo-cluster']]) {
     const object = requireObject(id!);
     assert.ok((object.searchNames ?? []).some(name => name.includes(normalizeDestinationQuery(query!))), query);
@@ -79,7 +79,7 @@ test('distance display and order use the prepared position, never the legacy orb
     assert.equal(distance.epochJdTt, distance.quantity === 'catalogue' ? null : object.worldFrame?.epochJdTt, object.id);
     assert.equal(distance.referencePoint, distance.quantity === 'catalogue' ? 'observer' : 'heliocentre', object.id);
   }
-  const halley = requireSceneObject('comet-1p');
+  const halley = requireObject('comet-1p');
   assert.ok(halley.distance.value > 30 && halley.distance.value < 40);
   assert.match(distanceDescription(halley.distance), /Distance from the Sun at JD/);
   assert.ok(!('distanceAu' in halley));

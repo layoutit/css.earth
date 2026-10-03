@@ -34,4 +34,3 @@ export function requireObject(id: string) {
   return object;
 }
 
-export const requireSceneObject = requireObject;

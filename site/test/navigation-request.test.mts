@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { requireSceneObject } from '../objects.mts';
+import { requireObject } from '../objects.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
 import { resolveNavigation } from '../navigation/navigation-request.mts';
 
@@ -13,7 +13,7 @@ test('a body without a hosted system opens detail on the first click', () => {
       overviewTarget() { assert.fail('object selection does not open an overview'); },
     } as unknown as Parameters<typeof resolveNavigation>[1]['navigation'];
     const { destination, centeredObjectId } = resolveNavigation({ kind: 'object' }, {
-      object: requireSceneObject(id), objects: WORLD_OBJECTS, navigation,
+      object: requireObject(id), objects: WORLD_OBJECTS, navigation,
       current: { objectId: 'sun', href: 'https://css.earth/sun/', subject: { objectId: 'sun' },
         centeredObjectId: null, hasPresented: true, reuseScene: false, mount: null, pending: null },
     });
@@ -33,7 +33,7 @@ test('a star hosting planets flies to frame its system on the first click and op
     overviewTarget() { assert.fail('object selection does not open an overview'); },
   } as unknown as Parameters<typeof resolveNavigation>[1]['navigation'];
   const select = (centeredObjectId: string | null) => resolveNavigation({ kind: 'object' }, {
-    object: requireSceneObject('eps-eridani'), objects: WORLD_OBJECTS, navigation,
+    object: requireObject('eps-eridani'), objects: WORLD_OBJECTS, navigation,
     current: { objectId: 'milky-way', href: 'https://css.earth/milky-way/', subject: { objectId: 'milky-way' },
       centeredObjectId, hasPresented: true, reuseScene: false, mount: null, pending: null },
   });
@@ -52,7 +52,7 @@ test('a galaxy picked from another galaxy\'s page is a destination like any body
   } as unknown as Parameters<typeof resolveNavigation>[1]['navigation'];
   // M 33, then LMC from search, then Back must return to M 33 (it left the site on 2026-10-01).
   const { destination } = resolveNavigation({ kind: 'object' }, {
-    object: requireSceneObject('lmc'), objects: WORLD_OBJECTS, navigation,
+    object: requireObject('lmc'), objects: WORLD_OBJECTS, navigation,
     current: { objectId: 'm33', href: 'https://css.earth/m33/', subject: { objectId: 'm33' },
       centeredObjectId: null, hasPresented: true, reuseScene: false, mount: null, pending: null },
   });

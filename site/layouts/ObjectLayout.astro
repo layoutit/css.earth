@@ -10,7 +10,7 @@ import { defaultDatasetBank } from '../object-page-data.mts';
 import contextBankAssets from '../prepared-context-bank-assets.json';
 import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
 import { inlineSceneImage, resolveBuildSceneAddress } from '../asset-origin.mts';
-import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
+import { SCENE_OBJECTS, requireObject } from "../objects.mts";
 import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
 import { pageTrail } from "../seo-trail.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
@@ -50,7 +50,7 @@ interface Props {
 const { objectId, pageId = objectId, navigation = false, scene, descriptor, home = false } = Astro.props;
 const objectUi = await Astro.slots.render('object-ui');
 const tabStyles = informationTabStyles(Astro.locals, objectUi);
-const objectRecord = requireSceneObject(objectId);
+const objectRecord = requireObject(objectId);
 // The world files the page reads at startup, root first, and its body's own row when no file has it (site/world-places.mts).
 const worldFiles = worldStartupFiles(pageId);
 const ownRow = worldPlaceOf(objectRecord.id)?.row !== undefined;

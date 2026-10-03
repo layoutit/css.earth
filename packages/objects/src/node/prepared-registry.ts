@@ -5,7 +5,7 @@ import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
 import { catalogueObject, checkObjectTree, defineObjects } from '../registry/index.js';
-import type { NavigableObject, NavigationDistance, ObjectDiscovery, ObjectEntry, WorldBody } from '../registry/index.js';
+import type { NavigableObject, NavigationDistance, ObjectDiscovery, WorldBody } from '../registry/index.js';
 
 /** The catalogue file, relative to the checkout: a module of each object's descriptor, as its folder's object.json holds
  * it, with its distance and discovery, in registry order. A page never loads it: it reads one entry at a time. */
@@ -25,9 +25,10 @@ export function preparedCatalogueModule(rows: readonly PreparedCatalogueRow[]) {
     `export const CATALOGUE_ENTRIES = Object.freeze(JSON.parse(${JSON.stringify(JSON.stringify(rows))}));\n`;
 }
 
-/** A scene object as preparation sees it: every registry field, and a scene loader that refuses to mount. */
-export type PreparedSceneObject = ObjectEntry<never, AbortSignal>;
+/** An object as preparation sees it: every registry field, its place in the object tree and its zoom facts, and a scene
+ * loader that refuses to mount. A scene object is one that is no system. */
 export type PreparedNavigableObject = NavigableObject<never, AbortSignal>;
+export type PreparedSceneObject = PreparedNavigableObject;
 export interface PreparedObjectRegistry {
   /** The catalogue entries as written, in registry order. */
   readonly entries: readonly Readonly<Record<string, unknown>>[];
