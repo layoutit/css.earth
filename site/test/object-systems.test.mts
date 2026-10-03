@@ -18,8 +18,8 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
   for (const system of systems.slice(1)) {
     const star = SCENE_OBJECTS.find(object => object.id === system.id);
     assert.ok(star, `${system.id} is a registered star`);
-    // Named by its star's system name when that names a system, else after its star (Sirius's is its constellation).
-    assert.deepEqual([system.name, system.route], [star.systemName.endsWith(' system') ? star.systemName : `${star.name} system`, `/${system.id}/`]);
+    // Named by its star's system name.
+    assert.deepEqual([system.name, system.route], [star.systemName, `/${system.id}/`]);
   }
   for (const id of ['wasp-43', 'hd-189733', 'hd-209458', 'k2-18', 'kepler-186', 'kepler-452', 'trappist-1', 'wasp-39', 'beta-pictoris', 'hr-8799', 'sgr-a-star', 'hd-110067', 'hd-29391', 'kepler-16-a', 'wd-1856-534', 'kelt-9', 'vhs-1256-1257', 'gq-lup', 'dh-tau', 'roxs-42b', 'wasp-76', 'pds-70', 'wasp-18', 'wasp-121', 'luhman-16', 'hip-65426', 'af-lep', 'ab-pic', 'yses-1', 'hd-206893', 'hd-95086', 'gj-504', 'hd-135344-a', 'eps-indi-a', 'hd-219134', 'hip-56998', 'hd-136352', 'gj-143', 'hd-39091', 'toi-2194', 'toi-5789', 'hd-97658', 'hd-63433', 'toi-2134', 'hd-207496', 'toi-836', 'hd-207897', 'hd-73583', 'hr-858', 'toi-431', 'hd-88986', 'hd-60779', 'kepler-444']) assert.ok(systems.some(system => system.id === id), `${id} keeps its system`);
   // A page builds its systems from the world summary alone; they match the registry's. The summary is regenerated on each
@@ -113,10 +113,10 @@ test("a system's exit distance scales the Sun's 100 AU by the prepared framing r
   assert.ok(wasp.exitDistanceM > wasp.radiusM && wasp.exitDistanceM < .1 * au);
 });
 
-test('a system is named by its star’s system name when that names a system, else after its star', () => {
+test('a system is named by its star’s system name', () => {
   assert.equal(systemById(SCENE_OBJECTS, 'wasp-43')!.name, 'WASP-43 system');
-  // Sirius's system name is its constellation, and Sgr A*'s the Galactic Centre: display text, not the system's name.
-  assert.equal(SCENE_OBJECTS.find(object => object.id === 'sirius')!.systemName, 'Canis Major');
+  // Sgr A*'s system is the Galactic Centre. A star's system name is never its constellation: Sirius's read "Canis Major".
+  assert.equal(systemById(SCENE_OBJECTS, 'sgr-a-star')!.name, 'Galactic Centre');
   assert.equal(systemById(SCENE_OBJECTS, 'sirius')!.name, 'Sirius system');
   assert.equal(systemById(SCENE_OBJECTS, SOLAR_SYSTEM_ID)!.name, 'Solar System');
 });

@@ -54,8 +54,8 @@ when `pnpm prepare:world-context` writes `site/prepared-world-presentation.json`
 registry, so no list names the systems. Every
 member is inside its star's system in the object tree, and the derivation fails
 otherwise. A star without orbiting bodies, such as Betelgeuse, belongs to no
-system. A system is named by its star's system name when that names a system, and
-otherwise after its star.
+system. A system is named by its star's system name (the TRAPPIST-1 system, the
+Galactic Centre).
 
 A system's classification says what it holds. A star with a planet is a
 `planetary-system`. A star with only stars inside its system is a `star-system`:

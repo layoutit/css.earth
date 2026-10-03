@@ -47,10 +47,8 @@ export function planetarySystems(objects: readonly (Pick<ObjectEntry, 'id' | 'na
       if (!points.has(memberId)) throw new TypeError(`Planetary system ${id} lists ${memberId}, which the world context does not place; run pnpm prepare:world-context.`);
     }
     const fade = systemFadeDistances(plan.system, 'orbitsWithinM' in host ? host.orbitsWithinM : undefined);
-    // Its name: the star's system name when that names a system, else the star's own (Sirius's system name is its
-    // constellation, Canis Major).
-    const name = id === plan.focus.id || star.systemName.endsWith(' system') ? star.systemName : `${star.name} system`;
-    return Object.freeze({ id, name, route: star.route, originM: star.worldFrame?.originM ?? host.positionM,
+    // Its name is its star's system name: the Solar System, the TRAPPIST-1 system, the Galactic Centre.
+    return Object.freeze({ id, name: star.systemName, route: star.route, originM: star.worldFrame?.originM ?? host.positionM,
       memberIds: Object.freeze([...memberIds]), radiusM,
       exitDistanceM: Math.min(policy.exitSunDistanceM * radiusM / solarRadiusM, fade.hiddenDistanceM / SYSTEM_OVERVIEW_SPAN) });
   }));
