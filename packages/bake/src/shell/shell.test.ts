@@ -1,4 +1,5 @@
 import { test } from 'node:test';
+import { parse, array, number } from '@cssearth/core/schema';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -150,6 +151,9 @@ test('sorted atlas pixels bake a spatial rim in linear RGB and alpha with transp
   const { data, info } = await sharp(join(objectDirectory, 'prepared', resource.path)).raw().toBuffer({ resolveWithObject: true });
   assert.deepEqual([info.width, info.height, info.channels], [1472, 1408, 4]);
   assert(info.width * info.height * 4 < 10 * 1024 * 1024);
+  assert.deepEqual(shell.atlas.facingLevels, (await recipe()).atlas.facingLevels);
+  assert.deepEqual(shell.atlas.facingLevels, parse(JSON.parse(await readFile(new URL('../../../renderer/test/fixtures/shell-facing-levels.json', import.meta.url), 'utf8')), array(number), 'Shell facing levels'),
+    'renderer authored levels follow the shell producer');
   const levels = shell.atlas.facingLevels!;
   const frameFor = (wanted: readonly number[]) => {
     let frame = 0;

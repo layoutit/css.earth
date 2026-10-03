@@ -2,8 +2,8 @@
  * The prepared solar geometry the host passes in: the unit direction to the Sun, the J2000 ecliptic north pole and the
  * body-fixed to ICRF rotation of each body at one pinned epoch. `packages/bake/cli/prepare-solar-geometry.mts` generates it
  * into the checkout (`src/platform/solar-geometry.mts`) after the packages build, from the built astronomy and bake
- * packages, so no package can import it; a caller imports that module and hands it to the frame preparers here, which
- * read nothing else. The generated module satisfies this interface as it is.
+ * packages. Hosts pass it to the frame preparers; package-owned tests and preparation can use `loadSolarGeometry`
+ * to read and validate it without depending on the checkout's relative layout.
  */
 export interface SolarGeometry {
   /** The epoch every direction is taken at, as its prepared label (`2026-09-03T00:00:00 TT`). */

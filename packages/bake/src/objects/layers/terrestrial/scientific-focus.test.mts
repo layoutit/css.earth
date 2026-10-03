@@ -5,14 +5,15 @@ import {readFile} from 'node:fs/promises';
 import { test } from 'node:test';
 
 import {prepareScientificNavigation} from '@cssearth/bake/objects/layers/terrestrial';
-import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
+import { loadSolarGeometry } from '@cssearth/bake/objects/scene';
+const solarGeometry = await loadSolarGeometry();
 import {preparedScenePitch} from '@cssearth/engine';
 
 import {requireRecord,requireString} from '@cssearth/core';
 
 // This small prepared carrier is independent of the focus helper's frame math.
 // No body raster preparation, browser, or complete runtime document is needed.
-const raw = requireRecord(JSON.parse(await readFile(new URL('../../../../src/objects/europa/prepared/scene.json', import.meta.url), 'utf8')), 'Europa scene');
+const raw = requireRecord(JSON.parse(await readFile(new URL('../../../../../../src/objects/europa/prepared/scene.json', import.meta.url), 'utf8')), 'Europa scene');
 const camera = raw.camera; requireCamera(camera);
 const scene = {camera, systemTransform:requireString(raw.systemTransform, 'Europa transform')};
 const focus = {longitudeDegrees:142, latitudeDegrees:-43.7, zoom:4};

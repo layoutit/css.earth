@@ -1,7 +1,6 @@
 import { parsePreparedObjectRuntime } from '@cssearth/objects';
 
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
-import { prepareFrameLookup } from "@cssearth/bake/presentation";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { sourceTest } from '@cssearth/objects/node/source-test';
@@ -9,7 +8,7 @@ const test = sourceTest();
 import { createPreparedMaterialPublisher, preparedMaterialFrame } from '@cssearth/renderer/testing';
 import { selectedPreparedVariant } from '@cssearth/renderer/testing';
 import { initialObjectSelection } from '@cssearth/renderer/testing';
-import { retainedPresentationFixture } from "./fixtures/object-runtime-package.mts";
+import { retainedPresentationFixture } from "../../test/object-runtime-package.mts";
 
 import { parse, object, array, tuple, number, boolean, string } from '@cssearth/core/schema';
 const definition = parsePreparedObjectRuntime(await loadObjectTestDefinition('venus'));
@@ -22,7 +21,7 @@ const referenceSchema = object({ source: object({}), records: array(object({
 const nativeElement = (element: ReturnType<ReturnType<typeof retainedPresentationFixture>['document']['createElement']>) => element as unknown as HTMLElement;
 
 test("Venus preserves roll and shadow boundaries while selecting physical directional phases",()=>{
-  const reference=parse(JSON.parse(readFileSync(new URL("../../../../packages/bake/src/contract/fixtures/venus-material-reference.json",import.meta.url), "utf8")), referenceSchema, "Venus material reference");
+  const reference=parse(JSON.parse(readFileSync(new URL("../../test/fixtures/venus-material-reference.json",import.meta.url), "utf8")), referenceSchema, "Venus material reference");
   assert.ok(reference.records.length>400);
   const f=retainedPresentationFixture(definition);
   try{
@@ -53,7 +52,8 @@ test("Venus preserves roll and shadow boundaries while selecting physical direct
 });
 
 test("frame mapping consumes numeric bounds independently of the presentation identity",()=>{
-  const mapping=prepareFrameLookup(41,z=>Math.round(Math.max(0,Math.min(40,(z+1)*20))));
+  const mapping={ count: 41, indices: Array.from({length: 41}, (_, i) => i),
+    thresholds: Array.from({length: 40}, (_, i) => (i + .5) / 20 - 1) };
   for(const [z,expected] of [[-2,0],[-1,0],[-.5,10],[0,20],[.5,30],[1,40],[2,40]])
     assert.equal(Reflect.apply(preparedMaterialFrame,undefined,[mapping,{sunViewDirection:[0,0,z]},definition.camera]),expected);
 });
@@ -87,12 +87,4 @@ test("prepared address caching survives native URL serialization and still publi
     publisher.publish(selected, { ...view, sunViewDirection: [0, 0, -1] }, f.resources); assert.equal(writes, 1);
     publisher.publish(selected, view, { ...f.resources, url: key => f.resources.url(key) + '?decoded=2' }); assert.equal(writes, 2);
   } finally { f.restore(); }
-});
-
-test("invalid material mappings fail before lookup expansion", () => {
-  for (const value of [NaN, Infinity, -1, .5, 4]) {
-    assert.throws(() => prepareFrameLookup(4, () => value), /inside its prepared bank/);
-  }
-  assert.throws(() => prepareFrameLookup(0, () => 0), /positive frame count/);
-  assert.throws(() => prepareFrameLookup(4, z => z === -1 ? 0 : z === 1 ? 3 : NaN), /inside its prepared bank/);
 });

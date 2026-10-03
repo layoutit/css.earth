@@ -4,54 +4,52 @@
  *   node .github/scripts/ci/affected-tests.mts <base ref>    append test_packages and test_site to $GITHUB_OUTPUT
  *   node .github/scripts/ci/affected-tests.mts               (no base: a push) test everything */
 import { execFileSync } from 'node:child_process';
-import { appendFileSync, readdirSync, readFileSync } from 'node:fs';
+import { appendFileSync, globSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export interface Workspace { readonly directory: string; readonly name: string; readonly dependencies: readonly string[]; }
 export interface AffectedTests { readonly packages: 'all' | readonly string[]; readonly site: boolean; readonly files: readonly string[]; }
 
-/** Cross-owner tests run in the packages lane whenever either owner (or its dependencies) changes.
- * Offline tool tests remain in their package glob; integration suites also run when directly edited.
- * `affected-tests.test.mts` proves every entry exists and imports its owner. */
-export const FOREIGN_TESTS: Readonly<Record<string, readonly string[]>> = {
-  objects: ['packages/bake/src/presentation/depth-partition-contract.test.ts'],
-  bake: [
-    'integration/renderer-bake/src/shell/shell.test.ts',
-    'integration/renderer-bake/src/contract/feature-fixture.test.mts',
-    'integration/renderer-bake/src/contract/object-runtime.test.mts',
-    'integration/renderer-bake/src/contract/object-selection-runtime.test.mts',
-    'integration/renderer-bake/src/contract/prepared-material.test.mts',
-    'integration/renderer-bake/src/presentation/leaf-box.test.mts',
-    'integration/renderer-bake/src/contract/navigable-object-mount.test.ts',
-    'integration/renderer-bake/src/sky/parallax.test.ts',
-    'integration/renderer-bake/src/stars/point-field-bank.test.ts',
-    'integration/renderer-bake/src/stars/validation.test.ts',
-    'integration/renderer-bake/src/volume-leaves/prepared-volume-runtime.test.ts',
-    'integration/renderer-bake/src/volume-leaves/prepared-leaf-frustum.test.ts',
-    'integration/renderer-bake/src/objects/layers/paged-ellipsoid/surface-target.test.ts',
-  ],
-  renderer: [
-    'integration/renderer-bake/src/shell/shell.test.ts',
-    'integration/renderer-bake/src/presentation/leaf-box.test.mts',
-    'integration/renderer-bake/src/contract/feature-fixture.test.mts',
-    'integration/renderer-bake/src/contract/object-runtime.test.mts',
-    'integration/renderer-bake/src/contract/object-selection-runtime.test.mts',
-    'integration/renderer-bake/src/contract/prepared-material.test.mts',
-    'integration/renderer-bake/src/contract/navigable-object-mount.test.ts',
-    'integration/renderer-bake/src/objects/layers/paged-ellipsoid/surface-target.test.ts',
-    'integration/renderer-bake/src/sky/parallax.test.ts',
-    'integration/renderer-bake/src/stars/point-field-bank.test.ts',
-    'integration/renderer-bake/src/stars/validation.test.ts',
-    'integration/renderer-bake/src/volume-leaves/prepared-leaf-frustum.test.ts',
-    'integration/renderer-bake/src/volume-leaves/prepared-volume-runtime.test.ts',
-  ],
-};
+/** The root scripts are the only lane map. Use their quoted Node test globs for collection and affected routing. */
+export function testLaneFiles(root: string): Readonly<Record<'packages' | 'site', readonly string[]>> {
+  const manifest: unknown = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
+  if (!manifest || typeof manifest !== 'object' || !('scripts' in manifest) || !manifest.scripts || typeof manifest.scripts !== 'object')
+    throw new TypeError('package.json has no scripts');
+  const scripts = manifest.scripts;
+  const collect = (lane: 'packages' | 'site'): string[] => {
+    const script = Reflect.get(scripts, `test:${lane}`);
+    if (typeof script !== 'string') throw new TypeError(`package.json has no test:${lane}`);
+    const patterns = [...script.matchAll(/"([^"\n]+)"/gu)].map(match => match[1]!);
+    if (patterns.length === 0) throw new TypeError(`test:${lane} has no test globs`);
+    return [...new Set(patterns.flatMap(pattern => globSync(pattern, { cwd: root })))].sort();
+  };
+  return { packages: collect('packages'), site: collect('site') };
+}
+
+/** Discover cross-owner coverage from the collected tests rather than maintaining a second path list.
+ * Looking for package-name strings conservatively includes static and dynamic imports in each collected test. */
+export function testOwners(root: string): ReadonlyMap<string, readonly string[]> {
+  return new Map(testLaneFiles(root).packages.map(file => {
+    const text = readFileSync(resolve(root, file), 'utf8');
+    return [file, [...new Set([...text.matchAll(/['"`]@cssearth\/([^/'"`]+)(?:[/'"`])/gu)].map(match => match[1]!))]];
+  }));
+}
 
 const SHARED = [/^package\.json$/u, /^pnpm-lock\.yaml$/u, /^pnpm-workspace\.yaml$/u, /^tsconfig[^/]*\.json$/u, /^\.github\/workflows\//u];
-/** The offline preparation and archive tools. Nearly every change touches a package they import (the renderer), so a
+/** The offline preparation and archive tools. Many changes touch a package they import, so a
  * tool joins only when it, or another tool it imports, changed; a push to main tests them whatever changed. */
 const TOOLS = new Set(['bake', 'telescope-cli']);
+// This producer contract was explicitly routed for objects changes before discovery.
+const TOOL_FOREIGN_TESTS = new Map([['packages/bake/src/presentation/depth-partition-contract.test.ts', ['objects']]]);
+/** A tool test that pins another package's frozen fixture reads it through a `<package>/test/` path; editing that fixture
+ * selects the pinning test, so the producer check runs on the pull request, not only after the merge. */
+export function readsChangedFixture(text: string, paths: readonly string[]): boolean {
+  return paths.some(path => {
+    const match = /^packages\/([^/]+)\/test\/(?:.+\/)?([^/]+)$/u.exec(path);
+    return match !== null && text.includes(`${match[1]}/test/`) && text.includes(match[2]!);
+  });
+}
 const SITE = [/^site\//u, /^src\//u, /^integration\//u, /^\.github\//u, /^labs\/performance\//u];
 
 /** Sources outside `packages/` whose schema literals a package test pins (see `packages/bake/src/sources/python-schema-identifiers.test.ts`
@@ -61,7 +59,7 @@ const PINNED_SOURCE_OWNERS: Readonly<Record<string, string>> = Object.freeze({
   'src/objects/heliosphere/source/ibex/extract.py': 'bake',
 });
 
-export function affectedTests(paths: readonly string[] | null, packages: readonly Workspace[], siteDependencies: readonly string[]): AffectedTests {
+export function affectedTests(paths: readonly string[] | null, packages: readonly Workspace[], siteDependencies: readonly string[], owners: ReadonlyMap<string, readonly string[]> = testOwners(resolve(import.meta.dirname, '../../..'))): AffectedTests {
   if (paths === null || paths.some(path => SHARED.some(pattern => pattern.test(path)))) return { packages: 'all', site: true, files: [] };
   const changed = new Set(paths.flatMap(path => /^packages\/([^/]+)\//u.exec(path)?.[1] ?? PINNED_SOURCE_OWNERS[path] ?? []));
   // Everything that imports a changed package can break with it: walk the dependents until nothing new joins.
@@ -76,10 +74,14 @@ export function affectedTests(paths: readonly string[] | null, packages: readonl
   }
   const site = paths.some(path => SITE.some(pattern => pattern.test(path))) || siteDependencies.some(name => changed.has(byName.get(name) ?? ''));
   // A foreign test whose own package already runs is in that package's glob.
-  const files = [...new Set([...Object.entries(FOREIGN_TESTS).filter(([owner]) => changed.has(owner))
-    .flatMap(([, tests]) => tests).filter(test => !changed.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')),
-      ...paths.filter(path => path.startsWith('integration/') && Object.values(FOREIGN_TESTS).some(tests => tests.includes(path))),
-    ])].sort();
+  const fixtureReaders = new Map<string, string>(paths.some(path => /^packages\/[^/]+\/test\//u.test(path))
+    ? [...owners.keys()].filter(test => TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')).map(test => [test, readFileSync(resolve(import.meta.dirname, '../../..', test), 'utf8')] as const)
+    : []);
+  const files = [...owners].filter(([test, imports]) => !changed.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
+    && (!TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
+      ? imports.some(owner => changed.has(owner)) || paths.includes(test)
+      : TOOL_FOREIGN_TESTS.get(test)?.some(owner => changed.has(owner)) === true
+        || (fixtureReaders.has(test) && readsChangedFixture(fixtureReaders.get(test)!, paths)))).map(([test]) => test).sort();
   return { packages: [...changed].sort(), site, files };
 }
 

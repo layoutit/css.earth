@@ -12,7 +12,6 @@ import { createPreparedPlayback, createPreparedResidency, createObjectControlBin
 import type { ObjectControlBindingOptions, PreparedImage, PreparedPresentationContext } from "@cssearth/renderer/testing";
 import { viewSunDirectionToPreparedLightDirection } from '@cssearth/engine';
 import { createSceneLifetime } from "@cssearth/engine";
-import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 import { initialObjectSelection } from "@cssearth/renderer/testing";
 // A single resident feature is sufficient for image-lifetime fixtures.
 export function fixtureFeaturePlan(plan: NonNullable<ObjectRuntimeDefinition['features']>) {
@@ -20,7 +19,7 @@ export function fixtureFeaturePlan(plan: NonNullable<ObjectRuntimeDefinition['fe
 }
 export async function fixtureFeatureTransport(url: string): Promise<Response> {
   if (url !== '/scenes/mercury/mercury-features.json') throw new Error('Invalid fixture catalogue URL');
-  return new Response(new Uint8Array(await readFile(new URL(`../../../../../packages/bake/src/contract/fixtures${url}`, import.meta.url))));
+  return new Response(new Uint8Array(await readFile(new URL(`./fixtures${url}`, import.meta.url))));
 }
 export const fixtureObjectCapabilities = { ...preparedObjectCapabilities,
   mountSurfaceFeatures(options: Parameters<NonNullable<typeof preparedObjectCapabilities.mountSurfaceFeatures>>[0]) {
@@ -151,7 +150,7 @@ function createStyle(): FixtureStyle { const values: Record<string, string> = {}
         (style as Record<string, unknown>)[key.replace(/-([a-z])/g, (_match, letter: string) => letter.toUpperCase())] = next;
     } } }); return new Proxy(style, { get(target, name) { return typeof name === "string" ? (target as Record<string, unknown>)[name] ?? "" : Reflect.get(target, name); } }) as unknown as FixtureStyle; }
 // The bake contract qualifies prepared runtimes; a transport split by dataset (dataset-tables.ts) is the renderer's own.
-function runtimeDefinition(value: unknown): ObjectRuntimeDefinition { const definition = parsePreparedObjectRuntime(value); if (!definition.deferredDatasets) requireObjectRuntimeDefinition(definition); return definition; }
+function runtimeDefinition(value: unknown): ObjectRuntimeDefinition { const definition = parsePreparedObjectRuntime(value); return definition; }
 class ControlledImage implements PreparedImage {
     naturalWidth = 1;
     naturalHeight = 1;

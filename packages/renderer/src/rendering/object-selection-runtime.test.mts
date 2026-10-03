@@ -7,7 +7,7 @@ const test = sourceTest();
 import { createObjectSelectionRuntime } from '@cssearth/renderer/testing';
 import { cameraMotionSignalFor } from '@cssearth/renderer/navigation';
 import { createPreparedResidency } from '@cssearth/renderer/testing';
-import { retainedPresentationFixture, preparedSelectionFixture } from "./fixtures/object-runtime-package.mts";
+import { retainedPresentationFixture, preparedSelectionFixture } from "../../test/object-runtime-package.mts";
 import { mountPreparedPresentation, initialObjectSelection } from '@cssearth/renderer/testing';
 
 import type { ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
@@ -18,7 +18,6 @@ import type { PreparedResidencyTicket } from '@cssearth/renderer/rendering/prepa
 import type { PreparedPresentationContext, PreparedPresentationPlan, PreparedView } from '@cssearth/renderer/rendering/prepared-presentation.ts';
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('earth'));
 const saturnDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('saturn'));
-import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 
 const flush = async () => { for (let i = 0; i < 40; i++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
@@ -240,13 +239,6 @@ test("camera movement in the prepared-ticket promise handoff retries the origina
   const request = h.dataset("topography"); await h.resolveJobs(); assert.equal(await request, true);
   const retryCommit = h.commits.at(-1); assert.ok(retryCommit); assert.equal(fired, true); assert.equal(retryCommit.plan.materials.atmosphere.frame, 127);
   assert.equal(h.commits.length, 2); assert.deepEqual(h.fatal, []); assert.ok(h.coordinator.stats().passes >= 2);
-});
-test("package reducers and resolvers are rejected before hidden work can start", () => {
-  for (const name of ["reduceSelection", "resolvePresentation"]) {
-    let ran = false;
-    assert.throws(() => requireObjectRuntimeDefinition({ ...earthDefinition, [name]() { ran = true; return Promise.resolve(); } }), /acyclic JSON|unsupported/);
-    assert.equal(ran, false);
-  }
 });
 test("same-row facts advance only after a successful shared native frame publication", async t => {
   const h = harness(); t.after(h.restore); await h.ready(); const jobs = h.jobs.length, commits = h.commits.length;

@@ -370,7 +370,7 @@ jobs:
           key: prepared-files-v2-${{ hashFiles('src/objects/*/inventory.json') }}
       - name: Test the selected folder lane
         # The packages lane tests the packages this change can break (all of them on a push); `test:site` runs site/, src/,
-        # integration/ (except renderer-bake suites in the packages lane) and .github/. A test whose restored input this job leaves out skips through sourceTest() and names it.
+        # and .github/; integration/ suites run in the packages lane. A test whose restored input this job leaves out skips through sourceTest() and names it.
         run: |
           if [ "$CI_LANE_SKIP" = true ]; then exit 0; fi
           node site/build/prepare/prepare-facilities.mts --catalog-only
@@ -387,7 +387,7 @@ jobs:
             node packages/bake/cli/restore-source-inputs.mts --repository-volumes
             if [ "$CI_TEST_PACKAGES" != all ]; then
               tests=(); for name in $CI_TEST_PACKAGES; do tests+=("packages/$name/**/*.test.{ts,mts}"); done
-              # Tests in offline tools or integration that exercise a changed package (FOREIGN_TESTS in affected-tests.mts).
+              # Tests in offline tools or integration that exercise a changed package (discovered from the root globs and imports by affected-tests.mts).
               for file in $CI_TEST_FILES; do tests+=("$file"); done
               pnpm test:run "${tests[@]}"
               exit 0

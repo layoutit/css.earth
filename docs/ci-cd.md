@@ -97,7 +97,7 @@ paths; do not move them into a bespoke wrapper to make CI faster.
 
 `node --test` runs every suite. `pnpm test:run` loads
 `packages/core/src/node/register-vite-suffix.mts` for Vite imports and enables module mocks; `test:packages`
-and `test:site` pass it their folders. The lab CLI owns lab-test discovery; `pnpm test:lab` also runs its
+runs `packages/` and `integration/`; `test:site` runs `site/`, `src/` and `.github/`. The lab CLI owns lab-test discovery; `pnpm test:lab` also runs its
 assets stage first. Distinguish source-dependent skips from executed checks.
 
 When changing selection, prove both that a newly matching file is discovered and

@@ -67,7 +67,7 @@ allocates large backing surfaces for tiny projected faces. `createLeafBoxBlocks.
 prepared levels while detached; after connection, `publish()` keeps the existing motion freeze and paced settling.
 No new geometry, texture or device-specific level policy is introduced.
 
-The connection-order regression uses Neptune's real prepared groups in `integration/renderer-bake/src/contract/object-selection-runtime.test.mts`.
+The connection-order regression uses Neptune's real prepared groups in `packages/renderer/src/rendering/object-selection-runtime.test.mts`.
 The leaf-box unit test checks initial selection, unchanged repeated preparation and the subsequent motion freeze.
 Matched iPad captures record the reduced layer allocation, remaining first-paint
 stalls and measurement limits.

@@ -12,3 +12,4 @@ export * from './runtime/object-contract.js';
 export { createObjectViewDemand } from './runtime/prepared-object-navigation.js';
 export * from './prepared-data/prepared-ellipsoid-projection.js';
 export { publishObjectDiagnostics, readObjectDiagnostics } from './runtime/object-diagnostics.js';
+export { requirePreparedCssDescriptor } from './prepared-object-decoder.js';
