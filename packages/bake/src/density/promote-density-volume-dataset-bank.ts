@@ -1,3 +1,4 @@
+import { DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA } from '@cssearth/objects';
 import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, DENSITY_VOLUME_FORMAT, parsePreparedDensityVolumeText, parseDensityVolumeObjectDescriptor, validatePreparedVolumeDatasets, type PreparedCssVolume } from '@cssearth/objects';
 /**
  * Package an already-prepared physical density volume as one selectable dataset.
@@ -180,7 +181,7 @@ export async function promoteDensityVolumeDatasetBank(request: DensityVolumeData
     ...(request.attachedTo === undefined ? {} : { attachedTo: request.attachedTo }),
     provenance, datasets });
   const envelope = json({ schema: PREPARED_OBJECT_SCHEMA, id: request.id, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA, data });
-  const delivery = json({ schema: 'cssearth-density-volume-dataset-bank-source@1',
+  const delivery = json({ schema: DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA,
     ...(request.attachedTo === undefined ? {} : { attachedTo: request.attachedTo }),
     ...(sourceReceipts.length === 1 ? { source: sourceReceipts[0] } : { sources: sourceReceipts }),
     promotion: { id: request.id, defaultDataset, datasetIds: datasets.map(dataset => dataset.id), framingRadiusUnits: request.framingRadiusUnits,

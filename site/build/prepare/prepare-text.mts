@@ -1,4 +1,4 @@
-import { PREPARED_TEXT_SCHEMA, parseObjectText, type ObjectText } from '@cssearth/objects';
+import { PREPARED_TEXT_SCHEMA, parseObjectText, parseObjectDescriptor, type ObjectText } from '@cssearth/objects';
 import { pathToFileURL } from 'node:url';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -88,7 +88,7 @@ export async function prepareText({ ids = [] as readonly string[], check = false
     composition = hasErrorCode(error, 'ENOENT') ? 'skipped: run pnpm prepare:facilities first' : `skipped: ${error instanceof Error ? error.message : String(error)}`;
   }
   const selected = bodies.filter(body => !ids.length || ids.includes(body.id));
-  const planned = await Promise.all(selected.map(async body => outputs(body, requireRecord(await readJson(resolve(body.directory, 'object.json'))))));
+  const planned = await Promise.all(selected.map(async body => outputs(body, requireRecord(parseObjectDescriptor(await readJson(resolve(body.directory, 'object.json')))))));
   const stale: string[] = [], rewritten = new Set<string>();
   for (const [body, outputs] of selected.map((body, index) => [body, planned[index]!] as const)) for (const [path, text] of outputs) {
     const current = await readFile(path, 'utf8').catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });

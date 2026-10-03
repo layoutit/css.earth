@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { HOSTED_PLANET_MEASUREMENTS_SCHEMA } from '@cssearth/objects';
 import { RASTER_RECIPE_SCHEMA } from '@cssearth/objects';
 /** Scaffold a planet of another star from its astronomy record, instead of cloning another planet by find-and-replace.
  *
@@ -154,7 +155,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     operations: [] });
   put(`${o}/source/presentation/solar-system.json`, { schema: SOLAR_SYSTEM_PREPARATION_SCHEMA, bodyId: id, displayName: name,
     bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm, defaultZoom: 1.25, geometryScale: GEOMETRY_SCALE });
-  put(`${o}/source/measurements.json`, { schema: 'cssearth-hosted-planet@1', id, radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
+  put(`${o}/source/measurements.json`, { schema: HOSTED_PLANET_MEASUREMENTS_SCHEMA, id, radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
     orbitalPeriodDays: periodDays, orbitalPeriodSource: requireString(requireRecord(orbit.sources).period, 'hosted orbit period source'),
     shape: { kind: 'sphere', qualification: `A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of ${name} is measured; only its size, mass and orbit are.` },
     ...(glow ? { effectiveTemperatureK: glow.temperatureK, effectiveTemperatureSource: glow.source } : {}) });

@@ -1,3 +1,7 @@
+import { readFeatureMapLongitude, readPreparedPanelContentRecord, readComparableSource, readObjectDescriptorRecord, validatePreparedCubicSky, validateDirectionalSunPlan } from '@cssearth/objects';
+import { requireInventory } from '@cssearth/objects/node';
+import { parsePreparedObjectRuntime } from '@cssearth/objects';
+import { parsePreparedWorldContext, readObjectContentDatasets, parseObjectDescriptor } from '@cssearth/objects';
 import { RASTER_RECIPE_SCHEMA } from '@cssearth/objects';
 import { BANDED_ELLIPSOID_SCHEMA, LAYERED_OBLATE_SCHEMA } from '@cssearth/bake/objects/scene';
 import { readNonArrayRecord } from '@cssearth/core';
@@ -44,7 +48,6 @@ function litBySun(descriptor: AuthoredObjectDescriptor, presentation: unknown): 
   return !(classification === 'star' || classification === 'black-hole' || parsePresentationProfile(presentation).mode === 'emissive');
 }
 function required(sources: ReadonlyMap<string, VerifiedSource>, id: string): VerifiedSource { const value = source(sources, id); if (!value) throw new TypeError(`Authored recipe requires ${id}.`); return value; }
-function sourceRecord(value: unknown, at: string): Record<string, unknown> { return record(value, at); }
 function physicalSolarSource(value: unknown): SolarSceneSource {
   const input = record(value, 'solar-system source');
   if (typeof input.bodyId !== 'string' || typeof input.displayName !== 'string' || typeof input.bodyRadiusUnits !== 'number' || !(input.bodyRadiusUnits > 0) || typeof input.bodyRadiusKilometers !== 'number' || !(input.bodyRadiusKilometers > 0)) throw new TypeError('Solar-system source lacks physical scene parameters.');
@@ -135,7 +138,7 @@ export async function stagedLegendLabelChanges(objectDirectory: string, prepared
   const contentReference = descriptor.recipe.sources.find(entry => entry.id === 'content');
   const assets = await readFile(resolve(preparedDirectory, 'assets.json'), 'utf8').catch(() => null);
   if (!contentReference || assets === null) return { changes: [], summary: '', contentPath: '', refreshed: null };
-  const contentPath = resolve(objectDirectory, contentReference.path), content = record(JSON.parse(await readFile(contentPath, 'utf8')) as unknown, 'content');
+  const contentPath = resolve(objectDirectory, contentReference.path), content = readObjectContentDatasets(JSON.parse(await readFile(contentPath, 'utf8')));
   const changes = legendLabelChanges(content, JSON.parse(assets) as unknown);
   return { changes, contentPath, refreshed: withDerivedLegendLabels(content, changes),
     summary: changes.map(change => `${change.datasetId} ${JSON.stringify(change.authored)} -> ${JSON.stringify(change.derived)}`).join('; ') };
@@ -183,7 +186,7 @@ function carryPublishedFeatures(definition: Record<string, unknown>, published: 
 
 async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = false, reuseImages = false, acceptChanged = [] }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   if (write) {
-    const id = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')), 'descriptor').id;
+    const id = record(parseObjectDescriptor(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8'))), 'descriptor').id;
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid preparation identity.');
     const projectRoot = process.cwd(), stageRoot = resolve(projectRoot, '.local/object-preparation');
     await mkdir(stageRoot, { recursive: true });
@@ -202,7 +205,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
       // Only inventoried files are carried: a local leftover in prepared/ or public/ must not be published with them.
       if (reuseImages) {
         const inventoried = new Map<string, Set<string>>();
-        for (const asset of (JSON.parse(await readFile(resolve(objectDirectory, 'inventory.json'), 'utf8')) as { assets: { location: string; filename: string }[] }).assets)
+        for (const asset of requireInventory(id, JSON.parse(await readFile(resolve(objectDirectory, 'inventory.json'), 'utf8'))).assets)
           (inventoried.get(asset.location) ?? inventoried.set(asset.location, new Set()).get(asset.location)!).add(asset.filename);
         const published = (location: string, root: string) => (path: string) => {
           const name = relative(root, path), names = inventoried.get(location) ?? new Set<string>();
@@ -216,7 +219,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         // names, or the page that the billboard step photographs could not start without them (packages/bake/cli/prepare-arrival-billboard.mts).
         const record: unknown = await readFile(resolve(outputDirectory, 'arrival-billboard.json'), 'utf8').then(text => JSON.parse(text) as unknown, () => null);
         // Only while it still shows the default dataset: a billboard of a replaced dataset is stale, and the billboard step makes the new one.
-        const content = JSON.parse(await readFile(resolve(objectDirectory, 'source/content/object.json'), 'utf8')) as { datasets?: { defaultDataset?: unknown } };
+        const content = readObjectContentDatasets(JSON.parse(await readFile(resolve(objectDirectory, 'source/content/object.json'), 'utf8'))) as { datasets?: { defaultDataset?: unknown } };
         const current = record && typeof record === 'object' && 'dataset' in record && record.dataset === content.datasets?.defaultDataset;
         const url = current && 'url' in record && typeof record.url === 'string' ? record.url : null;
         const image = url?.startsWith(`/scenes/${id}/`) ? url.slice(`/scenes/${id}/`.length) : null;
@@ -242,7 +245,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         // so their declared SVG outputs may change; all other published images must remain byte-identical.
         // Public JSON catalogues (places, features) are derived from the scene and may be regenerated here.
         // The staged inventory holds the run's public entries; the object's also holds its prepared entries.
-        const published = async (path: string) => (JSON.parse(await readFile(path, 'utf8')) as { assets: { location: string; filename: string }[] }).assets
+        const published = async (path: string) => requireInventory(id, JSON.parse(await readFile(path, 'utf8'))).assets
           .filter(asset => asset.location === 'public' && !asset.filename.endsWith('.json'));
         const stagedImages = await published(resolve(stagedData, 'inventory.json'));
         const existingImages = await published(resolve(objectDirectory, 'inventory.json'));
@@ -310,8 +313,8 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const { preparePagedEllipsoidObject } = await import('@cssearth/bake/objects/layers/paged-ellipsoid');
     // A reuse-images run carries the published feature anchors; read them before the lane rewrites this directory.
     const publishedFeatures = reuseImages ? {
-      runtime: record(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), 'published runtime'),
-      content: record(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8')), 'published content') } : null;
+      runtime: record(parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), { parsedJson: true }), 'published runtime'),
+      content: readPreparedPanelContentRecord(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8'))) } : null;
     const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets,
       solarGeometry: await solarGeometry(), assetWorker: pathToFileURL(resolve(process.cwd(), 'packages/bake/cli/paged-ellipsoid-asset-worker.mts')), reuseImages, acceptChanged });
     // Named features anchor on the rendered ellipsoid (attach.ts casts map directions through the lane's own surface sampler).
@@ -375,8 +378,8 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   // With --reuse-images the published image metadata, sky and Sun stand in for the stages that read raw downloads; the
   // published features are read here, before the lane rewrites this directory.
   const publishedJson = async (name: string) => JSON.parse(await readFile(resolve(outputDirectory, `${name}.json`), 'utf8')) as unknown;
-  const publishedFeatures = reuseImages ? { runtime: record(await publishedJson('runtime'), 'published runtime'),
-    content: record(await publishedJson('content'), 'published content') } : null;
+  const publishedFeatures = reuseImages ? { runtime: record(parsePreparedObjectRuntime(await publishedJson('runtime')), 'published runtime'),
+    content: readPreparedPanelContentRecord(await publishedJson('content')) } : null;
   const reused = reuseImages ? record(await publishedJson('assets'), 'published raster assets') as unknown as Awaited<ReturnType<typeof prepareRasterAssets>> : null;
   // Lighting and atmosphere frames come from the recipe and the body's photometry, never from raw downloads, so a reuse run
   // recomputes them (a shared bank's are copied): the published metadata may predate a lighting output or a limb law.
@@ -411,7 +414,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         .prepareGiantLayers({ sourceDirectory, publicDirectory, config: ringsSource.value, write: true })
     : null;
   const celestial = reuseImages
-    ? { sky: await publishedJson('sky'), sun: await publishedJson('sun') } as unknown as Awaited<ReturnType<typeof prepareCelestialAssets>>
+    ? { sky: validatePreparedCubicSky(await publishedJson('sky')), sun: validateDirectionalSunPlan(await publishedJson('sun')) } as unknown as Awaited<ReturnType<typeof prepareCelestialAssets>>
     : await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, directionalSun: litBySun(descriptor, required(sources, 'presentation').value),
       solarGeometry: await solarGeometry() });
   const geometryConfig = parseGeometryProfile(required(sources, 'geometry').value);
@@ -423,6 +426,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const outputPath = resolve(outputDirectory, 'world-context.json');
     await prepareSpatialContext({ sourcePath: contextSource.path, outputPath, solarGeometryPath: resolve(process.cwd(), 'src/platform/solar-geometry.mts'), objectsDirectory: resolve(objectDirectory, '..') });
     worldContext = JSON.parse(await readFile(outputPath, 'utf8')) as unknown;
+    parsePreparedWorldContext(worldContext);
   }
   // Rings the radial lane drew as wedges tell the scene where each ring begins, by the atlas the geometry names.
   const ringWedges = Object.fromEntries((radial?.assets ?? []).flatMap(asset => 'wedges' in asset && asset.wedges ? [[asset.filename, asset.wedges] as const] : []));
@@ -463,7 +467,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
           assets: source.assets.map(({ data: _data, filename, ...rest }) => ({ ...rest, filename, url: `/scenes/${descriptor.id}/${filename}` })) };
       })] });
   if (write) {
-    const descriptorData = record(JSON.parse(await readFile(descriptorPath, 'utf8')) as unknown, 'descriptor');
+    const descriptorData = readObjectDescriptorRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));
     const properties = record(descriptorData.properties, 'descriptor.properties');
     await writeFile(descriptorPath, `${JSON.stringify({ ...descriptorData, properties: { ...properties, worldFrame: scene.worldFrame } }, null, 2)}\n`);
     await writePreparedObject(descriptor.id, runtime as unknown as Record<string, unknown>);
@@ -505,10 +509,8 @@ export async function redrawOnlyDecision(objectDirectory: string, publishedRecip
   if (!source(sources, 'paged-ellipsoid') && !rasterLane) return { redraw: false, reason: 'its lane has no redraw-only path' };
   const recordPath = resolve(objectDirectory, 'prepared/authored-preparation.json');
   const published: unknown = await readFile(recordPath, 'utf8').then(text => JSON.parse(text) as unknown, () => null);
-  const rawSources = published !== null && typeof published === 'object' && 'sources' in published ? published.sources : undefined;
-  if (!Array.isArray(rawSources) || !await access(resolve(objectDirectory, 'inventory.json')).then(() => true, () => false)) return { redraw: false, reason: 'nothing is published to carry' };
   const listed = readAuthoredPreparationSources(published, recordPath);
-  if (!listed) return { redraw: false, reason: 'nothing is published to carry' };
+  if (!listed || !await access(resolve(objectDirectory, 'inventory.json')).then(() => true, () => false)) return { redraw: false, reason: 'nothing is published to carry' };
   const before = new Map(listed.map(value => [value.id, value] as const)), acceptChanged: string[] = [];
   const without = (value: unknown, keys: readonly string[]) => JSON.stringify(Object.fromEntries(Object.entries(record(value, 'recipe')).filter(([key]) => !keys.includes(key))));
   for (const id of new Set([...before.keys(), ...entries.map(entry => entry.reference.id)])) {
@@ -519,7 +521,7 @@ export async function redrawOnlyDecision(objectDirectory: string, publishedRecip
     if (bytes.equals(await readFile(now.path))) continue;
     const keys = REDRAWN_KEYS[id];
     if (!keys) return { redraw: false, reason: `recipe source ${id} changed` };
-    if (without(JSON.parse(bytes.toString('utf8')), keys) !== without(now.value, keys)) return { redraw: false, reason: `${path} changed outside ${keys.join(', ')}` };
+    if (without(readComparableSource(JSON.parse(bytes.toString('utf8')), now.value), keys) !== without(now.value, keys)) return { redraw: false, reason: `${path} changed outside ${keys.join(', ')}` };
     acceptChanged.push(id);
   }
   // A redraw carries the published feature anchors, which were placed with the left edge the published feature record states.
@@ -527,7 +529,7 @@ export async function redrawOnlyDecision(objectDirectory: string, publishedRecip
   if (typeof surfaceMap === 'string') {
     const edge = (JSON.parse(await readFile(resolve(objectDirectory, 'source', surfaceMap), 'utf8')) as { mapLeftEdgeLongitudeDeg?: unknown }).mapLeftEdgeLongitudeDeg;
     const publishedEdge = await readFile(resolve(objectDirectory, 'prepared/features.json'), 'utf8')
-      .then(text => (JSON.parse(text) as { mapLeftEdgeLongitudeDeg?: unknown }).mapLeftEdgeLongitudeDeg, () => undefined);
+      .then(text => readFeatureMapLongitude(JSON.parse(text)), () => undefined);
     if (publishedEdge !== edge) return { redraw: false, reason: `the surface map's left edge is ${String(edge)}° E, but the published feature anchors used ${String(publishedEdge)}° E` };
   }
   return { redraw: true, acceptChanged, reason: acceptChanged.length ? `only ${acceptChanged.map(id => `${id} ${REDRAWN_KEYS[id]!.join('/')}`).join(', ')} changed` : 'no recipe changed' };

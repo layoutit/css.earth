@@ -1,3 +1,4 @@
+import { readCataloguePresentationDistances } from '@cssearth/objects';
 import { pathToFileURL } from 'node:url';
 /** `node site/build/prepare/prepare-world-presentation.mts`: the world view's static presentation facts, prepared once from their
  * sources so the browser reads one small file instead of source tables and recipes: which moons are major, which orbits
@@ -28,12 +29,7 @@ function layerPresentation<Field extends string>(layer: 'galaxies' | 'clusters',
   const id: unknown = (catalogueIds as Record<string, unknown>)[layer];
   if (typeof id !== 'string') throw new TypeError(`site/prepared-dot-catalogues.json names no catalogue for the ${layer} dot layer. Run pnpm prepare:catalog.`);
   const path = `src/objects/${id}/source/presentation.json`;
-  const record = sourceObject(JSON.parse(readFileSync(resolve(import.meta.dirname, '../../..', path), 'utf8')));
-  return Object.fromEntries(fields.map(field => {
-    const value = record[field];
-    if (typeof value !== 'number' || !(value > 0) || !Number.isFinite(value)) throw new TypeError(`${path}: ${field} must be a positive number, not ${JSON.stringify(value)}.`);
-    return [field, value];
-  })) as Record<Field, number>;
+  return readCataloguePresentationDistances(JSON.parse(readFileSync(resolve(import.meta.dirname, '../../..', path), 'utf8')), fields);
 }
 
 const majorByParent = new Map(sourceArray(majorMoons.systems, input => {

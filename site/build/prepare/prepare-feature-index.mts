@@ -2,7 +2,7 @@ import { pathToFileURL } from 'node:url';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
-import { normalizeDestinationQuery, PREPARED_DESTINATIONS_SCHEMA, readPreparedFeaturePins } from '@cssearth/objects';
+import { normalizeDestinationQuery, readDestinationSettlements, readFeatureSearchCatalog, readRuntimeFeatureDatasets, readPreparedFeaturePins } from '@cssearth/objects';
 import { resolveBuildSceneAddress } from '../../asset-origin.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
@@ -37,20 +37,15 @@ async function preparedPlaces(root: string, objectId: string, settlements: reado
   if (radiusM === null) throw new TypeError(`${objectId}: places need the body's radius.`);
   if (!isRecord(pin) || !Number.isSafeInteger(pin.count)) throw new TypeError(`${objectId}: prepared places descriptor is invalid.`);
   const url = text(pin.url, `${objectId} places url`), bytes = await readFile(resolve(root, 'public', url.replace(/^\//u, '')));
-  const catalog: unknown = JSON.parse(bytes.toString('utf8'));
-  if (!isRecord(catalog) || catalog.schema !== PREPARED_DESTINATIONS_SCHEMA || !Array.isArray(catalog.places) || catalog.places.length !== pin.count) throw new TypeError(`${objectId}: places catalogue count or schema differs from its descriptor.`);
+  const catalog = readDestinationSettlements(JSON.parse(bytes.toString('utf8')), { objectId, count: Number(pin.count) });
   const duplicates: (readonly [string, string])[] = [];
-  for (const place of catalog.places) {
-    if (!isRecord(place)) throw new TypeError(`${objectId}: place record is invalid.`);
-    const id = place.id;
-    if (!(typeof id === 'number' && Number.isSafeInteger(id)) && !(typeof id === 'string' && /^[0-9]+$/u.test(id))) throw new TypeError(`${objectId}: place id is invalid.`);
-    const name = text(place.name, 'place name');
-    const at = { id: String(id), name: normalizeDestinationQuery(name), latitudeDeg: finite(place.latitude, 'place latitude'), longitudeDeg: finite(place.longitude, 'place longitude') };
+  for (const place of catalog) {
+    const at = { ...place, name: normalizeDestinationQuery(place.name) };
     const settlement = settlements.find(candidate => candidate.name === at.name && greatCircleKm(candidate, at, radiusM / 1000) < SAME_SETTLEMENT_KM);
     if (settlement) duplicates.push([at.id, settlement.id]);
   }
   // The deploy serves scene files from the asset bucket (ASSET_ORIGIN); a local build serves them itself.
-  return { objectId, type: 'City', url, assetUrl: await resolveBuildSceneAddress(url, root), count: catalog.places.length, duplicates };
+  return { objectId, type: 'City', url, assetUrl: await resolveBuildSceneAddress(url, root), count: catalog.length, duplicates };
 }
 
 function text(value: unknown, at: string): string { if (typeof value !== 'string' || !value) throw new TypeError(`${at} must be text.`); return value; }
@@ -68,7 +63,7 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
     for (const pin of pins) {
       const url = text(pin.url, `${object.id} catalogue url`), file = url.split('/').at(-1)!;
       const bytes = await readFile(resolve(root, 'public/scenes', object.id, file));
-      const part: unknown = JSON.parse(bytes.toString('utf8'));
+      const part = readFeatureSearchCatalog(JSON.parse(bytes.toString('utf8')), object.id, pin.count);
       if (!isRecord(part) || !Array.isArray(part.features) || part.features.length !== pin.count) throw new TypeError(`${object.id}: feature catalogue count differs from its descriptor.`);
       catalog ??= part;
       values.push(...part.features);
@@ -90,9 +85,7 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
     // dataset selection so search never moves to a point on an incompatible model.
     let datasetIds: string[] | undefined;
     if (catalog.landmarks !== undefined) {
-      const runtime: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', object.id, 'prepared/runtime.json'), 'utf8'));
-      if (!isRecord(runtime) || !isRecord(runtime.features) || !Array.isArray(runtime.features.datasetIds) || !runtime.features.datasetIds.length) throw new TypeError(`${object.id}: landmark datasets are missing.`);
-      datasetIds = runtime.features.datasetIds.map(id => text(id, 'landmark dataset'));
+      datasetIds = readRuntimeFeatureDatasets(JSON.parse(await readFile(resolve(root, 'src/objects', object.id, 'prepared/runtime.json'), 'utf8')));
     }
     // Named features that are settlements: search leaves the same places out.
     const settlements = values.filter((value): value is Record<string, unknown> => isRecord(value) && (value.type === 'Capital' || value.type === 'City'))

@@ -1,3 +1,4 @@
+import { parseObjectDescriptor } from '@cssearth/objects';
 import { parsePreparedObjectRuntime } from '@cssearth/objects';
 
 import { requireRecord } from '@cssearth/core';
@@ -19,7 +20,7 @@ export async function prepareInteriorFills(ids: readonly string[], root = proces
   if (!ids.length || ids.some(id => !SCENE_OBJECTS.some(object => object.id === id))) throw new Error('Choose registered scene objects.');
   const selected: string[] = [];
   for (const id of ids) {
-    const descriptor = requireRecord(JSON.parse(await readFile(resolve(root, 'src/objects', id, 'object.json'), 'utf8')));
+    const descriptor = requireRecord(parseObjectDescriptor(JSON.parse(await readFile(resolve(root, 'src/objects', id, 'object.json'), 'utf8'))));
     const shape = requireRecord(requireRecord(requireRecord(descriptor.properties).recipe).shape);
     if (shape.kind === 'sphere' || shape.kind === 'ellipsoid') selected.push(id);
     else console.log(JSON.stringify({ id, status: 'excluded-irregular' }));

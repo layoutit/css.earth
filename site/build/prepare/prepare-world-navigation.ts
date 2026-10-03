@@ -1,3 +1,5 @@
+import { parsePreparedObjectRuntime, validatePreparedCubicSky, validateDirectionalSunPlan } from '@cssearth/objects';
+import { parseObjectDescriptor } from '@cssearth/objects';
 import { parseSolarSceneSource, parsePagedRecipe, OBJECT_RUNTIME_SCHEMA, WORLD_NAVIGATION_PREPARATION_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, PAGED_ELLIPSOID_SCHEMA, type WorldNavigationPreparationReceipt } from '@cssearth/objects';
 
 import { HOSTED_PLANET_IDS, STAR_IDS } from '@cssearth/astronomy';
@@ -255,7 +257,8 @@ export async function writeWorldNavigationArtifacts(outputDirectory: string, res
     const existing = nextScene?.[name];
     if (nextScene && existing && typeof existing === 'object' && !Array.isArray(existing)) nextScene[name] = { ...existing, ...registration };
     const path = resolve(outputDirectory, `${name}.json`);
-    const document = await readFile(path, 'utf8').then(JSON.parse, () => null);
+    const document = await readFile(path, 'utf8').then(text => name === 'sky'
+      ? validatePreparedCubicSky(JSON.parse(text)) : validateDirectionalSunPlan(JSON.parse(text)), () => null);
     if (document) await writeFile(path, `${JSON.stringify({ ...document, ...registration })}\n`);
   }
   // The scene carries the same frame the descriptor does, so a re-derived frame rewrites it too.
@@ -269,11 +272,11 @@ if (invoked) {
   const [directory] = process.argv.slice(2);
   if (!directory || process.argv.length !== 3) throw new TypeError('Usage: prepare-world-navigation <object-directory>');
   const objectDirectory = resolve(directory), outputDirectory = resolve(objectDirectory, 'prepared');
-  const definition = JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8'));
+  const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), { parsedJson: true });
   const scene = JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8'));
   const result = await prepareWorldNavigationDefinition({ objectDirectory, definition });
   await writeWorldNavigationArtifacts(outputDirectory, result, scene);
-  const descriptorPath = resolve(objectDirectory, 'object.json'), descriptor = JSON.parse(await readFile(descriptorPath, 'utf8'));
+  const descriptorPath = resolve(objectDirectory, 'object.json'), descriptor = parseObjectDescriptor(JSON.parse(await readFile(descriptorPath, 'utf8')));
   await writeFile(descriptorPath, `${JSON.stringify({ ...descriptor, properties: { ...descriptor.properties, worldFrame: result.frame } }, null, 2)}\n`);
   const { writeObjectJson } = await import(pathToFileURL(resolve(objectDirectory, '../../../site/build/prepare/prepare-object-json.mts')).href);
   console.log(JSON.stringify(await writeObjectJson(descriptor.id, result.definition)));

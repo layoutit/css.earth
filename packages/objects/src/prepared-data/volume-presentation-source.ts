@@ -1,4 +1,5 @@
-import { sourceObject, sourcePath, sourceId, sourceUrl } from '../sources/catalog.js';
+import { parseProductInputEvidence } from '../provenance/product-input-evidence.js';
+import { sourceArray, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from '../sources/catalog.js';
 import type { ProductInputEvidence } from '../provenance/product-input-evidence.js';
 
 export const VOLUME_PRESENTATION_SOURCE_SCHEMA = 'cssearth-volume-presentation-source@2';
@@ -46,4 +47,27 @@ export function parseVolumeSourcePreview(raw: unknown): VolumeSourcePreview {
     result.crop = { left: offset(crop.left), top: offset(crop.top), width: integer(crop.width), height: integer(crop.height) };
   }
   return result;
+}
+
+export function parseVolumePresentationSource(raw: unknown): VolumePresentationSource {
+  const value = sourceObject(raw, ['schema', 'objectId', 'name', 'defaultDataset', 'bank', 'recipes', 'sharedInputs', 'inputEvidence', 'datasets']);
+  if (value.schema !== VOLUME_PRESENTATION_SOURCE_SCHEMA) throw new TypeError('Invalid volume presentation source.');
+  const datasets = sourceArray(value.datasets, raw => {
+    const dataset = sourceObject(raw, ['id', 'label', 'title', 'description', 'summary', 'detail', 'facts', 'input', 'preview', 'inputEvidence']);
+    const result = { id: sourceId(dataset.id), label: sourceText(dataset.label), title: sourceText(dataset.title), description: sourceText(dataset.description),
+      summary: sourceText(dataset.summary), detail: sourceText(dataset.detail), input: sourceId(dataset.input), preview: parseVolumeSourcePreview(dataset.preview),
+      inputEvidence: [...sourceArray(dataset.inputEvidence ?? [], parseProductInputEvidence)],
+      facts: [...sourceArray(dataset.facts, raw => { const fact = sourceObject(raw, ['id', 'label', 'value']); return { id: sourceId(fact.id), label: sourceText(fact.label), value: sourceText(fact.value) }; })] };
+    return result;
+  });
+  sourceUnique(datasets.map(dataset => dataset.id), 'volume dataset');
+  const defaultDataset = sourceId(value.defaultDataset);
+  if (!datasets.length || !datasets.some(dataset => dataset.id === defaultDataset)) throw new TypeError('Invalid volume default dataset.');
+  return { objectId: sourceId(value.objectId), name: sourceText(value.name), defaultDataset, bank: { path: sourcePath(sourceObject(value.bank, ['path']).path) }, datasets: [...datasets],
+    sharedInputs: [...sourceArray(value.sharedInputs, sourceId)], inputEvidence: [...sourceArray(value.inputEvidence ?? [], parseProductInputEvidence)] };
+}
+
+/** A source directory also contains unrelated unversioned presentation records. */
+export function hasVolumePresentationSource(value: unknown): boolean {
+  return sourceObject(value).schema === VOLUME_PRESENTATION_SOURCE_SCHEMA;
 }

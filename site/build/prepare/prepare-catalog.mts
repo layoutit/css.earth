@@ -1,3 +1,6 @@
+import { readStellarExtent } from '@cssearth/objects';
+import { readVolumeAttachment } from '@cssearth/objects';
+import { readObjectContentDatasets, parseObjectDescriptor } from '@cssearth/objects';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -94,7 +97,7 @@ export async function readHostedContextBanks(contexts: readonly { id: string; ty
     if (type === 'volume-dataset-bank') {
       const recipe = isRecord(preparation) && typeof preparation.source === 'string' ? preparation.source : undefined;
       if (recipe === undefined) throw new TypeError(`${path}: properties.preparation.source must name the bank's recipe.`);
-      const source: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, recipe), 'utf8'));
+      const source = readVolumeAttachment(JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, recipe), 'utf8')));
       attachedTo = isRecord(source) ? source.attachedTo : undefined;
       if (attachedTo === undefined) continue;
       if (typeof attachedTo !== 'string') throw new TypeError(`src/objects/${id}/${recipe}: attachedTo must be a body id, not ${JSON.stringify(attachedTo)}.`);
@@ -138,7 +141,7 @@ async function readDatasetBanks(entries: readonly { id: string }[], projectRoot:
   const pairs: (readonly [string, string])[] = [];
   for (const { id } of entries) {
     let content: unknown;
-    try { content = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, 'source/content/object.json'), 'utf8')); }
+    try { content = readObjectContentDatasets(JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, 'source/content/object.json'), 'utf8'))); }
     catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
     const controls = isRecord(content) && isRecord(content.datasets) && Array.isArray(content.datasets.controls) ? content.datasets.controls : [];
     for (const control of controls) {
@@ -154,7 +157,7 @@ async function readDatasetVolumes(datasetBanks: readonly (readonly [string, stri
   const volumes: Record<string, unknown> = {};
   for (const [id, volumeId] of datasetBanks) {
     if (volumes[volumeId]) continue;
-    const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', volumeId, 'object.json'), 'utf8'));
+    const descriptor: unknown = parseObjectDescriptor(JSON.parse(await readFile(resolve(projectRoot, 'src/objects', volumeId, 'object.json'), 'utf8')));
     if (!isRecord(descriptor) || !isRecord(descriptor.properties)) throw new TypeError(`src/objects/${volumeId}/object.json: the bank ${id} shows has no properties.`);
     // A bank of catalogue dots declares no frame: its object's own radius frames it.
     // A bank that names a host is that object's own extent (a galaxy's volume); another body may show it around itself.
@@ -222,16 +225,13 @@ async function readStellarExtents(entries: readonly { id: string }[], projectRoo
   const extents: Record<string, number> = {};
   // Read in parallel; the records are checked below in the entries' order.
   const records = await Promise.all(entries.map(async ({ id }) => {
-    try { return JSON.parse(await readFile(resolve(projectRoot, `src/objects/${id}/source/stellar-extent.json`), 'utf8')) as unknown; }
+    try { return readStellarExtent(JSON.parse(await readFile(resolve(projectRoot, `src/objects/${id}/source/stellar-extent.json`), 'utf8')), id, `src/objects/${id}/source/stellar-extent.json`); }
     catch (error) { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; }
   }));
   for (const [index, { id }] of entries.entries()) {
     const path = `src/objects/${id}/source/stellar-extent.json`, record = records[index];
     if (record === undefined) continue;
-    if (!isRecord(record) || record.schema !== 'cssearth-stellar-extent@1' || record.objectId !== id) throw new TypeError(`${path}: expected a cssearth-stellar-extent@1 record for ${id}.`);
-    const radiusPc = record.radiusPc, source = record.source;
-    if (typeof radiusPc !== 'number' || !(radiusPc > 0) || !Number.isFinite(radiusPc)) throw new TypeError(`${path}: radiusPc must be a positive number, got ${String(radiusPc)}.`);
-    if (typeof source !== 'string' || !/^[a-z0-9][a-z0-9-]*$/u.test(source)) throw new TypeError(`${path}: source must name a src/sources record, got ${String(source)}.`);
+    const { radiusPc, source } = record;
     try { await readFile(resolve(projectRoot, 'src/sources', `${source}.json`)); }
     catch (error) { if (hasErrorCode(error, 'ENOENT')) throw new TypeError(`${path}: source ${source} has no record in src/sources.`); throw error; }
     extents[id] = radiusPc * M_PER_PC;

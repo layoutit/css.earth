@@ -248,7 +248,7 @@ test('a repository rule has no baseline: any finding breaks the check and is pri
   assert.equal(isBroken(found), true);
   assert.doesNotMatch(formatFindings(clean), /broken/u);
   assert.match(formatFindings(found), /no-x: 1 findings[\s\S]*Repository rules broken:[\s\S]*\n {4}a\/x$/u);
-  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['bake-without-renderer', 'format-schema-ownership', 'preparation-without-renderer', 'workspace-package-cycles', 'integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'package cycles, retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
+  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['site-build-format-readers', 'bake-without-renderer', 'format-schema-ownership', 'preparation-without-renderer', 'workspace-package-cycles', 'integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'package cycles, retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
 });
 
 test('a script or Astro module inside an object package is a finding; its data is not', () => {
