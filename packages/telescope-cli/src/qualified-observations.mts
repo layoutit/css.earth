@@ -7,8 +7,7 @@ import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErr
 import { fileSize, plainName, readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { assessInput, assessRequest, type ProductFacts } from './request-satisfaction.mts';
 import type { CapabilityRequest } from './recipe-request.mts';
-import { parseResolutionEvidence } from '@cssearth/objects';
-import { parseRegion } from '@cssearth/telescope/node';
+import { parseResolutionEvidence, parseRegion } from '@cssearth/objects';
 
 export interface QualifiedObservation {
   readonly target: string; readonly telescope: string; readonly mode: string; readonly observation: string; readonly program: string;

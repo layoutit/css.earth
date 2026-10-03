@@ -3,7 +3,7 @@ import { DISPLAY_ORIENTATION_SCHEMA, PUBLISHED_MUTUAL_ORBIT_SCHEMA, PUBLISHED_BO
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { evaluatePublishedOrbit } from '../../../../packages/astronomy/cli/body-epoch-ephemeris.mts';
-import { parsePublishedParameters } from '../../../../packages/astronomy/cli/lib/ephemeris-records.mts';
+import { parsePublishedParameters } from '@cssearth/objects';
 import { bodies, celestiaCommit, celestiaUrl } from './catalog.mts';
 const epochJdTt = 2461286.5;
 const write = async (path: string, value: unknown) => { await mkdir(dirname(path), { recursive: true }); await writeFile(path, JSON.stringify(value, null, 2) + '\n'); };

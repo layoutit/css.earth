@@ -2,7 +2,7 @@
 import { copyFile, mkdir, readFile, realpath, symlink } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { requireRecord } from '@cssearth/core';
-import { PRODUCT_RECORD_SCHEMA } from '@cssearth/telescope';
+import { PRODUCT_RECORD_SCHEMA } from '@cssearth/objects';
 import { localOutput, verifiedProduct } from './verified-product.mts';
 import { OPUS_SERVICE } from './opus.mts';
 import { assertPdsDependencies } from './qualify-source.mts';

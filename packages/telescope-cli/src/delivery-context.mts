@@ -5,7 +5,8 @@ import { inputWavelengths } from './recipe-request.mts';
 import { PRODUCT_KINDS, REQUESTED_RESULTS, type CapabilityRequest } from './recipe-request.mts';
 import type { ConstraintVerdict } from './query-contract.mts';
 import type { RequestSatisfaction } from './request-satisfaction.mts';
-import { jsonValue, parseLimits, parseRegion, type Json } from '@cssearth/telescope/node';
+import { parseLimits } from '@cssearth/telescope/node';
+import { jsonValue, parseRegion, type Json } from '@cssearth/objects';
 
 export interface ExplorationReference {
   readonly schema: 'cssearth-telescope-exploration@1';

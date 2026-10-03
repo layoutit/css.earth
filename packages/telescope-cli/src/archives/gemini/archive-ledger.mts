@@ -25,7 +25,7 @@ import { readFileSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parseProductRecord, type EvidenceKind } from '@cssearth/telescope';
+import { parseProductRecord, type EvidenceKind } from '@cssearth/objects';
 import { PROGRAMS, parseGeminiProgram, type GeminiProgram } from './archive.mts';
 import { query } from './cadc.mts';
 import { isCommand, ledgerFiles, receiptProblem, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../ledger.mts';

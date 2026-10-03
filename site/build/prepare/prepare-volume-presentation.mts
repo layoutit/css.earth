@@ -1,4 +1,4 @@
-import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, type VolumeSourcePreview as Preview, type TrackedVolumeSourcePreview as TrackedPreview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
+import { parseVolumeSourcePreview, isTrackedVolumeSourcePreview, parseVolumeSourceManifest, VOLUME_PRESENTATION_SOURCE_SCHEMA, type VolumeSourcePreview as Preview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
 import { sha256 } from '@cssearth/core/node';
 import { parseProductInputEvidence } from '@cssearth/objects/provenance';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
@@ -21,46 +21,18 @@ import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '@cssearth/
 import { DECORATIVE_WEBP } from '@cssearth/bake/raster';
 
 export const volumePresentationCompilerClosure = ['site/build/prepare/prepare-volume-presentation.mts', 'site/dataset-content.mts', 'packages/bake/src/sources/context-source-records.ts',
+  'packages/objects/src/prepared-data/volume-source-manifest.ts', 'packages/objects/src/prepared-data/volume-presentation-source.ts',
   'packages/telescope-cli/src/sky/sky-band-composite.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.ts', 'packages/bake/src/objects/color/color-transfer.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/node/file.ts', 'packages/bake/src/raster/lossy-lane.ts'] as const;
 
-const integer = (value: unknown): number => {
-  if (typeof value !== 'number' || !Number.isSafeInteger(value) || value <= 0) throw new TypeError('Expected a positive integer.');
-  return value;
-};
 const json = (bytes: Buffer): unknown => JSON.parse(bytes.toString('utf8'));
 const stringify = (value: unknown) => JSON.stringify(value, null, 2) + '\n';
-/** A preview is a publisher image downloaded by URL, a composite of a pinned sky band recipe, or an image this package
- * draws itself from one of its own declared inputs. The third kind exists for a dataset whose source is the package's
- * own product rather than a figure someone published: there is nothing to download, and a publisher figure of some
- * other observation would misrepresent it. */
-const isTracked = (preview: Preview): preview is TrackedPreview => !preview.path.startsWith('.local/');
-function preview(raw: unknown): Preview {
-  const value = sourceObject(raw, ['path', 'url', 'skyBands', 'authoredFrom', 'crop']);
-  const path = sourcePath(value.path);
-  const result: Preview = path.startsWith('.local/') ? { path }
-    : { path, ...(value.authoredFrom === undefined ? {} : { authoredFrom: sourceId(value.authoredFrom) }) };
-  const kinds = [value.url, value.skyBands, value.authoredFrom].filter(candidate => candidate !== undefined);
-  if (kinds.length !== 1) throw new TypeError('A preview names exactly one of a URL, a sky band recipe or the input it is drawn from.');
-  if (value.authoredFrom !== undefined) { /* named above */ }
-  else if (value.url !== undefined) result.url = sourceUrl(value.url);
-  else if (isTracked(result)) throw new TypeError('A tracked preview names its URL or the input it is drawn from.');
-  else {
-    result.skyBands = { path: sourcePath(sourceObject(value.skyBands, ['path']).path) };
-  }
-  if (value.crop !== undefined) {
-    const crop = sourceObject(value.crop, ['left', 'top', 'width', 'height']);
-    const offset = (raw: unknown) => { if (typeof raw !== 'number' || !Number.isSafeInteger(raw) || raw < 0) throw new TypeError('Invalid crop offset.'); return raw; };
-    result.crop = { left: offset(crop.left), top: offset(crop.top), width: integer(crop.width), height: integer(crop.height) };
-  }
-  return result;
-}
 function presentation(raw: unknown): Presentation {
   const value = sourceObject(raw, ['schema', 'objectId', 'name', 'defaultDataset', 'bank', 'recipes', 'sharedInputs', 'inputEvidence', 'datasets']);
   if (value.schema !== VOLUME_PRESENTATION_SOURCE_SCHEMA) throw new TypeError('Invalid volume presentation source.');
   const datasets = sourceArray(value.datasets, raw => {
     const dataset = sourceObject(raw, ['id', 'label', 'title', 'description', 'summary', 'detail', 'facts', 'input', 'preview', 'inputEvidence']);
     const result = { id: sourceId(dataset.id), label: sourceText(dataset.label), title: sourceText(dataset.title), description: sourceText(dataset.description),
-      summary: sourceText(dataset.summary), detail: sourceText(dataset.detail), input: sourceId(dataset.input), preview: preview(dataset.preview),
+      summary: sourceText(dataset.summary), detail: sourceText(dataset.detail), input: sourceId(dataset.input), preview: parseVolumeSourcePreview(dataset.preview),
       inputEvidence: [...sourceArray(dataset.inputEvidence ?? [], parseProductInputEvidence)],
       facts: [...sourceArray(dataset.facts, raw => { const fact = sourceObject(raw, ['id', 'label', 'value']); return { id: sourceId(fact.id), label: sourceText(fact.label), value: sourceText(fact.value) }; })] };
     validateDatasetText(result);
@@ -147,7 +119,7 @@ async function volumeSources(root: string, input: (path: string) => Promise<Buff
     const record = presentation(json(await input(presentationPath)));
     if (record.objectId !== folder.name) throw new TypeError(`Mismatched volume presentation object: ${folder.name}.`);
     const manifest = sourceObject(json(await input(`${base}/source/manifest.json`)), ['schema', 'pathBase', 'inputs', 'documents', 'generatedIntermediates']);
-    if (manifest.schema !== VOLUME_SOURCE_MANIFEST_SCHEMA || manifest.pathBase !== 'repository') throw new TypeError(`Invalid volume source manifest: ${record.objectId}.`);
+    parseVolumeSourceManifest(manifest, { reader: 'presentation', objectId: record.objectId });
     const descriptor = parseObjectDescriptor(json(await input(`${base}/object.json`)));
     const format = descriptor.prepared?.format;
     if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-dataset-bank' && format === PREPARED_VOLUME_DATASETS_SCHEMA) ||
@@ -170,12 +142,12 @@ interface Options {
 
 export async function preparePreview(root: string, pin: Preview, input: (path: string) => Promise<Buffer>,
   { mirrorOrigin = null, fetcher = fetch }: { mirrorOrigin?: string | null; fetcher?: typeof fetch } = {}): Promise<{ bytes: Buffer; width: number; height: number }> {
-  const path = resolve(root, pin.path), download = isTracked(pin) ? null : pin;
+  const path = resolve(root, pin.path), download = isTrackedVolumeSourcePreview(pin) ? null : pin;
   // The recipe is source closure whether or not its composite is already cached.
   if (download?.skyBands) await verifySkyBandRecipe(download.skyBands, input);
   // An authored preview is written and checked in by the package's own author, so it is source closure; every other
   // preview is a download or a cache and stays outside it.
-  let bytes = isTracked(pin)
+  let bytes = isTrackedVolumeSourcePreview(pin)
     ? await input(pin.path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) throw new Error(`Preview is missing: ${pin.path}; it is kept in this repository beside its source.`); throw error; })
     : await readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
   if (bytes === null && download) {

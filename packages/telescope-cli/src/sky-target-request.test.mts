@@ -4,7 +4,8 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { readSkyTarget, simbadObjectQuery, skyRegion, type MetadataResponse, type SkyTarget } from '@cssearth/telescope/node';
+import { readSkyTarget, simbadObjectQuery, skyRegion, type SkyTarget } from '@cssearth/telescope/node';
+import { type MetadataResponse } from '@cssearth/objects';
 import { skyTargetRequest } from './exploration.mts';
 import { SERVICES, searchCircle, targetQuery } from './vo/discovery.mts';
 

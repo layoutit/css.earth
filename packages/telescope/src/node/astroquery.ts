@@ -1,9 +1,10 @@
+import { VO_METADATA_SCHEMA } from '@cssearth/objects';
 /** The only cssEarth process boundary into the pinned astronomy packages. Operations are explicit rather than extensible:
  * Astroquery and PyVO own supported remote protocols; the caller owns validation and scientific meaning. */
 import { spawn } from 'node:child_process';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { astroqueryToolchain } from './toolchain/toolchain.js';
-import { parseMetadata, parsePin, type Json, type Pin, type MetadataResponse } from './vo-contracts.js';
+import { parseMetadata, parsePin, type Json, type Pin, type MetadataResponse } from '@cssearth/objects';
 export class ArchiveTransportError extends Error {}
 export type VoFailureCode = 'authentication' | 'no-content' | 'byte-limit' | 'protocol' | 'transport' | 'interrupted' | 'identity' | 'local-io';
 export class VoAccessError extends Error {
@@ -263,7 +264,7 @@ elif operation in ('vo-tap', 'vo-links', 'vo-parse'):
     def parameter(p):
         return {**field(p), 'value': lossless(p.value), 'constraints': {'minimum': lossless(p.values.min), 'maximum': lossless(p.values.max),
             'options': lossless(p.values.options), 'null': lossless(p.values.null)}}
-    metadata = {'schema': 'cssearth-vo-metadata@1', 'pyvo': pyvo.__version__,
+    metadata = {'schema': '${VO_METADATA_SCHEMA}', 'pyvo': pyvo.__version__,
         'raw': {'path': raw_path, 'bytes': len(payload)},
         'effectiveUrl': effective_url, 'fetchedAt': fetched, 'httpStatus': http_status,
         'queryStatus': 'ERROR', 'fields': [], 'rows': [], 'resources': [], 'coordinateSystems': [], 'timeSystems': [], 'times': [], 'bindings': [], 'issues': []}

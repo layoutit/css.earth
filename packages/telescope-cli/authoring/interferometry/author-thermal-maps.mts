@@ -35,7 +35,7 @@ import { combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects
 import { type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
-import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
+import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../../..');
 /** The FITS ORIGIN of a cutout. A FITS string value holds at most 68 characters, so this keeps the short label it was written with. */

@@ -7,7 +7,8 @@ import { resolve } from 'node:path';
 import { astroquery } from '@cssearth/telescope/node';
 import { choiceKey } from '../session.mts';
 import { planAccess } from './access.mts';
-import { recordKey, type DiscoverySnapshot, type MetadataResponse } from '@cssearth/telescope/node';
+import { recordKey } from '@cssearth/telescope/node';
+import { type DiscoverySnapshot, type MetadataResponse } from '@cssearth/objects';
 import { normalizeSnapshot, SERVICES } from './discovery.mts';
 
 const fixtures = resolve(import.meta.dirname, 'fixtures/telescope-vo');

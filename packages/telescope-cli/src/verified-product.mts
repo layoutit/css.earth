@@ -1,7 +1,7 @@
 /** Verify a telescope product record and every file it claims, independent of its stage. */
 import { readFile, realpath } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve } from 'node:path';
-import { parseProductRecord } from '@cssearth/telescope';
+import { parseProductRecord } from '@cssearth/objects';
 import { sameRun } from '@cssearth/telescope/node';
 
 export function localOutput(root: string, name: string): string {

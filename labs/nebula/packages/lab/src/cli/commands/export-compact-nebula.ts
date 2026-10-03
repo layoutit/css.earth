@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { exportCompactCompiler } from '../../adapters/application/delivery/compact-compiler-export.ts';
 import { exportCompactSampled } from '../../adapters/application/delivery/compact-sampled.ts';
 import { exportCompactSymmetry } from '../../adapters/application/delivery/compact-symmetry.ts';
-import { readNebulaDelivery } from '../../adapters/application/delivery/nebula-objects.ts';
+import { readNebulaDelivery } from '@cssearth/objects';
 const [argument, ...extra] = process.argv.slice(2);
 if (!argument || !/^--object=[a-z0-9][a-z0-9-]*$/.test(argument) || extra.length) throw new TypeError('Usage: export-compact-nebula --object=<id>');
 const root = process.cwd(), id = argument.slice(9);
