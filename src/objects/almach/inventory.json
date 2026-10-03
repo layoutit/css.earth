@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "almach-arrival.webp",
+      "bytes": 17666,
+      "sha256": "361390524a9017d28a5335b3c9fcd1a6acc655c1d800b10bccca3140f569042d"
+    },
+    {
+      "location": "public",
+      "filename": "almach-billboard.webp",
+      "bytes": 3138,
+      "sha256": "b6f284b196fd4bc16a00291458e6ee7dcd6c16e88a1cea6957cd34855932c783"
+    },
+    {
+      "location": "public",
       "filename": "almach-dataset-color.webp",
       "bytes": 44,
       "sha256": "8da22cedae6201082670804fbdddca2f54e9ffc183083c1c781068ce6e5fb22f"
@@ -18,6 +30,12 @@
       "filename": "almach-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "e918115ccf69b91fe16877812010d0a57bbf9f8d20184a20675e05d815fea046"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "cdf06b1a5b08024f656ec7c015fe78c1801d41b76503b078d0b130f1cae1bfce"
     },
     {
       "location": "prepared",

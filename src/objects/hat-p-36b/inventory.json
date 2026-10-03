@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hat-p-36b-arrival.webp",
+      "bytes": 29544,
+      "sha256": "eee66c518a9df25a64f7faa4624e8953ffe8466fcccb44f7f0e9f8708d9e8548"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-36b-billboard.webp",
+      "bytes": 4766,
+      "sha256": "1b59bdf626f2a9d58204ddce3782a075c6a369c570c9c1b2f88b651783748d60"
+    },
+    {
+      "location": "public",
       "filename": "hat-p-36b-dataset-shape.webp",
       "bytes": 44,
       "sha256": "c26fc6a218ea8122dce1699eb0b85b392e980a85d959422e60c0c2e03688e75e"
@@ -240,6 +252,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 309,
+      "sha256": "35b8af9cf1d7a59e70e211e3f49b537769e04528b6d0d2252c655d58d2b224c5"
     },
     {
       "location": "prepared",

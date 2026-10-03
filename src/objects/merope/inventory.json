@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "merope-arrival.webp",
+      "bytes": 17686,
+      "sha256": "bf8138ee471fc6227be87cb10c54ccea59d651f17d96b0f19f8ec86abc86a155"
+    },
+    {
+      "location": "public",
+      "filename": "merope-billboard.webp",
+      "bytes": 3094,
+      "sha256": "50a998e7b32ce56fd369f4cc32c54914f2089d24fd9218640357883fdf492a84"
+    },
+    {
+      "location": "public",
       "filename": "merope-dataset-color.webp",
       "bytes": 44,
       "sha256": "3c6d05544c308507be31f99e11cab39ed677b33fb9d54479f980815b0f10e7dc"
@@ -18,6 +30,12 @@
       "filename": "merope-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "bc16eda5ae41c7188c5c07a3015a5d28e31a79e3da063d117d1cfbd59eb002b7"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 380,
+      "sha256": "44b98167294af27673c4a0b3dee95b1770887c316088f2a0e79cc3d2198f31f5"
     },
     {
       "location": "prepared",

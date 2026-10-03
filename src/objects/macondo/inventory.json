@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "macondo-arrival.webp",
+      "bytes": 16574,
+      "sha256": "87d4f6e3b5478b187e46c6bde243bba3bbe86d896a2881d6c7221b9ce0abc8af"
+    },
+    {
+      "location": "public",
+      "filename": "macondo-billboard.webp",
+      "bytes": 2894,
+      "sha256": "9c83d7ac50775d356d3a5149232022880a24e01e8756400a6bbb400d61385fd1"
+    },
+    {
+      "location": "public",
       "filename": "macondo-dataset-color.webp",
       "bytes": 44,
       "sha256": "d9396f083bd904f90afc335de59085dc41532092411ebce515198df5bad21fde"
@@ -18,6 +30,12 @@
       "filename": "macondo-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "c8d184f1b04f1bd3d9634c7defd4b409daa3945722b703521d7bdc18801d92d3"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "b27e96646dcf61d9779894ddda93bfccf0240c3a4836d1881bc4db05feecc1a8"
     },
     {
       "location": "prepared",

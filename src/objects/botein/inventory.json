@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "botein-arrival.webp",
+      "bytes": 16768,
+      "sha256": "2ea2075941d93abef7556013961f3d44453718cf70c0ae42a7ac3d43ea84efc8"
+    },
+    {
+      "location": "public",
+      "filename": "botein-billboard.webp",
+      "bytes": 2956,
+      "sha256": "2b1295d0c99e33a7294e71de61e75d2d2c7457a4c045c1b0795260db75fd4629"
+    },
+    {
+      "location": "public",
       "filename": "botein-dataset-color.webp",
       "bytes": 44,
       "sha256": "6f9c0260a434b2c3b11373fad8138c8ab1f1b25835cb568dc4f0e088298d86d9"
@@ -18,6 +30,12 @@
       "filename": "botein-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f2da1faa644e16529d2816361a5963a7774e4539048538784f33e5d35705f66c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 371,
+      "sha256": "24817bc31bce6955b3bbc1f3d2b5a2b80c304a304d1387fb8d5d81f157ca5019"
     },
     {
       "location": "prepared",

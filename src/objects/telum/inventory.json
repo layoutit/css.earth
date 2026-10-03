@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "telum-arrival.webp",
+      "bytes": 18028,
+      "sha256": "bd42173bcf28fce2323e054012b7c3daf81425f78edd1380173f6faa040e2b88"
+    },
+    {
+      "location": "public",
+      "filename": "telum-billboard.webp",
+      "bytes": 3306,
+      "sha256": "79ae78099edeedc6d54e6e6d80d37c2cbbc876fee13193fba6e7da19315096e0"
+    },
+    {
+      "location": "public",
       "filename": "telum-dataset-color.webp",
       "bytes": 44,
       "sha256": "4cb50447b328c0fb3960cd2cb5f51f57c9e6e9b6dc681eaa9184de3b35a3076d"
@@ -18,6 +30,12 @@
       "filename": "telum-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "fe4229a35d825bf1270d41fc8b7409488ff0d10082909cc4f246d19d85f35b10"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "7a7be4dea90b1fb8983a1e6e85c157fcd7fe6ea3cccd7f9f14e3ade2e7403854"
     },
     {
       "location": "prepared",

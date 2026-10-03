@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "neichu-arrival.webp",
+      "bytes": 15366,
+      "sha256": "3474cf4f753e71df8984e866df54c076a6aae497771f89df6bfb2457d910be06"
+    },
+    {
+      "location": "public",
+      "filename": "neichu-billboard.webp",
+      "bytes": 2558,
+      "sha256": "8df804f329478e34cb4941a637d7261afecb69bb1c894b0aea63599ce6cca7ee"
+    },
+    {
+      "location": "public",
       "filename": "neichu-dataset-color.webp",
       "bytes": 44,
       "sha256": "0f07a36dba1e101fb687cc3886e230c86e8a0d560e5b9415f55ad5905287de01"
@@ -18,6 +30,12 @@
       "filename": "neichu-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "4ee5bfc45ec0da78d9bb87c09b2068306173962c6da1088150788cb6b99b3cc4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "d6fec73ef013c381db8ccacc742fa77ba064ee0b353e3db19e1bedaf03124dad"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sika-arrival.webp",
+      "bytes": 27478,
+      "sha256": "ed9193f5f2d252609e247b010ef68ed6656537cb1a2103c2002c46fe89be485a"
+    },
+    {
+      "location": "public",
+      "filename": "sika-billboard.webp",
+      "bytes": 4862,
+      "sha256": "74d4e5109def3090b6efed03bb4df8417c2b41b717cd7a9e766cd8d8d4ae11a3"
+    },
+    {
+      "location": "public",
       "filename": "sika-dataset-color.webp",
       "bytes": 44,
       "sha256": "e74eed3c8a32541d4137f6b3da94ec8c98928af3043631832dd728d1c543acd4"
@@ -24,6 +36,12 @@
       "filename": "sika-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f8957ddd115385497c9b54d85c3620a6d835f999c1e452e66e8839e0665bd69b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "848b2ea79d4567cee3b17113cfc0569836fa0d1442f0d188052925a12a5f0ec2"
     },
     {
       "location": "prepared",

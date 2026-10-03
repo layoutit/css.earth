@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "taiyangshou-arrival.webp",
+      "bytes": 17304,
+      "sha256": "8e6e5e4adb4dc9e0c20da4ed9c0f4dbccd410644a24e5b8ddd28055b0f799be3"
+    },
+    {
+      "location": "public",
+      "filename": "taiyangshou-billboard.webp",
+      "bytes": 3098,
+      "sha256": "439eca7f6ce74472856474dddf4abe6d6d3a9d97ee9f1163ce68e65bfc410019"
+    },
+    {
+      "location": "public",
       "filename": "taiyangshou-dataset-color.webp",
       "bytes": 44,
       "sha256": "e9f34257d816c5e625137527c5eafbb331f6f4e45f8bd80b59c114cf69b9ece5"
@@ -18,6 +30,12 @@
       "filename": "taiyangshou-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "dd968d32e795be65d28c14e80f4180866e687448c1a8339b3447fc555006f72c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 387,
+      "sha256": "7c49553895666229586043d46ec7da97005ed97388965f45507b800faeaf1408"
     },
     {
       "location": "prepared",

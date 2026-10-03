@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "minelauva-arrival.webp",
+      "bytes": 18300,
+      "sha256": "73f3d97c7fcd95a3f1cbdd1292446e8e904778b7e051141647f455ac657a2ec0"
+    },
+    {
+      "location": "public",
+      "filename": "minelauva-billboard.webp",
+      "bytes": 3332,
+      "sha256": "9fd9fcb3fa6f44776f241091b494ddfd24b1b3a2ef2f877773ab0ef278035a65"
+    },
+    {
+      "location": "public",
       "filename": "minelauva-dataset-color.webp",
       "bytes": 44,
       "sha256": "b11b2d3fcf743c066e21514ed9782782449d831eecc8f52788903bf66a59ba0a"
@@ -18,6 +30,12 @@
       "filename": "minelauva-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "3f4ee108e5f224d28bd41fe51c29dafb0d8d7d471d507d0a31a96debd6ed5919"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 384,
+      "sha256": "ee4185cdefbda29b6cc1cc1f02a3c3700d1916a52154c3aec0b8102d254c217f"
     },
     {
       "location": "prepared",

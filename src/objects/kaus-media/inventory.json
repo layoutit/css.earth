@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kaus-media-arrival.webp",
+      "bytes": 17680,
+      "sha256": "598a82eba1d423e37358201c22b398671d59ae1d386379b12d5f87eb7322a3c5"
+    },
+    {
+      "location": "public",
+      "filename": "kaus-media-billboard.webp",
+      "bytes": 3240,
+      "sha256": "70951d3ea9acef706efe461856f5c4b6d0a3a13342c9dee96cb8ec58ac539cb6"
+    },
+    {
+      "location": "public",
       "filename": "kaus-media-dataset-color.webp",
       "bytes": 44,
       "sha256": "48449ef17c090841a992ae66da864460e4b0fea7c04de2b1172a4ac7500ce675"
@@ -18,6 +30,12 @@
       "filename": "kaus-media-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "ba5044d715e518ed0e11a0b0c7e0deeffcdd57f7e237438312fddda637921b8a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 388,
+      "sha256": "7e2f022157bf968414d73f6e991b5e9d82a6021be1814e4d10e0fe902fb67672"
     },
     {
       "location": "prepared",

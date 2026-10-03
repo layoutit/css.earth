@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "solaris-arrival.webp",
+      "bytes": 17106,
+      "sha256": "c71d5ae819be3913ef364c31549070224fbf1cf9dfc631aceaa30df80a11c98f"
+    },
+    {
+      "location": "public",
+      "filename": "solaris-billboard.webp",
+      "bytes": 2950,
+      "sha256": "e3662548bfa2ec258cef208d85af01510fd39be9cb53864a4437924ffc1488d5"
+    },
+    {
+      "location": "public",
       "filename": "solaris-dataset-color.webp",
       "bytes": 44,
       "sha256": "6d73b585b0bde39efe968d9912564e5e216f7fd4e1ecd3b932b5fe9790a5cc98"
@@ -18,6 +30,12 @@
       "filename": "solaris-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "bc5ff5b3f7c90600fccfe995b1f76665da5173090a79c748503ee0b3db35ee77"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 372,
+      "sha256": "fc217a3bb052ba4d1671aab327acf1744fc38f5444c961fb6be02379ea7b0851"
     },
     {
       "location": "prepared",

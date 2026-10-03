@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ancha-arrival.webp",
+      "bytes": 16408,
+      "sha256": "924924f86a9b2b8025fb775dbbc88ef40dee6b8399b026c34f67fe5486018afd"
+    },
+    {
+      "location": "public",
+      "filename": "ancha-billboard.webp",
+      "bytes": 2916,
+      "sha256": "d870e9806027e0a7287d6e9ea39ccb9f4986e57765c8813c4a3322a96073fd71"
+    },
+    {
+      "location": "public",
       "filename": "ancha-dataset-color.webp",
       "bytes": 44,
       "sha256": "f33d47d3e2ffe1a8278f716788dab98d57f17ac444d49ce67b2e79d9394703d0"
@@ -18,6 +30,12 @@
       "filename": "ancha-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "6c6ff4b39f87d529f9ea512600c2e106e17c8383cd03337585a2f5174bbe2d05"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "8ab4ced93b5f4e6fdc2793cc79b1bbd6e95aa4f1f4833f77d939bcbb65755f06"
     },
     {
       "location": "prepared",

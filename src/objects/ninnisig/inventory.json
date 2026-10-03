@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ninnisig-arrival.webp",
+      "bytes": 17324,
+      "sha256": "995c3a3050464eb1d54d0dd62090c5ff8e25fdf1ac265353f1a18c534062f661"
+    },
+    {
+      "location": "public",
+      "filename": "ninnisig-billboard.webp",
+      "bytes": 3110,
+      "sha256": "c7c9c086c346ac6cab3af9334fc40a06c3b7a3d6cd09751cb84f06515abafffe"
+    },
+    {
+      "location": "public",
       "filename": "ninnisig-dataset-color.webp",
       "bytes": 44,
       "sha256": "6f753400ad11f763f316adcfcfb40ee6e56128a836bf0c2289cb339e5198bbe7"
@@ -18,6 +30,12 @@
       "filename": "ninnisig-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "1af6d4cd430ec312ae82ff8d50938957d44e7636a625a76b13caf304503882ad"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "f597cfecdb6f95017afcf8db5cb9f1347f99156d6f92465dd771186af415c914"
     },
     {
       "location": "prepared",

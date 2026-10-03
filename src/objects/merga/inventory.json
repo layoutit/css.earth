@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "merga-arrival.webp",
+      "bytes": 27046,
+      "sha256": "0e34114b02fe6a52cdff5dcc6afed002375fe39af6727095bb8cc3aaa09fd2dc"
+    },
+    {
+      "location": "public",
+      "filename": "merga-billboard.webp",
+      "bytes": 4758,
+      "sha256": "9d5d62f8ee53790a0904b1b7469301c911fdee3d345ad329e3ac626beb5dbf22"
+    },
+    {
+      "location": "public",
       "filename": "merga-dataset-color.webp",
       "bytes": 44,
       "sha256": "4384261a4665fb2e5f8d4e39177978c1f75e4da66beace590302d634f3ec845c"
@@ -24,6 +36,12 @@
       "filename": "merga-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f41e6a688c5a01b03a042ef9b07a483d4a38b45a24e532bfcf89937082e4dbfe"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "632305c3a4ed378b1b3d83e0b9767e1b36826fe19dbe238c790b9a1d77a0c862"
     },
     {
       "location": "prepared",

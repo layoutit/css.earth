@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "honores-arrival.webp",
+      "bytes": 27172,
+      "sha256": "896e8abcad42a84b16e554fc5f04dd47473c79f8b4fa4335d6790fecb6216852"
+    },
+    {
+      "location": "public",
+      "filename": "honores-billboard.webp",
+      "bytes": 4806,
+      "sha256": "daee2bf9209759b7676fd19a642492cdcdf4dc82907205b498b6c77ae38a4b14"
+    },
+    {
+      "location": "public",
       "filename": "honores-dataset-color.webp",
       "bytes": 44,
       "sha256": "66f858cc79361bcd59b542fef85f3a1ee42a1a41afd873d0677ee6b08fe908be"
@@ -24,6 +36,12 @@
       "filename": "honores-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "243064aa3b1f1c04d171b82affc25ea1755fe8d07cf98adc3d1b3f9a9bcc54c3"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "24589ddf9a59dc8116d6798480b364e9f8e6fdd7abc8f94aa44eef960e17b2d1"
     },
     {
       "location": "prepared",

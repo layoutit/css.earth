@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mekbuda-arrival.webp",
+      "bytes": 15806,
+      "sha256": "413d2bf13c415437faa006ee98927f6dbe4e25fb8bf78f10e0cff1f9ac311766"
+    },
+    {
+      "location": "public",
+      "filename": "mekbuda-billboard.webp",
+      "bytes": 2754,
+      "sha256": "3befa00ac294d0a3ffa3ce8820112a118c495dd0e5d181e0b43019a3b8f5dff5"
+    },
+    {
+      "location": "public",
       "filename": "mekbuda-dataset-color.webp",
       "bytes": 44,
       "sha256": "ee22664ab4a1079147ca38e0b48167e723c56a750736ebaf82f226f7617deff0"
@@ -18,6 +30,12 @@
       "filename": "mekbuda-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "092323d55beeb3890e2547cad8ba7f0e3988ed372a85adb51bc2a64c28e02bb3"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "a496befc8d8255b06844d6f2b33018907a059ad47ccff29bc69e61f041f4cc55"
     },
     {
       "location": "prepared",

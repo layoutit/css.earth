@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lucilinburhuc-arrival.webp",
+      "bytes": 27840,
+      "sha256": "6936196a832ea9d57c7be71dd60cdc0946dd5c0fd107978f8d5fb7e4563864b9"
+    },
+    {
+      "location": "public",
+      "filename": "lucilinburhuc-billboard.webp",
+      "bytes": 4922,
+      "sha256": "00d104ac120547da7b79b69dd7b5f4745b08c21168915cc82892ba43cb0c8dc5"
+    },
+    {
+      "location": "public",
       "filename": "lucilinburhuc-dataset-color.webp",
       "bytes": 44,
       "sha256": "c164fa31c6445a54ddf7e80fce6e708763fec8be1227de02f5ff16daf5c5d28e"
@@ -24,6 +36,12 @@
       "filename": "lucilinburhuc-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "45eade3007c172efe0ed5b1a207f08ba952cb2bd81ff70eeef179a03db3115cc"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 391,
+      "sha256": "1d3a7388f9da8903245d9f3c3db1904836aec2d29f0261d98a2564d295bb83ef"
     },
     {
       "location": "prepared",

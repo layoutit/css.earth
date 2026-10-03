@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "aspidiske-arrival.webp",
+      "bytes": 14678,
+      "sha256": "a403ebe152b90eaeefbc986cf2bb847ca7704707705977d5cad2184e7ca4c626"
+    },
+    {
+      "location": "public",
+      "filename": "aspidiske-billboard.webp",
+      "bytes": 2518,
+      "sha256": "1baef0435349829edd94d7bad215ace8f52a6812963c49a0cf6582ef2e9ccba5"
+    },
+    {
+      "location": "public",
       "filename": "aspidiske-dataset-color.webp",
       "bytes": 44,
       "sha256": "f1bad1b8cce6671151e6d4a2ad68142c1508dcfaa6308c683347ee2255ba823c"
@@ -18,6 +30,12 @@
       "filename": "aspidiske-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "bb70043694061b6928e953fb8cda7cc3219f62124a3eb8897896bc9a1444f18b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 284,
+      "sha256": "4adb6a5cc427819391538c2bc11c75179d6612511a32bc45667355ca624c72e9"
     },
     {
       "location": "prepared",

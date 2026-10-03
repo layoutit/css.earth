@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tapecue-arrival.webp",
+      "bytes": 27856,
+      "sha256": "2060364de0efcca4a72851dd0faeec5f8f98d33d77d0fa4d257901000bf23fe3"
+    },
+    {
+      "location": "public",
+      "filename": "tapecue-billboard.webp",
+      "bytes": 4954,
+      "sha256": "4a94b806725c60559d1066e6878d0b4acd99db454766c58948d5e277a4116d4a"
+    },
+    {
+      "location": "public",
       "filename": "tapecue-dataset-color.webp",
       "bytes": 44,
       "sha256": "fef68136f9a3565e6708e6822edd4bc0d1fd69a146abdaa2bde7e57105eebea1"
@@ -24,6 +36,12 @@
       "filename": "tapecue-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f438fcc27383ebf9ead0beff441594c4ee56594b1fd9c6a6d954cde82c70ef2a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "aad7f35bf01217031aef42fb451ba7ee36d3916f292beff8de7b1fed23a43d3e"
     },
     {
       "location": "prepared",

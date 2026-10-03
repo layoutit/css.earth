@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "felis-arrival.webp",
+      "bytes": 18016,
+      "sha256": "296d78cb7cf2d8500cbada3c2e2f28d1972dc7e38c1b2a3a229073cc3e59b2c7"
+    },
+    {
+      "location": "public",
+      "filename": "felis-billboard.webp",
+      "bytes": 3280,
+      "sha256": "1f1414e86af28e944b6bfa98ac3902056d973323ba95e38d8518356b97db1656"
+    },
+    {
+      "location": "public",
       "filename": "felis-dataset-color.webp",
       "bytes": 44,
       "sha256": "e197e5d42819da985268a06b11e79a9ae940e451c69f7e20a9f953e8dc1f89ff"
@@ -18,6 +30,12 @@
       "filename": "felis-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "56ff65b0119869144ecbded4f98de438889794c66728a02881d9dbc6ab00a9f9"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "450a61f4b5cc00d22a0252f73fb51973ecec9cd0742b9157b79344f4879c2ae7"
     },
     {
       "location": "prepared",

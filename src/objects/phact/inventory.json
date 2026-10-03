@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "phact-arrival.webp",
+      "bytes": 17640,
+      "sha256": "4fbfffa27cbf38d5a4ae9d9ed5ae37b9649ae7ad15b50da21c72df7e20a7dcbf"
+    },
+    {
+      "location": "public",
+      "filename": "phact-billboard.webp",
+      "bytes": 3070,
+      "sha256": "04a901b32326925c4a972a20b3dfddabacaff58766743976d64d2f2e0fb5e921"
+    },
+    {
+      "location": "public",
       "filename": "phact-dataset-color.webp",
       "bytes": 44,
       "sha256": "cf8620c4696a19c6bfcd94c55a1535608d9398cfb40d44824822f29321b6f9c6"
@@ -18,6 +30,12 @@
       "filename": "phact-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "fef2d418699ef5da4ca7bac10f801e25a69d350970a6d3d870b6c15d5247cbf4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 372,
+      "sha256": "b054455b663e238be7ee3af124648538fd5ab75327b4ef58ffaa492272e2ec9c"
     },
     {
       "location": "prepared",

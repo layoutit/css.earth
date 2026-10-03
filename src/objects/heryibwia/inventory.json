@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "heryibwia-arrival.webp",
+      "bytes": 18156,
+      "sha256": "e88d698f278fac21266da5e98ee4d021c5b4fa9a3dd13ade2797683c96f86908"
+    },
+    {
+      "location": "public",
+      "filename": "heryibwia-billboard.webp",
+      "bytes": 3304,
+      "sha256": "76354e8e75f79fd4be01d0edb01d09bf50636a3bab56fd8c4a06ee2f29c4873c"
+    },
+    {
+      "location": "public",
       "filename": "heryibwia-dataset-color.webp",
       "bytes": 44,
       "sha256": "17cd7ff1eda262c8cbf4a0cfa4f1f8436d4e48cd6d392202d379998b0c548bba"
@@ -18,6 +30,12 @@
       "filename": "heryibwia-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "74541bee44ffab77259645d505eefee6fd401e903c39b15d4b50353d93963e24"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 384,
+      "sha256": "dbe39422ad5905d53ff8b2dc96c3f121dd75c51211cdabc6d397ffd63aac2db4"
     },
     {
       "location": "prepared",

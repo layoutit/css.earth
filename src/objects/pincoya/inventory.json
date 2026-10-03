@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pincoya-arrival.webp",
+      "bytes": 28496,
+      "sha256": "5d476f038c47579f5cb3d8bb4c28c25bb9b649409aa0652d4cc51d0eb34bde02"
+    },
+    {
+      "location": "public",
+      "filename": "pincoya-billboard.webp",
+      "bytes": 5046,
+      "sha256": "5b14d5fb014d9052bc4e0e6c5ca588bf261f1fe13fb2ac9ed810fd60ea217eb3"
+    },
+    {
+      "location": "public",
       "filename": "pincoya-dataset-color.webp",
       "bytes": 44,
       "sha256": "8bc4ced784d740419ef17744f3b2fa52710fa00bb9a53affeaa7d574bcb563fd"
@@ -24,6 +36,12 @@
       "filename": "pincoya-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "5853c10a7268de58d3d125e8f940c066579e4a5c50c35d9e71885c963008ff12"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "20f0ab2528dee95ec2661e1db28742d9d0747d26dd89e4e91212798e1d5efc73"
     },
     {
       "location": "prepared",

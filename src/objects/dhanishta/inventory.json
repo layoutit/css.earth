@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "dhanishta-arrival.webp",
+      "bytes": 27008,
+      "sha256": "6f8a4e8bb7cfb98a4c0d76a6c339adec75399f7a63965bbacd9805c293234845"
+    },
+    {
+      "location": "public",
+      "filename": "dhanishta-billboard.webp",
+      "bytes": 4770,
+      "sha256": "bbc7496d89b35e5e00687341a84b23f9b0bb04eba62b5209433dd53f3fd63fa8"
+    },
+    {
+      "location": "public",
       "filename": "dhanishta-dataset-color.webp",
       "bytes": 44,
       "sha256": "a9e61acb30cd46abc0d49f8000771a795cbc4f018468043947009ba9d19a87e3"
@@ -24,6 +36,12 @@
       "filename": "dhanishta-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "531b8e0e9efdf99e29bdad5875255d1d5cbfbb6414cc59f260acc8aef2d56d46"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 383,
+      "sha256": "6d8a071907684b7c96a6bdc919efd3badcff0a0fd0ea935e5dd8ea72b624d0c1"
     },
     {
       "location": "prepared",

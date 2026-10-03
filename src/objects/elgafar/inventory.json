@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "elgafar-arrival.webp",
+      "bytes": 27658,
+      "sha256": "6450611c827906aba179feb29fc4e1f4044a8308f4419dd715137f6199fcd9f0"
+    },
+    {
+      "location": "public",
+      "filename": "elgafar-billboard.webp",
+      "bytes": 4948,
+      "sha256": "b41d6f4ff1ac9094a1b9a72ff6773f6fb95608136957cbe4edf39253afb62eaf"
+    },
+    {
+      "location": "public",
       "filename": "elgafar-dataset-color.webp",
       "bytes": 44,
       "sha256": "7d844c8cd5c7e3ccdde8dd772aa0fb961ea1073b8498219ac4e84b59bf83ff37"
@@ -24,6 +36,12 @@
       "filename": "elgafar-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "67eaa04f8f7fa5c335bf3e879628a65781f5df4a3172710187d1b0bf05bb5ad7"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "4bb7c2fdfeb3a58832db9c1eb70be09184bc0bdb6222cdd7b33b9cd63bcf1e05"
     },
     {
       "location": "prepared",

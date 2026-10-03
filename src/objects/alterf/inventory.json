@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alterf-arrival.webp",
+      "bytes": 17952,
+      "sha256": "f5256806e6c4b00ed6eaeeabe194b899f30f158584ad501db2e68d96b6f5cba1"
+    },
+    {
+      "location": "public",
+      "filename": "alterf-billboard.webp",
+      "bytes": 3306,
+      "sha256": "07246e2f50cb43184ab2179f369e0fa9c32fc948dbea4310c325d765f72404e4"
+    },
+    {
+      "location": "public",
       "filename": "alterf-dataset-color.webp",
       "bytes": 44,
       "sha256": "374786c105435e3b94067512b48122d64ff22a3735ad2c1d2e8b0c9649c97d10"
@@ -18,6 +30,12 @@
       "filename": "alterf-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "59047cfe23cdc0bd2082e531e49b24374f8e9672435e7781319dd3b62b717c5a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "75cf5a514c533848e2a7d65ee97fb81d4ddff70c41eb5e33166e1cc03fa2ca41"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "praecipua-arrival.webp",
+      "bytes": 15560,
+      "sha256": "093cd3deebbca0ced35485f75d8d5c01aeacf62b5733fb96d44a68bca522c370"
+    },
+    {
+      "location": "public",
+      "filename": "praecipua-billboard.webp",
+      "bytes": 2734,
+      "sha256": "9b83226841155165811d0cbfc54e4db514069a6708f6f3070da99dd5e2d7fa16"
+    },
+    {
+      "location": "public",
       "filename": "praecipua-dataset-color.webp",
       "bytes": 44,
       "sha256": "5c0041ee8fc9a035c8856971d0b2da02bd7f6d875a249aa748af6e718a5c278f"
@@ -18,6 +30,12 @@
       "filename": "praecipua-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "49de4b63c91a9223aa6ddfb43f35a4217210c16514aa31837c5e8ff448d20cc8"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 383,
+      "sha256": "f914c291ea4b3369ff7fa7dac62d4f81fa6027b723339b73874265fac8326b47"
     },
     {
       "location": "prepared",

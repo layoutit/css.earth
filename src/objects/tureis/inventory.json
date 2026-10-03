@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tureis-arrival.webp",
+      "bytes": 15628,
+      "sha256": "3b0f460f26bb8725a180525599a837da3ba18162a8c51206f2bb0057fc9c6fc0"
+    },
+    {
+      "location": "public",
+      "filename": "tureis-billboard.webp",
+      "bytes": 2590,
+      "sha256": "e366982088594a20ac02be7984da3bb4eb12dc2c1701e4125c45be9498313329"
+    },
+    {
+      "location": "public",
       "filename": "tureis-dataset-color.webp",
       "bytes": 44,
       "sha256": "900abb7c644bdcbb8ce9d2634209665ee271336f91b5bc1b5dec07b69bbff98b"
@@ -18,6 +30,12 @@
       "filename": "tureis-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "64faa3dfb75384dbee423e779b32990faf996d71e4ff026478e79867adf57526"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "21ce70fdde12c6948c3cc97f1ff4fdf4589daf5da90acdd0bc89fb13d496a2b2"
     },
     {
       "location": "prepared",

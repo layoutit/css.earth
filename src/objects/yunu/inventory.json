@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "yunu-arrival.webp",
+      "bytes": 17774,
+      "sha256": "889e8e6c70f16f3ea4b8b6855fdd3719a6d4246a576c7bf199f2d41db93bb12a"
+    },
+    {
+      "location": "public",
+      "filename": "yunu-billboard.webp",
+      "bytes": 3292,
+      "sha256": "09347aa3c68c67b064e417b0cdfd8c7e797e2944f35dac5dfefa7477b7e3be3b"
+    },
+    {
+      "location": "public",
       "filename": "yunu-dataset-color.webp",
       "bytes": 44,
       "sha256": "cc6a425e19d99bffc04cd2415df3ad2a8d55132d200449f704d0bc880e5e717e"
@@ -18,6 +30,12 @@
       "filename": "yunu-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "d89f63f503184238c4b588aa065ab13732a75917f3a03cd06bf461ef93b9d0bc"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "0aac1e072d584bf0296747022b4a778d772962009c144fa0a3b9ee5058dbd64f"
     },
     {
       "location": "prepared",

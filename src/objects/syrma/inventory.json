@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "syrma-arrival.webp",
+      "bytes": 13964,
+      "sha256": "f6896f006ce48698b73a0b4417a671ab1e971c35a7a71ed63aad4ba4830b857e"
+    },
+    {
+      "location": "public",
+      "filename": "syrma-billboard.webp",
+      "bytes": 2408,
+      "sha256": "3c309529ad9474680047befc13d085f13dad3aa9857671f6f4c5bb679222762e"
+    },
+    {
+      "location": "public",
       "filename": "syrma-dataset-color.webp",
       "bytes": 44,
       "sha256": "3ab7517aa8431dac0b8d67a1fdf8d3f2ae977a00f343de97dd3eed5b1ce3aac9"
@@ -18,6 +30,12 @@
       "filename": "syrma-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f041f01c4d26377dc604cf0e6f10011e063721f304ba1857b4e0578c2b5ace40"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "ac56e1f9f0b14481c3599178a56610b13d83bd473760289d4cd1be13e4575311"
     },
     {
       "location": "prepared",

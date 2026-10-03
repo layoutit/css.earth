@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "arcalis-arrival.webp",
+      "bytes": 28382,
+      "sha256": "2431e98fd54b487bb3d3beae7f6b629050113a9d9bfea5b0ee41937ebe0fe8eb"
+    },
+    {
+      "location": "public",
+      "filename": "arcalis-billboard.webp",
+      "bytes": 5026,
+      "sha256": "60795431aa8d81e4aeacb17e63323eb93f59d1fc19d1e11a1a629923ce2ff120"
+    },
+    {
+      "location": "public",
       "filename": "arcalis-dataset-color.webp",
       "bytes": 44,
       "sha256": "efbefa6f3bb12bdcf1b44dbfe6f0f6c404b46be3aabf0c4d50db00ed3b0fa8ae"
@@ -24,6 +36,12 @@
       "filename": "arcalis-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "d5bb75ebac497b2c02579a7847fed3d4bab166631bd8b81f6035d0ff89236c8a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 382,
+      "sha256": "0f630d02bb6c843392eb6d07478e2e7704c42e019504e7fa7333933f64c0a282"
     },
     {
       "location": "prepared",

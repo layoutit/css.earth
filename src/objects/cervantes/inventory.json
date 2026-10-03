@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "cervantes-arrival.webp",
+      "bytes": 27578,
+      "sha256": "6c87f8addd0d34fa71ba8c337fbb5eea6aaca04dabd3cc4046236516e1e375da"
+    },
+    {
+      "location": "public",
+      "filename": "cervantes-billboard.webp",
+      "bytes": 4906,
+      "sha256": "4149c4c7af36f82ed0aae3a19d8d3e0d2a66a0e54defbbdf95168d2cc49e3273"
+    },
+    {
+      "location": "public",
       "filename": "cervantes-dataset-color.webp",
       "bytes": 44,
       "sha256": "491f17d473916267f1f3c01e62c29b8df371baf4a04ad881b7e465671773c544"
@@ -24,6 +36,12 @@
       "filename": "cervantes-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "570c2d738e3774b6071efd7db0f64e4fb068115098cb44bdcb2f3ce0bf09dc47"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "a1ab8c3adb1be1e46c19439387ba010cce67db4551dea89b132dc0128bbba835"
     },
     {
       "location": "prepared",

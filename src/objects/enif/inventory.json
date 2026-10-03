@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "enif-arrival.webp",
+      "bytes": 18030,
+      "sha256": "6c325a9be358b94b667703b82bd7cf5512c49b6845154420e1ac2dcf24b4a5dd"
+    },
+    {
+      "location": "public",
+      "filename": "enif-billboard.webp",
+      "bytes": 3322,
+      "sha256": "269bf5713fdf7bc8ed7a722c00054751bc8762b019a8702790057f5595bd7d3f"
+    },
+    {
+      "location": "public",
       "filename": "enif-dataset-color.webp",
       "bytes": 44,
       "sha256": "8cad496884c7a95bce2469f3e0da8a4c6a99da1ed411319d7f12dee1dd72879e"
@@ -18,6 +30,12 @@
       "filename": "enif-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f7eb054efdb613714c336f9e4154e72c59d30238c017a3e6cbe93d9073265202"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 367,
+      "sha256": "9de5fdf17e4858ca60d727027b38534099d90925f41f42a1c3d6d012f1b7a3e2"
     },
     {
       "location": "prepared",

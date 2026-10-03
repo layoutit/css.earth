@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "polaris-australis-arrival.webp",
+      "bytes": 27080,
+      "sha256": "535fa510796a3b728e9fb2b68403b290ab4e20bc1fe47e53960a9ed93821d176"
+    },
+    {
+      "location": "public",
+      "filename": "polaris-australis-billboard.webp",
+      "bytes": 4780,
+      "sha256": "b5fa763ffad25304bd5d1cd3a8a1d139d51ea10d4da811c7e43129c2bd16baff"
+    },
+    {
+      "location": "public",
       "filename": "polaris-australis-dataset-color.webp",
       "bytes": 44,
       "sha256": "c50b8a75c6a16f3312d4e87cec951541a1b0ecd628928f1d3b26978d76a37048"
@@ -24,6 +36,12 @@
       "filename": "polaris-australis-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "c5b5c42e32dd8a3156df0e7cf151e7464104f28017a3264a43e5d0ffe12224c0"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 395,
+      "sha256": "8e95e4e0a069144446b0b13ad2e429915c10c27a55c3bf856d836ea2823c1b5f"
     },
     {
       "location": "prepared",

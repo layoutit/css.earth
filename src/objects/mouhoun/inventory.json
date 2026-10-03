@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mouhoun-arrival.webp",
+      "bytes": 28090,
+      "sha256": "0fe5047fd6fc9ab2e275f1245e0c20bdec7971ebbee2275725a0c1cda405839e"
+    },
+    {
+      "location": "public",
+      "filename": "mouhoun-billboard.webp",
+      "bytes": 4998,
+      "sha256": "7f9e8d89b0c938e7e2e89cf19f5c26ac1735223bf0b50e842032068c8cb1158a"
+    },
+    {
+      "location": "public",
       "filename": "mouhoun-dataset-color.webp",
       "bytes": 44,
       "sha256": "e744d09c42d21df7ce6d676da8166d06679b63df370aaf7045e7c1643aa99eea"
@@ -24,6 +36,12 @@
       "filename": "mouhoun-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "4887843ee63258844fcf4e893223cb9324f03a4f46ca524d1ca9b2b82f54d0aa"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "8b056b02e6cf6520fb58b51c9e43aedf4162ad6cc8f9c0a5366e9f11d4f62e1e"
     },
     {
       "location": "prepared",

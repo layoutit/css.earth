@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tres-3-arrival.webp",
+      "bytes": 27582,
+      "sha256": "91149796cd30aaa55f51ae46a454668ad4527bea54adb47b2d82421de8063ba8"
+    },
+    {
+      "location": "public",
+      "filename": "tres-3-billboard.webp",
+      "bytes": 4882,
+      "sha256": "0018d2f94d8c3f822de1af82b7fa5368407de7aae0d78ab4d7aabf5ccb26cce8"
+    },
+    {
+      "location": "public",
       "filename": "tres-3-dataset-color.webp",
       "bytes": 44,
       "sha256": "9c8734e7f450031e1ff73e0599fa153391abceed7f9b54b6bc3126c8946f7796"
@@ -24,6 +36,12 @@
       "filename": "tres-3-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "e3f2e0b5156f60c16a5f9f817b7187f3be90e229f9f8353fe94491082b2fae40"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "e0458fd41b0f17477f2c79cc40a86c51358cb23ab4e2cc261a2ae77571d8dec8"
     },
     {
       "location": "prepared",

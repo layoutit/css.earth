@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "natasha-arrival.webp",
+      "bytes": 28020,
+      "sha256": "3c13af1894b1c6e0901f0370ae6b1dc5668f462327f1a33237ae20adff0243b0"
+    },
+    {
+      "location": "public",
+      "filename": "natasha-billboard.webp",
+      "bytes": 5002,
+      "sha256": "de48e2a021f5feb15a25643e769b09213519a647011ecd7c3c3f0c35d316de80"
+    },
+    {
+      "location": "public",
       "filename": "natasha-dataset-color.webp",
       "bytes": 44,
       "sha256": "d375d40e4ab371eb4bfafd05c86379bfb1dc484087fa691dce4eb3aebcf71e3b"
@@ -24,6 +36,12 @@
       "filename": "natasha-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2737d7550cf0b095919418997946f5e091aa0aa5b94fcba4304008bf859a3b76"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "d10af2ab06a8199b507c0e88aae08a49ef7ce8747b91c2076b63b06c4a13046d"
     },
     {
       "location": "prepared",

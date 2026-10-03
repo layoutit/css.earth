@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "funi-arrival.webp",
+      "bytes": 27414,
+      "sha256": "f0c6dc077edfbf302fb8915d743096d19649cf9d524a6aadbd93039d35717232"
+    },
+    {
+      "location": "public",
+      "filename": "funi-billboard.webp",
+      "bytes": 4874,
+      "sha256": "44f023df58fb24cc94e4ad9f8135c8b4ee57a7527e5ac573283d31336c7ba297"
+    },
+    {
+      "location": "public",
       "filename": "funi-dataset-color.webp",
       "bytes": 44,
       "sha256": "b9a906b3910d6736f00c5ee7d8d1fa0da1e6b6b66dbc5dbc15e721c45c58388d"
@@ -24,6 +36,12 @@
       "filename": "funi-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "091a7d28eeb58ae93ca5f810833272eccef3f445cd0ac2152a17b507d3f87c80"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 371,
+      "sha256": "5edfd84108897ca9b16828efd018c00151c6b704707a2dadfd9a0b03dacee2cb"
     },
     {
       "location": "prepared",

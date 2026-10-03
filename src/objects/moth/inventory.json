@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "moth-arrival.webp",
+      "bytes": 27824,
+      "sha256": "bfd8df82e000c89585fc0b1c8cd484c2430f2a8f3c7be4d27ce70dfe26e6ded7"
+    },
+    {
+      "location": "public",
+      "filename": "moth-billboard.webp",
+      "bytes": 4954,
+      "sha256": "c016963ab257a26d8240d5c96acb640ab4cd06f7cdc258a32273f2de1af3e2be"
+    },
+    {
+      "location": "public",
       "filename": "moth-dataset-color.webp",
       "bytes": 44,
       "sha256": "fef68136f9a3565e6708e6822edd4bc0d1fd69a146abdaa2bde7e57105eebea1"
@@ -24,6 +36,12 @@
       "filename": "moth-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f438fcc27383ebf9ead0beff441594c4ee56594b1fd9c6a6d954cde82c70ef2a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 369,
+      "sha256": "a8fab72d66eb0c1c54796d4f57fd5ea3fb864fb687a375adda2b11ab52787004"
     },
     {
       "location": "prepared",

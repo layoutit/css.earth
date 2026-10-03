@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "axolotl-arrival.webp",
+      "bytes": 27596,
+      "sha256": "3c9bab0b3e8eede1307c52dbd4f0caa501c869b499e4d89a0647db7f9ee1e953"
+    },
+    {
+      "location": "public",
+      "filename": "axolotl-billboard.webp",
+      "bytes": 4866,
+      "sha256": "f9305fd1cfef4d5ea2d452382b2cf76960084201e37e391f91628bf1c7344426"
+    },
+    {
+      "location": "public",
       "filename": "axolotl-dataset-color.webp",
       "bytes": 44,
       "sha256": "84ad3b2fe6d9d56cbfed5f16ee191680eeea912319a4808b0a3d3704704d7742"
@@ -24,6 +36,12 @@
       "filename": "axolotl-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "510b6d104087c54c70c653b50895e8c8a7bd152fb6fe851124079b12bb47ae65"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "c0845dd4cbaed614a39e2e835d9481dec9ba647c3f963d35f052bdf2b08b16ec"
     },
     {
       "location": "prepared",

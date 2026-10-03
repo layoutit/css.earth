@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ebla-arrival.webp",
+      "bytes": 17334,
+      "sha256": "4eafb608c952b430afed4d56a604fdf21a40974c35c366919f47d925aec148ed"
+    },
+    {
+      "location": "public",
+      "filename": "ebla-billboard.webp",
+      "bytes": 3016,
+      "sha256": "f655fd00de89abcf9a1b441c034c12fb3f05fc2d35a18f28d73946b1388a9c8e"
+    },
+    {
+      "location": "public",
       "filename": "ebla-dataset-color.webp",
       "bytes": 44,
       "sha256": "53b82020333f04122030a09f46e06568bfcb3b9bd8a50807a0fe61984f89e16e"
@@ -18,6 +30,12 @@
       "filename": "ebla-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "9dc5276cbf42e2c1191840b178b8be7afa5c21d25a401dea0dc9aaae91e02fd8"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "a55a9962efc1e2be8ca50b085c032857bc6502299df9496c64ba9b317b285aac"
     },
     {
       "location": "prepared",

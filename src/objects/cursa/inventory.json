@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "cursa-arrival.webp",
+      "bytes": 16978,
+      "sha256": "6bc1d6c8088998f9e2c4ce208dcc1e527569b9209421ca96addfdcd4fcc35ca9"
+    },
+    {
+      "location": "public",
+      "filename": "cursa-billboard.webp",
+      "bytes": 2942,
+      "sha256": "db59f4647980691871fbe28f3198d550bb3f7752f7353a56589104dd79477450"
+    },
+    {
+      "location": "public",
       "filename": "cursa-dataset-color.webp",
       "bytes": 44,
       "sha256": "0ef3ce06241f6632a64e769494164ccd0d1b2322c7a5ba99b8aa52d209e2d2b4"
@@ -18,6 +30,12 @@
       "filename": "cursa-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "b360bca10b62279f5b5f2a0665be4ed36598bc7531f70509c0b3de972bc596c2"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "18a20bb344e36b1c8f65f0dbb70b1d655b78576d4cee921970c97c5769c1f96a"
     },
     {
       "location": "prepared",

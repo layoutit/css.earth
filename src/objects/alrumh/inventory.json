@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alrumh-arrival.webp",
+      "bytes": 18128,
+      "sha256": "2815065794999234d3638dad99a68b188b322df05f4fa2b9fd8ffaba7f8937b9"
+    },
+    {
+      "location": "public",
+      "filename": "alrumh-billboard.webp",
+      "bytes": 3326,
+      "sha256": "0a5f7309f5b82f517e33283dda96cc7a5ca8bc4fb5bb5098235f4cdb2b57a89c"
+    },
+    {
+      "location": "public",
       "filename": "alrumh-dataset-color.webp",
       "bytes": 44,
       "sha256": "a1bc9e87a7e3e15fe2f2e512a2bff01ae291e739a61fa409b3efdf472fcfbc27"
@@ -18,6 +30,12 @@
       "filename": "alrumh-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "7ceed2e9a55580586f6a6a32fd12422160e59067d0ba1f7cfb3993f549fcdb60"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "567bd058402c8924f27aab335037894d58c205e9bff5b698b070a393734d6fac"
     },
     {
       "location": "prepared",

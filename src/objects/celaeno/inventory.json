@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "celaeno-arrival.webp",
+      "bytes": 27714,
+      "sha256": "bb6266c17d2e4662782fc7556994e9b55379a3ff92c8a8f89c97ef3d140869ff"
+    },
+    {
+      "location": "public",
+      "filename": "celaeno-billboard.webp",
+      "bytes": 5020,
+      "sha256": "5cf3a052a10b1618b2463d88417189d15a851cc56614b1bd9a5ffaf6f3acfb76"
+    },
+    {
+      "location": "public",
       "filename": "celaeno-dataset-color.webp",
       "bytes": 44,
       "sha256": "34f41b60b5c8479bbba748a2aaabd3349a0ba5b7d0534acf6ce72c0104f349b7"
@@ -24,6 +36,12 @@
       "filename": "celaeno-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "58b0f870980ebd7c9f5633ec924fbfa517447874839493da1e03e9990421d26b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 380,
+      "sha256": "4c418109e4cfa9e8576cc947cbdf8a746d9e2b1a63185912f515eb14698c2041"
     },
     {
       "location": "prepared",

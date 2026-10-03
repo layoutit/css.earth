@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ping-arrival.webp",
+      "bytes": 17938,
+      "sha256": "83620470a3d878c40060cb0f5872f82322edf502b33afd575c113ba8a3536a49"
+    },
+    {
+      "location": "public",
+      "filename": "ping-billboard.webp",
+      "bytes": 3266,
+      "sha256": "73ffb31f1698cfbd6eca799ccd207e55b8e445fdc3f37530b03e324e34ad75e8"
+    },
+    {
+      "location": "public",
       "filename": "ping-dataset-color.webp",
       "bytes": 44,
       "sha256": "c8eec8f5998343fbae4ed113786070d60eb3a9519f19ce02638350c9e5a850a8"
@@ -18,6 +30,12 @@
       "filename": "ping-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "d94d592811d3446b09e9b64254e89a4968b4d885b1a52d6ea0ad91e41740b3ff"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "0f104d0b02ec66f3a22b3d1fc3888da3420d530baca8998801ba5a5163d2d489"
     },
     {
       "location": "prepared",

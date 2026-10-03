@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "veritate-arrival.webp",
+      "bytes": 16876,
+      "sha256": "3b0a3ec40d59d96699deb916fd18921ede6b283bdd3fc076e2d18dfaf2d7e01e"
+    },
+    {
+      "location": "public",
+      "filename": "veritate-billboard.webp",
+      "bytes": 2956,
+      "sha256": "0fdc327b52eeec9710d1607ce203152a8d015b9e0a482138dd87de502b5f3f2c"
+    },
+    {
+      "location": "public",
       "filename": "veritate-dataset-color.webp",
       "bytes": 44,
       "sha256": "b6c648b09d01d020a95c1f050ef5c975f63abc333b804359ecdf1cda0e0b0951"
@@ -18,6 +30,12 @@
       "filename": "veritate-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "3046824f57f41fcbd7f6792f4c06f7a750725f815458cfb947219b95bf8135fc"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "d40c767e3786ddb6db4cee8b481720798362d296698dc4859624295c2ab90239"
     },
     {
       "location": "prepared",

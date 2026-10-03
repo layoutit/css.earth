@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "irena-arrival.webp",
+      "bytes": 27578,
+      "sha256": "8e2e776398401d2315f0b8ede892862a83cfd8eb98c1468cac36b84d74e0f1a5"
+    },
+    {
+      "location": "public",
+      "filename": "irena-billboard.webp",
+      "bytes": 4848,
+      "sha256": "7f153855ecfe26195e8ab47af006d9c27670f44931c19d8c0c029be047f36515"
+    },
+    {
+      "location": "public",
       "filename": "irena-dataset-color.webp",
       "bytes": 44,
       "sha256": "1abd50819fb55d4efd9dbd29c514d14dade50c59db701da9f5b96975b085f6c8"
@@ -24,6 +36,12 @@
       "filename": "irena-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "8a46f3ca2775ee6eba61b16305b0c7d291e6ce89764208ff326946a644c2dbe8"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "da8e93ae107d380cbd207ad8034eceecb9bafe3c47c5a0dd615c3068b8816b4b"
     },
     {
       "location": "prepared",

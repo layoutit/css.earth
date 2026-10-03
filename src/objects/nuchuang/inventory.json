@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nuchuang-arrival.webp",
+      "bytes": 17910,
+      "sha256": "f274629915aab620fb0c34be1ada6698ef37a7933395c9ca455e3ae8453ddb23"
+    },
+    {
+      "location": "public",
+      "filename": "nuchuang-billboard.webp",
+      "bytes": 3278,
+      "sha256": "e0ee8cae9d3eabaeaa3571a68c80f96617de9350e9e79ea47b9711d80c570189"
+    },
+    {
+      "location": "public",
       "filename": "nuchuang-dataset-color.webp",
       "bytes": 44,
       "sha256": "2077f7e9ef55bda0562560ca68c0cd28466980d85062f77e27547141109ccc00"
@@ -18,6 +30,12 @@
       "filename": "nuchuang-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "04989c07ea853b00809b70a7496105d1991dc51843d7f5d2f49d2dbcc9a65f4b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "6ae5b551ab1b66d42a9e2057de66e59f6a10005b3f65553351143784346bed2b"
     },
     {
       "location": "prepared",

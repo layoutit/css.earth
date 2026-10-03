@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kulou-arrival.webp",
+      "bytes": 17302,
+      "sha256": "c2d25143f5058ae94d6d57106d9a6d2dda521e9eb4ad849d5cd769aac632e905"
+    },
+    {
+      "location": "public",
+      "filename": "kulou-billboard.webp",
+      "bytes": 3050,
+      "sha256": "d1180ada1ae7686be278ba4d74927442ad1222fd5628971be374362699661cd8"
+    },
+    {
+      "location": "public",
       "filename": "kulou-dataset-color.webp",
       "bytes": 44,
       "sha256": "efa9657d2ba61ac762ef9f6391ae98ad6d0e07bc57b24b4b6d3fb5d026e71171"
@@ -18,6 +30,12 @@
       "filename": "kulou-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "afd5f5cd104c0510058095b634ddfc3da620abd2ed9245853089ff08d66238dc"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 275,
+      "sha256": "6ab3683e4328888272faaca14884093994dbc0bc48ffe59029d29fec8944e341"
     },
     {
       "location": "prepared",

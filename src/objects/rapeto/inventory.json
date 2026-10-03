@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "rapeto-arrival.webp",
+      "bytes": 27422,
+      "sha256": "b77e00401e0b3d81ab4e14bf54d78a3d1a6671477428365f48fcc422255906c5"
+    },
+    {
+      "location": "public",
+      "filename": "rapeto-billboard.webp",
+      "bytes": 4790,
+      "sha256": "d2f63e05f2d835315134a15ac8f1eab518c2885e28547ccfa537175bf8795217"
+    },
+    {
+      "location": "public",
       "filename": "rapeto-dataset-color.webp",
       "bytes": 44,
       "sha256": "5ba30029210642dd97f3af57d8768cf98758287e4c392748fa8da7707be8674a"
@@ -24,6 +36,12 @@
       "filename": "rapeto-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "bdf2e55bb87fb0224b2814193095d77e3fbe97d10cda0f29967c772607554f2c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "c95687d0eb87f36f7eff523bcb9c7d16d14216076153043da98aeb1f3d0f331a"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alcyone-arrival.webp",
+      "bytes": 17444,
+      "sha256": "1c5507cd0f01e712a33d04d5c524dacacdf56dc89485bca37600170e2a211321"
+    },
+    {
+      "location": "public",
+      "filename": "alcyone-billboard.webp",
+      "bytes": 3116,
+      "sha256": "223b06549473d29b1150e44c3c0c54b313c83576c0ff1c5bf4722efe4d74e813"
+    },
+    {
+      "location": "public",
       "filename": "alcyone-dataset-color.webp",
       "bytes": 44,
       "sha256": "9a660bb606ed83a2730787efa7a5a3abf1fd6b0f3d3281f1520e93ffd35435e7"
@@ -18,6 +30,12 @@
       "filename": "alcyone-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f958a950fcff8607b88bb3db86ab4d893533d0ae7fcfa4a94a3705992bd709ca"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 344,
+      "sha256": "80965974b5d2d28c45c922b0a2141c2eb114347d59bf8fe4c4b7fd11868e0ca5"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "stribor-arrival.webp",
+      "bytes": 27212,
+      "sha256": "cc1c39edcbdd6300a29403f7be8c1efa3a1666702c7ced43d359b7b7c4767748"
+    },
+    {
+      "location": "public",
+      "filename": "stribor-billboard.webp",
+      "bytes": 4796,
+      "sha256": "0f545cc74c1b6ce1db7b8945a0fbe3d150ee8b2775cddfbc501fea8c5d90c73c"
+    },
+    {
+      "location": "public",
       "filename": "stribor-dataset-color.webp",
       "bytes": 44,
       "sha256": "6a41f420632463312b4dc0a9b253d9bb6b724900f1be2c47ca3f668c4db5bfb7"
@@ -24,6 +36,12 @@
       "filename": "stribor-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "cf2119139a19e94ea27c376bbbb12f27125cb1e43ddc8761cc4558d8f2c5ee8e"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 380,
+      "sha256": "bff229ca2e546a76dab94ad954e033ff999ff5cee6a72eb27763a7f9261147b6"
     },
     {
       "location": "prepared",

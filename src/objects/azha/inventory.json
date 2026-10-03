@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "azha-arrival.webp",
+      "bytes": 17194,
+      "sha256": "8af3a14d556db0a1c129f74adfcc19285b830f71e7f94c8b375d55676e31c3c2"
+    },
+    {
+      "location": "public",
+      "filename": "azha-billboard.webp",
+      "bytes": 3072,
+      "sha256": "e049ccb6136fe616e7055a2d1777382b4ca65eb0b869b3fec369f8b04117aa93"
+    },
+    {
+      "location": "public",
       "filename": "azha-dataset-color.webp",
       "bytes": 44,
       "sha256": "e4f7eba0565e9c6806fbe88b69bbea19829b1897733bd1ae4f8973d366f9ff06"
@@ -18,6 +30,12 @@
       "filename": "azha-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2461484618c48ef1d4d29004eb669692b59096498079276b9c6415e13206d6a2"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "b6d4de676944135beb108c0d8de1d12ec1326ad7f354d38788f5f952f660614a"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "adhafera-arrival.webp",
+      "bytes": 16318,
+      "sha256": "9a1bda630b4197b88f9d8cab0f723739d590379699e625ccd405531a19d128d1"
+    },
+    {
+      "location": "public",
+      "filename": "adhafera-billboard.webp",
+      "bytes": 2748,
+      "sha256": "0b60c442914814daee9e13c8e1d07c497bfbedf3305967024cff0c738a8c101a"
+    },
+    {
+      "location": "public",
       "filename": "adhafera-dataset-color.webp",
       "bytes": 44,
       "sha256": "6ba0e0f9dce5dec0bd7ca941f1927494110939bf215965bd94c8757881d67ed0"
@@ -18,6 +30,12 @@
       "filename": "adhafera-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "6c769bae1184a8da630ddcf7300d767d6d2f3bafbf91f8d329a2ee970609f55a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "9f7da6da1cd0aed9266198a5115d3374a9ad8e131875944c4ac24fe76111d745"
     },
     {
       "location": "prepared",

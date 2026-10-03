@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "shama-arrival.webp",
+      "bytes": 27974,
+      "sha256": "f3b21270c5184261ba459fce769724cb9957f34ae4db8d6d06808c9a67c61f3c"
+    },
+    {
+      "location": "public",
+      "filename": "shama-billboard.webp",
+      "bytes": 4964,
+      "sha256": "e4a2b7c1dfe8efec22c4ddf578546867ffd24cb99ecf0f638a19b457732de47b"
+    },
+    {
+      "location": "public",
       "filename": "shama-dataset-color.webp",
       "bytes": 44,
       "sha256": "9181b6560ec7aa0a9cd6567a055dfd283d54dd4c9150dcde55d585def242c07a"
@@ -24,6 +36,12 @@
       "filename": "shama-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f15b643efccc2f58d32c2baa6307e599492ce8ded896a02ccb08674d3d5aab22"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "b46818e2bd3e340cb009f0fd0a01d3b05414bf602e2a66c96603d0161aa6d991"
     },
     {
       "location": "prepared",

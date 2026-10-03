@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "udkadua-arrival.webp",
+      "bytes": 17122,
+      "sha256": "ea472f7a7eb729df17a0d9318ff6dc7141ce00d3e50cd4046353ab75cb9054a1"
+    },
+    {
+      "location": "public",
+      "filename": "udkadua-billboard.webp",
+      "bytes": 3010,
+      "sha256": "238e7859cac7b66601a3ea6d3ec029e423409be8a66ca66c7b75f5572dc75cc2"
+    },
+    {
+      "location": "public",
       "filename": "udkadua-dataset-color.webp",
       "bytes": 44,
       "sha256": "1769544fc1cb5b50827a1d4f208b12757fdf258643c51bd8a03762ff06eff173"
@@ -18,6 +30,12 @@
       "filename": "udkadua-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "53cb97e6def9fbb335a33444095f5b14cf57f237543bb31ea92de6cfa6564a23"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "95bc90d743f4dbf618eb92dc46623acb53215bce94bb16d064b10399fd507378"
     },
     {
       "location": "prepared",

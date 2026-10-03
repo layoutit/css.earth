@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "atria-arrival.webp",
+      "bytes": 17836,
+      "sha256": "8bb27c9203c5b9b0d427baba0dfeacb5f03d66ddbd45ae503307d327cca22f9a"
+    },
+    {
+      "location": "public",
+      "filename": "atria-billboard.webp",
+      "bytes": 3268,
+      "sha256": "735b63b16799a63d3370daab885f7bea12b2a8083ca228c77a92934b8a60eeff"
+    },
+    {
+      "location": "public",
       "filename": "atria-dataset-color.webp",
       "bytes": 44,
       "sha256": "4144a09f8de23a0bf18fabd4046005da78e96af824540d76fbf525c27e6f2a5a"
@@ -18,6 +30,12 @@
       "filename": "atria-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "df808467f9d0b0b34ec85288e94e004677f3c5fefd5fc2700bebfbd77dc6d4a3"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "d46b1cda65492b9d20123e05d8d209516144082a0d7f90a69c5e11716073fab6"
     },
     {
       "location": "prepared",

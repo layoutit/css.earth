@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "rukbat-arrival.webp",
+      "bytes": 17628,
+      "sha256": "7f3af256fd08a7c67741a5928e2b260ae125afa3e553a1d2258a5b9a7961196b"
+    },
+    {
+      "location": "public",
+      "filename": "rukbat-billboard.webp",
+      "bytes": 3106,
+      "sha256": "68596490b8e44f9205bddfd9594a9b49d798ad6c7b9b74ca02349ea93ddce556"
+    },
+    {
+      "location": "public",
       "filename": "rukbat-dataset-color.webp",
       "bytes": 44,
       "sha256": "57d657aaecbb0329ed8c65d197026d1540c8c71e1d69b29d1eb53416ea021536"
@@ -18,6 +30,12 @@
       "filename": "rukbat-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "01f90e92e94dde877186498de3ec93b9ac7eec1321b37fd478e67db3330fb08c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "9b98ad0a4c016aef0ed4f14cb71d515307310660800d0445d3dd5f1c6d12c947"
     },
     {
       "location": "prepared",

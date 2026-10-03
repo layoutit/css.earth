@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bibha-arrival.webp",
+      "bytes": 27218,
+      "sha256": "5f1e1f44851d741005563a5ec12cbf3614a0e2ebf4a4925ad080997eabec63ac"
+    },
+    {
+      "location": "public",
+      "filename": "bibha-billboard.webp",
+      "bytes": 4806,
+      "sha256": "405c07a9ee6a3118e25365cbefb135358dafc2cd4f6b7689e2eee7bb16092003"
+    },
+    {
+      "location": "public",
       "filename": "bibha-dataset-color.webp",
       "bytes": 44,
       "sha256": "6a41f420632463312b4dc0a9b253d9bb6b724900f1be2c47ca3f668c4db5bfb7"
@@ -24,6 +36,12 @@
       "filename": "bibha-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "cf2119139a19e94ea27c376bbbb12f27125cb1e43ddc8761cc4558d8f2c5ee8e"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 367,
+      "sha256": "6bd0f7ded8edc79989b8e01284d21da90b56993ddf76f1663b648483df9b074a"
     },
     {
       "location": "prepared",

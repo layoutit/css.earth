@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hru-arrival.webp",
+      "bytes": 27854,
+      "sha256": "60c0615fe5b80e07e98c013c49ae0093cc756e943c88dc7bae23701ce7cafd12"
+    },
+    {
+      "location": "public",
+      "filename": "hru-billboard.webp",
+      "bytes": 5104,
+      "sha256": "4f123a889f8ab08a1d48fee0e683b1e1b91b85e1f368938e1c62c1b1a9bb1edf"
+    },
+    {
+      "location": "public",
       "filename": "hru-dataset-color.webp",
       "bytes": 44,
       "sha256": "46d5a5323dca80db638589481f78e7fed2a5b731bbbc4fcb06ce1bcb41f0f65f"
@@ -24,6 +36,12 @@
       "filename": "hru-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f153d6a856054e35a739c1e0a925f3de964070fe80ed02b29cdb78071cede290"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 369,
+      "sha256": "711a7d26a5fe0c56980778f0a515993ce7fcf6b6bc38e95ae6262475db83c96a"
     },
     {
       "location": "prepared",

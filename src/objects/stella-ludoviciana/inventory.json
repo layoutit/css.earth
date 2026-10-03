@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "stella-ludoviciana-arrival.webp",
+      "bytes": 27084,
+      "sha256": "e4f362bad841dbd889656e61cae8e63b28a0715d83ad61a5980d74fe3d2b37bb"
+    },
+    {
+      "location": "public",
+      "filename": "stella-ludoviciana-billboard.webp",
+      "bytes": 4776,
+      "sha256": "d667bd32affd032dbc8ea0069e5a26e927f3f5c876767aed3082e19af85bb766"
+    },
+    {
+      "location": "public",
       "filename": "stella-ludoviciana-dataset-color.webp",
       "bytes": 44,
       "sha256": "c50b8a75c6a16f3312d4e87cec951541a1b0ecd628928f1d3b26978d76a37048"
@@ -24,6 +36,12 @@
       "filename": "stella-ludoviciana-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "c5b5c42e32dd8a3156df0e7cf151e7464104f28017a3264a43e5d0ffe12224c0"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 391,
+      "sha256": "70e839e43606d33d01cd06d5c5bcbb0acd622a0884a3b8ebd18583a4c1e6adec"
     },
     {
       "location": "prepared",

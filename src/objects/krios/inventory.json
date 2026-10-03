@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "krios-arrival.webp",
+      "bytes": 27546,
+      "sha256": "e749fd4a114f8ce9f2ea883aa8870897e325cd24aa36721c2d843aed204a641d"
+    },
+    {
+      "location": "public",
+      "filename": "krios-billboard.webp",
+      "bytes": 4870,
+      "sha256": "7d4a3ef7e8fd138b27437503c5ae923ce7a87a0b76a61bd8d49e1e891cddcd45"
+    },
+    {
+      "location": "public",
       "filename": "krios-dataset-color.webp",
       "bytes": 44,
       "sha256": "e74eed3c8a32541d4137f6b3da94ec8c98928af3043631832dd728d1c543acd4"
@@ -24,6 +36,12 @@
       "filename": "krios-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f8957ddd115385497c9b54d85c3620a6d835f999c1e452e66e8839e0665bd69b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "5d0b0ff21e7b9123c5ecd87e2b9ba3b5e53c419e96a1986e519ad21e702e273c"
     },
     {
       "location": "prepared",

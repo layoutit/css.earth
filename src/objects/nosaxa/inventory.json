@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nosaxa-arrival.webp",
+      "bytes": 14882,
+      "sha256": "37d15fc1e4bb2189ed7aab1987c5339d322d17a71627eab6f071dae5e447e4ff"
+    },
+    {
+      "location": "public",
+      "filename": "nosaxa-billboard.webp",
+      "bytes": 2576,
+      "sha256": "dcac38959241fff1e73f5c67de1f0a68293b67c25c9f4788c4b6b38c4bcc122c"
+    },
+    {
+      "location": "public",
       "filename": "nosaxa-dataset-color.webp",
       "bytes": 44,
       "sha256": "0d429b584d272676250acc89de13be42f3ba2b55b34f1dba4ab9fefec9ba8073"
@@ -18,6 +30,12 @@
       "filename": "nosaxa-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "80f5a0d13a54c613d987a30e9beceee2cd3e89a8998ec46128bb78c4fcb36741"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "fb17b9f477ea4140caae7166ebeffd83b9a6b243da3310fa8a50e7e51ca5c630"
     },
     {
       "location": "prepared",

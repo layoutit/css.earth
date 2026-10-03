@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "torcular-arrival.webp",
+      "bytes": 16322,
+      "sha256": "c6d50026608d324ae39598c84a7ee3ac641565c5f7e360fdd627a17d36503e8e"
+    },
+    {
+      "location": "public",
+      "filename": "torcular-billboard.webp",
+      "bytes": 2864,
+      "sha256": "83d2718bcf052a5e2bcb1739cd147fcee387e40cddbbd3d4158852b038fcf1f4"
+    },
+    {
+      "location": "public",
       "filename": "torcular-dataset-color.webp",
       "bytes": 44,
       "sha256": "c4d00ec321e95c0845dab993a914d9aac181f095a659c6f3f3df457ce7ecec3f"
@@ -18,6 +30,12 @@
       "filename": "torcular-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "18ebf8e2ec424ba4925c17429c1e96c4599332b94aef3173fd2cc352bd0fd1ec"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "7eb66bd862a50789ccac2f7f70efa2467166e5a1eaadeaafab4c06f2daaf2708"
     },
     {
       "location": "prepared",

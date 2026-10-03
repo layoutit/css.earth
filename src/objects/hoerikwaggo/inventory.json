@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hoerikwaggo-arrival.webp",
+      "bytes": 27796,
+      "sha256": "22e862c9b9b0bcf867e1cb319fc8042a713985aa8347b85739199a568e9b70f6"
+    },
+    {
+      "location": "public",
+      "filename": "hoerikwaggo-billboard.webp",
+      "bytes": 4938,
+      "sha256": "8ee7a6e1e1cd7e6cb282ff736220b1e4ff8cf096f8a83aa4a53aaeb2a2fe01df"
+    },
+    {
+      "location": "public",
       "filename": "hoerikwaggo-dataset-color.webp",
       "bytes": 44,
       "sha256": "c164fa31c6445a54ddf7e80fce6e708763fec8be1227de02f5ff16daf5c5d28e"
@@ -24,6 +36,12 @@
       "filename": "hoerikwaggo-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "45eade3007c172efe0ed5b1a207f08ba952cb2bd81ff70eeef179a03db3115cc"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 386,
+      "sha256": "4da1af1ebc856f4b9ca48184c5e403a2c01772c640d1a4d078ba03a1cd2a10a0"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tianyi-arrival.webp",
+      "bytes": 18062,
+      "sha256": "5a58f544f18ff404af565616dc6e00b9083d1a4cd76ab7a707bf45d98c1d7ad1"
+    },
+    {
+      "location": "public",
+      "filename": "tianyi-billboard.webp",
+      "bytes": 3312,
+      "sha256": "aed855d9e812e5ae9d417977e15aad65b3ceaa6e79fea7435eae2401dd387093"
+    },
+    {
+      "location": "public",
       "filename": "tianyi-dataset-color.webp",
       "bytes": 44,
       "sha256": "30ef24ff993d980045ab80e13955922e04720de016581d2547edec108d3925a0"
@@ -18,6 +30,12 @@
       "filename": "tianyi-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "7acd0aaaa1e49b51fdeaf54a33be69fe7904cc0a3ceaa4290e30adddc187d6b2"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "cc91b548b8b1fbc6b84308d968b9d8be0481c9404472b1e0f2ac6a31934493cb"
     },
     {
       "location": "prepared",

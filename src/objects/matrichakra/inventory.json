@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "matrichakra-arrival.webp",
+      "bytes": 15614,
+      "sha256": "9a97f2052e6970213450d126071cb24b0b7669007dba7fd5a2112eb4b48748de"
+    },
+    {
+      "location": "public",
+      "filename": "matrichakra-billboard.webp",
+      "bytes": 2716,
+      "sha256": "17c101eb31a01349b1e8515ad3623fcb89e5d9d0101fdf74772b2139c20b3500"
+    },
+    {
+      "location": "public",
       "filename": "matrichakra-dataset-color.webp",
       "bytes": 44,
       "sha256": "432d536f28297b19e682b4e7aa9c493a072dad44264e41922a33bea8f779a0cc"
@@ -18,6 +30,12 @@
       "filename": "matrichakra-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2aae2414b6b11bccb313b217f1dcaf503343ad6cc1b02ad9b1426b4ac18433f2"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 388,
+      "sha256": "3ab9ec2fb5d9362e31620195b0c45203b09af4275416ce74189b241173b0964f"
     },
     {
       "location": "prepared",

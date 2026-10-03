@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "gumala-arrival.webp",
+      "bytes": 27588,
+      "sha256": "111c1a457ef94540a2c31838c95d5ab4c85217e0d76b76a8844abec7f6babc8f"
+    },
+    {
+      "location": "public",
+      "filename": "gumala-billboard.webp",
+      "bytes": 4842,
+      "sha256": "bc18c74f30056d1d51a86e663c80dc11831565f9cc687ce115ace2f849aa6e55"
+    },
+    {
+      "location": "public",
       "filename": "gumala-dataset-color.webp",
       "bytes": 44,
       "sha256": "1abd50819fb55d4efd9dbd29c514d14dade50c59db701da9f5b96975b085f6c8"
@@ -24,6 +36,12 @@
       "filename": "gumala-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "8a46f3ca2775ee6eba61b16305b0c7d291e6ce89764208ff326946a644c2dbe8"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "7e2bbcaee3bf965fedfecd76a625ff5801a4631ec81552eb7d88b07285f2b231"
     },
     {
       "location": "prepared",

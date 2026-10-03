@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kamuy-arrival.webp",
+      "bytes": 28144,
+      "sha256": "8383cf0a74f3dbd9a8f21b2f7f10c88d8d53ab7031608a8e9c8175ce0766b44c"
+    },
+    {
+      "location": "public",
+      "filename": "kamuy-billboard.webp",
+      "bytes": 5026,
+      "sha256": "554e03d803d998326e186af6074d4926e9deecda1f93ad4ceb9050da109fe294"
+    },
+    {
+      "location": "public",
       "filename": "kamuy-dataset-color.webp",
       "bytes": 44,
       "sha256": "1e9e96dc373b9ddbee27bade69423b25029a8fd8260d5ddeb05d4a37924b6491"
@@ -24,6 +36,12 @@
       "filename": "kamuy-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "425483b3db54d8521d9acae0d984268798aa1099432656441bb260f621347c81"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "9cc14a9903a65a41ecae48aa4b0b0b2166afc7a48713b0057ec8a3da3dbc5640"
     },
     {
       "location": "prepared",

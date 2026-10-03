@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nenque-arrival.webp",
+      "bytes": 27386,
+      "sha256": "bb1ba2a9e5460599c294e8808c8f1c45070c76de3ef03ea1bbd071797510112c"
+    },
+    {
+      "location": "public",
+      "filename": "nenque-billboard.webp",
+      "bytes": 4862,
+      "sha256": "faf013c154da1814990a561f73ec3a26ec57772fd026658d98b5b31fbea0dd2b"
+    },
+    {
+      "location": "public",
       "filename": "nenque-dataset-color.webp",
       "bytes": 44,
       "sha256": "e74eed3c8a32541d4137f6b3da94ec8c98928af3043631832dd728d1c543acd4"
@@ -24,6 +36,12 @@
       "filename": "nenque-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f8957ddd115385497c9b54d85c3620a6d835f999c1e452e66e8839e0665bd69b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "e54341dce4d292698c8810468687221efaafcc6bd71d502fe23dfed58582e13d"
     },
     {
       "location": "prepared",

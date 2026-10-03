@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "arkab-posterior-arrival.webp",
+      "bytes": 13546,
+      "sha256": "d9c39accded0fa8ea25e137232ea3a2b5dffaee27b9278fc65c7879a7d37a5dc"
+    },
+    {
+      "location": "public",
+      "filename": "arkab-posterior-billboard.webp",
+      "bytes": 2376,
+      "sha256": "b43f28f69e1645fc78e62adead1af95f517e45fa6baf0f55f6a86a50029f47f1"
+    },
+    {
+      "location": "public",
       "filename": "arkab-posterior-dataset-color.webp",
       "bytes": 44,
       "sha256": "a5f302368256b7251cedd3ad086fb0268e3188b25e3afdf7b747982b32a4b8e3"
@@ -18,6 +30,12 @@
       "filename": "arkab-posterior-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "c89b21d8c0725d7dd13bb12a4fa8239d487d9d447a9f1af71a27f24cc8a45afb"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 396,
+      "sha256": "ee3ffd14efc3387dabc268efda1bb9271006741aa47cbb757b9f0ab378a65e3a"
     },
     {
       "location": "prepared",

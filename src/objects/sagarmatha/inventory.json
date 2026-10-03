@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sagarmatha-arrival.webp",
+      "bytes": 15882,
+      "sha256": "71e0a5b33d4ca242337e54484140193e933c075e0ab3a1d4679624eb621cb97b"
+    },
+    {
+      "location": "public",
+      "filename": "sagarmatha-billboard.webp",
+      "bytes": 2732,
+      "sha256": "dcb6cdfced3c5855e648a3bca55cdc284cb20ea58d8374fcf2d8841a1c8ccfd6"
+    },
+    {
+      "location": "public",
       "filename": "sagarmatha-dataset-color.webp",
       "bytes": 44,
       "sha256": "1b0fbcff45d787397152be4c66ab95cbed841f6c23f59eb1d796766bc8a04d04"
@@ -18,6 +30,12 @@
       "filename": "sagarmatha-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "23626536d26ff52e9e39ea3ce1be664dc59ec928876a5d486275277e27432280"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 385,
+      "sha256": "1861c0ae94216dc6546a9ca20753099c0a9b8246bf46a2e54c572b1f2242e972"
     },
     {
       "location": "prepared",

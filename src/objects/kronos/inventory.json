@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kronos-arrival.webp",
+      "bytes": 27558,
+      "sha256": "6fbf11a0c905e98f200689165ced540ff2effb3cb6c205adb6a135e09d771b5d"
+    },
+    {
+      "location": "public",
+      "filename": "kronos-billboard.webp",
+      "bytes": 4836,
+      "sha256": "11caa0d8156b69f0e1d25355ea58463d29f6cc6821bf30033d0b9f60c1485011"
+    },
+    {
+      "location": "public",
       "filename": "kronos-dataset-color.webp",
       "bytes": 44,
       "sha256": "0f64ec3c87292c6619e3a78eeb196e694dfaaf9b83042b28c46a26666d4c7e83"
@@ -24,6 +36,12 @@
       "filename": "kronos-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "1b1078701e8896cedcd7348137299096a4253d62c1e25fa621e18587d9728401"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "df09953583171ea5e440d8a8a5f6e1e36c6a33023f473e73e68bb94b3900e500"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "uruk-arrival.webp",
+      "bytes": 27622,
+      "sha256": "c7f030eb2f6de448e6fceb09eec6f73c756fcaabe38ee8abd58da0902e1026f6"
+    },
+    {
+      "location": "public",
+      "filename": "uruk-billboard.webp",
+      "bytes": 4832,
+      "sha256": "f028112993b2efd2f83cfc3d6ef02c2a96051e1f805bead52fb9719b46182aaf"
+    },
+    {
+      "location": "public",
       "filename": "uruk-dataset-color.webp",
       "bytes": 44,
       "sha256": "1abd50819fb55d4efd9dbd29c514d14dade50c59db701da9f5b96975b085f6c8"
@@ -24,6 +36,12 @@
       "filename": "uruk-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "8a46f3ca2775ee6eba61b16305b0c7d291e6ce89764208ff326946a644c2dbe8"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 365,
+      "sha256": "81f8e22b1d0b53ff77ab6e9e1cb6bb61e777fe2fe9cea3b2e6b973067ec88234"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "intercrus-arrival.webp",
+      "bytes": 28132,
+      "sha256": "1198f5a93ad8b8b5ce5ea65374320da23626b21b214e2a1c5bed908c6f86b57c"
+    },
+    {
+      "location": "public",
+      "filename": "intercrus-billboard.webp",
+      "bytes": 4976,
+      "sha256": "3aebbe680658163f29bf74219f68a3ead81eac7bea213d573563de69f7246c44"
+    },
+    {
+      "location": "public",
       "filename": "intercrus-dataset-color.webp",
       "bytes": 44,
       "sha256": "e517196e065e672770db9200e583a247c635ec51f3a8153da74d5036873cdfa4"
@@ -24,6 +36,12 @@
       "filename": "intercrus-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2faa55da86f73503efd7ec26c5c2f7d9d0b994f82c0b82cc387fd6ac87ce591a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 384,
+      "sha256": "7fa10804939781ad805662983cfafb21977356bddc701be7cb371240f9e383d6"
     },
     {
       "location": "prepared",

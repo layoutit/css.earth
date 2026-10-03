@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "taiyi-arrival.webp",
+      "bytes": 27610,
+      "sha256": "a14e5a355154c772feea025f035085bdc5bd69814d99fcf6d151ba87fec8c0db"
+    },
+    {
+      "location": "public",
+      "filename": "taiyi-billboard.webp",
+      "bytes": 4820,
+      "sha256": "f038998616a8b1531521d0f6393d984e441a72983bd2845d2b8534e871229159"
+    },
+    {
+      "location": "public",
       "filename": "taiyi-dataset-color.webp",
       "bytes": 44,
       "sha256": "f1bad1b8cce6671151e6d4a2ad68142c1508dcfaa6308c683347ee2255ba823c"
@@ -24,6 +36,12 @@
       "filename": "taiyi-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "bb70043694061b6928e953fb8cda7cc3219f62124a3eb8897896bc9a1444f18b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "dede58f0ea84a678708e5f285e4e67a34f7d567cec311adbfac0d92737cc6613"
     },
     {
       "location": "prepared",

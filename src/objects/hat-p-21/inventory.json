@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hat-p-21-arrival.webp",
+      "bytes": 27334,
+      "sha256": "bcef3021481b7d96db3ad7f57783e3075398d586913d5c1330c109eeec43dbb1"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-21-billboard.webp",
+      "bytes": 4812,
+      "sha256": "224ac7c6c09cd6af91148afad4aac25be922277a215095f292df15e98b540ab6"
+    },
+    {
+      "location": "public",
       "filename": "hat-p-21-dataset-color.webp",
       "bytes": 44,
       "sha256": "f98a081e6618fe5d913d4c1989881dce601ea0d9917c05c8eeae1bc293e91e55"
@@ -24,6 +36,12 @@
       "filename": "hat-p-21-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "ef7a32b04167c8d276a178eeb5e38e103daaa77f9557c827dce67b0d379be7e2"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "92055bbaef6577a66e0fd31832c74c1cf761a5bf94fd8e3f281bfe36c107923a"
     },
     {
       "location": "prepared",

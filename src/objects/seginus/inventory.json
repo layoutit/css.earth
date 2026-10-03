@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "seginus-arrival.webp",
+      "bytes": 16906,
+      "sha256": "305456c9457f5966f0979b2e6ecaeb83baef887682d25f9f7c83b3c77dd116a0"
+    },
+    {
+      "location": "public",
+      "filename": "seginus-billboard.webp",
+      "bytes": 2882,
+      "sha256": "8e0129f7728de76035b6fdbba4860b64e31d7538586472e64e7fd881dce476c1"
+    },
+    {
+      "location": "public",
       "filename": "seginus-dataset-color.webp",
       "bytes": 44,
       "sha256": "13ba2b8d893ff64ea891fe316893227032bf8db0defec6166b3c4aecc573464f"
@@ -18,6 +30,12 @@
       "filename": "seginus-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "ff6169275e5c8bffaf3e0fa464b2c3cd4a84fe91859aca574c996ea092aefafe"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "26784640508abb069de7bf99a259dbe1b9d472dd298125010d21fed0d900c8d3"
     },
     {
       "location": "prepared",

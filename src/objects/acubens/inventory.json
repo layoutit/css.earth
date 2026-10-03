@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "acubens-arrival.webp",
+      "bytes": 17466,
+      "sha256": "f03431ea102bf083f510f436f579714ed7b8ac2a2c9a1fd28f556a59fdf2878e"
+    },
+    {
+      "location": "public",
+      "filename": "acubens-billboard.webp",
+      "bytes": 3012,
+      "sha256": "9a7a58f1966bf0966fe96191f6bc5397f29a2e86837f0510e6fad3b4ddd93e6e"
+    },
+    {
+      "location": "public",
       "filename": "acubens-dataset-color.webp",
       "bytes": 44,
       "sha256": "801c58ee2187f7df4fdf373617fbd1e02b6b1661ad7ec3c5d3640786d329ee6c"
@@ -18,6 +30,12 @@
       "filename": "acubens-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "21c780c72806bbeb5e093781235a13eece8b119fb6f34583f345d29e4b388348"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 380,
+      "sha256": "334961e30ffe5d0ec2e788cabba539dba4f534ba136f0ff0baa4abd5259fee7e"
     },
     {
       "location": "prepared",

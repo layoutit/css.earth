@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kenemu-arrival.webp",
+      "bytes": 16410,
+      "sha256": "0b2afd5cfe9cd22bbee738d7b39be55d082e422ef3bc37efd57b85043d3595bf"
+    },
+    {
+      "location": "public",
+      "filename": "kenemu-billboard.webp",
+      "bytes": 2802,
+      "sha256": "ccdb1879e7b73549eb6dc07c2525f189a6eaf3fc9ff633995217938d4ac15c4d"
+    },
+    {
+      "location": "public",
       "filename": "kenemu-dataset-color.webp",
       "bytes": 44,
       "sha256": "d691a4e24ef772634d887173efc20908c5981439a50bada19f5865acf6cea341"
@@ -18,6 +30,12 @@
       "filename": "kenemu-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "cc8e28676d042b23082206fe52638614b3dc3894267d60914edea4c8081a10fe"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "49f74beb734bd71c549db437e2bd05aa44b76c3b4e02012c1cd6a7f4031d0698"
     },
     {
       "location": "prepared",

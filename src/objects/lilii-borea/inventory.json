@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lilii-borea-arrival.webp",
+      "bytes": 17014,
+      "sha256": "2a746975fba8354055f55802b18f132a6f98c896ede654bc361a516d86f12805"
+    },
+    {
+      "location": "public",
+      "filename": "lilii-borea-billboard.webp",
+      "bytes": 3020,
+      "sha256": "321ab3a8453d6502760fbd5263e63888a2ba162aeb15eefa883768df77861ccc"
+    },
+    {
+      "location": "public",
       "filename": "lilii-borea-dataset-color.webp",
       "bytes": 44,
       "sha256": "c1aa2c5f318d50c4e30cbecf60c55abf2e546bd3ec79c6cf2e450b40fed56911"
@@ -18,6 +30,12 @@
       "filename": "lilii-borea-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "537583b450fab96ee22fccb02c0567a9d475470ede75ae56bc01d7df4fc3f7b5"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 385,
+      "sha256": "b8c810aea6b68e92e59d1ae378b343d3c3dca6ef3710ac24ba1a3075ebf5f0fa"
     },
     {
       "location": "prepared",

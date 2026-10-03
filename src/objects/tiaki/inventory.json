@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tiaki-arrival.webp",
+      "bytes": 18134,
+      "sha256": "a1b192b9b2d39515a68a9fc3a1748fbd7c096aa539494f43549d61c131f6224c"
+    },
+    {
+      "location": "public",
+      "filename": "tiaki-billboard.webp",
+      "bytes": 3328,
+      "sha256": "93c8464b0e0dc525d701e82f0f83dca366585271805837b7664326afbf6a513a"
+    },
+    {
+      "location": "public",
       "filename": "tiaki-dataset-color.webp",
       "bytes": 44,
       "sha256": "33eb3256e49167623fbfa00b22f464cec033b8a6a5969480e9aef8103b2240f8"
@@ -18,6 +30,12 @@
       "filename": "tiaki-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "b34d48c03f21ee9bbfc4fd692f43c0dfcb3721bc55bc927af682fb522343053b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 370,
+      "sha256": "c0b2ff1ef6cbe9407d5b47bef96c933f3ee8a24274538909c6d14c5857ed03e9"
     },
     {
       "location": "prepared",

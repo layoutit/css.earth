@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tepiamenit-arrival.webp",
+      "bytes": 26968,
+      "sha256": "7c1a70faf83533e8ee5ef7e9fc3f71018309e7d96c05a7a98b49e74500bb6580"
+    },
+    {
+      "location": "public",
+      "filename": "tepiamenit-billboard.webp",
+      "bytes": 4736,
+      "sha256": "18b848bf7af81e1a5ed505dcc808b4141f51dede62e03e53c02ab8a1629bfe67"
+    },
+    {
+      "location": "public",
       "filename": "tepiamenit-dataset-color.webp",
       "bytes": 44,
       "sha256": "c84c6fc8b20449f07eda2e49ade2e509657bc9a9137f6465c2016b6410e9ad72"
@@ -24,6 +36,12 @@
       "filename": "tepiamenit-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "aeac041c11bb797712b5c7270c7ae5e268d121c6ff72f246e9406c56fa5887db"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 386,
+      "sha256": "3ef0f22815b9bd6cbcd0b7430316e783562f9f765777cf05137841e0e0f76ce5"
     },
     {
       "location": "prepared",

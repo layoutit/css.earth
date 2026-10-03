@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alasia-arrival.webp",
+      "bytes": 27474,
+      "sha256": "79cddd0255c10620ec76d7416cacdd34db52e6652bf637c44f1b0600f79c3df0"
+    },
+    {
+      "location": "public",
+      "filename": "alasia-billboard.webp",
+      "bytes": 4902,
+      "sha256": "4a49d8af970028bbdbd278651d3ea09fa9abc3bafbac6b7ac0e04d86f1eacc8c"
+    },
+    {
+      "location": "public",
       "filename": "alasia-dataset-color.webp",
       "bytes": 44,
       "sha256": "0c54153d54e8e05575a09688b173cc6433fd0996fc80df341891812948817aa8"
@@ -24,6 +36,12 @@
       "filename": "alasia-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2b35cf7abee669949a6133dd22ad8ce010fdeb15aaabef52bc0e3c490d4e985a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "c1c18a93120d8db8fd45a2639f273cbea22bbf6cbffd9659fe7a9d5596dc1b02"
     },
     {
       "location": "prepared",

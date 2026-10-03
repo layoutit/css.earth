@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "rosaliadecastro-arrival.webp",
+      "bytes": 27468,
+      "sha256": "58e0a192aef1747144cffcc5b02b0ca816e44199f7f7cd66a9e666e027aad215"
+    },
+    {
+      "location": "public",
+      "filename": "rosaliadecastro-billboard.webp",
+      "bytes": 4868,
+      "sha256": "db4664052a6af1807260d7caec65d912ed2070dbaae37b195940b1c3f8832f2f"
+    },
+    {
+      "location": "public",
       "filename": "rosaliadecastro-dataset-color.webp",
       "bytes": 44,
       "sha256": "ede0703448aa35be18b6092a480a2c6735c78412fc4d82364b352d1b667e58d7"
@@ -24,6 +36,12 @@
       "filename": "rosaliadecastro-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "b45087b8faec309df033e2ac643f7d394da01d632d33132e707d43274cbf7872"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 394,
+      "sha256": "8e75d7fb9eeacbd045c464ccb65e627fdc3cced11a260f4d99cd5533b7ef4d5d"
     },
     {
       "location": "prepared",

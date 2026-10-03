@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alruba-arrival.webp",
+      "bytes": 17470,
+      "sha256": "4efc7b7e6119d4071035a03b6bd0a2aa4912fdf1326c0e1e4def6e4de860478b"
+    },
+    {
+      "location": "public",
+      "filename": "alruba-billboard.webp",
+      "bytes": 3062,
+      "sha256": "7a33af23a161dc3f741c5160f10c838db5e26bf2e8232a4dca3d31694714fa9b"
+    },
+    {
+      "location": "public",
       "filename": "alruba-dataset-color.webp",
       "bytes": 44,
       "sha256": "c20acede2aee91e7fcc6493685d3732a8a256486fdf69651a7fd728695373428"
@@ -18,6 +30,12 @@
       "filename": "alruba-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2917146f7db784d43d9e38fba2841ac1c8276190a935573746fb03907023be01"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 368,
+      "sha256": "4a3e156a7dd88cf28aabbaefb7e2b41e53e3986b5998b270705ff7b64c25d003"
     },
     {
       "location": "prepared",

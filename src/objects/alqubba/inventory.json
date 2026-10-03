@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alqubba-arrival.webp",
+      "bytes": 17002,
+      "sha256": "2ffa445939c4f90c456053a6c531eb953a6457bb2e7bbe741d60eb3946c00402"
+    },
+    {
+      "location": "public",
+      "filename": "alqubba-billboard.webp",
+      "bytes": 2996,
+      "sha256": "8ea85461ce40d83aff3f9f0c4e82084462271ba90184024e8bea1efba28e072e"
+    },
+    {
+      "location": "public",
       "filename": "alqubba-dataset-color.webp",
       "bytes": 44,
       "sha256": "756a7e2af3baf86344bb1c47d9eaaa1c661041d99499664b97e3023f2fae7f21"
@@ -18,6 +30,12 @@
       "filename": "alqubba-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "73cca7773dc93d85ab4bf8b67f1b9941c4a04a4f45e00051cb49530717a7d1c0"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 383,
+      "sha256": "3ff8744a521e291ebba7f3ff5e4971df3d226a3df70ad16489dc442ba2e1f9b7"
     },
     {
       "location": "prepared",

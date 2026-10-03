@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "samaya-arrival.webp",
+      "bytes": 26966,
+      "sha256": "acf108d43574d7d8999862ea14552f0f6ff81e0043260b1fdd9eea395fed3a2f"
+    },
+    {
+      "location": "public",
+      "filename": "samaya-billboard.webp",
+      "bytes": 4748,
+      "sha256": "4acb7a6443333bc4b3ccc992c469c3f6fbfcf9ee7d43c8e42b3be3b44b0d852b"
+    },
+    {
+      "location": "public",
       "filename": "samaya-dataset-color.webp",
       "bytes": 44,
       "sha256": "0daca9cebcce063b950bea4ba5abceea636203f7cbcc49a76c180d4e8bbd1bed"
@@ -24,6 +36,12 @@
       "filename": "samaya-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "ca32576f48e1e02c369a418f4296c38d16cc3661b7ca6355aebf7f23b03a6ad6"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "9324aa7bef014180fa70ed61531ebd5894c61469b0a04e13df736ae4d4a42420"
     },
     {
       "location": "prepared",

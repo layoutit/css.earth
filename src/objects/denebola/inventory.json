@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "denebola-arrival.webp",
+      "bytes": 17396,
+      "sha256": "33900d002493192b16bc2147fc774e648f25eb2b629f8cf6b1da21c6009ad0e4"
+    },
+    {
+      "location": "public",
+      "filename": "denebola-billboard.webp",
+      "bytes": 2970,
+      "sha256": "63ffda60737ace885cd4221b1e8064a7f9e6cdd5bd0f0bde0364d42046d8a587"
+    },
+    {
+      "location": "public",
       "filename": "denebola-dataset-color.webp",
       "bytes": 44,
       "sha256": "2f574e6a9f1fad38bc86c05e7a1c983c8d6662177b6e3a876e0f92de6f79ea35"
@@ -18,6 +30,12 @@
       "filename": "denebola-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "36714b8b68b53306180277c7b2ee0cb88fb2f9a6f735880f71df1ed2c3da45df"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "6eefeea14e757a5afde17b0628eaaa6b2a42bfeaf4de1241bf36345a093fe0ce"
     },
     {
       "location": "prepared",

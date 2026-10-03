@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "flegetonte-arrival.webp",
+      "bytes": 27874,
+      "sha256": "e6870dc36bedf92162b3ee3204b0545911474d9a28f83204db63fbc48a47b164"
+    },
+    {
+      "location": "public",
+      "filename": "flegetonte-billboard.webp",
+      "bytes": 4990,
+      "sha256": "1b2e8c6bd93825e03a5c1662d5f28f458b2688eaaf05e13226acdc07905c6ab1"
+    },
+    {
+      "location": "public",
       "filename": "flegetonte-dataset-color.webp",
       "bytes": 44,
       "sha256": "9181b6560ec7aa0a9cd6567a055dfd283d54dd4c9150dcde55d585def242c07a"
@@ -24,6 +36,12 @@
       "filename": "flegetonte-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f15b643efccc2f58d32c2baa6307e599492ce8ded896a02ccb08674d3d5aab22"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 383,
+      "sha256": "f717fc66b543c48979ecb1360af1ed95b34bf97cd0150b77896769edbb694257"
     },
     {
       "location": "prepared",

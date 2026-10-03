@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kalasungsang-arrival.webp",
+      "bytes": 17284,
+      "sha256": "ee943a578fbe75f19430367e3ab90f38c83185fc90f22ee56a2816491d435e5e"
+    },
+    {
+      "location": "public",
+      "filename": "kalasungsang-billboard.webp",
+      "bytes": 3110,
+      "sha256": "4211d20c849c907cbc28da42fc912e2ea88d0ac79df1d0d7fab766ee4a13f82e"
+    },
+    {
+      "location": "public",
       "filename": "kalasungsang-dataset-color.webp",
       "bytes": 44,
       "sha256": "1e46a9da9b350eb8d3240cb4a46e4cbd3601f1d1ad391468476480db87b734d5"
@@ -18,6 +30,12 @@
       "filename": "kalasungsang-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f15ba2fedfe3870e08b3ecada388d9bbb1b20c42edc9f8190b2c369624236230"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 388,
+      "sha256": "78fd75b7885fe281b02a6bdcdfa494c1070d5d27c5a8c53fd939d431762a31ae"
     },
     {
       "location": "prepared",

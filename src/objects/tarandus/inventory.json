@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tarandus-arrival.webp",
+      "bytes": 17514,
+      "sha256": "e70e2f49625687409bfc7de278a09e8132a99de3f9d40e38cfedd555ececd9de"
+    },
+    {
+      "location": "public",
+      "filename": "tarandus-billboard.webp",
+      "bytes": 3128,
+      "sha256": "0b11458034f91f0a22b2a9a386df84f1888c84251a2a7424a7cc234ddffbef27"
+    },
+    {
+      "location": "public",
       "filename": "tarandus-dataset-color.webp",
       "bytes": 44,
       "sha256": "7a9eeb16014b1ca71fc1eac3f01144476548d160caf1bfe735eda7f16c14bbf8"
@@ -18,6 +30,12 @@
       "filename": "tarandus-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "fccb5ffd2f9284eed698d9e7bd076722bb65dc34e9608ce977e9310ee02d6a84"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "2021e28e4343e46c6df26fa87052e3babbe96fd07e65c774fdc13df6c273c7bb"
     },
     {
       "location": "prepared",

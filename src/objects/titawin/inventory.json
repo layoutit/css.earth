@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "titawin-arrival.webp",
+      "bytes": 13950,
+      "sha256": "2eb000889786903a70d0b8d60e300b5100fb82d2a04d6068c02823fbee6f7222"
+    },
+    {
+      "location": "public",
+      "filename": "titawin-billboard.webp",
+      "bytes": 2384,
+      "sha256": "d7d4dbc1e375e5f5bd1649e4f63530bfe6040b0d7f462efcf3aea6e9145b1388"
+    },
+    {
+      "location": "public",
       "filename": "titawin-dataset-color.webp",
       "bytes": 44,
       "sha256": "de712b1a40071a0f84516a31e27bfec0a10e682d13fa20d0a2be90c3cae3d114"
@@ -18,6 +30,12 @@
       "filename": "titawin-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "35fc067c01cea65d56b1f5e3470f95b35e20d874b1170b3352d2111bed45868c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "c519f267e42c8bfe91b522660d589e2454d4f61049c860cb2fc4ec15def68644"
     },
     {
       "location": "prepared",

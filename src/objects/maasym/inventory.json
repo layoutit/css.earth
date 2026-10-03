@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "maasym-arrival.webp",
+      "bytes": 17850,
+      "sha256": "1ec7e8961cfcf1125f0a7f388e1b9dd698663d34b42f1d39471f6935ceb9392a"
+    },
+    {
+      "location": "public",
+      "filename": "maasym-billboard.webp",
+      "bytes": 3270,
+      "sha256": "3e7b27d46537e7562effaac169ea27fc70abf8c1cbaa6eed309fbd36b331554a"
+    },
+    {
+      "location": "public",
       "filename": "maasym-dataset-color.webp",
       "bytes": 44,
       "sha256": "168393c63aae706e32aa2f37be9e52d944987ff5c12f6c804314114ce727c122"
@@ -18,6 +30,12 @@
       "filename": "maasym-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2ee9ada2911bed83c63f9f2661f2b2a1cf31f46f309da2660f32cbe9691deb3f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 370,
+      "sha256": "ee35ae4e7e8ad6557c490073f098d8e09a5f5fddb6e30aeb8e7d6558483b830f"
     },
     {
       "location": "prepared",

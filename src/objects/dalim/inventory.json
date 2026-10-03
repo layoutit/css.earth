@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "dalim-arrival.webp",
+      "bytes": 13652,
+      "sha256": "8235fa7bae71daf607d1486ed10178718c5a007ea960d89c0ae2976ab75f4e64"
+    },
+    {
+      "location": "public",
+      "filename": "dalim-billboard.webp",
+      "bytes": 2406,
+      "sha256": "22d189b96ce22900d19d02db7c4bc97e3b9a3ff0524c1cee249f9cdc0ce4c164"
+    },
+    {
+      "location": "public",
       "filename": "dalim-dataset-color.webp",
       "bytes": 44,
       "sha256": "9f6e0dd80e8cad716c33579a1f2881e6f796cdf19ed8ce100ae6c57c2a9bb540"
@@ -18,6 +30,12 @@
       "filename": "dalim-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "cea346353618f57a28f28ccd161a0bf5d0f611d59c7894cb9f0721ae5b4c686f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 372,
+      "sha256": "16d28a07a8be89975266b07a94e6cc9532d60a2479e0758c3ec1d8b21f19e802"
     },
     {
       "location": "prepared",

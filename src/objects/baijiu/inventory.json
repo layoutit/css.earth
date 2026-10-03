@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "baijiu-arrival.webp",
+      "bytes": 28158,
+      "sha256": "8ed8aa796995f21dc64ca1935c44c49ce625476d3cf3d04a1e060564ebde2ca6"
+    },
+    {
+      "location": "public",
+      "filename": "baijiu-billboard.webp",
+      "bytes": 5042,
+      "sha256": "d4e465cadbc2b5eb5fc12a56017be88c10aaa687c714e3adb3a9a83f38c7e883"
+    },
+    {
+      "location": "public",
       "filename": "baijiu-dataset-color.webp",
       "bytes": 44,
       "sha256": "424ae007c0c565ade18c953880e17be3443ea82e912672e1a699421923f2dfa2"
@@ -24,6 +36,12 @@
       "filename": "baijiu-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "4c841c962204f47e6998e0bd44f146d22c54c07f8187ad1bee235ac140b3f16d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "45f3b6552d1ddb9b6a142440b1d1afd348a866859e33447e870c406601673204"
     },
     {
       "location": "prepared",

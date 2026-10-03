@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hoggar-arrival.webp",
+      "bytes": 27812,
+      "sha256": "bfaa451756fbdd5cc76431631c896acdce142125e7170bc3057108501cec4df2"
+    },
+    {
+      "location": "public",
+      "filename": "hoggar-billboard.webp",
+      "bytes": 4944,
+      "sha256": "697b8f3a4fbabc57bd8c55b66c18570e6236114ad324063892f3dbff5a6754b2"
+    },
+    {
+      "location": "public",
       "filename": "hoggar-dataset-color.webp",
       "bytes": 44,
       "sha256": "e0483a66ca1568735b84a784093dda7f82f7dc65d543e41237a0d1886583f9d0"
@@ -24,6 +36,12 @@
       "filename": "hoggar-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "122b4b2d044661aa06d3a2115d3c58fe17dd5cd08b6aedcf8d3ed24a11078f64"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "68ae0a73438c91763bf64a5432bf69b3d98fad5104b1b989019421d7e361d04d"
     },
     {
       "location": "prepared",

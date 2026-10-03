@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "yed-posterior-arrival.webp",
+      "bytes": 16816,
+      "sha256": "ffb570a330c8e8831e433d28485efb422347ce9f861b2980b19c02b2b32ee091"
+    },
+    {
+      "location": "public",
+      "filename": "yed-posterior-billboard.webp",
+      "bytes": 2956,
+      "sha256": "6a9c116202e3c0ccfe6594256c6d9b2afedb357deef26787dccc1fc547ff5b44"
+    },
+    {
+      "location": "public",
       "filename": "yed-posterior-dataset-color.webp",
       "bytes": 44,
       "sha256": "7d453217840f43ded994f389c83efeec090bb2fe9ce1f43dea1f3fb7943be32b"
@@ -18,6 +30,12 @@
       "filename": "yed-posterior-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "c4aa1bee75937abc2ce026e0d3e1db55a33d88f3e31fdec407466214f8e1d6d4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 390,
+      "sha256": "9a9a6f42da0030effeea309f1f5b9142218adc64b60a5a2df758a7282fe4f1cd"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "chechia-arrival.webp",
+      "bytes": 28054,
+      "sha256": "8dd7939345fcf3a32bb1d1ac9962f743de9b6ba2b16c7d309c0bca6ac90ee768"
+    },
+    {
+      "location": "public",
+      "filename": "chechia-billboard.webp",
+      "bytes": 4962,
+      "sha256": "22073c1102f01e479e9cb67d4884370aa92a3eeb8155cb0fee18abcbbfe9378b"
+    },
+    {
+      "location": "public",
       "filename": "chechia-dataset-color.webp",
       "bytes": 44,
       "sha256": "d375d40e4ab371eb4bfafd05c86379bfb1dc484087fa691dce4eb3aebcf71e3b"
@@ -24,6 +36,12 @@
       "filename": "chechia-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2737d7550cf0b095919418997946f5e091aa0aa5b94fcba4304008bf859a3b76"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "38f0defad967b358a3af9337956a511304023b52b22a5c8da14aeb5604f6de34"
     },
     {
       "location": "prepared",

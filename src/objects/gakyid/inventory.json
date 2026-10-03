@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "gakyid-arrival.webp",
+      "bytes": 28566,
+      "sha256": "a8ae09c9ed017b96e93fb9f3976e14299044eb8138da8bcea114c81063231a91"
+    },
+    {
+      "location": "public",
+      "filename": "gakyid-billboard.webp",
+      "bytes": 5054,
+      "sha256": "3d1158b48174ab8aaa493cac1378281da7a98373f155e10a7cb8d75dabb1110b"
+    },
+    {
+      "location": "public",
       "filename": "gakyid-dataset-color.webp",
       "bytes": 44,
       "sha256": "a0fc9371b76fa3d488c923c292af6264c084c4ea16b487bcd6b85c6aa46a8d2a"
@@ -24,6 +36,12 @@
       "filename": "gakyid-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "7a833df826ee149ca28a785aa7df92af4d40b047ab844c8c05711dc1c5824558"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "ee093eeb9d35a39c2c53c5ca3df0f8cdf66ee6a2da694c4db8274f7991b54d97"
     },
     {
       "location": "prepared",

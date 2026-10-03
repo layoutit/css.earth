@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "intan-arrival.webp",
+      "bytes": 17184,
+      "sha256": "4fcb524fdb6e25c7cec3c4d5fc6df37a377d08bd369a57b1a14c5e8e059e9505"
+    },
+    {
+      "location": "public",
+      "filename": "intan-billboard.webp",
+      "bytes": 3018,
+      "sha256": "9916d478cf6dd6c1a46712aa25ed42a031a11cb59803d5824dfb0b3c668e9934"
+    },
+    {
+      "location": "public",
       "filename": "intan-dataset-color.webp",
       "bytes": 44,
       "sha256": "7b4dcd7c17d3531bf8234c32e3cd8c8f31058c9d9df6e4fd65a90b2b32436f81"
@@ -18,6 +30,12 @@
       "filename": "intan-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "3d0f2abf50967c2c2e2a99a299299a5e703a8e9d394ba9cf859c681aeda34c12"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 380,
+      "sha256": "2d55b6e1e1787ad09f87d5862e641ab8a54e38f7d749adbeb607e78cc64c7ed8"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "apamvatsa-arrival.webp",
+      "bytes": 17966,
+      "sha256": "be5739ab9375266decd7e73def2fd98c430003d3984d5ad151b67184c2ae381f"
+    },
+    {
+      "location": "public",
+      "filename": "apamvatsa-billboard.webp",
+      "bytes": 3284,
+      "sha256": "6f6fdbd261e6104b22e912aed33f4546533a2b085b229c80bd62f738a2623c0b"
+    },
+    {
+      "location": "public",
       "filename": "apamvatsa-dataset-color.webp",
       "bytes": 44,
       "sha256": "5fd1a87265d4fc7e51b03fa1507b91715841aefab9f550d1e0b67d656d67ae1d"
@@ -18,6 +30,12 @@
       "filename": "apamvatsa-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "4235867d49180545e4688f49b960b38d4cde6c958f259312e0a978c5fb978fb1"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 386,
+      "sha256": "8cfce93f78155918621c9cfc357fe7820631c6dd32c3da3c983ed8828075c6f0"
     },
     {
       "location": "prepared",

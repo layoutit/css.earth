@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "buranun-arrival.webp",
+      "bytes": 17134,
+      "sha256": "c0a3b671e34fde90a4e8c5d9616283efad2392d2bf5307f0ac833c40cec4a4c6"
+    },
+    {
+      "location": "public",
+      "filename": "buranun-billboard.webp",
+      "bytes": 3000,
+      "sha256": "54edcd5eede6e17cde4c0d5fea09a58e14910cad708e52af9c57c903452b9772"
+    },
+    {
+      "location": "public",
       "filename": "buranun-dataset-color.webp",
       "bytes": 44,
       "sha256": "6631ec228d0c11ef824f07921b3393c1b2c53f371099a04dd6215514857f1781"
@@ -18,6 +30,12 @@
       "filename": "buranun-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "10c827d8302141fa8ce01446b49f9572d5491cf596fb0de7514c01d4983440d8"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "34be6bf640017450c4c16dea6b770be4ce6a8056466eee96949297329aca3039"
     },
     {
       "location": "prepared",

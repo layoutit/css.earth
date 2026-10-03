@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "poerava-arrival.webp",
+      "bytes": 26972,
+      "sha256": "f0694b6b419d4e8fead060f7999aa5f8d7a5ac49c7a54a68fe47dd2d2fb8bc5e"
+    },
+    {
+      "location": "public",
+      "filename": "poerava-billboard.webp",
+      "bytes": 4756,
+      "sha256": "2dcdd2654da3501a5abfc3efc47f9f24f982daa99eba74522b6be2a07f7d118e"
+    },
+    {
+      "location": "public",
       "filename": "poerava-dataset-color.webp",
       "bytes": 44,
       "sha256": "a9e61acb30cd46abc0d49f8000771a795cbc4f018468043947009ba9d19a87e3"
@@ -24,6 +36,12 @@
       "filename": "poerava-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "531b8e0e9efdf99e29bdad5875255d1d5cbfbb6414cc59f260acc8aef2d56d46"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "e1d8d99eeb2d2b2173a9d06389f5125dd2080b7d6b78a05028dba925aac6dfe0"
     },
     {
       "location": "prepared",

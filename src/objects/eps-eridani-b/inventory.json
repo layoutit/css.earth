@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eps-eridani-b-arrival.webp",
+      "bytes": 29842,
+      "sha256": "d3fe9ea7c8ecf88f76dc6d58a4d425827de22f3b6a6ee0a17af4306cf4e6f272"
+    },
+    {
+      "location": "public",
+      "filename": "eps-eridani-b-billboard.webp",
+      "bytes": 4868,
+      "sha256": "faa48a8cb200b5f9c99a1520b084bff79400e108e672373be6622f2e07fea5dd"
+    },
+    {
+      "location": "public",
       "filename": "eps-eridani-b-dataset-shape.webp",
       "bytes": 44,
       "sha256": "e829f1a746501aed7de9dc0b3ba44b32f644b6bb1edbd74a616a123d3dff3aa4"
@@ -234,6 +246,12 @@
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 56158,
       "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 321,
+      "sha256": "9080d2c775dd5cd45549051049fa71ca59e7829f1f80d496c68ef5afc2030134"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "yed-prior-arrival.webp",
+      "bytes": 17922,
+      "sha256": "528dd3fc0cd6e4fa83e20768cb3369d8f86cea86013adf352e7db99eadb369b4"
+    },
+    {
+      "location": "public",
+      "filename": "yed-prior-billboard.webp",
+      "bytes": 3308,
+      "sha256": "3802406d5c93d4ce7d732bcddd9fbac0c9728fc40c4e5b242ebebd6ebd46fc48"
+    },
+    {
+      "location": "public",
       "filename": "yed-prior-dataset-color.webp",
       "bytes": 44,
       "sha256": "07c4fa3d28ac3379e03e7edfd128eb0b76e740395a9e2af742622f459c7917b1"
@@ -18,6 +30,12 @@
       "filename": "yed-prior-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "049d1bbee6c490f979522cadc72cc7acf9d7610d680c73e0ae50212f0d1152d1"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 386,
+      "sha256": "b736f9f29af0883aa4226d7fedc52e3b4ed5ddb7bb3ca01ee4fb3655225142e8"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "citala-arrival.webp",
+      "bytes": 27164,
+      "sha256": "3e706fe82d248689f61203b7828af3df6645336b86ca496324ef6f92f26548d9"
+    },
+    {
+      "location": "public",
+      "filename": "citala-billboard.webp",
+      "bytes": 4802,
+      "sha256": "f05cfd31d08b29533053c340590056b906e0ed01e3648fb0a3a417bca204ffdf"
+    },
+    {
+      "location": "public",
       "filename": "citala-dataset-color.webp",
       "bytes": 44,
       "sha256": "17d003287001dadecc1e1e68adc6edb604f863a720cfb22687829c71d05dfb80"
@@ -24,6 +36,12 @@
       "filename": "citala-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "e29003a5310180a5198ae7d85171fa7440b89076e56e87f0b4bf35a320ad640c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "d43977bead332c4e6de223d777764bb95fb07e2ed6d4f1d799a6c48545f2eb96"
     },
     {
       "location": "prepared",

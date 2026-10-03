@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hydor-arrival.webp",
+      "bytes": 27840,
+      "sha256": "239db64678da5f066495fd65791477a22c90c5bc0871909a9c3f196f1a6fcfa9"
+    },
+    {
+      "location": "public",
+      "filename": "hydor-billboard.webp",
+      "bytes": 5010,
+      "sha256": "763c84a4df18462015b135a84ceb15865b6de0f390d3d356b2adf9c8ed8f4c4e"
+    },
+    {
+      "location": "public",
       "filename": "hydor-dataset-color.webp",
       "bytes": 44,
       "sha256": "4bcda59c99762213ee6e472533a8ae8fe370498177b6292795d489eda4c3edaf"
@@ -24,6 +36,12 @@
       "filename": "hydor-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "5a21f9b59296baa1000ec4dca74bd791ade59b82c6eecadcf87aa497a635741f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 369,
+      "sha256": "f1ccb9345f48d824898f064f0475d3b3b8bfd0aab7945ce137ba4faa0c631fae"
     },
     {
       "location": "prepared",

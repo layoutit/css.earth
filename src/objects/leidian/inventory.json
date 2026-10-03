@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "leidian-arrival.webp",
+      "bytes": 27694,
+      "sha256": "dc9677199c20c030c356b899e6e3d9f2d0aba2db853666183b3691fbd8ffc83e"
+    },
+    {
+      "location": "public",
+      "filename": "leidian-billboard.webp",
+      "bytes": 5014,
+      "sha256": "8a9be7e81919a970a27740c52e19f4bfecbacf142d539d10fb48048649f308d6"
+    },
+    {
+      "location": "public",
       "filename": "leidian-dataset-color.webp",
       "bytes": 44,
       "sha256": "436aa6b840868ba2cc3fad0970d61ddfa0e2c50cc0d61ea1bd290bc8770f9aa2"
@@ -24,6 +36,12 @@
       "filename": "leidian-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "4e8722cadc5413f47c16c222910346044cd5b1aaa285acb736c8b8613e24bad5"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 372,
+      "sha256": "7c22595629a508dcadf520efa4c504ed48fc90383212cb862a19ce77091b78a4"
     },
     {
       "location": "prepared",

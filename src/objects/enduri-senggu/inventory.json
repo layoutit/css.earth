@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "enduri-senggu-arrival.webp",
+      "bytes": 15164,
+      "sha256": "2e56603558bbe1a11ebafe63994f0f2a57f213f0e3654bc382402ed692cdf24c"
+    },
+    {
+      "location": "public",
+      "filename": "enduri-senggu-billboard.webp",
+      "bytes": 2570,
+      "sha256": "9ea22c001f03cf9fccf96ec82a7d4ff009873d06866b91a43d316942282df789"
+    },
+    {
+      "location": "public",
       "filename": "enduri-senggu-dataset-color.webp",
       "bytes": 44,
       "sha256": "c240b4003101df5bd0df5ddab16675d94d9ad834a076bb5aadb93f81bb5573ca"
@@ -18,6 +30,12 @@
       "filename": "enduri-senggu-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "59421b7479a6b3c0966d27610148ce4cf45674cef4ff7622e0273fb6701cfe80"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 356,
+      "sha256": "39e15bd922a064d79ec0060d10fcaabc986cae16113add82f3bba77679e8f749"
     },
     {
       "location": "prepared",

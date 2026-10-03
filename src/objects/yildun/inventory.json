@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "yildun-arrival.webp",
+      "bytes": 27556,
+      "sha256": "5f10eab3dcd6759a66be206a271e02ba4555d5f2495302b9e08c511bdb245a21"
+    },
+    {
+      "location": "public",
+      "filename": "yildun-billboard.webp",
+      "bytes": 4940,
+      "sha256": "cb61ffe5462cb6b228b72959257d6c49d4fcdb714ba325589eb635a56aa4b491"
+    },
+    {
+      "location": "public",
       "filename": "yildun-dataset-color.webp",
       "bytes": 44,
       "sha256": "d691a4e24ef772634d887173efc20908c5981439a50bada19f5865acf6cea341"
@@ -24,6 +36,12 @@
       "filename": "yildun-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "cc8e28676d042b23082206fe52638614b3dc3894267d60914edea4c8081a10fe"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "337303978f85e2cf5d3085ea7687192c4a2ba129f0de0647f23db44de850467f"
     },
     {
       "location": "prepared",

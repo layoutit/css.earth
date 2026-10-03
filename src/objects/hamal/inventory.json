@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hamal-arrival.webp",
+      "bytes": 17716,
+      "sha256": "4444984b6d880e6cdf5b28b6f622fb910acde8ec56c38dbf8eb131ccf8be11d1"
+    },
+    {
+      "location": "public",
+      "filename": "hamal-billboard.webp",
+      "bytes": 3120,
+      "sha256": "ea5ac632ebc4be48511d35d98eecadfe786b65b070ccf4f0a3e09a4b8c5b3f17"
+    },
+    {
+      "location": "public",
       "filename": "hamal-dataset-color.webp",
       "bytes": 44,
       "sha256": "647d184fcdc1aa2cd719d0a6421ccac7cc6fd1891cf6bc0211a4f7df088545ef"
@@ -18,6 +30,12 @@
       "filename": "hamal-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "804c2bbba21c66e6437c74ec4ea11dde4ce604309e45f6f56807ca276616bd25"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 372,
+      "sha256": "8b3fc099c17ef9de2c251e4d808b869e3ac1fcf3fb5e41c73e00d2497c9245e7"
     },
     {
       "location": "prepared",

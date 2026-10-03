@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alchiba-arrival.webp",
+      "bytes": 16062,
+      "sha256": "81341ee6529c9bea752cbdebb2c36572a0d4632078d0cc308da4658d52752c38"
+    },
+    {
+      "location": "public",
+      "filename": "alchiba-billboard.webp",
+      "bytes": 2698,
+      "sha256": "71505a908c67f407be4bc0e06da165da97bc2d07debd26c1c7fd828375b5578d"
+    },
+    {
+      "location": "public",
       "filename": "alchiba-dataset-color.webp",
       "bytes": 44,
       "sha256": "adc741de09b77710e18cb633c7eceefeac39b065e754801276d26904dda4076b"
@@ -18,6 +30,12 @@
       "filename": "alchiba-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "325343c0d4605a4cfd85611ef8a7fecf5ff18628336081d35e472b82364f8e9b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "8d990836502fb2fffb0522c572c4e3cc6eebcefae996c8c1eb6ef92da8d99163"
     },
     {
       "location": "prepared",

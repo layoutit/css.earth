@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nashira-arrival.webp",
+      "bytes": 16670,
+      "sha256": "1abf9559e5ad544f77455fee25cac73847eab6cce83e451f7300e60172e3a1be"
+    },
+    {
+      "location": "public",
+      "filename": "nashira-billboard.webp",
+      "bytes": 2828,
+      "sha256": "58b7c1d9ca715196a14b1d21aa3dac5fe8c11e0197703af0963a4ada3ac839c7"
+    },
+    {
+      "location": "public",
       "filename": "nashira-dataset-color.webp",
       "bytes": 44,
       "sha256": "4ac20c3d5630f46927a263509e00cf05a9cd94271dc1862de96a28054adf74e4"
@@ -18,6 +30,12 @@
       "filename": "nashira-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "aeb4790a179168a230b0ad4d497ff3169f10dc6c690a3d53dacc9b6d3a0d3f44"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 370,
+      "sha256": "5edb5869d6a67126fc80eb6be23f7b752bc50afd76d15b340e5480d178ec5f9d"
     },
     {
       "location": "prepared",

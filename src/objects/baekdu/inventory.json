@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "baekdu-arrival.webp",
+      "bytes": 28308,
+      "sha256": "62893b1e6285b99479298c13774d6dd88c475e26356b23b8ee0eb0ebdf8d9c2d"
+    },
+    {
+      "location": "public",
+      "filename": "baekdu-billboard.webp",
+      "bytes": 5034,
+      "sha256": "707154fc8492ccda039b0042105e7373e0a3148f6a96fcd5cc239d3a75d772e5"
+    },
+    {
+      "location": "public",
       "filename": "baekdu-dataset-color.webp",
       "bytes": 44,
       "sha256": "f520d6515c8a5d8ca4d0707b0fcfdabafb9c37c0474075865fef5c30433e0f4b"
@@ -24,6 +36,12 @@
       "filename": "baekdu-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "401ad7ac4dcf7bf4edfb0d878e545b56a91e942de927f573840c1444e400ea7f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "e1976b39a07ff1a57bf462ca36c0f8c0ca7def09909df7d08babe5592e5f1bd9"
     },
     {
       "location": "prepared",

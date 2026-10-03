@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "algedi-arrival.webp",
+      "bytes": 16540,
+      "sha256": "ffe51a4caba347969971ad76134a32e2f0fbd7ea15919f1104613d6bca0bb212"
+    },
+    {
+      "location": "public",
+      "filename": "algedi-billboard.webp",
+      "bytes": 2928,
+      "sha256": "269be8c6c930285475058bd1263376d4975819f864dfa1148751053076124317"
+    },
+    {
+      "location": "public",
       "filename": "algedi-dataset-color.webp",
       "bytes": 44,
       "sha256": "dac8345ee68b23c2b0c127f36bfbbffea90bddd325ca36d3150aeea5d5611b74"
@@ -18,6 +30,12 @@
       "filename": "algedi-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "043c73a05e57fb9c0ef0c611efad8879d592d26186125c502b4e7d26ab8db43b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 370,
+      "sha256": "f3e872c072a5e8163b8c862d39691ebdda7d8eb841820083c78aef6b66c1be05"
     },
     {
       "location": "prepared",

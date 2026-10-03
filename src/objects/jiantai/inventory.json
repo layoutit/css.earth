@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "jiantai-arrival.webp",
+      "bytes": 18316,
+      "sha256": "7c6bc8495acbbc08e3f98f038894161bf01802576539980de8111e73b09e2333"
+    },
+    {
+      "location": "public",
+      "filename": "jiantai-billboard.webp",
+      "bytes": 3346,
+      "sha256": "b52ed18ad8572ace5c2e6d565abd882343df082bebcbdeddbd94b211613e0e8a"
+    },
+    {
+      "location": "public",
       "filename": "jiantai-dataset-color.webp",
       "bytes": 44,
       "sha256": "b8dbd8fbdc165c20d421fe942d52dd99d98854cff43e1e3a41a7e45c38634c9e"
@@ -18,6 +30,12 @@
       "filename": "jiantai-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "75e0138561a3df6b6cced565f49ebde61f412036abba23e6578901b40fdef98e"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "94b1b4dd1fcd6d75ea4d0df526d06201b2a9388083e1dcf480ed42140fe31709"
     },
     {
       "location": "prepared",

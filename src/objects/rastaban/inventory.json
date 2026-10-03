@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "rastaban-arrival.webp",
+      "bytes": 16388,
+      "sha256": "78b60c5362f26f9eadc5af8e65f8cd882561d45efb3bc066e5bd6e6cf3cf0185"
+    },
+    {
+      "location": "public",
+      "filename": "rastaban-billboard.webp",
+      "bytes": 2884,
+      "sha256": "56b549e7b060a8b4c57af7d640ef2ee8100c823cfb23a4d93269e3b463f521af"
+    },
+    {
+      "location": "public",
       "filename": "rastaban-dataset-color.webp",
       "bytes": 44,
       "sha256": "296667924ad096cd5ece89e3599c0099a82fe160863665e52bf2fad0fa01cc75"
@@ -18,6 +30,12 @@
       "filename": "rastaban-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "94c5d71b698d64ea982631af0b6d1a4e8f00b679a4813ea95c06ee2c7473f5a7"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 384,
+      "sha256": "571162f53ffcd8fcd73f952b5dc8a96e85387c07cbae2efab0545ded6049e348"
     },
     {
       "location": "prepared",

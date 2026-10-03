@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bosona-arrival.webp",
+      "bytes": 28296,
+      "sha256": "f6fd56a4a598e4cd9138c1bc0790f0c472e9d1f727e1e837501f66d3c0f9a221"
+    },
+    {
+      "location": "public",
+      "filename": "bosona-billboard.webp",
+      "bytes": 5010,
+      "sha256": "80c5a7afd361f12ebbcab96ee17f8cb78e7da15ac1b0a65a9aff0da4a258d23e"
+    },
+    {
+      "location": "public",
       "filename": "bosona-dataset-color.webp",
       "bytes": 44,
       "sha256": "bfc51e12eeada2f03b180d5dfe234fc31380896d20f4c51cf8566ad081807de7"
@@ -24,6 +36,12 @@
       "filename": "bosona-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2ae79e2617b36e6c6374673fbbcf332a985be1e3993b61f8cfaf254f59bec785"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 369,
+      "sha256": "599bc800d713f6955f42ad349e0d8966e1958e794b6b3952ff11f1e2cd597641"
     },
     {
       "location": "prepared",

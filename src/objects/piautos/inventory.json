@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "piautos-arrival.webp",
+      "bytes": 27754,
+      "sha256": "5b3347f4507a3e6f0132d12e57f659350d9ea1061088d73e1a872790f076a679"
+    },
+    {
+      "location": "public",
+      "filename": "piautos-billboard.webp",
+      "bytes": 4962,
+      "sha256": "9ada897f42e14ee4347f3630bc6dc2e1c7fb076ff8e011da2ff5d164a62aef39"
+    },
+    {
+      "location": "public",
       "filename": "piautos-dataset-color.webp",
       "bytes": 44,
       "sha256": "cae15ade737080814f33cc040c9a0a7dc89a7364e7031ca0235faa8487cff543"
@@ -24,6 +36,12 @@
       "filename": "piautos-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "16fe1d8cc3c151032dbff8ed7ae23ab7d92805eb957a28cdac7045f099ce6366"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "7f8133a93465607d7e170bc8686b076765928a6ef522ae191c8144db0963b564"
     },
     {
       "location": "prepared",

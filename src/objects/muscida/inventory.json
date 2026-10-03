@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "muscida-arrival.webp",
+      "bytes": 28100,
+      "sha256": "0bc8919cdac496e10590620ec0312d99d213a096fb9fd9bfc26ee041a8221dc7"
+    },
+    {
+      "location": "public",
+      "filename": "muscida-billboard.webp",
+      "bytes": 4942,
+      "sha256": "ab7f43f0b23026553d0b6c2723a1c8475381c120bc5dddb8d10e7cbd2f09e3a7"
+    },
+    {
+      "location": "public",
       "filename": "muscida-dataset-color.webp",
       "bytes": 44,
       "sha256": "db2019592c1e0977749cf8be6ee32a65bb70f346d02066324bf53913a68b89fc"
@@ -24,6 +36,12 @@
       "filename": "muscida-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f5bd1c6d87679f7b7401055d5c5f1fb4eb27b6669f1ea4d9f19bdf8658312fed"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "4ae198835d27b0bf5b2835cc69ba3ce5740a49398743a29228585a90e412f500"
     },
     {
       "location": "prepared",

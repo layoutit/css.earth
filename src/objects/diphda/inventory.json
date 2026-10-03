@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "diphda-arrival.webp",
+      "bytes": 17134,
+      "sha256": "636733b980be10b625edfc0aa7c9a730e2ff365348b42c0a6709d587ba04b98e"
+    },
+    {
+      "location": "public",
+      "filename": "diphda-billboard.webp",
+      "bytes": 2996,
+      "sha256": "3981b8b9ebe69e9981950c151c64b3dea025b9ced39b272e03ef623d090d0015"
+    },
+    {
+      "location": "public",
       "filename": "diphda-dataset-color.webp",
       "bytes": 44,
       "sha256": "fec15f80933b9f44e9284bf84bf813a4f55f44fa3b4548098955c962d6baaff2"
@@ -18,6 +30,12 @@
       "filename": "diphda-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "e28b174501c6a98bb46e897d190a00c50d0e91d013e1ec2db984338b5e2c33a9"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "94ba1afbc14d00faef7448f36f48c89a33d73a64df97238c0773d9847b287353"
     },
     {
       "location": "prepared",

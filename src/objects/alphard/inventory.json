@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alphard-arrival.webp",
+      "bytes": 17828,
+      "sha256": "2ea55b600b3be2c7f1415a4738e64fd7adf91eee2cd2e6db45581346b46280fa"
+    },
+    {
+      "location": "public",
+      "filename": "alphard-billboard.webp",
+      "bytes": 3236,
+      "sha256": "a7599114a257134a4db5ba756c42f8b170dfa503a20684adc2658af862df9911"
+    },
+    {
+      "location": "public",
       "filename": "alphard-dataset-color.webp",
       "bytes": 44,
       "sha256": "b2d71ff2731695bc3abeec00957b8819d051b994a89c90b661b8e9759f4eb7a0"
@@ -18,6 +30,12 @@
       "filename": "alphard-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "e0a5d4ddcaa8e9337750d17247e85c98ab53a26a466b26fcdb2112374a14dad9"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 380,
+      "sha256": "9bfd067de057539b47442ff8982b2eb52d440556f42da6432fc8ec196ac362bf"
     },
     {
       "location": "prepared",

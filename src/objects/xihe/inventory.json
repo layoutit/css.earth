@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "xihe-arrival.webp",
+      "bytes": 16760,
+      "sha256": "ca311d848698f19c01ddd322d375a16ca258e649a8e89f600e2fe8299492e7c6"
+    },
+    {
+      "location": "public",
+      "filename": "xihe-billboard.webp",
+      "bytes": 2956,
+      "sha256": "19debf723f08a7b7330741df7e11682499a85417fda1d8852cdf98c93a189d48"
+    },
+    {
+      "location": "public",
       "filename": "xihe-dataset-color.webp",
       "bytes": 44,
       "sha256": "cf422ba89dbe617f59112ddb978c408f386d9b2a9dcca2cae1e438ed259464f4"
@@ -18,6 +30,12 @@
       "filename": "xihe-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "d151768bfc8aa4cd22a85e060435e99ba1fb97b77bfc35ab5552a920ce314347"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 372,
+      "sha256": "9f09cabb5334d887b396ccb9463385d16980f5afe40e3234cfa4b9073c0e3318"
     },
     {
       "location": "prepared",

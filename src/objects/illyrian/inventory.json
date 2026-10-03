@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "illyrian-arrival.webp",
+      "bytes": 28000,
+      "sha256": "47578a653844490bd0999f8c389482f6ee6369ada7680a374e1e864d969a6430"
+    },
+    {
+      "location": "public",
+      "filename": "illyrian-billboard.webp",
+      "bytes": 4966,
+      "sha256": "d8fae340cb4b46a19051df65dd0d11b84d549c4ed0bad8796ba83815e352a91e"
+    },
+    {
+      "location": "public",
       "filename": "illyrian-dataset-color.webp",
       "bytes": 44,
       "sha256": "d6486293fce00e31df1545161e5f676e5dd4d0df145eb8b02c6a1ed4f39ef22f"
@@ -24,6 +36,12 @@
       "filename": "illyrian-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "80d6ae3757f431e7844a7f32f12741c3b93d4b38ed33c0e6c1fdfcf83a6f15de"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 384,
+      "sha256": "8b772b1a62a14d551157d1241b31623ae9f58af2023eba09af221b30549d8e39"
     },
     {
       "location": "prepared",

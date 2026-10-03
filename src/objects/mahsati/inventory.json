@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mahsati-arrival.webp",
+      "bytes": 16162,
+      "sha256": "0d146086e244a4b7692a5b2e838bc6e61d149b7939f09a99ca2b769fc288d121"
+    },
+    {
+      "location": "public",
+      "filename": "mahsati-billboard.webp",
+      "bytes": 2848,
+      "sha256": "19c6a462e2917aebc118c84865540684a4c636df0c249867961e81812deb6e9c"
+    },
+    {
+      "location": "public",
       "filename": "mahsati-dataset-color.webp",
       "bytes": 44,
       "sha256": "db2019592c1e0977749cf8be6ee32a65bb70f346d02066324bf53913a68b89fc"
@@ -18,6 +30,12 @@
       "filename": "mahsati-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f5bd1c6d87679f7b7401055d5c5f1fb4eb27b6669f1ea4d9f19bdf8658312fed"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 371,
+      "sha256": "f682d76c244f8d14c909e353e24ca029e191aea4eb4b60fc5ead0e4948287bc4"
     },
     {
       "location": "prepared",

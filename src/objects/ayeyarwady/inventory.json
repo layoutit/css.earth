@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ayeyarwady-arrival.webp",
+      "bytes": 28156,
+      "sha256": "8c7328fee6c609266ea9b5f65112f1f1805c6c49f266e8b6b494db05c1e3cc1d"
+    },
+    {
+      "location": "public",
+      "filename": "ayeyarwady-billboard.webp",
+      "bytes": 4960,
+      "sha256": "07a724a4deec56806c40e5ca9db7cc0117d01472ec3492cdf7e077e03048adb3"
+    },
+    {
+      "location": "public",
       "filename": "ayeyarwady-dataset-color.webp",
       "bytes": 44,
       "sha256": "9181b6560ec7aa0a9cd6567a055dfd283d54dd4c9150dcde55d585def242c07a"
@@ -24,6 +36,12 @@
       "filename": "ayeyarwady-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f15b643efccc2f58d32c2baa6307e599492ce8ded896a02ccb08674d3d5aab22"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 387,
+      "sha256": "384b3ae2f3e49a2fce434055bf923d0c7f9e26a9da738d13569896448c717b54"
     },
     {
       "location": "prepared",

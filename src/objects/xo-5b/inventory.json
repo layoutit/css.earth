@@ -213,6 +213,18 @@
     },
     {
       "location": "public",
+      "filename": "xo-5b-arrival.webp",
+      "bytes": 29624,
+      "sha256": "b355ff0bac500034ee095a4c12796e50bfc33cdbb322f02498bd4125d56a8afa"
+    },
+    {
+      "location": "public",
+      "filename": "xo-5b-billboard.webp",
+      "bytes": 4854,
+      "sha256": "29f5e982ac81ecfa1a249892f57a462aea0f95610e3c297d0af4d489d39d29a5"
+    },
+    {
+      "location": "public",
       "filename": "xo-5b-dataset-shape.webp",
       "bytes": 44,
       "sha256": "0c66f93920c758d6ab5b8c2c392fecd1645dd8b897f96761cf4cf2c482e208b3"
@@ -240,6 +252,12 @@
       "filename": "xo-5b-transit.svg",
       "bytes": 12396,
       "sha256": "fcd293184be4dd73837c8f3c732ab20de9ed6da031373ff056da47819b2dee6c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 301,
+      "sha256": "2ee90583bb71fb37a8c91e96cdb3ab8f003caa13770c25b3c5902305a69ec8d7"
     },
     {
       "location": "prepared",

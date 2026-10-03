@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "sadalbari-arrival.webp",
+      "bytes": 16474,
+      "sha256": "b0b3eac9cbc0e1938f89620e2a2c06b4c8bdc94afd4c4213a1715b5379c8f8cc"
+    },
+    {
+      "location": "public",
+      "filename": "sadalbari-billboard.webp",
+      "bytes": 2928,
+      "sha256": "cf9d01c2a8dff83c577ff8b5311bb7dfb61247f064e0cb8b48a7c7647d6a5208"
+    },
+    {
+      "location": "public",
       "filename": "sadalbari-dataset-color.webp",
       "bytes": 44,
       "sha256": "9b55007ad003b0f13a4b7eb2948d797e96e619f5755a6ee2928463420a1820d0"
@@ -18,6 +30,12 @@
       "filename": "sadalbari-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "c9a7832e6cfe13d167097686196fe44a2a83cad4b795e1a5a2d2a07efbc1e150"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 383,
+      "sha256": "c53248f71c7a56d98b334cc79cd242508f32c00c50ba603660513cdc71faaa45"
     },
     {
       "location": "prepared",

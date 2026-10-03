@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lionrock-arrival.webp",
+      "bytes": 27982,
+      "sha256": "d0e5ac03f2448fa237482b77baed4be5d0217de53c150dd0c8047c54d1a29e38"
+    },
+    {
+      "location": "public",
+      "filename": "lionrock-billboard.webp",
+      "bytes": 4996,
+      "sha256": "38f17ce2c5828a852f1e0dc4bd700c2afbd870fe102905600f88759f82a1c48b"
+    },
+    {
+      "location": "public",
       "filename": "lionrock-dataset-color.webp",
       "bytes": 44,
       "sha256": "7a6a76e58460f5486777e028231b0a7c8aff61855284e247117e9bca6535520b"
@@ -24,6 +36,12 @@
       "filename": "lionrock-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "1092750db2731e5b067719d781beb22f80140fa7d453984dcb8e6ef9785e1aef"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "5b558339ed6ba31eeb1f11387af05a0d63e86d1373c58b736ce1c7254fd19e94"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tianfu-arrival.webp",
+      "bytes": 16920,
+      "sha256": "22265fc7d17f3e005812266093db2f66a9b728ae9dd44b069465452c95cbb49f"
+    },
+    {
+      "location": "public",
+      "filename": "tianfu-billboard.webp",
+      "bytes": 2986,
+      "sha256": "c359fbaca60ed0952f8d9030f5f49b8d65c5324cc0b865cf8ab0a00f2d8fbb1a"
+    },
+    {
+      "location": "public",
       "filename": "tianfu-dataset-color.webp",
       "bytes": 44,
       "sha256": "3fcb622c461ee7d8c2a3b05ef9698a9852002bda3c0632faeb92b380b2fcb58b"
@@ -18,6 +30,12 @@
       "filename": "tianfu-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "cab8bbc55da8ff0cde3a528f472911b6753e1dabd930d72640fa98282b675b17"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 371,
+      "sha256": "2944b378bb0c0be10bcadec98b818395e48f0e9d87b13d13c771969886cec7c6"
     },
     {
       "location": "prepared",

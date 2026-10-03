@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "mago-arrival.webp",
+      "bytes": 28646,
+      "sha256": "56e02dc3297184643ae4df4c6fcb08b83bab7cca94ae954cc5ecd28e78aee36e"
+    },
+    {
+      "location": "public",
+      "filename": "mago-billboard.webp",
+      "bytes": 5100,
+      "sha256": "a0c5fe465b5556027feebab8882fae6f63655efb7135d6dfb664206561340edc"
+    },
+    {
+      "location": "public",
       "filename": "mago-dataset-color.webp",
       "bytes": 44,
       "sha256": "05798e8e6f81bda49117950d3b16ab1035ec771fcee454b1959cc3c9ac55d4bd"
@@ -24,6 +36,12 @@
       "filename": "mago-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "98a144679597b33371581e7e5016940653acadecad1d6d525478390b47aca377"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "f597dbb8329d914006c22f9c18dbb28536e3ce3950453a02a27a74e3af315cc2"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "minchir-arrival.webp",
+      "bytes": 17204,
+      "sha256": "4e93914aff07db330da92b92280ac79cfd2ee9333f79d05093e32a5c39dd2e51"
+    },
+    {
+      "location": "public",
+      "filename": "minchir-billboard.webp",
+      "bytes": 3054,
+      "sha256": "f2381a3912c6972fe517cc103fc3244d59434e632ffe04a4bd15eb281cb6327b"
+    },
+    {
+      "location": "public",
       "filename": "minchir-dataset-color.webp",
       "bytes": 44,
       "sha256": "f9b7844654e5b98392bea68cecd03e19c0e3cd8e0cde2a022424191cb18a4dba"
@@ -18,6 +30,12 @@
       "filename": "minchir-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "63db174a5bef7926f7be7e14e640247c93427b02c10290881ef4a5ffedc8ff31"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 372,
+      "sha256": "f367408c577d5f71faf0dbc3f522b4b4bd350e9fabdc8bc6aeb76904d2f206a8"
     },
     {
       "location": "prepared",

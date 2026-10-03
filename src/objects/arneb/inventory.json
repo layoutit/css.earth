@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "arneb-arrival.webp",
+      "bytes": 16446,
+      "sha256": "3a9977c0e252c79b1c75767515488a9e50431bd4cd46a6619f9fb2ae7e850a51"
+    },
+    {
+      "location": "public",
+      "filename": "arneb-billboard.webp",
+      "bytes": 2826,
+      "sha256": "01b733cdf5893396629abdd2087219f052903800b11b18dd4bc56cae4a33b140"
+    },
+    {
+      "location": "public",
       "filename": "arneb-dataset-color.webp",
       "bytes": 44,
       "sha256": "2dc1f5b1f85b565840559c3907c01805762da766439feee56d4920a85926d378"
@@ -18,6 +30,12 @@
       "filename": "arneb-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "e1f0759419a99fc101f5d5bac018376a6ecd3d71591757c73717d41677db283d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 371,
+      "sha256": "9493f7d1a5a1fb25b1a8264f7dd93d1cc54216903137d0b449a9e1fd33891ca2"
     },
     {
       "location": "prepared",

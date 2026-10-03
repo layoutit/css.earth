@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tonglingxing-arrival.webp",
+      "bytes": 17712,
+      "sha256": "6d9511c8dc645d7538ac9c3fe01d6befdf73242829320d4112d17ec3cc508c86"
+    },
+    {
+      "location": "public",
+      "filename": "tonglingxing-billboard.webp",
+      "bytes": 3196,
+      "sha256": "d6ccf1cc0f90f2cb4070ce6d10c58cd435452e047ac5b042a5a3467e2e80844b"
+    },
+    {
+      "location": "public",
       "filename": "tonglingxing-dataset-color.webp",
       "bytes": 44,
       "sha256": "ec74eadf34c7efa0419d252a793107dab1e8c3237b9f1dc383e3d939f67a2e8d"
@@ -18,6 +30,12 @@
       "filename": "tonglingxing-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "ec87dfd47a570c99fd4cd9a7d075b0ee7c58e1f7399397150df80499872db00b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 384,
+      "sha256": "65ea879ff245c6440ee58df61df4003e73960e0f8976ae9d7d4bd372a2e5f9bc"
     },
     {
       "location": "prepared",

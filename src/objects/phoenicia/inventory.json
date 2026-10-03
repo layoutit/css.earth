@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "phoenicia-arrival.webp",
+      "bytes": 16676,
+      "sha256": "5b60d20e0f29431a3c26844ba0f168ae4698b841466cd35c9b3d4325ebc43bf2"
+    },
+    {
+      "location": "public",
+      "filename": "phoenicia-billboard.webp",
+      "bytes": 2904,
+      "sha256": "2119999fa8d70e350c632fa4afb499789a2b91263b4898e70d22e6d7489673bd"
+    },
+    {
+      "location": "public",
       "filename": "phoenicia-dataset-color.webp",
       "bytes": 44,
       "sha256": "a677ae2438ad490d1bed8e14c3cc7840a6e1c743259dea51511369b421babd83"
@@ -18,6 +30,12 @@
       "filename": "phoenicia-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "5fbb2053bf5789cac418fa08c09ab22e75e4f7537352669044310cc1d3e473db"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "96c19fd251ca0b842073efe4fe20883cf4ebfe9357b41075ad228bdb655671bf"
     },
     {
       "location": "prepared",

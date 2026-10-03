@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "shangcheng-arrival.webp",
+      "bytes": 27870,
+      "sha256": "f8686a6e168bbdca91ffbef862b9955b7ed87c437e8c4aac67083e389c92bb76"
+    },
+    {
+      "location": "public",
+      "filename": "shangcheng-billboard.webp",
+      "bytes": 4956,
+      "sha256": "d9568931714c22af9de31fab07890fac9b2de8edc289d36236220d3861a1c2ee"
+    },
+    {
+      "location": "public",
       "filename": "shangcheng-dataset-color.webp",
       "bytes": 44,
       "sha256": "d691a4e24ef772634d887173efc20908c5981439a50bada19f5865acf6cea341"
@@ -24,6 +36,12 @@
       "filename": "shangcheng-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "cc8e28676d042b23082206fe52638614b3dc3894267d60914edea4c8081a10fe"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 384,
+      "sha256": "229412cd37d6f3c718f8f993b36b5ff180e6a709cd677f49980206225bf89b81"
     },
     {
       "location": "prepared",

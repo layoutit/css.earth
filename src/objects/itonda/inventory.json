@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "itonda-arrival.webp",
+      "bytes": 27214,
+      "sha256": "cf984d236ae52dd49c6f2a545e547d07773d294d05ec66de47251acdcbacb515"
+    },
+    {
+      "location": "public",
+      "filename": "itonda-billboard.webp",
+      "bytes": 4812,
+      "sha256": "435151dc04e6ff79c1f0845090ffd4fbd0ed9bbe0b3d2dc53e6c0630bf1dc710"
+    },
+    {
+      "location": "public",
       "filename": "itonda-dataset-color.webp",
       "bytes": 44,
       "sha256": "17d003287001dadecc1e1e68adc6edb604f863a720cfb22687829c71d05dfb80"
@@ -24,6 +36,12 @@
       "filename": "itonda-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "e29003a5310180a5198ae7d85171fa7440b89076e56e87f0b4bf35a320ad640c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "32dcee2664ab95177ee80a0f48a625d6e2b16d5fe12f228cb2873772e88633c2"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "urquchillay-arrival.webp",
+      "bytes": 27032,
+      "sha256": "b2f73424e3c509bb03fe400a0dc0a9008a3086dda435dcaf6bc1e7ad9caa7fa0"
+    },
+    {
+      "location": "public",
+      "filename": "urquchillay-billboard.webp",
+      "bytes": 4802,
+      "sha256": "9625e1d123cc6b5ce7ddef40d2b1054b7de28e664f21dd7712121eefb2f36a96"
+    },
+    {
+      "location": "public",
       "filename": "urquchillay-dataset-color.webp",
       "bytes": 44,
       "sha256": "b4e0e551a97a6bb8235956a3fc766f8e0f2772bb9fdc0598389ad15297379bb5"
@@ -24,6 +36,12 @@
       "filename": "urquchillay-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f1a18947d2bb6c45e8542e95d8248f5fb965a5d56ec695f0c73cea381af83ad4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 388,
+      "sha256": "ffe939d578796392812225c68afaa9b0a28d3df361c3164ab29278244f109f1f"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "revati-arrival.webp",
+      "bytes": 27460,
+      "sha256": "5a66651e37fe5e3c753f4ed40794f6c1c62d8a492d598cdf64e81bb098c87fdd"
+    },
+    {
+      "location": "public",
+      "filename": "revati-billboard.webp",
+      "bytes": 4826,
+      "sha256": "b2e9261aca42254ee4f17adcb9ba739ce8a04eb7ccd58721a656f713ae62b060"
+    },
+    {
+      "location": "public",
       "filename": "revati-dataset-color.webp",
       "bytes": 44,
       "sha256": "0f07a36dba1e101fb687cc3886e230c86e8a0d560e5b9415f55ad5905287de01"
@@ -24,6 +36,12 @@
       "filename": "revati-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "4ee5bfc45ec0da78d9bb87c09b2068306173962c6da1088150788cb6b99b3cc4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "41e135da0cd019f38493094308d4be986e539785c0a619ee4f7c1378bb41dc75"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "formosa-arrival.webp",
+      "bytes": 16776,
+      "sha256": "0db83a3b4ab3ef551351816f07fa96a97357c8adb5157ac9f95e48fd135fee06"
+    },
+    {
+      "location": "public",
+      "filename": "formosa-billboard.webp",
+      "bytes": 2930,
+      "sha256": "53b8a720fd8bf7156c017bad8e03b5ffbbd682dc38641e25823e8463cd944188"
+    },
+    {
+      "location": "public",
       "filename": "formosa-dataset-color.webp",
       "bytes": 44,
       "sha256": "bfc51e12eeada2f03b180d5dfe234fc31380896d20f4c51cf8566ad081807de7"
@@ -18,6 +30,12 @@
       "filename": "formosa-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2ae79e2617b36e6c6374673fbbcf332a985be1e3993b61f8cfaf254f59bec785"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "2aa01ee4814769ffafe9df92933df2a665503a06f085495a823480b73f1a9ece"
     },
     {
       "location": "prepared",

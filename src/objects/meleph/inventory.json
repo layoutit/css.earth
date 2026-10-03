@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "meleph-arrival.webp",
+      "bytes": 27158,
+      "sha256": "3c2ddea1e2c9e2f7750ce93ff008033d33c6131c696cf998269d0406374644af"
+    },
+    {
+      "location": "public",
+      "filename": "meleph-billboard.webp",
+      "bytes": 4830,
+      "sha256": "2dda08dcd1672ef1f002a5868b1e87bb957d2da8bd04cdf3c8b8fd5c44d3d0ab"
+    },
+    {
+      "location": "public",
       "filename": "meleph-dataset-color.webp",
       "bytes": 44,
       "sha256": "d309749d541194618b165f66cdc11b5571fe0b9fd8ddcc65d4e4fb2a8885b54d"
@@ -24,6 +36,12 @@
       "filename": "meleph-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "de208937fcc0e02b1a3ef174d1014bbc91525933d55da0722969d80765963915"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 368,
+      "sha256": "df52dc15c62170b7af41396b42f107866fa95b37677748c15ff93d2e11a8a7a7"
     },
     {
       "location": "prepared",

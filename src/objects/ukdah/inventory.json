@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ukdah-arrival.webp",
+      "bytes": 17718,
+      "sha256": "9a2865888a627572cded1c57621abfdd07aa5e0eed488253f1644622872d2f5a"
+    },
+    {
+      "location": "public",
+      "filename": "ukdah-billboard.webp",
+      "bytes": 3164,
+      "sha256": "0d50522df1544c2673bb5a8f5915a22631db4762804bc6a03598aea1914c2df2"
+    },
+    {
+      "location": "public",
       "filename": "ukdah-dataset-color.webp",
       "bytes": 44,
       "sha256": "1edd1407d3d7bac6a65b8804e3d241f11de58452d83d1ea569b1793738da8c9e"
@@ -18,6 +30,12 @@
       "filename": "ukdah-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "7c49005a67d170c0be601091f593eda2e6a291eea2274f1b7aa8ef68eee25217"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "ace5cc1fea36e07be9e4e91713258cb25e26522056cc9b905e6d862a4c082148"
     },
     {
       "location": "prepared",

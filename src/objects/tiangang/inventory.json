@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tiangang-arrival.webp",
+      "bytes": 27566,
+      "sha256": "b2abf1c83136c5f73b0aedd3f0ed0dfefd63f31b01c1ca9ca8c12b54458d9ff1"
+    },
+    {
+      "location": "public",
+      "filename": "tiangang-billboard.webp",
+      "bytes": 4984,
+      "sha256": "69e6d3935b84b774526d9be7bbc549f418671aae99b9b9583b19424a445e8446"
+    },
+    {
+      "location": "public",
       "filename": "tiangang-dataset-color.webp",
       "bytes": 44,
       "sha256": "6131c3b9eb2839191bc5d3d379b69d036105586865bd1a39e7a35a4cca4e50c8"
@@ -24,6 +36,12 @@
       "filename": "tiangang-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "32f29bfff60b0d7f82e5d933e89f5a542bec28865c638ba6cedd312bc7104b9e"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "03d763a9832eada5c2add9bf63e361f9196cc5f51750b4a74f0d9979353b4e96"
     },
     {
       "location": "prepared",

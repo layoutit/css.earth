@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "marsic-arrival.webp",
+      "bytes": 16242,
+      "sha256": "a058ddcd4f4c718d6338d2be837dabf8893808d37130c54ff75dd2c1ee279b06"
+    },
+    {
+      "location": "public",
+      "filename": "marsic-billboard.webp",
+      "bytes": 2848,
+      "sha256": "d641578edd009a4ce9e29c4b2cc973ce0e03f43662fae5e3196ba7fef00a5544"
+    },
+    {
+      "location": "public",
       "filename": "marsic-dataset-color.webp",
       "bytes": 44,
       "sha256": "5a458a56ac6e5ddacc1e16fa6961be19aab4bd8ab7becb953f96152e6eb4b610"
@@ -18,6 +30,12 @@
       "filename": "marsic-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "37c0c56f9174b10ddb8fe3832884ccf57a8b3b07e206ec2c9347355efe76adec"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "c252420610bae9201277b3c12b5ae838c52268601b4ca804106566560169cacb"
     },
     {
       "location": "prepared",

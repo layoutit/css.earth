@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "amadioha-arrival.webp",
+      "bytes": 27770,
+      "sha256": "bee0a8b32d9e32cdbfb3a2f683753448c5e02b412ec854ec763432ffabe33330"
+    },
+    {
+      "location": "public",
+      "filename": "amadioha-billboard.webp",
+      "bytes": 4912,
+      "sha256": "5387b478ff35a15d9a84daba28f271eb10b8363fbb2a18d5589045868bd32973"
+    },
+    {
+      "location": "public",
       "filename": "amadioha-dataset-color.webp",
       "bytes": 44,
       "sha256": "61a1cbfb0710651a2088f3493e6e8591945afdb607ee5d12c55546fdddee28fd"
@@ -24,6 +36,12 @@
       "filename": "amadioha-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "6e3d5d7296e7329e04aaa39926a3f861fbe9b5af537174b31199cb9bc96b05e7"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "a5a028d4f2464b6899e1488b6283c87d0cce0d822ac0581778d9bb5a43a8fbaf"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "situla-arrival.webp",
+      "bytes": 16918,
+      "sha256": "41ee377abc869ff7418fefcd985bdb13074ee41efa5959f9411aa15624a40404"
+    },
+    {
+      "location": "public",
+      "filename": "situla-billboard.webp",
+      "bytes": 2974,
+      "sha256": "92a16ecaa664c3c3dae4e85ae9f092e167be75e3f2e2aa86f1fa94cf15364223"
+    },
+    {
+      "location": "public",
       "filename": "situla-dataset-color.webp",
       "bytes": 44,
       "sha256": "8bc4ced784d740419ef17744f3b2fa52710fa00bb9a53affeaa7d574bcb563fd"
@@ -18,6 +30,12 @@
       "filename": "situla-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "5853c10a7268de58d3d125e8f940c066579e4a5c50c35d9e71885c963008ff12"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "7e3110d2b9a7f09a700f7c1980f594c25f14a7060bdac1e938f6e4675254c4e7"
     },
     {
       "location": "prepared",

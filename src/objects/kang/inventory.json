@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kang-arrival.webp",
+      "bytes": 17506,
+      "sha256": "5ffe5ab9eb6c38382c0bfebdcfd5fe46de2bc8631d367d81db4e865436234d1c"
+    },
+    {
+      "location": "public",
+      "filename": "kang-billboard.webp",
+      "bytes": 3156,
+      "sha256": "46c5ca008d175263abec35f73734887611557452fc7d2de61a46dc297483452a"
+    },
+    {
+      "location": "public",
       "filename": "kang-dataset-color.webp",
       "bytes": 44,
       "sha256": "7b0ad55fc48ed6b8106c5e1ac9ccbda9aa661245a1ce725b92ad87ec2ca56fb8"
@@ -18,6 +30,12 @@
       "filename": "kang-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "1f95f1fbc6c24588a7e33858f7e9558ba901ce6f4d35213c49364d4350859ac0"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 369,
+      "sha256": "eeab18bae5181641d3ffb25758b81f8fbb412576038c892f9262a5eec54a1d97"
     },
     {
       "location": "prepared",

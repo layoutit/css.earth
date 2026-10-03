@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "belel-arrival.webp",
+      "bytes": 28324,
+      "sha256": "fee8cfb7ddd0233885a8d62ab292e23b5e636258bcde7eedd6c5bfb434902416"
+    },
+    {
+      "location": "public",
+      "filename": "belel-billboard.webp",
+      "bytes": 5040,
+      "sha256": "fdedc6972869a1c7cb78a61fcc21c045a3083a61ed4eb038d3885ac89a593a53"
+    },
+    {
+      "location": "public",
       "filename": "belel-dataset-color.webp",
       "bytes": 44,
       "sha256": "538f81a27d102da28534b0fb52f0da70acd2005018d08e9a40d1c5db9d82225d"
@@ -24,6 +36,12 @@
       "filename": "belel-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "64bab56862f525e45f285c8e8269772dbbe18c157aae3213c2b1010f2075d7ab"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "e9d194d9d297ff580220a22b62a6657075e62b51745fd371f23e3156b7571f9e"
     },
     {
       "location": "prepared",

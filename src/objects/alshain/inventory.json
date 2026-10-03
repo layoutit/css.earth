@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alshain-arrival.webp",
+      "bytes": 16368,
+      "sha256": "3ab822bdb09a315d32243ceb45610fef9c5d9a66aa31858d5237999c8df68863"
+    },
+    {
+      "location": "public",
+      "filename": "alshain-billboard.webp",
+      "bytes": 2840,
+      "sha256": "f9dd5a3eb5242634578c68d8be596ebc3c02d318324838847776d31353fe595d"
+    },
+    {
+      "location": "public",
       "filename": "alshain-dataset-color.webp",
       "bytes": 44,
       "sha256": "775e4ea335e629bd2057cf744c607628f83b97a819254cb22225079f6aef8773"
@@ -18,6 +30,12 @@
       "filename": "alshain-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "78068c41b014cbff09cbf4f2bfa16aefadff13f491b410773bc53410afdf33bb"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 380,
+      "sha256": "64b52dce317a280e6fcda420ea1d2c642b52113341b04159d78b622d3614c856"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "shatabhisha-arrival.webp",
+      "bytes": 18214,
+      "sha256": "68da0160f3c43c3864fc06113b6a39c79eadae39e187f4a0f7ae10b928fdf3e6"
+    },
+    {
+      "location": "public",
+      "filename": "shatabhisha-billboard.webp",
+      "bytes": 3330,
+      "sha256": "beb4ead621959255cea035e6a13b24b36db055cf9a95a0c672afc6d9d7de40be"
+    },
+    {
+      "location": "public",
       "filename": "shatabhisha-dataset-color.webp",
       "bytes": 44,
       "sha256": "c887f747fc1b75a18ccb1dd8e77494a71eb66e1a673bba3558d39ce2e5801507"
@@ -18,6 +30,12 @@
       "filename": "shatabhisha-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "f2f871b982d57b652013a6ed1726bebc801df770b76da3c64a02a6ed5e515089"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 390,
+      "sha256": "17d18a4a357a391759fb4d4898dc83d376608a5594242c352606646247efa944"
     },
     {
       "location": "prepared",

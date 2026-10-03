@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "solitaire-arrival.webp",
+      "bytes": 17660,
+      "sha256": "2b2012e38159ebc9909405f69fb12d7242a0be109276a7e6ab2b0a2ca7e03a17"
+    },
+    {
+      "location": "public",
+      "filename": "solitaire-billboard.webp",
+      "bytes": 3128,
+      "sha256": "1e85987b15fdde7dddb9c36b820d9647462e8ec2345e9ab6e8606741d2892134"
+    },
+    {
+      "location": "public",
       "filename": "solitaire-dataset-color.webp",
       "bytes": 44,
       "sha256": "82cd92a3ff8e7b7b5731c35780433febfa9a64cab60d8f3e5b557f324b12136f"
@@ -18,6 +30,12 @@
       "filename": "solitaire-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "6f50c6f7238223347e3e7e7d98364419fe4bf97e48f5149942d510061c8ed7f6"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 385,
+      "sha256": "fb65e805a35a8cb8c2d71fbed0548ae4377430dbb8c47ee69dfca05223ec1028"
     },
     {
       "location": "prepared",

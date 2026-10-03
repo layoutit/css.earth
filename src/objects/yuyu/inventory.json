@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "yuyu-arrival.webp",
+      "bytes": 16502,
+      "sha256": "c19ec205913a094101933014e980387892b9186b9fa8c896a3833c5d8202ea77"
+    },
+    {
+      "location": "public",
+      "filename": "yuyu-billboard.webp",
+      "bytes": 2920,
+      "sha256": "a2899f34f671d78cbd49f59d0e198d7513a0b92021298df098c237d9720cc788"
+    },
+    {
+      "location": "public",
       "filename": "yuyu-dataset-color.webp",
       "bytes": 44,
       "sha256": "ee8f358221b550075e4db23e4f3162c8af59ee37647e04e5d1db57666c84bc93"
@@ -18,6 +30,12 @@
       "filename": "yuyu-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "055533bc4ef0ffc656b8b783c92fe810d1978110b1b2d1fdf521e82b7f289ed4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "d09558468fac3527de66d56cc6ea294ed6463091761234f0f0c128ca9bab1abe"
     },
     {
       "location": "prepared",

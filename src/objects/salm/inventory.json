@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "salm-arrival.webp",
+      "bytes": 26974,
+      "sha256": "30d43e6387118a50873a9bd8b3f451216ccce8f87740e6d3ea8fd520c05a0e51"
+    },
+    {
+      "location": "public",
+      "filename": "salm-billboard.webp",
+      "bytes": 4818,
+      "sha256": "9396ddaefbdf95e9da486df14c1bef77c0c69806cfbe62453c811ae3571b2f1a"
+    },
+    {
+      "location": "public",
       "filename": "salm-dataset-color.webp",
       "bytes": 44,
       "sha256": "900abb7c644bdcbb8ce9d2634209665ee271336f91b5bc1b5dec07b69bbff98b"
@@ -24,6 +36,12 @@
       "filename": "salm-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "64faa3dfb75384dbee423e779b32990faf996d71e4ff026478e79867adf57526"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 369,
+      "sha256": "8669a41e0842fad9d3fbe30e558596a01da93bdd18ae2cff03ac7b0e7bb7716d"
     },
     {
       "location": "prepared",

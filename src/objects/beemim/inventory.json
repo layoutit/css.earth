@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "beemim-arrival.webp",
+      "bytes": 17888,
+      "sha256": "5d3540946eddd31ddda6952b5bc20da4515e74d913632931a68c163aeedc7b51"
+    },
+    {
+      "location": "public",
+      "filename": "beemim-billboard.webp",
+      "bytes": 3280,
+      "sha256": "3d7edbda39e96545ac0f4dc9ed0218fe8e6eb2c3bda2c81c5a07128bca6721aa"
+    },
+    {
+      "location": "public",
       "filename": "beemim-dataset-color.webp",
       "bytes": 44,
       "sha256": "7fcb4cae80295bc68a5cd17e9e4c36129ae5a690212cecab1058d5c0ebaf4c8c"
@@ -18,6 +30,12 @@
       "filename": "beemim-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "03125775c52b08b75e6759106293f90f9a13954130aa531a7843bfbd942e36aa"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "29ec6a3bb998b3c34c48d290762927e5a245229faad71c84dcbb986596bece62"
     },
     {
       "location": "prepared",

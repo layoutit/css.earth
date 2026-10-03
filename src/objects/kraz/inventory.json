@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kraz-arrival.webp",
+      "bytes": 16364,
+      "sha256": "bdd71e93aacbd8e74ef45a1ea91082a47af365fc3a435c0c0f4f556fccb24715"
+    },
+    {
+      "location": "public",
+      "filename": "kraz-billboard.webp",
+      "bytes": 2848,
+      "sha256": "2e79aa6a7996d4412aad50793b4d243ff73a25842525077f820f0d6b473de0fe"
+    },
+    {
+      "location": "public",
       "filename": "kraz-dataset-color.webp",
       "bytes": 44,
       "sha256": "c44455c58739c8097d944bb7941b0ccf919d63d2c109dd12c5af3d7014cd050f"
@@ -18,6 +30,12 @@
       "filename": "kraz-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "7291e45f860f6cb3ca2c9dfe20f01f23366c904ad04cc1676254f1cf27aca4bc"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "6d0dc06f1005af2d3ab83ae344e4bd873e4d9e021cf2e0db556e08207b63f0a0"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "fafnir-arrival.webp",
+      "bytes": 17384,
+      "sha256": "e1f4f67ac40f2b13be24647eb28728e570f4112ebaf833da69d586ccded6c771"
+    },
+    {
+      "location": "public",
+      "filename": "fafnir-billboard.webp",
+      "bytes": 3082,
+      "sha256": "88ad4295a77306d4ae950c7489772e9b8af6530cae10310c42d323c98e4a7e0c"
+    },
+    {
+      "location": "public",
       "filename": "fafnir-dataset-color.webp",
       "bytes": 44,
       "sha256": "cd1cf35794fbf5bd9f9fb5895178e9c3e5a9fa509618422121ffbc38ee862912"
@@ -18,6 +30,12 @@
       "filename": "fafnir-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "365149fd5d75cddb4d31eb121a799106ef5afb91ca2b46e1a8265f0c503785a9"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 380,
+      "sha256": "16f268453fe9e3f0034babfbcfcb29180a084516e3fc5d641a88c0e90e1a2863"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "paradys-arrival.webp",
+      "bytes": 17948,
+      "sha256": "26c61558b75b0eae8bc564c26786f31845cb40945244a8781371115a2e05ab12"
+    },
+    {
+      "location": "public",
+      "filename": "paradys-billboard.webp",
+      "bytes": 3262,
+      "sha256": "1d56cccfd64cfd1dff8e6e4cf0341d93d9a42ae3109df452df224832f55b8d3d"
+    },
+    {
+      "location": "public",
       "filename": "paradys-dataset-color.webp",
       "bytes": 44,
       "sha256": "79009dfeaba9e929beeafcb7920268b6af89b07b19e1bd62f19f1da37fe4f0dc"
@@ -18,6 +30,12 @@
       "filename": "paradys-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "58f7ba2c5cf63fac0a358db9d80670bfd75dd7679c03281271926ee396aac405"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "b12eff7e3d0f447d930efa2dc334e232a701776db29d5861a544d480a366e013"
     },
     {
       "location": "prepared",

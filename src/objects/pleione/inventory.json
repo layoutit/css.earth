@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pleione-arrival.webp",
+      "bytes": 17314,
+      "sha256": "44ea9080631991f6fb04a1365884da3c89240058da9a3ceb59a2c4dc7d7d09f9"
+    },
+    {
+      "location": "public",
+      "filename": "pleione-billboard.webp",
+      "bytes": 3048,
+      "sha256": "a5788db9f8f0d281d375e99e2e651c35ce8908e0226efdfb451efaea6d134099"
+    },
+    {
+      "location": "public",
       "filename": "pleione-dataset-color.webp",
       "bytes": 44,
       "sha256": "5eb3d88c6491d2a85e7febf46913e5facb00490557c626b4f2df5aed98fd5e26"
@@ -18,6 +30,12 @@
       "filename": "pleione-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "bd11befba7287879769c6c4b2da7d1d8f26987592524121c71bbaed18e16d1b6"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 382,
+      "sha256": "298cb5a324325068d37423f919996f6cd1fa93ea77c8657962c44b168c8f9588"
     },
     {
       "location": "prepared",

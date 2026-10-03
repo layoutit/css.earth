@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nikawiy-arrival.webp",
+      "bytes": 16392,
+      "sha256": "56e008118be7668eab39d5362df26b6a3fbe9223e7a03d0a0b3f1c37c00a7b5b"
+    },
+    {
+      "location": "public",
+      "filename": "nikawiy-billboard.webp",
+      "bytes": 2908,
+      "sha256": "05684f8257ffba47051120a9955ef008dc9c1e0a59fa025d6b8640f4ae3440b5"
+    },
+    {
+      "location": "public",
       "filename": "nikawiy-dataset-color.webp",
       "bytes": 44,
       "sha256": "006ec6f00ff0f989f14e24018795ca8060446a436661502e67c26f026d01a223"
@@ -18,6 +30,12 @@
       "filename": "nikawiy-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "9aece617d1bc152a435fe1b27785ab7a811a824902d396234370847597892422"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "c4f1e841da2f5231c978db2041016e0b8096bd6836c399fee536b9f2375e4fae"
     },
     {
       "location": "prepared",

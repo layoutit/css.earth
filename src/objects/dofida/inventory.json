@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "dofida-arrival.webp",
+      "bytes": 27552,
+      "sha256": "9a1f70feea06a7ec79323afa0ab40acbd9795460e2989d06661c9b6b4ada382a"
+    },
+    {
+      "location": "public",
+      "filename": "dofida-billboard.webp",
+      "bytes": 4852,
+      "sha256": "0e6a674b05817b4a97c1e788bfe277d9451164ded2f71fbded844c8c98c1ade3"
+    },
+    {
+      "location": "public",
       "filename": "dofida-dataset-color.webp",
       "bytes": 44,
       "sha256": "b840c3349060d63984aca79217785392950a861df9cb92b8428959bae9785833"
@@ -24,6 +36,12 @@
       "filename": "dofida-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "5f69a8b0a106909740dade1653d70bea50b2518bf3aff8950f5dd42c5b0f3120"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "c96afa04f34eca15eb7552b8230b5b3e32f892053bd164d9b33a96959450e1b3"
     },
     {
       "location": "prepared",

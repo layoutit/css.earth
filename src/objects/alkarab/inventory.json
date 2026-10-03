@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alkarab-arrival.webp",
+      "bytes": 13218,
+      "sha256": "d54cd9e974118e8ad399cdc49f53a650180a9bef5c4428a52bdff02064c68290"
+    },
+    {
+      "location": "public",
+      "filename": "alkarab-billboard.webp",
+      "bytes": 2376,
+      "sha256": "ff0bfb12f067c723eab68820ee50633edef357a60824da95a4ec1446e4b15150"
+    },
+    {
+      "location": "public",
       "filename": "alkarab-dataset-color.webp",
       "bytes": 44,
       "sha256": "01c85ab9714ecff29ae805e60e7653474813babf4ad710369ce7f71eb5369615"
@@ -18,6 +30,12 @@
       "filename": "alkarab-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "1589d4f61c4a690ef68dc286a3fb514777cc83499a71e2caa49f922d987ee2d9"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "fb517e9524f233b32d933c580b5157758d10b1e5bae6c6d4bbbac21e7550727c"
     },
     {
       "location": "prepared",

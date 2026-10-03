@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "rasalas-arrival.webp",
+      "bytes": 17574,
+      "sha256": "512e8daf1a31b9a7bd06fb6e27cfed376908680b41172ec7b9e52998780c1b54"
+    },
+    {
+      "location": "public",
+      "filename": "rasalas-billboard.webp",
+      "bytes": 3124,
+      "sha256": "056978d7a72f4cb72e6eb9f9fce50abdfbb4e07a88c6396d787b499e41be4d66"
+    },
+    {
+      "location": "public",
       "filename": "rasalas-dataset-color.webp",
       "bytes": 44,
       "sha256": "b9f3b2f4b8326341212f261e4622cb35d2f53d54cfa2c795a0cea491926adea3"
@@ -18,6 +30,12 @@
       "filename": "rasalas-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "830b81ff72d49fe95dd965ffb96830f8369a91f502a3e288704caacfe84b46ce"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 379,
+      "sha256": "94dbf41ab440b4a16924572f154f56e1c0b4804341ae60e48538606f795efbb3"
     },
     {
       "location": "prepared",

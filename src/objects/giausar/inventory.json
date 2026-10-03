@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "giausar-arrival.webp",
+      "bytes": 18146,
+      "sha256": "6622dcd61513c758f0ae09a4f7d8cfb496c910fe47c557bdff94c925c1d34792"
+    },
+    {
+      "location": "public",
+      "filename": "giausar-billboard.webp",
+      "bytes": 3332,
+      "sha256": "9b5042e8bd8bde5553b3904333c48b41a3abdc9f2bc7eb1b332f41ffa4fda110"
+    },
+    {
+      "location": "public",
       "filename": "giausar-dataset-color.webp",
       "bytes": 44,
       "sha256": "52d3c43f3dff9e9ac5d9bfb4265fa48f3ba6314edce4e071eacb092ef20ffb04"
@@ -18,6 +30,12 @@
       "filename": "giausar-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "bce6abad1908d8d3775960be9bcf1c5a84f2df473f7c2d066caec4465845a4cb"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 372,
+      "sha256": "95c6a55da6ed9fd75881c35dfab87fa6dc1c7c0773a17e8afe2d1da92c29bf1f"
     },
     {
       "location": "prepared",

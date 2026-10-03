@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nembus-arrival.webp",
+      "bytes": 17306,
+      "sha256": "a11c6f159417bb71eb32ad493010947de936f41ce431ecd87bf89591aec211ba"
+    },
+    {
+      "location": "public",
+      "filename": "nembus-billboard.webp",
+      "bytes": 3098,
+      "sha256": "b375a5ed03190d8248d1159f060a3cfe1d31b2b286e9e43793dfd7ac871d26c9"
+    },
+    {
+      "location": "public",
       "filename": "nembus-dataset-color.webp",
       "bytes": 44,
       "sha256": "f631e8af7a05abc03088c30804cb616353e6cd45232f051449dde68f5bc08da1"
@@ -18,6 +30,12 @@
       "filename": "nembus-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "21594c131fbb015edb8fa3fbc48dda18d484adff96d517a695443c75f42d2f46"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "ce4f192e55bf51be3579b647d1c1c59d8ded4bb0bc2171ca07ec8ec5c51d6014"
     },
     {
       "location": "prepared",

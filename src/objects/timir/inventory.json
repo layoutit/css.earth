@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "timir-arrival.webp",
+      "bytes": 16328,
+      "sha256": "974c2cd13c17d936ccf275ed55155f5952a8909d6d879ea7f684258d05e03159"
+    },
+    {
+      "location": "public",
+      "filename": "timir-billboard.webp",
+      "bytes": 2886,
+      "sha256": "53130d694f2b22133424b19a44d18663e92566fdd92a782979a52f1d91a4fdf9"
+    },
+    {
+      "location": "public",
       "filename": "timir-dataset-color.webp",
       "bytes": 44,
       "sha256": "006ec6f00ff0f989f14e24018795ca8060446a436661502e67c26f026d01a223"
@@ -18,6 +30,12 @@
       "filename": "timir-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "9aece617d1bc152a435fe1b27785ab7a811a824902d396234370847597892422"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 369,
+      "sha256": "c91ca9aa68efec49adb7ca866a2ae1fe6fdcbe57a3b0a5923d8e5e1fc8f3ac29"
     },
     {
       "location": "prepared",

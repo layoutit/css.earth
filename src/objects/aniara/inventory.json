@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "aniara-arrival.webp",
+      "bytes": 28106,
+      "sha256": "fd9a8af662b198c1c5be15bf8fae55c6614c6eea39c4f7b30ccb8ab0a3378710"
+    },
+    {
+      "location": "public",
+      "filename": "aniara-billboard.webp",
+      "bytes": 4990,
+      "sha256": "a9f7793331d9a9865a0acc2520c6c32ab6c17031f2c4a6ce02c8c9d744aae8b9"
+    },
+    {
+      "location": "public",
       "filename": "aniara-dataset-color.webp",
       "bytes": 44,
       "sha256": "916b9b61d63aed69625c7914682e46a5376cff9ae1a8aa0cfcba278a1789c127"
@@ -24,6 +36,12 @@
       "filename": "aniara-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2586f1cac788c04e39c12a5acf37b8b4057676fa295a5fdf2850bbc4fb815cdb"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 371,
+      "sha256": "9922a77e4c61c6596b81f92c1c3e9dcd991167074b3b155f4370956284d84543"
     },
     {
       "location": "prepared",

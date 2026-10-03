@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lintangkumba-arrival.webp",
+      "bytes": 18160,
+      "sha256": "3a07b5335cdaf42c46929058b1eba5a35df43ebc43240fe7480cb7187c4e5ee5"
+    },
+    {
+      "location": "public",
+      "filename": "lintangkumba-billboard.webp",
+      "bytes": 3304,
+      "sha256": "b9405509bfad93004125eb7cb7a6ee8fc07f136c180b2a862702c214c3db4222"
+    },
+    {
+      "location": "public",
       "filename": "lintangkumba-dataset-color.webp",
       "bytes": 44,
       "sha256": "26d6fa0f436ee7bd97ad811f61cc3c84b0db6d7ae25684c58f76bef6517f6d39"
@@ -18,6 +30,12 @@
       "filename": "lintangkumba-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "3bc4422ecb08b8f3f5bd9c6974f6789cdda299c00f12f1453ea3cca7db8b456c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 393,
+      "sha256": "1c193b81e09a248a86b330ddd1ae32fb026cc580dc5497b235b46fdf8bf5503b"
     },
     {
       "location": "prepared",

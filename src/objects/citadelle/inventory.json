@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "citadelle-arrival.webp",
+      "bytes": 27964,
+      "sha256": "69899fab3eae6719b6f9382ac579c1031c82b17c29f732871345d7dce8cfb9ca"
+    },
+    {
+      "location": "public",
+      "filename": "citadelle-billboard.webp",
+      "bytes": 5008,
+      "sha256": "143870baa4991e6e0a2ce933f365c2c11386d891b6b546d1746711d4e7bd16ce"
+    },
+    {
+      "location": "public",
       "filename": "citadelle-dataset-color.webp",
       "bytes": 44,
       "sha256": "aa8ec3e3a00cdf0141405926bc55cce324466e6d663266b97485d991fb7cedf1"
@@ -24,6 +36,12 @@
       "filename": "citadelle-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "71cddc69f6d693d75e57b49646242f4c2c8d1eabebd5cec2f5a046569467ec8b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "b4e6108a8f71fb12d182fb16ec97953b59e6e1269d5c7fd217ffeb5f4233620f"
     },
     {
       "location": "prepared",

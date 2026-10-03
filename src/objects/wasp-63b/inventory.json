@@ -213,6 +213,18 @@
     },
     {
       "location": "public",
+      "filename": "wasp-63b-arrival.webp",
+      "bytes": 29896,
+      "sha256": "9b6a7f78b0ad7872e52c46727560ab74e42c6101c0c6ea153ce911bf2a29de18"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-63b-billboard.webp",
+      "bytes": 4820,
+      "sha256": "cf4884a6e359db5219fe7b035e35a554a5dd83a28f153a515879c1a96ac075a7"
+    },
+    {
+      "location": "public",
       "filename": "wasp-63b-dataset-shape.webp",
       "bytes": 44,
       "sha256": "c3abf02cfddf2226eff847ed583644efd0e70eca5ac3a6164fb2052f5ac786c9"
@@ -240,6 +252,12 @@
       "filename": "wasp-63b-transit.svg",
       "bytes": 12189,
       "sha256": "668bc6135d66bf601b5de23a3e7984a69d05c2268c21c9fe5af89087ff52b304"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 309,
+      "sha256": "acd9effe5c99f08fb6bd9ee95b0cebdfc1e43be751bf8598b7d11847aca50c50"
     },
     {
       "location": "prepared",

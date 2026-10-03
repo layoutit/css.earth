@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "koeia-arrival.webp",
+      "bytes": 18120,
+      "sha256": "2b3db4358197f206b02a9717b76e087a8a7b0f39f276dcca7b889accef8f8ce2"
+    },
+    {
+      "location": "public",
+      "filename": "koeia-billboard.webp",
+      "bytes": 3292,
+      "sha256": "2b8d18241d37862bb56a931839ce7bd9796214808314990023bc898f031c9f52"
+    },
+    {
+      "location": "public",
       "filename": "koeia-dataset-color.webp",
       "bytes": 44,
       "sha256": "80e163c4cc8cc023b89812eaa530926b40d559240261ef47c0507cb309d376a8"
@@ -18,6 +30,12 @@
       "filename": "koeia-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "b2b179884d115256e3a8a71e5d171364ba8f47bf213cc42420af7f4c641e3cbd"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "b1d9f51a4ef49d9be7b630ff6555c6726972bf740d3ff5dcafd1d7bfa5a741d6"
     },
     {
       "location": "prepared",

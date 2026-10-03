@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "angetenar-arrival.webp",
+      "bytes": 16190,
+      "sha256": "db0ad94065e0e6e425a1e14bd7b34b9e9bfb5671e2e10bfc5aef08cad65d27ba"
+    },
+    {
+      "location": "public",
+      "filename": "angetenar-billboard.webp",
+      "bytes": 2844,
+      "sha256": "3c1864450fc69c2bb902d8e9faa68c5cb74d1078a5f0aca84bcd8a4e1a291831"
+    },
+    {
+      "location": "public",
       "filename": "angetenar-dataset-color.webp",
       "bytes": 44,
       "sha256": "aa8ec3e3a00cdf0141405926bc55cce324466e6d663266b97485d991fb7cedf1"
@@ -18,6 +30,12 @@
       "filename": "angetenar-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "71cddc69f6d693d75e57b49646242f4c2c8d1eabebd5cec2f5a046569467ec8b"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 384,
+      "sha256": "0e80036cd32431d547c92f5d0cf0563b7542948e186f3dda50285562e9d853d7"
     },
     {
       "location": "prepared",

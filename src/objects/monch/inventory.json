@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "monch-arrival.webp",
+      "bytes": 27998,
+      "sha256": "fd7d2e3c9a69f70fa0f2c3661c8bcd2a148d780bee40c8192304513f02d803fb"
+    },
+    {
+      "location": "public",
+      "filename": "monch-billboard.webp",
+      "bytes": 4958,
+      "sha256": "5e9decaac166ce2ffcf4d98d73fc4667200c7e010e3578b9e405e51f48aba32b"
+    },
+    {
+      "location": "public",
       "filename": "monch-dataset-color.webp",
       "bytes": 44,
       "sha256": "d6486293fce00e31df1545161e5f676e5dd4d0df145eb8b02c6a1ed4f39ef22f"
@@ -24,6 +36,12 @@
       "filename": "monch-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "80d6ae3757f431e7844a7f32f12741c3b93d4b38ed33c0e6c1fdfcf83a6f15de"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "f439a4595999b1a94dc8e713f979aba9c71121206c4699963e484edb355f6e6e"
     },
     {
       "location": "prepared",

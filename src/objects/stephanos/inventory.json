@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "stephanos-arrival.webp",
+      "bytes": 16996,
+      "sha256": "b31acd0d1b4d0aacf1ff1e0db3560d8041bd6e1710a4c5d920d0fd21447a226f"
+    },
+    {
+      "location": "public",
+      "filename": "stephanos-billboard.webp",
+      "bytes": 3002,
+      "sha256": "d3643f8710173e7c3cc01aed62a1351e3ba005d1a8f7a7a14cb9bb99021e060f"
+    },
+    {
+      "location": "public",
       "filename": "stephanos-dataset-color.webp",
       "bytes": 44,
       "sha256": "c9ace2c23ebf8a6f48413b478428de3f41f4901798ed94a4265b4cc51cb453d7"
@@ -18,6 +30,12 @@
       "filename": "stephanos-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "a4753b42aeb23b0d4f4b8f2fe2d40516646694a2d0f625d3b72fd6eb34481a92"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "5923b46b1c15637f061658f5d8e55f295262887026979dcf0a7e28d04147b44b"
     },
     {
       "location": "prepared",

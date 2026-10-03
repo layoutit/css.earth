@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tania-borealis-arrival.webp",
+      "bytes": 17612,
+      "sha256": "335f8128e42049714e9381399e03eeeb89f4a1d830c9bc415d2dfe948d897274"
+    },
+    {
+      "location": "public",
+      "filename": "tania-borealis-billboard.webp",
+      "bytes": 3078,
+      "sha256": "a277c28b37c163ffa88438fd676a396ddc42e217e11da73fd3f3022d61e8c2e2"
+    },
+    {
+      "location": "public",
       "filename": "tania-borealis-dataset-color.webp",
       "bytes": 44,
       "sha256": "349837e1b7b9b12d5df5343c701a7750fc14835ab95cc51f87f70fcc2c4130b2"
@@ -18,6 +30,12 @@
       "filename": "tania-borealis-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "60fdc35168cd910709aa4921e39f6c3f1b06b4a86ef722f580dc2ecf4589fc0d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 394,
+      "sha256": "4c3f0a58023602da45d18acc4f4fac78b649ec77d6bfc17131dbd1849ceccd91"
     },
     {
       "location": "prepared",

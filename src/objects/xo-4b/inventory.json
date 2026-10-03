@@ -213,6 +213,18 @@
     },
     {
       "location": "public",
+      "filename": "xo-4b-arrival.webp",
+      "bytes": 35506,
+      "sha256": "a08be13f1a92eb588594d92719289a01d4499727089561ac71e17573380119e8"
+    },
+    {
+      "location": "public",
+      "filename": "xo-4b-billboard.webp",
+      "bytes": 6120,
+      "sha256": "dcf95ccd151c7e23dd4af9ba802378688609b68d23b0ec34461defddadc3b295"
+    },
+    {
+      "location": "public",
       "filename": "xo-4b-dataset-thermal.webp",
       "bytes": 44,
       "sha256": "edda65ca7bb23f48e3373547f6718bebe2feddd10505291baaec219a60c9eabb"
@@ -240,6 +252,12 @@
       "filename": "xo-4b-transit.svg",
       "bytes": 11782,
       "sha256": "e222013e861ada1163258e8d2d974910dd598b034bbf8789d6b887bd0295ffba"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "c170b67bbe7b5a68a9ae9489f1f0636b59b2c03ef9b94912e7a18b70646bd24d"
     },
     {
       "location": "prepared",

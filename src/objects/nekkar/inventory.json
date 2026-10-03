@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "nekkar-arrival.webp",
+      "bytes": 16494,
+      "sha256": "4e9cbe7abdbcd5f92af218f5fbf68dcf9798e499044fff05c8a29e53621c10a3"
+    },
+    {
+      "location": "public",
+      "filename": "nekkar-billboard.webp",
+      "bytes": 2890,
+      "sha256": "0b6faf6bd7fa044317d45e8ad44beeedc9be4fd6dd4e86b26a8eacfc2519e63f"
+    },
+    {
+      "location": "public",
       "filename": "nekkar-dataset-color.webp",
       "bytes": 44,
       "sha256": "5597fe06c6a4593fdf91718da13794d4c7be84db96e2be170d31211c4bb9aaff"
@@ -18,6 +30,12 @@
       "filename": "nekkar-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "78a7e317e6d76ee46432f19c58583fec5f6dd190423dde5bbc4aed96210e7faf"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 380,
+      "sha256": "d3da5c31c2e185224909fc33a9f7905a1eacabf64c50d1086eebbf7c1045d3a4"
     },
     {
       "location": "prepared",

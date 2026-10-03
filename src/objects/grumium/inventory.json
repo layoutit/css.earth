@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "grumium-arrival.webp",
+      "bytes": 17252,
+      "sha256": "06ab5206f73634402813fc6dbb4f26f5cb413a2909e80a75b5bf38d5920c2e6d"
+    },
+    {
+      "location": "public",
+      "filename": "grumium-billboard.webp",
+      "bytes": 3092,
+      "sha256": "be73a25534b886b0547b778a05bbb86dcd3295bb8899e92b6df80b495aad5403"
+    },
+    {
+      "location": "public",
       "filename": "grumium-dataset-color.webp",
       "bytes": 44,
       "sha256": "34f8113116590e79b6d9a1dd878b14476f5267b90f94ac657dceac5fe51b367e"
@@ -18,6 +30,12 @@
       "filename": "grumium-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "d3461d07a63951a44858fe3c40c57a453b280d0f47533b9d19e0096b15bacbf1"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 378,
+      "sha256": "d8b311448a566cdc84aab2962a40673ca3918f8ad4cc2eec05b964cb25c44d1e"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "jishui-arrival.webp",
+      "bytes": 27226,
+      "sha256": "36769976887f968fe4b29ca3328e01287ccdf9f243b6e05b099ae77d19dc5077"
+    },
+    {
+      "location": "public",
+      "filename": "jishui-billboard.webp",
+      "bytes": 4772,
+      "sha256": "b4792633d1e7411033bda6f1042ec3408c22d59ae22721a2c4894ed23ee81cbd"
+    },
+    {
+      "location": "public",
       "filename": "jishui-dataset-color.webp",
       "bytes": 44,
       "sha256": "1eb38e56026ee132009ad735c68a6fa099af018c2272103a631d902972156dc4"
@@ -24,6 +36,12 @@
       "filename": "jishui-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "ad555278665d0facf3af35023179c893ffeb654e5596f3ebb90a7f0ff00c2e22"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "a0254f082b4a6085e91a7b9ec4f482bd3ba2838ec46562fdbe16eb0c8fe2c9c7"
     },
     {
       "location": "prepared",

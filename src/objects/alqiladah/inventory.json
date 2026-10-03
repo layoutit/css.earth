@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "alqiladah-arrival.webp",
+      "bytes": 16928,
+      "sha256": "68ce57da91725d0361e245ca5f335a00f7d4561d70ff5eca0191da3f22db43d3"
+    },
+    {
+      "location": "public",
+      "filename": "alqiladah-billboard.webp",
+      "bytes": 2990,
+      "sha256": "0d615151da0fee8e3c5b0b116e3f9b7cf22545c5aede2837460f40a5e78a25f6"
+    },
+    {
+      "location": "public",
       "filename": "alqiladah-dataset-color.webp",
       "bytes": 44,
       "sha256": "2e6e47b4e81e31c27be07167724e3e6bff7f683b0ad07487282eb4a0f16730c1"
@@ -18,6 +30,12 @@
       "filename": "alqiladah-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "701308bdc5422e949420161a5cc4f5715d420dfa2cee2757143cc6d1c45fb745"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 386,
+      "sha256": "0ec108a98c569c2ee16a80fb8d5a3f27d8aa32d55425c7267c0a9258057327a7"
     },
     {
       "location": "prepared",

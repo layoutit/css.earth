@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "gudja-arrival.webp",
+      "bytes": 17982,
+      "sha256": "bd10888e869bc912ce4fe4f8051a131cf8a5991a49a18efd7b65e4272c5b8399"
+    },
+    {
+      "location": "public",
+      "filename": "gudja-billboard.webp",
+      "bytes": 3324,
+      "sha256": "a8fcbb3705eb53e5ea7ff46d7f8b9833b86ec6a81ddcfd0941ee982dd80c75b7"
+    },
+    {
+      "location": "public",
       "filename": "gudja-dataset-color.webp",
       "bytes": 44,
       "sha256": "3870ae18d95a04e82ead73eb119ba78b5d74d6cc6b3c3746adfabd60964340a6"
@@ -18,6 +30,12 @@
       "filename": "gudja-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "92e0afc16dd87881ca1ab9b2bdc840dc384fddf907ffad083568de7c59c0083e"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "063bb1a56f0af7638be4d1080d5202a53eb5220823174fd5be308d6d861e21e8"
     },
     {
       "location": "prepared",

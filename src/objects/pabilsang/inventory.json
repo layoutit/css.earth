@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "pabilsang-arrival.webp",
+      "bytes": 17374,
+      "sha256": "f4fe7f0646a7a9a3907cd809e5eae90ad5a2b09517fd9ccb79b90828f7d653d9"
+    },
+    {
+      "location": "public",
+      "filename": "pabilsang-billboard.webp",
+      "bytes": 3116,
+      "sha256": "e810fd8824b2b2bb6473ac1f3efbad0e796ade8e0da6032b4f9933e15bb25633"
+    },
+    {
+      "location": "public",
       "filename": "pabilsang-dataset-color.webp",
       "bytes": 44,
       "sha256": "6af98b8cb8e27a61aa2bf129b21bd23e3b3e3e3cb6929d2c1bb609d3d6604c0e"
@@ -18,6 +30,12 @@
       "filename": "pabilsang-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "cc4f8c5920c346ee5f2e9aa41ff68903aaf38e3ad3676630b4fd148464ceaac6"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 382,
+      "sha256": "bcc09d16a89feafbe5221a16e469eb6310a6e5bfac7a7067d0261820f1b19e02"
     },
     {
       "location": "prepared",

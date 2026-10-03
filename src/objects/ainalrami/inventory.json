@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ainalrami-arrival.webp",
+      "bytes": 18012,
+      "sha256": "c6bdc6c21bbfd5d17521a4a5acbffc995d3e379f87459a51ca46c8382c28755d"
+    },
+    {
+      "location": "public",
+      "filename": "ainalrami-billboard.webp",
+      "bytes": 3284,
+      "sha256": "f00ae5f7d33fb9447a2462250dcd08c1041d71390426639677da30bf33b8d26c"
+    },
+    {
+      "location": "public",
       "filename": "ainalrami-dataset-color.webp",
       "bytes": 44,
       "sha256": "2ada107085913bfd8b79114ea7dbabe8b4b0b428c40849b9985cb7678eebe9a9"
@@ -18,6 +30,12 @@
       "filename": "ainalrami-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "12f766363be24884d8cb0ce3745b0bea9f3fc7ec1846a7a0e706845210e8f80d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "0eb92cdda2741950846ac90ab63c13a21f4a71ead08988ea2076b6b27564dbb7"
     },
     {
       "location": "prepared",

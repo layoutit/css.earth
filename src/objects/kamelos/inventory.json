@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "kamelos-arrival.webp",
+      "bytes": 18068,
+      "sha256": "c1bad52cc27c7613a1841f85a1a3ffef4e19f87c795130c8fc387797e2f5d15d"
+    },
+    {
+      "location": "public",
+      "filename": "kamelos-billboard.webp",
+      "bytes": 3278,
+      "sha256": "38345447a51942dc3bfffcddf21015eff9115f3e20b75e2de3fbd62434116936"
+    },
+    {
+      "location": "public",
       "filename": "kamelos-dataset-color.webp",
       "bytes": 44,
       "sha256": "c7a16bf37bf5a05b05ef40f67dbffcec9272cf0162d501766bb5a58dc09a3e21"
@@ -18,6 +30,12 @@
       "filename": "kamelos-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "5269c07f7c660ae22cac128810c83d0d4ad6d5b8898470b42ce8d1519313adac"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "2194ecb4d572ce7952454e1da6b7d1fec066cf5b0066628e891f8fde198aa558"
     },
     {
       "location": "prepared",

@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "magur-arrival.webp",
+      "bytes": 17742,
+      "sha256": "0d0771caad484f1480fccdf112a545641724f466ed14e5fec9ebd6683f769036"
+    },
+    {
+      "location": "public",
+      "filename": "magur-billboard.webp",
+      "bytes": 3146,
+      "sha256": "f321fce49fdc475b0d039098dc21593e7d1573672324abdae30d32f141c45da7"
+    },
+    {
+      "location": "public",
       "filename": "magur-dataset-color.webp",
       "bytes": 44,
       "sha256": "c1d56eae7349c182050c3c0266ed04014336598b14d1d9658f507934eb4eebc9"
@@ -18,6 +30,12 @@
       "filename": "magur-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "3ecf6b7367c2448d59f28b59e0257f9bfc31669d59edb8fd6cb95caf3bd41c0c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "52351e84f914309a0ac4bbfd9b70868cb7fd793de73069d1e697c9280cca691b"
     },
     {
       "location": "prepared",

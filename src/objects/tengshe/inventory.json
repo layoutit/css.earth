@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tengshe-arrival.webp",
+      "bytes": 18510,
+      "sha256": "0a53c6cb5c0193296c55b7652735acc7d2e8c50f45be25f7ce8eccbf14ad9b52"
+    },
+    {
+      "location": "public",
+      "filename": "tengshe-billboard.webp",
+      "bytes": 3398,
+      "sha256": "449243df9a6164789b3bc5fc173568fddebf89fe4ef6744d26db57452c996b31"
+    },
+    {
+      "location": "public",
       "filename": "tengshe-dataset-color.webp",
       "bytes": 44,
       "sha256": "fe1edb16f355ecdaddc083403a169f82ed044e2a698f5b3778c64aa5dbd2bc95"
@@ -18,6 +30,12 @@
       "filename": "tengshe-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "fede7f96819e0e9da7b12ba0b4e9dc86e611b9b728a873258a74cd3eab43fc73"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "a96df92d687993128c018e84aacbb7478128e6c195387ce209fd4feebfdb4df4"
     },
     {
       "location": "prepared",

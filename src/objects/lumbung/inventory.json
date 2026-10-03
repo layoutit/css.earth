@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lumbung-arrival.webp",
+      "bytes": 27754,
+      "sha256": "565147fb18d1f76306e420c99746f5ca678a17a54b5e1e4ecff7a3b8fd6890ac"
+    },
+    {
+      "location": "public",
+      "filename": "lumbung-billboard.webp",
+      "bytes": 5036,
+      "sha256": "96dd6c0b0f50b1cdbd21f21dc10861b002c3f31fe38b436c8de848e81315406e"
+    },
+    {
+      "location": "public",
       "filename": "lumbung-dataset-color.webp",
       "bytes": 44,
       "sha256": "a66236a31d886c2cd1342faf315229eb763871b6586a2aebe328541182fbef59"
@@ -24,6 +36,12 @@
       "filename": "lumbung-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "ea8a78e39391ffd2baf4926580115414540775a26be79e8c47057a327e0b3c80"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "675e8c5b42e1bdf057c539836a72253fa7e8158e797ab1dfe10e2d24a9b10e71"
     },
     {
       "location": "prepared",

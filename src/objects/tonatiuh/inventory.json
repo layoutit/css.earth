@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tonatiuh-arrival.webp",
+      "bytes": 28120,
+      "sha256": "1d694fa6d960a38f74c79b63aa1bbda65f1ceabc3afe7c7536c396e08e807d8c"
+    },
+    {
+      "location": "public",
+      "filename": "tonatiuh-billboard.webp",
+      "bytes": 5012,
+      "sha256": "a3f4cc8692079f53b950c3f48a5ebfe7bc11715a6e63b9779fbe3a2c5fb82f80"
+    },
+    {
+      "location": "public",
       "filename": "tonatiuh-dataset-color.webp",
       "bytes": 44,
       "sha256": "916b9b61d63aed69625c7914682e46a5376cff9ae1a8aa0cfcba278a1789c127"
@@ -24,6 +36,12 @@
       "filename": "tonatiuh-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2586f1cac788c04e39c12a5acf37b8b4057676fa295a5fdf2850bbc4fb815cdb"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 384,
+      "sha256": "ff5302cddf69dc57fcf0b4fe2e58fdbb7e8c0591057aedc32f15eb0852b4a99b"
     },
     {
       "location": "prepared",

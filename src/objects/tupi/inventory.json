@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "tupi-arrival.webp",
+      "bytes": 27164,
+      "sha256": "a624ffc64c198e6498a2849ede31460502f5e5bceb2cd81cd2f36cacbc92d38e"
+    },
+    {
+      "location": "public",
+      "filename": "tupi-billboard.webp",
+      "bytes": 4796,
+      "sha256": "1fdb089ce9f072fb49c3371f20ca3823599e5847a7e3c89b84fe86e4a19fd97a"
+    },
+    {
+      "location": "public",
       "filename": "tupi-dataset-color.webp",
       "bytes": 44,
       "sha256": "6a41f420632463312b4dc0a9b253d9bb6b724900f1be2c47ca3f668c4db5bfb7"
@@ -24,6 +36,12 @@
       "filename": "tupi-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "cf2119139a19e94ea27c376bbbb12f27125cb1e43ddc8761cc4558d8f2c5ee8e"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "2ec2aafdd2d85aa6cbd580112b21d09af713cd7c0bed6fb9013edfe5fa0cf643"
     },
     {
       "location": "prepared",

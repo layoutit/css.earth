@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "bubup-arrival.webp",
+      "bytes": 27290,
+      "sha256": "c6b9bb087525def54f19aed9bf8f9213e9dea7ed0560bce22b4be1794e4b0ce0"
+    },
+    {
+      "location": "public",
+      "filename": "bubup-billboard.webp",
+      "bytes": 4838,
+      "sha256": "a9b1698b72cfa831967601e9ecacb2ad204a4560f2aeb0f52e62615bb887313f"
+    },
+    {
+      "location": "public",
       "filename": "bubup-dataset-color.webp",
       "bytes": 44,
       "sha256": "6a41f420632463312b4dc0a9b253d9bb6b724900f1be2c47ca3f668c4db5bfb7"
@@ -24,6 +36,12 @@
       "filename": "bubup-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "cf2119139a19e94ea27c376bbbb12f27125cb1e43ddc8761cc4558d8f2c5ee8e"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "f83a5439df67beb193bd73c655464d8e1f2015612184fa22f96584243ba110e9"
     },
     {
       "location": "prepared",

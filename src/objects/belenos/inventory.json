@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "belenos-arrival.webp",
+      "bytes": 27748,
+      "sha256": "bda16e359450063d0d601024a2823f4394d4b65582ae551d3b81646d54fa445e"
+    },
+    {
+      "location": "public",
+      "filename": "belenos-billboard.webp",
+      "bytes": 4884,
+      "sha256": "d96105b7a63f3983b077e79f76fb961ec812e19a1698a12fe9f5742d87000d12"
+    },
+    {
+      "location": "public",
       "filename": "belenos-dataset-color.webp",
       "bytes": 44,
       "sha256": "0f64ec3c87292c6619e3a78eeb196e694dfaaf9b83042b28c46a26666d4c7e83"
@@ -24,6 +36,12 @@
       "filename": "belenos-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "1b1078701e8896cedcd7348137299096a4253d62c1e25fa621e18587d9728401"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "59d22db878192940b5e18cda6d8078a1206f74362b449a2a66fd8735ebed955a"
     },
     {
       "location": "prepared",

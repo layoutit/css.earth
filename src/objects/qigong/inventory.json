@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "qigong-arrival.webp",
+      "bytes": 16594,
+      "sha256": "78d0590597e48cfea32ee697684e7f7d7aa81af6fc8b635962d92951fb1a5228"
+    },
+    {
+      "location": "public",
+      "filename": "qigong-billboard.webp",
+      "bytes": 2916,
+      "sha256": "5d113811344d6c3dd8606ad55889679dec4547e7c81053f37828a1287af10d75"
+    },
+    {
+      "location": "public",
       "filename": "qigong-dataset-color.webp",
       "bytes": 44,
       "sha256": "2fef9a103639160e4f544875cd213e26d90af53fb860abcae4ac87cc93c3de65"
@@ -18,6 +30,12 @@
       "filename": "qigong-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "66c03551bb9c389b0ad0f07343d8dadf1cf3773986e982734394226dfccc1ae2"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 377,
+      "sha256": "d99dd3c9a1c217e82cd36e6e064501d302ea2fab4a3d3db182f6237b0fe143b7"
     },
     {
       "location": "prepared",

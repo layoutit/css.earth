@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "adhil-arrival.webp",
+      "bytes": 28554,
+      "sha256": "f6cb146b6431ac539d5c6e3268fe7f883ffa0252bc0f1b9b152faaf39de948bd"
+    },
+    {
+      "location": "public",
+      "filename": "adhil-billboard.webp",
+      "bytes": 5056,
+      "sha256": "719ee8890c7d00e8f851907f758a73a408b645eea568c63d6ef5795ba04de7fa"
+    },
+    {
+      "location": "public",
       "filename": "adhil-dataset-color.webp",
       "bytes": 44,
       "sha256": "7ab1f48c13b504cbe59c6b17c4a48b7ae0938b2a5d4c89416ead730efe17437b"
@@ -24,6 +36,12 @@
       "filename": "adhil-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "91e700752990b4415fa224fed87dd5a28e29836c046aa5ba330adb6145ab83fa"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 367,
+      "sha256": "4254b6bbba6997db421fb6a06aad54693b9949066dd9b3a86ece93a060a18931"
     },
     {
       "location": "prepared",

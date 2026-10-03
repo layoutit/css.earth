@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "schedar-arrival.webp",
+      "bytes": 17284,
+      "sha256": "5a3ad67dcf7f5142bb60317cb3aba2c29657f8548b4be65084d3f89e14895c18"
+    },
+    {
+      "location": "public",
+      "filename": "schedar-billboard.webp",
+      "bytes": 3088,
+      "sha256": "39f5d911b40b1f5448637a5167a5af0065dc3e33a3a24e5723693b85459da480"
+    },
+    {
+      "location": "public",
       "filename": "schedar-dataset-color.webp",
       "bytes": 44,
       "sha256": "1bdd71f4dd672a1cc09af7772718ee93b414c3e07059f22a7c8ff3556f026a68"
@@ -18,6 +30,12 @@
       "filename": "schedar-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "7ab65902ae4cc35fc4d08c642ee537cf4e778d23557d12f759205add10133766"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 382,
+      "sha256": "3ca7846f335af7e08becd209b13d121c90d427f508777e89fce21037f702e58a"
     },
     {
       "location": "prepared",

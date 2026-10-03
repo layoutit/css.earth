@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "cocibolca-arrival.webp",
+      "bytes": 27672,
+      "sha256": "7bf59710c50850160835aa2bf87e2015d5e841d8e34f8667ffc67893df57fc01"
+    },
+    {
+      "location": "public",
+      "filename": "cocibolca-billboard.webp",
+      "bytes": 4906,
+      "sha256": "15d12987ba108f5ec2cea014415c0bcce437caf041ed2059427ef2854462d474"
+    },
+    {
+      "location": "public",
       "filename": "cocibolca-dataset-color.webp",
       "bytes": 44,
       "sha256": "0c54153d54e8e05575a09688b173cc6433fd0996fc80df341891812948817aa8"
@@ -24,6 +36,12 @@
       "filename": "cocibolca-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "2b35cf7abee669949a6133dd22ad8ce010fdeb15aaabef52bc0e3c490d4e985a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 381,
+      "sha256": "73e7d8d5edff4d6c9cc8be6c09e42e06de5c6fc76af687da5aa9047db271bd88"
     },
     {
       "location": "prepared",
