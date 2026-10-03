@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "macs-j0717",
+  "card": {
+    "text": "Four clusters of galaxies caught colliding, the first such collision documented.",
+    "sources": [
+      {
+        "catalogueId": "esahubble-opo0917a",
+        "url": "https://esahubble.org/images/opo0917a/",
+        "label": "ESA/Hubble opo0917a: NASA, ESA, CXC, C. Ma, H. Ebeling and E. Barrett (University of Hawaii/IfA), et al. and STScI",
+        "checked": "2026-10-02",
+        "locator": "caption: four separate galaxy clusters have been involved in a collision, the first time such a phenomenon has been documented"
+      },
+      {
+        "catalogueId": "ned-macs-j0717",
+        "url": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0717.5%2B3745",
+        "label": "NASA/IPAC Extragalactic Database (NED), MACS J0717.5+3745: position from 2011MNRAS.410.1939Z, redshift from 2025A&A...703A.306D",
+        "checked": "2026-10-02",
+        "locator": "NED preferred values of MACS J0717.5+3745: RA 109.3788625°, Dec 37.75826111° (2011MNRAS.410.1939Z); redshift 0.549 (2025A&A...703A.306D)"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "z = 0.549: comoving distance 2,109 Mpc, lookback time 5.54 Gyr, age 8244 Myr"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Hubble's view with Chandra's X-rays: the purple glow is hot gas slowed by the collision. The picture is flat and has no depth.",
+    "sources": [
+      {
+        "catalogueId": "esahubble-opo0917a",
+        "url": "https://esahubble.org/images/opo0917a/",
+        "label": "ESA/Hubble opo0917a: NASA, ESA, CXC, C. Ma, H. Ebeling and E. Barrett (University of Hawaii/IfA), et al. and STScI",
+        "checked": "2026-10-02",
+        "locator": "Galaxy cluster MACS J0717; Hubble ACS at 606 and 814 nm, with Chandra X-ray light overlaid"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "MACS J0717 with its hot gas",
+      "detail": "3000 × 2911 px",
+      "summary": "Hubble's galaxies with Chandra's X-ray gas overlaid. A flat picture of the sky, with no depth.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-opo0917a",
+          "url": "https://esahubble.org/images/opo0917a/",
+          "label": "ESA/Hubble opo0917a: NASA, ESA, CXC, C. Ma, H. Ebeling and E. Barrett (University of Hawaii/IfA), et al. and STScI",
+          "checked": "2026-10-02",
+          "locator": "Galaxy cluster MACS J0717"
+        }
+      ]
+    }
+  }
+}

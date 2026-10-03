@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "romulus",
+  "parent": "sylvia-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

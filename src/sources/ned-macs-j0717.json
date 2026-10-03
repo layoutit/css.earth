@@ -1,0 +1,36 @@
+{
+  "id": "ned-macs-j0717",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA/IPAC Extragalactic Database: MACS J0717.5+3745",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0717.5%2B3745"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0717.5%2B3745",
+      "label": "NED, MACS J0717.5+3745"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0717.5%2B3745",
+      "checkedOn": "2026-10-02",
+      "locator": "NED preferred values of MACS J0717.5+3745: RA 109.3788625°, Dec 37.75826111° (2011MNRAS.410.1939Z); redshift 0.549 (2025A&A...703A.306D)"
+    }
+  ],
+  "publisher": "NASA/IPAC Extragalactic Database",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Position and redshift are NED's preferred values with the reference codes it gives (2011MNRAS.410.1939Z, 2025A&A...703A.306D); this record does not claim independent review of those papers.",
+      "scope": "citation",
+      "evidence": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0717.5%2B3745"
+    }
+  ]
+}

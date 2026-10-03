@@ -1,0 +1,114 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": ".local/nebula-lab/planetary/gn-z11-inferred-original.jpg",
+      "origin": "https://cdn.esawebb.org/archives/images/large/weic2406a.jpg",
+      "sourceUrl": "https://esawebb.org/images/weic2406a/",
+      "title": "GN-z11 in the GOODS-North field",
+      "credit": "NASA, ESA, CSA, B. Robertson (UC Santa Cruz), B. Johnson (CfA), S. Tacchella (Cambridge), M. Rieke (University of Arizona), D. Eisenstein (CfA)",
+      "displayCredit": "ESA/Webb",
+      "acquisition": "The publisher's Large JPEG (4049 x 1961 px), downloaded unchanged by the Nebula Lab recipe (labs/nebula/models/gn-z11/experiment.json) into its ignored cache; the recipe reads the window 3600, 281, 160, 160 (x, y, width, height). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esawebb-weic2406a",
+            "role": "material",
+            "evidence": "https://esawebb.org/images/weic2406a/"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://esawebb.org/images/weic2406a/"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-1",
+      "path": "src/objects/gn-z11-volume/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/gn-z11-volume/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/gn-z11-volume/source/replay-references.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/gn-z11-volume/source/bake-inputs/references/00-experiment.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-5",
+      "path": "src/objects/gn-z11-volume/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "compact-compact-emission-0-f32-gz",
+      "path": "src/objects/gn-z11-volume/source/compact/emission-0.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-emission-1-f32-gz",
+      "path": "src/objects/gn-z11-volume/source/compact/emission-1.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-emission-2-f32-gz",
+      "path": "src/objects/gn-z11-volume/source/compact/emission-2.f32.gz",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    },
+    {
+      "id": "compact-compact-model-json",
+      "path": "src/objects/gn-z11-volume/source/compact/model.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
+      }
+    }
+  ]
+}

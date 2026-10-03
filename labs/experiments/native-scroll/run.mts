@@ -6,7 +6,7 @@ import { build, type Plugin } from 'esbuild';
 
 /** Bundle `@cssearth/renderer` and the telescope command's native camera modules into the preview: their sources are
  * TypeScript, and the renderer's sibling imports name `.js`, which Node cannot load unbundled. A lab imports no application
- * tree, so this extends the plugin in `packages/bake/src/preparation/bundle-renderer.ts` here, as `labs/nebula` writes its own. */
+ * tree; this consumer owns its bundler, as `labs/nebula` owns its own. */
 const bundleSourcePackages: Plugin = {
   name: 'bundle-source-packages',
   setup(builder) {

@@ -1,0 +1,36 @@
+{
+  "id": "ned-abell-s1063",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA/IPAC Extragalactic Database: Abell S1063",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://ned.ipac.caltech.edu/byname?objname=Abell%20S1063"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ned.ipac.caltech.edu/byname?objname=Abell%20S1063",
+      "label": "NED, Abell S1063"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ned.ipac.caltech.edu/byname?objname=Abell%20S1063",
+      "checkedOn": "2026-10-02",
+      "locator": "NED preferred values of Abell S1063: RA 342.1907°, Dec -44.5269° (2015ApJS..216...27B); redshift 0.35166 ± 0.004934 (2024MNRAS.531.3973K)"
+    }
+  ],
+  "publisher": "NASA/IPAC Extragalactic Database",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Position and redshift are NED's preferred values with the reference codes it gives (2015ApJS..216...27B, 2024MNRAS.531.3973K); this record does not claim independent review of those papers.",
+      "scope": "citation",
+      "evidence": "https://ned.ipac.caltech.edu/byname?objname=Abell%20S1063"
+    }
+  ]
+}

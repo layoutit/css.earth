@@ -1,0 +1,96 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "el-gordo",
+  "parent": "observable-universe",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "El Gordo",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 30365637940498702000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "El Gordo",
+      "systemName": "Galaxy clusters",
+      "classification": "galaxy-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 631174209984199,
+      "description": "The most massive cluster known from its time, when the universe was about 6 billion years old.",
+      "aliases": [
+        "ACT-CL J0102-4915"
+      ],
+      "order": 5453,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5.933079789594949e+25,
+        1.6698087100813596e+25,
+        -7.153044427835425e+25
+      ],
+      "presentationToReference": [
+        0.976366684446289,
+        0,
+        -0.21612056242606964,
+        -0.19828673927022175,
+        0.3977771559319137,
+        -0.8957989189814314,
+        -0.08596782266024751,
+        -0.9174820620691818,
+        -0.3883763628857171
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 97953670775802270000,
+      "bodyRadiusM": 3.03656379404987e+22
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

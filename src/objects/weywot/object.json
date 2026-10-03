@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "weywot",
+  "parent": "quaoar-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

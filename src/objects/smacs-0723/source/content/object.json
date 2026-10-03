@@ -1,0 +1,136 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "smacs-0723",
+  "displayName": "SMACS 0723",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance (comoving)",
+        "value": "1,568 Mpc, 5.1 billion light years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "redshift",
+        "label": "Redshift",
+        "value": "0.391 ± 0.0007",
+        "source": {
+          "catalogueId": "ned-smacs-0723",
+          "url": "https://ned.ipac.caltech.edu/byname?objname=SMACS%20J0723.3-7327",
+          "label": "NASA/IPAC Extragalactic Database (NED), SMACS J0723.3-7327: position from 2024ApJ...964..146F, redshift from 2025A&A...699A.105A",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "light-travel",
+        "label": "Light travel time",
+        "value": "4.34 billion years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 110.8054°, Dec -73.4569°",
+        "source": {
+          "catalogueId": "ned-smacs-0723",
+          "url": "https://ned.ipac.caltech.edu/byname?objname=SMACS%20J0723.3-7327",
+          "label": "NASA/IPAC Extragalactic Database (NED), SMACS J0723.3-7327: position from 2024ApJ...964..146F, redshift from 2025A&A...699A.105A",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "2.27 arcmin, 1.03 Mpc comoving at its distance",
+        "source": {
+          "catalogueId": "esawebb-weic2209a",
+          "url": "https://esawebb.org/images/weic2209a/",
+          "label": "ESA/Webb weic2209a: NASA, ESA, CSA, and STScI",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "members",
+        "label": "Member dots",
+        "value": "93 flagged members",
+        "source": {
+          "catalogueId": "amrutha-2025-smacs-0723-redshifts",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/699/A105",
+          "label": "Amrutha et al. (2025), A&A 699, A105; CDS J/A+A/699/A105",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Webb · near infrared",
+        "thumbnail": "smacs-0723-dataset-optical.webp",
+        "volume": {
+          "objectId": "smacs-0723-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "smacs-0723-layers-optical",
+          "path": "../../smacs-0723-layers/source/manifest.json",
+          "url": "https://esawebb.org/images/weic2209a/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+      "href": "https://arxiv.org/abs/1807.06209"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "NASA/IPAC Extragalactic Database (NED), SMACS J0723.3-7327: position from 2024ApJ...964..146F, redshift from 2025A&A...699A.105A",
+      "href": "https://ned.ipac.caltech.edu/byname?objname=SMACS%20J0723.3-7327"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Webb weic2209a: NASA, ESA, CSA, and STScI",
+      "href": "https://esawebb.org/images/weic2209a/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Amrutha et al. (2025), A&A 699, A105; CDS J/A+A/699/A105",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/699/A105"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ned.ipac.caltech.edu/byname?objname=SMACS%20J0723.3-7327",
+      "credit": "NASA/IPAC Extragalactic Database (NED), SMACS J0723.3-7327: position from 2024ApJ...964..146F, redshift from 2025A&A...699A.105A"
+    }
+  }
+}

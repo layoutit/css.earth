@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "quasar-3c-273-layers",
+  "name": "3C 273",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/quasar-3c-273-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/quasar-3c-273-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/quasar-3c-273-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Hubble · visible",
+      "title": "3C 273 and its jet",
+      "description": "The cross is the telescope's diffraction of a point of light; the faint streak is the jet. A flat picture, with no depth. It stands as one flat picture facing the Sun at the object's distance.",
+      "summary": "The cross is the telescope's diffraction of a point of light; the faint streak is the jet. A flat picture, with no depth.",
+      "detail": "705 × 696 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "Hubble WFPC2, two filters: blue light at 450 nm and visible light at 606 nm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "705 × 696"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "1.17 arcmin across"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/quasar-3c-273-layers/source/source.jpg",
+        "url": "https://cdn.esahubble.org/archives/images/large/potw1346a.jpg"
+      }
+    }
+  ]
+}

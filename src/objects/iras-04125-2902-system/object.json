@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "iras-04125-2902-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {

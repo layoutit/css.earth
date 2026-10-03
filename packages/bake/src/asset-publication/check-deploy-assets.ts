@@ -5,7 +5,7 @@ import { dirname, extname, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry } from '../objects/sources/index.ts';
-import { parseCompleteWorldContext, parsePreparedSystemView, parsePreparedWorldContextSummary, parsePreparedWorldIndex } from '@cssearth/objects';
+import { parseCompleteWorldContext, parsePreparedSystemView, parsePreparedWorldContextSummary, parsePreparedWorldIndex, systemViewFile, systemViewOwner } from '@cssearth/objects';
 
 const execFileAsync = promisify(execFile);
 /** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
@@ -46,14 +46,18 @@ export async function checkPublishedWorldPair(root: string, fetchText: (url: str
   if (!summaryAsset) throw new Error('The Sun inventory lacks world-context-summary.json.');
   const summary = parsePreparedWorldContextSummary(JSON.parse(await fetchText(summaryAsset.url)));
   const hosts = [summary.focus, ...summary.bodies].filter(body => body.systemView).map(body => body.id);
-  const viewFiles = hosts.map(id => `system-views/${id}.json`);
-  const assets = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: viewFiles });
-  const disagree = (detail: string) => new Error(`The Sun's published world summary and system views disagree: ${detail} Run pnpm prepare:world-context, publish the Sun and commit its inventory.`);
-  const missing = viewFiles.filter(name => !assets.some(entry => entry.filename === name));
-  if (missing.length) throw disagree(`the inventory lacks ${missing.join(', ')}.`);
+  // Each view is in the package of the system that owns it (systemViewOwner in @cssearth/objects).
+  const boundTo = new Map(summary.bodies.flatMap(body => body.boundTo ? [[body.id, body.boundTo.hostId] as const] : []));
+  const ownerOf = (id: string) => systemViewOwner(id, host => boundTo.get(host));
+  const owners = [...new Set(hosts.map(ownerOf))].sort();
+  const assets = await inventoryAssets(root, owners, { location: 'prepared' });
+  const disagree = (detail: string) => new Error(`The published world summary and system views disagree: ${detail} Run pnpm prepare:world-context, publish the changed packages and commit their inventories.`);
+  const viewOf = (id: string) => assets.find(entry => entry.id === ownerOf(id) && entry.filename === systemViewFile(id));
+  const missing = hosts.filter(id => !viewOf(id)).map(id => `${ownerOf(id)}/prepared/${systemViewFile(id)}`);
+  if (missing.length) throw disagree(`the inventories lack ${missing.join(', ')}.`);
   for (let start = 0; start < hosts.length; start += 16) {
     await Promise.all(hosts.slice(start, start + 16).map(async id => {
-      const asset = assets.find(entry => entry.filename === `system-views/${id}.json`)!, text = await fetchText(asset.url);
+      const text = await fetchText(viewOf(id)!.url);
       try { parsePreparedSystemView(JSON.parse(text), summary, id); }
       catch (error) { throw disagree(error instanceof Error ? error.message : String(error)); }
     }));

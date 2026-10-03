@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "hercules-cluster",
+  "parent": "nearby-universe",
   "type": "layered-body",
   "properties": {
     "preparation": {

@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "jades-gs-z14-0-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "jades-gs-z14-0",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1.6955702219526747e+26,
+        2.2568876317777414e+26,
+        -1.4918261188746263e+26
+      ],
+      "localToReferenceXyzw": [
+        0.2711890953878539,
+        0.812452531756073,
+        0.48956491566572047,
+        0.1634122135431764
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -77.14537618241975,
+          -84.24393857883314,
+          -0.0012286920100450516
+        ],
+        "max": [
+          70.39886762015529,
+          60.95950418623813,
+          0.0013464391231536865
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

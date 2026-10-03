@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "earendel",
+  "parent": "observable-universe",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Earendel",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7670523133178953000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Earendel",
+      "systemName": "Early universe",
+      "classification": "galaxy",
+      "classificationLabel": "Lensed star",
+      "color": "#e08070",
+      "distanceAu": 1731229245713813,
+      "description": "The most distant single star reported, on a galaxy that a nearer cluster's gravity stretches into an arc.",
+      "aliases": [
+        "WHL0137-LS",
+        "Sunrise Arc"
+      ],
+      "order": 5448,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.3338536703487438e+26,
+        1.0560711485089517e+26,
+        -3.8122183121323357e+25
+      ],
+      "presentationToReference": [
+        0.9438033398516968,
+        0,
+        0.3305075728100382,
+        0.30323476943123406,
+        0.3977771559319137,
+        -0.8659226344349156,
+        0.13146836232633685,
+        -0.9174820620691818,
+        -0.37542340828524934
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 24743623010254690000,
+      "bodyRadiusM": 7.670523133178953e+21
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

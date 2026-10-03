@@ -33,7 +33,7 @@ the elements that own stacking; an inherited depth variable on the shared stage 
 
 The built entries are ESM with declarations in `dist/`. The site's client build compiles them from their sources
 instead ([package-sources.mts](../../site/build/package-sources.mts)); server rendering and Node tools use `dist/`.
-Node bundles that keep packages external still bundle this one ([bundle-renderer.ts](../bake/src/preparation/bundle-renderer.ts)),
+Node bundles that keep packages external still bundle this one ([lab builder](../../labs/nebula/packages/lab/src/cli/build.ts)),
 because its sources name their siblings `.js`. `src/runtime/shell-contract.ts` and `src/labels/universe-label-policy.ts` name
 theirs `.ts` instead, so plain-Node tools can load them without a bundler.
 

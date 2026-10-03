@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "abell-s1063",
+  "card": {
+    "text": "A massive cluster that acts as a magnifying glass for galaxies far behind it.",
+    "sources": [
+      {
+        "catalogueId": "esahubble-heic1615a",
+        "url": "https://esahubble.org/images/heic1615a/",
+        "label": "ESA/Hubble heic1615a: NASA, ESA, and J. Lotz (STScI)",
+        "checked": "2026-10-02",
+        "locator": "caption: the huge mass of the cluster acts as a cosmic magnifying glass and enlarges even more distant galaxies"
+      },
+      {
+        "catalogueId": "ned-abell-s1063",
+        "url": "https://ned.ipac.caltech.edu/byname?objname=Abell%20S1063",
+        "label": "NASA/IPAC Extragalactic Database (NED), Abell S1063: position from 2015ApJS..216...27B, redshift from 2024MNRAS.531.3973K",
+        "checked": "2026-10-02",
+        "locator": "NED preferred values of Abell S1063: RA 342.1907°, Dec -44.5269° (2015ApJS..216...27B); redshift 0.35166 ± 0.004934 (2024MNRAS.531.3973K)"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "z = 0.35166: comoving distance 1,425 Mpc, lookback time 4.00 Gyr, age 9785 Myr"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Hubble's Frontier Fields view of the cluster and the far galaxies it magnifies. The picture is flat and has no depth.",
+    "sources": [
+      {
+        "catalogueId": "esahubble-heic1615a",
+        "url": "https://esahubble.org/images/heic1615a/",
+        "label": "ESA/Hubble heic1615a: NASA, ESA, and J. Lotz (STScI)",
+        "checked": "2026-10-02",
+        "locator": "Hubble image of Abell S1063; Hubble ACS and WFC3, from 435 nm to 1.6 µm, the shortest wavelengths blue and the longest red"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Abell S1063 from Hubble",
+      "detail": "2243 × 2511 px",
+      "summary": "Hubble's Frontier Fields image of the cluster and the lensed galaxies behind it. A flat picture, with no depth.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-heic1615a",
+          "url": "https://esahubble.org/images/heic1615a/",
+          "label": "ESA/Hubble heic1615a: NASA, ESA, and J. Lotz (STScI)",
+          "checked": "2026-10-02",
+          "locator": "Hubble image of Abell S1063"
+        }
+      ]
+    }
+  }
+}

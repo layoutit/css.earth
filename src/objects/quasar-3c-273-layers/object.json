@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "quasar-3c-273-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "quasar-3c-273",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2.055065079245586e+25,
+        -2.624548458879957e+24,
+        7.424400713680557e+23
+      ],
+      "localToReferenceXyzw": [
+        0.5211362836675284,
+        -0.45881405579325263,
+        -0.47555075469875746,
+        0.540146383637978
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -152.03024567336732,
+          -138.67025854206528,
+          -0.0024485375033691525
+        ],
+        "max": [
+          139.94025257764113,
+          151.390447462111,
+          0.0027547834906727076
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "publication-naidu-2025-mom-z14",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A Cosmic Miracle: A Remarkably Luminous Galaxy at z_spec = 14.44 Confirmed with JWST",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2505.11263"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2505.11263",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2505.11263",
+      "checkedOn": "2026-10-02",
+      "locator": "abstract: z_spec = 14.44 +0.02 -0.02; 280 million years after the Big Bang; circularized r_e = 74 +15 -12 pc; M_UV = -20.2. Position 150.0933255°, 2.2731627° as SIMBAD records it with this paper as its coordinate reference."
+    }
+  ],
+  "creators": [
+    "Naidu, Rohan P.",
+    "Oesch, Pascal A.",
+    "Brammer, Gabriel"
+  ],
+  "publisher": "Open Journal of Astrophysics",
+  "publicationDate": "2025",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "The position is SIMBAD's transcription from the paper; the paper's own table was not read here.",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2505.11263"
+    }
+  ]
+}

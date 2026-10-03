@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "earendel",
+  "card": {
+    "text": "The most distant single star reported, on a galaxy that a nearer cluster's gravity stretches into an arc.",
+    "sources": [
+      {
+        "catalogueId": "publication-pascale-2025-earendel",
+        "url": "https://arxiv.org/abs/2507.05483",
+        "label": "Pascale et al. (2025), Is Earendel a Star Cluster?: Metal Poor Globular Cluster Progenitors at z ~ 6, arXiv:2507.05483",
+        "checked": "2026-10-02",
+        "locator": "abstract: a highly magnified star at redshift 6.2, magnified by a factor of thousands by the foreground galaxy cluster WHL0137-08"
+      },
+      {
+        "catalogueId": "publication-pascale-2025-earendel",
+        "url": "https://arxiv.org/abs/2507.05483",
+        "label": "Pascale et al. (2025), Is Earendel a Star Cluster?: Metal Poor Globular Cluster Progenitors at z ~ 6, arXiv:2507.05483",
+        "checked": "2026-10-02",
+        "locator": "abstract: a spectroscopic redshift of the Sunrise galaxy, z = 5.926 ± 0.013, from NIRSpec PRISM spectroscopy"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "z = 5.926: comoving distance 8,393 Mpc, lookback time 12.84 Gyr, age 944 Myr"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Webb's view of the Sunrise Arc, a galaxy seen 940 million years after the Big Bang and magnified by a nearer cluster. The picture is flat and has no depth.",
+    "sources": [
+      {
+        "catalogueId": "esawebb-sunrisearc1",
+        "url": "https://esawebb.org/images/sunrisearc1/",
+        "label": "ESA/Webb sunrisearc1: NASA, ESA, CSA, D. Coe (AURA/STScI for ESA), Z. Levay",
+        "checked": "2026-10-02",
+        "locator": "Galaxy cluster WHL0137-08; Webb NIRCam, 0.9 to 4.4 µm, the shortest wavelengths blue and the longest red"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "z = 5.926: age of the universe 944 Myr of 13,787 Myr"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Earendel on the Sunrise Arc",
+      "detail": "610 × 830 px",
+      "summary": "The far galaxy, stretched into an arc by a nearer cluster's gravity; Earendel is a point on it. A flat picture.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-sunrisearc1",
+          "url": "https://esawebb.org/images/sunrisearc1/",
+          "label": "ESA/Webb sunrisearc1: NASA, ESA, CSA, D. Coe (AURA/STScI for ESA), Z. Levay",
+          "checked": "2026-10-02",
+          "locator": "Galaxy cluster WHL0137-08"
+        }
+      ]
+    }
+  }
+}

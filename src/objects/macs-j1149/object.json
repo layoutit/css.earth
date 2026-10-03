@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "macs-j1149",
+  "parent": "observable-universe",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "MACS J1149",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 17790479245079364000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "MACS J1149",
+      "systemName": "Galaxy clusters",
+      "classification": "galaxy-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 430352115119692,
+      "description": "A huge cluster of galaxies whose light took over 5 billion years to reach us.",
+      "aliases": [
+        "MACS J1149.5+2223",
+        "MACSJ1149.5+2223"
+      ],
+      "order": 5458,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5.9459299973478274e+25,
+        2.703961015968757e+24,
+        2.4536376386493816e+25
+      ],
+      "presentationToReference": [
+        -0.9794595641499545,
+        0,
+        0.20164067594406898,
+        0.18500170316218803,
+        0.3977771559319137,
+        0.8986365806296823,
+        0.08020805459722045,
+        -0.9174820620691818,
+        0.3896066397778807
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 57388642726062465000,
+      "bodyRadiusM": 1.7790479245079363e+22
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

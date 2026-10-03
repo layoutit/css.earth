@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "asteroid-2001-sn263-system",
+  "parent": "solar-system",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
