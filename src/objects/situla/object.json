@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "situla",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Situla",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7050223.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/situla-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Situla",
+      "classification": "star",
+      "color": "#ffe0c2",
+      "distanceAu": 13525623.6,
+      "description": "A star 66 parsecs away, 10 times the Sun's width, measured from its light.",
+      "systemName": "Situla system",
+      "aliases": [
+        "HD 214376",
+        "HIP 111710",
+        "HR 8610",
+        "Kappa Aquarii"
+      ],
+      "order": 5697,
+      "context": {
+        "order": 5694
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1889347812451667700,
+        -708707973085593600,
+        -149209789526640900
+      ],
+      "presentationToReference": [
+        0.9337474001338685,
+        -0.06903861871046858,
+        -0.35121142047176107,
+        -0.35025537540427304,
+        0.025896599589019183,
+        -0.936296180773017,
+        -0.07373577655150412,
+        -0.9972778124756795,
+        2.647752731735135e-7
+      ],
+      "orbitUpReference": [
+        0.06903861871046858,
+        -0.025896599589019183,
+        0.9972778124756795
+      ],
+      "metersPerUnit": 22742657.419354837,
+      "bodyRadiusM": 7050223800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

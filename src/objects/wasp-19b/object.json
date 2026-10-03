@@ -1,0 +1,138 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-19b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-19 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "thermal",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 101161.2
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WASP-19 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 54980345,
+      "description": "WASP-19 b was found in 2009 by SuperWASP as it crossed its star.",
+      "systemName": "Wattle system",
+      "order": 5747,
+      "context": {
+        "order": 5747
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4897136800863827000,
+        3010782039392761000,
+        -5882424874988812000
+      ],
+      "presentationToReference": [
+        -0.6838363071132394,
+        0.40146152832776405,
+        -0.6092590141692311,
+        0.1980466273116931,
+        0.9057993352242437,
+        0.37457322076969357,
+        -0.7022431476947217,
+        -0.1354850751191961,
+        0.6989265740660853
+      ],
+      "orbitUpReference": [
+        -0.40146152832776405,
+        -0.9057993352242437,
+        0.1354850751191961
+      ],
+      "metersPerUnit": 326326.4516129032,
+      "bodyRadiusM": 101161200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

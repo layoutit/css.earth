@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "mekbuda",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Mekbuda",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 54686194.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/mekbuda-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Mekbuda",
+      "classification": "star",
+      "color": "#ffedd9",
+      "distanceAu": 87031576.7,
+      "description": "A star 422 parsecs away, 79 times the Sun's width, measured from its light.",
+      "systemName": "Mekbuda system",
+      "aliases": [
+        "HD 52973",
+        "HIP 34088",
+        "HR 2650",
+        "Zeta Geminorum"
+      ],
+      "order": 5614,
+      "context": {
+        "order": 5611
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3365468203352413000,
+        11715825109714580000,
+        4574566432950716400
+      ],
+      "presentationToReference": [
+        -0.2584896866508279,
+        -0.09700710829900712,
+        0.9611309498890469,
+        0.8998510098682376,
+        0.3376993675945427,
+        0.27609291400787284,
+        0.35135628916282347,
+        -0.9362418267016864,
+        -1.4065556298147943e-7
+      ],
+      "orbitUpReference": [
+        0.09700710829900712,
+        -0.3376993675945427,
+        0.9362418267016864
+      ],
+      "metersPerUnit": 176407078.06451613,
+      "bodyRadiusM": 54686194200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

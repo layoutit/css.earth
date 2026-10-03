@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "sagarmatha",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sagarmatha",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 738833.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/sagarmatha-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Sagarmatha",
+      "classification": "star",
+      "color": "#ffecde",
+      "distanceAu": 10182058.4,
+      "description": "A star 49 parsecs away, 1.1 times the Sun's width, measured from its light.",
+      "systemName": "Sagarmatha system",
+      "aliases": [
+        "HD 100777",
+        "HIP 56572"
+      ],
+      "order": 5683,
+      "context": {
+        "order": 5680
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1509556868011121000,
+        159604010351837000,
+        -126278557925349700
+      ],
+      "presentationToReference": [
+        -0.9910336885342048,
+        0.08244499883642038,
+        0.10514299956322007,
+        0.10478104829026283,
+        -0.008716781306614898,
+        0.9944571130234054,
+        -0.08290452405919872,
+        -0.996557494523279,
+        4.947392905831714e-8
+      ],
+      "orbitUpReference": [
+        -0.08244499883642038,
+        0.008716781306614898,
+        0.996557494523279
+      ],
+      "metersPerUnit": 2383333.5483870967,
+      "bodyRadiusM": 738833400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

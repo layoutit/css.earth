@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-39",
+      "label": "Malmok",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,17 +94,20 @@
       }
     },
     "catalog": {
-      "name": "WASP-39",
+      "name": "Malmok",
       "classification": "star",
       "color": "#ffebdf",
       "distanceAu": 44419786.7,
       "description": "Sun-like star about 215 parsecs away that hosts the hot giant WASP-39 b.",
-      "systemName": "WASP-39 system",
+      "systemName": "Malmok system",
       "order": 1100,
       "context": {
         "order": 1097
       },
-      "featured": true
+      "featured": true,
+      "aliases": [
+        "WASP-39"
+      ]
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

@@ -2,7 +2,7 @@
   "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "gj-436",
-  "displayName": "GJ 436",
+  "displayName": "Noquisi",
   "panel": {
     "facts": [
       {
@@ -13,7 +13,7 @@
           "catalogueId": "arxiv-1501-02711",
           "url": "https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M",
           "label": "Maciejewski et al. (2014), Acta Astronomica, 2014, vol 64, no 4, p. 323-335",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "gaia-dr3-gj-436",
           "url": "https://gea.esac.esa.int/archive/",
           "label": "Gaia DR3 parallax",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }

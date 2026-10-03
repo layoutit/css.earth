@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "urquchillay",
+  "card": {
+    "text": "A star about 48 parsecs away, 2.0 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2096869455581362560: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-zeta2-lyrae",
+        "url": "https://en.wikipedia.org/wiki/Zeta2_Lyrae",
+        "label": "Wikipedia, \"Zeta2 Lyrae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1360486232",
+        "quote": "Zeta2 Lyrae, also named Urquchillay, is a single, white-hued star in the northern constellation of Lyra."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 2.0 solar radii and 1.63 solar masses (FLAME) and 7,257 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2096869455581362560: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-zeta2-lyrae",
+        "url": "https://en.wikipedia.org/wiki/Zeta2_Lyrae",
+        "label": "Wikipedia, \"Zeta2 Lyrae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1360486232",
+        "quote": "It is a dim star that is just visible to the naked eye with an apparent visual magnitude of 5.74 An annual parallax shift of 20.6 mas as seen from Earth provides a distance estimate of about 158 light years from the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

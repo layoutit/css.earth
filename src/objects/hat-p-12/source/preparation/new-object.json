@@ -1,8 +1,13 @@
 {
   "id": "hat-p-12",
-  "name": "HAT-P-12",
-  "system": "HAT-P-12 system",
+  "name": "Komondor",
+  "system": "Komondor system",
   "description": "Star of 4,650 K, 143 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "HAT-P-12"
+  ],
+  "featured": true,
+  "order": 3112,
   "target": "HAT-P-12",
   "gaia": "1499514786891168640",
   "paper": {
@@ -30,7 +35,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "HAT-P-12 b crosses HAT-P-12 as seen from Earth, which is how it was found.",
+    "card": "HAT-P-12 b crosses Komondor as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Hartman et al. 2009.",
     "locator": "NASA Exoplanet Archive ps table (st_refname HARTMAN_ET_AL__2009): st_teff 4650, st_rad 0.701, st_mass 0.733",
     "quotes": {
@@ -40,6 +45,5 @@
       "card": "HAT-P-12, also named Komondor, is a magnitude 13 low-metallicity K dwarf star approximately 463 light years away in the constellation Canes Venatici, which hosts one known exoplanet."
     }
   },
-  "notes": [],
-  "order": 3112
+  "notes": []
 }

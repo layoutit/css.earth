@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "nervia",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Nervia",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 710607.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/nervia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Nervia",
+      "classification": "star",
+      "color": "#ffeee4",
+      "distanceAu": 8844388.8,
+      "description": "A star about 43 parsecs away, the Sun's width, measured by Gaia.",
+      "systemName": "Nervia system",
+      "aliases": [
+        "Gaia DR3 951427000863064192",
+        "HD 49674",
+        "HIP 32916"
+      ],
+      "order": 5644,
+      "context": {
+        "order": 5641
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -222994658115300060,
+        975406555084667400,
+        865709906380927100
+      ],
+      "presentationToReference": [
+        -0.16853838768695778,
+        -0.14582228148575155,
+        0.9748490519553121,
+        0.7372080098815682,
+        0.6378518827016243,
+        0.2228661614073587,
+        0.6543081552619823,
+        -0.7562280330404867,
+        0.0000011739631215329794
+      ],
+      "orbitUpReference": [
+        0.14582228148575155,
+        -0.6378518827016243,
+        0.7562280330404867
+      ],
+      "metersPerUnit": 2292281.290322581,
+      "bodyRadiusM": 710607200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

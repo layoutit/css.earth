@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tiangang",
+  "card": {
+    "text": "A star about 45 parsecs away, 2.4 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6601750220152445440: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-beta-piscis-austrini",
+        "url": "https://en.wikipedia.org/wiki/Beta_Piscis_Austrini",
+        "label": "Wikipedia, \"Beta Piscis Austrini\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375885101",
+        "quote": "Beta Piscis Austrini, also named Tiangang, is a star in the southern constellation of Piscis Austrinus that makes part of a binary star system."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 2.4 solar radii and 2.30 solar masses (FLAME) and 9,345 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6601750220152445440: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-beta-piscis-austrini",
+        "url": "https://en.wikipedia.org/wiki/Beta_Piscis_Austrini",
+        "label": "Wikipedia, \"Beta Piscis Austrini\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375885101",
+        "quote": "It is visible to the naked eye with an apparent visual magnitude of +4.29."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

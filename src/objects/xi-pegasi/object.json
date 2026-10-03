@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Xi Pegasi",
+      "label": "Tugongli",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,19 +94,21 @@
       }
     },
     "catalog": {
-      "name": "Xi Pegasi",
+      "name": "Tugongli",
       "classification": "star",
       "color": "#fff8fc",
       "distanceAu": 3361071.9,
       "description": "A naked-eye star 16 parsecs away whose disc the CHARA Array measured: 1.9 times the Sun's width.",
-      "systemName": "Xi Pegasi system",
+      "systemName": "Tugongli system",
       "aliases": [
-        "HD 215648"
+        "HD 215648",
+        "Xi Pegasi"
       ],
       "order": 5363,
       "context": {
         "order": 5360
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

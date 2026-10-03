@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "pherkad",
+  "card": {
+    "text": "A star 149 parsecs away, 16 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 75097: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-pherkad",
+        "url": "https://en.wikipedia.org/wiki/Pherkad",
+        "label": "Wikipedia, \"Pherkad\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374596449",
+        "quote": "Pherkad, Bayer designation Gamma Ursae Minoris, is a star in the northern constellation of Ursa Minor."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 998 times the Sun's luminosity at 8,015 K, so 16.408 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 75097: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-pherkad",
+        "url": "https://en.wikipedia.org/wiki/Pherkad",
+        "label": "Wikipedia, \"Pherkad\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374596449",
+        "quote": "Together with Beta Ursae Minoris (Kochab), it forms the end of the dipper pan of the \"Little Dipper\", which is an asterism forming the tail of the bear."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

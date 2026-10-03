@@ -2,7 +2,7 @@
   "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "gj-367",
-  "displayName": "GJ 367",
+  "displayName": "Añañuca",
   "panel": {
     "facts": [
       {
@@ -13,7 +13,7 @@
           "catalogueId": "arxiv-2606-18355",
           "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L",
           "label": "Lee et al. (2026)",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "gaia-dr3-gj-367",
           "url": "https://gea.esac.esa.int/archive/",
           "label": "Gaia DR3 parallax",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }

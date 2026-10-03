@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "HD 95086",
+      "label": "Aiolos",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,16 +94,20 @@
       }
     },
     "catalog": {
-      "name": "HD 95086",
+      "name": "Aiolos",
       "classification": "star",
       "color": "#ced9ff",
       "distanceAu": 17833970.5,
       "description": "Young A-type star 86 parsecs away, with a giant planet between two belts of dust.",
-      "systemName": "HD 95086 system",
+      "systemName": "Aiolos system",
       "order": 1763,
       "context": {
         "order": 1760
-      }
+      },
+      "aliases": [
+        "HD 95086"
+      ],
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "hat-p-36b",
+  "displayName": "HAT-P-36 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.3 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C",
+          "label": "Chakrabarty 2019",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "32 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C",
+          "label": "Chakrabarty 2019",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.8 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C",
+          "label": "Chakrabarty 2019",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Tuiren; the neutral gray is a display convention, not a measured color.",
+        "thumbnail": "hat-p-36b-dataset-shape.webp",
+        "surface": "hat-p-36b-surface-shape@2x.webp",
+        "poles": "hat-p-36b-poles-shape@2x.webp",
+        "source": {
+          "id": "hat-p-36b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or color of HAT-P-36 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of hat-p-36's light, as its color dataset measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hat-p-36b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hat-p-36b/hat-p-36b-system-orbits.svg",
+      "alt": "The orbits of Tuiren's planets in this map from above, to scale, with HAT-P-36 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hat-p-36b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C"
+      }
+    },
+    {
+      "id": "hat-p-36b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hat-p-36b/hat-p-36b-transit.svg",
+      "alt": "HAT-P-36 b crossing its star, as TESS recorded it: 3 sectors (22, 49, 76) of the SPOC pipeline's 2-minute light curves of TIC 373693175, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hat-p-36b-tess-sector-22",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020049080258-s0022-0000000373693175-0174-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chakrabarty & Sengupta 2019",
+      "href": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+      "credit": "Chakrabarty & Sengupta 2019"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hat-p-36b.json",
+      "credit": "Radius from Chakrabarty & Sengupta 2019 (2019AJ....158...39C), via the NASA Exoplanet Archive; mass from Chakrabarty & Sengupta 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....158...39C), via the NASA Exoplanet Archive; orbit from Chakrabarty & Sengupta 2019 (2019AJ....158...39C), via the NASA Exoplanet Archive"
+    }
+  }
+}

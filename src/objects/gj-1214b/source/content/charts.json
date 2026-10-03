@@ -5,11 +5,11 @@
     {
       "kind": "system-orbits",
       "id": "gj-1214b-orbits",
-      "title": "GJ 1214 b: orbits around GJ 1214",
+      "title": "GJ 1214 b: orbits around Orkaria",
       "output": "gj-1214b-system-orbits.svg",
       "system": "gj-1214",
       "highlight": "gj-1214b",
-      "description": "The orbits of GJ 1214's planets in this map from above, to scale, with GJ 1214 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "description": "The orbits of Orkaria's planets in this map from above, to scale, with GJ 1214 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
         "orbitSource": "Mahajan et al. 2024 (2024ApJ...963L..37M), via the NASA Exoplanet Archive ps table (pl_refname MAHAJAN_ET_AL__2024): P 1.580404531 d"
       }

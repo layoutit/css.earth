@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-161-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-161",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Tislit system",
+      "systemName": "Tislit system",
+      "classification": "planetary-system",
+      "color": "#f6f2ff",
+      "distanceAu": 73461576.8,
+      "description": "WASP-161 b crosses Tislit as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6381137014800158000,
+        8674862039478502000,
+        -2191179035197905200
+      ],
+      "presentationToReference": [
+        -0.5806473040385319,
+        0.11814451200480468,
+        0.8055374495303934,
+        0.7893632818801221,
+        -0.16061192924368128,
+        0.592544865309004,
+        -0.19938484779999602,
+        -0.9799212634022028,
+        5.602046712545766e-8
+      ],
+      "orbitUpReference": [
+        -0.11814451200480468,
+        0.16061192924368128,
+        0.9799212634022028
+      ],
+      "metersPerUnit": 3842059.35483871,
+      "bodyRadiusM": 1191038400
+    }
+  }
+}

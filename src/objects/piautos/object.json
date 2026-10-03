@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "piautos",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Piautos",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2645960.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/piautos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Piautos",
+      "classification": "star",
+      "color": "#cbd8ff",
+      "distanceAu": 35958290.5,
+      "description": "A star about 170 parsecs away, 3.8 times the Sun's width, measured by Gaia.",
+      "systemName": "Piautos system",
+      "aliases": [
+        "Gaia DR3 679023579196041856",
+        "HR 3268",
+        "Lambda Cancri",
+        "HIP 40881",
+        "HD 70011"
+      ],
+      "order": 5663,
+      "context": {
+        "order": 5660
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2827581567607594000,
+        4018210867715539500,
+        2189853186553060000
+      ],
+      "presentationToReference": [
+        -0.5256425373400815,
+        -0.2342759058097021,
+        0.8178109334655074,
+        0.7469784710270551,
+        0.33292324448437094,
+        0.5754869912553044,
+        0.4070910055021653,
+        -0.9133876029589209,
+        -4.3894995257798144e-7
+      ],
+      "orbitUpReference": [
+        0.2342759058097021,
+        -0.33292324448437094,
+        0.9133876029589209
+      ],
+      "metersPerUnit": 8535356.451612903,
+      "bodyRadiusM": 2645960500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

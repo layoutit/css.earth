@@ -2,7 +2,7 @@
   "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wasp-80",
-  "displayName": "WASP-80",
+  "displayName": "Petra",
   "panel": {
     "facts": [
       {
@@ -13,7 +13,7 @@
           "catalogueId": "doi-10-1093-mnras-stv706",
           "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T",
           "label": "Triaud et al. (2015), Monthly Notices of the Royal Astronomical Society 450 2279-2290",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "gaia-dr3-wasp-80",
           "url": "https://gea.esac.esa.int/archive/",
           "label": "Gaia DR3 parallax",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }

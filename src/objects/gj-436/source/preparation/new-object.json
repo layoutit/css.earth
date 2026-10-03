@@ -1,8 +1,13 @@
 {
   "id": "gj-436",
-  "name": "GJ 436",
-  "system": "GJ 436 system",
+  "name": "Noquisi",
+  "system": "Noquisi system",
   "description": "Star of 3,505 K, 9.75 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "GJ 436"
+  ],
+  "featured": true,
+  "order": 3097,
   "target": "GJ 436",
   "gaia": "4017860992519744384",
   "paper": {
@@ -30,7 +35,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "GJ 436 b crosses GJ 436 as seen from Earth, which is how it was found.",
+    "card": "GJ 436 b crosses Noquisi as seen from Earth, which is how it was found.",
     "introduction": "Its radius follows Maciejewski et al. 2014, and its temperature Maxted et al. 2022.",
     "locator": "NASA Exoplanet Archive ps table (st_refname MAXTED_ET_AL_2022, MACIEJEWSKI_ET_AL__2014): st_teff 3505, st_rad 0.455, st_mass 0.47",
     "quotes": {
@@ -41,6 +46,5 @@
       "introduction": "It has an apparent visual magnitude of 10.67, which is much too faint to be seen with the naked eye."
     }
   },
-  "notes": [],
-  "order": 3097
+  "notes": []
 }

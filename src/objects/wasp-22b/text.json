@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-22b",
+  "card": {
+    "text": "WASP-22 b was found in 2010 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.53272912, pl_radj 1.23, pl_bmassj 0.67"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-22",
+        "url": "https://en.wikipedia.org/wiki/WASP-22",
+        "label": "Wikipedia, \"WASP-22\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375720811",
+        "quote": "It hosts one known exoplanet, WASP-22b; the nature of a likely third body is unclear."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Tojil. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.53272912, pl_radj 1.23, pl_bmassj 0.67"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

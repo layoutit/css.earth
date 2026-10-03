@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around HAT-P-12. Its orbit and size follow Hartman et al. 2009's fit, the archive's default. The introduction is generated from Hartman et al. 2009's published values; the sections below are the data's own.
+It is the only planet known around Komondor. Its orbit and size follow Hartman et al. 2009's fit, the archive's default. The introduction is generated from Hartman et al. 2009's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.959 Jupiter radii from Hartman et al. 2009 (2009ApJ...706..785H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract): 68,560.8 km at 71,492 km per Jupiter radius. GM from the mass 0.211 Jupiter masses (Hartman et al. 2009, the mass the NASA Exoplanet Archive's composite table adopts (2009ApJ...706..785H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -10,11 +10,12 @@ It is the only planet known around HAT-P-12. Its orbit and size follow Hartman e
 
 **Color.** No image or measured color exists. The neutral gray is lit by hat-p-12's measured color (#ffd1b6, the color dataset of hat-p-12 (src/objects/hat-p-12/source/photometry/stellar-color.json)) at the gray's own brightness.
 
-**Charts.** The orbits of HAT-P-12's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (50, 76, 77), folded onto its orbit. Upper limits and rows without an error are left out.
+**Charts.** The orbits of Komondor's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (50, 76, 77), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hat-p-12b.json).
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hat-p-12b.json).
+
 
 ## Known problems
 

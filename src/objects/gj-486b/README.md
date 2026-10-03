@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around GJ 486. Its orbit and size follow Weiner Mansfield et al. 2024's fit, the archive's default. The introduction is generated from Weiner Mansfield et al. 2024's published values; the sections below are the data's own.
+It is the only planet known around Gar. Its orbit and size follow Weiner Mansfield et al. 2024's fit, the archive's default. The introduction is generated from Weiner Mansfield et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.11499708 Jupiter radii from Weiner Mansfield et al. 2024 (2024ApJ...975L..22W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W/abstract): 8,221.4 km at 71,492 km per Jupiter radius. GM from the mass 0.00871539 Jupiter masses (Weiner Mansfield et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJ...975L..22W), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -10,11 +10,12 @@ It is the only planet known around GJ 486. Its orbit and size follow Weiner Mans
 
 **Color.** No image or measured color exists. The neutral gray is lit by gj-486's measured color (#ffcd89, the color dataset of gj-486 (src/objects/gj-486/source/photometry/stellar-color.json)) at the gray's own brightness.
 
-**Charts.** The orbits of GJ 486's planets from above, from their hosted-orbit records, and its transmission spectrum, 203 bins from Moran et al. 2023 in the archive's transitspec table; its transit in 2 TESS sectors (23, 50), folded onto its orbit. Upper limits and rows without an error are left out.
+**Charts.** The orbits of Gar's planets from above, from their hosted-orbit records, and its transmission spectrum, 203 bins from Moran et al. 2023 in the archive's transitspec table; its transit in 2 TESS sectors (23, 50), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-486b.json).
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-486b.json).
+
 
 ## Known problems
 

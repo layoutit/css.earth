@@ -1,0 +1,30 @@
+{
+ "id": "almach",
+ "classification": "star",
+ "order": 5472,
+ "physical": {
+  "name": "Almach",
+  "horizonsCode": null,
+  "meanRadiusKm": 68536885.5,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 4302
+ },
+ "physicalNotes": "Radius 98.515 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 9640: radius 98.515 solar radii, implied by the fitted luminosity 2986.6 solar luminosities (fractional uncertainty 0.138) and temperature (https://doi.org/10.1093/mnras/stx1433): 68,536,886 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4302 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 9640: effective temperature 4302 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.066) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 30.97466283,
+  "declinationDegrees": 42.32984832,
+  "positionEpochJulianYear": 1991.25,
+  "distanceParsecs": 120.482,
+  "properMotionRaMasPerYear": 43.08,
+  "properMotionDecMasPerYear": -50.85,
+  "radialVelocityKmPerS": -11.5,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry (https://doi.org/10.1134/S1063773712050015), VizieR V/137D/XHIP row HIP = 9640: RAJ2000 30.97466283, DEJ2000 42.32984832 (ICRS at epoch J1991.25), from the archived row src/objects/almach/source/photometry/catalogue-row.tsv; SIMBAD names it HIP 9640",
+   "distance": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 9640: distance 120.482 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.125), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 120.482 +/- 15.06 pc; Gaia DR3 cannot see the star",
+   "properMotion": "VizieR V/137D/XHIP row HIP = 9640 (same row): 43.08, -50.85 mas/yr",
+   "radialVelocity": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 9640: RV -11.5 +/- 0.6 km/s (quality D) (https://doi.org/10.1134/S1063773712050015)"
+  }
+ }
+}

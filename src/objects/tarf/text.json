@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tarf",
+  "card": {
+    "text": "A star 93 parsecs away, 48 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 40526: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-cancri",
+        "url": "https://en.wikipedia.org/wiki/Beta_Cancri",
+        "label": "Wikipedia, \"Beta Cancri\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374787876",
+        "quote": "Beta Cancri is the brightest star in the zodiacal constellation of Cancer."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 598 times the Sun's luminosity at 4,103 K, so 48.474 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 40526: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-cancri",
+        "url": "https://en.wikipedia.org/wiki/Beta_Cancri",
+        "label": "Wikipedia, \"Beta Cancri\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374787876",
+        "quote": "It is visible to the naked eye with an apparent visual magnitude of +3.5, and has an absolute magnitude of −1.2."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

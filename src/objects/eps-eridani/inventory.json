@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "eps-eridani-billboard.webp",
-      "bytes": 5030,
-      "sha256": "d6000e890cf137cb943a59efb2c8d0dbc72e89c51463903a59d99e19686d682e"
-    },
-    {
-      "location": "public",
       "filename": "eps-eridani-dataset-color.webp",
       "bytes": 44,
       "sha256": "e744d09c42d21df7ce6d676da8166d06679b63df370aaf7045e7c1643aa99eea"
@@ -46,20 +40,20 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2079,
-      "sha256": "9f0089a9e184fa502e4dbbb764dbbcbf782ab785402c43a4458f61727f2ee967"
+      "bytes": 1874,
+      "sha256": "65ccdc8f5f655813f8210037892aacef1c30f7ebfb2c76ca9531073f1a1b763a"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 726,
-      "sha256": "d8f96d817ee17b642060a74943b7e1ec2c7ce6adb5c68e68db15e67f4ecb1c2d"
+      "bytes": 664,
+      "sha256": "db14aa7c472ae322d43f088527ca13ee0232a5b27dfa2389493ce36458d968bc"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 1169,
-      "sha256": "392f5e29ba6368fe3843dbdbc7c8af974b0bd4ffde67a046f90bbad68bed2a51"
+      "bytes": 1162,
+      "sha256": "c8661d6cdb164fd4ed61b4cfd4c8678436060db410892750f0b502237d52ec1f"
     },
     {
       "location": "prepared",
@@ -88,8 +82,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 273827,
-      "sha256": "342733dd63c2389bc72f7ac22af11afa9561e0aae9595cf80622707ad8837ad5"
+      "bytes": 273760,
+      "sha256": "916486e3fc88929eebe26d29c3bc7eb4e9702826277d52e38a267cce280006df"
     },
     {
       "location": "prepared",

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "enif",
+  "angularDiameterMas": 7.83,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 123,829,034 km at 211.42 pc = 7.83 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 211.416,
+  "distanceSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 107315: distance 211.416 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.036), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 211.416 +/- 7.611 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 123829034.4,
+  "radiusSource": "Radius 177.992 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 107315: radius 177.992 solar radii, implied by the fitted luminosity 8508.04 solar luminosities (fractional uncertainty 0.07) and temperature (https://doi.org/10.1093/mnras/stx1433): 123,829,034 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4158 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 107315: effective temperature 4158 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.079) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4158,
+  "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 107315: effective temperature 4158 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.079) (https://doi.org/10.1093/mnras/stx1433)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 206778) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

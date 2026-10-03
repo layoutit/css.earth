@@ -1,0 +1,31 @@
+{
+  "host": "wasp-64",
+  "planets": [
+    {
+      "id": "wasp-64b",
+      "name": "WASP-64 b",
+      "description": "Transiting planet of Atakoraka with a 1.57-day year, found in 2012.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A%26A...552A..82G/abstract",
+        "credit": "Gillon et al. 2013"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GILLON_ET_AL__2013"
+      },
+      "text": {
+        "card": "WASP-64 b was found in 2012 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around Atakoraka. Its orbit and size follow Gillon et al. 2013's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILLON_ET_AL__2013): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.573290273, pl_radj 1.271, pl_bmassj 1.271",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-64",
+          "title": "WASP-64",
+          "revision": "1370791684",
+          "card": "It is a G7 class main-sequence star, orbited by a planet WASP-64b.",
+          "introduction": "It is younger than the Sun at 3.6±1.6 billion years, and it has a metal abundance similar to the Sun."
+        }
+      },
+      "order": 5493
+    }
+  ]
+}

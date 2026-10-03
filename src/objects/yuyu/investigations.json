@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "yuyu",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 705156050012755712: position at J2016.0. Distance: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 43103: distance 101.523 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.062), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 101.523 +/- 6.294 pc; Gaia DR3 parallax 9.4124 +/- 0.1621 mas (same row, RUWE 2.08), 58.1 standard errors, is not used. Proper motion: Gaia DR3 (same row): -22.070, -43.699 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1093/mnras/stx1433"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 21.353 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 43103: radius 21.353 solar radii, implied by the fitted luminosity 256.838 solar luminosities (fractional uncertainty 0.08) and temperature (https://doi.org/10.1093/mnras/stx1433). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5004 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 43103: effective temperature 5004 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.052).",
+      "evidence": [
+        "https://doi.org/10.1093/mnras/stx1433"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 517: HR 3475; VizieR III/202, cross-checked against Gaia DR3 XP spectrum, source 705156050012755712 (11 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffe8ca. Routes tried in order: stis-ngsl: HD 74739 is not in the library; pulkovo: HR 3475 is not in the catalogue; kiehling: HR 3475 is not among its 60 stars; burnashev: BS 3475 is not in part2; kharitonov: used.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=705156050012755712&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    }
+  ]
+}

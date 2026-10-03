@@ -1,8 +1,13 @@
 {
   "id": "wasp-62",
-  "name": "WASP-62",
-  "system": "WASP-62 system",
+  "name": "Naledi",
+  "system": "Naledi system",
   "description": "Star of 6,230 K, 176 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "WASP-62"
+  ],
+  "featured": true,
+  "order": 4828,
   "target": "WASP-62",
   "gaia": "4756649415309914240",
   "paper": {
@@ -30,7 +35,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "WASP-62 b crosses WASP-62 as seen from Earth, which is how it was found.",
+    "card": "WASP-62 b crosses Naledi as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Stassun et al. 2017.",
     "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6230, st_rad 1.23, st_mass 1.11",
     "quotes": {
@@ -41,6 +46,5 @@
       "introduction": "It is an F-class main-sequence star, orbited by a planet, WASP-62b."
     }
   },
-  "notes": [],
-  "order": 4828
+  "notes": []
 }

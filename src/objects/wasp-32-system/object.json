@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-32-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-32",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Parumleo system",
+      "systemName": "Parumleo system",
+      "classification": "planetary-system",
+      "color": "#fff7fc",
+      "distanceAu": 57768185,
+      "description": "WASP-32 b crosses Parumleo as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        8619454329208086000,
+        596943301275227100,
+        181069270841000420
+      ],
+      "presentationToReference": [
+        0.9973914607215525,
+        0.02090133247078662,
+        0.06908985729232098,
+        0.06907469179450137,
+        0.001447526914404838,
+        -0.9976104408131095,
+        0.020951396927705822,
+        -0.9997804953922524,
+        2.114921986435322e-9
+      ],
+      "orbitUpReference": [
+        -0.02090133247078662,
+        -0.001447526914404838,
+        0.9997804953922524
+      ],
+      "metersPerUnit": 2131983.870967742,
+      "bodyRadiusM": 660915000
+    }
+  }
+}

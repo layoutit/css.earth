@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tianfu",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tianfu",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 11563229.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tianfu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tianfu",
+      "classification": "star",
+      "color": "#ffe1c0",
+      "distanceAu": 29215899.7,
+      "description": "A star 142 parsecs away, 17 times the Sun's width, measured from its light.",
+      "systemName": "Tianfu system",
+      "aliases": [
+        "Tau Aquilae",
+        "HD 190327",
+        "HIP 98823",
+        "HR 7669"
+      ],
+      "order": 5723,
+      "context": {
+        "order": 5720
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2235161128461674800,
+        -3714827266222888000,
+        553692619432125060
+      ],
+      "presentationToReference": [
+        0.5114040862257444,
+        0.06531287901661045,
+        -0.8568547650717554,
+        -0.8499511822116158,
+        -0.10854987924110494,
+        -0.5155578644282506,
+        0.12668404970116878,
+        -0.9919431191108203,
+        9.306939990240161e-8
+      ],
+      "orbitUpReference": [
+        -0.06531287901661045,
+        0.10854987924110494,
+        0.9919431191108203
+      ],
+      "metersPerUnit": 37300740.96774194,
+      "bodyRadiusM": 11563229700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

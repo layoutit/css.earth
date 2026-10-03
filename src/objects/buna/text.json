@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "buna",
+  "card": {
+    "text": "A star about 60 parsecs away, 1.9 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 340028235795364864: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-16175",
+        "url": "https://en.wikipedia.org/wiki/HD_16175",
+        "label": "Wikipedia, \"HD 16175\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374603653",
+        "quote": "HD 16175 is a 7th magnitude G-type star with temperature about 6,000 K located 196 light-years away in the Andromeda constellation."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.9 solar radii and 1.16 solar masses (FLAME) and 5,799 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 340028235795364864: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-16175",
+        "url": "https://en.wikipedia.org/wiki/HD_16175",
+        "label": "Wikipedia, \"HD 16175\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374603653",
+        "quote": "This star is only visible through binoculars or better equipment; it is also 3.3 times more luminous, is 1.34 times more massive, and has a radius 1.66 times bigger than the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

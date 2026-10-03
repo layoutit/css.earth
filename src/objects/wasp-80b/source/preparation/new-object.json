@@ -4,7 +4,8 @@
     {
       "id": "wasp-80b",
       "name": "WASP-80 b",
-      "description": "Transiting planet of WASP-80 with a 3.07-day year, found in 2012.",
+      "description": "Transiting planet of Petra with a 3.07-day year, found in 2012.",
+      "order": 4912,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T/abstract",
         "credit": "Triaud et al. 2015"
@@ -15,10 +16,9 @@
       },
       "text": {
         "card": "WASP-80 b was found in 2012 by SuperWASP as it crossed its star.",
-        "introduction": "It is the only planet known around WASP-80. Its orbit and size follow Triaud et al. 2015's fit, the archive's default.",
+        "introduction": "It is the only planet known around Petra. Its orbit and size follow Triaud et al. 2015's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TRIAUD_ET_AL__2015): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.06785251, pl_radj 0.999, pl_bmassj 0.538"
-      },
-      "order": 4912
+      }
     }
   ]
 }

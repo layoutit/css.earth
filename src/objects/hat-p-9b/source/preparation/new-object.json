@@ -1,0 +1,31 @@
+{
+  "host": "hat-p-9",
+  "planets": [
+    {
+      "id": "hat-p-9b",
+      "name": "HAT-P-9 b",
+      "description": "Transiting planet of Tevel with a 3.92-day year, found in 2008.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+        "credit": "Wang et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "WANG_ET_AL__2019"
+      },
+      "text": {
+        "card": "HAT-P-9 b was found in 2008 by HATNet as it crossed its star.",
+        "introduction": "It is the only planet known around Tevel. Its orbit and size follow Wang et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WANG_ET_AL__2019): disc_year 2008, disc_facility HATNet, sy_pnum 1; pl_orbper 3.92281131, pl_radj 1.393, pl_bmassj 0.749",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HAT-P-9b",
+          "title": "HAT-P-9b",
+          "revision": "1348849144",
+          "card": "HAT-P-9b, formally named Alef, is an exoplanet approximately 1500 light years away in the constellation Auriga.",
+          "introduction": "This planet was found by the transit method on June 26, 2008."
+        }
+      },
+      "order": 5720
+    }
+  ]
+}

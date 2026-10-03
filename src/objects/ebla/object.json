@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ebla",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ebla",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 714483.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ebla-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Ebla",
+      "classification": "star",
+      "color": "#ffdebe",
+      "distanceAu": 5925077.3,
+      "description": "A star 29 parsecs away, the Sun's width, measured from its light.",
+      "systemName": "Ebla system",
+      "aliases": [
+        "HD 218566",
+        "HIP 114322"
+      ],
+      "order": 5535,
+      "context": {
+        "order": 5532
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        864017714351874200,
+        -194724653360341120,
+        -34976330359999816
+      ],
+      "presentationToReference": [
+        0.9747725678201017,
+        -0.038489102211443665,
+        -0.21985683986713322,
+        -0.21968560045331958,
+        0.008675655104279053,
+        -0.975532147067423,
+        -0.039454758634031084,
+        -0.9992213578679494,
+        -0.0000012890732894739074
+      ],
+      "orbitUpReference": [
+        0.038489102211443665,
+        -0.008675655104279053,
+        0.9992213578679494
+      ],
+      "metersPerUnit": 2304786.7741935486,
+      "bodyRadiusM": 714483900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

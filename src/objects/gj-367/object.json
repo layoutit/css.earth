@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "GJ 367",
+      "label": "Añañuca",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,16 +94,20 @@
       }
     },
     "catalog": {
-      "name": "GJ 367",
+      "name": "Añañuca",
       "classification": "star",
       "color": "#ffc589",
       "distanceAu": 1942836.3,
       "description": "GJ 367 b crosses GJ 367 as seen from Earth, which is how it was found.",
-      "systemName": "GJ 367 system",
+      "systemName": "Añañuca system",
+      "aliases": [
+        "GJ 367"
+      ],
       "order": 3093,
       "context": {
         "order": 3090
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

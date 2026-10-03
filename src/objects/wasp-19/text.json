@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-19",
+  "card": {
+    "text": "WASP-19 b crosses Wattle as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2001-11112",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+        "label": "Cortés-Zuleta et al. (2020), Astronomy & Astrophysics 636 A98",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CORT_EACUTE_S_ZULETA_ET_AL__2020): st_teff 5616, st_rad 1.006, st_mass 0.965"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-19",
+        "url": "https://en.wikipedia.org/wiki/WASP-19",
+        "label": "Wikipedia, \"WASP-19\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374406313",
+        "quote": "WASP-19, formally named Wattle, is a magnitude 12.3 star about 869 light-years away, located in the Vela constellation of the Southern Hemisphere."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Cortés-Zuleta et al. 2020.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2001-11112",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+        "label": "Cortés-Zuleta et al. (2020), Astronomy & Astrophysics 636 A98",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CORT_EACUTE_S_ZULETA_ET_AL__2020): st_teff 5616, st_rad 1.006, st_mass 0.965"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-19",
+        "url": "https://en.wikipedia.org/wiki/WASP-19",
+        "label": "Wikipedia, \"WASP-19\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374406313",
+        "quote": "This star has been found to host a transiting hot Jupiter-type planet in a tight orbit."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

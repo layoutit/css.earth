@@ -1,11 +1,14 @@
 {
   "id": "psi1-draconis-a",
-  "name": "Psi1 Draconis A",
-  "system": "Psi1 Draconis A system",
+  "name": "Dziban",
+  "system": "Dziban system",
   "description": "A naked-eye star 22.8 parsecs away, 2.3 times the Sun's width: its disc was measured with the CHARA Array.",
   "aliases": [
-    "HD 162003"
+    "HD 162003",
+    "Psi1 Draconis A"
   ],
+  "featured": true,
+  "order": 5355,
   "target": "HD 162003",
   "paper": {
     "url": "https://doi.org/10.1088/0004-637X/746/1/101",
@@ -42,6 +45,5 @@
     "introduction": "Its disc spans 0.949 milliarcseconds, which gives 2.329 solar radii and 6,014 K at its surface.",
     "locator": "Tables 5 and 10, HD 162003: limb-darkened diameter, R, Teff"
   },
-  "notes": [],
-  "order": 5355
+  "notes": []
 }

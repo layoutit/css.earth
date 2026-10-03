@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "uruk",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Uruk",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 997791.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/uruk-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Uruk",
+      "classification": "star",
+      "color": "#fff4f2",
+      "distanceAu": 22374089.6,
+      "description": "A star about 110 parsecs away, 1.4 times the Sun's width, measured by Gaia.",
+      "systemName": "Uruk system",
+      "aliases": [
+        "Gaia DR3 4321678767076043264",
+        "HD 231701",
+        "HIP 96078"
+      ],
+      "order": 5743,
+      "context": {
+        "order": 5740
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1255051041580716300,
+        -2954159018394157000,
+        949198595490841200
+      ],
+      "presentationToReference": [
+        0.3749649784760834,
+        0.11088628740135677,
+        -0.9203833419737529,
+        -0.8825985048022067,
+        -0.26100838205802823,
+        -0.391017267926059,
+        0.2835862201118724,
+        -0.958946742922564,
+        9.308969606371702e-7
+      ],
+      "orbitUpReference": [
+        -0.11088628740135677,
+        0.26100838205802823,
+        0.958946742922564
+      ],
+      "metersPerUnit": 3218681.935483871,
+      "bodyRadiusM": 997791400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "bibha",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Bibhā",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1125916.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/bibha-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Bibhā",
+      "classification": "star",
+      "color": "#fff2ed",
+      "distanceAu": 21312211.7,
+      "description": "A star about 100 parsecs away, 1.6 times the Sun's width, measured by Gaia.",
+      "systemName": "Bibhā system",
+      "aliases": [
+        "Gaia DR3 3823126385045210880",
+        "HD 86081",
+        "HIP 48711"
+      ],
+      "order": 5505,
+      "context": {
+        "order": 5502
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2727529640849201000,
+        1637299981130565600,
+        -211759587415345440
+      ],
+      "presentationToReference": [
+        -0.8554911516060437,
+        0.056947033729934704,
+        0.5146765245016786,
+        0.5135400273584034,
+        -0.03418428255660858,
+        0.8573844383512101,
+        -0.06641934826912615,
+        -0.9977917970074978,
+        2.300084711258206e-7
+      ],
+      "orbitUpReference": [
+        -0.056947033729934704,
+        0.03418428255660858,
+        0.9977917970074978
+      ],
+      "metersPerUnit": 3631989.0322580645,
+      "bodyRadiusM": 1125916600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

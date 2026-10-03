@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/eps-eridani-b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "eps-eridani-b-orbits",
+      "title": "ε Eridani b: orbits around ε Eridani",
+      "output": "eps-eridani-b-system-orbits.svg",
+      "system": "eps-eridani",
+      "highlight": "eps-eridani-b",
+      "description": "The orbits of ε Eridani's planets in this map from above, to scale, with ε Eridani b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Thompson et al. (2025), AJ 170, 301, Table 3, the model with every data set (RV, Hipparcos, FGS, Gaia DR2 and DR3): P 7.33 +0.08/-0.07 yr, a 3.53 +/- 0.04 au (over the host's recorded 0.74 solar radii), i 40 +6/-5 degrees, position angle of the ascending node 186 +8/-9 degrees. Drawn circular: e 0.06 +0.06/-0.04 is small and its omega and periastron time are each unconstrained (268 +62/-105 degrees; MJD 58017 +1740/-447), so their medians do not phase the orbit. The phase is the paper's section 4 statement that the planet is at its greatest separation ('opposition'), south of the star, on 2024-12-07 + N x 3.66 yr, moving counterclockwise: inferior conjunction MJD 59981.7 puts it at 1,096 mas and position angle 186 degrees on that date (their radial velocities alone give 1,071 +/- 58 mas). (https://arxiv.org/abs/2502.20561): P 2677.28 d"
+      }
+    }
+  ]
+}

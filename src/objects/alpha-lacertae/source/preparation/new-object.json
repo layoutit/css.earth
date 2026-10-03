@@ -1,11 +1,13 @@
 {
   "id": "alpha-lacertae",
-  "name": "Alpha Lacertae",
-  "system": "Alpha Lacertae system",
+  "name": "Stellio",
+  "system": "Stellio system",
   "description": "A naked-eye star 31.4 parsecs away, 2.1 times the Sun's width: its disc was measured with the CHARA Array.",
   "aliases": [
-    "HD 213558"
+    "HD 213558",
+    "Alpha Lacertae"
   ],
+  "featured": true,
   "order": 5362,
   "target": "HD 213558",
   "paper": {

@@ -1,4 +1,4 @@
-# Zeta Aquilae A credits
+# Okab credits
 
 Radius, mass and temperature: Radius 2.449 +/- 0.046 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 177724: radius in solar radii, from the limb-darkened angular diameter 0.895 +/- 0.017 mas (CHARA) and the Hipparcos parallax, 2.449 +/- 0.046 (https://doi.org/10.1088/0004-637X/746/1/101); Mass 1.984 +/- 0.006 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 177724: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.984 +/- 0.006 (https://doi.org/10.1088/0004-637X/746/1/101); temperature from Boyajian et al. (2012), ApJ 746, 101, HD 177724: effective temperature in K, from the angular diameter and the bolometric flux, 9205 +/- 95.
 

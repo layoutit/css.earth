@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tupi",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tupi",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 778407.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tupi-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tupi",
+      "classification": "star",
+      "color": "#fff2ed",
+      "distanceAu": 6906974.4,
+      "description": "A star about 33 parsecs away, 1.1 times the Sun's width, measured by Gaia.",
+      "systemName": "Tupi system",
+      "aliases": [
+        "Gaia DR3 4733035238430992768",
+        "HD 23079",
+        "HIP 17096"
+      ],
+      "order": 5738,
+      "context": {
+        "order": 5735
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        358008270289182600,
+        509908579441127400,
+        -824298148113178200
+      ],
+      "presentationToReference": [
+        0.3464834848083501,
+        -0.45839261220028765,
+        0.8184286210997626,
+        0.4934939112855541,
+        -0.6529082381335697,
+        -0.5746082074782813,
+        -0.7977549462580271,
+        -0.6029817954611189,
+        0.000007958509477177325
+      ],
+      "orbitUpReference": [
+        0.45839261220028765,
+        0.6529082381335697,
+        0.6029817954611189
+      ],
+      "metersPerUnit": 2510993.2258064514,
+      "bodyRadiusM": 778407900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

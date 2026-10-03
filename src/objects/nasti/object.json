@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "nasti",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Násti",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 872666.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/nasti-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Násti",
+      "classification": "star",
+      "color": "#fff1ea",
+      "distanceAu": 12455573.5,
+      "description": "A star about 60 parsecs away, 1.3 times the Sun's width, measured by Gaia.",
+      "systemName": "Násti system",
+      "aliases": [
+        "Gaia DR3 1090159839002347136",
+        "HD 68988",
+        "HIP 40687"
+      ],
+      "order": 5638,
+      "context": {
+        "order": 5635
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -505433296324414400,
+        732821157845488500,
+        1636917484874817300
+      ],
+      "presentationToReference": [
+        -0.2712538839091196,
+        -0.4987645455481024,
+        0.8231981891187644,
+        0.3932874757935947,
+        0.7231737135614773,
+        0.5677541205465666,
+        0.878490917339571,
+        -0.47775904818003945,
+        0.00000582941057927531
+      ],
+      "orbitUpReference": [
+        0.4987645455481024,
+        -0.7231737135614773,
+        0.47775904818003945
+      ],
+      "metersPerUnit": 2815052.580645161,
+      "bodyRadiusM": 872666300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

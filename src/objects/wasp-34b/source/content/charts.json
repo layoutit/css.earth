@@ -5,11 +5,11 @@
     {
       "kind": "system-orbits",
       "id": "wasp-34b-orbits",
-      "title": "WASP-34 b: orbits around WASP-34",
+      "title": "WASP-34 b: orbits around Amansinaya",
       "output": "wasp-34b-system-orbits.svg",
       "system": "wasp-34",
       "highlight": "wasp-34b",
-      "description": "The orbits of WASP-34's planets in this map from above, to scale, with WASP-34 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "description": "The orbits of Amansinaya's planets in this map from above, to scale, with WASP-34 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
         "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 4.31768411 d"
       }

@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "psi1-draconis-a-billboard.webp",
-      "bytes": 4822,
-      "sha256": "3c74029c8ad185c6f3554706530d30c8ae16e23f79503c7f482e4e710405a638"
-    },
-    {
-      "location": "public",
       "filename": "psi1-draconis-a-dataset-color.webp",
       "bytes": 44,
       "sha256": "b0622c072e3850248924209f5b8225962b240c985c503c9048efb71b595a214d"
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 1424,
-      "sha256": "ca1f4860ff794a3922a749b2502afadd4587d2c8d58dc026340060b47eabe775"
+      "bytes": 1415,
+      "sha256": "a7730beb3785b2fe899d7d8a7205955bedb2ee69c9b73d27d77bad71456d7929"
     },
     {
       "location": "prepared",
@@ -113,7 +107,7 @@
       "location": "prepared",
       "filename": "text.json",
       "bytes": 1030,
-      "sha256": "d11b5c9726786dc4c12b8427e9b76340ea84ed51469d649cc16b9da7641550cc"
+      "sha256": "401c44dbf960e39ea53e89876411b290310b8c8d6d590bf77b8d9d7e9e4db7a0"
     },
     {
       "location": "prepared",

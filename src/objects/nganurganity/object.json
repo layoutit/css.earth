@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "nganurganity",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Nganurganity",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 178682892.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/nganurganity-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Nganurganity",
+      "classification": "star",
+      "color": "#ffc578",
+      "distanceAu": 70881506.6,
+      "description": "A star 344 parsecs away, 257 times the Sun's width, measured from its light.",
+      "systemName": "Nganurganity system",
+      "aliases": [
+        "Sigma Canis Majoris",
+        "HD 52877",
+        "HIP 33856",
+        "HR 2646"
+      ],
+      "order": 5645,
+      "context": {
+        "order": 5642
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2492467354111641600,
+        9030537140652000000,
+        -4967487833936528000
+      ],
+      "presentationToReference": [
+        -0.2350558523157028,
+        0.12463871300479357,
+        0.9639574355295192,
+        0.8516382776140702,
+        -0.4515818659060683,
+        0.26605650243385065,
+        -0.4684666374403607,
+        -0.8834811880313596,
+        1.384865705090947e-7
+      ],
+      "orbitUpReference": [
+        -0.12463871300479357,
+        0.4515818659060683,
+        0.8834811880313596
+      ],
+      "metersPerUnit": 576396426.7741935,
+      "bodyRadiusM": 178682892300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-161b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-161b-orbits",
+      "title": "WASP-161 b: orbits around Tislit",
+      "output": "wasp-161b-system-orbits.svg",
+      "system": "wasp-161",
+      "highlight": "wasp-161b",
+      "description": "The orbits of Tislit's planets in this map from above, to scale, with WASP-161 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 5.4056202 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-161b-transit",
+      "title": "WASP-161 b: its transit",
+      "description": "WASP-161 b crossing its star, as TESS recorded it: 3 sectors (61, 88, 99) of the SPOC pipeline's 2-minute light curves of TIC 50712784, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 21-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-161b-transit.svg",
+      "metadata": {
+        "tic": "TIC 50712784",
+        "sectors": [
+          61,
+          88,
+          99
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-161b",
+      "sources": [
+        "photometry/tess/tess2023018032328-s0061-0000000050712784-0250-s_lc.fits",
+        "photometry/tess/tess2025014115807-s0088-0000000050712784-0285-s_lc.fits",
+        "photometry/tess/tess2026005125623-s0099-0000000050712784-0300-s_lc.fits"
+      ],
+      "durationHours": 5.1288,
+      "binMinutes": 21,
+      "notes": [
+        "TESS 2-min SPOC · sectors 61, 88, 99",
+        "Folded on the app's orbit; 21-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

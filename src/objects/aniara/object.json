@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "aniara",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Aniara",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3145944.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/aniara-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Aniara",
+      "classification": "star",
+      "color": "#ffe5ce",
+      "distanceAu": 25249441.3,
+      "description": "A star about 120 parsecs away, 4.5 times the Sun's width, measured by Gaia.",
+      "systemName": "Aniara system",
+      "aliases": [
+        "Gaia DR3 845335158256083584",
+        "HD 102956",
+        "HIP 57820"
+      ],
+      "order": 5486,
+      "context": {
+        "order": 5483
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2020266250490729200,
+        76070194229596910,
+        3190681872956619300
+      ],
+      "presentationToReference": [
+        -0.5348485239568544,
+        -0.8441097891863228,
+        0.0376260577392285,
+        0.020138945098313186,
+        0.031782748647623045,
+        0.9992918891788971,
+        0.844707925446128,
+        -0.5352275410404659,
+        -5.244998991773795e-7
+      ],
+      "orbitUpReference": [
+        0.8441097891863228,
+        -0.031782748647623045,
+        0.5352275410404659
+      ],
+      "metersPerUnit": 10148207.41935484,
+      "bodyRadiusM": 3145944300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

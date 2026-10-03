@@ -1,8 +1,13 @@
 {
   "id": "ltt-9779",
-  "name": "LTT 9779",
-  "system": "LTT 9779 system",
+  "name": "Uúba",
+  "system": "Uúba system",
   "description": "Star of 5,443 K, 80.4 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "LTT 9779"
+  ],
+  "featured": true,
+  "order": 3838,
   "target": "LTT 9779",
   "gaia": "2307504062045842688",
   "paper": {
@@ -30,7 +35,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "LTT 9779 b crosses LTT 9779 as seen from Earth, which is how it was found.",
+    "card": "LTT 9779 b crosses Uúba as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Jenkins et al. 2020.",
     "locator": "NASA Exoplanet Archive ps table (st_refname JENKINS_ET_AL_2020): st_teff 5443, st_rad 0.949, st_mass 1.02",
     "quotes": {
@@ -41,6 +46,5 @@
       "introduction": "The star is about 95% the radius and about the same mass as the Sun, but younger than the Sun at 1.7 billion years old, hence its lower luminosity."
     }
   },
-  "notes": [],
-  "order": 3838
+  "notes": []
 }

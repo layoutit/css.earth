@@ -1,0 +1,48 @@
+{
+  "id": "neichu",
+  "name": "Neichu",
+  "system": "Neichu system",
+  "description": "A star 81 parsecs away, 8.3 times the Sun's width, measured from its light.",
+  "aliases": [
+    "Pi Pegasi",
+    "HD 210459",
+    "HIP 109410",
+    "HR 8454"
+  ],
+  "featured": true,
+  "target": "HIP 109410",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 8.263,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 109410: radius 8.263 solar radii, implied by the fitted luminosity 95.476 solar luminosities (fractional uncertainty 0.037) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 6281,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 109410: effective temperature 6281 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.062)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 80.645,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 109410: distance 80.645 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.014), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 1.129
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 81 parsecs away, 8.3 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 95 times the Sun's luminosity at 6,281 K, so 8.263 solar radii.",
+    "locator": "Table 2, HIP 109410: D, Teff, L, Rad, Q"
+  },
+  "notes": [],
+  "order": 5640
+}

@@ -4,7 +4,8 @@
     {
       "id": "gj-486b",
       "name": "GJ 486 b",
-      "description": "Transiting planet of GJ 486 with a 1.47-day year, found in 2021.",
+      "description": "Transiting planet of Gar with a 1.47-day year, found in 2021.",
+      "order": 3100,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W/abstract",
         "credit": "Weiner Mansfield et al. 2024"
@@ -15,7 +16,7 @@
       },
       "text": {
         "card": "GJ 486 b was found in 2021 by Calar Alto Observatory as it crossed its star.",
-        "introduction": "It is the only planet known around GJ 486. Its orbit and size follow Weiner Mansfield et al. 2024's fit, the archive's default.",
+        "introduction": "It is the only planet known around Gar. Its orbit and size follow Weiner Mansfield et al. 2024's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WEINER_MANSFIELD_ET_AL__2024): disc_year 2021, disc_facility Calar Alto Observatory, sy_pnum 1; pl_orbper 1.46712127, pl_radj 0.11499708, pl_bmassj 0.00871539",
         "quotes": {
           "url": "https://en.wikipedia.org/wiki/Gliese_486_b",
@@ -24,8 +25,7 @@
           "card": "Gliese 486 b, also named Su, is a rocky super-Earth exoplanet orbiting the red dwarf star Gliese 486 (Gar), 26.4 light-years away in the constellation Virgo.",
           "introduction": "It is the only known planet in its system."
         }
-      },
-      "order": 3100
+      }
     }
   ]
 }

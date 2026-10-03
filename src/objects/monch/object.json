@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "monch",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Mönch",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 612808.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/monch-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Mönch",
+      "classification": "star",
+      "color": "#ffebdb",
+      "distanceAu": 6582411.6,
+      "description": "A star about 32 parsecs away, 88% of the Sun's width, measured by Gaia.",
+      "systemName": "Mönch system",
+      "aliases": [
+        "Gaia DR3 3650718804281798912",
+        "HD 130322",
+        "HIP 72339"
+      ],
+      "order": 5622,
+      "context": {
+        "order": 5619
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -733093291123232300,
+        -657429703814223400,
+        -4855401196308108
+      ],
+      "presentationToReference": [
+        -0.7444727601367539,
+        0.0036654441763421235,
+        -0.6676427741939198,
+        -0.6676346818626482,
+        0.0032871731799768125,
+        0.7444817835693802,
+        -0.00492351383911275,
+        -0.9999878794322834,
+        3.323378737832271e-8
+      ],
+      "orbitUpReference": [
+        -0.0036654441763421235,
+        -0.0032871731799768125,
+        0.9999878794322834
+      ],
+      "metersPerUnit": 1976801.935483871,
+      "bodyRadiusM": 612808600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "hd-149026b-billboard.webp",
-      "bytes": 6084,
-      "sha256": "f57af5fcfaa23d35179630051cd7ce1f2a413fe42024c37c5d25f725e588ed4d"
-    },
-    {
-      "location": "public",
       "filename": "hd-149026b-dataset-thermal.webp",
       "bytes": 44,
       "sha256": "fbb3265586a18d147350131b9ff01c06981093be05323c5679ceb54a9c33e0fa"
@@ -28,14 +22,14 @@
     {
       "location": "public",
       "filename": "hd-149026b-surface-thermal@2x.webp",
-      "bytes": 178,
-      "sha256": "41b5461409f986bcb877be9dcdf5262582921cb3968275993fc123aa219a2561"
+      "bytes": 38,
+      "sha256": "d6b3f454caf2fe0449da64b41a8a7cad5eb650f2fb95945b96c40a9fd2c87b9b"
     },
     {
       "location": "public",
       "filename": "hd-149026b-system-orbits.svg",
-      "bytes": 4605,
-      "sha256": "8b24f4a481f49c5b482e85b3f5740b8a7b08cf21137916874f1f5edd26f62f3b"
+      "bytes": 4595,
+      "sha256": "ff2e57189586ae7400c630a9f3c520c00a21466de934ee93b59ac9bbf0ea647e"
     },
     {
       "location": "public",
@@ -262,20 +256,20 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 86012,
-      "sha256": "7681205a0d0280c221c1906ee2f61f2668909e96204249a00af3565f320a9d3d"
+      "bytes": 84564,
+      "sha256": "c940de618355284d0a01d9742fab5c176e8bdb641617a371e282a65a54cc21f1"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 725,
-      "sha256": "aac4bf4730d534b87efc453d964afb68ea1babdad4d69d53552fa27a882e9781"
+      "bytes": 663,
+      "sha256": "021c41474ba8e27c56846ee0bf393734b143327cab1784eabadb148767155a27"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 3035,
-      "sha256": "bbfda1427f61a8b5c882316b507309d91c155ab3c0a63769683d165728933815"
+      "bytes": 3030,
+      "sha256": "a6fda714f83be403c8bea13c7218f47f0a4da8b6a345761d36d809260bf0b57d"
     },
     {
       "location": "prepared",
@@ -329,7 +323,7 @@
       "location": "prepared",
       "filename": "text.json",
       "bytes": 1876,
-      "sha256": "a974c8517fb1271981826ff0fdb2ef89a5c17bddaf61130d31ec9d37d344d315"
+      "sha256": "c712b59f553a14722998f87d5d77b7e0224a1dc719d0e6d606c567aa01569e13"
     },
     {
       "location": "prepared",

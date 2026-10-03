@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tureis",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tureis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2319463.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tureis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tureis",
+      "classification": "star",
+      "color": "#e9ebff",
+      "distanceAu": 4018554.1,
+      "description": "A star 19 parsecs away, 3.3 times the Sun's width, measured from its light.",
+      "systemName": "Tureis system",
+      "aliases": [
+        "HD 67523",
+        "HIP 39757",
+        "HR 3185",
+        "Rho Puppis"
+      ],
+      "order": 5739,
+      "context": {
+        "order": 5736
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -289406440182908350,
+        465215803273810900,
+        -247426930882953800
+      ],
+      "presentationToReference": [
+        -0.4814070975741332,
+        0.2174069138571769,
+        0.849106259670924,
+        0.773853510173083,
+        -0.3494741549932691,
+        0.5282220743063836,
+        -0.4115798236041788,
+        -0.9113737152227063,
+        0.0000017647917909442322
+      ],
+      "orbitUpReference": [
+        -0.2174069138571769,
+        0.3494741549932691,
+        0.9113737152227063
+      ],
+      "metersPerUnit": 7482141.29032258,
+      "bodyRadiusM": 2319463800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

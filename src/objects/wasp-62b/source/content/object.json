@@ -13,7 +13,7 @@
           "catalogueId": "doi-10-3847-1538-3881-aa5df3",
           "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
           "label": "Stassun et al. 2017",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "doi-10-3847-1538-3881-aa5df3",
           "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
           "label": "Stassun et al. 2017",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "orbitalPeriodDays; orbitalPeriodSource"
         }
@@ -39,7 +39,7 @@
           "catalogueId": "doi-10-3847-1538-3881-aa5df3",
           "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
           "label": "Stassun et al. 2017",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "massSource"
         }
@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by WASP-62; the neutral gray is a display convention, not a measured color.",
+        "qualification": "A sphere of the published radius, lit by Naledi; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "wasp-62b-dataset-shape.webp",
         "surface": "wasp-62b-surface-shape@2x.webp",
         "poles": "wasp-62b-poles-shape@2x.webp",
@@ -84,7 +84,7 @@
       "id": "wasp-62b-orbits",
       "titleKey": "systemOrbits",
       "src": "/scenes/wasp-62b/wasp-62b-system-orbits.svg",
-      "alt": "The orbits of WASP-62's planets in this map from above, to scale, with WASP-62 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "alt": "The orbits of Naledi's planets in this map from above, to scale, with WASP-62 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "source": {
         "id": "wasp-62b-observational-measurements",
         "path": "../manifest.json",

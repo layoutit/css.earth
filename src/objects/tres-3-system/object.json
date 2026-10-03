@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tres-3-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "tres-3",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Pipoltr system",
+      "systemName": "Pipoltr system",
+      "classification": "planetary-system",
+      "color": "#ffeee6",
+      "distanceAu": 47850750.1,
+      "description": "TrES-3 b crosses Pipoltr as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -195202588361866370,
+        -5672225639691921000,
+        4362340891302840000
+      ],
+      "presentationToReference": [
+        -0.027269175690529023,
+        -0.020958458400768848,
+        -0.9994083925396176,
+        -0.7923917343159046,
+        -0.6090422600009378,
+        0.034392803328355814,
+        0.6094027661940762,
+        -0.7928608128507887,
+        -7.711901494607586e-7
+      ],
+      "orbitUpReference": [
+        0.020958458400768848,
+        0.6090422600009378,
+        0.7928608128507887
+      ],
+      "metersPerUnit": 1860436.4516129033,
+      "bodyRadiusM": 576735300
+    }
+  }
+}

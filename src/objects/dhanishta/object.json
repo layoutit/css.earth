@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "dhanishta",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Dhanishta",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1884413
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/dhanishta-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Dhanishta",
+      "classification": "star",
+      "color": "#fff5f5",
+      "distanceAu": 7396068.1,
+      "description": "A star about 36 parsecs away, 2.7 times the Sun's width, measured by Gaia.",
+      "systemName": "Dhanishta system",
+      "aliases": [
+        "Gaia DR3 1763000482062205056",
+        "HR 7947",
+        "Gamma1 Delphini",
+        "HD 197963",
+        "HIP 102531"
+      ],
+      "order": 5527,
+      "context": {
+        "order": 5524
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        706557457353598100,
+        -794087139880825000,
+        307250528651578750
+      ],
+      "presentationToReference": [
+        0.6385866651964671,
+        0.18459911072568208,
+        -0.7470811464309233,
+        -0.7176959966329867,
+        -0.20746733663291425,
+        -0.6647328490810644,
+        0.2777040285092014,
+        -0.960666681294679,
+        -1.6811222586915185e-7
+      ],
+      "orbitUpReference": [
+        -0.18459911072568208,
+        0.20746733663291425,
+        0.960666681294679
+      ],
+      "metersPerUnit": 6078751.612903226,
+      "bodyRadiusM": 1884413000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "illyrian",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Illyrian",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3334429.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/illyrian-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Illyrian",
+      "classification": "star",
+      "color": "#ffebdb",
+      "distanceAu": 26124858.2,
+      "description": "A star about 130 parsecs away, 4.8 times the Sun's width, measured by Gaia.",
+      "systemName": "Illyrian system",
+      "aliases": [
+        "Gaia DR3 797597524475897600",
+        "HD 82886",
+        "HIP 47087"
+      ],
+      "order": 5569,
+      "context": {
+        "order": 5566
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2594910171794627000,
+        1889577445377444400,
+        2229382555460301800
+      ],
+      "presentationToReference": [
+        -0.6639607761097222,
+        -0.4611308332241396,
+        0.5886547735623879,
+        0.48348698956354336,
+        0.3357897755453555,
+        0.8083845357019034,
+        0.5704352888019443,
+        -0.8213425480816213,
+        4.816303359675182e-7
+      ],
+      "orbitUpReference": [
+        0.4611308332241396,
+        -0.3357897755453555,
+        0.8213425480816213
+      ],
+      "metersPerUnit": 10756223.225806452,
+      "bodyRadiusM": 3334429200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

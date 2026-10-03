@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "almach",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Almach",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 68536885.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/almach-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Almach",
+      "classification": "star",
+      "color": "#ffd7a7",
+      "distanceAu": 24851110.5,
+      "description": "A star 120 parsecs away, 99 times the Sun's width, measured from its light.",
+      "systemName": "Almach system",
+      "aliases": [
+        "HD 12533",
+        "HIP 9640",
+        "HR 603",
+        "Gamma Andromedae"
+      ],
+      "order": 5472,
+      "context": {
+        "order": 5469
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2356471418668023000,
+        1414525034863422500,
+        2503448715307519500
+      ],
+      "presentationToReference": [
+        0.6338514825361489,
+        0.5773678336987854,
+        0.5146636597785956,
+        0.3804836262776312,
+        0.3465701846035514,
+        -0.8573921607283824,
+        0.6733977340482743,
+        -0.7392803877784341,
+        0.00000498174798641818
+      ],
+      "orbitUpReference": [
+        -0.5773678336987854,
+        -0.3465701846035514,
+        0.7392803877784341
+      ],
+      "metersPerUnit": 221086727.41935483,
+      "bodyRadiusM": 68536885500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

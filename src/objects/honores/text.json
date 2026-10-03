@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "honores",
+  "card": {
+    "text": "A star about 25 parsecs away, 1.8 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1990723839987250176: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-7-andromedae",
+        "url": "https://en.wikipedia.org/wiki/7_Andromedae",
+        "label": "Wikipedia, \"7 Andromedae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374432871",
+        "quote": "7 Andromedae, also named Honores, is a single, yellow-white hued star in the northern constellation of Andromeda."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.8 solar radii and 1.57 solar masses (FLAME) and 7,229 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1990723839987250176: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-7-andromedae",
+        "url": "https://en.wikipedia.org/wiki/7_Andromedae",
+        "label": "Wikipedia, \"7 Andromedae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374432871",
+        "quote": "7 Andromedae is the Flamsteed designation, abbreviated 7 And."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Xi Geminorum",
+      "label": "Alzirr",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,19 +94,21 @@
       }
     },
     "catalog": {
-      "name": "Xi Geminorum",
+      "name": "Alzirr",
       "classification": "star",
       "color": "#f5efff",
       "distanceAu": 3713240.3,
       "description": "A naked-eye star 18 parsecs away whose disc the CHARA Array measured: 2.7 times the Sun's width.",
-      "systemName": "Xi Geminorum system",
+      "systemName": "Alzirr system",
       "aliases": [
-        "HD 48737"
+        "HD 48737",
+        "Xi Geminorum"
       ],
       "order": 5407,
       "context": {
         "order": 5404
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

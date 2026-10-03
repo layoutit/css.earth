@@ -13,7 +13,7 @@
           "catalogueId": "arxiv-1501-02711",
           "url": "https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M",
           "label": "Maciejewski et al. 2014",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "arxiv-1501-02711",
           "url": "https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M",
           "label": "Maciejewski et al. 2014",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "orbitalPeriodDays; orbitalPeriodSource"
         }
@@ -39,7 +39,7 @@
           "catalogueId": "arxiv-1501-02711",
           "url": "https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M",
           "label": "Maciejewski et al. 2014",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "massSource"
         }
@@ -84,7 +84,7 @@
       "id": "gj-436b-orbits",
       "titleKey": "systemOrbits",
       "src": "/scenes/gj-436b/gj-436b-system-orbits.svg",
-      "alt": "The orbits of GJ 436's planets in this map from above, to scale, with GJ 436 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "alt": "The orbits of Noquisi's planets in this map from above, to scale, with GJ 436 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "source": {
         "id": "gj-436b-observational-measurements",
         "path": "../manifest.json",

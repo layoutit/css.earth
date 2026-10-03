@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Alpha Lacertae",
+      "label": "Stellio",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,19 +94,21 @@
       }
     },
     "catalog": {
-      "name": "Alpha Lacertae",
+      "name": "Stellio",
       "classification": "star",
       "color": "#b4cbff",
       "distanceAu": 6486380.9,
       "description": "A naked-eye star 31 parsecs away whose disc the CHARA Array measured: 2.1 times the Sun's width.",
-      "systemName": "Alpha Lacertae system",
+      "systemName": "Stellio system",
       "aliases": [
-        "HD 213558"
+        "HD 213558",
+        "Alpha Lacertae"
       ],
       "order": 5362,
       "context": {
         "order": 5359
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

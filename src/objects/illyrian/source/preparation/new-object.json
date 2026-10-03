@@ -1,0 +1,53 @@
+{
+  "id": "illyrian",
+  "name": "Illyrian",
+  "system": "Illyrian system",
+  "description": "A star 4.8 solar radii and 1.95 solar masses, about 130 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 797597524475897600",
+    "HD 82886",
+    "HIP 47087"
+  ],
+  "featured": true,
+  "target": "HD 82886",
+  "gaia": "797597524475897600",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5322,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 797597524475897600: teff_gspphot 5321.732 K (16th-84th percentiles 5318.455-5324.897), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 3.2
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.24 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 130 parsecs away, 4.8 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 4.8 solar radii and 1.95 solar masses (FLAME) and 5,322 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 797597524475897600: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_82886",
+      "title": "HD 82886",
+      "revision": "1370779272",
+      "card": "HD 82886, also named Illyrian, is a star with an orbiting exoplanet located in the constellation Leo Minor.",
+      "introduction": "It has an apparent visual magnitude of 7.63, making it too faint to be viewed with the naked eye."
+    }
+  },
+  "notes": [],
+  "order": 5569
+}

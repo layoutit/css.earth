@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "funi",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Funi",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 783907.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/funi-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Funi",
+      "classification": "star",
+      "color": "#fff0e8",
+      "distanceAu": 14015018.4,
+      "description": "A star about 68 parsecs away, 1.1 times the Sun's width, measured by Gaia.",
+      "systemName": "Funi system",
+      "aliases": [
+        "Gaia DR3 1692267077979468544",
+        "HD 109246",
+        "HIP 61177"
+      ],
+      "order": 5547,
+      "context": {
+        "order": 5544
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -555186917810920060,
+        -78275378466335890,
+        2020258125739485200
+      ],
+      "presentationToReference": [
+        -0.26479892371408337,
+        -0.9541396500453482,
+        -0.13963902825214597,
+        -0.0373337974315366,
+        -0.13455573512033625,
+        0.9902024751108064,
+        0.9635806751742193,
+        -0.2674178048626651,
+        -0.00000855742323207178
+      ],
+      "orbitUpReference": [
+        0.9541396500453482,
+        0.13455573512033625,
+        0.2674178048626651
+      ],
+      "metersPerUnit": 2528733.870967742,
+      "bodyRadiusM": 783907500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

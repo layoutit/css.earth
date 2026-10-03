@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "HAT-P-26",
+      "label": "Guahayona",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,16 +94,20 @@
       }
     },
     "catalog": {
-      "name": "HAT-P-26",
+      "name": "Guahayona",
       "classification": "star",
       "color": "#ffe1cf",
       "distanceAu": 29472575.7,
       "description": "HAT-P-26 b crosses HAT-P-26 as seen from Earth, which is how it was found.",
-      "systemName": "HAT-P-26 system",
+      "systemName": "Guahayona system",
+      "aliases": [
+        "HAT-P-26"
+      ],
       "order": 3127,
       "context": {
         "order": 3124
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

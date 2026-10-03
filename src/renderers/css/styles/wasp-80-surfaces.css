@@ -1,4 +1,4 @@
-/* WASP-80: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Petra: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="wasp-80"] > :is(.polycss-camera, .wasp-80-corona-layer, .wasp-80-limb-layer) {
   --wasp-80-scene-side-padding: 16px;

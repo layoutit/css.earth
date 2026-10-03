@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alqubba",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alqubba",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 26821322.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alqubba-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alqubba",
+      "classification": "star",
+      "color": "#ffdfc0",
+      "distanceAu": 29980389.4,
+      "description": "A star 145 parsecs away, 39 times the Sun's width, measured from its light.",
+      "systemName": "Alqubba system",
+      "aliases": [
+        "Beta Coronae Australis",
+        "HD 178345",
+        "HIP 94160",
+        "HR 7259"
+      ],
+      "order": 5475,
+      "context": {
+        "order": 5472
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1043464460653777500,
+        -3307964623903241000,
+        -2843202182066029000
+      ],
+      "presentationToReference": [
+        0.23265676488137477,
+        -0.19070511174897653,
+        -0.9536783472994147,
+        -0.7375625876691563,
+        0.6045691187767868,
+        -0.30082820661008075,
+        -0.6339339547821293,
+        -0.7733871869731679,
+        -1.396184800653126e-7
+      ],
+      "orbitUpReference": [
+        0.19070511174897653,
+        -0.6045691187767868,
+        0.7733871869731679
+      ],
+      "metersPerUnit": 86520393.87096775,
+      "bodyRadiusM": 26821322100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,4 +1,4 @@
-/* HD 17156: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Nushagak: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="hd-17156"] > :is(.polycss-camera, .hd-17156-corona-layer, .hd-17156-limb-layer) {
   --hd-17156-scene-side-padding: 16px;

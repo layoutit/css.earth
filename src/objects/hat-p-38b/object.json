@@ -1,0 +1,138 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-38b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HAT-P-38 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 58980.9
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HAT-P-38 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 51894170.9,
+      "description": "HAT-P-38 b was found in 2012 by HATNet as it crossed its star.",
+      "systemName": "Horna system",
+      "order": 5564,
+      "context": {
+        "order": 5564
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5353126328232490000,
+        3801972945767323600,
+        4142125861392786400
+      ],
+      "presentationToReference": [
+        0.6720662100501558,
+        0.5992478552849888,
+        -0.43500461749866637,
+        0.5137085505732385,
+        -0.8004070609415966,
+        -0.3089531709867656,
+        0.5333202924854467,
+        0.015828604839852597,
+        0.8457652871169763
+      ],
+      "orbitUpReference": [
+        -0.5992478552849888,
+        0.8004070609415966,
+        -0.015828604839852597
+      ],
+      "metersPerUnit": 190260.96774193548,
+      "bodyRadiusM": 58980900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

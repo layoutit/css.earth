@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "scheat",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Scheat",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 79910884.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/scheat-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Scheat",
+      "classification": "star",
+      "color": "#ffca7d",
+      "distanceAu": 12395749.5,
+      "description": "A star 60 parsecs away, 115 times the Sun's width, measured from its light.",
+      "systemName": "Scheat system",
+      "aliases": [
+        "HD 217906",
+        "HIP 113881",
+        "HR 8775",
+        "Beta Pegasi"
+      ],
+      "order": 5688,
+      "context": {
+        "order": 5685
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1587066278966409500,
+        -397314378033559550,
+        872971181755358800
+      ],
+      "presentationToReference": [
+        0.8558590994605599,
+        0.45664527480411005,
+        -0.2428585902735131,
+        -0.21426019250041226,
+        -0.11433663021346578,
+        -0.9700617015948602,
+        0.47074172513199375,
+        -0.8822710626505371,
+        0.00001514088591959104
+      ],
+      "orbitUpReference": [
+        -0.45664527480411005,
+        0.11433663021346578,
+        0.8822710626505371
+      ],
+      "metersPerUnit": 257777047.7419355,
+      "bodyRadiusM": 79910884800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

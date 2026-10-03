@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kalasungsang",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kalasungsang",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 13684419
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kalasungsang-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kalasungsang",
+      "classification": "star",
+      "color": "#ffddaa",
+      "distanceAu": 10125921.3,
+      "description": "A star 49 parsecs away, 20 times the Sun's width, measured from its light.",
+      "systemName": "Kalasungsang system",
+      "aliases": [
+        "Rho Bootis",
+        "HD 127665",
+        "HIP 71053",
+        "HR 5429"
+      ],
+      "order": 5578,
+      "context": {
+        "order": 5575
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1030476185587531800,
+        -803839736263601900,
+        765916991179733400
+      ],
+      "presentationToReference": [
+        -0.6802672718959741,
+        -0.39866133017572153,
+        -0.6150655108276949,
+        -0.5306535678381988,
+        -0.31098613081170995,
+        0.788476009389856,
+        0.5056117381230374,
+        -0.8627611316380023,
+        -0.000002629587897619093
+      ],
+      "orbitUpReference": [
+        0.39866133017572153,
+        0.31098613081170995,
+        0.8627611316380023
+      ],
+      "metersPerUnit": 44143287.09677419,
+      "bodyRadiusM": 13684419000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

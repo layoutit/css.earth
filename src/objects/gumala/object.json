@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gumala",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Gumala",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 886662
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gumala-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Gumala",
+      "classification": "star",
+      "color": "#fff4f2",
+      "distanceAu": 5680365.3,
+      "description": "A star about 28 parsecs away, 1.3 times the Sun's width, measured by Gaia.",
+      "systemName": "Gumala system",
+      "aliases": [
+        "Gaia DR3 6770313530317154560",
+        "HD 179949",
+        "V5652 Sagittarii",
+        "HIP 94645"
+      ],
+      "order": 5556,
+      "context": {
+        "order": 5553
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        250969802448889060,
+        -733464672091821300,
+        -348071455675148400
+      ],
+      "presentationToReference": [
+        0.2953390137226776,
+        -0.1326029257258267,
+        -0.946145512625974,
+        -0.8631346510759901,
+        0.38754342360632127,
+        -0.3237416700571932,
+        -0.4096015638217769,
+        -0.9122645224431576,
+        -0.0000025124745839313994
+      ],
+      "orbitUpReference": [
+        0.1326029257258267,
+        -0.38754342360632127,
+        0.9122645224431576
+      ],
+      "metersPerUnit": 2860200,
+      "bodyRadiusM": 886662000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

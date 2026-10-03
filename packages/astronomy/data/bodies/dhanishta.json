@@ -1,0 +1,30 @@
+{
+ "id": "dhanishta",
+ "classification": "star",
+ "order": 5527,
+ "physical": {
+  "name": "Dhanishta",
+  "horizonsCode": null,
+  "meanRadiusKm": 1884413,
+  "gravitationalParameterKm3PerS2": 207118465826.09296,
+  "parent": null,
+  "effectiveTemperatureK": 6165
+ },
+ "physicalNotes": "Radius 2.709 (2.654 to 2.763) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 1,884,413 km at 695,700 km per solar radius. Mass 1.561 (1.516 to 1.601) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 6165 +/- 1.4 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1763000482062205056: teff_gspphot 6164.66 K (16th-84th percentiles 6163.242-6165.9697), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 311.6618668885928,
+  "declinationDegrees": 16.12322163371345,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 35.85722527166536,
+  "properMotionRaMasPerYear": -11.701605206975518,
+  "properMotionDecMasPerYear": -203.99419609436566,
+  "radialVelocityKmPerS": -6.890259,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1763000482062205056 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/dhanishta/source/photometry/gaia-dr3-source.csv; cross-identification HD 197963, HR 7947, HIP 102531: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+1763000482062205056",
+   "distance": "Gaia DR3 parallax 27.8884 +/- 0.0887 mas (same row, RUWE 0.91): 35.86 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -11.702, -203.994 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -6.89 +/- 0.12 km/s"
+  }
+ }
+}

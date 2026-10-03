@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-62",
+      "label": "Naledi",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,16 +94,20 @@
       }
     },
     "catalog": {
-      "name": "WASP-62",
+      "name": "Naledi",
       "classification": "star",
       "color": "#faf5ff",
       "distanceAu": 36243785.6,
       "description": "WASP-62 b crosses WASP-62 as seen from Earth, which is how it was found.",
-      "systemName": "WASP-62 system",
+      "systemName": "Naledi system",
+      "aliases": [
+        "WASP-62"
+      ],
       "order": 4828,
       "context": {
         "order": 4825
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

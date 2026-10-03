@@ -171,7 +171,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
   - `objects/sources`: an object's authored source references read through its source manifest, and the pinned source
     files (bindings, byte ranges, contained paths, atomic publication) preparation reads and writes; JSON source values
-    left unchecked for their consumer; the shared reference banks under `src/references/` (the CIE 1931 table), whose
+    left unchecked for their consumer; the shared reference banks under `src/references/` (the CIE 1931 table, the IAU star names), whose
     directory is found on first use; and the
     idle-timeout stream relay pinned downloads go through.
   - `objects/charts`: the chart renderers and readers a content recipe names (measured spectra, retrieved profiles,

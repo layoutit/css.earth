@@ -1,4 +1,4 @@
-# Gamma Serpentis
+# Muning
 
 ## Sources
 
@@ -12,7 +12,7 @@ Its disc spans 1.217 milliarcseconds, which gives 1.472 solar radii and 6,294 K 
 
 ## Evidence
 
-Generated 2026-10-02 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 - The color's cross-check differs by 7 levels at most in any channel (threshold 12); [object-package-consistency.test.mts](../../../src/objects/object-package-consistency.test.mts) recomputes it after preparation.
 

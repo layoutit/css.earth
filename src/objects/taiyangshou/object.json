@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "taiyangshou",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Taiyangshou",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 13518842.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/taiyangshou-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Taiyangshou",
+      "classification": "star",
+      "color": "#ffddaf",
+      "distanceAu": 11613925.9,
+      "description": "A star 56 parsecs away, 19 times the Sun's width, measured from its light.",
+      "systemName": "Taiyangshou system",
+      "aliases": [
+        "HD 102224",
+        "HIP 57399",
+        "HR 4518",
+        "Chi Ursae Majoris"
+      ],
+      "order": 5708,
+      "context": {
+        "order": 5705
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1165353699963146200,
+        71050827215580460,
+        1286672398785711900
+      ],
+      "presentationToReference": [
+        -0.6707396919149881,
+        -0.7391924535726725,
+        0.0608504911319469,
+        0.04089454553131927,
+        0.045060164722951504,
+        0.9981468918455475,
+        0.7405645831631253,
+        -0.6719851919025841,
+        -0.0000052984451241597756
+      ],
+      "orbitUpReference": [
+        0.7391924535726725,
+        -0.045060164722951504,
+        0.6719851919025841
+      ],
+      "metersPerUnit": 43609169.03225806,
+      "bodyRadiusM": 13518842400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

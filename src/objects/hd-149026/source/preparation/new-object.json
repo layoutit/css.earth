@@ -1,8 +1,13 @@
 {
   "id": "hd-149026",
-  "name": "HD 149026",
-  "system": "HD 149026 system",
+  "name": "Ogma",
+  "system": "Ogma system",
   "description": "Star of 6,179 K, 75.9 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "HD 149026"
+  ],
+  "featured": true,
+  "order": 3164,
   "target": "HD 149026",
   "gaia": "1331356474971716992",
   "paper": {
@@ -30,7 +35,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "HD 149026 b crosses HD 149026 as seen from Earth, which is how it was found.",
+    "card": "HD 149026 b crosses Ogma as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Stassun et al. 2017.",
     "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6179, st_rad 1.41, st_mass 1.42",
     "quotes": {
@@ -41,6 +46,5 @@
       "introduction": "An exoplanet orbits the star."
     }
   },
-  "notes": [],
-  "order": 3164
+  "notes": []
 }

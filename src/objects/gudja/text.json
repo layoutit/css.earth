@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gudja",
+  "card": {
+    "text": "A star 117 parsecs away, 68 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 77450: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-kappa-serpentis",
+        "url": "https://en.wikipedia.org/wiki/Kappa_Serpentis",
+        "label": "Wikipedia, \"Kappa Serpentis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370780950",
+        "quote": "Kappa Serpentis, Latinised from κ Serpentis, is a single, red-hued star in the constellation Serpens, in its head."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 868 times the Sun's luminosity at 3,803 K, so 67.945 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 77450: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-kappa-serpentis",
+        "url": "https://en.wikipedia.org/wiki/Kappa_Serpentis",
+        "label": "Wikipedia, \"Kappa Serpentis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370780950",
+        "quote": "It has the proper name Gudja and the Flamsteed designation 35 Serpentis."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

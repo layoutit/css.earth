@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1088-0004-6256-135-1-209",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Massarotti et al. (2008): ROTATIONAL AND RADIAL VELOCITIES FOR A SAMPLE OF 761 HIPPARCOS GIANTS AND THE ROLE OF BINARITY",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-6256/135/1/209"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2008AJ....135..209M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2008AJ....135..209M",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2008AJ....135..209M",
+      "checkedOn": "2026-10-03",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Massarotti et al. (2008), The Astronomical Journal 135 209-231",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2008AJ....135..209M"
+    }
+  ],
+  "publisher": "The Astronomical Journal 135 209-231",
+  "creators": [
+    "Alessandro Massarotti",
+    "David W. Latham",
+    "Robert P. Stefanik",
+    "et al."
+  ],
+  "publicationDate": "2008"
+}

@@ -1,4 +1,4 @@
-/* LTT 9779: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Uúba: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="ltt-9779"] > :is(.polycss-camera, .ltt-9779-corona-layer, .ltt-9779-limb-layer) {
   --ltt-9779-scene-side-padding: 16px;

@@ -1,0 +1,42 @@
+{
+  "id": "doi-10-1093-mnras-stx1433",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "McDonald et al. (2017): Fundamental parameters and infrared excesses of Tycho–Gaia stars",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stx1433"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1093/mnras/stx1433",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1093/mnras/stx1433",
+      "checkedOn": "2026-10-03",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1093/mnras/stx1433"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 471 770-791",
+  "creators": [
+    "I. McDonald",
+    "A. A. Zijlstra",
+    "R. A. Watson"
+  ],
+  "publicationDate": "2017"
+}

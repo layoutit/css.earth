@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-80",
+      "label": "Petra",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,16 +94,20 @@
       }
     },
     "catalog": {
-      "name": "WASP-80",
+      "name": "Petra",
       "classification": "star",
       "color": "#ffbe8d",
       "distanceAu": 10254736.6,
       "description": "WASP-80 b crosses WASP-80 as seen from Earth, which is how it was found.",
-      "systemName": "WASP-80 system",
+      "systemName": "Petra system",
+      "aliases": [
+        "WASP-80"
+      ],
       "order": 4843,
       "context": {
         "order": 4840
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

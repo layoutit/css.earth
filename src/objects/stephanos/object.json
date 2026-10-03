@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "stephanos",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Stephanos",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 6487402.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/stephanos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Stephanos",
+      "classification": "star",
+      "color": "#ffe0c0",
+      "distanceAu": 15392912.2,
+      "description": "A star 75 parsecs away, 9.3 times the Sun's width, measured from its light.",
+      "systemName": "Stephanos system",
+      "aliases": [
+        "Pi Coronae Borealis",
+        "HD 140716",
+        "HIP 77048",
+        "HR 5855"
+      ],
+      "order": 5701,
+      "context": {
+        "order": 5698
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1085917495153222100,
+        -1609745832568264400,
+        1237798368226350600
+      ],
+      "presentationToReference": [
+        -0.47157469336161045,
+        -0.30060782499876415,
+        -0.8290067817155752,
+        -0.6990543948050671,
+        -0.44561777033108313,
+        0.5592385500561234,
+        0.5375316378452754,
+        -0.8432435818401859,
+        -8.422221864783165e-7
+      ],
+      "orbitUpReference": [
+        0.30060782499876415,
+        0.44561777033108313,
+        0.8432435818401859
+      ],
+      "metersPerUnit": 20927104.83870968,
+      "bodyRadiusM": 6487402500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

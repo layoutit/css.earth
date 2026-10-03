@@ -1,8 +1,8 @@
-# HD 17156
+# Nushagak
 
 ## Sources
 
-Its radius and temperature follow Kane et al. 2023. It is also HIP 13192. The introduction is generated from Kane et al. 2023's published values; the sections below are the data's own.
+Its radius and temperature follow Kane et al. 2023. It is also HD 17156, HIP 13192. The introduction is generated from Kane et al. 2023's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 545560867790611072, parallax 12.914 ± 0.018 mas (77.43 pc). Radius 1.517 +/- 0.038 solar radii from Kane et al. 2023, the stellar radius of the default parameter set of HD 17156 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..252K/abstract). Mass 1.285 +/- 0.064 solar masses from Kane et al. 2023, the stellar mass of the default parameter set of HD 17156 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..252K/abstract). Temperature 6,046 K from Kane et al. 2023, the stellar temperature of the default parameter set of HD 17156 b in the NASA Exoplanet Archive. log g 4.18 from the mass and radius.
 
@@ -12,7 +12,8 @@ Its radius and temperature follow Kane et al. 2023. It is also HIP 13192. The in
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+
 
 ## Known problems
 

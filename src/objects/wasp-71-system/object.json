@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-71-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-71",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Mpingo system",
+      "systemName": "Mpingo system",
+      "classification": "planetary-system",
+      "color": "#fff5f8",
+      "distanceAu": 73252080.7,
+      "description": "WASP-71 b crosses Mpingo as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        9559018822839112000,
+        5356271933047893000,
+        145124041311496260
+      ],
+      "presentationToReference": [
+        0.8723041475679617,
+        0.011553456065705106,
+        0.48882715942209004,
+        0.4887842894017746,
+        0.006473810521782159,
+        -0.8723806555691904,
+        0.01324358598468927,
+        -0.9999122998694765,
+        1.6044490604796396e-8
+      ],
+      "orbitUpReference": [
+        -0.011553456065705106,
+        -0.006473810521782159,
+        0.9999122998694765
+      ],
+      "metersPerUnit": 4084432.2580645164,
+      "bodyRadiusM": 1266174000
+    }
+  }
+}

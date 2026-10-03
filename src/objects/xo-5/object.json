@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "xo-5",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Absolutno",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 786141
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/xo-5-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Absolutno",
+      "classification": "star",
+      "color": "#ffecdf",
+      "distanceAu": 56484410.4,
+      "description": "XO-5 b crosses Absolutno as seen from Earth, which is how it was found.",
+      "systemName": "Absolutno system",
+      "aliases": [
+        "XO-5",
+        "TOI-5373"
+      ],
+      "order": 5460,
+      "context": {
+        "order": 5457
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2948333376765439500,
+        5857955923168815000,
+        5328535989399789000
+      ],
+      "presentationToReference": [
+        -0.3489170088554234,
+        -0.28350201718664514,
+        0.8932432631609866,
+        0.6932528305088334,
+        0.5632797175244911,
+        0.4495736567204757,
+        0.6306008515082064,
+        -0.776107316082404,
+        -7.016820323938459e-7
+      ],
+      "orbitUpReference": [
+        0.28350201718664514,
+        -0.5632797175244911,
+        0.776107316082404
+      ],
+      "metersPerUnit": 2535938.709677419,
+      "bodyRadiusM": 786141000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

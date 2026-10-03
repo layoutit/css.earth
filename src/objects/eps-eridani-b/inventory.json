@@ -16,8 +16,14 @@
     {
       "location": "public",
       "filename": "eps-eridani-b-surface-shape@2x.webp",
-      "bytes": 178,
-      "sha256": "aeb7b3a710bd66882175f59dca52a6d8e8d2c77de66be8f7fe1ccae212663091"
+      "bytes": 38,
+      "sha256": "ced024d37944c96e94aeabf9707e67b57fc41925fa1c999fe80a19fc62cab7e2"
+    },
+    {
+      "location": "public",
+      "filename": "eps-eridani-b-system-orbits.svg",
+      "bytes": 5338,
+      "sha256": "e45adf94d27c92c9da1914d2fa808693aa6e2467b3523a6c1a66d9e611569c4f"
     },
     {
       "location": "public",
@@ -232,20 +238,20 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 87121,
-      "sha256": "e5c2402438bbb80b4fbce43087fdb312825177c7e7cab34e38f72574261fe81c"
+      "bytes": 85671,
+      "sha256": "0a3d28fa9fc2c1c87b4fdef344c3e3ac644dd4636bce89ccf0c5b7a3ee1d5631"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 728,
-      "sha256": "611b94c2d1884f5a4f26f1f246d611e4aca229166a3be88c91abb00173766b53"
+      "bytes": 666,
+      "sha256": "9a4829c78de4363f02d04d593aa6e000b4242959d6caa1f96f3619e3cd1b243f"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 2696,
-      "sha256": "50b708fb47a885926f7168a047e0fc04286544cd1f19a8bedfe91f14191cf128"
+      "bytes": 3280,
+      "sha256": "4ebf9e428658a1762835b10dd22bd5851cb5d31251213cceb804abfe5b09a84a"
     },
     {
       "location": "prepared",
@@ -262,8 +268,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 82,
-      "sha256": "b209edc4f0c1a0cb82f05765652e7e3caec79da375793d88d7d7b3b56afb1238"
+      "bytes": 101,
+      "sha256": "3381e54c0e18ef1a8f3c30f3a4a38b83ca3e7004b040bda259dbae84de1c07b3"
     },
     {
       "location": "prepared",
@@ -299,7 +305,7 @@
       "location": "prepared",
       "filename": "text.json",
       "bytes": 2019,
-      "sha256": "5446cca9f6aaf752942d1b270abcc8d312c49d56a77ab90aa504497e590db2f0"
+      "sha256": "218c65e6a16f262d6c063246c3dc18595799862c016380aa75fe62a081e7f2b9"
     },
     {
       "location": "prepared",

@@ -10,14 +10,20 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Archive } from './archives.mts';
-import { preferredName, simbadIdentifiers } from './display-name.mts';
+import { preferredName, PROPER_STEPS, simbadIdentifiers } from './display-name.mts';
+import { readIauNames } from './iau-names.mts';
 import { STORED_SPEC } from './refresh.mts';
 
 type Stored = Record<string, any>;
 const NAMED = ['name', 'system', 'description'] as const;
-function renamed(entry: Stored, from: string, to: string) {
-  for (const key of NAMED) if (typeof entry[key] === 'string') entry[key] = entry[key].replaceAll(from, to);
-  for (const key of ['card', 'introduction'] as const) if (typeof entry.text?.[key] === 'string') entry.text[key] = entry.text[key].replaceAll(from, to);
+const escaped = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
+/** `from` replaced by `to` in an entry's names and drafted text. A designation carries over to the bodies it hosts (HD 1234 b becomes
+ * Alpha Ceti b); a name of the star's own does not (WASP-39 b keeps its designation when WASP-39 becomes Malmok), so with `keepHosted`
+ * an occurrence followed by a planet or companion letter stays as it is. */
+export function renamed(entry: Stored, from: string, to: string, keepHosted = false) {
+  const pattern = new RegExp(`${escaped(from)}${keepHosted ? '(?! ?[A-Za-z]\\b)' : ''}`, 'gu'), swap = (text: string) => text.replace(pattern, to);
+  for (const key of NAMED) if (typeof entry[key] === 'string') entry[key] = swap(entry[key]);
+  for (const key of ['card', 'introduction'] as const) if (typeof entry.text?.[key] === 'string') entry.text[key] = swap(entry.text[key]);
 }
 
 /** Rewrites the stored specs of `ids` and their hosted bodies; returns one line per star and the ids to refresh. */
@@ -35,18 +41,24 @@ export async function renameStars(root: string, ids: readonly string[], archive:
     const spec = await read(id).catch(() => { throw new Error(`${id}: no stored spec at src/objects/${id}/${STORED_SPEC}; only a star new-object made is renamed.`); });
     if (typeof spec.host === 'string') throw new Error(`${id}: a hosted body takes its star's name; rename ${spec.host}.`);
     const target = typeof spec.target === 'string' ? spec.target : `Gaia DR3 ${String(spec.gaia)}`, base = String(spec.system).replace(/ system$/u, '');
-    const identifiers = await simbadIdentifiers(archive, target), preferred = preferredName(identifiers);
-    if (!preferred || preferred.name === base) { lines.push(`${id}: keeps ${base} (${identifiers.length ? 'SIMBAD lists no preferred designation' : `SIMBAD does not know ${target}`}).`); continue; }
-    renamed(spec, base, preferred.name);
-    spec.aliases = [...new Set([...(Array.isArray(spec.aliases) ? spec.aliases : []), base])];
+    const identifiers = await simbadIdentifiers(archive, target), preferred = preferredName(identifiers, (await readIauNames()).lookup);
+    // A component of a system (Zeta Aquilae A) is renamed as itself; the system it shares keeps its name.
+    const old = String(spec.name), from = old === base ? base : old;
+    if (!preferred || preferred.name === from) { lines.push(`${id}: keeps ${from} (${identifiers.length ? 'SIMBAD lists no preferred designation' : `SIMBAD does not know ${target}`}).`); continue; }
+    const own = PROPER_STEPS.has(preferred.step);
+    renamed(spec, from, preferred.name, own);
+    spec.aliases = [...new Set([...(Array.isArray(spec.aliases) ? spec.aliases : []), from])];
+    // A star with a name of its own is a map target, as the drafts make one (chara.mts, iau.mts).
+    if (own) spec.featured = true;
     await write(id, spec);
-    for (const hostedId of hosted.get(id) ?? []) {
+    const renamedHosts = from === base ? hosted.get(id) ?? [] : [];
+    for (const hostedId of renamedHosts) {
       const addition = await read(hostedId);
-      for (const entry of [...addition.planets ?? [], ...addition.companions ?? []]) renamed(entry, base, preferred.name);
+      for (const entry of [...addition.planets ?? [], ...addition.companions ?? []]) renamed(entry, base, preferred.name, own);
       await write(hostedId, addition);
     }
-    refresh.push(id, ...hosted.get(id) ?? []);
-    lines.push(`${id}: ${base} is now ${preferred.name} (${preferred.step}, SIMBAD ${preferred.identifier}); ${base} is an alias.`);
+    refresh.push(id, ...renamedHosts);
+    lines.push(`${id}: ${from} is now ${preferred.name} (${preferred.step}, SIMBAD ${preferred.identifier}); ${from} is an alias.`);
   }
   return { lines, refresh };
 }

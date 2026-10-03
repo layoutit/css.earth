@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-72",
+  "card": {
+    "text": "WASP-72 b crosses Diya as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6250, st_rad 2.18, st_mass 2.78"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-72",
+        "url": "https://en.wikipedia.org/wiki/WASP-72",
+        "label": "Wikipedia, \"WASP-72\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374785622",
+        "quote": "WASP-72 is the primary of a binary star system."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6250, st_rad 2.18, st_mass 2.78"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-72",
+        "url": "https://en.wikipedia.org/wiki/WASP-72",
+        "label": "Wikipedia, \"WASP-72\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374785622",
+        "quote": "It is an F7 class dwarf star, with an internal structure just on the verge of the Kraft break."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

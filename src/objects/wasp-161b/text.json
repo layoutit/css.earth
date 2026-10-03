@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-161b",
+  "card": {
+    "text": "WASP-161 b was found in 2018 by SuperWASP-South as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaf422",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract",
+        "label": "Barkaoui et al. 2019",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARKAOUI_ET_AL__2019): disc_year 2018, disc_facility SuperWASP-South, sy_pnum 1; pl_orbper 5.4056202, pl_radj 1.143, pl_bmassj 2.49"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Tislit. Its orbit and size follow Barkaoui et al. 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaf422",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract",
+        "label": "Barkaoui et al. 2019",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARKAOUI_ET_AL__2019): disc_year 2018, disc_facility SuperWASP-South, sy_pnum 1; pl_orbper 5.4056202, pl_radj 1.143, pl_bmassj 2.49"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

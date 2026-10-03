@@ -1,0 +1,92 @@
+/* Aniara: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+.object-stage[data-object-id="aniara"] > :is(.polycss-camera, .aniara-corona-layer, .aniara-limb-layer) {
+  --aniara-scene-side-padding: 16px;
+  --aniara-reference-width: 1920px;
+  --aniara-reference-height: 1080px;
+  --aniara-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--aniara-scene-side-padding) - var(--aniara-scene-side-padding)) /
+        var(--aniara-reference-width)
+    ),
+    calc(100cqh / var(--aniara-reference-height))
+  );
+}
+
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+.object-stage[data-object-id="aniara"] > :is(.aniara-corona-layer, .aniara-limb-layer) {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* Paint order: off-limb context behind the sphere, limb plate above it. */
+.object-stage[data-object-id="aniara"] .aniara-corona-layer {
+  z-index: 0;
+}
+
+.object-stage[data-object-id="aniara"] .polycss-camera {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="aniara"] .aniara-limb-layer {
+  z-index: 2;
+}
+
+.object-stage[data-object-id="aniara"] .aniara-body {
+  transform-style: preserve-3d;
+}
+
+.object-stage[data-object-id="aniara"] .polycss-scene s {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
+.object-stage[data-object-id="aniara"] .aniara-corona-layer {
+  background-image: var(--aniara-corona-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    600px
+    600px;
+}
+
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+.object-stage[data-object-id="aniara"] .aniara-limb-layer {
+  background-image: var(--aniara-limb-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    496px
+    496px;
+}
+
+.object-stage[data-object-id="aniara"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="aniara"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="aniara"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kraz",
+  "card": {
+    "text": "A star 45 parsecs away, 16 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 61359: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-corvi",
+        "url": "https://en.wikipedia.org/wiki/Beta_Corvi",
+        "label": "Wikipedia, \"Beta Corvi\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374618452",
+        "quote": "Beta Corvi is a star in the southern constellation of Corvus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 161 times the Sun's luminosity at 5,214 K, so 15.565 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 61359: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-corvi",
+        "url": "https://en.wikipedia.org/wiki/Beta_Corvi",
+        "label": "Wikipedia, \"Beta Corvi\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374618452",
+        "quote": "With an apparent visual magnitude of 2.647, it is visible to the naked eye as the second-brightest star in Corvus."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

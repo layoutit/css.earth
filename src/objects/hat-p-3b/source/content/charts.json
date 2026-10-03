@@ -5,11 +5,11 @@
     {
       "kind": "system-orbits",
       "id": "hat-p-3b-orbits",
-      "title": "HAT-P-3 b: orbits around HAT-P-3",
+      "title": "HAT-P-3 b: orbits around Dombay",
       "output": "hat-p-3b-system-orbits.svg",
       "system": "hat-p-3",
       "highlight": "hat-p-3b",
-      "description": "The orbits of HAT-P-3's planets in this map from above, to scale, with HAT-P-3 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "description": "The orbits of Dombay's planets in this map from above, to scale, with HAT-P-3 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
         "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 2.89973815 d"
       }

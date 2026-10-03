@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "chechia",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Chechia",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3413324.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/chechia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Chechia",
+      "classification": "star",
+      "color": "#ffe7d3",
+      "distanceAu": 15026884.9,
+      "description": "A star about 73 parsecs away, 4.9 times the Sun's width, measured by Gaia.",
+      "systemName": "Chechia system",
+      "aliases": [
+        "Gaia DR3 4246124829130366848",
+        "HD 192699",
+        "HIP 99894"
+      ],
+      "order": 5519,
+      "context": {
+        "order": 5516
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1253846421792879000,
+        -1857175436085511200,
+        179520212827432600
+      ],
+      "presentationToReference": [
+        0.5577632294232057,
+        0.04468627408169468,
+        -0.8287963059836188,
+        -0.8261491605617378,
+        -0.06618822640966149,
+        -0.5595504295306003,
+        0.07986078140446923,
+        -0.9968060270651653,
+        -1.689091767002598e-7
+      ],
+      "orbitUpReference": [
+        -0.04468627408169468,
+        0.06618822640966149,
+        0.9968060270651653
+      ],
+      "metersPerUnit": 11010723.225806452,
+      "bodyRadiusM": 3413324200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

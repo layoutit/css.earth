@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "gj-3470-billboard.webp",
-      "bytes": 5364,
-      "sha256": "fbe852b11fb9c92c66cf1f7a417eb8ef089521b2332d23db0ba9fd9026115045"
-    },
-    {
-      "location": "public",
       "filename": "gj-3470-dataset-color.webp",
       "bytes": 44,
       "sha256": "5109b6d791821c9f613c5a1a9c442f4a73daa42add03cd2bd0801b62e9b606d2"
@@ -46,20 +40,20 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1861,
-      "sha256": "90eb808f42645dab6768ed8d7726dc9029db02a7ed6dff7a87f16fcd3b3a6888"
+      "bytes": 1672,
+      "sha256": "69465b8285dd4f2dc0f88b34add29614d7054d0611f2edc630d3a047864bc37d"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 722,
-      "sha256": "792fe33f177e5240a8d4b712cb3d9eb55fc21b6a0ed26e02ddb4cf0b37f9a4f9"
+      "bytes": 660,
+      "sha256": "4f7ad367313f6fa1a3f0feb87e2669c26d5e1266fb04be82a46fa28ba48dc1de"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 1363,
-      "sha256": "1991e920f92844829509a4c46482381d8289cea202c4949782b281a0388183cf"
+      "bytes": 1365,
+      "sha256": "615b3697e21d3aa8a7da42004cf5aab4ac43be2d3c5d12ed42413a43c1707a7e"
     },
     {
       "location": "prepared",
@@ -88,8 +82,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 270487,
-      "sha256": "f6988d334b92ad6eb05358696f519f946d10c85db475f6955845300f918ea59c"
+      "bytes": 270424,
+      "sha256": "9c136cf6ffaaaad950ce3b8c25debe1e3da18ead6a723bdf1e9ef97ad22fce02"
     },
     {
       "location": "prepared",
@@ -113,7 +107,7 @@
       "location": "prepared",
       "filename": "text.json",
       "bytes": 1728,
-      "sha256": "026db4b37c46867765c84ae1e2d0c6b76bfa12575f398bae20963deaf38e8182"
+      "sha256": "63233d0fbe8d902617fbe0553aba9473ac11ceaaa4b6bd692e3ad71c2f6ffbf9"
     },
     {
       "location": "prepared",

@@ -14,6 +14,7 @@
  * spectrum, and the color routes do not remove it. */
 import { GAIA_TAP, type Archive } from './archives.mts';
 import { preferredName, simbadIdentifiers } from './display-name.mts';
+import { sunWidth } from './prose.mts';
 
 export const GAIA_FLAME = { paper: 'https://doi.org/10.1051/0004-6361/202243688', credit: 'Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)' };
 export const GAIA_GSPPHOT = { paper: 'https://doi.org/10.1051/0004-6361/202243462', credit: 'Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot)' };
@@ -41,7 +42,8 @@ export function parseGaiaDraftRow(csv: string, sourceId: string) {
 export function draftFromGaia(row: ReturnType<typeof parseGaiaDraftRow>) {
   const name = `Gaia DR3 ${row.sourceId}`, [teff, low, high] = row.teff;
   // About, because the parallax is inverted as it stands; the generator places the star by the same parallax.
-  const parsecs = Math.round(1000 / row.parallax / 100) * 100;
+  // Two significant figures at any distance: 43 parsecs for a neighbour, 8,400 for a star across the disc.
+  const parsecs = Number((1000 / row.parallax).toPrecision(2));
   return {
     id: `gaia-dr3-${row.sourceId}`, name, system: `${name} system`, target: name, gaia: row.sourceId,
     description: `A star ${row.radius.toFixed(1)} solar radii and ${row.mass.toFixed(2)} solar masses, about ${parsecs.toLocaleString('en-US')} parsecs away, measured by Gaia.`,
@@ -50,7 +52,7 @@ export function draftFromGaia(row: ReturnType<typeof parseGaiaDraftRow>) {
     temperature: { value: Math.round(teff), uncertainty: Number(((high - low) / 2).toFixed(1)),
       source: `${GAIA_GSPPHOT.credit}, astrophysical_parameters of ${name}: teff_gspphot ${teff} K (16th-84th percentiles ${low}-${high}), the temperature FLAME used`, url: GAIA_GSPPHOT.paper },
     // The reader text is the archive row in words, cited to it; nothing the row does not hold.
-    text: { card: `A star about ${parsecs.toLocaleString('en-US')} parsecs away, ${row.radius.toFixed(0)} times the Sun's width, measured by Gaia.`,
+    text: { card: `A star about ${parsecs.toLocaleString('en-US')} parsecs away, ${sunWidth(row.radius)}, measured by Gaia.`,
       introduction: `Gaia's parallax, brightness and spectrum give it ${row.radius.toFixed(1)} solar radii and ${row.mass.toFixed(2)} solar masses (FLAME) and ${Math.round(teff).toLocaleString('en-US')} K at its surface (GSP-Phot).`,
       locator: `gaiadr3.astrophysical_parameters, ${name}: radius_flame, mass_flame, teff_gspphot` },
     color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'],

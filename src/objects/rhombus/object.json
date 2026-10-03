@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "rhombus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Rhombus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 8913308.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/rhombus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Rhombus",
+      "classification": "star",
+      "color": "#ffeacf",
+      "distanceAu": 10221326.1,
+      "description": "A star 50 parsecs away, 13 times the Sun's width, measured from its light.",
+      "systemName": "Rhombus system",
+      "aliases": [
+        "Alpha Reticuli",
+        "HD 27256",
+        "HIP 19780",
+        "HR 1336"
+      ],
+      "order": 5678,
+      "context": {
+        "order": 5675
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        314140087844727900,
+        633021048717304200,
+        -1355991288520367900
+      ],
+      "presentationToReference": [
+        0.20544181927972166,
+        -0.39421069930384134,
+        0.8957631290946365,
+        0.41398408203840836,
+        -0.7943606002745264,
+        -0.4445316822795767,
+        -0.8867980822655485,
+        -0.46215707425708685,
+        -0.0000020675964893374454
+      ],
+      "orbitUpReference": [
+        0.39421069930384134,
+        0.7943606002745264,
+        0.46215707425708685
+      ],
+      "metersPerUnit": 28752607.741935484,
+      "bodyRadiusM": 8913308400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

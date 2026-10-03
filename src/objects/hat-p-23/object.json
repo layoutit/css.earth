@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-23",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Moriah",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 836927.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-23-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Moriah",
+      "classification": "star",
+      "color": "#fff2ee",
+      "distanceAu": 75393648.6,
+      "description": "HAT-P-23 b crosses Moriah as seen from Earth, which is how it was found.",
+      "systemName": "Moriah system",
+      "aliases": [
+        "HAT-P-23",
+        "TOI-5798"
+      ],
+      "order": 5627,
+      "context": {
+        "order": 5624
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6366672988090527000,
+        -8723225968096390000,
+        3252773936680133000
+      ],
+      "presentationToReference": [
+        0.5644849056493917,
+        0.1700210104951588,
+        -0.8077435529202339,
+        -0.7734226960878364,
+        -0.23295274297690605,
+        -0.5895340131966584,
+        0.2883992449196423,
+        -0.9575102482635581,
+        1.9881134171602526e-7
+      ],
+      "orbitUpReference": [
+        -0.1700210104951588,
+        0.23295274297690605,
+        0.9575102482635581
+      ],
+      "metersPerUnit": 2699764.8387096776,
+      "bodyRadiusM": 836927100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

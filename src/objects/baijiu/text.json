@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "baijiu",
+  "card": {
+    "text": "A star about 65 parsecs away, 3.0 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6591574171318785664: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-iota-piscis-austrini",
+        "url": "https://en.wikipedia.org/wiki/Iota_Piscis_Austrini",
+        "label": "Wikipedia, \"Iota Piscis Austrini\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375885902",
+        "quote": "Iota Piscis Austrini, also named Baijiu, is a solitary, blue-white hued star in the southern constellation of Piscis Austrinus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 3.0 solar radii and 2.73 solar masses (FLAME) and 10,048 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6591574171318785664: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-iota-piscis-austrini",
+        "url": "https://en.wikipedia.org/wiki/Iota_Piscis_Austrini",
+        "label": "Wikipedia, \"Iota Piscis Austrini\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375885902",
+        "quote": "It has an apparent visual magnitude of +4.35 and is around 500 light years from the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

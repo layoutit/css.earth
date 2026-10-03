@@ -1,0 +1,55 @@
+{
+  "id": "ainalrami",
+  "name": "Ainalrami",
+  "system": "Ainalrami system",
+  "description": "A star 345 parsecs away, 80 times the Sun's width, measured from its light.",
+  "aliases": [
+    "Nu1 Sagittarii",
+    "HD 174974",
+    "HIP 92761",
+    "HR 7116"
+  ],
+  "featured": true,
+  "target": "HIP 92761",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 80.369,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 92761: radius 80.369 solar radii, implied by the fitted luminosity 2009.96 solar luminosities (fractional uncertainty 0.119) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4314,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 92761: effective temperature 4314 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.081)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 344.828,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 92761: distance 344.828 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.103), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 35.517
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 345 parsecs away, 80 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 2,010 times the Sun's luminosity at 4,314 K, so 80.369 solar radii.",
+    "locator": "Table 2, HIP 92761: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Nu1_Sagittarii",
+      "title": "Nu1 Sagittarii",
+      "revision": "1358417958",
+      "card": "Nu1 Sagittarii (ν1 Sagittarii, abbreviated Nu1 Sgr, ν1 Sgr) is a triple star system about 1,100 light-years from Earth.",
+      "introduction": "The two resolved components are designated Nu1 Sagittarii A (officially named Ainalrami, the traditional name for the system), and B. Component A is itself a spectroscopic binary."
+    }
+  },
+  "notes": [],
+  "order": 5466
+}

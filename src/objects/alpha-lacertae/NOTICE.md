@@ -1,4 +1,4 @@
-# Alpha Lacertae credits
+# Stellio credits
 
 Radius, mass and temperature: Radius 2.143 +/- 0.074 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 213558: radius in solar radii, from the limb-darkened angular diameter 0.634 +/- 0.022 mas (CHARA) and the Hipparcos parallax, 2.143 +/- 0.074 (https://doi.org/10.1088/0004-637X/746/1/101); Mass 2.209 +/- 0.037 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 213558: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 2.209 +/- 0.037 (https://doi.org/10.1088/0004-637X/746/1/101); temperature from Boyajian et al. (2012), ApJ 746, 101, HD 213558: effective temperature in K, from the angular diameter and the bolometric flux, 9131 +/- 167.
 

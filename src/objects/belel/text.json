@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "belel",
+  "card": {
+    "text": "A star about 120 parsecs away, 5.6 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6770761168986617600: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-181342",
+        "url": "https://en.wikipedia.org/wiki/HD_181342",
+        "label": "Wikipedia, \"HD 181342\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374545970",
+        "quote": "HD 181342 is a star with an orbiting exoplanet in the constellation of Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 5.6 solar radii and 1.19 solar masses (FLAME) and 4,785 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6770761168986617600: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-181342",
+        "url": "https://en.wikipedia.org/wiki/HD_181342",
+        "label": "Wikipedia, \"HD 181342\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374545970",
+        "quote": "With an apparent magnitude of 7.55, it cannot be seen with the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

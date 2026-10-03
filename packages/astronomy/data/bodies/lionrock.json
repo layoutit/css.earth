@@ -1,0 +1,30 @@
+{
+ "id": "lionrock",
+ "classification": "star",
+ "order": 5601,
+ "physical": {
+  "name": "Lionrock",
+  "horizonsCode": null,
+  "meanRadiusKm": 3028650.2,
+  "gravitationalParameterKm3PerS2": 238916459358.84964,
+  "parent": null,
+  "effectiveTemperatureK": 5253
+ },
+ "physicalNotes": "Radius 4.353 (4.265 to 4.442) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 3,028,650 km at 695,700 km per solar radius. Mass 1.800 (1.712 to 1.845) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 5253 +/- 3.9 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 2595360574179855104: teff_gspphot 5253.4624 K (16th-84th percentiles 5248.9824-5256.7456), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 336.762400490189,
+  "declinationDegrees": -17.26411908371357,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 111.54725074719514,
+  "properMotionRaMasPerYear": -85.89240291520895,
+  "properMotionDecMasPerYear": -104.04196709632893,
+  "radialVelocityKmPerS": 14.853911,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2595360574179855104 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/lionrock/source/photometry/gaia-dr3-source.csv; cross-identification HD 212771, HIP 110813: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+2595360574179855104",
+   "distance": "Gaia DR3 parallax 8.9648 +/- 0.0314 mas (same row, RUWE 1.08): 111.55 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -85.892, -104.042 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 14.85 +/- 0.12 km/s"
+  }
+ }
+}

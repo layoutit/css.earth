@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "yildun",
+  "card": {
+    "text": "A star about 56 parsecs away, 3.0 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1724851173788449536: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-yildun",
+        "url": "https://en.wikipedia.org/wiki/Yildun",
+        "label": "Wikipedia, \"Yildun\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1360521973",
+        "quote": "Delta Ursae Minoris, Latinized from δ Ursae Minoris, formally named Yildun, is a white-hued star in the northern circumpolar constellation of Ursa Minor, forming the second star in the bear's tail."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 3.0 solar radii and 2.40 solar masses (FLAME) and 8,880 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1724851173788449536: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-yildun",
+        "url": "https://en.wikipedia.org/wiki/Yildun",
+        "label": "Wikipedia, \"Yildun\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1360521973",
+        "quote": "It is visible to the naked eye with an apparent visual magnitude of 4.36."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

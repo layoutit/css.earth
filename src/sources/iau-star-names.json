@@ -1,0 +1,50 @@
+{
+  "id": "iau-star-names",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "IAU Catalog of Star Names (IAU-CSN), IAU Working Group on Star Names",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://exopla.net/star-names/modern-iau-star-names/",
+      "label": "Modern IAU star names (WGSN, always up to date)"
+    },
+    {
+      "role": "original",
+      "url": "https://www.pas.rochester.edu/~emamajek/WGSN/IAU-CSN.txt",
+      "label": "IAU-CSN text edition of 2022-04-04, with the rights statement"
+    },
+    {
+      "role": "rights",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "label": "CC BY 4.0"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://exopla.net/star-names/modern-iau-star-names/",
+      "checkedOn": "2026-10-02",
+      "locator": "The table under \"proper names\": 640 names, adopted 2015-12-15 to 2026-09-22"
+    },
+    {
+      "url": "https://www.pas.rochester.edu/~emamajek/WGSN/IAU-CSN.txt",
+      "checkedOn": "2026-10-02",
+      "locator": "Header: IAU-produced products are released under Creative Commons Attribution, free to use as long as the source is mentioned"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution: free to use as long as the source is mentioned",
+      "scope": "Catalogue of names",
+      "evidence": "IAU-CSN text edition header"
+    }
+  ],
+  "publisher": "International Astronomical Union, Division C Working Group on Star Names",
+  "creators": [
+    "IAU Working Group on Star Names (WGSN)"
+  ],
+  "publicationDate": "2026"
+}

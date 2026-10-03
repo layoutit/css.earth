@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "LHS 3844",
+      "label": "Batsũ̀",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,16 +94,20 @@
       }
     },
     "catalog": {
-      "name": "LHS 3844",
+      "name": "Batsũ̀",
       "classification": "star",
       "color": "#ffce77",
       "distanceAu": 3068830.6,
       "description": "LHS 3844 b crosses LHS 3844 as seen from Earth, which is how it was found.",
-      "systemName": "LHS 3844 system",
+      "systemName": "Batsũ̀ system",
+      "aliases": [
+        "LHS 3844"
+      ],
       "order": 3819,
       "context": {
         "order": 3816
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

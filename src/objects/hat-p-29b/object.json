@@ -1,0 +1,138 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-29b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HAT-P-29 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 83645.6
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HAT-P-29 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 65776404.7,
+      "description": "HAT-P-29 b was found in 2011 by HATNet as it crossed its star.",
+      "systemName": "Muspelheim system",
+      "order": 5636,
+      "context": {
+        "order": 5636
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5098236432179377000,
+        3327435871280737300,
+        7730585632379674000
+      ],
+      "presentationToReference": [
+        0.4897972309377334,
+        0.5720693445494981,
+        -0.6579022249486896,
+        0.38008873739704224,
+        -0.8192416149559582,
+        -0.4293899486810046,
+        0.7846217077481674,
+        0.039747218155000756,
+        0.6186993893477575
+      ],
+      "orbitUpReference": [
+        -0.5720693445494981,
+        0.8192416149559582,
+        -0.039747218155000756
+      ],
+      "metersPerUnit": 269824.51612903224,
+      "bodyRadiusM": 83645600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

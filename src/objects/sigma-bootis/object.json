@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Sigma Bootis",
+      "label": "Genghe",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,19 +94,21 @@
       }
     },
     "catalog": {
-      "name": "Sigma Bootis",
+      "name": "Genghe",
       "classification": "star",
       "color": "#e2e6ff",
       "distanceAu": 3265792.4,
       "description": "A naked-eye star 16 parsecs away whose disc the CHARA Array measured: 1.4 times the Sun's width.",
-      "systemName": "Sigma Bootis system",
+      "systemName": "Genghe system",
       "aliases": [
-        "HD 128167"
+        "HD 128167",
+        "Sigma Bootis"
       ],
       "order": 5350,
       "context": {
         "order": 5347
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

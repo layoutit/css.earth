@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Iota Piscium",
+      "label": "Puwuh Atarung",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,19 +94,21 @@
       }
     },
     "catalog": {
-      "name": "Iota Piscium",
+      "name": "Puwuh Atarung",
       "classification": "star",
       "color": "#f9f5ff",
       "distanceAu": 2829140.5,
       "description": "A naked-eye star 14 parsecs away whose disc the CHARA Array measured: 1.6 times the Sun's width.",
-      "systemName": "Iota Piscium system",
+      "systemName": "Puwuh Atarung system",
       "aliases": [
-        "HD 222368"
+        "HD 222368",
+        "Iota Piscium"
       ],
       "order": 5364,
       "context": {
         "order": 5361
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

@@ -1,4 +1,4 @@
-# LTT 9779 credits
+# Uúba credits
 
 Radius, mass and temperature: Radius 0.949 +/- 0.006 solar radii from Jenkins et al. 2020, the stellar radius of the default parameter set of LTT 9779 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract); Mass 1.02 +/- 0.02 solar masses from Jenkins et al. 2020, the stellar mass of the default parameter set of LTT 9779 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract); temperature from Jenkins et al. 2020, the stellar temperature of the default parameter set of LTT 9779 b in the NASA Exoplanet Archive.
 

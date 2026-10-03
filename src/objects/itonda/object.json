@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "itonda",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Itonda",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 845144.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/itonda-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Itonda",
+      "classification": "star",
+      "color": "#fff3f0",
+      "distanceAu": 9262514.2,
+      "description": "A star about 45 parsecs away, 1.2 times the Sun's width, measured by Gaia.",
+      "systemName": "Itonda system",
+      "aliases": [
+        "Gaia DR3 6586580842340695040",
+        "HD 208487",
+        "HIP 108375"
+      ],
+      "order": 5574,
+      "context": {
+        "order": 5571
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        942215689880009300,
+        -558698643617706560,
+        -848597671201504400
+      ],
+      "presentationToReference": [
+        0.6799830707120171,
+        -0.5267657782115727,
+        -0.5100400361248245,
+        -0.40320451399557633,
+        0.31235710069414,
+        -0.8601506621165517,
+        -0.6124125598309095,
+        -0.7905383333849834,
+        -0.000003200895405372758
+      ],
+      "orbitUpReference": [
+        0.5267657782115727,
+        -0.31235710069414,
+        0.7905383333849834
+      ],
+      "metersPerUnit": 2726271.6129032257,
+      "bodyRadiusM": 845144200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

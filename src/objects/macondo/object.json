@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "macondo",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Macondo",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 582996.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/macondo-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Macondo",
+      "classification": "star",
+      "color": "#ffe1cd",
+      "distanceAu": 5906696.8,
+      "description": "A star 29 parsecs away, 84% of the Sun's width, measured from its light.",
+      "systemName": "Macondo system",
+      "aliases": [
+        "HD 93083",
+        "HIP 52521"
+      ],
+      "order": 5605,
+      "context": {
+        "order": 5602
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -696432168270170600,
+        238627784596482850,
+        -488712273912571800
+      ],
+      "presentationToReference": [
+        -0.7881538526419107,
+        0.5232071574344466,
+        0.3241415971070044,
+        0.27005560100108783,
+        -0.1792700403024597,
+        0.9460085755519851,
+        -0.5530673349002403,
+        -0.8331365572697675,
+        0.000002650421376061592
+      ],
+      "orbitUpReference": [
+        -0.5232071574344466,
+        0.1792700403024597,
+        0.8331365572697675
+      ],
+      "metersPerUnit": 1880634.1935483871,
+      "bodyRadiusM": 582996600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

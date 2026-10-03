@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "qedty",
+  "card": {
+    "text": "A star 55 parsecs away, 11 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 94005: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-delta-coronae-australis",
+        "url": "https://en.wikipedia.org/wiki/Delta_Coronae_Australis",
+        "label": "Wikipedia, \"Delta Coronae Australis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374547101",
+        "quote": "Delta Coronae Australis, also named Qedty, is a single star located in the southern constellation of Corona Australis."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 50 times the Sun's luminosity at 4,675 K, so 10.83 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 94005: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-delta-coronae-australis",
+        "url": "https://en.wikipedia.org/wiki/Delta_Coronae_Australis",
+        "label": "Wikipedia, \"Delta Coronae Australis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374547101",
+        "quote": "Its Bayer designation is Latinized from δ Coronae Australis, and abbreviated Delta CrA or δ CrA."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

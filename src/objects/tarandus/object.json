@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tarandus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tarandus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 14693184
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tarandus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tarandus",
+      "classification": "star",
+      "color": "#ffdaa8",
+      "distanceAu": 17720434.4,
+      "description": "A star 86 parsecs away, 21 times the Sun's width, measured from its light.",
+      "systemName": "Tarandus system",
+      "aliases": [
+        "2 Ursae Minoris",
+        "HD 5848",
+        "HIP 5372",
+        "HR 285"
+      ],
+      "order": 5714,
+      "context": {
+        "order": 5711
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        165320075053025340,
+        51162860646881540,
+        2645284590932898300
+      ],
+      "presentationToReference": [
+        0.06236231049327183,
+        0.9532794726820233,
+        0.29558279583396657,
+        0.01929973843990826,
+        0.2949520457742689,
+        -0.9553171257701416,
+        0.9978669562251732,
+        -0.06528045386374996,
+        0.000004153423696031763
+      ],
+      "orbitUpReference": [
+        -0.9532794726820233,
+        -0.2949520457742689,
+        0.06528045386374996
+      ],
+      "metersPerUnit": 47397367.741935484,
+      "bodyRadiusM": 14693184000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

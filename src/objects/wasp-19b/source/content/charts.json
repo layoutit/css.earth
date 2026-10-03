@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-19b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-19b-orbits",
+      "title": "WASP-19 b: orbits around Wattle",
+      "output": "wasp-19b-system-orbits.svg",
+      "system": "wasp-19",
+      "highlight": "wasp-19b",
+      "description": "The orbits of Wattle's planets in this map from above, to scale, with WASP-19 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): P 0.78883900702 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "wasp-19b-transmission",
+      "title": "WASP-19 b: transmission spectrum",
+      "description": "WASP-19 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 9 measured bins from Bean et al. 2013 (Magellan II Landon Clay Telescope, MMIRS), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors. The archive holds 1 other paper for this planet; this chart draws the one with the most bins.",
+      "output": "wasp-19b-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2013ApJ...771..108B/abstract",
+        "table": "transitspec",
+        "bins": 9
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 9
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1,
+        "maximum": 2.5,
+        "ticks": [
+          1,
+          1.5,
+          2,
+          2.5
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 1.9,
+        "maximum": 2.2,
+        "ticks": [
+          1.9,
+          2,
+          2.1,
+          2.2
+        ]
+      },
+      "notes": [
+        "Bean et al. 2013",
+        "Magellan II Landon Clay Telescope, MMIRS",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-19b-transit",
+      "title": "WASP-19 b: its transit",
+      "description": "WASP-19 b crossing its star, as TESS recorded it: 3 sectors (89, 90, 99) of the SPOC pipeline's 2-minute light curves of TIC 35516889, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 6-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-19b-transit.svg",
+      "metadata": {
+        "tic": "TIC 35516889",
+        "sectors": [
+          89,
+          90,
+          99
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-19b",
+      "sources": [
+        "photometry/tess/tess2025042113628-s0089-0000000035516889-0286-s_lc.fits",
+        "photometry/tess/tess2025071122000-s0090-0000000035516889-0287-s_lc.fits",
+        "photometry/tess/tess2026005125623-s0099-0000000035516889-0300-s_lc.fits"
+      ],
+      "durationHours": 1.607,
+      "binMinutes": 6,
+      "notes": [
+        "TESS 2-min SPOC · sectors 89, 90, 99",
+        "Folded on the app's orbit; 6-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

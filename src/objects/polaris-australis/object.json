@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "polaris-australis",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Polaris Australis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2960739.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/polaris-australis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Polaris Australis",
+      "classification": "star",
+      "color": "#f0f0ff",
+      "distanceAu": 18581639.2,
+      "description": "A star about 90 parsecs away, 4.3 times the Sun's width, measured by Gaia.",
+      "systemName": "Polaris Australis system",
+      "aliases": [
+        "Gaia DR3 6341181494973204096",
+        "HR 7228",
+        "Sigma Octantis",
+        "HD 177482",
+        "HIP 104382"
+      ],
+      "order": 5670,
+      "context": {
+        "order": 5667
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        37149083825481590,
+        -34393236019905456,
+        -2779312617395749000
+      ],
+      "presentationToReference": [
+        0.013363888717317926,
+        -0.7336281983305781,
+        -0.6794196590418776,
+        -0.012372509105026587,
+        0.6793069954835449,
+        -0.7337499076017423,
+        -0.9998341499952866,
+        -0.018211878029161677,
+        -0.0000013615289883562658
+      ],
+      "orbitUpReference": [
+        0.7336281983305781,
+        -0.6793069954835449,
+        0.018211878029161677
+      ],
+      "metersPerUnit": 9550771.612903226,
+      "bodyRadiusM": 2960739200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

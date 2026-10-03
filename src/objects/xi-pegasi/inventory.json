@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "xi-pegasi-billboard.webp",
-      "bytes": 4768,
-      "sha256": "20cdb878d30c7a1aa64e605f28ff826184e87a80b07f6aac8df2e1076116cdbf"
-    },
-    {
-      "location": "public",
       "filename": "xi-pegasi-dataset-color.webp",
       "bytes": 44,
       "sha256": "b2f4b4c057408fff685b5f1826f082b880e0baab15c1e908438f550e3639f70c"
@@ -58,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 1405,
-      "sha256": "06f34b96936633ede7807a0bd19104e079afe452a14316891f2889c9c0ecd7ee"
+      "bytes": 1404,
+      "sha256": "f6b94f76c10b83f3fc55046050850954e7a3bfce9e0614e585fc2651bc3bb5ab"
     },
     {
       "location": "prepared",
@@ -113,7 +107,7 @@
       "location": "prepared",
       "filename": "text.json",
       "bytes": 1021,
-      "sha256": "dbafb9b90e725b262bd747604fd5c8034fe6c02c1e0f5d67121f6ece7782d3b6"
+      "sha256": "4500441f559bbaf8af8755131deac0964168f3b03d16c6564327e4f9a053c052"
     },
     {
       "location": "prepared",

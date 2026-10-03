@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "tres-3b",
+  "radiusKm": 95513.3,
+  "radiusSource": "Radius 1.336 Jupiter radii from Sozzetti et al. 2009 (2009ApJ...691.1145S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract): 95,513.3 km at 71,492 km per Jupiter radius. GM from the mass 1.91 Jupiter masses (Sozzetti et al. 2009, the mass the NASA Exoplanet Archive's composite table adopts (2009ApJ...691.1145S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.30618626966,
+  "orbitalPeriodSource": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): P 1.30618626966 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of TrES-3 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "1.91 Jupiter masses: Sozzetti et al. 2009, the mass the NASA Exoplanet Archive's composite table adopts (2009ApJ...691.1145S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract)."
+}

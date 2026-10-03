@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/tres-3b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "tres-3b-orbits",
+      "title": "TrES-3 b: orbits around Pipoltr",
+      "output": "tres-3b-system-orbits.svg",
+      "system": "tres-3",
+      "highlight": "tres-3b",
+      "description": "The orbits of Pipoltr's planets in this map from above, to scale, with TrES-3 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): P 1.30618626966 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "tres-3b-transit",
+      "title": "TrES-3 b: its transit",
+      "description": "TrES-3 b crossing its star, as TESS recorded it: 3 sectors (53, 79, 80) of the SPOC pipeline's 2-minute light curves of TIC 116264089, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 6-minute bins. Error bars are each bin's standard error.",
+      "output": "tres-3b-transit.svg",
+      "metadata": {
+        "tic": "TIC 116264089",
+        "sectors": [
+          53,
+          79,
+          80
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "tres-3b",
+      "sources": [
+        "photometry/tess/tess2022164095748-s0053-0000000116264089-0226-s_lc.fits",
+        "photometry/tess/tess2024142205832-s0079-0000000116264089-0274-s_lc.fits",
+        "photometry/tess/tess2024170053053-s0080-0000000116264089-0275-s_lc.fits"
+      ],
+      "durationHours": 1.4177746,
+      "binMinutes": 6,
+      "notes": [
+        "TESS 2-min SPOC · sectors 53, 79, 80",
+        "Folded on the app's orbit; 6-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

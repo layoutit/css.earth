@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-19-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-19",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Wattle system",
+      "systemName": "Wattle system",
+      "classification": "planetary-system",
+      "color": "#ffeade",
+      "distanceAu": 54980345,
+      "description": "WASP-19 b crosses Wattle as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4897136801223669000,
+        3010782039188641300,
+        -5882424877419734000
+      ],
+      "presentationToReference": [
+        -0.5954001833601302,
+        0.6092596404289257,
+        0.5237378277336281,
+        0.36605474810343774,
+        -0.3745734021414085,
+        0.8518795030983781,
+        -0.7151940597108257,
+        -0.6989259309487857,
+        0.000001311889979030906
+      ],
+      "orbitUpReference": [
+        -0.6092596404289257,
+        0.3745734021414085,
+        0.6989259309487857
+      ],
+      "metersPerUnit": 2257658.709677419,
+      "bodyRadiusM": 699874200
+    }
+  }
+}

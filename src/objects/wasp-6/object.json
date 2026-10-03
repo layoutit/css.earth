@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-6",
+      "label": "Márohu",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,16 +94,20 @@
       }
     },
     "catalog": {
-      "name": "WASP-6",
+      "name": "Márohu",
       "classification": "star",
       "color": "#ffece0",
       "distanceAu": 41192836.1,
       "description": "WASP-6 b crosses WASP-6 as seen from Earth, which is how it was found.",
-      "systemName": "WASP-6 system",
+      "systemName": "Márohu system",
+      "aliases": [
+        "WASP-6"
+      ],
       "order": 4826,
       "context": {
         "order": 4823
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

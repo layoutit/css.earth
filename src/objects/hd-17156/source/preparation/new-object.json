@@ -1,8 +1,13 @@
 {
   "id": "hd-17156",
-  "name": "HD 17156",
-  "system": "HD 17156 system",
+  "name": "Nushagak",
+  "system": "Nushagak system",
   "description": "Star of 6,046 K, 78.1 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "HD 17156"
+  ],
+  "featured": true,
+  "order": 3175,
   "target": "HD 17156",
   "gaia": "545560867790611072",
   "paper": {
@@ -30,7 +35,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "HD 17156 b crosses HD 17156 as seen from Earth, which is how it was found.",
+    "card": "HD 17156 b crosses Nushagak as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Kane et al. 2023.",
     "locator": "NASA Exoplanet Archive ps table (st_refname KANE_ET_AL__2023): st_teff 6046, st_rad 1.517, st_mass 1.285",
     "quotes": {
@@ -41,6 +46,5 @@
       "introduction": "The apparent magnitude is 8.16, which means it is not visible to the naked eye but can be seen with good binoculars."
     }
   },
-  "notes": [],
-  "order": 3175
+  "notes": []
 }

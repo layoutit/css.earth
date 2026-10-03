@@ -1,0 +1,30 @@
+{
+ "id": "wasp-64",
+ "classification": "star",
+ "order": 5492,
+ "physical": {
+  "name": "Atakoraka",
+  "horizonsCode": null,
+  "meanRadiusKm": 736050.6,
+  "gravitationalParameterKm3PerS2": 133243289802.10713,
+  "parent": null,
+  "effectiveTemperatureK": 5400
+ },
+ "physicalNotes": "Radius 1.058 +/- 0.025 solar radii from Gillon et al. 2013, the stellar radius of the default parameter set of WASP-64 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract): 736,051 km at 695,700 km per solar radius. Mass 1.004 +/- 0.028 solar masses from Gillon et al. 2013, the stellar mass of the default parameter set of WASP-64 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract); GM is that mass times the JPL solar GM. Temperature 5400 +/- 100 K from Gillon et al. 2013, the stellar temperature of the default parameter set of WASP-64 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 101.11491919531099,
+  "declinationDegrees": -32.85838790104288,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 360.73142392243903,
+  "properMotionRaMasPerYear": -19.26509432060659,
+  "properMotionDecMasPerYear": -1.0721360724731186,
+  "radialVelocityKmPerS": 34.4045,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5583523425437258240 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/wasp-64/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 2.7721 +/- 0.0102 mas (same row, RUWE 1.06): 360.73 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -19.265, -1.072 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 34.40 +/- 1.23 km/s"
+  }
+ }
+}

@@ -1,0 +1,31 @@
+{
+  "host": "hat-p-5",
+  "planets": [
+    {
+      "id": "hat-p-5b",
+      "name": "HAT-P-5 b",
+      "description": "Transiting planet of Chasoň with a 2.79-day year, found in 2007.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "credit": "Stassun et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STASSUN_ET_AL__2017"
+      },
+      "text": {
+        "card": "HAT-P-5 b was found in 2007 by HATNet as it crossed its star.",
+        "introduction": "It is the only planet known around Chasoň. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2007, disc_facility HATNet, sy_pnum 1; pl_orbper 2.78847323, pl_radj 1.21, pl_bmassj 0.98",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HAT-P-5b",
+          "title": "HAT-P-5b",
+          "revision": "1374168776",
+          "card": "HAT-P-5 b is a transiting extrasolar planet located approximately 1000 light-years away in the constellation of Lyra, orbiting the star HAT-P-5.",
+          "introduction": "It is a hot Jupiter with a mass 6% greater than Jupiter and a radius 26% greater than Jupiter, corresponding to a density of 0.66 g/cm3, which is less than water."
+        }
+      },
+      "order": 5518
+    }
+  ]
+}

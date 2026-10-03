@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "veritate",
+  "card": {
+    "text": "A star 79 parsecs away, 14 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 116076: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-14-andromedae",
+        "url": "https://en.wikipedia.org/wiki/14_Andromedae",
+        "label": "Wikipedia, \"14 Andromedae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374546255",
+        "quote": "14 Andromedae, abbreviated 14 And, also named Veritate, is a single, orange-hued giant star situated 248 light-years away in the northern constellation of Andromeda."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 68 times the Sun's luminosity at 4,509 K, so 13.58 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 116076: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-14-andromedae",
+        "url": "https://en.wikipedia.org/wiki/14_Andromedae",
+        "label": "Wikipedia, \"14 Andromedae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374546255",
+        "quote": "It is dimly visible to the naked eye with an apparent visual magnitude of 5.22."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

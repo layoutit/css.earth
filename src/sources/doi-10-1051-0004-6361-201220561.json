@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201220561",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gillon et al. (2013): WASP-64 b and WASP-72 b: two new transiting highly irradiated giant planets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1210.4257"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201220561"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2013A&A...552A..82G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201220561",
+      "label": "Astronomy & Astrophysics 552 A82"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gillon et al. (2013), Astronomy & Astrophysics 552 A82",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 552 A82",
+  "creators": [
+    "M. Gillon",
+    "D. R. Anderson",
+    "A. Collier-Cameron",
+    "et al."
+  ],
+  "publicationDate": "2013"
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "sham",
+  "card": {
+    "text": "A star about 130 parsecs away, 18 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1824277055360974720: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-alpha-sagittae",
+        "url": "https://en.wikipedia.org/wiki/Alpha_Sagittae",
+        "label": "Wikipedia, \"Alpha Sagittae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1376038239",
+        "quote": "Alpha Sagittae, formally named Sham, is a single star in the northern constellation of Sagitta."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 18.1 solar radii and 4.08 solar masses (FLAME) and 5,824 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1824277055360974720: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-alpha-sagittae",
+        "url": "https://en.wikipedia.org/wiki/Alpha_Sagittae",
+        "label": "Wikipedia, \"Alpha Sagittae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1376038239",
+        "quote": "Alpha Sagittae is the Bayer designation, which is latinized from α Sagittae and abbreviated Alpha Sge or α Sge."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

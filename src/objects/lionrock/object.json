@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lionrock",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Lionrock",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3028650.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/lionrock-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Lionrock",
+      "classification": "star",
+      "color": "#ffead9",
+      "distanceAu": 23008305.5,
+      "description": "A star about 110 parsecs away, 4.4 times the Sun's width, measured by Gaia.",
+      "systemName": "Lionrock system",
+      "aliases": [
+        "Gaia DR3 2595360574179855104",
+        "HD 212771",
+        "HIP 110813"
+      ],
+      "order": 5601,
+      "context": {
+        "order": 5598
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3020263623219311000,
+        -1296850041883680300,
+        -1021521877276187800
+      ],
+      "presentationToReference": [
+        0.8774765744469086,
+        -0.27270136136715095,
+        -0.39454889279457056,
+        -0.3767735781574058,
+        0.11709184262631524,
+        -0.9188749486153378,
+        -0.2967769062770622,
+        -0.9549468403523187,
+        0.0000013187272816013874
+      ],
+      "orbitUpReference": [
+        0.27270136136715095,
+        -0.11709184262631524,
+        0.9549468403523187
+      ],
+      "metersPerUnit": 9769839.35483871,
+      "bodyRadiusM": 3028650200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

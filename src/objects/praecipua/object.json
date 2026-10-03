@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "praecipua",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Praecipua",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5502291.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/praecipua-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Praecipua",
+      "classification": "star",
+      "color": "#fff3db",
+      "distanceAu": 5999659.7,
+      "description": "A star 29 parsecs away, 7.9 times the Sun's width, measured from its light.",
+      "systemName": "Praecipua system",
+      "aliases": [
+        "HD 94264",
+        "HIP 53229",
+        "HR 4247",
+        "46 Leonis Minoris"
+      ],
+      "order": 5671,
+      "context": {
+        "order": 5668
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -711023508456735400,
+        212929342100782270,
+        504656432185043500
+      ],
+      "presentationToReference": [
+        -0.7921869252277584,
+        -0.5386447758202965,
+        0.2868826955040902,
+        0.2372352513935804,
+        0.1613106211099148,
+        0.9579657191222232,
+        0.5622804558175704,
+        -0.8269466058934132,
+        0.000002636140076556414
+      ],
+      "orbitUpReference": [
+        0.5386447758202965,
+        -0.1613106211099148,
+        0.8269466058934132
+      ],
+      "metersPerUnit": 17749326.774193548,
+      "bodyRadiusM": 5502291300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

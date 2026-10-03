@@ -1,0 +1,40 @@
+{
+  "host": "xo-4",
+  "planets": [
+    {
+      "id": "xo-4b",
+      "name": "XO-4 b",
+      "description": "Transiting planet of Koit with a 4.13-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "credit": "Stassun et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STASSUN_ET_AL__2017"
+      },
+      "text": {
+        "card": "XO-4 b was found in 2010 by Lowell Observatory as it crossed its star.",
+        "introduction": "It is the only planet known around Koit. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility Lowell Observatory, sy_pnum 1; pl_orbper 4.12506679, pl_radj 1.25, pl_bmassj 1.42",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/XO-4b",
+          "title": "XO-4b",
+          "revision": "1374245034",
+          "card": "XO-4b is an extrasolar planet approximately 956 light years away in the constellation of Lynx.",
+          "introduction": "This planet was found by the transit method by McCullough in May 2008."
+        }
+      },
+      "thermal": {
+        "temperatureK": 1961,
+        "uncertaintyK": 65,
+        "wavelengthMicrometres": 4.5,
+        "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+        "source": "Todorov et al. 2012, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...746..111T/abstract",
+        "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5588
+    }
+  ]
+}

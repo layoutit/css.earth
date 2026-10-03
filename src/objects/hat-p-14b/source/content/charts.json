@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hat-p-14b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hat-p-14b-orbits",
+      "title": "HAT-P-14 b: orbits around Franz",
+      "output": "hat-p-14b-system-orbits.svg",
+      "system": "hat-p-14",
+      "highlight": "hat-p-14b",
+      "description": "The orbits of Franz's planets in this map from above, to scale, with HAT-P-14 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 4.62766098 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hat-p-14b-transit",
+      "title": "HAT-P-14 b: its transit",
+      "description": "HAT-P-14 b crossing its star, as TESS recorded it: 3 sectors (52, 53, 80) of the SPOC pipeline's 2-minute light curves of TIC 101721385, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "output": "hat-p-14b-transit.svg",
+      "metadata": {
+        "tic": "TIC 101721385",
+        "sectors": [
+          52,
+          53,
+          80
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hat-p-14b",
+      "sources": [
+        "photometry/tess/tess2022138205153-s0052-0000000101721385-0224-s_lc.fits",
+        "photometry/tess/tess2022164095748-s0053-0000000101721385-0226-s_lc.fits",
+        "photometry/tess/tess2024170053053-s0080-0000000101721385-0275-s_lc.fits"
+      ],
+      "durationHours": 2.1888,
+      "binMinutes": 9,
+      "notes": [
+        "TESS 2-min SPOC · sectors 52, 53, 80",
+        "Folded on the app's orbit; 9-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

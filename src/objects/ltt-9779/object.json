@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "LTT 9779",
+      "label": "Uúba",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,16 +94,20 @@
       }
     },
     "catalog": {
-      "name": "LTT 9779",
+      "name": "Uúba",
       "classification": "star",
       "color": "#ffeade",
       "distanceAu": 16717708.7,
       "description": "LTT 9779 b crosses LTT 9779 as seen from Earth, which is how it was found.",
-      "systemName": "LTT 9779 system",
+      "systemName": "Uúba system",
+      "aliases": [
+        "LTT 9779"
+      ],
       "order": 3838,
       "context": {
         "order": 3835
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

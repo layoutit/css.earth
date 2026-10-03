@@ -1,11 +1,13 @@
 {
   "id": "gamma-serpentis",
-  "name": "Gamma Serpentis",
-  "system": "Gamma Serpentis system",
+  "name": "Muning",
+  "system": "Muning system",
   "description": "A naked-eye star 11.3 parsecs away, 1.5 times the Sun's width: its disc was measured with the CHARA Array.",
   "aliases": [
-    "HD 142860"
+    "HD 142860",
+    "Gamma Serpentis"
   ],
+  "featured": true,
   "order": 5353,
   "target": "HD 142860",
   "paper": {

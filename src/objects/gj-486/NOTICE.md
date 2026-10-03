@@ -1,4 +1,4 @@
-# GJ 486 credits
+# Gar credits
 
 Radius, mass and temperature: Radius 0.3243 +/- 0.0044 solar radii from Weiner Mansfield et al. 2024, the stellar radius of the default parameter set of GJ 486 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W/abstract); Mass 0.312 +/- 0.007 solar masses from Weiner Mansfield et al. 2024, the stellar mass of the default parameter set of GJ 486 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W/abstract); temperature from Weiner Mansfield et al. 2024, the stellar temperature of the default parameter set of GJ 486 b in the NASA Exoplanet Archive.
 

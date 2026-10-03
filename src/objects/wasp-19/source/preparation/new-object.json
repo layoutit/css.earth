@@ -1,0 +1,50 @@
+{
+  "id": "wasp-19",
+  "name": "Wattle",
+  "system": "Wattle system",
+  "description": "Star of 5,616 K, 268 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "WASP-19"
+  ],
+  "featured": true,
+  "target": "WASP-19",
+  "gaia": "5411736896952029568",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+    "credit": "Cortés-Zuleta et al. 2020"
+  },
+  "radius": {
+    "value": 1.006,
+    "source": "Cortés-Zuleta et al. 2020, the stellar radius of the default parameter set of WASP-19 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+    "uncertainty": 0.031
+  },
+  "mass": {
+    "value": 0.965,
+    "source": "Cortés-Zuleta et al. 2020, the stellar mass of the default parameter set of WASP-19 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+    "uncertainty": 0.091
+  },
+  "temperature": {
+    "value": 5616,
+    "source": "Cortés-Zuleta et al. 2020, the stellar temperature of the default parameter set of WASP-19 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+    "uncertainty": 66
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-19 b crosses Wattle as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Cortés-Zuleta et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CORT_EACUTE_S_ZULETA_ET_AL__2020): st_teff 5616, st_rad 1.006, st_mass 0.965",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-19",
+      "title": "WASP-19",
+      "revision": "1374406313",
+      "card": "WASP-19, formally named Wattle, is a magnitude 12.3 star about 869 light-years away, located in the Vela constellation of the Southern Hemisphere.",
+      "introduction": "This star has been found to host a transiting hot Jupiter-type planet in a tight orbit."
+    }
+  },
+  "notes": [],
+  "order": 5746
+}

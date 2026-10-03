@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "schedar",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Schedar",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 28577964.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/schedar-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Schedar",
+      "classification": "star",
+      "color": "#ffdfb0",
+      "distanceAu": 14434195.4,
+      "description": "A star 70 parsecs away, 41 times the Sun's width, measured from its light.",
+      "systemName": "Schedar system",
+      "aliases": [
+        "HD 3712",
+        "HIP 3179",
+        "HR 168",
+        "Alpha Cassiopeiae"
+      ],
+      "order": 5689,
+      "context": {
+        "order": 5686
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1172093650280800800,
+        209362270154353300,
+        1801401658330802000
+      ],
+      "presentationToReference": [
+        0.5428042589572644,
+        0.8212461106868971,
+        0.175836179836517,
+        0.09695704083457996,
+        0.14668910790033696,
+        -0.9844194420347482,
+        0.8342438904124243,
+        -0.5513956214054008,
+        0.00000212017816487553
+      ],
+      "orbitUpReference": [
+        -0.8212461106868971,
+        -0.14668910790033696,
+        0.5513956214054008
+      ],
+      "metersPerUnit": 92186982.58064516,
+      "bodyRadiusM": 28577964600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

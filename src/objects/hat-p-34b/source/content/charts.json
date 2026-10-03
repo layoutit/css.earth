@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hat-p-34b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hat-p-34b-orbits",
+      "title": "HAT-P-34 b: orbits around Sansuna",
+      "output": "hat-p-34b-system-orbits.svg",
+      "system": "hat-p-34",
+      "highlight": "hat-p-34b",
+      "description": "The orbits of Sansuna's planets in this map from above, to scale, with HAT-P-34 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 5.45264682 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hat-p-34b-transit",
+      "title": "HAT-P-34 b: its transit",
+      "description": "HAT-P-34 b crossing its star, as TESS recorded it: 3 sectors (41, 54, 81) of the SPOC pipeline's 2-minute light curves of TIC 278348461, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "output": "hat-p-34b-transit.svg",
+      "metadata": {
+        "tic": "TIC 278348461",
+        "sectors": [
+          41,
+          54,
+          81
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hat-p-34b",
+      "sources": [
+        "photometry/tess/tess2021204101404-s0041-0000000278348461-0212-s_lc.fits",
+        "photometry/tess/tess2022190063128-s0054-0000000278348461-0227-s_lc.fits",
+        "photometry/tess/tess2024196212429-s0081-0000000278348461-0276-s_lc.fits"
+      ],
+      "durationHours": 3.1752,
+      "binMinutes": 13,
+      "notes": [
+        "TESS 2-min SPOC · sectors 41, 54, 81",
+        "Folded on the app's orbit; 13-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

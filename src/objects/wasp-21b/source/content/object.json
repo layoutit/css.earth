@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wasp-21b",
+  "displayName": "WASP-21 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-1006-2605",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B",
+          "label": "Bouchy et al. 2010",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.32 days",
+        "source": {
+          "catalogueId": "arxiv-1006-2605",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B",
+          "label": "Bouchy et al. 2010",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.30 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-1006-2605",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B",
+          "label": "Bouchy et al. 2010",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Tangra; the neutral gray is a display convention, not a measured color.",
+        "thumbnail": "wasp-21b-dataset-shape.webp",
+        "surface": "wasp-21b-surface-shape@2x.webp",
+        "poles": "wasp-21b-poles-shape@2x.webp",
+        "source": {
+          "id": "wasp-21b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or color of WASP-21 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of wasp-21's light, as its color dataset measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-21b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-21b/wasp-21b-system-orbits.svg",
+      "alt": "The orbits of Tangra's planets in this map from above, to scale, with WASP-21 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-21b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B"
+      }
+    },
+    {
+      "id": "wasp-21b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-21b/wasp-21b-transit.svg",
+      "alt": "WASP-21 b crossing its star, as TESS recorded it: 2 sectors (56, 83) of the SPOC pipeline's 2-minute light curves of TIC 436478932, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-21b-tess-sector-56",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022244194134-s0056-0000000436478932-0243-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bouchy et al. 2010",
+      "href": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract",
+      "credit": "Bouchy et al. 2010"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-21b.json",
+      "credit": "Radius from Bouchy et al. 2010 (2010arXiv1006.2605B), via the NASA Exoplanet Archive; mass from Bouchy et al. 2010, the mass the NASA Exoplanet Archive's composite table adopts (2010arXiv1006.2605B), via the NASA Exoplanet Archive; orbit from Bouchy et al. 2010 (2010arXiv1006.2605B), via the NASA Exoplanet Archive"
+    }
+  }
+}

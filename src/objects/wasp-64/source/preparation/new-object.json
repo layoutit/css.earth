@@ -1,0 +1,50 @@
+{
+  "id": "wasp-64",
+  "name": "Atakoraka",
+  "system": "Atakoraka system",
+  "description": "Star of 5,400 K, 370 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "WASP-64"
+  ],
+  "featured": true,
+  "target": "WASP-64",
+  "gaia": "5583523425437258240",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract",
+    "credit": "Gillon et al. 2013"
+  },
+  "radius": {
+    "value": 1.058,
+    "source": "Gillon et al. 2013, the stellar radius of the default parameter set of WASP-64 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract",
+    "uncertainty": 0.025
+  },
+  "mass": {
+    "value": 1.004,
+    "source": "Gillon et al. 2013, the stellar mass of the default parameter set of WASP-64 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract",
+    "uncertainty": 0.028
+  },
+  "temperature": {
+    "value": 5400,
+    "source": "Gillon et al. 2013, the stellar temperature of the default parameter set of WASP-64 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-64 b crosses Atakoraka as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Gillon et al. 2013.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GILLON_ET_AL__2013): st_teff 5400, st_rad 1.058, st_mass 1.004",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-64",
+      "title": "WASP-64",
+      "revision": "1370791684",
+      "card": "WASP-64, also named Atakoraka, is a star about 1,177 light-years away in the constellation Canis Major.",
+      "introduction": "It is a G7 class main-sequence star, orbited by a planet WASP-64b."
+    }
+  },
+  "notes": [],
+  "order": 5492
+}

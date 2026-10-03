@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-6-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-6",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Sterrennacht system",
+      "systemName": "Sterrennacht system",
+      "classification": "planetary-system",
+      "color": "#ededff",
+      "distanceAu": 56574526.4,
+      "description": "HAT-P-6 b crosses Sterrennacht as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6217334260229590000,
+        -568665832501298000,
+        5714105257152338000
+      ],
+      "presentationToReference": [
+        0.7346118668140843,
+        0.6723460116344923,
+        -0.09108372947523322,
+        -0.06719096180471593,
+        -0.0614948813103382,
+        -0.9958432377760994,
+        0.6751524122653222,
+        -0.7376782633450837,
+        -7.056283881728708e-7
+      ],
+      "orbitUpReference": [
+        -0.6723460116344923,
+        0.0614948813103382,
+        0.7376782633450837
+      ],
+      "metersPerUnit": 3635593.5483870967,
+      "bodyRadiusM": 1127034000
+    }
+  }
+}

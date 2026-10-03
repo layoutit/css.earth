@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "aspidiske",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Aspidiske",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 32663115
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/aspidiske-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Aspidiske",
+      "classification": "star",
+      "color": "#f2f1ff",
+      "distanceAu": 48419040.2,
+      "description": "A star 235 parsecs away, 47 times the Sun's width, measured from its light.",
+      "systemName": "Aspidiske system",
+      "aliases": [
+        "HD 80404",
+        "HIP 45556",
+        "HR 3699",
+        "Iota Carinae"
+      ],
+      "order": 5491,
+      "context": {
+        "order": 5488
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2804506959846265300,
+        2414610636804434400,
+        -6226638493070633000
+      ],
+      "presentationToReference": [
+        -0.38718179968365574,
+        0.6514453585566142,
+        0.6524639444511626,
+        0.33335388547029515,
+        -0.5608782272923662,
+        0.757819768276884,
+        -0.859630991202378,
+        -0.5109154127293648,
+        5.263721709119294e-17
+      ],
+      "orbitUpReference": [
+        -0.6514453585566142,
+        0.5608782272923662,
+        0.5109154127293648
+      ],
+      "metersPerUnit": 105364887.09677419,
+      "bodyRadiusM": 32663115000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

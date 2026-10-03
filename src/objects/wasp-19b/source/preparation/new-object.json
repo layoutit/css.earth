@@ -1,0 +1,40 @@
+{
+  "host": "wasp-19",
+  "planets": [
+    {
+      "id": "wasp-19b",
+      "name": "WASP-19 b",
+      "description": "Transiting planet of Wattle with a 0.789-day year, found in 2009.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+        "credit": "Cortés-Zuleta et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CORT_EACUTE_S_ZULETA_ET_AL__2020"
+      },
+      "text": {
+        "card": "WASP-19 b was found in 2009 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around Wattle. Its orbit and size follow Cortés-Zuleta et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CORT_EACUTE_S_ZULETA_ET_AL__2020): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 0.78883900702, pl_radj 1.415, pl_bmassj 1.154",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-19b",
+          "title": "WASP-19b",
+          "revision": "1374844406",
+          "card": "WASP-19b, formally named Banksia, is an exoplanet, notable for possessing one of the shortest orbital periods of any known planetary body: 0.79 days or approximately 18.932 hours.",
+          "introduction": "It has a mass close to that of Jupiter, but by comparison has a much larger radius ; making it nearly the size of a low-mass star."
+        }
+      },
+      "thermal": {
+        "temperatureK": 2346,
+        "uncertaintyK": 57,
+        "wavelengthMicrometres": 3.6,
+        "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+        "source": "Anderson et al. 2013, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013MNRAS.430.3422A/abstract",
+        "chosen": "8 measured of 9 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5747
+    }
+  ]
+}

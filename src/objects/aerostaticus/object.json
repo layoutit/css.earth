@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "aerostaticus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Aerostaticus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1835952.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/aerostaticus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Aerostaticus",
+      "classification": "star",
+      "color": "#bacdff",
+      "distanceAu": 11523186.1,
+      "description": "A star 56 parsecs away, 2.6 times the Sun's width, measured from its light.",
+      "systemName": "Aerostaticus system",
+      "aliases": [
+        "Epsilon Microscopii",
+        "HD 202627",
+        "HIP 105140",
+        "HR 8135"
+      ],
+      "order": 5465,
+      "context": {
+        "order": 5462
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1109292262561815200,
+        -947927547586694700,
+        -917901160161763700
+      ],
+      "presentationToReference": [
+        0.643499682068858,
+        -0.4048034560099641,
+        -0.6496478439736931,
+        -0.5498921213881225,
+        0.3459204764351842,
+        -0.7602352785934928,
+        -0.5324723598578139,
+        -0.8464473911503563,
+        -0.0000014854365861928192
+      ],
+      "orbitUpReference": [
+        0.4048034560099641,
+        -0.3459204764351842,
+        0.8464473911503563
+      ],
+      "metersPerUnit": 5922426.774193549,
+      "bodyRadiusM": 1835952300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

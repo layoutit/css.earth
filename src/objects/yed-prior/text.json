@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "yed-prior",
+  "card": {
+    "text": "A star 52 parsecs away, 54 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 79593: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-delta-ophiuchi",
+        "url": "https://en.wikipedia.org/wiki/Delta_Ophiuchi",
+        "label": "Wikipedia, \"Delta Ophiuchi\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377512875",
+        "quote": "Delta Ophiuchi, formally named Yed Prior, is a star in the constellation of Ophiuchus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 558 times the Sun's luminosity at 3,811 K, so 54.27 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 79593: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-delta-ophiuchi",
+        "url": "https://en.wikipedia.org/wiki/Delta_Ophiuchi",
+        "label": "Wikipedia, \"Delta Ophiuchi\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377512875",
+        "quote": "It forms a naked-eye optical double with Epsilon Ophiuchi."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

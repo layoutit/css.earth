@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-21",
+  "card": {
+    "text": "WASP-21 b crosses Tangra as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1006-2605",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract",
+        "label": "Bouchy et al. (2010)",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CHEN_ET_AL__2020): st_teff 5800, st_rad 1.136, st_mass 0.89"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-21",
+        "url": "https://en.wikipedia.org/wiki/WASP-21",
+        "label": "Wikipedia, \"WASP-21\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370791513",
+        "quote": "WASP-21, also named Tangra, is a G-type star that has reached the end of its main sequence lifetime."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Chen et al. 2020.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1006-2605",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract",
+        "label": "Bouchy et al. (2010)",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CHEN_ET_AL__2020): st_teff 5800, st_rad 1.136, st_mass 0.89"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-21",
+        "url": "https://en.wikipedia.org/wiki/WASP-21",
+        "label": "Wikipedia, \"WASP-21\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370791513",
+        "quote": "It lies approximately 834 light-years away, in the constellation of Pegasus."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

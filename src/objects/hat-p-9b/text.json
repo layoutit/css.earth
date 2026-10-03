@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-9b",
+  "card": {
+    "text": "HAT-P-9 b was found in 2008 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaf6b6",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+        "label": "Wang et al. 2019",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WANG_ET_AL__2019): disc_year 2008, disc_facility HATNet, sy_pnum 1; pl_orbper 3.92281131, pl_radj 1.393, pl_bmassj 0.749"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-9b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-9b",
+        "label": "Wikipedia, \"HAT-P-9b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1348849144",
+        "quote": "HAT-P-9b, formally named Alef, is an exoplanet approximately 1500 light years away in the constellation Auriga."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Tevel. Its orbit and size follow Wang et al. 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaf6b6",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+        "label": "Wang et al. 2019",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WANG_ET_AL__2019): disc_year 2008, disc_facility HATNet, sy_pnum 1; pl_orbper 3.92281131, pl_radj 1.393, pl_bmassj 0.749"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-9b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-9b",
+        "label": "Wikipedia, \"HAT-P-9b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1348849144",
+        "quote": "This planet was found by the transit method on June 26, 2008."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

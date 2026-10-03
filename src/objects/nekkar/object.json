@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "nekkar",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Nekkar",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 12990806.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/nekkar-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Nekkar",
+      "classification": "star",
+      "color": "#ffeacc",
+      "distanceAu": 14244812.4,
+      "description": "A star 69 parsecs away, 19 times the Sun's width, measured from its light.",
+      "systemName": "Nekkar system",
+      "aliases": [
+        "HD 133208",
+        "HIP 73555",
+        "HR 5602",
+        "Beta Bootis"
+      ],
+      "order": 5641,
+      "context": {
+        "order": 5638
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1137902514595290400,
+        -1157376781885160700,
+        1380865876454794500
+      ],
+      "presentationToReference": [
+        -0.5339767348475022,
+        -0.45429484868180625,
+        -0.7130813677994785,
+        -0.5431153082517032,
+        -0.46207228768591485,
+        0.7010812812330414,
+        0.6479927534967176,
+        -0.7616465002964826,
+        -0.0000013646630604766206
+      ],
+      "orbitUpReference": [
+        0.45429484868180625,
+        0.46207228768591485,
+        0.7616465002964826
+      ],
+      "metersPerUnit": 41905826.12903226,
+      "bodyRadiusM": 12990806100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

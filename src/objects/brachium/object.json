@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "brachium",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Brachium",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 74263192.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/brachium-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Brachium",
+      "classification": "star",
+      "color": "#ffc990",
+      "distanceAu": 18237306.6,
+      "description": "A star 88 parsecs away, 107 times the Sun's width, measured from its light.",
+      "systemName": "Brachium system",
+      "aliases": [
+        "HD 133216",
+        "HIP 73714",
+        "HR 5603",
+        "Sigma Librae"
+      ],
+      "order": 5509,
+      "context": {
+        "order": 5506
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1713151450502287600,
+        -1775071446180358400,
+        -1165181653565520000
+      ],
+      "presentationToReference": [
+        -0.6279283617853533,
+        0.2965799046292731,
+        -0.7195459211444768,
+        -0.6506241493914382,
+        0.3073020482635237,
+        0.6944448627225277,
+        -0.42707632654389754,
+        -0.9042155778923155,
+        0.000001623563383333085
+      ],
+      "orbitUpReference": [
+        -0.2965799046292731,
+        -0.3073020482635237,
+        0.9042155778923155
+      ],
+      "metersPerUnit": 239558684.51612905,
+      "bodyRadiusM": 74263192200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

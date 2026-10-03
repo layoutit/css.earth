@@ -1,0 +1,31 @@
+{
+  "host": "hat-p-14",
+  "planets": [
+    {
+      "id": "hat-p-14b",
+      "name": "HAT-P-14 b",
+      "description": "Transiting planet of Franz with a 4.63-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "credit": "Stassun et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STASSUN_ET_AL__2017"
+      },
+      "text": {
+        "card": "HAT-P-14 b was found in 2010 by HATNet as it crossed its star.",
+        "introduction": "It is the only planet known around Franz. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility HATNet, sy_pnum 1; pl_orbper 4.62766098, pl_radj 1.42, pl_bmassj 3.44",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HAT-P-14b",
+          "title": "HAT-P-14b",
+          "revision": "1374169060",
+          "card": "HAT-P-14b, officially named Sissi and also known as WASP-27b, is an extrasolar planet located approximately 224.2 ± 0.6 parsecs (731.2 ± 2.0 ly) away in the constellation of Hercules, orbiting the 10th magnitude F-type main-sequence star HAT-P-14.",
+          "introduction": "This planet was discovered in 2010 by the HATNet Project using the transit method."
+        }
+      },
+      "order": 5546
+    }
+  ]
+}

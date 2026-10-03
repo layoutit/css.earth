@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/xo-4b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "xo-4b-orbits",
+      "title": "XO-4 b: orbits around Koit",
+      "output": "xo-4b-system-orbits.svg",
+      "system": "xo-4",
+      "highlight": "xo-4b",
+      "description": "The orbits of Koit's planets in this map from above, to scale, with XO-4 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 4.12506679 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "xo-4b-transit",
+      "title": "XO-4 b: its transit",
+      "description": "XO-4 b crossing its star, as TESS recorded it: 3 sectors (47, 60, 74) of the SPOC pipeline's 2-minute light curves of TIC 51234631, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 18-minute bins. Error bars are each bin's standard error.",
+      "output": "xo-4b-transit.svg",
+      "metadata": {
+        "tic": "TIC 51234631",
+        "sectors": [
+          47,
+          60,
+          74
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "xo-4b",
+      "sources": [
+        "photometry/tess/tess2021364111932-s0047-0000000051234631-0218-s_lc.fits",
+        "photometry/tess/tess2022357055054-s0060-0000000051234631-0249-s_lc.fits",
+        "photometry/tess/tess2024003055635-s0074-0000000051234631-0269-s_lc.fits"
+      ],
+      "durationHours": 4.454,
+      "binMinutes": 18,
+      "notes": [
+        "TESS 2-min SPOC · sectors 47, 60, 74",
+        "Folded on the app's orbit; 18-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

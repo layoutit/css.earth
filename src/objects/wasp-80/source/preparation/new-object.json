@@ -1,8 +1,13 @@
 {
   "id": "wasp-80",
-  "name": "WASP-80",
-  "system": "WASP-80 system",
+  "name": "Petra",
+  "system": "Petra system",
   "description": "Star of 4,143 K, 49.8 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "WASP-80"
+  ],
+  "featured": true,
+  "order": 4843,
   "target": "WASP-80",
   "gaia": "4223507222112425344",
   "paper": {
@@ -30,7 +35,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "WASP-80 b crosses WASP-80 as seen from Earth, which is how it was found.",
+    "card": "WASP-80 b crosses Petra as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Triaud et al. 2015.",
     "locator": "NASA Exoplanet Archive ps table (st_refname TRIAUD_ET_AL__2015): st_teff 4143, st_rad 0.586, st_mass 0.577",
     "quotes": {
@@ -41,6 +46,5 @@
       "introduction": "The star's age is much younger than the Sun's at 1.352±0.222 billion years."
     }
   },
-  "notes": [],
-  "order": 4843
+  "notes": []
 }

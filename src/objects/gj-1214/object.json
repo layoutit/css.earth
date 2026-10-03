@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "GJ 1214",
+      "label": "Orkaria",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,16 +94,20 @@
       }
     },
     "catalog": {
-      "name": "GJ 1214",
+      "name": "Orkaria",
       "classification": "star",
       "color": "#ffca76",
       "distanceAu": 3020089.4,
       "description": "GJ 1214 b crosses GJ 1214 as seen from Earth, which is how it was found.",
-      "systemName": "GJ 1214 system",
+      "systemName": "Orkaria system",
+      "aliases": [
+        "GJ 1214"
+      ],
       "order": 3076,
       "context": {
         "order": 3073
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

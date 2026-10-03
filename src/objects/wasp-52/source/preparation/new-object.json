@@ -1,8 +1,13 @@
 {
   "id": "wasp-52",
-  "name": "WASP-52",
-  "system": "WASP-52 system",
+  "name": "Anadolu",
+  "system": "Anadolu system",
   "description": "Star of 5,000 K, 175 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "WASP-52"
+  ],
+  "featured": true,
+  "order": 4822,
   "target": "WASP-52",
   "gaia": "2666015878575546496",
   "paper": {
@@ -30,7 +35,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "WASP-52 b crosses WASP-52 as seen from Earth, which is how it was found.",
+    "card": "WASP-52 b crosses Anadolu as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Hebrard et al. 2013.",
     "locator": "NASA Exoplanet Archive ps table (st_refname HEBRARD_ET_AL__2013): st_teff 5000, st_rad 0.79, st_mass 0.87",
     "quotes": {
@@ -41,6 +46,5 @@
       "introduction": "It is older than the Sun at 10.7+1.9−4.5 billion years, but it has a similar fraction of heavy elements."
     }
   },
-  "notes": [],
-  "order": 4822
+  "notes": []
 }

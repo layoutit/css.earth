@@ -1,8 +1,13 @@
 {
   "id": "hat-p-3",
-  "name": "HAT-P-3",
-  "system": "HAT-P-3 system",
+  "name": "Dombay",
+  "system": "Dombay system",
   "description": "Star of 5,185 K, 135 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "HAT-P-3"
+  ],
+  "featured": true,
+  "order": 3031,
   "target": "HAT-P-3",
   "gaia": "1510191594552968832",
   "paper": {
@@ -30,7 +35,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "HAT-P-3 b crosses HAT-P-3 as seen from Earth, which is how it was found.",
+    "card": "HAT-P-3 b crosses Dombay as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Stassun et al. 2017.",
     "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5185, st_rad 0.87, st_mass 1.06",
     "quotes": {
@@ -41,6 +46,5 @@
       "introduction": "At a magnitude of about 11.5 it is not visible to the naked eye but is visible in a small to medium-sized amateur telescope."
     }
   },
-  "notes": [],
-  "order": 3031
+  "notes": []
 }

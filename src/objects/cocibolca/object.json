@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "cocibolca",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Cocibolca",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 667755.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/cocibolca-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Cocibolca",
+      "classification": "star",
+      "color": "#ffeee3",
+      "distanceAu": 7035400.1,
+      "description": "A star about 34 parsecs away, the Sun's width, measured by Gaia.",
+      "systemName": "Cocibolca system",
+      "aliases": [
+        "Gaia DR3 2343647384368388608",
+        "HD 4208",
+        "HIP 3479"
+      ],
+      "order": 5522,
+      "context": {
+        "order": 5519
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        924120385067375700,
+        181533697316530140,
+        -469854267899966300
+      ],
+      "presentationToReference": [
+        0.8780366857313329,
+        -0.43806190418021956,
+        0.19275203401245064,
+        0.17248104097131914,
+        -0.08604439071681377,
+        -0.9812474985097402,
+        -0.4464323789952819,
+        -0.8948173729494596,
+        -0.000007241592119516885
+      ],
+      "orbitUpReference": [
+        0.43806190418021956,
+        0.08604439071681377,
+        0.8948173729494596
+      ],
+      "metersPerUnit": 2154051.290322581,
+      "bodyRadiusM": 667755900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

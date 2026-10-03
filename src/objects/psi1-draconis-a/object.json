@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Psi1 Draconis A",
+      "label": "Dziban",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,19 +94,21 @@
       }
     },
     "catalog": {
-      "name": "Psi1 Draconis A",
+      "name": "Dziban",
       "classification": "star",
       "color": "#fff3f1",
       "distanceAu": 4710257.1,
       "description": "A naked-eye star 23 parsecs away whose disc the CHARA Array measured: 2.3 times the Sun's width.",
-      "systemName": "Psi1 Draconis A system",
+      "systemName": "Dziban system",
       "aliases": [
-        "HD 162003"
+        "HD 162003",
+        "Psi1 Draconis A"
       ],
       "order": 5355,
       "context": {
         "order": 5352
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

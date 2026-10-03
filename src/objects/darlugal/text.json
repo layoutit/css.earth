@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "darlugal",
+  "card": {
+    "text": "A star 22 parsecs away, 2.0 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 27288: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-zeta-leporis",
+        "url": "https://en.wikipedia.org/wiki/Zeta_Leporis",
+        "label": "Wikipedia, \"Zeta Leporis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1345015552",
+        "quote": "Zeta Leporis, Latinized from ζ Leporis formally named Darlugal, is a star approximately 70.5 light-years away in the southern constellation of Lepus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 13 times the Sun's luminosity at 7,737 K, so 2.017 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 27288: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-zeta-leporis",
+        "url": "https://en.wikipedia.org/wiki/Zeta_Leporis",
+        "label": "Wikipedia, \"Zeta Leporis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1345015552",
+        "quote": "It has an apparent visual magnitude of 3.5, which is bright enough to be seen with the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

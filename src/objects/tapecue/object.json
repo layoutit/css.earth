@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tapecue",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tapecue",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 591783.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tapecue-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tapecue",
+      "classification": "star",
+      "color": "#ffebdd",
+      "distanceAu": 6707143,
+      "description": "A star about 33 parsecs away, 85% of the Sun's width, measured by Gaia.",
+      "systemName": "Tapecue system",
+      "aliases": [
+        "Gaia DR3 5488567574038257280",
+        "HD 63765",
+        "HIP 38041"
+      ],
+      "order": 5713,
+      "context": {
+        "order": 5710
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -265660989264984860,
+        522311534898165760,
+        -814478302431904900
+      ],
+      "presentationToReference": [
+        -0.2647728881164158,
+        0.36799155826852875,
+        0.8913346906530634,
+        0.5205654547340121,
+        -0.723525492389949,
+        0.4533458604635684,
+        -0.811730820565576,
+        -0.5840317413505725,
+        -0.000006241377604220638
+      ],
+      "orbitUpReference": [
+        -0.36799155826852875,
+        0.723525492389949,
+        0.5840317413505725
+      ],
+      "metersPerUnit": 1908978.3870967743,
+      "bodyRadiusM": 591783300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

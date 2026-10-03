@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "jiantai",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Jiantai",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 185706679.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/jiantai-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Jiantai",
+      "classification": "star",
+      "color": "#ffc97f",
+      "distanceAu": 46560922.3,
+      "description": "A star 226 parsecs away, 267 times the Sun's width, measured from its light.",
+      "systemName": "Jiantai system",
+      "aliases": [
+        "Delta Lyrae",
+        "HD 175588",
+        "HIP 92791",
+        "HR 7139"
+      ],
+      "order": 5576,
+      "context": {
+        "order": 5573
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1312264555692837000,
+        -5413453641195455000,
+        4182043177270179300
+      ],
+      "presentationToReference": [
+        0.18839720068798252,
+        0.14144581713516508,
+        -0.9718536801329187,
+        -0.777190474002233,
+        -0.5835019646137654,
+        -0.2355852805505058,
+        0.6004010841871594,
+        -0.7996990297023259,
+        -2.0493574045919362e-7
+      ],
+      "orbitUpReference": [
+        -0.14144581713516508,
+        0.5835019646137654,
+        0.7996990297023259
+      ],
+      "metersPerUnit": 599053804.8387097,
+      "bodyRadiusM": 185706679500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

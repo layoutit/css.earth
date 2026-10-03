@@ -1,0 +1,61 @@
+{
+  "id": "hru",
+  "name": "Hru",
+  "system": "Hru system",
+  "description": "A star 6.1 solar radii and 6.25 solar masses, about 240 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 4291462091610511744",
+    "HR 7474",
+    "Sigma Aquilae",
+    "HIP 96665",
+    "HD 185507"
+  ],
+  "featured": true,
+  "target": "HR 7474",
+  "gaia": "4291462091610511744",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 16195,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 4291462091610511744: teff_gspphot 16194.543 K (16th-84th percentiles 15999.62-16440.488), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 220.4
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.52 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 240 parsecs away, 6.1 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 6.1 solar radii and 6.25 solar masses (FLAME) and 16,195 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 4291462091610511744: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Sigma_Aquilae",
+      "title": "Sigma Aquilae",
+      "revision": "1374808306",
+      "card": "Sigma Aquilae, also named Hru, is an eclipsing binary star system in the equatorial constellation of Aquila.",
+      "introduction": "Its Bayer designation is Latinized from σ Aquilae, and abbreviated Sigma Aql or σ Aql."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -4.8,
+    "uncertainty": 0.9,
+    "source": "SIMBAD's radial velocity for Gaia DR3 4291462091610511744 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
+  },
+  "order": 5565
+}

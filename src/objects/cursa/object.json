@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "cursa",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Cursa",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2392512.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/cursa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Cursa",
+      "classification": "star",
+      "color": "#c9d8ff",
+      "distanceAu": 5651023.4,
+      "description": "A star 27 parsecs away, 3.4 times the Sun's width, measured from its light.",
+      "systemName": "Cursa system",
+      "aliases": [
+        "HD 33111",
+        "HIP 23875",
+        "HR 1666",
+        "Beta Eridani"
+      ],
+      "order": 5523,
+      "context": {
+        "order": 5520
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        189968195597181760,
+        820342862997525000,
+        -74958785172997490
+      ],
+      "presentationToReference": [
+        0.2247131675709423,
+        -0.020002578210460427,
+        0.9742196308765124,
+        0.9703826614773376,
+        -0.08637927696786744,
+        -0.22560166403346246,
+        -0.08866500225225521,
+        -0.9960615028076544,
+        4.0585966204495077e-7
+      ],
+      "orbitUpReference": [
+        0.020002578210460427,
+        0.08637927696786744,
+        0.9960615028076544
+      ],
+      "metersPerUnit": 7717781.612903226,
+      "bodyRadiusM": 2392512300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

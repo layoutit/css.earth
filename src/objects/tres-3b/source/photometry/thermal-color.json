@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "tres-3b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1731,
+      "lowerKelvin": 1671,
+      "upperKelvin": 1791,
+      "citation": "Croll et al. 2010, dayside brightness temperature at 2.146 µm (NASA Exoplanet Archive emission table): 1731 +/- 60 K, https://ui.adsabs.harvard.edu/abs/2010ApJ...718..920C/abstract"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse at 2.146 µm (3.58m Canada-France-Hawaii Telescope (CFHT) at Mauna Kea Observatory Wide-field Infrared Camera (WIRCam)) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "1 measured of 6 rows; the smallest relative uncertainty, then the longest wavelength",
+    "wavelengthMicrometres": 2.146,
+    "facility": "3.58m Canada-France-Hawaii Telescope (CFHT) at Mauna Kea Observatory Wide-field Infrared Camera (WIRCam)",
+    "rows": "photometry/emission-spectroscopy.csv"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

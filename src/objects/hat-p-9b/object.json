@@ -1,0 +1,138 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-9b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HAT-P-9 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 99588.4
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HAT-P-9 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 95378218.3,
+      "description": "HAT-P-9 b was found in 2008 by HATNet as it crossed its star.",
+      "systemName": "Tevel system",
+      "order": 5720,
+      "context": {
+        "order": 5720
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3921594739496290000,
+        10676705019860154000,
+        8614852632598396000
+      ],
+      "presentationToReference": [
+        -0.3326015977563739,
+        0.9198050909551823,
+        0.20817005505796501,
+        0.7254244557682302,
+        0.390580408179541,
+        -0.5667506539208138,
+        0.6026072818538406,
+        0.03749052412586556,
+        0.7971567753318627
+      ],
+      "orbitUpReference": [
+        -0.9198050909551823,
+        -0.390580408179541,
+        -0.03749052412586556
+      ],
+      "metersPerUnit": 321252.9032258064,
+      "bodyRadiusM": 99588400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

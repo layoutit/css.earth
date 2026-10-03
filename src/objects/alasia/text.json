@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "alasia",
+  "card": {
+    "text": "A star about 42 parsecs away, 1.1 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 4153637759337630720: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-168746",
+        "url": "https://en.wikipedia.org/wiki/HD_168746",
+        "label": "Wikipedia, \"HD 168746\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374405549",
+        "quote": "HD 168746 is a Sun-like star with a close orbiting exoplanet in the constellation of Serpens."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.1 solar radii and 0.89 solar masses (FLAME) and 5,553 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 4153637759337630720: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-168746",
+        "url": "https://en.wikipedia.org/wiki/HD_168746",
+        "label": "Wikipedia, \"HD 168746\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374405549",
+        "quote": "With an apparent visual magnitude of 7.95, it is too faint to be viewed with the naked eye but is easily visible with binoculars or a small telescope."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

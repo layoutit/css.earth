@@ -4,7 +4,8 @@
     {
       "id": "hd-17156b",
       "name": "HD 17156 b",
-      "description": "Transiting planet of HD 17156 with a 21.2-day year, found in 2007.",
+      "description": "Transiting planet of Nushagak with a 21.2-day year, found in 2007.",
+      "order": 3176,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..252K/abstract",
         "credit": "Kane et al. 2023"
@@ -15,7 +16,7 @@
       },
       "text": {
         "card": "HD 17156 b was found in 2007 by Subaru Telescope as it crossed its star.",
-        "introduction": "It is the only planet known around HD 17156. Its orbit and size follow Kane et al. 2023's fit, the archive's default.",
+        "introduction": "It is the only planet known around Nushagak. Its orbit and size follow Kane et al. 2023's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KANE_ET_AL__2023): disc_year 2007, disc_facility Subaru Telescope, sy_pnum 1; pl_orbper 21.2164387, pl_radj 1.094, pl_bmassj 3.26",
         "quotes": {
           "url": "https://en.wikipedia.org/wiki/HD_17156_b",
@@ -24,8 +25,7 @@
           "card": "HD 17156 b, named Mulchatna by the IAU, is an extrasolar planet approximately 255 light-years away in the constellation of Cassiopeia.",
           "introduction": "The planet was discovered orbiting the yellow subgiant star HD 17156 in April 2007."
         }
-      },
-      "order": 3176
+      }
     }
   ]
 }

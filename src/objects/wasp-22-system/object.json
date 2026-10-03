@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-22-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-22",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Tojil system",
+      "systemName": "Tojil system",
+      "classification": "planetary-system",
+      "color": "#fff6f9",
+      "distanceAu": 65415387,
+      "description": "WASP-22 b crosses Tojil as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5410383602316820000,
+        7132580423128693000,
+        -3952200990088663000
+      ],
+      "presentationToReference": [
+        0.552869962112845,
+        -0.24407295794634354,
+        0.7967202747468298,
+        0.7288557999127434,
+        -0.32176453988315834,
+        -0.6043482471285365,
+        -0.4038613969258468,
+        -0.9148201856502194,
+        -4.202659279355873e-8
+      ],
+      "orbitUpReference": [
+        0.24407295794634354,
+        0.32176453988315834,
+        0.9148201856502194
+      ],
+      "metersPerUnit": 2782800,
+      "bodyRadiusM": 862668000
+    }
+  }
+}

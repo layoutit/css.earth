@@ -1,0 +1,61 @@
+{
+  "id": "brachium",
+  "name": "Brachium",
+  "system": "Brachium system",
+  "description": "A star 88 parsecs away, 107 times the Sun's width, measured from its light.",
+  "aliases": [
+    "HD 133216",
+    "HIP 73714",
+    "HR 5603",
+    "Sigma Librae"
+  ],
+  "featured": true,
+  "target": "HIP 73714",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 106.746,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 73714: radius 106.746 solar radii, implied by the fitted luminosity 1675.97 solar luminosities (fractional uncertainty 0.073) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 3577,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 73714: effective temperature 3577 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.045)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 88.417,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 73714: distance 88.417 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.022), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 1.945
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 88 parsecs away, 107 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 1,676 times the Sun's luminosity at 3,577 K, so 106.746 solar radii.",
+    "locator": "Table 2, HIP 73714: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Sigma_Librae",
+      "title": "Sigma Librae",
+      "revision": "1370789151",
+      "card": "Sigma Librae is a star in the constellation of Libra.",
+      "introduction": "It has the proper name Brachium, Sigma Librae is its Bayer designation."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -3.9,
+    "uncertainty": 0.7,
+    "source": "SIMBAD's radial velocity for Gaia DR3 6227443304915069056 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
+  },
+  "order": 5509
+}

@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "udkadua",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Udkadua",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5253926.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/udkadua-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Udkadua",
+      "classification": "star",
+      "color": "#ffddbb",
+      "distanceAu": 5446643.9,
+      "description": "A star 26 parsecs away, 7.6 times the Sun's width, measured from its light.",
+      "systemName": "Udkadua system",
+      "aliases": [
+        "Lambda Andromedae",
+        "HD 222107",
+        "HIP 116584",
+        "HR 8961"
+      ],
+      "order": 5740,
+      "context": {
+        "order": 5737
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        558653415282633900,
+        -54848033204116824,
+        590599190042590700
+      ],
+      "presentationToReference": [
+        0.6856115018110364,
+        0.7213796181710326,
+        -0.09771548020569995,
+        -0.06731265088751344,
+        -0.07083305822952247,
+        -0.9952143914214409,
+        0.7248488639812517,
+        -0.6889079215318026,
+        0.000005985035297034387
+      ],
+      "orbitUpReference": [
+        -0.7213796181710326,
+        0.07083305822952247,
+        0.6889079215318026
+      ],
+      "metersPerUnit": 16948149.677419353,
+      "bodyRadiusM": 5253926400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "megrez",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Megrez",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1476971.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/megrez-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Megrez",
+      "classification": "star",
+      "color": "#bcd0ff",
+      "distanceAu": 5091618.9,
+      "description": "A star 25 parsecs away, 2.1 times the Sun's width, measured from its light.",
+      "systemName": "Megrez system",
+      "aliases": [
+        "HD 106591",
+        "HIP 59774",
+        "HR 4660",
+        "Delta Ursae Majoris"
+      ],
+      "order": 5613,
+      "context": {
+        "order": 5610
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -413545381221426750,
+        -27887537924925760,
+        639047958505013600
+      ],
+      "presentationToReference": [
+        -0.542927898163542,
+        -0.8370802255528083,
+        -0.067275503596616,
+        -0.03661248084640464,
+        -0.05644040796100798,
+        0.9977344369096753,
+        0.8389808243589304,
+        -0.5441609838436183,
+        0.0000045116591933538785
+      ],
+      "orbitUpReference": [
+        0.8370802255528083,
+        0.05644040796100798,
+        0.5441609838436183
+      ],
+      "metersPerUnit": 4764422.903225807,
+      "bodyRadiusM": 1476971100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

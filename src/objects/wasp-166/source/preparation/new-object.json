@@ -1,8 +1,13 @@
 {
   "id": "wasp-166",
-  "name": "WASP-166",
-  "system": "WASP-166 system",
+  "name": "Filetdor",
+  "system": "Filetdor system",
   "description": "Star of 6,050 K, 114 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "WASP-166"
+  ],
+  "featured": true,
+  "order": 4798,
   "target": "WASP-166",
   "gaia": "5664957444179338240",
   "paper": {
@@ -30,7 +35,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "WASP-166 b crosses WASP-166 as seen from Earth, which is how it was found.",
+    "card": "WASP-166 b crosses Filetdor as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Hellier et al. 2019.",
     "locator": "NASA Exoplanet Archive ps table (st_refname HELLIER_ET_AL__2019): st_teff 6050, st_rad 1.22, st_mass 1.19",
     "quotes": {
@@ -41,6 +46,5 @@
       "introduction": "With an apparent magnitude of 9.4, it is too faint to be visible to the naked eye."
     }
   },
-  "notes": [],
-  "order": 4798
+  "notes": []
 }
