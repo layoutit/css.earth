@@ -15,7 +15,7 @@
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node packages/bake/cli/prepare-object.mts <id> */
 
-import { AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+import { AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA } from '@cssearth/objects';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -173,7 +173,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     resources: [{ label: 'Research', role: 'facts', description: spec.paperCredit, href: spec.paper }],
     provenance: { editorial: { url: spec.paper, credit: spec.paperCredit },
       physical: { path: `../../../../../packages/astronomy/data/bodies/${id}.json`, credit: `Published radius, mass and transit-fitted orbit; ${TODO}` } } });
-  put(`${o}/text.json`, { schema: 'cssearth-object-text@1', objectId: id,
+  put(`${o}/text.json`, { schema: OBJECT_TEXT_SCHEMA, objectId: id,
     card: { text: `${TODO}: one sentence, 110 characters at most.`, sources: [{ catalogueId: `${TODO}-card-source`, url: spec.paper, label: TODO, checked: TODO, locator: TODO, quote: TODO }] },
     introduction: { text: `${TODO}: two sentences, 180 characters at most.`, sources: [{ catalogueId: `${TODO}-introduction-source`, url: spec.paper, label: TODO, checked: TODO, locator: TODO, quote: TODO }] },
     datasets: { shape: { title: 'Shape only', detail: 'Published radius', summary: `${TODO}: what the sphere is and is not, 125 characters at most.` } } });

@@ -29,4 +29,6 @@ See [prepared format ownership](../../../docs/prepared-format-ownership.md) for 
 The source-manifest exception is retained only for the pre-build body-reference check
 and preserved Python distant-worlds authoring.
 [Schema-identifier conformance tests](../../../packages/objects/src/prepared-data/schema-identifiers.test.ts)
-pin both literals to the browser-safe objects constant; changing either spelling must fail.
+pin the manifest, archived-camera and object-text Python literals to their browser-safe objects constants.
+The archived-camera and object-text exceptions retain only bake as an owner: preserved Python writers cannot
+import TypeScript. Changing any retained spelling must fail its conformance test.

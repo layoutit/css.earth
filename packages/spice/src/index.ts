@@ -12,6 +12,6 @@ export {
 } from './frames.js';
 export { ECLIPTIC_OBLIQUITY_RAD, Ephemeris, SPEED_OF_LIGHT_KM_S, stelab } from './geometry.js';
 export {
-  aberrationRotation, invert, pixelModel, spiceCamera, type Aberration, type PixelModel, type PixelModelKeys, type SpiceCamera, type SpiceCameraRequest,
+  aberrationRotation, invert, pixelModel, spiceCamera, type Aberration, type PixelModel, type PixelModelKeys, type SpiceCameraRequest,
 } from './camera.js';
 export { parseApproachRecipe, spacecraftApproach, type ApproachKernels, type ApproachRecipe } from './approach.js';

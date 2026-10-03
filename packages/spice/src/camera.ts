@@ -1,3 +1,4 @@
+import { ARCHIVED_CAMERA_SCHEMA, type SpiceCamera } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 /**
  * A pinhole camera from SPICE kernels for one exposure: the instrument frame's
@@ -33,17 +34,6 @@ export interface SpiceCameraRequest {
   readonly pixels: PixelModelKeys | PixelModel;
   /** Where along its path the observer is taken, when a fit separates that epoch from the pointing epoch `et`. */
   readonly ephemerisEt?: number;
-}
-export interface SpiceCamera {
-  readonly schema: 'cssearth-archived-camera@1';
-  /** Body-fixed kilometres to pixel (column, row) with a positive third coordinate in front of the camera. */
-  readonly matrix: number[][];
-  /** Pixel (column, row, 1) to an unnormalised ray in the body-fixed frame. */
-  readonly rayMatrix: number[][];
-  readonly positionKm: number[]; readonly sunDirection: number[];
-  readonly width: number; readonly height: number;
-  readonly report: { instrumentFrame: string; focalLengthMm: number; pixelPitchMm: number; focalLengthPixels: number; center: number[]; boresight: number[];
-    rangeKm: number; lightTimeSeconds: number; emissionEt: number; aberration: Aberration; aberrationMicroradians: number; sunDistanceKm: number; phaseAngleDegrees: number };
 }
 
 const AXES: Record<string, readonly number[]> = { X: [1, 0, 0], '-X': [-1, 0, 0], Y: [0, 1, 0], '-Y': [0, -1, 0], Z: [0, 0, 1], '-Z': [0, 0, -1] };
@@ -125,7 +115,7 @@ export function spiceCamera({ pool, ephemeris, rotation, observer, target, bodyF
   const sunApparent = ephemeris.apparent(sun, target, emissionEt, { lightTime, stellarAberration, converged });
   const sunDirection = unit(apply(bodyRotation, sunApparent.position));
   const toObserver = unit(positionKm);
-  return { schema: 'cssearth-archived-camera@1', matrix, rayMatrix: rayMatrix.map(row => [...row]), positionKm, sunDirection, width: model.width, height: model.height,
+  return { schema: ARCHIVED_CAMERA_SCHEMA, matrix, rayMatrix: rayMatrix.map(row => [...row]), positionKm, sunDirection, width: model.width, height: model.height,
     report: { instrumentFrame: model.frame, focalLengthMm: model.focalLengthMm, pixelPitchMm: model.pixelPitchMm, focalLengthPixels: f, center: model.center, boresight: [...b],
       rangeKm: Math.hypot(...positionKm), lightTimeSeconds: apparent.lightTimeSeconds, emissionEt, aberration, aberrationMicroradians, sunDistanceKm: Math.hypot(...sunApparent.position),
       phaseAngleDegrees: Math.acos(Math.max(-1, Math.min(1, dot(toObserver, sunDirection)))) * 180 / Math.PI } };

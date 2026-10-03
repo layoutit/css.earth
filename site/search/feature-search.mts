@@ -1,5 +1,5 @@
 import { isRecord } from '@cssearth/core';
-import { searchDestinations } from '@cssearth/objects';
+import { searchDestinations, parsePreparedDestinations } from '@cssearth/objects';
 
 /** A row of the prepared cross-body feature index: enough to list, navigate and select. */
 export interface IndexedFeature { readonly objectId: string; readonly id: string; readonly name: string; readonly type: string; readonly diameterKm: number; readonly searchNames: readonly string[]; readonly searchContext: string;
@@ -41,18 +41,14 @@ export function parseFeatureIndex(value: unknown, pin: FeatureIndexPin): Feature
  * feature of the body already carries (Natural Earth's New York City) is not listed again; its alternate names ("nueva
  * york", "big apple") are returned for that feature instead. */
 export function placeFeatures(pin: PlacePin, catalog: unknown): { features: IndexedFeature[]; aliases: Map<string, readonly string[]> } {
-  if (!isRecord(catalog) || catalog.schema !== 'cssearth-prepared-destinations@1' || !Array.isArray(catalog.places) || catalog.places.length !== pin.count) throw new TypeError(`${pin.objectId}: places catalogue differs from its pin.`);
   const duplicates = new Map(pin.duplicates.map(([placeId, featureId]) => [placeId, featureId]));
   const features: IndexedFeature[] = [], aliases = new Map<string, readonly string[]>();
-  for (const place of catalog.places as unknown[]) {
-    if (!isRecord(place) || typeof place.name !== 'string' || typeof place.context !== 'string' || typeof place.searchContext !== 'string' ||
-        !Array.isArray(place.names) || !place.names.every(name => typeof name === 'string')) throw new TypeError(`${pin.objectId}: place record is invalid.`);
-    const id = String(place.id);
-    if (!/^[0-9]+$/u.test(id)) throw new TypeError(`${pin.objectId}: place id is invalid.`);
+  for (const place of parsePreparedDestinations(catalog, pin)) {
+    const id = place.id;
     const feature = duplicates.get(id);
-    if (feature !== undefined) { aliases.set(feature, [...aliases.get(feature) ?? [], ...place.names as string[]]); continue; }
+    if (feature !== undefined) { aliases.set(feature, [...aliases.get(feature) ?? [], ...place.names]); continue; }
     features.push({ objectId: pin.objectId, id: `${PLACE_FEATURE_PREFIX}${id}`, name: place.name, type: pin.type, diameterKm: 0,
-      searchNames: place.names as string[], searchContext: place.searchContext, context: place.context });
+      searchNames: place.names, searchContext: place.searchContext, context: place.context });
   }
   return { features, aliases };
 }

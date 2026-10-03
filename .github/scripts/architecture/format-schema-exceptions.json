@@ -10,10 +10,9 @@
   {
     "schema": "cssearth-archived-camera@1",
     "owners": [
-      "packages/bake",
-      "packages/spice"
+      "packages/bake"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/spice); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Preserved packages/bake/cli/prepare-archived-camera.py writes cameras read by bake; Python cannot import TypeScript. schema-identifiers.test.ts pins both writer literals to objects."
   },
   {
     "schema": "cssearth-authored-preparation@1",
@@ -229,11 +228,9 @@
   {
     "schema": "cssearth-object-text@1",
     "owners": [
-      "packages/bake",
-      "packages/telescope-cli",
-      "site"
+      "packages/bake"
     ],
-    "reason": "Spelled as a raw string by 3 owners (packages/bake, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Preserved packages/bake/authoring/distant-worlds/author.py writes text read by site; Python cannot import TypeScript. schema-identifiers.test.ts pins the writer literal to objects."
   },
   {
     "schema": "cssearth-observed-stellar-catalogue@1",
@@ -253,14 +250,6 @@
   },
   {
     "schema": "cssearth-prepared-content@2",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-prepared-destinations@1",
     "owners": [
       "packages/bake",
       "site"
