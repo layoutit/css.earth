@@ -48,8 +48,7 @@ export async function renameStars(root: string, ids: readonly string[], archive:
     const own = PROPER_STEPS.has(preferred.step);
     renamed(spec, from, preferred.name, own);
     spec.aliases = [...new Set([...(Array.isArray(spec.aliases) ? spec.aliases : []), from])];
-    // A star with a name of its own is a map target, as the drafts make one (chara.mts, iau.mts).
-    if (own) spec.featured = true;
+    // The name changes and nothing else: a star the map does not name stays a dot of the galaxy's bank (`featured` is the spec's own).
     await write(id, spec);
     const renamedHosts = from === base ? hosted.get(id) ?? [] : [];
     for (const hostedId of renamedHosts) {

@@ -103,7 +103,7 @@ test("a system's exit distance scales the Sun's 100 AU by the prepared framing r
 
 test('every member names its star’s system', () => {
   const renamed = SCENE_OBJECTS.map(object => object.id === 'wasp-43b' ? { ...object, systemName: 'Sextans' } : object);
-  assert.throws(() => planetarySystems(renamed), /wasp-43b orbits WASP-43 but names its system Sextans, not WASP-43 system/u);
+  assert.throws(() => planetarySystems(renamed), /wasp-43b orbits Gnomon but names its system Sextans, not Gnomon system/u);
 });
 
 test("every system's overview lasts two doublings of distance before its orbits are gone, more than one wheel step", async () => {
