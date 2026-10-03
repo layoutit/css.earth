@@ -18,7 +18,8 @@ import { renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation'
 import { type BodyMapFrame, type MeasurementDefinition } from '@cssearth/objects';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
-import { productRecordPath, type ProductInput, type ProductSoftware } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope';
+import { type ProductInput, type ProductSoftware } from '@cssearth/objects';
 import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
 import { horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
 import { horizonsRows, LEAP_SECONDS_KERNEL, leapSecondsKernel, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';

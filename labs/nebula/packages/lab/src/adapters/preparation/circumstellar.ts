@@ -2,7 +2,7 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-export type { EdgeOnReconstruction, EdgeOnSolveInputs } from '../../../../../../../packages/telescope-cli/authoring/circumstellar/author.mts';
+export type { EdgeOnSolveInputs } from '../../../../../../../packages/telescope-cli/authoring/circumstellar/author.mts';
 
 /** The author as the checkout holds it. The lab runner bundles its callers; this loads it unbundled at run time, so the
  * paths it resolves from its own location stay the repository's. */

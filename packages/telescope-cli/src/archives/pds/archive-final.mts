@@ -5,7 +5,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { pdsPackages, WORKSPACE } from '@cssearth/telescope/node';
 import { pdsToolchain } from '@cssearth/telescope/node';
 import { writeProductRecord } from '@cssearth/telescope/node';
-import type { ProductInput, ProductRun } from '@cssearth/telescope';
+import type { ProductInput, ProductRun } from '@cssearth/objects';
 import { archivePrograms } from '../programs.mts';
 
 const ROOT = WORKSPACE;

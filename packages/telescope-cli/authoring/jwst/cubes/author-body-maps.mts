@@ -34,7 +34,7 @@ import { combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects
 import { type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
-import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
+import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../../../..');
 export const JWST_HORIZONS_CENTER = '500@-170';

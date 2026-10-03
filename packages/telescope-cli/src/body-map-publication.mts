@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { PRODUCT_RECORD_SCHEMA } from '@cssearth/objects';
 import { selectedProductInput } from './selected-product.mts';
 import { assessRequest, summarizeSatisfaction, type RequestSatisfaction } from './request-satisfaction.mts';
 /** Bind one scientific question and selected archive program to the exact body-map bytes published for it.
@@ -10,10 +11,10 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, hasErrorCode, requireRecord, requireArray } from '@cssearth/core';
-import { supportsMeasuredResolution, type BodyMapProduct } from '@cssearth/objects';
 import { readFitsHdus, fitsImageAccessor } from '@cssearth/fits';
 import { readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
-import { parseProductRecord, productRecordPath, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope';
+import { parseProductRecord, supportsMeasuredResolution, type BodyMapProduct, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { runKey, sameRun, WORKSPACE } from '@cssearth/telescope/node';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation } from './query.mts';
 import { type ConstraintVerdict, type ObservationSelection } from './query-contract.mts';
@@ -39,7 +40,7 @@ export function bodyMapProductRecord(product: BodyMapProduct, plane: Buffer, met
   software: readonly ProductSoftware[],
   extraOutputs: readonly { readonly path: string; readonly bytes: Buffer; readonly units?: string; readonly conventions?: Readonly<Record<string, string>> }[] = []): ProductRecord {
   const planeName = product.planes.file, metadataName = `${planeName}.body-map.json`;
-  return parseProductRecord({ schema: 'cssearth-telescope-product@1', ...bodyMapRun(product, inputs, software),
+  return parseProductRecord({ schema: PRODUCT_RECORD_SCHEMA, ...bodyMapRun(product, inputs, software),
     outputs: [{ path: planeName, bytes: plane.byteLength, units: product.definition.units },
       { path: metadataName, bytes: metadata.byteLength, conventions: { schema: product.schema } },
       ...extraOutputs.map(output => ({ path: output.path, bytes: output.bytes.byteLength,

@@ -5,7 +5,8 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { loadVoInputs } from './bridge.mts';
 import { explorationAnswer } from '../exploration.mts';
-import { parseLimits, type DiscoverySnapshot, type MetadataResponse } from '@cssearth/telescope/node';
+import { parseLimits } from '@cssearth/telescope/node';
+import { type DiscoverySnapshot, type MetadataResponse } from '@cssearth/objects';
 import { associateTarget, instrumentFacetQuery, mastConeSelection, normalizeSnapshot, SERVICES, targetQuery, verifySnapshot } from './discovery.mts';
 
 const alma = SERVICES[1]!;

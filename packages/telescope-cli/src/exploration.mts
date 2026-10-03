@@ -8,7 +8,8 @@ import { loadQueryInputs, loadTargetCatalogue, type ArchiveSelection } from './q
 import { canonicalTargetRequest, resolveTarget, type TargetResolution } from '@cssearth/telescope';
 import { explorationQualificationFor, type QualificationConfiguration } from './qualification-routes.mts';
 import type { QualifiedObservation } from './qualified-observations.mts';
-import { parseLimits, parseRegion, type TransferLimits } from '@cssearth/telescope/node';
+import { parseLimits, type TransferLimits } from '@cssearth/telescope/node';
+import { parseRegion } from '@cssearth/objects';
 import type { DiscoveryRequest } from './vo/discovery.mts';
 import type { VoInputs } from './vo/bridge.mts';
 import { nativeQualificationRoute } from './vo/access.mts';

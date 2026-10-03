@@ -31,7 +31,7 @@ import { skyImageAxes } from '@cssearth/fits';
 import { positionalArguments } from '@cssearth/core';
 import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 import { assertInputs, fileSize, writeProductRecord } from '@cssearth/telescope/node';
-import type { ProductEvidence, ProductInput, ProductRun } from '@cssearth/telescope';
+import type { ProductEvidence, ProductInput, ProductRun } from '@cssearth/objects';
 import { HST_PROGRAMS, PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses } from './line-stack-ephemeris.mts';
 import {

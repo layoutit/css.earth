@@ -83,21 +83,5 @@
       "src"
     ],
     "reason": "Preserved heliosphere IBEX extract.py writes samples parsed and triangulated by bake; Python cannot import TypeScript. shell-grid-schema.test.ts pins writer and real fixture to SURFACE_GRID_SCHEMA; geometry stays bake."
-  },
-  {
-    "schema": "cssearth-telescope-product@1",
-    "owners": [
-      "packages/telescope",
-      "packages/telescope-cli"
-    ],
-    "reason": "Needs the leaf data types plus EVIDENCE_KINDS moved first (the telescope -> objects dependency already exists), then the record and parser; every archive toolkit and CLI publication imports it (about 67 files)."
-  },
-  {
-    "schema": "cssearth-vo-discovery@1",
-    "owners": [
-      "packages/telescope",
-      "packages/telescope-cli"
-    ],
-    "reason": "Needs the nested MetadataResponse/Pin/Json/region data and parsers moved first (telescope's Json replaced by core's data type; the telescope -> objects dependency already exists), then the snapshot (about 23 files plus closure)."
   }
 ]

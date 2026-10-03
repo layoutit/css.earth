@@ -1,3 +1,4 @@
+import { sourceRecordReaders } from '@cssearth/objects';
 import type { KeplerianElements } from '../../src/kepler.ts';
 import type { VectorRow } from './horizons.mts';
 
@@ -17,27 +18,7 @@ export interface HostedOrbitRecord { periodDays: number; semiMajorAxisStellarRad
   barycentreCompanion?: string;
   sources: { period: string; shape: string; phase: string; orientation: string; eccentricity?: string; argumentOfPeriapsis?: string; constraint?: string; barycentre?: string } }
 
-export function objectValue(value: unknown, label = 'record'): Record<string, unknown> {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${label} must be an object`);
-  return value as Record<string, unknown>;
-}
-export function stringValue(value: unknown, label = 'value'): string {
-  if (typeof value !== 'string') throw new TypeError(`${label} must be a string`);
-  return value;
-}
-export function numberValue(value: unknown, label = 'value'): number {
-  if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${label} must be finite`);
-  return value;
-}
-export function arrayValue(value: unknown, label = 'value'): unknown[] {
-  if (!Array.isArray(value)) throw new TypeError(`${label} must be an array`);
-  return value;
-}
-export function numberVector(value: unknown): [number, number, number] {
-  const values = arrayValue(value);
-  if (values.length !== 3) throw new TypeError('A source vector requires exactly three components');
-  return [numberValue(values[0]), numberValue(values[1]), numberValue(values[2])];
-}
+export const { objectValue, stringValue, numberValue, arrayValue, numberVector } = sourceRecordReaders;
 export function readElementRecord(value: unknown): ElementRecord {
   const record = objectValue(value), elements = objectValue(record.elements);
   return { ...record, query: stringValue(record.query), elements: { ...elements,

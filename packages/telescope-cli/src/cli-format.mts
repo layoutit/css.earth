@@ -5,7 +5,7 @@ import { assessRequest } from './request-satisfaction.mts';
 import type { ExplorationSession, Session } from './session.mts';
 import type { OutputChoice } from './outputs.mts';
 import type { SourceRelevance } from './source-relevance.mts';
-import type { ProductSoftware } from '@cssearth/telescope';
+import type { ProductSoftware } from '@cssearth/objects';
 import type { SourceProcessingSoftware } from './source-product-contract.mts';
 import type { DeliveryContext } from './delivery-context.mts';
 import type { FamilyOperation } from './family-handlers.mts';
