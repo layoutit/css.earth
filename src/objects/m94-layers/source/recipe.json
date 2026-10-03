@@ -115,6 +115,7 @@
     ],
     "bulge": {
       "source": "salo-2015-s4g-decompositions",
+      "lightFrom": "fit",
       "positionAngleDeg": 7.53,
       "sersicIndex": 1.814,
       "halfLightRadiusKpc": 0.4016,
@@ -133,9 +134,9 @@
         "positionAngleDeg": 123.51
       },
       "extentKpc": {
-        "radius": 1.33,
-        "height": 0.89,
-        "fadeFrom": 0.67
+        "radius": 3.21,
+        "height": 2.76,
+        "fadeFrom": 1.6
       }
     }
   },

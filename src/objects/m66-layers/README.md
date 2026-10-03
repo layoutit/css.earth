@@ -19,15 +19,16 @@ A survey image of M66 (NGC 3627), cleaned of the Milky Way stars in front of it 
 - **Registration:** the cutout's registration is its request: a tangent projection centred on the galaxy, north up.
 - **Foreground stars:** the bake removes the Gaia foreground stars where they show and leaves those on extended light.
 - **Color:** tied to RC3's B-V of 0.73 in linear light.
-- **Bulge:** S4G's fit splits the light at each point between the bulge and the rest (disc and bar). The bulge's share leaves the flat picture and fills an oblate spheroid through the disc, with intrinsic axis ratio 0.26 (the one that projects to 0.584 at 57.3°), following the fit's deprojected Sérsic density, so the view from the Sun is unchanged. The spheroid ends at 3.3 half-light radii on the sky (1.03 kpc); its share fades to nothing from half that radius, and it reaches two thirds of that radius either side of the disc. Those three are M81's proportions, presentation choices.
+- **Bulge:** the bulge takes the fit's own light, scaled to the photograph and never more than the photograph holds there, in an oblate spheroid through the disc with intrinsic axis ratio 0.26 (the one that projects to 0.584 at 57.3°) and the fit's deprojected Sérsic density. The flat picture keeps the rest, so the view from the Sun is unchanged and the photograph's own structure stays on the disc. The spheroid ends on its own surface at 8 half-light radii (2.49 kpc), where the fitted bulge is under about 1% of the display's range, fading from half that radius, so it shows no rim: a presentation choice.
 - **Disc:** inclination 57.3°, line of nodes 173.1°, drawn as one flat image on the midplane. The support radius, 18.5 kpc, is 1.2 times the D25 radius (5.1′), a presentation choice that keeps the faint light outside that isophote.
 - **Near side:** the source gives the tilt, not which edge is nearer. The disc is drawn with the edge at position angle 263° nearer: an assumption, not a measurement.
 - **Sky:** the image's sky, (8, 8, 6) of 255 (each channel's median over the frame's outer ring), is subtracted as the background floor (8 of 255).
 
 ## Known problems
 
-- The bulge's depth is modelled from the fit, not measured: the picture's light along our sight lines, spread through the fitted spheroid.
-- Where the survey image is saturated at the centre, the fit's own light stands in, so the bulge's core is plainer than the photograph.
+- The bulge's depth is modelled, not measured: the paper fits light on the sky, and the spheroid is the one that shows its axis ratio at the disc's tilt.
+- The fit is of the 3.6 µm image and the picture is visible light, so the bulge's share of the picture is not exactly the fit's.
+- Where the fit's bulge is as bright as the photograph, the flat picture is empty under it; from the side the nucleus can show as a dark spot on the disc.
 - Which edge of the disc is nearer is assumed.
 - The survey image is shallow: faint outer light is lost, and the brightest part of the centre may be saturated.
 - Fainter and uncatalogued foreground stars remain.

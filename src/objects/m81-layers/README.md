@@ -34,7 +34,8 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 - **Bulge:** S4G's fit splits the light; its bulge becomes an oblate spheroid with intrinsic axis ratio 0.47 (the one that
   projects to 0.654 at 59°), so seen from above it stays round. The fit's bulge falls off more slowly than its disc and
   would keep a quarter of the light at 9 kpc, the arms' light, so its share fades to nothing between 3 and 6 kpc
-  (`extentKpc.fadeFrom`), a presentation choice. Where the photograph is saturated (21,105 pixels) the fit's light
+  (`extentKpc.fadeFrom`), a presentation choice; the fade follows the spheroid's own outline on the sky, and the spheroid
+  itself ends there, so the bulge has no edge but its own. Where the photograph is saturated (21,105 pixels) the fit's light
   stands in.
 - **Disc:** inclination 59.0°, line of nodes 150.2°, support 16.5 kpc (where the frame stops on its tightest side), 32
   slabs with an exponential of 368 pc over ±3 scale heights.
@@ -44,7 +45,7 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 | Catalogue | Drawn | Left out |
 | --- | --- | --- |
 | Planetary nebulae (Jacoby et al. 1989) | 185, 101 of them in the bulge | none |
-| Globular clusters (Nantais & Huchra 2010) | 100, 23 of them in the bulge | 8 beyond the photograph |
+| Globular clusters (Nantais & Huchra 2010) | 100, 19 of them in the bulge | 8 beyond the photograph |
 | Supernova remnants (Vučetić et al. 2015) | 41 | none |
 
 Dots keep their place in the disc and rise along its axis to heights drawn from the 368 pc layer; old objects near the
@@ -55,16 +56,16 @@ approximate.
 
 ![M81 before and after the disc-brightness correction](evidence/2026-10-03/disc-brightness.webp)
 
-The M81 page in headless Chromium at 1440 × 900, device pixel ratio 2, zoomed in, on 2026-10-03: before (top) and after (bottom) the disc's central brightness was taken as projected on the sky; as the page opens, from the side and from above. An unchanged rebake reproduced the published bytes first, so the difference is the correction alone.
+The M81 page in headless Chromium at 1440 × 900, device pixel ratio 2, zoomed in, on 2026-10-03: before (top) and after (bottom) the disc's central brightness was taken as projected on the sky and the bulge was ended on its own spheroid; as the page opens, from the side and from above. An unchanged rebake reproduced the published bytes first, so the difference is the correction alone.
 
 - Dots from the photograph: the default view (left) and tilted (right), in the app with each dot's tone and color taken from the photograph. Captured on 2026-09-29, before the correction above; the dots' tones and colors are made the same way since.
 - The prepared bank's `approximation.limitations` records the foreground, color-tie and saturation counts quoted above.
-- Bytes: 150 layer images, 1.43 MB.
+- Bytes: 151 layer images, 1.36 MB.
 - Tests: `packages/bake/src/image-layers/bulge.test.mts` pins the bulge model and its fade (`extentKpc.fadeFrom`), on M81's fit.
 
 ## Known problems
 
-- Until 2026-10-03 the disc's central brightness was taken face-on, as S4G tabulates it, where the bulge model needs it as projected on the sky (0.66 mag brighter). The bulge's share was too large: 78% of the light at 1 kpc where the fit gives 66%. Corrected, and the dots replaced.
+- Until 2026-10-03 the disc's central brightness was taken face-on, as S4G tabulates it, where the bulge model needs it as projected on the sky (0.66 mag brighter). The bulge's share was too large: 78% of the light at 1 kpc where the fit gives 66%. Corrected, and the dots replaced. The bulge also ended on the box of its slices and on a circle on the sky; it now ends on its own spheroid.
 - One flat disc and one bulge fit; the ongoing interaction with M82 and NGC 3077 is not modelled.
 - The dot catalogues trace old objects; no catalogue of M81's HII regions with positions is on CDS, so its young
   population shows only in the photograph.

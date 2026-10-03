@@ -33,7 +33,7 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
   blue × 0.857 in linear light.
 - **Bulge:** at 76° the photograph's centre is thicker on the sky than S4G's bulge, and a share of it spread through the
   bulge made a box and a band seen from above. So the bulge takes the fit's own light, scaled to the photograph
-  (`lightFrom: fit`), in an oblate spheroid with intrinsic axis ratio 0.55, fading out between 3 and 6 kpc; the disc
+  (`lightFrom: fit`), in an oblate spheroid with intrinsic axis ratio 0.55, fading out between 3 and 6 kpc on the spheroid's own outline; the disc
   keeps the rest. Where the photograph is saturated (11,380 pixels) the fit's light stands in.
 - **Disc:** inclination 76°, line of nodes 55°, support 19.9 kpc (where the frame stops on its tightest side), 32 slabs
   with an exponential of 426 pc over ±3 scale heights.
@@ -42,8 +42,8 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 
 | Catalogue | Drawn | Left out |
 | --- | --- | --- |
-| Planetary nebulae (Congiu et al. 2025) | 571, 87 of them in the bulge | none |
-| Globular clusters (Cantiello et al. 2018) | 21, 2 of them in the bulge | 61 beyond the photograph |
+| Planetary nebulae (Congiu et al. 2025) | 571, 84 of them in the bulge | none |
+| Globular clusters (Cantiello et al. 2018) | 21, 1 of them in the bulge | 61 beyond the photograph |
 | Young star groups (Rodríguez et al. 2018) | 875 | none |
 
 Dots keep their place in the disc and rise along its axis to heights drawn from the 426 pc layer; old objects near the
@@ -53,16 +53,16 @@ centre are bulge members. Colors are the Milky Way's and M31's for each kind; ea
 
 ![NGC 253 before and after the disc-brightness correction](evidence/2026-10-03/disc-brightness.webp)
 
-The NGC 253 page in headless Chromium at 1440 × 900, device pixel ratio 2, zoomed in, on 2026-10-03: before (top) and after (bottom) the disc's central brightness was taken as projected on the sky; as the page opens, from the side and from above. An unchanged rebake reproduced the published bytes first, so the difference is the correction alone.
+The NGC 253 page in headless Chromium at 1440 × 900, device pixel ratio 2, zoomed in, on 2026-10-03: before (top) and after (bottom) the disc's central brightness was taken as projected on the sky and the bulge was ended on its own spheroid; as the page opens, from the side and from above. An unchanged rebake reproduced the published bytes first, so the difference is the correction alone.
 
 - Dots from the photograph: the default view (left) and tilted (right), in the app with each dot's tone and color taken from the photograph. Captured on 2026-09-29, before the correction above; the dots' tones and colors are made the same way since.
 - The prepared bank's `approximation.limitations` records the foreground, color-tie and saturation counts quoted above.
-- Bytes: 162 layer images, 1.69 MB.
+- Bytes: 166 layer images, 1.67 MB.
 - Tests: `packages/bake/src/image-layers/bulge.test.mts` pins the bulge model and its fade (`extentKpc.fadeFrom`), on M81's fit.
 
 ## Known problems
 
-- Until 2026-10-03 the disc's central brightness was taken face-on, as S4G tabulates it, where the bulge model needs it as projected on the sky (1.79 mag brighter for a disc this steep). The bulge's share was too large: 74% of the light at 1 kpc where the fit gives 35%. Corrected, and the dots replaced.
+- Until 2026-10-03 the disc's central brightness was taken face-on, as S4G tabulates it, where the bulge model needs it as projected on the sky (1.79 mag brighter for a disc this steep). The bulge's share was too large: 74% of the light at 1 kpc where the fit gives 35%. Corrected, and the dots replaced. The bulge also ended on the box of its slices and on a circle on the sky; it now ends on its own spheroid.
 - Nearly edge-on: seen from above, the disc's light near the minor axis is thin and its outer edge smears; the bar and
   the starburst wind are not modelled.
 - The planetary nebulae cover the MUSE mosaic and the young groups the HST fields only.
