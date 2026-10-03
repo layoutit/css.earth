@@ -1,5 +1,5 @@
-import { OBJECT_SCHEMA } from '@cssearth/objects';
 /** Export the existing physical point/volume package. This does not infer depth from a spectral cube. */
+import { OBJECT_SCHEMA, type PreparedCssPointField, type PreparedCssVolume, type PreparedVolumeDatasets } from '@cssearth/objects';
 import { readFile,writeFile,mkdir,mkdtemp,rm,rmdir,rename,realpath } from 'node:fs/promises';
 import { resolve,dirname,relative,isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -8,7 +8,6 @@ import { build } from 'esbuild';
 import { requireRecord,requireString } from '@cssearth/core';
 import { VERSION } from './help.mts';
 import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
-import type { PreparedCssPointField, PreparedCssVolume, PreparedVolumeDatasets } from '@cssearth/objects';
 import type { ProductInput } from '@cssearth/telescope';
 
 export type SpatialKind='points'|'volume'|'volume-dataset-bank';

@@ -1,6 +1,6 @@
+/** Prepared catalogue contract. Historical schema identifiers are preserved byte-for-byte. */
 export const PREPARED_LMC_STARS_SCHEMA = 'cssearth-lmc-stars@1';
 export const PREPARED_CATALOGUE_STARS_SCHEMA = 'cssearth-catalogue-stars@2';
-/** Prepared catalogue contract. Historical schema identifiers are preserved byte-for-byte. */
 import type { DensityVolumeFrame } from '../density-volume.js';
 
 export interface PreparedLmcStar {

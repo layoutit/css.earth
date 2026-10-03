@@ -1,4 +1,4 @@
-import { PREPARED_CATALOGUE_STARS_SCHEMA } from '@cssearth/objects';
+import { PREPARED_CATALOGUE_STARS_SCHEMA, type PreparedLmcStars } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 /**
  * Offline preparation of the published Bonanos et al. (2009) massive LMC star sample inside the current
@@ -11,7 +11,6 @@ import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { STAR_PHOTOMETRY } from '@cssearth/bake/volume';
-import { type PreparedLmcStars } from '@cssearth/objects';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { loadFiniteModelStarContext, type FiniteModelStarContext } from '../../server/workflows/stars/finite-model-star-context.ts';
 import { placeCatalogueStarsInFiniteModel, preparedStarsLayerPath, readFiniteDatasetRecipe, finiteModelSubjectId,

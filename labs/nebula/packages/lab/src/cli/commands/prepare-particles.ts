@@ -1,4 +1,4 @@
-import { OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
+import { OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA, type VolumeRecipe, type Vector3 } from '@cssearth/objects';
 import {rotateParticles} from '@cssearth/nebula-reconstruction/stars/rotate-particles';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Reproducible local experiment: a pinned simulation snapshot, photograph colors, and the shared volume baker. */
@@ -11,8 +11,6 @@ import { convertParticlesToDensityVolume } from '../../server/workflows/stars/pa
 import type { ParticlePhotoEmissionOptions } from '../../server/workflows/stars/particles.ts';
 import { extractExtendedSource } from '@cssearth/nebula-reconstruction/star-removal/extraction';
 import { createParticleAlignmentDiagnostic } from '@cssearth/nebula-reconstruction/registration/particle-alignment';
-import type { VolumeRecipe } from '@cssearth/objects';
-import type { Vector3 } from '@cssearth/objects';
 
 interface ParticleExperiment {
   schema: 'cssearth-magellanic-particle-experiment@1';

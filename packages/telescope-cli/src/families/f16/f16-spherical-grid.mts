@@ -1,5 +1,5 @@
-import { OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
 /** Archive spherical physical grids -> the existing cssEarth density-volume package. */
+import { OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

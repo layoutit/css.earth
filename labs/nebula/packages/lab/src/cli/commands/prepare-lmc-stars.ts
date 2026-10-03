@@ -1,10 +1,9 @@
-import { PREPARED_LMC_STARS_SCHEMA } from '@cssearth/objects';
+import { PREPARED_LMC_STARS_SCHEMA, type DensityVolumeFrame } from '@cssearth/objects';
 import {sampleJointDepth as sampleDepth} from '@cssearth/nebula-reconstruction/stars/joint-depth';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Offline preparation of the published Bonanos et al. (2009) massive LMC star sample. */
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { basename } from 'node:path';
-import type { DensityVolumeFrame } from '@cssearth/objects';
 import { prepareStarPhotometry, STAR_PHOTOMETRY, rayToOverlayPlane, type ImageWcs } from '@cssearth/bake/volume';
 import { catalogueColor } from '../../adapters/sources/stellar-color.ts';
 import { createObservationMapping, type ObservationMapping } from '../../adapters/preparation/observation-prior.ts';

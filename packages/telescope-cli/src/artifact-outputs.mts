@@ -1,5 +1,5 @@
-import { OBJECT_SCHEMA } from '@cssearth/objects';
 /** Inspect a verified artifact and name only the next outputs its present facts can support. */
+import { OBJECT_SCHEMA } from '@cssearth/objects';
 import { readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';

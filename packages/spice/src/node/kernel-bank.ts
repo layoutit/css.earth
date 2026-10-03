@@ -1,4 +1,3 @@
-import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects';
 /**
  * Shared SPICE kernel banks: one declared set of a mission's kernels under the checkout's
  * `src/spice/<set>/`, used by every body that mission observed. A bank's
@@ -15,6 +14,7 @@ import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects';
  * bank's first kernel unless the options give others. A recipe names the bank with
  * `spice.kernelSet` and lists kernels by their paths inside it, in load order.
  */
+import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects';
 import { lstat, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';

@@ -1,5 +1,5 @@
-export const SOURCE_CATALOG_SCHEMA = 'cssearth-source-catalog@1';
 /** Canonical published identities. Local files and claim-specific citations keep their own evidence. */
+export const SOURCE_CATALOG_SCHEMA = 'cssearth-source-catalog@1';
 export type SourceKind = 'data-product' | 'publication' | 'model' | 'reference-page' | 'software' | 'artwork';
 export type SourceRole = 'material' | 'method' | 'reference' | 'artwork';
 export type SourceEvidence =

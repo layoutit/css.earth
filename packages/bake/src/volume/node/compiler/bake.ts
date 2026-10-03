@@ -1,14 +1,11 @@
-import { COMPILER_BAKE_SCHEMA } from '@cssearth/objects';
 /** Offline transport for one fitted neutral field and source-dependent RGB datasets. */
+import { COMPILER_BAKE_SCHEMA, readVolumeLayerPlan, readLayerOptimizationReport, createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount, readCompilerBakeResult, validCompilerName, validCompilerImageWidth, COMPILER_IMAGE_WIDTH, validCompilerStarSize, validCompilerStarMaterials, type DensityVolumeFrame, type Vector3, type RenderElementProfile, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites, type EmissionBounds, type EmissionVector3, type SkyBounds, type VolumeSlices, type CompilerStarInput } from '@cssearth/objects';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative } from 'node:path';
 import sharp from 'sharp';
-import { type DensityVolumeFrame, type Vector3, readVolumeLayerPlan, readLayerOptimizationReport, createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount, type RenderElementProfile, readCompilerBakeResult, validCompilerName, validCompilerImageWidth, COMPILER_IMAGE_WIDTH, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites, type EmissionBounds, type EmissionVector3, type SkyBounds } from '@cssearth/objects';
-import { type VolumeSlices } from '@cssearth/objects';
 import { compilerSlabMaterial } from '../../materials/slab-material.ts';
 import { optimizeVolumeLayers } from '../../sampling/layer-optimization.ts';
 import { compilerFrame, compilerPreparedPoint, compilerPreparedSlices, compilerSliceCounts, validCompilerBounds } from '../../coordinates/compiler-frame.ts';
-import type { CompilerStarInput } from '@cssearth/objects';
 import { containedPath, sourceBytes } from '../compact-inputs/density-grid.ts';
 import { recolorCloudSlices } from '../slices/material.ts';
 import { bakeMasterVolumeSlices } from '../slices/emission.ts';

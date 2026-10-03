@@ -1,8 +1,6 @@
-import { LAYER_OPTIMIZATION_SCHEMA, VOLUME_LAYER_PLAN_SCHEMA } from '@cssearth/objects';
+import { LAYER_OPTIMIZATION_SCHEMA, VOLUME_LAYER_PLAN_SCHEMA, readVolumeLayerPlan, DEFAULT_VOLUME_LAYER_BUDGET, readLayerOptimizationReport, type Axis, type Bounds3, type Vector3, type VolumeLayerPlan, type LayerOptimizationReport, type Cancellation } from '@cssearth/objects';
 import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 /** Offline allocation of a global slab budget. Geometry is sampled again at full resolution afterwards. */
-import { type Axis, type Bounds3, type Vector3, readVolumeLayerPlan, type VolumeLayerPlan, DEFAULT_VOLUME_LAYER_BUDGET, readLayerOptimizationReport, type LayerOptimizationReport } from '@cssearth/objects';
-import type { Cancellation } from '@cssearth/objects';
 
 export interface LayerOptimizationOptions {
   bounds: Bounds3;

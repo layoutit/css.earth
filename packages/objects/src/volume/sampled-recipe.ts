@@ -1,5 +1,5 @@
-export const NEBULA_PHYSICAL_EVIDENCE_SCHEMA = 'cssearth-nebula-physical-evidence@1';
 /** A qualified spatial sample set and explicitly authored analytic components. No object-specific code. */
+export const NEBULA_PHYSICAL_EVIDENCE_SCHEMA = 'cssearth-nebula-physical-evidence@1';
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 const jointPath = (v: unknown): v is string => typeof v === 'string' && v.length > 0 && !v.startsWith('/') && !/[\\:?#\s]/.test(v) && v.split('/').every(p => p && p !== '.' && p !== '..');
 import type { EmissionVector3 } from './coordinates.js';
