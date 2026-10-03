@@ -1,6 +1,6 @@
 import { isRecord } from '@cssearth/core';
-import { validateWorldRotation } from './world-rotation.js';
-import type { WorldRotation } from './world-rotation.js';
+import { validateWorldRotation } from '@cssearth/core';
+import type { WorldRotation } from '@cssearth/core';
 
 /** The package's prepared arrival image and viewing angle, in its presentation frame. */
 export interface PreparedArrivalBillboard { url: string; size: number; focalPixels: number; distanceM: number; dataset: string; rotation: WorldRotation; }

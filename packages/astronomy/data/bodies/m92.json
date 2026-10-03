@@ -1,0 +1,28 @@
+{
+  "id": "m92",
+  "classification": "globular-cluster",
+  "order": 5292,
+  "physical": {
+    "name": "M92",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M92 is recorded: it is an extended star cluster, and its package frames it at 31.1 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 259.280762,
+    "declinationDegrees": 43.135944,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 8500,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": -120.55,
+    "sources": {
+      "position": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6341: NGC_6341, RA 259.280762, DEC 43.135944 (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)",
+      "distance": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6341: Rsun 8.5 ± 0.07 kpc (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Baumgardt's orbits table, NGC_6341: <RV> -120.55 ± 0.27 km/s (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)"
+    }
+  }
+}

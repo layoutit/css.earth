@@ -58,8 +58,12 @@ export async function requireAuthoredWorldFrame({ scene: sceneInput, runtime: ru
   if (contextual) return;
   const camera = requireRecord(runtime.camera, 'Authored runtime camera');
   const shape = requireRecord(recipe.shape, 'Authored shape');
-  const renderedRadius = requireFiniteNumber(receipt.sourceRadiusUnits, 'Source radius') * requireFiniteNumber(receipt.tilePixels, 'Tile pixels') * requireFiniteNumber(camera.sceneScale, 'Scene scale');
+  // A scene with no surface stands in the ecliptic presentation frame at the radius its solar-system source authors
+  // (site/build/prepare/prepare-world-navigation.ts): its receipt records that rendered radius, with no surface tiles to scale.
+  const surfaceless = receipt.model === 'ecliptic-presentation-frame';
+  const renderedRadius = surfaceless ? requireFiniteNumber(receipt.renderedRadiusUnits, 'Rendered radius')
+    : requireFiniteNumber(receipt.sourceRadiusUnits, 'Source radius') * requireFiniteNumber(receipt.tilePixels, 'Tile pixels') * requireFiniteNumber(camera.sceneScale, 'Scene scale');
   if (!Number.isFinite(renderedRadius) || renderedRadius <= 0 || receipt.renderedRadiusUnits !== renderedRadius ||
-    receipt.sceneScale !== camera.sceneScale || frame.bodyRadiusM !== requireFiniteNumber(shape.radiusKm, 'Shape radius') * 1000 ||
+    (!surfaceless && receipt.sceneScale !== camera.sceneScale) || frame.bodyRadiusM !== requireFiniteNumber(shape.radiusKm, 'Shape radius') * 1000 ||
     frame.metersPerUnit !== requireFiniteNumber(frame.bodyRadiusM, 'Body radius') / renderedRadius) fail('does not reproduce its authored shape and prepared scene scale');
 }

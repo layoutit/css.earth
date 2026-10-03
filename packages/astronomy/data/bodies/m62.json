@@ -1,0 +1,28 @@
+{
+  "id": "m62",
+  "classification": "globular-cluster",
+  "order": 5262,
+  "physical": {
+    "name": "M62",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M62 is recorded: it is an extended star cluster, and its package frames it at 36.5 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 255.304153,
+    "declinationDegrees": -30.11339,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 6030,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": -73.98,
+    "sources": {
+      "position": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6266: NGC_6266, RA 255.304153, DEC -30.11339 (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)",
+      "distance": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6266: Rsun 6.03 ± 0.09 kpc (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Baumgardt's orbits table, NGC_6266: <RV> -73.98 ± 0.67 km/s (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m60-volume",
+  "name": "M60",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m60-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "labs/nebula/models/m60/experiment.json"
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/m60-volume/source/delivery.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "SDSS · optical",
+      "title": "M60 in visible light",
+      "description": "The Sloan Digital Sky Survey's view of M60 with the Milky Way stars removed (NOX) and neighbouring galaxies masked, its light spread in depth through the spheroid of Kormendy et al.'s measured profile. Depth is modelled, not measured.",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "detail": "2700 × 2700 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "SDSS g, r, i"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "23.1 × 23.1 arcmin"
+        },
+        {
+          "id": "distance",
+          "label": "Distance",
+          "value": "16.7 Mpc"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": ".local/nebula-lab/planetary/m60-inferred-original.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=2700&height=2700&fov=0.385237&projection=TAN&coordsys=icrs&ra=190.916504&dec=11.552706&format=jpg"
+      }
+    }
+  ]
+}

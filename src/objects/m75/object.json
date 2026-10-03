@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m75",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "M75",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 860784379573803.6
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M75",
+      "systemName": "Milky Way",
+      "classification": "globular-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 4232553824,
+      "description": "M75 is a globular star cluster in the Milky Way, about 20,520 parsecs away.",
+      "aliases": [
+        "Messier 75",
+        "NGC 6864"
+      ],
+      "order": 5275,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        307089047351684100000,
+        -500735593036775750000,
+        -236385723753946780000
+      ],
+      "presentationToReference": [
+        0.48518376195790375,
+        0,
+        -0.8744122123646124,
+        -0.80225751969876,
+        0.3977771559319137,
+        -0.44514739840362055,
+        -0.3478212029465281,
+        -0.9174820620691818,
+        -0.19299501693596158
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 2776723805076786,
+      "bodyRadiusM": 860784379573803600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

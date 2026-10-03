@@ -1,4 +1,5 @@
-import { type PreparedCssVolume, type WorldCameraPose } from '@cssearth/objects';
+import { type PreparedCssVolume } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import type { PhysicalCameraPose, PositionM } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 

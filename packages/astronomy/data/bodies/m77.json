@@ -1,0 +1,28 @@
+{
+  "id": "m77",
+  "classification": "galaxy",
+  "order": 5277,
+  "physical": {
+    "name": "M77",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M77 is recorded: it is an extended galaxy, and its package frames it at 14,900 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 40.669729,
+    "declinationDegrees": -0.013278,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 13970000,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 1141.2,
+    "sources": {
+      "position": "HyperLEDA (Makarov et al. 2014), NGC1068 = PGC 10266: centre, type Sb, D25 diameter 6.1 arcmin (http://atlas.obs-hp.fr/hyperleda/)",
+      "distance": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC1068: distance 13.97 ± 2.11 Mpc, from the compilation of Anand et al. (2021) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43)",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "HyperLEDA (Makarov et al. 2014), NGC1068 = PGC 10266: heliocentric radial velocity 1141.2 ± 6.4 km/s (http://atlas.obs-hp.fr/hyperleda/)"
+    }
+  }
+}

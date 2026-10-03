@@ -11,7 +11,8 @@ import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.t
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 
 import { required, position, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
-import { type WorldCameraPose, type PreparedWorldCameraFrame, type PreparedArrivalView } from '@cssearth/objects';
+import { type PreparedWorldCameraFrame, type PreparedArrivalView } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';

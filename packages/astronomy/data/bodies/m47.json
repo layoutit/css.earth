@@ -1,0 +1,28 @@
+{
+  "id": "m47",
+  "classification": "open-cluster",
+  "order": 5247,
+  "physical": {
+    "name": "M47",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M47 is recorded: it is an extended star cluster, and its package frames it at 7.7 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 114.16908692,
+    "declinationDegrees": -14.49265462,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 468.27206923,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 34.31254399,
+    "sources": {
+      "position": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2422: RA_ICRS 114.16908692, DE_ICRS -14.49265462, the densest point of its members (epoch 2016.0) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "distance": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2422: dist50, the median of the maximum-likelihood distance, 468.27206923 pc (16th to 84th percentile 468 to 469) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Hunt & Reffert (2023), Table 3, NGC_2422: mean Gaia DR3 radial velocity 34.31254399 km/s of 197 members (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)"
+    }
+  }
+}

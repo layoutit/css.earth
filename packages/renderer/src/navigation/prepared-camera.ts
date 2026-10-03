@@ -1,4 +1,5 @@
-import { type CameraPose, cameraProjectionScale, worldCameraFromCenteredPresentation, worldCameraFromPresentation, type PerspectiveCameraPlan, type PreparedWorldCameraFrame, type WorldCameraPose } from '@cssearth/objects';
+import { type CameraPose, type PerspectiveCameraPlan, type PreparedWorldCameraFrame } from '@cssearth/objects';
+import { cameraProjectionScale, worldCameraFromCenteredPresentation, worldCameraFromPresentation, type WorldCameraPose } from '@cssearth/engine';
 
 import { preparedScenePitch } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';

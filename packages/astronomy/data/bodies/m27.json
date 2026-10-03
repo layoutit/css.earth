@@ -1,0 +1,28 @@
+{
+  "id": "m27",
+  "classification": "nebula",
+  "order": 5227,
+  "physical": {
+    "name": "Dumbbell Nebula",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Dumbbell Nebula is recorded: it is an extended nebula, and its package frames it at 0.50 pc (object.json worldFrame.bodyRadiusM), half its picture's long side, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 299.90156395898,
+    "declinationDegrees": 22.72121423511,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 388.007460307672,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "Chornay & Walton (2021), PN G060.8-03.6: its central star, Gaia EDR3 1827256624493300096",
+      "distance": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G060.8-03.6: distance 388 pc (382 to 394) from the Gaia EDR3 parallax of its central star (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110)",
+      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Zero: no radial velocity is recorded for the nebula here."
+    }
+  }
+}

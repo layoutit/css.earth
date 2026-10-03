@@ -1,0 +1,28 @@
+{
+  "id": "m32",
+  "classification": "galaxy",
+  "order": 5232,
+  "physical": {
+    "name": "M32",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M32 is recorded: it is an extended galaxy, and its package frames it at 1,374 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 10.674104,
+    "declinationDegrees": 40.865165,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 775889.7239198748,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": -199.7,
+    "sources": {
+      "position": "HyperLEDA (Makarov et al. 2014), NGC0221 = PGC 2555: centre, type E, D25 diameter 7.7 arcmin (http://atlas.obs-hp.fr/hyperleda/)",
+      "distance": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 2555: distance modulus 24.449 ± 0.01 mag (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94)",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "HyperLEDA (Makarov et al. 2014), NGC0221 = PGC 2555: heliocentric radial velocity -199.7 ± 0.5 km/s (http://atlas.obs-hp.fr/hyperleda/)"
+    }
+  }
+}

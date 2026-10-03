@@ -1,0 +1,28 @@
+{
+  "id": "m54",
+  "classification": "globular-cluster",
+  "order": 5254,
+  "physical": {
+    "name": "M54",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M54 is recorded: it is an extended star cluster, and its package frames it at 63.3 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 283.763855,
+    "declinationDegrees": -30.479862,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 26280,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 143.13,
+    "sources": {
+      "position": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6715: NGC_6715, RA 283.763855, DEC -30.479862 (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)",
+      "distance": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6715: Rsun 26.28 ± 0.33 kpc (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Baumgardt's orbits table, NGC_6715: <RV> 143.13 ± 0.43 km/s (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)"
+    }
+  }
+}

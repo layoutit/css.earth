@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m71",
+  "card": {
+    "text": "M71 is a globular star cluster in the Milky Way, about 4,000 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6838: Rsun 4 ± 0.05 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_6838: Rsun 4 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-71",
+        "url": "https://en.wikipedia.org/wiki/Messier_71",
+        "label": "Wikipedia, \"Messier 71\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373099974",
+        "quote": "Messier 71 is a globular cluster in the small northern constellation Sagitta."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M71 is drawn as 2,274 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6838: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6838: 2,274 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-71",
+        "url": "https://en.wikipedia.org/wiki/Messier_71",
+        "label": "Wikipedia, \"Messier 71\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373099974",
+        "quote": "It was discovered by Philippe Loys de Chéseaux in 1745 and included by Charles Messier in his catalog of non-comet-like objects in 1780."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "2,274 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6838: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6838, inrt = True"
+        }
+      ]
+    }
+  }
+}

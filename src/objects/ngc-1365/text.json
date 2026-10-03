@@ -50,7 +50,7 @@
     "optical": {
       "title": "NGC 1365 in visible light",
       "detail": "3383 × 3263 px",
-      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "summary": "Flat picture on the measured disc; the bulge of a published fit stands through it. Depth is modelled.",
       "sources": [
         {
           "catalogueId": "noirlab-iotw2127a",
@@ -58,6 +58,13 @@
           "label": "Portrait of the Great Barred Spiral; Dark Energy Survey/DOE/FNAL/DECam/CTIO/NOIRLab/NSF/AURA",
           "checked": "2026-10-02",
           "locator": "Portrait of the Great Barred Spiral"
+        },
+        {
+          "catalogueId": "salo-2015-s4g-decompositions",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
+          "label": "Salo et al. (2015), ApJS 219, 4: S4G Pipeline 4 decompositions, table 7",
+          "checked": "2026-10-03",
+          "locator": "NGC1365, model _bdbarfn: bulge 25.0% of the light, Re 12.64 arcsec, n 0.857"
         }
       ]
     }

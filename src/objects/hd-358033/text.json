@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-358033",
+  "card": {
+    "text": "A star of M73, a chance alignment of stars once thought to be a small cluster.",
+    "sources": [
+      {
+        "catalogueId": "page-arxiv-org-abs-astro-ph-0111601",
+        "url": "https://arxiv.org/abs/astro-ph/0111601",
+        "label": "arxiv.org/abs/astro-ph/0111601",
+        "checked": "2026-10-03",
+        "locator": "Title and abstract: NGC 6994 = M73 is clearly not a physical stellar ensemble"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M73 (NGC 6994) is an asterism: its stars lie at different distances and are not bound to each other.",
+    "sources": [
+      {
+        "catalogueId": "page-arxiv-org-abs-astro-ph-0111601",
+        "url": "https://arxiv.org/abs/astro-ph/0111601",
+        "label": "arxiv.org/abs/astro-ph/0111601",
+        "checked": "2026-10-03",
+        "locator": "Title and abstract: NGC 6994 = M73 is clearly not a physical stellar ensemble"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

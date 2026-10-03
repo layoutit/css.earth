@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { compileCssSky } from '@cssearth/bake/sky';
 import { preparedSkyCameraTransform } from '@cssearth/renderer/sky/prepared-sky-runtime.ts';
-import { validatePreparedCssSky, type PreparedCssVolume, type WorldCameraPose } from '@cssearth/objects';
+import { validatePreparedCssSky, type PreparedCssVolume } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import type { BakedSky } from '@cssearth/bake/sky';
 
 const viewport = { focalPixels: 600, principalOffsetPixels: [17, -11] } as const;

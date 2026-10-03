@@ -1,0 +1,82 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/m16-layers/source/starless.jpg",
+      "origin": "https://cdn.eso.org/images/publicationjpg/eso0926a.jpg",
+      "sourceUrl": "https://www.eso.org/public/images/eso0926a/",
+      "title": "The Eagle Nebula",
+      "credit": "ESO",
+      "displayCredit": "ESO",
+      "acquisition": "The publisher's JPEG (4000 x 4000 px) with its stars removed by `node labs/nebula/run.mts remove-stars src/objects/m16-layers --coarse=4` (NOX over the whole picture). NOX then ran again over a copy a quarter of the size (1000 x 1000 px), where the saturated stars are small enough for it, and the picture took that pass's result where it took a star: 2.71% of the picture. Restored from the source cache; not tracked. Its place on the sky is the file's embedded tags (recipe observation). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0926a",
+            "role": "material",
+            "evidence": "src/objects/m16-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "MPG/ESO 2.2-metre telescope, Wide Field Imager",
+            "evidence": "https://www.eso.org/public/images/eso0926a/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      },
+      "generator": "labs/nebula/run.mts remove-stars"
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/m16-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/m16-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/m16-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

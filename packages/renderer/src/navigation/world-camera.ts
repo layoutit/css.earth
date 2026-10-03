@@ -1,4 +1,6 @@
-import { cameraProjectionScale, worldCameraFocusFrame as focusFrame, validateWorldCameraViewport as validateViewport, type WorldCameraPose, type LocalWorldCameraPresentation, type PreparedWorldCameraFrame } from '@cssearth/objects';
+import type { PreparedWorldCameraViewport } from '@cssearth/engine';
+import { type PreparedWorldCameraFrame } from '@cssearth/objects';
+import { cameraProjectionScale, worldCameraFocusFrame as focusFrame, validateWorldCameraViewport as validateViewport, type WorldCameraPose, type LocalWorldCameraPresentation } from '@cssearth/engine';
 import { cameraPoseFromReferenceFrame } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
 import { silhouetteEllipse } from '@cssearth/engine';
@@ -9,15 +11,10 @@ import {
 } from '@cssearth/engine';
 
 
-export interface WorldCameraViewport {
-  readonly focalPixels: number;
-  /** Scale already included in focalPixels. */
-  readonly projectionScale?: number;
+export interface WorldCameraViewport extends PreparedWorldCameraViewport {
   /** Measured layout dimensions, transported with the camera rather than read after frame writes. */
   readonly widthPixels?: number;
   readonly heightPixels?: number;
-  /** Relative to the selected presentation root centre, in CSS pixels. */
-  readonly principalOffsetPixels: readonly [number, number];
   /** The top band of the stage the shell header covers, in CSS pixels: scene labels stay below it. */
   readonly coveredTopPixels?: number;
 }

@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "jordan-gc",
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+recno%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJS%2F180%2F54%2Ftable4%22+WHERE+VCC%3D798+AND+pGC%3E%3D0.5",
+    "bytes": 14114,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "spheroid",
+    "converter": "Each sky position at a depth drawn from the spheroid's density along its sight line (frame.spheroid).",
+    "spheroid": {
+      "centerRaDeg": 186.350004,
+      "centerDecDeg": 18.190178,
+      "distancePc": 17741895,
+      "halfLightRadiusKpc": 11.1,
+      "sersicIndex": 6.12,
+      "axisRatio": 0.714,
+      "axisPositionAngleDeg": 97.63,
+      "cutoffHalfLightRadii": 4.697,
+      "source": "kormendy-2009-virgo-ellipticals",
+      "basis": "The spheroid the volume's light is spread through (labs/nebula/models/m85/experiment.json shapePrior): Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4382 (n = 6.12, half-light radius 128.89 arcsec, 11.1 kpc at 17.7 Mpc), axis along M85's minor axis in the plane of the sky, ending at 4.697 half-light radii, where their Table 3 profile stops. Each cluster's depth is drawn from it, not measured."
+    }
+  },
+  "source": "jordan-2009-acsvcs-globular-clusters",
+  "meaning": "Globular clusters in the Hubble ACS field on M85's centre (Jordán et al. 2009, Table 4, VCC 798, probability of being a globular cluster at least 0.5, the authors' own cut): one dot per cluster at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange."
+  }
+}

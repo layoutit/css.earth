@@ -1,0 +1,621 @@
+{
+  "schema": "cssearth-compact-symmetry@1",
+  "recipe": {
+    "schema": "cssearth-emission-inference@1",
+    "id": "m89-inferred",
+    "source": {
+      "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=2100&height=2100&fov=0.294936&projection=TAN&coordsys=icrs&ra=188.916041&dec=12.556242&format=jpg",
+      "width": 2100,
+      "height": 2100,
+      "publisher": "https://www.sdss.org/",
+      "credit": "Sloan Digital Sky Survey DR9, g, r and i color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+    },
+    "crop": {
+      "left": 0,
+      "top": 0,
+      "width": 2100,
+      "height": 2100
+    },
+    "pointMasks": [],
+    "neighbourMasks": {
+      "source": "paturel-2003-hyperleda-pgc and the 2MASS Extended Source Catalog (galaxies), gaia-2023-dr3 (stars)",
+      "fill": "isophote",
+      "masks": [
+        {
+          "name": "PGC 169577",
+          "x": 1364,
+          "y": 1019,
+          "radius": 118
+        },
+        {
+          "name": "PGC 165254",
+          "x": 365,
+          "y": 1040,
+          "radius": 85
+        },
+        {
+          "name": "PGC 165250",
+          "x": 463,
+          "y": 2166,
+          "radius": 71
+        },
+        {
+          "name": "PGC 165245",
+          "x": 1094,
+          "y": 1571,
+          "radius": 66
+        },
+        {
+          "name": "PGC 169572",
+          "x": 1740,
+          "y": 1537,
+          "radius": 59
+        },
+        {
+          "name": "PGC 169586",
+          "x": 903,
+          "y": 730,
+          "radius": 59
+        },
+        {
+          "name": "PGC 169582",
+          "x": 1289,
+          "y": 1996,
+          "radius": 53
+        },
+        {
+          "name": "PGC 41935 (VCC1613)",
+          "x": 1430,
+          "y": 1238,
+          "radius": 36
+        },
+        {
+          "name": "PGC 169571",
+          "x": 1758,
+          "y": 1549,
+          "radius": 35
+        },
+        {
+          "name": "2MASX J12360351+1233251",
+          "x": 364,
+          "y": 1044,
+          "radius": 65
+        },
+        {
+          "name": "2MASX J12351547+1229094",
+          "x": 1755,
+          "y": 1550,
+          "radius": 31
+        },
+        {
+          "name": "2MASX J12353839+1228594",
+          "x": 1092,
+          "y": 1570,
+          "radius": 30
+        },
+        {
+          "name": "2MASX J12353525+1242084",
+          "x": 1183,
+          "y": 9,
+          "radius": 30
+        },
+        {
+          "name": "Gaia DR3 3931693606281079040 (G 9.9)",
+          "x": 454,
+          "y": 135,
+          "radius": 148
+        },
+        {
+          "name": "Gaia DR3 3928677542806618240 (G 11.7)",
+          "x": 927,
+          "y": 1949,
+          "radius": 65
+        },
+        {
+          "name": "Gaia DR3 3931685974123452672 (G 12.0)",
+          "x": 1998,
+          "y": 883,
+          "radius": 55
+        },
+        {
+          "name": "Gaia DR3 3931680240342627456 (G 12.1)",
+          "x": 1492,
+          "y": 1771,
+          "radius": 53
+        },
+        {
+          "name": "Gaia DR3 3931704670116598144 (G 12.3)",
+          "x": 1714,
+          "y": 37,
+          "radius": 50
+        },
+        {
+          "name": "Gaia DR3 3931693601985136384 (G 12.8)",
+          "x": 419,
+          "y": 166,
+          "radius": 38
+        },
+        {
+          "name": "Gaia DR3 3931687799485071232 (G 13.1)",
+          "x": 851,
+          "y": 1005,
+          "radius": 34
+        },
+        {
+          "name": "Gaia DR3 3931680137263412224 (G 13.7)",
+          "x": 1475,
+          "y": 1965,
+          "radius": 25
+        },
+        {
+          "name": "Gaia DR3 3931693601986958592 (G 13.8)",
+          "x": 445,
+          "y": 150,
+          "radius": 25
+        },
+        {
+          "name": "Gaia DR3 3928684689632220160 (G 13.9)",
+          "x": 43,
+          "y": 1142,
+          "radius": 24
+        },
+        {
+          "name": "Gaia DR3 3931690170307021184 (G 13.9)",
+          "x": 400,
+          "y": 386,
+          "radius": 24
+        },
+        {
+          "name": "Gaia DR3 3931685531742323584 (G 14.0)",
+          "x": 2061,
+          "y": 1018,
+          "radius": 23
+        },
+        {
+          "name": "Gaia DR3 3931693640640599296 (G 13.9)",
+          "x": 326,
+          "y": 28,
+          "radius": 23
+        },
+        {
+          "name": "Gaia DR3 3928684689632220416 (G 14.2)",
+          "x": 18,
+          "y": 1142,
+          "radius": 20
+        },
+        {
+          "name": "Gaia DR3 3931682851682728320 (G 14.2)",
+          "x": 2084,
+          "y": 1487,
+          "radius": 20
+        },
+        {
+          "name": "Gaia DR3 3931689036435654144 (G 14.3)",
+          "x": 217,
+          "y": 705,
+          "radius": 19
+        },
+        {
+          "name": "Gaia DR3 3928676855611867648 (G 14.5)",
+          "x": 485,
+          "y": 2091,
+          "radius": 18
+        },
+        {
+          "name": "Gaia DR3 3931681683451640192 (G 14.9)",
+          "x": 1084,
+          "y": 1294,
+          "radius": 15
+        }
+      ]
+    },
+    "nativeRemoval": {
+      "directory": ".local/nebula-lab/m89/nox",
+      "model": {
+        "path": ".local/open-star-removal/noxGeneratorColor.pb"
+      }
+    },
+    "grid": {
+      "width": 150,
+      "height": 150,
+      "depth": 150
+    },
+    "prior": {
+      "axis": [
+        0.766493,
+        0.642253,
+        0
+      ],
+      "center": [
+        74.5,
+        74.5,
+        74.5
+      ],
+      "binWidth": 1
+    },
+    "tau": 0.001,
+    "iterations": 100,
+    "blackLevel": [
+      0.024,
+      0.024,
+      0.016
+    ],
+    "displayExposure": 1.5,
+    "slices": 48,
+    "assumptions": [
+      "Depth follows the deprojected density (Prugniel & Simien 1997) of Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4552: n = 9.22 (+1.13, -0.83), half-light radius 138.6 (+33.4, -21.5) arcsec, on an oblate spheroid whose axis is M89's minor axis (position angle 230.04 degrees: the major axis is at 140.04 degrees in Table 3, interpolated to the half-light radius between the rows at 124.738 and 138.739 arcsec) in the plane of the sky, axis ratio 0.857 (1 - 0.143, the ellipticity interpolated the same way). The survey image's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
+      "The prior ends at 3.83 half-light radii, where Kormendy et al.'s Table 3 profile of NGC 4552 stops (530.884 arcsec, 41.4 kpc at 16.1 Mpc); light beyond that spheroid is not drawn.",
+      "The 2100 x 2100 px cutout is requested on M89's HyperLEDA position (PGC 41968: 188.916041, +12.556242) in a tangent projection, north up and east left, 0.294936 degrees wide (twice 530.884 arcsec, 0.5056 arcsec per px), so its registration is the request's.",
+      "NOX removes stars; what it leaves is masked afterwards: 9 neighbouring galaxies from HyperLEDA PGC (Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) at 3 times their D25 radius, M87's rule; 4 from the 2MASS Extended Source Catalog (CDS VII/233), which sizes the galaxies HyperLEDA gives no D25, at 3 times their K-band 20 mag isophotal radius; and the 18 Gaia DR3 stars brighter than G = 15, whose haloes NOX leaves, at 45 arcsec for G = 11, scaled with brightness (a factor 10 in radius per 5 magnitudes). No mask reaches beyond nine tenths of its distance from M89's centre (chosen here), so every isophote keeps unmasked light. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the measured axis ratio and position angle), never more than it held.",
+      "Every pixel is clamped to the median of the 35 px square around it, so star haloes and small background galaxies that NOX and the masks leave are not spread through the spheroid.",
+      "Black level per channel: the median of the cleaned cutout's four 105 px corners, red 0.024, green 0.024, blue 0.016 (6, 6 and 4 of 255).",
+      "The color is the survey's published g, r, i display composite, not calibrated photometry. Single-image depth is modelled by the prior, not measured."
+    ],
+    "compactClamp": {
+      "windowPx": 35,
+      "basis": "35 px (17.7 arcsec, 1.4 kpc) is about two and a half of the grid's 14.0 px cells, the proportion M87's recipe uses: light more compact than that cannot be M89's smooth light at this grid."
+    },
+    "shapePrior": {
+      "components": [
+        {
+          "kind": "sersic",
+          "axis": [
+            0.766493,
+            0.642253,
+            0
+          ],
+          "radius": 19.581,
+          "radialSigma": 1,
+          "axialSigma": 1,
+          "weight": 1,
+          "sersicIndex": 9.22,
+          "axisRatio": 0.857
+        }
+      ],
+      "sigmaCutoff": 3.83
+    },
+    "modelReference": {
+      "paper": "https://arxiv.org/abs/0810.1681"
+    }
+  },
+  "channels": [
+    {
+      "path": "src/objects/m89-volume/source/compact/emission-0.f32.gz",
+      "bytes": 13500000
+    },
+    {
+      "path": "src/objects/m89-volume/source/compact/emission-1.f32.gz",
+      "bytes": 13500000
+    },
+    {
+      "path": "src/objects/m89-volume/source/compact/emission-2.f32.gz",
+      "bytes": 13500000
+    }
+  ],
+  "provenance": {
+    "method": "Image-conditioned emission in an authored geometric prior; no image-only depth inference",
+    "doi": "https://arxiv.org/abs/0810.1681",
+    "recipePath": "labs/nebula/models/m89/experiment.json",
+    "recipe": {
+      "schema": "cssearth-emission-inference@1",
+      "id": "m89-inferred",
+      "source": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=2100&height=2100&fov=0.294936&projection=TAN&coordsys=icrs&ra=188.916041&dec=12.556242&format=jpg",
+        "width": 2100,
+        "height": 2100,
+        "publisher": "https://www.sdss.org/",
+        "credit": "Sloan Digital Sky Survey DR9, g, r and i color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+      },
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 2100,
+        "height": 2100
+      },
+      "pointMasks": [],
+      "neighbourMasks": {
+        "source": "paturel-2003-hyperleda-pgc and the 2MASS Extended Source Catalog (galaxies), gaia-2023-dr3 (stars)",
+        "fill": "isophote",
+        "masks": [
+          {
+            "name": "PGC 169577",
+            "x": 1364,
+            "y": 1019,
+            "radius": 118
+          },
+          {
+            "name": "PGC 165254",
+            "x": 365,
+            "y": 1040,
+            "radius": 85
+          },
+          {
+            "name": "PGC 165250",
+            "x": 463,
+            "y": 2166,
+            "radius": 71
+          },
+          {
+            "name": "PGC 165245",
+            "x": 1094,
+            "y": 1571,
+            "radius": 66
+          },
+          {
+            "name": "PGC 169572",
+            "x": 1740,
+            "y": 1537,
+            "radius": 59
+          },
+          {
+            "name": "PGC 169586",
+            "x": 903,
+            "y": 730,
+            "radius": 59
+          },
+          {
+            "name": "PGC 169582",
+            "x": 1289,
+            "y": 1996,
+            "radius": 53
+          },
+          {
+            "name": "PGC 41935 (VCC1613)",
+            "x": 1430,
+            "y": 1238,
+            "radius": 36
+          },
+          {
+            "name": "PGC 169571",
+            "x": 1758,
+            "y": 1549,
+            "radius": 35
+          },
+          {
+            "name": "2MASX J12360351+1233251",
+            "x": 364,
+            "y": 1044,
+            "radius": 65
+          },
+          {
+            "name": "2MASX J12351547+1229094",
+            "x": 1755,
+            "y": 1550,
+            "radius": 31
+          },
+          {
+            "name": "2MASX J12353839+1228594",
+            "x": 1092,
+            "y": 1570,
+            "radius": 30
+          },
+          {
+            "name": "2MASX J12353525+1242084",
+            "x": 1183,
+            "y": 9,
+            "radius": 30
+          },
+          {
+            "name": "Gaia DR3 3931693606281079040 (G 9.9)",
+            "x": 454,
+            "y": 135,
+            "radius": 148
+          },
+          {
+            "name": "Gaia DR3 3928677542806618240 (G 11.7)",
+            "x": 927,
+            "y": 1949,
+            "radius": 65
+          },
+          {
+            "name": "Gaia DR3 3931685974123452672 (G 12.0)",
+            "x": 1998,
+            "y": 883,
+            "radius": 55
+          },
+          {
+            "name": "Gaia DR3 3931680240342627456 (G 12.1)",
+            "x": 1492,
+            "y": 1771,
+            "radius": 53
+          },
+          {
+            "name": "Gaia DR3 3931704670116598144 (G 12.3)",
+            "x": 1714,
+            "y": 37,
+            "radius": 50
+          },
+          {
+            "name": "Gaia DR3 3931693601985136384 (G 12.8)",
+            "x": 419,
+            "y": 166,
+            "radius": 38
+          },
+          {
+            "name": "Gaia DR3 3931687799485071232 (G 13.1)",
+            "x": 851,
+            "y": 1005,
+            "radius": 34
+          },
+          {
+            "name": "Gaia DR3 3931680137263412224 (G 13.7)",
+            "x": 1475,
+            "y": 1965,
+            "radius": 25
+          },
+          {
+            "name": "Gaia DR3 3931693601986958592 (G 13.8)",
+            "x": 445,
+            "y": 150,
+            "radius": 25
+          },
+          {
+            "name": "Gaia DR3 3928684689632220160 (G 13.9)",
+            "x": 43,
+            "y": 1142,
+            "radius": 24
+          },
+          {
+            "name": "Gaia DR3 3931690170307021184 (G 13.9)",
+            "x": 400,
+            "y": 386,
+            "radius": 24
+          },
+          {
+            "name": "Gaia DR3 3931685531742323584 (G 14.0)",
+            "x": 2061,
+            "y": 1018,
+            "radius": 23
+          },
+          {
+            "name": "Gaia DR3 3931693640640599296 (G 13.9)",
+            "x": 326,
+            "y": 28,
+            "radius": 23
+          },
+          {
+            "name": "Gaia DR3 3928684689632220416 (G 14.2)",
+            "x": 18,
+            "y": 1142,
+            "radius": 20
+          },
+          {
+            "name": "Gaia DR3 3931682851682728320 (G 14.2)",
+            "x": 2084,
+            "y": 1487,
+            "radius": 20
+          },
+          {
+            "name": "Gaia DR3 3931689036435654144 (G 14.3)",
+            "x": 217,
+            "y": 705,
+            "radius": 19
+          },
+          {
+            "name": "Gaia DR3 3928676855611867648 (G 14.5)",
+            "x": 485,
+            "y": 2091,
+            "radius": 18
+          },
+          {
+            "name": "Gaia DR3 3931681683451640192 (G 14.9)",
+            "x": 1084,
+            "y": 1294,
+            "radius": 15
+          }
+        ]
+      },
+      "nativeRemoval": {
+        "directory": ".local/nebula-lab/m89/nox",
+        "model": {
+          "path": ".local/open-star-removal/noxGeneratorColor.pb"
+        }
+      },
+      "grid": {
+        "width": 150,
+        "height": 150,
+        "depth": 150
+      },
+      "prior": {
+        "axis": [
+          0.766493,
+          0.642253,
+          0
+        ],
+        "center": [
+          74.5,
+          74.5,
+          74.5
+        ],
+        "binWidth": 1
+      },
+      "tau": 0.001,
+      "iterations": 100,
+      "blackLevel": [
+        0.024,
+        0.024,
+        0.016
+      ],
+      "displayExposure": 1.5,
+      "slices": 48,
+      "assumptions": [
+        "Depth follows the deprojected density (Prugniel & Simien 1997) of Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4552: n = 9.22 (+1.13, -0.83), half-light radius 138.6 (+33.4, -21.5) arcsec, on an oblate spheroid whose axis is M89's minor axis (position angle 230.04 degrees: the major axis is at 140.04 degrees in Table 3, interpolated to the half-light radius between the rows at 124.738 and 138.739 arcsec) in the plane of the sky, axis ratio 0.857 (1 - 0.143, the ellipticity interpolated the same way). The survey image's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
+        "The prior ends at 3.83 half-light radii, where Kormendy et al.'s Table 3 profile of NGC 4552 stops (530.884 arcsec, 41.4 kpc at 16.1 Mpc); light beyond that spheroid is not drawn.",
+        "The 2100 x 2100 px cutout is requested on M89's HyperLEDA position (PGC 41968: 188.916041, +12.556242) in a tangent projection, north up and east left, 0.294936 degrees wide (twice 530.884 arcsec, 0.5056 arcsec per px), so its registration is the request's.",
+        "NOX removes stars; what it leaves is masked afterwards: 9 neighbouring galaxies from HyperLEDA PGC (Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) at 3 times their D25 radius, M87's rule; 4 from the 2MASS Extended Source Catalog (CDS VII/233), which sizes the galaxies HyperLEDA gives no D25, at 3 times their K-band 20 mag isophotal radius; and the 18 Gaia DR3 stars brighter than G = 15, whose haloes NOX leaves, at 45 arcsec for G = 11, scaled with brightness (a factor 10 in radius per 5 magnitudes). No mask reaches beyond nine tenths of its distance from M89's centre (chosen here), so every isophote keeps unmasked light. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the measured axis ratio and position angle), never more than it held.",
+        "Every pixel is clamped to the median of the 35 px square around it, so star haloes and small background galaxies that NOX and the masks leave are not spread through the spheroid.",
+        "Black level per channel: the median of the cleaned cutout's four 105 px corners, red 0.024, green 0.024, blue 0.016 (6, 6 and 4 of 255).",
+        "The color is the survey's published g, r, i display composite, not calibrated photometry. Single-image depth is modelled by the prior, not measured."
+      ],
+      "compactClamp": {
+        "windowPx": 35,
+        "basis": "35 px (17.7 arcsec, 1.4 kpc) is about two and a half of the grid's 14.0 px cells, the proportion M87's recipe uses: light more compact than that cannot be M89's smooth light at this grid."
+      },
+      "shapePrior": {
+        "components": [
+          {
+            "kind": "sersic",
+            "axis": [
+              0.766493,
+              0.642253,
+              0
+            ],
+            "radius": 19.581,
+            "radialSigma": 1,
+            "axialSigma": 1,
+            "weight": 1,
+            "sersicIndex": 9.22,
+            "axisRatio": 0.857
+          }
+        ],
+        "sigmaCutoff": 3.83
+      },
+      "modelReference": {
+        "paper": "https://arxiv.org/abs/0810.1681"
+      }
+    },
+    "nativeRemoval": {
+      "settings": {
+        "directory": ".local/nebula-lab/m89/nox",
+        "model": {
+          "path": ".local/open-star-removal/noxGeneratorColor.pb"
+        }
+      },
+      "source": ".local/nebula-lab/m89/nox-source.png",
+      "receipt": ".local/nebula-lab/m89/nox/result.json",
+      "diffuse": ".local/nebula-lab/m89/nox/diffuse.png",
+      "timing": {
+        "modelLoadSeconds": 0.34106645900010335,
+        "inferenceSeconds": 6.9853164569999535,
+        "inferredTiles": 36,
+        "batchSize": 2,
+        "threads": 6
+      }
+    },
+    "uncoveredSignalFractions": [
+      0.02269896967562268,
+      0.020286432615392643,
+      0.018792389200188882
+    ],
+    "projectionCaveat": "Agreement on supported rays is imposed by normalization and does not validate depth geometry.",
+    "coordinateMeaning": "Image x right, y up in display; dimensionless units. No measured gas density, scale, distance or sky registration.",
+    "reports": [
+      {
+        "iteration": 0,
+        "relativeChange": 0,
+        "relativeProjectionError": 0.03325377268536032
+      },
+      {
+        "iteration": 0,
+        "relativeChange": 0,
+        "relativeProjectionError": 0.029029597781410413
+      },
+      {
+        "iteration": 0,
+        "relativeChange": 0,
+        "relativeProjectionError": 0.029982396762967815
+      }
+    ]
+  },
+  "interpretation": "Three RGB emissivity voxel fields before optical integration, not rendered slices."
+}

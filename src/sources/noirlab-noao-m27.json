@@ -1,0 +1,52 @@
+{
+  "id": "noirlab-noao-m27",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "M27, NGC 6853, Dumbbell Nebula",
+  "identifiers": [
+    {
+      "type": "NOIRLab image",
+      "value": "noao-m27"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://noirlab.edu/public/images/noao-m27/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://storage.noirlab.edu/media/archives/images/large/noao-m27.jpg",
+      "label": "JPEG, 1750 x 1500 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://noirlab.edu/public/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://noirlab.edu/public/images/noao-m27/",
+      "checkedOn": "2026-10-02",
+      "locator": "1750 x 1500 px; a color composite from the Kitt Peak 2.1-meter telescope; its page names no filters. The file's embedded sky tags, used as they are: 0.3053 arcsec per pixel, north 2.1° left of vertical, the frame's centre at 299.9038269°, 22.7212155°. Not measured against Gaia here."
+    }
+  ],
+  "publisher": "NOIRLab",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "REU program/NOIRLab/NSF/AURA",
+      "scope": "Published source",
+      "evidence": "https://noirlab.edu/public/images/noao-m27/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://noirlab.edu/public/copyright/"
+    }
+  ]
+}

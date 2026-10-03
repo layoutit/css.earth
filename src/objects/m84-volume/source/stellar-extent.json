@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-stellar-extent@1",
+  "objectId": "m84-volume",
+  "radiusPc": 42100.0,
+  "definition": "Radius along M84's major axis out to which Kormendy et al. (2009) measured its surface brightness: 486.407 arcsec at 17.9 Mpc.",
+  "quote": "486.407",
+  "source": "kormendy-2009-virgo-ellipticals",
+  "presentation": "Where the galaxy's stars are still measured: while the camera is inside this radius the galaxy's caption hides; outside it the caption hangs under what is drawn of the galaxy. Not a boundary."
+}

@@ -112,7 +112,33 @@
       1,
       1,
       1
-    ]
+    ],
+    "bulge": {
+      "source": "salo-2015-s4g-decompositions",
+      "lightFrom": "fit",
+      "positionAngleDeg": 17.27,
+      "sersicIndex": 0.496,
+      "halfLightRadiusKpc": 0.3238,
+      "surfaceBrightnessAtHalfLight": 17.236,
+      "skyEllipticity": 0.477,
+      "disc": {
+        "centralSurfaceBrightness": 18.381,
+        "scaleLengthKpc": 2.4382,
+        "skyEllipticity": 0.513,
+        "positionAngleDeg": 19.57
+      },
+      "bar": {
+        "centralSurfaceBrightness": 19.77,
+        "radiusKpc": 3.1649,
+        "skyEllipticity": 0.811,
+        "positionAngleDeg": 30.89
+      },
+      "extentKpc": {
+        "radius": 2.59,
+        "height": 0.89,
+        "fadeFrom": 1.29
+      }
+    }
   },
   "bake": {
     "maxFacePixels": 1024,
@@ -134,7 +160,10 @@
       "source": "rc3-1991",
       "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives a total (B-V)T of 0.67 as observed; red and blue are scaled in linear light so the disc's mean color matches the engine's catalogue color for that index, the function that colors the star dots."
     },
-    "flat": true
+    "flat": true,
+    "bulgeSlices": 40,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 24
   },
   "provenance": {
     "path": "provenance.json"

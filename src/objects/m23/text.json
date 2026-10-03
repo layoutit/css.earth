@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m23",
+  "card": {
+    "text": "M23 is an open star cluster in the Milky Way, about 713 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_6494: dist50, the median of the maximum-likelihood distance, 713.40536845 pc (16th to 84th percentile 713 to 714)",
+        "checked": "2026-10-02",
+        "locator": "NGC_6494: dist50 713.4 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-23",
+        "url": "https://en.wikipedia.org/wiki/Messier_23",
+        "label": "Wikipedia, \"Messier 23\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100831",
+        "quote": "Messier 23, also known as NGC 6494, is an open cluster of stars in the northwest of the southern constellation of Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M23 is drawn as 663 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6494: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6494: 663 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-23",
+        "url": "https://en.wikipedia.org/wiki/Messier_23",
+        "label": "Wikipedia, \"Messier 23\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100831",
+        "quote": "It was discovered by Charles Messier in 1764."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "663 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6494: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6494, inrt = True"
+        }
+      ]
+    }
+  }
+}

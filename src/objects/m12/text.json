@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m12",
+  "card": {
+    "text": "M12 is a globular star cluster in the Milky Way, about 5,110 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6218: Rsun 5.11 ± 0.05 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_6218: Rsun 5.11 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-12",
+        "url": "https://en.wikipedia.org/wiki/Messier_12",
+        "label": "Wikipedia, \"Messier 12\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100759",
+        "quote": "Messier 12 or M 12 is a globular cluster in the constellation of Ophiuchus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M12 is drawn as 3,627 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6218: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6218: 3,627 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-12",
+        "url": "https://en.wikipedia.org/wiki/Messier_12",
+        "label": "Wikipedia, \"Messier 12\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100759",
+        "quote": "It was discovered by the French astronomer Charles Messier on May 30, 1764, who described it as a \"nebula without stars\"."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "3,627 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6218: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6218, inrt = True"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "eso-eso0930a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "The Trifid Nebula",
+  "identifiers": [
+    {
+      "type": "ESO image",
+      "value": "eso0930a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso0930a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/publicationjpg/eso0930a.jpg",
+      "label": "JPEG, 2432 x 4000 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.eso.org/public/outreach/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso0930a/",
+      "checkedOn": "2026-10-02",
+      "locator": "2432 x 4000 px; B, V, R and H-alpha. The file's embedded sky tags, used as they are: 0.3426 arcsec per pixel, north 0.2° left of vertical, the frame's centre at 270.5768785°, -22.9417882°. Not measured against Gaia here."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/eso0930a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/outreach/copyright/"
+    }
+  ]
+}

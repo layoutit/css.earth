@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m35",
+  "card": {
+    "text": "M35 is an open star cluster in the Milky Way, about 839 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2168: dist50, the median of the maximum-likelihood distance, 838.53354927 pc (16th to 84th percentile 838 to 839)",
+        "checked": "2026-10-02",
+        "locator": "NGC_2168: dist50 838.5 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-35",
+        "url": "https://en.wikipedia.org/wiki/Messier_35",
+        "label": "Wikipedia, \"Messier 35\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373099961",
+        "quote": "Messier 35 or M35, also known as NGC 2168 or the Shoe-Buckle Cluster, is a relatively close open cluster of stars in the west of Gemini, at about the declination of the Sun when the latter is at June solstice."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M35 is drawn as 1,106 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2168: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_2168: 1,106 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-35",
+        "url": "https://en.wikipedia.org/wiki/Messier_35",
+        "label": "Wikipedia, \"Messier 35\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373099961",
+        "quote": "It was discovered by Philippe Loys de Chéseaux around 1745 and independently discovered by John Bevis before 1750."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "1,106 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2168: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_2168, inrt = True"
+        }
+      ]
+    }
+  }
+}

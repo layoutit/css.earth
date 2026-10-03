@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m17-layers",
+  "source": {
+    "path": "starless.jpg",
+    "dimensions": [
+      4000,
+      3738
+    ],
+    "originalDimensions": [
+      4000,
+      3738
+    ],
+    "publisherUrl": "https://www.eso.org/public/images/eso1537a/",
+    "downloadUrl": "https://cdn.eso.org/images/publicationjpg/eso1537a.jpg",
+    "credit": "ESO",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 275.2630836,
+    "centerDecDeg": -16.1874792,
+    "fieldOfViewDeg": [
+      0.5906627,
+      0.5519459
+    ],
+    "northClockwiseDeg": 0
+  },
+  "target": {
+    "centerRaDeg": 275.11875,
+    "centerDecDeg": -16.182777777777776,
+    "distancePc": 1680
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.1387,
+    "lineOfNodesPaDeg": 181.943,
+    "thicknessKpc": 8.66e-06,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.0079301,
+    "supportTaperFraction": 0.7,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc"
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

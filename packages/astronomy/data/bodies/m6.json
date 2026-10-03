@@ -1,0 +1,28 @@
+{
+  "id": "m6",
+  "classification": "open-cluster",
+  "order": 5206,
+  "physical": {
+    "name": "Butterfly Cluster",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Butterfly Cluster is recorded: it is an extended star cluster, and its package frames it at 9.2 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 265.0672502,
+    "declinationDegrees": -32.22806085,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 451.8697801,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": -10.52715734,
+    "sources": {
+      "position": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_6405: RA_ICRS 265.0672502, DE_ICRS -32.22806085, the densest point of its members (epoch 2016.0) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "distance": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_6405: dist50, the median of the maximum-likelihood distance, 451.8697801 pc (16th to 84th percentile 452 to 452) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Hunt & Reffert (2023), Table 3, NGC_6405: mean Gaia DR3 radial velocity -10.52715734 km/s of 215 members (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)"
+    }
+  }
+}

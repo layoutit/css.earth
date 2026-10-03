@@ -1,0 +1,52 @@
+{
+  "id": "eso-eso1105a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Messier 78: a reflection nebula in Orion",
+  "identifiers": [
+    {
+      "type": "ESO image",
+      "value": "eso1105a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1105a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/publicationjpg/eso1105a.jpg",
+      "label": "JPEG, 4000 x 3876 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.eso.org/public/outreach/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso1105a/",
+      "checkedOn": "2026-10-02",
+      "locator": "4000 x 3876 px; B, V, R and H-alpha. The file's embedded sky tags, used as they are: 0.5165 arcsec per pixel, north 1.6° right of vertical, the frame's centre at 86.6729501°, 0.0946682°. Not measured against Gaia here."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/Igor Chekalin",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/eso1105a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/outreach/copyright/"
+    }
+  ]
+}

@@ -9,7 +9,8 @@ import { sha256 } from '@cssearth/core/node';
 import { writeLossyWebp } from '@cssearth/bake/raster';
 import { arrivalLook, writeWorldBillboard } from '@cssearth/bake/site-assets';
 import { anyChangedAfter } from '@cssearth/bake/preparation';
-import { preparedDefaultViewRotation, worldCameraFromCenteredPresentation, parseArrivalBillboard } from '@cssearth/objects';
+import { requireCamera, parseArrivalBillboard } from '@cssearth/objects';
+import { preparedDefaultViewRotation, worldCameraFromCenteredPresentation } from '@cssearth/engine';
 import { readInventory, readPreparedObjects, updateInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../../..'), args = process.argv.slice(2);
@@ -52,6 +53,7 @@ try {
     const objectDirectory = resolve(root, 'src/objects', object.id), prepared = resolve(objectDirectory, 'prepared');
     const runtimeBytes = await readFile(resolve(prepared, 'runtime.json'));
     const runtime = requireRecord(JSON.parse(runtimeBytes.toString('utf8')));
+    requireCamera(runtime.camera);
     const rotation = preparedDefaultViewRotation(runtime.camera);
     const controls = requireRecord(requireRecord(runtime.controls).datasets);
     const dataset = requireString(controls.defaultDataset);

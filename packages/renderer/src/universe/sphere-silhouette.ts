@@ -1,5 +1,5 @@
 import { fromEyeM } from '@cssearth/engine';
-import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation } from '@cssearth/engine';
 

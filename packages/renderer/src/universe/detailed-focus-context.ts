@@ -1,6 +1,6 @@
 import { eyeDistanceM } from '@cssearth/engine';
 import { worldCameraViewport, type WorldCameraViewport } from '../navigation/world-camera.js';
-import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraPose } from '@cssearth/engine';
 
 /** The selected bank package: where it is and the radius its page frames. */
 export interface SelectedBank { readonly positionM: readonly [number, number, number]; readonly framingRadiusM: number; }

@@ -83,7 +83,9 @@
 }
 
 /* Dataset billboards (dataset-billboards.ts): a zero-size root at the stage centre; each leaf's atlas-sized box, atlas cell,
-   display, transform and opacity are inline. */
+   display, transform and opacity are inline. A shown leaf is its own layer: its transform changes on every frame of a
+   zoom, and in its container's layer each change repainted that layer. On the iPad, compositing took 2.84 and 2.47 ms a
+   frame with a layer for each leaf against 3.51 and 3.05 without (zoom out of Earth, interleaved, 2026-10-03). */
 .prepared-dataset-billboards {
   position: absolute;
   left: 50%;
@@ -99,4 +101,5 @@
   pointer-events: none;
   transform-origin: 0 0;
   background-repeat: no-repeat;
+  will-change: transform;
 }

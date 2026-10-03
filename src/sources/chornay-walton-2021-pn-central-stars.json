@@ -1,0 +1,50 @@
+{
+  "id": "chornay-walton-2021-pn-central-stars",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "One star, two star, red star, blue star: an updated planetary nebula central star distance catalogue from Gaia EDR3",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2021A&A...656A.110C"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/656/A110"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...656A.110C",
+      "label": "2021A&A...656A.110C"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+      "label": "CDS J/A+A/656/A110"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+      "checkedOn": "2026-10-02",
+      "locator": "Table A.1 (best matches): each nebula's central star in Gaia EDR3 with its position and the distance rcomb with its bounds. PN G060.8-03.6 (NGC 6853) 388 (382 to 394) pc; PN G063.1+13.9 (NGC 6720) 790 (764 to 818) pc; PN G130.9-10.5 (NGC 650/1) 1359 (1190 to 1546) pc; PN G148.4+57.0 (NGC 3587) 811 (782 to 842) pc."
+    }
+  ],
+  "creators": [
+    "Nicholas Chornay",
+    "Nicholas A. Walton"
+  ],
+  "publisher": "A&A 656, A110",
+  "publicationDate": "2021",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Chornay & Walton (2021), A&A 656, A110.",
+      "scope": "Planetary nebula central stars and distances",
+      "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+    }
+  ]
+}

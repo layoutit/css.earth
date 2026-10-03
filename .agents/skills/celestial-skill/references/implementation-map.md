@@ -2,6 +2,8 @@
 
 Paths are relative to the selected repository. The documentation links were
 checked on 2026-09-09.
+Camera conversion, default-view rotation, silhouette walking and fly-to calibration belong to `@cssearth/engine`.
+Objects owns parsed formats and depends only on core; parse camera records with `requireCamera` before calling engine.
 Code examples below name the revisions where they were checked. Inspect the
 current checkout before using them.
 

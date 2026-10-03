@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m7",
+  "card": {
+    "text": "M7 is an open star cluster in the Milky Way, about 276 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_6475: dist50, the median of the maximum-likelihood distance, 275.98760826 pc (16th to 84th percentile 276 to 276)",
+        "checked": "2026-10-02",
+        "locator": "NGC_6475: dist50 276.0 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-7",
+        "url": "https://en.wikipedia.org/wiki/Messier_7",
+        "label": "Wikipedia, \"Messier 7\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1370815152",
+        "quote": "Messier 7 or M7, also designated NGC 6475 and sometimes known as Ptolemy's Cluster, is an open cluster of stars in the constellation of Scorpius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M7 is drawn as 961 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6475: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6475: 961 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-7",
+        "url": "https://en.wikipedia.org/wiki/Messier_7",
+        "label": "Wikipedia, \"Messier 7\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1370815152",
+        "quote": "The cluster is easily detectable with the naked eye, close to the \"stinger\" of Scorpius."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "961 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6475: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6475, inrt = True"
+        }
+      ]
+    }
+  }
+}

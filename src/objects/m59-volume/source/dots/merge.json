@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "dots",
+  "published": true,
+  "meaning": "M59's globular clusters as dots through its spheroid: Jordán et al.'s (2009) Hubble clusters on the centre.",
+  "centreOnGalaxy": true,
+  "banks": [
+    {
+      "bank": "jordan-gc",
+      "withinPcOfCentre": 38200.0,
+      "basis": "Presentation choice: a dot is drawn only inside the spheroid's 38.2 kpc edge, where the volume ends."
+    }
+  ],
+  "colorTowardWhite": 0.5,
+  "colorTowardWhiteBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), so both galaxies' dots read as the same tints of starlight.",
+  "colorGamma": 1.6,
+  "colorGammaBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), picked there from three renders over its backing."
+}

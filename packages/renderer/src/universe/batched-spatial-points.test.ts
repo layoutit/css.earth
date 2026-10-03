@@ -363,3 +363,30 @@ test('a layer\'s fields turn by one warp, and all repaint when one of them must'
   assert.equal(svg.style.transform, '');
   far.destroy(); near.destroy();
 });
+
+test('a field left unresolved at mount resolves its points in slices and draws a part only once it is whole', () => {
+  const { document } = parseHTML('<div id="host"></div>');
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20] as const, max: [20, 20, 20] as const } };
+  const style = { colorCss: '#ffb38a', opacity: 1, radiusPx: 1 };
+  const row = (count: number, y: number) => Array.from({ length: count }, (_, index) => ({ positionUnits: [index - count / 2, y, -100] as const }));
+  const part = (points: ReturnType<typeof row>) => ({ points, stylePoint: () => style, paintPalette: [pointPaint(style)], paintGroup: 0 });
+  const options = { host: document.getElementById('host')!, frame, className: 'test-points', parts: [part(row(10, 0)), part(row(6, 1))] };
+  const field = mountBatchedSpatialPoints({ ...options, deferFill: true });
+  const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const publication = { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport };
+  const drawn = () => { field.publish(publication); return field.stats().visiblePoints; };
+  assert.equal(drawn(), 0, 'nothing is resolved at mount');
+  assert.equal(field.fill(7), 7);
+  assert.equal(drawn(), 0, 'a part with points still to resolve draws none of them');
+  assert.equal(field.fill(7), 7, 'the rest of the first part and the start of the second');
+  assert.equal(drawn(), 10, 'the first part is whole');
+  assert.equal(field.fill(7), 2);
+  assert.equal(drawn(), 16);
+  assert.equal(field.fill(7), 0, 'nothing left');
+  // The same field resolved at mount paints the same paths.
+  const whole = mountBatchedSpatialPoints({ ...options, host: parseHTML('<div id="host"></div>').document.getElementById('host')! });
+  whole.publish(publication);
+  assert.deepEqual([...field.root.querySelectorAll('path')].map(path => path.getAttribute('d')), [...whole.root.querySelectorAll('path')].map(path => path.getAttribute('d')));
+  field.destroy(); whole.destroy();
+});

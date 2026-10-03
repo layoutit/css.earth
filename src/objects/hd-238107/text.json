@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-238107",
+  "card": {
+    "text": "One of the two unrelated stars that Charles Messier catalogued as M40.",
+    "sources": [
+      {
+        "catalogueId": "page-arxiv-org-pdf-1612-00834",
+        "url": "https://arxiv.org/pdf/1612.00834",
+        "label": "arxiv.org/pdf/1612.00834",
+        "checked": "2026-10-03",
+        "locator": "Abstract: Messier 40 comprises a pair of entirely unrelated stars (Hipparcos/Gaia parallaxes)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M40, also called Winnecke 4, is an optical double: this giant star and HD 238108 lie at different distances.",
+    "sources": [
+      {
+        "catalogueId": "page-arxiv-org-pdf-1612-00834",
+        "url": "https://arxiv.org/pdf/1612.00834",
+        "label": "arxiv.org/pdf/1612.00834",
+        "checked": "2026-10-03",
+        "locator": "Abstract: Messier 40 comprises a pair of entirely unrelated stars (Hipparcos/Gaia parallaxes)"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

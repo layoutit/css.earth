@@ -1,0 +1,15 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m41-members",
+  "type": "catalogue-point-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/dots/points.json"
+    },
+    "host": "m41"
+  },
+  "prepared": {
+    "format": "cssearth-catalogue-points-bin@1",
+    "url": "prepared/dots.bin"
+  }
+}

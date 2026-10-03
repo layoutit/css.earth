@@ -1,6 +1,6 @@
 import type { OrientationXyzw, PositionM } from '../runtime/selection-flight.js';
 
-import type { Matrix3 as WorldRotation } from '../solar-system/types.js';
+import type { WorldRotation } from '@cssearth/core';
 
 /** A physical camera pose keeps right-handed axes: +x right, +y up, +z toward the eye. CSS eye space differs only in +y, which
  * points down, so the camera's CSS view is its reference-to-camera rotation with the y row negated. */

@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m63",
+  "card": {
+    "text": "A spiral galaxy 8.8 million parsecs away, tilted 55° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 46153: distance modulus 29.73 ± 0.02 mag",
+        "checked": "2026-10-02",
+        "locator": "distance: 8.83 Mpc (8.75 to 8.91)"
+      },
+      {
+        "catalogueId": "hyperleda-2014",
+        "url": "http://atlas.obs-hp.fr/hyperleda/",
+        "label": "HyperLEDA (Makarov et al. 2014), NGC5055 = PGC 46153: inclination 54.87°, major-axis position angle 103°, from its outline at 25 mag per square arcsecond",
+        "checked": "2026-10-02",
+        "locator": "inclination 54.87 deg"
+      },
+      {
+        "catalogueId": "wikipedia-messier-63",
+        "url": "https://en.wikipedia.org/wiki/Messier_63",
+        "label": "Wikipedia, \"Messier 63\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1377881707",
+        "quote": "Messier 63 or M63, also known as NGC 5055 or the Sunflower Galaxy, is a spiral galaxy in the northern constellation of Canes Venatici."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, laid flat on its measured disc.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 18.90 arcmin wide"
+      },
+      {
+        "catalogueId": "wikipedia-messier-63",
+        "url": "https://en.wikipedia.org/wiki/Messier_63",
+        "label": "Wikipedia, \"Messier 63\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1377881707",
+        "quote": "M63 was first discovered by the French astronomer Pierre Méchain, then later verified by his colleague Charles Messier on 14 June 1779."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M63 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 18.90 × 18.90 arcmin on NGC 5055"
+        }
+      ]
+    }
+  }
+}

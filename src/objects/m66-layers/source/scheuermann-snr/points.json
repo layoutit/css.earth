@@ -1,0 +1,85 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "scheuermann-snr",
+  "table": {
+    "path": "table2.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/table2.dat",
+    "bytes": 212947,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        9,
+        11
+      ],
+      "raH": [
+        17,
+        18
+      ],
+      "raM": [
+        20,
+        21
+      ],
+      "raS": [
+        23,
+        27
+      ],
+      "decSign": [
+        29,
+        29
+      ],
+      "decD": [
+        30,
+        31
+      ],
+      "decM": [
+        33,
+        34
+      ],
+      "decS": [
+        36,
+        40
+      ]
+    }
+  },
+  "filters": [
+    {
+      "column": [
+        1,
+        7
+      ],
+      "op": "==",
+      "value": "NGC3627",
+      "basis": "The table holds 19 galaxies; these are the rows of NGC3627."
+    },
+    {
+      "column": [
+        13,
+        15
+      ],
+      "op": "==",
+      "value": "SNR",
+      "basis": "Type SNR: a supernova remnant."
+    }
+  ],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": 370,
+      "source": "kregel-2002-disc-flattening",
+      "basis": "The stellar disc's exponential scale height as its scale length over 7.3, the mean flattening Kregel et al. (2002) measured for edge-on discs, with S4G's disc scale length (Salo et al. 2015), 53.95″ = 2.70 kpc: 370 pc. For young objects it is an upper value. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "scheuermann-2022-phangs-pne",
+  "meaning": "Supernova remnants of M66 that Scheuermann et al. (2022) separated from its planetary nebulae by their line ratios: one dot per remnant at its catalogue position.",
+  "appearance": {
+    "colorCss": "#9fe8ff",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the supernova-remnant color M31's and M33's dots share. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

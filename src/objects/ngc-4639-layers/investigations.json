@@ -54,6 +54,15 @@
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/520/4902"
       ],
       "revisitWhen": "CDS is searched for its HII regions, clusters or remnants with sky positions."
+    },
+    {
+      "id": "bulge",
+      "subject": "Bulge",
+      "status": "included",
+      "finding": "Salo et al. (2015), S4G Pipeline 4, table 7, NGC4639, model _bdbarf: a Sérsic bulge (11.2% of the light, magnitude 13.594, half-light radius 1.6″ = 0.16 kpc, n = 2.14, axis ratio 0.708, PA 122.51°) and an exponential disc (81.5% of the light, scale length 17.53″ = 1.72 kpc, axis ratio 0.653, PA 134.51°, face-on central surface brightness 19.655, 19.192 as projected on the sky) and a Ferrers bar (7.2% of the light, radius 24.00″ = 2.36 kpc, axis ratio 0.426, PA 178.81°, central surface brightness 20.094 on the sky). Used as published; the half-light surface brightness the bake needs, 17.305 mag per square arcsecond, follows from the bulge's magnitude, radius, index and axis ratio. At the disc's 51.02° the bulge's axis ratio is one an oblate spheroid in the disc plane can show (intrinsic 0.42).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4"
+      ]
     }
   ]
 }
