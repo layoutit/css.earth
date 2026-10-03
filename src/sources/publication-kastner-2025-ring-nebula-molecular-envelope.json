@@ -1,0 +1,44 @@
+{
+  "id": "publication-kastner-2025-ring-nebula-molecular-envelope",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Structure of the Molecular Envelope of the Ring Nebula (NGC 6720)",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2501.12223"
+    },
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4357/adace1"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2501.12223",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2501.12223",
+      "checkedOn": "2026-10-03",
+      "locator": "Sect. IV: the SMA CO(2-1) cube is matched by an expanding triaxial ellipsoid shell with axial ratios 1.0 : 0.71 : 0.82, 1.1e18 cm by 7.6e17 cm on the sky, viewed within about 2 degrees of its third axis and turned to position angle about 70 degrees, open at both poles where the emission ends at about +/-20 km/s; the openings are modelled by an elongated ellipsoid of semiminor axis 2.3e17 cm and height 1.8e18 cm, inclined 12 degrees at position angle 160 degrees to the line of sight, whose geometry the paper calls not tightly constrained. Sect. V.2: the molecular gas is a thin shell just outside the ionized gas. Distance used: 782 pc. The text does not say which end of the inclined ellipsoid is the near one."
+    }
+  ],
+  "creators": [
+    "Kastner, Joel H.",
+    "Wilner, David J.",
+    "Ryder, Diana",
+    "Moraga Baez, Paula",
+    "De Marco, Orsola",
+    "Sahai, Raghvendra",
+    "Wootten, Al",
+    "Zijlstra, Albert"
+  ],
+  "publisher": "ApJ",
+  "publicationDate": "2025",
+  "relations": [],
+  "statements": []
+}

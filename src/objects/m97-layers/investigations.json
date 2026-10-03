@@ -15,11 +15,12 @@
     {
       "id": "volume",
       "subject": "The shape of the Owl Nebula",
-      "status": "included",
-      "finding": "Guerrero et al. (2003, Sect. III.1 and Fig. 5) give the main nebula's shape: an outer shell that is almost circular, 218 arcsec across, modelled as spherical, around an ellipsoidal inner shell (axis ratio about 1.1) with a bipolar cavity whose axis is tilted about 30 degrees to the line of sight. The sphere's radius, 109 arcsec, is used here; the inner shell and cavity are not drawn in depth. The image-layer bake fills that sphere evenly with part of the picture's smooth light and keeps the rest, with all its detail, on the flat picture; along the Sun's sight line the layers add up to the photograph. A Nebula Lab volume of the same shape was made first and not used: its slices are 192 px wide against the picture's 1,024, so the view from the Sun lost the picture's detail.",
+      "status": "deferred",
+      "finding": "The picture is flat. Guerrero et al. (2003) give the shape from echelle spectra: an outer shell that is a filled envelope, 218 arcsec across, expanding at 40 km/s; an inner shell that is an ellipsoid of radius 93 arcsec along its pole and 83 arcsec across it, its pole tilted 10 to 30 degrees from the line of sight toward the south-east, expanding at about 45 and 40 km/s; and a bipolar cavity along that pole, the owl's eyes. The Ring's bake draws thin walls; the Owl needs a filled envelope with a cavity cut in it, which the bake does not draw yet.",
       "evidence": [
         "https://arxiv.org/abs/astro-ph/0303056"
-      ]
+      ],
+      "revisitWhen": "The image-layer bake draws a filled envelope with a cavity, and the cavity's size is read from the paper."
     },
     {
       "id": "noao-m97",

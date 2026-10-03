@@ -22,7 +22,7 @@
     ]
   },
   "introduction": {
-    "text": "ESA/Hubble's photograph of it stands here as a flat picture facing the Sun, inside the ellipsoid a paper gives it, 0.48 pc wide.",
+    "text": "ESA/Hubble's photograph of it lies here on the walls its spectra give: a shell 0.34 pc across and a lobe through its opening, pointed almost at the Sun.",
     "sources": [
       {
         "catalogueId": "esahubble-heic1310a",
@@ -44,7 +44,14 @@
         "url": "https://arxiv.org/abs/1301.6636",
         "label": "O'Dell et al. (2013), AJ 145, 92: Studies of NGC 6720 with calibrated HST/WFC3 emission-line filter images. I. Structure and evolution",
         "checked": "2026-10-03",
-        "locator": "Sect. III.1: triaxial ellipsoid, semi-major axis 44 arcsec along position angle 60 degrees, semi-minor axis 30 arcsec, semi-polar axis 59 arcsec tipped 6.5 +/- 2 degrees from the line of sight"
+        "locator": "Sect. III.1 and III.3: expansion of 0.65 km/s per arcsec; Main Ring 44 by 30 arcsec, 19 km/s in [N II] and 9 km/s in [O III]; Lobes 36, 28 and 20 km/s in [N II], [O III] and He II"
+      },
+      {
+        "catalogueId": "publication-kastner-2025-ring-nebula-molecular-envelope",
+        "url": "https://arxiv.org/abs/2501.12223",
+        "label": "Kastner et al. (2025), ApJ: The structure of the molecular envelope of the Ring Nebula (NGC 6720)",
+        "checked": "2026-10-03",
+        "locator": "Sect. IV: an elongated ellipsoid of radius 2.3e17 cm through the polar openings of the molecular shell"
       }
     ]
   },
@@ -52,7 +59,7 @@
     "optical": {
       "title": "Ring Nebula in visible light",
       "detail": "3179 × 3179 px",
-      "summary": "A flat picture facing the Sun, inside the shape a paper gives the nebula. The shape's depth is modelled.",
+      "summary": "The photograph on the nebula's walls: a shell and a lobe through it, at depths from published expansion speeds.",
       "sources": [
         {
           "catalogueId": "esahubble-heic1310a",
@@ -66,7 +73,14 @@
           "url": "https://arxiv.org/abs/1301.6636",
           "label": "O'Dell et al. (2013), AJ 145, 92: Studies of NGC 6720 with calibrated HST/WFC3 emission-line filter images. I. Structure and evolution",
           "checked": "2026-10-03",
-          "locator": "Sect. III.1: triaxial ellipsoid, semi-major axis 44 arcsec along position angle 60 degrees, semi-minor axis 30 arcsec, semi-polar axis 59 arcsec tipped 6.5 +/- 2 degrees from the line of sight"
+          "locator": "Sect. III.1 and III.3: expansion of 0.65 km/s per arcsec; Main Ring 44 by 30 arcsec, 19 km/s in [N II] and 9 km/s in [O III]; Lobes 36, 28 and 20 km/s in [N II], [O III] and He II"
+        },
+        {
+          "catalogueId": "publication-kastner-2025-ring-nebula-molecular-envelope",
+          "url": "https://arxiv.org/abs/2501.12223",
+          "label": "Kastner et al. (2025), ApJ: The structure of the molecular envelope of the Ring Nebula (NGC 6720)",
+          "checked": "2026-10-03",
+          "locator": "Sect. IV: an elongated ellipsoid of radius 2.3e17 cm through the polar openings of the molecular shell"
         }
       ]
     }

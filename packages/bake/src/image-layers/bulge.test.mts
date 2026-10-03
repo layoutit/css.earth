@@ -122,30 +122,42 @@ test('an edge-on disc is bright along its position angle and thin across it', ()
   assert.ok(model.share(...along(3.2)) < model.share(...across(3.2)));
 });
 
-// A nebula's published ellipsoid (geometry.shape): the Ring Nebula's, long along the sight line and tipped 6.5°.
+// A nebula's published walls (geometry.shape): the Ring Nebula's main shell and lobe, pole along the sight line.
 import { imageLayerShapeModel, lowerEnvelope } from '@cssearth/bake/image-layers';
-const ring = imageLayerShapeModel({ geometry: { kind: 'inclined-disk', inclinationDeg: 0.001, lineOfNodesPaDeg: 0, thicknessKpc: 1, supportRadiusKpc: 1, supportTaperFraction: 0.75, depthWeights: [1], depthScales: [1],
-  shape: { source: 'test', basis: 'test', semiAxesKpc: { polar: 59, major: 44, minor: 30 }, polarTiltDeg: 6.5, polarLeansToPaDeg: 240, majorPaDeg: 60, share: 1, smoothPixels: 6 } } });
+const walled = (polarTiltDeg: number) => imageLayerShapeModel({ source: 'test', basis: 'test', expansionKmSPerArcsec: 0.65,
+  ring: { semiMajorArcsec: 44, semiMinorArcsec: 30, majorPaDeg: 60, polarTiltDeg, polarLeansToPaDeg: 240, expansionKmS: [19, 9, 9] },
+  lobe: { source: 'test', radiusArcsec: 19.7, expansionKmS: [36, 28, 20] }, smoothPixels: 16 });
+const ring = walled(0), along = (radius: number, paDeg: number): [number, number] => [radius * Math.sin(paDeg * Math.PI / 180), radius * Math.cos(paDeg * Math.PI / 180)];
 
-test('a shape is filled evenly, ends on its surface and is long along its pole', () => {
-  assert.equal(ring.density([0, 0, 0]), 1);
-  // The pole is 6.5° from the sight line: 58 units along it are inside, 60 are outside.
-  assert.equal(ring.density([ring.pole[0] * 58, ring.pole[1] * 58, ring.pole[2] * 58]), 1);
-  assert.equal(ring.density([ring.pole[0] * 60, ring.pole[1] * 60, ring.pole[2] * 60]), 0);
-  // The near pole leans to position angle 240° (south-west): east and north components are both negative, and it points at the Sun.
-  assert.ok(ring.pole[0] < 0 && ring.pole[1] < 0 && ring.pole[2] < 0, `${ring.pole}`);
-  // The major axis lies near position angle 60°, the minor across it.
-  const major = [Math.sin(Math.PI / 3), Math.cos(Math.PI / 3)];
-  assert.ok(Math.abs(Math.abs(ring.major[0] * major[0]! + ring.major[1] * major[1]!) - Math.cos(6.5 * Math.PI / 180)) < 1e-9);
-  assert.equal(ring.density([major[0]! * 43, major[1]! * 43, 0]), 1);
-  assert.equal(ring.density([-major[1]! * 31, major[0]! * 31, 0]), 0);
+test('a speed is a depth: each channel has its wall at its speed over the expansion law', () => {
+  // On the axis the light is the lobe's: red light at 36 km/s lies 55.4 arcsec in front of the star and as far behind it.
+  const red = ring.walls(0, 0, [1, 0, 0])!, blue = ring.walls(0, 0, [0, 0, 1])!, mixed = ring.walls(0, 0, [1, 0, 1])!;
+  assert.ok(Math.abs(red.far - 36 / 0.65) < 1e-9 && Math.abs(red.near + 36 / 0.65) < 1e-9, `${red.near} ${red.far}`);
+  assert.ok(Math.abs(blue.far - 20 / 0.65) < 1e-9, `${blue.far}`);
+  // Mixed light lies between its channels' walls, by how much of it is each channel's.
+  assert.ok(Math.abs(mixed.far - (36 + 20) / 2 / 0.65) < 1e-9, `${mixed.far}`);
+  assert.ok(Math.abs(ring.reach - 36 / 0.65) < 1e-9, `${ring.reach}`);
 });
 
-test('the chord through the centre is the long one and there is none outside the outline', () => {
-  assert.ok(Math.abs(ring.chord(0, 0) - 2 * 59 / Math.hypot(Math.cos(6.5 * Math.PI / 180), 59 / 44 * Math.sin(6.5 * Math.PI / 180))) < 1e-9, `${ring.chord(0, 0)}`);
-  assert.ok(ring.chord(20, 10) < ring.chord(0, 0) && ring.chord(20, 10) > 0);
-  assert.equal(ring.chord(60, 0), 0);
-  assert.ok(ring.height > 58 && ring.height < 59.1 && ring.radius === 59);
+test('outside the lobe the light is on the main shell, which meets the picture\'s plane at its outline', () => {
+  // 35 arcsec out along the major axis: outside the lobe (19.7 arcsec), inside the shell (44 arcsec).
+  const wall = ring.walls(...along(35, 60), [1, 0, 0])!;
+  assert.ok(Math.abs(wall.far - 19 / 0.65 * Math.sqrt(1 - (35 / 44) ** 2)) < 1e-6 && Math.abs(wall.near + wall.far) < 1e-9, `${wall.near} ${wall.far}`);
+  // Across the major axis the shell ends at 30 arcsec; at its outline the wall is in the picture's plane.
+  assert.equal(ring.walls(...along(31, 150), [1, 0, 0]), null);
+  assert.ok(Math.abs(ring.walls(...along(43.99, 60), [1, 0, 0])!.far) < 0.02);
+  // A tipped pole whose near end leans south-west puts the shell's south-west side behind the star, and still meets the plane at the outline.
+  const tipped = walled(6.5), southWest = tipped.walls(...along(30, 240), [1, 0, 0])!, northEast = tipped.walls(...along(30, 60), [1, 0, 0])!;
+  assert.ok(southWest.near + southWest.far > 0 && northEast.near + northEast.far < 0, `${southWest.near + southWest.far} ${northEast.near + northEast.far}`);
+  const edge = tipped.walls(...along(43.5, 240), [1, 0, 0])!; assert.ok(Math.abs(edge.near) < 0.5 && Math.abs(edge.far) < 0.5, `${edge.near} ${edge.far}`);
+});
+
+test('the lobe opens from the shell\'s inner lip', () => {
+  const green = (radius: number) => ring.walls(...along(radius, 60), [0, 1, 0])!.far;
+  // Well inside its outline the wall is the lobe's own; at the outline it has joined the shell's, with no step across it.
+  assert.ok(Math.abs(green(10) - 28 / 0.65 * Math.sqrt(1 - (10 / 19.7) ** 2)) < 1e-6, `${green(10)}`);
+  assert.ok(Math.abs(green(19.69) - 9 / 0.65 * Math.sqrt(1 - (19.69 / 44) ** 2)) < 0.05, `${green(19.69)}`);
+  assert.ok(Math.abs(green(19.69) - green(19.71)) < 0.05);
 });
 
 test('the lower envelope stays under fine dark detail and ignores fine bright detail', () => {

@@ -20,12 +20,16 @@ export interface ImageLayerRecipe {
     /** The bank's unit when it is not the kiloparsec: parsecs, for an object a few parsecs across (a nebula), whose leaves in
      * kiloparsecs would be smaller than one CSS pixel. The recipe's lengths stay in kiloparsecs. A flat bank without a bulge only. */
     unit?: 'pc';
-    /** A published ellipsoid for a nebula (./shape.ts): the smooth part of the picture's light inside its outline is spread
-     * evenly through it, and the flat picture keeps the rest with every fine detail. Semi-axes in kiloparsecs: along the
-     * pole, and along and across `majorPaDeg` in the equatorial plane. The pole is tipped `polarTiltDeg` from the sight line,
-     * its near end leaning to position angle `polarLeansToPaDeg`. A sight line gives the ellipsoid at most `share` of
-     * its smooth light; `smoothPixels` is the radius, in face pixels, of the lower envelope that counts as smooth. Both are presentation. */
-    shape?: { source: string; basis: string; semiAxesKpc: { polar: number; major: number; minor: number }; polarTiltDeg: number; polarLeansToPaDeg: number; majorPaDeg: number; share: number; smoothPixels: number };
+    /** A nebula's published walls (./shape.ts). Spectra give each emission line's speed along the sight line across the
+     * nebula, a velocity ellipse; with the published expansion law (`expansionKmSPerArcsec`: speed grows in proportion to
+     * distance from the star) a speed is a depth, so each ellipse is an ellipsoidal wall. `ring` is the main shell: its
+     * outline on the sky and, for the display's red, green and blue channels, the speed of the lines that make that
+     * channel. Its pole is tipped `polarTiltDeg` from the sight line, the near end leaning to position angle
+     * `polarLeansToPaDeg`. `lobe` is the body through the shell's opening, on the same axis. Every value is one a paper
+     * prints. `smoothPixels` is presentation: the radius, in face pixels, of the smooth light the far wall carries. */
+    shape?: { source: string; basis: string; expansionKmSPerArcsec: number;
+      ring: { semiMajorArcsec: number; semiMinorArcsec: number; majorPaDeg: number; polarTiltDeg: number; polarLeansToPaDeg: number; expansionKmS: [number, number, number] };
+      lobe?: { source: string; radiusArcsec: number; expansionKmS: [number, number, number] }; smoothPixels: number };
     /** A published bulge-plus-disc fit of the sky light (./bulge.ts): Sérsic bulge, exponential disc, one position angle.
      * Every surface brightness is the component's as projected on the sky, in magnitudes per square arcsecond: a disc's
      * face-on central value (as S4G tabulates it) brightens by 2.5 log10 of its axis ratio. */
@@ -94,13 +98,16 @@ const bulgeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['bulge']>
       ...(e.fadeFrom===undefined?{}:{fadeFrom:(()=>{const f=positive(e.fadeFrom,'geometry.bulge.extentKpc.fadeFrom');if(f>=Number(e.radius))throw new TypeError(`geometry.bulge.extentKpc.fadeFrom (${f}) must be inside radius (${String(e.radius)}).`);return f;})()}) } };
 };
 const shapeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['shape']> => {
-  const s = object(v, 'geometry.shape'), axes = object(s.semiAxesKpc, 'geometry.shape.semiAxesKpc'), tilt = finite(s.polarTiltDeg, 'geometry.shape.polarTiltDeg'), share = finite(s.share, 'geometry.shape.share'), smooth = finite(s.smoothPixels, 'geometry.shape.smoothPixels');
-  if (!(tilt >= 0 && tilt <= 90)) throw new TypeError(`geometry.shape.polarTiltDeg must be from 0 to 90; got ${tilt}.`);
-  if (!(share > 0 && share <= 1)) throw new TypeError(`geometry.shape.share must be above 0 and at most 1; got ${share}.`);
+  const s = object(v, 'geometry.shape'), r = object(s.ring, 'geometry.shape.ring'), tilt = finite(r.polarTiltDeg, 'geometry.shape.ring.polarTiltDeg'), smooth = finite(s.smoothPixels, 'geometry.shape.smoothPixels');
+  const speeds = (value: unknown, name: string): [number, number, number] => { if (!Array.isArray(value) || value.length !== 3) throw new TypeError(`${name} holds three speeds, for the red, green and blue channels.`); return [positive(value[0], `${name}[0]`), positive(value[1], `${name}[1]`), positive(value[2], `${name}[2]`)]; };
+  if (!(tilt >= 0 && tilt <= 90)) throw new TypeError(`geometry.shape.ring.polarTiltDeg must be from 0 to 90; got ${tilt}.`);
   if (!(Number.isInteger(smooth) && smooth >= 1 && smooth <= 64)) throw new TypeError(`geometry.shape.smoothPixels must be a whole number from 1 to 64; got ${smooth}.`);
-  return { source: text(s.source, 'geometry.shape.source'), basis: text(s.basis, 'geometry.shape.basis'),
-    semiAxesKpc: { polar: positive(axes.polar, 'geometry.shape.semiAxesKpc.polar'), major: positive(axes.major, 'geometry.shape.semiAxesKpc.major'), minor: positive(axes.minor, 'geometry.shape.semiAxesKpc.minor') },
-    polarTiltDeg: tilt, polarLeansToPaDeg: finite(s.polarLeansToPaDeg, 'geometry.shape.polarLeansToPaDeg'), majorPaDeg: finite(s.majorPaDeg, 'geometry.shape.majorPaDeg'), share, smoothPixels: smooth };
+  const lobe = s.lobe === undefined ? undefined : object(s.lobe, 'geometry.shape.lobe');
+  return { source: text(s.source, 'geometry.shape.source'), basis: text(s.basis, 'geometry.shape.basis'), expansionKmSPerArcsec: positive(s.expansionKmSPerArcsec, 'geometry.shape.expansionKmSPerArcsec'),
+    ring: { semiMajorArcsec: positive(r.semiMajorArcsec, 'geometry.shape.ring.semiMajorArcsec'), semiMinorArcsec: positive(r.semiMinorArcsec, 'geometry.shape.ring.semiMinorArcsec'), majorPaDeg: finite(r.majorPaDeg, 'geometry.shape.ring.majorPaDeg'),
+      polarTiltDeg: tilt, polarLeansToPaDeg: finite(r.polarLeansToPaDeg, 'geometry.shape.ring.polarLeansToPaDeg'), expansionKmS: speeds(r.expansionKmS, 'geometry.shape.ring.expansionKmS') },
+    ...(lobe === undefined ? {} : { lobe: { source: text(lobe.source, 'geometry.shape.lobe.source'), radiusArcsec: positive(lobe.radiusArcsec, 'geometry.shape.lobe.radiusArcsec'), expansionKmS: speeds(lobe.expansionKmS, 'geometry.shape.lobe.expansionKmS') } }),
+    smoothPixels: smooth };
 };
 const parsecUnit = (v: unknown, unsupported: boolean): 'pc' => {
   if (v !== 'pc' || unsupported) throw new TypeError(`geometry.unit is "pc", on a flat bank without a bulge; got ${JSON.stringify(v)}${unsupported ? ' on a bank that is not flat or has a bulge' : ''}.`);

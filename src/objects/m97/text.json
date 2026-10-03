@@ -22,7 +22,7 @@
     ]
   },
   "introduction": {
-    "text": "A Sloan Digital Sky Survey image of it stands here as a flat picture facing the Sun, inside the sphere a paper gives it, 1.70 pc wide.",
+    "text": "A Sloan Digital Sky Survey image of it stands here as a flat picture facing the Sun, 1.70 pc wide.",
     "sources": [
       {
         "catalogueId": "sdss-dr9-color-hips",
@@ -38,13 +38,6 @@
         "checked": "2026-10-02",
         "locator": "Lead section, revision 1368396740",
         "quote": "Estimated to be about 8,000 years old, it is approximately circular in cross-section with a faint internal structure."
-      },
-      {
-        "catalogueId": "publication-guerrero-2003-owl-nebula",
-        "url": "https://arxiv.org/abs/astro-ph/0303056",
-        "label": "Guerrero et al. (2003), AJ 125, 3213: Physical structure of planetary nebulae. I. The Owl Nebula",
-        "checked": "2026-10-03",
-        "locator": "Sect. III.1 and Fig. 5: the outer shell is almost circular, 218 arcsec in diameter, and is modelled as spherical"
       }
     ]
   },
@@ -52,7 +45,7 @@
     "optical": {
       "title": "Owl Nebula in visible light",
       "detail": "2000 × 2000 px",
-      "summary": "A flat picture facing the Sun, inside the shape a paper gives the nebula. The shape's depth is modelled.",
+      "summary": "A flat picture facing the Sun at the nebula's distance; nothing in it has depth.",
       "sources": [
         {
           "catalogueId": "sdss-dr9-color-hips",
@@ -60,13 +53,6 @@
           "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
           "checked": "2026-10-02",
           "locator": "SDSS9 color"
-        },
-        {
-          "catalogueId": "publication-guerrero-2003-owl-nebula",
-          "url": "https://arxiv.org/abs/astro-ph/0303056",
-          "label": "Guerrero et al. (2003), AJ 125, 3213: Physical structure of planetary nebulae. I. The Owl Nebula",
-          "checked": "2026-10-03",
-          "locator": "Sect. III.1 and Fig. 5: the outer shell is almost circular, 218 arcsec in diameter, and is modelled as spherical"
         }
       ]
     }

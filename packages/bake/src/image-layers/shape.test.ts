@@ -29,7 +29,7 @@ function texel(leaf: Texture, x: number, y: number): [number, number, number, nu
   return [leaf.data[at]!, leaf.data[at + 1]!, leaf.data[at + 2]!, leaf.data[at + 3]!];
 }
 
-test('a shape\'s slices and the flat picture add up to the photograph along the Sun\'s sight line', async () => {
+test('a nebula\'s walls hold the light inside their outline and add up to the photograph along the Sun\'s sight line', async () => {
   const root = await mkdtemp(join(tmpdir(), 'image-layer-shape-')), source = join(root, 'source');
   try {
     await mkdir(source);
@@ -42,49 +42,46 @@ test('a shape\'s slices and the flat picture add up to the photograph along the 
     }
     await writeFile(join(source, 'source.png'), await sharp(rgb, { raw: { width: SIZE, height: SIZE, channels: 3 } }).png().toBuffer());
     await writeFile(join(source, 'provenance.json'), '{}\n');
-    // 0.01° at 1000 pc is 0.175 pc across; the sphere is 0.05 pc in radius, inside the glow.
+    // 0.01° is 36 arcsec across 64 pixels. The shell is 12 arcsec in radius on the sky; at 1 km/s per arcsec its walls,
+    // moving at 8 km/s, stand 8 arcsec in front of the star and behind it: 0.0388 pc at 1000 pc.
     const flat = { schema: 'cssearth-image-layer-recipe@1', id: 'fixture', source: { path: 'source.png', dimensions: [SIZE, SIZE], originalDimensions: [SIZE, SIZE], publisherUrl: 'https://example.test', downloadUrl: 'https://example.test/a', credit: 'Fixture', license: 'CC-BY-4.0' },
       observation: { centerRaDeg: 10, centerDecDeg: 20, fieldOfViewDeg: [0.01, 0.01], northClockwiseDeg: 20 }, target: { centerRaDeg: 10, centerDecDeg: 20, distancePc: 1000 },
       geometry: { kind: 'inclined-disk', inclinationDeg: 0.001, lineOfNodesPaDeg: 0, thicknessKpc: 1e-7, supportRadiusKpc: 0.0001, supportTaperFraction: 0.9, depthWeights: [0.25, 0.5, 0.25], depthScales: [1, 1, 1], unit: 'pc' },
       bake: { maxFacePixels: SIZE, diffuseFacePixels: 16, crossAxisSlices: 3, crossAxisAlongPixels: 16, crossAxisDepthPixels: 9, backgroundFloor: 0, edgeTaperFraction: 0.01, diffuseFraction: 0.6, diffuseSigmaPixels: 1, flat: true, encoding: { format: 'webp', quality: 100 } },
       provenance: { path: 'provenance.json' } };
-    const shaped = { ...flat, geometry: { ...flat.geometry, shape: { source: 'fixture', basis: 'fixture', semiAxesKpc: { polar: 0.00005, major: 0.00005, minor: 0.00005 }, polarTiltDeg: 0, polarLeansToPaDeg: 0, majorPaDeg: 0, share: 1, smoothPixels: 2 } },
-      bake: { ...flat.bake, bulgeSlices: 16, bulgeFacePixels: 32, bulgeCrossSlices: 8 } };
+    const shaped = { ...flat, geometry: { ...flat.geometry, shape: { source: 'fixture', basis: 'fixture', expansionKmSPerArcsec: 1, ring: { semiMajorArcsec: 12, semiMinorArcsec: 12, majorPaDeg: 0, polarTiltDeg: 0, polarLeansToPaDeg: 0, expansionKmS: [8, 8, 8] }, smoothPixels: 2 } },
+      bake: { ...flat.bake, bulgeSlices: 17, bulgeFacePixels: 32, bulgeCrossSlices: 8 } };
     const reference = await prepareImageLayers({ sourceDirectory: source, outputDirectory: join(root, 'flat'), recipe: parseImageLayerRecipe(flat) });
     const bank = await prepareImageLayers({ sourceDirectory: source, outputDirectory: join(root, 'shaped'), recipe: parseImageLayerRecipe(shaped) });
-    const leaves = bank.banks.find(entry => entry.axis === 'z')!.leaves as Leaf[], slices = leaves.filter(leaf => leaf.id.startsWith('bulge-z-'));
-    assert.ok(slices.length > 8 && slices.length <= 16, `${slices.length} slices`);
-    for (const axis of ['x', 'y'] as const) assert.ok(bank.banks.find(entry => entry.axis === axis)!.leaves.some(leaf => leaf.id.startsWith(`bulge-${axis}-`)), `${axis} curtains`);
+    const leaves = bank.banks.find(entry => entry.axis === 'z')!.leaves as Leaf[], terraces = leaves.filter(leaf => leaf.id.startsWith('shape-z-'));
+    assert.ok(terraces.length > 8 && terraces.length <= 17, `${terraces.length} terraces`);
+    for (const axis of ['x', 'y'] as const) assert.ok(bank.banks.find(entry => entry.axis === axis)!.leaves.some(leaf => leaf.id.startsWith(`shape-${axis}-`)), `${axis} curtains`);
     const textures = await Promise.all(leaves.map(leaf => texture(join(root, 'shaped'), leaf)));
     // Farthest from the Sun first: the frame's z points away from it.
     const order = textures.map((leaf, index) => ({ leaf, id: leaves[index]!.id })).sort((a, b) => b.leaf.depth - a.leaf.depth);
-    const picture = order.find(entry => entry.id === 'z-detail')!.leaf;
-    assert.ok(order.some(entry => entry.leaf.depth < picture.depth) && order.some(entry => entry.leaf.depth > picture.depth), 'slices stand on both sides of the picture');
-    // A browser keeps a slice's color premultiplied in 8 bits: every slice texel must premultiply to a whole number
-    // whether the browser rounds or truncates, and the whole fill has one color where its light is not rounded away.
-    let faint = 0;
-    for (const { leaf, id } of order) { if (id === 'z-detail') continue;
-      for (let at = 0; at < leaf.data.length; at += 4) { const alpha = leaf.data[at + 3]!; if (!alpha) continue; faint = Math.max(faint, alpha);
-        for (let channel = 0; channel < 3; channel++) { const light = leaf.data[at + channel]! * alpha / 255; assert.equal(Math.floor(light), Math.round(light), `${id}: ${leaf.data[at + channel]} at alpha ${alpha}`); } } }
-    assert.ok(faint > 0 && faint < 40, `slices are faint: the largest alpha is ${faint}`);
+    const depths = order.filter(entry => entry.id !== 'z-detail').map(entry => entry.leaf.depth);
+    // The walls reach 8 arcsec either side of the picture's plane, as far in front as behind.
+    const reach = 8 * 1000 * Math.PI / 648000;
+    assert.ok(Math.abs(Math.max(...depths) - reach) < reach / 8 && Math.abs(Math.min(...depths) + reach) < reach / 8, `${Math.min(...depths)} to ${Math.max(...depths)}, for ${reach}`);
     // The Sun's view: the leaves over one another, farthest first, against the flat bake of the same picture.
     const flatLeaf = reference.banks.find(entry => entry.axis === 'z')!.leaves[0] as Leaf, flatTexture = await texture(join(root, 'flat'), flatLeaf);
     let total = 0, alone = 0, far = 0, count = 0, moved = 0;
-    for (let row = 0; row < picture.height; row++) for (let column = 0; column < picture.width; column++) {
-      const a = (column + 0.5) / picture.width, b = (row + 0.5) / picture.height, x = picture.origin[0]! + a * picture.right[0]! + b * picture.down[0]!, y = picture.origin[1]! + a * picture.right[1]! + b * picture.down[1]!;
+    for (let row = 0; row < flatTexture.height; row++) for (let column = 0; column < flatTexture.width; column++) {
+      const a = (column + 0.5) / flatTexture.width, b = (row + 0.5) / flatTexture.height, x = flatTexture.origin[0]! + a * flatTexture.right[0]! + b * flatTexture.down[0]!, y = flatTexture.origin[1]! + a * flatTexture.right[1]! + b * flatTexture.down[1]!;
       const seen = [0, 0, 0], own = [0, 0, 0]; let through = 0;
       for (const { leaf, id } of order) { const sample = texel(leaf, x, y); if (!sample) continue; const alpha = sample[3] / 255; if (id !== 'z-detail' && alpha) through++;
         for (let channel = 0; channel < 3; channel++) { seen[channel] = sample[channel]! * alpha + seen[channel]! * (1 - alpha); if (id === 'z-detail') own[channel] = sample[channel]! * alpha; } }
-      const wanted = texel(flatTexture, x, y); if (!wanted) continue;
+      const wanted = texel(flatTexture, x, y)!;
       if (!through) continue;
       moved++;
-      for (let channel = 0; channel < 3; channel++) { const light = wanted[channel]! * wanted[3] / 255, difference = Math.abs(seen[channel]! - light); total += difference; alone += Math.abs(own[channel]! - light); if (difference > 8) far++; count++; }
+      for (let channel = 0; channel < 3; channel++) { const light = wanted[channel]! * wanted[3] / 255, difference = Math.abs(seen[channel]! - light); total += difference; alone += own[channel]!; if (difference > 8) far++; count++; }
     }
-    assert.ok(moved > 200, `the sphere covers ${moved} pixels of the picture`);
-    // Inside the sphere the flat picture alone is off by the light it gave; with the slices the sum is the photograph's.
+    // Inside the outline the light is on the walls, none of it left on the flat picture, and the walls add up to the
+    // photograph, within what the lossy color subsampling moves at this fixture's hard edges.
+    assert.ok(moved > 1000, `the walls cover ${moved} pixels of the picture`);
+    assert.ok(alone / count < 1, `the flat picture keeps ${(alone / count).toFixed(2)} of 255 inside the outline`);
     assert.ok(total / count < 4, `the mean difference from the flat picture is ${(total / count).toFixed(2)} of 255`);
-    assert.ok(alone > 5 * total, `the picture alone differs by ${(alone / count).toFixed(2)} of 255, the sum by ${(total / count).toFixed(2)}`);
     assert.ok(far / count < 0.1, `${(100 * far / count).toFixed(1)}% of the samples differ by more than 8 of 255`);
-    assert.match(bank.approximation.limitations.join(' '), /an even fill of the published ellipsoid, not a measurement/);
+    assert.match(bank.approximation.limitations.join(' '), /ellipsoids from published expansion speeds/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

@@ -45,7 +45,7 @@
     "pixelArcsec": 0.03963,
     "northClockwiseDeg": -11.7
   },
-  "displayModel": "The picture lies on one flat plane facing the Sun at the nebula's distance. Part of its smooth light fills the ellipsoid O'Dell et al. (2013) give the nebula, evenly and in one color; where that light lies along the sight line is modelled, not measured. The picture's detail has no depth.",
+  "displayModel": "Inside the Main Ring's outline the picture's light lies on two walls, in front of the star and behind it, at the depths published expansion speeds give: a shell seen almost pole-on and a lobe through its opening. Which wall holds a patch of light is not measured. Outside the outline the picture lies on one plane facing the Sun.",
   "coverage": "The published frame inside a circle: the picture fades out between 70% and 98% of half its short side, so its corners are not drawn and no straight edge shows. Its stars are removed before the bake by NOX, which predicts the light under a star and does not measure it.",
   "acquisition": {
     "url": "https://cdn.esahubble.org/archives/images/large/heic1310a.jpg",
