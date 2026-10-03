@@ -34,11 +34,13 @@ export function declaredPackage(path: string, manifest: unknown, built = false):
     declared: names([...SHIPPED_FIELDS, 'devDependencies']), shipped: names(SHIPPED_FIELDS), built };
 }
 
-/** `moduleSpecifiers` (ESM, dynamic and type imports) plus CommonJS `require('…')` and TypeScript `import x = require('…')`. */
+/** `moduleSpecifiers` (ESM, dynamic and type imports) plus CommonJS `require('…')` / `require.resolve('…')` and TypeScript `import x = require('…')`. */
 export function importedSpecifiers(text: string, path: string): string[] {
   const found = moduleSpecifiers(text, path).map(item => item.specifier);
   const visit = (node: ts.Node): void => {
-    if (ts.isCallExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === 'require'
+    if (ts.isCallExpression(node) && (ts.isIdentifier(node.expression) && node.expression.text === 'require'
+      || ts.isPropertyAccessExpression(node.expression) && ts.isIdentifier(node.expression.expression)
+        && node.expression.expression.text === 'require' && node.expression.name.text === 'resolve')
       && node.arguments[0] && ts.isStringLiteralLike(node.arguments[0])) found.push(node.arguments[0].text);
     else if (ts.isImportEqualsDeclaration(node) && ts.isExternalModuleReference(node.moduleReference)
       && ts.isStringLiteralLike(node.moduleReference.expression)) found.push(node.moduleReference.expression.text);
