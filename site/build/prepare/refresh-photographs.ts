@@ -6,7 +6,7 @@ import { readFile, readdir, writeFile, mkdir, mkdtemp, copyFile } from 'node:fs/
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { readRasterRecipe as parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
+import { readRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 import { prepareObjectContentAssets } from '../content/prepare.ts';
 import { parseRuntimeManifest } from '@cssearth/bake/delivery';
@@ -20,7 +20,7 @@ export async function refreshPhotographs(id: string, datasetIds: readonly string
   const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const authored = await readAuthoredSources(objectDirectory);
   const sources = new Map([...authored.sources].map(([id, entry]) => [id, entry.value]));
-  const config = parseRasterRecipe(sources.get('raster'));
+  const config = readRasterRecipe(sources.get('raster'));
   if (config.resample !== 'density-before-pack' || config.emission)
     throw new TypeError('Photographic refresh needs separately packed non-emissive raster surfaces.');
   if (datasetIds.some(id => !config.surfaces.some(surface => surface.id === id))) throw new TypeError('Unknown photographic dataset.');

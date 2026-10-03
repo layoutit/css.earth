@@ -47,3 +47,47 @@ test('raster validates inline recipes and preserves resolution position and muta
   assert.equal(called, true);
   assert.throws(() => parseRasterRecipe({ ...fixture, atmosphere: { materialOutput: 'a', observationOutput: 'b', lightingOutput: 'c', tileSize: 1, logicalSize: 1, bodyRadius: 1, supersampling: 1, coverageScale: 1, contentScale: 1, frameCount: 1, directionalFrameCount: 1, columns: 1, rows: 1, minimumLightViewZ: -1, maximumLightViewZ: 1, limb: { models: [] } } }, inline), /must name three records/);
 });
+// Frozen from the pre-migration origin/main parsers; no branch or filesystem dependency at test time.
+test('raster admission and first diagnostics remain fixed', () => {
+  const r = rasterRecipeFixture();
+  const cases: readonly [unknown, string][] = [
+    [null, 'raster must be an object.'],
+    [[], 'raster must be an object.'],
+    [{}, 'Unsupported raster recipe schema.'],
+    [{ ...r, schema: 'wrong', sourceWidth: 0 }, 'Unsupported raster recipe schema.'],
+    [{ ...r, sourceWidth: 0, lighting: { bank: 'bad' } }, 'raster.sourceWidth must be positive and finite.'],
+    [{ ...r, surfaces: [], thumbnail: { size: 0 } }, 'thumbnail.size must be positive and finite.'],
+    [{ ...r, surfaces: [{ ...r.surfaces[0], source: '../escape' }] }, 'surface.source must be a contained relative path.'],
+    [{ ...r, thumbnail: { size: 8, quality: 1 } }, 'thumbnail.quality is no longer read; thumbnails are encoded in the lossy lane (packages/bake/src/raster/lossy-lane.ts). Remove it from raster.json.'],
+  ];
+  for (const [value, message] of cases) assert.throws(() => parseRasterRecipe(value, inline), { name: 'TypeError', message });
+  assert.deepEqual(parseRasterRecipe(r, inline), r);
+});
+test('body admission, normalization and first diagnostics remain fixed', () => {
+  const b = bodyMapFixture();
+  const cases: readonly [unknown, string, string][] = [
+    [null, 'TypeError', 'body map must be an object.'],
+    [[], 'TypeError', 'body map must be an object.'],
+    [{}, 'TypeError', 'Unsupported body map schema undefined.'],
+    [{ ...b, schema: 'wrong', observations: [] }, 'TypeError', 'Unsupported body map schema wrong.'],
+    [{ ...b, observations: [], grid: { ...b.grid, width: -1.5 } }, 'TypeError', 'A body map names the observations it was made from.'],
+    [{ ...b, observations: [{ ...b.observations[0], rangeKm: -1 }] }, 'RangeError', 'Observation 0 needs the range to the body, in kilometres.'],
+    [{ ...b, observations: [{ ...b.observations[0], startIso: '2000-01-01T00:00:00Z' }] }, 'RangeError', 'Invalid authoritative UTC interval.'],
+  ];
+  for (const [value, name, message] of cases) assert.throws(() => parseBodyMapProduct(value, sizes), { name, message });
+  assert.deepEqual(parseBodyMapProduct({ ...b, mask: { ...b.mask, missing: 'other' } }, sizes), b);
+});
+test('resolving a lighting bank replaces lighting on the caller recipe', () => {
+  const authored = { bank: 'fixture' };
+  const recipe = { ...rasterRecipeFixture(), lighting: authored };
+  const resolved = {
+    ...authored, frameSize: 8, columns: 1, presentationSize: 8, billboardFrameSize: 8, billboardColumns: 1,
+    frameCount: 1, radiusScale: 1, defaultFrame: 0, minimumLightViewZ: -1, maximumLightViewZ: 1,
+    maximumAlpha: 1, shadowlessFloodLimbFloor: 0, ambientIntensity: 0, terminator: [0, 1] as const,
+    rowOutput: 'row.webp', billboardOutput: 'billboard.webp', bankSchema: 'bank', billboardSchema: 'billboard', metadata: {},
+  };
+  const result = parseRasterRecipe(recipe, () => resolved);
+  assert.notStrictEqual(resolved, authored);
+  assert.strictEqual(recipe.lighting, resolved);
+  assert.strictEqual(result.lighting, resolved);
+});

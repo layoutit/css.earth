@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import ts from 'typescript';
-const root = resolve(import.meta.dirname, '../../../..');
+const root = resolve(import.meta.dirname, '../../..');
 const contracts = new Set(['BodyMapProduct', 'BodyMapObservation', 'BodyMapFrame', 'BodyMapGrid', 'AngularResolution', 'MeasurementDefinition', 'CombinationPolicy', 'TimeDependence', 'ResolutionEvidence', 'ResolutionAssumption', 'LimbBlock', 'RasterRecipe', 'LightingRecipe', 'SurfaceRasterRecipe', 'SurfaceEncoding', 'AtmosphereRecipe', 'InteriorRecipe', 'StructureSource', 'EmissionRecipe', 'LambertRasterConfig', 'InteriorPalette', 'CutawayAngles']);
 const parsers = new Set(['parseBodyMapProduct', 'parseCombinationPolicy', 'parseResolutionEvidence', 'parseAcceptedAssumptions', 'parseLimbBlock', 'parseRasterRecipe']);
 test('moved formats have no second definition or parser outside objects', () => {

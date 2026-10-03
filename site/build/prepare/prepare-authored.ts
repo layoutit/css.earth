@@ -10,7 +10,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { parsePresentationProfile, AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, readAuthoredPreparationSources, CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, type AuthoredObjectDescriptor } from '@cssearth/objects';
 import { readAuthoredSources, type VerifiedSource } from '@cssearth/bake/objects/sources';
-import { readRasterRecipe as parseRasterRecipe, prepareLimb, prepareRasterAssets, surfaceCoordinateWidth, prepareLighting, prepareAtmosphere, outputName } from '@cssearth/bake/raster';
+import { readRasterRecipe, prepareLimb, prepareRasterAssets, surfaceCoordinateWidth, prepareLighting, prepareAtmosphere, outputName } from '@cssearth/bake/raster';
 import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '@cssearth/bake/scene';
 import { prepareCssPresentation, type PresentationInputs } from '@cssearth/bake/presentation';
 import { prepareCelestialAssets } from '@cssearth/bake/objects/celestial';
@@ -363,7 +363,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   }
   // Scientific and observed surfaces are interpreted by their existing decoder owners (observation rasters,
   // terrestrial decoders, GLB base color, solar synoptic maps) before the raster lane packs them; src never imports tools.
-  const rasterConfig = parseRasterRecipe(required(sources, 'raster').value);
+  const rasterConfig = readRasterRecipe(required(sources, 'raster').value);
   const solarSource = physicalSolarSource(required(sources, 'solar-system').value);
   if (reuseImages && (source(sources, 'observations') || source(sources, 'rings')))
     throw new TypeError(`${descriptor.id}: --reuse-images cannot carry observed surfaces or radial layers, which publish their own images; run the full preparation.`);

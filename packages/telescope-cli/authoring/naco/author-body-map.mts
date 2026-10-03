@@ -14,7 +14,7 @@ import { pathToFileURL } from 'node:url';
 import { readFitsImage } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { bodyMapFits, topRowFirst } from '@cssearth/bake/objects/layers/observation';
-import { formatBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { type BodyMapFrame, type MeasurementDefinition } from '@cssearth/objects';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
@@ -154,7 +154,7 @@ export async function authorNacoBodyMap(target: string, programId: string, produ
     planes: { file: basename(output), value: quantity, uncertainty: `${quantity} ERROR` },
     mask: { maximumEmissionDegrees: 70, missing: 'NaN' }, observations: [placed.observation] } as const;
   const resolution = bindMapResolution(unqualifiedMap, 'measured', 'disc-edge-gaussian-fit', placed.centre), mapProduct = resolution.product;
-  const metadata = Buffer.from(formatBodyMapProduct(mapProduct)), metadataPath = `${output}.body-map.json`, mapRecordPath = productRecordPath(output);
+  const metadata = Buffer.from(renderBodyMapProduct(mapProduct)), metadataPath = `${output}.body-map.json`, mapRecordPath = productRecordPath(output);
   const inputs: ProductInput[] = [
     { role: 'reduced jitter image', identity: product, bytes: productBytes.byteLength },
     { role: 'reduction product record', identity: reductionRecordPath, bytes: reductionRecordBytes.byteLength },

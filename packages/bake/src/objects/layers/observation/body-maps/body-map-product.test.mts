@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import type { BodyMap } from '@cssearth/bake/objects/layers/observation';
-import { combineUnderPolicy, assertProductsCombinable, readBodyMapProduct as parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
+import { combineUnderPolicy, checkProductsCombinable, readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
 import { type BodyMapObservation, type BodyMapProduct, type MeasurementDefinition } from '@cssearth/objects';
 
 const salt: MeasurementDefinition = { quantity: 'equivalent width', units: 'Angstrom', timeDependence: 'surface-property', source: 'Trumbo, Brown & Hand 2019, doi:10.1126/sciadv.aaw7123',
@@ -21,21 +21,21 @@ test('the same quantity and units are not the same measurement', () => {
   const otherWindow = { ...salt, method: { ...salt.method, bandAngstrom: [4000, 5000] } };
   const policy = { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } } as const;
   // A citation is not part of what was measured.
-  assertProductsCombinable([map(salt, [seen('a', 2457000, 0.1)]), map({ ...salt, source: 'a corrected citation' }, [seen('b', 2457001, 0.1)])], policy);
-  assert.throws(() => assertProductsCombinable([map(salt, [seen('a', 2457000, 0.1)]), map(otherWindow, [seen('b', 2457001, 0.1)])], policy), /not the same measurement/u);
-  assert.throws(() => assertProductsCombinable([map(salt, [seen('a', 2457000, 0.1)]), map(heat, [seen('b', 2457001, 0.1)])], policy), /not the same measurement/u);
+  checkProductsCombinable([map(salt, [seen('a', 2457000, 0.1)]), map({ ...salt, source: 'a corrected citation' }, [seen('b', 2457001, 0.1)])], policy);
+  assert.throws(() => checkProductsCombinable([map(salt, [seen('a', 2457000, 0.1)]), map(otherWindow, [seen('b', 2457001, 0.1)])], policy), /not the same measurement/u);
+  assert.throws(() => checkProductsCombinable([map(salt, [seen('a', 2457000, 0.1)]), map(heat, [seen('b', 2457001, 0.1)])], policy), /not the same measurement/u);
 });
 
 test('an instantaneous state is never combined as if time did not matter', () => {
   const pair = [map(heat, [seen('nov-17', 2457343.9, 0.05)]), map(heat, [seen('nov-26', 2457352.9, 0.05)])];
-  assert.throws(() => assertProductsCombinable(pair, { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } }), /instantaneous state/u);
-  assert.throws(() => assertProductsCombinable(pair, { time: { rule: 'same-epoch-only', withinDays: 1 }, resolution: { rule: 'as-observed' } }), /span 9\.00 days/u);
-  assertProductsCombinable(pair, { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } });
+  assert.throws(() => checkProductsCombinable(pair, { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } }), /instantaneous state/u);
+  assert.throws(() => checkProductsCombinable(pair, { time: { rule: 'same-epoch-only', withinDays: 1 }, resolution: { rule: 'as-observed' } }), /span 9\.00 days/u);
+  checkProductsCombinable(pair, { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } });
 });
 
 test('resolution differences need a stated policy, and kilometres need the range', () => {
   const sharp = seen('sharp', 2457352.9, 0.048), blurred = seen('blurred', 2457352.9, 0.3);
-  assert.throws(() => assertProductsCombinable([map(heat, [sharp]), map(heat, [blurred])], { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'within-factor', factor: 2 } }), /factor of 6\.25/u);
+  assert.throws(() => checkProductsCombinable([map(heat, [sharp]), map(heat, [blurred])], { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'within-factor', factor: 2 } }), /factor of 6\.25/u);
   const onGround = surfaceResolutionKm(sharp);
   assert.ok(Math.abs(onGround.majorKm - 195.1) < 0.5 && onGround.where === 'sub-observer point', `${onGround.majorKm}`);
   assert.ok(Math.abs(surfaceResolutionKm(seen('near', 2457352.9, 0.048, 4.1925e8)).majorKm - 97.6) < 0.5, 'the same angle is half the kilometres at half the range');
@@ -43,10 +43,10 @@ test('resolution differences need a stated policy, and kilometres need the range
 });
 
 test('a record without a method, a range or a combination rule is refused', () => {
-  assert.throws(() => parseBodyMapProduct({ ...map(heat, [seen('a', 2457352.9, 0.05)]), definition: { ...heat, method: {} } }), /not a definition/u);
-  assert.throws(() => parseBodyMapProduct(map(heat, [{ ...seen('a', 2457352.9, 0.05), rangeKm: 0 }])), /range to the body/u);
-  assert.throws(() => parseBodyMapProduct(map(heat, [seen('a', 2457343.9, 0.05), seen('b', 2457352.9, 0.05)])), /states how they were combined/u);
-  assert.equal(parseBodyMapProduct(map(heat, [seen('a', 2457343.9, 0.05), seen('b', 2457352.9, 0.05)], { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } })).observations.length, 2);
+  assert.throws(() => readBodyMapProduct({ ...map(heat, [seen('a', 2457352.9, 0.05)]), definition: { ...heat, method: {} } }), /not a definition/u);
+  assert.throws(() => readBodyMapProduct(map(heat, [{ ...seen('a', 2457352.9, 0.05), rangeKm: 0 }])), /range to the body/u);
+  assert.throws(() => readBodyMapProduct(map(heat, [seen('a', 2457343.9, 0.05), seen('b', 2457352.9, 0.05)])), /states how they were combined/u);
+  assert.equal(readBodyMapProduct(map(heat, [seen('a', 2457343.9, 0.05), seen('b', 2457352.9, 0.05)], { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } })).observations.length, 2);
 });
 
 const frame = { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', bodyCode: 502 } };
@@ -72,7 +72,7 @@ test('the combination itself refuses maps that are not one measurement', () => {
 
 test('a resolution limit looks at both axes of the beam', () => {
   const round = { ...seen('round', 2457352.9, 1), angularResolution: { majorArcsec: 1, minorArcsec: 1, basis: 'beam' } }, needle = { ...seen('needle', 2457352.9, 1), angularResolution: { majorArcsec: 1, minorArcsec: 0.01, basis: 'beam' } };
-  assert.throws(() => assertProductsCombinable([map(heat, [round]), map(heat, [needle])], { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'within-factor', factor: 2 } }), /minor axis ranges over a factor of 100/u);
+  assert.throws(() => checkProductsCombinable([map(heat, [round]), map(heat, [needle])], { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'within-factor', factor: 2 } }), /minor axis ranges over a factor of 100/u);
 });
 
 test('no production code averages placed maps except through the policy', async () => {

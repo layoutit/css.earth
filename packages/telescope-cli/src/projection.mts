@@ -6,7 +6,7 @@ import { randomUUID } from 'node:crypto';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import { fileSize } from '@cssearth/telescope/node';
 import type { ProductInput } from '@cssearth/telescope';
-import { readBodyMapProduct as parseBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { readBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 
 import { assertBodyMapPlanes, bodyMapProductRecord, formatProductRecord } from './body-map-publication.mts';
 import { VERSION } from './help.mts';
@@ -72,7 +72,7 @@ export async function projectOutput(recordPath:string,geometryPath:string,output
     const spectral=requireRecord(metadata.spectral??{}),band=selection.band;
     const sampling=requireFiniteNumber(nav.samplingArcsec);
     const resolution={majorArcsec:sampling,minorArcsec:sampling,basis:'Native angular sampling from the registered disc scale; achieved PSF/beam resolution remains unknown.',evidence:{kind:'sampling'}};
-    const product=parseBodyMapProduct({schema:BODY_MAP_SCHEMA,definition:{quantity:definition,units:requireString(nav.units),timeDependence:'instantaneous-state',
+    const product=readBodyMapProduct({schema:BODY_MAP_SCHEMA,definition:{quantity:definition,units:requireString(nav.units),timeDependence:'instantaneous-state',
       ...(Array.isArray(band)?{wavelengthIntervalsMicrometres:[band]}:selection.kind==='image'&&Array.isArray(spectral.centersMicrometres)&&typeof selection.plane==='number'?{wavelengthIntervalsMicrometres:[[spectral.centersMicrometres[selection.plane],spectral.centersMicrometres[selection.plane]]]}:{}),
       method:{measurement,selection:Object.fromEntries(Object.entries(selection).filter(([key])=>key!=='hdu')),projection:{owner:'PlanetMapper',interpolation:'nearest',latitude:'planetocentric',shape:nav.shape,uncertainty:nav.uncertainty}},source:source.file},
       frame:{body:d.target,radiusKm:nav.radiusKm,rotation:{model:rotation.file,bodyCode:nav.bodyCode}},grid:{width:geometry.width,height:geometry.height,longitude:'east-positive-from-0',rows:'north-to-south'},

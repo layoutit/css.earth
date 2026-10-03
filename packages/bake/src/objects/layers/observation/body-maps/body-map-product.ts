@@ -1,4 +1,4 @@
-import { parseBodyMapProduct, assertCombinable as checkCombinable, assertProductsCombinable as checkProductsCombinable, formatBodyMapProduct as formatProduct, type BodyMapObservation, type BodyMapGrid, type BodyMapFrame, type BodyMapProduct, type MeasurementDefinition, type CombinationPolicy } from '@cssearth/objects';
+import { parseBodyMapProduct, assertCombinable, assertProductsCombinable, formatBodyMapProduct, type BodyMapObservation, type BodyMapGrid, type BodyMapFrame, type BodyMapProduct, type MeasurementDefinition, type CombinationPolicy } from '@cssearth/objects';
 import { combineBodyMaps, type BodyMap } from './body-map.ts';
 const ARCSEC_PER_RADIAN = 206_264.806_247;
 
@@ -16,9 +16,9 @@ export const resolutionElementsAcrossDisc = (observation: Pick<BodyMapObservatio
 
 /** Read an authored product using the scientific owner's surface-resolution calculation. */
 export const readBodyMapProduct = (value: unknown): BodyMapProduct => parseBodyMapProduct(value, surfaceResolutionKm);
-export const assertCombinable = (definitions: readonly MeasurementDefinition[], frames: readonly BodyMapFrame[], grids: readonly BodyMapGrid[], observations: readonly BodyMapObservation[], policy: CombinationPolicy): void => checkCombinable(definitions, frames, grids, observations, policy, surfaceResolutionKm);
-export const assertProductsCombinable = (products: readonly BodyMapProduct[], policy: CombinationPolicy): void => checkProductsCombinable(products, policy, surfaceResolutionKm);
-export const formatBodyMapProduct = (product: BodyMapProduct): string => formatProduct(product, surfaceResolutionKm);
+export const checkCombinable = (definitions: readonly MeasurementDefinition[], frames: readonly BodyMapFrame[], grids: readonly BodyMapGrid[], observations: readonly BodyMapObservation[], policy: CombinationPolicy): void => assertCombinable(definitions, frames, grids, observations, policy, surfaceResolutionKm);
+export const checkProductsCombinable = (products: readonly BodyMapProduct[], policy: CombinationPolicy): void => assertProductsCombinable(products, policy, surfaceResolutionKm);
+export const renderBodyMapProduct = (product: BodyMapProduct): string => formatBodyMapProduct(product, surfaceResolutionKm);
 
 /** One placed map with what it means: what `combineUnderPolicy` takes. `map.facing` says how squarely each cell was seen. */
 export interface MeasuredMap { readonly map: BodyMap; readonly definition: MeasurementDefinition; readonly frame: BodyMapFrame; readonly observation: BodyMapObservation }
@@ -34,7 +34,7 @@ export interface MeasuredMap { readonly map: BodyMap; readonly definition: Measu
 export function combineUnderPolicy(inputs: readonly MeasuredMap[], policy: CombinationPolicy, maximumEmissionDegrees: number) {
   if (!inputs.length) throw new RangeError('Nothing to combine.');
   const grid = (map: BodyMap): BodyMapGrid => ({ width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' });
-  assertCombinable(inputs.map(input => input.definition), inputs.map(input => input.frame), inputs.map(input => grid(input.map)), inputs.map(input => input.observation), policy);
+  checkCombinable(inputs.map(input => input.definition), inputs.map(input => input.frame), inputs.map(input => grid(input.map)), inputs.map(input => input.observation), policy);
   const averaged = combineBodyMaps(inputs.map(input => input.map), maximumEmissionDegrees);
   if (policy.time.rule !== 'mosaic-of-snapshots') return { ...averaged, chosen: null as Int16Array | null };
   const first = inputs[0]!.map, cells = first.width * first.height, depth = new Float32Array(cells).fill(NaN), error = new Float32Array(cells).fill(NaN), facing = new Float32Array(cells), chosen = new Int16Array(cells).fill(-1);

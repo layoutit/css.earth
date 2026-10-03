@@ -30,7 +30,7 @@ import { HST_PROGRAMS, PROGRAMS } from '@cssearth/telescope-cli/archives/hst/arc
 import { observerCamera, type BodyOrientation } from '@cssearth/bake/objects/cameras';
 import { loadOrientation } from '@cssearth/bake/objects/layers/terrestrial';
 import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap } from '@cssearth/bake/objects/layers/observation';
-import { combineUnderPolicy, formatBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
@@ -409,7 +409,7 @@ export async function writeProducts(definition: SlitScanDefinition, run: SlitSca
   await mkdir(outputDirectory, { recursive: true });
   const name = `${definition.band.id}.fits`;
   const fits = scanProduct(definition, run), rotationBytes = await readFile(resolve(REPOSITORY, definition.orientation.path));
-  const product = scanBodyMapRecord(definition, run, fits, name), metadata = Buffer.from(formatBodyMapProduct(product));
+  const product = scanBodyMapRecord(definition, run, fits, name), metadata = Buffer.from(renderBodyMapProduct(product));
   const registration = Buffer.from(`${JSON.stringify({ scan: definition.id, acrossSlitDirection: run.direction,
     frames: run.frames.map(frame => ({ name: frame.name, visit: frame.visit, programme: frame.programme, targetName: frame.targetName,
       postArg1Arcsec: frame.postArg1Arcsec, postArg2Arcsec: frame.postArg2Arcsec, orientatDegrees: frame.orientatDegrees,

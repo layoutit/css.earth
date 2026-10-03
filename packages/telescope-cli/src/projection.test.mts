@@ -11,7 +11,7 @@ import { exportSphere } from './sphere/sphere.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 import { inspectMeasurementSphere } from './sphere/sphere-lane.mts';
 import { bodyMapFits } from '@cssearth/bake/objects/layers/observation';
-import { formatBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { type BodyMapProduct } from '@cssearth/objects';
 import sharp from 'sharp';
 const test = sourceTest();
@@ -32,7 +32,7 @@ async function mapFixture(root:string,target='mercury'){
   await mkdir(root,{recursive:true});
   const plane=fits(3),map:BodyMapProduct={schema:'cssearth-body-map@1',definition:{quantity:'Brightness temperature',units:'K',timeDependence:'instantaneous-state',method:{owner:'fixture'},source:'fixture'},frame:{body:target,radiusKm:2439.7,rotation:{model:'pck.tpc',bodyCode:199}},grid:{width:4,height:2,longitude:'east-positive-from-0',rows:'north-to-south'},planes:{file:'map.fits',value:'VALUE',uncertainty:'SIGMA'},mask:{maximumEmissionDegrees:65,missing:'NaN'},observations:[{id:'observation',telescope:'Fixture',instrument:'Camera',midTimeJd:2460000,rangeKm:1e8,subObserver:{latitudeDegrees:0,westLongitudeDegrees:0},angularResolution:{majorArcsec:1,minorArcsec:1,basis:'fixture'}}]};
   const files={map:resolve(root,'map.fits'),metadata:resolve(root,'map.fits.body-map.json'),texture:resolve(root,'texture.png'),poles:resolve(root,'poles.png'),navigation:resolve(root,'navigation.json'),record:resolve(root,'map.fits.product.json')};
-  await writeFile(files.map,plane);await writeFile(files.metadata,formatBodyMapProduct(map));
+  await writeFile(files.map,plane);await writeFile(files.metadata,renderBodyMapProduct(map));
   const png=await sharp({create:{width:2,height:2,channels:4,background:'#6688aaff'}}).png().toBuffer();await writeFile(files.texture,png);await writeFile(files.poles,png);
   await writeFile(files.navigation,JSON.stringify({radiiKm:[2439.7,2439.7,2439.7],shape:'reference ellipsoid',registration:{method:'disc'},uncertainty:'source uncertainty',normalization:{minimum:1,maximum:4,colormap:'viridis',missing:'#333941'},sourceContext:{...explorationContext,target}}));
   const outputs=[{path:'map.fits',file:files.map},{path:'map.fits.body-map.json',file:files.metadata},{path:'texture.png',file:files.texture},{path:'poles.png',file:files.poles},{path:'navigation.json',file:files.navigation}];

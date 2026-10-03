@@ -11,7 +11,7 @@ import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { flagValue, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readJsonSource } from '@cssearth/bake/objects/sources';
-import { readBodyMapProduct as parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
+import { readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
 
 import type { SourceIntakeIssue } from './source-intake.mts';
 import { loadSourceProducts, sourceQualifiedObservations } from './source-products.mts';
@@ -191,7 +191,7 @@ function resolveEvidence(inputs: QueryInputs, modes: readonly TargetMode[]): { r
   const attached = new Map<TargetMode, AttachedEvidence>(modes.map(mode => [mode, { bodyMaps: [], investigations: [] }]));
   const unassigned: UnassignedEvidence[] = [];
   for (const { path, value } of inputs.bodyMaps) {
-    const map = parseBodyMapProduct(value);
+    const map = readBodyMapProduct(value);
     for (const observation of map.observations) {
       const namedMode = observation.mode ?? observation.instrument;
       const { mode, couldMean } = resolveMode(observation.telescope, namedMode, modes);

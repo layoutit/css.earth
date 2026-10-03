@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { formatBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { type BodyMapProduct } from '@cssearth/objects';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord, qualifyBodyMap } from './body-map-publication.mts';
 import type { ObservationSelection } from './query-contract.mts';
@@ -29,7 +29,7 @@ async function fixture(value = product(), measured = true) {
   const bound = measured ? bindMapResolution(value, 'measured', 'fixture-disc-fit', { residual: 0.01 }) : undefined;
   if (bound) value = bound.product;
   const directory = await mkdtemp(resolve(tmpdir(), 'body-map-publication-')), planePath = resolve(directory, value.planes.file), mapPath = `${planePath}.body-map.json`;
-  const metadata = Buffer.from(formatBodyMapProduct(value)), record = bodyMapProductRecord(value, plane, metadata,
+  const metadata = Buffer.from(renderBodyMapProduct(value)), record = bodyMapProductRecord(value, plane, metadata,
     [{ role: 'spectral cube', identity: 'mast:JWST/product/jw01250-o002_s3d.fits', bytes: 12 }],
     [{ name: 'cssEarth author-body-maps', version: '1' }], bound ? [bound.output] : []);
   if (bound) await writeFile(resolve(directory, bound.output.path), bound.output.bytes);

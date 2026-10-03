@@ -30,7 +30,7 @@ import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
 import { mastFile } from '@cssearth/telescope/node';
 import { readImagingProgram } from '@cssearth/telescope-cli/archives/jwst/imaging/image3';
 import { bandDepth, openSpectralCube, type Window } from '@cssearth/bake/objects/layers/observation';
-import { combineUnderPolicy, formatBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
@@ -129,7 +129,7 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
       grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, value: quantity, uncertainty: `${quantity} ERROR` },
       mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) } as const;
     const resolution = bindMapResolution(unqualifiedMap, 'measured', 'disc-edge-gaussian-fit', cubes), mapProduct = resolution.product;
-    const metadata = Buffer.from(formatBodyMapProduct(mapProduct));
+    const metadata = Buffer.from(renderBodyMapProduct(mapProduct));
     written.set(resolve(source, `${output}.body-map.json`), metadata);
     written.set(resolve(dirname(resolve(source, output)), resolution.output.path), resolution.output.bytes);
     written.set(resolve(source, output), fits);
