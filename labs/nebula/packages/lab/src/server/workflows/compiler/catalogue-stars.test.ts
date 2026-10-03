@@ -97,3 +97,20 @@ test('invalid frame and selection limits fail before rendering', () => {
   assert.throws(() => prepareCatalogueStars(valid, model(), center, 10, ['optical', 'optical']), /dataset/);
   assert.equal(prepare([row], 0).stars.length, 0);
 });
+
+test('errors are reported in order: envelope, frame and limits, model bounds, then rows and duplicate identities', () => {
+  const row = star('valid', 6, .2), invalidRow = { ...star('bad', 6, .2), magnitudeV: Number.NaN };
+  const badEnvelope = { ...catalogue([row]), frame: 'galactic' };
+  const badBounds = { ...model(), bounds: { min: [0, 0, 0], max: [0, 0, 0] } } as EmissionFieldModel;
+  // The envelope is read first, so it wins over an invalid maximum.
+  assert.throws(() => prepareCatalogueStars(badEnvelope, model(), center, 5001, ['optical']), /ICRS positions at epoch 2000/);
+  // A valid envelope with an invalid maximum, dataset list or centre fails on the frame before the model bounds or any row.
+  assert.throws(() => prepareCatalogueStars(catalogue([invalidRow]), badBounds, center, 5001, ['optical']), /maximum/);
+  assert.throws(() => prepareCatalogueStars(catalogue([invalidRow]), badBounds, center, 5, ['optical', 'optical']), /dataset/);
+  assert.throws(() => prepareCatalogueStars(catalogue([invalidRow]), badBounds, [Number.NaN, 0], 5, ['optical']), /frame/);
+  // Model bounds are checked before rows.
+  assert.throws(() => prepareCatalogueStars(catalogue([invalidRow, star('bad', 6)]), badBounds, center, 5, ['optical']), /model bounds/);
+  // Rows are validated before duplicate identities.
+  assert.throws(() => prepareCatalogueStars(catalogue([invalidRow, row, row]), model(), center, 5, ['optical']), /Invalid observed stellar catalogue record/);
+  assert.throws(() => prepareCatalogueStars(catalogue([row, row]), model(), center, 5, ['optical']), /Duplicate observed stellar catalogue identity/);
+});
