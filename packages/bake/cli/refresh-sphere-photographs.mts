@@ -5,7 +5,7 @@ import { access, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve, relative } from 'node:path';
 import sharp from 'sharp';
 import type { Sharp } from 'sharp';
-import { completeEnhancedCoverage, createNativePhotographPolarSprite, packLatitudeRaster } from '../src/baking/index.js';
+import { completeEnhancedCoverage, createNativePhotographPolarSprite, packLatitudeRaster } from '../src/baking/index.ts';
 import { missingCoverageColor, applyNativeSurfaceExposure, loadNativeSourcePoleSampler } from '@cssearth/bake/raster';
 import { loadNativeObservationPoleSampler, parseObservationDataset } from '@cssearth/bake/objects/layers/observation';
 import { loadNativePhotograph, parseSolidObservation } from '@cssearth/bake/objects/layers/terrestrial';

@@ -1,1 +1,1 @@
-export * from './surface.js';
+export * from './surface.ts';

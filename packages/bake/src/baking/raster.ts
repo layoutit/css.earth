@@ -1,4 +1,4 @@
-import { modulo, clamp } from './math.js';
+import { modulo, clamp } from './math.ts';
 export function packLatitudeRaster(source: Uint8Array, width: number, height: number, bandCount: number, gutter: number) {
     if (![width, height, bandCount, gutter].every(value => Number.isInteger(value) && value > 0) || height % bandCount !== 0 || source.length !== width * height * 4)
         throw new RangeError('Invalid latitude raster dimensions.');

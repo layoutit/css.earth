@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import { copyFile } from 'node:fs/promises';
 import { availableParallelism } from 'node:os';
 import { resolve } from 'node:path';
-import { lightingFrame, type LambertRasterConfig } from '../baking/index.js';
+import { lightingFrame, type LambertRasterConfig } from '../baking/index.ts';
 import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
 import { limbSphereFrame, type Channels, type LimbLaw } from '../photometry/index.ts';
 import { type RasterRecipe, type LightingRecipe } from './config.ts';

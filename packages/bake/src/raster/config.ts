@@ -1,4 +1,4 @@
-import type { LambertRasterConfig, CutawayAngles, InteriorPalette } from '../baking/index.js';
+import type { LambertRasterConfig, CutawayAngles, InteriorPalette } from '../baking/index.ts';
 import type { LimbBlock } from '../photometry/index.ts';
 /** Delivered surface map encoding. Absent means the lossy WebP default. */
 export interface SurfaceEncoding {

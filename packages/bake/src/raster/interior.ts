@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { interiorLayer, interiorCorePoleAtlas, interiorSection, shadeInteriorOuter, orientLatitudeBands, polarTile } from '../baking/index.js';
+import { interiorLayer, interiorCorePoleAtlas, interiorSection, shadeInteriorOuter, orientLatitudeBands, polarTile } from '../baking/index.ts';
 import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
 import { type RasterRecipe, type InteriorRecipe, type StructureSource } from './config.ts';
 import { raster, readRgba, assetPath, outputName } from './io.ts';

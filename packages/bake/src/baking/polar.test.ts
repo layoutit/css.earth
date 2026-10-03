@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { createPolarSprite } from './polar.js';
+import { createPolarSprite } from './polar.ts';
 
 describe('prepared polar sprites', () => {
     it('keeps the established density-map result when no native sampler is selected', () => {

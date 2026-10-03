@@ -1,6 +1,6 @@
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, formatCssLength } from '@layoutit/polycss';
 import type { ComputeTextureAtlasPlanOptions, Polygon } from '@layoutit/polycss';
-import type { SurfacePatch } from '../surface-geometry/index.js';
+import type { SurfacePatch } from '../surface-geometry/index.ts';
 import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, prepareProjectiveTextureLayer } from './projective-surface-raster.ts';
 import type { GeometryProfile } from './profile.ts';
 import { prepareLeafSeamOutset, type PreparedLeafSeamOutset } from './seam-outset.ts';

@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { completeEnhancedCoverage, packLatitudeRaster, applySurfaceExposure, readAtmosphereModel } from './index.js';
+import { completeEnhancedCoverage, packLatitudeRaster, applySurfaceExposure, readAtmosphereModel } from './index.ts';
 describe('prepared raster operators', () => {
     it('packs reversed latitude bands with wrapped horizontal and clamped vertical gutters', () => {
         const source = new Uint8Array(4 * 4 * 4);
