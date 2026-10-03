@@ -1,6 +1,7 @@
 import { eyeDistanceM } from '@cssearth/engine';
 import { cross3 as cross } from '@cssearth/core';
-import { parseDensityVolumeFrame, type WorldRotation, type PreparedWorldCameraFrame, type PreparedWorldContext, type DensityVolumeFrame } from '@cssearth/objects';
+import type { WorldRotation } from '@cssearth/core';
+import { parseDensityVolumeFrame, type PreparedWorldCameraFrame, type PreparedWorldContext, type DensityVolumeFrame } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';

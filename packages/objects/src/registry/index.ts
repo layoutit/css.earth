@@ -24,5 +24,3 @@ export { systemHostId, systemObjectId, systemViewFile } from './system-address.j
 export type { NavigableObject, ObjectSystem, WorldBody } from './navigable-object.js';
 export { objectZoom } from './object-zoom.js';
 export type { ObjectZoom, ZoomDistance, ZoomFrame } from './object-zoom.js';
-export { validateWorldReflection, validateWorldRotation } from '@cssearth/core';
-export type { WorldRotation } from '@cssearth/core';

@@ -26,9 +26,8 @@ Do not import the application, legacy runtime, or object-specific configuration.
 
 Numeric camera orientation math, heliocentric geometry and solar direction conversions live in `src/navigation/` and `src/solar-system/`, exported by the main entry. They depend on core numerics; no renderer, DOM or resource-loading implementation is imported. Flat solar matrices use the public `FlatMatrix3` name; navigation `Matrix3` remains nested.
 
-Navigation owns presentation-to-world conversion (`src/navigation/world-camera-conversion.ts`), its structural
-frame input and shared pose/viewport interfaces, default-view rotation from plain camera calibration,
-silhouette-level walking and surface fly-to calibration. Objects parsers validate camera records before
-calling engine. Rotation/reflection validation comes from core; engine never imports objects.
-
-These functions take plain values: callers parse with `@cssearth/objects` first, then call engine. `engine` never imports `@cssearth/objects`; the `engine-imports-no-objects` architecture rule enforces it.
+Navigation owns presentation-to-world conversion (`src/navigation/world-camera-conversion.ts`), default-view rotation
+(`prepared-arrival-view.ts`), silhouette-level walking (`walkSilhouetteLevels`) and surface fly-to calibration, with their
+shared pose and viewport interfaces. These functions take plain values: callers parse with `@cssearth/objects` first,
+then call engine. Rotation and reflection validation comes from core. `engine` never imports `@cssearth/objects`; the
+`engine-imports-no-objects` architecture rule enforces it.

@@ -171,7 +171,6 @@ export { surfaceFeatureBankIndex } from './prepared-data/surface-feature-banks.j
 
 export { CSS_COMPILER_RENDER_BUDGET } from './volume/compiler-render-budget.js';
 
-
 export { PREPARED_INTERIOR_DISC_SIZE } from './prepared-data/prepared-interior-disc-size.js';
 
 export { tiledTextureKeys, textureTileLeafStyles } from './prepared-data/prepared-texture-tile-styles.js';
@@ -179,7 +178,6 @@ export { tiledTextureKeys, textureTileLeafStyles } from './prepared-data/prepare
 export { shellMaterialAddress } from './prepared-data/shell-material-address.js';
 
 export { IMPERCEPTIBLE_LUMINANCE } from './stars/point-field-luminance.js';
-
 
 export { requireObjectControls } from './prepared-data/shell-controls.js';
 export type { ShellObjectControls } from './prepared-data/shell-controls.js';

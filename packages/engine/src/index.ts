@@ -29,7 +29,8 @@ export type { Matrix3dLike, SilhouetteEllipse, BodyProjection, OrbitSegment } fr
 
 export { preparedSceneMatrix } from './navigation/prepared-scene-matrix.js';
 
-export * from './navigation/world-camera-conversion.js';
-export * from './navigation/prepared-arrival-view.js';
-export * from './navigation/prepared-silhouette-steps.js';
-export * from './navigation/surface-fly-to.js';
+export { cameraProjectionScale, worldCameraFromCenteredPresentation, worldCameraFromPresentation, worldCameraFocusFrame, validateWorldCameraViewport } from './navigation/world-camera-conversion.js';
+export type { WorldCameraFrame, WorldCameraPose, LocalWorldCameraPresentation, PreparedWorldCameraViewport } from './navigation/world-camera-conversion.js';
+export { preparedDefaultViewRotation } from './navigation/prepared-arrival-view.js';
+export { walkSilhouetteLevels } from './navigation/prepared-silhouette-steps.js';
+export { SURFACE_FLY_TO_SCHEMA, SURFACE_FLY_TO } from './navigation/surface-fly-to.js';

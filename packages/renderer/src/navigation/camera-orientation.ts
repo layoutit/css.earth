@@ -1,4 +1,5 @@
-import { CAMERA_POSE_SCHEMA, parseRestoredCameraPose, validateWorldRotation, type CameraPose, type CameraPlan } from '@cssearth/objects';
+import { CAMERA_POSE_SCHEMA, parseRestoredCameraPose, type CameraPose, type CameraPlan } from '@cssearth/objects';
+import { validateWorldRotation } from '@cssearth/core';
 
 import type { CameraAngles, Quaternion, Vector3 } from './types.js';
 
