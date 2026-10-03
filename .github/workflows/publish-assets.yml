@@ -139,9 +139,9 @@ jobs:
             # the expensive authoring pass is actually restricted to this one object. The
             # global feature index is a tracked catalogue, not an asset needed by this job.
             pnpm prepare:catalog
+            pnpm build:objects
             pnpm build:astronomy
             node packages/bake/cli/prepare-solar-geometry.mts
-            pnpm build:objects
             pnpm build:catalog
             node packages/bake/cli/prepare-objects.mts "--object=$OBJECT"
           fi
