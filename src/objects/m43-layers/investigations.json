@@ -21,6 +21,15 @@
         "https://noirlab.edu/public/images/noao-m43/"
       ],
       "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+    },
+    {
+      "id": "star-removal",
+      "subject": "Stars in the picture",
+      "status": "included",
+      "finding": "The photograph first kept its stars, which stood on the nebula's plane whatever their own distances. The Nebula Lab's NOX removes them and keeps the nebula's structure. The glow of the brightest stars remains. A second pass over a quarter-size copy takes saturated stars, but on this picture it also took real nebula, so it is not used. The galaxies' glow fill, which needs a star table, erased nebula around the stars that light it and is not used on nebulae.",
+      "evidence": [
+        "https://github.com/charvey2718/nox"
+      ]
     }
   ]
 }

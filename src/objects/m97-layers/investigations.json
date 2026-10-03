@@ -31,6 +31,15 @@
         "https://noirlab.edu/public/images/noao-m97/"
       ],
       "revisitWhen": "A photograph of the Owl Nebula with sky coordinates is published under an attribution licence."
+    },
+    {
+      "id": "star-removal",
+      "subject": "Stars in the picture",
+      "status": "included",
+      "finding": "The photograph first kept its stars, which stood on the nebula's plane whatever their own distances. The Nebula Lab's NOX removes them and keeps the nebula's structure. One pass left the saturated stars, tens of pixels wide; a second pass over a quarter-size copy takes them, and the picture takes that pass's result only where it took a star.",
+      "evidence": [
+        "https://github.com/charvey2718/nox"
+      ]
     }
   ]
 }

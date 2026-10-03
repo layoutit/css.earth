@@ -2,7 +2,7 @@
   "schema": "cssearth-image-layer-recipe@1",
   "id": "m97-layers",
   "source": {
-    "path": "source.jpg",
+    "path": "starless.jpg",
     "dimensions": [
       2000,
       2000
@@ -34,7 +34,7 @@
     "kind": "inclined-disk",
     "inclinationDeg": 0.001,
     "lineOfNodesPaDeg": 255.684,
-    "thicknessKpc": 8.49e-7,
+    "thicknessKpc": 8.49e-07,
     "depthWeights": [
       0.25,
       0.5,

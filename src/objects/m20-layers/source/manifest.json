@@ -4,6 +4,42 @@
   "inputs": [
     {
       "id": "optical",
+      "path": "src/objects/m20-layers/source/starless.jpg",
+      "origin": "https://cdn.eso.org/images/publicationjpg/eso0930a.jpg",
+      "sourceUrl": "https://www.eso.org/public/images/eso0930a/",
+      "title": "The Trifid Nebula",
+      "credit": "ESO",
+      "displayCredit": "ESO",
+      "acquisition": "The window cut from the publisher's JPEG (source.jpg, 2432 x 2432 px) with its stars removed by `node labs/nebula/run.mts remove-stars src/objects/m20-layers --from=source.jpg --coarse=4` (NOX over the whole picture). NOX then ran again over a copy a quarter of the size (608 x 608 px), where the saturated stars are small enough for it, and the picture took that pass's result where it took a star: 1.86% of the picture. Restored from the source cache; not tracked. Its place on the sky is the file's embedded tags (recipe observation). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0930a",
+            "role": "material",
+            "evidence": "src/objects/m20-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "optical-window"
+      ],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "MPG/ESO 2.2-metre telescope, Wide Field Imager",
+            "evidence": "https://www.eso.org/public/images/eso0930a/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      },
+      "generator": "labs/nebula/run.mts remove-stars"
+    },
+    {
+      "id": "optical-window",
       "path": "src/objects/m20-layers/source/source.jpg",
       "origin": "https://cdn.eso.org/images/publicationjpg/eso0930a.jpg",
       "sourceUrl": "https://www.eso.org/public/images/eso0930a/",
@@ -22,18 +58,7 @@
         ]
       },
       "dependencies": [],
-      "datasetId": "optical",
       "license": "CC-BY-4.0; retain the complete recorded credit.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "unresolved",
-            "label": "MPG/ESO 2.2-metre telescope, Wide Field Imager",
-            "evidence": "https://www.eso.org/public/images/eso0930a/",
-            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
-          }
-        ]
-      },
       "generator": "packages/bake/authoring/far-destinations/picture-source.mts"
     }
   ],

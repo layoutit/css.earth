@@ -4,13 +4,13 @@
   "inputs": [
     {
       "id": "optical",
-      "path": "src/objects/m78-layers/source/source.jpg",
+      "path": "src/objects/m78-layers/source/starless.jpg",
       "origin": "https://cdn.eso.org/images/publicationjpg/eso1105a.jpg",
       "sourceUrl": "https://www.eso.org/public/images/eso1105a/",
       "title": "Messier 78: a reflection nebula in Orion",
       "credit": "ESO/Igor Chekalin",
       "displayCredit": "ESO",
-      "acquisition": "The publisher's JPEG (4000 x 3876 px), restored from its origin; not tracked. Its place on the sky is the file's embedded tags (recipe observation). A display composite, not a calibrated scientific array.",
+      "acquisition": "The publisher's JPEG (4000 x 3876 px) with its stars removed by `node labs/nebula/run.mts remove-stars src/objects/m78-layers` (NOX over the whole picture). Restored from the source cache; not tracked. Its place on the sky is the file's embedded tags (recipe observation). A display composite, not a calibrated scientific array.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -33,7 +33,8 @@
             "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
           }
         ]
-      }
+      },
+      "generator": "labs/nebula/run.mts remove-stars"
     }
   ],
   "documents": [

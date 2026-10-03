@@ -4,13 +4,13 @@
   "inputs": [
     {
       "id": "optical",
-      "path": "src/objects/m16-layers/source/source.jpg",
+      "path": "src/objects/m16-layers/source/starless.jpg",
       "origin": "https://cdn.eso.org/images/publicationjpg/eso0926a.jpg",
       "sourceUrl": "https://www.eso.org/public/images/eso0926a/",
       "title": "The Eagle Nebula",
       "credit": "ESO",
       "displayCredit": "ESO",
-      "acquisition": "The publisher's JPEG (4000 x 4000 px), restored from its origin; not tracked. Its place on the sky is the file's embedded tags (recipe observation). A display composite, not a calibrated scientific array.",
+      "acquisition": "The publisher's JPEG (4000 x 4000 px) with its stars removed by `node labs/nebula/run.mts remove-stars src/objects/m16-layers --coarse=4` (NOX over the whole picture). NOX then ran again over a copy a quarter of the size (1000 x 1000 px), where the saturated stars are small enough for it, and the picture took that pass's result where it took a star: 2.71% of the picture. Restored from the source cache; not tracked. Its place on the sky is the file's embedded tags (recipe observation). A display composite, not a calibrated scientific array.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -33,7 +33,8 @@
             "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
           }
         ]
-      }
+      },
+      "generator": "labs/nebula/run.mts remove-stars"
     }
   ],
   "documents": [
