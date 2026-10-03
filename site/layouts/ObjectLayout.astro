@@ -64,7 +64,9 @@ const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddres
 // width that response frames it at, so choosing a dataset does not resize the body.
 // A page without script turns the body a native response drew by dragging it, and zooms it with the wheel. A native resize
 // corner covers the scene: the browser stores a drag in the sensor's width, and a view timeline reads that width on the
-// body's own rotating nodes (dataset-response.mts marks them; packages/telescope-cli resize-input.mts is the original).
+// body's spinning meshes (packages/telescope-cli resize-input.mts is the original). The rule finds them by the paused,
+// looping animation the native view writes on a mesh (prepared-native-view.ts), so the response carries no mark for it; a
+// variable star's light curve loops on a veil, not a mesh, and is left alone.
 // The corner sits in a scroll area that opens part-way down its range, so the wheel scales the drawing in both directions;
 // only the stage's own scale animates, so the scene and the layers fitted to its silhouette (a star's limb, a material
 // composite) zoom together. One rule set for every body.
@@ -82,7 +84,7 @@ const dragWithoutScript = `
   .native-drag-sensor::-webkit-scrollbar { width: 16384px; height: 16384px; }
   .native-drag-sensor::-webkit-resizer { cursor: inherit; }
   .native-zoom-start { display: none; }
-  .object-stage [data-native-turn] {
+  .object-stage .polycss-mesh[style*=" infinite both paused"] {
     animation: native-drag linear both !important; animation-timeline: --native-drag !important;
     rotate: z calc(((100cqw / 1px + 8192) / max(.000001, var(--native-drag-progress)) - 100cqw / 1px - 20480) * sign(var(--native-drag-progress)) * .3deg);
   }
