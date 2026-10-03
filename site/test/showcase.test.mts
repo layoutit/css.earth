@@ -6,7 +6,7 @@ import { requireSceneObject } from '../objects.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { NavigationIntent } from '../navigation/navigation-request.mts';
 
-const markup = '<html><body><header><button class="object-showcase-action" type="button" aria-pressed="false"><span>Showcase</span></button></header><main></main></body></html>';
+const markup = '<html><body><header><button class="object-showcase-action" type="button" aria-pressed="false"><span>Slideshow</span></button></header><main></main></body></html>';
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 type Flight = { id: string; intent: NavigationIntent };
 

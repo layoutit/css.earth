@@ -102,7 +102,7 @@ export function createSceneRouter({
   // Whether a link flies in place; set once the router's modules have loaded (`ensureContext`).
   let navigable = (_id: string) => false;
   let shellOwner: { shell: ObjectShell | null } | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
-  // The header's Showcase pill tours the featured bodies through `navigate` (showcase.mts).
+  // The header's Slideshow pill tours the featured bodies through `navigate` (showcase.mts).
   let showcase: { destroy(): void } | null = null;
   let centeredObjectId: string | null = null;
   // The registry and what the router builds from it (navigation, selection, activation, history and the shell) arrive

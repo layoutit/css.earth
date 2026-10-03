@@ -30,7 +30,7 @@ highlights bypass the fade tied to orbit size, so moons remain identifiable
 at Solar System scale; their tiny orbits need not be drawn. Orbit visibility
 continues to follow Settings.
 
-The Showcase pill, beside the app actions, tours the featured bodies listed in
+The Slideshow pill, beside the app actions, tours the featured bodies listed in
 `site/showcase.mts`: it flies to one at random, stays seven seconds after
 landing while the camera turns sixty degrees around it, and flies on, showing
 every body before repeating one. A pointer or key on the page, a wheel, Back, a

@@ -1,7 +1,7 @@
 import type { NavigationIntent } from './navigation/navigation-request.mts';
 import type { BrowserWindow } from './browser/browser-types.mts';
 
-/** The destinations the Showcase pill tours: the bodies with the richest prepared imagery. A tour draws them at random and
+/** The destinations the Slideshow pill tours: the bodies with the richest prepared imagery. A tour draws them at random and
  * shows every one before repeating any. */
 export const SHOWCASE_OBJECT_IDS: readonly string[] = Object.freeze([
   'sun', 'mercury', 'venus', 'earth', 'moon', 'mars',
@@ -32,7 +32,7 @@ export interface ShowcaseOptions {
   random?(): number;
 }
 
-/** The header's Showcase pill: a slideshow of the featured bodies. Pressed, it flies to one, stays while the camera turns
+/** The header's Slideshow pill: a tour of the featured bodies. Pressed, it flies to one, stays while the camera turns
  * around it, and flies to the next, until the reader takes over: a pointer or key on the page, a wheel, Back, the tab leaving
  * the screen, or the pill again. The first hop is a history entry; the rest replace it, so Back returns to the page the tour
  * left. */
