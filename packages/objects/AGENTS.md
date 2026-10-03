@@ -126,3 +126,9 @@ text budgets and editorial checks stay in site; destination preparation and sear
 
 Bake-only recipe routing identifiers and lab-only molecular catalogue envelopes stay with their owners.
 Preserved Python audit/native protocols retain narrow, conformance-tested schema exceptions; scientific code stays outside objects.
+
+Authored preparation receipts, world-navigation preparation receipts and prepared feature descriptors live in
+`packages/objects/src/prepared-data/`, exported through the browser-safe objects main entry.
+Historical source-list and index/pre-build admission policies retain their accepted records and diagnostics.
+Frame/source auditing, camera solving, geometry, file I/O and inventory lookup stay with bake/site/tooling.
+Contract tests use node:test in the packages CI lane.

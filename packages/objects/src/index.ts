@@ -203,3 +203,6 @@ export { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA } from './descriptor.js';
 export { OBJECT_TEXT_SCHEMA, PREPARED_TEXT_SCHEMA, parseCitedText, parseObjectText, parsePreparedText, type TextCitation, type CitedText, type ObjectTextDataset, type ObjectText, type PreparedObjectText } from './prepared-data/object-text.js';
 export { ARCHIVED_CAMERA_SCHEMA, archivedCameraFields, parseArchivedCamera, parseMatrixArchivedCamera, type ArchivedCamera, type SpiceCamera } from './prepared-data/archived-camera.js';
 export { PREPARED_DESTINATIONS_SCHEMA, parsePreparedDestinations, type PreparedDestination, type PreparedDestinations, type DestinationSearchRecord } from './prepared-data/prepared-destinations.js';
+export * from './prepared-data/authored-preparation.js';
+export * from './prepared-data/world-navigation-preparation.js';
+export * from './prepared-data/prepared-features.js';

@@ -1,4 +1,4 @@
-import { OBJECT_RUNTIME_SCHEMA, PREPARED_CSS_OBJECT_FORMAT, parseAuthoredObjectDescriptor } from '@cssearth/objects';
+import { AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, OBJECT_RUNTIME_SCHEMA, PREPARED_CSS_OBJECT_FORMAT, parseAuthoredObjectDescriptor } from '@cssearth/objects';
 
 import {readAuthoredSources} from '../../sources/index.ts';
 import {parse} from '@cssearth/core/schema';
@@ -108,7 +108,7 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   if(write) {
     await writeFile(descriptorPath,JSON.stringify({...rawDescriptor,prepared:{format:PREPARED_CSS_OBJECT_FORMAT,url:'prepared/object.json'}},null,2)+'\n');
   }
-  await writeJson(resolve(outputDirectory,'authored-preparation.json'),{schema:'cssearth-authored-preparation@1',id:descriptor.id,sources:[...sources.values()].map(source=>source.reference),lanes:{radial:true,materials:true,geometry:true,content:true,celestial:true,presentation:true}});
+  await writeJson(resolve(outputDirectory,'authored-preparation.json'),{schema:AUTHORED_PREPARATION_SCHEMA,id:descriptor.id,sources:[...sources.values()].map(source=>source.reference),lanes:{radial:true,materials:true,geometry:true,content:true,celestial:true,presentation:true}} satisfies AuthoredPreparationReceipt);
   return {descriptor,sources,raster:surface,celestial:{sky,sun},scene,definition,content};
 }
 

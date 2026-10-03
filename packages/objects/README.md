@@ -163,3 +163,9 @@ Archived-camera data (including `SpiceCamera`), cited object/prepared-text recor
 are browser-safe contracts in `packages/objects/src/prepared-data/`, exported from `@cssearth/objects`.
 Their node:test suites run in the packages lane. Camera fitting and kernel computation stay with bake/SPICE;
 text budgets and editorial checks stay in site; destination preparation and search projection stay with bake/site.
+
+Authored preparation receipts, world-navigation preparation receipts and prepared feature descriptors live in
+`packages/objects/src/prepared-data/`, exported through the browser-safe objects main entry.
+Historical source-list and index/pre-build admission policies retain their accepted records and diagnostics.
+Frame/source auditing, camera solving, geometry, file I/O and inventory lookup stay with bake/site/tooling.
+Contract tests use node:test in the packages CI lane.
