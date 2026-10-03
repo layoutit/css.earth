@@ -138,10 +138,6 @@
 }
 
 .explorer-settings-panel .object-speed-setting-control:has(.object-speed-setting:disabled) {
-  cursor: default;
-}
-
-.explorer-settings-panel .object-speed-setting-control:has(.object-speed-setting:disabled) {
   opacity: var(--shell-disabled-opacity);
   cursor: default;
 }

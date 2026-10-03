@@ -436,8 +436,7 @@
 .object-result-row > .object-distance { color: var(--shell-text-secondary); }
 /* Object results share one row component in search and system cards: a 40 px preview, the name, and a subtitle (what it is, how far). The catalogue window
    positions rows on a 56 px pitch (48 px row, 8 px gap; `site/search/catalogue-window.mts`). */
-.object-observation-control.object-result-row.object-thumbnail-leading,
-.object-observation-control.object-result-row.object-thumbnail-leading:has(.object-dataset-detail) {
+.object-observation-control.object-result-row.object-thumbnail-leading {
   grid-template-columns: 40px minmax(0, 1fr);
   grid-template-rows: auto auto;
   align-content: center;
@@ -611,7 +610,8 @@
 /* The system's datasets come before its tabs and its body list, as on the card it had. */
 .object-information-panel[data-card-subject="system"] > :is(.object-card-tabs, .object-card-tabpanel)[data-view-part="system"] { order: 1; }
 /* The system's card shows the datasets authored for the whole system (a debris disc) and its gallery, not the star's own. */
-.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] :is([data-dataset-option]:not([data-system-dataset]), [data-dataset-details]:not([data-system-dataset-details]), summary:has(> .atlas-tree-root), .object-mobile-information-heading) {
+.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] :is([data-dataset-option]:not([data-system-dataset]), [data-dataset-details]:not([data-system-dataset-details]), .object-mobile-information-heading),
+.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] > summary {
   display: none !important;
 }
 .object-results-scroll .object-empty {
