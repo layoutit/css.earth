@@ -1,4 +1,4 @@
-import { CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, parseVolumeRecipe, type VolumeSlices, type VolumeSliceQuad, type Vector3 } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, parseVolumeRecipe, type VolumeSlices, type VolumeSliceQuad, type Vector3 } from '@cssearth/objects';
 import { collectArtifacts } from '../../server/workflows/density/io.ts';
 import { parseFiniteMaterialSettings, verifyFiniteMaterialArtifacts } from './finite-density-material-artifacts.ts';
 /** One offline finite-material experiment on an existing reconstruction. All density slice alpha is retained. */
@@ -86,9 +86,9 @@ export async function finiteDensityMaterial(baselineId:string,settingsPath:strin
   const nextProvenance={...provenance,method:'fixed-density-finite-region-material@1',request:{...work,id,outputDirectory:output},material:receipt,qualification:receipt.qualification,validation:receipt.validation};
   await json(resolve(output,'source/provenance.json'),nextProvenance);painted.slices.provenance=nextProvenance;
   await json(resolve(output,'prepared/volume-slices.json'),painted.slices);
-  const data=compileCssVolume({id,frame,slices:painted.slices,recipe:{anchors:[]}}),prepared={schema:'cssearth-prepared-object@1',id,type:'density-volume',format:DENSITY_VOLUME_FORMAT,data};
+  const data=compileCssVolume({id,frame,slices:painted.slices,recipe:{anchors:[]}}),prepared={schema:PREPARED_OBJECT_SCHEMA,id,type:'density-volume',format:DENSITY_VOLUME_FORMAT,data};
   await json(resolve(output,'prepared/volume.json'),prepared);
-  const descriptor={schema:'cssearth-object@2',id,type:'density-volume',properties:{volume:frame,preparation:{source:'source/provenance.json'}},prepared:{format:prepared.format,url:'prepared/volume.json'}};
+  const descriptor={schema:OBJECT_SCHEMA,id,type:'density-volume',properties:{volume:frame,preparation:{source:'source/provenance.json'}},prepared:{format:prepared.format,url:'prepared/volume.json'}};
   await json(resolve(output,'object.json'),descriptor);
   const referenceLeafIds=data.stacks.flatMap(s=>s.leaves.map(l=>l.id)),partLeafIds=referenceLeafIds.map(id=>'all-light::'+id);
   const inspection={...prepared,data:{...data,stacks:data.stacks.map(s=>({...s,leaves:s.leaves.flatMap(l=>[l,{...l,id:'all-light::'+l.id}])}))}};

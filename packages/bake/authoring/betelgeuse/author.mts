@@ -15,6 +15,7 @@ import { convolveGaussian, readReconstruction, writeReconstruction } from '@csse
 import { skyDisplayRaster } from '@cssearth/fits';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import sharp from 'sharp';
+import { parseUniformDiscStarMeasurements } from '@cssearth/objects';
 import { interpolatePalette } from '@cssearth/bake/objects/color';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse/source');
@@ -86,11 +87,8 @@ export async function contextMarker(image: ReturnType<typeof readReconstruction>
  * the much larger pinned interferometry archives every sibling star body also authors. Written or checked first, so the
  * small sphere table restores without the archive files a full run also needs. Shared by every uniform-disc star body. */
 export async function authorUniformDiscSphere(sourceRoot: string, label: string, { check = false } = {}) {
-  const measurements = requireRecord(JSON.parse(await readFile(resolve(sourceRoot, 'measurements.json'), 'utf8')), 'measurements');
-  if (measurements.schema !== 'cssearth-uniform-disc-star@1') throw new TypeError(`Unexpected ${label} measurements schema.`);
-  const shape = requireRecord(measurements.shape, 'shape');
-  if (requireString(shape.path) !== SPHERE_PATH) throw new TypeError(`${label} sphere path differs from the authoring tool.`);
-  const bytes = Buffer.from(uniformDiscTable(requireFiniteNumber(measurements.radiusKm), requireFiniteNumber(shape.stepDegrees)), 'latin1');
+  const measurements = parseUniformDiscStarMeasurements(JSON.parse(await readFile(resolve(sourceRoot, 'measurements.json'), 'utf8')), label, SPHERE_PATH);
+  const bytes = Buffer.from(uniformDiscTable(measurements.radiusKm, measurements.shape.stepDegrees), 'latin1');
   await writeOrCheckAuthoredOutputs(sourceRoot, [[SPHERE_PATH, bytes]], { check, missingFile: 'propagate-read-error', mkdir: 'none' });
   return measurements;
 }

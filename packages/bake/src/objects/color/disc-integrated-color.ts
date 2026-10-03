@@ -1,46 +1,16 @@
 // A uniform surface color from published whole-disc photometry: color indices relative to the Sun give reflectance at
 // each filter's effective wavelength, a piecewise-linear spectrum joins them, and the CIE 1931 observer under D65 turns
 // it into linear sRGB scaled so the V reflectance is the published geometric albedo. No map, terrain or variation is implied.
-import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { requireString } from '@cssearth/core';
+import { parseDiscColorRecord, type DiscColorRecord } from '@cssearth/objects';
 import { linearToSrgb } from './color-transfer.ts';
 
-const BANDS = ['B', 'V', 'R', 'I'] as const;
-type Band = typeof BANDS[number];
 const INDICES = ['B-V', 'V-R', 'V-I'] as const;
-
-export interface DiscColorRecord {
-  readonly colorIndices: Readonly<Record<typeof INDICES[number], number>>;
-  readonly solarColorIndices: Readonly<Record<typeof INDICES[number], number>>;
-  readonly effectiveWavelengthsNm: Readonly<Record<Band, number>>;
-  readonly geometricAlbedo: number;
-}
 
 export interface DiscColor {
   readonly reflectance: readonly (readonly [number, number])[];
   readonly linear: readonly [number, number, number];
   readonly srgb: readonly [number, number, number];
-}
-
-const measured = (value: unknown, label: string) => requireFiniteNumber(requireRecord(value, label).value, `${label}.value`);
-
-/** Validate the cited record down to the numbers the method consumes. */
-export function parseDiscColorRecord(value: unknown): DiscColorRecord {
-  const input = requireRecord(value, 'disc color record');
-  if (input.schema !== 'cssearth-disc-integrated-color@1') throw new TypeError('The disc color record must use cssearth-disc-integrated-color@1.');
-  const indices = (record: unknown, label: string) => {
-    const values = requireRecord(requireRecord(record, label).indices, `${label}.indices`);
-    return Object.fromEntries(INDICES.map(name => [name, measured(values[name], `${label}.indices.${name}`)])) as Record<typeof INDICES[number], number>;
-  };
-  const wavelengths = requireRecord(requireRecord(input.effectiveWavelengths, 'effectiveWavelengths').nanometres, 'effectiveWavelengths.nanometres');
-  const effectiveWavelengthsNm = Object.fromEntries(BANDS.map(band => [band, requireFiniteNumber(wavelengths[band], `effective wavelength ${band}`)])) as Record<Band, number>;
-  if (BANDS.some((band, index) => index > 0 && !(effectiveWavelengthsNm[band] > effectiveWavelengthsNm[BANDS[index - 1]!]))) {
-    throw new TypeError('Filter effective wavelengths must increase from B to I.');
-  }
-  const geometricAlbedo = measured(requireRecord(input.geometricAlbedo, 'geometricAlbedo'), 'geometricAlbedo');
-  if (requireString(requireRecord(input.geometricAlbedo).band, 'geometricAlbedo.band') !== 'V' || !(geometricAlbedo > 0 && geometricAlbedo <= 1)) {
-    throw new TypeError('The geometric albedo must be a V-band value in (0, 1].');
-  }
-  return { colorIndices: indices(input.object, 'object'), solarColorIndices: indices(input.sun, 'sun'), effectiveWavelengthsNm, geometricAlbedo };
 }
 
 /** Parse a CIE CSV table (wavelength, value[, value...]) at 1 nm steps. */

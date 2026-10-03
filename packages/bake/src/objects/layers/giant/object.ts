@@ -1,4 +1,4 @@
-import { OBJECT_RUNTIME_SCHEMA, parseAuthoredObjectDescriptor } from '@cssearth/objects';
+import { AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, OBJECT_RUNTIME_SCHEMA, parseAuthoredObjectDescriptor } from '@cssearth/objects';
 
 import { readAuthoredSources } from '../../sources/index.ts';
 import { parse } from '@cssearth/core/schema';
@@ -19,7 +19,7 @@ import type { ContentPreparationContext, PreparedObjectContentAssets } from '../
 import { mkdir, readFile, writeFile, realpath } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 
-import { withFocusedCamera } from '../../scene/index.ts';
+import { BANDED_ELLIPSOID_SCHEMA, withFocusedCamera } from '../../scene/index.ts';
 import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
 import { requirePreparedPresentation } from '../../../presentation/index.ts';
@@ -29,7 +29,7 @@ import { prepareObservedPolarSurfaces, polarImageProjection } from './observed-p
 
 const readJson=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
 const writeJson=(path:string,value:unknown)=>writeFile(path,`${JSON.stringify(value)}\n`);
-export const isLayeredGiantRecipe=(value:unknown)=>isRecord(value)&&value.schema==='cssearth-banded-ellipsoid@1';
+export const isLayeredGiantRecipe=(value:unknown)=>isRecord(value)&&value.schema===BANDED_ELLIPSOID_SCHEMA;
 
 /** The authored residency declaration must describe the bank actually compiled. */
 export function assertLayeredGiantFrameBank(descriptor:Pick<ReturnType<typeof parseAuthoredObjectDescriptor>,'recipe'>,materialInput:unknown,presentationInput:unknown) {
@@ -109,6 +109,6 @@ export async function prepareLayeredGiantObject({objectDirectory,publicDirectory
   const assetIdentity=<T extends {data?:Uint8Array;filename:string}>({data,...asset}:T)=>({...asset,url:`/scenes/${descriptor.id}/${asset.filename}`});
   const raster={schema:'cssearth-prepared-layered-raster@1',observations:observed.assets.map(assetIdentity),radial:radial.assets.map(assetIdentity),materials:material.assets.map(assetIdentity)};
   const scene={schema:'cssearth-prepared-layered-scene@1',...geometry};
-  await Promise.all([writeJson(resolve(outputDirectory,'runtime.json'),definition),writeJson(resolve(outputDirectory,'scene.json'),scene),writeJson(resolve(outputDirectory,'sky.json'),celestial.sky),writeJson(resolve(outputDirectory,'sun.json'),celestial.sun),writeJson(resolve(outputDirectory,'assets.json'),raster),writeJson(resolve(outputDirectory,'authored-preparation.json'),{schema:'cssearth-authored-preparation@1',id:descriptor.id,sources:descriptor.recipe.sources,lanes:{raster:true,celestial:true,geometry:true,content:true,presentation:true}})]);
+  await Promise.all([writeJson(resolve(outputDirectory,'runtime.json'),definition),writeJson(resolve(outputDirectory,'scene.json'),scene),writeJson(resolve(outputDirectory,'sky.json'),celestial.sky),writeJson(resolve(outputDirectory,'sun.json'),celestial.sun),writeJson(resolve(outputDirectory,'assets.json'),raster),writeJson(resolve(outputDirectory,'authored-preparation.json'),{schema:AUTHORED_PREPARATION_SCHEMA,id:descriptor.id,sources:descriptor.recipe.sources,lanes:{raster:true,celestial:true,geometry:true,content:true,presentation:true}} satisfies AuthoredPreparationReceipt)]);
   return {descriptor,sources,raster,celestial,scene,definition,content};
 }

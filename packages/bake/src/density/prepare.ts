@@ -1,7 +1,7 @@
 /** Generic, self-contained density-volume object preparation entry point. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
-import { DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
+import { PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import { parseVolumeRecipe } from '@cssearth/objects';
 import { sourceBytes, containedPath, prepareVolumeSlices } from '../volume/node/index.ts';
 import { compileCssVolume } from '../volume-leaves/index.ts';
@@ -41,7 +41,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
     const compiled = compileCssSky(await prepareSkyFaces({ sourceDirectory: skyDirectory, outputDirectory, recipe: skyRecipe }), descriptor.volume);
     data = { ...data, sky: compiled.sky, resources: [...data.resources, ...compiled.resources] };
   }
-  const envelope = { schema: 'cssearth-prepared-object@1' as const, id: descriptor.id, type: 'density-volume' as const,
+  const envelope = { schema: PREPARED_OBJECT_SCHEMA, id: descriptor.id, type: 'density-volume' as const,
     format: DENSITY_VOLUME_FORMAT, data };
   const bytes = Buffer.from(JSON.stringify(envelope) + '\n'), outputPath = resolve(outputDirectory, 'volume.json');
   await writeFile(outputPath, bytes);

@@ -1,3 +1,4 @@
+export const VOLUME_RECIPE_SCHEMA = 'cssearth-volume-recipe@1';
 import type { Axis, Bounds3, Vector3 } from './coordinates.js';
 import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
 /** Data-only emission/absorption recipe for a bounded scalar-field volume. */
@@ -10,7 +11,7 @@ export interface RadialEmission {
   exponent: number; falloff: number; radialTaper: [number, number]; verticalTaper: [number, number];
 }
 export interface VolumeRecipe {
-  schema: 'cssearth-volume-recipe@1';
+  schema: typeof VOLUME_RECIPE_SCHEMA;
   grid: { path: string; dimensions: Vector3;
     encoding: 'sqrt-density-unorm8' | 'linear-density-unorm8'; bounds: Bounds3;
     acquisition?: { path: string }; };
@@ -79,7 +80,7 @@ function channels(value: unknown, at: string): DensityChannel[] {
 }
 export function parseVolumeRecipe(value: unknown): VolumeRecipe {
   const r = record(value, 'volume recipe');
-  if (r.schema !== 'cssearth-volume-recipe@1') throw new TypeError('Unsupported volume recipe schema.');
+  if (r.schema !== VOLUME_RECIPE_SCHEMA) throw new TypeError('Unsupported volume recipe schema.');
   const g = record(r.grid, 'grid'), m = record(r.material, 'material'), b = record(r.bake, 'bake');
   const bounds = record(g.bounds, 'bounds'), min = triple(bounds.min, 'min'), max = triple(bounds.max, 'max');
   if (min.some((n, i) => n >= (max[i] ?? n))) throw new TypeError('Bounds must strictly increase.');

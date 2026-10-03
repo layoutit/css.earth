@@ -2,7 +2,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, type Vector3 } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA, DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, type Vector3 } from '@cssearth/objects';
 import { cataloguePosition, METERS_PER_KPC } from '@cssearth/bake/volume';
 import { type VolumeRecipe } from '@cssearth/objects';
 import { planFullDensityGrid } from '@cssearth/nebula-reconstruction/stars/full-density';
@@ -92,7 +92,7 @@ export async function prepareCatalogueDensity(configPath: string) {
             'No image-to-model scaling, rotation or translation is fitted. No photographic material has been applied.'] };
     const provenanceBytes = Buffer.from(JSON.stringify(provenance, null, 2) + '\n');
     await writeFile(resolve(sourceDirectory, 'provenance.json'), provenanceBytes);
-    const recipe: VolumeRecipe = { schema: 'cssearth-volume-recipe@1', grid: { path: 'density.ktx2',
+    const recipe: VolumeRecipe = { schema: VOLUME_RECIPE_SCHEMA, grid: { path: 'density.ktx2',
             dimensions: plan.dimensions, encoding: 'sqrt-density-unorm8', bounds: plan.boundsKpc },
         material: { emission: [{ channel: 3, color: [1, 1, 1], strength: 1 }], absorption: [], intensityScale: 1, stepScale: 1,
             stepMetric: 'source', exposureGain: .08, emissionTransfer: 'shared-opacity' },
@@ -104,10 +104,10 @@ export async function prepareCatalogueDensity(configPath: string) {
     const slices = await prepareVolumeSlices({ sourceDirectory, outputDirectory: prepared, recipe });
     const frame = { ...descriptor.volume, boundsUnits: plan.boundsKpc };
     const data = compileCssVolume({ id: config.id, frame, slices, recipe });
-    const envelope = { schema: 'cssearth-prepared-object@1', id: config.id, type: 'density-volume', format: DENSITY_VOLUME_FORMAT, data };
+    const envelope = { schema: PREPARED_OBJECT_SCHEMA, id: config.id, type: 'density-volume', format: DENSITY_VOLUME_FORMAT, data };
     const preparedBytes = Buffer.from(JSON.stringify(envelope) + '\n');
     await writeFile(resolve(prepared, 'volume.json'), preparedBytes);
-    await json(resolve(output, 'object.json'), { schema: 'cssearth-object@2', id: config.id, type: 'density-volume',
+    await json(resolve(output, 'object.json'), { schema: OBJECT_SCHEMA, id: config.id, type: 'density-volume',
         properties: { volume: frame, preparation: { source: 'source/volume.json' } },
         prepared: { format: envelope.format, url: 'prepared/volume.json' } });
     await json(resolve(output, 'receipt.json'), { ...provenance, prepared: { path: 'prepared/volume.json', leaves: data.resources.length,

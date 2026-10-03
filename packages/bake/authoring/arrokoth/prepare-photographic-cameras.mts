@@ -1,3 +1,4 @@
+import { ARCHIVED_CAMERA_SCHEMA } from '@cssearth/objects';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { newHorizonsCamera, multiplyCameraMatrices, inverseCameraMatrix } from '@cssearth/bake/objects/layers/terrestrial';
@@ -20,7 +21,7 @@ if (profile.mvic) {
   const original=shape({matrix:array(array(number)),rayMatrix:array(array(number)),positionKm:array(number),sunDirection:array(number)})(reference);
   const matrix=multiplyCameraMatrices(mvic.imageTransform,original.matrix);
   const provenance=[profile.mesh,path,mvic.referenceCamera,...mvic.references].map(cite);
-  await writeFile(resolve(source,mvic.output),JSON.stringify({schema:'cssearth-archived-camera@1',width:300,height:300,startTime:mvic.startTime,
+  await writeFile(resolve(source,mvic.output),JSON.stringify({schema:ARCHIVED_CAMERA_SCHEMA,width:300,height:300,startTime:mvic.startTime,
     provenance,matrix,rayMatrix:inverseCameraMatrix(matrix.map(row=>row.slice(0,3))),
     positionKm:original.positionKm,sunDirection:original.sunDirection,referenceCamera:reference,imageTransform:mvic.imageTransform},null,2)+'\n');
 }

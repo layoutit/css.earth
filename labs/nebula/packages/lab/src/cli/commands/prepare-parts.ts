@@ -1,4 +1,4 @@
-import { CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, type VolumeRecipe, type DensityVolumeFrame, type VolumeSlices, type PreparedCssVolume } from '@cssearth/objects';
+import { OBJECT_SCHEMA, CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, type VolumeRecipe, type DensityVolumeFrame, type VolumeSlices, type PreparedCssVolume } from '@cssearth/objects';
 import { observationEnvelope as envelope, type ImageWcs } from '@cssearth/bake/volume';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Offline preparation of frozen cloud-component inspection banks. */
@@ -174,7 +174,7 @@ await json(resolve(targetDirectory, 'source/cloud-parts.json'), { schema: CLOUD_
     ...(part.scale === undefined ? {} : { scale: part.scale }), ...(part.radius === undefined ? {} : { radius: part.radius }),
     signalFraction: part.integratedIntensity / sourceTotal, defaultEnabled: part.kind === 'extended', leafIds: partLeafIds.get(part.id)! })), referenceLeafIds,
   composition: 'The unfiltered default uses exact reference leaves. Filtered part leaves are independently encoded source-over contribution inspection; their combined RGBA is order-dependent and approximate.' });
-await json(resolve(targetDirectory, 'inspection-object.json'), { schema: 'cssearth-object@2', id: targetId,
+await json(resolve(targetDirectory, 'inspection-object.json'), { schema: OBJECT_SCHEMA, id: targetId,
   type: 'density-volume', properties: { volume: combined.data.frame, preparation: { source: 'source/cloud-parts.json' } },
   prepared: { format: DENSITY_VOLUME_FORMAT, url: 'prepared/inspection.json' } });
 console.log(`CLOUD_PARTS_COMPLETE ${results.length} parts ${partResources.length} resources ${partResources.reduce((sum, item) => sum + item.bytes, 0)} bytes`);

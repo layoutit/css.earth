@@ -14,8 +14,8 @@
  * shared neutral gray, lit by its own star: no color of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node packages/bake/cli/prepare-object.mts <id> */
-import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects/node';
-import { NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, SYNCHRONOUS_ROTATION_SCHEMA } from '@cssearth/objects';
+
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -79,10 +79,10 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
   const glow = spec.selfLuminous, material = glow ? 'emission' : 'lighting';
   if (glow && !(glow.temperatureK > 0)) throw new TypeError(`${spec.id}: a self-luminous planet needs a positive effective temperature, not ${glow.temperatureK}.`);
 
-  put(`${o}/object.json`, { schema: 'cssearth-object@2', id, type: 'layered-body', properties: {
+  put(`${o}/object.json`, { schema: OBJECT_SCHEMA, id, type: 'layered-body', properties: {
     preparation: { schema: 'cssearth-object-preparation@1', label: name,
       steps: ['verify-sources', 'assets', 'panel-content', 'datasets', 'starfield', ...(glow ? [] : ['sky-sun']), 'system-markers', 'scene', 'controls', 'presentation', 'runtime-assets'] },
-    recipe: { schema: 'cssearth-authored-object@2',
+    recipe: { schema: AUTHORED_OBJECT_SCHEMA,
       surfaces: [{ id: 'body', source: 'geometry', projection: 'equirectangular', datasets: [{ id: 'shape', source: 'content', material }] }],
       shape: { kind: 'sphere', radiusKm }, materials: [{ id: material, source: 'raster', model: glow ? 'emissive' : 'lit' }],
       sources: ['raster', 'geometry', 'presentation'].map(source => ({ id: source, path: `source/preparation/${source}.json` })).concat([
@@ -137,12 +137,12 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     // The orbit normal in ICRF, from the same elements the orbit is propagated with: a display axis, not a measured pole.
     const elements = hostedKeplerElements(orbit as unknown as Parameters<typeof hostedKeplerElements>[0], astrometry, requireFiniteNumber(requireRecord(host.physical, 'host physical').meanRadiusKm));
     const normal = [Math.sin(elements.inclinationRad) * Math.sin(elements.ascendingNodeRad), -Math.sin(elements.inclinationRad) * Math.cos(elements.ascendingNodeRad), Math.cos(elements.inclinationRad)];
-    put(`${o}/source/preparation/rotation.json`, { schema: 'cssearth-display-orientation@1',
+    put(`${o}/source/preparation/rotation.json`, { schema: DISPLAY_ORIENTATION_SCHEMA,
       rightAscensionDegrees: (Math.atan2(normal[1]!, normal[0]!) * 180 / Math.PI + 360) % 360, declinationDegrees: Math.asin(normal[2]!) * 180 / Math.PI, displayMeridianDegrees: 90, phase: 'arbitrary-display-phase',
       source: `No rotation period or spin axis of ${name} is measured (${TODO}: name the literature checked). The display axis is the normal of its hosted orbit in packages/astronomy/data/bodies/${id}.json, computed by hostedKeplerElements in @cssearth/astronomy; the meridian is set so that grid longitude 0 faces the Sun and Earth at the scene epoch.`,
       coordinateSystem: 'ICRF/J2000. +Z is the display axis, the orbit normal; +X is the display meridian; east longitude. No spin is propagated.',
       qualification: `Display convention, not a measurement: the spin axis, spin sense, period and prime meridian of ${name} are unmeasured; the axis shown is its orbit normal.` });
-  } else put(`${o}/source/preparation/rotation.json`, { schema: 'cssearth-synchronous-rotation@1', host: hostId,
+  } else put(`${o}/source/preparation/rotation.json`, { schema: SYNCHRONOUS_ROTATION_SCHEMA, host: hostId,
     source: `Assumed synchronous rotation: a planet ${Math.round(requireFiniteNumber(orbit.semiMajorAxisStellarRadii))} stellar radii from its star is expected to be tidally locked, and no rotation period of ${name} is measured (${TODO}: name the literature checked). Pole, prime meridian and rate are computed from the hosted orbit in packages/astronomy/data/bodies/${id}.json.`,
     coordinateSystem: 'ICRF/J2000. +Z is the orbit normal (prograde spin); +X points at the host star at each instant, so longitude 0 is the substellar point; east longitude, the direction of rotation.',
     qualification: `Tidal locking and a spin axis on the orbit normal are assumptions, not measurements: neither the rotation period nor the obliquity of ${name} is measured.` });
@@ -154,7 +154,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     orbitalPeriodDays: periodDays, orbitalPeriodSource: requireString(requireRecord(orbit.sources).period, 'hosted orbit period source'),
     shape: { kind: 'sphere', qualification: `A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of ${name} is measured; only its size, mass and orbit are.` },
     ...(glow ? { effectiveTemperatureK: glow.temperatureK, effectiveTemperatureSource: glow.source } : {}) });
-  put(`${o}/source/content/object.json`, { schema: 'cssearth-object-content@2', version: 1, id, displayName: name,
+  put(`${o}/source/content/object.json`, { schema: OBJECT_CONTENT_SCHEMA, version: OBJECT_CONTENT_VERSION, id, displayName: name,
     panel: { facts: [
       { id: 'radius', label: 'Radius', value: `${TODO}: the radius in Earth radii`,
         source: { catalogueId: `${TODO}-radius-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'radiusKm; radiusSource' } },
@@ -169,7 +169,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     resources: [{ label: 'Research', role: 'facts', description: spec.paperCredit, href: spec.paper }],
     provenance: { editorial: { url: spec.paper, credit: spec.paperCredit },
       physical: { path: `../../../../../packages/astronomy/data/bodies/${id}.json`, credit: `Published radius, mass and transit-fitted orbit; ${TODO}` } } });
-  put(`${o}/text.json`, { schema: 'cssearth-object-text@1', objectId: id,
+  put(`${o}/text.json`, { schema: OBJECT_TEXT_SCHEMA, objectId: id,
     card: { text: `${TODO}: one sentence, 110 characters at most.`, sources: [{ catalogueId: `${TODO}-card-source`, url: spec.paper, label: TODO, checked: TODO, locator: TODO, quote: TODO }] },
     introduction: { text: `${TODO}: two sentences, 180 characters at most.`, sources: [{ catalogueId: `${TODO}-introduction-source`, url: spec.paper, label: TODO, checked: TODO, locator: TODO, quote: TODO }] },
     datasets: { shape: { title: 'Shape only', detail: 'Published radius', summary: `${TODO}: what the sphere is and is not, 125 characters at most.` } } });

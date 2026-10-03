@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
+import { VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
 /** Author a circumstellar volume: the material around a star, drawn from coronagraph mosaics as a density grid attached to
  * that star, the way Betelgeuse's shell is (packages/bake/authoring/betelgeuse-shell/author.mts), but from one
  * checked-in recipe rather than a script per star.
@@ -682,7 +684,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
     exposureGain: b.exposureGain, topAlpha: b.dataset.topAlpha, faceOnOpacity: b.opacity, droppedShare: b.spread.droppedShare, filledVoxels: b.spread.filledVoxels,
   }]));
   const provenance = {
-    schema: 'cssearth-volume-provenance@2', title: `${recipe.name}: ${built.some(b => b.dataset.archive) ? 'ALMA continuum imaging' : 'JWST coronagraph imaging'} given the depth of the fitted ${built.some(b => b.kind === 'edge-on') ? 'disc' : 'ring'}`, kind: 'observed-sky-image-on-fitted-envelope',
+    schema: VOLUME_PROVENANCE_SCHEMA, title: `${recipe.name}: ${built.some(b => b.dataset.archive) ? 'ALMA continuum imaging' : 'JWST coronagraph imaging'} given the depth of the fitted ${built.some(b => b.kind === 'edge-on') ? 'disc' : 'ring'}`, kind: 'observed-sky-image-on-fitted-envelope',
     authors: [], organizations: [...new Set(built.map(b => b.dataset.deposit ? b.dataset.deposit.displayCredit : b.dataset.archive ? b.dataset.archive.displayCredit : 'NASA/ESA/CSA JWST; MAST (STScI)'))],
     license: { spdx: recipe.license.spdx, dataLicenseDeclaration: recipe.license.url, note: recipe.license.note },
     sources: built.flatMap(b => b.bands.map(band => ({ id: inputOf(b.dataset, band), url: band.origin.url, landing: band.origin.landing, bytes: band.origin.bytes,
@@ -724,7 +726,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
   const deliveryGrids: { id: string; label: string; sourceUrl: string; recipe: { path: string } }[] = [];
   for (const b of built) {
     const file = `density-${b.dataset.id}.ktx2`, recipeBytes = Buffer.from(JSON.stringify({
-      schema: 'cssearth-volume-recipe@1',
+      schema: VOLUME_RECIPE_SCHEMA,
       grid: { path: file, dimensions: [size, size, size], encoding: 'sqrt-density-unorm8', bounds: { min: [-halfUnits, -halfUnits, -halfUnits], max: [halfUnits, halfUnits, halfUnits] } },
       material: { intensityScale: 1, stepScale: 1, stepMetric: 'source', emission: [[1, 0, 0], [0, 1, 0], [0, 0, 1]].map((color, channel) => ({ channel, color, strength: 1 })),
         absorption: [], emissionTransfer: 'shared-opacity', exposureGain: b.exposureGain },

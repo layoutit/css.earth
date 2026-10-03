@@ -1,7 +1,8 @@
+import { archivedCameraFields, ARCHIVED_CAMERA_SCHEMA } from '@cssearth/objects';
 import { cross3 as cross, array, number, shape, text, dotN as dot } from '@cssearth/core';
 import { pds4Blocks, pds4Elements } from '@cssearth/telescope';
 import { readFitsHdu, fitsImageAccessor, readFitsHeader, readFitsPrimary } from '@cssearth/fits';
-import { archivedCameraFields, dimensions, sipCameraFields } from '../../../raster/index.ts';
+import { dimensions, sipCameraFields } from '../../../raster/index.ts';
 import { bindSipCamera, sipPixel } from './llorri-geo.ts';
 
 const parseCamera = shape({ ...archivedCameraFields, ...sipCameraFields, ...dimensions,
@@ -38,7 +39,7 @@ export function newHorizonsCamera(bytes: Buffer, value: unknown) {
     qy.map((v,i) => v+(ref[1]+control.offsetPixels[1])*bore[i]), bore].map(toBody);
   const cofactors = [cross(rows[1],rows[2]),cross(rows[2],rows[0]),cross(rows[0],rows[1])], determinant = dot(rows[0],cofactors[0]);
   const terms = (axis: string) => [2,3].flatMap(degree => Array.from({length:degree+1}, (_,i) => [i,degree-i,n(`${axis}_${i}_${degree-i}`)]));
-  return {schema:'cssearth-archived-camera@1',
+  return {schema:ARCHIVED_CAMERA_SCHEMA,
     width:n('NAXIS1'),height:n('NAXIS2'),target:text(h.SPCTCB),startTime:text(h.SPCUTCAL),filter:'PANCHROMATIC',
     matrix:rows.map(row => [...row,-dot(row,eye)]),rayMatrix:[0,1,2].map(i => cofactors.map(row => row[i]/determinant)),
     positionKm:eye,sunDirection:toBody(unit(['SPCTSOX','SPCTSOY','SPCTSOZ'].map(n))),

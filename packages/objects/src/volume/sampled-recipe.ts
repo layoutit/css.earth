@@ -1,4 +1,5 @@
 /** A qualified spatial sample set and explicitly authored analytic components. No object-specific code. */
+export const NEBULA_PHYSICAL_EVIDENCE_SCHEMA = 'cssearth-nebula-physical-evidence@1';
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 const jointPath = (v: unknown): v is string => typeof v === 'string' && v.length > 0 && !v.startsWith('/') && !/[\\:?#\s]/.test(v) && v.split('/').every(p => p && p !== '.' && p !== '..');
 import type { EmissionVector3 } from './coordinates.js';
@@ -92,7 +93,7 @@ export function readSampledRecipe(v: unknown, allowedSourcePath: (path: string) 
     ...(emissionFit ? { emissionFit } : {}), ...(pulsar ? { pulsar } : {}) };
 }
 export function verifySampledEvidence(recipe: SampledRecipe, value: unknown) {
-  if (!jointRecord(value) || value.schema !== 'cssearth-nebula-physical-evidence@1' || value.subjectId !== recipe.id || !Array.isArray(value.evidence) || !Array.isArray(value.sources))
+  if (!jointRecord(value) || value.schema !== NEBULA_PHYSICAL_EVIDENCE_SCHEMA || value.subjectId !== recipe.id || !Array.isArray(value.evidence) || !Array.isArray(value.sources))
     throw new TypeError('Sampled prior evidence belongs to another object or schema.');
   const sources = new Set<string>(), ids = new Set<string>();
   for (const row of value.sources) {

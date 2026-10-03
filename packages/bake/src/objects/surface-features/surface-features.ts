@@ -1,6 +1,6 @@
 import { readNonArrayRecord, readNonblankText, readFiniteNumber } from '@cssearth/core';
 import { featureDiscoveryZoomShare, normalizeSearchText } from './catalog.ts';
-import { PREPARED_SURFACE_FEATURES_SCHEMA, surfaceFeatureBankIndex, type SurfaceFeatureKind, type SurfaceFeatureOutline, type SurfaceFeatureAxes, type SurfaceFeaturePolicy, type PreparedSurfaceFeature, type PreparedSurfaceFeatureCatalog, type SurfaceFeatureCatalogDescriptor, type SurfaceFeatureSelectionPlan, type PreparedSurfaceFeaturePlan } from '@cssearth/objects';
+import { PREPARED_FEATURES_SCHEMA, type PreparedFeaturesDescriptor, PREPARED_SURFACE_FEATURES_SCHEMA, surfaceFeatureBankIndex, type SurfaceFeatureKind, type SurfaceFeatureOutline, type SurfaceFeatureAxes, type SurfaceFeaturePolicy, type PreparedSurfaceFeature, type PreparedSurfaceFeatureCatalog, type SurfaceFeatureCatalogDescriptor, type SurfaceFeatureSelectionPlan, type PreparedSurfaceFeaturePlan } from '@cssearth/objects';
 import type { Vector3 } from './catalog.ts';
 import { surfaceDirection, round, scaled, rimVectors, extentPolygon, normalizeExtent, projectRadial, meshRadiusBand, triaxialSurfacePoint } from './geometry.ts';
 import { unzipMember } from './archive.ts';
@@ -558,9 +558,9 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     ...(context.hitMesh ? { surfaceRadiusUnits: meshRadiusBand(context.hitMesh.triangles) } : {}), ...(context.surface ? { surfaceEllipsoidUnits: context.surface.plan() } : {}),
     outline: config.outline,
   };
-  const descriptor = { schema: 'cssearth-prepared-features@1', objectId: context.objectId, ...plan.catalog,
+  const descriptor = { schema: PREPARED_FEATURES_SCHEMA, objectId: context.objectId, ...plan.catalog,
     ...(selection ? { selection, totalCount: features.length } : {}), source: manifest.source, sourcePage: manifest.sourcePage,
-    license: manifest.license, snapshotDate: manifest.snapshotDate, mapLeftEdgeLongitudeDeg: axes.mapLeftEdgeLongitudeDeg, excluded, skipped, assumed: catalog.assumed, duplicates: catalog.duplicates, ...(catalog.traces ? { traces: catalog.traces } : {}) };
+    license: manifest.license, snapshotDate: manifest.snapshotDate, mapLeftEdgeLongitudeDeg: axes.mapLeftEdgeLongitudeDeg, excluded, skipped, assumed: catalog.assumed, duplicates: catalog.duplicates, ...(catalog.traces ? { traces: catalog.traces } : {}) } satisfies PreparedFeaturesDescriptor;
   await writeFile(resolve(context.outputDirectory, 'features.json'), `${JSON.stringify(descriptor)}\n`);
   return { plan, descriptor, catalog };
 }

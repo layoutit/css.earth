@@ -1,9 +1,9 @@
+import { parseMeasuredSpectrumDocument, type Measurement } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { CHART, chartAxes, chartDocument, chartNotes, coordinate, escapeXml, linearScale, ticks } from './chart-style.ts';
 
-export interface Measurement { x: number; xLow: number; xHigh: number; y: number; minus: number; plus: number }
 export interface MeasurementSource {
   path: string;
   format: 'records' | 'columns';
@@ -82,15 +82,7 @@ export async function readMeasuredSpectrum(root: string, input: unknown) {
   const text = await readFile(resolve(root, source.path), 'utf8');
   let points: Measurement[];
   if (source.format === 'records') {
-    const document = requireRecord(JSON.parse(text), 'measurement document');
-    if (document.schema !== 'cssearth-measured-spectrum@1') throw new TypeError('Unknown measurement document schema.');
-    points = requireArray(document.measurements, 'measurements').map(value => {
-      const p = requireRecord(value, 'measurement'), number = (key: string) => requireFiniteNumber(p[key], key);
-      const xLow = number('xLow'), xHigh = number('xHigh');
-      // An integrated band has no representative wavelength: this midpoint only positions its error bar.
-      const x = p.x === undefined && recipe.mode === 'band' ? (xLow + xHigh) / 2 : number('x');
-      return { x, xLow, xHigh, y: number('y') * source.yScale, minus: number('minus') * source.yScale, plus: number('plus') * source.yScale };
-    });
+    points = parseMeasuredSpectrumDocument(JSON.parse(text), recipe.mode, source.yScale);
   } else {
     const c = source.columns;
     if (!c) throw new TypeError('Missing spectrum columns.');

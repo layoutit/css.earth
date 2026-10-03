@@ -4,12 +4,13 @@
  * A JWST band names its level-3 product in the draft ({ band, product }); the product is downloaded by streaming and pinned.
  * WISE tiles come from the IRSA IBE atlas search around the grid; a tile is kept when any sample of its
  * published footprint edges or its centre projects inside the grid. */
+import { WISE_ATLAS_TILES_SCHEMA, type WiseBand } from '@cssearth/objects';
 import { mkdir, readFile, rename, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { acquireMastProduct, hips2fitsCachePath, parseSkyBandComposite, SKY_BANDS, skyBandUrl } from './sky-band-composite.mts';
-import { gridWcs, skyToGridPixel, WISE_ATLAS_BANDS, wiseAtlasUrl, type SkyGrid, type WiseBand } from '@cssearth/bake/objects/raster';
+import { gridWcs, skyToGridPixel, WISE_ATLAS_BANDS, wiseAtlasUrl, type SkyGrid } from '@cssearth/bake/objects/raster';
 
 const IBE_SEARCH = 'https://irsa.ipac.caltech.edu/ibe/search/wise/allwise/p3am_cdd';
 const stable = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
@@ -126,7 +127,7 @@ if (import.meta.main) {
       tiles.push({ coaddId, bytes: bytes.length });
       if ((index + 1) % 25 === 0 || index + 1 === coaddIds.length) console.log(`SKY_BAND ${id} tiles ${index + 1}/${coaddIds.length}`);
     }
-    const list = Buffer.from(stable({ schema: 'cssearth-wise-atlas-tiles@1', band: wiseBand, tiles }));
+    const list = Buffer.from(stable({ schema: WISE_ATLAS_TILES_SCHEMA, band: wiseBand, tiles }));
     await writeFile(resolve(root, listPath), list);
     bands.push({ band: id, tiles: { path: listPath } });
   }

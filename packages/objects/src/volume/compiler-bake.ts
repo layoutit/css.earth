@@ -1,3 +1,5 @@
+export const COMPILER_STAR_SPRITES_SCHEMA = 'cssearth-compiler-star-sprites@1';
+export const COMPILER_BAKE_SCHEMA = 'cssearth-compiler-bake@2';
 import type { DensityVolumeFrame } from '../density-volume.js';
 import type { EmissionBounds, EmissionVector3, SkyBounds } from './coordinates.js';
 import { readVolumeLayerPlan, type VolumeLayerPlan } from './volume-layer-plan.js';
@@ -28,7 +30,7 @@ export interface PreparedCompilerStar {
   materials?: Record<string, CompilerStarMaterial>;
 }
 export interface CompilerStarSprites {
-  schema: 'cssearth-compiler-star-sprites@1';
+  schema: typeof COMPILER_STAR_SPRITES_SCHEMA;
   atlas: CompilerPin;
   width: number; height: number; tileSize: number;
   entries: Record<string, { x: number; y: number }>;
@@ -37,7 +39,7 @@ export interface CompilerStarSprites {
   profile: CompilerPin;
 }
 export interface CompilerBakeResult {
-  schema: 'cssearth-compiler-bake@2';
+  schema: typeof COMPILER_BAKE_SCHEMA;
   id: string;
   /** Name of the immutable cloud bank retained during an independently prepared stellar update. */
   volumeId?: string;
@@ -112,7 +114,7 @@ function same(a: unknown, b: readonly number[]): boolean {
 
 /** Optional only for historical cached scenes; new preparations carry a verified sprite bank. */
 export function validCompilerStarSprites(value: unknown, stars: readonly PreparedCompilerStar[]): value is CompilerStarSprites {
-  if (!record(value) || value.schema !== 'cssearth-compiler-star-sprites@1' || !pin(value.atlas) || !pin(value.profile) ||
+  if (!record(value) || value.schema !== COMPILER_STAR_SPRITES_SCHEMA || !pin(value.atlas) || !pin(value.profile) ||
       !Number.isInteger(value.width) || !Number.isInteger(value.height) || !Number.isInteger(value.tileSize) ||
       Number(value.tileSize) < 1 || Number(value.tileSize) > 256 || Number(value.width) > 8192 || Number(value.height) > 8192 ||
       Number(value.width) < Number(value.tileSize) || Number(value.height) < Number(value.tileSize) ||
@@ -137,7 +139,7 @@ export function validCompilerStarSprites(value: unknown, stars: readonly Prepare
 export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
   if (record(value) && value.volumeId !== undefined && !validCompilerName(value.volumeId))
     throw new TypeError(`Invalid retained compiler cloud name: ${JSON.stringify(value.volumeId)}.`);
-  if (!record(value) || value.schema !== 'cssearth-compiler-bake@2' || !validCompilerName(value.id) ||
+  if (!record(value) || value.schema !== COMPILER_BAKE_SCHEMA || !validCompilerName(value.id) ||
       !validCompilerName(value.fieldIdentity) ||
       !bounds3(value.boundsArcsec) || !bounds2(value.skyBoundsArcsec) || !pin(value.neutral) ||
       !finite(value.spanArcsec) || value.spanArcsec <= 0 || !record(value.sourceImage) ||

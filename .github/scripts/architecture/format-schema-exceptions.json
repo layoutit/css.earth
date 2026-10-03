@@ -5,48 +5,22 @@
       "packages/bake",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Bake/telescope-cli write acquisition operations read by bake and telescope-cli; extract the operation union and pure containment validation while preserving CLI admission in a separate 22-file packet after E2h camera (25-file scope cap)."
   },
   {
     "schema": "cssearth-archived-camera@1",
     "owners": [
-      "packages/bake",
-      "packages/spice"
+      "packages/bake"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/spice); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-authored-object@2",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Raw spelling in packages/bake, packages/telescope-cli duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
-  },
-  {
-    "schema": "cssearth-authored-preparation@1",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Preserved packages/bake/cli/prepare-archived-camera.py writes cameras read by bake; Python cannot import TypeScript. python-schema-identifiers.test.ts pins both writer literals to objects."
   },
   {
     "schema": "cssearth-authoritative-sources@3",
     "owners": [
       ".github/scripts",
-      "packages/bake",
-      "packages/spice"
+      "packages/bake"
     ],
-    "reason": "Raw spelling in .github/scripts, packages/bake, packages/spice duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
-  },
-  {
-    "schema": "cssearth-banded-ellipsoid@1",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Objects owns source manifests; the pre-build body-reference check cannot load built objects, and preserved Python distant-worlds authoring cannot import TypeScript. python-schema-identifiers.test.ts pins the pre-build check and both Python declarations to SOURCE_MANIFEST_SCHEMA."
   },
   {
     "schema": "cssearth-body-map@1",
@@ -54,24 +28,7 @@
       "packages/bake",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-camera-pose@2",
-    "owners": [
-      "labs/experiments",
-      "packages/renderer",
-      "packages/telescope-cli",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 4 owners (labs/experiments, packages/renderer, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-catalogue-stars@2",
-    "owners": [
-      "labs/nebula/packages/lab"
-    ],
-    "reason": "Raw spelling in labs/nebula/packages/lab duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
+    "reason": "Needs the resolution-evidence subformat and its pure compatibility checks extracted into objects first, then the product record; map combining, resolution calculation and sampled arrays stay in bake (about 26 files)."
   },
   {
     "schema": "cssearth-chart-assets@1",
@@ -79,7 +36,7 @@
       "packages/telescope-cli",
       "site"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Telescope-cli writes chart envelopes read by site; requires nested measured-spectrum/retrieved-profile/system-orbits recipe parsers and pure path validation split from bake. E2f moves the measurement-document precursor; the envelope remains for a bounded follow-up."
   },
   {
     "schema": "cssearth-circumstellar-reconstruction@2",
@@ -87,7 +44,7 @@
       "labs/nebula/packages/lab",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Lab writes reconstruction records read by telescope-cli; extract the opacity data shape from solver return types with identity/grid validation in a separate reconstruction/delivery packet."
   },
   {
     "schema": "cssearth-compact-density-delivery@1",
@@ -95,21 +52,7 @@
       "labs/nebula/packages/lab",
       "packages/bake"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, packages/bake); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-compiler-bake@2",
-    "owners": [
-      "packages/bake"
-    ],
-    "reason": "Raw spelling in packages/bake duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
-  },
-  {
-    "schema": "cssearth-compiler-star-sprites@1",
-    "owners": [
-      "packages/bake"
-    ],
-    "reason": "Raw spelling in packages/bake duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
+    "reason": "Lab exports compact delivery read by bake; extract id/delivery/pin admission together with historical assertion diagnostics and source-owner policy in a separate handoff packet (E2g keeps the wave under 25 files)."
   },
   {
     "schema": "cssearth-css-geometry-profile@1",
@@ -117,7 +60,7 @@
       "packages/bake",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Telescope-cli writes geometry profiles read by bake/site; GeometryProfile/SeamOutsetProfile and scene/paged/site importers require a separate complete packet after E2f color/measurement extraction (25-file scope cap)."
   },
   {
     "schema": "cssearth-css-presentation-profile@2",
@@ -125,39 +68,14 @@
       "packages/bake",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-density-placement@1",
-    "owners": [
-      "labs/nebula/packages/lab",
-      "packages/bake"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, packages/bake); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-disc-integrated-color@1",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Telescope-cli writes presentation profiles read by bake/site; the pure profile/mode contract and bake/site imports require a separate complete packet after E2f color/measurement extraction (25-file scope cap)."
   },
   {
     "schema": "cssearth-display-orientation@1",
     "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
+      "packages/bake"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-facility-emblems@3",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Preserved distant-worlds Python writes display orientations read by bake; it cannot import TypeScript. packages/bake/src/sources/python-schema-identifiers.test.ts (packages lane, runs when author.py changes) pins its literal to the objects constant."
   },
   {
     "schema": "cssearth-fixed-wcs-catalogue-direction-gate@1",
@@ -165,7 +83,7 @@
       "labs/nebula",
       "labs/nebula/packages/reconstruction"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula, labs/nebula/packages/reconstruction); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Reconstruction fixed-catalogue.ts and preserved WISE check-wise-catalogue.py write independent catalogue audit receipts; Python cannot import TypeScript. schema-protocols.test.ts pins both writers and retained receipt; matching stays reconstruction."
   },
   {
     "schema": "cssearth-gaia-nebula-field@1",
@@ -173,7 +91,7 @@
       "packages/bake",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Bake writes Gaia fields read by bake and telescope-cli; the CLI accepts an astrometry subset, so move wire parsing with explicit reader policies in a separate 12-file packet."
   },
   {
     "schema": "cssearth-image-direction-gate@1",
@@ -181,7 +99,7 @@
       "labs/nebula",
       "labs/nebula/packages/reconstruction"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula, labs/nebula/packages/reconstruction); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Reconstruction validate-image-registration.py and its preserved LMC pinned copy write registration gate/failure receipts; neither can import TypeScript. schema-protocols.test.ts pins all eight declarations and retained receipt; scientific registration stays Python."
   },
   {
     "schema": "cssearth-investigation-ledger@1",
@@ -189,52 +107,7 @@
       "packages/bake",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-joint-fit-volume@1",
-    "owners": [
-      "labs/nebula/packages/lab"
-    ],
-    "reason": "Raw spelling in labs/nebula/packages/lab duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
-  },
-  {
-    "schema": "cssearth-layer-optimization@1",
-    "owners": [
-      "packages/bake"
-    ],
-    "reason": "Raw spelling in packages/bake duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
-  },
-  {
-    "schema": "cssearth-layered-oblate-preparation@2",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-lmc-stars@1",
-    "owners": [
-      "labs/nebula/packages/lab"
-    ],
-    "reason": "Raw spelling in labs/nebula/packages/lab duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
-  },
-  {
-    "schema": "cssearth-measured-spectrum@1",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-molecular-catalogue@1",
-    "owners": [
-      "labs/nebula/packages/lab",
-      "labs/nebula/packages/reconstruction"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, labs/nebula/packages/reconstruction); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Bake/telescope-cli write investigation ledgers read by bake and telescope-cli; split survey data and pure ledger/entry parsing from filesystem discovery and facility policy in a separate 19-file packet after E2h camera (25-file scope cap)."
   },
   {
     "schema": "cssearth-navigation-marker@2",
@@ -242,7 +115,7 @@
       "packages/bake",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Telescope-cli writes marker descriptors read by bake; descriptor/source/operation validators must split from sharp/source-byte checks with navigation consumers migrated together, outside the bounded E2f color/measurement packet."
   },
   {
     "schema": "cssearth-nebula-delivery@2",
@@ -250,7 +123,7 @@
       "packages/bake",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Bake and telescope-cli write delivery envelopes read by bake/lab; extract grid/pin/sky data and parser with all replay consumers in a separate 16-file packet."
   },
   {
     "schema": "cssearth-nebula-depth-model@1",
@@ -258,15 +131,7 @@
       "labs/nebula/packages/lab",
       "labs/nebula/packages/reconstruction"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, labs/nebula/packages/reconstruction); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-nebula-physical-evidence@1",
-    "owners": [
-      "labs/nebula/packages/lab",
-      "labs/nebula/packages/reconstruction"
-    ],
-    "reason": "Raw spelling in labs/nebula/packages/lab, labs/nebula/packages/reconstruction duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
+    "reason": "Authored depth models are read by reconstruction and lab compiler publication; move recipe/surface parsing with caller-specific path and identity admission in a separate 17-file packet."
   },
   {
     "schema": "cssearth-nox-output@1",
@@ -274,51 +139,14 @@
       "labs/nebula/packages/lab",
       "labs/nebula/packages/reconstruction"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, labs/nebula/packages/reconstruction); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-object-content@2",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 3 owners (packages/bake, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-object-page@1",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Raw spelling in packages/bake, site duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
+    "reason": "Reconstruction star-removal.py writes native operation receipts read by three lab TS boundaries; Python cannot import TypeScript. schema-protocols.test.ts pins producer and every TS check; existing star-removal/compiler tests exercise receipt validation without NOX."
   },
   {
     "schema": "cssearth-object-text@1",
     "owners": [
-      "packages/bake",
-      "packages/telescope-cli",
-      "site"
+      "packages/bake"
     ],
-    "reason": "Spelled as a raw string by 3 owners (packages/bake, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-object@2",
-    "owners": [
-      "labs/nebula/packages/lab",
-      "packages/bake",
-      "packages/telescope-cli",
-      "site"
-    ],
-    "reason": "Raw spelling in labs/nebula/packages/lab, packages/bake, packages/telescope-cli, site duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
-  },
-  {
-    "schema": "cssearth-observed-stellar-catalogue@1",
-    "owners": [
-      "labs/nebula/packages/lab",
-      "labs/nebula/packages/reconstruction"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, labs/nebula/packages/reconstruction); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Preserved packages/bake/authoring/distant-worlds/author.py writes text read by site; Python cannot import TypeScript. python-schema-identifiers.test.ts pins the writer literal to objects."
   },
   {
     "schema": "cssearth-paged-ellipsoid@1",
@@ -326,54 +154,7 @@
       "packages/bake",
       "site"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-prepared-content@2",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-prepared-destinations@1",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-prepared-exploration@3",
-    "owners": [
-      "site"
-    ],
-    "reason": "Raw spelling in site duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
-  },
-  {
-    "schema": "cssearth-prepared-features@1",
-    "owners": [
-      ".github/scripts",
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 3 owners (.github/scripts, packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-prepared-object@1",
-    "owners": [
-      "labs/nebula/packages/lab",
-      "packages/bake"
-    ],
-    "reason": "Raw spelling in labs/nebula/packages/lab, packages/bake duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
-  },
-  {
-    "schema": "cssearth-prepared-sources@1",
-    "owners": [
-      "site"
-    ],
-    "reason": "Raw spelling in site duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
+    "reason": "Authored Earth recipe is read by bake and site; structural recipe validation must split from derived camera defaults while retaining site subset admission, outside the bounded E2f color/measurement packet."
   },
   {
     "schema": "cssearth-published-body-epoch-ephemeris@1",
@@ -382,14 +163,6 @@
       "packages/bake"
     ],
     "reason": "Spelled as a raw string by 2 owners (packages/astronomy, packages/bake); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-published-limb-darkening@1",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
   },
   {
     "schema": "cssearth-published-mutual-orbit@1",
@@ -405,7 +178,7 @@
       "packages/telescope",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/telescope, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Telescope embedded Python writes UVFITS responses read by telescope and telescope-cli; move response validation and collapse CLI wire types with telescope dependency/build-order changes in a separate 13-file packet after E2h camera (25-file scope cap)."
   },
   {
     "schema": "cssearth-raster-recipe@2",
@@ -414,15 +187,7 @@
       "packages/telescope-cli",
       "site"
     ],
-    "reason": "Spelled as a raw string by 3 owners (packages/bake, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-shape-model@2",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Parser resolves lighting and the photometric law through bake; needs the pure nested recipe contracts split from preparation-time resolution and moved to objects first, then the top-level recipe (about 29 files plus closure)."
   },
   {
     "schema": "cssearth-solar-system-preparation@1",
@@ -434,19 +199,12 @@
     "reason": "Spelled as a raw string by 3 owners (packages/bake, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
   },
   {
-    "schema": "cssearth-source-catalog@1",
-    "owners": [
-      "packages/bake"
-    ],
-    "reason": "Raw spelling in packages/bake duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
-  },
-  {
     "schema": "cssearth-star-removal@1",
     "owners": [
       "labs/nebula/packages/lab",
       "labs/nebula/packages/reconstruction"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, labs/nebula/packages/reconstruction); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Lab writes native removal requests consumed by reconstruction star-removal.py; Python cannot import TypeScript. schema-protocols.test.ts pins lab/native request declarations and Python validator; native.test.ts exercises exact request transport without NOX."
   },
   {
     "schema": "cssearth-star-separation-receipt@1",
@@ -454,7 +212,7 @@
       "labs/nebula/packages/lab",
       "labs/nebula/packages/reconstruction"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, labs/nebula/packages/reconstruction); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Reconstruction star-separation.py writes receipts read by lab TS overlay/service boundaries and process-image-candidates.py; Python cannot import TypeScript. schema-protocols.test.ts pins every producer/reader and retained receipts; Python fixtures exercise exact native reconstruction."
   },
   {
     "schema": "cssearth-star-separation@1",
@@ -462,15 +220,7 @@
       "labs/nebula/packages/lab",
       "labs/nebula/packages/reconstruction"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, labs/nebula/packages/reconstruction); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-stellar-photometric-color@1",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Authored recipes are validated by lab TS, lab process-image-candidates.py and reconstruction star-separation.py; Python cannot import TypeScript. schema-protocols.test.ts pins all validators and retained recipes; existing Python fixture suites exercise native validation."
   },
   {
     "schema": "cssearth-surface-grid@1",
@@ -478,15 +228,7 @@
       "packages/bake",
       "src"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, src); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-synchronous-rotation@1",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Preserved heliosphere IBEX extract.py writes samples parsed and triangulated by bake; Python cannot import TypeScript. shell-grid-schema.test.ts pins writer and real fixture to SURFACE_GRID_SCHEMA; geometry stays bake."
   },
   {
     "schema": "cssearth-telescope-product@1",
@@ -494,15 +236,7 @@
       "packages/telescope",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/telescope, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-uniform-disc-star@1",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Needs telescope -> objects (dependency, reference, lockfile) and the leaf data types plus EVIDENCE_KINDS moved first, then the record and parser; every archive toolkit and CLI publication imports it (about 67 files)."
   },
   {
     "schema": "cssearth-vo-discovery@1",
@@ -510,7 +244,7 @@
       "packages/telescope",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/telescope, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Needs the nested MetadataResponse/Pin/Json/region data and parsers moved first (telescope's Json replaced by core's data type, telescope -> objects), then the snapshot (about 23 files plus closure)."
   },
   {
     "schema": "cssearth-volume-dataset-manifest@1",
@@ -518,14 +252,7 @@
       "labs/nebula/packages/lab",
       "packages/bake"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, packages/bake); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-volume-layer-plan@1",
-    "owners": [
-      "packages/bake"
-    ],
-    "reason": "Raw spelling in packages/bake duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
+    "reason": "Lab promotion writes output manifests read by bake; move the output-map parser with compact delivery, preserving size-check diagnostics and atlas replay in the separate handoff packet."
   },
   {
     "schema": "cssearth-volume-presentation-source@2",
@@ -534,24 +261,7 @@
       "packages/telescope-cli",
       "site"
     ],
-    "reason": "Spelled as a raw string by 3 owners (packages/bake, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-volume-provenance@2",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-volume-recipe@1",
-    "owners": [
-      "labs/nebula/packages/lab",
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Raw spelling in labs/nebula/packages/lab, packages/bake, packages/telescope-cli duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
+    "reason": "Bake/telescope-cli write presentation datasets/previews read by site and bake; move the pure presentation/preview records together with the context source manifest in a separate 19-file packet after E2h camera (25-file scope cap)."
   },
   {
     "schema": "cssearth-volume-source-manifest@2",
@@ -560,22 +270,6 @@
       "packages/telescope-cli",
       "site"
     ],
-    "reason": "Spelled as a raw string by 3 owners (packages/bake, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-wise-atlas-tiles@1",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-world-navigation-preparation@1",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Bake/telescope-cli write repository-path context manifests read by bake and site; extract input/document/intermediate parsing together with presentation records in the separate volume-source packet after E2h camera (25-file scope cap)."
   }
 ]
