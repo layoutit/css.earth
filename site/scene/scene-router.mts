@@ -117,6 +117,8 @@ export function createSceneRouter({
   let categoryFlight = false, refreshOverviewSelection: ((landed?: boolean) => void) | null = null;
   // The zoom ladder's hand-over to another scene (a level, or back to the centre's system) waits until the crossing has held.
   let pendingHandover: { timer: number; to: LadderHandover; crossedAt: number } | null = null;
+  // The scenes already fetched ahead from this one (warm), until the scene changes.
+  const warmedIds = new Set<string>();
   // The view a header pill's flight left, while that flight's landing is being handed over.
   let categoryDeparture: string | null = null;
   const requests = createNavigationLifecycle({ onError: report, onCancel(request) {
@@ -500,6 +502,7 @@ export function createSceneRouter({
       if (departing) handoff.beforeRetire?.(departing);
       if (scenes.current) retire(scenes.current, null, { preserveShell: true, flush: false, publish: false });
       objectId = object.id;
+      warmedIds.clear();
       if (stage.dataset) stage.dataset.objectId = object.id;
       const result = await mountApplication({ context: ready, factory, content, handoff, request, selectionTransition });
       requests.finish(request, scenes.state.kind === 'failed' ? 'failed' : 'cancelled');
@@ -601,11 +604,29 @@ export function createSceneRouter({
   function report(error: unknown) {
     try { reportError(error); } catch { /* Diagnostics cannot interrupt cleanup. */ }
   }
+  /** What a hand-over to `id` reads (its card, entry, object transport and system view), requested ahead of the crossing:
+   * the four a hover on its link requests, and a flight to it starts with. */
+  function warm(id: string, source: 'overview-watcher' | 'zoom-scope') {
+    if (warmedIds.has(id) || id === objectId) return;
+    warmedIds.add(id);
+    void ensureContext().then(({ registry, objects }) => {
+      if (destroyed || !objects.some(object => object.id === id)) return;
+      markHandover(windowTarget, 'warmed', { source, from: objectId, to: id });
+      navigationFragments(windowTarget).prefetch(id);
+      startFlightRequest(preparedObjectUrl(id, 'prepared/object.json'));
+      void registry.loadSystemView(id).catch(() => {});
+    }).catch(report);
+  }
   function followSelectionCamera(session: Session, frame: WorldCameraPose) {
     // Until the arrival is ready the camera still shows the mounted object's default view, not the page's: following it
     // selected the Solar System for a moment on every overview page (and fetched its body list for nobody).
     if (requests.current || scenes.state.kind !== 'ready') return;
     const selection = context?.selection;
+    // Near a crossing, going out or coming in, the scene on the other side is fetched before the camera gets there.
+    for (const ratio of [1 / OVERVIEW_SELECTION_POLICY.warmScale, OVERVIEW_SELECTION_POLICY.warmScale]) {
+      const ahead = selection?.handoverAhead(frame, ratio);
+      if (ahead) warm(ahead.objectId, 'zoom-scope');
+    }
     const followed = selection?.followCamera(frame) ?? false;
     if (typeof followed === 'object') { holdHandover(session, followed); return; }
     cancelHandover();
@@ -687,6 +708,7 @@ export function createSceneRouter({
       // suppress zoom-out deselection after that flight has finished.
       isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current && !categoryFlight,
       windowTarget,
+      onApproach(next) { if (next.overview) warm(next.objectId, 'overview-watcher'); },
       onChange(next) {
         if (!next.overview || next.objectId === objectId) {
           // A mounted star and its system overview share the same camera, detail and

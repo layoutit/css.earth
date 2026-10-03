@@ -152,3 +152,21 @@ test('continuous outward camera updates cannot postpone the Sun overview flip, a
   assert.equal(timers.size, 0, 'and its timer is gone');
   dispose();
 });
+
+test('part of the way to an exit the watcher names the scene to fetch ahead, once', () => {
+  let listener: ObjectWorldNavigationListener | null = null;
+  const getListener = () => required(listener);
+  const timers = new Map<number, () => void>(), changes: OverviewSelection[] = [], approaches: OverviewSelection[] = [];
+  let serial = 0;
+  const dispose = watchOverviewSelection({ objects, systems: objects, objectId: 'sun', getOverview: () => false,
+    isAvailable: () => true, onChange: next => changes.push(next), onApproach: next => approaches.push(next),
+    navigation: { ...navigationFixture(ceres, () => camera(ceres, 100), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => {}; } },
+    windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
+  // The Sun's scene is left at 100 au; an eighth of that is the warm distance.
+  getListener()(camera(sun, 10 * au), viewport);
+  assert.deepEqual(approaches, [], 'short of an eighth of the exit distance nothing is fetched');
+  for (const range of [15, 40, 90]) getListener()(camera(sun, range * au), viewport);
+  assert.deepEqual(approaches, [{ objectId: 'sun', overview: true }], 'past it, the scene it would switch to, once');
+  assert.deepEqual(changes, [], 'and no switch yet');
+  dispose();
+});

@@ -67,12 +67,14 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
 /** Require a sustained threshold crossing, even while the camera keeps moving; a camera clearly past an exit
  * (policy.clearExitScale) switches at once, so the switch is done before the zoom reaches the scene's far limit. */
 export function watchOverviewSelection({ navigation, objects, systems, objectId, getOverview, isAvailable,
-  onChange, windowTarget }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; getOverview(): boolean; isAvailable(): boolean; onChange(selection: OverviewSelection): void; windowTarget: Window }) {
+  onChange, onApproach, windowTarget }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; getOverview(): boolean; isAvailable(): boolean; onChange(selection: OverviewSelection): void; /** The camera is part of the way to an exit: the scene it would switch to. */ onApproach?(selection: OverviewSelection): void; windowTarget: Window }) {
   let timer: number | null = null, latest: SelectionPublication | null = null, candidate: OverviewSelection | null = null; let disposed = false;
   // Where the body's scene came to rest: the first camera it answers for, and each landing after it.
   let restRangeM: number | null = null;
   // The exit the camera was last switched for by being clearly past it, until it comes back inside: one switch a crossing.
   let left: OverviewSelection | null = null;
+  // The scene last asked to be fetched ahead.
+  let warmed: string | null = null;
   // When the pending crossing was first seen, for its timing entry.
   let crossedAt = 0;
   const now = () => windowTarget.performance?.now?.() ?? 0;
@@ -94,6 +96,11 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     latest = { world, viewport: navigation.optics?.() ?? viewport };
     if (isAvailable() && restRangeM === null) restRangeM = range(world);
     const next = isAvailable() ? selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview(), restRangeM: restRangeM ?? 0 }) : null;
+    // Part of the way to an exit (policy.warmScale) the camera may be leaving: its owner fetches what the switch reads.
+    if (onApproach && isAvailable() && !getOverview()) {
+      const ahead = next ?? selectionAtCamera({ ...latest, objects, systems, objectId, overview: false, restRangeM: restRangeM ?? 0, exitScale: policy.warmScale });
+      if (ahead && ahead.objectId !== warmed) { warmed = ahead.objectId; onApproach(ahead); }
+    }
     if (!next) left = null;
     else if (!getOverview() && next.overview && left?.objectId !== next.objectId
         && selectionAtCamera({ ...latest, objects, systems, objectId, overview: false, restRangeM: restRangeM ?? 0, exitScale: policy.clearExitScale })) {

@@ -10,9 +10,10 @@ const SETTLED_PHASES = ['finished', 'failed', 'cancelled'];
 export interface HandoverDetail { source: 'overview-watcher' | 'zoom-scope'; from: string; to: string; rangeM?: number; waitedMs?: number }
 
 /** Named User Timing entries for a scene hand-over the camera causes by crossing a threshold: `crossed` when an owner
- * first sees it, `settled` when it asks for the navigation, `cancelled` when the camera came back first. Only the latest
+ * first sees it, `settled` when it asks for the navigation, `cancelled` when the camera came back first, and `warmed`
+ * when the camera came near enough to a crossing for the next scene's files to be fetched ahead. Only the latest
  * of each phase is kept. A capture reads them beside `cssEarth:navigation:*` to see where a zoom's hold comes from. */
-export function markHandover(windowTarget: Window, phase: 'crossed' | 'settled' | 'cancelled', detail: HandoverDetail) {
+export function markHandover(windowTarget: Window, phase: 'warmed' | 'crossed' | 'settled' | 'cancelled', detail: HandoverDetail) {
   const clock = windowTarget?.performance;
   if (typeof clock?.mark !== 'function' || typeof clock?.clearMarks !== 'function') return;
   const name = `cssEarth:handover:${phase}`;

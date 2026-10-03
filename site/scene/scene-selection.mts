@@ -1,4 +1,5 @@
 import type { WorldCameraPose } from '@cssearth/objects';
+import { dollyPoseAboutFocus } from '@cssearth/engine';
 import { overviewScopeAtCamera, overviewsReachableFrom } from '../overview-context.mts';
 import { PAGE_VIEWS, namesSystem, withView, type PageView } from '../navigation/navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
@@ -64,6 +65,18 @@ export function createSceneSelection({ initial, objectId, systems = [], onChange
       // The rung the camera crossed into is a selection of the mounted scene (a star's own system), or of another scene.
       const next = subjectOfScope(scope, centreId);
       return next.objectId === scene ? publish(next) : { ...next, centreId };
+    },
+    /** The scene a camera `ratio` times as far from its focus would be handed to, without changing the selection: what a
+     * zoom toward a crossing has fetched before it gets there. Null on a body, and when that camera is in this scope still. */
+    handoverAhead(world: WorldCameraPose, ratio: number): LadderHandover | null {
+      const ladder = ladderOf(subject);
+      if (!ladder) return null;
+      const { centreId } = ladder, star = systemById(systems, centreId);
+      const scope = overviewScopeAtCamera({ ...world, pose: dollyPoseAboutFocus(world.pose, ratio) }, ladder.scope, undefined,
+        star ? { originM: star.originM, orbitsWithinM: SYSTEM_RANGES.get(star.id) } : undefined);
+      if (scope === ladder.scope) return null;
+      const next = subjectOfScope(scope, centreId);
+      return next.objectId === scene ? null : { ...next, centreId };
     },
     /** Whether a wider scene takes the camera as it zooms out: a body's system does, and so does the next level out of a
      * system or a level, up to the outermost its centre reaches. Such a scene's own far limit does not stop the zoom. */
