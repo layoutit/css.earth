@@ -1,14 +1,5 @@
+import type { LambertRasterConfig } from '@cssearth/objects';
 import { clamp, smoothstep } from "./math.js";
-export interface LambertRasterConfig {
-    minimumLightViewZ: number;
-    maximumLightViewZ: number;
-    frameCount: number;
-    shadowlessFloodLimbFloor: number;
-    ambientIntensity: number;
-    radiusScale: number;
-    terminator: readonly number[];
-    maximumAlpha: number;
-}
 export function lightingFrame(size: number, frameIndex: number, config: LambertRasterConfig) {
     const pixels = new Uint8Array(size * size * 4);
     const lightViewZ = config.minimumLightViewZ +

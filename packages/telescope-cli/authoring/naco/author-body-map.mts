@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { BODY_MAP_SCHEMA } from '@cssearth/objects';
 /** Turn one checked NACO jitter product into a registered body map through the shared resolved-disc boundary.
  *
  *   node packages/telescope-cli/authoring/naco/author-body-map.mts <target> <program> <naco_img_jitter.fits> --raw <raw-dir> [--out <map.fits>] [--check]
@@ -13,7 +14,8 @@ import { pathToFileURL } from 'node:url';
 import { readFitsImage } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { bodyMapFits, topRowFirst } from '@cssearth/bake/objects/layers/observation';
-import { formatBodyMapProduct, type BodyMapFrame, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
+import { renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { type BodyMapFrame, type MeasurementDefinition } from '@cssearth/objects';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductSoftware } from '@cssearth/telescope';
@@ -147,12 +149,12 @@ export async function authorNacoBodyMap(target: string, programId: string, produ
   const frame: BodyMapFrame = { body: target, radiusKm, rotation: { model: PCK, bodyCode } };
   const fits = bodyMapFits(placed.map, { TELESCOP: 'VLT/NACO', OBJECT: program.object, QUANTITY: quantity, FILTER: String(productHeader['ESO INS OPTI6 NAME']) },
     [{ name: quantity, units, values: placed.map.depth }, { name: `${quantity} ERROR`, units, values: placed.map.error }]);
-  const unqualifiedMap = { schema: 'cssearth-body-map@1', definition, frame,
+  const unqualifiedMap = { schema: BODY_MAP_SCHEMA, definition, frame,
     grid: { width: placed.map.width, height: placed.map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' },
     planes: { file: basename(output), value: quantity, uncertainty: `${quantity} ERROR` },
     mask: { maximumEmissionDegrees: 70, missing: 'NaN' }, observations: [placed.observation] } as const;
   const resolution = bindMapResolution(unqualifiedMap, 'measured', 'disc-edge-gaussian-fit', placed.centre), mapProduct = resolution.product;
-  const metadata = Buffer.from(formatBodyMapProduct(mapProduct)), metadataPath = `${output}.body-map.json`, mapRecordPath = productRecordPath(output);
+  const metadata = Buffer.from(renderBodyMapProduct(mapProduct)), metadataPath = `${output}.body-map.json`, mapRecordPath = productRecordPath(output);
   const inputs: ProductInput[] = [
     { role: 'reduced jitter image', identity: product, bytes: productBytes.byteLength },
     { role: 'reduction product record', identity: reductionRecordPath, bytes: reductionRecordBytes.byteLength },

@@ -237,6 +237,11 @@ export { PYUVDATA_UVFITS_SCHEMA, parsePyuvdataUvfitsRequest, parsePyuvdataUvfits
 export { VOLUME_SOURCE_MANIFEST_SCHEMA } from './prepared-data/volume-source-manifest.js';
 export { VOLUME_PRESENTATION_SOURCE_SCHEMA, type VolumeSourcePreview, type TrackedVolumeSourcePreview, type VolumeDatasetSource, type VolumePresentationSource } from './prepared-data/volume-presentation-source.js';
 
+export * from './prepared-data/resolution-evidence.js';
+export * from './prepared-data/limb-block.js';
+export * from './prepared-data/raster-recipe.js';
+export { parseRasterRecipe } from './prepared-data/raster-recipe-parser.js';
+export * from './prepared-data/body-map-product.js';
 export * as preparedPanelReaders from './prepared-data/panel-readers.js';
 export { parseCloudAppearance, DEFAULT_CLOUD_APPEARANCE, type CloudAppearance } from './volume/cloud-appearance.js';
 export { validateChannelGain, type ChannelGain } from './volume/channel-gain.js';

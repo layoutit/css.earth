@@ -8,8 +8,8 @@ import { prepareGeometryScene, parseGeometryProfile, leafImageCandidates, widest
 import type { GeometryProfile, GeometrySceneAssets, LeafImagePixels, SolarSceneSource } from './geometry-scene.ts';
 import { prepareLeafSeamOutset, prepareSeamOutsetSteps } from './seam-outset.ts';
 import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
-import { parseRasterRecipe, outputName, packedRasterSize, rasterPageName, rasterPagePlan } from '../raster/index.ts';
-import type { RasterRecipe } from '../raster/index.ts';
+import { readRasterRecipe, outputName, packedRasterSize, rasterPageName, rasterPagePlan } from '../raster/index.ts';
+import type { RasterRecipe } from '@cssearth/objects';
 import { TEXELS_PER_CSS_PIXEL } from './projective-surface-raster.ts';
 import { prepareComposite } from '../presentation/composite.ts';
 import { presentationAdapters } from '../presentation/adapters.ts';
@@ -38,7 +38,7 @@ const styleOf=(style:string)=>new Map(style.split(';').map(entry=>[entry.slice(0
 const matrixOf=(style:string)=>(/transform:matrix3d\(([^)]+)\)/.exec(style)?.[1]??'').split(',').map(Number);
 async function prepareAuthored(id:string,direction:[number,number,number],edit:(profile:GeometryProfile)=>GeometryProfile=profile=>profile,extra:Partial<GeometrySceneAssets>={},
  widths:(raster:RasterRecipe,profile:GeometryProfile)=>LeafImagePixels=publishedWidths){
- const root=`src/objects/${id}/source`, profile=edit(parseGeometryProfile(await readJson(`${root}/preparation/geometry.json`))),raster=parseRasterRecipe(await readJson(`${root}/preparation/raster.json`));
+ const root=`src/objects/${id}/source`, profile=edit(parseGeometryProfile(await readJson(`${root}/preparation/geometry.json`))),raster=readRasterRecipe(await readJson(`${root}/preparation/raster.json`));
  const assets:GeometrySceneAssets={...extra};
  if(raster.lighting)assets.lighting={frameCount:raster.lighting.frameCount,defaultFrame:raster.lighting.defaultFrame};
  if(raster.interior){
@@ -95,7 +95,7 @@ for(const [id,direction,fixedOverlap] of fixtures){
   const result=await prepareAuthored(id,direction),gutter=projection.rasterGutter;
   const cellWidth=surface.surface.width/surface.longitudeSegments,cellHeight=surface.surfaceLatitudeHeight/surface.latitudeSegments;
   // A paged body's leaf samples its page, which holds `bandsPerPage` of the bands.
-  const rows=rasterPagePlan(parseRasterRecipe(await readJson(`src/objects/${id}/source/preparation/raster.json`)),RASTER_DENSITY)?.bandsPerPage??surface.latitudeSegments;
+  const rows=rasterPagePlan(readRasterRecipe(await readJson(`src/objects/${id}/source/preparation/raster.json`)),RASTER_DENSITY)?.bandsPerPage??surface.latitudeSegments;
   const packedWidth=surface.surface.width+2*gutter,packedHeight=rows*(cellHeight+2*gutter);
   const polar=(leaf:object)=>Boolean(('polar' in leaf&&leaf.polar)||('polarCap' in leaf&&leaf.polarCap));
   const bands=('bodyLeaves' in result?result.bodyLeaves:result.body.leaves).filter(leaf=>!polar(leaf));
@@ -113,7 +113,7 @@ for(const [id,direction,fixedOverlap] of fixtures){
 }
 test('a band leaf holds its widest image at two texels per CSS pixel, and a cap already there keeps its box',async()=>{
  // Venus's @2x maps put about two texels on each CSS pixel of a leaf at raster scale 1, so the recipe's 2 shrinks to just over 1.
- const raster=parseRasterRecipe(await readJson('src/objects/venus/source/preparation/raster.json')),width=publishedWidths(raster);
+ const raster=readRasterRecipe(await readJson('src/objects/venus/source/preparation/raster.json')),width=publishedWidths(raster);
  const {projection,surface}=parseGeometryProfile(await readJson('src/objects/venus/source/preparation/geometry.json'));
  const result=await prepareAuthored('venus',[1,0,0]);
  assert.ok(!('bodyLeaves' in result));
@@ -160,7 +160,7 @@ test('a plain cap whose image holds fewer than two texels per CSS pixel shrinks 
  });
 });
 test('leaf image candidates cover every dataset, page, level and cutaway image a leaf can show',async()=>{
- const venus=parseGeometryProfile(await readJson('src/objects/venus/source/preparation/geometry.json')),venusPaged=parseRasterRecipe(await readJson('src/objects/venus/source/preparation/raster.json'));
+ const venus=parseGeometryProfile(await readJson('src/objects/venus/source/preparation/geometry.json')),venusPaged=readRasterRecipe(await readJson('src/objects/venus/source/preparation/raster.json'));
  // Venus's radar is drawn at four times the scale, which pages the body; at one scale it publishes whole atlases.
  const venusRaster={...venusPaged,surfaces:venusPaged.surfaces.map(({resolutionScale:_scale,...surface})=>surface)};
  const dataset=(id:string,extra:Record<string,unknown>={})=>({id,surfaceUrl:`/scenes/venus/venus-${id}@2x.webp`,surface2xUrl:`/scenes/venus/venus-${id}@2x.webp`,
@@ -173,7 +173,7 @@ test('leaf image candidates cover every dataset, page, level and cutaway image a
  assert.deepEqual(candidates.get(venus.surface.poles.url),['/scenes/venus/venus-poles-clouds@2x.webp','/scenes/venus/venus-poles-radar@2x.webp']);
  assert.throws(()=>leafImageCandidates({objectId:'venus',profile:venus,raster:venusRaster,datasets:{controls:[dataset('clouds',{surfaceUrl:'venus-clouds.webp'})]}}),/venus: dataset clouds\.surfaceUrl must be a \/scenes\/ url, not "venus-clouds\.webp"/);
  // A paged surface publishes no whole atlas: every page at every level instead.
- const triton=parseGeometryProfile(await readJson('src/objects/triton/source/preparation/geometry.json')),tritonRaster=parseRasterRecipe(await readJson('src/objects/triton/source/preparation/raster.json'));
+ const triton=parseGeometryProfile(await readJson('src/objects/triton/source/preparation/geometry.json')),tritonRaster=readRasterRecipe(await readJson('src/objects/triton/source/preparation/raster.json'));
  const paged=leafImageCandidates({objectId:'triton',profile:triton,raster:tritonRaster,datasets:{controls:[{id:'normal',surfaceUrl:triton.surface.surface.url,surface2xUrl:triton.surface.surface.url}]}});
  const pages=paged.get(triton.surface.surface.url)!,full=packedRasterSize(tritonRaster,RASTER_DENSITY).width;
  assert.equal(pages.length,16*4);
@@ -181,7 +181,7 @@ test('leaf image candidates cover every dataset, page, level and cutaway image a
  assert.ok(pages.includes(`/scenes/triton/${rasterPageName('triton-normal@2x.webp',0)}`)&&pages.includes(`/scenes/triton/${rasterPageName('triton-normal@2x.webp',15,full/8)}`));
  // The cutaway draws the band leaves again over its outer shell, lit or unlit, and names its own poles, core and section.
  // No body keeps a cutaway while they are parked; the test gives Mercury's profile one.
- const mercury={...parseGeometryProfile(await readJson('src/objects/mercury/source/preparation/geometry.json')),cutaway:{} as never},mercuryRaster=parseRasterRecipe(await readJson('src/objects/mercury/source/preparation/raster.json'));
+ const mercury={...parseGeometryProfile(await readJson('src/objects/mercury/source/preparation/geometry.json')),cutaway:{} as never},mercuryRaster=readRasterRecipe(await readJson('src/objects/mercury/source/preparation/raster.json'));
  const interior=Object.fromEntries(['outerSurface','outerSurfaceUnlit','outerPoles','outerPolesUnlit','core','corePoles','section'].map(name=>[`${name}Url`,`/scenes/mercury/${name}.webp`]));
  const cutaway=leafImageCandidates({objectId:'mercury',profile:mercury,raster:mercuryRaster,interior,datasets:{controls:[{id:'normal',surfaceUrl:mercury.surface.surface.url,polesUrl:mercury.surface.poles.url}]}});
  // Mercury is one page, published at three reductions and whole.

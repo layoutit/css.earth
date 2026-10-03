@@ -1,3 +1,4 @@
+import { RASTER_RECIPE_SCHEMA } from '@cssearth/objects';
 import { BANDED_ELLIPSOID_SCHEMA, LAYERED_OBLATE_SCHEMA } from '@cssearth/bake/objects/scene';
 import { readNonArrayRecord } from '@cssearth/core';
 import { isRecord } from '@cssearth/core';
@@ -9,7 +10,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { parsePresentationProfile, AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, readAuthoredPreparationSources, CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, type AuthoredObjectDescriptor } from '@cssearth/objects';
 import { readAuthoredSources, type VerifiedSource } from '@cssearth/bake/objects/sources';
-import { parseRasterRecipe, prepareLimb, prepareRasterAssets, surfaceCoordinateWidth, prepareLighting, prepareAtmosphere, outputName } from '@cssearth/bake/raster';
+import { readRasterRecipe, prepareLimb, prepareRasterAssets, surfaceCoordinateWidth, prepareLighting, prepareAtmosphere, outputName } from '@cssearth/bake/raster';
 import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '@cssearth/bake/scene';
 import { prepareCssPresentation, type PresentationInputs } from '@cssearth/bake/presentation';
 import { prepareCelestialAssets } from '@cssearth/bake/objects/celestial';
@@ -280,7 +281,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   // Nomenclature labels ride the generic sphere lane; other lanes declare no mesh anchor frame yet.
   // --reuse-images keeps the published images and rebuilds only what the tracked recipes describe (scene, presentation,
   // content), so it needs no raw downloads. The paged-ellipsoid lane and the generic raster lane support it.
-  const genericRasterLane = (source(sources, 'raster')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-raster-recipe@2' &&
+  const genericRasterLane = (source(sources, 'raster')?.value as Record<string, unknown> | undefined)?.schema === RASTER_RECIPE_SCHEMA &&
     !['terrestrial', 'shape-model'].some(id => source(sources, id)) &&
     ![LAYERED_OBLATE_SCHEMA, BANDED_ELLIPSOID_SCHEMA].includes(String((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema));
   if (reuseImages && !source(sources, 'paged-ellipsoid') && !genericRasterLane) throw new TypeError(`${descriptor.id}: --reuse-images supports the paged-ellipsoid and raster lanes only.`);
@@ -367,7 +368,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   }
   // Scientific and observed surfaces are interpreted by their existing decoder owners (observation rasters,
   // terrestrial decoders, GLB base color, solar synoptic maps) before the raster lane packs them; src never imports tools.
-  const rasterConfig = parseRasterRecipe(required(sources, 'raster').value);
+  const rasterConfig = readRasterRecipe(required(sources, 'raster').value);
   const solarSource = physicalSolarSource(required(sources, 'solar-system').value);
   if (reuseImages && (source(sources, 'observations') || source(sources, 'rings')))
     throw new TypeError(`${descriptor.id}: --reuse-images cannot carry observed surfaces or radial layers, which publish their own images; run the full preparation.`);
@@ -498,7 +499,7 @@ export async function redrawOnlyDecision(objectDirectory: string, publishedRecip
   Promise<{ redraw: true; acceptChanged: string[]; reason: string } | { redraw: false; reason: string }> {
   const { entries, sources } = await readAuthoredSources(objectDirectory);
   const geometrySchema = String((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema);
-  const rasterLane = (source(sources, 'raster')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-raster-recipe@2' &&
+  const rasterLane = (source(sources, 'raster')?.value as Record<string, unknown> | undefined)?.schema === RASTER_RECIPE_SCHEMA &&
     !['terrestrial', 'shape-model', 'observations', 'rings'].some(sourceId => source(sources, sourceId)) &&
     ![LAYERED_OBLATE_SCHEMA, BANDED_ELLIPSOID_SCHEMA].includes(geometrySchema);
   if (!source(sources, 'paged-ellipsoid') && !rasterLane) return { redraw: false, reason: 'its lane has no redraw-only path' };
