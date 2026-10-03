@@ -1,3 +1,4 @@
+import { VOLUME_PRESENTATION_SOURCE_SCHEMA } from '@cssearth/objects';
 // Maintainer command: mirror an object's downloaded source inputs into R2 under source-cache/<object id>/<manifest path>,
 // addressed the way the manifest names them and additive. Two forms:
 //
@@ -50,7 +51,7 @@ export async function objectSourceCacheCandidates(id: string): Promise<readonly 
   const candidates: Candidate[] = [];
 
   const presentation = await readJson(`src/objects/${id}/source/presentation.json`).catch(() => null);
-  if (presentation && typeof presentation === 'object' && (presentation as Record<string, unknown>).schema === 'cssearth-volume-presentation-source@2') {
+  if (presentation && typeof presentation === 'object' && (presentation as Record<string, unknown>).schema === VOLUME_PRESENTATION_SOURCE_SCHEMA) {
     const datasets = (presentation as Record<string, unknown>).datasets;
     if (Array.isArray(datasets)) for (const dataset of datasets) {
       const preview = (dataset as Record<string, unknown>).preview as Record<string, unknown> | undefined;

@@ -1,3 +1,4 @@
+import { VOLUME_PRESENTATION_SOURCE_SCHEMA } from '@cssearth/objects';
 import type { InventoryAsset, AssetLocation } from '@cssearth/objects/node';
 /** An inventoried file with where it is served from and where it lives in this checkout. */
 /** `inventory` is the inventory file that pins the asset, when it came from one (see installRuntimeAssets). */
@@ -94,7 +95,7 @@ export async function volumeMetadataObjectIds(root: string): Promise<string[]> {
     const text = await readFile(resolve(root, 'src/objects', id, 'source/presentation.json'), 'utf8').catch(() => null);
     if (text === null) continue;
     const presentation = JSON.parse(text) as { schema?: unknown; objectId?: unknown };
-    if (presentation.schema !== 'cssearth-volume-presentation-source@2') continue;
+    if (presentation.schema !== VOLUME_PRESENTATION_SOURCE_SCHEMA) continue;
     if (presentation.objectId !== id) throw new TypeError(`Mismatched volume presentation object: ${id}.`);
     ids.push(id);
   }

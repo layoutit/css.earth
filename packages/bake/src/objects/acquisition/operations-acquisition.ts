@@ -1,3 +1,4 @@
+import { ACQUISITION_PLAN_SCHEMA, type AcquisitionOperation, type AcquisitionPlan } from '@cssearth/objects';
 import sharp from 'sharp';
 import { lstat, readFile, mkdir, rename, rm } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
@@ -15,33 +16,12 @@ import { withIdleTimeout } from '../sources/index.ts';
 import { prepareSatelliteCatalog, validateSatelliteCatalogRecipe } from './satellite-catalog.ts';
 import { prepareDskMesh, validateDskMeshRecipe } from './dsk-mesh.ts';
 import { missingCoverageColor } from '../../raster/index.ts';
-interface HriiFacets extends OperationBase {kind:'hrii-facets';path:string;recipePath:string;product:'fields'|'report';}
-interface SpectralBandMaps extends OperationBase {kind:'spectral-band-maps';path:string;recipePath:string;product:string;}
-interface MappedComposition extends OperationBase {kind:'mapped-composition';path:string;recipePath:string;product:string;}
-interface GeoTiffGrid extends OperationBase {kind:'geotiff-grid'|'geotiff-image';path:string;recipePath:string;}
-interface DskMesh extends OperationBase {kind:'dsk-mesh';path:string;recipe:Record<string,unknown>;}
-interface OperationBase { groups:string[]; }
-interface Download extends OperationBase {kind:'download';path:string;url:string;headers?:Record<string,string>;encoding?:'gzip'|'pretty-json';expectedJsonFields?:Record<string,unknown>;}
-interface RequestDownload extends OperationBase {kind:'request-download';path:string;url:string;form:Record<string,string>;fileSource?:string;trimEnd?:boolean;appendText?:string;headers?:Record<string,string>;replacements?:{pattern:string;flags?:string;replacement:string}[];requiredPrefix?:string;requiredText?:string[];numericLineCount?:number;}
-interface JsonDocument extends OperationBase {kind:'json-document';path:string;value:Record<string,unknown>;}
-interface ZipMember extends OperationBase {kind:'zip-member';path:string;url:string;member:string;}
-/** One member of a published .tar.gz deposit, streamed out by tar so the archive never has to fit in memory. */
-interface TarGzMember extends OperationBase {kind:'tar-gz-member';path:string;url:string;member:string;}
-interface SatelliteCatalog extends OperationBase {kind:'satellite-catalog';path:string;recipePath:string;headers?:Record<string,string>;}
-interface VerifyDownload extends OperationBase {kind:'verify-download';url:string;}
-interface Mosaic extends OperationBase {kind:'tile-mosaic';path:string;url:string;tileSize:number;columns:number;rows:number;dataWidth:number;dataHeight:number;width:number;height:number;forceRgb:boolean;concurrency:number;missingCoverage?:'transparent';}
-interface RequestCheck extends OperationBase {kind:'verify-request';url:string;form:Record<string,string>;fileSource?:string;expectedPath:string;selector:'trim'|'numeric-lines'|'before-marker';marker?:string;rowCount?:number;headers?:Record<string,string>;}
-interface JsonCheck extends OperationBase {kind:'verify-json';url:string;expectedPath:string;fields:Record<string,string>;}
-/** A pinned JPL Horizons time-list table asked for again; Horizons dates each response, so its rows are compared, not its bytes. */
-interface HorizonsTimeList extends OperationBase {kind:'horizons-time-list';path:string;url:string;parameters:Record<string,string>;epochs:number[];}
-export type AcquisitionOperation=GeoTiffGrid|MappedComposition|SpectralBandMaps|HriiFacets|DskMesh|Download|RequestDownload|JsonDocument|ZipMember|TarGzMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|HorizonsTimeList;
-export interface AcquisitionPlan {schema:'cssearth-acquisition-plan@1';operations:AcquisitionOperation[];}
 export interface AcquisitionTransport { fetch(url:string,init?:RequestInit):Promise<Response>; }
 const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected acquisition object.');return value as Record<string,unknown>;};
 export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
  // An empty plan is legal: a body whose every declared source input is already
  // tracked needs no reacquisition operation at all (e.g. eris, haumea, makemake).
- const plan=record(value);if(plan.schema!=='cssearth-acquisition-plan@1'||!Array.isArray(plan.operations))throw new TypeError('Invalid acquisition plan.');
+ const plan=record(value);if(plan.schema!==ACQUISITION_PLAN_SCHEMA||!Array.isArray(plan.operations))throw new TypeError('Invalid acquisition plan.');
  for(const value of plan.operations){const step=record(value);if(!['geotiff-grid','geotiff-image','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','satellite-catalog','zip-member','tar-gz-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
   if(!['geotiff-grid','geotiff-image','download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','tar-gz-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','horizons-time-list'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
   for(const key of ['path','expectedPath','fileSource','recipePath','member'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}
@@ -242,7 +222,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
  * observed mean, with an 8-bit rounding error of at most ±1 DN when alpha ≥ 128. Pixels less than half observed become
  * the shared missing-coverage grid rather than being recovered from too few samples.
  */
-async function transparentGapsAsCoverage(step:Mosaic,inputs:{input:Buffer;left:number;top:number}[]) {
+async function transparentGapsAsCoverage(step:Extract<AcquisitionOperation, { kind: 'tile-mosaic' }>,inputs:{input:Buffer;left:number;top:number}[]) {
  const {width,height}=step,gray=new Uint8Array(width*height),alpha=new Uint8Array(width*height);
  // Tiles are decoded one by one; compositing would premultiply partial alpha and shift gray values by up to 2 DN.
  for(const tile of inputs){

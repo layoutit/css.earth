@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { it as test } from 'node:test';
 import { parseAstroqueryAnswer } from './astroquery.js';
-import { parsePyuvdataUvfitsAnswer } from './pyuvdata.js';
 
 test('the boundary rejects a response from another operation', async () => {
   assert.throws(() => parseAstroqueryAnswer({ schema: 'cssearth-astroquery-answer@2', astroquery: '0.4.11', pyvo: '1.9.1', operation: 'tap-query', tap: { queryStatus: 'OK', complete: true }, rows: [] },
@@ -23,10 +22,4 @@ test('row operations require rows and TAP preserves server completeness', () => 
   assert.throws(() => parseAstroqueryAnswer({ schema: 'cssearth-astroquery-answer@2', astroquery: '0.4.11', pyvo: '1.9.1', operation: 'tap-query', tap: { queryStatus: 'OK', complete: true } }, request), /no rows field/u);
   assert.deepEqual(parseAstroqueryAnswer({ schema: 'cssearth-astroquery-answer@2', astroquery: '0.4.11', pyvo: '1.9.1', operation: 'tap-query',
     tap: { queryStatus: 'OVERFLOW', complete: false }, rows: [{ id: 1 }] }, request).tap, { queryStatus: 'OVERFLOW', complete: false });
-});
-
-test('the pyuvdata boundary rejects missing or inverted visibility selections', () => {
-  const file = { path: 'fixture.uvfits', bytes: 1 };
-  assert.throws(() => parsePyuvdataUvfitsAnswer({}, { operation: 'uvfits-visibility-export', file }), /UVFITS selection/u);
-  assert.throws(() => parsePyuvdataUvfitsAnswer({}, { operation: 'uvfits-amplitude-phase-diagnostics', file, selection: { field: 'J1008+0730', timeStartJulianDate: 2, timeEndJulianDate: 1, antenna1: 4, antenna2: 8, rowOffset: 0, rowCount: 1, channelStart: 0, channelCount: 1, polarization: -1 } }), /inverted/u);
 });

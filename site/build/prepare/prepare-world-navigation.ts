@@ -1,4 +1,4 @@
-import { OBJECT_RUNTIME_SCHEMA, WORLD_NAVIGATION_PREPARATION_SCHEMA, type WorldNavigationPreparationReceipt } from '@cssearth/objects';
+import { OBJECT_RUNTIME_SCHEMA, WORLD_NAVIGATION_PREPARATION_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, PAGED_ELLIPSOID_SCHEMA, type WorldNavigationPreparationReceipt } from '@cssearth/objects';
 
 import { HOSTED_PLANET_IDS, STAR_IDS } from '@cssearth/astronomy';
 import { buildPolyCameraSceneTransform } from '@layoutit/polycss';
@@ -69,7 +69,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const frame = preparePhysicalWorldFrame({ referenceFrame: 'sun-icrf', epochJdTt: solar.SOLAR_GEOMETRY_EPOCH_JD_TT,
     originM, bodyToReference, bodyToPresentation, orbitUpReference: eclipticUp,
     physicalRadiusM: bodyRadiusM, renderedRadiusUnits });
-  const alreadyPhysical = sources.has('shape-model') || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
+  const alreadyPhysical = sources.has('shape-model') || sources.get('solar-system')?.schema === SOLAR_SYSTEM_PREPARATION_SCHEMA ||
     sources.get('terrestrial')?.kind === 'solid-observation-body';
   const paged = sources.get('paged-ellipsoid');
   const physical = alreadyPhysical ? oriented.camera : physicalCamera(oriented.camera, oriented.sky.projection, pagedSurfaceArcPerCssPixel(paged),
@@ -190,8 +190,8 @@ function assertAtlasOrigins(id: string, raster: Input | undefined, placement: Su
 
 /** Lanes whose system node carries the ecliptic presentation frame directly. */
 function eclipticLane(sources: ReadonlyMap<string, Input>): boolean {
-  return sources.get('shape-model')?.schema === SHAPE_MODEL_SCHEMA || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
-    sources.get('terrestrial')?.kind === 'solid-observation-body' || sources.get('paged-ellipsoid')?.schema === 'cssearth-paged-ellipsoid@1';
+  return sources.get('shape-model')?.schema === SHAPE_MODEL_SCHEMA || sources.get('solar-system')?.schema === SOLAR_SYSTEM_PREPARATION_SCHEMA ||
+    sources.get('terrestrial')?.kind === 'solid-observation-body' || sources.get('paged-ellipsoid')?.schema === PAGED_ELLIPSOID_SCHEMA;
 }
 
 /** Every prepared copy of the system node's transform (the node itself, counter bindings, physical material tracks) is one value. */
@@ -214,7 +214,7 @@ async function surfacePlacement(objectDirectory: string, bound: Awaited<ReturnTy
  * target (`textureLevels.texelsPerCssPixel`) times one texel of the sharpest level. The canonical atlas carries
  * `atlas.density` texels per column of its `atlas.sourceWidth` grid around the equator (paged-ellipsoid surface-raster). */
 function pagedSurfaceArcPerCssPixel(paged: Input | undefined): number | undefined {
-  if (paged?.schema !== 'cssearth-paged-ellipsoid@1') return undefined;
+  if (paged?.schema !== PAGED_ELLIPSOID_SCHEMA) return undefined;
   const { sourceWidth, density } = paged.atlas ?? {}, texelsPerCssPixel = paged.textureLevels?.texelsPerCssPixel;
   if (!(Number.isInteger(sourceWidth) && sourceWidth > 0 && Number.isInteger(density) && density > 0 && texelsPerCssPixel >= 1)) {
     throw new TypeError(`${String(paged.namespace)}: paged ellipsoid zoom limit needs atlas.sourceWidth, atlas.density and textureLevels.texelsPerCssPixel; found ${String(sourceWidth)}, ${String(density)} and ${String(texelsPerCssPixel)}.`);

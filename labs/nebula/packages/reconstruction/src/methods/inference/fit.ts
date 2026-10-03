@@ -1,8 +1,8 @@
-import { EMISSION_FIELD_SCHEMA, readEmissionWindow, readJointParameters, defaultCompilerControls, readCompilerControls, type EmissionComponent, type EmissionFieldModel, type CompilerControls } from '@cssearth/objects';
 /** Bounded positive multiscale fit, followed by explicitly conditional 3D depth assignment. */
+import { EMISSION_FIELD_SCHEMA, readEmissionWindow, readJointParameters, defaultCompilerControls, readCompilerControls, type EmissionComponent, type EmissionFieldModel, type CompilerControls, type DepthRecipe } from '@cssearth/objects';
 import { jointRayDepths } from '../joint/geometry.ts';
 import { createEmissionField, emissionKernel, projectEmissionComponent, type EmissionFitInput, type EmissionFitResult, createEmissionWindowSampler } from '@cssearth/bake/volume';
-import { conditionDepthComponents, readDepthRecipe, type DepthRecipe } from './depth-model.ts';
+import { conditionDepthComponents, readDepthRecipe } from './depth-model.ts';
 
 interface Basis {
   x: number; y: number; sigma: number; weight: number; pixels: Uint32Array; values: Float32Array; norm: number;

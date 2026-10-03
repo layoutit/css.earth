@@ -1,7 +1,8 @@
+import { INVESTIGATION_LEDGER_SCHEMA, type InvestigationLedger } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { INVESTIGATION_LEDGER_SCHEMA, investigationOptions, investigationReport, formatInvestigationReport, type InvestigationLedger } from '@cssearth/bake/sources';
+import { investigationOptions, investigationReport, formatInvestigationReport } from '@cssearth/bake/sources';
 
 const ledger = (objectId: string): InvestigationLedger => ({ schema: INVESTIGATION_LEDGER_SCHEMA, objectId, entries: [
   { id: 'mesh', subject: 'Selected mesh', status: 'included', finding: 'Source geometry is in use; optical terrain remains unknown.', evidence: ['https://example.org/mesh'] },

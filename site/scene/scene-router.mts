@@ -102,6 +102,8 @@ export function createSceneRouter({
   // Whether a link flies in place; set once the router's modules have loaded (`ensureContext`).
   let navigable = (_id: string) => false;
   let shellOwner: { shell: ObjectShell | null } | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
+  // The header's Showcase pill tours the featured bodies through `navigate` (showcase.mts).
+  let showcase: { destroy(): void } | null = null;
   let centeredObjectId: string | null = null;
   // The registry and what the router builds from it (navigation, selection, activation, history and the shell) arrive
   // after a cold page's first body has mounted. Publish them together once ready.
@@ -185,7 +187,7 @@ export function createSceneRouter({
       if (control && windowTarget.__cssEarthControl === control) delete windowTarget.__cssEarthControl;
       windowTarget.removeEventListener("pagehide", destroyActiveScene);
       windowTarget.removeEventListener("pageshow", restoreCachedScene);
-      historyOwner?.destroy(); unbindLinks?.();
+      historyOwner?.destroy(); unbindLinks?.(); showcase?.destroy();
     },
   });
 
@@ -358,6 +360,7 @@ export function createSceneRouter({
         historyOwner = createNavigationHistory({ windowTarget, capture: () => requests.current ? null : view.capture(), navigate, navigating: () => requests.current !== null, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
         // A link flies in place to any body the world draws; one whose entry has loaded must also share this frame.
         unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
+        showcase = registry.createShowcaseController({ documentTarget, windowTarget, navigate, readObjectId: () => objectId, onError: report });
       }
       // Any body the world draws, and any object the page already knows (a scale of the universe is no body of the world).
       navigable = id => (worldIds.has(id) || registry.knownObject(id) !== undefined) && (!registry.knownObject(id) || navigation.supports(objectId, id));

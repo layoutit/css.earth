@@ -1,4 +1,5 @@
 /** Bounded Gaia DR3/Bailer-Jones stellar neighbourhood intake, recorded by its archive query. */
+import { GAIA_NEBULA_FIELD_SCHEMA } from '@cssearth/objects';
 import { readFile, writeFile, mkdir, rename, stat } from 'node:fs/promises';
 
 const arguments_=process.argv.slice(2), magnitudeOptions=arguments_.filter(value=>value.startsWith('--magnitude-limit='));
@@ -149,7 +150,7 @@ async function prepare(id:string,explicitMagnitudeLimit:number|null) {
   let previousRetainedSources:string|null|undefined,previousImageAnchors:object|undefined;
   try {
     const previous:unknown=JSON.parse(await readFile(`src/objects/${id}/source/stellar-field.json`,'utf8'));
-    if(!previous || typeof previous!=='object' || !('schema' in previous) || previous.schema!=='cssearth-gaia-nebula-field@1' || !('id' in previous) || previous.id!==id || !('selection' in previous)) throw new Error('Invalid existing stellar-field identity.');
+    if(!previous || typeof previous!=='object' || !('schema' in previous) || previous.schema!==GAIA_NEBULA_FIELD_SCHEMA || !('id' in previous) || previous.id!==id || !('selection' in previous)) throw new Error('Invalid existing stellar-field identity.');
     const selection=previous.selection;
     if(!selection || typeof selection!=='object' || !('outerRadiusPc' in selection) || typeof selection.outerRadiusPc!=='number' || !Number.isFinite(selection.outerRadiusPc) || selection.outerRadiusPc<=0 || !('limitingMagnitude' in selection) || typeof selection.limitingMagnitude!=='number' || !Number.isFinite(selection.limitingMagnitude) || selection.limitingMagnitude<5 || selection.limitingMagnitude>20) throw new Error('Invalid existing stellar-field selection.');
     previousRadius=selection.outerRadiusPc;previousMagnitude=selection.limitingMagnitude;
@@ -216,7 +217,7 @@ async function prepare(id:string,explicitMagnitudeLimit:number|null) {
   }).filter(star=>star.separation<radius).sort((a,b)=>a.photGMeanMag-b.photGMeanMag || a.sourceId.localeCompare(b.sourceId))
     .map(({separation:_separation,...star})=>star);
   if (!stars.length) throw new Error(`${id}: no qualified stars in the 3D neighbourhood.`);
-  const field={schema:'cssearth-gaia-nebula-field@1',id,coordinateEpochJulianYear:2016,
+  const field={schema:GAIA_NEBULA_FIELD_SCHEMA,id,coordinateEpochJulianYear:2016,
     selection:{centerIcrsDegrees:[ra,dec],distancePc:distance,outerRadiusPc:radius,featherStartPc:radius*.65,
       limitingMagnitude:magnitudeLimit,fadeMagnitude:1.5,maximumStars:1500,
       retainIds:previousRetainIds??(id==='m1'?['crab-pulsar']:id==='m45'?['HIP 17702','HIP 17847','HIP 17499','HIP 17573','HIP 17608','HIP 17531','HIP 17851','HIP 17579']:[]),

@@ -1,7 +1,6 @@
-import { PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
+import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, type VolumeSourcePreview as Preview, type TrackedVolumeSourcePreview as TrackedPreview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
 import { sha256 } from '@cssearth/core/node';
 import { parseProductInputEvidence } from '@cssearth/objects/provenance';
-import type { ProductInputEvidence } from '@cssearth/objects/provenance';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -34,12 +33,6 @@ const stringify = (value: unknown) => JSON.stringify(value, null, 2) + '\n';
  * draws itself from one of its own declared inputs. The third kind exists for a dataset whose source is the package's
  * own product rather than a figure someone published: there is nothing to download, and a publisher figure of some
  * other observation would misrepresent it. */
-type Crop = { left: number; top: number; width: number; height: number };
-/** A preview whose file is in this repository (authored here, or a download kept beside its source) is identified by that
- * file; a preview fetched into the ignored cache is named by its path there. */
-interface TrackedPreview { path: string; url?: string; authoredFrom?: string; crop?: Crop; }
-interface CachedPreview { path: string; url?: string; skyBands?: { path: string }; crop?: Crop; }
-type Preview = TrackedPreview | CachedPreview;
 const isTracked = (preview: Preview): preview is TrackedPreview => !preview.path.startsWith('.local/');
 function preview(raw: unknown): Preview {
   const value = sourceObject(raw, ['path', 'url', 'skyBands', 'authoredFrom', 'crop']);
@@ -61,19 +54,9 @@ function preview(raw: unknown): Preview {
   }
   return result;
 }
-interface DatasetRecord {
-  id: string; label: string; title: string; description: string; summary: string; detail: string;
-  facts: { id: string; label: string; value: string }[]; input: string; preview: Preview;
-  /** Further inputs this one dataset was built from, each with its role, beyond its own image and the shared inputs. */
-  inputEvidence: ProductInputEvidence[];
-}
-interface Presentation {
-  objectId: string; name: string; defaultDataset: string; bank: { path: string };
-  sharedInputs: string[]; inputEvidence: ProductInputEvidence[]; datasets: DatasetRecord[];
-}
 function presentation(raw: unknown): Presentation {
   const value = sourceObject(raw, ['schema', 'objectId', 'name', 'defaultDataset', 'bank', 'recipes', 'sharedInputs', 'inputEvidence', 'datasets']);
-  if (value.schema !== 'cssearth-volume-presentation-source@2') throw new TypeError('Invalid volume presentation source.');
+  if (value.schema !== VOLUME_PRESENTATION_SOURCE_SCHEMA) throw new TypeError('Invalid volume presentation source.');
   const datasets = sourceArray(value.datasets, raw => {
     const dataset = sourceObject(raw, ['id', 'label', 'title', 'description', 'summary', 'detail', 'facts', 'input', 'preview', 'inputEvidence']);
     const result = { id: sourceId(dataset.id), label: sourceText(dataset.label), title: sourceText(dataset.title), description: sourceText(dataset.description),
@@ -160,11 +143,11 @@ async function volumeSources(root: string, input: (path: string) => Promise<Buff
     const base = `src/objects/${folder.name}`, presentationPath = `${base}/source/presentation.json`;
     const presentationBytes = await readFile(resolve(root, presentationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
     // The source-only catalogue contexts use source/presentation.json too, but are not prepared dataset packages.
-    if (presentationBytes === null || sourceObject(json(presentationBytes)).schema !== 'cssearth-volume-presentation-source@2') continue;
+    if (presentationBytes === null || sourceObject(json(presentationBytes)).schema !== VOLUME_PRESENTATION_SOURCE_SCHEMA) continue;
     const record = presentation(json(await input(presentationPath)));
     if (record.objectId !== folder.name) throw new TypeError(`Mismatched volume presentation object: ${folder.name}.`);
     const manifest = sourceObject(json(await input(`${base}/source/manifest.json`)), ['schema', 'pathBase', 'inputs', 'documents', 'generatedIntermediates']);
-    if (manifest.schema !== 'cssearth-volume-source-manifest@2' || manifest.pathBase !== 'repository') throw new TypeError(`Invalid volume source manifest: ${record.objectId}.`);
+    if (manifest.schema !== VOLUME_SOURCE_MANIFEST_SCHEMA || manifest.pathBase !== 'repository') throw new TypeError(`Invalid volume source manifest: ${record.objectId}.`);
     const descriptor = parseObjectDescriptor(json(await input(`${base}/object.json`)));
     const format = descriptor.prepared?.format;
     if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-dataset-bank' && format === PREPARED_VOLUME_DATASETS_SCHEMA) ||
