@@ -170,6 +170,17 @@ export function eyeAnchor(pose: PhysicalCameraPose): { readonly originM: Positio
 }
 const ZERO: PositionM = Object.freeze([0, 0, 0]);
 
+/** The pose with its eye `ratio` times as far from its focus origin (eyeAnchor), looking the same way: a dolly along the
+ * line from that origin, which keeps the origin where it is on screen. A pose with no focus offset has no origin to
+ * dolly from and is returned as it is. */
+export function dollyPoseAboutFocus(pose: PhysicalCameraPose, ratio: number): PhysicalCameraPose {
+  const { originM, offsetM } = eyeAnchor(pose);
+  if (pose.focusOffset === undefined || originM !== pose.focusOffset.originM || !(ratio > 0) || !Number.isFinite(ratio)) return pose;
+  const offset: PositionM = Object.freeze([offsetM[0] * ratio, offsetM[1] * ratio, offsetM[2] * ratio]);
+  return Object.freeze({ positionM: Object.freeze([originM[0] + offset[0], originM[1] + offset[1], originM[2] + offset[2]]) as PositionM,
+    orientationXyzw: pose.orientationXyzw, focusOffset: Object.freeze({ originM, offsetM: offset }) });
+}
+
 /** A point's position from the eye in the reference frame, point - eye. Every reader of the camera's place goes through this:
  * `point - pose.positionM` loses whatever a double cannot hold at the eye's distance from the frame origin (a kilometre at 157
  * parsecs), while (point - origin) - offset keeps the eye's offset from the body it is near. */

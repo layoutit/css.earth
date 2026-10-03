@@ -331,8 +331,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   windowTarget.addEventListener('pointerdown', beginCameraInput, { capture: true });
   windowTarget.addEventListener('wheel', beginCameraInput, { capture: true, passive: true });
   const refresh = () => { requestPublication?.(); };
-  // Any change to what the planner decides also invalidates frames already captured.
-  const invalidatePolicy = () => { presentationRevision++; policyDirty = true; };
+  // A change to what the planner decides (a selection, a visibility, a blocker, a flight or a coast beginning or ending, a
+  // caption measured) reaches the next plan (policyDirty), and each caller asks for that frame. A plan already captured
+  // stays good: it is the frame the camera asked for a moment before the change, so it is drawn and the change follows
+  // one frame later. Counted as stale, such a plan was thrown away and the camera waited a frame for its replacement:
+  // three held frames at every hand-over of a zoom, one as the scenes swapped and two as the new one settled (2026-10-03).
+  const invalidatePolicy = () => { policyDirty = true; };
+  // The bodies themselves changed: a plan already captured indexes the old list and cannot be drawn.
+  const invalidatePlans = () => { presentationRevision++; policyDirty = true; };
   const invalidateLabelSizes = () => { invalidatePolicy(); for (const entry of bodies) entry.labelSize = { ...entry.labelSize, width: 0 }; };
   const fonts = host.ownerDocument.fonts;
   fonts?.addEventListener('loadingdone', invalidateLabelSizes);
@@ -397,11 +403,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     bodyLabelRects: interactions.bodyLabelRects,
     setNavigationInFlight(active: boolean) {
       if (destroyed || active === navigationInFlight) return;
-      // The next plan carries the flight's state (policyDirty) and the refresh below asks for it. A plan already in flight
-      // is the frame the camera asked for a moment before the flight began or ended, so it commits: counted as stale it
-      // was thrown away at both ends of every hand-over, and the camera waited a frame each time (a zoom out of Earth
-      // held one frame as the Sun's scene was requested and one as it finished, 2026-10-03).
-      policyDirty = true;
+      invalidatePolicy();
       navigationInFlight = active;
       if (active) { hoverIntent = false; settleHover(); }
       systemRetired = false;
@@ -529,7 +531,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       for (const entry of entries) if (entry.orbit) entry.parentPaint = entriesById.get(entry.orbit.centerBodyId)?.paint;
       systemFade = createSystemFade(next);
       anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
-      refreshDepthBodies(); invalidatePolicy(); refresh();
+      refreshDepthBodies(); invalidatePlans(); refresh();
     },
     /** The places of the stars this layer draws as plain dots: a dot bank that also holds them leaves them out. The same
      * list until a system joins. */
@@ -756,11 +758,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       // Only progress asks for another frame: a caption measured, or a marker now on the page that the next frame reads or
       // shows. An attach the retire pass undid is not progress.
       const attached = [...attachMarkers].some(entry => entry.mover.parentNode === root);
-      // The next plan reads the new sizes and markers (policyDirty); a plan already captured stays good. It is the plan the
-      // frame before this one would have made, so it commits and the refresh follows it with one more frame. Counted
-      // as stale it was thrown away and the camera waited a frame for its replacement: one to three such discards in a
-      // steady zoom out of Earth on the iPad (2026-10-03).
-      if (measured || attached) { policyDirty = true; if (!navigationInFlight) refresh(); }
+      if (measured || attached) { invalidatePolicy(); if (!navigationInFlight) refresh(); }
     },
     destroy() { if (!destroyed) { destroyed = true; interactions.destroy();
       if (annotationFrame !== null) clock.cancel(annotationFrame);

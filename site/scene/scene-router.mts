@@ -495,6 +495,9 @@ export function createSceneRouter({
       const presented = await request.lifetime.wait(afterSceneFrame(windowTarget, request.signal));
       if (presented.cancelled || !requests.owns(request)) return false;
       request.timing.mark('handoff');
+      // The departing scene's last camera and its zoom's rate: the hand-over carries them through the mount.
+      const departing = scenes.current?.mount?.navigation;
+      if (departing) handoff.beforeRetire?.(departing);
       if (scenes.current) retire(scenes.current, null, { preserveShell: true, flush: false, publish: false });
       objectId = object.id;
       if (stage.dataset) stage.dataset.objectId = object.id;

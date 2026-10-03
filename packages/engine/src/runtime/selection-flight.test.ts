@@ -156,3 +156,14 @@ describe('a camera a few kilometres from a focus hundreds of parsecs away', () =
     assert.equal(sameEyePlace(a, cameraPoseToReferenceFrame(local(137.25), frame)), true);
   });
 });
+
+it('a dolly about the focus scales the eye\'s offset from its origin and keeps the exact anchor', async () => {
+  const { dollyPoseAboutFocus, eyeAnchor, cameraPoseToReferenceFrame } = await import('./selection-flight.js');
+  const frame = { originM: [4.8e18, -2.1e18, 7.7e17] as const, localToReferenceXyzw: [0, 0, 0, 1] as const };
+  const pose = cameraPoseToReferenceFrame({ positionM: [0, 0, 3e7], orientationXyzw: [0, 0, 0, 1] }, frame);
+  const out = dollyPoseAboutFocus(pose, 1.5);
+  assert.deepEqual(eyeAnchor(out), { originM: frame.originM, offsetM: [0, 0, 4.5e7] }, 'half as far again from the same origin, exactly');
+  assert.deepEqual(out.orientationXyzw, pose.orientationXyzw);
+  assert.equal(dollyPoseAboutFocus({ positionM: [1, 2, 3], orientationXyzw: [0, 0, 0, 1] }, 2).positionM[0], 1, 'a pose with no focus offset is left as it is');
+  assert.equal(dollyPoseAboutFocus(pose, 0), pose, 'and so is a ratio that is not a distance');
+});

@@ -18,6 +18,10 @@ export interface ObjectWorldNavigation {
   setZoomOutCentering?(enabled: boolean): void;
   /** A wider scene can take the camera over as it zooms out: this scene's own far limit does not stop the zoom. */
   setZoomOutOpen?(open: boolean): void;
+  /** The signed log rate per millisecond a wheel zoom is moving the camera at now (positive recedes), 0 at rest. */
+  zoomRate?(): number;
+  /** Take up a zoom carried from the scene before this one: glide on from that rate. */
+  resumeZoom?(rate: number): void;
   /** True once every prepared detail group is connected and painted. */
   detailActivated?(): boolean;
   optics(): WorldCameraViewport & { framingRadiusPixels: number;
