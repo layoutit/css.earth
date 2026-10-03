@@ -169,7 +169,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       }
     },
     /** While the camera coasts no billboard is revealed or hidden (motion-freezes-membership.md). */
-    setCoasting(active: boolean) { billboards?.setCoasting(active); },
+    setCoasting(active: boolean) { billboards?.setCoasting(active); catalog?.setCoasting(active); },
     /** The image bank whose framing sphere holds `positionM`: the galaxy a selected star is in. */
     imageBankContaining(positionM: readonly number[]): string | undefined {
       return images.find(bank => Math.hypot(...positionM.map((value, axis) => value - bank.frame.originM[axis]!)) <= bank.radiusUnits * bank.frame.metersPerUnit)?.id;

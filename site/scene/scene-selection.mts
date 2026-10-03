@@ -34,6 +34,14 @@ export function createSceneSelection({ initial, objectId, systems = [], onChange
   // The mounted scene.
   let scene = objectId;
   let subject: SceneSubject = initial;
+  /** The scope a camera frames, on the zoom out of a step's centre (zoom-scope.mts). */
+  const scopeAt = (world: WorldCameraPose, step: { readonly scope: string; readonly centreId: string }) => {
+    const star = systemById(systems, step.centreId);
+    return zoomScopeAtCamera(world, step.scope, undefined, star ? { originM: star.originM, orbitsWithinM: SYSTEM_RANGES.get(star.id) } : undefined,
+      zoomChain(step.centreId).map(object => ({ id: object.id, zoom: object.zoom! })));
+  };
+  /** Whether the mounted scene shows `next`: its own object, or its system. */
+  const ownScene = (next: SceneSubject) => next.objectId === scene || next.objectId === systemObjectId(scene);
   function publish(next: SceneSubject, notify = true) {
     if (subject === next) return false;
     subject = next; if (notify) onChange(); return true;
@@ -46,18 +54,27 @@ export function createSceneSelection({ initial, objectId, systems = [], onChange
       scene = mountedObjectId;
       return selectionKey(target) === selectionKey(subject) ? false : publish(target, notify);
     },
-    /** Follows the camera as it backs out: true when the selection changed in place, a hand-over when the camera has crossed
-     * into an object the centre is inside (the router replaces the scene once the crossing has held), false otherwise. */
-    followCamera(world: WorldCameraPose): boolean | ZoomHandover {
-      const step = zoomStepOf(subject);
+    /** Follows the camera as it backs out or comes in, from `from`: the committed selection, or one of another scene the
+     * camera has already crossed into (camera-handover.mts). True when the camera frames a selection of the mounted scene,
+     * which is then committed; a hand-over when it has crossed into another scene's; false while it frames `from` still. */
+    followCamera(world: WorldCameraPose, from: SceneSubject = subject): boolean | ZoomHandover {
+      const step = zoomStepOf(from);
       if (!step) return false;
-      const { centreId } = step, star = systemById(systems, centreId);
-      const scope = zoomScopeAtCamera(world, step.scope, undefined,
-        star ? { originM: star.originM, orbitsWithinM: SYSTEM_RANGES.get(star.id) } : undefined, zoomChain(centreId).map(object => ({ id: object.id, zoom: object.zoom! })));
+      const scope = scopeAt(world, step);
       if (scope === step.scope) return false;
       // The scope the camera crossed into is a selection of the mounted scene (a star's own system), or of another scene.
-      const next = subjectOfScope(scope, centreId);
-      return (next.objectId === scene || next.objectId === systemObjectId(scene)) ? publish(next) : { ...next, centreId };
+      const next = subjectOfScope(scope, step.centreId);
+      if (!ownScene(next)) return { ...next, centreId: step.centreId };
+      if (selectionKey(next) !== selectionKey(subject)) publish(next);
+      return true;
+    },
+    /** Whether a wider scene takes the camera as it zooms out of `from`: a body's system does, and so does the next object
+     * the centre is inside, out to the last the page has read. Such a zoom does not stop at the mounted scene's far limit. */
+    zoomOutOpen(from: SceneSubject = subject): boolean {
+      const step = zoomStepOf(from);
+      if (!step) return true;
+      const chain = zoomChain(step.centreId);
+      return step.scope === 'system' ? chain.length > 0 : chain.at(-1)?.id !== step.scope;
     },
     /** Project the committed identity while preserving camera, dataset and diagnostic URL payloads. */
     url(value: string | URL) {

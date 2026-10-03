@@ -186,3 +186,30 @@ test('reversing or stopping a trackpad gesture drops unfinished zoom immediately
   f.controls.destroy();
   assert.equal(f.surface.listenerCount(), 0);
 });
+
+test('a zoom reports the rate it moves the camera at, and another scene\'s controls take it up as a glide', () => {
+  const first = fixture(runtimePolicy.WHEEL_ZOOM_INERTIA);
+  let carried = 0;
+  try {
+    assert.equal(first.controls.rate(), 0, 'at rest');
+    for (let i = 0; i < 4; i++) { first.surface.tick(i * 60); first.surface.dispatch('wheel', notch(i)); }
+    first.surface.tick(200);
+    carried = first.controls.rate();
+    assert.ok(carried > 0, `a zoom out recedes at a positive rate, got ${carried}`);
+  } finally { first.controls.destroy(); }
+  // The scene is replaced mid-zoom: the next scene's controls start at rest and are given the rate.
+  const next = fixture(runtimePolicy.WHEEL_ZOOM_INERTIA);
+  try {
+    next.surface.tick(300);
+    next.controls.resume(carried);
+    assert.equal(next.controls.stats().gliding, true, 'the carried zoom glides on');
+    assert.equal(next.controls.rate(), carried);
+    const before = next.camera.state.distance;
+    next.surface.tick(316); next.surface.tick(332);
+    assert.ok(next.camera.state.distance > before, 'in the direction it was travelling');
+    for (let time = 348; time < 4000; time += 16) next.surface.tick(time);
+    assert.equal(next.controls.stats().active, false, 'and settles like any released gesture');
+    next.controls.resume(0);
+    assert.equal(next.controls.stats().active, false, 'no rate, nothing to take up');
+  } finally { next.controls.destroy(); }
+});
