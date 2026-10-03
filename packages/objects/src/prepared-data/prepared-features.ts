@@ -11,12 +11,12 @@ export interface PreparedFeaturesDescriptor extends SurfaceFeatureCatalogDescrip
   readonly mapLeftEdgeLongitudeDeg: number;
 }
 
-/** The index reader and pre-build inventory reader historically admit different partial records.
+/** The index reader and typecheck-input inventory reader historically admit different partial records.
  * Preserve both complete policies, including diagnostics; transport and inventory checks belong to callers. */
-export function readPreparedFeaturePins(input: unknown, id: string, policy: 'index' | 'prebuild' = 'index'): {
+export function readPreparedFeaturePins(input: unknown, id: string, policy: 'index' | 'inventory' = 'index'): {
   readonly descriptor: Record<string, unknown>; readonly pins: readonly Record<string, unknown>[];
 } {
-  if (policy === 'prebuild') {
+  if (policy === 'inventory') {
     const descriptor = requireRecord(input);
     if (descriptor.schema !== PREPARED_FEATURES_SCHEMA) throw new TypeError(`Invalid feature-index input: ${id}`);
     const pins = [descriptor, ...descriptor.selection === undefined ? [] : requireArray(requireRecord(descriptor.selection).banks).map(value => requireRecord(value))];
