@@ -61,3 +61,17 @@ test('a second disc adds to the disc light and lowers the bulge share, most wher
   assert.ok(two.share(0, 0.2) < one.share(0, 0.2) && one.share(0, 0.2) - two.share(0, 0.2) < 0.01, `${one.share(0, 0.2)}, ${two.share(0, 0.2)}`);
   assert.ok((one.share(0, 2.5) - two.share(0, 2.5)) / one.share(0, 2.5) > 0.05, `${one.share(0, 2.5)}, ${two.share(0, 2.5)}`);
 });
+
+test('a fitted bar adds disc light inside its radius and none beyond it', () => {
+  const bar = { centralSurfaceBrightness: 18.823, radiusKpc: 2, skyEllipticity: 0.544, positionAngleDeg: 57.29 };
+  const base = { target: { centerRaDeg: 0, centerDecDeg: 0, distancePc: 10_000_000 }, geometry: { kind: 'inclined-disk' as const, inclinationDeg: 40, lineOfNodesPaDeg: 95, thicknessKpc: 0.01,
+    supportRadiusKpc: 17, supportTaperFraction: 0.75, depthWeights: [1], depthScales: [1], bulge: { source: 'salo-2015-s4g-decompositions', positionAngleDeg: 86.11, sersicIndex: 2.655,
+      halfLightRadiusKpc: 0.37, surfaceBrightnessAtHalfLight: 16.5, skyEllipticity: 0.152, disc: { centralSurfaceBrightness: 19.2, scaleLengthKpc: 4.2, skyEllipticity: 0.253, positionAngleDeg: 92.15 },
+      extentKpc: { radius: 1.2, height: 0.8 } } } };
+  const plain = imageLayerBulgeModel(base), barred = imageLayerBulgeModel({ ...base, geometry: { ...base.geometry, bulge: { ...base.geometry.bulge, bar } } });
+  const along = (kpc: number): [number, number] => [kpc * Math.sin(57.29 * Math.PI / 180), kpc * Math.cos(57.29 * Math.PI / 180)];
+  const centre = barred.light(0, 0).disc - plain.light(0, 0).disc;
+  assert.ok(Math.abs(centre - 10 ** (-0.4 * 18.823)) < 1e-15, `${centre}`);
+  assert.ok(barred.light(...along(1)).disc > plain.light(...along(1)).disc && barred.share(...along(1)) < plain.share(...along(1)));
+  assert.equal(barred.light(...along(2.5)).disc, plain.light(...along(2.5)).disc);
+});

@@ -28,7 +28,14 @@ export function imageLayerBulgeModel(recipe: Pick<ImageLayerRecipe, 'target' | '
   const radii = (east: number, north: number) => ({ rb: elliptical(...along(east, north, fitPa), bulge.skyEllipticity), rd: elliptical(...along(east, north, discPa), bulge.disc.skyEllipticity) });
   // A fit with two exponential discs (S4G's two-disc models): the second disc's light is disc light too.
   const second = bulge.secondDisc, secondI0 = second ? 10 ** (-0.4 * second.centralSurfaceBrightness) : 0, secondPa = rad(second?.positionAngleDeg ?? bulge.disc.positionAngleDeg ?? bulge.positionAngleDeg);
-  const discLight = (east: number, north: number, rd: number) => discI0 * Math.exp(-rd / bulge.disc.scaleLengthKpc) +
+  // A fitted bar is disc light as well: a modified Ferrers profile, I0 (1 - (r / radius)²)² inside its radius.
+  const bar = bulge.bar, barI0 = bar ? 10 ** (-0.4 * bar.centralSurfaceBrightness) : 0;
+  const barLight = (east: number, north: number) => {
+    if (!bar) return 0;
+    const r = elliptical(...along(east, north, rad(bar.positionAngleDeg)), bar.skyEllipticity) / bar.radiusKpc;
+    return r < 1 ? barI0 * (1 - r * r) ** 2 : 0;
+  };
+  const discLight = (east: number, north: number, rd: number) => discI0 * Math.exp(-rd / bulge.disc.scaleLengthKpc) + barLight(east, north) +
     (second ? secondI0 * Math.exp(-elliptical(...along(east, north, secondPa), second.skyEllipticity) / second.scaleLengthKpc) : 0);
   /** The bulge's share of the fitted light at a sky offset from the centre: kpc at the galaxy's distance, east and north. */
   // A fit whose bulge falls off more slowly than its disc (a high Sérsic index) keeps a share far out, where that light
