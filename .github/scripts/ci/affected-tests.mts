@@ -42,6 +42,14 @@ const SHARED = [/^package\.json$/u, /^pnpm-lock\.yaml$/u, /^pnpm-workspace\.yaml
 const TOOLS = new Set(['bake', 'telescope-cli']);
 // This producer contract was explicitly routed for objects changes before discovery.
 const TOOL_FOREIGN_TESTS = new Map([['packages/bake/src/presentation/depth-partition-contract.test.ts', ['objects']]]);
+/** A tool test that pins another package's frozen fixture reads it through a `<package>/test/` path; editing that fixture
+ * selects the pinning test, so the producer check runs on the pull request, not only after the merge. */
+export function readsChangedFixture(text: string, paths: readonly string[]): boolean {
+  return paths.some(path => {
+    const match = /^packages\/([^/]+)\/test\/(?:.+\/)?([^/]+)$/u.exec(path);
+    return match !== null && text.includes(`${match[1]}/test/`) && text.includes(match[2]!);
+  });
+}
 const SITE = [/^site\//u, /^src\//u, /^integration\//u, /^\.github\//u, /^labs\/performance\//u];
 
 /** Sources outside `packages/` whose schema literals a package test pins (see `packages/bake/src/sources/python-schema-identifiers.test.ts`
@@ -66,10 +74,14 @@ export function affectedTests(paths: readonly string[] | null, packages: readonl
   }
   const site = paths.some(path => SITE.some(pattern => pattern.test(path))) || siteDependencies.some(name => changed.has(byName.get(name) ?? ''));
   // A foreign test whose own package already runs is in that package's glob.
+  const fixtureReaders = new Map<string, string>(paths.some(path => /^packages\/[^/]+\/test\//u.test(path))
+    ? [...owners.keys()].filter(test => TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')).map(test => [test, readFileSync(resolve(import.meta.dirname, '../../..', test), 'utf8')] as const)
+    : []);
   const files = [...owners].filter(([test, imports]) => !changed.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
     && (!TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
       ? imports.some(owner => changed.has(owner)) || paths.includes(test)
-      : TOOL_FOREIGN_TESTS.get(test)?.some(owner => changed.has(owner)) === true)).map(([test]) => test).sort();
+      : TOOL_FOREIGN_TESTS.get(test)?.some(owner => changed.has(owner)) === true
+        || (fixtureReaders.has(test) && readsChangedFixture(fixtureReaders.get(test)!, paths)))).map(([test]) => test).sort();
   return { packages: [...changed].sort(), site, files };
 }
 

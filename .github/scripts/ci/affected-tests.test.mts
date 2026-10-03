@@ -102,3 +102,11 @@ test('internal raster and surface geometry changes select bake and its direct co
   for (const file of ['packages/bake/src/baking/polar.ts', 'packages/bake/src/surface-geometry/surface.ts'])
     assert.deepEqual(select([file]).packages, ['bake', 'telescope-cli']);
 });
+
+test('editing a renderer fixture that a bake test pins selects that bake test, so the producer check runs before the merge', () => {
+  for (const fixture of ['packages/renderer/test/fixtures/leaf-box-placements.json', 'packages/renderer/test/fixtures/shell-facing-levels.json']) {
+    const files = affectedTests([fixture], packages, site).files;
+    assert.ok(files.some(file => file.startsWith('packages/bake/')), `${fixture} selects no bake test`);
+  }
+  assert.ok(!affectedTests(['packages/renderer/src/index.ts'], packages, site).files.some(file => file.startsWith('packages/bake/')));
+});
