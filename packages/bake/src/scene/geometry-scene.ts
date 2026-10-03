@@ -21,7 +21,8 @@ export { leafImageCandidates, widestLeafImages } from './leaf-images.ts';
 export interface PhysicalScene {
  camera:unknown;systemTransform:unknown;presentationFrame:unknown;worldFrame:unknown;starfield:unknown;
 }
-export interface SolarSceneSource extends Record<string, unknown> { bodyId:string;bodyRadiusUnits:number;bodyRadiusKilometers:number;displayName:string; }
+export type { SolarSceneSource } from '@cssearth/objects';
+import type { SolarSceneSource } from '@cssearth/objects';
 export interface ScenePreparationAdapters {
  preparePhysicalScene(input:SolarSceneSource & {starfield:Record<string,unknown>;sun:Record<string,unknown>|null;worldContext?:unknown}):Promise<PhysicalScene>;
  bodyFixedSunDirection(id:string):[number,number,number];

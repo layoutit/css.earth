@@ -5,10 +5,8 @@ import { prepareSolarSystemSunPresentation, type SolarGeometry } from '../scene/
 type Scene = typeof import('../../presentation/index.ts');
 export type StarfieldPlan = ReturnType<Scene['prepareCubicSky']>;
 export type SunPlan = ReturnType<Scene['prepareDirectionalSun']>;
-export interface SolarSource {
-  readonly bodyId: string;
-  readonly displayName: string;
-}
+import type { SolarSource } from '@cssearth/objects';
+export type { SolarSource } from '@cssearth/objects';
 
 /** The preparers with their implementation-owned signatures, bound to the solar geometry the host passes in. */
 export async function loadCelestialAdapters(geometry: SolarGeometry) {
