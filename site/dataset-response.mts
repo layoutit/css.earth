@@ -135,7 +135,10 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   } : null);
   if (view && frame) {
     try {
-      publishPreparedNativeView(definition, initialObjectSelection(definition.controls, datasetId, settings), stage, frame, view);
+      const publication = publishPreparedNativeView(definition, initialObjectSelection(definition.controls, datasetId, settings), stage, frame, view);
+      // A page without script turns the body by dragging it; the turn applies to the body's own prepared rotation, marked
+      // here for ObjectLayout's noscript rules. The live camera replaces it when it mounts.
+      for (const plan of definition.motion ?? []) publication.nodes[plan.target]!.dataset.nativeTurn = '';
       // The frame publisher writes the lighting and material frames of this camera by their prepared address: give
       // each its published URL, as the scene's own textures have. A saved Moon link asked the site for
       // /scenes/moon/lighting-2x-shadowless.webp and got 404 (2026-10-01).
