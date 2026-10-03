@@ -13,8 +13,8 @@ import { STYLE_WRITES_LOGGER } from './ios-capture.mts';
 
 /** Writes the contract allows while coasting, besides transform and opacity (the exceptions table of the doc). */
 const ALLOWED = [
-  / \{ (transform|opacity) \}$/u,
-  / \[points\]$/u, / \{ stroke-opacity \}$/u, / <\+polyline>$/u, // orbit strokes
+  / \{ (transform|opacity) \}( removed)?$/u,
+  / \[points\]$/u, / \{ stroke-opacity \}$/u, / <\+polyline>$/u, // orbit strokes; a dot bank's dimming is its stroke opacity too
   / \[d\]$/u, // batched star points: one SVG path per color
   /^div\.object-input-surface \{ cursor \}$/u, // the release itself sets the grab cursor, once
 ];

@@ -7,11 +7,12 @@ import { readPreparedBinary } from '../prepared-data/prepared-binary.js';
 import type { VolumeCameraPublication } from '../volume/types.js';
 
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
+import { pointLayerSlot } from './point-layer.js';
 import { revealLayer } from '../rendering/layer-reveal.js';
 import { afterStartup } from '../rendering/startup-gate.js';
 
 /** Dot layers switching on show one a frame (layer-reveal.ts). */
-const revealLayers = (layers: readonly HTMLElement[]) => { for (const layer of layers) revealLayer(layer); };
+const revealLayers = (layers: readonly (HTMLElement | SVGElement)[]) => { for (const layer of layers) revealLayer(layer); };
 
 // MAX_CATALOGUE_POINTS bounds every published bank. The batched projection walks the drawn prefix each frame, and a
 // stacked bank draws its innermost levels only from near its origin, so the whole bank is walked only near the Sun.
@@ -80,18 +81,18 @@ const toLocalAxes = ([x, y, z, w]: readonly number[], [vx, vy, vz]: readonly num
 
 /**
  * A published catalogue drawn as fixed dust: every point the same small dot, whatever the distance, so a population's
- * shape shows without any star claiming a size. Fetched on the first publication that shows it.
+ * shape shows without any star claiming a size. Fetched on the first publication that shows it. Its root is a group in
+ * the dot layer that ends where it mounts (point-layer.ts): banks mounted next to each other are one layer, and the
+ * root's stroke opacity dims this bank alone.
  */
 export function mountCataloguePoints({ host, before, url, loadBank, occluder }: {
   host: HTMLElement; before?: Node; url: string; loadBank(url: string): Promise<unknown>;
   /** A disc in the world's reference frame (its centre, unit normal and radius, in metres) that dims the dots behind it. */
   occluder?: CataloguePointOccluder;
 }) {
-  const root = host.ownerDocument.createElement('div');
+  const slot = pointLayerSlot(host, before), root = slot.group;
   root.dataset.cataloguePoints = 'loading';
-  Object.assign(root.style, { position: 'absolute', inset: '0', pointerEvents: 'none' });
-  if (before) host.insertBefore(root, before); else host.append(root);
-  let runtime: { readonly layers: readonly HTMLElement[]; publish(publication: VolumeCameraPublication): void; destroy(): void } | null = null, loading = false, destroyed = false;
+  let runtime: { readonly layers: readonly SVGElement[]; publish(publication: VolumeCameraPublication): void; hide(): void; destroy(): void } | null = null, loading = false, destroyed = false;
   let latest: VolumeCameraPublication | null = null, extent: { originM: readonly number[]; radiusM: number } | null = null;
   // The loaded bank's fade as the view narrows at its origin (its appearance's fadeOutUnits, in its units), in metres.
   let fadeOutM: readonly [number, number] | null = null;
@@ -135,7 +136,13 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
       }
     }
     const display = alpha > 0 ? '' : 'none';
-    writeStyle(root, 'opacity', String(alpha));
+    // The bank dims by its strokes' opacity, which its paths inherit. A group's own opacity is an offscreen pass on every
+    // repaint of the shared layer: dragging the Milky Way on the iPad, 50 frames in 211 ran over 20 ms with the main
+    // bank's 0.6 on its group and 17 to 25 with it on the strokes (2026-10-03). A dot's alpha was already its stroke's,
+    // so the dimming now behaves the same way: where two dots of different colours overlap, both show through.
+    // The property is inherited, so each change restyles the bank's paths: about 1 ms a frame for 2,000 paths on the
+    // iPad while a bank fades, which is what the group's pass cost there; a bank at a steady opacity pays nothing.
+    writeStyle(root, 'strokeOpacity', String(alpha));
     if (root.style.display !== display) {
       root.style.display = display;
       if (display === '' && runtime) revealLayers(runtime.layers);
@@ -149,7 +156,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
       if (destroyed) return;
       hiddenAtM = withoutM;
       requested = opacity;
-      if (!(present(publication) > 0)) return;
+      if (!(present(publication) > 0)) { runtime?.hide(); return; }
       latest = publication;
       const { widthPixels, heightPixels, focalPixels } = publication.viewport;
       if (widthPixels && heightPixels && focalPixels > 0) halfWidthPerDistance = Math.hypot(widthPixels, heightPixels) / 2 / focalPixels;
@@ -203,7 +210,8 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         // A level's exact repaint after a pause measures the view the camera stopped at: the shares are recomputed from it and
         // published once more, so a still view keeps the same dots however the frames before it were paced.
         const settled = () => { if (latest && runtime) { runtime.publish(latest); runtime.publish(latest); } };
-        const part = (points: typeof bank.points, cellOf: Int32Array, count: (total: number) => number, share: () => number) => ({ points,
+        const part = (points: typeof bank.points, cellOf: Int32Array, count: (total: number) => number, share: () => number, paintGroup?: number) => ({ points,
+          ...(paintGroup === undefined ? {} : { paintGroup }),
           cells: { boxes: bank.cells.boxes, of: cellOf },
           drawnCount: (distanceUnits: number, cameraUnits: VolumeVector) => count(drawn(distanceUnits, cameraUnits)),
           ...(budget === undefined ? {} : { keepFraction: share }),
@@ -214,7 +222,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
           stylePoint: (point: (typeof bank.points)[number]) => styles.get(styleKey(point))! });
         const local = occluder && { normal: toLocalAxes(bank.frame.localToReferenceXyzw, occluder.normal), radiusUnits: occluder.radiusM / bank.frame.metersPerUnit,
           centreUnits: toLocalAxes(bank.frame.localToReferenceXyzw, occluder.centreM.map((value, axis) => (value - bank.frame.originM[axis]!) / bank.frame.metersPerUnit)) };
-        const mount = (parts: ReturnType<typeof part>[]) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, parts,
+        const mount = (parts: ReturnType<typeof part>[]) => mountBatchedSpatialPoints({ host: slot, frame: bank.frame, parts,
           onSettle: settled, className: `catalogue-points-${bank.id}`, ...(local ? { occluder: local } : {}) });
         // Each level draws as its own part: it dims to its near opacity as the innermost level fills, and takes its share
         // of the budget after the levels outside it. The levels share one field, so they are one layer (batched-spatial-points.ts).
@@ -231,11 +239,12 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         };
         if (shares.length < 2) {
           const whole = { share: 1 }, single = mount([part(bank.points, bank.cells.of, total => total, () => whole.share)]);
-          runtime = { layers: [single.root], publish(publication) { single.publish(publication); rebudget([single.stats().candidates], distanceOf(publication), [whole]); }, destroy: single.destroy };
+          runtime = { layers: [single.root], publish(publication) { single.publish(publication); rebudget([single.stats().candidates], distanceOf(publication), [whole]); }, hide: single.hide, destroy: single.destroy };
         } else {
           const innermost = levels[levels.length - 1] as { appearUnits?: readonly [number, number] };
           const field = mount(shares.map(entry => part(bank.points.slice(entry.start, entry.start + entry.points), bank.cells.of.subarray(entry.start, entry.start + entry.points),
-            total => Math.max(0, Math.min(entry.points, total - entry.start)), () => entry.share)));
+            // Levels with the same near opacity dim together, so they share their paths (batched-spatial-points.ts).
+            total => Math.max(0, Math.min(entry.points, total - entry.start)), () => entry.share, entry.nearOpacity)));
           runtime = { layers: [field.root], publish(publication) {
             const distanceUnits = distanceOf(publication);
             const [from, to] = innermost.appearUnits ?? [1, 1];
@@ -246,7 +255,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
             });
             field.publish(publication);
             rebudget(field.parts.map(entry => entry.stats().candidates), distanceUnits, shares);
-          }, destroy: field.destroy };
+          }, hide: field.hide, destroy: field.destroy };
         }
         root.dataset.cataloguePoints = bank.id;
         // A still view publishes nothing more, so the bank takes its own fades for the view it loaded under here.
@@ -255,6 +264,6 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         if (latest && shown) runtime.publish(latest);
       }).catch(error => { root.dataset.cataloguePoints = 'failed'; console.error(`Catalogue points ${url} failed`, error); }); });
     },
-    destroy() { if (destroyed) return; destroyed = true; runtime?.destroy(); root.remove(); },
+    destroy() { if (destroyed) return; destroyed = true; runtime?.destroy(); slot.release(); },
   });
 }

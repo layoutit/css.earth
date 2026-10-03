@@ -4,8 +4,8 @@ const test = sourceTest();
 import { APPLICATION_WORLD_CONTEXT as context } from '../world-context-plan.mts';
 import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
 import { allSatelliteSystems, satelliteSystemByHost, satelliteSystemOfMember, satelliteSystems } from '../satellite-systems.mts';
-import { satelliteSelectionAtCamera } from '../satellite-selection.mts';
-import { selectionTargetFromUrl, createSceneSelection, moonSystem, starSystem } from '../scene/scene-selection.mts';
+import { satelliteSelectionAtCamera, watchSatelliteSelection } from '../satellite-selection.mts';
+import { selectionTargetFromUrl, createSceneSelection, moonSystem, starSystem, type SceneContext } from '../scene/scene-selection.mts';
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from '../system-framing.mts';
 import type { WorldCameraPose } from '@cssearth/objects';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
@@ -82,4 +82,34 @@ test('camera crosses the system and body cards at the selected body, including a
     { objectId: 'moon' }), null);
   assert.deepEqual(satelliteSelectionAtCamera(camera(moon.worldFrame.originM, 400e6), optics, SCENE_OBJECTS,
     { objectId: 'moon' }), { objectId: 'earth-system' });
+});
+
+test("a moon's crossing into its planet's system is reported once, and so is the camera coming back", () => {
+  const moon = SCENE_OBJECTS.find(object => object.id === 'moon')!;
+  const optics: ReturnType<ObjectWorldNavigation['optics']> = { focalPixels: 1000, framingRadiusPixels: 300,
+    detailHandoffDiameterPixels: 14, principalOffsetPixels: [0, 0], visibleRect: null, widthPixels: 1200, heightPixels: 800 };
+  const camera = (range: number): WorldCameraPose => ({ referenceFrame: 'world', epochJdTt: 1,
+    pose: { positionM: [moon.worldFrame.originM[0], moon.worldFrame.originM[1], moon.worldFrame.originM[2] + range], orientationXyzw: [0, 0, 0, 1] } });
+  let listener: ((world: WorldCameraPose) => void) | null = null;
+  const timers = new Map<number, () => void>(), changes: SceneContext[] = [];
+  let serial = 0, returns = 0;
+  // The moon's scene stays mounted after the report (its planet's waits for the camera to rest): the selection is the moon's still.
+  const watch = watchSatelliteSelection({ objects: SCENE_OBJECTS, getSelection: () => ({ objectId: 'moon' }), isAvailable: () => true,
+    onChange: next => changes.push(next), onReturn: () => { returns++; },
+    navigation: { optics: () => optics, subscribe(value: (world: WorldCameraPose) => void) { listener = value; return () => {}; } } as unknown as ObjectWorldNavigation,
+    documentTarget: new EventTarget() as unknown as Document,
+    windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
+  const at = (range: number) => listener!(camera(range));
+  const settle = () => { const pending = [...timers.values()]; timers.clear(); for (const run of pending) run(); };
+  at(400e6); settle();
+  assert.deepEqual(changes, [{ objectId: 'earth-system' }]);
+  at(500e6); at(900e6);
+  assert.deepEqual([changes.length, timers.size, returns], [1, 0, 0], 'not again while the camera stays out there');
+  at(20e6);
+  assert.equal(returns, 1, 'back at the moon');
+  at(400e6); settle();
+  assert.equal(changes.length, 2, 'the next crossing is reported again');
+  watch.refresh(); settle();
+  assert.equal(changes.length, 3, 'asked again, the camera says where it is');
+  watch();
 });

@@ -134,7 +134,7 @@ test('camera sampling settles before changing selection and releases timers and 
   assert.equal(listener, null); assert.equal(timers.size, 0);
 });
 
-test('continuous outward camera updates cannot postpone the Sun overview flip', () => {
+test('continuous outward camera updates cannot postpone the Sun overview flip, and clearly past the exit it flips at once', () => {
   let listener: ObjectWorldNavigationListener | null = null;
   const getListener = () => required(listener);
   const timers = new Map<number, () => void>(), changes: OverviewSelection[] = [];
@@ -143,9 +143,40 @@ test('continuous outward camera updates cannot postpone the Sun overview flip', 
     isAvailable: () => true, onChange: next => changes.push(next),
     navigation: { ...navigationFixture(ceres, () => camera(ceres, 100), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => {}; } },
     windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
-  for (let step = 0; step < 100; step++) getListener()(camera(sun, (101 + step) * au), viewport);
+  for (let step = 0; step < 20; step++) getListener()(camera(sun, (101 + step) * au), viewport);
   assert.equal(serial, 1, 'The first crossing keeps its original timer throughout continuous movement');
-  [...timers.values()][0](); timers.clear();
-  assert.deepEqual(changes, [{ objectId: 'sun', overview: true }]);
+  assert.deepEqual(changes, [], 'near the threshold the crossing still has to last');
+  // A quarter past the exit distance the camera is leaving: the flip starts without waiting for the timer, so it is done
+  // before the zoom reaches the scene's far limit.
+  for (let step = 20; step < 100; step++) getListener()(camera(sun, (101 + step) * au), viewport);
+  assert.deepEqual(changes, [{ objectId: 'sun', overview: true }], 'once, however long the zoom goes on');
+  assert.equal(timers.size, 0, 'and its timer is gone');
+  dispose();
+});
+
+test('a crossing out of a body is reported once, and so is the camera coming back inside', () => {
+  let listener: ObjectWorldNavigationListener | null = null;
+  const getListener = () => required(listener);
+  const timers = new Map<number, () => void>(), changes: [OverviewSelection, boolean][] = [];
+  let serial = 0, returns = 0;
+  // The body's scene stays mounted after the report (its system's scene waits for the camera to rest), so the watcher
+  // goes on answering for the body.
+  const dispose = watchOverviewSelection({ objects, systems: objects, objectId: 'ceres', getOverview: () => false,
+    isAvailable: () => true, onChange: (next, landed) => changes.push([next, landed]), onReturn: () => { returns++; },
+    navigation: { ...navigationFixture(ceres, () => camera(ceres, 100), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => {}; } },
+    windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
+  getListener()(camera(sun, 101 * au), viewport);
+  [...timers.values()][0]!(); timers.clear();
+  assert.deepEqual(changes, [[{ objectId: 'sun', overview: true }, false]], 'the crossing, once it has lasted');
+  for (const range of [110, 400, 5000]) getListener()(camera(sun, range * au), viewport);
+  assert.equal(changes.length, 1, 'not again while the camera stays outside');
+  assert.equal(timers.size, 0, 'and no timer waits on it');
+  assert.equal(returns, 0);
+  getListener()(camera(sun, 90 * au), viewport);
+  assert.equal(returns, 1, 'back inside');
+  getListener()(camera(sun, 80 * au), viewport);
+  assert.equal(returns, 1, 'told once');
+  for (let step = 0; step < 60; step++) getListener()(camera(sun, (101 + step) * au), viewport);
+  assert.equal(changes.length, 2, 'and the next crossing is reported again');
   dispose();
 });

@@ -297,3 +297,36 @@ test('newer input queued behind an adopted frame keeps its order: a later reques
   assert.deepEqual(f.events, ['plan:1', 'camera:1', 'drawing:1', 'plan:1']);
   assert.partialDeepStrictEqual(f.queue.stats(), { ridden: 0, superseded: 1 });
 });
+
+test('a plan whose owner has gone is drawn for another owner asking for the same view', async () => {
+  const f = fixture(); let alive = true;
+  // A scene asks for a view and its plan comes back; before the frame is drawn the scene is retired, and the hand-over
+  // asks for that same view so the frame is not lost.
+  f.queue.present(f.request(1, () => alive));
+  await f.finish(() => true, false);
+  const heir = { ...f.request(1), commit: () => { f.events.push('camera:heir'); } };
+  f.queue.present(heir);
+  alive = false;
+  f.paint();
+  assert.deepEqual(f.events, ['plan:1', 'camera:heir', 'drawing:1'], 'the one plan is drawn, with the new owner\'s camera');
+  assert.equal(f.queue.stats().discarded, 0);
+  assert.equal(f.pending.length, 0, 'and the view is not planned again');
+  // The same when the owner goes while its plan is still being made.
+  let planning = true;
+  f.queue.present(f.request(5, () => planning));
+  f.queue.present({ ...f.request(5), commit: () => { f.events.push('camera:heir5'); } });
+  planning = false;
+  await f.finish();
+  assert.deepEqual(f.events.slice(-3), ['plan:5', 'camera:heir5', 'drawing:5']);
+  assert.equal(f.queue.stats().discarded, 0);
+  // A different view asked by the new owner cannot take the plan: it is discarded as before and the new view planned.
+  let second = true;
+  f.queue.present(f.request(2, () => second));
+  await f.finish(() => true, false);
+  f.queue.present(f.request(3));
+  second = false;
+  f.paint();
+  await Promise.resolve();
+  assert.equal(f.queue.stats().discarded, 1);
+  assert.equal(f.events.at(-1), 'plan:3');
+});
