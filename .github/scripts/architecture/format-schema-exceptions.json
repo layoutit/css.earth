@@ -107,7 +107,7 @@
       "packages/telescope",
       "packages/telescope-cli"
     ],
-    "reason": "Needs telescope -> objects (dependency, reference, lockfile) and the leaf data types plus EVIDENCE_KINDS moved first, then the record and parser; every archive toolkit and CLI publication imports it (about 67 files)."
+    "reason": "Needs the leaf data types plus EVIDENCE_KINDS moved first (the telescope -> objects dependency already exists), then the record and parser; every archive toolkit and CLI publication imports it (about 67 files)."
   },
   {
     "schema": "cssearth-vo-discovery@1",
@@ -115,6 +115,6 @@
       "packages/telescope",
       "packages/telescope-cli"
     ],
-    "reason": "Needs the nested MetadataResponse/Pin/Json/region data and parsers moved first (telescope's Json replaced by core's data type, telescope -> objects), then the snapshot (about 23 files plus closure)."
+    "reason": "Needs the nested MetadataResponse/Pin/Json/region data and parsers moved first (telescope's Json replaced by core's data type; the telescope -> objects dependency already exists), then the snapshot (about 23 files plus closure)."
   }
 ]
