@@ -80,6 +80,12 @@ system's package, and puts a bound star inside its host's system.
 
 ![The 61 Cygni system: the card lists its two stars, and the view frames both](images/61-cygni-system.png)
 
+A bound star with bodies of its own hosts its system inside its host's. Epsilon Indi B
+is the pair of brown dwarfs Ba and Bb, inside Epsilon Indi A's system: its breadcrumb
+names that system, and zooming out hands the view to it.
+
+![Epsilon Indi B: the card lists its two brown dwarfs, and its breadcrumb names the Epsilon Indi system it is inside](images/epsilon-indi-b-system.png)
+
 Inside a stellar system, every nonstellar host with prepared satellite children
 has a [satellite-system view](satellite-system-navigation.md). Its
 `/<host>-system/` address and `object:<host-id>-system` identity name the family;
