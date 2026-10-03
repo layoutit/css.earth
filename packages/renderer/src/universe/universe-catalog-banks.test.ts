@@ -88,12 +88,12 @@ test('a bank of plain-dot stars draws while the selected body is inside its host
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
   const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined,
-    pointBanks: [{ id: 'cloud/plain-stars', url: '/world/dots/cloud.bin', host: 'cloud', stars: true }] });
+    pointBanks: [{ id: 'cloud/plain-stars', url: '/world/dots/cloud.bin', host: 'cloud', stars: true }, { id: 'group-members', url: '/group/dots.bin', host: 'group' }] });
   let asked = 0;
-  // The selected body, the centre it orbits, then the objects it is inside as the host read them from the object tree.
-  const publish = (...system: string[]) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
+  // The selected body, then the objects it is inside as the host read them from the object tree.
+  const publish = (selected: string, ...inside: string[]) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
     pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
-  { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, undefined, system, () => { asked++; return { opacity: .5, hiddenAtM: [] }; });
+  { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, undefined, [selected], { inside, look: () => { asked++; return { opacity: .5, hiddenAtM: [] }; } });
   const layer = () => root.querySelector<HTMLElement>('[data-catalogue-points]');
   publish('sun');
   assert.equal(layer(), null, 'a page outside the object never asks for its dots');
@@ -101,6 +101,7 @@ test('a bank of plain-dot stars draws while the selected body is inside its host
   publish('cepheid', 'cepheid-system', 'cloud', 'group');
   assert.equal(layer()?.style.display, '', 'a star inside it selected, the dots draw');
   assert.equal(asked, 1, 'and take the look every star dot has');
+  assert.equal(root.querySelectorAll('[data-catalogue-points]').length, 1, 'a bank of members draws for its host and its system only, not for what is inside it');
   publish('cloud', 'group');
   assert.equal(layer()?.style.display, '', 'the object itself selected, they stay');
   publish('sun');

@@ -53,9 +53,10 @@ export interface PreparedUniverseOptions {
   loadImageLayer?(id: string): Promise<PreparedImageLayerMount>;
   /** Packages that are only a prepared catalogue point bank (`catalogue-point-bank` descriptors), by URL: fetched and drawn
    * while the catalogue row that details to them (`detailedObjectId`) is selected, or, for a bank that belongs to a body's
-   * system (`host`), while the selected body is that host, orbits it or is inside it (`setSelectionHolders`). `stars`: its
-   * dots are the catalogued stars the map draws as plain dots (no label, hover or click): they dim as every other star does,
-   * and the dot at the place of a star a body marker draws is left out. */
+   * system (`host`), while the selected body is that host or orbits it. `stars`: its dots are the catalogued stars the map
+   * draws as plain dots (no label, hover or click), the ones inside `host`: they draw while the selected body is that host
+   * or is inside it (`setSelectionHolders`), dim as every other star does, leave out the dot at the place of a star a body
+   * marker draws, and paint under the layers mounted after the world's own star dots. */
   pointBanks?: readonly { id: string; url: string; host?: string; stars?: true }[];
   /** Volume dataset banks are identified and framed from their descriptor alone; their heavy prepared
    * payload (all datasets, plus catalogue points) is fetched only through {@link loadVolumeDataset}, the

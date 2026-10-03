@@ -214,14 +214,16 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const galaxyDisc = { centreM: payload.frame.originM, normal: [2 * (gx * gz + gw * gy), 2 * (gy * gz - gw * gx), 1 - 2 * (gx * gx + gy * gy)],
           radiusM: Math.max(...[payload.frame.boundsUnits.min, payload.frame.boundsUnits.max].flatMap(bound => [Math.abs(bound[0]), Math.abs(bound[1])])) * payload.frame.metersPerUnit };
         const additionalPoints = own(mountBackgroundPoints(root, end, backgroundCataloguePoints, target => fetchPreparedCatalogueBank(target), galaxyDisc));
-        // The places of the stars a body marker draws: a bank of plain-dot stars leaves its dot out there.
+        // The places of the stars a body marker draws: a bank of plain-dot stars leaves its dot out there. Such a bank mounts
+        // here whenever it is first shown (`starDots` marks the place), so every layer mounted after this paints over it.
         let starPlaces: readonly (readonly number[])[] = [], starPlacesFor: unknown = null, starPlacesSelected: unknown = null;
+        const starDots = document.createElement('span'); starDots.hidden = true; root.insertBefore(starDots, end);
         // Over the galaxies: a mesh seen from outside hides what lies inside it.
         const meshes = imageMeshes.map(mesh => ({ cutaway: () => mesh.cutaway?.() ?? true, hidden: () => mesh.hidden?.() ?? false,
           runtime: own(mountImageMesh({ host: root, before: end, interiorBefore: meshInterior, labelHost: frontRoot, url: mesh.url,
             fetchJson: fetchPreparedJson, resolveResource: mesh.resolveResource, cutaway: mesh.cutaway?.() ?? true,
             hidden: mesh.hidden?.() ?? false, hiddenCaption: mesh.hiddenCaption })) }));
-        const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime,
+        const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime, starsBefore: starDots,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: [...declaredVolumes],
           pointBanks: [...declaredPoints],
           initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardAtlas });
@@ -234,7 +236,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         let selected = plan.focus;
         // The selected body and the centre it orbits: a point bank of either's system draws (universe-catalog-banks.ts).
         let selectedSystem: readonly string[] = [plan.focus.id];
-        // The objects the selected body is inside, as the host reads them from the object tree: a point bank one hosts draws too.
+        // The objects the selected body is inside, as the host reads them from the object tree: a bank of plain-dot stars one hosts draws.
         let selectionHolders: readonly string[] = [];
         // The caption sits below the selected body's longest reach, which an elongated shape model extends past its radius.
         let captionBody: typeof selected = selected;
@@ -348,7 +350,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               foregroundLabelExclusions: [...spatial.backgroundExclusionRects(), ...environmentLabels.labelExclusionRects()] });
           },
           /** The objects the selected body is inside (the object tree is the host's to read): a star of another galaxy
-           * stands among the dots that galaxy hosts. */
+           * stands among that galaxy's plain-dot stars. */
           setSelectionHolders(ids: readonly string[]) {
             if (ids.length === selectionHolders.length && ids.every((id, index) => id === selectionHolders[index])) return;
             selectionHolders = [...ids];
@@ -414,8 +416,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 : { objectId: insideGalaxy, opacity: logarithmicFade(eyeDistanceM(world.pose, selected.positionM), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) });
               // A bank of plain-dot stars dims like every marker outside a highlighted category and like every body outside
               // the focus star's system (the frame's `otherSystems`).
-              catalogBanks.publishPoints(world, viewport, companion ?? undefined, selectionHolders.length ? [...selectedSystem, ...selectionHolders] : selectedSystem,
-                () => ({ opacity: (spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1) * frame.otherSystems, hiddenAtM: starPlaces }));
+              catalogBanks.publishPoints(world, viewport, companion ?? undefined, selectedSystem,
+                { inside: selectionHolders, look: () => ({ opacity: (spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1) * frame.otherSystems, hiddenAtM: starPlaces }) });
               datasets.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,
                 selectedBodyContextOpacity(world, viewport, captionBody));
               for (const [index, shell] of shellLayers.entries()) {
