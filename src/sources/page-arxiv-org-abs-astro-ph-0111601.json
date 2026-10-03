@@ -1,0 +1,43 @@
+{
+  "id": "page-arxiv-org-abs-astro-ph-0111601",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NGC 6994 - clearly not a physical stellar ensemble (Odenkirchen & Soubiran 2002), arXiv:astro-ph/0111601",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://arxiv.org/abs/astro-ph/0111601"
+    },
+    {
+      "type": "arxiv",
+      "value": "astro-ph/0111601"
+    },
+    {
+      "type": "ads",
+      "value": "2002A&A...383..163O"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0111601",
+      "label": "arxiv.org/abs/astro-ph/0111601"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0111601",
+      "checkedOn": "2026-10-03",
+      "locator": "Title and abstract, as arXiv lists them"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Odenkirchen, M. & Soubiran, C. (2002), NGC 6994 - clearly not a physical stellar ensemble, A&A 383, 163; arXiv:astro-ph/0111601",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/astro-ph/0111601"
+    }
+  ]
+}

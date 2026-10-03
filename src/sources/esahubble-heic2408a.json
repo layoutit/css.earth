@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-heic2408a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Little Dumbbell Nebula (M76)",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "heic2408a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/heic2408a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esahubble.org/archives/images/publicationjpg/heic2408a.jpg",
+      "label": "JPEG, 4000 x 2524 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/heic2408a/",
+      "checkedOn": "2026-10-02",
+      "locator": "4000 x 2524 px; g 475, [O III] 502, H-alpha 656, [N II] 658 and I 814 nm. The file's embedded sky tags, used as they are: 0.0751 arcsec per pixel, north 19.1° right of vertical, the frame's centre at 25.5822739°, 51.5752397°. Not measured against Gaia here."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, STScI, A. Pagan (STScI)",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/heic2408a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}
