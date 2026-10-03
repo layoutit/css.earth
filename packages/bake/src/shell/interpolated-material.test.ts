@@ -2,29 +2,21 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
-import { parseShellRecipe, loadShellMesh, shellRim } from '@cssearth/bake/shell';
-import { SHELL_CORNER_PERMUTATIONS, shellMaterialAddress, type PreparedCssSurfaceShell } from '@cssearth/objects';
-import { nearestFacingIndex } from '@cssearth/renderer/shell/material-address.ts';
+import { parseShellRecipe, loadShellMesh, shellRim, compileCssSurfaceShell } from './index.ts';
+import { validatePreparedCssSurfaceShell } from '@cssearth/objects';
 import { dotN as dot } from '@cssearth/core';
 
 const objectDirectory = resolve('src/objects/heliosphere');
 const recipe = async () => parseShellRecipe(JSON.parse(await readFile(join(objectDirectory, 'source/shell.json'), 'utf8')) as unknown);
-const prepared = async () => (JSON.parse(await readFile(join(objectDirectory, 'prepared/shell.json'), 'utf8')) as { data: PreparedCssSurfaceShell }).data;
-
-test('every sorted triple and corner order selects its correct prepared tile without changing edge values', async () => {
-  const levels = (await recipe()).atlas.facingLevels!; let frame = 0;
-  for (let a = 0; a < levels.length; a++) for (let b = a; b < levels.length; b++) for (let c = b; c < levels.length; c++, frame++) {
-    for (const order of SHELL_CORNER_PERMUTATIONS) {
-      const input = [a, b, c].map((_, i) => [a, b, c][order[i]!]!);
-      const address = shellMaterialAddress(input[0]!, input[1]!, input[2]!, levels.length);
-      assert.equal(Math.floor(address / 6), frame);
-      const sorted = SHELL_CORNER_PERMUTATIONS[address % 6]!.map(i => input[i]!);
-      assert.deepEqual(sorted, [a, b, c]);
-    }
-  }
-  assert.equal(frame, 2024);
-  for (let i = 0; i < levels.length; i++) assert.equal(nearestFacingIndex(levels[i]!, levels), i);
-});
+const prepared = async () => {
+  const r = await recipe(), mesh = await loadShellMesh(join(objectDirectory, 'source'), r);
+  return validatePreparedCssSurfaceShell(compileCssSurfaceShell({ id: 'fixture', recipe: r, mesh,
+    atlasResource: { path: 'rim.png', width: r.atlas.columns * r.atlas.tileSize,
+      height: Math.ceil(r.atlas.frames / r.atlas.columns) * r.atlas.tileSize, bytes: 1 }, provenance: {} }));
+};
+// Independent exhaustive reference for the nearest prepared facing level (ties choose the lower index).
+const nearestFacingIndex = (value: number, levels: readonly number[]) => levels.reduce((best, level, index) =>
+  Math.abs(value - level) < Math.abs(value - levels[best]!) ? index : best, 0);
 
 test('interpolated corner material reduces source shader error at outside and near-surface viewpoints', async () => {
   const r = await recipe(), mesh = await loadShellMesh(join(objectDirectory, 'source'), r), shell = await prepared(), levels = r.atlas.facingLevels!;

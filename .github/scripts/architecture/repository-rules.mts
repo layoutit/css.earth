@@ -58,7 +58,7 @@ export const REPOSITORY_RULES: readonly RepositoryRule[] = [
   { id: 'format-schema-ownership', description: 'shared raw schema literals and duplicates of objects definitions fail; schema/owner exceptions must remain current and justified', check: checkFormatSchemaOwnership },
   { id: 'preparation-without-renderer', description: 'preparation packages reach renderer only through named, file-scoped runtime consumers; stale exceptions fail', check: checkPreparationWithoutRenderer },
   { id: 'workspace-package-cycles', description: 'workspace packages have no dependency cycles, including dev and peer dependencies', check: checkPackageCycles },
-  { id: 'integration-owners', description: 'integration files import at least two owners with no transitive workspace dependency between them', check: checkIntegrationOwners },
+  { id: 'integration-owners', description: 'integration files import public entries only and at least two owners with no transitive workspace dependency between them', check: checkIntegrationOwners },
   {
     id: 'retired-folders',
     description: 'no file lives under a tools/ folder or root tests/ folder (RETIRED_FOLDERS in repository-rules.mts)',
@@ -121,14 +121,25 @@ export function checkIntegrationOwners(root: string, files: readonly string[]): 
   };
   return files.filter(file => file.startsWith('integration/') && /\.[cm]?[jt]sx?$/u.test(file)).flatMap(file => {
     if (!existsSync(resolve(root, file))) return [`${file}: integration file is missing`];
+    const findings: string[] = [];
     const owners = new Set(importedSpecifiers(readFileSync(resolve(root, file), 'utf8'), file).flatMap(specifier => {
       const pkg = packages.find(item => specifier === item.name || specifier.startsWith(`${item.name}/`));
       const path = specifier.startsWith('.') ? posix.normalize(posix.join(dirname(file), specifier)) : specifier.replace(/^\//u, '');
+      if (pkg) {
+        const manifest: unknown = JSON.parse(readFileSync(resolve(root, `${pkg.directory}/package.json`), 'utf8'));
+        const exports = manifest && typeof manifest === 'object' && 'exports' in manifest ? manifest.exports : undefined;
+        const entry = specifier === pkg.name ? '.' : `.${specifier.slice(pkg.name.length)}`;
+        const entries = exports && typeof exports === 'object' ? Object.keys(exports) : ['.'];
+        const published = entries.some(key => key === entry || key.includes('*') && entry.startsWith(key.split('*')[0]!) && entry.endsWith(key.split('*')[1]!));
+        if (!published || /\.[cm]?[jt]sx?$/u.test(entry)) findings.push(`${file}: integration imports public package entries only; private source import ${specifier}`);
+      } else if (specifier.startsWith('.') || specifier.startsWith('/')) {
+        if (owner(path)) findings.push(`${file}: integration imports public package entries only; relative owner import ${specifier}`);
+      }
       const imported = pkg ? owner(`${pkg.directory}/index.ts`) : owner(path);
       return imported ? [imported] : [];
     }));
     const list = [...owners];
     const independent = list.some((left, i) => list.slice(i + 1).some(right => !reaches(left, right) && !reaches(right, left)));
-    return independent ? [] : [`${file}: integration must import at least two independent owners; found ${list.join(', ') || 'none'}`];
+    return independent ? findings : [...findings, `${file}: integration must import at least two independent owners; found ${list.join(', ') || 'none'}`];
   });
 }

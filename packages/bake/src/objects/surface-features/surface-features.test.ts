@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { parsePreparedSurfaceFeatureCatalog } from '@cssearth/objects';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -156,6 +157,9 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
     assert.equal(catalog.datum.radiusM, 2439700);
     const written = await readFile(resolve(directory, 'public', 'mercury-features.json'));
     assert.equal(written.length, plan.catalog.bytes);
+    const parsed = parsePreparedSurfaceFeatureCatalog(JSON.parse(written.toString('utf8')), plan, 'mercury');
+    assert.equal(parsed.features.length, catalog.features.length);
+    assert.equal(parsed.features.find(feature => feature.name === 'Serp Facula')?.name, 'Serp Facula');
     for (const feature of catalog.features) {
       assert.ok(Math.abs(Math.hypot(...feature.anchorUnits) - 11500) < 1e-2, feature.name);
       if (feature.outline.kind === 'circle') {

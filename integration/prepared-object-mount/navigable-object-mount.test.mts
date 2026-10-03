@@ -6,16 +6,16 @@ import { preparedObjectText } from '@cssearth/objects/node';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { loadNavigableObject } from '@cssearth/renderer/runtime/navigable-object-mount.ts';
+import { loadNavigableObject } from '@cssearth/renderer';
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
-import { requirePreparedCssDescriptor } from '@cssearth/renderer/prepared-object-decoder.ts';
+import { parseObjectDescriptor } from '@cssearth/objects';
 
-import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
+import type { ObjectMountOptions } from '@cssearth/renderer';
 
 async function preparedFixture() {
-  const descriptor = requirePreparedCssDescriptor(JSON.parse(await readFile(new URL('../../../../src/objects/venus/object.json', import.meta.url), 'utf8')));
-  const envelope = record(JSON.parse(await preparedObjectText(fileURLToPath(new URL('../../../../src/objects/venus', import.meta.url)), descriptor)), 'prepared Venus fixture');
+  const descriptor = parseObjectDescriptor(JSON.parse(await readFile(new URL('../../src/objects/venus/object.json', import.meta.url), 'utf8')));
+  const envelope = record(JSON.parse(await preparedObjectText(fileURLToPath(new URL('../../src/objects/venus', import.meta.url)), descriptor)), 'prepared Venus fixture');
   const source = requireObjectRuntimeDefinition(envelope.data);
   // Retain the real tree and selections while keeping image decoding in its browser gate. The texture levels go with
   // the textures they map.

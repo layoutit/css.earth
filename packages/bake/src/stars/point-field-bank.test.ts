@@ -1,9 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
-import { encodePointFieldBank, magnitudeDisplayAlphaChange } from '@cssearth/bake/stars';
-import { POINT_FIELD_BANK_HEADER_BYTES, POINT_FIELD_MAGNITUDE_BOUND, decodePointFieldBank, IMPERCEPTIBLE_LUMINANCE, type PreparedPointFieldBank } from '@cssearth/objects';
-import { pointLuminanceVisible } from '@cssearth/renderer/stars/point-field-projection.ts';
+import { encodePointFieldBank, magnitudeDisplayAlphaChange } from './point-field-bank.ts';
+import { POINT_FIELD_BANK_HEADER_BYTES, POINT_FIELD_MAGNITUDE_BOUND, decodePointFieldBank, IMPERCEPTIBLE_LUMINANCE, parsePreparedCssPointFieldManifest, decodePreparedCssPointField, type PreparedPointFieldBank } from '@cssearth/objects';
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: 3.085677581491367e16, boundsUnits: { min: [-1024, -1024, -1024], max: [1024, 1024, 1024] } } as const;
@@ -71,6 +69,21 @@ test('encoder refuses rows outside the declared storage and bounds', () => {
   // A photometry table steep enough for half a millimagnitude to be visible fails preparation.
   const steep = { ...photometry, step: 1e-4 };
   assert.ok(magnitudeDisplayAlphaChange(steep, atlas, POINT_FIELD_MAGNITUDE_BOUND) > IMPERCEPTIBLE_LUMINANCE);
-  assert.equal(pointLuminanceVisible(magnitudeDisplayAlphaChange(steep, atlas, POINT_FIELD_MAGNITUDE_BOUND)), true);
   assert.throws(() => encode({ photometry: steep }), /display threshold/);
+});
+
+test('encoded bank manifest passes the objects parser with bounded display quantization', () => {
+  const { bytes, bank } = encode();
+  const manifest = parsePreparedCssPointFieldManifest({ schema: 'cssearth-css-point-field-bank@1', id: 'fixture', frame, bank,
+    atlas: { path: 'atlas.webp', columns: 2, tileSize: 32, colors: [[255, 255, 255], [255, 128, 0]], haloRadii: atlas.haloRadii },
+    photometry, policy: { activeSlots: 3, transitionSlots: 3, maxErrorPx: 2, transitionMs: 180 },
+    labels: { activeSlots: 1, transitionSlots: 1, capHeightPx: 12, gapPx: 7, maxAlpha: .55, fadeMs: 300 },
+    resources: [{ path: 'atlas.webp', width: 64, height: 32, bytes: 1 }] });
+  assert.equal(decodePreparedCssPointField(manifest, bytes).stars.length, stars.length);
+  const magnitude = manifest.bank.quantization.find(entry => entry.field === 'star.absoluteMagnitude')!;
+  assert.equal(magnitude.bound, POINT_FIELD_MAGNITUDE_BOUND);
+  assert.ok(magnitude.measured >= 0 && magnitude.measured <= magnitude.bound);
+  assert.equal(magnitude.displayAlphaChange, magnitudeDisplayAlphaChange(manifest.photometry, atlas, magnitude.bound));
+  assert.ok(magnitude.displayAlphaChange < IMPERCEPTIBLE_LUMINANCE);
+  for (const field of manifest.bank.quantization.filter(entry => entry !== magnitude)) assert.deepEqual([field.bound, field.measured, field.displayAlphaChange], [0, 0, 0]);
 });

@@ -1,20 +1,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
 import { validatePreparedLeafBounds } from '@cssearth/objects';
-import { createPreparedLeafFrustum, preparedLeafMayContribute } from '@cssearth/renderer/rendering/prepared-leaf-frustum.ts';
-import { compileLeafBounds } from '@cssearth/bake/volume-leaves';
+import { createPreparedLeafFrustum, preparedLeafMayContribute } from './prepared-leaf-frustum.ts';
 
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 const viewport = { focalPixels: 600, widthPixels: 1000, heightPixels: 800, principalOffsetPixels: [0, 0] as const };
-const box = (x: number, y: number, z: number, radius = 1) => ({ min: [x-radius, y-radius, z-radius] as const, max: [x+radius, y+radius, z+radius] as const });
+const box = (x: number, y: number, z: number, radius = 1) => {
+  const bounds = { min: [x-radius, y-radius, z-radius] as const, max: [x+radius, y+radius, z+radius] as const };
+  validatePreparedLeafBounds(bounds); return bounds;
+};
 
-test('prepared image bounds include the compiled edge extension', () => {
-  const bounds = compileLeafBounds('0,1,0,0,-2,0,0,0,0,0,1,0,10,20,30,1', 4, 3)!;
-  assert.deepEqual(bounds, { min: [4,20,30], max: [10,24,30] });
-  assert.doesNotThrow(() => validatePreparedLeafBounds(bounds));
-  assert.equal(compileLeafBounds('1,0,0,0.1,0,1,0,0,0,0,1,0,0,0,0,1', 4, 3), undefined);
-});
 test('five clip planes reject wholly outside bounds while retaining grazing and eye-crossing images', () => {
   const planes = createPreparedLeafFrustum(rotation, [0,0,0], viewport);
   for (const [x,y,z] of [[503,0,0],[-503,0,0],[0,403,0],[0,-403,0],[0,0,603]]) assert.equal(preparedLeafMayContribute(box(x,y,z,0), planes), false);

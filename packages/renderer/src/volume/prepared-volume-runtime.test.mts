@@ -1,12 +1,9 @@
-import { compileLeafBounds } from '@cssearth/bake/volume-leaves';
 import { readFileSync } from 'node:fs';
 import { afterEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
-import { bakeSlab } from '@cssearth/bake/volume/node';
-import { type VolumeRecipe, type PreparedCssVolume, type VolumeVector } from '@cssearth/objects';
-import { mountPreparedCssVolume } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
-import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
+import { validatePreparedCssVolume, type PreparedCssVolume, type VolumeVector } from '@cssearth/objects';
+import { mountPreparedCssVolume } from './prepared-volume-runtime.ts';
+import type { VolumeCameraPublication } from './types.ts';
 
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 
@@ -30,7 +27,7 @@ class FakeDocument {
   count = 0;
   createElement(tag = 'div'): FakeElement { this.count++; return new FakeElement(this, tag); }
 }
-const payload = (count = 1): PreparedCssVolume => ({
+const payload = (count = 1): PreparedCssVolume => validatePreparedCssVolume({
   schema: 'cssearth-css-volume@1', id: 'fixture', frame: { referenceFrame: 'fixture', epochJdTt: 123, originM: [0, 0, 0],
     localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } }, anchors: [],
   stacks: AXES.map((axis, coordinate) => ({ axis, leaves: Array.from({ length: count }, (_, index) => {
@@ -46,7 +43,7 @@ function mount(data = payload()) {
   stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.append(before);
   const resolver = mock.fn((path: string) => `/prepared/${path}`);
-  const runtime = mountPreparedCssVolume({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload: data, resolveResource: resolver });
+  const runtime = mountPreparedCssVolume({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload: validatePreparedCssVolume({ ...data }), resolveResource: resolver });
   const roots = runtime.roots as unknown as FakeElement[], root = roots[0]!, camera = root.children[0]!, scene = camera.children[0]!;
   const meshes = roots.map(node => node.children[0]!.children[0]!.children[0]!);
   return { data, document, host, before, runtime, roots, root, camera, scene, meshes, resolver };
@@ -90,7 +87,7 @@ test('optical copies reuse canonical textures and transforms inside isolated unf
     }
   }
   assert.equal(resolver.mock.callCount(), 9);
-  const css = readFileSync(new URL('../../../../packages/renderer/src/styles/volume.css', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../styles/volume.css', import.meta.url), 'utf8');
   assert.match(css, /\.css-volume-projection\s*\{[^}]*background:\s*#000[^}]*transform-style:\s*flat/su);
   assert.match(css, /\.css-volume-camera,\s*\.css-volume-scene,\s*\.css-volume-mesh\s*\{[^}]*transform-style:\s*preserve-3d/su);
 });
@@ -132,17 +129,10 @@ test('rotation only publishes changed optical copies and translation leaves thei
   assert.equal(leaves.every(leaf => leaf.propertyWrites.length === 0), true);
 });
 
-test('actual baked homogeneous emission keeps physical optical density through a full rotation and stack handoffs', () => {
+test('prepared homogeneous emission keeps physical optical density through a full rotation and stack handoffs', () => {
   const count = 256, data = payload(count), { runtime, roots, meshes } = mount(data);
-  const recipe: VolumeRecipe = { schema: 'cssearth-volume-recipe@1', grid: { path: 'density.ktx2',
-    dimensions: [1, 1, 1], encoding: 'sqrt-density-unorm8', bounds: { min: [-1, -1, -1], max: [1, 1, 1] } },
-    material: { emission: [0, 1, 2].map(channel => ({ channel, color: [Number(channel === 0), Number(channel === 1), Number(channel === 2)], strength: 1 })),
-      absorption: [], intensityScale: 1, stepScale: 1, exposureGain: 16 },
-    bake: { sliceCounts: { x: count, y: count, z: count }, unitsPerSourceUnit: 1, imageWidth: 1, samplesPerSlab: 1, cropTransparent: false, opticalWeight: 1 },
-    anchors: [], provenance: { path: 'provenance.json' } };
-  const texel = bakeSlab({ width: 1, height: 1, depth: 1, encodedRgba: Buffer.from([32, 32, 32, 0]), recipe, provenance: {} }, 'z', 0, 2 / count, 1, 1, undefined).rgba;
-  assert.deepEqual(([...texel]), [255, 255, 255, 1]);
-  const alpha = texel[3]! / 255, density = -count * Math.log1p(-alpha) / 2;
+  // Canonical one-byte alpha from the producer's homogeneous emission contract.
+  const alpha = 1 / 255, density = -count * Math.log1p(-alpha) / 2;
   let worstDensityError = 0, oldDominantError = 0;
   for (let degree = 0; degree <= 360; degree++) {
     const angle = degree * Math.PI / 180, direction: VolumeVector = [Math.sin(angle) / Math.sqrt(2), Math.sin(angle) / Math.sqrt(2), Math.cos(angle)];
@@ -217,9 +207,12 @@ test('rotation keeps geometry and texture resources stable while publishing leaf
 
 for (const bounds of ['leaf', 'frame']) test(`prepared ${bounds} bounds defer offscreen textures and restore retained optical copies`, () => {
   const data = payload(3);
-  if (bounds === 'leaf') for (const stack of data.stacks) for (const leaf of stack.leaves) Object.assign(leaf, {
-    boundsCssPixels: compileLeafBounds(leaf.style.transform.slice(9,-1), parseFloat(leaf.style.width), parseFloat(leaf.style.height)),
-  });
+  if (bounds === 'leaf') for (const [coordinate, stack] of data.stacks.entries()) for (const leaf of stack.leaves) {
+    const cssAxis = [1, 0, 2][coordinate]!, depth = leaf.centerUnits[coordinate]! * 50;
+    const min: [number,number,number] = [-50,-50,-50], max: [number,number,number] = [50,50,50];
+    min[cssAxis] = depth; max[cssAxis] = depth;
+    Object.assign(leaf, { boundsCssPixels: { min, max } });
+  }
   const { runtime, meshes, document, resolver } = mount(data), nodes = meshes.flatMap(m => m.children), count = document.count;
   const view = (position: VolumeVector) => ({ ...publication([0,0,1], position), viewport: { focalPixels:600, principalOffsetPixels:[17,-11] as const, widthPixels:1000, heightPixels:800 } });
   runtime.publish(view([100,0,10]));

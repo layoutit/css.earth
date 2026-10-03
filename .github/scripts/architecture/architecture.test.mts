@@ -379,24 +379,22 @@ test('retired root tests and dependent integration owners fail without a baselin
     write('labs/nebula/packages/lab/package.json', '{"name":"@x/lab","dependencies":{"@x/a":"workspace:*"}}');
     write('integration/example.test.mts', "import '@x/a'; import '@x/lab';\n");
     assert.equal(broken(), true, 'a lab package maps to its labs owner and dependency graph');
-    write('packages/renderer/package.json', '{"name":"@cssearth/renderer"}');
-    write('packages/bake/package.json', '{"name":"@cssearth/bake","dependencies":{"@cssearth/renderer":"workspace:*"}}');
-    write('integration/renderer-bake/conformance.test.ts', "import '@cssearth/bake'; import '@cssearth/renderer';\n");
-    write('integration/example.test.mts', "import '@x/a'; import '@x/b';\n");
-    assert.equal(broken(), true, 'renderer-bake has no exception for dependent owners');
-    write('packages/bake/package.json', '{"name":"@cssearth/bake"}');
-    assert.equal(broken(), false, 'renderer-bake conformance passes when its owners are independent');
-    write('integration/renderer-bake/conformance.test.ts', "import '@cssearth/renderer';\n");
-    assert.equal(broken(), true, 'removing either conformance owner is red');
-    rmSync(join(root, 'integration/renderer-bake'), { recursive: true });
     write('integration/AGENTS.md', '# Integration test instructions\n');
+    write('integration/example.test.mts', "import '@x/a'; import '@x/b';\n");
     assert.equal(broken(), false, 'instruction files in integration are not source');
     write('integration/example.test.mts', "import '@x/a';\n");
     assert.equal(broken(), true, 'a single-owner source file stays red beside the instructions');
     write('site/a.mts', 'export {};');
     write('src/a.mts', 'export {};');
     write('integration/example.test.mts', "import '../site/a.mts'; import '../src/a.mts';\n");
-    assert.equal(broken(), false, 'relative application imports count as owners');
+    assert.equal(broken(), true, 'relative application imports are private');
+    for (const specifier of ['../packages/a/src/private.ts', '@x/a/src/private.ts', '@x/a/unpublished', '../site/a.mts', '../src/a.mts']) {
+      write('integration/example.test.mts', `import '@x/a'; import '@x/b'; import '${specifier}';\n`);
+      assert.equal(broken(), true, `${specifier} is private even with two independent owners`);
+    }
+    write('packages/a/package.json', '{"name":"@x/a","exports":{".":"./index.js","./public":"./public.js"}}');
+    write('integration/example.test.mts', "import '@x/a/public'; import '@x/b';\n");
+    assert.equal(broken(), false, 'public subpaths are green');
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 

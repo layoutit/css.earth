@@ -1,11 +1,9 @@
-import { readFileSync } from 'node:fs';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
-import { loadPreparedCssPointField, loadPreparedPointAppearance } from '@cssearth/renderer/stars/loader.ts';
+import { loadPreparedCssPointField, loadPreparedPointAppearance } from './loader.js';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest, POINT_FIELD_MAGNITUDE_BOUND, IMPERCEPTIBLE_LUMINANCE } from '@cssearth/objects';
-import { readCanonicalPointFieldFiles } from '@cssearth/renderer/test/canonical-point-field-fixture.ts';
-import { magnitudeDisplayAlphaChange } from '@cssearth/bake/stars';
+import { readCanonicalPointFieldFiles } from '../../test/canonical-point-field-fixture.ts';
+import { pointLuminanceVisible } from './point-field-projection.js';
 
 const copy = (bytes: Uint8Array) => new Uint8Array(bytes).buffer;
 function fixture() {
@@ -40,19 +38,17 @@ test('decodes the local prepared point field and reads its manifest and bank onc
 
 test('declared magnitude quantization is bounded below what the runtime can display', () => {
   const { manifest } = fixture();
-  const atlas = JSON.parse(readFileSync(new URL('../../../../packages/renderer/test/fixtures/point-field/atlas-recipe.json', import.meta.url), 'utf8')) as {
-    tileSize: number; haloRadii: number; coreInnerRadii: number; coreOuterRadii: number; haloPeak: number; samplesPerPixelAxis: number };
   const magnitude = manifest.bank.quantization.find(entry => entry.field === 'star.absoluteMagnitude')!;
   assert.equal(magnitude.bound, POINT_FIELD_MAGNITUDE_BOUND);
   assert.ok(magnitude.measured >= 0);
   assert.ok(magnitude.measured <= magnitude.bound);
-  assert.equal(magnitude.displayAlphaChange, magnitudeDisplayAlphaChange(manifest.photometry, atlas, magnitude.bound));
+  assert.equal(pointLuminanceVisible(magnitude.displayAlphaChange), false);
   assert.ok(magnitude.displayAlphaChange < IMPERCEPTIBLE_LUMINANCE);
   for (const field of manifest.bank.quantization.filter(entry => entry !== magnitude)) assert.deepEqual(([field.bound, field.measured, field.displayAlphaChange]), [0, 0, 0]);
 });
 
 test('rejects malformed hierarchy, rows and manifest fields', async () => {
-  const { descriptor, manifestBytes, bankBytes, manifest, data, transport } = fixture();
+  const { descriptor, bankBytes, manifest, data, transport } = fixture();
   const column = (name: string) => manifest.bank.columns.find(entry => entry.name === name)!;
   const tampered = (mutate: (view: DataView) => void) => { const bytes = new Uint8Array(bankBytes); mutate(new DataView(bytes.buffer)); return bytes; };
   const firstChild = (() => { const children = column('node.children'); return new DataView(bankBytes.buffer, bankBytes.byteOffset).getUint32(children.offset, true); })();
@@ -79,11 +75,15 @@ test('rejects malformed hierarchy, rows and manifest fields', async () => {
 });
 
 test('Sun appearance verifies the manifest without fetching or decoding the star bank', async () => {
-  const { descriptor, url, manifest, transport, manifestBytes } = fixture();
+  const { descriptor, url, manifest, transport } = fixture();
   const reader = transport();
   const appearance = await loadPreparedPointAppearance(descriptor, reader);
   assert.deepEqual(reader.read.mock.calls.map(call => call.arguments), [[url]]);
   assert.deepEqual(Object.keys(appearance).sort(), ['atlas', 'frame', 'id', 'photometry', 'resources']);
   assert.deepEqual(appearance.atlas, manifest.atlas);
   assert.deepEqual(appearance.photometry, manifest.photometry);
+});
+
+test('renderer displays changes above the shared luminance threshold', () => {
+  assert.equal(pointLuminanceVisible(IMPERCEPTIBLE_LUMINANCE * 2), true);
 });

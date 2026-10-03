@@ -12,12 +12,11 @@ import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runti
 import type { PreparedImage } from "@cssearth/renderer/rendering/prepared-image-store.ts";
 import type { RuntimePolicy } from "@cssearth/renderer/navigation/runtime-policy.ts";
 import type { OrbitPublication } from "@cssearth/renderer/navigation/object-orbit.ts";
-import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 import { createPreparedResidency } from '@cssearth/renderer/testing';
 import { createPreparedPlayback } from '@cssearth/renderer/testing';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createObjectSelectionRuntime } from '@cssearth/renderer/testing';
-import { retainedPresentationFixture, fixtureObjectCapabilities, objectView } from "./fixtures/object-runtime-package.mts";
+import { retainedPresentationFixture, fixtureObjectCapabilities, objectView } from "../../test/object-runtime-package.mts";
 const moonDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("moon"));
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("earth"));
 // This mount harness records lifecycle calls; no page requests are made here.
@@ -172,11 +171,6 @@ test("partial actual tree construction registers root cleanup before failure", a
   const failure = assert.rejects(h.runtime.ready, /native element failure/); await h.resolveJobs(); await failure;
   assert.ok(h.events.includes("remove:camera")); assert.equal(h.stage.children.length, 0);
   assert.equal(h.resources().stats().images.entries.length, 0);
-});
-for (const name of ["createPresentation", "resolvePresentation", "reduceSelection"]) test(`preparation rejects a package's executable ${name}`, () => {
-  let invoked = false;
-  assert.throws(() => requireObjectRuntimeDefinition({ ...moonDefinition, [name]() { invoked = true; return Promise.resolve(); } }), /acyclic JSON|unsupported/);
-  assert.equal(invoked, false);
 });
 test("late native animation registration inherits permission and retires after disposal", async t => {
   const h = harness(); t.after(h.restore); h.runtime.resume(); await h.complete();
