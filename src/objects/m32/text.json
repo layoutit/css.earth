@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m32",
+  "card": {
+    "text": "An elliptical galaxy 0.8 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 2555: distance modulus 24.449 ± 0.01 mag",
+        "checked": "2026-10-02",
+        "locator": "distance: 0.78 Mpc (0.77 to 0.78)"
+      },
+      {
+        "catalogueId": "hyperleda-2014",
+        "url": "http://atlas.obs-hp.fr/hyperleda/",
+        "label": "HyperLEDA (Makarov et al. 2014), NGC0221 = PGC 2555: centre, type E, D25 diameter 7.7 arcmin",
+        "checked": "2026-10-02",
+        "locator": "type E, T = -4.8"
+      },
+      {
+        "catalogueId": "wikipedia-messier-32",
+        "url": "https://en.wikipedia.org/wiki/Messier_32",
+        "label": "Wikipedia, \"Messier 32\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1372954166",
+        "quote": "Messier 32 is a dwarf \"early-type\" galaxy about 2,490,000 light-years (760,000 pc) from the Solar System, appearing in the constellation Andromeda."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, standing as a flat picture that faces the Sun.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 12.42 arcmin wide"
+      },
+      {
+        "catalogueId": "wikipedia-messier-32",
+        "url": "https://en.wikipedia.org/wiki/Messier_32",
+        "label": "Wikipedia, \"Messier 32\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1372954166",
+        "quote": "M32 is a satellite galaxy of the Andromeda Galaxy (M31) and was discovered by Guillaume Le Gentil in 1749."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M32 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image on a flat plane facing the Sun; nothing in it has depth.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 12.42 × 12.42 arcmin on NGC 221"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m100",
+  "displayName": "M100",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "15.21 Mpc (14.71 to 15.71)",
+        "source": {
+          "catalogueId": "leroy-2021-phangs-alma",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+          "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4321: distance 15.21 ± 0.5 Mpc, from the compilation of Anand et al. (2021)",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 185.729°, Dec 15.822°",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4321 = PGC 40153: centre, type SABb, D25 diameter 6.1 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "type",
+        "label": "Type",
+        "value": "SABb (spiral galaxy)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4321 = PGC 40153: centre, type SABb, D25 diameter 6.1 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "tilt",
+        "label": "Tilt of its disc",
+        "value": "39° from face-on",
+        "source": {
+          "catalogueId": "leroy-2021-phangs-alma",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+          "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4321: inclination 38.5 ± 2.4°, position angle 156.2 ± 1.7°",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "size",
+        "label": "Diameter",
+        "value": "27.0 kpc (6.1 arcmin at 25 mag per square arcsecond)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4321 = PGC 40153: centre, type SABb, D25 diameter 6.1 arcmin",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "SDSS · optical",
+        "thumbnail": "m100-dataset-optical.webp",
+        "volume": {
+          "objectId": "m100-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m100-layers-optical",
+          "path": "../../m100-layers/source/manifest.json",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4321: distance 15.21 ± 0.5 Mpc, from the compilation of Anand et al. (2021)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "HyperLEDA (Makarov et al. 2014), NGC4321 = PGC 40153: centre, type SABb, D25 diameter 6.1 arcmin",
+      "href": "http://atlas.obs-hp.fr/hyperleda/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4321: inclination 38.5 ± 2.4°, position angle 156.2 ± 1.7°",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+      "credit": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4321: distance 15.21 ± 0.5 Mpc, from the compilation of Anand et al. (2021)"
+    }
+  }
+}

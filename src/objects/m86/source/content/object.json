@@ -1,0 +1,102 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m86",
+  "displayName": "M86",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "17.06 Mpc (15.28 to 19.05)",
+        "source": {
+          "catalogueId": "publication-tully2016aj-152-50t",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/152/50",
+          "label": "Tully, Courtois & Sorce (2016), Cosmicflows-3, AJ 152, 50; CDS J/AJ/152/50, table 3, PGC 40653: distance modulus 31.16 ± 0.24 mag",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 186.549°, Dec 12.946°",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4406 = PGC 40653: centre, type E, D25 diameter 11.5 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "type",
+        "label": "Type",
+        "value": "E (elliptical galaxy)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4406 = PGC 40653: centre, type E, D25 diameter 11.5 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "size",
+        "label": "Diameter",
+        "value": "57.2 kpc (11.5 arcmin at 25 mag per square arcsecond)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4406 = PGC 40653: centre, type E, D25 diameter 11.5 arcmin",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "SDSS · optical",
+        "thumbnail": "m86-dataset-optical.webp",
+        "volume": {
+          "objectId": "m86-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m86-layers-optical",
+          "path": "../../m86-layers/source/manifest.json",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tully, Courtois & Sorce (2016), Cosmicflows-3, AJ 152, 50; CDS J/AJ/152/50, table 3, PGC 40653: distance modulus 31.16 ± 0.24 mag",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/152/50"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "HyperLEDA (Makarov et al. 2014), NGC4406 = PGC 40653: centre, type E, D25 diameter 11.5 arcmin",
+      "href": "http://atlas.obs-hp.fr/hyperleda/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/152/50",
+      "credit": "Tully, Courtois & Sorce (2016), Cosmicflows-3, AJ 152, 50; CDS J/AJ/152/50, table 3, PGC 40653: distance modulus 31.16 ± 0.24 mag"
+    }
+  }
+}

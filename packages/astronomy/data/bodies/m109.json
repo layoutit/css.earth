@@ -1,0 +1,28 @@
+{
+  "id": "m109",
+  "classification": "galaxy",
+  "order": 5309,
+  "physical": {
+    "name": "M109",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M109 is recorded: it is an extended galaxy, and its package frames it at 31,040 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 179.399919,
+    "declinationDegrees": 53.374515,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 25176769.277588595,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 1047.2,
+    "sources": {
+      "position": "HyperLEDA (Makarov et al. 2014), NGC3992 = PGC 37617: centre, type Sbc, D25 diameter 7.1 arcmin (http://atlas.obs-hp.fr/hyperleda/)",
+      "distance": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 37617: distance modulus 32.005 ± 0.4 mag (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94)",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "HyperLEDA (Makarov et al. 2014), NGC3992 = PGC 37617: heliocentric radial velocity 1047.2 ± 1.8 km/s (http://atlas.obs-hp.fr/hyperleda/)"
+    }
+  }
+}

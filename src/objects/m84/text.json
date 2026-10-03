@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m84",
+  "card": {
+    "text": "An elliptical galaxy 17.9 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 40455: distance modulus 31.26 ± 0.057 mag",
+        "checked": "2026-10-02",
+        "locator": "distance: 17.86 Mpc (17.40 to 18.34)"
+      },
+      {
+        "catalogueId": "hyperleda-2014",
+        "url": "http://atlas.obs-hp.fr/hyperleda/",
+        "label": "HyperLEDA (Makarov et al. 2014), NGC4374 = PGC 40455: centre, type E, D25 diameter 7.4 arcmin",
+        "checked": "2026-10-02",
+        "locator": "type E, T = -4.4"
+      },
+      {
+        "catalogueId": "wikipedia-messier-84",
+        "url": "https://en.wikipedia.org/wiki/Messier_84",
+        "label": "Wikipedia, \"Messier 84\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1377881790",
+        "quote": "Messier 84 or M84, also known as NGC 4374, is a giant elliptical or lenticular galaxy in the constellation Virgo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, standing as a flat picture that faces the Sun.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 11.88 arcmin wide"
+      },
+      {
+        "catalogueId": "wikipedia-messier-84",
+        "url": "https://en.wikipedia.org/wiki/Messier_84",
+        "label": "Wikipedia, \"Messier 84\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1377881790",
+        "quote": "Charles Messier discovered the object in 1781 in a systematic search for \"nebulous objects\" in the night sky."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M84 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image on a flat plane facing the Sun; nothing in it has depth.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 11.88 × 11.88 arcmin on NGC 4374"
+        }
+      ]
+    }
+  }
+}

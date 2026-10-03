@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m99",
+  "card": {
+    "text": "A spiral galaxy 13.1 million parsecs away, tilted 34° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4254: distance 13.1 ± 2.01 Mpc, from the compilation of Anand et al. (2021)",
+        "checked": "2026-10-02",
+        "locator": "distance: 13.10 Mpc (11.09 to 15.11)"
+      },
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4254: inclination 34.4 ± 1.0°, position angle 68.1 ± 0.5°",
+        "checked": "2026-10-02",
+        "locator": "inclination 34.4 deg"
+      },
+      {
+        "catalogueId": "wikipedia-messier-99",
+        "url": "https://en.wikipedia.org/wiki/Messier_99",
+        "label": "Wikipedia, \"Messier 99\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1377881824",
+        "quote": "Messier 99 or M99, also known as NGC 4254 or St."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, laid flat on its measured disc.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 8.04 arcmin wide"
+      },
+      {
+        "catalogueId": "wikipedia-messier-99",
+        "url": "https://en.wikipedia.org/wiki/Messier_99",
+        "label": "Wikipedia, \"Messier 99\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1377881824",
+        "quote": "Catherine's Wheel, is a grand design spiral galaxy in the northern constellation Coma Berenices approximately 15,000,000 parsecs from the Milky Way."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M99 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 8.04 × 8.04 arcmin on NGC 4254"
+        }
+      ]
+    }
+  }
+}

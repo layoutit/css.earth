@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m104",
+  "displayName": "Sombrero Galaxy",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "9.38 Mpc (9.08 to 9.70)",
+        "source": {
+          "catalogueId": "cosmicflows-4",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 42407: distance modulus 29.862 ± 0.072 mag",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 189.998°, Dec -11.623°",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4594 = PGC 42407: centre, type Sa, D25 diameter 8.5 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "type",
+        "label": "Type",
+        "value": "Sa (spiral galaxy)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4594 = PGC 42407: centre, type Sa, D25 diameter 8.5 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "tilt",
+        "label": "Tilt of its disc",
+        "value": "59° from face-on",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4594 = PGC 42407: inclination 59.44°, major-axis position angle 89.3°, from its outline at 25 mag per square arcsecond",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "size",
+        "label": "Diameter",
+        "value": "23.1 kpc (8.5 arcmin at 25 mag per square arcsecond)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4594 = PGC 42407: centre, type Sa, D25 diameter 8.5 arcmin",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "SDSS · optical",
+        "thumbnail": "m104-dataset-optical.webp",
+        "volume": {
+          "objectId": "m104-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m104-layers-optical",
+          "path": "../../m104-layers/source/manifest.json",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 42407: distance modulus 29.862 ± 0.072 mag",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "HyperLEDA (Makarov et al. 2014), NGC4594 = PGC 42407: centre, type Sa, D25 diameter 8.5 arcmin",
+      "href": "http://atlas.obs-hp.fr/hyperleda/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "HyperLEDA (Makarov et al. 2014), NGC4594 = PGC 42407: inclination 59.44°, major-axis position angle 89.3°, from its outline at 25 mag per square arcsecond",
+      "href": "http://atlas.obs-hp.fr/hyperleda/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+      "credit": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 42407: distance modulus 29.862 ± 0.072 mag"
+    }
+  }
+}

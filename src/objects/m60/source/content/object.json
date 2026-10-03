@@ -1,0 +1,102 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m60",
+  "displayName": "M60",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "16.66 Mpc (16.06 to 17.27)",
+        "source": {
+          "catalogueId": "cosmicflows-4",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 42831: distance modulus 31.108 ± 0.079 mag",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 190.917°, Dec 11.553°",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4649 = PGC 42831: centre, type E, D25 diameter 6.8 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "type",
+        "label": "Type",
+        "value": "E (elliptical galaxy)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4649 = PGC 42831: centre, type E, D25 diameter 6.8 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "size",
+        "label": "Diameter",
+        "value": "32.8 kpc (6.8 arcmin at 25 mag per square arcsecond)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4649 = PGC 42831: centre, type E, D25 diameter 6.8 arcmin",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "SDSS · optical",
+        "thumbnail": "m60-dataset-optical.webp",
+        "volume": {
+          "objectId": "m60-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m60-layers-optical",
+          "path": "../../m60-layers/source/manifest.json",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 42831: distance modulus 31.108 ± 0.079 mag",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "HyperLEDA (Makarov et al. 2014), NGC4649 = PGC 42831: centre, type E, D25 diameter 6.8 arcmin",
+      "href": "http://atlas.obs-hp.fr/hyperleda/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+      "credit": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 42831: distance modulus 31.108 ± 0.079 mag"
+    }
+  }
+}

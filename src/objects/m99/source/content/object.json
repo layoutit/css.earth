@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m99",
+  "displayName": "M99",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "13.10 Mpc (11.09 to 15.11)",
+        "source": {
+          "catalogueId": "leroy-2021-phangs-alma",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+          "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4254: distance 13.1 ± 2.01 Mpc, from the compilation of Anand et al. (2021)",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 184.707°, Dec 14.417°",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4254 = PGC 39578: centre, type Sc, D25 diameter 5.0 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "type",
+        "label": "Type",
+        "value": "Sc (spiral galaxy)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4254 = PGC 39578: centre, type Sc, D25 diameter 5.0 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "tilt",
+        "label": "Tilt of its disc",
+        "value": "34° from face-on",
+        "source": {
+          "catalogueId": "leroy-2021-phangs-alma",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+          "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4254: inclination 34.4 ± 1.0°, position angle 68.1 ± 0.5°",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "size",
+        "label": "Diameter",
+        "value": "19.2 kpc (5.0 arcmin at 25 mag per square arcsecond)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4254 = PGC 39578: centre, type Sc, D25 diameter 5.0 arcmin",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "SDSS · optical",
+        "thumbnail": "m99-dataset-optical.webp",
+        "volume": {
+          "objectId": "m99-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m99-layers-optical",
+          "path": "../../m99-layers/source/manifest.json",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4254: distance 13.1 ± 2.01 Mpc, from the compilation of Anand et al. (2021)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "HyperLEDA (Makarov et al. 2014), NGC4254 = PGC 39578: centre, type Sc, D25 diameter 5.0 arcmin",
+      "href": "http://atlas.obs-hp.fr/hyperleda/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4254: inclination 34.4 ± 1.0°, position angle 68.1 ± 0.5°",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+      "credit": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4254: distance 13.1 ± 2.01 Mpc, from the compilation of Anand et al. (2021)"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m86-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "m86",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5.097131472721954e+23,
+        -5.851682189980265e+22,
+        1.1793848973320327e+23
+      ],
+      "localToReferenceXyzw": [
+        0.46488530190597,
+        -0.4145683969861561,
+        -0.5206783065246473,
+        0.5838739602060957
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -43.88592663999354,
+          -43.34854794644274,
+          -0.0007487589682568796
+        ],
+        "max": [
+          42.900728559623325,
+          43.79636352440075,
+          0.0007659539151063655
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

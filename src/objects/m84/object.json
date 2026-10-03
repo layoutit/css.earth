@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m84",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "M84",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 933417468401138600
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M84",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 3684895134897,
+      "description": "An elliptical galaxy 17.9 million parsecs away.",
+      "aliases": [
+        "Messier 84",
+        "NGC 4374",
+        "PGC 40455"
+      ],
+      "order": 5284,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5.341574750214441e+23,
+        -5.864543268396683e+22,
+        1.2294627781621881e+23
+      ],
+      "presentationToReference": [
+        -0.9999579120535235,
+        0,
+        -0.009174645582119905,
+        -0.008417572747437286,
+        0.3977771559319137,
+        0.9174434471332603,
+        -0.003649464426338937,
+        -0.9174820620691818,
+        0.39776041430826525
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 3011024091616576000,
+      "bodyRadiusM": 933417468401138500000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "datasets/optical.webp",
+      "bytes": 4296,
+      "sha256": "1a9b53c09b9350c91de39928337fc47131222b57d72c645f48a832e69ea5da64"
+    },
+    {
+      "location": "prepared",
+      "filename": "image-layers.json",
+      "bytes": 9648,
+      "sha256": "7d7b48f6841af2d7135f305281598bfcba1ae3f18e8b71a646656b1ca4e254f9"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/z-detail.webp",
+      "bytes": 108278,
+      "sha256": "422477ff309c5259ced6d3887263e74fd09182a734efffb7b44f07ce88154375"
+    },
+    {
+      "location": "prepared",
+      "filename": "presentation.json",
+      "bytes": 1396,
+      "sha256": "2a0c88411ac0f4749412a5bb16f319b6d3f0580f0b1b1dba5c41e6801bb31c78"
+    }
+  ]
+}

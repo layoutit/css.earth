@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m86",
+  "card": {
+    "text": "An elliptical galaxy 17.1 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-tully2016aj-152-50t",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/152/50",
+        "label": "Tully, Courtois & Sorce (2016), Cosmicflows-3, AJ 152, 50; CDS J/AJ/152/50, table 3, PGC 40653: distance modulus 31.16 ± 0.24 mag",
+        "checked": "2026-10-02",
+        "locator": "distance: 17.06 Mpc (15.28 to 19.05)"
+      },
+      {
+        "catalogueId": "hyperleda-2014",
+        "url": "http://atlas.obs-hp.fr/hyperleda/",
+        "label": "HyperLEDA (Makarov et al. 2014), NGC4406 = PGC 40653: centre, type E, D25 diameter 11.5 arcmin",
+        "checked": "2026-10-02",
+        "locator": "type E, T = -4.8"
+      },
+      {
+        "catalogueId": "wikipedia-messier-86",
+        "url": "https://en.wikipedia.org/wiki/Messier_86",
+        "label": "Wikipedia, \"Messier 86\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373230547",
+        "quote": "Messier 86 is a bright elliptical or lenticular galaxy in the constellation of Virgo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, standing as a flat picture that faces the Sun.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 18.48 arcmin wide"
+      },
+      {
+        "catalogueId": "wikipedia-messier-86",
+        "url": "https://en.wikipedia.org/wiki/Messier_86",
+        "label": "Wikipedia, \"Messier 86\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373230547",
+        "quote": "It was discovered by Charles Messier in 1781."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M86 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image on a flat plane facing the Sun; nothing in it has depth.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 18.48 × 18.48 arcmin on NGC 4406"
+        }
+      ]
+    }
+  }
+}

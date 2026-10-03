@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m98",
+  "card": {
+    "text": "A spiral galaxy 17.6 million parsecs away, seen close to edge-on.",
+    "sources": [
+      {
+        "catalogueId": "publication-tully2016aj-152-50t",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/152/50",
+        "label": "Tully, Courtois & Sorce (2016), Cosmicflows-3, AJ 152, 50; CDS J/AJ/152/50, table 3, PGC 39028: distance modulus 31.23 ± 0.45 mag",
+        "checked": "2026-10-02",
+        "locator": "distance: 17.62 Mpc (14.32 to 21.68)"
+      },
+      {
+        "catalogueId": "hyperleda-2014",
+        "url": "http://atlas.obs-hp.fr/hyperleda/",
+        "label": "HyperLEDA (Makarov et al. 2014), NGC4192 = PGC 39028: inclination 90°, major-axis position angle 152.4°, from its outline at 25 mag per square arcsecond",
+        "checked": "2026-10-02",
+        "locator": "inclination 90 deg"
+      },
+      {
+        "catalogueId": "wikipedia-messier-98",
+        "url": "https://en.wikipedia.org/wiki/Messier_98",
+        "label": "Wikipedia, \"Messier 98\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373230578",
+        "quote": "Messier 98, M98 or NGC 4192 is an intermediate spiral galaxy about 44.4 million light-years away in slightly northerly Coma Berenices, about 6° to the east of the bright star Denebola."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, standing as a flat picture that faces the Sun.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 17.64 arcmin wide"
+      },
+      {
+        "catalogueId": "wikipedia-messier-98",
+        "url": "https://en.wikipedia.org/wiki/Messier_98",
+        "label": "Wikipedia, \"Messier 98\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373230578",
+        "quote": "It was discovered by French astronomer Pierre Méchain on 1781, along with nearby M99 and M100, and was catalogued by compatriot Charles Messier 29 days later in his Catalogue des Nébuleuses & des amas d'Étoiles."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M98 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image on a flat plane facing the Sun; nothing in it has depth.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 17.64 × 17.64 arcmin on NGC 4192"
+        }
+      ]
+    }
+  }
+}

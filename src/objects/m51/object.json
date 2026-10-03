@@ -1,0 +1,100 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m51",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Whirlpool Galaxy",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 615901245265676900
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Whirlpool Galaxy",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 1720382963409,
+      "description": "A spiral galaxy 8.3 million parsecs away, tilted 33° to our line of sight.",
+      "aliases": [
+        "M51",
+        "Messier 51",
+        "Whirlpool",
+        "NGC 5194",
+        "Question Mark Galaxy",
+        "PGC 47404"
+      ],
+      "order": 5251,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1.6160435704394014e+23,
+        -6.683810802151164e+22,
+        1.8882204806372494e+23
+      ],
+      "presentationToReference": [
+        -0.9963809154347066,
+        0,
+        0.08500041974893978,
+        0.07798636038800334,
+        0.3977771559319137,
+        0.9141616168994137,
+        0.03381122522075198,
+        -0.9174820620691818,
+        0.3963375667664542
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1986778210534442000,
+      "bodyRadiusM": 615901245265677000000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

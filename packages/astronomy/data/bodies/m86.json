@@ -1,0 +1,28 @@
+{
+  "id": "m86",
+  "classification": "galaxy",
+  "order": 5286,
+  "physical": {
+    "name": "M86",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M86 is recorded: it is an extended galaxy, and its package frames it at 44,940 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 186.549081,
+    "declinationDegrees": 12.94581,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 17060823.890031245,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": -291.8,
+    "sources": {
+      "position": "HyperLEDA (Makarov et al. 2014), NGC4406 = PGC 40653: centre, type E, D25 diameter 11.5 arcmin (http://atlas.obs-hp.fr/hyperleda/)",
+      "distance": "Tully, Courtois & Sorce (2016), Cosmicflows-3, AJ 152, 50; CDS J/AJ/152/50, table 3, PGC 40653: distance modulus 31.16 ± 0.24 mag (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/152/50)",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "HyperLEDA (Makarov et al. 2014), NGC4406 = PGC 40653: heliocentric radial velocity -291.8 ± 18.7 km/s (http://atlas.obs-hp.fr/hyperleda/)"
+    }
+  }
+}

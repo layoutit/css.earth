@@ -1,0 +1,28 @@
+{
+  "id": "m99",
+  "classification": "galaxy",
+  "order": 5299,
+  "physical": {
+    "name": "M99",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M99 is recorded: it is an extended galaxy, and its package frames it at 11,510 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 184.706731,
+    "declinationDegrees": 14.416792,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 13100000,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 2407.4,
+    "sources": {
+      "position": "HyperLEDA (Makarov et al. 2014), NGC4254 = PGC 39578: centre, type Sc, D25 diameter 5.0 arcmin (http://atlas.obs-hp.fr/hyperleda/)",
+      "distance": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4254: distance 13.1 ± 2.01 Mpc, from the compilation of Anand et al. (2021) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43)",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "HyperLEDA (Makarov et al. 2014), NGC4254 = PGC 39578: heliocentric radial velocity 2407.4 ± 8 km/s (http://atlas.obs-hp.fr/hyperleda/)"
+    }
+  }
+}

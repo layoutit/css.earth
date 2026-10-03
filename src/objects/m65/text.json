@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m65",
+  "card": {
+    "text": "A spiral galaxy 12.7 million parsecs away, seen close to edge-on.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 34612: distance modulus 30.525 ± 0.39 mag",
+        "checked": "2026-10-02",
+        "locator": "distance: 12.74 Mpc (10.64 to 15.24)"
+      },
+      {
+        "catalogueId": "hyperleda-2014",
+        "url": "http://atlas.obs-hp.fr/hyperleda/",
+        "label": "HyperLEDA (Makarov et al. 2014), NGC3623 = PGC 34612: inclination 90°, major-axis position angle 173.33°, from its outline at 25 mag per square arcsecond",
+        "checked": "2026-10-02",
+        "locator": "inclination 90 deg"
+      },
+      {
+        "catalogueId": "wikipedia-messier-65",
+        "url": "https://en.wikipedia.org/wiki/Messier_65",
+        "label": "Wikipedia, \"Messier 65\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1372953432",
+        "quote": "Messier 65 is an intermediate spiral galaxy about 35 million light-years away in the constellation Leo, within its highly equatorial southern half."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, standing as a flat picture that faces the Sun.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 12.24 arcmin wide"
+      },
+      {
+        "catalogueId": "wikipedia-messier-65",
+        "url": "https://en.wikipedia.org/wiki/Messier_65",
+        "label": "Wikipedia, \"Messier 65\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1372953432",
+        "quote": "It was discovered by Charles Messier in 1780."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M65 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image on a flat plane facing the Sun; nothing in it has depth.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 12.24 × 12.24 arcmin on NGC 3623"
+        }
+      ]
+    }
+  }
+}

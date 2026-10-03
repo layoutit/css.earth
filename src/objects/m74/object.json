@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m74",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "M74",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 506668258880882560
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M74",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 1962569897314,
+      "description": "A spiral galaxy 9.5 million parsecs away, tilted 9° to our line of sight.",
+      "aliases": [
+        "Messier 74",
+        "NGC 628",
+        "PGC 5974"
+      ],
+      "order": 5274,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.5775047022908e+23,
+        1.156979929157048e+23,
+        7.985890156430844e+22
+      ],
+      "presentationToReference": [
+        0.881713000042211,
+        0,
+        0.47178616507541216,
+        0.43285534358910055,
+        0.3977771559319137,
+        -0.8089558614319323,
+        0.1876657589517218,
+        -0.9174820620691818,
+        -0.350725289504986
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1634413738325427500,
+      "bodyRadiusM": 506668258880882540000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

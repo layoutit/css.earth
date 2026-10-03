@@ -1,0 +1,28 @@
+{
+  "id": "m98",
+  "classification": "galaxy",
+  "order": 5298,
+  "physical": {
+    "name": "M98",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M98 is recorded: it is an extended galaxy, and its package frames it at 44,300 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 183.451428,
+    "declinationDegrees": 14.899971,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 17619760.46411631,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": -118.2,
+    "sources": {
+      "position": "HyperLEDA (Makarov et al. 2014), NGC4192 = PGC 39028: centre, type SABb, D25 diameter 11.0 arcmin (http://atlas.obs-hp.fr/hyperleda/)",
+      "distance": "Tully, Courtois & Sorce (2016), Cosmicflows-3, AJ 152, 50; CDS J/AJ/152/50, table 3, PGC 39028: distance modulus 31.23 ± 0.45 mag (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/152/50)",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "HyperLEDA (Makarov et al. 2014), NGC4192 = PGC 39028: heliocentric radial velocity -118.2 ± 11.5 km/s (http://atlas.obs-hp.fr/hyperleda/)"
+    }
+  }
+}

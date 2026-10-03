@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m100",
+  "card": {
+    "text": "A spiral galaxy 15.2 million parsecs away, tilted 39° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4321: distance 15.21 ± 0.5 Mpc, from the compilation of Anand et al. (2021)",
+        "checked": "2026-10-02",
+        "locator": "distance: 15.21 Mpc (14.71 to 15.71)"
+      },
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4321: inclination 38.5 ± 2.4°, position angle 156.2 ± 1.7°",
+        "checked": "2026-10-02",
+        "locator": "inclination 38.5 deg"
+      },
+      {
+        "catalogueId": "wikipedia-messier-100",
+        "url": "https://en.wikipedia.org/wiki/Messier_100",
+        "label": "Wikipedia, \"Messier 100\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373230521",
+        "quote": "Messier 100 is a grand design intermediate spiral galaxy in the constellation of Coma Berenices."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, laid flat on its measured disc.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 9.78 arcmin wide"
+      },
+      {
+        "catalogueId": "wikipedia-messier-100",
+        "url": "https://en.wikipedia.org/wiki/Messier_100",
+        "label": "Wikipedia, \"Messier 100\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373230521",
+        "quote": "It is one of the brightest and largest galaxies in the Virgo Cluster and is approximately 55 million light-years from the Milky Way, about 166,000 light-years in diameter."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M100 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 9.78 × 9.78 arcmin on NGC 4321"
+        }
+      ]
+    }
+  }
+}

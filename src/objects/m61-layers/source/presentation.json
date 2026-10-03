@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m61-layers",
+  "name": "M61",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m61-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m61-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m61-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "SDSS · optical",
+      "title": "M61 in visible light",
+      "description": "The Sloan Digital Sky Survey view of M61 with Milky Way foreground stars removed and the whole-galaxy color tied to RC3's measured B-V of 0.53, on a disc tilted 24°.",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "detail": "3000 × 3000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "SDSS g r i"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3000 × 3000"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "11.04 × 11.04 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m61-layers/source/source.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.184&projection=TAN&coordsys=icrs&ra=185.478414&dec=4.473776&format=jpg"
+      }
+    }
+  ]
+}

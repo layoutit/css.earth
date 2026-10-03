@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m105-layers",
+  "entries": [
+    {
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
+      "status": "included",
+      "finding": "A 3000 x 3000 px hips2fits cutout of CDS/P/SDSS9/color, 7.80 arcmin wide, 1.6 times NGC 3379's D25 diameter. Its sky level is (17, 14, 9) of 255.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "https://www.sdss.org/collaboration/#image-use"
+      ]
+    },
+    {
+      "id": "observatory-photographs",
+      "subject": "Observatory photographs of M105",
+      "status": "deferred",
+      "finding": "Not surveyed: the Messier galaxies of this batch share one survey so that they match. An observatory photograph with sky coordinates would show more detail.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+      ],
+      "revisitWhen": "A whole-galaxy photograph with sky coordinates is published under an attribution licence."
+    }
+  ]
+}
