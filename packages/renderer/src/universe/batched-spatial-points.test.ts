@@ -384,6 +384,15 @@ test('a field left unresolved at mount resolves its points in slices and draws a
   assert.equal(field.fill(7), 2);
   assert.equal(drawn(), 16);
   assert.equal(field.fill(7), 0, 'nothing left');
+  // A limit is a whole number of points however the frame's budget divides: half a point resolves none of the next.
+  const halves = mountBatchedSpatialPoints({ ...options, host: parseHTML('<div id="host"></div>').document.getElementById('host')!, deferFill: true });
+  assert.equal(halves.fill(2.5), 2);
+  assert.equal(halves.fill(.5), 1, 'and a slice always advances');
+  let left = 13; while (left > 0) left -= halves.fill(3.5);
+  assert.equal(left, 0);
+  halves.publish(publication);
+  assert.equal(halves.stats().visiblePoints, 16);
+  halves.destroy();
   // The same field resolved at mount paints the same paths.
   const whole = mountBatchedSpatialPoints({ ...options, host: parseHTML('<div id="host"></div>').document.getElementById('host')! });
   whole.publish(publication);

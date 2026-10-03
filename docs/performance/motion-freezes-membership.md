@@ -97,17 +97,25 @@ page makes while it coasts. It exits 1 on anything outside this table.
 ## A zoom's change of scene waits for rest
 
 A zoom that crosses a threshold (out of a body into its system, from a moon out to its planet's system, into or out of
-an object seen from inside) hands the view to another scene. The world shows the new selection at the crossing: its
-scope is a few policy flags (`setOverview`). The scene, its card and its address are membership, so they change when the
-camera rests (`site/scene/camera-handover.mts`): the settle time after the motion signal reports no motion. Until then
+an object seen from inside) changes the selection, and often the scene. The world shows the new selection at the
+crossing: its scope is a few policy flags (`setOverview`). The scene, its card and its address are membership, so they
+change when the camera rests (`site/scene/camera-handover.mts`): the settle time after the motion signal reports no
+motion. That holds for every crossing, one that keeps the mounted scene included: a body and its own system share a
+scene, and the card of the one replaces the card of the other at rest too. Until then
 the mounted scene keeps the camera, and its far limit stays open while a wider scene exists (`setZoomOutOpen`). A zoom
 that crosses several thresholds without resting replaces the scene once, with the last. The new scene's files are
-requested as the camera comes to rest, not at each crossing. A camera that comes back before it rests keeps its scene.
+requested as the camera comes to rest, not at each crossing. What the zoom needs to go on is read at the crossing: the
+entries of the objects the crossed system's star is inside, a few kilobytes each. Without them a zoom out of a planet
+followed nothing past its star's system until the camera rested, and out of TRAPPIST-1 e the star's scene was mounted at
+rest only to be replaced by the Observable Universe's (2026-10-03). A camera that comes back before it rests keeps its
+scene.
 A flight's landing is already at rest and hands over at once.
 
 A zoom in toward a body does not wait for rest: the world draws a body it has not mounted as a point, and only the
 body's own scene draws it larger. The pending scene is mounted as soon as its body is a pixel across, moving or not.
-Without that, a zoom from the Nearby Universe in to the Sun showed no Sun until the camera stopped (2026-10-03).
+Without that, a zoom from the Nearby Universe in to the Sun showed no Sun until the camera stopped (2026-10-03). A zoom
+out waits for rest all the same: the system the mounted body belongs to is around the camera already, and from a planet
+of TRAPPIST-1 its star is a disc.
 
 Measured 2026-10-03. In headless Chrome, zooming out of Earth with the swap held until rest, the page before and after
 the swap differed in 2 of 2,774,880 pixels at Earth to the Solar System (one channel, by 2) and in 0 at the next four

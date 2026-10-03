@@ -125,9 +125,11 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     if (cells && cells.of.length !== points.length) throw new TypeError(`${className}: ${cells.of.length} cells for ${points.length} points.`);
     const part = { points, cells, drawnCount, keepFraction, hidden, paint, positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order,
       boxes: cells?.boxes ?? new Float64Array(6), widestMargin: 0, culled: new Int32Array(cellCount), ready: false,
-      /** Resolve up to `limit` more of the part's points, in order; the last slice orders them by cell and readies the part. */
+      /** Resolve up to `limit` more of the part's points, in order; the last slice orders them by cell and readies the part.
+       * A whole number of them, and one or more: the pacer's budget is halved after a slow frame, and half a point left
+       * the next slice starting between two points, so the bank failed to load (2026-10-03). */
       resolve(limit: number): number {
-        const from = resolved, end = Math.min(points.length, from + limit);
+        const from = resolved, end = Math.min(points.length, from + Math.max(1, Math.floor(limit)));
         for (let index = from; index < end; index++) {
           const point = points[index]!;
           positions.set(point.positionUnits, index * 3);
@@ -355,8 +357,9 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     /** Resolve up to `limit` more points of the parts still waiting (deferFill), in part order; 0 once every part is
      * ready. A part that becomes ready draws on the next publication. */
     fill(limit: number): number {
+      const whole = Math.max(1, Math.floor(limit));
       let done = 0;
-      for (const part of parts) { if (part.ready) continue; done += part.resolve(limit - done); if (done >= limit) break; }
+      for (const part of parts) { if (part.ready) continue; done += part.resolve(whole - done); if (done >= whole) break; }
       return done;
     },
     /** The whole field's counts from the last paint. */

@@ -3,14 +3,14 @@ import { readSystemViewFile } from './system-view-file.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { selectionAtCamera, watchOverviewSelection } from '../overview-selection.mts';
+import { selectionAtCamera, watchCameraSelection } from '../overview-selection.mts';
+import { subjectOf, type SceneSubject } from '../scene/scene-subject.mts';
 import { systemById } from '../object-systems.mts';
 import { type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { worldCameraFromCenteredPresentation, type WorldCameraPose } from '@cssearth/engine';
 
 import { required, objectFixture, navigationFixture } from './navigation-test-values.mts';
 import type { ObjectWorldNavigationListener } from '@cssearth/renderer/runtime/world-navigation-types.ts';
-import type { OverviewSelection } from '../overview-selection.mts';
 import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, readSystemViewFile)));
@@ -124,8 +124,8 @@ test('camera sampling settles before changing selection and releases timers and 
   let listener: ObjectWorldNavigationListener | null = null;
   const getListener = () => required(listener);
   let serial = 0, available = true;
-  const timers = new Map<number, () => void>(), changes: OverviewSelection[] = [];
-  const dispose = watchOverviewSelection({ objects, systems: objects, objectId: 'ceres', getOverview: () => false,
+  const timers = new Map<number, () => void>(), changes: SceneSubject[] = [];
+  const dispose = watchCameraSelection({ objects, systems: objects, objectId: 'ceres', getSelection: () => ({ objectId: 'ceres' }),
     isAvailable: () => available, onChange: next => changes.push(next),
     navigation: { ...navigationFixture(ceres, () => camera(ceres, 100), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => { listener = null; }; } },
     windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
@@ -159,9 +159,9 @@ test('camera sampling settles before changing selection and releases timers and 
 test('continuous outward camera updates cannot postpone the Sun overview flip, and clearly past the exit it flips at once', () => {
   let listener: ObjectWorldNavigationListener | null = null;
   const getListener = () => required(listener);
-  const timers = new Map<number, () => void>(), changes: OverviewSelection[] = [];
+  const timers = new Map<number, () => void>(), changes: SceneSubject[] = [];
   let serial = 0;
-  const dispose = watchOverviewSelection({ objects, systems: objects, objectId: 'sun', getOverview: () => false,
+  const dispose = watchCameraSelection({ objects, systems: objects, objectId: 'sun', getSelection: () => ({ objectId: 'sun' }),
     isAvailable: () => true, onChange: next => changes.push(next),
     navigation: { ...navigationFixture(ceres, () => camera(ceres, 100), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => {}; } },
     windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
@@ -171,7 +171,7 @@ test('continuous outward camera updates cannot postpone the Sun overview flip, a
   // A quarter past the exit distance the camera is leaving: the flip starts without waiting for the timer, so it is done
   // before the zoom reaches the scene's far limit.
   for (let step = 20; step < 100; step++) getListener()(camera(sun, (101 + step) * au), viewport);
-  assert.deepEqual(changes, [{ objectId: 'sun', overview: true }], 'once, however long the zoom goes on');
+  assert.deepEqual(changes, [subjectOf('sun', 'system')], 'once, however long the zoom goes on');
   assert.equal(timers.size, 0, 'and its timer is gone');
   dispose();
 });
@@ -179,17 +179,17 @@ test('continuous outward camera updates cannot postpone the Sun overview flip, a
 test('a crossing out of a body is reported once, and so is the camera coming back inside', () => {
   let listener: ObjectWorldNavigationListener | null = null;
   const getListener = () => required(listener);
-  const timers = new Map<number, () => void>(), changes: [OverviewSelection, boolean][] = [];
+  const timers = new Map<number, () => void>(), changes: [SceneSubject, boolean][] = [];
   let serial = 0, returns = 0;
   // The body's scene stays mounted after the report (its system's scene waits for the camera to rest), so the watcher
   // goes on answering for the body.
-  const dispose = watchOverviewSelection({ objects, systems: objects, objectId: 'ceres', getOverview: () => false,
+  const dispose = watchCameraSelection({ objects, systems: objects, objectId: 'ceres', getSelection: () => ({ objectId: 'ceres' }),
     isAvailable: () => true, onChange: (next, landed) => changes.push([next, landed]), onReturn: () => { returns++; },
     navigation: { ...navigationFixture(ceres, () => camera(ceres, 100), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => {}; } },
     windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
   getListener()(camera(sun, 101 * au), viewport);
   [...timers.values()][0]!(); timers.clear();
-  assert.deepEqual(changes, [[{ objectId: 'sun', overview: true }, false]], 'the crossing, once it has lasted');
+  assert.deepEqual(changes, [[subjectOf('sun', 'system'), false]], 'the crossing, once it has lasted');
   for (const range of [110, 400, 5000]) getListener()(camera(sun, range * au), viewport);
   assert.equal(changes.length, 1, 'not again while the camera stays outside');
   assert.equal(timers.size, 0, 'and no timer waits on it');
@@ -200,5 +200,27 @@ test('a crossing out of a body is reported once, and so is the camera coming bac
   assert.equal(returns, 1, 'told once');
   for (let step = 0; step < 60; step++) getListener()(camera(sun, (101 + step) * au), viewport);
   assert.equal(changes.length, 2, 'and the next crossing is reported again');
+  dispose();
+});
+
+test("an approach to the system's star is reported once from its overview, and withdrawn when the camera backs away", () => {
+  let listener: ObjectWorldNavigationListener | null = null;
+  const getListener = () => required(listener);
+  const timers = new Map<number, () => void>(), changes: SceneSubject[] = [];
+  let serial = 0, returns = 0;
+  // The star's system stays the committed selection after the report: the star's card waits for the camera to rest.
+  const dispose = watchCameraSelection({ objects, systems: objects, objectId: 'sun', getSelection: () => subjectOf('sun', 'system'),
+    isAvailable: () => true, onChange: next => changes.push(next), onReturn: () => { returns++; },
+    navigation: { ...navigationFixture(sun, () => camera(sun, 1281), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => {}; } },
+    windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
+  const settle = () => { const pending = [...timers.values()]; timers.clear(); for (const run of pending) run(); };
+  getListener()(camera(sun, 100), viewport); settle();
+  assert.deepEqual(changes, [{ objectId: 'sun' }]);
+  getListener()(camera(sun, 90), viewport); getListener()(camera(sun, 60), viewport);
+  assert.deepEqual([changes.length, timers.size, returns], [1, 0, 0], 'not again while the camera stays close');
+  getListener()(camera(sun, 1281), viewport);
+  assert.equal(returns, 1, 'backed away before it rested');
+  getListener()(camera(sun, 100), viewport); settle();
+  assert.equal(changes.length, 2, 'and the next approach is reported again');
   dispose();
 });
