@@ -15,6 +15,8 @@ export interface ObjectWorldNavigation {
   holdPresentation?(): () => void;
   capture(): WorldCameraPose;
   apply(pose: WorldCameraPose, options?: { signal: AbortSignal; departing?: boolean }): void | Promise<boolean>;
+  /** Turn the camera sideways around the body by `degrees` at a steady rate, keeping its distance (object-orbit.ts). */
+  turn?(degrees: number, options: { durationMilliseconds: number; signal: AbortSignal }): Promise<{ completed: boolean }>;
   setZoomOutCentering?(enabled: boolean): void;
   /** A wider scene can take the camera over as it zooms out: this scene's own far limit does not stop the zoom. */
   setZoomOutOpen?(open: boolean): void;
