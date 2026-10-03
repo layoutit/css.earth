@@ -4,6 +4,14 @@ import { startupFetch } from './startup-requests.mts';
  * directory decodes the object from it, and the world reads from it which holder has the body. A failed read is
  * forgotten, so the next reader asks again. */
 const entries = new Map<string, Promise<unknown | null>>();
+// Every entry read so far, and who is told of each: the world declares the banks an entry carries (`banks`).
+const read = new Map<string, unknown>(), listeners = new Set<(id: string, entry: unknown) => void>();
+/** Calls `listener` with each entry read so far, then with each one read later; returns the unsubscribe. */
+export function onObjectEntry(listener: (id: string, entry: unknown) => void): () => void {
+  for (const [id, entry] of read) listener(id, entry);
+  listeners.add(listener);
+  return () => { listeners.delete(listener); };
+}
 export function readObjectEntry(id: string): Promise<unknown | null> {
   let entry = entries.get(id);
   if (!entry) {
@@ -11,7 +19,11 @@ export function readObjectEntry(id: string): Promise<unknown | null> {
       const response = await startupFetch(`/objects/${encodeURIComponent(id)}/entry.json`);
       if (response.status === 404) return null;
       if (!response.ok) throw new Error(`Object entry request for ${id} failed: ${response.status}.`);
-      return response.json() as Promise<unknown>;
+      const value: unknown = await response.json();
+      // Told before any reader continues: a scene mounts only after its entry is read, so its banks are declared by then.
+      read.set(id, value);
+      for (const listener of listeners) listener(id, value);
+      return value;
     })();
     entry.catch(() => { if (entries.get(id) === entry) entries.delete(id); });
     entries.set(id, entry);

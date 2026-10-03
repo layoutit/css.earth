@@ -1,4 +1,4 @@
-import { parsePreparedWorldContextPlan, validatePreparedCssVolume, DEFAULT_POINT_VISIBILITY, type PreparedWorldContext, type PreparedWorldCameraFrame, type PreparedAssets, type PreparedCssSurfaceShell, type WorldCameraPose } from '@cssearth/objects';
+import { parsePreparedWorldContextPlan, validatePreparedCssVolume, DEFAULT_POINT_VISIBILITY, type PreparedWorldContext, type PreparedWorldCameraFrame, type PreparedAssets, type PreparedCssSurfaceShell, type WorldCameraPose, type DensityVolumeFrame } from '@cssearth/objects';
 
 import { createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
@@ -55,12 +55,16 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   // a system was added starts with that system's too.
   const annotationPriorities: Record<string, number> = { ...initialPriorities };
   const annotationOpacities: Record<string, { line: number; label: number }> = { ...initialOpacities };
-  if (volumeDatasetBanks.length && !datasetBillboards) throw new TypeError('Volume dataset banks require their prepared billboards.');
-  const datasetFacts = volumeDatasetBanks.map(bank => {
-    const facts = datasetBillboards!.plan.banks.get(bank.id);
+  const factsOf = (bank: { id: string }) => {
+    if (!datasetBillboards) throw new TypeError(`${bank.id}: volume dataset banks require their prepared billboards.`);
+    const facts = datasetBillboards.plan.banks.get(bank.id);
     if (!facts) throw new TypeError(`${bank.id}: dataset billboards are missing; run pnpm prepare:dataset-billboards.`);
     return facts;
-  });
+  };
+  // Declared now and by `addBanks`: each mount starts with the banks declared so far and is told of later ones.
+  const declaredVolumes = [...volumeDatasetBanks], declaredPoints = [...pointBanks];
+  const datasetFacts = declaredVolumes.map(factsOf);
+  const bankMounts = new Set<{ add(volumes: typeof declaredVolumes, points: typeof declaredPoints): void }>();
   if (!Number.isSafeInteger(warmVolumeDatasetDomNodeBudget) || warmVolumeDatasetDomNodeBudget < 0) {
     throw new TypeError('Warm volume dataset DOM node budget must be a non-negative integer.');
   }
@@ -93,11 +97,12 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   });
   // A bank's frame is validated against its authored descriptor at load time (loadPreparedVolumeDatasets);
   // this only catches a descriptor wired to the wrong universe before any network request is made.
-  for (const bank of [...declaredImageLayers, ...volumeDatasetBanks]) {
+  const checkFrame = (bank: { id: string; frame: DensityVolumeFrame }) => {
     if (bank.frame.referenceFrame !== plan.frame.referenceFrame || bank.frame.epochJdTt !== plan.frame.epochJdTt) {
-      throw new TypeError('Prepared volume dataset banks must share the universe reference frame and epoch.');
+      throw new TypeError(`Prepared volume dataset bank ${bank.id} must share the universe reference frame and epoch.`);
     }
-  }
+  };
+  for (const bank of [...declaredImageLayers, ...declaredVolumes]) checkFrame(bank);
   const assets: PreparedAssets = {
     entries: [...entries, ...pointEntries, ...shellEntries, ...imageEntries],
     pools: [{ id: pool, retention: 'mount', capacity: entries.length, concurrency: 8, reuse: false, decoding: 'async' },
@@ -135,6 +140,18 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       Object.assign(annotationPriorities, annotations.annotationPriorities); Object.assign(annotationOpacities, annotations.annotationOpacities);
       for (const layer of layers) layer.addBodies(plan, nextSprites, annotations);
       for (const planner of planners) planner.extend(plan, annotations.annotationPriorities);
+    },
+    /** Declare banks after the universe is made, as `addSystems` adds bodies: a bank drawn only for the bodies that hold
+     * it arrives with them (a volume dataset bank and a package of catalogue dots). Mounted layers add them after their
+     * own; a known id is ignored. */
+    addBanks({ volumeDatasetBanks: volumes = [], pointBanks: points = [] }: Pick<PreparedUniverseOptions, 'volumeDatasetBanks' | 'pointBanks'>) {
+      const known = new Set([...declaredImageLayers, ...declaredVolumes, ...declaredPoints].map(bank => bank.id));
+      const freshVolumes = volumes.filter(bank => !known.has(bank.id)), freshPoints = points.filter(bank => !known.has(bank.id));
+      for (const bank of freshVolumes) checkFrame(bank);
+      const facts = freshVolumes.map(factsOf);
+      declaredVolumes.push(...freshVolumes); datasetFacts.push(...facts); declaredPoints.push(...freshPoints);
+      if (!freshVolumes.length && !freshPoints.length) return;
+      for (const mounted of bankMounts) mounted.add(freshVolumes, freshPoints);
     },
     mount(stage: HTMLElement, { requestPublication, presentationHost = stage }: {
       requestPublication?: () => boolean;
@@ -188,7 +205,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const billboardTextures = own(createVolumeTextureReadiness(() => { requestPublication?.(); }));
         const prepareBillboardAtlas = () => datasetBillboards !== undefined && billboardTextures.ready([datasetBillboards.atlasUrl]);
         const datasets = createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lifetime,
-          declarations: volumeDatasetBanks, facts: datasetFacts, frame: plan.frame, visibility: datasetVisibility,
+          declarations: [...declaredVolumes], facts: [...datasetFacts], frame: plan.frame, visibility: datasetVisibility,
           billboards: datasetBillboards, load: loadVolumeDataset, warmDomNodeBudget: warmVolumeDatasetDomNodeBudget, requestPublication, prepareBillboardAtlas });
         // A cut-open mesh draws the inside of its far wall here, behind the points it holds; its outer shell stays over them.
         const meshInterior = document.createElement('span'); meshInterior.hidden = true; root.insertBefore(meshInterior, end);
@@ -206,8 +223,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             fetchJson: fetchPreparedJson, resolveResource: mesh.resolveResource, cutaway: mesh.cutaway?.() ?? true,
             hidden: mesh.hidden?.() ?? false, hiddenCaption: mesh.hiddenCaption })) }));
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime,
-          declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: volumeDatasetBanks,
-          pointBanks,
+          declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: [...declaredVolumes],
+          pointBanks: [...declaredPoints],
           initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardAtlas });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];
@@ -229,7 +246,20 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // The bank the mounted scene's dataset shows as its companion: its subject, drawn whole while it is shown.
         let companion: string | null = null;
         // The banks that are a scene's whole subject: a galaxy's image layers, and a volume that is not attached to a body.
-        const subjectBanks = new Set([...declaredImageLayers.map(bank => bank.id), ...volumeDatasetBanks.filter((_, index) => !datasetFacts[index]!.attached).map(bank => bank.id)]);
+        const subjectBanks = new Set([...declaredImageLayers.map(bank => bank.id), ...declaredVolumes.filter((_, index) => !datasetFacts[index]!.attached).map(bank => bank.id)]);
+        // Banks declared after this mount (`addBanks`) join its layers, and a free cloud becomes a subject as at mount.
+        const bankMount = { add(volumes: typeof declaredVolumes, points: typeof declaredPoints) {
+          if (lifetime.disposed) return;
+          for (const bank of volumes) {
+            const facts = factsOf(bank);
+            datasets.declare(bank, facts);
+            if (!facts.attached) subjectBanks.add(bank.id);
+          }
+          catalogBanks.addPointBanks(points);
+          requestPublication?.();
+        } };
+        bankMounts.add(bankMount);
+        lifetime.onDispose(() => { bankMounts.delete(bankMount); });
         // A level's context packages are banks too, for the object whose datasets name them (the Milky Way's volume).
         const contextFocusBanks = new Map(contextBanks.map(id => [id, createContextFocusBank(id)]));
         const bankOf = (id: string) => datasets.focusBank(id) ?? catalogBanks.focusBank(id) ?? contextFocusBanks.get(id) ?? null;
