@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 import { parseRuntimeManifest } from './public-runtime-assets.ts';
 import { sha256 } from '@cssearth/core/node';
-import { readInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
+import { bakedPreparedFiles, readInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
 import type { RuntimeManifest } from './public-runtime-assets.ts';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -32,6 +32,20 @@ export async function unownedPublicFiles(id: string, objectDirectory: string, pu
   const known = new Set(current === null ? [] : parseRuntimeManifest(current, id).assets?.map(asset => asset.filename) ?? []);
   const entries = await readdir(publicDirectory, { withFileTypes: true }).catch(error => { if (hasErrorCode(error, 'ENOENT')) return []; throw error; });
   return entries.filter(entry => !entry.isFile() || !known.has(entry.name)).map(entry => entry.name).sort();
+}
+
+/**
+ * Baked files under an object's `prepared/` its inventory does not list: leftovers of an earlier preparation (a moved
+ * dataset's folder, a file no step writes now). The pins after a run inventory the whole directory and would publish them,
+ * so a run checks first. `shared` names the files a shared step writes into many packages and pins itself. An object with
+ * no inventory has published nothing to compare with.
+ */
+export async function unownedPreparedFiles(id: string, objectDirectory: string, preparedDirectory: string, shared: (filename: string) => boolean = () => false): Promise<string[]> {
+  const current = await readInventory(id, objectDirectory);
+  if (current === null) return [];
+  const known = new Set(current.assets.filter(asset => asset.location === 'prepared').map(asset => asset.filename));
+  const baked = await bakedPreparedFiles(preparedDirectory, id).catch(error => { if (hasErrorCode(error, 'ENOENT')) return [] as string[]; throw error; });
+  return baked.filter(filename => !known.has(filename) && !shared(filename)).sort();
 }
 
 /** Preflight images and describe their writes; metadata joins the same set below. */

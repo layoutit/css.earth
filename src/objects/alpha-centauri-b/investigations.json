@@ -11,6 +11,15 @@
         "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Cen+B",
         "https://arxiv.org/abs/1610.06185"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the power law I(mu) = mu^0.1545 that Kervella et al. (2017), A&A 597, A137 fit to the star's resolved disc (VLTI/PIONIER H band, 1.65 um; not a visible band).",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201629505"
+      ]
     }
   ]
 }

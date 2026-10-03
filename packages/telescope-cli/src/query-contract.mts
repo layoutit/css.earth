@@ -3,7 +3,7 @@ import type { ProductKind, CapabilityRequest } from './recipe-request.mts';
 import type { VoInputs, VoProductCandidate } from './vo/bridge.mts';
 import type { QualifiedObservation } from './qualified-observations.mts';
 import type { RequestSatisfaction } from './request-satisfaction.mts';
-import type { ResolutionAssumption } from '@cssearth/bake/objects/layers/observation';
+import type { ResolutionAssumption } from '@cssearth/objects';
 import type { SourceIntakeIssue } from './source-intake.mts';
 import type { LoadedSourceProduct } from './source-products.mts';
 import type { QualificationAction } from './qualification-routes.mts';

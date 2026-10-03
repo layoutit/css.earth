@@ -15,14 +15,6 @@
     "reason": "Objects owns source manifests; the pre-build body-reference check cannot load built objects, and preserved Python distant-worlds authoring cannot import TypeScript. python-schema-identifiers.test.ts pins the pre-build check and both Python declarations to SOURCE_MANIFEST_SCHEMA."
   },
   {
-    "schema": "cssearth-body-map@1",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Needs the resolution-evidence subformat and its pure compatibility checks extracted into objects first, then the product record; map combining, resolution calculation and sampled arrays stay in bake (about 26 files)."
-  },
-  {
     "schema": "cssearth-display-orientation@1",
     "owners": [
       "packages/bake"
@@ -59,15 +51,6 @@
       "packages/bake"
     ],
     "reason": "Preserved packages/bake/authoring/distant-worlds/author.py writes text read by site; Python cannot import TypeScript. python-schema-identifiers.test.ts pins the writer literal to objects."
-  },
-  {
-    "schema": "cssearth-raster-recipe@2",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli",
-      "site"
-    ],
-    "reason": "Parser resolves lighting and the photometric law through bake; needs the pure nested recipe contracts split from preparation-time resolution and moved to objects first, then the top-level recipe (about 29 files plus closure)."
   },
   {
     "schema": "cssearth-star-removal@1",

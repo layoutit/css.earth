@@ -4,7 +4,6 @@
 // composite in `packages/telescope-cli/src/sky/`).
 export * from './body-maps/body-map-product.ts';
 export * from './body-maps/body-map.ts';
-export * from './body-maps/resolution-evidence.ts';
 export * from './body-maps/resolved-disc-map.ts';
 export * from './body-maps/spectral-cube.ts';
 export * from './controlled-map-mosaic.ts';

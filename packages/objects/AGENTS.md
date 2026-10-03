@@ -184,3 +184,10 @@ Circumstellar reconstruction identifiers live in `src/volume/circumstellar-recon
 UVFITS request/response types and pure validation live in `src/prepared-data/pyuvdata-uvfits.ts`; process and toolchain handling stay in telescope.
 Volume source-manifest identifiers live in `src/prepared-data/volume-source-manifest.ts`; source parsing and restoration stay with callers.
 Volume presentation-source identifiers and pure preview/dataset/presentation records live in `src/prepared-data/volume-presentation-source.ts`; preview creation and dataset text validation stay with callers.
+
+Body-map products, resolution evidence, raster recipes and limb-model references have browser-safe
+contracts and parsers in `src/prepared-data/`, exported through `@cssearth/objects`.
+The parsers require owner-supplied surface-resolution and lighting-bank resolvers at the historical
+validation position. Bake supplies them through `readBodyMapProduct` and `readRasterRecipe`;
+angular-to-surface conversion, sampled map combination, lighting banks and photometric evaluation stay in bake.
+Contract and duplicate-ownership tests use node:test beside the formats.

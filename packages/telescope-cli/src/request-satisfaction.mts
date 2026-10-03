@@ -4,7 +4,7 @@ import { inputWavelengths } from './recipe-request.mts';
 /** Product facts answer a request; catalogue capabilities and successful decoding alone do not. */
 import type { CapabilityRequest, ProductKind, RequestedResult } from './recipe-request.mts';
 import type { ConstraintVerdict } from './query-contract.mts';
-import { supportsMeasuredResolution, PROFILE_ASSUMPTIONS, RESOLUTION_ASSUMPTIONS, type ResolutionEvidence } from '@cssearth/bake/objects/layers/observation';
+import { supportsMeasuredResolution, PROFILE_ASSUMPTIONS, RESOLUTION_ASSUMPTIONS, type ResolutionEvidence } from '@cssearth/objects';
 export interface ProductFacts {
   readonly regionCoverage?: { readonly region: import('@cssearth/telescope/node').IcrsCircle; readonly answer: 'partial' | 'unknown'; readonly reason: string; readonly usablePixelCenters: number; readonly invalidPixelCenters: number };
   readonly nativeMetadata?: NativeMetadata;

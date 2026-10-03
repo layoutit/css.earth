@@ -10,9 +10,9 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, hasErrorCode, requireRecord, requireArray } from '@cssearth/core';
-import { supportsMeasuredResolution } from '@cssearth/bake/objects/layers/observation';
+import { supportsMeasuredResolution, type BodyMapProduct } from '@cssearth/objects';
 import { readFitsHdus, fitsImageAccessor } from '@cssearth/fits';
-import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
 import { parseProductRecord, productRecordPath, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { runKey, sameRun, WORKSPACE } from '@cssearth/telescope/node';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation } from './query.mts';
@@ -141,7 +141,7 @@ export function assertMapAnswersRequest(product: BodyMapProduct, selection: Obse
 
 /** Verify the complete chain at publication time and return the small descriptor the body package can consume. */
 export async function qualifyBodyMap(mapPath: string, selection: ObservationSelection, root = WORKSPACE): Promise<TelescopeLayer> {
-  const metadataPath = resolve(mapPath), product = parseBodyMapProduct(JSON.parse((await publicationFile(metadataPath, selection, 'body-map metadata')).toString('utf8')) as unknown);
+  const metadataPath = resolve(mapPath), product = readBodyMapProduct(JSON.parse((await publicationFile(metadataPath, selection, 'body-map metadata')).toString('utf8')) as unknown);
   const planePath = resolve(dirname(metadataPath), product.planes.file), expectedMetadata = `${planePath}.body-map.json`;
   if (metadataPath !== expectedMetadata) throw new Error(`The body-map record belongs at ${expectedMetadata}, beside the plane it names.`);
   const plane = await publicationFile(planePath, selection, 'map plane');

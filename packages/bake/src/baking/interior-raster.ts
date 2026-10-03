@@ -1,13 +1,5 @@
+import type { CutawayAngles, InteriorPalette } from '@cssearth/objects';
 import { normalize, clamp, smoothstep, angularDistance } from "./math.js";
-export interface CutawayAngles {
-    centerLongitudeDegrees: number;
-    widthDegrees: number;
-}
-export interface InteriorPalette {
-    metallicCore: readonly number[];
-    combinedMantleCrust: readonly number[];
-    layerContact: readonly number[];
-}
 export interface InteriorStructure {
     metallicCoreRadiusFraction: number;
     presentation: {

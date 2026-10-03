@@ -9,7 +9,7 @@ import { inventoryAssets } from '@cssearth/bake/delivery';
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
-import { outputName, parseRasterRecipe, prepareRasterAssets, rasterPageOutput } from '@cssearth/bake/raster';
+import { outputName, readRasterRecipe, prepareRasterAssets, rasterPageOutput } from '@cssearth/bake/raster';
 
 import { parseGeometryProfile } from '@cssearth/bake/scene';
 import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
@@ -29,7 +29,7 @@ export async function inspectMeasurementSphere(root:string,target:string){
   await pinned(resolve(root, 'pnpm-lock.yaml'));
   const geometry = parseGeometryProfile(await json(resolve(object, 'source/preparation/geometry.json')));
   if (geometry.namespace !== id) throw new Error('Standard sphere geometry belongs to another body');
-  const recipe = parseRasterRecipe(await json(resolve(object, 'source/preparation/raster.json')));
+  const recipe = readRasterRecipe(await json(resolve(object, 'source/preparation/raster.json')));
   await pinned(resolve(object, 'inventory.json'));
   const original = parsePreparedObjectRuntime(await json(resolve(object, 'prepared/runtime.json')));
   if (original.id !== id || original.destinations)

@@ -49,6 +49,8 @@ test("one inventory per object: each location is written by its own stage and ke
   await writeFile(resolve(preparedRoot, "atlases/x.webp"), "atlas-bytes");
   // Regenerated on every checkout, so never inventoried.
   await writeFile(resolve(preparedRoot, "page.json"), "generated");
+  // Left by a preparation that no longer writes them (an old checkout still holds both), so never inventoried either.
+  await writeFile(resolve(preparedRoot, "provenance.json"), "retired"); await writeFile(resolve(preparedRoot, "lenses.json"), "retired");
   const first = await inventoryPublicAssets({ objectId: "fixture", objectDirectory, urls: ["/scenes/fixture/a.webp"], publicRoot });
   assert.deepEqual(first?.assets, [{ location: "public", filename: "a.webp", bytes: 7, sha256: digest("asset-a") }]);
   const second = await inventoryPreparedAssets({ objectId: "fixture", objectDirectory, gitTrackedPaths: async () => new Set() });

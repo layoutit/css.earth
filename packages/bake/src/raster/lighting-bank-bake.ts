@@ -6,7 +6,7 @@
 import { mkdir, mkdtemp, readdir, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import type { RasterRecipe } from './config.ts';
+import type { RasterRecipe } from '@cssearth/objects';
 import { LIGHTING_BANKS, LIGHTING_BANK_ROOT } from './lighting-banks.ts';
 import { prepareLighting } from './lighting.ts';
 

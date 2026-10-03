@@ -1,4 +1,4 @@
-import type { LightingRecipe } from './config.ts';
+import type { LightingRecipe } from '@cssearth/objects';
 
 /**
  * Shared lighting banks: the pixel-determining fields of a lighting recipe that many bodies draw the same. A body's raster

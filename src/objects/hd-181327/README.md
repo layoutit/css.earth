@@ -6,11 +6,13 @@ The [navigation marker](source/preparation/navigation.json) adds a prepared curv
 
 - **Placement:** Gaia DR3 source 6643589352010758400 (`source/photometry/gaia-dr3-source.csv`): ICRS position at J2016.0, parallax 20.931 ± 0.029 mas (47.78 pc, no zero-point correction), proper motion and radial velocity, propagated to the scene epoch by `@cssearth/astronomy`.
 - **Radius and mass:** the Gaia DR3 FLAME values of the same source (`source/photometry/gaia-dr3-astrophysical-parameters.csv`): 1.372 solar radii (1.344–1.400) and 1.231 solar masses (1.191–1.271); Creevey et al. (2023, A&A 674, A26), Fouesneau et al. (2023, A&A 674, A28). GSP-Phot gives 1.376 solar radii and 6375 K in the same row.
-- **Color and limb:** the Gaia DR3 BP/RP sampled spectrum (`source/photometry/gaia-dr3-xp-sampled.csv`) through the CIE 1931 2° observer, the route [HD 189733 A](../hd-189733/README.md) uses: sRGB (238, 237, 255). No transit or image measures the limb, so the sphere is darkened by the quadratic law Claret (2017, A&A 600, A30) computes from model atmospheres, interpolated to the star's Gaia temperature and gravity (u1 0.324, u2 0.223; `source/photometry/claret-2017-tess-quadratic.tsv`): a model, stated as one.
+- **Color:** the Gaia DR3 BP/RP sampled spectrum (`source/photometry/gaia-dr3-xp-sampled.csv`) through the CIE 1931 2° observer, the route [HD 189733 A](../hd-189733/README.md) uses: sRGB (238, 237, 255).
 - **Rotation:** unmeasured. The display axis is celestial north in the plane of the sky (`source/preparation/rotation.json`).
 - **The debris ring** is the attached volume [hd-181327-disc](../hd-181327-disc/README.md): six JWST/NIRCam coronagraph images of programme 2780 (Gáspár et al. 2026, [arXiv:2608.27437](https://arxiv.org/abs/2608.27437)) in the reflectance color of the paper's Figure 1, placed in depth on a disc fitted to them.
 
 Catalogue color: the swatch that search, the catalogue and the minimap show is this dataset's prepared color, #eeedff.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,375 K and log g 4.25 (u1 0.363, u2 0.310): a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/hd-181327.json: 4.254.
 
 ## Evidence
 
@@ -20,5 +22,6 @@ Catalogue color: the swatch that search, the catalogue and the minimap show is t
 
 - The photosphere is a uniform color with a modelled limb: the star is 0.27 mas across and no image or limb measurement exists ([ledger](investigations.json)).
 - The star's spin axis is not measured, so the sphere's axis is a display convention; the ring's own orientation is measured in the disc package.
+- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

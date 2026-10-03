@@ -51,7 +51,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The color of Gaia DR3's measured spectrum of the star, an F7 dwarf. Its fainter companion, WASP-76 B, 0.44 arcseconds away, falls inside Gaia's spectrum window and adds a little of its redder light. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for the TESS band, at the star's ESPRESSO temperature and gravity (6,329 K, log g 4.20): a model. The spin axis is measured only on the sky, 61° from the orbit, so the display axis is celestial north."
+        "notes": "The color of Gaia DR3's measured spectrum of the star, an F7 dwarf. Its fainter companion, WASP-76 B, 0.44 arcseconds away, falls inside Gaia's spectrum window and adds a little of its redder light. The spin axis is measured only on the sky, 61° from the orbit, so the display axis is celestial north. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,329 K and log g 4.11 (u1 0.368, u2 0.308): a model, because no fit of this star's limb is used."
       }
     ]
   },
