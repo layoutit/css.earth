@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1744-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1744",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1744 system",
+      "systemName": "TOI-1744 system",
+      "classification": "planetary-system",
+      "color": "#faf5ff",
+      "distanceAu": 23496067.5,
+      "description": "TOI-1744 b crosses TOI-1744 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        703633785890755300,
+        -1559024567022375700,
+        3070716103750152700
+      ],
+      "presentationToReference": [
+        0.20018214450764896,
+        0.35938037913566384,
+        -0.9114674169231861,
+        -0.44353879450486955,
+        -0.7962701739245274,
+        -0.41137227408682997,
+        0.8736134424271904,
+        -0.4866205433502673,
+        -6.910684479619088e-8
+      ],
+      "orbitUpReference": [
+        -0.35938037913566384,
+        0.7962701739245274,
+        0.4866205433502673
+      ],
+      "metersPerUnit": 2558380.64516129,
+      "bodyRadiusM": 793098000
+    }
+  }
+}

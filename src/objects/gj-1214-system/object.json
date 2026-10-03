@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-1214-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-1214",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 1214 system",
+      "systemName": "GJ 1214 system",
+      "classification": "planetary-system",
+      "color": "#ffca76",
+      "distanceAu": 3020089.4,
+      "description": "GJ 1214 b crosses GJ 1214 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -87170566204908020,
+        -441586564728014500,
+        39049710171506490
+      ],
+      "presentationToReference": [
+        -0.19294041040031487,
+        -0.0167488859599994,
+        -0.9810675169699878,
+        -0.9773929065814723,
+        -0.08483265305656176,
+        0.19366601957908547,
+        0.08647025036843461,
+        -0.9962544332621481,
+        0.000002595434364876281
+      ],
+      "orbitUpReference": [
+        0.0167488859599994,
+        0.08483265305656176,
+        0.9962544332621481
+      ],
+      "metersPerUnit": 485194.51612903224,
+      "bodyRadiusM": 150410300
+    }
+  }
+}

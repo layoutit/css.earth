@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1775-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1775",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1775 system",
+      "systemName": "TOI-1775 system",
+      "classification": "planetary-system",
+      "color": "#ffe6d6",
+      "distanceAu": 30851360.3,
+      "description": "TOI-1775 b crosses TOI-1775 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3089604883909263000,
+        1775519884186598100,
+        2933060637034262500
+      ],
+      "presentationToReference": [
+        -0.6694265486646469,
+        -0.5510041847247058,
+        0.49825945486142215,
+        0.3847029613227723,
+        0.31664825265320673,
+        0.8670279785803688,
+        0.6355090302209945,
+        -0.772093435089001,
+        -1.9465050687968858e-7
+      ],
+      "orbitUpReference": [
+        0.5510041847247058,
+        -0.31664825265320673,
+        0.772093435089001
+      ],
+      "metersPerUnit": 1859987.7419354839,
+      "bodyRadiusM": 576596200
+    }
+  }
+}

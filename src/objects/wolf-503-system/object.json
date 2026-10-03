@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wolf-503-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wolf-503",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Wolf 503 system",
+      "systemName": "Wolf 503 system",
+      "classification": "planetary-system",
+      "color": "#ffd3bc",
+      "distanceAu": 9205564.9,
+      "description": "Wolf 503 b crosses Wolf 503 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1221668782296833300,
+        -618317533566620500,
+        -147322342085650370
+      ],
+      "presentationToReference": [
+        -0.8871131232081022,
+        0.09542148422952795,
+        -0.4515806096140538,
+        -0.4489904353476363,
+        0.048297370004370725,
+        0.8922303250938073,
+        -0.10694809768437458,
+        -0.9942646048201127,
+        0.0000018970015812597186
+      ],
+      "orbitUpReference": [
+        -0.09542148422952795,
+        -0.048297370004370725,
+        0.9942646048201127
+      ],
+      "metersPerUnit": 1546249.3548387096,
+      "bodyRadiusM": 479337300
+    }
+  }
+}

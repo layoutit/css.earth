@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1899-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1899",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1899 system",
+      "systemName": "TOI-1899 system",
+      "classification": "planetary-system",
+      "color": "#ffbe8a",
+      "distanceAu": 26504303.3,
+      "description": "TOI-1899 b crosses TOI-1899 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1489157371545480400,
+        -2639920001146699300,
+        2556238892706298000
+      ],
+      "presentationToReference": [
+        0.3755771380979258,
+        0.31674992750962944,
+        -0.8709829486050895,
+        -0.6658084751739318,
+        -0.5615250405358391,
+        -0.4913132434992854,
+        0.6447021697844172,
+        -0.7644338508163206,
+        0.0000011814481323905427
+      ],
+      "orbitUpReference": [
+        -0.31674992750962944,
+        0.5615250405358391,
+        0.7644338508163206
+      ],
+      "metersPerUnit": 1362225.4838709678,
+      "bodyRadiusM": 422289900
+    }
+  }
+}

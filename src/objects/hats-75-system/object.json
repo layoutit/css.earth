@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hats-75-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hats-75",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HATS-75 system",
+      "systemName": "HATS-75 system",
+      "classification": "planetary-system",
+      "color": "#ffc38a",
+      "distanceAu": 40757067.8,
+      "description": "HATS-75 b crosses HATS-75 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2674281606620438500,
+        4814506464374217000,
+        -2616148743152493600
+      ],
+      "presentationToReference": [
+        0.4386102849810046,
+        -0.20835145041684486,
+        0.8741914498655767,
+        0.7896296512507207,
+        -0.3750942613315006,
+        -0.48558141334058635,
+        -0.42907578791461465,
+        -0.9032684917705106,
+        -2.8227288615005293e-7
+      ],
+      "orbitUpReference": [
+        0.20835145041684486,
+        0.3750942613315006,
+        0.9032684917705106
+      ],
+      "metersPerUnit": 1312404.5161290322,
+      "bodyRadiusM": 406845400
+    }
+  }
+}

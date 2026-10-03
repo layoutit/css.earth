@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "SDSS9 color HiPS (CDS), a cutout on TON 618",
+  "publisher": "CDS (SDSS)",
+  "sourceId": "CDS/P/SDSS9/color",
+  "sourcePage": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+  "download": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=512&height=512&fov=0.0166667&projection=TAN&coordsys=icrs&ra=187.104039&dec=31.477127&format=jpg",
+  "credit": "Sloan Digital Sky Survey DR9; color HiPS by CDS (CNRS/Unistra)",
+  "license": "CC-BY",
+  "original": {
+    "dimensions": [
+      512,
+      512
+    ],
+    "bands": [
+      "SDSS g",
+      "r",
+      "i"
+    ],
+    "fieldOfViewDeg": [
+      0.01666667,
+      0.01666667
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published file",
+    "dimensions": [
+      512,
+      512
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 0,
+    "reference": "A picture of the sky, centred on the object, so its plane faces the Sun. The recipe's inclination of 0.001° is not a measurement: the bake needs a plane with some depth along the sight line, and this is the smallest tilt that gives it one."
+  },
+  "registration": {
+    "method": "The cutout is asked of the CDS hips2fits service as a tangent-plane image centred on the catalogue position, 60 arcsec across at 512 px (0.117 arcsec per pixel, finer than the survey's 0.396 arcsec pixels), north up. Its geometry is the request's; no registration was measured.",
+    "pixelArcsec": 0.1172,
+    "northClockwiseDeg": 0
+  },
+  "displayModel": "The picture lies on one flat plane facing the Sun at the object's comoving distance. Nothing in the picture has depth: seen from the side it is a line.",
+  "coverage": "The whole cutout. The other points are Milky Way stars and galaxies at their own distances. A display composite, not calibrated photometry.",
+  "acquisition": {
+    "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=512&height=512&fov=0.0166667&projection=TAN&coordsys=icrs&ra=187.104039&dec=31.477127&format=jpg",
+    "dimensions": [
+      512,
+      512
+    ],
+    "operation": "Download the publisher's file; no crop or resample."
+  }
+}

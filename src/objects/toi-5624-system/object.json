@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5624-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5624",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5624 system",
+      "systemName": "TOI-5624 system",
+      "classification": "planetary-system",
+      "color": "#ffe9dc",
+      "distanceAu": 20911142,
+      "description": "4 planets cross TOI-5624 as seen from Earth: b, c, d, e."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2041731349218474200,
+        -30077468679133796,
+        2369905815160855000
+      ],
+      "presentationToReference": [
+        -0.6526727283503777,
+        -0.757496693898971,
+        -0.01473324132032107,
+        -0.00961475345559202,
+        -0.011163553413159262,
+        0.9998914599051137,
+        0.7575789504623676,
+        -0.6527435436734095,
+        -0.000003002908987165466
+      ],
+      "orbitUpReference": [
+        0.757496693898971,
+        0.011163553413159262,
+        0.6527435436734095
+      ],
+      "metersPerUnit": 1840238.7096774194,
+      "bodyRadiusM": 570474000
+    }
+  }
+}

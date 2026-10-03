@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2081-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2081",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2081 system",
+      "systemName": "TOI-2081 system",
+      "classification": "planetary-system",
+      "color": "#ffbe85",
+      "distanceAu": 12851640.5,
+      "description": "TOI-2081 b crosses TOI-2081 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -114814918228436240,
+        -1150639610016850000,
+        1535953261591025700
+      ],
+      "presentationToReference": [
+        -0.05971911885995693,
+        -0.07931589187442763,
+        -0.9950591018320241,
+        -0.5984865440937448,
+        -0.7949568999001969,
+        0.09928435848508102,
+        0.7989039262522848,
+        -0.601458657429779,
+        -0.000004631574043411106
+      ],
+      "orbitUpReference": [
+        0.07931589187442763,
+        0.7949568999001969,
+        0.601458657429779
+      ],
+      "metersPerUnit": 1198399.3548387096,
+      "bodyRadiusM": 371503800
+    }
+  }
+}

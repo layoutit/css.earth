@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-376-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-376",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-376 system",
+      "systemName": "K2-376 system",
+      "classification": "planetary-system",
+      "color": "#fff6f9",
+      "distanceAu": 33237191.6,
+      "description": "K2-376 b crosses K2-376 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3056184212119424500,
+        3309741762608597500,
+        2104340884743613000
+      ],
+      "presentationToReference": [
+        -0.6146525853784176,
+        -0.28711597547361717,
+        0.7346881079175438,
+        0.6656474839632255,
+        0.3109341457789587,
+        0.6784050295230254,
+        0.4232205410670124,
+        -0.9060266958630648,
+        -0.0000015500941935912821
+      ],
+      "orbitUpReference": [
+        0.28711597547361717,
+        -0.3109341457789587,
+        0.9060266958630648
+      ],
+      "metersPerUnit": 2578578.3870967743,
+      "bodyRadiusM": 799359300
+    }
+  }
+}

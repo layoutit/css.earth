@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Webb finds most distant known galaxy (JADES-GS-z14-0 environment NIRCam image)",
+  "publisher": "ESA/Webb",
+  "sourceId": "jades5",
+  "sourcePage": "https://esawebb.org/images/jades5/",
+  "download": "https://cdn.esawebb.org/archives/images/large/jades5.jpg",
+  "credit": "NASA, ESA, CSA, J. Olmsted (STScI), S. Carniani (Scuola Normale Superiore), JADES Collaboration",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      12407,
+      12121
+    ],
+    "bands": [
+      "Webb NIRCam F090W",
+      "F115W",
+      "F150W",
+      "F200W",
+      "F277W",
+      "F356W",
+      "F410M",
+      "F444W"
+    ],
+    "fieldOfViewDeg": [
+      0.0006647222,
+      0.0006647222
+    ]
+  },
+  "checkedSource": {
+    "kind": "Window of the Large JPEG",
+    "dimensions": [
+      80,
+      80
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 0,
+    "reference": "A picture of the sky, centred on the object, so its plane faces the Sun. The recipe's inclination of 0.001° is not a measurement: the bake needs a plane with some depth along the sight line, and this is the smallest tilt that gives it one."
+  },
+  "registration": {
+    "method": "The file's embedded tags give 0.02991 arcsec per pixel and north 38.0° right of vertical. They place the paper's position 1.5 arcsec from the galaxy the publisher marks in its annotated version (ESA/Webb jades4), so the window is centred on that marked galaxy instead: its orange light and the pale galaxy beside it, as the publisher's enlarged view shows them. The window's centre is taken to be the paper's position, to about 0.1 arcsec.",
+    "pixelArcsec": 0.02991,
+    "northClockwiseDeg": 37.96
+  },
+  "displayModel": "The picture lies on one flat plane facing the Sun at the object's comoving distance. Nothing in the picture has depth: seen from the side it is a line.",
+  "coverage": "An 80 px window (2.4 arcsec) of the publisher's Large JPEG, not resampled. The pale galaxy beside the orange one is a foreground galaxy.",
+  "acquisition": {
+    "url": "https://cdn.esawebb.org/archives/images/large/jades5.jpg",
+    "dimensions": [
+      12407,
+      12121
+    ],
+    "window": [
+      7410,
+      5578,
+      80,
+      80
+    ],
+    "outputDimensions": [
+      80,
+      80
+    ],
+    "operation": "packages/bake/authoring/far-destinations/picture-source.mts: download the publisher's Large JPEG, cut the window without resampling; JPEG quality 95."
+  }
+}

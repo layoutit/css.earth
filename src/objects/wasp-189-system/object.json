@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-189-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-189",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-189 system",
+      "systemName": "WASP-189 system",
+      "classification": "planetary-system",
+      "color": "#c9d6ff",
+      "distanceAu": 20422779.9,
+      "description": "WASP-189 b crosses WASP-189 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2131326862710023400,
+        -2183028236875052500,
+        -161577658987447900
+      ],
+      "presentationToReference": [
+        -0.6976053758169886,
+        0.03694432959286885,
+        -0.715529074281522,
+        -0.7145277715255982,
+        0.037840716970657794,
+        0.6985829541706621,
+        -0.05288481209100479,
+        -0.9986006191917167,
+        1.380890002418051e-7
+      ],
+      "orbitUpReference": [
+        -0.03694432959286885,
+        -0.037840716970657794,
+        0.9986006191917167
+      ],
+      "metersPerUnit": 5296296.774193549,
+      "bodyRadiusM": 1641852000
+    }
+  }
+}

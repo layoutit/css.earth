@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-370-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-370",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-370 system",
+      "systemName": "K2-370 system",
+      "classification": "planetary-system",
+      "color": "#ffebde",
+      "distanceAu": 29069635.9,
+      "description": "K2-370 b crosses K2-370 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1544339064411604000,
+        3788145802741581000,
+        1475345292726255900
+      ],
+      "presentationToReference": [
+        0.355121882181764,
+        0.1280730550288049,
+        0.9260052599047536,
+        0.8710868606807339,
+        0.31415509310053363,
+        -0.3775106073057801,
+        0.3392582054203925,
+        -0.9406932922342881,
+        -5.925160162990809e-7
+      ],
+      "orbitUpReference": [
+        -0.1280730550288049,
+        -0.31415509310053363,
+        0.9406932922342881
+      ],
+      "metersPerUnit": 2120762.9032258065,
+      "bodyRadiusM": 657436500
+    }
+  }
+}

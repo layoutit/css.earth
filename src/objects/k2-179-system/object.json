@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-179-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-179",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-179 system",
+      "systemName": "K2-179 system",
+      "classification": "planetary-system",
+      "color": "#ffd9be",
+      "distanceAu": 38839371.2,
+      "description": "K2-179 b crosses K2-179 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2755102134063779000,
+        4548624497097424400,
+        2340697569612323000
+      ],
+      "presentationToReference": [
+        0.47417646398161195,
+        0.20870886930035937,
+        0.8553346063858639,
+        0.7828568869898253,
+        0.34457565696679976,
+        -0.5180759704121572,
+        0.40285453391825593,
+        -0.9152640190137837,
+        -4.908870123615384e-7
+      ],
+      "orbitUpReference": [
+        -0.20870886930035937,
+        -0.34457565696679976,
+        0.9152640190137837
+      ],
+      "metersPerUnit": 1723690.9677419353,
+      "bodyRadiusM": 534344199.99999994
+    }
+  }
+}

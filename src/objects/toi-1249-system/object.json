@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1249-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1249",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1249 system",
+      "systemName": "TOI-1249 system",
+      "classification": "planetary-system",
+      "color": "#ffebe0",
+      "distanceAu": 28822454.4,
+      "description": "TOI-1249 b crosses TOI-1249 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1622162135099189200,
+        -608485777817501000,
+        3948387379927446500
+      ],
+      "presentationToReference": [
+        -0.37621449194732626,
+        -0.8573865874904412,
+        -0.35121346164449824,
+        -0.14112101546350445,
+        -0.32161429482431364,
+        0.9362954151117098,
+        0.9157224006451763,
+        -0.40181150426058687,
+        -6.926588868727515e-7
+      ],
+      "orbitUpReference": [
+        0.8573865874904412,
+        0.32161429482431364,
+        0.40181150426058687
+      ],
+      "metersPerUnit": 2195943.5483870967,
+      "bodyRadiusM": 680742500
+    }
+  }
+}

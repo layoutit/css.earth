@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-212-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-212",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-212 system",
+      "systemName": "K2-212 system",
+      "classification": "planetary-system",
+      "color": "#ffc298",
+      "distanceAu": 22163708.9,
+      "description": "K2-212 b crosses K2-212 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3141090187581992000,
+        1046400135986756100,
+        179142578773887000
+      ],
+      "presentationToReference": [
+        0.9473546575900744,
+        0.051258576435707595,
+        0.3160564998290302,
+        0.31559489964552884,
+        0.017075432706464107,
+        -0.9487403696036212,
+        0.05402788224723989,
+        -0.9985394273335789,
+        4.545813651477351e-7
+      ],
+      "orbitUpReference": [
+        -0.051258576435707595,
+        -0.017075432706464107,
+        0.9985394273335789
+      ],
+      "metersPerUnit": 1521563.2258064516,
+      "bodyRadiusM": 471684600
+    }
+  }
+}

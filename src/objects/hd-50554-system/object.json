@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-50554-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-50554",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 50554 system",
+      "systemName": "HD 50554 system",
+      "classification": "planetary-system",
+      "color": "#fff3f0",
+      "distanceAu": 6408617.7,
+      "description": "HD 50554's planets b, c, d are placed on the orbits their papers measured."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -206709589181927550,
+        849364299694855200,
+        393683848871742850
+      ],
+      "presentationToReference": [
+        -0.21561047976232303,
+        -0.09710419481526586,
+        0.9716392830500113,
+        0.8859378264869516,
+        0.39899506759619946,
+        0.23646797591530355,
+        0.4106413138205133,
+        -0.9117969682901907,
+        -7.6135018507494e-7
+      ],
+      "orbitUpReference": [
+        0.09710419481526586,
+        -0.39899506759619946,
+        0.9117969682901907
+      ],
+      "metersPerUnit": 2571845.806451613,
+      "bodyRadiusM": 797272200
+    }
+  }
+}

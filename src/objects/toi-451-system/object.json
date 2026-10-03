@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-451-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-451",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-451 system",
+      "systemName": "TOI-451 system",
+      "classification": "planetary-system",
+      "color": "#ffede4",
+      "distanceAu": 25467104.2,
+      "description": "3 planets cross TOI-451 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1365655001270285000,
+        2676360912975026700,
+        -2342400873644847000
+      ],
+      "presentationToReference": [
+        0.3584559603804449,
+        -0.2794493471798454,
+        0.890739797487735,
+        0.702488930580513,
+        -0.5476556301549926,
+        -0.45451360064511287,
+        -0.6148321940819138,
+        -0.7886579569878795,
+        3.5181317358422466e-7
+      ],
+      "orbitUpReference": [
+        0.2794493471798454,
+        0.5476556301549926,
+        0.7886579569878795
+      ],
+      "metersPerUnit": 1907564.5161290322,
+      "bodyRadiusM": 591345000
+    }
+  }
+}

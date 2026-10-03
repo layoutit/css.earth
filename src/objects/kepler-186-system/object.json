@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-186-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-186",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-186 system",
+      "systemName": "Kepler-186 system",
+      "classification": "planetary-system",
+      "color": "#ffbd89",
+      "distanceAu": 36612974.2,
+      "description": "Red dwarf 178 parsecs away that hosts Kepler-186 f."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1890655298376854300,
+        -3460124330612159500,
+        3801701436103602700
+      ],
+      "presentationToReference": [
+        0.34518482713556686,
+        0.33281742578971923,
+        -0.8775420196241851,
+        -0.6317293374179387,
+        -0.6090960847449471,
+        -0.47949974326778166,
+        0.694093278573479,
+        -0.719885074605024,
+        1.948463517936463e-7
+      ],
+      "orbitUpReference": [
+        -0.33281742578971923,
+        0.6090960847449471,
+        0.719885074605024
+      ],
+      "metersPerUnit": 1173712.9032258065,
+      "bodyRadiusM": 363851000
+    }
+  }
+}

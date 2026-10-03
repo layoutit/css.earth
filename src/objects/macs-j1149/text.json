@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "macs-j1149",
+  "card": {
+    "text": "A huge cluster of galaxies whose light took over 5 billion years to reach us.",
+    "sources": [
+      {
+        "catalogueId": "esahubble-heic1505b",
+        "url": "https://esahubble.org/images/heic1505b/",
+        "label": "ESA/Hubble heic1505b: NASA, ESA, S. Rodney (John Hopkins University, USA) and the FrontierSN team; T. Treu (University of California Los Angeles, USA), P. Kelly (University of California Berkeley, USA) and the GLASS team; J. Lotz (STScI) and the Frontier Fields team; M. Postman (STScI) and the CLASH team; and Z. Levay (STScI)",
+        "checked": "2026-10-02",
+        "locator": "caption: this image shows the huge galaxy cluster MACS J1149.5+223, whose light took over 5 billion years to reach us"
+      },
+      {
+        "catalogueId": "ned-macs-j1149",
+        "url": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J1149.5%2B2223",
+        "label": "NASA/IPAC Extragalactic Database (NED), MACS J1149.5+2223: position from 2011MNRAS.410.1939Z, redshift from 2025A&A...693A...2S",
+        "checked": "2026-10-02",
+        "locator": "NED preferred values of MACS J1149.5+2223: RA 177.3962208°, Dec 22.40303889° (2011MNRAS.410.1939Z); redshift 0.5421990921 ± 0.00047 (2025A&A...693A...2S)"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "z = 0.5421990921: comoving distance 2,086 Mpc, lookback time 5.50 Gyr, age 8290 Myr"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Hubble's view: the cluster's mass bends and magnifies the light of galaxies far behind it. The picture is flat and has no depth.",
+    "sources": [
+      {
+        "catalogueId": "esahubble-heic1505b",
+        "url": "https://esahubble.org/images/heic1505b/",
+        "label": "ESA/Hubble heic1505b: NASA, ESA, S. Rodney (John Hopkins University, USA) and the FrontierSN team; T. Treu (University of California Los Angeles, USA), P. Kelly (University of California Berkeley, USA) and the GLASS team; J. Lotz (STScI) and the Frontier Fields team; M. Postman (STScI) and the CLASH team; and Z. Levay (STScI)",
+        "checked": "2026-10-02",
+        "locator": "Galaxy cluster MACS j1149.5+223; Hubble ACS and WFC3, from 814 nm to 1.6 µm, the shortest wavelengths blue and the longest red"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "MACS J1149 from Hubble",
+      "detail": "3800 × 3800 px",
+      "summary": "Hubble's image of the cluster and the lensed galaxies behind it. A flat picture of the sky, with no depth.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-heic1505b",
+          "url": "https://esahubble.org/images/heic1505b/",
+          "label": "ESA/Hubble heic1505b: NASA, ESA, S. Rodney (John Hopkins University, USA) and the FrontierSN team; T. Treu (University of California Los Angeles, USA), P. Kelly (University of California Berkeley, USA) and the GLASS team; J. Lotz (STScI) and the Frontier Fields team; M. Postman (STScI) and the CLASH team; and Z. Levay (STScI)",
+          "checked": "2026-10-02",
+          "locator": "Galaxy cluster MACS j1149.5+223"
+        }
+      ]
+    }
+  }
+}

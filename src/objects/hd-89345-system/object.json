@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-89345-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-89345",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 89345 system",
+      "systemName": "HD 89345 system",
+      "classification": "planetary-system",
+      "color": "#ffeee5",
+      "distanceAu": 27095617.7,
+      "description": "HD 89345 b crosses HD 89345 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3606677317551450600,
+        1707093632661340400,
+        712839603369299800
+      ],
+      "presentationToReference": [
+        -0.8897800232877956,
+        -0.15895607491225805,
+        0.4278136000718754,
+        0.4211460240237436,
+        0.07523631340950598,
+        0.9038669833518309,
+        0.17586226601224703,
+        -0.9844147821894159,
+        4.975388030777396e-8
+      ],
+      "orbitUpReference": [
+        0.15895607491225805,
+        -0.07523631340950598,
+        0.9844147821894159
+      ],
+      "metersPerUnit": 3920606.129032258,
+      "bodyRadiusM": 1215387900
+    }
+  }
+}

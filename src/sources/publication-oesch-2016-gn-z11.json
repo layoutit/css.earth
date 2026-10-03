@@ -1,0 +1,39 @@
+{
+  "id": "publication-oesch-2016-gn-z11",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A Remarkably Luminous Galaxy at z = 11.1 Measured with Hubble Space Telescope Grism Spectroscopy",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1603.00461"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016ApJ...819..129O"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1603.00461",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1603.00461",
+      "checkedOn": "2026-10-02",
+      "locator": "text: GN-z11 lies in the CANDELS DEEP area in GOODS-North at (RA, DEC) = (12:36:25.46, +62:14:31.4) and has H160 = 26.0 ± 0.1."
+    }
+  ],
+  "creators": [
+    "Oesch, P. A.",
+    "Brammer, G.",
+    "van Dokkum, P. G."
+  ],
+  "publisher": "ApJ 819, 129",
+  "publicationDate": "2016",
+  "relations": [],
+  "statements": []
+}

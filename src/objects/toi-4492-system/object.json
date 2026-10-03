@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-4492-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-4492",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-4492 system",
+      "systemName": "TOI-4492 system",
+      "classification": "planetary-system",
+      "color": "#fff0e9",
+      "distanceAu": 29459371.1,
+      "description": "TOI-4492 b crosses TOI-4492 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2401843183860323300,
+        -3003292941236673000,
+        2152568588230367200
+      ],
+      "presentationToReference": [
+        0.5449978944932055,
+        0.3050659476971076,
+        -0.7809686693803017,
+        -0.6814717715722814,
+        -0.38145548509062355,
+        -0.6245702021745944,
+        0.4884398832488085,
+        -0.8725975478133907,
+        -0.0000013956062507016531
+      ],
+      "orbitUpReference": [
+        -0.3050659476971076,
+        0.38145548509062355,
+        0.8725975478133907
+      ],
+      "metersPerUnit": 2742404.5161290322,
+      "bodyRadiusM": 850145400
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-201-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-201",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-201 system",
+      "systemName": "K2-201 system",
+      "classification": "planetary-system",
+      "color": "#ffede1",
+      "distanceAu": 40500123.1,
+      "description": "2 planets cross K2-201 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2227101598615583500,
+        -5107179646957192000,
+        -2380119758091175400
+      ],
+      "presentationToReference": [
+        0.3675857505002231,
+        -0.15702594008924703,
+        -0.9166370984027845,
+        -0.8429460356152694,
+        0.3600910318360911,
+        -0.3997204395971268,
+        -0.3928392763837252,
+        -0.9196071459760996,
+        6.150112231698688e-8
+      ],
+      "orbitUpReference": [
+        0.15702594008924703,
+        -0.3600910318360911,
+        0.9196071459760996
+      ],
+      "metersPerUnit": 1970763.2258064516,
+      "bodyRadiusM": 610936600
+    }
+  }
+}

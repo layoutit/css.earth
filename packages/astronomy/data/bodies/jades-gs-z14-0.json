@@ -1,0 +1,28 @@
+{
+  "id": "jades-gs-z14-0",
+  "classification": "galaxy",
+  "order": 5446,
+  "physical": {
+    "name": "JADES-GS-z14-0",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of JADES-GS-z14-0 is recorded here: its package frames it at 60,022 pc (object.json worldFrame.bodyRadiusM), half the short side of its picture at its distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 53.08294,
+    "declinationDegrees": -27.85563,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 10347197411.943087,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 4250847.2,
+    "sources": {
+      "position": "Carniani et al. (2024), Spectroscopic confirmation of two luminous galaxies at z ~ 14, Nature 633, 318 (https://arxiv.org/abs/2405.18485); Extended Data Table: extended ID JADES-GS-53.08294-27.85563, RA 3:32:19.905, Dec -27:51:20.27 (ICRS)",
+      "distance": "Comoving distance of the redshift z = 14.1793 (Schouws et al. (2025), Detection of [OIII] 88 µm in JADES-GS-z14-0 at z = 14.1793, ApJ (accepted), arXiv:2409.20549) in the Planck 2018 cosmology: 10347197411.943087 pc, from Astropy 8.0.1 Planck18.comoving_distance (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift (packages/bake/cli/prepare-catalogue-points.mts).",
+      "properMotion": "Zero: the object is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the redshift z = 14.1793: the redshift written as a velocity, not a motion through space. Schouws et al. (2025), Detection of [OIII] 88 µm in JADES-GS-z14-0 at z = 14.1793, ApJ (accepted), arXiv:2409.20549 (https://arxiv.org/abs/2409.20549); abstract: z = 14.1793 ± 0.0007 from the [O III] 88 µm line (ALMA)."
+    }
+  }
+}

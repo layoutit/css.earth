@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1695-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1695",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1695 system",
+      "systemName": "TOI-1695 system",
+      "classification": "planetary-system",
+      "color": "#ffc88f",
+      "distanceAu": 9280331.6,
+      "description": "TOI-1695 b crosses TOI-1695 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        391642647341752100,
+        157617739341964350,
+        1322572924364480500
+      ],
+      "presentationToReference": [
+        0.28210053958766174,
+        0.8837621649695359,
+        0.37334129336668487,
+        0.11353219474052798,
+        0.3556601778419532,
+        -0.9276940652256158,
+        0.95264354630772,
+        -0.30408925279560467,
+        0.0000035301385732482467
+      ],
+      "orbitUpReference": [
+        -0.8837621649695359,
+        -0.3556601778419532,
+        0.30408925279560467
+      ],
+      "metersPerUnit": 1155759.677419355,
+      "bodyRadiusM": 358285500
+    }
+  }
+}

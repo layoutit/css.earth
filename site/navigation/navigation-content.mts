@@ -15,9 +15,7 @@ export type NavigationContentLoader = (object: ObjectEntry, options: { signal: A
 
 export function objectLinkIsCurrent(anchor: Pick<HTMLAnchorElement, 'origin' | 'pathname' | 'search'>,
   origin: string, route: string) {
-  if (anchor.origin !== origin || anchor.pathname !== route) return false;
-  const query = new URLSearchParams(anchor.search);
-  return !query.has('overview');
+  return anchor.origin === origin && anchor.pathname === route;
 }
 /** Load the static navigation fragment without a second resident card bank. */
 export function createNavigationContent({ documentTarget, windowTarget, fragments = navigationFragments(windowTarget) }: { documentTarget: Document; windowTarget: BrowserWindow; fragments?: NavigationFragments }) {

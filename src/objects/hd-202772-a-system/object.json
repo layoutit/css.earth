@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-202772-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-202772-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 202772 system",
+      "systemName": "HD 202772 system",
+      "classification": "planetary-system",
+      "color": "#f6f1ff",
+      "distanceAu": 33611591.9,
+      "description": "HD 202772 A b crosses HD 202772 A as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3428448725981358600,
+        -2907570081703550000,
+        -2252731199586758400
+      ],
+      "presentationToReference": [
+        0.6818421017969203,
+        -0.34168457970580807,
+        -0.6467944002605646,
+        -0.5782509391535972,
+        0.28977378690402045,
+        -0.7626644109903689,
+        -0.44801473143764037,
+        -0.8940261743453425,
+        -5.387991045339155e-7
+      ],
+      "orbitUpReference": [
+        0.34168457970580807,
+        -0.28977378690402045,
+        0.8940261743453425
+      ],
+      "metersPerUnit": 5731670.322580645,
+      "bodyRadiusM": 1776817800
+    }
+  }
+}

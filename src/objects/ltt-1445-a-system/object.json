@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ltt-1445-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "ltt-1445-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "LTT 1445 system",
+      "systemName": "LTT 1445 system",
+      "classification": "planetary-system",
+      "color": "#ffc680",
+      "distanceAu": 1415744.6,
+      "description": "2 planets cross LTT 1445 A as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        142361595090130510,
+        144672515971873200,
+        -60490062679515420
+      ],
+      "presentationToReference": [
+        0.6721780517110233,
+        -0.20031107685395985,
+        0.7127777629020001,
+        0.683089353393279,
+        -0.20357080978915593,
+        -0.7013899490886216,
+        -0.285596922390149,
+        -0.9583498306419187,
+        0.000005466343627261737
+      ],
+      "orbitUpReference": [
+        0.20031107685395985,
+        0.20357080978915593,
+        0.9583498306419187
+      ],
+      "metersPerUnit": 594711.2903225806,
+      "bodyRadiusM": 184360500
+    }
+  }
+}

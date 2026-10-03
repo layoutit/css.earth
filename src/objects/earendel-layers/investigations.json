@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "earendel-layers",
+  "entries": [
+    {
+      "id": "sunrisearc1",
+      "subject": "ESA/Webb sunrisearc1",
+      "status": "included",
+      "finding": "Galaxy cluster WHL0137-08: Webb NIRCam, 0.9 to 4.4 µm, the shortest wavelengths blue and the longest red; 610 × 830 px over 12.22 arcsec. The file's embedded tags give 0.02003 arcsec per pixel and north 17.2° left of vertical, and place the paper's position at pixel 4914, 4194, on the arc. The same publisher's tags placed another galaxy 1.5 arcsec off (JADES-GS-z14-0), so that place is good to about an arcsec. The window holds the whole arc; only a band along it is kept, 0.44 arcsec to each side of a path traced by eye over the arc and fading out over a further 0.28 arcsec, so the nearer cluster's galaxies around it are not drawn.",
+      "evidence": [
+        "https://esawebb.org/images/sunrisearc1/",
+        "https://esawebb.org/copyright/"
+      ]
+    }
+  ]
+}

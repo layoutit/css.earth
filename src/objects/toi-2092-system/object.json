@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2092-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2092",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2092 system",
+      "systemName": "TOI-2092 system",
+      "classification": "planetary-system",
+      "color": "#fff0eb",
+      "distanceAu": 36532485.6,
+      "description": "TOI-2092 b crosses TOI-2092 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3225310709750093000,
+        -2058543297097254700,
+        3902305122632380400
+      ],
+      "presentationToReference": [
+        -0.5901552255755097,
+        -0.6018895637055149,
+        -0.5380016383137735,
+        -0.37666451179791854,
+        -0.38414789911300135,
+        0.8429437924079537,
+        0.7140312705182842,
+        -0.7001138083979291,
+        0.000003548614008484161
+      ],
+      "orbitUpReference": [
+        0.6018895637055149,
+        0.38414789911300135,
+        0.7001138083979291
+      ],
+      "metersPerUnit": 2360667.0967741935,
+      "bodyRadiusM": 731806800
+    }
+  }
+}

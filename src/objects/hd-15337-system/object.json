@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-15337-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-15337",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 15337 system",
+      "systemName": "HD 15337 system",
+      "classification": "planetary-system",
+      "color": "#ffe5d5",
+      "distanceAu": 9252783.1,
+      "description": "2 planets cross HD 15337 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        981043685933249400,
+        735722014397897200,
+        -642080017924819800
+      ],
+      "presentationToReference": [
+        0.708749962009555,
+        -0.37109385680945894,
+        0.5999690331923268,
+        0.5315185829720321,
+        -0.27829990432671,
+        -0.8000232241673658,
+        -0.46385502832981934,
+        -0.8859111200848677,
+        0.0000017656978286677777
+      ],
+      "orbitUpReference": [
+        0.37109385680945894,
+        0.27829990432671,
+        0.8859111200848677
+      ],
+      "metersPerUnit": 1918785.4838709678,
+      "bodyRadiusM": 594823500
+    }
+  }
+}

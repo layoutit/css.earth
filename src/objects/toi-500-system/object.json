@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-500-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-500",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-500 system",
+      "systemName": "TOI-500 system",
+      "classification": "planetary-system",
+      "color": "#ffcbab",
+      "distanceAu": 9779053.1,
+      "description": "TOI-500 b crosses TOI-500 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -281216912291418270,
+        945751169450363600,
+        -1080103164568210300
+      ],
+      "presentationToReference": [
+        -0.1922307285937202,
+        0.21042239457264403,
+        0.9585247846804184,
+        0.6464847186743804,
+        -0.7076915086350153,
+        0.28500918779296147,
+        -0.7383121667051377,
+        -0.6744591495918865,
+        -0.00000519176641278836
+      ],
+      "orbitUpReference": [
+        -0.21042239457264403,
+        0.7076915086350153,
+        0.6744591495918865
+      ],
+      "metersPerUnit": 1521563.2258064516,
+      "bodyRadiusM": 471684600
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { parseCompleteWorldContext, parsePreparedWorldIndex } from '@cssearth/objects';
+import { parseCompleteWorldContext, parsePreparedWorldIndex, systemObjectId } from '@cssearth/objects';
 import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
 import { WORLD_SUMMARY_SOURCE, pageWorldPlace, startupWorld } from './startup-world.mts';
 import { readWorldPlace, type WorldPlace } from './object-entries.mts';
@@ -117,7 +117,7 @@ const settled = new Set<string>();
 /** Whether the plan holds `id` with everything that orbits it: a star's row names its system's members, and one of them
  * missing means its holder's file is not read. */
 export function worldSystemHeld(id: string): boolean {
-  if (node || id === summary.focus.id || loaded.has(id) || settled.has(id)) return true;
+  if (node || id === summary.focus.id || loaded.has(id) || loaded.has(systemObjectId(id)) || settled.has(id)) return true;
   const body = held.get(id);
   return body !== undefined && (body.systemView?.memberIds ?? []).every(member => held.has(member));
 }
@@ -125,13 +125,15 @@ export function worldSystemHeld(id: string): boolean {
  * the caller goes on at once. A body the plan does not hold names its holder in its own object entry. */
 export function loadWorldSystemOf(id: string): Promise<void> | null {
   if (worldSystemHeld(id)) return null;
-  // A star the plan holds without its planets is its own holder.
-  if (held.has(id)) return loadHolder({ holder: id });
+  // A star the plan holds without its planets: its system is their holder (an object of its own, system-address.ts).
+  if (held.has(id)) return loadHolder({ holder: systemObjectId(id) });
   return readWorldPlace(id).then(place => {
     if (!place) { settled.add(id); return; }
     return loadHolder(place);
   });
 }
+/** Whether the holder `id` is read. */
+export const worldHolderRead = (id: string): boolean => node || loaded.has(id);
 /** Reads a holder by its id (world-approach.mts): the file of a star the camera has come near. */
 export function loadWorldHolder(id: string): Promise<void> {
   return loadHolder({ holder: id });

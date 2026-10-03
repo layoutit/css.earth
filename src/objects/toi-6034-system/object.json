@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-6034-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-6034",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-6034 system",
+      "systemName": "TOI-6034 system",
+      "classification": "planetary-system",
+      "color": "#ffc286",
+      "distanceAu": 24232226.1,
+      "description": "TOI-6034 b crosses TOI-6034 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        990067124718330600,
+        -894590569410084400,
+        3370570889544083000
+      ],
+      "presentationToReference": [
+        0.273115045833654,
+        0.689883088288476,
+        -0.6704248624811254,
+        -0.24677735303695833,
+        -0.6233541804310948,
+        -0.7419774280711985,
+        0.9297898202106505,
+        -0.36809087224846093,
+        -1.1687375407586327e-7
+      ],
+      "orbitUpReference": [
+        -0.689883088288476,
+        0.6233541804310948,
+        0.36809087224846093
+      ],
+      "metersPerUnit": 1097410.6451612904,
+      "bodyRadiusM": 340197300
+    }
+  }
+}

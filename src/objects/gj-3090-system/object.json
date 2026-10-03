@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-3090-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-3090",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 3090 system",
+      "systemName": "GJ 3090 system",
+      "classification": "planetary-system",
+      "color": "#ffc188",
+      "distanceAu": 4631576,
+      "description": "GJ 3090 b crosses GJ 3090 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        445149722378107900,
+        165885187629590180,
+        -504378901980422400
+      ],
+      "presentationToReference": [
+        0.6424714141700001,
+        -0.6821233451260705,
+        0.34919654065929673,
+        0.23941717974992374,
+        -0.25419999619692035,
+        -0.9370495056154068,
+        -0.7279491026266829,
+        -0.6856311719631083,
+        0.000004183506976350623
+      ],
+      "orbitUpReference": [
+        0.6821233451260705,
+        0.25419999619692035,
+        0.6856311719631083
+      ],
+      "metersPerUnit": 1158003.8709677418,
+      "bodyRadiusM": 358981200
+    }
+  }
+}

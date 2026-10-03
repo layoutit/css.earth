@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2134-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2134",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2134 system",
+      "systemName": "TOI-2134 system",
+      "classification": "planetary-system",
+      "color": "#ffcaa9",
+      "distanceAu": 4676235.8,
+      "description": "2 planets cross TOI-2134 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        18345044130851610,
+        -542792325685805800,
+        440927462246369500
+      ],
+      "presentationToReference": [
+        0.02622356832159051,
+        0.021288429941188753,
+        -0.9994294008158465,
+        -0.7759017376743264,
+        -0.6299489032391795,
+        -0.03377680834116224,
+        0.6303085101269408,
+        -0.7763447572170458,
+        0.000001778319477125614
+      ],
+      "orbitUpReference": [
+        -0.021288429941188753,
+        0.6299489032391795,
+        0.7763447572170458
+      ],
+      "metersPerUnit": 1591133.2258064516,
+      "bodyRadiusM": 493251300
+    }
+  }
+}

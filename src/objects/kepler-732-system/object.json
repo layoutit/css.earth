@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-732-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-732",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-732 system",
+      "systemName": "Kepler-732 system",
+      "classification": "planetary-system",
+      "color": "#ffca92",
+      "distanceAu": 35759087.3,
+      "description": "2 planets cross Kepler-732 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        882756571082929800,
+        -3612568430661534000,
+        3845394900453191700
+      ],
+      "presentationToReference": [
+        0.16501669874281874,
+        0.17063456000946634,
+        -0.9714182086343646,
+        -0.67530974671919,
+        -0.6982908291355506,
+        -0.23737452249820082,
+        0.7188367235485993,
+        -0.6951789444995878,
+        -0.0000015341151988649082
+      ],
+      "orbitUpReference": [
+        -0.17063456000946634,
+        0.6982908291355506,
+        0.6951789444995878
+      ],
+      "metersPerUnit": 1032329.0322580645,
+      "bodyRadiusM": 320022000
+    }
+  }
+}

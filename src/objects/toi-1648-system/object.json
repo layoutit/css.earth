@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1648-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1648",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1648 system",
+      "systemName": "TOI-1648 system",
+      "classification": "planetary-system",
+      "color": "#ffdbc2",
+      "distanceAu": 14389008.9,
+      "description": "TOI-1648 b crosses TOI-1648 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        535968432888801300,
+        543529762880645700,
+        2012672289351806200
+      ],
+      "presentationToReference": [
+        0.24899076451918353,
+        0.6565070609381649,
+        0.7120407840303006,
+        0.252503473886842,
+        0.6657657799843539,
+        -0.7021381074097188,
+        0.935011013228844,
+        -0.35461867567876004,
+        7.829691125402393e-7
+      ],
+      "orbitUpReference": [
+        -0.6565070609381649,
+        -0.6657657799843539,
+        0.35461867567876004
+      ],
+      "metersPerUnit": 1817796.7741935484,
+      "bodyRadiusM": 563517000
+    }
+  }
+}

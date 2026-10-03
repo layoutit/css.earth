@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-16-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-16-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-16 system",
+      "systemName": "Kepler-16 system",
+      "classification": "planetary-system",
+      "color": "#ffc195",
+      "distanceAu": 15531101.8,
+      "description": "Orange dwarf 75 parsecs away, the larger of the two stars Kepler-16 (AB) b circles."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        470029775114370500,
+        -1359213632515667500,
+        1824798526546973700
+      ],
+      "presentationToReference": [
+        0.20229921885495816,
+        0.25668169672152374,
+        -0.9450870502862864,
+        -0.5850009311154412,
+        -0.742269117783401,
+        -0.3268187072049556,
+        0.7853973113302215,
+        -0.618991973577373,
+        0.0000014311253582699772
+      ],
+      "orbitUpReference": [
+        -0.25668169672152374,
+        0.742269117783401,
+        0.618991973577373
+      ],
+      "metersPerUnit": 1456257.1935483871,
+      "bodyRadiusM": 451439730
+    }
+  }
+}

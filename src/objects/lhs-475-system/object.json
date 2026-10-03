@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lhs-475-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "lhs-475",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "LHS 475 system",
+      "systemName": "LHS 475 system",
+      "classification": "planetary-system",
+      "color": "#ffc981",
+      "distanceAu": 2574637.2,
+      "description": "LHS 475 b crosses LHS 475 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        17250633821443038,
+        -46769574847179870,
+        -381920722859642050
+      ],
+      "presentationToReference": [
+        0.04481003124198019,
+        -0.3430132110001337,
+        -0.9382611567039694,
+        -0.12148808920482831,
+        0.9303626404091917,
+        -0.34592774030452766,
+        -0.9915809121203636,
+        -0.12948858795359072,
+        -0.00001755940668821683
+      ],
+      "orbitUpReference": [
+        0.3430132110001337,
+        -0.9303626404091917,
+        0.12948858795359072
+      ],
+      "metersPerUnit": 625905.4838709678,
+      "bodyRadiusM": 194030700
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hip-113103-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hip-113103",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HIP 113103 system",
+      "systemName": "HIP 113103 system",
+      "classification": "planetary-system",
+      "color": "#ffd9c0",
+      "distanceAu": 9541439.5,
+      "description": "2 planets cross HIP 113103 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1001138536534412800,
+        -295175432996903600,
+        -973654971161030400
+      ],
+      "presentationToReference": [
+        0.7013814755706276,
+        -0.6542828404546281,
+        -0.2828038019776122,
+        -0.2067951369288924,
+        0.1929086876103771,
+        -0.9591777778842682,
+        -0.6821288713058036,
+        -0.7312319761409956,
+        -7.03845200461897e-8
+      ],
+      "orbitUpReference": [
+        0.6542828404546281,
+        -0.1929086876103771,
+        0.7312319761409956
+      ],
+      "metersPerUnit": 1665191.6129032257,
+      "bodyRadiusM": 516209400
+    }
+  }
+}

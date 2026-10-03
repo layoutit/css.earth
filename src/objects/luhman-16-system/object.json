@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "luhman-16-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "luhman-16",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Luhman 16 system",
+      "systemName": "Luhman 16 system",
+      "classification": "planetary-system",
+      "color": "#ff2f96",
+      "distanceAu": 411832.8,
+      "description": "The brighter of the two nearest brown dwarfs, 2 parsecs away: a failed star 35 times the mass of Jupiter."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -35061348545805564,
+        11193622093541040,
+        -49407603163387790
+      ],
+      "presentationToReference": [
+        -0.569056354586803,
+        0.7641335893254604,
+        0.3037675475902046,
+        0.18167591569428876,
+        -0.24345157012917654,
+        0.9527461333735657,
+        -0.8019780090258213,
+        -0.5973534888708923,
+        0.00028700653732398817
+      ],
+      "orbitUpReference": [
+        -0.7641335893254604,
+        0.24345157012917654,
+        0.5973534888708923
+      ],
+      "metersPerUnit": 232925.48387096773,
+      "bodyRadiusM": 72206900
+    }
+  }
+}

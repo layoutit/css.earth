@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-18-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-18",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-18 system",
+      "systemName": "WASP-18 system",
+      "classification": "planetary-system",
+      "color": "#f3f0ff",
+      "distanceAu": 25326309.8,
+      "description": "F6 star in Phoenix, 123 parsecs away, circled every 23 hours by a planet ten times Jupiter's mass."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2411612600698164000,
+        1091651414513013100,
+        -2710560743283833300
+      ],
+      "presentationToReference": [
+        0.6365166162336501,
+        -0.6517577515483701,
+        0.41238141393020755,
+        0.2881284764705219,
+        -0.29502612020418995,
+        -0.911011289416349,
+        -0.7154219582213284,
+        -0.6986926518104193,
+        -9.402485717324561e-7
+      ],
+      "orbitUpReference": [
+        0.6517577515483701,
+        0.29502612020418995,
+        0.6986926518104193
+      ],
+      "metersPerUnit": 3022928.709677419,
+      "bodyRadiusM": 937107900
+    }
+  }
+}

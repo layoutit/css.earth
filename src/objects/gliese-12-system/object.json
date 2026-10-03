@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gliese-12-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gliese-12",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Gliese 12 system",
+      "systemName": "Gliese 12 system",
+      "classification": "planetary-system",
+      "color": "#ffc57d",
+      "distanceAu": 2509608.5,
+      "description": "Gliese 12 b crosses Gliese 12 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        364097663852443460,
+        25204045111256450,
+        88016454544669120
+      ],
+      "presentationToReference": [
+        0.9698136538849774,
+        0.2338647296102547,
+        0.06905624506582755,
+        0.06713371015744363,
+        0.016181161863937355,
+        -0.9976127680424051,
+        0.2344238505331007,
+        -0.972134485678322,
+        0.0000074952623344263456
+      ],
+      "orbitUpReference": [
+        -0.2338647296102547,
+        -0.016181161863937355,
+        0.972134485678322
+      ],
+      "metersPerUnit": 594711.2903225806,
+      "bodyRadiusM": 184360500
+    }
+  }
+}

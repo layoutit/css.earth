@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-83-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-83",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-83 system",
+      "systemName": "K2-83 system",
+      "classification": "planetary-system",
+      "color": "#ffbc86",
+      "distanceAu": 25910838.7,
+      "description": "2 planets cross K2-83 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1872654207798801200,
+        3230660219590843400,
+        1039699983196406300
+      ],
+      "presentationToReference": [
+        0.4831150756472111,
+        0.13451321735558822,
+        0.865162422923602,
+        0.8334590817012395,
+        0.2320602877897877,
+        -0.501491756622826,
+        0.26822711050920306,
+        -0.9633557064696141,
+        -5.60876409104413e-7
+      ],
+      "orbitUpReference": [
+        -0.13451321735558822,
+        -0.2320602877897877,
+        0.9633557064696141
+      ],
+      "metersPerUnit": 951538.0645161291,
+      "bodyRadiusM": 294976800
+    }
+  }
+}

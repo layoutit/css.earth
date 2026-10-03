@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "stephans-quintet",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Stephan's Quintet",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2584265342654217700
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Stephan's Quintet",
+      "systemName": "Galaxy groups",
+      "classification": "galaxy-cluster",
+      "classificationLabel": "Galaxy group",
+      "color": "#9a9a9a",
+      "distanceAu": 19550527014932,
+      "description": "Five galaxies close together on the sky: four are a true group, and the fifth is far in front.",
+      "aliases": [
+        "HCG 92",
+        "Hickson Compact Group 92",
+        "Arp 319"
+      ],
+      "order": 5455,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.2645601958981874e+24,
+        -8.697556234543981e+23,
+        1.6337879542431676e+24
+      ],
+      "presentationToReference": [
+        0.9978682725616439,
+        0,
+        -0.06526032956429591,
+        -0.059875181739964645,
+        0.3977771559319137,
+        -0.9155262403832694,
+        -0.025959068289264916,
+        -0.9174820620691818,
+        -0.3969292034542624
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 8336339815013605000,
+      "bodyRadiusM": 2.5842653426542177e+21
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

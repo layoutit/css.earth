@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1749-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1749",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1749 system",
+      "systemName": "TOI-1749 system",
+      "classification": "planetary-system",
+      "color": "#ffbe8c",
+      "distanceAu": 20507081.8,
+      "description": "3 planets cross TOI-1749 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        292041260903415800,
+        -1292015481826823700,
+        2767110677035911700
+      ],
+      "presentationToReference": [
+        0.09519581183297172,
+        0.1988681482691819,
+        -0.975391827428059,
+        -0.42115440225091466,
+        -0.8797830337557973,
+        -0.2204785317896523,
+        0.9019793383853848,
+        -0.43177919486634897,
+        -0.000002535975795676211
+      ],
+      "orbitUpReference": [
+        -0.1988681482691819,
+        0.8797830337557973,
+        0.43177919486634897
+      ],
+      "metersPerUnit": 1234306.4516129033,
+      "bodyRadiusM": 382635000
+    }
+  }
+}

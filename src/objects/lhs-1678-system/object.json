@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lhs-1678-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "lhs-1678",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "LHS 1678 system",
+      "systemName": "LHS 1678 system",
+      "classification": "planetary-system",
+      "color": "#ffc282",
+      "distanceAu": 4097465.5,
+      "description": "3 planets cross LHS 1678 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        175059184688521950,
+        437235459354786900,
+        -392319065439642940
+      ],
+      "presentationToReference": [
+        0.28560268855614573,
+        -0.23788884371378285,
+        0.9283533822451561,
+        0.713333737403304,
+        -0.5941338077159577,
+        -0.37169879958263485,
+        -0.6399891275418167,
+        -0.7683839642818275,
+        -0.000007925127125567266
+      ],
+      "orbitUpReference": [
+        0.23788884371378285,
+        0.5941338077159577,
+        0.7683839642818275
+      ],
+      "metersPerUnit": 738339.6774193548,
+      "bodyRadiusM": 228885300
+    }
+  }
+}

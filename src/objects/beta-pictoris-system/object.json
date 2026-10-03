@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "beta-pictoris-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "beta-pictoris",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Beta Pictoris system",
+      "systemName": "Beta Pictoris system",
+      "classification": "planetary-system",
+      "color": "#c2d4ff",
+      "distanceAu": 4049949.7,
+      "description": "A-type star 19.6 parsecs away with an edge-on debris disc and three imaged giant planets."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        21112473235951380,
+        380154975400486850,
+        -471282792847974600
+      ],
+      "presentationToReference": [
+        0.034846705886936155,
+        -0.043134135869912375,
+        0.9984613930501196,
+        0.6274560290371514,
+        -0.7766750189342759,
+        -0.0554512992487243,
+        -0.7778718652283029,
+        -0.6284229159460991,
+        -2.0765435089244534e-7
+      ],
+      "orbitUpReference": [
+        0.043134135869912375,
+        0.7766750189342759,
+        0.6284229159460991
+      ],
+      "metersPerUnit": 3486839.6129032257,
+      "bodyRadiusM": 1080920280
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-76-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-76",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-76 system",
+      "systemName": "WASP-76 system",
+      "classification": "planetary-system",
+      "color": "#f8f3ff",
+      "distanceAu": 38992026.5,
+      "description": "F7 star 189 parsecs away whose giant planet WASP-76b has iron condensing on its night side."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5208414396789427000,
+        2611941641804032500,
+        274804537788801380
+      ],
+      "presentationToReference": [
+        0.8929029724365631,
+        0.042114274771569433,
+        0.44827521644009627,
+        0.4477774382231642,
+        0.0211195523799127,
+        -0.8938955925193797,
+        0.047113136514679334,
+        -0.9988895596449774,
+        1.1097328605432442e-7
+      ],
+      "orbitUpReference": [
+        -0.042114274771569433,
+        -0.0211195523799127,
+        0.9988895596449774
+      ],
+      "metersPerUnit": 3940803.870967742,
+      "bodyRadiusM": 1221649200
+    }
+  }
+}

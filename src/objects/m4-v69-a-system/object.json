@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m4-v69-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "m4-v69-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "M4 V69 system",
+      "systemName": "M4 V69 system",
+      "classification": "planetary-system",
+      "color": "#fff4f3",
+      "distanceAu": 375402098,
+      "description": "The primary star of M4 V69, a pair that eclipse each other every 48.188 days."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -20426793798991393000,
+        -45862079504398156000,
+        -25165231128637200000
+      ],
+      "presentationToReference": [
+        -0.36372931504657774,
+        0.18231687226517215,
+        -0.9134886663025396,
+        -0.8166422459106653,
+        0.40933725173414887,
+        0.40686417455548823,
+        -0.44810314389628214,
+        -0.8939818635913029,
+        2.9816227249015414e-7
+      ],
+      "orbitUpReference": [
+        -0.18231687226517215,
+        -0.40933725173414887,
+        0.8939818635913029
+      ],
+      "metersPerUnit": 1942349.3548387096,
+      "bodyRadiusM": 602128300
+    }
+  }
+}

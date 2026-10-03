@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1136-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1136",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1136 system",
+      "systemName": "TOI-1136 system",
+      "classification": "planetary-system",
+      "color": "#fff3f3",
+      "distanceAu": 17445173.9,
+      "description": "6 planets cross TOI-1136 as seen from Earth: b, c, d, e, f, g."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1083922855850899800,
+        -234053558355645120,
+        2362452540822375000
+      ],
+      "presentationToReference": [
+        -0.41533370569638867,
+        -0.884843800097614,
+        -0.21106719863901027,
+        -0.0896838102440799,
+        -0.19106589575700453,
+        0.9774715533756864,
+        0.9052373871491441,
+        -0.4249061930678197,
+        5.694664838845004e-8
+      ],
+      "orbitUpReference": [
+        0.884843800097614,
+        0.19106589575700453,
+        0.4249061930678197
+      ],
+      "metersPerUnit": 2172379.35483871,
+      "bodyRadiusM": 673437600
+    }
+  }
+}

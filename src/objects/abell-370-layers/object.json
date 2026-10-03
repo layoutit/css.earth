@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "abell-370-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "abell-370",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3.570945955936555e+25,
+        2.9933389441423777e+25,
+        -1.2870692012172018e+24
+      ],
+      "localToReferenceXyzw": [
+        0.30309615244231325,
+        0.6495678885156634,
+        0.6318732978538338,
+        0.2948396446261747
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -578.7344163292809,
+          -519.8615359913954,
+          -0.05147087504155934
+        ],
+        "max": [
+          530.6347319240356,
+          601.4208992513844,
+          0.06004323670640588
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

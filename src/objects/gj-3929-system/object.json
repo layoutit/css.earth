@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-3929-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-3929",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 3929 system",
+      "systemName": "GJ 3929 system",
+      "classification": "planetary-system",
+      "color": "#ffc983",
+      "distanceAu": 3265118.9,
+      "description": "GJ 3929 b crosses GJ 3929 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -201593853493186080,
+        -343292911251681600,
+        283015927239692930
+      ],
+      "presentationToReference": [
+        -0.4127223237588138,
+        -0.29339040754575896,
+        -0.8623122127346096,
+        -0.7028222618949115,
+        -0.49962307836464687,
+        0.5063769818528032,
+        0.5793972313154813,
+        -0.815045304462008,
+        -0.0000042880566087477884
+      ],
+      "orbitUpReference": [
+        0.29339040754575896,
+        0.49962307836464687,
+        0.815045304462008
+      ],
+      "metersPerUnit": 718141.9354838709,
+      "bodyRadiusM": 222624000
+    }
+  }
+}

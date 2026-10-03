@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1278-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1278",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1278 system",
+      "systemName": "TOI-1278 system",
+      "classification": "planetary-system",
+      "color": "#ffbe8a",
+      "distanceAu": 15564339,
+      "description": "TOI-1278 b crosses TOI-1278 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1459507481808556300,
+        -1204062259926085600,
+        1357011863403951600
+      ],
+      "presentationToReference": [
+        0.6268295682756377,
+        0.4495730195017716,
+        -0.6363715836454654,
+        -0.51712090276267,
+        -0.37088376131159506,
+        -0.7713826595933339,
+        0.5828127179989288,
+        -0.8126065073154555,
+        -0.0000026977191038043048
+      ],
+      "orbitUpReference": [
+        -0.4495730195017716,
+        0.37088376131159506,
+        0.8126065073154555
+      ],
+      "metersPerUnit": 1285922.9032258065,
+      "bodyRadiusM": 398636100
+    }
+  }
+}

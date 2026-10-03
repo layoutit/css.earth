@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-183579-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-183579",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 183579 system",
+      "systemName": "HD 183579 system",
+      "classification": "planetary-system",
+      "color": "#fff4f5",
+      "distanceAu": 11713580.7,
+      "description": "HD 183579 b crosses HD 183579 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        401966058959001660,
+        -933929276246413300,
+        -1427181971709539600
+      ],
+      "presentationToReference": [
+        0.2293912803167949,
+        -0.32197650915648923,
+        -0.9185372981354775,
+        -0.5329684625426944,
+        0.7481011870206663,
+        -0.39533432928743584,
+        -0.814447210351597,
+        -0.5802376595238121,
+        -0.000004564037186854627
+      ],
+      "orbitUpReference": [
+        0.32197650915648923,
+        -0.7481011870206663,
+        0.5802376595238121
+      ],
+      "metersPerUnit": 2154425.806451613,
+      "bodyRadiusM": 667872000
+    }
+  }
+}

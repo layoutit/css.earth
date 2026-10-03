@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-93963-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-93963-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 93963 system",
+      "systemName": "HD 93963 system",
+      "classification": "planetary-system",
+      "color": "#fff6f9",
+      "distanceAu": 16975716.4,
+      "description": "2 planets cross HD 93963 A as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2186778921420982500,
+        677909264200686600,
+        1098933499599039700
+      ],
+      "presentationToReference": [
+        -0.8610950803401343,
+        -0.4133273572603437,
+        0.2961009259597101,
+        0.2669425457728239,
+        0.1281305413039396,
+        0.9551566581673832,
+        0.4327319492137614,
+        -0.9015226342834325,
+        -0.000002078226488842203
+      ],
+      "orbitUpReference": [
+        0.4133273572603437,
+        -0.1281305413039396,
+        0.9015226342834325
+      ],
+      "metersPerUnit": 2313988.064516129,
+      "bodyRadiusM": 717336300
+    }
+  }
+}

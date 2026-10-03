@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-106315-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-106315",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 106315 system",
+      "systemName": "HD 106315 system",
+      "classification": "planetary-system",
+      "color": "#efeeff",
+      "distanceAu": 22487387.3,
+      "description": "HD 106315 b crosses HD 106315 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3357809754602479000,
+        -203752877383563200,
+        -23097829238783000
+      ],
+      "presentationToReference": [
+        -0.9981404871707961,
+        0.006854057426189595,
+        -0.06056888448076847,
+        -0.06056745651397286,
+        0.00041590704812832086,
+        0.9981640197045551,
+        -0.006866664537764085,
+        -0.9999764241811533,
+        8.385315588295507e-10
+      ],
+      "orbitUpReference": [
+        -0.006854057426189595,
+        -0.00041590704812832086,
+        0.9999764241811533
+      ],
+      "metersPerUnit": 2908474.8387096776,
+      "bodyRadiusM": 901627200
+    }
+  }
+}

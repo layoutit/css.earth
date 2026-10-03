@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-110-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-110",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-110 system",
+      "systemName": "K2-110 system",
+      "classification": "planetary-system",
+      "color": "#ffddc6",
+      "distanceAu": 24035570.9,
+      "description": "K2-110 b crosses K2-110 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3120602315725930000,
+        -1614105193753835000,
+        -765081662299855600
+      ],
+      "presentationToReference": [
+        -0.8678787855634603,
+        0.18898933980554677,
+        -0.4594229456707153,
+        -0.44890297243512617,
+        0.09775256696329102,
+        0.8882176292953186,
+        -0.21277343562531914,
+        -0.9771015633453622,
+        -4.972954502237953e-7
+      ],
+      "orbitUpReference": [
+        -0.18898933980554677,
+        -0.09775256696329102,
+        0.9771015633453622
+      ],
+      "metersPerUnit": 1600110,
+      "bodyRadiusM": 496034100
+    }
+  }
+}

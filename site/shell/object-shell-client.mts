@@ -7,7 +7,8 @@ import { bindTabPanels } from '../tab-panels.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
 import { createObjectBrowserController } from '../object-browser.mts';
 import { applySeoHead, objectSeo } from '../seo.mts';
-import { knownLevel, knownObject } from '../object-directory.mts';
+import { knownLevel, knownObject, loadObject } from '../object-directory.mts';
+import { systemObjectId } from '../navigation/system-address.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import { selectionKey, type SceneView } from '../scene/scene-selection.mts';
@@ -124,6 +125,12 @@ export function mountObjectShell({
     viewReadout.setExtendedSubject(!ladder && shown?.worldFrame && isExtendedClassification(shown.classification) ? { name: shown.name, positionM: shown.worldFrame.originM } : null);
     viewReadout.setOverviewScope(ladder?.scope ?? 'system');
     updateBodyCard();
+    // The page is the subject's own object: the body, or its system when the view is out to its moons or its planets
+    // (navigation/system-address.mts). Its head and forms follow, once that object's entry is read.
+    const pageId = subject.view === 'body' ? subject.objectId : systemObjectId(subject.objectId);
+    void loadObject(pageId).then(page => {
+      if (page && presentedSubject === subject && !lifetime.disposed) presentPage(page.route, objectSeo(page));
+    }, error => { console.error(`The page of ${pageId} could not be read for its title.`, error); });
   }
   function own<T extends { destroy(): void }>(controller: T) {
     lifetime.onDispose(() => controller.destroy());

@@ -11,7 +11,7 @@ declare global { interface Window { __cssEarthStartupRequests?: StartupRequests 
 export function startStartupRequests(window: Window, urls: readonly string[], transportUrl: string, sceneRoute: string) {
   const location = window.location, query = new URLSearchParams(location.search);
   const defaultView = (location.pathname === '/' || location.pathname === sceneRoute) &&
-    !['overview', 'view', 'dataset', 'feature', 'v', 'settings', 'q'].some(key => query.has(key));
+    !['dataset', 'feature', 'v', 'settings', 'q'].some(key => query.has(key));
   const requests = new Map();
   for (const url of defaultView ? [transportUrl, ...urls] : urls) {
     const response = fetch(url);

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-135344-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-135344-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 135344 A system",
+      "systemName": "HD 135344 A system",
+      "classification": "planetary-system",
+      "color": "#b8cdff",
+      "distanceAu": 27834006.8,
+      "description": "Young hot star 135 parsecs away with a newly found giant planet on a Solar System scale orbit."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2179426073171518000,
+        -2503060950272571400,
+        -2514541492668905000
+      ],
+      "presentationToReference": [
+        -0.5234092702360603,
+        0.3965537460852588,
+        -0.7541802584904372,
+        -0.6011331705484595,
+        0.4554412954085324,
+        0.6566674483351177,
+        -0.6038887704679656,
+        -0.7970685998722732,
+        5.853880455417083e-7
+      ],
+      "orbitUpReference": [
+        -0.3965537460852588,
+        -0.4554412954085324,
+        0.7970685998722732
+      ],
+      "metersPerUnit": 3366290.3225806453,
+      "bodyRadiusM": 1043550000
+    }
+  }
+}

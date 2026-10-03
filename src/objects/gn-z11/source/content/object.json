@@ -1,0 +1,136 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "gn-z11",
+  "displayName": "GN-z11",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance (comoving)",
+        "value": "9,762 Mpc, 31.8 billion light years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "redshift",
+        "label": "Redshift",
+        "value": "10.603",
+        "source": {
+          "catalogueId": "publication-bunker-2023-gn-z11",
+          "url": "https://arxiv.org/abs/2302.07256",
+          "label": "Bunker et al. (2023), JADES NIRSpec Spectroscopy of GN-z11, A&A 677, A88",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "light-travel",
+        "label": "Light travel time",
+        "value": "13.35 billion years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age of the universe then",
+        "value": "440 million years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 189.1061°, Dec 62.2421°",
+        "source": {
+          "catalogueId": "publication-oesch-2016-gn-z11",
+          "url": "https://arxiv.org/abs/1603.00461",
+          "label": "Oesch et al. (2016), A Remarkably Luminous Galaxy at z = 11.1 Measured with Hubble Space Telescope Grism Spectroscopy, ApJ 819, 129",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "0.39 arcsec, 18.5 kpc comoving at its distance",
+        "source": {
+          "catalogueId": "esawebb-weic2406a",
+          "url": "https://esawebb.org/images/weic2406a/",
+          "label": "ESA/Webb weic2406a: NASA, ESA, CSA, B. Robertson (UC Santa Cruz), B. Johnson (CfA), S. Tacchella (Cambridge), M. Rieke (University of Arizona), D. Eisenstein (CfA)",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Webb · near infrared",
+        "thumbnail": "gn-z11-dataset-optical.webp",
+        "volume": {
+          "objectId": "gn-z11-volume",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "gn-z11-volume-optical",
+          "path": "../../gn-z11-volume/source/manifest.json",
+          "url": "https://esawebb.org/images/weic2406a/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+      "href": "https://arxiv.org/abs/1807.06209"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bunker et al. (2023), JADES NIRSpec Spectroscopy of GN-z11, A&A 677, A88",
+      "href": "https://arxiv.org/abs/2302.07256"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Oesch et al. (2016), A Remarkably Luminous Galaxy at z = 11.1 Measured with Hubble Space Telescope Grism Spectroscopy, ApJ 819, 129",
+      "href": "https://arxiv.org/abs/1603.00461"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Webb weic2406a: NASA, ESA, CSA, B. Robertson (UC Santa Cruz), B. Johnson (CfA), S. Tacchella (Cambridge), M. Rieke (University of Arizona), D. Eisenstein (CfA)",
+      "href": "https://esawebb.org/images/weic2406a/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1603.00461",
+      "credit": "Oesch et al. (2016), A Remarkably Luminous Galaxy at z = 11.1 Measured with Hubble Space Telescope Grism Spectroscopy, ApJ 819, 129"
+    }
+  }
+}

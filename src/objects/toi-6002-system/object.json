@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-6002-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-6002",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-6002 system",
+      "systemName": "TOI-6002 system",
+      "classification": "planetary-system",
+      "color": "#ffc87c",
+      "distanceAu": 6618159,
+      "description": "TOI-6002 b crosses TOI-6002 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        413603852980730240,
+        -727657055388918300,
+        528839105458080700
+      ],
+      "presentationToReference": [
+        0.4177505681280275,
+        0.26396062359318595,
+        -0.8693729073424169,
+        -0.7349524094589409,
+        -0.464385839418691,
+        -0.4941566026857225,
+        0.5341623523416896,
+        -0.8453819144858105,
+        -0.0000010480643274486704
+      ],
+      "orbitUpReference": [
+        -0.26396062359318595,
+        0.464385839418691,
+        0.8453819144858105
+      ],
+      "metersPerUnit": 545787.7419354839,
+      "bodyRadiusM": 169194200
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-237-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-237",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-237 system",
+      "systemName": "TOI-237 system",
+      "classification": "planetary-system",
+      "color": "#ffca79",
+      "distanceAu": 7897583.8,
+      "description": "2 planets cross TOI-237 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1021982406097289500,
+        -121066736844888270,
+        -580298718101759000
+      ],
+      "presentationToReference": [
+        0.8650236550834604,
+        -0.48774417857644553,
+        -0.11764222205840563,
+        -0.10247298844665564,
+        0.05778389969853093,
+        -0.9930560445284254,
+        -0.4911551310786262,
+        -0.8710721194025317,
+        -0.000003836546011638389
+      ],
+      "orbitUpReference": [
+        0.48774417857644553,
+        -0.05778389969853093,
+        0.8710721194025317
+      ],
+      "metersPerUnit": 461406.12903225806,
+      "bodyRadiusM": 143035900
+    }
+  }
+}

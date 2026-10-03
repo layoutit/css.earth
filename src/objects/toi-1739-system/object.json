@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1739-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1739",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1739 system",
+      "systemName": "TOI-1739 system",
+      "classification": "planetary-system",
+      "color": "#ffdac1",
+      "distanceAu": 14642751,
+      "description": "TOI-1739 b crosses TOI-1739 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -127906281080071520,
+        -223056764225611840,
+        2175381036169929200
+      ],
+      "presentationToReference": [
+        -0.05839346734887105,
+        -0.493954206340752,
+        -0.8675248959016993,
+        -0.10183282519098746,
+        -0.8615274347166273,
+        0.4973937624701472,
+        0.9930862392987823,
+        -0.11738705750151998,
+        -0.000006821782631269467
+      ],
+      "orbitUpReference": [
+        0.493954206340752,
+        0.8615274347166273,
+        0.11738705750151998
+      ],
+      "metersPerUnit": 1752715.1612903227,
+      "bodyRadiusM": 543341700
+    }
+  }
+}

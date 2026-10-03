@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hip-9618-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hip-9618",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HIP 9618 system",
+      "systemName": "HIP 9618 system",
+      "classification": "planetary-system",
+      "color": "#fff1ee",
+      "distanceAu": 13880433.8,
+      "description": "2 planets cross HIP 9618 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1660158891576501200,
+        993802439173411800,
+        753665851905338900
+      ],
+      "presentationToReference": [
+        0.7995067705628851,
+        0.3114164206448436,
+        0.513623146652154,
+        0.4785998392793003,
+        0.18641601494395563,
+        -0.8580158875068941,
+        0.36294781672567517,
+        -0.9318094667501338,
+        0.0000029827805126522743
+      ],
+      "orbitUpReference": [
+        -0.3114164206448436,
+        -0.18641601494395563,
+        0.9318094667501338
+      ],
+      "metersPerUnit": 2152854.8387096776,
+      "bodyRadiusM": 667385000
+    }
+  }
+}

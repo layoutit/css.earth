@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2227-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2227",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2227 system",
+      "systemName": "TOI-2227 system",
+      "classification": "planetary-system",
+      "color": "#fff5f7",
+      "distanceAu": 34701030.1,
+      "description": "TOI-2227 b crosses TOI-2227 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1808491491730247200,
+        -748446039038849700,
+        -4808091800128439000
+      ],
+      "presentationToReference": [
+        0.348375275380042,
+        -0.8558078491876733,
+        -0.3823971662717293,
+        -0.144175461234113,
+        0.3541765508197831,
+        -0.9239980558569009,
+        -0.926200898229866,
+        -0.3770303649816156,
+        1.3795941166152117e-7
+      ],
+      "orbitUpReference": [
+        0.8558078491876733,
+        -0.3541765508197831,
+        0.3770303649816156
+      ],
+      "metersPerUnit": 2712040.64516129,
+      "bodyRadiusM": 840732600
+    }
+  }
+}

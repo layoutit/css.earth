@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-152-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-152",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-152 system",
+      "systemName": "K2-152 system",
+      "classification": "planetary-system",
+      "color": "#ffbe8e",
+      "distanceAu": 22322744.3,
+      "description": "K2-152 b crosses K2-152 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3320829664499014700,
+        -94622198425611220,
+        -339062304610268000
+      ],
+      "presentationToReference": [
+        -0.9944286143212864,
+        0.10149140300737503,
+        -0.028482031785684068,
+        -0.02833479316048599,
+        0.002892340130623887,
+        0.9995943046381974,
+        -0.10153260813944753,
+        -0.9948322117242502,
+        4.878764606632731e-7
+      ],
+      "orbitUpReference": [
+        -0.10149140300737503,
+        -0.002892340130623887,
+        0.9948322117242502
+      ],
+      "metersPerUnit": 1368958.064516129,
+      "bodyRadiusM": 424377000
+    }
+  }
+}

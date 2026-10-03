@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hip-97166-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hip-97166",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HIP 97166 system",
+      "systemName": "HIP 97166 system",
+      "classification": "planetary-system",
+      "color": "#ffe5d3",
+      "distanceAu": 13621623.1,
+      "description": "HIP 97166 b crosses HIP 97166 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        247429455695037800,
+        -501851419108337700,
+        1959442095621689300
+      ],
+      "presentationToReference": [
+        0.12142254201292582,
+        0.42520784287135727,
+        -0.896914074285718,
+        -0.24627655932269185,
+        -0.8624399764510267,
+        -0.44220486581145757,
+        0.9615635302044769,
+        -0.2745825511204958,
+        9.297348698727153e-7
+      ],
+      "orbitUpReference": [
+        -0.42520784287135727,
+        0.8624399764510267,
+        0.2745825511204958
+      ],
+      "metersPerUnit": 1889162.2580645161,
+      "bodyRadiusM": 585640300
+    }
+  }
+}

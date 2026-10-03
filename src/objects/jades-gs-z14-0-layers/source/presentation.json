@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "jades-gs-z14-0-layers",
+  "name": "JADES-GS-z14-0",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/jades-gs-z14-0-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/jades-gs-z14-0-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/jades-gs-z14-0-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · near infrared",
+      "title": "JADES-GS-z14-0 in near infrared",
+      "description": "Webb's deep field around the galaxy, 2.4 arcsec across, at the publisher's own pixels. A flat picture, with no depth. It stands as one flat picture facing the Sun at the object's distance.",
+      "summary": "Webb's deep field around the galaxy, 2.4 arcsec across, at the publisher's own pixels. A flat picture, with no depth.",
+      "detail": "80 × 80 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "Webb NIRCam: 0.9 to 1.5 µm blue, 2.0 and 2.8 µm green, 3.6 to 4.4 µm red"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "80 × 80"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "2.39 arcsec across"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/jades-gs-z14-0-layers/source/source.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/large/jades5.jpg"
+      }
+    }
+  ]
+}

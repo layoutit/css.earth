@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hip-65426-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hip-65426",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HIP 65426 system",
+      "systemName": "HIP 65426 system",
+      "classification": "planetary-system",
+      "color": "#bacdff",
+      "distanceAu": 22171671.3,
+      "description": "Young A-type star in Centaurus whose planet was the first exoplanet JWST photographed."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1925498448842766300,
+        -744919304759502500,
+        -2595947632374551600
+      ],
+      "presentationToReference": [
+        -0.5805235800189847,
+        0.7299361048743106,
+        -0.3608124940226721,
+        -0.22458767592806853,
+        0.28239339876487213,
+        0.9326383780197194,
+        -0.7826574914119013,
+        -0.6224526095494687,
+        0.0000013734550040151739
+      ],
+      "orbitUpReference": [
+        -0.7299361048743106,
+        -0.28239339876487213,
+        0.6224526095494687
+      ],
+      "metersPerUnit": 3972222.580645161,
+      "bodyRadiusM": 1231389000
+    }
+  }
+}

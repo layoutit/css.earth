@@ -26,8 +26,8 @@ sets the camera threshold between the host family and the selected body.
 `satellite-system:<host-id>`, so its heading, source link, URL and card agree
 on the subject.
 
-The existing `?overview=system` means a *stellar* planetary system, such as the
-Solar System or WASP-43's system. It must keep that meaning. Satellite systems
+A *stellar* planetary system, such as the Solar System or WASP-43's, is an object
+of its own with its own address (`/solar-system/`, `/wasp-43-system/`). Satellite systems
 are the next scale inside it, derived from a host's prepared orbit children.
 
 ## Which systems qualify
@@ -88,9 +88,12 @@ mounted scene and shares its camera. It is distinct from the host's own `object:
 `overview:system:<star-id>` (the view `system`). That distinction must survive search previews,
 navigation, history, source links, reading position and reload.
 
-The canonical URL is `/<host>/?view=satellites`; `/earth/` remains the
-Earth body destination, `/moon/` remains the Moon body destination, and
-`/sun/?overview=system` remains the Solar System overview. A wide-map or
+A satellite system is an object too, `/<host>-system/` (`/earth-system/`,
+`/jupiter-system/`), whose page shows its host's scene out to its moons;
+`/earth/` remains the Earth body destination, `/moon/` the Moon's, and
+`/solar-system/` the Solar System. The id rule is `system-address.ts` in
+`@cssearth/objects`; the packages are written by
+`site/build/prepare/system-packages.mts`. A wide-map or
 navigation selection of a host opens the system URL. An exact body search result
 or direct body link continues to open the named body. Saved camera views must
 round-trip with whichever selection the URL names; a reload or Back operation

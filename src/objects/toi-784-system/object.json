@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-784-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-784",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-784 system",
+      "systemName": "TOI-784 system",
+      "classification": "planetary-system",
+      "color": "#ffeee6",
+      "distanceAu": 13321776.4,
+      "description": "TOI-784 b crosses HD 307842 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -827500749799785300,
+        312005932142356860,
+        -1785940256181335600
+      ],
+      "presentationToReference": [
+        -0.41522918217068056,
+        0.8385199499711444,
+        0.35280167201170876,
+        0.15656054459134014,
+        -0.31616105966982294,
+        0.9356981245175806,
+        -0.8961436950350825,
+        -0.443763988904963,
+        -1.5822273064134656e-7
+      ],
+      "orbitUpReference": [
+        -0.8385199499711444,
+        0.31616105966982294,
+        0.443763988904963
+      ],
+      "metersPerUnit": 2035483.5483870967,
+      "bodyRadiusM": 630999900
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-95-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-95",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-95 system",
+      "systemName": "WASP-95 system",
+      "classification": "planetary-system",
+      "color": "#fff1ef",
+      "distanceAu": 28497901.2,
+      "description": "WASP-95 b crosses WASP-95 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2634553660844707000,
+        -1093517555271098100,
+        -3168349192585048000
+      ],
+      "presentationToReference": [
+        0.6179721924812588,
+        -0.6864002966596621,
+        -0.3833601466838123,
+        -0.25650016213234195,
+        0.2849081762674931,
+        -0.9235989378090543,
+        -0.7431810251520071,
+        -0.6690904003506993,
+        -0.0000035429629687441355
+      ],
+      "orbitUpReference": [
+        0.6864002966596621,
+        -0.2849081762674931,
+        0.6690904003506993
+      ],
+      "metersPerUnit": 2760358.064516129,
+      "bodyRadiusM": 855711000
+    }
+  }
+}

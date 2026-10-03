@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-942-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-942",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-942 system",
+      "systemName": "TOI-942 system",
+      "classification": "planetary-system",
+      "color": "#ffe0cb",
+      "distanceAu": 31238765.9,
+      "description": "2 planets cross TOI-942 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1012407620346727000,
+        4266043131897804000,
+        -1617157723544934100
+      ],
+      "presentationToReference": [
+        0.21663875828058154,
+        -0.07990369983490028,
+        0.9729763857172187,
+        0.9128638191689671,
+        -0.3366937700873977,
+        -0.2309046401365328,
+        -0.3460452225690956,
+        -0.9382178339474414,
+        -2.7632447639409114e-7
+      ],
+      "orbitUpReference": [
+        0.07990369983490028,
+        0.3366937700873977,
+        0.9382178339474414
+      ],
+      "metersPerUnit": 2006309.0322580645,
+      "bodyRadiusM": 621955800
+    }
+  }
+}

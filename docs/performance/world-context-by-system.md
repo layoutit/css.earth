@@ -12,8 +12,10 @@ A page never reads a list of the world's bodies. A body is found through its hol
 
 - `world-context-summary.json`, which every page reads, holds the camera and frame facts, the Sun's own system in full,
   and every body that orbits nothing and the map opens by click (a featured star, a galaxy). It names no other body.
-- `world-systems/<star id>.json` is one holder: a star with the bodies that orbit it, their named orbit centres and
-  orbit-bank pins, served at `/world/systems/<id>.json`. A featured star is a body of the summary and its file holds its
+- `world-systems/<system id>.json` is one holder, named after its star's system (`trappist-1-system`, the object with
+  the address `/trappist-1-system/`; the id rule is in `@cssearth/objects` `system-address.ts`). Two holders have no
+  package of their own: `eps-indi-ba-system` (Ba is bound to A, whose system it is on the map) and `catalogue-asteroids`. It holds the bodies that
+  orbit its star, their named orbit centres and orbit-bank pins, served at `/world/systems/<id>.json`. A featured star is a body of the summary and its file holds its
   planets. A star the map draws as a plain dot, with no label, hover or click, is in its own file with them.
 - A plain-dot star nothing orbits has no file: it is its own holder of one body, and its row travels in its object entry.
   The map draws a plain-dot star of the Milky Way as one of the galaxy's own dots
@@ -29,7 +31,7 @@ and `/objects/<id>/entry.json` carries `world: { holder, row? }`.
 
 The application reads holders in [world-context-plan.mts](../../site/world-context-plan.mts):
 
-- at startup, the summary and the page body's own holder (`/trappist-1b/` reads `trappist-1.json`)
+- at startup, the summary and the page body's own holder (`/trappist-1b/` reads `trappist-1-system.json`)
 - when navigation flies to a body the world does not hold: the body's entry names its holder, and the flight and its
   preview wait for it ([scene-transition.mts](../../site/scene/scene-transition.mts))
 - when the camera comes within twice the distance at which a system's bodies are drawn

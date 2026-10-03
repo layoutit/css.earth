@@ -1,0 +1,28 @@
+{
+  "provenance": {
+    "name": "MACS J1149 members",
+    "products": [
+      {
+        "id": "dots",
+        "label": "MACS J1149 flagged cluster members, CDS J/MNRAS/492/503",
+        "process": "Keep the catalogue's flagged members; place each at the cluster's Planck 2018 comoving distance, spread in depth as widely as the members spread across the sky; tone by magnitude.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "members"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "A member's depth within the cluster is assumed (as deep as wide), not measured.",
+          "The table covers the Hubble Frontier Fields core, a few arcmin across."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-209458-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-209458",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 209458 system",
+      "systemName": "HD 209458 system",
+      "classification": "planetary-system",
+      "color": "#fef9ff",
+      "distanceAu": 9931113.7,
+      "description": "Sun-like star 48 parsecs away in Pegasus that hosts the first known transiting planet."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1227013974935572200,
+        -685892101985150700,
+        480847548815294500
+      ],
+      "presentationToReference": [
+        0.8258968277954436,
+        0.28251454027884954,
+        -0.4879343853106211,
+        -0.4616704640751361,
+        -0.15792513090276025,
+        -0.8728803100253748,
+        0.32365848117741614,
+        -0.9461739731996311,
+        0.0000012457232597006887
+      ],
+      "orbitUpReference": [
+        -0.28251454027884954,
+        0.15792513090276025,
+        0.9461739731996311
+      ],
+      "metersPerUnit": 2592045.1612903224,
+      "bodyRadiusM": 803534000
+    }
+  }
+}

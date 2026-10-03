@@ -1,0 +1,39 @@
+{
+  "id": "publication-welch-2022-earendel",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A highly magnified star at redshift 6.2",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2209.14866"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022Natur.603..815W"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2209.14866",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2209.14866",
+      "checkedOn": "2026-10-02",
+      "locator": "abstract: z_phot = 6.2 ± 0.1, magnified by a factor of thousands by the foreground galaxy cluster WHL0137-08 (z = 0.566). Text: the star sits atop the lensing critical curve at RA, Dec = 01:37:23.232, -8:27:52.20 (J2000), designated WHL0137-LS; the Sunrise Arc exceeds 15 arcseconds."
+    }
+  ],
+  "creators": [
+    "Welch, Brian",
+    "Coe, Dan",
+    "Diego, Jose M."
+  ],
+  "publisher": "Nature 603, 815",
+  "publicationDate": "2022",
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-782-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-782",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-782 system",
+      "systemName": "TOI-782 system",
+      "classification": "planetary-system",
+      "color": "#ffd08f",
+      "distanceAu": 10769092.9,
+      "description": "TOI-782 b crosses TOI-782 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1520514569196333300,
+        -104186838998369890,
+        -522119787471022340
+      ],
+      "presentationToReference": [
+        -0.9438138166691507,
+        0.3233298552336143,
+        -0.06836142317872666,
+        -0.06467085561836686,
+        0.022157721456544505,
+        0.9976606215609808,
+        -0.3240881977147568,
+        -0.9460268707042438,
+        0.000002745271672676312
+      ],
+      "orbitUpReference": [
+        -0.3233298552336143,
+        -0.022157721456544505,
+        0.9460268707042438
+      ],
+      "metersPerUnit": 926851.9354838709,
+      "bodyRadiusM": 287324100
+    }
+  }
+}

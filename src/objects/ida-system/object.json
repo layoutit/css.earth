@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ida-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "ida",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Ida–Dactyl system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#a49c8d",
+      "distanceAu": 2.861,
+      "description": "Ida and its tiny moon Dactyl form an asteroid pair. Dactyl was the first asteroid moon discovered, in images from Galileo."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -360929403692.4176,
+        200015536271.1016,
+        85869094625.52826
+      ],
+      "presentationToReference": [
+        -0.8563291013563339,
+        -1.3877787807814457e-17,
+        0.5164305085587544,
+        0.4738157279079223,
+        0.39777715593191376,
+        0.7856665897222586,
+        0.2054242589309732,
+        -0.9174820620691818,
+        0.340628154479254
+      ],
+      "orbitUpReference": [
+        1.3877787807814457e-17,
+        -0.39777715593191376,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 69.56521739130434,
+      "bodyRadiusM": 16000
+    }
+  }
+}

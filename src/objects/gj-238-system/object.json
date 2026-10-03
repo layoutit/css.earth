@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-238-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-238",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 238 system",
+      "systemName": "GJ 238 system",
+      "classification": "planetary-system",
+      "color": "#ffc787",
+      "distanceAu": 3138502.4,
+      "description": "GJ 238 b crosses GJ 238 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -36036191868411690,
+        242499431901194050,
+        -400422451983502850
+      ],
+      "presentationToReference": [
+        -0.07674706775047024,
+        0.12539596500214423,
+        0.9891338329836291,
+        0.516456365372298,
+        -0.8435985790274446,
+        0.14701789050762384,
+        -0.8528673462257423,
+        -0.5221276562528145,
+        0.000017827018539587516
+      ],
+      "orbitUpReference": [
+        -0.12539596500214423,
+        0.8435985790274446,
+        0.5221276562528145
+      ],
+      "metersPerUnit": 968145.1612903225,
+      "bodyRadiusM": 300125000
+    }
+  }
+}

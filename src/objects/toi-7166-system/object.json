@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-7166-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-7166",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-7166 system",
+      "systemName": "TOI-7166 system",
+      "classification": "planetary-system",
+      "color": "#ffcc7e",
+      "distanceAu": 7267263.2,
+      "description": "TOI-7166 b crosses TOI-7166 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        830970048167280300,
+        -680590401869840000,
+        167981540583827000
+      ],
+      "presentationToReference": [
+        0.7643426892612815,
+        0.11954611826449481,
+        -0.6336315798480405,
+        -0.62602051562059,
+        -0.09791472313795095,
+        -0.7736349404046776,
+        0.15452691479144634,
+        -0.9879885791853618,
+        0.0000020802051561850005
+      ],
+      "orbitUpReference": [
+        -0.11954611826449481,
+        0.09791472313795095,
+        0.9879885791853618
+      ],
+      "metersPerUnit": 498210.96774193546,
+      "bodyRadiusM": 154445400
+    }
+  }
+}

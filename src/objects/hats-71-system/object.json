@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hats-71-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hats-71",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HATS-71 system",
+      "systemName": "HATS-71 system",
+      "classification": "planetary-system",
+      "color": "#ffc486",
+      "distanceAu": 29002170,
+      "description": "HATS-71 b crosses HATS-71 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1977984558435208200,
+        550492559228247800,
+        -3822110751316700000
+      ],
+      "presentationToReference": [
+        0.4558984541173104,
+        -0.8486883401213532,
+        0.2681132239847729,
+        0.12688102425427433,
+        -0.23619040321888538,
+        -0.9633874086324186,
+        -0.880941431207338,
+        -0.4732253107869049,
+        -0.0000036061624231786783
+      ],
+      "orbitUpReference": [
+        0.8486883401213532,
+        0.23619040321888538,
+        0.4732253107869049
+      ],
+      "metersPerUnit": 1073397.7419354839,
+      "bodyRadiusM": 332753300
+    }
+  }
+}

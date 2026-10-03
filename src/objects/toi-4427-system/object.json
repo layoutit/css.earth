@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-4427-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-4427",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-4427 system",
+      "systemName": "TOI-4427 system",
+      "classification": "planetary-system",
+      "color": "#ffe9da",
+      "distanceAu": 41608153.9,
+      "description": "TOI-4427 b crosses TOI-4427 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1350475463608860700,
+        1348137434166408000,
+        5924781216838371000
+      ],
+      "presentationToReference": [
+        -0.21696088965407156,
+        -0.673638357002272,
+        0.7064979379557971,
+        0.21658527308544545,
+        0.6724805988440762,
+        0.7077151006307664,
+        0.9518501940132265,
+        -0.3065635466809322,
+        0.0000018414881456520228
+      ],
+      "orbitUpReference": [
+        0.673638357002272,
+        -0.6724805988440762,
+        0.3065635466809322
+      ],
+      "metersPerUnit": 1997332.2580645161,
+      "bodyRadiusM": 619173000
+    }
+  }
+}

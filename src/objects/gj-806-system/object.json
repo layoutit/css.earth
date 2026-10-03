@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-806-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-806",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 806 system",
+      "systemName": "GJ 806 system",
+      "classification": "planetary-system",
+      "color": "#ffc286",
+      "distanceAu": 2488351.6,
+      "description": "GJ 806 b crosses GJ 806 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        175134205345962850,
+        -199550562002928160,
+        260919934515826660
+      ],
+      "presentationToReference": [
+        0.4704785186514515,
+        0.46232576892774585,
+        -0.7516015213348789,
+        -0.5360703393371244,
+        -0.5268144250147139,
+        -0.6596174291810342,
+        0.7009126584464831,
+        -0.7132471135460592,
+        0.00001573845174507426
+      ],
+      "orbitUpReference": [
+        -0.46232576892774585,
+        0.5268144250147139,
+        0.7132471135460592
+      ],
+      "metersPerUnit": 929993.8709677419,
+      "bodyRadiusM": 288298100
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-73583-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-73583",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 73583 system",
+      "systemName": "HD 73583 system",
+      "classification": "planetary-system",
+      "color": "#ffcfb2",
+      "distanceAu": 6515685.1,
+      "description": "2 planets cross HD 73583 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -605885412594592900,
+        730101017296844800,
+        -223515195494381120
+      ],
+      "presentationToReference": [
+        -0.6215911101587197,
+        0.1464405495953271,
+        0.7695321027779602,
+        0.7490266186267905,
+        -0.17646184231997306,
+        0.6386081292886567,
+        -0.2293111780096363,
+        -0.9733531649094584,
+        7.57224911669331e-7
+      ],
+      "orbitUpReference": [
+        -0.1464405495953271,
+        0.17646184231997306,
+        0.9733531649094584
+      ],
+      "metersPerUnit": 1458725.8064516129,
+      "bodyRadiusM": 452205000
+    }
+  }
+}

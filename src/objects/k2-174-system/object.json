@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-174-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-174",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-174 system",
+      "systemName": "K2-174 system",
+      "classification": "planetary-system",
+      "color": "#ffc7a2",
+      "distanceAu": 20672623.9,
+      "description": "K2-174 b crosses K2-174 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1448067113658149400,
+        2590275880050669600,
+        870417592490068000
+      ],
+      "presentationToReference": [
+        0.46823865578686735,
+        0.1373414245595124,
+        0.8728630444272867,
+        0.8375767150271719,
+        0.2456728327906381,
+        -0.4879652709700917,
+        0.281456582213313,
+        -0.9595739639697333,
+        4.622304683256464e-7
+      ],
+      "orbitUpReference": [
+        -0.1373414245595124,
+        -0.2456728327906381,
+        0.9595739639697333
+      ],
+      "metersPerUnit": 1517074.8387096773,
+      "bodyRadiusM": 470293200
+    }
+  }
+}

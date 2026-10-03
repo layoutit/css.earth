@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "saturn-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "saturn",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Saturn system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#d2b68c",
+      "distanceAu": 9.58,
+      "description": "Saturn's rings and moons form a broad family. Icy spray from Enceladus feeds the E ring, while Titan has a thick atmosphere."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1390634722841.8352,
+        245138173773.5476,
+        41364624140.6779
+      ],
+      "presentationToReference": [
+        -0.796411321327559,
+        0.5856935972440432,
+        0.1506386982439242,
+        0.5707735278595528,
+        0.645645843068836,
+        0.5073056526618764,
+        -0.19986642328328103,
+        -0.4900045463822399,
+        0.8484980597318321
+      ],
+      "orbitUpReference": [
+        -5.551115123125783e-17,
+        -0.3977771559319137,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 238213.4387351779,
+      "bodyRadiusM": 60268000
+    }
+  }
+}

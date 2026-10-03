@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-778-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-778",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-778 system",
+      "systemName": "TOI-778 system",
+      "classification": "planetary-system",
+      "color": "#eaeaff",
+      "distanceAu": 33532134.4,
+      "description": "TOI-778 b crosses TOI-778 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4566253274546544600,
+        -1602090935959086300,
+        -1321461896277323500
+      ],
+      "presentationToReference": [
+        -0.9102769503597666,
+        0.24857439912442142,
+        -0.3310689380531735,
+        -0.3193748492924393,
+        0.08721437601547286,
+        0.943606569633586,
+        -0.263430406906938,
+        -0.9646784027416414,
+        8.249685738580735e-7
+      ],
+      "orbitUpReference": [
+        -0.24857439912442142,
+        -0.08721437601547286,
+        0.9646784027416414
+      ],
+      "metersPerUnit": 3837570.9677419355,
+      "bodyRadiusM": 1189647000
+    }
+  }
+}

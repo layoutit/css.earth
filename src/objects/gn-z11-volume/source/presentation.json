@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "gn-z11-volume",
+  "name": "GN-z11",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/gn-z11-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "labs/nebula/models/gn-z11/experiment.json"
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/gn-z11-volume/source/delivery.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · near infrared",
+      "title": "GN-z11 in near infrared",
+      "description": "Webb's near-infrared picture of GN-z11, its light spread in depth through the spheroid of the extended component of Tacchella et al.'s published fit. The galaxy is a few native pixels of the telescope, so the volume is almost entirely the published model, with the picture giving color and brightness. Depth is modelled, not measured.",
+      "summary": "A published model spheroid colored by Webb's picture of a few native pixels; depth is not measured.",
+      "detail": "160 × 160 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Webb NIRCam: 0.9 to 1.5 µm blue, 2.0 to 3.4 µm green, 3.6 to 4.4 µm red"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "0.39 × 0.39 arcsec"
+        },
+        {
+          "id": "distance",
+          "label": "Distance (comoving)",
+          "value": "9,762 Mpc"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": ".local/nebula-lab/planetary/gn-z11-inferred-original.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/large/weic2406a.jpg",
+        "crop": {
+          "left": 3600,
+          "top": 281,
+          "width": 160,
+          "height": 160
+        }
+      }
+    }
+  ]
+}

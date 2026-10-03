@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-883-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-883",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-883 system",
+      "systemName": "TOI-883 system",
+      "classification": "planetary-system",
+      "color": "#fff0ec",
+      "distanceAu": 21136417,
+      "description": "TOI-883 b crosses TOI-883 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -726397504043508500,
+        3056454708929442000,
+        -358386902656398340
+      ],
+      "presentationToReference": [
+        -0.22973002347778496,
+        0.0262065831736525,
+        0.9729015013408393,
+        0.9666324679378834,
+        -0.1102678703868998,
+        0.23121995737534187,
+        -0.11333926169343715,
+        -0.9935563455379369,
+        2.937165392931249e-7
+      ],
+      "orbitUpReference": [
+        -0.0262065831736525,
+        0.1102678703868998,
+        0.9935563455379369
+      ],
+      "metersPerUnit": 2277340.3225806453,
+      "bodyRadiusM": 705975500
+    }
+  }
+}

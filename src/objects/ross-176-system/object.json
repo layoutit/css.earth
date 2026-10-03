@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ross-176-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "ross-176",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Ross 176 system",
+      "systemName": "Ross 176 system",
+      "classification": "planetary-system",
+      "color": "#ffbf8f",
+      "distanceAu": 9591322.7,
+      "description": "Ross 176 b crosses Ross 176 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        567589222755315900,
+        -790152183265902800,
+        1054643059869424600
+      ],
+      "presentationToReference": [
+        0.3955808019743056,
+        0.4288063056405253,
+        -0.8121828497033718,
+        -0.550695858796939,
+        -0.5969715676066576,
+        -0.5834029641449826,
+        0.735016938725406,
+        -0.6780487443482027,
+        0.000008634727448211173
+      ],
+      "orbitUpReference": [
+        -0.4288063056405253,
+        0.5969715676066576,
+        0.6780487443482027
+      ],
+      "metersPerUnit": 1276946.1290322582,
+      "bodyRadiusM": 395853300
+    }
+  }
+}

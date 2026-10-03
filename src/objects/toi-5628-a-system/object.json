@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5628-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5628-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5628 system",
+      "systemName": "TOI-5628 system",
+      "classification": "planetary-system",
+      "color": "#ffc180",
+      "distanceAu": 22746008.4,
+      "description": "TOI-5628 A b crosses TOI-5628 A as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3204436592456691000,
+        -321392789678828740,
+        1098649401569432800
+      ],
+      "presentationToReference": [
+        -0.9417179670559547,
+        -0.32125991549337496,
+        -0.0997964790019645,
+        -0.09445072660229153,
+        -0.032224175297824675,
+        0.9950078707079026,
+        0.3228720036923288,
+        -0.946442639161806,
+        -0.000002852404982120223
+      ],
+      "orbitUpReference": [
+        0.32125991549337496,
+        0.032224175297824675,
+        0.946442639161806
+      ],
+      "metersPerUnit": 785467.7419354839,
+      "bodyRadiusM": 243495000
+    }
+  }
+}

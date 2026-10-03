@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "stephans-quintet-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "stephans-quintet",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.264560191697734e+24,
+        -8.697556218411189e+23,
+        1.6337879512127112e+24
+      ],
+      "localToReferenceXyzw": [
+        0.38718197386067643,
+        0.26605098045243736,
+        0.49994803616202166,
+        0.7275705849300019
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -102.17328444016535,
+          -105.74277692485038,
+          -0.011588730485527776
+        ],
+        "max": [
+          109.41664255757141,
+          108.75762934775433,
+          0.012458293364034034
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

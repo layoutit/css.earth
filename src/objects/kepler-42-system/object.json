@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-42-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-42",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-42 system",
+      "systemName": "Kepler-42 system",
+      "classification": "planetary-system",
+      "color": "#ffbf6d",
+      "distanceAu": 8272302.2,
+      "description": "3 planets cross Kepler-42 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        333125405067091800,
+        -815484838820708200,
+        869174727195904100
+      ],
+      "presentationToReference": [
+        0.2691824231095109,
+        0.2656059717189684,
+        -0.925739861341249,
+        -0.6589535997359357,
+        -0.6502110767147886,
+        -0.37816095662091737,
+        0.702368120349966,
+        -0.7118138966784912,
+        0.0000033819871555707288
+      ],
+      "orbitUpReference": [
+        -0.2656059717189684,
+        0.6502110767147886,
+        0.7118138966784912
+      ],
+      "metersPerUnit": 381512.9032258064,
+      "bodyRadiusM": 118269000
+    }
+  }
+}
