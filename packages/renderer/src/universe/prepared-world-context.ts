@@ -1,4 +1,5 @@
 import { writeStyle } from '../rendering/retained-write.js';
+import { eyeAnchor } from '@cssearth/engine';
 import { isExtendedClassification, type PreparedWorldContext, type PreparedContextBody, type WorldCameraPose } from '@cssearth/objects';
 import { createContextLocator } from './context-locator.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
@@ -304,14 +305,18 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const paintedBodies = new Set<(typeof bodies)[number]>();
   let paintedOrder: typeof bodies = [], paintMembershipChanged = false;
   let skippedPublications = 0, bodyPublications = 0, depthPublications = 0;
-  const cameraState = new Float64Array(12).fill(NaN);
-  const sameCamera = (world: WorldCameraPose, viewport: WorldCameraViewport) =>
-    world.pose.positionM.every((value, axis) => value === cameraState[axis]) &&
-    world.pose.orientationXyzw.every((value, axis) => value === cameraState[axis + 3]) &&
-    viewport.focalPixels === cameraState[7] &&
-    (viewport.widthPixels ?? host.clientWidth) === cameraState[8] &&
-    (viewport.heightPixels ?? host.clientHeight) === cameraState[9] &&
-    viewport.principalOffsetPixels.every((value, axis) => value === cameraState[axis + 10]);
+  // The camera as last published: position, orientation, lens and viewport, then the eye's exact anchor (engine eyeAnchor).
+  // positionM alone calls two places the same when they differ by less than a double holds that far from the frame origin.
+  const cameraState = new Float64Array(18).fill(NaN);
+  const sameCamera = (world: WorldCameraPose, viewport: WorldCameraViewport) => {
+    const { originM, offsetM } = eyeAnchor(world.pose);
+    return world.pose.positionM.every((value, axis) => value === cameraState[axis] && originM[axis] === cameraState[axis + 12] && offsetM[axis] === cameraState[axis + 15]) &&
+      world.pose.orientationXyzw.every((value, axis) => value === cameraState[axis + 3]) &&
+      viewport.focalPixels === cameraState[7] &&
+      (viewport.widthPixels ?? host.clientWidth) === cameraState[8] &&
+      (viewport.heightPixels ?? host.clientHeight) === cameraState[9] &&
+      viewport.principalOffsetPixels.every((value, axis) => value === cameraState[axis + 10]);
+  };
   const settleHover = () => {
     fader.setAnimationEnabled(false);
     for (const entry of animatedAnnotations) {
@@ -568,7 +573,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       presentationRevision++;
       const { ranksChanged, changed: depthChanged } = depthOrder.update(world.pose.orientationXyzw, rotating, selectedEntry);
       const { emphasizedId, width, height } = frame;
-      cameraState.set(world.pose.positionM, 0); cameraState.set(world.pose.orientationXyzw, 3);
+      const anchor = eyeAnchor(world.pose);
+      cameraState.set(world.pose.positionM, 0); cameraState.set(world.pose.orientationXyzw, 3); cameraState.set(anchor.originM, 12); cameraState.set(anchor.offsetM, 15);
       cameraState[7] = viewport.focalPixels; cameraState[8] = width; cameraState[9] = height;
       cameraState.set(viewport.principalOffsetPixels, 10);
       const resized = previousHeader?.width !== width || previousHeader?.height !== height;

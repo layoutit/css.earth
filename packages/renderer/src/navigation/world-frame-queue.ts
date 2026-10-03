@@ -1,5 +1,6 @@
 import { opacityClockFor, type OpacityClock, type OpacityWindow } from '../stars/opacity-clock.js';
 import type { WorldFrameRequest } from './world-frame-presenter.js';
+import { sameEyePlace } from '@cssearth/engine';
 
 export interface PreparedWorldFrame {
   current(): boolean;
@@ -11,7 +12,7 @@ export interface QueuedRequest extends WorldFrameRequest { cancelled?(): void; p
 export function sameWorldView(a: Pick<WorldFrameRequest, 'world' | 'viewport'>, b: Pick<WorldFrameRequest, 'world' | 'viewport'>): boolean {
   const { world: wa, viewport: va } = a, { world: wb, viewport: vb } = b;
   return wa.referenceFrame === wb.referenceFrame && wa.epochJdTt === wb.epochJdTt && wa.projectionScale === wb.projectionScale
-    && wa.pose.positionM.length === wb.pose.positionM.length && wa.pose.positionM.every((value, axis) => value === wb.pose.positionM[axis])
+    && sameEyePlace(wa.pose, wb.pose)
     && wa.pose.orientationXyzw.length === wb.pose.orientationXyzw.length && wa.pose.orientationXyzw.every((value, axis) => value === wb.pose.orientationXyzw[axis])
     && va.focalPixels === vb.focalPixels && va.projectionScale === vb.projectionScale && va.widthPixels === vb.widthPixels && va.heightPixels === vb.heightPixels
     && va.coveredTopPixels === vb.coveredTopPixels

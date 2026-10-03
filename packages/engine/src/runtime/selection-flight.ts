@@ -179,6 +179,17 @@ export function fromEyeM(pose: PhysicalCameraPose, pointM: readonly number[]): P
 }
 /** The eye's distance from a point, through `fromEyeM`. */
 export function eyeDistanceM(pose: PhysicalCameraPose, pointM: readonly number[]): number { return Math.hypot(...fromEyeM(pose, pointM)); }
+/** Whether two poses put the eye in the same place, value for value: the same `positionM` and the same anchor (eyeAnchor).
+ * `positionM` alone calls two places the same when they differ by less than a double holds at the eye's distance from the
+ * frame origin: 790 m at PSR J0437-4715, where 82 of 159 frames of a slow zoom 55 km from the star kept `positionM` bit for
+ * bit (2026-10-02), so a "same view" check dropped them. */
+export function sameEyePlace(a: PhysicalCameraPose, b: PhysicalCameraPose): boolean {
+  const ea = eyeAnchor(a), eb = eyeAnchor(b);
+  for (let axis = 0; axis < 3; axis++) {
+    if (a.positionM[axis] !== b.positionM[axis] || ea.originM[axis] !== eb.originM[axis] || ea.offsetM[axis] !== eb.offsetM[axis]) return false;
+  }
+  return true;
+}
 
 export function cameraPoseFromReferenceFrame(pose: PhysicalCameraPose, frame: FocusFrame): PhysicalCameraPose {
   validatePose(pose); validateFrame(frame);

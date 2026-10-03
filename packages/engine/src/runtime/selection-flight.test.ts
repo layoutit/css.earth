@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { buildSelectionFlightCurve, selectionFlightProgress, createSelectionFlight, createSelectionFlightSample,
-  sampleSelectionFlight, sampleSelectionFlightInto, cameraPoseToReferenceFrame, cameraPoseFromReferenceFrame } from './selection-flight.js';
+  sampleSelectionFlight, sampleSelectionFlightInto, cameraPoseToReferenceFrame, cameraPoseFromReferenceFrame, sameEyePlace } from './selection-flight.js';
 import type { PhysicalCameraPose, OrientationXyzw, PositionM } from './selection-flight.js';
 
 const identity: OrientationXyzw = [0, 0, 0, 1];
@@ -148,5 +148,11 @@ describe('a camera a few kilometres from a focus hundreds of parsecs away', () =
     assert.ok(Math.abs(cameraPoseFromReferenceFrame(moved, frame).positionM[0] - 1e6) < 2048, 'a stale offset is not used');
     const other = { ...frame, originM: [frame.originM[0] + 1e6, frame.originM[1], frame.originM[2]] as PositionM };
     assert.ok(Math.abs(cameraPoseFromReferenceFrame(world, other).positionM[0] + 1e6) < 2048);
+  });
+  it('tells two places apart that positionM rounds to one value', () => {
+    const a = cameraPoseToReferenceFrame(local(137.25), frame), b = cameraPoseToReferenceFrame(local(137.5), frame);
+    assert.deepEqual([...a.positionM], [...b.positionM], 'a quarter metre is below what positionM holds here');
+    assert.equal(sameEyePlace(a, b), false);
+    assert.equal(sameEyePlace(a, cameraPoseToReferenceFrame(local(137.25), frame)), true);
   });
 });

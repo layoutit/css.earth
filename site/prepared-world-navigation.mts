@@ -1,6 +1,6 @@
 import { namesSystem } from './navigation/navigation-scope.mts';
 import { satelliteSystemByHost } from './satellite-systems.mts';
-import { eyeDistanceM } from '@cssearth/engine';
+import { eyeDistanceM, sameEyePlace } from '@cssearth/engine';
 import { createPreparedSceneOwnership } from './prepared-scene-ownership.mts';
 import { createPreparedArrival } from './prepared-arrival.mts';
 import { canUseArrivalBillboard, frameArrivalBillboard, prepareArrivalBillboard } from './arrival-billboard.mts';
@@ -199,7 +199,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
         anchors: [{ positionM: frame.originM, radiusM: frame.bodyRadiusM }], signal, reducedMotion,
         windowTarget, documentTarget, bindWheel, onPaint(world) {
           lastCamera = world;
-          if (world.pose.positionM.some((value, axis) => value !== from.pose.positionM[axis]) ||
+          if (!sameEyePlace(world.pose, from.pose) ||
               world.pose.orientationXyzw.some((value, axis) => value !== from.pose.orientationXyzw[axis])) timing.mark('first-motion');
         } });
       if (!(await running.finished).completed) throw cancellationReason(running.signal);
@@ -316,7 +316,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
           billboard?.publish(world, source?.optics() ?? optics);
           drawn = lastCamera = world;
           drawnElapsedS = elapsedS;
-          if (!moved && (world.pose.positionM.some((value, axis) => value !== from.pose.positionM[axis]) ||
+          if (!moved && (!sameEyePlace(world.pose, from.pose) ||
               world.pose.orientationXyzw.some((value, axis) => value !== from.pose.orientationXyzw[axis]))) {
             moved = true; timing.mark('first-motion');
           }
