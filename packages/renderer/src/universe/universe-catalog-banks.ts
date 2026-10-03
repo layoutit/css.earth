@@ -59,7 +59,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   });
   const byId = new Map(images.map(bank => [bank.id, bank]));
   // A package that is only catalogue dots mounts them the first time its catalogue row is selected; they draw while it is.
-  const points = (pointBanks ?? []).map(bank => ({ id: bank.id, url: bank.url, host: bank.host, mounted: null as ReturnType<typeof mountCataloguePoints> | null }));
+  const points = (pointBanks ?? []).map(bank => ({ id: bank.id, url: bank.url, host: bank.host, stars: bank.stars === true, mounted: null as ReturnType<typeof mountCataloguePoints> | null }));
   lifetime.onDispose(() => { for (const bank of points) { bank.mounted?.destroy(); bank.mounted = null; } });
   const billboardEntries = images.flatMap(bank => {
     const billboard = prepared?.plan.banks.get(bank.id)?.billboard;
@@ -148,7 +148,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     /** Packages of catalogue dots declared after mount (their host's entry brought them); a known id is ignored. */
     addPointBanks(added: NonNullable<PreparedUniverseOptions['pointBanks']>) {
       if (lifetime.disposed) return;
-      for (const bank of added) if (!points.some(point => point.id === bank.id)) points.push({ id: bank.id, url: bank.url, host: bank.host, mounted: null });
+      for (const bank of added) if (!points.some(point => point.id === bank.id)) points.push({ id: bank.id, url: bank.url, host: bank.host, stars: bank.stars === true, mounted: null });
     },
     focusBank(id: string) {
       const bank = byId.get(id);
@@ -156,16 +156,20 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       // A bank of dots has one dataset, its members; the dots mount when they are first shown.
       return points.some(point => point.id === id) ? createPointFocusBank(id) : null;
     },
-    /** Draw the selected package's catalogue dots, and those of the selected body's system (`systemIds`: the body and the
-     * centre it orbits), and hide every other's. */
-    publishPoints(world: WorldCameraPose, viewport: WorldCameraViewport, selectedObjectId?: string, systemIds: readonly string[] = []) {
+    /** Draw the selected package's catalogue dots, and those of the selected body's system (`systemIds`: the body, the
+     * centre it orbits and the objects it is inside), and hide every other's. `stars`: how a bank of plain-dot stars
+     * shows, and the places of the stars a body marker draws; asked only while such a bank is selected. */
+    publishPoints(world: WorldCameraPose, viewport: WorldCameraViewport, selectedObjectId?: string, systemIds: readonly string[] = [],
+      stars?: () => { readonly opacity: number; readonly hiddenAtM: readonly (readonly number[])[] }) {
       if (lifetime.disposed) return;
       for (const bank of points) {
         const selected = bank.id === selectedObjectId || bank.host !== undefined && systemIds.includes(bank.host);
         if (!bank.mounted && !selected) continue;
         bank.mounted ??= mountCataloguePoints({ host: root, before: end, url: bank.url,
           loadBank: target => fetchPreparedCatalogueBank(target, (input, init) => root.ownerDocument.defaultView!.fetch(input, init)) });
-        bank.mounted.publish({ world, viewport }, selected ? 1 : 0);
+        const shown = selected && bank.stars ? stars?.() : undefined;
+        if (shown) bank.mounted.publish({ world, viewport }, shown.opacity, shown.hiddenAtM);
+        else bank.mounted.publish({ world, viewport }, selected ? 1 : 0);
       }
     },
     /** While the camera coasts no billboard is revealed or hidden (motion-freezes-membership.md). */

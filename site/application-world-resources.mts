@@ -129,7 +129,10 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       const bank = parseCataloguePointBankDescriptor(descriptor);
       return { id: bank.id, url: resourceSet(bank.id).resolve(bank.url), ...(bank.host === undefined ? {} : { host: bank.host }) };
     };
-    const pointBanks = parsedDescriptors.filter(descriptor => descriptor.type === 'catalogue-point-bank').map(pointBank);
+    // The plain stars inside an object are dots of that object (`/world/dots/<object id>.bin`, named by the world's summary):
+    // they draw while it or a body inside it is selected, so no other page asks for them.
+    const pointBanks = [...parsedDescriptors.filter(descriptor => descriptor.type === 'catalogue-point-bank').map(pointBank),
+      ...WORLD_DOT_BANKS.map(id => ({ id: `${id}/plain-stars`, url: `/world/dots/${id}.bin`, host: id, stars: true as const }))];
     // A body's row says whether it is a plain dot (no billboard) and what it is (an asteroid's sprite stays smaller).
     const billboards = (bodies: readonly (Parameters<typeof preparedBodyBillboards>[0][number] & { readonly plainDot?: true; readonly classification?: string })[]) => {
       const asteroids = new Set(bodies.filter(body => body.classification === 'asteroid').map(body => body.id));
@@ -174,7 +177,6 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       context: plan, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, pointBanks, volumeDatasetBanks, loadVolumeDataset,
       backgroundCataloguePoints,
-      starCataloguePoints: WORLD_DOT_BANKS.map(id => `/world/dots/${id}.bin`),
       // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
       // open unless its page's dataset shows it whole or hides it. Hidden, its caption names the object it bounds.
       imageMeshes: parsedDescriptors.filter(descriptor => descriptor.prepared?.format === IMAGE_MESH_SCHEMA).map(descriptor => {

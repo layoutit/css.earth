@@ -13,6 +13,7 @@ import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { suppressMinorMoonOrbitPaint } from './moon-orbit-policy.mts';
 import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
 import { loadApplicationUniverse } from './application-world-resources.mts';
+import { knownAncestors, loadAncestors } from './object-directory.mts';
 
 /** The world's prepared data and planner worker, which `startup-boot.mts` starts while the first body still loads. */
 export { loadApplicationUniverse };
@@ -45,6 +46,8 @@ export function createApplicationWorldContext() {
         const resources = own(prepareObjectResources(prepared.assets, { signal }));
         if ((await lifetime.wait(resources.ready)).cancelled || lifetime.disposed) throw cancelled();
         let refreshWorld = () => false;
+        // The body the world last selected: its holders are published again once the page has read what it is inside.
+        let selectedId: string | null = null;
         // World presentation lives beside the detail stage, outside its changing object scope.
         const presentationHost = stage.closest<HTMLElement>('.object-world-stage') ?? stage;
         const layer = own(prepared.mount(stage, { presentationHost,
@@ -100,6 +103,12 @@ export function createApplicationWorldContext() {
             visibility.selectObject(id);
             layer.selectObject(id, frame, framingScale, edge);
             moonLabels.selectObject(id);
+            // The objects the body is inside, by the object tree, as far as the page has read them and again once it has read
+            // them all: a dot bank one of them hosts (another galaxy's plain stars, a system's bound star) draws around the body.
+            const holders = () => { if (!lifetime.disposed && selectedId === id) layer.setSelectionHolders(knownAncestors(id).map(object => object.id)); };
+            selectedId = id;
+            holders();
+            void loadAncestors(id).then(holders, () => {});
           },
           setIllustrationModelsEnabled: visibility.setIllustrationModelsEnabled,
           setHighlightedClassification: visibility.setHighlightedClassification,

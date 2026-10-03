@@ -136,7 +136,8 @@ export interface PreparedWorldContext {
   readonly sky: { readonly sceneRegistration: string };
   /** How many bodies the whole world holds, read or not: what stacking and ordering count on. */
   readonly worldBodyCount?: number;
-  /** The dot banks the bake wrote for the stars the summary only lists (plain-star-dots.ts in @cssearth/bake), by id. */
+  /** The objects the bake wrote a dot bank for: the plain stars inside each, which the summary only lists (plain-star-dots.ts
+   * in @cssearth/bake), are dots in that object's own package. */
   readonly dotBanks?: readonly string[];
 }
 /** The build's table of the world (`world-index.json`, never served): every body in the full context's order, every object

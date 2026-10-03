@@ -4,6 +4,7 @@ import { gunzipSync } from 'node:zlib';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { decodeCatalogueBankBinary, parseCataloguePoints, parseCompleteWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldIndex } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
+import { OBJECTS } from '../objects.mts';
 const test = sourceTest();
 
 const prepared = new URL('../../src/objects/observable-universe/prepared/', import.meta.url);
@@ -44,7 +45,7 @@ test('a plain-dot star is never a body of a file read at startup; one inside no 
   await assert.rejects(parseCompleteWorldContext(raw, copy, rawIndex), /holds [a-z0-9-]+, which another file holds too/u);
 });
 
-test('every plain-dot star is a dot once: of the Milky Way\'s own bank when the galaxy holds it, else of the world\'s banks', async () => {
+test('every plain-dot star is a dot once: of the Milky Way\'s own bank when the galaxy holds it, else of the object it is inside', async () => {
   const raw = await json('world.json'), summary = parsePreparedWorldContextSummary(raw);
   const rawIndex = await json('world-index.json');
   const whole = await parseCompleteWorldContext(raw, id => json(`../../${id}/prepared/members.json`), rawIndex);
@@ -59,18 +60,25 @@ test('every plain-dot star is a dot once: of the Milky Way\'s own bank when the 
     assert.ok(body && listed.has(id), `${id} of the galaxy's table is a plain-dot star of the world`);
     assert.ok(kpc.every((value, axis) => Math.abs(value * KPC_M - body.positionM[axis]!) <= KPC_M * 0.5e-4 * 1.0001), `${id} is at its prepared place to the table's rounding`);
   }
+  // The summary names the objects with a dot bank, each in its own package: the objects those stars are inside.
   assert.ok(summary.dotBanks?.length);
-  const points: { positionM: number[]; toleranceM: number }[] = [];
+  assert.ok(!summary.dotBanks!.includes('milky-way') && !summary.dotBanks!.includes('observable-universe'), 'no page inside the Milky Way asks for a dot bank of the world\'s own');
+  const points = new Map<string, { positionM: number[]; toleranceM: number }[]>();
   for (const id of summary.dotBanks!) {
-    const name = `${id}.bin`, bank = parseCataloguePoints(decodeCatalogueBankBinary(unpackPreparedBinary(await readFile(new URL(name, prepared)), name), name), name);
-    assert.equal(bank.id, id);
-    for (const point of bank.points) points.push({ toleranceM: bank.frame.metersPerUnit * 1e-4,
-      positionM: point.positionUnits.map((value, axis) => value * bank.frame.metersPerUnit + bank.frame.originM[axis]!) });
+    const name = 'plain-stars.bin', bank = parseCataloguePoints(decodeCatalogueBankBinary(unpackPreparedBinary(await readFile(new URL(`../../${id}/prepared/${name}`, prepared)), name), name), name);
+    assert.equal(bank.id, 'plain-stars');
+    assert.ok(OBJECTS.some(object => object.id === id), `${id} is an object`);
+    points.set(id, bank.points.map(point => ({ toleranceM: bank.frame.metersPerUnit * 1e-4,
+      positionM: point.positionUnits.map((value, axis) => value * bank.frame.metersPerUnit + bank.frame.originM[axis]!) })));
   }
   const outside = whole.bodies.filter(body => listed.has(body.id) && !galaxy.has(body.id));
   assert.ok(galaxy.size > 0 && outside.length > 0, 'stars of the galaxy and stars of other galaxies');
-  assert.equal(points.length, outside.length, 'the world\'s banks hold the stars the galaxy\'s table does not name, and no other');
+  assert.equal([...points.values()].flat().length, outside.length, 'the banks hold the stars the galaxy\'s table does not name, and no other');
   for (const body of outside) {
-    assert.ok(points.some(point => point.positionM.every((value, axis) => Math.abs(value - body.positionM[axis]!) <= point.toleranceM)), `${body.id} has its dot`);
+    // The object it is inside: its parent in the object tree, or its own system's parent.
+    const parent = OBJECTS.find(object => object.id === body.id)?.parent;
+    const holder = parent === `${body.id}-system` ? OBJECTS.find(object => object.id === parent)?.parent : parent;
+    assert.ok(holder !== undefined && points.get(holder)?.some(point => point.positionM.every((value, axis) => Math.abs(value - body.positionM[axis]!) <= point.toleranceM)),
+      `${body.id} has its dot in the bank of ${holder}, the object it is inside`);
   }
 });

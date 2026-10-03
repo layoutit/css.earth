@@ -10,7 +10,7 @@ import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/
 import { worldOrbitBankRegions } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { plainDotBank } from './plain-dot-bank.mts';
-import { parseWorldContextSource, PLAIN_STAR_DOT_BANK_IDS, plainStarDotBanks, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
+import { parseWorldContextSource, PLAIN_STAR_DOT_BANK, RETIRED_PLAIN_STAR_DOT_BANK, plainStarDotBank, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
 import { writeCatalogueBank } from '@cssearth/bake/volume/node';
 import { systemViewFile, worldOrbitBanks } from '@cssearth/objects';
 import type { OrbitalState, Vector3, WorldContextBodyFact } from '@cssearth/bake/world-context';
@@ -214,7 +214,8 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   // is inside, by the object tree (summarizeWorldContext). The tree is the checkout's registry, as the bodies'
   // classifications above are: `objectsDirectory` says where each object's files are read and written, not which objects
   // exist or what they are inside.
-  const tree = new Map(readPreparedObjects(process.cwd()).objects.map(object => [object.id, { parent: object.parent }] as const));
+  const registered = readPreparedObjects(process.cwd()).objects;
+  const tree = new Map(registered.map(object => [object.id, { parent: object.parent }] as const));
   // The dot bank the paged asteroids are dots of (paged-asteroid-dot-positions.mts writes their places into it): the holder
   // of every asteroid the map draws as a plain dot. It is the bank the focus hosts that declares them.
   const asteroidDotBank = await plainDotBank(resolve(process.cwd(), 'src/objects'), prepared.focus.id, 'asteroid');
@@ -225,23 +226,31 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   await writeIfChanged(options.outputPath, `${JSON.stringify({ ...prepared, bodies: prepared.bodies.map(body => ({ ...body, inside: insideOf(body.id) })) })}\n`);
   // Each file is in its own object's package, in the objects directory this bake writes for (a fixture's, or the checkout's).
   const objectsRoot = worldFilesRoot(options);
-  // The map draws those stars as dots, not as bodies. A star of the Milky Way is one of the galaxy's own dots
-  // (src/objects/milky-way-volume/source/packaged-stars, written by paged-star-dot-positions.mts). The stars that table
-  // does not name, the ones in other galaxies, are dots of the world's own two banks, in the root object's package
-  // (`/world/dots/<id>.bin`): one bank per galaxy was nine requests and 12.5 KB on every page against two and 5.8 KB
-  // (2026-10-03), because a bank is asked for before its extent is known.
+  // The map draws those stars as dots, not as bodies. A star of a galaxy whose bank merges its star packages (the Milky
+  // Way's volume) is one of that galaxy's own dots (`source/packaged-stars`, written by paged-star-dot-positions.mts). The
+  // stars no such table names are dots of the object they are inside in the object tree (another galaxy; for a star bound to another,
+  // that star's system), in that object's own package (`prepared/plain-stars.bin`, served as `/world/dots/<object id>.bin`),
+  // about its centre: a page asks for a bank only while that object or a body inside it is selected. As two banks of the
+  // world's own, they were two requests and 5.8 KB on every page (2026-10-03).
   const galaxyStars = await packagedGalaxyStars(objectsRoot);
-  const dotBanks = plainStarDotBanks(plainStars.filter(body => !galaxyStars.has(body.id)).map(body => ({ id: body.id, positionM: body.positionM, color: body.color })), prepared.frame);
-  const rootPackage = resolve(objectsRoot, OBJECT_TREE_ROOT);
-  for (const id of PLAIN_STAR_DOT_BANK_IDS) {
-    if (!dotBanks.some(bank => bank.id === id)) await rm(resolve(rootPackage, 'prepared', `${id}.bin`), { force: true });
-    // The Sun's package held them before the root's did.
-    await rm(resolve(dirname(options.outputPath), `${id}.bin`), { force: true });
+  const starsInside = new Map<string, { id: string; positionM: typeof prepared.focus.positionM; color: string }[]>();
+  for (const body of plainStars) {
+    if (galaxyStars.has(body.id)) continue;
+    const holder = insideOf(body.id);
+    (starsInside.get(holder) ?? starsInside.set(holder, []).get(holder)!).push({ id: body.id, positionM: body.positionM, color: body.color });
   }
-  for (const bank of dotBanks) await writeCatalogueBank({ objectDirectory: rootPackage, id: bank.id, bank, published: true, inventory: async () => undefined });
+  const frames = new Map(registered.map(object => [object.id, object.worldFrame] as const));
+  const dotBanks = [...starsInside].sort(([a], [b]) => a.localeCompare(b)).map(([id, stars]) => {
+    const centre = frames.get(id);
+    if (!centre) throw new TypeError(`${stars[0]!.id} is inside ${id}, which the registry does not place (src/objects/${id}/object.json properties.worldFrame): its dots have no centre.`);
+    return { id, bank: plainStarDotBank(id, stars, { referenceFrame: prepared.frame.referenceFrame, epochJdTt: prepared.frame.epochJdTt, originM: centre.originM })! };
+  });
+  for (const { id, bank } of dotBanks) await writeCatalogueBank({ objectDirectory: resolve(objectsRoot, id), id: bank.id, bank, published: true, inventory: async () => undefined });
+  // The Sun's package held the world's own banks before the root's did.
+  for (const id of [PLAIN_STAR_DOT_BANK, RETIRED_PLAIN_STAR_DOT_BANK]) await rm(resolve(dirname(options.outputPath), `${id}.bin`), { force: true });
   // The summary and the build's index are in the root object's package, the object nothing is outside of. The summary names
-  // the dot banks this bake wrote, so the site asks for no other.
-  await writeIfChanged(worldSummaryPath(objectsRoot), `${JSON.stringify({ ...summary, ...(dotBanks.length ? { dotBanks: dotBanks.map(bank => bank.id) } : {}) })}\n`);
+  // the objects this bake wrote a dot bank for, so the site asks for no other.
+  await writeIfChanged(worldSummaryPath(objectsRoot), `${JSON.stringify({ ...summary, ...(dotBanks.length ? { dotBanks: dotBanks.map(({ id }) => id) } : {}) })}\n`);
   // Read by the build and Node tools only: every body's place in the world's order, and the rows object entries carry.
   await writeIfChanged(worldIndexPath(objectsRoot), `${JSON.stringify(index)}\n`);
   for (const old of ['world-stars.json', 'world-context-summary.json', 'world-index.json']) await rm(resolve(dirname(options.outputPath), old), { force: true });
@@ -283,8 +292,9 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     if (!placed.has(entry.name)) await rm(placesFilePath(objectsRoot, entry.name), { force: true });
     const directory = resolve(objectsRoot, entry.name, 'prepared', 'orbits'), kept = orbits.get(entry.name);
     for (const name of await readdir(directory).catch(() => [] as string[])) if (!kept?.has(name)) await rm(resolve(directory, name));
-    // Only the root object's package holds plain-star dot banks.
-    if (entry.name !== OBJECT_TREE_ROOT) for (const id of PLAIN_STAR_DOT_BANK_IDS) await rm(resolve(objectsRoot, entry.name, 'prepared', `${id}.bin`), { force: true });
+    // Only an object with plain stars inside it holds their dot bank.
+    if (!starsInside.has(entry.name)) await rm(resolve(objectsRoot, entry.name, 'prepared', `${PLAIN_STAR_DOT_BANK}.bin`), { force: true });
+    await rm(resolve(objectsRoot, entry.name, 'prepared', `${RETIRED_PLAIN_STAR_DOT_BANK}.bin`), { force: true });
   }
   for (const old of ['world-systems', 'world-orbits']) await rm(resolve(dirname(options.outputPath), old), { recursive: true, force: true });
   await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
@@ -308,15 +318,20 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   await rm(resolve(dirname(options.outputPath), 'world-system-views.json'), { force: true });
 }
 
-/** The star packages that are dots of the Milky Way's own bank, by id: the names of its tracked table. An object folder
- * without the table (a fixture) has none. */
+/** The star packages that are dots of a galaxy's own bank, by id: the names of each bank's tracked table
+ * (`source/packaged-stars/positions.csv.gz`, written by paged-star-dot-positions.mts for the bank that declares one). An
+ * objects folder without such a table (a fixture) has none. */
 async function packagedGalaxyStars(objectsRoot: string): Promise<ReadonlySet<string>> {
-  const path = resolve(objectsRoot, 'milky-way-volume/source/packaged-stars/positions.csv.gz');
-  const bytes = await readFile(path).catch((error: unknown) => { if (isMissingFile(error)) return null; throw error; });
-  if (bytes === null) return new Set();
-  const [header, ...rows] = gunzipSync(bytes).toString('utf8').trim().split('\n');
-  if (header !== 'name,xKpc,yKpc,zKpc,color') throw new TypeError(`${path}: the header is ${JSON.stringify(header)}, not name,xKpc,yKpc,zKpc,color.`);
-  return new Set(rows.map(row => row.slice(0, row.indexOf(','))));
+  const folders = (await readdir(objectsRoot, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name);
+  const tables = await Promise.all(folders.map(async id => {
+    const path = resolve(objectsRoot, id, 'source/packaged-stars/positions.csv.gz');
+    const bytes = await readFile(path).catch((error: unknown) => { if (isMissingFile(error)) return null; throw error; });
+    if (bytes === null) return [];
+    const [header, ...rows] = gunzipSync(bytes).toString('utf8').trim().split('\n');
+    if (header !== 'name,xKpc,yKpc,zKpc,color') throw new TypeError(`${path}: the header is ${JSON.stringify(header)}, not name,xKpc,yKpc,zKpc,color.`);
+    return rows.map(row => row.slice(0, row.indexOf(',')));
+  }));
+  return new Set(tables.flat());
 }
 
 /** The objects directory the world's per-object files are written into: the one given; else the one the output is in, when
