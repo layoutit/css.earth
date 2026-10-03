@@ -1,4 +1,4 @@
-import { NEBULA_PHYSICAL_EVIDENCE_SCHEMA, PHOTOMETRIC_MGE_SCHEMA, verifySampledEvidence } from '@cssearth/objects';
+import { NEBULA_PHYSICAL_EVIDENCE_SCHEMA, PHOTOMETRIC_MGE_SCHEMA, verifySampledEvidence, NEBULA_DEPTH_MODEL_SCHEMA } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readCompilerRecipe, readCompilerRequest, type CompilerRequest } from './model.ts';
 import { readCompilerResult, type CompilerResult } from './result.ts';
@@ -45,7 +45,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   let depthInputs: { recipe: Pin; evidence: Pin } | undefined;
   if (recipe.depthRecipe) {
     const depth: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.depthRecipe)![1]));
-    if (!record(depth) || depth.schema !== 'cssearth-nebula-depth-model@1' || depth.id !== recipe.id)
+    if (!record(depth) || depth.schema !== NEBULA_DEPTH_MODEL_SCHEMA || depth.id !== recipe.id)
       throw new Error('Prepared depth recipe belongs to another nebula or has an invalid schema.');
     const evidence = pin(depth.evidence);
     if (!evidence.path.startsWith('labs/nebula/models/') || !publication.inputs.some(source => source.path === evidence.path))

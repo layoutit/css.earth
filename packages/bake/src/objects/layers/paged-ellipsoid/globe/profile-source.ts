@@ -1,3 +1,4 @@
+import { PAGED_ELLIPSOID_SCHEMA } from '@cssearth/objects';
 import {array, boolean, dictionary, literal, number, object, optional, parse, record, string, tuple, union, type Guard, type Infer} from '@cssearth/core/schema';
 import type {PagedAssetConfiguration} from './asset-contract.ts';
 import type { PagedRasterConfiguration } from '../surface-raster.ts';
@@ -40,7 +41,7 @@ const assetConfiguration: Guard<Omit<PagedAssetConfiguration & PagedRasterConfig
       deepOceanFill: optional(deepOceanFill),
       thumbnailRegion: optional(object({longitude: optional(number), latitude: optional(number), spanDegrees: optional(number)})),
       webp: optional(object({quality: optional(number), effort: optional(number)}))}))})});
-const profile = object({textureLevels: optional(object({widths:array(number),fixedWidth:optional(number),maximumWidth:optional(number),hysteresis:number,texelsPerCssPixel:number})),schema: literal('cssearth-paged-ellipsoid@1'), displayName: string,
+const profile = object({textureLevels: optional(object({widths:array(number),fixedWidth:optional(number),maximumWidth:optional(number),hysteresis:number,texelsPerCssPixel:number})),schema: literal(PAGED_ELLIPSOID_SCHEMA), displayName: string,
   destinations: object({searchLabel: string, descriptionSuffix: string, statuses: object({detail: string, overview: string})}),
   geographic: object({places: record})});
 /** Orientation, light and default camera angles are derived at preparation; a recipe that states them is stale. */
@@ -60,7 +61,7 @@ export function parsePagedProfile(value: unknown) {
     // The profile guard returns the recipe object itself, so the derived camera goes last.
   return Object.assign({}, assets, metadata, {camera: assets.camera});
 }
-export const isPagedEllipsoidRecipe = (value: unknown): boolean => record(value) && value.schema === 'cssearth-paged-ellipsoid@1';
+export const isPagedEllipsoidRecipe = (value: unknown): boolean => record(value) && value.schema === PAGED_ELLIPSOID_SCHEMA;
 const dataset = object({id: string, maximumZoom: number, view: optional(string), surfaceBankId: optional(string), surfaceUrl: optional(string),
   polesUrl: optional(string), surfacePagePrefix: optional(string), interiorTextures: optional(dictionary(string)),
   focus: optional(object({longitude: number, latitude: number, zoom: number, northUp: optional(boolean),

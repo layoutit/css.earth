@@ -36,6 +36,7 @@
  * Run from the repository root. `--fetch` downloads missing tables and labels into the cache named in
  * catalogues.json; `--check` writes nothing and fails when a file would change.
  */
+import { INVESTIGATION_LEDGER_SCHEMA } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -554,7 +555,7 @@ for (const { body, facts, extracts, notes } of outcomes) {
   // Ledger: one entry when a catalogue value is not shown.
   const ledgerPath = resolve(objectDirectory, 'investigations.json'), ledger = await optionalJson(ledgerPath);
   if (ledger || notes.length) {
-    const base = ledger ?? { schema: 'cssearth-investigation-ledger@1', objectId: body.id, entries: [] };
+    const base = ledger ?? { schema: INVESTIGATION_LEDGER_SCHEMA, objectId: body.id, entries: [] };
     const entries = requireArray(base.entries).filter(raw => requireRecord(raw).id !== LEDGER_ID);
     if (notes.length) entries.push({ id: LEDGER_ID, subject: 'PDS SBN catalogue values that disagree with the factsheet or are not shown', status: notes.some(note => note.status === 'conflict') ? 'unresolved' : 'excluded',
       finding: notes.map(note => note.text).join(' '), revisitWhen: 'A newer release of the named catalogue, or a review that replaces the shown value.',

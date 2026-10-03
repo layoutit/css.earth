@@ -5,25 +5,13 @@
  * A facility keeps the same ledger in src/facilities/<facility id>/investigations.json: what was examined about a telescope's
  * archive, data policy and reduction software, and what was run from it. Every facility ledger answers the same three sweep
  * entries (FACILITY_SWEEP), so facilities compare side by side. */
+import { INVESTIGATION_LEDGER_SCHEMA, INVESTIGATION_STATUSES, type InvestigationStatus, type InvestigationEntry, type InvestigationLedger, type FacilityInvestigationLedger } from '@cssearth/objects';
 import { access, readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { readInvestigationSurveys, type InvestigationSurvey } from './investigation-survey.ts';
 
-export const INVESTIGATION_LEDGER_SCHEMA = 'cssearth-investigation-ledger@1';
 export const INVESTIGATION_LEDGER_FILE = 'investigations.json';
-export const INVESTIGATION_STATUSES = ['included', 'excluded', 'unresolved', 'deferred'] as const;
-export type InvestigationStatus = typeof INVESTIGATION_STATUSES[number];
-
-export interface InvestigationEntry {
-  id: string; subject: string; status: InvestigationStatus; finding: string; revisitWhen?: string;
-  /** The shared record this decision leans on (data/investigations), when the reasoning is not this body's own. */
-  survey?: string;
-  evidence: string[];
-}
-export interface InvestigationLedger { schema: typeof INVESTIGATION_LEDGER_SCHEMA; objectId: string; entries: InvestigationEntry[] }
-export interface FacilityInvestigationLedger { schema: typeof INVESTIGATION_LEDGER_SCHEMA; facilityId: string; entries: InvestigationEntry[] }
-
 /** The questions every facility ledger answers first. */
 export const FACILITY_SWEEP = ['archive-access', 'data-policy', 'reduction-software'] as const;
 

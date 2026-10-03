@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { parsePresentationProfile } from './css-presentation.ts';
+import { parsePresentationProfile } from './css-presentation-profile.js';
 
 describe('presentation profile', () => {
   it('rejects surface texture levels: raster surfaces have one prepared density', () => {

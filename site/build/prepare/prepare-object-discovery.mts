@@ -2,6 +2,7 @@ import { open, readFile } from 'node:fs/promises';
 import { basename, resolve, sep } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { parseArrivalView, parseArrivalBillboard, preparedDefaultViewRotation, type ObjectDiscovery } from '@cssearth/objects';
+import { SHAPE_MODEL_SCHEMA } from '@cssearth/bake/objects/scene';
 import { resolveBuildSceneAddress } from '../../asset-origin.mts';
 
 /** Authored exceptions describe illustrative datasets, not a permanent body blacklist. */
@@ -139,7 +140,8 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     const recipe: unknown = JSON.parse(await readFile(path, 'utf8'));
     // A shape model names its dataset surfaces by `dataset`; discovery reads them as surfaces like the raster lane's.
     if (source.id === 'shape-model') {
-      if (isRecord(recipe) && Array.isArray(recipe.surfaces))
+      if (!isRecord(recipe) || recipe.schema !== SHAPE_MODEL_SCHEMA) throw new TypeError(`Discovery shape-model recipe has an unexpected schema: ${source.path}.`);
+      if (Array.isArray(recipe.surfaces))
         inputs.push({ surfaces: recipe.surfaces.map(surface => isRecord(surface) ? { id: surface.dataset, science: surface.science } : surface) });
     } else inputs.push(recipe);
   }

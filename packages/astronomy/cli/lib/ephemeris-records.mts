@@ -1,3 +1,4 @@
+import { PUBLISHED_MUTUAL_ORBIT_SCHEMA, PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA } from '@cssearth/objects';
 import { array, boolean, dictionary, literal, number, optional, shape, string, vector } from './source-validation.mts';
 import { objectValue } from './generator-records.mts';
 const stateFields = { positionKm: vector, velocityKmPerDay: vector };
@@ -22,13 +23,13 @@ const validation = shape({ orbitalPlaneVsIndependentRadarDegrees: optional(numbe
 const horizonsRecord = shape({ ...bodyFields, solution: string, schema: literal('cssearth-body-epoch-ephemeris@1'), requestEpochJdUtc: number,
   ttMinusUtcSeconds: number, sources: shape({ relative: horizonPin, parent: horizonPin, heliocentricCheck: horizonPin }),
   parentHeliocentricState: shape(stateFields) });
-const publishedRecord = shape({ ...bodyFields, schema: literal('cssearth-published-body-epoch-ephemeris@1'),
+const publishedRecord = shape({ ...bodyFields, schema: literal(PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA),
   source: shape(pinFields), sourcePins: optional(dictionary(sourcePin)), validation,
   parentHeliocentricState: optional(shape(stateFields)), parentHeliocentricSource: optional(parentPin) });
 export function parseBodyEpochRecord(value: unknown) {
-  return objectValue(value).schema === 'cssearth-published-body-epoch-ephemeris@1' ? publishedRecord(value) : horizonsRecord(value);
+  return objectValue(value).schema === PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA ? publishedRecord(value) : horizonsRecord(value);
 }
-export const parsePublishedParameters = shape({ schema: literal('cssearth-published-mutual-orbit@1'), id: string,
+export const parsePublishedParameters = shape({ schema: literal(PUBLISHED_MUTUAL_ORBIT_SCHEMA), id: string,
   placement: optional(literal('approximate')),
   centerBodyId: string, referenceFrame: string, epochJd: number, timeQualification: string, citation: shape({ url: string }),
   semiMajorAxisKm: number, eccentricity: number, inclinationDegrees: number, ascendingNodeDegrees: number,

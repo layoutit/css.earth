@@ -14,8 +14,9 @@ export type NavigationHistory = { history: 'push' | 'replace' } | { history: 'po
 export type NavigationIntent =
   /** Go to an object. `view` asks for its moons or its planetary system instead of the body itself; `camera: 'frame'` flies
    * to that view's framing, and `preserve` keeps the camera where it is (the zoom hands the view over to the object's scene).
-   * `departed`: the view a header pill's flight left: the hand-over it lands on is a new entry, and Back returns to it. */
-  | { kind: 'object'; view?: SceneView; camera?: 'frame' | 'preserve'; departed?: string }
+   * `departed`: the view a header pill's flight left: the hand-over it lands on is a new entry, and Back returns to it.
+   * `history: 'replace'` lands on the entry it left (a Showcase hop after the tour's first). */
+  | { kind: 'object'; view?: SceneView; camera?: 'frame' | 'preserve'; departed?: string; history?: 'replace' }
   | { kind: 'feature'; id: string | null }
   | { kind: 'link'; url: string }
   | { kind: 'history'; url: string; history: NavigationHistory };
@@ -58,7 +59,7 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   const linked = intent.kind === 'link' || intent.kind === 'history';
   let url = new URL(intent.kind === 'link' || intent.kind === 'history' ? intent.url : current.href, current.href);
   let history: NavigationHistory = intent.kind === 'history' ? intent.history
-    : { history: intent.kind === 'object' && intent.camera === 'preserve' && !intent.departed ? 'replace' : 'push' };
+    : { history: intent.kind === 'object' && (intent.history === 'replace' || intent.camera === 'preserve' && !intent.departed) ? 'replace' : 'push' };
   const targetRequest = { objectId: object.id, fromId: current.objectId, mount: current.mount };
   const family = satelliteSystemByHost(object.id);
   const view = intent.kind === 'object' ? intent.view ?? null : null;

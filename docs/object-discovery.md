@@ -30,6 +30,13 @@ highlights bypass the fade tied to orbit size, so moons remain identifiable
 at Solar System scale; their tiny orbits need not be drawn. Orbit visibility
 continues to follow Settings.
 
+The Showcase pill, beside the app actions, tours the featured bodies listed in
+`site/showcase.mts`: it flies to one at random, stays seven seconds after
+landing and flies on, showing every body before repeating one. A pointer or key
+on the page, a wheel, Back, a hidden tab, or the pill again ends the tour. Its
+first hop adds a history entry and the rest replace it, so Back returns to the
+page the tour left.
+
 ## Sourced asteroid context
 
 The default asteroid context is the intersection of registered cssEarth objects

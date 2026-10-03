@@ -63,6 +63,38 @@ const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddres
 // Only the empty stage of the default view shows the photograph: a native dataset, settings or saved-view response draws
 // its scene into the stage and marks it (dataset-response.mts). The photograph shows the body at the share of the viewport
 // width that response frames it at, so choosing a dataset does not resize the body.
+// A page without script turns the body a native response drew by dragging it, and zooms it with the wheel. A native resize
+// corner covers the scene: the browser stores a drag in the sensor's width, and a view timeline reads that width on the
+// body's spinning meshes (packages/telescope-cli resize-input.mts is the original). The rule finds them by the paused,
+// looping animation the native view writes on a mesh (prepared-native-view.ts), so the response carries no mark for it; a
+// variable star's light curve loops on a veil, not a mesh, and is left alone.
+// The corner sits in a scroll area that opens part-way down its range, so the wheel scales the drawing in both directions;
+// only the stage's own scale animates, so the scene and the layers fitted to its silhouette (a star's limb, a material
+// composite) zoom together. One rule set for every body.
+const dragWithoutScript = `
+@property --native-drag-progress { syntax: '<number>'; inherits: false; initial-value: 0; }
+@keyframes native-drag { from { --native-drag-progress: 0; } to { --native-drag-progress: 1; } }
+@keyframes native-zoom { 0% { scale: 5; } 10% { scale: 3.381; } 20% { scale: 2.287; } 30% { scale: 1.546; } 40% { scale: 1.046; } 40.984% { scale: 1; } 50% { scale: 0.7071; } 60% { scale: 0.4782; } 70% { scale: 0.3234; } 80% { scale: 0.2187; } 90% { scale: 0.1479; } 100% { scale: 0.1; } }
+.native-scene-input { display: none; }
+@supports (animation-timeline: view()) and (timeline-scope: --native-drag) and selector(::-webkit-resizer) {
+  .object-viewport { timeline-scope: --native-drag, --native-zoom; }
+  .native-scene-input { position: absolute; inset: 0 0 var(--native-input-footer, 24px); z-index: 40; display: block; overflow: hidden; container-type: size; }
+  .native-drag-frame { position: sticky; top: 0; display: block; height: 100cqh; margin-bottom: -100cqh; overflow: hidden; contain: strict; cursor: grab; }
+  .native-drag-frame:active { cursor: grabbing; }
+  .native-drag-sensor { position: absolute; left: -8192px; top: -8192px; min-width: 16384px; min-height: 16384px; max-width: 24576px; max-height: 24576px; resize: both; overflow: scroll; opacity: 0; touch-action: none; view-timeline: --native-drag x; }
+  .native-drag-sensor::-webkit-scrollbar { width: 16384px; height: 16384px; }
+  .native-drag-sensor::-webkit-resizer { cursor: inherit; }
+  .native-zoom-start { display: none; }
+  .object-stage .polycss-mesh[style*=" infinite both paused"] {
+    animation: native-drag linear both !important; animation-timeline: --native-drag !important;
+    rotate: z calc(((100cqw / 1px + 8192) / max(.000001, var(--native-drag-progress)) - 100cqw / 1px - 20480) * sign(var(--native-drag-progress)) * .3deg);
+  }
+  @supports (scroll-initial-target: nearest) {
+    .native-scene-input { overflow: hidden scroll; scrollbar-width: none; overscroll-behavior: contain; scroll-timeline: --native-zoom y; }
+    .native-zoom-start { display: block; height: 100cqh; margin: 1000px 0 1440px; scroll-initial-target: nearest; }
+    .object-stage[data-prepared-object] { animation: native-zoom linear both; animation-timeline: --native-zoom; }
+  }
+}`;
 const billboardWidthWithoutScript = (() => {
   const billboard = startup?.arrival?.billboard, share = scene?.coverPlan && defaultWidthShare(scene.coverPlan);
   return billboard && share
@@ -159,6 +191,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {tabStyles.map(({ key, css }) => <style is:inline data-object-style={key} set:html={css} />)}
     {!navigation && <noscript><style is:inline>.startup-loading { display: none; }</style></noscript>}
     <noscript><style is:inline set:html={sheetWithoutScript} /></noscript>
+    <noscript><style is:inline set:html={dragWithoutScript} /></noscript>
     {startup && <noscript><style is:inline set:html={billboardWithoutScript} /></noscript>}
     <title>{seo.title}</title>
     {!navigation && <ObjectSwatchStyles />}
@@ -195,6 +228,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
       </div>
       <div class="object-input-surface" tabindex="0" role="group" aria-label={`Explore ${objectRecord.name}`} />
       <div class="object-scene-overlays"></div>
+      <noscript><div class="native-scene-input" role="group" aria-label="Drag to turn, scroll to zoom"><div class="native-drag-frame"><div class="native-drag-sensor" aria-hidden="true" style="width:20480px;height:20480px"></div></div><span class="native-zoom-start" aria-hidden="true"></span></div></noscript>
     </div>
   </body>
 </html>

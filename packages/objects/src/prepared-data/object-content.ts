@@ -172,6 +172,8 @@ const content = object({
       qualification: optional(string), surface: optional(string), poles: optional(string), material: optional(string),
       legendNote: optional(string), falseColor: optional(boolean), view: optional(literal('exterior', 'interior')),
       notes: optional(string), noData: optional(boolean), legend: optional(legend), facts: optional(array(fact)), source,
+      scope: optional(literal('system')), volume: optional(object({objectId: string, datasetId: string, surface: string})),
+      step: optional(object({group: string, label: string, autoplay: optional(boolean), opens: optional(literal('first', 'last'))})),
     })),
   }),
   settings: object({titleKey: literal('settings'), controls: array(object({kind: literal('cycle', 'toggle'),

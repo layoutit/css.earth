@@ -224,3 +224,23 @@ export { CAMERA_POSE_SCHEMA, parseCameraPose, parseCameraPoseMatrix, parseRestor
 export * from './prepared-data/object-content.js';
 export * from './prepared-data/prepared-content.js';
 export * from './prepared-data/facility-emblems.js';
+
+// E2-rest: P1
+export { PUBLISHED_MUTUAL_ORBIT_SCHEMA, PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA } from './prepared-data/source-schema-identifiers.js';
+export type { AcquisitionOperation, AcquisitionPlan } from './prepared-data/acquisition-plan.js';
+export { INVESTIGATION_STATUSES, type InvestigationStatus, type InvestigationEntry, type InvestigationLedger, type FacilityInvestigationLedger } from './prepared-data/investigation-ledger.js';
+// E2-rest: P2
+export { CSS_PRESENTATION_PROFILE_SCHEMA, parsePresentationProfile, type PresentationProfile } from './prepared-data/css-presentation-profile.js';
+export { CSS_GEOMETRY_PROFILE_SCHEMA, NAVIGATION_MARKER_SCHEMA, PAGED_ELLIPSOID_SCHEMA, CHART_ASSETS_SCHEMA } from './prepared-data/presentation-recipe-schemas.js';
+export { MARKER_SOURCE_HINTS, type MarkerSource, type MarkerOperation, type MarkerDescriptor } from './prepared-data/navigation-marker.js';
+// E2-rest: P3
+export { VOLUME_DATASET_MANIFEST_SCHEMA } from './volume/volume-dataset-manifest.js';
+export { COMPACT_DENSITY_DELIVERY_SCHEMA } from './volume/compact-density-delivery.js';
+export { NEBULA_DEPTH_MODEL_SCHEMA, type DepthSurface, type DepthRecipe } from './volume/nebula-depth-model.js';
+export { GAIA_NEBULA_FIELD_SCHEMA } from './volume/gaia-nebula-field.js';
+export { NEBULA_DELIVERY_SCHEMA } from './volume/nebula-delivery.js';
+export { CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA } from './volume/circumstellar-reconstruction.js';
+// E2-rest: P4
+export { PYUVDATA_UVFITS_SCHEMA, parsePyuvdataUvfitsRequest, parsePyuvdataUvfitsAnswer, type PyuvdataUvfitsRequest, type PyuvdataUvfitsAnswer } from './prepared-data/pyuvdata-uvfits.js';
+export { VOLUME_SOURCE_MANIFEST_SCHEMA } from './prepared-data/volume-source-manifest.js';
+export { VOLUME_PRESENTATION_SOURCE_SCHEMA, type VolumeSourcePreview, type TrackedVolumeSourcePreview, type VolumeDatasetSource, type VolumePresentationSource } from './prepared-data/volume-presentation-source.js';

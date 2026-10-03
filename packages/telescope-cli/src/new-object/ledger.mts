@@ -1,7 +1,7 @@
 /** A generated package's investigation ledger: every source the generator chose, as an included decision with the links it read.
  * An entry is written only when it has a link; a package whose choices name none keeps the scaffold's empty ledger, which the
  * ledger check refuses until a person records what was examined. */
-import { INVESTIGATION_LEDGER_SCHEMA } from '@cssearth/bake/sources';
+import { INVESTIGATION_LEDGER_SCHEMA } from '@cssearth/objects';
 import { json, type PackageFiles } from './dataset.mts';
 
 export interface Decision { readonly id: string; readonly subject: string; readonly finding: string; readonly evidence?: readonly string[] }

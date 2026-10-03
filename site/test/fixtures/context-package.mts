@@ -1,4 +1,4 @@
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA } from '@cssearth/objects';
+import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA } from '@cssearth/objects';
 import { createHash } from 'node:crypto';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -23,7 +23,7 @@ export async function writeContextPackage(root: string, id: string) {
   const descriptor = { schema: OBJECT_SCHEMA, id, type: 'volume-dataset-bank', properties: { frame },
     prepared: { format: PREPARED_VOLUME_DATASETS_SCHEMA, url: 'prepared/datasets.json' } };
   // The dataset's own source record: the manifest input that names it.
-  const manifest = { schema: 'cssearth-volume-source-manifest@2', pathBase: 'repository', inputs: [{ id: 'image', datasetId: 'optical', path: '.local/fixture/image.tif',
+  const manifest = { schema: VOLUME_SOURCE_MANIFEST_SCHEMA, pathBase: 'repository', inputs: [{ id: 'image', datasetId: 'optical', path: '.local/fixture/image.tif',
     origin: 'https://example.test/source', sourceUrl: 'https://example.test/source', title: 'Fixture image', credit: 'Fixture', acquisition: 'Fixture',
     sourceBinding: { kind: 'local', reason: 'Structural test fixture' }, dependencies: [] }], documents: [], generatedIntermediates: [] };
   const presentation = { schema: 'cssearth-volume-presentation@2', objectId: id, defaultDataset: 'optical', controls: [{
@@ -40,7 +40,7 @@ export async function writeContextPackage(root: string, id: string) {
       { location: 'prepared', filename: 'presentation.json', bytes: Buffer.byteLength(JSON.stringify(presentation)), sha256: address(JSON.stringify(presentation)) },
       { location: 'prepared', filename: 'slice.webp', bytes: image.length, sha256: address(image) },
     ] })],
-    [`${directory}/source/presentation.json`, JSON.stringify({ schema: 'cssearth-volume-presentation-source@2', objectId: id,
+    [`${directory}/source/presentation.json`, JSON.stringify({ schema: VOLUME_PRESENTATION_SOURCE_SCHEMA, objectId: id,
       name: `${id} fixture`, defaultDataset: 'optical', bank: { path: `${directory}/prepared/datasets.json` }, sharedInputs: [],
       datasets: [{ id: 'optical', label: 'Optical', title: 'Fixture optical image', description: 'Structural test fixture', summary: 'Structural test fixture',
         detail: '1 × 1 px', facts: [], input: 'image', preview: { path: '.local/fixture/preview.jpg', url: 'https://example.test/preview.jpg' } }] })],

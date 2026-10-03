@@ -1,3 +1,4 @@
+import { CHART_ASSETS_SCHEMA } from '@cssearth/objects';
 import { readFile,writeFile,mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -11,13 +12,13 @@ interface Pressure extends Identity {kind:'pressure';source:string;layerCount:nu
 interface Phase extends Identity {kind:'phase';sampleCount:number;maximumAngleDegrees:number;segments:({maximumAngleDegrees:number;coefficients:number[];kind:'polynomialMagnitude'}|{maximumAngleDegrees:number;coefficients:number[];kind:'albedoPolynomialMagnitude';constant:number})[];}
 interface FoldedTransit extends Identity {kind:'folded-transit';planet:string;sources:string[];durationHours:number;binMinutes:number;alignMinutes?:number;notes:string[];}
 interface LightCurve extends Identity {kind:'light-curve';source:string;timeField:string;fluxField:string;maskField?:string;binMinutes:number;axisLabel:string;events:{time:number;label:string}[];}
-export interface ChartAssetRecipe {schema:'cssearth-chart-assets@1';publicBase:string;charts:(Spectrum|Pressure|Phase|LightCurve|FoldedTransit|MeasuredSpectrumRecipe|RetrievedProfileRecipe|SystemOrbitsRecipe)[];gallery?:{source:string;schema:string;itemCount:number};}
+export interface ChartAssetRecipe {schema:typeof CHART_ASSETS_SCHEMA;publicBase:string;charts:(Spectrum|Pressure|Phase|LightCurve|FoldedTransit|MeasuredSpectrumRecipe|RetrievedProfileRecipe|SystemOrbitsRecipe)[];gallery?:{source:string;schema:string;itemCount:number};}
 function record(value:unknown,label:string):JsonMap {if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError(`${label} must be an object.`);return value as JsonMap;}
 function string(value:unknown,label:string):asserts value is string {if(typeof value!=='string'||!value.trim())throw new TypeError(`${label} must be text.`);}
 function path(root:string,value:string):string {if(value.startsWith('/')||value.includes('\\')||value.split('/').includes('..'))throw new TypeError('Unsafe chart source path.');return resolve(root,value);}
 function numericArray(value:unknown,label:string):number[]{if(!Array.isArray(value)||value.some(item=>typeof item!=='number'||!Number.isFinite(item)))throw new TypeError(`${label} must contain finite samples.`);return value;}
 export function parseChartAssetRecipe(value:unknown):ChartAssetRecipe {
- const recipe=record(value,'charts');if(recipe.schema!=='cssearth-chart-assets@1'||!Array.isArray(recipe.charts))throw new TypeError('Unknown chart recipe schema.');string(recipe.publicBase,'publicBase');if(!recipe.publicBase.startsWith('/')||!recipe.publicBase.endsWith('/'))throw new TypeError('Chart asset base must be an absolute URL prefix.');
+ const recipe=record(value,'charts');if(recipe.schema!==CHART_ASSETS_SCHEMA||!Array.isArray(recipe.charts))throw new TypeError('Unknown chart recipe schema.');string(recipe.publicBase,'publicBase');if(!recipe.publicBase.startsWith('/')||!recipe.publicBase.endsWith('/'))throw new TypeError('Chart asset base must be an absolute URL prefix.');
  for(const value of recipe.charts){const chart=record(value,'chart');for(const key of ['id','title','description','output'])string(chart[key],key);path('.',String(chart.output));record(chart.metadata,'metadata');if(!['spectrum','pressure','phase','light-curve','measured-spectrum','retrieved-profile','system-orbits','folded-transit'].includes(String(chart.kind)))throw new TypeError(`${String(chart.id)}: unknown chart operator ${String(chart.kind)}.`);
   if(chart.kind==='measured-spectrum')parseMeasuredSpectrum(chart);
   if(chart.kind==='retrieved-profile')parseRetrievedProfile(chart);

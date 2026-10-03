@@ -11,7 +11,7 @@
  * snapshot and writes the source manifest. The astronomy record is written without elements; run
  * `node packages/astronomy/cli/generate-asteroids.mts --object=<ids>` next, then `node packages/bake/cli/prepare-object.mts <id>`.
  */
-import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA } from '@cssearth/objects';
+import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA } from '@cssearth/objects';
 
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
@@ -293,7 +293,7 @@ async function authorBody(body: Body) {
     // Reference PDFs are not committed (see .gitignore); restore them from the archive.
     ...(body.occultation ? [{ kind: 'download', groups: ['restore', 'refresh'], path: `reference/${model.id}-${body.occultation.name}`, url: `${DAMIT}/stored_files/open/${body.occultation.file}/${body.occultation.name}` }] : []),
   ];
-  await write(resolve(src, 'preparation/acquisition.json'), json({ schema: 'cssearth-acquisition-plan@1', operations }));
+  await write(resolve(src, 'preparation/acquisition.json'), json({ schema: ACQUISITION_PLAN_SCHEMA, operations }));
   const navigation = requireRecord(JSON.parse(await readFile(resolve(template, 'source/preparation/navigation.json'), 'utf8')));
   await write(resolve(src, 'preparation/navigation.json'), json({ ...navigation, objectId: id }));
 
@@ -536,7 +536,7 @@ function ledger(body: Body, modelUrl: string) {
       finding: 'No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.',
       revisitWhen: 'A resolved image or a registered surface map of this asteroid is published.', evidence: [modelUrl] },
   ];
-  return { schema: 'cssearth-investigation-ledger@1', objectId: id, entries };
+  return { schema: INVESTIGATION_LEDGER_SCHEMA, objectId: id, entries };
 }
 
 const tableChecked = checked;

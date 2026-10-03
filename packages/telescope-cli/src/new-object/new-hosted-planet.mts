@@ -14,7 +14,7 @@
  * shared neutral gray, lit by its own star: no color of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node packages/bake/cli/prepare-object.mts <id> */
-import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, SYNCHRONOUS_ROTATION_SCHEMA } from '@cssearth/objects';
+import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, SYNCHRONOUS_ROTATION_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA, CSS_PRESENTATION_PROFILE_SCHEMA, CSS_GEOMETRY_PROFILE_SCHEMA, NAVIGATION_MARKER_SCHEMA } from '@cssearth/objects';
 
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -121,7 +121,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
         shadowlessFloodLimbFloor: 0.35, orenNayarRoughness: 0, terminatorSmoothstep: [0, 0.1], minimumLightViewZ: -1, maximumLightViewZ: 1,
         baseLightAzimuthDegrees: 0, cameraContract: 'unbounded-accumulated-matrix3d-phase-and-roll', runtimeRasterization: false } } }) });
 
-  put(`${o}/source/preparation/geometry.json`, { schema: 'cssearth-css-geometry-profile@1', namespace: id,
+  put(`${o}/source/preparation/geometry.json`, { schema: CSS_GEOMETRY_PROFILE_SCHEMA, namespace: id,
     surface: { radius: BODY_RADIUS_UNITS, polarRadius: BODY_RADIUS_UNITS, latitudeSegments: 16, longitudeSegments: 32,
       surface: { url: `/scenes/${id}/${id}-surface-shape@2x.webp`, width: 1024, height: 768 }, surfaceLatitudeHeight: 512, packedBandGutter: 8,
       poles: { url: `/scenes/${id}/${id}-poles-shape@2x.webp`, width: 512, height: 256 }, polarTileSize: 256, polarRadiusScale: 1.035, polarOffset: 0.1, uv: 'cell', color },
@@ -132,8 +132,8 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
         polarPreparation: 'the same gray on the polar tiles',
         axialTiltNote: rotation === 'unmeasured' ? 'no obliquity or spin of this planet is measured; the display axis is the orbit normal and nothing turns' : "no obliquity of this planet is measured; the rotation record assumes the spin axis on the orbit normal, as tidal locking implies" } } });
 
-  put(`${o}/source/preparation/presentation.json`, { schema: 'cssearth-css-presentation-profile@2', namespace: id, mode: glow ? 'emissive' : 'composite' });
-  put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@2', objectId: id, owner: 'object', presentation: { size: 5 },
+  put(`${o}/source/preparation/presentation.json`, { schema: CSS_PRESENTATION_PROFILE_SCHEMA, namespace: id, mode: glow ? 'emissive' : 'composite' });
+  put(`${o}/source/preparation/navigation.json`, { schema: NAVIGATION_MARKER_SCHEMA, objectId: id, owner: 'object', presentation: { size: 5 },
     source: { path: 'presentation/context.png' }, operations: [{ type: 'resize', width: 'tile', height: 'tile', fit: 'cover', position: 'centre', kernel: 'lanczos3' },
       { type: 'ensure-alpha' }, { type: 'ellipse-mask', cx: .5, cy: .5, rx: .45, ry: .45, shading: { ambient: .35, diffuse: .65 } }, { type: 'png' }],
     context: { pixels: 512 } });
@@ -150,9 +150,9 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     source: `Assumed synchronous rotation: a planet ${Math.round(requireFiniteNumber(orbit.semiMajorAxisStellarRadii))} stellar radii from its star is expected to be tidally locked, and no rotation period of ${name} is measured (${TODO}: name the literature checked). Pole, prime meridian and rate are computed from the hosted orbit in packages/astronomy/data/bodies/${id}.json.`,
     coordinateSystem: 'ICRF/J2000. +Z is the orbit normal (prograde spin); +X points at the host star at each instant, so longitude 0 is the substellar point; east longitude, the direction of rotation.',
     qualification: `Tidal locking and a spin axis on the orbit normal are assumptions, not measurements: neither the rotation period nor the obliquity of ${name} is measured.` });
-  put(`${o}/source/preparation/acquisition.json`, { schema: 'cssearth-acquisition-plan@1',
+  put(`${o}/source/preparation/acquisition.json`, { schema: ACQUISITION_PLAN_SCHEMA,
     operations: [] });
-  put(`${o}/source/presentation/solar-system.json`, { schema: 'cssearth-solar-system-preparation@1', bodyId: id, displayName: name,
+  put(`${o}/source/presentation/solar-system.json`, { schema: SOLAR_SYSTEM_PREPARATION_SCHEMA, bodyId: id, displayName: name,
     bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm, defaultZoom: 1.25, geometryScale: GEOMETRY_SCALE });
   put(`${o}/source/measurements.json`, { schema: 'cssearth-hosted-planet@1', id, radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
     orbitalPeriodDays: periodDays, orbitalPeriodSource: requireString(requireRecord(orbit.sources).period, 'hosted orbit period source'),
@@ -201,7 +201,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
   put(`${o}/NOTICE.md`, `# ${name} credits\n\n${TODO}: the sources this package redistributes and their terms.\n`);
   // Empty, like the TODO prose: `pnpm check:investigations` refuses it until the sources examined are recorded (new-object
   // writes its own choices over it, ledger.mts).
-  put(`${o}/investigations.json`, { schema: 'cssearth-investigation-ledger@1', objectId: id, entries: [] });
+  put(`${o}/investigations.json`, { schema: INVESTIGATION_LEDGER_SCHEMA, objectId: id, entries: [] });
   return files;
 }
 

@@ -11,6 +11,7 @@
  * baker reads and the receipt `reconstruction-<dataset>.json`: the channel digest it was solved from, the method settings, the
  * projection error per channel and a depth check against extrusion. The author then uses that grid only while the digest
  * still matches the channels it displays. */
+import { CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA } from '@cssearth/objects';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -105,7 +106,7 @@ for (const inputs of datasets) {
   const { exposureGain, opacity } = exposureAndOpacity(dataset.topAlpha, peak, integral);
   const mean = volumes[0]!.map((_, i) => volumes.reduce((total, volume) => total + volume[i]!, 0) / volumes.length);
   const record: EdgeOnReconstruction = {
-    schema: 'cssearth-circumstellar-reconstruction@2', objectId: id, datasetId: dataset.id,
+    schema: CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA, objectId: id, datasetId: dataset.id,
     grid: { size, halfUnits: recipe.grid.halfUnits },
     method: { name: 'axial-symmetry emission inference', paper: 'Wenger, Lorenz & Magnor (2013), Computer Graphics Forum 32, 93; doi:10.1111/cgf.12216',
       implementation: 'labs/nebula/packages/reconstruction/src/methods/symmetry/solver.ts', command: `node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar ${id}`,

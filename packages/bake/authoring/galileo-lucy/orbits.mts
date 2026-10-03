@@ -1,4 +1,4 @@
-import { DISPLAY_ORIENTATION_SCHEMA } from '@cssearth/objects';
+import { DISPLAY_ORIENTATION_SCHEMA, PUBLISHED_MUTUAL_ORBIT_SCHEMA, PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA } from '@cssearth/objects';
 // Prepare explicitly illustrative moon phases using published size/period constraints.
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
@@ -23,7 +23,7 @@ for (const body of bodies) {
     coordinateSystem: 'ICRF/J2000, right-handed Z-up model; illustrative zero meridian',
     qualification: body.id === 'dactyl' ? 'Retrograde parent-equatorial approximation to the approximately 172-degree encounter inclination; synchronous spin is assumed, not measured.' : body.id === 'selam' ? 'Assumed pole shared with Dinkinesh; synchronous spin approximation. No present rotational phase measurement.' : 'Published pole and period; authored mesh meridian is illustrative, not registered to the mission body frame.' });
   if (body.parent === 'sun') continue;
-  const parameters = { schema: 'cssearth-published-mutual-orbit@1', id: body.id, centerBodyId: body.parent,
+  const parameters = { schema: PUBLISHED_MUTUAL_ORBIT_SCHEMA, id: body.id, centerBodyId: body.parent,
     placement: 'approximate', referenceFrame: body.id === 'dactyl' ? 'EQJ2000' : 'ECLIPJ2000', epochJd: epochJdTt,
     timeScale: 'TT', timeQualification: 'An illustrative zero mean anomaly is assigned at the shared TT scene epoch. This is not a propagation of a measured encounter phase or a prediction of present position.',
     semiMajorAxisKm: body.id === 'dactyl' ? 82.3 : 3.11, eccentricity: body.id === 'dactyl' ? .15 : 0,
@@ -40,7 +40,7 @@ for (const body of bodies) {
   await write(`${s}/orbit/published-parameters.json`, parameters);
   const bytes = await readFile(`${s}/orbit/published-parameters.json`), state = evaluatePublishedOrbit(parsePublishedParameters(parameters), epochJdTt);
   const gm = parameters.semiMajorAxisKm ** 3 * (parameters.meanMotionDegreesPerDay * rad / 86400) ** 2;
-  await write(`${s}/validation/epoch-state.json`, { schema: 'cssearth-published-body-epoch-ephemeris@1', id: body.id, centerBodyId: body.parent,
+  await write(`${s}/validation/epoch-state.json`, { schema: PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA, id: body.id, centerBodyId: body.parent,
     epochJdTt, referenceFrame: 'ICRF', units: 'KM-D', correction: 'NONE', runtimeExtrapolation: false,
     ...state, gravitationalParametersKm3PerS2: { combined: gm, body: 0, parent: gm },
     source: { path: 'source/orbit/published-parameters.json', bytes: bytes.length },
