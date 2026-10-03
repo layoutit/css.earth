@@ -1,8 +1,10 @@
+import { readFileSync } from 'node:fs';
+import { parse, array, number } from '@cssearth/core/schema';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { SHELL_CORNER_PERMUTATIONS, shellMaterialAddress, validatePreparedCssSurfaceShell } from '@cssearth/objects';
 import { nearestFacingIndex } from './material-address.js';
-const authoredLevels = [-1, -.5, -.2, -.07, 0, .0125, .025, .0375, .05, .0625, .075, .0875, .1, .15, .2, .3, .4, .5, .625, .75, .875, 1];
+const authoredLevels = parse(JSON.parse(readFileSync(new URL('../../test/fixtures/shell-facing-levels.json', import.meta.url), 'utf8')), array(number), 'Shell facing levels');
 const transform = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)';
 // Small contract-built triangle: the reader has no preparation implementation or source data dependency.
 const shell = validatePreparedCssSurfaceShell({ schema: 'cssearth-css-surface-shell@1', id: 'fixture', unitScale: 1,

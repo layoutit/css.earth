@@ -1,6 +1,5 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { validatePreparedLeafBounds } from '@cssearth/objects';
 import { prepareSurfaceTargetRotation } from './surface-target.ts';
 import { dotN as dot } from '@cssearth/core';
 
@@ -28,11 +27,9 @@ test('surface correction is a finite proper rotation toward the real physical ey
 });
 
 test('prepared destination correction preserves close-range framing when the globe radius changes', () => {
-  // Destination preparation aligns its geographic target on +z; reader fixtures
-  // use the objects leaf-bounds contract for that same prepared spatial point.
+  // Destination preparation aligns its geographic target on +z.
   for (const radius of [1, 1000, 6371000]) {
     const local = [0,0,radius];
-    validatePreparedLeafBounds({ min: local, max: local });
     const focal = 1212.44, offset = [-170,0], depth = radius * 1.000004;
     const centre = [-offset[0]! * depth / focal, 0, -depth];
     const project = (rotation: readonly number[]) => {

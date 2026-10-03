@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { globSync } from 'node:fs';
+import { globSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { affectedTests, testLaneFiles, testOwners } from './affected-tests.mts';
 
@@ -72,7 +72,30 @@ test('directly edited integration suites stay in the packages lane and two chang
 
 test('foreign package tests follow imports without a handwritten owner map', () => {
   const result = select(['packages/objects/src/format.ts']);
-  assert.ok(result.files.includes('packages/bake/src/presentation/depth-partition-contract.test.ts'));
+  assert.deepEqual(result.files, ['packages/bake/src/presentation/depth-partition-contract.test.ts']);
+});
+
+
+test('real-tree discovery keeps offline tools bounded for objects and runs them for bake changes', () => {
+  const root = resolve(import.meta.dirname, '../../..');
+  const workspaces = readdirSync(resolve(root, 'packages'), { withFileTypes: true }).filter(entry => entry.isDirectory()).map(entry => {
+    const manifest = JSON.parse(readFileSync(resolve(root, 'packages', entry.name, 'package.json'), 'utf8'));
+    return { directory: entry.name, name: String(manifest.name), dependencies: ['dependencies', 'devDependencies', 'peerDependencies']
+      .flatMap(field => Object.keys(manifest[field] ?? {})).filter(name => name.startsWith('@cssearth/')) };
+  });
+  const discovered = testOwners(root);
+  const objects = affectedTests(['packages/objects/src/index.ts'], workspaces, site, discovered);
+  assert.notEqual(objects.packages, 'all');
+  assert.ok(!objects.packages.includes('bake') && !objects.packages.includes('telescope-cli'));
+  assert.deepEqual(objects.files.filter(file => /^packages\/(bake|telescope-cli)\//u.test(file)),
+    ['packages/bake/src/presentation/depth-partition-contract.test.ts']);
+  assert.ok(objects.files.length <= 20, `unbounded foreign discovery: ${objects.files.length}`);
+  const bake = affectedTests(['packages/bake/src/stars/point-field-bank.ts'], workspaces, site, discovered);
+  assert.ok(bake.packages.includes('bake') && bake.packages.includes('telescope-cli'));
+  assert.ok(bake.files.includes(mount));
+  assert.ok(!bake.files.some(file => file.startsWith('packages/bake/')), 'bake runs through its package glob');
+  assert.deepEqual(affectedTests(['src/objects/venus/object.json'], workspaces, site, discovered).files, [],
+    'eclipse-map uses injected inputs, not object files');
 });
 
 test('internal raster and surface geometry changes select bake and its direct consumers', () => {

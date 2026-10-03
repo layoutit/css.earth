@@ -40,6 +40,8 @@ const SHARED = [/^package\.json$/u, /^pnpm-lock\.yaml$/u, /^pnpm-workspace\.yaml
 /** The offline preparation and archive tools. Many changes touch a package they import, so a
  * tool joins only when it, or another tool it imports, changed; a push to main tests them whatever changed. */
 const TOOLS = new Set(['bake', 'telescope-cli']);
+// This producer contract was explicitly routed for objects changes before discovery.
+const TOOL_FOREIGN_TESTS = new Map([['packages/bake/src/presentation/depth-partition-contract.test.ts', ['objects']]]);
 const SITE = [/^site\//u, /^src\//u, /^integration\//u, /^\.github\//u, /^labs\/performance\//u];
 
 /** Sources outside `packages/` whose schema literals a package test pins (see `packages/bake/src/sources/python-schema-identifiers.test.ts`
@@ -65,7 +67,9 @@ export function affectedTests(paths: readonly string[] | null, packages: readonl
   const site = paths.some(path => SITE.some(pattern => pattern.test(path))) || siteDependencies.some(name => changed.has(byName.get(name) ?? ''));
   // A foreign test whose own package already runs is in that package's glob.
   const files = [...owners].filter(([test, imports]) => !changed.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
-    && (imports.some(owner => changed.has(owner)) || paths.includes(test))).map(([test]) => test).sort();
+    && (!TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
+      ? imports.some(owner => changed.has(owner)) || paths.includes(test)
+      : TOOL_FOREIGN_TESTS.get(test)?.some(owner => changed.has(owner)) === true)).map(([test]) => test).sort();
   return { packages: [...changed].sort(), site, files };
 }
 

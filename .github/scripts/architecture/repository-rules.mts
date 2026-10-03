@@ -1,6 +1,7 @@
 /** Rules the architecture check applies to the repository itself rather than to the import graph. They have no
  * baseline: the repository satisfies each of them today, so every finding fails the check, and
  * `--update-baseline` never records one. */
+import ts from 'typescript';
 import { checkBakeWithoutRenderer } from './bake-without-renderer.mts';
 import { checkFormatSchemaOwnership } from './format-schema-ownership.mts';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
@@ -99,7 +100,8 @@ export function isBroken(findings: ReadonlyMap<string, readonly string[]>): bool
 
 /** Count static import owners and require an independent pair. All declared workspace dependencies count;
  * nested lab packages belong to the labs owner, including their dependencies. Only source files are checked;
- * instruction and fixture data files such as `AGENTS.md` import nothing. */
+ * instruction and fixture data files such as `AGENTS.md` import nothing. Literal new URL paths are checked too;
+ * computed paths and import(variable) cannot be resolved statically. */
 export function checkIntegrationOwners(root: string, files: readonly string[]): string[] {
   const packages = files.filter(file => /^(?:packages\/[^/]+|labs\/[^/]+(?:\/packages\/[^/]+)?)\/package\.json$/u.test(file))
     .map(file => declaredPackage(file, JSON.parse(readFileSync(resolve(root, file), 'utf8'))));
@@ -122,7 +124,15 @@ export function checkIntegrationOwners(root: string, files: readonly string[]): 
   return files.filter(file => file.startsWith('integration/') && /\.[cm]?[jt]sx?$/u.test(file)).flatMap(file => {
     if (!existsSync(resolve(root, file))) return [`${file}: integration file is missing`];
     const findings: string[] = [];
-    const owners = new Set(importedSpecifiers(readFileSync(resolve(root, file), 'utf8'), file).flatMap(specifier => {
+    const text = readFileSync(resolve(root, file), 'utf8');
+    const specifiers = importedSpecifiers(text, file);
+    const visit = (node: ts.Node): void => {
+      if (ts.isNewExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === 'URL'
+        && node.arguments?.[0] && ts.isStringLiteralLike(node.arguments[0])) specifiers.push(node.arguments[0].text);
+      ts.forEachChild(node, visit);
+    };
+    visit(ts.createSourceFile(file, text, ts.ScriptTarget.Latest, true));
+    const owners = new Set(specifiers.flatMap(specifier => {
       const pkg = packages.find(item => specifier === item.name || specifier.startsWith(`${item.name}/`));
       const path = specifier.startsWith('.') ? posix.normalize(posix.join(dirname(file), specifier)) : specifier.replace(/^\//u, '');
       if (pkg) {

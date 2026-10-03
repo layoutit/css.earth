@@ -1,21 +1,21 @@
-import { parsePreparedWorldCameraFrame, record, type ObjectRuntimeDefinition } from '@cssearth/objects';
+import { parsePreparedWorldCameraFrame, type ObjectRuntimeDefinition } from '@cssearth/objects';
 
 import { readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
-import { preparedObjectText } from '@cssearth/objects/node';
+import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
+import { requirePreparedCssDescriptor } from '@cssearth/renderer/testing';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { loadNavigableObject } from '@cssearth/renderer';
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
-import { parseObjectDescriptor } from '@cssearth/objects';
 
 import type { ObjectMountOptions } from '@cssearth/renderer';
 
 async function preparedFixture() {
-  const descriptor = parseObjectDescriptor(JSON.parse(await readFile(new URL('../../src/objects/venus/object.json', import.meta.url), 'utf8')));
-  const envelope = record(JSON.parse(await preparedObjectText(fileURLToPath(new URL('../../src/objects/venus', import.meta.url)), descriptor)), 'prepared Venus fixture');
+  const descriptor = requirePreparedCssDescriptor(JSON.parse(await readFile(new URL('./venus-object.json', import.meta.url), 'utf8')));
+  const envelope = { schema: 'cssearth-prepared-object@1', id: descriptor.id, type: descriptor.type,
+    format: descriptor.prepared!.format, data: await loadObjectTestDefinition('venus') };
   const source = requireObjectRuntimeDefinition(envelope.data);
   // Retain the real tree and selections while keeping image decoding in its browser gate. The texture levels go with
   // the textures they map.

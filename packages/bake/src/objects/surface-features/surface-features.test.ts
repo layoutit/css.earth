@@ -160,6 +160,11 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
     const parsed = parsePreparedSurfaceFeatureCatalog(JSON.parse(written.toString('utf8')), plan, 'mercury');
     assert.equal(parsed.features.length, catalog.features.length);
     assert.equal(parsed.features.find(feature => feature.name === 'Serp Facula')?.name, 'Serp Facula');
+    const fixture: unknown = JSON.parse(await readFile(new URL('../../../../renderer/test/fixtures/scenes/mercury/mercury-features.json', import.meta.url), 'utf8'));
+    const fixturePlan = { ...plan, catalog: { ...plan.catalog, count: 1 } };
+    const fixtureCatalog = parsePreparedSurfaceFeatureCatalog(fixture, fixturePlan, 'mercury');
+    assert.deepEqual(parsed.features.find(feature => feature.id === fixtureCatalog.features[0]!.id), fixtureCatalog.features[0],
+      'renderer feature fixture must match the producer');
     for (const feature of catalog.features) {
       assert.ok(Math.abs(Math.hypot(...feature.anchorUnits) - 11500) < 1e-2, feature.name);
       if (feature.outline.kind === 'circle') {

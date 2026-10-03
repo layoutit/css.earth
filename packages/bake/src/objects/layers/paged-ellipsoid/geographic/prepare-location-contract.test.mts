@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
-import { parsePreparedDestinations, PREPARED_DESTINATIONS_SCHEMA } from '@cssearth/objects';
+import { preparedScenePitch } from '@cssearth/engine';
+import { parsePreparedObjectRuntime, parsePreparedDestinations, PREPARED_DESTINATIONS_SCHEMA } from '@cssearth/objects';
 import { prepareLocationPoint, prepareLocationCamera } from './prepare-location.ts';
 import { parseGeographicScene, parseBodyAttitude, parsePlacesConfig } from './source-records.ts';
 
@@ -15,17 +15,20 @@ function rotate(point: readonly number[], axis: 'x' | 'y' | 'z', degrees: number
 }
 
 test('prepared geographic destination aligns with the retained body and passes the objects catalogue parser', async () => {
-  const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(resolve(process.cwd(), path), 'utf8'));
+  const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL('../../../../../../../' + path, import.meta.url), 'utf8'));
   const rawScene = await read('src/objects/earth/prepared/scene.json');
   const config = parsePlacesConfig(await read('src/objects/earth/source/preparation/paged-ellipsoid.json'));
   const scene = parseGeographicScene(rawScene);
+  const camera = parsePreparedObjectRuntime(await read('src/objects/earth/prepared/runtime.json')).camera;
+  assert.equal(camera.maximumControlPitchDegrees, config.camera.maximumControlPitchDegrees);
+  assert.equal(camera.maximumScenePitchDegrees, config.camera.maximumScenePitchDegrees);
   assert.ok(rawScene && typeof rawScene === 'object');
   const body = parseBodyAttitude(Reflect.get(rawScene, config.sceneBodyKey));
   const point = prepareLocationPoint(scene, -58.3816, -34.6037);
   const destination = prepareLocationCamera(scene, point, 2048, { body, camera: config.camera });
   let local = apply(body.bodyMatrix, point);
   local = rotate(local, 'y', destination.controlYaw);
-  local = rotate(local, 'x', config.camera.maximumScenePitchDegrees * (1 - destination.controlPitch / config.camera.maximumControlPitchDegrees));
+  local = rotate(local, 'x', preparedScenePitch(destination.controlPitch, camera));
   // Scaling cannot change the solved direction; the generated camera transports
   // the same geographic point on the shared forward axis for any body radius.
   assert.ok(Math.hypot(local[0]!, local[1]!) < 1e-10);

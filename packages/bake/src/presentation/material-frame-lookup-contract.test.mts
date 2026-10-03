@@ -9,6 +9,8 @@ test('prepared numeric phase mappings pass the objects runtime parser in both di
   const track = definition.materials[0];
   assert.ok(track);
   const count = track.banks[0]!.frames.length;
+  assert.deepEqual(track.frame, prepareFrameLookup(32, z => Math.max(0, Math.min(30, Math.round((z + .98) / 1.96 * 30)))),
+    'published Venus lookup follows the source directional phase mapping');
   for (const ascending of [true, false]) {
     const frame = prepareFrameLookup(count, z => Math.round((ascending ? z + 1 : 1 - z) * (count - 1) / 2));
     const prepared = parsePreparedObjectRuntime({ ...definition, materials: [{ ...track, frame }] });

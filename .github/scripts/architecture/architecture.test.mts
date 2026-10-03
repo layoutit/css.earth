@@ -392,6 +392,12 @@ test('retired root tests and dependent integration owners fail without a baselin
       write('integration/example.test.mts', `import '@x/a'; import '@x/b'; import '${specifier}';\n`);
       assert.equal(broken(), true, `${specifier} is private even with two independent owners`);
     }
+    for (const specifier of ['../packages/a/src/private.ts', '../site/a.mts', '../src/a.mts']) {
+      write('integration/example.test.mts', `import '@x/a'; import '@x/b'; new URL('${specifier}', import.meta.url);\n`);
+      assert.equal(broken(), true, `${specifier} URL is private even with two independent owners`);
+    }
+    write('integration/example.test.mts', "import '@x/a'; import '@x/b'; const path = '../site/a.mts'; import(path);\n");
+    assert.equal(broken(), false, 'computed imports cannot be resolved statically');
     write('packages/a/package.json', '{"name":"@x/a","exports":{".":"./index.js","./public":"./public.js"}}');
     write('integration/example.test.mts', "import '@x/a/public'; import '@x/b';\n");
     assert.equal(broken(), false, 'public subpaths are green');

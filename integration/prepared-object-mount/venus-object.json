@@ -1,0 +1,202 @@
+{
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  },
+  "id": "venus",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Venus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "charts",
+        "features",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        68657871456.995544,
+        -75424003294.51498,
+        -38282359176.27216
+      ],
+      "presentationToReference": [
+        0.6309252744307956,
+        -6.591949208711867e-17,
+        -0.7758436041396649,
+        -0.711822589769246,
+        0.39777715593191376,
+        -0.5788626217963307,
+        -0.30861286230264157,
+        -0.9174820620691817,
+        -0.250967661268644
+      ],
+      "orbitUpReference": [
+        6.591949208711867e-17,
+        -0.39777715593191376,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 24402.58064516129,
+      "bodyRadiusM": 6051840
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "charts",
+          "path": "source/content/charts.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json"
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 6051.84
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "clouds",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "radar",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ultraviolet",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "emissivity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "reflectivity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "roughness",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "gravity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "gravity-uncertainty",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "bouguer",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "geoid",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "atmosphere": {
+        "source": "raster",
+        "material": "lighting"
+      },
+      "features": {
+        "source": "features",
+        "maxEntries": 2500
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Venus",
+      "classification": "planet",
+      "color": "#d6aa69",
+      "distanceAu": 0.72,
+      "description": "The hottest planet, hidden beneath thick clouds.",
+      "systemName": "Solar System",
+      "order": 118,
+      "context": {
+        "order": 1
+      }
+    }
+  },
+  "schema": "cssearth-object@2",
+  "parent": "solar-system",
+  "type": "layered-body"
+}

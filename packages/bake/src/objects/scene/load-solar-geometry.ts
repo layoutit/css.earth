@@ -4,7 +4,8 @@ import { pathToFileURL } from 'node:url';
 import { requireRecord, requireString } from '@cssearth/core';
 import type { SolarGeometry } from './solar-geometry.ts';
 
-/** Locate generated host data through the package, from source and bundled entries alike. */
+/** Locate generated host data in the repository layout, from source and bundled entries alike.
+ * The default assumes packages/bake is two levels below the checkout root; other hosts must pass their root. */
 export async function loadSolarGeometry(root = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..')): Promise<SolarGeometry> {
   const module: unknown = await import(pathToFileURL(resolve(root, 'src/platform/solar-geometry.mts')).href);
   const value = requireRecord(module, 'Generated solar geometry');
