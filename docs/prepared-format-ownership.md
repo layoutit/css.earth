@@ -25,3 +25,9 @@ Computed runtime resolution, renderer access through a telescope exception's
 re-export, and telescope's computed tsup configuration loading are known limits.
 Numeric binary versions and magic strings without schema ids are not scanned.
 No serialized value changes when an existing objects constant replaces a literal.
+
+Schema constants are exported beside their objects-owned contracts. The source-manifest
+identifier is browser-safe and available from the main entry; its filesystem validator
+remains in `@cssearth/objects/node`. The pre-build body-reference check and preserved
+Python distant-worlds authoring retain their raw manifest identifier. The objects
+schema-identifier tests pin both spellings; mutation checks must reject either drifting.

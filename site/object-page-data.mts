@@ -1,4 +1,4 @@
-import { parseObjectDescriptor, type ObjectDescriptor, deferredDatasetIds, parsePreparedObjectRuntime, requireAssets, requireControls, splitPreparedDatasetTables } from '@cssearth/objects';
+import { OBJECT_PAGE_SCHEMA, parseObjectDescriptor, type ObjectDescriptor, deferredDatasetIds, parsePreparedObjectRuntime, requireAssets, requireControls, splitPreparedDatasetTables } from '@cssearth/objects';
 
 import { readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -92,7 +92,7 @@ export async function loadObjectPageData(id: string, root = process.cwd()) {
   }
   // The page data is the runtime's asset table and its published controls, read when needed (prepared-transport.ts).
   const object: unknown = await preparedPageData(directory, id);
-  if (!isRecord(object) || object.schema !== 'cssearth-object-page@1' || object.id !== id || !object.assets || !object.controls) {
+  if (!isRecord(object) || object.schema !== OBJECT_PAGE_SCHEMA || object.id !== id || !object.assets || !object.controls) {
     throw new TypeError(`${id}: incomplete prepared page data.`);
   }
   requireAssets(object.assets);

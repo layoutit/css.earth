@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
 /** Betelgeuse's circumstellar material, as four density grids the shared slab baker turns into one dataset bank.
  *
  *   node packages/bake/authoring/betelgeuse-shell/author.mts [--check]
@@ -280,7 +281,7 @@ function encodeGrid(sample: (x: number, y: number, z: number) => number | readon
 /** The slab recipe both grids share: one emission channel, shared opacity, twenty-four slabs an axis. */
 function volumeRecipe(grid: string, material: Record<string, unknown>) {
   return {
-    schema: 'cssearth-volume-recipe@1',
+    schema: VOLUME_RECIPE_SCHEMA,
     grid: { path: grid, dimensions: [GRID.size, GRID.size, GRID.size], encoding: 'sqrt-density-unorm8',
       bounds: { min: [-GRID.halfUnits, -GRID.halfUnits, -GRID.halfUnits], max: [GRID.halfUnits, GRID.halfUnits, GRID.halfUnits] } },
     material: { intensityScale: 1, stepScale: 1, stepMetric: 'source', ...material },

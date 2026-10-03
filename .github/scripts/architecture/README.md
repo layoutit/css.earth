@@ -25,3 +25,8 @@ without schema ids are outside the literal rule: generic numeric/string matching
 cannot distinguish format constants from unrelated values reliably.
 
 See [prepared format ownership](../../../docs/prepared-format-ownership.md) for the contract and limits.
+
+The source-manifest exception is retained only for the pre-build body-reference check
+and preserved Python distant-worlds authoring.
+[Schema-identifier conformance tests](../../../packages/objects/src/prepared-data/schema-identifiers.test.ts)
+pin both literals to the browser-safe objects constant; changing either spelling must fail.

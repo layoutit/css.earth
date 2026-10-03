@@ -27,7 +27,8 @@
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json"
   },
   "dependencies": {
-    "@cssearth/core": "workspace:*"
+    "@cssearth/core": "workspace:*",
+    "@cssearth/objects": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^26.4.0",

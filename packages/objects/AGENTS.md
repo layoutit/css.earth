@@ -114,3 +114,7 @@ projection stay in renderer. Shell facing-level selection remains in renderer.
 
 Shared prepared schema literals are enforced by the hard `format-schema-ownership` architecture rule.
 Only shared-schema debt has schema/owner exceptions; owner-internal formats need no entry. Exceptions live in `.github/scripts/architecture/format-schema-exceptions.json`; stale entries fail.
+
+Schema identifiers are exported from their format owners, including the browser-safe source-manifest identifier.
+Writers and readers import these constants; the pre-build body-reference check and preserved Python authoring
+keep conformance-tested source-manifest spellings in the schema exception ledger.

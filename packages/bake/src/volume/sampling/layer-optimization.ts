@@ -1,7 +1,6 @@
+import { LAYER_OPTIMIZATION_SCHEMA, VOLUME_LAYER_PLAN_SCHEMA, readVolumeLayerPlan, DEFAULT_VOLUME_LAYER_BUDGET, readLayerOptimizationReport, type Axis, type Bounds3, type Vector3, type VolumeLayerPlan, type LayerOptimizationReport, type Cancellation } from '@cssearth/objects';
 import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 /** Offline allocation of a global slab budget. Geometry is sampled again at full resolution afterwards. */
-import { type Axis, type Bounds3, type Vector3, readVolumeLayerPlan, type VolumeLayerPlan, DEFAULT_VOLUME_LAYER_BUDGET, readLayerOptimizationReport, type LayerOptimizationReport } from '@cssearth/objects';
-import type { Cancellation } from '@cssearth/objects';
 
 export interface LayerOptimizationOptions {
   bounds: Bounds3;
@@ -158,9 +157,9 @@ export function optimizeVolumeLayers(options: LayerOptimizationOptions): { plan:
     return result.reverse();
   };
   const error = { x: partitions.x.costs[selected.x]!, y: partitions.y.costs[selected.y]!, z: partitions.z.costs[selected.z]! }, count = sum(selected);
-  const plan = readVolumeLayerPlan({ schema: 'cssearth-volume-layer-plan@1', referenceSliceCounts: { ...counts },
+  const plan = readVolumeLayerPlan({ schema: VOLUME_LAYER_PLAN_SCHEMA, referenceSliceCounts: { ...counts },
     referenceSamplesPerSlab: samples, axes: { x: groups('x'), y: groups('y'), z: groups('z') } });
-  const report = readLayerOptimizationReport({ schema: 'cssearth-layer-optimization@1', method: 'gradient-weighted-depth-displacement@1',
+  const report = readLayerOptimizationReport({ schema: LAYER_OPTIMIZATION_SCHEMA, method: 'gradient-weighted-depth-displacement@1',
     maximumLayers: budget, referenceLayers: sum(counts), plannedLayers: count, probeWidth: width, probeSubpixels: 2,
     targetNormalizedL1: target, estimatedNormalizedL1: error, status: AXES.every(axis => error[axis] <= target) ? 'target-met' : 'budget-limited' }, plan);
   return { plan, report };

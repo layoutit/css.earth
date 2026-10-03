@@ -1,4 +1,4 @@
-import { OBJECT_RUNTIME_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
+import { OBJECT_SCHEMA, OBJECT_RUNTIME_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
 
 // Entry script: node site/build/prepare/prepare-object-json.mts [<object-id>...] [--keep-bindings].
 
@@ -58,7 +58,7 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
   const { projectRoot, objectDirectory, preparedDirectory } = target;
   const originalDescriptor = requireRecord(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')));
   let descriptor = parseObjectDescriptor(originalDescriptor);
-  if (descriptor.schema !== 'cssearth-object@2' || descriptor.id !== id || typeof descriptor.type !== 'string') {
+  if (descriptor.schema !== OBJECT_SCHEMA || descriptor.id !== id || typeof descriptor.type !== 'string') {
     throw new TypeError('Prepared object descriptor identity is invalid.');
   }
   const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./prepare-world-navigation.ts');
