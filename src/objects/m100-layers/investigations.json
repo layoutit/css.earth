@@ -26,7 +26,7 @@
       "id": "bulge",
       "subject": "Bulge",
       "status": "included",
-      "finding": "Salo et al. (2015), S4G Pipeline 4, table 7, NGC4321, model _bd: a Sérsic bulge (9.8% of the light, magnitude 11.424, half-light radius 9.58″ = 0.71 kpc, n = 0.639, axis ratio 0.795, PA 127.67°) and an exponential disc (90.2% of the light, scale length 61.14″ = 4.51 kpc, axis ratio 0.823, PA 158.22°, central surface brightness 19.942). Used as published; the half-light surface brightness the bake needs, 18.58 mag per square arcsecond, follows from the bulge's magnitude, radius, index and axis ratio. At the disc's 38.5° the bulge's axis ratio is one an oblate spheroid in the disc plane can show (intrinsic 0.22).",
+      "finding": "Salo et al. (2015), S4G Pipeline 4, table 7, NGC4321, model _bd: a Sérsic bulge (9.8% of the light, magnitude 11.424, half-light radius 9.58″ = 0.71 kpc, n = 0.639, axis ratio 0.795, PA 127.67°) and an exponential disc (90.2% of the light, scale length 61.14″ = 4.51 kpc, axis ratio 0.823, PA 158.22°, face-on central surface brightness 19.942, 19.73 as projected on the sky). Used as published; the half-light surface brightness the bake needs, 18.58 mag per square arcsecond, follows from the bulge's magnitude, radius, index and axis ratio. At the disc's 38.5° the bulge's axis ratio is one an oblate spheroid in the disc plane can show (intrinsic 0.22).",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4"
       ]

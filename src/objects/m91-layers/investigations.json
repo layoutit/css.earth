@@ -21,6 +21,15 @@
         "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
       ],
       "revisitWhen": "A whole-galaxy photograph with sky coordinates is published under an attribution licence."
+    },
+    {
+      "id": "bulge",
+      "subject": "Bulge",
+      "status": "included",
+      "finding": "Salo et al. (2015), S4G Pipeline 4, table 7, NGC4548, model _bdbarf: a Sérsic bulge (10.5% of the light, magnitude 12.0, half-light radius 5.7″ = 0.45 kpc, n = 2.56, axis ratio 0.869, PA 115.78°) and an exponential disc (78.0% of the light, scale length 55.9″ = 4.39 kpc, axis ratio 0.777, PA 149.2°, face-on central surface brightness 20.559, 20.285 as projected on the sky) and a Ferrers bar (11.4% of the light, radius 62.25″ = 4.89 kpc, axis ratio 0.458, PA 63.77°, central surface brightness 20.084 on the sky). Used as published; the half-light surface brightness the bake needs, 18.784 mag per square arcsecond, follows from the bulge's magnitude, radius, index and axis ratio. At the disc's 38.3° the bulge's axis ratio is one an oblate spheroid in the disc plane can show (intrinsic 0.60).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4"
+      ]
     }
   ]
 }
