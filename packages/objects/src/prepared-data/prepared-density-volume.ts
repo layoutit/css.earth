@@ -13,3 +13,8 @@ export function parsePreparedDensityVolume(value: unknown, descriptor: DensityVo
   }
   return payload;
 }
+
+/** JSON text admission; callers own byte decoding and transport. */
+export function parsePreparedDensityVolumeText(text: string, descriptor: DensityVolumeObjectDescriptor): PreparedCssVolume {
+  return parsePreparedDensityVolume(JSON.parse(text), descriptor);
+}

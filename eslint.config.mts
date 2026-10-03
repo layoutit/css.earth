@@ -22,7 +22,7 @@ export default [
     },
   },
   {
-    files: ['integration/renderer-bake/**/*.{ts,mts}', 'packages/**/*.{js,mjs,cjs,ts,tsx,mts}', 'labs/nebula/packages/**/*.{ts,tsx,mts}'],
+    files: ['integration/**/*.{ts,mts}', 'packages/**/*.{js,mjs,cjs,ts,tsx,mts}', 'labs/nebula/packages/**/*.{ts,tsx,mts}'],
     languageOptions: { parser: typescriptParser },
     rules: {
       'max-lines': ['error', { max: packageLineLimit, skipBlankLines: false, skipComments: false }],

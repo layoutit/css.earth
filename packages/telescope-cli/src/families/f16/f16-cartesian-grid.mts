@@ -1,5 +1,5 @@
 /** Bounded physical Cartesian FITS grids. Astropy owns FITS/WCS interpretation. */
-import { OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA, DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, parsePreparedDensityVolume } from '@cssearth/objects';
+import { OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA, DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, parsePreparedDensityVolumeText } from '@cssearth/objects';
 import {spawn} from 'node:child_process';
 import {copyFile,mkdir,readFile,readdir,stat,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -153,6 +153,6 @@ export async function validatePreparedPhysicalVolume(input: unknown, directory: 
   const descriptor = parseDensityVolumeObjectDescriptor(input);
   if (descriptor.prepared?.format !== DENSITY_VOLUME_FORMAT) throw new TypeError('A volume requires its prepared artifact.');
   const bytes = await readFile(resolve(directory, descriptor.prepared.url));
-  const value: unknown = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
-  parsePreparedDensityVolume(value, descriptor);
+  const text = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+  parsePreparedDensityVolumeText(text, descriptor);
 }

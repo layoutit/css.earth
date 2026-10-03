@@ -58,8 +58,13 @@ test('published finite delivery inputs retain every dataset and pinned tone proj
     const path = `src/objects/${id}/source/compact/inputs.json`;
     const raw = await json(path);
     const input = readCompactFiniteEmission(raw), seen = new Set<string>();
-    for (const dataset of input.datasets) readCompactFiniteDataset(dataset, seen);
-    if (input.toneProjection !== undefined) readCompactToneProjection(input.toneProjection);
+    for (const dataset of raw.datasets) readCompactFiniteDataset(dataset, seen);
+    if (input.toneProjection !== undefined) readCompactToneProjection(raw.toneProjection);
+    assert.equal(typeof input.appearance.gamma, 'number');
+    for (const patch of [{ appearance: {} }, { toneProjection: {} },
+      { datasets: [{ ...raw.datasets[0], channelGain: [0, 1, 1] }] },
+      { datasets: [{ ...raw.datasets[0], toneCurve: {} }] }])
+      assert.throws(() => readCompactFiniteEmission({ ...raw, ...patch }));
     const envelope = readSimulationEnvelopeRecord(await json(input.envelope.path));
     assert.equal(envelope.gain.length, envelope.width * envelope.height);
     assert.equal(seen.size, input.datasets.length);

@@ -19,4 +19,4 @@ Rules for tests that do belong here:
 - Name the folder for the behaviour it proves (for example `eclipse-map`), not for its owners or after a copy of a package's folder layout.
 - Fixtures and helpers stay inside the suite's folder.
 
-`renderer-bake/` predates these rules and is being split back into `packages/bake` and `packages/renderer`. Do not add tests to it.
+`prepared-object-mount/` proves that bake prepares an object, objects parses it, and renderer mounts it. Writer and reader unit coverage stays in its owning package.

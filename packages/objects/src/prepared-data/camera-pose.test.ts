@@ -47,6 +47,8 @@ test('live restore preserves its finite-matrix admission and historical diagnost
     'matrix3d(0x1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
     'matrix3d(,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)']) {
     assert.equal(parseRestoredCameraPose({ ...pose(scene), extra: true }).length, 16);
+    assert.deepEqual(parseCameraPoseMatrix(scene, { rotation: 'finite' }), parseRestoredCameraPose(pose(scene)));
+    assert.throws(() => parseCameraPoseMatrix(scene, { rotation: 'proper' }), invalidLink);
     assert.throws(() => parseCameraPose(pose(scene)), invalidLink);
   }
   for (const value of [null, {}, { ...pose(), schema: 'retired' }]) {
@@ -55,5 +57,12 @@ test('live restore preserves its finite-matrix admission and historical diagnost
   for (const scene of [null, 1, '', 'matrix3d(1)', 'matrix3d((1))',
     'matrix3d(NaN,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)']) {
     assert.throws(() => parseRestoredCameraPose(pose(scene)), invalidRestore);
+  }
+});
+
+test('both policies preserve rejection of trailing newlines', () => {
+  for (const suffix of ['\n', '\r', '\r\n']) {
+    assert.throws(() => parseCameraPose(pose(identity + suffix)), invalidLink);
+    assert.throws(() => parseRestoredCameraPose(pose(identity + suffix)), invalidRestore);
   }
 });

@@ -2,8 +2,7 @@
   "extends": "./tsconfig.base.json",
   "include": [
     "integration/eclipse-map/transit-fit.test.mts",
-    "integration/renderer-bake/**/*.test.ts",
-    "integration/renderer-bake/**/*.test.mts",
+    "integration/prepared-object-mount/**/*.test.mts",
     "site/env.d.ts",
     "packages/bake/src/delivery/fixtures/external-modules.d.mts"
   ],

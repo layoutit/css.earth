@@ -1,3 +1,6 @@
+import { parseCloudAppearance } from './cloud-appearance.js';
+import { validateChannelGain } from './channel-gain.js';
+import { validateDatasetToneCurve } from './dataset-tone-curve.js';
 import { requireRecord as record } from '@cssearth/core';
 import type { CompilerPin } from './compiler-bake.js';
 const check: (condition: unknown, message: string) => asserts condition = (condition, message) => { if (!condition) throw new TypeError(message); };
@@ -38,11 +41,13 @@ export function readCompactFiniteEmission(value: unknown) {
   check(typeof input.neutralTextures === 'string' && input.neutralTextures.length > 0, 'Delivered neutral texture directory is missing.');
   const prior = record(input.priorCloud, 'prior cloud');
   check(Array.isArray(input.datasets) && input.datasets.length > 0, 'A delivered finite model has at least one dataset.');
-  return { distance, modelTangent, exposureGain, fullChromaAlphaByte, appearance: input.appearance,
+  const seen = new Set<string>();
+  return { distance, modelTangent, exposureGain, fullChromaAlphaByte, appearance: parseCloudAppearance(input.appearance),
     encoding: { quality: encoding.quality }, neutralTextures: input.neutralTextures,
     emissionField: readCompactFinitePin(input.emissionField, 'emission field'), neutralSlices: readCompactFinitePin(input.neutralSlices, 'neutral slices'),
     envelope: readCompactFinitePin(input.envelope, 'envelope'), priorRecipe: readCompactFinitePin(prior.recipe, 'prior recipe'),
-    datasets: input.datasets as unknown[], toneProjection: input.toneProjection };
+    datasets: input.datasets.map(value => readCompactFiniteDataset(value, seen)),
+    toneProjection: input.toneProjection === undefined ? undefined : readCompactToneProjection(input.toneProjection) };
 }
 export function readCompactFiniteDataset(value: unknown, seen: Set<string>) {
   const dataset = record(value, 'delivered dataset'), imageId = dataset.imageId;
@@ -52,7 +57,8 @@ export function readCompactFiniteDataset(value: unknown, seen: Set<string>) {
   check(filter.cutoff === 0 && filter.softness === .25 && filter.showRemoved === false, 'Compact replay requires the accepted unchanged density filter.');
   return { imageId, bounds: readCompactFiniteBounds(dataset.tangentBoundsKpc, `${imageId} tangent bounds`),
     registered: readCompactFinitePin(dataset.registered, `${imageId} registered image`), coverage: readCompactFinitePin(dataset.coverage, `${imageId} coverage mask`),
-    toneCurve: dataset.toneCurve, channelGain: dataset.channelGain };
+    toneCurve: dataset.toneCurve === undefined ? undefined : validateDatasetToneCurve(dataset.toneCurve),
+    channelGain: dataset.channelGain === undefined ? undefined : validateChannelGain(dataset.channelGain) };
 }
 export function readCompactToneProjection(value: unknown) {
   const grid = record(value, 'delivered tone projection'), pw = grid.width, ph = grid.height;

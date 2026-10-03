@@ -1,4 +1,4 @@
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, DENSITY_VOLUME_FORMAT, parsePreparedDensityVolume, parseDensityVolumeObjectDescriptor, validatePreparedVolumeDatasets, type PreparedCssVolume } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, DENSITY_VOLUME_FORMAT, parsePreparedDensityVolumeText, parseDensityVolumeObjectDescriptor, validatePreparedVolumeDatasets, type PreparedCssVolume } from '@cssearth/objects';
 /**
  * Package an already-prepared physical density volume as one selectable dataset.
  *
@@ -139,8 +139,8 @@ export async function promoteDensityVolumeDatasetBank(request: DensityVolumeData
     const descriptor = parseDensityVolumeObjectDescriptor(authoredDescriptor);
     if (descriptor.prepared?.format !== DENSITY_VOLUME_FORMAT) throw new TypeError('A volume requires its prepared artifact.');
     const bytes = await readArrayBuffer(local(sourceDirectory, descriptor.prepared.url));
-    const value: unknown = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
-    const source = parsePreparedDensityVolume(value, descriptor);
+    const text = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+    const source = parsePreparedDensityVolumeText(text, descriptor);
     const preparedPath = local(sourceDirectory, descriptor.prepared!.url);
     const preparedDirectory = dirname(preparedPath), resources = await Promise.all(source.resources.map(async resource => {
       const path = local(preparedDirectory, resource.path);
