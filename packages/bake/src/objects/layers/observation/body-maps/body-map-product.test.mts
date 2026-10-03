@@ -4,7 +4,8 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import type { BodyMap } from '@cssearth/bake/objects/layers/observation';
-import { combineUnderPolicy, assertProductsCombinable, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation, type BodyMapProduct, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
+import { combineUnderPolicy, assertProductsCombinable, readBodyMapProduct as parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
+import { type BodyMapObservation, type BodyMapProduct, type MeasurementDefinition } from '@cssearth/objects';
 
 const salt: MeasurementDefinition = { quantity: 'equivalent width', units: 'Angstrom', timeDependence: 'surface-property', source: 'Trumbo, Brown & Hand 2019, doi:10.1126/sciadv.aaw7123',
   method: { kind: 'equivalent-width', bandAngstrom: [3500, 5300], continuum: { model: 'polynomial', order: 3, anchorsAngstrom: [[3100, 3500], [5300, 5500]] }, reference: 'mean of spectra without the band' } };

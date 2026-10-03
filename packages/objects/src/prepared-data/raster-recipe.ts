@@ -1,5 +1,24 @@
-import type { LambertRasterConfig, CutawayAngles, InteriorPalette } from '../baking/index.ts';
-import type { LimbBlock } from '../photometry/index.ts';
+import type { LimbBlock } from './limb-block.js';
+export const RASTER_RECIPE_SCHEMA = 'cssearth-raster-recipe@2';
+export interface CutawayAngles {
+    centerLongitudeDegrees: number;
+    widthDegrees: number;
+}
+export interface InteriorPalette {
+    metallicCore: readonly number[];
+    combinedMantleCrust: readonly number[];
+    layerContact: readonly number[];
+}
+export interface LambertRasterConfig {
+    minimumLightViewZ: number;
+    maximumLightViewZ: number;
+    frameCount: number;
+    shadowlessFloodLimbFloor: number;
+    ambientIntensity: number;
+    radiusScale: number;
+    terminator: readonly number[];
+    maximumAlpha: number;
+}
 /** Delivered surface map encoding. Absent means the lossy WebP default. */
 export interface SurfaceEncoding {
     format: 'jpeg';
@@ -132,7 +151,7 @@ export interface StructureSource {
 /** Every raster-lane image is prepared once, at the canonical density; there is no 1x output. */
 
 export interface RasterRecipe {
-    schema: 'cssearth-raster-recipe@2';
+    schema: typeof RASTER_RECIPE_SCHEMA;
     publicBase: string;
     sourceWidth: number;
     sourceHeight: number;

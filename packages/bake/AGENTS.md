@@ -372,3 +372,7 @@ Authored and prepared content wire records and their pure parsers live in `@csse
 
 Surface geometry and ellipsoid patches live in internal `src/surface-geometry/`; polar sprites, lighting,
 coverage, atmosphere and interior raster algorithms live in internal `src/baking/`. Tests stay beside them.
+
+Body-map and raster recipe contracts, resolution evidence and limb-model reference validation belong to
+`@cssearth/objects`. `readBodyMapProduct` and `readRasterRecipe` supply the surface-resolution calculation
+and lighting-bank resolution to those shared parsers. Keep scientific calculations, sampled maps and preparation here.

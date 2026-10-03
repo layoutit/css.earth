@@ -8,8 +8,8 @@ import { prepareGeometryScene, parseGeometryProfile, leafImageCandidates, widest
 import type { GeometryProfile, GeometrySceneAssets, LeafImagePixels, SolarSceneSource } from './geometry-scene.ts';
 import { prepareLeafSeamOutset, prepareSeamOutsetSteps } from './seam-outset.ts';
 import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
-import { parseRasterRecipe, outputName, packedRasterSize, rasterPageName, rasterPagePlan } from '../raster/index.ts';
-import type { RasterRecipe } from '../raster/index.ts';
+import { readRasterRecipe as parseRasterRecipe, outputName, packedRasterSize, rasterPageName, rasterPagePlan } from '../raster/index.ts';
+import type { RasterRecipe } from '@cssearth/objects';
 import { TEXELS_PER_CSS_PIXEL } from './projective-surface-raster.ts';
 import { prepareComposite } from '../presentation/composite.ts';
 import { presentationAdapters } from '../presentation/adapters.ts';

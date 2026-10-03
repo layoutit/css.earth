@@ -5,7 +5,8 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { formatBodyMapProduct, type BodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { formatBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { type BodyMapProduct } from '@cssearth/objects';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord, qualifyBodyMap } from './body-map-publication.mts';
 import type { ObservationSelection } from './query-contract.mts';
 

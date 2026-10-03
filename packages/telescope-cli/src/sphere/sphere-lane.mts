@@ -9,7 +9,7 @@ import { inventoryAssets } from '@cssearth/bake/delivery';
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
-import { outputName, parseRasterRecipe, prepareRasterAssets, rasterPageOutput } from '@cssearth/bake/raster';
+import { outputName, readRasterRecipe as parseRasterRecipe, prepareRasterAssets, rasterPageOutput } from '@cssearth/bake/raster';
 
 import { parseGeometryProfile } from '@cssearth/bake/scene';
 import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';

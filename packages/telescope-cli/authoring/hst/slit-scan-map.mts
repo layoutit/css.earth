@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { BODY_MAP_SCHEMA } from '@cssearth/objects';
 /** Map one absorption band over a body's surface from STIS long-slit spectra scanned across its disc.
  *
  *   node packages/telescope-cli/authoring/hst/slit-scan-map.mts <scan id> <frames directory> <output directory> [--fetch] [--receipt] [--mirror]
@@ -29,7 +30,8 @@ import { HST_PROGRAMS, PROGRAMS } from '@cssearth/telescope-cli/archives/hst/arc
 import { observerCamera, type BodyOrientation } from '@cssearth/bake/objects/cameras';
 import { loadOrientation } from '@cssearth/bake/objects/layers/terrestrial';
 import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap } from '@cssearth/bake/objects/layers/observation';
-import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
+import { combineUnderPolicy, formatBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 import { ACROSS_SLIT_DIRECTIONS, addFeatureless, bandFromReflectance, featurelessMean, newFeatureless, parseSlitScan, quantiles, ratioAgainst, reflectance, scanImage, type AcrossSlitDirection, type Reflectance, type ReferenceSpectrum, type SlitScanDefinition, type ScanSampling } from '@cssearth/telescope-cli/archives/hst/slit-scan-reduction';
@@ -397,7 +399,7 @@ export function scanObservation(definition: SlitScanDefinition, entry: VisitMap,
 export function scanBodyMapRecord(definition: SlitScanDefinition, run: SlitScanRun, fits: Buffer, fileName: string): BodyMapProduct {
   const observations = run.visits.map(entry => { const frame = run.used.find(frame_ => frame_.visit === entry.registration.visit)!;
     return scanObservation(definition, entry, frame.plateScaleArcsec, frame.programme); });
-  return { schema: 'cssearth-body-map@1', definition: scanMeasurement(definition, run.direction), frame: scanFrame(definition),
+  return { schema: BODY_MAP_SCHEMA, definition: scanMeasurement(definition, run.direction), frame: scanFrame(definition),
     grid: { width: run.combined.map.width, height: run.combined.map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' },
     planes: { file: fileName, value: definition.band.quantity, uncertainty: `${definition.band.quantity} ERROR` }, mask: { maximumEmissionDegrees: definition.grid.maximumEmissionDegrees, missing: 'NaN' }, observations,
     ...(observations.length > 1 ? { combination: SCAN_COMBINATION } : {}) };

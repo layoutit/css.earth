@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { RASTER_RECIPE_SCHEMA } from '@cssearth/objects';
 /** Scaffold a planet of another star from its astronomy record, instead of cloning another planet by find-and-replace.
  *
  *   node packages/telescope-cli/src/new-object/new-hosted-planet.mts <id> --name <display name> --system <system name>
@@ -100,7 +101,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     prepared: { format: PREPARED_CSS_OBJECT_FORMAT, url: 'prepared/object.json' } });
 
   if (glow) put(`src/renderers/css/styles/${id}-surfaces.css`, starStylesheet(id, name, 600, 'Both plates are transparent: no observation is cast.'));
-  put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@2', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512,
+  put(`${o}/source/preparation/raster.json`, { schema: RASTER_RECIPE_SCHEMA, publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512,
     latitudeBands: 16, polarTile: 256, resample: 'density-before-pack', polarProjection: 'orthographic-bilinear',
     polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` }, thumbnail: { size: 64, centerLongitudeDegrees: 0 },
     surfaces: [{ id: 'shape', output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-dataset-{id}.webp`, source: 'measurements.json', falseColor: false,

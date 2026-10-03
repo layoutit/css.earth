@@ -6,7 +6,7 @@ import { readFile, readdir, writeFile, mkdir, mkdtemp, copyFile } from 'node:fs/
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
+import { readRasterRecipe as parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 import { prepareObjectContentAssets } from '../content/prepare.ts';
 import { parseRuntimeManifest } from '@cssearth/bake/delivery';

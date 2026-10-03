@@ -6,7 +6,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { loadNativeSourcePoleSampler, prepareSurfaces } from './surfaces.ts';
-import { parseRasterRecipe, prepareRasterAssets, surfaceCoordinateWidth } from './assets.ts';
+import { readRasterRecipe as parseRasterRecipe, prepareRasterAssets, surfaceCoordinateWidth } from './assets.ts';
 import { loadNativeObservationPoleSampler, parseObservationDataset } from '../objects/layers/observation/index.ts';
 
 describe('native source pole sampling', () => {

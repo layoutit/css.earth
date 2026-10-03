@@ -1,6 +1,6 @@
 /** One validated source context follows a telescope product through every derived artifact. */
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { parseAcceptedAssumptions } from '@cssearth/bake/objects/layers/observation';
+import { parseAcceptedAssumptions } from '@cssearth/objects';
 import { inputWavelengths } from './recipe-request.mts';
 import { PRODUCT_KINDS, REQUESTED_RESULTS, type CapabilityRequest } from './recipe-request.mts';
 import type { ConstraintVerdict } from './query-contract.mts';

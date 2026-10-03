@@ -6,7 +6,8 @@ import { randomUUID } from 'node:crypto';
 import { build } from 'esbuild';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
-import { parseBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { readBodyMapProduct as parseBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 import { assertBodyMapPlanes } from '../body-map-publication.mts';
 import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
