@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { checkoutState, missingSourceReason, restoredSources } from '@cssearth/objects/node/source-test';
 import { readOracleInput } from '@cssearth/core/oracle';
+import { MissingSourceInputError } from '@cssearth/core';
 
 test('restored source paths resolve from the objects package to the repository root', () => {
   assert.equal(restoredSources('saturn', 'manifest.json').skip, false);
@@ -13,11 +14,20 @@ test('restored source paths resolve from the objects package to the repository r
 });
 
 test('only absent inputs skip: coverage that finds an undeclared file fails', () => {
+  // An undeclared file is a plain Error; absent declared files are a MissingSourceInputError, whatever the message says.
   assert.equal(missingSourceReason(new Error('Fixture source manifest coverage failed. Undeclared: stray.txt. Missing: none.')), null);
   assert.equal(missingSourceReason(new Error('Fixture source coverage failed. Undeclared: stray.txt. Missing: raw/a.fits.')), null);
-  assert.match(missingSourceReason(new Error('Fixture source manifest coverage failed. Undeclared: none. Missing: raw/a.fits.')) ?? '', /Missing: raw\/a\.fits/u);
+  assert.match(missingSourceReason(new MissingSourceInputError('Fixture source manifest coverage failed. Undeclared: none. Missing: raw/a.fits.')) ?? '', /Missing: raw\/a\.fits/u);
   assert.equal(missingSourceReason(new Error('an ordinary assertion')), null);
 });
+
+test('skipping follows the error code, not the wording of the message', () => {
+  for (const message of ['x', 'Missing oracle input a.fits.', 'The Eureka! toolchain is not installed']) {
+    assert.notEqual(missingSourceReason(new MissingSourceInputError(message)), null, `a coded absence skips whatever it says: ${message}`);
+    assert.equal(missingSourceReason(new Error(message)), null, `the same words without the code are a failure: ${message}`);
+  }
+});
+
 
 test('an untracked source sharp reports missing skips; a tracked one still fails', () => {
   const root = new URL('../../../', import.meta.url).pathname;

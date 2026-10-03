@@ -8,6 +8,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { projectRoot } from '../project-root.ts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../validate.ts';
+import { MissingSourceInputError } from '../../source-input.ts';
 
 const oraclePath = (path: string) => resolve(ORACLE_ROOT, path);
 
@@ -73,7 +74,7 @@ export async function readOracleInput(input: { path: string; bytes?: number }, v
   }
   catch (error) {
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT')
-      throw new Error(`Missing oracle input ${input.path}. Restore it from its owner's declared source record.`, { cause: error });
+      throw new MissingSourceInputError(`Missing oracle input ${input.path}. Restore it from its owner's declared source record.`, { cause: error });
     throw error;
   }
 }

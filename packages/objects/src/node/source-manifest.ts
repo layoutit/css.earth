@@ -1,6 +1,6 @@
 import { SOURCE_MANIFEST_SCHEMA } from '../sources/source-manifest-schema.js';
 import { safeRelativePath } from './source-path.js';
-import { isArray } from '@cssearth/core';
+import { isArray, MissingSourceInputError } from '@cssearth/core';
 import { parseSourceBinding } from '../sources/catalog.js';
 import type { SourceBinding } from '../sources/catalog.js';
 /** One byte range of a remote member, for archive files too large to keep whole. The range names exactly the kept bytes. */
@@ -157,10 +157,10 @@ export async function verifySourceManifest({ manifest, objectName, sourceRoot }:
   const undeclared = [...actual].filter((sourcePath) => !declared.has(sourcePath));
   const missing = [...declared].filter((sourcePath) => !actual.has(sourcePath));
   if (undeclared.length > 0 || missing.length > 0) {
-    throw new Error(
-      `${objectName} source manifest coverage failed. Undeclared: ${
-        undeclared.join(", ") || "none"}. Missing: ${missing.join(", ") || "none"}.`,
-    );
+    const message = `${objectName} source manifest coverage failed. Undeclared: ${
+      undeclared.join(", ") || "none"}. Missing: ${missing.join(", ") || "none"}.`;
+    // Declared files that are absent are an unrestored download; an undeclared file is a real failure.
+    throw undeclared.length === 0 ? new MissingSourceInputError(message) : new Error(message);
   }
   return Object.freeze({
     inputCount: manifest.inputs.length,
@@ -195,7 +195,7 @@ export function assertRangeResponse(
 }
 
 async function validateSourceEntry({ entry, objectName, sourceRoot }: SourceVerification) {
-  await access(resolve(sourceRoot, entry.path)).catch(() => { throw new Error(`${objectName} source is missing: ${entry.path}.`); });
+  await access(resolve(sourceRoot, entry.path)).catch(() => { throw new MissingSourceInputError(`${objectName} source is missing: ${entry.path}.`); });
 }
 
 function validateEntryBase(objectId: string, entry: SourceEntry, kind: string, paths: Set<string>) {
