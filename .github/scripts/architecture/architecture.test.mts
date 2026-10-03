@@ -389,6 +389,10 @@ test('retired root tests and dependent integration owners fail without a baselin
     write('integration/renderer-bake/conformance.test.ts', "import '@cssearth/renderer';\n");
     assert.equal(broken(), true, 'removing either conformance owner is red');
     rmSync(join(root, 'integration/renderer-bake'), { recursive: true });
+    write('integration/AGENTS.md', '# Integration test instructions\n');
+    assert.equal(broken(), false, 'instruction files in integration are not source');
+    write('integration/example.test.mts', "import '@x/a';\n");
+    assert.equal(broken(), true, 'a single-owner source file stays red beside the instructions');
     write('site/a.mts', 'export {};');
     write('src/a.mts', 'export {};');
     write('integration/example.test.mts', "import '../site/a.mts'; import '../src/a.mts';\n");
