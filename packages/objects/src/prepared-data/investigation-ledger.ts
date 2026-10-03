@@ -1,3 +1,4 @@
+import { isRecord } from '@cssearth/core';
 import { INVESTIGATION_LEDGER_SCHEMA } from './source-schema-identifiers.ts';
 
 export const INVESTIGATION_STATUSES = ['included', 'excluded', 'unresolved', 'deferred'] as const;
@@ -12,7 +13,6 @@ export interface InvestigationEntry {
 export interface InvestigationLedger { schema: typeof INVESTIGATION_LEDGER_SCHEMA; objectId: string; entries: InvestigationEntry[] }
 export interface FacilityInvestigationLedger { schema: typeof INVESTIGATION_LEDGER_SCHEMA; facilityId: string; entries: InvestigationEntry[] }
 
-import { isRecord } from '@cssearth/core';
 export type InvestigationEntryExpansion = (value: Record<string, unknown>, id: string, status: InvestigationStatus) => InvestigationEntry;
 function plainInvestigationEntry(value: Record<string, unknown>, id: string, status: InvestigationStatus): InvestigationEntry {
  return { id, status, subject: typeof value.subject === 'string' && value.subject ? value.subject : id, finding: typeof value.finding === 'string' && value.finding ? value.finding : '',

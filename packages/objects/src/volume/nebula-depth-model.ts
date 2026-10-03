@@ -1,3 +1,4 @@
+import { isRecord, isFiniteNumber } from '@cssearth/core';
 /** Nebula depth recipe contract; evidence policy and sampling stay with consumers. */
 export const NEBULA_DEPTH_MODEL_SCHEMA = 'cssearth-nebula-depth-model@1';
 
@@ -21,7 +22,6 @@ export interface DepthRecipe {
   interpretation: string;
 }
 
-import { isRecord, isFiniteNumber } from '@cssearth/core';
 const number = (v: unknown, low: number, high: number): v is number => isFiniteNumber(v) && v >= low && v <= high;
 const id = (v: unknown): v is string => typeof v === 'string' && /^[a-z0-9][a-z0-9-]{0,95}$/.test(v);
 function pair(v: unknown, low: number, high: number): Pair {

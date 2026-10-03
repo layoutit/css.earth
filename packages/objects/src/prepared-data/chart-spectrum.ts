@@ -1,4 +1,4 @@
-import { isArray, isRecord, isFiniteNumber, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
+import { requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 /** Decode source samples for compact spectrum charts independently of the other chart kinds and @cssearth/bake. */
 export interface SpectrumRecipe {id:string;title:string;description:string;output:string;metadata:Record<string,unknown>;kind:'spectrum';source:string;format:'json-columns'|'numeric-lines';pointCount:number;maximum:number;maximumRoundingScale?:number;requiredHeader?:string;xField?:string;yField?:string;countField?:string;countValue?:number;xScale?:number;minimumX?:number;maximumX?:number;metadataFields?:Record<string,string>;}
 

@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = fileURLToPath(new URL('../../../../', import.meta.url));
+const root = fileURLToPath(new URL('../../../', import.meta.url));
 const pattern = /cssearth-(catalogue-points(-bin)?|galaxy-backing|image-mesh|dataset-billboards)@1|CSCPTS01/u;
 
 test('Universe schema identifiers and catalogue binary magic are owned only by objects', () => {

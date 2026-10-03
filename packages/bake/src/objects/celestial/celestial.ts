@@ -25,7 +25,6 @@ async function verifySources(sourceDirectory: string, paths: readonly string[]):
   }
 }
 
-
 /** Prepare the sky orientation and directional Sun into renderer-neutral JSON. The shared universe draws both. */
 export async function prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, directionalSun, solarGeometry }: CelestialContext): Promise<CelestialAssets> {
   if (typeof sourceDirectory !== 'string' || typeof publicDirectory !== 'string' || typeof outputDirectory !== 'string') throw new TypeError('Celestial preparation needs source, public, and output directories.');

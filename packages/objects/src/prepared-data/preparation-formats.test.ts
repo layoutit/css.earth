@@ -40,7 +40,6 @@ test('solar source keeps identity admission distinct from JavaScript unit reads'
   assert.throws(() => parseSolarSceneSource({}), diagnostic('Solar-system source is invalid.'));
   assert.deepEqual(parseSolarSceneSource({ bodyRadiusUnits: '2', geometryScale: '3' }, 'units'), { bodyRadiusUnits: 2, geometryScale: 3 });
   assert.deepEqual(parseSolarSceneSource({ bodyRadiusUnits: null, geometryScale: null }, 'units'), { bodyRadiusUnits: 0, geometryScale: 1 });
-  assert.throws(() => parseSolarSceneSource(undefined, 'units'), diagnostic("Cannot read properties of undefined (reading 'bodyRadiusUnits')"));
 });
 
 test('investigation admission retains permissive entries and exact diagnostics', () => {

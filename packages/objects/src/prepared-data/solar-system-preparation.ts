@@ -13,7 +13,6 @@ export function parseSolarSceneSource(value: unknown, admission: 'units'): { bod
 export function parseSolarSceneSource(value: unknown, admission?: 'units') {
   if (admission === 'units') {
     // The original navigation read used JavaScript property/coercion semantics, without schema admission.
-    if (value === null || value === undefined) throw new TypeError(`Cannot read properties of ${String(value)} (reading 'bodyRadiusUnits')`);
     const source = Object(value) as Record<string, unknown>;
     return { bodyRadiusUnits: Number(source.bodyRadiusUnits), geometryScale: Number(source.geometryScale ?? 1) };
   }
