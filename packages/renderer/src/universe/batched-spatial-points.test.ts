@@ -64,7 +64,7 @@ test('a camera turn warps the painted dots exactly where a repaint puts them, an
   warped.publish({ world: pose(2), viewport });
   // Only the warp was written: the paths keep the first paint.
   assert.equal(warped.root.querySelector('path')!.getAttribute('d'), before);
-  const numbers = (warped.root.querySelector('svg')!.style.transform.match(/-?[\d.e+-]+/g) ?? []).slice(1).map(Number);
+  const numbers = (warped.svg.style.transform.match(/-?[\d.e+-]+/g) ?? []).slice(1).map(Number);
   assert.equal(numbers.length, 16);
   const [a, b, , c, d, e, , g, , , , , h, i, , j] = numbers;
   const moved = painted.map(([x, y]) => { const w = c! * x! + g! * y! + j!; return [(a! * x! + d! * y! + h!) / w, (b! * x! + e! * y! + i!) / w]; });
@@ -76,11 +76,11 @@ test('a camera turn warps the painted dots exactly where a repaint puts them, an
   for (const [x, y] of repainted) assert.ok(Math.min(...moved.map(([mx, my]) => Math.hypot(mx! - x!, my! - y!))) < .2);
   // A pause brings back the exact paint.
   await new Promise(resolve => setTimeout(resolve, 200));
-  assert.equal(warped.root.querySelector('svg')!.style.transform, '');
+  assert.equal(warped.svg.style.transform, '');
   assert.equal(warped.root.querySelector('path')!.getAttribute('d'), exact.root.querySelector('path')!.getAttribute('d'));
   // A turn past the painted margin repaints at once.
   warped.publish({ world: pose(40), viewport });
-  assert.equal(warped.root.querySelector('svg')!.style.transform, '');
+  assert.equal(warped.svg.style.transform, '');
   warped.destroy(); exact.destroy();
 });
 
@@ -130,7 +130,7 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
       ...(withCells ? { cells: { boxes: Float64Array.from(cells.boxes.flat()), of: Int32Array.from(cells.of) } } : {}),
       stylePoint: point => styles[point.color]!, paintPalette: styles.map(pointPaint), drawnCount: () => drawn, keepFraction: () => keep }); };
   const dots = (field: ReturnType<typeof mount>) => [...field.root.querySelectorAll('path')]
-    .map(path => [...(path.getAttribute('d') ?? '').matchAll(/M-?\d+ -?\d+h0/g)].map(match => match[0]).sort().join(''));
+    .map(path => [...(path.getAttribute('d') ?? '').matchAll(/M-?\d+ -?\d+h\.1/g)].map(match => match[0]).sort().join(''));
   const plain = mount(false), celled = mount(true);
   let last: { focalPixels: number; principalOffsetPixels: readonly [number, number]; widthPixels: number; heightPixels: number } =
     { focalPixels: 800, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 };
@@ -177,7 +177,7 @@ test('a travelling camera repaints every frame; once paused, a turn warps and se
     return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
       stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'], onSettle: () => settled++ }); };
   const exactAt = (z: number, degrees = 0) => { const fresh = mount(); fresh.publish(at(z, degrees)); const d = fresh.root.querySelector('path')!.getAttribute('d'); fresh.destroy(); return d; };
-  const field = mount(), path = field.root.querySelector('path')!, svg = field.root.querySelector('svg')!;
+  const field = mount(), path = field.root.querySelector('path')!, svg = field.svg;
   field.publish(at(0));
   // Each frame of a zoom at the dots' own scale is the exact paint of its camera: none keeps the frame before.
   for (const z of [-1, -2, -3, -4]) {
@@ -220,7 +220,7 @@ test('a travelling camera paints the view alone; the pause paints the margin bac
       stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'], onSettle: () => settled++ }); };
   const exactAt = (z: number, degrees = 0) => { const fresh = mount(); fresh.publish(at(z, degrees)); const d = fresh.root.querySelector('path')!.getAttribute('d'); fresh.destroy(); return d; };
   const dots = (field: ReturnType<typeof mount>) => field.root.querySelector('path')!.getAttribute('d')!.match(/M/g)?.length ?? 0;
-  const field = mount(), path = field.root.querySelector('path')!, svg = field.root.querySelector('svg')!;
+  const field = mount(), path = field.root.querySelector('path')!, svg = field.svg;
   field.publish(at(0));
   assert.equal(dots(field), 7, 'a first paint has its margin');
   for (const z of [.5, 1]) {
@@ -241,7 +241,7 @@ test('a travelling camera paints the view alone; the pause paints the margin bac
   assert.equal(dots(hurried), 5);
   hurried.publish(at(1, 2));
   assert.equal(hurried.root.querySelector('path')!.getAttribute('d'), exactAt(1, 2));
-  assert.equal(hurried.root.querySelector('svg')!.style.transform, '');
+  assert.equal(hurried.svg.style.transform, '');
   field.destroy(); hurried.destroy();
 });
 
@@ -255,7 +255,7 @@ test('a turn warps the paint only while no dot grows or shrinks by more than a t
   const { document } = parseHTML('<div id="host"></div>');
   const field = mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
     stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'] });
-  const path = field.root.querySelector('path')!, svg = field.root.querySelector('svg')!;
+  const path = field.root.querySelector('path')!, svg = field.svg;
   field.publish(turned(0));
   const first = path.getAttribute('d');
   field.publish(turned(2));
@@ -283,4 +283,83 @@ test('a dot seen through an occluding disc is painted by a fainter path of its c
   assert.deepEqual(dots, { '#ffffffff': 2, '#ffffff40': 1, '#ffffff66': 0, '#ffffff8c': 0, '#ffffffb3': 0, '#ffffffd9': 1 });
   assert.equal(field.stats().visiblePoints, 4);
   field.destroy();
+});
+
+test('fields mounted next to each other paint into one layer; another element between them starts a new one', () => {
+  const { document } = parseHTML('<div id="host"><b></b></div>'), host = document.getElementById('host')!, end = host.firstElementChild!;
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20] as const, max: [20, 20, 20] as const } };
+  const mount = (className: string) => mountBatchedSpatialPoints({ host, before: end, frame, points: [{ positionUnits: [0, 0, -10] as const }], className,
+    stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'] });
+  const first = mount('first'), second = mount('second');
+  assert.equal(first.svg, second.svg, 'one svg, so one compositing layer and one raster');
+  assert.deepEqual([...first.svg.children].map(group => group.getAttribute('class')), ['first', 'second'], 'in mount order');
+  assert.equal(host.children.length, 2, 'the layer and the marker');
+  // Something else mounted before the marker sits above those dots; dots mounted after it must paint above it.
+  host.insertBefore(document.createElement('i'), end);
+  const third = mount('third');
+  assert.notEqual(third.svg, first.svg);
+  assert.deepEqual([...host.children].map(child => child.tagName), ['DIV', 'I', 'DIV', 'B']);
+  first.destroy();
+  assert.equal(host.children.length, 4, 'a layer stays while a field paints into it');
+  second.destroy(); third.destroy();
+  assert.deepEqual([...host.children].map(child => child.tagName), ['I', 'B'], 'and goes with its last field');
+});
+
+test('a layer\'s fields turn by one warp, and all repaint when one of them must', async () => {
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  const base = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, metersPerUnit: 1,
+    boundsUnits: { min: [-2e6, -2e6, -2e6] as const, max: [2e6, 2e6, 2e6] as const } };
+  // The far field's frame is turned a quarter about z: the warp is the camera's turn, whatever a field's own axes are.
+  const farFrame = { ...base, localToReferenceXyzw: [0, 0, Math.SQRT1_2, Math.SQRT1_2] as const }, nearFrame = { ...base, localToReferenceXyzw: [0, 0, 0, 1] as const };
+  const grid = (step: number, depth: number) => Array.from({ length: 12 }, (_, index) => ({ positionUnits: [((index % 4) - 1.5) * step, (Math.floor(index / 4) - 1) * step, depth] as const }));
+  const farPoints = grid(2e5, -1e6), nearPoints = grid(1, -10);
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (z: number, degrees = 0) => { const half = degrees * Math.PI / 360;
+    return { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, Math.sin(half), 0, Math.cos(half)] as const } }, viewport }; };
+  const settled = { far: 0, near: 0 };
+  const mountIn = (into: HTMLElement, kind: 'far' | 'near') => mountBatchedSpatialPoints({ host: into, frame: kind === 'far' ? farFrame : nearFrame,
+    points: kind === 'far' ? farPoints : nearPoints, className: kind, stylePoint: () => ({ colorCss: kind === 'far' ? '#ffffff' : '#ff0000', opacity: 1, radiusPx: 1 }),
+    paintPalette: [kind === 'far' ? '#ffffffff@1' : '#ff0000ff@1'], onSettle: () => { if (into === host) settled[kind]++; } });
+  const far = mountIn(host, 'far'), near = mountIn(host, 'near'), svg = far.svg;
+  assert.equal(near.svg, svg);
+  const d = (field: typeof far) => field.root.querySelector('path')!.getAttribute('d');
+  // Each field alone in a layer of its own, painted once from a camera: the exact paint.
+  const exact = (kind: 'far' | 'near', z: number, degrees = 0) => { const fresh = mountIn(parseHTML('<div id="host"></div>').document.getElementById('host')!, kind);
+    fresh.publish(at(z, degrees)); const text = d(fresh); fresh.destroy(); return text; };
+  const publish = (z: number, degrees = 0) => { far.publish(at(z, degrees)); near.publish(at(z, degrees)); };
+  publish(0);
+  const first = { far: d(far), near: d(near) };
+  // A turn alone: one transform moves both paints.
+  publish(0, 2);
+  assert.match(svg.style.transform, /^matrix3d/);
+  assert.deepEqual({ far: d(far), near: d(near) }, first, 'neither field repaints');
+  // The pause repaints both exactly and tells both owners once, whichever field's timer comes first.
+  await new Promise(resolve => setTimeout(resolve, 200));
+  assert.equal(svg.style.transform, '');
+  assert.deepEqual({ far: d(far), near: d(near) }, { far: exact('far', 0, 2), near: exact('near', 0, 2) });
+  assert.deepEqual(settled, { far: 1, near: 1 });
+  // Travel with a turn: the near field's dots move, so it repaints; the far field's would only turn, but the layer has
+  // one transform, so it repaints from the same camera, on the frame's first publication or its own.
+  far.publish(at(-1, 4));
+  near.publish(at(-1, 4));
+  assert.equal(svg.style.transform, '');
+  assert.deepEqual({ far: d(far), near: d(near) }, { far: exact('far', -1, 4), near: exact('near', -1, 4) });
+  near.publish(at(-2, 6));
+  assert.equal(d(far), exact('far', -2, 6), 'the near field\'s repaint brings the far field along');
+  far.publish(at(-2, 6));
+  assert.equal(svg.style.transform, '');
+  // Travel alone leaves the far field's paint as it is: no dot of it moves, and no warp is needed.
+  const kept = d(far);
+  publish(-3, 6);
+  assert.equal(d(far), kept);
+  assert.equal(d(near), exact('near', -3, 6));
+  // A hidden field is not repainted for the others, and repaints on its next publication.
+  far.hide();
+  near.publish(at(-4, 9));
+  assert.equal(d(far), kept, 'hidden, it keeps its old paint');
+  far.publish(at(-4, 9));
+  assert.equal(d(far), exact('far', -4, 9));
+  assert.equal(svg.style.transform, '');
+  far.destroy(); near.destroy();
 });

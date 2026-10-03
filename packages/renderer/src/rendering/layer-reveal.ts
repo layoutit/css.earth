@@ -5,12 +5,12 @@ import type { OpacityWindow } from '../stars/opacity-clock.js';
 // sections, all one plane's size, painted about 21 ms each in one frame, and its dot layers joined them: 45-62 ms paints
 // on six bodies on the iPad (2026-09-30). A layer switching on waits hidden until its image is decoded off the main
 // thread, then the document's pacer shows one a frame, each taking that frame's budget.
-interface Waiting { readonly layer: HTMLElement; ready: boolean }
+interface Waiting { readonly layer: HTMLElement | SVGElement; ready: boolean }
 const reveals = new WeakMap<OpacityWindow, { readonly waiting: Waiting[]; readonly pacer: ReturnType<typeof createSettlePacer> }>();
 
 /** Show `layer` on a later frame of its own, once `images` (urls it paints) are decoded. Without animation frames (a test
  * document) the layer shows at once. */
-export function revealLayer(layer: HTMLElement, images: string | readonly string[] = [],
+export function revealLayer(layer: HTMLElement | SVGElement, images: string | readonly string[] = [],
   /** Decodes one url; the window's Image by default. */ decode?: (url: string) => Promise<unknown>) {
   const urls = typeof images === 'string' ? [images] : images;
   const view = layer.ownerDocument.defaultView as (OpacityWindow & { Image?: typeof Image }) | null;
