@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "eps-indi-ba",
-  "parent": "eps-indi-a-system",
+  "parent": "eps-indi-ba-system",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -101,7 +101,7 @@
       "color": "#ff5f00",
       "distanceAu": 750390.9,
       "description": "A brown dwarf of 67 Jupiter masses, one of a pair orbiting far out around the nearby star Epsilon Indi A.",
-      "systemName": "Epsilon Indi system",
+      "systemName": "Epsilon Indi B",
       "order": 1772,
       "context": {
         "order": 1769

@@ -10,6 +10,7 @@ import { validateWorldRotation } from '@cssearth/core';
 import type { LevelOfDetailPlan, OrbitLineFade } from './world-presentation.js';
 import type { PreparedOrbitStrokes } from './prepared-orbit-strokes.js';
 import { expandWorldContextSummary, expandWorldSystem } from './world-context-summary.js';
+import { systemObjectId } from '../registry/system-address.js';
 import { parseClassificationViews, parseSystemView } from './world-system-view.js';
 import type { PreparedSystemViewCandidate } from './world-system-view.js';
 
@@ -61,6 +62,9 @@ export interface PreparedContextBody extends PreparedContextPoint {
   readonly labelPlacement?: 'centre';
   /** A placed star measured to be bound to another with no measured orbit: its host and the pair's centre of mass. */
   readonly boundTo?: { readonly hostId: string; readonly centerM: PositionM };
+  /** The object the body, with the system it hosts, is inside in the object tree: the object whose file has its row.
+   * Absent where a page cannot tell: a row in its own system's file (a plain-dot star with planets) or on its own. */
+  readonly inside?: string;
   /** The members a system overview frames. The full context also carries its camera candidates; the browser's summary
    * does not, and reads a system's from `system-views/<id>.json` (`parsePreparedSystemView`) when navigation frames it. */
   readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
@@ -132,7 +136,8 @@ export interface PreparedWorldContext {
   readonly sky: { readonly sceneRegistration: string };
   /** How many bodies the whole world holds, read or not: what stacking and ordering count on. */
   readonly worldBodyCount?: number;
-  /** The dot banks the bake wrote for the stars the summary only lists (plain-star-dots.ts in @cssearth/bake), by id. */
+  /** The objects the bake wrote a dot bank for: the plain stars inside each, which the summary only lists (plain-star-dots.ts
+   * in @cssearth/bake), are dots in that object's own package. */
   readonly dotBanks?: readonly string[];
 }
 /** The build's table of the world (`world-index.json`, never served): every body in the full context's order, every object
@@ -400,7 +405,7 @@ function parseSummaryOrbit(value: unknown): PreparedContextOrbit {
     ...(orbit.lod === undefined ? {} : { lod: Object.freeze({ bounds: sphere(record(orbit.lod, 'orbit detail levels', ['bounds']).bounds, 'orbit detail bounds') }) }),
     ...(orbit.closed === false ? { closed: false as const, displayExtentAu: positive(orbit.displayExtentAu, 'Open trajectory display extent') } : {}) });
 }
-const BODY_FIELDS = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'billboard', 'plainDot', 'dotColor'];
+const BODY_FIELDS = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'billboard', 'plainDot', 'dotColor', 'inside'];
 function parseBody(value: unknown, geometry: boolean, focusId: string, renderedIds: ReadonlySet<string>): PreparedContextGeometryBody | PreparedContextBody {
   const input = record(value, 'context body', BODY_FIELDS);
   const rawBody = point(input, BODY_FIELDS);
@@ -416,7 +421,7 @@ function parseBody(value: unknown, geometry: boolean, focusId: string, renderedI
   const body = { ...rawBody, ...(systemView ? { systemView } : {}), ...(bound ? { boundTo: bound } : {}),
     ...(input.placement === 'approximate' ? { placement: 'approximate' as const } : {}), ...(input.unpackaged === true ? { unpackaged: true as const } : {}),
     ...(input.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(input.orbitsWithinM, `context body ${String(input.id)} orbit range`) }),
-    ...(input.labelPlacement === 'centre' ? { labelPlacement: 'centre' as const } : {}) };
+    ...(input.labelPlacement === 'centre' ? { labelPlacement: 'centre' as const } : {}), ...(input.inside === undefined ? {} : { inside: text(input.inside, `context body ${String(input.id)} inside`) }) };
   if (input.orbit === undefined) return Object.freeze(body);
   if (!geometry) return Object.freeze({ ...body, orbit: parseSummaryOrbit(input.orbit) });
   return Object.freeze({ ...body, orbit: validateOrbitGeometry(jsonOrbitGeometry(input.orbit), body.positionM, focusId, renderedIds, body.id) });
@@ -461,14 +466,18 @@ function checkBodies(focus: PreparedContextFocus, bodies: readonly PreparedConte
 export function parsePreparedWorldSystem(value: unknown, plan: PreparedWorldContext, id: string): PreparedWorldSystem {
   const placed = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body.positionM] as const));
   const input = record(expandWorldSystem(value, body => placed.get(body) ?? plan.orbitCenters?.[body]?.positionM), `world system ${id}`,
-    ['schema', 'id', 'orbitCenters', 'orbitBanks', 'bodies', 'anywhere', 'places']);
+    ['schema', 'id', 'orbitCenters', 'orbitBanks', 'bodies', 'anywhere', 'places', 'inside']);
   if (input.id !== id) throw new TypeError(`Prepared world system ${id} names ${String(input.id)}.`);
   const ids = array(input.bodies, `world system ${id} bodies`).map(body => text(record(body, `world system ${id} body`).id, `world system ${id} body id`));
   for (const flag of ['anywhere', 'places'] as const) if (input[flag] !== undefined && input[flag] !== true) throw new TypeError(`Prepared world system ${id} ${flag} is true or absent, not ${JSON.stringify(input[flag])}.`);
   // Only an object with places may list no body of its own: it is read for them.
   if (!ids.length && input.places !== true) throw new TypeError(`Prepared world system ${id} holds no body and no places.`);
   const rendered = new Set([...plan.bodies.map(body => body.id), ...ids]);
-  return Object.freeze({ id, bodies: Object.freeze(array(input.bodies, `world system ${id} bodies`).map(body => parseBody(body, false, plan.focus.id, rendered))),
+  // A body is inside the object whose file has its row, unless the file says where its bodies are (a dot bank's). A row in
+  // its own system's file, or alone, does not say.
+  const container = text(input.inside ?? id, `world system ${id} inside`);
+  const within = (body: PreparedContextBody) => body.id === id || systemObjectId(body.id) === id ? body : Object.freeze({ ...body, inside: container });
+  return Object.freeze({ id, bodies: Object.freeze(array(input.bodies, `world system ${id} bodies`).map(body => within(parseBody(body, false, plan.focus.id, rendered)))),
     orbitCenters: Object.freeze({ ...(input.orbitCenters === undefined ? {} : record(input.orbitCenters, `world system ${id} orbitCenters`)) }),
     orbitBanks: parseOrbitBanks(input.orbitBanks) ?? Object.freeze({}), anywhere: input.anywhere === true, places: input.places === true });
 }
@@ -492,38 +501,6 @@ export function extendWorldContext(plan: PreparedWorldContext, systems: readonly
     ...(Object.keys(orbitCenters).length ? { orbitCenters } : {}) });
   validatedContexts.add(result);
   return result;
-}
-/** The build's index of the world's bodies (`world-index.json`), checked. */
-export function parsePreparedWorldIndex(value: unknown): PreparedWorldIndex {
-  const input = record(value, 'world index', ['order', 'files', 'rows']);
-  const order = array(input.order, 'world index order').map((id, index) => text(id, `world index order[${index}]`));
-  unique(order, 'world index order');
-  const files = array(input.files, 'world index files').map((id, index) => text(id, `world index files[${index}]`));
-  unique(files, 'world index files');
-  const places = new Set(order);
-  const rows = record(input.rows, 'world index rows');
-  for (const id of Object.keys(rows)) if (!places.has(id)) throw new TypeError(`The world index holds a row for ${id}, which has no place in its order.`);
-  return Object.freeze({ order: Object.freeze(order), files: Object.freeze(files), rows: Object.freeze({ ...rows }) });
-}
-/** The whole world, every file read, in the full context's order: for build tools and tests. The index names every object
- * with a `members.json`, which `read` gives, from the root of the tree down, so an orbit's parent is placed before it; a
- * plain-dot star with nothing round it has its row in the index instead. */
-export async function parseCompleteWorldContext(summary: unknown, read: (id: string) => Promise<unknown>, indexInput: unknown): Promise<PreparedWorldContext> {
-  const index = parsePreparedWorldIndex(indexInput), files = index.files;
-  let whole = parsePreparedWorldContextSummary(summary);
-  const values = await Promise.all(files.map(read)), held = new Set<string>();
-  const add = (id: string, value: unknown) => {
-    const system = parsePreparedWorldSystem(value, whole, id);
-    for (const body of system.bodies) {
-      if (held.has(body.id)) throw new TypeError(`Prepared world file ${id} holds ${body.id}, which another file holds too.`);
-      held.add(body.id);
-    }
-    whole = extendWorldContext(whole, [system], index.order);
-  };
-  files.forEach((id, at) => add(id, values[at]));
-  for (const [id, row] of Object.entries(index.rows)) add(id, row);
-  if (whole.bodies.length !== index.order.length) throw new TypeError(`The summary and its ${files.length} files hold ${whole.bodies.length} bodies, not the index's ${index.order.length}.`);
-  return whole;
 }
 function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (value && typeof value === 'object' && validatedContexts.has(value) &&

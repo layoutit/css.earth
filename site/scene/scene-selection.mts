@@ -3,9 +3,9 @@ import { zoomScopeAtCamera } from '../zoom-scope.mts';
 import { namesSystem, type PageView } from '../navigation/navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
 import { SYSTEM_RANGES } from '../system-framing.mts';
-import { subjectOfScope, zoomChain, zoomStepOf } from '../inside-view.mts';
+import { zoomChain, zoomStepOf } from '../inside-view.mts';
 import { selectionKey, subjectOf, type SceneSubject } from './scene-subject.mts';
-import { systemObjectId } from '../navigation/system-address.mts';
+import { systemHostId, systemObjectId } from '../navigation/system-address.mts';
 export { moonSystem, selectionKey, starSystem, subjectHost, subjectOf, subjectView, type SceneSubject } from './scene-subject.mts';
 
 /** The camera has crossed into a scope of the zoom another scene shows (an object seen from inside, or back to the centre's own system): the
@@ -37,8 +37,9 @@ export function createSceneSelection({ initial, objectId, systems = [], onChange
   /** The scope a camera frames, on the zoom out of a step's centre (zoom-scope.mts). */
   const scopeAt = (world: WorldCameraPose, step: { readonly scope: string; readonly centreId: string }) => {
     const star = systemById(systems, step.centreId);
-    return zoomScopeAtCamera(world, step.scope, undefined, star ? { originM: star.originM, orbitsWithinM: SYSTEM_RANGES.get(star.id) } : undefined,
-      zoomChain(step.centreId).map(object => ({ id: object.id, zoom: object.zoom! })));
+    const systemId = systemObjectId(step.centreId);
+    return zoomScopeAtCamera(world, step.scope, undefined, star ? { originM: star.originM, orbitsWithinM: SYSTEM_RANGES.get(star.id), systemId } : { systemId },
+      zoomChain(step.centreId));
   };
   /** Whether the mounted scene shows `next`: its own object, or its system. */
   const ownScene = (next: SceneSubject) => next.objectId === scene || next.objectId === systemObjectId(scene);
@@ -63,7 +64,7 @@ export function createSceneSelection({ initial, objectId, systems = [], onChange
       const scope = scopeAt(world, step);
       if (scope === step.scope) return false;
       // The scope the camera crossed into is a selection of the mounted scene (a star's own system), or of another scene.
-      const next = subjectOfScope(scope, step.centreId);
+      const next: SceneSubject = { objectId: scope };
       if (!ownScene(next)) return { ...next, centreId: step.centreId };
       if (selectionKey(next) !== selectionKey(subject)) publish(next);
       return true;
@@ -74,7 +75,7 @@ export function createSceneSelection({ initial, objectId, systems = [], onChange
       const step = zoomStepOf(from);
       if (!step) return true;
       const chain = zoomChain(step.centreId);
-      return step.scope === 'system' ? chain.length > 0 : chain.at(-1)?.id !== step.scope;
+      return systemHostId(step.scope) !== null ? chain.length > 0 : chain.at(-1)?.id !== step.scope;
     },
     /** Project the committed identity while preserving camera, dataset and diagnostic URL payloads. */
     url(value: string | URL) {

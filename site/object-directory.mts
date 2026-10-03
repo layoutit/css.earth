@@ -1,5 +1,5 @@
 import { importPackagedObjectRuntime } from './import-queue.mts';
-import { catalogueObject, objectSystem } from '@cssearth/objects';
+import { catalogueObject, objectSystem, systemHostId } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './objects.mts';
 import { readObjectEntry } from './object-entries.mts';
 
@@ -30,16 +30,26 @@ export function knownAncestors(id: string): readonly NavigableObject[] {
   }
   return chain;
 }
-/** Loads the objects `id` is inside, together: its entry names them (`ancestors`), so none waits for another. */
-export async function loadAncestors(id: string, read: (id: string) => Promise<unknown | null> = fetchEntry): Promise<readonly NavigableObject[]> {
+/** The ids of the objects `id` is inside, nearest first, as its own entry names them (`ancestors`): no other entry is read. */
+export async function ancestorIds(id: string, read: (id: string) => Promise<unknown | null> = fetchEntry): Promise<readonly string[]> {
   const entry = await read(id);
   const listed: unknown = entry && typeof entry === 'object' && 'ancestors' in entry ? entry.ancestors : [];
   if (!Array.isArray(listed) || !listed.every((value): value is string => typeof value === 'string')) {
     throw new TypeError(`/objects/${id}/entry.json: ancestors must be a list of object ids; got ${JSON.stringify(listed)}.`);
   }
-  const ids: readonly string[] = listed;
-  await Promise.all(ids.map(ancestor => loadObject(ancestor, read)));
+  return listed;
+}
+/** Loads the objects `id` is inside, together: its entry names them (`ancestors`), so none waits for another. */
+export async function loadAncestors(id: string, read: (id: string) => Promise<unknown | null> = fetchEntry): Promise<readonly NavigableObject[]> {
+  await Promise.all((await ancestorIds(id, read)).map(ancestor => loadObject(ancestor, read)));
   return knownAncestors(id);
+}
+/** Loads the object `id`, with any system it hosts, is inside: the nearest one that is no system (its galaxy; the Milky
+ * Way's is read at startup). Zooming out of `id` hands the view to it when it has a scene of its own (inside-view.mts
+ * `insideBody`), and nothing else it is inside is read for that. */
+export async function loadHolder(id: string, read: (id: string) => Promise<unknown | null> = fetchEntry): Promise<NavigableObject | null> {
+  const holder = (await ancestorIds(id, read)).find(ancestor => systemHostId(ancestor) === null);
+  return holder === undefined ? null : loadObject(holder, read);
 }
 
 /** A prepared catalogue entry as the directory serves it (`@cssearth/objects` catalogueObject), bound to the shell's scene loader. */

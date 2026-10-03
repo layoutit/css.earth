@@ -28,7 +28,9 @@ import { moonSystem, starSystem, subjectHost, subjectOf, subjectView } from './s
 import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import { WORLD_HOST_ID, namesSystem } from '../navigation/navigation-scope.mts';
-import { pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../inside-view.mts';
+import { systemHostId } from '../navigation/system-address.mts';
+import { insideBody, pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../inside-view.mts';
+import { loadAncestors, loadHolder } from '../object-directory.mts';
 import { bodyInView, createCameraHandover } from './camera-handover.mts';
 import { OVERVIEW_SELECTION_POLICY } from '../runtime-policy.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
@@ -637,18 +639,23 @@ export function createSceneRouter({
     if (requests.current || scenes.state.kind !== 'ready') return;
     const selection = context?.selection;
     if (!selection) return;
-    // The selection the camera was last in: the committed one, or one of another scene it has crossed into.
-    const from = handover.subject ?? undefined;
-    const committed = selection.current, followed = selection.followCamera(frame, from);
+    // The selection the camera was last in: the committed one, or one of another scene it has crossed into. The scene of
+    // a body the centre is inside is no step of the zoom: while it waits for the camera to rest, the camera is followed
+    // from the committed step, and coming back inside that step cancels it.
+    const committed = selection.current, pending = handover.subject ?? undefined;
+    const pastChain = pending !== undefined && zoomStepOf(pending) === null && zoomStepOf(committed) !== null;
+    const followed = selection.followCamera(frame, pastChain ? undefined : pending);
+    if (pastChain && followed === false) { handover.back(); return; }
     if (typeof followed === 'object') {
       // The next scene is seen around the same star, with the camera where it is.
       setZoomCentre(followed.centreId);
       handover.cross({ objectId: followed.objectId }, 'zoom-scope');
     }
     // A pending scene whose body the camera has come close enough to see is mounted without waiting for rest. An object
-    // seen from inside has no body.
+    // seen from inside has no body, and one the mounted body is inside is around the camera already: it waits for rest.
     const host = handover.subject ? subjectHost(handover.subject) : null, focal = session.mount?.navigation?.optics().focalPixels;
-    const body = host !== null && zoomStepOf({ objectId: host }) === null ? context?.registry.SCENE_OBJECTS.find(object => object.id === host)?.worldFrame : undefined;
+    const around = host !== null && (insideBody(objectId)?.id === host || insideBody(subjectOf(objectId, 'system').objectId)?.id === host);
+    const body = host !== null && !around && zoomStepOf({ objectId: host }) === null ? context?.registry.SCENE_OBJECTS.find(object => object.id === host)?.worldFrame : undefined;
     if (body && focal && bodyInView(frame, body, focal)) handover.due();
     if (followed !== true) return;
     // The camera frames a selection of the mounted scene: nothing waits for it to rest any more.
@@ -675,13 +682,17 @@ export function createSceneRouter({
     const { step, moons } = framing();
     // A planet's system keeps its host selected, and its world paths use the shared overview policy. Past the scope that
     // the galaxy the centre is in, that galaxy's stars retire too.
-    world.current?.setOverview?.(step !== null || moons, step?.scope, moons,
+    world.current?.setOverview?.(step !== null || moons, step !== null && systemHostId(step.scope) === null, moons,
       step !== null && pastCentreGalaxy(step.scope, step.centreId));
   }
   /** The camera crossed into, or came back from, a selection of another scene: the camera's limits and the world follow. */
   function publishFraming() { publishCamera(); publishWorld(); }
   function publishSelection() {
     const subject = context?.selection.current;
+    // A star's system is a step of the zoom out of that star: the objects the star is inside, which the zoom hands the view
+    // to next, are read now. A page has read the Sun's as it started.
+    const step = subject ? zoomStepOf(subject) : null;
+    if (step) void loadAncestors(step.centreId).catch(error => console.error(`The objects ${step.centreId} is inside could not be read; zooming out stops at its system.`, error));
     publishCamera();
     shellOwner?.shell?.presentSelection();
     publishWorld();
@@ -713,7 +724,11 @@ export function createSceneRouter({
     const owner = session.mount?.navigation;
     if (!owner) return;
     const { selection: current, objects, registry } = ready;
+    // The object the mounted body is inside is read now, when the page has not read it (another galaxy): it takes the view
+    // as the camera backs out of the body.
+    void loadHolder(objectId).catch(error => console.error(`The object ${objectId} is inside could not be read; zooming out of it skips it.`, error));
     const watch = registry.watchOverviewSelection({ navigation: owner, objects: registry.SCENE_OBJECTS, systems: objects, objectId,
+      inside: () => { const frame = insideBody(objectId)?.worldFrame, id = insideBody(objectId)?.id; return frame && id !== undefined ? { id, originM: frame.originM, radiusM: frame.bodyRadiusM } : null; },
       // The scene of an object seen from inside is left by zooming (followSelectionCamera), not by this watcher.
       getOverview: () => zoomStepOf(current.context) !== null,
       // The pending flight owns the camera; repeat-click bookkeeping must not
@@ -723,6 +738,8 @@ export function createSceneRouter({
       // Back inside the system's exit the camera may still frame the planet's moons: that watcher is asked again.
       onReturn() { handover.back(); refreshSatelliteSelection?.(); },
       onChange(next, landed) {
+        // The object the body is inside takes the view as its own scene, once the camera rests.
+        if (!next.overview && next.objectId !== objectId) { handover.cross({ objectId: next.objectId }, 'overview-watcher'); return; }
         if (!next.overview || next.objectId === objectId) {
           // A mounted star and its system overview share the same camera, detail and
           // subscriptions. Change their selection in place in either direction.

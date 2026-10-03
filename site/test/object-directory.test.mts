@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { OBJECTS, SCENE_OBJECTS as REGISTERED_SCENE_OBJECTS } from '../objects.mts';
+import { OBJECTS, SCENE_OBJECTS as REGISTERED_SCENE_OBJECTS, ancestorsOf } from '../objects.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { resolve } from 'node:path';
 import { OBJECT_ENTRY_IDS, objectEntry } from '../object-entry.mts';
-import { knownObject, loadAncestors, loadObject, objectFromEntry, NAVIGABLE_OBJECTS, SCENE_OBJECTS } from '../object-directory.mts';
+import { ancestorIds, knownObject, loadAncestors, loadHolder, loadObject, objectFromEntry, NAVIGABLE_OBJECTS, SCENE_OBJECTS } from '../object-directory.mts';
 
 // Loaders are functions; compare everything else an object carries.
 const facts = (value: unknown) => JSON.parse(JSON.stringify(value));
@@ -52,3 +52,22 @@ test('an entry whose ancestors are not a list of object ids is refused, naming t
   await assert.rejects(loadAncestors('mars', async () => ({ ancestors: ['solar-system', 7] })), /\/objects\/mars\/entry\.json: ancestors must be a list of object ids; got \["solar-system",7\]/);
   await assert.rejects(loadAncestors('mars', async () => ({ ancestors: 'solar-system' })), /ancestors must be a list of object ids/);
 });
+
+test('a page reads the one object a body is inside that takes the view, and the ids of the rest from the body\'s own entry', async () => {
+  const reads: string[] = [];
+  // As the entry endpoint serves it: the object's facts with the ids of the objects it is inside, nearest first.
+  const read = async (id: string) => { reads.push(id); const entry = objectEntry(id); return entry && { ...(entry as object), ancestors: ancestorsOf(id).map(object => object.id) }; };
+  // A star of the Large Magellanic Cloud: its own entry names the Cloud and everything the Cloud is inside.
+  assert.deepEqual((await ancestorIds('hv-1005', read)).slice(0, 2), ['lmc', 'milky-way']);
+  assert.deepEqual(reads, ['hv-1005']);
+  assert.equal((await loadHolder('hv-1005', read))?.id, 'lmc');
+  assert.equal(knownObject('lmc')?.id, 'lmc');
+  // A body inside a system: the first object that is no system. Europa is inside the Jupiter system, inside the Solar
+  // System, inside the Milky Way, and neither system's entry is read for it.
+  reads.length = 0;
+  assert.equal((await loadHolder('europa', read))?.id, 'milky-way');
+  assert.ok(reads.includes('europa') && !reads.includes('jupiter-system') && !reads.includes('solar-system'), reads.join(', '));
+  // The root is inside nothing.
+  assert.equal(await loadHolder('observable-universe', read), null);
+});
+

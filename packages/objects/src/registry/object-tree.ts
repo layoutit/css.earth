@@ -8,6 +8,8 @@
  * `checkBankHosts` requires of every bank. A star measured to be bound to another is inside what that star is inside
  * (`checkBoundStars`).
  */
+import { systemObjectId } from './system-address.js';
+
 export const OBJECT_TREE_ROOT = 'observable-universe';
 
 export interface TreeNode { readonly id: string; readonly parent?: string }
@@ -65,15 +67,19 @@ export function checkBankHosts(banks: readonly BankNode[], objects: ReadonlySet<
 }
 
 /** Checks that each star measured to be bound to another (`bonds`: the star, then the star it is bound to, from the
- * astronomy records' `boundTo`) is inside the same object as that star: the system the pair makes. The tree's own shape
- * cannot tell a wrong parent from a right one; a measured bond can. */
+ * astronomy records' `boundTo`) is inside the same object as that star: the system the pair makes. A bound star with
+ * bodies of its own hosts a system inside that one (Epsilon Indi B, the pair Ba and Bb, inside Epsilon Indi A's system),
+ * so it is its system that is inside it. The tree's own shape cannot tell a wrong parent from a right one; a measured
+ * bond can. */
 export function checkBoundStars(objects: readonly TreeNode[], bonds: Iterable<readonly [star: string, host: string]>): void {
   const byId = new Map(objects.map(object => [object.id, object] as const));
   for (const [star, host] of bonds) {
     const where = `src/objects/${star}/object.json`, own = byId.get(star), other = byId.get(host);
     if (!own) continue;
     if (!other) throw new TypeError(`${where}: ${star} is bound to ${host}, which is no object of the registry.`);
-    if (own.parent !== other.parent) {
+    // The object the star, with any system it hosts, is inside.
+    const inside = own.parent === systemObjectId(star) ? byId.get(own.parent)?.parent : own.parent;
+    if (inside !== other.parent) {
       throw new TypeError(`${where}: ${star} is bound to ${host}, so it is inside what ${host} is inside ("${other.parent ?? 'nothing'}"); its parent is "${own.parent ?? 'none'}".`);
     }
   }

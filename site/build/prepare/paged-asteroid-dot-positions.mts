@@ -3,7 +3,7 @@
  *
  * Only an asteroid that is a JPL mission target keeps a marker on the map (jpl-mission-targets.mts). Every other asteroid
  * package still has its place in the world, prepared from JPL Horizons (`properties.worldFrame.originM` of its
- * descriptor): this writes those places as `name,xKm,yKm,zKm`, relative to the Sun, for the `catalogue-asteroids` bank to join
+ * descriptor): this writes those places as `name,xKm,yKm,zKm`, relative to the Sun, for the Sun's asteroid dot bank to join
  * (packages/bake/authoring/small-body-dots/positions.mts `pagesTable`).
  *
  * Usage: node site/build/prepare/paged-asteroid-dot-positions.mts
@@ -12,6 +12,7 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
+import { plainDotBank } from './plain-dot-bank.mts';
 
 const objects = resolve(import.meta.dirname, '../../../src/objects');
 const sun = JSON.parse(await readFile(resolve(objects, 'sun/object.json'), 'utf8')) as { properties: { worldFrame: { referenceFrame: string; epochJdTt: number; originM: number[] } } };
@@ -28,6 +29,9 @@ for (const id of (await readdir(objects)).sort()) {
   }
   rows.push(`${id},${(originM as number[]).map((value, axis) => ((value - sunM[axis]!) / 1000).toFixed(0)).join(',')}`);
 }
-const output = resolve(objects, 'catalogue-asteroids/source/dots/paged-positions.csv.gz');
+// The bank the Sun hosts that declares its plain-dot asteroids (`properties.plainDots`).
+const bank = await plainDotBank(objects, 'sun', 'asteroid');
+if (bank === undefined) throw new TypeError('No catalogue point bank hosted by sun declares properties.plainDots asteroid: the paged asteroids have no bank to be dots of.');
+const output = resolve(objects, bank, 'source/dots/paged-positions.csv.gz');
 await writeFile(output, gzipSync(`name,xKm,yKm,zKm\n${rows.join('\n')}\n`));
 console.log(`Wrote ${rows.length} positions at JD ${epochJdTt} TT to ${output}.`);
