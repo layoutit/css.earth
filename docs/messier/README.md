@@ -15,6 +15,14 @@ Twelve were built one at a time, with their own guides: the nebulae M1, M8, M42 
 | Nebulae (9) | M16, M17, M20, M27, M43, M57, M76, M78, M97 | An ESO, Hubble or NOIRLab photograph standing flat, facing the Sun (M97: a Sloan picture); M16 and M78 also draw their cluster's stars | Distance: Hunt & Reffert (M16, M78), [Kuhn et al. (2019)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/870/32) (M17, M20), Menten et al. (2007) (M43), [Chornay & Walton (2021)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110) (the four planetary nebulae) |
 | Stars (2 entries) | M40: HD 238107 and HD 238108. M73: BD-13 5809, HD 358033 and BD-13 5808 | Each star as a body, with its Gaia color and limb | Gaia DR3; the two entries are chance alignments, so neither has a package of its own |
 
+![The 54 star clusters as the app draws them: 29 globular clusters, then 25 open clusters](../images/messier/clusters.webp)
+
+![The 32 galaxies](../images/messier/galaxies.webp)
+
+![The nine nebulae](../images/messier/nebulae.webp)
+
+Each tile is the object's own page in headless Chromium at 1440 × 900, device pixel ratio 2, on 2026-10-03, cut to the object.
+
 ## Measured, chosen and assumed
 
 | Value | Kind |
