@@ -10,8 +10,8 @@ import type { WorldContextView } from './world-context-planner.js';
 // Earth's page's world: the summary, the files every page reads and the Earth system's (site/world-context-plan.mts).
 const objects = new URL('../../../../../src/objects/', import.meta.url);
 const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, objects), 'utf8'));
-const index = parsePreparedWorldIndex(await json('sun/prepared/world-index.json'));
-let summary: PreparedWorldContext = parsePreparedWorldContextSummary(await json('sun/prepared/world-context-summary.json'));
+const index = parsePreparedWorldIndex(await json('observable-universe/prepared/world-index.json'));
+let summary: PreparedWorldContext = parsePreparedWorldContextSummary(await json('observable-universe/prepared/world.json'));
 for (const id of index.files) {
   const file = await json(`${id}/prepared/members.json`) as { anywhere?: unknown };
   if (file.anywhere === true || id === 'earth-system') summary = extendWorldContext(summary, [parsePreparedWorldSystem(file, summary, id)]);

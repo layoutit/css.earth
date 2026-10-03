@@ -12,23 +12,6 @@ import { writePreparedSet, type PreparedOutput } from './write-prepared-set.ts';
 const safe = (name: unknown): name is string => typeof name === 'string' && /^[a-z0-9][a-z0-9@._-]*$/u.test(name);
 
 /** Validate consumer JSON before publication; private preparation folders stay staged. */
-/** Folders a prepared set may carry, each beside the JSON that owns it: the spatial-context step writes one orbit bank
- * per centre next to `world-context.json` (site/build/prepare/prepare-spatial-context.ts). */
-const PREPARED_FOLDERS: Readonly<Record<string, { owner: string; extension: string }>> = {
-  'world-orbits': { owner: 'world-context.json', extension: '.bin' } };
-export async function readPreparedBinaryOutputs(directory: string) {
-  const entries = await readdir(directory, { withFileTypes: true }), names = new Set(entries.map(entry => entry.name));
-  const outputs = [];
-  for (const [folder, { owner, extension }] of Object.entries(PREPARED_FOLDERS)) {
-    if (!names.has(folder)) continue;
-    if (!names.has(owner)) throw new TypeError(`Prepared folder ${folder} is published beside ${owner}, which is missing from ${directory}.`);
-    for (const file of await readdir(resolve(directory, folder), { withFileTypes: true })) {
-      if (!file.isFile() || !safe(file.name) || !file.name.endsWith(extension)) throw new TypeError(`Prepared folder ${folder} must hold only ${extension} files; found ${file.name} in ${directory}.`);
-      outputs.push({ filename: `${folder}/${file.name}`, path: resolve(directory, folder, file.name) });
-    }
-  }
-  return outputs.sort((left, right) => left.filename.localeCompare(right.filename));
-}
 export async function readPreparedJsonOutputs(directory: string) {
   const outputs = [];
   const entries = await readdir(directory, { withFileTypes: true }), names = new Set(entries.map(entry => entry.name));
@@ -103,7 +86,7 @@ export async function verifySurfaceAssetRecords(id: string, surfaces: unknown, m
 export async function publishPreparedObject({ id, stage, objectDirectory, publicDirectory, outputDirectory, projectRoot }: {
   id: string; stage: string; objectDirectory: string; publicDirectory: string; outputDirectory: string; projectRoot: string;
 }) {
-  const data = resolve(stage, 'prepared'), outputs = [...await readPreparedJsonOutputs(data), ...await readPreparedBinaryOutputs(data)];
+  const data = resolve(stage, 'prepared'), outputs = await readPreparedJsonOutputs(data);
   const manifest = parseRuntimeManifest(await optionalJson(resolve(data, 'inventory.json')), id);
   await verifySurfaceAssetRecords(id, await optionalJson(resolve(data, 'surfaces.json')), manifest, resolve(stage, 'public'));
   const current = await readInventory(id, objectDirectory);

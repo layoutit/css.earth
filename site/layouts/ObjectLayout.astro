@@ -27,9 +27,9 @@ import type { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts'
 import type { ObjectDescriptor } from '@cssearth/objects';
 // The world camera a body mounts with (`site/world-camera.mts`): the summary's frame, focus and camera, so the first
 // body mounts before the world summary itself downloads.
-import worldSummary from '../../src/objects/sun/prepared/world-context-summary.json';
+import worldSummary from '../../src/objects/observable-universe/prepared/world.json';
 // The same hashed file the client's `world-context-plan.mts` fetches, requested by the head (startup-requests.mts).
-import worldSummaryUrl from '../../src/objects/sun/prepared/world-context-summary.json?url';
+import worldSummaryUrl from '../../src/objects/observable-universe/prepared/world.json?url';
 import { worldCameraOf } from '@cssearth/objects';
 import { MOBILE_VIEWPORT_QUERY } from '../runtime-policy.mts';
 import { defaultWidthShare } from '../default-width-share.mts';

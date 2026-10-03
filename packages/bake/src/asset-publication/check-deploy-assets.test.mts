@@ -26,15 +26,15 @@ function RUNTIME_ASSET_ORIGIN_FIXTURE(): string {
 }
 
 test('the published world files and system views must describe the same systems', async () => {
-  const root = projectRoot(import.meta.url), prepared = resolve(root, 'src/objects/sun/prepared');
-  const summary = await readFile(resolve(prepared, 'world-context-summary.json'), 'utf8');
+  const root = projectRoot(import.meta.url), prepared = resolve(root, 'src/objects/observable-universe/prepared');
+  const summary = await readFile(resolve(prepared, 'world.json'), 'utf8');
   // Every holder's members are named members.json in its own package: an address is read back through the inventories.
   // Members and system views are each in their own package's prepared files.
   const holders = (await readdir(resolve(root, 'src/objects'))).filter(id => existsSync(resolve(root, 'src/objects', id, 'prepared/members.json')) || existsSync(resolve(root, 'src/objects', id, 'prepared/views')));
-  const byUrl = new Map((await inventoryAssets(root, ['sun', ...holders], { location: 'prepared' })).map(asset => [asset.url, asset] as const));
+  const byUrl = new Map((await inventoryAssets(root, holders, { location: 'prepared' })).map(asset => [asset.url, asset] as const));
   const view = async (url: string) => readFile(byUrl.get(url)!.file, 'utf8');
   const nameOf = (url: string) => { const asset = byUrl.get(url); return asset?.filename === 'members.json' ? asset.id : asset ? asset.filename.replace(/^views\//u, '').replace(/\.json$/u, '') : url; };
-  const read = (alter?: (id: string, text: string) => string) => async (url: string) => url.endsWith('/world-context-summary.json') ? summary
+  const read = (alter?: (id: string, text: string) => string) => async (url: string) => url.endsWith('/world.json') ? summary
     : (alter ?? ((_id, text) => text))(nameOf(url), await view(url));
   assert.ok(await checkPublishedWorldPair(root, read()) > 0);
   // A view for another system than its file names is caught.

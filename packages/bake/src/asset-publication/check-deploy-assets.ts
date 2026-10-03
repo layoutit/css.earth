@@ -5,7 +5,7 @@ import { dirname, extname, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry } from '../objects/sources/index.ts';
-import { parseCompleteWorldContext, parsePreparedSystemView, parsePreparedWorldContextSummary, parsePreparedWorldIndex, systemViewFile } from '@cssearth/objects';
+import { OBJECT_TREE_ROOT, parseCompleteWorldContext, parsePreparedSystemView, parsePreparedWorldContextSummary, parsePreparedWorldIndex, systemViewFile } from '@cssearth/objects';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const execFileAsync = promisify(execFile);
@@ -45,12 +45,12 @@ async function readPublishedText(url: string): Promise<string> {
  * world the published index lists, and every system they draw must have its published views, which must parse. */
 export async function checkPublishedWorldPair(root: string, fetchText: (url: string) => Promise<string> = readPublishedText,
   parentOf: (id: string) => string | undefined = treeOf(root)) {
-  const [summaryAsset] = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: ['world-context-summary.json'] });
-  if (!summaryAsset) throw new Error('The Sun inventory lacks world-context-summary.json.');
+  const [summaryAsset] = await inventoryAssets(root, [OBJECT_TREE_ROOT], { location: 'prepared', filenames: ['world.json'] });
+  if (!summaryAsset) throw new Error(`The inventory of ${OBJECT_TREE_ROOT}, the root object, lacks world.json.`);
   const summary = parsePreparedWorldContextSummary(JSON.parse(await fetchText(summaryAsset.url)));
   const disagree = (detail: string) => new Error(`The published world files disagree: ${detail} Run pnpm prepare:world-context, publish the changed packages and commit their inventories.`);
-  const [indexAsset] = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: ['world-index.json'] });
-  if (!indexAsset) throw disagree('the inventory lacks world-index.json.');
+  const [indexAsset] = await inventoryAssets(root, [OBJECT_TREE_ROOT], { location: 'prepared', filenames: ['world-index.json'] });
+  if (!indexAsset) throw disagree(`the inventory of ${OBJECT_TREE_ROOT} lacks world-index.json.`);
   const indexInput: unknown = JSON.parse(await fetchText(indexAsset.url));
   const index = parsePreparedWorldIndex(indexInput);
   // Each object's file is its own package's `members.json`, published in that package's inventory, with its places.

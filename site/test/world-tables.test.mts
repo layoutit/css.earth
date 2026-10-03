@@ -11,10 +11,10 @@ const test = sourceTest();
 
 // What every page reads (the summary and the files drawn from anywhere), the Earth system's file, and one file a page reads
 // later: TOI-178's system, a plain-dot star with its six planets.
-const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
+const prepared = new URL('../../src/objects/observable-universe/prepared/', import.meta.url);
 const json = async (name: string) => JSON.parse(await readFile(new URL(name, prepared), 'utf8')) as unknown;
 const index = parsePreparedWorldIndex(await json('world-index.json'));
-let summary: PreparedWorldContext = parsePreparedWorldContextSummary(await json('world-context-summary.json'));
+let summary: PreparedWorldContext = parsePreparedWorldContextSummary(await json('world.json'));
 for (const id of index.files) {
   const file = await json(`../../${id}/prepared/members.json`) as { anywhere?: unknown };
   if (file.anywhere === true || id === 'earth-system') summary = extendWorldContext(summary, [parsePreparedWorldSystem(file, summary, id)]);

@@ -64,9 +64,9 @@ test('a page that holds the files every page reads has the systems whose members
   const { readFile } = await import('node:fs/promises');
   const { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldIndex, parsePreparedWorldSystem } = await import('@cssearth/objects');
   const { worldObjects } = await import('../world-objects.mts');
-  const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
+  const prepared = new URL('../../src/objects/observable-universe/prepared/', import.meta.url);
   const json = async (name: string) => JSON.parse(await readFile(new URL(name, prepared), 'utf8')) as { anywhere?: unknown };
-  let summary = parsePreparedWorldContextSummary(await json('world-context-summary.json'));
+  let summary = parsePreparedWorldContextSummary(await json('world.json'));
   for (const id of parsePreparedWorldIndex(await json('world-index.json')).files) {
     const file = await json(`../../${id}/prepared/members.json`);
     if (file.anywhere === true) summary = extendWorldContext(summary, [parsePreparedWorldSystem(file, summary, id)]);

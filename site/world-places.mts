@@ -7,7 +7,7 @@ import { OBJECTS } from './objects.mts';
  * body's row is. Every world body is in the file of the object it is inside (`summarizeWorldContext` in @cssearth/bake);
  * this reads the files and the object tree, and keeps no table of holders of its own. A page never reads these. */
 function index() {
-  if (!APPLICATION_WORLD_INDEX) throw new TypeError('The world index is the build\'s: only Node reads src/objects/sun/prepared/world-index.json.');
+  if (!APPLICATION_WORLD_INDEX) throw new TypeError('The world index is the build\'s: only Node reads src/objects/observable-universe/prepared/world-index.json.');
   return APPLICATION_WORLD_INDEX;
 }
 const parents = new Map(OBJECTS.map(object => [object.id, object.parent] as const));

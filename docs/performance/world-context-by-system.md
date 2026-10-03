@@ -13,25 +13,30 @@ a body's row is in the file of the object it is inside.
 `pnpm prepare:world-context` writes the browser's copy ([summary.ts](../../packages/bake/src/world-context/summary.ts)),
 by one rule the bake and the build share ([world-holders.ts](../../packages/objects/src/prepared-data/world-holders.ts)):
 
-- `world-context-summary.json`, which every page reads, holds the camera, frame and sky facts and the Sun, at the frame's
-  origin. It lists no other body.
+- `src/objects/observable-universe/prepared/world.json`, which every page reads, is the root object's: the camera, frame
+  and sky facts and the Sun, at the frame's origin. It lists no other body.
 - `src/objects/<object id>/prepared/members.json` is one object's file, in its own package: the bodies inside it, their
   named orbit centres and orbit-bank pins, served at `/world/systems/<id>.json`. A body with a system of its own is drawn
   as that system, so its row is in the file of the object its system is inside: the Earth's is in the Solar System's, the
   Moon's in the Earth system's, TRAPPIST-1's in the Milky Way's and its planets' in the TRAPPIST-1 system's.
+- `src/objects/<object id>/prepared/orbits/<body id>.bin` is the orbit path of one body of that file, beside the file
+  that pins it, served at `/world/orbits/<body id>.bin`. The planner worker reads it when a frame first draws that orbit.
 - A star the map draws as a plain dot, with no label, hover or click, is not in its parent's file. One with planets is in
   its own system's file with them; one with nothing round it has no file, and its row travels in its object entry. The
   map draws a plain-dot star of the Milky Way as one of the galaxy's own dots
-  ([packaged-stars](../../src/objects/milky-way-volume/source/packaged-stars/points.json)), and the ones in other
-  galaxies from the world's two dot banks
-  ([plain-star-dots.ts](../../packages/bake/src/world-context/plain-star-dots.ts), served at `/world/dots/<id>.bin`). An
-  asteroid drawn as a plain dot is a dot of `catalogue-asteroids`, whose file has its row.
+  ([packaged-stars](../../src/objects/milky-way-volume/source/packaged-stars/points.json)), and one of another galaxy as a
+  dot of that galaxy's own bank, `src/objects/<galaxy id>/prepared/plain-stars.bin`
+  ([plain-star-dots.ts](../../packages/bake/src/world-context/plain-star-dots.ts), served at `/world/dots/<galaxy id>.bin`).
+  An asteroid drawn as a plain dot is a dot of `catalogue-asteroids`, whose file has its row.
 - `src/objects/<object id>/prepared/places.json` is, per object, where each of its children's systems that is read on
   approach is: its host's place, rounded to 1e12 m, and the range its orbits are authored to. Served at
   `/world/places/<id>.json`.
-- `world-index.json` is the build's own: every body's place in the full context, every object with a file from the root
-  of the tree down, and the rows object entries carry. It names no holder. Node tools, tests, the build and the deploy
-  check read it; no page does.
+- `src/objects/observable-universe/prepared/world-index.json` is the build's own: every body's place in the full context,
+  every object with a file from the root of the tree down, and the rows object entries carry. It names no holder. Node
+  tools, tests, the build and the deploy check read it; no page does.
+
+The bake computes every body in one full context, `src/objects/sun/prepared/world-context.json`, in the Sun's package: the
+frame is the Sun's and the Sun's scene is framed from it. Node tools read it; no page does. It is the only world file there.
 
 A file is read by every page when a body in it is drawn from anywhere: one that orbits nothing or the Sun and is no
 plain dot (the Solar System's planets, the Milky Way's featured stars, the galaxies and clusters, a featured star of
@@ -103,7 +108,7 @@ from anywhere.
 | What Earth's page downloads for the world context at startup | Gzip |
 | --- | --- |
 | One summary of those 291 bodies, as the files were before (computed from the same rows) | 26,283 B |
-| `world-context-summary.json` (no bodies) | 1,269 B |
+| `world.json` (no bodies) | 1,269 B |
 | `/world/anywhere.json` (22 files in one response) | 26,100 B |
 | `earth-system.json` (the page's own) | 484 B |
 

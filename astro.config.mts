@@ -67,7 +67,7 @@ export default defineConfig({
       // The world summary ships as Vite emits it; its billboards take their published addresses (asset-origin.mts).
       { name: 'cssearth-world-billboards', apply: 'build', async generateBundle(_options, bundle) {
         for (const file of Object.values(bundle)) {
-          if (file.type !== 'asset' || !file.originalFileNames.some(name => name.endsWith('world-context-summary.json'))) continue;
+          if (file.type !== 'asset' || !file.originalFileNames.some(name => name.endsWith('observable-universe/prepared/world.json'))) continue;
           file.source = await resolveWorldBillboards(typeof file.source === 'string' ? file.source : new TextDecoder().decode(file.source));
         }
       } },

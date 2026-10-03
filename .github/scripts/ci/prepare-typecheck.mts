@@ -9,7 +9,7 @@ import { type RuntimeAssetLocation, inventoryAssets } from '@cssearth/bake/deliv
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 import { volumeMetadataAssets } from '@cssearth/bake/delivery';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parsePreparedWorldIndex } from '@cssearth/objects';
+import { OBJECT_TREE_ROOT, parsePreparedWorldIndex } from '@cssearth/objects';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
@@ -132,8 +132,8 @@ export async function restoreTypecheckInputs({ root = projectRoot, fetcher = fet
   // The world index names every object with a file of world bodies, which Node reads by computed path: each object's
   // `members.json` and `places.json` in its own package. They restore with the summary, after the index that names them:
   // the world step of build:tools bakes without the bodies' imagery, so its own copies place stars in different files.
-  const summary = resolve(root, 'src/objects/sun/prepared/world-context-summary.json');
-  const world = imports.includes(summary) ? await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: ['world-index.json'] }) : [];
+  const summary = resolve(root, `src/objects/${OBJECT_TREE_ROOT}/prepared/world.json`);
+  const world = imports.includes(summary) ? await inventoryAssets(root, [OBJECT_TREE_ROOT], { location: 'prepared', filenames: ['world-index.json'] }) : [];
   const initial = uniqueAssets([...await typecheckAssetsForPaths(imports, root), ...world, ...catalogue.assets, ...features.assets]);
   const first = await installRuntimeAssets(initial, { fetcher });
   const index = world.length ? parsePreparedWorldIndex(JSON.parse(await readFile(world[0]!.file, 'utf8'))) : null;

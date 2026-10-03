@@ -4,12 +4,12 @@ import { pathToFileURL } from 'node:url';
 import { gunzipSync } from 'node:zlib';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
-import { isPlacedClassification, mapLabel, NEUTRAL_CATALOGUE_COLOR, parseObjectDescriptor } from '@cssearth/objects';
+import { isPlacedClassification, mapLabel, NEUTRAL_CATALOGUE_COLOR, OBJECT_TREE_ROOT, parseObjectDescriptor } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
-import { parseWorldContextSource, PLAIN_STAR_DOT_BANK_IDS, plainStarDotBanks, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
+import { parseWorldContextSource, PLAIN_STAR_DOT_BANK_ID, plainStarDotBank, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
 import { writeCatalogueBank } from '@cssearth/bake/volume/node';
 import { systemViewFile, worldOrbitBanks } from '@cssearth/objects';
 import type { OrbitalState, Vector3, WorldContextBodyFact } from '@cssearth/bake/world-context';
@@ -208,60 +208,91 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     minimumRadiusShare: SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, ...SYSTEM_FRAMING_ANGLES });
   // Browser payload: compact JSON. Indentation was 60% of the fetched bytes.
   await writeIfChanged(options.outputPath, `${JSON.stringify(prepared)}\n`);
-  // The browser reads the summary; the planner worker adds each orbit centre's binary bank, which the summary pins by
-  // byte length, when that centre's orbits come into view. The full JSON above remains for build-time tools.
-  const banks = worldOrbitBanks(prepared), bankDirectory = worldOrbitsDirectory(options.outputPath), keptBanks = new Set<string>();
-  // Each bank is packed for delivery (@cssearth/objects prepared-binary.ts); the summary pins its unpacked bytes.
-  for (const bank of banks) {
-    keptBanks.add(`${bank.id}.bin`);
-    await writeIfChanged(resolve(bankDirectory, `${bank.id}.bin`), packPreparedBinary(bank.bytes, worldOrbitBankRegions(bank.bytes, `world-orbits/${bank.id}.bin`), `world-orbits/${bank.id}.bin`));
-  }
-  for (const name of await readdir(bankDirectory).catch(() => [] as string[])) if (!keptBanks.has(name)) await rm(resolve(bankDirectory, name));
-  await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
+  // The browser reads the summary; the planner worker adds each body's binary orbit bank, which the file that has the body
+  // pins by byte length, when its orbit comes into view. The full JSON above remains for build-time tools.
+  const banks = worldOrbitBanks(prepared);
   // Every page reads the summary: frame, camera and sky facts and the Sun. Every other body is in the file of the object it
   // is inside, by the object tree (summarizeWorldContext).
-  const tree = new Map(readPreparedObjects(process.cwd()).objects.map(object => [object.id, object.parent] as const));
+  const tree = new Map(readPreparedObjects(process.cwd()).objects.map(object => [object.id, { parent: object.parent, classification: object.classification }] as const));
   const { summary, systems, places, index, plainStars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])),
-    id => tree.get(id), ASTEROID_DOT_BANK);
+    id => tree.get(id)?.parent, ASTEROID_DOT_BANK);
+  // Each file is in its own object's package, in the objects directory this bake writes for (a fixture's, or the checkout's).
+  const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(options.outputPath)));
   // The map draws those stars as dots, not as bodies. A star of the Milky Way is one of the galaxy's own dots
-  // (src/objects/milky-way-volume/source/packaged-stars, written by paged-star-dot-positions.mts); the world's own banks
-  // (`/world/dots/<id>.bin`) hold only the stars that table does not name: the ones in other galaxies.
+  // (src/objects/milky-way-volume/source/packaged-stars, written by paged-star-dot-positions.mts). Every other is a dot of
+  // the galaxy it is inside, in that galaxy's own package (`prepared/plain-stars.bin`, served at `/world/dots/<galaxy>.bin`);
+  // one outside every galaxy is the root object's.
   const galaxyStars = await packagedGalaxyStars(dirname(dirname(dirname(options.outputPath))));
-  const dotBanks = plainStarDotBanks(plainStars.filter(body => !galaxyStars.has(body.id)).map(body => ({ id: body.id, positionM: body.positionM, color: body.color })), prepared.frame);
-  for (const id of PLAIN_STAR_DOT_BANK_IDS) if (!dotBanks.some(bank => bank.id === id)) await rm(resolve(dirname(options.outputPath), `${id}.bin`), { force: true });
-  for (const bank of dotBanks) {
-    await writeCatalogueBank({ objectDirectory: resolve(dirname(options.outputPath), '..'), id: bank.id, bank, published: true, inventory: async () => undefined });
+  const galaxyOf = (id: string) => {
+    for (let parent = tree.get(id)?.parent; parent !== undefined; parent = tree.get(parent)?.parent) if (tree.get(parent)?.classification === 'galaxy') return parent;
+    return OBJECT_TREE_ROOT;
+  };
+  const starsOf = new Map<string, { id: string; positionM: Vector3; color: string }[]>();
+  for (const body of plainStars) if (!galaxyStars.has(body.id)) {
+    const owner = galaxyOf(body.id);
+    (starsOf.get(owner) ?? starsOf.set(owner, []).get(owner)!).push({ id: body.id, positionM: body.positionM, color: body.color });
   }
-  // The summary names the banks this bake wrote, so the site asks for no other.
-  await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify({ ...summary, ...(dotBanks.length ? { dotBanks: dotBanks.map(bank => bank.id) } : {}) })}\n`);
+  const dotBanks = [...starsOf.keys()].sort();
+  for (const owner of dotBanks) {
+    await writeCatalogueBank({ objectDirectory: resolve(objectsRoot, owner), id: PLAIN_STAR_DOT_BANK_ID, bank: plainStarDotBank(starsOf.get(owner)!, prepared.frame)!, published: true, inventory: async () => undefined });
+  }
+  // An object that holds no such star any more loses its bank, and the Sun's old ones go.
+  for (const entry of await readdir(objectsRoot, { withFileTypes: true })) {
+    if (entry.isDirectory() && !starsOf.has(entry.name)) await rm(resolve(objectsRoot, entry.name, 'prepared', `${PLAIN_STAR_DOT_BANK_ID}.bin`), { force: true });
+  }
+  await rm(resolve(dirname(options.outputPath), 'plain-stars-far.bin'), { force: true });
+  // The summary and the build's index are in the root object's package, the object nothing is outside of. The summary names
+  // the objects whose dot bank this bake wrote, so the site asks for no other.
+  await writeIfChanged(worldSummaryPath(objectsRoot), `${JSON.stringify({ ...summary, ...(dotBanks.length ? { dotBanks } : {}) })}\n`);
   // Read by the build and Node tools only: every body's place in the world's order, and the rows object entries carry.
-  await writeIfChanged(worldIndexPath(options.outputPath), `${JSON.stringify(index)}\n`);
-  await rm(resolve(dirname(options.outputPath), 'world-stars.json'), { force: true });
+  await writeIfChanged(worldIndexPath(objectsRoot), `${JSON.stringify(index)}\n`);
+  for (const old of ['world-stars.json', 'world-context-summary.json', 'world-index.json']) await rm(resolve(dirname(options.outputPath), old), { force: true });
   // Each holder is an object: a star's system, or the asteroid dot bank. Its members are its own package's prepared file,
   // published with it; a holder without a package is refused, named.
-  // Each file is in its own object's package, in the objects directory this bake writes for (a fixture's, or the checkout's).
-  const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(options.outputPath))), holders = new Set<string>(), placed = new Set<string>();
+  const holders = new Set<string>(), placed = new Set<string>();
+  // An orbit bank is in the package of the file that pins it, packed for delivery (@cssearth/objects prepared-binary.ts);
+  // the pin is of its unpacked bytes.
+  const bankOf = new Map(banks.map(bank => [bank.id, bank] as const)), pinnedBy = new Map<string, string>(), orbits = new Map<string, Set<string>>();
+  const writeOrbits = async (holderId: string, pins: Readonly<Record<string, number>>) => {
+    for (const id of Object.keys(pins)) {
+      const bank = bankOf.get(id), other = pinnedBy.get(id);
+      if (!bank) throw new TypeError(`World file ${holderId} pins the orbit bank of ${id}, which this bake did not write.`);
+      if (other !== undefined) throw new TypeError(`World files ${other} and ${holderId} both pin the orbit bank of ${id}: each orbit's body is in one file.`);
+      pinnedBy.set(id, holderId);
+      (orbits.get(holderId) ?? orbits.set(holderId, new Set()).get(holderId)!).add(`${id}.bin`);
+      const name = `orbits/${id}.bin`;
+      await writeIfChanged(orbitBankPath(objectsRoot, holderId, id), packPreparedBinary(bank.bytes, worldOrbitBankRegions(bank.bytes, name), name));
+    }
+  };
+  await writeOrbits(OBJECT_TREE_ROOT, summary.orbitBanks ?? {});
   for (const system of systems) {
     // Every file's object is an object of the registry, or the asteroid dot bank: anything else has no package.
     if (!tree.has(system.id) && system.id !== ASTEROID_DOT_BANK) throw new TypeError(`World file ${system.id} has no package (src/objects/${system.id}/object.json): run node site/build/prepare/system-packages.mts.`);
     holders.add(system.id);
     await writeIfChanged(memberFilePath(objectsRoot, system.id), `${JSON.stringify(system.file)}\n`);
+    await writeOrbits(system.id, system.file.orbitBanks);
   }
+  const unpinned = banks.filter(bank => !pinnedBy.has(bank.id)).map(bank => bank.id);
+  if (unpinned.length) throw new TypeError(`No world file pins the orbit bank of ${unpinned.slice(0, 5).join(', ')}${unpinned.length > 5 ? ` and ${unpinned.length - 5} more` : ''}: each orbit's body is in one file.`);
   for (const table of places) {
     placed.add(table.id);
     await writeIfChanged(placesFilePath(objectsRoot, table.id), `${JSON.stringify(table.file)}\n`);
   }
-  // A package that holds no members or places any more loses its file, and the Sun's old folder of them goes.
+  // A package that holds no members, places or orbit any more loses its file, and the Sun's old folders of them go.
   for (const entry of await readdir(objectsRoot, { withFileTypes: true })) {
-    if (entry.isDirectory() && !holders.has(entry.name)) await rm(memberFilePath(objectsRoot, entry.name), { force: true });
-    if (entry.isDirectory() && !placed.has(entry.name)) await rm(placesFilePath(objectsRoot, entry.name), { force: true });
+    if (!entry.isDirectory()) continue;
+    if (!holders.has(entry.name)) await rm(memberFilePath(objectsRoot, entry.name), { force: true });
+    if (!placed.has(entry.name)) await rm(placesFilePath(objectsRoot, entry.name), { force: true });
+    const directory = resolve(objectsRoot, entry.name, 'prepared', 'orbits'), kept = orbits.get(entry.name);
+    for (const name of await readdir(directory).catch(() => [] as string[])) if (!kept?.has(name)) await rm(resolve(directory, name));
   }
-  await rm(resolve(dirname(options.outputPath), 'world-systems'), { recursive: true, force: true });
+  for (const old of ['world-systems', 'world-orbits']) await rm(resolve(dirname(options.outputPath), old), { recursive: true, force: true });
+  await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
   // System framing's camera candidates, one file per host, read when navigation frames that system: each in the package of
   // the system the host is inside (its parent), which a host with members always is.
   const owned = new Map<string, Set<string>>();
   for (const view of worldSystemViews(prepared)) {
-    const owner = tree.get(view.id);
+    const owner = tree.get(view.id)?.parent;
     if (owner === undefined) throw new TypeError(`src/objects/${view.id}/object.json: ${view.id} draws a system, so it is inside its system object, but it names no parent: run node site/build/prepare/system-packages.mts.`);
     const file = resolve(objectsRoot, owner, 'prepared', systemViewFile(view.id));
     if (!tree.has(owner)) throw new TypeError(`The system view of ${view.id} belongs to ${owner}, which has no package (src/objects/${owner}/object.json): run node site/build/prepare/system-packages.mts.`);
@@ -292,9 +323,14 @@ async function packagedGalaxyStars(objectsRoot: string): Promise<ReadonlySet<str
   return new Set(rows.map(row => row.slice(0, row.indexOf(','))));
 }
 
-/** `world-context.json` → `world-index.json`, beside it: the build's table of the world's order and the rows entries carry. */
-export function worldIndexPath(outputPath: string): string {
-  return resolve(dirname(outputPath), 'world-index.json');
+/** The world file every page reads: the root object's prepared `world.json` (frame, camera and sky facts and the focus). */
+export function worldSummaryPath(objectsRoot: string): string {
+  return resolve(objectsRoot, OBJECT_TREE_ROOT, 'prepared', 'world.json');
+}
+
+/** The build's table of the world's order and the rows entries carry: the root object's prepared `world-index.json`. */
+export function worldIndexPath(objectsRoot: string): string {
+  return resolve(objectsRoot, OBJECT_TREE_ROOT, 'prepared', 'world-index.json');
 }
 
 /** A holder's members: its own package's prepared file (`src/objects/<holder>/prepared/members.json`). */
@@ -307,14 +343,9 @@ export function placesFilePath(objectsRoot: string, objectId: string): string {
   return resolve(objectsRoot, objectId, 'prepared', 'places.json');
 }
 
-/** `world-context.json` → `world-orbits/`, beside it: `<orbit centre id>.bin` per centre. */
-export function worldOrbitsDirectory(outputPath: string): string {
-  return resolve(dirname(outputPath), 'world-orbits');
-}
-
-/** `world-context.json` → `world-context-summary.json`, beside it. */
-export function worldContextSummaryPath(outputPath: string): string {
-  return outputPath.replace(/\.json$/, '-summary.json');
+/** A body's orbit bank: in the package of the object whose file pins it (`src/objects/<holder>/prepared/orbits/<body>.bin`). */
+export function orbitBankPath(objectsRoot: string, holderId: string, bodyId: string): string {
+  return resolve(objectsRoot, holderId, 'prepared', 'orbits', `${bodyId}.bin`);
 }
 
 async function writeIfChanged(path: string, contents: string | Uint8Array): Promise<void> {

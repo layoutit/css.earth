@@ -2,7 +2,7 @@ import { startupFetch } from './startup-requests.mts';
 import { readWorldPlace } from './object-entries.mts';
 
 /** The world summary's address: bundled by Vite for the browser, the checked-in file in Node (`world-context-plan.mts`). */
-export const WORLD_SUMMARY_SOURCE = new URL('../src/objects/sun/prepared/world-context-summary.json', import.meta.url);
+export const WORLD_SUMMARY_SOURCE = new URL('../src/objects/observable-universe/prepared/world.json', import.meta.url);
 
 /** The files every page reads at startup, together in one response, root first (`pages/world/anywhere.json.ts`). */
 export const WORLD_ANYWHERE_SOURCE = '/world/anywhere.json';

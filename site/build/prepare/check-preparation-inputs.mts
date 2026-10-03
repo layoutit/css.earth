@@ -37,10 +37,11 @@ export async function textBudgetFindings(ids: readonly string[], projectRoot = r
   return findings;
 }
 
-/** The files the world step rewrites before pins reads them (site/build/prepare/prepare-spatial-context.ts): the Sun's, and
- * each holder's members (`members.json`). */
+/** The files the world step rewrites before pins reads them (site/build/prepare/prepare-spatial-context.ts): the Sun's
+ * full context, the root object's summary and index, and each object's members, places, system views, orbit banks and
+ * plain-dot stars. */
 export const worldStepOutput = ({ location, filename }: InventoryAsset) =>
-  location === 'prepared' && /^(?:world-context(?:-summary)?\.json|world-orbits\/|views\/|members\.json$)/u.test(filename);
+  location === 'prepared' && /^(?:world-context\.json$|world\.json$|world-index\.json$|orbits\/|views\/|members\.json$|places\.json$|plain-stars\.bin$)/u.test(filename);
 
 /** Restore from R2 each inventoried file of `id` whose local copy is missing or differs from its inventory, leaving the
  * ones `keep` names. Returns the restored files as `<location>/<filename>`. */
@@ -66,8 +67,8 @@ export async function missingPreparedFiles(ids: readonly string[], { projectRoot
   }
   const missing: string[] = [];
   for (const asset of await inventoryAssets(projectRoot, objects, { location: 'prepared' })) {
-    // The Sun's world files are the bake's own output: its world and pins steps rebuild them, as restoreDriftedFiles leaves them too.
-    if ((asset.id === 'sun' || asset.filename === 'members.json' || asset.filename.startsWith('views/')) && worldStepOutput(asset)) continue;
+    // The world files are the bake's own output: its world and pins steps rebuild them, as restoreDriftedFiles leaves them too.
+    if (worldStepOutput(asset)) continue;
     const size = await stat(asset.file).then(found => found.size, (error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return -1; throw error; });
     if (size !== asset.bytes) missing.push(`${asset.id}/prepared/${asset.filename}`);
   }
@@ -81,7 +82,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const findings = await textBudgetFindings(ids), missing = await missingPreparedFiles(ids);
   if (missing.length) {
     console.error(`${missing.length} prepared file(s) of other objects are missing or the wrong size (${missing.slice(0, 3).join(', ')}${missing.length > 3 ? ', …' : ''}). `
-      + 'The bake rebuilds the catalogue and the Sun\'s world files from them, so it stops here. Restore them first: pnpm setup:assets, then pnpm prepare:object-json.');
+      + 'The bake rebuilds the catalogue and the world files from them, so it stops here. Restore them first: pnpm setup:assets, then pnpm prepare:object-json.');
     process.exitCode = 1;
   } else if (findings.length) {
     console.error(`Reader text breaks its budgets; fix it before the bake, or the text step refuses it after:\n${findings

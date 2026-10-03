@@ -11,8 +11,8 @@ import { createWorldContextPlannerClient, type WorldPlannerWorker } from './worl
 const objects = new URL('../../../../../src/objects/', import.meta.url);
 const json = async (path: string): Promise<Record<string, unknown>> => JSON.parse(await readFile(new URL(path, objects), 'utf8')) as Record<string, unknown>;
 // The build's index of the world: its order and every object with a file, from the root of the tree down; a page never reads it.
-const index = parsePreparedWorldIndex(await json('sun/prepared/world-index.json'));
-const root = parsePreparedWorldContextSummary(await json('sun/prepared/world-context-summary.json'));
+const index = parsePreparedWorldIndex(await json('observable-universe/prepared/world-index.json'));
+const root = parsePreparedWorldContextSummary(await json('observable-universe/prepared/world.json'));
 let summary: PreparedWorldContext = root;
 for (const id of index.files) {
   const file = await json(`${id}/prepared/members.json`);

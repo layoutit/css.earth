@@ -4,9 +4,10 @@ import { gunzipSync } from 'node:zlib';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { decodeCatalogueBankBinary, parseCataloguePoints, parseCompleteWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldIndex } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
+import { OBJECTS } from '../objects.mts';
 const test = sourceTest();
 
-const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
+const prepared = new URL('../../src/objects/observable-universe/prepared/', import.meta.url);
 const json = async (name: string) => JSON.parse(await readFile(new URL(name, prepared), 'utf8')) as unknown;
 /** The plain-dot stars of a whole world: a star drawn as a plain dot that orbits nothing and that nothing is bound to. */
 const plainStars = (whole: { readonly bodies: readonly { id: string; plainDot?: boolean; classification?: string; orbit?: unknown; boundTo?: { hostId: string } }[] }) => {
@@ -15,7 +16,7 @@ const plainStars = (whole: { readonly bodies: readonly { id: string; plainDot?: 
 };
 
 test('a plain-dot star is never a body of a file read at startup; one nothing orbits has its row in the index, one with planets is in its system\'s file', async () => {
-  const raw = await json('world-context-summary.json'), summary = parsePreparedWorldContextSummary(raw);
+  const raw = await json('world.json'), summary = parsePreparedWorldContextSummary(raw);
   const rawIndex = await json('world-index.json'), index = parsePreparedWorldIndex(rawIndex);
   const read = (id: string) => json(`../../${id}/prepared/members.json`);
   const whole = await parseCompleteWorldContext(raw, read, rawIndex);
@@ -42,8 +43,8 @@ test('a plain-dot star is never a body of a file read at startup; one nothing or
   await assert.rejects(parseCompleteWorldContext(raw, copy, rawIndex), /holds [a-z0-9-]+, which another file holds too/u);
 });
 
-test('every plain-dot star is a dot once: of the Milky Way\'s own bank when the galaxy holds it, else of the world\'s banks', async () => {
-  const raw = await json('world-context-summary.json'), summary = parsePreparedWorldContextSummary(raw);
+test('every plain-dot star is a dot once: of the Milky Way\'s own bank when the galaxy holds it, else of the bank of the galaxy it is inside', async () => {
+  const raw = await json('world.json'), summary = parsePreparedWorldContextSummary(raw);
   const rawIndex = await json('world-index.json');
   const whole = await parseCompleteWorldContext(raw, id => json(`../../${id}/prepared/members.json`), rawIndex);
   const listed = new Set(plainStars(whole));
@@ -59,15 +60,17 @@ test('every plain-dot star is a dot once: of the Milky Way\'s own bank when the 
   }
   assert.ok(summary.dotBanks?.length);
   const points: { positionM: number[]; toleranceM: number }[] = [];
-  for (const id of summary.dotBanks!) {
-    const name = `${id}.bin`, bank = parseCataloguePoints(decodeCatalogueBankBinary(unpackPreparedBinary(await readFile(new URL(name, prepared)), name), name), name);
-    assert.equal(bank.id, id);
+  // Each bank is in the package of the galaxy its stars are inside.
+  for (const owner of summary.dotBanks!) {
+    const name = `${owner}/prepared/plain-stars.bin`, bank = parseCataloguePoints(decodeCatalogueBankBinary(unpackPreparedBinary(await readFile(new URL(`../../${name}`, prepared)), name), name), name);
+    assert.equal(bank.id, 'plain-stars');
+    assert.equal(OBJECTS.find(object => object.id === owner)?.classification, 'galaxy', `${owner} is a galaxy`);
     for (const point of bank.points) points.push({ toleranceM: bank.frame.metersPerUnit * 1e-4,
       positionM: point.positionUnits.map((value, axis) => value * bank.frame.metersPerUnit + bank.frame.originM[axis]!) });
   }
   const outside = whole.bodies.filter(body => listed.has(body.id) && !galaxy.has(body.id));
   assert.ok(galaxy.size > 0 && outside.length > 0, 'stars of the galaxy and stars of other galaxies');
-  assert.equal(points.length, outside.length, 'the world\'s banks hold the stars the galaxy\'s table does not name, and no other');
+  assert.equal(points.length, outside.length, 'the other galaxies\' banks hold the stars the Milky Way\'s table does not name, and no other');
   for (const body of outside) {
     assert.ok(points.some(point => point.positionM.every((value, axis) => Math.abs(value - body.positionM[axis]!) <= point.toleranceM)), `${body.id} has its dot`);
   }

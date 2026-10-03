@@ -49,7 +49,7 @@ async function readNodeJson(path: string): Promise<unknown> {
 }
 async function readPreparedWorldContext(): Promise<unknown> {
   // Node tools, tests and the prerender build read the checked-in file directly.
-  if (node) return readNodeJson('src/objects/sun/prepared/world-context-summary.json');
+  if (node) return readNodeJson('src/objects/observable-universe/prepared/world.json');
   const response = await startupFetch(source);
   if (!response.ok) throw new Error(`Prepared world context request failed: ${response.status}.`);
   return response.json();
@@ -61,8 +61,8 @@ async function fetchJson(url: string): Promise<unknown> {
 }
 
 const summary = parsePreparedWorldContextSummary(startup ? startup.summary : await readPreparedWorldContext());
-/** The world's own dot banks (`pages/world/dots/[id].bin.ts`), as the bake names them in the summary: the stars drawn as
- * plain dots, near the Sun and in other galaxies, written by the bake as `plainStarDotBanks`. */
+/** The objects with a bank of plain-dot stars (`pages/world/dots/[id].bin.ts`), as the bake names them in the summary: each
+ * galaxy's stars the map draws as plain dots, in that galaxy's own package (`plainStarDotBank`). */
 export const WORLD_DOT_BANKS: readonly string[] = summary.dotBanks ?? [];
 
 const loaded = new Set<string>(), loading = new Map<string, Promise<unknown>>();
@@ -105,7 +105,7 @@ export let APPLICATION_WORLD_INDEX: PreparedWorldIndex | null = null;
 /** The file each body's row is in, in Node only, as the files read say (a plain-dot star with nothing round it is its own). */
 export const APPLICATION_WORLD_FILE_OF = new Map<string, string>();
 if (node) {
-  const index = await readNodeJson('src/objects/sun/prepared/world-index.json');
+  const index = await readNodeJson('src/objects/observable-universe/prepared/world-index.json');
   APPLICATION_WORLD_INDEX = parsePreparedWorldIndex(index);
   const files = new Map(await Promise.all(APPLICATION_WORLD_INDEX.files.map(async id => [id, await readNodeJson(`src/objects/${id}/prepared/members.json`)] as const)));
   for (const [id, file] of files) for (const body of rowIds(file)) APPLICATION_WORLD_FILE_OF.set(body, id);
