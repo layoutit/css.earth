@@ -58,3 +58,15 @@ test('a new law replaces the earlier one: its table, inputs and sentences leave,
   await starLimb(star.root, ['a-star'], { archive });
   assert.deepEqual(await Promise.all(paths.map(star.read)), first);
 });
+
+test('a law a paper measured on the star replaces the model grid and leaves the cited gravity as it is', async t => {
+  const star = await starWithEarlierLaw();
+  t.after(() => rm(star.root, { recursive: true, force: true }));
+  await writeFile(join(star.root, star.source, 'photometry/a-paper-limb-darkening.json'), `${JSON.stringify({ schema: 'cssearth-published-limb-darkening@1', objectId: 'a-star', law: 'power',
+    source: 'A Paper (2017), Table 3 (https://doi.org/10.1000/example)', band: 'H band; not a visible band', alpha: { value: 0.14, uncertainty: 0.005, cell: 'alpha = 0.14 ± 0.005' } }, null, 2)}\n`);
+  const [result] = await starLimb(star.root, ['a-star'], { archive });
+  assert.equal(result?.limb, 'published');
+  assert.deepEqual(await readdir(join(star.root, star.source, 'photometry')), ['a-paper-limb-darkening.json'], 'the model table is removed');
+  assert.match(await star.read(`${star.source}/preparation/raster.json`), /"published": true/u);
+  assert.deepEqual(JSON.parse(await star.read(`${star.source}/measurements.json`)), { effectiveTemperatureK: 6432, surfaceGravityLogg: 4.31, surfaceGravitySource: 'a paper' });
+});

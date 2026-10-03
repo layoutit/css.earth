@@ -95,10 +95,16 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     process.stdout.write(`${results.map(result => `${result.id}: ${result.limb}${result.gravity ? `, log g ${result.gravity}` : ''}${result.color ? `, color ${result.color}` : ''}`).join('\n')}\n`);
     const changed = results.filter(result => !result.limb.startsWith('NONE')).map(result => result.id);
     if (changed.length !== results.length) process.exitCode = 1;
-    // The navigation marker is the color dataset as a disc under its law, so a changed law redraws it: for the markers context-markers.mts
-    // draws, as each manifest says. A marker another author draws (a reconstructed image, a spectrum's own disc) is that author's.
+    // The navigation marker is the color dataset as a disc under its law, so a changed law redraws it: for the markers each manifest
+    // says are that disc (context-markers.mts, or the measured-spectrum author, which draws the same disc). A marker made from a
+    // reconstructed image is its own author's.
     const { readFile } = await import('node:fs/promises'), drawnHere: string[] = [];
-    for (const id of changed) if ((await readFile(resolve('src/objects', id, 'source/manifest.json'), 'utf8')).includes('"generator": "packages/telescope-cli/src/source-authoring/context-markers.mts"')) drawnHere.push(id);
+    const DISC_AUTHORS = ['packages/telescope-cli/src/source-authoring/context-markers.mts', 'packages/telescope-cli/authoring/stellar-spectra/author.mts'];
+    for (const id of changed) {
+      const manifest = JSON.parse(await readFile(resolve('src/objects', id, 'source/manifest.json'), 'utf8')) as { inputs?: { path?: string; generator?: string }[]; generatedIntermediates?: { path?: string; generator?: string }[] };
+      const marker = [...manifest.generatedIntermediates ?? [], ...manifest.inputs ?? []].find(entry => entry.path === 'presentation/context.png');
+      if (marker?.generator && DISC_AUTHORS.includes(marker.generator)) drawnHere.push(id);
+    }
     if (drawnHere.length) { const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers(drawnHere); }
     if (args.includes('--bake') && changed.length) {
       // A hand-made package's downloads may be missing from this checkout; restore them before the bake needs them.

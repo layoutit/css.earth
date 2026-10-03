@@ -61,7 +61,7 @@ async function publishedLaw(root: string, id: string): Promise<LimbChoice | null
 
 /** Insert or replace the README's limb paragraph, and drop the sentences that said no law was drawn. */
 function readmeWithLimb(readme: string, paragraph: string, problem: string) {
-  const lines = stale(readme).replace(/[^\S\n]+$/gmu, '').split('\n').filter(line => !line.startsWith('**Limb.**') && !line.startsWith('- **Model limb.**'));
+  const lines = stale(readme).replace(/[^\S\n]+$/gmu, '').split('\n').filter(line => !line.startsWith('**Limb.**') && !line.startsWith('- **Model limb.**') && !line.startsWith('- **Measured limb, other band.**'));
   const evidence = lines.indexOf('## Evidence'), problems = lines.indexOf('## Known problems');
   if (evidence >= 0) lines.splice(evidence, 0, paragraph, ''); else lines.push('', paragraph);
   const at = lines.indexOf('## Known problems');
@@ -164,13 +164,16 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
     }
     bindInputs(files, id);
     const measured = limb.limbDarkening && 'published' in limb.limbDarkening;
+    // The gravity a grid law was read at; a published law is read at none.
+    const readAt = gravity && limb.grid ? ` Gravity: ${gravity.sentence}.` : '';
     files.set(`${o}/NOTICE.md`, `${String(files.get(`${o}/NOTICE.md`) ?? '').replace(/\n\nLimb darkening: [^\n]*/gu, '').trimEnd()}\n\n${limb.credit}\n`);
-    files.set(`${o}/README.md`, readmeWithLimb(String(files.get(`${o}/README.md`) ?? ''), `**Limb.** The disc is ${limb.sentence}.${gravity ? ` Gravity: ${gravity.sentence}.` : ''}`,
+    files.set(`${o}/README.md`, readmeWithLimb(String(files.get(`${o}/README.md`) ?? ''), `**Limb.** The disc is ${limb.sentence}.${readAt}`,
       measured ? '- **Measured limb, other band.** The law was measured or fixed outside the visible band the color is drawn in; the visible limb is not measured.' : `- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and ${gravity?.kind === 'bounded' ? 'a display gravity' : 'gravity'}, not a measurement of this star.`));
-    if (gravity && measurements.surfaceGravityLogg !== gravity.logg && gravity.kind !== 'bounded') { measurements.surfaceGravityLogg = gravity.logg; measurements.surfaceGravitySource = `${gravity.sentence}${gravity.url ? ` (${gravity.url})` : ''}`; files.set(`${s}/measurements.json`, json(measurements)); }
+    // The gravity on record is the one a grid law was read at. A published law is read at none, so the star's cited gravity stays.
+    if (gravity && limb.grid && measurements.surfaceGravityLogg !== gravity.logg && gravity.kind !== 'bounded') { measurements.surfaceGravityLogg = gravity.logg; measurements.surfaceGravitySource = `${gravity.sentence}${gravity.url ? ` (${gravity.url})` : ''}`; files.set(`${s}/measurements.json`, json(measurements)); }
     const ledgerPath = `${o}/investigations.json`, ledger = files.has(ledgerPath) ? read(ledgerPath) : { schema: INVESTIGATION_LEDGER_SCHEMA, objectId: id, entries: [] };
     ledger.entries = [...ledger.entries.filter((entry: { id: string }) => entry.id !== 'limb-darkening'), { id: 'limb-darkening', subject: 'Limb darkening', status: 'included',
-      finding: `The disc is ${limb.sentence}.${gravity ? ` Gravity: ${gravity.sentence}.` : ''}`, evidence: [...new Set([...(limb.inputs ?? []).map(input => String(input.origin)).filter(Boolean), ...(gravity?.url ? [gravity.url] : [])])] }];
+      finding: `The disc is ${limb.sentence}.${readAt}`, evidence: [...new Set([...(limb.inputs ?? []).map(input => String(input.origin)).filter(Boolean), ...(gravity?.url && limb.grid ? [gravity.url] : [])])] }];
     files.set(ledgerPath, json(ledger));
     for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
     for (const path of retired) await rm(resolve(root, path), { force: true });
