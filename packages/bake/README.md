@@ -138,3 +138,8 @@ Bake has no renderer dependency or imports. Renderer bundling belongs to the lab
 
 Surface geometry and ellipsoid patches live in internal `src/surface-geometry/`; polar sprites, lighting,
 coverage, atmosphere and interior raster algorithms live in internal `src/baking/`. Tests stay beside them.
+
+Authored body maps and raster recipes are read by `readBodyMapProduct`
+(`@cssearth/bake/objects/layers/observation`) and `readRasterRecipe` (`@cssearth/bake/raster`).
+These supply surface-resolution calculation and lighting-bank resolution to the single parsers in
+`@cssearth/objects`, which also owns their types, schema identifiers, resolution evidence and limb-model references.

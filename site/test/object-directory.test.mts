@@ -71,3 +71,13 @@ test('a page reads the one object a body is inside that takes the view, and the 
   assert.equal(await loadHolder('observable-universe', read), null);
 });
 
+
+test('reading what a star is inside loads the star too, so the chain out of it is known on a page that has not mounted it', async () => {
+  const read = async (id: string) => { const entry = objectEntry(id); return entry && { ...(entry as object), ancestors: ancestorsOf(id).map(object => object.id) }; };
+  // A planet's page reads its own entry; the zoom out of it is centred on its star, which the page has not mounted.
+  assert.equal(knownObject('trappist-1'), undefined);
+  const chain = await loadAncestors('trappist-1', read);
+  assert.equal(knownObject('trappist-1')?.id, 'trappist-1');
+  assert.deepEqual(chain.map(object => object.id), ancestorsOf('trappist-1').map(object => object.id));
+  assert.deepEqual(chain.map(object => object.id).slice(0, 2), ['trappist-1-system', 'milky-way']);
+});

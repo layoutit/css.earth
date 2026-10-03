@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { BODY_MAP_SCHEMA } from '@cssearth/objects';
 /** Write a body's ALMA thermal maps from its record, src/objects/<id>/source/preparation/alma-thermal-maps.json.
  *
  *   node packages/telescope-cli/authoring/interferometry/author-thermal-maps.mts <object id> [--check] [--raw <dir>]...
@@ -30,10 +31,11 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { ALMA, horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
 import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
-import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
+import { combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
-import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
+import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../../..');
 /** The FITS ORIGIN of a cutout. A FITS string value holds at most 68 characters, so this keeps the short label it was written with. */
@@ -135,12 +137,12 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
     const output = requireString(entry.output, 'output'), fits = bodyMapFits(map, { TELESCOP: 'ALMA', OBJECT: requireString(entry.target), QUANTITY: quantity, NSESSION: String(placed.length) },
       [{ name: quantity, units, values: map.depth }, { name: `${quantity} ERROR`, units, values: map.error }]);
     written.set(resolve(source, output), fits);
-    const unqualifiedMap = { schema: 'cssearth-body-map@1',
+    const unqualifiedMap = { schema: BODY_MAP_SCHEMA,
       definition: definitionAt(frequencies[0]!), frame,
       grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, value: quantity, uncertainty: `${quantity} ERROR` },
       mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) } as const;
     const resolution = bindMapResolution(unqualifiedMap, 'calibrated', 'applied-restoring-beam', sessions), mapProduct = resolution.product;
-    const metadata = Buffer.from(formatBodyMapProduct(mapProduct));
+    const metadata = Buffer.from(renderBodyMapProduct(mapProduct));
     written.set(resolve(source, `${output}.body-map.json`), metadata);
     written.set(resolve(dirname(resolve(source, output)), resolution.output.path), resolution.output.bytes);
     written.set(resolve(source, `${output}.product.json`), Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software, [resolution.output]))));

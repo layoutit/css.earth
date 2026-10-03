@@ -1,4 +1,4 @@
-import { ACQUISITION_PLAN_SCHEMA, type AcquisitionOperation, type AcquisitionPlan } from '@cssearth/objects';
+import { parseAcquisitionPlan as parseSharedAcquisitionPlan, type AcquisitionOperation, type AcquisitionPlan } from '@cssearth/objects';
 import sharp from 'sharp';
 import { lstat, readFile, mkdir, rename, rm } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
@@ -18,36 +18,8 @@ import { prepareDskMesh, validateDskMeshRecipe } from './dsk-mesh.ts';
 import { missingCoverageColor } from '../../raster/index.ts';
 export interface AcquisitionTransport { fetch(url:string,init?:RequestInit):Promise<Response>; }
 const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected acquisition object.');return value as Record<string,unknown>;};
-export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
- // An empty plan is legal: a body whose every declared source input is already
- // tracked needs no reacquisition operation at all (e.g. eris, haumea, makemake).
- const plan=record(value);if(plan.schema!==ACQUISITION_PLAN_SCHEMA||!Array.isArray(plan.operations))throw new TypeError('Invalid acquisition plan.');
- for(const value of plan.operations){const step=record(value);if(!['geotiff-grid','geotiff-image','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','satellite-catalog','zip-member','tar-gz-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
-  if(!['geotiff-grid','geotiff-image','download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','tar-gz-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','horizons-time-list'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
-  for(const key of ['path','expectedPath','fileSource','recipePath','member'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}
-  if(['geotiff-grid','geotiff-image','download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','tar-gz-member','satellite-catalog','tile-mosaic','horizons-time-list'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
-  if(step.kind==='horizons-time-list'){const parameters=record(step.parameters);if(Object.values(parameters).some(value=>typeof value!=='string')||'TLIST' in parameters||!Array.isArray(step.epochs)||!step.epochs.length||step.epochs.some(epoch=>typeof epoch!=='number'||!Number.isFinite(epoch)))throw new TypeError('Invalid Horizons time list.');}
-  if(step.kind==='tar-gz-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.member!=='string'||!/^[A-Za-z0-9_. /-]+$/.test(step.member)||step.member.startsWith('-')||step.member.split('/').includes('..')))throw new TypeError('Invalid tar.gz member.');
-  if(step.kind==='zip-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.member!=='string'||!/^[A-Za-z0-9_. /-]+$/.test(step.member)||step.member.startsWith('-')))throw new TypeError('Invalid ZIP member.');
-  if(step.headers!==undefined){const headers=record(step.headers);if(Object.values(headers).some(value=>typeof value!=='string'))throw new TypeError('Acquisition headers must be text.');}
-  if(step.kind==='request-download'||step.kind==='verify-request'){const form=record(step.form);if(Object.values(form).some(value=>typeof value!=='string'))throw new TypeError('Acquisition form values must be text.');}
-  if(step.kind==='request-download'&&(step.trimEnd!==undefined&&typeof step.trimEnd!=='boolean'||step.appendText!==undefined&&typeof step.appendText!=='string'))throw new TypeError('Invalid response text transformation.');
-  if(step.kind==='download'&&step.encoding!==undefined&&!['gzip','pretty-json'].includes(String(step.encoding)))throw new TypeError('Unknown source download encoding.');
-  if(step.kind==='download'&&step.expectedJsonFields!==undefined)record(step.expectedJsonFields);
-  if(step.kind==='request-download'&&(step.requiredPrefix!==undefined&&typeof step.requiredPrefix!=='string'||step.requiredText!==undefined&&(!Array.isArray(step.requiredText)||step.requiredText.some(value=>typeof value!=='string'))||step.numericLineCount!==undefined&&(!Number.isSafeInteger(step.numericLineCount)||Number(step.numericLineCount)<1)))throw new TypeError('Invalid source response checks.');
-  if(step.kind==='request-download'&&step.replacements!==undefined){if(!Array.isArray(step.replacements))throw new TypeError('Response replacements must be an array.');for(const value of step.replacements){const replacement=record(value);if(typeof replacement.pattern!=='string'||typeof replacement.replacement!=='string'||replacement.flags!==undefined&&(typeof replacement.flags!=='string'||!/^[gimu]*$/.test(replacement.flags)))throw new TypeError('Invalid response text replacement.');new RegExp(replacement.pattern,replacement.flags as string|undefined);}}
-  if(step.kind==='json-document')record(step.value);
-  if(step.kind==='hrii-facets'&&(typeof step.recipePath!=='string'||!['fields','report'].includes(String(step.product))))throw new TypeError('Invalid HRII facet acquisition.');
-  if(['geotiff-grid','geotiff-image'].includes(String(step.kind))&&typeof step.recipePath!=='string')throw new TypeError('GeoTIFF grid recipe is missing.');
-  if(['spectral-band-maps','mapped-composition'].includes(String(step.kind))&&(typeof step.recipePath!=='string'||typeof step.product!=='string'||!/^[a-z][a-z0-9-]*$/.test(step.product)))throw new TypeError('Invalid numeric-map acquisition.');
-  if(step.kind==='dsk-mesh')validateDskMeshRecipe(step.recipe);
-  if(step.kind==='satellite-catalog'&&typeof step.recipePath!=='string')throw new TypeError('Satellite catalog recipe is missing.');
-  if(step.kind==='tile-mosaic')for(const key of ['tileSize','columns','rows','dataWidth','dataHeight','width','height','concurrency'])if(typeof step[key]!=='number'||!Number.isSafeInteger(step[key])||step[key]<=0)throw new TypeError(`Invalid mosaic ${key}.`);
-  if(step.kind==='tile-mosaic'&&step.missingCoverage!==undefined&&(step.missingCoverage!=='transparent'||step.dataWidth!==step.width||step.dataHeight!==step.height))throw new TypeError(`${String(step.path)}: missingCoverage must be "transparent" and needs the mosaic kept at its data size, not ${String(step.missingCoverage)} at ${String(step.dataWidth)}x${String(step.dataHeight)} to ${String(step.width)}x${String(step.height)}.`);
-  if(step.kind==='verify-request'){record(step.form);if(typeof step.expectedPath!=='string'||!['trim','numeric-lines','before-marker'].includes(String(step.selector)))throw new TypeError('Invalid source response comparator.');if(step.selector==='before-marker'&&typeof step.marker!=='string')throw new TypeError('Source marker is missing.');}
-  if(step.kind==='verify-json')record(step.fields);
- }
- return plan as unknown as AcquisitionPlan;
+export function parseAcquisitionPlan(value: unknown): AcquisitionPlan {
+ return parseSharedAcquisitionPlan(value, { containedPath: path => containedPath('.', path), validateDskMeshRecipe });
 }
 
 // The mirror is opt-in (default null): a caller must name RUNTIME_ASSET_ORIGIN explicitly to use it. Defaulting to
@@ -57,7 +29,11 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
 const archiveCacheName=(url:string)=>url.replace(/^https?:\/\//,'').replace(/[^A-Za-z0-9._-]+/g,'_').slice(-200);
 const rangeHeaders=(entry:SourceEntry,headers?:Record<string,string>)=>entry.range?{...headers,Range:rangeRequestHeader(entry.range)}:headers;
 const rangedEntry=(manifest:SourceManifest,path:string)=>[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].some(entry=>entry.path===path&&entry.range!==undefined);
-export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport={fetch},mirrorOrigin=null,objectId=basename(dirname(sourceRoot))}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport;mirrorOrigin?:string|null;objectId?:string}) {
+// An archive such as Zenodo answers 403 to a request that does not say who asks, the runtime's default user agent included. The
+// default transport names this project; a step's own headers win.
+const SOURCE_USER_AGENT='cssEarth/0.6 (https://github.com/layoutit/css.earth; source restore)';
+const NAMED_TRANSPORT:AcquisitionTransport={fetch:(url,init)=>fetch(url,{...init,headers:{'user-agent':SOURCE_USER_AGENT,...Object.fromEntries(new Headers(init?.headers))}})};
+export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport=NAMED_TRANSPORT,mirrorOrigin=null,objectId=basename(dirname(sourceRoot))}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport;mirrorOrigin?:string|null;objectId?:string}) {
  const selected=plan.operations.filter(step=>step.groups.includes(group));if(!selected.length)throw new Error(`Acquisition group ${group} is undeclared.`);
  const request=async(url:string,init?:RequestInit)=>{const response=await transport.fetch(url,init);if(!response.ok)throw new Error(`Source request failed ${response.status}: ${url}.`);return response;};
  const bytes=async(url:string)=>new Uint8Array(await(await request(url)).arrayBuffer());

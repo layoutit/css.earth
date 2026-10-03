@@ -1,17 +1,19 @@
 import { validateCapabilityRequest, PRODUCT_KINDS, REQUESTED_RESULTS, type ProductKind, type RequestedResult, type CapabilityRequest } from './recipe-request.mts';
 import { inputWavelengths } from './recipe-request.mts';
 import { skyCatalogueEntry, WORKSPACE } from '@cssearth/telescope/node';
-import { parseLimits, parseRegion } from '@cssearth/telescope/node';
+import { parseLimits } from '@cssearth/telescope/node';
+import { parseRegion } from '@cssearth/objects';
 import { loadVoInputs, voCandidates } from './vo/bridge.mts';
 import type { DiscoveryRequest } from './vo/discovery.mts';
 import { loadQualifiedObservations, matchingProduct } from './qualified-observations.mts';
 import { assessInput, assessRequest } from './request-satisfaction.mts';
-import { parseAcceptedAssumptions } from '@cssearth/bake/objects/layers/observation';
+import { parseAcceptedAssumptions } from '@cssearth/objects';
 import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { flagValue, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readJsonSource } from '@cssearth/bake/objects/sources';
-import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
+import { readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
+
 import type { SourceIntakeIssue } from './source-intake.mts';
 import { loadSourceProducts, sourceQualifiedObservations } from './source-products.mts';
 import { loadTargetAssociations, parseTargetAssociationSources } from '@cssearth/telescope/node';
@@ -190,7 +192,7 @@ function resolveEvidence(inputs: QueryInputs, modes: readonly TargetMode[]): { r
   const attached = new Map<TargetMode, AttachedEvidence>(modes.map(mode => [mode, { bodyMaps: [], investigations: [] }]));
   const unassigned: UnassignedEvidence[] = [];
   for (const { path, value } of inputs.bodyMaps) {
-    const map = parseBodyMapProduct(value);
+    const map = readBodyMapProduct(value);
     for (const observation of map.observations) {
       const namedMode = observation.mode ?? observation.instrument;
       const { mode, couldMean } = resolveMode(observation.telescope, namedMode, modes);

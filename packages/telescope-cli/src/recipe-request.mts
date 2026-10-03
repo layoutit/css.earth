@@ -1,5 +1,5 @@
-import type { ResolutionAssumption } from '@cssearth/bake/objects/layers/observation';
-import { parseLimits, parseRegion } from '@cssearth/telescope/node';
+import { parseRegion, type ResolutionAssumption } from '@cssearth/objects';
+import { parseLimits } from '@cssearth/telescope/node';
 /** Band depth has three input windows. Keep their enclosing reduction range out of the measurement's band identity. */
 import { requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 export function inputWavelengths(request: CapabilityRequest): readonly [number,number] {
@@ -23,7 +23,7 @@ export type RequestedResult = typeof REQUESTED_RESULTS[number];
 
 
 export interface CapabilityRequest {
-  readonly region?: import('@cssearth/telescope/node').IcrsCircle;
+  readonly region?: import('@cssearth/objects').IcrsCircle;
   readonly spectralFrame?: 'barycentric';
   readonly transferLimits?: import('@cssearth/telescope/node').TransferLimits;
   readonly continuumMicrometres?: readonly [readonly [number,number],readonly [number,number]];

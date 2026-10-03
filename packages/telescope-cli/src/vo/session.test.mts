@@ -16,9 +16,10 @@ import { executeFamilyOperation } from '../family-operation.mts';
 import { explorationAnswer } from '../exploration.mts';
 import { binaryTableHdu, primaryHdu } from '@cssearth/bake/objects/raster';
 import { sessionRequest } from '../session.mts';
-import { parseSnapshot, normalizeSnapshot, SERVICES } from './discovery.mts';
+import { normalizeSnapshot, SERVICES } from './discovery.mts';
+import { parseSnapshot } from '@cssearth/objects';
 import { planAccess } from './access.mts';
-import { jsonValue } from '@cssearth/telescope/node';
+import { jsonValue } from '@cssearth/objects';
 import { qualifyVoProduct } from './qualify.mts';
 import type { QueryInputs } from '../query-contract.mts';
 

@@ -152,32 +152,6 @@
       }
     },
     {
-      "id": "iota-horologii-claret-2017-limb-darkening",
-      "path": "photometry/claret-2017-tess-quadratic.tsv",
-      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/600/A30/tableab&-out.max=200&Teff=6000..6250&logg=4.0..4.5&Z=0&-out=logg,Teff,Z,L/HP,aLSM,bLSM,aPCM,bPCM,chi2,Type,Mod",
-      "credit": "Claret, A. (2017), A&A 600, A30: limb and gravity-darkening coefficients for the TESS satellite (VizieR J/A+A/600/A30, table ab)",
-      "license": "VizieR catalogue data, public with citation of the paper and CDS",
-      "licenseEvidence": [
-        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
-      ],
-      "acquisition": "VizieR ASU download in source/preparation/acquisition.json: the quadratic TESS coefficients of the grid nodes at 6000 to 6250 K, log g 4.0 to 4.5, solar metallicity.",
-      "redistribution": "Twenty-four catalogue rows, retained unchanged with their citation.",
-      "consumers": [
-        "assets",
-        "datasets"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-iota-horologii-claret-2017-limb-darkening",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "iota-horologii-zdi-epoch-01",
       "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_01.dat",
       "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
@@ -824,6 +798,32 @@
           }
         ]
       }
+    },
+    {
+      "id": "iota-horologii-claret-2011-limb-darkening",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75 (VizieR J/A+A/529/A75)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 6000..6250 K, log g 4..4.5, solar metallicity.",
+      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iota-horologii-claret-2011-limb-darkening",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -831,7 +831,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://gea.esac.esa.int/archive/",
-      "credit": "Photosphere color from the Gaia DR3 BP/RP spectrum, dimmed toward the limb by the Claret (2017) TESS law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "Photosphere color from the Gaia DR3 BP/RP spectrum, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -841,9 +841,9 @@
         "inputs": [
           "iota-horologii-stellar-color",
           "iota-horologii-gaia-dr3-xp-sampled",
-          "iota-horologii-claret-2017-limb-darkening",
           "iota-horologii-cie-1931-2deg-cmf",
-          "iota-horologii-preparation-raster"
+          "iota-horologii-preparation-raster",
+          "iota-horologii-claret-2011-limb-darkening"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

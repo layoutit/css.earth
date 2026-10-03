@@ -61,6 +61,9 @@
  * flattened, its measured pole up and its poles brighter than its equator. `radius` is then the volume-equivalent sphere of the fit's
  * two radii, and `spin` is not given: the fit holds the pole.
  *
+ * `whiteDwarf` ({ "atmosphere": "DA" | "DB" | "DBA", "source", "url" }), on a star or a companion, is a white dwarf's cited atmosphere
+ * class: its limb law is then read from the white-dwarf grid of that class (limb.mts), which no other grid replaces.
+ *
  * `aliases` lists the star's other designations (the catalogue's `aliases`: searchable, never a map label); `new-object --rename`
  * moves the old name there when a better designation exists (display-name.mts). `featured: true` makes the star a map target
  * (ring, name, click); without it a star is a plain dot, reachable through search.
@@ -74,6 +77,7 @@
  * A file may also hold `"pulsars": [ … ]`: neutron stars with a published hot-region map, written whole from cited values (pulsar.mts). */
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parsePulsarSpec, type PulsarSpec } from './pulsar.mts';
+import { WHITE_DWARF_ATMOSPHERES, type WhiteDwarfAtmosphere } from './limb.mts';
 import { DISC_BAND_COLOR_SCHEMA, parseDiscBandColorRecord } from '@cssearth/bake/objects/layers/observation';
 import { phaseCurveEntry, type PhaseCurveEntry } from './phase-curve-dataset.mts';
 
@@ -108,6 +112,8 @@ export interface StarSpec {
   /** A fast rotator's published Roche-von Zeipel fit: the record written beside the star, its paper, and the rotation period it prints (roche-shape.mts). */
   readonly gravityDarkening?: { readonly record: Readonly<Record<string, unknown>>; readonly credit: string; readonly url: string; readonly rotationPeriodHours?: number };
   readonly limb?: { readonly none: string };
+  /** A white dwarf's cited atmosphere class, which picks the grid its limb law is read from (limb.mts). */
+  readonly whiteDwarf?: WhiteDwarfSpec;
   /** `disagreement` says why the color and its cross-check differ by more than the agreement threshold, for the color record;
    * `companion` says what is known of a close, bright companion a double-star catalogue lists when a measured spectrum is kept
    * (companion-blend.mts). */
@@ -178,6 +184,15 @@ export interface HostedSpec {
   readonly blackHole?: true;
   /** Why a companion's color is a Planck spectrum at its temperature, when not because the archives cannot separate it. */
   readonly colorReason?: string;
+  /** A white dwarf's cited atmosphere class, which picks the grid its limb law is read from (limb.mts). */
+  readonly whiteDwarf?: WhiteDwarfSpec;
+}
+export interface WhiteDwarfSpec { readonly atmosphere: WhiteDwarfAtmosphere; readonly source: string; readonly url: string }
+export function whiteDwarfSpec(value: unknown, label: string): WhiteDwarfSpec {
+  const input = requireRecord(value, label), atmosphere = requireString(input.atmosphere, `${label}.atmosphere`), url = requireString(input.url, `${label}.url`);
+  if (!(WHITE_DWARF_ATMOSPHERES as readonly string[]).includes(atmosphere)) throw new TypeError(`${label}.atmosphere is ${WHITE_DWARF_ATMOSPHERES.join(', ')}, not ${atmosphere}: no other white-dwarf atmosphere has a limb-darkening grid here.`);
+  if (!/^https:\/\/\S+$/u.test(url)) throw new TypeError(`${label}.url must be an https URL, not ${url}.`);
+  return { atmosphere: atmosphere as WhiteDwarfAtmosphere, source: requireString(input.source, `${label}.source`), url };
 }
 const ELEMENT_KEYS = ['periodDays', 'semiMajorAxisStellarRadii', 'inclinationDegrees', 'eccentricity', 'argumentOfPeriapsisDegrees', 'transitTimeBmjdTdb', 'ascendingNodePositionAngleDegrees'];
 function orbitSpec(value: unknown, label: string): OrbitSpec {
@@ -210,7 +225,7 @@ function orbitSpec(value: unknown, label: string): OrbitSpec {
 function hostedSpec(value: unknown, kind: HostedSpec['kind'], label: string): HostedSpec {
   const input = requireRecord(value, label), id = requireString(input.id, `${label}.id`), at = (name: string) => `${id}.${name}`;
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: an id is lowercase letters, digits and hyphens.`);
-  const known = new Set(['id', 'name', 'description', 'order', 'paper', 'radius', 'mass', 'temperature', 'orbit', 'text', 'thermal', 'photometry', 'phaseCurves', 'blackHole', 'colorReason']), unknown = Object.keys(input).filter(key => !known.has(key));
+  const known = new Set(['id', 'name', 'description', 'order', 'paper', 'radius', 'mass', 'temperature', 'orbit', 'text', 'thermal', 'photometry', 'phaseCurves', 'blackHole', 'colorReason', 'whiteDwarf']), unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown fields ${unknown.join(', ')}.`);
   const paper = requireRecord(input.paper, at('paper')), orbit = orbitSpec(input.orbit, at('orbit'));
   const thermal = input.thermal === undefined ? undefined : thermalSpec(input.thermal, at('thermal'));
@@ -229,7 +244,9 @@ function hostedSpec(value: unknown, kind: HostedSpec['kind'], label: string): Ho
     ...(input.order === undefined ? {} : { order: requireFiniteNumber(input.order, at('order')) }), paper: { url: requireString(paper.url, at('paper.url')), credit: requireString(paper.credit, at('paper.credit')) },
     ...(input.radius === undefined ? {} : { radius: cited(input.radius, at('radius'), range.radius) }), ...(input.mass === undefined ? {} : { mass: cited(input.mass, at('mass'), range.mass) }),
     ...(input.temperature === undefined ? {} : { temperature: cited(input.temperature, at('temperature'), [100, 60000]) }), orbit, ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }), ...(thermal ? { thermal } : {}), ...(photometry ? { photometry } : {}), ...(phaseCurves ? { phaseCurves } : {}),
-    ...(blackHole ? { blackHole: true as const } : {}), ...(input.colorReason === undefined ? {} : { colorReason: requireString(input.colorReason, at('colorReason')) }) };
+    ...(blackHole ? { blackHole: true as const } : {}), ...(input.colorReason === undefined ? {} : { colorReason: requireString(input.colorReason, at('colorReason')) }),
+    ...(input.whiteDwarf === undefined ? {} : { whiteDwarf: whiteDwarfSpec(input.whiteDwarf, at('whiteDwarf')) }) };
+  if (out.whiteDwarf && (kind !== 'companion' || blackHole)) throw new TypeError(`${id}: whiteDwarf names a companion star's atmosphere.`);
   const fromArchive = 'archive' in orbit;
   if (blackHole) { if (!out.mass) throw new TypeError(`${id}: a black hole needs its cited mass.`); if ('record' in orbit) throw new TypeError(`${id}: a black hole's record is written here; the record route packages a star another owner records.`); }
   else if (!fromArchive && (!out.radius || !out.mass)) throw new TypeError(`${id}: give radius and mass with their sources; only an archive orbit supplies them.`);
@@ -265,7 +282,7 @@ export function parseStarSpec(value: unknown): StarSpec {
   const input = requireRecord(value, 'star spec'), id = requireString(input.id, 'id');
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a star id is lowercase letters, digits and hyphens.`);
   const at = (label: string) => `${id}.${label}`;
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'gravityRange', 'radialVelocity', 'distance', 'position', 'spin', 'gravityDarkening', 'limb', 'color', 'planets', 'companions', 'text', 'notes', 'aliases', 'featured', 'parent', 'boundTo']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'gravityRange', 'radialVelocity', 'distance', 'position', 'spin', 'gravityDarkening', 'limb', 'whiteDwarf', 'color', 'planets', 'companions', 'text', 'notes', 'aliases', 'featured', 'parent', 'boundTo']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown spec fields ${unknown.join(', ')}.`);
   const gaia = input.gaia === undefined ? undefined : requireString(input.gaia, at('gaia')), target = input.target === undefined ? undefined : requireString(input.target, at('target'));
@@ -330,6 +347,7 @@ export function parseStarSpec(value: unknown): StarSpec {
     // Out to a gigaparsec: the stars measured one by one in other galaxies are at most tens of megaparsecs away.
     ...(input.distance === undefined ? {} : { distance: cited(input.distance, at('distance'), [1, 1e9]) }), ...(position ? { position } : {}),
     ...(spin ? { spin } : {}), ...(gravityDarkening ? { gravityDarkening } : {}), ...(limb ? { limb } : {}), ...(color ? { color } : {}),
+    ...(input.whiteDwarf === undefined ? {} : { whiteDwarf: whiteDwarfSpec(input.whiteDwarf, at('whiteDwarf')) }),
     planets: input.planets === undefined ? [] : requireArray(input.planets, at('planets')).map((entry, i) => hostedSpec(entry, 'planet', `${at('planets')}[${i}]`)),
     companions: input.companions === undefined ? [] : requireArray(input.companions, at('companions')).map((entry, i) => hostedSpec(entry, 'companion', `${at('companions')}[${i}]`)),
     ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }),

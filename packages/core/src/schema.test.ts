@@ -30,3 +30,10 @@ describe('structural guards (the material-composition dialect)', () => {
     assert.equal(message(() => parse([], recipe)), 'Invalid recipe structure.');
   });
 });
+
+// Shared JSON data admits retained readonly records without requiring callers to copy them.
+it('JSON data accepts readonly nested source records', () => {
+  const source = { nested: [null, { value: 1 }] } as const;
+  const value: import('./schema.ts').JsonValue = source;
+  assert.equal(json(value), true);
+});

@@ -8,7 +8,7 @@
  */
 import { observerCamera, type BodyOrientation, type ObserverSighting } from '../../../cameras/index.ts';
 import { fitDiscCentre, projectBandMap, topRowFirst, type BodyMap, type DiscCentre } from './body-map.ts';
-import type { AngularResolution, BodyMapObservation } from './body-map-product.ts';
+import type { AngularResolution, BodyMapObservation } from '@cssearth/objects';
 
 const ARCSEC_PER_RADIAN = 206_264.806_247;
 const AU_KM = 1.495978707e8;

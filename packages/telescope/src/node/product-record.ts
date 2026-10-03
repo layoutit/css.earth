@@ -3,7 +3,7 @@
 import { copyFile, readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { canonical } from '@cssearth/core';
-import { parseProductRecord, PRODUCT_RECORD_SCHEMA, type ProductEvidence, type ProductInput, type ProductOutput, type ProductRecord, type ProductRun } from '../product-record.js';
+import { parseProductRecord, PRODUCT_RECORD_SCHEMA, type ProductEvidence, type ProductInput, type ProductOutput, type ProductRecord, type ProductRun } from '@cssearth/objects';
 
 /** One key for a run: the canonical text of its facts. Key order and input order do not change it, any value does. */
 export function runKey(run: ProductRun): string {

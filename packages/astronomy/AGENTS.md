@@ -5,9 +5,8 @@ the ephemeris series.
 
 ## Hard boundaries
 
-- **Zero dependencies.** Not "few". Zero. This package is imported by the
-  pipeline, by workers and by the renderer; a transitive dep would be dragged
-  into all three.
+- **Data contracts only.** The existing `@cssearth/objects` dependency supplies shared source
+  formats. Scientific evaluation stays here; no other workspace dependency is permitted.
 - **Zero browser globals.** `lib` is `ES2022`, no `DOM`. If you need `window`,
   `performance` or a canvas, the code belongs in the application renderer.
 - **No three.js types.** Not even as a type-only import. This package must be

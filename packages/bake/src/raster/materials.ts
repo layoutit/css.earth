@@ -1,5 +1,5 @@
 import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
-import { type AtmosphereRecipe } from './config.ts';
+import { type AtmosphereRecipe } from '@cssearth/objects';
 import { raster, assetPath } from './io.ts';
 import { limbFactors, limbOverlay, scatteringAngles, silhouetteColorWeight, srgbToLinear, linearToSrgb, loadLimbProfile, haloAltitudeKm, haloRatio, type LimbProfile } from '../photometry/index.ts';
 import type { PreparedLimb } from './lighting.ts';

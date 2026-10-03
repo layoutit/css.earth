@@ -1,7 +1,6 @@
 // `@cssearth/bake/raster`: the raster lane (Node only). Recipes and their validation, surface maps, pages and poles, the
 // lighting, limb and atmosphere banks and the bake and check of the shared lighting banks, interiors, missing-coverage
 // painting and the lossy WebP lane.
-export * from './config.ts';
 export * from './validation.ts';
 export * from './io.ts';
 export * from './pages.ts';

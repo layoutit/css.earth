@@ -1,4 +1,38 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": []
+  "operations": [
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/claret-2020-v-quadratic.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "J/A+A/634/A93/tableab",
+        "-out.max": "500",
+        "Teff": "25000..30000",
+        "logg": "8.5..8.75",
+        "Mod": "=DA",
+        "Filter": "=V",
+        "-out": "logg,Teff,Z,a,b,Mod,Filter"
+      },
+      "requiredText": [
+        "logg\tTeff"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        }
+      ]
+    }
+  ]
 }

@@ -34,13 +34,12 @@
       ]
     },
     {
-      "id": "limb-darkening-model",
-      "subject": "Limb darkening of the sphere",
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
       "status": "included",
-      "finding": "No transit or image measures this star's limb, so the sphere is darkened by the quadratic TESS-band law Claret (2017, A&A 600, A30) computes from quasi-spherical PHOENIX-COND model atmospheres, interpolated bilinearly to the star's Gaia DR3 temperature (6375 K) and FLAME gravity (log g 4.25): u1 0.324, u2 0.223. A model, stated as one.",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,375 K and log g 4.25 (u1 0.363, u2 0.310): a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/hd-181327.json: 4.254.",
       "evidence": [
-        "https://doi.org/10.1051/0004-6361/201630311",
-        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A%2BA/600/A30"
+        "https://vizier.cds.unistra.fr/viz-bin/asu-tsv"
       ]
     }
   ]

@@ -6,7 +6,8 @@ import type { CapabilityRequest } from '../recipe-request.mts';
 import type { TargetCatalogueEntry } from '@cssearth/telescope';
 import type { QualifiedObservation } from '../qualified-observations.mts';
 import type { QualificationAction } from '../qualification-routes.mts';
-import { parseLimits, type DiscoverySnapshot, type MetadataResponse } from '@cssearth/telescope/node';
+import { parseLimits } from '@cssearth/telescope/node';
+import { type DiscoverySnapshot, type MetadataResponse } from '@cssearth/objects';
 import {
 discover, discoverInstrumentFacets, INSTRUMENT_SAMPLE_LIMIT, normalizeSnapshot, searchCircle, SERVICES,
 type DiscoveredObservation, type DiscoveryRequest

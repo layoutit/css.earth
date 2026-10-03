@@ -15,9 +15,11 @@ Both use the paper's color bar: linear from −12 G (blue) through white at 0 to
 
 **Spin.** The maps were made with the axis tilted 60° from the line of sight; the paper's own fit gives about 56°. The tilt is used, with the visible pole north. The axis's direction on the sky is unmeasured and set toward celestial north, and longitude 0 faces the Sun as a display convention.
 
-**Star.** Placement: Gaia DR3 source 4745373133284418816, parallax 57.613 ± 0.038 mas (17.36 pc). Radius 1.16 solar radii, mass 1.23 solar masses and temperature 6,080 K: Bruntt et al. (2010), as tabulated by Alvarado-Gómez et al. (2018, Table 1). Color: its Gaia DR3 BP/RP spectrum through the CIE 1931 2° observer, sRGB (252, 246, 255). Limb: Claret (2017)'s TESS-band quadratic law at 6,080 K and log g 4.40 (u1 0.334, u2 0.227), a model.
+**Star.** Placement: Gaia DR3 source 4745373133284418816, parallax 57.613 ± 0.038 mas (17.36 pc). Radius 1.16 solar radii, mass 1.23 solar masses and temperature 6,080 K: Bruntt et al. (2010), as tabulated by Alvarado-Gómez et al. (2018, Table 1). Color: its Gaia DR3 BP/RP spectrum through the CIE 1931 2° observer, sRGB (252, 246, 255).
 
 Catalogue color: #fcf6ff, the color dataset's prepared color.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,080 K and log g 4.4 (u1 0.402, u2 0.292): a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/iota-horologii.json: 4.399.
 
 ## Evidence
 
@@ -36,5 +38,6 @@ Run of 2026-09-23 (this version):
 - **The far south is unseen.** South of 60° S the star never faces us, so the maps there are only the smooth continuation of the fit.
 - **Not shown.** The symmetric and antisymmetric reconstructions, the meridional component and the planet ι Hor b ([ledger](investigations.json)).
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
+- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

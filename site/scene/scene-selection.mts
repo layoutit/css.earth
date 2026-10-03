@@ -8,8 +8,8 @@ import { selectionKey, subjectOf, type SceneSubject } from './scene-subject.mts'
 import { systemHostId, systemObjectId } from '../navigation/system-address.mts';
 export { moonSystem, selectionKey, starSystem, subjectHost, subjectOf, subjectView, type SceneSubject } from './scene-subject.mts';
 
-/** The camera has crossed into a scope of the zoom another scene shows (an object seen from inside, or back to the centre's own system): the
- * view is handed to that scene. */
+/** The camera has crossed into a scope of the zoom (an object seen from inside, or back to the centre's own system): the
+ * view is handed to the scene that shows it. */
 export interface ZoomHandover { readonly objectId: string; readonly centreId: string }
 
 /** How far out an object's scene is seen: on the body, or out to its system. */
@@ -55,19 +55,17 @@ export function createSceneSelection({ initial, objectId, systems = [], onChange
       scene = mountedObjectId;
       return selectionKey(target) === selectionKey(subject) ? false : publish(target, notify);
     },
-    /** Follows the camera as it backs out or comes in, from `from`: the committed selection, or one of another scene the
-     * camera has already crossed into (camera-handover.mts). True when the camera frames a selection of the mounted scene,
-     * which is then committed; a hand-over when it has crossed into another scene's; false while it frames `from` still. */
-    followCamera(world: WorldCameraPose, from: SceneSubject = subject): boolean | ZoomHandover {
+    /** Whether the mounted scene shows `next`: its own object, or its system. */
+    ownScene,
+    /** The scope the camera frames as it backs out or comes in, from `from`: the committed selection, or one the camera
+     * has already crossed into (camera-handover.mts). Null while it frames `from` still; else the scope it has crossed
+     * into, a selection of the mounted scene (a star's own system) or of another. Nothing is committed here: every
+     * crossing goes to the camera hand-over, which commits it when the camera rests. */
+    followCamera(world: WorldCameraPose, from: SceneSubject = subject): ZoomHandover | null {
       const step = zoomStepOf(from);
-      if (!step) return false;
+      if (!step) return null;
       const scope = scopeAt(world, step);
-      if (scope === step.scope) return false;
-      // The scope the camera crossed into is a selection of the mounted scene (a star's own system), or of another scene.
-      const next: SceneSubject = { objectId: scope };
-      if (!ownScene(next)) return { ...next, centreId: step.centreId };
-      if (selectionKey(next) !== selectionKey(subject)) publish(next);
-      return true;
+      return scope === step.scope ? null : { objectId: scope, centreId: step.centreId };
     },
     /** Whether a wider scene takes the camera as it zooms out of `from`: a body's system does, and so does the next object
      * the centre is inside, out to the last the page has read. Such a zoom does not stop at the mounted scene's far limit. */

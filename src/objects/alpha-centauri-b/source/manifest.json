@@ -138,32 +138,6 @@
       }
     },
     {
-      "id": "alpha-centauri-b-claret-2011-v-quadratic",
-      "path": "photometry/claret-2011-v-quadratic.tsv",
-      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
-      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
-      "license": "CDS VizieR catalogue: free use with citation",
-      "licenseEvidence": [
-        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
-      ],
-      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
-      "redistribution": "A few catalogue rows, with citation",
-      "consumers": [
-        "assets",
-        "datasets"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
-            "role": "method",
-            "evidence": "src/objects/alpha-centauri-b/source/photometry/claret-2011-v-quadratic.tsv"
-          }
-        ]
-      }
-    },
-    {
       "id": "alpha-centauri-b-crosscheck-spectrum",
       "path": "photometry/crosscheck-table6.dat",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/III/201/table6.dat",
@@ -188,11 +162,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "alpha-centauri-b-kervella-2017-limb-darkening",
+      "path": "photometry/kervella-2017-limb-darkening.json",
+      "origin": "https://doi.org/10.1051/0004-6361/201629505",
+      "credit": "Kervella et al. (2017), A&A 597, A137",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, each value with its quoted cell",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published limb-darkening law transcribed with its cells; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "stellar-color-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124",
       "credit": "Photosphere color from the measured spectrum as a uniform disc; rendered by packages/telescope-cli/authoring/stellar-spectra/author.mts",
@@ -207,7 +198,7 @@
           "alpha-centauri-b-kiehling-1987",
           "alpha-centauri-b-cie-1931-2deg-cmf",
           "alpha-centauri-b-preparation-raster",
-          "alpha-centauri-b-claret-2011-v-quadratic"
+          "alpha-centauri-b-kervella-2017-limb-darkening"
         ]
       },
       "generator": "packages/telescope-cli/authoring/stellar-spectra/author.mts",

@@ -4,7 +4,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { it as test } from 'node:test';
 import { addProductEvidence, assertInputs, fileSize, readProductRecord, runKey, sameRun, writeProductRecord } from './node/product-record.js';
-import { evidenceFor, parseProductRecord, productRecordPath, type ProductRun } from './product-record.js';
+import { evidenceFor, productRecordPath } from './product-record.js';
+import { parseProductRecord, type ProductRun } from '@cssearth/objects';
 
 const scratch = () => mkdtemp(join(tmpdir(), 'product-record-'));
 const run = (overrides: Partial<ProductRun> = {}): ProductRun => ({ telescope: 'ALMA', stage: 'disc-selfcal/final', inputs: [{ role: 'visibilities', identity: 'uid://A002/X/1', bytes: 3 }],

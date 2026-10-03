@@ -189,18 +189,31 @@ contracts in `src/prepared-data/`, exported through `@cssearth/objects`. Source 
 metadata and panel field parsing preserve caller diagnostics. Asset production, editorial checks, Astro adapters,
 source binding resolution and image byte inspection stay in bake/site. Contract tests use node:test in the packages lane.
 
-Astronomy published-orbit/epoch, solar-system preparation, investigation-ledger and acquisition-plan schema identifiers live in `src/prepared-data/`; acquisition operations and investigation entry types are shared, while scientific evaluation, survey expansion and acquisition validation/execution stay with their owners.
+Astronomy published-orbit/epoch, solar-system preparation, investigation-ledger and acquisition-plan schema identifiers live in `src/prepared-data/`; physical scene source/unit reads, acquisition and investigation parsers are shared. Scientific evaluation, survey expansion, Node containment, DSK validation and acquisition execution stay with their owners; host callbacks preserve admission order.
 Authored CSS presentation profiles and their pure parser belong to objects; compilation stays with bake.
-CSS geometry profile identifiers belong to objects; scene validation and generation stay with bake.
+CSS geometry profiles, surface geometry/seam-outset data and the pure profile parser belong to objects; scene validation and generation stay with bake.
 Navigation marker recipe identifiers and wire types belong to objects; image/source validation and preparation stay with bake.
-Paged ellipsoid recipe identifiers belong to objects; camera derivation and asset preparation stay with bake/site.
-Chart asset recipe identifiers belong to objects; nested chart validation, rendering and file I/O stay with their consumers.
+Paged ellipsoid recipes, authored camera fields and pure parsers belong to objects. Full assets and navigation field reads retain separate admission policies; camera derivation and asset preparation stay with bake/site.
+Chart asset recipes and nested spectrum, measured-spectrum, retrieved-profile and system-orbits parsers belong to objects. Envelope/source spectrum admission stays distinct; rendering, source sampling and Node file paths stay with consumers.
 Volume dataset manifest identifiers live in `src/volume/volume-dataset-manifest.ts`; output selection and byte checks stay with bake/lab.
 Compact density delivery identifiers live in `src/volume/compact-density-delivery.ts`; replay and source-owner admission stay with bake/lab.
-Nebula depth-model identifiers and `DepthRecipe`/`DepthSurface` wire types live in `src/volume/nebula-depth-model.ts`; joint-path admission, evidence policy and sampling stay with reconstruction/lab.
-Gaia nebula-field identifiers live in `src/volume/gaia-nebula-field.ts`; existing reader subsets, projection and selection stay with bake/telescope-cli.
-Nebula delivery identifiers live in `src/volume/nebula-delivery.ts`; existing envelope admission and compilation stay with bake/telescope-cli/lab.
-Circumstellar reconstruction identifiers live in `src/volume/circumstellar-reconstruction.ts`; solver-derived opacity types, reconstruction and file checks stay with lab/telescope-cli.
+Nebula depth-model identifiers and `DepthRecipe`/`DepthSurface` wire types and the pure recipe parser live in `src/volume/nebula-depth-model.ts`; the caller supplies joint-path admission, while evidence policy and sampling stay with reconstruction/lab.
+Gaia nebula-field types and the pure parser live in `src/volume/gaia-nebula-field.ts`; explicit catalogue-selection and astrometry-table subsets preserve their historical admission and diagnostics. Projection, scientific admission, selection and file I/O stay with bake/telescope-cli.
+Nebula delivery identifiers, sky-frame data and pure envelope admission live in `src/volume/nebula-delivery.ts`; transport and compilation stay with bake/telescope-cli/lab.
+Circumstellar reconstruction identifiers, reconstruction records and opacity data live in `src/volume/circumstellar-reconstruction.ts`; opacity computation, reconstruction and historical file admission stay with lab/telescope-cli.
 UVFITS request/response types and pure validation live in `src/prepared-data/pyuvdata-uvfits.ts`; process and toolchain handling stay in telescope.
-Volume source-manifest identifiers live in `src/prepared-data/volume-source-manifest.ts`; source parsing and restoration stay with callers.
-Volume presentation-source identifiers and pure preview/dataset/presentation records live in `src/prepared-data/volume-presentation-source.ts`; preview creation and dataset text validation stay with callers.
+Volume source-manifest envelope admission and context records live in `src/prepared-data/volume-source-manifest.ts`; manifest I/O, restoration and lineage stay with callers.
+Volume presentation-source identifiers, preview parsing and pure preview/dataset/presentation records live in `src/prepared-data/volume-presentation-source.ts`; preview creation and dataset text validation stay with callers.
+
+Published mutual-orbit and body-epoch structures and pure decoding live in `src/prepared-data/published-orbit.ts`;
+scientific evaluation and source I/O stay in astronomy. Product records and their evidence kinds/parser live in
+`src/prepared-data/telescope-product.ts`; run identity, product paths and evidence queries stay in telescope.
+VO metadata, pin, region and snapshot data/parsers live in `src/prepared-data/vo-discovery.ts`, using core JSON data;
+archive operations, network transport, ADQL generation and row identity queries stay with telescope owners.
+
+Body-map products, resolution evidence, raster recipes and limb-model references have browser-safe
+contracts and parsers in `src/prepared-data/`, exported through `@cssearth/objects`.
+The parsers require owner-supplied surface-resolution and lighting-bank resolvers at the historical
+validation position. Bake supplies them through `readBodyMapProduct` and `readRasterRecipe`;
+angular-to-surface conversion, sampled map combination, lighting banks and photometric evaluation stay in bake.
+Contract and duplicate-ownership tests use node:test beside the formats.

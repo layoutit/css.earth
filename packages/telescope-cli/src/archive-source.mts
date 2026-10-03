@@ -6,7 +6,7 @@ import { Readable } from 'node:stream';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { VERSION } from './help.mts';
-import type { ProductInput } from '@cssearth/telescope';
+import type { ProductInput } from '@cssearth/objects';
 import { EXPLORATION_SCHEMA } from './exploration.mts';
 import { FITS_SOURCE_SCHEMA } from './fits-source.mts';
 import { parseLimits } from '@cssearth/telescope/node';

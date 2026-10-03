@@ -22,7 +22,8 @@ import { positionalArguments, requireArray, requireRecord, requireString } from 
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { assertInputs, addProductEvidence, fileSize, readProductRecord, WORKSPACE } from '@cssearth/telescope/node';
-import { productRecordPath, type ProductEvidence, type ProductInput } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope';
+import { type ProductEvidence, type ProductInput } from '@cssearth/objects';
 import { DOWNLOADS, PROGRAMS, readKeckProgram, type KeckFile, type KeckObservation } from './archive.mts';
 
 const REPOSITORY = WORKSPACE;

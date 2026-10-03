@@ -6,7 +6,8 @@ import { randomUUID } from 'node:crypto';
 import { build } from 'esbuild';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
-import { parseBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { readBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 import { assertBodyMapPlanes } from '../body-map-publication.mts';
 import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
@@ -37,7 +38,7 @@ async function loadSphereOwner(){
 export async function validateSphereBundle(source:Awaited<ReturnType<typeof verifiedProduct>>){
   if(source.record.stage!=='body-map')throw new TypeError('Sphere export requires a registered body-map product; native pixels have no surface coordinates');
   for(const name of ['map.fits','map.fits.body-map.json','texture.png','poles.png','navigation.json'])if(!source.record.outputs.some(o=>o.path===name))throw new Error(`Body map has no prepared ${name}; export the measurement with --output body-map first`);
-  const map=parseBodyMapProduct(JSON.parse(await readFile(localOutput(source.root,'map.fits.body-map.json'),'utf8'))),plane=await readFile(localOutput(source.root,map.planes.file));
+  const map=readBodyMapProduct(JSON.parse(await readFile(localOutput(source.root,'map.fits.body-map.json'),'utf8'))),plane=await readFile(localOutput(source.root,map.planes.file));
   if(map.planes.file!=='map.fits'||!source.record.outputs.some(output=>output.path===map.planes.file))throw new Error('Body-map metadata does not bind the projected map.fits output');
   assertBodyMapPlanes(plane,map);
   for(const name of ['texture.png','poles.png']){const image=await sharp(localOutput(source.root,name)).metadata();if(!image.width||!image.height)throw new Error(`Body map has an invalid ${name}`);}

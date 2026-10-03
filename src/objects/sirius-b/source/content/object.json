@@ -54,7 +54,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Color of a blackbody at the star's temperature. The disc itself is unresolved.",
+        "qualification": "Color of a blackbody at the star's temperature. The disc itself is unresolved; darkening toward the edge from a model atmosphere.",
         "thumbnail": "sirius-b-dataset-color.webp",
         "surface": "sirius-b-surface-color@2x.webp",
         "poles": "sirius-b-poles-color@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://doi.org/10.3847/1538-4357/aa6af8"
         },
         "falseColor": false,
-        "notes": "The color of a blackbody at the star's published temperature. No limb darkening is drawn: at 25,369 K and log g 8.63 no model grid used here reaches it (Claret & Bloemen (2011), A&A 529, A75 (ATLAS): The limb-darkening grid is empty.; Reeve & Howarth (2016), MNRAS 456, 1294 (non-LTE TLUSTY): 25369 is outside the grid 27500, 30000, 32500, 35000, 37500, 40000, 42500, 45000, 47500, 50000, 52500, 55000.; Neilson & Lester (2013), A&A 554, A98 (spherical ATLAS (SATLAS)): the grid is of spherical models, read by mass, and the star has no measured mass; Howarth (2011), MNRAS 413, 1515: 25369 is outside the grid .; Claret (2017), A&A 600, A30 (PHOENIX): The limb-darkening grid is empty.; PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) (Sonora Bobcat cloud-free (Marley et al. 2021, ApJ 920, 85)): the PICASO toolchain holds no Bobcat profiles: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install). The spin axis's direction on the sky is a display convention."
+        "notes": "The color of a blackbody at the star's published temperature. The spin axis's direction on the sky is a display convention. The darkening toward the edge is the quadratic law Claret et al. (2020), A&A 634, A93 compute from pure-hydrogen (DA) white-dwarf model atmospheres for the Johnson V band at 25,369 K and log g 8.63 (u1 0.087, u2 0.267): a model, because no fit of this star's limb is used; its atmosphere is DA: Bond et al. (2017), ApJ 840, 70, section 8: the STIS spectra show only the Balmer lines, confirming a DA2 white dwarf with a pure hydrogen atmosphere (https://doi.org/10.3847/1538-4357/aa6af8)."
       }
     ]
   },

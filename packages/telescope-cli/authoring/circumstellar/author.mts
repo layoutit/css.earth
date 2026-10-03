@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
-import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA, CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA } from '@cssearth/objects';
+import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA, CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA, type EdgeOnReconstruction, type CircumstellarOpacity } from '@cssearth/objects';
 /** Author a circumstellar volume: the material around a star, drawn from coronagraph mosaics as a density grid attached to
  * that star, the way Betelgeuse's shell is (packages/bake/authoring/betelgeuse-shell/author.mts), but from one
  * checked-in recipe rather than a script per star.
@@ -488,7 +488,7 @@ export function parseFigureColorMap(value: unknown, path: string) {
  * the brightest channel's column into 1 - exp(-gain * column). A white column at the top of the stretch carries 1 in every
  * channel, so the gain puts exactly that column at the stated alpha. Returns the gain and how opaque the lines of sight are
  * face-on. Shared with the lab's reconstruction command, which computes it for the volume it writes. */
-export function exposureAndOpacity(topAlpha: number, peak: number, integral: readonly Float64Array[]) {
+export function exposureAndOpacity(topAlpha: number, peak: number, integral: readonly Float64Array[]): { exposureGain: number; opacity: CircumstellarOpacity } {
   const count = integral[0]!.length, exposureGain = -Math.log(1 - topAlpha) * peak;
   const columnEmission = (p: number) => Math.max(...integral.map(channel => channel[p]! / peak));
   const alphas = Array.from({ length: count }, (_, p) => 1 - Math.exp(-exposureGain * columnEmission(p))).filter(alpha => alpha > 0.001).sort((a, b) => a - b);
@@ -496,7 +496,7 @@ export function exposureAndOpacity(topAlpha: number, peak: number, integral: rea
   return { exposureGain, opacity: { drawnColumns: alphas.length, median: quantile(0.5), p90: quantile(0.9), max: alphas.at(-1)! } };
 }
 
-async function finishDataset(dataset: CircumstellarDataset, sky: SkyPlane, shown: readonly Float32Array[], encoded: { ktx2: Uint8Array; peak: number; filledVoxels: number; droppedShare: readonly number[] } & ({ integral: readonly Float64Array[] } | { exposureGain: number; opacity: ReturnType<typeof exposureAndOpacity>['opacity'] })) {
+async function finishDataset(dataset: CircumstellarDataset, sky: SkyPlane, shown: readonly Float32Array[], encoded: { ktx2: Uint8Array; peak: number; filledVoxels: number; droppedShare: readonly number[] } & ({ integral: readonly Float64Array[] } | { exposureGain: number; opacity: CircumstellarOpacity })) {
   const { size } = sky, count = size * size;
   const { exposureGain, opacity } = 'integral' in encoded ? exposureAndOpacity(dataset.topAlpha, encoded.peak, encoded.integral) : encoded;
   // A preview of the image as read, in its displayed colors: north up, east left.
@@ -526,13 +526,6 @@ export interface EdgeOnSolveInputs {
   readonly axis: readonly [number, number, number];
 }
 /** The lab-written reconstruction of one edge-on dataset, as the recipe's source/ holds it (labs/nebula reconstruct-circumstellar). */
-export interface EdgeOnReconstruction {
-  readonly schema: typeof CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA; readonly objectId: string; readonly datasetId: string;
-  readonly grid: { readonly size: number; readonly halfUnits: number };
-  readonly method: Record<string, unknown>; readonly ktx2: { readonly path: string; readonly bytes: number };
-  readonly peak: number; readonly filledVoxels: number; readonly exposureGain: number;
-  readonly opacity: ReturnType<typeof exposureAndOpacity>['opacity']; readonly checks: Record<string, unknown>;
-}
 export const reconstructionPath = (dataset: CircumstellarDataset) => `reconstruction-${dataset.id}.json`;
 
 /** An edge-on disc: its midplane measured and checked against the published position angle, its displayed channels written,

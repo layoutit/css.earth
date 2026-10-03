@@ -14,7 +14,9 @@ import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.t
 import { OVERVIEW_SELECTION_POLICY as policy } from './runtime-policy.mts';
 import { SOLAR_SYSTEM_ID, systemOfObject } from './object-systems.mts';
 import { systemOverviewDistance } from './system-framing.mts';
-import { leaveDistanceM } from './inside-view.mts';
+import { leaveDistanceM, zoomStepOf } from './inside-view.mts';
+import { satelliteSelectionAtCamera } from './satellite-selection.mts';
+import { subjectOf, type SceneSubject } from './scene/scene-subject.mts';
 
 const distance = (a: PositionM, b: PositionM) => Math.hypot(...a.map((value, axis) => value - b[axis]));
 /** The Solar System's star; the root of the galactic overviews. */
@@ -77,34 +79,56 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
     ? { overview: false, objectId } : null;
 }
 
-/** Require a sustained threshold crossing, even while the camera keeps moving; a camera clearly past an exit
- * (policy.clearExitScale) is reported at once. A crossing out of a body's scene is reported once, until the camera comes
- * back inside (`onReturn`): the scene it names takes the view only when the camera rests (scene/camera-handover.mts), and
- * this watcher goes on with the body's until then. */
-export function watchOverviewSelection({ navigation, objects, systems, objectId, getOverview, isAvailable,
-  onChange, onReturn, windowTarget, inside }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; getOverview(): boolean; isAvailable(): boolean;
+/** The selection the camera frames from the scene of body `objectId` when it is not the committed one, farthest first:
+ * out of the body, its star's system or the object it is inside (selectionAtCamera); short of that, its planet's
+ * system or its own moons' (satelliteSelectionAtCamera); and back in, the body. Null while the camera frames
+ * `selection` still. A system is named by its own object id. */
+export function framedAtCamera({ selection, optics, ...facts }: Omit<Parameters<typeof selectionAtCamera>[0], 'overview'> & {
+  /** The committed selection of the mounted scene: the body, or its system. */
+  selection: SceneSubject;
+  /** The shared camera's optics, for the body's own close-up threshold; without them only the exits are asked. */
+  optics?: ReturnType<ObjectWorldNavigation['optics']> | null }): SceneSubject | null {
+  const exit = selectionAtCamera({ ...facts, overview: zoomStepOf(selection) !== null });
+  if (exit) return exit.overview ? subjectOf(exit.objectId, 'system') : { objectId: exit.objectId };
+  return optics ? satelliteSelectionAtCamera(facts.world, optics, facts.objects, selection) : null;
+}
+
+/** Watches the camera on a body's scene and reports the selection it frames (framedAtCamera). A crossing must last
+ * (policy.settleMilliseconds), even while the camera keeps moving; a camera clearly past an exit (policy.clearExitScale)
+ * is reported at once. A crossing is reported once, until the camera comes back (`onReturn`) or frames another: what it
+ * names (another scene, or the body's own system or the body itself, which share the mounted scene) takes the card and
+ * the address only when the camera rests (scene/camera-handover.mts), and this watcher goes on with the committed
+ * selection until then. */
+export function watchCameraSelection({ navigation, objects, systems, objectId, getSelection, isAvailable,
+  onChange, onReturn, windowTarget, inside }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string;
+  /** The committed selection of the mounted scene. */
+  getSelection(): SceneSubject; isAvailable(): boolean;
   /** The object the body is inside, when it has a scene of its own; asked on each camera, as its entry may be read late. */
   inside?(): InsideBody | null;
   /** `landed`: a flight to a framing has just landed here, so the camera is at rest. */
-  onChange(selection: OverviewSelection, landed: boolean): void;
-  /** The camera is back inside the body's scene after a crossing out of it was reported. */
+  onChange(selection: SceneSubject, landed: boolean): void;
+  /** The camera frames the committed selection again after a crossing was reported. */
   onReturn?(): void;
   windowTarget: Window }) {
-  let timer: number | null = null, latest: SelectionPublication | null = null, candidate: OverviewSelection | null = null; let disposed = false;
+  let timer: number | null = null, latest: SelectionPublication | null = null, candidate: SceneSubject | null = null; let disposed = false;
   // Where the body's scene came to rest: the first camera it answers for, and each landing after it.
   let restRangeM: number | null = null;
-  // The exit out of the body's scene that was last reported, until the camera comes back inside: one report a crossing.
-  let left: OverviewSelection | null = null;
+  // The crossing last reported, until the camera comes back: one report a crossing.
+  let left: SceneSubject | null = null;
+  const same = (a: SceneSubject | null, b: SceneSubject | null) => a?.objectId === b?.objectId;
   const range = (world: WorldCameraPose) => {
     const origin = objects.find(object => object.id === objectId)?.worldFrame?.originM;
     return origin ? eyeDistanceM(world.pose, origin) : 0;
   };
   // What every reading of the camera is asked with.
-  const facts = () => ({ objects, systems, objectId, inside: inside?.() ?? null });
-  /** Whether `next` leaves the body's scene: for its system's overview, or for the object it is inside. */
-  const leaves = (next: OverviewSelection) => next.overview || next.objectId !== objectId;
-  const report = (next: OverviewSelection, landed: boolean) => {
-    if (!getOverview() && leaves(next)) left = next;
+  const facts = (publication: SelectionPublication) => ({ ...publication, objects, systems, objectId, inside: inside?.() ?? null, restRangeM: restRangeM ?? 0 });
+  const framed = (publication: SelectionPublication, landed = false) =>
+    framedAtCamera({ ...facts(publication), selection: getSelection(), optics: navigation.optics?.() ?? null, landed });
+  /** Whether the camera is clearly past an exit out of the body: no wait is needed to know it has left. */
+  const clearlyOut = (publication: SelectionPublication) => zoomStepOf(getSelection()) === null
+    && selectionAtCamera({ ...facts(publication), overview: false, exitScale: policy.clearExitScale }) !== null;
+  const report = (next: SceneSubject, landed: boolean) => {
+    left = next;
     onChange(next, landed);
   };
   function inspect(landed = false) {
@@ -112,7 +136,7 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     candidate = null;
     if (disposed || !isAvailable() || !latest) return;
     if (landed || restRangeM === null) restRangeM = range(latest.world);
-    const next = selectionAtCamera({ ...latest, ...facts(), overview: getOverview(), landed, restRangeM });
+    const next = framed(latest, landed);
     if (next) report(next, landed);
   }
   const unsubscribe = navigation.subscribe((world, viewport) => {
@@ -120,19 +144,18 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     // beside the sidebar, just like the active object's orbit controls.
     latest = { world, viewport: navigation.optics?.() ?? viewport };
     if (isAvailable() && restRangeM === null) restRangeM = range(world);
-    const next = isAvailable() ? selectionAtCamera({ ...latest, ...facts(), overview: getOverview(), restRangeM: restRangeM ?? 0 }) : null;
+    const next = isAvailable() ? framed(latest) : null;
     if (!next) {
       // A flight that holds this watcher off (isAvailable) is not the camera coming back.
       if (left && isAvailable()) { left = null; onReturn?.(); }
-    } else if (left && leaves(next) && next.overview === left.overview && next.objectId === left.objectId) return;
-    else if (!getOverview() && leaves(next)
-        && selectionAtCamera({ ...latest, ...facts(), overview: false, restRangeM: restRangeM ?? 0, exitScale: policy.clearExitScale })) {
+    } else if (same(next, left)) return;
+    else if (clearlyOut(latest)) {
       if (timer !== null) windowTarget.clearTimeout(timer);
       timer = null; candidate = null;
       report(next, false);
       return;
     }
-    if (next?.objectId === candidate?.objectId && next?.overview === candidate?.overview) return;
+    if (same(next, candidate)) return;
     if (timer !== null) windowTarget.clearTimeout(timer);
     timer = null; candidate = next;
     if (next) timer = windowTarget.setTimeout(() => inspect(), policy.settleMilliseconds);

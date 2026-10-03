@@ -15,7 +15,7 @@ import { binning, checkAgainstArchive, compareOnDetector, overlapAt, parseSectio
   wcsShift, type Wcs } from './compare.mts';
 import { galileanNote, hasScience, observationsOf, type MoonRow, GEMINI_TARGET_NAMES } from './archive-ledger.mts';
 import { matchNumberedTarget, parseNumberedTarget } from '../targets.mts';
-import { PRODUCT_RECORD_SCHEMA } from '@cssearth/telescope';
+import { PRODUCT_RECORD_SCHEMA } from '@cssearth/objects';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

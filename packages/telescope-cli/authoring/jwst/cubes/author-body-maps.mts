@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { BODY_MAP_SCHEMA } from '@cssearth/objects';
 /** Write a body's JWST band maps from its record, src/objects/<id>/source/preparation/jwst-band-maps.json.
  *
  *   node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts <object id> [--check] [--raw <dir>]...
@@ -29,10 +30,11 @@ import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
 import { mastFile } from '@cssearth/telescope/node';
 import { readImagingProgram } from '@cssearth/telescope-cli/archives/jwst/imaging/image3';
 import { bandDepth, openSpectralCube, type Window } from '@cssearth/bake/objects/layers/observation';
-import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
+import { combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
-import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
+import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../../../..');
 export const JWST_HORIZONS_CENTER = '500@-170';
@@ -122,12 +124,12 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
     const fits = bodyMapFits(map, { TELESCOP: 'JWST', OBJECT: requireString(entry.target), QUANTITY: quantity, NCUBES: String(placed.length) },
       [{ name: quantity, units, values: map.depth }, { name: `${quantity} ERROR`, units, values: map.error }]);
     // What the map means, beside it: the band and continuum that define the number, the frame, and every cube that went in.
-    const unqualifiedMap = { schema: 'cssearth-body-map@1',
+    const unqualifiedMap = { schema: BODY_MAP_SCHEMA,
       definition, frame,
       grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, value: quantity, uncertainty: `${quantity} ERROR` },
       mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) } as const;
     const resolution = bindMapResolution(unqualifiedMap, 'measured', 'disc-edge-gaussian-fit', cubes), mapProduct = resolution.product;
-    const metadata = Buffer.from(formatBodyMapProduct(mapProduct));
+    const metadata = Buffer.from(renderBodyMapProduct(mapProduct));
     written.set(resolve(source, `${output}.body-map.json`), metadata);
     written.set(resolve(dirname(resolve(source, output)), resolution.output.path), resolution.output.bytes);
     written.set(resolve(source, output), fits);

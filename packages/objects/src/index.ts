@@ -229,14 +229,35 @@ export { MARKER_SOURCE_HINTS, type MarkerSource, type MarkerOperation, type Mark
 export { VOLUME_DATASET_MANIFEST_SCHEMA } from './volume/volume-dataset-manifest.js';
 export { COMPACT_DENSITY_DELIVERY_SCHEMA } from './volume/compact-density-delivery.js';
 export { NEBULA_DEPTH_MODEL_SCHEMA, type DepthSurface, type DepthRecipe } from './volume/nebula-depth-model.js';
-export { GAIA_NEBULA_FIELD_SCHEMA } from './volume/gaia-nebula-field.js';
-export { NEBULA_DELIVERY_SCHEMA } from './volume/nebula-delivery.js';
-export { CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA } from './volume/circumstellar-reconstruction.js';
+export { GAIA_NEBULA_FIELD_SCHEMA, parseGaiaNebulaField, type GaiaNebulaFieldDocument, type GaiaNebulaFieldStar, type GaiaNebulaFieldSelection, type GaiaNebulaCatalogueField, type GaiaNebulaAstrometryRow, type GaiaNebulaFieldSubset } from './volume/gaia-nebula-field.js';
+export { NEBULA_DELIVERY_SCHEMA, readNebulaDelivery, type NebulaDelivery, type NebulaSkyFrame } from './volume/nebula-delivery.js';
+export { CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA, type CircumstellarOpacity, type EdgeOnReconstruction } from './volume/circumstellar-reconstruction.js';
 // E2-rest: P4
 export { PYUVDATA_UVFITS_SCHEMA, parsePyuvdataUvfitsRequest, parsePyuvdataUvfitsAnswer, type PyuvdataUvfitsRequest, type PyuvdataUvfitsAnswer } from './prepared-data/pyuvdata-uvfits.js';
-export { VOLUME_SOURCE_MANIFEST_SCHEMA } from './prepared-data/volume-source-manifest.js';
-export { VOLUME_PRESENTATION_SOURCE_SCHEMA, type VolumeSourcePreview, type TrackedVolumeSourcePreview, type VolumeDatasetSource, type VolumePresentationSource } from './prepared-data/volume-presentation-source.js';
-
+export { VOLUME_SOURCE_MANIFEST_SCHEMA, parseVolumeSourceManifest, parseVolumeContextProducts, type VolumeManifestReader, type VolumeContextProduct } from './prepared-data/volume-source-manifest.js';
+export { VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeSourcePreview, isTrackedVolumeSourcePreview, type VolumeSourcePreview, type TrackedVolumeSourcePreview, type VolumeDatasetSource, type VolumePresentationSource } from './prepared-data/volume-presentation-source.js';
+export { parseGeometryProfile, type GeometryProfile, type SeamOutsetProfile, type SurfaceGeometryProfile } from './prepared-data/css-geometry-profile.js';
+export { parseDepthRecipe } from './volume/nebula-depth-model.js';
+export { parseAcquisitionPlan, type AcquisitionValidationPolicy } from './prepared-data/acquisition-plan.js';
+export { evidenceLink, parseInvestigationLedger, parseFacilityLedger, type InvestigationEntryExpansion } from './prepared-data/investigation-ledger.js';
+export { parseMeasuredSpectrum, type MeasuredSpectrumRecipe, type MeasurementSource } from './prepared-data/chart-measured-spectrum.js';
+export { parseRetrievedProfile, type RetrievedProfileRecipe, type ProfileSource } from './prepared-data/chart-retrieved-profile.js';
+export { parseSystemOrbits, type SystemOrbitsRecipe } from './prepared-data/chart-system-orbits.js';
+export { parseChartAssetRecipe, chartSourcePath, type ChartAssetRecipe } from './prepared-data/chart-assets.js';
+export { parseSpectrumRecipe, type SpectrumRecipe } from './prepared-data/chart-spectrum.js';
+export { responsiveFit, cameraFields, camera, recipeCamera, DERIVED_CAMERA_ANGLE_FIELDS } from './prepared-data/authored-camera.js';
+export { parsePagedRecipe, parsePagedDatasetBindings, isPagedEllipsoidRecipe, type PagedDatasetBindings, type PagedEllipsoidRecipe, type PagedGeometryParameters } from './prepared-data/paged-ellipsoid.js';
+export { parseSolarSceneSource, type SolarSceneSource, type SolarSource } from './prepared-data/solar-system-preparation.js';
+export * from './prepared-data/resolution-evidence.js';
+export * from './prepared-data/limb-block.js';
+export * from './prepared-data/raster-recipe.js';
+export { parseRasterRecipe } from './prepared-data/raster-recipe-parser.js';
+export * from './prepared-data/body-map-product.js';
+export * from './prepared-data/telescope-product.js';
+export * from './prepared-data/vo-discovery.js';
+export { parsePublishedBodyEpochRecord, parsePublishedParameters, type PublishedRecord, type PublishedParameters, type SourcePin, type HorizonsPin, type ProjectionSample } from './prepared-data/published-orbit.js';
 export * as preparedPanelReaders from './prepared-data/panel-readers.js';
 export { parseCloudAppearance, DEFAULT_CLOUD_APPEARANCE, type CloudAppearance } from './volume/cloud-appearance.js';
 export { validateChannelGain, type ChannelGain } from './volume/channel-gain.js';
+
+export { sourceRecordReaders } from './prepared-data/source-record-readers.js';

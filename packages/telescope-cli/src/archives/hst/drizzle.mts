@@ -28,7 +28,8 @@ import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/cor
 import { mastFile } from '@cssearth/telescope/node';
 import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
-import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope';
+import { type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { suffixOf, type HstObservation, type HstProgram } from './archive.mts';
 import { hstSoftware, MEMORY_GUARD, PIPELINES, readHstProgram, REFERENCE_FILES } from './calibrate.mts';
 import { hstToolchain } from './toolchain.mts';

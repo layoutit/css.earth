@@ -1,7 +1,7 @@
 /** Reload the qualification and its pins; a serialized selection cannot authorize different bytes or facts. */
 import { resolve } from 'node:path';
 import { readProductRecord, fileSize } from '@cssearth/telescope/node';
-import type { ProductInput } from '@cssearth/telescope';
+import type { ProductInput } from '@cssearth/objects';
 import { loadSourceProducts, sourceQualifiedObservations } from './source-products.mts';
 import { loadQualifiedObservations, type QualifiedObservation } from './qualified-observations.mts';
 import type { ObservationSelection } from './query-contract.mts';

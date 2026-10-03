@@ -8,7 +8,7 @@ import { build } from 'esbuild';
 import { requireRecord,requireString } from '@cssearth/core';
 import { VERSION } from './help.mts';
 import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
-import type { ProductInput } from '@cssearth/telescope';
+import type { ProductInput } from '@cssearth/objects';
 
 export type SpatialKind='points'|'volume'|'volume-dataset-bank';
 type SpatialPayload =

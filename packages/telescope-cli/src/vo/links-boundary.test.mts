@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import { astroquery } from '@cssearth/telescope/node';
 import { loadVoInputs } from './bridge.mts';
 import { SERVICES } from './discovery.mts';
-import { jsonValue, type DiscoverySnapshot } from '@cssearth/telescope/node';
+import { jsonValue, type DiscoverySnapshot } from '@cssearth/objects';
 
 test('PyVO sends descriptor-bound DataLink parameters and retains the exact response', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'vo-links-boundary-'));

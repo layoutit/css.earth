@@ -1,4 +1,4 @@
-import { VOLUME_SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects';
+import { parseVolumeSourceManifest, parseVolumeContextProducts } from '@cssearth/objects';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode } from '@cssearth/core';
@@ -29,14 +29,8 @@ export async function contextLineages({ route, root = process.cwd(), input = (pa
     if (raw.provenance === undefined) continue;
     const presentation = sourceObject(raw.provenance);
     const manifest = sourceObject(JSON.parse((await input(`${base}/source/manifest.json`)).toString()));
-    if (manifest.schema !== VOLUME_SOURCE_MANIFEST_SCHEMA || manifest.pathBase !== 'repository') throw new TypeError(`Invalid context manifest: ${id}`);
-    const products = sourceArray(presentation.products, raw => {
-      const value = sourceObject(raw), interpretation = sourceObject(value.interpretation);
-      return { id: sourceText(value.id), label: sourceText(value.label), inputs: [...sourceArray(value.inputs, sourceText)], parents: [], datasetIds: [],
-        observationAttribution: 'none' as const, limitations: [...sourceArray(value.limitations, sourceText)],
-        interpretation: { ...(typeof interpretation.kind === 'string' ? { kind: interpretation.kind } : {}),
-          ...(typeof interpretation.sourceKind === 'string' ? { sourceKind: interpretation.sourceKind } : {}) } };
-    });
+    parseVolumeSourceManifest(manifest, { reader: 'context', objectId: id });
+    const products = parseVolumeContextProducts(presentation.products);
     // A bank that names its host object (`properties.host` in its descriptor) is seen on that object's page.
     const descriptor = sourceObject(JSON.parse((await input(`${base}/object.json`)).toString()));
     const properties = sourceObject(descriptor.properties), host = properties.host === undefined ? undefined : sourceId(properties.host);
