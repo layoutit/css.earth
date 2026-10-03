@@ -18,11 +18,14 @@ The earlier VISTA, Horálek and WISE recipes retain their existing source/alignm
 
 ## A picture for the application: `remove-stars`
 
-`node labs/nebula/run.mts remove-stars <object-directory>` makes the star-free copy of an image-layer bank's picture
+`node labs/nebula/run.mts remove-stars <object-directory> [--from=<file>] [--coarse=<factor>]` makes the star-free copy
+of an image-layer bank's picture
 ([remove-stars.ts](../packages/lab/src/cli/commands/remove-stars.ts)). It reads the bank's `source/recipe.json`, takes the
 download the recipe names into the ignored cache (`.local/nebula-lab/starless/<id>/`), runs NOX over it and writes the
 result as the bank's picture, `source/<source.path>`. The bank's manifest names this command as that file's generator,
-and the file is mirrored in the source cache, so a checkout restores it without running NOX.
+and the file is mirrored in the source cache, so a checkout restores it without running NOX. With `--from=<file>` it
+takes a picture another generator wrote into the bank's `source/` directory in place of the download: M20's picture is a
+window cut from the publisher's file.
 
 NOX takes a star's core and spikes but leaves the wide glow of a bright one. For each star of the recipe's
 `source.foregroundStars` table brighter than Gaia G = 14, [haloes.ts](../packages/reconstruction/src/star-removal/haloes.ts)
@@ -31,7 +34,15 @@ from the target, until no channel still falls by 1.5 levels over the next 12 px;
 samples. The constants are presentation choices made on M66's Sloan picture. The isophote fill of the emission recipes
 suits an elliptical; on a spiral it left a dark notch.
 
-Test: `node labs/nebula/run.mts test haloes`.
+NOX takes a star whose core is a few pixels wide. A saturated star tens of pixels wide stays, with its spikes. With
+`--coarse=<factor>` NOX runs again over a copy of the star-free picture that many times smaller, where such a star is small
+enough, and [coarse.ts](../packages/reconstruction/src/star-removal/coarse.ts) gives the picture that pass's result only
+where it took a star: a connected patch of small pixels that each lost more than 6 levels and holds one that lost 40 or
+more. The rest of the picture keeps its own pixels. The constants are presentation choices made on M16's ESO picture at a
+quarter of its size. The small pass also takes compact bright nebula: on M17, M27, M43, M57 and M78 it took real gas, so
+those banks run one pass. The glow fill above is for a galaxy; on a nebula it erased the gas around the stars that light it.
+
+Tests: `node labs/nebula/run.mts test haloes` and `node labs/nebula/run.mts test coarse`.
 
 ## Interpretation
 
