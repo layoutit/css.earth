@@ -171,7 +171,12 @@ it("current format rejects duplicate camera data, reserved flags, invalid smalle
   assert.throws(() => parseSharedView(badPadding));
 });
 
-it('validates bounded payloads and playback before encoding', () => {
+it('validates bounded payloads, playback and pure rotations before encoding', () => {
+  for (const scene of ['rotateX(45deg)', 'matrix3d(2,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
+    'matrix3d(-1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', 'matrix3d(,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)']) {
+    const view = physical(); view.camera.pose.scene = scene;
+    assert.throws(() => formatSharedView(view), /pose/);
+  }
   for (const times of [[-1], [NaN], Array.from({ length: 4096 }, () => 1)]) {
     const view = physical(); view.playback.times = times;
     assert.throws(() => formatSharedView(view));
