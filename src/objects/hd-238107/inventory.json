@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "hd-238107-arrival.webp",
+      "bytes": 27894,
+      "sha256": "8ced32e1a966155d00a54681df283536d75db35df9ba707820f4d0413ef61da2"
+    },
+    {
+      "location": "public",
+      "filename": "hd-238107-billboard.webp",
+      "bytes": 4952,
+      "sha256": "a1e9b6ab7f8f69f18d9b743cace71fabbac062c02a276a7ff2ce84e3e18446f0"
+    },
+    {
+      "location": "public",
       "filename": "hd-238107-dataset-color.webp",
       "bytes": 44,
       "sha256": "661bf69a73addd548da03813a69cb966075fdcc280131aab34421512535b9d53"
@@ -24,6 +36,12 @@
       "filename": "hd-238107-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "31f34e84ca7a52a728e4116e1f9743fc2649df41a5a04f5e48de6744caf0d53a"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 380,
+      "sha256": "1cbe2cd965745cc21d7cbde8244126949152fdef0d8bea681615008690c89aef"
     },
     {
       "location": "prepared",
