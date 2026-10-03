@@ -41,9 +41,11 @@ export function imageLayerBulgeModel(recipe: Pick<ImageLayerRecipe, 'target' | '
   // A fit whose bulge falls off more slowly than its disc (a high Sérsic index) keeps a share far out, where that light
   // is the disc's; `extentKpc.fadeFrom` fades the share to nothing between it and `extentKpc.radius` on the sky.
   const fadeFrom = bulge.extentKpc.fadeFrom, reach = bulge.extentKpc.radius;
+  // On the sky the fade follows the spheroid's own outline (its ellipse about the line of nodes, with the fitted axis
+  // ratio), so every sight line that still carries bulge light passes through the spheroid that will hold it.
   const fade = (east: number, north: number) => {
     if (fadeFrom === undefined) return 1;
-    const t = Math.max(0, Math.min(1, (reach - Math.hypot(east, north)) / (reach - fadeFrom)));
+    const [major, minor] = along(east, north, pa), t = Math.max(0, Math.min(1, (reach - Math.hypot(major, minor / (1 - bulge.skyEllipticity))) / (reach - fadeFrom)));
     return t * t * (3 - 2 * t);
   };
   const share = (east: number, north: number) => {
@@ -68,8 +70,12 @@ export function imageLayerBulgeModel(recipe: Pick<ImageLayerRecipe, 'target' | '
   /** Relative bulge density at a point in the galaxy's local frame (kpc from the centre, east/north/sight-line axes). */
   const density = (point: Vec3) => {
     const x = dot(point, lineNodes), y = dot(point, diskMinor), z = dot(point, disc.diskNormal);
-    const m = Math.max(core, Math.hypot(x, y, z / q0)) / re;
-    return m ** -p * Math.exp(-b * m ** (1 / n));
+    // The spheroid ends on its own surface: with `extentKpc.fadeFrom` the density fades to nothing between that
+    // spheroidal radius and `extentKpc.radius`, so the bulge's edge is a spheroid from every side and never the box of
+    // slices that holds it.
+    const spheroidal = Math.hypot(x, y, z / q0), m = Math.max(core, spheroidal) / re;
+    const edge = fadeFrom === undefined ? 1 : Math.max(0, Math.min(1, (reach - spheroidal) / (reach - fadeFrom)));
+    return m ** -p * Math.exp(-b * m ** (1 / n)) * edge * edge * (3 - 2 * edge);
   };
   /** A local-frame point as its sky offset from the centre (kpc east and north at the galaxy's distance), for the share. */
   const skyOffset = (point: Vec3): [number, number] => {

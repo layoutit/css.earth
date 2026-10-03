@@ -75,3 +75,14 @@ test('a fitted bar adds disc light inside its radius and none beyond it', () => 
   assert.ok(barred.light(...along(1)).disc > plain.light(...along(1)).disc && barred.share(...along(1)) < plain.share(...along(1)));
   assert.equal(barred.light(...along(2.5)).disc, plain.light(...along(2.5)).disc);
 });
+
+test('a fading bulge ends on its own spheroid, in the disc plane and along the disc normal', () => {
+  const plain = m81(), faded = m81(3), n = faded.disc.diskNormal, m = faded.lineNodes;
+  const at = (model: typeof plain, v: readonly number[], k: number) => model.density([v[0]! * k, v[1]! * k, v[2]! * k]);
+  assert.equal(at(faded, m, 2.9), at(plain, m, 2.9));
+  assert.ok(at(faded, m, 4.5) > 0 && at(faded, m, 4.5) < at(plain, m, 4.5));
+  assert.equal(at(faded, m, 6.001), 0);
+  // Along the normal the spheroid is flatter by its intrinsic axis ratio: it ends at radius x q0.
+  assert.ok(at(faded, n, 6 * faded.q0 * 0.9) > 0);
+  assert.equal(at(faded, n, 6.001 * faded.q0), 0);
+});
