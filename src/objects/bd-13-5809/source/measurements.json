@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "bd-13-5809",
+  "angularDiameterMas": 0.13,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 6,900,529 km at 702.26 pc = 0.13 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 702.2643048020012,
+  "distanceSource": "Gaia DR3 parallax 1.4240 +/- 0.0151 mas (same row, RUWE 1.00): 702.26 pc, no zero-point correction",
+  "radiusKm": 6900529.3,
+  "radiusSource": "Radius 9.919 (9.700 to 10.143) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 6,900,529 km at 695,700 km per solar radius. Mass 2.902 (2.794 to 3.011) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 4821.1 K from Gaia DR3 astrophysical parameters (CDS I/355/paramp), source 6888761925104124544: Teff 4821.1 K from the BP/RP spectra (GSP-Phot) (https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4821.1,
+  "effectiveTemperatureSource": "Gaia DR3 astrophysical parameters (CDS I/355/paramp), source 6888761925104124544: Teff 4821.1 K from the BP/RP spectra (GSP-Phot) (https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355)",
+  "surfaceGravityLogg": 2.91,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/bd-13-5809.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.908, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}
