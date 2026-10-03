@@ -526,7 +526,6 @@ export interface EdgeOnSolveInputs {
   readonly axis: readonly [number, number, number];
 }
 /** The lab-written reconstruction of one edge-on dataset, as the recipe's source/ holds it (labs/nebula reconstruct-circumstellar). */
-export type { EdgeOnReconstruction } from '@cssearth/objects';
 export const reconstructionPath = (dataset: CircumstellarDataset) => `reconstruction-${dataset.id}.json`;
 
 /** An edge-on disc: its midplane measured and checked against the published position angle, its displayed channels written,

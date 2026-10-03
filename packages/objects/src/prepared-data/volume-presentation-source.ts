@@ -25,7 +25,7 @@ const integer = (value: unknown): number => {
   return value;
 };
 
-const isTrackedVolumeSourcePreview = (preview: VolumeSourcePreview): preview is TrackedVolumeSourcePreview => !preview.path.startsWith('.local/');
+export const isTrackedVolumeSourcePreview = (preview: VolumeSourcePreview): preview is TrackedVolumeSourcePreview => !preview.path.startsWith('.local/');
 
 export function parseVolumeSourcePreview(raw: unknown): VolumeSourcePreview {
   const value = sourceObject(raw, ['path', 'url', 'skyBands', 'authoredFrom', 'crop']);

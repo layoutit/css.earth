@@ -1,7 +1,8 @@
 /** Configuration data contains no renderer implementation or individual object facts. */
 export const PREPARED_OBJECT_SCHEMA = 'cssearth-prepared-object@1';
 export const OBJECT_SCHEMA = 'cssearth-object@2';
-export type JsonValue = null | boolean | number | string | readonly JsonValue[] | JsonRecord;
+export type { JsonValue } from '@cssearth/core/schema';
+import type { JsonValue } from '@cssearth/core/schema';
 export interface JsonRecord { readonly [key: string]: JsonValue; }
 export interface PreparedAssetReference {
   readonly format: string;

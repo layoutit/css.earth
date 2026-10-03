@@ -1,6 +1,5 @@
 /** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, readNebulaDelivery } from '@cssearth/objects';
-export { readNebulaDelivery } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, readNebulaDelivery, type NebulaSkyFrame } from '@cssearth/objects';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
 
@@ -13,7 +12,7 @@ import { prepareNebulaCatalogueField } from './catalogue-field.ts';
 
 import { prepareVolumeAtlases } from '../density/index.ts';
 
-import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.ts';
+import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint } from './nebula-frame.ts';
 import { sanitizeVolumeProvenance } from './volume-provenance.ts';
 import { assertCompilerDeliveryElementBudget } from './element-budget.ts';
 const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';

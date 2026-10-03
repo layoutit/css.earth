@@ -235,7 +235,7 @@ export { CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA, type CircumstellarOpacity, type Ed
 // E2-rest: P4
 export { PYUVDATA_UVFITS_SCHEMA, parsePyuvdataUvfitsRequest, parsePyuvdataUvfitsAnswer, type PyuvdataUvfitsRequest, type PyuvdataUvfitsAnswer } from './prepared-data/pyuvdata-uvfits.js';
 export { VOLUME_SOURCE_MANIFEST_SCHEMA, parseVolumeSourceManifest, parseVolumeContextProducts, type VolumeManifestReader, type VolumeContextProduct } from './prepared-data/volume-source-manifest.js';
-export { VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeSourcePreview, type VolumeSourcePreview, type TrackedVolumeSourcePreview, type VolumeDatasetSource, type VolumePresentationSource } from './prepared-data/volume-presentation-source.js';
+export { VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeSourcePreview, isTrackedVolumeSourcePreview, type VolumeSourcePreview, type TrackedVolumeSourcePreview, type VolumeDatasetSource, type VolumePresentationSource } from './prepared-data/volume-presentation-source.js';
 
 export * from './prepared-data/resolution-evidence.js';
 export * from './prepared-data/limb-block.js';
@@ -248,3 +248,5 @@ export { parsePublishedBodyEpochRecord, parsePublishedParameters, type Published
 export * as preparedPanelReaders from './prepared-data/panel-readers.js';
 export { parseCloudAppearance, DEFAULT_CLOUD_APPEARANCE, type CloudAppearance } from './volume/cloud-appearance.js';
 export { validateChannelGain, type ChannelGain } from './volume/channel-gain.js';
+
+export { sourceRecordReaders } from './prepared-data/source-record-readers.js';

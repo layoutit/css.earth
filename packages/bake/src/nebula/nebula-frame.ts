@@ -4,7 +4,6 @@ import { balanceVolumeSlices } from '../volume-leaves/index.ts';
 
 export const METERS_PER_PARSEC = 3.085677581491367e16;
 export const ARCSECOND_RADIANS = Math.PI / 648000;
-export type { NebulaSkyFrame } from '@cssearth/objects';
 import type { NebulaSkyFrame } from '@cssearth/objects';
 const vector = (v: readonly number[]): VolumeVector => [v[0]!, v[1]!, v[2]!];
 function quaternion(x: VolumeVector, y: VolumeVector, z: VolumeVector): [number, number, number, number] {
