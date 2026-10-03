@@ -1,3 +1,4 @@
+import { sourceObject, sourcePath, sourceId, sourceUrl } from '../sources/catalog.js';
 import type { ProductInputEvidence } from '../provenance/product-input-evidence.js';
 
 export const VOLUME_PRESENTATION_SOURCE_SCHEMA = 'cssearth-volume-presentation-source@2';
@@ -17,4 +18,32 @@ export interface VolumeDatasetSource {
 export interface VolumePresentationSource {
   objectId: string; name: string; defaultDataset: string; bank: { path: string };
   sharedInputs: string[]; inputEvidence: ProductInputEvidence[]; datasets: VolumeDatasetSource[];
+}
+
+const integer = (value: unknown): number => {
+  if (typeof value !== 'number' || !Number.isSafeInteger(value) || value <= 0) throw new TypeError('Expected a positive integer.');
+  return value;
+};
+
+const isTrackedVolumeSourcePreview = (preview: VolumeSourcePreview): preview is TrackedVolumeSourcePreview => !preview.path.startsWith('.local/');
+
+export function parseVolumeSourcePreview(raw: unknown): VolumeSourcePreview {
+  const value = sourceObject(raw, ['path', 'url', 'skyBands', 'authoredFrom', 'crop']);
+  const path = sourcePath(value.path);
+  const result: VolumeSourcePreview = path.startsWith('.local/') ? { path }
+    : { path, ...(value.authoredFrom === undefined ? {} : { authoredFrom: sourceId(value.authoredFrom) }) };
+  const kinds = [value.url, value.skyBands, value.authoredFrom].filter(candidate => candidate !== undefined);
+  if (kinds.length !== 1) throw new TypeError('A preview names exactly one of a URL, a sky band recipe or the input it is drawn from.');
+  if (value.authoredFrom !== undefined) { /* named above */ }
+  else if (value.url !== undefined) result.url = sourceUrl(value.url);
+  else if (isTrackedVolumeSourcePreview(result)) throw new TypeError('A tracked preview names its URL or the input it is drawn from.');
+  else {
+    result.skyBands = { path: sourcePath(sourceObject(value.skyBands, ['path']).path) };
+  }
+  if (value.crop !== undefined) {
+    const crop = sourceObject(value.crop, ['left', 'top', 'width', 'height']);
+    const offset = (raw: unknown) => { if (typeof raw !== 'number' || !Number.isSafeInteger(raw) || raw < 0) throw new TypeError('Invalid crop offset.'); return raw; };
+    result.crop = { left: offset(crop.left), top: offset(crop.top), width: integer(crop.width), height: integer(crop.height) };
+  }
+  return result;
 }

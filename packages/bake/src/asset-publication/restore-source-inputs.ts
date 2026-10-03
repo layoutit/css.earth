@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 
 import { resolve } from "node:path";
 import { spawn } from "node:child_process";
-import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeRecipe } from '@cssearth/objects';
+import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeSourceManifest, parseVolumeRecipe } from '@cssearth/objects';
 import { sourceBytes } from '../volume/node/index.ts';
 import { publishSourceBytes } from '../delivery/index.ts';
 import { sourceArray, sourceObject, sourcePath } from '@cssearth/objects/sources';
@@ -44,9 +44,8 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
 
   async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Promise<boolean> {
     const manifestBytes = await readFile(resolve(sourceRoot, 'manifest.json'));
-    const manifest = sourceObject(JSON.parse(manifestBytes.toString('utf8')));
-    if (manifest.schema !== VOLUME_SOURCE_MANIFEST_SCHEMA) return false;
-    if (manifest.pathBase !== 'repository') throw new TypeError(`Invalid repository volume source manifest: ${id}.`);
+    const manifest = parseVolumeSourceManifest(JSON.parse(manifestBytes.toString('utf8')), { reader: 'restoration', objectId: id });
+    if (manifest === null) return false;
     const entries = (['inputs', 'documents', 'generatedIntermediates'] as const).flatMap(section =>
       sourceArray(manifest[section] ?? [], sourceObject).map(raw => ({ raw, section })));
     for (const { raw, section } of entries) {

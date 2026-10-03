@@ -4,7 +4,7 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parseProductRecord } from '@cssearth/telescope';
+import { parseProductRecord } from '@cssearth/objects';
 import { PDS_ARCHIVE_FINAL_SCHEMA, PDS_PROGRAMS, PDS_PROGRAMS_LOCATION, pdsReceiptName } from './archive-final.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
 

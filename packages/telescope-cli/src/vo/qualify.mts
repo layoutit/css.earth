@@ -7,7 +7,7 @@ import { describeFitsTable } from '../families/f08-table.mts';
 import { readProductScience } from '../product-science.mts';
 import { rememberQualification, type QualifiedObservation } from '../qualified-observations.mts';
 import { readProductRecord, fileSize, writeProductRecord } from '@cssearth/telescope/node';
-import type { ProductRun } from '@cssearth/telescope';
+import type { ProductRun } from '@cssearth/objects';
 import { VERSION } from '../help.mts';
 import { acquireVoProduct, nativeQualificationRoute, type AcquisitionSpec } from './access.mts';
 import type { VoNetworkPolicy } from './network-policy.mts';

@@ -33,7 +33,8 @@ import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { esoEnvironment, esoHeader, rawFrames, type EsoHeader, type SetOfFrames } from '@cssearth/telescope/node';
 import { assertInputs, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
-import { productRecordPath, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope';
+import { type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { readProgram, type NacoFrame, type NacoMode, type NacoProgram } from './archive.mts';
 import { nacoToolchainPath } from './toolchain.mts';
 

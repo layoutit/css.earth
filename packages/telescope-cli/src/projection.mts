@@ -5,13 +5,13 @@ import { resolve, dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import { fileSize } from '@cssearth/telescope/node';
-import type { ProductInput } from '@cssearth/telescope';
+import type { ProductInput } from '@cssearth/objects';
 import { readBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 
 import { assertBodyMapPlanes, bodyMapProductRecord, formatProductRecord } from './body-map-publication.mts';
 import { VERSION } from './help.mts';
 import { projectWithPlanetMapper } from '@cssearth/telescope/node';
-import { canonical } from '@cssearth/telescope/node';
+import { canonical } from '@cssearth/objects';
 import { sourceContext } from './delivery-context.mts';
 import { delivery } from './outputs.mts';
 import { localOutput, verifiedProduct } from './verified-product.mts';
