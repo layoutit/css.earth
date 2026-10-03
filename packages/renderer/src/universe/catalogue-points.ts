@@ -203,7 +203,8 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         // A level's exact repaint after a pause measures the view the camera stopped at: the shares are recomputed from it and
         // published once more, so a still view keeps the same dots however the frames before it were paced.
         const settled = () => { if (latest && runtime) { runtime.publish(latest); runtime.publish(latest); } };
-        const part = (points: typeof bank.points, cellOf: Int32Array, count: (total: number) => number, share: () => number) => ({ points,
+        const part = (points: typeof bank.points, cellOf: Int32Array, count: (total: number) => number, share: () => number, paintGroup?: number) => ({ points,
+          ...(paintGroup === undefined ? {} : { paintGroup }),
           cells: { boxes: bank.cells.boxes, of: cellOf },
           drawnCount: (distanceUnits: number, cameraUnits: VolumeVector) => count(drawn(distanceUnits, cameraUnits)),
           ...(budget === undefined ? {} : { keepFraction: share }),
@@ -235,7 +236,8 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         } else {
           const innermost = levels[levels.length - 1] as { appearUnits?: readonly [number, number] };
           const field = mount(shares.map(entry => part(bank.points.slice(entry.start, entry.start + entry.points), bank.cells.of.subarray(entry.start, entry.start + entry.points),
-            total => Math.max(0, Math.min(entry.points, total - entry.start)), () => entry.share)));
+            // Levels with the same near opacity dim together, so they share their paths (batched-spatial-points.ts).
+            total => Math.max(0, Math.min(entry.points, total - entry.start)), () => entry.share, entry.nearOpacity)));
           runtime = { layers: [field.root], publish(publication) {
             const distanceUnits = distanceOf(publication);
             const [from, to] = innermost.appearUnits ?? [1, 1];

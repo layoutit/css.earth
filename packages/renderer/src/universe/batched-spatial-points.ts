@@ -61,6 +61,11 @@ export interface BatchedSpatialPointPart<T extends BatchedSpatialPoint> {
   /** The indices of the points not to draw now, or null: the dots of stars a body marker draws (catalogue-points.ts). The
    * same set is returned until it changes. */
   hidden?(): ReadonlySet<number> | null;
+  /** Parts with the same key paint into the same paths and share one group: a path is one color, size and alpha, so
+   * parts that never dim apart need no paths of their own. The Milky Way's main bank drew 3,356 dots through 685 paths,
+   * a copy of every paint for each of its five levels, where its dots use 389 paints (2026-10-03). Without a key a part
+   * has its own paths. */
+  paintGroup?: string | number;
 }
 
 export interface BatchedSpatialPointStats { visiblePoints: number; candidates: number; skippedCells: number; residentElements: number; publishMs: number }
@@ -91,12 +96,18 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   // spreads the kept share evenly and stably. The cells' points in ascending order, each cell a run of `order` from
   // cellStart to cellStart of the next: the prefix a frame draws ends a run early, and a point keeps its own index for its
   // rank. One cell holds everything without cells.
-  const parts = inputs.map(({ points, cells, stylePoint, drawnCount, paintPalette, keepFraction, hidden }) => {
-    // Behind an occluder a dot is painted by a fainter path of its color, one for each level: more paths, no more dots.
-    const dimmed = (style: BatchedSpatialPointStyle, factor: number) => pointPaint({ ...style, opacity: style.opacity * factor });
+  // Behind an occluder a dot is painted by a fainter path of its color, one for each level: more paths, no more dots.
+  const dimmed = (style: BatchedSpatialPointStyle, factor: number) => pointPaint({ ...style, opacity: style.opacity * factor });
+  // One set of paths for each paint group, in the order the groups first appear, holding every paint its parts use.
+  const groupOf = inputs.map((input, index) => input.paintGroup === undefined ? `part ${index}` : `group ${input.paintGroup}`);
+  const paints = new Map([...new Set(groupOf)].map(group => [group, mountPointPaths(root, inputs.flatMap(({ points, stylePoint, paintPalette }, index) => {
+    if (groupOf[index] !== group) return [];
     const drawnStyle = (point: T) => { const style = stylePoint(point); return style && style.opacity > 0 && style.radiusPx > 0 ? style : null; };
-    const paint = mountPointPaths(root, occluder ? [...paintPalette, ...OCCLUDED_OPACITIES.flatMap(factor =>
-      points.flatMap(point => { const style = drawnStyle(point); return style ? [dimmed(style, factor)] : []; }))] : paintPalette);
+    return occluder ? [...paintPalette, ...OCCLUDED_OPACITIES.flatMap(factor =>
+      points.flatMap(point => { const style = drawnStyle(point); return style ? [dimmed(style, factor)] : []; }))] : paintPalette;
+  }))] as const));
+  const parts = inputs.map(({ points, cells, stylePoint, drawnCount, keepFraction, hidden }, partIndex) => {
+    const paint = paints.get(groupOf[partIndex]!)!;
     const positions = new Float64Array(points.length * 3), paths = new Int32Array(points.length), margins = new Float64Array(points.length);
     const occludedPaths = OCCLUDED_OPACITIES.map(() => new Int32Array(occluder ? points.length : 0));
     const ranks = new Float64Array(points.length);
@@ -121,7 +132,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
       boxes: cells?.boxes ?? new Float64Array(6), widestMargin, culled: new Int32Array(cellCount),
       last: { visiblePoints: 0, candidates: 0, skippedCells: 0, residentElements: 0, publishMs: 0 } as BatchedSpatialPointStats };
   });
-  const residentElements = 1 + parts.reduce((sum, part) => sum + part.paint.residentElements, 0);
+  const residentElements = 1 + [...paints.values()].reduce((sum, paint) => sum + paint.residentElements, 0);
   // The last full paint: the camera's position and everything else it depended on, how many points each part drew and
   // the nearest of them. A camera that only moved (a zoom, a pan around a planet) moves no point by a visible amount while
   // its translation is far below that nearest distance, so the paint is kept (parallaxPixels).
@@ -205,12 +216,12 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     // The occluder's plane from the camera: a sight line `camera + t offset` crosses it at t = side / (normal · offset).
     const [onx, ony, onz] = occluder?.normal ?? [0, 0, 0], [ocx, ocy, ocz] = occluder?.centreUnits ?? [0, 0, 0];
     const side = onx * (ocx - px) + ony * (ocy - py) + onz * (ocz - pz), occluderRadius = occluder?.radiusUnits ?? 0;
+    for (const paint of paints.values()) paint.begin(viewport);
     parts.forEach((part, partIndex) => {
       const partStarted = performance.now();
       const { positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order, boxes, culled, paint, cells } = part;
       const count = counts[partIndex]!, keep = keeps[partIndex]!, hiddenSet = hiddens[partIndex]!;
       let visible = 0, candidates = 0;
-      paint.begin(viewport);
       // A cell is out of view when all of its box is behind the camera or beyond one edge of the painted view and its
       // margins (a plane through the camera for each edge). The test is on the box, so it never drops a point the point
       // test below would keep; a relative tolerance keeps rounding on the box's side.
@@ -286,9 +297,9 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
           if (squared < nearestSquared) nearestSquared = squared;
         }
       }
-      paint.commit();
       part.last = { visiblePoints: visible, candidates, skippedCells: culledCount, residentElements, publishMs: performance.now() - partStarted };
     });
+    for (const paint of paints.values()) paint.commit();
     const nearestUnits = Math.sqrt(nearestSquared);
     // Counts for probes and tests, kept here: a per-frame dataset write is a DOM write (motion-freezes-membership.md).
     painted = { position: [...local.positionUnits], rest, counts, nearestUnits, keeps, hiddens, width, height, overscan };

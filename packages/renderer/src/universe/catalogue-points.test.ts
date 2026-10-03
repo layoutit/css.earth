@@ -100,7 +100,7 @@ test('a catalogue shown during a body\'s first view loads once that view is inte
   points.destroy();
 });
 
-test('a level with a near opacity draws as its own part and dims to it as the innermost level fills the view', async () => {
+test('a level with a near opacity has its own group and dims to it as the innermost level fills the view; the others share one', async () => {
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   const points = [[0, 0, -10], [0, 1, -10], [1, 0, -10]];
   const stacked = { ...bank, points, ...baked(points, [1, 1, 1]), appearance: { ...bank.appearance, opacity: 1, levels: [
@@ -113,13 +113,13 @@ test('a level with a near opacity draws as its own part and dims to it as the in
   field.publish(at(1)); await new Promise(resolve => setTimeout(resolve, 0)); field.publish(at(1));
   // The levels are groups of the bank's group in one svg: one layer (point-layer.ts), each group dimmed alone.
   const parts = [...field.root.firstElementChild!.children] as unknown as HTMLElement[];
-  assert.equal(parts.length, 3, 'one part per level');
+  assert.equal(parts.length, 2, 'the two levels that never dim share their paths');
   assert.equal(parts[0]!.style.opacity, '1', 'before the innermost level appears');
   const halfWidthPerDistance = Math.hypot(1000, 800) / 200;
   field.publish(at(Math.sqrt(.01) / halfWidthPerDistance));
   assert.ok(Math.abs(Number(parts[0]!.style.opacity) - (.75)) < 10 ** -12 / 2, 'halfway through its window in the logarithm');
   field.publish(at(.001));
-  assert.deepEqual(parts.map(part => part.style.opacity), ['0.5', '1', '1']);
+  assert.deepEqual(parts.map(part => part.style.opacity), ['0.5', '1']);
   field.destroy();
   for (const nearOpacity of [0, 1.5]) {
     assert.throws(() => parseCataloguePoints({ ...stacked, appearance: { ...stacked.appearance, levels: [{ ...stacked.appearance.levels[0], nearOpacity }, ...stacked.appearance.levels.slice(1)] } }), { message: `test-stars: level 0 nearOpacity must be in (0, 1], got ${nearOpacity}.` });
@@ -235,7 +235,8 @@ test('an arriving level spends what the budget leaves, never thinning the levels
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   // 200 outer dots and 1,000 inner ones, all on screen; a budget of 500 keeps every outer dot and 300 inner ones.
   const points = Array.from({ length: 1200 }, (_, i) => [((i * 37) % 200 - 100) / 100, ((i * 91) % 160 - 80) / 100, -10]);
-  const levels = [{ points: 200, fullDetailUnits: 100 }, { points: 1000, appearUnits: [0.64, 0.064] }];
+  // The outer level dims on its own, so it keeps its own group and its dots can be counted apart.
+  const levels = [{ points: 200, fullDetailUnits: 100, nearOpacity: .5 }, { points: 1000, appearUnits: [0.64, 0.064] }];
   const budgeted = { ...bank, points, ...baked(points, levels.map(level => level.points)), appearance: { ...bank.appearance, opacity: 1, screenBudget: 500, levels } };
   const field = mountCataloguePoints({ host, url: '/dots.json', loadBank: async () => budgeted });
   const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
