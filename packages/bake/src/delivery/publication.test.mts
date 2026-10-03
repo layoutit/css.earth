@@ -6,7 +6,7 @@ import { syncBuiltinESMExports } from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { preparedAssetWrites, publishPreparedObject, readPreparedJsonOutputs } from '@cssearth/bake/delivery';
+import { preparedAssetWrites, publishPreparedObject, readPreparedJsonOutputs, unownedPreparedFiles } from '@cssearth/bake/delivery';
 import { inventoryPreparedAssets } from '@cssearth/objects/node';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 const manifest = (values: Record<string,string>) => ({ schema: 'cssearth-inventory@1', assets: Object.entries(values).map(([filename,text]) => ({location:'public',filename,bytes:Buffer.byteLength(text),sha256:createHash('sha256').update(text).digest('hex')})) });
@@ -135,4 +135,18 @@ test('invalid staged metadata or missing previews fail without changing canonica
     await assert.rejects(publishPreparedObject(fixture.args), /ENOENT/);
     assert.deepEqual(await snapshot(fixture.canonical), before);
   } finally { await rm(fixture.root, { recursive: true, force: true }); }
+});
+
+test('a bake names the prepared files its inventory does not list, apart from regenerated, retired and shared ones', async t => {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-leftovers-')), objectDirectory = join(root, 'object'), prepared = join(objectDirectory, 'prepared');
+  t.after(() => rm(root, { recursive: true, force: true }));
+  // A first bake has published nothing to compare with.
+  await put(join(prepared, 'runtime.json'), '{}');
+  assert.deepEqual(await unownedPreparedFiles('fixture', objectDirectory, prepared), []);
+  await inventoryPreparedAssets({ objectId: 'fixture', objectDirectory, gitTrackedPaths: async () => new Set() });
+  // What an old checkout holds beside the published set: a moved dataset's folder, the transport and page a checkout regenerates,
+  // the two files no preparation writes now, and the world's member list, which the world step pins itself.
+  for (const name of ['layers/a/atlas.webp', 'old-report.json', 'object.json', 'page.json', 'provenance.json', 'lenses.json', 'members.json']) await put(join(prepared, name), 'x');
+  assert.deepEqual(await unownedPreparedFiles('fixture', objectDirectory, prepared, name => name === 'members.json'), ['layers/a/atlas.webp', 'old-report.json']);
+  assert.deepEqual(await unownedPreparedFiles('fixture', objectDirectory, join(root, 'absent')), []);
 });

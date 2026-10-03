@@ -26,23 +26,24 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Uniform photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret (2017) computes from PHOENIX model atmospheres for the TESS band, at the star's temperature and gravity from Bruntt et al. (2010): a model, because no transit fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting.",
+        "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,080 K and log g 4.4 (u1 0.402, u2 0.292): a model, because no fit of this star's limb is used.",
         "limbDarkening": {
           "law": "quadratic",
-          "path": "photometry/claret-2017-tess-quadratic.tsv",
+          "path": "photometry/claret-2011-v-quadratic.tsv",
           "grid": {
             "teffK": 6080,
-            "logg": 4.399,
+            "logg": 4.4,
             "models": {
-              "Type": "q",
-              "Mod": "PC"
+              "Filt": "V",
+              "Met": "L",
+              "Mod": "A"
             }
           },
           "columns": {
             "teff": "Teff",
             "logg": "logg",
-            "u1": "aLSM",
-            "u2": "bLSM"
+            "u1": "a",
+            "u2": "b"
           }
         }
       }
@@ -1506,7 +1507,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the photosphere according to the selected limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

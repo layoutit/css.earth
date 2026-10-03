@@ -135,10 +135,10 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   if (star) {
     const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
     const logg = fixed(Math.log10(record.mass.value * GM_SUN * 1e15 / (radius.value * SOLAR_RADIUS_KM * 1e5) ** 2), 2);
-    const limb = await chooseLimb(id, t!.value, logg, archive);
+    const limb = await chooseLimb(id, t!.value, logg, archive, undefined, undefined, spec.whiteDwarf?.atmosphere);
     const color = planckChoice(id, t!, spec.colorReason ?? 'The archives do not resolve this companion from its star', [], cmf);
     const installed = await installColorDataset(files, id, color, limb);
-    colorHex = installed.hex; limbSentence = limb.sentence;
+    colorHex = installed.hex; limbSentence = `${limb.sentence}${spec.whiteDwarf ? `; its atmosphere is ${spec.whiteDwarf.atmosphere}: ${spec.whiteDwarf.source} (${spec.whiteDwarf.url})` : ''}`;
     const measurements = read(`${s}/measurements.json`);
     Object.assign(measurements, { surfaceGravityLogg: logg, surfaceGravitySource: `log g from the mass and radius in packages/astronomy/data/bodies/${id}.json, log10(GM/R^2) in cgs, rounded to two decimals` });
     files.set(`${s}/measurements.json`, json(measurements));

@@ -57,7 +57,11 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
 const archiveCacheName=(url:string)=>url.replace(/^https?:\/\//,'').replace(/[^A-Za-z0-9._-]+/g,'_').slice(-200);
 const rangeHeaders=(entry:SourceEntry,headers?:Record<string,string>)=>entry.range?{...headers,Range:rangeRequestHeader(entry.range)}:headers;
 const rangedEntry=(manifest:SourceManifest,path:string)=>[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].some(entry=>entry.path===path&&entry.range!==undefined);
-export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport={fetch},mirrorOrigin=null,objectId=basename(dirname(sourceRoot))}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport;mirrorOrigin?:string|null;objectId?:string}) {
+// An archive such as Zenodo answers 403 to a request that does not say who asks, the runtime's default user agent included. The
+// default transport names this project; a step's own headers win.
+const SOURCE_USER_AGENT='cssEarth/0.6 (https://github.com/layoutit/css.earth; source restore)';
+const NAMED_TRANSPORT:AcquisitionTransport={fetch:(url,init)=>fetch(url,{...init,headers:{'user-agent':SOURCE_USER_AGENT,...Object.fromEntries(new Headers(init?.headers))}})};
+export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport=NAMED_TRANSPORT,mirrorOrigin=null,objectId=basename(dirname(sourceRoot))}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport;mirrorOrigin?:string|null;objectId?:string}) {
  const selected=plan.operations.filter(step=>step.groups.includes(group));if(!selected.length)throw new Error(`Acquisition group ${group} is undeclared.`);
  const request=async(url:string,init?:RequestInit)=>{const response=await transport.fetch(url,init);if(!response.ok)throw new Error(`Source request failed ${response.status}: ${url}.`);return response;};
  const bytes=async(url:string)=>new Uint8Array(await(await request(url)).arrayBuffer());

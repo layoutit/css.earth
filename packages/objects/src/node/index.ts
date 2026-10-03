@@ -11,7 +11,7 @@ export { PREPARED_CATALOGUE, preparedCatalogueModule, readPreparedObjects } from
 export type { PreparedNavigableObject, PreparedObjectRegistry, PreparedSceneObject } from './prepared-registry.js';
 export { readCatalog, readContextObjects, readObjectDescriptors, type ObjectDescriptors } from './catalog-directory.js';
 export { ASSET_LOCATIONS, INVENTORY_FILE, INVENTORY_SCHEMA, assembleRuntimeAssetClosure, bakedPreparedFiles, inventoryPreparedAssets, inventoryPreparedSubset,
-  inventoryPublicAssets, inventoryText, isRegeneratedPreparedFile, mergeInventory, normalizeRuntimeAssetUrls, readInventory,
+  inventoryPublicAssets, inventoryText, isRegeneratedPreparedFile, isRetiredPreparedFile, mergeInventory, normalizeRuntimeAssetUrls, readInventory,
   requireInventory, updateInventory, validateInventory, verifyInventory } from './runtime-asset-closure.js';
 export type { AssetLocation, Inventory, InventoryAsset } from './runtime-asset-closure.js';
 export { preparedObjectText, preparedObjectTransport, preparedPageData, readJsonHead } from './prepared-transport.js';

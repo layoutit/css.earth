@@ -7,8 +7,12 @@
   "distanceSource": "Gaia DR3 parallax 20.931 +/- 0.029 mas (photometry/gaia-dr3-source.csv): 1000/20.930631 = 47.777 pc, no zero-point correction",
   "radiusKm": 954529.68897,
   "radiusSource": "1.3720421 solar radii (954,529.69 km at 695,700 km per solar radius): the Gaia DR3 FLAME radius of source 6643589352010758400 (photometry/gaia-dr3-astrophysical-parameters.csv, radius_flame, bounds 1.344 to 1.400), Creevey et al. (2023, A&A 674, A26) and Fouesneau et al. (2023, A&A 674, A28). The GSP-Phot radius in the same row is 1.376.",
+  "effectiveTemperatureK": 6375.009,
+  "effectiveTemperatureSource": "Gaia DR3 GSP-Phot effective temperature 6375.009 K (6372.871 to 6377.673) of source 6643589352010758400 (photometry/gaia-dr3-astrophysical-parameters.csv, teff_gspphot); Creevey et al. 2023 (A&A 674, A26; https://doi.org/10.1051/0004-6361/202243688).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the Gaia FLAME radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json). A star's limb is not a sharp surface."
-  }
+  },
+  "surfaceGravityLogg": 4.25,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-181327.json: 4.254"
 }

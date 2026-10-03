@@ -1,28 +1,28 @@
 {
-  "id": "source-hd-181327-claret-2017-limb-darkening",
+  "id": "source-hd-181327-claret-2011-limb-darkening",
   "kind": "data-product",
   "identityLevel": "work",
-  "title": "HD 181327 · hd 181327 claret 2017 limb darkening",
+  "title": "HD 181327 · hd 181327 claret 2011 limb darkening",
   "identifiers": [],
   "links": [
     {
       "role": "landing",
-      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/600/A30/tableab&-out.max=200&Teff=6250..6500&logg=4.0..4.5&Z=0&-out=logg,Teff,Z,L/HP,aLSM,bLSM,aPCM,bPCM,chi2,Type,Mod",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "label": "Source"
     }
   ],
   "evidence": [
     {
       "path": "src/objects/hd-181327/source/manifest.json",
-      "locator": "/inputs/10"
+      "locator": "/inputs/9"
     }
   ],
   "relations": [],
   "statements": [
     {
       "kind": "credit",
-      "text": "Claret, A. (2017), A&A 600, A30: limb and gravity-darkening coefficients for the TESS satellite (VizieR J/A+A/600/A30, table ab)",
-      "scope": "The hd 181327 claret 2017 limb darkening input.",
+      "text": "Claret & Bloemen (2011), A&A 529, A75 (VizieR J/A+A/529/A75)",
+      "scope": "The hd 181327 claret 2011 limb darkening input.",
       "evidence": "Manifest credit field."
     },
     {

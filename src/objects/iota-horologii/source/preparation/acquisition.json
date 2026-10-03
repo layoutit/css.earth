@@ -27,15 +27,6 @@
       "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4745373133284418816&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
     },
     {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "photometry/claret-2017-tess-quadratic.tsv",
-      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/600/A30/tableab&-out.max=200&Teff=6000..6250&logg=4.0..4.5&Z=0&-out=logg,Teff,Z,L/HP,aLSM,bLSM,aPCM,bPCM,chi2,Type,Mod"
-    },
-    {
       "kind": "zip-member",
       "groups": [
         "restore",
@@ -214,6 +205,42 @@
       "path": "science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_18.dat",
       "url": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
       "member": "iHor_ZDI-Unconstrained_Epoch_18.dat"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "J/A+A/529/A75/table-af",
+        "-out.max": "500",
+        "Teff": "6000..6250",
+        "logg": "4..4.5",
+        "Z": "=0",
+        "xi": "=2",
+        "Filt": "V",
+        "Met": "L",
+        "Mod": "A",
+        "-out": "logg,Teff,Z,xi,a,b,Filt,Met,Mod"
+      },
+      "requiredText": [
+        "logg\tTeff"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        }
+      ]
     }
   ]
 }

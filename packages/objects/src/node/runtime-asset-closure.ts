@@ -192,9 +192,19 @@ export function isRegeneratedPreparedFile(filename: string): boolean {
     /^terrain(-[a-z0-9-]+)?\.json$/u.test(filename) || /-source-index\.json$/u.test(filename);
 }
 
+/**
+ * Files an earlier preparation wrote at the top of `prepared/` and none writes now. A checkout baked before the retirement
+ * still holds them, so a rebake there would list and publish them: the generated lineage record (lineage is read from the
+ * source records since 2026-09-29) and the lens list (`datasets.json` since the same day). Add a name here when a
+ * preparation stops writing it.
+ */
+export function isRetiredPreparedFile(filename: string): boolean {
+  return ['provenance.json', 'lenses.json'].includes(filename);
+}
+
 /** Every baked file under an object's `prepared/`: what the inventory publishes and `setup:assets` restores. */
 export async function bakedPreparedFiles(preparedRoot: string, objectId: string): Promise<string[]> {
-  return (await runtimeFiles(preparedRoot, objectId, true)).filter(name => !isRegeneratedPreparedFile(name));
+  return (await runtimeFiles(preparedRoot, objectId, true)).filter(name => !isRegeneratedPreparedFile(name) && !isRetiredPreparedFile(name));
 }
 
 /** Re-inventory part of an object's `prepared/`: the rows `owns` selects are replaced by the baked files it selects, and

@@ -15,6 +15,12 @@
  * 6. PICASO on the cloud-free Sonora Bobcat atmospheres, Bessell V (picaso-limb.mts): brown dwarfs colder than every table, computed
  *    with the pinned toolchain at the model nodes around the dwarf.
  *
+ * A white dwarf is read from none of these: its gravity is beyond them all, and its law depends on what its atmosphere is made of.
+ * When the spec cites its atmosphere class, the law is read from Claret et al. (2020), white-dwarf model atmospheres, Johnson V
+ * (J/A+A/634/A93, tableab): pure hydrogen (DA, 3,750-60,000 K), pure helium (DB, 10,000-40,000 K) or helium with a trace of hydrogen
+ * (DBA), log g 5 to 9.5. A white dwarf with no cited class, or one the grid of its class does not reach (a helium atmosphere under
+ * 10,000 K), gets no law.
+ *
  * Where a node beside the star is missing, the law is read between the nearest nodes that all exist. Outside every grid no law is
  * drawn and the reason is recorded; nothing is extrapolated. A spec may decline a law with its own reason. */
 import { interpolateGrid, readHowarthNode, readLimbGrid, type GridNode, type QuadraticLimbDarkening } from '@cssearth/bake/objects/stellar';
@@ -22,13 +28,24 @@ import { VIZIER_ASU, type Archive } from './archives.mts';
 import { fromPicaso, PICASO } from './picaso-limb.mts';
 
 interface Grid {
-  readonly key: 'atlas' | 'tlusty' | 'neilson' | 'phoenix'; readonly inputId: string; readonly file: string; readonly source: string; readonly cite: string; readonly models: string; readonly band: string;
+  readonly key: 'atlas' | 'tlusty' | 'neilson' | 'phoenix' | 'white-dwarf'; readonly inputId: string; readonly file: string; readonly source: string; readonly cite: string; readonly models: string; readonly band: string;
   readonly vizier: string; readonly modelColumns: Readonly<Record<string, string>>;
   readonly columns: { readonly teff: string; readonly logg: string; readonly u1: string; readonly u2: string; readonly mass?: string };
   readonly form: (teff: string, logg: string, mass?: string) => Record<string, string>;
   /** Rewrites of the returned table into the columns above, applied after the comment lines are dropped (and on restore). */
   readonly rewrite?: readonly { readonly pattern: string; readonly flags: string; readonly replacement: string }[];
+  /** How far around the star the first request looks for nodes, for a grid coarser than 1,000 K. */
+  readonly window?: { readonly teff: number; readonly logg: number };
 }
+/** The atmospheres Claret et al. (2020) tabulate for white dwarfs. */
+export const WHITE_DWARF_ATMOSPHERES = ['DA', 'DB', 'DBA'] as const;
+export type WhiteDwarfAtmosphere = typeof WHITE_DWARF_ATMOSPHERES[number];
+const ATMOSPHERE_WORDS: Readonly<Record<WhiteDwarfAtmosphere, string>> = { DA: 'pure-hydrogen (DA) white-dwarf', DB: 'pure-helium (DB) white-dwarf', DBA: 'helium with trace hydrogen (DBA) white-dwarf' };
+/** Claret et al. (2020) for one atmosphere class: 5,000 K apart above 20,000 K, so the first request looks 6,000 K either side. */
+export const whiteDwarfGrid = (atmosphere: WhiteDwarfAtmosphere): Grid => ({ key: 'white-dwarf', inputId: 'claret-2020-limb-darkening', file: 'photometry/claret-2020-v-quadratic.tsv', source: 'J/A+A/634/A93/tableab',
+  cite: 'Claret et al. (2020), A&A 634, A93', models: ATMOSPHERE_WORDS[atmosphere], band: 'Johnson V', vizier: 'J/A+A/634/A93', modelColumns: { Mod: atmosphere, Filter: 'V' }, columns: { teff: 'Teff', logg: 'logg', u1: 'a', u2: 'b' },
+  window: { teff: 6000, logg: 0.5 },
+  form: (teff, logg) => ({ '-source': 'J/A+A/634/A93/tableab', '-out.max': '500', Teff: teff, logg, Mod: `=${atmosphere}`, Filter: '=V', '-out': 'logg,Teff,Z,a,b,Mod,Filter' }) });
 export const GRIDS: readonly Grid[] = [
   { key: 'atlas', inputId: 'claret-2011-limb-darkening', file: 'photometry/claret-2011-v-quadratic.tsv', source: 'J/A+A/529/A75/table-af', cite: 'Claret & Bloemen (2011), A&A 529, A75', models: 'ATLAS', band: 'Johnson V', vizier: 'J/A+A/529/A75',
     modelColumns: { Filt: 'V', Met: 'L', Mod: 'A' }, columns: { teff: 'Teff', logg: 'logg', u1: 'a', u2: 'b' },
@@ -78,12 +95,13 @@ function edgeNote(law: { u1: number; u2: number }) {
 async function fromGrid(id: string, grid: Grid, teffK: number, logg: number, massSolar: number | undefined, archive: Archive) {
   if (grid.columns.mass && massSolar === undefined) throw new RangeError('the grid is of spherical models, read by mass, and the star has no measured mass');
   const recipe = { law: 'quadratic' as const, source: 'grid' as const, path: grid.file, teffK, logg, ...(grid.columns.mass ? { massSolar } : {}), models: grid.modelColumns, columns: grid.columns };
-  const wide = rewritten(grid, await archive.text(VIZIER_ASU, grid.form(`${Math.floor(teffK - 1000)}..${Math.ceil(teffK + 1000)}`, `${(logg - 1).toFixed(2)}..${(logg + 1).toFixed(2)}`, grid.columns.mass ? '0..100' : undefined)));
+  const reach = grid.window ?? { teff: 1000, logg: 1 };
+  const wide = rewritten(grid, await archive.text(VIZIER_ASU, grid.form(`${Math.floor(teffK - reach.teff)}..${Math.ceil(teffK + reach.teff)}`, `${(logg - reach.logg).toFixed(2)}..${(logg + reach.logg).toFixed(2)}`, grid.columns.mass ? '0..100' : undefined)));
   const { corners } = readLimbGrid(wide, recipe);
   const teffs = corners.map(c => c.teff), loggs = corners.map(c => c.logg), masses = corners.flatMap(c => c.mass === undefined ? [] : [c.mass]);
   const form = grid.form(range(teffs), range(loggs), masses.length ? range(masses) : undefined), text = rewritten(grid, await archive.text(VIZIER_ASU, form));
   const coefficients = readLimbGrid(text, recipe);
-  const law = `the quadratic law ${grid.cite} compute${grid.key === 'phoenix' ? 's' : ''} from ${grid.models} model atmospheres for the ${grid.band} band at ${teffK.toLocaleString('en-US')} K and log g ${logg}${massSolar !== undefined && grid.columns.mass ? ` for ${massSolar} solar masses` : ''}`;
+  const law = `the quadratic law ${grid.cite} compute${grid.key === 'phoenix' ? 's' : ''} from ${grid.models} model atmospheres for the ${grid.band} band at ${Math.round(teffK).toLocaleString('en-US')} K and log g ${logg}${massSolar !== undefined && grid.columns.mass ? ` for ${massSolar} solar masses` : ''}`;
   return {
     limbDarkening: { law: 'quadratic', path: grid.file, grid: { teffK, logg, ...(grid.columns.mass ? { massSolar } : {}), models: grid.modelColumns }, columns: grid.columns },
     files: [{ path: grid.file, text }], grid: grid.key, coefficients: { u1: coefficients.u1, u2: coefficients.u2, u1Bounds: coefficients.u1Bounds, u2Bounds: coefficients.u2Bounds },
@@ -116,18 +134,24 @@ async function fromHowarth(id: string, teffK: number, logg: number, archive: Arc
     inputs: files.map(file => ({ id: `${id}-howarth-2011-${file.path.split('/').at(-1)!.replace(/\.ucE$/u, '')}`, path: file.path, origin: file.url, credit: `${HOWARTH.cite} (VizieR ${HOWARTH.vizier})`, ...LICENSE,
       acquisition: `Download of the ${HOWARTH.grid} model's energy-integrating (ucE) coefficient file from the CDS archive, retained unchanged.`,
       redistribution: 'Catalogue file retained unchanged with its citation.', consumers: ['assets', 'datasets'] })),
-    sentence: `dimmed toward the limb by the quadratic law ${HOWARTH.cite} computes from ATLAS9 model atmospheres for the Bessell V band at ${teffK.toLocaleString('en-US')} K and log g ${logg}, read between the models ${chosen.map(model => model.file.split('/').at(-1)).join(', ')} (u1 ${coefficients.u1.toFixed(3)}, u2 ${coefficients.u2.toFixed(3)}): a model, because no fit of this star's limb is used`,
+    sentence: `dimmed toward the limb by the quadratic law ${HOWARTH.cite} computes from ATLAS9 model atmospheres for the Bessell V band at ${Math.round(teffK).toLocaleString('en-US')} K and log g ${logg}, read between the models ${chosen.map(model => model.file.split('/').at(-1)).join(', ')} (u1 ${coefficients.u1.toFixed(3)}, u2 ${coefficients.u2.toFixed(3)}): a model, because no fit of this star's limb is used`,
     credit: `Limb darkening: ${HOWARTH.cite}, CDS J/MNRAS/413/1515.`,
   } satisfies LimbChoice;
 }
 
-/** The law of the first grid that holds the star, or the reasons none does. `massSolar` reads spherical grids. */
-export async function chooseLimb(id: string, teffK: number, logg: number, archive: Archive, decline?: string, massSolar?: number): Promise<LimbChoice> {
+/** The law of the first grid that holds the star, or the reasons none does. `massSolar` reads spherical grids; `whiteDwarf` is the
+ * cited atmosphere class of a white dwarf, whose law is read from its own grid and no other. */
+export async function chooseLimb(id: string, teffK: number, logg: number, archive: Archive, decline?: string, massSolar?: number, whiteDwarf?: WhiteDwarfAtmosphere): Promise<LimbChoice> {
   if (decline) return { sentence: `No limb darkening is drawn: ${decline}` };
+  if (whiteDwarf) {
+    const grid = whiteDwarfGrid(whiteDwarf);
+    try { return await fromGrid(id, grid, teffK, logg, undefined, archive); }
+    catch (error) { return { sentence: `No limb darkening is drawn: at ${Math.round(teffK).toLocaleString('en-US')} K and log g ${logg} the ${grid.models} grid of ${grid.cite} does not reach it (${(error as Error).message})` }; }
+  }
   const reasons: string[] = [];
   for (const grid of [...GRIDS.slice(0, 3), 'howarth' as const, GRIDS[3]!, 'picaso' as const]) {
     try { return grid === 'howarth' ? await fromHowarth(id, teffK, logg, archive) : grid === 'picaso' ? fromPicaso(id, teffK, logg) : await fromGrid(id, grid, teffK, logg, massSolar, archive); }
     catch (error) { reasons.push(`${grid === 'howarth' ? HOWARTH.cite : grid === 'picaso' ? `${PICASO.cite} (${PICASO.models})` : `${grid.cite} (${grid.models})`}: ${(error as Error).message}`); }
   }
-  return { sentence: `No limb darkening is drawn: at ${teffK.toLocaleString('en-US')} K and log g ${logg}${massSolar === undefined ? '' : ` for ${massSolar} solar masses`} no model grid used here reaches it (${reasons.join('; ')})` };
+  return { sentence: `No limb darkening is drawn: at ${Math.round(teffK).toLocaleString('en-US')} K and log g ${logg}${massSolar === undefined ? '' : ` for ${massSolar} solar masses`} no model grid used here reaches it (${reasons.join('; ')})` };
 }
