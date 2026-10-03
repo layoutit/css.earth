@@ -7,13 +7,15 @@ import type { VolumeCameraPublication } from '../volume/types.js';
  * A galaxy's face-on backing image, fixed in its frame under the catalogue dots. The plane never changes: camera motion
  * turns one scene transform, so it costs the compositor, not a repaint.
  *
- * The plane is an `img`, which the browser composites as it is. As a box with a background image, Safari drew each
- * plane's 2048-pixel image again on every frame while the camera was inside the galaxy's disc: zooming out of Earth on
- * the iPad, the three section planes took 26 ms of compositing a frame for about 63 frames, from 0.05 pc to 250 pc. With
- * the same planes drawing a 2 by 2 image the stretch was gone, and a smaller box, opaque planes or no `will-change` left
- * it as it was. Interleaved runs of that zoom had 70 and 69 frames over 20 ms as background images and 16 and 8 as
- * `img` (2026-10-03). In headless Chrome the two forms differ in 0 pixels close up and in thin lines of 1 to 2 levels
- * where the plane is drawn small.
+ * The plane is an `img`, which the browser composites as it is: the image is the layer. A box with a background image
+ * is a layer the browser paints the image into, and Safari painted each plane's 2048-pixel image again on every frame
+ * while the camera was inside the galaxy's disc and anything else on the page changed (one moving dataset billboard
+ * was enough). Zooming out of Earth on the iPad, the three section planes took 26 ms of compositing a frame for about
+ * 63 frames, from 0.05 pc to 250 pc; a native profile of that zoom has the browser's GPU process 1,579 ms inside
+ * CoreGraphics image drawing with boxes, 1,500 of them in that stretch, and 86 ms with `img`, never more than 13 ms in
+ * a half second. Interleaved runs of that zoom had 70 and 69 frames over 20 ms as background images and 16 and 8 as
+ * `img` (2026-10-03). The two forms draw the same pixels in WebKit at three cameras; in Chromium they differ by one
+ * level close up and in thin lines where the plane is drawn small.
  */
 export function mountGalaxyBacking({ host, before, payload, resolveResource }: {
   host: HTMLElement; before: Node | null; payload: PreparedGalaxyBacking; resolveResource(path: string): string;

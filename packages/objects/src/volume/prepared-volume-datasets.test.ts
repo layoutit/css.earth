@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import type { PreparedCssVolume } from './css-volume-types.js';
+import { validatePreparedCssVolume } from './css-volume-validation.js';
 import type { VolumeVector } from '../density-volume.js';
 import { validatePreparedCataloguePoints, type PreparedCataloguePoints } from './prepared-catalogue-points.js';
 import { validatePreparedVolumeDatasets, type PreparedVolumeDatasets } from './prepared-volume-datasets.js';
@@ -44,4 +45,17 @@ test('nearby volume visibility is explicit and rejects unknown policies', () => 
   assert.equal(validatePreparedVolumeDatasets({ ...payload(), contextVisibility: 'independent' }).contextVisibility, 'independent');
   assert.equal(validatePreparedVolumeDatasets(payload()).contextVisibility, 'galactic');
   assert.throws(() => validatePreparedVolumeDatasets({ ...payload(), contextVisibility: 'maybe' }));
+});
+
+test('a validated bank, volume or catalogue handed back is answered as it is, and a copy of it is read again', () => {
+  const bank = validatePreparedVolumeDatasets(payload()), first = bank.datasets[0]!;
+  assert.equal(validatePreparedVolumeDatasets(bank), bank);
+  assert.equal(validatePreparedCssVolume(first.volume), first.volume);
+  assert.equal(validatePreparedCataloguePoints(first.stars), first.stars);
+  assert.ok(Object.isFrozen(first.volume));
+  // A copy is another object: it is read, and refused when it is wrong.
+  assert.notEqual(validatePreparedCssVolume({ ...first.volume }), first.volume);
+  assert.throws(() => validatePreparedCssVolume({ ...first.volume, id: 'Not An Id' }), /identity/);
+  assert.throws(() => validatePreparedCataloguePoints({ ...first.stars, points: [{ ...first.stars.points[0]!, opacity: 2 }] }));
+  assert.throws(() => validatePreparedVolumeDatasets({ ...bank, defaultDataset: 'absent' }), /default/);
 });

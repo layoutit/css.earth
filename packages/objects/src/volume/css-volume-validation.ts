@@ -8,7 +8,14 @@ import { validateVolumeImpostors } from './volume-impostor-validation.js';
 
 const AXES: readonly VolumeAxis[] = ['x', 'y', 'z'];
 
+/** The volumes this validator has returned. A volume is read once and then handed to each of its owners (its dataset
+ * bank, the bank's topology check, its levels of detail, its runtime), and each validates what it is given: a returned
+ * volume is answered as it is, not read again. The five datasets of the Small Magellanic Cloud were validated some 25
+ * times in the frame they arrived in, 57 ms of a zoom on the iPad (2026-10-03). */
+const validated = new WeakSet<object>();
+
 export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
+  if (typeof input === 'object' && input !== null && validated.has(input)) return input as PreparedCssVolume;
   const value = record(input, 'prepared CSS volume');
   exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', 'provenance', 'approximation', ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : [])], 'prepared CSS volume');
   if (value.schema !== PREPARED_CSS_VOLUME_SCHEMA || typeof value.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.id)) {
@@ -50,10 +57,12 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   const impostors = Object.hasOwn(value, 'impostors') ? validateVolumeImpostors(value.impostors, resources) : undefined;
   const sky = Object.hasOwn(value, 'sky') ? validatePreparedCssSky(value.sky, resourcesInput as PreparedCssVolume['resources']) : undefined;
   if (sky && (sky.referenceFrame !== frame.referenceFrame || sky.epochJdTt !== frame.epochJdTt)) throw new TypeError('Prepared sky and volume must share their reference frame and epoch.');
-  return { schema: value.schema, id: value.id, frame,
+  const volume: PreparedCssVolume = Object.freeze({ schema: value.schema, id: value.id, frame,
     ...(value.anchors === undefined ? {} : { anchors: value.anchors as PreparedCssVolume['anchors'] }),
     stacks: stacks as PreparedCssVolume['stacks'], resources: resourcesInput as PreparedCssVolume['resources'],
-    provenance: value.provenance, approximation: value.approximation, ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}) };
+    provenance: value.provenance, approximation: value.approximation, ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}) });
+  validated.add(volume);
+  return volume;
 }
 
 function validateStack(stack: Record<string, unknown>, resources: Set<string>, leafIds: Set<string>): void {
