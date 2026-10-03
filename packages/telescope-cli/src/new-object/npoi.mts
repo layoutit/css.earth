@@ -72,7 +72,9 @@ export function parseNpoiRow(year: Paper, hd: string, tables: NpoiTables) {
     if (rows[0]) mass = [number(rows[0], 'Mass', '6'), number(rows[0], 'e_Mass', '6')];
   }
   const gravitySource = GRAVITY[year][t4.Ref ?? ''];
-  return { year, hd, spectralType: t5.SpType ?? t5.SpT ?? '', parallax: [number(t1, 'Plx', '1'), number(t1, 'e_Plx', '1')] as const, parallaxSource,
+  // A luminosity the 2018 paper flags (a parallax error of 20% or more) is not used.
+  const luminosity = t5.Lum && t5.f_Lum !== '*' ? number(t5, 'Lum', '5') : undefined;
+  return { year, hd, spectralType: (t1.SpType ?? t1.SpT ?? '').replace(/\s+/gu, ' ').trim(), luminosity, parallax: [number(t1, 'Plx', '1'), number(t1, 'e_Plx', '1')] as const, parallaxSource,
     diameter, radius: { value: number(t5, 'Rad', '5'), lower, upper }, teff: [number(t5, 'Teff', '5'), number(t5, 'e_Teff', '5')] as const, mass,
     gravity: t4.logg && gravitySource ? { value: number(t4, 'logg', '4'), source: gravitySource } : undefined };
 }
@@ -96,13 +98,20 @@ export function draftFromNpoi(row: ReturnType<typeof parseNpoiRow>, identifiers:
   const mass = row.mass ? cite(row.mass[0], row.mass[1], `mass ${row.mass[0]} +/- ${row.mass[1]} solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only`) : 'unmeasured' as const;
   // The width to a tenth below a hundred solar radii: two giants at one distance (Unukalhai and Epsilon Cygni, 23 pc) differ only there.
   const parsecs = 1000 / row.parallax[0], wider = r >= 1.05 ? `${r >= 100 ? Math.round(r) : r.toFixed(1)} times the Sun's width` : `the Sun's width`;
+  // What kind of star, in the papers' own terms: the MK type they list from SIMBAD (Table 1; Table 5's is the best-fitting SED
+  // template, G4 III for the F5 Ib supergiant Mirfak) and the luminosity class it names, as the 2018 abstract counts its sample
+  // ("dwarfs, subgiants, giants, bright giants and supergiants"). A type between two classes takes the first.
+  const CLASSES: Readonly<Record<string, string>> = { I: 'supergiant', II: 'bright giant', III: 'giant', IV: 'subgiant', V: 'dwarf' };
+  const luminosityClass = /(?:\s|\d)(I{1,3}|IV|V)(?![IV])/u.exec(row.spectralType)?.[1], word = luminosityClass ? CLASSES[luminosityClass]! : 'star';
+  const kind = row.spectralType ? `A ${word} of type ${row.spectralType}` : 'A naked-eye star', l = row.luminosity;
+  const light = l === undefined ? '' : ` and ${l >= 100 ? Math.round(l).toLocaleString('en-US') : l >= 10 ? Math.round(l) : l.toFixed(1)} times its light`;
   const hip = hipparcos ? { position: { catalogue: XHIP.catalogue, row: { HIP: hipparcos.hip }, credit: XHIP.credit, url: XHIP.url, motion: { epoch: 1991.25, ra: 'pmRA', dec: 'pmDE' } },
     radialVelocity: { value: hipparcos.rv, uncertainty: hipparcos.error, source: `${XHIP.credit.split(' (XHIP)')[0]}, XHIP, HIP ${hipparcos.hip}: RV ${hipparcos.rv} +/- ${hipparcos.error} km/s${hipparcos.quality ? ` (quality ${hipparcos.quality})` : ''}`, url: XHIP.url } } : {};
   return {
     // An id starts with a letter: a star named by its Flamsteed number takes its HD number as its id.
     id: (/^\d/u.test(name) ? hd : name).normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, ''), name, system: `${name} system`, target: hd,
     ...(name === hd ? {} : { aliases: [hd] }), ...(preferred?.step === 'proper' ? { featured: true } : {}),
-    description: `A naked-eye star ${parsecs.toFixed(parsecs < 100 ? 1 : 0)} parsecs away, ${wider}: its disc was measured with the Navy Precision Optical Interferometer.`,
+    description: `${kind} ${parsecs.toFixed(parsecs < 100 ? 1 : 0)} parsecs away, ${wider}: its disc was measured with the Navy Precision Optical Interferometer.`,
     paper: { url: paper, credit },
     distance: { value: Number(parsecs.toFixed(3)), uncertainty: Number((parsecs * row.parallax[1] / row.parallax[0]).toFixed(3)),
       source: `${credit}, ${hd}: the ${row.parallaxSource} parallax the radius was computed with (Table 1), ${row.parallax[0]} +/- ${row.parallax[1]} mas, inverted`, url: paper },
@@ -110,9 +119,9 @@ export function draftFromNpoi(row: ReturnType<typeof parseNpoiRow>, identifiers:
     radius, mass, temperature: cite(row.teff[0], row.teff[1], `effective temperature ${row.teff[0]} +/- ${row.teff[1]} K (Table 5), from the angular diameter and the bolometric flux of the SED fit`),
     ...(row.gravity && mass === 'unmeasured' ? { gravity: { value: row.gravity.value, source: `${credit}, ${hd}: log g ${row.gravity.value}, from ${row.gravity.source}, as the paper lists it beside the diameter (Table 4)`, url: paper } } : {}),
     // The reader text is the table row in words, cited to it; nothing the row does not hold.
-    text: { card: `A naked-eye star ${parsecs.toFixed(0)} parsecs away whose disc the NPOI measured: ${wider}.`,
+    text: { card: `${kind}, ${parsecs.toFixed(0)} parsecs away: ${wider}${light}.`,
       introduction: `Its disc spans ${row.diameter[0]} milliarcseconds, which gives ${r} solar radii and ${row.teff[0].toLocaleString('en-US')} K at its surface.`,
-      locator: `Tables 1, 4 and 5, ${hd}: parallax, limb-darkened diameter, radius, Teff` },
+      locator: `Tables 1, 4 and 5, ${hd}: parallax, MK type, limb-darkened diameter, radius, Teff, luminosity` },
     planets: [], companions: [],
   };
 }

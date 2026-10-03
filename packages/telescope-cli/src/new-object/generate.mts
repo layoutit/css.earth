@@ -175,7 +175,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const bright = spec.position?.motion && spec.target ? await resolver(spec.target) : undefined;
   const ids: Identifiers = bright ? readIdentifiers(bright.mainId, bright.identifiers) : spec.position ? { main: spec.target ?? spec.name } : await identify(resolver, spec.target, spec.gaia, spec.id);
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
-  const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...spec.position ? [spec.position.url] : [], ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.distance, spec.spin].flatMap(value => value && value !== 'gaia-flame' && value !== 'unmeasured' ? [value.url] : [])])];
+  const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...spec.position ? [spec.position.url] : [], ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.distance, spec.spin, spec.gravityDarkening].flatMap(value => value && value !== 'gaia-flame' && value !== 'unmeasured' ? [value.url] : [])])];
   const [gaiaRead, catalogueRow, found] = await Promise.all([spec.position ? undefined : fetchGaiaRow(archive, ids.gaia!), spec.position ? fetchCatalogueRow(archive, spec.position, spec.id) : undefined,
     Promise.all(urls.map(async url => [url, await fetchPublication(archive, url)] as const))]);
   const gaia = gaiaRead?.row, row: GaiaRow | CatalogueRow = gaia ?? catalogueRow!, label = gaia ? `Gaia DR3 ${gaia.sourceId}` : `VizieR ${catalogueRow!.words}`;
@@ -204,7 +204,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const gravity = Number.isFinite(physical.logg) || spec.limb?.none ? null
     : await chooseGravity({ archive, ...simbadPosition(row, place.properMotion), teffK: spec.temperature.value, ...(gravityRange ? { range: gravityRange } : {}), where: id });
   const limbLogg = gravity?.logg ?? physical.logg;
-  const [color, limb] = await Promise.all([chooseColor(spec, gaia, ids, archive, cmf), chooseLimb(id, spec.temperature.value, limbLogg, archive, spec.limb?.none ?? (Number.isFinite(limbLogg) ? undefined : 'no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class'), physical.gm > 0 ? Number((physical.gm / GM_SUN).toFixed(3)) : undefined)]);
+  const [color, limb] = await Promise.all([chooseColor(spec, gaia, ids, archive, cmf, row), chooseLimb(id, spec.temperature.value, limbLogg, archive, spec.limb?.none ?? (Number.isFinite(limbLogg) ? undefined : 'no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class'), physical.gm > 0 ? Number((physical.gm / GM_SUN).toFixed(3)) : undefined)]);
   const publications = new Map<string, Publication>(found.flatMap(([url, publication]) => publication ? [[url, publication]] : []));
   const catalogueOf = (url: string) => { const publication = publications.get(url); if (!publication) throw new TypeError(`${id}: no publication record was read for ${url}; cite the paper by arXiv, DOI or ADS link, or a web page by its address.`); return publication; };
   const paper = catalogueOf(spec.paper.url);
@@ -344,6 +344,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     ...lightCurve ? [lightCurve.decision] : [],
   ]);
 
+  if (spec.gravityDarkening) (await import('./roche-shape.mts')).installRocheShape(files, spec, row, catalogueOf(spec.gravityDarkening.url).id);
   const todo = [...color.todo ? [color.todo] : [], ...spec.text ? ['review the drafted card, introduction and README'] : ['reader card and introduction with quotes (text.json)', 'the README account of the star and its evidence']];
   return { id, files, color, limb, hex: colorHex, todo };
 }
