@@ -44,3 +44,20 @@ test('a fading bulge keeps its share inside fadeFrom and gives none at the exten
   assert.equal(along(faded, 6), 0);
   assert.equal(along(faded, 9), 0);
 });
+
+// M94 with S4G's two-disc fit (Salo et al. 2015, model _bdd): the second disc's light is disc light, so it lowers the
+// bulge's share where it is bright.
+const m94 = (secondDisc: boolean) => imageLayerBulgeModel({ target: { centerRaDeg: 192.721248, centerDecDeg: 41.120303, distancePc: 4_337_105.6 },
+  geometry: { kind: 'inclined-disk', inclinationDeg: 31.77, lineOfNodesPaDeg: 105, thicknessKpc: 0.00783, supportRadiusKpc: 5.862, supportTaperFraction: 0.75,
+    depthWeights: [1], depthScales: [1], bulge: { source: 'salo-2015-s4g-decompositions', positionAngleDeg: 7.53, sersicIndex: 1.814,
+      halfLightRadiusKpc: 0.4016, surfaceBrightnessAtHalfLight: 17.724, skyEllipticity: 0.037,
+      disc: { centralSurfaceBrightness: 19.035, scaleLengthKpc: 1.0612, skyEllipticity: 0.268, positionAngleDeg: 96.08 },
+      ...(secondDisc ? { secondDisc: { centralSurfaceBrightness: 23.007, scaleLengthKpc: 5.3381, skyEllipticity: 0.171, positionAngleDeg: 123.51 } } : {}),
+      extentKpc: { radius: 2.6, height: 1.3 } } } });
+
+test('a second disc adds to the disc light and lowers the bulge share, most where the first disc has faded', () => {
+  const one = m94(false), two = m94(true);
+  assert.ok(two.light(0, 2).disc > one.light(0, 2).disc && two.light(0, 2).bulge === one.light(0, 2).bulge);
+  assert.ok(two.share(0, 0.2) < one.share(0, 0.2) && one.share(0, 0.2) - two.share(0, 0.2) < 0.01, `${one.share(0, 0.2)}, ${two.share(0, 0.2)}`);
+  assert.ok((one.share(0, 2.5) - two.share(0, 2.5)) / one.share(0, 2.5) > 0.05, `${one.share(0, 2.5)}, ${two.share(0, 2.5)}`);
+});

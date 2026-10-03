@@ -23,6 +23,8 @@ export interface ImageLayerRecipe {
     /** A published bulge-plus-disc fit of the sky light (./bulge.ts): Sérsic bulge, exponential disc, one position angle. */
     bulge?: { source: string; /** Whose light fills the bulge: a share of the photograph's (default) or the fit's own. */ lightFrom?: 'photograph' | 'fit'; positionAngleDeg: number; sersicIndex: number; halfLightRadiusKpc: number; surfaceBrightnessAtHalfLight: number;
       skyEllipticity: number; disc: { centralSurfaceBrightness: number; scaleLengthKpc: number; skyEllipticity: number; positionAngleDeg?: number };
+      /** The fit's second exponential disc, where it has two: its light counts as the disc's. */
+      secondDisc?: { centralSurfaceBrightness: number; scaleLengthKpc: number; skyEllipticity: number; positionAngleDeg?: number };
       /** How far the bulge's slices reach: radius on the sky and height either side of the disc, kpc. */
       extentKpc: { radius: number; height: number; /** The share fades to nothing from here out to `radius`. */ fadeFrom?: number } } };
   bake: { maxFacePixels: number; diffuseFacePixels: number;
@@ -59,12 +61,13 @@ const path = (v: unknown): string => {
 const bulgeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['bulge']> => {
   const b = object(v, 'geometry.bulge'), d = object(b.disc, 'geometry.bulge.disc'), e = object(b.extentKpc, 'geometry.bulge.extentKpc');
   const ellipticity = (x: unknown, at: string) => { const n = finite(x, at); if (n < 0 || n >= 1) throw new TypeError(`${at} must be in [0, 1); got ${n}.`); return n; };
+  const discOf = (d: Record<string, unknown>, at: string) => ({ centralSurfaceBrightness: finite(d.centralSurfaceBrightness, `${at}.centralSurfaceBrightness`), scaleLengthKpc: positive(d.scaleLengthKpc, `${at}.scaleLengthKpc`),
+    skyEllipticity: ellipticity(d.skyEllipticity, `${at}.skyEllipticity`), ...(d.positionAngleDeg===undefined?{}:{positionAngleDeg:finite(d.positionAngleDeg,`${at}.positionAngleDeg`)}) });
   if (b.lightFrom !== undefined && b.lightFrom !== 'photograph' && b.lightFrom !== 'fit') throw new TypeError(`geometry.bulge.lightFrom must be photograph or fit; got ${JSON.stringify(b.lightFrom)}.`);
   return { source: text(b.source, 'geometry.bulge.source'), ...(b.lightFrom===undefined?{}:{lightFrom:b.lightFrom}), positionAngleDeg: finite(b.positionAngleDeg, 'geometry.bulge.positionAngleDeg'),
     sersicIndex: positive(b.sersicIndex, 'geometry.bulge.sersicIndex'), halfLightRadiusKpc: positive(b.halfLightRadiusKpc, 'geometry.bulge.halfLightRadiusKpc'),
     surfaceBrightnessAtHalfLight: finite(b.surfaceBrightnessAtHalfLight, 'geometry.bulge.surfaceBrightnessAtHalfLight'), skyEllipticity: ellipticity(b.skyEllipticity, 'geometry.bulge.skyEllipticity'),
-    disc: { centralSurfaceBrightness: finite(d.centralSurfaceBrightness, 'geometry.bulge.disc.centralSurfaceBrightness'), scaleLengthKpc: positive(d.scaleLengthKpc, 'geometry.bulge.disc.scaleLengthKpc'),
-      skyEllipticity: ellipticity(d.skyEllipticity, 'geometry.bulge.disc.skyEllipticity'), ...(d.positionAngleDeg===undefined?{}:{positionAngleDeg:finite(d.positionAngleDeg,'geometry.bulge.disc.positionAngleDeg')}) },
+    disc: discOf(d, 'geometry.bulge.disc'), ...(b.secondDisc===undefined?{}:{secondDisc:discOf(object(b.secondDisc,'geometry.bulge.secondDisc'),'geometry.bulge.secondDisc')}),
     extentKpc: { radius: positive(e.radius, 'geometry.bulge.extentKpc.radius'), height: positive(e.height, 'geometry.bulge.extentKpc.height'),
       ...(e.fadeFrom===undefined?{}:{fadeFrom:(()=>{const f=positive(e.fadeFrom,'geometry.bulge.extentKpc.fadeFrom');if(f>=Number(e.radius))throw new TypeError(`geometry.bulge.extentKpc.fadeFrom (${f}) must be inside radius (${String(e.radius)}).`);return f;})()}) } };
 };

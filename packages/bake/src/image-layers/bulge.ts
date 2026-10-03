@@ -26,6 +26,10 @@ export function imageLayerBulgeModel(recipe: Pick<ImageLayerRecipe, 'target' | '
   const fitPa = rad(bulge.positionAngleDeg), discPa = rad(bulge.disc.positionAngleDeg ?? bulge.positionAngleDeg);
   const along = (east: number, north: number, pa: number) => [east * Math.sin(pa) + north * Math.cos(pa), -east * Math.cos(pa) + north * Math.sin(pa)] as const;
   const radii = (east: number, north: number) => ({ rb: elliptical(...along(east, north, fitPa), bulge.skyEllipticity), rd: elliptical(...along(east, north, discPa), bulge.disc.skyEllipticity) });
+  // A fit with two exponential discs (S4G's two-disc models): the second disc's light is disc light too.
+  const second = bulge.secondDisc, secondI0 = second ? 10 ** (-0.4 * second.centralSurfaceBrightness) : 0, secondPa = rad(second?.positionAngleDeg ?? bulge.disc.positionAngleDeg ?? bulge.positionAngleDeg);
+  const discLight = (east: number, north: number, rd: number) => discI0 * Math.exp(-rd / bulge.disc.scaleLengthKpc) +
+    (second ? secondI0 * Math.exp(-elliptical(...along(east, north, secondPa), second.skyEllipticity) / second.scaleLengthKpc) : 0);
   /** The bulge's share of the fitted light at a sky offset from the centre: kpc at the galaxy's distance, east and north. */
   // A fit whose bulge falls off more slowly than its disc (a high Sérsic index) keeps a share far out, where that light
   // is the disc's; `extentKpc.fadeFrom` fades the share to nothing between it and `extentKpc.radius` on the sky.
@@ -37,13 +41,13 @@ export function imageLayerBulgeModel(recipe: Pick<ImageLayerRecipe, 'target' | '
   };
   const share = (east: number, north: number) => {
     const { rb, rd } = radii(east, north);
-    const sb = bulgeIb * Math.exp(-b * ((rb / re) ** (1 / n) - 1)), sd = discI0 * Math.exp(-rd / bulge.disc.scaleLengthKpc);
+    const sb = bulgeIb * Math.exp(-b * ((rb / re) ** (1 / n) - 1)), sd = discLight(east, north, rd);
     return sb / (sb + sd) * fade(east, north);
   };
   /** The fitted surface brightness of the bulge and the disc at a sky offset (east, north, kpc), as linear intensity. */
   const light = (east: number, north: number) => {
     const { rb, rd } = radii(east, north);
-    return { bulge: bulgeIb * Math.exp(-b * ((rb / re) ** (1 / n) - 1)), disc: discI0 * Math.exp(-rd / bulge.disc.scaleLengthKpc) };
+    return { bulge: bulgeIb * Math.exp(-b * ((rb / re) ** (1 / n) - 1)), disc: discLight(east, north, rd) };
   };
   // The oblate spheroid that projects to the fitted sky ellipticity at the disc's inclination:
   // q_sky² = cos² i + q0² sin² i.
