@@ -29,7 +29,17 @@ function quaternionFromBasis(x: Vec3, y: Vec3, z: Vec3): [number, number, number
   else { const s=Math.sqrt(1+m22-m00-m11)*2; q=[(m02+m20)/s,(m12+m21)/s,s/4,(m10-m01)/s]; }
   return q;
 }
-function compileStyle(vertices: Quad['verticesUnits'], texture: string, width: number, height: number, index: number): Quad['style'] {
+/** The leaf compiler draws a leaf this many CSS pixels beyond its quad on every side, at LEAF_PIXELS_PER_UNIT. */
+const LEAF_OUTSET_PIXELS=0.6,LEAF_PIXELS_PER_UNIT=50;
+/** A leaf's style. The compiler's outset is 12 pc on a kiloparsec bank and unseen; on a parsec bank it is 0.012 pc, 5% of
+ * a picture half a parsec across, and leaves that share a picture's light no longer line up. `exact` hands the compiler
+ * the quad drawn in by the outset, so the leaf is drawn on the quad itself. */
+function compileStyle(quad: Quad['verticesUnits'], texture: string, width: number, height: number, index: number, exact = false): Quad['style'] {
+  let vertices = quad;
+  if (exact) { const inset = LEAF_OUTSET_PIXELS / LEAF_PIXELS_PER_UNIT, right = difference(quad[1], quad[0]), down = difference(quad[3], quad[0]);
+    if (Math.hypot(...right) <= 2 * inset || Math.hypot(...down) <= 2 * inset) throw new RangeError(`${texture}: the leaf is ${(Math.hypot(...right) * LEAF_PIXELS_PER_UNIT).toFixed(2)} by ${(Math.hypot(...down) * LEAF_PIXELS_PER_UNIT).toFixed(2)} CSS pixels, under the compiler's outset.`);
+    const u = scale(norm(right), inset), v = scale(norm(down), inset), move = (vertex: Vec3, a: number, b: number): Vec3 => [vertex[0] + a * u[0] + b * v[0], vertex[1] + a * u[1] + b * v[1], vertex[2] + a * u[2] + b * v[2]];
+    vertices = [move(quad[0], 1, 1), move(quad[1], -1, 1), move(quad[2], -1, -1), move(quad[3], 1, -1)]; }
   const polygon: Polygon = { vertices, uvs: [[0,0],[1,0],[1,1],[0,1]], texture,
     textureImageSource: { url: texture, width, height }, texturePresentation: { backend:'image',lighting:'source',projection:'projective' }, doubleSided:true };
   const plan=computeTextureAtlasPlanPublic(polygon,index,{tileSize:50,layerElevation:50,seamBleed:0});
@@ -111,6 +121,8 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
   const unitsPerKpc=options.recipe.geometry.unit==='pc'?1000:1,{rgb,info,foreground,companions,colorTie}=await prepareImageLayerFace(options);
   const recipe:ImageLayerRecipe=unitsPerKpc===1?options.recipe:{...options.recipe,target:{...options.recipe.target,distancePc:options.recipe.target.distancePc*unitsPerKpc},
     geometry:{...options.recipe.geometry,thicknessKpc:options.recipe.geometry.thicknessKpc*unitsPerKpc,supportRadiusKpc:options.recipe.geometry.supportRadiusKpc*unitsPerKpc}};
+  // A parsec bank's leaves are drawn on their quads exactly (see compileStyle).
+  const styleOf=(vertices:Quad['verticesUnits'],texture:string,width:number,height:number,index:number)=>compileStyle(vertices,texture,width,height,index,unitsPerKpc!==1);
   const base=Buffer.alloc(info.width*info.height*4), floor=recipe.bake.backgroundFloor*255;
   for(let p=0;p<info.width*info.height;p++) { const i=p*3,o=p*4,r=Math.max(0,rgb[i]-floor),g=Math.max(0,rgb[i+1]-floor),b=Math.max(0,rgb[i+2]-floor),a=Math.max(r,g,b);
     base[o]=a?Math.round(r*255/a):0;base[o+1]=a?Math.round(g*255/a):0;base[o+2]=a?Math.round(b*255/a):0;base[o+3]=Math.round(a*255/(255-floor)); }
@@ -204,10 +216,10 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
   const flat=recipe.bake.flat===true;
   for(let layer=0;!flat&&layer<recipe.geometry.depthWeights.length;layer++){const w=recipe.geometry.depthWeights[layer],rgba=Buffer.from(diffuseSmall);for(let p=0;p<dw*dh;p++){const i=4*p,a=rgba[i+3]/255;rgba[i+3]=Math.round(255*(1-(1-a)**w));}
     const offset=thickness*(layer/(recipe.geometry.depthWeights.length-1)-.5),path=`layers/z-${String(layer).padStart(2,'0')}.webp`,bytes=await encode(rgba,dw,dh,path),v:[Vec3,Vec3,Vec3,Vec3]=[intersect(u0,v0,offset),intersect(u1,v0,offset),intersect(u1,v1,offset),intersect(u0,v1,offset)];
-    leaves.push({id:`z-${layer}`,axis:'z',offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:dw,heightPx:dh,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,dw,dh,leaves.length),bytes:bytes.length});}
-  {const path='layers/z-detail.webp',bytes=await encode(flat?extractSized(base,info.width,left,top,right+1,bottom+1):residualCrop,cropWidth,cropHeight,path),v:[Vec3,Vec3,Vec3,Vec3]=[intersect(u0,v0,0),intersect(u1,v0,0),intersect(u1,v1,0),intersect(u0,v1,0)];leaves.push({id:'z-detail',axis:'z',offsetKpc:0,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:cropWidth,heightPx:cropHeight,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,cropWidth,cropHeight,leaves.length),bytes:bytes.length});
+    leaves.push({id:`z-${layer}`,axis:'z',offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:dw,heightPx:dh,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:styleOf(v,path,dw,dh,leaves.length),bytes:bytes.length});}
+  {const path='layers/z-detail.webp',bytes=await encode(flat?extractSized(base,info.width,left,top,right+1,bottom+1):residualCrop,cropWidth,cropHeight,path),v:[Vec3,Vec3,Vec3,Vec3]=[intersect(u0,v0,0),intersect(u1,v0,0),intersect(u1,v1,0),intersect(u0,v1,0)];leaves.push({id:'z-detail',axis:'z',offsetKpc:0,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:cropWidth,heightPx:cropHeight,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:styleOf(v,path,cropWidth,cropHeight,leaves.length),bytes:bytes.length});
     // The runtime shows one stack per view axis: a flat bank gives each the same plane, so the disc draws from every side.
-    if(flat)for(const axis of ['x','y'] as const)leaves.push({id:`${axis}-detail`,axis,offsetKpc:0,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:cropWidth,heightPx:cropHeight,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,cropWidth,cropHeight,leaves.length),bytes:0});}
+    if(flat)for(const axis of ['x','y'] as const)leaves.push({id:`${axis}-detail`,axis,offsetKpc:0,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:cropWidth,heightPx:cropHeight,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:styleOf(v,path,cropWidth,cropHeight,leaves.length),bytes:0});}
   const weightAt=(z:number)=>{const q=(z+1)/2*(recipe.geometry.depthWeights.length-1),i=Math.min(recipe.geometry.depthWeights.length-2,Math.max(0,Math.floor(q))),t=q-i;return ((recipe.geometry.depthWeights[i]??0)*(1-t)+(recipe.geometry.depthWeights[i+1]??0)*t)*recipe.geometry.depthWeights.length;};
   const side=async(axis:'x'|'y')=>{const slices=recipe.bake.crossAxisSlices,sourceAlong=axis==='x'?info.height:info.width,along=Math.min(sourceAlong,recipe.bake.crossAxisAlongPixels),depth=recipe.bake.crossAxisDepthPixels,crossSize=axis==='x'?info.width:info.height;
     for(let s=0;s<slices;s++){const rgba=Buffer.alloc(along*depth*4);
@@ -221,7 +233,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       const alongA=2*aMin/along-1,alongB=2*(aMax+1)/along-1;
       const v:Quad['verticesUnits']=axis==='x'?[intersect(coordinate,-alongA,hi),intersect(coordinate,-alongB,hi),intersect(coordinate,-alongB,lo),intersect(coordinate,-alongA,lo)]:[intersect(alongA,-coordinate,hi),intersect(alongB,-coordinate,hi),intersect(alongB,-coordinate,lo),intersect(alongA,-coordinate,lo)];
       const offset=axis==='x'?(v[0][0]+v[1][0])/2:(v[0][1]+v[1][1])/2;
-      leaves.push({id:`${axis}-${s}`,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:sideWidth,heightPx:depth,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,sideWidth,depth,leaves.length),bytes:bytes.length}); }};
+      leaves.push({id:`${axis}-${s}`,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:sideWidth,heightPx:depth,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:styleOf(v,path,sideWidth,depth,leaves.length),bytes:bytes.length}); }};
   if(!flat){await side('x');await side('y');}
   if(bulgeModel&&bulgeTau){
     // The bulge's light, spread along each of our sight lines by the spheroid's density: slices parallel to the disc for the
@@ -242,7 +254,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     const scaleAt=(u:number,v:number,tau:number)=>{const ray=rayLocal(u,v),path=step/Math.abs(dot(diskNormal,norm(ray)));let sum=0;for(const z of offsets)sum+=bulgeModel.density(intersect(u,v,z))*path;return sum>0?tau/sum:0;};
     const grid=Array.from({length:sw*sh},(_,k)=>{const i=k%sw,j=Math.floor(k/sw),{tau,color}=cell(i,j,sw,sh),{u,v}=at(i,j,sw,sh);return {u,v,color,scale:scaleAt(u,v,tau),path:step/Math.abs(dot(diskNormal,norm(rayLocal(u,v))))};});
     const push=async(id:string,axis:LayerAxis,rgba:Buffer,width:number,height:number,v:Quad['verticesUnits'],offset:number)=>{const path=`layers/${id}.webp`,bytes=await encode(rgba,width,height,path);
-      leaves.push({id,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:width,heightPx:height,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,width,height,leaves.length),bytes:bytes.length});};
+      leaves.push({id,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:width,heightPx:height,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:styleOf(v,path,width,height,leaves.length),bytes:bytes.length});};
     for(const [k,z] of offsets.entries()){const rgba=Buffer.alloc(sw*sh*4);
       for(const [t,g] of grid.entries()){const tau=g.scale*bulgeModel.density(intersect(g.u,g.v,z))*g.path,o=4*t;for(let c=0;c<3;c++)rgba[o+c]=Math.round(g.color[c]);rgba[o+3]=Math.round(255*(1-Math.exp(-tau)));}
       await push(`bulge-z-${String(k).padStart(2,'0')}`,'z',rgba,sw,sh,[intersect(bu0,bv0,z),intersect(bu1,bv0,z),intersect(bu1,bv1,z),intersect(bu0,bv1,z)],z);}
@@ -273,13 +285,14 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     const bu0=2*bl/W-1,bu1=2*(br+1)/W-1,bv0=1-2*bt/info.height,bv1=1-2*(bb+1)/info.height,name=(axis:LayerAxis,index:number)=>`shape-${axis}-${String(index).padStart(2,'0')}`;
     // The walls' leaves keep their alpha exact: two terraces share a pixel's light, and a coarser alpha shows as rings.
     const push=async(id:string,axis:LayerAxis,rgba:Buffer,width:number,height:number,v:Quad['verticesUnits'],offset:number)=>{const path=`layers/${id}.webp`,bytes=await encode(rgba,width,height,path,true);
-      leaves.push({id,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:width,heightPx:height,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,width,height,leaves.length),bytes:bytes.length});};
+      leaves.push({id,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:width,heightPx:height,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:styleOf(v,path,width,height,leaves.length),bytes:bytes.length});};
     // How far in depth each pixel's light is shared, on each wall, and the sum of its shares over the terraces.
     const spread=[near,far].map(wall=>{const half=new Float32Array(bw*bh),total=new Float32Array(bw*bh),at=(x:number,y:number,otherwise:number)=>{const value=x<0||y<0||x>=bw||y>=bh?NaN:wall[(bt+y)*W+bl+x]!;return Number.isNaN(value)?otherwise:value;};
       for(let y=0;y<bh;y++)for(let x=0;x<bw;x++){const here=at(x,y,NaN),t=y*bw+x;if(Number.isNaN(here))continue;
         half[t]=Math.max(step,Math.hypot(at(x+1,y,here)-at(x-1,y,here),at(x,y+1,here)-at(x,y-1,here))/2*TERRACE_SHARE_PIXELS);
         for(let k=0;k<slices;k++)total[t]+=Math.max(0,1-Math.abs(here-(-reach+k*step))/half[t]!);}
       return {half,total};});
+    const least=Math.ceil(4/LEAF_PIXELS_PER_UNIT/(Math.hypot(...difference3(intersect(bu0,bv0,0),intersect(bu1,bv0,0)))/bw));
     // A terrace behind the star holds only the far wall's smooth light: half the picture's resolution carries it.
     const halve=(rgba:Buffer,width:number,height:number)=>{const out=Buffer.alloc(width*height);for(let y=0;y<height/2;y++)for(let x=0;x<width/2;x++){const lit=[0,0,0],plain=[0,0,0];let opacity=0;
         for(const [i,j] of [[0,0],[1,0],[0,1],[1,1]] as const){const o=4*((2*y+j)*width+2*x+i),a=rgba[o+3]!;opacity+=a;for(let c=0;c<3;c++){lit[c]!+=rgba[o+c]!*a;plain[c]!+=rgba[o+c]!;}}
@@ -294,6 +307,9 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
         for(let c=0;c<3;c++)rgba[o+c]=alpha>0?Math.min(255,Math.round((nearHue[3*p+c]!*front+(1-front)*farHue[3*p+c]!*back)/alpha)):nearHue[3*p+c]!;
         rgba[o+3]=stored;if(stored){x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y);if(front>0)detailed=true;}}
       if(x1<x0)continue;
+      // A terrace is a few CSS pixels across at least, with clear texels around its light: the leaf compiler cannot draw less.
+      while(x1-x0+1<least&&(x0>0||x1<bw-1)){if(x0>0)x0--;if(x1<bw-1&&x1-x0+1<least)x1++;}
+      while(y1-y0+1<least&&(y0>0||y1<bh-1)){if(y0>0)y0--;if(y1<bh-1&&y1-y0+1<least)y1++;}
       if(!detailed){if((x1-x0)%2===0){if(x1<bw-1)x1++;else x0--;}if((y1-y0)%2===0){if(y1<bh-1)y1++;else y0--;}}
       const u0=2*(bl+x0)/W-1,u1=2*(bl+x1+1)/W-1,v0=1-2*(bt+y0)/info.height,v1=1-2*(bt+y1+1)/info.height,offset=toward*depth,width=x1-x0+1,height=y1-y0+1,crop=extractSized(rgba,bw,x0,y0,x1+1,y1+1);
       await push(name('z',k),'z',detailed?crop:halve(crop,width,height),detailed?width:width/2,detailed?height:height/2,[intersect(u0,v0,offset),intersect(u1,v0,offset),intersect(u1,v1,offset),intersect(u0,v1,offset)],offset);}

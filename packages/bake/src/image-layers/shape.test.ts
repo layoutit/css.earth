@@ -7,7 +7,7 @@ import sharp from 'sharp';
 import { parseImageLayerRecipe } from './config.ts';
 import { prepareImageLayers } from './prepare.ts';
 
-type Leaf = { id: string; texturePath: string; verticesUnits: number[][] };
+type Leaf = { id: string; texturePath: string; verticesUnits: number[][]; style: { width: string; height: string; transform: string } };
 type Texture = { data: Buffer; width: number; height: number; origin: number[]; right: number[]; down: number[]; depth: number };
 
 const SIZE = 64;
@@ -56,6 +56,14 @@ test('a nebula\'s walls hold the light inside their outline and add up to the ph
     const leaves = bank.banks.find(entry => entry.axis === 'z')!.leaves as Leaf[], terraces = leaves.filter(leaf => leaf.id.startsWith('shape-z-'));
     assert.ok(terraces.length > 8 && terraces.length <= 17, `${terraces.length} terraces`);
     for (const axis of ['x', 'y'] as const) assert.ok(bank.banks.find(entry => entry.axis === axis)!.leaves.some(leaf => leaf.id.startsWith(`shape-${axis}-`)), `${axis} curtains`);
+    // A parsec bank's leaves are drawn on their quads: the box each style gives, through its matrix, is its quad's size at
+    // 50 CSS pixels per unit. Drawn beyond their quads, terraces that share a pixel's light overlap as rings.
+    for (const entry of bank.banks) for (const leaf of entry.leaves as Leaf[]) {
+      const [corner, right, , down] = leaf.verticesUnits as [number[], number[], number[], number[]], matrix = /matrix3d\(([^)]+)\)/.exec(leaf.style.transform)![1]!.split(',').map(Number);
+      const drawn = [parseFloat(leaf.style.width) * Math.hypot(matrix[0]!, matrix[1]!, matrix[2]!), parseFloat(leaf.style.height) * Math.hypot(matrix[4]!, matrix[5]!, matrix[6]!)];
+      const quad = [right, down].map(vertex => 50 * Math.hypot(...vertex.map((value, axis) => value - corner[axis]!)));
+      assert.ok(Math.abs(drawn[0]! - quad[0]!) < 0.01 && Math.abs(drawn[1]! - quad[1]!) < 0.01, `${leaf.id}: drawn ${drawn.map(value => value.toFixed(3)).join(' x ')} CSS px for a quad of ${quad.map(value => value.toFixed(3)).join(' x ')}`);
+    }
     const textures = await Promise.all(leaves.map(leaf => texture(join(root, 'shaped'), leaf)));
     // Farthest from the Sun first: the frame's z points away from it.
     const order = textures.map((leaf, index) => ({ leaf, id: leaves[index]!.id })).sort((a, b) => b.leaf.depth - a.leaf.depth);
