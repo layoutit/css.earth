@@ -2,7 +2,7 @@ import { pathToFileURL } from 'node:url';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
-import { normalizeDestinationQuery, readPreparedFeaturePins } from '@cssearth/objects';
+import { normalizeDestinationQuery, PREPARED_DESTINATIONS_SCHEMA, readPreparedFeaturePins } from '@cssearth/objects';
 import { resolveBuildSceneAddress } from '../../asset-origin.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
@@ -38,7 +38,7 @@ async function preparedPlaces(root: string, objectId: string, settlements: reado
   if (!isRecord(pin) || !Number.isSafeInteger(pin.count)) throw new TypeError(`${objectId}: prepared places descriptor is invalid.`);
   const url = text(pin.url, `${objectId} places url`), bytes = await readFile(resolve(root, 'public', url.replace(/^\//u, '')));
   const catalog: unknown = JSON.parse(bytes.toString('utf8'));
-  if (!isRecord(catalog) || !Array.isArray(catalog.places) || catalog.places.length !== pin.count) throw new TypeError(`${objectId}: places catalogue count differs from its descriptor.`);
+  if (!isRecord(catalog) || catalog.schema !== PREPARED_DESTINATIONS_SCHEMA || !Array.isArray(catalog.places) || catalog.places.length !== pin.count) throw new TypeError(`${objectId}: places catalogue count or schema differs from its descriptor.`);
   const duplicates: (readonly [string, string])[] = [];
   for (const place of catalog.places) {
     if (!isRecord(place)) throw new TypeError(`${objectId}: place record is invalid.`);
