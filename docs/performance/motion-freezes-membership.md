@@ -114,7 +114,8 @@ crossings, out to the Observable Universe, and in 0 at two crossings coming back
 world draws everything in view there, and the arriving scene's stage holds 3 to 5 empty nodes. On the iPad, a steady
 zoom out of Earth across four crossings and back in (interleaved runs) had 81 and 84 frames over 20 ms going out and 6
 and 6 coming in with the scene replaced at each crossing, and 68 and 72 and 3 and 3 with it replaced at rest. Most of
-the frames that remain are one stretch past the Solar System where compositing takes 26 ms a frame in both.
+the frames that remained were one stretch past the Solar System, where Safari redrew the galaxy's backing images on
+every frame; as `img` planes (`universe/galaxy-backing.ts`) the same zoom out has 16 and 8.
 
 ## Object arrival ownership
 
