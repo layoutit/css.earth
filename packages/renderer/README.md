@@ -101,10 +101,11 @@ budget or admit extra assets. Releasing the final lease cancels pending image
 loads and removes their listeners; completed warm handoffs preserve the decoded URL used by retained CSS. Detail
 publication and paced painting continue to wait on the same decoded-resource receipts.
 
-The universe billboard atlas has one shared decode lease for both the nebula and
-image-layer billboard banks. First visible demand starts its asynchronous decode;
-CSS receives the atlas only after readiness, followed by a requested publication.
-The lease ends with the universe. Cold body close-ups do not request this atlas,
+The universe billboards have one shared decode lease for both the nebula and
+image-layer billboard banks. Each billboard draws an image of its own: its first
+visible demand starts that image's asynchronous decode, and CSS receives the image
+only after readiness, followed by a requested publication. The lease keeps every
+image asked for and ends with the universe. Cold body close-ups request none,
 and decoding never reveals a new billboard during an inertial coast.
 
 Prepared leaf bounds validation and serialized pose keyframes live in `@cssearth/objects`.

@@ -1,13 +1,18 @@
 import { DATASET_BILLBOARDS_SCHEMA } from '@cssearth/objects';
 // `pnpm prepare:dataset-billboards` (`packages/bake/cli/prepare-dataset-billboards.mts`): what the universe knows about every volume dataset bank before fetching it.
 // Each bank gets its context visibility (whether it fades with the galaxy) and, when its default dataset has
-// prepared impostors, the one impostor view that faces the Sun, packed with the others into one atlas image.
-// From the Solar System and the nearby stars a nebula is a few pixels to a few dozen: the atlas draws it there,
+// prepared impostors, the one impostor view that faces the Sun, as an image of its own named by the bank's id.
+// From the Solar System and the nearby stars a nebula is a few pixels to a few dozen: its billboard draws it there,
 // and its megabytes of datasets are fetched only once it is large on screen. Inputs are the restored prepared
 // dataset payloads, each one the object's inventory lists.
+// One image for each bank, not one atlas for all: a page fetches the billboards it shows, and a billboard's layer draws
+// from an image its own size. With 98 billboards in one 2560 px atlas, the first billboard shown fetched 2 MB, and on an
+// iPad every billboard's layer made the GPU process copy the whole atlas before drawing its cell: 7 to 12 ms each, 87 to
+// 92 ms over a zoom out of Earth. With an image for each, the copies take 0 to 1 ms, and the zoom's frames over 25 ms
+// fall from 13 to 17 of 330 to 6 or 7 (three native captures each way, 2026-10-03).
 // An image-layer galaxy (Andromeda, Triangulum) gets the same one view: its source-facing slices, seen from the Sun and
 // composited back to front as the page composites them, so the galaxy shows from afar before its slices load.
-import { readFile, readdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { encodeLossyWebp } from '../raster/index.ts';
@@ -15,8 +20,9 @@ import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readInventory } from '@cssearth/objects/node';
 
-const OUTPUT = { metadata: 'site/prepared-dataset-billboards.json', atlas: 'site/prepared-dataset-billboards.webp' };
-/** Prepared impostor views are 256 px squares; cells keep them at their prepared size. */
+/** The images are served from the site's own `public/` tree, beside the other generated navigation images. */
+const OUTPUT = { metadata: 'site/prepared-dataset-billboards.json', images: 'public/navigation/dataset-billboards' };
+/** Prepared impostor views are 256 px squares; billboards keep them at their prepared size. */
 const CELL_PX = 256;
 
 type Vector = [number, number, number];
@@ -154,19 +160,29 @@ export async function prepareDatasetBillboards(projectRoot = process.cwd()) {
     banks.push(bank);
   }
   const drawn = banks.filter(bank => bank.image);
-  const columns = Math.max(1, Math.ceil(Math.sqrt(drawn.length))), rows = Math.max(1, Math.ceil(drawn.length / columns));
-  // Photographic billboards go through the lossy lane with exact alpha: lossless was 247 KB, lossy 98 KB, and pixelmatch
-  // (threshold 0.1) flags 4 of the atlas's 1,048,576 pixels (2026-09-25). Effort 4, not 6: every dev start encodes this
-  // atlas; 6 took 4.7 s and 4 takes 0.3 s for 6.7 KB more (220,384 against 227,078 bytes), and pixelmatch (threshold
-  // 0.1) finds 0 of the 1,310,720 pixels differ between the two atlases (2026-09-30).
-  const atlas = await encodeLossyWebp(sharp({ create: { width: columns * CELL_PX, height: rows * CELL_PX, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
-    .composite(drawn.map((bank, index) => ({ input: bank.image!, left: (index % columns) * CELL_PX, top: Math.floor(index / columns) * CELL_PX }))),
-    { alphaQuality: 100, effort: 4 });
-  const metadata = { schema: DATASET_BILLBOARDS_SCHEMA, atlas: { columns, rows, cellPx: CELL_PX },
+  // Photographic billboards go through the lossy lane with exact alpha. Effort 4, not 6: every dev start encodes these;
+  // on the atlas they replaced, 6 took 4.7 s and 4 took 0.3 s for 6.7 KB more, and pixelmatch (threshold 0.1) found none
+  // of its 1,310,720 pixels different between the two (2026-09-30).
+  const images = resolve(projectRoot, OUTPUT.images);
+  await mkdir(images, { recursive: true });
+  const names = new Set(drawn.map(bank => `${bank.id}.webp`));
+  // A bank that lost its billboard, or was removed, leaves no image behind.
+  for (const stale of (await readdir(images)).filter(name => !names.has(name))) await rm(resolve(images, stale));
+  let imageBytes = 0, next = 0;
+  await Promise.all(Array.from({ length: 8 }, async () => {
+    while (next < drawn.length) {
+      const bank = drawn[next++]!;
+      const bytes = await encodeLossyWebp(sharp(bank.image!), { alphaQuality: 100, effort: 4 });
+      imageBytes += bytes.length;
+      await writeIfChanged(resolve(images, `${bank.id}.webp`), bytes);
+    }
+  }));
+  const metadata = { schema: DATASET_BILLBOARDS_SCHEMA, imagePx: CELL_PX,
     banks: banks.map(bank => ({ id: bank.id, contextVisibility: bank.contextVisibility, attached: bank.attached,
       ...(bank.framingRadiusUnits === undefined ? {} : { framingRadiusUnits: bank.framingRadiusUnits }),
-      ...(bank.view ? { billboard: { cell: drawn.indexOf(bank), radiusUnits: bank.radiusUnits, ...bank.view } } : {}) })) };
-  await writeIfChanged(resolve(projectRoot, OUTPUT.atlas), atlas);
+      ...(bank.view ? { billboard: { radiusUnits: bank.radiusUnits, ...bank.view } } : {}) })) };
   await writeIfChanged(resolve(projectRoot, OUTPUT.metadata), `${JSON.stringify(metadata)}\n`);
-  return { banks: banks.length, billboards: drawn.length, atlasBytes: atlas.length };
+  // The atlas an earlier checkout wrote here is no longer read.
+  await rm(resolve(projectRoot, 'site/prepared-dataset-billboards.webp'), { force: true });
+  return { banks: banks.length, billboards: drawn.length, imageBytes };
 }

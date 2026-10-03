@@ -30,7 +30,7 @@ interface ImageBank {
 
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
 export function createUniverseCatalogBanks({ root, end, stage, lifetime, declarations, initialImages, volumeDeclarations,
-  initialCatalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardAtlas,
+  initialCatalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardImage,
   pointBanks = [], starsBefore }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
   /** Where a bank of plain-dot stars mounts: the world's own place for star dots, under every layer mounted after it (a
@@ -44,7 +44,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   loadCatalog: PreparedUniverseOptions['loadCatalog'];
   loadImageLayer: PreparedUniverseOptions['loadImageLayer'];
   requestPublication?: () => boolean;
-  prepareBillboardAtlas: () => boolean;
+  prepareBillboardImage: (url: string) => boolean;
   /** Published stellar extents in metres by object id (PreparedUniverseOptions.stellarExtents). */
   stellarExtents?: Readonly<Record<string, number>>;
   /** The prepared billboards: a galaxy with one shows its Sun-facing view from afar, before and without its slices. */
@@ -69,9 +69,9 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     const billboard = prepared?.plan.banks.get(bank.id)?.billboard;
     return billboard ? [{ id: bank.id, frame: bank.frame, billboard }] : [];
   });
-  // Mounted with the bank declarations, after the opaque galaxy backdrop: the atlas itself loads when one first shows.
-  const billboards = billboardEntries.length ? mountDatasetBillboards({ host: root, before: end, atlasUrl: prepared!.atlasUrl,
-    atlas: prepared!.plan.atlas, entries: billboardEntries, prepareAtlas: prepareBillboardAtlas }) : null;
+  // Mounted with the bank declarations, after the opaque galaxy backdrop: a billboard's image loads when it first shows.
+  const billboards = billboardEntries.length ? mountDatasetBillboards({ host: root, before: end, imageUrl: prepared!.imageUrl,
+    imagePx: prepared!.plan.imagePx, entries: billboardEntries, prepareImage: prepareBillboardImage }) : null;
   if (billboards) lifetime.onDispose(() => billboards.destroy());
   lifetime.onDispose(() => {
     const mounted = catalog;

@@ -201,13 +201,18 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const background = createUniverseBackground({ root, end, lifetime, plan, payload, sky, resolveResource,
           prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM, cataloguePointUrls: galaxyCataloguePoints,
           ...(galaxyBacking ? { backingUrl: galaxyBacking } : {}) });
-        // Both billboard layers sample one atlas. Keep one demand-driven decode lease
-        // for the universe lifetime, and publish again when its pixels are ready.
+        // Both billboard layers draw their banks' own images. Keep one demand-driven decode lease
+        // for the universe lifetime, and publish again when an image's pixels are ready.
         const billboardTextures = own(createVolumeTextureReadiness(() => { requestPublication?.(); }));
-        const prepareBillboardAtlas = () => datasetBillboards !== undefined && billboardTextures.ready([datasetBillboards.atlasUrl]);
+        // Each billboard asks for its own image when it first shows; the lease keeps every image asked for.
+        const billboardImages = new Set<string>();
+        const prepareBillboardImage = (url: string) => {
+          if (!billboardImages.has(url)) { billboardImages.add(url); billboardTextures.ready([...billboardImages]); }
+          return billboardTextures.decoded(url);
+        };
         const datasets = createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lifetime,
           declarations: [...declaredVolumes], facts: [...datasetFacts], frame: plan.frame, visibility: datasetVisibility,
-          billboards: datasetBillboards, load: loadVolumeDataset, warmDomNodeBudget: warmVolumeDatasetDomNodeBudget, requestPublication, prepareBillboardAtlas });
+          billboards: datasetBillboards, load: loadVolumeDataset, warmDomNodeBudget: warmVolumeDatasetDomNodeBudget, requestPublication, prepareBillboardImage });
         // A cut-open mesh draws the inside of its far wall here, behind the points it holds; its outer shell stays over them.
         const meshInterior = document.createElement('span'); meshInterior.hidden = true; root.insertBefore(meshInterior, end);
         // Our galaxy's disc, as its volume frames it: the centre, the frame's z axis and its reach in the plane.
@@ -227,7 +232,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime, starsBefore: starDots,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: [...declaredVolumes],
           pointBanks: [...declaredPoints],
-          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardAtlas });
+          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardImage });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];
         let overview = false;

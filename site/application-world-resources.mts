@@ -3,7 +3,6 @@ import { DATASET_VISIBILITY } from './runtime-policy.mts';
 import { isRecord } from '@cssearth/core';
 // Generated after the prepared dataset payloads are restored: text now, validated below.
 import datasetBillboardText from './prepared-dataset-billboards.json?raw';
-import datasetBillboardAtlasUrl from './prepared-dataset-billboards.webp?url';
 import { createPreparedUniverse, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE, WORLD_DOT_BANKS, onWorldSystems } from './world-context-plan.mts';
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
@@ -147,7 +146,9 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const volumeDatasetIds = new Set(volumeDatasetDescriptors.map(descriptor => descriptor.id));
     const volumeDatasetBanks = volumeDatasetDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame) }));
     // Every bank's context visibility and Sun-facing billboard, prepared from those same payloads.
-    const datasetBillboards = { plan: parseDatasetBillboards(JSON.parse(datasetBillboardText)), atlasUrl: datasetBillboardAtlasUrl };
+    // Each bank's billboard image is a public file named by its id (prepare-dataset-billboards.ts).
+    const datasetBillboards = { plan: parseDatasetBillboards(JSON.parse(datasetBillboardText)),
+      imageUrl: (id: string) => `/navigation/dataset-billboards/${encodeURIComponent(id)}.webp` };
     const loadVolumeDataset = createInFlightLoader(async (id: string) => {
       if (!volumeDatasetIds.has(id)) throw new TypeError(`Unknown prepared volume dataset bank: ${id}.`);
       const set = await bankSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport);
