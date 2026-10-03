@@ -247,9 +247,6 @@ importers:
       '@cssearth/objects':
         specifier: workspace:*
         version: link:../objects
-      '@cssearth/renderer':
-        specifier: workspace:*
-        version: link:../renderer
       '@cssearth/spice':
         specifier: workspace:*
         version: link:../spice

@@ -33,7 +33,7 @@ Camera projection, star loading and navigation remain here.
   effects ([package-sources.mts](../../site/build/package-sources.mts)), so modules declare and export only.
   Worker entries keep their load-time effects.
 - Node code built by esbuild with `packages: 'external'` must bundle this package
-  ([bundle-renderer.ts](../bake/src/preparation/bundle-renderer.ts)): the sources name their siblings `.js`, which Node cannot
+  ([lab builder](../../labs/nebula/packages/lab/src/cli/build.ts)): the sources name their siblings `.js`, which Node cannot
   load unbundled. The lab's builder and the implementation fingerprints follow the sources the same way.
 
 ## Source size and package maintenance

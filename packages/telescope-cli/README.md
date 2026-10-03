@@ -112,3 +112,8 @@ CSSEARTH_ORACLE_PYTHON="$PWD/work/telescope-oracles/env/bin/python" node --test 
 It fails above 1e-10 of the reference peak. It verifies numerical extraction only, not archive calibration, covariance, aperture corrections or detection significance.
 
 Sphere silhouette framing uses `@cssearth/engine`; prepared loader and retained renderer consumers remain separate from this numeric contract.
+
+Renderer runtime exceptions are file-scoped in [the architecture rule](../../.github/scripts/architecture/preparation-without-renderer.mts):
+`src/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
+`src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
+The package keeps its renderer dependency for these four consumers. F16 validation uses objects contracts.
