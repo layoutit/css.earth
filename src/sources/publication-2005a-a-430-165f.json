@@ -1,0 +1,36 @@
+{
+  "id": "publication-2005a-a-430-165f",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reference 2005A&A...430..165F, as the NASA Exoplanet Archive cites it.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "2005A&A...430..165F"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2005A&A...430..165F",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2005A&A...430..165F",
+      "checkedOn": "2026-10-03",
+      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2005A&A...430..165F"
+    }
+  ],
+  "publicationDate": "2005"
+}

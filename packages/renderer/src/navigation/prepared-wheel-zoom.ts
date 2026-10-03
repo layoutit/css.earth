@@ -267,6 +267,19 @@ export function createPreparedWheelZoomControls({
       if (!enabled) stop();
     },
     destroy,
+    /** The signed log rate per millisecond the camera travels at by this zoom now: a dolly's own recent speed, a glide's
+     * present rate, 0 at rest. The zoom is the world camera's, not this scene's: a hand-over carries the rate across
+     * the scene swap, where these controls end and the next scene's begin. */
+    rate: () => motion.kind === 'glide' ? motion.rate : motion.kind === 'dolly' ? travelRate : 0,
+    /** Take up a zoom another scene's controls carried here: glide on from `rate`, as a released gesture does. */
+    resume(rate: number) {
+      if (disposed || !enabled || glidePolicy === null || !Number.isFinite(rate) || rate === 0) return;
+      cancelMotion();
+      direction = -Math.sign(rate); travelRate = 0;
+      const gliding: Extract<Motion, { kind: 'glide' }> = { kind: 'glide', frame: null, rate, releasedRate: rate, previous: frameClock.now() };
+      setMotion(gliding);
+      gliding.frame = requestFrame(glide);
+    },
     stats: () => Object.freeze({ active: motion.kind !== 'idle', gliding: motion.kind === 'glide', events, frames, inputKind,
       model: "perspective-dolly" }),
   });

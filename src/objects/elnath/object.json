@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "elnath",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Elnath",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3805479
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/elnath-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Elnath",
+      "classification": "star",
+      "color": "#afc6ff",
+      "distanceAu": 8467445.3,
+      "description": "A giant of type B7 III, 41 parsecs away: 5.5 times the Sun's width and 564 times its light.",
+      "systemName": "Elnath system",
+      "aliases": [
+        "HD 35497"
+      ],
+      "order": 5477,
+      "context": {
+        "order": 5474
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        162972190402501950,
+        1100079822722343200,
+        606484297664289200
+      ],
+      "presentationToReference": [
+        0.12865558093494478,
+        0.07017034569255672,
+        0.9892036514690385,
+        0.8684390164252308,
+        0.47364283889187947,
+        -0.14654738454444996,
+        0.47881250635783273,
+        -0.8779171850190816,
+        0.0000018714021511840618
+      ],
+      "orbitUpReference": [
+        -0.07017034569255672,
+        -0.47364283889187947,
+        0.8779171850190816
+      ],
+      "metersPerUnit": 12275738.709677419,
+      "bodyRadiusM": 3805479000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

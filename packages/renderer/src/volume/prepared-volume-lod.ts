@@ -105,10 +105,6 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     const projection = projectVolumeImpostors(publication, options.payload.frame, bank,
       !detailAllowed || options.nativeFocalCss !== undefined);
     const { visible, volumeMix, diameterPixels, x, y } = projection;
-    // Test hooks: rounded and written only on change, so a steady frame writes no attributes.
-    const mixHook = String(Math.round(volumeMix * 1000) / 1000), diameterHook = String(Math.round(diameterPixels * 10) / 10);
-    writeData(options.host, 'volumeDetailMix', mixHook);
-    writeData(options.host, 'volumeDiameterPixels', diameterHook);
     const responsive = options.nativeFocalCss !== undefined && Number.isFinite(diameterPixels);
     // A presentation faded to zero still rasterises every node it keeps displayed: on an iPhone the full slice
     // volume cost hundreds of milliseconds a frame while its CSS opacity was 0. An impostor-sized cloud now leaves

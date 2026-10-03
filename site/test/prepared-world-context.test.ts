@@ -343,7 +343,7 @@ test('open world trajectories validate their epoch vertex and never accept a clo
   }
 });
 
-test('semantic changes invalidate worker snapshots without synchronously republishing geometry', () => {
+test('semantic changes reach the next worker snapshot: the plan in flight is still drawn, and nothing is republished synchronously', () => {
   const request = mock.fn(() => true), root = mount(1, request), layer = mounted.get(root)!;
   const clock = root.ownerDocument.defaultView;
   clock.advance(1000);
@@ -356,7 +356,9 @@ test('semantic changes invalidate worker snapshots without synchronously republi
     () => layer.setBodyVisibility({ labelHidden: ['venus'] }), () => layer.previewSelection('mercury')]) {
     const stale = layer.captureFrame(world, viewport), before = drawing(), calls = request.mock.calls.length;
     change();
-    assert.equal(stale.current(), false);
+    // The plan in flight is the frame the camera asked for a moment before the change: it is drawn, and the frame the
+    // change asks for carries it. Thrown away, the camera waited a frame at every change of selection or visibility.
+    assert.equal(stale.current(), true);
     assert.equal(request.mock.calls.length, calls + 1);
     assert.equal(drawing(), before);
     const fresh = layer.captureFrame(world, viewport);

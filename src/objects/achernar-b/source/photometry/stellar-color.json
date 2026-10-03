@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "achernar-b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 9064,
+      "lowerKelvin": 8440,
+      "upperKelvin": 9688,
+      "citation": "Kervella et al. (2022), A&A 667, A111, Table 4: Teff of B 9064 +/- 624 K: 9064 +/- 624 K, https://doi.org/10.1051/0004-6361/202244009"
+    },
+    "note": "The archives do not resolve this companion from its star, so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

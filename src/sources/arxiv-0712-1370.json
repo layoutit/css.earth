@@ -1,0 +1,55 @@
+{
+  "id": "arxiv-0712-1370",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Soubiran et al. (2008): Vertical distribution of Galactic disk stars IV - AMR and AVR from clump giants",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0712.1370"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:20078788"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2008A&A...480...91S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2008A&A...480...91S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361:20078788",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2008A&A...480...91S",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Soubiran et al. (2008)",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2008A&A...480...91S"
+    }
+  ],
+  "creators": [
+    "C. Soubiran",
+    "O. Bienayme",
+    "T. V. Mishenina",
+    "et al."
+  ],
+  "publicationDate": "2008"
+}

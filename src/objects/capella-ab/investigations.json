@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "capella-ab",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "8.83 +/- 0.33 solar radii from Torres et al. (2015), ApJ 807, 26, Table 5: secondary radius 8.83 +/- 0.33 solar radii.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/807/1/26"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "2.4828 solar masses: Torres et al. (2015), ApJ 807, 26, Table 4: dynamical mass of the secondary 2.4828 +/- 0.0067 solar masses (https://doi.org/10.1088/0004-637X/807/1/26).",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/807/1/26"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): P 104.02128 d; Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): a/R* 13.33, inclination 137.156 degrees; Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): e 0.00089; Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): omega 342.6 degrees (the star's); Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): periastron passage at 48147.1 BMJD_TDB; Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): ascending node 40.522 degrees east of north.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/807/1/26"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 5730 K from Torres et al. (2015), ApJ 807, 26, Table 5: secondary Teff 5730 +/- 60 K: #fff0e8, because the archives do not resolve this companion from its star. The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,730 K and log g 2.94 (u1 0.451, u2 0.264): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/807/1/26"
+      ]
+    }
+  ]
+}

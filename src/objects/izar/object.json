@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "izar",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Izar",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 26165277
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/izar-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Izar",
+      "classification": "star",
+      "color": "#ffe3c1",
+      "distanceAu": 14914352,
+      "description": "A bright giant of type K0 II-III, 72 parsecs away: 37.6 times the Sun's width and 653 times its light.",
+      "systemName": "Izar system",
+      "aliases": [
+        "HD 129989"
+      ],
+      "order": 5478,
+      "context": {
+        "order": 5475
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1493732265442851600,
+        -1309798184508622800,
+        1015503127950039400
+      ],
+      "presentationToReference": [
+        -0.6694886261890314,
+        -0.34221513568299944,
+        -0.6592979450240917,
+        -0.5870496389622362,
+        -0.3000774928393164,
+        0.7518817857120749,
+        0.45514580169197644,
+        -0.8904169243678696,
+        -0.0000011965811252952966
+      ],
+      "orbitUpReference": [
+        0.34221513568299944,
+        0.3000774928393164,
+        0.8904169243678696
+      ],
+      "metersPerUnit": 84404119.35483871,
+      "bodyRadiusM": 26165277000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

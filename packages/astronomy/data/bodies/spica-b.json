@@ -1,0 +1,32 @@
+{
+ "id": "spica-b",
+ "classification": "star",
+ "order": 5488,
+ "physical": {
+  "name": "Spica B",
+  "horizonsCode": null,
+  "meanRadiusKm": 2601918,
+  "gravitationalParameterKm3PerS2": 956856692702.38,
+  "parent": "spica",
+  "effectiveTemperatureK": 20900
+ },
+ "physicalNotes": "Radius 3.74 +/- 0.53 solar radii from Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: secondary radius 3.74 +/- 0.53 solar radii (https://doi.org/10.1093/mnras/stw255): 2,601,918 km at 695,700 km per solar radius. GM from the mass 7.21 +/- 0.75 solar masses (Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: dynamical mass of the secondary 7.21 +/- 0.75 solar masses, https://doi.org/10.1093/mnras/stw255) times the JPL solar GM. Temperature 20900 +/- 800 K from Tkachenko et al. (2016), MNRAS 458, 1964, Tables 4 and 7: secondary Teff 20,900 +/- 800 K from the disentangled spectrum (https://doi.org/10.1093/mnras/stw255). A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.0145,
+  "semiMajorAxisStellarRadii": 3.775,
+  "inclinationDegrees": 63.1,
+  "eccentricity": 0.133,
+  "argumentOfPeriapsisDegrees": 255.6,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 54188.9,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 2 (PHOEBE 2.0 solution): P 4.0145 d, T0 HJD 2,454,189.40 the time of periastron passage (Sect. 3; MJD 54188.90, HJD for BJD_TDB), e 0.133, longitude of periastron 255.6 degrees (the primary's, from its radial velocities), i 63.1; a 28.20 solar radii over the primary's 7.47 is 3.775 of its radii. The node's position angle on the sky is not measured and is drawn at 0, a display convention (https://doi.org/10.1093/mnras/stw255): P 4.0145 d",
+   "shape": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 2 (PHOEBE 2.0 solution): P 4.0145 d, T0 HJD 2,454,189.40 the time of periastron passage (Sect. 3; MJD 54188.90, HJD for BJD_TDB), e 0.133, longitude of periastron 255.6 degrees (the primary's, from its radial velocities), i 63.1; a 28.20 solar radii over the primary's 7.47 is 3.775 of its radii. The node's position angle on the sky is not measured and is drawn at 0, a display convention (https://doi.org/10.1093/mnras/stw255): a/R* 3.775, inclination 63.1 degrees",
+   "eccentricity": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 2 (PHOEBE 2.0 solution): P 4.0145 d, T0 HJD 2,454,189.40 the time of periastron passage (Sect. 3; MJD 54188.90, HJD for BJD_TDB), e 0.133, longitude of periastron 255.6 degrees (the primary's, from its radial velocities), i 63.1; a 28.20 solar radii over the primary's 7.47 is 3.775 of its radii. The node's position angle on the sky is not measured and is drawn at 0, a display convention (https://doi.org/10.1093/mnras/stw255): e 0.133",
+   "argumentOfPeriapsis": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 2 (PHOEBE 2.0 solution): P 4.0145 d, T0 HJD 2,454,189.40 the time of periastron passage (Sect. 3; MJD 54188.90, HJD for BJD_TDB), e 0.133, longitude of periastron 255.6 degrees (the primary's, from its radial velocities), i 63.1; a 28.20 solar radii over the primary's 7.47 is 3.775 of its radii. The node's position angle on the sky is not measured and is drawn at 0, a display convention (https://doi.org/10.1093/mnras/stw255): omega 255.6 degrees (the star's)",
+   "phase": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 2 (PHOEBE 2.0 solution): P 4.0145 d, T0 HJD 2,454,189.40 the time of periastron passage (Sect. 3; MJD 54188.90, HJD for BJD_TDB), e 0.133, longitude of periastron 255.6 degrees (the primary's, from its radial velocities), i 63.1; a 28.20 solar radii over the primary's 7.47 is 3.775 of its radii. The node's position angle on the sky is not measured and is drawn at 0, a display convention (https://doi.org/10.1093/mnras/stw255): periastron passage at 54188.9 BMJD_TDB",
+   "orientation": "Display convention: the orbit's position angle on the sky is not measured, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

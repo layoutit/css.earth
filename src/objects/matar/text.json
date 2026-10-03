@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "matar",
+  "card": {
+    "text": "A bright giant of type G8 II, 66 parsecs away: 24.5 times the Sun's width and 331 times its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa9d8b",
+        "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+        "label": "Baines et al. (2017), The Astronomical Journal 155 30",
+        "checked": "2026-10-03",
+        "locator": "Tables 1, 4 and 5, HD 215182: parallax, limb-darkened diameter, radius, Teff"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its disc spans 3.471 milliarcseconds, which gives 24.51 solar radii and 4,970 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa9d8b",
+        "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+        "label": "Baines et al. (2017), The Astronomical Journal 155 30",
+        "checked": "2026-10-03",
+        "locator": "Tables 1, 4 and 5, HD 215182: parallax, limb-darkened diameter, radius, Teff"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

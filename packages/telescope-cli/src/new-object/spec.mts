@@ -12,9 +12,10 @@
  *     "mass": "gaia-flame",
  *     "gravity": { "value": 4.4, "source": "…", "url": "…" },
  *     "spin": { "inclinationDegrees": 62, "periodDays": 2.32, "source": "…", "url": "…" },
+ *     "gravityDarkening": { "record": { "source": "…", "model": { … }, "view": { … } }, "credit": "…", "url": "…", "rotationPeriodHours": 37.25 },
  *     "radialVelocity": { "value": 18.2, "source": "…", "url": "…" },
  *     "limb": { "none": "why no law is drawn" },
- *     "color": { "skip": ["gaia-xp"], "reason": "why those routes are not used", "disagreement": "why the color and its cross-check differ" },
+ *     "color": { "skip": ["gaia-xp"], "reason": "why those routes are not used", "disagreement": "why the color and its cross-check differ", "companion": "what is known of a close companion a measured spectrum includes" },
  *     "planets": [{ "id": "wasp-121b", "name": "WASP-121b", "description": "…", "paper": { … }, "orbit": { "archive": "nasa-ps", "reference": "BOURRIER_ET_AL__2020" } }],
  *     "companions": [{ "id": "…", "name": "…", "description": "…", "paper": { … }, "temperature": { … }, "radius": { … }, "mass": { … }, "orbit": { … } }]
  *   }]
@@ -54,6 +55,11 @@
  * log g from the mass and radius. `radialVelocity` is needed only when Gaia DR3 has none. Every cited value names its source and a
  * URL; the URL becomes the fact's catalogue record (arXiv and DOI links are resolved to publication records; ADS links are cited by
  * bibcode; any other page by its address).
+ *
+ * `gravityDarkening` is a fast rotator's published Roche-von Zeipel fit (roche-shape.mts): `record` is the Roche-von Zeipel
+ * record of packages/bake's gravity-darkening.ts, each value with the table cell it was read from, with the pole's inclination and position angle; the star is then drawn
+ * flattened, its measured pole up and its poles brighter than its equator. `radius` is then the volume-equivalent sphere of the fit's
+ * two radii, and `spin` is not given: the fit holds the pole.
  *
  * `aliases` lists the star's other designations (the catalogue's `aliases`: searchable, never a map label); `new-object --rename`
  * moves the old name there when a better designation exists (display-name.mts). `featured: true` makes the star a map target
@@ -99,9 +105,13 @@ export interface StarSpec {
   /** One row of a published VizieR table that places a star Gaia cannot see (spec header). */
   readonly position?: CataloguePosition;
   readonly spin?: { readonly inclinationDegrees: number; readonly periodDays?: number; readonly source: string; readonly url: string };
+  /** A fast rotator's published Roche-von Zeipel fit: the record written beside the star, its paper, and the rotation period it prints (roche-shape.mts). */
+  readonly gravityDarkening?: { readonly record: Readonly<Record<string, unknown>>; readonly credit: string; readonly url: string; readonly rotationPeriodHours?: number };
   readonly limb?: { readonly none: string };
-  /** `disagreement` says why the color and its cross-check differ by more than the agreement threshold, for the color record. */
-  readonly color?: { readonly skip: readonly ColorRoute[]; readonly reason: string; readonly disagreement?: string };
+  /** `disagreement` says why the color and its cross-check differ by more than the agreement threshold, for the color record;
+   * `companion` says what is known of a close, bright companion a double-star catalogue lists when a measured spectrum is kept
+   * (companion-blend.mts). */
+  readonly color?: { readonly skip: readonly ColorRoute[]; readonly reason: string; readonly disagreement?: string; readonly companion?: string };
   readonly planets: readonly HostedSpec[]; readonly companions: readonly HostedSpec[];
   /** Drafted reader text, cited to the paper at `locator`; without it the card and introduction stay marked for a person. */
   readonly text?: DraftText;
@@ -255,7 +265,7 @@ export function parseStarSpec(value: unknown): StarSpec {
   const input = requireRecord(value, 'star spec'), id = requireString(input.id, 'id');
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a star id is lowercase letters, digits and hyphens.`);
   const at = (label: string) => `${id}.${label}`;
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'gravityRange', 'radialVelocity', 'distance', 'position', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes', 'aliases', 'featured', 'parent', 'boundTo']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'gravityRange', 'radialVelocity', 'distance', 'position', 'spin', 'gravityDarkening', 'limb', 'color', 'planets', 'companions', 'text', 'notes', 'aliases', 'featured', 'parent', 'boundTo']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown spec fields ${unknown.join(', ')}.`);
   const gaia = input.gaia === undefined ? undefined : requireString(input.gaia, at('gaia')), target = input.target === undefined ? undefined : requireString(input.target, at('target'));
@@ -276,11 +286,20 @@ export function parseStarSpec(value: unknown): StarSpec {
     if (period !== undefined && !(period > 0)) throw new RangeError(`${at('spin.periodDays')} must be positive.`);
     return { inclinationDegrees: inclination, ...(period === undefined ? {} : { periodDays: period }), source: requireString(s.source, at('spin.source')), url: requireString(s.url, at('spin.url')) };
   })();
+  const gravityDarkening = input.gravityDarkening === undefined ? undefined : (() => {
+    const g = requireRecord(input.gravityDarkening, at('gravityDarkening')), url = requireString(g.url, at('gravityDarkening.url'));
+    if (spin) throw new TypeError(`${id}: give gravityDarkening or spin, not both; the fit holds the pole.`);
+    if (!URL_PATTERN.test(url)) throw new TypeError(`${at('gravityDarkening.url')} must be an https URL, not ${url}.`);
+    const hours = g.rotationPeriodHours === undefined ? undefined : requireFiniteNumber(g.rotationPeriodHours, at('gravityDarkening.rotationPeriodHours'));
+    if (hours !== undefined && !(hours > 0)) throw new RangeError(`${at('gravityDarkening.rotationPeriodHours')} must be positive.`);
+    return { record: requireRecord(g.record, at('gravityDarkening.record')), credit: requireString(g.credit, at('gravityDarkening.credit')), url, ...(hours === undefined ? {} : { rotationPeriodHours: hours }) };
+  })();
   const color = input.color === undefined ? undefined : (() => {
     const c = requireRecord(input.color, at('color')), skip = requireArray(c.skip ?? [], at('color.skip')).map(route => requireString(route, at('color.skip')));
     const bad = skip.filter(route => !COLOR_ROUTES.includes(route as ColorRoute));
     if (bad.length) throw new TypeError(`${at('color.skip')}: ${bad.join(', ')} are not color routes (${COLOR_ROUTES.join(', ')}).`);
-    return { skip: skip as ColorRoute[], reason: skip.length ? requireString(c.reason, at('color.reason')) : '', ...(c.disagreement === undefined ? {} : { disagreement: requireString(c.disagreement, at('color.disagreement')) }) };
+    return { skip: skip as ColorRoute[], reason: skip.length ? requireString(c.reason, at('color.reason')) : '', ...(c.disagreement === undefined ? {} : { disagreement: requireString(c.disagreement, at('color.disagreement')) }),
+      ...(c.companion === undefined ? {} : { companion: requireString(c.companion, at('color.companion')) }) };
   })();
   const limb = input.limb === undefined ? undefined : { none: requireString(requireRecord(input.limb, at('limb')).none, at('limb.none')) };
   const aliases = input.aliases === undefined ? undefined : requireArray(input.aliases, at('aliases')).map(alias => requireString(alias, at('aliases')));
@@ -310,7 +329,7 @@ export function parseStarSpec(value: unknown): StarSpec {
     ...(input.radialVelocity === undefined ? {} : { radialVelocity: cited(input.radialVelocity, at('radialVelocity'), input.position ? [-30000, 30000] : [-1000, 1000]) }),
     // Out to a gigaparsec: the stars measured one by one in other galaxies are at most tens of megaparsecs away.
     ...(input.distance === undefined ? {} : { distance: cited(input.distance, at('distance'), [1, 1e9]) }), ...(position ? { position } : {}),
-    ...(spin ? { spin } : {}), ...(limb ? { limb } : {}), ...(color ? { color } : {}),
+    ...(spin ? { spin } : {}), ...(gravityDarkening ? { gravityDarkening } : {}), ...(limb ? { limb } : {}), ...(color ? { color } : {}),
     planets: input.planets === undefined ? [] : requireArray(input.planets, at('planets')).map((entry, i) => hostedSpec(entry, 'planet', `${at('planets')}[${i}]`)),
     companions: input.companions === undefined ? [] : requireArray(input.companions, at('companions')).map((entry, i) => hostedSpec(entry, 'companion', `${at('companions')}[${i}]`)),
     ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }),

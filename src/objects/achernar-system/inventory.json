@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 919,
+      "sha256": "0cbd2c71e86fb79be044690246f0aeec7983a8d79ad9a54b108c9a48063763f3"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/achernar-b.bin",
+      "bytes": 2266,
+      "sha256": "0410fea5f6fec666d9f43defba7e18b61588efedbab365059b6048369573c4db"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/achernar.json",
+      "bytes": 30356,
+      "sha256": "5b84ef24b6dfed87c6b87ae873f2ecf1bedb42e2cde9a34d1e45af339547d72a"
+    }
+  ]
+}

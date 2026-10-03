@@ -1,0 +1,124 @@
+{
+  "id": "achernar",
+  "name": "Achernar",
+  "system": "Achernar system",
+  "parent": "milky-way",
+  "description": "A Be star 43 parsecs away that spins so fast it is flattened, with a companion on a seven-year orbit.",
+  "aliases": [
+    "Alpha Eridani",
+    "Achernar A",
+    "HD 10144"
+  ],
+  "featured": true,
+  "order": 5485,
+  "target": "HD 10144",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202244009",
+    "credit": "Kervella et al. (2022), A&A 667, A111"
+  },
+  "radius": {
+    "value": 8.286,
+    "source": "Domiciano de Souza et al. (2014), A&A 569, A10, Table 6: equatorial radius 9.16 +/- 0.23 and polar radius 6.78 solar radii, from the Roche-von Zeipel fit to VLTI/PIONIER data; the record holds the volume-equivalent sphere of the two, 8.286 solar radii, and the scene draws the flattening",
+    "url": "https://doi.org/10.1051/0004-6361/201424144"
+  },
+  "mass": {
+    "value": 5.99,
+    "source": "Kervella et al. (2022), A&A 667, A111, Table 4: mass of A 5.99 +/- 0.60 solar masses, the orbit's total mass less B's model mass",
+    "url": "https://doi.org/10.1051/0004-6361/202244009",
+    "uncertainty": 0.6
+  },
+  "temperature": {
+    "value": 15539,
+    "source": "Kervella et al. (2022), A&A 667, A111, Table 4: Teff of A 15539 +/- 438 K",
+    "url": "https://doi.org/10.1051/0004-6361/202244009",
+    "uncertainty": 438
+  },
+  "radialVelocity": {
+    "value": 10.49,
+    "source": "Kervella et al. (2022), A&A 667, A111, Table 4: barycentric radial velocity +10.49 +/- 0.51 km/s",
+    "url": "https://doi.org/10.1051/0004-6361/202244009",
+    "uncertainty": 0.51
+  },
+  "distance": {
+    "value": 42.753,
+    "source": "Kervella et al. (2022), A&A 667, A111, Table 4: the Hipparcos parallax 23.39 +/- 0.57 mas (van Leeuwen 2007) the orbit is scaled with, inverted",
+    "url": "https://doi.org/10.1051/0004-6361/202244009",
+    "uncertainty": 1.042
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "7588"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "gravityDarkening": {
+    "record": {
+      "source": "Domiciano de Souza et al. (2014), The environment of the fast rotating star Achernar. III. Photospheric parameters revealed by the VLTI, A&A 569, A10 (https://doi.org/10.1051/0004-6361/201424144), Table 6, read from the open copy at https://hal.science/hal-02548378",
+      "caption": "Physical parameters of Achernar derived from the fit of the RVZ model (CHARRON code) to VLTI/PIONIER H band data using the MCMC method (emcee code). The fit adopts a mass of 6.1 solar masses, a mean effective temperature of 15 000 K and a distance of 42.75 pc.",
+      "model": {
+        "omega": {
+          "value": 0.98,
+          "cell": "Critical rotation rate: Veq/Vc; \u03a9/\u03a9c 0.883; 0.980 (a derived parameter, printed without an uncertainty; \u03c9 is \u03a9/\u03a9c)"
+        },
+        "beta": {
+          "value": 0.166,
+          "uncertainty": 0.012,
+          "cell": "0.166 (+0.012; \u22120.010)"
+        },
+        "poleTemperatureK": {
+          "value": 17124,
+          "cell": "Polar temperature: Tp (K) 17 124 (derived, no uncertainty printed)"
+        },
+        "equatorTemperatureK": {
+          "value": 12673,
+          "cell": "Equatorial temperature: Teq (K) 12 673 (derived, no uncertainty printed)"
+        },
+        "polarRadiusSolar": {
+          "value": 6.78,
+          "cell": "Polar radius: Rp (R\u2299) 6.78 (derived, no uncertainty printed)"
+        },
+        "equatorialRadiusSolar": {
+          "value": 9.16,
+          "uncertainty": 0.23,
+          "cell": "9.16 (+0.23; \u22120.23)"
+        }
+      },
+      "view": {
+        "inclinationDegrees": {
+          "value": 60.6,
+          "uncertainty": 7.1,
+          "cell": "60.6 (+7.1; \u22123.9)"
+        },
+        "polePositionAngleDegrees": {
+          "value": 216.9,
+          "uncertainty": 0.4,
+          "cell": "Position angle of the visible pole: PArot (\u00b0) 216.9 (+0.4; \u22120.4)"
+        }
+      },
+      "note": "The table names the position angle as the visible pole's, so that pole is the one tilted toward us. The same table derives Req/Rp 1.352, a rotation period of 37.25 h and an equatorial velocity of 298.8 km/s. The fit's mean temperature is an adopted 15 000 K, not a fitted one; only the pole-to-equator contrast of the model is drawn, around the star's measured disc color."
+    },
+    "credit": "Domiciano de Souza et al. (2014), A&A 569, A10",
+    "url": "https://doi.org/10.1051/0004-6361/201424144",
+    "rotationPeriodHours": 37.25
+  },
+  "color": {
+    "skip": [],
+    "reason": "",
+    "companion": "Kervella et al. (2022), A&A 667, A111, Table A.1 measure Achernar B at 1.3 to 1.5% of A's flux at 0.554 um (SPHERE/ZIMPOL), under the 4.7% a color check allows; the Washington Double Star catalogue's magnitudes for the pair (KRV 54: 0.7 and 2.1) are not visible-band ones"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Be star that spins so fast it is flattened, with a companion on a seven-year orbit.",
+    "introduction": "Its equator is 1.35 times wider than its poles; 13 years of watching its companion's orbit weigh it at 5.99 solar masses.",
+    "locator": "Table 4; Sect. 1 and Sect. 4.3, which give the flattening Domiciano de Souza et al. (2014) measured"
+  },
+  "notes": []
+}

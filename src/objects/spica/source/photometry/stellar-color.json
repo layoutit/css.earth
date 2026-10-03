@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "spica",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 25300,
+      "lowerKelvin": 24800,
+      "upperKelvin": 25800,
+      "citation": "Tkachenko et al. (2016), MNRAS 458, 1964, Tables 4 and 7: primary Teff 25,300 +/- 500 K from the disentangled spectrum: 25300 +/- 500 K, https://doi.org/10.1093/mnras/stw255"
+    },
+    "note": "Every spectrum of Spica is the blended light of both stars, the secondary giving 14.5 +/- 1.5% of it (Tkachenko et al. 2016, MNRAS 458, 1964, Table 4), so no archive spectrum is the primary's own, so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

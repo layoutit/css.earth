@@ -1,0 +1,9 @@
+# Kornephoros credits
+
+Radius, mass and temperature: Radius 15.92 +/- 0.41 solar radii from Baines et al. (2018), AJ 155, 30, HD 148856: radius 15.92 +0.41/-0.39 solar radii (Table 5), from the limb-darkened angular diameter 3.472 +/- 0.008 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/aa9d8b); Mass 2.91 +/- 0.11 solar masses from Baines et al. (2018), AJ 155, 30, HD 148856: mass 2.91 +/- 0.11 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only (https://doi.org/10.3847/1538-3881/aa9d8b); temperature from Baines et al. (2018), AJ 155, 30, HD 148856: effective temperature 5092 +/- 64 K (Table 5), from the angular diameter and the bolometric flux of the SED fit.
+
+Color: Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Kornephoros is HR 6148., through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b). Cross-check: Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 755: HR 6148; VizieR III/202.
+
+Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
+
+Placement: Gaia DR3 source 1297565458994346240: position, proper motion; distance: Baines et al. (2018), AJ 155, 30, HD 148856: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 23.44 +/- 0.58 mas, inverted. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.

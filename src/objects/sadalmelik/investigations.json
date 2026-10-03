@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "sadalmelik",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2680356911816018048: position at J2016.0. Distance: Baines et al. (2018), AJ 155, 30, HD 209750: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 6.23 +/- 0.19 mas, inverted (https://doi.org/10.3847/1538-3881/aa9d8b): 160.514 +/- 4.895 pc; Gaia DR3 parallax 4.9451 +/- 0.4296 mas (same row, RUWE 3.02), 11.5 standard errors, is not used. Proper motion: Gaia DR3 (same row): 18.590, -10.450 mas/yr. Radial velocity from SIMBAD's radial velocity for Gaia DR3 2680356911816018048 (quality A), from 2018A&A...616A...7S; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.3847/1538-3881/aa9d8b",
+        "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...7S/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 52.89 +/- 1.78 solar radii from Baines et al. (2018), AJ 155, 30, HD 209750: radius 52.89 +1.78/-1.68 solar radii (Table 5), from the limb-darkened angular diameter 3.066 +/- 0.036 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/aa9d8b). Mass 5.13 +/- 0.06 solar masses from Baines et al. (2018), AJ 155, 30, HD 209750: mass 5.13 +/- 0.06 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only (https://doi.org/10.3847/1538-3881/aa9d8b). Temperature 5383 +/- 74 K from Baines et al. (2018), AJ 155, 30, HD 209750: effective temperature 5383 +/- 74 K (Table 5), from the angular diameter and the bolometric flux of the SED fit.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/aa9d8b"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Sadalmelik is HR 8414., cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 1033: HR 8414; VizieR III/202 (10 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffe6c5. Routes tried in order: stis-ngsl: HD 209750 is not in the library; kiehling: HR 8414 is not among its 60 stars; burnashev: found, not needed after the color and its cross-check; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: used.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
+        "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,383 K and log g 1.7 (u1 0.526, u2 0.209): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

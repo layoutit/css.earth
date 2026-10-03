@@ -1,0 +1,9 @@
+# Dubhe credits
+
+Radius, mass and temperature: Radius 17.03 +/- 0.13 solar radii from Baines et al. (2018), AJ 155, 30, HD 95689: radius 17.03 +/- 0.13 solar radii (Table 5), from the limb-darkened angular diameter 6.419 +/- 0.041 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/aa9d8b); Mass 3.44 +/- 0.11 solar masses from Baines et al. (2018), AJ 155, 30, HD 95689: mass 3.44 +/- 0.11 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only (https://doi.org/10.3847/1538-3881/aa9d8b); temperature from Baines et al. (2018), AJ 155, 30, HD 95689: effective temperature 5012 +/- 65 K (Table 5), from the angular diameter and the bolometric flux of the SED fit.
+
+Color: Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Dubhe is HR 4301., through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b). Cross-check: Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 588: HR 4301; VizieR III/202.
+
+Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
+
+Placement: position from Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 54061 (CDS, Strasbourg); distance: Baines et al. (2018), AJ 155, 30, HD 95689: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 26.54 +/- 0.48 mas, inverted; radial velocity: Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 54061: RV -9.4 +/- 0.3 km/s (quality D).

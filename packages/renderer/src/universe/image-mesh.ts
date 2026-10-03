@@ -1,5 +1,5 @@
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
-import { worldRotationCss } from '@cssearth/engine';
+import { eyeDistanceM, worldRotationCss } from '@cssearth/engine';
 import { parseImageMesh, type PreparedImageMesh } from '@cssearth/objects';
 import type { VolumeCameraPublication } from '../volume/types.js';
 import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.js';
@@ -102,7 +102,8 @@ export function mountImageMesh({ host, before, interiorBefore = before, labelHos
     publish(publication: VolumeCameraPublication, shown = 1, captioned = true): number {
       if (destroyed) return 0;
       lastShown = shown; lastCaptioned = captioned; latest = publication;
-      const distanceM = Math.hypot(...publication.world.pose.positionM);
+      // From the mesh's own centre, through the eye's exact place (engine eyeDistanceM).
+      const distanceM = payload ? eyeDistanceM(publication.world.pose, payload.frame.originM) : 0;
       const radiusM = payload ? radiusUnits() * payload.frame.metersPerUnit : null;
       // Before the bank loads its radius is unknown; it loads once the camera is past the fade's far end of any mesh
       // this size could have, which the caller's own opacity (shown) already gates.

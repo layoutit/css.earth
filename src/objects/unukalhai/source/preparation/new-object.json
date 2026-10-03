@@ -1,0 +1,55 @@
+{
+  "id": "unukalhai",
+  "name": "Unukalhai",
+  "system": "Unukalhai system",
+  "parent": "milky-way",
+  "description": "A giant of type K2 III 22.7 parsecs away, 11.6 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 140573"
+  ],
+  "featured": true,
+  "target": "HD 140573",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "credit": "Baines et al. (2018), AJ 155, 30"
+  },
+  "radius": {
+    "value": 11.62,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 140573: radius 11.62 +/- 0.06 solar radii (Table 5), from the limb-darkened angular diameter 4.77 +/- 0.013 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.06
+  },
+  "mass": {
+    "value": 1.61,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 140573: mass 1.61 +/- 0.12 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.12
+  },
+  "temperature": {
+    "value": 4687,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 140573: effective temperature 4687 +/- 59 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 59
+  },
+  "distance": {
+    "value": 22.676,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 140573: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 44.1 +/- 0.19 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.098
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A giant of type K2 III, 23 parsecs away: 11.6 times the Sun's width and 59 times its light.",
+    "introduction": "Its disc spans 4.77 milliarcseconds, which gives 11.62 solar radii and 4,687 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 140573: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 2.63,
+    "uncertainty": 0.16,
+    "source": "SIMBAD's radial velocity for Gaia DR3 4429785739602747392 (quality A), from 2005A&A...430..165F; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2005A&A...430..165F/abstract"
+  },
+  "order": 5467
+}
