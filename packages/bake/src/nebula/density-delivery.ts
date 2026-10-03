@@ -1,7 +1,7 @@
 /** Restore accepted app textures from regenerated cloud slices; keep reference metadata immutable. */
 import assert from 'node:assert/strict';
 import { prepareVolumeAtlases } from '../density/index.ts';
-import { validatePreparedVolumeDatasets, validatePreparedCssVolume, VOLUME_DATASET_MANIFEST_SCHEMA } from '@cssearth/objects';
+import { validatePreparedVolumeDatasets, validatePreparedCssVolume, parseVolumeDatasetManifest } from '@cssearth/objects';
 
 import { localPath, pinned, type Pin, writeAtomic } from '../volume/node/index.ts';
 
@@ -9,10 +9,10 @@ export interface BakeDelivery { directory: string; manifest: Pin; atlasInputs?: 
 async function deliveryFiles(root: string, delivery: BakeDelivery) {
   localPath(root, delivery.directory);
   const manifest = JSON.parse((await pinned(root, delivery.manifest)).toString());
-  assert.equal(manifest.schema, VOLUME_DATASET_MANIFEST_SCHEMA);
-  const images = Object.entries(manifest.outputs).filter(([path]) => /^prepared\/[a-z][a-z0-9-]*\/(?:slices\/[xyz]\/\d+|atlases\/[a-z0-9-]+)\.webp$/.test(path)) as [string, {bytes: number}][];
+  const outputs = parseVolumeDatasetManifest(manifest, { extraKeys: 'allow', outputs: 'entries', assertion: assert });
+  const images = outputs.filter(([path]) => /^prepared\/[a-z][a-z0-9-]*\/(?:slices\/[xyz]\/\d+|atlases\/[a-z0-9-]+)\.webp$/.test(path)) as [string, {bytes: number}][];
   assert.ok(images.length > 0, 'Delivery manifest has no cloud textures.');
-  for (const [path, pin] of Object.entries(manifest.outputs) as [string, {bytes: number}][]) {
+  for (const [path, pin] of outputs as [string, {bytes: number}][]) {
     if (images.some(([imagePath]) => imagePath === path)) continue;
     const bytes = await pinned(root, { path: `${delivery.directory}/${path}` });
     assert.equal(bytes.length, pin.bytes, `Artifact size differs: ${path}`);

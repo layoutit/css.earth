@@ -7,7 +7,8 @@ import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-laye
 import { outsideVolumeOpacity, projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
-import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
+import { mountCataloguePoints } from './catalogue-points.js';
+import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
 import type { PreparedCatalogBank, PreparedUniverseOptions } from './prepared-universe-types.js';
 import type { PreparedImageLayerMount } from './prepared-universe-types.js';
 

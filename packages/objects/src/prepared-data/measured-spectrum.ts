@@ -2,12 +2,6 @@ import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core
 
 export const MEASURED_SPECTRUM_SCHEMA = 'cssearth-measured-spectrum@1';
 export interface Measurement { x: number; xLow: number; xHigh: number; y: number; minus: number; plus: number }
-export interface MeasuredSpectrumDocument {
-  schema: typeof MEASURED_SPECTRUM_SCHEMA;
-  source?: string;
-  units?: { x: string; y: string };
-  measurements: { x?: number; xLow: number; xHigh: number; y: number; minus: number; plus: number }[];
-}
 /** Chart mode controls absent-x admission; yScale is supplied by the validated chart recipe. */
 export function parseMeasuredSpectrumDocument(value: unknown, mode: 'points' | 'band', yScale: number): Measurement[] {
   const document = requireRecord(value, 'measurement document');

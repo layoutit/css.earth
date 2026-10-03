@@ -175,8 +175,8 @@ CSS geometry profiles, surface geometry/seam-outset data and the pure profile pa
 Navigation marker recipe identifiers and wire types belong to objects; image/source validation and preparation stay with bake.
 Paged ellipsoid recipes, authored camera fields and pure parsers belong to objects. Full assets and navigation field reads retain separate admission policies; camera derivation and asset preparation stay with bake/site.
 Chart asset recipes and nested spectrum, measured-spectrum, retrieved-profile and system-orbits parsers belong to objects. Envelope/source spectrum admission stays distinct; rendering, source sampling and Node file paths stay with consumers.
-Volume dataset manifest identifiers live in `src/volume/volume-dataset-manifest.ts`; output selection and byte checks stay with bake/lab.
-Compact density delivery identifiers live in `src/volume/compact-density-delivery.ts`; replay and source-owner admission stay with bake/lab.
+Volume dataset manifest identifiers and pure parsers live in `src/volume/volume-dataset-manifest.ts`; explicit assertion, extra-key and native-entries policies preserve bake admission. Output selection and byte checks stay with bake/lab.
+Compact density delivery identifiers and pure parsers live in `src/volume/compact-density-delivery.ts`; host assertions preserve diagnostics and staged input admission. Replay and source-owner path admission stay with bake/lab.
 Nebula depth-model identifiers and `DepthRecipe`/`DepthSurface` wire types and the pure recipe parser live in `src/volume/nebula-depth-model.ts`; the caller supplies joint-path admission, while evidence policy and sampling stay with reconstruction/lab.
 Gaia nebula-field types and the pure parser live in `src/volume/gaia-nebula-field.ts`; explicit catalogue-selection and astrometry-table subsets preserve their historical admission and diagnostics. Projection, scientific admission, selection and file I/O stay with bake/telescope-cli.
 Nebula delivery identifiers, sky-frame data and pure envelope admission live in `src/volume/nebula-delivery.ts`; transport and compilation stay with bake/telescope-cli/lab.

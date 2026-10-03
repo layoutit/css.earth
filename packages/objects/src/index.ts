@@ -62,7 +62,7 @@ export { CATALOGUE_POINTS_BINARY_SCHEMA, CATALOGUE_BANK_BINARY_MAGIC, CATALOGUE_
 export { PREPARED_CSS_POINT_FIELD_SCHEMA, PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA, POINT_FIELD_BANK_ENCODING } from './stars/point-field-schemas.js';
 export { POINT_FIELD_BANK_MAGIC, POINT_FIELD_BANK_VERSION, POINT_FIELD_BANK_HEADER_BYTES, POINT_FIELD_MAGNITUDE_DIVISOR, POINT_FIELD_MAGNITUDE_BOUND, POINT_FIELD_BANK_QUANTIZATION, decodeStarMagnitude, pointFieldBankLayout, pointFieldBankHeader, pointFieldBankRegions, decodePointFieldBank } from './stars/point-field-bank.js';
 export { parsePreparedCssPointFieldManifest, decodePreparedCssPointField } from './stars/point-field-validation.js';
-export type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedPointFieldStar, PreparedPointFieldNode, PreparedPointFieldResource, PreparedPointFieldBank, PreparedPointFieldQuantization, PreparedPointAppearance } from './stars/point-field-types.js';
+export type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedPointFieldStar, PreparedPointFieldNode, PreparedPointFieldResource, PreparedPointFieldBank, PreparedPointFieldQuantization, PreparedPointAppearance, PointFieldRgb, PointFieldVector, PointFieldBankStorage, PreparedPointFieldBankColumn } from './stars/point-field-types.js';
 
 export { OBJECT_RUNTIME_SCHEMA, requireObjectRuntimeDefinition, objectCycleStates, OBJECT_SPEED_STATES, SHELL_SETTING_NAMES } from './prepared-data/object-controls.js';
 export type { DatasetVolume, DatasetControl, CycleState, ToggleControl, CycleControl, SettingControl, ObjectControls } from './prepared-data/object-controls.js';
@@ -197,9 +197,9 @@ export { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA } from './descriptor.js';
 export { OBJECT_TEXT_SCHEMA, PREPARED_TEXT_SCHEMA, parseCitedText, parseObjectText, parsePreparedText, type TextCitation, type CitedText, type ObjectTextDataset, type ObjectText, type PreparedObjectText } from './prepared-data/object-text.js';
 export { ARCHIVED_CAMERA_SCHEMA, archivedCameraFields, parseArchivedCamera, parseMatrixArchivedCamera, type ArchivedCamera, type SpiceCamera } from './prepared-data/archived-camera.js';
 export { PREPARED_DESTINATIONS_SCHEMA, parsePreparedDestinations, type PreparedDestination, type PreparedDestinations, type DestinationSearchRecord } from './prepared-data/prepared-destinations.js';
-export * from './prepared-data/authored-preparation.js';
-export * from './prepared-data/world-navigation-preparation.js';
-export * from './prepared-data/prepared-features.js';
+export { AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, readAuthoredPreparationSources, readPublishedPreparationSources } from './prepared-data/authored-preparation.js';
+export { WORLD_NAVIGATION_PREPARATION_SCHEMA, type WorldNavigationPreparationReceipt, samePreparedWorldFrame, requireWorldNavigationReceiptIdentity, requireWorldNavigationReceiptContext } from './prepared-data/world-navigation-preparation.js';
+export { PREPARED_FEATURES_SCHEMA, type PreparedFeaturesDescriptor, readPreparedFeaturePins } from './prepared-data/prepared-features.js';
 export { WISE_ATLAS_TILES_SCHEMA, WISE_BAND_NAMES, parseTilePins, type WiseBand, type TilePins } from './prepared-data/wise-atlas-tiles.js';
 export { DISPLAY_ORIENTATION_SCHEMA, parseAuthoredOrientation, type DisplayOrientation } from './prepared-data/display-orientation.js';
 export { SYNCHRONOUS_ROTATION_SCHEMA, parseSynchronousRotation, type SynchronousRotation } from './prepared-data/synchronous-rotation.js';
@@ -208,7 +208,7 @@ export { PUBLISHED_LIMB_DARKENING_SCHEMA, readPublishedPowerLaw, readPublishedLi
 export { DISC_INTEGRATED_COLOR_SCHEMA, parseDiscColor, parseDiscColorRecord, parseDiscColorPhotometry, type DiscColorRecord, type DiscColorPhotometry } from './prepared-data/disc-integrated-color.js';
 export { STELLAR_PHOTOMETRIC_COLOR_SCHEMA, PLANCK_FLOOR_KELVIN, parseStellarColorRecord, parseMeasuredSpectrumRecord, checkStellarTemperature, type StellarColorRecord, type StellarTemperature, type MeasuredSpectrumRecord } from './prepared-data/stellar-photometric-color.js';
 export { UNIFORM_DISC_STAR_SCHEMA, parseUniformDiscStarMeasurements, type UniformDiscStarMeasurements } from './prepared-data/uniform-disc-star.js';
-export { MEASURED_SPECTRUM_SCHEMA, parseMeasuredSpectrumDocument, type Measurement, type MeasuredSpectrumDocument } from './prepared-data/measured-spectrum.js';
+export { MEASURED_SPECTRUM_SCHEMA, parseMeasuredSpectrumDocument, type Measurement } from './prepared-data/measured-spectrum.js';
 export { DENSITY_PLACEMENT_SCHEMA, parseDensityPlacement, type DensityPlacement } from './volume/density-placement.js';
 export { OBSERVED_STELLAR_CATALOGUE_SCHEMA, isStellarCoordinate, readObservedStellarCatalogueEnvelope, parseObservedStellarCatalogue,
   type ObservedStar, type PhotometryKind, type ObservedStellarCatalogueEnvelope, type ObservedStellarCatalogue } from './volume/observed-stellar-catalogue.js';
@@ -226,8 +226,8 @@ export { CSS_PRESENTATION_PROFILE_SCHEMA, parsePresentationProfile, type Present
 export { CSS_GEOMETRY_PROFILE_SCHEMA, NAVIGATION_MARKER_SCHEMA, PAGED_ELLIPSOID_SCHEMA, CHART_ASSETS_SCHEMA } from './prepared-data/presentation-recipe-schemas.js';
 export { MARKER_SOURCE_HINTS, type MarkerSource, type MarkerOperation, type MarkerDescriptor } from './prepared-data/navigation-marker.js';
 // E2-rest: P3
-export { VOLUME_DATASET_MANIFEST_SCHEMA } from './volume/volume-dataset-manifest.js';
-export { COMPACT_DENSITY_DELIVERY_SCHEMA } from './volume/compact-density-delivery.js';
+export { VOLUME_DATASET_MANIFEST_SCHEMA, parseVolumeDatasetManifest, type VolumeDatasetManifestPolicy } from './volume/volume-dataset-manifest.js';
+export { COMPACT_DENSITY_DELIVERY_SCHEMA, parseCompactDensityDelivery, parseCompactDensityInputs } from './volume/compact-density-delivery.js';
 export { NEBULA_DEPTH_MODEL_SCHEMA, type DepthSurface, type DepthRecipe } from './volume/nebula-depth-model.js';
 export { GAIA_NEBULA_FIELD_SCHEMA, parseGaiaNebulaField, type GaiaNebulaFieldDocument, type GaiaNebulaFieldStar, type GaiaNebulaFieldSelection, type GaiaNebulaCatalogueField, type GaiaNebulaAstrometryRow, type GaiaNebulaFieldSubset } from './volume/gaia-nebula-field.js';
 export { NEBULA_DELIVERY_SCHEMA, readNebulaDelivery, type NebulaDelivery, type NebulaSkyFrame } from './volume/nebula-delivery.js';
@@ -261,3 +261,5 @@ export { parseCloudAppearance, DEFAULT_CLOUD_APPEARANCE, type CloudAppearance } 
 export { validateChannelGain, type ChannelGain } from './volume/channel-gain.js';
 
 export { sourceRecordReaders } from './prepared-data/source-record-readers.js';
+
+export type { DeliveryAssertion, DeliveryValidationPolicy } from './volume/delivery-validation-policy.js';

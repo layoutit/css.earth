@@ -1,7 +1,7 @@
-export const PREPARED_CLUSTER_CATALOG_SCHEMA = 'cssearth-cluster-catalog@1';
 import { validateSpatialPosition } from './spatial-relations.js';
 import type { PreparedGalaxyRecord, SpatialCatalogSource } from './galaxy-catalog.js';
 import type { PreparedNebulaRecord } from './nebula-catalog.js';
+export const PREPARED_CLUSTER_CATALOG_SCHEMA = 'cssearth-cluster-catalog@1';
 
 /** A catalogue centre and overdensity aperture, never a member-galaxy or density model. */
 export interface PreparedClusterRecord extends Pick<PreparedGalaxyRecord,

@@ -1,4 +1,4 @@
-import type { ParsedSurfaceFeature as PreparedSurfaceFeature } from '@cssearth/objects';
+import type { ParsedSurfaceFeature } from '@cssearth/objects';
 
 const kilometres = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
 const SITE_CODES = new Set(['LS', 'IM', 'SS', 'RT']);
@@ -25,7 +25,7 @@ export function surfaceFeatureCaption(root: HTMLElement) {
     if (!field) throw new TypeError(`Prepared feature caption is missing ${name}.`);
     return [name, field];
   }));
-  return { element: card, show(feature: PreparedSurfaceFeature) {
+  return { element: card, show(feature: ParsedSurfaceFeature) {
     fields.name.textContent = feature.name;
     fields.detail.textContent = feature.diameterKm > 0 ? `${feature.type} · ${kilometres.format(feature.diameterKm)} km`
       : SITE_CODES.has(feature.code) ? feature.type : `${feature.type} · size unpublished`;
