@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "zaurak",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Zaurak",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 40837590
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/zaurak-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Zaurak",
+      "classification": "star",
+      "color": "#ffc882",
+      "distanceAu": 12133457.8,
+      "description": "A naked-eye star 59 parsecs away whose disc the NPOI measured: 58.7 times the Sun's width.",
+      "systemName": "Zaurak system",
+      "aliases": [
+        "HD 25025"
+      ],
+      "order": 5476,
+      "context": {
+        "order": 5473
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        895555658223994600,
+        1520827136450615800,
+        -424023744583604540
+      ],
+      "presentationToReference": [
+        0.49338187266550726,
+        -0.11853325931355824,
+        0.8616984357427965,
+        0.837858075803638,
+        -0.2012909311736943,
+        -0.5074207384782895,
+        -0.23359831449670757,
+        -0.972333187474197,
+        -7.519941305131702e-7
+      ],
+      "orbitUpReference": [
+        0.11853325931355824,
+        0.2012909311736943,
+        0.972333187474197
+      ],
+      "metersPerUnit": 131734161.29032259,
+      "bodyRadiusM": 40837590000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

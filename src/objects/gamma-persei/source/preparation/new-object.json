@@ -1,0 +1,53 @@
+{
+  "id": "gamma-persei",
+  "name": "Gamma Persei",
+  "system": "Gamma Persei system",
+  "description": "A naked-eye star 74.6 parsecs away, 31.2 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 18925"
+  ],
+  "target": "HD 18925",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "credit": "Baines et al. (2018), AJ 155, 30"
+  },
+  "radius": {
+    "value": 31.21,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 18925: radius 31.21 +1.24/-1.15 solar radii (Table 5), from the limb-darkened angular diameter 3.894 +/- 0.018 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 1.24
+  },
+  "mass": {
+    "value": 3.64,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 18925: mass 3.64 +/- 0.25 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.25
+  },
+  "temperature": {
+    "value": 4589,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 18925: effective temperature 4589 +/- 58 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 58
+  },
+  "distance": {
+    "value": 74.571,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 18925: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 13.41 +/- 0.51 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 2.836
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 75 parsecs away whose disc the NPOI measured: 31.2 times the Sun's width.",
+    "introduction": "Its disc spans 3.894 milliarcseconds, which gives 31.21 solar radii and 4,589 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 18925: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 3.13,
+    "uncertainty": 0.13,
+    "source": "SIMBAD's radial velocity for Gaia DR3 447071293401293056 (quality A), from 2004A&A...424..727P; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2004A&A...424..727P/abstract"
+  },
+  "order": 5460
+}

@@ -1,0 +1,83 @@
+{
+  "id": "spica",
+  "name": "Spica",
+  "system": "Spica system",
+  "description": "Two hot blue stars 77 parsecs away that circle each other every four days.",
+  "aliases": [
+    "Alpha Virginis",
+    "Spica A",
+    "HD 116658"
+  ],
+  "featured": true,
+  "target": "HD 116658",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stw255",
+    "credit": "Tkachenko et al. (2016), MNRAS 458, 1964"
+  },
+  "radius": {
+    "value": 7.47,
+    "source": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: primary radius 7.47 +/- 0.54 solar radii from the combined light- and radial-velocity-curve solution",
+    "url": "https://doi.org/10.1093/mnras/stw255",
+    "uncertainty": 0.54
+  },
+  "mass": {
+    "value": 11.43,
+    "source": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: dynamical mass of the primary 11.43 +/- 1.15 solar masses",
+    "url": "https://doi.org/10.1093/mnras/stw255",
+    "uncertainty": 1.15
+  },
+  "temperature": {
+    "value": 25300,
+    "source": "Tkachenko et al. (2016), MNRAS 458, 1964, Tables 4 and 7: primary Teff 25,300 +/- 500 K from the disentangled spectrum",
+    "url": "https://doi.org/10.1093/mnras/stw255",
+    "uncertainty": 500
+  },
+  "radialVelocity": {
+    "value": -0.5,
+    "source": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 2: systemic velocity -0.5 +/- 1.1 km/s",
+    "url": "https://doi.org/10.1093/mnras/stw255",
+    "uncertainty": 1.1
+  },
+  "distance": {
+    "value": 76.57,
+    "source": "van Leeuwen (2007), A&A 474, 653, HIP 65474: Hipparcos parallax 13.06 +/- 0.70 mas, inverted",
+    "url": "https://doi.org/10.1051/0004-6361:20078357",
+    "uncertainty": 4.1
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "65474"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Every spectrum of Spica is the blended light of both stars, the secondary giving 14.5 +/- 1.5% of it (Tkachenko et al. 2016, MNRAS 458, 1964, Table 4), so no archive spectrum is the primary's own"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Two hot blue stars 77 parsecs away that circle each other every four days.",
+    "introduction": "Their orbit weighs the larger at 11.43 solar masses: it is 7.47 solar radii, 25,300 K at its surface, and pulsates.",
+    "locator": "Tables 2, 4 and 7"
+  },
+  "notes": [
+    "Spica's orbit turns in its plane once every 139 years (Aufdenberg et al. 2007); it is drawn as the paper fixed it, at its 2007 epoch.",
+    "The position angle of the orbit's line of nodes on the sky is not measured; it is drawn at 0, a display convention."
+  ],
+  "order": 5487
+}

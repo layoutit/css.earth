@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "mirfak",
+  "angularDiameterMas": 3.18,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 36,920,799 km at 155.28 pc = 3.18 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 155.28,
+  "distanceSource": "Baines et al. (2021), AJ 162, 198, HD 20902: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 6.44 +/- 0.17 mas, inverted (https://doi.org/10.3847/1538-3881/ac2431): 155.28 +/- 4.099 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 36920799,
+  "radiusSource": "Radius 53.07 +/- 1.45 solar radii from Baines et al. (2021), AJ 162, 198, HD 20902: radius 53.07 +1.37/-1.45 solar radii (Table 5), from the limb-darkened angular diameter 3.18 +/- 0.008 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/ac2431): 36,920,799 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5859 +/- 41 K from Baines et al. (2021), AJ 162, 198, HD 20902: effective temperature 5859 +/- 41 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ac2431). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5859,
+  "effectiveTemperatureSource": "Baines et al. (2021), AJ 162, 198, HD 20902: effective temperature 5859 +/- 41 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ac2431)",
+  "surfaceGravityLogg": 1.31,
+  "surfaceGravitySource": "Baines et al. (2021), AJ 162, 198, HD 20902: log g 1.31, from Prugniel et al. (2011), as the paper lists it beside the diameter (Table 4) (https://doi.org/10.3847/1538-3881/ac2431)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

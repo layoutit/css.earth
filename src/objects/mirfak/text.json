@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "mirfak",
+  "card": {
+    "text": "A naked-eye star 155 parsecs away whose disc the NPOI measured: 53.1 times the Sun's width.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac2431",
+        "url": "https://doi.org/10.3847/1538-3881/ac2431",
+        "label": "Baines et al. (2021), The Astronomical Journal 162 198",
+        "checked": "2026-10-03",
+        "locator": "Tables 1, 4 and 5, HD 20902: parallax, limb-darkened diameter, radius, Teff"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its disc spans 3.18 milliarcseconds, which gives 53.07 solar radii and 5,859 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac2431",
+        "url": "https://doi.org/10.3847/1538-3881/ac2431",
+        "label": "Baines et al. (2021), The Astronomical Journal 162 198",
+        "checked": "2026-10-03",
+        "locator": "Tables 1, 4 and 5, HD 20902: parallax, limb-darkened diameter, radius, Teff"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

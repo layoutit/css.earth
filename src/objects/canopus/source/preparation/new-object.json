@@ -1,0 +1,68 @@
+{
+  "id": "canopus",
+  "name": "Canopus",
+  "system": "Canopus system",
+  "description": "The brightest and closest yellow supergiant to the Solar System, 95 parsecs away and 73 times the Sun's width.",
+  "aliases": [
+    "Alpha Carinae",
+    "HD 45348"
+  ],
+  "featured": true,
+  "target": "HD 45348",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202140478",
+    "credit": "Domiciano de Souza et al. (2021), A&A 654, A19"
+  },
+  "radius": {
+    "value": 73.2,
+    "source": "Domiciano de Souza et al. (2021), A&A 654, A19, Table 3 note and Sect. 5.3: R = 73.2 +/- 3.9 solar radii from the power-law limb-darkened PIONIER diameter 7.184 +/- 0.0017 +/- 0.029 mas and the Hipparcos distance",
+    "url": "https://doi.org/10.1051/0004-6361/202140478",
+    "uncertainty": 3.9
+  },
+  "mass": {
+    "value": 9.81,
+    "source": "Domiciano de Souza et al. (2021), A&A 654, A19, Table 4: (M/Msun)_Ross = 9.81 +/- 1.83, from the SED fit's log g (1.70 +/- 0.05) and the radius",
+    "url": "https://doi.org/10.1051/0004-6361/202140478",
+    "uncertainty": 1.83
+  },
+  "temperature": {
+    "value": 7661,
+    "source": "Domiciano de Souza et al. (2021), A&A 654, A19, Sect. 5.3: Teff 7661 +/- 81 K from the bolometric flux of the SED fit and the PIONIER diameter",
+    "url": "https://doi.org/10.1051/0004-6361/202140478",
+    "uncertainty": 81
+  },
+  "radialVelocity": {
+    "value": 20.3,
+    "source": "Anderson & Francis (2012), XHIP, HIP 30438: RV 20.30 +/- 0.50 km/s (quality A)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 0.5
+  },
+  "distance": {
+    "value": 94.8,
+    "source": "Domiciano de Souza et al. (2021), A&A 654, A19, Sect. 1: d = 94.8 +/- 5.0 pc, the Hipparcos parallax 10.55 +/- 0.56 mas (van Leeuwen 2007) the paper adopts",
+    "url": "https://doi.org/10.1051/0004-6361/202140478",
+    "uncertainty": 5
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "30438"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "The brightest and closest yellow supergiant to the Solar System, 73 times the Sun's width.",
+    "introduction": "VLTI measured its disc at 7.18 milliarcseconds, which at 95 parsecs is 73.2 solar radii, with 7,661 K at its surface.",
+    "locator": "Abstract, Tables 3 and 4, Sect. 5.3"
+  },
+  "notes": [],
+  "order": 5482
+}

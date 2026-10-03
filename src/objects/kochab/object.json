@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kochab",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kochab",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 30701241
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kochab-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kochab",
+      "classification": "star",
+      "color": "#ffcf92",
+      "distanceAu": 8280627.4,
+      "description": "A naked-eye star 40 parsecs away whose disc the NPOI measured: 44.1 times the Sun's width.",
+      "systemName": "Kochab system",
+      "aliases": [
+        "HD 131873"
+      ],
+      "order": 5479,
+      "context": {
+        "order": 5476
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -248657191770605120,
+        -229257244485911870,
+        1191699423843182000
+      ],
+      "presentationToReference": [
+        -0.2007314267836495,
+        -0.7072581755908672,
+        -0.6778589583101181,
+        -0.18507059245519902,
+        -0.6521055460572167,
+        0.735191969902896,
+        0.9620061175011737,
+        -0.2730278920940078,
+        -0.000005387098211012336
+      ],
+      "orbitUpReference": [
+        0.7072581755908672,
+        0.6521055460572167,
+        0.2730278920940078
+      ],
+      "metersPerUnit": 99036261.29032259,
+      "bodyRadiusM": 30701241000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

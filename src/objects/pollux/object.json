@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "pollux",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Pollux",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 6303042
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/pollux-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Pollux",
+      "classification": "star",
+      "color": "#ffe4c3",
+      "distanceAu": 2136515,
+      "description": "A naked-eye star 10 parsecs away whose disc the NPOI measured: 9.1 times the Sun's width.",
+      "systemName": "Pollux system",
+      "aliases": [
+        "HD 62509"
+      ],
+      "order": 5462,
+      "context": {
+        "order": 5459
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -125111952986915400,
+        252881407964692740,
+        150178960449066880
+      ],
+      "presentationToReference": [
+        -0.3914403801358798,
+        -0.20841449641729218,
+        0.8962911505098131,
+        0.791195343265346,
+        0.42112677168910556,
+        0.44346608772480356,
+        0.4698769600590234,
+        -0.882731918449672,
+        -0.00005055543897438454
+      ],
+      "orbitUpReference": [
+        0.20841449641729218,
+        -0.42112677168910556,
+        0.882731918449672
+      ],
+      "metersPerUnit": 20332393.548387095,
+      "bodyRadiusM": 6303042000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

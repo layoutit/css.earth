@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "achernar",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Achernar",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5662998
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/achernar-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Achernar",
+      "classification": "star",
+      "color": "#aac3ff",
+      "distanceAu": 8818517.6,
+      "description": "A fast-spinning Be star eight times the Sun's width, with a companion on a seven-year orbit.",
+      "systemName": "Achernar system",
+      "aliases": [
+        "Alpha Eridani",
+        "Achernar A",
+        "HD 10144"
+      ],
+      "order": 5485,
+      "context": {
+        "order": 5482
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        650003671721640700,
+        295261297209513860,
+        -1109363621237293600
+      ],
+      "presentationToReference": [
+        0.492718922360381,
+        -0.7656351040427667,
+        0.41355888456838513,
+        0.22381539427559763,
+        -0.34776086675837903,
+        -0.9104773741487044,
+        -0.8409130352380583,
+        -0.5411702754299084,
+        -0.000012563174269467653
+      ],
+      "orbitUpReference": [
+        0.7656351040427667,
+        0.34776086675837903,
+        0.5411702754299084
+      ],
+      "metersPerUnit": 18267735.48387097,
+      "bodyRadiusM": 5662998000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

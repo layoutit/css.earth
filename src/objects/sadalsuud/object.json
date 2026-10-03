@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "sadalsuud",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sadalsuud",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 33310116
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/sadalsuud-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Sadalsuud",
+      "classification": "star",
+      "color": "#ffefdd",
+      "distanceAu": 33981110,
+      "description": "A naked-eye star 165 parsecs away whose disc the NPOI measured: 47.9 times the Sun's width.",
+      "systemName": "Sadalsuud system",
+      "aliases": [
+        "HD 204867"
+      ],
+      "order": 5472,
+      "context": {
+        "order": 5469
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4034826605064378000,
+        -3052638047176452600,
+        -493522840631836800
+      ],
+      "presentationToReference": [
+        0.7937101246804342,
+        -0.07742127698134935,
+        -0.6033491392637822,
+        -0.6004990950510022,
+        0.058574915222163126,
+        -0.7974771571334466,
+        -0.09708282455046875,
+        -0.9952763059458883,
+        -9.649913568620902e-8
+      ],
+      "orbitUpReference": [
+        0.07742127698134935,
+        -0.058574915222163126,
+        0.9952763059458883
+      ],
+      "metersPerUnit": 107451987.09677419,
+      "bodyRadiusM": 33310116000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

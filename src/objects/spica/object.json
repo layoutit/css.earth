@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "spica",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Spica",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5196879
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/spica-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Spica",
+      "classification": "star",
+      "color": "#a5bdff",
+      "distanceAu": 15793692.5,
+      "description": "Two hot blue stars 77 parsecs away that circle each other every four days.",
+      "systemName": "Spica system",
+      "aliases": [
+        "Alpha Virginis",
+        "Spica A",
+        "HD 116658"
+      ],
+      "order": 5487,
+      "context": {
+        "order": 5484
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2159702770272660500,
+        -841942932305317000,
+        -457362438543918600
+      ],
+      "presentationToReference": [
+        -0.9140824001377555,
+        0.18035022475673596,
+        -0.3632177889209103,
+        -0.35634774699160104,
+        0.07030963948554018,
+        0.931704265209419,
+        -0.1935707854310925,
+        -0.9810863117104469,
+        0.0000014077522711615888
+      ],
+      "orbitUpReference": [
+        -0.18035022475673596,
+        -0.07030963948554018,
+        0.9810863117104469
+      ],
+      "metersPerUnit": 16764125.806451613,
+      "bodyRadiusM": 5196879000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

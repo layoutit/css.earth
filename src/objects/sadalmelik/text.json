@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "sadalmelik",
+  "card": {
+    "text": "A naked-eye star 161 parsecs away whose disc the NPOI measured: 52.9 times the Sun's width.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa9d8b",
+        "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+        "label": "Baines et al. (2017), The Astronomical Journal 155 30",
+        "checked": "2026-10-03",
+        "locator": "Tables 1, 4 and 5, HD 209750: parallax, limb-darkened diameter, radius, Teff"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its disc spans 3.066 milliarcseconds, which gives 52.89 solar radii and 5,383 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa9d8b",
+        "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+        "label": "Baines et al. (2017), The Astronomical Journal 155 30",
+        "checked": "2026-10-03",
+        "locator": "Tables 1, 4 and 5, HD 209750: parallax, limb-darkened diameter, radius, Teff"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "capella-ab",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Capella Ab",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 6143031
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/capella-ab-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Capella Ab",
+      "classification": "star",
+      "color": "#fff0e8",
+      "distanceAu": 2714461.8,
+      "description": "The hotter giant of Capella, 8.8 times the Sun's width, orbiting its partner every 104 days.",
+      "systemName": "Capella system",
+      "order": 5484,
+      "context": {
+        "order": 5484
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        52992340997564376,
+        277089888882640900,
+        292082363351549900
+      ],
+      "presentationToReference": [
+        0.571845649310006,
+        0.3523170563142154,
+        -0.740854402156931,
+        0.022710598137583998,
+        -0.909535800460942,
+        -0.41500464625363764,
+        0.8200468170156205,
+        -0.22049335479773463,
+        0.5281154214682522
+      ],
+      "orbitUpReference": [
+        -0.3523170563142154,
+        0.909535800460942,
+        0.22049335479773463
+      ],
+      "metersPerUnit": 19816229.032258064,
+      "bodyRadiusM": 6143031000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

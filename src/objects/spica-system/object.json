@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "spica-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "spica",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Spica system",
+      "systemName": "Spica system",
+      "classification": "planetary-system",
+      "color": "#a5bdff",
+      "distanceAu": 15793692.5,
+      "description": "Two hot blue stars 77 parsecs away that circle each other every four days."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2159702770272660500,
+        -841942932305317000,
+        -457362438543918600
+      ],
+      "presentationToReference": [
+        -0.9140824001377555,
+        0.18035022475673596,
+        -0.3632177889209103,
+        -0.35634774699160104,
+        0.07030963948554018,
+        0.931704265209419,
+        -0.1935707854310925,
+        -0.9810863117104469,
+        0.0000014077522711615888
+      ],
+      "orbitUpReference": [
+        -0.18035022475673596,
+        -0.07030963948554018,
+        0.9810863117104469
+      ],
+      "metersPerUnit": 16764125.806451613,
+      "bodyRadiusM": 5196879000
+    }
+  }
+}

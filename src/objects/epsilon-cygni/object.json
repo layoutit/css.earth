@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "epsilon-cygni",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Epsilon Cygni",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 8633637
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/epsilon-cygni-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Epsilon Cygni",
+      "classification": "star",
+      "color": "#ffe3be",
+      "distanceAu": 4776858.3,
+      "description": "A naked-eye star 23 parsecs away whose disc the NPOI measured: 12.4 times the Sun's width.",
+      "systemName": "Epsilon Cygni system",
+      "aliases": [
+        "HD 197989"
+      ],
+      "order": 5481,
+      "context": {
+        "order": 5478
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        393115221990119040,
+        -443481147478617540,
+        399310959738052100
+      ],
+      "presentationToReference": [
+        0.5501132318090223,
+        0.3706608590730519,
+        -0.748322096252583,
+        -0.6205937436123187,
+        -0.4181499313991427,
+        -0.6633355412309369,
+        0.5587833547788271,
+        -0.829313669501546,
+        3.421561234233553e-17
+      ],
+      "orbitUpReference": [
+        -0.3706608590730519,
+        0.4181499313991427,
+        0.829313669501546
+      ],
+      "metersPerUnit": 27850441.93548387,
+      "bodyRadiusM": 8633637000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

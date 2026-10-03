@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "capella-ab",
+  "displayName": "Capella Ab",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "8.8 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-807-1-26",
+          "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+          "label": "Torres et al. 2015",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "104 days",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-807-1-26",
+          "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+          "label": "Torres et al. 2015",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.5 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-807-1-26",
+          "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+          "label": "Torres et al. 2015",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "capella-ab-dataset-color.webp",
+        "surface": "capella-ab-surface-color@2x.webp",
+        "poles": "capella-ab-poles-color@2x.webp",
+        "source": {
+          "id": "capella-ab-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1088/0004-637X/807/1/26"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,730 K and log g 2.94 (u1 0.451, u2 0.264): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Torres et al. (2015), ApJ 807, 26",
+      "href": "https://doi.org/10.1088/0004-637X/807/1/26"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+      "credit": "Torres et al. (2015), ApJ 807, 26"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/capella-ab.json",
+      "credit": "Radius from Torres et al. (2015), ApJ 807, 26, Table 5: secondary radius 8.83 +/- 0.33 solar radii; mass from Torres et al. (2015), ApJ 807, 26, Table 4: dynamical mass of the secondary 2.4828 +/- 0.0067 solar masses; orbit from Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii"
+    }
+  }
+}

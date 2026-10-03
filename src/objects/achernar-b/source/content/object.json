@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "achernar-b",
+  "displayName": "Achernar B",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.7 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244009",
+          "url": "https://doi.org/10.1051/0004-6361/202244009",
+          "label": "Kervella et al. 2022",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "7 years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244009",
+          "url": "https://doi.org/10.1051/0004-6361/202244009",
+          "label": "Kervella et al. 2022",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.0 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244009",
+          "url": "https://doi.org/10.1051/0004-6361/202244009",
+          "label": "Kervella et al. 2022",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "achernar-b-dataset-color.webp",
+        "surface": "achernar-b-surface-color@2x.webp",
+        "poles": "achernar-b-poles-color@2x.webp",
+        "source": {
+          "id": "achernar-b-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202244009"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 9,064 K and log g 4.28 (u1 0.274, u2 0.316): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kervella et al. (2022), A&A 667, A111",
+      "href": "https://doi.org/10.1051/0004-6361/202244009"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1051/0004-6361/202244009",
+      "credit": "Kervella et al. (2022), A&A 667, A111"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/achernar-b.json",
+      "credit": "Radius from Kervella et al. (2022), A&A 667, A111, Table 4: radius of B 1.70 +/- 0.08 solar radii, from its angular diameter 0.370 +/- 0.014 mas and the Hipparcos parallax; mass from Kervella et al. (2022), A&A 667, A111, Table 4: model mass of B 2.02 +/- 0.11 solar masses, from its position on isochrones; orbit from Kervella et al. (2022), A&A 667, A111, Table 4: relative orbit of B, P 2570.94 d, i 30.32, e 0.7258, omega 172.05 degrees for the companion (the star's is 180 degrees on), node 310.91, T0 MJD 54743.44; a 7.35 au over A's 8.14 solar radii (IAU au 149,597,870.7 km, nominal solar radius 695,700 km) is 194.2 of its radii"
+    }
+  }
+}

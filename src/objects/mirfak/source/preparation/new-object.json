@@ -1,0 +1,67 @@
+{
+  "id": "mirfak",
+  "name": "Mirfak",
+  "system": "Mirfak system",
+  "description": "A naked-eye star 155 parsecs away, 53.1 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 20902"
+  ],
+  "featured": true,
+  "target": "HD 20902",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "credit": "Baines et al. (2021), AJ 162, 198"
+  },
+  "radius": {
+    "value": 53.07,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 20902: radius 53.07 +1.37/-1.45 solar radii (Table 5), from the limb-darkened angular diameter 3.18 +/- 0.008 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "uncertainty": 1.45
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5859,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 20902: effective temperature 5859 +/- 41 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "uncertainty": 41
+  },
+  "gravity": {
+    "value": 1.31,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 20902: log g 1.31, from Prugniel et al. (2011), as the paper lists it beside the diameter (Table 4)",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431"
+  },
+  "radialVelocity": {
+    "value": -2.04,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 15863: RV -2.04 +/- 0.05 km/s (quality A)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 0.05
+  },
+  "distance": {
+    "value": 155.28,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 20902: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 6.44 +/- 0.17 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "uncertainty": 4.099
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "15863"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 155 parsecs away whose disc the NPOI measured: 53.1 times the Sun's width.",
+    "introduction": "Its disc spans 3.18 milliarcseconds, which gives 53.07 solar radii and 5,859 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 20902: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "order": 5475
+}

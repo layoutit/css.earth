@@ -1,0 +1,54 @@
+{
+  "id": "kornephoros",
+  "name": "Kornephoros",
+  "system": "Kornephoros system",
+  "description": "A naked-eye star 42.7 parsecs away, 15.9 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 148856"
+  ],
+  "featured": true,
+  "target": "HD 148856",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "credit": "Baines et al. (2018), AJ 155, 30"
+  },
+  "radius": {
+    "value": 15.92,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 148856: radius 15.92 +0.41/-0.39 solar radii (Table 5), from the limb-darkened angular diameter 3.472 +/- 0.008 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.41
+  },
+  "mass": {
+    "value": 2.91,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 148856: mass 2.91 +/- 0.11 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.11
+  },
+  "temperature": {
+    "value": 5092,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 148856: effective temperature 5092 +/- 64 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 64
+  },
+  "distance": {
+    "value": 42.662,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 148856: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 23.44 +/- 0.58 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 1.056
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 43 parsecs away whose disc the NPOI measured: 15.9 times the Sun's width.",
+    "introduction": "Its disc spans 3.472 milliarcseconds, which gives 15.92 solar radii and 5,092 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 148856: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -25.91,
+    "uncertainty": 0.54,
+    "source": "SIMBAD's radial velocity for Gaia DR3 1297565458994346240 (quality A), from 2004A&A...424..727P; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2004A&A...424..727P/abstract"
+  },
+  "order": 5469
+}

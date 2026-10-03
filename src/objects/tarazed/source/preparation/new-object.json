@@ -1,0 +1,54 @@
+{
+  "id": "tarazed",
+  "name": "Tarazed",
+  "system": "Tarazed system",
+  "description": "A naked-eye star 121 parsecs away, 91.8 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 186791"
+  ],
+  "featured": true,
+  "target": "HD 186791",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "credit": "Baines et al. (2018), AJ 155, 30"
+  },
+  "radius": {
+    "value": 91.81,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 186791: radius 91.81 +2.19/-2.12 solar radii (Table 5), from the limb-darkened angular diameter 7.056 +/- 0.08 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 2.19
+  },
+  "mass": {
+    "value": 3.51,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 186791: mass 3.51 +/- 0.23 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.23
+  },
+  "temperature": {
+    "value": 4098,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 186791: effective temperature 4098 +/- 56 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 56
+  },
+  "distance": {
+    "value": 121.065,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 186791: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 8.26 +/- 0.17 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 2.492
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 121 parsecs away whose disc the NPOI measured: 91.8 times the Sun's width.",
+    "introduction": "Its disc spans 7.056 milliarcseconds, which gives 91.81 solar radii and 4,098 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 186791: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -2.693,
+    "uncertainty": 0.0005,
+    "source": "SIMBAD's radial velocity for Gaia DR3 4302054339959905920 (quality A), from 2018A&A...616A...7S; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...7S/abstract"
+  },
+  "order": 5471
+}

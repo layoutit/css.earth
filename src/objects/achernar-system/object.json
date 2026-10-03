@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "achernar-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "achernar",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Achernar system",
+      "systemName": "Achernar system",
+      "classification": "planetary-system",
+      "color": "#aac3ff",
+      "distanceAu": 8818517.6,
+      "description": "A fast-spinning Be star eight times the Sun's width, with a companion on a seven-year orbit."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        650003671721640700,
+        295261297209513860,
+        -1109363621237293600
+      ],
+      "presentationToReference": [
+        0.492718922360381,
+        -0.7656351040427667,
+        0.41355888456838513,
+        0.22381539427559763,
+        -0.34776086675837903,
+        -0.9104773741487044,
+        -0.8409130352380583,
+        -0.5411702754299084,
+        -0.000012563174269467653
+      ],
+      "orbitUpReference": [
+        0.7656351040427667,
+        0.34776086675837903,
+        0.5411702754299084
+      ],
+      "metersPerUnit": 18267735.48387097,
+      "bodyRadiusM": 5662998000
+    }
+  }
+}

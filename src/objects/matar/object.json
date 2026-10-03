@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "matar",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Matar",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 17051607
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/matar-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Matar",
+      "classification": "star",
+      "color": "#ffecd2",
+      "distanceAu": 13552226,
+      "description": "A naked-eye star 66 parsecs away whose disc the NPOI measured: 24.5 times the Sun's width.",
+      "systemName": "Matar system",
+      "aliases": [
+        "HD 215182"
+      ],
+      "order": 5474,
+      "context": {
+        "order": 5471
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1653901755396260600,
+        -577545420961887500,
+        1020459084931952400
+      ],
+      "presentationToReference": [
+        0.8157806765271823,
+        0.47519834767626395,
+        -0.3296792656061362,
+        -0.28487205645630825,
+        -0.1659407412940693,
+        -0.9440929942697005,
+        0.5033386526536648,
+        -0.8640892319341349,
+        5.19669120912544e-7
+      ],
+      "orbitUpReference": [
+        -0.47519834767626395,
+        0.1659407412940693,
+        0.8640892319341349
+      ],
+      "metersPerUnit": 55005183.87096774,
+      "bodyRadiusM": 17051607000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

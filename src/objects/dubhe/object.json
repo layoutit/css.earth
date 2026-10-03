@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "dubhe",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Dubhe",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 11847771
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/dubhe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Dubhe",
+      "classification": "star",
+      "color": "#ffe1b7",
+      "distanceAu": 7771781.4,
+      "description": "A naked-eye star 38 parsecs away whose disc the NPOI measured: 17.0 times the Sun's width.",
+      "systemName": "Dubhe system",
+      "aliases": [
+        "HD 95689"
+      ],
+      "order": 5464,
+      "context": {
+        "order": 5461
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -533778156113234500,
+        133780057587522000,
+        1024167992957785200
+      ],
+      "presentationToReference": [
+        -0.45910285335237616,
+        -0.8544824050672402,
+        0.24307280694107172,
+        0.11506429327842194,
+        0.21411351731762293,
+        0.9700080464172517,
+        0.8808999820956087,
+        -0.47330246263080117,
+        -0.000020287316074145444
+      ],
+      "orbitUpReference": [
+        0.8544824050672402,
+        -0.21411351731762293,
+        0.47330246263080117
+      ],
+      "metersPerUnit": 38218616.12903226,
+      "bodyRadiusM": 11847771000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

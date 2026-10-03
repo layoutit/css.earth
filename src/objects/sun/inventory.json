@@ -226,8 +226,8 @@
     {
       "location": "prepared",
       "filename": "plain-stars.bin",
-      "bytes": 1485,
-      "sha256": "7b4066bb84ddbb05f4dd2acecc9d82dd9442350af43a74dbb812297b78a84690"
+      "bytes": 1558,
+      "sha256": "70fcf6d4a4d23c0314d5464f04ed4e7da7e14841db3baa9f99d3569d1343ab2e"
     },
     {
       "location": "prepared",
@@ -267,6 +267,12 @@
     },
     {
       "location": "prepared",
+      "filename": "system-views/achernar.json",
+      "bytes": 30358,
+      "sha256": "08c995e9c0af531098514ff3fc96080688747ea98acb4a6140258420d1bd2f56"
+    },
+    {
+      "location": "prepared",
       "filename": "system-views/af-lep.json",
       "bytes": 30283,
       "sha256": "907f8a6479986b0614575fb06aeae8168c075f43f194f247dc8350ea9c128d1c"
@@ -288,6 +294,12 @@
       "filename": "system-views/beta-pictoris.json",
       "bytes": 38891,
       "sha256": "63517c0bc0fa03ba032c6958a98bd67937e35954130281c044985e44d47dbf4c"
+    },
+    {
+      "location": "prepared",
+      "filename": "system-views/capella.json",
+      "bytes": 30364,
+      "sha256": "ff3b1bec8ce9a25c753a0ef60dc76f5aeb0a3be465f7b228caed17649e5323b9"
     },
     {
       "location": "prepared",
@@ -1968,6 +1980,12 @@
       "filename": "system-views/sirius.json",
       "bytes": 30313,
       "sha256": "19f2eb0e16c2eca0bb7259de5aaf93e0e22523b2a5067c792a2864fa7e8790d1"
+    },
+    {
+      "location": "prepared",
+      "filename": "system-views/spica.json",
+      "bytes": 30483,
+      "sha256": "eafb0569bb552db1943d63dd58eec1ee794b9e8d8dcc457182afd7eb13e8732e"
     },
     {
       "location": "prepared",
@@ -4666,20 +4684,20 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 151991,
-      "sha256": "991d475a0ac28f14cdddc13eb03a06d7c3552fc2992b358cd236741fb5614ebd"
+      "bytes": 156580,
+      "sha256": "61146c47f57f510cdaea17e87e15a90eedcefbad0206ee96122ef65bb269c58e"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 54949945,
-      "sha256": "fcdcdd4b7498d775e1d11523873245d0a6330838dc285f938377de81349ee337"
+      "bytes": 55202359,
+      "sha256": "9bc1da2139f3ddaf9ea8bfec220621904ae6705b4468a4e12e71d91a787ef22d"
     },
     {
       "location": "prepared",
       "filename": "world-index.json",
-      "bytes": 1398014,
-      "sha256": "2c5c7680007e9c38042952d70f03603d83845e4f8438af119ae7b27d7f1b7252"
+      "bytes": 1401080,
+      "sha256": "0914bc846be2f9fdc82fb5fbb3db68895cea796ae59c3a85127fab9c04d0f5c0"
     },
     {
       "location": "prepared",
@@ -4698,6 +4716,12 @@
       "filename": "world-orbits/abundantia.bin",
       "bytes": 2267,
       "sha256": "5229e6500e9da815063269d6268c8d1f38e05c8aec55f5f659d18085c68d5288"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/achernar-b.bin",
+      "bytes": 2272,
+      "sha256": "578e17cd07ed15557b0d2b0069dfbf0e019c3cf5c627fe358c665e9b79f75bcc"
     },
     {
       "location": "prepared",
@@ -5340,6 +5364,12 @@
       "filename": "world-orbits/camilla.bin",
       "bytes": 2261,
       "sha256": "8303dc1aabda9501d71b06007964781cb531c2c5e664e4d7ad16e97e12c809a3"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/capella-ab.bin",
+      "bytes": 2262,
+      "sha256": "9822bd78c601dc57896a9cf652ac53ce72c3b3c8acf5ac6b0816de1a26191c45"
     },
     {
       "location": "prepared",
@@ -9909,6 +9939,12 @@
     },
     {
       "location": "prepared",
+      "filename": "world-orbits/spica-b.bin",
+      "bytes": 2268,
+      "sha256": "191b159aea8dda635af035abb267838cac5166b3c700ba27f1f120e1c0c99c00"
+    },
+    {
+      "location": "prepared",
       "filename": "world-orbits/squannit.bin",
       "bytes": 2263,
       "sha256": "3e72b9f3e6e97492dfee3184c8dea065872c37fc4c981e04af8be50455cee597"
@@ -13497,6 +13533,12 @@
     },
     {
       "location": "prepared",
+      "filename": "world-systems/achernar-system.json",
+      "bytes": 919,
+      "sha256": "d5a308b279b34b0063cabfd39fe987c010ca98e9f21792bf0c1b9ac564681a94"
+    },
+    {
+      "location": "prepared",
       "filename": "world-systems/af-lep-system.json",
       "bytes": 1070,
       "sha256": "adc449d4bf80730908e64656c2c92b74cb0ab11ed43e4b7c43d765e648578d41"
@@ -13512,6 +13554,12 @@
       "filename": "world-systems/beta-pictoris-system.json",
       "bytes": 1411,
       "sha256": "ad816b07aadfd7b4f976de4ef688bafe192934c0a85fa210386f20971123f8a1"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-systems/capella-system.json",
+      "bytes": 905,
+      "sha256": "521207891fe38493a70e24fc789779dd418ec617c1e32383700545350633fb41"
     },
     {
       "location": "prepared",
@@ -15108,6 +15156,12 @@
       "filename": "world-systems/sirius-system.json",
       "bytes": 893,
       "sha256": "babc847c97fe229be22e19c5dcdd738b5875905f4463850b9e72627b0ddeaddb"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-systems/spica-system.json",
+      "bytes": 903,
+      "sha256": "56c751a3167fa41919e07ef52df4ae0e2641cebe511009983ff75fe12307733e"
     },
     {
       "location": "prepared",

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "achernar",
+  "angularDiameterMas": 1.77,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 5,662,998 km at 42.75 pc = 1.77 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 42.753,
+  "distanceSource": "Kervella et al. (2022), A&A 667, A111, Table 4: the Hipparcos parallax 23.39 +/- 0.57 mas (van Leeuwen 2007) the orbit is scaled with, inverted (https://doi.org/10.1051/0004-6361/202244009): 42.753 +/- 1.042 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 5662998,
+  "radiusSource": "Radius 8.14 +/- 0.26 solar radii from Kervella et al. (2022), A&A 667, A111, Table 4: radius of A 8.14 +/- 0.26 solar radii, from the mean limb-darkened diameter 1.770 +/- 0.035 mas (Domiciano de Souza et al. 2014) and the Hipparcos parallax (https://doi.org/10.1051/0004-6361/202244009): 5,662,998 km at 695,700 km per solar radius. Mass 5.99 +/- 0.6 solar masses from Kervella et al. (2022), A&A 667, A111, Table 4: mass of A 5.99 +/- 0.60 solar masses, the orbit's total mass less B's model mass (https://doi.org/10.1051/0004-6361/202244009); GM is that mass times the JPL solar GM. Temperature 15539 +/- 438 K from Kervella et al. (2022), A&A 667, A111, Table 4: Teff of A 15539 +/- 438 K (https://doi.org/10.1051/0004-6361/202244009). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 15539,
+  "effectiveTemperatureSource": "Kervella et al. (2022), A&A 667, A111, Table 4: Teff of A 15539 +/- 438 K (https://doi.org/10.1051/0004-6361/202244009)",
+  "surfaceGravityLogg": 3.39,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/achernar.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.394, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

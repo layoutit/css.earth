@@ -1,0 +1,54 @@
+{
+  "id": "cebalrai",
+  "name": "Cebalrai",
+  "system": "Cebalrai system",
+  "description": "A naked-eye star 25.1 parsecs away, 12.2 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 161096"
+  ],
+  "featured": true,
+  "target": "HD 161096",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "credit": "Baines et al. (2018), AJ 155, 30"
+  },
+  "radius": {
+    "value": 12.17,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 161096: radius 12.17 +/- 0.06 solar radii (Table 5), from the limb-darkened angular diameter 4.511 +/- 0.011 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.06
+  },
+  "mass": {
+    "value": 1.44,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 161096: mass 1.44 +/- 0.16 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.16
+  },
+  "temperature": {
+    "value": 4559,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 161096: effective temperature 4559 +/- 57 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 57
+  },
+  "distance": {
+    "value": 25.094,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 161096: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 39.85 +/- 0.17 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.107
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 25 parsecs away whose disc the NPOI measured: 12.2 times the Sun's width.",
+    "introduction": "Its disc spans 4.511 milliarcseconds, which gives 12.17 solar radii and 4,559 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 161096: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -12.12,
+    "uncertainty": 0.0008,
+    "source": "SIMBAD's radial velocity for Gaia DR3 4473334474604992384 (quality A), from 2018A&A...616A...7S; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...7S/abstract"
+  },
+  "order": 5470
+}

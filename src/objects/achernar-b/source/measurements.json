@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "achernar-b",
+  "radiusKm": 1182690,
+  "radiusSource": "Radius 1.7 +/- 0.08 solar radii from Kervella et al. (2022), A&A 667, A111, Table 4: radius of B 1.70 +/- 0.08 solar radii, from its angular diameter 0.370 +/- 0.014 mas and the Hipparcos parallax (https://doi.org/10.1051/0004-6361/202244009): 1,182,690 km at 695,700 km per solar radius. GM from the mass 2.02 +/- 0.11 solar masses (Kervella et al. (2022), A&A 667, A111, Table 4: model mass of B 2.02 +/- 0.11 solar masses, from its position on isochrones, https://doi.org/10.1051/0004-6361/202244009) times the JPL solar GM. Temperature 9064 +/- 624 K from Kervella et al. (2022), A&A 667, A111, Table 4: Teff of B 9064 +/- 624 K (https://doi.org/10.1051/0004-6361/202244009). A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2570.94,
+  "orbitalPeriodSource": "Kervella et al. (2022), A&A 667, A111, Table 4: relative orbit of B, P 2570.94 d, i 30.32, e 0.7258, omega 172.05 degrees for the companion (the star's is 180 degrees on), node 310.91, T0 MJD 54743.44; a 7.35 au over A's 8.14 solar radii (IAU au 149,597,870.7 km, nominal solar radius 695,700 km) is 194.2 of its radii (https://doi.org/10.1051/0004-6361/202244009): P 2570.94 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of Achernar B is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 9064,
+  "effectiveTemperatureSource": "Kervella et al. (2022), A&A 667, A111, Table 4: Teff of B 9064 +/- 624 K (https://doi.org/10.1051/0004-6361/202244009)",
+  "surfaceGravityLogg": 4.28,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/achernar-b.json, log10(GM/R^2) in cgs, rounded to two decimals",
+  "massSource": "2.02 solar masses: Kervella et al. (2022), A&A 667, A111, Table 4: model mass of B 2.02 +/- 0.11 solar masses, from its position on isochrones (https://doi.org/10.1051/0004-6361/202244009)."
+}

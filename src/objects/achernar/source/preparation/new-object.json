@@ -1,0 +1,71 @@
+{
+  "id": "achernar",
+  "name": "Achernar",
+  "system": "Achernar system",
+  "description": "A fast-spinning Be star 43 parsecs away, eight times the Sun's width, with a companion on a seven-year orbit.",
+  "aliases": [
+    "Alpha Eridani",
+    "Achernar A",
+    "HD 10144"
+  ],
+  "featured": true,
+  "target": "HD 10144",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202244009",
+    "credit": "Kervella et al. (2022), A&A 667, A111"
+  },
+  "radius": {
+    "value": 8.14,
+    "source": "Kervella et al. (2022), A&A 667, A111, Table 4: radius of A 8.14 +/- 0.26 solar radii, from the mean limb-darkened diameter 1.770 +/- 0.035 mas (Domiciano de Souza et al. 2014) and the Hipparcos parallax",
+    "url": "https://doi.org/10.1051/0004-6361/202244009",
+    "uncertainty": 0.26
+  },
+  "mass": {
+    "value": 5.99,
+    "source": "Kervella et al. (2022), A&A 667, A111, Table 4: mass of A 5.99 +/- 0.60 solar masses, the orbit's total mass less B's model mass",
+    "url": "https://doi.org/10.1051/0004-6361/202244009",
+    "uncertainty": 0.6
+  },
+  "temperature": {
+    "value": 15539,
+    "source": "Kervella et al. (2022), A&A 667, A111, Table 4: Teff of A 15539 +/- 438 K",
+    "url": "https://doi.org/10.1051/0004-6361/202244009",
+    "uncertainty": 438
+  },
+  "radialVelocity": {
+    "value": 10.49,
+    "source": "Kervella et al. (2022), A&A 667, A111, Table 4: barycentric radial velocity +10.49 +/- 0.51 km/s",
+    "url": "https://doi.org/10.1051/0004-6361/202244009",
+    "uncertainty": 0.51
+  },
+  "distance": {
+    "value": 42.753,
+    "source": "Kervella et al. (2022), A&A 667, A111, Table 4: the Hipparcos parallax 23.39 +/- 0.57 mas (van Leeuwen 2007) the orbit is scaled with, inverted",
+    "url": "https://doi.org/10.1051/0004-6361/202244009",
+    "uncertainty": 1.042
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "7588"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A fast-spinning Be star eight times the Sun's width, with a companion on a seven-year orbit.",
+    "introduction": "VLT and VLTI followed its companion for 13 years: the orbit weighs Achernar at 5.99 solar masses, with 15,539 K at its surface.",
+    "locator": "Table 4"
+  },
+  "notes": [
+    "Achernar A spins so fast that it is much wider at its equator than at its poles; it is drawn as a sphere of its mean radius."
+  ],
+  "order": 5485
+}

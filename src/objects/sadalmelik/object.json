@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "sadalmelik",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sadalmelik",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 36795573
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/sadalmelik-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Sadalmelik",
+      "classification": "star",
+      "color": "#ffe6c5",
+      "distanceAu": 33108404.5,
+      "description": "A naked-eye star 161 parsecs away whose disc the NPOI measured: 52.9 times the Sun's width.",
+      "systemName": "Sadalmelik system",
+      "aliases": [
+        "HD 209750"
+      ],
+      "order": 5473,
+      "context": {
+        "order": 5470
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4350442189306039300,
+        -2367397310505180700,
+        -27656138100645070
+      ],
+      "presentationToReference": [
+        0.8783543144881536,
+        -0.004904131447907878,
+        -0.47798498691359276,
+        -0.47797753683553457,
+        0.0026687066947537912,
+        -0.8783680050441345,
+        -0.005583233890941153,
+        -0.999984413628192,
+        -5.3696517208205605e-9
+      ],
+      "orbitUpReference": [
+        0.004904131447907878,
+        -0.0026687066947537912,
+        0.999984413628192
+      ],
+      "metersPerUnit": 118695396.77419356,
+      "bodyRadiusM": 36795573000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

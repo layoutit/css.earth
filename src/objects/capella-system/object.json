@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "capella-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "capella",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Capella system",
+      "systemName": "Capella system",
+      "classification": "planetary-system",
+      "color": "#ffe6cf",
+      "distanceAu": 2714462.3,
+      "description": "Two yellow giants 13 parsecs away that circle each other every 104 days."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        52992410401438290,
+        277089894773175870,
+        292082449950605000
+      ],
+      "presentationToReference": [
+        0.13048827304404806,
+        0.13513312156176238,
+        0.9821974598088492,
+        0.6823049159241783,
+        0.7065209493334543,
+        -0.187851403664318,
+        0.7193280283039735,
+        -0.6946705604888754,
+        0.000009294597806182989
+      ],
+      "orbitUpReference": [
+        -0.13513312156176238,
+        -0.7065209493334543,
+        0.6946705604888754
+      ],
+      "metersPerUnit": 26885438.70967742,
+      "bodyRadiusM": 8334486000
+    }
+  }
+}

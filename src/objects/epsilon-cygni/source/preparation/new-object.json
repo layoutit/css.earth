@@ -1,0 +1,53 @@
+{
+  "id": "epsilon-cygni",
+  "name": "Epsilon Cygni",
+  "system": "Epsilon Cygni system",
+  "description": "A naked-eye star 23.2 parsecs away, 12.4 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 197989"
+  ],
+  "target": "HD 197989",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "credit": "Baines et al. (2021), AJ 162, 198"
+  },
+  "radius": {
+    "value": 12.41,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 197989: radius 12.41 +0.29/-0.3 solar radii (Table 5), from the limb-darkened angular diameter 4.985 +/- 0.046 mas (NPOI, Table 4) and the Gaia DR2 (Gaia Collaboration 2018) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "uncertainty": 0.3
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4659,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 197989: effective temperature 4659 +/- 35 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "uncertainty": 35
+  },
+  "gravity": {
+    "value": 2.67,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 197989: log g 2.67, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 4)",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431"
+  },
+  "distance": {
+    "value": 23.159,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 197989: the Gaia DR2 (Gaia Collaboration 2018) parallax the radius was computed with (Table 1), 43.18 +/- 0.94 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "uncertainty": 0.504
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A naked-eye star 23 parsecs away whose disc the NPOI measured: 12.4 times the Sun's width.",
+    "introduction": "Its disc spans 4.985 milliarcseconds, which gives 12.41 solar radii and 4,659 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 197989: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -12.599,
+    "uncertainty": 0.0011,
+    "source": "SIMBAD's radial velocity for Gaia DR3 1869302503206674304 (quality A), from 2018A&A...616A...7S; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...7S/abstract"
+  },
+  "order": 5481
+}

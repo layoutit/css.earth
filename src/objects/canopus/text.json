@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "canopus",
+  "card": {
+    "text": "The brightest and closest yellow supergiant to the Solar System, 73 times the Sun's width.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202140478",
+        "url": "https://doi.org/10.1051/0004-6361/202140478",
+        "label": "Souza et al. (2021), Astronomy & Astrophysics 654 A19",
+        "checked": "2026-10-03",
+        "locator": "Abstract, Tables 3 and 4, Sect. 5.3"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "VLTI measured its disc at 7.18 milliarcseconds, which at 95 parsecs is 73.2 solar radii, with 7,661 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202140478",
+        "url": "https://doi.org/10.1051/0004-6361/202140478",
+        "label": "Souza et al. (2021), Astronomy & Astrophysics 654 A19",
+        "checked": "2026-10-03",
+        "locator": "Abstract, Tables 3 and 4, Sect. 5.3"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

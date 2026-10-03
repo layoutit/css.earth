@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "achernar",
+  "displayName": "Achernar",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "8.1 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244009",
+          "url": "https://doi.org/10.1051/0004-6361/202244009",
+          "label": "Kervella et al. (2022), Astronomy & Astrophysics 667 A111",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "42.8 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244009",
+          "url": "https://doi.org/10.1051/0004-6361/202244009",
+          "label": "Kervella et al. (2022), A&A 667, A111, Table 4: the Hipparcos parallax 23.39 +/- 0.57 mas (van Leeuwen 2007) the orbit is scaled with, inverted",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "achernar-dataset-color.webp",
+        "surface": "achernar-surface-color@2x.webp",
+        "poles": "achernar-poles-color@2x.webp",
+        "source": {
+          "id": "achernar-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"
+        },
+        "falseColor": false,
+        "notes": "The color of the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 15,539 K and log g 3.39 (u1 0.147, u2 0.292): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kervella et al. (2022), A&A 667, A111",
+      "href": "https://doi.org/10.1051/0004-6361/202244009"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1051/0004-6361/202244009",
+      "credit": "Kervella et al. (2022), A&A 667, A111"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/achernar.json",
+      "credit": "Kervella et al. radius; Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

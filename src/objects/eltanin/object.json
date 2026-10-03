@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "eltanin",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Eltanin",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 36037260
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/eltanin-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Eltanin",
+      "classification": "star",
+      "color": "#ffcd8e",
+      "distanceAu": 9756941.9,
+      "description": "A naked-eye star 47 parsecs away whose disc the NPOI measured: 51.8 times the Sun's width.",
+      "systemName": "Eltanin system",
+      "aliases": [
+        "HD 164058"
+      ],
+      "order": 5480,
+      "context": {
+        "order": 5477
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -13459843256096828,
+        -908758462289120400,
+        1142129937648268200
+      ],
+      "presentationToReference": [
+        -0.009221439855797472,
+        -0.011586521209663947,
+        -0.9998903527753651,
+        -0.6225972574488075,
+        -0.7824023086569758,
+        0.014808187784385154,
+        0.7824880957971241,
+        -0.6226655442004899,
+        -0.0000011395038081801083
+      ],
+      "orbitUpReference": [
+        0.011586521209663947,
+        0.7824023086569758,
+        0.6226655442004899
+      ],
+      "metersPerUnit": 116249225.80645162,
+      "bodyRadiusM": 36037260000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

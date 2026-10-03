@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "canopus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Canopus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 50925240
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/canopus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Canopus",
+      "classification": "star",
+      "color": "#cedaff",
+      "distanceAu": 19554055.3,
+      "description": "The brightest and closest yellow supergiant to the Solar System, 73 times the Sun's width.",
+      "systemName": "Canopus system",
+      "aliases": [
+        "Alpha Carinae",
+        "HD 45348"
+      ],
+      "order": 5482,
+      "context": {
+        "order": 5479
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -184949976266902560,
+        1763174030016923000,
+        -2326815287375789000
+      ],
+      "presentationToReference": [
+        -0.06322513332550697,
+        0.08297751706727097,
+        0.9945437718759909,
+        0.6027408888727696,
+        -0.7910883231761149,
+        0.10432011222801862,
+        -0.7954281887114861,
+        -0.6060478500875599,
+        -0.000002722311479288924
+      ],
+      "orbitUpReference": [
+        -0.08297751706727097,
+        0.7910883231761149,
+        0.6060478500875599
+      ],
+      "metersPerUnit": 164274967.7419355,
+      "bodyRadiusM": 50925240000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "capella-ab",
+  "radiusKm": 6143031,
+  "radiusSource": "Radius 8.83 +/- 0.33 solar radii from Torres et al. (2015), ApJ 807, 26, Table 5: secondary radius 8.83 +/- 0.33 solar radii (https://doi.org/10.1088/0004-637X/807/1/26): 6,143,031 km at 695,700 km per solar radius. GM from the mass 2.4828 +/- 0.0067 solar masses (Torres et al. (2015), ApJ 807, 26, Table 4: dynamical mass of the secondary 2.4828 +/- 0.0067 solar masses, https://doi.org/10.1088/0004-637X/807/1/26) times the JPL solar GM. Temperature 5730 +/- 60 K from Torres et al. (2015), ApJ 807, 26, Table 5: secondary Teff 5730 +/- 60 K (https://doi.org/10.1088/0004-637X/807/1/26). A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 104.02128,
+  "orbitalPeriodSource": "Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): P 104.02128 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of Capella Ab is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 5730,
+  "effectiveTemperatureSource": "Torres et al. (2015), ApJ 807, 26, Table 5: secondary Teff 5730 +/- 60 K (https://doi.org/10.1088/0004-637X/807/1/26)",
+  "surfaceGravityLogg": 2.94,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/capella-ab.json, log10(GM/R^2) in cgs, rounded to two decimals",
+  "massSource": "2.4828 solar masses: Torres et al. (2015), ApJ 807, 26, Table 4: dynamical mass of the secondary 2.4828 +/- 0.0067 solar masses (https://doi.org/10.1088/0004-637X/807/1/26)."
+}

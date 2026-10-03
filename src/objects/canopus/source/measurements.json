@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "canopus",
+  "angularDiameterMas": 7.18,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 50,925,240 km at 94.80 pc = 7.18 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 94.8,
+  "distanceSource": "Domiciano de Souza et al. (2021), A&A 654, A19, Sect. 1: d = 94.8 +/- 5.0 pc, the Hipparcos parallax 10.55 +/- 0.56 mas (van Leeuwen 2007) the paper adopts (https://doi.org/10.1051/0004-6361/202140478): 94.8 +/- 5 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 50925240,
+  "radiusSource": "Radius 73.2 +/- 3.9 solar radii from Domiciano de Souza et al. (2021), A&A 654, A19, Table 3 note and Sect. 5.3: R = 73.2 +/- 3.9 solar radii from the power-law limb-darkened PIONIER diameter 7.184 +/- 0.0017 +/- 0.029 mas and the Hipparcos distance (https://doi.org/10.1051/0004-6361/202140478): 50,925,240 km at 695,700 km per solar radius. Mass 9.81 +/- 1.83 solar masses from Domiciano de Souza et al. (2021), A&A 654, A19, Table 4: (M/Msun)_Ross = 9.81 +/- 1.83, from the SED fit's log g (1.70 +/- 0.05) and the radius (https://doi.org/10.1051/0004-6361/202140478); GM is that mass times the JPL solar GM. Temperature 7661 +/- 81 K from Domiciano de Souza et al. (2021), A&A 654, A19, Sect. 5.3: Teff 7661 +/- 81 K from the bolometric flux of the SED fit and the PIONIER diameter (https://doi.org/10.1051/0004-6361/202140478). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 7661,
+  "effectiveTemperatureSource": "Domiciano de Souza et al. (2021), A&A 654, A19, Sect. 5.3: Teff 7661 +/- 81 K from the bolometric flux of the SED fit and the PIONIER diameter (https://doi.org/10.1051/0004-6361/202140478)",
+  "surfaceGravityLogg": 1.7,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/canopus.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 1.701, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}
