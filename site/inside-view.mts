@@ -1,7 +1,9 @@
 import { isRecord } from '@cssearth/core';
 import { knownAncestors, knownObject, loadAncestors, loadObject } from './object-directory.mts';
 import { SOLAR_SYSTEM_ID } from './object-systems.mts';
-import { starSystem, subjectHost, subjectOf, subjectView, type SceneSubject } from './scene/scene-subject.mts';
+import { starSystem, subjectHost, subjectView, type SceneSubject } from './scene/scene-subject.mts';
+import { systemHostId } from './navigation/system-address.mts';
+import type { ZoomStep } from './zoom-scope.mts';
 
 /** An object the view hands over to as the camera backs out of something inside it (the Milky Way) is seen from inside: its
  * scene has no body, and its camera is centred on the star the zoom came out of. That star is the zoom's centre: the world's
@@ -21,30 +23,62 @@ export function setZoomCentre(id: string) {
 }
 
 /**
- * Where a selection stands as the camera backs out: its scope (a star's own `system`, or the id of an object seen from
+ * Where a selection stands as the camera backs out: its scope (the id of the star's own system, or of an object seen from
  * inside) and the star the scope is measured from. Null for a selection on a body. A star's system view and an object seen
  * from inside are steps of the same zoom out of the centre; everything that follows it (the world's overview scope, the
  * readout, the opening framing, the hand-over between scenes) reads this and never asks what kind of object is mounted.
  */
 export function zoomStepOf(subject: SceneSubject): { readonly scope: string; readonly centreId: string } | null {
   // A planet's own system is its host seen out to its moons, not a step of the zoom out of a star.
-  if (subjectView(subject) === 'system') return starSystem(subject) ? { scope: 'system', centreId: subjectHost(subject) } : null;
+  if (subjectView(subject) === 'system') return starSystem(subject) ? { scope: subject.objectId, centreId: subjectHost(subject) } : null;
   return seenFromInside(subject.objectId) ? { scope: subject.objectId, centreId } : null;
 }
 
-/** The selection a scope is, around `centre`: the star's planetary system, or the object seen from inside. */
-export function subjectOfScope(scope: string, centre: string): SceneSubject {
-  return scope === 'system' ? subjectOf(centre, 'system') : { objectId: scope };
+const PARSEC_M = 3.085677581491367e16;
+/** How far from a body at `originM` the camera is outside the object it is inside, whichever way it backs out: the distance
+ * to that object's centre and its radius. */
+export const leaveDistanceM = (originM: readonly number[], inside: { readonly originM: readonly number[]; readonly radiusM: number }) =>
+  Math.hypot(...originM.map((value, axis) => value - inside.originM[axis]!)) + inside.radiusM;
+/** The share of its entering distance below which a scene of its own gives the view back: the Nearby and the Observable
+ * Universe author the same margin (4 of 5 Mpc, 0.8 of 1 Gpc), so the view does not flicker at the edge. */
+const RETURN_SHARE = .8;
+
+/** The object `id` is inside when that object has a scene of its own (another galaxy, a cluster of galaxies), as far as the
+ * page has read it: zooming out of `id` hands the view to that scene. Null inside a system, or inside an object seen from
+ * inside. */
+export function insideBody(id: string) {
+  const parent = knownObject(id)?.parent, object = parent === undefined ? undefined : knownObject(parent);
+  return object && !object.system && object.zoom === undefined && object.worldFrame ? object : null;
 }
 
-/** The objects the view hands over to as the camera backs out of `centre`: those it is inside that are seen from inside,
- * nearest first, as far as the page has read them. */
-export const zoomChain = (centre: string = centreId) => knownAncestors(centre).filter(object => object.zoom !== undefined);
+/** The objects the view hands over to as the camera backs out of `centre`, nearest first, as far as the page has read them:
+ * the objects it is inside, each with the distances it is entered and left again at. Its own system is the zoom's first
+ * scope, not a step. An object seen from inside authors its distances. An object with a scene of its own takes the view
+ * as its body once the camera is outside it (overview-selection.mts `leaveDistanceM`), and ends the chain: its scene is
+ * left the way any body's is. */
+export function zoomChain(centre: string = centreId): readonly ZoomStep[] {
+  const chain: ZoomStep[] = [];
+  for (const object of knownAncestors(centre)) {
+    if (object.system) continue;
+    if (object.zoom === undefined) {
+      // Without both frames the camera cannot be told to be outside it: the zoom stops at the centre's system.
+      const from = knownObject(centre)?.worldFrame, frame = object.worldFrame;
+      if (from && frame) {
+        const enterPc = leaveDistanceM(from.originM, { originM: frame.originM, radiusM: frame.bodyRadiusM }) / PARSEC_M;
+        chain.push({ id: object.id, body: true, zoom: { enter: { distancePc: enterPc }, returnBelow: { distancePc: enterPc * RETURN_SHARE } } });
+      }
+      break;
+    }
+    chain.push({ id: object.id, zoom: object.zoom });
+  }
+  return chain;
+}
 
 /** Whether the scope is past the galaxy the centre is inside, where that galaxy's stars retire: a galaxy lies between the
  * centre and the scope (the Local Group is past the Milky Way; the Milky Way is not). */
 export function pastCentreGalaxy(scope: string, centre: string = centreId): boolean {
-  if (scope === 'system') return false;
+  // The centre's own system is inside that galaxy, whether the page has read the system's entry or not.
+  if (systemHostId(scope) === centre) return false;
   for (const object of knownAncestors(centre)) {
     if (object.id === scope) return false;
     if (object.classification === 'galaxy') return true;

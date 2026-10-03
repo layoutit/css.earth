@@ -212,7 +212,7 @@ test('a Solar System breadcrumb always restores the system framing from a Sun cl
   const closeup = createWorldSelectionTarget(world, sun, optics);
   const camera = { sharedView: unusedSharedView, navigation: { ...mount.navigation, capture: () => closeup } };
   assert.equal(navigation.systemTarget({ objectId: 'sun', fromId: 'sun', mount: camera }), null);
-  const target = required(navigation.overviewTarget({ scope: 'system', objectId: 'sun', fromId: 'sun', mount: camera }));
+  const target = required(navigation.overviewTarget({ scope: 'solar-system', objectId: 'sun', fromId: 'sun', mount: camera }));
   assert.ok(target.world);
   assert.equal(bodyViewAtCamera(target.world, sun, optics, 'sun'), 'overview');
 });

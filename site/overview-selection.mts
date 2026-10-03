@@ -7,17 +7,23 @@ import type { ObjectEntry } from './objects.mts';
 import type { SystemObjects } from './object-systems.mts';
 interface SelectionPublication { world: WorldCameraPose; viewport: WorldCameraViewport; }
 export interface OverviewSelection { overview: boolean; objectId: string; }
+/** The object a body is inside, when that object has a scene of its own: another galaxy, a cluster of galaxies. Its scene
+ * shows it from outside, so `radiusM` is its body's (`worldFrame.bodyRadiusM`). */
+export interface InsideBody { readonly id: string; readonly originM: PositionM; readonly radiusM: number }
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { OVERVIEW_SELECTION_POLICY as policy } from './runtime-policy.mts';
 import { SOLAR_SYSTEM_ID, systemOfObject } from './object-systems.mts';
 import { systemOverviewDistance } from './system-framing.mts';
+import { leaveDistanceM } from './inside-view.mts';
 
 const distance = (a: PositionM, b: PositionM) => Math.hypot(...a.map((value, axis) => value - b[axis]));
 /** The Solar System's star; the root of the galactic overviews. */
 export const solarSystemFocus = (objects: SystemObjects) => objects.find(object => object.id === SOLAR_SYSTEM_ID);
 
 /** `objects` are the loaded objects, for the mounted one's frame; `systems` are the world's bodies, for its system and the Sun. */
-export function selectionAtCamera({ world, viewport, objects, systems, objectId, overview, landed = false, restRangeM = 0, exitScale = 1 }: SelectionPublication & { objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; overview: boolean;
+export function selectionAtCamera({ world, viewport, objects, systems, objectId, overview, landed = false, restRangeM = 0, exitScale = 1, inside = null }: SelectionPublication & { objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; overview: boolean;
+  /** The object the body is inside, when it has a scene of its own: zooming out of the body hands the view to it. */
+  inside?: InsideBody | null;
   /** A flight to a framing (a header pill's category) has just landed here. */
   landed?: boolean;
   /** How far from the body its scene came to rest: where its page loaded or its flight landed. */
@@ -39,6 +45,14 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
       // keeps the body's scene out to the exit distance, so a reader can come back in.
       if (landed && outside > 0 && eyeDistanceM(world.pose, selected.originM) >= outside) return { overview: true, objectId: system.id };
       return eyeDistanceM(world.pose, system.originM) >= exit * exitScale ? { overview: true, objectId: system.id } : null;
+    }
+    // A body inside an object with a scene of its own (a star of another galaxy, a galaxy of a cluster) hands the view to
+    // that object, the next one out in the object tree, once the camera is outside it: that scene shows its body from
+    // outside and refuses a camera inside it. `leaveDistanceM` is that far from the body whichever way the camera backs out.
+    // A flight that landed far out chose a framing of the whole world, which the Sun's overview shows.
+    if (inside && !landed) {
+      return eyeDistanceM(world.pose, selected.originM) >= Math.max(leaveDistanceM(selected.originM, inside), 2 * restRangeM) * exitScale
+        ? { overview: false, objectId: inside.id } : null;
     }
     // A star or body outside every system keeps its scene until the camera is as far from it as the Sun is;
     // the Solar System overview then hands the camera to the galactic scopes.
@@ -68,7 +82,9 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
  * back inside (`onReturn`): the scene it names takes the view only when the camera rests (scene/camera-handover.mts), and
  * this watcher goes on with the body's until then. */
 export function watchOverviewSelection({ navigation, objects, systems, objectId, getOverview, isAvailable,
-  onChange, onReturn, windowTarget }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; getOverview(): boolean; isAvailable(): boolean;
+  onChange, onReturn, windowTarget, inside }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; getOverview(): boolean; isAvailable(): boolean;
+  /** The object the body is inside, when it has a scene of its own; asked on each camera, as its entry may be read late. */
+  inside?(): InsideBody | null;
   /** `landed`: a flight to a framing has just landed here, so the camera is at rest. */
   onChange(selection: OverviewSelection, landed: boolean): void;
   /** The camera is back inside the body's scene after a crossing out of it was reported. */
@@ -83,8 +99,12 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     const origin = objects.find(object => object.id === objectId)?.worldFrame?.originM;
     return origin ? eyeDistanceM(world.pose, origin) : 0;
   };
+  // What every reading of the camera is asked with.
+  const facts = () => ({ objects, systems, objectId, inside: inside?.() ?? null });
+  /** Whether `next` leaves the body's scene: for its system's overview, or for the object it is inside. */
+  const leaves = (next: OverviewSelection) => next.overview || next.objectId !== objectId;
   const report = (next: OverviewSelection, landed: boolean) => {
-    if (!getOverview() && next.overview) left = next;
+    if (!getOverview() && leaves(next)) left = next;
     onChange(next, landed);
   };
   function inspect(landed = false) {
@@ -92,7 +112,7 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     candidate = null;
     if (disposed || !isAvailable() || !latest) return;
     if (landed || restRangeM === null) restRangeM = range(latest.world);
-    const next = selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview(), landed, restRangeM });
+    const next = selectionAtCamera({ ...latest, ...facts(), overview: getOverview(), landed, restRangeM });
     if (next) report(next, landed);
   }
   const unsubscribe = navigation.subscribe((world, viewport) => {
@@ -100,13 +120,13 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     // beside the sidebar, just like the active object's orbit controls.
     latest = { world, viewport: navigation.optics?.() ?? viewport };
     if (isAvailable() && restRangeM === null) restRangeM = range(world);
-    const next = isAvailable() ? selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview(), restRangeM: restRangeM ?? 0 }) : null;
+    const next = isAvailable() ? selectionAtCamera({ ...latest, ...facts(), overview: getOverview(), restRangeM: restRangeM ?? 0 }) : null;
     if (!next) {
       // A flight that holds this watcher off (isAvailable) is not the camera coming back.
       if (left && isAvailable()) { left = null; onReturn?.(); }
-    } else if (left && next.overview && next.objectId === left.objectId) return;
-    else if (!getOverview() && next.overview
-        && selectionAtCamera({ ...latest, objects, systems, objectId, overview: false, restRangeM: restRangeM ?? 0, exitScale: policy.clearExitScale })) {
+    } else if (left && leaves(next) && next.overview === left.overview && next.objectId === left.objectId) return;
+    else if (!getOverview() && leaves(next)
+        && selectionAtCamera({ ...latest, ...facts(), overview: false, restRangeM: restRangeM ?? 0, exitScale: policy.clearExitScale })) {
       if (timer !== null) windowTarget.clearTimeout(timer);
       timer = null; candidate = null;
       report(next, false);

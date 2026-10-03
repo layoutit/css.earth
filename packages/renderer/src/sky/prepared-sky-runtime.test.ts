@@ -153,8 +153,9 @@ test('the galaxy is its bulge slices at every overview scope, with no disc plane
     const radiusM = Math.hypot(...volume.frame.boundsUnits.max) * volume.frame.metersPerUnit;
     const camera: WorldCameraPose = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
       pose: { positionM: [volume.frame.originM[0], volume.frame.originM[1], volume.frame.originM[2] + 2.5 * radiusM], orientationXyzw: [0, 0, 0, 1] } };
-    for (const scope of ['local-group', 'milky-way', 'system', 'milky-way', undefined]) {
-      mounted.setOverview(scope !== undefined, scope);
+    // Out past the star's own system, back to it, out again, and on the body.
+    for (const [overview, systemRetired] of [[true, true], [true, true], [true, false], [true, true], [false, false]] as const) {
+      mounted.setOverview(overview, systemRetired);
       mounted.publish(camera, viewport, spatialFrame);
       const nodes = descendants(image);
       assert.equal(nodes.filter(node => node.dataset.volumeImpostor !== undefined).length, 0);

@@ -324,13 +324,13 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             publishSuppressedLabels();
             spatial.previewSelection(id);
           },
-          /** `scope`: what the zoom shows: a star's own `system`, or the id of an object seen from inside. `starsRetired`:
-           * the scope is past the object that holds the stars, as the host says. */
-          setOverview(enabled: boolean, scope?: string, preserveSelection = false, starsRetired = false) {
+          /** `systemRetired`: the zoom shows an object the star is inside, past the star's own system. `starsRetired`: it
+           * is past the object that holds the stars too, as the host says. */
+          setOverview(enabled: boolean, systemRetired = false, preserveSelection = false, starsRetired = false) {
             overview = enabled;
             spatial.setOverview(enabled, preserveSelection);
             // Past the system scope, a planetary system is drawn as its star; past the scope that holds the stars, they retire too.
-            spatial.setSystemRetired(enabled && scope !== undefined && scope !== 'system', starsRetired);
+            spatial.setSystemRetired(enabled && systemRetired, starsRetired);
             publishSuppressedLabels();
           },
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },

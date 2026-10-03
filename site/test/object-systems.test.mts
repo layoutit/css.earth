@@ -128,12 +128,13 @@ test("every system's overview lasts two doublings of distance before its orbits 
   const { zoomScopeAtCamera } = await import('../zoom-scope.mts');
   const { ancestorsOf } = await import('../objects.mts');
   const { SYSTEM_RANGES } = await import('../system-framing.mts');
+  const { systemObjectId } = await import('../navigation/system-address.mts');
   const { APPLICATION_WORLD_CONTEXT: plan } = await import('../world-context-plan.mts');
   for (const system of allPlanetarySystems(SCENE_OBJECTS)) {
     const at = (factor: number) => ({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [system.originM[0] + system.exitDistanceM * factor, system.originM[1], system.originM[2]] as const,
       orientationXyzw: [0, 0, 0, 1] as const } });
     const steps = ancestorsOf(system.id).flatMap(object => object.zoom ? [{ id: object.id, zoom: object.zoom }] : []);
-    assert.equal(zoomScopeAtCamera(at(3.99), 'system', plan, { originM: system.originM, orbitsWithinM: SYSTEM_RANGES.get(system.id) }, steps), 'system', system.id);
+    assert.equal(zoomScopeAtCamera(at(3.99), systemObjectId(system.id), plan, { originM: system.originM, orbitsWithinM: SYSTEM_RANGES.get(system.id), systemId: systemObjectId(system.id) }, steps), systemObjectId(system.id), system.id);
   }
   assert.ok(systemById(SCENE_OBJECTS, 'sgr-a-star')!.exitDistanceM < 0.8 * 9.4607e15, 'Sgr A* opens at 0.8 ly, not the scaled 3.6 ly');
 });

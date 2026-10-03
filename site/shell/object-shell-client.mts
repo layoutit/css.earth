@@ -115,7 +115,7 @@ export function mountObjectShell({
     // An object seen from inside is seen around the star the zoom is centred on: its readout is measured from that star.
     const step = zoomStepOf(subject);
     viewReadout.setExtendedSubject(!step && shown?.worldFrame && isExtendedClassification(shown.classification) ? { name: shown.name, positionM: shown.worldFrame.originM } : null);
-    viewReadout.setOverviewScope(step?.scope ?? 'system');
+    viewReadout.setOverviewScope(step?.scope ?? null);
     updateBodyCard();
     // The page is the subject's own object: the body, or its system when the view is out to what is inside it
     // (navigation/system-address.mts). Its head and forms follow, once that object's entry is read.

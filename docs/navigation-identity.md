@@ -26,9 +26,15 @@ nebula and a cluster of galaxies are objects like any body; their recipe declare
 surface, and their imagery is a context bank a dataset names. The selection is one
 object id, and a search row is one object's. The object tree is the only structure:
 breadcrumbs are an object's ancestors, the card of an object seen from inside lists
-its children, and zooming out of a star's system hands the view to the objects the
-star is inside that are seen from inside, nearest first, with the camera kept where
-it is; zooming back in returns to the star.
+its children, and zooming out hands the view to the objects a body is inside, nearest
+first, with the camera kept where it is. Out of a star's system those are the objects
+seen from inside (the Milky Way and beyond), and zooming back in returns to the star.
+An object with a scene of its own (another galaxy, a cluster of galaxies) shows its
+body from outside, so it takes the view once the camera is outside it: as far from
+the body as that object's centre and its radius. A star of the Large Magellanic Cloud
+zooms out into the Cloud, M87* into M87, M87 into the Virgo Cluster. That scene is
+then left the way any body's is ([overview-selection.mts](../site/overview-selection.mts),
+[inside-view.mts](../site/inside-view.mts)).
 
 One object has one id. The spatial catalogues (Local Group galaxies, galaxy
 clusters, the nearby field) are data the world draws as dots: a row makes no page

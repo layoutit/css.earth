@@ -2,14 +2,17 @@ import { eyeDistanceM } from '@cssearth/engine';
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from './system-framing.mts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { WorldCameraPose, PreparedWorldCameraFrame, ZoomDistance, ObjectZoom } from '@cssearth/objects';
-/** `system` is the planetary system of the mounted star, and every other scope is the id of an object it is inside, seen
- * from inside (inside-view.mts `zoomChain`); every scope is measured from that star (zoomScopeAtCamera). */
+/** What the camera's zoom out of a star frames, by object id: the star's own system, or an object it is inside
+ * (inside-view.mts `zoomChain`); every scope is measured from that star (zoomScopeAtCamera). */
 export type ZoomScope = string;
 /** An object the camera's zoom hands over to: its id and its zoom facts. */
-export interface ZoomStep { readonly id: string; readonly zoom: ObjectZoom }
+export interface ZoomStep { readonly id: string; readonly zoom: Pick<ObjectZoom, 'enter' | 'returnBelow'>;
+  /** The object has a scene of its own, which shows it from outside: the centre's system lasts until its `enter`. */
+  readonly body?: true }
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 import { systemFadeDistances } from '@cssearth/renderer/universe/world-context/context-scale.ts';
+import { systemHostId, systemObjectId } from './navigation/system-address.mts';
 
 const PARSEC_M = 3.085677581491367e16;
 
@@ -54,33 +57,38 @@ export function zoomDistanceM(value: ZoomDistance, plan = context, orbitsWithinM
  * - Past it, the farthest step whose threshold the camera has passed: its `enter` distance, or its lower `returnBelow`
  *   distance while the view is already that step or a farther one, so the view does not flicker at an edge (each object's
  *   `zoom`, in its object.json). The steps are the objects the centre is inside that are seen from inside, nearest first
- *   (`chain`, inside-view.mts `zoomChain`): the Magellanic Clouds' are the Milky Way's, M87's the Nearby Universe's. Short of
- *   every threshold the view is the nearest step. */
-export function zoomScopeAtCamera(world: WorldCameraPose, previous: ZoomScope = 'system', plan = context,
-  centre: { readonly originM: readonly number[]; readonly orbitsWithinM?: number } = { originM: plan.focus.positionM },
+ *   (`chain`, inside-view.mts `zoomChain`). Short of every threshold the view is the nearest step.
+ * - A first step with a scene of its own (`body`: another galaxy, around one of its stars) is reached only past its own
+ *   threshold, where the camera is outside it; the centre's system lasts until then. */
+export function zoomScopeAtCamera(world: WorldCameraPose, previous?: ZoomScope, plan = context,
+  centre: { readonly originM?: readonly number[]; readonly orbitsWithinM?: number;
+    /** The centre's own system, the zoom's first scope; the system of the plan's focus when not given. */
+    readonly systemId?: string } = {},
   chain: readonly ZoomStep[] = []): ZoomScope {
-  const range = eyeDistanceM(world.pose, centre.originM);
+  const originM = centre.originM ?? plan.focus.positionM, system = centre.systemId ?? systemObjectId(plan.focus.id);
+  const range = eyeDistanceM(world.pose, originM);
   const { fadeOutStartDistanceM, hiddenDistanceM } = systemFadeDistances(plan.system, centre.orbitsWithinM);
   const at = (value: ZoomDistance) => zoomDistanceM(value, plan, centre.orbitsWithinM);
-  const centreDistance = distance(centre.originM, plan.focus.positionM);
+  const centreDistance = distance(originM, plan.focus.positionM);
   const previousStep = chain.findIndex(step => step.id === previous);
-  const systemLimit = previous !== 'system' ? Math.sqrt(fadeOutStartDistanceM * hiddenDistanceM) : hiddenDistanceM;
+  const systemLimit = previous !== undefined && previous !== system ? Math.sqrt(fadeOutStartDistanceM * hiddenDistanceM) : hiddenDistanceM;
   const first = chain[0];
-  const handoff = first && centreDistance === 0 && centre.orbitsWithinM === undefined
-    ? Math.min(systemLimit, at(previousStep >= 0 ? first.zoom.returnBelow : first.zoom.enter))
-    : systemLimit;
-  if (range < handoff) return 'system';
+  const firstAt = first ? at(previousStep >= 0 ? first.zoom.returnBelow : first.zoom.enter) : 0;
+  const handoff = first?.body ? firstAt
+    : first && centreDistance === 0 && centre.orbitsWithinM === undefined ? Math.min(systemLimit, firstAt) : systemLimit;
+  if (range < handoff) return system;
   for (let index = chain.length - 1; index >= 0; index--) {
     const step = chain[index]!;
     if (range >= at(previousStep >= index ? step.zoom.returnBelow : step.zoom.enter)) return step.id;
   }
-  return chain[0]?.id ?? 'system';
+  return chain[0]?.id ?? system;
 }
 
-export function viewDistance(world: WorldCameraPose, frame: PreparedWorldCameraFrame, scope: ZoomScope, plan = context, focus: { readonly name: string; readonly positionM: readonly number[] } | null = null) {
+export function viewDistance(world: WorldCameraPose, frame: PreparedWorldCameraFrame, scope: ZoomScope | null, plan = context, focus: { readonly name: string; readonly positionM: readonly number[] } | null = null) {
   if (focus) return { label: `Distance to ${focus.name}:`, meters: eyeDistanceM(world.pose, focus.positionM),
     title: `Camera distance from the prepared center of ${focus.name}` };
-  return scope !== 'system' ? {
+  // Out to an object the star is inside the readout is the distance from the Sun; on a body or its own system, the altitude.
+  return scope !== null && systemHostId(scope) === null ? {
     label: 'Distance from Sun:',
     meters: eyeDistanceM(world.pose, plan.focus.positionM),
     title: 'Camera distance from the center of the Sun',

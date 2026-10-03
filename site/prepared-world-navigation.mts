@@ -38,6 +38,7 @@ import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARR
 import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, DATASET_VOLUMES, categoryZoomTarget, drawnGalaxiesZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyViewAtCamera, zoomFrameDistanceM } from './zoom-scope.mts';
 import { knownObject } from './object-directory.mts';
+import { systemHostId } from './navigation/system-address.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createCameraMotion, createWorldSelectionTarget, savedWorldCamera, parseSharedView } from '@cssearth/renderer/navigation';
 import { worldCameraFromCenteredPresentation } from '@cssearth/objects';
@@ -107,7 +108,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
      * direction the camera looks in; a page opened cold has no view to keep and asks for `objectId`'s own default direction
      * (`view: 'default'`). */
     overviewTarget({ scope, objectId, fromId, mount, view }: TargetRequest & {scope: string; view?: 'default'}) {
-      if (scope === 'system') {
+      if (systemHostId(scope) !== null) {
         const world = this.systemTarget({ objectId, fromId, mount, force: true });
         return world ? { world, focusPositionM: frames.get(objectId)!.originM } : null;
       }
