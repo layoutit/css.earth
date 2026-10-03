@@ -1,0 +1,41 @@
+{
+  "host": "sgr-a-star",
+  "companions": [
+    {
+      "id": "s8",
+      "name": "S8",
+      "description": "A hot young star on a 93-year orbit around Sagittarius A*, the Milky Way's central black hole.",
+      "order": 1258,
+      "paper": {
+        "url": "https://arxiv.org/abs/1611.09144",
+        "credit": "Gillessen et al. (2017), ApJ 837, 30"
+      },
+      "radius": {
+        "value": 5.11,
+        "source": "Habibi et al. (2017), ApJ 847, 120, Table 3: 5.11 (+1.30/-0.59) solar radii, model-atmosphere fit to SINFONI spectra",
+        "url": "https://arxiv.org/abs/1708.06353"
+      },
+      "mass": {
+        "value": 13.2,
+        "source": "Habibi et al. (2017), ApJ 847, 120, Table 3: 13.20 (+2.2/-1.8) solar masses",
+        "url": "https://arxiv.org/abs/1708.06353"
+      },
+      "temperature": {
+        "value": 28274,
+        "source": "Habibi et al. (2017), ApJ 847, 120, Table 3: Teff 28,274 K",
+        "url": "https://arxiv.org/abs/1708.06353"
+      },
+      "orbit": {
+        "record": true,
+        "source": "Gillessen et al. (2017), ApJ 837, 30, table3 (VizieR J/ApJ/837/30)",
+        "url": "https://arxiv.org/abs/1611.09144"
+      },
+      "text": {
+        "card": "A hot young star that swings around the Milky Way's central black hole every 93 years.",
+        "introduction": "At its closest it passes 660 au from Sagittarius A*; it was last there in 1983.",
+        "locator": "table3: P, a, e and Tp"
+      },
+      "colorReason": "S8 is observed only in the near-infrared (the SINFONI H- and K-band spectra of Habibi et al. 2017); no spectrum of it covers visible light"
+    }
+  ]
+}

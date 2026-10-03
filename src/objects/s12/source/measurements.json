@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "s12",
+  "radiusKm": 2831499,
+  "radiusSource": "Radius 4.07 (+1.31/-0.78) solar radii and mass 7.60 (+1.4/-1.3) solar masses from Habibi et al. (2017, ApJ 847, 120; arXiv:1708.06353), Table 3, model-atmosphere fit to SINFONI spectra (Teff 20882 K, B0-B3), at 695,700 km per solar radius and the JPL solar GM.",
+  "orbitalPeriodDays": 21513.225,
+  "orbitalPeriodSource": "Gillessen et al. (2017, ApJ 837, 30; VizieR J/ApJ/837/30), table3: P = 58.90 +/- 0.22 yr of 365.25 d.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of S12 is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 20882,
+  "effectiveTemperatureSource": "Habibi et al. (2017), ApJ 847, 120, Table 3: Teff 20,882 K (https://arxiv.org/abs/1708.06353)",
+  "surfaceGravityLogg": 4.1,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/s12.json, log10(GM/R^2) in cgs, rounded to two decimals",
+  "massSource": "7.6 solar masses: Habibi et al. (2017), ApJ 847, 120, Table 3: 7.60 (+1.4/-1.3) solar masses (https://arxiv.org/abs/1708.06353)."
+}

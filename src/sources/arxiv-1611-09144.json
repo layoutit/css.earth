@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-1611-09144",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gillessen et al. (2016): An Update on Monitoring Stellar Orbits in the Galactic Center",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1611.09144"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/aa5c41"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1611.09144",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/aa5c41",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1611.09144",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gillessen et al. (2016)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1611.09144"
+    }
+  ],
+  "creators": [
+    "Stefan Gillessen",
+    "Philipp Plewa",
+    "Frank Eisenhauer",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}
