@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": 85.3234514111457,
   "radialVelocityKmPerS": 13.863482,
   "presentationUp": "display-axis",
+  "boundTo": "hat-p-22",
   "sources": {
    "position": "Gaia DR3 source 846946625690867328 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-233731-b/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 12.3165 +/- 0.0199 mas (same row, RUWE 1.29): 81.19 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): -25.433, 85.323 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): 13.86 +/- 0.70 km/s"
+   "radialVelocity": "Gaia DR3 (same row): 13.86 +/- 0.70 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list HAT-P-22 and HD 233731B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 846946629987527168 and 846946625690867328), 747 AU apart on the sky, with a chance-alignment probability of 7.3e-7: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

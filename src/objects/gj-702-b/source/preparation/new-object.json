@@ -2,6 +2,10 @@
   "id": "gj-702-b",
   "name": "70 Ophiuchi B",
   "system": "70 Ophiuchi system",
+  "boundTo": {
+    "host": "gj-702-a",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list 70 Ophiuchi A and 70 Ophiuchi B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 4468557611984384512 and 4468557611977674496), 33 AU apart on the sky, with a chance-alignment probability of 3.0e-6: the pair is bound. This record adopts no orbit of the pair, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "A nearby orange dwarf, 67% of the Sun's width: its disc was measured by interferometry.",
   "aliases": [
     "GJ 702 B"

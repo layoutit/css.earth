@@ -23,6 +23,22 @@ export function prepareSystemView(parent: Pick<PreparedWorldContext['focus'], 'i
   return bakeView(parent, candidateFrames(parent, main, states, policy), main, member => member.orbit!.verticesM);
 }
 
+/** Frame a star with the stars bound to it that have no orbit in the record (a wide binary's companion): the camera fits
+ * the stars at their prepared positions. The pair's orbital plane is not in the record, so the candidate angles stand
+ * about a plane through the farthest companion that holds the frame's pole as nearly as it can: a camera choice, not a
+ * measurement. Members are listed farthest first. */
+export function prepareBoundView(parent: ViewParent, companions: PreparedWorldContext['bodies'], policy: SystemViewPolicy): PreparedSystemView | undefined {
+  validatePolicy(policy);
+  if (!companions.length) return undefined;
+  const offset = (body: ViewMember) => body.positionM.map((value, axis) => value - parent.positionM[axis]!) as unknown as Vector3;
+  const members = [...companions].sort((a, b) => Math.hypot(...offset(b)) - Math.hypot(...offset(a)) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  const radial = offset(members[0]!), along = unit(radial);
+  const across = (axis: Vector3) => axis.map((value, index) => value - along[index]! * dot(axis, along)) as unknown as Vector3;
+  const pole = across([0, 0, 1]);
+  const normal = unit(Math.hypot(...pole) > 1e-6 ? pole : across([1, 0, 0]));
+  return bakeView(parent, framesAbout(parent, normal, radial, policy), members, member => [member.positionM]);
+}
+
 /** Frame a group by its members' prepared positions, from the plane bodies' candidate angles.
  * Positions, not orbits: an open trajectory would otherwise fit hundreds of AU. */
 export function prepareGroupView(parent: ViewParent, planeBodies: PreparedWorldContext['bodies'],
@@ -62,6 +78,11 @@ function candidateFrames(parent: ViewParent, main: readonly ViewMember[], states
     return sum.map((value, axis) => value + sign * normal[axis]!) as unknown as Vector3;
   }, [0, 0, 0] as Vector3));
   const radial = main[0]!.positionM.map((value, axis) => value - parent.positionM[axis]!) as unknown as Vector3;
+  return framesAbout(parent, normal, radial, policy);
+}
+
+/** Oblique candidate angles about the plane of `normal`, starting from the direction of `radial` in it. */
+function framesAbout(parent: ViewParent, normal: Vector3, radial: Vector3, policy: SystemViewPolicy): CandidateFrame[] {
   const baseRight = unit(radial.map((value, axis) => value - normal[axis]! * dot(radial, normal)) as unknown as Vector3);
   const inPlane = cross(normal, baseRight);
   const frames: CandidateFrame[] = [];

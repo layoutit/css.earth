@@ -7,12 +7,12 @@ import { withDataset } from '../dataset-url.mts';
 import { withView } from './navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
-import { ladderOf } from '../level-view.mts';
-import { selectionKey, selectionTargetFromUrl, type SelectionTarget, type SceneSubject, type SceneView } from '../scene/scene-selection.mts';
+import { zoomStepOf } from '../inside-view.mts';
+import { moonSystem, selectionKey, selectionTargetFromUrl, starSystem, subjectOf, subjectView, type SelectionTarget, type SceneSubject, type SceneView } from '../scene/scene-selection.mts';
 
 export type NavigationHistory = { history: 'push' | 'replace' } | { history: 'pop'; entry: string };
 export type NavigationIntent =
-  /** Go to an object. `view` asks for its moons or its planetary system instead of the body itself; `camera: 'frame'` flies
+  /** Go to an object. `view` asks for the system it hosts instead of the body itself; `camera: 'frame'` flies
    * to that view's framing, and `preserve` keeps the camera where it is (the zoom hands the view over to the object's scene).
    * `departed`: the view a header pill's flight left: the hand-over it lands on is a new entry, and Back returns to it.
    * `history: 'replace'` lands on the entry it left (a Showcase hop after the tour's first). */
@@ -37,8 +37,8 @@ export interface ResolvedNavigation {
 }
 
 /** Interpret destination intent here; dataset and camera owners still validate their payloads when applying them. */
-export function readNavigationSelection(url: URL, objectId: string, objects: SystemObjects) {
-  return { subject: selectionTargetFromUrl(url, objectId, objects), savedView: url.searchParams.has('v'),
+export function readNavigationSelection(url: URL, objectId: string) {
+  return { subject: selectionTargetFromUrl(url, objectId), savedView: url.searchParams.has('v'),
     dataset: url.searchParams.has('dataset'), feature: url.searchParams.get('feature') };
 }
 
@@ -52,8 +52,9 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
     hasPresented: boolean; reuseScene: boolean; mount: ShellCamera | null; pending: ResolvedNavigation | null };
 }): { destination: ResolvedNavigation; centeredObjectId: string | null } {
   if (intent.kind === 'link') {
-    const link = new URL(intent.url, current.href), selection = readNavigationSelection(link, object.id, objects);
-    if (selection.subject.view !== 'body' && !selection.savedView && !selection.dataset) intent = { kind: 'object', view: selection.subject.view, camera: 'frame' };
+    const link = new URL(intent.url, current.href), selection = readNavigationSelection(link, object.id);
+    const view = subjectView(selection.subject);
+    if (view !== 'body' && !selection.savedView && !selection.dataset) intent = { kind: 'object', view, camera: 'frame' };
   }
   const linked = intent.kind === 'link' || intent.kind === 'history';
   let url = new URL(intent.kind === 'link' || intent.kind === 'history' ? intent.url : current.href, current.href);
@@ -62,15 +63,16 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   const targetRequest = { objectId: object.id, fromId: current.objectId, mount: current.mount };
   const family = satelliteSystemByHost(object.id);
   const view = intent.kind === 'object' ? intent.view ?? null : null;
-  if (view === 'moons' && !family) throw new TypeError(`${object.id} has no satellite system.`);
-  // A destination on the zoom ladder (a star's system, a level) opens framed as that rung says, around its centre; the
-  // ladder's own hand-over keeps the camera, and history restores its own.
-  const ladder = intent.kind !== 'history' && !(intent.kind === 'object' && intent.camera === 'preserve') ? ladderOf({ objectId: object.id, view: view ?? 'body' }) : null;
-  const overviewTarget = ladder ? navigation.overviewTarget({ ...targetRequest, objectId: ladder.centreId, scope: ladder.scope }) : null;
-  const opensOverviewFocus = current.subject.view === 'system' && object.id === current.objectId;
-  const opensFamilyFocus = current.subject.view === 'moons' && object.id === current.objectId;
+  // A planet's system is its host seen out to its moons; a star's is a destination the zoom out of the star reaches.
+  const ofMoons = view === 'system' && family !== null;
+  // A destination a zoom out reaches (a star's system, an object seen from inside) opens framed as that scope says, around its centre; the
+  // zoom's own hand-over keeps the camera, and history restores its own.
+  const step = intent.kind !== 'history' && !(intent.kind === 'object' && intent.camera === 'preserve') ? zoomStepOf(subjectOf(object.id, view ?? 'body')) : null;
+  const overviewTarget = step ? navigation.overviewTarget({ ...targetRequest, objectId: step.centreId, scope: step.scope }) : null;
+  const opensOverviewFocus = starSystem(current.subject) && object.id === current.objectId;
+  const opensFamilyFocus = moonSystem(current.subject) && object.id === current.objectId;
   const plain = intent.kind === 'object' && view === null;
-  const familyTarget = view === 'moons' && intent.kind === 'object' && intent.camera === 'frame'
+  const familyTarget = ofMoons && intent.kind === 'object' && intent.camera === 'frame'
     ? navigation.systemTarget({ ...targetRequest, force: true })
     : plain && family && !opensFamilyFocus && object.id !== current.centeredObjectId && current.hasPresented
       ? navigation.systemTarget(targetRequest) : null;
@@ -85,10 +87,10 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
     url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('feature');
     url = withDataset(url, null);
     // A plain selection that flies to a host's moons, or to a star's system, lands on that view.
-    withView(url, view ?? (plain && familyTarget !== null ? 'moons' : center && plain && systemById(objects, object.id) ? 'system' : 'body'));
+    withView(url, view ?? (plain && (familyTarget !== null || center && systemById(objects, object.id)) ? 'system' : 'body'));
     if (intent.kind === 'feature' && intent.id !== null) url.searchParams.set('feature', intent.id);
   }
-  const selection = readNavigationSelection(url, object.id, objects);
+  const selection = readNavigationSelection(url, object.id);
   const interruptedFlight = current.pending !== null
     && !(current.pending.camera.kind === 'frame' && current.pending.camera.framing === 'center') && !center;
   const restore = history.history === 'pop' || linked && selection.savedView;
@@ -104,5 +106,5 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   }
   return { destination: { id: object.id, url: url.href, subject: selection.subject, camera, history,
     scene: current.reuseScene ? 'reuse' : 'replace', origin: linked ? 'link' : 'selection', feature: selection.feature },
-  centeredObjectId: center && view !== 'system' ? object.id : null };
+  centeredObjectId: center && (view !== 'system' || ofMoons) ? object.id : null };
 }

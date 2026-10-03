@@ -2,7 +2,7 @@
 
 The Milky Way as an object of the world: its place (the Galactic centre), its card and its list marker. It has no surface. What the world draws of it, the density volume, the star catalogues and the backing picture, is the [Milky Way volume](../milky-way-volume/README.md) bank, whose README holds the sources, processing, evidence and known problems.
 
-It is also a level of the zoom ladder ([object.json](object.json) `overview`): zooming out of a star's system far enough hands the view to this object, with the camera kept where it was and still centred on that star.
+It is inside the Local Group, and every star, nebula and system of the galaxy is inside it, with the Magellanic Clouds ([object.json](object.json) `parent`). It is seen from inside ([object.json](object.json) `zoom`): zooming out of a star's system far enough hands the view to this object, with the camera kept where it was and still centred on that star.
 
 ## Sources
 
@@ -15,9 +15,9 @@ The card's facts cite their sources in [source/content/object.json](source/conte
 
 ## Evidence
 
-The page before, as a level drawn by the Sun's scene, and after, as this object's own scene, opened cold on the local preview on 2026-10-01 (Chrome, 1440 by 900): the same view and the same distance from the Sun.
+The page before, as a page drawn by the Sun's scene, and after, as this object's own scene, opened cold on the local preview on 2026-10-01 (Chrome, 1440 by 900): the same view and the same distance from the Sun.
 
-![Before: the level page](evidence/2026-10-01/before-level-page.jpg)
+![Before: the page drawn by the Sun's scene](evidence/2026-10-01/before-level-page.jpg)
 
 ![After: the object's page](evidence/2026-10-01/object-page.jpg)
 

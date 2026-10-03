@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "sgr-a-star",
+  "parent": "sgr-a-star-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

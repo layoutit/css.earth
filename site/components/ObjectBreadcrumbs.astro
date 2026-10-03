@@ -1,44 +1,25 @@
 ---
-import type { OverviewScope } from '../overview-context.mts';
 import type { HTMLAttributes } from 'astro/types';
-interface Props extends HTMLAttributes<'nav'> { objectId?: string; scope?: OverviewScope; systemId?: string; satelliteSystem?: boolean; includeObject?: boolean; currentPage?: boolean; }
-import { OVERVIEWS, SCENE_OBJECTS } from '../objects.mts';
-import preparedWorld from '../../src/objects/sun/prepared/world-context.json';
-import { SOLAR_SYSTEM_ID, systemById, systemOfObject } from '../object-systems.mts';
-import { satelliteSystemByHost, satelliteSystemOfMember } from '../satellite-systems.mts';
-import { overviewsReachableFrom } from '../overview-context.mts';
-import { systemRoute } from '../navigation/system-address.mts';
+interface Props extends HTMLAttributes<'nav'> { objectId?: string; scope?: string; system?: boolean; includeObject?: boolean; currentPage?: boolean; }
+import { OBJECTS, ancestorsOf } from '../objects.mts';
+import { systemObjectId } from '../navigation/system-address.mts';
 
-const { objectId, scope, systemId, satelliteSystem = false, includeObject: requestedIncludeObject,
+const { objectId, scope, system = false, includeObject: requestedIncludeObject,
   currentPage: requestedCurrentPage, ...attributes } = Astro.props;
-const includeObject = requestedIncludeObject ?? Boolean(objectId && !satelliteSystem
-  && (satelliteSystemByHost(objectId) || satelliteSystemOfMember(objectId)));
-const currentPage = requestedCurrentPage ?? (Boolean(scope) || satelliteSystem || includeObject);
-const object = SCENE_OBJECTS.find(object => object.id === objectId);
-// Each overview is its own page; the trail runs from the farthest level in, through the levels a zoom centred on the object
-// reaches (M87* is in no Local Group).
-const positionM = !scope && object ? preparedWorld.bodies.find(body => body.id === object.id)?.positionM : undefined;
-const galactic = [...(positionM ? overviewsReachableFrom(positionM) : OVERVIEWS)].reverse();
-const crumbs = galactic.slice(0, scope && scope !== 'system' ? galactic.findIndex(entry => entry.id === scope) + 1 : galactic.length)
-  .map(entry => ({ label: entry.name, href: entry.route }));
-// An object's trail passes through its own planetary system; a star outside every system sits directly in the Milky Way.
-const system = scope === 'system' ? systemById(SCENE_OBJECTS, systemId ?? SOLAR_SYSTEM_ID)
-  : !scope && object ? systemOfObject(SCENE_OBJECTS, object.id) : null;
-if (system) crumbs.push({ label: system.name, href: systemRoute(system.id) });
-if (object && !scope && system) {
-  const family = satelliteSystemByHost(object.id) ?? satelliteSystemOfMember(object.id);
-  if (family) crumbs.push({ label: family.name, href: systemRoute(family.hostId) });
-  else {
-    // An orbit parent without a satellite-system selection keeps its own breadcrumb.
-    const parentId = preparedWorld.bodies.find(body => body.id === object.id)?.orbit?.centerBodyId;
-    const parent = parentId && parentId !== system.id ? SCENE_OBJECTS.find(body => body.id === parentId) : null;
-    if (parent) crumbs.push({ label: parent.name, href: parent.route });
-  }
-}
-// Keep the body in the three-crumb window; its heading replaces that final crumb.
-if (object && includeObject && !satelliteSystem) crumbs.push({ label: object.name, href: object.route });
-// Body and satellite-system cards already name their subject in the heading.
+// The trail is the object tree: the objects the card's subject is inside, from the farthest in. The subject is the page's
+// object seen from inside (`scope`), the system the body hosts (`system`) or the body itself.
+const subjectId = scope ?? (system && objectId ? systemObjectId(objectId) : objectId);
+const subject = subjectId ? OBJECTS.find(object => object.id === subjectId) : undefined;
+// A body in a satellite system (a moon, or the planet it orbits) keeps itself in the three-crumb window; its heading
+// replaces that final crumb.
+const parent = subject?.parent ? OBJECTS.find(object => object.id === subject.parent) : undefined;
+const includeObject = requestedIncludeObject ?? Boolean(objectId && !scope && !system && parent?.classification === 'satellite-system');
+const currentPage = requestedCurrentPage ?? (Boolean(scope) || system || includeObject);
+const crumbs = (subject ? [...ancestorsOf(subject.id)].reverse() : []).map(object => ({ label: object.name, href: object.route }));
+if (subject && (scope || system || includeObject)) crumbs.push({ label: subject.name, href: subject.route });
 const trail = crumbs.slice(-3);
+// A card that names its subject in its heading drops the subject's crumb; the page of an object seen from inside marks
+// it as the current page.
 const visibleCrumbs = currentPage && objectId ? trail.slice(0, -1) : trail;
 ---
 

@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "kelt-8-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "kelt-8",
-      "members": "planets"
+      "host": "kelt-8"
     },
     "catalog": {
       "name": "KELT-8 system",

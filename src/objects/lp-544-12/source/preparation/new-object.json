@@ -2,6 +2,10 @@
   "id": "lp-544-12",
   "name": "LP 544-12",
   "system": "GJ 3473 system",
+  "boundTo": {
+    "host": "gj-3473",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list GJ 3473 and LP 544-12 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 3094290054327367168 and 3094290019967631360), 1,346 AU apart on the sky, with a chance-alignment probability of 4.1e-6: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to GJ 3473, 1,346 AU away.",
   "gaia": "3094290019967631360",
   "paper": {

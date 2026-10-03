@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "sylvia-system",
+  "parent": "solar-system",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "sylvia",
-      "members": "moons"
+      "host": "sylvia"
     },
     "catalog": {
       "name": "Sylvia–Romulus system",

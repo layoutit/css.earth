@@ -116,33 +116,40 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
       return indices = found.length ? new Set(found) : null;
     };
   };
+  // The opacity the caller last asked for: the bank's own fades are known only once it has loaded, and are applied then.
+  let requested = 1;
+  /** Write the bank's opacity for one view: what the caller asked for, through the loaded bank's own fades. */
+  const present = (publication: VolumeCameraPublication) => {
+    let alpha = Math.max(0, Math.min(1, requested));
+    if (extent) {
+      const distanceM = eyeDistanceM(publication.world.pose, extent.originM);
+      const pixels = distanceM > extent.radiusM ? publication.viewport.focalPixels * extent.radiusM / distanceM : Infinity;
+      const t = Math.max(0, Math.min(1, (pixels - EXTENT_FADE_PIXELS[0]) / (EXTENT_FADE_PIXELS[1] - EXTENT_FADE_PIXELS[0])));
+      alpha *= t * t * (3 - 2 * t);
+      if (fadeOutM) {
+        // The whole bank fades out as the view's half-width at its origin narrows, evenly in its logarithm; faded out it
+        // neither draws nor projects.
+        const { widthPixels, heightPixels, focalPixels } = publication.viewport;
+        const halfWidthM = distanceM * (widthPixels && heightPixels && focalPixels > 0 ? Math.hypot(widthPixels, heightPixels) / 2 / focalPixels : halfWidthPerDistance);
+        alpha *= Math.max(0, Math.min(1, Math.log(halfWidthM / fadeOutM[1]) / Math.log(fadeOutM[0] / fadeOutM[1])));
+      }
+    }
+    const display = alpha > 0 ? '' : 'none';
+    writeStyle(root, 'opacity', String(alpha));
+    if (root.style.display !== display) {
+      root.style.display = display;
+      if (display === '' && runtime) revealLayers(runtime.layers);
+    }
+    return alpha;
+  };
   return Object.freeze({ root,
     /** `withoutM`: places in the world's frame, in metres, whose own dots are not drawn. The caller passes the same list
      * until its places change. */
     publish(publication: VolumeCameraPublication, opacity = 1, withoutM: readonly (readonly number[])[] | null = null) {
       if (destroyed) return;
       hiddenAtM = withoutM;
-      let alpha = Math.max(0, Math.min(1, opacity));
-      if (extent) {
-        const distanceM = eyeDistanceM(publication.world.pose, extent.originM);
-        const pixels = distanceM > extent.radiusM ? publication.viewport.focalPixels * extent.radiusM / distanceM : Infinity;
-        const t = Math.max(0, Math.min(1, (pixels - EXTENT_FADE_PIXELS[0]) / (EXTENT_FADE_PIXELS[1] - EXTENT_FADE_PIXELS[0])));
-        alpha *= t * t * (3 - 2 * t);
-        if (fadeOutM) {
-          // The whole bank fades out as the view's half-width at its origin narrows, evenly in its logarithm; faded out it
-          // neither draws nor projects.
-          const { widthPixels, heightPixels, focalPixels } = publication.viewport;
-          const halfWidthM = distanceM * (widthPixels && heightPixels && focalPixels > 0 ? Math.hypot(widthPixels, heightPixels) / 2 / focalPixels : halfWidthPerDistance);
-          alpha *= Math.max(0, Math.min(1, Math.log(halfWidthM / fadeOutM[1]) / Math.log(fadeOutM[0] / fadeOutM[1])));
-        }
-      }
-      const display = alpha > 0 ? '' : 'none';
-      writeStyle(root, 'opacity', String(alpha));
-      if (root.style.display !== display) {
-        root.style.display = display;
-        if (display === '' && runtime) revealLayers(runtime.layers);
-      }
-      if (!(alpha > 0)) return;
+      requested = opacity;
+      if (!(present(publication) > 0)) return;
       latest = publication;
       const { widthPixels, heightPixels, focalPixels } = publication.viewport;
       if (widthPixels && heightPixels && focalPixels > 0) halfWidthPerDistance = Math.hypot(widthPixels, heightPixels) / 2 / focalPixels;
@@ -242,8 +249,10 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
           }, destroy: field.destroy };
         }
         root.dataset.cataloguePoints = bank.id;
+        // A still view publishes nothing more, so the bank takes its own fades for the view it loaded under here.
+        const shown = latest === null || present(latest) > 0;
         if (root.style.display !== 'none') revealLayers(runtime.layers);
-        if (latest) runtime.publish(latest);
+        if (latest && shown) runtime.publish(latest);
       }).catch(error => { root.dataset.cataloguePoints = 'failed'; console.error(`Catalogue points ${url} failed`, error); }); });
     },
     destroy() { if (destroyed) return; destroyed = true; runtime?.destroy(); root.remove(); },

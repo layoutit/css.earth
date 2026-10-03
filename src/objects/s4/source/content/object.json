@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "s4",
+  "displayName": "S4",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "5.2 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1708-06353",
+          "url": "https://arxiv.org/abs/1708.06353",
+          "label": "Habibi et al. 2017",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "77 years",
+        "source": {
+          "catalogueId": "arxiv-1611-09144",
+          "url": "https://arxiv.org/abs/1611.09144",
+          "label": "Gillessen et al. 2016",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "12 solar masses",
+        "source": {
+          "catalogueId": "arxiv-1708-06353",
+          "url": "https://arxiv.org/abs/1708.06353",
+          "label": "Habibi et al. 2017",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "s4-dataset-color.webp",
+        "surface": "s4-surface-color@2x.webp",
+        "poles": "s4-poles-color@2x.webp",
+        "source": {
+          "id": "s4-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1708.06353"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 27,288 K and log g 4.09 (u1 0.083, u2 0.281): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Gillessen et al. (2017), ApJ 837, 30",
+      "href": "https://arxiv.org/abs/1611.09144"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1611.09144",
+      "credit": "Gillessen et al. (2017), ApJ 837, 30"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/s4.json",
+      "credit": "Radius from Habibi et al. (2017), ApJ 847, 120, Table 3: 5.23 (+1.21/-0.85) solar radii, model-atmosphere fit to SINFONI spectra; mass from Habibi et al. (2017), ApJ 847, 120, Table 3: 12.20 (+1.9/-1.7) solar masses; orbit from Gillessen et al. (2017), ApJ 837, 30, table3 (VizieR J/ApJ/837/30)"
+    }
+  }
+}

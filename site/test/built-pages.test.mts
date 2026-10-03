@@ -5,7 +5,7 @@ import { builtObjectPages, builtScenePaths, namedPages } from '../built-pages.mt
 const objects = [
   { id: 'earth' }, { id: 'moon' }, { id: 'mars' }, { id: 'sun' },
   // A level's page mounts the world host's scene.
-  { id: 'milky-way', sceneHostId: 'sun' },
+  { id: 'milky-way', sceneId: 'sun' },
 ];
 const pages = objects.map(({ id }) => ({ params: { id } }));
 const scenes = pages.filter(({ params }) => params.id !== 'milky-way');

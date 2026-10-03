@@ -367,6 +367,14 @@
       "bytes": 8276
     },
     {
+      "path": "src/objects/ngc-1365-layers/prepared/presentation.json",
+      "bytes": 1437
+    },
+    {
+      "path": "public/scenes/ngc-1365-layers/datasets/optical.webp",
+      "bytes": 13984
+    },
+    {
       "path": "src/objects/ngc-1637-layers/prepared/presentation.json",
       "bytes": 1396
     },
@@ -413,6 +421,30 @@
     {
       "path": "public/scenes/ngc-3521-layers/datasets/optical.webp",
       "bytes": 7360
+    },
+    {
+      "path": "src/objects/ngc-4424-layers/prepared/presentation.json",
+      "bytes": 1421
+    },
+    {
+      "path": "public/scenes/ngc-4424-layers/datasets/optical.webp",
+      "bytes": 3852
+    },
+    {
+      "path": "src/objects/ngc-4536-layers/prepared/presentation.json",
+      "bytes": 1423
+    },
+    {
+      "path": "public/scenes/ngc-4536-layers/datasets/optical.webp",
+      "bytes": 4930
+    },
+    {
+      "path": "src/objects/ngc-4639-layers/prepared/presentation.json",
+      "bytes": 1417
+    },
+    {
+      "path": "public/scenes/ngc-4639-layers/datasets/optical.webp",
+      "bytes": 3858
     },
     {
       "path": "src/objects/ngc-4696-volume/prepared/presentation.json",
@@ -1379,6 +1411,24 @@
       "credit": "SDSS",
       "sourceUrl": "https://www.sdss.org/"
     },
+    "ngc-1365-layers/optical": {
+      "url2x": "/navigation/focus-ngc-1365-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-1365-layers/prepared/presentation.json",
+        "public/scenes/ngc-1365-layers/datasets/optical.webp"
+      ],
+      "credit": "DES/NOIRLab",
+      "sourceUrl": "https://noirlab.edu/public/images/iotw2127a/"
+    },
+    "ngc-1365-layers": {
+      "url2x": "/navigation/focus-object-ngc-1365-layers@2x.webp",
+      "inputs": [
+        "src/objects/ngc-1365-layers/prepared/presentation.json",
+        "public/scenes/ngc-1365-layers/datasets/optical.webp"
+      ],
+      "credit": "DES/NOIRLab",
+      "sourceUrl": "https://noirlab.edu/public/images/iotw2127a/"
+    },
     "ngc-1637-layers/optical": {
       "url2x": "/navigation/focus-ngc-1637-layers-optical@2x.webp",
       "inputs": [
@@ -1486,6 +1536,60 @@
       ],
       "credit": "ESO",
       "sourceUrl": "https://www.eso.org/public/images/eso1129a/"
+    },
+    "ngc-4424-layers/optical": {
+      "url2x": "/navigation/focus-ngc-4424-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4424-layers/prepared/presentation.json",
+        "public/scenes/ngc-4424-layers/datasets/optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+    },
+    "ngc-4424-layers": {
+      "url2x": "/navigation/focus-object-ngc-4424-layers@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4424-layers/prepared/presentation.json",
+        "public/scenes/ngc-4424-layers/datasets/optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+    },
+    "ngc-4536-layers/optical": {
+      "url2x": "/navigation/focus-ngc-4536-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4536-layers/prepared/presentation.json",
+        "public/scenes/ngc-4536-layers/datasets/optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+    },
+    "ngc-4536-layers": {
+      "url2x": "/navigation/focus-object-ngc-4536-layers@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4536-layers/prepared/presentation.json",
+        "public/scenes/ngc-4536-layers/datasets/optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+    },
+    "ngc-4639-layers/optical": {
+      "url2x": "/navigation/focus-ngc-4639-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4639-layers/prepared/presentation.json",
+        "public/scenes/ngc-4639-layers/datasets/optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+    },
+    "ngc-4639-layers": {
+      "url2x": "/navigation/focus-object-ngc-4639-layers@2x.webp",
+      "inputs": [
+        "src/objects/ngc-4639-layers/prepared/presentation.json",
+        "public/scenes/ngc-4639-layers/datasets/optical.webp"
+      ],
+      "credit": "SDSS",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
     },
     "ngc-4696-volume/legacy-optical": {
       "url2x": "/navigation/focus-ngc-4696-volume-legacy-optical@2x.webp",
@@ -1825,12 +1929,16 @@
     "macs-j1149-layers": "macs-j1149-layers",
     "mom-z14-layers": "mom-z14-layers",
     "ngc-1275-volume": "ngc-1275-volume",
+    "ngc-1365-layers": "ngc-1365-layers",
     "ngc-1637-layers": "ngc-1637-layers",
     "ngc-253-layers": "ngc-253-layers",
     "ngc-2903-layers": "ngc-2903-layers",
     "ngc-300-layers": "ngc-300-layers",
     "ngc-3311-volume": "ngc-3311-volume",
     "ngc-3521-layers": "ngc-3521-layers",
+    "ngc-4424-layers": "ngc-4424-layers",
+    "ngc-4536-layers": "ngc-4536-layers",
+    "ngc-4639-layers": "ngc-4639-layers",
     "ngc-4696-volume": "ngc-4696-volume",
     "ngc-4874-volume": "ngc-4874-volume",
     "ngc-4889-volume": "ngc-4889-volume",

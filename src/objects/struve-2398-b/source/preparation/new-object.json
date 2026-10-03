@@ -2,6 +2,10 @@
   "id": "struve-2398-b",
   "name": "Struve 2398 B",
   "system": "Struve 2398 system",
+  "boundTo": {
+    "host": "struve-2398-a",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list Struve 2398 A and Struve 2398 B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2154880616774131840 and 2154880616774131712), 41 AU apart on the sky, with a chance-alignment probability of 4.7e-7: the pair is bound. This record adopts no orbit of the pair, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "A nearby red dwarf, 32% of the Sun's width: its disc was measured by interferometry.",
   "aliases": [
     "GJ 725 B"

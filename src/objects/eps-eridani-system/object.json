@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "eps-eridani-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "eps-eridani",
-      "members": "planets"
+      "host": "eps-eridani"
     },
     "catalog": {
       "name": "ε Eridani system",

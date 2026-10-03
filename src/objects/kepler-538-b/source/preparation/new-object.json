@@ -2,6 +2,10 @@
   "id": "kepler-538-b",
   "name": "Kepler-538B",
   "system": "Kepler-538 system",
+  "boundTo": {
+    "host": "kepler-538",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list Kepler-538 and Kepler-538B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2087171453788422528 and 2087171453783512704), 2,679 AU apart on the sky, with a chance-alignment probability of 3.2e-4: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to Kepler-538, 2,679 AU away.",
   "gaia": "2087171453783512704",
   "paper": {

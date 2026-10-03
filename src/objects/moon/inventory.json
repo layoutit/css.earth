@@ -219,6 +219,12 @@
     },
     {
       "location": "public",
+      "filename": "moon-billboard.webp",
+      "bytes": 9952,
+      "sha256": "397f9919627b62c4f98d2d66103e4f52de090e61fd13cd1f332a34d0124eeb88"
+    },
+    {
+      "location": "public",
       "filename": "moon-bouguer-gravity-page-0-level-1040.webp",
       "bytes": 106668,
       "sha256": "dbf6864a4e6a5ff346bc29bd34a2801c08350ff08aebd5035169680eab06a6da"
@@ -3324,12 +3330,6 @@
       "filename": "world-navigation.json",
       "bytes": 1231,
       "sha256": "6be4cf399fda49fce7657c92f91f3cf48cdeb407a1489eb5015b64d4f0d3c1f7"
-    },
-    {
-      "location": "public",
-      "filename": "moon-billboard.webp",
-      "bytes": 9952,
-      "sha256": "397f9919627b62c4f98d2d66103e4f52de090e61fd13cd1f332a34d0124eeb88"
     }
   ]
 }

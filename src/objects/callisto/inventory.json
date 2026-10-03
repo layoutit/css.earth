@@ -9,6 +9,12 @@
     },
     {
       "location": "public",
+      "filename": "callisto-billboard.webp",
+      "bytes": 8416,
+      "sha256": "66f057395311c5f1f4c897ee9a212d13b3b4b6032126df86639427dcb324cbd9"
+    },
+    {
+      "location": "public",
       "filename": "callisto-dataset-enhanced.webp",
       "bytes": 1410,
       "sha256": "df2588e5d850855d13163b2a1f6f43cbcb859a9b67d3cacf56425ca079ba9edc"
@@ -678,12 +684,6 @@
       "filename": "world-navigation.json",
       "bytes": 1225,
       "sha256": "c7a9b9ded3e93d5d49548e1247fee7a0580c8d6cd6c439b4d4401c49cfa68a2f"
-    },
-    {
-      "location": "public",
-      "filename": "callisto-billboard.webp",
-      "bytes": 8416,
-      "sha256": "66f057395311c5f1f4c897ee9a212d13b3b4b6032126df86639427dcb324cbd9"
     }
   ]
 }

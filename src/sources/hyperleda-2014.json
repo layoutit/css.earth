@@ -30,6 +30,11 @@
       "url": "http://atlas.obs-hp.fr/hyperleda/fullsql.html",
       "checkedOn": "2026-09-29",
       "locator": "meandata: pgc, t (numerical morphological type), btc (corrected total B magnitude), v"
+    },
+    {
+      "url": "http://atlas.obs-hp.fr/hyperleda/fullsql.html",
+      "checkedOn": "2026-10-02",
+      "locator": "meandata row PGC 42741 (NGC4639): al2000 12.7145558 h, de2000 13.2572415 deg, incl 51.02 deg, pa 138.01 deg, logr25 0.183. Query: SELECT objname, pgc, al2000, de2000, incl, pa, logr25 FROM meandata WHERE pgc IN (13179, 41823, 42741, 40809)"
     }
   ],
   "creators": [
@@ -46,7 +51,7 @@
     {
       "kind": "credit",
       "text": "This research has made use of the HyperLEDA database (http://leda.univ-lyon1.fr); Makarov et al. (2014), A&A 570, A13.",
-      "scope": "Galaxy morphological types",
+      "scope": "Galaxy morphological types; NGC 4639's centre, inclination and position angle",
       "evidence": "https://doi.org/10.1051/0004-6361/201423496"
     }
   ]

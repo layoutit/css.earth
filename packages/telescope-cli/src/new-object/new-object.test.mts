@@ -495,7 +495,7 @@ test('a refresh regenerates what the tool wrote and keeps what a person wrote', 
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
 
-test('a wide companion is drafted as a placed star of the host\'s system from the three catalogues; a circumbinary host is refused', async () => {
+test('a wide companion is drafted as a placed star bound to its host from the three catalogues; a circumbinary host is refused', async () => {
   const { wideCompanions } = await import('./companions.mts');
   const { archiveSpec } = await import('./from-archive.mts');
   const asu = (header: string, row: string) => `#\n# VizieR\n${header}\n${header.split('\t').map(() => ' ').join('\t')}\n${header.split('\t').map(() => '---').join('\t')}\n${row}\n`;
@@ -506,13 +506,17 @@ test('a wide companion is drafted as a placed star of the host\'s system from th
     if (query.get('-source') === 'IV/39/tic82') return asu('TIC\tTeff\ts_Teff\tRad\ts_Rad\tMass\ts_Mass', '252479261\t3589.0\t157.0\t0.599\t0.018\t0.587\t0.02');
     throw new Error(`unexpected ${url}`);
   }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
-  const { companions, notes } = await wideCompanions(archive, { gaia: '846946621395854848', name: 'HAT-P-22', system: 'HAT-P-22 system' }, () => undefined);
+  const { companions, notes } = await wideCompanions(archive, { id: 'hat-p-22', gaia: '846946621395854848', name: 'HAT-P-22', system: 'HAT-P-22 system' }, () => undefined);
   assert.deepEqual(notes, []);
-  const star = companions[0]! as { id: string; name: string; system: string; gaia: string; temperature: { value: number; uncertainty: number; source: string }; radius: { value: number }; mass: { value: number }; text: { card: string } };
+  const star = companions[0]! as { id: string; name: string; system: string; gaia: string; boundTo: { host: string; source: string }; temperature: { value: number; uncertainty: number; source: string }; radius: { value: number }; mass: { value: number }; text: { card: string } };
   assert.deepEqual([star.id, star.name, star.system, star.gaia, star.temperature.value, star.temperature.uncertainty, star.radius.value, star.mass.value], ['hd-233731-b', 'HD 233731B', 'HAT-P-22 system', '846946625690867328', 3589, 157, 0.599, 0.587]);
   assert.match(star.temperature.source, /TIC 252479261/u);
+  // The bond is data: the star it is bound to and the catalogue row that says so, which puts it inside that star's system.
+  assert.equal(star.boundTo.host, 'hat-p-22');
+  assert.match(star.boundTo.source, /El-Badry, Rix & Heintz \(2021, MNRAS 506, 2269\) list HAT-P-22 and HD 233731B .* source_id 846946621395854848 and 846946625690867328\), 747 AU apart on the sky, with a chance-alignment probability of 1\.0e-3: the pair is bound/u);
+  assert.deepEqual(parseStarSpec(star).boundTo, star.boundTo);
   assert.doesNotThrow(() => parseStarSpec(star), 'the draft is a valid star spec');
-  const held = await wideCompanions(archive, { gaia: '846946621395854848', name: 'HAT-P-22', system: 's' }, () => 'hd-233731-b');
+  const held = await wideCompanions(archive, { id: 'hat-p-22', gaia: '846946621395854848', name: 'HAT-P-22', system: 's' }, () => 'hd-233731-b');
   assert.deepEqual([held.companions.length, /already in the universe as hd-233731-b/u.test(held.notes[0]!)], [0, true]);
   // A circumbinary host: the pair's orbit is a paper's, so the draft refuses it.
   const cb = { async text(url: string) { if (decodeURIComponent(url).includes('st_teff')) return 'pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id,cb_flag,sy_snum,disc_facility,sy_pnum\nTOI-1338 b,TOI-1338,1,x,x,1,,5990,,1,,400,2020,Transit,1,b,,,Gaia DR3 1,1,2,TESS,2'; return ''; }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
@@ -598,10 +602,20 @@ test('a whole star package from fixtures is what the bake accepts: declared file
   const archive: Archive = {
     async text(url) { if (url.includes('gea.esac.esa.int/tap')) return row; if (url.includes('export.arxiv.org')) return arxiv; if (url.includes('asu-tsv')) return '#\n'; throw new Error(`unexpected ${url}`); },
     async bytes(url) { if (url.includes('III/126')) return gzipSync(''); return Buffer.from(''); }, async exists() { return false; } };
-  const spec = parseStarSpec({ ...star, id: 'test-fixture-star', name: 'Test Fixture Star', gaia, target: undefined, limb: { none: 'a test fixture' },
+  const unplaced = parseStarSpec({ ...star, id: 'test-fixture-star', name: 'Test Fixture Star', gaia, target: undefined, limb: { none: 'a test fixture' },
     text: { card: 'A test star.', introduction: 'A test star made from fixtures.', locator: 'fixture' } });
-  const generated = await generateStar(spec, { archive, root, order: 9999, universe: { ids: new Set(), names: new Map(), stars: [] }, solarEpoch: await loadSolarEpoch(root),
-    resolver: async () => ({ mainId: 'Test Fixture Star', identifiers: [`Gaia DR3 ${gaia}`] }) });
+  const options = { archive, root, order: 9999, universe: { ids: new Set<string>(), names: new Map<string, string>(), stars: [] }, solarEpoch: await loadSolarEpoch(root),
+    resolver: async () => ({ mainId: 'Test Fixture Star', identifiers: [`Gaia DR3 ${gaia}`] }) };
+  // A new package names the object it is inside, or the star it is bound to: the tree has no place for it otherwise.
+  await assert.rejects(generateStar(unplaced, options), /test-fixture-star: a new object names the object it is inside/u);
+  const spec = parseStarSpec({ ...unplaced, planets: [], companions: [], parent: 'milky-way' });
+  const generated = await generateStar(spec, options);
+  assert.equal(JSON.parse(String(generated.files.get(`src/objects/${spec.id}/object.json`))).parent, 'milky-way');
+  const bond = { host: 'hat-p-3', source: 'A catalogue lists the pair as bound.' };
+  const bound = await generateStar(parseStarSpec({ ...unplaced, planets: [], companions: [], boundTo: bond }), options);
+  assert.equal(JSON.parse(String(bound.files.get(`src/objects/${spec.id}/object.json`))).parent, 'hat-p-3-system', 'a bound star is inside its star\'s system');
+  const record = JSON.parse(String(bound.files.get(`packages/astronomy/data/bodies/${spec.id}.json`))).star;
+  assert.deepEqual([record.boundTo, record.sources.binary], [bond.host, bond.source]);
   assert.equal(generated.color.route, 'planck', 'no archive spectrum in the fixtures, so the Planck route');
   assertWholePackage(generated.files, spec.id, true);
   const { parseInvestigationLedger } = await import('@cssearth/bake/sources');
@@ -639,7 +653,7 @@ test('a star beyond Gaia\'s parallax is placed at its cited distance; a weak or 
   const archive: Archive = {
     async text(url) { if (url.includes('gea.esac.esa.int/tap')) return twoParameter; if (url.includes('export.arxiv.org')) return arxiv; if (url.includes('asu-tsv')) return '#\n'; throw new Error(`unexpected ${url}`); },
     async bytes(url) { if (url.includes('III/126')) return gzipSync(''); return Buffer.from(''); }, async exists() { return false; } };
-  const spec = parseStarSpec({ ...base, distance, limb: { none: 'a test fixture' }, text: { card: 'A far star.', introduction: 'A star in another galaxy made from fixtures.', locator: 'fixture' } });
+  const spec = parseStarSpec({ ...base, distance, parent: 'm33', limb: { none: 'a test fixture' }, text: { card: 'A far star.', introduction: 'A star in another galaxy made from fixtures.', locator: 'fixture' } });
   const generated = await generateStar(spec, { archive, root, order: 9998, universe: { ids: new Set(), names: new Map(), stars: [] }, solarEpoch: await loadSolarEpoch(root),
     resolver: async () => ({ mainId: 'Test Far Star', identifiers: [`Gaia DR3 ${gaia}`] }) });
   assertWholePackage(generated.files, spec.id, true);

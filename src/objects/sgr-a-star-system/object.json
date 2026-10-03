@@ -1,17 +1,17 @@
 {
   "schema": "cssearth-object@2",
   "id": "sgr-a-star-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "sgr-a-star",
-      "members": "planets"
+      "host": "sgr-a-star"
     },
     "catalog": {
       "name": "Galactic Centre",
       "systemName": "Galactic Centre",
-      "classification": "planetary-system",
+      "classification": "star-system",
       "color": "#9a9a9a",
       "distanceAu": 1707253791.2,
       "description": "The black hole at the centre of the Milky Way, 4.3 million solar masses, with its S-stars in orbit."

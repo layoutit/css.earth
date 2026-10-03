@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "lp-791-18-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "lp-791-18",
-      "members": "planets"
+      "host": "lp-791-18"
     },
     "catalog": {
       "name": "LP 791-18 system",

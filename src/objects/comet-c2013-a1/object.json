@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "comet-c2013-a1",
+  "parent": "solar-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

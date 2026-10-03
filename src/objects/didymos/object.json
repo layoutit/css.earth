@@ -138,6 +138,7 @@
     }
   },
   "schema": "cssearth-object@2",
+  "parent": "didymos-system",
   "type": "layered-body",
   "prepared": {
     "format": "cssearth-css-object@5",

@@ -34,7 +34,7 @@ const proxy = http.createServer((request, response) => {
     upstream.on('error', () => { response.writeHead(502); response.end(); });
     request.pipe(upstream);
   };
-  if (request.url?.includes('world-context-summary')) setTimeout(forward, delay); else forward();
+  if (/\/world(?:\.[\w-]+)?\.json(?:\?|$)/u.test(request.url ?? '')) setTimeout(forward, delay); else forward();
 });
 await new Promise<void>(listening => proxy.listen(port, '0.0.0.0', listening));
 

@@ -13,8 +13,8 @@
   # site/build/bundle-netlify-functions.mts writes one self-contained module per function here at the end of build:deploy;
   # Netlify's own tracing would leave the renderer's TypeScript subpaths external, which Node cannot load.
   directory = "netlify/functions-bundled"
-  included_files = ["pnpm-workspace.yaml", "src/objects/sun/prepared/world-context-summary.json", "src/objects/sun/prepared/world-index.json",
-    "src/objects/sun/prepared/world-systems/*.json",
+  included_files = ["pnpm-workspace.yaml", "src/objects/observable-universe/prepared/world.json", "src/objects/observable-universe/prepared/world-index.json",
+    "src/objects/*/prepared/members.json", "src/objects/*/prepared/places.json",
     "dist/catalogue/index.json", "public/features/index.json", "public/scenes/*/*-places.json"]
 
 # This tiny router preserves optional view and category parameters. Search work

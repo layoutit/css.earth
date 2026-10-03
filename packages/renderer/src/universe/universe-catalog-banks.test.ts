@@ -82,3 +82,21 @@ test('a bank that belongs to a body draws while that body or one of its system i
   assert.equal(layer()?.style.display, 'none', 'another system hides them');
   lifetime.destroy();
 });
+
+test('a package of catalogue dots declared after mount draws while its host is selected, mounted once', () => {
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined });
+  const publish = (...system: string[]) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
+    pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, undefined, system);
+  assert.equal(banks.focusBank('minor-moons'), null, 'unknown before its host brings it');
+  banks.addPointBanks([{ id: 'minor-moons', url: '/minor-moons/dots.bin', host: 'planet' }]);
+  banks.addPointBanks([{ id: 'minor-moons', url: '/minor-moons/dots.bin', host: 'planet' }]);
+  assert.notEqual(banks.focusBank('minor-moons'), null);
+  publish('moon', 'planet');
+  assert.equal(root.querySelectorAll('[data-catalogue-points]').length, 1, 'mounted once, drawn for a body of its host');
+  lifetime.destroy();
+  assert.equal(root.querySelector('[data-catalogue-points]'), null);
+});

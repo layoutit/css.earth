@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-4639-layers",
+  "name": "NGC 4639",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-4639-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-4639-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-4639-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "SDSS · optical",
+      "title": "NGC 4639 in visible light",
+      "description": "The Sloan Digital Sky Survey view of NGC 4639 with Milky Way foreground stars removed and the whole-galaxy color tied to RC3's measured B-V of 0.70, on a disc tilted 51°.",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "detail": "900 × 900 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "SDSS g r i"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "900 × 900"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "6.00 × 6.00 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/ngc-4639-layers/source/source.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=900&height=900&fov=0.1&projection=TAN&coordsys=icrs&ra=190.718337&dec=13.257241&format=jpg"
+      }
+    }
+  ]
+}

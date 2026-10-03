@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 1141,
+      "sha256": "c15ac907f0f5c05d271836c0b56ae45f7385274fa54a7484a1459d4b5ddece1e"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/deimos.bin",
+      "bytes": 2264,
+      "sha256": "e83aad916669488932861aaa661190a4eeee4a560c7902a56cee74b0f35b8241"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/phobos.bin",
+      "bytes": 2263,
+      "sha256": "9a5b0189d0a666d55ed1b194e0e51fa346178a4a429463b6af8ded83c8110dc8"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/mars.json",
+      "bytes": 34714,
+      "sha256": "b463ba629c815fcab5114a96d393f22e4da9d9815cbc44600e5207ab808db74f"
+    }
+  ]
+}

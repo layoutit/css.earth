@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "quaoar-system",
+  "parent": "solar-system",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "quaoar",
-      "members": "moons"
+      "host": "quaoar"
     },
     "catalog": {
       "name": "Quaoar–Weywot system",

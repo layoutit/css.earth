@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "ds-tuc-a-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "ds-tuc-a",
-      "members": "planets"
+      "host": "ds-tuc-a"
     },
     "catalog": {
       "name": "DS Tuc system",

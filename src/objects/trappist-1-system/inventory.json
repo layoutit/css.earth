@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 2677,
+      "sha256": "ad1728d5b11b58004b4f5da4555c20e859980944cd93f7a36e441ce9ba1d6680"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/trappist-1b.bin",
+      "bytes": 1941,
+      "sha256": "42e694b16688be7b0bca3d3a170bec906eeeaa367196e115489e740071933523"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/trappist-1c.bin",
+      "bytes": 1942,
+      "sha256": "890a54e253d251d15d17eececb4f8aa835741b87a6f320983487d7b4a8eb4804"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/trappist-1d.bin",
+      "bytes": 1942,
+      "sha256": "a01aae03de8bc0b894ce99256d3b07c3db55b0e0d46106b625f19e149cc674c9"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/trappist-1e.bin",
+      "bytes": 1937,
+      "sha256": "6f2e4525edd5f6490974fed5df8c5fbd3adc69c8fb6cebd5ec3cff272521be69"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/trappist-1f.bin",
+      "bytes": 1944,
+      "sha256": "a5dedbaa4fc4d7d44996a9f236c72b6b07d82176bd9e58b470d8fc0b520a7de8"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/trappist-1g.bin",
+      "bytes": 1940,
+      "sha256": "184ac2af229f4f4770ff68009ec3e816984160e2a960af0cb49ed79ea47352fb"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/trappist-1h.bin",
+      "bytes": 1945,
+      "sha256": "cec9bb43501d9e4138d54c0e57e7288cffc16414350138139c2be05d8b5cb49c"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/trappist-1.json",
+      "bytes": 55410,
+      "sha256": "9391d5cd42fed413c79171f38388f343deae07f5c0443d874cc7dc073aa56d24"
+    }
+  ]
+}

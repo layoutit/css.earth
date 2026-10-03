@@ -3,7 +3,7 @@
  *
  * {
  *   "stars": [{
- *     "id": "hd-29615", "name": "HD 29615", "system": "HD 29615 system", "order": 1771,
+ *     "id": "hd-29615", "name": "HD 29615", "system": "HD 29615 system", "parent": "milky-way", "order": 1771,
  *     "description": "Catalogue line.",
  *     "target": "HD 29615", "gaia": "4891725758804030208",
  *     "paper": { "url": "https://arxiv.org/abs/2110.06729", "credit": "Willamo et al. (2022), A&A 659, A71" },
@@ -31,6 +31,12 @@
  * temperature required; `colorReason` says why its color is a Planck spectrum when that is not because the archives cannot separate it
  * from its star. A companion with `"blackHole": true` is a black hole: no temperature, a radius only if a source measures one (else the
  * records' unmeasured 0), and an astronomy record only, drawn in its star's system, with no package of its own.
+ *
+ * `parent` is the object the star is inside, by the object tree (packages/objects/src/registry/object-tree.ts): its galaxy's id,
+ * `milky-way` for a star Gaia or Hipparcos places. A new star without one is refused; a package that exists keeps the parent it has,
+ * because the systems step moves a star with planets into its own system. `boundTo` is { "host": id, "source": sentence } for a star
+ * measured to be bound to another with no measured orbit (a wide companion, companions.mts): the astronomy record carries the bond
+ * and the star is inside its host's system, whatever `parent` says.
  *
  * `target` is a name SIMBAD resolves, through the telescope's resolver (packages/telescope/src/node/sky-target.ts); `gaia` is a Gaia
  * DR3 source_id. Give either: the other is read from SIMBAD, and when both are given they must name the same star.
@@ -70,6 +76,13 @@ export type ColorRoute = 'stis-ngsl' | 'gaia-xp' | 'pulkovo' | 'kiehling' | 'kha
 export const COLOR_ROUTES: readonly ColorRoute[] = ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'];
 export interface StarSpec {
   readonly id: string; readonly name: string; readonly system: string; readonly description: string; readonly order?: number;
+  /** The object the star is inside, by the object tree: its galaxy (`milky-way` for a star Gaia or Hipparcos places, the galaxy a
+   * star was measured in otherwise). The systems step moves a star with planets into its own system, and `boundTo` puts a companion
+   * in the system of its star. A package that exists keeps its parent when the spec names none; a new one is refused without it. */
+  readonly parent?: string;
+  /** The star this one is measured to be bound to with no measured orbit, and the measurement that says so: the astronomy record's
+   * `boundTo` and `sources.binary`. The star is then inside that star's system. */
+  readonly boundTo?: { readonly host: string; readonly source: string };
   /** A SIMBAD name, a Gaia DR3 source_id, or both. */
   readonly target?: string; readonly gaia?: string;
   /** Other designations of the star, searchable and listed on its card: the names `name` was preferred to (display-name.mts). */
@@ -242,7 +255,7 @@ export function parseStarSpec(value: unknown): StarSpec {
   const input = requireRecord(value, 'star spec'), id = requireString(input.id, 'id');
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a star id is lowercase letters, digits and hyphens.`);
   const at = (label: string) => `${id}.${label}`;
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'gravityRange', 'radialVelocity', 'distance', 'position', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes', 'aliases', 'featured']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'gravityRange', 'radialVelocity', 'distance', 'position', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes', 'aliases', 'featured', 'parent', 'boundTo']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown spec fields ${unknown.join(', ')}.`);
   const gaia = input.gaia === undefined ? undefined : requireString(input.gaia, at('gaia')), target = input.target === undefined ? undefined : requireString(input.target, at('target'));
@@ -271,9 +284,15 @@ export function parseStarSpec(value: unknown): StarSpec {
   })();
   const limb = input.limb === undefined ? undefined : { none: requireString(requireRecord(input.limb, at('limb')).none, at('limb.none')) };
   const aliases = input.aliases === undefined ? undefined : requireArray(input.aliases, at('aliases')).map(alias => requireString(alias, at('aliases')));
+  const objectId = (value: unknown, label: string) => { const text = requireString(value, label); if (!/^[a-z][a-z0-9-]*$/u.test(text)) throw new TypeError(`${label} is an object id (lowercase letters, digits and hyphens), not ${text}.`); return text; };
+  const boundTo = input.boundTo === undefined ? undefined : (() => {
+    const bond = requireRecord(input.boundTo, at('boundTo'));
+    return { host: objectId(bond.host, at('boundTo.host')), source: requireString(bond.source, at('boundTo.source')) };
+  })();
   return {
     id, name, system: input.system === undefined ? `${name} system` : requireString(input.system, at('system')), description: requireString(input.description, at('description')),
     ...(aliases?.length ? { aliases } : {}),
+    ...(input.parent === undefined ? {} : { parent: objectId(input.parent, at('parent')) }), ...(boundTo ? { boundTo } : {}),
     ...(input.featured === undefined ? {} : input.featured === true ? { featured: true as const } : (() => { throw new TypeError(`${at('featured')} is true or absent, not ${JSON.stringify(input.featured)}.`); })()),
     ...(input.order === undefined ? {} : { order: requireFiniteNumber(input.order, at('order')) }), ...(target ? { target } : {}), ...(gaia ? { gaia } : {}),
     paper: { url: requireString(paper.url, at('paper.url')), credit: requireString(paper.credit, at('paper.credit')) },

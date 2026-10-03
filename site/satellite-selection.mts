@@ -1,24 +1,25 @@
 import type { WorldCameraPose } from '@cssearth/objects';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectEntry } from './objects.mts';
-import { bodyViewAtCamera } from './overview-context.mts';
+import { bodyViewAtCamera } from './zoom-scope.mts';
 import { OVERVIEW_SELECTION_POLICY } from './runtime-policy.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from './satellite-systems.mts';
 import type { SceneContext } from './scene/scene-selection.mts';
+import { moonSystem, starSystem, subjectHost, subjectOf } from './scene/scene-subject.mts';
 
 /** The selected body's own close-up leads into its nearest prepared satellite family. */
 export function satelliteSelectionAtCamera(world: WorldCameraPose, optics: ReturnType<ObjectWorldNavigation['optics']>,
   objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[], selection: SceneContext): SceneContext | null {
-  if (selection.view === 'system') return null;
-  const id = selection.objectId;
+  // A star's system is a step of the zoom out of the star (scene-selection.mts `followCamera`), not this hand-over.
+  if (starSystem(selection)) return null;
+  const id = subjectHost(selection), overview = moonSystem(selection);
   const family = satelliteSystemByHost(id) ?? satelliteSystemOfMember(id);
   if (!family) return null;
   const frame = objects.find(object => object.id === id)?.worldFrame;
   if (!frame) return null;
-  const card = bodyViewAtCamera(world, frame, optics, id,
-    selection.view === 'moons' ? 'overview' : 'detail');
-  if (selection.view === 'moons' && card === 'detail') return { objectId: id, view: 'body' };
-  if (selection.view === 'body' && card === 'overview') return { objectId: family.hostId, view: 'moons' };
+  const card = bodyViewAtCamera(world, frame, optics, id, overview ? 'overview' : 'detail');
+  if (overview && card === 'detail') return { objectId: id };
+  if (!overview && card === 'overview') return subjectOf(family.hostId, 'system');
   return null;
 }
 
@@ -32,7 +33,7 @@ export function watchSatelliteSelection({ navigation, objects, getSelection, isA
   let latest: { world: WorldCameraPose; optics: ReturnType<ObjectWorldNavigation['optics']> } | null = null;
   let candidate: SceneContext | null = null;
   const cancel = () => { if (timer !== null) windowTarget.clearTimeout(timer); timer = null; candidate = null; };
-  const same = (a: SceneContext | null, b: SceneContext | null) => a?.view === b?.view && a?.objectId === b?.objectId;
+  const same = (a: SceneContext | null, b: SceneContext | null) => a?.objectId === b?.objectId;
   const inspect = () => {
     timer = null; candidate = null;
     if (disposed || coasting || !isAvailable() || !latest) return;
