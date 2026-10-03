@@ -54,7 +54,7 @@
       "labs/nebula/packages/lab",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Lab writes reconstruction records read by telescope-cli; extract the opacity data shape from solver return types with identity/grid validation in a separate reconstruction/delivery packet."
   },
   {
     "schema": "cssearth-compact-density-delivery@1",
@@ -62,7 +62,7 @@
       "labs/nebula/packages/lab",
       "packages/bake"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, packages/bake); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Lab exports compact delivery read by bake; extract id/delivery/pin admission together with historical assertion diagnostics and source-owner policy in a separate handoff packet (E2g keeps the wave under 25 files)."
   },
   {
     "schema": "cssearth-css-geometry-profile@1",
@@ -79,14 +79,6 @@
       "packages/telescope-cli"
     ],
     "reason": "Telescope-cli writes presentation profiles read by bake/site; the pure profile/mode contract and bake/site imports require a separate complete packet after E2f color/measurement extraction (25-file scope cap)."
-  },
-  {
-    "schema": "cssearth-density-placement@1",
-    "owners": [
-      "labs/nebula/packages/lab",
-      "packages/bake"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, packages/bake); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
   },
   {
     "schema": "cssearth-display-orientation@1",
@@ -117,7 +109,7 @@
       "packages/bake",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Bake writes Gaia fields read by bake and telescope-cli; the CLI accepts an astrometry subset, so move wire parsing with explicit reader policies in a separate 12-file packet."
   },
   {
     "schema": "cssearth-image-direction-gate@1",
@@ -149,7 +141,7 @@
       "packages/bake",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Bake and telescope-cli write delivery envelopes read by bake/lab; extract grid/pin/sky data and parser with all replay consumers in a separate 16-file packet."
   },
   {
     "schema": "cssearth-nebula-depth-model@1",
@@ -157,7 +149,7 @@
       "labs/nebula/packages/lab",
       "labs/nebula/packages/reconstruction"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, labs/nebula/packages/reconstruction); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Authored depth models are read by reconstruction and lab compiler publication; move recipe/surface parsing with caller-specific path and identity admission in a separate 17-file packet."
   },
   {
     "schema": "cssearth-nox-output@1",
@@ -182,14 +174,6 @@
       "packages/bake"
     ],
     "reason": "Preserved packages/bake/authoring/distant-worlds/author.py writes text read by site; Python cannot import TypeScript. python-schema-identifiers.test.ts pins the writer literal to objects."
-  },
-  {
-    "schema": "cssearth-observed-stellar-catalogue@1",
-    "owners": [
-      "labs/nebula/packages/lab",
-      "labs/nebula/packages/reconstruction"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, labs/nebula/packages/reconstruction); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
   },
   {
     "schema": "cssearth-paged-ellipsoid@1",
@@ -303,7 +287,7 @@
       "labs/nebula/packages/lab",
       "packages/bake"
     ],
-    "reason": "Spelled as a raw string by 2 owners (labs/nebula/packages/lab, packages/bake); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Lab promotion writes output manifests read by bake; move the output-map parser with compact delivery, preserving size-check diagnostics and atlas replay in the separate handoff packet."
   },
   {
     "schema": "cssearth-volume-presentation-source@2",

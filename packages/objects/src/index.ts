@@ -215,3 +215,6 @@ export { DISC_INTEGRATED_COLOR_SCHEMA, parseDiscColorRecord, parseDiscColorPhoto
 export { STELLAR_PHOTOMETRIC_COLOR_SCHEMA, PLANCK_FLOOR_KELVIN, parseStellarColorRecord, parseMeasuredSpectrumRecord, checkStellarTemperature, type StellarColorRecord, type StellarTemperature, type MeasuredSpectrumRecord } from './prepared-data/stellar-photometric-color.js';
 export { UNIFORM_DISC_STAR_SCHEMA, parseUniformDiscStarMeasurements, type UniformDiscStarMeasurements } from './prepared-data/uniform-disc-star.js';
 export { MEASURED_SPECTRUM_SCHEMA, parseMeasuredSpectrumDocument, type Measurement, type MeasuredSpectrumDocument } from './prepared-data/measured-spectrum.js';
+export { DENSITY_PLACEMENT_SCHEMA, parseDensityPlacement, type DensityPlacement } from './volume/density-placement.js';
+export { OBSERVED_STELLAR_CATALOGUE_SCHEMA, readObservedStellarCatalogueEnvelope, parseObservedStellarCatalogue,
+  type ObservedStar, type PhotometryKind, type ObservedStellarCatalogueEnvelope, type ObservedStellarCatalogue } from './volume/observed-stellar-catalogue.js';

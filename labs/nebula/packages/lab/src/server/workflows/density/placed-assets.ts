@@ -2,8 +2,8 @@
 import { readFile, mkdir, symlink, rename, rm, realpath } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
-import { parseDensityPlacement, placeDensitySlices } from '@cssearth/bake/volume';
-import { PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, type VolumeSlices } from '@cssearth/objects';
+import { placeDensitySlices } from '@cssearth/bake/volume';
+import { parseDensityPlacement, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, type VolumeSlices } from '@cssearth/objects';
 import { sourceBytes, containedPath } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { parseLabModelJson } from '../../../resources/model-paths.ts';

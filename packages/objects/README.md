@@ -181,3 +181,8 @@ measurement documents live in `src/prepared-data/`, exported through the browser
 Their parsers preserve separate compiler/public-photometry admission and mode-dependent absent-wavelength policies.
 CIE/Planck evaluation, spectrum file loading, binning, sphere generation and chart rendering remain in bake/telescope-cli.
 Contract tests use node:test in the packages lane; scientific and file-output conformance stays with the consumers.
+
+Authored density placement and observed stellar catalogue wire types, schema identifiers and pure parsers live in
+`src/volume/`, exported by `@cssearth/objects`. Envelope admission is separate from stellar-row parsing to preserve
+caller validation order. Transforms, fitting, projection, display selection and file I/O stay with bake/reconstruction/lab.
+Contract tests use node:test in the packages lane.
