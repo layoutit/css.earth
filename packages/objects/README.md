@@ -165,6 +165,7 @@ Frame/source auditing, camera solving, geometry, file I/O and inventory lookup s
 Contract tests use node:test in the packages CI lane.
 
 See the [shared source-format ownership contract](AGENTS.md) for WISE pins, rotation records and published limb coefficients.
+Limb intensity lives in [core](../core/src/math/limb-intensity.ts).
 
 Disc-integrated and stellar photometric color records, uniform-disc star measurements, and measured-spectrum
 measurement documents live in `src/prepared-data/`, exported through the browser-safe main entry.

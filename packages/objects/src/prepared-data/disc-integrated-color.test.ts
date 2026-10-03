@@ -23,3 +23,14 @@ test('public photometry preserves subset admission and numeric coercion', () => 
   assert.throws(() => parseDiscColorPhotometry({ ...subset, object: [] }), { message: 'object must be an object.' });
   assert.ok(Number.isNaN(parseDiscColorPhotometry({ ...subset, geometricAlbedo: { band: 'R' } }).value));
 });
+
+test('both disc policies share envelope admission while preserving diagnostics', () => {
+  for (const invalid of [undefined, null, [], 1, 'record', () => {}]) {
+    assert.throws(() => parseDiscColor(invalid), { name: 'TypeError', message: 'disc color record must be an object.' });
+    assert.throws(() => parseDiscColor(invalid, { acceptance: 'photometry' }), { name: 'TypeError', message: 'photometry member must be an object.' });
+  }
+  for (const schema of [undefined, null, 'other']) {
+    assert.throws(() => parseDiscColor({ schema }), { message: `The disc color record must use ${DISC_INTEGRATED_COLOR_SCHEMA}.` });
+    assert.throws(() => parseDiscColor({ schema }, { acceptance: 'photometry' }), { message: 'The public photometry executor currently supports the pinned disc-integrated-color schema.' });
+  }
+});

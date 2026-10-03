@@ -19,20 +19,19 @@ const measured = (value: unknown, label: string) => requireFiniteNumber(requireR
 export function parseDiscColor(value: unknown, policy?: { acceptance: 'color' }): DiscColorRecord;
 export function parseDiscColor(value: unknown, policy: { acceptance: 'photometry' }): DiscColorPhotometry;
 export function parseDiscColor(value: unknown, policy: { acceptance: 'color' | 'photometry' } = { acceptance: 'color' }): DiscColorRecord | DiscColorPhotometry {
-  if (policy.acceptance === 'photometry') {
-    const object = (value: unknown, label: string) => {
-      if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${label} must be an object.`);
-      return value as Record<string, unknown>;
-    };
-    const source = object(value, 'photometry member');
-    if (source.schema !== DISC_INTEGRATED_COLOR_SCHEMA) throw new TypeError('The public photometry executor currently supports the pinned disc-integrated-color schema.');
+  const photometry = policy.acceptance === 'photometry';
+  const input = requireRecord(value, photometry ? 'photometry member' : 'disc color record');
+  if (input.schema !== DISC_INTEGRATED_COLOR_SCHEMA) throw new TypeError(photometry
+    ? 'The public photometry executor currently supports the pinned disc-integrated-color schema.'
+    : `The disc color record must use ${DISC_INTEGRATED_COLOR_SCHEMA}.`);
+  if (photometry) {
+    const object = requireRecord;
+    const source = input;
     const albedo = object(source.geometricAlbedo, 'geometricAlbedo'), body = object(source.object, 'object');
     const waves = object(object(source.effectiveWavelengths, 'effectiveWavelengths').nanometres, 'effective wavelengths');
     const band = String(albedo.band);
     return { band, system: String(body.system), effectiveWavelength: Number(waves[band]), value: Number(albedo.value), uncertainty: Number(albedo.uncertainty) };
   }
-  const input = requireRecord(value, 'disc color record');
-  if (input.schema !== DISC_INTEGRATED_COLOR_SCHEMA) throw new TypeError(`The disc color record must use ${DISC_INTEGRATED_COLOR_SCHEMA}.`);
   const indices = (record: unknown, label: string) => {
     const values = requireRecord(requireRecord(record, label).indices, `${label}.indices`);
     return Object.fromEntries(INDICES.map(name => [name, measured(values[name], `${label}.indices.${name}`)])) as Record<typeof INDICES[number], number>;

@@ -4,7 +4,8 @@ export interface CameraPose { schema: typeof CAMERA_POSE_SCHEMA; scene: string; 
 
 function invalidPose(): never { throw new Error('Invalid “pose” in this view link.'); }
 
-/** Share links admit bounded proper rotations, preserving their historical diagnostics. */
+/** The default proper policy admits bounded share-link rotations with historical diagnostics.
+ * The finite policy admits live-restore matrices before renderer projects them to a rotation. */
 export function parseCameraPoseMatrix(value: unknown, { rotation = 'proper' }: { rotation?: 'proper' | 'finite' } = {}): number[] {
   const fail: () => never = rotation === 'proper' ? invalidPose : (): never => { throw new TypeError('Camera camera scene matrix is invalid.'); };
   if (typeof value !== 'string' || rotation === 'proper' && value.length > 1024) fail();

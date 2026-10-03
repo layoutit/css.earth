@@ -1,6 +1,4 @@
-import { requireControls, type PreparedTitle, type Fact } from '@cssearth/objects';
-
-import { preparedPanelReaders } from '@cssearth/objects';
+import { requireControls, preparedPanelReaders, type PreparedTitle, type Fact } from '@cssearth/objects';
 const { object, text, number, optionalText, optionalBoolean, array } = preparedPanelReaders;
 import type { Props, Dataset, DatasetControl, DatasetReaderText } from './object-shell-types.js';
 
