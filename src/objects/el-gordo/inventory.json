@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "el-gordo-dataset-optical.webp",
+      "bytes": 14268,
+      "sha256": "1f13935fa15825fba69948314df7e6e6759acb70c7e39757072d4993de901a42"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 3250,
+      "sha256": "c1f45c4cad64ceb2a3e109c6753524f5030b8e8c447cabe64d56c242d61c54eb"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 470,
+      "sha256": "36d70944640fa4adee71d2cc252b591efe464988f22eb98758c166c21a437792"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 560,
+      "sha256": "2bcc4c8b1453f61587554eda48712731dffbedcc9dcca646584bd9d7d90ad152"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 4614,
+      "sha256": "06a07ea99528f35dc981fa9c910d16fcadd2d6ac696d2d9544e074ad6600af65"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 3881,
+      "sha256": "8fb08b7e17cc57709a1eb8bb20969267bd4915444c76420093abc38fdba8f4e1"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 3343,
+      "sha256": "c20c301432002704244308c1bfd88da40517020638df1fc6d60558cb4f97ce98"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 649,
+      "sha256": "a7a91fd12c7fb1c1d97d4b3d5d9370b2bf2d4a699a09372025a2244d67543afd"
+    }
+  ]
+}

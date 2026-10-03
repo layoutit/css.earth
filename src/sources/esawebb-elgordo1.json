@@ -1,0 +1,52 @@
+{
+  "id": "esawebb-elgordo1",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Webb spotlights gravitational arcs in 'El Gordo' galaxy cluster (NIRCam image)",
+  "identifiers": [
+    {
+      "type": "ESA/Webb image",
+      "value": "elgordo1"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esawebb.org/images/elgordo1/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esawebb.org/archives/images/large/elgordo1.jpg",
+      "label": "JPEG, 4422 x 4421 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esawebb.org/images/elgordo1/",
+      "checkedOn": "2026-10-02",
+      "locator": "4422 x 4421 px; Webb NIRCam, six filters from 1.15 to 4.4 µm, the shortest wavelengths blue and the longest red. The file's embedded sky tags, used as they are: 0.03001 arcsec per pixel, north 5.2° right of vertical, the frame's centre at 15.7306709°, -49.2603915°. Not measured against Gaia here; the same publishers' tags were within 0.4 arcsec on four cluster pictures and 1.5 arcsec off on one deep field."
+    }
+  ],
+  "publisher": "ESA/Webb",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, J. Diego (Instituto de Física de Cantabria), B. Frye (University of Arizona), P. Kamieneski (Arizona State University), T. Carleton (Arizona State University), R. Windhorst (Arizona State University), A. Pagan (STScI), J. Summers (Arizona State University), J. D’Silva (University of Western Australia), A. Koekemoer (STScI), A. Robotham (University of Western Australia)",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/images/elgordo1/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/copyright/"
+    }
+  ]
+}

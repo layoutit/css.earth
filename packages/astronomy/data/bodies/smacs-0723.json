@@ -1,0 +1,28 @@
+{
+  "id": "smacs-0723",
+  "classification": "galaxy-cluster",
+  "order": 5451,
+  "physical": {
+    "name": "SMACS 0723",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of SMACS 0723 is recorded here: its package frames it at 517,162 pc (object.json worldFrame.bodyRadiusM), half the short side of its picture at its distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 110.8054167,
+    "declinationDegrees": -73.45694444,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 1567937065.7376704,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 117218.9,
+    "sources": {
+      "position": "NASA/IPAC Extragalactic Database (NED), SMACS J0723.3-7327: position from 2024ApJ...964..146F, redshift from 2025A&A...699A.105A (https://ned.ipac.caltech.edu/byname?objname=SMACS%20J0723.3-7327); NED preferred values of SMACS J0723.3-7327: RA 110.8054167°, Dec -73.45694444° (2024ApJ...964..146F); redshift 0.391 ± 0.0007 (2025A&A...699A.105A)",
+      "distance": "Comoving distance of the redshift z = 0.391 (NED, 2025A&A...699A.105A) in the Planck 2018 cosmology: 1567937065.7376704 pc, from Astropy 8.0.1 Planck18.comoving_distance (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift (packages/bake/cli/prepare-catalogue-points.mts).",
+      "properMotion": "Zero: the object is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the redshift z = 0.391: the redshift written as a velocity, not a motion through space. NASA/IPAC Extragalactic Database (NED), SMACS J0723.3-7327: position from 2024ApJ...964..146F, redshift from 2025A&A...699A.105A (https://ned.ipac.caltech.edu/byname?objname=SMACS%20J0723.3-7327)."
+    }
+  }
+}

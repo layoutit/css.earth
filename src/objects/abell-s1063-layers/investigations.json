@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "abell-s1063-layers",
+  "entries": [
+    {
+      "id": "heic1615a",
+      "subject": "ESA/Hubble heic1615a",
+      "status": "included",
+      "finding": "Hubble image of Abell S1063: Hubble ACS and WFC3, from 435 nm to 1.6 µm, the shortest wavelengths blue and the longest red; 2243 × 2511 px over 2.07 arcmin, CC BY 4.0. The file's embedded sky tags, used as they are: 0.05549 arcsec per pixel, north 7.3° right of vertical, the frame's centre at 342.185158802°, -44.5300561316°. Not measured against Gaia here; the same publishers' tags were within 0.4 arcsec on four cluster pictures and 1.5 arcsec off on one deep field.",
+      "evidence": [
+        "https://esahubble.org/images/heic1615a/",
+        "https://esahubble.org/copyright/"
+      ]
+    }
+  ]
+}

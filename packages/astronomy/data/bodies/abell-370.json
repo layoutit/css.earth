@@ -1,0 +1,28 @@
+{
+  "id": "abell-370",
+  "classification": "galaxy-cluster",
+  "order": 5452,
+  "physical": {
+    "name": "Abell 370",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Abell 370 is recorded here: its package frames it at 457,515 pc (object.json worldFrame.bodyRadiusM), half the short side of its picture at its distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 39.97136,
+    "declinationDegrees": -1.58222,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 1510644641.4313226,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 112452.2,
+    "sources": {
+      "position": "NASA/IPAC Extragalactic Database (NED), Abell 0370: position from 2012ApJS..199...34W, redshift from 2016MNRAS.461..248S (https://ned.ipac.caltech.edu/byname?objname=Abell%200370); NED preferred values of Abell 0370: RA 39.97136°, Dec -1.58222° (2012ApJS..199...34W); redshift 0.3751 ± 0.0009 (2016MNRAS.461..248S)",
+      "distance": "Comoving distance of the redshift z = 0.3751 (NED, 2016MNRAS.461..248S) in the Planck 2018 cosmology: 1510644641.4313226 pc, from Astropy 8.0.1 Planck18.comoving_distance (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift (packages/bake/cli/prepare-catalogue-points.mts).",
+      "properMotion": "Zero: the object is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the redshift z = 0.3751: the redshift written as a velocity, not a motion through space. NASA/IPAC Extragalactic Database (NED), Abell 0370: position from 2012ApJS..199...34W, redshift from 2016MNRAS.461..248S (https://ned.ipac.caltech.edu/byname?objname=Abell%200370)."
+    }
+  }
+}

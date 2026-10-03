@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "el-gordo-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      4422,
+      4421
+    ],
+    "originalDimensions": [
+      4422,
+      4421
+    ],
+    "publisherUrl": "https://esawebb.org/images/elgordo1/",
+    "downloadUrl": "https://cdn.esawebb.org/archives/images/large/elgordo1.jpg",
+    "credit": "NASA, ESA, CSA, J. Diego (Instituto de Física de Cantabria), B. Frye (University of Arizona), P. Kamieneski (Arizona State University), T. Carleton (Arizona State University), R. Windhorst (Arizona State University), A. Pagan (STScI), J. Summers (Arizona State University), J. D’Silva (University of Western Australia), A. Koekemoer (STScI), A. Robotham (University of Western Australia)",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 15.7306709,
+    "centerDecDeg": -49.2603915,
+    "fieldOfViewDeg": [
+      0.03686028,
+      0.03685194
+    ],
+    "northClockwiseDeg": 5.2
+  },
+  "target": {
+    "centerRaDeg": 15.71875,
+    "centerDecDeg": -49.24944444,
+    "distancePc": 3060018921.6384254
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.01343,
+    "lineOfNodesPaDeg": 234.593,
+    "thicknessKpc": 0.984,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 964.4,
+    "supportTaperFraction": 0.7,
+    "depthScales": [
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

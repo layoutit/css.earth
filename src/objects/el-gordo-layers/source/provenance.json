@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Webb spotlights gravitational arcs in 'El Gordo' galaxy cluster (NIRCam image)",
+  "publisher": "ESA/Webb",
+  "sourceId": "elgordo1",
+  "sourcePage": "https://esawebb.org/images/elgordo1/",
+  "download": "https://cdn.esawebb.org/archives/images/large/elgordo1.jpg",
+  "credit": "NASA, ESA, CSA, J. Diego (Instituto de Física de Cantabria), B. Frye (University of Arizona), P. Kamieneski (Arizona State University), T. Carleton (Arizona State University), R. Windhorst (Arizona State University), A. Pagan (STScI), J. Summers (Arizona State University), J. D’Silva (University of Western Australia), A. Koekemoer (STScI), A. Robotham (University of Western Australia)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      4422,
+      4421
+    ],
+    "bands": [
+      "Webb",
+      "NIRCam",
+      "F115W",
+      "F150W",
+      "F200W",
+      "F277W",
+      "F356W",
+      "F444W"
+    ],
+    "fieldOfViewDeg": [
+      0.03686028,
+      0.03685194
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      4422,
+      4421
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.01343,
+    "lineOfNodesPaDeg": 234.593,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 48.4 arcsec from the object's position, which is the whole of the recipe's inclination. Not a measured orientation of the object."
+  },
+  "registration": {
+    "method": "The file's embedded sky tags, used as they are: 0.03001 arcsec per pixel, north 5.2° right of vertical, the frame's centre at 15.7306709°, -49.2603915°. Not measured against Gaia here; the same publishers' tags were within 0.4 arcsec on four cluster pictures and 1.5 arcsec off on one deep field.",
+    "pixelArcsec": 0.03001,
+    "northClockwiseDeg": 5.2
+  },
+  "displayModel": "The picture lies on one flat plane facing the Sun at the object's comoving distance. Nothing in the picture has depth: seen from the side it is a line.",
+  "coverage": "The published frame inside a circle: the picture fades out between 70% and 98% of half its short side, so its corners are not drawn and no straight edge shows. The arcs are galaxies far behind the cluster; all stand on the cluster's plane here.",
+  "acquisition": {
+    "url": "https://cdn.esawebb.org/archives/images/large/elgordo1.jpg",
+    "dimensions": [
+      4422,
+      4421
+    ],
+    "operation": "Download the publisher's JPEG; no crop or resample."
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "einstein-cross",
+  "displayName": "Einstein Cross",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance (comoving)",
+        "value": "4,826 Mpc, 15.7 billion light years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "redshift",
+        "label": "Redshift",
+        "value": "1.695",
+        "source": {
+          "catalogueId": "ned-einstein-cross",
+          "url": "https://ned.ipac.caltech.edu/byname?objname=Einstein%20Cross",
+          "label": "NASA/IPAC Extragalactic Database (NED), Einstein Cross: position from 1994AJ....107..461B, redshift from 2017A&A...600A..79A",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "light-travel",
+        "label": "Light travel time",
+        "value": "9.96 billion years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 340.1261°, Dec 3.3586°",
+        "source": {
+          "catalogueId": "ned-einstein-cross",
+          "url": "https://ned.ipac.caltech.edu/byname?objname=Einstein%20Cross",
+          "label": "NASA/IPAC Extragalactic Database (NED), Einstein Cross: position from 1994AJ....107..461B, redshift from 2017A&A...600A..79A",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "24.6 arcsec, 575.2 kpc comoving at its distance",
+        "source": {
+          "catalogueId": "esahubble-potw1204a",
+          "url": "https://esahubble.org/images/potw1204a/",
+          "label": "ESA/Hubble potw1204a: ESA/Hubble & NASA",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Hubble · visible",
+        "thumbnail": "einstein-cross-dataset-optical.webp",
+        "volume": {
+          "objectId": "einstein-cross-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "einstein-cross-layers-optical",
+          "path": "../../einstein-cross-layers/source/manifest.json",
+          "url": "https://esahubble.org/images/potw1204a/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+      "href": "https://arxiv.org/abs/1807.06209"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "NASA/IPAC Extragalactic Database (NED), Einstein Cross: position from 1994AJ....107..461B, redshift from 2017A&A...600A..79A",
+      "href": "https://ned.ipac.caltech.edu/byname?objname=Einstein%20Cross"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Hubble potw1204a: ESA/Hubble & NASA",
+      "href": "https://esahubble.org/images/potw1204a/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ned.ipac.caltech.edu/byname?objname=Einstein%20Cross",
+      "credit": "NASA/IPAC Extragalactic Database (NED), Einstein Cross: position from 1994AJ....107..461B, redshift from 2017A&A...600A..79A"
+    }
+  }
+}

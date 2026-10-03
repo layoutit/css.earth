@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "el-gordo",
+  "card": {
+    "text": "The most massive cluster known from its time, when the universe was about 6 billion years old.",
+    "sources": [
+      {
+        "catalogueId": "esawebb-elgordo1",
+        "url": "https://esawebb.org/images/elgordo1/",
+        "label": "ESA/Webb elgordo1: NASA, ESA, CSA, J. Diego (Instituto de Física de Cantabria), B. Frye (University of Arizona), P. Kamieneski (Arizona State University), T. Carleton (Arizona State University), R. Windhorst (Arizona State University), A. Pagan (STScI), J. Summers (Arizona State University), J. D’Silva (University of Western Australia), A. Koekemoer (STScI), A. Robotham (University of Western Australia)",
+        "checked": "2026-10-02",
+        "locator": "caption: El Gordo is a cluster of hundreds of galaxies that existed when the universe was 6.2 billion years old; it is the most massive cluster known to exist at that time"
+      },
+      {
+        "catalogueId": "ned-el-gordo",
+        "url": "https://ned.ipac.caltech.edu/byname?objname=ACT-CL%20J0102-4915",
+        "label": "NASA/IPAC Extragalactic Database (NED), ACT-CL J0102-4915: position from 2015MNRAS.450.3675S, redshift from 2018ApJ...855...26A",
+        "checked": "2026-10-02",
+        "locator": "NED preferred values of ACT-CL J0102-4915: RA 15.71875°, Dec -49.24944444° (2015MNRAS.450.3675S); redshift 0.87008 ± 0.0001 (2018ApJ...855...26A)"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "z = 0.87008: comoving distance 3,060 Mpc, lookback time 7.37 Gyr, age 6417 Myr"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Webb's near-infrared view: the pale galaxies are the cluster, and the red arcs are far galaxies its gravity magnifies. The picture is flat and has no depth.",
+    "sources": [
+      {
+        "catalogueId": "esawebb-elgordo1",
+        "url": "https://esawebb.org/images/elgordo1/",
+        "label": "ESA/Webb elgordo1: NASA, ESA, CSA, J. Diego (Instituto de Física de Cantabria), B. Frye (University of Arizona), P. Kamieneski (Arizona State University), T. Carleton (Arizona State University), R. Windhorst (Arizona State University), A. Pagan (STScI), J. Summers (Arizona State University), J. D’Silva (University of Western Australia), A. Koekemoer (STScI), A. Robotham (University of Western Australia)",
+        "checked": "2026-10-02",
+        "locator": "Webb spotlights gravitational arcs in 'El Gordo' galaxy cluster (NIRCam image); Webb NIRCam, six filters from 1.15 to 4.4 µm, the shortest wavelengths blue and the longest red"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "El Gordo in near infrared",
+      "detail": "4422 × 4421 px",
+      "summary": "Webb's image of the cluster and the far galaxies it magnifies. A flat picture of the sky, with no depth.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-elgordo1",
+          "url": "https://esawebb.org/images/elgordo1/",
+          "label": "ESA/Webb elgordo1: NASA, ESA, CSA, J. Diego (Instituto de Física de Cantabria), B. Frye (University of Arizona), P. Kamieneski (Arizona State University), T. Carleton (Arizona State University), R. Windhorst (Arizona State University), A. Pagan (STScI), J. Summers (Arizona State University), J. D’Silva (University of Western Australia), A. Koekemoer (STScI), A. Robotham (University of Western Australia)",
+          "checked": "2026-10-02",
+          "locator": "Webb spotlights gravitational arcs in 'El Gordo' galaxy cluster (NIRCam image)"
+        }
+      ]
+    }
+  }
+}
