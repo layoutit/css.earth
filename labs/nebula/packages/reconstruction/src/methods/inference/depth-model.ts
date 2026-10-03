@@ -1,26 +1,9 @@
+import { NEBULA_PHYSICAL_EVIDENCE_SCHEMA, type EmissionComponent, NEBULA_DEPTH_MODEL_SCHEMA, type DepthSurface, type DepthRecipe } from '@cssearth/objects';
 import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 import {jointPath,jointRecord} from '../joint/model.ts';
 
-import type { EmissionComponent } from '@cssearth/objects';
 type Pair = [number, number];
 type Triple = [number, number, number];
-export interface DepthSurface {
-  id: string; methodId: string; evidenceIds: string[];
-  support: 'paper-guided' | 'unconstrained';
-  /** A window scopes a hypothesis; it is not a measured nebular boundary. */
-  centerArcsec: Pair; radiusArcsec: Pair; angleDegrees: number;
-  depthArcsec: number; gradient: Pair; curvaturePerArcsec: Triple;
-  thicknessArcsec: number; strength: number; rationale: string;
-}
-export interface DepthRecipe {
-  schema: 'cssearth-nebula-depth-model@1'; id: string;
-  centerIcrsDegrees: Pair;
-  evidence: { path: string };
-  background: DepthSurface; features: DepthSurface[];
-  /** The unobserved normal thickness may shrink with projected feature scale, never grow into rods. */
-  detailThicknessRatio: number; minimumThicknessArcsec: number;
-  interpretation: string;
-}
 const finite = coreIsFiniteNumber;
 const number = (v: unknown, low: number, high: number): v is number => finite(v) && v >= low && v <= high;
 const id = (v: unknown): v is string => typeof v === 'string' && /^[a-z0-9][a-z0-9-]{0,95}$/.test(v);
@@ -40,7 +23,7 @@ function surface(v: unknown): DepthSurface {
     thicknessArcsec: v.thicknessArcsec, strength: v.strength, rationale: v.rationale };
 }
 export function readDepthRecipe(v: unknown, allowedPath: (path: string) => boolean = () => true): DepthRecipe {
-  if (!jointRecord(v) || v.schema !== 'cssearth-nebula-depth-model@1' || !id(v.id) || !jointRecord(v.evidence) ||
+  if (!jointRecord(v) || v.schema !== NEBULA_DEPTH_MODEL_SCHEMA || !id(v.id) || !jointRecord(v.evidence) ||
       !jointPath(v.evidence.path) || !allowedPath(v.evidence.path) ||
       !Array.isArray(v.features) || v.features.length > 64 || !number(v.detailThicknessRatio, .05, 2) || !number(v.minimumThicknessArcsec, .01, 1000) ||
       typeof v.interpretation !== 'string' || !v.interpretation.trim()) throw new TypeError('Invalid nebula depth-model recipe.');
@@ -51,7 +34,7 @@ export function readDepthRecipe(v: unknown, allowedPath: (path: string) => boole
     detailThicknessRatio: v.detailThicknessRatio, minimumThicknessArcsec: v.minimumThicknessArcsec, interpretation: v.interpretation };
 }
 export function verifyDepthEvidence(recipe: DepthRecipe, v: unknown): string[] {
-  if (!jointRecord(v) || v.schema !== 'cssearth-nebula-physical-evidence@1' || v.subjectId !== recipe.id || !Array.isArray(v.sources) || !Array.isArray(v.evidence) || !Array.isArray(v.methods))
+  if (!jointRecord(v) || v.schema !== NEBULA_PHYSICAL_EVIDENCE_SCHEMA || v.subjectId !== recipe.id || !Array.isArray(v.sources) || !Array.isArray(v.evidence) || !Array.isArray(v.methods))
     throw new TypeError('Depth model requires its object-owned physical evidence ledger.');
   const sources = new Set<string>(), evidence = new Map<string, 'observed' | 'published-model' | 'authored'>(), methods = new Set<string>();
   for (const source of v.sources) {

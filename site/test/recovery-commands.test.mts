@@ -7,7 +7,7 @@ import test from 'node:test';
 const root = resolve(import.meta.dirname, '../..');
 
 /** The recovery messages the shell shows a reader must name commands that exist. */
-for (const owner of ['site/object-text.mts', 'site/components/ObjectNavigationMarker.astro']) {
+for (const owner of ['packages/objects/src/prepared-data/object-text.ts', 'site/components/ObjectNavigationMarker.astro']) {
   test(`${owner} tells the reader to run a command that exists`, async () => {
     const named = [...(await readFile(resolve(root, owner), 'utf8')).matchAll(/node ((?:packages|site|\.github)\/[A-Za-z0-9_./-]+\.mts)/g)].map(match => match[1]!);
     assert.ok(named.length > 0, `${owner} names no command, so this guard reads nothing`);

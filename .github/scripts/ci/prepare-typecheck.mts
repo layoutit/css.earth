@@ -1,3 +1,4 @@
+import { readPreparedFeaturePins } from '@cssearth/objects';
 import { execFile, spawn } from 'node:child_process';
 import { access, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -106,9 +107,7 @@ export async function typecheckFeatureAssets(root = projectRoot, ids = SCENE_OBJ
       throw error;
     });
     if (source === undefined) continue;
-    const descriptor = requireRecord(JSON.parse(source));
-    if (descriptor.schema !== 'cssearth-prepared-features@1') throw new TypeError(`Invalid feature-index input: ${id}`);
-    const pins = [descriptor, ...descriptor.selection === undefined ? [] : requireArray(requireRecord(descriptor.selection).banks).map(value => requireRecord(value))];
+    const { pins } = readPreparedFeaturePins(JSON.parse(source), id, 'inventory');
     for (const [index, pin] of pins.entries()) {
       const url = requireString(pin.url), prefix = `/scenes/${id}/`;
       if (!url.startsWith(prefix) || !/^[a-zA-Z0-9._-]+\.json$/u.test(url.slice(prefix.length))) throw new TypeError(`Invalid feature catalogue URL: ${url}`);

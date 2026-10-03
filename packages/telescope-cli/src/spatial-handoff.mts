@@ -1,4 +1,5 @@
 /** Export the existing physical point/volume package. This does not infer depth from a spectral cube. */
+import { OBJECT_SCHEMA, type PreparedCssPointField, type PreparedCssVolume, type PreparedVolumeDatasets } from '@cssearth/objects';
 import { readFile,writeFile,mkdir,mkdtemp,rm,rmdir,rename,realpath } from 'node:fs/promises';
 import { resolve,dirname,relative,isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -7,7 +8,6 @@ import { build } from 'esbuild';
 import { requireRecord,requireString } from '@cssearth/core';
 import { VERSION } from './help.mts';
 import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
-import type { PreparedCssPointField, PreparedCssVolume, PreparedVolumeDatasets } from '@cssearth/objects';
 import type { ProductInput } from '@cssearth/telescope';
 
 export type SpatialKind='points'|'volume'|'volume-dataset-bank';
@@ -19,7 +19,7 @@ const workspaceRoot=WORKSPACE;
 
 async function validateSpatialObject(objectPath:string,expected:SpatialKind|undefined){
   const source=resolve(objectPath),root=dirname(source),bytes=await readFile(source),descriptor=requireRecord(JSON.parse(bytes.toString()));
-  if(descriptor.schema!=='cssearth-object@2'||!['point-field','density-volume','volume-dataset-bank'].includes(String(descriptor.type)))throw new Error('Physical handoff requires an existing point-field, density-volume or volume-dataset-bank object.json; a spectral cube does not establish depth');
+  if(descriptor.schema!==OBJECT_SCHEMA||!['point-field','density-volume','volume-dataset-bank'].includes(String(descriptor.type)))throw new Error('Physical handoff requires an existing point-field, density-volume or volume-dataset-bank object.json; a spectral cube does not establish depth');
   const kind:SpatialKind=descriptor.type==='point-field'?'points':descriptor.type==='density-volume'?'volume':'volume-dataset-bank';
   if(expected&&expected!==kind)throw new Error(`${expected} requires a matching prepared physical object package; a spectral cube does not establish depth`);
   const prepared=requireRecord(descriptor.prepared),properties=requireRecord(descriptor.properties),preparation=requireRecord(properties.preparation);

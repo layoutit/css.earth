@@ -114,3 +114,65 @@ projection stay in renderer. Shell facing-level selection remains in renderer.
 
 Shared prepared schema literals are enforced by the hard `format-schema-ownership` architecture rule.
 Only shared-schema debt has schema/owner exceptions; owner-internal formats need no entry. Exceptions live in `.github/scripts/architecture/format-schema-exceptions.json`; stale entries fail.
+
+Schema identifiers are exported from their format owners, including the browser-safe source-manifest identifier.
+Writers and readers import these constants; the pre-build body-reference check and preserved Python authoring
+keep conformance-tested source-manifest, archived-camera and object-text spellings in the schema exception ledger.
+
+Archived-camera data (including `SpiceCamera`), cited object/prepared-text records and prepared destinations
+are browser-safe contracts in `packages/objects/src/prepared-data/`, exported from `@cssearth/objects`.
+Their node:test suites run in the packages lane. Camera fitting and kernel computation stay with bake/SPICE;
+text budgets and editorial checks stay in site; destination preparation and search projection stay with bake/site.
+
+Bake-only recipe routing identifiers and lab-only molecular catalogue envelopes stay with their owners.
+Preserved Python audit/native protocols retain narrow, conformance-tested schema exceptions; scientific code stays outside objects.
+
+Authored preparation receipts, world-navigation preparation receipts and prepared feature descriptors live in
+`packages/objects/src/prepared-data/`, exported through the browser-safe objects main entry.
+Historical source-list and index/pre-build admission policies retain their accepted records and diagnostics.
+Frame/source auditing, camera solving, geometry, file I/O and inventory lookup stay with bake/site/tooling.
+Contract tests use node:test in the packages CI lane.
+
+WISE tile pins, authored display/synchronous rotation records and cited published limb coefficients have
+browser-safe schema identifiers, data types and pure validation in `packages/objects/src/prepared-data/`.
+Contract tests use node:test in the packages lane. WISE photometry, FITS/mosaicking, orbit/rotation evaluation,
+limb intensity, model-grid interpolation and file I/O remain with their scientific owners. The preserved
+Python display-orientation writer has a literal conformance test and a specific schema-ledger exception.
+
+Disc-integrated and stellar photometric color records, uniform-disc star measurements, and measured-spectrum
+measurement documents live in `src/prepared-data/`, exported through the browser-safe main entry.
+Their parsers preserve separate compiler/public-photometry admission and mode-dependent absent-wavelength policies.
+CIE/Planck evaluation, spectrum file loading, binning, sphere generation and chart rendering remain in bake/telescope-cli.
+Contract tests use node:test in the packages lane; scientific and file-output conformance stays with the consumers.
+
+Authored density placement and observed stellar catalogue wire types, schema identifiers and pure parsers live in
+`src/volume/`, exported by `@cssearth/objects`. Envelope admission is separate from stellar-row parsing to preserve
+caller validation order. Transforms, fitting, projection, display selection and file I/O stay with bake/reconstruction/lab.
+Contract tests use node:test in the packages lane.
+
+Saved CSS camera snapshots (`CameraPose`), their schema identifier and pure matrix admission live in
+`src/prepared-data/camera-pose.ts`, exported through the browser-safe main entry. Share links retain
+bounded proper-rotation validation; live restore retains finite-matrix admission before renderer projects
+it to a rotation. DOMMatrix, camera controls and URL/base64 transport stay in renderer. Contract tests
+use node:test in the packages lane.
+
+Authored object-content recipes, prepared panel content and facility emblem-library records have browser-safe
+contracts in `src/prepared-data/`, exported through `@cssearth/objects`. Source envelope admission, authored dataset
+metadata and panel field parsing preserve caller diagnostics. Asset production, editorial checks, Astro adapters,
+source binding resolution and image byte inspection stay in bake/site. Contract tests use node:test in the packages lane.
+
+Astronomy published-orbit/epoch, solar-system preparation, investigation-ledger and acquisition-plan schema identifiers live in `src/prepared-data/`; acquisition operations and investigation entry types are shared, while scientific evaluation, survey expansion and acquisition validation/execution stay with their owners.
+Authored CSS presentation profiles and their pure parser belong to objects; compilation stays with bake.
+CSS geometry profile identifiers belong to objects; scene validation and generation stay with bake.
+Navigation marker recipe identifiers and wire types belong to objects; image/source validation and preparation stay with bake.
+Paged ellipsoid recipe identifiers belong to objects; camera derivation and asset preparation stay with bake/site.
+Chart asset recipe identifiers belong to objects; nested chart validation, rendering and file I/O stay with their consumers.
+Volume dataset manifest identifiers live in `src/volume/volume-dataset-manifest.ts`; output selection and byte checks stay with bake/lab.
+Compact density delivery identifiers live in `src/volume/compact-density-delivery.ts`; replay and source-owner admission stay with bake/lab.
+Nebula depth-model identifiers and `DepthRecipe`/`DepthSurface` wire types live in `src/volume/nebula-depth-model.ts`; joint-path admission, evidence policy and sampling stay with reconstruction/lab.
+Gaia nebula-field identifiers live in `src/volume/gaia-nebula-field.ts`; existing reader subsets, projection and selection stay with bake/telescope-cli.
+Nebula delivery identifiers live in `src/volume/nebula-delivery.ts`; existing envelope admission and compilation stay with bake/telescope-cli/lab.
+Circumstellar reconstruction identifiers live in `src/volume/circumstellar-reconstruction.ts`; solver-derived opacity types, reconstruction and file checks stay with lab/telescope-cli.
+UVFITS request/response types and pure validation live in `src/prepared-data/pyuvdata-uvfits.ts`; process and toolchain handling stay in telescope.
+Volume source-manifest identifiers live in `src/prepared-data/volume-source-manifest.ts`; source parsing and restoration stay with callers.
+Volume presentation-source identifiers and pure preview/dataset/presentation records live in `src/prepared-data/volume-presentation-source.ts`; preview creation and dataset text validation stay with callers.

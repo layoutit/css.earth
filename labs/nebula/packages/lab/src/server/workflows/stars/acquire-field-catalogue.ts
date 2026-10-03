@@ -1,4 +1,5 @@
 import { isRecord as coreIsRecord } from '@cssearth/core';
+import { OBSERVED_STELLAR_CATALOGUE_SCHEMA } from '@cssearth/objects';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 
@@ -32,7 +33,7 @@ export async function acquireFieldCatalogue(root: string, evidencePath: string) 
     sourceText.push(bytes.toString());
   }
   const prepared = mergeFieldCatalogue(sourceText[0]!, sourceText[1]!);
-  const result = { schema: 'cssearth-observed-stellar-catalogue@1', id: catalogueId, frame: 'ICRS', coordinateEpochJulianYear: 2000, stars: prepared.stars };
+  const result = { schema: OBSERVED_STELLAR_CATALOGUE_SCHEMA, id: catalogueId, frame: 'ICRS', coordinateEpochJulianYear: 2000, stars: prepared.stars };
   const bytes = JSON.stringify(result, null, 2) + '\n';
   // The checked-in catalogue is the record: a replay that writes different rows stops instead of replacing it.
   const existing = await readFile(output, 'utf8').catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });

@@ -1,3 +1,5 @@
+import { PREPARED_OBJECT_SCHEMA } from '../descriptor.js';
+import { OBJECT_PAGE_SCHEMA } from '../prepared-data/object-page-schema.js';
 // A scene body's transports, built from its restored `prepared/runtime.json` when read. The descriptor names them
 // `prepared/object.json` and `prepared/page.json`, the paths the site serves (`/objects/<id>/object.json`), but no copy is
 // written to disk: rewriting 1.18 GB of runtimes into near-identical files cost every dev start and deploy about 40 s.
@@ -88,7 +90,7 @@ export async function preparedObjectText(objectDirectory: string, descriptor: Sc
 /** The `cssearth-prepared-object@1` transport that carries `data`, the JSON text of a runtime. */
 export function preparedObjectTransport(descriptor: SceneDescriptor, data: string) {
   if (!descriptor.prepared) throw new TypeError(`${descriptor.id}: no prepared reference.`);
-  return `{"schema":"cssearth-prepared-object@1","id":${JSON.stringify(descriptor.id)},"type":${JSON.stringify(descriptor.type)},` +
+  return `{"schema":"${PREPARED_OBJECT_SCHEMA}","id":${JSON.stringify(descriptor.id)},"type":${JSON.stringify(descriptor.type)},` +
     `"format":${JSON.stringify(descriptor.prepared.format)},"data":${data}}`;
 }
 
@@ -98,5 +100,5 @@ export async function preparedPageData(objectDirectory: string, id: string) {
   const { assets } = await readJsonHead(resolve(objectDirectory, 'prepared/runtime.json'), ['assets']);
   const controls: unknown = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/controls.json'), 'utf8'));
   if (!isRecord(assets)) throw new TypeError(`${id}: prepared/runtime.json has no asset table.`);
-  return { schema: 'cssearth-object-page@1' as const, id, assets, controls: requireRecord(controls, `${id} prepared controls`) };
+  return { schema: OBJECT_PAGE_SCHEMA, id, assets, controls: requireRecord(controls, `${id} prepared controls`) };
 }

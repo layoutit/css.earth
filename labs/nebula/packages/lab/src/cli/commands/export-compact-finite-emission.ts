@@ -1,5 +1,3 @@
-import { COMPACT_FINITE_EMISSION_SCHEMA, COMPACT_FINITE_EMISSION_METHOD, validateDatasetToneCurve } from '@cssearth/objects';
-import { isNonemptyText, isRecord } from '@cssearth/core';
 /**
  * Export the minimal checked-in surface that regenerates an accepted finite-emission dataset bank.
  *
@@ -11,6 +9,8 @@ import { isNonemptyText, isRecord } from '@cssearth/core';
  * Nothing is fitted, acquired or re-registered here. This command reads an accepted promotion recipe and
  * its saved reconstructions and writes their replay inputs; the application preparation owns the replay.
  */
+import { COMPACT_FINITE_EMISSION_SCHEMA, COMPACT_FINITE_EMISSION_METHOD, validateDatasetToneCurve, COMPACT_DENSITY_DELIVERY_SCHEMA } from '@cssearth/objects';
+import { isNonemptyText, isRecord } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
@@ -168,7 +168,7 @@ const inputs = {
 };
 const inputsPin = await put(`${compact}/inputs.json`, Buffer.from(JSON.stringify(inputs, null, 2) + '\n'));
 await writeFile(resolve(root, objectDirectory, 'source/compact-delivery.json'), JSON.stringify({
-  schema: 'cssearth-compact-density-delivery@1', id: recipe.id,
+  schema: COMPACT_DENSITY_DELIVERY_SCHEMA, id: recipe.id,
   delivery: { directory: objectDirectory, method: 'finite-emission', compactInputs: { path: inputsPin.path } },
   researchRecipe: { path: recipeArgument },
 }, null, 2) + '\n');

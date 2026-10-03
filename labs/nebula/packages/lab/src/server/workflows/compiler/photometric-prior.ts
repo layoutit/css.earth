@@ -1,4 +1,4 @@
-import { PHOTOMETRIC_ENVELOPE_SCHEMA, readPhotometricMgeRecipe as readScientificRecipe, type PhotometricMgeRecipe, type EnvelopeColors, type EmissionFieldModel } from '@cssearth/objects';
+import { NEBULA_PHYSICAL_EVIDENCE_SCHEMA, PHOTOMETRIC_ENVELOPE_SCHEMA, readPhotometricMgeRecipe as readScientificRecipe, type PhotometricMgeRecipe, type EnvelopeColors, type EmissionFieldModel } from '@cssearth/objects';
 import { readFile, realpath } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { jointPath, jointRecord } from '../../../features/joint-fit/model.ts';
@@ -15,7 +15,7 @@ export function readPhotometricMgeRecipe(value: unknown): PhotometricMgeRecipe {
 /** Live compilation and saved-result restoration enforce the same scientific source identity. */
 export function verifyPhotometricEvidence(recipe: PhotometricMgeRecipe, evidence: unknown, subjectId: string): void {
   if (recipe.id !== subjectId) throw new TypeError('Photometric model belongs to another subject.');
-  if (!jointRecord(evidence) || evidence.schema !== 'cssearth-nebula-physical-evidence@1' || evidence.subjectId !== subjectId ||
+  if (!jointRecord(evidence) || evidence.schema !== NEBULA_PHYSICAL_EVIDENCE_SCHEMA || evidence.subjectId !== subjectId ||
       !Array.isArray(evidence.sources) || !evidence.sources.some(row => jointRecord(row) && jointRecord(row.download) &&
         row.download.url === recipe.source.url))
     throw new TypeError('Photometric model lacks its source-owned evidence ledger.');

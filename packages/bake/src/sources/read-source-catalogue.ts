@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseSourceCatalog } from '@cssearth/objects/sources';
+import { SOURCE_CATALOG_SCHEMA, parseSourceCatalog } from '@cssearth/objects/sources';
 
 async function sourceRecordPaths(root: string): Promise<string[]> {
   const entries = await readdir(resolve(root, 'src/sources'), { withFileTypes: true });
@@ -15,7 +15,7 @@ export async function readSourceCatalog(root: string, input = (path: string) => 
   const records: unknown[] = [];
   // The input callback also records byte pins; keep their insertion order stable.
   for (const path of paths) records.push(JSON.parse((await input(path)).toString('utf8')));
-  const catalog = parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records });
+  const catalog = parseSourceCatalog({ schema: SOURCE_CATALOG_SCHEMA, records });
   for (const [index, record] of catalog.records.entries()) {
     if (paths[index] !== `src/sources/${record.id}.json`) throw new TypeError(`Source identity differs from filename: ${paths[index]}.`);
   }

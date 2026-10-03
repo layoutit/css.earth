@@ -1,9 +1,10 @@
+import { parsePresentationProfile } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { prepareCssPresentation, parsePresentationProfile } from './css-presentation.ts';
+import { prepareCssPresentation } from './css-presentation.ts';
 import { presentationHostAdapters } from '../objects/host-adapters/index.ts';
 import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
 import type { PresentationInputs } from './types.ts';

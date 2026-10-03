@@ -1,19 +1,13 @@
 // Shared object-content preparation. Source JSON owns facts, labels, recipes,
 // and provenance; this module owns the derived shell payload.
+
+import { PREPARED_CONTENT_SCHEMA, validateObjectContentEnvelope, type ObjectContentSource, type PreparedObjectContent, type PreparedObjectContentDocument, type GalleryRecipe } from '@cssearth/objects';
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { PREPARED_SHELL_TITLES } from "../../prepared-shell-titles.mjs";
 import { datasetBillboardColors, prepareDatasetLabels, prepareDatasets } from "@cssearth/bake/objects/content";
 import { parseFactsheet, verifyFactsheetSources } from '@cssearth/bake/sources';
-import type {
-  ContentPreparationContext,
-  ObjectContentSource,
-  PreparedObjectContent,
-  PreparedObjectContentAssets,
-  PreparedObjectContentDocument,
-  PreparedRasterAssets,
-  GalleryRecipe,
-} from "@cssearth/bake/objects/content";
+import type { ContentPreparationContext, PreparedObjectContentAssets, PreparedRasterAssets } from '@cssearth/bake/objects/content';
 
 const titleMap: Record<string, { label: string; src: string; width: number; height: number }> = {
   facts: PREPARED_SHELL_TITLES.facts,
@@ -56,9 +50,7 @@ export function prepareObjectContent(
   source: ObjectContentSource,
   assets: PreparedRasterAssets = {},
 ): PreparedObjectContent {
-  if (source.schema !== "cssearth-object-content@2" || source.version !== 1) {
-    throw new Error(`${source.id}: unsupported object content schema`);
-  }
+  validateObjectContentEnvelope(source);
   // The page sets the display name in the shared title font; no object carries its own title artwork.
   const title = { label: source.displayName };
   const { facts, moreFacts } = parseFactsheet(source.panel);
@@ -137,7 +129,7 @@ export async function prepareObjectContentAssets({
   const datasets = await deriveDatasetBillboardColors(prepared.datasets, publicDirectory);
   const preparedWithAssets = { ...prepared, datasets };
   const content: PreparedObjectContentDocument = {
-    schema: "cssearth-prepared-content@2",
+    schema: PREPARED_CONTENT_SCHEMA,
     objectId: preparedWithAssets.objectId,
     title: preparedWithAssets.title,
     facts: preparedWithAssets.facts,

@@ -1,7 +1,7 @@
 import { cross3 as cross, dotN as dot } from '@cssearth/core';
 /** Camera providers. Each turns what an archive or a kernel set gives into the one ObservationCamera contract. */
 import type { ObservationCamera } from './contract.ts';
-import { parseArchivedCamera } from '../../../raster/index.ts';
+import { parseMatrixArchivedCamera } from '@cssearth/objects';
 import { fitCamera, project } from '../missions/osiris-geo.ts';
 
 const unit = (a: readonly number[]) => { const n = Math.hypot(...a); return a.map(v => v / n); };
@@ -13,12 +13,7 @@ export interface PixelDistortion { projectPoint(pointKm: readonly number[]): num
 
 /** A camera given as a 3 × 4 projection and its ray matrix in kilometres: an archived closure, or one derived from SPICE kernels. */
 export function matrixCamera(kind: 'archived-closure' | 'kernels', value: unknown, distortion?: PixelDistortion): ObservationCamera {
-  const camera = parseArchivedCamera(value);
-  if (camera.schema !== 'cssearth-archived-camera@1' ||
-      camera.matrix?.length !== 3 || camera.matrix.some(r => r.length !== 4 || !r.every(Number.isFinite)) ||
-      camera.rayMatrix?.length !== 3 || camera.rayMatrix.some(r => r.length !== 3 || !r.every(Number.isFinite)) ||
-      camera.positionKm?.length !== 3 || !camera.positionKm.every(Number.isFinite) ||
-      camera.sunDirection?.length !== 3 || Math.abs(Math.hypot(...camera.sunDirection) - 1) > 1e-9) throw new Error('Invalid archived source camera.');
+  const camera = parseMatrixArchivedCamera(value);
   const { matrix, rayMatrix, positionKm, sunDirection } = camera;
   return { kind, positionKm, positionMeters: positionKm.map(n => n * 1000), sunDirection, pinhole: !distortion, report: camera,
     project: point => { const km = point.map(n => n / 1000); return distortion ? distortion.projectPoint(km) : project(matrix, km); },

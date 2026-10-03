@@ -4,6 +4,8 @@ import { requireRecord as record, requireFiniteNumber as finite } from '@csseart
 import { type Vector3 } from '@cssearth/objects';
 import { sourceBytes } from '../volume/node/index.ts';
 
+export const SURFACE_GRID_SCHEMA = 'cssearth-surface-grid@1';
+
 export interface ShellMesh {
   positionsUnits: Vector3[];
   radialNormals: Vector3[];
@@ -114,7 +116,7 @@ export function subdivideRadialMesh(mesh: ShellMesh, segmentsPerEdge: number): S
 /** Connects adjacent published samples; null samples leave holes, including at the grid boundary. */
 export function parseGriddedShellMesh(value: unknown): ShellMesh {
   const source = record(value, 'gridded surface'), rows = source.positionsUnits;
-  if (source.schema !== 'cssearth-surface-grid@1' || !Array.isArray(rows) || rows.length < 2 ||
+  if (source.schema !== SURFACE_GRID_SCHEMA || !Array.isArray(rows) || rows.length < 2 ||
       !Array.isArray(rows[0]) || rows[0].length < 2 || rows.length * rows[0].length > 12_000) {
     throw new TypeError('Gridded surface needs a bounded rectangular sample array.');
   }

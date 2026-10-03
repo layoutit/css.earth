@@ -1,4 +1,4 @@
-import { type CameraPlan, type DirectionalSunPlan, type PreparedWorldCameraFrame, type WorldCameraPose } from '@cssearth/objects';
+import { type CameraPose, type CameraPlan, type DirectionalSunPlan, type PreparedWorldCameraFrame, type WorldCameraPose } from '@cssearth/objects';
 
 import { cameraMotionSignalFor } from './camera-motion-signal.js';
 import type { WorldFramePresenter } from './world-frame-presenter.js';
@@ -8,7 +8,7 @@ export { createObjectInteractionControls } from './object-interaction-controls.j
 export type { ObjectInteractionOptions, InteractionServices } from './object-interaction-controls.js';
 import { errorMessage } from './types.js';
 import type { RuntimePolicy } from './runtime-policy.js';
-import type { CameraDelta, CameraAngles, CameraPose, Vector3 } from './types.js';
+import type { CameraDelta, CameraAngles, Vector3 } from './types.js';
 
 import type { PerspectiveDolly, PerspectivePublication, PerspectiveWorldContext } from './perspective-dolly.js';
 import type { PhysicalSharedCamera } from './view-url.js';

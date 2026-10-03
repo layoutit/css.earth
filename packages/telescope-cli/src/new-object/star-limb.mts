@@ -9,6 +9,7 @@
  *    (interferometric-limb.mts); the record is written beside the star and read as in 1.
  * A star that already has a color dataset gains the law on it; a placeholder that has none gains the color dataset with it
  * (color.mts, dataset.mts). A star no source covers is reported and left unchanged. */
+import { PUBLISHED_LIMB_DARKENING_SCHEMA, INVESTIGATION_LEDGER_SCHEMA } from '@cssearth/objects';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { parseCieTable } from '@cssearth/bake/objects/color';
@@ -35,7 +36,7 @@ async function publishedLaw(root: string, id: string): Promise<LimbChoice | null
   const names = (await readdir(directory).catch(() => [] as string[])).filter(name => name.endsWith('-limb-darkening.json'));
   for (const name of names) {
     const record = JSON.parse(await readFile(resolve(directory, name), 'utf8')) as { schema?: string; law?: string; source?: string; band?: string; basis?: string; alpha?: { value: number }; u1?: { value: number }; u2?: { value: number }; fit?: { tool: string; input: string; data: string } };
-    if (record.schema !== 'cssearth-published-limb-darkening@1') continue;
+    if (record.schema !== PUBLISHED_LIMB_DARKENING_SCHEMA) continue;
     // A fitted law's origin is the origin of the file it was fitted to, as the star's manifest records it.
     const fitted = record.fit && ((JSON.parse(await readFile(resolve(root, 'src/objects', id, 'source/manifest.json'), 'utf8')) as { inputs?: { path: string; origin?: string }[] }).inputs ?? []).find(input => input.path === record.fit!.input)?.origin;
     const path = `photometry/${name}`, url = fitted ?? /https?:\/\/\S+?(?=[),;]|\s|$)/u.exec(record.source ?? '')?.[0] ?? '';
@@ -146,7 +147,7 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
     files.set(`${o}/README.md`, readmeWithLimb(String(files.get(`${o}/README.md`) ?? ''), `**Limb.** The disc is ${limb.sentence}.${gravity ? ` Gravity: ${gravity.sentence}.` : ''}`,
       measured ? '- **Measured limb, other band.** The law was measured or fixed outside the visible band the color is drawn in; the visible limb is not measured.' : `- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and ${gravity?.kind === 'bounded' ? 'a display gravity' : 'gravity'}, not a measurement of this star.`));
     if (gravity && !measurements.surfaceGravityLogg && gravity.kind !== 'bounded') { measurements.surfaceGravityLogg = gravity.logg; measurements.surfaceGravitySource = `${gravity.sentence}${gravity.url ? ` (${gravity.url})` : ''}`; files.set(`${s}/measurements.json`, json(measurements)); }
-    const ledgerPath = `${o}/investigations.json`, ledger = files.has(ledgerPath) ? read(ledgerPath) : { schema: 'cssearth-investigation-ledger@1', objectId: id, entries: [] };
+    const ledgerPath = `${o}/investigations.json`, ledger = files.has(ledgerPath) ? read(ledgerPath) : { schema: INVESTIGATION_LEDGER_SCHEMA, objectId: id, entries: [] };
     ledger.entries = [...ledger.entries.filter((entry: { id: string }) => entry.id !== 'limb-darkening'), { id: 'limb-darkening', subject: 'Limb darkening', status: 'included',
       finding: `The disc is ${limb.sentence}.${gravity ? ` Gravity: ${gravity.sentence}.` : ''}`, evidence: [...new Set([...(limb.inputs ?? []).map(input => String(input.origin)).filter(Boolean), ...(gravity?.url ? [gravity.url] : [])])] }];
     files.set(ledgerPath, json(ledger));

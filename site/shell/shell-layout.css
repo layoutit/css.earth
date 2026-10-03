@@ -319,6 +319,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 }
 
 .object-search-category,
+.object-showcase-action,
 .object-header-link,
 .object-report-issue-link,
 .object-sidebar-collapse,
@@ -363,6 +364,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 }
 
 .object-search-category[aria-pressed="true"],
+.object-showcase-action[aria-pressed="true"],
 .object-toolbar-action[aria-pressed="true"] {
   color: var(--shell-text);
   border-bottom-color: var(--shell-focus);
@@ -370,12 +372,14 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 
 .explorer-shell-header .object-toolbar-action,
 .object-search-category,
+.object-showcase-action,
 .object-sidebar-collapse {
   border: 0;
 }
 
 .explorer-shell-header .object-sidebar-search-card:hover .object-sidebar-search,
 .object-search-category:hover,
+.object-showcase-action:hover,
 .object-report-issue-link:hover,
 .object-sidebar-collapse:hover,
 .object-toolbar-action:hover {
@@ -385,6 +389,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 
 .explorer-shell-header .object-sidebar-search-card:focus-within .object-sidebar-search,
 .object-search-category:focus-visible,
+.object-showcase-action:focus-visible,
 .object-report-issue-link:focus-visible,
 .object-sidebar-collapse:focus-visible,
 .object-toolbar-action:focus-visible {
@@ -394,6 +399,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 
 /* Category filters are filled pills, like the search field. */
 .object-search-category,
+.object-showcase-action,
 .object-header-link {
   box-sizing: border-box;
   height: var(--explorer-category-height);
@@ -403,14 +409,24 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   background: var(--explorer-header-control-background);
   font-size: 14px;
 }
-.object-search-category:hover { background: var(--explorer-header-control-hover); }
+.object-search-category:hover,
+.object-showcase-action:hover { background: var(--explorer-header-control-hover); }
 /* Project links share the pill look without joining the search filters. */
 .object-header-link { text-decoration: none; pointer-events: auto; }
 .object-header-link:hover { color: var(--shell-text); background: var(--explorer-header-control-hover); }
 .object-header-link:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
-.object-search-category[aria-pressed="true"] { background: var(--explorer-header-control-selected); }
-.object-search-category:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
-.object-search-category .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
+.object-search-category[aria-pressed="true"],
+.object-showcase-action[aria-pressed="true"] { background: var(--explorer-header-control-selected); }
+.object-search-category:focus-visible,
+.object-showcase-action:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.object-search-category .material-symbol,
+.object-showcase-action .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
+/* Showcase sits with the app actions. Where the header row is short (landscape under 1440 px, phones) it is an icon-only
+   circle like them; its word fits beside the eight category pills only on wide screens. */
+@media (max-width: 1439px) {
+  .object-showcase-action { width: var(--explorer-category-height); padding: 0; }
+  .object-showcase-action span { display: none; }
+}
 /* Eight pills with icons need 840 px of header row, which a landscape screen narrower than 1440 px does not have (732 px at
    1280): there the pills are words alone, 648 px. */
 @media (min-width: 821px) and (max-width: 1439px) and (orientation: landscape) {
@@ -898,5 +914,5 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     transition: transform var(--sheet-snap-duration) cubic-bezier(.2, .9, .3, 1);
   }
   body:has(.object-sidebar.is-dragging) .object-search-categories { transition: none; }
-  :is(.object-search-category, .object-header-link, .object-header-action) { box-shadow: var(--explorer-float-shadow); }
+  :is(.object-search-category, .object-showcase-action, .object-header-link, .object-header-action) { box-shadow: var(--explorer-float-shadow); }
 }

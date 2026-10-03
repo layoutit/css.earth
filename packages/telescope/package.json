@@ -41,7 +41,8 @@
   },
   "dependencies": {
     "@cssearth/core": "workspace:*",
-    "@cssearth/fits": "workspace:*"
+    "@cssearth/fits": "workspace:*",
+    "@cssearth/objects": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^26.4.0",

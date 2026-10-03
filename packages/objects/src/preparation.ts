@@ -1,3 +1,4 @@
+import { PREPARED_OBJECT_SCHEMA } from './descriptor.js';
 import type { JsonRecord, ObjectDescriptor, PreparedObject } from './descriptor.js';
 
 /** A reusable type supplies validation and baking; callers supply its environment. */
@@ -17,17 +18,17 @@ export async function prepareObject<Input, Payload, Context>(
   if (!/^[a-z][a-z0-9.-]*@[1-9][0-9]*$/.test(preparation.format)) throw new TypeError('Preparation requires a versioned output format.');
   const input = preparation.parse(descriptor.properties);
   const data = await preparation.bake(input, context);
-  return Object.freeze({ schema: 'cssearth-prepared-object@1', id: descriptor.id,
+  return Object.freeze({ schema: PREPARED_OBJECT_SCHEMA, id: descriptor.id,
     type: descriptor.type, format: preparation.format, data });
 }
 
 /** Runtime decodes prepared data only. Baking is never an implicit fallback. */
 export function readPreparedObject<Payload>(value: unknown, descriptor: ObjectDescriptor, decode: (data: unknown) => Payload): PreparedObject<Payload> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Prepared object must be a record.');
-  if (!('schema' in value) || value.schema !== 'cssearth-prepared-object@1' ||
+  if (!('schema' in value) || value.schema !== PREPARED_OBJECT_SCHEMA ||
       !('id' in value) || value.id !== descriptor.id || !('type' in value) || value.type !== descriptor.type ||
       !('format' in value) || value.format !== descriptor.prepared?.format || typeof value.format !== 'string' ||
       !('data' in value)) throw new TypeError('Prepared object identity, type, or format does not match its descriptor.');
   const data = decode(value.data);
-  return Object.freeze({ schema: 'cssearth-prepared-object@1', id: descriptor.id, type: descriptor.type, format: value.format, data });
+  return Object.freeze({ schema: PREPARED_OBJECT_SCHEMA, id: descriptor.id, type: descriptor.type, format: value.format, data });
 }

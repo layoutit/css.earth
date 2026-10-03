@@ -50,8 +50,8 @@ export function assertImageLayerReplay(actual: unknown, expected: unknown): void
 export async function restoreEnvironmentObject(objectDirectory: string, verifyReplay = false, descriptorInput?: Descriptor) {
   const descriptor: Descriptor = descriptorInput ?? JSON.parse(await readFile(join(objectDirectory, 'object.json'), 'utf8'));
   // These resources have their own preparation steps later in the build. A scene body's runtime lists no environment
-  // resources: parsing all 3,587 of them (1.2 GB) to find that out cost every dev start about 8 s. A system is a holder with no
-  // prepared scene of its own (site/build/prepare/system-packages.mts).
+  // resources: parsing all 3,587 of them (1.2 GB) to find that out cost every dev start about 8 s. A system draws nothing
+  // of its own (site/build/prepare/system-packages.mts): it has no prepared transport to read.
   if (['volume-dataset-bank', 'galaxy-point-field', 'catalogue-point-bank', 'layered-body', 'system'].includes(descriptor.type)) return;
   const preparedBytes = await readFile(containedPath(objectDirectory, descriptor.prepared.url));
   const expected = JSON.parse(preparedBytes.toString());

@@ -23,7 +23,5 @@ export interface NavigationCamera {
 export interface CameraDelta { controlPitchDelta: number; controlYawDelta: number; zoom?: number; distance?: number; rotation?: Quaternion; }
 export interface ControlsUpdate { drag?: boolean; wheel?: boolean; }
 export interface MotionCompletion { completed: boolean; }
-export interface PhysicalCameraPose { schema: 'cssearth-camera-pose@2'; scene: string; }
-export type CameraPose = PhysicalCameraPose;
 export interface CameraAngles { controlPitch: number; controlYaw: number; }
 export function errorMessage(error: unknown): string { return error instanceof Error ? error.message : String(error); }

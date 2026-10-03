@@ -1,15 +1,14 @@
-import { DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset } from '@cssearth/objects';
+/** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, NEBULA_DELIVERY_SCHEMA } from '@cssearth/objects';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
 
-/** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
 import { replayCompactCompiler, replayCompactSymmetry, replayCompactSampled, prepareVolumeSlices } from '../volume/node/index.ts';
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { readFile, writeFile, mkdir, readdir, rename, rm } from 'node:fs/promises';
 import { resolve, dirname, relative, isAbsolute, sep } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';
-import { parsePreparedNebulaCatalog } from '@cssearth/objects';
 
 import { prepareVolumeAtlases } from '../density/index.ts';
 
@@ -41,7 +40,7 @@ function pin(v: unknown): Pin {
 async function pinned(root: string, p: Pin) { const bytes = await readFile(local(root,p.path)); return bytes; }
 export function readNebulaDelivery(v: unknown) {
   const r = record(v), frame = record(r.sky), center = frame.centerIcrsDegrees;
-  if (r.schema !== 'cssearth-nebula-delivery@2' || !/^[a-z][a-z0-9-]*$/.test(text(r.id)) ||
+  if (r.schema !== NEBULA_DELIVERY_SCHEMA || !/^[a-z][a-z0-9-]*$/.test(text(r.id)) ||
       !['compiler','axial-symmetry','density-grid'].includes(text(r.method)) || !Array.isArray(center) || center.length !== 2 || !Array.isArray(r.inputPins)) throw new TypeError('Invalid nebula delivery recipe.');
   if (!(finite(r.framingRadiusUnits)>0) || !/^https:\/\//.test(text(r.sourceUrl))) throw new TypeError('Invalid nebula framing/source URL.');
   if (r.attachedTo !== undefined && !/^[a-z][a-z0-9-]*$/.test(text(r.attachedTo))) throw new TypeError('Invalid attached body id.');
@@ -203,7 +202,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
         // Every dataset of one bank shares a frame, so navigation and framing do not change with the dataset.
         if (shared && JSON.stringify(shared.boundsUnits) !== JSON.stringify(source.boundsUnits)) throw new TypeError('Density-grid datasets must share their bounds.');
         shared ??= source;
-        const compiled = json({ schema: 'cssearth-prepared-object@1', id: `${recipe.id}-${grid.id}`, type: 'density-volume', format: DENSITY_VOLUME_FORMAT,
+        const compiled = json({ schema: PREPARED_OBJECT_SCHEMA, id: `${recipe.id}-${grid.id}`, type: 'density-volume', format: DENSITY_VOLUME_FORMAT,
           data: compileCssVolume({ id: `${recipe.id}-${grid.id}`, frame: source, slices, recipe: volumeRecipe }) });
         const volumePath = resolve(output, 'volume.json');
         await put(volumePath, compiled);
@@ -226,7 +225,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       framingRadiusUnits:recipe.framingRadiusUnits,contextVisibility:'independent',starsEnabled:datasets[0]!.stars.points.length>0,
       ...(recipe.attachedTo === undefined ? {} : {attachedTo:recipe.attachedTo}),datasets});
     const renderElements = assertCompilerDeliveryElementBudget(compilerSampling, data);
-    const envelope = json({schema:'cssearth-prepared-object@1',id:recipe.id,type:'volume-dataset-bank',format:PREPARED_VOLUME_DATASETS_SCHEMA,data});
+    const envelope = json({schema:PREPARED_OBJECT_SCHEMA,id:recipe.id,type:'volume-dataset-bank',format:PREPARED_VOLUME_DATASETS_SCHEMA,data});
     await put(resolve(staging,'datasets.json'),envelope);
     await put(resolve(staging,'delivery.json'),json({schema:'cssearth-nebula-delivery-receipt@2',recipe:JSON.parse(recipeBytes.toString()),sourceResult,
       acceptedLabResult:recipe.acceptedLabResult,...(fieldStars ? {fieldStars} : {}), ...(renderElements ? { renderElements } : {}),
@@ -237,7 +236,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     // The descriptor names the object that hosts the bank (`properties.host`); a rebake keeps it.
     const host = await read(directory,'object.json').then(value => record(record(value).properties).host, (error: unknown) => {
       if (error instanceof SyntaxError || error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined; throw error; });
-    await put(resolve(directory,'object.json'),json({schema:'cssearth-object@2',id:recipe.id,type:'volume-dataset-bank',properties:{frame:datasets[0]!.volume.frame,
+    await put(resolve(directory,'object.json'),json({schema:OBJECT_SCHEMA,id:recipe.id,type:'volume-dataset-bank',properties:{frame:datasets[0]!.volume.frame,
       preparation:{source:'source/delivery.json'},...(host === undefined ? {} : {host:text(host)})},prepared:{format:PREPARED_VOLUME_DATASETS_SCHEMA,url:'prepared/datasets.json'}}));
     return { id:recipe.id,status:'prepared',sourceResult,datasets:datasets.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length})) };
   } finally { await rm(staging,{recursive:true,force:true}); }

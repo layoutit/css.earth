@@ -219,6 +219,10 @@ importers:
         version: 0.35.3(@types/node@26.4.0)
 
   packages/astronomy:
+    dependencies:
+      '@cssearth/objects':
+        specifier: workspace:*
+        version: link:../objects
     devDependencies:
       tsup:
         specifier: ^8.0.1
@@ -430,6 +434,9 @@ importers:
       '@cssearth/core':
         specifier: workspace:*
         version: link:../core
+      '@cssearth/objects':
+        specifier: workspace:*
+        version: link:../objects
     devDependencies:
       '@types/node':
         specifier: ^26.4.0
@@ -449,6 +456,9 @@ importers:
       '@cssearth/fits':
         specifier: workspace:*
         version: link:../fits
+      '@cssearth/objects':
+        specifier: workspace:*
+        version: link:../objects
     devDependencies:
       '@types/node':
         specifier: ^26.4.0

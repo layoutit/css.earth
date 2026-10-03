@@ -1,11 +1,12 @@
 /** The package files of a placed star, shared by the shape-only scaffold and the full generator (generate.mts); the command is
  * packages/telescope-cli/src/new-object/new-object-cli.mts. */
-import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects/node';
+import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, UNIFORM_DISC_STAR_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA, CSS_PRESENTATION_PROFILE_SCHEMA, CSS_GEOMETRY_PROFILE_SCHEMA, NAVIGATION_MARKER_SCHEMA } from '@cssearth/objects';
+
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+
 import { readStarTemperature, temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { sphereProjection } from '@cssearth/bake/objects/scene';
@@ -144,9 +145,9 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   const orientation = skyPlaneOrientation(astrometry, 0), offLimbSize = 600;
   const files = new Map<string, string>(), put = (path: string, value: unknown) => files.set(path, typeof value === 'string' ? value : `${JSON.stringify(value, null, 2)}\n`);
   const o = `src/objects/${id}`;
-  put(`${o}/object.json`, { schema: 'cssearth-object@2', id, type: 'layered-body', properties: {
+  put(`${o}/object.json`, { schema: OBJECT_SCHEMA, id, type: 'layered-body', properties: {
     preparation: { schema: 'cssearth-object-preparation@1', label: name, steps: ['verify-sources', 'assets', 'panel-content', 'datasets', 'starfield', 'scene', 'controls', 'presentation', 'runtime-assets'] },
-    recipe: { schema: 'cssearth-authored-object@2', surfaces: [{ id: 'body', source: 'geometry', projection: 'equirectangular', datasets: [{ id: 'shape', source: 'content', material: 'emission' }] }],
+    recipe: { schema: AUTHORED_OBJECT_SCHEMA, surfaces: [{ id: 'body', source: 'geometry', projection: 'equirectangular', datasets: [{ id: 'shape', source: 'content', material: 'emission' }] }],
       shape: { kind: 'sphere', radiusKm }, materials: [{ id: 'emission', source: 'raster', model: 'emissive' }],
       sources: ['raster', 'geometry', 'presentation'].map(source => ({ id: source, path: `source/preparation/${source}.json` })).concat([
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
@@ -168,34 +169,34 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
       offLimbContext: { logicalSize: offLimbSize, source: 'none: no observation, a transparent plate', composition: 'transparent', rotation: 'none', runtimeAlphaProcessing: false },
       limbMaterial: { logicalSize: BODY_DIAMETER_PX, composition: "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate", surfaceReplacement: false, runtimeAlphaProcessing: false },
       lighting: false, shadows: false, runtimeLighting: false } } });
-  put(`${o}/source/preparation/geometry.json`, { schema: 'cssearth-css-geometry-profile@1', namespace: id, surface: { radius: BODY_RADIUS_UNITS, polarRadius: BODY_RADIUS_UNITS, latitudeSegments: 16, longitudeSegments: 32,
+  put(`${o}/source/preparation/geometry.json`, { schema: CSS_GEOMETRY_PROFILE_SCHEMA, namespace: id, surface: { radius: BODY_RADIUS_UNITS, polarRadius: BODY_RADIUS_UNITS, latitudeSegments: 16, longitudeSegments: 32,
     surface: { url: `/scenes/${id}/${id}-surface-shape@2x.webp`, width: 1024, height: 768 }, surfaceLatitudeHeight: 512, packedBandGutter: 8,
     poles: { url: `/scenes/${id}/${id}-poles-shape@2x.webp`, width: 512, height: 256 }, polarTileSize: 256, polarRadiusScale: 1.035, polarOffset: 0.1, uv: 'cell', color },
     projection: sphereProjection(1, 1024 / 32),
     bodyRotationDegrees: 0, output: { schema: `css${id}-prepared-runtime-scene@1`, materialSchema: `css${id}-prepared-emission@1`, layout: 'body-container', body: { axialTiltDegrees: 0, rotationDirection: 'prograde', rotationPeriodEarthDays: 36525,
       sourceProjection: 'no observation: the shared neutral gray of an unresolved surface on the reference sphere', polarPreparation: 'the same gray on the polar tiles',
       axialTiltNote: "the star has no measured rotation axis; the object's rotation record places a display axis along celestial north in the plane of the sky, and this profile's tilt is not used for the frame" } } });
-  put(`${o}/source/preparation/presentation.json`, { schema: 'cssearth-css-presentation-profile@2', namespace: id, mode: 'emissive' });
-  put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@2', objectId: id, owner: 'object', presentation: { size: 5 }, source: { path: 'presentation/context.png' },
+  put(`${o}/source/preparation/presentation.json`, { schema: CSS_PRESENTATION_PROFILE_SCHEMA, namespace: id, mode: 'emissive' });
+  put(`${o}/source/preparation/navigation.json`, { schema: NAVIGATION_MARKER_SCHEMA, objectId: id, owner: 'object', presentation: { size: 5 }, source: { path: 'presentation/context.png' },
     operations: [{ type: 'resize', width: 'tile', height: 'tile', fit: 'cover', position: 'centre', kernel: 'lanczos3' },
       { type: 'ensure-alpha' }, { type: 'ellipse-mask', cx: .5, cy: .5, rx: .45, ry: .45, shading: { ambient: .35, diffuse: .65 } }, { type: 'png' }], context: { pixels: 512 } });
-  put(`${o}/source/preparation/rotation.json`, { schema: 'cssearth-display-orientation@1', ...orientation, phase: 'arbitrary-display-phase',
+  put(`${o}/source/preparation/rotation.json`, { schema: DISPLAY_ORIENTATION_SCHEMA, ...orientation, phase: 'arbitrary-display-phase',
     source: `No measured rotation axis or period (${TODO}: name the literature checked). The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.`,
     coordinateSystem: 'ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.',
     qualification: `Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of ${name} are unmeasured; the axis shown is where celestial north lies on the sky.` });
-  put(`${o}/source/preparation/acquisition.json`, { schema: 'cssearth-acquisition-plan@1', operations: [] });
-  put(`${o}/source/presentation/solar-system.json`, { schema: 'cssearth-solar-system-preparation@1', bodyId: id, displayName: name, bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm,
+  put(`${o}/source/preparation/acquisition.json`, { schema: ACQUISITION_PLAN_SCHEMA, operations: [] });
+  put(`${o}/source/presentation/solar-system.json`, { schema: SOLAR_SYSTEM_PREPARATION_SCHEMA, bodyId: id, displayName: name, bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm,
     defaultZoom: 1.25, geometryScale: GEOMETRY_SCALE });
   if (blackHole) put(`${o}/source/measurements.json`, { schema: 'cssearth-black-hole-shadow@1', id, angularDiameterMas: Math.round(angularDiameterMas * 1e6) / 1e6,
     angularDiameterSource: blackHole.shadowSource, distanceParsecs: astrometry.distanceParsecs, distanceSource: requireString(requireRecord(star.sources).distance),
     radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
     shape: { kind: 'shadow-sphere', qualification: 'A black sphere at the measured shadow radius: the dark region an observer sees, not an event horizon or a surface.' } });
-  else if (temperature) put(`${o}/source/measurements.json`, { schema: 'cssearth-uniform-disc-star@1', id, angularDiameterMas: Math.round(angularDiameterMas * 100) / 100,
+  else if (temperature) put(`${o}/source/measurements.json`, { schema: UNIFORM_DISC_STAR_SCHEMA, id, angularDiameterMas: Math.round(angularDiameterMas * 100) / 100,
     angularDiameterSource: `${TODO}: the published angular diameter and its source; this value is the record's radius at its distance.`, distanceParsecs: astrometry.distanceParsecs,
     distanceSource: requireString(requireRecord(star.sources).distance), radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
     effectiveTemperatureK: temperature.kelvin, effectiveTemperatureSource: temperature.source,
     shape: { kind: 'uniform-disc-sphere', qualification: 'A sphere at the published radius in the shared neutral gray; the photosphere of a star is not a solid surface and its limb is not sharp.' } });
-  put(`${o}/source/content/object.json`, { schema: 'cssearth-object-content@2', version: 1, id, displayName: name,
+  put(`${o}/source/content/object.json`, { schema: OBJECT_CONTENT_SCHEMA, version: OBJECT_CONTENT_VERSION, id, displayName: name,
     // A published fact names its source: the author replaces each TODO catalogue id with the entry the measurement record cites.
     panel: { facts: [
       { id: 'radius', label: 'Radius', value: `${solarRadii(radiusKm / SOLAR_RADIUS_KM)} solar radii`,
@@ -210,14 +211,14 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     resources: [{ label: 'Research', role: 'facts', description: spec.paperCredit, href: spec.paper }],
     provenance: { editorial: { url: spec.paper, credit: spec.paperCredit },
       physical: { path: `../../../../../packages/astronomy/data/bodies/${id}.json`, credit: 'Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)' } } });
-  put(`${o}/text.json`, { schema: 'cssearth-object-text@1', objectId: id, card: { text: spec.description, sources: [{ catalogueId: `${TODO}-card-source`, url: spec.paper, label: TODO, checked: TODO, locator: TODO, quote: TODO }] },
+  put(`${o}/text.json`, { schema: OBJECT_TEXT_SCHEMA, objectId: id, card: { text: spec.description, sources: [{ catalogueId: `${TODO}-card-source`, url: spec.paper, label: TODO, checked: TODO, locator: TODO, quote: TODO }] },
     introduction: { text: `${TODO}: two sentences, 180 characters at most.`, sources: [{ catalogueId: `${TODO}-introduction-source`, url: spec.paper, label: TODO, checked: TODO, locator: TODO, quote: TODO }] },
     datasets: { shape: { title: 'Sphere of the measured radius', detail: 'No image', summary: 'A sphere at the published size in neutral gray. No picture of the surface is cast here.' } } });
   put(`${o}/README.md`, `# ${name}\n\n## Sources\n\n${TODO}: placement, radius, rotation and the shape dataset, each with its source.\n\n## Evidence\n\n${TODO}: the tests and captures that prove the package.\n\n## Known problems\n\n${TODO}: what is not shown and why.\n\n[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)\n`);
   put(`${o}/NOTICE.md`, `# ${name} credits\n\n${TODO}: the measurements and placement credits.\n`);
   // Empty, like the TODO prose: `pnpm check:investigations` refuses it until the sources examined are recorded (new-object
   // writes its own choices over it, ledger.mts).
-  put(`${o}/investigations.json`, { schema: 'cssearth-investigation-ledger@1', objectId: id, entries: [] });
+  put(`${o}/investigations.json`, { schema: INVESTIGATION_LEDGER_SCHEMA, objectId: id, entries: [] });
   const local = (reason: string) => ({ kind: 'local', reason });
   const preparation = (entryId: string, path: string, origin: string, consumers: string[]) => ({ id: `${id}-${entryId}`, path, origin, sourceBinding: local('Project-authored preparation record; published inputs retain their own identities and hashes.'),
     credit: 'cssEarth and the institutional sources identified in this record', license: 'Project-authored preparation record; referenced observations retain their source terms', acquisition: 'checked repository source', redistribution: 'checked authored source with embedded provenance', consumers });
@@ -245,4 +246,3 @@ export async function scaffoldStar(spec: StarScaffold, { SOLAR_GEOMETRY_EPOCH_JD
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
   return [...files.keys(), `src/objects/${spec.id}/source/presentation/context.png`];
 }
-

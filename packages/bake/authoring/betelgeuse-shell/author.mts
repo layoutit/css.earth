@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
+import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA } from '@cssearth/objects';
 /** Betelgeuse's circumstellar material, as four density grids the shared slab baker turns into one dataset bank.
  *
  *   node packages/bake/authoring/betelgeuse-shell/author.mts [--check]
@@ -280,7 +282,7 @@ function encodeGrid(sample: (x: number, y: number, z: number) => number | readon
 /** The slab recipe both grids share: one emission channel, shared opacity, twenty-four slabs an axis. */
 function volumeRecipe(grid: string, material: Record<string, unknown>) {
   return {
-    schema: 'cssearth-volume-recipe@1',
+    schema: VOLUME_RECIPE_SCHEMA,
     grid: { path: grid, dimensions: [GRID.size, GRID.size, GRID.size], encoding: 'sqrt-density-unorm8',
       bounds: { min: [-GRID.halfUnits, -GRID.halfUnits, -GRID.halfUnits], max: [GRID.halfUnits, GRID.halfUnits, GRID.halfUnits] } },
     material: { intensityScale: 1, stepScale: 1, stepMetric: 'source', ...material },
@@ -720,7 +722,7 @@ export async function author(defaultDataset = 'zimpol-v') {
   const veilGain = -Math.log(1 - VEIL_2019_12.scatteredSurfaceBrightness) / (veilBrightestColumn * Math.exp(-veilOpticalDepth / 2));
 
   const provenance = {
-    schema: 'cssearth-volume-provenance@2',
+    schema: VOLUME_PROVENANCE_SCHEMA,
     title: 'Betelgeuse circumstellar material: polarised dust, the 4 micrometre light outside the disc, silicon monoxide around the star and the published Great Dimming clump',
     kind: 'observed-sky-maps-line-cube-and-published-radiative-transfer-model',
     authors: ['M. Montargès', 'E. Cannon', 'A. de Koter', 'P. Kervella', 'E. Lagadec', 'L. Decin', 'A. Boccaletti', 'O. Flasseur', 'J. Milli', 'S. Ridgway', 'A. K. Dupree'],
@@ -815,7 +817,7 @@ export async function author(defaultDataset = 'zimpol-v') {
       ...('occultingCentreUnits' in grid ? { occultingCentreUnits: grid.occultingCentreUnits } : {}) });
   }
   const delivery = {
-    schema: 'cssearth-nebula-delivery@2', id: 'betelgeuse-shell', method: 'density-grid',
+    schema: NEBULA_DELIVERY_SCHEMA, id: 'betelgeuse-shell', method: 'density-grid',
     request: deliveryGrids.find(grid => grid.id === defaultDataset)!.recipe,
     inputPins: [{ path: 'src/objects/betelgeuse-shell/source/provenance.json' },
       ...grids.map(grid => ({ path: `src/objects/betelgeuse-shell/source/${grid.file}` }))],
@@ -857,7 +859,7 @@ export async function author(defaultDataset = 'zimpol-v') {
        { id: 'extinction', label: 'Optical depth', value: `ln ${VEIL_2019_12.dimmingFactor} through the centre, the ${VEIL_2019_12.dimmingFactor}-times dimming the paper reports` },
        { id: 'epoch', label: 'Epoch', value: 'December 2019, the only optimised solution the paper reports' }];
   const presentation = {
-    schema: 'cssearth-volume-presentation-source@2', objectId: 'betelgeuse-shell', name: 'Betelgeuse dust shell',
+    schema: VOLUME_PRESENTATION_SOURCE_SCHEMA, objectId: 'betelgeuse-shell', name: 'Betelgeuse dust shell',
     defaultDataset,
     bank: { path: 'src/objects/betelgeuse-shell/prepared/datasets.json' },
     recipes: deliveryGrids.map(grid => ({ id: grid.id, path: grid.recipe.path })),
@@ -1009,7 +1011,7 @@ export async function author(defaultDataset = 'zimpol-v') {
         sourceBinding: { kind: 'local', reason: 'Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above.' } });
     }
   }
-  outputs.push(['manifest.json', Buffer.from(JSON.stringify({ schema: 'cssearth-volume-source-manifest@2', pathBase: 'repository',
+  outputs.push(['manifest.json', Buffer.from(JSON.stringify({ schema: VOLUME_SOURCE_MANIFEST_SCHEMA, pathBase: 'repository',
     inputs, documents, generatedIntermediates: intermediates }, null, 2) + '\n')]);
   return { outputs, measured: provenance.measured, grids: grids.map(g => ({ id: g.id, peak: g.built.peak, voxels: g.built.filled })) };
 }

@@ -2,7 +2,7 @@ import { pathToFileURL } from 'node:url';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
-import { normalizeDestinationQuery } from '@cssearth/objects';
+import { normalizeDestinationQuery, PREPARED_DESTINATIONS_SCHEMA, readPreparedFeaturePins } from '@cssearth/objects';
 import { resolveBuildSceneAddress } from '../../asset-origin.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
@@ -38,7 +38,7 @@ async function preparedPlaces(root: string, objectId: string, settlements: reado
   if (!isRecord(pin) || !Number.isSafeInteger(pin.count)) throw new TypeError(`${objectId}: prepared places descriptor is invalid.`);
   const url = text(pin.url, `${objectId} places url`), bytes = await readFile(resolve(root, 'public', url.replace(/^\//u, '')));
   const catalog: unknown = JSON.parse(bytes.toString('utf8'));
-  if (!isRecord(catalog) || !Array.isArray(catalog.places) || catalog.places.length !== pin.count) throw new TypeError(`${objectId}: places catalogue count differs from its descriptor.`);
+  if (!isRecord(catalog) || catalog.schema !== PREPARED_DESTINATIONS_SCHEMA || !Array.isArray(catalog.places) || catalog.places.length !== pin.count) throw new TypeError(`${objectId}: places catalogue count or schema differs from its descriptor.`);
   const duplicates: (readonly [string, string])[] = [];
   for (const place of catalog.places) {
     if (!isRecord(place)) throw new TypeError(`${objectId}: place record is invalid.`);
@@ -60,18 +60,9 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
   const objects: { id: string; name: string; route: string; count: number; datasetIds?: string[] }[] = [];
   const features: IndexedFeature[] = [], places: PlacePin[] = [];
   for (const object of SCENE_OBJECTS) {
-    const descriptor: unknown = await readFile(resolve(root, 'src/objects', object.id, 'prepared/features.json'), 'utf8').then(JSON.parse, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
-    if (descriptor === null) continue;
-    if (!isRecord(descriptor) || descriptor.schema !== 'cssearth-prepared-features@1') throw new TypeError(`${object.id}: prepared features descriptor is invalid.`);
-    const pins: Record<string, unknown>[] = [descriptor];
-    if (descriptor.selection !== undefined) {
-      const selection = descriptor.selection;
-      if (!isRecord(selection) || !Array.isArray(selection.banks) || !Number.isSafeInteger(selection.count) || Number(selection.count) < 1) throw new TypeError(`${object.id}: feature selection descriptor is invalid.`);
-      for (const bank of selection.banks) {
-        if (!isRecord(bank)) throw new TypeError(`${object.id}: feature selection bank is invalid.`);
-        pins.push(bank);
-      }
-    }
+    const input: unknown = await readFile(resolve(root, 'src/objects', object.id, 'prepared/features.json'), 'utf8').then(JSON.parse, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
+    if (input === null) continue;
+    const { descriptor, pins } = readPreparedFeaturePins(input, object.id);
     const values: unknown[] = [];
     let catalog: Record<string, unknown> | null = null;
     for (const pin of pins) {

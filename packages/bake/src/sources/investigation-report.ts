@@ -5,7 +5,7 @@
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { readFile } from 'node:fs/promises';
-import { INVESTIGATION_STATUSES, type InvestigationLedger, type InvestigationStatus } from './investigation-ledger.ts';
+import { INVESTIGATION_STATUSES, type InvestigationLedger, type InvestigationStatus } from '@cssearth/objects';
 
 interface ObjectIdentity { id: string; classification: string }
 export interface InvestigationOptions { classification?: string; statuses: readonly InvestigationStatus[]; search?: string; summary: boolean; json: boolean; facilities: boolean; index: boolean; write: boolean }

@@ -1,3 +1,4 @@
+import { readPublishedLimbDarkening } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees, type SolarGeometry } from '../scene/index.ts';
 // One `science` adapter for the generic raster lane that dispatches by `science.kind` to the existing
@@ -25,7 +26,7 @@ import { prepareAkatsukiUviMap } from './akatsuki-uvi-l3b.ts';
 import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '../color/index.ts';
 import { readCie1931ColorMatching } from '../sources/index.ts';
 import { prepareGlbSurface } from '../layers/shape-model/index.ts';
-import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, limbIntensity, loadStellarPhotometricColor, parseSpotFigureModel, readPublishedLimbDarkening, parseSpotOccultation, spotDiscCentre } from '../stellar/index.ts';
+import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, limbIntensity, loadStellarPhotometricColor, parseSpotFigureModel, parseSpotOccultation, spotDiscCentre } from '../stellar/index.ts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
 export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown>; nativeSourcePoles?: boolean }[]; readonly emission?: RasterRecipe['emission']; readonly missingCoverage?: RasterRecipe['missingCoverage']; }

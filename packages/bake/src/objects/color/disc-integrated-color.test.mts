@@ -1,10 +1,11 @@
+import { parseDiscColorRecord } from '@cssearth/objects';
 import { pathToFileURL } from 'node:url';
 import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { discIntegratedColor, filterReflectance, parseCieTable, parseDiscColorRecord } from '@cssearth/bake/objects/color';
+import { discIntegratedColor, filterReflectance, parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 
 const root = new URL('src/objects/makemake/source/', pathToFileURL(findProjectRoot(import.meta.url) + '/'));
@@ -42,9 +43,6 @@ test('Haumea\'s rotation-corrected colors and occultation albedo give a light, n
 });
 
 test('records and tables fail closed', () => {
-  assert.throws(() => parseDiscColorRecord({ ...makemake, schema: 'other' }), /cssearth-disc-integrated-color@1/);
-  assert.throws(() => parseDiscColorRecord({ ...makemake, geometricAlbedo: { ...makemake.geometricAlbedo, band: 'R' } }), /V-band/);
-  assert.throws(() => parseDiscColorRecord(withObject({ 'B-V': 0.91, 'V-R': 0.41 })), /V-I/);
   assert.throws(() => parseCieTable('380,1,2\n', 3), /Invalid CIE table row/);
   assert.throws(() => discIntegratedColor(parseDiscColorRecord(makemake), new Map([[380, [0, 0, 0]]]), illuminant), /cover 381 nm/);
 });

@@ -265,6 +265,15 @@ below are the Moon's Tycho link at 1280×800 and Europa with shadows at 390×844
 
 ![The Moon and Europa drawn by a native response, before and after the default view](images/native-default-view.png)
 
+A drawn body also takes a drag and the wheel without script (`dragWithoutScript` in `site/layouts/ObjectLayout.astro`).
+Dragging turns the body's prepared rotation: a hidden resize corner holds the drag and a view timeline reads it. A body
+without a prepared rotation, such as a star, only zooms. The wheel scales the whole stage from a tenth of its size to five
+times it, so a star's limb or a material composite zooms with the body. Dragging needs a resize corner (Chromium,
+WebKit) and the wheel needs `scroll-initial-target` (recent Chromium); other browsers keep the still view. The frames are
+Jupiter at 1280×800 in headless Chromium: the opening view, after a drag, zoomed out and zoomed in.
+
+![Jupiter without script: the opening view, turned by a drag, zoomed out and zoomed in](images/native-drag-zoom.png)
+
 The earlier continuous Saturn capture
 was recorded, before native dataset submits were added.
 At 1280×900, application scripts are held for the first ten seconds,

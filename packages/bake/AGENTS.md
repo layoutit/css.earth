@@ -179,8 +179,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     no topic. The recipe dispatcher is site-owned preparation in
     `site/build/charts/`; the spectrum reader and compact spectrum are in `site/overview/`, because
     `site/prepare-body-overview.mts` uses them and the runtime may not import the bake.
-  - `objects/content`: the object-content contract (facts, labels, dataset, legend and gallery recipes, the prepared shell
-    payload), the shared dataset vocabulary, dataset steps and prepared legends, each dataset control's billboard color, and the legend
+  - `objects/content`: the shared dataset vocabulary, dataset steps and prepared legends, each dataset control's billboard color, and the legend
     labels a palette dataset derives from the stretch its report states. It
     imports no topic. The content preparer that reads factsheets and writes the payload is site-owned preparation in `site/build/content/`
     (it reads the prepared shell titles).
@@ -346,3 +345,31 @@ Renderer-behavior runtime, selection, material and feature transport suites and 
 lives in `integration/renderer-bake/src/presentation/leaf-box.test.mts`. These node:test suites run in
 the packages CI lane on changes to either owner. Shell facing/material conformance lives in
 `integration/renderer-bake/src/shell/shell.test.ts`; bake-owned shell assertions stay in `src/shell/`. Validated camera conversions come from `@cssearth/objects`; bake has no renderer imports or dependency. Pure prepared volume envelope/frame validation comes from objects; labs own their renderer bundlers.
+
+Archived-camera data (including `SpiceCamera`), cited object/prepared-text records and prepared destinations
+are browser-safe contracts in `packages/objects/src/prepared-data/`, exported from `@cssearth/objects`.
+Their node:test suites run in the packages lane. Camera fitting and kernel computation stay with bake/SPICE;
+text budgets and editorial checks stay in site; destination preparation and search projection stay with bake/site.
+
+`objects/scene/recipe-identifiers.ts` owns bake lane identifiers used by the layer recipes and site routing;
+`volume/contracts/source-report-schema.ts` owns the authored provenance stamp. These are owner-internal identifiers,
+not shared prepared field contracts. The IBEX Python grid protocol is pinned by `shell-grid-schema.test.ts`.
+
+Authored preparation receipts, world-navigation preparation receipts and prepared feature descriptors live in
+`packages/objects/src/prepared-data/`, exported through the browser-safe objects main entry.
+Historical source-list and index/pre-build admission policies retain their accepted records and diagnostics.
+Frame/source auditing, camera solving, geometry, file I/O and inventory lookup stay with bake/site/tooling.
+Contract tests use node:test in the packages CI lane.
+
+WISE tile pins, authored display/synchronous rotation records and cited published limb coefficients have
+browser-safe schema identifiers, data types and pure validation in `packages/objects/src/prepared-data/`.
+Contract tests use node:test in the packages lane. WISE photometry, FITS/mosaicking, orbit/rotation evaluation,
+limb intensity, model-grid interpolation and file I/O remain with their scientific owners. The preserved
+Python display-orientation writer has a literal conformance test and a specific schema-ledger exception.
+
+Photometric color/stellar measurement records and measured-spectrum documents are parsed by `@cssearth/objects`.
+The color and stellar topics retain CIE/Planck evaluation, spectrum I/O and binning; charts retain recipes and drawing;
+uniform-disc authoring retains geometry generation and its expected sphere path.
+
+Authored and prepared content wire records and their pure parsers live in `@cssearth/objects`;
+`objects/content` retains dataset preparation and filesystem/callback APIs.

@@ -9,6 +9,7 @@
  *   lamp: the gray's brightness with the chromaticity of the host's color dataset (interpret.mts, `hostLitGray`).
  *
  * Nothing here decides a value: the temperature is the archive's, the host color is the host package's. */
+import { PLANCK_FLOOR_KELVIN } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import type { Archive } from './archives.mts';
@@ -17,7 +18,7 @@ import { bindInputs, json, type PackageFiles } from './dataset.mts';
 import { decodeEntities, NASA_TAP } from './orbit.mts';
 import type { Cited, PhotometrySpec, ThermalSpec } from './spec.mts';
 import { DISC_BAND_COLOR_SCHEMA, loadDiscBandColor } from '@cssearth/bake/objects/layers/observation';
-import { loadStellarPhotometricColor, PLANCK_FLOOR_KELVIN } from '@cssearth/bake/objects/stellar';
+import { loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
 import { parseCieTable, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { HOSTED_PLANET_STYLESHEET } from './new-hosted-planet.mts';

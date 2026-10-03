@@ -1,3 +1,4 @@
+import { LAYERED_OBLATE_SCHEMA } from '../../scene/index.ts';
 import { linearToSrgb, srgbToLinear } from '../../color/index.ts';
 import { isArray, requireString, requireRecord } from '@cssearth/core';
 import type { prepareRadialMotionAndShadow } from './radial-motion.ts';
@@ -117,7 +118,7 @@ export async function prepareSurfaceColor({ sourcePath, unobservedRows, width, h
 /** Source-configured oblate surface, projected material banks and retained cutaway. */
 export async function createLayeredOblatePreparation({ sourceDirectory, publicDirectory, stagingDirectory, config:input, preparedInputs }: {sourceDirectory:string;publicDirectory:string;stagingDirectory:string;config:unknown;preparedInputs:LayeredInputs}) {
   const config=parse(input,layeredRecipe,'layered oblate recipe');
-  validateMaterialRecipe(config, 'cssearth-layered-oblate-preparation@2');
+  validateMaterialRecipe(config, LAYERED_OBLATE_SCHEMA);
   // The recipe names its inputs by path (sources); git and the source cache hold their bytes, so nothing else is pinned.
   await verifyObservationSources(sourceDirectory, Object.values(config.sources).map(path => ({ path })));
   const readSourceJson = async (path:string): Promise<unknown> => JSON.parse(await readFile(resolve(sourceDirectory,path),'utf8'));

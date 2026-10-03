@@ -1,4 +1,4 @@
-import { readCompactSymmetry, decodeCompactSymmetryField, DENSITY_VOLUME_FORMAT, type VolumeSlices, type DensityVolumeFrame, type CompilerPin } from '@cssearth/objects';
+import { PREPARED_OBJECT_SCHEMA, readCompactSymmetry, decodeCompactSymmetryField, DENSITY_VOLUME_FORMAT, type VolumeSlices, type DensityVolumeFrame, type CompilerPin } from '@cssearth/objects';
 import type { CompiledVolumeArtifact } from '../compiler/bake.ts';
 /** Losslessly retained RGB emission voxels; runtime slice images remain disposable. */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
@@ -107,7 +107,7 @@ export async function replayCompactSymmetry<Volume extends CompiledVolumeArtifac
     });
   const bytes = Buffer.from(
     JSON.stringify({
-      schema: "cssearth-prepared-object@1",
+      schema: PREPARED_OBJECT_SCHEMA,
       id: r.id,
       type: "density-volume",
       format: DENSITY_VOLUME_FORMAT,

@@ -13,9 +13,10 @@
  * the next one is its cross-check, which preparation compares against CROSS_CHECK_AGREEMENT. With no spectrum at all the color is a
  * Planck spectrum at the cited temperature. Stretches of 380-780 nm with no sample are declared as gaps with their reason, as
  * the reader requires. */
+import { type MeasuredSpectrumRecord, STELLAR_PHOTOMETRIC_COLOR_SCHEMA } from '@cssearth/objects';
 import { blendingCompanion, blendRefusal } from './companion-blend.mts';
 import { gunzipSync } from 'node:zlib';
-import { CROSS_CHECK_AGREEMENT, measuredSpectrumColor, planckColor, readMeasuredSpectrum, type MeasuredSpectrumRecord, type StellarColor } from '@cssearth/bake/objects/stellar';
+import { CROSS_CHECK_AGREEMENT, measuredSpectrumColor, planckColor, readMeasuredSpectrum, type StellarColor } from '@cssearth/bake/objects/stellar';
 import { ARI_TAP, BURNASHEV_PART2, KHARITONOV_CATALOG, ngslUrl, PULKOVO_TABLE5, VIZIER_ASU, xpSampledMirrorForm, xpSampledUrl, type Archive, type GaiaRow, type Identifiers } from './archives.mts';
 import type { Cited, ColorRoute, StarSpec } from './spec.mts';
 
@@ -233,10 +234,10 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow | undefined, ids:
   const primaryPath = `photometry/${primary.file}`;
   addFile(primary, primaryPath, `${id}-${primary.route}`);
   const record: Record<string, unknown> = primary.route === 'gaia-xp' && row
-    ? { schema: 'cssearth-stellar-photometric-color@1', objectId: id, spectrum: 'gaia-xp-sampled', sampledSpectrum: {
+    ? { schema: STELLAR_PHOTOMETRIC_COLOR_SCHEMA, objectId: id, spectrum: 'gaia-xp-sampled', sampledSpectrum: {
         source: 'Gaia Collaboration (2023), Gaia Data Release 3, A&A 674, A1; BP/RP spectra: De Angeli et al. (2023), A&A 674, A2, and externally calibrated sampled spectra: Montegriffo et al. (2023), A&A 674, A3',
         path: primaryPath, service: primary.origin, checked: CHECKED, sourceId: row.sourceId, sampling: '343 samples from 336 to 1020 nm in 2 nm steps, flux in W m^-2 nm^-1 (the DataLink default sampling)', note: primary.note } }
-    : { schema: 'cssearth-stellar-photometric-color@1', objectId: id, spectrum: 'measured', measuredSpectrum: { source: primary.source, ...primary.record(primaryPath), service: primary.origin, checked: CHECKED, gaps: primary.gaps, note: primary.note } };
+    : { schema: STELLAR_PHOTOMETRIC_COLOR_SCHEMA, objectId: id, spectrum: 'measured', measuredSpectrum: { source: primary.source, ...primary.record(primaryPath), service: primary.origin, checked: CHECKED, gaps: primary.gaps, note: primary.note } };
   record.whitePoint = 'sRGB D65'; record.normalization = 'brightest linear sRGB channel = 1';
   let todo: string | undefined, crossCheck: ColorChoice['crossCheck'];
   if (second) {
@@ -262,7 +263,7 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow | undefined, ids:
  * do not resolve from its star. `why` opens the record's note. */
 export function planckChoice(id: string, t: Cited, why: string, tried: readonly string[], cmf: Map<number, readonly number[]>, gamut?: 'desaturate'): ColorChoice {
   const lower = t.uncertainty ? t.value - t.uncertainty : t.value, upper = t.uncertainty ? t.value + t.uncertainty : t.value;
-  const record = { schema: 'cssearth-stellar-photometric-color@1', objectId: id, spectrum: 'planck', temperature: {
+  const record = { schema: STELLAR_PHOTOMETRIC_COLOR_SCHEMA, objectId: id, spectrum: 'planck', temperature: {
     published: { kelvin: t.value, lowerKelvin: lower, upperKelvin: upper, citation: `${t.source}${t.uncertainty ? `: ${t.value} +/- ${t.uncertainty} K` : `: ${t.value} K; the source gives no uncertainty, so the range is the value itself`}, ${t.url}` },
     note: `${why}, so the color is a Planck spectrum at its published temperature.` },
     whitePoint: 'sRGB D65', normalization: 'brightest linear sRGB channel = 1', ...(gamut ? { gamut } : {}) };

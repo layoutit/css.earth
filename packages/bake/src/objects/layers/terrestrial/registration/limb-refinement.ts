@@ -1,6 +1,7 @@
+import { parseArchivedCamera } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import type { SourceMesh } from '../../../geometry/index.ts';
-import { parseArchivedCamera, parseLimbRefinement } from '../../../raster/index.ts';
+import { parseLimbRefinement } from '../../../raster/index.ts';
 
 /**
  * Pointing refinement against the retained mesh. Archived and kernel cameras
