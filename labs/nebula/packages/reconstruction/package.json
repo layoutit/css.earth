@@ -46,6 +46,7 @@
     "./methods/symmetry/shape-prior": "./src/methods/symmetry/shape-prior.ts",
     "./evidence/structure-map": "./src/evidence/structure-map.ts",
     "./star-removal/native": "./src/star-removal/native.ts",
+    "./star-removal/haloes": "./src/star-removal/haloes.ts",
     "./methods/sampled/material-fit": "./src/methods/sampled/material-fit.ts",
     "./star-removal/extraction": "./src/star-removal/extraction.ts",
     "./star-removal/native-extraction": "./src/star-removal/native-extraction.ts",

@@ -16,6 +16,23 @@ Every candidate resolves to its downloaded, recorded original and matching full-
 
 The earlier VISTA, Horálek and WISE recipes retain their existing source/alignment checks and optional diffuse baseline so completed results restore unchanged. Other candidates need no trial-plan entry or alignment gate to remove stars. Image-to-density registration and approval remain requirements of subsequent 3D baking, which these buttons never trigger.
 
+## A picture for the application: `remove-stars`
+
+`node labs/nebula/run.mts remove-stars <object-directory>` makes the star-free copy of an image-layer bank's picture
+([remove-stars.ts](../packages/lab/src/cli/commands/remove-stars.ts)). It reads the bank's `source/recipe.json`, takes the
+download the recipe names into the ignored cache (`.local/nebula-lab/starless/<id>/`), runs NOX over it and writes the
+result as the bank's picture, `source/<source.path>`. The bank's manifest names this command as that file's generator,
+and the file is mirrored in the source cache, so a checkout restores it without running NOX.
+
+NOX takes a star's core and spikes but leaves the wide glow of a bright one. For each star of the recipe's
+`source.foregroundStars` table brighter than Gaia G = 14, [haloes.ts](../packages/reconstruction/src/star-removal/haloes.ts)
+measures the glow on the picture and fills it from the ring around it: each ring's median, over the half that faces away
+from the target, until no channel still falls by 1.5 levels over the next 12 px; then an inverse-square blend of 64 ring
+samples. The constants are presentation choices made on M66's Sloan picture. The isophote fill of the emission recipes
+suits an elliptical; on a spiral it left a dark notch.
+
+Test: `node labs/nebula/run.mts test haloes`.
+
 ## Interpretation
 
 The model predicts a plausible background beneath stars; it does not measure the hidden nebula. The mask shows actual removed signal, not a catalog of identified stellar objects. Inspect compact nebular detail, saturated cores and halos before deciding on a 3D bake. Native integer accounting remains exact: original = without stars + residual. Pixels outside the mask remain unchanged. The current reconstructed volume is not rebuilt by star removal.
