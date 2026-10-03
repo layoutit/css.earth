@@ -2036,8 +2036,6 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
     width: calc(100% - var(--tablet-left-column));
     padding-inline: var(--explorer-card-padding-inline-start) var(--explorer-card-padding-inline-end);
   }
-  /* Headings separate the sections; the rule under the title would stop at the column edge. */
-  :is(.object-information-panel, .object-prepared-information-panel).object-card > .object-selected-panel:has(+ .object-native-tabs)::after { content: none; }
 
   .object-sidebar .object-information-panel[data-card-subject="system"]:not([hidden]) { display: block; }
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel { max-height: none; overflow: visible; }

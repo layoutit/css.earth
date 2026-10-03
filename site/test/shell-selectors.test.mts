@@ -52,3 +52,9 @@ test('the drawer carries the search results state its ground reads', async () =>
   presentation.present(true, false); assert.equal(drawer.hasAttribute('data-search-results'), false, 'the browser open on its tree is not a result list');
   presentation.present(true, true); presentation.present(false, false); assert.equal(drawer.hasAttribute('data-search-results'), false);
 });
+
+test("a card's tabs are always card tabs: one narrow-layout rule drops the header's divider on a phone and a tablet alike", async () => {
+  // InformationTabs writes `object-tabs` in place of `object-card-tabs` only for the overview group, which no card uses.
+  const users = (await sources()).filter(({ text }) => /<InformationTabs\b[^>]*\bgroup=["'{]\s*["'`]?overview/u.test(text)).map(({ file }) => file);
+  assert.deepEqual(users, []);
+});
