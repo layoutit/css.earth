@@ -2,7 +2,7 @@ import { parseHTML } from 'linkedom';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraPose } from '@cssearth/engine';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 import { mountSelectedBodyLabel } from './selected-body-label.js';
 import { stubGlobal } from '@cssearth/objects/node/contract';

@@ -1,4 +1,5 @@
-import { worldCameraFromCenteredPresentation, type WorldRotation, type ObjectRuntimeDefinition, type PreparedWorldCameraFrame, type WorldCameraPose } from '@cssearth/objects';
+import { type WorldRotation, type ObjectRuntimeDefinition, type PreparedWorldCameraFrame } from '@cssearth/objects';
+import { worldCameraFromCenteredPresentation, type WorldCameraPose } from '@cssearth/engine';
 
 import { initialStageSelection } from './initial-stage-selection.js';
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';

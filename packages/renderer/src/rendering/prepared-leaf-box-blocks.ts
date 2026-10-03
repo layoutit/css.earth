@@ -1,4 +1,5 @@
-import { walkSilhouetteLevels, type PreparedSilhouetteSteps, type PreparedTexturePlacements } from '@cssearth/objects';
+import { type PreparedSilhouetteSteps, type PreparedTexturePlacements } from '@cssearth/objects';
+import { walkSilhouetteLevels } from '@cssearth/engine';
 
 import { transformPreparedPoint } from '@cssearth/core';
 

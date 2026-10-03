@@ -1,6 +1,7 @@
 import { fromEyeM } from '@cssearth/engine';
 import { presentWorldCamera } from '../../navigation/world-camera.js';
-import { type WorldCameraPose, type PreparedPointAppearance, type PreparedWorldContext } from '@cssearth/objects';
+import { type PreparedPointAppearance, type PreparedWorldContext } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../../navigation/world-camera.js';
 import { cssViewFromOrientation, rotateWorldPosition } from '@cssearth/engine';
 import { rayHitsSphereBefore } from '@cssearth/engine';

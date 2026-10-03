@@ -17,7 +17,8 @@ import { SYSTEM_FRAMING_ANGLES } from '../runtime-policy.mts';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 
 import { required, position, quaternion, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
-import { parsePreparedWorldContext, type WorldCameraPose } from '@cssearth/objects';
+import { parsePreparedWorldContext } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, readSystemViewFile)));

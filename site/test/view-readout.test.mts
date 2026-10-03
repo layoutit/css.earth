@@ -1,6 +1,7 @@
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import assert from 'node:assert/strict';
-import { type WorldCameraPose, type WorldRotation } from '@cssearth/objects';
+import { type WorldRotation } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import { required } from './navigation-test-values.mts';
 import { formatViewCoordinate, formatViewDate, formatViewDistance, viewScale } from '../minimap/view-format.mts';
 import { measureExtendedSubjectView } from '../view-readout.mts';

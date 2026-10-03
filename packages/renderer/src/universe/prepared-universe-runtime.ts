@@ -1,4 +1,5 @@
-import { parsePreparedWorldContextPlan, validatePreparedCssVolume, DEFAULT_POINT_VISIBILITY, type PreparedWorldContext, type PreparedWorldCameraFrame, type PreparedAssets, type PreparedCssSurfaceShell, type WorldCameraPose, type DensityVolumeFrame } from '@cssearth/objects';
+import { parsePreparedWorldContextPlan, validatePreparedCssVolume, DEFAULT_POINT_VISIBILITY, type PreparedWorldContext, type PreparedWorldCameraFrame, type PreparedAssets, type PreparedCssSurfaceShell, type DensityVolumeFrame } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 
 import { createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';

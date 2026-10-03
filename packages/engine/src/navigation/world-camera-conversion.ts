@@ -1,7 +1,18 @@
-import { validateWorldReflection, validateWorldRotation, type WorldRotation } from '../registry/world-rotation.js';
-import type { PreparedWorldCameraFrame } from './world-frame.js';
-import { cameraPoseToReferenceFrame, offAxisFrame, flipWorldRotationY, referenceRotationFromPresentation, rotateWorldPosition, scaleWorldPosition, transposeWorldRotation, validateWorldPosition, worldQuaternionFromRotation } from '@cssearth/engine';
-import type { FocusFrame, PhysicalCameraPose, PositionM } from '@cssearth/engine';
+import { validateWorldReflection, validateWorldRotation, type WorldRotation } from '@cssearth/core';
+import { flipWorldRotationY, referenceRotationFromPresentation, rotateWorldPosition, scaleWorldPosition, transposeWorldRotation, validateWorldPosition, worldQuaternionFromRotation } from './world-camera-math.js';
+import { cameraPoseToReferenceFrame, type FocusFrame, type PhysicalCameraPose, type PositionM } from '../runtime/selection-flight.js';
+import { offAxisFrame } from '../solar-system/heliocentric-geometry.js';
+
+/** Structural frame input; parsed wire records belong to objects. */
+export interface WorldCameraFrame {
+  readonly referenceFrame: string;
+  readonly epochJdTt: number;
+  readonly originM: PositionM;
+  readonly presentationToReference: WorldRotation;
+  readonly metersPerUnit: number;
+  readonly bodyRadiusM: number;
+}
+
 
 export interface WorldCameraPose {
   readonly referenceFrame: string;
@@ -34,7 +45,7 @@ export function cameraProjectionScale(value = 1): number {
 /** Capture the existing centred physical dolly, including its off-axis eye. */
 export function worldCameraFromCenteredPresentation(
   local: { readonly rotation: WorldRotation; readonly distanceUnits: number },
-  frame: PreparedWorldCameraFrame,
+  frame: WorldCameraFrame,
   viewport: PreparedWorldCameraViewport,
 ): WorldCameraPose {
   validateWorldCameraViewport(viewport);
@@ -48,7 +59,7 @@ export function worldCameraFromCenteredPresentation(
 }
 
 /** Reverse the full translated presentation; unlike the centred dolly this does not re-aim the observer. */
-export function worldCameraFromPresentation(local: LocalWorldCameraPresentation, frame: PreparedWorldCameraFrame, projectionScale = 1): WorldCameraPose {
+export function worldCameraFromPresentation(local: LocalWorldCameraPresentation, frame: WorldCameraFrame, projectionScale = 1): WorldCameraPose {
   const focus = worldCameraFocusFrame(frame);
   validateWorldRotation(local.rotation);
   validateWorldPosition(local.bodyCenterUnits);
@@ -64,7 +75,7 @@ export function worldCameraFromPresentation(local: LocalWorldCameraPresentation,
     ...(projectionScale === 1 ? {} : { projectionScale }) });
 }
 
-export function worldCameraFocusFrame(frame: PreparedWorldCameraFrame): FocusFrame {
+export function worldCameraFocusFrame(frame: WorldCameraFrame): FocusFrame {
   if (typeof frame.referenceFrame !== 'string' || frame.referenceFrame.length === 0 ||
       !Number.isFinite(frame.epochJdTt) || !Number.isFinite(frame.metersPerUnit) || frame.metersPerUnit <= 0 ||
       !Number.isFinite(frame.bodyRadiusM) || frame.bodyRadiusM <= 0) throw new TypeError('Prepared world frame metadata is invalid.');

@@ -2,7 +2,7 @@ import { worldSubject, worldSubjectFrame } from '../inside-view.mts';
 import type { createApplicationWorldContext } from '../application-world-context.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { SceneSession } from './scene-session.mts';
-import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraPose } from '@cssearth/engine';
 
 /** The world's code loads when the world does (`scene-router.mts`); its viewport exists from the start. */
 export type WorldContextOwner = Pick<ReturnType<typeof createApplicationWorldContext>, 'mount'> & {

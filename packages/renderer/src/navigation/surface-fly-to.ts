@@ -1,4 +1,4 @@
-import { SURFACE_FLY_TO } from '@cssearth/objects';
+import { SURFACE_FLY_TO } from '@cssearth/engine';
 import { cross3 } from '@cssearth/core';
 import type { TrackballMetrics, Vector3, Quaternion, Matrix3 } from './types.js';
 export interface SurfaceFlyToInput { clientX: number; clientY: number; trackball: TrackballMetrics; currentZoom: number; minimumZoom: number; maximumZoom: number; }

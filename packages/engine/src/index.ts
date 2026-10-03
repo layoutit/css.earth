@@ -20,7 +20,7 @@ export { cssDirectionToViewDirection } from './solar-system/solar-view-direction
 
 export { viewSunDirectionToPreparedLightDirection, viewSunDirectionToPhysicalLightDirection } from './solar-system/directional-sun-coordinate.js';
 
-export { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, offAxisFrame, silhouetteEllipse, rotationFromMatrix3d, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle, eyeFraction, lerp, determinant, add, scale, magnitude, normalize, round, positive, vector, unit } from './solar-system/heliocentric-geometry.js';
+export { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, offAxisFrame, silhouetteEllipse, rotationFromMatrix3d, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle, eyeFraction, lerp } from './solar-system/heliocentric-geometry.js';
 export type { OffAxisFrame } from './solar-system/heliocentric-geometry.js';
 
 export { cssViewFromOrientation, cssCameraAxesFromOrientation, flipWorldRotationY, referenceRotationFromPresentation, validateWorldPosition, transposeWorldRotation, rotateWorldPosition, scaleWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion, worldRotationCss, nearestWorldRotation } from './navigation/world-camera-math.js';
@@ -28,3 +28,8 @@ export { cssViewFromOrientation, cssCameraAxesFromOrientation, flipWorldRotation
 export type { Matrix3dLike, SilhouetteEllipse, BodyProjection, OrbitSegment } from './solar-system/types.js';
 
 export { preparedSceneMatrix } from './navigation/prepared-scene-matrix.js';
+
+export * from './navigation/world-camera-conversion.js';
+export * from './navigation/prepared-arrival-view.js';
+export * from './navigation/prepared-silhouette-steps.js';
+export * from './navigation/surface-fly-to.js';

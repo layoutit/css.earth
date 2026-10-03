@@ -1,4 +1,5 @@
-import { textureTileLeafStyles, walkSilhouetteLevels, type PreparedTexturePlacements, type PreparedTextureLevels, type PreparedTextureTile, type PreparedTextureTileLeaves } from '@cssearth/objects';
+import { textureTileLeafStyles, type PreparedTexturePlacements, type PreparedTextureLevels, type PreparedTextureTile, type PreparedTextureTileLeaves } from '@cssearth/objects';
+import { walkSilhouetteLevels } from '@cssearth/engine';
 
 import { invertPreparedAffineMatrix4, transformPreparedPoint } from '@cssearth/core';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
