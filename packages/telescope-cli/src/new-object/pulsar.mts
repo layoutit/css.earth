@@ -31,9 +31,9 @@
 import { readFile } from 'node:fs/promises';
 import { skyBasis, directionFromRaDec } from '@cssearth/astronomy';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { NEUTRAL_CATALOGUE_COLOR } from '@cssearth/objects';
+import { NEUTRAL_CATALOGUE_COLOR, PUBLISHED_LIMB_DARKENING_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, checkLimbLaw } from '@cssearth/objects';
 import { parseHotRegionSamples, parsePublishedHotRegions, publishedHotRegionMap } from '@cssearth/bake/objects/raster';
-import { checkLimbLaw, fitQuadraticLimb, neutronStarLog10Gravity, nsxLimbProfile, readNsxTable, type NsxTable } from '@cssearth/bake/objects/stellar';
+import { fitQuadraticLimb, neutronStarLog10Gravity, nsxLimbProfile, readNsxTable, type NsxTable } from '@cssearth/bake/objects/stellar';
 import { CHECKED } from './color.mts';
 import { bindInputs, json, type PackageFiles } from './dataset.mts';
 import { fetchPublication, liveArchive, type Archive, type Publication } from './archives.mts';
@@ -188,7 +188,7 @@ export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, 
   checkLimbLaw({ u1: limb.u1, u2: limb.u2 });
   const round = (value: number, digits: number) => Number(value.toFixed(digits)), fitted = `least-squares fit to the table's ${limb.profile.mu.filter(mu => mu >= 0.05).length} emission cosines of 0.05 and above; largest miss ${limb.largestMiss.toFixed(3)} of the centre intensity`;
   const limbSentence = `dimmed toward the limb by the quadratic law (u1 ${limb.u1.toFixed(3)}, u2 ${limb.u2.toFixed(3)}) fitted to the bolometric intensity of the ${NSX.credit}, at log g ${log10Gravity.toFixed(2)} and ${Math.round(discKelvin).toLocaleString('en-US')} K`;
-  files.set(`${s}/${NSX.path}`, json({ schema: 'cssearth-published-limb-darkening@1', objectId: id, source: `${NSX.credit} (${NSX.url})`,
+  files.set(`${s}/${NSX.path}`, json({ schema: PUBLISHED_LIMB_DARKENING_SCHEMA, objectId: id, source: `${NSX.credit} (${NSX.url})`,
     band: "Bolometric: the table's specific intensity integrated over photon energy", law: 'I(mu)/I(1) = 1 - u1 (1 - mu) - u2 (1 - mu)^2', basis: 'model-prior',
     u1: { value: round(limb.u1, 4), fixed: fitted }, u2: { value: round(limb.u2, 4), fixed: fitted },
     computed: { log10Gravity: round(log10Gravity, 4), gravity: 'GM/R^2 (1 - 2GM/Rc^2)^(-1/2) from the cited mass and radius, in cgs', temperatureK: Math.round(discKelvin),
@@ -227,7 +227,7 @@ export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, 
   files.set(`${s}/preparation/navigation.json`, json(navigation));
 
   const orientation = tiltedOrientation(spec.position.rightAscensionDegrees, spec.position.declinationDegrees, spec.spin.inclinationDegrees);
-  files.set(`${s}/preparation/rotation.json`, json({ schema: 'cssearth-display-orientation@1', ...orientation, phase: 'arbitrary-display-phase',
+  files.set(`${s}/preparation/rotation.json`, json({ schema: DISPLAY_ORIENTATION_SCHEMA, ...orientation, phase: 'arbitrary-display-phase',
     source: `North rotation pole ${spec.spin.inclinationDegrees} degrees from the line of sight toward Earth: ${spec.spin.source} (${spec.spin.url}). The direction of the axis on the sky is not used from any measurement; it is tilted toward celestial north as a convention: sin(i) x sky-north + cos(i) x (direction to Earth), RA ${orientation.rightAscensionDegrees.toFixed(4)}, Dec ${orientation.declinationDegrees >= 0 ? '+' : ''}${orientation.declinationDegrees.toFixed(4)}. Longitude 0 is the meridian that faces Earth, the fit's phase zero.`,
     coordinateSystem: 'ICRF/J2000. +Z is the north rotation pole above; +X is the display meridian, set so that longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.',
     qualification: `The tilt of the axis is published; its position angle on the sky is a display convention. ${spec.name} turns ${spec.spin.frequencyHz.toFixed(1)} times a second, so the star is drawn at one instant: the fit's phase zero.` }));

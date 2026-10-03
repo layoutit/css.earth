@@ -1,3 +1,4 @@
+import { SYNCHRONOUS_ROTATION_SCHEMA, parseAuthoredOrientation, parseSynchronousRotation } from '@cssearth/objects';
 import { cross3 as cross, requireRecord, requireFiniteNumber, dot3 as dot } from '@cssearth/core';
 import type { RotationElements } from "@cssearth/astronomy";
 import { readFile } from 'node:fs/promises';
@@ -30,17 +31,12 @@ export async function readAuthoredRotation(directory: string, reference: { path:
     return { poleRightAscensionRad: ra * rad, poleDeclinationRad: dec * rad,
       primeMeridianRad: ((w % 360 + 360) % 360) * rad, spinRateRadPerDay: rate * rad };
   }
-  if (source.schema === 'cssearth-synchronous-rotation@1') return synchronousRotation(directory, source, epochJdTt);
+  if (source.schema === SYNCHRONOUS_ROTATION_SCHEMA) return synchronousRotation(directory, source, epochJdTt);
   if (source.schema === 'cssearth-orbit-aligned-pole@1') return orbitAlignedPole(directory, source, epochJdTt);
   if (source.schema === 'cssearth-measured-obliquity-pole@1') return measuredObliquityPole(directory, source, epochJdTt);
   const observed = source.schema === 'cssearth-observed-pole@1';
-  const rightAscension = requireFiniteNumber(source.rightAscensionDegrees), declination = requireFiniteNumber(source.declinationDegrees), meridian = requireFiniteNumber(source.displayMeridianDegrees);
-  const periodHours = observed ? requireFiniteNumber(source.periodHours) : 0;
-  if ((!observed && source.schema !== 'cssearth-display-orientation@1') || source.phase !== 'arbitrary-display-phase' ||
-      ![rightAscension, declination, meridian, epochJdTt].every(Number.isFinite) ||
-      (observed && (!Number.isFinite(periodHours) || periodHours <= 0)) ||
-      (!observed && (typeof source.qualification !== 'string' || !source.qualification.trim())) ||
-      Math.abs(declination) > 90) throw new TypeError('Invalid authored orientation source.');
+  const { rightAscensionDegrees: rightAscension, declinationDegrees: declination, displayMeridianDegrees: meridian, periodHours } = parseAuthoredOrientation(source, { observed });
+  if (!Number.isFinite(epochJdTt)) throw new TypeError('Invalid authored orientation source.');
   const rad = Math.PI / 180;
   return { poleRightAscensionRad: rightAscension * rad,
     poleDeclinationRad: declination * rad,
@@ -54,8 +50,8 @@ export async function readAuthoredRotation(directory: string, reference: { path:
  * varies, by up to about 2e radians in longitude. */
 async function synchronousRotation(directory: string, source: Record<string, unknown>, epochJdTt: number): Promise<RotationElements> {
   const { id } = requireRecord(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')), 'Object descriptor');
-  if (typeof id !== 'string' || typeof source.source !== 'string' || !source.source.trim() || typeof source.qualification !== 'string' || !source.qualification.trim() ||
-      typeof source.coordinateSystem !== 'string' || !source.coordinateSystem.trim()) throw new TypeError('Invalid synchronous rotation source.');
+  if (typeof id !== 'string') throw new TypeError('Invalid synchronous rotation source.');
+  parseSynchronousRotation(source);
   const { HOSTED_PLANET_IDS, hostedOrbit, hostedPlanetStateRelativeKm, hostedKeplerElements, starAstrometry, BODIES } = await import('@cssearth/astronomy');
   if (!(HOSTED_PLANET_IDS as readonly string[]).includes(id)) throw new TypeError(`Synchronous rotation needs a hosted orbit: ${id}.`);
   const planet = id as (typeof HOSTED_PLANET_IDS)[number], orbit = hostedOrbit(planet);

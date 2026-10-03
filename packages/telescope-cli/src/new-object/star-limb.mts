@@ -9,6 +9,7 @@
  *    (interferometric-limb.mts); the record is written beside the star and read as in 1.
  * A star that already has a color dataset gains the law on it; a placeholder that has none gains the color dataset with it
  * (color.mts, dataset.mts). A star no source covers is reported and left unchanged. */
+import { PUBLISHED_LIMB_DARKENING_SCHEMA } from '@cssearth/objects';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { parseCieTable } from '@cssearth/bake/objects/color';
@@ -35,7 +36,7 @@ async function publishedLaw(root: string, id: string): Promise<LimbChoice | null
   const names = (await readdir(directory).catch(() => [] as string[])).filter(name => name.endsWith('-limb-darkening.json'));
   for (const name of names) {
     const record = JSON.parse(await readFile(resolve(directory, name), 'utf8')) as { schema?: string; law?: string; source?: string; band?: string; basis?: string; alpha?: { value: number }; u1?: { value: number }; u2?: { value: number }; fit?: { tool: string; input: string; data: string } };
-    if (record.schema !== 'cssearth-published-limb-darkening@1') continue;
+    if (record.schema !== PUBLISHED_LIMB_DARKENING_SCHEMA) continue;
     // A fitted law's origin is the origin of the file it was fitted to, as the star's manifest records it.
     const fitted = record.fit && ((JSON.parse(await readFile(resolve(root, 'src/objects', id, 'source/manifest.json'), 'utf8')) as { inputs?: { path: string; origin?: string }[] }).inputs ?? []).find(input => input.path === record.fit!.input)?.origin;
     const path = `photometry/${name}`, url = fitted ?? /https?:\/\/\S+?(?=[),;]|\s|$)/u.exec(record.source ?? '')?.[0] ?? '';

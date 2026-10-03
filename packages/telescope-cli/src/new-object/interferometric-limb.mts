@@ -3,6 +3,7 @@
  * visibilities an observation season records for it (packages/telescope-cli/src/archives/interferometry/seasons/). The first lobe
  * is where the whole disc dominates; past the null a spotted star's cells do. The law is written as a record beside the star, with
  * the tool, the input and the data it was fitted to, and star-limb.mts installs it as it installs a paper's. */
+import { PUBLISHED_LIMB_DARKENING_SCHEMA } from '@cssearth/objects';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -29,7 +30,7 @@ export async function fitInterferometricLimb(root: string, id: string, progress:
     const alpha = Number(fit.alpha.toFixed(2)), uncertainty = Math.ceil(Math.max(fit.alpha - fit.alphaRange[0], fit.alphaRange[1] - fit.alpha) * 100 - 1e-6) / 100;
     const sourceDirectory = resolve(root, 'src/objects', id, 'source'), input = relative(sourceDirectory, resolve(root, calibrated));
     const title = requireString(season.title, `${path} title`), record = {
-      schema: 'cssearth-published-limb-darkening@1', objectId: id,
+      schema: PUBLISHED_LIMB_DARKENING_SCHEMA, objectId: id,
       source: `${title}, the calibrated visibilities in ${input}`,
       fit: { tool: 'fitPowerLawDisc (packages/telescope-cli/src/archives/interferometry/disc-fit.mts), run by node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb', input, data: `the calibrated ${instrument.toUpperCase()} visibilities of ${title.split(',')[0]}, inside the first lobe` },
       band, law: 'power', basis: 'fit',

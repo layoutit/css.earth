@@ -206,3 +206,7 @@ export { PREPARED_DESTINATIONS_SCHEMA, parsePreparedDestinations, type PreparedD
 export * from './prepared-data/authored-preparation.js';
 export * from './prepared-data/world-navigation-preparation.js';
 export * from './prepared-data/prepared-features.js';
+export { WISE_ATLAS_TILES_SCHEMA, WISE_BAND_NAMES, parseTilePins, type WiseBand, type TilePins } from './prepared-data/wise-atlas-tiles.js';
+export { DISPLAY_ORIENTATION_SCHEMA, parseAuthoredOrientation, type DisplayOrientation } from './prepared-data/display-orientation.js';
+export { SYNCHRONOUS_ROTATION_SCHEMA, parseSynchronousRotation, type SynchronousRotation } from './prepared-data/synchronous-rotation.js';
+export { PUBLISHED_LIMB_DARKENING_SCHEMA, readPublishedPowerLaw, readPublishedLimbDarkening, checkLimbLaw, type LimbLaw, type PublishedLimbCoefficient, type PublishedLimbDarkening } from './prepared-data/published-limb-darkening.js';
