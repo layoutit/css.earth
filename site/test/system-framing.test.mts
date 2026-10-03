@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readSystemViewFile } from './system-view-file.mts';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { SCENE_OBJECTS } from '../objects.mts';
@@ -16,7 +17,7 @@ import { required, position, quaternion, navigationFixture, unusedSharedView } f
 import { parsePreparedWorldContext, type WorldCameraPose } from '@cssearth/objects';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
+await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, readSystemViewFile)));
 const context = parsePreparedWorldContext(contextInput);
 // Target calculation never requests native frames or queries absent shell nodes.
 const windowTarget = {} as Window;

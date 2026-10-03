@@ -27,18 +27,17 @@ test('private material masters stay staged while all consumer JSON is preflighte
   await writeFile(join(root,'unexpected.mjs'),'export default null;');
   await assert.rejects(readPreparedJsonOutputs(root),/only regular JSON/);
   await rm(join(root,'unexpected.mjs'));
-  // World orbit banks and system views are published per centre and per system beside the world context that owns them,
-  // and refused without it; a folder holds only its own kind of file.
-  await mkdir(join(root,'world-orbits')); await mkdir(join(root,'system-views'));
-  await writeFile(join(root,'world-orbits','sun.bin'),'orbits'); await writeFile(join(root,'system-views','sun.json'),'{}\n');
+  // World orbit banks are published per centre beside the world context that owns them, and refused without it; a folder
+  // holds only its own kind of file. (A system's views are its own package's: src/objects/<system>/prepared/views/.)
+  await mkdir(join(root,'world-orbits'));
+  await writeFile(join(root,'world-orbits','sun.bin'),'orbits');
   await assert.rejects(readPreparedBinaryOutputs(root),/beside world-context\.json/);
   await writeFile(join(root,'world-context.json'),'{}\n');
   assert.deepEqual((await readPreparedJsonOutputs(root)).map(output=>output.filename),['content.json','runtime.json','world-context.json']);
-  assert.deepEqual(await readPreparedBinaryOutputs(root),[{filename:'system-views/sun.json',path:join(root,'system-views','sun.json')},
-    {filename:'world-orbits/sun.bin',path:join(root,'world-orbits','sun.bin')}]);
+  assert.deepEqual(await readPreparedBinaryOutputs(root),[{filename:'world-orbits/sun.bin',path:join(root,'world-orbits','sun.bin')}]);
   await writeFile(join(root,'world-orbits','notes.txt'),'x');
   await assert.rejects(readPreparedBinaryOutputs(root),/must hold only \.bin files; found notes\.txt/);
-  await rm(join(root,'world-orbits'),{recursive:true}); await rm(join(root,'system-views'),{recursive:true}); await rm(join(root,'world-context.json'));
+  await rm(join(root,'world-orbits'),{recursive:true}); await rm(join(root,'world-context.json'));
   await symlink(join(root,'runtime.json'),join(root,'linked.json'));
   await assert.rejects(readPreparedJsonOutputs(root),/only regular JSON/);
  }finally{await rm(root,{recursive:true,force:true});}
