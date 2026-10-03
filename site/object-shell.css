@@ -1645,7 +1645,7 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
     box-shadow: none;
   }
   /* Search results are one list, not sections: they sit on the sheet's own background. */
-  .object-drawer-content:has(> [data-search-results]) { background: transparent; }
+  .object-drawer-content[data-search-results] { background: transparent; }
 
   .object-card {
     display: flex;

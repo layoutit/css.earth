@@ -67,7 +67,8 @@ body[data-object-shell] {
   font: 14px/1.4 var(--shell-ui-font);
 }
 
-.object-card:has(> .object-selected-panel > .object-breadcrumbs) {
+/* The body's card opens on its breadcrumbs (ObjectInformationPanel.astro). */
+.object-card.object-information-panel {
   padding-block-start: 16px;
 }
 
@@ -600,7 +601,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     --explorer-header-height: calc(var(--explorer-header-bar-height) + var(--explorer-header-row-gap) + var(--explorer-search-height));
   }
 
-  .object-card:has(> .object-selected-panel > .object-breadcrumbs) { padding-block-start: 14px; }
+  .object-card.object-information-panel { padding-block-start: 14px; }
 
   .object-ui-layer {
     position: fixed;
