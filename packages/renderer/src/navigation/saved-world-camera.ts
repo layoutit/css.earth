@@ -1,7 +1,8 @@
 import type { SharedView } from './view-url.js';
 import { parseSharedView, formatSharedView } from './view-url.js';
 import type { WorldCameraViewport } from './world-camera.js';
-import { worldCameraFromCenteredPresentation, worldCameraFromPresentation, type PreparedWorldCameraFrame } from '@cssearth/objects';
+import { type PreparedWorldCameraFrame } from '@cssearth/objects';
+import { worldCameraFromCenteredPresentation, worldCameraFromPresentation } from '@cssearth/engine';
 import { worldCameraViewport } from './world-camera.js';
 
 /** Resolve a validated saved camera before flight so Back lands at its exact view. */

@@ -1,4 +1,4 @@
-import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraPose } from '@cssearth/engine';
 import { sameEyePlace } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import type { ObjectWorldNavigationListener } from './world-navigation-types.js';

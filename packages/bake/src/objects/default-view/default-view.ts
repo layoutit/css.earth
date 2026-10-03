@@ -6,7 +6,7 @@
  * celestial directions land on screen. A preparation check uses it to refuse a default view that misses the dataset's
  * sub-observer point; a test pins the numbers the browser was measured to show. */
 import { preparedScenePitch } from '@cssearth/engine';
-import { worldCameraFromPresentation } from '@cssearth/objects';
+import { worldCameraFromPresentation } from '@cssearth/engine';
 import type { SolarGeometry } from '../scene/index.ts';
 
 const DEGREE = Math.PI / 180;

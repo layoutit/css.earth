@@ -3,7 +3,7 @@ import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { parsePreparedLmcStars, mountPreparedLmcStars, type PreparedLmcStars } from '@cssearth/nebula-lab/adapters/viewer/catalogue-stars';
-import { worldCameraFromCenteredPresentation } from '@cssearth/objects';
+import { worldCameraFromCenteredPresentation } from '@cssearth/engine';
 import { referenceRotationFromPresentation, worldRotationFromQuaternion } from '@cssearth/engine';
 import { preparedVolumeCameraTransform } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
 import { prepareCatalogue, sampleJointDepth } from '../../../cli/commands/prepare-lmc-stars.ts';

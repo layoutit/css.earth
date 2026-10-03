@@ -1,4 +1,5 @@
-import { type CameraPose, type CameraPlan, type DirectionalSunPlan, type PreparedWorldCameraFrame, type WorldCameraPose } from '@cssearth/objects';
+import { type CameraPose, type CameraPlan, type DirectionalSunPlan, type PreparedWorldCameraFrame } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 
 import { cameraMotionSignalFor } from './camera-motion-signal.js';
 import type { WorldFramePresenter } from './world-frame-presenter.js';

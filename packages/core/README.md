@@ -47,3 +47,5 @@ pnpm --filter @cssearth/core build
 pnpm --filter @cssearth/core typecheck
 pnpm --filter @cssearth/core test
 ```
+
+Shared world rotation/reflection types and validation live in `src/math/world-rotation.ts`, used by objects parsers and engine navigation.

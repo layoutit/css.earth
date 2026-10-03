@@ -1,4 +1,5 @@
-import { PREPARED_VOLUME_IMPOSTORS_SCHEMA, type DatasetBankBillboard, type DatasetBillboards, type DensityVolumeFrame, type VolumeVector, type PreparedVolumeImpostors, type WorldCameraPose } from '@cssearth/objects';
+import { PREPARED_VOLUME_IMPOSTORS_SCHEMA, type DatasetBankBillboard, type DatasetBillboards, type DensityVolumeFrame, type VolumeVector, type PreparedVolumeImpostors } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 
 import { writeStyle } from '../rendering/retained-write.js';
 

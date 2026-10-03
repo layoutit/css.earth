@@ -1,4 +1,4 @@
-import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraPose } from '@cssearth/engine';
 import { zoomScopeAtCamera } from '../zoom-scope.mts';
 import { namesSystem, type PageView } from '../navigation/navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';

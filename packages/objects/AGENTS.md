@@ -1,5 +1,13 @@
 # Objects package instructions
 
+## What may live here
+
+- **Allowed:** format types, schema-id constants, parsers, validators, binary encoders and decoders, and their fixtures.
+- **Not allowed:** algorithms that compute from the data: camera or navigation math, level or hysteresis walkers, geometry derivation, projection, sampling and fitting. They belong in `engine` (camera and navigation) or the owning package.
+- **Quick test:** if a function does more than read, check or (de)serialize a format, it does not belong here.
+- Known exceptions still to move out: `src/baking/` (raster algorithms) and `src/geometry/` (A255). Do not add to them.
+- `objects` imports `@cssearth/core` only; the `objects-imports-core-only` architecture rule enforces it.
+
 Own the shared object JSON parser, validation, reusable object types, and preparation contracts.
 Own the source catalogue (`src/sources/`, browser-safe), the provenance, exploration and source-usage records the
 application reads and preparation writes (`src/provenance/`, the browser-safe `@cssearth/objects/provenance` entry; the
@@ -17,7 +25,7 @@ inputs, joint parameters, authored shape settings, observation photo data and ma
 structural cancellation interfaces, and prepared catalogue stars. Writers and readers import these from
 `@cssearth/objects`; sampling, fitting, cancellation handling and file I/O remain outside this area.
 `src/prepared-data/` owns the prepared CSS object format identifier and compact world-summary/system table decoders,
-exported through the browser-safe main entry. It also owns full world-context, world-camera frame and presentation contracts, system views, orbit centres and
+exported through the browser-safe main entry. It also owns the data shapes of the full world-context, world-camera frame and presentation records, system views, orbit centres and
 JSON orbit data, and orbit-bank encoding, decoding and binary regions. Projection, navigation and spatial
 preparation stay with their owners; never import renderer implementation here.
 An object type describes supported behavior and data, not an individual planet.
@@ -26,7 +34,7 @@ Keep one shared object contract; application discovery remains in the existing r
 `src/registry/` holds that registry's shared contracts, exported from the main entry: the entry schema and catalogue
 decoding (`defineObjects`, `catalogEntry`, `catalogueObject`), the object tree (`checkObjectTree`: every object names the one object it is inside, the Observable Universe is the root), the discovery, distance, arrival, zoom and package-fact parsers, the classification
 categories, the fact order, the destination-name normalisation preparation and search share, the context color and
-world-rotation validation. `site/objects.mts` stays the one `OBJECTS` registry: it binds these contracts to the shell's
+world-rotation validation from core. `site/objects.mts` stays the one `OBJECTS` registry: it binds these contracts to the shell's
 scene loader. The registry here never loads a scene, reads a file or lists an object. Preparation reads that same
 registry with `readPreparedObjects` (`src/node/prepared-registry.ts`): the prepared catalogue decoded with the same
 contracts, without a scene loader. It is a read of the one registry, never a second list; keep it assembled as
@@ -102,13 +110,13 @@ parsers and little-endian compact color/emission decoders are exported through `
 fitting, selection, decompression, compilation and file I/O stay with bake, reconstruction, lab and volume-viewer.
 Contract tests use node:test in the packages lane; replay and selection conformance stay with their owners.
 
-`src/prepared-data/` also owns canonical image density/resource addresses and pools, tile leaf styles and keys, silhouette-step walking, interior-disc size, shell material addresses, marker and shell-control validation, surface fly-to conventions and feature-bank hashing. `src/stars/` owns the luminance threshold; `src/volume/` owns the CSS compiler budget and pure topology equality. Numeric camera orientation and solar geometry belong to engine.
+`src/prepared-data/` also owns canonical image density/resource addresses and pools, tile leaf styles and keys, interior-disc size, shell material addresses, marker and shell-control validation, feature-bank hashing. `src/stars/` owns the luminance threshold; `src/volume/` owns the CSS compiler budget and pure topology equality. Numeric camera orientation and solar geometry belong to engine.
 
-`src/prepared-data/world-camera-conversion.ts` owns validated presentation-to-world pose conversion,
-its shared pose and presentation data shapes, projection-scale, focus-frame and viewport validation.
-`prepared-arrival-view.ts` owns the validated default-view rotation reader. Both use browser-safe engine
-math; objects depends on engine, which never imports objects. Runtime viewport/layout and presentation
-projection stay in renderer. Shell facing-level selection remains in renderer.
+`@cssearth/objects` depends only on core and owns formats, parsers, validators and codecs.
+Shared rotation/reflection validation lives in core. Presentation-to-world conversion, camera pose/viewport
+interfaces, default-view rotation, silhouette walking and surface fly-to calibration live in engine navigation.
+Callers validate camera records with `requireCamera` before passing plain calibration values to engine.
+Runtime viewport/layout and presentation projection stay in renderer.
 
 `parsePreparedDensityVolume` validates the prepared envelope, identity and authored physical frame without transport. Bake, telescope F16 and renderer share it; filesystem/fetch transport stays with callers. Its node:test suite runs in the packages lane.
 

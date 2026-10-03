@@ -1,4 +1,4 @@
-import { validateWorldRotation } from '@cssearth/objects';
+import { validateWorldRotation } from '@cssearth/core';
 import { it } from 'node:test';
 import assert from 'node:assert/strict';
 import { nearestWorldRotation } from '@cssearth/engine';

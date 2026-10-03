@@ -1,4 +1,5 @@
-import { type DensityVolumeFrame, type WorldCameraPose } from '@cssearth/objects';
+import { type DensityVolumeFrame } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { projectVolumeSphere } from '../volume/projected-volume-visibility.js';
 

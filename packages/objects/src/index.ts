@@ -171,8 +171,6 @@ export { surfaceFeatureBankIndex } from './prepared-data/surface-feature-banks.j
 
 export { CSS_COMPILER_RENDER_BUDGET } from './volume/compiler-render-budget.js';
 
-export { walkSilhouetteLevels } from './prepared-data/prepared-silhouette-steps.js';
-
 export { PREPARED_INTERIOR_DISC_SIZE } from './prepared-data/prepared-interior-disc-size.js';
 
 export { tiledTextureKeys, textureTileLeafStyles } from './prepared-data/prepared-texture-tile-styles.js';
@@ -180,8 +178,6 @@ export { tiledTextureKeys, textureTileLeafStyles } from './prepared-data/prepare
 export { shellMaterialAddress } from './prepared-data/shell-material-address.js';
 
 export { IMPERCEPTIBLE_LUMINANCE } from './stars/point-field-luminance.js';
-
-export { SURFACE_FLY_TO_SCHEMA, SURFACE_FLY_TO } from './prepared-data/surface-fly-to.js';
 
 export { requireObjectControls } from './prepared-data/shell-controls.js';
 export type { ShellObjectControls } from './prepared-data/shell-controls.js';
@@ -193,9 +189,6 @@ export { samePreparedVolumeTopology } from './volume/prepared-volume-topology.js
 
 export { RENDER_ELEMENT_PROFILE_SCHEMA } from './volume/render-element-budget.js';
 
-export { worldCameraFromCenteredPresentation, worldCameraFromPresentation, cameraProjectionScale, worldCameraFocusFrame, validateWorldCameraViewport } from './prepared-data/world-camera-conversion.js';
-export type { WorldCameraPose, LocalWorldCameraPresentation, PreparedWorldCameraViewport } from './prepared-data/world-camera-conversion.js';
-export { preparedDefaultViewRotation } from './prepared-data/prepared-arrival-view.js';
 export { parsePreparedDensityVolume } from './prepared-data/prepared-density-volume.js';
 export { AUTHORED_OBJECT_SCHEMA } from './authored.js';
 export { SOURCE_MANIFEST_SCHEMA } from './sources/source-manifest-schema.js';

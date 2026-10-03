@@ -1,6 +1,7 @@
 import { writeStyle } from '../rendering/retained-write.js';
 import { eyeAnchor } from '@cssearth/engine';
-import { isExtendedClassification, type PreparedWorldContext, type PreparedContextBody, type WorldCameraPose } from '@cssearth/objects';
+import { isExtendedClassification, type PreparedWorldContext, type PreparedContextBody } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import { createContextLocator } from './context-locator.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
 import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';

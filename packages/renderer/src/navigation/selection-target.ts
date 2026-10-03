@@ -1,5 +1,6 @@
 import type { PositionM } from '@cssearth/engine';
-import { type WorldCameraPose, type PreparedWorldCameraFrame } from '@cssearth/objects';
+import { type PreparedWorldCameraFrame } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from './world-camera.js';
 import { cssCameraAxesFromOrientation, rotateWorldPosition } from '@cssearth/engine';
 import { distanceForSilhouetteRadius } from '@cssearth/engine';

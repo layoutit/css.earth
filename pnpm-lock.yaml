@@ -384,9 +384,6 @@ importers:
       '@cssearth/core':
         specifier: workspace:*
         version: link:../core
-      '@cssearth/engine':
-        specifier: workspace:*
-        version: link:../engine
     devDependencies:
       '@types/node':
         specifier: ^26.4.0

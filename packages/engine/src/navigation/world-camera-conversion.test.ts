@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { worldCameraFromCenteredPresentation, worldCameraFromPresentation } from './world-camera-conversion.js';
-import type { PreparedWorldCameraFrame } from './world-frame.js';
-import type { WorldRotation } from '../registry/world-rotation.js';
+import type { WorldCameraFrame } from './world-camera-conversion.js';
+import type { WorldRotation } from '@cssearth/core';
 
 const rotation: WorldRotation = [1, 0, 0, 0, 1, 0, 0, 0, 1];
-const frame: PreparedWorldCameraFrame = { referenceFrame: 'ICRF', epochJdTt: 2451545,
+const frame: WorldCameraFrame = { referenceFrame: 'ICRF', epochJdTt: 2451545,
   originM: [0, 0, 0], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1],
   metersPerUnit: 2, bodyRadiusM: 1 };
 const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const };

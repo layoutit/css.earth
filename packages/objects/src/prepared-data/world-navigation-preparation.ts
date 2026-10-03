@@ -1,6 +1,6 @@
 import { requireRecord } from '@cssearth/core';
 import type { PreparedWorldCameraFrame } from './world-frame.js';
-import type { WorldRotation } from '../registry/world-rotation.js';
+import type { WorldRotation } from '@cssearth/core';
 
 export const WORLD_NAVIGATION_PREPARATION_SCHEMA = 'cssearth-world-navigation-preparation@1';
 interface WorldNavigationReceiptBase {
