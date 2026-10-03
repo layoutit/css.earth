@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "capella",
+  "displayName": "Capella",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "12 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-807-1-26",
+          "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+          "label": "Torres et al. (2015), The Astrophysical Journal 807 26",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "13.2 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-807-1-26",
+          "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+          "label": "Torres et al. (2015), ApJ 807, 26, Table 4: distance 13.159 +/- 0.015 pc from the orbital parallax 75.994 +/- 0.089 mas",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "capella-dataset-color.webp",
+        "surface": "capella-surface-color@2x.webp",
+        "poles": "capella-poles-color@2x.webp",
+        "source": {
+          "id": "capella-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1088/0004-637X/807/1/26"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,970 K and log g 2.69 (u1 0.636, u2 0.142): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Torres et al. (2015), ApJ 807, 26",
+      "href": "https://doi.org/10.1088/0004-637X/807/1/26"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+      "credit": "Torres et al. (2015), ApJ 807, 26"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/capella.json",
+      "credit": "Torres et al. radius; Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

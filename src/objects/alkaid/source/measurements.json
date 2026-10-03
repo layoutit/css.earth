@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "alkaid",
+  "angularDiameterMas": 0.99,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 2,365,380 km at 31.87 pc = 0.99 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 31.867,
+  "distanceSource": "Baines et al. (2018), AJ 155, 30, HD 120315: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 31.38 +/- 0.24 mas, inverted (https://doi.org/10.3847/1538-3881/aa9d8b): 31.867 +/- 0.244 pc; Gaia DR3 gives this source no parallax (a two-parameter solution)",
+  "radiusKm": 2365380,
+  "radiusSource": "Radius 3.4 +/- 0.5 solar radii from Baines et al. (2018), AJ 155, 30, HD 120315: radius 3.4 +/- 0.5 solar radii (Table 5), from the limb-darkened angular diameter 0.981 +/- 0.144 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/aa9d8b): 2,365,380 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 15540 +/- 1157 K from Baines et al. (2018), AJ 155, 30, HD 120315: effective temperature 15540 +/- 1157 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 15540,
+  "effectiveTemperatureSource": "Baines et al. (2018), AJ 155, 30, HD 120315: effective temperature 15540 +/- 1157 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b)",
+  "surfaceGravityLogg": 3.78,
+  "surfaceGravitySource": "Baines et al. (2018), AJ 155, 30, HD 120315: log g 3.78, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 4) (https://doi.org/10.3847/1538-3881/aa9d8b)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

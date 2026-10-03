@@ -20,17 +20,22 @@ const record = async (id: string) => {
 test('the Roche-von Zeipel model reproduces each paper\'s equatorial radius and temperature from its polar values', async () => {
   const ids = (await readdir(objects, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name)
     .filter(id => existsSync(new URL(`${id}/source/photometry/gravity-darkening.json`, objects))).sort();
-  assert.deepEqual(ids, ['alderamin', 'altair', 'caph', 'kelt-9', 'rasalhague', 'regulus', 'vega']);
+  assert.deepEqual(ids, ['achernar', 'alderamin', 'altair', 'caph', 'kelt-9', 'rasalhague', 'regulus', 'vega']);
   for (const id of ids) {
     const { raw, record: model } = await record(id);
     // A transit fit publishes the radius ratio and no equatorial temperature (KELT-9, next test).
     if (raw.model.equatorialToPolarRadius) continue;
     const ratio = model.equatorialRadiusSolar / model.polarRadiusSolar;
     // The published radii each carry about half a percent; the model ratio must fall inside their combined error.
-    const ratioError = ratio * Math.hypot(raw.model.equatorialRadiusSolar.uncertainty / model.equatorialRadiusSolar, raw.model.polarRadiusSolar.uncertainty / model.polarRadiusSolar);
+    // A paper that fits the equatorial radius and derives the polar one prints the latter without an error (Achernar: Domiciano de
+    // Souza et al. 2014, Table 6): the ratio then carries the fitted radius's error alone.
+    const ratioError = ratio * Math.hypot(raw.model.equatorialRadiusSolar.uncertainty / model.equatorialRadiusSolar, (raw.model.polarRadiusSolar.uncertainty ?? 0) / model.polarRadiusSolar);
     // Asymmetric published errors are recorded as their larger side.
     assert.ok(Math.abs(rocheRadius(model.omega, Math.PI / 2) - ratio) <= ratioError, `${id}: equatorial radius`);
-    assert.ok(Math.abs(surfaceTemperature(model, Math.PI / 2) - model.equatorTemperatureK!) <= raw.model.equatorTemperatureK.uncertainty, `${id}: equatorial temperature`);
+    // A derived equatorial temperature printed without an error is held to what the fitted exponent's own error moves it.
+    const equator = Math.PI / 2, temperatureError = raw.model.equatorTemperatureK.uncertainty
+      ?? Math.abs(surfaceTemperature({ ...model, beta: model.beta + raw.model.beta.uncertainty }, equator) - surfaceTemperature(model, equator));
+    assert.ok(Math.abs(surfaceTemperature(model, equator) - model.equatorTemperatureK!) <= temperatureError, `${id}: equatorial temperature`);
     assert.equal(surfaceTemperature(model, 0), model.poleTemperatureK, `${id}: the pole is the reference`);
   }
   // Monnier et al. (2012), Table 2, give Vega's surface-averaged temperature as 9360 ± 90 K.

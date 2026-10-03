@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "mirfak",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Mirfak",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 36920799
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/mirfak-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Mirfak",
+      "classification": "star",
+      "color": "#fbf7ff",
+      "distanceAu": 32028783.9,
+      "description": "A supergiant of type F5 I, 155 parsecs away: 53.1 times the Sun's width and 2,994 times its light.",
+      "systemName": "Mirfak system",
+      "aliases": [
+        "HD 20902"
+      ],
+      "order": 5475,
+      "context": {
+        "order": 5472
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1940433345200511200,
+        2403172723506446300,
+        3662970944447843300
+      ],
+      "presentationToReference": [
+        0.40497717662774496,
+        0.4802698847654289,
+        0.778032341357364,
+        0.5015529685618622,
+        0.5947931942570687,
+        -0.6282242241367779,
+        0.764485517284274,
+        -0.64464090302499,
+        0.000003117927338756465
+      ],
+      "orbitUpReference": [
+        -0.4802698847654289,
+        -0.5947931942570687,
+        0.64464090302499
+      ],
+      "metersPerUnit": 119099351.61290322,
+      "bodyRadiusM": 36920799000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

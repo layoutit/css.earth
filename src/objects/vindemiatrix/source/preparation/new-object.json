@@ -1,0 +1,55 @@
+{
+  "id": "vindemiatrix",
+  "name": "Vindemiatrix",
+  "system": "Vindemiatrix system",
+  "parent": "milky-way",
+  "description": "A giant of type G8 III 33.6 parsecs away, 12.0 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 113226"
+  ],
+  "featured": true,
+  "target": "HD 113226",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "credit": "Baines et al. (2018), AJ 155, 30"
+  },
+  "radius": {
+    "value": 11.98,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 113226: radius 11.98 +/- 0.07 solar radii (Table 5), from the limb-darkened angular diameter 3.318 +/- 0.013 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.07
+  },
+  "mass": {
+    "value": 2.96,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 113226: mass 2.96 +/- 0.09 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.09
+  },
+  "temperature": {
+    "value": 5020,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 113226: effective temperature 5020 +/- 64 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 64
+  },
+  "distance": {
+    "value": 33.602,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 113226: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 29.76 +/- 0.14 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.158
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A giant of type G8 III, 34 parsecs away: 12.0 times the Sun's width and 82 times its light.",
+    "introduction": "Its disc spans 3.318 milliarcseconds, which gives 11.98 solar radii and 5,020 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 113226: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -14.29,
+    "uncertainty": 0.02,
+    "source": "SIMBAD's radial velocity for Gaia DR3 3736865265441207424 (quality A), from 2015A&A...574A..50J; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...574A..50J/abstract"
+  },
+  "order": 5465
+}

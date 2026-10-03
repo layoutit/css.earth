@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-3847-1538-3881-aa9d8b",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Baines et al. (2017): Fundamental Parameters of 87 Stars from the Navy Precision Optical Interferometer",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aa9d8b"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+      "checkedOn": "2026-10-03",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Baines et al. (2017), The Astronomical Journal 155 30",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.3847/1538-3881/aa9d8b"
+    }
+  ],
+  "publisher": "The Astronomical Journal 155 30",
+  "creators": [
+    "Ellyn K. Baines",
+    "J. Thomas Armstrong",
+    "Henrique R. Schmitt",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

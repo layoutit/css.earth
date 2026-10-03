@@ -1,0 +1,50 @@
+{
+  "id": "zaurak",
+  "name": "Zaurak",
+  "system": "Zaurak system",
+  "parent": "milky-way",
+  "description": "A giant of type M0 III 58.8 parsecs away, 58.7 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 25025"
+  ],
+  "featured": true,
+  "target": "HD 25025",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "credit": "Baines et al. (2021), AJ 162, 198"
+  },
+  "radius": {
+    "value": 58.7,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 25025: radius 58.7 +0.8/-0.82 solar radii (Table 5), from the limb-darkened angular diameter 9.286 +/- 0.028 mas (NPOI, Table 4) and the Gaia EDR3 (Gaia Collaboration 2021) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "uncertainty": 0.82
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 3779,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 25025: effective temperature 3779 +/- 34 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "uncertainty": 34
+  },
+  "distance": {
+    "value": 58.824,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 25025: the Gaia EDR3 (Gaia Collaboration 2021) parallax the radius was computed with (Table 1), 17 +/- 0.23 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "uncertainty": 0.796
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A giant of type M0 III, 59 parsecs away: 58.7 times the Sun's width and 634 times its light.",
+    "introduction": "Its disc spans 9.286 milliarcseconds, which gives 58.7 solar radii and 3,779 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 25025: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 60.81,
+    "uncertainty": 0.25,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5111187420714898304 (quality A), from 2008AJ....135..209M; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2008AJ....135..209M/abstract"
+  },
+  "order": 5476
+}

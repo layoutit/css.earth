@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "elnath",
+  "angularDiameterMas": 1.24,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 3,805,479 km at 41.05 pc = 1.24 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 41.051,
+  "distanceSource": "Baines et al. (2021), AJ 162, 198, HD 35497: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 24.36 +/- 0.34 mas, inverted (https://doi.org/10.3847/1538-3881/ac2431): 41.051 +/- 0.573 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 3805479,
+  "radiusSource": "Radius 5.47 +/- 0.24 solar radii from Baines et al. (2021), AJ 162, 198, HD 35497: radius 5.47 +/- 0.24 solar radii (Table 5), from the limb-darkened angular diameter 1.239 +/- 0.052 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/ac2431): 3,805,479 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 12026 +/- 262 K from Baines et al. (2021), AJ 162, 198, HD 35497: effective temperature 12026 +/- 262 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ac2431). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 12026,
+  "effectiveTemperatureSource": "Baines et al. (2021), AJ 162, 198, HD 35497: effective temperature 12026 +/- 262 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ac2431)",
+  "surfaceGravityLogg": 3.63,
+  "surfaceGravitySource": "Baines et al. (2021), AJ 162, 198, HD 35497: log g 3.63, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 4) (https://doi.org/10.3847/1538-3881/ac2431)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -13,6 +13,8 @@ import { requireFiniteNumber, requireRecord, requireString, dot3 as dot } from '
 import { linearToSrgb } from '../color/index.ts';
 import { planckLinearSrgb, type StellarColor } from './stellar-photometric-color.ts';
 
+/** The schema of a published Roche-von Zeipel fit transcribed beside its star (source/photometry/gravity-darkening.json). */
+export const ROCHE_VON_ZEIPEL_SCHEMA = 'cssearth-roche-von-zeipel@1';
 export interface GravityDarkeningRecord {
   readonly omega: number; readonly beta: number; readonly poleTemperatureK: number;
   /** The paper's own equatorial temperature; absent when it publishes only the polar temperature, ω or the flattening, and β. */
@@ -31,7 +33,7 @@ export function rocheOmegaForFlattening(ratio: number) {
 
 export function parseGravityDarkeningRecord(value: unknown): GravityDarkeningRecord {
   const input = requireRecord(value, 'gravity-darkening record');
-  if (input.schema !== 'cssearth-roche-von-zeipel@1') throw new TypeError('The gravity-darkening record must use cssearth-roche-von-zeipel@1.');
+  if (input.schema !== ROCHE_VON_ZEIPEL_SCHEMA) throw new TypeError(`The gravity-darkening record must use ${ROCHE_VON_ZEIPEL_SCHEMA}.`);
   const model = requireRecord(input.model, 'model'), view = input.view === undefined ? null : requireRecord(input.view, 'view');
   const number = (record: Record<string, unknown>, key: string) => requireFiniteNumber(requireRecord(record[key], key).value, `${key}.value`);
   // A fit publishes ω and both radii (interferometric images), or the equatorial radius and its ratio to the polar one (a transit

@@ -1,0 +1,73 @@
+{
+  "id": "dubhe",
+  "name": "Dubhe",
+  "system": "Dubhe system",
+  "parent": "milky-way",
+  "description": "A giant of type G9 III 37.7 parsecs away, 17.0 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 95689"
+  ],
+  "featured": true,
+  "order": 5464,
+  "target": "HD 95689",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "credit": "Baines et al. (2018), AJ 155, 30"
+  },
+  "radius": {
+    "value": 17.03,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 95689: radius 17.03 +/- 0.13 solar radii (Table 5), from the limb-darkened angular diameter 6.419 +/- 0.041 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.13
+  },
+  "mass": {
+    "value": 3.44,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 95689: mass 3.44 +/- 0.11 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.11
+  },
+  "temperature": {
+    "value": 5012,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 95689: effective temperature 5012 +/- 65 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 65
+  },
+  "radialVelocity": {
+    "value": -9.4,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 54061: RV -9.4 +/- 0.3 km/s (quality D)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 0.3
+  },
+  "distance": {
+    "value": 37.679,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 95689: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 26.54 +/- 0.48 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.681
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "54061"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "color": {
+    "skip": [],
+    "reason": "",
+    "companion": "the spectrum includes Dubhe's companion, which is not drawn: Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 11037+6145 BU 1077 AB 0.8 arcsec apart at magnitudes 2.02 and 4.95, so it gives 6.3% of the light and can move a color channel by 16 levels of 255 at most; a Planck color at the star's NPOI temperature differs from the measured one by 25 levels, so the measurement is kept"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A giant of type G9 III, 38 parsecs away: 17.0 times the Sun's width and 165 times its light.",
+    "introduction": "Its disc spans 6.419 milliarcseconds, which gives 17.03 solar radii and 5,012 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 95689: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": []
+}

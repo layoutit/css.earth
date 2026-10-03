@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "mebsuta",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Mebsuta",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 90594054
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/mebsuta-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Mebsuta",
+      "classification": "star",
+      "color": "#ffd698",
+      "distanceAu": 53436422.1,
+      "description": "A supergiant of type G8 I, 259 parsecs away: 130 times the Sun's width and 9,636 times its light.",
+      "systemName": "Mebsuta system",
+      "aliases": [
+        "HD 48329"
+      ],
+      "order": 5461,
+      "context": {
+        "order": 5458
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1378824399425753300,
+        7104697024643949000,
+        3394960834741687300
+      ],
+      "presentationToReference": [
+        -0.1724829027792914,
+        -0.08091111502150362,
+        0.9816837778606746,
+        0.8887562235545498,
+        0.4169117590184679,
+        0.1905176114829863,
+        0.4246905030041108,
+        -0.9053385977953795,
+        -1.0663177360036015e-7
+      ],
+      "orbitUpReference": [
+        0.08091111502150362,
+        -0.4169117590184679,
+        0.9053385977953795
+      ],
+      "metersPerUnit": 292238883.87096775,
+      "bodyRadiusM": 90594054000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

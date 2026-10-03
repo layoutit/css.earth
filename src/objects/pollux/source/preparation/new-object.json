@@ -1,0 +1,68 @@
+{
+  "id": "pollux",
+  "name": "Pollux",
+  "system": "Pollux system",
+  "parent": "milky-way",
+  "description": "A giant of type K0 III 10.4 parsecs away, 9.1 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 62509"
+  ],
+  "featured": true,
+  "target": "HD 62509",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "credit": "Baines et al. (2018), AJ 155, 30"
+  },
+  "radius": {
+    "value": 9.06,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 62509: radius 9.06 +/- 0.03 solar radii (Table 5), from the limb-darkened angular diameter 8.134 +/- 0.013 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 1.91,
+    "source": "Hatzes et al. (2012), A&A 543, A98, abstract: M = 1.91 +/- 0.09 solar masses from the p-mode frequency spacing (7.14 +/- 0.12 microHz) and the interferometric radius",
+    "url": "https://doi.org/10.1051/0004-6361/201219332",
+    "uncertainty": 0.09
+  },
+  "temperature": {
+    "value": 4586,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 62509: effective temperature 4586 +/- 57 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 57
+  },
+  "radialVelocity": {
+    "value": 3.23,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 37826: RV 3.23 +/- 0.02 km/s (quality A)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 0.02
+  },
+  "distance": {
+    "value": 10.358,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 62509: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 96.54 +/- 0.27 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.029
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "37826"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A giant of type K0 III, 10 parsecs away: 9.1 times the Sun's width and 33 times its light.",
+    "introduction": "Its disc spans 8.134 milliarcseconds, which gives 9.06 solar radii and 4,586 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 62509: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "order": 5462
+}

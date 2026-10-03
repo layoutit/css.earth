@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "spica-b",
+  "card": {
+    "text": "The smaller star of Spica, 3.7 times the Sun's width, orbiting its partner every four days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stw255",
+        "url": "https://doi.org/10.1093/mnras/stw255",
+        "label": "Tkachenko et al. 2016",
+        "checked": "2026-10-03",
+        "locator": "Tables 2, 4 and 7"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its orbit weighs it at 7.21 solar masses; it is 3.74 solar radii with 20,900 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stw255",
+        "url": "https://doi.org/10.1093/mnras/stw255",
+        "label": "Tkachenko et al. 2016",
+        "checked": "2026-10-03",
+        "locator": "Tables 2, 4 and 7"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

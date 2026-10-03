@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "epsilon-leonis",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Epsilon Leonis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 14630571
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/epsilon-leonis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Epsilon Leonis",
+      "classification": "star",
+      "color": "#ffedd7",
+      "distanceAu": 15602498.5,
+      "description": "A giant of type G1 III, 76 parsecs away: 21.0 times the Sun's width and 399 times its light.",
+      "systemName": "Epsilon Leonis system",
+      "aliases": [
+        "HD 84441"
+      ],
+      "order": 5463,
+      "context": {
+        "order": 5460
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1780433596857508000,
+        1180122805667109400,
+        940952570899858300
+      ],
+      "presentationToReference": [
+        -0.7627919713798437,
+        -0.33602180210239113,
+        0.5524832639187482,
+        0.505600547526865,
+        0.2227236926143559,
+        0.8335239907097817,
+        0.4031333461014929,
+        -0.9151412488026575,
+        -9.6256162997366e-7
+      ],
+      "orbitUpReference": [
+        0.33602180210239113,
+        -0.2227236926143559,
+        0.9151412488026575
+      ],
+      "metersPerUnit": 47195390.32258064,
+      "bodyRadiusM": 14630571000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

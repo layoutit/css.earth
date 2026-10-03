@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "capella",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 24608: position at J1991.25; Gaia cannot see the star. Distance: Torres et al. (2015), ApJ 807, 26, Table 4: distance 13.159 +/- 0.015 pc from the orbital parallax 75.994 +/- 0.089 mas (https://doi.org/10.1088/0004-637X/807/1/26): 13.159 +/- 0.015 pc; Gaia DR3 cannot see the star. Proper motion: VizieR V/137D/XHIP row HIP = 24608 (same row): 75.25, -426.89 mas/yr. Radial velocity from Torres et al. (2015), ApJ 807, 26, Table 4: systemic velocity +29.9387 +/- 0.0032 km/s, on the frame of the Weber & Strassmeier (2011) velocities.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=V/137D/XHIP",
+        "https://doi.org/10.1088/0004-637X/807/1/26"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 11.98 +/- 0.57 solar radii from Torres et al. (2015), ApJ 807, 26, Table 5: primary radius 11.98 +/- 0.57 solar radii (https://doi.org/10.1088/0004-637X/807/1/26). Mass 2.5687 +/- 0.0074 solar masses from Torres et al. (2015), ApJ 807, 26, Table 4: dynamical mass of the primary 2.5687 +/- 0.0074 solar masses (https://doi.org/10.1088/0004-637X/807/1/26). Temperature 4970 +/- 50 K from Torres et al. (2015), ApJ 807, 26, Table 5: primary Teff 4970 +/- 50 K.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/807/1/26"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 4,970 K, because every spectrum of Capella is the blended light of both giants, and the secondary is the brighter in the Hipparcos band, (l_B/l_A)_Hp = 1.204 +/- 0.060 (Torres et al. 2015, ApJ 807, 26, Table 4), so no archive spectrum is the primary's own, through the CIE 1931 2-degree observer: #ffe6cf. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/807/1/26"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,970 K and log g 2.69 (u1 0.636, u2 0.142): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

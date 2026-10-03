@@ -1,0 +1,30 @@
+{
+ "id": "spica",
+ "classification": "star",
+ "order": 5487,
+ "physical": {
+  "name": "Spica",
+  "horizonsCode": null,
+  "meanRadiusKm": 5196879,
+  "gravitationalParameterKm3PerS2": 1516903189679.367,
+  "parent": null,
+  "effectiveTemperatureK": 25300
+ },
+ "physicalNotes": "Radius 7.47 +/- 0.54 solar radii from Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: primary radius 7.47 +/- 0.54 solar radii from the combined light- and radial-velocity-curve solution (https://doi.org/10.1093/mnras/stw255): 5,196,879 km at 695,700 km per solar radius. Mass 11.43 +/- 1.15 solar masses from Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: dynamical mass of the primary 11.43 +/- 1.15 solar masses (https://doi.org/10.1093/mnras/stw255); GM is that mass times the JPL solar GM. Temperature 25300 +/- 500 K from Tkachenko et al. (2016), MNRAS 458, 1964, Tables 4 and 7: primary Teff 25,300 +/- 500 K from the disentangled spectrum (https://doi.org/10.1093/mnras/stw255). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 201.29835228,
+  "declinationDegrees": -11.16124494,
+  "positionEpochJulianYear": 1991.25,
+  "distanceParsecs": 76.57,
+  "properMotionRaMasPerYear": -42.35,
+  "properMotionDecMasPerYear": -30.67,
+  "radialVelocityKmPerS": -0.5,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry (https://doi.org/10.1134/S1063773712050015), VizieR V/137D/XHIP row HIP = 65474: RAJ2000 201.29835228, DEJ2000 -11.16124494 (ICRS at epoch J1991.25), from the archived row src/objects/spica/source/photometry/catalogue-row.tsv; SIMBAD names it HD 116658",
+   "distance": "van Leeuwen (2007), A&A 474, 653, HIP 65474: Hipparcos parallax 13.06 +/- 0.70 mas, inverted (https://doi.org/10.1051/0004-6361:20078357): 76.57 +/- 4.1 pc; Gaia DR3 cannot see the star",
+   "properMotion": "VizieR V/137D/XHIP row HIP = 65474 (same row): -42.35, -30.67 mas/yr",
+   "radialVelocity": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 2: systemic velocity -0.5 +/- 1.1 km/s (https://doi.org/10.1093/mnras/stw255)"
+  }
+ }
+}
