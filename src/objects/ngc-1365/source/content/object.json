@@ -32,7 +32,25 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "controls": []
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "NOIRLab · optical",
+        "thumbnail": "ngc-1365-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-1365-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-1365-layers-optical",
+          "path": "../../ngc-1365-layers/source/manifest.json",
+          "url": "https://noirlab.edu/public/images/iotw2127a/"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

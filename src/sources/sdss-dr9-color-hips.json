@@ -36,6 +36,21 @@
       "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
       "checkedOn": "2026-10-02",
       "locator": "The M95 cutout is 3000 x 3000 px, 0.2 degrees wide, tangent projection on 160.990417, +11.703611 through the CDS hips2fits service; 53 of the 58 Gaia DR3 stars brighter than G = 19 in it have a star within 4 px of their requested places."
+    },
+    {
+      "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+      "checkedOn": "2026-10-02",
+      "locator": "The NGC 4536 cutout is 2250 x 2250 px, 0.25 degrees wide (0.40 arcsec per pixel, the HiPS's scale), tangent projection on 188.612917, +2.188333 through the CDS hips2fits service; 70 of the 74 Gaia DR3 stars brighter than G = 19 in it have a star within 4 px of their requested places."
+    },
+    {
+      "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+      "checkedOn": "2026-10-02",
+      "locator": "The NGC 4424 cutout is 1125 x 1125 px, 0.125 degrees wide, tangent projection on 186.798333, +9.420556 through the CDS hips2fits service; all 17 Gaia DR3 stars brighter than G = 19 in it have a star within 4 px of their requested places."
+    },
+    {
+      "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+      "checkedOn": "2026-10-02",
+      "locator": "The NGC 4639 cutout is 900 x 900 px, 0.1 degrees wide, tangent projection on 190.718337, +13.257241 through the CDS hips2fits service; 8 of the 10 Gaia DR3 stars brighter than G = 19 in it have a star within 4 px of their requested places."
     }
   ],
   "creators": [
@@ -48,7 +63,7 @@
     {
       "kind": "credit",
       "text": "Sloan Digital Sky Survey; color HiPS by CDS (CNRS/Unistra)",
-      "scope": "Survey image of NGC 2903",
+      "scope": "Survey image of NGC 2903; survey images of NGC 4536, NGC 4424 and NGC 4639",
       "evidence": "https://www.sdss.org/collaboration/#image-use"
     },
     {
