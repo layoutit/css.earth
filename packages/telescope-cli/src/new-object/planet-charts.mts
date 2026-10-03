@@ -10,6 +10,7 @@
  *   new-object --charts HOST_ID...     charts for the archive planets of hosts already in the tree
  *
  * or with every planet `--from-archive` generates. Nothing is baked here. */
+import { MEASURED_SPECTRUM_SCHEMA } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Archive } from './archives.mts';
@@ -124,7 +125,7 @@ export async function installPlanetCharts(files: PackageFiles, id: string, name:
     // A paper may combine several facilities; each is named, in the order its rows first use it.
     const rows = chosen.rows, first = rows[0]!, facilities = [...new Set(rows.map(row => row.facility))].join('; '), path = `science/archive-spectra/${kind}`, chartId = `${id}-${kind}`;
     files.set(`${s}/${path}.csv`, csv);
-    files.set(`${s}/${path}.json`, json({ schema: 'cssearth-measured-spectrum@1', source: `NASA Exoplanet Archive ${spec.table}, ${first.label}`, units: { x: 'um', y: '%' },
+    files.set(`${s}/${path}.json`, json({ schema: MEASURED_SPECTRUM_SCHEMA, source: `NASA Exoplanet Archive ${spec.table}, ${first.label}`, units: { x: 'um', y: '%' },
       uncertainty: 'published 1-sigma, asymmetric (err1, err2)', observation: facilities,
       measurements: rows.map(row => ({ x: row.x, xLow: Number((row.x - row.half).toPrecision(12)), xHigh: Number((row.x + row.half).toPrecision(12)), y: row.y, minus: row.minus, plus: row.plus })) }));
     const x = niceAxis(Math.min(...rows.map(r => r.x - r.half)), Math.max(...rows.map(r => r.x + r.half))), y = niceAxis(Math.min(...rows.map(r => r.y - r.minus)), Math.max(...rows.map(r => r.y + r.plus)));

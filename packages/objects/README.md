@@ -175,3 +175,9 @@ browser-safe schema identifiers, data types and pure validation in `packages/obj
 Contract tests use node:test in the packages lane. WISE photometry, FITS/mosaicking, orbit/rotation evaluation,
 limb intensity, model-grid interpolation and file I/O remain with their scientific owners. The preserved
 Python display-orientation writer has a literal conformance test and a specific schema-ledger exception.
+
+Disc-integrated and stellar photometric color records, uniform-disc star measurements, and measured-spectrum
+measurement documents live in `src/prepared-data/`, exported through the browser-safe main entry.
+Their parsers preserve separate compiler/public-photometry admission and mode-dependent absent-wavelength policies.
+CIE/Planck evaluation, spectrum file loading, binning, sphere generation and chart rendering remain in bake/telescope-cli.
+Contract tests use node:test in the packages lane; scientific and file-output conformance stays with the consumers.

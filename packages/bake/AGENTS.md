@@ -367,3 +367,7 @@ browser-safe schema identifiers, data types and pure validation in `packages/obj
 Contract tests use node:test in the packages lane. WISE photometry, FITS/mosaicking, orbit/rotation evaluation,
 limb intensity, model-grid interpolation and file I/O remain with their scientific owners. The preserved
 Python display-orientation writer has a literal conformance test and a specific schema-ledger exception.
+
+Photometric color/stellar measurement records and measured-spectrum documents are parsed by `@cssearth/objects`.
+The color and stellar topics retain CIE/Planck evaluation, spectrum I/O and binning; charts retain recipes and drawing;
+uniform-disc authoring retains geometry generation and its expected sphere path.
