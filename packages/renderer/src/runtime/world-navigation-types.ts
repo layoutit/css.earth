@@ -15,6 +15,8 @@ export interface ObjectWorldNavigation {
   holdPresentation?(): () => void;
   capture(): WorldCameraPose;
   apply(pose: WorldCameraPose, options?: { signal: AbortSignal; departing?: boolean }): void | Promise<boolean>;
+  /** Turn the camera sideways around the body by `degrees` at a steady rate, keeping its distance (object-orbit.ts). */
+  turn?(degrees: number, options: { durationMilliseconds: number; signal: AbortSignal }): Promise<{ completed: boolean }>;
   setZoomOutCentering?(enabled: boolean): void;
   /** True once every prepared detail group is connected and painted. */
   detailActivated?(): boolean;
