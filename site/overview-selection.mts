@@ -78,9 +78,10 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
 }
 
 /** Require a sustained threshold crossing, even while the camera keeps moving; a camera clearly past an exit
- * (policy.clearExitScale) is reported at once. A crossing out of a body's scene is reported once, until the camera comes
- * back inside (`onReturn`): the scene it names takes the view only when the camera rests (scene/camera-handover.mts), and
- * this watcher goes on with the body's until then. */
+ * (policy.clearExitScale) is reported at once. A crossing is reported once, until the camera comes back (`onReturn`):
+ * what it names (another scene, or the body's own system or the body itself, which share the mounted scene) takes the
+ * card and the address only when the camera rests (scene/camera-handover.mts), and this watcher goes on with the
+ * committed selection until then. */
 export function watchOverviewSelection({ navigation, objects, systems, objectId, getOverview, isAvailable,
   onChange, onReturn, windowTarget, inside }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; getOverview(): boolean; isAvailable(): boolean;
   /** The object the body is inside, when it has a scene of its own; asked on each camera, as its entry may be read late. */
@@ -93,7 +94,7 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
   let timer: number | null = null, latest: SelectionPublication | null = null, candidate: OverviewSelection | null = null; let disposed = false;
   // Where the body's scene came to rest: the first camera it answers for, and each landing after it.
   let restRangeM: number | null = null;
-  // The exit out of the body's scene that was last reported, until the camera comes back inside: one report a crossing.
+  // The crossing last reported, until the camera comes back: one report a crossing.
   let left: OverviewSelection | null = null;
   const range = (world: WorldCameraPose) => {
     const origin = objects.find(object => object.id === objectId)?.worldFrame?.originM;
@@ -104,7 +105,7 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
   /** Whether `next` leaves the body's scene: for its system's overview, or for the object it is inside. */
   const leaves = (next: OverviewSelection) => next.overview || next.objectId !== objectId;
   const report = (next: OverviewSelection, landed: boolean) => {
-    if (!getOverview() && leaves(next)) left = next;
+    left = next;
     onChange(next, landed);
   };
   function inspect(landed = false) {
@@ -124,7 +125,7 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     if (!next) {
       // A flight that holds this watcher off (isAvailable) is not the camera coming back.
       if (left && isAvailable()) { left = null; onReturn?.(); }
-    } else if (left && leaves(next) && next.overview === left.overview && next.objectId === left.objectId) return;
+    } else if (left && next.overview === left.overview && next.objectId === left.objectId) return;
     else if (!getOverview() && leaves(next)
         && selectionAtCamera({ ...latest, ...facts(), overview: false, restRangeM: restRangeM ?? 0, exitScale: policy.clearExitScale })) {
       if (timer !== null) windowTarget.clearTimeout(timer);

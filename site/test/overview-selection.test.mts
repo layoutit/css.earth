@@ -202,3 +202,25 @@ test('a crossing out of a body is reported once, and so is the camera coming bac
   assert.equal(changes.length, 2, 'and the next crossing is reported again');
   dispose();
 });
+
+test("an approach to the system's star is reported once from its overview, and withdrawn when the camera backs away", () => {
+  let listener: ObjectWorldNavigationListener | null = null;
+  const getListener = () => required(listener);
+  const timers = new Map<number, () => void>(), changes: OverviewSelection[] = [];
+  let serial = 0, returns = 0;
+  // The star's system stays the committed selection after the report: the star's card waits for the camera to rest.
+  const dispose = watchOverviewSelection({ objects, systems: objects, objectId: 'sun', getOverview: () => true,
+    isAvailable: () => true, onChange: next => changes.push(next), onReturn: () => { returns++; },
+    navigation: { ...navigationFixture(sun, () => camera(sun, 1281), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => {}; } },
+    windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
+  const settle = () => { const pending = [...timers.values()]; timers.clear(); for (const run of pending) run(); };
+  getListener()(camera(sun, 100), viewport); settle();
+  assert.deepEqual(changes, [{ objectId: 'sun', overview: false }]);
+  getListener()(camera(sun, 90), viewport); getListener()(camera(sun, 60), viewport);
+  assert.deepEqual([changes.length, timers.size, returns], [1, 0, 0], 'not again while the camera stays close');
+  getListener()(camera(sun, 1281), viewport);
+  assert.equal(returns, 1, 'backed away before it rested');
+  getListener()(camera(sun, 100), viewport); settle();
+  assert.equal(changes.length, 2, 'and the next approach is reported again');
+  dispose();
+});

@@ -24,7 +24,7 @@ import { createNavigationHistory, bindNavigationLinks, navigationHref } from '..
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { createWorldViewport, stageSized } from '../world-viewport.mts';
 import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
-import { moonSystem, starSystem, subjectHost, subjectOf, subjectView } from './scene-subject.mts';
+import { moonSystem, selectionKey, starSystem, subjectHost, subjectOf, subjectView } from './scene-subject.mts';
 import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import { WORLD_HOST_ID, namesSystem } from '../navigation/navigation-scope.mts';
@@ -125,7 +125,12 @@ export function createSceneRouter({
   const handover = createCameraHandover({ windowTarget, documentTarget, mountedId: () => objectId, fetchAhead: fetchSceneReads,
     canSwap: () => scenes.state.kind === 'ready' && !requests.current && !categoryFlight,
     onChange: publishFraming,
-    swap: next => { void navigate(subjectHost(next), { kind: 'object', ...(subjectView(next) === 'system' ? { view: 'system' as const } : {}), camera: 'preserve' }).catch(report); } });
+    swap: next => {
+      // A body and its system share the mounted scene, its camera, detail and subscriptions: the selection changes in place.
+      const session = scenes.current;
+      if (subjectHost(next) === objectId && context && session) { commitInPlace(context, session, next); return; }
+      void navigate(subjectHost(next), { kind: 'object', ...(subjectView(next) === 'system' ? { view: 'system' as const } : {}), camera: 'preserve' }).catch(report);
+    } });
   // The view a header pill's flight left, while that flight's landing is being handed over.
   let categoryDeparture: string | null = null;
   const requests = createNavigationLifecycle({ onError: report, onCancel(request) {
@@ -644,13 +649,17 @@ export function createSceneRouter({
     // a body the centre is inside is no step of the zoom: while it waits for the camera to rest, the camera is followed
     // from the committed step, and coming back inside that step cancels it.
     const committed = selection.current, pending = handover.subject ?? undefined;
-    const pastChain = pending !== undefined && zoomStepOf(pending) === null && zoomStepOf(committed) !== null;
-    const followed = selection.followCamera(frame, pastChain ? undefined : pending);
-    if (pastChain && followed === false) { handover.back(); return; }
-    if (typeof followed === 'object') {
-      // The next scene is seen around the same star, with the camera where it is.
-      setZoomCentre(followed.centreId);
-      handover.cross({ objectId: followed.objectId }, 'zoom-scope');
+    // The mounted body itself, pending while its system is still committed, is no such scene: it waits for rest, and the
+    // watcher that reported it withdraws it.
+    const pastChain = pending !== undefined && !selection.ownScene(pending) && zoomStepOf(pending) === null && zoomStepOf(committed) !== null;
+    const crossed = selection.followCamera(frame, pastChain ? undefined : pending);
+    if (pastChain && crossed === null) { handover.back(); return; }
+    // The camera is back in the committed selection: nothing waits for it to rest any more.
+    if (crossed && selectionKey(crossed) === selectionKey(committed)) handover.back();
+    else if (crossed) {
+      // Another scene's is seen around the same star, with the camera where it is.
+      if (!selection.ownScene(crossed)) setZoomCentre(crossed.centreId);
+      handover.cross({ objectId: crossed.objectId }, 'zoom-scope');
     }
     // A pending scene whose body the camera has come close enough to see is mounted without waiting for rest. An object
     // seen from inside has no body. One the mounted body is inside, or whose system it belongs to (its star's, its
@@ -659,15 +668,20 @@ export function createSceneRouter({
     const host = handover.subject ? subjectHost(handover.subject) : null, focal = session.mount?.navigation?.optics().focalPixels;
     const around = host !== null && (insideBody(objectId)?.id === host || insideBody(subjectOf(objectId, 'system').objectId)?.id === host
       || systemOfObject(context?.objects ?? [], objectId)?.id === host || satelliteSystemOfMember(objectId)?.hostId === host);
-    const body = host !== null && !around && zoomStepOf({ objectId: host }) === null ? context?.registry.SCENE_OBJECTS.find(object => object.id === host)?.worldFrame : undefined;
+    // The mounted scene draws its own body already: its selections wait for rest like any other.
+    const body = host !== null && host !== objectId && !around && zoomStepOf({ objectId: host }) === null ? context?.registry.SCENE_OBJECTS.find(object => object.id === host)?.worldFrame : undefined;
     if (body && focal && bodyInView(frame, body, focal)) handover.due();
-    if (followed !== true) return;
-    // The camera frames a selection of the mounted scene: nothing waits for it to rest any more.
-    handover.back();
-    if (selection.current === committed) return;
-    view.replace(session, selection.url(session.url ?? navigationHref(windowTarget)));
-    // An overview's page carries no scene dataset; the scene's page gets its dataset back on the way in.
+  }
+  /** Commits a selection of the mounted scene (the body, or its system) where the camera is. A star's system is centred on
+   * its system's centre as it opens. An overview's page carries no scene dataset; the scene's page gets its dataset back
+   * on the way in. */
+  function commitInPlace(ready: RouterContext, session: Session, next: SceneSubject) {
+    handover.clear();
+    if (!ready.selection.commit(next, objectId)) return;
+    if (zoomStepOf(next) !== null) aimAtSystemCenter(ready);
+    view.replace(session, ready.selection.url(navigationHref(windowTarget)));
     view.syncDataset(session);
+    session.viewUrl?.flush();
   }
   /** The selection the camera frames: the committed one, or one of another scene while that scene waits for the camera to
    * rest (camera-handover.mts). A selection a zoom out of a centre reaches (a star's system, an object seen from inside) is
@@ -753,20 +767,20 @@ export function createSceneRouter({
       // Back inside the system's exit the camera may still frame the planet's moons: that watcher is asked again.
       onReturn() { handover.back(); refreshSatelliteSelection?.(); },
       onChange(next, landed) {
-        // The object the body is inside takes the view as its own scene, once the camera rests.
-        if (!next.overview && next.objectId !== objectId) { handover.cross({ objectId: next.objectId }, 'overview-watcher'); return; }
-        if (!next.overview || next.objectId === objectId) {
-          // A mounted star and its system overview share the same camera, detail and
-          // subscriptions. Change their selection in place in either direction.
-          current.commit(subjectOf(objectId, next.overview ? 'system' : 'body'), objectId);
-          if (next.overview) aimAtSystemCenter(ready);
-          view.replace(session, current.url(navigationHref(windowTarget)));
-          view.syncDataset(session);
-          session.viewUrl?.flush();
+        // Every crossing shows in the world at once and takes the card and the address when the camera rests: into the
+        // object the body is inside, into a system (the body's own shares the mounted scene), and back onto the body.
+        if (!next.overview) {
+          handover.cross({ objectId: next.objectId }, 'overview-watcher');
+          // A flight's landing is at rest already: the mounted body takes its card back at once.
+          if (landed && next.objectId === objectId) handover.due();
           return;
         }
-        // A zoom by hand: the world shows the system at once, and its scene takes over when the camera rests.
-        if (!landed) { handover.cross(subjectOf(next.objectId, 'system'), 'overview-watcher'); return; }
+        if (next.objectId === objectId || !landed) {
+          handover.cross(subjectOf(next.objectId, 'system'), 'overview-watcher');
+          // A flight's landing is at rest already: the star's own system takes the card at once.
+          if (landed) handover.due();
+          return;
+        }
         // A pill's landing is a place the reader chose, so it is its own entry: as a replacement, Back from the Planets
         // pill skipped Earth for the page before it (2026-10-01).
         void navigate(next.objectId, { kind: 'object', view: 'system', camera: 'preserve', ...(categoryDeparture ? { departed: categoryDeparture } : {}) });
@@ -785,14 +799,10 @@ export function createSceneRouter({
       getSelection: () => current.context,
       isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current,
       documentTarget, windowTarget,
-      onReturn() { if (handover.subject && moonSystem(handover.subject)) handover.back(); },
-      onChange(next) {
-        // A moon's planet shows the system: the world shows it at once, and the planet's scene takes over at rest.
-        if (moonSystem(next) && subjectHost(next) !== objectId) { handover.cross(next, 'satellite-watcher'); return; }
-        current.commit(next, objectId);
-        view.replace(session, current.url(navigationHref(windowTarget)));
-        session.viewUrl?.flush();
-      },
+      // What this watcher reports is a planet's system, or the mounted body again.
+      onReturn() { const pending = handover.subject; if (pending && (moonSystem(pending) || pending.objectId === objectId)) handover.back(); },
+      // The world shows the system at once (a planet's own, or a moon's planet's); its card and address follow at rest.
+      onChange(next) { handover.cross(next, 'satellite-watcher'); },
     });
     session.own(watch);
     refreshSatelliteSelection = watch.refresh;

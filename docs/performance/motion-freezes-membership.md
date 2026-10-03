@@ -97,9 +97,11 @@ page makes while it coasts. It exits 1 on anything outside this table.
 ## A zoom's change of scene waits for rest
 
 A zoom that crosses a threshold (out of a body into its system, from a moon out to its planet's system, into or out of
-an object seen from inside) hands the view to another scene. The world shows the new selection at the crossing: its
-scope is a few policy flags (`setOverview`). The scene, its card and its address are membership, so they change when the
-camera rests (`site/scene/camera-handover.mts`): the settle time after the motion signal reports no motion. Until then
+an object seen from inside) changes the selection, and often the scene. The world shows the new selection at the
+crossing: its scope is a few policy flags (`setOverview`). The scene, its card and its address are membership, so they
+change when the camera rests (`site/scene/camera-handover.mts`): the settle time after the motion signal reports no
+motion. That holds for every crossing, one that keeps the mounted scene included: a body and its own system share a
+scene, and the card of the one replaces the card of the other at rest too. Until then
 the mounted scene keeps the camera, and its far limit stays open while a wider scene exists (`setZoomOutOpen`). A zoom
 that crosses several thresholds without resting replaces the scene once, with the last. The new scene's files are
 requested as the camera comes to rest, not at each crossing. What the zoom needs to go on is read at the crossing: the
