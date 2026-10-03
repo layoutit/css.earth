@@ -86,3 +86,38 @@ test('a fading bulge ends on its own spheroid, in the disc plane and along the d
   assert.ok(at(faded, n, 6 * faded.q0 * 0.9) > 0);
   assert.equal(at(faded, n, 6.001 * faded.q0), 0);
 });
+
+// The Sombrero (NGC 4594) with S4G's fit: a Sérsic bulge and an edge-on disc. Its picture stands flat, facing the Sun, so
+// the spheroid takes the galaxy's own disc from `galaxyDisc`.
+const sombrero = (galaxyDisc?: { inclinationDeg: number; lineOfNodesPaDeg: number; source: string; basis: string }) => imageLayerBulgeModel({ target: { centerRaDeg: 189.9976, centerDecDeg: -11.6231, distancePc: 9_384_259 },
+  geometry: { kind: 'inclined-disk', inclinationDeg: 0.001, lineOfNodesPaDeg: 0, thicknessKpc: 1, supportRadiusKpc: 18.06, supportTaperFraction: 0.75, depthWeights: [1], depthScales: [1],
+    bulge: { source: 'salo-2015-s4g-decompositions', lightFrom: 'fit', positionAngleDeg: 89.5, sersicIndex: 4.663, halfLightRadiusKpc: 8.208, surfaceBrightnessAtHalfLight: 20.9, skyEllipticity: 0.392,
+      edgeDisc: { centralSurfaceBrightness: 16.9, scaleLengthKpc: 3.2, scaleHeightKpc: 0.3, positionAngleDeg: 89.5 }, ...(galaxyDisc ? { galaxyDisc } : {}), extentKpc: { radius: 18, height: 18, fadeFrom: 9 } } } });
+const sombreroDisc = { inclinationDeg: 84, lineOfNodesPaDeg: 89.5, source: 'test', basis: 'test' };
+
+test('a picture facing the Sun cannot hold a flattened bulge without the galaxy\'s own disc', () => {
+  assert.throws(() => sombrero(), /cannot come from an oblate spheroid seen at inclination 0.001°/);
+});
+
+test('with the galaxy\'s own disc the spheroid is flattened along that disc\'s normal, not along the sight line', () => {
+  const model = sombrero(sombreroDisc), i = 84 * Math.PI / 180;
+  assert.ok(Math.abs(Math.sqrt(Math.cos(i) ** 2 + model.q0 ** 2 * Math.sin(i) ** 2) - (1 - 0.392)) < 1e-12);
+  // The normal of a disc seen at 84° lies almost in the plane of the sky, across the line of nodes.
+  assert.ok(Math.abs(model.spheroidNormal[2]) < 0.11 && Math.abs(model.disc.diskNormal[2]) > 0.999, `${model.spheroidNormal}`);
+  const at = (v: readonly number[], k: number) => model.density([v[0]! * k, v[1]! * k, v[2]! * k]);
+  // Along the sight line (the picture's normal) the bulge is as deep as it is long; along the galaxy's normal it is flatter.
+  assert.ok(at([0, 0, 1], 4) > at(model.spheroidNormal, 4) * 1.5, `${at([0, 0, 1], 4)} against ${at(model.spheroidNormal, 4)}`);
+  assert.ok(Math.abs(at([0, 0, 1], 4) / at(model.lineNodes, 4) - 1) < 0.05);
+});
+
+test('an edge-on disc is bright along its position angle and thin across it', () => {
+  const model = sombrero(sombreroDisc), pa = 89.5 * Math.PI / 180, along = (kpc: number): [number, number] => [kpc * Math.sin(pa), kpc * Math.cos(pa)], across = (kpc: number): [number, number] => [-kpc * Math.cos(pa), kpc * Math.sin(pa)];
+  const centre = model.light(0, 0).disc;
+  assert.ok(Math.abs(centre - 10 ** (-0.4 * 16.9)) / centre < 1e-9);
+  // One scale length along the disc: (r / hr) K1(r / hr) at 1 is 0.6019.
+  assert.ok(Math.abs(model.light(...along(3.2)).disc / centre - 0.6019072) < 1e-5, `${model.light(...along(3.2)).disc / centre}`);
+  // One scale height across it: sech²(1) = 0.41997.
+  assert.ok(Math.abs(model.light(...across(0.3)).disc / centre - 0.4199743) < 1e-5, `${model.light(...across(0.3)).disc / centre}`);
+  // So the bulge's share is small in the disc and large above it.
+  assert.ok(model.share(...along(3.2)) < model.share(...across(3.2)));
+});

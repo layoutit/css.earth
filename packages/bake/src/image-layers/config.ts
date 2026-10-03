@@ -24,7 +24,14 @@ export interface ImageLayerRecipe {
      * Every surface brightness is the component's as projected on the sky, in magnitudes per square arcsecond: a disc's
      * face-on central value (as S4G tabulates it) brightens by 2.5 log10 of its axis ratio. */
     bulge?: { source: string; /** Whose light fills the bulge: a share of the photograph's (default) or the fit's own. */ lightFrom?: 'photograph' | 'fit'; positionAngleDeg: number; sersicIndex: number; halfLightRadiusKpc: number; surfaceBrightnessAtHalfLight: number;
-      skyEllipticity: number; disc: { centralSurfaceBrightness: number; scaleLengthKpc: number; skyEllipticity: number; positionAngleDeg?: number };
+      skyEllipticity: number; /** The fit's exponential disc; a fit of an edge-on galaxy has `edgeDisc` in its place. */ disc?: { centralSurfaceBrightness: number; scaleLengthKpc: number; skyEllipticity: number; positionAngleDeg?: number };
+      /** The fit's edge-on disc, I0 (r / hr) K1(r / hr) sech^2(z / hz) along and across its position angle (van der Kruit & Searle 1981, as GALFIT's
+       * edgedisk and S4G's Z component): disc light too. Its central surface brightness is as seen, edge-on. */
+      edgeDisc?: { centralSurfaceBrightness: number; scaleLengthKpc: number; scaleHeightKpc: number; positionAngleDeg: number };
+      /** The galaxy's own disc, where the picture does not lie on it (a picture standing flat, facing the Sun): the spheroid is
+       * flattened along this disc's normal and its sky fade follows this line of nodes. Without it the spheroid shares the
+       * picture's disc (geometry.inclinationDeg and lineOfNodesPaDeg). */
+      galaxyDisc?: { inclinationDeg: number; lineOfNodesPaDeg: number; source: string; basis: string };
       /** The fit's second exponential disc, where it has two: its light counts as the disc's. */
       secondDisc?: { centralSurfaceBrightness: number; scaleLengthKpc: number; skyEllipticity: number; positionAngleDeg?: number };
       /** The fit's bar, a modified Ferrers profile I0 (1 - (r / radius)^2)^2 inside its radius (Salo et al. 2015, eq. 4, with their fixed alpha = 2, beta = 0): disc light too. */
@@ -63,7 +70,8 @@ const path = (v: unknown): string => {
   const p = text(v, 'source path'); if (p.startsWith('/') || p.split('/').includes('..') || /[\\\0]/.test(p)) throw new TypeError('Path must be contained.'); return p;
 };
 const bulgeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['bulge']> => {
-  const b = object(v, 'geometry.bulge'), d = object(b.disc, 'geometry.bulge.disc'), e = object(b.extentKpc, 'geometry.bulge.extentKpc');
+  const b = object(v, 'geometry.bulge'), e = object(b.extentKpc, 'geometry.bulge.extentKpc');
+  if (b.disc === undefined && b.edgeDisc === undefined) throw new TypeError('geometry.bulge needs the fit\'s disc: disc (exponential) or edgeDisc (edge-on).');
   const ellipticity = (x: unknown, at: string) => { const n = finite(x, at); if (n < 0 || n >= 1) throw new TypeError(`${at} must be in [0, 1); got ${n}.`); return n; };
   const discOf = (d: Record<string, unknown>, at: string) => ({ centralSurfaceBrightness: finite(d.centralSurfaceBrightness, `${at}.centralSurfaceBrightness`), scaleLengthKpc: positive(d.scaleLengthKpc, `${at}.scaleLengthKpc`),
     skyEllipticity: ellipticity(d.skyEllipticity, `${at}.skyEllipticity`), ...(d.positionAngleDeg===undefined?{}:{positionAngleDeg:finite(d.positionAngleDeg,`${at}.positionAngleDeg`)}) });
@@ -71,7 +79,10 @@ const bulgeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['bulge']>
   return { source: text(b.source, 'geometry.bulge.source'), ...(b.lightFrom===undefined?{}:{lightFrom:b.lightFrom}), positionAngleDeg: finite(b.positionAngleDeg, 'geometry.bulge.positionAngleDeg'),
     sersicIndex: positive(b.sersicIndex, 'geometry.bulge.sersicIndex'), halfLightRadiusKpc: positive(b.halfLightRadiusKpc, 'geometry.bulge.halfLightRadiusKpc'),
     surfaceBrightnessAtHalfLight: finite(b.surfaceBrightnessAtHalfLight, 'geometry.bulge.surfaceBrightnessAtHalfLight'), skyEllipticity: ellipticity(b.skyEllipticity, 'geometry.bulge.skyEllipticity'),
-    disc: discOf(d, 'geometry.bulge.disc'), ...(b.secondDisc===undefined?{}:{secondDisc:discOf(object(b.secondDisc,'geometry.bulge.secondDisc'),'geometry.bulge.secondDisc')}),
+    ...(b.disc===undefined?{}:{disc:discOf(object(b.disc,'geometry.bulge.disc'),'geometry.bulge.disc')}),
+    ...(b.edgeDisc===undefined?{}:{edgeDisc:(()=>{const r=object(b.edgeDisc,'geometry.bulge.edgeDisc');return{centralSurfaceBrightness:finite(r.centralSurfaceBrightness,'geometry.bulge.edgeDisc.centralSurfaceBrightness'),scaleLengthKpc:positive(r.scaleLengthKpc,'geometry.bulge.edgeDisc.scaleLengthKpc'),scaleHeightKpc:positive(r.scaleHeightKpc,'geometry.bulge.edgeDisc.scaleHeightKpc'),positionAngleDeg:finite(r.positionAngleDeg,'geometry.bulge.edgeDisc.positionAngleDeg')};})()}),
+    ...(b.galaxyDisc===undefined?{}:{galaxyDisc:(()=>{const r=object(b.galaxyDisc,'geometry.bulge.galaxyDisc'),i=finite(r.inclinationDeg,'geometry.bulge.galaxyDisc.inclinationDeg');if(!(i>0&&i<=90))throw new TypeError(`geometry.bulge.galaxyDisc.inclinationDeg must be above 0 and at most 90; got ${i}.`);return{inclinationDeg:i,lineOfNodesPaDeg:finite(r.lineOfNodesPaDeg,'geometry.bulge.galaxyDisc.lineOfNodesPaDeg'),source:text(r.source,'geometry.bulge.galaxyDisc.source'),basis:text(r.basis,'geometry.bulge.galaxyDisc.basis')};})()}),
+    ...(b.secondDisc===undefined?{}:{secondDisc:discOf(object(b.secondDisc,'geometry.bulge.secondDisc'),'geometry.bulge.secondDisc')}),
     ...(b.bar===undefined?{}:{bar:(()=>{const r=object(b.bar,'geometry.bulge.bar');return{centralSurfaceBrightness:finite(r.centralSurfaceBrightness,'geometry.bulge.bar.centralSurfaceBrightness'),radiusKpc:positive(r.radiusKpc,'geometry.bulge.bar.radiusKpc'),skyEllipticity:ellipticity(r.skyEllipticity,'geometry.bulge.bar.skyEllipticity'),positionAngleDeg:finite(r.positionAngleDeg,'geometry.bulge.bar.positionAngleDeg')};})()}),
     extentKpc: { radius: positive(e.radius, 'geometry.bulge.extentKpc.radius'), height: positive(e.height, 'geometry.bulge.extentKpc.height'),
       ...(e.fadeFrom===undefined?{}:{fadeFrom:(()=>{const f=positive(e.fadeFrom,'geometry.bulge.extentKpc.fadeFrom');if(f>=Number(e.radius))throw new TypeError(`geometry.bulge.extentKpc.fadeFrom (${f}) must be inside radius (${String(e.radius)}).`);return f;})()}) } };
