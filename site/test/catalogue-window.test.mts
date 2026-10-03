@@ -7,10 +7,10 @@ import type { CatalogueRow } from '../search/catalogue-index.mts';
 import { createCatalogueWindow } from '../search/catalogue-window.mts';
 
 const entry = (index: number): CatalogueRow => ({
-  kind: 'scene', id: `earth-${index}`, name: `Earth ${index}`,
+  id: `earth-${index}`, name: `Earth ${index}`,
   classificationName: 'planet', route: `/earth-${index}/`, detail: { text: `${index} au`, value: String(index), unit: 'au', title: 'Distance', ariaLabel: `${index} au. Distance` },
   source: { subject: `object:earth-${index}`, document: `/sources/${index}/`, label: `Sources ${index}` },
-  marker: { kind: 'scene', id: 'earth', color: '#fff', preview: true },
+  marker: { id: 'earth', color: '#fff', preview: true },
 });
 
 test('catalogue window bounds connected rows, reuses them while scrolling, and clears on close', () => {
@@ -53,17 +53,17 @@ test('catalogue window bounds connected rows, reuses them while scrolling, and c
   assert.equal(list.querySelector<HTMLElement>('[data-catalogue-index="0"] .object-name')?.textContent, 'Earth 90');
   assert.equal(list.querySelectorAll('.object-item').length, 2);
 
-  catalogue.setSelection({ kind: 'scene', id: 'earth-91' });
+  catalogue.setSelection({ id: 'earth-91' });
   assert.equal(list.querySelector('[data-catalogue-index="1"] a')?.getAttribute('aria-current'), 'page');
   assert.equal(list.querySelector('[data-catalogue-index="1"]')?.getAttribute('aria-setsize'), '2', 'marking the selection keeps the list size');
   assert.equal(list.querySelector('[data-catalogue-index="0"] a')?.getAttribute('aria-current'), null,
     'objects with the same display name must not share selection');
-  // A galaxy or a nebula is a scene row like any other, shown by its bank's thumbnail.
+  // A galaxy or a nebula is an object's row like any other.
   const nebula: CatalogueRow = { ...entry(91), id: 'm42', route: '/m42/',
     source: { subject: 'object:m42', document: '/sources/m42/', label: 'Sources M42' },
-    marker: { kind: 'thumbnail', thumbnail: null } };
+    marker: { id: 'm42', color: '#fff', preview: true } };
   catalogue.setRows(2, 0, [entry(91), nebula]);
-  catalogue.setSelection({ kind: 'scene', id: 'm42' });
+  catalogue.setSelection({ id: 'm42' });
   assert.equal(list.querySelector('[data-catalogue-index="0"] a')?.getAttribute('aria-current'), null,
     'selecting the nebula does not also select the other scene');
   assert.equal(list.querySelector('[data-catalogue-index="1"] a')?.getAttribute('aria-current'), 'page');
@@ -94,7 +94,7 @@ test('a filter change reads the layout before writing rows, and rows keep their 
   const subtitle = () => list.querySelector('[data-catalogue-index="0"] .object-kind');
   const marker = () => list.querySelector('[data-catalogue-index="0"] .object-dataset-icon')?.firstElementChild;
   const [kind, icon] = [subtitle(), marker()];
-  catalogue.setSelection({ kind: 'scene', id: 'earth-0' });
+  catalogue.setSelection({ id: 'earth-0' });
   catalogue.setRows(entries.length, 0, entries);
   assert.equal(subtitle(), kind, 'selecting or refiltering to the same entry keeps the subtitle nodes');
   assert.equal(marker(), icon);

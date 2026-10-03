@@ -1,7 +1,7 @@
 # Observable Universe microwave background
 
-What the world draws at the edge of the last level of the zoom ladder, the [Observable Universe](../observable-universe/README.md):
-everything whose light has had time to reach us. That object has its own page, `/observable-universe/`. The level
+What the world draws at the edge of the [Observable Universe](../observable-universe/README.md), the root of the object tree:
+everything whose light has had time to reach us. That object has its own page, `/observable-universe/`. Its view
 reads from 1 Gpc out, opens 52 Gpc from the Sun and reaches 80 Gpc, far enough for the microwave background's caption to
 fit below it.
 
@@ -73,8 +73,8 @@ the page draws it from the same map, limb law and opacities
   with its dataset card, and the full sphere after choosing it in place, at the
   same camera. An earlier capture, from before the cutaway, shows
   the whole sphere from outside seamless across its 450 patches.
-- The registry tests check that the four levels are `OBJECTS` entries and that zooming out from the Sun walks them in
-  their order (`site/test/navigation-ontology.test.mts`, `site/test/overview-context.test.mts`).
+- The registry tests check that the object tree is whole and that zooming out from the Sun walks the objects it is
+  inside in their order (`site/test/navigation-ontology.test.mts`, `site/test/zoom-scope.test.mts`).
 - The [context lineage test](../../../site/test/context-lineage.test.mts) checks that its products read only its source records.
 
 ## Known problems

@@ -23,11 +23,11 @@ test('every prepared entry rebuilds the object the registry holds', () => {
 test('preparation reads the registry the application holds, without its scene loader', async () => {
   const prepared = readPreparedObjects(resolve(import.meta.dirname, '../..'));
   assert.deepEqual(facts(prepared.objects), facts(OBJECTS));
-  // Preparation reads the same scene objects, galaxies, nebulae and the levels of the zoom ladder among them.
+  // Preparation reads the same scene objects, galaxies, nebulae and the objects seen from inside among them.
   assert.deepEqual(prepared.sceneObjects.map(object => object.id), REGISTERED_SCENE_OBJECTS.map(object => object.id));
   assert.equal(prepared.requireSceneObject('m31').id, 'm31');
-  assert.equal(prepared.objects.find(object => object.id === 'milky-way')?.level?.order, 1);
-  assert.deepEqual(prepared.levels.map(level => level.id), ['milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
+  assert.deepEqual(prepared.objects.filter(object => object.zoom).map(object => object.id).sort(), ['local-group', 'milky-way', 'nearby-universe', 'observable-universe']);
+  assert.equal(prepared.objects.find(object => object.id === 'milky-way')?.parent, 'local-group');
   assert.equal(prepared.requireSceneObject('mars').name, REGISTERED_SCENE_OBJECTS.find(object => object.id === 'mars')?.name);
   await assert.rejects(prepared.requireSceneObject('mars').loadScene(), /cannot mount a scene/);
 });

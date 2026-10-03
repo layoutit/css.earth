@@ -65,12 +65,13 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   const places = new Map<string, { id: string; positionM: Vector3; orbitsWithinM: number | null }[]>();
   for (const id of files.keys()) {
     if (holders.drawnFromAnywhere(id) || id === asteroidHolder) continue;
+    // Its host is a body of the world, or a centre the world places without drawing it (a moon's primary that has no row).
     const host = systemHostId(id), body = host === null ? undefined : host === focus.id ? focus : byId.get(host);
-    const parent = parentOf(id);
-    if (!body || !parent) throw new TypeError(`World file ${id} is read on approach, so it must be a system whose host is a world body and whose package names its parent.`);
+    const placeM = host === null ? undefined : positions.get(host), parent = parentOf(id);
+    if (!placeM || !parent) throw new TypeError(`World file ${id} is read on approach, so it must be a system whose host the world places and whose package (src/objects/${id}/object.json) names its parent.`);
     // To the nearest 1e12 m: an approach is measured against a system's fade distance, 1e16 m or more.
-    (places.get(parent) ?? places.set(parent, []).get(parent)!).push({ id, positionM: body.positionM.map(value => Math.round(value / APPROACH_ROUNDING_M) * APPROACH_ROUNDING_M) as unknown as Vector3,
-      orbitsWithinM: 'orbitsWithinM' in body && typeof body.orbitsWithinM === 'number' ? body.orbitsWithinM : null });
+    (places.get(parent) ?? places.set(parent, []).get(parent)!).push({ id, positionM: placeM.map(value => Math.round(value / APPROACH_ROUNDING_M) * APPROACH_ROUNDING_M) as unknown as Vector3,
+      orbitsWithinM: body && 'orbitsWithinM' in body && typeof body.orbitsWithinM === 'number' ? body.orbitsWithinM : null });
   }
   // An object with places has a file, read at startup, so its places are read.
   for (const id of places.keys()) if (!files.has(id)) files.set(id, []);

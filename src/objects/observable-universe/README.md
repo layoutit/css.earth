@@ -2,7 +2,7 @@
 
 The Observable Universe as an object of the world: its card and its list marker. It has no surface and no centre but the observer. What the world draws of it, the cosmic microwave background at its edge, is the [observable-universe-cmb](../observable-universe-cmb/README.md) bank, whose README holds the sources, processing, evidence and known problems.
 
-It is also a level of the zoom ladder ([object.json](object.json) `overview`): zooming far enough out hands the view to this object, with the camera kept where it was and still centred on the star the zoom started from.
+It is the root of the object tree: every object is inside it, and it is inside nothing ([object.json](object.json) has no `parent`). It is seen from inside ([object.json](object.json) `zoom`): zooming far enough out hands the view to this object, with the camera kept where it was and still centred on the star the zoom started from.
 
 ## Sources
 
