@@ -139,7 +139,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
     // The bank dims by its strokes' opacity, which its paths inherit. A group's own opacity is an offscreen pass on every
     // repaint of the shared layer: dragging the Milky Way on the iPad, 50 frames in 211 ran over 20 ms with the main
     // bank's 0.6 on its group and 17 to 25 with it on the strokes (2026-10-03). A dot's alpha was already its stroke's,
-    // so the dimming now behaves the same way: where two dots of different colours overlap, both show through.
+    // so the dimming now behaves the same way: where two dots of different colors overlap, both show through.
     // The property is inherited, so each change restyles the bank's paths: about 1 ms a frame for 2,000 paths on the
     // iPad while a bank fades, which is what the group's pass cost there; a bank at a steady opacity pays nothing.
     writeStyle(root, 'strokeOpacity', String(alpha));
