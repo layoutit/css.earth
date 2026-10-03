@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m60",
+  "card": {
+    "text": "An elliptical galaxy 16.7 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 42831: distance modulus 31.108 ± 0.079 mag",
+        "checked": "2026-10-02",
+        "locator": "distance: 16.66 Mpc (16.06 to 17.27)"
+      },
+      {
+        "catalogueId": "hyperleda-2014",
+        "url": "http://atlas.obs-hp.fr/hyperleda/",
+        "label": "HyperLEDA (Makarov et al. 2014), NGC4649 = PGC 42831: centre, type E, D25 diameter 6.8 arcmin",
+        "checked": "2026-10-02",
+        "locator": "type E, T = -4.6"
+      },
+      {
+        "catalogueId": "wikipedia-messier-60",
+        "url": "https://en.wikipedia.org/wiki/Messier_60",
+        "label": "Wikipedia, \"Messier 60\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1372953563",
+        "quote": "Messier 60 or M60, also known as NGC 4649, is an elliptical galaxy approximately 57 million light-years away in the equatorial constellation of Virgo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with stars and neighbouring galaxies removed, given depth by Kormendy et al.'s measured profile of the galaxy.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 23.1 arcmin wide"
+      },
+      {
+        "catalogueId": "kormendy-2009-virgo-ellipticals",
+        "url": "https://arxiv.org/abs/0810.1681",
+        "label": "Kormendy et al. (2009), ApJS 182, 216, Table 1",
+        "checked": "2026-10-03",
+        "locator": "NGC 4649: n = 5.36, r_e = 132.05 arcsec"
+      },
+      {
+        "catalogueId": "wikipedia-messier-60",
+        "url": "https://en.wikipedia.org/wiki/Messier_60",
+        "label": "Wikipedia, \"Messier 60\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1372953563",
+        "quote": "Together with NGC 4647, it forms a pair known as Arp 116."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M60 in visible light",
+      "detail": "2700 × 2700 px",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 23.1 × 23.1 arcmin on NGC4649"
+        }
+      ]
+    }
+  }
+}

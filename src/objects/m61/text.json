@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m61",
+  "card": {
+    "text": "A spiral galaxy 17.0 million parsecs away, tilted 24° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4303: distance 16.99 ± 3.02 Mpc, from the compilation of Anand et al. (2021)",
+        "checked": "2026-10-02",
+        "locator": "distance: 16.99 Mpc (13.97 to 20.01)"
+      },
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4303: inclination 23.5 ± 9.2°, position angle 312.4 ± 2.5°",
+        "checked": "2026-10-02",
+        "locator": "inclination 23.5 deg"
+      },
+      {
+        "catalogueId": "wikipedia-messier-61",
+        "url": "https://en.wikipedia.org/wiki/Messier_61",
+        "label": "Wikipedia, \"Messier 61\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1377881684",
+        "quote": "Messier 61 is an intermediate barred spiral galaxy in the Virgo Cluster of galaxies."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, laid flat on its measured disc.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 11.04 arcmin wide"
+      },
+      {
+        "catalogueId": "wikipedia-messier-61",
+        "url": "https://en.wikipedia.org/wiki/Messier_61",
+        "label": "Wikipedia, \"Messier 61\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1377881684",
+        "quote": "It was first discovered by Barnaba Oriani on May 5, 1779, six days before Charles Messier discovered the same galaxy."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M61 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 11.04 × 11.04 arcmin on NGC 4303"
+        }
+      ]
+    }
+  }
+}

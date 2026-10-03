@@ -41,3 +41,8 @@ per-planet code or data folders. Concrete CSS/DOM rendering belongs to the
 application renderer. Earth is a future consumer, outside this migration's scope.
 
 Numeric camera orientation math, heliocentric geometry and solar direction conversions live in `src/navigation/` and `src/solar-system/`, exported by the main entry. They depend on core numerics; no renderer, DOM or resource-loading implementation is imported. Flat solar matrices use the public `FlatMatrix3` name; navigation `Matrix3` remains nested.
+
+Navigation owns presentation-to-world conversion (`src/navigation/world-camera-conversion.ts`), its structural
+frame input and shared pose/viewport interfaces, default-view rotation from plain camera calibration,
+silhouette-level walking and surface fly-to calibration. Objects parsers validate camera records before
+calling engine. Rotation/reflection validation comes from core; engine never imports objects.

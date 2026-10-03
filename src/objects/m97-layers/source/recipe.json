@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m97-layers",
+  "source": {
+    "path": "starless.jpg",
+    "dimensions": [
+      2000,
+      2000
+    ],
+    "originalDimensions": [
+      2000,
+      2000
+    ],
+    "publisherUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+    "downloadUrl": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=2000&height=2000&fov=0.12&projection=TAN&coordsys=icrs&ra=168.698802&dec=55.019028&format=jpg",
+    "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+    "license": "CC-BY"
+  },
+  "observation": {
+    "centerRaDeg": 168.698802,
+    "centerDecDeg": 55.019028,
+    "fieldOfViewDeg": [
+      0.12,
+      0.12
+    ],
+    "northClockwiseDeg": 0
+  },
+  "target": {
+    "centerRaDeg": 168.69880181924,
+    "centerDecDeg": 55.01902840609,
+    "distancePc": 811.014503375056
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 255.684,
+    "thicknessKpc": 8.49e-07,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.00083231,
+    "supportTaperFraction": 0.7,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc"
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

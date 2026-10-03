@@ -41,7 +41,7 @@ import { knownObject } from './object-directory.mts';
 import { systemHostId } from './navigation/system-address.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createCameraMotion, createWorldSelectionTarget, savedWorldCamera, parseSharedView } from '@cssearth/renderer/navigation';
-import { worldCameraFromCenteredPresentation } from '@cssearth/objects';
+import { worldCameraFromCenteredPresentation } from '@cssearth/engine';
 import { worldCameraViewport, presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 
 /** A camera within this many pixels of a pair's centre already looks at it; no turn is needed. */

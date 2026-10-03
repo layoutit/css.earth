@@ -51,6 +51,20 @@ const AUTHORING_LEAF_EXCEPTIONS = new Set(['labs/nebula/packages/lab/src/adapter
 
 export const LAYER_RULES: readonly LayerRule[] = [
   {
+    id: 'objects-imports-core-only',
+    description: 'objects may import only itself, core, npm dependencies and Node built-ins (tests and type-only imports count)',
+    forbids: (from, to) => from.startsWith('packages/objects/') && !to.startsWith('packages/objects/') && !to.startsWith('packages/core/'),
+    includeTests: true,
+    noBaseline: true,
+  },
+  {
+    id: 'engine-imports-no-objects',
+    description: 'engine takes plain values and never imports objects: callers parse with objects first (tests and type-only imports count)',
+    forbids: (from, to) => from.startsWith('packages/engine/') && to.startsWith('packages/objects/'),
+    includeTests: true,
+    noBaseline: true,
+  },
+  {
     id: 'packages-import-only-packages',
     noBaseline: true,
     description: 'packages/* may import only packages/*, npm dependencies and Node built-ins (type-only imports count)',

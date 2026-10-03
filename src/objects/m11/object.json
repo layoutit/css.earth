@@ -1,0 +1,99 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m11",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Wild Duck Cluster",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 215119619305987.38
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Wild Duck Cluster",
+      "systemName": "Milky Way",
+      "classification": "open-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 460602977,
+      "description": "The Wild Duck Cluster is an open star cluster in the Milky Way, about 2,233 parsecs away.",
+      "aliases": [
+        "M11",
+        "Messier 11",
+        "NGC 6705",
+        "Amas de l'Ecu de Sobieski"
+      ],
+      "order": 5211,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        15134738101168927000,
+        -66799307499336310000,
+        -7531688705373916000
+      ],
+      "presentationToReference": [
+        0.2291728063083676,
+        0,
+        -0.9733857533623284,
+        -0.8930639681836331,
+        0.3977771559319137,
+        -0.21026193890198228,
+        -0.38719061659711024,
+        -0.9174820620691818,
+        -0.09115970711027778
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 693934255825765.6,
+      "bodyRadiusM": 215119619305987360
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

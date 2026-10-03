@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m110",
+  "card": {
+    "text": "An elliptical galaxy 0.8 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 2429: distance modulus 24.47 ± 0.02 mag",
+        "checked": "2026-10-02",
+        "locator": "distance: 0.78 Mpc (0.78 to 0.79)"
+      },
+      {
+        "catalogueId": "hyperleda-2014",
+        "url": "http://atlas.obs-hp.fr/hyperleda/",
+        "label": "HyperLEDA (Makarov et al. 2014), NGC0205 = PGC 2429: centre, type E, D25 diameter 16.2 arcmin",
+        "checked": "2026-10-02",
+        "locator": "type E, T = -4.8"
+      },
+      {
+        "catalogueId": "wikipedia-messier-110",
+        "url": "https://en.wikipedia.org/wiki/Messier_110",
+        "label": "Wikipedia, \"Messier 110\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1372953796",
+        "quote": "Messier 110, or M110, also known as NGC 205, is a dwarf elliptical galaxy that is a satellite of the Andromeda Galaxy in the Local Group."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, standing as a flat picture that faces the Sun.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 25.92 arcmin wide"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M110 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image on a flat plane facing the Sun; nothing in it has depth.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 25.92 × 25.92 arcmin on NGC 205"
+        }
+      ]
+    }
+  }
+}

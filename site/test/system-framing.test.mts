@@ -17,7 +17,8 @@ import { SYSTEM_FRAMING_ANGLES } from '../runtime-policy.mts';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 
 import { required, position, quaternion, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
-import { parsePreparedWorldContext, type WorldCameraPose } from '@cssearth/objects';
+import { parsePreparedWorldContext } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, readSystemViewFile)));
@@ -227,7 +228,9 @@ test('the Local Group overview frames the Milky Way and every drawn member galax
   // The galaxies inside the Local Group in the object tree: M81, NGC 253, M83 and NGC 300 are drawn by the same catalogue
   // but are inside the Nearby Universe (prepare-catalog.mts prepareFitBoxes).
   const members = OBJECTS.filter(object => object.classification === 'galaxy' && ancestorsOf(object.id).some(ancestor => ancestor.id === 'local-group')).map(object => object.id).sort();
-  assert.deepEqual(members, ['lmc', 'm31', 'm33', 'milky-way', 'smc']);
+  // Catalogue batches add galaxies (M32 and M110 with the Messier objects), so the list is held to its rule, not pinned.
+  for (const id of ['lmc', 'm31', 'm33', 'milky-way', 'smc']) assert.ok(members.includes(id), id);
+  for (const id of ['m81', 'ngc-253', 'm83', 'ngc-300']) assert.ok(!members.includes(id), id);
   assert.throws(() => drawnGalaxiesZoomTarget('milky-way', world, optics, systemFramingRect(optics)), /no box for milky-way/u);
   const steps = ancestorsOf('sun').flatMap(object => object.zoom ? [{ id: object.id, zoom: object.zoom }] : []);
   for (const orientationXyzw of [[0, 0, 0, 1], [.5, -.5, .5, .5], [0, .7071067811865476, 0, .7071067811865476]] as const) {

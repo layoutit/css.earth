@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m9",
+  "card": {
+    "text": "M9 is a globular star cluster in the Milky Way, about 8,300 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6333: Rsun 8.3 ± 0.14 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_6333: Rsun 8.3 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-9",
+        "url": "https://en.wikipedia.org/wiki/Messier_9",
+        "label": "Wikipedia, \"Messier 9\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100791",
+        "quote": "Messier 9 or M9 is a globular cluster in the constellation of Ophiuchus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M9 is drawn as 442 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6333: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6333: 442 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-9",
+        "url": "https://en.wikipedia.org/wiki/Messier_9",
+        "label": "Wikipedia, \"Messier 9\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100791",
+        "quote": "It is positioned in the southern part of the constellation to the southwest of Eta Ophiuchi, and lies atop a dark cloud of dust designated Barnard 64."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "442 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6333: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6333, inrt = True"
+        }
+      ]
+    }
+  }
+}

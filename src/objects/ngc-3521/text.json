@@ -43,7 +43,7 @@
     "optical": {
       "title": "NGC 3521 in visible light",
       "detail": "2046 × 2046 px",
-      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "summary": "Flat picture on the measured disc; the bulge of a published fit stands through it. Depth is modelled.",
       "sources": [
         {
           "catalogueId": "eso-eso1129a",
@@ -51,6 +51,13 @@
           "label": "A spiral galaxy in Leo; ESO/O. Maliy",
           "checked": "2026-10-02",
           "locator": "A spiral galaxy in Leo"
+        },
+        {
+          "catalogueId": "salo-2015-s4g-decompositions",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
+          "label": "Salo et al. (2015), ApJS 219, 4: S4G Pipeline 4 decompositions, table 7",
+          "checked": "2026-10-03",
+          "locator": "NGC3521, model _bdd: bulge 10.4% of the light, Re 8.31 arcsec, n 2.866"
         }
       ]
     }

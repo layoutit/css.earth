@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "SDSS9 color",
+  "publisher": "CDS (CNRS/Unistra)",
+  "sourceId": "CDS/P/SDSS9/color",
+  "sourcePage": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+  "download": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.366&projection=TAN&coordsys=icrs&ra=202.469547&dec=47.195151&format=jpg",
+  "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+  "license": "CC-BY",
+  "original": {
+    "dimensions": [
+      3000,
+      3000
+    ],
+    "bands": [
+      "SDSS",
+      "g",
+      "r",
+      "i"
+    ],
+    "fieldOfViewDeg": [
+      0.366,
+      0.366
+    ]
+  },
+  "checkedSource": {
+    "kind": "CDS hips2fits cutout (JPEG)",
+    "dimensions": [
+      3000,
+      3000
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 32.6,
+    "lineOfNodesPaDeg": 163,
+    "reference": "HyperLEDA (Makarov et al. 2014), NGC5194 = PGC 47404: inclination 32.6°, major-axis position angle 163°, from its outline at 25 mag per square arcsecond. Which edge of the disc is nearer is not in the source: the disc is drawn with the edge at position angle 253° nearer, an assumption."
+  },
+  "displayModel": "The photograph lies on one flat plane, the disc's midplane, as the Milky Way's backing image does. Nothing in the image has depth.",
+  "coverage": "Stars are removed from the picture before the bake by NOX, which predicts the light under a star and does not measure it; 10 of the 10 Gaia stars brighter than G 14 in the picture had a glow, filled out to at most 69 px (30″).",
+  "acquisition": {
+    "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.366&projection=TAN&coordsys=icrs&ra=202.469547&dec=47.195151&format=jpg",
+    "dimensions": [
+      3000,
+      3000
+    ],
+    "operation": "Request the cutout from the CDS hips2fits service: 3000 x 3000 px, 0.366 degrees wide, tangent projection on 202.469547, +47.195151, north up; no crop or resample."
+  }
+}

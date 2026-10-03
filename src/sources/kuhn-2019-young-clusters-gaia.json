@@ -1,0 +1,53 @@
+{
+  "id": "kuhn-2019-young-clusters-gaia",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kinematics in young star clusters and associations with Gaia DR2",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2019ApJ...870...32K"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/870/32"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...870...32K",
+      "label": "2019ApJ...870...32K"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/870/32",
+      "label": "CDS J/ApJ/870/32"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/870/32",
+      "checkedOn": "2026-10-02",
+      "locator": "Table 1 (cluster/association sample): M17, 82 stars, parallax 0.60 +/- 0.04 mas, distance 1680 (-110, +130) pc; M20, 116 stars, parallax 0.79 +/- 0.05 mas, distance 1264 (-68, +76) pc."
+    }
+  ],
+  "creators": [
+    "Michael A. Kuhn",
+    "Lynne A. Hillenbrand",
+    "Alison Sills",
+    "Eric D. Feigelson",
+    "Konstantin V. Getman"
+  ],
+  "publisher": "ApJ 870, 32",
+  "publicationDate": "2019",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Kuhn et al. (2019), ApJ 870, 32.",
+      "scope": "Distances of young clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/870/32"
+    }
+  ]
+}

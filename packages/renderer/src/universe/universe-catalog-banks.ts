@@ -1,6 +1,7 @@
 import { createImageFocusBank, createPointFocusBank } from './prepared-focus-bank.js';
 import type { SceneLifetime } from '@cssearth/engine';
-import { type PreparedCatalogObject, type DensityVolumeFrame, type WorldCameraPose } from '@cssearth/objects';
+import { type PreparedCatalogObject, type DensityVolumeFrame } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
 import { outsideVolumeOpacity, projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';

@@ -1,0 +1,64 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "ford-pne",
+  "table": {
+    "path": "table3",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/458/455/table3",
+    "bytes": 11172,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        5
+      ],
+      "raH": [
+        7,
+        8
+      ],
+      "raM": [
+        10,
+        11
+      ],
+      "raS": [
+        13,
+        18
+      ],
+      "decSign": [
+        20,
+        20
+      ],
+      "decD": [
+        21,
+        22
+      ],
+      "decM": [
+        24,
+        25
+      ],
+      "decS": [
+        27,
+        31
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the plane the picture stands on, facing the Sun (recipe.json), through the image-layer bake's own intersection.",
+    "bulge": {
+      "source": "salo-2015-s4g-decompositions",
+      "basis": "Old objects fill the bulge as well as the disc: each is a bulge member with the bulge's share of S4G's fitted light at its sky position (faded out between 12.64 and 18.06 kpc as the image layers' is), and then sits at a depth drawn from the bulge's density along its sight line. Membership is drawn, not measured."
+    }
+  },
+  "source": "ford-1996-m104-planetary-nebulae",
+  "meaning": "Planetary nebulae of the Sombrero Galaxy from Ford et al.'s (1996) [O III] survey of its halo: one dot per nebula at its catalogue position.",
+  "appearance": {
+    "colorCss": "#9dffcf",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the planetary-nebula color M31's and M33's dots share. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

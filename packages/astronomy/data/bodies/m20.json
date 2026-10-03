@@ -1,0 +1,28 @@
+{
+  "id": "m20",
+  "classification": "nebula",
+  "order": 5220,
+  "physical": {
+    "name": "Trifid Nebula",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Trifid Nebula is recorded: it is an extended nebula, and its package frames it at 2.55 pc (object.json worldFrame.bodyRadiusM), half its picture's short side, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 270.59624999999994,
+    "declinationDegrees": -23.03055555555555,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 1264,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "Kuhn et al. (2019), Table 1, M20",
+      "distance": "Kuhn et al. (2019), Kinematics in young star clusters and associations with Gaia DR2, ApJ 870, 32; CDS J/ApJ/870/32, Table 1, M20: distance 1264 pc (-68 / +76) from the Gaia DR2 parallaxes of its young stars (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/870/32)",
+      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Zero: no radial velocity is recorded for the nebula here."
+    }
+  }
+}

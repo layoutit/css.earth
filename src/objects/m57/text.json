@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m57",
+  "card": {
+    "text": "The Ring Nebula is a planetary nebula about 790 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "chornay-walton-2021-pn-central-stars",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+        "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G063.1+13.9: distance 790 pc (764 to 818) from the Gaia EDR3 parallax of its central star",
+        "checked": "2026-10-02",
+        "locator": "distance: 790 pc (764 to 818)"
+      },
+      {
+        "catalogueId": "wikipedia-ring-nebula",
+        "url": "https://en.wikipedia.org/wiki/Ring_Nebula",
+        "label": "Wikipedia, \"Ring Nebula\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1368977956",
+        "quote": "The Ring Nebula is a planetary nebula in the northern constellation of Lyra, about mid-way between the prominent stars Beta and Gamma Lyrae."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "ESA/Hubble's photograph of it stands here as a flat picture facing the Sun, 0.48 pc wide.",
+    "sources": [
+      {
+        "catalogueId": "esahubble-heic1310a",
+        "url": "https://esahubble.org/images/heic1310a/",
+        "label": "ESA/Hubble heic1310a: NASA, ESA, and C. Robert O'Dell (Vanderbilt University)",
+        "checked": "2026-10-02",
+        "locator": "Hubble image of the Ring Nebula (Messier 57); He II 469, H-beta 487, [O III] 502, continuum 645, H-alpha 656, [N II] 658 and [S II] 673 nm"
+      },
+      {
+        "catalogueId": "wikipedia-ring-nebula",
+        "url": "https://en.wikipedia.org/wiki/Ring_Nebula",
+        "label": "Wikipedia, \"Ring Nebula\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1368977956",
+        "quote": "It is also catalogued as Messier 57, M57 and NGC 6720."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Ring Nebula in visible light",
+      "detail": "3179 × 3179 px",
+      "summary": "A flat picture facing the Sun at the nebula's distance; nothing in it has depth.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-heic1310a",
+          "url": "https://esahubble.org/images/heic1310a/",
+          "label": "ESA/Hubble heic1310a: NASA, ESA, and C. Robert O'Dell (Vanderbilt University)",
+          "checked": "2026-10-02",
+          "locator": "Hubble image of the Ring Nebula (Messier 57)"
+        }
+      ]
+    }
+  }
+}

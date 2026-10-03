@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m44",
+  "card": {
+    "text": "The Beehive Cluster is an open star cluster in the Milky Way, about 183 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2632: dist50, the median of the maximum-likelihood distance, 183.49109237 pc (16th to 84th percentile 183 to 184)",
+        "checked": "2026-10-02",
+        "locator": "NGC_2632: dist50 183.5 pc"
+      },
+      {
+        "catalogueId": "wikipedia-beehive-cluster",
+        "url": "https://en.wikipedia.org/wiki/Beehive_Cluster",
+        "label": "Wikipedia, \"Beehive Cluster\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1370773477",
+        "quote": "The Beehive Cluster is an open cluster in the constellation Cancer."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Beehive Cluster is drawn as 793 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2632: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_2632: 793 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-beehive-cluster",
+        "url": "https://en.wikipedia.org/wiki/Beehive_Cluster",
+        "label": "Wikipedia, \"Beehive Cluster\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1370773477",
+        "quote": "One of the nearest open clusters to Earth, it contains a larger population of stars than other nearby bright open clusters holding around 1,000 stars."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "793 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2632: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_2632, inrt = True"
+        }
+      ]
+    }
+  }
+}

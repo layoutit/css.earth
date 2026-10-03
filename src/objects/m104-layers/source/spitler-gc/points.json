@@ -1,0 +1,64 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "spitler-gc",
+  "table": {
+    "path": "table2.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/132/1593/table2.dat",
+    "bytes": 67218,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        3
+      ],
+      "raH": [
+        5,
+        6
+      ],
+      "raM": [
+        8,
+        9
+      ],
+      "raS": [
+        11,
+        15
+      ],
+      "decSign": [
+        17,
+        17
+      ],
+      "decD": [
+        18,
+        19
+      ],
+      "decM": [
+        21,
+        22
+      ],
+      "decS": [
+        24,
+        28
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the plane the picture stands on, facing the Sun (recipe.json), through the image-layer bake's own intersection.",
+    "bulge": {
+      "source": "salo-2015-s4g-decompositions",
+      "basis": "Old objects fill the bulge as well as the disc: each is a bulge member with the bulge's share of S4G's fitted light at its sky position (faded out between 12.64 and 18.06 kpc as the image layers' is), and then sits at a depth drawn from the bulge's density along its sight line. Membership is drawn, not measured."
+    }
+  },
+  "source": "spitler-2006-sombrero-globular-clusters",
+  "meaning": "Globular clusters of the Sombrero Galaxy that Spitler et al. (2006) catalogued in a Hubble mosaic: one dot per cluster at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

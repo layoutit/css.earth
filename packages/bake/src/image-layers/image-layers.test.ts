@@ -37,6 +37,11 @@ test('production preparation preserves canonical flux and supplies nondegenerate
   assert.deepEqual(flatBank.banks.map(b=>[b.axis,b.leaves.length]),[['x',1],['y',1],['z',1]]);assert.equal(flatBank.resources.length,1);
   assert.deepEqual(new Set(flatBank.banks.flatMap(b=>b.leaves.map(l=>l.texturePath))),new Set(['layers/z-detail.webp']));
   {const [a,b,c]=flatBank.banks.map(v=>v.normalUnits);assert(Math.abs(a[0]*(b[1]*c[2]-b[2]*c[1])-a[1]*(b[0]*c[2]-b[2]*c[0])+a[2]*(b[0]*c[1]-b[1]*c[0]))>1e-3,'flat bank normals are independent');}
+  // A parsec bank is the same flat bank with a thousand times as many units, at the same place: a nebula a few parsecs across.
+  const parsecBank=await prepareImageLayers({sourceDirectory:source,outputDirectory:join(root,'parsec'),recipe:parseImageLayerRecipe({...recipe,geometry:{...recipe.geometry,unit:'pc'},bake:{...recipe.bake,flat:true}})});
+  assert.equal(parsecBank.frame.metersPerUnit,flatBank.frame.metersPerUnit/1000);assert.deepEqual(parsecBank.frame.originM,flatBank.frame.originM);
+  for(const [i,vertex] of parsecBank.banks[2]!.leaves[0]!.verticesUnits.entries())for(const [axis,value] of vertex.entries())assert(Math.abs(value-1000*flatBank.banks[2]!.leaves[0]!.verticesUnits[i]![axis]!)<=1e-9*Math.max(1,Math.abs(value)),'parsec vertices are the kiloparsec ones times a thousand');
+  assert.throws(()=>parseImageLayerRecipe({...recipe,geometry:{...recipe.geometry,unit:'pc'}}),/flat bank without a bulge/);
   // Every layer holds its whole image at the shared texel density: WebKit backs a leaf at its box, not its projection.
   for(const b of bank.banks)for(const l of b.leaves){const [width,height]=[l.style.width,l.style.height].map(Number.parseFloat);
     assert.equal(l.widthPx/width!,TEXELS_PER_CSS_PIXEL,`${l.id}: ${l.widthPx} texels across ${l.style.width}`);assert.equal(l.heightPx/height!,TEXELS_PER_CSS_PIXEL,`${l.id}: ${l.heightPx} texels down ${l.style.height}`);

@@ -6,7 +6,7 @@ import type { PreparedOrbitCenter } from './prepared-orbit-centers.js';
 import { parsePreparedWorldCameraFrame } from './world-frame.js';
 import { array, finite, numbers, positive, record, text, unique } from './world-guards.js';
 import type { PreparedWorldCameraFrame } from './world-frame.js';
-import { validateWorldRotation } from '../registry/world-rotation.js';
+import { validateWorldRotation } from '@cssearth/core';
 import type { LevelOfDetailPlan, OrbitLineFade } from './world-presentation.js';
 import type { PreparedOrbitStrokes } from './prepared-orbit-strokes.js';
 import { expandWorldContextSummary, expandWorldSystem } from './world-context-summary.js';

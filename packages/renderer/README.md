@@ -120,7 +120,7 @@ The complete catalogue bank is `PreparedCataloguePointBank`; embedded volume sta
 Counting, projection, transport and retained mounting stay in renderer; image/geometry preparation and file I/O stay in bake.
 Contract tests use node:test in the packages lane.
 
-Shared prepared resource addresses, texture tile styles, silhouette thresholds, shell material addresses, feature-bank addresses, marker validation, fly-to conventions and volume topology equality live in `@cssearth/objects`. Numeric camera orientation and solar geometry live in `@cssearth/engine`.
+Shared prepared resource addresses, texture tile styles, silhouette thresholds, shell material addresses, feature-bank addresses, marker validation, volume topology equality live in `@cssearth/objects`. Numeric camera orientation and solar geometry live in `@cssearth/engine`.
 
-Validated presentation-to-world camera conversion, its pose/presentation data shapes and the default-view reader
-belong to `@cssearth/objects`, using engine math. Runtime viewport/layout and world-to-presentation projection stay here.
+Presentation-to-world conversion, camera pose/viewport shapes, default-view rotation, silhouette walking and
+surface fly-to calibration belong to `@cssearth/engine`. Renderer extends the engine viewport with layout fields. Runtime viewport/layout and world-to-presentation projection stay here.

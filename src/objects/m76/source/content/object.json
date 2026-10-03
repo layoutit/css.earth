@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m76",
+  "displayName": "Little Dumbbell Nebula",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "1,359 pc (1,190 to 1,546)",
+        "source": {
+          "catalogueId": "chornay-walton-2021-pn-central-stars",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+          "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G130.9-10.5: distance 1359 pc (1190 to 1546) from the Gaia EDR3 parallax of its central star",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 25.582°, Dec 51.575°",
+        "source": {
+          "catalogueId": "chornay-walton-2021-pn-central-stars",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+          "label": "Chornay & Walton (2021), PN G130.9-10.5: its central star, Gaia EDR3 406328443354164480",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "5.01 arcmin, 1.98 pc at its distance",
+        "source": {
+          "catalogueId": "esahubble-heic2408a",
+          "url": "https://esahubble.org/images/heic2408a/",
+          "label": "ESA/Hubble heic2408a: NASA, ESA, STScI, A. Pagan (STScI)",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Hubble · optical",
+        "thumbnail": "m76-dataset-optical.webp",
+        "volume": {
+          "objectId": "m76-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m76-layers-optical",
+          "path": "../../m76-layers/source/manifest.json",
+          "url": "https://esahubble.org/images/heic2408a/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G130.9-10.5: distance 1359 pc (1190 to 1546) from the Gaia EDR3 parallax of its central star",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chornay & Walton (2021), PN G130.9-10.5: its central star, Gaia EDR3 406328443354164480",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Hubble heic2408a: NASA, ESA, STScI, A. Pagan (STScI)",
+      "href": "https://esahubble.org/images/heic2408a/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+      "credit": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G130.9-10.5: distance 1359 pc (1190 to 1546) from the Gaia EDR3 parallax of its central star"
+    }
+  }
+}

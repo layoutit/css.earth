@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m60-volume",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4.944596899286732e+23,
+        -9.536564668427587e+22,
+        1.0293542590376276e+23
+      ],
+      "localToReferenceXyzw": [
+        0.4876428916026741,
+        -0.40257890189035433,
+        -0.4931947728848686,
+        0.597405686297998
+      ],
+      "metersPerUnit": 345585806764145700000,
+      "boundsUnits": {
+        "min": [
+          -5,
+          -5,
+          -5
+        ],
+        "max": [
+          5,
+          5,
+          5
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "m60",
+    "cataloguePoints": [
+      "dots"
+    ]
+  },
+  "prepared": {
+    "format": "cssearth-volume-datasets@1",
+    "url": "prepared/datasets.json"
+  }
+}

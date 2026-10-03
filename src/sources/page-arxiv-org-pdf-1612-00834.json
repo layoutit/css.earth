@@ -1,0 +1,39 @@
+{
+  "id": "page-arxiv-org-pdf-1612-00834",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "Gaia Shows That Messier 40 is Definitely Not a Binary Star (Merrifield, Gray & Haran 2016), arXiv:1612.00834",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://arxiv.org/pdf/1612.00834"
+    },
+    {
+      "type": "arxiv",
+      "value": "1612.00834"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/pdf/1612.00834",
+      "label": "arxiv.org/pdf/1612.00834"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/pdf/1612.00834",
+      "checkedOn": "2026-10-03",
+      "locator": "Title and abstract, as arXiv lists them"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Merrifield, M. R., Gray, M. E. & Haran, B. (2016), Gaia Shows That Messier 40 is Definitely Not a Binary Star, The Observatory; arXiv:1612.00834",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/pdf/1612.00834"
+    }
+  ]
+}

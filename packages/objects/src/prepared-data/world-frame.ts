@@ -1,4 +1,4 @@
-import { validateWorldReflection, type WorldRotation } from '../registry/world-rotation.js';
+import { validateWorldReflection, type WorldRotation } from '@cssearth/core';
 import { finite, numbers, positive, record, text } from './world-guards.js';
 
 export type WorldPosition = readonly [number, number, number];

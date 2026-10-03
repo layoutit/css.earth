@@ -1,7 +1,7 @@
 import { PREPARED_WORLD_SYSTEM_VIEW_SCHEMA } from './world-schemas.js';
 import type { WorldPosition as PositionM } from './world-frame.js';
 import { array, numbers, positive, record, text, unique } from './world-guards.js';
-import { validateWorldRotation } from '../registry/world-rotation.js';
+import { validateWorldRotation } from '@cssearth/core';
 import type { PreparedContextBody, PreparedWorldContext } from './world-context.js';
 
 function vector(value: unknown, label: string): PositionM {

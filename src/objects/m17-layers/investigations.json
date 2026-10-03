@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m17-layers",
+  "entries": [
+    {
+      "id": "eso1537a",
+      "subject": "ESO eso1537a",
+      "status": "included",
+      "finding": "The star formation region Messier 17: B, V, R and H-alpha; 4000 × 3738 px over 35.44 × 33.12 arcmin. The file's embedded sky tags, used as they are: 0.5316 arcsec per pixel, north 0.0° left of vertical, the frame's centre at 275.2630836°, -16.1874792°. Not measured against Gaia here.",
+      "evidence": [
+        "https://www.eso.org/public/images/eso1537a/",
+        "https://www.eso.org/public/outreach/copyright/"
+      ]
+    },
+    {
+      "id": "volume",
+      "subject": "A volume of the Omega Nebula",
+      "status": "deferred",
+      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "evidence": [
+        "https://www.eso.org/public/images/eso1537a/"
+      ],
+      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+    },
+    {
+      "id": "star-removal",
+      "subject": "Stars in the picture",
+      "status": "included",
+      "finding": "The photograph first kept its stars, which stood on the nebula's plane whatever their own distances. The Nebula Lab's NOX removes them and keeps the nebula's structure. The glow of the brightest stars remains. A second pass over a quarter-size copy takes saturated stars, but on this picture it also took real nebula, so it is not used. The galaxies' glow fill, which needs a star table, erased nebula around the stars that light it and is not used on nebulae.",
+      "evidence": [
+        "https://github.com/charvey2718/nox"
+      ]
+    }
+  ]
+}

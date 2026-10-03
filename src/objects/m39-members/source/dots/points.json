@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "dots",
+  "published": true,
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+GaiaDR3%2C+RA_ICRS%2C+DE_ICRS%2C+'m39'+AS+grp%2C+295.86999699+AS+distpc%2C+Gmag%2C+%22BP-RP%22+FROM+%22J%2FA%2BA%2F673%2FA114%2Fmembers%22+WHERE+Name%3D'Theia_517'+AND+inrt%3D'True'+AND+%22BP-RP%22+IS+NOT+NULL+AND+Gmag+IS+NOT+NULL+ORDER+BY+Gmag",
+    "bytes": 26323,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 5
+    },
+    "distanceUnit": "pc",
+    "groupDistance": {
+      "group": 4,
+      "distance": 5,
+      "depth": "isotropic",
+      "source": "hunt-reffert-2023-open-clusters",
+      "basis": "Every member sits at the cluster's distance, Hunt & Reffert's (2023) 296 pc for Theia_517 (dist50; the query writes it into each row), spread in depth as widely as the members spread across the sky: that the cluster is as deep as it is wide is an assumption, not a measurement of any member's depth. A member's own parallax is not used: its error spreads the cluster along the sight line far more than the cluster is deep."
+    }
+  },
+  "sample": "The 284 stars Hunt & Reffert (2023, A&A 673, A114) list as members of Theia_517 within its tidal radius (inrt = True, their own selection of reliable members), of 511 members in all, that have a Gaia DR3 G magnitude and BP-RP color; 0 within the tidal radius without a color are left out. Gaia misses stars in the crowded core.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "hunt-reffert-2023-open-clusters",
+  "meaning": "Member stars of M39 from Hunt & Reffert's (2023) Gaia DR3 cluster census, one dot per star at its measured sky position, at the cluster's distance. Drawn when the cluster is selected.",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 1,
+    "opacity": 1,
+    "colorByBpRp": {
+      "column": 7,
+      "range": [
+        -0.4,
+        1.9
+      ],
+      "steps": 12,
+      "basis": "Measured Gaia DR3 BP-RP, as observed (not corrected for the dust in front of the cluster), through Cardiel et al.'s (2021) RGB fit, as the nebula star fields color Gaia stars. A color beyond the range takes its end."
+    },
+    "toneBy": {
+      "magnitudeColumn": 6,
+      "band": "Gaia G, as observed",
+      "brightMagnitude": -3,
+      "faintMagnitude": 6,
+      "faintTone": 0.45,
+      "steps": 5,
+      "basis": "A display scale: each member's G magnitude minus the distance modulus of the cluster's distance darkens its color, from full at -3 to 45% at +6, linear in magnitude; the dot size and the faintest tone are the nuclear star cluster's. Dust in front of the cluster (Hunt & Reffert's A_V 0.06 mag) is not removed."
+    }
+  }
+}

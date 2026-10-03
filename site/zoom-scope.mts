@@ -1,7 +1,8 @@
 import { eyeDistanceM } from '@cssearth/engine';
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from './system-framing.mts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
-import type { WorldCameraPose, PreparedWorldCameraFrame, ZoomDistance, ObjectZoom } from '@cssearth/objects';
+import type { PreparedWorldCameraFrame, ZoomDistance, ObjectZoom } from '@cssearth/objects';
+import type { WorldCameraPose } from '@cssearth/engine';
 /** What the camera's zoom out of a star frames, by object id: the star's own system, or an object it is inside
  * (inside-view.mts `zoomChain`); every scope is measured from that star (zoomScopeAtCamera). */
 export type ZoomScope = string;

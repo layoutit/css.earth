@@ -1,0 +1,53 @@
+{
+  "id": "ford-1996-m104-planetary-nebulae",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The stellar halo of M104. I. A survey for planetary nebulae and the planetary nebula luminosity function distance",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "1996ApJ...458..455F"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/458/455"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/1996ApJ...458..455F",
+      "label": "1996ApJ...458..455F"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/458/455",
+      "label": "CDS J/ApJ/458/455"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/458/455/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table3: 294 rows; 289 drawn as Sombrero Galaxy's planetary nebulae."
+    }
+  ],
+  "creators": [
+    "H. C. Ford",
+    "X. Hui",
+    "R. Ciardullo",
+    "G. H. Jacoby",
+    "K. C. Freeman"
+  ],
+  "publisher": "ApJ 458, 455",
+  "publicationDate": "1996",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Ford et al. (1996), ApJ 458, 455.",
+      "scope": "Sombrero Galaxy's planetary nebulae",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/458/455/ReadMe"
+    }
+  ]
+}

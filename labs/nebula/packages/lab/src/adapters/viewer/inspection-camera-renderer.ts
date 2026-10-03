@@ -4,7 +4,7 @@ import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts
 import { runtimePolicy } from './inspection-runtime-policy';
 import { createObjectInteractionControls } from '@cssearth/renderer/navigation/object-interaction-controls.ts';
 import { createCameraMotion } from '@cssearth/renderer/navigation/camera-motion.ts';
-import { worldCameraFromCenteredPresentation } from '@cssearth/objects';
+import { worldCameraFromCenteredPresentation } from '@cssearth/engine';
 import { referenceRotationFromPresentation, worldRotationFromQuaternion } from '@cssearth/engine';
 import { rotationFromMatrix3d } from '@cssearth/engine';
 export const inspectionCameraRenderer: InspectionCameraBackend<VolumeCameraPublication> = {

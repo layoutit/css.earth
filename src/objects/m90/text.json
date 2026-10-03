@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m90",
+  "card": {
+    "text": "A spiral galaxy 15.8 million parsecs away, seen close to edge-on.",
+    "sources": [
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4569: distance 15.76 ± 2.38 Mpc, from the compilation of Anand et al. (2021)",
+        "checked": "2026-10-02",
+        "locator": "distance: 15.76 Mpc (13.38 to 18.14)"
+      },
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4569: inclination 70.0 ± 6.0°, position angle 18.0 ± 2.0°",
+        "checked": "2026-10-02",
+        "locator": "inclination 70 deg"
+      },
+      {
+        "catalogueId": "wikipedia-messier-90",
+        "url": "https://en.wikipedia.org/wiki/Messier_90",
+        "label": "Wikipedia, \"Messier 90\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373230537",
+        "quote": "Messier 90 is an intermediate spiral galaxy exhibiting a weak inner ring structure about 60 million light-years away[a] in the constellation Virgo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with stars removed, standing flat and facing the Sun. Its bulge stands through it as a volume, from a published fit.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 14.58 arcmin wide"
+      },
+      {
+        "catalogueId": "salo-2015-s4g-decompositions",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
+        "label": "Salo et al. (2015), ApJS 219, 4: S4G Pipeline 4 decompositions, table 7",
+        "checked": "2026-10-03",
+        "locator": "NGC4569, model _bdbar: bulge 14.6% of the light, Re 6.52 arcsec, n 4.898"
+      },
+      {
+        "catalogueId": "wikipedia-messier-90",
+        "url": "https://en.wikipedia.org/wiki/Messier_90",
+        "label": "Wikipedia, \"Messier 90\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373230537",
+        "quote": "It was discovered by Charles Messier in 1781."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M90 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Flat picture facing the Sun; the bulge of a published fit stands through it. Depth is modelled.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 14.58 × 14.58 arcmin on NGC 4569"
+        }
+      ]
+    }
+  }
+}

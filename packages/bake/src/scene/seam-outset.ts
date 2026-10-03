@@ -1,4 +1,5 @@
-import { walkSilhouetteLevels, type PreparedSilhouetteSteps } from '@cssearth/objects';
+import { type PreparedSilhouetteSteps } from '@cssearth/objects';
+import { walkSilhouetteLevels } from '@cssearth/engine';
 
 
 /** Authored rule: hold `targetPixels` of outset on each leaf edge at every silhouette size. */

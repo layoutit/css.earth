@@ -30,6 +30,11 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/180/54/ReadMe",
       "checkedOn": "2026-10-01",
       "locator": "table4: 12,763 sources in the HST/ACS fields of 100 Virgo galaxies with J2000 positions and pGC, the probability that a source is a globular cluster; note 1 restricts a bona fide sample to pGC >= 0.5. 765 rows of VCC 1226 (M49) pass it."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/180/54",
+      "checkedOn": "2026-10-03",
+      "locator": "table4 rows with pGC >= 0.5 for the Messier ellipticals drawn as volumes: 308 of VCC 1903 (M59), 807 of VCC 1978 (M60), 506 of VCC 763 (M84), 367 of VCC 881 (M86), 456 of VCC 1632 (M89)."
     }
   ],
   "creators": [
@@ -50,7 +55,7 @@
     {
       "kind": "credit",
       "text": "Cite Jordán et al. (2009), ApJS 180, 54.",
-      "scope": "M49 globular clusters",
+      "scope": "Globular clusters of M49, M59, M60, M84, M86 and M89",
       "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/180/54/ReadMe"
     }
   ]

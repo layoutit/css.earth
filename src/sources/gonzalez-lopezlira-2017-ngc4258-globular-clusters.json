@@ -1,0 +1,54 @@
+{
+  "id": "gonzalez-lopezlira-2017-ngc4258-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The relation between globular cluster systems and supermassive black holes in spiral galaxies: the case study of NGC 4258",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2017ApJ...835..184G"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/835/184"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017ApJ...835..184G",
+      "label": "2017ApJ...835..184G"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/835/184",
+      "label": "CDS J/ApJ/835/184"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/835/184/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table6.dat: 39 rows; 37 drawn as M106's globular cluster candidates."
+    }
+  ],
+  "creators": [
+    "R. A. González-Lópezlira",
+    "L. Lomelí-Núñez",
+    "K. Álamo-Martínez",
+    "Y. Órdenes-Briceño",
+    "L. Loinard",
+    "I. Y. Georgiev"
+  ],
+  "publisher": "ApJ 835, 184",
+  "publicationDate": "2017",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite González-Lópezlira et al. (2017), ApJ 835, 184.",
+      "scope": "M106's globular cluster candidates",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/835/184/ReadMe"
+    }
+  ]
+}

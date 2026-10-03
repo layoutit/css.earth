@@ -3,7 +3,8 @@ import { test } from 'node:test';
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { preparedDefaultViewRotation, parseObjectDiscovery } from '@cssearth/objects';
+import { parseObjectDiscovery } from '@cssearth/objects';
+import { preparedDefaultViewRotation } from '@cssearth/engine';
 import { prepareObjectDiscovery } from '../build/prepare/prepare-object-discovery.mts';
 
 test('a shape-only body gets a prepared arrival without becoming photographic', async () => {

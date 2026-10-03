@@ -21,6 +21,15 @@
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/520/4902"
       ],
       "revisitWhen": "A catalogue of its HII regions, clusters or remnants with sky positions is published."
+    },
+    {
+      "id": "bulge",
+      "subject": "Bulge",
+      "status": "included",
+      "finding": "Salo et al. (2015), S4G Pipeline 4, table 7, NGC3521, model _bdd: a Sérsic bulge (10.4% of the light, magnitude 10.566, half-light radius 8.31″ = 0.43 kpc, n = 2.866, axis ratio 0.678, PA 163.21°) and an exponential disc (67.4% of the light, scale length 39.05″ = 2.03 kpc, axis ratio 0.514, PA 162.82°, face-on central surface brightness 18.491, 17.768 as projected on the sky) and an exponential disc (22.2% of the light, scale length 108.98″ = 5.66 kpc, axis ratio 0.453, PA 162.31°, face-on central surface brightness 21.908, 21.048 as projected on the sky). Used as published; the half-light surface brightness the bake needs, 17.957 mag per square arcsecond, follows from the bulge's magnitude, radius, index and axis ratio. At the disc's 73° the bulge's axis ratio is one an oblate spheroid in the disc plane can show (intrinsic 0.64).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4"
+      ]
     }
   ]
 }

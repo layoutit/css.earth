@@ -1,0 +1,30 @@
+# Beehive Cluster members
+
+The stars of Beehive Cluster that a Gaia DR3 cluster census counts as members, one dot each, drawn while the cluster is selected. The cluster's place, distance and card are the [Beehive Cluster](../m44/README.md) package's.
+
+## Sources
+
+| Source | Measurement used |
+| --- | --- |
+| [Hunt & Reffert (2023), A&A 673, A114](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114) | [Record](../../sources/hunt-reffert-2023-open-clusters.json). Table `members`, NGC_2632: Gaia DR3 positions (epoch 2016.0), G magnitudes and BP-RP colors of its members. The 793 inside the tidal radius (`inrt`, the authors' selection of reliable members) with a color are drawn. |
+| [Cardiel et al. (2021), MNRAS 507, 318](https://arxiv.org/abs/2107.08734) | [Record](../../sources/cardiel-2021-rgb.json). The Gaia BP-RP to RGB fit that colors each dot. |
+
+## Processing
+
+1. The table is a CDS TAP query (`source/dots/points.json`, `table.origin`; not tracked): it keeps the members inside the tidal radius with a G magnitude and a BP-RP color, and writes the cluster's distance into each row.
+2. `node packages/bake/cli/prepare-catalogue-points.mts src/objects/m44-members dots` places every member at the cluster's distance, spread in depth as widely as the members spread across the sky, colors it by its BP-RP and tones it by its G magnitude ([recipe](source/dots/points.json)): 793 dots.
+
+## Measured, chosen and assumed
+
+| Value | Kind |
+| --- | --- |
+| Sky positions, membership, G and BP-RP | Measured: Hunt & Reffert (2023), from Gaia DR3 |
+| Distance 183 pc | Measured: Hunt & Reffert (2023), dist50 |
+| Depth of each member within the cluster | Assumed: as deep as the members are wide on the sky; not measured |
+| Color fit, tone scale, dot size | Presentation: Cardiel et al. (2021) for the color; the tone and size are display choices |
+
+## Known problems
+
+- A member's depth is assumed, not measured.
+- Gaia misses stars where they crowd together, so the core holds fewer dots than stars.
+- Colors are as observed, reddened by the dust in front of the cluster (A_V 0.16 mag in Hunt & Reffert's fit).

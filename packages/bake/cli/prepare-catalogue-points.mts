@@ -39,6 +39,7 @@ import { readFitsHdus, binaryTable, tableColumn, numbers } from '@cssearth/bake/
 import { parseCieTable, linearToSrgb } from '@cssearth/bake/objects/color';
 import { spectrumLinearSrgb } from '@cssearth/bake/objects/stellar';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
+import { GAIA_BP_RP_DISPLAY_DOMAIN, gaiaBpRpDisplayColor } from '@cssearth/bake/nebula';
 import { type CatalogueSizeBy, checkCatalogueSizeBy, checkCatalogueToneBy, parseCatalogueSpheroid, placeGroupMembers, placeMeasuredRows, placeSpheroidRows, recipePublished, toneCataloguePalette, writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const [objectDirectoryArgument, id] = process.argv.slice(2);
@@ -51,6 +52,7 @@ if (recipe.schema !== 'cssearth-catalogue-points-source@1' || recipe.id !== id) 
 const published = recipePublished(recipe, recipePath);
 /** A column is a 1-based whitespace or comma-separated field, or a 1-based inclusive byte range of a fixed-width table. */
 type Column = number | [number, number];
+type MeasuredColor = { column: Column; range: [number, number]; steps: number; basis: string };
 /** Galactic coordinates come from columns, or from a `G<l><±b>` identifier in the name column (as in G305.20+00.01).
  * A distance is a column in pc or kpc, a trigonometric parallax in mas taken as 1/parallax, a distance modulus
  * (10^(m - M)/5 + 1 pc), or a redshift: the comoving distance in the Planck 2018 cosmology (Astropy's Planck18,
@@ -119,9 +121,10 @@ type Spectrum = { path: string; bytes: number; wavelength: string; flux: string;
   endsNm?: { value: number; basis: string } };
 const appearance = recipe.appearance as { colorCss: string; radiusPx: number; opacity: number;
   colorBy?: { column: Column; stops: [number, string][]; steps: number };
-  /** Each row's measured B-V through the app's own catalogue star color (@cssearth/engine catalogueColor), quantised to
-   * `steps` colors across `range`; a color outside the range takes its end. */
-  colorByBv?: { column: Column; range: [number, number]; steps: number; basis: string };
+  /** Each row's measured B-V through the app's own catalogue star color (@cssearth/engine catalogueColor), or its Gaia BP-RP
+   * through Cardiel et al.'s (2021) RGB fit (gaiaBpRpDisplayColor, as the nebula star fields color Gaia stars; the range stays
+   * inside the fit's domain), quantised to `steps` colors across `range`; a color outside the range takes its end. */
+  colorByBv?: MeasuredColor; colorByBpRp?: MeasuredColor;
   colorByClass?: { column: Column; classes: { label: string; below?: number; spectrum: Spectrum }[]; missing: { label: string; colorCss: string; basis: string } };
   toneBy?: { magnitudeColumn: Column; band: string; brightMagnitude: number; faintMagnitude: number; faintTone: number; steps: number; basis: string;
     /** The column holds a flux in nanomaggies (m = 22.5 - 2.5 log10 f, the Legacy Surveys' zero point), not a magnitude. */
@@ -149,15 +152,15 @@ if (skyPlacement && (!icrsInput || frame.unit === 'Mpc' || kinematicUncertainty)
 if (icrsInput && kinematicUncertainty) throw new TypeError(`${at('kinematicUncertainty')} needs Galactic input: its rotation curve reads Galactic longitude.`);
 const hex = /^#[0-9a-f]{6}$/iu;
 if (!hex.test(appearance.colorCss) || !(appearance.radiusPx > 0) || !(appearance.opacity > 0 && appearance.opacity <= 1)) throw new TypeError(`${at('appearance')} needs a hex color, a positive radius and an opacity in (0, 1].`);
-const sizeBy = appearance.sizeBy;
 const colorBy = appearance.colorBy, colorByClass = appearance.colorByClass, colorByBv = appearance.colorByBv, toneBy = appearance.toneBy,
-  colorByBands = appearance.colorByBands, colorBySpectrumAtRedshift = appearance.colorBySpectrumAtRedshift;
-if ([colorBy, colorByClass, colorByBv, colorByBands, colorBySpectrumAtRedshift].filter(Boolean).length > 1) {
-  throw new TypeError(`${at('appearance')} takes one of colorBy, colorByClass, colorByBv, colorByBands and colorBySpectrumAtRedshift.`);
+  colorByBands = appearance.colorByBands, colorBySpectrumAtRedshift = appearance.colorBySpectrumAtRedshift, colorByBpRp = appearance.colorByBpRp, sizeBy = appearance.sizeBy;
+if ([colorBy, colorByClass, colorByBv, colorByBpRp, colorByBands, colorBySpectrumAtRedshift].filter(Boolean).length > 1) {
+  throw new TypeError(`${at('appearance')} takes one of colorBy, colorByClass, colorByBv, colorByBpRp, colorByBands and colorBySpectrumAtRedshift.`);
 }
-if (colorByBv && (!Array.isArray(colorByBv.range) || !(colorByBv.range[0] < colorByBv.range[1]) || !Number.isInteger(colorByBv.steps)
-    || colorByBv.steps < 2 || colorByBv.steps > 64 || typeof colorByBv.basis !== 'string' || !colorByBv.basis)) {
-  throw new TypeError(`${at('appearance.colorByBv')} takes a rising [low, high] B-V range, 2-64 steps and a basis; got ${JSON.stringify(colorByBv)}.`);
+const measured = colorByBv ?? colorByBpRp, measuredKey = colorByBv ? 'colorByBv' : 'colorByBpRp', [lowest, highest] = colorByBpRp ? GAIA_BP_RP_DISPLAY_DOMAIN : [-Infinity, Infinity];
+if (measured && (!Array.isArray(measured.range) || !(lowest <= measured.range[0] && measured.range[0] < measured.range[1] && measured.range[1] <= highest) || !Number.isInteger(measured.steps)
+    || measured.steps < 2 || measured.steps > 64 || typeof measured.basis !== 'string' || !measured.basis)) {
+  throw new TypeError(`${at(`appearance.${measuredKey}`)} takes a rising [low, high] range${colorByBpRp ? ' inside the fit\'s -0.5 to 2' : ''}, 2-64 steps and a basis; got ${JSON.stringify(measured)}.`);
 }
 // A spheroid's rows take their tone at the spheroid's own distance: their drawn depths barely change it.
 if (discPlacement && toneBy) throw new TypeError(`${at('appearance.toneBy')} needs each row's own distance; a ${String(frame.placement)} placement has none.`);
@@ -309,7 +312,7 @@ const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env,
   input: JSON.stringify({ table: resolve(sourceDirectory, table.path), gzip: table.gzip === true, columns: table.columns, unit: table.distanceUnit ?? null,
     fromName: table.galacticFromName === true, byFlag: table.distanceByFlag ?? null, icrs: icrsInput, csv: table.format === 'csv', weight: kinematicUncertainty ?? null, firstOf: table.distanceFirstOf ?? null, onePerName: table.onePerName === true,
     exclude: table.exclude ? { ...table.exclude, path: resolve(sourceDirectory, table.exclude.path) } : null, group: groupDistance ?? null,
-    disc: skyPlacement, filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? colorByBv?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, nanomaggies: toneBy?.nanomaggies === true,
+    disc: skyPlacement, filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? measured?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, nanomaggies: toneBy?.nanomaggies === true,
     bands: colorByBands ? [colorByBands.red, colorByBands.green, colorByBands.blue] : null, outUnit: frame.unit ?? 'kpc',
     placementPc: spheroidPlacement ? (recipe.frame as { spheroid?: { distancePc?: unknown } }).spheroid?.distancePc ?? null : null, ...(table.missingDistance === undefined ? {} : { missing: table.missingDistance }) }) });
 if (run.status !== 0) throw new Error(`Catalogue point conversion failed for ${table.path}: ${run.stderr.slice(-2000)}`);
@@ -436,14 +439,13 @@ const ramp = (value: number) => {
   return mix(c0, c1, v1 === v0 ? 0 : (clamped - v0) / (v1 - v0));
 };
 const { catalogueColor } = await import('@cssearth/engine');
-const bvColor = (bv: number) => '#' + catalogueColor(Number.NaN, bv).map(channel => Math.round(channel).toString(16).padStart(2, '0')).join('');
+const measuredColor = (value: number) => colorByBv ? '#' + catalogueColor(Number.NaN, value).map(channel => Math.round(channel).toString(16).padStart(2, '0')).join('') : gaiaBpRpDisplayColor(value).colorCss;
 const palette = colorBy ? Array.from({ length: colorBy.steps }, (_, step) => ramp(colorBy.stops[0]![0] + (colorBy.stops.at(-1)![0] - colorBy.stops[0]![0]) * step / (colorBy.steps - 1)))
-  : colorByBv ? Array.from({ length: colorByBv.steps }, (_, step) => bvColor(colorByBv.range[0] + (colorByBv.range[1] - colorByBv.range[0]) * step / (colorByBv.steps - 1))) : null;
+  : measured ? Array.from({ length: measured.steps }, (_, step) => measuredColor(measured.range[0] + (measured.range[1] - measured.range[0]) * step / (measured.steps - 1))) : null;
 const paletteIndex = (value: number | null) => {
-  if (colorByBv) {
-    if (value === null || !Number.isFinite(value)) throw new TypeError(`${at('appearance.colorByBv')}: a kept row has no ${JSON.stringify(colorByBv.column)} value.`);
-    const [low, high] = colorByBv.range;
-    return Math.round((Math.max(low, Math.min(high, value)) - low) / (high - low) * (colorByBv.steps - 1));
+  if (measured) {
+    if (value === null || !Number.isFinite(value)) throw new TypeError(`${at(`appearance.${measuredKey}`)}: a kept row has no ${JSON.stringify(measured.column)} value.`);
+    return Math.round((Math.max(measured.range[0], Math.min(measured.range[1], value)) - measured.range[0]) / (measured.range[1] - measured.range[0]) * (measured.steps - 1));
   }
   if (!colorBy || value === null || !Number.isFinite(value)) throw new TypeError(`${at('appearance.colorBy')}: a kept row has no ${JSON.stringify(colorBy?.column)} value.`);
   const [low, high] = [colorBy.stops[0]![0], colorBy.stops.at(-1)![0]];
@@ -491,8 +493,7 @@ const redshiftColor = (index: number) => {
 };
 const classIndex = (value: number | null) => value === null || !Number.isFinite(value) ? colorByClass!.classes.length
   : Math.max(0, colorByClass!.classes.findIndex(entry => entry.below === undefined || value < entry.below));
-const reachKpc = Math.ceil(converted.maxDistanceKpc);
-const outputMpc = frame.unit === 'Mpc';
+const reachKpc = Math.ceil(converted.maxDistanceKpc), outputMpc = frame.unit === 'Mpc';
 const reach = aroundOriginM ? Math.ceil(Math.max(...converted.points.flat().map(Math.abs))) : outputMpc ? Math.ceil(converted.maxDistanceKpc / 1000) : reachKpc;
 const classPalette = classColors ? [...classColors, colorByClass!.missing.colorCss] : null;
 // Band colors: the three scaled fluxes, the brightest channel full, each channel in `levels` steps. A row with no

@@ -83,8 +83,12 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   /** A disc that dims the dots behind it (OCCLUDED_FLOOR): a dot whose sight line from the camera crosses the disc
    * before reaching the dot is painted by a fainter path of its own color. */
   occluder?: BatchedSpatialPointOccluder;
+  /** Leave the parts' points unresolved at mount: the owner resolves them in slices (`fill`), and a part draws nothing
+   * until its last slice. Resolving a point (its place, its path, its cell) is a pass over every point of the bank:
+   * all of them in the frame the bank arrived in were one long frame of a zoom. */
+  deferFill?: boolean;
 } & ({ parts: readonly BatchedSpatialPointPart<T>[] } | BatchedSpatialPointPart<T>)) {
-  const { host, before, frame, className, onSettle, occluder } = options;
+  const { host, before, frame, className, onSettle, occluder, deferFill = false } = options;
   const inputs = 'parts' in options ? options.parts : [options];
   if (!inputs.length) throw new TypeError(`${className}: a point field needs a part.`);
   // Mounted in an element, the field takes its own place in the dot layer there; in an owner's place, a group of its own.
@@ -102,35 +106,59 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   const groupOf = inputs.map((input, index) => input.paintGroup === undefined ? `part ${index}` : `group ${input.paintGroup}`);
   const paints = new Map([...new Set(groupOf)].map(group => [group, mountPointPaths(root, inputs.flatMap(({ points, stylePoint, paintPalette }, index) => {
     if (groupOf[index] !== group) return [];
-    const drawnStyle = (point: T) => { const style = stylePoint(point); return style && style.opacity > 0 && style.radiusPx > 0 ? style : null; };
-    return occluder ? [...paintPalette, ...OCCLUDED_OPACITIES.flatMap(factor =>
-      points.flatMap(point => { const style = drawnStyle(point); return style ? [dimmed(style, factor)] : []; }))] : paintPalette;
+    if (!occluder) return paintPalette;
+    // The fainter paints, built once for each style the points have and not once for each point: 39,916 galaxies share
+    // 123 styles, and five paints for each point were 58 ms of the frame their bank mounted in (iPad, 2026-10-03).
+    const drawn = new Set<BatchedSpatialPointStyle>();
+    for (const point of points) { const style = stylePoint(point); if (style && style.opacity > 0 && style.radiusPx > 0) drawn.add(style); }
+    return [...paintPalette, ...OCCLUDED_OPACITIES.flatMap(factor => [...drawn].map(style => dimmed(style, factor)))];
   }))] as const));
   const parts = inputs.map(({ points, cells, stylePoint, drawnCount, keepFraction, hidden }, partIndex) => {
     const paint = paints.get(groupOf[partIndex]!)!;
     const positions = new Float64Array(points.length * 3), paths = new Int32Array(points.length), margins = new Float64Array(points.length);
     const occludedPaths = OCCLUDED_OPACITIES.map(() => new Int32Array(occluder ? points.length : 0));
     const ranks = new Float64Array(points.length);
-    points.forEach((point, index) => {
-      positions.set(point.positionUnits, index * 3);
-      ranks[index] = (index * 0.6180339887498949) % 1;
-      const style = stylePoint(point);
-      if (!style || !(style.opacity > 0) || !(style.radiusPx > 0)) { paths[index] = -1; return; }
-      paths[index] = paint.entry(pointPaint(style), Math.max(.5, style.radiusPx));
-      if (occluder) OCCLUDED_OPACITIES.forEach((factor, level) => { occludedPaths[level]![index] = paint.entry(dimmed(style, factor), Math.max(.5, style.radiusPx)); });
-      margins[index] = Math.max(2, style.radiusPx);
-    });
+    // A bank hands out one style object for each of its paints: its path is looked up once, not for each of its points
+    // (39,916 points share 123 paints in the nearby galaxies' bank).
+    const pathOf = new Map<BatchedSpatialPointStyle, number>(), occludedOf = OCCLUDED_OPACITIES.map(() => new Map<BatchedSpatialPointStyle, number>());
     const cellCount = cells ? cells.boxes.length / 6 : 1, cellStart = new Int32Array(cellCount + 1), order = new Int32Array(points.length);
     if (cells && cells.of.length !== points.length) throw new TypeError(`${className}: ${cells.of.length} cells for ${points.length} points.`);
-    for (let index = 0; index < points.length; index++) cellStart[(cells ? cells.of[index]! : 0) + 1]!++;
-    for (let cell = 0; cell < cellCount; cell++) cellStart[cell + 1]! += cellStart[cell]!;
-    { const next = cellStart.slice(0, cellCount); for (let index = 0; index < points.length; index++) order[next[cells ? cells.of[index]! : 0]!++] = index; }
-    // The widest margin a drawn point has: a cell is out of view when even its nearest corner is beyond it.
-    let widestMargin = 0;
-    for (let index = 0; index < points.length; index++) if (paths[index]! >= 0) widestMargin = Math.max(widestMargin, margins[index]!);
-    return { points, cells, drawnCount, keepFraction, hidden, paint, positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order,
-      boxes: cells?.boxes ?? new Float64Array(6), widestMargin, culled: new Int32Array(cellCount),
+    const part = { points, cells, drawnCount, keepFraction, hidden, paint, positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order,
+      boxes: cells?.boxes ?? new Float64Array(6), widestMargin: 0, culled: new Int32Array(cellCount), ready: false,
+      /** Resolve up to `limit` more of the part's points, in order; the last slice orders them by cell and readies the part. */
+      resolve(limit: number): number {
+        const from = resolved, end = Math.min(points.length, from + limit);
+        for (let index = from; index < end; index++) {
+          const point = points[index]!;
+          positions.set(point.positionUnits, index * 3);
+          ranks[index] = (index * 0.6180339887498949) % 1;
+          const style = stylePoint(point);
+          if (!style || !(style.opacity > 0) || !(style.radiusPx > 0)) { paths[index] = -1; continue; }
+          let path = pathOf.get(style);
+          if (path === undefined) pathOf.set(style, path = paint.entry(pointPaint(style), Math.max(.5, style.radiusPx)));
+          paths[index] = path;
+          if (occluder) OCCLUDED_OPACITIES.forEach((factor, level) => {
+            let dim = occludedOf[level]!.get(style);
+            if (dim === undefined) occludedOf[level]!.set(style, dim = paint.entry(dimmed(style, factor), Math.max(.5, style.radiusPx)));
+            occludedPaths[level]![index] = dim;
+          });
+          margins[index] = Math.max(2, style.radiusPx);
+        }
+        resolved = end;
+        if (resolved === points.length && !part.ready) {
+          for (let index = 0; index < points.length; index++) cellStart[(cells ? cells.of[index]! : 0) + 1]!++;
+          for (let cell = 0; cell < cellCount; cell++) cellStart[cell + 1]! += cellStart[cell]!;
+          { const next = cellStart.slice(0, cellCount); for (let index = 0; index < points.length; index++) order[next[cells ? cells.of[index]! : 0]!++] = index; }
+          // The widest margin a drawn point has: a cell is out of view when even its nearest corner is beyond it.
+          for (let index = 0; index < points.length; index++) if (paths[index]! >= 0) part.widestMargin = Math.max(part.widestMargin, margins[index]!);
+          part.ready = true;
+        }
+        return end - from;
+      },
       last: { visiblePoints: 0, candidates: 0, skippedCells: 0, residentElements: 0, publishMs: 0 } as BatchedSpatialPointStats };
+    let resolved = 0;
+    if (!deferFill) part.resolve(Infinity);
+    return part;
   });
   const residentElements = 1 + [...paints.values()].reduce((sum, paint) => sum + paint.residentElements, 0);
   // The last full paint: the camera's position and everything else it depended on, how many points each part drew and
@@ -176,7 +204,8 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     // The camera's turn and lens; the kept shares are part of the paint too (`same` below): a new share repaints at rest.
     const rest = cameraRest(publication);
     const distanceUnits = Math.hypot(...local.positionUnits);
-    const counts = parts.map(part => part.drawnCount ? Math.max(0, Math.min(part.points.length, Math.round(part.drawnCount(distanceUnits, local.positionUnits)))) : part.points.length);
+    // A part whose points are not all resolved yet (deferFill) draws none of them.
+    const counts = parts.map(part => !part.ready ? 0 : part.drawnCount ? Math.max(0, Math.min(part.points.length, Math.round(part.drawnCount(distanceUnits, local.positionUnits)))) : part.points.length);
     const width = viewport.widthPixels ?? 0, height = viewport.heightPixels ?? 0;
     let travelling = forced?.travelling ?? false;
     if (painted) {
@@ -323,6 +352,13 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     publish: (publication: VolumeCameraPublication) => { shown = true; publish(publication); },
     /** The owner hid these dots: until the next publication the layer's other fields do not repaint them. */
     hide() { shown = false; },
+    /** Resolve up to `limit` more points of the parts still waiting (deferFill), in part order; 0 once every part is
+     * ready. A part that becomes ready draws on the next publication. */
+    fill(limit: number): number {
+      let done = 0;
+      for (const part of parts) { if (part.ready) continue; done += part.resolve(limit - done); if (done >= limit) break; }
+      return done;
+    },
     /** The whole field's counts from the last paint. */
     stats: () => Object.freeze(total()),
     destroy() { if (destroyed) return; destroyed = true; if (settle !== null) clearTimeout(settle); arrivals.destroy(); leave(); if (own) own.release(); else root.remove(); } });

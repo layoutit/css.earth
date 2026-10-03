@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m16-layers",
+  "name": "Eagle Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m16-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m16-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m16-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "ESO · optical",
+      "title": "Eagle Nebula in visible light",
+      "description": "ESO's photograph of the Eagle Nebula, in B (451 nm), V (539 nm) and R (651 nm). It stands as one flat picture facing the Sun at the nebula's distance.",
+      "summary": "A flat picture facing the Sun at the nebula's distance; nothing in it has depth.",
+      "detail": "4000 × 4000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "B (451 nm), V (539 nm) and R (651 nm)"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4000 × 4000"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "32.08 × 32.08 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m16-layers/source/starless.jpg",
+        "url": "https://cdn.eso.org/images/publicationjpg/eso0926a.jpg"
+      }
+    }
+  ]
+}

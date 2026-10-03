@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m6",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Butterfly Cluster",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 283282584219859.56
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Butterfly Cluster",
+      "systemName": "Milky Way",
+      "classification": "open-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 93204833,
+      "description": "The Butterfly Cluster is an open star cluster in the Milky Way, about 452 parsecs away.",
+      "aliases": [
+        "M6",
+        "Messier 6",
+        "NGC 6405"
+      ],
+      "order": 5206,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1014212344776322300,
+        -11751345277081858000,
+        -7435797042646217000
+      ],
+      "presentationToReference": [
+        -0.0736172974918299,
+        0,
+        -0.9972865653913119,
+        -0.9149925344891128,
+        0.3977771559319137,
+        0.06754254990676449,
+        -0.3966978136304626,
+        -0.9174820620691818,
+        0.029283279223693698
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 913814787805998.5,
+      "bodyRadiusM": 283282584219859550
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

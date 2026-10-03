@@ -14,6 +14,7 @@ import {
   GALAXY_CLUSTER_IDS,
   NEBULA_IDS,
   GLOBULAR_CLUSTER_IDS,
+  OPEN_CLUSTER_IDS,
   PLANET_IDS,
   bodyData,
   moonsOf,
@@ -30,7 +31,7 @@ const HOSTED_STAR_IDS = HOSTED_PLANET_IDS.filter(id => !(EXOPLANET_IDS as readon
 
 const GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2 = 6.6743e-20
 
-const EXTENDED_IDS: readonly string[] = [...GALAXY_IDS, ...GALAXY_CLUSTER_IDS, ...NEBULA_IDS, ...GLOBULAR_CLUSTER_IDS]
+const EXTENDED_IDS: readonly string[] = [...GALAXY_IDS, ...GALAXY_CLUSTER_IDS, ...NEBULA_IDS, ...GLOBULAR_CLUSTER_IDS, ...OPEN_CLUSTER_IDS]
 
 describe('the body table', () => {
   it('has an entry for the Sun, eight planets, the Moon, every satellite, the five dwarf planets, every placed star, black hole and hosted star, and every exoplanet', () => {

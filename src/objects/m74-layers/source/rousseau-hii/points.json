@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "rousseau-hii",
+  "table": {
+    "path": "catalog.dat.gz",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/477/4152/catalog.dat.gz",
+    "bytes": 782987,
+    "format": "fixed-width",
+    "gzip": true,
+    "columns": {
+      "name": [
+        1,
+        4
+      ],
+      "raDeg": [
+        6,
+        12
+      ],
+      "decDeg": [
+        14,
+        20
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": 438,
+      "source": "kregel-2002-disc-flattening",
+      "basis": "The stellar disc's exponential scale height as its scale length over 7.3, the mean flattening Kregel et al. (2002) measured for edge-on discs, with S4G's disc scale length (Salo et al. 2015), 69.34″ = 3.20 kpc: 438 pc. For young objects it is an upper value. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "rousseau-nepton-2018-ngc628-hii-regions",
+  "meaning": "HII region candidates of M74 that Rousseau-Nepton et al. (2018) found with the SITELLE imaging spectrometer over the whole disc: one dot per region at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ff7a9c",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way HII layer's pink (hou-han-hii), as M31's and M33's HII regions use. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

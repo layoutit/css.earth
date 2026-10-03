@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m28",
+  "card": {
+    "text": "M28 is a globular star cluster in the Milky Way, about 5,370 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6626: Rsun 5.37 ± 0.1 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_6626: Rsun 5.37 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-28",
+        "url": "https://en.wikipedia.org/wiki/Messier_28",
+        "label": "Wikipedia, \"Messier 28\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100838",
+        "quote": "Messier 28 or M28, also known as NGC 6626, is a globular cluster of stars in the center-west of Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M28 is drawn as 857 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6626: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6626: 857 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-28",
+        "url": "https://en.wikipedia.org/wiki/Messier_28",
+        "label": "Wikipedia, \"Messier 28\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100838",
+        "quote": "It was discovered by French astronomer Charles Messier in 1764."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "857 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6626: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6626, inrt = True"
+        }
+      ]
+    }
+  }
+}

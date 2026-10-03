@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m15",
+  "card": {
+    "text": "M15 is a globular star cluster in the Milky Way, about 10,710 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_7078: Rsun 10.71 ± 0.1 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_7078: Rsun 10.71 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-15",
+        "url": "https://en.wikipedia.org/wiki/Messier_15",
+        "label": "Wikipedia, \"Messier 15\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1374794739",
+        "quote": "Messier 15 or M15 is a globular cluster in the constellation Pegasus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M15 is drawn as 1,767 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_7078: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_7078: 1,767 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-15",
+        "url": "https://en.wikipedia.org/wiki/Messier_15",
+        "label": "Wikipedia, \"Messier 15\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1374794739",
+        "quote": "It was discovered by Jean-Dominique Maraldi in 1746 and included in Charles Messier's catalogue of comet-like objects in 1764."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "1,767 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_7078: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_7078, inrt = True"
+        }
+      ]
+    }
+  }
+}

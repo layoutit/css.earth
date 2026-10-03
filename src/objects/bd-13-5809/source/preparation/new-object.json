@@ -1,0 +1,35 @@
+{
+  "id": "bd-13-5809",
+  "name": "BD-13 5809",
+  "system": "BD-13 5809 system",
+  "description": "The brightest star of M73, a chance alignment of stars once thought to be a small cluster.",
+  "aliases": [
+    "M73",
+    "Messier 73",
+    "NGC 6994"
+  ],
+  "target": "BD-13 5809",
+  "gaia": "6888761925104124544",
+  "paper": {
+    "url": "https://arxiv.org/abs/astro-ph/0111601",
+    "credit": "Odenkirchen & Soubiran (2002), A&A 383, 163"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 4821.1,
+    "source": "Gaia DR3 astrophysical parameters (CDS I/355/paramp), source 6888761925104124544: Teff 4821.1 K from the BP/RP spectra (GSP-Phot)",
+    "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "The brightest star of M73, a chance alignment of stars once thought to be a small cluster.",
+    "introduction": "M73 (NGC 6994) is an asterism: its stars lie at different distances and are not bound to each other.",
+    "locator": "Title and abstract: NGC 6994 = M73 is clearly not a physical stellar ensemble"
+  },
+  "notes": [
+    "M73 has no package of its own: it is a chance alignment of unrelated stars. Its three brightest are drawn as bodies; Gaia DR3 publishes no temperature or radius for the next (Gaia DR3 6888762676722910720), so it is left out."
+  ],
+  "order": 5462
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "members",
+      "path": "src/objects/m4-members/source/dots/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+GaiaDR3%2C+RA_ICRS%2C+DE_ICRS%2C+'m4'+AS+grp%2C+1850+AS+distpc%2C+Gmag%2C+%22BP-RP%22+FROM+%22J%2FA%2BA%2F673%2FA114%2Fmembers%22+WHERE+Name%3D'NGC_6121'+AND+inrt%3D'True'+AND+%22BP-RP%22+IS+NOT+NULL+AND+Gmag+IS+NOT+NULL+ORDER+BY+Gmag",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+      "title": "M4 members within the tidal radius, table.csv",
+      "credit": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114; Gaia DR3 photometry (Gaia Collaboration 2023)",
+      "acquisition": "Query result downloaded unchanged from its CDS origin on 2026-10-02; not tracked. The query keeps NGC_6121's members inside the tidal radius that have a G magnitude and a BP-RP color, and writes the group name and the cluster's distance into each row; read by packages/bake/cli/prepare-catalogue-points.mts through dots/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hunt-reffert-2023-open-clusters",
+            "role": "material",
+            "evidence": "src/objects/m4-members/source/dots/points.json#/table"
+          },
+          {
+            "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+            "role": "method",
+            "evidence": "src/objects/m4-members/source/dots/points.json#/table/groupDistance"
+          },
+          {
+            "catalogueId": "cardiel-2021-rgb",
+            "role": "method",
+            "evidence": "src/objects/m4-members/source/dots/points.json#/appearance/colorByBpRp"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/m4-members/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/m4-members/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

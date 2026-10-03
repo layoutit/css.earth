@@ -16,6 +16,34 @@ Every candidate resolves to its downloaded, recorded original and matching full-
 
 The earlier VISTA, Horálek and WISE recipes retain their existing source/alignment checks and optional diffuse baseline so completed results restore unchanged. Other candidates need no trial-plan entry or alignment gate to remove stars. Image-to-density registration and approval remain requirements of subsequent 3D baking, which these buttons never trigger.
 
+## A picture for the application: `remove-stars`
+
+`node labs/nebula/run.mts remove-stars <object-directory> [--from=<file>] [--coarse=<factor>]` makes the star-free copy
+of an image-layer bank's picture
+([remove-stars.ts](../packages/lab/src/cli/commands/remove-stars.ts)). It reads the bank's `source/recipe.json`, takes the
+download the recipe names into the ignored cache (`.local/nebula-lab/starless/<id>/`), runs NOX over it and writes the
+result as the bank's picture, `source/<source.path>`. The bank's manifest names this command as that file's generator,
+and the file is mirrored in the source cache, so a checkout restores it without running NOX. With `--from=<file>` it
+takes a picture another generator wrote into the bank's `source/` directory in place of the download: M20's picture is a
+window cut from the publisher's file.
+
+NOX takes a star's core and spikes but leaves the wide glow of a bright one. For each star of the recipe's
+`source.foregroundStars` table brighter than Gaia G = 14, [haloes.ts](../packages/reconstruction/src/star-removal/haloes.ts)
+measures the glow on the picture and fills it from the ring around it: each ring's median, over the half that faces away
+from the target, until no channel still falls by 1.5 levels over the next 12 px; then an inverse-square blend of 64 ring
+samples. The constants are presentation choices made on M66's Sloan picture. The isophote fill of the emission recipes
+suits an elliptical; on a spiral it left a dark notch.
+
+NOX takes a star whose core is a few pixels wide. A saturated star tens of pixels wide stays, with its spikes. With
+`--coarse=<factor>` NOX runs again over a copy of the star-free picture that many times smaller, where such a star is small
+enough, and [coarse.ts](../packages/reconstruction/src/star-removal/coarse.ts) gives the picture that pass's result only
+where it took a star: a connected patch of small pixels that each lost more than 6 levels and holds one that lost 40 or
+more. The rest of the picture keeps its own pixels. The constants are presentation choices made on M16's ESO picture at a
+quarter of its size. The small pass also takes compact bright nebula: on M17, M27, M43, M57 and M78 it took real gas, so
+those banks run one pass. The glow fill above is for a galaxy; on a nebula it erased the gas around the stars that light it.
+
+Tests: `node labs/nebula/run.mts test haloes` and `node labs/nebula/run.mts test coarse`.
+
 ## Interpretation
 
 The model predicts a plausible background beneath stars; it does not measure the hidden nebula. The mask shows actual removed signal, not a catalog of identified stellar objects. Inspect compact nebular detail, saturated cores and halos before deciding on a 3D bake. Native integer accounting remains exact: original = without stars + residual. Pixels outside the mask remain unchanged. The current reconstructed volume is not rebuilt by star removal.

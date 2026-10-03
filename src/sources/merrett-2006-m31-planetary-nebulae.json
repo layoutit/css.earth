@@ -30,6 +30,16 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/369/120/ReadMe",
       "checkedOn": "2026-09-29",
       "locator": "table3.dat: RAh/RAm/RAs, DE-/DEd/DEm/DEs (J2000), HV, Note (E/R = probable HII region or background galaxy), Host (non-M31 sources); 3,300 emission-line objects"
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/369/120/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table3.dat: 3,300 rows; 42 drawn as M32's planetary nebulae (Note E or R marks a probable HII region or background galaxy, and 'other' an object excluded as a planetary nebula by its flux (ReadMe note 1).; The survey of M31 marks the host of each object that is not M31's own (ReadMe note 2); these are the rows it gives to M32, without those it marks as uncertain.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/369/120/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table3.dat: 3,300 rows; 45 drawn as M110's planetary nebulae (Note E or R marks a probable HII region or background galaxy, and 'other' an object excluded as a planetary nebula by its flux (ReadMe note 1).; The survey of M31 marks the host of each object that is not M31's own (ReadMe note 2); these are the rows it gives to M110, without those it marks as uncertain.)."
     }
   ],
   "creators": [

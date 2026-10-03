@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "csornyei-cepheids",
+  "table": {
+    "path": "ceps.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/678/A44/ceps.dat",
+    "bytes": 75284,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        10
+      ],
+      "raDeg": [
+        1,
+        10
+      ],
+      "decDeg": [
+        12,
+        20
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": 466,
+      "source": "kregel-2002-disc-flattening",
+      "basis": "The stellar disc's exponential scale height as its scale length over 7.3, the mean flattening Kregel et al. (2002) measured for edge-on discs, with S4G's disc scale length (Salo et al. 2015), 84.2″ = 3.40 kpc: 466 pc. For young objects it is an upper value. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "publication-csornyei2023a-a-678a-44c",
+  "meaning": "Cepheid variables of M51 from Csörnyei et al.'s (2023) Hubble catalogue: one dot per star at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffe2a8",
+    "radiusPx": 0.75,
+    "opacity": 0.9,
+    "note": "Presentation only: the Milky Way Cepheid layer's color, size and opacity. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}
