@@ -1,8 +1,7 @@
-import type { PreparedDestinations } from '@cssearth/objects';
+import { normalizeDestinationQuery, PREPARED_DESTINATIONS_SCHEMA, type PreparedDestinations } from '@cssearth/objects';
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { normalizeDestinationQuery, PREPARED_DESTINATIONS_SCHEMA } from '@cssearth/objects';
 import { prepareLocationPoint, prepareLocationCamera } from "./prepare-location.ts";
 
 import type { GeographicScene } from './contracts.ts';

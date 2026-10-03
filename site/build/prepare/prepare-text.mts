@@ -1,5 +1,4 @@
-import type { ObjectText } from '@cssearth/objects';
-import { PREPARED_TEXT_SCHEMA, parseObjectText } from '@cssearth/objects';
+import { PREPARED_TEXT_SCHEMA, parseObjectText, type ObjectText } from '@cssearth/objects';
 import { pathToFileURL } from 'node:url';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';

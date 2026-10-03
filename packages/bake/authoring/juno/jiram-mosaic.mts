@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import type { SpiceCamera } from '@cssearth/objects';
 /** A one-side map of one body in one JIRAM imager band from Juno JIRAM frames: Io's night-side 4.8 µm (M-band) thermal
  * emission is the first recipe.
  *
@@ -27,6 +26,7 @@ import type { SpiceCamera } from '@cssearth/objects';
  *
  * Output: a PDS3 simple-cylindrical float map with a detached label, as `pds3-float-map` reads it, and a receipt with
  * every frame's registration. */
+import type { SpiceCamera } from '@cssearth/objects';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
