@@ -1,0 +1,28 @@
+{
+  "id": "m108",
+  "classification": "galaxy",
+  "order": 5308,
+  "physical": {
+    "name": "M108",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M108 is recorded: it is an extended galaxy, and its package frames it at 8,325 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 167.8789,
+    "declinationDegrees": 55.674268,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 9183325.96483581,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 697.6,
+    "sources": {
+      "position": "HyperLEDA (Makarov et al. 2014), NGC3556 = PGC 34030: centre, type Sc, D25 diameter 4.0 arcmin (http://atlas.obs-hp.fr/hyperleda/)",
+      "distance": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 34030: distance modulus 29.815 ± 0.4 mag (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94)",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "HyperLEDA (Makarov et al. 2014), NGC3556 = PGC 34030: heliocentric radial velocity 697.6 ± 1.4 km/s (http://atlas.obs-hp.fr/hyperleda/)"
+    }
+  }
+}

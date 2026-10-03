@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m30",
+  "card": {
+    "text": "M30 is a globular star cluster in the Milky Way, about 8,460 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_7099: Rsun 8.46 ± 0.09 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_7099: Rsun 8.46 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-30",
+        "url": "https://en.wikipedia.org/wiki/Messier_30",
+        "label": "Wikipedia, \"Messier 30\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100713",
+        "quote": "Messier 30 is a globular cluster of stars in the southeast of the southern constellation of Capricornus, at about the declination of the Sun when the latter is at December solstice."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M30 is drawn as 919 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_7099: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_7099: 919 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-30",
+        "url": "https://en.wikipedia.org/wiki/Messier_30",
+        "label": "Wikipedia, \"Messier 30\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100713",
+        "quote": "It was discovered by the French astronomer Charles Messier in 1764, who described it as a circular nebula without a star."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "919 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_7099: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_7099, inrt = True"
+        }
+      ]
+    }
+  }
+}

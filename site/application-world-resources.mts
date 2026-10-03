@@ -39,7 +39,13 @@ const PARSEC_M = 3.085677581491367e16;
 // Published catalogues drawn through a volume bank, with its opacity (src/objects/m87-volume/README.md).
 const VOLUME_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
   'm49-volume': ['dots'],
+  'm59-volume': ['dots'],
+  'm60-volume': ['dots'],
+  'm84-volume': ['dots'],
+  'm85-volume': ['dots'],
+  'm86-volume': ['dots'],
   'm87-volume': ['dots'],
+  'm89-volume': ['dots'],
 };
 
 // Inventory of prepared resources, not navigation entries or runtime generators.

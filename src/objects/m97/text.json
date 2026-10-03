@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m97",
+  "card": {
+    "text": "The Owl Nebula is a planetary nebula about 811 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "chornay-walton-2021-pn-central-stars",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+        "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G148.4+57.0: distance 811 pc (782 to 842) from the Gaia EDR3 parallax of its central star",
+        "checked": "2026-10-02",
+        "locator": "distance: 811 pc (782 to 842)"
+      },
+      {
+        "catalogueId": "wikipedia-owl-nebula",
+        "url": "https://en.wikipedia.org/wiki/Owl_Nebula",
+        "label": "Wikipedia, \"Owl Nebula\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1368396740",
+        "quote": "The Owl Nebula is a planetary nebula approximately 2,030 light years away in the constellation Ursa Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A Sloan Digital Sky Survey image of it stands here as a flat picture facing the Sun, 1.70 pc wide.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "SDSS9 color; SDSS g, r and i"
+      },
+      {
+        "catalogueId": "wikipedia-owl-nebula",
+        "url": "https://en.wikipedia.org/wiki/Owl_Nebula",
+        "label": "Wikipedia, \"Owl Nebula\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1368396740",
+        "quote": "Estimated to be about 8,000 years old, it is approximately circular in cross-section with a faint internal structure."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Owl Nebula in visible light",
+      "detail": "2000 × 2000 px",
+      "summary": "A flat picture facing the Sun at the nebula's distance; nothing in it has depth.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "SDSS9 color"
+        }
+      ]
+    }
+  }
+}

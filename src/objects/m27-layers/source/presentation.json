@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m27-layers",
+  "name": "Dumbbell Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m27-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m27-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m27-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "NOIRLab · optical",
+      "title": "Dumbbell Nebula in visible light",
+      "description": "NOIRLab's photograph of the Dumbbell Nebula, in a color composite from the Kitt Peak 2.1-meter telescope; its page names no filters. It stands as one flat picture facing the Sun at the nebula's distance.",
+      "summary": "A flat picture facing the Sun at the nebula's distance; nothing in it has depth.",
+      "detail": "1750 × 1500 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "a color composite from the Kitt Peak 2.1-meter telescope; its page names no filters"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "1750 × 1500"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "8.90 × 7.63 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m27-layers/source/source.jpg",
+        "url": "https://storage.noirlab.edu/media/archives/images/large/noao-m27.jpg"
+      }
+    }
+  ]
+}

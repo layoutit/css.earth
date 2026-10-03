@@ -26,24 +26,37 @@ export function imageLayerBulgeModel(recipe: Pick<ImageLayerRecipe, 'target' | '
   const fitPa = rad(bulge.positionAngleDeg), discPa = rad(bulge.disc.positionAngleDeg ?? bulge.positionAngleDeg);
   const along = (east: number, north: number, pa: number) => [east * Math.sin(pa) + north * Math.cos(pa), -east * Math.cos(pa) + north * Math.sin(pa)] as const;
   const radii = (east: number, north: number) => ({ rb: elliptical(...along(east, north, fitPa), bulge.skyEllipticity), rd: elliptical(...along(east, north, discPa), bulge.disc.skyEllipticity) });
+  // A fit with two exponential discs (S4G's two-disc models): the second disc's light is disc light too.
+  const second = bulge.secondDisc, secondI0 = second ? 10 ** (-0.4 * second.centralSurfaceBrightness) : 0, secondPa = rad(second?.positionAngleDeg ?? bulge.disc.positionAngleDeg ?? bulge.positionAngleDeg);
+  // A fitted bar is disc light as well: a modified Ferrers profile, I0 (1 - (r / radius)²)² inside its radius.
+  const bar = bulge.bar, barI0 = bar ? 10 ** (-0.4 * bar.centralSurfaceBrightness) : 0;
+  const barLight = (east: number, north: number) => {
+    if (!bar) return 0;
+    const r = elliptical(...along(east, north, rad(bar.positionAngleDeg)), bar.skyEllipticity) / bar.radiusKpc;
+    return r < 1 ? barI0 * (1 - r * r) ** 2 : 0;
+  };
+  const discLight = (east: number, north: number, rd: number) => discI0 * Math.exp(-rd / bulge.disc.scaleLengthKpc) + barLight(east, north) +
+    (second ? secondI0 * Math.exp(-elliptical(...along(east, north, secondPa), second.skyEllipticity) / second.scaleLengthKpc) : 0);
   /** The bulge's share of the fitted light at a sky offset from the centre: kpc at the galaxy's distance, east and north. */
   // A fit whose bulge falls off more slowly than its disc (a high Sérsic index) keeps a share far out, where that light
   // is the disc's; `extentKpc.fadeFrom` fades the share to nothing between it and `extentKpc.radius` on the sky.
   const fadeFrom = bulge.extentKpc.fadeFrom, reach = bulge.extentKpc.radius;
+  // On the sky the fade follows the spheroid's own outline (its ellipse about the line of nodes, with the fitted axis
+  // ratio), so every sight line that still carries bulge light passes through the spheroid that will hold it.
   const fade = (east: number, north: number) => {
     if (fadeFrom === undefined) return 1;
-    const t = Math.max(0, Math.min(1, (reach - Math.hypot(east, north)) / (reach - fadeFrom)));
+    const [major, minor] = along(east, north, pa), t = Math.max(0, Math.min(1, (reach - Math.hypot(major, minor / (1 - bulge.skyEllipticity))) / (reach - fadeFrom)));
     return t * t * (3 - 2 * t);
   };
   const share = (east: number, north: number) => {
     const { rb, rd } = radii(east, north);
-    const sb = bulgeIb * Math.exp(-b * ((rb / re) ** (1 / n) - 1)), sd = discI0 * Math.exp(-rd / bulge.disc.scaleLengthKpc);
+    const sb = bulgeIb * Math.exp(-b * ((rb / re) ** (1 / n) - 1)), sd = discLight(east, north, rd);
     return sb / (sb + sd) * fade(east, north);
   };
   /** The fitted surface brightness of the bulge and the disc at a sky offset (east, north, kpc), as linear intensity. */
   const light = (east: number, north: number) => {
     const { rb, rd } = radii(east, north);
-    return { bulge: bulgeIb * Math.exp(-b * ((rb / re) ** (1 / n) - 1)), disc: discI0 * Math.exp(-rd / bulge.disc.scaleLengthKpc) };
+    return { bulge: bulgeIb * Math.exp(-b * ((rb / re) ** (1 / n) - 1)), disc: discLight(east, north, rd) };
   };
   // The oblate spheroid that projects to the fitted sky ellipticity at the disc's inclination:
   // q_sky² = cos² i + q0² sin² i.
@@ -57,8 +70,12 @@ export function imageLayerBulgeModel(recipe: Pick<ImageLayerRecipe, 'target' | '
   /** Relative bulge density at a point in the galaxy's local frame (kpc from the centre, east/north/sight-line axes). */
   const density = (point: Vec3) => {
     const x = dot(point, lineNodes), y = dot(point, diskMinor), z = dot(point, disc.diskNormal);
-    const m = Math.max(core, Math.hypot(x, y, z / q0)) / re;
-    return m ** -p * Math.exp(-b * m ** (1 / n));
+    // The spheroid ends on its own surface: with `extentKpc.fadeFrom` the density fades to nothing between that
+    // spheroidal radius and `extentKpc.radius`, so the bulge's edge is a spheroid from every side and never the box of
+    // slices that holds it.
+    const spheroidal = Math.hypot(x, y, z / q0), m = Math.max(core, spheroidal) / re;
+    const edge = fadeFrom === undefined ? 1 : Math.max(0, Math.min(1, (reach - spheroidal) / (reach - fadeFrom)));
+    return m ** -p * Math.exp(-b * m ** (1 / n)) * edge * edge * (3 - 2 * edge);
   };
   /** A local-frame point as its sky offset from the centre (kpc east and north at the galaxy's distance), for the share. */
   const skyOffset = (point: Vec3): [number, number] => {

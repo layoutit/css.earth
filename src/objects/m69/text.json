@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m69",
+  "card": {
+    "text": "M69 is a globular star cluster in the Milky Way, about 8,900 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6637: Rsun 8.9 ± 0.1 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_6637: Rsun 8.9 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-69",
+        "url": "https://en.wikipedia.org/wiki/Messier_69",
+        "label": "Wikipedia, \"Messier 69\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101313",
+        "quote": "Messier 69 or M69, also known NGC 6637, and NGC 6634, is a globular cluster in the southern constellation of Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M69 is drawn as 318 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6637: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6637: 318 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-69",
+        "url": "https://en.wikipedia.org/wiki/Messier_69",
+        "label": "Wikipedia, \"Messier 69\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101313",
+        "quote": "It can be found 2.5° to the northeast of the star Epsilon Sagittarii and is dimly visible in 50 mm aperture binoculars."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "318 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6637: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6637, inrt = True"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "m36",
+  "classification": "open-cluster",
+  "order": 5236,
+  "physical": {
+    "name": "M36",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M36 is recorded: it is an extended star cluster, and its package frames it at 6.1 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 84.08531765,
+    "declinationDegrees": 34.13422525,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 1124.82093002,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": -5.13490475,
+    "sources": {
+      "position": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_1960: RA_ICRS 84.08531765, DE_ICRS 34.13422525, the densest point of its members (epoch 2016.0) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "distance": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_1960: dist50, the median of the maximum-likelihood distance, 1124.82093002 pc (16th to 84th percentile 1123 to 1127) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Hunt & Reffert (2023), Table 3, NGC_1960: mean Gaia DR3 radial velocity -5.13490475 km/s of 45 members (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m52",
+  "card": {
+    "text": "M52 is an open star cluster in the Milky Way, about 1,571 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_7654: dist50, the median of the maximum-likelihood distance, 1570.81507502 pc (16th to 84th percentile 1569 to 1573)",
+        "checked": "2026-10-02",
+        "locator": "NGC_7654: dist50 1570.8 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-52",
+        "url": "https://en.wikipedia.org/wiki/Messier_52",
+        "label": "Wikipedia, \"Messier 52\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101024",
+        "quote": "Messier 52 or M52, also known as NGC 7654 or the Scorpion Cluster, is an open cluster of stars in the highly northern constellation of Cassiopeia."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M52 is drawn as 1,008 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_7654: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_7654: 1,008 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-52",
+        "url": "https://en.wikipedia.org/wiki/Messier_52",
+        "label": "Wikipedia, \"Messier 52\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101024",
+        "quote": "It was discovered by Charles Messier in 1774."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "1,008 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_7654: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_7654, inrt = True"
+        }
+      ]
+    }
+  }
+}

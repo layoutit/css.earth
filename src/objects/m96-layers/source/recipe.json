@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m96-layers",
+  "source": {
+    "path": "starless.jpg",
+    "dimensions": [
+      3000,
+      3000
+    ],
+    "originalDimensions": [
+      3000,
+      3000
+    ],
+    "publisherUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+    "downloadUrl": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.22&projection=TAN&coordsys=icrs&ra=161.690407&dec=11.819923&format=jpg",
+    "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+    "license": "CC-BY",
+    "foregroundStars": {
+      "path": "gaia-dr3-foreground.csv",
+      "raDegColumn": "RA_ICRS",
+      "decDegColumn": "DE_ICRS",
+      "gMagColumn": "Gmag",
+      "source": "gaia-2023-dr3",
+      "basis": "Milky Way foreground stars by the criterion of Ren et al. (2021, Sect. 3.2): a Gaia parallax measured to better than 20% that places the star within 50 kpc, or a proper motion above 0.2 mas/yr plus 2 sigma measured to better than 20%. Applied to Gaia DR3 over the photograph's field; the query is in the Gaia DR3 source record."
+    }
+  },
+  "observation": {
+    "centerRaDeg": 161.690407,
+    "centerDecDeg": 11.819923,
+    "fieldOfViewDeg": [
+      0.22,
+      0.22
+    ],
+    "northClockwiseDeg": 0
+  },
+  "target": {
+    "centerRaDeg": 161.690407,
+    "centerDecDeg": 11.819923,
+    "distancePc": 10452014.414584352
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 51.07,
+    "lineOfNodesPaDeg": 4.57,
+    "thicknessKpc": 0.0201,
+    "depthWeights": [
+      0.005054043639887778,
+      0.006133325082786362,
+      0.007443085032793983,
+      0.00903254173839321,
+      0.01096142391177135,
+      0.013302215218429378,
+      0.01614287807329399,
+      0.01959015909832834,
+      0.023773600454352346,
+      0.028850407785172626,
+      0.03501135770195747,
+      0.04248796679970681,
+      0.05156119160360519,
+      0.06257198637243411,
+      0.07593411550089782,
+      0.09214970198618913,
+      0.09214970198618913,
+      0.07593411550089783,
+      0.0625719863724341,
+      0.05156119160360519,
+      0.04248796679970681,
+      0.035011357701957485,
+      0.02885040778517261,
+      0.023773600454352346,
+      0.01959015909832834,
+      0.016142878073294,
+      0.013302215218429378,
+      0.01096142391177135,
+      0.00903254173839321,
+      0.007443085032793986,
+      0.006133325082786362,
+      0.005054043639887778
+    ],
+    "supportRadiusKpc": 15.07,
+    "supportTaperFraction": 0.75,
+    "depthScales": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.0353,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.08,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "colorTie": {
+      "bv": 0.86,
+      "source": "rc3-1991",
+      "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives NGC 3368 a total (B-V)T of 0.86 as observed; red and blue are scaled in linear light so the galaxy's mean color matches the engine's catalogue color for that index, the function that colors the star dots."
+    },
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

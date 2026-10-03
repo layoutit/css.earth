@@ -1,0 +1,34 @@
+# M66
+
+A survey image of M66 (NGC 3627), cleaned of the Milky Way stars in front of it and color-tied to its measured integrated color, lies flat on its measured disc, with its bulge standing through it as a small volume. Image brightness does not measure per-pixel distance.
+
+## Sources
+
+| Selected source | Input and meaning |
+| --- | --- |
+| [Sloan Digital Sky Survey](https://www.sdss.org/) | [Record](../../sources/sdss-dr9-color-hips.json). The survey's g, r, i color composite as the CDS HiPS `CDS/P/SDSS9/color`, cut out by the CDS hips2fits service: 3000 × 3000 px over 16.44 × 16.44 arcmin, tangent projection, north up (`source/starless.jpg`: the download with its stars removed, restored from the source cache). A display composite, not calibrated photometry. |
+| [HyperLEDA](http://atlas.obs-hp.fr/hyperleda/) (Makarov et al. 2014) | [Record](../../sources/hyperleda-2014.json). NGC 3627 = PGC 34695: centre 170.06253°, +12.99160°, D25 diameter 10.3′ (log d25 2.012), type Sb (T = 3.1). |
+| [Leroy et al. (2021), PHANGS-ALMA](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43) | [Record](../../sources/leroy-2021-phangs-alma.json). Row NGC3627: inclination 57.3 ± 1.0°, position angle 173.1 ± 3.6°, from the rotation of its gas ([Lang et al. 2020](../../sources/lang-2020-phangs-kinematics.json)). |
+| [Gaia DR3](https://doi.org/10.1051/0004-6361/202243940) with [Ren et al. (2021)](https://doi.org/10.3847/1538-4357/abcda5) | The 308 Gaia DR3 sources within 0.2055° of the centre that Ren et al.'s criterion marks as Milky Way stars (`source/gaia-dr3-foreground.csv`, restored by the query in the manifest). Its stars brighter than G 14 are where remove-stars looks for a glow. |
+| [RC3](../../sources/rc3-1991.json) | NGC 3627's total B-V, 0.73 ± 0.01 as observed. |
+| Tully et al. (2023) | [Record](../../sources/cosmicflows-4.json). Distance: 10.31 Mpc (10.03 to 10.61). |
+| [Salo et al. (2015)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4) | [Record](../../sources/salo-2015-s4g-decompositions.json). S4G's 3.6 µm fit of NGC3627 (table 7, model `_bdbar`): a Sérsic bulge (9.1% of the light, magnitude 10.882, half-light radius 6.23″ = 0.31 kpc, n = 2.089, axis ratio 0.584, PA 170.9°) and an exponential disc (77.8% of the light, scale length 53.95″ = 2.70 kpc, axis ratio 0.584, PA 166.23°, face-on central surface brightness 19.213, 18.629 as projected on the sky) and a Ferrers bar (13.1% of the light, radius 100.23″ = 5.01 kpc, axis ratio 0.22, PA 157.19°, central surface brightness 18.906 on the sky). |
+
+## The image
+
+- **Registration:** the cutout's registration is its request: a tangent projection centred on the galaxy, north up.
+- **Stars:** [NOX](../../../labs/nebula/docs/star-removal.md) removes the stars from the picture before the bake (`node labs/nebula/run.mts remove-stars src/objects/m66-layers`). NOX leaves the wide glow of a bright star: 9 of the 9 Gaia stars brighter than G 14 in the picture had a glow, filled out to at most 182 px (60″), each measured on the picture and filled from the ring around it. The bake's own pass over the Gaia foreground stars then removes any that still show.
+- **Color:** tied to RC3's B-V of 0.73 in linear light.
+- **Bulge:** the bulge takes the fit's own light, scaled to the photograph and never more than the photograph holds there, in an oblate spheroid through the disc with intrinsic axis ratio 0.26 (the one that projects to 0.584 at 57.3°) and the fit's deprojected Sérsic density. The flat picture keeps the rest, so the view from the Sun is unchanged and the photograph's own structure stays on the disc. The spheroid ends on its own surface at 8 half-light radii (2.49 kpc), where the fitted bulge is under about 1% of the display's range, fading from half that radius, so it shows no rim: a presentation choice.
+- **Disc:** inclination 57.3°, line of nodes 173.1°, drawn as one flat image on the midplane. The support radius, 18.5 kpc, is 1.2 times the D25 radius (5.1′), a presentation choice that keeps the faint light outside that isophote.
+- **Near side:** the source gives the tilt, not which edge is nearer. The disc is drawn with the edge at position angle 263° nearer: an assumption, not a measurement.
+- **Sky:** the image's sky, (8, 8, 6) of 255 (each channel's median over the frame's outer ring), is subtracted as the background floor (8 of 255).
+
+## Known problems
+
+- The bulge's depth is modelled, not measured: the paper fits light on the sky, and the spheroid is the one that shows its axis ratio at the disc's tilt.
+- The fit is of the 3.6 µm image and the picture is visible light, so the bulge's share of the picture is not exactly the fit's.
+- Where the fit's bulge is as bright as the photograph, the flat picture is empty under it; from the side the nucleus can show as a dark spot on the disc.
+- Which edge of the disc is nearer is assumed.
+- The survey image is shallow: faint outer light is lost, and the brightest part of the centre may be saturated.
+- NOX predicts the light under each star; it does not measure it. It also takes the galaxy's own compact light, its clusters and star-forming knots, so the arms are smoother than in the survey picture. Where a bright star's glow was filled, a faint patch can show.

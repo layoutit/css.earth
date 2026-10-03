@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m57",
+  "displayName": "Ring Nebula",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "790 pc (764 to 818)",
+        "source": {
+          "catalogueId": "chornay-walton-2021-pn-central-stars",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+          "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G063.1+13.9: distance 790 pc (764 to 818) from the Gaia EDR3 parallax of its central star",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 283.396°, Dec 33.029°",
+        "source": {
+          "catalogueId": "chornay-walton-2021-pn-central-stars",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+          "label": "Chornay & Walton (2021), PN G063.1+13.9: its central star, Gaia EDR3 2090486618786534784",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "2.10 arcmin, 0.48 pc at its distance",
+        "source": {
+          "catalogueId": "esahubble-heic1310a",
+          "url": "https://esahubble.org/images/heic1310a/",
+          "label": "ESA/Hubble heic1310a: NASA, ESA, and C. Robert O'Dell (Vanderbilt University)",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Hubble · optical",
+        "thumbnail": "m57-dataset-optical.webp",
+        "volume": {
+          "objectId": "m57-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m57-layers-optical",
+          "path": "../../m57-layers/source/manifest.json",
+          "url": "https://esahubble.org/images/heic1310a/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G063.1+13.9: distance 790 pc (764 to 818) from the Gaia EDR3 parallax of its central star",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chornay & Walton (2021), PN G063.1+13.9: its central star, Gaia EDR3 2090486618786534784",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Hubble heic1310a: NASA, ESA, and C. Robert O'Dell (Vanderbilt University)",
+      "href": "https://esahubble.org/images/heic1310a/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+      "credit": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G063.1+13.9: distance 790 pc (764 to 818) from the Gaia EDR3 parallax of its central star"
+    }
+  }
+}

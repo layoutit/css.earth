@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m43-layers",
+  "name": "M43",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m43-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m43-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m43-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "NOIRLab · optical",
+      "title": "M43 in visible light",
+      "description": "NOIRLab's photograph of M43, in a color composite; its page names no filters. It stands as one flat picture facing the Sun at the nebula's distance.",
+      "summary": "A flat picture facing the Sun at the nebula's distance; nothing in it has depth.",
+      "detail": "1400 × 1400 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "a color composite; its page names no filters"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "1400 × 1400"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "6.95 × 6.95 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m43-layers/source/source.jpg",
+        "url": "https://storage.noirlab.edu/media/archives/images/large/noao-m43.jpg"
+      }
+    }
+  ]
+}

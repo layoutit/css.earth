@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m67",
+  "card": {
+    "text": "M67 is an open star cluster in the Milky Way, about 837 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2682: dist50, the median of the maximum-likelihood distance, 837.26777331 pc (16th to 84th percentile 837 to 838)",
+        "checked": "2026-10-02",
+        "locator": "NGC_2682: dist50 837.3 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-67",
+        "url": "https://en.wikipedia.org/wiki/Messier_67",
+        "label": "Wikipedia, \"Messier 67\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101222",
+        "quote": "Messier 67 and sometimes called the King Cobra Cluster or the Golden Eye Cluster is an open cluster in the southern, equatorial half of Cancer."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M67 is drawn as 806 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2682: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_2682: 806 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-67",
+        "url": "https://en.wikipedia.org/wiki/Messier_67",
+        "label": "Wikipedia, \"Messier 67\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101222",
+        "quote": "It was discovered by Johann Gottfried Koehler in 1779."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "806 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2682: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_2682, inrt = True"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m27-layers",
+  "entries": [
+    {
+      "id": "noao-m27",
+      "subject": "NOIRLab noao-m27",
+      "status": "included",
+      "finding": "M27, NGC 6853, Dumbbell Nebula: a color composite from the Kitt Peak 2.1-meter telescope; its page names no filters; 1750 × 1500 px over 8.90 × 7.63 arcmin. The file's embedded sky tags, used as they are: 0.3053 arcsec per pixel, north 2.1° left of vertical, the frame's centre at 299.9038269°, 22.7212155°. Not measured against Gaia here.",
+      "evidence": [
+        "https://noirlab.edu/public/images/noao-m27/",
+        "https://noirlab.edu/public/copyright/"
+      ]
+    },
+    {
+      "id": "volume",
+      "subject": "A volume of the Dumbbell Nebula",
+      "status": "deferred",
+      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "evidence": [
+        "https://noirlab.edu/public/images/noao-m27/"
+      ],
+      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+    }
+  ]
+}

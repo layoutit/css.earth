@@ -1,0 +1,28 @@
+{
+  "provenance": {
+    "name": "M22 members",
+    "products": [
+      {
+        "id": "dots",
+        "label": "M22 members within the tidal radius, CDS J/A+A/673/A114",
+        "process": "Keep Hunt & Reffert's members of NGC_6656 inside the tidal radius that have a color; place each at the cluster's distance, spread in depth as widely as the members spread across the sky; color by Gaia BP-RP and tone by G magnitude.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "members"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "A member's depth within the cluster is assumed (as deep as wide), not measured.",
+          "Gaia misses stars in the crowded core, and colors are not corrected for dust."
+        ]
+      }
+    ]
+  }
+}

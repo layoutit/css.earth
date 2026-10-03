@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m110-layers",
+  "entries": [
+    {
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
+      "status": "included",
+      "finding": "A 3000 x 3000 px hips2fits cutout of CDS/P/SDSS9/color, 25.92 arcmin wide, 1.6 times NGC 205's D25 diameter. Its sky level is (11, 10, 8) of 255.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "https://www.sdss.org/collaboration/#image-use"
+      ]
+    },
+    {
+      "id": "observatory-photographs",
+      "subject": "Observatory photographs of M110",
+      "status": "deferred",
+      "finding": "Not surveyed: the Messier galaxies of this batch share one survey so that they match. An observatory photograph with sky coordinates would show more detail.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+      ],
+      "revisitWhen": "A whole-galaxy photograph with sky coordinates is published under an attribution licence."
+    },
+    {
+      "id": "star-removal",
+      "subject": "Stars in the picture",
+      "status": "included",
+      "finding": "The picture was first cleaned only by the bake's pass over the Gaia foreground stars, which leaves the brightest stars, the faint ones Gaia cannot certify and those it reads as extended. The Nebula Lab's NOX removes them all and keeps the galaxy's arms and dust lanes; it also takes the galaxy's own compact knots and clusters, most visibly in M51, which was looked at and accepted on 2026-10-03; 51 of the 53 Gaia stars brighter than G 14 in the picture had a glow, filled out to at most 120 px (62″). The lab's isophote fill, made for ellipticals, left a dark notch on a spiral, so the glow is filled from the ring around it.",
+      "evidence": [
+        "https://github.com/charvey2718/nox"
+      ]
+    }
+  ]
+}

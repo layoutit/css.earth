@@ -1,0 +1,28 @@
+{
+  "id": "m57",
+  "classification": "nebula",
+  "order": 5257,
+  "physical": {
+    "name": "Ring Nebula",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Ring Nebula is recorded: it is an extended nebula, and its package frames it at 0.24 pc (object.json worldFrame.bodyRadiusM), half its picture's short side, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 283.39624524513,
+    "declinationDegrees": 33.02914523473,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 790.014153719229,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "Chornay & Walton (2021), PN G063.1+13.9: its central star, Gaia EDR3 2090486618786534784",
+      "distance": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G063.1+13.9: distance 790 pc (764 to 818) from the Gaia EDR3 parallax of its central star (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110)",
+      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Zero: no radial velocity is recorded for the nebula here."
+    }
+  }
+}

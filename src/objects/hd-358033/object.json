@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-358033",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 358033",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1233595.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-358033-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HD 358033",
+      "classification": "star",
+      "color": "#fff7fd",
+      "distanceAu": 79012841.1,
+      "description": "A star of M73, a chance alignment of stars once thought to be a small cluster.",
+      "systemName": "HD 358033 system",
+      "aliases": [
+        "M73",
+        "Messier 73",
+        "NGC 6994"
+      ],
+      "order": 5463,
+      "context": {
+        "order": 5460
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        8118808890903635000,
+        -8192788301338156000,
+        -2584409818407313400
+      ],
+      "presentationToReference": [
+        0.686861649137295,
+        -0.1539017026615752,
+        -0.710306511910361,
+        -0.69312040218064,
+        0.15530437515812412,
+        -0.7038925053853697,
+        -0.21864396407251566,
+        -0.9758047022712141,
+        -2.091942699779795e-7
+      ],
+      "orbitUpReference": [
+        0.1539017026615752,
+        -0.15530437515812412,
+        0.9758047022712141
+      ],
+      "metersPerUnit": 3979340.64516129,
+      "bodyRadiusM": 1233595600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

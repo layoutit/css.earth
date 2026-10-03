@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m76",
+  "card": {
+    "text": "The Little Dumbbell Nebula is a planetary nebula about 1,359 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "chornay-walton-2021-pn-central-stars",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+        "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G130.9-10.5: distance 1359 pc (1190 to 1546) from the Gaia EDR3 parallax of its central star",
+        "checked": "2026-10-02",
+        "locator": "distance: 1,359 pc (1,190 to 1,546)"
+      },
+      {
+        "catalogueId": "wikipedia-little-dumbbell-nebula",
+        "url": "https://en.wikipedia.org/wiki/Little_Dumbbell_Nebula",
+        "label": "Wikipedia, \"Little Dumbbell Nebula\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1347234530",
+        "quote": "The Little Dumbbell Nebula, also known as Messier 76, NGC 650/651, the Barbell Nebula, or the Cork Nebula, is a planetary nebula in the northern constellation of Perseus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "ESA/Hubble's photograph of it stands here as a flat picture facing the Sun, 1.98 pc wide.",
+    "sources": [
+      {
+        "catalogueId": "esahubble-heic2408a",
+        "url": "https://esahubble.org/images/heic2408a/",
+        "label": "ESA/Hubble heic2408a: NASA, ESA, STScI, A. Pagan (STScI)",
+        "checked": "2026-10-02",
+        "locator": "Little Dumbbell Nebula (M76); g 475, [O III] 502, H-alpha 656, [N II] 658 and I 814 nm"
+      },
+      {
+        "catalogueId": "wikipedia-little-dumbbell-nebula",
+        "url": "https://en.wikipedia.org/wiki/Little_Dumbbell_Nebula",
+        "label": "Wikipedia, \"Little Dumbbell Nebula\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1347234530",
+        "quote": "It was discovered by Pierre Méchain in 1780 and included in Charles Messier's catalog of comet-like objects as number 76."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Little Dumbbell Nebula in visible light",
+      "detail": "4000 × 2524 px",
+      "summary": "A flat picture facing the Sun at the nebula's distance; nothing in it has depth.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-heic2408a",
+          "url": "https://esahubble.org/images/heic2408a/",
+          "label": "ESA/Hubble heic2408a: NASA, ESA, STScI, A. Pagan (STScI)",
+          "checked": "2026-10-02",
+          "locator": "Little Dumbbell Nebula (M76)"
+        }
+      ]
+    }
+  }
+}

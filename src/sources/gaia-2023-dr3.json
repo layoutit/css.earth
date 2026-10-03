@@ -39,7 +39,7 @@
     {
       "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
       "checkedOn": "2026-09-29",
-      "locator": "I/355/gaiadr3, the same columns and foreground criterion around M81 (3,207 rows, src/objects/m81-layers/source/gaia-dr3-foreground.csv). Query: SELECT Source, RA_ICRS, DE_ICRS, Plx, e_Plx, pmRA, e_pmRA, pmDE, e_pmDE, Gmag FROM \"I/355/gaiadr3\" WHERE 1=CONTAINS(POINT('ICRS', RA_ICRS, DE_ICRS), CIRCLE('ICRS', 148.7094, 69.2285, 0.58)) AND ((Plx > 0.02 AND e_Plx < 0.2 * Plx) OR (ABS(pmRA) > 0.2 + 2 * e_pmRA AND e_pmRA < 0.2 * ABS(pmRA)) OR (ABS(pmDE) > 0.2 + 2 * e_pmDE AND e_pmDE < 0.2 * ABS(pmDE)))"
+      "locator": "I/355/gaiadr3, the same columns and foreground criterion around M81 (3,206 rows with a G magnitude, src/objects/m81-layers/source/gaia-dr3-foreground.csv). Query: SELECT Source, RA_ICRS, DE_ICRS, Plx, e_Plx, pmRA, e_pmRA, pmDE, e_pmDE, Gmag FROM \"I/355/gaiadr3\" WHERE 1=CONTAINS(POINT('ICRS', RA_ICRS, DE_ICRS), CIRCLE('ICRS', 148.7094, 69.2285, 0.58)) AND ((Plx > 0.02 AND e_Plx < 0.2 * Plx) OR (ABS(pmRA) > 0.2 + 2 * e_pmRA AND e_pmRA < 0.2 * ABS(pmRA)) OR (ABS(pmDE) > 0.2 + 2 * e_pmDE AND e_pmDE < 0.2 * ABS(pmDE))) AND Gmag IS NOT NULL"
     },
     {
       "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",

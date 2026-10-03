@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m59",
+  "card": {
+    "text": "An elliptical galaxy 15.4 million parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 42628: distance modulus 30.94 ± 0.069 mag",
+        "checked": "2026-10-02",
+        "locator": "distance: 15.42 Mpc (14.93 to 15.91)"
+      },
+      {
+        "catalogueId": "hyperleda-2014",
+        "url": "http://atlas.obs-hp.fr/hyperleda/",
+        "label": "HyperLEDA (Makarov et al. 2014), NGC4621 = PGC 42628: centre, type E, D25 diameter 4.5 arcmin",
+        "checked": "2026-10-02",
+        "locator": "type E, T = -4.8"
+      },
+      {
+        "catalogueId": "wikipedia-messier-59",
+        "url": "https://en.wikipedia.org/wiki/Messier_59",
+        "label": "Wikipedia, \"Messier 59\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1377881676",
+        "quote": "Messier 59 or M59, also known as NGC 4621, is an elliptical galaxy in the equatorial constellation of Virgo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with stars and neighbouring galaxies removed, given depth by Kormendy et al.'s measured profile of the galaxy.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 17.1 arcmin wide"
+      },
+      {
+        "catalogueId": "kormendy-2009-virgo-ellipticals",
+        "url": "https://arxiv.org/abs/0810.1681",
+        "label": "Kormendy et al. (2009), ApJS 182, 216, Table 1",
+        "checked": "2026-10-03",
+        "locator": "NGC 4621: n = 5.36, r_e = 74.63 arcsec"
+      },
+      {
+        "catalogueId": "wikipedia-messier-59",
+        "url": "https://en.wikipedia.org/wiki/Messier_59",
+        "label": "Wikipedia, \"Messier 59\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1377881676",
+        "quote": "It is a member of the Virgo Cluster, with the nearest fellow member 8′ away and around 5 magnitudes fainter."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M59 in visible light",
+      "detail": "2100 × 2100 px",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 17.1 × 17.1 arcmin on NGC4621"
+        }
+      ]
+    }
+  }
+}

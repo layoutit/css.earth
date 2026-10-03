@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-stellar-extent@1",
+  "objectId": "m85-volume",
+  "radiusPc": 52100.0,
+  "definition": "Radius along M85's major axis out to which Kormendy et al. (2009) measured its surface brightness: 605.341 arcsec at 17.7 Mpc.",
+  "quote": "605.341",
+  "source": "kormendy-2009-virgo-ellipticals",
+  "presentation": "Where the galaxy's stars are still measured: while the camera is inside this radius the galaxy's caption hides; outside it the caption hangs under what is drawn of the galaxy. Not a boundary."
+}

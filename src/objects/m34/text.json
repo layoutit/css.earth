@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m34",
+  "card": {
+    "text": "M34 is an open star cluster in the Milky Way, about 490 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_1039: dist50, the median of the maximum-likelihood distance, 489.73176952 pc (16th to 84th percentile 489 to 490)",
+        "checked": "2026-10-02",
+        "locator": "NGC_1039: dist50 489.7 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-34",
+        "url": "https://en.wikipedia.org/wiki/Messier_34",
+        "label": "Wikipedia, \"Messier 34\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373098581",
+        "quote": "Messier 34 is a large and relatively near open cluster in Perseus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M34 is drawn as 589 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_1039: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_1039: 589 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-34",
+        "url": "https://en.wikipedia.org/wiki/Messier_34",
+        "label": "Wikipedia, \"Messier 34\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373098581",
+        "quote": "It was probably discovered by Giovanni Batista Hodierna before 1654 and included by Charles Messier in his catalog of comet-like objects in 1764."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "589 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_1039: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_1039, inrt = True"
+        }
+      ]
+    }
+  }
+}

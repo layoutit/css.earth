@@ -1,0 +1,24 @@
+# Little Dumbbell Nebula
+
+ESA/Hubble's photograph of the Little Dumbbell Nebula, standing as one flat picture that faces the Sun at the nebula's distance. **The picture has no depth.**
+
+## Sources
+
+| Selected source | Input and meaning |
+| --- | --- |
+| [ESA/Hubble heic2408a](https://esahubble.org/images/heic2408a/) | [Record](../../sources/esahubble-heic2408a.json). Little Dumbbell Nebula (M76): g 475, [O III] 502, H-alpha 656, [N II] 658 and I 814 nm; 4000 × 2524 px over 5.01 × 3.16 arcmin (`source/source.jpg`, restored from its origin). Credit: NASA, ESA, STScI, A. Pagan (STScI). A display composite, not calibrated photometry. |
+| Chornay & Walton (2021) | [Record](../../sources/chornay-walton-2021-pn-central-stars.json). Distance: 1,359 pc (1,190 to 1,546). |
+
+## The picture
+
+- **Registration:** The file's embedded sky tags, used as they are: 0.0751 arcsec per pixel, north 19.1° right of vertical, the frame's centre at 25.5822739°, 51.5752397°. Not measured against Gaia here.
+- **Plane:** the picture's own tangent plane, perpendicular to the sight line through its centre, so it faces the Sun. The centre is 1.0″ from the nebula's position, which is the recipe's whole inclination (0.001°). This is where a sky picture lies, not a measured shape.
+- **Size:** 5.01 × 3.16 arcmin, 1.98 pc wide at 1,359 pc.
+- **Rim:** the picture fades out on a round rim between 70% and 98% of half its long side; the nebula stands on dark sky, so the long edges show no straight line.
+- **Sky:** the picture's sky is not black: (14, 13, 11) of 255, each channel's median over the top and bottom 4% of the frame. It is subtracted as the background floor (14 of 255), so the frame's edge does not show.
+
+## Known problems
+
+- The picture is flat: seen from the side it is a line. No published three-dimensional shape of the nebula is used yet ([ledger](investigations.json)).
+- Stars in front of and behind the nebula stand on its plane.
+- Colors are the publisher's display composite, not a measurement.

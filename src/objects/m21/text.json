@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m21",
+  "card": {
+    "text": "M21 is an open star cluster in the Milky Way, about 1,202 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_6531: dist50, the median of the maximum-likelihood distance, 1201.83264598 pc (16th to 84th percentile 1199 to 1205)",
+        "checked": "2026-10-02",
+        "locator": "NGC_6531: dist50 1201.8 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-21",
+        "url": "https://en.wikipedia.org/wiki/Messier_21",
+        "label": "Wikipedia, \"Messier 21\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100691",
+        "quote": "Messier 21 or M21, also designated NGC 6531 or Webb's Cross, is an open cluster of stars located to the north-east of Sagittarius in the night sky, close to the Messier objects M20 to M25."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M21 is drawn as 212 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6531: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6531: 212 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-21",
+        "url": "https://en.wikipedia.org/wiki/Messier_21",
+        "label": "Wikipedia, \"Messier 21\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100691",
+        "quote": "It was discovered and catalogued by Charles Messier on June 5, 1764."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "212 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6531: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6531, inrt = True"
+        }
+      ]
+    }
+  }
+}

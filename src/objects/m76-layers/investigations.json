@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m76-layers",
+  "entries": [
+    {
+      "id": "heic2408a",
+      "subject": "ESA/Hubble heic2408a",
+      "status": "included",
+      "finding": "Little Dumbbell Nebula (M76): g 475, [O III] 502, H-alpha 656, [N II] 658 and I 814 nm; 4000 × 2524 px over 5.01 × 3.16 arcmin. The file's embedded sky tags, used as they are: 0.0751 arcsec per pixel, north 19.1° right of vertical, the frame's centre at 25.5822739°, 51.5752397°. Not measured against Gaia here.",
+      "evidence": [
+        "https://esahubble.org/images/heic2408a/",
+        "https://esahubble.org/copyright/"
+      ]
+    },
+    {
+      "id": "volume",
+      "subject": "A volume of the Little Dumbbell Nebula",
+      "status": "deferred",
+      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "evidence": [
+        "https://esahubble.org/images/heic2408a/"
+      ],
+      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+    }
+  ]
+}

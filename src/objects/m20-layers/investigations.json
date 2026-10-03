@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m20-layers",
+  "entries": [
+    {
+      "id": "eso0930a",
+      "subject": "ESO eso0930a",
+      "status": "included",
+      "finding": "The Trifid Nebula: B, V, R and H-alpha; 2432 × 2432 px over 13.89 × 13.89 arcmin. The file's embedded sky tags, used as they are: 0.3426 arcsec per pixel, north 0.2° left of vertical, the window's centre at 270.5770458°, -23.0163803°. Not measured against Gaia here.",
+      "evidence": [
+        "https://www.eso.org/public/images/eso0930a/",
+        "https://www.eso.org/public/outreach/copyright/"
+      ]
+    },
+    {
+      "id": "volume",
+      "subject": "A volume of the Trifid Nebula",
+      "status": "deferred",
+      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "evidence": [
+        "https://www.eso.org/public/images/eso0930a/"
+      ],
+      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+    }
+  ]
+}

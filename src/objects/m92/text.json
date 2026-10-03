@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m92",
+  "card": {
+    "text": "M92 is a globular star cluster in the Milky Way, about 8,500 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6341: Rsun 8.5 ± 0.07 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_6341: Rsun 8.5 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-92",
+        "url": "https://en.wikipedia.org/wiki/Messier_92",
+        "label": "Wikipedia, \"Messier 92\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101113",
+        "quote": "Messier 92 is a globular cluster of stars in the northern constellation of Hercules."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M92 is drawn as 2,547 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6341: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6341: 2,547 members inside the tidal radius with a color"
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "2,547 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6341: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6341, inrt = True"
+        }
+      ]
+    }
+  }
+}

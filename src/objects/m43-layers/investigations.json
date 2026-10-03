@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m43-layers",
+  "entries": [
+    {
+      "id": "noao-m43",
+      "subject": "NOIRLab noao-m43",
+      "status": "included",
+      "finding": "M43, NGC 1982: a color composite; its page names no filters; 1400 × 1400 px over 6.95 × 6.95 arcmin. The file's embedded sky tags, used as they are: 0.2979 arcsec per pixel, north 0.4° right of vertical, the frame's centre at 83.8792279°, -5.2667566°. Not measured against Gaia here.",
+      "evidence": [
+        "https://noirlab.edu/public/images/noao-m43/",
+        "https://noirlab.edu/public/copyright/"
+      ]
+    },
+    {
+      "id": "volume",
+      "subject": "A volume of M43",
+      "status": "deferred",
+      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "evidence": [
+        "https://noirlab.edu/public/images/noao-m43/"
+      ],
+      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+    }
+  ]
+}

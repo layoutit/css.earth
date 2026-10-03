@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m86-volume",
+  "name": "M86",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m86-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "labs/nebula/models/m86/experiment.json"
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/m86-volume/source/delivery.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "SDSS · optical",
+      "title": "M86 in visible light",
+      "description": "The Sloan Digital Sky Survey's view of M86 with the Milky Way stars removed (NOX) and neighbouring galaxies masked, its light spread in depth through the spheroid of Kormendy et al.'s measured profile. Depth is modelled, not measured.",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "detail": "3000 × 3000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "SDSS g, r, i"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "26.7 × 26.7 arcmin"
+        },
+        {
+          "id": "distance",
+          "label": "Distance",
+          "value": "17.1 Mpc"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": ".local/nebula-lab/planetary/m86-inferred-original.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.444352&projection=TAN&coordsys=icrs&ra=186.549081&dec=12.94581&format=jpg"
+      }
+    }
+  ]
+}

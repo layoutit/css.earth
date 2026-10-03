@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m104",
+  "card": {
+    "text": "A spiral galaxy 9.4 million parsecs away, seen close to edge-on.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 42407: distance modulus 29.862 ± 0.072 mag",
+        "checked": "2026-10-02",
+        "locator": "distance: 9.38 Mpc (9.08 to 9.70)"
+      },
+      {
+        "catalogueId": "hyperleda-2014",
+        "url": "http://atlas.obs-hp.fr/hyperleda/",
+        "label": "HyperLEDA (Makarov et al. 2014), NGC4594 = PGC 42407: inclination 59.44°, major-axis position angle 89.3°, from its outline at 25 mag per square arcsecond",
+        "checked": "2026-10-02",
+        "locator": "inclination 59.44 deg"
+      },
+      {
+        "catalogueId": "wikipedia-sombrero-galaxy",
+        "url": "https://en.wikipedia.org/wiki/Sombrero_Galaxy",
+        "label": "Wikipedia, \"Sombrero Galaxy\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1377344460",
+        "quote": "The Sombrero Galaxy is a peculiar galaxy of unclear classification in the constellation borders of Virgo and Corvus, being about 9.55 megaparsecs from the Milky Way galaxy."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, standing as a flat picture that faces the Sun.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 13.50 arcmin wide"
+      },
+      {
+        "catalogueId": "wikipedia-sombrero-galaxy",
+        "url": "https://en.wikipedia.org/wiki/Sombrero_Galaxy",
+        "label": "Wikipedia, \"Sombrero Galaxy\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1377344460",
+        "quote": "It is a member of the Virgo II Groups, a series of galaxies and galaxy clusters strung out from the southern edge of the Virgo Supercluster."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Sombrero Galaxy in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image on a flat plane facing the Sun; nothing in it has depth.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 13.50 × 13.50 arcmin on NGC 4594"
+        }
+      ]
+    }
+  }
+}

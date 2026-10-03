@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m90-layers",
+  "name": "M90",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m90-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m90-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m90-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "SDSS · optical",
+      "title": "M90 in visible light",
+      "description": "The Sloan Digital Sky Survey view of M90 with Milky Way foreground stars removed and the whole-galaxy color tied to RC3's measured B-V of 0.72, on a flat plane facing the Sun.",
+      "summary": "Visible-light image on a flat plane facing the Sun; nothing in it has depth.",
+      "detail": "3000 × 3000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "SDSS g r i"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3000 × 3000"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "14.58 × 14.58 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m90-layers/source/starless.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.243&projection=TAN&coordsys=icrs&ra=189.208080&dec=13.163395&format=jpg"
+      }
+    }
+  ]
+}
