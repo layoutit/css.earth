@@ -5,7 +5,8 @@ import { createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { mountBackgroundPoints } from './background-points.js';
 import { UNHIGHLIGHTED_OPACITY } from './context-presentation-policy.js';
-import { fetchPreparedCatalogueBank, fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
+import { mountCataloguePoints } from './catalogue-points.js';
+import { fetchPreparedCatalogueBank, fetchPreparedJson } from './catalogue-point-transport.js';
 import { mountImageMesh } from './image-mesh.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 

@@ -9,7 +9,8 @@ import { createPreparedVolumeDatasets } from '../volume/prepared-volume-datasets
 import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
-import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
+import { mountCataloguePoints } from './catalogue-points.js';
+import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 
 type DatasetMount = ReturnType<ReturnType<typeof createPreparedVolumeDatasets>['mount']>;
