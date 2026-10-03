@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ton-618",
+  "card": {
+    "text": "A quasar at redshift 2.22: a point of light from a galaxy's core, which left it 10.8 billion years ago.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr16q-2020",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/289",
+        "label": "Lyke et al. (2020), SDSS DR16Q, ApJS 250, 8; CDS VII/289",
+        "checked": "2026-10-02",
+        "locator": "row SDSS J122824.96+312837.6 of the quasar catalogue"
+      },
+      {
+        "catalogueId": "sdss-dr16q-2020",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/289",
+        "label": "Lyke et al. (2020), SDSS DR16Q, ApJS 250, 8; CDS VII/289",
+        "checked": "2026-10-02",
+        "locator": "row SDSS J122824.96+312837.6: z 2.22, source VI (visual inspection)"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "z = 2.22: comoving distance 5,616 Mpc, lookback time 10.83 Gyr, age 2954 Myr"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Sloan survey's view: the quasar is the blue point at the centre, and nothing of its galaxy shows. The picture is flat and has no depth.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "CDS (SDSS) CDS/P/SDSS9/color: Sloan Digital Sky Survey DR9; color HiPS by CDS (CNRS/Unistra)",
+        "checked": "2026-10-02",
+        "locator": "SDSS9 color HiPS (CDS), a cutout on TON 618; SDSS g, r and i as blue, green and red"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "z = 2.22: age of the universe 2954 Myr of 13,787 Myr"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "TON 618 in visible light",
+      "detail": "512 × 512 px",
+      "summary": "One arcminute of the Sloan survey around the quasar, the blue point at the centre. A flat picture of the sky, with no depth.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "CDS (SDSS) CDS/P/SDSS9/color: Sloan Digital Sky Survey DR9; color HiPS by CDS (CNRS/Unistra)",
+          "checked": "2026-10-02",
+          "locator": "SDSS9 color HiPS (CDS), a cutout on TON 618"
+        }
+      ]
+    }
+  }
+}

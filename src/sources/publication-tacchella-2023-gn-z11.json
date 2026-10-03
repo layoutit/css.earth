@@ -1,0 +1,39 @@
+{
+  "id": "publication-tacchella-2023-gn-z11",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "JADES Imaging of GN-z11: Revealing the Morphology and Environment of a Luminous Galaxy 430 Myr after the Big Bang",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2302.07234"
+    },
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4357/acdbc6"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2302.07234",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2302.07234",
+      "checkedOn": "2026-10-02",
+      "locator": "Section 3 (morphology), ForcePho fit of a point source, an extended Sérsic component and a haze: the extended component has Sérsic index n = 0.9 +/- 0.1, half-light radius along the major axis 49 +/- 3 mas (200 pc at z = 10.6), axis ratio q = 0.67 +/- 0.05, position angle 34 +/- 5 degrees, offset 21 mas from the point source. The haze has n = 0.9 +/- 0.1, half-light radius 0.11 +/- 0.01 arcsec, offset 0.41 arcsec, and is more likely a chance projection of a lower-redshift galaxy."
+    }
+  ],
+  "creators": [
+    "Tacchella, Sandro",
+    "Eisenstein, Daniel J.",
+    "Hainline, Kevin"
+  ],
+  "publisher": "ApJ 952, 74",
+  "publicationDate": "2023",
+  "relations": [],
+  "statements": []
+}
