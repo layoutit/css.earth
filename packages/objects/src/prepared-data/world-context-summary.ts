@@ -3,7 +3,7 @@ import { checks, failure } from '@cssearth/core';
 
 const { array, positive, record, text, unique } = checks(failure('Prepared presentation: '));
 
-/** `world-context-summary.json` and each `world-systems/<star id>.json` write what many bodies repeat once
+/** `world-context-summary.json` and each holder's `members.json` write what many bodies repeat once
  * (`summarizeWorldContext` in @cssearth/bake). These put each body back in the shape `parsePreparedWorldContextSummary`
  * and `parsePreparedWorldSystem` check:
  * - `bodies` is one column per field, a body's value at its index and `null` where it has none.

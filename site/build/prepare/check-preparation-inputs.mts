@@ -36,9 +36,10 @@ export async function textBudgetFindings(ids: readonly string[], projectRoot = r
   return findings;
 }
 
-/** The Sun's files that the world step rewrites before pins reads them (site/build/prepare/prepare-spatial-context.ts). */
+/** The files the world step rewrites before pins reads them (site/build/prepare/prepare-spatial-context.ts): the Sun's, and
+ * each holder's members (`members.json`). */
 export const worldStepOutput = ({ location, filename }: InventoryAsset) =>
-  location === 'prepared' && /^(?:world-context(?:-summary)?\.json|world-orbits\/|world-systems\/|system-views\/)/u.test(filename);
+  location === 'prepared' && /^(?:world-context(?:-summary)?\.json|world-orbits\/|system-views\/|members\.json$)/u.test(filename);
 
 /** Restore from R2 each inventoried file of `id` whose local copy is missing or differs from its inventory, leaving the
  * ones `keep` names. Returns the restored files as `<location>/<filename>`. */
@@ -65,7 +66,7 @@ export async function missingPreparedFiles(ids: readonly string[], { projectRoot
   const missing: string[] = [];
   for (const asset of await inventoryAssets(projectRoot, objects, { location: 'prepared' })) {
     // The Sun's world files are the bake's own output: its world and pins steps rebuild them, as restoreDriftedFiles leaves them too.
-    if (asset.id === 'sun' && worldStepOutput(asset)) continue;
+    if ((asset.id === 'sun' || asset.filename === 'members.json') && worldStepOutput(asset)) continue;
     const size = await stat(asset.file).then(found => found.size, (error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return -1; throw error; });
     if (size !== asset.bytes) missing.push(`${asset.id}/prepared/${asset.filename}`);
   }

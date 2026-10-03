@@ -12,7 +12,7 @@ const test = sourceTest();
 const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
 const json = async (name: string) => JSON.parse(await readFile(new URL(name, prepared), 'utf8')) as unknown;
 const summary = parsePreparedWorldContextSummary(await json('world-context-summary.json'));
-const host = 'toi-178', holder = `${host}-system`, system = parsePreparedWorldSystem(await json(`world-systems/${holder}.json`), summary, holder);
+const host = 'toi-178', holder = `${host}-system`, system = parsePreparedWorldSystem(await json(`../../${holder}/prepared/members.json`), summary, holder);
 const extended = extendWorldContext(summary, [system]);
 assert.ok(!summary.bodies.some(body => body.id === host) && extended.bodies.some(body => body.id === host), `${host} arrives with its file`);
 

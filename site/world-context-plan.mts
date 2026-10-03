@@ -97,7 +97,7 @@ export let APPLICATION_WORLD_INDEX: PreparedWorldIndex | null = null;
 if (node) {
   const index = await readNodeJson('src/objects/sun/prepared/world-index.json');
   APPLICATION_WORLD_INDEX = parsePreparedWorldIndex(index);
-  APPLICATION_WORLD_CONTEXT = await parseCompleteWorldContext(summary, id => readNodeJson(`src/objects/sun/prepared/world-systems/${id}.json`), index);
+  APPLICATION_WORLD_CONTEXT = await parseCompleteWorldContext(summary, id => readNodeJson(`src/objects/${id}/prepared/members.json`), index);
   held = new Map(APPLICATION_WORLD_CONTEXT.bodies.map(body => [body.id, body] as const));
 } else if (startup?.system) {
   adopt([parseSystem(startup.system.value, startup.system.id)]);

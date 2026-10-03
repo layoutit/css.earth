@@ -8,7 +8,7 @@ import { createWorldContextPlannerClient, type WorldPlannerWorker } from './worl
 // The summary every page reads, and one other system's file: TRAPPIST-1's seven planets (packages/bake/src/world-context/summary.ts).
 const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
 const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
-const trappistFile = JSON.parse(await readFile(new URL('world-systems/trappist-1-system.json', prepared), 'utf8')) as Record<string, unknown>;
+const trappistFile = JSON.parse(await readFile(new URL('../../trappist-1-system/prepared/members.json', prepared), 'utf8')) as Record<string, unknown>;
 const trappist = parsePreparedWorldSystem(trappistFile, summary, 'trappist-1-system');
 // The build's index of which holder has each body (world-index.json); a page never reads it.
 const index = parsePreparedWorldIndex(JSON.parse(await readFile(new URL('world-index.json', prepared), 'utf8')));

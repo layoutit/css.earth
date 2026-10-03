@@ -20,24 +20,24 @@ test('a plain-dot star is its own holder, never a body of the summary; one nothi
   // No star drawn as a plain dot is a body of the summary but one another body is bound to.
   const bound = new Set(summary.bodies.flatMap(body => body.boundTo ? [body.boundTo.hostId] : []));
   assert.deepEqual(summary.bodies.filter(body => body.plainDot && body.classification === 'star' && !body.orbit && !body.boundTo && !bound.has(body.id)).map(body => body.id), []);
-  for (const id of alone) await assert.rejects(access(new URL(`world-systems/${id}.json`, prepared)), `${id} has no holder file`);
+  for (const id of alone) await assert.rejects(access(new URL(`../../${id}/prepared/members.json`, prepared)), `${id} has no holder file`);
   // A star with planets is in its own holder's file with them.
   const host = stars.find(id => !alone.includes(id))!;
-  const file = await json(`world-systems/${host}-system.json`) as { bodies: { id: string[] } };
+  const file = await json(`../../${host}-system/prepared/members.json`) as { bodies: { id: string[] } };
   assert.ok(file.bodies.id.includes(host) && file.bodies.id.length > 1, host);
-  const whole = await parseCompleteWorldContext(raw, id => json(`world-systems/${id}.json`), rawIndex);
+  const whole = await parseCompleteWorldContext(raw, id => json(`../../${id}/prepared/members.json`), rawIndex);
   assert.equal(whole.bodies.length, summary.worldBodyCount);
   assert.deepEqual(whole.bodies.map(body => body.id), index.order, 'the whole world is in the index\'s order');
   for (const id of stars) { const body = whole.bodies.find(body => body.id === id)!; assert.equal(body.plainDot, true, id); assert.equal(body.classification, 'star', id); }
   // An index that gives a body to another holder than the file that has it is refused, with both named.
   const moved = { ...index, holders: { ...index.holders, [`${host}`]: alone[0]! } };
-  await assert.rejects(parseCompleteWorldContext(raw, id => json(`world-systems/${id}.json`), moved), new RegExp(`${host}-system holds ${host}; the world index gives it to ${alone[0]!}`, 'u'));
+  await assert.rejects(parseCompleteWorldContext(raw, id => json(`../../${id}/prepared/members.json`), moved), new RegExp(`${host}-system holds ${host}; the world index gives it to ${alone[0]!}`, 'u'));
 });
 
 test('every plain-dot star is a dot once: of the Milky Way\'s own bank when the galaxy holds it, else of the world\'s banks', async () => {
   const raw = await json('world-context-summary.json'), summary = parsePreparedWorldContextSummary(raw);
   const rawIndex = await json('world-index.json');
-  const whole = await parseCompleteWorldContext(raw, id => json(`world-systems/${id}.json`), rawIndex);
+  const whole = await parseCompleteWorldContext(raw, id => json(`../../${id}/prepared/members.json`), rawIndex);
   const listed = new Set(plainStars(parsePreparedWorldIndex(rawIndex)));
   // The galaxy's stars: the tracked table its dots are merged from (site/build/prepare/paged-star-dot-positions.mts).
   const table = gunzipSync(await readFile(new URL('../../src/objects/milky-way-volume/source/packaged-stars/positions.csv.gz', import.meta.url))).toString('utf8').trim().split('\n');

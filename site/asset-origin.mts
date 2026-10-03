@@ -191,7 +191,7 @@ export async function rewriteSceneCss(css: string, root = process.cwd()): Promis
   return css.replace(CSS_SCENE_URL, (_match, quote: string) => `url(${quote}${resolved[index++]}${quote})`);
 }
 
-/** A world file (`world-context-summary.json` or `world-systems/<star>.json`) with every billboard's published address.
+/** A world file (`world-context-summary.json` or a holder's `members.json`) with every billboard's published address.
  * The file leaves a body's own `/scenes/<id>/<id>-billboard.webp` implicit (`packages/objects/src/prepared-data/world-context-summary.ts`), and production serves
  * no `/scenes`: the build writes the bucket's address for each. No-op when unset. */
 export async function resolveWorldBillboards(text: string, root = process.cwd()): Promise<string> {

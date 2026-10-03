@@ -13,7 +13,7 @@ type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][numbe
  * - `summary` (`world-context-summary.json`, read by every page) holds the camera and frame facts, the focus's own system
  *   in full, and every body that orbits nothing and the map can open by click (a featured star, a galaxy). It lists no
  *   other body: a body is found through its holder.
- * - `systems` (`world-systems/<holder id>.json`) is one holder each: a system object (`<star>-system`), the star's
+ * - `systems` (`src/objects/<holder id>/prepared/members.json`) is one holder each: a system object (`<star>-system`), the star's
  *   planets with everything that orbits them, their named
  *   orbit centres and orbit-bank pins. A star drawn as a plain dot is in its own holder, and the map draws it from a dot
  *   bank until that file is read. A page reads its own body's holder at startup and any other when navigation targets a
@@ -45,6 +45,14 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
     }
     return current;
   };
+  // The system a body belongs to: its orbit chain's root, and past a star bound to another (Epsilon Indi Ba to A), that
+  // star's host, as the map's planetary systems are (site/planetary-system-members.mts).
+  const boundHost = new Map(bodies.flatMap(body => 'boundTo' in body && body.boundTo ? [[body.id, body.boundTo.hostId] as const] : []));
+  const systemOf = (id: string) => {
+    let root = hostOf(id);
+    for (let steps = 0; boundHost.has(root) && steps <= boundHost.size; steps++) root = hostOf(boundHost.get(root)!);
+    return root;
+  };
   const positions = new Map<string, Vector3>([...[focus, ...bodies].map(body => [body.id, body.positionM] as const),
     ...Object.entries(orbitCenters).map(([id, centre]) => [id, centre.positionM] as const)]);
   // A star another body is bound to stays in the summary: its companion reads its place. A star with planets leaves like
@@ -57,17 +65,16 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   const orbited = new Set(parents.values());
   const plainAsteroid = (body: Body) => asteroidHolder !== undefined && body !== focus && body.plainDot === true && body.classification === 'asteroid'
     && 'orbit' in body && body.orbit?.centerBodyId === focus.id && !orbited.has(body.id);
-  const local = (body: Body) => !plainStar(body) && !plainAsteroid(body) && (!('orbit' in body && body.orbit) || hostOf(body.id) === focus.id);
+  const local = (body: Body) => !plainStar(body) && !plainAsteroid(body) && (!('orbit' in body && body.orbit) || systemOf(body.id) === focus.id);
   /** The holder whose file has a body the summary does not: its star's system, a plain-dot star's own, or the asteroid dot
-   * bank. A holder is named after its star's system; Epsilon Indi Ba's has no package of its own, as Ba is bound to A,
-   * whose system holds it on the map (planetary-system-members.mts). */
+   * bank: always an object with a package, whose `prepared/members.json` the file is. */
   // A star with the bodies that orbit it is a system, an object of its own (system-address.ts in @cssearth/objects): its
   // holder is that object. A plain-dot star with planets is in it with them; one nothing orbits is its own holder.
-  const systemStars = new Set(bodies.filter(body => 'orbit' in body && body.orbit && hostOf(body.id) !== focus.id).map(body => hostOf(body.id)));
-  const fileOf = (body: Body) => plainAsteroid(body) ? asteroidHolder! : plainStar(body) ? systemStars.has(body.id) ? systemObjectId(body.id) : body.id : systemObjectId(hostOf(body.id));
+  const systemStars = new Set(bodies.filter(body => 'orbit' in body && body.orbit && systemOf(body.id) !== focus.id).map(body => systemOf(body.id)));
+  const fileOf = (body: Body) => plainAsteroid(body) ? asteroidHolder! : plainStar(body) ? systemStars.has(body.id) ? systemObjectId(body.id) : body.id : systemObjectId(systemOf(body.id));
   const systems = new Map<string, PreparedWorldContext['bodies'][number][]>();
   for (const body of bodies) if (!local(body)) (systems.get(fileOf(body)) ?? systems.set(fileOf(body), []).get(fileOf(body))!).push(body);
-  const centresOf = (host: string) => Object.fromEntries(Object.entries(orbitCenters).filter(([id]) => hostOf(id) === host));
+  const centresOf = (host: string) => Object.fromEntries(Object.entries(orbitCenters).filter(([id]) => systemOf(id) === host));
   const pinsOf = (members: readonly Body[]) => Object.fromEntries(members.flatMap(body => orbitBanks[body.id] === undefined ? [] : [[body.id, orbitBanks[body.id]!] as const]));
   const rootBodies = bodies.filter(local), rootCentres = centresOf(focus.id);
   const root = encodeBodies([focus, ...rootBodies], positions);

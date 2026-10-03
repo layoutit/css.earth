@@ -12,7 +12,7 @@ const APPROACH_ROUNDING_M = 1e12;
 let holders: ReadonlySet<string> | null = null;
 const holderIds = () => holders ??= new Set(Object.values(index().holders));
 
-/** Every holder that is a file (`world-systems/<id>.json`), in id order: each star something orbits, and the asteroid dot
+/** Every holder that is a file (its own package's `prepared/members.json`), in id order: each star something orbits, and the asteroid dot
  * bank. A star that is its own holder of one body has its row in the index and no file. */
 export function worldHolderFiles(): readonly string[] {
   return [...holderIds()].filter(id => !Object.hasOwn(index().rows, id)).sort();

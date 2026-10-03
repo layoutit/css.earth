@@ -1,4 +1,4 @@
-import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { gunzipSync } from 'node:zlib';
@@ -235,12 +235,20 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   // Read by the build and Node tools only: which holder has each body, which the page reads from the body's own object entry.
   await writeIfChanged(worldIndexPath(options.outputPath), `${JSON.stringify(index)}\n`);
   await rm(resolve(dirname(options.outputPath), 'world-stars.json'), { force: true });
-  const systemDirectory = worldSystemsDirectory(options.outputPath), keptSystems = new Set<string>();
+  // Each holder is an object: a star's system, or the asteroid dot bank. Its members are its own package's prepared file,
+  // published with it; a holder without a package is refused, named.
+  const objectsRoot = dirname(dirname(dirname(options.outputPath))), holders = new Set<string>();
   for (const system of systems) {
-    keptSystems.add(`${system.id}.json`);
-    await writeIfChanged(resolve(systemDirectory, `${system.id}.json`), `${JSON.stringify(system.file)}\n`);
+    const directory = resolve(objectsRoot, system.id);
+    await access(resolve(directory, 'object.json')).catch(() => { throw new TypeError(`World holder ${system.id} has no package (src/objects/${system.id}/object.json): run node site/build/prepare/system-packages.mts.`); });
+    holders.add(system.id);
+    await writeIfChanged(memberFilePath(objectsRoot, system.id), `${JSON.stringify(system.file)}\n`);
   }
-  for (const name of await readdir(systemDirectory).catch(() => [] as string[])) if (!keptSystems.has(name)) await rm(resolve(systemDirectory, name));
+  // A package that holds no members any more loses its file, and the Sun's old folder of them goes.
+  for (const entry of await readdir(objectsRoot, { withFileTypes: true })) {
+    if (entry.isDirectory() && !holders.has(entry.name)) await rm(memberFilePath(objectsRoot, entry.name), { force: true });
+  }
+  await rm(resolve(dirname(options.outputPath), 'world-systems'), { recursive: true, force: true });
   // System framing's camera candidates, one file per host, read when navigation frames that system.
   const directory = worldSystemViewsDirectory(options.outputPath), views = worldSystemViews(prepared), kept = new Set<string>();
   for (const view of views) { kept.add(`${view.id}.json`); await writeIfChanged(resolve(directory, `${view.id}.json`), `${JSON.stringify(view)}\n`); }
@@ -273,9 +281,9 @@ export function worldIndexPath(outputPath: string): string {
   return resolve(dirname(outputPath), 'world-index.json');
 }
 
-/** `world-context.json` → `world-systems/`, beside it: `<star id>.json` per system other than the focus's. */
-export function worldSystemsDirectory(outputPath: string): string {
-  return resolve(dirname(outputPath), 'world-systems');
+/** A holder's members: its own package's prepared file (`src/objects/<holder>/prepared/members.json`). */
+export function memberFilePath(objectsRoot: string, holderId: string): string {
+  return resolve(objectsRoot, holderId, 'prepared', 'members.json');
 }
 
 /** `world-context.json` → `world-orbits/`, beside it: `<orbit centre id>.bin` per centre. */

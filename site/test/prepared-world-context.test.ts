@@ -2774,7 +2774,7 @@ test('the orbit banks decode to the orbits of the full prepared file, each verte
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
   // Every system's file read, as Node reads the world (site/world-context-plan.mts).
   const summary = await parseCompleteWorldContext(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')),
-    async id => JSON.parse(await readFile(new URL(`world-systems/${id}.json`, prepared), 'utf8')),
+    async id => JSON.parse(await readFile(new URL(`../../${id}/prepared/members.json`, prepared), 'utf8')),
     JSON.parse(await readFile(new URL('world-index.json', prepared), 'utf8')));
   const bankOf = async (id: string) => unpackPreparedBinary(await readFile(new URL(`world-orbits/${id}.bin`, prepared)), `world-orbits/${id}.bin`);
   const banks = new Map(await Promise.all(Object.keys(summary.orbitBanks!).map(async id => [id, await bankOf(id)] as const)));

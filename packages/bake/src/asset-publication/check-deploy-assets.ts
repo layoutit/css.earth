@@ -64,14 +64,15 @@ export async function checkPublishedWorldPair(root: string, fetchText: (url: str
   if (!indexAsset) throw disagree('the inventory lacks world-index.json.');
   const indexInput: unknown = JSON.parse(await fetchText(indexAsset.url));
   const index = parsePreparedWorldIndex(indexInput);
-  const systems = [...new Set(Object.values(index.holders))].filter(id => !Object.hasOwn(index.rows, id)), systemFiles = systems.map(id => `world-systems/${id}.json`);
-  const systemAssets = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: systemFiles });
-  const unpublished = systemFiles.filter(name => !systemAssets.some(entry => entry.filename === name));
-  if (unpublished.length) throw disagree(`the inventory lacks ${unpublished.join(', ')}.`);
+  // Each holder that is a file is its own package's `members.json`, published in that package's inventory.
+  const systems = [...new Set(Object.values(index.holders))].filter(id => !Object.hasOwn(index.rows, id)).sort();
+  const systemAssets = await inventoryAssets(root, systems, { location: 'prepared', filenames: ['members.json'] });
+  const unpublished = systems.filter(id => !systemAssets.some(entry => entry.id === id));
+  if (unpublished.length) throw disagree(`the inventories of ${unpublished.join(', ')} lack members.json.`);
   const files = new Map<string, unknown>();
   for (let start = 0; start < systems.length; start += 16) {
     await Promise.all(systems.slice(start, start + 16).map(async id => {
-      const asset = systemAssets.find(entry => entry.filename === `world-systems/${id}.json`)!;
+      const asset = systemAssets.find(entry => entry.id === id)!;
       files.set(id, JSON.parse(await fetchText(asset.url)));
     }));
   }

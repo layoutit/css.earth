@@ -452,7 +452,7 @@ function checkBodies(focus: PreparedContextFocus, bodies: readonly PreparedConte
   }
   return orbitCenters;
 }
-/** `world-systems/<holder id>.json`: one holder's bodies, with its named orbit centres and orbit bank pins, checked as
+/** A holder's `src/objects/<holder>/prepared/members.json`: one holder's bodies, with its named orbit centres and orbit bank pins, checked as
  * the summary's own bodies are. */
 export function parsePreparedWorldSystem(value: unknown, plan: PreparedWorldContext, id: string): PreparedWorldSystem {
   const placed = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body.positionM] as const));
@@ -502,7 +502,7 @@ export function parsePreparedWorldIndex(value: unknown): PreparedWorldIndex {
   return Object.freeze({ order: Object.freeze(order), holders: Object.freeze(Object.fromEntries(holders)), rows: Object.freeze({ ...rows }) });
 }
 /** The whole world, every holder read, in the full context's order: for build tools and tests. `read` gives a holder's
- * `world-systems/<id>.json`; a star that is its own holder of one body has its row in the index instead. */
+ * `members.json`; a star that is its own holder of one body has its row in the index instead. */
 export async function parseCompleteWorldContext(summary: unknown, read: (id: string) => Promise<unknown>, indexInput: unknown): Promise<PreparedWorldContext> {
   const plan = parsePreparedWorldContextSummary(summary), index = parsePreparedWorldIndex(indexInput);
   const holders = [...new Set(Object.values(index.holders))].sort();

@@ -12,9 +12,10 @@ A page never reads a list of the world's bodies. A body is found through its hol
 
 - `world-context-summary.json`, which every page reads, holds the camera and frame facts, the Sun's own system in full,
   and every body that orbits nothing and the map opens by click (a featured star, a galaxy). It names no other body.
-- `world-systems/<system id>.json` is one holder, named after its star's system (`trappist-1-system`, the object with
-  the address `/trappist-1-system/`; the id rule is in `@cssearth/objects` `system-address.ts`). Two holders have no
-  package of their own: `eps-indi-ba-system` (Ba is bound to A, whose system it is on the map) and `catalogue-asteroids`. It holds the bodies that
+- `src/objects/<system id>/prepared/members.json` is one holder, in its own package, named after its star's system (`trappist-1-system`, the object with
+  the address `/trappist-1-system/`; the id rule is in `@cssearth/objects` `system-address.ts`). Every holder is a package: a
+  star's system, or `catalogue-asteroids` for the asteroids drawn as its dots. A star bound to another (Epsilon Indi Ba)
+  is in its host's system, as the map draws it. It holds the bodies that
   orbit its star, their named orbit centres and orbit-bank pins, served at `/world/systems/<id>.json`. A featured star is a body of the summary and its file holds its
   planets. A star the map draws as a plain dot, with no label, hover or click, is in its own file with them.
 - A plain-dot star nothing orbits has no file: it is its own holder of one body, and its row travels in its object entry.

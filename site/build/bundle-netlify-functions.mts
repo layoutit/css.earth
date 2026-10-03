@@ -29,7 +29,7 @@ const result = await build({
 // query answered 502.
 const included = /included_files\s*=\s*\[([^\]]*)\]/u.exec(await readFile(resolve(root, 'netlify.toml'), 'utf8'))?.[1];
 if (included === undefined) throw new Error('netlify.toml: [functions] included_files is missing.');
-for (const path of ['src/objects/sun/prepared/world-context-summary.json', 'src/objects/sun/prepared/world-index.json', 'src/objects/sun/prepared/world-systems/*.json']) {
+for (const path of ['src/objects/sun/prepared/world-context-summary.json', 'src/objects/sun/prepared/world-index.json', 'src/objects/*/prepared/members.json']) {
   if (!included.includes(`"${path}"`)) throw new Error(`netlify.toml: [functions] included_files does not list ${path}, which the page function reads (site/world-context-plan.mts); a deployed function would answer 502.`);
 }
 for (const [file, { bytes }] of Object.entries(result.metafile.outputs)) {

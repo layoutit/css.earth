@@ -69,7 +69,7 @@ test('a page that holds only the summary has the systems whose members it holds,
   const before = planetarySystems(worldObjects(summary), summary, systemFramingRadii(summary));
   assert.ok(before.some(system => system.id === SOLAR_SYSTEM_ID));
   assert.equal(before.some(system => system.id === 'trappist-1'), false, 'no system until its planets are held');
-  const extended = extendWorldContext(summary, [parsePreparedWorldSystem(JSON.parse(await readFile(new URL('world-systems/trappist-1-system.json', prepared), 'utf8')), summary, 'trappist-1-system')]);
+  const extended = extendWorldContext(summary, [parsePreparedWorldSystem(JSON.parse(await readFile(new URL('../../trappist-1-system/prepared/members.json', prepared), 'utf8')), summary, 'trappist-1-system')]);
   const after = planetarySystems(worldObjects(extended), extended, systemFramingRadii(extended));
   // Read whole, it is the system the build sees.
   assert.deepEqual(after.find(system => system.id === 'trappist-1'), systemById(WORLD_OBJECTS, 'trappist-1'));
