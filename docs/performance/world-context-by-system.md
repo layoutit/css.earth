@@ -47,6 +47,10 @@ another galaxy), or when it has places. On 2026-10-03 that is 20 files. The buil
 whole and named by its object (`/world/anywhere.json`): measured with 22 files, separate responses were 32.1 KB gzipped
 and one response 26.1 KB.
 
+A row says what its body is inside by the file it is in: a page reads a system's members from that, with no table of
+systems. A file whose bodies are inside another object says which (`inside`): the asteroid dot bank's are inside the Solar
+System. The full context, which Node tools read, writes it on every row.
+
 The build tells each page and each object entry which files it needs ([world-places.mts](../../site/world-places.mts)),
 root first, so an orbit's parent is placed before it: the page names its own in its head
 (`<meta name="cssearth-world-files">`), and `/objects/<id>/entry.json` carries `world: { files, row? }`.

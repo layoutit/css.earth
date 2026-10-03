@@ -14,14 +14,14 @@ test("the home page is named and addressed as the site, not as the Earth page it
   assert.equal(websiteJsonLd().url, "https://css.earth/");
 });
 
-test("breadcrumbs follow the orbit chain through pages, passing over centres that have none", () => {
+test("breadcrumbs follow the object tree from the Observable Universe down to the page", () => {
   const names = (id: string) => breadcrumbJsonLd(pageTrail(requireObject(id))).itemListElement.map(step => step.name);
-  assert.deepEqual(names("phobos"), ["cssEarth", "Sun", "Mars", "Phobos"]);
-  assert.deepEqual(names("sun"), ["cssEarth", "Sun"]);
-  // Kepler-16 b orbits the A–B barycentre, which is not a page: the trail goes on to Kepler-16 A.
-  assert.deepEqual(names("kepler-16ab-b").slice(0, 2), ["cssEarth", requireObject("kepler-16-a").name]);
+  assert.deepEqual(names("phobos"), ["cssEarth", "Observable Universe", "Nearby Universe", "Local Group", "Milky Way", "Solar System", "Mars system", "Phobos"]);
+  assert.deepEqual(names("sun").slice(-3), ["Milky Way", "Solar System", "Sun"]);
+  // Kepler-16 b orbits the A–B barycentre, which is no object: it is inside Kepler-16 A's system.
+  assert.deepEqual(names("kepler-16ab-b").slice(-2), [requireObject("kepler-16-a-system").name, requireObject("kepler-16ab-b").name]);
   const items = breadcrumbJsonLd(pageTrail(requireObject("phobos"))).itemListElement;
-  assert.deepEqual(items.map(step => step.position), [1, 2, 3, 4]);
+  assert.deepEqual(items.map(step => step.position), [1, 2, 3, 4, 5, 6, 7, 8]);
   assert.equal(items.at(-1)?.item, "https://css.earth/phobos/");
 });
 

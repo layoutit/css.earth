@@ -98,12 +98,15 @@ test('the system helpers read the orbit graph of the plan', () => {
   }
 });
 
-test('a plan reads its systems from its own orbit graph', () => {
+test('a plan reads its systems from what its bodies are inside', () => {
   const plan = { ...APPLICATION_WORLD_CONTEXT, bodies: APPLICATION_WORLD_CONTEXT.bodies.filter(body => body.id !== 'wasp-43b') };
   assert.deepEqual(planetarySystems(SCENE_OBJECTS, plan, SYSTEM_FRAMING_RADII).find(system => system.id === 'wasp-43')?.memberIds, []);
-  // The Sun made to orbit the Earth closes every Solar System chain into a loop.
-  const cyclic = { ...APPLICATION_WORLD_CONTEXT, orbitCenters: { ...APPLICATION_WORLD_CONTEXT.orbitCenters, sun: { positionM: [0, 0, 0] as const, centerBodyId: 'earth' } } };
-  assert.throws(() => planetarySystemMembers(cyclic), /has a cyclic orbit chain/);
+  // The Earth put inside the Moon's system closes their chain into a loop.
+  const cyclic = { ...APPLICATION_WORLD_CONTEXT, bodies: APPLICATION_WORLD_CONTEXT.bodies.map(body => body.id === 'earth' ? { ...body, inside: 'moon-system' } : body) };
+  assert.throws(() => planetarySystemMembers(cyclic), /the chain of hosts is cyclic/);
+  // Every row of the whole world says what it is inside, except a star alone or in its own system's file.
+  const unplaced = APPLICATION_WORLD_CONTEXT.bodies.filter(body => body.inside === undefined);
+  assert.ok(unplaced.length > 0 && unplaced.every(body => body.classification === 'star'), 'only a plain-dot star can lack it');
 });
 
 test("a system's exit distance scales the Sun's 100 AU by the prepared framing radius", () => {

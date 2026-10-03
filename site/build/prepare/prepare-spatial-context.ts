@@ -206,8 +206,6 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   }
   const prepared = prepareWorldContext(source, facts, states, orbitCenters, {
     minimumRadiusShare: SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, ...SYSTEM_FRAMING_ANGLES });
-  // Browser payload: compact JSON. Indentation was 60% of the fetched bytes.
-  await writeIfChanged(options.outputPath, `${JSON.stringify(prepared)}\n`);
   // The browser reads the summary; the planner worker adds each body's binary orbit bank, which the file that has the body
   // pins by byte length, when its orbit comes into view. The full JSON above remains for build-time tools.
   const banks = worldOrbitBanks(prepared);
@@ -216,8 +214,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   // classifications above are: `objectsDirectory` says where each object's files are read and written, not which objects
   // exist or what they are inside.
   const tree = new Map(readPreparedObjects(process.cwd()).objects.map(object => [object.id, { parent: object.parent }] as const));
-  const { summary, systems, places, index, plainStars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])),
+  const { summary, systems, places, index, plainStars, insideOf } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])),
     id => tree.get(id)?.parent, ASTEROID_DOT_BANK);
+  // The full context, for build-time tools: compact JSON (indentation was 60% of its bytes). Each row says what its body is
+  // inside in the object tree, which a page reads from the file a row is in.
+  await writeIfChanged(options.outputPath, `${JSON.stringify({ ...prepared, bodies: prepared.bodies.map(body => ({ ...body, inside: insideOf(body.id) })) })}\n`);
   // Each file is in its own object's package, in the objects directory this bake writes for (a fixture's, or the checkout's).
   const objectsRoot = worldFilesRoot(options);
   // The map draws those stars as dots, not as bodies. A star of the Milky Way is one of the galaxy's own dots

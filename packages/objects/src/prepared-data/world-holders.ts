@@ -26,6 +26,9 @@ export interface WorldHolders {
   /** Whether `id` is a star the map draws as a plain dot, of a dot bank (alone, with its system round it, or bound to a
    * system's star). */
   plainDotStar(id: string): boolean;
+  /** The object `id`, with the system it hosts, is inside in the object tree: its parent, or its system's parent. A body
+   * without a package is in the system its orbit leads to. The runtime reads a system's members from this. */
+  insideOf(id: string): string;
 }
 
 /** The world's holders, from the object tree (`parentOf`) and the rows the bake prepared. Bake and build share it, so the
@@ -77,5 +80,6 @@ export function worldHolders(focusId: string, bodies: readonly HolderBody[], par
   }));
   return { holderOf, drawnFromAnywhere: id => anywhere.has(id),
     ownRow: id => { const body = byId.get(id); return body !== undefined && plainStar(body) && holderOf(id) === id; },
-    plainDotStar: id => { const body = byId.get(id); return body !== undefined && plainStar(body); } };
+    plainDotStar: id => { const body = byId.get(id); return body !== undefined && plainStar(body); },
+    insideOf: id => hasSystem(id) ? placeOf({ id: systemObjectId(id) }) : placeOf(byId.get(id) ?? { id }) };
 }
