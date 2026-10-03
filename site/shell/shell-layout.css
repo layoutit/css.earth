@@ -268,8 +268,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   background: var(--explorer-header-control-hover);
 }
 .explorer-shell-header .object-sidebar-search-clear:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 1px; }
-.explorer-shell-header .object-sidebar-search-card:has(.object-sidebar-search:placeholder-shown) .object-sidebar-search-clear { display: none; }
-.explorer-shell-header .object-sidebar-search-card:not(:has(.object-sidebar-search:placeholder-shown)) .object-sidebar-search { padding-inline-end: 24px; }
+.explorer-shell-header .object-sidebar-search-card .object-sidebar-search:placeholder-shown ~ .object-sidebar-search-clear { display: none; }
+.explorer-shell-header .object-sidebar-search-card .object-sidebar-search:not(:placeholder-shown) { padding-inline-end: 24px; }
 /* The custom clear replaces the browser's own search cancel control. */
 .explorer-shell-header .object-sidebar-search::-webkit-search-cancel-button { appearance: none; display: none; }
 
