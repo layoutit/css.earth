@@ -123,7 +123,6 @@ import Detached from './Detached.astro';
     </label>
   </div>
 </header>
-<div class="object-dataset-context-dock">
 <form id="object-settings-form" action={pageRoute ?? `/${objectId}/`} method="get" data-settings-form hidden>
   <input type="hidden" name="settings" value="1" />
   {['v', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
@@ -203,7 +202,6 @@ import Detached from './Detached.astro';
     <button class="object-setting-control object-settings-submit" type="submit" form="object-settings-form">Apply settings</button>
   </div>
 </section>
-</div>
 <div class="object-sidebar-frame">
 <aside id={`${objectId}-sidebar`} class="object-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Object information">
   <div class="object-drawer-content" id={`${objectId}-information`}>

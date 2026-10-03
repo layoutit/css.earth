@@ -43,8 +43,15 @@ export function createSettingsController(
   };
   documentTarget.addEventListener('click', opening, { capture: true, signal: events.signal });
   panel.addEventListener('toggle', event => { if ((event as ToggleEvent).newState === 'closed') showSection(panel, false); }, { signal: events.signal });
-  // The shell starts before anyone can open the panel.
+  // The gear shows its open panel as its own `aria-expanded`, which its pressed look reads: it comes before the panel, so
+  // no selector reaches it from there. `beforetoggle` runs in the task that opens or closes the panel.
+  const gear = documentTarget.querySelector(`[popovertarget="${panel.id}"]`);
+  const expand = (open: boolean) => { if (gear?.getAttribute('aria-expanded') !== String(open)) gear?.setAttribute('aria-expanded', String(open)); };
+  panel.addEventListener('beforetoggle', event => expand((event as ToggleEvent).newState === 'open'), { signal: events.signal });
+  // The shell starts before anyone can open the panel. A panel left open by the scene before leaves the page here
+  // without an event, so the gear is told.
   showSection(panel, false);
+  expand(false);
   lifetime.onDispose(() => showSection(panel, true));
   const inputs = { motionEnabled: motion, lightCurvesEnabled: lightCurves, heliosphereEnabled: heliosphere,
     illustrationModelsEnabled: illustrationModels, surfaceLabelsEnabled: surfaceLabels };

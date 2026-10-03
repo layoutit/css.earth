@@ -57,8 +57,9 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     return { tucked: Math.max(0, height - tucked), peek: Math.max(0, height - peek),
       half: Math.max(0, height - half), full: 0 };
   };
-  // Layout rests the sheet at its state's offset; a drag or a snap adds a transform to that. The rest comes from this
-  // controller's state, not from CSS: a tap on the handle checks it, and CSS moves the rest, before the change event.
+  // Layout rests the sheet at its state's offset; a drag or a snap adds a transform to that. The rest is this
+  // controller's state, which the stylesheet reads from the body (`data-sheet`): a tap that checks the handle moves
+  // nothing until the controller settles.
   const currentOffset = (points: SheetStops = stops()) => {
     const transform = windowTarget.getComputedStyle(sheet).transform;
     return points[state] + (transform === "none" ? 0 : new windowTarget.DOMMatrixReadOnly(transform).m42);
@@ -69,6 +70,11 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   // elements), against 0.2 ms here.
   const riders = [toolbar, categories];
   const readers = [sheet, ...riders];
+  // While a drag or the start of a snap holds the sheet where it is, the sheet and its riders take no transition. Each
+  // carries the class itself: read off the sheet by `body:has(.object-sidebar.is-dragging)`, it made every element
+  // added anywhere on the page restyle the whole document in Chromium (1,500 to 1,840 of 1,946 elements on each frame
+  // of a zoom that attached a marker, 2026-10-03).
+  const hold = (held: boolean) => { for (const reader of readers) reader.classList.toggle("is-dragging", held); };
   // The sheet's transform is taken from its rest (shell-layout.css), so a snap that moves the rest keeps it in place.
   const writeOffset = (offset: number) => {
     for (const rider of riders) rider.style.transform = `translate3d(0, ${offset}px, 0)`;
@@ -105,7 +111,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     endSettle();
     for (const reader of readers) reader.style.setProperty("--sheet-snap-duration", `${duration}ms`);
     writeOffset(from);
-    sheet.classList.add("is-dragging");
+    hold(true);
     state = next;
     body.dataset.sheet = next;
     handle.checked = next === "half" || next === "full";
@@ -114,7 +120,8 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     void windowTarget.getComputedStyle(sheet).transform;
     // Committed before the hold is released: WebKit starts no transition when the transition turns on in the same style
     // update as the transform it would animate.
-    sheet.classList.replace("is-dragging", "is-settling");
+    hold(false);
+    sheet.classList.add("is-settling");
     void windowTarget.getComputedStyle(sheet).transitionProperty;
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     snapFrame = windowTarget.requestAnimationFrame(() => {
@@ -180,7 +187,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
       try { drag.capture.setPointerCapture(event.pointerId); }
       catch (error) { if (!(error instanceof Error && error.name === 'NotFoundError')) throw error; }
       endSettle();
-      sheet.classList.add("is-dragging");
+      hold(true);
     }
     const raw = drag.start + dy;
     const overdrag = (distance: number) => Math.min(overdragPixels, distance * overdragResistance);
@@ -263,7 +270,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   mobile.addEventListener("change", () => {
     gesture = null;
     endSettle();
-    sheet.classList.remove("is-dragging");
+    hold(false);
     clearOffset();
   }, { signal });
   // Typing in search opens a keyboard over the sheet. The layout
@@ -282,7 +289,14 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   visual?.addEventListener("scroll", followKeyboard, { signal });
   lifetime.onDispose(() => body.style.removeProperty("--sheet-keyboard"));
 
+  // A page whose handle arrives checked (the server opens the sheet for a search or a dataset) rests open from this
+  // first publication: the rest moves there with no snap, committed before the snap duration is given back.
+  if (state === "full") for (const reader of readers) reader.style.setProperty("--sheet-snap-duration", "0ms");
   body.dataset.sheet = state;
+  if (state === "full") {
+    void windowTarget.getComputedStyle(sheet).transform;
+    for (const reader of readers) reader.style.removeProperty("--sheet-snap-duration");
+  }
   return Object.freeze({
     // A choice from search reveals its card over the scene.
     showSelection() {
@@ -302,7 +316,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
       events.abort();
       gesture = null;
       endSettle();
-      sheet.classList.remove("is-dragging");
+      hold(false);
       clearOffset();
       delete body.dataset.sheet;
     },
