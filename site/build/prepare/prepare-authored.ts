@@ -19,6 +19,7 @@ import { prepareObjectContentAssets } from '../content/prepare.ts';
 import { loadGeometryAdapters, presentationHostAdapters } from '@cssearth/bake/objects/host-adapters';
 import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.ts';
+import { worldFile } from './world-files.mts';
 import { attachSurfaceFeatures, longitudeDistanceDeg, measureAtlasLeftEdge, writeFeatureContent } from '@cssearth/bake/objects/surface-features';
 import { loadNativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';
 
@@ -186,7 +187,11 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const projectRoot = process.cwd(), stageRoot = resolve(projectRoot, '.local/object-preparation');
     await mkdir(stageRoot, { recursive: true });
     // Publication refuses files the inventory does not list; say so before the run, not after it.
-    const { unownedPublicFiles } = await import('@cssearth/bake/delivery');
+    const { unownedPreparedFiles, unownedPublicFiles } = await import('@cssearth/bake/delivery');
+    // The pins after this run inventory everything under prepared/, so a leftover there would be published. The world's own files are
+    // the world step's: it writes and pins them (pin-world-files.mts).
+    const leftovers = await unownedPreparedFiles(id, objectDirectory, outputDirectory, worldFile);
+    if (leftovers.length) throw new Error(`${id}: ${relative(projectRoot, outputDirectory)} holds ${leftovers.length} file(s) inventory.json does not list (${leftovers.slice(0, 5).join(', ')}${leftovers.length > 5 ? ', ...' : ''}): leftovers of an earlier preparation, which this run would publish. Delete them and run again.`);
     const strays = await unownedPublicFiles(id, objectDirectory, publicDirectory);
     if (strays.length) throw new Error(`${id}: ${relative(projectRoot, publicDirectory)} holds ${strays.length} file(s) inventory.json does not list (${strays.slice(0, 5).join(', ')}${strays.length > 5 ? ', ...' : ''}); publication would refuse them. Move them out of that directory and run again.`);
     const stage = await mkdtemp(resolve(stageRoot, `${id}-`));

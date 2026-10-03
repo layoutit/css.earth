@@ -10,9 +10,9 @@
 import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { inventoryPreparedSubset, readInventory } from '@cssearth/objects/node';
+import { worldFile } from './world-files.mts';
 
 const objects = resolve(import.meta.dirname, '../../../src/objects');
-const worldFile = (name: string) => ['members.json', 'places.json', 'plain-stars.bin', 'plain-stars-far.bin', 'world.json', 'world-index.json'].includes(name) || name.startsWith('views/') || name.startsWith('orbits/');
 let changed = 0, held = 0;
 for (const entry of await readdir(objects, { withFileTypes: true })) {
   if (!entry.isDirectory()) continue;

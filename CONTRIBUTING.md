@@ -61,6 +61,9 @@ inventory; R2 holds the bytes.
    `pnpm prepare:volume src/objects/<id>` for a volume field. From a clean
    checkout, restore that object's sources with
    `node packages/bake/cli/restore-source-inputs.mts --object=<id>` first.
+   An older checkout can hold files a later change moved or stopped writing.
+   The bake names any under `prepared/` or `public/scenes/<id>/` that the
+   inventory does not list and stops; delete them and run again.
 2. Publish the bytes: `node packages/bake/cli/publish-runtime-assets.mts --object=<id>`.
    Safe to repeat — keys are content-addressed, so it uploads only what is
    missing.
