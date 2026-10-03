@@ -112,7 +112,26 @@
       1,
       1,
       1
-    ]
+    ],
+    "bulge": {
+      "source": "salo-2015-s4g-decompositions",
+      "positionAngleDeg": 127.67,
+      "sersicIndex": 0.639,
+      "halfLightRadiusKpc": 0.7064,
+      "surfaceBrightnessAtHalfLight": 18.58,
+      "skyEllipticity": 0.205,
+      "disc": {
+        "centralSurfaceBrightness": 19.942,
+        "scaleLengthKpc": 4.5085,
+        "skyEllipticity": 0.177,
+        "positionAngleDeg": 158.22
+      },
+      "extentKpc": {
+        "radius": 2.33,
+        "height": 1.55,
+        "fadeFrom": 1.17
+      }
+    }
   },
   "bake": {
     "maxFacePixels": 1024,
@@ -134,7 +153,10 @@
       "source": "rc3-1991",
       "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives NGC 4321 a total (B-V)T of 0.70 as observed; red and blue are scaled in linear light so the galaxy's mean color matches the engine's catalogue color for that index, the function that colors the star dots."
     },
-    "flat": true
+    "flat": true,
+    "bulgeSlices": 40,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 24
   },
   "provenance": {
     "path": "provenance.json"

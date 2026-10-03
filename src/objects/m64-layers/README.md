@@ -1,6 +1,6 @@
 # Black Eye Galaxy
 
-A survey image of the Black Eye Galaxy (NGC 4826), cleaned of the Milky Way stars in front of it and color-tied to its measured integrated color, lies flat on its measured disc. Image brightness does not measure per-pixel distance.
+A survey image of the Black Eye Galaxy (NGC 4826), cleaned of the Milky Way stars in front of it and color-tied to its measured integrated color, lies flat on its measured disc, with its bulge standing through it as a small volume. Image brightness does not measure per-pixel distance.
 
 ## Sources
 
@@ -12,18 +12,23 @@ A survey image of the Black Eye Galaxy (NGC 4826), cleaned of the Milky Way star
 | [Gaia DR3](https://doi.org/10.1051/0004-6361/202243940) with [Ren et al. (2021)](https://doi.org/10.3847/1538-4357/abcda5) | The 274 Gaia DR3 sources within 0.2108° of the centre that Ren et al.'s criterion marks as Milky Way stars (`source/gaia-dr3-foreground.csv`, restored by the query in the manifest). |
 | [RC3](../../sources/rc3-1991.json) | NGC 4826's total B-V, 0.84 ± 0.01 as observed. |
 | Tully et al. (2023) | [Record](../../sources/cosmicflows-4.json). Distance: 4.36 Mpc (4.30 to 4.42). |
+| [Salo et al. (2015)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4) | [Record](../../sources/salo-2015-s4g-decompositions.json). S4G's 3.6 µm fit of NGC4826 (table 7, model `_bdd`): a Sérsic bulge (28.0% of the light, magnitude 9.229, half-light radius 28.96″ = 0.61 kpc, n = 4.164, axis ratio 0.699, PA 102.38°) and an exponential disc (67.9% of the light, scale length 56.23″ = 1.19 kpc, axis ratio 0.554, PA 115.88°, central surface brightness 19.018) and an exponential disc (4.2% of the light, scale length 17.38″ = 0.37 kpc, axis ratio 0.554, PA 115.88°, central surface brightness 19.486). |
 
 ## The image
 
 - **Registration:** the cutout's registration is its request: a tangent projection centred on the galaxy, north up.
 - **Foreground stars:** the bake removes the Gaia foreground stars where they show and leaves those on extended light.
 - **Color:** tied to RC3's B-V of 0.84 in linear light.
+- **Bulge:** S4G's fit splits the light at each point between bulge and disc. The bulge's share leaves the flat picture and fills an oblate spheroid through the disc, with intrinsic axis ratio 0.55 (the one that projects to 0.699 at 59.1°), following the fit's deprojected Sérsic density, so the view from the Sun is unchanged. The spheroid ends at 3.3 half-light radii on the sky (2.02 kpc); its share fades to nothing from half that radius, and it reaches two thirds of that radius either side of the disc. Those three are M81's proportions, presentation choices.
 - **Disc:** inclination 59.1°, line of nodes 293.6°, drawn as one flat image on the midplane. The support radius, 8.007 kpc, is 1.2 times the D25 radius (5.3′), a presentation choice that keeps the faint light outside that isophote.
 - **Near side:** the source gives the tilt, not which edge is nearer. The disc is drawn with the edge at position angle 24° nearer: an assumption, not a measurement.
 - **Sky:** the image's sky, (7, 7, 5) of 255 (each channel's median over the frame's outer ring), is subtracted as the background floor (7 of 255).
 
 ## Known problems
 
+- A faint ring shows around the centre, where the bulge's share fades out; the photograph has none.
+- The bulge's depth is modelled from the fit, not measured: the picture's light along our sight lines, spread through the fitted spheroid.
+- Where the survey image is saturated at the centre, the fit's own light stands in, so the bulge's core is plainer than the photograph.
 - Which edge of the disc is nearer is assumed.
 - The survey image is shallow: faint outer light is lost, and the brightest part of the centre may be saturated.
 - Fainter and uncatalogued foreground stars remain.

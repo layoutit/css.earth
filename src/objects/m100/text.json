@@ -29,7 +29,7 @@
     ]
   },
   "introduction": {
-    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, laid flat on its measured disc.",
+    "text": "Its picture is the Sloan Digital Sky Survey's, with foreground stars removed, laid flat on its measured disc; its bulge stands through it, from a published fit.",
     "sources": [
       {
         "catalogueId": "sdss-dr9-color-hips",
@@ -37,6 +37,13 @@
         "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
         "checked": "2026-10-02",
         "locator": "hips2fits cutout, 9.78 arcmin wide"
+      },
+      {
+        "catalogueId": "salo-2015-s4g-decompositions",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
+        "label": "Salo et al. (2015), ApJS 219, 4: S4G Pipeline 4 decompositions, table 7",
+        "checked": "2026-10-03",
+        "locator": "NGC4321, model _bd: bulge 9.8% of the light, Re 9.58 arcsec, n 0.639"
       },
       {
         "catalogueId": "wikipedia-messier-100",
@@ -52,7 +59,7 @@
     "optical": {
       "title": "M100 in visible light",
       "detail": "3000 × 3000 px",
-      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "summary": "Flat picture on the measured disc; the bulge of a published fit stands through it. Depth is modelled.",
       "sources": [
         {
           "catalogueId": "sdss-dr9-color-hips",

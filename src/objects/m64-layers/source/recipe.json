@@ -112,7 +112,32 @@
       1,
       1,
       1
-    ]
+    ],
+    "bulge": {
+      "source": "salo-2015-s4g-decompositions",
+      "positionAngleDeg": 102.38,
+      "sersicIndex": 4.164,
+      "halfLightRadiusKpc": 0.6123,
+      "surfaceBrightnessAtHalfLight": 19.559,
+      "skyEllipticity": 0.301,
+      "disc": {
+        "centralSurfaceBrightness": 19.018,
+        "scaleLengthKpc": 1.1889,
+        "skyEllipticity": 0.446,
+        "positionAngleDeg": 115.88
+      },
+      "secondDisc": {
+        "centralSurfaceBrightness": 19.486,
+        "scaleLengthKpc": 0.3675,
+        "skyEllipticity": 0.446,
+        "positionAngleDeg": 115.88
+      },
+      "extentKpc": {
+        "radius": 2.02,
+        "height": 1.35,
+        "fadeFrom": 1.01
+      }
+    }
   },
   "bake": {
     "maxFacePixels": 1024,
@@ -134,7 +159,10 @@
       "source": "rc3-1991",
       "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives NGC 4826 a total (B-V)T of 0.84 as observed; red and blue are scaled in linear light so the galaxy's mean color matches the engine's catalogue color for that index, the function that colors the star dots."
     },
-    "flat": true
+    "flat": true,
+    "bulgeSlices": 40,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 24
   },
   "provenance": {
     "path": "provenance.json"

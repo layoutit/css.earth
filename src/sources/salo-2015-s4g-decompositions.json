@@ -35,6 +35,11 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/219/4/ReadMe",
       "checkedOn": "2026-10-01",
       "locator": "table7: NGC2903 (model _bdbarf): Sersic component 7.1% of the light, Re 7.29 arcsec, n 0.496, q 0.523; exponential disc 90.1%, q 0.487, PA 19.57, hr 54.89 arcsec; Ferrers bar 2.7%. NGC5457 (model _bd): Sersic bulge 5.0%, Re 55.3 arcsec, n 3.831, q 0.59, PA 83.25; exponential disc 95.0%, q 0.929, PA 37.69, hr 127.3 arcsec. Query: SELECT * FROM \"J/ApJS/219/4/table7\" WHERE Name IN ('NGC2903','NGC5457')"
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/219/4/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table7, the Messier discs given a bulge: NGC4826 (model _bdd): a Sérsic bulge (28.0% of the light, magnitude 9.229, half-light radius 28.96″ = 0.61 kpc, n = 4.164, axis ratio 0.699, PA 102.38°) and an exponential disc (67.9% of the light, scale length 56.23″ = 1.19 kpc, axis ratio 0.554, PA 115.88°, central surface brightness 19.018) and an exponential disc (4.2% of the light, scale length 17.38″ = 0.37 kpc, axis ratio 0.554, PA 115.88°, central surface brightness 19.486) NGC4501 (model _bd): a Sérsic bulge (5.9% of the light, magnitude 11.807, half-light radius 5.24″ = 0.49 kpc, n = 2.081, axis ratio 0.674, PA 136.87°) and an exponential disc (94.1% of the light, scale length 39.66″ = 3.74 kpc, axis ratio 0.506, PA 142.56°, central surface brightness 18.781) NGC4736 (model _bdd): a Sérsic bulge (42.0% of the light, magnitude 8.378, half-light radius 19.1″ = 0.40 kpc, n = 1.814, axis ratio 0.963, PA 7.53°) and an exponential disc (36.9% of the light, scale length 50.47″ = 1.06 kpc, axis ratio 0.732, PA 96.08°, central surface brightness 19.035) and an exponential disc (21.1% of the light, scale length 253.87″ = 5.34 kpc, axis ratio 0.829, PA 123.51°, central surface brightness 23.007) NGC4321 (model _bd): a Sérsic bulge (9.8% of the light, magnitude 11.424, half-light radius 9.58″ = 0.71 kpc, n = 0.639, axis ratio 0.795, PA 127.67°) and an exponential disc (90.2% of the light, scale length 61.14″ = 4.51 kpc, axis ratio 0.823, PA 158.22°, central surface brightness 19.942) Query: SELECT * FROM \"J/ApJS/219/4/table7\" WHERE Name IN ('NGC4826','NGC4501','NGC4736','NGC4321')"
     }
   ],
   "creators": [
