@@ -34,10 +34,11 @@
   {
     "schema": "cssearth-authoritative-sources@3",
     "owners": [
+      ".github/scripts",
       "packages/bake",
       "packages/spice"
     ],
-    "reason": "Raw spelling in packages/bake, packages/spice duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
+    "reason": "Raw spelling in .github/scripts, packages/bake, packages/spice duplicates a definition already in packages/objects/src; the constant is not exported yet. Debt ledger entry: replace the literals with the objects export and delete this entry."
   },
   {
     "schema": "cssearth-banded-ellipsoid@1",
