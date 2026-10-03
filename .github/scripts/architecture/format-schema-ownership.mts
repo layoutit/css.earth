@@ -83,8 +83,8 @@ export function readSchemaExceptions(): SchemaException[] {
   });
 }
 
-export function checkFormatSchemaOwnership(root: string, files: readonly string[]): string[] {
+export function checkFormatSchemaOwnership(root: string, files: readonly string[], exceptions: readonly SchemaException[] = readSchemaExceptions()): string[] {
   const sources = new Map(files.filter(path => isSchemaSource(path) && existsSync(resolve(root, path)))
     .map(path => [path, readFileSync(resolve(root, path), 'utf8')] as const));
-  return schemaOwnershipFindings(sources, readSchemaExceptions());
+  return schemaOwnershipFindings(sources, exceptions);
 }

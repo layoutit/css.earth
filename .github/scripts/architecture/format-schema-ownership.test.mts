@@ -23,20 +23,20 @@ function fixture(paths: readonly string[], run: (root: string) => void): void {
 }
 
 test('two owners spelling one id fail; one owner alone passes', () => {
-  fixture([bake, site], root => assert.match(checkFormatSchemaOwnership(root, [bake, site])[0]!, /shared schema/u));
-  fixture([bake, 'packages/bake/cli/probe.mts'], root => assert.deepEqual(checkFormatSchemaOwnership(root, [bake, 'packages/bake/cli/probe.mts']), []));
+  fixture([bake, site], root => assert.match(checkFormatSchemaOwnership(root, [bake, site], [])[0]!, /shared schema/u));
+  fixture([bake, 'packages/bake/cli/probe.mts'], root => assert.deepEqual(checkFormatSchemaOwnership(root, [bake, 'packages/bake/cli/probe.mts'], []), []));
 });
 
 test('objects definition plus raw duplicate fails; objects definition alone passes', () => {
   const objects = 'packages/objects/src/probe.ts';
-  fixture([objects, bake], root => assert.match(checkFormatSchemaOwnership(root, [objects, bake])[0]!, /duplicates objects definition/u));
-  fixture([objects], root => assert.deepEqual(checkFormatSchemaOwnership(root, [objects]), []));
+  fixture([objects, bake], root => assert.match(checkFormatSchemaOwnership(root, [objects, bake], [])[0]!, /duplicates objects definition/u));
+  fixture([objects], root => assert.deepEqual(checkFormatSchemaOwnership(root, [objects], []), []));
 });
 
 test('test, fixture, data, prepared and compiled files do not add owners', () => {
   for (const ignored of ['site/probe.test.mts', 'site/test/probe.ts', 'site/tests/probe.ts', 'site/fixtures/probe.ts',
     'site/data/probe.ts', 'site/prepared/probe.ts', 'site/dist/probe.ts', 'site/probe.json', 'site/probe.md'])
-    fixture([bake, ignored], root => assert.deepEqual(checkFormatSchemaOwnership(root, [bake, ignored]), [], ignored));
+    fixture([bake, ignored], root => assert.deepEqual(checkFormatSchemaOwnership(root, [bake, ignored], []), [], ignored));
 });
 
 test('exception honoured; stale, changed owner set, empty reason and duplicate fail', () => {
