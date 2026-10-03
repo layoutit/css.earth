@@ -35,7 +35,6 @@ test('records and catalogue rows fail closed', () => {
   assert.throws(() => readStellarTemperature(`source_id,teff_gspphot,teff_gspphot_lower,teff_gspphot_upper\n${parsed.sourceId},4400,4500,4600\n`, parsed), /inside its bounds/u);
 });
 
-
 test("WASP-43's TESS limb darkening is read from its pinned catalogue row and darkens the limb plate by the quadratic law", async () => {
   const science = JSON.parse((await read('preparation/raster.json')).toString('utf8')).surfaces[0].science;
   const { limbDarkening, color } = await loadStellarPhotometricColor(read, science, 'photometry/stellar-color.json');
