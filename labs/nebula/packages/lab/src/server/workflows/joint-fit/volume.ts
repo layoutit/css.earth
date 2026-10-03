@@ -1,3 +1,4 @@
+import { JOINT_FIT_VOLUME_SCHEMA } from '@cssearth/objects';
 /** Offline transport from a bounded analytic emission sampler to one neutral PolyCSS volume. */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative, resolve } from 'node:path';
@@ -79,7 +80,7 @@ export async function bakeJointVolume(options: BakeJointVolumeOptions): Promise<
   await writeFile(containedPath(root, path), bytes);
   cancellation(signal);
   progress?.({ phase: 'compile', completed: 1, total: 1, message: 'Prepared retained joint-fit scene' });
-  return { schema: 'cssearth-joint-fit-volume@1', id, volume: { path }, frame,
+  return { schema: JOINT_FIT_VOLUME_SCHEMA, id, volume: { path }, frame,
     boundsArcsec: { min: [...min] as Vector3, max: [...max] as Vector3 },
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin,
       earthView: 'observer-at-negative-z-looking-away' },

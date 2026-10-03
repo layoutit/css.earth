@@ -10,7 +10,7 @@ import { decomposeStructures, type WaveletSettings } from '@cssearth/nebula-reco
 import { createCoherentVolumeSampler, type CoarseStellarDensityPrior } from '@cssearth/nebula-reconstruction/methods/density-prior/coherent-volume';
 import { validateCoherentColumns, validateCoherentAxisSampling } from '@cssearth/nebula-reconstruction/methods/density-prior/coherent-validation';
 import { bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/bake/volume/node';
-import { DENSITY_VOLUME_FORMAT, type VolumeSlices } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, type VolumeSlices } from '@cssearth/objects';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 
 type Vec3 = [number, number, number];
@@ -111,7 +111,7 @@ for (const variant of selected) {
     await json(resolve(variantCache, 'inputs.json'), inputs);
   }
   const data = compileCssVolume({ id: variant.id, frame, slices, recipe: { anchors: [] } });
-  const prepared = { schema: 'cssearth-prepared-object@1', id: variant.id, type: 'density-volume',
+  const prepared = { schema: PREPARED_OBJECT_SCHEMA, id: variant.id, type: 'density-volume',
     format: DENSITY_VOLUME_FORMAT, data };
   const bytes = Buffer.from(`${JSON.stringify(prepared)}\n`);
   const sourceDirectory = resolve(variant.directory, 'source');
@@ -120,7 +120,7 @@ for (const variant of selected) {
   await json(resolve(sourceDirectory, 'provenance.json'), provenance);
   await json(resolve(sourceDirectory, 'validation.json'), validation);
   await writeFile(resolve(variant.directory, 'prepared/volume.json'), bytes);
-  await json(resolve(variant.directory, 'object.json'), { schema: 'cssearth-object@2', id: variant.id, type: 'density-volume',
+  await json(resolve(variant.directory, 'object.json'), { schema: OBJECT_SCHEMA, id: variant.id, type: 'density-volume',
     properties: { volume: frame, preparation: { source: 'source/experiment.json' } },
     prepared: { format: prepared.format, url: 'prepared/volume.json' } });
   console.log(`COHERENT_PREPARED ${variant.id}: ${data.resources.length} images, ` +

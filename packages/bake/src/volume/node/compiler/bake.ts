@@ -1,3 +1,4 @@
+import { COMPILER_BAKE_SCHEMA } from '@cssearth/objects';
 /** Offline transport for one fitted neutral field and source-dependent RGB datasets. */
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative } from 'node:path';
@@ -228,7 +229,7 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
   }
   options.progress?.({ phase: 'compile', completed: banks.length, total: banks.length, message: 'Prepared final cloud and materials' });
   const starSprites = await backend.prepareStarSprites(root, outputDirectory, stars);
-  return readCompilerBakeResult({ schema: 'cssearth-compiler-bake@2', id: options.id, fieldIdentity: options.fieldIdentity, frame,
+  return readCompilerBakeResult({ schema: COMPILER_BAKE_SCHEMA, id: options.id, fieldIdentity: options.fieldIdentity, frame,
     boundsArcsec: structuredClone(boundsArcsec), skyBoundsArcsec: structuredClone(skyBoundsArcsec),
     spanArcsec: Math.max(skyBoundsArcsec.max[0] - skyBoundsArcsec.min[0], skyBoundsArcsec.max[1] - skyBoundsArcsec.min[1]),
     sourceImage: { width: 512, height: 512 }, coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin,

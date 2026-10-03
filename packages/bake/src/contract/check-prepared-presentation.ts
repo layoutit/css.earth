@@ -1,4 +1,4 @@
-import { OBJECT_RUNTIME_SCHEMA, PREPARED_CSS_OBJECT_FORMAT, requireObjectControls, type ObjectEntry } from '@cssearth/objects';
+import { AUTHORED_OBJECT_SCHEMA, OBJECT_RUNTIME_SCHEMA, PREPARED_CSS_OBJECT_FORMAT, requireObjectControls, type ObjectEntry } from '@cssearth/objects';
 
 import { isArray, hasErrorCode, isRecord, requireRecord, requireArray } from '@cssearth/core';
 import { readFile } from "node:fs/promises";
@@ -125,7 +125,7 @@ export function requirePreparedControlSource(source: string): string[] {
 async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {root: string; objectId: string; descriptor: Record<string, unknown>; readText: RuntimeSourceReader}) {
   const recipe = requireRecord(requireRecord(descriptor.properties).recipe, 'Authored recipe');
   const reference = requireRecord(descriptor.prepared, 'Prepared reference');
-  if (!recipe || typeof recipe !== 'object' || recipe.schema !== 'cssearth-authored-object@2' || !isArray(recipe.sources) ||
+  if (!recipe || typeof recipe !== 'object' || recipe.schema !== AUTHORED_OBJECT_SCHEMA || !isArray(recipe.sources) ||
       !reference || reference.format !== PREPARED_CSS_OBJECT_FORMAT || typeof reference.url !== 'string') {
     throw new TypeError('Authored descriptor identity or source references are invalid.');
   }
@@ -171,7 +171,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
       let descriptor = null;
       try { descriptor = requireRecord(JSON.parse(await readText(descriptorPath)), 'Object descriptor'); }
       catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
-      if (descriptor && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) && descriptor.properties.recipe.schema === 'cssearth-authored-object@2') {
+      if (descriptor && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) && descriptor.properties.recipe.schema === AUTHORED_OBJECT_SCHEMA) {
         const prepared = await readAuthoredRuntime({ root, objectId: object.id, descriptor, readText });
         const definition = prepared.runtime;
         requireObjectRuntimeDefinition(definition, { objectId: object.id });

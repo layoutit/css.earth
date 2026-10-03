@@ -1,3 +1,4 @@
+import { PREPARED_CATALOGUE_STARS_SCHEMA } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 /**
  * Offline preparation of the published Bonanos et al. (2009) massive LMC star sample inside the current
@@ -80,7 +81,7 @@ export async function prepareLmcFiniteStars(root = process.cwd(), recipePath?: s
     throw new Error(`Unexpected catalogue sample: ${JSON.stringify({ ...selection, stars: selection.stars.length })}`);
   const finiteModel = await finiteModelStarProvenance(root, { context, subjectId, command: COMMAND,
     datasetRecipe: { path: finiteDatasetRecipe } });
-  const payload: PreparedLmcStars = { schema: 'cssearth-catalogue-stars@2', id: 'lmc-stars', starIdPrefix: STAR_ID_PREFIX,
+  const payload: PreparedLmcStars = { schema: PREPARED_CATALOGUE_STARS_SCHEMA, id: 'lmc-stars', starIdPrefix: STAR_ID_PREFIX,
     frame: context.frame, magnitudeBand: 'V', stars: selection.stars,
     sourceUrl: 'https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003',
     credit: 'Bonanos et al. (2009), AJ 138, 1003; CDS/VizieR J/AJ/138/1003',

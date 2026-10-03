@@ -1,11 +1,11 @@
 /** The package files of a placed star, shared by the shape-only scaffold and the full generator (generate.mts); the command is
  * packages/telescope-cli/src/new-object/new-object-cli.mts. */
-import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects/node';
+
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+import { AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
 import { readStarTemperature, temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { sphereProjection } from '@cssearth/bake/objects/scene';
@@ -144,9 +144,9 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   const orientation = skyPlaneOrientation(astrometry, 0), offLimbSize = 600;
   const files = new Map<string, string>(), put = (path: string, value: unknown) => files.set(path, typeof value === 'string' ? value : `${JSON.stringify(value, null, 2)}\n`);
   const o = `src/objects/${id}`;
-  put(`${o}/object.json`, { schema: 'cssearth-object@2', id, type: 'layered-body', properties: {
+  put(`${o}/object.json`, { schema: OBJECT_SCHEMA, id, type: 'layered-body', properties: {
     preparation: { schema: 'cssearth-object-preparation@1', label: name, steps: ['verify-sources', 'assets', 'panel-content', 'datasets', 'starfield', 'scene', 'controls', 'presentation', 'runtime-assets'] },
-    recipe: { schema: 'cssearth-authored-object@2', surfaces: [{ id: 'body', source: 'geometry', projection: 'equirectangular', datasets: [{ id: 'shape', source: 'content', material: 'emission' }] }],
+    recipe: { schema: AUTHORED_OBJECT_SCHEMA, surfaces: [{ id: 'body', source: 'geometry', projection: 'equirectangular', datasets: [{ id: 'shape', source: 'content', material: 'emission' }] }],
       shape: { kind: 'sphere', radiusKm }, materials: [{ id: 'emission', source: 'raster', model: 'emissive' }],
       sources: ['raster', 'geometry', 'presentation'].map(source => ({ id: source, path: `source/preparation/${source}.json` })).concat([
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
@@ -245,4 +245,3 @@ export async function scaffoldStar(spec: StarScaffold, { SOLAR_GEOMETRY_EPOCH_JD
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
   return [...files.keys(), `src/objects/${spec.id}/source/presentation/context.png`];
 }
-

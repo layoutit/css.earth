@@ -7,7 +7,7 @@ import { readInventory, updateInventory } from '@cssearth/objects/node';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { spatialPublicationId } from '@cssearth/catalog';
-import { parsePreparedGalaxyCatalog } from '@cssearth/objects';
+import { OBJECT_SCHEMA, parsePreparedGalaxyCatalog } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
 import { sourceBytes } from '../volume/node/index.ts';
 import { sha256 } from '@cssearth/core/node';
@@ -73,7 +73,7 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     const existing = await readFile(resolve(objectDirectory, 'object.json'), 'utf8').then(text => record(JSON.parse(text), 'object.json'), (error: unknown) => {
       if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error; });
     const authored = existing?.properties === undefined ? {} : record(existing.properties, 'object.json properties');
-    const descriptor = { schema: 'cssearth-object@2', id: basename(objectDirectory), type: 'galaxy-catalog',
+    const descriptor = { schema: OBJECT_SCHEMA, id: basename(objectDirectory), type: 'galaxy-catalog',
       properties: { ...authored, preparation: { source: 'source/catalogue.json' } },
       prepared: { format: data.schema, url: 'prepared/catalogue.json' } };
     await writeFile(resolve(objectDirectory, 'object.json'), JSON.stringify(descriptor, null, 2) + '\n');

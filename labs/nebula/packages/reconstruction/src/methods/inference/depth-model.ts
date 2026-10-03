@@ -1,3 +1,4 @@
+import { NEBULA_PHYSICAL_EVIDENCE_SCHEMA } from '@cssearth/objects';
 import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 import {jointPath,jointRecord} from '../joint/model.ts';
 
@@ -51,7 +52,7 @@ export function readDepthRecipe(v: unknown, allowedPath: (path: string) => boole
     detailThicknessRatio: v.detailThicknessRatio, minimumThicknessArcsec: v.minimumThicknessArcsec, interpretation: v.interpretation };
 }
 export function verifyDepthEvidence(recipe: DepthRecipe, v: unknown): string[] {
-  if (!jointRecord(v) || v.schema !== 'cssearth-nebula-physical-evidence@1' || v.subjectId !== recipe.id || !Array.isArray(v.sources) || !Array.isArray(v.evidence) || !Array.isArray(v.methods))
+  if (!jointRecord(v) || v.schema !== NEBULA_PHYSICAL_EVIDENCE_SCHEMA || v.subjectId !== recipe.id || !Array.isArray(v.sources) || !Array.isArray(v.evidence) || !Array.isArray(v.methods))
     throw new TypeError('Depth model requires its object-owned physical evidence ledger.');
   const sources = new Set<string>(), evidence = new Map<string, 'observed' | 'published-model' | 'authored'>(), methods = new Set<string>();
   for (const source of v.sources) {

@@ -14,8 +14,8 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import sharp from 'sharp';
-import { createSourceManifest, SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects/node';
-import { NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+import { createSourceManifest } from '@cssearth/objects/node';
+import { SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
 import { ENTRY_EVIDENCE } from '@cssearth/bake/sources';
 import { shapeMaterialRaster, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/cli/lib/horizons.mts';

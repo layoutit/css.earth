@@ -1,4 +1,4 @@
-import { PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA } from '@cssearth/objects';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
@@ -24,7 +24,7 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
   // (`inventoryPreparedAssets` in packages/objects/src/node/runtime-asset-closure.ts); a scratch bake records nothing.
   if (outputDirectory === resolve(objectDirectory, 'prepared') && !options.inventory) throw new TypeError('A bake into the object\'s prepared directory needs the host inventory.');
   const descriptorPath = resolve(objectDirectory,'object.json'), descriptor = record(JSON.parse(await readFile(descriptorPath,'utf8')) as unknown,'Point-field descriptor');
-  if (descriptor.schema !== 'cssearth-object@2' || descriptor.type !== 'point-field') throw new TypeError('Unsupported point-field descriptor.');
+  if (descriptor.schema !== OBJECT_SCHEMA || descriptor.type !== 'point-field') throw new TypeError('Unsupported point-field descriptor.');
   const id = text(descriptor.id,'Point-field id'), properties = record(descriptor.properties,'Point-field properties'), preparation = record(properties.preparation,'Point-field preparation');
   const sourcePath = text(preparation.source,'Point-field source');
   const recipe = parseStarsRecipe(JSON.parse((await readFile(containedPath(objectDirectory,sourcePath))).toString('utf8')) as unknown);
@@ -53,7 +53,7 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
     resources:[{path:atlasPath,bytes:atlas.length,width:colors.length*recipe.atlas.tileSize,height:recipe.atlas.tileSize},...diffuse.resources], };
   // The baked provenance is published beside the manifest, not inside it: the page never reads it.
   const provenance = {source:source.provenance,catalogueMetadata:source.catalogueMetadata,reconciliation:source.reconciliation,qualification:'All catalogue rows retained; explicitly cross-identified detailed stars use body astrometry at the navigation epoch, with HYG apparent brightness preserved. Remaining rows retain HYG J2000.0 positions. Internal nodes approximate unresolved luminosity and position; no fixed pixel-error guarantee when the point pool is saturated.'};
-  const envelope = {schema:'cssearth-prepared-object@1',id,type:'point-field',format:PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA,data};
+  const envelope = {schema:PREPARED_OBJECT_SCHEMA,id,type:'point-field',format:PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA,data};
   const bytes = Buffer.from(JSON.stringify(envelope)+'\n'), outputPath = resolve(outputDirectory,'stars.json');
   await writeFile(outputPath,bytes);
   await writeFile(resolve(outputDirectory,'stars-provenance.json'),JSON.stringify({schema:'cssearth-point-field-provenance@1',id,provenance})+'\n');

@@ -154,3 +154,7 @@ projection stay in renderer. Shell facing-level selection remains in renderer.
 
 Shared prepared schema literals are enforced by the hard architecture ownership rule; see
 [prepared format ownership](../../docs/prepared-format-ownership.md) for the computed owner rule, schema/owner exceptions and migration limits.
+
+Schema identifiers are exported from their format owners, including the browser-safe source-manifest identifier.
+Writers and readers import these constants; the pre-build body-reference check and preserved Python authoring
+keep conformance-tested source-manifest spellings in the schema exception ledger.

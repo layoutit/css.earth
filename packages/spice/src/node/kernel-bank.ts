@@ -1,3 +1,4 @@
+import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects';
 /**
  * Shared SPICE kernel banks: one declared set of a mission's kernels under the checkout's
  * `src/spice/<set>/`, used by every body that mission observed. A bank's
@@ -95,7 +96,7 @@ export function kernelBanks({ openManifest, acquireCommand }: KernelBankOptions)
   async function addKernels(set: string, urls: readonly string[], options: { credit?: string; license?: string; catalogue?: string } = {}) {
     const root = kernelBankRoot(set), manifestPath = resolve(root, 'manifest.json');
     const manifest = await readFile(manifestPath, 'utf8').then(text => requireRecord(JSON.parse(text), 'kernel bank manifest'),
-      () => ({ schema: `cssearth-authoritative-sources@3`, inputs: [], generatedIntermediates: [], documents: [] }) as Record<string, unknown>);
+      () => ({ schema: SOURCE_MANIFEST_SCHEMA, inputs: [], generatedIntermediates: [], documents: [] }) as Record<string, unknown>);
     const inputs = requireArray(manifest.inputs, 'kernel bank inputs').map(entry => requireRecord(entry, 'kernel bank input'));
     const first = inputs[0];
     const credit = options.credit ?? (first ? requireString(first.credit, 'credit') : undefined);
