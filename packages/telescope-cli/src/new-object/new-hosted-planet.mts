@@ -14,7 +14,8 @@
  * shared neutral gray, lit by its own star: no color of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node packages/bake/cli/prepare-object.mts <id> */
-import { NEUTRAL_CATALOGUE_COLOR } from '@cssearth/objects';
+import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects/node';
+import { NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -93,7 +94,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       description: spec.description, systemName: spec.system, order, context: { order } },
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1],
       metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
-    prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' } });
+    prepared: { format: PREPARED_CSS_OBJECT_FORMAT, url: 'prepared/object.json' } });
 
   if (glow) put(`src/renderers/css/styles/${id}-surfaces.css`, starStylesheet(id, name, 600, 'Both plates are transparent: no observation is cast.'));
   put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@2', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512,
@@ -177,7 +178,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     sourceBinding: local('Project-authored preparation record; published inputs retain their own identities and hashes.'),
     credit: 'cssEarth and the institutional sources identified in this record', license: 'Project-authored preparation record; referenced observations retain their source terms',
     acquisition: 'checked repository source', redistribution: 'checked authored source with embedded provenance', consumers });
-  put(`${o}/source/manifest.json`, { schema: `cssearth-authoritative-sources@3`, inputs: [
+  put(`${o}/source/manifest.json`, { schema: SOURCE_MANIFEST_SCHEMA, inputs: [
     { id: `${id}-observational-measurements`, path: 'measurements.json', origin: spec.paper, credit: spec.paperCredit,
       license: 'Factual numerical measurements; source attribution retained', acquisition: 'Transcribed published measurements with their sources',
       redistribution: 'Factual parameter transcription only; no paper figures', consumers: ['shape-model'],
