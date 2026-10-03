@@ -45,15 +45,16 @@ missing hosts, duplicate identities and cycles, including self-hosting.
 
 ## Planetary systems
 
-A planetary system is a star and every prepared body whose orbit chain leads
-back to it. The Solar System is the Sun's; WASP-43 and its planet WASP-43b form
-another. [`planetary-system-members.mts`](../site/planetary-system-members.mts)
-reads each system's members from the prepared world context's orbit graph once,
-when `pnpm prepare:world-context` writes `site/prepared-world-presentation.json`;
-[`object-systems.mts`](../site/object-systems.mts) joins that table with the
-registry, so no list names the systems. Every
-member is inside its star's system in the object tree, and the derivation fails
-otherwise. A star without orbiting bodies, such as Betelgeuse, belongs to no
+A planetary system is a star and every prepared body inside its system in the
+object tree, at any depth. The Solar System is the Sun's; WASP-43 and its planet
+WASP-43b form another. Each world row says which object its body is inside: the
+object whose file the row arrives in.
+[`planetary-system-members.mts`](../site/planetary-system-members.mts) reads each
+system's members from that, and
+[`object-systems.mts`](../site/object-systems.mts) joins them with the registry,
+so no list names the systems and nothing walks orbits or bonds to find them. The
+moon systems ([`satellite-systems.mts`](../site/satellite-systems.mts)) and the
+set of bodies a selected star opens are read the same way. A star without orbiting bodies, such as Betelgeuse, belongs to no
 system. A system is named by its star's system name (the TRAPPIST-1 system, the
 Galactic Centre).
 
