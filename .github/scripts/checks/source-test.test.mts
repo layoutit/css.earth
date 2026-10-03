@@ -5,6 +5,7 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { checkoutState, missingSourceReason, restoredSources } from '@cssearth/objects/node/source-test';
+import { readOracleInput } from '@cssearth/core/oracle';
 
 test('restored source paths resolve from the objects package to the repository root', () => {
   assert.equal(restoredSources('saturn', 'manifest.json').skip, false);
@@ -48,4 +49,12 @@ test('the checkout state comes from git: a sparse checkout marks what it leaves 
     assert.equal(checkoutState('kept/a.txt', repository), 'checked-out');
     assert.equal(checkoutState('never/added.fits', repository), 'untracked');
   } finally { rmSync(repository, { recursive: true, force: true }); }
+});
+
+test('an oracle input that is not restored is a skip, whichever layer reports the absence', async () => {
+  // CI runs without restored sources by design: the oracle reader's absence error must stay recognizable as an unrestored source.
+  const error = await readOracleInput({ path: 'src/objects/pallas/source/shape/2_Pallas_mpcd.obj' }).then(() => null, (reason: unknown) => reason);
+  assert.ok(error instanceof Error);
+  assert.notEqual(missingSourceReason(error), null);
+  assert.equal(missingSourceReason(new Error('Oracle source size differs from its record: x')), null, 'a wrong size stays a failure');
 });
