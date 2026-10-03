@@ -44,7 +44,7 @@ Each tile is the object's own page in headless Chromium at 1440 × 900, device p
 - `appearance.colorByBpRp` in [prepare-catalogue-points](../../packages/bake/cli/prepare-catalogue-points.mts): a dot's color from its Gaia BP-RP through the fit of Cardiel et al. (2021), the one the nebula star fields already use.
 - `geometry.unit: "pc"` in the [image-layer recipe](../../packages/bake/src/image-layers/config.ts): a bank in parsecs. A nebula a few parsecs across is smaller than one CSS pixel in kiloparsecs, and its picture was drawn far too large.
 - The `open-cluster` classification beside `globular-cluster`.
-- `geometry.bulge.secondDisc` and `geometry.bulge.bar` in the image-layer recipe: the second exponential disc and the Ferrers bar of an S4G fit count as disc light when the bulge's share is taken. S4G tabulates a disc's central brightness face-on; the recipe takes it as projected on the sky.
+- `geometry.bulge.secondDisc` and `geometry.bulge.bar` in the image-layer recipe: the second exponential disc and the Ferrers bar of an S4G fit count as disc light when the bulge's share is taken. S4G tabulates a disc's central brightness face-on; the recipe takes it as projected on the sky. M81 and NGC 253, whose bulges predate this change, carried the face-on value and are corrected with it ([M81](../../src/objects/m81-layers/README.md#evidence)).
 
 The six volumes use the Nebula Lab route of [M49](../../src/objects/m49-volume/README.md#method) unchanged; their recipes are `labs/nebula/models/m59` to `m89`.
 
