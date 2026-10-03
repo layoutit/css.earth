@@ -1,0 +1,28 @@
+{
+  "id": "m39",
+  "classification": "open-cluster",
+  "order": 5239,
+  "physical": {
+    "name": "M39",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M39 is recorded: it is an extended star cluster, and its package frames it at 20.7 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 322.83050675,
+    "declinationDegrees": 48.34913184,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 295.86999699,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": -5.36202912,
+    "sources": {
+      "position": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Theia_517: RA_ICRS 322.83050675, DE_ICRS 48.34913184, the densest point of its members (epoch 2016.0) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "distance": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Theia_517: dist50, the median of the maximum-likelihood distance, 295.86999699 pc (16th to 84th percentile 296 to 296) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Hunt & Reffert (2023), Table 3, Theia_517: mean Gaia DR3 radial velocity -5.36202912 km/s of 87 members (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)"
+    }
+  }
+}

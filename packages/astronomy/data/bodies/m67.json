@@ -1,0 +1,28 @@
+{
+  "id": "m67",
+  "classification": "open-cluster",
+  "order": 5267,
+  "physical": {
+    "name": "M67",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M67 is recorded: it is an extended star cluster, and its package frames it at 8.7 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 132.84984192,
+    "declinationDegrees": 11.81745461,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 837.26777331,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 33.76749829,
+    "sources": {
+      "position": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2682: RA_ICRS 132.84984192, DE_ICRS 11.81745461, the densest point of its members (epoch 2016.0) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "distance": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2682: dist50, the median of the maximum-likelihood distance, 837.26777331 pc (16th to 84th percentile 837 to 838) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Hunt & Reffert (2023), Table 3, NGC_2682: mean Gaia DR3 radial velocity 33.76749829 km/s of 387 members (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m23",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "M23",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 346991359350732.1
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M23",
+      "systemName": "Milky Way",
+      "classification": "open-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 147150420,
+      "description": "M23 is an open star cluster in the Milky Way, about 713 parsecs away.",
+      "aliases": [
+        "Messier 23",
+        "NGC 6494"
+      ],
+      "order": 5223,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -279002727014230370,
+        -20812300384914210000,
+        -7166535118476769000
+      ],
+      "presentationToReference": [
+        -0.012712353731421362,
+        0,
+        -0.9999191947665608,
+        -0.91740792471698,
+        0.3977771559319137,
+        0.011663356515257328,
+        -0.39774501345597185,
+        -0.9174820620691818,
+        0.00505668391248524
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1119326965647522.9,
+      "bodyRadiusM": 346991359350732100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

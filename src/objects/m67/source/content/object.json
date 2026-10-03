@@ -1,0 +1,131 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m67",
+  "displayName": "M67",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "837 pc (837 to 838)",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2682: dist50, the median of the maximum-likelihood distance, 837.26777331 pc (16th to 84th percentile 837 to 838)",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 132.850°, Dec 11.817°",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2682: RA_ICRS 132.84984192, DE_ICRS 11.81745461, the densest point of its members (epoch 2016.0)",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.7 billion years (1.2 billion to 2.6 billion)",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2682: logAge50 9.23 (16th to 84th percentile 9.06 to 9.42), log of the age in years",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "half-members",
+        "label": "Half its members within",
+        "value": "2.5 pc of the centre",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2682: r50pc 2.48, the radius holding half its members inside the tidal radius",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "members",
+        "label": "Member stars drawn",
+        "value": "806 Gaia DR3 stars",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2682: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "members",
+    "controls": [
+      {
+        "id": "members",
+        "label": "Gaia DR3 members",
+        "thumbnail": "m67-dataset-members.webp",
+        "volume": {
+          "objectId": "m67-members",
+          "datasetId": "members",
+          "surface": "members"
+        },
+        "source": {
+          "id": "m67-members",
+          "path": "../../m67-members/source/manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2682: dist50, the median of the maximum-likelihood distance, 837.26777331 pc (16th to 84th percentile 837 to 838)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2682: RA_ICRS 132.84984192, DE_ICRS 11.81745461, the densest point of its members (epoch 2016.0)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2682: logAge50 9.23 (16th to 84th percentile 9.06 to 9.42), log of the age in years",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2682: r50pc 2.48, the radius holding half its members inside the tidal radius",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2682: members inside the tidal radius (inrt) with a Gaia DR3 color",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+      "credit": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2682: dist50, the median of the maximum-likelihood distance, 837.26777331 pc (16th to 84th percentile 837 to 838)"
+    }
+  }
+}

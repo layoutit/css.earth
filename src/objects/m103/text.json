@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m103",
+  "card": {
+    "text": "M103 is an open star cluster in the Milky Way, about 2,527 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_581: dist50, the median of the maximum-likelihood distance, 2526.62384077 pc (16th to 84th percentile 2516 to 2537)",
+        "checked": "2026-10-02",
+        "locator": "NGC_581: dist50 2526.6 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-103",
+        "url": "https://en.wikipedia.org/wiki/Messier_103",
+        "label": "Wikipedia, \"Messier 103\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101454",
+        "quote": "Messier 103 is a small open cluster of many faint stars in Cassiopeia."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M103 is drawn as 209 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_581: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_581: 209 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-103",
+        "url": "https://en.wikipedia.org/wiki/Messier_103",
+        "label": "Wikipedia, \"Messier 103\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101454",
+        "quote": "It was discovered on 27 March 1781 by Pierre Méchain, but later added as Charles Messier's last deep-sky object in his catalogue."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "209 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_581: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_581, inrt = True"
+        }
+      ]
+    }
+  }
+}

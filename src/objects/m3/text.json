@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m3",
+  "card": {
+    "text": "M3 is a globular star cluster in the Milky Way, about 10,180 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_5272: Rsun 10.18 ± 0.08 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_5272: Rsun 10.18 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-3",
+        "url": "https://en.wikipedia.org/wiki/Messier_3",
+        "label": "Wikipedia, \"Messier 3\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100799",
+        "quote": "Messier 3 is a globular cluster located 33.9 thousand light years from Earth in the northern constellation of Canes Venatici."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M3 is drawn as 3,365 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_5272: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_5272: 3,365 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-3",
+        "url": "https://en.wikipedia.org/wiki/Messier_3",
+        "label": "Wikipedia, \"Messier 3\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100799",
+        "quote": "It is one of the largest and brightest globular clusters discovered with around 500,000 stars."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "3,365 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_5272: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_5272, inrt = True"
+        }
+      ]
+    }
+  }
+}

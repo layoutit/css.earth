@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m11",
+  "card": {
+    "text": "The Wild Duck Cluster is an open star cluster in the Milky Way, about 2,233 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_6705: dist50, the median of the maximum-likelihood distance, 2233.06624872 pc (16th to 84th percentile 2228 to 2238)",
+        "checked": "2026-10-02",
+        "locator": "NGC_6705: dist50 2233.1 pc"
+      },
+      {
+        "catalogueId": "wikipedia-wild-duck-cluster",
+        "url": "https://en.wikipedia.org/wiki/Wild_Duck_Cluster",
+        "label": "Wikipedia, \"Wild Duck Cluster\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1375774984",
+        "quote": "The Wild Duck Cluster is an open cluster of stars in the constellation Scutum."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Wild Duck Cluster is drawn as 1,157 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6705: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6705: 1,157 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-wild-duck-cluster",
+        "url": "https://en.wikipedia.org/wiki/Wild_Duck_Cluster",
+        "label": "Wikipedia, \"Wild Duck Cluster\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1375774984",
+        "quote": "It was discovered by Gottfried Kirch in 1681."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "1,157 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6705: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6705, inrt = True"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m79",
+  "card": {
+    "text": "M79 is a globular star cluster in the Milky Way, about 13,080 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_1904: Rsun 13.08 ± 0.18 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_1904: Rsun 13.08 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-79",
+        "url": "https://en.wikipedia.org/wiki/Messier_79",
+        "label": "Wikipedia, \"Messier 79\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101328",
+        "quote": "Messier 79 is a globular cluster in the southern constellation Lepus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M79 is drawn as 763 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_1904: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_1904: 763 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-79",
+        "url": "https://en.wikipedia.org/wiki/Messier_79",
+        "label": "Wikipedia, \"Messier 79\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101328",
+        "quote": "It was discovered by Pierre Méchain in 1780 and is about 42,000 light-years away from Earth and 60,000 light years from the Galactic Center."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "763 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_1904: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_1904, inrt = True"
+        }
+      ]
+    }
+  }
+}

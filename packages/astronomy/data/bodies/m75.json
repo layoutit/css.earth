@@ -1,0 +1,28 @@
+{
+  "id": "m75",
+  "classification": "globular-cluster",
+  "order": 5275,
+  "physical": {
+    "name": "M75",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M75 is recorded: it is an extended star cluster, and its package frames it at 27.9 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 301.519784,
+    "declinationDegrees": -21.921164,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 20520,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": -189.08,
+    "sources": {
+      "position": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6864: NGC_6864, RA 301.519784, DEC -21.921164 (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)",
+      "distance": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6864: Rsun 20.52 ± 0.45 kpc (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Baumgardt's orbits table, NGC_6864: <RV> -189.08 ± 1.12 km/s (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)"
+    }
+  }
+}

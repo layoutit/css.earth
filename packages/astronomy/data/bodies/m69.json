@@ -1,0 +1,28 @@
+{
+  "id": "m69",
+  "classification": "globular-cluster",
+  "order": 5269,
+  "physical": {
+    "name": "M69",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M69 is recorded: it is an extended star cluster, and its package frames it at 27.9 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 277.846252,
+    "declinationDegrees": -32.348084,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 8900,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 47.48,
+    "sources": {
+      "position": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6637: NGC_6637, RA 277.846252, DEC -32.348084 (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)",
+      "distance": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6637: Rsun 8.9 ± 0.1 kpc (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Baumgardt's orbits table, NGC_6637: <RV> 47.48 ± 1 km/s (https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt)"
+    }
+  }
+}

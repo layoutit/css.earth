@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m47",
+  "card": {
+    "text": "M47 is an open star cluster in the Milky Way, about 468 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2422: dist50, the median of the maximum-likelihood distance, 468.27206923 pc (16th to 84th percentile 468 to 469)",
+        "checked": "2026-10-02",
+        "locator": "NGC_2422: dist50 468.3 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-47",
+        "url": "https://en.wikipedia.org/wiki/Messier_47",
+        "label": "Wikipedia, \"Messier 47\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373098623",
+        "quote": "Messier 47, also known as NGC 2478 is an open cluster in the southern constellation of Puppis."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M47 is drawn as 510 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2422: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_2422: 510 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-47",
+        "url": "https://en.wikipedia.org/wiki/Messier_47",
+        "label": "Wikipedia, \"Messier 47\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373098623",
+        "quote": "It was discovered by Giovanni Batista Hodierna before 1654 and re-discovered by Charles Messier in 1771."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "510 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2422: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_2422, inrt = True"
+        }
+      ]
+    }
+  }
+}

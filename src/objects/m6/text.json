@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m6",
+  "card": {
+    "text": "The Butterfly Cluster is an open star cluster in the Milky Way, about 452 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_6405: dist50, the median of the maximum-likelihood distance, 451.8697801 pc (16th to 84th percentile 452 to 452)",
+        "checked": "2026-10-02",
+        "locator": "NGC_6405: dist50 451.9 pc"
+      },
+      {
+        "catalogueId": "wikipedia-butterfly-cluster",
+        "url": "https://en.wikipedia.org/wiki/Butterfly_Cluster",
+        "label": "Wikipedia, \"Butterfly Cluster\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373098563",
+        "quote": "The Butterfly Cluster is an open cluster of stars in the southern constellation of Scorpius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Butterfly Cluster is drawn as 533 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6405: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6405: 533 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-butterfly-cluster",
+        "url": "https://en.wikipedia.org/wiki/Butterfly_Cluster",
+        "label": "Wikipedia, \"Butterfly Cluster\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373098563",
+        "quote": "Its name derives from the resemblance of its shape to a butterfly."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "533 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6405: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6405, inrt = True"
+        }
+      ]
+    }
+  }
+}
