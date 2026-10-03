@@ -110,8 +110,12 @@ const RGB_COEFFICIENTS = [
   [-0.02330159, 0.12884074, 0.22149167, -0.14550480, 0.10635149, -0.02363990],
   [-0.13748689, 0.44265552, 0.37878846, -0.14923841, 0.09172474, -0.02594726],
 ];
-function color(bpRp: number | null): { colorCss: string; fallback: boolean } {
-  if (bpRp === null || bpRp <= -0.5 || bpRp >= 2) return { colorCss: '#ffffff', fallback: true };
+/** The polynomials' domain in Gaia BP-RP: the colors they are fitted over. */
+export const GAIA_BP_RP_DISPLAY_DOMAIN = [-0.5, 2] as const;
+/** A Gaia BP-RP color as display chromaticity: neutral white outside the domain or without a value. The catalogue point
+ * banks (packages/bake/cli/prepare-catalogue-points.mts, `appearance.colorByBpRp`) color Gaia stars with the same fit. */
+export function gaiaBpRpDisplayColor(bpRp: number | null): { colorCss: string; fallback: boolean } {
+  if (bpRp === null || bpRp <= GAIA_BP_RP_DISPLAY_DOMAIN[0] || bpRp >= GAIA_BP_RP_DISPLAY_DOMAIN[1]) return { colorCss: '#ffffff', fallback: true };
   const linear = RGB_COEFFICIENTS.map(coefficients => 10 ** (-0.4 * coefficients.reduceRight((sum, a) => sum * bpRp + a, 0)));
   const maximum = Math.max(...linear);
   const channels = linear.map(channel => {
@@ -161,7 +165,7 @@ export async function prepareNebulaCatalogueField(root: string, pin: { path: str
       scale(subtract(scale(positionPc, METERS_PER_PARSEC), frame.originM), 1 / frame.metersPerUnit));
     const sizePx = s.referenceDiameterPx * 10 ** (-0.2 * (star.photGMeanMag - s.referenceMagnitude));
     const diameterUnits = star.distancePc * METERS_PER_PARSEC / frame.metersPerUnit * sizePx / s.referenceFocalPixels;
-    const presentation = color(star.bpRp);
+    const presentation = gaiaBpRpDisplayColor(star.bpRp);
     const opacity = taper(separationPc, s.featherStartPc, s.outerRadiusPc) *
       taper(star.photGMeanMag, s.limitingMagnitude - s.fadeMagnitude, s.limitingMagnitude);
     candidates.push({ point: { id: `gaia-dr3:${star.sourceId}`, positionUnits, sizePx, diameterUnits,
