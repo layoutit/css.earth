@@ -38,12 +38,17 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
     ['roxs-42b-companion', 'roxs-42b'], ['roxs-42b-b', 'roxs-42b'],
     ['hip-65426-b', 'hip-65426'], ['af-lep-b', 'af-lep'], ['ab-pic-b', 'ab-pic'], ['yses-1-b', 'yses-1'],
     ['hd-206893-b', 'hd-206893'], ['hd-206893-c', 'hd-206893'], ['hd-95086-b', 'hd-95086'], ['gj-504-b', 'gj-504'], ['hd-135344-ab', 'hd-135344-a'],
-    ['eps-indi-ab', 'eps-indi-a'], ['eps-indi-ba', 'eps-indi-a'], ['eps-indi-bb', 'eps-indi-a'],
+    // A system inside another: the brown dwarfs Ba and Bb are Epsilon Indi B, inside Epsilon Indi A's system.
+    ['eps-indi-ab', 'eps-indi-a'], ['eps-indi-a', 'eps-indi-a'], ['eps-indi-ba', 'eps-indi-ba'], ['eps-indi-bb', 'eps-indi-ba'],
     // Stars nothing orbits, with the stars their records bind to them: a star system.
     ['gj-820-a', 'gj-820-a'], ['gj-820-b', 'gj-820-a'], ['alpha-centauri-b', 'alpha-centauri-a'], ['proxima-centauri', 'alpha-centauri-a']] as const) {
     assert.equal(systemOfObject(SCENE_OBJECTS, id)?.id, system, id);
   }
   assert.equal(systemOfObject(SCENE_OBJECTS, 'betelgeuse'), null, 'A star without orbiting bodies belongs to no system');
+  // A system inside another holds its own bodies, and the outer one holds them too.
+  assert.deepEqual(systemById(SCENE_OBJECTS, 'eps-indi-ba')?.memberIds, ['eps-indi-bb']);
+  assert.deepEqual([...systemById(SCENE_OBJECTS, 'eps-indi-a')!.memberIds].sort(), ['eps-indi-ab', 'eps-indi-ba', 'eps-indi-bb']);
+  assert.equal(systemById(SCENE_OBJECTS, 'eps-indi-ba')?.name, 'Epsilon Indi B');
   // A star system is framed out to its farthest star, and the camera aims at the nearest pair's centre of mass.
   const AU_M = 149_597_870_700, centauri = SYSTEM_CENTERS.get('alpha-centauri-a')!;
   assert.ok(SYSTEM_FRAMING_RADII.get('alpha-centauri-a')! > 10_000 * AU_M && centauri.separationM < 100 * AU_M, 'Proxima frames the system; A and B are its nearest pair');
@@ -59,9 +64,6 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
   assert.deepEqual(systemById(SCENE_OBJECTS, 'hd-110067')!.memberIds,
     ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'wd-1856-534')!.memberIds, ['wd-1856-534b']);
-  // Epsilon Indi Ba is bound to A and Bb circles Ba: one system, whose host is A; Ba does not open a system of its own.
-  assert.deepEqual([...systemById(SCENE_OBJECTS, 'eps-indi-a')!.memberIds].sort(), ['eps-indi-ab', 'eps-indi-ba', 'eps-indi-bb']);
-  assert.equal(systemById(SCENE_OBJECTS, 'eps-indi-ba'), null);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'vhs-1256-1257')!.memberIds, ['vhs-1256-1257-companion', 'vhs-1256-1257-b']);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'roxs-42b')!.memberIds, ['roxs-42b-companion', 'roxs-42b-b']);
 });
@@ -92,7 +94,9 @@ test('the system helpers read the orbit graph of the plan', () => {
     const derived = planetarySystems(objects, APPLICATION_WORLD_CONTEXT, SYSTEM_FRAMING_RADII, planetarySystemMembers(APPLICATION_WORLD_CONTEXT));
     assert.deepEqual(allPlanetarySystems(objects), derived);
     for (const { id } of objects) {
-      assert.deepEqual(systemOfObject(objects, id), derived.find(system => system.id === id || system.memberIds.includes(id)) ?? null, id);
+      // The nearest system that lists it: of a system inside another, the inner one, which holds fewer bodies.
+      const listing = derived.filter(system => system.id === id || system.memberIds.includes(id));
+      assert.deepEqual(systemOfObject(objects, id), listing.find(system => system.id === id) ?? listing.sort((a, b) => a.memberIds.length - b.memberIds.length)[0] ?? null, id);
       assert.deepEqual(systemById(objects, id), derived.find(system => system.id === id) ?? null, id);
     }
   }

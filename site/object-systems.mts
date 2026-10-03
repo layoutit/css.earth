@@ -61,8 +61,12 @@ const indexOf = (objects: Parameters<typeof planetarySystems>[0]) => {
   if (!index) {
     const systems = planetarySystems(objects);
     const byMember = new Map<string, PlanetarySystem>();
-    // The first system to list an id wins, as a scan in system order found it.
-    for (const system of systems) for (const id of [system.id, ...system.memberIds]) if (!byMember.has(id)) byMember.set(id, system);
+    // A body is in the nearest system: the first to list it, unless a later one's host is itself inside that one (a
+    // system inside another: Epsilon Indi Bb is in Epsilon Indi B, which is inside Epsilon Indi A's system).
+    for (const system of systems) for (const id of [system.id, ...system.memberIds]) {
+      const listed = byMember.get(id);
+      if (!listed || listed.memberIds.includes(system.id)) byMember.set(id, system);
+    }
     const byId = new Map<string, PlanetarySystem>();
     for (const system of systems) if (!byId.has(system.id)) byId.set(system.id, system);
     cache.set(objects, index = { systems, byId, byMember });

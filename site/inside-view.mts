@@ -55,11 +55,12 @@ export function insideBody(id: string) {
  * the objects it is inside, each with the distances it is entered and left again at. Its own system is the zoom's first
  * scope, not a step. An object seen from inside authors its distances. An object with a scene of its own takes the view
  * as its body once the camera is outside it (overview-selection.mts `leaveDistanceM`), and ends the chain: its scene is
- * left the way any body's is. */
+ * left the way any body's is. A system the centre's own is inside (Epsilon Indi A's, around Epsilon Indi B) is such an
+ * object: it shows its host's scene out to what is inside it. */
 export function zoomChain(centre: string = centreId): readonly ZoomStep[] {
   const chain: ZoomStep[] = [];
   for (const object of knownAncestors(centre)) {
-    if (object.system) continue;
+    if (object.system?.host === centre) continue;
     if (object.zoom === undefined) {
       // Without both frames the camera cannot be told to be outside it: the zoom stops at the centre's system.
       const from = knownObject(centre)?.worldFrame, frame = object.worldFrame;

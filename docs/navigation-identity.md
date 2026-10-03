@@ -34,7 +34,10 @@ body from outside, so it takes the view once the camera is outside it: as far fr
 the body as that object's centre and its radius. A star of the Large Magellanic Cloud
 zooms out into the Cloud, M87* into M87, M87 into the Virgo Cluster. That scene is
 then left the way any body's is ([overview-selection.mts](../site/overview-selection.mts),
-[inside-view.mts](../site/inside-view.mts)).
+[inside-view.mts](../site/inside-view.mts)). A system can be inside another: a star
+bound to another, with bodies of its own, hosts its system inside that star's. The
+brown dwarfs Epsilon Indi Ba and Bb are Epsilon Indi B, inside Epsilon Indi A's
+system, and zooming out of Epsilon Indi B hands the view to that system the same way.
 
 One object has one id. The spatial catalogues (Local Group galaxies, galaxy
 clusters, the nearby field) are data the world draws as dots: a row makes no page

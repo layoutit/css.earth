@@ -86,8 +86,15 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
     if (new Set(told).size > 1) throw new TypeError(`World file ${id} holds bodies inside ${[...new Set(told)].join(' and ')}; a file's bodies are inside one object.`);
     return told[0];
   };
+  // A host whose row is in its own system's file does not say what it is inside, and a page does not need it: its system
+  // is inside a galaxy. One whose system is inside another system says so (Epsilon Indi Ba, whose system Epsilon Indi B is
+  // inside Epsilon Indi A's): a page reads that system's members from it.
+  const nested = (id: string, body: Body): Body => {
+    const outer = systemObjectId(body.id) === id ? holders.insideOf(body.id) : undefined;
+    return outer !== undefined && systemHostId(outer) !== null ? { ...body, inside: outer } : body;
+  };
   const encode = (id: string, members: readonly Body[]) => {
-    const file = encodeBodies(members, positions), centres = centresOf(id), inside = insideOf(id, members);
+    const file = encodeBodies(members.map(body => nested(id, body)), positions), centres = centresOf(id), inside = insideOf(id, members);
     return { schema: PREPARED_WORLD_SYSTEM_SCHEMA as typeof PREPARED_WORLD_SYSTEM_SCHEMA, id, ...(inside === undefined ? {} : { inside }), ...(Object.keys(centres).length ? { orbitCenters: centres } : {}),
       orbitBanks: pinsOf(members), ...file.tables(), bodies: columns(file.rows),
       ...(holders.drawnFromAnywhere(id) || places.has(id) ? { anywhere: true } : {}), ...(places.has(id) ? { places: true } : {}) };

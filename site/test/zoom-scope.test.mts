@@ -151,6 +151,11 @@ test('a centre walks the objects it is inside, and one with a scene of its own e
   assert.deepEqual(at('m33'), ['m31']);
   assert.deepEqual(at('m87-star'), ['m87']);
   assert.deepEqual(at('m87'), ['virgo-cluster']);
+  // A system the centre's own is inside is such an object: Epsilon Indi B zooms out into Epsilon Indi A's system, whose
+  // own zoom goes on to the Milky Way.
+  assert.deepEqual(at('eps-indi-ba'), ['eps-indi-a-system']);
+  assert.equal(stepsOf('eps-indi-ba')[0]!.body, true);
+  assert.deepEqual(at('eps-indi-a'), ['milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
   // It is entered once the camera is outside it: as far from the star as the object's centre and its radius.
   const frameOf = (id: string) => OBJECTS.find(object => object.id === id)!.worldFrame!, parsec = 3.085677581491367e16;
   const cloud = frameOf('lmc'), star = frameOf('hv-1005'), step = stepsOf('hv-1005')[0]!;

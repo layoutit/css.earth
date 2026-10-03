@@ -19,17 +19,18 @@ export function planetarySystemParents(plan: PlanetarySystemPlan): ReadonlyMap<s
 }
 
 /** Every candidate system host with the prepared bodies inside its system at any depth, in plan order. Candidates are the
- * focus and every body with a system view that is inside no other body's system: a planet's moons are not a planetary
- * system, and neither is a star inside another's (Epsilon Indi Ba, with Bb around it, is in Epsilon Indi A's system).
- * Whether a candidate is a star is the registry's to say (site/object-systems.mts). Each chain is walked once; a cyclic
- * chain anywhere in the plan is rejected. */
+ * focus and every body with a system view, wherever it is in the tree: a star inside another's system hosts its own inside
+ * it (Epsilon Indi Ba, with Bb around it, hosts Epsilon Indi B inside Epsilon Indi A's system), and its members are
+ * members of both. Whether a candidate is a star is the registry's to say (site/object-systems.mts): a planet with moons
+ * is a candidate too, and no planetary system. A cyclic chain anywhere in the plan is rejected. */
 export function planetarySystemMembers(plan: PlanetarySystemPlan): readonly PlanetarySystemMembers[] {
   const parents = planetarySystemParents(plan);
-  const hosts = [plan.focus, ...plan.bodies.filter(body => body.systemView && !parents.has(body.id))];
+  const hosts = [plan.focus, ...plan.bodies.filter(body => body.systemView)];
   const members = new Map(hosts.map(host => [host.id, [] as string[]]));
   for (const body of plan.bodies) {
-    const root = orbitRoot(body.id, parents);
-    if (root !== body.id) members.get(root)?.push(body.id);
+    // The walk below ends: the chain of hosts has a root.
+    orbitRoot(body.id, parents);
+    for (let host = parents.get(body.id); host !== undefined; host = parents.get(host)) members.get(host)?.push(body.id);
   }
   return hosts.map(host => ({ id: host.id, memberIds: members.get(host.id)! }));
 }
