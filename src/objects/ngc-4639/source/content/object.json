@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-4639",
+  "displayName": "NGC 4639",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "20.249 Mpc (−651,400 / +673,000 pc)",
+        "source": {
+          "catalogueId": "arxiv-1604-01424",
+          "url": "https://arxiv.org/abs/1604.01424",
+          "label": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 190.7°, Dec 13.26°",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014, A&A 570, A13), meandata",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "controls": []
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant",
+      "href": "https://arxiv.org/abs/1604.01424"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "HyperLEDA (Makarov et al. 2014, A&A 570, A13), meandata",
+      "href": "http://atlas.obs-hp.fr/hyperleda/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1604.01424",
+      "credit": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant"
+    }
+  }
+}

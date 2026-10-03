@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet and dataset list."
+      }
+    },
+    {
+      "path": "presentation/solar-system.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored framing: the radius the page frames the object at, RC3's D25 isophotal radius at the Cepheid distance."
+      }
+    }
+  ]
+}

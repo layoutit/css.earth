@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-4424",
+  "displayName": "NGC 4424",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "16.444 Mpc (−2,069,000 / +2,366,800 pc)",
+        "source": {
+          "catalogueId": "arxiv-1604-01424",
+          "url": "https://arxiv.org/abs/1604.01424",
+          "label": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 186.8°, Dec 9.421°",
+        "source": {
+          "catalogueId": "leroy-2021-phangs-alma",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+          "label": "Leroy et al. (2021), ApJS 257, 43, galaxies table",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "controls": []
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant",
+      "href": "https://arxiv.org/abs/1604.01424"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Leroy et al. (2021), ApJS 257, 43, galaxies table",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1604.01424",
+      "credit": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant"
+    }
+  }
+}

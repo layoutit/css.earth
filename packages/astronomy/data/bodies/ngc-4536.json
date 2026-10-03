@@ -1,0 +1,27 @@
+{
+  "id": "ngc-4536",
+  "classification": "galaxy",
+  "physical": {
+    "name": "NGC 4536",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 4536 is recorded: it is an extended galaxy, and its package frames it at 16700 pc (object.json worldFrame.bodyRadiusM): RC3's isophotal diameter, log D25 = 1.88 (0.1 arcmin), halved and set at the Cepheid distance.",
+  "star": {
+    "rightAscensionDegrees": 188.61291666666665,
+    "declinationDegrees": 2.188333333333333,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 15177492,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 1802,
+    "sources": {
+      "position": "Leroy et al. (2021), ApJS 257, 43, galaxies table (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43), row NGC4536: RAJ2000 188.61291666666665, DEJ2000 2.188333333333333",
+      "distance": "Riess et al. (2016), ApJ 826, 56, table 5 (https://arxiv.org/abs/1604.01424), row N4536: Cepheid distance modulus mu_Ceph 30.906 +/- 0.053 mag, 10^(mu/5 + 1) pc: 15177492 pc (-365959/+375001); the distance its Cepheids are placed at",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NGC 4536: 1802 km/s, from 2022ApJS..261...21Y (https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract)"
+    }
+  }
+}

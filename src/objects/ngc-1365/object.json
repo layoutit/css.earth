@@ -1,0 +1,92 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngc-1365",
+  "parent": "fornax-cluster",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "NGC 1365",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 919531919284427400
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "NGC 1365",
+      "systemName": "Galaxy catalogue",
+      "classification": "galaxy",
+      "color": "#9a9a9a",
+      "distanceAu": 3765521513400,
+      "description": "A barred spiral galaxy 18.3 million parsecs away, tilted 55° to our line of sight.",
+      "aliases": [
+        "PGC 13179",
+        "ESO 358-17"
+      ],
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.7122314375225056e+23,
+        3.652244675935895e+23,
+        -3.322224301277578e+23
+      ],
+      "presentationToReference": [
+        1,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "orbitUpReference": [
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 2966231997691701000,
+      "bodyRadiusM": 919531919284427400000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
