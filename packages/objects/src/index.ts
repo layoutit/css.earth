@@ -11,8 +11,6 @@ export type { CatalogueCells, CataloguePointSpread } from './catalogue-points.js
 export type { DensityVolumeFrame, DensityVolumeObjectDescriptor, DensityVolumePreparationReference, VolumeQuaternion, VolumeVector } from './density-volume.js';
 export { parseAuthoredObjectDescriptor, parseAuthoredRecipe } from './authored.js';
 export type { AuthoredObjectDescriptor, AuthoredRecipe, CutawayRecipe, DestinationsRecipe, FeaturesRecipe, FrameBankRecipe, LayerRecipe, DatasetRecipe, MaterialRecipe, MotionRecipe, ShapeKind, ShapeRecipe, SourceReference, SurfaceRecipe, WorldFrameRecipe } from './authored.js';
-export * from './baking/index.js';
-export * from './geometry/index.js';
 export { prepareObject, readPreparedObject } from './preparation.js';
 export type { ObjectPreparation } from './preparation.js';
 export * from './registry/index.js';

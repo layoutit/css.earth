@@ -3,7 +3,7 @@
  * `--update-baseline` never records one. */
 import { checkBakeWithoutRenderer } from './bake-without-renderer.mts';
 import { checkFormatSchemaOwnership } from './format-schema-ownership.mts';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, posix, resolve } from 'node:path';
 import { declaredPackage, importedSpecifiers } from './declared-dependencies.mts';
 import { isTestPath } from './zones.mts';
@@ -43,6 +43,16 @@ export function objectCodeFiles(files: readonly string[]): string[] {
   return files.filter(file => OBJECT_CODE.test(file) && !isTestPath(file)).map(file => `${file}: object packages hold data only; put code in packages/ or site/`);
 }
 
+/** Only established format owners may be top-level objects source folders. */
+export const OBJECT_FORMAT_FOLDERS: readonly string[] = ["node", "prepared-data", "provenance", "registry", "sources", "stars", "volume"];
+export function objectFormatFolders(root: string): string[] {
+  const directory = resolve(root, 'packages/objects/src');
+  if (!existsSync(directory)) return [];
+  return readdirSync(directory, { withFileTypes: true })
+    .filter(entry => entry.isDirectory() && !OBJECT_FORMAT_FOLDERS.includes(entry.name))
+    .map(entry => `packages/objects/src/${entry.name}/: objects holds formats only; put algorithms in their owning package`);
+}
+
 export const REPOSITORY_RULES: readonly RepositoryRule[] = [
   { id: 'bake-without-renderer', description: 'bake declares no renderer dependency and permits no renderer exception', check: checkBakeWithoutRenderer },
   { id: 'format-schema-ownership', description: 'shared raw schema literals and duplicates of objects definitions fail; schema/owner exceptions must remain current and justified', check: checkFormatSchemaOwnership },
@@ -56,8 +66,8 @@ export const REPOSITORY_RULES: readonly RepositoryRule[] = [
   },
   {
     id: 'objects-hold-data',
-    description: 'src/objects/ holds no script or Astro module: object content reaches the runtime as data (objectCodeFiles in repository-rules.mts)',
-    check: (_root, files) => objectCodeFiles(files),
+    description: 'src/objects/ holds no script or Astro module; packages/objects/src/ permits only listed format folders',
+    check: (root, files) => [...objectCodeFiles(files), ...objectFormatFolders(root)],
   },
   {
     id: 'nebula-boundaries',

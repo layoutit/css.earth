@@ -35,8 +35,10 @@ it('the main volume entry stays host-neutral: only volume/node imports Node buil
 /** The topics a topic may import, always through one of that topic's entries (`index.ts`, or `node/index.ts` for the volume
  * bake): a lower layer, never a peer or a layer above. A topic missing here imports no other topic. */
 const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
-  raster: ['photometry'],
-  scene: ['raster'],
+  baking: [],
+  'surface-geometry': [],
+  raster: ['photometry', 'baking'],
+  scene: ['raster', 'surface-geometry'],
   presentation: ['scene', 'raster'],
   'volume-leaves': ['scene', 'volume'],
   'stars': ['raster', 'volume'],
@@ -62,7 +64,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'objects/stellar': ['objects/color', 'objects/raster', 'objects/sources'],
   'objects/acquisition': ['delivery', 'raster', 'objects/sources', 'objects/layers/observation', 'objects/layers/terrestrial'],
   'objects/sphere-survey': ['objects/cameras', 'objects/geometry', 'objects/layers/terrestrial', 'sources'],
-  'objects/layers/paged-ellipsoid': ['raster', 'scene', 'photometry', 'presentation', 'objects/color', 'objects/content', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/observation'],
+  'objects/layers/paged-ellipsoid': ['baking', 'raster', 'scene', 'photometry', 'presentation', 'objects/color', 'objects/content', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/observation'],
   'prepared-presentation': ['presentation', 'raster'],
   'delivery': ['objects/sources'],
   'sources': ['runtime-source', 'objects/content', 'delivery'],
