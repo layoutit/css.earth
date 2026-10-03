@@ -61,9 +61,12 @@ Sphere framing reads numeric silhouette geometry from `@cssearth/engine`. Its ru
 Renderer runtime exceptions are file-scoped in [the architecture rule](../../.github/scripts/architecture/preparation-without-renderer.mts):
 `src/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
 `src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
-The package keeps its renderer dependency for these four consumers. F16 validation uses objects contracts.
+The package keeps its renderer dependency for these four consumers and the declared build metadata reader. F16 validation uses objects contracts.
 
 Object-text scaffolding imports `OBJECT_TEXT_SCHEMA` from `@cssearth/objects`; cited-text
 format parsing belongs there, while wording generation and editorial policy stay with their owners.
 
 See the [shared source-format ownership contract](../objects/AGENTS.md) for WISE pins, rotation records and published limb coefficients.
+
+`src/implementation-dependencies.mts` declares `RENDERER_BUILD_CONFIG_PATH` for its entry-source closure.
+The architecture rule names this metadata reader separately from runtime consumers; its guard rejects an unlisted reader.

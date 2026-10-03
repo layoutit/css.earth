@@ -79,7 +79,7 @@ redraws its page and moves the tiles after it, so commit the redrawn pages.
 After merging main into a branch that adds bodies, run
 `node packages/bake/cli/prepare-navigation.mts <id>...` and
 `prepare-object.mts <id>... --from world` before `pnpm install` or
-`build:tools`, which refuse a page whose width does not match its members.
+`build:preparation`, which refuse a page whose width does not match its members.
 
 ## Sources and delivery
 

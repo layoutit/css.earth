@@ -8,6 +8,7 @@ import { importedSpecifiers } from './declared-dependencies.mts';
 export interface RendererException { readonly path: string; readonly reason: string }
 export const PREPARATION_RENDERER_EXCEPTIONS: readonly RendererException[] = [
   { path: 'packages/telescope-cli/package.json', reason: 'Declares renderer for the four named runtime transport/publication consumers.' },
+  { path: 'packages/telescope-cli/src/implementation-dependencies.mts', reason: 'Reads the declared renderer build config input to follow its entry sources; never runs renderer here.' },
   { path: 'packages/telescope-cli/src/spatial-handoff.mts', reason: 'Runs application loaders, including compressed binary point banks, for physical resource handoff.' },
   { path: 'packages/telescope-cli/src/sphere/native-scroll/native-camera.mts', reason: 'Reads retained renderer variants and camera transforms for native CSS publication.' },
   { path: 'packages/telescope-cli/src/sphere/sphere-html.mts', reason: 'Serializes and publishes retained renderer scenes into sphere HTML.' },
@@ -16,6 +17,7 @@ export const PREPARATION_RENDERER_EXCEPTIONS: readonly RendererException[] = [
 const PREPARATION = /^packages\/(?:bake|telescope-cli)\//u;
 const SOURCE = /\.[cm]?[jt]sx?$/u;
 const renderer = (specifier: string, path: string) => /^@cssearth\/renderer(?:\/|$)/u.test(specifier)
+  || specifier.startsWith('packages/renderer/')
   || specifier.startsWith('.') && posix.normalize(posix.join(dirname(path), specifier)).startsWith('packages/renderer/');
 
 const targets = (value: unknown): string[] => typeof value === 'string' ? [value] : Array.isArray(value) ? value.flatMap(targets)
@@ -50,7 +52,7 @@ export function rendererUses(path: string, text: string): boolean {
   };
   visit(ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true));
   return urlUse || importedSpecifiers(text, path).some(specifier => renderer(specifier, path))
-    || [...text.matchAll(/['"]([^'"\n]*packages\/renderer\/src\/[^'"\n]+)['"]/gu)].some(match => renderer(match[1]!, path));
+    || [...text.matchAll(/['"]([^'"\n]*packages\/renderer\/(?:src\/[^'"\n]+|tsup\.config\.ts))['"]/gu)].some(match => renderer(match[1]!, path));
 }
 
 export function preparationRendererFindings(sources: ReadonlyMap<string, string>,

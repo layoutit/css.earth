@@ -28,7 +28,7 @@ From the repository root, with Node 24 (or 22.18+) and pnpm 10.33.0:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:tools
+pnpm build:preparation
 pnpm prepare:volume src/objects/milky-way
 pnpm test:packages
 ```
