@@ -48,13 +48,17 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
         const point = width > 0 && height > 0 ? projectCatalogPosition(dot.object.positionM, world, viewport) : null;
         const visible = point !== null && Math.abs(point.x) <= width / 2 + 4 && Math.abs(point.y) <= height / 2 + 4;
         if (visible) {
-          // Never read back from the style (a read serialises it).
-          const transform = `translate(${point.x}px,${point.y}px) translate(-50%,-50%)`;
+          // Never read back from the style (a read serialises it). Hundredths of a pixel: a finer text is a write the
+          // page serialises to the same value.
+          const transform = `translate(${Math.round(point.x * 100) / 100}px,${Math.round(point.y * 100) / 100}px) translate(-50%,-50%)`;
           if (transform !== dot.transform) { dot.element.style.transform = transform; dot.transform = transform; }
         }
         fader.set(dot.element, visible ? alpha : 0, 200);
       }
     },
+    /** While the camera coasts a dot that fades out keeps its box; it is hidden once the coast stops
+     * (docs/performance/motion-freezes-membership.md). */
+    setCoasting(active: boolean) { fader.holdHiding(active); },
     inspect() { return { count: dots.length, clusterCount: clusterCatalog?.objects.length ?? 0 }; },
     destroy() {
       if (destroyed) return; destroyed = true; fader.destroy();

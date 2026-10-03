@@ -12,7 +12,7 @@ import type { BrowserWindow, SceneFactory } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import type { ObjectEntry } from '../objects.mts';
-import { type ObjectDescriptor, type WorldCameraPose } from '@cssearth/objects';
+import { isExtendedClassification, type ObjectDescriptor, type WorldCameraPose } from '@cssearth/objects';
 import type { NavigationIntent } from '../navigation/navigation-request.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import type { ObjectShell, ShellNavigationTransition } from '../shell/object-shell-types.mts';
@@ -28,7 +28,7 @@ import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import { WORLD_HOST_ID, namesSystem } from '../navigation/navigation-scope.mts';
 import { pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../inside-view.mts';
-import type { ZoomHandover } from './scene-selection.mts';
+import { bodyInView, createCameraHandover } from './camera-handover.mts';
 import { OVERVIEW_SELECTION_POLICY } from '../runtime-policy.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
 import { retainInitialScene } from '../initial-scene.mts';
@@ -103,7 +103,7 @@ export function createSceneRouter({
   // Whether a link flies in place; set once the router's modules have loaded (`ensureContext`).
   let navigable = (_id: string) => false;
   let shellOwner: { shell: ObjectShell | null } | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
-  // The header's Showcase pill tours the featured bodies through `navigate` (showcase.mts).
+  // The header's Slideshow pill tours the featured bodies through `navigate` (showcase.mts).
   let showcase: { destroy(): void } | null = null;
   let centeredObjectId: string | null = null;
   // The registry and what the router builds from it (navigation, selection, activation, history and the shell) arrive
@@ -115,9 +115,13 @@ export function createSceneRouter({
   const reducedMotion = windowTarget.matchMedia?.("(prefers-reduced-motion: reduce)");
   let reducedMotionActive = reducedMotion?.matches === true;
   // A header pill's flight holds the overview hand-over off until it lands, then settles it once.
-  let categoryFlight = false, refreshOverviewSelection: ((landed?: boolean) => void) | null = null;
-  // The zoom's hand-over to another scene (an object seen from inside, or back to the centre's system) waits until the crossing has held.
-  let pendingHandover: { timer: number; to: ZoomHandover } | null = null;
+  let categoryFlight = false, refreshOverviewSelection: ((landed?: boolean) => void) | null = null, refreshSatelliteSelection: (() => void) | null = null;
+  // The zoom's hand-over to another scene (a body's system, an object seen from inside, or back to the centre's system):
+  // the world shows the selection the camera has crossed into at once, and the scene is replaced when the camera rests.
+  const handover = createCameraHandover({ windowTarget, documentTarget, mountedId: () => objectId, fetchAhead: fetchSceneReads,
+    canSwap: () => scenes.state.kind === 'ready' && !requests.current && !categoryFlight,
+    onChange: publishFraming,
+    swap: next => { void navigate(subjectHost(next), { kind: 'object', ...(subjectView(next) === 'system' ? { view: 'system' as const } : {}), camera: 'preserve' }).catch(report); } });
   // The view a header pill's flight left, while that flight's landing is being handed over.
   let categoryDeparture: string | null = null;
   const requests = createNavigationLifecycle({ onError: report, onCancel(request) {
@@ -182,7 +186,7 @@ export function createSceneRouter({
       releaseInput();
       documentTarget.removeEventListener("visibilitychange", syncPlayback);
       reducedMotion?.removeEventListener("change", syncReducedMotion);
-      cameraMotion.cancel();
+      cameraMotion.cancel(); handover.destroy();
       context?.navigation.destroy();
       world.destroy();
       if (control && windowTarget.__cssEarthControl === control) delete windowTarget.__cssEarthControl;
@@ -361,7 +365,13 @@ export function createSceneRouter({
         historyOwner = createNavigationHistory({ windowTarget, capture: () => requests.current ? null : view.capture(), navigate, navigating: () => requests.current !== null, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
         // A link flies in place to any body the world draws; one whose entry has loaded must also share this frame.
         unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
-        showcase = registry.createShowcaseController({ documentTarget, windowTarget, navigate, readObjectId: () => objectId, onError: report });
+        showcase = registry.createShowcaseController({ documentTarget, windowTarget, navigate, readObjectId: () => objectId, onError: report,
+          isExtended: id => isExtendedClassification(registry.knownObject(id)?.classification),
+          // A reader who asked for reduced motion gets the tour's stops without the turn.
+          turn({ degrees, durationMilliseconds, signal }) {
+            if (reducedMotionActive || requests.current) return;
+            void scenes.current?.mount?.navigation?.turn?.(degrees, { durationMilliseconds, signal }).catch(report);
+          } });
       }
       // Any body the world draws, and any object the page already knows (a scale of the universe is no body of the world).
       navigable = id => (worldIds.has(id) || registry.knownObject(id) !== undefined) && (!registry.knownObject(id) || navigation.supports(objectId, id));
@@ -453,7 +463,9 @@ export function createSceneRouter({
     if (resolved.destination.history.history === 'pop') historyOwner?.remember();
     else if (intent.kind === 'object' && intent.departed) historyOwner?.keep(intent.departed);
     else historyOwner?.checkpoint();
-    requests.cancel(); cancelHandover();
+    requests.cancel();
+    // A navigation the reader chose takes the view from a hand-over that was waiting for the camera to rest.
+    if (!(intent.kind === 'object' && intent.camera === 'preserve')) handover.clear();
     scenes.current?.setViewUrl(null);
     const request = requests.begin({ ...resolved.destination, timing: createNavigationTiming(windowTarget, objectId, id) });
     if (request.camera.kind === 'surface' || request.feature) preferences.set('motionEnabled', false);
@@ -498,8 +510,12 @@ export function createSceneRouter({
       const presented = await request.lifetime.wait(afterSceneFrame(windowTarget, request.signal));
       if (presented.cancelled || !requests.owns(request)) return false;
       request.timing.mark('handoff');
+      // The departing scene's last camera and its zoom's rate: the hand-over carries them through the mount.
+      const departing = scenes.current?.mount?.navigation;
+      if (departing) handoff.beforeRetire?.(departing);
       if (scenes.current) retire(scenes.current, null, { preserveShell: true, flush: false, publish: false });
       objectId = object.id;
+      handover.clear();
       if (stage.dataset) stage.dataset.objectId = object.id;
       const result = await mountApplication({ context: ready, factory, content, handoff, request, selectionTransition });
       requests.finish(request, scenes.state.kind === 'failed' ? 'failed' : 'cancelled');
@@ -509,6 +525,8 @@ export function createSceneRouter({
         error.name === 'AbortError' && error.preserveView === true;
       if (!requests.finish(request, error instanceof Error && error.name === 'AbortError' ? 'cancelled' : 'failed')) return false;
       centeredObjectId = null;
+      // A hand-over that could not mount its scene leaves the mounted one framed as it is.
+      if (handover.subject) { handover.clear(); publishFraming(); }
       publication.publish();
       if (scenes.current === source && source) {
         source.shell?.setDatasetNotice?.(errorMessage(error));
@@ -601,52 +619,71 @@ export function createSceneRouter({
   function report(error: unknown) {
     try { reportError(error); } catch { /* Diagnostics cannot interrupt cleanup. */ }
   }
+  /** What a hand-over to the scene of `id` reads (its entry, card, object transport and system view), requested together
+   * before it is asked for: the four a flight to it starts with. A failed read is not an error yet: the navigation asks again. */
+  function fetchSceneReads(id: string) {
+    void ensureContext().then(({ registry }) => {
+      if (destroyed) return;
+      void registry.loadObject(id).catch(() => {});
+      navigationFragments(windowTarget).prefetch(id);
+      startFlightRequest(preparedObjectUrl(id, 'prepared/object.json'));
+      void registry.loadSystemView(id).catch(() => {});
+    }).catch(report);
+  }
   function followSelectionCamera(session: Session, frame: WorldCameraPose) {
     // Until the arrival is ready the camera still shows the mounted object's default view, not the page's: following it
     // selected the Solar System for a moment on every overview page (and fetched its body list for nobody).
     if (requests.current || scenes.state.kind !== 'ready') return;
     const selection = context?.selection;
-    const followed = selection?.followCamera(frame) ?? false;
-    if (typeof followed === 'object') { holdHandover(session, followed); return; }
-    cancelHandover();
-    if (followed) {
-      view.replace(session, selection!.url(session.url ?? navigationHref(windowTarget)));
-      // An overview's page carries no scene dataset; the scene's page gets its dataset back on the way in.
-      view.syncDataset(session);
-    }
-  }
-  function cancelHandover() {
-    if (!pendingHandover) return;
-    windowTarget.clearTimeout(pendingHandover.timer);
-    pendingHandover = null;
-  }
-  /** The crossing must hold for the same settle time a body's system hand-over waits (overview-selection.mts). */
-  function holdHandover(session: Session, to: ZoomHandover) {
-    if (pendingHandover?.to.objectId === to.objectId) return;
-    cancelHandover();
-    const timer = windowTarget.setTimeout(() => {
-      pendingHandover = null;
-      const navigation = session.mount?.navigation;
-      if (!navigation || !scenes.isCurrent(session) || scenes.state.kind !== 'ready' || requests.current || categoryFlight) return;
-      const again = context?.selection.followCamera(navigation.capture());
-      if (typeof again !== 'object' || again.objectId !== to.objectId) return;
+    if (!selection) return;
+    // The selection the camera was last in: the committed one, or one of another scene it has crossed into.
+    const from = handover.subject ?? undefined;
+    const committed = selection.current, followed = selection.followCamera(frame, from);
+    if (typeof followed === 'object') {
       // The next scene is seen around the same star, with the camera where it is.
-      setZoomCentre(again.centreId);
-      void navigate(subjectHost(again), { kind: 'object', ...(subjectView(again) === 'system' ? { view: 'system' as const } : {}), camera: 'preserve' }).catch(report);
-    }, OVERVIEW_SELECTION_POLICY.settleMilliseconds);
-    pendingHandover = { timer, to };
+      setZoomCentre(followed.centreId);
+      handover.cross({ objectId: followed.objectId }, 'zoom-scope');
+    }
+    // A pending scene whose body the camera has come close enough to see is mounted without waiting for rest. An object
+    // seen from inside has no body.
+    const host = handover.subject ? subjectHost(handover.subject) : null, focal = session.mount?.navigation?.optics().focalPixels;
+    const body = host !== null && zoomStepOf({ objectId: host }) === null ? context?.registry.SCENE_OBJECTS.find(object => object.id === host)?.worldFrame : undefined;
+    if (body && focal && bodyInView(frame, body, focal)) handover.due();
+    if (followed !== true) return;
+    // The camera frames a selection of the mounted scene: nothing waits for it to rest any more.
+    handover.back();
+    if (selection.current === committed) return;
+    view.replace(session, selection.url(session.url ?? navigationHref(windowTarget)));
+    // An overview's page carries no scene dataset; the scene's page gets its dataset back on the way in.
+    view.syncDataset(session);
   }
-  function publishSelection() {
-    const selection = context?.selection;
-    // A selection a zoom out of a centre reaches (a star's system, an object seen from inside) is the world seen around
-    // that centre at that scope.
-    const subject = selection?.current, step = subject ? zoomStepOf(subject) : null, moons = subject ? moonSystem(subject) : false;
-    scenes.current?.mount?.navigation?.setZoomOutCentering?.(step !== null);
-    shellOwner?.shell?.presentSelection();
+  /** The selection the camera frames: the committed one, or one of another scene while that scene waits for the camera to
+   * rest (camera-handover.mts). A selection a zoom out of a centre reaches (a star's system, an object seen from inside) is
+   * the world seen around that centre at that scope. */
+  function framing() {
+    const framed = handover.subject ?? context?.selection.current;
+    return { framed, step: framed ? zoomStepOf(framed) : null, moons: framed ? moonSystem(framed) : false };
+  }
+  function publishCamera() {
+    const { framed, step } = framing(), navigation = scenes.current?.mount?.navigation;
+    navigation?.setZoomOutCentering?.(step !== null);
+    // A zoom with a wider scene to hand the camera to does not stop at the mounted scene's far limit.
+    navigation?.setZoomOutOpen?.(context?.selection.zoomOutOpen(framed) ?? false);
+  }
+  function publishWorld() {
+    const { step, moons } = framing();
     // A planet's system keeps its host selected, and its world paths use the shared overview policy. Past the scope that
     // the galaxy the centre is in, that galaxy's stars retire too.
     world.current?.setOverview?.(step !== null || moons, step?.scope, moons,
       step !== null && pastCentreGalaxy(step.scope, step.centreId));
+  }
+  /** The camera crossed into, or came back from, a selection of another scene: the camera's limits and the world follow. */
+  function publishFraming() { publishCamera(); publishWorld(); }
+  function publishSelection() {
+    const subject = context?.selection.current;
+    publishCamera();
+    shellOwner?.shell?.presentSelection();
+    publishWorld();
     if (stage.dataset) {
       const value = subject && starSystem(subject) ? 'system' : subject ? subjectHost(subject) : objectId;
       if (stage.dataset.selection !== value) stage.dataset.selection = value;
@@ -682,7 +719,9 @@ export function createSceneRouter({
       // suppress zoom-out deselection after that flight has finished.
       isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current && !categoryFlight,
       windowTarget,
-      onChange(next) {
+      // Back inside the system's exit the camera may still frame the planet's moons: that watcher is asked again.
+      onReturn() { handover.back(); refreshSatelliteSelection?.(); },
+      onChange(next, landed) {
         if (!next.overview || next.objectId === objectId) {
           // A mounted star and its system overview share the same camera, detail and
           // subscriptions. Change their selection in place in either direction.
@@ -693,6 +732,8 @@ export function createSceneRouter({
           session.viewUrl?.flush();
           return;
         }
+        // A zoom by hand: the world shows the system at once, and its scene takes over when the camera rests.
+        if (!landed) { handover.cross(subjectOf(next.objectId, 'system'), 'overview-watcher'); return; }
         // A pill's landing is a place the reader chose, so it is its own entry: as a replacement, Back from the Planets
         // pill skipped Earth for the page before it (2026-10-01).
         void navigate(next.objectId, { kind: 'object', view: 'system', camera: 'preserve', ...(categoryDeparture ? { departed: categoryDeparture } : {}) });
@@ -707,20 +748,22 @@ export function createSceneRouter({
     const owner = session.mount?.navigation;
     if (!owner) return;
     const current = ready.selection;
-    session.own(watchSatelliteSelection({ navigation: owner, objects: ready.registry.SCENE_OBJECTS,
+    const watch = watchSatelliteSelection({ navigation: owner, objects: ready.registry.SCENE_OBJECTS,
       getSelection: () => current.context,
       isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current,
       documentTarget, windowTarget,
+      onReturn() { if (handover.subject && moonSystem(handover.subject)) handover.back(); },
       onChange(next) {
-        if (moonSystem(next) && subjectHost(next) !== objectId) {
-          void navigate(subjectHost(next), { kind: 'object', view: 'system', camera: 'preserve' }).catch(report);
-          return;
-        }
+        // A moon's planet shows the system: the world shows it at once, and the planet's scene takes over at rest.
+        if (moonSystem(next) && subjectHost(next) !== objectId) { handover.cross(next, 'satellite-watcher'); return; }
         current.commit(next, objectId);
         view.replace(session, current.url(navigationHref(windowTarget)));
         session.viewUrl?.flush();
       },
-    }));
+    });
+    session.own(watch);
+    refreshSatelliteSelection = watch.refresh;
+    session.own(() => { if (refreshSatelliteSelection === watch.refresh) refreshSatelliteSelection = null; });
   }
   function fail(session: Session, error: unknown) {
     if (!scenes.isCurrent(session)) return;

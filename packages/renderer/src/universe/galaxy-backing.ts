@@ -6,20 +6,35 @@ import type { VolumeCameraPublication } from '../volume/types.js';
 /**
  * A galaxy's face-on backing image, fixed in its frame under the catalogue dots. The plane never changes: camera motion
  * turns one scene transform, so it costs the compositor, not a repaint.
+ *
+ * The plane is an `img`, which the browser composites as it is. As a box with a background image, Safari drew each
+ * plane's 2048-pixel image again on every frame while the camera was inside the galaxy's disc: zooming out of Earth on
+ * the iPad, the three section planes took 26 ms of compositing a frame for about 63 frames, from 0.05 pc to 250 pc. With
+ * the same planes drawing a 2 by 2 image the stretch was gone, and a smaller box, opaque planes or no `will-change` left
+ * it as it was. Interleaved runs of that zoom had 70 and 69 frames over 20 ms as background images and 16 and 8 as
+ * `img` (2026-10-03). In headless Chrome the two forms differ in 0 pixels close up and in thin lines of 1 to 2 levels
+ * where the plane is drawn small.
  */
 export function mountGalaxyBacking({ host, before, payload, resolveResource }: {
   host: HTMLElement; before: Node | null; payload: PreparedGalaxyBacking; resolveResource(path: string): string;
 }) {
-  const document = host.ownerDocument;
+  const document = host.ownerDocument, { style } = payload.leaf;
+  // An img fills its box from its corner: the prepared leaf must ask for exactly that.
+  if (style.backgroundSize !== `${style.width} ${style.height}` || style.backgroundPosition !== '0px 0px') {
+    throw new TypeError(`${payload.id}: the backing leaf ${payload.leaf.texturePath} is drawn as an image filling its box; its backgroundSize must be "${style.width} ${style.height}" (got "${style.backgroundSize}") and its backgroundPosition "0px 0px" (got "${style.backgroundPosition}").`);
+  }
   const root = document.createElement('div'), camera = document.createElement('div');
-  const scene = document.createElement('div'), mesh = document.createElement('div'), node = document.createElement('s');
+  const scene = document.createElement('div'), mesh = document.createElement('div'), node = document.createElement('img');
   root.className = 'css-volume-projection'; root.dataset.galaxyBacking = payload.id;
   // The projection's black backdrop would hide what lies behind the plane.
   root.style.background = 'transparent';
   camera.className = 'css-volume-camera'; scene.className = 'css-volume-scene'; mesh.className = 'css-volume-mesh';
   scene.style.willChange = 'transform';
-  Object.assign(node.style, { ...payload.leaf.style, textDecoration: 'none',
-    backgroundImage: `url("${resolveResource(payload.leaf.texturePath).replace(/["\\\n\r]/gu, character => `\\${character}`)}")` });
+  node.alt = ''; node.draggable = false; node.decoding = 'async';
+  // What the volume stylesheet gives a leaf (`.css-volume-mesh s`), on the image itself.
+  Object.assign(node.style, { display: 'block', position: 'absolute', left: '0', top: '0', transformOrigin: '0 0',
+    width: style.width, height: style.height, transform: style.transform });
+  node.src = resolveResource(payload.leaf.texturePath);
   mesh.append(node); scene.append(mesh); camera.append(scene); root.append(camera); host.insertBefore(root, before);
   let perspective = '', origin = '', transform = '';
   return Object.freeze({ root, publish(publication: VolumeCameraPublication) {

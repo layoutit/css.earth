@@ -100,8 +100,11 @@ export function mountWorldContextPointSource({ host, before, plan, field, resolv
   let destroyed = false, coasting = false;
   // Every write is on change; while the camera coasts the point only moves and fades, and its visibility and navigation
   // wait for the coast to stop (docs/performance/motion-freezes-membership.md).
+  // Each is guarded by the value last written. The page gives a transform or an opacity back normalised, so a guard read
+  // from it never matched and the point was rewritten on every frame (469 writes in one throw of a drag, 2026-10-03).
+  const written: Partial<Record<'visibility' | 'backgroundPosition' | 'transform' | 'opacity', string>> = { visibility: 'hidden' };
   const setStyle = (property: 'visibility' | 'backgroundPosition' | 'transform' | 'opacity', value: string) => {
-    if (element.style[property] !== value) element.style[property] = value;
+    if (written[property] !== value) { element.style[property] = value; written[property] = value; }
   };
   return Object.freeze({ element,
     setNavigationEnabled(enabled: boolean) { navigationEnabled = enabled; picking.publish(element, enabled ? target : []); },
@@ -109,7 +112,7 @@ export function mountWorldContextPointSource({ host, before, plan, field, resolv
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, publication: PointSourcePublication = {}) {
       if (destroyed) return;
       const appearance = worldContextPointAppearance(plan, field, world, viewport, publication);
-      const hidden = element.style.visibility === 'hidden';
+      const hidden = written.visibility === 'hidden';
       if (!appearance || appearance.opacity <= 0 || appearance.luminance <= 0) {
         target = []; picking.publish(element, target);
         if (coasting) { setStyle('opacity', '0'); return; }
@@ -120,9 +123,12 @@ export function mountWorldContextPointSource({ host, before, plan, field, resolv
       const size = appearance.radiusPx * 2 * field.atlas.haloRadii;
       setStyle('visibility', '');
       setStyle('backgroundPosition', `${-(appearance.colorIndex % field.atlas.columns) * field.atlas.tileSize}px ${-Math.floor(appearance.colorIndex / field.atlas.columns) * field.atlas.tileSize}px`);
-      setStyle('transform', `translate(${appearance.x - size / 2}px,${appearance.y - size / 2}px) scale(${size / field.atlas.tileSize})`);
+      // A hundredth of a pixel and a thousandth of the scale or the opacity are below what shows. A held point's values
+      // still differ in their last digits from frame to frame, and the page serialises those texts alike: each was a
+      // write that changed nothing (457 in one throw of a drag at the Milky Way, 2026-10-03).
+      setStyle('transform', `translate(${hundredths(appearance.x - size / 2)}px,${hundredths(appearance.y - size / 2)}px) scale(${thousandths(size / field.atlas.tileSize)})`);
       const alpha = appearance.opacity * appearance.luminance;
-      setStyle('opacity', String(alpha));
+      setStyle('opacity', String(thousandths(alpha)));
       // Projection already carries the measured viewport. Do not read layout
       // to decide whether a retained point can receive keyboard focus.
       const halfWidth = (viewport.widthPixels ?? 0) / 2, halfHeight = (viewport.heightPixels ?? 0) / 2;
@@ -145,6 +151,7 @@ function nearestAtlasColor(color: string, palette: PreparedPointAppearance['atla
   for (let index = 0; index < palette.length; index++) { const sample = palette[index]!, distance = (sample[0] - red) ** 2 + (sample[1] - green) ** 2 + (sample[2] - blue) ** 2; if (distance < error) { error = distance; closest = index; } }
   return closest;
 }
+const hundredths = (value: number) => Math.round(value * 100) / 100, thousandths = (value: number) => Math.round(value * 1000) / 1000;
 function clamp(value: number): number { return Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0; }
 
 function occludesFocus(world: WorldCameraPose, plan: PreparedWorldContext,

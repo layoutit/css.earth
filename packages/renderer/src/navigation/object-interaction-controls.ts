@@ -92,6 +92,8 @@ export function createObjectInteractionControls({
       ...dragControls.stats(),
       wheelZoom: wheelControls.stats(),
     }),
+    zoomRate: () => wheelControls.rate(),
+    resumeZoom(rate: number) { if (!lifetime.disposed) wheelControls.resume(rate); },
     destroy() {
       const errors = lifetime.destroy();
       if (errors.length) throw new AggregateError(errors, "Object input cleanup failed.");
