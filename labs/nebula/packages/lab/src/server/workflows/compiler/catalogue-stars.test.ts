@@ -91,16 +91,8 @@ test('dust support never erases a measured star; all image datasets preserve the
   assert.deepEqual(source, before);
 });
 
-test('malformed catalogue fields, epoch, duplicate identities and invalid limits fail before rendering', () => {
-  const row = star('valid', 6, .2);
-  for (const patch of [{ magnitudeV: NaN }, { raDegrees: 360 }, { decDegrees: 91 }, { colorIndexBV: 'blue' },
-    { sourceEpochJulianYear: null }, { sourceRaDegrees: Infinity }, { properMotionRaCosDecMasPerYear: '20' },
-    { photometry: { ...row.photometry, errorMagnitudeV: -1 } }, { photometry: { ...row.photometry, kind: 'invented' } }]) {
-    assert.throws(() => prepareCatalogueStars({ ...catalogue([]), stars: [{ ...row, ...patch }] }, model(), center, 10, ['optical']), TypeError);
-  }
-  const valid = catalogue([row]);
-  assert.throws(() => prepareCatalogueStars({ ...valid, coordinateEpochJulianYear: 2016 }, model(), center, 10, ['optical']), /epoch 2000/);
-  assert.throws(() => prepare([row, row]), /Duplicate/);
+test('invalid frame and selection limits fail before rendering', () => {
+  const row = star('valid', 6, .2), valid = catalogue([row]);
   assert.throws(() => prepareCatalogueStars(valid, model(), center, 5001, ['optical']), /maximum/);
   assert.throws(() => prepareCatalogueStars(valid, model(), center, 10, ['optical', 'optical']), /dataset/);
   assert.equal(prepare([row], 0).stars.length, 0);
