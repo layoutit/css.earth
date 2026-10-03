@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "kepler-22b",
+  "parent": "kepler-22-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

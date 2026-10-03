@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "kepler-63-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "kepler-63",
-      "members": "planets"
+      "host": "kepler-63"
     },
     "catalog": {
       "name": "Kepler-63 system",

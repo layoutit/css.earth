@@ -25,7 +25,8 @@ export function mountDatasetBillboards({ host, before, atlasUrl, atlas, entries,
   // packages/bake/src/scene/projective-surface-raster.ts: the cell holds no more detail than that, and the layer's backing stays
   // this size however large the billboard shows.
   const box = atlas.cellPx / 2;
-  const leaves = entries.map(entry => {
+  type Entry = (typeof entries)[number];
+  const makeLeaf = (entry: Entry) => {
     const node = document.createElement('s');
     node.dataset.datasetBillboard = entry.id;
     const column = entry.billboard.cell % atlas.columns, row = Math.floor(entry.billboard.cell / atlas.columns);
@@ -40,12 +41,15 @@ export function mountDatasetBillboards({ host, before, atlasUrl, atlas, entries,
       views: [{ id: entry.id, texturePath: '', back: entry.billboard.back as unknown as VolumeVector,
         right: entry.billboard.right as unknown as VolumeVector, down: entry.billboard.down as unknown as VolumeVector }] };
     return { node, frame: entry.frame, bank, shown: false, style: '' };
-  });
+  };
+  const leaves = entries.map(makeLeaf);
   // While the camera coasts a billboard is neither revealed nor hidden: a shown one fades, the rest wait for the coast
   // to stop (motion-freezes-membership.md).
   let coasting = false;
   return {
     root: layer,
+    /** Add the billboard of a bank declared after mount (its host's entry brought it); returns its index. */
+    add(entry: Entry) { return leaves.push(makeLeaf(entry)) - 1; },
     setCoasting(active: boolean) { coasting = active; },
     /** Show billboard `index` at `opacity` (0 hides it) for this camera. */
     publish(index: number, opacity: number, world: WorldCameraPose, viewport: WorldCameraViewport) {

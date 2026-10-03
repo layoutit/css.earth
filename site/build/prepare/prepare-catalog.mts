@@ -1,13 +1,14 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { checkBankHosts, checkBoundStars } from '@cssearth/objects';
 import type { CatalogEntry } from '@cssearth/objects';
-import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
+import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
-import { BODIES, M_PER_PC } from '@cssearth/astronomy';
+import { BODIES, M_PER_PC, STAR_IDS, starAstrometry } from '@cssearth/astronomy';
 import { assetOrigin } from '../../asset-origin.mts';
 import { readInventory } from '@cssearth/objects/node';
 
@@ -42,16 +43,61 @@ export function contextObjectJsonModule(contexts: readonly { id: string }[]) {
  * compressed, 2026-10-02). */
 export const CONTEXT_BANK_TYPES: ReadonlySet<string> = new Set(['image-layer-bank', 'volume-dataset-bank']);
 
+/** The context object a prepared resource path (`../src/objects/<id>/…`) belongs to. */
+const assetObjectId = (path: string) => /^\.\.\/src\/objects\/([^/]+)\//u.exec(path)?.[1];
+
 /** `assets` (contextObjectAssetUrls) apart: what the application names in its code, and each bank's own list
  * (`/world/context-assets/<id>.json`). */
 export function splitContextObjectAssets(contexts: readonly { id: string; type?: string }[], assets: Readonly<Record<string, string>>) {
   const bankIds = new Set(contexts.filter(context => context.type !== undefined && CONTEXT_BANK_TYPES.has(context.type)).map(({ id }) => id));
   const inline: Record<string, string> = {}, banks: Record<string, Record<string, string>> = Object.fromEntries([...bankIds].sort().map(id => [id, {}]));
   for (const [path, url] of Object.entries(assets)) {
-    const id = /^\.\.\/src\/objects\/([^/]+)\//u.exec(path)?.[1];
+    const id = assetObjectId(path);
     if (id !== undefined && bankIds.has(id)) banks[id]![path] = url; else inline[path] = url;
   }
   return { inline, banks };
+}
+
+/** A bank the world draws only for the bodies that hold it travels with them, in their object entries
+ * (`pages/objects/[id]/entry.json.ts`), not in every page's code: a package of catalogue dots, drawn while its host or a
+ * body that orbits it is selected, or a dataset names it; and a cloud attached to a body (its source recipe's
+ * `attachedTo`), drawn only while a dataset shows it. Each names the objects that carry it: its host, the body it is
+ * attached to and the entries whose datasets show it (`datasetBanks`). Every other bank is drawn from any page (a
+ * galaxy's image layers and a free nebula show their billboards from everywhere), so the world knows it at startup. */
+export async function readHostedContextBanks(contexts: readonly { id: string; type?: string }[], descriptors: ReadonlyMap<string, unknown>,
+  datasetBanks: readonly (readonly [string, string])[], projectRoot: string) {
+  const hosted: Record<string, string[]> = {};
+  for (const { id, type } of contexts) {
+    if (type !== 'catalogue-point-bank' && type !== 'volume-dataset-bank') continue;
+    const descriptor = descriptors.get(id), path = `src/objects/${id}/object.json`;
+    if (!isRecord(descriptor) || !isRecord(descriptor.properties)) throw new TypeError(`${path}: a bank's descriptor has properties.`);
+    const { host, preparation } = descriptor.properties;
+    if (host !== undefined && typeof host !== 'string') throw new TypeError(`${path}: properties.host must be an object id, not ${JSON.stringify(host)}.`);
+    let attachedTo: unknown;
+    if (type === 'volume-dataset-bank') {
+      const recipe = isRecord(preparation) && typeof preparation.source === 'string' ? preparation.source : undefined;
+      if (recipe === undefined) throw new TypeError(`${path}: properties.preparation.source must name the bank's recipe.`);
+      const source: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, recipe), 'utf8'));
+      attachedTo = isRecord(source) ? source.attachedTo : undefined;
+      if (attachedTo === undefined) continue;
+      if (typeof attachedTo !== 'string') throw new TypeError(`src/objects/${id}/${recipe}: attachedTo must be a body id, not ${JSON.stringify(attachedTo)}.`);
+    }
+    const carriers = new Set([host, attachedTo, ...datasetBanks.filter(([, bank]) => bank === id).map(([entry]) => entry)]
+      .filter((carrier): carrier is string => typeof carrier === 'string'));
+    if (!carriers.size) throw new TypeError(`${path}: a ${type} names no host, attached body or dataset that shows it, so no object can carry it.`);
+    hosted[id] = [...carriers].sort();
+  }
+  return hosted;
+}
+
+/** The build-only record of the hosted banks (`site/prepared-hosted-banks.json`, read by `site/hosted-banks.mts`): each
+ * bank's carriers and descriptor, and the files of a bank that has no list of its own (`/world/context-assets/<id>.json`). */
+export function hostedBankRecords(hosted: Readonly<Record<string, readonly string[]>>, descriptors: ReadonlyMap<string, unknown>,
+  inline: Readonly<Record<string, string>>) {
+  return Object.fromEntries(Object.entries(hosted).sort(([left], [right]) => left.localeCompare(right, 'en')).map(([id, carriers]) => {
+    const files = Object.fromEntries(Object.entries(inline).filter(([path]) => assetObjectId(path) === id));
+    return [id, { carriers, descriptor: descriptors.get(id), ...(Object.keys(files).length ? { files } : {}) }];
+  }));
 }
 
 /** Context resources come exclusively from committed inventories, so dev and a deploy list the same files: an
@@ -70,9 +116,9 @@ export async function contextObjectAssetUrls(contexts: readonly { id: string }[]
   return Object.fromEntries(entries.sort(([left], [right]) => left.localeCompare(right, 'en')));
 }
 
-/** The frame of every bank a body shows through one of its datasets, when the bank declares one, so an opening camera can fit it. */
-async function readDatasetVolumes(entries: readonly CatalogEntry[], projectRoot: string) {
-  const volumes: Record<string, unknown> = {};
+/** Each catalogue entry's datasets that show a bank, as [entry id, bank id] pairs in the entries' order. */
+async function readDatasetBanks(entries: readonly { id: string }[], projectRoot: string) {
+  const pairs: (readonly [string, string])[] = [];
   for (const { id } of entries) {
     let content: unknown;
     try { content = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, 'source/content/object.json'), 'utf8')); }
@@ -80,24 +126,34 @@ async function readDatasetVolumes(entries: readonly CatalogEntry[], projectRoot:
     const controls = isRecord(content) && isRecord(content.datasets) && Array.isArray(content.datasets.controls) ? content.datasets.controls : [];
     for (const control of controls) {
       const volumeId = isRecord(control) && isRecord(control.volume) ? control.volume.objectId : undefined;
-      if (typeof volumeId !== 'string' || volumes[volumeId]) continue;
-      const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', volumeId, 'object.json'), 'utf8'));
-      if (!isRecord(descriptor) || !isRecord(descriptor.properties)) throw new TypeError(`src/objects/${volumeId}/object.json: the bank ${id} shows has no properties.`);
-      // A bank of catalogue dots declares no frame: its object's own radius frames it.
-      // A bank that names a host is that object's own extent (a galaxy's volume); another body may show it around itself.
-      const { frame, host } = descriptor.properties;
-      if (host !== undefined && typeof host !== 'string') throw new TypeError(`src/objects/${volumeId}/object.json: properties.host must be an object id.`);
-      if (isRecord(frame)) volumes[volumeId] = { frame, ...(host === undefined ? {} : { host }) };
+      if (typeof volumeId === 'string') pairs.push([id, volumeId]);
     }
+  }
+  return pairs;
+}
+
+/** The frame of every bank a body shows through one of its datasets, when the bank declares one, so an opening camera can fit it. */
+async function readDatasetVolumes(datasetBanks: readonly (readonly [string, string])[], projectRoot: string) {
+  const volumes: Record<string, unknown> = {};
+  for (const [id, volumeId] of datasetBanks) {
+    if (volumes[volumeId]) continue;
+    const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', volumeId, 'object.json'), 'utf8'));
+    if (!isRecord(descriptor) || !isRecord(descriptor.properties)) throw new TypeError(`src/objects/${volumeId}/object.json: the bank ${id} shows has no properties.`);
+    // A bank of catalogue dots declares no frame: its object's own radius frames it.
+    // A bank that names a host is that object's own extent (a galaxy's volume); another body may show it around itself.
+    const { frame, host } = descriptor.properties;
+    if (host !== undefined && typeof host !== 'string') throw new TypeError(`src/objects/${volumeId}/object.json: properties.host must be an object id.`);
+    if (isRecord(frame)) volumes[volumeId] = { frame, ...(host === undefined ? {} : { host }) };
   }
   return volumes;
 }
 
-/** The galaxies the Local Group catalogue draws (its recipe's detail objects), each at its frame origin with the focus
- * radius the recipe gives it: what the Local Group overview fits in view. The Milky Way has no focus radius there; the
- * overview reads its volume directly. A galaxy beyond the Local Group level's reach (its zoom's `centreWithin`, M87 in
- * Virgo) is drawn but not framed by it. */
-async function readLocalGroupGalaxies(projectRoot: string) {
+/** The galaxies the Local Group catalogue draws (its recipe's detail objects) that are inside the Local Group, each at its
+ * frame origin with the focus radius the recipe gives it: what the Local Group's page fits in view. The Milky Way has no
+ * focus radius there; its page reads its volume directly. M81, NGC 253 and M83 are drawn from this catalogue but are inside
+ * the Nearby Universe, 3.5 to 4.9 Mpc away; framing them pulled the camera past the Nearby Universe's threshold, so the
+ * Local Group page opened as the Nearby Universe (2026-10-01). */
+async function readLocalGroupGalaxies(projectRoot: string, descriptors: ReadonlyMap<string, unknown>) {
   const recipePath = 'src/objects/local-group-galaxies/source/catalogue.json';
   let text: string;
   // A project without the Local Group object has no Local Group galaxies to frame.
@@ -105,33 +161,20 @@ async function readLocalGroupGalaxies(projectRoot: string) {
   catch (error) { if (hasErrorCode(error, 'ENOENT')) return {}; throw error; }
   const recipe: unknown = JSON.parse(text);
   if (!isRecord(recipe) || !isRecord(recipe.detailObjects)) throw new TypeError(`${recipePath}: detailObjects is missing.`);
-  const level: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects/local-group/object.json'), 'utf8'));
-  const within = isRecord(level) && isRecord(level.properties) && isRecord(level.properties.overview) && isRecord(level.properties.overview.zoom)
-    && isRecord(level.properties.overview.zoom.centreWithin) ? level.properties.overview.zoom.centreWithin.distancePc : undefined;
-  if (within !== undefined && !(typeof within === 'number' && within > 0)) throw new TypeError(`src/objects/local-group/object.json: zoom.centreWithin.distancePc is ${String(within)}, not a positive number.`);
-  // The level frames its members: the prepared catalogue's Local Group association. M81, NGC 253 and M83 are drawn from
-  // this catalogue but belong to other groups, 3.5 to 4.9 Mpc away; framing them pulled the camera past the Nearby
-  // Universe threshold, so the Local Group page opened as the Nearby Universe (2026-10-01). Before the prepared
-  // catalogue is restored the association is unknown and the distance rule alone applies.
-  let members: Set<string> | null = null;
-  try {
-    const prepared: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects/local-group-galaxies/prepared/catalogue.json'), 'utf8'));
-    if (!isRecord(prepared) || !Array.isArray(prepared.objects)) throw new TypeError('src/objects/local-group-galaxies/prepared/catalogue.json: objects is missing.');
-    members = new Set(prepared.objects.flatMap(object => isRecord(object) && typeof object.id === 'string' && isRecord(object.membership)
-      && object.membership.group === 'local-group' ? [object.id] : []));
-  } catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
+  // Inside the Local Group: the object tree's chain from a galaxy reaches it.
+  const parentOf = (id: string) => { const descriptor = descriptors.get(id); return isRecord(descriptor) && typeof descriptor.parent === 'string' ? descriptor.parent : undefined; };
+  const inside = (id: string) => { for (let at = parentOf(id); at !== undefined; at = parentOf(at)) if (at === 'local-group') return true; return false; };
   const galaxies: Record<string, { originM: unknown; radiusM: number }> = {};
   for (const [row, detail] of Object.entries(recipe.detailObjects)) {
     if (!isRecord(detail) || typeof detail.id !== 'string') throw new TypeError(`${recipePath}: detailObjects.${row} has no id.`);
-    if (detail.focusRadiusM === undefined || members && !members.has(detail.id)) continue;
+    if (detail.focusRadiusM === undefined || !inside(detail.id)) continue;
     if (typeof detail.focusRadiusM !== 'number' || !(detail.focusRadiusM > 0)) throw new TypeError(`${recipePath}: detailObjects.${row}.focusRadiusM is ${String(detail.focusRadiusM)}, not a positive number.`);
-    const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', detail.id, 'object.json'), 'utf8'));
+    const descriptor = descriptors.get(detail.id);
     // A galaxy is an object of the world: its world frame places it.
     if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.worldFrame)) {
       throw new TypeError(`src/objects/${detail.id}/object.json: the Local Group galaxy ${row} has no properties.worldFrame.`);
     }
     const originM = descriptor.properties.worldFrame.originM;
-    if (within !== undefined && Array.isArray(originM) && Math.hypot(...originM.map(Number)) > within * M_PER_PC) continue;
     galaxies[detail.id] = { originM, radiusM: detail.focusRadiusM };
   }
   return galaxies;
@@ -171,10 +214,15 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   // Every descriptor once, shared by each read below.
   const descriptors = await readObjectDescriptors(resolve(projectRoot, 'src/objects'));
   const catalogued = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
-  // A level of the zoom ladder is an object: its package is a catalogue entry that also authors its place on the ladder.
-  const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), descriptors);
   const entries = catalogued;
-  for (const { id } of overviews) if (!entries.some(entry => entry.id === id)) throw new TypeError(`src/objects/${id}/object.json authors a level of the zoom ladder without a catalogue entry: a level is an object.`);
+  // What the tree's shape cannot check: every package outside it is a bank that names its host, and a star measured to be
+  // bound to another (the astronomy records' `boundTo`) is inside what that star is inside.
+  const parentOf = (id: string) => { const descriptor = descriptors.get(id); return isRecord(descriptor) && typeof descriptor.parent === 'string' ? descriptor.parent : undefined; };
+  const inTree = new Set(entries.map(({ id }) => id));
+  checkBankHosts([...descriptors].flatMap(([id, descriptor]) => inTree.has(id) ? []
+    : [{ id, host: isRecord(descriptor) && isRecord(descriptor.properties) ? descriptor.properties.host : undefined }]), inTree);
+  checkBoundStars(entries.map(({ id }) => { const parent = parentOf(id); return parent === undefined ? { id } : { id, parent }; }),
+    STAR_IDS.flatMap(id => { const host = starAstrometry(id).boundTo; return host === undefined ? [] : [[id, host] as const]; }));
   const discoveries = await Promise.all(entries.map(async ({ id }) => {
     return prepareObjectDiscovery(descriptors.get(id), resolve(projectRoot, 'src/objects', id));
   }));
@@ -191,17 +239,20 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
     const descriptor = descriptors.get(id);
     return { descriptor, distance, discovery: discoveries[index]! };
   })));
-  // Every page reads the levels, so their rows are written apart as well: the same rows as the catalogue's.
-  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews.map(({ id, descriptor }) => {
-    const index = entries.findIndex(entry => entry.id === id);
-    return { descriptor, distance: entries[index]!.distance, discovery: discoveries[index]! };
-  })) + '\n');
-  await writeGenerated(resolve(projectRoot, 'site/prepared-dataset-volumes.json'), JSON.stringify(await readDatasetVolumes(entries, projectRoot)) + '\n');
-  await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');
+  await rm(resolve(projectRoot, 'site/prepared-overview-objects.json'), { force: true });
+  const datasetBanks = await readDatasetBanks(entries, projectRoot);
+  await writeGenerated(resolve(projectRoot, 'site/prepared-dataset-volumes.json'), JSON.stringify(await readDatasetVolumes(datasetBanks, projectRoot)) + '\n');
+  await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot, descriptors)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'), descriptors);
   await writeGenerated(resolve(projectRoot, 'site/prepared-stellar-extents.json'), JSON.stringify(await readStellarExtents([...entries, ...contexts], projectRoot)) + '\n');
   const { inline, banks } = splitContextObjectAssets(contexts, await contextObjectAssetUrls(contexts, projectRoot, assetOrigin()));
-  await writeGenerated(resolve(projectRoot, 'site/prepared-context-objects.mts'), contextObjectModule(contexts, inline));
+  const hosted = await readHostedContextBanks(contexts, descriptors, datasetBanks, projectRoot);
+  // The application's code names what the world draws from any page; a hosted bank comes with its carriers' entries.
+  const world = contexts.filter(({ id }) => hosted[id] === undefined), worldIds = new Set(world.map(({ id }) => id));
+  await writeGenerated(resolve(projectRoot, 'site/prepared-context-objects.mts'), contextObjectModule(world,
+    Object.fromEntries(Object.entries(inline).filter(([path]) => worldIds.has(assetObjectId(path) ?? '')))));
+  // Read by the build only (site/hosted-banks.mts).
+  await writeGenerated(resolve(projectRoot, 'site/prepared-hosted-banks.json'), JSON.stringify(hostedBankRecords(hosted, descriptors, inline)) + '\n');
   // Read by the build only (site/pages/world/context-assets/[id].json.ts).
   await writeGenerated(resolve(projectRoot, 'site/prepared-context-bank-assets.json'), JSON.stringify(banks) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-context-json.mts'), contextObjectJsonModule(contexts));

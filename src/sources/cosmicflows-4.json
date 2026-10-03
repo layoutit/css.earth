@@ -30,6 +30,11 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/944/94/ReadMe",
       "checkedOn": "2026-09-29",
       "locator": "table2: PGC, DM (all methodologies), RAJ2000, DEJ2000"
+    },
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-10-02",
+      "locator": "J/ApJ/944/94/table2: PGC 13179 (NGC 1365) is in group 1PGC 13418 (Fornax, NGC 1399); PGC 40809 (NGC 4424) in group 1PGC 41220 (Virgo, M49); PGC 42741 (NGC 4639) is its own group 1PGC 42741; PGC 41823 (NGC 4536) has no row; the two rows within 0.3 deg of its centre are other galaxies (PGC 1210230, PGC 41816). Query: SELECT * FROM \"J/ApJ/944/94/table2\" WHERE PGC IN (13179, 40809, 41823, 42741)"
     }
   ],
   "publisher": "CDS/VizieR",

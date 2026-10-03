@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "yses-1-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "yses-1",
-      "members": "planets"
+      "host": "yses-1"
     },
     "catalog": {
       "name": "YSES 1 system",

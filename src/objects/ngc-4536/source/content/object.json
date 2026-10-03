@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-4536",
+  "displayName": "NGC 4536",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "15.177 Mpc (−366,000 / +375,000 pc)",
+        "source": {
+          "catalogueId": "arxiv-1604-01424",
+          "url": "https://arxiv.org/abs/1604.01424",
+          "label": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 188.6°, Dec 2.188°",
+        "source": {
+          "catalogueId": "leroy-2021-phangs-alma",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+          "label": "Leroy et al. (2021), ApJS 257, 43, galaxies table",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "SDSS · optical",
+        "thumbnail": "ngc-4536-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-4536-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-4536-layers-optical",
+          "path": "../../ngc-4536-layers/source/manifest.json",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant",
+      "href": "https://arxiv.org/abs/1604.01424"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Leroy et al. (2021), ApJS 257, 43, galaxies table",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1604.01424",
+      "credit": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant"
+    }
+  }
+}

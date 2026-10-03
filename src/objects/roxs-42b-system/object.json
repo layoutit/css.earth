@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "roxs-42b-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "roxs-42b",
-      "members": "planets"
+      "host": "roxs-42b"
     },
     "catalog": {
       "name": "ROXs 42B system",

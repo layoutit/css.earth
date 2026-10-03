@@ -2,11 +2,11 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
-import { OBJECTS, OVERVIEWS, SCENE_OBJECTS, requireObject, requireSceneObject } from '../objects.mts';
+import { OBJECTS, SCENE_OBJECTS, ancestorsOf, requireObject } from '../objects.mts';
 import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
-import { readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
+import { readObjectDescriptors } from '@cssearth/objects/node';
 import { distanceDescription, isExtendedClassification, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { resolveSpatialCitation } from '@cssearth/catalog';
@@ -19,44 +19,54 @@ test('every scene and every package the host draws has exactly one searchable de
   // A galaxy, a nebula or a cluster is an authored object like any body: its recipe declares no surface.
   const hosted = [...descriptors].filter(([, descriptor]) => isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe)
     && Array.isArray(descriptor.properties.recipe.surfaces) && !descriptor.properties.recipe.surfaces.length).map(([id]) => id);
-  // Galaxies, nebulae and clusters, the four levels of the zoom ladder, and five places of the Nearby Universe (the Shapley
+  // Galaxies, nebulae and clusters, the four objects seen from inside, and five places of the Nearby Universe (the Shapley
   // Supercluster, the Hercules and Leo clusters, the Great Attractor and the Local Void) that show its galaxy field.
-  assert.equal(hosted.length, 63);
+  assert.equal(hosted.length, 67);
   // A bank is context the world draws, never an object: none carries a catalogue entry.
   for (const [id, descriptor] of descriptors) if (isRecord(descriptor) && typeof descriptor.type === 'string' && /-bank$/u.test(descriptor.type)) assert.ok(isRecord(descriptor.properties) && descriptor.properties.catalog === undefined, id);
-  const overviews = await readOverviews(resolve('src/objects'));
-  // The registry holds objects only. A level of the zoom ladder is one of them, and so is a system: a host with the bodies
+  // The registry holds objects only. An object seen from inside is one of them, and so is a system: a host with the bodies
   // that orbit it, with an address and a page of its own, which mounts its host's scene (navigation/system-address.mts).
   const systems = OBJECTS.filter(object => object.system);
   assert.deepEqual(SCENE_OBJECTS, OBJECTS.filter(object => !object.system));
   assert.ok(systems.length > 700 && systems.some(object => object.id === 'solar-system') && systems.some(object => object.id === 'jupiter-system'));
+  const starSystems = new Set(systems.filter(object => object.classification === 'star-system').map(object => object.name));
+  for (const name of ['61 Cygni system', '70 Ophiuchi system', 'Alpha Centauri system', 'GJ 338 system', 'Struve 2398 system', 'Sirius system']) assert.ok(starSystems.has(name), name);
+  assert.equal(requireObject('trappist-1-system').classification, 'planetary-system');
   for (const system of systems) {
-    const host = requireSceneObject(system.system!.host);
+    const host = requireObject(system.system!.host);
     assert.equal(system.id, systemObjectId(host.id), `${system.id} is named after its host`);
     assert.equal(system.route, `/${system.id}/`);
-    assert.equal(system.classification, system.system!.members === 'moons' ? 'satellite-system' : 'planetary-system', system.id);
+    // What kind of system it is is its classification: a planet's or small body's moons, a star with only stars inside its
+    // system, or a star with a planet.
+    const inside = OBJECTS.filter(object => object.parent === system.id && object.id !== host.id);
+    if (!['star', 'black-hole'].includes(host.classification)) assert.equal(system.classification, 'satellite-system', system.id);
+    else if (inside.some(object => !['star', 'black-hole'].includes(object.classification))) assert.equal(system.classification, 'planetary-system', system.id);
+    else if (inside.length) assert.equal(system.classification, 'star-system', system.id);
+    else assert.ok(['star-system', 'planetary-system'].includes(system.classification), system.id);
     assert.equal(host.system, undefined, `${host.id} hosts a system and is not one`);
   }
   // No other object's id reads as a system's.
   for (const object of SCENE_OBJECTS) assert.equal(systemHostId(object.id), null, object.id);
-  for (const id of hosted) assert.equal(requireSceneObject(id).id, id);
-  assert.deepEqual(OVERVIEWS.map(level => level.id), overviews.map(overview => overview.id));
-  assert.deepEqual(OVERVIEWS.map(level => level.id), ['milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
-  for (const level of OVERVIEWS) {
-    const object = requireSceneObject(level.id);
-    assert.equal(object.route, `/${level.id}/`);
-    assert.deepEqual(object.level?.zoom, level.zoom);
-    // Each names the context packages the world draws for it, and none of those is an object.
-    for (const id of level.packages) assert.equal(OBJECTS.some(candidate => candidate.id === id), false, `${level.id} draws ${id}`);
+  for (const id of hosted) assert.equal(requireObject(id).id, id);
+  // The objects seen from inside author their zoom facts; the order the view hands over in is the tree: Earth's ancestors.
+  const inside = OBJECTS.filter(object => object.zoom);
+  assert.deepEqual(new Set(inside.map(object => object.id)), new Set(['milky-way', 'local-group', 'nearby-universe', 'observable-universe']));
+  assert.deepEqual(ancestorsOf('earth').map(object => object.id), ['earth-system', 'solar-system', 'milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
+  for (const object of inside) {
+    assert.equal(object.route, `/${object.id}/`);
+    // The banks the world draws for it name it as their host, and none of those is an object.
+    for (const [id, descriptor] of descriptors) {
+      if (isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.host === object.id) assert.equal(OBJECTS.some(candidate => candidate.id === id), false, `${object.id} hosts ${id}`);
+    }
   }
   const sitemap = await (await import('../pages/sitemap.xml.ts')).GET().text();
-  for (const level of OVERVIEWS) assert.equal(sitemap.split(`/${level.id}/</loc>`).length, 2, `${level.id} is in the sitemap once`);
+  for (const object of inside) assert.equal(sitemap.split(`/${object.id}/</loc>`).length, 2, `${object.id} is in the sitemap once`);
   // The site's own address leads: it was absent, and it is the page a search result should name (2026-10-01).
   assert.ok(sitemap.includes('<url><loc>https://css.earth/</loc></url>'));
-  // Every object is searched through the catalogue, the levels included.
+  // Every object is searched through the catalogue.
   assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.map(object => object.id)));
   assert.deepEqual(objectAdapter.routes(SCENE_OBJECTS), SCENE_OBJECTS.map(object => object.route));
-  assert.equal(requireSceneObject('m31').id, 'm31');
+  assert.equal(requireObject('m31').id, 'm31');
   for (const [query, id] of [['Andromeda', 'm31'], ['M31', 'm31'], ['LMC', 'lmc'], ['SMC', 'smc'], ['NGC 1976', 'm42'], ['Virgo', 'virgo-cluster']]) {
     const object = requireObject(id!);
     assert.ok((object.searchNames ?? []).some(name => name.includes(normalizeDestinationQuery(query!))), query);
@@ -78,7 +88,7 @@ test('distance display and order use the prepared position, never the legacy orb
     assert.equal(distance.epochJdTt, distance.quantity === 'catalogue' ? null : object.worldFrame?.epochJdTt, object.id);
     assert.equal(distance.referencePoint, distance.quantity === 'catalogue' ? 'observer' : 'heliocentre', object.id);
   }
-  const halley = requireSceneObject('comet-1p');
+  const halley = requireObject('comet-1p');
   assert.ok(halley.distance.value > 30 && halley.distance.value < 40);
   assert.match(distanceDescription(halley.distance), /Distance from the Sun at JD/);
   assert.ok(!('distanceAu' in halley));
@@ -115,10 +125,37 @@ test('physical hosts remain distinct from scene hosts and M45 retains its measur
   assert.equal(OBJECTS.some(o => o.id === satellite.id), false, 'a catalogue row without a package is data, never a destination');
   // The Milky Way row is detailed by the milky-way package, so it carries that id; its LVDB key stays in its source reference.
   assert.equal(catalogue.unpositionedHosts?.find(o => o.id === 'milky-way')?.sourceRef, 'lvdb-v1.1.1:mw:name_discovery');
-  assert.equal(requireObject('milky-way').classification, 'galaxy', 'the Milky Way row is detailed by its object, which is also a level');
+  assert.equal(requireObject('milky-way').classification, 'galaxy', 'the Milky Way row is detailed by its object');
   const m45 = OBJECTS.find(o => o.id === 'm45')!;
   assert.equal(m45.distance.subject?.id, 'm45-stellar-cluster');
   assert.match(distanceDescription(m45.distance), /Pleiades stellar cluster/);
   assert.match(distanceDescription(m45.distance), /dust-filament distances are not measured/);
 });
 
+
+test('every object is inside exactly one object, and the Observable Universe is the root', async () => {
+  const byId = new Map(OBJECTS.map(object => [object.id, object]));
+  assert.deepEqual(OBJECTS.filter(object => object.parent === undefined).map(object => object.id), ['observable-universe']);
+  for (const object of OBJECTS) {
+    if (object.parent !== undefined) assert.ok(byId.has(object.parent), `${object.id} is inside ${object.parent}`);
+    assert.equal(ancestorsOf(object.id).at(-1)?.id ?? object.id, 'observable-universe', object.id);
+  }
+  // A body with a system of its own is inside it, and the system sits where the body would.
+  for (const system of OBJECTS.filter(object => object.system)) assert.equal(requireObject(system.system!.host).parent, system.id, system.id);
+  // Every body an orbit graph gives a star's system is inside that system in the tree.
+  const { allPlanetarySystems } = await import('../object-systems.mts');
+  for (const system of allPlanetarySystems(SCENE_OBJECTS)) {
+    const inside = requireObject(system.id).parent!;
+    for (const member of system.memberIds) if (byId.has(member)) assert.ok(ancestorsOf(member).some(object => object.id === inside), `${member} orbits ${system.id} and is inside ${inside}`);
+  }
+  const chain = (id: string) => ancestorsOf(id).map(object => object.id);
+  assert.deepEqual(chain('moon'), ['earth-system', 'solar-system', 'milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
+  assert.deepEqual(chain('trappist-1b').slice(0, 2), ['trappist-1-system', 'milky-way']);
+  // McConnachie (2012): the Magellanic Clouds are in the Milky Way's subgroup, Triangulum in Andromeda's.
+  assert.deepEqual(chain('lmc').slice(0, 2), ['milky-way', 'local-group']);
+  assert.deepEqual(chain('m33').slice(0, 2), ['m31', 'local-group']);
+  // Cosmicflows-4 groups: M87 is in Virgo, which is inside the Nearby Universe, not the Local Group.
+  assert.deepEqual(chain('m87-star'), ['m87', 'virgo-cluster', 'nearby-universe', 'observable-universe']);
+  assert.deepEqual(chain('hv-2827').slice(0, 2), ['lmc', 'milky-way']);
+  assert.deepEqual(chain('abell-2744'), ['observable-universe']);
+});

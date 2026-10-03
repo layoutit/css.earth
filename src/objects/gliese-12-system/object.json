@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "gliese-12-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "gliese-12",
-      "members": "planets"
+      "host": "gliese-12"
     },
     "catalog": {
       "name": "Gliese 12 system",

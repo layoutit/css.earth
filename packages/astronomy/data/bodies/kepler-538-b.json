@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": -8.033296726457865,
   "radialVelocityKmPerS": 0,
   "presentationUp": "display-axis",
+  "boundTo": "kepler-538",
   "sources": {
    "position": "Gaia DR3 source 2087171453783512704 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kepler-538-b/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 6.6506 +/- 0.2187 mas (same row, RUWE 1.09): 150.36 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): -49.153, -8.033 mas/yr",
-   "radialVelocity": "No catalogued radial velocity: Gaia DR3 measures none for source 2087171453783512704 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 50,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%202087171453783512704)"
+   "radialVelocity": "No catalogued radial velocity: Gaia DR3 measures none for source 2087171453783512704 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 50,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%202087171453783512704)",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list Kepler-538 and Kepler-538B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2087171453788422528 and 2087171453783512704), 2,679 AU apart on the sky, with a chance-alignment probability of 3.2e-4: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

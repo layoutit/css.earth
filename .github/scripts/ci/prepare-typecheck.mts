@@ -10,6 +10,7 @@ import { type RuntimeAssetLocation, inventoryAssets } from '@cssearth/bake/deliv
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 import { volumeMetadataAssets } from '@cssearth/bake/delivery';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
+import { OBJECT_TREE_ROOT, parsePreparedWorldIndex } from '@cssearth/objects';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
@@ -127,14 +128,19 @@ export async function restoreTypecheckInputs({ root = projectRoot, fetcher = fet
   const imports = await collectTypecheckPreparedImports(root);
   const catalogue = await volumeMetadataAssets(root);
   const features = await typecheckFeatureAssets(root);
-  // The world summary names the files that hold its other bodies, which Node reads by computed path. They restore with it:
+  // The world index names every object with a file of world bodies, which Node reads by computed path: each object's
+  // `members.json` and `places.json` in its own package. They restore with the summary, after the index that names them:
   // the world step of build:tools bakes without the bodies' imagery, so its own copies place stars in different files.
-  const summary = resolve(root, 'src/objects/sun/prepared/world-context-summary.json');
-  const world = imports.includes(summary)
-    ? (await inventoryAssets(root, ['sun'], { location: 'prepared' })).filter(asset => /^(?:world-systems\/.+|world-(?:stars|index|hosts))\.json$/u.test(relative(dirname(summary), asset.file).split(sep).join('/')))
-    : [];
+  const summary = resolve(root, `src/objects/${OBJECT_TREE_ROOT}/prepared/world.json`);
+  const world = imports.includes(summary) ? await inventoryAssets(root, [OBJECT_TREE_ROOT], { location: 'prepared', filenames: ['world-index.json'] }) : [];
   const initial = uniqueAssets([...await typecheckAssetsForPaths(imports, root), ...world, ...catalogue.assets, ...features.assets]);
   const first = await installRuntimeAssets(initial, { fetcher });
+  const index = world.length ? parsePreparedWorldIndex(JSON.parse(await readFile(world[0]!.file, 'utf8'))) : null;
+  const holders = index ? index.files : [];
+  const members = uniqueAssets(holders.length ? await inventoryAssets(root, holders, { location: 'prepared', filenames: ['members.json', 'places.json'] }) : []);
+  const memberFiles = members.filter(asset => asset.filename === 'members.json').length;
+  if (memberFiles !== holders.length) throw new TypeError(`The world index names ${holders.length} objects with files and their packages' inventories publish ${memberFiles} members.json files.`);
+  const held = await installRuntimeAssets(members, { fetcher });
   const landmarkRuntimes: string[] = [];
   for (const asset of features.catalogues) {
     const data = requireRecord(JSON.parse(await readFile(asset.file, 'utf8')));
@@ -143,9 +149,9 @@ export async function restoreTypecheckInputs({ root = projectRoot, fetcher = fet
   const followup = uniqueAssets(await typecheckAssetsForPaths(landmarkRuntimes, root))
     .filter(asset => !initial.some(previous => previous.file === asset.file));
   const second = await installRuntimeAssets(followup, { fetcher });
-  const assets = uniqueAssets([...initial, ...followup]);
+  const assets = uniqueAssets([...initial, ...followup, ...members]);
   return { files: assets.length, bytes: assets.reduce((sum, asset) => sum + asset.bytes, 0),
-    installed: first.installed + second.installed, reused: first.reused + second.reused };
+    installed: first.installed + second.installed + held.installed, reused: first.reused + second.reused + held.reused };
 }
 
 async function run(root: string, args: string[]) {

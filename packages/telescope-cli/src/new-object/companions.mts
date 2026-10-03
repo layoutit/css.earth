@@ -2,9 +2,9 @@
  *
  * A wide companion is found in El-Badry, Rix & Heintz (2021)'s catalogue of Gaia EDR3 binaries (VizieR J/MNRAS/506/2269), kept
  * only when the paper's chance-alignment probability R is below 0.1, named by SIMBAD, and given the temperature, radius and mass of
- * the TESS Input Catalog v8.2 (Stassun et al. 2019, VizieR IV/39/tic82). It becomes a placed star of the host's system at its own
- * Gaia DR3 position, as Alpha Centauri B and Proxima are: at these separations the measured positions are the stars' places, so no
- * orbit or barycentre is involved. A pair too close for Gaia to separate is not in the catalogue and is not added. */
+ * the TESS Input Catalog v8.2 (Stassun et al. 2019, VizieR IV/39/tic82). It becomes a placed star at its own Gaia DR3 position, bound
+ * to its host (`boundTo`) and so inside the host's system: at these separations the measured positions are the stars' places, so no
+ * orbit is involved. A pair too close for Gaia to separate is not in the catalogue and is not added. */
 import type { Archive } from './archives.mts';
 import { hostId as idFor } from './identity.mts';
 
@@ -33,7 +33,7 @@ export const ticRow = async (archive: Archive, gaia: string) => (await vizier(ar
 
 /** The bound wide companions of the star with Gaia DR3 `gaia`, as placed-star spec entries of `system`. `held(gaia, name)` names a
  * star the universe already holds; such a companion is noted, not drafted again. */
-export async function wideCompanions(archive: Archive, host: { readonly gaia: string; readonly name: string; readonly system: string }, held: (gaia: string, name: string) => string | undefined): Promise<{ companions: Record<string, unknown>[]; notes: string[] }> {
+export async function wideCompanions(archive: Archive, host: { readonly id: string; readonly gaia: string; readonly name: string; readonly system: string }, held: (gaia: string, name: string) => string | undefined): Promise<{ companions: Record<string, unknown>[]; notes: string[] }> {
   const pairs = (await Promise.all(['Source1', 'Source2'].map(column => vizier(archive, 'J/MNRAS/506/2269/catalog', { [column]: host.gaia }, 'Source1,Source2,sepAU,R')))).flat()
     .filter(pair => Number(pair.R) < CHANCE_ALIGNMENT_MAX);
   const companions: Record<string, unknown>[] = [], notes: string[] = [];
@@ -51,7 +51,10 @@ export async function wideCompanions(archive: Archive, host: { readonly gaia: st
     const cite = (key: string, error: string, label: string) => ({ value: value(key)!, ...(value(error) ? { uncertainty: value(error)! } : {}), source: `${TIC.credit}, ${label} of TIC ${tic.TIC} (VizieR IV/39/tic82)`, url: TIC.url });
     const teff = Math.round(value('Teff')!), au = separation.toLocaleString('en-US');
     const fit = (budget: number, ...drafts: string[]) => drafts.find(draft => draft.length <= budget) ?? drafts.at(-1)!;
-    companions.push({ id: idFor({ hostname: name, gaiaDr3: `Gaia DR3 ${gaia}` }), name, system: host.system, gaia,
+    // The bond as the astronomy record carries it (`boundTo`, `sources.binary`): it puts the star inside its host's system.
+    const chance = Number(pair.R).toExponential(1).replace(/e([+-])0*(\d)/u, (_, sign: string, digits: string) => `e${sign === '-' ? '-' : ''}${digits}`);
+    const bond = `El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list ${host.name} and ${name} in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id ${host.gaia} and ${gaia}), ${au} AU apart on the sky, with a chance-alignment probability of ${chance}: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit.`;
+    companions.push({ id: idFor({ hostname: name, gaiaDr3: `Gaia DR3 ${gaia}` }), name, system: host.system, gaia, boundTo: { host: host.id, source: bond },
       description: `Star bound to ${host.name}, ${au} AU away.`, paper: EL_BADRY,
       radius: cite('Rad', 's_Rad', 'the radius'), temperature: cite('Teff', 's_Teff', 'the effective temperature'), mass: cite('Mass', 's_Mass', 'the mass'),
       text: { card: fit(110, `${name} is a star of ${teff.toLocaleString('en-US')} K, bound to ${host.name} ${au} AU away.`, `A star of ${teff.toLocaleString('en-US')} K, bound to ${host.name}.`),

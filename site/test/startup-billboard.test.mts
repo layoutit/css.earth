@@ -7,7 +7,7 @@ import { createPreparedObjectNavigation } from '@cssearth/renderer/runtime/prepa
 import { selectPreparedTextureLevel } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { readPreparedObjectBytes } from '../object-page-data.mts';
-import { requireSceneObject } from '../objects.mts';
+import { requireObject } from '../objects.mts';
 import { usesDefaultStartupView, readStartupSavedView } from '../startup-billboard.mts';
 import { canUseArrivalBillboard } from '../arrival-billboard.mts';
 
@@ -22,7 +22,7 @@ test('default startup never overwrites a saved camera, dataset or context', () =
 });
 
 test('startup uses the baked perspective and viewport texture demand before mounting', async () => {
-  const object = requireSceneObject('earth'), arrival = object.discovery.arrival;
+  const object = requireObject('earth'), arrival = object.discovery.arrival;
   assert.ok(arrival?.billboard);
   const { descriptor, bytes } = await readPreparedObjectBytes('earth');
   const definition = await loadPreparedCssObject(descriptor, { async read() { return Uint8Array.from(bytes).buffer; } });
@@ -44,7 +44,7 @@ test('startup uses the baked perspective and viewport texture demand before moun
 });
 
  test('saved startup prepares the saved camera and dataset instead of default arrival demand', async () => {
-  const object = requireSceneObject('earth');
+  const object = requireObject('earth');
   const { descriptor, bytes } = await readPreparedObjectBytes('earth');
   const definition = await loadPreparedCssObject(descriptor, { async read() { return Uint8Array.from(bytes).buffer; } });
   const nav = createPreparedObjectNavigation(async () => definition, object.worldFrame);

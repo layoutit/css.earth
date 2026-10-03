@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "ida-system",
+  "parent": "solar-system",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "ida",
-      "members": "moons"
+      "host": "ida"
     },
     "catalog": {
       "name": "Ida–Dactyl system",

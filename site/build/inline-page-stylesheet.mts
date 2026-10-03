@@ -11,14 +11,13 @@ export async function inlineStylesheetLinks(html: string, read: (href: string) =
   return html.replace(STYLESHEET_LINK, (_link, href: string) => `<style>${sheets.get(href)!}</style>`);
 }
 
-/** Inlines the stylesheet of every page a reader opens. The fragments a flight fetches (`/navigation/<id>/`,
- * `/system-bodies-fragment/<id>/`) keep their link: the open page already has the sheet, and a fragment that carried it
+/** Inlines the stylesheet of every page a reader opens. The fragments a flight fetches (`/navigation/<id>/`) keep their link: the open page already has the sheet, and a fragment that carried it
  * would send it again on every flight. Astro's `build.inlineStylesheets` decides per stylesheet, not per page. */
 export async function inlinePageStylesheets(dist: string): Promise<number> {
   const cache = new Map<string, Promise<string>>();
   const read = (href: string) => cache.get(href) ?? cache.set(href, readFile(join(dist, href), 'utf8')).get(href)!;
   const pages = ['index.html', ...(await readdir(dist, { withFileTypes: true }))
-    .filter(entry => entry.isDirectory() && !['navigation', 'system-bodies-fragment', '_astro'].includes(entry.name))
+    .filter(entry => entry.isDirectory() && !['navigation', '_astro'].includes(entry.name))
     .map(entry => join(entry.name, 'index.html'))];
   let inlined = 0;
   await Promise.all(pages.map(async page => {

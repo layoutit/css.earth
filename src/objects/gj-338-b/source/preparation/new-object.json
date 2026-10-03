@@ -1,7 +1,11 @@
 {
   "id": "gj-338-b",
   "name": "GJ 338 B",
-  "system": "GJ 338 B system",
+  "system": "GJ 338 system",
+  "boundTo": {
+    "host": "gj-338-a",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list GJ 338 A and GJ 338 B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 1022456139210632064 and 1022456104850892928), 108 AU apart on the sky, with a chance-alignment probability of 5.5e-7: the pair is bound. This record adopts no orbit of the pair, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "A nearby orange dwarf, 57% of the Sun's width: its disc was measured by interferometry.",
   "target": "GJ 338 B",
   "paper": {

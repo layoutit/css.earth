@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "hd-135344-a-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hd-135344-a",
-      "members": "planets"
+      "host": "hd-135344-a"
     },
     "catalog": {
       "name": "HD 135344 A system",

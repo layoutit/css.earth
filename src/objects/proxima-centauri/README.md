@@ -24,7 +24,7 @@ Run of 2026-09-21 (this version):
 
 ## Known problems
 
-Proxima is a flare star with a planet, Proxima b; neither flares nor the planet are drawn. No mass is adopted.
+Proxima is a flare star with a planet, Proxima b; neither flares nor the planet are drawn. Kervella, Thévenin & Lovis (2017), A&A 598, L7 (https://arxiv.org/abs/1611.03495) find Proxima bound to Alpha Centauri, so it is inside the Alpha Centauri system here, with the mass they adopt for it, 0.1221 ± 0.0022 solar masses. Its orbit about Alpha Centauri is not adopted: the star is placed by its own astrometry.
 - **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

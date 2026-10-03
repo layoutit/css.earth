@@ -2,6 +2,10 @@
   "id": "hd-80607",
   "name": "HD 80607",
   "system": "HD 80606 system",
+  "boundTo": {
+    "host": "hd-80606",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list HD 80606 and HD 80607 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 1019003226022657920 and 1019003329101872896), 1,355 AU apart on the sky, with a chance-alignment probability of 3.6e-6: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to HD 80606, 1,355 AU away.",
   "gaia": "1019003329101872896",
   "paper": {

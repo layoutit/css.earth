@@ -4,8 +4,8 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { catalogEntry, defineObjects, overviewLevel } from '../registry/index.js';
-import type { CatalogEntry, NavigationDistance, OverviewObject } from '../registry/index.js';
+import { catalogEntry, defineObjects } from '../registry/index.js';
+import type { CatalogEntry, NavigationDistance } from '../registry/index.js';
 
 const byOrder = (a: CatalogEntry, b: CatalogEntry) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en');
 
@@ -36,36 +36,14 @@ export async function readCatalog(objectsDirectory: string, distance: (descripto
   return entries;
 }
 
-/** A descriptor that mounts no scene of its own is application context: the world loads its prepared resources directly. */
+/** A descriptor that mounts no scene of its own is application context: the world loads its prepared resources directly.
+ * So is an object seen from inside (`properties.zoom`): its scene is the world around the star the zoom came from. */
 export async function readContextObjects(objectsDirectory: string, descriptors?: ObjectDescriptors) {
   const contexts: { id: string; type: string }[] = [];
   for (const [name, descriptor] of descriptors ?? await readObjectDescriptors(objectsDirectory)) {
-    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || descriptor.properties.catalog !== undefined && descriptor.properties.overview === undefined) continue;
+    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || descriptor.properties.catalog !== undefined && descriptor.properties.zoom === undefined) continue;
     if (descriptor.id !== name || typeof descriptor.type !== 'string') throw new TypeError(`Context object identity differs: ${name}.`);
     contexts.push({ id: name, type: descriptor.type });
   }
   return contexts.sort((a, b) => a.id.localeCompare(b.id, 'en'));
-}
-
-/** The levels above the star systems the object folders author (`properties.overview`), in their order on the zoom ladder,
- * each with its descriptor: an entry of the one registry like any other package's. */
-export async function readOverviews(objectsDirectory: string, descriptors?: ObjectDescriptors) {
-  const overviews: { readonly id: string; readonly descriptor: unknown; readonly level: NonNullable<ReturnType<typeof overviewLevel>> }[] = [];
-  const read = descriptors ?? await readObjectDescriptors(objectsDirectory);
-  for (const [name, descriptor] of read) {
-    const level = overviewLevel(descriptor);
-    if (!level) continue;
-    if (!isRecord(descriptor) || descriptor.id !== name) throw new TypeError(`Overview identity differs: ${name}.`);
-    overviews.push({ id: name, descriptor, level });
-  }
-  overviews.sort((a, b) => a.level.order - b.level.order);
-  for (const [index, overview] of overviews.entries()) {
-    if (index > 0 && overview.level.order === overviews[index - 1]!.level.order) throw new TypeError(`Overviews ${overviews[index - 1]!.id} and ${overview.id} share order ${overview.level.order} on the zoom ladder.`);
-    for (const id of overview.level.packages) if (!read.has(id)) throw new TypeError(`Overview ${overview.id} draws package ${id}, which is not in ${objectsDirectory}.`);
-    // One level holds each classification: a subject's breadcrumbs lead to exactly one.
-    for (const other of overviews.slice(0, index)) for (const classification of overview.level.holds.flatMap(group => group.classifications)) {
-      if (other.level.holds.some(group => group.classifications.includes(classification))) throw new TypeError(`Overviews ${other.id} and ${overview.id} both hold ${classification}.`);
-    }
-  }
-  return overviews;
 }

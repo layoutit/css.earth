@@ -73,6 +73,8 @@ export async function galaxyVelocity(archive: Archive, name: string) {
 /** What a Cepheid placed by a catalogue row needs beside its period: who it is, where its row is, and its galaxy's distance and velocity. */
 export interface RelationCepheid {
   readonly id: string; readonly name: string; readonly target: string; readonly galaxy: string; readonly periodDays: number;
+  /** The galaxy's object, which the star is inside (the spec's `parent`). */
+  readonly inside: string;
   readonly paper: { readonly url: string; readonly credit: string }; readonly periodSource: string;
   readonly position: { readonly catalogue: string; readonly row: Readonly<Record<string, string>>; readonly credit: string; readonly url: string };
   readonly distance: { readonly value: number; readonly uncertainty?: number; readonly source: string; readonly url: string };
@@ -84,7 +86,7 @@ export function relationCepheidDraft(star: RelationCepheid) {
   const { radius, temperature } = cepheidRelations(star.periodDays);
   const relation = `${GROENEWEGEN_2020.credit}, period relations for Galactic fundamental-mode Cepheids applied to this star's period, ${star.periodDays} d in ${star.periodSource}; not a measurement of this star`;
   return {
-    id: star.id, name: star.name, system: `${star.name} system`, target: star.target, paper: star.paper, description: star.description,
+    id: star.id, name: star.name, system: `${star.name} system`, parent: star.inside, target: star.target, paper: star.paper, description: star.description,
     position: star.position, distance: star.distance, radialVelocity: star.velocity,
     radius: { value: Number(radius.toFixed(1)), uncertainty: Number((radius * (10 ** GROENEWEGEN_2020.radiusRmsDex - 1)).toFixed(1)),
       source: `${relation}: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, ${GROENEWEGEN_2020.radiusRmsDex} dex`, url: GROENEWEGEN_2020.url },
@@ -105,7 +107,7 @@ export function draftFromHoffmann(row: HoffmannRow, velocity: { value: number; u
   const galaxy = hostName(row.host), [modulus, error] = distance, parsecs = 10 ** (modulus / 5 + 1);
   const period = row.periodDays.toFixed(row.periodDays < 10 ? 2 : 1), id = `${galaxy.toLowerCase().replace(/\s+/gu, '-')}-cepheid-${row.id}`, name = `${galaxy} Cepheid ${row.id}`;
   return relationCepheidDraft({
-    id, name, target: row.simbad, galaxy, periodDays: row.periodDays, paper: { url: HOFFMANN.paper, credit: HOFFMANN.credit }, periodSource: `${HOFFMANN.credit}, table 5`,
+    id, name, target: row.simbad, galaxy, inside: galaxy.toLowerCase().replace(/\s+/gu, '-'), periodDays: row.periodDays, paper: { url: HOFFMANN.paper, credit: HOFFMANN.credit }, periodSource: `${HOFFMANN.credit}, table 5`,
     description: `A Cepheid in the galaxy ${galaxy} that pulsates every ${period} days, found by the Hubble Space Telescope.`,
     position: { catalogue: HOFFMANN.catalogue, row: { Gal: row.host, ID: row.id }, credit: `${HOFFMANN.credit}, table 5`, url: HOFFMANN.paper },
     distance: { value: Math.round(parsecs), uncertainty: Math.round(parsecs * Math.LN10 / 5 * error),

@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": -52.9805895161079,
   "radialVelocityKmPerS": -15.552483,
   "presentationUp": "display-axis",
+  "boundTo": "k2-122",
   "sources": {
    "position": "Gaia DR3 source 663843446785837952 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/k2-122-b/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 13.7680 +/- 0.0299 mas (same row, RUWE 1.19): 72.63 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): -22.191, -52.981 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): -15.55 +/- 3.51 km/s"
+   "radialVelocity": "Gaia DR3 (same row): -15.55 +/- 3.51 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list K2-122 and K2-122B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 663843343706623232 and 663843446785837952), 1,452 AU apart on the sky, with a chance-alignment probability of 5.2e-6: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

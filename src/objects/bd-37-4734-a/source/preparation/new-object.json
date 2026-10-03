@@ -2,6 +2,10 @@
   "id": "bd-37-4734-a",
   "name": "BD+37 4734A",
   "system": "HAT-P-1 system",
+  "boundTo": {
+    "host": "hat-p-1",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list HAT-P-1 and BD+37 4734A in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 1928431764627661440 and 1928431764627661312), 1,807 AU apart on the sky, with a chance-alignment probability of 7.9e-6: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to HAT-P-1, 1,807 AU away.",
   "gaia": "1928431764627661312",
   "paper": {

@@ -1,0 +1,797 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 54296,
+      "sha256": "6fb9773e723405b23402eac481c0d803e47ea5061cbefe0a78b6c6e245446381"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/achlys.bin",
+      "bytes": 2265,
+      "sha256": "40c25501738a96428eb2b8359741d56166a68bd06e742dbd3232aff9dcde9f89"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/adeona.bin",
+      "bytes": 2263,
+      "sha256": "48fc99621c320e479a0e9a709b0d07818284c93e2033ee69c99b5b718350f8f2"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/amphitrite.bin",
+      "bytes": 2259,
+      "sha256": "598534e76e6e26ad00940b91c51dd7334fc97c3f08c17559e7819a0c2a117dac"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/annefrank.bin",
+      "bytes": 2273,
+      "sha256": "f23f51a47e4235a00eaa7018f28fffb2952aa715a2d8440229c8d85b545e63e1"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/apophis.bin",
+      "bytes": 2258,
+      "sha256": "e7ab5ab406b8f4f9b9d51a0b52537c457fd4551602e8eace489d2d2323922aea"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/arrokoth.bin",
+      "bytes": 2265,
+      "sha256": "7149f00f93063bd07ffb10919c424a5be65ea2c23a26d348ade30dc0e2512e98"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/asteroid-2001-sn263.bin",
+      "bytes": 2276,
+      "sha256": "dac2d28b6a0fdfb2fc6812c3ba8c56ae54f94afb7c686c8d6a2be076dfc060b2"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/asteroid-2002-tc302.bin",
+      "bytes": 2275,
+      "sha256": "4c2150819486348743bb4eb6840330972eb99fe61d9661f14100c7db9e8e6e32"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/asteroid-2002-tx300.bin",
+      "bytes": 2282,
+      "sha256": "56fd5d451bfc6cb416aa046f96f3b9dfd299368e38fc667b650879416493d683"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/asteroid-2003-vs2.bin",
+      "bytes": 2277,
+      "sha256": "681e14f36714ec33fff08f7ece5f6b42f9d9b1d438d365a3485f026149a8e581"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/asteroid-2012-vp113.bin",
+      "bytes": 2282,
+      "sha256": "59d3a249fb69349732fd96c644c1f22143a7db8fe1b8b554e4fcad1b05e6e2a0"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/asteroid-2017-of201.bin",
+      "bytes": 2271,
+      "sha256": "069f2b3464118f9e224270359be26a42b88e49ca7341e373a22330dd9d5966ae"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/athamantis.bin",
+      "bytes": 2270,
+      "sha256": "6f3bfcae86a3a186896a0815cc7efa699b322c277692a09b4e5dc204f47364ff"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/ausonia.bin",
+      "bytes": 2265,
+      "sha256": "41822fa4ee1881969deaabd62f7588107c99c77d7d939fb14957bae71e30a793"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/bamberga.bin",
+      "bytes": 2261,
+      "sha256": "39b192fd484259e37f27f919ed9572efcbd05537ff1e64bd238face2cd08fff1"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/bennu.bin",
+      "bytes": 2255,
+      "sha256": "72c98554bd6e062ca0aa98bd5f2a8c78e7706a91934b501a36500ffe4f048b19"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/braille.bin",
+      "bytes": 2264,
+      "sha256": "f7200dd35c71972b15620b1be42e5ee402b752dfd202db968a7f717680733bef"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/ceres.bin",
+      "bytes": 2265,
+      "sha256": "584b890c3bbceafe619626891875222cd199644e781236d1871310d685da83d1"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-103p.bin",
+      "bytes": 2265,
+      "sha256": "ad6ab1d9f9823e2eecc940c68c4ed41488fb8afa173f92127437be9e16202226"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-109p.bin",
+      "bytes": 2267,
+      "sha256": "d71dc62c3406f4e91c7c95f91acc7aa319e3da6ac9c428f5fc08e661cc5135fd"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-137p.bin",
+      "bytes": 2255,
+      "sha256": "cf9a848dbf8c8aedd15bcad89b6519e2ad18603d7af8e4bf62ee603b44e36488"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-143p.bin",
+      "bytes": 2265,
+      "sha256": "f8dc6d338e7f6c2de0527a964086e74522718c469478d9d71aebb9e9fdee54e5"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-153p.bin",
+      "bytes": 2263,
+      "sha256": "d182a869c9204578e3fd69ce0a1dc4331275c2e6856c6cfe3206e6c73c158f25"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-162p.bin",
+      "bytes": 2267,
+      "sha256": "1bb85a2bfe6dab1184038012ad9bf99f158109d04d6c813508de4505382e1008"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-167p.bin",
+      "bytes": 2269,
+      "sha256": "b7ad1be9460e642bfa9f462e360384f9b25163632cd7abd432f652c0eb2f6736"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-17p.bin",
+      "bytes": 2256,
+      "sha256": "c34abc1f8fa4a577049b44f8f0128297089aec52f211534058507fc46c933fd3"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-19p.bin",
+      "bytes": 2264,
+      "sha256": "29304b7e9f7e44c0cc7f7defd29e467ad249da8d8ab54d5dbe247e1bf088e70d"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-1p.bin",
+      "bytes": 2259,
+      "sha256": "58139923871a551268e43134d75f58f9888b25eef5efd69dbcab4625d38c2709"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-209p.bin",
+      "bytes": 2264,
+      "sha256": "e6beecdb1872d9ed1307a03403d3ad16490697d1d2487ae06a6504fe1163d573"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-21p.bin",
+      "bytes": 2261,
+      "sha256": "1812304d36d8ab28e74b742505216778427b75d63d6ad72aade79e5e3753c2ea"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-26p.bin",
+      "bytes": 2262,
+      "sha256": "af51a36b19efe4b5f1cf60820df595c5f05cc9e4d965167a9e07eb36e4d0f577"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-29p.bin",
+      "bytes": 2253,
+      "sha256": "c5583e18e7c2ef0621e4702524eff0957191ba313c8a376e8dccceff986d8acc"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-2i.bin",
+      "bytes": 1896,
+      "sha256": "ff468567f11ce12e35a1ad0b79b08d396fc3e49288f9e8011e2e07e70a0a3944"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-2p.bin",
+      "bytes": 2264,
+      "sha256": "9fdeb58deef8174df68c37bd49e52291cc61711e6672a55bad0b4ea3b6f337f8"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-3i.bin",
+      "bytes": 1869,
+      "sha256": "f89fa1f9c109ddff83d934f6ff2390e587b212f996c7b52df4ba5a91a4023e0e"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-46p.bin",
+      "bytes": 2251,
+      "sha256": "af8f944b3bfbf0a8d0e6f7a873aa0fe50e7099955c82abe7e164fdc5e263f7bd"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-55p.bin",
+      "bytes": 2268,
+      "sha256": "b0decf2bb752c27113528ab6eaabe4416db106487d60a1422126545fc873efaf"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-67p.bin",
+      "bytes": 2263,
+      "sha256": "fb8aa5aae540e314c939ed0969b62af18f3f7d46adedbd74646c3788d8b95dab"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-81p.bin",
+      "bytes": 2269,
+      "sha256": "38b01919b86b192c879b307fede58863ab46e0df8eeb05a62114ec111df613bc"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-8p.bin",
+      "bytes": 2260,
+      "sha256": "2f55007fbe9d0568e371856aa24384b03fbe94306c8a2680f0e52e3cdc0f5daa"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-96p.bin",
+      "bytes": 2262,
+      "sha256": "37b42d5b9e3dcf9aa8861d7d1e36d1a982a8a0eb5fed3bcd0224936645b3a069"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-9p.bin",
+      "bytes": 2273,
+      "sha256": "3c7f80d6dd10460464e917df74509296c79c46808bd6fa084894aa2432b6fc79"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-c1956-r1.bin",
+      "bytes": 1959,
+      "sha256": "329dc9c9af05452387f7a77013ae0718712a7dc966364ef1a8f442b7bd488b73"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-c1973-e1.bin",
+      "bytes": 2238,
+      "sha256": "1592c3500b74b133857a1fce07bb8a0d5c6f907d1ce68a460241df2f01d9434c"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-c1983-h1.bin",
+      "bytes": 2265,
+      "sha256": "e840af9874d8510f99a962010f82bcdafd7ce5178dfa89666a1f3e2cecfe5f8b"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-c1995-o1.bin",
+      "bytes": 2264,
+      "sha256": "3eff6aa972bed795333469bec05652c3f578b877e49750d1a78bb13ec1266cc6"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-c1996-b2.bin",
+      "bytes": 2231,
+      "sha256": "af683920f548c8c4c759334dc8abe1ccf75f1ee9bb42b03de32032c14891fe3a"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-c2006-p1.bin",
+      "bytes": 2252,
+      "sha256": "051a6950c6325a3fd37861a2670d42b8b34d04d479bd038a02ff797aadbb0da3"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-c2013-a1.bin",
+      "bytes": 1967,
+      "sha256": "b8963b7ef51b4fc2a6009cd43e92a164bd318236f331935a3c3925f180c326d8"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-c2014-un271.bin",
+      "bytes": 1959,
+      "sha256": "b150f24f576ed72a52fa78299d83fad48a5d75dc558c98c1e070bf117cf9b576"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-c2020-f3.bin",
+      "bytes": 2257,
+      "sha256": "17cb2ca101233ff10c4cc29fbb22e958461826e753d90a131ce2d7c774b9a500"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/comet-c2023-a3.bin",
+      "bytes": 1958,
+      "sha256": "50a44ec56cde15fbef51409c6442b07c8bdfd9c9242a9dc2e1ca10d95f54a055"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/daphne.bin",
+      "bytes": 2258,
+      "sha256": "9d851223c47e8801c88b3ada87c4b8a8be81dbd47f01e6e527a64f4ab496f796"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/davida.bin",
+      "bytes": 2262,
+      "sha256": "f565ed8a190c00203f22db0f3bcbfa4f0112271c54b9f8018eb45d0e930e0cde"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/deedee.bin",
+      "bytes": 2266,
+      "sha256": "02d3c7134b4d5a2d2b6782f6aeecadecbf6563851e93f737ac0fc321b12d522e"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/didymos.bin",
+      "bytes": 2258,
+      "sha256": "1e4980ef8fa74011bcadc9f1cc25975ad3aba67011048554c1c337b722fb602f"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/dinkinesh.bin",
+      "bytes": 2267,
+      "sha256": "765f3fa5c837e8048650e7403e858acacd5fd96eae62224c0a180c8229b37c45"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/donaldjohanson.bin",
+      "bytes": 2267,
+      "sha256": "fdd60f16cb9859d72c22d05f59af56ff3b85e5ad5da9291746c8f1bd34651180"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/doris.bin",
+      "bytes": 2249,
+      "sha256": "6a6fc6b5298bc0992b4a7c8e74ff36b650c4e2f6e973ff0eae56a261cd830e72"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/earth.bin",
+      "bytes": 1936,
+      "sha256": "3ce827767ad50153ffc1b4717f82fe95c0c627b26e9b77df534a5e282308e0ae"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/egeria.bin",
+      "bytes": 2256,
+      "sha256": "0dbfbac3fcb03a0feac436fa5d55f0b7712786105178767f231042b444ed4ce1"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/elektra.bin",
+      "bytes": 2268,
+      "sha256": "4601f1113601f06391d96f8ab6061e975743a4c28ff5834734c321490c5605c2"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/eleonora.bin",
+      "bytes": 2266,
+      "sha256": "216ee0a121b21d81d3c6db0e322f447bd0939b5198aff3b4137039cd8e5f4953"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/eris.bin",
+      "bytes": 2261,
+      "sha256": "77f32376d4c149abee4f0867d42cf9f8edaacfe8d2a5ee0e6a84c09ee81c1a74"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/eros.bin",
+      "bytes": 2264,
+      "sha256": "951d3590a9f88729735cff13c6d198b207bfba1849d742392405ab3429633c93"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/eugenia.bin",
+      "bytes": 2261,
+      "sha256": "5445afddfac38c3dd6455638670865c0c16d7686a94914d846e396ce63396e4d"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/eunomia.bin",
+      "bytes": 2260,
+      "sha256": "dbb4e1c41f3fb416e067eff75c761185f8a8cc6150bacd92c3a44f6637ca0cac"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/euphrosyne.bin",
+      "bytes": 2263,
+      "sha256": "5f4fe28cb9c4a4f2d90c22f7a5a256e550c4740ac54d2dab655b709419fa6d48"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/europa-52.bin",
+      "bytes": 2267,
+      "sha256": "7b7036f9dde88372c409aaabe31951a203738ac1bc08f85724ea61f1288faa10"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/eurybates.bin",
+      "bytes": 2270,
+      "sha256": "8ee188ab315c4bb9c47eafa69f3fd1f91637bd23adb6dbb44bec9a27c4ab2340"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/flora.bin",
+      "bytes": 2262,
+      "sha256": "dc4d46ca2ad0e1889c095b813c6e4cc29bb6fdf1c515cefde4af14a1be13d8ce"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/fortuna.bin",
+      "bytes": 2266,
+      "sha256": "1078bfc2ff1f43b99869fafc56c57bee9d92d6bc255f3982f1a1ca04b0529834"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/gaspra.bin",
+      "bytes": 2259,
+      "sha256": "017aea37ccdcce36f1ceee64dbb9ccbb60354850acf0f65f21c3cc400ae8ea44"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/gkunhomdima.bin",
+      "bytes": 2266,
+      "sha256": "ad9ad78b097b0a7b7da70622fdaaa5b702985a95e544cc474c527ea6b101a42c"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/gonggong.bin",
+      "bytes": 2261,
+      "sha256": "84e21378de8cad1059062eb68b12fbfe0cb5f4c4933057920518b8ea78200f36"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/haumea.bin",
+      "bytes": 2258,
+      "sha256": "a6812088d8f21ec3e309f78297b0d59f075be3eb17058e15fc8c666d1ea2cc6f"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/hebe.bin",
+      "bytes": 2258,
+      "sha256": "51658f0d873b8a5ac1caaaa840031e889a761c2946b59a50d5543875d16c45a3"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/huya.bin",
+      "bytes": 2254,
+      "sha256": "26eeb989bdb69a5d929bc2ac0feb0a8fc714b47aafc9c31621ce98997fa56af4"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/hygiea.bin",
+      "bytes": 2263,
+      "sha256": "a6bcf842cb9749a0e8220205a56e2afb9a0bb1158e53c872a01aa7c5d0b261b7"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/ida.bin",
+      "bytes": 2261,
+      "sha256": "3e462154815740d257570196d110b079cf1eed8fcaa407ebaa65b8f8676df847"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/ino.bin",
+      "bytes": 2253,
+      "sha256": "0ff5daf3f49f898d6957f00d46e637e5dfabebd1500437004adb722a37255779"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/interamnia.bin",
+      "bytes": 2258,
+      "sha256": "2f71b0408a04e3ae268235e69dfc36eaa4f53f8428ce347b44f2309d2519d69d"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/iris.bin",
+      "bytes": 2256,
+      "sha256": "fec21ebe851f15beb95e129dfa90a0b1e763c3746a75f35b5dcaf3c16a44c832"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/itokawa.bin",
+      "bytes": 2267,
+      "sha256": "3ac393f37ab03ec866417fb920678744df15058d6b699943fa4dd32bd80de945"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/ixion.bin",
+      "bytes": 2259,
+      "sha256": "7e9d6ef11af1040bb489fce4266b26e53cbc0a11833595986a7e8ad99dfd4c25"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/julia.bin",
+      "bytes": 2265,
+      "sha256": "f5544164e607e0dc287b37d7bba52d5f47c2f046898be6300d336bfa6ba9ae38"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/juno.bin",
+      "bytes": 2257,
+      "sha256": "56a1c5306315ca4cc94929c554b9ea8f280bc13f0007832966f4db19ee5f73dd"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/jupiter.bin",
+      "bytes": 1946,
+      "sha256": "1de64e307758ba90fc1e13513c3f4bf3b4b9289bdc21dc38d08799586f39bd3f"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kalliope.bin",
+      "bytes": 2262,
+      "sha256": "7dc078127c2d8fc0912c53b28dc2fd11f993990759a68170e57b519799f089e6"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kleopatra.bin",
+      "bytes": 2256,
+      "sha256": "adf1797849fa4ebc90f71f34d35fa97541e096ace55e3b7e71d521d86c6a046a"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/lamberta.bin",
+      "bytes": 2270,
+      "sha256": "8ab1c49d9c0319a195e2bb91aaecc9229f76d121828a8f16a80e76d1cd403d30"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/leleakuhonua.bin",
+      "bytes": 2274,
+      "sha256": "be4bb9149ac63966a0571d7c4ceeb1f56f8508edf1722b86690c2a2d89403870"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/leucus.bin",
+      "bytes": 2262,
+      "sha256": "1db76fd0915d5c3f5c216637f2bc51a5c3df553bb5a674e893d98b2fb8680d3e"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/lutetia.bin",
+      "bytes": 2256,
+      "sha256": "258b31f0f3fdce9bec57992cd3b9250e67b38ebe0c182972c8977370f1681dba"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/makemake.bin",
+      "bytes": 2265,
+      "sha256": "59e911cab7c75ae1a5bce99d5367103b096053f44a8840cd4c14d5b408bc9ce3"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/mani.bin",
+      "bytes": 2263,
+      "sha256": "fe1f63578eb819af4f730ca6aaba33733ca619502853c63e2dd46fcfb86ecae0"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/mars.bin",
+      "bytes": 1949,
+      "sha256": "6059912795419eb236301c52beccae7f48a9df8b586e61aa87ceef9418108cbb"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/mathilde.bin",
+      "bytes": 2252,
+      "sha256": "ca1ee291f8eee8f9168f224d9052f97b8994cd1b7e6ebc88a6650b8c07cc599f"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/melpomene.bin",
+      "bytes": 2261,
+      "sha256": "c9fd2cd0e87d62455e9a73ba53eb18a4e9dd2b7d9f77879ba38e8ebdaaef1212"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/mercury.bin",
+      "bytes": 1943,
+      "sha256": "0b6eab903ec589e6c6ae2f1ba9d78c4014349f91b070062a45a3c3782a659510"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/metis-9.bin",
+      "bytes": 2266,
+      "sha256": "b10c0292606d059af523cb27ec764fb5b97cd628a2c68c2eb03862dc308d41ea"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/moshup.bin",
+      "bytes": 2255,
+      "sha256": "ab7cef146976fd6a9c6f5e8d6dd426e40acbf6af1fdf336609dd7323828514f5"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/nemausa.bin",
+      "bytes": 2260,
+      "sha256": "9c819d08d5d07f38e1de09e7f9cf2305901ef29448514ae86c3a585fa9d044d3"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/neptune.bin",
+      "bytes": 1941,
+      "sha256": "3fc8d93f1e16c5812f27485a26d30feb1052877a7b180ed1f8c2097fd041929b"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/orcus.bin",
+      "bytes": 2260,
+      "sha256": "9e3071daac4dde7e99912467ae36e46a832d75b35517fef0671c41fefb138048"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/orus.bin",
+      "bytes": 2257,
+      "sha256": "a51ea90d1add4b261851357bcf0055505baaacbc68e66c313d985d803b45fa98"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/oumuamua.bin",
+      "bytes": 1892,
+      "sha256": "a4048ec3615ea1637a7a7330098e0b83b8a88af25e574f8a4f46ef38090fa32c"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/pallas.bin",
+      "bytes": 2266,
+      "sha256": "c7a5628fe9ee4b2e1357fdad5904929b2e9c5caea2b1ae6ef5bf2b377e1f08a6"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/parthenope.bin",
+      "bytes": 2266,
+      "sha256": "0cf77fce7376fff5c1b8b498cc041673a54566584247480cbbca3fd61cbd29d9"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/patroclus.bin",
+      "bytes": 2272,
+      "sha256": "817ce0a0b36f143183aabfa3dea2fc68f73b86aa9485f42528ec3a38a3974731"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/pluto.bin",
+      "bytes": 2259,
+      "sha256": "0205435695a964f327ed1ee449ece76b76d3840d5d3e7fe2fa4fb7d42418b117"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/polymele.bin",
+      "bytes": 2265,
+      "sha256": "b0070cb7a925b1a5049750c732486f6e1b9c8e68625d8dd5e4b2b26014de7919"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/psyche.bin",
+      "bytes": 2262,
+      "sha256": "0a2ea00670196b38e82c5033fd7a632edf501be5546e065649342fba49b56b13"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/quaoar.bin",
+      "bytes": 2261,
+      "sha256": "fd6f8198290f8753c41b20fc32d57e63733651d42f88b5b0347d9107c2504ca2"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/ryugu.bin",
+      "bytes": 2253,
+      "sha256": "b6f76d6411f1e85e4d91544bcade52ffb78f4941ba0881f5cdad1a3fb4c0bcbc"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/salacia.bin",
+      "bytes": 2272,
+      "sha256": "89ab6f8c3a9e68aa44bc0f2724e792fcc31ff0b08883b5a84b3ec0a2838db8d7"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/saturn.bin",
+      "bytes": 1943,
+      "sha256": "15d9230d2150427b6f1d49a4e30db694771ed31fa0bfd8e973a2ec6029ecd51a"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/sedna.bin",
+      "bytes": 2257,
+      "sha256": "70282527bdf5c5afc2c65689bb3463c11408e22efe3390294f9fe836937ad035"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/steins.bin",
+      "bytes": 2261,
+      "sha256": "f30a64abf2c1bf209a8a6b80820d9addb1a0af12a83279cec1954c427a644e08"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/sylvia.bin",
+      "bytes": 2260,
+      "sha256": "1e29177b43a4162e6171c923f7f9552f4196e280c7a8ecf64a40fa00b5b30c7f"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/themis.bin",
+      "bytes": 2254,
+      "sha256": "2e8488d8ca3d4ed2ac500f01155497825496a474f85c038f38c92cca7529fdcd"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/thisbe.bin",
+      "bytes": 2264,
+      "sha256": "0a93f6549a04cf0f322747e4fccf90d6389df3c5f8f4c068cdbfc459f1a40e8c"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/toutatis.bin",
+      "bytes": 2263,
+      "sha256": "d2c9bae2fb9cd0b8b08f72300e864bfc7a2446b3caeb976c62c5bb1374fbfc49"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/urania.bin",
+      "bytes": 2261,
+      "sha256": "ef09a61feaa33d47cdde51377b19c423d954dcfd35b2f48a28048fa56ef76db6"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/uranus.bin",
+      "bytes": 1945,
+      "sha256": "a6267bd0dae7bc2da78d5f85cea0a969e228fabc4a607eea961259c5a9124cdf"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/varda.bin",
+      "bytes": 2244,
+      "sha256": "42420060d6ce788b22409b2ae1da0bb784d1f14402ea34d42ba7f927ea62b57f"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/varuna.bin",
+      "bytes": 2262,
+      "sha256": "71066856c5dc50b32c49c64078a83dfd62fc5d6a9ac4a2b80ac54fd4d0c54e67"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/venus.bin",
+      "bytes": 1939,
+      "sha256": "89ded93ea11c31d0fad0231483205a51874c260ac986b77a3830239a21adfe82"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/vesta.bin",
+      "bytes": 2260,
+      "sha256": "920a94081a1a02504b84e35037e98a18ed1657f2f494f6fd4a513f3ac5135063"
+    },
+    {
+      "location": "prepared",
+      "filename": "places.json",
+      "bytes": 836,
+      "sha256": "e2b4c0e15b5f7e33c4ba8c830267143cfe5ab25ce2c24ddb78666b29548ff3c0"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/sun.json",
+      "bytes": 59792,
+      "sha256": "81ac862b34f0b84a3407d7c3b0b31210854a805575f24f9ff0534f9925ad37e0"
+    }
+  ]
+}

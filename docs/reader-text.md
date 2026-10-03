@@ -41,16 +41,19 @@ that source label; dates and other differences belong in the arrow selector.
 ## Satellite-system introductions
 
 Satellite families keep their short introductions in `src/navigation/system-text.json`,
-using the same cited text format and introduction limits as bodies. The world
-presentation preparer checks every available satellite host and citation, then
-publishes the text in `site/prepared-world-presentation.json`. `pnpm prepare:world-context`
-refreshes it during development and builds. The shared card header renders it with
-the body's introduction typography.
+using the same cited text format and introduction limits as bodies.
+[`system-packages.mts`](../site/build/prepare/system-packages.mts) checks every
+satellite host and citation, then writes each introduction as its system object's
+description, the one copy the card and search read. The shared card header renders
+it with the body's introduction typography. A star's system shows its star's
+description, and a system of bound stars alone a sentence that names its stars.
 
 ## Overview navigation
 
-Each system lists its prepared orbit members under **Celestial bodies**, using
-the same rows as search. The Solar System puts its planets first. Large-scale
+Each system lists what is inside it under **Celestial bodies**, with their
+count, using the same rows as search: its host, its stars, its planets and its
+featured bodies, or a planet's moons in its moon catalogue's order. The Solar
+System puts its planets first. Large-scale
 overviews use their registry-held groups for navigation: the Milky Way starts
 with the Sun and featured stars within its existing galactic range; the Local
 Group and Nearby Universe list their held galaxies and clusters.

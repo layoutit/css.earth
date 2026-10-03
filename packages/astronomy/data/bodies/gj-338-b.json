@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": -659.9060008123529,
   "radialVelocityKmPerS": 11.969568,
   "presentationUp": "display-axis",
+  "boundTo": "gj-338-a",
   "sources": {
    "position": "Gaia DR3 source 1022456104850892928 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/gj-338-b/source/photometry/gaia-dr3-source.csv; cross-identification HD 79211, HIP 120005: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+1022456104850892928",
    "distance": "Gaia DR3 parallax 157.8825 +/- 0.0211 mas (same row, RUWE 1.12): 6.33 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): -1573.040, -659.906 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): 11.97 +/- 0.12 km/s"
+   "radialVelocity": "Gaia DR3 (same row): 11.97 +/- 0.12 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list GJ 338 A and GJ 338 B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 1022456139210632064 and 1022456104850892928), 108 AU apart on the sky, with a chance-alignment probability of 5.5e-7: the pair is bound. This record adopts no orbit of the pair, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

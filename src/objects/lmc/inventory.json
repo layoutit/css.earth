@@ -39,6 +39,18 @@
     },
     {
       "location": "prepared",
+      "filename": "members.json",
+      "bytes": 948,
+      "sha256": "33f466e18f2e7a15d2a3687bc233e53336c5a8c48af1b16e1bad5ffd0d12796f"
+    },
+    {
+      "location": "prepared",
+      "filename": "places.json",
+      "bytes": 237,
+      "sha256": "2836e4efc54ab4c7bcce6bc29345494d68a56d9ae8cc196a9df6ea55fb813886"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
       "bytes": 5275,
       "sha256": "f44614fe48fe24c4b8e0cbb205c6f2c4b1bea822c98656bd12b2142b23ecea01"

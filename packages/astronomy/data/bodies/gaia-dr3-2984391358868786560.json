@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": 37.20876824093174,
   "radialVelocityKmPerS": 101.04732,
   "presentationUp": "display-axis",
+  "boundTo": "tic-46432937",
   "sources": {
    "position": "Gaia DR3 source 2984391358868786560 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/gaia-dr3-2984391358868786560/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 11.0149 +/- 0.0202 mas (same row, RUWE 1.12): 90.79 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): -14.133, 37.209 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): 101.05 +/- 1.58 km/s"
+   "radialVelocity": "Gaia DR3 (same row): 101.05 +/- 1.58 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TIC 46432937 and Gaia DR3 2984391358868786560 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2984391358868786816 and 2984391358868786560), 3,604 AU apart on the sky, with a chance-alignment probability of 1.4e-4: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

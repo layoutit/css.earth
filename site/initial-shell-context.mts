@@ -3,7 +3,7 @@ export function deferInitialShellContext(document: Document, url: string, sceneR
   const location = new URL(url), query = location.searchParams;
   // ?embed shows only the scene, for the wiki's object viewer; the shell still mounts, hidden.
   if (query.has('embed')) document.documentElement.dataset.embed = '';
-  // A level's page draws this scene under its own path.
+  // The page of an object seen from inside draws this scene under its own path.
   const levelPage = location.pathname !== '/' && location.pathname !== sceneRoute;
   if (levelPage || ['dataset', 'feature', 'v'].some(key => query.has(key))) {
     document.documentElement.dataset.shellContext = 'pending';

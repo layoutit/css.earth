@@ -2,7 +2,7 @@
 
 The Nearby Universe as an object of the world: its card and its list marker. It has no surface and no centre but the observer. What the world draws of it, one dot per galaxy and quasar, is the [nearby-universe-galaxies](../nearby-universe-galaxies/README.md) bank, whose README holds the sources, processing, evidence and known problems.
 
-It is also a level of the zoom ladder ([object.json](object.json) `overview`): zooming far enough out hands the view to this object, with the camera kept where it was and still centred on the star the zoom started from.
+It is inside the Observable Universe, and the Local Group, the galaxy clusters and the galaxies of no cluster within Cosmicflows-4's reach are inside it ([object.json](object.json) `parent`). It is seen from inside ([object.json](object.json) `zoom`): zooming far enough out hands the view to this object, with the camera kept where it was and still centred on the star the zoom started from.
 
 ## Sources
 

@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "hip-9618-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hip-9618",
-      "members": "planets"
+      "host": "hip-9618"
     },
     "catalog": {
       "name": "HIP 9618 system",

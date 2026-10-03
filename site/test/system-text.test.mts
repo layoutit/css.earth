@@ -3,16 +3,17 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 import { readSourceCatalog } from '@cssearth/bake/sources';
 import input from '../../src/navigation/system-text.json' with { type: 'json' };
 import { allSatelliteSystems } from '../satellite-systems.mts';
-import { PREPARED_WORLD_PRESENTATION } from '../prepared-world-presentation.mts';
+import { requireObject } from '../objects.mts';
+import { systemObjectId } from '../navigation/system-address.mts';
 import { prepareSystemIntroductions } from '../build/prepare/system-text.mts';
 import { showsDefaultContextOrbit } from '../build/prepare/prepare-world-presentation.mts';
 const test = sourceTest();
 
-test('every satellite system has a cited introduction in the prepared presentation', async () => {
+test('every satellite system has a cited introduction, which is its system object\'s description', async () => {
   const catalogue = await readSourceCatalog(new URL('../../', import.meta.url).pathname);
   const hosts = allSatelliteSystems().map(system => system.hostId);
   const prepared = prepareSystemIntroductions(input, hosts, new Set(catalogue.records.map(record => record.id)));
-  assert.deepEqual(prepared, PREPARED_WORLD_PRESENTATION.satelliteSystemIntroductions);
+  assert.deepEqual(prepared, Object.fromEntries(hosts.map(id => [id, requireObject(systemObjectId(id)).description])));
   assert.equal(Object.keys(prepared).length, hosts.length);
 });
 

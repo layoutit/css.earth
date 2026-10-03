@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 2227,
+      "sha256": "fa4b513457b6649419b44fb0ab55d6221ce6e9832b72e07f004a1bee6c6be6ef"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/hd-108236b.bin",
+      "bytes": 1944,
+      "sha256": "749b99a6ba117a4f2d4a43e4711ca0861b560d4f91371de51c3875efe9c46a7f"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/hd-108236c.bin",
+      "bytes": 1933,
+      "sha256": "b59c81d513ec595d1ac18f4d66567a8ae833c828ba35a5e3d4e51852d2badacf"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/hd-108236d.bin",
+      "bytes": 1930,
+      "sha256": "4f7a02df7156aff9a69593d43b2b3d68365bd8abe16b8a53d51b2a4676ae8b30"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/hd-108236e.bin",
+      "bytes": 1943,
+      "sha256": "b1f6201052a79c3b07040f7441b80c895a5f4dd31a6ecdbb1b3f1189e73cad71"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/hd-108236.json",
+      "bytes": 43108,
+      "sha256": "84475ec80bee9537f6cca6e3b61e33126abc17b057ee3e7e3667f2fd0227461a"
+    }
+  ]
+}

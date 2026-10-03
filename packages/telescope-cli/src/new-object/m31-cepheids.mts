@@ -59,7 +59,7 @@ export function discPlacement(galaxy: CepheidGalaxy, placed: Awaited<ReturnType<
 export function draftGalaxyCepheid(star: GalaxyCepheid, galaxy: CepheidGalaxy, placed: Awaited<ReturnType<typeof galaxyDisc>>, velocity: { value: number; uncertainty?: number; source: string; url: string }) {
   const [modulus, error] = galaxy.distance.modulus, parsecs = 10 ** (modulus / 5 + 1), days = star.periodDays.toFixed(star.periodDays < 10 ? 2 : 1), kpc = Math.round(parsecs / 1000);
   return { ...relationCepheidDraft({
-    id: slug(star.name), name: star.name, target: star.target, galaxy: galaxy.name, periodDays: star.periodDays, paper: star.paper, periodSource: star.periodSource, position: star.position,
+    id: slug(star.name), name: star.name, target: star.target, galaxy: galaxy.name, inside: galaxy.objectId, periodDays: star.periodDays, paper: star.paper, periodSource: star.periodSource, position: star.position,
     description: `A Cepheid in ${galaxy.reader} that pulsates every ${days} days.`,
     distance: discPlacement(galaxy, placed, star.raDeg, star.decDeg,
       `The galaxy's Cepheid distance, ${galaxy.distance.credit}, abstract: modulus ${modulus} +/- ${error} mag, ${kpc} kpc; it places the galaxy, not a star within it`),
