@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
-import { VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
+import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA, CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA } from '@cssearth/objects';
 /** Author a circumstellar volume: the material around a star, drawn from coronagraph mosaics as a density grid attached to
  * that star, the way Betelgeuse's shell is (packages/bake/authoring/betelgeuse-shell/author.mts), but from one
  * checked-in recipe rather than a script per star.
@@ -527,7 +527,7 @@ export interface EdgeOnSolveInputs {
 }
 /** The lab-written reconstruction of one edge-on dataset, as the recipe's source/ holds it (labs/nebula reconstruct-circumstellar). */
 export interface EdgeOnReconstruction {
-  readonly schema: 'cssearth-circumstellar-reconstruction@2'; readonly objectId: string; readonly datasetId: string;
+  readonly schema: typeof CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA; readonly objectId: string; readonly datasetId: string;
   readonly grid: { readonly size: number; readonly halfUnits: number };
   readonly method: Record<string, unknown>; readonly ktx2: { readonly path: string; readonly bytes: number };
   readonly peak: number; readonly filledVoxels: number; readonly exposureGain: number;
@@ -575,7 +575,7 @@ async function buildEdgeOnDataset(recipe: CircumstellarRecipe, dataset: Circumst
   if (inputsOnly) return { kind: 'inputs' as const, inputs: { dataset, sky, shown, geometry, innerMaskUnits, taperFromUnits, axis } satisfies EdgeOnSolveInputs };
   const recordPath = resolve(repositoryRoot, `src/objects/${recipe.id}/source`, reconstructionPath(dataset));
   const reconstruction = JSON.parse(await readFile(recordPath, 'utf8').catch(() => { throw new Error(`${dataset.id}: no reconstruction at ${reconstructionPath(dataset)}; run node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar ${recipe.id}.`); })) as EdgeOnReconstruction;
-  if (reconstruction.schema !== 'cssearth-circumstellar-reconstruction@2' || reconstruction.objectId !== recipe.id || reconstruction.datasetId !== dataset.id) throw new TypeError(`${reconstructionPath(dataset)} is not this dataset's reconstruction.`);
+  if (reconstruction.schema !== CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA || reconstruction.objectId !== recipe.id || reconstruction.datasetId !== dataset.id) throw new TypeError(`${reconstructionPath(dataset)} is not this dataset's reconstruction.`);
   for (const retired of ['shownSha256', 'decodedSha256'] as const) if (retired in reconstruction) throw new TypeError(`${reconstructionPath(dataset)} carries the retired ${retired}; reconstruct again.`);
   if (reconstruction.grid.size !== size || reconstruction.grid.halfUnits !== halfUnits) throw new Error(`${dataset.id}: the reconstruction's grid differs from the recipe's.`);
   const ktx2 = await readFile(resolve(repositoryRoot, `src/objects/${recipe.id}/source`, reconstruction.ktx2.path));
@@ -739,14 +739,14 @@ export async function author(id: string, options: { sources?: readonly string[] 
   }
   const request = deliveryGrids.find(grid => grid.id === recipe.defaultDataset)!.recipe;
   outputs.push(['delivery.json', Buffer.from(JSON.stringify({
-    schema: 'cssearth-nebula-delivery@2', id, method: 'density-grid', request,
+    schema: NEBULA_DELIVERY_SCHEMA, id, method: 'density-grid', request,
     inputPins: [{ path: `${packageBase}/provenance.json` }, ...built.map(b => ({ path: `${packageBase}/density-${b.dataset.id}.ktx2` }))],
     sky: { centerIcrsDegrees: [raDeg, decDeg], distancePc, imageRotationDegrees: 0, arcsecPerUnit: 1 / distancePc },
     sourceUrl: recipe.sourceUrl, description: recipe.description, defaultDataset: recipe.defaultDataset, framingRadiusUnits: halfUnits,
     attachedTo: recipe.host, acceptedLabResult: `${id}-density-grids`, compactInputs: request, compactMethod: 'density-grid', grids: deliveryGrids,
   }, null, 2) + '\n')]);
   const presentation = {
-    schema: 'cssearth-volume-presentation-source@2', objectId: id, name: recipe.name, defaultDataset: recipe.defaultDataset,
+    schema: VOLUME_PRESENTATION_SOURCE_SCHEMA, objectId: id, name: recipe.name, defaultDataset: recipe.defaultDataset,
     bank: { path: `src/objects/${id}/prepared/datasets.json` },
     recipes: deliveryGrids.map(grid => ({ id: grid.id, path: grid.recipe.path })),
     sharedInputs: [], inputEvidence: [],
@@ -794,7 +794,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
   const documents = [local('circumstellar.json', 'Object-owned recipe: the datasets, their pinned program and bands, the stated conventions and the published geometry each is checked against.'),
     ...recipe.datasets.flatMap(dataset => dataset.colorMap ? [local(dataset.colorMap.path, `The publisher's color map the ${dataset.id} dataset is shown in, read from the published figure as the file itself records (${dataset.colorMap.source}).`)] : []),
     ...['delivery.json', 'presentation.json', 'provenance.json'].map(name => local(name, 'Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above.'))];
-  outputs.push(['manifest.json', Buffer.from(JSON.stringify({ schema: 'cssearth-volume-source-manifest@2', pathBase: 'repository', inputs, documents, generatedIntermediates: intermediates }, null, 2) + '\n')]);
+  outputs.push(['manifest.json', Buffer.from(JSON.stringify({ schema: VOLUME_SOURCE_MANIFEST_SCHEMA, pathBase: 'repository', inputs, documents, generatedIntermediates: intermediates }, null, 2) + '\n')]);
   return { outputs, measured, root };
 }
 

@@ -10,7 +10,7 @@
  *   new-object --charts HOST_ID...     charts for the archive planets of hosts already in the tree
  *
  * or with every planet `--from-archive` generates. Nothing is baked here. */
-import { MEASURED_SPECTRUM_SCHEMA } from '@cssearth/objects';
+import { CHART_ASSETS_SCHEMA, MEASURED_SPECTRUM_SCHEMA } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Archive } from './archives.mts';
@@ -149,7 +149,7 @@ export async function installPlanetCharts(files: PackageFiles, id: string, name:
   const transit = await installTransitChart(files, id, name, archive, tess ?? await liveTessArchive(), await transitFold(id), await timingSigma(archive, archiveName), archiveName);
   report.push(transit.report);
   if (transit.recipe) { charts.push(transit.recipe); controls.push(transit.control); inputs.push(...transit.inputs); operations.push(...transit.operations); drawn.push(transit.readme); }
-  files.set(`${s}/content/charts.json`, json({ schema: 'cssearth-chart-assets@1', publicBase: `/scenes/${id}/`, charts }));
+  files.set(`${s}/content/charts.json`, json({ schema: CHART_ASSETS_SCHEMA, publicBase: `/scenes/${id}/`, charts }));
   const content = read(`${s}/content/object.json`);
   content.charts = controls;
   files.set(`${s}/content/object.json`, json(content));
