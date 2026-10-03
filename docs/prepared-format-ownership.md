@@ -38,3 +38,8 @@ Archived-camera data (including `SpiceCamera`), cited object/prepared-text recor
 are browser-safe contracts in `packages/objects/src/prepared-data/`, exported from `@cssearth/objects`.
 Their node:test suites run in the packages lane. Camera fitting and kernel computation stay with bake/SPICE;
 text budgets and editorial checks stay in site; destination preparation and search projection stay with bake/site.
+
+Bake recipe lane identifiers remain bake-owned when site only delegates preparation; site imports the identifiers.
+The lab molecular catalogue envelope is lab-owned, separate from reconstruction table data. Preserved Python
+registration and native processing protocols keep specific ledger reasons, with source/fixture conformance in
+`schema-protocols.test.ts` and `shell-grid-schema.test.ts`; scientific processing is not relocated.

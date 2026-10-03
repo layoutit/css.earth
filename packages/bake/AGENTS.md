@@ -351,3 +351,7 @@ Archived-camera data (including `SpiceCamera`), cited object/prepared-text recor
 are browser-safe contracts in `packages/objects/src/prepared-data/`, exported from `@cssearth/objects`.
 Their node:test suites run in the packages lane. Camera fitting and kernel computation stay with bake/SPICE;
 text budgets and editorial checks stay in site; destination preparation and search projection stay with bake/site.
+
+`objects/scene/recipe-identifiers.ts` owns bake lane identifiers used by the layer recipes and site routing;
+`volume/contracts/source-report-schema.ts` owns the authored provenance stamp. These are owner-internal identifiers,
+not shared prepared field contracts. The IBEX Python grid protocol is pinned by `shell-grid-schema.test.ts`.

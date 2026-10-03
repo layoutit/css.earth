@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
 import { VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
 /** Author a circumstellar volume: the material around a star, drawn from coronagraph mosaics as a density grid attached to
  * that star, the way Betelgeuse's shell is (packages/bake/authoring/betelgeuse-shell/author.mts), but from one
@@ -683,7 +684,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
     exposureGain: b.exposureGain, topAlpha: b.dataset.topAlpha, faceOnOpacity: b.opacity, droppedShare: b.spread.droppedShare, filledVoxels: b.spread.filledVoxels,
   }]));
   const provenance = {
-    schema: 'cssearth-volume-provenance@2', title: `${recipe.name}: ${built.some(b => b.dataset.archive) ? 'ALMA continuum imaging' : 'JWST coronagraph imaging'} given the depth of the fitted ${built.some(b => b.kind === 'edge-on') ? 'disc' : 'ring'}`, kind: 'observed-sky-image-on-fitted-envelope',
+    schema: VOLUME_PROVENANCE_SCHEMA, title: `${recipe.name}: ${built.some(b => b.dataset.archive) ? 'ALMA continuum imaging' : 'JWST coronagraph imaging'} given the depth of the fitted ${built.some(b => b.kind === 'edge-on') ? 'disc' : 'ring'}`, kind: 'observed-sky-image-on-fitted-envelope',
     authors: [], organizations: [...new Set(built.map(b => b.dataset.deposit ? b.dataset.deposit.displayCredit : b.dataset.archive ? b.dataset.archive.displayCredit : 'NASA/ESA/CSA JWST; MAST (STScI)'))],
     license: { spdx: recipe.license.spdx, dataLicenseDeclaration: recipe.license.url, note: recipe.license.note },
     sources: built.flatMap(b => b.bands.map(band => ({ id: inputOf(b.dataset, band), url: band.origin.url, landing: band.origin.landing, bytes: band.origin.bytes,

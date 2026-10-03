@@ -10,3 +10,6 @@
 
 Photometric MGE recipes and simulation-envelope settings are parsed by `@cssearth/objects`; their
 scientific samplers stay in bake and fitting stays here.
+
+Molecular table parsing returns `ParsedMolecularTable`; the catalogue envelope and recipe path belong to lab.
+Preserved Python registration/native protocols are pinned by lab `schema-protocols.test.ts`; their scientific code stays here.

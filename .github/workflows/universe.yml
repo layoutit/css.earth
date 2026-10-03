@@ -558,7 +558,7 @@ jobs:
           catalogue object-browser papers survey-images
           geometry-model observation-alignment structures-model
           build dataset-levels dataset-difference dataset-radial dataset-radial-panel
-          registration photometric-mge photometric-prior compiler-defaults simulation-guided compiler-published
+          registration schema-protocols molecular-data native star-removal images native-cache photometric-mge photometric-prior compiler-defaults simulation-guided compiler-published
 
   ci-guard:
     name: Report the first CI failure
