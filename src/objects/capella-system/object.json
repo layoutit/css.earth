@@ -1,17 +1,17 @@
 {
   "schema": "cssearth-object@2",
   "id": "capella-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "capella",
-      "members": "planets"
+      "host": "capella"
     },
     "catalog": {
       "name": "Capella system",
       "systemName": "Capella system",
-      "classification": "planetary-system",
+      "classification": "star-system",
       "color": "#ffe6cf",
       "distanceAu": 2714462.3,
       "description": "Two yellow giants 13 parsecs away that circle each other every 104 days."

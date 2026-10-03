@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "izar",
+  "parent": "milky-way",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -126,7 +127,7 @@
         0.7518817857120749,
         0.45514580169197644,
         -0.8904169243678696,
-        -0.0000011965811252952966
+        -1.1965811252952966e-06
       ],
       "orbitUpReference": [
         0.34221513568299944,

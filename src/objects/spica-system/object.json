@@ -1,17 +1,17 @@
 {
   "schema": "cssearth-object@2",
   "id": "spica-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "spica",
-      "members": "planets"
+      "host": "spica"
     },
     "catalog": {
       "name": "Spica system",
       "systemName": "Spica system",
-      "classification": "planetary-system",
+      "classification": "star-system",
       "color": "#a5bdff",
       "distanceAu": 15793692.5,
       "description": "Two hot blue stars 77 parsecs away that circle each other every four days."

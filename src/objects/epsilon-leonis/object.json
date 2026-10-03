@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "epsilon-leonis",
+  "parent": "milky-way",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -125,7 +126,7 @@
         0.8335239907097817,
         0.4031333461014929,
         -0.9151412488026575,
-        -9.6256162997366e-7
+        -9.6256162997366e-07
       ],
       "orbitUpReference": [
         0.33602180210239113,

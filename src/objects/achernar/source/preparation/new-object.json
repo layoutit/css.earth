@@ -2,6 +2,7 @@
   "id": "achernar",
   "name": "Achernar",
   "system": "Achernar system",
+  "parent": "milky-way",
   "description": "A Be star 43 parsecs away that spins so fast it is flattened, with a companion on a seven-year orbit.",
   "aliases": [
     "Alpha Eridani",
@@ -64,12 +65,12 @@
       "model": {
         "omega": {
           "value": 0.98,
-          "cell": "Critical rotation rate: Veq/Vc; Ω/Ωc 0.883; 0.980 (a derived parameter, printed without an uncertainty; ω is Ω/Ωc)"
+          "cell": "Critical rotation rate: Veq/Vc; \u03a9/\u03a9c 0.883; 0.980 (a derived parameter, printed without an uncertainty; \u03c9 is \u03a9/\u03a9c)"
         },
         "beta": {
           "value": 0.166,
           "uncertainty": 0.012,
-          "cell": "0.166 (+0.012; −0.010)"
+          "cell": "0.166 (+0.012; \u22120.010)"
         },
         "poleTemperatureK": {
           "value": 17124,
@@ -81,24 +82,24 @@
         },
         "polarRadiusSolar": {
           "value": 6.78,
-          "cell": "Polar radius: Rp (R⊙) 6.78 (derived, no uncertainty printed)"
+          "cell": "Polar radius: Rp (R\u2299) 6.78 (derived, no uncertainty printed)"
         },
         "equatorialRadiusSolar": {
           "value": 9.16,
           "uncertainty": 0.23,
-          "cell": "9.16 (+0.23; −0.23)"
+          "cell": "9.16 (+0.23; \u22120.23)"
         }
       },
       "view": {
         "inclinationDegrees": {
           "value": 60.6,
           "uncertainty": 7.1,
-          "cell": "60.6 (+7.1; −3.9)"
+          "cell": "60.6 (+7.1; \u22123.9)"
         },
         "polePositionAngleDegrees": {
           "value": 216.9,
           "uncertainty": 0.4,
-          "cell": "Position angle of the visible pole: PArot (°) 216.9 (+0.4; −0.4)"
+          "cell": "Position angle of the visible pole: PArot (\u00b0) 216.9 (+0.4; \u22120.4)"
         }
       },
       "note": "The table names the position angle as the visible pole's, so that pole is the one tilted toward us. The same table derives Req/Rp 1.352, a rotation period of 37.25 h and an equatorial velocity of 298.8 km/s. The fit's mean temperature is an adopted 15 000 K, not a fitted one; only the pole-to-equator contrast of the model is drawn, around the star's measured disc color."

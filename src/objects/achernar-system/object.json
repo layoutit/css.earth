@@ -1,17 +1,17 @@
 {
   "schema": "cssearth-object@2",
   "id": "achernar-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "achernar",
-      "members": "planets"
+      "host": "achernar"
     },
     "catalog": {
       "name": "Achernar system",
       "systemName": "Achernar system",
-      "classification": "planetary-system",
+      "classification": "star-system",
       "color": "#aac3ff",
       "distanceAu": 8818517.6,
       "description": "A Be star that spins so fast it is flattened, with a companion on a seven-year orbit."

@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "matar",
+  "parent": "milky-way",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -126,7 +127,7 @@
         -0.9440929942697005,
         0.5033386526536648,
         -0.8640892319341349,
-        5.19669120912544e-7
+        5.19669120912544e-07
       ],
       "orbitUpReference": [
         -0.47519834767626395,

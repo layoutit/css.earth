@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "eltanin",
+  "parent": "milky-way",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -126,7 +127,7 @@
         0.014808187784385154,
         0.7824880957971241,
         -0.6226655442004899,
-        -0.0000011395038081801083
+        -1.1395038081801083e-06
       ],
       "orbitUpReference": [
         0.011586521209663947,

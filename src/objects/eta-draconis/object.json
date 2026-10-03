@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "eta-draconis",
+  "parent": "milky-way",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -125,7 +126,7 @@
         0.40677357387399127,
         0.8789375366603477,
         -0.4769369000705272,
-        -7.45462761925718e-7
+        -7.45462761925718e-07
       ],
       "orbitUpReference": [
         0.3575282382046136,

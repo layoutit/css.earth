@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "canopus",
+  "parent": "milky-way",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -127,7 +128,7 @@
         0.10432011222801862,
         -0.7954281887114861,
         -0.6060478500875599,
-        -0.000002722311479288924
+        -2.722311479288924e-06
       ],
       "orbitUpReference": [
         -0.08297751706727097,

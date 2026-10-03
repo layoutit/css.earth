@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "dubhe",
+  "parent": "milky-way",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -126,7 +127,7 @@
         0.9700080464172517,
         0.8808999820956087,
         -0.47330246263080117,
-        -0.000020287316074145444
+        -2.0287316074145444e-05
       ],
       "orbitUpReference": [
         0.8544824050672402,

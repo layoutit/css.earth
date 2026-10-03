@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "elnath",
+  "parent": "milky-way",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -126,7 +127,7 @@
         -0.14654738454444996,
         0.47881250635783273,
         -0.8779171850190816,
-        0.0000018714021511840618
+        1.8714021511840618e-06
       ],
       "orbitUpReference": [
         -0.07017034569255672,

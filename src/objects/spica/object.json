@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "spica",
+  "parent": "spica-system",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -128,7 +129,7 @@
         0.931704265209419,
         -0.1935707854310925,
         -0.9810863117104469,
-        0.0000014077522711615888
+        1.4077522711615888e-06
       ],
       "orbitUpReference": [
         -0.18035022475673596,

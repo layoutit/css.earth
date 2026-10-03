@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "cebalrai",
+  "parent": "milky-way",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -126,7 +127,7 @@
         0.07205758808602851,
         0.07964241855260311,
         -0.9968234974994632,
-        -1.7219594948393982e-7
+        -1.7219594948393982e-07
       ],
       "orbitUpReference": [
         0.0057386693874761875,
