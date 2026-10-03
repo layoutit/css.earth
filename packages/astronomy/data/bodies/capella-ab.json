@@ -1,0 +1,32 @@
+{
+ "id": "capella-ab",
+ "classification": "star",
+ "order": 5484,
+ "physical": {
+  "name": "Capella Ab",
+  "horizonsCode": null,
+  "meanRadiusKm": 6143031,
+  "gravitationalParameterKm3PerS2": 329498446136.13,
+  "parent": "capella",
+  "effectiveTemperatureK": 5730
+ },
+ "physicalNotes": "Radius 8.83 +/- 0.33 solar radii from Torres et al. (2015), ApJ 807, 26, Table 5: secondary radius 8.83 +/- 0.33 solar radii (https://doi.org/10.1088/0004-637X/807/1/26): 6,143,031 km at 695,700 km per solar radius. GM from the mass 2.4828 +/- 0.0067 solar masses (Torres et al. (2015), ApJ 807, 26, Table 4: dynamical mass of the secondary 2.4828 +/- 0.0067 solar masses, https://doi.org/10.1088/0004-637X/807/1/26) times the JPL solar GM. Temperature 5730 +/- 60 K from Torres et al. (2015), ApJ 807, 26, Table 5: secondary Teff 5730 +/- 60 K (https://doi.org/10.1088/0004-637X/807/1/26). A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 104.02128,
+  "semiMajorAxisStellarRadii": 13.33,
+  "inclinationDegrees": 137.156,
+  "eccentricity": 0.00089,
+  "argumentOfPeriapsisDegrees": 342.6,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 48147.1,
+  "ascendingNodePositionAngleDegrees": 40.522,
+  "sources": {
+   "period": "Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): P 104.02128 d",
+   "shape": "Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): a/R* 13.33, inclination 137.156 degrees",
+   "eccentricity": "Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): e 0.00089",
+   "argumentOfPeriapsis": "Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): omega 342.6 degrees (the star's)",
+   "phase": "Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): periastron passage at 48147.1 BMJD_TDB",
+   "orientation": "Torres et al. (2015), ApJ 807, 26, Table 4: P 104.02128 d, i 137.156, e 0.00089, omega_A 342.6 degrees (the primary's, as the record stores it), node 40.522 (J2000), T_peri HJD 2,448,147.6 (MJD 48147.1; HJD for BJD_TDB, under a minute apart); a 159.72 solar radii over the primary's 11.98 is 13.33 of its radii (https://doi.org/10.1088/0004-637X/807/1/26): ascending node 40.522 degrees east of north"
+  }
+ }
+}

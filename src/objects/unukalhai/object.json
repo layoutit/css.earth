@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "unukalhai",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Unukalhai",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 8084034
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/unukalhai-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Unukalhai",
+      "classification": "star",
+      "color": "#ffddb1",
+      "distanceAu": 4677266.7,
+      "description": "A giant of type K2 III, 23 parsecs away: 11.6 times the Sun's width and 59 times its light.",
+      "systemName": "Unukalhai system",
+      "aliases": [
+        "HD 140573"
+      ],
+      "order": 5467,
+      "context": {
+        "order": 5464
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -388129989657379650,
+        -576901530180305000,
+        78310968934169490
+      ],
+      "presentationToReference": [
+        -0.5547020523086249,
+        -0.06247370695505758,
+        -0.8297003489838325,
+        -0.8244878553502374,
+        -0.09285712403720464,
+        0.5582090387081756,
+        0.11191697612322268,
+        -0.993717560705673,
+        7.753882406787259e-7
+      ],
+      "orbitUpReference": [
+        0.06247370695505758,
+        0.09285712403720464,
+        0.993717560705673
+      ],
+      "metersPerUnit": 26077529.032258064,
+      "bodyRadiusM": 8084034000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

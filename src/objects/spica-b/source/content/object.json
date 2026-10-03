@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "spica-b",
+  "displayName": "Spica B",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "3.7 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw255",
+          "url": "https://doi.org/10.1093/mnras/stw255",
+          "label": "Tkachenko et al. 2016",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.01 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw255",
+          "url": "https://doi.org/10.1093/mnras/stw255",
+          "label": "Tkachenko et al. 2016",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "7.2 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw255",
+          "url": "https://doi.org/10.1093/mnras/stw255",
+          "label": "Tkachenko et al. 2016",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "spica-b-dataset-color.webp",
+        "surface": "spica-b-surface-color@2x.webp",
+        "poles": "spica-b-poles-color@2x.webp",
+        "source": {
+          "id": "spica-b-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1093/mnras/stw255"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 20,900 K and log g 4.15 (u1 0.117, u2 0.263): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tkachenko et al. (2016), MNRAS 458, 1964",
+      "href": "https://doi.org/10.1093/mnras/stw255"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1093/mnras/stw255",
+      "credit": "Tkachenko et al. (2016), MNRAS 458, 1964"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/spica-b.json",
+      "credit": "Radius from Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: secondary radius 3.74 +/- 0.53 solar radii; mass from Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: dynamical mass of the secondary 7.21 +/- 0.75 solar masses; orbit from Tkachenko et al. (2016), MNRAS 458, 1964, Table 2 (PHOEBE 2.0 solution): P 4.0145 d, T0 HJD 2,454,189.40 the time of periastron passage (Sect. 3; MJD 54188.90, HJD for BJD_TDB), e 0.133, longitude of periastron 255.6 degrees (the primary's, from its radial velocities), i 63.1; a 28.20 solar radii over the primary's 7.47 is 3.775 of its radii. The node's position angle on the sky is not measured and is drawn at 0, a display convention"
+    }
+  }
+}

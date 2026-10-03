@@ -73,6 +73,10 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
     return [node('packages/bake/cli/prepare-arrival-billboard.mts', ...ids, '--origin', origin), node('site/build/prepare/prepare-catalog.mts')];
   } },
   { name: 'world', purpose: 'place the object in the world context', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },
+  // A star or planet that gains orbiting bodies hosts a system, an object of its own whose page its members link to; its package is read
+  // from the world's orbit graph, so it follows the world step. Every system is rewritten: unchanged ones come out the same, in a second.
+  // The systems step moves each host inside its system in the object tree, and the world files follow the tree, so the world is placed again.
+  { name: 'systems', purpose: 'write the package of every system, so a new host has its system page, and place the world by the tree they change', scope: 'once', commands: async () => [node('site/build/prepare/system-packages.mts'), ['pnpm', 'prepare:world-context']] },
   { name: 'catalogues', purpose: 'rebuild the shared sources and facilities catalogues from the object\'s source records', scope: 'once', commands: async () => [node('site/build/prepare/prepare-facilities.mts', '--catalog-only')] },
   // The world context is written under the Sun's prepared/ and into the package of each object that holds bodies; without this
   // their inventories still pin the bytes from before the object existed.

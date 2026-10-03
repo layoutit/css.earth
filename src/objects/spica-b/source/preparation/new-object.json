@@ -1,0 +1,51 @@
+{
+  "host": "spica",
+  "companions": [
+    {
+      "id": "spica-b",
+      "name": "Spica B",
+      "description": "The smaller star of Spica, 3.7 times the Sun's width, orbiting its partner every four days.",
+      "paper": {
+        "url": "https://doi.org/10.1093/mnras/stw255",
+        "credit": "Tkachenko et al. (2016), MNRAS 458, 1964"
+      },
+      "radius": {
+        "value": 3.74,
+        "source": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: secondary radius 3.74 +/- 0.53 solar radii",
+        "url": "https://doi.org/10.1093/mnras/stw255",
+        "uncertainty": 0.53
+      },
+      "mass": {
+        "value": 7.21,
+        "source": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: dynamical mass of the secondary 7.21 +/- 0.75 solar masses",
+        "url": "https://doi.org/10.1093/mnras/stw255",
+        "uncertainty": 0.75
+      },
+      "temperature": {
+        "value": 20900,
+        "source": "Tkachenko et al. (2016), MNRAS 458, 1964, Tables 4 and 7: secondary Teff 20,900 +/- 800 K from the disentangled spectrum",
+        "url": "https://doi.org/10.1093/mnras/stw255",
+        "uncertainty": 800
+      },
+      "orbit": {
+        "elements": {
+          "periodDays": 4.0145,
+          "semiMajorAxisStellarRadii": 3.775,
+          "inclinationDegrees": 63.1,
+          "eccentricity": 0.133,
+          "argumentOfPeriapsisDegrees": 255.6,
+          "transitTimeBmjdTdb": 54188.9
+        },
+        "epoch": "periastron",
+        "source": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 2 (PHOEBE 2.0 solution): P 4.0145 d, T0 HJD 2,454,189.40 the time of periastron passage (Sect. 3; MJD 54188.90, HJD for BJD_TDB), e 0.133, longitude of periastron 255.6 degrees (the primary's, from its radial velocities), i 63.1; a 28.20 solar radii over the primary's 7.47 is 3.775 of its radii. The node's position angle on the sky is not measured and is drawn at 0, a display convention",
+        "url": "https://doi.org/10.1093/mnras/stw255"
+      },
+      "text": {
+        "card": "The smaller star of Spica, 3.7 times the Sun's width, orbiting its partner every four days.",
+        "introduction": "Its orbit weighs it at 7.21 solar masses; it is 3.74 solar radii with 20,900 K at its surface.",
+        "locator": "Tables 2, 4 and 7"
+      },
+      "order": 5488
+    }
+  ]
+}

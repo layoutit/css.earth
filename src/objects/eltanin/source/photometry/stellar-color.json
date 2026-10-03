@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "eltanin",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 164058: 168-1020 nm",
+    "path": "photometry/h_stis_ngsl_hd164058_v2.fits",
+    "format": "fits-table",
+    "extension": "1",
+    "wavelength": {
+      "column": "WAVELENGTH",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "FLUX",
+      "kind": "flux"
+    },
+    "service": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd164058/h_stis_ngsl_hd164058_v2.fits",
+    "checked": "2026-10-03",
+    "gaps": [],
+    "note": "Space spectrophotometry from the Hubble Space Telescope; the file header marks it DATAQUAL good."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Eltanin is HR 6705.",
+    "spectrum": {
+      "path": "photometry/crosscheck-pulkovo-table5.dat",
+      "format": "pulkovo-blocks",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "6705",
+        "kind": "flux"
+      },
+      "gaps": []
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "host": "achernar",
+  "companions": [
+    {
+      "id": "achernar-b",
+      "name": "Achernar B",
+      "description": "An A-type star 1.7 times the Sun's width on a seven-year, eccentric orbit around Achernar.",
+      "order": 5486,
+      "paper": {
+        "url": "https://doi.org/10.1051/0004-6361/202244009",
+        "credit": "Kervella et al. (2022), A&A 667, A111"
+      },
+      "radius": {
+        "value": 1.7,
+        "source": "Kervella et al. (2022), A&A 667, A111, Table 4: radius of B 1.70 +/- 0.08 solar radii, from its angular diameter 0.370 +/- 0.014 mas and the Hipparcos parallax",
+        "url": "https://doi.org/10.1051/0004-6361/202244009",
+        "uncertainty": 0.08
+      },
+      "mass": {
+        "value": 2.02,
+        "source": "Kervella et al. (2022), A&A 667, A111, Table 4: model mass of B 2.02 +/- 0.11 solar masses, from its position on isochrones",
+        "url": "https://doi.org/10.1051/0004-6361/202244009",
+        "uncertainty": 0.11
+      },
+      "temperature": {
+        "value": 9064,
+        "source": "Kervella et al. (2022), A&A 667, A111, Table 4: Teff of B 9064 +/- 624 K",
+        "url": "https://doi.org/10.1051/0004-6361/202244009",
+        "uncertainty": 624
+      },
+      "orbit": {
+        "elements": {
+          "periodDays": 2570.94,
+          "semiMajorAxisStellarRadii": 190.74,
+          "inclinationDegrees": 30.32,
+          "eccentricity": 0.7258,
+          "argumentOfPeriapsisDegrees": 352.05,
+          "transitTimeBmjdTdb": 54743.44,
+          "ascendingNodePositionAngleDegrees": 310.91
+        },
+        "epoch": "periastron",
+        "source": "Kervella et al. (2022), A&A 667, A111, Table 4: relative orbit of B, P 2570.94 d, i 30.32, e 0.7258, omega 172.05 degrees for the companion (the star's is 180 degrees on), node 310.91, T0 MJD 54743.44; a 7.35 au over A's record radius, the volume-equivalent 8.286 solar radii of its flattened figure (IAU au 149,597,870.7 km, nominal solar radius 695,700 km), is 190.74 of its radii",
+        "url": "https://doi.org/10.1051/0004-6361/202244009"
+      },
+      "text": {
+        "card": "An A-type star 1.7 times the Sun's width on a seven-year, eccentric orbit around Achernar.",
+        "introduction": "It comes within 2 au of Achernar at periastron; its disc spans 0.37 milliarcseconds, 1.70 solar radii, with 9,064 K at its surface.",
+        "locator": "Table 4 and abstract"
+      }
+    }
+  ]
+}

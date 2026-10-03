@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "dubhe",
+  "angularDiameterMas": 4.2,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 11,847,771 km at 37.68 pc = 4.2 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 37.679,
+  "distanceSource": "Baines et al. (2018), AJ 155, 30, HD 95689: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 26.54 +/- 0.48 mas, inverted (https://doi.org/10.3847/1538-3881/aa9d8b): 37.679 +/- 0.681 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 11847771,
+  "radiusSource": "Radius 17.03 +/- 0.13 solar radii from Baines et al. (2018), AJ 155, 30, HD 95689: radius 17.03 +/- 0.13 solar radii (Table 5), from the limb-darkened angular diameter 6.419 +/- 0.041 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/aa9d8b): 11,847,771 km at 695,700 km per solar radius. Mass 3.44 +/- 0.11 solar masses from Baines et al. (2018), AJ 155, 30, HD 95689: mass 3.44 +/- 0.11 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only (https://doi.org/10.3847/1538-3881/aa9d8b); GM is that mass times the JPL solar GM. Temperature 5012 +/- 65 K from Baines et al. (2018), AJ 155, 30, HD 95689: effective temperature 5012 +/- 65 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5012,
+  "effectiveTemperatureSource": "Baines et al. (2018), AJ 155, 30, HD 95689: effective temperature 5012 +/- 65 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b)",
+  "surfaceGravityLogg": 2.51,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/dubhe.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.512, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

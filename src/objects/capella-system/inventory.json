@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 905,
+      "sha256": "521207891fe38493a70e24fc789779dd418ec617c1e32383700545350633fb41"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/capella-ab.bin",
+      "bytes": 2262,
+      "sha256": "9822bd78c601dc57896a9cf652ac53ce72c3b3c8acf5ac6b0816de1a26191c45"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/capella.json",
+      "bytes": 30364,
+      "sha256": "ff3b1bec8ce9a25c753a0ef60dc76f5aeb0a3be465f7b228caed17649e5323b9"
+    }
+  ]
+}

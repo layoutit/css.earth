@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "eltanin",
+  "card": {
+    "text": "A giant of type K5 III, 47 parsecs away: 51.8 times the Sun's width and 598 times its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac2431",
+        "url": "https://doi.org/10.3847/1538-3881/ac2431",
+        "label": "Baines et al. (2021), The Astronomical Journal 162 198",
+        "checked": "2026-10-03",
+        "locator": "Tables 1, 4 and 5, HD 164058: parallax, limb-darkened diameter, radius, Teff"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its disc spans 10.19 milliarcseconds, which gives 51.8 solar radii and 3,964 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac2431",
+        "url": "https://doi.org/10.3847/1538-3881/ac2431",
+        "label": "Baines et al. (2021), The Astronomical Journal 162 198",
+        "checked": "2026-10-03",
+        "locator": "Tables 1, 4 and 5, HD 164058: parallax, limb-darkened diameter, radius, Teff"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}
