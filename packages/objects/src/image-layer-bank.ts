@@ -12,16 +12,22 @@ export interface ImageLayerBankDescriptor extends ObjectDescriptor {
   readonly cataloguePoints: readonly string[];
 }
 
+/** The published catalogues a bank draws with itself (`properties.cataloguePoints`): each a bank at `prepared/<id>.bin`. */
+export function bankCataloguePoints(descriptor: ObjectDescriptor): readonly string[] {
+  const cataloguePoints = descriptor.properties.cataloguePoints ?? [];
+  if (!Array.isArray(cataloguePoints) || !cataloguePoints.every(bank => typeof bank === 'string' && /^[a-z][a-z0-9-]*$/u.test(bank)) || new Set(cataloguePoints).size !== cataloguePoints.length) {
+    throw new TypeError(`src/objects/${descriptor.id}/object.json properties.cataloguePoints must be distinct bank ids, not ${JSON.stringify(cataloguePoints)}.`);
+  }
+  return Object.freeze([...cataloguePoints as string[]]);
+}
+
 export function parseImageLayerBankDescriptor(input: unknown): ImageLayerBankDescriptor {
   const descriptor = parseObjectDescriptor(input);
   if (descriptor.type !== 'image-layer-bank') throw new TypeError('Object is not an image-layer bank.');
   const properties = descriptor.properties;
   const unknown = Object.keys(properties).filter(key => !['frame', 'preparation', 'cataloguePoints', 'host'].includes(key));
   if (unknown.length) throw new TypeError(`Unknown image-layer property: ${unknown.join(', ')}.`);
-  const cataloguePoints = properties.cataloguePoints ?? [];
-  if (!Array.isArray(cataloguePoints) || !cataloguePoints.every(bank => typeof bank === 'string' && /^[a-z][a-z0-9-]*$/u.test(bank)) || new Set(cataloguePoints).size !== cataloguePoints.length) {
-    throw new TypeError(`${descriptor.id}: image-layer cataloguePoints must be distinct bank ids, not ${JSON.stringify(cataloguePoints)}.`);
-  }
+  const cataloguePoints = bankCataloguePoints(descriptor);
   const frame = parseDensityVolumeFrame(properties.frame);
   const preparation = properties.preparation;
   if (!preparation || typeof preparation !== 'object' || Array.isArray(preparation)) throw new TypeError('Image layers need a preparation reference.');
@@ -32,5 +38,5 @@ export function parseImageLayerBankDescriptor(input: unknown): ImageLayerBankDes
     throw new TypeError('Image-layer preparation must be a contained source.');
   }
   return Object.freeze({ ...descriptor, type: 'image-layer-bank', frame,
-    preparation: Object.freeze({ source: reference.source }), cataloguePoints: Object.freeze([...cataloguePoints as string[]]) });
+    preparation: Object.freeze({ source: reference.source }), cataloguePoints });
 }

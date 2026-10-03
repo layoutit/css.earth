@@ -1,7 +1,7 @@
 export type { JsonValue, JsonRecord, ObjectDescriptor, PreparedAssetReference, PreparedObject } from './descriptor.js';
 export { parseObjectDescriptor } from './parse.js';
 export { objectPageCss } from './page-style.js';
-export { parseImageLayerBankDescriptor } from './image-layer-bank.js';
+export { bankCataloguePoints, parseImageLayerBankDescriptor } from './image-layer-bank.js';
 export type { ImageLayerBankDescriptor } from './image-layer-bank.js';
 export { parseCataloguePointBankDescriptor } from './catalogue-point-bank.js';
 export type { CataloguePointBankDescriptor } from './catalogue-point-bank.js';

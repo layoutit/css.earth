@@ -30,7 +30,8 @@ by one rule the bake and the build share ([world-holders.ts](../../packages/obje
   ([plain-star-dots.ts](../../packages/bake/src/world-context/plain-star-dots.ts), served at `/world/dots/<id>.bin`).
   One bank per galaxy was measured on 2026-10-03: nine requests and 12.5 KB on every page against two and 5.8 KB,
   because a bank is asked for before its extent is known.
-  An asteroid drawn as a plain dot is a dot of `catalogue-asteroids`, whose file has its row.
+  An asteroid drawn as a plain dot is a dot of the bank its star hosts that declares them (`properties.plainDots` of
+  `catalogue-asteroids`), whose file has its row.
 - `src/objects/<object id>/prepared/places.json` is, per object, where each of its children's systems that is read on
   approach is: its host's place, rounded to 1e12 m, and the range its orbits are authored to. Served at
   `/world/places/<id>.json`.

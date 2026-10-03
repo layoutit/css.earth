@@ -9,6 +9,7 @@ import { isRecord } from '@cssearth/core';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
+import { plainDotBank } from './plain-dot-bank.mts';
 import { parseWorldContextSource, PLAIN_STAR_DOT_BANK_IDS, plainStarDotBanks, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
 import { writeCatalogueBank } from '@cssearth/bake/volume/node';
 import { systemViewFile, worldOrbitBanks } from '@cssearth/objects';
@@ -214,8 +215,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   // classifications above are: `objectsDirectory` says where each object's files are read and written, not which objects
   // exist or what they are inside.
   const tree = new Map(readPreparedObjects(process.cwd()).objects.map(object => [object.id, { parent: object.parent }] as const));
+  // The dot bank the paged asteroids are dots of (paged-asteroid-dot-positions.mts writes their places into it): the holder
+  // of every asteroid the map draws as a plain dot. It is the bank the focus hosts that declares them.
+  const asteroidDotBank = await plainDotBank(resolve(process.cwd(), 'src/objects'), prepared.focus.id, 'asteroid');
   const { summary, systems, places, index, plainStars, insideOf } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])),
-    id => tree.get(id)?.parent, ASTEROID_DOT_BANK);
+    id => tree.get(id)?.parent, asteroidDotBank);
   // The full context, for build-time tools: compact JSON (indentation was 60% of its bytes). Each row says what its body is
   // inside in the object tree, which a page reads from the file a row is in.
   await writeIfChanged(options.outputPath, `${JSON.stringify({ ...prepared, bodies: prepared.bodies.map(body => ({ ...body, inside: insideOf(body.id) })) })}\n`);
@@ -261,7 +265,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   await writeOrbits(OBJECT_TREE_ROOT, summary.orbitBanks ?? {});
   for (const system of systems) {
     // Every file's object is an object of the registry, or the asteroid dot bank: anything else has no package.
-    if (!tree.has(system.id) && system.id !== ASTEROID_DOT_BANK) throw new TypeError(`World file ${system.id} has no package (src/objects/${system.id}/object.json): run node site/build/prepare/system-packages.mts.`);
+    if (!tree.has(system.id) && system.id !== asteroidDotBank) throw new TypeError(`World file ${system.id} has no package (src/objects/${system.id}/object.json): run node site/build/prepare/system-packages.mts.`);
     holders.add(system.id);
     await writeIfChanged(memberFilePath(objectsRoot, system.id), `${JSON.stringify(system.file)}\n`);
     await writeOrbits(system.id, system.file.orbitBanks);
@@ -303,10 +307,6 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   await rm(resolve(dirname(options.outputPath), 'system-views'), { recursive: true, force: true });
   await rm(resolve(dirname(options.outputPath), 'world-system-views.json'), { force: true });
 }
-
-/** The dot bank the paged asteroids are dots of (paged-asteroid-dot-positions.mts writes their places into it): the
- * holder of every asteroid the map draws as a plain dot. */
-const ASTEROID_DOT_BANK = 'catalogue-asteroids';
 
 /** The star packages that are dots of the Milky Way's own bank, by id: the names of its tracked table. An object folder
  * without the table (a fixture) has none. */
