@@ -28,7 +28,13 @@ See [prepared format ownership](../../../docs/prepared-format-ownership.md) for 
 
 The source-manifest exception is retained only for the pre-build body-reference check
 and preserved Python distant-worlds authoring.
-[Schema-identifier conformance tests](../../../packages/objects/src/prepared-data/schema-identifiers.test.ts)
+[Schema-identifier conformance tests](../../../packages/bake/src/sources/python-schema-identifiers.test.ts)
 pin the manifest, archived-camera and object-text Python literals to their browser-safe objects constants.
 The archived-camera and object-text exceptions retain only bake as an owner: preserved Python writers cannot
 import TypeScript. Changing any retained spelling must fail its conformance test.
+
+Other preserved Python grid, registration and native star-processing protocols retain specific ledger reasons.
+[Grid conformance](../../../packages/bake/src/shell/shell-grid-schema.test.ts) and
+[lab protocol conformance](../../../labs/nebula/packages/lab/src/server/services/schema-protocols.test.ts)
+pin their source checks and retained fixtures. Bake recipe routing identifiers stay bake-owned;
+the molecular catalogue wrapper stays lab-owned, separate from reconstruction table data.

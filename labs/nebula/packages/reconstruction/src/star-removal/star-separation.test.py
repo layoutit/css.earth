@@ -131,6 +131,7 @@ class StarSeparationTests(unittest.TestCase):
             path = directory / 'recipe.json'
             path.write_text(json.dumps(recipe))
             receipt = separation.run(path)
+            self.assertEqual(receipt['schema'], 'cssearth-star-separation-receipt@1')
             self.assertGreater(receipt['acceptedCount'], 0)
             self.assertTrue(receipt['verification']['encodedRoundTripExact'])
             self.assertEqual(receipt['verification']['maximumReconstructionErrorCodeValues'], 0)

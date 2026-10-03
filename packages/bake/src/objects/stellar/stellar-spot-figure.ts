@@ -1,8 +1,9 @@
 /** Extract a published *hypothetical* spot layout onto a stationary stellar limb plate.
  * The figure constrains an illustrative pattern, not the actual surface of the star. */
+import type { LimbLaw } from '@cssearth/objects';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { displayedLuminance, type StellarColor } from './stellar-photometric-color.ts';
-import { limbIntensity as lawIntensity, type LimbLaw } from './limb-laws.ts';
+import { limbIntensity as lawIntensity } from './limb-laws.ts';
 
 export interface SpotFigureModel {
   readonly source: string;

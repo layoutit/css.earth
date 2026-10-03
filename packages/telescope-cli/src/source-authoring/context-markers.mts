@@ -15,13 +15,14 @@
  *   node packages/telescope-cli/src/source-authoring/context-markers.mts <id>... [--check]
  *
  * --check recomputes each marker and fails if it differs from the file on disk. */
+import { readPublishedLimbDarkening } from '@cssearth/objects';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { hostLitGray, linearToSrgb, srgbToLinear } from '@cssearth/bake/objects/color';
 import { loadDiscBandColor } from '@cssearth/bake/objects/layers/observation';
-import { limbIntensity, loadStellarPhotometricColor, readPublishedLimbDarkening } from '@cssearth/bake/objects/stellar';
+import { limbIntensity, loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
 import { colorForValue, loadScienceSurface } from '@cssearth/bake/objects/raster';
 import { MISSING_COVERAGE_STYLES } from '@cssearth/bake/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';

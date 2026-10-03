@@ -163,3 +163,26 @@ Archived-camera data (including `SpiceCamera`), cited object/prepared-text recor
 are browser-safe contracts in `packages/objects/src/prepared-data/`, exported from `@cssearth/objects`.
 Their node:test suites run in the packages lane. Camera fitting and kernel computation stay with bake/SPICE;
 text budgets and editorial checks stay in site; destination preparation and search projection stay with bake/site.
+
+Authored preparation receipts, world-navigation preparation receipts and prepared feature descriptors live in
+`packages/objects/src/prepared-data/`, exported through the browser-safe objects main entry.
+Historical source-list and index/pre-build admission policies retain their accepted records and diagnostics.
+Frame/source auditing, camera solving, geometry, file I/O and inventory lookup stay with bake/site/tooling.
+Contract tests use node:test in the packages CI lane.
+
+WISE tile pins, authored display/synchronous rotation records and cited published limb coefficients have
+browser-safe schema identifiers, data types and pure validation in `packages/objects/src/prepared-data/`.
+Contract tests use node:test in the packages lane. WISE photometry, FITS/mosaicking, orbit/rotation evaluation,
+limb intensity, model-grid interpolation and file I/O remain with their scientific owners. The preserved
+Python display-orientation writer has a literal conformance test and a specific schema-ledger exception.
+
+Disc-integrated and stellar photometric color records, uniform-disc star measurements, and measured-spectrum
+measurement documents live in `src/prepared-data/`, exported through the browser-safe main entry.
+Their parsers preserve separate compiler/public-photometry admission and mode-dependent absent-wavelength policies.
+CIE/Planck evaluation, spectrum file loading, binning, sphere generation and chart rendering remain in bake/telescope-cli.
+Contract tests use node:test in the packages lane; scientific and file-output conformance stays with the consumers.
+
+Authored density placement and observed stellar catalogue wire types, schema identifiers and pure parsers live in
+`src/volume/`, exported by `@cssearth/objects`. Envelope admission is separate from stellar-row parsing to preserve
+caller validation order. Transforms, fitting, projection, display selection and file I/O stay with bake/reconstruction/lab.
+Contract tests use node:test in the packages lane.

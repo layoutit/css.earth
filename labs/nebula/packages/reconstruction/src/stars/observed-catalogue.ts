@@ -1,48 +1,11 @@
-import { isFiniteNumber as coreIsFiniteNumber, isRecord as coreIsRecord } from '@cssearth/core';
+import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 export type CatalogueColor=(temperature:number,colorIndex:number)=>readonly [number,number,number];
 
-import { type EmissionFieldModel, type CompilerStarInput, type CompilerStarMaterial } from '@cssearth/objects';
+import { readObservedStellarCatalogueEnvelope, parseObservedStellarCatalogue, type ObservedStar, type EmissionFieldModel, type CompilerStarInput, type CompilerStarMaterial } from '@cssearth/objects';
 import { createCompilerStarDepthSampler } from './compiler.ts';
 
-const record = coreIsRecord;
 const finite = coreIsFiniteNumber;
-const text = (v: unknown): v is string => typeof v === 'string' && v.trim().length > 0 && v.length <= 128;
 const coordinate = (ra: unknown, dec: unknown): boolean => finite(ra) && ra >= 0 && ra < 360 && finite(dec) && dec >= -90 && dec <= 90;
-const error = (v: unknown): v is number | null => v === null || finite(v) && v >= 0;
-type PhotometryKind = 'johnson-measured' | 'tycho-johnson-approximation';
-interface ObservedStar {
-  id: string;
-  raDegrees: number;
-  decDegrees: number;
-  properMotionRaCosDecMasPerYear: number;
-  properMotionDecMasPerYear: number;
-  magnitudeV: number;
-  colorIndexBV: number | null;
-  sourceId: string;
-  sourceEpochJulianYear: number;
-  sourceRaDegrees: number;
-  sourceDecDegrees: number;
-  photometry: { kind: PhotometryKind; errorMagnitudeV: number | null; errorColorIndexBV: number | null };
-}
-
-/** Decode consumed catalogue fields; extra source columns remain in the pinned source, not type assertions. */
-function readStar(value: unknown): ObservedStar {
-  if (!record(value) || !text(value.id) || !finite(value.raDegrees) || !finite(value.decDegrees) ||
-      !coordinate(value.raDegrees, value.decDegrees) || !finite(value.properMotionRaCosDecMasPerYear) ||
-      !finite(value.properMotionDecMasPerYear) || !finite(value.magnitudeV) || value.magnitudeV < -30 || value.magnitudeV > 40 ||
-      !(value.colorIndexBV === null || finite(value.colorIndexBV) && value.colorIndexBV >= -2 && value.colorIndexBV <= 10) ||
-      !text(value.sourceId) || !finite(value.sourceEpochJulianYear) || value.sourceEpochJulianYear < 1800 || value.sourceEpochJulianYear > 2200 ||
-      !finite(value.sourceRaDegrees) || !finite(value.sourceDecDegrees) || !coordinate(value.sourceRaDegrees, value.sourceDecDegrees) ||
-      !record(value.photometry)) throw new TypeError('Invalid observed stellar catalogue record.');
-  const p = value.photometry;
-  if ((p.kind !== 'johnson-measured' && p.kind !== 'tycho-johnson-approximation') ||
-      !error(p.errorMagnitudeV) || !error(p.errorColorIndexBV)) throw new TypeError('Invalid observed stellar photometry.');
-  return { id: value.id, raDegrees: value.raDegrees, decDegrees: value.decDegrees,
-    properMotionRaCosDecMasPerYear: value.properMotionRaCosDecMasPerYear, properMotionDecMasPerYear: value.properMotionDecMasPerYear,
-    magnitudeV: value.magnitudeV, colorIndexBV: value.colorIndexBV, sourceId: value.sourceId,
-    sourceEpochJulianYear: value.sourceEpochJulianYear, sourceRaDegrees: value.sourceRaDegrees, sourceDecDegrees: value.sourceDecDegrees,
-    photometry: { kind: p.kind, errorMagnitudeV: p.errorMagnitudeV, errorColorIndexBV: p.errorColorIndexBV } };
-}
 
 /** Exact TAN projection in the registered image's west/north frame, in arcseconds. */
 function project(raDegrees: number, decDegrees: number, center: [number, number]): [number, number] | null {
@@ -73,9 +36,7 @@ function appearance(star: ObservedStar, catalogueColor:CatalogueColor) {
  */
 export function prepareCatalogueStars(value: unknown, model: EmissionFieldModel,
   centerIcrsDegrees: [number, number], maximum: number, datasetIds: string[], catalogueColor:CatalogueColor) {
-  if (!record(value) || value.schema !== 'cssearth-observed-stellar-catalogue@1' || !text(value.id) || value.frame !== 'ICRS' ||
-      value.coordinateEpochJulianYear !== 2000 || !Array.isArray(value.stars) || value.stars.length > 200000)
-    throw new TypeError('Observed stellar catalogue requires ICRS positions at epoch 2000.');
+  const envelope = readObservedStellarCatalogueEnvelope(value);
   if (!Array.isArray(centerIcrsDegrees) || centerIcrsDegrees.length !== 2 || !coordinate(centerIcrsDegrees[0], centerIcrsDegrees[1]) ||
       !Number.isInteger(maximum) || maximum < 0 || maximum > 5000 || !Array.isArray(datasetIds) || datasetIds.length < 1 || datasetIds.length > 8 ||
       datasetIds.some(id => typeof id !== 'string' || !/^[a-z0-9][a-z0-9-]{0,95}$/.test(id)) || new Set(datasetIds).size !== datasetIds.length)
@@ -83,11 +44,7 @@ export function prepareCatalogueStars(value: unknown, model: EmissionFieldModel,
   if (!model.bounds || !Array.isArray(model.bounds.min) || !Array.isArray(model.bounds.max) || model.bounds.min.length !== 3 ||
       model.bounds.max.length !== 3 || model.bounds.min.some((n, axis) => !finite(n) || !finite(model.bounds.max[axis]) || n >= model.bounds.max[axis]!))
     throw new TypeError('Invalid catalogue star model bounds.');
-  const sourceStars = value.stars.map(readStar), ids = new Set<string>();
-  for (const star of sourceStars) {
-    if (ids.has(star.id)) throw new TypeError('Duplicate observed stellar catalogue identity.');
-    ids.add(star.id);
-  }
+  const sourceStars = parseObservedStellarCatalogue(envelope).stars;
   const inFrame = sourceStars.flatMap(star => {
     const xy = project(star.raDegrees, star.decDegrees, centerIcrsDegrees);
     if (!xy || xy.some((n, axis) => n < model.bounds.min[axis]! || n > model.bounds.max[axis]!)) return [];
@@ -104,7 +61,7 @@ export function prepareCatalogueStars(value: unknown, model: EmissionFieldModel,
       colorAssignment: star.colorIndexBV === null ? 'unknown-neutral-white' : 'catalogue-bv-display-fit',
       relativeVLight: light.relativeVLight, displayedRelativeVLight: light.displayedRelativeVLight, displayClipped: light.clipped };
   });
-  return { stars, receipt: { method: 'observed-catalogue-optical-overlay@1', catalogueId: value.id,
+  return { stars, receipt: { method: 'observed-catalogue-optical-overlay@1', catalogueId: envelope.id,
     frame: 'ICRS', coordinateEpochJulianYear: 2000, centerIcrsDegrees: [...centerIcrsDegrees],
     projection: 'gnomonic-TAN-west-north-arcseconds', ranking: 'ascending-V-magnitude-then-id',
     inputCount: sourceStars.length, inFrameCount: inFrame.length, selectedCount: selected.length,

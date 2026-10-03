@@ -351,3 +351,23 @@ Archived-camera data (including `SpiceCamera`), cited object/prepared-text recor
 are browser-safe contracts in `packages/objects/src/prepared-data/`, exported from `@cssearth/objects`.
 Their node:test suites run in the packages lane. Camera fitting and kernel computation stay with bake/SPICE;
 text budgets and editorial checks stay in site; destination preparation and search projection stay with bake/site.
+
+`objects/scene/recipe-identifiers.ts` owns bake lane identifiers used by the layer recipes and site routing;
+`volume/contracts/source-report-schema.ts` owns the authored provenance stamp. These are owner-internal identifiers,
+not shared prepared field contracts. The IBEX Python grid protocol is pinned by `shell-grid-schema.test.ts`.
+
+Authored preparation receipts, world-navigation preparation receipts and prepared feature descriptors live in
+`packages/objects/src/prepared-data/`, exported through the browser-safe objects main entry.
+Historical source-list and index/pre-build admission policies retain their accepted records and diagnostics.
+Frame/source auditing, camera solving, geometry, file I/O and inventory lookup stay with bake/site/tooling.
+Contract tests use node:test in the packages CI lane.
+
+WISE tile pins, authored display/synchronous rotation records and cited published limb coefficients have
+browser-safe schema identifiers, data types and pure validation in `packages/objects/src/prepared-data/`.
+Contract tests use node:test in the packages lane. WISE photometry, FITS/mosaicking, orbit/rotation evaluation,
+limb intensity, model-grid interpolation and file I/O remain with their scientific owners. The preserved
+Python display-orientation writer has a literal conformance test and a specific schema-ledger exception.
+
+Photometric color/stellar measurement records and measured-spectrum documents are parsed by `@cssearth/objects`.
+The color and stellar topics retain CIE/Planck evaluation, spectrum I/O and binning; charts retain recipes and drawing;
+uniform-disc authoring retains geometry generation and its expected sphere path.
