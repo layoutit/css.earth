@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Color from a measured spectrum of the star (Kiehling 1987, relative calibration). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+        "qualification": "Color from a measured spectrum of the star (Kiehling 1987, relative calibration); darkening toward the edge from a published law. No image of the surface exists.",
         "thumbnail": "alpha-centauri-b-dataset-color.webp",
         "surface": "alpha-centauri-b-surface-color@2x.webp",
         "poles": "alpha-centauri-b-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124"
         },
         "falseColor": false,
-        "notes": "The color of Alpha Centauri B's spectrum as Kiehling (1987) measured it from the ground, 320-880 nm with a relative calibration; the observation date is not published. No resolved image of the surface is cast; the display axis is celestial north, a convention."
+        "notes": "The color of Alpha Centauri B's spectrum as Kiehling (1987) measured it from the ground, 320-880 nm with a relative calibration; the observation date is not published. No resolved image of the surface is cast; the display axis is celestial north, a convention. The darkening toward the edge is the power law I(mu) = mu^0.1545 that Kervella et al. (2017), A&A 597, A137 fit to the star's resolved disc (VLTI/PIONIER H band, 1.65 um; not a visible band)."
       }
     ]
   },

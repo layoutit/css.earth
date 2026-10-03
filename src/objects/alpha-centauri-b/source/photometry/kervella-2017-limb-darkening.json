@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "alpha-centauri-b",
+  "law": "power",
+  "source": "Kervella et al. (2017), A&A 597, A137, Table 3, row Power: the power law limb darkened disc fitted to the VLTI/PIONIER squared visibilities of this star (https://doi.org/10.1051/0004-6361/201629505)",
+  "band": "VLTI/PIONIER H band, 1.65 um; not a visible band",
+  "alpha": {
+    "value": 0.1545,
+    "uncertainty": 0.0044,
+    "cell": "alpha = 0.1545 ± 0.0044"
+  },
+  "note": "I(mu)/I(1) = mu^alpha, the paper's equation for its power law (Hestroffer 1997). Fitted with the angular diameter 5.999 mas, the diameter this package's radius comes from (reduced chi-squared 3.33). The paper finds this limb darkening weaker than 1D and 3D model atmospheres predict in the same band. The only measured limb of Alpha Centauri B; the visible limb is not measured."
+}
