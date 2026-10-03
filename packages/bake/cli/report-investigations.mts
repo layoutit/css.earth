@@ -9,9 +9,10 @@
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import {
-  INVESTIGATION_INDEX_FILE, INVESTIGATION_STATUSES, formatInvestigationIndex, formatInvestigationReport, groundFacilities,
+  INVESTIGATION_INDEX_FILE, formatInvestigationIndex, formatInvestigationReport, groundFacilities,
   investigationOptions, investigationReport, readFacilityLedgers, readInvestigationLedgers,
 } from '@cssearth/bake/sources';
+import { INVESTIGATION_STATUSES } from '@cssearth/objects';
 import { readCatalog } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 

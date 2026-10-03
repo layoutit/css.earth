@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 
 import { resolve } from "node:path";
 import { spawn } from "node:child_process";
-import { parseVolumeRecipe } from '@cssearth/objects';
+import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeRecipe } from '@cssearth/objects';
 import { sourceBytes } from '../volume/node/index.ts';
 import { publishSourceBytes } from '../delivery/index.ts';
 import { sourceArray, sourceObject, sourcePath } from '@cssearth/objects/sources';
@@ -36,8 +36,8 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
         throw error;
       });
       if (!manifest || !presentation) continue;
-      if (sourceObject(JSON.parse(manifest.toString('utf8'))).schema === 'cssearth-volume-source-manifest@2' &&
-          sourceObject(JSON.parse(presentation.toString('utf8'))).schema === 'cssearth-volume-presentation-source@2') ids.push(entry.name);
+      if (sourceObject(JSON.parse(manifest.toString('utf8'))).schema === VOLUME_SOURCE_MANIFEST_SCHEMA &&
+          sourceObject(JSON.parse(presentation.toString('utf8'))).schema === VOLUME_PRESENTATION_SOURCE_SCHEMA) ids.push(entry.name);
     }
     return ids.sort((left, right) => left.localeCompare(right));
   }
@@ -45,7 +45,7 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
   async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Promise<boolean> {
     const manifestBytes = await readFile(resolve(sourceRoot, 'manifest.json'));
     const manifest = sourceObject(JSON.parse(manifestBytes.toString('utf8')));
-    if (manifest.schema !== 'cssearth-volume-source-manifest@2') return false;
+    if (manifest.schema !== VOLUME_SOURCE_MANIFEST_SCHEMA) return false;
     if (manifest.pathBase !== 'repository') throw new TypeError(`Invalid repository volume source manifest: ${id}.`);
     const entries = (['inputs', 'documents', 'generatedIntermediates'] as const).flatMap(section =>
       sourceArray(manifest[section] ?? [], sourceObject).map(raw => ({ raw, section })));

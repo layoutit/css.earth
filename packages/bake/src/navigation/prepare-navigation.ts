@@ -4,8 +4,7 @@ import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
 
 import sharp from "sharp";
-import { validateMarkerPresentation, type ObjectEntry, type MarkerPresentation } from '@cssearth/objects';
-import type { MarkerDescriptor } from './marker-recipe.ts';
+import { MARKER_SOURCE_HINTS, validateMarkerPresentation, type MarkerDescriptor, type ObjectEntry, type MarkerPresentation } from '@cssearth/objects';
 import { hasErrorCode, isRecord, requireRecord } from '@cssearth/core';
 
 type MarkerPlanet = Pick<ObjectEntry, 'id' | 'classification'>;
@@ -26,7 +25,6 @@ import {
   NAVIGATION_SUPERNOVA_SOURCE,
 } from "./marker-descriptors.ts";
 import {
-  MARKER_SOURCE_HINTS,
   renderMarker,
   readMarkerImage,
   validateMarkerDescriptor,

@@ -1,15 +1,14 @@
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset } from '@cssearth/objects';
+/** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, NEBULA_DELIVERY_SCHEMA } from '@cssearth/objects';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
 
-/** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
 import { replayCompactCompiler, replayCompactSymmetry, replayCompactSampled, prepareVolumeSlices } from '../volume/node/index.ts';
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { readFile, writeFile, mkdir, readdir, rename, rm } from 'node:fs/promises';
 import { resolve, dirname, relative, isAbsolute, sep } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';
-import { parsePreparedNebulaCatalog } from '@cssearth/objects';
 
 import { prepareVolumeAtlases } from '../density/index.ts';
 
@@ -41,7 +40,7 @@ function pin(v: unknown): Pin {
 async function pinned(root: string, p: Pin) { const bytes = await readFile(local(root,p.path)); return bytes; }
 export function readNebulaDelivery(v: unknown) {
   const r = record(v), frame = record(r.sky), center = frame.centerIcrsDegrees;
-  if (r.schema !== 'cssearth-nebula-delivery@2' || !/^[a-z][a-z0-9-]*$/.test(text(r.id)) ||
+  if (r.schema !== NEBULA_DELIVERY_SCHEMA || !/^[a-z][a-z0-9-]*$/.test(text(r.id)) ||
       !['compiler','axial-symmetry','density-grid'].includes(text(r.method)) || !Array.isArray(center) || center.length !== 2 || !Array.isArray(r.inputPins)) throw new TypeError('Invalid nebula delivery recipe.');
   if (!(finite(r.framingRadiusUnits)>0) || !/^https:\/\//.test(text(r.sourceUrl))) throw new TypeError('Invalid nebula framing/source URL.');
   if (r.attachedTo !== undefined && !/^[a-z][a-z0-9-]*$/.test(text(r.attachedTo))) throw new TypeError('Invalid attached body id.');

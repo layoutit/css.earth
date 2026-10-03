@@ -1,5 +1,6 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Restore an accepted source-owned compact delivery; no lab recipes, caches or research services. */
+import { COMPACT_DENSITY_DELIVERY_SCHEMA } from '@cssearth/objects';
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -12,7 +13,7 @@ function pin(value: unknown): Pin {
 }
 export async function prepareCompactDensityObject(root: string, directory: string, ifMissing: boolean, allowMissing = false) {
   const value: unknown = JSON.parse(await readFile(resolve(directory,'source/compact-delivery.json'),'utf8'));
-  assert.ok(record(value) && value.schema === 'cssearth-compact-density-delivery@1' && typeof value.id === 'string' && record(value.delivery));
+  assert.ok(record(value) && value.schema === COMPACT_DENSITY_DELIVERY_SCHEMA && typeof value.id === 'string' && record(value.delivery));
   const data = value.delivery;
   assert.ok(typeof data.directory === 'string');
   assert.equal(resolve(root,data.directory),resolve(directory),'Density delivery differs from its source owner.');
