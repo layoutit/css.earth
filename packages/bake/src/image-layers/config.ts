@@ -17,6 +17,9 @@ export interface ImageLayerRecipe {
   target: { centerRaDeg: number; centerDecDeg: number; distancePc: number };
   geometry: { kind: 'inclined-disk' | 'line-of-sight-envelope'; inclinationDeg: number; lineOfNodesPaDeg: number;
     thicknessKpc: number; supportRadiusKpc: number; supportTaperFraction: number; depthWeights: number[]; depthScales: number[];
+    /** The bank's unit when it is not the kiloparsec: parsecs, for an object a few parsecs across (a nebula), whose leaves in
+     * kiloparsecs would be smaller than one CSS pixel. The recipe's lengths stay in kiloparsecs. A flat bank without a bulge only. */
+    unit?: 'pc';
     /** A published bulge-plus-disc fit of the sky light (./bulge.ts): Sérsic bulge, exponential disc, one position angle. */
     bulge?: { source: string; /** Whose light fills the bulge: a share of the photograph's (default) or the fit's own. */ lightFrom?: 'photograph' | 'fit'; positionAngleDeg: number; sersicIndex: number; halfLightRadiusKpc: number; surfaceBrightnessAtHalfLight: number;
       skyEllipticity: number; disc: { centralSurfaceBrightness: number; scaleLengthKpc: number; skyEllipticity: number; positionAngleDeg?: number };
@@ -64,6 +67,10 @@ const bulgeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['bulge']>
       skyEllipticity: ellipticity(d.skyEllipticity, 'geometry.bulge.disc.skyEllipticity'), ...(d.positionAngleDeg===undefined?{}:{positionAngleDeg:finite(d.positionAngleDeg,'geometry.bulge.disc.positionAngleDeg')}) },
     extentKpc: { radius: positive(e.radius, 'geometry.bulge.extentKpc.radius'), height: positive(e.height, 'geometry.bulge.extentKpc.height'),
       ...(e.fadeFrom===undefined?{}:{fadeFrom:(()=>{const f=positive(e.fadeFrom,'geometry.bulge.extentKpc.fadeFrom');if(f>=Number(e.radius))throw new TypeError(`geometry.bulge.extentKpc.fadeFrom (${f}) must be inside radius (${String(e.radius)}).`);return f;})()}) } };
+};
+const parsecUnit = (v: unknown, unsupported: boolean): 'pc' => {
+  if (v !== 'pc' || unsupported) throw new TypeError(`geometry.unit is "pc", on a flat bank without a bulge; got ${JSON.stringify(v)}${unsupported ? ' on a bank that is not flat or has a bulge' : ''}.`);
+  return v;
 };
 const flatOf = (v: unknown): boolean => { if (typeof v !== 'boolean') throw new TypeError(`bake.flat must be true or false; got ${JSON.stringify(v)}.`); return v; };
 const alphaQualityOf = (v: unknown): number => {
@@ -137,7 +144,8 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
     target: { centerRaDeg: finite(t.centerRaDeg, 'target RA'), centerDecDeg: finite(t.centerDecDeg, 'target Dec'), distancePc: positive(t.distancePc, 'distancePc') },
     geometry: { kind, inclinationDeg, lineOfNodesPaDeg: finite(g.lineOfNodesPaDeg, 'lineOfNodesPaDeg'),
       thicknessKpc: positive(g.thicknessKpc, 'thicknessKpc'), supportRadiusKpc: positive(g.supportRadiusKpc, 'supportRadiusKpc'),
-      supportTaperFraction, depthWeights: weights, depthScales: scales, ...(g.bulge===undefined?{}:{bulge:bulgeOf(g.bulge)}) },
+      supportTaperFraction, depthWeights: weights, depthScales: scales, ...(g.bulge===undefined?{}:{bulge:bulgeOf(g.bulge)}),
+      ...(g.unit===undefined?{}:{unit:parsecUnit(g.unit,g.bulge!==undefined||b.flat!==true)}) },
     bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true),
       ...(b.levels===undefined?{}:{levels:levelsOf(b.levels)}),
       ...(b.colorTie===undefined?{}:{colorTie:colorTieOf(b.colorTie)}),
