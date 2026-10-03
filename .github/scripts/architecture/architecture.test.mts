@@ -10,7 +10,7 @@ import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConne
 import { decodeCruiseResult, missingSources, repositoryFiles, type ImportGraph } from './graph.mts';
 import { formatDelta, formatFindings } from './report.mts';
 import { declaredPackage, undeclaredImports } from './declared-dependencies.mts';
-import { isBroken, objectCodeFiles, REPOSITORY_RULES, repositoryFindings, RETIRED_FOLDERS, retiredFiles } from './repository-rules.mts';
+import { isBroken, OBJECT_FORMAT_FOLDERS, objectCodeFiles, REPOSITORY_RULES, repositoryFindings, RETIRED_FOLDERS, retiredFiles } from './repository-rules.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
 import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './workspaces.mts';
 import { packageCycles, packageCycleText } from './package-cycles.mts';
@@ -379,24 +379,28 @@ test('retired root tests and dependent integration owners fail without a baselin
     write('labs/nebula/packages/lab/package.json', '{"name":"@x/lab","dependencies":{"@x/a":"workspace:*"}}');
     write('integration/example.test.mts', "import '@x/a'; import '@x/lab';\n");
     assert.equal(broken(), true, 'a lab package maps to its labs owner and dependency graph');
-    write('packages/renderer/package.json', '{"name":"@cssearth/renderer"}');
-    write('packages/bake/package.json', '{"name":"@cssearth/bake","dependencies":{"@cssearth/renderer":"workspace:*"}}');
-    write('integration/renderer-bake/conformance.test.ts', "import '@cssearth/bake'; import '@cssearth/renderer';\n");
-    write('integration/example.test.mts', "import '@x/a'; import '@x/b';\n");
-    assert.equal(broken(), true, 'renderer-bake has no exception for dependent owners');
-    write('packages/bake/package.json', '{"name":"@cssearth/bake"}');
-    assert.equal(broken(), false, 'renderer-bake conformance passes when its owners are independent');
-    write('integration/renderer-bake/conformance.test.ts', "import '@cssearth/renderer';\n");
-    assert.equal(broken(), true, 'removing either conformance owner is red');
-    rmSync(join(root, 'integration/renderer-bake'), { recursive: true });
     write('integration/AGENTS.md', '# Integration test instructions\n');
+    write('integration/example.test.mts', "import '@x/a'; import '@x/b';\n");
     assert.equal(broken(), false, 'instruction files in integration are not source');
     write('integration/example.test.mts', "import '@x/a';\n");
     assert.equal(broken(), true, 'a single-owner source file stays red beside the instructions');
     write('site/a.mts', 'export {};');
     write('src/a.mts', 'export {};');
     write('integration/example.test.mts', "import '../site/a.mts'; import '../src/a.mts';\n");
-    assert.equal(broken(), false, 'relative application imports count as owners');
+    assert.equal(broken(), true, 'relative application imports are private');
+    for (const specifier of ['../packages/a/src/private.ts', '@x/a/src/private.ts', '@x/a/unpublished', '../site/a.mts', '../src/a.mts']) {
+      write('integration/example.test.mts', `import '@x/a'; import '@x/b'; import '${specifier}';\n`);
+      assert.equal(broken(), true, `${specifier} is private even with two independent owners`);
+    }
+    for (const specifier of ['../packages/a/src/private.ts', '../site/a.mts', '../src/a.mts']) {
+      write('integration/example.test.mts', `import '@x/a'; import '@x/b'; new URL('${specifier}', import.meta.url);\n`);
+      assert.equal(broken(), true, `${specifier} URL is private even with two independent owners`);
+    }
+    write('integration/example.test.mts', "import '@x/a'; import '@x/b'; const path = '../site/a.mts'; import(path);\n");
+    assert.equal(broken(), false, 'computed imports cannot be resolved statically');
+    write('packages/a/package.json', '{"name":"@x/a","exports":{".":"./index.js","./public":"./public.js"}}');
+    write('integration/example.test.mts', "import '@x/a/public'; import '@x/b';\n");
+    assert.equal(broken(), false, 'public subpaths are green');
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
@@ -475,5 +479,21 @@ test('manifest cycles fail without a baseline across all dependency fields', () 
     assert.equal(isBroken(findings()), true, 'self-dependency is a cycle');
     write('a', { dependencies: [] });
     assert.throws(findings, /dependencies/u, 'malformed fields fail rather than hiding edges');
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+
+test('objects format folder allow-list rejects a new algorithm folder, including an empty one', () => {
+  const root = mkdtempSync(join(tmpdir(), 'object-format-folders-'));
+  const check = () => REPOSITORY_RULES.find(rule => rule.id === 'objects-hold-data')!.check(root, []);
+  try {
+    for (const folder of OBJECT_FORMAT_FOLDERS) mkdirSync(join(root, 'packages/objects/src', folder), { recursive: true });
+    assert.deepEqual(check(), []);
+    const fake = join(root, 'packages/objects/src/fake-algorithm');
+    mkdirSync(fake);
+    assert.equal(check().length, 1);
+    assert.match(check()[0], /fake-algorithm/);
+    rmSync(fake, { recursive: true });
+    assert.deepEqual(check(), []);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

@@ -1,31 +1,9 @@
-import { requireControls, type PreparedTitle, type Fact } from '@cssearth/objects';
-
-import { isRecord } from '@cssearth/core';
+import { requireControls, preparedPanelReaders, type PreparedTitle, type Fact } from '@cssearth/objects';
+const { object, text, number, optionalText, optionalBoolean, array } = preparedPanelReaders;
 import type { Props, Dataset, DatasetControl, DatasetReaderText } from './object-shell-types.js';
 
-const object = (value: unknown, label: string): Record<string, unknown> => {
-  if (!isRecord(value)) throw new TypeError(`Prepared ${label} must be an object.`);
-  return value;
-};
-const text = (value: unknown, label: string): string => {
-  if (typeof value !== 'string') throw new TypeError(`Prepared ${label} must be text.`);
-  return value;
-};
-const number = (value: unknown, label: string): number => {
-  if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`Prepared ${label} must be finite.`);
-  return value;
-};
-const optionalText = (value: unknown, label: string) => value === undefined ? undefined : text(value, label);
-const optionalBoolean = (value: unknown, label: string) => {
-  if (value !== undefined && typeof value !== 'boolean') throw new TypeError(`Prepared ${label} must be boolean.`);
-  return value;
-};
 const stepOpens = (value: unknown) => {
   if (value !== 'first' && value !== 'last') throw new TypeError(`Prepared dataset step opens must be "first" or "last", not ${JSON.stringify(value)}.`);
-  return value;
-};
-const array = (value: unknown, label: string): readonly unknown[] => {
-  if (!Array.isArray(value)) throw new TypeError(`Prepared ${label} must be an array.`);
   return value;
 };
 function rasterTitle(value: unknown): PreparedTitle {

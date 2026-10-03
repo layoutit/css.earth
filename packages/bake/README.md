@@ -43,7 +43,7 @@ layer (the raster lane uses the photometric models), never sideways. Command ent
 | `@cssearth/bake/objects/color` | the sRGB transfer, band-color and asinh displays, palettes, whole-disc color | Node only |
 | `@cssearth/bake/objects/geometry` | shape models, radial meshes, shape cameras, ellipsoids, the radial-layer contract | Node only (`node:*`, meshoptimizer) |
 | `@cssearth/bake/objects/cameras` | observer-computed cameras, SPICE kernel banks | Node only |
-| `@cssearth/bake/objects/scene` | the physical world frame, authored rotations, default camera, directional Sun, generated sphere seams | Node only |
+| `@cssearth/bake/objects/scene` | the physical world frame, authored rotations, default camera, directional Sun, generated sphere seams and the validated `loadSolarGeometry` loader | Node only |
 | `@cssearth/bake/objects/raster` | scientific surfaces (PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot), categorical geology, eclipse and phase-curve maps, observed color rasters | Node only (`node:*`, `sharp`, `geotiff`) |
 | `@cssearth/bake/objects/sources` | source references read through the manifest, pinned source files, reference banks, the download relay | Node only |
 | `@cssearth/bake/objects/charts` | chart renderers and readers and their shared SVG style | Node only |
@@ -127,11 +127,14 @@ Contract tests use node:test in the packages lane.
 Volume replay reads retained emission, envelope, tone, material and compact delivery formats from
 `@cssearth/objects`; bake owns material arithmetic, sampling, decompression and file I/O.
 
-Renderer-behavior runtime, selection, material and feature transport suites and their DOM harness live in
-`integration/renderer-bake/src/contract/`; immutable material and feature JSON inputs remain in
-`src/contract/fixtures/`. Leaf-box bake checks stay in `src/presentation/`; renderer visibility conformance
-lives in `integration/renderer-bake/src/presentation/leaf-box.test.mts`. These node:test suites run in
-the packages CI lane on changes to either owner. Shell facing/material conformance lives in
-`integration/renderer-bake/src/shell/shell.test.ts`; bake-owned shell assertions stay in `src/shell/`. Validated camera conversions come from `@cssearth/objects`; bake imports no renderer behavior helpers.
+Renderer runtime, selection, material and feature transport tests and their DOM harness live in
+`packages/renderer/`; immutable material and feature JSON inputs live in `packages/renderer/test/fixtures/`.
+Bake output tests stay beside their producers and validate the objects contract; renderer tests read
+objects-built fixtures. The end-to-end mount test lives in `integration/prepared-object-mount/`.
+All run in the packages CI lane. Validated camera conversions come from `@cssearth/objects`;
+bake has no renderer imports or dependency.
 
 Bake has no renderer dependency or imports. Renderer bundling belongs to the lab consumers; preparation reads shared contracts from objects.
+
+Surface geometry and ellipsoid patches live in internal `src/surface-geometry/`; polar sprites, lighting,
+coverage, atmosphere and interior raster algorithms live in internal `src/baking/`. Tests stay beside them.

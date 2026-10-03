@@ -5,6 +5,7 @@ export * from './authored-rotation.ts';
 // The ecliptic presentation frame, the default camera, the Sun's reference view direction and the astrometric sky registration
 // derived from it, from the prepared solar geometry the host passes in (`SolarGeometry`).
 export type { SolarGeometry } from './solar-geometry.ts';
+export { loadSolarGeometry } from './load-solar-geometry.ts';
 export * from './solar-presentation-frame.ts';
 export * from './default-camera.ts';
 export * from './prepare-sun-view-direction.ts';

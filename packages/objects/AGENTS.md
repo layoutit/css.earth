@@ -5,7 +5,6 @@
 - **Allowed:** format types, schema-id constants, parsers, validators, binary encoders and decoders, and their fixtures.
 - **Not allowed:** algorithms that compute from the data: camera or navigation math, level or hysteresis walkers, geometry derivation, projection, sampling and fitting. They belong in `engine` (camera and navigation) or the owning package.
 - **Quick test:** if a function does more than read, check or (de)serialize a format, it does not belong here.
-- Known exceptions still to move out: `src/baking/` (raster algorithms) and `src/geometry/` (A255). Do not add to them.
 - `objects` imports `@cssearth/core` only; the `objects-imports-core-only` architecture rule enforces it.
 
 Own the shared object JSON parser, validation, reusable object types, and preparation contracts.
@@ -66,7 +65,7 @@ Preparation must remain reproducible from source inputs and provenance outside p
 `src/stars/` owns point-field data/manifest schemas, bank layout, quantization, decoding and validation,
 exported through the browser-safe main entry. Hierarchy construction and encoding star rows remain in bake;
 loading, selection and projection remain with their runtime owners. Contract tests run in the packages lane;
-writer/reader conformance stays in `integration/renderer-bake/src/stars/`.
+writer and reader tests live beside their producing bake and consuming renderer modules.
 
 `src/prepared-data/` also owns the object runtime schema, controls and dataset metadata, the data-only runtime definition
 and its JSON validators, deferred dataset transports, splitting and validated merging. Presentation, resource, material,
@@ -76,7 +75,7 @@ resource loading and in-place dataset installation remain in renderer. Contract 
 `src/prepared-data/` owns the presentation schema identifier, narrowed prepared material/selection records,
 serialized pose keyframes and leaf bounds validation. Frustum computation, DOM animation and CSS publication
 stay in renderer; leaf-box extraction stays in bake and imports the shared record. Leaf bounds contract tests
-run in the packages lane; writer/frustum conformance remains in `integration/renderer-bake/`.
+run in the packages lane; bake output and renderer frustum tests live beside their respective modules.
 Prepared CSS sky, parallax, cubic-sky and directional-Sun contracts and validators live in `src/prepared-data/`,
 exported by the main entry. Sky/Sun validators default to the historical authored bake acceptance and diagnostics. The single 'runtime' policy
 opts into runtime checks; there are no independent validation flags.
@@ -144,7 +143,8 @@ Contract tests use node:test in the packages CI lane.
 WISE tile pins, authored display/synchronous rotation records and cited published limb coefficients have
 browser-safe schema identifiers, data types and pure validation in `packages/objects/src/prepared-data/`.
 Contract tests use node:test in the packages lane. WISE photometry, FITS/mosaicking, orbit/rotation evaluation,
-limb intensity, model-grid interpolation and file I/O remain with their scientific owners. The preserved
+model-grid interpolation and file I/O remain with their scientific owners. Limb intensity lives in
+`packages/core/src/math/limb-intensity.ts`. The preserved
 Python display-orientation writer has a literal conformance test and a specific schema-ledger exception.
 
 Disc-integrated and stellar photometric color records, uniform-disc star measurements, and measured-spectrum

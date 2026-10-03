@@ -1,4 +1,4 @@
-import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { limbIntensity, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const PUBLISHED_LIMB_DARKENING_SCHEMA = 'cssearth-published-limb-darkening@1';
 
@@ -17,7 +17,7 @@ export type LimbLaw =
 /** A law must keep the limb between dark and the centre brightness. A spherical model's law may fall below zero before the edge: the
  * extended atmosphere is dark there, and the law is drawn held at zero (`darkEdge`); only spherical grids pass it. */
 export function checkLimbLaw(law: LimbLaw | { readonly u1: number; readonly u2: number }, { darkEdge = false }: { darkEdge?: boolean } = {}): void {
-  const edge = 'law' in law && law.law === 'power' ? 0 ** law.alpha : 1 - (law as { readonly u1: number; readonly u2: number }).u1 - (law as { readonly u1: number; readonly u2: number }).u2;
+  const edge = limbIntensity(0, law);
   if (!((edge >= 0 || darkEdge) && edge <= 1) || ('law' in law && law.law === 'power' && !(law.alpha >= 0)))
     throw new TypeError('The limb-darkening law must keep the limb between dark and the centre brightness.');
 }

@@ -167,12 +167,12 @@ Full-universe integrity and production-build checks remain distinct and can
 still expose unrelated package defects. Report those failures; do not bypass pins.
 
 Every test runs under `node --test` through one command, `pnpm test:run`. The
-lanes are folders: `test:packages` runs `packages/`, and `test:site` runs `site/`,
-`src/`, `integration/` and `.github/`. A new test file runs without a workflow edit.
+lanes are folders: `test:packages` runs `packages/` and `integration/`, and `test:site` runs `site/`,
+`src/` and `.github/`. A new test file runs without a workflow edit.
 A test that needs an input CI does not restore skips through `sourceTest()`.
 Tests stay beside their owners.
 
-The required universe matrix runs the two lanes; both must pass. A pull request tests only what it can break: the packages it changed and every package that depends on them (the offline tools `bake` and `telescope-cli` only when a tool changed, except the bake tests listed in `FOREIGN_TESTS` that exercise the renderer, which run whenever it changes), and the site when it or a package it imports changed (`.github/scripts/ci/affected-tests.mts`). A push to main, or a change to shared configuration, tests everything. The preparation gate checks publication. Source
+The required universe matrix runs the two lanes; both must pass. A pull request tests only what it can break: the packages it changed and every package that depends on them (the offline tools `bake` and `telescope-cli` only when a tool changed, except the depth-partition producer contract on objects changes; foreign runtime and integration tests follow their imported owners), and the site when it or a package it imports changed (`.github/scripts/ci/affected-tests.mts`). A push to main, or a change to shared configuration, tests everything. The preparation gate checks publication. Source
 catalogue reconciliation and broad bake reproduction run in the separate advisory
 audit. Native tests needing unavailable sources, prepared outputs or toolchains
 can skip through `@cssearth/objects/node/source-test`; a pass with skips does not prove

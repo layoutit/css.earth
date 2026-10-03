@@ -1,4 +1,4 @@
-import { readCompactFiniteEmission, readCompactFiniteDataset, readCompactToneProjection, readSimulationEnvelopeRecord, validateDatasetToneCurve, type EmissionFieldModel, type VolumeSlices, type Vector3 } from '@cssearth/objects';
+import { readCompactFiniteEmission, readSimulationEnvelopeRecord, type EmissionFieldModel, type VolumeSlices, type Vector3 } from '@cssearth/objects';
 /**
  * Offline replay of an accepted simulation-guided finite-emission delivery.
  *
@@ -15,10 +15,9 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { createEmissionField } from '../../fields/emission.ts';
 import { createEmissionMaterial } from '../../materials/component-material.ts';
-import { compilerSlabMaterial, datasetChannelGainMaterial, validateChannelGain, type DatasetTone } from '../../materials/slab-material.ts';
+import { compilerSlabMaterial, datasetChannelGainMaterial, type DatasetTone } from '../../materials/slab-material.ts';
 import { createEnvelopeSampler, envelopeChromaticity, envelopeChromaSettings } from '../../fields/simulation-envelope.ts';
 import { physicalToField, angularScale } from '../../coordinates/observer-tangent.ts';
-import { parseCloudAppearance } from '../../materials/cloud-appearance.ts';
 
 import { recolorCloudSlices } from '../slices/material.ts';
 import { loadSimulationPrior } from './simulation-prior.ts';
@@ -47,7 +46,7 @@ export interface CompactFiniteDataset {
 export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, destination: string): Promise<CompactFiniteDataset[]> {
   const input = readCompactFiniteEmission(await json(root, inputPin));
   const { distance, modelTangent, exposureGain, fullChromaAlphaByte, encoding, datasets } = input;
-  const appearance = parseCloudAppearance(input.appearance);
+  const appearance = input.appearance;
   assert.equal(appearance.detailStrength, 0, 'Finite component material does not support projected detail enhancement');
   const field = await json(root, input.emissionField) as EmissionFieldModel;
   const preparedField = createEmissionField(field);
@@ -63,8 +62,9 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
 
   // A dataset tone curve is indexed by the model's own front-projection byte at the texel's sky position, read
   // from the delivered projection exactly as the accepted bake read the model's `fit-projection.png`.
-  const levelAt = input.toneProjection === undefined ? null : await (async () => {
-    const grid = readCompactToneProjection(input.toneProjection), pb = grid.bounds, w = grid.width, h = grid.height;
+  const toneProjection = input.toneProjection;
+  const levelAt = toneProjection === undefined ? null : await (async () => {
+    const grid = toneProjection, pb = grid.bounds, w = grid.width, h = grid.height;
     const projection = await sharp(await pinned(root, grid.image)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
     assert.ok(projection.info.width === w && projection.info.height === h, 'Front projection differs from its pinned grid.');
     const pc = projection.info.channels, pd = projection.data;
@@ -77,9 +77,9 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
       return at(i, j) * (1 - fu) * (1 - fv) + at(i + 1, j) * fu * (1 - fv) + at(i, j + 1) * (1 - fu) * fv + at(i + 1, j + 1) * fu * fv;
     };
   })();
-  const seen = new Set<string>(), results: CompactFiniteDataset[] = [];
-  for (const value of datasets as unknown[]) {
-    const dataset = readCompactFiniteDataset(value, seen), { imageId, bounds } = dataset;
+  const results: CompactFiniteDataset[] = [];
+  for (const dataset of datasets) {
+    const { imageId, bounds } = dataset;
 
     const registered = await pinned(root, dataset.registered);
     const decoded = await sharp(registered).removeAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -133,10 +133,10 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
     let tone: DatasetTone | null = null;
     if (dataset.toneCurve !== undefined) {
       assert.ok(levelAt, `${imageId} carries a tone curve but the delivery has no tone projection.`);
-      tone = { curve: validateDatasetToneCurve(dataset.toneCurve), levelAt };
+      tone = { curve: dataset.toneCurve, levelAt };
     }
     const slabMaterial = datasetChannelGainMaterial(compilerSlabMaterial(sampleEmission, sampleMaterial), sampleEmission,
-      exposureGain, fullChromaAlphaByte, dataset.channelGain === undefined ? null : validateChannelGain(dataset.channelGain), tone);
+      exposureGain, fullChromaAlphaByte, dataset.channelGain === undefined ? null : dataset.channelGain, tone);
 
     const directory = resolve(destination, imageId);
     await mkdir(directory, { recursive: true });

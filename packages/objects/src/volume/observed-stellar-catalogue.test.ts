@@ -34,3 +34,12 @@ test('catalogue envelope keeps epoch 2000 and its 200000-row bound independently
   assert.equal(parsed.schema, OBSERVED_STELLAR_CATALOGUE_SCHEMA);
   assert.deepEqual(parsed.stars, [row]);
 });
+
+test('caller frame admission follows one envelope read and precedes star admission', () => {
+  const input = catalogue([null as never]);
+  let reads = 0;
+  const once = { ...input, get stars() { reads++; return input.stars; } };
+  // Envelope validation inspects stars for array/length, then copies it; a second envelope pass would add three reads.
+  assert.throws(() => parseObservedStellarCatalogue(once, () => { throw new Error('frame admission'); }), /frame admission/);
+  assert.equal(reads, 3);
+});

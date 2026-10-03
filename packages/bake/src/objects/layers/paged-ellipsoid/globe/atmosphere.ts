@@ -1,5 +1,6 @@
 import type {SourceManifest} from '@cssearth/objects/node';
-import { type PreparedDirectionalSunPlan, readAtmosphereModel as parseAtmosphereModelRecord } from '@cssearth/objects';
+import { type PreparedDirectionalSunPlan } from '@cssearth/objects';
+import { readAtmosphereModel as parseAtmosphereModelRecord } from '../../../../baking/index.ts';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
