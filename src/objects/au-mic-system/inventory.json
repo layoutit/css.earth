@@ -9,6 +9,18 @@
     },
     {
       "location": "prepared",
+      "filename": "orbits/au-mic-b.bin",
+      "bytes": 1939,
+      "sha256": "5f04db5b08fafe0da8f5872877210d35039956200ae60b46a14afd78bc4ab43c"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/au-mic-c.bin",
+      "bytes": 1941,
+      "sha256": "9e75aad385d51495dd58f5ab7f8a548016f424914ebd24e6e6680b9625ccce8c"
+    },
+    {
+      "location": "prepared",
       "filename": "views/au-mic.json",
       "bytes": 34642,
       "sha256": "b5520674957cc5a19b9b079db7df6238756c3a0ce2f9cc06e6fbf42cec00fc5b"

@@ -9,6 +9,18 @@
     },
     {
       "location": "prepared",
+      "filename": "orbits/pds-70-b.bin",
+      "bytes": 1940,
+      "sha256": "13d2e90bb0d1bf3f12f6a2a17dcd55a3eaa012ae5540feb12acfb05d371ba59b"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/pds-70-c.bin",
+      "bytes": 1948,
+      "sha256": "869eec3b2b38e9ee0e3b8a5f39cb0f794852f71d9256fd85a45a05ebf52f8b2e"
+    },
+    {
+      "location": "prepared",
       "filename": "views/pds-70.json",
       "bytes": 34568,
       "sha256": "8bff133ee45f98da4a685b130d6cf5706b0625bc4fa19822fd7bb5fd16543450"

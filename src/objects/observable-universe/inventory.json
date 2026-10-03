@@ -63,9 +63,21 @@
     },
     {
       "location": "prepared",
+      "filename": "world-index.json",
+      "bytes": 1283778,
+      "sha256": "cdee5ebc1ae6384c24cef3af3ce3eefad40d2e58a120c69526a35a43af858477"
+    },
+    {
+      "location": "prepared",
       "filename": "world-navigation.json",
       "bytes": 512,
       "sha256": "b36a4f2317acb8e1c640491e88468a7bbd9a714d17a2f700cf4db0a5a43ed19b"
+    },
+    {
+      "location": "prepared",
+      "filename": "world.json",
+      "bytes": 2534,
+      "sha256": "44e019acfcdcfb049a95c55fcf6ec9ce1223f712c4ee08b26e3f14548a7609e2"
     }
   ]
 }

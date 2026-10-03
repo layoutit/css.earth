@@ -9,6 +9,36 @@
     },
     {
       "location": "prepared",
+      "filename": "orbits/charon.bin",
+      "bytes": 2261,
+      "sha256": "8c94c0c179673eda68de4d1158cadd4b43c75b59bf9a5d4b2d68ebd8310abee7"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/hydra.bin",
+      "bytes": 2273,
+      "sha256": "d920d3c4374a040cd7322623bc4f867ad540740756559771ee186b6af6f95194"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kerberos.bin",
+      "bytes": 2275,
+      "sha256": "813c6ac74bb5283fdc19004105e4f279b8507f91b5fefa0272ea9dcd8034e66d"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/nix.bin",
+      "bytes": 2261,
+      "sha256": "8055ffb0f7684b017e756db62e4b3091fe71d7c4d29afa1fa2c2d5fb7c413c24"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/styx.bin",
+      "bytes": 2263,
+      "sha256": "67b7b883cf72fe509327e1c0deb97d0a339aade1729bdf4065282adbbdcd1d8a"
+    },
+    {
+      "location": "prepared",
       "filename": "views/pluto.json",
       "bytes": 30519,
       "sha256": "67278bb1dbaac5cb7778517364215746a7d76afd36424cdcbfaca3584b64c51b"

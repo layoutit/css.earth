@@ -9,6 +9,18 @@
     },
     {
       "location": "prepared",
+      "filename": "orbits/roxs-42b-b.bin",
+      "bytes": 1942,
+      "sha256": "864ffdd841ad1264bffad930dd7ac43b23c3d3a9a5774860d7a7634cd2b9ebf5"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/roxs-42b-companion.bin",
+      "bytes": 2278,
+      "sha256": "d5f9c81beab4cdfda2086d4a540dfaa3df4cf5407a8179085cfb4cb9d4c48802"
+    },
+    {
+      "location": "prepared",
       "filename": "views/roxs-42b.json",
       "bytes": 34712,
       "sha256": "7906be5ef4f12632bd150b87f2a3c95734073299131cfb2613e68766d233d62d"

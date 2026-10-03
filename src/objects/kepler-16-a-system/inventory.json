@@ -9,6 +9,18 @@
     },
     {
       "location": "prepared",
+      "filename": "orbits/kepler-16-b.bin",
+      "bytes": 2264,
+      "sha256": "6d04c3cb50fe588ddf4d2662d8339de7eead10c2f2c3d1f004091f79647a8f44"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-16ab-b.bin",
+      "bytes": 1943,
+      "sha256": "643af2a912dbe5b768c6f52c57d92db7c83232571dcece18760b749b3a141d3a"
+    },
+    {
+      "location": "prepared",
       "filename": "views/kepler-16-a.json",
       "bytes": 34483,
       "sha256": "cd855ad90ff254186b2dc2bbf7fde28a8945457a8f31a1d72532ceda7bdea0dd"

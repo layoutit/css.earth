@@ -9,6 +9,18 @@
     },
     {
       "location": "prepared",
+      "filename": "orbits/toi-406b.bin",
+      "bytes": 1936,
+      "sha256": "8f4c2e3ca7b15276d1cb96e603f81768df43e352662a2de77530a32ce94cf814"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/toi-406c.bin",
+      "bytes": 1948,
+      "sha256": "fe7a93eabdf6a23c8852e4f98127a4a9641d673ac8d9aaf7bc42d55542904df1"
+    },
+    {
+      "location": "prepared",
       "filename": "views/toi-406.json",
       "bytes": 34574,
       "sha256": "f8fee4a457c10dc880923328a1bea863648ac9ecf88c5c9ceb85393826a6c9d9"
