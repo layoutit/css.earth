@@ -50,13 +50,27 @@ description, and a system of bound stars alone a sentence that names its stars.
 
 ## Overview navigation
 
-Each system lists what is inside it under **Celestial bodies**, with their
-count, using the same rows as search: its host, its stars, its planets and its
-featured bodies, or a planet's moons in its moon catalogue's order. The Solar
-System puts its planets first. Large-scale
-overviews use their registry-held groups for navigation: the Milky Way starts
-with the Sun and featured stars within its existing galactic range; the Local
-Group and Nearby Universe list their held galaxies and clusters.
+Every object with something inside it lists it under **Celestial bodies**, with
+the count, using the same rows as search. One rule builds every list
+([`object-children.mts`](../site/object-children.mts)): the rows are the objects
+whose parent it is in the object tree.
+
+- A child that is a system shows as its host: the Solar System lists Jupiter,
+  and the Milky Way lists the Sun.
+- A child the map never names is left out: an asteroid or a star drawn as a
+  plain dot. A plain-dot star is listed in the system it is inside, where the map
+  names it.
+- A system's host leads, planets come before other bodies, then nearest first:
+  from the host in a system, from the centre of the reader's home galaxy where
+  the list holds it, else from the Sun. Then by name.
+- A moon its host's catalogue names and nobody has packaged is a row that opens
+  nothing, after the moons with pages.
+
+![The Solar System's list, and M31's new Celestial bodies tab](images/celestial-bodies-list.png)
+
+A galaxy or a cluster with objects inside it shows the list beside its datasets
+and opens on the datasets. An object seen from inside has no body of its own, so
+its list leads.
 
 ## Dataset groups
 

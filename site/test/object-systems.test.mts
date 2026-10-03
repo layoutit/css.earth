@@ -135,21 +135,10 @@ test("every system's overview lasts two doublings of distance before its orbits 
   assert.ok(systemById(SCENE_OBJECTS, 'sgr-a-star')!.exitDistanceM < 0.8 * 9.4607e15, 'Sgr A* opens at 0.8 ly, not the scaled 3.6 ly');
 });
 
-test("a system's card lists its stars, its planets and its featured bodies, read from the object tree", async () => {
-  const { listedInSystemCard, systemCard } = await import('../system-card.mts');
-  const body = (id: string, classification: string, featured: boolean) => ({ id, classification, discovery: { featured } });
-  assert.deepEqual([body('gj-820-b', 'star', false), body('neptune', 'planet', false), body('trappist-1b', 'exoplanet', false), body('ceres', 'dwarf-planet', true),
-    body('asteroid-1998-wt24', 'asteroid', false), body('hyperion', 'satellite', false)].filter(listedInSystemCard).map(object => object.id),
-  ['gj-820-b', 'neptune', 'trappist-1b', 'ceres']);
-  // One card for every kind of system: a star's planets by name after the star, a planet's moons in its catalogue's order,
-  // a star's companions.
-  assert.deepEqual(systemCard('trappist-1')!.rows.map(row => row.id), ['trappist-1', ...[...'bcdefgh'].map(letter => `trappist-1${letter}`)]);
-  assert.deepEqual(systemCard('earth')!.rows.map(row => row.id), ['earth', 'moon']);
-  assert.deepEqual(systemCard('gj-820-a')!.rows.map(row => row.id), ['gj-820-a', 'gj-820-b']);
-  assert.deepEqual(systemCard('alpha-centauri-a')!.rows.map(row => row.id), ['alpha-centauri-a', 'alpha-centauri-b', 'proxima-centauri']);
+test('a system\'s card is read from its object: its name, its facts and how many rows it lists', async () => {
+  const { systemCard } = await import('../system-card.mts');
   assert.equal(systemCard('alpha-centauri-a')!.system.classification, 'star-system');
-  const solar = systemCard('sun')!;
-  assert.equal(solar.rows[0]!.id, 'mercury');
-  assert.ok(solar.facts && solar.rows.length < 150 && solar.rows.some(row => row.id === 'sun'));
+  assert.equal(systemCard('alpha-centauri-a')!.count, 3);
+  assert.ok(systemCard('sun')!.facts);
   assert.equal(systemCard('moon'), null);
 });

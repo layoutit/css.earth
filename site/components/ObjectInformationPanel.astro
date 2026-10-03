@@ -13,11 +13,10 @@ import DatasetContextPanels from "./DatasetContextPanels.astro";
 import DatasetList from "./DatasetList.astro";
 import TreeDisclosure from './TreeDisclosure.astro';
 import { readObjectArticleUrl } from '../server/object-article.mts';
-import { OBJECTS, ancestorsOf } from '../objects.mts';
+import { OBJECTS } from '../objects.mts';
 import { systemObjectId } from '../navigation/system-address.mts';
-import { WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
-import { objectResultMarkup } from '../server/object-result-markup.mts';
-import { PREPARED_CATALOGUE_INDEX } from '../search/prepared-catalogue-index.mts';
+import ChildList from './ChildList.astro';
+import { childrenOf } from '../object-children.mts';
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], datasets } = Astro.props;
 const hasDatasets = Boolean(datasets && datasets.controls.length > 0);
 const hasFacts = facts.length + moreFacts.length > 0;
@@ -25,36 +24,12 @@ const hasFacts = facts.length + moreFacts.length > 0;
 // factsheet first, without tabs.
 const stacked = hasFacts && datasets?.controls.length === 1 && datasets.controls[0]!.color !== undefined && galleries.length === 0;
 const articleUrl = await readObjectArticleUrl(objectId);
-// An object seen from inside lists what is inside it: its children the map draws as markers (a star drawn as a plain dot
-// is not one, nor a system whose star is), nearest first. A child with a distance from the Sun at the world's epoch (a
-// star, a system) is search's own row. Any other shows its catalogue distance in light years: from the centre of the galaxy
-// the Solar System is in where that galaxy is in the list (the view from home), else its published distance from the Solar
-// System. One at no distance (the home galaxy, an object centred on the observer) shows none.
+// Any object lists what is inside it (object-children.mts, ChildList.astro). An object seen from inside has no body of its
+// own to look at, so its list leads; any other opens on its datasets.
 const zoom = OBJECTS.find(object => object.id === objectId)?.zoom;
 const objectById = new Map(OBJECTS.map(object => [object.id, object] as const));
-const marker = (object: (typeof OBJECTS)[number]) => {
-  const shown = object.system ? objectById.get(object.system.host) ?? object : object;
-  return shown.classification !== 'star' || shown.discovery.featured === true || shown.discovery.imagery || shown.discovery.hostsImagery === true;
-};
-const PARSEC_M = 3.085677581491367e16;
-const resultRows = new Map(PREPARED_CATALOGUE_INDEX.entries.map(row => [row.id, row]));
-const around = new Set(ancestorsOf(WORLD_HOST_ID).map(object => object.id));
-const members = zoom ? OBJECTS.filter(object => object.parent === objectId && marker(object)) : [];
-const home = members.find(member => around.has(member.id) && member.classification === 'galaxy');
-const children = members.map(member => ({ member, distancePc: (home
-  ? Math.hypot(...member.worldFrame.originM.map((value, axis) => value - home.worldFrame.originM[axis]!)) : member.distance.meters) / PARSEC_M }))
-  .sort((a, b) => a.distancePc - b.distancePc);
-const listTitle = home ? `Catalogue center distance from ${home.name}` : 'Published catalogue distance from the Solar System';
-const memberMarkup = ({ member, distancePc }: (typeof children)[number]) => {
-  const row = resultRows.get(member.id);
-  if (!row) throw new Error(`Missing search row for ${objectId} member ${member.id}.`);
-  if (member.distance.quantity === 'geometric') return objectResultMarkup(row);
-  if (distancePc === 0) return objectResultMarkup({ ...row, detail: undefined });
-  const ly = distancePc * 3.261563777, divisor = ly >= 1e6 ? 1e6 : ly >= 1e3 ? 1e3 : 1;
-  const value = `≈${new Intl.NumberFormat('en', { maximumSignificantDigits: 3 }).format(ly / divisor)}`, unit = divisor === 1e6 ? 'Mly' : divisor === 1e3 ? 'kly' : 'ly';
-  return objectResultMarkup({ ...row, detail: { text: `${value} ${unit}`, value, unit, title: listTitle, ariaLabel: `${value} ${unit}. ${listTitle}` } });
-};
-const opening = children.length ? 'bodies' : 'dataset';
+const inside = childrenOf(objectId), children = inside.rows;
+const opening = zoom && children.length ? 'bodies' : 'dataset';
 const together = stacked && !children.length;
 // The card's subject: the body, or the system it hosts.
 const system = objectById.get(systemObjectId(objectId));
@@ -84,9 +59,7 @@ const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.system
       ]} />}
       <p data-dataset-notice role="status" aria-live="polite" hidden></p>
       {children.length > 0 && <section class="object-results-scroll object-card-tabpanel" id={`${objectId}-bodies-content`} data-information-panel="bodies" aria-label="Celestial bodies">
-        <ul class="object-list">
-          {children.map(row => <li class="object-item"><Fragment set:html={memberMarkup(row)} /></li>)}
-        </ul>
+        <ChildList {objectId} />
       </section>}
       {together && <section class="object-card-tabpanel object-factsheet-content" id={`${objectId}-factsheet-content`} data-information-panel="factsheet" aria-label="Factsheet">
         <h2 class="object-mobile-information-heading">Factsheet</h2>

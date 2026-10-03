@@ -1,0 +1,34 @@
+---
+import { childrenOf } from '../object-children.mts';
+import { PREPARED_CATALOGUE_INDEX } from '../search/prepared-catalogue-index.mts';
+import { objectResultMarkup } from '../server/object-result-markup.mts';
+
+interface Props { objectId: string }
+/** What is inside an object, the one list every card shows (object-children.mts). A row is search's own row of the body.
+ * A system's rows, and any row with a distance from the Sun at the world's epoch, keep search's distance. Any other
+ * shows its catalogue distance in light years: from the centre of the reader's home galaxy where the list holds it, else
+ * its published distance from the Solar System. One at no distance (the home galaxy) shows none. */
+const { objectId } = Astro.props;
+const { rows, drafts, host, homeGalaxy } = childrenOf(objectId);
+const resultRows = new Map(PREPARED_CATALOGUE_INDEX.entries.map(row => [row.id, row]));
+const title = homeGalaxy ? `Catalogue center distance from ${homeGalaxy.name}` : 'Published catalogue distance from the Solar System';
+const markup = ({ object, distancePc }: (typeof rows)[number]) => {
+  const row = resultRows.get(object.id);
+  if (!row) throw new Error(`Missing search row for ${object.id}, which is inside ${objectId}.`);
+  if (host || object.distance.quantity === 'geometric') return objectResultMarkup(row);
+  if (distancePc === 0) return objectResultMarkup({ ...row, detail: undefined });
+  const ly = distancePc * 3.261563777, divisor = ly >= 1e6 ? 1e6 : ly >= 1e3 ? 1e3 : 1;
+  const value = `≈${new Intl.NumberFormat('en', { maximumSignificantDigits: 3 }).format(ly / divisor)}`, unit = divisor === 1e6 ? 'Mly' : divisor === 1e3 ? 'kly' : 'ly';
+  return objectResultMarkup({ ...row, detail: { text: `${value} ${unit}`, value, unit, title, ariaLabel: `${value} ${unit}. ${title}` } });
+};
+---
+<ul class="object-list">
+  {rows.map(row => <li class="object-item"><Fragment set:html={markup(row)} /></li>)}
+  {drafts.map(moon => <li class="object-item">
+    <span class="object-link object-observation-control object-thumbnail-leading object-result-row" role="link" aria-disabled="true" title="Not available yet">
+      <span class="object-dataset-icon" aria-hidden="true"><span class="object-moon-placeholder"></span></span>
+      <span class="object-name object-dataset-label">{moon.name}</span>
+      <span class="object-dataset-detail">Not available</span>
+    </span>
+  </li>)}
+</ul>
