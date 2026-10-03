@@ -1,0 +1,27 @@
+{
+  "id": "ngc-1365",
+  "classification": "galaxy",
+  "physical": {
+    "name": "NGC 1365",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 1365 is recorded: it is an extended galaxy, and its package frames it at 29800 pc (object.json worldFrame.bodyRadiusM): RC3's isophotal diameter, log D25 = 2.05 (0.1 arcmin), halved and set at the Cepheid distance.",
+  "star": {
+    "rightAscensionDegrees": 53.40166666666666,
+    "declinationDegrees": -36.140277777777776,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 18255763,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 1522.2390946596668,
+    "sources": {
+      "position": "Leroy et al. (2021), ApJS 257, 43, galaxies table (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43), row NGC1365: RAJ2000 53.40166666666666, DEJ2000 -36.140277777777776",
+      "distance": "Riess et al. (2016), ApJ 826, 56, table 5 (https://arxiv.org/abs/1604.01424), row N1365: Cepheid distance modulus mu_Ceph 31.307 +/- 0.057 mag, 10^(mu/5 + 1) pc: 18255763 pc (-472969/+485549); the distance its Cepheids are placed at",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NGC 1365: 1522.2390946596668 km/s, from 2022ApJS..261....2K (https://ui.adsabs.harvard.edu/abs/2022ApJS..261....2K/abstract)"
+    }
+  }
+}
