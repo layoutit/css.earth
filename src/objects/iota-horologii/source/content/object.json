@@ -64,7 +64,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The color of Gaia DR3's measured spectrum of the star, an F8 to G0 dwarf. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for the TESS band, at 6,080 K and log g 4.40 (Bruntt et al. 2010): a model. The spin axis's direction on the sky is a display convention."
+        "notes": "The color of Gaia DR3's measured spectrum of the star, an F8 to G0 dwarf. The spin axis's direction on the sky is a display convention. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,080 K and log g 4.4 (u1 0.402, u2 0.292): a model, because no fit of this star's limb is used."
       },
       {
         "id": "radial-field-01",
