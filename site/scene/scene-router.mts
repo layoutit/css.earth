@@ -43,6 +43,7 @@ import { createSceneSessions, type SceneSession as Session } from './scene-sessi
 import { readPreparedDescriptor } from '../prepared-descriptor.mts';
 import { watchSatelliteSelection } from '../satellite-selection.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from '../satellite-systems.mts';
+import { systemOfObject } from '../object-systems.mts';
 import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
 import { observeSceneRetirement } from './scene-memory.mts';
 import { releaseStartupRequests, startFlightRequest } from '../startup-requests.mts';
@@ -652,9 +653,12 @@ export function createSceneRouter({
       handover.cross({ objectId: followed.objectId }, 'zoom-scope');
     }
     // A pending scene whose body the camera has come close enough to see is mounted without waiting for rest. An object
-    // seen from inside has no body, and one the mounted body is inside is around the camera already: it waits for rest.
+    // seen from inside has no body. One the mounted body is inside, or whose system it belongs to (its star's, its
+    // planet's), is around the camera already, and a zoom to it is a zoom out: it waits for rest. From TRAPPIST-1 e its
+    // star is a disc, and its scene was mounted mid-zoom on the way out once the page knew the star (2026-10-03).
     const host = handover.subject ? subjectHost(handover.subject) : null, focal = session.mount?.navigation?.optics().focalPixels;
-    const around = host !== null && (insideBody(objectId)?.id === host || insideBody(subjectOf(objectId, 'system').objectId)?.id === host);
+    const around = host !== null && (insideBody(objectId)?.id === host || insideBody(subjectOf(objectId, 'system').objectId)?.id === host
+      || systemOfObject(context?.objects ?? [], objectId)?.id === host || satelliteSystemOfMember(objectId)?.hostId === host);
     const body = host !== null && !around && zoomStepOf({ objectId: host }) === null ? context?.registry.SCENE_OBJECTS.find(object => object.id === host)?.worldFrame : undefined;
     if (body && focal && bodyInView(frame, body, focal)) handover.due();
     if (followed !== true) return;
@@ -685,8 +689,19 @@ export function createSceneRouter({
     world.current?.setOverview?.(step !== null || moons, step !== null && systemHostId(step.scope) === null, moons,
       step !== null && pastCentreGalaxy(step.scope, step.centreId));
   }
-  /** The camera crossed into, or came back from, a selection of another scene: the camera's limits and the world follow. */
-  function publishFraming() { publishCamera(); publishWorld(); }
+  /** The camera crossed into, or came back from, a selection of another scene: the camera's limits and the world follow.
+   * A star's system it crossed into is a step of the zoom out of that star, as a committed one is (publishSelection): the
+   * objects the star is inside are read now, and the camera is asked again once they are known, so the zoom goes on through
+   * them before it rests. Read only at rest, a zoom out of a planet followed nothing past its star's system, and out of
+   * TRAPPIST-1 e the star's scene was mounted at rest only to be replaced by the Observable Universe's (2026-10-03). */
+  function publishFraming() {
+    const { step } = framing();
+    if (handover.subject && step) void loadAncestors(step.centreId).then(() => {
+      const session = scenes.current;
+      if (session?.mount?.navigation && scenes.state.kind === 'ready') followSelectionCamera(session, session.mount.navigation.capture());
+    }).catch(error => console.error(`The objects ${step.centreId} is inside could not be read; zooming out stops at its system.`, error));
+    publishCamera(); publishWorld();
+  }
   function publishSelection() {
     const subject = context?.selection.current;
     // A star's system is a step of the zoom out of that star: the objects the star is inside, which the zoom hands the view

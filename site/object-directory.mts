@@ -39,9 +39,13 @@ export async function ancestorIds(id: string, read: (id: string) => Promise<unkn
   }
   return listed;
 }
-/** Loads the objects `id` is inside, together: its entry names them (`ancestors`), so none waits for another. */
+/** Loads the objects `id` is inside, together: its entry names them (`ancestors`), so none waits for another. `id` is
+ * loaded too, from the entry just read: the chain starts at its parent (`knownAncestors`), so without it the chain of a
+ * star the page has not mounted (the Sun, on a planet's page) was empty and a zoom out of that planet followed nothing
+ * past the star's system until the camera rested (2026-10-03). */
 export async function loadAncestors(id: string, read: (id: string) => Promise<unknown | null> = fetchEntry): Promise<readonly NavigableObject[]> {
-  await Promise.all((await ancestorIds(id, read)).map(ancestor => loadObject(ancestor, read)));
+  const ids = await ancestorIds(id, read);
+  await Promise.all([id, ...ids].map(each => loadObject(each, read)));
   return knownAncestors(id);
 }
 /** Loads the object `id`, with any system it hosts, is inside: the nearest one that is no system (its galaxy; the Milky
