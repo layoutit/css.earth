@@ -1,0 +1,36 @@
+{
+  "id": "ned-smacs-0723",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA/IPAC Extragalactic Database: SMACS J0723.3-7327",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://ned.ipac.caltech.edu/byname?objname=SMACS%20J0723.3-7327"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ned.ipac.caltech.edu/byname?objname=SMACS%20J0723.3-7327",
+      "label": "NED, SMACS J0723.3-7327"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ned.ipac.caltech.edu/byname?objname=SMACS%20J0723.3-7327",
+      "checkedOn": "2026-10-02",
+      "locator": "NED preferred values of SMACS J0723.3-7327: RA 110.8054167°, Dec -73.45694444° (2024ApJ...964..146F); redshift 0.391 ± 0.0007 (2025A&A...699A.105A)"
+    }
+  ],
+  "publisher": "NASA/IPAC Extragalactic Database",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Position and redshift are NED's preferred values with the reference codes it gives (2024ApJ...964..146F, 2025A&A...699A.105A); this record does not claim independent review of those papers.",
+      "scope": "citation",
+      "evidence": "https://ned.ipac.caltech.edu/byname?objname=SMACS%20J0723.3-7327"
+    }
+  ]
+}

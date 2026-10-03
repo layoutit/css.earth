@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "macs-j1149-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      3800,
+      3800
+    ],
+    "originalDimensions": [
+      3800,
+      3800
+    ],
+    "publisherUrl": "https://esahubble.org/images/heic1505b/",
+    "downloadUrl": "https://cdn.esahubble.org/archives/images/large/heic1505b.jpg",
+    "credit": "NASA, ESA, S. Rodney (John Hopkins University, USA) and the FrontierSN team; T. Treu (University of California Los Angeles, USA), P. Kelly (University of California Berkeley, USA) and the GLASS team; J. Lotz (STScI) and the Frontier Fields team; M. Postman (STScI) and the CLASH team; and Z. Levay (STScI)",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 177.400369075,
+    "centerDecDeg": 22.400300529,
+    "fieldOfViewDeg": [
+      0.03166583,
+      0.03166583
+    ],
+    "northClockwiseDeg": -0.02
+  },
+  "target": {
+    "centerRaDeg": 177.3962208,
+    "centerDecDeg": 22.40303889,
+    "distancePc": 2086405931.0445287
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.004712,
+    "lineOfNodesPaDeg": 215.527,
+    "thicknessKpc": 0.577,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 565.02,
+    "supportTaperFraction": 0.7,
+    "depthScales": [
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

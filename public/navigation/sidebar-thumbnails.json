@@ -19,6 +19,22 @@
       "bytes": 18658
     },
     {
+      "path": "src/objects/abell-370-layers/prepared/presentation.json",
+      "bytes": 1554
+    },
+    {
+      "path": "public/scenes/abell-370-layers/datasets/optical.webp",
+      "bytes": 20058
+    },
+    {
+      "path": "src/objects/abell-s1063-layers/prepared/presentation.json",
+      "bytes": 1548
+    },
+    {
+      "path": "public/scenes/abell-s1063-layers/datasets/optical.webp",
+      "bytes": 18018
+    },
+    {
       "path": "src/objects/beta-pictoris-disc/prepared/presentation.json",
       "bytes": 9515
     },
@@ -63,12 +79,36 @@
       "bytes": 24340
     },
     {
+      "path": "src/objects/cartwheel-galaxy-layers/prepared/presentation.json",
+      "bytes": 1539
+    },
+    {
+      "path": "public/scenes/cartwheel-galaxy-layers/datasets/optical.webp",
+      "bytes": 15414
+    },
+    {
       "path": "src/objects/earendel-layers/prepared/presentation.json",
       "bytes": 1508
     },
     {
       "path": "public/scenes/earendel-layers/datasets/optical.webp",
       "bytes": 1812
+    },
+    {
+      "path": "src/objects/einstein-cross-layers/prepared/presentation.json",
+      "bytes": 1463
+    },
+    {
+      "path": "public/scenes/einstein-cross-layers/datasets/optical.webp",
+      "bytes": 2426
+    },
+    {
+      "path": "src/objects/el-gordo-layers/prepared/presentation.json",
+      "bytes": 1510
+    },
+    {
+      "path": "public/scenes/el-gordo-layers/datasets/optical.webp",
+      "bytes": 14268
     },
     {
       "path": "src/objects/eps-eridani-disc/prepared/presentation.json",
@@ -295,6 +335,22 @@
       "bytes": 17250
     },
     {
+      "path": "src/objects/macs-j0717-layers/prepared/presentation.json",
+      "bytes": 1478
+    },
+    {
+      "path": "public/scenes/macs-j0717-layers/datasets/optical.webp",
+      "bytes": 15890
+    },
+    {
+      "path": "src/objects/macs-j1149-layers/prepared/presentation.json",
+      "bytes": 1522
+    },
+    {
+      "path": "public/scenes/macs-j1149-layers/datasets/optical.webp",
+      "bytes": 18602
+    },
+    {
       "path": "src/objects/mom-z14-layers/prepared/presentation.json",
       "bytes": 1510
     },
@@ -427,6 +483,14 @@
       "bytes": 4406
     },
     {
+      "path": "src/objects/smacs-0723-layers/prepared/presentation.json",
+      "bytes": 1530
+    },
+    {
+      "path": "public/scenes/smacs-0723-layers/datasets/optical.webp",
+      "bytes": 18880
+    },
+    {
       "path": "src/objects/smc-volume/prepared/presentation.json",
       "bytes": 7689
     },
@@ -449,6 +513,14 @@
     {
       "path": "public/scenes/smc-volume/datasets/smc-allwise-wide.webp",
       "bytes": 3552
+    },
+    {
+      "path": "src/objects/stephans-quintet-layers/prepared/presentation.json",
+      "bytes": 1528
+    },
+    {
+      "path": "public/scenes/stephans-quintet-layers/datasets/optical.webp",
+      "bytes": 18234
     },
     {
       "path": "src/objects/sun-cor1-density/prepared/presentation.json",
@@ -523,6 +595,42 @@
       ],
       "credit": "ESA/Webb",
       "sourceUrl": "https://esawebb.org/images/weic2305a/"
+    },
+    "abell-370-layers/optical": {
+      "url2x": "/navigation/focus-abell-370-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/abell-370-layers/prepared/presentation.json",
+        "public/scenes/abell-370-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/heic1711a/"
+    },
+    "abell-370-layers": {
+      "url2x": "/navigation/focus-object-abell-370-layers@2x.webp",
+      "inputs": [
+        "src/objects/abell-370-layers/prepared/presentation.json",
+        "public/scenes/abell-370-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/heic1711a/"
+    },
+    "abell-s1063-layers/optical": {
+      "url2x": "/navigation/focus-abell-s1063-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/abell-s1063-layers/prepared/presentation.json",
+        "public/scenes/abell-s1063-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/heic1615a/"
+    },
+    "abell-s1063-layers": {
+      "url2x": "/navigation/focus-object-abell-s1063-layers@2x.webp",
+      "inputs": [
+        "src/objects/abell-s1063-layers/prepared/presentation.json",
+        "public/scenes/abell-s1063-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/heic1615a/"
     },
     "beta-pictoris-disc/visible": {
       "url2x": "/navigation/focus-beta-pictoris-disc-visible@2x.webp",
@@ -623,6 +731,24 @@
       "credit": "ESA/Hubble",
       "sourceUrl": "https://esahubble.org/images/opo0639a/"
     },
+    "cartwheel-galaxy-layers/optical": {
+      "url2x": "/navigation/focus-cartwheel-galaxy-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/cartwheel-galaxy-layers/prepared/presentation.json",
+        "public/scenes/cartwheel-galaxy-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Webb",
+      "sourceUrl": "https://esawebb.org/images/weic2211a/"
+    },
+    "cartwheel-galaxy-layers": {
+      "url2x": "/navigation/focus-object-cartwheel-galaxy-layers@2x.webp",
+      "inputs": [
+        "src/objects/cartwheel-galaxy-layers/prepared/presentation.json",
+        "public/scenes/cartwheel-galaxy-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Webb",
+      "sourceUrl": "https://esawebb.org/images/weic2211a/"
+    },
     "earendel-layers/optical": {
       "url2x": "/navigation/focus-earendel-layers-optical@2x.webp",
       "inputs": [
@@ -640,6 +766,42 @@
       ],
       "credit": "ESA/Webb",
       "sourceUrl": "https://esawebb.org/images/sunrisearc1/"
+    },
+    "einstein-cross-layers/optical": {
+      "url2x": "/navigation/focus-einstein-cross-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/einstein-cross-layers/prepared/presentation.json",
+        "public/scenes/einstein-cross-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/potw1204a/"
+    },
+    "einstein-cross-layers": {
+      "url2x": "/navigation/focus-object-einstein-cross-layers@2x.webp",
+      "inputs": [
+        "src/objects/einstein-cross-layers/prepared/presentation.json",
+        "public/scenes/einstein-cross-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/potw1204a/"
+    },
+    "el-gordo-layers/optical": {
+      "url2x": "/navigation/focus-el-gordo-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/el-gordo-layers/prepared/presentation.json",
+        "public/scenes/el-gordo-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Webb",
+      "sourceUrl": "https://esawebb.org/images/elgordo1/"
+    },
+    "el-gordo-layers": {
+      "url2x": "/navigation/focus-object-el-gordo-layers@2x.webp",
+      "inputs": [
+        "src/objects/el-gordo-layers/prepared/presentation.json",
+        "public/scenes/el-gordo-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Webb",
+      "sourceUrl": "https://esawebb.org/images/elgordo1/"
     },
     "eps-eridani-disc/dust": {
       "url2x": "/navigation/focus-eps-eridani-disc-dust@2x.webp",
@@ -1145,6 +1307,42 @@
       "credit": "ESA/Webb",
       "sourceUrl": "https://esawebb.org/images/weic2327a/"
     },
+    "macs-j0717-layers/optical": {
+      "url2x": "/navigation/focus-macs-j0717-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/macs-j0717-layers/prepared/presentation.json",
+        "public/scenes/macs-j0717-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/opo0917a/"
+    },
+    "macs-j0717-layers": {
+      "url2x": "/navigation/focus-object-macs-j0717-layers@2x.webp",
+      "inputs": [
+        "src/objects/macs-j0717-layers/prepared/presentation.json",
+        "public/scenes/macs-j0717-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/opo0917a/"
+    },
+    "macs-j1149-layers/optical": {
+      "url2x": "/navigation/focus-macs-j1149-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/macs-j1149-layers/prepared/presentation.json",
+        "public/scenes/macs-j1149-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/heic1505b/"
+    },
+    "macs-j1149-layers": {
+      "url2x": "/navigation/focus-object-macs-j1149-layers@2x.webp",
+      "inputs": [
+        "src/objects/macs-j1149-layers/prepared/presentation.json",
+        "public/scenes/macs-j1149-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Hubble",
+      "sourceUrl": "https://esahubble.org/images/heic1505b/"
+    },
     "mom-z14-layers/optical": {
       "url2x": "/navigation/focus-mom-z14-layers-optical@2x.webp",
       "inputs": [
@@ -1442,6 +1640,24 @@
       "credit": "ESA/Hubble",
       "sourceUrl": "https://esahubble.org/images/potw1346a/"
     },
+    "smacs-0723-layers/optical": {
+      "url2x": "/navigation/focus-smacs-0723-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/smacs-0723-layers/prepared/presentation.json",
+        "public/scenes/smacs-0723-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Webb",
+      "sourceUrl": "https://esawebb.org/images/weic2209a/"
+    },
+    "smacs-0723-layers": {
+      "url2x": "/navigation/focus-object-smacs-0723-layers@2x.webp",
+      "inputs": [
+        "src/objects/smacs-0723-layers/prepared/presentation.json",
+        "public/scenes/smacs-0723-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Webb",
+      "sourceUrl": "https://esawebb.org/images/weic2209a/"
+    },
     "smc-volume/smc-horalek-wide": {
       "url2x": "/navigation/focus-smc-volume-smc-horalek-wide@2x.webp",
       "inputs": [
@@ -1495,6 +1711,24 @@
       ],
       "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
       "sourceUrl": "https://noirlab.edu/public/images/iotw2615a/"
+    },
+    "stephans-quintet-layers/optical": {
+      "url2x": "/navigation/focus-stephans-quintet-layers-optical@2x.webp",
+      "inputs": [
+        "src/objects/stephans-quintet-layers/prepared/presentation.json",
+        "public/scenes/stephans-quintet-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Webb",
+      "sourceUrl": "https://esawebb.org/images/weic2208a/"
+    },
+    "stephans-quintet-layers": {
+      "url2x": "/navigation/focus-object-stephans-quintet-layers@2x.webp",
+      "inputs": [
+        "src/objects/stephans-quintet-layers/prepared/presentation.json",
+        "public/scenes/stephans-quintet-layers/datasets/optical.webp"
+      ],
+      "credit": "ESA/Webb",
+      "sourceUrl": "https://esawebb.org/images/weic2208a/"
     },
     "sun-cor1-density/electron-density": {
       "url2x": "/navigation/focus-sun-cor1-density-electron-density@2x.webp",
@@ -1558,10 +1792,15 @@
   "defaults": {
     "abell-1689-layers": "abell-1689-layers",
     "abell-2744-layers": "abell-2744-layers",
+    "abell-370-layers": "abell-370-layers",
+    "abell-s1063-layers": "abell-s1063-layers",
     "beta-pictoris-disc": "beta-pictoris-disc",
     "betelgeuse-shell": "betelgeuse-shell",
     "bullet-cluster-layers": "bullet-cluster-layers",
+    "cartwheel-galaxy-layers": "cartwheel-galaxy-layers",
     "earendel-layers": "earendel-layers",
+    "einstein-cross-layers": "einstein-cross-layers",
+    "el-gordo-layers": "el-gordo-layers",
     "eps-eridani-disc": "eps-eridani-disc",
     "gn-z11-volume": "gn-z11-volume",
     "hd-181327-disc": "hd-181327-disc",
@@ -1582,6 +1821,8 @@
     "m87-volume": "m87-volume",
     "m95-layers": "m95-layers",
     "macs-j0416-layers": "macs-j0416-layers",
+    "macs-j0717-layers": "macs-j0717-layers",
+    "macs-j1149-layers": "macs-j1149-layers",
     "mom-z14-layers": "mom-z14-layers",
     "ngc-1275-volume": "ngc-1275-volume",
     "ngc-1637-layers": "ngc-1637-layers",
@@ -1598,7 +1839,9 @@
     "omega-centauri-volume": "omega-centauri-volume",
     "pds-70-disc": "pds-70-disc",
     "quasar-3c-273-layers": "quasar-3c-273-layers",
+    "smacs-0723-layers": "smacs-0723-layers",
     "smc-volume": "smc-volume",
+    "stephans-quintet-layers": "stephans-quintet-layers",
     "sun-cor1-density": "sun-cor1-density",
     "ton-618-layers": "ton-618-layers",
     "milky-way-volume": "milky-way-volume"

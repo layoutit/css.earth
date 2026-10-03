@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-opo0917a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Galaxy cluster MACS J0717",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "opo0917a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/opo0917a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esahubble.org/archives/images/large/opo0917a.jpg",
+      "label": "JPEG, 3000 x 2911 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/opo0917a/",
+      "checkedOn": "2026-10-02",
+      "locator": "3000 x 2911 px; Hubble ACS at 606 and 814 nm, with Chandra X-ray light overlaid. The file's embedded sky tags, used as they are: 0.09711 arcsec per pixel, north 0.4° right of vertical, the frame's centre at 109.379778°, 37.7571709°. Not measured against Gaia here; the same publishers' tags were within 0.4 arcsec on four cluster pictures and 1.5 arcsec off on one deep field."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CXC, C. Ma, H. Ebeling and E. Barrett (University of Hawaii/IfA), et al. and STScI",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/opo0917a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}

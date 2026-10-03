@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-potw1204a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Seeing quadruple",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "potw1204a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/potw1204a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esahubble.org/archives/images/large/potw1204a.jpg",
+      "label": "JPEG, 498 x 498 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/potw1204a/",
+      "checkedOn": "2026-10-02",
+      "locator": "498 x 498 px; Hubble; the page lists no filters. The file's embedded sky tags, used as they are: 0.04937 arcsec per pixel, north 124.3° right of vertical, the frame's centre at 340.125539°, 3.3592354°. Not measured against Gaia here; the same publishers' tags were within 0.4 arcsec on four cluster pictures and 1.5 arcsec off on one deep field."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Hubble & NASA",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/potw1204a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}

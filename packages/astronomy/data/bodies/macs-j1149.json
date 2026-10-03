@@ -1,0 +1,28 @@
+{
+  "id": "macs-j1149",
+  "classification": "galaxy-cluster",
+  "order": 5458,
+  "physical": {
+    "name": "MACS J1149",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of MACS J1149 is recorded here: its package frames it at 576,550 pc (object.json worldFrame.bodyRadiusM), half the short side of its picture at its distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 177.3962208,
+    "declinationDegrees": 22.40303889,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 2086405931.0445287,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 162547.2,
+    "sources": {
+      "position": "NASA/IPAC Extragalactic Database (NED), MACS J1149.5+2223: position from 2011MNRAS.410.1939Z, redshift from 2025A&A...693A...2S (https://ned.ipac.caltech.edu/byname?objname=MACS%20J1149.5%2B2223); NED preferred values of MACS J1149.5+2223: RA 177.3962208°, Dec 22.40303889° (2011MNRAS.410.1939Z); redshift 0.5421990921 ± 0.00047 (2025A&A...693A...2S)",
+      "distance": "Comoving distance of the redshift z = 0.5421990921 (NED, 2025A&A...693A...2S) in the Planck 2018 cosmology: 2086405931.0445287 pc, from Astropy 8.0.1 Planck18.comoving_distance (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift (packages/bake/cli/prepare-catalogue-points.mts).",
+      "properMotion": "Zero: the object is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the redshift z = 0.5421990921: the redshift written as a velocity, not a motion through space. NASA/IPAC Extragalactic Database (NED), MACS J1149.5+2223: position from 2011MNRAS.410.1939Z, redshift from 2025A&A...693A...2S (https://ned.ipac.caltech.edu/byname?objname=MACS%20J1149.5%2B2223)."
+    }
+  }
+}

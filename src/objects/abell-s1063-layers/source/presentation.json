@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "abell-s1063-layers",
+  "name": "Abell S1063",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/abell-s1063-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/abell-s1063-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/abell-s1063-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Hubble · visible and near infrared",
+      "title": "Abell S1063 from Hubble",
+      "description": "Hubble's Frontier Fields image of the cluster and the lensed galaxies behind it. A flat picture, with no depth. It stands as one flat picture facing the Sun at the object's distance.",
+      "summary": "Hubble's Frontier Fields image of the cluster and the lensed galaxies behind it. A flat picture, with no depth.",
+      "detail": "2243 × 2511 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "Hubble ACS and WFC3, from 435 nm to 1.6 µm, the shortest wavelengths blue and the longest red"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "2243 × 2511"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "2.07 arcmin across"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/abell-s1063-layers/source/source.jpg",
+        "url": "https://cdn.esahubble.org/archives/images/large/heic1615a.jpg"
+      }
+    }
+  ]
+}
