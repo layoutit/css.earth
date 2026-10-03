@@ -23,26 +23,34 @@ export function satelliteSelectionAtCamera(world: WorldCameraPose, optics: Retur
   return null;
 }
 
-/** Layout-changing card selection settles after motion, with no change mid-coast. */
-export function watchSatelliteSelection({ navigation, objects, getSelection, isAvailable, onChange,
+/** Layout-changing card selection settles after motion, with no change mid-coast. A crossing out of the body's close-up
+ * is reported once, until the camera comes back (`onReturn`): when it leads to another scene (a moon's planet), that
+ * scene takes the view only when the camera rests (scene/camera-handover.mts), and this watcher goes on with the body's. */
+export function watchSatelliteSelection({ navigation, objects, getSelection, isAvailable, onChange, onReturn,
   documentTarget, windowTarget }: { navigation: ObjectWorldNavigation;
   objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; getSelection(): SceneContext;
   isAvailable(): boolean; onChange(selection: SceneContext): void;
+  /** The camera no longer frames the selection last reported. */
+  onReturn?(): void;
   documentTarget: Document; windowTarget: Window }) {
   let timer: number | null = null, coasting = false, disposed = false;
   let latest: { world: WorldCameraPose; optics: ReturnType<ObjectWorldNavigation['optics']> } | null = null;
-  let candidate: SceneContext | null = null;
+  let candidate: SceneContext | null = null, left: SceneContext | null = null;
   const cancel = () => { if (timer !== null) windowTarget.clearTimeout(timer); timer = null; candidate = null; };
   const same = (a: SceneContext | null, b: SceneContext | null) => a?.objectId === b?.objectId;
   const inspect = () => {
     timer = null; candidate = null;
     if (disposed || coasting || !isAvailable() || !latest) return;
     const next = satelliteSelectionAtCamera(latest.world, latest.optics, objects, getSelection());
-    if (next) onChange(next);
+    if (next) { left = next; onChange(next); }
   };
   const schedule = () => {
     if (disposed || coasting || !isAvailable() || !latest) { cancel(); return; }
     const next = satelliteSelectionAtCamera(latest.world, latest.optics, objects, getSelection());
+    if (left) {
+      if (same(next, left)) return;
+      left = null; onReturn?.();
+    }
     if (same(next, candidate)) return;
     cancel(); candidate = next;
     if (next) timer = windowTarget.setTimeout(inspect, OVERVIEW_SELECTION_POLICY.settleMilliseconds);
@@ -56,5 +64,7 @@ export function watchSatelliteSelection({ navigation, objects, getSelection, isA
     if (coasting) cancel(); else schedule();
   };
   documentTarget.addEventListener('objectmotionchange', motionChanged, { capture: true });
-  return () => { disposed = true; cancel(); unsubscribe(); documentTarget.removeEventListener('objectmotionchange', motionChanged, { capture: true }); };
+  return Object.assign(() => { disposed = true; cancel(); unsubscribe(); documentTarget.removeEventListener('objectmotionchange', motionChanged, { capture: true }); },
+    // Whatever was reported no longer stands (a wider crossing was withdrawn): the camera is asked again.
+    { refresh() { left = null; schedule(); } });
 }

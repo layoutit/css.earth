@@ -1,5 +1,4 @@
 import type { WorldCameraPose } from '@cssearth/objects';
-import { dollyPoseAboutFocus } from '@cssearth/engine';
 import { zoomScopeAtCamera } from '../zoom-scope.mts';
 import { namesSystem, type PageView } from '../navigation/navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
@@ -55,31 +54,24 @@ export function createSceneSelection({ initial, objectId, systems = [], onChange
       scene = mountedObjectId;
       return selectionKey(target) === selectionKey(subject) ? false : publish(target, notify);
     },
-    /** Follows the camera as it backs out: true when the selection changed in place, a hand-over when the camera has crossed
-     * into an object the centre is inside (the router replaces the scene once the crossing has held), false otherwise. */
-    followCamera(world: WorldCameraPose): boolean | ZoomHandover {
-      const step = zoomStepOf(subject);
+    /** Follows the camera as it backs out or comes in, from `from`: the committed selection, or one of another scene the
+     * camera has already crossed into (camera-handover.mts). True when the camera frames a selection of the mounted scene,
+     * which is then committed; a hand-over when it has crossed into another scene's; false while it frames `from` still. */
+    followCamera(world: WorldCameraPose, from: SceneSubject = subject): boolean | ZoomHandover {
+      const step = zoomStepOf(from);
       if (!step) return false;
       const scope = scopeAt(world, step);
       if (scope === step.scope) return false;
       // The scope the camera crossed into is a selection of the mounted scene (a star's own system), or of another scene.
       const next = subjectOfScope(scope, step.centreId);
-      return ownScene(next) ? publish(next) : { ...next, centreId: step.centreId };
+      if (!ownScene(next)) return { ...next, centreId: step.centreId };
+      if (selectionKey(next) !== selectionKey(subject)) publish(next);
+      return true;
     },
-    /** The scene a camera `ratio` times as far from its focus would be handed to, without changing the selection: what a
-     * zoom toward a crossing has fetched before it gets there. Null on a body, and when that camera is in this scope still. */
-    handoverAhead(world: WorldCameraPose, ratio: number): ZoomHandover | null {
-      const step = zoomStepOf(subject);
-      if (!step) return null;
-      const scope = scopeAt({ ...world, pose: dollyPoseAboutFocus(world.pose, ratio) }, step);
-      if (scope === step.scope) return null;
-      const next = subjectOfScope(scope, step.centreId);
-      return ownScene(next) ? null : { ...next, centreId: step.centreId };
-    },
-    /** Whether a wider scene takes the camera as it zooms out: a body's system does, and so does the next object the centre
-     * is inside, out to the last the page has read. Such a scene's own far limit does not stop the zoom. */
-    zoomOutOpen(): boolean {
-      const step = zoomStepOf(subject);
+    /** Whether a wider scene takes the camera as it zooms out of `from`: a body's system does, and so does the next object
+     * the centre is inside, out to the last the page has read. Such a zoom does not stop at the mounted scene's far limit. */
+    zoomOutOpen(from: SceneSubject = subject): boolean {
+      const step = zoomStepOf(from);
       if (!step) return true;
       const chain = zoomChain(step.centreId);
       return step.scope === 'system' ? chain.length > 0 : chain.at(-1)?.id !== step.scope;

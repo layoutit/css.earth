@@ -16,9 +16,10 @@ import { clamp } from '@cssearth/core';
 
 /** The live camera stays in its prepared local frame for float64 precision.
  * Input, focus changes and restored observers mutate this owner; frame capture is read-only. */
-/** How far past its own far limit a scene lets the zoom go while a wider scene can take the camera: ten doublings, more
- * runway than any zoom covers in the fraction of a second a switch takes. */
-const OPEN_FAR_LIMIT = 1024;
+/** How far past its own far limit a scene lets the zoom go while a wider scene can take the camera. That scene takes it
+ * when the camera rests, so a zoom may run from a planet out to the widest scene on this one's camera: sixty doublings,
+ * where a planet's close-up to the observable universe is about sixty-six. */
+const OPEN_FAR_LIMIT = 2 ** 60;
 
 export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldContext: PerspectiveWorldContext,
   baseOptics: () => WorldCameraViewport, sunDirection: Vector3 | null | undefined,
@@ -30,9 +31,10 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
   // The camera is the world's, not this scene's. A scene with a wider one to hand it to (setZoomOutOpen) does not stop
   // the zoom at its own far limit: the wider scene takes the camera over underneath, and a camera standing at the limit
   // until that switch was done is a hold (6 frames of a steady zoom out of Earth on the iPad, 2026-10-03). The limit
-  // still ends the zoom of a scene with nowhere wider to go, and far out of one whose switch never comes.
-  let zoomOutOpen = false;
-  const farLimit = () => zoomOutOpen ? maximumDistance * OPEN_FAR_LIMIT : maximumDistance;
+  // still ends the zoom of a scene with nowhere wider to go. A camera already past it when the way out closes (the zoom
+  // has reached the widest scene, which has not mounted yet) stops where it is: closing never pulls it back in.
+  let zoomOutOpen = false, closedAt = 0;
+  const farLimit = () => zoomOutOpen ? maximumDistance * OPEN_FAR_LIMIT : Math.max(maximumDistance, closedAt);
   const framingReferenceZoom = worldContext.framingReferenceZoom ?? cameraPlan.defaultZoom;
   const orientation = createOrientation({ cameraPlan, controlPitch: cameraPlan.defaultControlPitchDegrees,
     controlYaw: cameraPlan.defaultControlYawDegrees, sunDirection });
@@ -194,7 +196,10 @@ export function createPreparedCamera(cameraPlan: PerspectiveCameraPlan, worldCon
     scene: orientation.scene,
     bodyCenter: () => bodyCenter,
     setZoomOutCentering(enabled: boolean) { zoomOutCentering = enabled; },
-    setZoomOutOpen(open: boolean) { zoomOutOpen = open; },
+    setZoomOutOpen(open: boolean) {
+      if (zoomOutOpen && !open) closedAt = cameraState.distance;
+      zoomOutOpen = open;
+    },
     minimumZoom, maximumZoom, minimumDistance, maximumDistance,
     /** Only the original centred framing follows a resize; a restored observer stays put. */
     reframe(zoom: number) { if (bodyCenter === null) updateDetail({ zoom }); },

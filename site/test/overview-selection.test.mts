@@ -154,20 +154,29 @@ test('continuous outward camera updates cannot postpone the Sun overview flip, a
   dispose();
 });
 
-test('part of the way to an exit the watcher names the scene to fetch ahead, once', () => {
+test('a crossing out of a body is reported once, and so is the camera coming back inside', () => {
   let listener: ObjectWorldNavigationListener | null = null;
   const getListener = () => required(listener);
-  const timers = new Map<number, () => void>(), changes: OverviewSelection[] = [], approaches: OverviewSelection[] = [];
-  let serial = 0;
-  const dispose = watchOverviewSelection({ objects, systems: objects, objectId: 'sun', getOverview: () => false,
-    isAvailable: () => true, onChange: next => changes.push(next), onApproach: next => approaches.push(next),
+  const timers = new Map<number, () => void>(), changes: [OverviewSelection, boolean][] = [];
+  let serial = 0, returns = 0;
+  // The body's scene stays mounted after the report (its system's scene waits for the camera to rest), so the watcher
+  // goes on answering for the body.
+  const dispose = watchOverviewSelection({ objects, systems: objects, objectId: 'ceres', getOverview: () => false,
+    isAvailable: () => true, onChange: (next, landed) => changes.push([next, landed]), onReturn: () => { returns++; },
     navigation: { ...navigationFixture(ceres, () => camera(ceres, 100), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), subscribe(value) { listener = value; return () => {}; } },
     windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
-  // The Sun's scene is left at 100 au; an eighth of that is the warm distance.
-  getListener()(camera(sun, 10 * au), viewport);
-  assert.deepEqual(approaches, [], 'short of an eighth of the exit distance nothing is fetched');
-  for (const range of [15, 40, 90]) getListener()(camera(sun, range * au), viewport);
-  assert.deepEqual(approaches, [{ objectId: 'sun', overview: true }], 'past it, the scene it would switch to, once');
-  assert.deepEqual(changes, [], 'and no switch yet');
+  getListener()(camera(sun, 101 * au), viewport);
+  [...timers.values()][0]!(); timers.clear();
+  assert.deepEqual(changes, [[{ objectId: 'sun', overview: true }, false]], 'the crossing, once it has lasted');
+  for (const range of [110, 400, 5000]) getListener()(camera(sun, range * au), viewport);
+  assert.equal(changes.length, 1, 'not again while the camera stays outside');
+  assert.equal(timers.size, 0, 'and no timer waits on it');
+  assert.equal(returns, 0);
+  getListener()(camera(sun, 90 * au), viewport);
+  assert.equal(returns, 1, 'back inside');
+  getListener()(camera(sun, 80 * au), viewport);
+  assert.equal(returns, 1, 'told once');
+  for (let step = 0; step < 60; step++) getListener()(camera(sun, (101 + step) * au), viewport);
+  assert.equal(changes.length, 2, 'and the next crossing is reported again');
   dispose();
 });

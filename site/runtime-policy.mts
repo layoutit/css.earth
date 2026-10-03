@@ -134,17 +134,9 @@ export const OVERVIEW_SELECTION_POLICY = Object.freeze({
   enterSunDiameterPixels: 48,
   centerRadiusPixels: 160,
   settleMilliseconds: 180,
-  // This many times past an exit distance the camera is leaving, not hovering at the threshold: the switch starts at
-  // once. A switch takes about 120 ms; waiting the settle time first, a steady zoom out of Earth reached the scene's
-  // far limit before it began and the camera stood there for 6 frames on the iPad (2026-10-03).
+  // This many times past an exit distance the camera is leaving, not hovering at the threshold: the crossing is reported
+  // at once instead of after the settle time, so the world shows the system as a fast zoom passes it.
   clearExitScale: 1.25,
-  // Within this share of the way to a crossing (an eighth of an exit distance going out, eight times an entry distance
-  // coming in) the next scene's card, entry, object transport and system view are fetched, the same four a hover on its
-  // link fetches. On the iPad a zoom out of Earth had the Sun's card 49 and 147 ms after the switch was asked for, and 10
-  // and 30 ms with them fetched ahead; frames with nothing committed around the swap went from 3 and 4 to 2 and 1
-  // (interleaved runs, a share of a half, 2026-10-03). A steady wheel zoom doubled its distance every 100 ms there, so a
-  // half left the fetch 100 ms before the crossing, less than the slower cold read; an eighth leaves it 300 ms.
-  warmScale: 0.125,
 });
 
 export const sceneCursor: RuntimePolicy["sceneCursor"] = ({ surface, pressed, enabled }) => {

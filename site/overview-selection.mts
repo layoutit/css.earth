@@ -11,7 +11,6 @@ import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.t
 import { OVERVIEW_SELECTION_POLICY as policy } from './runtime-policy.mts';
 import { SOLAR_SYSTEM_ID, systemOfObject } from './object-systems.mts';
 import { systemOverviewDistance } from './system-framing.mts';
-import { markHandover } from './navigation/navigation-timing.mts';
 
 const distance = (a: PositionM, b: PositionM) => Math.hypot(...a.map((value, axis) => value - b[axis]));
 /** The Solar System's star; the root of the galactic overviews. */
@@ -65,22 +64,28 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
 }
 
 /** Require a sustained threshold crossing, even while the camera keeps moving; a camera clearly past an exit
- * (policy.clearExitScale) switches at once, so the switch is done before the zoom reaches the scene's far limit. */
+ * (policy.clearExitScale) is reported at once. A crossing out of a body's scene is reported once, until the camera comes
+ * back inside (`onReturn`): the scene it names takes the view only when the camera rests (scene/camera-handover.mts), and
+ * this watcher goes on with the body's until then. */
 export function watchOverviewSelection({ navigation, objects, systems, objectId, getOverview, isAvailable,
-  onChange, onApproach, windowTarget }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; getOverview(): boolean; isAvailable(): boolean; onChange(selection: OverviewSelection): void; /** The camera is part of the way to an exit: the scene it would switch to. */ onApproach?(selection: OverviewSelection): void; windowTarget: Window }) {
+  onChange, onReturn, windowTarget }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string; getOverview(): boolean; isAvailable(): boolean;
+  /** `landed`: a flight to a framing has just landed here, so the camera is at rest. */
+  onChange(selection: OverviewSelection, landed: boolean): void;
+  /** The camera is back inside the body's scene after a crossing out of it was reported. */
+  onReturn?(): void;
+  windowTarget: Window }) {
   let timer: number | null = null, latest: SelectionPublication | null = null, candidate: OverviewSelection | null = null; let disposed = false;
   // Where the body's scene came to rest: the first camera it answers for, and each landing after it.
   let restRangeM: number | null = null;
-  // The exit the camera was last switched for by being clearly past it, until it comes back inside: one switch a crossing.
+  // The exit out of the body's scene that was last reported, until the camera comes back inside: one report a crossing.
   let left: OverviewSelection | null = null;
-  // The scene last asked to be fetched ahead.
-  let warmed: string | null = null;
-  // When the pending crossing was first seen, for its timing entry.
-  let crossedAt = 0;
-  const now = () => windowTarget.performance?.now?.() ?? 0;
   const range = (world: WorldCameraPose) => {
     const origin = objects.find(object => object.id === objectId)?.worldFrame?.originM;
     return origin ? eyeDistanceM(world.pose, origin) : 0;
+  };
+  const report = (next: OverviewSelection, landed: boolean) => {
+    if (!getOverview() && next.overview) left = next;
+    onChange(next, landed);
   };
   function inspect(landed = false) {
     timer = null;
@@ -88,7 +93,7 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     if (disposed || !isAvailable() || !latest) return;
     if (landed || restRangeM === null) restRangeM = range(latest.world);
     const next = selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview(), landed, restRangeM });
-    if (next) { markHandover(windowTarget, 'settled', { source: 'overview-watcher', from: objectId, to: next.objectId, rangeM: range(latest.world), waitedMs: landed ? 0 : now() - crossedAt }); onChange(next); }
+    if (next) report(next, landed);
   }
   const unsubscribe = navigation.subscribe((world, viewport) => {
     // Publications use the whole stage; selection uses the content centre
@@ -96,30 +101,21 @@ export function watchOverviewSelection({ navigation, objects, systems, objectId,
     latest = { world, viewport: navigation.optics?.() ?? viewport };
     if (isAvailable() && restRangeM === null) restRangeM = range(world);
     const next = isAvailable() ? selectionAtCamera({ ...latest, objects, systems, objectId, overview: getOverview(), restRangeM: restRangeM ?? 0 }) : null;
-    // Part of the way to an exit (policy.warmScale) the camera may be leaving: its owner fetches what the switch reads.
-    if (onApproach && isAvailable() && !getOverview()) {
-      const ahead = next ?? selectionAtCamera({ ...latest, objects, systems, objectId, overview: false, restRangeM: restRangeM ?? 0, exitScale: policy.warmScale });
-      if (ahead && ahead.objectId !== warmed) { warmed = ahead.objectId; onApproach(ahead); }
-    }
-    if (!next) left = null;
-    else if (!getOverview() && next.overview && left?.objectId !== next.objectId
+    if (!next) {
+      // A flight that holds this watcher off (isAvailable) is not the camera coming back.
+      if (left && isAvailable()) { left = null; onReturn?.(); }
+    } else if (left && next.overview && next.objectId === left.objectId) return;
+    else if (!getOverview() && next.overview
         && selectionAtCamera({ ...latest, objects, systems, objectId, overview: false, restRangeM: restRangeM ?? 0, exitScale: policy.clearExitScale })) {
       if (timer !== null) windowTarget.clearTimeout(timer);
-      timer = null; candidate = left = next;
-      markHandover(windowTarget, 'settled', { source: 'overview-watcher', from: objectId, to: next.objectId, rangeM: range(world), waitedMs: 0 });
-      onChange(next);
+      timer = null; candidate = null;
+      report(next, false);
       return;
     }
     if (next?.objectId === candidate?.objectId && next?.overview === candidate?.overview) return;
     if (timer !== null) windowTarget.clearTimeout(timer);
-    // A crossing already handed over (left) is not cancelled by the flight that then holds this watcher off.
-    if (candidate && !next && candidate !== left) markHandover(windowTarget, 'cancelled', { source: 'overview-watcher', from: objectId, to: candidate.objectId, rangeM: range(world), waitedMs: now() - crossedAt });
     timer = null; candidate = next;
-    if (next) {
-      crossedAt = now();
-      markHandover(windowTarget, 'crossed', { source: 'overview-watcher', from: objectId, to: next.objectId, rangeM: range(world) });
-      timer = windowTarget.setTimeout(() => inspect(), policy.settleMilliseconds);
-    }
+    if (next) timer = windowTarget.setTimeout(() => inspect(), policy.settleMilliseconds);
   });
   // `refresh` settles at once on the last camera: a flight that held the watcher off (isAvailable) hands over where it landed.
   return Object.assign(() => { disposed = true; unsubscribe(); if (timer !== null) windowTarget.clearTimeout(timer); },

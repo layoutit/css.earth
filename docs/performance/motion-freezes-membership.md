@@ -93,6 +93,25 @@ be seen mid-motion.
 `node labs/performance/coast-writes.mts --url <page>` flings the camera in headless Chrome and lists every write the
 page makes while it coasts. It exits 1 on anything outside this table.
 
+## A zoom's change of scene waits for rest
+
+A zoom that crosses a threshold (out of a body into its system, from a moon out to its planet's system, into or out of
+an object seen from inside) hands the view to another scene. The world shows the new selection at the crossing: its
+scope is a few policy flags (`setOverview`). The scene, its card and its address are membership, so they change when the
+camera rests (`site/scene/camera-handover.mts`): the settle time after the motion signal reports no motion. Until then
+the mounted scene keeps the camera, and its far limit stays open while a wider scene exists (`setZoomOutOpen`). A zoom
+that crosses several thresholds without resting replaces the scene once, with the last. The new scene's files are
+requested as the camera comes to rest, not at each crossing. A camera that comes back before it rests keeps its scene.
+A flight's landing is already at rest and hands over at once.
+
+Measured 2026-10-03. In headless Chrome, zooming out of Earth with the swap held until rest, the page before and after
+the swap differed in 2 of 2,774,880 pixels at Earth to the Solar System (one channel, by 2) and in 0 at the next four
+crossings, out to the Observable Universe, and in 0 at two crossings coming back in from the Local Group: the shared
+world draws everything in view there, and the arriving scene's stage holds 3 to 5 empty nodes. On the iPad, a steady
+zoom out of Earth across four crossings and back in (interleaved runs) had 81 and 84 frames over 20 ms going out and 6
+and 6 coming in with the scene replaced at each crossing, and 68 and 72 and 3 and 3 with it replaced at rest. Most of
+the frames that remain are one stretch past the Solar System where compositing takes 26 ms a frame in both.
+
 ## Object arrival ownership
 
 The application retains the input surface's native camera, wheel, picking and surface-feature input listeners across
