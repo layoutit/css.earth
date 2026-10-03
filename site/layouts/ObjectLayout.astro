@@ -55,8 +55,13 @@ const objectRecord = requireObject(objectId);
 const worldFiles = worldStartupFiles(pageId);
 const ownRow = worldPlaceOf(objectRecord.id)?.row !== undefined;
 // Rules for a page without script. The phone sheet waits, hidden, for its controller to publish a snap state
-// (shell-layout.css); without script it rests at its peek, and the checkbox of its handle opens it.
-const sheetWithoutScript = 'body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: visible !important; }';
+// (shell-layout.css); without script it rests at its peek, and the checkbox of its handle opens it. Only here does a rule
+// read the handle with `:has()`: with script the controller publishes the state on the body, and a `:has()` on the body
+// made every element added to the page restyle the whole document (shell-sheet.mts).
+const sheetWithoutScript = 'body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: visible !important; } '
+  + '@media (max-width: 820px), (orientation: portrait) { '
+  + 'body[data-object-shell]:has(.object-sheet-handle:checked) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { --sheet-rest: 0px; } '
+  + '.object-sidebar:has(.object-sheet-handle:checked) { overflow-y: auto; touch-action: pan-y; } }';
 
 const startup = !navigation && scene && objectRecord.discovery?.arrival?.billboard ? objectRecord.discovery : undefined;
 const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddress(startup.arrival.billboard.url) : undefined;
