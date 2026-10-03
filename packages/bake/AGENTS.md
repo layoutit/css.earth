@@ -355,3 +355,9 @@ text budgets and editorial checks stay in site; destination preparation and sear
 `objects/scene/recipe-identifiers.ts` owns bake lane identifiers used by the layer recipes and site routing;
 `volume/contracts/source-report-schema.ts` owns the authored provenance stamp. These are owner-internal identifiers,
 not shared prepared field contracts. The IBEX Python grid protocol is pinned by `shell-grid-schema.test.ts`.
+
+Authored preparation receipts, world-navigation preparation receipts and prepared feature descriptors live in
+`packages/objects/src/prepared-data/`, exported through the browser-safe objects main entry.
+Historical source-list and index/pre-build admission policies retain their accepted records and diagnostics.
+Frame/source auditing, camera solving, geometry, file I/O and inventory lookup stay with bake/site/tooling.
+Contract tests use node:test in the packages CI lane.

@@ -1,4 +1,4 @@
-import { OBJECT_RUNTIME_SCHEMA } from '@cssearth/objects';
+import { OBJECT_RUNTIME_SCHEMA, WORLD_NAVIGATION_PREPARATION_SCHEMA, type WorldNavigationPreparationReceipt } from '@cssearth/objects';
 
 import { HOSTED_PLANET_IDS, STAR_IDS } from '@cssearth/astronomy';
 import { buildPolyCameraSceneTransform } from '@layoutit/polycss';
@@ -24,8 +24,8 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   if (contextSource) {
     const context = parseWorldContextSource(contextSource);
     if (context.focus.id !== descriptor.id) throw new TypeError('Authored context focus differs.');
-    return { definition, frame: context.frame, systemTransform: null, defaultCamera: null, receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
-      frame: context.frame, model: 'authored-context-focus' } };
+    return { definition, frame: context.frame, systemTransform: null, defaultCamera: null, receipt: { schema: WORLD_NAVIGATION_PREPARATION_SCHEMA, id: descriptor.id,
+      frame: context.frame, model: 'authored-context-focus' } satisfies WorldNavigationPreparationReceipt };
   }
   const solar = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-geometry.mts')).href) as Input;
   // The generated module satisfies the frame preparers' contract as it is; typing it by the module keeps drift a type error.
@@ -45,8 +45,8 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
       physicalRadiusM: descriptor.recipe.shape.radiusKm * 1000, renderedRadiusUnits });
     const sky = { ...definition.sky, sceneRegistration: matrixCss(transpose(frame.presentationToReference)),
       sceneRegistrationModel: 'icrf-in-authored-presentation-frame', sceneRegistrationEpoch: solar.SOLAR_GEOMETRY_EPOCH_LABEL };
-    return { definition: { ...definition, sky } as Input, frame, systemTransform: null, defaultCamera: null, receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
-      frame, renderedRadiusUnits, model: 'ecliptic-presentation-frame', ephemerisSource: 'src/platform/solar-geometry.mts' } };
+    return { definition: { ...definition, sky } as Input, frame, systemTransform: null, defaultCamera: null, receipt: { schema: WORLD_NAVIGATION_PREPARATION_SCHEMA, id: descriptor.id,
+      frame, renderedRadiusUnits, model: 'ecliptic-presentation-frame', ephemerisSource: 'src/platform/solar-geometry.mts' } satisfies WorldNavigationPreparationReceipt };
   }
   const intended = ecliptic.basis.flat() as unknown as Matrix3, placement = await surfacePlacement(objectDirectory, bound, sources.get('features'));
   assertAtlasOrigins(descriptor.id, sources.get('raster'), placement);
@@ -125,13 +125,13 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     mapLeftEdgeLongitudeDeg: placement.mapLeftEdgeLongitudeDeg, camera, coverages: datasetCoverages,
     authored: authoredFocusDatasets(sources.get('terrestrial'), sources.get('presentation')) }) : tracked;
   return { definition: prepared, frame, systemTransform: solved, defaultCamera: posed ? { angles, transform: posed.transform } : null,
-    receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
+    receipt: { schema: WORLD_NAVIGATION_PREPARATION_SCHEMA, id: descriptor.id,
       frame, bodyToPresentation, sourceRadiusUnits: authored.sourceRadiusUnits,
       tilePixels: authored.tilePixels, sceneScale: camera.sceneScale, renderedRadiusUnits, ...(posed ? { defaultCamera: angles } : {}),
       sourceGeometryConvention: solved
         ? 'ecliptic presentation frame, drawn by solving the outermost mesh node; body as drawn: retained node chain at the first spin keyframe, then the surface map axes and left edge the feature labels use; PolyCSS writes world X/Y as CSS Y/X'
         : 'body as drawn: retained node chain at the first spin keyframe, then the surface map axes and left edge the feature labels use; PolyCSS writes world X/Y as CSS Y/X',
-      ephemerisSource: 'src/platform/solar-geometry.mts' } };
+      ephemerisSource: 'src/platform/solar-geometry.mts' } satisfies WorldNavigationPreparationReceipt };
 }
 
 /** The camera's default pose and everything prepared from it: the control and scene pitch, the yaw, the retained state and
