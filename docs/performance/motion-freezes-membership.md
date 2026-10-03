@@ -104,6 +104,10 @@ that crosses several thresholds without resting replaces the scene once, with th
 requested as the camera comes to rest, not at each crossing. A camera that comes back before it rests keeps its scene.
 A flight's landing is already at rest and hands over at once.
 
+A zoom in toward a body does not wait for rest: the world draws a body it has not mounted as a point, and only the
+body's own scene draws it larger. The pending scene is mounted as soon as its body is a pixel across, moving or not.
+Without that, a zoom from the Nearby Universe in to the Sun showed no Sun until the camera stopped (2026-10-03).
+
 Measured 2026-10-03. In headless Chrome, zooming out of Earth with the swap held until rest, the page before and after
 the swap differed in 2 of 2,774,880 pixels at Earth to the Solar System (one channel, by 2) and in 0 at the next four
 crossings, out to the Observable Universe, and in 0 at two crossings coming back in from the Local Group: the shared

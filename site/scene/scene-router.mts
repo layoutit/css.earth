@@ -28,7 +28,7 @@ import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import { WORLD_HOST_ID, namesSystem } from '../navigation/navigation-scope.mts';
 import { pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../inside-view.mts';
-import { createCameraHandover } from './camera-handover.mts';
+import { bodyInView, createCameraHandover } from './camera-handover.mts';
 import { OVERVIEW_SELECTION_POLICY } from '../runtime-policy.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
 import { retainInitialScene } from '../initial-scene.mts';
@@ -637,9 +637,13 @@ export function createSceneRouter({
       // The next scene is seen around the same star, with the camera where it is.
       setZoomCentre(followed.centreId);
       handover.cross({ objectId: followed.objectId }, 'zoom-scope');
-      return;
     }
-    if (!followed) return;
+    // A pending scene whose body the camera has come close enough to see is mounted without waiting for rest. An object
+    // seen from inside has no body.
+    const host = handover.subject ? subjectHost(handover.subject) : null, focal = session.mount?.navigation?.optics().focalPixels;
+    const body = host !== null && zoomStepOf({ objectId: host }) === null ? context?.registry.SCENE_OBJECTS.find(object => object.id === host)?.worldFrame : undefined;
+    if (body && focal && bodyInView(frame, body, focal)) handover.due();
+    if (followed !== true) return;
     // The camera frames a selection of the mounted scene: nothing waits for it to rest any more.
     handover.back();
     if (selection.current === committed) return;

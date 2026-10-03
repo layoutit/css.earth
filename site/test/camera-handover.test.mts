@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { createCameraHandover } from '../scene/camera-handover.mts';
+import { bodyInView, createCameraHandover } from '../scene/camera-handover.mts';
 import type { SceneSubject } from '../scene/scene-subject.mts';
 
 function fixture({ canSwap = (): boolean => true } = {}) {
@@ -76,4 +76,29 @@ test('a crossing with the camera at rest waits the settle time; a scene that can
   busy.handover.destroy();
   busy.motion(false);
   assert.equal(busy.timers.size, 0, 'and a destroyed owner hears nothing');
+});
+
+test('a pending scene whose body comes into view is mounted at once, moving or not, and once', () => {
+  const { handover, motion, settle, timers, fetched, swaps } = fixture();
+  motion(true);
+  handover.cross({ objectId: 'sun' }, 'zoom-scope');
+  handover.due(); handover.due();
+  assert.deepEqual(fetched, ['sun']);
+  assert.deepEqual(swaps, [{ objectId: 'sun' }], 'while the camera still moves');
+  motion(false); settle();
+  assert.deepEqual(swaps, [{ objectId: 'sun' }], 'and the rest that follows does not ask again');
+  assert.equal(timers.size, 0);
+  const idle = fixture();
+  idle.handover.due();
+  assert.deepEqual(idle.swaps, [], 'nothing pending, nothing to mount');
+});
+
+test('a body is in view once its disc is a pixel across', () => {
+  const sun = { originM: [0, 0, 0], bodyRadiusM: 6.957e8 }, au = 149_597_870_700;
+  const from = (range: number) => ({ referenceFrame: 'test', epochJdTt: 1, pose: { positionM: [0, 0, range] as const, orientationXyzw: [0, 0, 0, 1] as const } });
+  // At a focal length of 1000 px the Sun's disc is a pixel across from 9.3 au.
+  assert.equal(bodyInView(from(100 * au), sun, 1000), false, 'a tenth of a pixel from the edge of its system');
+  assert.equal(bodyInView(from(9.4 * au), sun, 1000), false);
+  assert.equal(bodyInView(from(9.2 * au), sun, 1000), true);
+  assert.equal(bodyInView(from(1e8), sun, 1000), true, 'and from inside it');
 });
