@@ -5,7 +5,7 @@ import preparedContext from '../../src/objects/sun/prepared/world-context.json' 
 import { bodyViewAtCamera, zoomFrameDistanceM, zoomScopeAtCamera, viewDistance, type ZoomStep } from '../zoom-scope.mts';
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
-import { parsePreparedWorldContext, type WorldCameraPose, type PreparedWorldCameraFrame } from '@cssearth/objects';
+import { parsePreparedWorldContext, type ObjectZoom, type WorldCameraPose, type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { systemOverviewDistance, SYSTEM_FRAMING_RADII } from '../system-framing.mts';
 import { OBJECTS } from '../objects.mts';
 import { seedObjectDirectory } from '../object-directory.mts';
@@ -101,7 +101,9 @@ test('zooming out from the Sun walks the objects it is inside that are seen from
 });
 
 test('the steps are the chain it is given: an object farther out is reached past its own threshold', async () => {
-  const beyond: ZoomStep = { id: 'beyond-the-horizon', zoom: { enter: { distancePc: 3e10 }, returnBelow: { distancePc: 2e10 }, frame: { distance: { distancePc: 5e10 } } } };
+  // An object seen from inside authors its frame with its thresholds; a step reads only the thresholds.
+  const zoom: ObjectZoom = { enter: { distancePc: 3e10 }, returnBelow: { distancePc: 2e10 }, frame: { distance: { distancePc: 5e10 } } };
+  const beyond = { id: 'beyond-the-horizon', zoom };
   const steps = [...SUN_STEPS, beyond], gpc = 1e9 * 3.085677581491367e16;
   assert.equal(overviewScopeAtCamera(camera(40 * gpc), 'observable-universe', context, undefined, steps), 'beyond-the-horizon');
   assert.equal(overviewScopeAtCamera(camera(25 * gpc), 'observable-universe', context, undefined, steps), 'observable-universe');
