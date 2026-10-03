@@ -752,7 +752,11 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       // Only progress asks for another frame: a caption measured, or a marker now on the page that the next frame reads or
       // shows. An attach the retire pass undid is not progress.
       const attached = [...attachMarkers].some(entry => entry.mover.parentNode === root);
-      if (measured || attached) { invalidatePolicy(); if (!navigationInFlight) refresh(); }
+      // The next plan reads the new sizes and markers (policyDirty); a plan already captured stays good. It is the plan the
+      // frame before this one would have made, so it commits and the refresh follows it with one more frame. Counted
+      // as stale it was thrown away and the camera waited a frame for its replacement: one to three such discards in a
+      // steady zoom out of Earth on the iPad (2026-10-03).
+      if (measured || attached) { policyDirty = true; if (!navigationInFlight) refresh(); }
     },
     destroy() { if (!destroyed) { destroyed = true; interactions.destroy();
       if (annotationFrame !== null) clock.cancel(annotationFrame);
