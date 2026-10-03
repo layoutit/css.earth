@@ -20,6 +20,8 @@ Twelve were built one at a time, with their own guides: the nebulae M1, M8, M42 
 
 ![The 32 galaxies](../images/messier/galaxies.webp)
 
+![The six ellipticals drawn as volumes: as each page opens, from the side and from above](../images/messier/volumes.webp)
+
 ![The nine nebulae](../images/messier/nebulae.webp)
 
 Each tile is the object's own page in headless Chromium at 1440 × 900, device pixel ratio 2, on 2026-10-03, cut to the object.
