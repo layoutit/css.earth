@@ -137,18 +137,9 @@ it('the declared topic order has no cycle', () => {
   for (const topic of Object.keys(LOWER_TOPICS)) visit(topic, []);
 });
 
-/** Imports of `files` that name a built renderer entry (`@cssearth/renderer`, `@cssearth/renderer/platform/<name>`) rather than a
- * TypeScript source subpath. The renderer's development build depends on this package, so the two build in parallel and a built
- * entry may not exist yet when a topic is bundled; its sources always do. */
-function builtRendererImports(files: ReadonlyMap<string, string>): string[] {
-  return [...files].flatMap(([name, text]) => specifiers(text)
-    .filter(specifier => /^@cssearth\/renderer(?:\/|$)/u.test(specifier) && !/^@cssearth\/renderer\/.+\.ts$/u.test(specifier))
-    .map(specifier => `${name} -> ${specifier}`));
-}
-
-it('topics read the renderer through its TypeScript source subpaths, never a built entry the parallel build may not have written', async () => {
-  const files = new Map<string, string>();
-  for (const path of await sources(source)) files.set(relative(source, path).replaceAll('\\', '/'), await readFile(path, 'utf8'));
-  assert.deepEqual(builtRendererImports(files), []);
-  assert.deepEqual(builtRendererImports(new Map([['objects/scene/probe.ts', "import { a } from '@cssearth/renderer/platform/solar-view-direction';\nimport { b } from '@cssearth/renderer/solar-system/types.ts';"]])), ['objects/scene/probe.ts -> @cssearth/renderer/platform/solar-view-direction']);
+it('topics import no renderer entry or source subpath', async () => {
+  const found: string[] = [];
+  for (const path of await sources(source)) for (const specifier of specifiers(await readFile(path, 'utf8')))
+    if (/^@cssearth\/renderer(?:\/|$)/u.test(specifier)) found.push(`${relative(source, path)} -> ${specifier}`);
+  assert.deepEqual(found, []);
 });

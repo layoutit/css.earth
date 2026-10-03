@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ton-618-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "ton-618",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1.466523092786165e+26,
+        -1.8277009299632228e+25,
+        9.048275638416396e+25
+      ],
+      "localToReferenceXyzw": [
+        0.3663800091846826,
+        -0.3235531149696042,
+        -0.5774752522213961,
+        0.6539123823075482
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -810.4070061426452,
+          -810.4070061428994,
+          -0.014144270680844784
+        ],
+        "max": [
+          810.4070020602715,
+          810.4070061422759,
+          0.01414426974952221
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

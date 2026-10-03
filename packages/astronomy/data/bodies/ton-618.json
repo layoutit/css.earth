@@ -1,0 +1,28 @@
+{
+  "id": "ton-618",
+  "classification": "galaxy",
+  "order": 5449,
+  "physical": {
+    "name": "TON 618",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of TON 618 is recorded here: its package frames it at 816,788 pc (object.json worldFrame.bodyRadiusM), half the short side of its picture at its distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 187.104039,
+    "declinationDegrees": 31.477127,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 5615820567.245126,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 665539.3,
+    "sources": {
+      "position": "Lyke et al. (2020), The Sloan Digital Sky Survey Quasar Catalog: Sixteenth Data Release, ApJS 250, 8; CDS VII/289 (https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/289); row SDSS J122824.96+312837.6: RAJ2000 187.104039, DEJ2000 31.477127",
+      "distance": "Comoving distance of the redshift z = 2.22 (Lyke et al. (2020), SDSS DR16Q, ApJS 250, 8; CDS VII/289) in the Planck 2018 cosmology: 5615820567.245126 pc, from Astropy 8.0.1 Planck18.comoving_distance (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift (packages/bake/cli/prepare-catalogue-points.mts).",
+      "properMotion": "Zero: the object is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the redshift z = 2.22: the redshift written as a velocity, not a motion through space. Lyke et al. (2020), SDSS DR16Q, ApJS 250, 8; CDS VII/289 (https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/289); row SDSS J122824.96+312837.6: z 2.22, source VI (visual inspection)."
+    }
+  }
+}

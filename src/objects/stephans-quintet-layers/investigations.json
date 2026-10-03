@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "stephans-quintet-layers",
+  "entries": [
+    {
+      "id": "weic2208a",
+      "subject": "ESA/Webb weic2208a",
+      "status": "included",
+      "finding": "Stephan's Quintet (NIRCam + MIRI Imaging): Webb NIRCam and MIRI, from 0.9 to 7.7 µm: near-infrared blue to orange, mid-infrared yellow and red; 4000 × 3835 px over 6.34 arcmin, CC BY 4.0. The file's embedded sky tags, used as they are: 0.09505 arcsec per pixel, north 62.0° right of vertical, the frame's centre at 338.99763°, 33.9604911°. Not measured against Gaia here; the same publishers' tags were within 0.4 arcsec on four cluster pictures and 1.5 arcsec off on one deep field.",
+      "evidence": [
+        "https://esawebb.org/images/weic2208a/",
+        "https://esawebb.org/copyright/"
+      ]
+    }
+  ]
+}

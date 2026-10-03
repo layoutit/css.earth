@@ -18,12 +18,12 @@ This guide covers prepared nodes, resource leases, motion and leaf visibility.
 ## Implementation and URL ownership
 
 The CSS renderer owns object mounting, camera navigation, saved-view encoding,
-material publication and map paging. Preparation tools use the renderer's
-`dist/preparation.js` entry for the same pure matrix, asset-address and prepared
-transport helpers used by the browser. These helpers live in `prepared-data/`;
-a build-closure test prevents this entry from importing DOM construction or
-runtime modules. CSS-specific layout stays with the renderer. Platform tests exercise those renderer
-implementations; there is no separate platform mount or codec.
+material publication and map paging. Bake reads pure format, matrix and asset-address
+contracts from objects and numeric camera geometry from engine; it has no renderer dependency.
+Telescope's four scene publication/physical handoff consumers are named, file-scoped
+exceptions in [the architecture rule](../.github/scripts/architecture/preparation-without-renderer.mts).
+Labs own their renderer bundlers. CSS-specific layout and runtime transport stay with renderer.
+Platform tests exercise those renderer implementations; there is no separate platform mount or codec.
 
 Saved views use one binary format (version 5), with a physical rotation, either
 a distance or translated body centre, an explicit epoch and playback state.

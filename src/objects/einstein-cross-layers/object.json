@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "einstein-cross-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "einstein-cross",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1.398050187413135e+26,
+        -5.053661153387393e+25,
+        8.724211309225518e+24
+      ],
+      "localToReferenceXyzw": [
+        0.5615712682759127,
+        0.39413831198984633,
+        0.41794692953810997,
+        0.5954939678606691
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -374.98889298579167,
+          -339.7701575606452,
+          -0.004634061828255653
+        ],
+        "max": [
+          331.86336208401843,
+          380.1720184475238,
+          0.0056638894602656364
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

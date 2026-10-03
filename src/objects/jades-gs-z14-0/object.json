@@ -1,0 +1,96 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "jades-gs-z14-0",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "JADES-GS-z14-0",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1852084725195196400
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "JADES-GS-z14-0",
+      "systemName": "Early universe",
+      "classification": "galaxy",
+      "classificationLabel": "Early galaxy",
+      "color": "#e09050",
+      "distanceAu": 2134262669374898,
+      "description": "A galaxy seen 290 million years after the Big Bang, its distance measured by both Webb and ALMA.",
+      "aliases": [
+        "JADES-GS-53.08294-27.85563"
+      ],
+      "order": 5446,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1.6955702409528486e+26,
+        2.25688765706791e+26,
+        -1.49182613559169e+26
+      ],
+      "presentationToReference": [
+        0.753981909391256,
+        0,
+        0.6568951821338894,
+        0.6026895462675117,
+        0.3977771559319137,
+        -0.6917648769911485,
+        0.2612978972945949,
+        -0.9174820620691818,
+        -0.29991677954176765
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 5974466855468375000,
+      "bodyRadiusM": 1.8520847251951963e+21
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

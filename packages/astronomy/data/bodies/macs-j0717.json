@@ -1,0 +1,28 @@
+{
+  "id": "macs-j0717",
+  "classification": "galaxy-cluster",
+  "order": 5457,
+  "physical": {
+    "name": "MACS J0717",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of MACS J0717 is recorded here: its package frames it at 1,444,888 pc (object.json worldFrame.bodyRadiusM), half the short side of its picture at its distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 109.3788625,
+    "declinationDegrees": 37.75826111,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 2108633877.0901115,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 164586.1,
+    "sources": {
+      "position": "NASA/IPAC Extragalactic Database (NED), MACS J0717.5+3745: position from 2011MNRAS.410.1939Z, redshift from 2025A&A...703A.306D (https://ned.ipac.caltech.edu/byname?objname=MACS%20J0717.5%2B3745); NED preferred values of MACS J0717.5+3745: RA 109.3788625°, Dec 37.75826111° (2011MNRAS.410.1939Z); redshift 0.549 (2025A&A...703A.306D)",
+      "distance": "Comoving distance of the redshift z = 0.549 (NED, 2025A&A...703A.306D) in the Planck 2018 cosmology: 2108633877.0901115 pc, from Astropy 8.0.1 Planck18.comoving_distance (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift (packages/bake/cli/prepare-catalogue-points.mts).",
+      "properMotion": "Zero: the object is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the redshift z = 0.549: the redshift written as a velocity, not a motion through space. NASA/IPAC Extragalactic Database (NED), MACS J0717.5+3745: position from 2011MNRAS.410.1939Z, redshift from 2025A&A...703A.306D (https://ned.ipac.caltech.edu/byname?objname=MACS%20J0717.5%2B3745)."
+    }
+  }
+}

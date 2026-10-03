@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "quasar-3c-273",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "3C 273",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3486200402554328000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "3C 273",
+      "systemName": "Quasars",
+      "classification": "galaxy",
+      "classificationLabel": "Quasar",
+      "color": "#c8d8ff",
+      "distanceAu": 138577266153789,
+      "description": "The first quasar identified, in the early 1960s, and the brightest in our sky.",
+      "aliases": [
+        "PG 1226+023",
+        "QSO B1226+023"
+      ],
+      "order": 5450,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2.0550650831868504e+25,
+        -2.624548463913385e+24,
+        7.424400727919294e+23
+      ],
+      "presentationToReference": [
+        -0.9947573799317905,
+        0,
+        -0.10226316575991307,
+        -0.09382462019512759,
+        0.3977771559319137,
+        0.9126720521983557,
+        -0.04067795123257208,
+        -0.9174820620691818,
+        0.39569176143154977
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 11245807750175252000,
+      "bodyRadiusM": 3.486200402554328e+21
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

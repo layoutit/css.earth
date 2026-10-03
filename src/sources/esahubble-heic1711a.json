@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-heic1711a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "The last of the Frontier Fields — Abell 370",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "heic1711a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/heic1711a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esahubble.org/archives/images/large/heic1711a.jpg",
+      "label": "JPEG, 4164 x 4634 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/heic1711a/",
+      "checkedOn": "2026-10-02",
+      "locator": "4164 x 4634 px; Hubble ACS and WFC3, seven filters from 435 nm to 1.6 µm, the shortest wavelengths blue and the longest red. The file's embedded sky tags, used as they are: 0.03000 arcsec per pixel, north 27.9° right of vertical, the frame's centre at 39.9702863°, -1.5768308°. Not measured against Gaia here; the same publishers' tags were within 0.4 arcsec on four cluster pictures and 1.5 arcsec off on one deep field."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA/Hubble, HST Frontier Fields",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/heic1711a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}

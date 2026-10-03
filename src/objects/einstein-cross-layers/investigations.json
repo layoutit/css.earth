@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "einstein-cross-layers",
+  "entries": [
+    {
+      "id": "potw1204a",
+      "subject": "ESA/Hubble potw1204a",
+      "status": "included",
+      "finding": "Seeing quadruple: Hubble; the page lists no filters; 498 × 498 px over 24.6 arcsec, CC BY 4.0. The file's embedded sky tags, used as they are: 0.04937 arcsec per pixel, north 124.3° right of vertical, the frame's centre at 340.125539°, 3.3592354°. Not measured against Gaia here; the same publishers' tags were within 0.4 arcsec on four cluster pictures and 1.5 arcsec off on one deep field.",
+      "evidence": [
+        "https://esahubble.org/images/potw1204a/",
+        "https://esahubble.org/copyright/"
+      ]
+    }
+  ]
+}

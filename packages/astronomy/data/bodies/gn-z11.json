@@ -1,0 +1,28 @@
+{
+  "id": "gn-z11",
+  "classification": "galaxy",
+  "order": 5447,
+  "physical": {
+    "name": "GN-z11",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of GN-z11 is recorded here: its package frames it at 9,265 pc (object.json worldFrame.bodyRadiusM), half the width of the picture that is drawn at its distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 189.106083,
+    "declinationDegrees": 62.242056,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 9762148825.546518,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 3178699.4,
+    "sources": {
+      "position": "Oesch et al. (2016), A Remarkably Luminous Galaxy at z = 11.1 Measured with Hubble Space Telescope Grism Spectroscopy, ApJ 819, 129 (https://arxiv.org/abs/1603.00461); text: GN-z11 lies at (RA, DEC) = (12:36:25.46, +62:14:31.4)",
+      "distance": "Comoving distance of the redshift z = 10.603 (Bunker et al. (2023), JADES NIRSpec Spectroscopy of GN-z11, A&A 677, A88) in the Planck 2018 cosmology: 9762148825.546518 pc, from Astropy 8.0.1 Planck18.comoving_distance (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift (packages/bake/cli/prepare-catalogue-points.mts).",
+      "properMotion": "Zero: the object is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the redshift z = 10.603: the redshift written as a velocity, not a motion through space. Bunker et al. (2023), JADES NIRSpec Spectroscopy of GN-z11, A&A 677, A88 (https://arxiv.org/abs/2302.07256); abstract: we derive a redshift of z = 10.603."
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "members",
+      "path": "src/objects/smacs-0723-members/source/dots/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+recno%2C+RAJ2000%2C+DEJ2000%2C+%27smacs-0723%27+AS+grp%2C+1567937065.74+AS+distpc%2C+rmag%2C+z+FROM+%22J%2FA%2BA%2F699%2FA105%2Ftable1%22+WHERE+ClMem%3D1+ORDER+BY+recno",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/699/A105",
+      "title": "SMACS 0723 flagged cluster members, table.csv",
+      "credit": "Amrutha et al. (2025), A&A 699, A105; CDS J/A+A/699/A105",
+      "acquisition": "Query result downloaded unchanged from its CDS origin on 2026-10-02; not tracked. The query keeps the rows with ClMem=1 and writes the group name and the cluster distance into each row; read by packages/bake/cli/prepare-catalogue-points.mts through dots/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "amrutha-2025-smacs-0723-redshifts",
+            "role": "material",
+            "evidence": "src/objects/smacs-0723-members/source/dots/points.json#/table"
+          },
+          {
+            "catalogueId": "planck-2018-cosmology",
+            "role": "method",
+            "evidence": "src/objects/smacs-0723-members/source/dots/points.json#/table/groupDistance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/smacs-0723-members/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/smacs-0723-members/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

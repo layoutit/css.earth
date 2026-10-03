@@ -1,0 +1,96 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "mom-z14",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "MoM-z14",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 451247209514842900
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "MoM-z14",
+      "systemName": "Early universe",
+      "classification": "galaxy",
+      "classificationLabel": "Early galaxy",
+      "color": "#d8d070",
+      "distanceAu": 2141378168145900,
+      "description": "The most distant galaxy confirmed by a spectrum as of January 2026, seen 280 million years after the Big Bang.",
+      "aliases": [
+        "MOM-z14"
+      ],
+      "order": 5445,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2.7746945311773224e+26,
+        1.595950256374536e+26,
+        1.2706113708324869e+25
+      ],
+      "presentationToReference": [
+        -0.8777189157419661,
+        0,
+        0.4791758601481792,
+        0.43963525626252536,
+        0.3977771559319137,
+        0.8052913607320655,
+        0.19060521084097112,
+        -0.9174820620691818,
+        0.3491365340114823
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1455636159725299500,
+      "bodyRadiusM": 451247209514842850000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

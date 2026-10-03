@@ -1,4 +1,4 @@
-import { PREPARED_VOLUME_DATASETS_SCHEMA, parseDensityVolumeObjectDescriptor, validatePreparedVolumeDatasets, type PreparedCssVolume } from '@cssearth/objects';
+import { PREPARED_VOLUME_DATASETS_SCHEMA, DENSITY_VOLUME_FORMAT, parsePreparedDensityVolume, parseDensityVolumeObjectDescriptor, validatePreparedVolumeDatasets, type PreparedCssVolume } from '@cssearth/objects';
 /**
  * Package an already-prepared physical density volume as one selectable dataset.
  *
@@ -11,8 +11,6 @@ import { PREPARED_VOLUME_DATASETS_SCHEMA, parseDensityVolumeObjectDescriptor, va
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
-
-import { loadPreparedCssVolume } from '@cssearth/renderer/volume/loader.ts';
 
 export interface DensityVolumeDatasetBankSource {
   /** Directory containing the authored density-volume object.json. */
@@ -127,7 +125,7 @@ function rewrittenVolume(source: PreparedCssVolume, bankId: string, datasetId: s
 
 /**
  * Promote a prepared density-volume package into the existing selectable-bank
- * contract. The source loader authenticates the input envelope; this function
+ * contract. The source parser authenticates the input envelope; this function
  * authenticates every copied resource before publishing the destination object.
  */
 export async function promoteDensityVolumeDatasetBank(request: DensityVolumeDatasetBankPromotion): Promise<DensityVolumeDatasetBankPromotionResult> {
@@ -139,9 +137,10 @@ export async function promoteDensityVolumeDatasetBank(request: DensityVolumeData
     const sourceDirectory = resolve(requestSource.sourceDirectory), descriptorPath = local(sourceDirectory, 'object.json');
     const descriptorBytes = await readFile(descriptorPath), authoredDescriptor: unknown = JSON.parse(descriptorBytes.toString('utf8'));
     const descriptor = parseDensityVolumeObjectDescriptor(authoredDescriptor);
-    // The existing loader owns parsing its raw descriptor boundary; passing the
-    // derived DensityVolumeObjectDescriptor would add its convenience fields.
-    const source = await loadPreparedCssVolume(authoredDescriptor, { read: path => readArrayBuffer(local(sourceDirectory, path)) });
+    if (descriptor.prepared?.format !== DENSITY_VOLUME_FORMAT) throw new TypeError('A volume requires its prepared artifact.');
+    const bytes = await readArrayBuffer(local(sourceDirectory, descriptor.prepared.url));
+    const value: unknown = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
+    const source = parsePreparedDensityVolume(value, descriptor);
     const preparedPath = local(sourceDirectory, descriptor.prepared!.url);
     const preparedDirectory = dirname(preparedPath), resources = await Promise.all(source.resources.map(async resource => {
       const path = local(preparedDirectory, resource.path);

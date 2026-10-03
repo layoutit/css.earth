@@ -1,0 +1,39 @@
+{
+  "id": "publication-bunker-2023-gn-z11",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "JADES NIRSpec Spectroscopy of GN-z11: Lyman-alpha emission and possible enhanced nitrogen abundance in a z = 10.60 luminous galaxy",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2302.07256"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023A&A...677A..88B"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2302.07256",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2302.07256",
+      "checkedOn": "2026-10-02",
+      "locator": "abstract: we derive a redshift of z = 10.603 (lower than previous determinations); 430 Myr after the Big Bang."
+    }
+  ],
+  "creators": [
+    "Bunker, Andrew J.",
+    "Saxena, Aayush",
+    "Cameron, Alex J."
+  ],
+  "publisher": "A&A 677, A88",
+  "publicationDate": "2023",
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "el-gordo-layers",
+  "entries": [
+    {
+      "id": "elgordo1",
+      "subject": "ESA/Webb elgordo1",
+      "status": "included",
+      "finding": "Webb spotlights gravitational arcs in 'El Gordo' galaxy cluster (NIRCam image): Webb NIRCam, six filters from 1.15 to 4.4 µm, the shortest wavelengths blue and the longest red; 4422 × 4421 px over 2.21 arcmin, CC BY 4.0. The file's embedded sky tags, used as they are: 0.03001 arcsec per pixel, north 5.2° right of vertical, the frame's centre at 15.7306709°, -49.2603915°. Not measured against Gaia here; the same publishers' tags were within 0.4 arcsec on four cluster pictures and 1.5 arcsec off on one deep field.",
+      "evidence": [
+        "https://esawebb.org/images/elgordo1/",
+        "https://esawebb.org/copyright/"
+      ]
+    }
+  ]
+}

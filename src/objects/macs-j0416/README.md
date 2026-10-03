@@ -1,6 +1,6 @@
 # MACS J0416.1-2403
 
-MACS J0416.1-2403 as an object of the world: its place, its card and its list marker. It has no surface. Its one dataset shows the [MACS J0416.1-2403 picture](../macs-j0416-layers/README.md) bank, whose README holds the picture's source, registration, evidence and known problems.
+MACS J0416.1-2403 as an object of the world: its place, its card and its list marker. It has no surface. Its one dataset shows the [MACS J0416.1-2403 picture](../macs-j0416-layers/README.md) bank, whose README holds the picture's source, registration, evidence and known problems. Its 146 flagged member galaxies are drawn as dots around the picture by the [members bank](../macs-j0416-members/README.md).
 
 ## Sources
 

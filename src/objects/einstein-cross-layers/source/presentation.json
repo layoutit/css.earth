@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "einstein-cross-layers",
+  "name": "Einstein Cross",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/einstein-cross-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/einstein-cross-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/einstein-cross-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Hubble · visible",
+      "title": "The Einstein Cross from Hubble",
+      "description": "Four images of one quasar around the core of the galaxy that lenses it. A flat picture, with no depth. It stands as one flat picture facing the Sun at the object's distance.",
+      "summary": "Four images of one quasar around the core of the galaxy that lenses it. A flat picture, with no depth.",
+      "detail": "498 × 498 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "Hubble; the page lists no filters"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "498 × 498"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "24.6 arcsec across"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/einstein-cross-layers/source/source.jpg",
+        "url": "https://cdn.esahubble.org/archives/images/large/potw1204a.jpg"
+      }
+    }
+  ]
+}
