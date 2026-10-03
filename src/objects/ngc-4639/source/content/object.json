@@ -32,7 +32,25 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "controls": []
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "SDSS · optical",
+        "thumbnail": "ngc-4639-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-4639-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-4639-layers-optical",
+          "path": "../../ngc-4639-layers/source/manifest.json",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+        },
+        "falseColor": false
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

@@ -1,7 +1,23 @@
 {
   "schema": "cssearth-authoritative-sources@3",
   "inputs": [],
-  "generatedIntermediates": [],
+  "generatedIntermediates": [
+    {
+      "id": "companion-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+      "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS); the default dataset's picture as the NGC 4639 bank publishes it, saved by site/build/prepare/companion-context.mts",
+      "license": "SDSS images: CC-BY; the CDS HiPS distribution: ODbL-1.0. Retain the complete recorded credit.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "site/build/prepare/companion-context.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A picture of the bank the default dataset shows; its sources are that bank's (src/objects/ngc-4639-layers/source/manifest.json)."
+      }
+    }
+  ],
   "documents": [
     {
       "path": "content/object.json",
@@ -16,6 +32,9 @@
         "kind": "local",
         "reason": "Project-authored framing: the radius the page frames the object at, RC3's D25 isophotal radius at the Cepheid distance."
       }
+    },
+    {
+      "path": "preparation/navigation.json"
     }
   ]
 }

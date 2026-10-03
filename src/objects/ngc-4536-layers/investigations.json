@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-4536-layers",
+  "entries": [
+    {
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
+      "status": "included",
+      "finding": "A 2250 x 2250 px hips2fits cutout of CDS/P/SDSS9/color, 15 arcmin wide at the HiPS's 0.40 arcsec per pixel. 70 of the 74 Gaia DR3 stars brighter than G = 19 in it have a star within 4 px of their requested places. Shallow: the outer arms are faint.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "https://www.sdss.org/collaboration/#image-use"
+      ]
+    },
+    {
+      "id": "press-images",
+      "subject": "Observatory press images of NGC 4536",
+      "status": "excluded",
+      "finding": "ESA/Hubble potw1715a covers 2.45 x 2.72 arcmin of a galaxy whose RC3 isophotal diameter is 7.6 arcmin: the centre only. The ESO and NOIRLab image archives return nothing for NGC 4536.",
+      "evidence": [
+        "https://esahubble.org/images/potw1715a/"
+      ],
+      "revisitWhen": "A whole-disc photograph is published under an attribution licence."
+    },
+    {
+      "id": "legacy-surveys",
+      "subject": "DESI Legacy Surveys DR10 color HiPS",
+      "status": "excluded",
+      "finding": "Deeper than SDSS, but its cutout of this field carries a satellite trail and colored patches of sky beside the disc.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&get=record"
+      ],
+      "revisitWhen": "A later release cleans the field."
+    },
+    {
+      "id": "orientation",
+      "subject": "Disc tilt and position angle",
+      "status": "included",
+      "finding": "Leroy et al. (2021) give inclination 66.0 +/- 2.9 deg and position angle 305.6 +/- 2.3 deg. Lang et al. (2020) fit 67.7 deg and 305.5 deg to the CO velocity field, so the angle is the receding side's.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/897/122"
+      ]
+    },
+    {
+      "id": "dot-catalogues",
+      "subject": "Catalogues of NGC 4536's nebulae and clusters",
+      "status": "unresolved",
+      "finding": "The PHANGS-MUSE nebular catalogue (Groves et al. 2023, J/MNRAS/520/4902/catalog) has no rows for NGC 4536. No other catalogue of its nebulae or clusters was searched for in this change, so the bank has no dots.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/520/4902"
+      ],
+      "revisitWhen": "CDS is searched for its HII regions, clusters or remnants with sky positions."
+    }
+  ]
+}

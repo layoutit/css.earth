@@ -90,6 +90,26 @@
       "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
       "checkedOn": "2026-10-02",
       "locator": "I/355/gaiadr3, the same columns and foreground criterion around M95, for sources with a G magnitude (141 rows, src/objects/m95-layers/source/gaia-dr3-foreground.csv), centred on 160.990417, 11.703611 with radius 0.15 deg."
+    },
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-10-02",
+      "locator": "I/355/gaiadr3, the same columns and foreground criterion around NGC 1365, for sources with a G magnitude (278 rows, src/objects/ngc-1365-layers/source/gaia-dr3-foreground.csv). Query: SELECT Source, RA_ICRS, DE_ICRS, Plx, e_Plx, pmRA, e_pmRA, pmDE, e_pmDE, Gmag FROM \"I/355/gaiadr3\" WHERE 1=CONTAINS(POINT('ICRS', RA_ICRS, DE_ICRS), CIRCLE('ICRS', 53.401667, -36.140278, 0.18)) AND Gmag IS NOT NULL AND ((Plx > 0.02 AND e_Plx < 0.2 * Plx) OR (ABS(pmRA) > 0.2 + 2 * e_pmRA AND e_pmRA < 0.2 * ABS(pmRA)) OR (ABS(pmDE) > 0.2 + 2 * e_pmDE AND e_pmDE < 0.2 * ABS(pmDE)))"
+    },
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-10-02",
+      "locator": "I/355/gaiadr3, the same columns and foreground criterion around NGC 4536, for sources with a G magnitude (261 rows, src/objects/ngc-4536-layers/source/gaia-dr3-foreground.csv). Query: SELECT Source, RA_ICRS, DE_ICRS, Plx, e_Plx, pmRA, e_pmRA, pmDE, e_pmDE, Gmag FROM \"I/355/gaiadr3\" WHERE 1=CONTAINS(POINT('ICRS', RA_ICRS, DE_ICRS), CIRCLE('ICRS', 188.612917, 2.188333, 0.18)) AND Gmag IS NOT NULL AND ((Plx > 0.02 AND e_Plx < 0.2 * Plx) OR (ABS(pmRA) > 0.2 + 2 * e_pmRA AND e_pmRA < 0.2 * ABS(pmRA)) OR (ABS(pmDE) > 0.2 + 2 * e_pmDE AND e_pmDE < 0.2 * ABS(pmDE)))"
+    },
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-10-02",
+      "locator": "I/355/gaiadr3, the same columns and foreground criterion around NGC 4424, for sources with a G magnitude (67 rows, src/objects/ngc-4424-layers/source/gaia-dr3-foreground.csv). Query: SELECT Source, RA_ICRS, DE_ICRS, Plx, e_Plx, pmRA, e_pmRA, pmDE, e_pmDE, Gmag FROM \"I/355/gaiadr3\" WHERE 1=CONTAINS(POINT('ICRS', RA_ICRS, DE_ICRS), CIRCLE('ICRS', 186.798333, 9.420556, 0.09)) AND Gmag IS NOT NULL AND ((Plx > 0.02 AND e_Plx < 0.2 * Plx) OR (ABS(pmRA) > 0.2 + 2 * e_pmRA AND e_pmRA < 0.2 * ABS(pmRA)) OR (ABS(pmDE) > 0.2 + 2 * e_pmDE AND e_pmDE < 0.2 * ABS(pmDE)))"
+    },
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-10-02",
+      "locator": "I/355/gaiadr3, the same columns and foreground criterion around NGC 4639, for sources with a G magnitude (33 rows, src/objects/ngc-4639-layers/source/gaia-dr3-foreground.csv). Query: SELECT Source, RA_ICRS, DE_ICRS, Plx, e_Plx, pmRA, e_pmRA, pmDE, e_pmDE, Gmag FROM \"I/355/gaiadr3\" WHERE 1=CONTAINS(POINT('ICRS', RA_ICRS, DE_ICRS), CIRCLE('ICRS', 190.718337, 13.257241, 0.075)) AND Gmag IS NOT NULL AND ((Plx > 0.02 AND e_Plx < 0.2 * Plx) OR (ABS(pmRA) > 0.2 + 2 * e_pmRA AND e_pmRA < 0.2 * ABS(pmRA)) OR (ABS(pmDE) > 0.2 + 2 * e_pmDE AND e_pmDE < 0.2 * ABS(pmDE)))"
     }
   ],
   "creators": [
