@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 1158,
+      "sha256": "a439ed7cc682592ec642210dc6a22652f1216aecdcec1f95caafe7cd80995646"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/haumea.json",
+      "bytes": 34539,
+      "sha256": "e3c52736f711644aa592f7d832736a16302c1390014ff87e24e856f661297274"
+    }
+  ]
+}

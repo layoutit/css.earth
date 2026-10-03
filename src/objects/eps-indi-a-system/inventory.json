@@ -4,8 +4,20 @@
     {
       "location": "prepared",
       "filename": "members.json",
-      "bytes": 1248,
-      "sha256": "a0d7edd127eae9177e36b635019f120069ae206bd72ac94def15d6f84cd2f811"
+      "bytes": 1620,
+      "sha256": "f221e2843c13bd0e6c52b754db4bfd24fe34ae64d8361f8205c88b7ace786596"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/eps-indi-a.json",
+      "bytes": 30447,
+      "sha256": "2205df836ad2ff6b7c8578ba84f7601da23180dfdb29adec1d9af8f148245e10"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/eps-indi-ba.json",
+      "bytes": 30400,
+      "sha256": "985bf3ac98073fecdc30c78b2954ee29cc5917773028149131708af5168d0489"
     }
   ]
 }

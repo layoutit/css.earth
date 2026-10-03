@@ -34,7 +34,7 @@ export const explorationCompilerClosure = [
   'packages/objects/src/provenance/prepared-exploration.ts', 'packages/objects/src/provenance/object-lineage.ts', 'packages/objects/src/provenance/product-input-evidence.ts', 'packages/objects/src/node/prepared-registry.ts', 'packages/objects/src/registry/object-schema.ts',
   'packages/objects/src/registry/object-catalog.ts', 'site/prepared-catalogue.mjs', 'site/build/prepare/prepare-catalog.mts', 'packages/objects/src/node/catalog-directory.ts',
   'packages/objects/src/registry/navigable-object.ts', 'packages/objects/src/registry/navigation-distance.ts', 'packages/bake/src/navigation/navigation-destinations.ts',
-  'packages/objects/src/registry/overview-object.ts', 'site/prepared-overview-objects.json',
+  'packages/objects/src/registry/object-zoom.ts', 'packages/objects/src/registry/object-tree.ts',
   'site/source/facilities/catalog.json', 'site/source/facilities/render-library.json', 'site/source/facilities/emblem-library.json',
   'site/source/agency-logos.json', 'packages/bake/src/sources/read-source-catalogue.ts',
   'packages/objects/src/sources/catalog.ts', 'packages/objects/src/provenance/source-usage.ts', 'packages/objects/src/node/source-manifest.ts',

@@ -219,6 +219,12 @@
     },
     {
       "location": "public",
+      "filename": "titania-billboard.webp",
+      "bytes": 7240,
+      "sha256": "e33cf6d99418897cc487b01f354673d553894516f30dcb8d3ba5aea0036663ad"
+    },
+    {
+      "location": "public",
       "filename": "titania-dataset-elevation.webp",
       "bytes": 124,
       "sha256": "225252df40cf87b0c6bb881171836789e7c073e94d29c2c0761264ee44ef29e0"
@@ -510,12 +516,6 @@
       "filename": "world-navigation.json",
       "bytes": 1223,
       "sha256": "1dd0c7236fd4ac3a44f5e7d2c5a12d8f439b13765ad9a115772e090a2625e2d1"
-    },
-    {
-      "location": "public",
-      "filename": "titania-billboard.webp",
-      "bytes": 7240,
-      "sha256": "e33cf6d99418897cc487b01f354673d553894516f30dcb8d3ba5aea0036663ad"
     }
   ]
 }

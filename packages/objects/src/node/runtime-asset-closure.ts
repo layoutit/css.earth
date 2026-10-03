@@ -197,6 +197,20 @@ export async function bakedPreparedFiles(preparedRoot: string, objectId: string)
   return (await runtimeFiles(preparedRoot, objectId, true)).filter(name => !isRegeneratedPreparedFile(name));
 }
 
+/** Re-inventory part of an object's `prepared/`: the rows `owns` selects are replaced by the baked files it selects, and
+ * every other row stays as it is, so a file that is not restored on this machine keeps its row. For files a shared step
+ * writes into many packages (the world's members, places and system views). */
+export async function inventoryPreparedSubset({ objectId, objectDirectory, owns }: { objectId: string; objectDirectory: string; owns(filename: string): boolean }) {
+  const preparedRoot = resolve(objectDirectory, 'prepared');
+  const baked = await bakedPreparedFiles(preparedRoot, objectId).catch((error: unknown) => {
+    if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT') return [] as string[];
+    throw error;
+  });
+  const names = baked.filter(owns).sort((left, right) => left.localeCompare(right));
+  const kept = ((await readInventory(objectId, objectDirectory))?.assets ?? []).filter(asset => asset.location === 'prepared' && !owns(asset.filename));
+  return updateInventory({ objectId, objectDirectory, location: 'prepared', assets: [...kept, ...await hashedAssets(preparedRoot, names, objectId)] });
+}
+
 /** Inventory the object's baked `prepared/` files: an explicit list, or everything baked under `preparedRoot`. */
 export async function inventoryPreparedAssets({ objectId, objectDirectory, preparedRoot = resolve(objectDirectory, 'prepared'), filenames,
   exclude = [], gitTrackedPaths = defaultGitTrackedPaths }: {
