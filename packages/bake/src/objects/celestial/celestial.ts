@@ -1,6 +1,7 @@
+import { parseSolarSceneSource } from '@cssearth/objects';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { loadCelestialAdapters, type SolarSource, type StarfieldPlan, type SunPlan } from './adapters.ts';
+import { loadCelestialAdapters, type StarfieldPlan, type SunPlan } from './adapters.ts';
 import type { SolarGeometry } from '../scene/index.ts';
 
 export interface CelestialContext { readonly sourceDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string;
@@ -23,13 +24,13 @@ async function verifySources(sourceDirectory: string, paths: readonly string[]):
     await readFile(resolve(sourceDirectory, path));
   }
 }
-function solarSource(value: unknown): SolarSource { const source = record(value, 'solar-system source'); if (typeof source.bodyId !== 'string' || typeof source.displayName !== 'string') throw new TypeError('Solar-system source is invalid.'); return Object.freeze({ bodyId: source.bodyId, displayName: source.displayName }); }
+
 
 /** Prepare the sky orientation and directional Sun into renderer-neutral JSON. The shared universe draws both. */
 export async function prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, directionalSun, solarGeometry }: CelestialContext): Promise<CelestialAssets> {
   if (typeof sourceDirectory !== 'string' || typeof publicDirectory !== 'string' || typeof outputDirectory !== 'string') throw new TypeError('Celestial preparation needs source, public, and output directories.');
   await verifySources(sourceDirectory, ['presentation/solar-system.json']);
-  const solar = solarSource(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation/solar-system.json'), 'utf8'))); const api = await loadCelestialAdapters(solarGeometry); api.requireSceneObject(solar.bodyId);
+  const solar = parseSolarSceneSource(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation/solar-system.json'), 'utf8'))); const api = await loadCelestialAdapters(solarGeometry); api.requireSceneObject(solar.bodyId);
   await mkdir(outputDirectory, { recursive: true });
   const sky = json(api.prepareCubicSky({ objectId: solar.bodyId, cameraContract: api.cubicSkyCamera }));
   // A star has no directional Sun; sun.json records null so the runtime contract sees the absence explicitly.

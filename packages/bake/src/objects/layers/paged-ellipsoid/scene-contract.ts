@@ -4,7 +4,8 @@ import type {Polygon} from '@layoutit/polycss';
 
 import type { RasterRect, SeamOutsetProfile } from '../../../scene/index.ts';
 import type {Cutaway} from './contracts.ts';
-export type PagedGeometryParameters = Record<'BODY_LATITUDE_SEGMENTS' | 'BODY_LONGITUDE_SEGMENTS' | 'EQUATORIAL_RADIUS' | 'TILE_SIZE' | 'SEAM_BLEED' | 'PLANET_SEAM_BLEED' | 'INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE' | 'SURFACE_OVERLAP' | 'POLAR_CAP_BAND_SPAN' | 'POLAR_SURFACE_OVERLAP' | 'MESH_ROTATION_Z' | 'CAMERA_ZOOM' | 'CAMERA_MINIMUM_CONTROL_PITCH_DEGREES' | 'CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES' | 'CAMERA_MILLISECONDS_PER_CONTROL_DEGREE' | 'INTERIOR_LATITUDE_SEGMENTS' | 'INTERIOR_LONGITUDE_SEGMENTS' | 'rotationSeconds', number> & {interiorCutaway: Cutaway; seamOutset?: SeamOutsetProfile};
+export type { PagedGeometryParameters } from '@cssearth/objects';
+import type { PagedGeometryParameters } from '@cssearth/objects';
 export interface PagedSceneProfile {namespace: string; publicBase: string; geometry: PagedGeometryParameters; camera: CameraPlan; polarRadiusKm: number; equatorialRadiusKm: number; sceneBodyKey: string; interiorRadiusKey: string;}
 export interface InteriorSource extends Record<string, unknown> {
   qualification: string; sourceUrl: string; sourceId: number; tomographyPath?: string;

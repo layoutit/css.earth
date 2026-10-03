@@ -236,7 +236,18 @@ export { CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA, type CircumstellarOpacity, type Ed
 export { PYUVDATA_UVFITS_SCHEMA, parsePyuvdataUvfitsRequest, parsePyuvdataUvfitsAnswer, type PyuvdataUvfitsRequest, type PyuvdataUvfitsAnswer } from './prepared-data/pyuvdata-uvfits.js';
 export { VOLUME_SOURCE_MANIFEST_SCHEMA, parseVolumeSourceManifest, parseVolumeContextProducts, type VolumeManifestReader, type VolumeContextProduct } from './prepared-data/volume-source-manifest.js';
 export { VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeSourcePreview, isTrackedVolumeSourcePreview, type VolumeSourcePreview, type TrackedVolumeSourcePreview, type VolumeDatasetSource, type VolumePresentationSource } from './prepared-data/volume-presentation-source.js';
-
+export { parseGeometryProfile, type GeometryProfile, type SeamOutsetProfile, type SurfaceGeometryProfile } from './prepared-data/css-geometry-profile.js';
+export { parseDepthRecipe } from './volume/nebula-depth-model.js';
+export { parseAcquisitionPlan, type AcquisitionValidationPolicy } from './prepared-data/acquisition-plan.js';
+export { evidenceLink, parseInvestigationLedger, parseFacilityLedger, type InvestigationEntryExpansion } from './prepared-data/investigation-ledger.js';
+export { parseMeasuredSpectrum, type MeasuredSpectrumRecipe, type MeasurementSource } from './prepared-data/chart-measured-spectrum.js';
+export { parseRetrievedProfile, type RetrievedProfileRecipe, type ProfileSource } from './prepared-data/chart-retrieved-profile.js';
+export { parseSystemOrbits, type SystemOrbitsRecipe } from './prepared-data/chart-system-orbits.js';
+export { parseChartAssetRecipe, type ChartAssetRecipe } from './prepared-data/chart-assets.js';
+export { parseSpectrumRecipe, type SpectrumRecipe } from './prepared-data/chart-spectrum.js';
+export { responsiveFit, cameraFields, camera, recipeCamera, DERIVED_CAMERA_ANGLE_FIELDS } from './prepared-data/authored-camera.js';
+export { parsePagedRecipe, parsePagedDatasetBindings, isPagedEllipsoidRecipe, type PagedDatasetBindings, type PagedEllipsoidRecipe, type PagedGeometryParameters } from './prepared-data/paged-ellipsoid.js';
+export { parseSolarSceneSource, type SolarSceneSource, type SolarSource } from './prepared-data/solar-system-preparation.js';
 export * from './prepared-data/resolution-evidence.js';
 export * from './prepared-data/limb-block.js';
 export * from './prepared-data/raster-recipe.js';
