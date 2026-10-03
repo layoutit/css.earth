@@ -22,7 +22,8 @@ export const pointPaint = (style: BatchedSpatialPointStyle) =>
 const MAX_PARALLAX_PIXELS = .25;
 /** Dots are painted this share of the view beyond each edge: a turn warps them into view before the exact repaint, so a
  * drag shows no hole at its leading edge (content is resident a margin before it enters the view,
- * motion-freezes-membership.md). The root clips them, so a settled frame is unchanged. */
+ * motion-freezes-membership.md). The root clips them, so a settled frame is unchanged. A travelling camera repaints
+ * every frame and warps none, so its paints leave the margin out and the pause paints it back. */
 const OVERSCAN = .2;
 /** A warp holds while it changes no dot's size by more than this factor: a turn's projective map stretches the painted discs
  * with its centres, and a larger turn grows the dots on one side of the view past their size. */
@@ -141,11 +142,22 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   // the nearest of them. A camera that only moved (a zoom, a pan around a planet) moves no point by a visible amount while
   // its translation is far below that nearest distance, so the paint is kept (parallaxPixels).
   let painted: { position: readonly number[]; rest: readonly number[]; counts: readonly number[]; nearestUnits: number; keeps: readonly number[]; hiddens: readonly (ReadonlySet<number> | null)[];
-    axes: Matrix3; focal: number; cx: number; cy: number; width: number; height: number } | null = null, destroyed = false;
+    axes: Matrix3; focal: number; cx: number; cy: number; width: number; height: number; overscan: number } | null = null, destroyed = false;
   // While the camera turns, the last paint is moved by one warp (a compositor transform) instead of repainted; the exact
   // paint follows once the publications pause.
   let warp = '', latest: VolumeCameraPublication | null = null, settle: ReturnType<typeof setTimeout> | null = null;
   const setWarp = (value: string) => { if (warp !== value) { svg.style.transform = value; warp = value; } };
+  // The pause's exact paint: after a warp, and after a paint that left its margin out. Only the first can change what
+  // the view shows, so only it tells the owner.
+  const settleAfterPause = () => {
+    if (settle !== null) clearTimeout(settle);
+    settle = setTimeout(() => {
+      settle = null;
+      if (!latest) return;
+      if (warp) { publish(latest, true); onSettle?.(); }
+      else if (painted && painted.overscan < OVERSCAN) publish(latest, true);
+    }, SETTLE_MS);
+  };
   // A repaint the pacer runs for dots a zoom adds. The dots' paint is a paint exception of the motion contract
   // (docs/performance/motion-freezes-membership.md), so nothing holds it: the pacer only spaces it by the frame budget.
   let arriving = false;
@@ -172,13 +184,16 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     const counts = parts.map(part => part.drawnCount ? Math.max(0, Math.min(part.points.length, Math.round(part.drawnCount(distanceUnits, local.positionUnits)))) : part.points.length);
     const width = viewport.widthPixels ?? 0, height = viewport.heightPixels ?? 0;
     const cx = width / 2 + viewport.principalOffsetPixels[0], cy = height / 2 + viewport.principalOffsetPixels[1];
+    let travelling = false;
     if (painted) {
       const shift = Math.hypot(...local.positionUnits.map((value, axis) => value - painted!.position[axis]!));
       const still = shift === 0 || parallaxPixels(viewport.focalPixels, shift, painted.nearestUnits) < MAX_PARALLAX_PIXELS;
       const same = counts.every((count, index) => count === painted!.counts[index]) && keeps.every((keep, index) => keep === painted!.keeps[index])
         && hiddens.every((hidden, index) => hidden === painted!.hiddens[index]);
       const turned = !rest.every((value, i) => value === painted!.rest[i]);
-      if (still && same && !turned) { setWarp(''); return; }
+      // A paint without its margin is kept like any other; only the pause's exact paint replaces it.
+      if (still && same && !turned && !(exact && painted.overscan < OVERSCAN)) { setWarp(''); return; }
+      travelling = !still && !exact;
       // A turn or a zoom of the lens moves every far point by the same projective map of the screen. Warp the paint while
       // what it painted still covers the view. Dots a zoom adds (a longer prefix, a larger share) arrive at once, by a
       // repaint; dots it takes away wait for the pause, so a zoom warps while it only thins the view.
@@ -186,6 +201,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
       // on alternate frames left the dots at half the display's rate and cost more: on the iPad a slow zoom at the nearby
       // universe had 72 to 75 frames over 20 ms in 240 that way and 34 to 38 repainting each frame (2026-10-03).
       if (still && !exact && (turned || shift > 0) && painted.width === width && painted.height === height && width > 0 && height > 0) {
+        const margin = painted.overscan;
         // Dots the zoom adds come through the pacer while the warp holds: a repaint as soon as the frame budget allows.
         if (counts.some((count, index) => count > painted!.counts[index]!) || keeps.some((keep, index) => keep > painted!.keeps[index]!)) { arriving = true; arrivals.request(true); }
         const next = axesMatrix(r), turn = multiply(next, transpose(painted.axes));
@@ -201,21 +217,25 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
           const [ax, ay] = source(x! + 1, y!), [bx, by] = source(x!, y! + 1);
           const stretch = [Math.hypot(ax - px, ay - py), Math.hypot(bx - px, by - py)];
           if (stretch.some(value => !(value >= 1 / MAX_WARP_STRETCH && value <= MAX_WARP_STRETCH))) return false;
-          return px >= -OVERSCAN * width && px <= (1 + OVERSCAN) * width && py >= -OVERSCAN * height && py <= (1 + OVERSCAN) * height;
+          return px >= -margin * width && px <= (1 + margin) * width && py >= -margin * height && py <= (1 + margin) * height;
         });
         if (covered) {
           const f = (value: number) => Number(value.toPrecision(10));
           setWarp(`matrix3d(${f(forward[0])},${f(forward[3])},0,${f(forward[6])},${f(forward[1])},${f(forward[4])},0,${f(forward[7])},0,0,1,0,${f(forward[2])},${f(forward[5])},0,${f(forward[8])})`);
-          if (settle !== null) clearTimeout(settle);
-          settle = setTimeout(() => { settle = null; if (latest && warp) { publish(latest, true); onSettle?.(); } }, SETTLE_MS);
+          settleAfterPause();
           return;
         }
       }
     }
-    if (settle !== null) { clearTimeout(settle); settle = null; }
+    // No warp slides a travelling camera's paint (the next frame repaints), so it paints the view alone. On the iPad's
+    // slow zoom the margin was a third of the dots written; without it 690 frames had 19 to 24 over 20 ms at the nearby
+    // universe against 57 to 81, and 42 to 47 at the Milky Way against 105 to 121 (interleaved runs, 2026-10-03).
+    const overscan = travelling ? 0 : OVERSCAN;
+    if (travelling) settleAfterPause(); else if (settle !== null) { clearTimeout(settle); settle = null; }
     let nearestSquared = Infinity;
     const [px, py, pz] = local.positionUnits, focal = viewport.focalPixels, [ox, oy] = viewport.principalOffsetPixels;
     const halfWidth = (viewport.widthPixels ?? Infinity) / 2, halfHeight = (viewport.heightPixels ?? Infinity) / 2;
+    const paintedHalfWidth = halfWidth * (1 + 2 * overscan), paintedHalfHeight = halfHeight * (1 + 2 * overscan);
     const [r0, r1, r2, r3, r4, r5, r6, r7, r8] = r as unknown as [number, number, number, number, number, number, number, number, number];
     // The occluder's plane from the camera: a sight line `camera + t offset` crosses it at t = side / (normal · offset).
     const [onx, ony, onz] = occluder?.normal ?? [0, 0, 0], [ocx, ocy, ocz] = occluder?.centreUnits ?? [0, 0, 0];
@@ -229,7 +249,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
       // A cell is out of view when all of its box is behind the camera or beyond one edge of the painted view and its
       // margins (a plane through the camera for each edge). The test is on the box, so it never drops a point the point
       // test below would keep; a relative tolerance keeps rounding on the box's side.
-      const edgeX = halfWidth * (1 + 2 * OVERSCAN) + part.widestMargin, edgeY = halfHeight * (1 + 2 * OVERSCAN) + part.widestMargin;
+      const edgeX = paintedHalfWidth + part.widestMargin, edgeY = paintedHalfHeight + part.widestMargin;
       const sides = Number.isFinite(edgeX) && Number.isFinite(edgeY);
       // Each edge's plane n, with n · offset >= 0 on the view's side: sx <= edgeX is (edgeX - ox) depth - focal x >= 0, and
       // sx >= -edgeX is focal x + (edgeX + ox) depth >= 0, where depth = -(r2, r5, r8) · offset (likewise for y).
@@ -267,7 +287,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
           if (depth <= 0) continue;
           const sx = focal * (r0 * x + r3 * y + r6 * z) / depth + ox, sy = focal * (r1 * x + r4 * y + r7 * z) / depth + oy;
           const margin = margins[index]!;
-          if (Math.abs(sx) > halfWidth * (1 + 2 * OVERSCAN) + margin || Math.abs(sy) > halfHeight * (1 + 2 * OVERSCAN) + margin) continue;
+          if (Math.abs(sx) > paintedHalfWidth + margin || Math.abs(sy) > paintedHalfHeight + margin) continue;
           // The share and the counts are of the view; the overscan only paints ahead of a turn.
           const inView = Math.abs(sx) <= halfWidth + margin && Math.abs(sy) <= halfHeight + margin;
           if (inView) candidates++;
@@ -307,7 +327,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     const nearestUnits = Math.sqrt(nearestSquared);
     setWarp('');
     // Counts for probes and tests, kept here: a per-frame dataset write is a DOM write (motion-freezes-membership.md).
-    painted={position:[...local.positionUnits],rest,counts,nearestUnits,keeps,hiddens,axes:axesMatrix(r),focal:viewport.focalPixels,cx,cy,width,height};
+    painted={position:[...local.positionUnits],rest,counts,nearestUnits,keeps,hiddens,axes:axesMatrix(r),focal:viewport.focalPixels,cx,cy,width,height,overscan};
   };
   return Object.freeze({ root,
     /** Each part's group, whose opacity dims it, and its counts from the last paint. */

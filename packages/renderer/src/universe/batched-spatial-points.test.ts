@@ -165,7 +165,7 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
   plain.destroy(); celled.destroy();
 });
 
-test('a travelling camera repaints every frame; a turning one warps and settles to the exact paint', async () => {
+test('a travelling camera repaints every frame; once paused, a turn warps and settles to the exact paint', async () => {
   const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
     metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20] as const, max: [20, 20, 20] as const } };
   const points = Array.from({ length: 30 }, (_, index) => ({ positionUnits: [(index % 6) - 2.5, Math.floor(index / 6) - 2, -10] as const }));
@@ -185,6 +185,10 @@ test('a travelling camera repaints every frame; a turning one warps and settles 
     assert.equal(path.getAttribute('d'), exactAt(z), `the frame at ${z} is painted from its own camera`);
     assert.equal(svg.style.transform, '');
   }
+  // The pause paints the margin back. Every dot here is in the view, so the paint is the same and the owner is not told.
+  await new Promise(resolve => setTimeout(resolve, 200));
+  assert.equal(path.getAttribute('d'), exactAt(-4));
+  assert.equal(settled, 0);
   // A turn alone moves the last paint as one warp, and the exact paint follows the pause.
   const before = path.getAttribute('d');
   field.publish(at(-4, 2));
@@ -200,6 +204,45 @@ test('a travelling camera repaints every frame; a turning one warps and settles 
   assert.equal(svg.style.transform, '');
   const exact = mount();
   field.destroy(); exact.destroy();
+});
+
+test('a travelling camera paints the view alone; the pause paints the margin back for a turn to warp', async () => {
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20] as const, max: [20, 20, 20] as const } };
+  // Five dots in the view and one in the margin past each side: about 550 px from the centre of a view 500 px to its edge.
+  const points = [-15, -4, -2, 0, 2, 4, 15].map(x => ({ positionUnits: [x, 0, -10] as const }));
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (z: number, degrees = 0) => { const half = degrees * Math.PI / 360;
+    return { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, Math.sin(half), 0, Math.cos(half)] as const } }, viewport }; };
+  let settled = 0;
+  const mount = () => { const { document } = parseHTML('<div id="host"></div>');
+    return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
+      stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'], onSettle: () => settled++ }); };
+  const exactAt = (z: number, degrees = 0) => { const fresh = mount(); fresh.publish(at(z, degrees)); const d = fresh.root.querySelector('path')!.getAttribute('d'); fresh.destroy(); return d; };
+  const dots = (field: ReturnType<typeof mount>) => field.root.querySelector('path')!.getAttribute('d')!.match(/M/g)?.length ?? 0;
+  const field = mount(), path = field.root.querySelector('path')!, svg = field.root.querySelector('svg')!;
+  field.publish(at(0));
+  assert.equal(dots(field), 7, 'a first paint has its margin');
+  for (const z of [.5, 1]) {
+    field.publish(at(z));
+    assert.equal(dots(field), 5, 'a travelling paint leaves the margin out');
+    assert.equal(field.stats().visiblePoints, 5, 'and counts the same view');
+  }
+  await new Promise(resolve => setTimeout(resolve, 200));
+  assert.equal(path.getAttribute('d'), exactAt(1), 'the pause paints the margin back');
+  assert.equal(settled, 0, 'the view did not change, so the owner is not told');
+  const rested = path.getAttribute('d');
+  field.publish(at(1, 2));
+  assert.equal(path.getAttribute('d'), rested, 'a turn then keeps the paint');
+  assert.match(svg.style.transform, /^matrix3d/, 'and warps the margin in');
+  // A turn that comes before the pause finds no margin to warp in: it repaints at once, with one.
+  const hurried = mount();
+  hurried.publish(at(0)); hurried.publish(at(1));
+  assert.equal(dots(hurried), 5);
+  hurried.publish(at(1, 2));
+  assert.equal(hurried.root.querySelector('path')!.getAttribute('d'), exactAt(1, 2));
+  assert.equal(hurried.root.querySelector('svg')!.style.transform, '');
+  field.destroy(); hurried.destroy();
 });
 
 test('a turn warps the paint only while no dot grows or shrinks by more than a tenth; a larger turn repaints', () => {
