@@ -397,7 +397,11 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     bodyLabelRects: interactions.bodyLabelRects,
     setNavigationInFlight(active: boolean) {
       if (destroyed || active === navigationInFlight) return;
-      invalidatePolicy();
+      // The next plan carries the flight's state (policyDirty) and the refresh below asks for it. A plan already in flight
+      // is the frame the camera asked for a moment before the flight began or ended, so it commits: counted as stale it
+      // was thrown away at both ends of every hand-over, and the camera waited a frame each time (a zoom out of Earth
+      // held one frame as the Sun's scene was requested and one as it finished, 2026-10-03).
+      policyDirty = true;
       navigationInFlight = active;
       if (active) { hoverIntent = false; settleHover(); }
       systemRetired = false;
