@@ -11,11 +11,13 @@
  * snapshot and writes the source manifest. The astronomy record is written without elements; run
  * `node packages/astronomy/cli/generate-asteroids.mts --object=<ids>` next, then `node packages/bake/cli/prepare-object.mts <id>`.
  */
+import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA } from '@cssearth/objects';
+
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import sharp from 'sharp';
 import { createSourceManifest } from '@cssearth/objects/node';
-import { NEUTRAL_CATALOGUE_COLOR } from '@cssearth/objects';
+
 import { ENTRY_EVIDENCE } from '@cssearth/bake/sources';
 import { shapeMaterialRaster, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/cli/lib/horizons.mts';
@@ -300,7 +302,7 @@ async function authorBody(body: Body) {
   const legendMiddle = (elevation[0]! + elevation[1]!) / 2;
   const fmt = (value: number) => String(Number(value.toPrecision(4)));
   const content = {
-    schema: 'cssearth-object-content@2', version: 1, id, displayName: name,
+    schema: OBJECT_CONTENT_SCHEMA, version: OBJECT_CONTENT_VERSION, id, displayName: name,
     panel: {
       facts: [
         { id: 'radius', label: 'Display reference radius', value: `${fmt(radiusKm)} km (size-calibrated model)`,
@@ -346,7 +348,7 @@ async function authorBody(body: Body) {
   const damitSource = sourceEntry(`damit-shape-${model.shapeFile}`, shapeUrl, `DAMIT shape ${model.shapeFile} · ${name}`, 'Dataset source');
   const cite = (keys: string[]) => [...keys.map(key => key === 'sbdb' ? sbdbSource : (({ url, label, locator, quote, catalogueId }) => sourceEntry(catalogueId, url, label, locator, quote))(body.papers[key]!)), damitSource];
   await write(resolve(pkg, 'text.json'), json({
-    schema: 'cssearth-object-text@1', objectId: id,
+    schema: OBJECT_TEXT_SCHEMA, objectId: id,
     card: { text: body.text.card, sources: cite(body.text.cardSources) },
     introduction: { text: body.text.introduction, sources: cite(body.text.introductionSources) },
     datasets: {
@@ -381,7 +383,7 @@ async function authorBody(body: Body) {
       catalog: { name, classification: 'asteroid', color: NEUTRAL_CATALOGUE_COLOR, distanceAu: semiMajorAxisAu, description: body.text.card, systemName: 'Solar System', context: {} },
     },
     schema: descriptor.schema, type: descriptor.type,
-    prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' },
+    prepared: { format: PREPARED_CSS_OBJECT_FORMAT, url: 'prepared/object.json' },
   };
   await write(resolve(pkg, 'object.json'), json(object));
   const astronomyPath = resolve('packages/astronomy/data/bodies', `${id}.json`);
@@ -396,7 +398,7 @@ async function authorBody(body: Body) {
 
   // Manifest, then the marker snapshot that reads it.
   const manifest: Record<string, unknown> = {
-    schema: `cssearth-authoritative-sources@3`,
+    schema: SOURCE_MANIFEST_SCHEMA,
     inputs: [
       { id: shapeId, path: shapePath, origin: shapeUrl, credit, license: 'CC-BY-4.0, DAMIT; retain original model and authors attribution.',
         acquisition: 'Restore original uncalibrated counted triangle table through the pinned acquisition recipe.',

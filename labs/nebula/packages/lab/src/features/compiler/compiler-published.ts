@@ -1,4 +1,4 @@
-import { PHOTOMETRIC_MGE_SCHEMA, verifySampledEvidence } from '@cssearth/objects';
+import { NEBULA_PHYSICAL_EVIDENCE_SCHEMA, PHOTOMETRIC_MGE_SCHEMA, verifySampledEvidence } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readCompilerRecipe, readCompilerRequest, type CompilerRequest } from './model.ts';
 import { readCompilerResult, type CompilerResult } from './result.ts';
@@ -51,7 +51,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
     if (!evidence.path.startsWith('labs/nebula/models/') || !publication.inputs.some(source => source.path === evidence.path))
       throw new Error('Prepared nebula receipt does not pin the declared depth evidence.');
     const ledger: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === evidence.path)![1]));
-    if (!record(ledger) || ledger.schema !== 'cssearth-nebula-physical-evidence@1' || ledger.subjectId !== recipe.id ||
+    if (!record(ledger) || ledger.schema !== NEBULA_PHYSICAL_EVIDENCE_SCHEMA || ledger.subjectId !== recipe.id ||
         !Array.isArray(ledger.sources) || !Array.isArray(ledger.evidence) || !Array.isArray(ledger.methods))
       throw new Error('Prepared physical evidence ledger belongs to another nebula or has an invalid schema.');
     depthInputs = { recipe: publication.inputs.find(source => source.path === recipe.depthRecipe)!, evidence };

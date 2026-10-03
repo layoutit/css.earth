@@ -148,6 +148,8 @@ jobs:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
         run: node .github/scripts/ci/build-ci.mts lint
+      - name: Mutation-check architecture rules
+        run: node --test .github/scripts/architecture/*.test.mts
       - name: Check the architecture against its baseline
         # Fails when a change adds a folder-cycle edge or a forbidden import (.github/scripts/architecture/rules.mts) that
         # .github/scripts/architecture/baseline.json does not record, or breaks a repository rule (repository-rules.mts:
@@ -556,7 +558,7 @@ jobs:
           catalogue object-browser papers survey-images
           geometry-model observation-alignment structures-model
           build dataset-levels dataset-difference dataset-radial dataset-radial-panel
-          registration photometric-mge photometric-prior compiler-defaults simulation-guided compiler-published
+          registration schema-protocols molecular-data native star-removal images native-cache photometric-mge photometric-prior compiler-defaults simulation-guided compiler-published catalogue-stars
 
   ci-guard:
     name: Report the first CI failure

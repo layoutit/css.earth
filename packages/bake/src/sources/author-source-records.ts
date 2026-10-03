@@ -7,7 +7,7 @@
  */
 import { access, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
-import { parseSourceCatalog } from '@cssearth/objects/sources';
+import { SOURCE_CATALOG_SCHEMA, parseSourceCatalog } from '@cssearth/objects/sources';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 /** What an authored binding rests on: the manifest entry it sits in. */
@@ -60,7 +60,7 @@ export async function authorSourceRecords({ root, objectId, write = true }: Auth
         result.records.push(catalogueId);
       }
       if (result.records.includes(catalogueId)) {
-        parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records: [record] });
+        parseSourceCatalog({ schema: SOURCE_CATALOG_SCHEMA, records: [record] });
         if (write) await writeFile(recordPath, JSON.stringify(record, null, 2) + '\n');
       }
     }

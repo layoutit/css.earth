@@ -1,3 +1,4 @@
+import { OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA, type VolumeRecipe, type Vector3 } from '@cssearth/objects';
 import {rotateParticles} from '@cssearth/nebula-reconstruction/stars/rotate-particles';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Reproducible local experiment: a pinned simulation snapshot, photograph colors, and the shared volume baker. */
@@ -10,8 +11,6 @@ import { convertParticlesToDensityVolume } from '../../server/workflows/stars/pa
 import type { ParticlePhotoEmissionOptions } from '../../server/workflows/stars/particles.ts';
 import { extractExtendedSource } from '@cssearth/nebula-reconstruction/star-removal/extraction';
 import { createParticleAlignmentDiagnostic } from '@cssearth/nebula-reconstruction/registration/particle-alignment';
-import type { VolumeRecipe } from '@cssearth/objects';
-import type { Vector3 } from '@cssearth/objects';
 
 interface ParticleExperiment {
   schema: 'cssearth-magellanic-particle-experiment@1';
@@ -92,7 +91,7 @@ export async function prepareParticleExperiments(recipePath: string, archivePath
           'Authored mass-to-light conversion and exposure; not calibrated photometry.' },
       ...(target.extraction ? { extraction: target.extraction } : {}) };
     await json(resolve(sourceDirectory, 'provenance.json'), provenance);
-    const volume: VolumeRecipe = { schema: 'cssearth-volume-recipe@1',
+    const volume: VolumeRecipe = { schema: VOLUME_RECIPE_SCHEMA,
       grid: { path: 'density.ktx2',
         dimensions: target.dimensions,
         encoding: 'sqrt-density-unorm8', bounds: target.boundsKpc },
@@ -107,7 +106,7 @@ export async function prepareParticleExperiments(recipePath: string, archivePath
     await json(resolve(sourceDirectory, 'volume.json'), volume);
     const reference = parseLabModelJson(await readFile(target.referenceObject, 'utf8'));
     const frame = { ...reference.properties.frame, boundsUnits: target.boundsKpc };
-    await json(resolve(objectDirectory, 'object.json'), { schema: 'cssearth-object@2', id: target.id,
+    await json(resolve(objectDirectory, 'object.json'), { schema: OBJECT_SCHEMA, id: target.id,
       type: 'density-volume', properties: { volume: frame,
         preparation: { source: 'source/volume.json' } } });
     console.log(`PARTICLES_BAKE ${target.id}: ${(100 * provenance.display.massRetention).toFixed(2)}% stellar mass inside display bounds`);

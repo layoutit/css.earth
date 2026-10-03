@@ -1,9 +1,10 @@
+export const JOINT_FIT_VOLUME_SCHEMA = 'cssearth-joint-fit-volume@1';
 import type { DensityVolumeFrame } from '../density-volume.js';
 import type { Bounds3, Vector3 } from './coordinates.js';
 
 export interface JointVolumePin { path: string }
 export interface JointVolumeResult {
-  schema: 'cssearth-joint-fit-volume@1';
+  schema: typeof JOINT_FIT_VOLUME_SCHEMA;
   id: string;
   volume: JointVolumePin;
   frame: DensityVolumeFrame;
@@ -24,7 +25,7 @@ export function readJointVolumeResult(value: unknown): JointVolumeResult {
   const expectedOrigin = sourceBounds?.min.map((entry, axis) => (entry + sourceBounds.max[axis]!) / 2);
   const expectedLocal = expectedOrigin && { min: sourceBounds!.min.map((entry, axis) => entry - expectedOrigin[axis]!),
     max: sourceBounds!.max.map((entry, axis) => entry - expectedOrigin[axis]!) };
-  if (result.schema !== 'cssearth-joint-fit-volume@1' || !safeId(result.id) || !pin(result.volume) || !sourceBounds ||
+  if (result.schema !== JOINT_FIT_VOLUME_SCHEMA || !safeId(result.id) || !pin(result.volume) || !sourceBounds ||
       frame.referenceFrame !== 'lab-sky-angular' || frame.epochJdTt !== 2451545 || frame.metersPerUnit !== 1 ||
       !sameTuple(frame.originM, [0, 0, 0]) || !sameTuple(frame.localToReferenceXyzw, [0, 0, 0, 1]) || !frameBounds ||
       !Array.isArray(coordinates.axes) || coordinates.axes.join(',') !== 'west,north,away' ||

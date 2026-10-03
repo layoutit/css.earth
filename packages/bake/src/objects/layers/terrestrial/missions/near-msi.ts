@@ -1,3 +1,4 @@
+import { ARCHIVED_CAMERA_SCHEMA } from '@cssearth/objects';
 import { readFitsHeader, readFitsPrimary } from '@cssearth/fits';
 import { array, number, shape, text, dotN as dot } from '@cssearth/core';
 
@@ -39,7 +40,7 @@ export function mathildeImageCamera(table: string, met: number) {
   const fx = 166.85 / .016, fy = 166.85 / .027, cx = centreSample, cy = centreLine * 16 / 27;
   const positionKm = observer.map(n => n * rangeKm);
   const rows = [right.map((n, i) => n * fx + forward[i] * cx), down.map((n, i) => n * fy + forward[i] * cy), forward];
-  return { schema: 'cssearth-archived-camera@1', matrix: rows.map(row => [...row, -dot(row, positionKm)]),
+  return { schema: ARCHIVED_CAMERA_SCHEMA, matrix: rows.map(row => [...row, -dot(row, positionKm)]),
     rayMatrix: [0, 1, 2].map(i => [right[i] / fx, down[i] / fy, forward[i] - right[i] * cx / fx - down[i] * cy / fy]),
     positionKm, sunDirection: direction(solarLatitude, solarLongitudeWest), geometry,
     detector: { focalLengthMm: 166.85, pitchMm: [.016, .027], tableLineToDetector: 16 / 27,

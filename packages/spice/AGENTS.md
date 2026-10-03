@@ -35,3 +35,7 @@ that pins it. The SpiceyPy comparisons live in `packages/bake/src/objects/camera
 - Every source file, test, tool, and generated source is limited to 600 physical lines, including blanks/comments.
 - `pnpm lint:packages` enforces the limit. Split code by responsibility.
 - Maintain README.md and CLAUDE.md as a symlink to this guide. Test behavior and package boundaries.
+
+Archived-camera data and the serialized `SpiceCamera` record belong to the browser-safe
+`@cssearth/objects` main entry (`packages/objects/src/prepared-data/archived-camera.ts`).
+Kernel computation stays here; writers import the format schema and type from objects.

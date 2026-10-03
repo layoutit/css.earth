@@ -1,3 +1,4 @@
+import { ARCHIVED_CAMERA_SCHEMA } from '@cssearth/objects';
 import { cross3 as cross, requireFiniteNumber, dotN as dot } from '@cssearth/core';
 /** Native FITS TAN-SIP camera seed. Surface registration remains a separate requirement. */
 import { scanFitsCards, fitsCardValue } from '@cssearth/fits';
@@ -43,7 +44,7 @@ export function llorriHeaderCamera(bytes: Buffer, kernels: KernelSet, bodyId: nu
   const k = [...inv.map((row, i) => east.map((e,j) => (row[0]*e+row[1]*north[j])*180/Math.PI + referencePixel[i]*bore[j])), bore];
   const matrix = k.map(row => [...[0,1,2].map(i => dot(row, bodyToJ2000.map(r => r[i]))), -dot(row, eye)]);
   const terms = (prefix: string) => [2,3].flatMap(d => Array.from({length:d+1}, (_,i) => [i,d-i,h[`${prefix}_${i}_${d-i}`] === undefined ? 0 : number(`${prefix}_${i}_${d-i}`)]));
-  return { schema: 'cssearth-archived-camera@1', target: cameraTarget, startTime: text('STARTUTC'), filter: 'PANCHROMATIC', width: image.width, height: image.height,
+  return { schema: ARCHIVED_CAMERA_SCHEMA, target: cameraTarget, startTime: text('STARTUTC'), filter: 'PANCHROMATIC', width: image.width, height: image.height,
     matrix, rayMatrix: inverse(matrix.map(row => row.slice(0,3))), positionKm: rotation.map(row => dot(row,eye)), sunDirection: sun.map(n => n/sunLength),
     sip: { referencePixel, a: terms('A'), b: terms('B'), offsetPixels: [0,0] },
     checks: { status: 'unregistered-header-seed', pointing: 'Original FITS WCS and source body frame. No image-to-surface registration established.' } };

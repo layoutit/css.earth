@@ -1,7 +1,8 @@
+import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects/node';
+
 import { checkLineage, lineageSource } from '@cssearth/objects/provenance';
 import type { LineageSource, ObjectLineage } from '@cssearth/objects/provenance';
 import { lineageProducts } from './lineage-recipes.ts';

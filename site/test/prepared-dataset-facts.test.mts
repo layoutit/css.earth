@@ -1,11 +1,11 @@
-import {parseObjectContentFixture} from './fixtures/object-content-fixture.mts';
+import { OBJECT_CONTENT_FIXTURE_LABEL } from './fixtures/object-content-fixture.mts';
+import { parseCompleteObjectContentSource, type ObjectContentSource } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { loadObjectContent } from './load-object-content.mts';
 import { prepareObjectContent } from '../build/content/prepare.ts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import type { ObjectContentSource } from '@cssearth/bake/objects/content';
 
 const preparedObject = (value: unknown): { readonly data: { readonly datasets: { readonly controls: readonly Record<string, unknown>[] } } } => {
   const object = requireRecord(value, 'prepared object');
@@ -17,7 +17,7 @@ const preparedObject = (value: unknown): { readonly data: { readonly datasets: {
 
 async function fixture(): Promise<{ readonly loaded: Awaited<ReturnType<typeof loadObjectContent>>; readonly source: ObjectContentSource }> {
   const loaded = await loadObjectContent('comet-67p');
-  const source = parseObjectContentFixture(await loaded.source('content'));
+  const source = parseCompleteObjectContentSource(await loaded.source('content'), OBJECT_CONTENT_FIXTURE_LABEL);
   return { loaded, source };
 }
 

@@ -3,6 +3,7 @@
  * bands, a grid, one background and one peak percentile for every band, and one common display.
  * Each band is divided by its own measured range, the usual survey false-color practice, because
  * infrared bands differ in brightness by an order of magnitude. No authored gain, crop or rotation. */
+import { parseTilePins, type WiseBand } from '@cssearth/objects';
 import { plainName } from '@cssearth/telescope/node';
 import { createWriteStream } from 'node:fs';
 import { mkdir, readFile, rename, rm, writeFile, stat } from 'node:fs/promises';
@@ -17,8 +18,7 @@ import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDi
 import { maskSaturatedStars, findPointSources } from '@cssearth/bake/objects/layers/observation';
 import { JWST_BANDS, JWST_UNITS_REFERENCE, bandOfHeader, type JwstBand } from '../archives/jwst/imaging/bands.mts';
 import { runImage3 } from '../archives/jwst/imaging/image3.mts';
-import { binWiseAtlasTile, gridWcs, parseSkyGrid, matchTileBackgrounds, mosaicTiles, MONTAGE_BACKGROUND_REFERENCE, parseTilePins, readWiseAtlasTile,
-  WISE_ATLAS_REFERENCE, wiseAtlasUrl, type SkyGrid, type WiseBand } from '@cssearth/bake/objects/raster';
+import { binWiseAtlasTile, gridWcs, parseSkyGrid, matchTileBackgrounds, mosaicTiles, MONTAGE_BACKGROUND_REFERENCE, readWiseAtlasTile, WISE_ATLAS_REFERENCE, wiseAtlasUrl, type SkyGrid } from '@cssearth/bake/objects/raster';
 
 export const HIPS2FITS = 'https://alasky.cds.unistra.fr/hips-image-services/hips2fits';
 const WISE_ATLAS_PIXEL_SR = (1.375 / 206264.80624709636) ** 2;

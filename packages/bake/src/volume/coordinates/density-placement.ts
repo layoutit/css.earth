@@ -1,19 +1,5 @@
 /** Authored model-only similarity; observed sky/image geometry stays fixed. */
-import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
-import { type Vector3, type Bounds3 } from '@cssearth/objects';
-import type { VolumeSlices } from '@cssearth/objects';
-export interface DensityPlacement {
-  schema: 'cssearth-density-placement@1'; scale: number; rotationZDegrees: number;
-  pivotUnits: Vector3; translationUnits: Vector3;
-}
-export function parseDensityPlacement(input: unknown): DensityPlacement {
-  const value = record(input, 'density placement');
-  if (value.schema !== 'cssearth-density-placement@1') throw new TypeError('Invalid authored density placement schema.');
-  const scale = finite(value.scale, 'density placement scale');
-  if (!(scale > 0)) throw new TypeError('Density placement scale must be positive.');
-  return { schema: value.schema, scale, rotationZDegrees: finite(value.rotationZDegrees, 'density placement rotation'),
-    pivotUnits: triple(value.pivotUnits, 'density placement pivot'), translationUnits: triple(value.translationUnits, 'density placement translation') };
-}
+import { parseDensityPlacement, type DensityPlacement, type Vector3, type Bounds3, type VolumeSlices } from '@cssearth/objects';
 export function densityPlacementTransform(placement: DensityPlacement) {
   const p = parseDensityPlacement(placement), angle = p.rotationZDegrees * Math.PI / 180, c = Math.cos(angle), s = Math.sin(angle);
   const normal = ([x, y, z]: readonly number[]): Vector3 => [c * x - s * y, s * x + c * y, z];
@@ -40,9 +26,4 @@ export function placeDensitySlices(slices: VolumeSlices, placement: DensityPlace
       y: slices.approximation.slabPitchUnits.y * placement.scale, z: slices.approximation.slabPitchUnits.z * placement.scale } },
     quads: slices.quads.map(quad => ({ ...quad, center: transform.point(quad.center), normal: transform.normal(quad.normal),
       vertices: quad.vertices.map(transform.point) as typeof quad.vertices })) };
-}
-
-function triple(value: unknown, at: string): [number, number, number] {
-  if (!Array.isArray(value) || value.length !== 3) throw new TypeError(`${at} must contain three numbers.`);
-  return [finite(value[0], at), finite(value[1], at), finite(value[2], at)];
 }

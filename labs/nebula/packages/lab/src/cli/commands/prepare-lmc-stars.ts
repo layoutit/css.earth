@@ -1,9 +1,9 @@
+import { PREPARED_LMC_STARS_SCHEMA, type DensityVolumeFrame } from '@cssearth/objects';
 import {sampleJointDepth as sampleDepth} from '@cssearth/nebula-reconstruction/stars/joint-depth';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Offline preparation of the published Bonanos et al. (2009) massive LMC star sample. */
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { basename } from 'node:path';
-import type { DensityVolumeFrame } from '@cssearth/objects';
 import { prepareStarPhotometry, STAR_PHOTOMETRY, rayToOverlayPlane, type ImageWcs } from '@cssearth/bake/volume';
 import { catalogueColor } from '../../adapters/sources/stellar-color.ts';
 import { createObservationMapping, type ObservationMapping } from '../../adapters/preparation/observation-prior.ts';
@@ -59,7 +59,7 @@ export async function prepareLmcStars() {
   const table = await readFile(`${directory}/source/table3.dat`, 'utf8');
   const stars = prepareCatalogue(table, frame, recipe.wcs, model);
   if (stars.length < 100 || stars.length > 1268) throw new Error(`Unexpected catalogue sample: ${stars.length}`);
-  const payload: PreparedLmcStars = { schema: 'cssearth-lmc-stars@1', id: 'lmc-stars', frame, stars,
+  const payload: PreparedLmcStars = { schema: PREPARED_LMC_STARS_SCHEMA, id: 'lmc-stars', frame, stars,
     magnitudeBand: 'V', sourceUrl: 'https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003',
     credit: 'Bonanos et al. (2009), AJ 138, 1003; CDS/VizieR J/AJ/138/1003',
     depthAssumption: 'Published J2000 angular positions held fixed; individual depths unmeasured. Depths sample the joint reconstructed-cloud emission and simulation stellar density along each measured sightline. This cloud-contained display realization is not measured stellar distance or evidence of physical cloud membership.',
