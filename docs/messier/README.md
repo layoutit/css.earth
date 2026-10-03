@@ -2,7 +2,7 @@
 
 109 of Charles Messier's 110 objects are places in the world. Each has its own page (`/m13/`, `/m51/`, `/m57/`), found by its Messier number, its NGC number or its common name. M24 is left out; the reason is under [Left out](#left-out).
 
-Twelve were built one at a time, with their own guides: the nebulae M1, M8, M42 and M45 ([nebulae](../nebulae/README.md)) and the galaxies M31, M33, M49, M81, M83, M87, M95 and M101 ([galaxies](../galaxies/README.md)). The other 97 share the four routes below. Each package's README names its own sources, numbers and known problems.
+Twelve were built one at a time, with their own guides: the nebulae M1, M8, M42 and M45 ([nebulae](../nebulae/README.md)) and the galaxies M31, M33, M49, M81, M83, M87, M95 and M101 ([galaxies](../galaxies/README.md)). The other 97 share the routes below. Each package's README names its own sources, numbers and known problems.
 
 ## What is drawn
 
@@ -11,7 +11,8 @@ Twelve were built one at a time, with their own guides: the nebulae M1, M8, M42 
 | Globular clusters (29) | M2, M3, M4, M5, M9, M10, M12, M13, M14, M15, M19, M22, M28, M30, M53, M54, M55, M56, M62, M68, M69, M70, M71, M72, M75, M79, M80, M92, M107 | One dot per member star, in its Gaia color | Members: [Hunt & Reffert (2023)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114). Distance and position: [Baumgardt & Vasiliev (2021)](https://doi.org/10.1093/mnras/stab1474) |
 | Open clusters (25) | M6, M7, M11, M18, M21, M23, M25, M26, M29, M34, M35, M36, M37, M38, M39, M41, M44, M46, M47, M48, M50, M52, M67, M93, M103 | One dot per member star, in its Gaia color | Members, distance, position and age: Hunt & Reffert (2023) |
 | Disc galaxies seen from above (15) | M51, M58, M61, M63, M64, M66, M74, M77, M88, M91, M94, M96, M99, M100, M109 | A Sloan Digital Sky Survey picture laid flat on the measured disc | Tilt: [PHANGS](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43) where it lists the galaxy, else [HyperLEDA](http://atlas.obs-hp.fr/hyperleda/). Distance: [Cosmicflows-4](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94), else PHANGS or Cosmicflows-3 |
-| Ellipticals, lenticulars and steep discs (17) | M32, M59, M60, M65, M82, M84, M85, M86, M89, M90, M98, M102, M104, M105, M106, M108, M110 | A Sloan picture standing flat, facing the Sun | Same distances; no shape is drawn |
+| Ellipticals with a published profile (6) | M59, M60, M84, M85, M86, M89 | A volume of starlight: the Sloan picture, cleaned of stars and neighbours, spread in depth through the galaxy's measured profile, with its globular clusters as dots | Profile and shape: [Kormendy et al. (2009)](https://arxiv.org/abs/0810.1681). Clusters: [Jordán et al. (2009)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/180/54). Same distances |
+| Other ellipticals, lenticulars and steep discs (11) | M32, M65, M82, M90, M98, M102, M104, M105, M106, M108, M110 | A Sloan picture standing flat, facing the Sun | Same distances; no shape is drawn |
 | Nebulae (9) | M16, M17, M20, M27, M43, M57, M76, M78, M97 | An ESO, Hubble or NOIRLab photograph standing flat, facing the Sun (M97: a Sloan picture); M16 and M78 also draw their cluster's stars | Distance: Hunt & Reffert (M16, M78), [Kuhn et al. (2019)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/870/32) (M17, M20), Menten et al. (2007) (M43), [Chornay & Walton (2021)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110) (the four planetary nebulae) |
 | Stars (2 entries) | M40: HD 238107 and HD 238108. M73: BD-13 5809, HD 358033 and BD-13 5808 | Each star as a body, with its Gaia color and limb | Gaia DR3; the two entries are chance alignments, so neither has a package of its own |
 
@@ -30,6 +31,7 @@ Each tile is the object's own page in headless Chromium at 1440 × 900, device p
 | Star positions, colors and membership; distances; galaxy tilts, sizes and colors | Measured, each cited in its package |
 | A cluster star's depth inside its cluster | Assumed: the cluster is drawn as deep as it is wide on the sky |
 | Which edge of a tilted galaxy is nearer | Assumed: no catalogue used here gives it |
+| The depth of an elliptical's light and of its globular clusters | Modelled: the published Sérsic profile, deprojected on a spheroid whose axis lies in the plane of the sky. The light along each sight line is the picture's |
 | The plane of a flat picture that faces the Sun | Not a shape: it is where a picture of the sky lies |
 | Dot size and tone, picture rims, framing radii | Presentation |
 
@@ -38,6 +40,8 @@ Each tile is the object's own page in headless Chromium at 1440 × 900, device p
 - `appearance.colorByBpRp` in [prepare-catalogue-points](../../packages/bake/cli/prepare-catalogue-points.mts): a dot's color from its Gaia BP-RP through the fit of Cardiel et al. (2021), the one the nebula star fields already use.
 - `geometry.unit: "pc"` in the [image-layer recipe](../../packages/bake/src/image-layers/config.ts): a bank in parsecs. A nebula a few parsecs across is smaller than one CSS pixel in kiloparsecs, and its picture was drawn far too large.
 - The `open-cluster` classification beside `globular-cluster`.
+
+The six volumes use the Nebula Lab route of [M49](../../src/objects/m49-volume/README.md#method) unchanged; their recipes are `labs/nebula/models/m59` to `m89`.
 
 ## Reproduce
 
@@ -56,6 +60,17 @@ node site/build/prepare/prepare-volume-presentation.mts --object=m51-layers
 node packages/bake/cli/prepare-object.mts m51
 ```
 
+An elliptical's volume, from its lab recipe:
+
+```sh
+node labs/nebula/run.mts prepare-emission labs/nebula/models/m60/experiment.json
+node labs/nebula/run.mts prepare-nebula-objects --research --object=m60-volume
+node packages/bake/cli/prepare-nebulae.mts --object=m60-volume
+node packages/bake/cli/prepare-catalogue-points.mts src/objects/m60-volume jordan-gc
+node packages/bake/cli/merge-catalogue-points.mts src/objects/m60-volume dots
+node packages/bake/cli/prepare-object.mts m60
+```
+
 Member tables, survey cutouts and photographs are not tracked: each manifest names the query or address that restores them.
 
 ## Left out
@@ -66,6 +81,8 @@ Member tables, survey cutouts and photographs are not tracked: each manifest nam
 ## Known problems
 
 - Gaia misses stars where they crowd, so the core of a globular cluster holds fewer dots than stars.
-- A flat picture seen from the side is a line. Volumes for the planetary nebulae and the ellipticals, from their published shapes, are the next step ([ledgers](../../src/objects/m57-layers/investigations.json)).
+- A flat picture seen from the side is a line. M32, M105 and M110 are not in Kormendy et al.'s Virgo sample and stay flat pictures; a volume for a planetary nebula needs its published axis and inclination ([ledgers](../../src/objects/m57-layers/investigations.json)).
+- A volume's page frames the whole measured profile, so the galaxy arrives smaller on the screen than a flat picture does.
+- A volume's depth is modelled. M86's fit has a half-light radius beyond its measured profile, and its paper calls the fit's index unusually large.
 - The Sloan pictures are shallow: faint outer light is lost and the brightest centres may be saturated.
 - The Milky Way's cluster catalogues still draw each of these clusters as one dot of their own.
