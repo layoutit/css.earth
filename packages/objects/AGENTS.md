@@ -149,3 +149,9 @@ Authored density placement and observed stellar catalogue wire types, schema ide
 `src/volume/`, exported by `@cssearth/objects`. Envelope admission is separate from stellar-row parsing to preserve
 caller validation order. Transforms, fitting, projection, display selection and file I/O stay with bake/reconstruction/lab.
 Contract tests use node:test in the packages lane.
+
+Saved CSS camera snapshots (`CameraPose`), their schema identifier and pure matrix admission live in
+`src/prepared-data/camera-pose.ts`, exported through the browser-safe main entry. Share links retain
+bounded proper-rotation validation; live restore retains finite-matrix admission before renderer projects
+it to a rotation. DOMMatrix, camera controls and URL/base64 transport stay in renderer. Contract tests
+use node:test in the packages lane.

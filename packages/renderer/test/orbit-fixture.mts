@@ -1,4 +1,4 @@
-import { type CameraPlan } from '@cssearth/objects';
+import { CAMERA_POSE_SCHEMA, type CameraPlan } from '@cssearth/objects';
 
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import type { RuntimePolicy } from '@cssearth/renderer/navigation/runtime-policy.ts';
@@ -53,7 +53,7 @@ export function orbitFixture(runtimePolicy: RuntimePolicy, failure: OrbitFailure
   const acquire = (name: string): NativeOwner => { if (failure === name) throw new Error(`${name} failure`); owners.add(name); return { mobile: false, update() {}, stop() {}, stats: () => ({}), destroy() { owners.delete(name); if (cleanupFailure && name === "wheel") throw new Error("wheel cleanup failure"); } }; };
   // These objects model only the browser boundary reached by this fixture.
   const controlled = {
-    createCameraOrientation() { return { scene: () => "matrix3d(1)", sceneMatrix: () => ({ m11: 1, m22: 1, m33: 1, m12: 0, m13: 0, m21: 0, m23: 0, m31: 0, m32: 0 }), sunViewDirection: () => [0, 0, 1], captureCounterRotation: () => () => "matrix3d(1)", setSceneRotation() {}, reset() {}, rotate() {}, rebaseScene() {}, prepareFlight: () => ({ angularDistance: 0, sample() {} }), restore() {}, snapshot: () => ({ schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1)' }) }; },
+    createCameraOrientation() { return { scene: () => "matrix3d(1)", sceneMatrix: () => ({ m11: 1, m22: 1, m33: 1, m12: 0, m13: 0, m21: 0, m23: 0, m31: 0, m32: 0 }), sunViewDirection: () => [0, 0, 1], captureCounterRotation: () => () => "matrix3d(1)", setSceneRotation() {}, reset() {}, rotate() {}, rebaseScene() {}, prepareFlight: () => ({ angularDistance: 0, sample() {} }), restore() {}, snapshot: () => ({ schema: CAMERA_POSE_SCHEMA, scene: 'matrix3d(1)' }) }; },
     HTMLElement: { [Symbol.hasInstance](value: unknown): boolean { return value instanceof Surface; } },
     matchMedia: () => new MediaQuery(),
     createUnboundedMatrixDragControls(options: DragOptions) { callbacks.drag = options; acquire("drag"); return { update() {}, stop() {}, stats: () => ({}), destroy() { owners.delete('drag'); if (cleanupFailure && failure === 'drag') throw new Error('drag cleanup failure'); }, invalidateTrackball() {} }; },

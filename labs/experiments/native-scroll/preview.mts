@@ -1,9 +1,8 @@
 import { createServer } from 'node:http';
 import { parseHTML } from 'linkedom';
-import { parseObjectDescriptor } from '@cssearth/objects';
+import { CAMERA_POSE_SCHEMA, parseObjectDescriptor, parsePreparedWorldCameraFrame } from '@cssearth/objects';
 import { serializePreparedScene, loadPreparedCssObject, initialObjectSelection } from '@cssearth/renderer';
 import { parseSharedView, formatSharedView } from '@cssearth/renderer/navigation';
-import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
 import { preparedSceneMatrix } from '@cssearth/engine';
 import { serializePreparedMatrix4 } from '@cssearth/core';
 import { distanceForSilhouetteRadius } from '@cssearth/engine';
@@ -95,7 +94,7 @@ createServer((request, response) => {
         // focal length. This proof does not add a device-specific view.
         saved = {
           camera: { distanceKilometers: distanceForSilhouetteRadius(frame.bodyRadiusM, 1000, 200, [0, 0]) / 1000,
-            pose: { schema: 'cssearth-camera-pose@2', scene: serializePreparedMatrix4(preparedSceneMatrix(definition.camera,
+            pose: { schema: CAMERA_POSE_SCHEMA, scene: serializePreparedMatrix4(preparedSceneMatrix(definition.camera,
               definition.camera.defaultControlPitchDegrees, definition.camera.defaultControlYawDegrees)) } },
           playback: { speed: 1, motionRequested: false, times: (definition.motion ?? []).map(() => 0) },
           preparedEpochJdTt: frame.epochJdTt,

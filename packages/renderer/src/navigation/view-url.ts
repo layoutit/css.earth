@@ -1,6 +1,6 @@
-import type { PhysicalCameraPose } from './types.js';
+import { CAMERA_POSE_SCHEMA, parseCameraPose, parseCameraPoseMatrix, type CameraPose } from '@cssearth/objects';
 export interface SharedPlayback { times: readonly number[]; speed: number; motionRequested: boolean; }
-export interface PhysicalSharedCamera { distanceKilometers: number; pose: PhysicalCameraPose; bodyCenterKilometers?: readonly [number, number, number]; projectionScale?: number; }
+export interface PhysicalSharedCamera { distanceKilometers: number; pose: CameraPose; bodyCenterKilometers?: readonly [number, number, number]; projectionScale?: number; }
 export interface SharedView { camera: PhysicalSharedCamera; playback: SharedPlayback; preparedEpochJdTt: number | null; }
 function invalid(key = "v"): never { throw new Error(`Invalid “${key}” in this view link.`); }
 function base64url(bytes: Uint8Array) {
@@ -9,33 +9,11 @@ function base64url(bytes: Uint8Array) {
 
 const SHARED_VERSION = 5;
 const MAX_SHARED_BYTES = 4096;
-const MINIMAL_POSE_SCHEMA = "cssearth-camera-pose@2";
 const MATRIX_INDICES = [0, 1, 2, 4, 5, 6, 8, 9, 10];
 
 function record(value: unknown, keys: readonly string[], label: string): asserts value is Record<string, unknown> {
   if (value === null || typeof value !== "object" || Array.isArray(value) ||
       Object.keys(value).some(key => !keys.includes(key))) invalid(label);
-}
-
-function poseMatrix(value: unknown) {
-  if (typeof value !== "string" || value.length > 1024) invalid("pose");
-  const match = /^matrix3d\(([^)]+)\)$/u.exec(value);
-  if (!match) invalid("pose");
-  const fields = match[1].split(",").map(field => field.trim());
-  if (fields.length !== 16 || fields.some(field => !/^[+-]?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?$/iu.test(field))) invalid("pose");
-  const matrix = fields.map(Number);
-  if (!matrix.every(Number.isFinite) || [3, 7, 11, 12, 13, 14].some(index => Math.abs(matrix[index]) > 1e-9) ||
-      Math.abs(matrix[15] - 1) > 1e-9) invalid("pose");
-  // The saved values are rotations, rounded by the live CSS serializer.
-  for (let a = 0; a < 3; a += 1) for (let b = a; b < 3; b += 1) {
-    const dot = matrix[a * 4] * matrix[b * 4] + matrix[a * 4 + 1] * matrix[b * 4 + 1] + matrix[a * 4 + 2] * matrix[b * 4 + 2];
-    if (Math.abs(dot - (a === b ? 1 : 0)) > 1e-4) invalid("pose");
-  }
-  const determinant = matrix[0] * (matrix[5] * matrix[10] - matrix[6] * matrix[9]) -
-    matrix[4] * (matrix[1] * matrix[10] - matrix[2] * matrix[9]) +
-    matrix[8] * (matrix[1] * matrix[6] - matrix[2] * matrix[5]);
-  if (Math.abs(determinant - 1) > 1e-4) invalid("pose");
-  return matrix;
 }
 
 function validateShared(view: unknown): asserts view is SharedView {
@@ -51,9 +29,7 @@ function validateShared(view: unknown): asserts view is SharedView {
         Math.abs(Math.hypot(...centre) - camera.distanceKilometers) > camera.distanceKilometers * 1e-12) invalid('camera');
   }
   const pose = camera.pose;
-  record(pose, ["schema", "scene"], "pose");
-  if (pose.schema !== MINIMAL_POSE_SCHEMA) invalid("pose");
-  poseMatrix(pose.scene);
+  parseCameraPose(pose);
   if (view.preparedEpochJdTt !== null &&
     (typeof view.preparedEpochJdTt !== "number" || !Number.isFinite(view.preparedEpochJdTt))) invalid("preparedEpochJdTt");
   record(playback, ["times", "speed", "motionRequested"], "playback");
@@ -90,7 +66,7 @@ export function formatSharedView(view: SharedView) {
   if (playback.speed !== 1) { flags |= 8; values.push(playback.speed); }
   if (camera.projectionScale !== undefined && camera.projectionScale !== 1) { flags |= 256; values.push(camera.projectionScale); }
   if (playback.motionRequested) flags |= 16;
-  const matrix = poseMatrix(view.camera.pose.scene), quaternion = matrixQuaternion(matrix);
+  const matrix = parseCameraPoseMatrix(view.camera.pose.scene), quaternion = matrixQuaternion(matrix);
   let largest = 0;
   for (let i = 1; i < 4; i += 1) if (Math.abs(quaternion[i]) > Math.abs(quaternion[largest])) largest = i;
   const sign = quaternion[largest] < 0 ? -1 : 1;
@@ -134,7 +110,7 @@ function parseCurrentShared(bytes: Uint8Array): SharedView {
     matrix = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
     for (const index of MATRIX_INDICES) matrix[index] = read();
   } else matrix = quaternionMatrix(expandQuaternion([read(), read(), read()], (flags >> 6) & 3));
-  view.camera.pose = { schema: MINIMAL_POSE_SCHEMA, scene: serializeMatrix(matrix) };
+  view.camera.pose = { schema: CAMERA_POSE_SCHEMA, scene: serializeMatrix(matrix) };
   if (offset + 2 > bytes.length) invalid();
   const count = data.getUint16(offset); offset += 2;
   if (offset + count * 8 !== bytes.length) invalid();

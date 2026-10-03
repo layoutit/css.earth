@@ -1,6 +1,6 @@
-import { validateWorldRotation, type CameraPlan } from '@cssearth/objects';
+import { CAMERA_POSE_SCHEMA, parseRestoredCameraPose, validateWorldRotation, type CameraPose, type CameraPlan } from '@cssearth/objects';
 
-import type { CameraAngles, CameraPose, Quaternion, Vector3 } from './types.js';
+import type { CameraAngles, Quaternion, Vector3 } from './types.js';
 
 export interface CameraOrientationOptions extends CameraAngles { cameraPlan: CameraPlan; sunDirection?: Vector3 | null; }
 export type CameraOrientation = ReturnType<typeof createCameraOrientation>;
@@ -71,11 +71,11 @@ export function createCameraOrientation({
       });
     },
     snapshot(): CameraPose {
-      return Object.freeze({ schema: "cssearth-camera-pose@2", scene: formatMatrix3d(sceneMatrix) });
+      return Object.freeze({ schema: CAMERA_POSE_SCHEMA, scene: formatMatrix3d(sceneMatrix) });
     },
     restore(snapshot: CameraPose) {
-      if (snapshot?.schema !== "cssearth-camera-pose@2") throw new TypeError("Physical camera pose is invalid.");
-      sceneMatrix = rotationOf(parseCameraPoseMatrix(snapshot.scene, "scene"));
+      // Numeric construction preserves float64 across repeated URL restore cycles.
+      sceneMatrix = rotationOf(new DOMMatrix(parseRestoredCameraPose(snapshot)));
       invalidatePresentations();
     },
     rotate({ renderedPitchDelta, yawDelta, rotation }: { renderedPitchDelta: number; yawDelta: number; rotation?: Quaternion }) {
@@ -140,29 +140,6 @@ function formatMatrix3d(matrix: DOMMatrixReadOnly) {
   ].map((value) => Math.abs(value) < 1e-12
     ? 0
     : Number(value.toFixed(12))).join(",")})`;
-}
-
-function parseCameraPoseMatrix(value: string, label: string) {
-  if (typeof value !== "string" || !/^matrix3d\([^()]+\)$/u.test(value)) {
-    throw new TypeError(`Camera camera ${label} matrix is invalid.`);
-  }
-  // CSS-string parsing in browsers rounds to float32. Numeric construction
-  // preserves the saved float64 pose across repeated URL restore cycles.
-  const components = value.slice(9, -1).split(",").map(Number);
-  if (components.length !== 16 || components.some(component => !Number.isFinite(component))) {
-    throw new TypeError(`Camera camera ${label} matrix is invalid.`);
-  }
-  const matrix = new DOMMatrix(components);
-  const values = [
-    matrix.m11, matrix.m12, matrix.m13, matrix.m14,
-    matrix.m21, matrix.m22, matrix.m23, matrix.m24,
-    matrix.m31, matrix.m32, matrix.m33, matrix.m34,
-    matrix.m41, matrix.m42, matrix.m43, matrix.m44,
-  ];
-  if (values.some((component) => !Number.isFinite(component))) {
-    throw new TypeError(`Camera camera ${label} matrix is invalid.`);
-  }
-  return matrix;
 }
 
 function createSceneMatrix(controlPitch: number, controlYaw: number, cameraPlan: CameraPlan) {

@@ -9,7 +9,7 @@ const multiply = (a: readonly number[], b: readonly number[]) => Array.from({ le
 });
 const yaw = (degrees: number) => { const c = Math.cos(degrees * Math.PI / 180), s = Math.sin(degrees * Math.PI / 180); return [c, 0, s, 0, 1, 0, -s, 0, c]; };
 const pitch = (degrees: number) => { const c = Math.cos(degrees * Math.PI / 180), s = Math.sin(degrees * Math.PI / 180); return [1, 0, 0, 0, c, -s, 0, s, c]; };
-// A matrix read back from a CSS string, which browsers hold at float32 (camera-orientation.ts parseCameraPoseMatrix).
+// A matrix read back from a CSS string, which browsers hold at float32 (objects camera-pose.ts parseRestoredCameraPose).
 const fromCss = (rows: readonly number[]) => rows.map(Math.fround);
 
 it('a rebase by a matrix read from CSS leaves the camera check, and its nearest rotation passes it', () => {
