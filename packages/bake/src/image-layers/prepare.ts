@@ -11,6 +11,7 @@ import { resizeRgbaLanczos3 } from './resize-rgba.ts';
 import { imageLayerDisc, imageLayerView, norm, rad } from './disc.ts';
 import { removeCompanionGalaxies, removeForegroundStars, type CompanionEllipse, type ForegroundRemoval } from './foreground.ts';
 import { imageLayerBulgeModel } from './bulge.ts';
+import { imageLayerShapeModel, lowerEnvelope } from './shape.ts';
 import { compileVolumeLeaf } from '../volume-leaves/index.ts';
 
 const M_PER_PC = 3.0856775814913673e16, M_PER_KPC = M_PER_PC * 1000;
@@ -107,7 +108,8 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
   // A parsec bank (`geometry.unit`) is the same bake with every length a thousand times as many units; the origin keeps the true distance.
   const unitsPerKpc=options.recipe.geometry.unit==='pc'?1000:1,{rgb,info,foreground,companions,colorTie}=await prepareImageLayerFace(options);
   const recipe:ImageLayerRecipe=unitsPerKpc===1?options.recipe:{...options.recipe,target:{...options.recipe.target,distancePc:options.recipe.target.distancePc*unitsPerKpc},
-    geometry:{...options.recipe.geometry,thicknessKpc:options.recipe.geometry.thicknessKpc*unitsPerKpc,supportRadiusKpc:options.recipe.geometry.supportRadiusKpc*unitsPerKpc}};
+    geometry:{...options.recipe.geometry,thicknessKpc:options.recipe.geometry.thicknessKpc*unitsPerKpc,supportRadiusKpc:options.recipe.geometry.supportRadiusKpc*unitsPerKpc,
+      ...(options.recipe.geometry.shape?{shape:{...options.recipe.geometry.shape,semiAxesKpc:{polar:options.recipe.geometry.shape.semiAxesKpc.polar*unitsPerKpc,major:options.recipe.geometry.shape.semiAxesKpc.major*unitsPerKpc,minor:options.recipe.geometry.shape.semiAxesKpc.minor*unitsPerKpc}}}:{})}};
   const base=Buffer.alloc(info.width*info.height*4), floor=recipe.bake.backgroundFloor*255;
   for(let p=0;p<info.width*info.height;p++) { const i=p*3,o=p*4,r=Math.max(0,rgb[i]-floor),g=Math.max(0,rgb[i+1]-floor),b=Math.max(0,rgb[i+2]-floor),a=Math.max(r,g,b);
     base[o]=a?Math.round(r*255/a):0;base[o+1]=a?Math.round(g*255/a):0;base[o+2]=a?Math.round(b*255/a):0;base[o+3]=Math.round(a*255/(255-floor)); }
@@ -148,6 +150,36 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       // thickness through the bulge.
       const discTau=recipe.geometry.bulge!.lightFrom==='fit'?tau-Math.min(tau,lightScale*l.bulge*bulgeModel.fade(east,north)):(1-w)*(1-share)*tau+w*Math.min(tau,lightScale*l.disc);
       bulgeTau[py*info.width+px]=tau-discTau;base[i]=Math.round(255*(1-Math.exp(-discTau)));}}
+  // A nebula's published shape is filled evenly: one emissivity and one color for the whole ellipsoid. In each color
+  // channel the ellipsoid's light per unit chord is the 5th percentile, over the sight lines whose chord is at least half
+  // the longest, of what the smooth part of the picture's light there can give (its lower envelope, so fine detail,
+  // bright or dark, stays on the flat picture). Nearly every sight line can then give its chord's worth in full, in every
+  // channel, so the ellipsoid holds none of the picture's structure: a camera near the nebula sees the slices in
+  // perspective, and structure in them would smear outward from the centre. The few sight lines that cannot give less.
+  // Sight lines whose chord is under one slice give nothing the slices could not hold.
+  const shapeModel=recipe.geometry.shape?imageLayerShapeModel(recipe):null;let shapeTau:Float32Array|null=null,shapeEmissivity=0,shapeColor:number[]|null=null;
+  if(shapeModel){const {share,smoothPixels}=recipe.geometry.shape!,count=info.width*info.height,tau=new Float32Array(count),chords=new Float32Array(count),fronts=new Float32Array(count),step=2*shapeModel.height/recipe.bake.bulgeSlices!;
+    for(let p=0;p<count;p++)tau[p]=-Math.log(1-Math.min(base[4*p+3]/255,.998));
+    // Each sight line's chord, and the part of it nearer the Sun than the flat picture.
+    let longest=0;
+    for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++){const u=2*(px+.5)/info.width-1,v=1-2*(py+.5)/info.height,ray=rayLocal(u,v),ends=shapeModel.span(ray[0]/ray[2]*distanceKpc,ray[1]/ray[2]*distanceKpc);if(!ends)continue;
+      const p=py*info.width+px,chord=ends[1]-ends[0];chords[p]=chord;fronts[p]=Math.max(0,Math.min(1,(intersect(u,v,0)[2]-ends[0])/chord));longest=Math.max(longest,chord);}
+    // The smooth light of each channel (color times opacity, 0 to 1) and the rate each can give.
+    const smooth=[0,1,2].map(c=>{const light=new Float32Array(count);for(let p=0;p<count;p++)light[p]=base[4*p+c]!/255*Math.min(base[4*p+3]!/255,.998);return lowerEnvelope(light,info.width,info.height,smoothPixels);});
+    const rates=smooth.map(envelope=>{const ratios:number[]=[];for(let p=0;p<count;p++)if(chords[p]!>=longest/2)ratios.push(envelope[p]!/chords[p]!);ratios.sort((a,b)=>a-b);return ratios.length?ratios[Math.floor(ratios.length/20)]!:0;});
+    shapeEmissivity=Math.max(...rates);const color=rates.map(rate=>shapeEmissivity>0?Math.round(255*rate/shapeEmissivity):0);shapeColor=color;shapeTau=new Float32Array(count);
+    if(shapeEmissivity>0)for(let p=0;p<count;p++){if(!(chords[p]!>step))continue;
+      let fraction=1;for(let c=0;c<3;c++)if(rates[c]!>0)fraction=Math.min(fraction,share*smooth[c]![p]!/(rates[c]!*chords[p]!));
+      shapeTau[p]=Math.min(tau[p]!,fraction*shapeEmissivity*chords[p]!);}
+    // The flat picture keeps the rest of the optical depth, and takes the color that makes the slices in front of it, the
+    // picture and the slices behind it add up to the photograph along the Sun's sight line. Where that color would pass
+    // full brightness the picture keeps a little more opacity instead.
+    for(let p=0;p<count;p++){const moved=shapeTau[p]!;if(!(moved>0))continue;
+      const i=4*p,front=Math.exp(-moved*fronts[p]!),back=Math.exp(-moved*(1-fronts[p]!)),whole=1-Math.exp(-tau[p]!);
+      let alpha=Math.round(255*(1-Math.exp(-(tau[p]!-moved)))),need=[0,0,0];
+      for(let pass=0;pass<2;pass++){need=[0,1,2].map(c=>Math.max(0,(base[i+c]!*whole-color[c]!*((1-front)+front*(1-alpha/255)*(1-back)))/front));alpha=Math.min(255,Math.max(alpha,Math.ceil(Math.max(...need))));}
+      for(let c=0;c<3;c++)base[i+c]=alpha?Math.min(255,Math.round(255*need[c]!/alpha)):0;base[i+3]=alpha;}}
+  const volumeTau=bulgeTau??shapeTau,volumeDensity=bulgeModel?bulgeModel.density:shapeModel?shapeModel.density:null,volumeHeight=recipe.geometry.bulge?.extentKpc.height??shapeModel?.height??0;
   let left=info.width,top=info.height,right=-1,bottom=-1;
   for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++)if(base[4*(py*info.width+px)+3]){left=Math.min(left,px);right=Math.max(right,px);top=Math.min(top,py);bottom=Math.max(bottom,py);}
   if(right<left)throw new TypeError('Physical support removed the complete observation.');
@@ -162,7 +194,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     diffuse[i+3]=Math.round(255*ad);residual[i+3]=Math.round(255*(a-ad)/Math.max(1-ad,1e-9));}
   await mkdir(resolve(options.outputDirectory,'layers'),{recursive:true});
   const leaves: Quad[]=[], resources: PreparedImageLayerBank['resources']=[];
-  const encode=async(rgba:Buffer,width:number,height:number,path:string)=>{ const bytes=await sharp(rgba,{raw:{width,height,channels:4}}).webp({quality:recipe.bake.encoding.quality,alphaQuality:recipe.bake.encoding.alphaQuality??100,effort:5}).toBuffer(); await writeFile(resolve(options.outputDirectory,path),bytes); resources.push({path,bytes:bytes.length,width,height}); return bytes; };
+  const encode=async(rgba:Buffer,width:number,height:number,path:string,lossless=false)=>{ const bytes=await sharp(rgba,{raw:{width,height,channels:4}}).webp(lossless?{lossless:true,effort:5}:{quality:recipe.bake.encoding.quality,alphaQuality:recipe.bake.encoding.alphaQuality??100,effort:5}).toBuffer(); await writeFile(resolve(options.outputDirectory,path),bytes); resources.push({path,bytes:bytes.length,width,height}); return bytes; };
   const cropWidth=right-left+1,cropHeight=bottom-top+1,u0=2*left/info.width-1,u1=2*(right+1)/info.width-1,v0=1-2*top/info.height,v1=1-2*(bottom+1)/info.height;
   const diffuseCrop=extractSized(diffuse,info.width,left,top,right+1,bottom+1),residualCrop=extractSized(residual,info.width,left,top,right+1,bottom+1);
   const diffuseScale=Math.min(1,recipe.bake.diffuseFacePixels/Math.max(cropWidth,cropHeight)),dw=Math.max(1,Math.round(cropWidth*diffuseScale)),dh=Math.max(1,Math.round(cropHeight*diffuseScale));
@@ -191,39 +223,50 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       const offset=axis==='x'?(v[0][0]+v[1][0])/2:(v[0][1]+v[1][1])/2;
       leaves.push({id:`${axis}-${s}`,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:sideWidth,heightPx:depth,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,sideWidth,depth,leaves.length),bytes:bytes.length}); }};
   if(!flat){await side('x');await side('y');}
-  if(bulgeModel&&bulgeTau){
-    // The bulge's light, spread along each of our sight lines by the spheroid's density: slices parallel to the disc for the
+  if(volumeTau&&volumeDensity){
+    // The bulge's light (or a nebula shape's), spread along each of our sight lines by the spheroid's density: slices parallel to the disc for the
     // z bank, curtains through image columns and rows for the side banks. Along every sight line from the Sun the slices
     // add up to the photograph's bulge light, so the view from the Sun is unchanged.
-    let bl=info.width,bt=info.height,br=-1,bb=-1;for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++)if(bulgeTau[py*info.width+px]>1e-3){bl=Math.min(bl,px);br=Math.max(br,px);bt=Math.min(bt,py);bb=Math.max(bb,py);}
-    if(br<bl)throw new TypeError(`${recipe.id}: the bulge fit (${recipe.geometry.bulge!.source}) leaves no light inside ${recipe.geometry.bulge!.extentKpc.radius} kpc.`);
+    let bl=info.width,bt=info.height,br=-1,bb=-1;for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++)if(volumeTau[py*info.width+px]>1e-3){bl=Math.min(bl,px);br=Math.max(br,px);bt=Math.min(bt,py);bb=Math.max(bb,py);}
+    if(br<bl)throw new TypeError(`${recipe.id}: ${recipe.geometry.bulge?`the bulge fit (${recipe.geometry.bulge.source}) leaves no light inside ${recipe.geometry.bulge.extentKpc.radius} kpc`:`the shape (${recipe.geometry.shape!.source}) holds no light of the picture`}.`);
     const bw=br-bl+1,bh=bb-bt+1,fscale=Math.min(1,recipe.bake.bulgeFacePixels!/Math.max(bw,bh)),sw=Math.max(2,Math.round(bw*fscale)),sh=Math.max(2,Math.round(bh*fscale));
-    const bu0=2*bl/info.width-1,bu1=2*(br+1)/info.width-1,bv0=1-2*bt/info.height,bv1=1-2*(bb+1)/info.height,height=recipe.geometry.bulge!.extentKpc.height;
+    const bu0=2*bl/info.width-1,bu1=2*(br+1)/info.width-1,bv0=1-2*bt/info.height,bv1=1-2*(bb+1)/info.height,height=volumeHeight;
     // Bulge optical depth and color on a coarser grid (texel centres in crop u, v), box-averaged from the face image.
     const cell=(i:number,j:number,cols:number,rows:number)=>{const x0=bl+Math.floor(i*bw/cols),x1=Math.max(x0+1,bl+Math.floor((i+1)*bw/cols)),y0=bt+Math.floor(j*bh/rows),y1=Math.max(y0+1,bt+Math.floor((j+1)*bh/rows));
-      let tau=0;const color=[0,0,0];for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){const t=bulgeTau[y*info.width+x],k=4*(y*info.width+x);tau+=t;for(let c=0;c<3;c++)color[c]+=t*base[k+c];}
-      const n=(x1-x0)*(y1-y0);return {tau:tau/n,color:color.map(c=>tau?c/tau:0)};};
+      let tau=0;const color=[0,0,0];for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){const t=volumeTau[y*info.width+x],k=4*(y*info.width+x);tau+=t;for(let c=0;c<3;c++)color[c]+=t*base[k+c];}
+      const n=(x1-x0)*(y1-y0);return {tau:tau/n,color:shapeColor??color.map(c=>tau?c/tau:0)};};
     const at=(i:number,j:number,cols:number,rows:number)=>({u:bu0+(bu1-bu0)*(i+.5)/cols,v:bv0+(bv1-bv0)*(j+.5)/rows});
     // Optical depth per unit density along the Sun's sight line through (u, v): the bulge light over the density summed
     // across the z slices, each weighted by its path length there.
     const slices=recipe.bake.bulgeSlices!,offsets=Array.from({length:slices},(_,k)=>height*((k+.5)/slices*2-1)),step=2*height/slices;
-    const scaleAt=(u:number,v:number,tau:number)=>{const ray=rayLocal(u,v),path=step/Math.abs(dot(diskNormal,norm(ray)));let sum=0;for(const z of offsets)sum+=bulgeModel.density(intersect(u,v,z))*path;return sum>0?tau/sum:0;};
+    const scaleAt=(u:number,v:number,tau:number)=>{const ray=rayLocal(u,v),path=step/Math.abs(dot(diskNormal,norm(ray)));let sum=0;for(const z of offsets)sum+=volumeDensity(intersect(u,v,z))*path;return sum>0?tau/sum:0;};
     const grid=Array.from({length:sw*sh},(_,k)=>{const i=k%sw,j=Math.floor(k/sw),{tau,color}=cell(i,j,sw,sh),{u,v}=at(i,j,sw,sh);return {u,v,color,scale:scaleAt(u,v,tau),path:step/Math.abs(dot(diskNormal,norm(rayLocal(u,v))))};});
-    const push=async(id:string,axis:LayerAxis,rgba:Buffer,width:number,height:number,v:Quad['verticesUnits'],offset:number)=>{const path=`layers/${id}.webp`,bytes=await encode(rgba,width,height,path);
+    // A shape's slices are faint (a sight line's light over up to all of them), so they are kept lossless and each
+    // slice's rounding is carried to the next one along the sight line: the slices then add up to the picture's light.
+    // A browser holds a slice's color premultiplied in 8 bits, a whole number no larger than its alpha (3 or 4 here), and
+    // drops the rest: so the color's light is rounded to that whole number, its rounding carried on like the alpha's, and
+    // written as the smallest color that premultiplies to it whether the browser rounds or truncates.
+    const exact=shapeModel!==null,quantise=(tau:number,carry:Float32Array,t:number)=>{if(!exact)return Math.round(255*(1-Math.exp(-tau)));
+      const wanted=tau+carry[t]!,alpha=Math.max(0,Math.min(254,Math.round(255*(1-Math.exp(-wanted)))));carry[t]=wanted+Math.log(1-alpha/255);return alpha;};
+    const tint=(color:number,alpha:number,carry:Float32Array|undefined,t:number)=>{if(!carry)return Math.round(color);if(!alpha)return 0;
+      const wanted=color/255*alpha+carry[t]!,light=Math.max(0,Math.min(alpha,Math.round(wanted)));carry[t]=wanted-light;return Math.min(255,Math.ceil(light*255/alpha));};
+    const tintCarry=(size:number)=>exact?[0,1,2].map(()=>new Float32Array(size)):[];
+    const push=async(id:string,axis:LayerAxis,rgba:Buffer,width:number,height:number,v:Quad['verticesUnits'],offset:number)=>{const path=`layers/${id}.webp`,bytes=await encode(rgba,width,height,path,exact);
       leaves.push({id,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:width,heightPx:height,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,width,height,leaves.length),bytes:bytes.length});};
+    const sliceCarry=new Float32Array(sw*sh),sliceTint=tintCarry(sw*sh);
     for(const [k,z] of offsets.entries()){const rgba=Buffer.alloc(sw*sh*4);
-      for(const [t,g] of grid.entries()){const tau=g.scale*bulgeModel.density(intersect(g.u,g.v,z))*g.path,o=4*t;for(let c=0;c<3;c++)rgba[o+c]=Math.round(g.color[c]);rgba[o+3]=Math.round(255*(1-Math.exp(-tau)));}
+      for(const [t,g] of grid.entries()){const tau=g.scale*volumeDensity(intersect(g.u,g.v,z))*g.path,o=4*t,alpha=tau>0?quantise(tau,sliceCarry,t):0;for(let c=0;c<3;c++)rgba[o+c]=tint(g.color[c]!,alpha,sliceTint[c],t);rgba[o+3]=alpha;}
       await push(`bulge-z-${String(k).padStart(2,'0')}`,'z',rgba,sw,sh,[intersect(bu0,bv0,z),intersect(bu1,bv0,z),intersect(bu1,bv1,z),intersect(bu0,bv1,z)],z);}
     // Side curtains: through image columns (x) or rows (y) across the bulge, each carrying the density in its own plane
     // times the curtain spacing, so looking across them adds the density along that line.
     const crossSlices=recipe.bake.bulgeCrossSlices!,depthPx=Math.max(8,Math.round(sh*2*height/Math.max(1e-9,Math.hypot(...difference3(intersect(bu0,bv0,0),intersect(bu0,bv1,0)))))),alongPx=(axis:'x'|'y')=>axis==='x'?sh:sw;
-    for(const axis of ['x','y'] as const){const along=alongPx(axis);
+    for(const axis of ['x','y'] as const){const along=alongPx(axis),curtainCarry=new Float32Array(along*depthPx),curtainTint=tintCarry(along*depthPx);
       for(let s=0;s<crossSlices;s++){const fraction=(s+.5)/crossSlices,rgba=Buffer.alloc(along*depthPx*4);
         const place=(a:number,z:number)=>{const i=axis==='x'?Math.min(sw-1,Math.floor(fraction*sw)):a,j=axis==='x'?a:Math.min(sh-1,Math.floor(fraction*sh));return {g:grid[j*sw+i]!,u:axis==='x'?bu0+(bu1-bu0)*fraction:grid[j*sw+i]!.u,v:axis==='x'?grid[j*sw+i]!.v:bv0+(bv1-bv0)*fraction,z};};
         const first=place(0,0),spacing=Math.hypot(...difference3(intersect(axis==='x'?bu0:first.u,axis==='x'?first.v:bv0,0),intersect(axis==='x'?bu1:first.u,axis==='x'?first.v:bv1,0)))/crossSlices;
         let any=false;
-        for(let a=0;a<along;a++)for(let d=0;d<depthPx;d++){const z=height-(d+.5)/depthPx*2*height,{g,u,v}=place(a,z),tau=g.scale*bulgeModel.density(intersect(u,v,z))*spacing,o=4*(d*along+a);
-          for(let c=0;c<3;c++)rgba[o+c]=Math.round(g.color[c]);rgba[o+3]=Math.round(255*(1-Math.exp(-tau)));if(rgba[o+3])any=true;}
+        for(let a=0;a<along;a++)for(let d=0;d<depthPx;d++){const z=height-(d+.5)/depthPx*2*height,{g,u,v}=place(a,z),tau=g.scale*volumeDensity(intersect(u,v,z))*spacing,o=4*(d*along+a);
+          const alpha=tau>0?quantise(tau,curtainCarry,d*along+a):0;for(let c=0;c<3;c++)rgba[o+c]=tint(g.color[c]!,alpha,curtainTint[c],d*along+a);rgba[o+3]=alpha;if(alpha)any=true;}
         if(!any)continue;
         const ends=[place(0,0),place(along-1,0)],v=[intersect(ends[0].u,ends[0].v,height),intersect(ends[1].u,ends[1].v,height),intersect(ends[1].u,ends[1].v,-height),intersect(ends[0].u,ends[0].v,-height)] as Quad['verticesUnits'];
         await push(`bulge-${axis}-${String(s).padStart(2,'0')}`,axis,rgba,along,depthPx,v,axis==='x'?(v[0][0]+v[1][0])/2:(v[0][1]+v[1][1])/2);}}}
@@ -238,6 +281,6 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     else if(flat&&axis!=='z')samplingStepUnits=recipe.geometry.supportRadiusKpc*2;else if(axis!=='z'){const values=sampled.map(l=>dot(l.centerUnits,normal)),span=Math.max(...values)-Math.min(...values);samplingStepUnits=sampled.length>1?span/(sampled.length-1):recipe.geometry.supportRadiusKpc*2;}
     return {axis,normalUnits:normal,samplingStepUnits,leaves:selected};};
   const result:PreparedImageLayerBank={schema:PREPARED_IMAGE_LAYER_BANK_SCHEMA,id:recipe.id,frame:{referenceFrame:'sun-icrf',epochJdTt:2461286.5,originM:origin,localToReferenceXyzw:q,metersPerUnit:M_PER_KPC/unitsPerKpc,boundsUnits:bounds},observation:recipe.observation,
-    banks:(['x','y','z'] as LayerAxis[]).map(bank),resources,provenance,approximation:{model:flat?`The observed display RGB lies on one plane, the ${recipe.geometry.kind}'s midplane; nothing in it has depth.`:`A low-frequency fraction of the observed display RGB is distributed through one normalized ${recipe.geometry.kind} depth profile; the compact residual remains on the physical midplane.`,canonicalRecomposition:'The source-facing diffuse slabs use optical-depth weights and composite with the residual layer to reproduce the prepared observation within resampling and encoding error.',limitations:['Depth is parametric and is not measured per pixel.','Compact residuals are image-frequency features, not classified stars or measured 3D positions.','Cross-axis banks are sampled projections of the separable display model; finite slices and bank handoffs remain visible.',foreground?`Milky Way foreground stars from ${recipe.source.foregroundStars!.source} were removed where they show (${foreground.removed} of the ${foreground.inImage} catalogued in the image; ${foreground.extended} left where the light is an extended object); fainter ones and uncatalogued stars remain.`:'Released foreground stars remain because blanket removal would also erase intrinsic galaxy stars.',...(colorTie?[`Whole-galaxy color tied to B-V ${colorTie.bv} (${colorTie.source}): red/green and blue/green in linear light measured ${colorTie.measured[0]}, ${colorTie.measured[2]}, target ${colorTie.target[0]}, ${colorTie.target[2]}; gains red ${colorTie.gains[0]}, blue ${colorTie.gains[2]}.`]:[]),...(bulgeModel?[`The bulge fit (${recipe.geometry.bulge!.source}) stands in for ${saturatedPixels} saturated pixels, scaled by ${lightScale.toPrecision(4)} optical depth per unit fitted light.`]:[]),...(companions?[`Companion galaxies ${companions.keys.join(', ')} from ${recipe.source.companions!.source} were replaced by the light around them, out to ${companions.extentHalfLight.join(', ')} half-light radii.`]:[])]}};
+    banks:(['x','y','z'] as LayerAxis[]).map(bank),resources,provenance,approximation:{model:shapeModel?`The observed display RGB lies on one plane; part of the smooth light inside a published ellipsoid fills that ellipsoid evenly, in one color.`:flat?`The observed display RGB lies on one plane, the ${recipe.geometry.kind}'s midplane; nothing in it has depth.`:`A low-frequency fraction of the observed display RGB is distributed through one normalized ${recipe.geometry.kind} depth profile; the compact residual remains on the physical midplane.`,canonicalRecomposition:'The source-facing diffuse slabs use optical-depth weights and composite with the residual layer to reproduce the prepared observation within resampling and encoding error.',limitations:['Depth is parametric and is not measured per pixel.','Compact residuals are image-frequency features, not classified stars or measured 3D positions.','Cross-axis banks are sampled projections of the separable display model; finite slices and bank handoffs remain visible.',foreground?`Milky Way foreground stars from ${recipe.source.foregroundStars!.source} were removed where they show (${foreground.removed} of the ${foreground.inImage} catalogued in the image; ${foreground.extended} left where the light is an extended object); fainter ones and uncatalogued stars remain.`:'Released foreground stars remain because blanket removal would also erase intrinsic galaxy stars.',...(colorTie?[`Whole-galaxy color tied to B-V ${colorTie.bv} (${colorTie.source}): red/green and blue/green in linear light measured ${colorTie.measured[0]}, ${colorTie.measured[2]}, target ${colorTie.target[0]}, ${colorTie.target[2]}; gains red ${colorTie.gains[0]}, blue ${colorTie.gains[2]}.`]:[]),...(bulgeModel?[`The bulge fit (${recipe.geometry.bulge!.source}) stands in for ${saturatedPixels} saturated pixels, scaled by ${lightScale.toPrecision(4)} optical depth per unit fitted light.`]:[]),...(shapeModel?[`Where along each sight line the light of the shape (${recipe.geometry.shape!.source}) lies is modelled: an even fill of the published ellipsoid, not a measurement. Its emissivity is ${shapeEmissivity.toPrecision(3)} optical depth per unit length and its color ${shapeColor!.join(', ')} (sRGB at full brightness): in each channel, the light nearly every sight line through it can give. The rest of the picture's light stays on the flat plane.`]:[]),...(companions?[`Companion galaxies ${companions.keys.join(', ')} from ${recipe.source.companions!.source} were replaced by the light around them, out to ${companions.extentHalfLight.join(', ')} half-light radii.`]:[])]}};
   await writeFile(resolve(options.outputDirectory,'image-layers.json'),JSON.stringify(result,null,2)+'\n');return result;
 }

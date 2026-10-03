@@ -5,4 +5,5 @@ export * from './resize-rgba.ts';
 export * from './prepare.ts';
 export { imageLayerDisc, imageLayerDiscDistanceKpc, imageLayerView } from './disc.ts';
 export { imageLayerBulgeModel } from './bulge.ts';
+export { imageLayerShapeModel, lowerEnvelope } from './shape.ts';
 export { removeForegroundStars, removeCompanionGalaxies } from './foreground.ts';

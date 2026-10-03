@@ -22,7 +22,7 @@
     ]
   },
   "introduction": {
-    "text": "ESA/Hubble's photograph of it stands here as a flat picture facing the Sun, 0.48 pc wide.",
+    "text": "ESA/Hubble's photograph of it stands here as a flat picture facing the Sun, inside the ellipsoid a paper gives it, 0.48 pc wide.",
     "sources": [
       {
         "catalogueId": "esahubble-heic1310a",
@@ -38,6 +38,13 @@
         "checked": "2026-10-02",
         "locator": "Lead section, revision 1368977956",
         "quote": "It is also catalogued as Messier 57, M57 and NGC 6720."
+      },
+      {
+        "catalogueId": "publication-odell-2013-ring-nebula-structure",
+        "url": "https://arxiv.org/abs/1301.6636",
+        "label": "O'Dell et al. (2013), AJ 145, 92: Studies of NGC 6720 with calibrated HST/WFC3 emission-line filter images. I. Structure and evolution",
+        "checked": "2026-10-03",
+        "locator": "Sect. III.1: triaxial ellipsoid, semi-major axis 44 arcsec along position angle 60 degrees, semi-minor axis 30 arcsec, semi-polar axis 59 arcsec tipped 6.5 +/- 2 degrees from the line of sight"
       }
     ]
   },
@@ -45,7 +52,7 @@
     "optical": {
       "title": "Ring Nebula in visible light",
       "detail": "3179 × 3179 px",
-      "summary": "A flat picture facing the Sun at the nebula's distance; nothing in it has depth.",
+      "summary": "A flat picture facing the Sun, inside the shape a paper gives the nebula. The shape's depth is modelled.",
       "sources": [
         {
           "catalogueId": "esahubble-heic1310a",
@@ -53,6 +60,13 @@
           "label": "ESA/Hubble heic1310a: NASA, ESA, and C. Robert O'Dell (Vanderbilt University)",
           "checked": "2026-10-02",
           "locator": "Hubble image of the Ring Nebula (Messier 57)"
+        },
+        {
+          "catalogueId": "publication-odell-2013-ring-nebula-structure",
+          "url": "https://arxiv.org/abs/1301.6636",
+          "label": "O'Dell et al. (2013), AJ 145, 92: Studies of NGC 6720 with calibrated HST/WFC3 emission-line filter images. I. Structure and evolution",
+          "checked": "2026-10-03",
+          "locator": "Sect. III.1: triaxial ellipsoid, semi-major axis 44 arcsec along position angle 60 degrees, semi-minor axis 30 arcsec, semi-polar axis 59 arcsec tipped 6.5 +/- 2 degrees from the line of sight"
         }
       ]
     }

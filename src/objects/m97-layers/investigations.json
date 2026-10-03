@@ -14,13 +14,12 @@
     },
     {
       "id": "volume",
-      "subject": "A volume of the Owl Nebula",
-      "status": "deferred",
-      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "subject": "The shape of the Owl Nebula",
+      "status": "included",
+      "finding": "Guerrero et al. (2003, Sect. III.1 and Fig. 5) give the main nebula's shape: an outer shell that is almost circular, 218 arcsec across, modelled as spherical, around an ellipsoidal inner shell (axis ratio about 1.1) with a bipolar cavity whose axis is tilted about 30 degrees to the line of sight. The sphere's radius, 109 arcsec, is used here; the inner shell and cavity are not drawn in depth. The image-layer bake fills that sphere evenly with part of the picture's smooth light and keeps the rest, with all its detail, on the flat picture; along the Sun's sight line the layers add up to the photograph. A Nebula Lab volume of the same shape was made first and not used: its slices are 192 px wide against the picture's 1,024, so the view from the Sun lost the picture's detail.",
       "evidence": [
-        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
-      ],
-      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+        "https://arxiv.org/abs/astro-ph/0303056"
+      ]
     },
     {
       "id": "noao-m97",

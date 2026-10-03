@@ -121,3 +121,41 @@ test('an edge-on disc is bright along its position angle and thin across it', ()
   // So the bulge's share is small in the disc and large above it.
   assert.ok(model.share(...along(3.2)) < model.share(...across(3.2)));
 });
+
+// A nebula's published ellipsoid (geometry.shape): the Ring Nebula's, long along the sight line and tipped 6.5°.
+import { imageLayerShapeModel, lowerEnvelope } from '@cssearth/bake/image-layers';
+const ring = imageLayerShapeModel({ geometry: { kind: 'inclined-disk', inclinationDeg: 0.001, lineOfNodesPaDeg: 0, thicknessKpc: 1, supportRadiusKpc: 1, supportTaperFraction: 0.75, depthWeights: [1], depthScales: [1],
+  shape: { source: 'test', basis: 'test', semiAxesKpc: { polar: 59, major: 44, minor: 30 }, polarTiltDeg: 6.5, polarLeansToPaDeg: 240, majorPaDeg: 60, share: 1, smoothPixels: 6 } } });
+
+test('a shape is filled evenly, ends on its surface and is long along its pole', () => {
+  assert.equal(ring.density([0, 0, 0]), 1);
+  // The pole is 6.5° from the sight line: 58 units along it are inside, 60 are outside.
+  assert.equal(ring.density([ring.pole[0] * 58, ring.pole[1] * 58, ring.pole[2] * 58]), 1);
+  assert.equal(ring.density([ring.pole[0] * 60, ring.pole[1] * 60, ring.pole[2] * 60]), 0);
+  // The near pole leans to position angle 240° (south-west): east and north components are both negative, and it points at the Sun.
+  assert.ok(ring.pole[0] < 0 && ring.pole[1] < 0 && ring.pole[2] < 0, `${ring.pole}`);
+  // The major axis lies near position angle 60°, the minor across it.
+  const major = [Math.sin(Math.PI / 3), Math.cos(Math.PI / 3)];
+  assert.ok(Math.abs(Math.abs(ring.major[0] * major[0]! + ring.major[1] * major[1]!) - Math.cos(6.5 * Math.PI / 180)) < 1e-9);
+  assert.equal(ring.density([major[0]! * 43, major[1]! * 43, 0]), 1);
+  assert.equal(ring.density([-major[1]! * 31, major[0]! * 31, 0]), 0);
+});
+
+test('the chord through the centre is the long one and there is none outside the outline', () => {
+  assert.ok(Math.abs(ring.chord(0, 0) - 2 * 59 / Math.hypot(Math.cos(6.5 * Math.PI / 180), 59 / 44 * Math.sin(6.5 * Math.PI / 180))) < 1e-9, `${ring.chord(0, 0)}`);
+  assert.ok(ring.chord(20, 10) < ring.chord(0, 0) && ring.chord(20, 10) > 0);
+  assert.equal(ring.chord(60, 0), 0);
+  assert.ok(ring.height > 58 && ring.height < 59.1 && ring.radius === 59);
+});
+
+test('the lower envelope stays under fine dark detail and ignores fine bright detail', () => {
+  const width = 64, height = 64, map = new Float32Array(width * height).fill(1);
+  map[32 * width + 20] = 5;   // a bright knot
+  map[32 * width + 44] = 0.2; // a dark knot
+  const envelope = lowerEnvelope(map, width, height, 4);
+  assert.ok(Math.abs(envelope[10 * width + 10]! - 1) < 1e-6);
+  assert.ok(envelope[32 * width + 20]! <= 1 + 1e-6, 'the bright knot is not followed');
+  assert.ok(Math.abs(envelope[32 * width + 44]! - 0.2) < 1e-6, 'the envelope stays under the dark knot');
+  for (let p = 0; p < map.length; p++) assert.ok(envelope[p]! <= map[p]! + 1e-6, `the envelope is above the map at ${p}`);
+  assert.throws(() => lowerEnvelope(map, width, height, 0), /whole number of pixels/);
+});

@@ -1,0 +1,40 @@
+{
+  "id": "publication-guerrero-2003-owl-nebula",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Physical Structure of Planetary Nebulae. I. The Owl Nebula",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0303056"
+    },
+    {
+      "type": "doi",
+      "value": "10.1086/375206"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0303056",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0303056",
+      "checkedOn": "2026-10-03",
+      "locator": "Sect. III.1: the outer shell is almost circular, with a diameter of 218 arcsec; the inner shell is roughly confined by an ellipse of 182 x 168 arcsec with its major axis north-west to south-east. Fig. 5 and Sect. IV: the main nebula is a spherical outer shell and an ellipsoidal inner shell with a major-to-minor axis ratio of about 1.1; the inner shell has a bipolar cavity whose polar axis is tilted by about 30 degrees to the line of sight."
+    }
+  ],
+  "creators": [
+    "Guerrero, Martín A.",
+    "Chu, You-Hua",
+    "Manchado, Arturo",
+    "Kwitter, Karen B."
+  ],
+  "publisher": "AJ 125, 3213",
+  "publicationDate": "2003",
+  "relations": [],
+  "statements": []
+}

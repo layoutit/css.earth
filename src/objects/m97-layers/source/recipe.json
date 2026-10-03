@@ -34,7 +34,7 @@
     "kind": "inclined-disk",
     "inclinationDeg": 0.001,
     "lineOfNodesPaDeg": 255.684,
-    "thicknessKpc": 8.49e-07,
+    "thicknessKpc": 8.49e-7,
     "depthWeights": [
       0.25,
       0.5,
@@ -47,7 +47,21 @@
       1,
       1
     ],
-    "unit": "pc"
+    "unit": "pc",
+    "shape": {
+      "source": "publication-guerrero-2003-owl-nebula",
+      "basis": "Guerrero et al. (2003, Sect. III.1 and Fig. 5): the outer shell is almost circular, 218 arcsec across, and is modelled as spherical; its radius, 109 arcsec, is used for all three semi-axes.",
+      "semiAxesKpc": {
+        "polar": 0.000428578,
+        "major": 0.000428578,
+        "minor": 0.000428578
+      },
+      "polarTiltDeg": 0,
+      "polarLeansToPaDeg": 0,
+      "majorPaDeg": 0,
+      "share": 1,
+      "smoothPixels": 6
+    }
   },
   "bake": {
     "maxFacePixels": 1024,
@@ -64,7 +78,10 @@
     "edgeTaperFraction": 0.04,
     "diffuseFraction": 0.65,
     "diffuseSigmaPixels": 2,
-    "flat": true
+    "flat": true,
+    "bulgeSlices": 40,
+    "bulgeFacePixels": 128,
+    "bulgeCrossSlices": 24
   },
   "provenance": {
     "path": "provenance.json"

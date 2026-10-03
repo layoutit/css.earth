@@ -1,0 +1,40 @@
+{
+  "id": "publication-odell-2013-ring-nebula-structure",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Studies of NGC 6720 with Calibrated HST/WFC3 Emission-line Filter Images. I. Structure and Evolution",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1301.6636"
+    },
+    {
+      "type": "doi",
+      "value": "10.1088/0004-6256/145/4/92"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1301.6636",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1301.6636",
+      "checkedOn": "2026-10-03",
+      "locator": "Sect. III.1, restating the model of O'Dell, Sabbadin & Henney (2007): a triaxial ellipsoid with a semi-major axis of 44 arcsec (0.16 pc at 740 pc) along position angle about 60 degrees, a semi-minor axis of 30 arcsec perpendicular to it, both in the equatorial plane, and a semi-polar axis of about 59 arcsec tipped 6.5 +/- 2 degrees from the line of sight; the south-west end of the main ring moves away from the observer. Sect. III.6: the 2013 model elaborates that work and reaches similar conclusions on the main ring. Sect. III.4: the Inner Halo's loops lie almost all within 65 arcsec of the central star; the Outer Halo is a thin shell of radius 115 arcsec."
+    }
+  ],
+  "creators": [
+    "O'Dell, C. R.",
+    "Ferland, G. J.",
+    "Henney, W. J.",
+    "Peimbert, M."
+  ],
+  "publisher": "AJ 145, 92",
+  "publicationDate": "2013",
+  "relations": [],
+  "statements": []
+}

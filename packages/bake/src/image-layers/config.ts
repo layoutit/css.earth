@@ -20,6 +20,12 @@ export interface ImageLayerRecipe {
     /** The bank's unit when it is not the kiloparsec: parsecs, for an object a few parsecs across (a nebula), whose leaves in
      * kiloparsecs would be smaller than one CSS pixel. The recipe's lengths stay in kiloparsecs. A flat bank without a bulge only. */
     unit?: 'pc';
+    /** A published ellipsoid for a nebula (./shape.ts): the smooth part of the picture's light inside its outline is spread
+     * evenly through it, and the flat picture keeps the rest with every fine detail. Semi-axes in kiloparsecs: along the
+     * pole, and along and across `majorPaDeg` in the equatorial plane. The pole is tipped `polarTiltDeg` from the sight line,
+     * its near end leaning to position angle `polarLeansToPaDeg`. A sight line gives the ellipsoid at most `share` of
+     * its smooth light; `smoothPixels` is the radius, in face pixels, of the lower envelope that counts as smooth. Both are presentation. */
+    shape?: { source: string; basis: string; semiAxesKpc: { polar: number; major: number; minor: number }; polarTiltDeg: number; polarLeansToPaDeg: number; majorPaDeg: number; share: number; smoothPixels: number };
     /** A published bulge-plus-disc fit of the sky light (./bulge.ts): Sérsic bulge, exponential disc, one position angle.
      * Every surface brightness is the component's as projected on the sky, in magnitudes per square arcsecond: a disc's
      * face-on central value (as S4G tabulates it) brightens by 2.5 log10 of its axis ratio. */
@@ -86,6 +92,15 @@ const bulgeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['bulge']>
     ...(b.bar===undefined?{}:{bar:(()=>{const r=object(b.bar,'geometry.bulge.bar');return{centralSurfaceBrightness:finite(r.centralSurfaceBrightness,'geometry.bulge.bar.centralSurfaceBrightness'),radiusKpc:positive(r.radiusKpc,'geometry.bulge.bar.radiusKpc'),skyEllipticity:ellipticity(r.skyEllipticity,'geometry.bulge.bar.skyEllipticity'),positionAngleDeg:finite(r.positionAngleDeg,'geometry.bulge.bar.positionAngleDeg')};})()}),
     extentKpc: { radius: positive(e.radius, 'geometry.bulge.extentKpc.radius'), height: positive(e.height, 'geometry.bulge.extentKpc.height'),
       ...(e.fadeFrom===undefined?{}:{fadeFrom:(()=>{const f=positive(e.fadeFrom,'geometry.bulge.extentKpc.fadeFrom');if(f>=Number(e.radius))throw new TypeError(`geometry.bulge.extentKpc.fadeFrom (${f}) must be inside radius (${String(e.radius)}).`);return f;})()}) } };
+};
+const shapeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['shape']> => {
+  const s = object(v, 'geometry.shape'), axes = object(s.semiAxesKpc, 'geometry.shape.semiAxesKpc'), tilt = finite(s.polarTiltDeg, 'geometry.shape.polarTiltDeg'), share = finite(s.share, 'geometry.shape.share'), smooth = finite(s.smoothPixels, 'geometry.shape.smoothPixels');
+  if (!(tilt >= 0 && tilt <= 90)) throw new TypeError(`geometry.shape.polarTiltDeg must be from 0 to 90; got ${tilt}.`);
+  if (!(share > 0 && share <= 1)) throw new TypeError(`geometry.shape.share must be above 0 and at most 1; got ${share}.`);
+  if (!(Number.isInteger(smooth) && smooth >= 1 && smooth <= 64)) throw new TypeError(`geometry.shape.smoothPixels must be a whole number from 1 to 64; got ${smooth}.`);
+  return { source: text(s.source, 'geometry.shape.source'), basis: text(s.basis, 'geometry.shape.basis'),
+    semiAxesKpc: { polar: positive(axes.polar, 'geometry.shape.semiAxesKpc.polar'), major: positive(axes.major, 'geometry.shape.semiAxesKpc.major'), minor: positive(axes.minor, 'geometry.shape.semiAxesKpc.minor') },
+    polarTiltDeg: tilt, polarLeansToPaDeg: finite(s.polarLeansToPaDeg, 'geometry.shape.polarLeansToPaDeg'), majorPaDeg: finite(s.majorPaDeg, 'geometry.shape.majorPaDeg'), share, smoothPixels: smooth };
 };
 const parsecUnit = (v: unknown, unsupported: boolean): 'pc' => {
   if (v !== 'pc' || unsupported) throw new TypeError(`geometry.unit is "pc", on a flat bank without a bulge; got ${JSON.stringify(v)}${unsupported ? ' on a bank that is not flat or has a bulge' : ''}.`);
@@ -164,11 +179,12 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
     geometry: { kind, inclinationDeg, lineOfNodesPaDeg: finite(g.lineOfNodesPaDeg, 'lineOfNodesPaDeg'),
       thicknessKpc: positive(g.thicknessKpc, 'thicknessKpc'), supportRadiusKpc: positive(g.supportRadiusKpc, 'supportRadiusKpc'),
       supportTaperFraction, depthWeights: weights, depthScales: scales, ...(g.bulge===undefined?{}:{bulge:bulgeOf(g.bulge)}),
+      ...(g.shape===undefined?{}:{shape:(()=>{if(g.bulge!==undefined||b.flat!==true)throw new TypeError('geometry.shape is for a flat bank without a bulge.');return shapeOf(g.shape);})()}),
       ...(g.unit===undefined?{}:{unit:parsecUnit(g.unit,g.bulge!==undefined||b.flat!==true)}) },
     bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true),
       ...(b.levels===undefined?{}:{levels:levelsOf(b.levels)}),
       ...(b.colorTie===undefined?{}:{colorTie:colorTieOf(b.colorTie)}),
-      ...(g.bulge===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
+      ...(g.bulge===undefined&&g.shape===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
       crossAxisAlongPixels:positive(b.crossAxisAlongPixels,'crossAxisAlongPixels',true),crossAxisDepthPixels: positive(b.crossAxisDepthPixels, 'crossAxisDepthPixels', true), backgroundFloor,edgeTaperFraction,diffuseFraction,diffuseSigmaPixels:positive(b.diffuseSigmaPixels,'diffuseSigmaPixels'),
       ...(b.flat===undefined?{}:{flat:flatOf(b.flat)}),
       encoding: { format: 'webp', quality, ...(e.alphaQuality===undefined?{}:{alphaQuality:alphaQualityOf(e.alphaQuality)}) } }, provenance: { path: path(p.path) } };

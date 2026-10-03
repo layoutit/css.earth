@@ -14,13 +14,12 @@
     },
     {
       "id": "volume",
-      "subject": "A volume of the Ring Nebula",
-      "status": "deferred",
-      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "subject": "The shape of the Ring Nebula",
+      "status": "included",
+      "finding": "O'Dell et al. (2013, Sect. III.1), restating O'Dell, Sabbadin & Henney (2007), give the main ring's shape: a triaxial ellipsoid with semi-axes of 44 arcsec (along position angle 60 degrees), 30 arcsec and 59 arcsec (polar, tipped 6.5 +/- 2 degrees from the line of sight), the south-west end of the main ring moving away. The image-layer bake fills that ellipsoid evenly with part of the picture's smooth light and keeps the rest, with all its detail, on the flat picture; along the Sun's sight line the layers add up to the photograph. A Nebula Lab volume of the same shape was made first and not used: its slices are 192 px wide against the picture's 1,024, so the view from the Sun lost the picture's detail.",
       "evidence": [
-        "https://esahubble.org/images/heic1310a/"
-      ],
-      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+        "https://arxiv.org/abs/1301.6636"
+      ]
     },
     {
       "id": "star-removal",
