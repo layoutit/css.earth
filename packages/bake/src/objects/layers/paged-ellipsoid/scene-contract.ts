@@ -2,8 +2,7 @@ import { type CameraPlan } from '@cssearth/objects';
 
 import type {Polygon} from '@layoutit/polycss';
 
-import type { RasterRect, SeamOutsetProfile } from '../../../scene/index.ts';
-import type {Cutaway} from './contracts.ts';
+import type { RasterRect } from '../../../scene/index.ts';
 export type { PagedGeometryParameters } from '@cssearth/objects';
 import type { PagedGeometryParameters } from '@cssearth/objects';
 export interface PagedSceneProfile {namespace: string; publicBase: string; geometry: PagedGeometryParameters; camera: CameraPlan; polarRadiusKm: number; equatorialRadiusKm: number; sceneBodyKey: string; interiorRadiusKey: string;}

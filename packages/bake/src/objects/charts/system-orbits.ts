@@ -4,7 +4,6 @@
  * the record's transit convention puts it (true anomaly pi/2 - omega). Inclination and the node set how the orbit is tilted on the
  * sky, which a top-down view does not show. The star is a marker, not to scale. */
 import { bodyData, HOSTED_PLANET_IDS, hostedOrbit, hostedOrbitCentreId, type BodyId, type HostedPlanetId } from '@cssearth/astronomy';
-import { requireRecord, requireString } from '@cssearth/core';
 import { CHART, chartDocument, chartNotes, coordinate, escapeXml } from './chart-style.ts';
 
 /** The IAU 2012 astronomical unit, km (Resolution B2). */

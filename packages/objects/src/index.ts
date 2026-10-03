@@ -243,7 +243,7 @@ export { evidenceLink, parseInvestigationLedger, parseFacilityLedger, type Inves
 export { parseMeasuredSpectrum, type MeasuredSpectrumRecipe, type MeasurementSource } from './prepared-data/chart-measured-spectrum.js';
 export { parseRetrievedProfile, type RetrievedProfileRecipe, type ProfileSource } from './prepared-data/chart-retrieved-profile.js';
 export { parseSystemOrbits, type SystemOrbitsRecipe } from './prepared-data/chart-system-orbits.js';
-export { parseChartAssetRecipe, type ChartAssetRecipe } from './prepared-data/chart-assets.js';
+export { parseChartAssetRecipe, chartSourcePath, type ChartAssetRecipe } from './prepared-data/chart-assets.js';
 export { parseSpectrumRecipe, type SpectrumRecipe } from './prepared-data/chart-spectrum.js';
 export { responsiveFit, cameraFields, camera, recipeCamera, DERIVED_CAMERA_ANGLE_FIELDS } from './prepared-data/authored-camera.js';
 export { parsePagedRecipe, parsePagedDatasetBindings, isPagedEllipsoidRecipe, type PagedDatasetBindings, type PagedEllipsoidRecipe, type PagedGeometryParameters } from './prepared-data/paged-ellipsoid.js';

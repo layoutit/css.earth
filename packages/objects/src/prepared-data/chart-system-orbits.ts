@@ -1,4 +1,4 @@
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { requireRecord, requireString } from '@cssearth/core';
 export interface SystemOrbitsRecipe {
   kind: 'system-orbits'; id: string; title: string; description: string; output: string; metadata: Record<string, unknown>;
   /** The host star's id, and the planet drawn brighter. */

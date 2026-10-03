@@ -24,6 +24,7 @@ const contracts = [
     ['site/build/prepare/prepare-world-navigation.ts', "parsePagedRecipe(paged, 'drag')"]] },
   { id: 'A240', diagnostic: 'Chart asset base must be an absolute URL prefix.', readers: [
     ['site/build/charts/charts.ts', 'parseChartAssetRecipe(config)'],
+    ['site/build/charts/charts.ts', 'resolve(root,chartSourcePath(value))'],
     ['site/overview/spectrum-data.mts', 'parseSpectrumRecipe(input)'],
     ['packages/bake/src/objects/charts/measured-spectrum.ts', 'parseMeasuredSpectrum(input)'],
     ['packages/bake/src/objects/charts/retrieved-profile.ts', 'parseRetrievedProfile(input)'],

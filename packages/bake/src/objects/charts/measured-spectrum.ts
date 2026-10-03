@@ -1,7 +1,7 @@
 import { parseMeasuredSpectrumDocument, type Measurement } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { requireFiniteNumber } from '@cssearth/core';
 import { CHART, chartAxes, chartDocument, chartNotes, coordinate, escapeXml, linearScale, ticks } from './chart-style.ts';
 
 import { parseMeasuredSpectrum, type MeasuredSpectrumRecipe, type MeasurementSource } from '@cssearth/objects';

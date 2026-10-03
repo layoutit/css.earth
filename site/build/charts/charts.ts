@@ -1,15 +1,15 @@
-import { parseChartAssetRecipe } from '@cssearth/objects';
+import { parseChartAssetRecipe, chartSourcePath } from '@cssearth/objects';
 import { readFile,writeFile,mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { readSpectrumData, type SpectrumRecipe } from '../../overview/spectrum-data.mts';
-import { parseFitsGalleryImageRecipe, parseMeasuredSpectrum, parseRetrievedProfile, parseSystemOrbits, readMeasuredSpectrum, readRetrievedProfile, readSystemOrbits, renderFitsGalleryImage, renderFoldedTransit, renderLightCurveChart, renderMeasuredSpectrum, renderPhotometricPhaseChart, renderReflectanceChart, renderRetrievedProfile, renderSystemOrbits, renderTemperaturePressureChart } from '@cssearth/bake/objects/charts';
-import type { ChartIdentity, MeasuredSpectrumRecipe, RetrievedProfileRecipe, SystemOrbitsRecipe } from '@cssearth/bake/objects/charts';
+import { readSpectrumData } from '../../overview/spectrum-data.mts';
+import { parseFitsGalleryImageRecipe, parseSystemOrbits, readMeasuredSpectrum, readRetrievedProfile, readSystemOrbits, renderFitsGalleryImage, renderFoldedTransit, renderLightCurveChart, renderMeasuredSpectrum, renderPhotometricPhaseChart, renderReflectanceChart, renderRetrievedProfile, renderSystemOrbits, renderTemperaturePressureChart } from '@cssearth/bake/objects/charts';
+import type { ChartIdentity } from '@cssearth/bake/objects/charts';
 type JsonMap=Record<string,unknown>;
 export { parseChartAssetRecipe, type ChartAssetRecipe } from '@cssearth/objects';
 function record(value:unknown,label:string):JsonMap {if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError(`${label} must be an object.`);return value as JsonMap;}
 function string(value:unknown,label:string):asserts value is string {if(typeof value!=='string'||!value.trim())throw new TypeError(`${label} must be text.`);}
-function path(root:string,value:string):string {if(value.startsWith('/')||value.includes('\\')||value.split('/').includes('..'))throw new TypeError('Unsafe chart source path.');return resolve(root,value);}
+function path(root:string,value:string):string {return resolve(root,chartSourcePath(value));}
 export async function prepareChartAssets({sourceDirectory,publicDirectory,config}:{sourceDirectory:string;publicDirectory:string;config:unknown}) {
  const recipe=parseChartAssetRecipe(config);await mkdir(publicDirectory,{recursive:true});const urls:string[]=[];
  const dimensions:{src:string;width:number;height:number}[]=[];

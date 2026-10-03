@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { requireFiniteNumber } from '@cssearth/core';
 import { CHART, chartAxes, chartDocument, chartNotes, coordinate, escapeXml } from './chart-style.ts';
 
 import { parseRetrievedProfile, type RetrievedProfileRecipe, type ProfileSource } from '@cssearth/objects';
