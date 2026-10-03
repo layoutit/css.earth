@@ -1,3 +1,4 @@
+import { BANDED_ELLIPSOID_SCHEMA, LAYERED_OBLATE_SCHEMA } from '@cssearth/bake/objects/scene';
 import { readNonArrayRecord } from '@cssearth/core';
 import { isRecord } from '@cssearth/core';
 import '@cssearth/bake/thread-pool';
@@ -276,7 +277,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   // content), so it needs no raw downloads. The paged-ellipsoid lane and the generic raster lane support it.
   const genericRasterLane = (source(sources, 'raster')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-raster-recipe@2' &&
     !['terrestrial', 'shape-model'].some(id => source(sources, id)) &&
-    !['cssearth-layered-oblate-preparation@2', 'cssearth-banded-ellipsoid@1'].includes(String((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema));
+    ![LAYERED_OBLATE_SCHEMA, BANDED_ELLIPSOID_SCHEMA].includes(String((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema));
   if (reuseImages && !source(sources, 'paged-ellipsoid') && !genericRasterLane) throw new TypeError(`${descriptor.id}: --reuse-images supports the paged-ellipsoid and raster lanes only.`);
   const genericLaneOnly = () => { if (descriptor.recipe.features) throw new TypeError('Surface features are prepared by the generic authored lane only.'); };
   await mkdir(outputDirectory, { recursive: true });
@@ -294,7 +295,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     if (write) await writePreparedObject(descriptor.id, prepared.definition as unknown as Record<string, unknown>);
     return Object.freeze({ descriptor, sources, definition: prepared.definition, scene: prepared.scene }) as never;
   }
-  if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-layered-oblate-preparation@2') {
+  if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === LAYERED_OBLATE_SCHEMA) {
     genericLaneOnly();
     const { prepareLayeredOblateObject } = await import('@cssearth/bake/objects/layers/material-composition');
     return prepareLayeredOblateObject({ objectDirectory, publicDirectory, outputDirectory, write, prepareContent: prepareObjectContentAssets });
@@ -320,7 +321,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     if (write) await writePreparedObject(descriptor.id, definition);
     return Object.freeze({ ...prepared, definition });
   }
-  if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-banded-ellipsoid@1') {
+  if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === BANDED_ELLIPSOID_SCHEMA) {
     genericLaneOnly();
     const { prepareLayeredGiantObject } = await import('@cssearth/bake/objects/layers/giant');
     const prepared = await prepareLayeredGiantObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
@@ -494,7 +495,7 @@ export async function redrawOnlyDecision(objectDirectory: string, publishedRecip
   const geometrySchema = String((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema);
   const rasterLane = (source(sources, 'raster')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-raster-recipe@2' &&
     !['terrestrial', 'shape-model', 'observations', 'rings'].some(sourceId => source(sources, sourceId)) &&
-    !['cssearth-layered-oblate-preparation@2', 'cssearth-banded-ellipsoid@1'].includes(geometrySchema);
+    ![LAYERED_OBLATE_SCHEMA, BANDED_ELLIPSOID_SCHEMA].includes(geometrySchema);
   if (!source(sources, 'paged-ellipsoid') && !rasterLane) return { redraw: false, reason: 'its lane has no redraw-only path' };
   const recordPath = resolve(objectDirectory, 'prepared/authored-preparation.json');
   const published: unknown = await readFile(recordPath, 'utf8').then(text => JSON.parse(text) as unknown, () => null);

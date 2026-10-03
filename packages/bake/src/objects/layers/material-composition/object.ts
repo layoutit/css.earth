@@ -23,7 +23,7 @@ import sharp from 'sharp';
 import {inventoryPublicAssets} from '@cssearth/objects/node';
 import {requirePreparedPresentation} from '../../../presentation/index.ts';
 import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../presentation/index.ts';
-import { withFocusedCamera } from '../../scene/index.ts';
+import { LAYERED_OBLATE_SCHEMA, withFocusedCamera } from '../../scene/index.ts';
 import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
 import {prepareMaterialTracks} from '../../../presentation/index.ts';
 import { prepareCutawayMaterials } from './cutaway-materials.ts';
@@ -34,7 +34,7 @@ import {parseObservedSurfaceRecipe,prepareObservedSurfaces} from '../observed-su
 const json=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
 const writeJson=(path:string,value:unknown)=>writeFile(path,JSON.stringify(value)+'\n');
 
-export const isLayeredOblateRecipe=(value:unknown)=>isRecord(value)&&value.schema==='cssearth-layered-oblate-preparation@2';
+export const isLayeredOblateRecipe=(value:unknown)=>isRecord(value)&&value.schema===LAYERED_OBLATE_SCHEMA;
 
 /** A full source-to-consumer pipeline; no runtime product is a preparation input. */
 export async function prepareLayeredOblateObject({objectDirectory,publicDirectory,outputDirectory,write=false,prepareContent}: {objectDirectory:string;publicDirectory:string;outputDirectory:string;write?:boolean;prepareContent:(context: ContentPreparationContext) => Promise<PreparedObjectContentAssets>}) {

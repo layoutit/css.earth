@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
 import { VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
 /** Betelgeuse's circumstellar material, as four density grids the shared slab baker turns into one dataset bank.
  *
@@ -721,7 +722,7 @@ export async function author(defaultDataset = 'zimpol-v') {
   const veilGain = -Math.log(1 - VEIL_2019_12.scatteredSurfaceBrightness) / (veilBrightestColumn * Math.exp(-veilOpticalDepth / 2));
 
   const provenance = {
-    schema: 'cssearth-volume-provenance@2',
+    schema: VOLUME_PROVENANCE_SCHEMA,
     title: 'Betelgeuse circumstellar material: polarised dust, the 4 micrometre light outside the disc, silicon monoxide around the star and the published Great Dimming clump',
     kind: 'observed-sky-maps-line-cube-and-published-radiative-transfer-model',
     authors: ['M. Montargès', 'E. Cannon', 'A. de Koter', 'P. Kervella', 'E. Lagadec', 'L. Decin', 'A. Boccaletti', 'O. Flasseur', 'J. Milli', 'S. Ridgway', 'A. K. Dupree'],

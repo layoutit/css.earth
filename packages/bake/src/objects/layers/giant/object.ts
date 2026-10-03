@@ -19,7 +19,7 @@ import type { ContentPreparationContext, PreparedObjectContentAssets } from '../
 import { mkdir, readFile, writeFile, realpath } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 
-import { withFocusedCamera } from '../../scene/index.ts';
+import { BANDED_ELLIPSOID_SCHEMA, withFocusedCamera } from '../../scene/index.ts';
 import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
 import { requirePreparedPresentation } from '../../../presentation/index.ts';
@@ -29,7 +29,7 @@ import { prepareObservedPolarSurfaces, polarImageProjection } from './observed-p
 
 const readJson=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
 const writeJson=(path:string,value:unknown)=>writeFile(path,`${JSON.stringify(value)}\n`);
-export const isLayeredGiantRecipe=(value:unknown)=>isRecord(value)&&value.schema==='cssearth-banded-ellipsoid@1';
+export const isLayeredGiantRecipe=(value:unknown)=>isRecord(value)&&value.schema===BANDED_ELLIPSOID_SCHEMA;
 
 /** The authored residency declaration must describe the bank actually compiled. */
 export function assertLayeredGiantFrameBank(descriptor:Pick<ReturnType<typeof parseAuthoredObjectDescriptor>,'recipe'>,materialInput:unknown,presentationInput:unknown) {

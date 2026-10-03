@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { parseMolecularTable, readMolecularRecipe } from './molecular-data.ts';
-import { acquireMolecularSources, loadMolecularCatalogue } from './molecular-source.ts';
+import { MOLECULAR_CATALOGUE_SCHEMA, acquireMolecularSources, loadMolecularCatalogue } from './molecular-source.ts';
 import type { MolecularRecipe } from '@cssearth/nebula-reconstruction/methods/kinematics/molecular-types';
 
 const recipePath = 'labs/nebula/models/helix/kinematics-hco.json';
@@ -107,6 +107,7 @@ test('explicit acquisition verifies actual side effects, then replay uses the so
   assert.equal(await readFile(resolve(root, local.table.cachePath), 'utf8'), excerpt);
   globalThis.fetch = async () => { throw new Error('Cache replay must not fetch.'); };
   const loaded = await loadMolecularCatalogue(root, recipePath);
+  assert.equal(loaded.schema, MOLECULAR_CATALOGUE_SCHEMA);
   assert.deepEqual(loaded.points, parseMolecularTable(excerpt, recipe).points);
   const replay = await acquireMolecularSources(root, recipePath);
   assert.ok(replay.sources.every(source => source.status === 'verified'));

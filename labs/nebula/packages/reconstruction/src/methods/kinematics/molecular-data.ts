@@ -1,5 +1,5 @@
 import { isRecord as coreIsRecord } from '@cssearth/core';
-import type { MolecularCatalogue, MolecularColumn, MolecularPoint, MolecularPointing, MolecularRecipe, MolecularSourcePin } from './molecular-types.ts';
+import type { ParsedMolecularTable, MolecularColumn, MolecularPoint, MolecularPointing, MolecularRecipe, MolecularSourcePin } from './molecular-types.ts';
 const isRecord = coreIsRecord;
 const record = (v: unknown) => { if (!isRecord(v)) throw new TypeError('Expected molecular evidence object.'); return v; };
 const text = (v: unknown) => { if (typeof v !== 'string' || !v.trim() || v.length > 8192) throw new TypeError('Expected molecular evidence text.'); return v; };
@@ -60,7 +60,6 @@ function numericField(line: string, field: MolecularColumn, optional: boolean): 
   if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[Ee][+-]?\d+)?$/.test(value)) throw new TypeError(`Invalid numeric field at byte ${field.start}.`);
   const result = Number(value); if (!Number.isFinite(result)) throw new TypeError('Nonfinite source value.'); return result;
 }
-export type ParsedMolecularTable = Pick<MolecularCatalogue, 'points' | 'pointings' | 'diagnostics'>;
 /** Preserve every published row, including null line parameters for intensity upper limits. */
 export function parseMolecularTable(source: string, recipe: MolecularRecipe): ParsedMolecularTable {
   const r = readMolecularRecipe(recipe), columns = r.table.columns;
@@ -102,7 +101,7 @@ export function parseMolecularTable(source: string, recipe: MolecularRecipe): Pa
   const pointings = [...groups.values()];
   if (pointings.some(p => (p.upperLimits > 0 && p.detectedComponents > 0) || p.upperLimits > 1)) throw new TypeError('Conflicting detections and upper limits at a pointing.');
   const detected = points.filter(point => point.status === 'detection'), velocities = detected.map(point => point.velocityLsrKmS!);
-  const diagnostics: MolecularCatalogue['diagnostics'] = { rows: points.length, pointings: pointings.length, detectedComponents: detected.length,
+  const diagnostics: ParsedMolecularTable['diagnostics'] = { rows: points.length, pointings: pointings.length, detectedComponents: detected.length,
     detectedPointings: pointings.filter(p => p.detectedComponents > 0).length, upperLimits: points.length - detected.length,
     multiComponentPointings: pointings.filter(p => p.detectedComponents > 1).length,
     maximumComponents: Math.max(...pointings.map(p => p.detectedComponents)), broadComponents: points.filter(p => p.possiblyUnresolvedBlend).length,

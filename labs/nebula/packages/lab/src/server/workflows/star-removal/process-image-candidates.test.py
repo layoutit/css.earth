@@ -131,6 +131,7 @@ class BatchGateTests(unittest.TestCase):
         batch.run(self.plan_path)
         destination = Path(self.recipes[0][1]['outputDirectory'])
         receipt = batch.document(destination / 'receipt.json')
+        self.assertEqual(receipt['schema'], 'cssearth-star-separation-receipt@1')
         self.assertEqual(receipt['detectedCount'], 0)
         self.assertEqual(receipt['acceptedCount'], 0)
         source = cv2.imread(self.recipes[0][1]['source']['path'], cv2.IMREAD_UNCHANGED)
