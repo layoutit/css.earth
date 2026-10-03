@@ -211,6 +211,12 @@ from. It groups the files into folders and fails when a change adds:
 - an import of `@cssearth/bake` from `packages/telescope`, tests included;
 - an import between `nebula/` and `objects/` inside `@cssearth/bake`, either way.
 
+Bake declares no renderer dependency or exception. Shared prepared schema literals
+belong in objects. The rule computes sharing across owners; internal formats need
+no inventory. Schema/owner debt exceptions fail when stale. See
+[prepared format ownership](docs/prepared-format-ownership.md). Contract lint also
+runs the architecture mutation tests.
+
 Type-only imports count. The package-only and application-entry layer rules have
 no baseline: every violation fails, including during a baseline update. Workspace
 package cycles also have no baseline, including dev and peer dependencies. Existing

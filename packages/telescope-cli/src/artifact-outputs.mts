@@ -1,4 +1,5 @@
 /** Inspect a verified artifact and name only the next outputs its present facts can support. */
+import { OBJECT_SCHEMA } from '@cssearth/objects';
 import { readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
@@ -61,7 +62,7 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
     const next=await listArtifactOutputs(resolve(artifact,'..',relativePath));
     return {...next,artifact:'physical-grid-volume',via:artifact};
   }
-  if(raw.schema==='cssearth-object@2'){
+  if(raw.schema===OBJECT_SCHEMA){
     const type=raw.type,target=typeof raw.id==='string'?raw.id:'physical object';
     if(type!=='point-field'&&type!=='density-volume'&&type!=='volume-dataset-bank')throw new TypeError('Object is not a supported physical point field, density volume or volume dataset bank');
     const kind=type==='point-field'?'points':type==='density-volume'?'volume':'volume-dataset-bank';let issue:string|undefined;

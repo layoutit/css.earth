@@ -248,7 +248,7 @@ test('a repository rule has no baseline: any finding breaks the check and is pri
   assert.equal(isBroken(found), true);
   assert.doesNotMatch(formatFindings(clean), /broken/u);
   assert.match(formatFindings(found), /no-x: 1 findings[\s\S]*Repository rules broken:[\s\S]*\n {4}a\/x$/u);
-  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['preparation-without-renderer', 'workspace-package-cycles', 'integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'package cycles, retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
+  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['bake-without-renderer', 'format-schema-ownership', 'preparation-without-renderer', 'workspace-package-cycles', 'integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'package cycles, retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
 });
 
 test('a script or Astro module inside an object package is a finding; its data is not', () => {
@@ -383,7 +383,9 @@ test('retired root tests and dependent integration owners fail without a baselin
     write('packages/bake/package.json', '{"name":"@cssearth/bake","dependencies":{"@cssearth/renderer":"workspace:*"}}');
     write('integration/renderer-bake/conformance.test.ts', "import '@cssearth/bake'; import '@cssearth/renderer';\n");
     write('integration/example.test.mts', "import '@x/a'; import '@x/b';\n");
-    assert.equal(broken(), false, 'the named renderer-bake conformance boundary permits dependent owners');
+    assert.equal(broken(), true, 'renderer-bake has no exception for dependent owners');
+    write('packages/bake/package.json', '{"name":"@cssearth/bake"}');
+    assert.equal(broken(), false, 'renderer-bake conformance passes when its owners are independent');
     write('integration/renderer-bake/conformance.test.ts', "import '@cssearth/renderer';\n");
     assert.equal(broken(), true, 'removing either conformance owner is red');
     rmSync(join(root, 'integration/renderer-bake'), { recursive: true });

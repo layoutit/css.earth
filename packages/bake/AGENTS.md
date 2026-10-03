@@ -346,3 +346,8 @@ Renderer-behavior runtime, selection, material and feature transport suites and 
 lives in `integration/renderer-bake/src/presentation/leaf-box.test.mts`. These node:test suites run in
 the packages CI lane on changes to either owner. Shell facing/material conformance lives in
 `integration/renderer-bake/src/shell/shell.test.ts`; bake-owned shell assertions stay in `src/shell/`. Validated camera conversions come from `@cssearth/objects`; bake has no renderer imports or dependency. Pure prepared volume envelope/frame validation comes from objects; labs own their renderer bundlers.
+
+Archived-camera data (including `SpiceCamera`), cited object/prepared-text records and prepared destinations
+are browser-safe contracts in `packages/objects/src/prepared-data/`, exported from `@cssearth/objects`.
+Their node:test suites run in the packages lane. Camera fitting and kernel computation stay with bake/SPICE;
+text budgets and editorial checks stay in site; destination preparation and search projection stay with bake/site.

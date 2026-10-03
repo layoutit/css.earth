@@ -1,3 +1,4 @@
+export const AUTHORED_OBJECT_SCHEMA = 'cssearth-authored-object@2';
 import type { ObjectDescriptor } from './descriptor.js';
 import { parseObjectDescriptor } from './parse.js';
 import { isRecord } from '@cssearth/core';
@@ -19,7 +20,7 @@ export interface DestinationsRecipe { readonly source: string; readonly maxEntri
 export interface FeaturesRecipe { readonly source: string; readonly maxEntries: number; }
 export interface WorldFrameRecipe { readonly referenceFrame: string; readonly epochJdTt: number; readonly originM: readonly [number, number, number]; readonly presentationToReference: readonly [number, number, number, number, number, number, number, number, number]; readonly orbitUpReference: readonly [number, number, number]; readonly metersPerUnit: number; readonly bodyRadiusM: number; }
 export interface AuthoredRecipe {
-  readonly schema: 'cssearth-authored-object@2';
+  readonly schema: typeof AUTHORED_OBJECT_SCHEMA;
   readonly sources: readonly SourceReference[];
   readonly shape: ShapeRecipe;
   readonly surfaces: readonly SurfaceRecipe[];
@@ -152,7 +153,7 @@ function parseWorldFrame(value: unknown): WorldFrameRecipe | undefined {
 export function parseAuthoredRecipe(value: unknown): AuthoredRecipe {
   const input = record(value, 'recipe');
   keys(input, ['schema', 'sources', 'shape', 'surfaces', 'materials', 'frameBanks', 'cutaway', 'atmosphere', 'rings', 'emission', 'motion', 'destinations', 'features', 'worldFrame'], 'recipe');
-  if (input.schema !== 'cssearth-authored-object@2') throw new TypeError('Unsupported authored recipe schema.');
+  if (input.schema !== AUTHORED_OBJECT_SCHEMA) throw new TypeError('Unsupported authored recipe schema.');
   const parsedSources = sources(input.sources), sourceIds = new Set(parsedSources.map(item => item.id));
   const shapeInput = record(input.shape, 'recipe.shape'); keys(shapeInput, ['kind', 'radiusKm', 'polarRadiusKm', 'secondaryRadiusKm'], 'recipe.shape');
   if (shapeInput.kind !== 'sphere' && shapeInput.kind !== 'ellipsoid' && shapeInput.kind !== 'radial-terrain') throw new TypeError('recipe.shape.kind is not supported.');
@@ -172,7 +173,7 @@ export function parseAuthoredRecipe(value: unknown): AuthoredRecipe {
   const destinations = input.destinations === undefined ? undefined : (() => { const at = 'recipe.destinations', item = record(input.destinations, at); keys(item, ['source', 'maxEntries'], at); return freeze({ source: sourceRef(item.source, sourceIds, `${at}.source`), maxEntries: positive(item.maxEntries, `${at}.maxEntries`, true) }); })();
   const features = input.features === undefined ? undefined : (() => { const at = 'recipe.features', item = record(input.features, at); keys(item, ['source', 'maxEntries'], at); return freeze({ source: sourceRef(item.source, sourceIds, `${at}.source`), maxEntries: positive(item.maxEntries, `${at}.maxEntries`, true) }); })();
   const worldFrame = parseWorldFrame(input.worldFrame);
-  return freeze({ schema: 'cssearth-authored-object@2', sources: parsedSources, shape: freeze({ kind: shapeInput.kind, radiusKm, ...(secondaryRadiusKm === undefined ? {} : { secondaryRadiusKm }), ...(polarRadiusKm === undefined ? {} : { polarRadiusKm }) }), surfaces: parsedSurfaces, ...(materials === undefined ? {} : { materials }), ...(frameBanks === undefined ? {} : { frameBanks }), ...(cutaway === undefined ? {} : { cutaway }), ...(atmosphere === undefined ? {} : { atmosphere }), ...(rings === undefined ? {} : { rings }), ...(emission === undefined ? {} : { emission }), ...(motion === undefined ? {} : { motion }), ...(destinations === undefined ? {} : { destinations }), ...(features === undefined ? {} : { features }), ...(worldFrame === undefined ? {} : { worldFrame }) });
+  return freeze({ schema: AUTHORED_OBJECT_SCHEMA, sources: parsedSources, shape: freeze({ kind: shapeInput.kind, radiusKm, ...(secondaryRadiusKm === undefined ? {} : { secondaryRadiusKm }), ...(polarRadiusKm === undefined ? {} : { polarRadiusKm }) }), surfaces: parsedSurfaces, ...(materials === undefined ? {} : { materials }), ...(frameBanks === undefined ? {} : { frameBanks }), ...(cutaway === undefined ? {} : { cutaway }), ...(atmosphere === undefined ? {} : { atmosphere }), ...(rings === undefined ? {} : { rings }), ...(emission === undefined ? {} : { emission }), ...(motion === undefined ? {} : { motion }), ...(destinations === undefined ? {} : { destinations }), ...(features === undefined ? {} : { features }), ...(worldFrame === undefined ? {} : { worldFrame }) });
 }
 
 /** Keeps the legacy envelope compatible while making authored capability data typed. */

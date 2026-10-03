@@ -9,6 +9,7 @@ For a body's sources, processing, evidence and known problems, read its
 
 | Topic | Guide |
 | --- | --- |
+| Computed schema ownership across packages and architecture locks | [Prepared format ownership](prepared-format-ownership.md) |
 | PR feedback budget, check selection, failure recovery and deployment | [CI/CD maintenance](ci-cd.md) |
 | Galaxies, LMC image datasets and extragalactic datasets | [Galaxies and the nearby universe](galaxies/README.md) |
 | Nebula reconstruction, spectral datasets and reproducible delivery | [Prepared nebulae](nebulae/README.md) |

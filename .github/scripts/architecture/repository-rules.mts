@@ -1,6 +1,8 @@
 /** Rules the architecture check applies to the repository itself rather than to the import graph. They have no
  * baseline: the repository satisfies each of them today, so every finding fails the check, and
  * `--update-baseline` never records one. */
+import { checkBakeWithoutRenderer } from './bake-without-renderer.mts';
+import { checkFormatSchemaOwnership } from './format-schema-ownership.mts';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, posix, resolve } from 'node:path';
 import { declaredPackage, importedSpecifiers } from './declared-dependencies.mts';
@@ -42,6 +44,8 @@ export function objectCodeFiles(files: readonly string[]): string[] {
 }
 
 export const REPOSITORY_RULES: readonly RepositoryRule[] = [
+  { id: 'bake-without-renderer', description: 'bake declares no renderer dependency and permits no renderer exception', check: checkBakeWithoutRenderer },
+  { id: 'format-schema-ownership', description: 'shared raw schema literals and duplicates of objects definitions fail; schema/owner exceptions must remain current and justified', check: checkFormatSchemaOwnership },
   { id: 'preparation-without-renderer', description: 'preparation packages reach renderer only through named, file-scoped runtime consumers; stale exceptions fail', check: checkPreparationWithoutRenderer },
   { id: 'workspace-package-cycles', description: 'workspace packages have no dependency cycles, including dev and peer dependencies', check: checkPackageCycles },
   { id: 'integration-owners', description: 'integration files import at least two owners with no transitive workspace dependency between them', check: checkIntegrationOwners },
@@ -114,8 +118,6 @@ export function checkIntegrationOwners(root: string, files: readonly string[]): 
     }));
     const list = [...owners];
     const independent = list.some((left, i) => list.slice(i + 1).some(right => !reaches(left, right) && !reaches(right, left)));
-    // Preparation/runtime conformance spans these owners even while bake depends on renderer.
-    const rendererBake = file.startsWith('integration/renderer-bake/') && owners.has('packages/bake') && owners.has('packages/renderer');
-    return independent || rendererBake ? [] : [`${file}: integration must import at least two independent owners; found ${list.join(', ') || 'none'}`];
+    return independent ? [] : [`${file}: integration must import at least two independent owners; found ${list.join(', ') || 'none'}`];
   });
 }
