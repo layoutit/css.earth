@@ -2,7 +2,7 @@ import { OBJECTS } from "../objects.mts";
 import { homeSeo, objectSeo } from "../seo.mts";
 import { ROOT_OBJECT_ID } from "../root-object.mts";
 
-/** The site's own page, `/`, then every page `/<id>/`: each object and each level. */
+/** The site's own page, `/`, then every page `/<id>/`: each object's. */
 export function GET() {
   const root = OBJECTS.find(object => object.id === ROOT_OBJECT_ID);
   const pages = [...(root ? [homeSeo(objectSeo(root))] : []), ...OBJECTS.map(page => objectSeo(page))];

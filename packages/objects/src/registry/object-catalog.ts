@@ -9,8 +9,7 @@ import { parseNavigationDistance } from './navigation-distance.js';
 import { destinationSearchNames, objectSystem } from './navigable-object.js';
 import { systemHostId, systemObjectId } from './system-address.js';
 import type { NavigableObject } from './navigable-object.js';
-import { overviewLevel } from './overview-object.js';
-import type { OverviewObject } from './overview-object.js';
+import { objectZoom } from './object-zoom.js';
 
 /** `orbitsWithinAu`: a host's authored presentation range, the camera distance up to which its system draws every orbit. */
 /** `labelPlacement: 'centre'` captions the body over its middle instead of below it (Sgr A*'s black shadow). */
@@ -85,7 +84,7 @@ export function catalogueObject<Scene, Signal>(value: unknown,
   if (!isRecord(value) || !isRecord(value.descriptor) || !isRecord(value.descriptor.properties) || typeof value.descriptor.id !== 'string') throw new TypeError('Invalid catalogue entry.');
   const descriptor = value.descriptor, id = value.descriptor.id;
   if (value.descriptor.properties.catalog === undefined) throw new TypeError(`Invalid catalogue entry: ${id} has no catalogue entry.`);
-  const ladder = overviewLevel(descriptor);
+  const zoom = objectZoom(descriptor);
   const { order: _order, context: _context, ...entry } = catalogEntry(descriptor, loadScene(descriptor), parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery));
   const system = objectSystem(descriptor);
   const expected = system ? system.members === 'moons' ? 'satellite-system' : 'planetary-system' : null;
@@ -101,16 +100,8 @@ export function catalogueObject<Scene, Signal>(value: unknown,
   if (parent !== undefined && (typeof parent !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(parent) || parent === id)) {
     throw new TypeError(`src/objects/${id}/object.json: parent names the object it is inside by its id; got ${JSON.stringify(parent)}.`);
   }
-  const object = { ...entry, ...(typeof parent === 'string' ? { parent } : {}), ...(ladder === null ? {} : { level: Object.freeze({ order: ladder.order, zoom: ladder.zoom, holds: ladder.holds, packages: ladder.packages }) }),
+  const object = { ...entry, ...(typeof parent === 'string' ? { parent } : {}), ...(zoom === null ? {} : { zoom }),
     ...(system ? { system } : {}) };
   // An object with alternate names is found by them: search matches its id, its name and each alias.
   return object.aliases.length ? { ...object, searchNames: Object.freeze(destinationSearchNames([id, object.name, ...object.aliases])) } : object;
-}
-
-/** A level of the zoom ladder as the ladder reads it, from the object that is the level. */
-export function levelOf(object: NavigableObject): OverviewObject {
-  if (!object.level) throw new TypeError(`${object.id} is not a level of the zoom ladder.`);
-  return Object.freeze({ id: object.id, name: object.name, description: object.description, route: object.route, ...object.level,
-    classification: object.classification, ...(object.classificationLabel === undefined ? {} : { classificationLabel: object.classificationLabel }),
-    worldFrame: object.worldFrame });
 }

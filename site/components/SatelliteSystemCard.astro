@@ -8,6 +8,7 @@ import { SCENE_OBJECTS } from '../objects.mts';
 import { prepareBodyMoons } from '../prepare-body-moons.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
 import { systemSourceDocumentation } from '../source-documentation.mts';
+import { systemObjectId } from '../navigation/system-address.mts';
 
 interface Props { hostId: string; detached: boolean; }
 /** The system card is mounted only while it is the card's subject (`updateBodyCard` in object-shell-client.mts). */
@@ -22,7 +23,7 @@ import Detached from './Detached.astro';
 
 {system && host && source && <>
   <Detached {detached}><ObjectCardHeader title={{ label: system.name }} heading={false} introduction={PREPARED_WORLD_PRESENTATION.satelliteSystemIntroductions[hostId]} data-view-part="moons"
-    data-source-subject={`satellite-system:${hostId}`} data-source-document={source.href} data-source-label={source.label}>
+    data-source-subject={`object:${systemObjectId(hostId)}`} data-source-document={source.href} data-source-label={source.label}>
     <ObjectBreadcrumbs objectId={hostId} satelliteSystem />
   </ObjectCardHeader></Detached>
   <Detached {detached}><InformationTabs idPrefix={`${hostId}-system`} group="satellite-system" viewPart="moons"

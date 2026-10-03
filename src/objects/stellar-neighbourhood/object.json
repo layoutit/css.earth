@@ -33,7 +33,8 @@
     },
     "preparation": {
       "source": "source/stars.json"
-    }
+    },
+    "host": "milky-way"
   },
   "prepared": {
     "format": "cssearth-css-point-field-bank@1",

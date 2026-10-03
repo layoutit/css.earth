@@ -1,4 +1,5 @@
 import type { SceneSubject, SelectionTarget } from './scene-selection.mts';
+import { subjectHost, subjectView } from './scene-subject.mts';
 import type { SceneState } from '../browser/shell-contract-types.mts';
 import type { SceneSessionState } from './scene-session.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
@@ -41,8 +42,8 @@ export function createScenePublication({ stage, documentTarget, windowTarget, re
     }) });
     return { sceneState, playing, playback, scene: Object.freeze({
       activeObjectId: objectId,
-      selectedObjectId: selected.view === 'system' ? null : selected.objectId,
-      overview: selected.view === 'system',
+      selectedObjectId: subjectView(selected) === 'system' ? null : subjectHost(selected),
+      overview: subjectView(selected) === 'system',
       error: state.kind === 'failed' ? state.error.message : null,
       lifecycle: sceneState === 'ready' ? (playing ? 'mounted' : 'paused') : sceneState,
       mountedObjectCount,

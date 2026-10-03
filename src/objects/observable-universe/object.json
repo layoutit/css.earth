@@ -57,26 +57,6 @@
       "description": "Everything whose light has had time to reach us, out to the microwave background.",
       "order": 5157
     },
-    "overview": {
-      "order": 4,
-      "zoom": {
-        "enter": {
-          "distancePc": 1000000000
-        },
-        "returnBelow": {
-          "distancePc": 800000000
-        },
-        "frame": {
-          "distance": {
-            "distancePc": 52000000000
-          }
-        }
-      },
-      "holds": [],
-      "packages": [
-        "observable-universe-cmb"
-      ]
-    },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
@@ -103,6 +83,19 @@
       ],
       "metersPerUnit": 2244193.5483870967,
       "bodyRadiusM": 695700000
+    },
+    "zoom": {
+      "enter": {
+        "distancePc": 1000000000
+      },
+      "returnBelow": {
+        "distancePc": 800000000
+      },
+      "frame": {
+        "distance": {
+          "distancePc": 52000000000
+        }
+      }
     }
   },
   "prepared": {

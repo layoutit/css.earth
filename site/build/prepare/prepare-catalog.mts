@@ -1,8 +1,8 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import type { CatalogEntry } from '@cssearth/objects';
-import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors, readOverviews } from '@cssearth/objects/node';
+import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 
@@ -93,11 +93,12 @@ async function readDatasetVolumes(entries: readonly CatalogEntry[], projectRoot:
   return volumes;
 }
 
-/** The galaxies the Local Group catalogue draws (its recipe's detail objects), each at its frame origin with the focus
- * radius the recipe gives it: what the Local Group overview fits in view. The Milky Way has no focus radius there; the
- * overview reads its volume directly. A galaxy beyond the Local Group level's reach (its zoom's `centreWithin`, M87 in
- * Virgo) is drawn but not framed by it. */
-async function readLocalGroupGalaxies(projectRoot: string) {
+/** The galaxies the Local Group catalogue draws (its recipe's detail objects) that are inside the Local Group, each at its
+ * frame origin with the focus radius the recipe gives it: what the Local Group's page fits in view. The Milky Way has no
+ * focus radius there; its page reads its volume directly. M81, NGC 253 and M83 are drawn from this catalogue but are inside
+ * the Nearby Universe, 3.5 to 4.9 Mpc away; framing them pulled the camera past the Nearby Universe's threshold, so the
+ * Local Group page opened as the Nearby Universe (2026-10-01). */
+async function readLocalGroupGalaxies(projectRoot: string, descriptors: ReadonlyMap<string, unknown>) {
   const recipePath = 'src/objects/local-group-galaxies/source/catalogue.json';
   let text: string;
   // A project without the Local Group object has no Local Group galaxies to frame.
@@ -105,33 +106,20 @@ async function readLocalGroupGalaxies(projectRoot: string) {
   catch (error) { if (hasErrorCode(error, 'ENOENT')) return {}; throw error; }
   const recipe: unknown = JSON.parse(text);
   if (!isRecord(recipe) || !isRecord(recipe.detailObjects)) throw new TypeError(`${recipePath}: detailObjects is missing.`);
-  const level: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects/local-group/object.json'), 'utf8'));
-  const within = isRecord(level) && isRecord(level.properties) && isRecord(level.properties.overview) && isRecord(level.properties.overview.zoom)
-    && isRecord(level.properties.overview.zoom.centreWithin) ? level.properties.overview.zoom.centreWithin.distancePc : undefined;
-  if (within !== undefined && !(typeof within === 'number' && within > 0)) throw new TypeError(`src/objects/local-group/object.json: zoom.centreWithin.distancePc is ${String(within)}, not a positive number.`);
-  // The level frames its members: the prepared catalogue's Local Group association. M81, NGC 253 and M83 are drawn from
-  // this catalogue but belong to other groups, 3.5 to 4.9 Mpc away; framing them pulled the camera past the Nearby
-  // Universe threshold, so the Local Group page opened as the Nearby Universe (2026-10-01). Before the prepared
-  // catalogue is restored the association is unknown and the distance rule alone applies.
-  let members: Set<string> | null = null;
-  try {
-    const prepared: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects/local-group-galaxies/prepared/catalogue.json'), 'utf8'));
-    if (!isRecord(prepared) || !Array.isArray(prepared.objects)) throw new TypeError('src/objects/local-group-galaxies/prepared/catalogue.json: objects is missing.');
-    members = new Set(prepared.objects.flatMap(object => isRecord(object) && typeof object.id === 'string' && isRecord(object.membership)
-      && object.membership.group === 'local-group' ? [object.id] : []));
-  } catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
+  // Inside the Local Group: the object tree's chain from a galaxy reaches it.
+  const parentOf = (id: string) => { const descriptor = descriptors.get(id); return isRecord(descriptor) && typeof descriptor.parent === 'string' ? descriptor.parent : undefined; };
+  const inside = (id: string) => { for (let at = parentOf(id); at !== undefined; at = parentOf(at)) if (at === 'local-group') return true; return false; };
   const galaxies: Record<string, { originM: unknown; radiusM: number }> = {};
   for (const [row, detail] of Object.entries(recipe.detailObjects)) {
     if (!isRecord(detail) || typeof detail.id !== 'string') throw new TypeError(`${recipePath}: detailObjects.${row} has no id.`);
-    if (detail.focusRadiusM === undefined || members && !members.has(detail.id)) continue;
+    if (detail.focusRadiusM === undefined || !inside(detail.id)) continue;
     if (typeof detail.focusRadiusM !== 'number' || !(detail.focusRadiusM > 0)) throw new TypeError(`${recipePath}: detailObjects.${row}.focusRadiusM is ${String(detail.focusRadiusM)}, not a positive number.`);
-    const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', detail.id, 'object.json'), 'utf8'));
+    const descriptor = descriptors.get(detail.id);
     // A galaxy is an object of the world: its world frame places it.
     if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.worldFrame)) {
       throw new TypeError(`src/objects/${detail.id}/object.json: the Local Group galaxy ${row} has no properties.worldFrame.`);
     }
     const originM = descriptor.properties.worldFrame.originM;
-    if (within !== undefined && Array.isArray(originM) && Math.hypot(...originM.map(Number)) > within * M_PER_PC) continue;
     galaxies[detail.id] = { originM, radiusM: detail.focusRadiusM };
   }
   return galaxies;
@@ -171,10 +159,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   // Every descriptor once, shared by each read below.
   const descriptors = await readObjectDescriptors(resolve(projectRoot, 'src/objects'));
   const catalogued = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance, descriptors);
-  // A level of the zoom ladder is an object: its package is a catalogue entry that also authors its place on the ladder.
-  const overviews = await readOverviews(resolve(projectRoot, 'src/objects'), descriptors);
   const entries = catalogued;
-  for (const { id } of overviews) if (!entries.some(entry => entry.id === id)) throw new TypeError(`src/objects/${id}/object.json authors a level of the zoom ladder without a catalogue entry: a level is an object.`);
   const discoveries = await Promise.all(entries.map(async ({ id }) => {
     return prepareObjectDiscovery(descriptors.get(id), resolve(projectRoot, 'src/objects', id));
   }));
@@ -191,13 +176,9 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
     const descriptor = descriptors.get(id);
     return { descriptor, distance, discovery: discoveries[index]! };
   })));
-  // Every page reads the levels, so their rows are written apart as well: the same rows as the catalogue's.
-  await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.overviews), JSON.stringify(overviews.map(({ id, descriptor }) => {
-    const index = entries.findIndex(entry => entry.id === id);
-    return { descriptor, distance: entries[index]!.distance, discovery: discoveries[index]! };
-  })) + '\n');
+  await rm(resolve(projectRoot, 'site/prepared-overview-objects.json'), { force: true });
   await writeGenerated(resolve(projectRoot, 'site/prepared-dataset-volumes.json'), JSON.stringify(await readDatasetVolumes(entries, projectRoot)) + '\n');
-  await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');
+  await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot, descriptors)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'), descriptors);
   await writeGenerated(resolve(projectRoot, 'site/prepared-stellar-extents.json'), JSON.stringify(await readStellarExtents([...entries, ...contexts], projectRoot)) + '\n');
   const { inline, banks } = splitContextObjectAssets(contexts, await contextObjectAssetUrls(contexts, projectRoot, assetOrigin()));

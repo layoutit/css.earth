@@ -17,7 +17,6 @@ import { loadDotCatalogues } from './dot-catalogues.mts';
 import { annotationsForBodies, worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
 import { CONTEXT_DATASETS } from './context-datasets.mts';
-import { KNOWN_OVERVIEWS } from './object-directory.mts';
 import { navigationHref } from './navigation/navigation-history.mts';
 
 /** The view an image mesh package is drawn in: the view of the dataset the mounted object shows of it (context-datasets.mts),
@@ -56,6 +55,19 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // Only the context objects' folders are globbed; bodies share src/objects but are not world resources.
     const descriptors = CONTEXT_OBJECT_DESCRIPTORS, assets = CONTEXT_OBJECT_ASSET_URLS;
     const parsedDescriptors = Object.values(descriptors).map(parseObjectDescriptor);
+    // The objects seen from inside (the Milky Way, the Local Group, the Nearby and the Observable Universe) are context
+    // objects too, and the banks they host are the world's own context: drawn always, each answering as a bank with
+    // nothing to load, its caption naming its host and linking to its host's page.
+    const insideObjects = new Map(parsedDescriptors.filter(descriptor => isRecord(descriptor.properties.zoom)).map(descriptor => [descriptor.id, descriptor] as const));
+    const insideHost = (id: string) => {
+      const host = parsedDescriptors.find(descriptor => descriptor.id === id)?.properties.host;
+      return typeof host === 'string' ? insideObjects.get(host) : undefined;
+    };
+    const contextBanks = parsedDescriptors.filter(descriptor => insideHost(descriptor.id)).map(descriptor => descriptor.id);
+    const hostName = (id: string) => {
+      const catalog = insideHost(id)?.properties.catalog;
+      return isRecord(catalog) && typeof catalog.name === 'string' ? catalog.name : undefined;
+    };
     const resourceSet = (objectId: string, files: Record<string, unknown> = assets) => {
       const base = `../src/objects/${objectId}/`;
       const resolve = (path: string) => {
@@ -151,9 +163,9 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // The plan as it stands now: systems read later reach the universe through onWorldSystems below.
     const plan = applicationContext, sprites = billboards([plan.focus, ...plan.bodies]);
     const universe = createPreparedUniverse({
-      // The world's volume is an overview's package (the Milky Way): clicking it opens that overview's page.
-      environmentLinks: (level => level ? { [applicationContext.volume.objectId]: level.route } : {})(KNOWN_OVERVIEWS.find(level => level.packages.includes(applicationContext.volume.objectId))),
-      contextBanks: KNOWN_OVERVIEWS.flatMap(level => level.packages),
+      // The world's volume is the Milky Way's bank: clicking it opens its host's page.
+      environmentLinks: (host => host ? { [applicationContext.volume.objectId]: `/${host.id}/` } : {})(insideHost(applicationContext.volume.objectId)),
+      contextBanks,
       stellarExtents: STELLAR_EXTENTS,
       // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
       // Cepheids), star-forming regions on both sides of the centre (Anderson et al. 2014 WISE HII regions, Reid et al.
@@ -165,11 +177,11 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       backgroundCataloguePoints,
       starCataloguePoints: WORLD_DOT_BANKS.map(id => `/world/dots/${id}.bin`),
       // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
-      // open unless its page's dataset shows it whole or hides it. Hidden, its caption names the overview it bounds.
+      // open unless its page's dataset shows it whole or hides it. Hidden, its caption names the object it bounds.
       imageMeshes: parsedDescriptors.filter(descriptor => descriptor.prepared?.format === IMAGE_MESH_SCHEMA).map(descriptor => {
         const set = resourceSet(descriptor.id);
         return { url: set.resolve(descriptor.prepared!.url), resolveResource: (path: string) => set.resolve(`prepared/${path}`),
-          cutaway: () => meshView(descriptor) === 'cutaway', hidden: () => meshView(descriptor) === 'hidden', hiddenCaption: KNOWN_OVERVIEWS.find(overview => overview.packages.includes(descriptor.id))?.name };
+          cutaway: () => meshView(descriptor) === 'cutaway', hidden: () => meshView(descriptor) === 'hidden', hiddenCaption: hostName(descriptor.id) };
       }),
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       nonNavigableIds: ordinaryAsteroidIds,

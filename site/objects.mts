@@ -1,4 +1,4 @@
-import { checkObjectTree, defineObjects, levelOf } from '@cssearth/objects';
+import { checkObjectTree, defineObjects } from '@cssearth/objects';
 import type { CatalogEntry as RegistryCatalogEntry, NavigableObject as RegistryNavigableObject, ObjectEntry as RegistryObjectEntry } from '@cssearth/objects';
 import { CATALOGUE_ENTRIES } from './prepared-catalogue.mjs';
 import { objectFromEntry } from './object-directory.mts';
@@ -18,10 +18,15 @@ checkObjectTree(OBJECTS);
 export const SCENE_OBJECTS = Object.freeze(OBJECTS.filter(object => !object.system));
 
 /** Every page a build can prerender, each with the scene it mounts: a system's is its host's (built-pages.mts). */
-export const PAGES = Object.freeze(OBJECTS.map(object => Object.freeze({ id: object.id, ...(object.system ? { sceneHostId: object.system.host } : {}) })));
+export const PAGES = Object.freeze(OBJECTS.map(object => Object.freeze({ id: object.id, ...(object.system ? { sceneId: object.system.host } : {}) })));
 
-/** The levels of the zoom ladder, from the nearest out: the objects that are levels, as the ladder reads them. */
-export const OVERVIEWS = Object.freeze(OBJECTS.filter(object => object.level).map(levelOf).sort((a, b) => a.order - b.order));
+/** The objects `id` is inside, nearest first: its parent, that one's, out to the Observable Universe. */
+export function ancestorsOf(id: string): readonly NavigableObject[] {
+  const chain: NavigableObject[] = [];
+  for (let parent = requireObject(id).parent; parent !== undefined; parent = requireObject(parent).parent) chain.push(requireObject(parent));
+  return chain;
+}
+
 
 export function requireObject(id: string) {
   const object = OBJECTS.find(candidate => candidate.id === id);

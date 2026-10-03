@@ -4,7 +4,7 @@
  * The map names a star only when it is featured, has imagery or hosts a body that does (prepare-spatial-context.ts); every
  * other star package is a plain dot. Such a star is one more star of the galaxy: this writes each one within the
  * galaxy's reach as `name,xKpc,yKpc,zKpc,color`, relative to the Sun, for the `milky-way-volume` dots to join
- * (packages/bake/cli/prepare-packaged-points.mts, then each level's merge). The color is the star's dot color: its
+ * (packages/bake/cli/prepare-packaged-points.mts, then each dot bank's merge). The color is the star's dot color: its
  * prepared color dimmed by its luminosity where its package cites a radius and temperature.
  *
  * It reads the prepared world context, so it runs after `pnpm prepare:world-context`.

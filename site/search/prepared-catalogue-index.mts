@@ -19,10 +19,10 @@ const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKE
  * every object's marker (site/prepared-navigation-markers.mjs was 820 KB of every page's code, 2026-10-02). */
 export function objectResultMarker(object: { readonly id: string; readonly color: string }) {
   const prepared = PREPARED_NAVIGATION_MARKERS[object.id];
-  if (!prepared) return Object.freeze({ kind: 'scene' as const, id: object.id, color: object.color });
-  if (prepared.context) return Object.freeze({ kind: 'scene' as const, id: object.id, color: object.color, preview: true as const });
+  if (!prepared) return Object.freeze({ id: object.id, color: object.color });
+  if (prepared.context) return Object.freeze({ id: object.id, color: object.color, preview: true as const });
   const { style, innerStyle, ringed, ringStyle } = markerStyle(prepared, { color: object.color, scale: THUMBNAIL_SCALE });
-  return Object.freeze({ kind: 'scene' as const, id: object.id, color: object.color,
+  return Object.freeze({ id: object.id, color: object.color,
     sprite: Object.freeze({ style, innerStyle, ...(ringed ? { ringStyle } : {}) }) });
 }
 
@@ -31,13 +31,12 @@ export function objectResultMarker(object: { readonly id: string; readonly color
 export function preparedCatalogueIndex(): CatalogueIndex {
   return Object.freeze({
     schema: 'cssearth-catalogue-index@1',
-    // A system object's row is its system's (systemEntries below), not a second row of its own.
+    // A system's row is its own object's, built from its system (systemEntries below).
     entries: Object.freeze([...SEARCH_OBJECTS.filter(object => !object.system).map((object): CatalogueIndexEntry => {
       const title = distanceDescription(object.distance);
       const source = sourceDocumentation(object.id, object.name);
       const { value, unit } = listDistance(object.distance);
       return Object.freeze({
-        kind: 'scene' as const,
         id: object.id,
         name: object.name,
         searchNames: Object.freeze([...new Set([...designationNames(object.id, object.name), ...(object.searchNames ?? []).map(name => name.toLocaleLowerCase('en'))])]),
@@ -64,8 +63,7 @@ function systemEntries(): CatalogueIndexEntry[] {
     const star = SCENE_OBJECTS.find(object => object.id === system.id)!, source = systemSourceDocumentation(system);
     const title = distanceDescription(star.distance), { value, unit } = listDistance(star.distance);
     return Object.freeze({
-      kind: 'system' as const,
-      id: system.id,
+      id: systemObjectId(system.id),
       name: system.name,
       searchNames: Object.freeze([]),
       classification: 'planetary-system',
@@ -76,7 +74,7 @@ function systemEntries(): CatalogueIndexEntry[] {
       candidate: false,
       distanceMeters: star.distance.meters,
       detail: Object.freeze({ text: `${value} ${unit}`, value, unit, title, ariaLabel: `${value} ${unit}. ${title}` }),
-      source: Object.freeze({ subject: `overview:system:${system.id}`, document: source.href, label: source.label }),
+      source: Object.freeze({ subject: `object:${systemObjectId(system.id)}`, document: source.href, label: source.label }),
       marker: objectResultMarker(star),
     });
   }), ...allSatelliteSystems().map(system => {
@@ -84,8 +82,7 @@ function systemEntries(): CatalogueIndexEntry[] {
     const host = SCENE_OBJECTS.find(object => object.id === system.hostId)!, source = systemSourceDocumentation({ id: system.hostId, name: system.name, memberIds: system.memberIds });
     const title = distanceDescription(host.distance), { value, unit } = listDistance(host.distance);
     return Object.freeze({
-      kind: 'system' as const,
-      id: system.hostId,
+      id: systemObjectId(system.hostId),
       name: system.name,
       searchNames: Object.freeze([]),
       classification: 'satellite-system',
@@ -96,7 +93,7 @@ function systemEntries(): CatalogueIndexEntry[] {
       candidate: false,
       distanceMeters: host.distance.meters,
       detail: Object.freeze({ text: `${value} ${unit}`, value, unit, title, ariaLabel: `${value} ${unit}. ${title}` }),
-      source: Object.freeze({ subject: `satellite-system:${system.hostId}`, document: source.href, label: source.label }),
+      source: Object.freeze({ subject: `object:${systemObjectId(system.hostId)}`, document: source.href, label: source.label }),
       marker: objectResultMarker(host),
     });
   })];
