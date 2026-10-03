@@ -1,4 +1,4 @@
-import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA, systemHostId, worldHolders } from '@cssearth/objects';
+import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA, systemHostId, systemObjectId, worldHolders } from '@cssearth/objects';
 import type { PreparedWorldContextData as PreparedWorldContext } from '@cssearth/objects';
 import { outwardSphere } from './spatial-context.ts';
 import type { Vector3 } from './spatial-context.ts';
@@ -78,9 +78,24 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   const root = encodeBodies([focus], positions);
   const summary = { schema: PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA as typeof PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, ...rest, worldBodyCount: bodies.length,
     orbitBanks: {}, ...root.tables(), focus: root.rows[0]!, bodies: {} };
+  // A page reads what a body is inside from the file its row is in (world-context.ts parsePreparedWorldSystem). A file whose
+  // bodies are inside another object says which: the asteroid dot bank's are inside the Solar System.
+  const insideOf = (id: string, members: readonly Body[]) => {
+    const told = members.filter(body => body.id !== id && systemObjectId(body.id) !== id).map(body => holders.insideOf(body.id));
+    if (told.every(inside => inside === id)) return undefined;
+    if (new Set(told).size > 1) throw new TypeError(`World file ${id} holds bodies inside ${[...new Set(told)].join(' and ')}; a file's bodies are inside one object.`);
+    return told[0];
+  };
+  // A host whose row is in its own system's file does not say what it is inside, and a page does not need it: its system
+  // is inside a galaxy. One whose system is inside another system says so (Epsilon Indi Ba, whose system Epsilon Indi B is
+  // inside Epsilon Indi A's): a page reads that system's members from it.
+  const nested = (id: string, body: Body): Body => {
+    const outer = systemObjectId(body.id) === id ? holders.insideOf(body.id) : undefined;
+    return outer !== undefined && systemHostId(outer) !== null ? { ...body, inside: outer } : body;
+  };
   const encode = (id: string, members: readonly Body[]) => {
-    const file = encodeBodies(members, positions), centres = centresOf(id);
-    return { schema: PREPARED_WORLD_SYSTEM_SCHEMA as typeof PREPARED_WORLD_SYSTEM_SCHEMA, id, ...(Object.keys(centres).length ? { orbitCenters: centres } : {}),
+    const file = encodeBodies(members.map(body => nested(id, body)), positions), centres = centresOf(id), inside = insideOf(id, members);
+    return { schema: PREPARED_WORLD_SYSTEM_SCHEMA as typeof PREPARED_WORLD_SYSTEM_SCHEMA, id, ...(inside === undefined ? {} : { inside }), ...(Object.keys(centres).length ? { orbitCenters: centres } : {}),
       orbitBanks: pinsOf(members), ...file.tables(), bodies: columns(file.rows),
       ...(holders.drawnFromAnywhere(id) || places.has(id) ? { anywhere: true } : {}), ...(places.has(id) ? { places: true } : {}) };
   };
@@ -95,7 +110,9 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
      * a file from the root of the tree down, and the row of each plain-dot star nothing orbits, which its object entry carries. */
     index: { order: bodies.map(body => body.id), files: ordered, rows: Object.fromEntries([...rows].map(([id, body]) => [id, encode(id, [body])])) },
     /** Every star the files leave out, which the map draws from dot banks (plain-star-dots.ts). */
-    plainStars: bodies.filter(body => holders.plainDotStar(body.id)) };
+    plainStars: bodies.filter(body => holders.plainDotStar(body.id)),
+    /** What each body, with the system it hosts, is inside in the object tree: the full context's rows carry it. */
+    insideOf: (id: string) => holders.insideOf(id) };
 }
 
 /** The rounding of a place in `places.json`, in metres. */

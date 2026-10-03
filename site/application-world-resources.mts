@@ -1,14 +1,13 @@
-import { IMAGE_MESH_SCHEMA, parseDatasetBillboards, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
+import { IMAGE_MESH_SCHEMA, bankCataloguePoints, parseDatasetBillboards, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { DATASET_VISIBILITY } from './runtime-policy.mts';
 import { isRecord } from '@cssearth/core';
 // Generated after the prepared dataset payloads are restored: text now, validated below.
 import datasetBillboardText from './prepared-dataset-billboards.json?raw';
 import datasetBillboardAtlasUrl from './prepared-dataset-billboards.webp?url';
-import galaxyDisplaySample from '../src/objects/local-group-galaxies/prepared/display-sample.json' with { type: 'json' };
 import { createPreparedUniverse, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE, WORLD_DOT_BANKS, onWorldSystems } from './world-context-plan.mts';
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
-import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
+import { CONTEXT_GALAXY_SAMPLE, CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { createInFlightLoader } from './in-flight-loader.mts';
@@ -35,18 +34,6 @@ function meshView(descriptor: { id: string; properties: Record<string, unknown> 
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
 const { annotationOpacities, annotationPriorities, ordinaryAsteroidIds, compact: phone } = worldVisibilityPolicy;
 const PARSEC_M = 3.085677581491367e16;
-
-// Published catalogues drawn through a volume bank, with its opacity (src/objects/m87-volume/README.md).
-const VOLUME_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
-  'm49-volume': ['dots'],
-  'm59-volume': ['dots'],
-  'm60-volume': ['dots'],
-  'm84-volume': ['dots'],
-  'm85-volume': ['dots'],
-  'm86-volume': ['dots'],
-  'm87-volume': ['dots'],
-  'm89-volume': ['dots'],
-};
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
@@ -142,7 +129,10 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       const bank = parseCataloguePointBankDescriptor(descriptor);
       return { id: bank.id, url: resourceSet(bank.id).resolve(bank.url), ...(bank.host === undefined ? {} : { host: bank.host }) };
     };
-    const pointBanks = parsedDescriptors.filter(descriptor => descriptor.type === 'catalogue-point-bank').map(pointBank);
+    // The plain stars inside an object are dots of that object (`/world/dots/<object id>.bin`, named by the world's summary):
+    // they draw while it or a body inside it is selected, so no other page asks for them.
+    const pointBanks = [...parsedDescriptors.filter(descriptor => descriptor.type === 'catalogue-point-bank').map(pointBank),
+      ...WORLD_DOT_BANKS.map(id => ({ id: `${id}/plain-stars`, url: `/world/dots/${id}.bin`, host: id, stars: true as const }))];
     // A body's row says whether it is a plain dot (no billboard) and what it is (an asteroid's sprite stays smaller).
     const billboards = (bodies: readonly (Parameters<typeof preparedBodyBillboards>[0][number] & { readonly plainDot?: true; readonly classification?: string })[]) => {
       const asteroids = new Set(bodies.filter(body => body.classification === 'asteroid').map(body => body.id));
@@ -162,7 +152,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       if (!volumeDatasetIds.has(id)) throw new TypeError(`Unknown prepared volume dataset bank: ${id}.`);
       const set = await bankSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport);
       return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`),
-        cataloguePointUrls: (VOLUME_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.bin`)) };
+        // Published catalogues drawn through the bank, with its opacity (its descriptor's `cataloguePoints`).
+        cataloguePointUrls: bankCataloguePoints(parseObjectDescriptor(set.descriptor)).map(bank => set.resolve(`prepared/${bank}.bin`)) };
     });
     // The worker receives the validated summary and reads orbit paths on demand.
     // The bounded spatial-star sample is already inside pointAppearance;
@@ -186,7 +177,6 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       context: plan, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, pointBanks, volumeDatasetBanks, loadVolumeDataset,
       backgroundCataloguePoints,
-      starCataloguePoints: WORLD_DOT_BANKS.map(id => `/world/dots/${id}.bin`),
       // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
       // open unless its page's dataset shows it whole or hides it. Hidden, its caption names the object it bounds.
       imageMeshes: parsedDescriptors.filter(descriptor => descriptor.prepared?.format === IMAGE_MESH_SCHEMA).map(descriptor => {
@@ -202,7 +192,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       sky: !phone,
       loadCatalog: async () => {
         const { galaxies, clusters, nebulae } = await loadCatalogs();
-        return { payload: galaxies, galaxySample: galaxyDisplaySample, nebulae, ...catalogBank,
+        return { payload: galaxies, galaxySample: CONTEXT_GALAXY_SAMPLE, nebulae, ...catalogBank,
           clusters: { payload: clusters, ...catalogBank.clusters } };
       },
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),

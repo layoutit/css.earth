@@ -25,12 +25,18 @@ by one rule the bake and the build share ([world-holders.ts](../../packages/obje
   its own system's file with them; a companion bound to a system's star is in that system's file; one inside no system has
   no file, and its row travels in its object entry. The
   map draws a plain-dot star of the Milky Way as one of the galaxy's own dots
-  ([packaged-stars](../../src/objects/milky-way-volume/source/packaged-stars/points.json)), and the ones in other
-  galaxies from the world's two dot banks, in the root object's package
-  ([plain-star-dots.ts](../../packages/bake/src/world-context/plain-star-dots.ts), served at `/world/dots/<id>.bin`).
-  One bank per galaxy was measured on 2026-10-03: nine requests and 12.5 KB on every page against two and 5.8 KB,
-  because a bank is asked for before its extent is known.
-  An asteroid drawn as a plain dot is a dot of `catalogue-asteroids`, whose file has its row.
+  ([packaged-stars](../../src/objects/milky-way-volume/source/packaged-stars/points.json)). Every other one is a dot of
+  the object it is inside in the object tree: another galaxy, or the system of the star it is bound to. That object's
+  package holds the bank (`prepared/plain-stars.bin`, about its centre, served at `/world/dots/<object id>.bin`;
+  [plain-star-dots.ts](../../packages/bake/src/world-context/plain-star-dots.ts)), and a page asks for it only while that
+  object or a body inside it is selected. A star package of the Milky Way that the galaxy's table does not name yet is
+  inside the Milky Way, so its dot is in the Milky Way's bank, one request on every page inside the galaxy, until
+  [paged-star-dot-positions.mts](../../site/build/prepare/paged-star-dot-positions.mts) rewrites the table and the
+  galaxy's dots are merged again; on 2026-10-03 the table names every one, and no page inside the Milky Way asks for a
+  dot bank. As two banks of the world's own they were two requests and 5.8 KB on every page, and one bank per galaxy
+  asked for on every page was nine requests and 12.5 KB (measured 2026-10-03).
+  An asteroid drawn as a plain dot is a dot of the bank its star hosts that declares them (`properties.plainDots` of
+  `catalogue-asteroids`), whose file has its row.
 - `src/objects/<object id>/prepared/places.json` is, per object, where each of its children's systems that is read on
   approach is: its host's place, rounded to 1e12 m, and the range its orbits are authored to. Served at
   `/world/places/<id>.json`.
@@ -46,6 +52,10 @@ plain dot (the Solar System's planets, the Milky Way's featured stars, the galax
 another galaxy), or when it has places. On 2026-10-03 that is 20 files. The build serves them as one response, each file
 whole and named by its object (`/world/anywhere.json`): measured with 22 files, separate responses were 32.1 KB gzipped
 and one response 26.1 KB.
+
+A row says what its body is inside by the file it is in: a page reads a system's members from that, with no table of
+systems. A file whose bodies are inside another object says which (`inside`): the asteroid dot bank's are inside the Solar
+System. The full context, which Node tools read, writes it on every row.
 
 The build tells each page and each object entry which files it needs ([world-places.mts](../../site/world-places.mts)),
 root first, so an orbit's parent is placed before it: the page names its own in its head

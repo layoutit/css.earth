@@ -28,6 +28,7 @@ export interface PreparedWorldContextData {
     readonly dotColor?: string;
     /** A placed star bound to another with no measured orbit: its host and the pair's centre of mass. */
     readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 };
+    readonly inside?: string;
     /** Absent for a placed body, which has a position but no orbit to draw. */
     readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
       readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[];

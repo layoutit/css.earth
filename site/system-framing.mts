@@ -11,9 +11,8 @@ type FramingFrame = Pick<PreparedWorldCameraFrame, 'referenceFrame' | 'epochJdTt
 interface FramingCandidate { originM?: PositionM; minimumM: PositionM; maximumM: PositionM; cameraToReference: readonly number[]; }
 interface SystemView { readonly candidates: readonly FramingCandidate[]; }
 const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map(2)];
-import galaxy from '../src/objects/milky-way-volume/object.json' with { type: 'json' };
 import datasetVolumes from './prepared-dataset-volumes.json' with { type: 'json' };
-import localGroupGalaxies from './prepared-local-group-galaxies.json' with { type: 'json' };
+import fitBoxes from './prepared-fit-boxes.json' with { type: 'json' };
 import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
 import { systemFramingRadii } from './system-framing-radii.mts';
 export { systemFramingRadii } from './system-framing-radii.mts';
@@ -90,7 +89,6 @@ export function loadSystemView(id: string, read?: (id: string) => Promise<unknow
   }
   return loading;
 }
-export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);
 /** Volumes a body shows through one of its datasets, by volume id, each with the object it is the extent of when it
  * names one (site/build/prepare/prepare-catalog.mts). */
 export const DATASET_VOLUMES: ReadonlyMap<string, { readonly frame: DensityVolumeFrame; readonly host?: string }> = new Map(
@@ -100,26 +98,16 @@ export const DATASET_VOLUMES: ReadonlyMap<string, { readonly frame: DensityVolum
     return [id, { frame: parseDensityVolumeFrame(bank.frame), ...(host === undefined ? {} : { host }) }];
   }));
 
-/** The Local Group as the universe draws it: the Milky Way's volume and the other galaxies the Local Group catalogue draws,
- * each a sphere of its recipe focus radius (site/build/prepare/prepare-catalog.mts), in one box in reference axes. */
-const DRAWN_GALAXIES_BOX = (() => {
-  const rotation = worldRotationFromQuaternion(GALACTIC_VOLUME.localToReferenceXyzw), { min, max } = GALACTIC_VOLUME.boundsUnits;
-  const galaxy = [0, 1, 2, 3, 4, 5, 6, 7].map(corner => {
-    const offset = rotateWorldPosition(rotation, tuple(axis => ((corner >> axis) & 1 ? max : min)[axis]! * GALACTIC_VOLUME.metersPerUnit));
-    return tuple(axis => GALACTIC_VOLUME.originM[axis]! + offset[axis]);
-  });
-  const members = Object.entries(localGroupGalaxies as Record<string, { originM: unknown; radiusM: unknown }>).flatMap(([id, { originM, radiusM }]) => {
-    if (!Array.isArray(originM) || originM.length !== 3 || !originM.every(Number.isFinite) || typeof radiusM !== 'number' || !(radiusM > 0)) {
-      throw new TypeError(`prepared-local-group-galaxies.json: ${id} needs an origin of three numbers and a positive radius.`);
-    }
-    return [-1, 1].flatMap(sign => [0, 1, 2].map(axis => tuple(index => (originM[index] as number) + (index === axis ? sign * radiusM : 0))));
-  });
-  const corners = [...galaxy, ...members];
-  const minimum = tuple(axis => Math.min(...corners.map(corner => corner[axis]!))), maximum = tuple(axis => Math.max(...corners.map(corner => corner[axis]!)));
-  const centre = tuple(axis => (minimum[axis] + maximum[axis]) / 2);
-  return { centre, candidate: { minimumM: tuple(axis => minimum[axis] - centre[axis]), maximumM: tuple(axis => maximum[axis] - centre[axis]),
-    cameraToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1] } };
-})();
+/** The box each overview whose `zoom.frame` is {fit: drawn-galaxies} fits in view, by object id: the galaxies inside it,
+ * in reference axes about the box's centre (site/build/prepare/prepare-catalog.mts prepareFitBoxes). */
+const FIT_BOXES: ReadonlyMap<string, { centre: PositionM; candidate: FramingCandidate }> = new Map(Object.entries(fitBoxes as Record<string, Record<string, unknown>>).map(([id, box]) => {
+  const position = (field: 'centreM' | 'minimumM' | 'maximumM'): PositionM => {
+    const value = box[field];
+    if (!Array.isArray(value) || value.length !== 3 || !value.every(Number.isFinite)) throw new TypeError(`site/prepared-fit-boxes.json: ${id}.${field} must be three numbers.`);
+    return [value[0], value[1], value[2]];
+  };
+  return [id, { centre: position('centreM'), candidate: { minimumM: position('minimumM'), maximumM: position('maximumM'), cameraToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1] } }];
+}));
 
 /** Fit a box in reference axes at the current viewing angle, centred on it. */
 function boxZoomTarget(from: WorldCameraPose, box: { centre: PositionM; candidate: FramingCandidate }, optics: Optics, rect: MapViewport) {
@@ -127,9 +115,11 @@ function boxZoomTarget(from: WorldCameraPose, box: { centre: PositionM; candidat
   return { world: systemViewTarget(from, frame, optics, { candidates: [box.candidate] }, rect), focusPositionM: box.centre };
 }
 
-/** Fit the drawn galaxies (the Milky Way's volume and the Local Group catalogue's galaxies) at the current viewing angle, centred on them: an overview's `zoom.frame` {fit: drawn-galaxies}. */
-export function drawnGalaxiesZoomTarget(from: WorldCameraPose, optics: Optics, rect: MapViewport) {
-  return boxZoomTarget(from, DRAWN_GALAXIES_BOX, optics, rect);
+/** Fit the galaxies inside `objectId` at the current viewing angle, centred on them: an overview's `zoom.frame` {fit: drawn-galaxies}. */
+export function drawnGalaxiesZoomTarget(objectId: string, from: WorldCameraPose, optics: Optics, rect: MapViewport) {
+  const box = FIT_BOXES.get(objectId);
+  if (!box) throw new TypeError(`site/prepared-fit-boxes.json has no box for ${objectId}: its zoom.frame fits the galaxies inside it. Run pnpm prepare:catalog.`);
+  return boxZoomTarget(from, box, optics, rect);
 }
 
 /** Each classification's prepared box (site/build/prepare/prepare-world-presentation.mts prepareCategoryFrames), in the world's

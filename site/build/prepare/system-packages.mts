@@ -78,11 +78,12 @@ for (const system of systems) {
   if (host.parent !== id) {
     await writeFile(resolve(objectsRoot, system.hostId, 'object.json'), `${JSON.stringify({ ...host, parent: id }, null, 2)}\n`);
   }
-  // A star bound to the host is inside the host's system (`checkBoundStars`, object-tree.ts). It hosts no system of its
-  // own: what orbits it belongs to the host's system (planetary-system-members.mts).
+  // A star bound to the host is inside the host's system (`checkBoundStars`, object-tree.ts). One with bodies of its own
+  // hosts a system inside this one (Epsilon Indi B): then its system is what is inside it, and the star stays in its own.
   for (const starId of system.bound) {
     const star = await existing(starId);
-    if (star && star.parent !== id) await writeFile(resolve(objectsRoot, starId, 'object.json'), `${JSON.stringify({ ...star, parent: id }, null, 2)}\n`);
+    const insideId = star?.parent === systemObjectId(starId) ? systemObjectId(starId) : starId, inside = insideId === starId ? star : await existing(insideId);
+    if (inside && inside.parent !== id) await writeFile(resolve(objectsRoot, insideId, 'object.json'), `${JSON.stringify({ ...inside, parent: id }, null, 2)}\n`);
   }
   const descriptor = { schema: OBJECT_SCHEMA, id, parent, type: 'system',
     generator: 'site/build/prepare/system-packages.mts',

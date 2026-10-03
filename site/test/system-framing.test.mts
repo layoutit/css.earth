@@ -33,6 +33,11 @@ const world: WorldCameraPose = { referenceFrame: sun.referenceFrame, epochJdTt: 
 const optics: ReturnType<ObjectWorldNavigation["optics"]> = { visibleRect: null, focalPixels: 1100, framingRadiusPixels: 200, detailHandoffDiameterPixels: 14,
   principalOffsetPixels: [0,0], widthPixels: 1280, heightPixels: 720 };
 const mount = { sharedView: unusedSharedView, navigation: navigationFixture(sun, () => world, () => optics) };
+/** The Milky Way's volume: the frame its page's galactic breadcrumb fits. */
+async function galacticVolume() {
+  const { parseDensityVolumeFrame } = await import('@cssearth/objects');
+  return parseDensityVolumeFrame((await import('../../src/objects/milky-way-volume/object.json', { with: { type: 'json' } })).default.properties.volume);
+}
 
 test('fitting the current angle is independent of prepared box order', () => {
   const view = required(SYSTEM_VIEWS.get('neptune'));
@@ -167,7 +172,8 @@ test('selecting the Milky Way from Local Group zooms in to the galaxy while keep
 });
 
 test('galactic breadcrumbs zoom straight out from the current view without panning or turning', async () => {
-  const { GALACTIC_VOLUME, volumeZoomTarget } = await import('../system-framing.mts');
+  const { volumeZoomTarget } = await import('../system-framing.mts');
+  const GALACTIC_VOLUME = await galacticVolume();
   const { rotateWorldPosition, worldRotationFromQuaternion } = await import('@cssearth/engine');
   for (const orientationXyzw of [[0, 0, 0, 1], [.5, -.5, .5, .5]] as const) {
     const from: WorldCameraPose = { ...world, pose: { positionM: [2e12, -3e12, 1e13], orientationXyzw } };
@@ -207,30 +213,34 @@ test('a Solar System breadcrumb always restores the system framing from a Sun cl
   const closeup = createWorldSelectionTarget(world, sun, optics);
   const camera = { sharedView: unusedSharedView, navigation: { ...mount.navigation, capture: () => closeup } };
   assert.equal(navigation.systemTarget({ objectId: 'sun', fromId: 'sun', mount: camera }), null);
-  const target = required(navigation.overviewTarget({ scope: 'system', objectId: 'sun', fromId: 'sun', mount: camera }));
+  const target = required(navigation.overviewTarget({ scope: 'solar-system', objectId: 'sun', fromId: 'sun', mount: camera }));
   assert.ok(target.world);
   assert.equal(bodyViewAtCamera(target.world, sun, optics, 'sun'), 'overview');
 });
 
 test('the Local Group overview frames the Milky Way and every drawn member galaxy from any angle', async () => {
-  const { GALACTIC_VOLUME, drawnGalaxiesZoomTarget } = await import('../system-framing.mts');
-  const members = (await import('../prepared-local-group-galaxies.json', { with: { type: 'json' } })).default as Record<string, { originM: number[] }>;
+  const { drawnGalaxiesZoomTarget } = await import('../system-framing.mts');
   const { cssViewFromOrientation, rotateWorldPosition } = await import('@cssearth/engine');
-  // The galaxies inside the Local Group with a drawn object: M81, NGC 253, M83 and NGC 300 are drawn but are inside the
-  // Nearby Universe (prepare-catalog.mts reads the object tree).
   const { existsSync } = await import('node:fs');
   const associated = existsSync(new URL('../../src/objects/local-group-galaxies/prepared/catalogue.json', import.meta.url));
-  if (associated) assert.deepEqual(Object.keys(members).sort(), ['lmc', 'm31', 'm33', 'smc']);
   const { zoomScopeAtCamera } = await import('../zoom-scope.mts');
-  const { ancestorsOf } = await import('../objects.mts');
+  const { ancestorsOf, requireObject } = await import('../objects.mts');
+  // The galaxies inside the Local Group in the object tree: M81, NGC 253, M83 and NGC 300 are drawn by the same catalogue
+  // but are inside the Nearby Universe (prepare-catalog.mts prepareFitBoxes).
+  const members = OBJECTS.filter(object => object.classification === 'galaxy' && ancestorsOf(object.id).some(ancestor => ancestor.id === 'local-group')).map(object => object.id).sort();
+  // Catalogue batches add galaxies (M32 and M110 with the Messier objects), so the list is held to its rule, not pinned.
+  for (const id of ['lmc', 'm31', 'm33', 'milky-way', 'smc']) assert.ok(members.includes(id), id);
+  for (const id of ['m81', 'ngc-253', 'm83', 'ngc-300']) assert.ok(!members.includes(id), id);
+  assert.throws(() => drawnGalaxiesZoomTarget('milky-way', world, optics, systemFramingRect(optics)), /no box for milky-way/u);
   const steps = ancestorsOf('sun').flatMap(object => object.zoom ? [{ id: object.id, zoom: object.zoom }] : []);
   for (const orientationXyzw of [[0, 0, 0, 1], [.5, -.5, .5, .5], [0, .7071067811865476, 0, .7071067811865476]] as const) {
     const from: WorldCameraPose = { ...world, pose: { ...world.pose, orientationXyzw } };
-    const { world: target } = drawnGalaxiesZoomTarget(from, optics, systemFramingRect(optics));
+    const { world: target } = drawnGalaxiesZoomTarget('local-group', from, optics, systemFramingRect(optics));
     assert.deepEqual(target.pose.orientationXyzw, orientationXyzw, 'the view keeps its angle');
     if (associated) assert.equal(zoomScopeAtCamera(target, 'local-group', undefined, undefined, steps), 'local-group', 'the Local Group frame is a Local Group view');
     const view = cssViewFromOrientation(orientationXyzw);
-    for (const [id, originM] of [['milky-way', GALACTIC_VOLUME.originM], ...Object.entries(members).map(([id, frame]) => [id, frame.originM] as const)] as const) {
+    for (const id of members) {
+      const originM = required(requireObject(id).worldFrame).originM;
       const [x, y, z] = rotateWorldPosition(view, position(originM.map((value, axis) => value - target.pose.positionM[axis]!)));
       assert.ok(z < 0, `${id} is in front of the camera`);
       assert.ok(Math.abs(x / z) * optics.focalPixels <= optics.widthPixels! / 2 && Math.abs(y / z) * optics.focalPixels <= optics.heightPixels! / 2, `${id} is on screen`);

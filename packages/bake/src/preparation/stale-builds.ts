@@ -2,8 +2,9 @@
  * refusal from an old objects package, a missing module after main moved). A build is stale when a source it compiles is
  * newer than its output, or its output is missing. Modification times are enough for a local preflight; CI builds fresh.
  *
- * It imports only Node built-ins: `packages/bake/cli/check-stale-builds.mts` loads this file from source, so the check still
+ * Its bootstrap closure imports only Node built-ins: `packages/bake/cli/check-stale-builds.mts` loads this file from source, so the check still
  * runs, and `--run` still rebuilds, when this package's own build is missing or stale. */
+import { readWorkspaceGraph, workspaceOrder, hasBuild, buildOutput } from './workspace-graph.ts';
 import { spawn } from 'node:child_process';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
@@ -22,24 +23,27 @@ export interface BuildRule { readonly name: string; readonly command: string; re
 /** The builds preparation tools import. Sources are directories scanned for TypeScript, JSON body records or generator scripts.
  * A package's rule follows the rules of the workspace packages it depends on (its package.json `dependencies`), since --run
  * rebuilds in this order: `@cssearth/bake` declares types from the engine, objects and catalogue builds. */
-export const BUILD_RULES: readonly BuildRule[] = Object.freeze([
-  { name: '@cssearth/core', command: 'pnpm build:core', sources: ['packages/core/src'], output: 'packages/core/dist/index.js' },
-  { name: '@cssearth/fits', command: 'pnpm build:fits', sources: ['packages/fits/src'], output: 'packages/fits/dist/index.js' },
-  { name: '@cssearth/engine', command: 'pnpm --filter @cssearth/engine build', sources: ['packages/engine/src'], output: 'packages/engine/dist/index.js' },
-  { name: '@cssearth/objects', command: 'pnpm build:objects', sources: ['packages/objects/src'], output: 'packages/objects/dist/index.js' },
-  { name: '@cssearth/astronomy', command: 'pnpm build:astronomy', sources: ['packages/astronomy/src', 'packages/astronomy/data/bodies', 'packages/astronomy/cli'], output: 'packages/astronomy/dist/index.js' },
-  { name: '@cssearth/telescope', command: 'pnpm build:telescope', sources: ['packages/telescope/src'], output: 'packages/telescope/dist/node/index.js' },
-  { name: '@cssearth/spice', command: 'pnpm build:spice', sources: ['packages/spice/src'], output: 'packages/spice/dist/index.js' },
-  { name: '@cssearth/catalog', command: 'pnpm build:catalog', sources: ['packages/catalog/src'], output: 'packages/catalog/dist/index.js' },
-  // The bake's output is a declaration stub written after `tsc` emits its declarations, so a failed type build reads stale.
-  { name: '@cssearth/bake', command: 'pnpm build:bake', sources: ['packages/bake/src'], output: 'packages/bake/dist/volume.d.ts', inputs: 'packages/bake/dist/metafile-esm.json', base: 'packages/bake' },
-  // Telescope scene publication needs renderer; bake does not.
-  { name: '@cssearth/renderer', command: 'pnpm build:renderer', sources: ['packages/renderer/src'], output: 'packages/renderer/dist/index.js', inputs: 'packages/renderer/dist/metafile-esm.json', base: 'packages/renderer' },
-  { name: '@cssearth/volume-viewer', command: 'pnpm --filter @cssearth/volume-viewer build', sources: ['packages/volume-viewer/src', 'packages/bake/src'], output: 'packages/volume-viewer/dist/scene/compiler-viewer.js' },
-  // The CLI bundles its workspace dependencies into one file, so any of their sources makes it stale.
-  { name: '@cssearth/telescope-cli', command: 'pnpm --filter @cssearth/telescope-cli build', output: 'packages/telescope-cli/dist/telescope.mjs',
-    sources: ['packages/telescope-cli/src', ...['telescope', 'core', 'engine', 'bake', 'objects', 'fits', 'renderer', 'astronomy', 'spice'].map(name => `packages/${name}/src`)] },
-]);
+const BUILD_METADATA: readonly (Partial<BuildRule> & Pick<BuildRule, 'name'> & { bundledWorkspace?: boolean })[] = [
+  { name: '@cssearth/astronomy', sources: ['packages/astronomy/src', 'packages/astronomy/data/bodies', 'packages/astronomy/cli'] },
+  // Declaration stubs are written after tsc succeeds; a failed declaration build must read stale.
+  { name: '@cssearth/bake', output: 'packages/bake/dist/volume.d.ts', inputs: 'packages/bake/dist/metafile-esm.json', base: 'packages/bake' },
+  { name: '@cssearth/renderer', inputs: 'packages/renderer/dist/metafile-esm.json', base: 'packages/renderer' },
+  { name: '@cssearth/volume-viewer', sources: ['packages/volume-viewer/src', 'packages/bake/src'], output: 'packages/volume-viewer/dist/scene/compiler-viewer.js' },
+  { name: '@cssearth/telescope-cli', output: 'packages/telescope-cli/dist/telescope.mjs', bundledWorkspace: true },
+];
+
+export function buildRules(root: string): readonly BuildRule[] {
+  const graph = readWorkspaceGraph(root);
+  return workspaceOrder(graph).filter(hasBuild).map(pkg => {
+    const override: Partial<BuildRule> & { bundledWorkspace?: boolean } = BUILD_METADATA.find(rule => rule.name === pkg.name) ?? {};
+    const { bundledWorkspace, ...metadata } = override;
+    return { name: pkg.name, command: `pnpm --filter ${pkg.name} build`, output: metadata.output ?? buildOutput(pkg), ...metadata,
+      sources: [...metadata.sources ?? [pkg.directory + '/src'], pkg.directory + '/package.json', pkg.directory + '/tsup.config.ts',
+        ...bundledWorkspace ? workspaceOrder(graph, [pkg.name]).filter(dependency => dependency.name !== pkg.name).map(dependency => dependency.directory + '/src') : []] };
+  });
+}
+
+export const BUILD_RULES = Object.freeze(buildRules(process.cwd()));
 
 const SOURCE = /\.(?:ts|mts|json)$/u, SKIP = new Set(['dist', 'node_modules']);
 

@@ -34,7 +34,10 @@
     "preparation": {
       "source": "source/delivery.json"
     },
-    "host": "m86"
+    "host": "m86",
+    "cataloguePoints": [
+      "dots"
+    ]
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

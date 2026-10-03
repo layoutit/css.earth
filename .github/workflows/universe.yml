@@ -540,25 +540,8 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=4096
         run: pnpm typecheck:nebula
       - name: Test numerical owners, durable jobs and isolated React controls
-        # Explicit cache-independent selection. Do not substitute test:lab:nebula:
-        # that command restores real source assets before running the wider suite.
-        # Browser helpers use fresh contexts and synthetic local pages, not a lab server.
-        run: >-
-          node labs/nebula/run.mts test
-          material
-          point-projection cloud-inspection compiler-framing compact shape-cloud-camera
-          nebula-frame bake retained-material-bank optical-composite-preparation
-          detect-shapes structure-wavelets structure-map ridge-graph
-          material-solver shape-prior solver
-          acquisition footprint image-links image-ranking
-          operation-jobs plugin-lifecycle
-          lab-shell shape-cloud-state shape-cloud-scheduler
-          control-portals browser-regression browser-camera overlay-store
-          workspace-sections workspace-portals workspace-objects camera-model-panel image-appearance-panel
-          catalogue object-browser papers survey-images
-          geometry-model observation-alignment structures-model
-          build dataset-levels dataset-difference dataset-radial dataset-radial-panel
-          registration schema-protocols molecular-data native star-removal haloes coarse images native-cache photometric-mge photometric-prior compiler-defaults simulation-guided compiler-published catalogue-stars
+        # Discover every lab and volume-viewer test except *.sources.test.* files, which need restored source assets.
+        run: node labs/nebula/run.mts test --without-sources
 
   ci-guard:
     name: Report the first CI failure

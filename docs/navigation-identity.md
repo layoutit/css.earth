@@ -26,9 +26,18 @@ nebula and a cluster of galaxies are objects like any body; their recipe declare
 surface, and their imagery is a context bank a dataset names. The selection is one
 object id, and a search row is one object's. The object tree is the only structure:
 breadcrumbs are an object's ancestors, the card of an object seen from inside lists
-its children, and zooming out of a star's system hands the view to the objects the
-star is inside that are seen from inside, nearest first, with the camera kept where
-it is; zooming back in returns to the star.
+its children, and zooming out hands the view to the objects a body is inside, nearest
+first, with the camera kept where it is. Out of a star's system those are the objects
+seen from inside (the Milky Way and beyond), and zooming back in returns to the star.
+An object with a scene of its own (another galaxy, a cluster of galaxies) shows its
+body from outside, so it takes the view once the camera is outside it: as far from
+the body as that object's centre and its radius. A star of the Large Magellanic Cloud
+zooms out into the Cloud, M87* into M87, M87 into the Virgo Cluster. That scene is
+then left the way any body's is ([overview-selection.mts](../site/overview-selection.mts),
+[inside-view.mts](../site/inside-view.mts)). A system can be inside another: a star
+bound to another, with bodies of its own, hosts its system inside that star's. The
+brown dwarfs Epsilon Indi Ba and Bb are Epsilon Indi B, inside Epsilon Indi A's
+system, and zooming out of Epsilon Indi B hands the view to that system the same way.
 
 One object has one id. The spatial catalogues (Local Group galaxies, galaxy
 clusters, the nearby field) are data the world draws as dots: a row makes no page
@@ -45,15 +54,16 @@ missing hosts, duplicate identities and cycles, including self-hosting.
 
 ## Planetary systems
 
-A planetary system is a star and every prepared body whose orbit chain leads
-back to it. The Solar System is the Sun's; WASP-43 and its planet WASP-43b form
-another. [`planetary-system-members.mts`](../site/planetary-system-members.mts)
-reads each system's members from the prepared world context's orbit graph once,
-when `pnpm prepare:world-context` writes `site/prepared-world-presentation.json`;
-[`object-systems.mts`](../site/object-systems.mts) joins that table with the
-registry, so no list names the systems. Every
-member is inside its star's system in the object tree, and the derivation fails
-otherwise. A star without orbiting bodies, such as Betelgeuse, belongs to no
+A planetary system is a star and every prepared body inside its system in the
+object tree, at any depth. The Solar System is the Sun's; WASP-43 and its planet
+WASP-43b form another. Each world row says which object its body is inside: the
+object whose file the row arrives in.
+[`planetary-system-members.mts`](../site/planetary-system-members.mts) reads each
+system's members from that, and
+[`object-systems.mts`](../site/object-systems.mts) joins them with the registry,
+so no list names the systems and nothing walks orbits or bonds to find them. The
+moon systems ([`satellite-systems.mts`](../site/satellite-systems.mts)) and the
+set of bodies a selected star opens are read the same way. A star without orbiting bodies, such as Betelgeuse, belongs to no
 system. A system is named by its star's system name (the TRAPPIST-1 system, the
 Galactic Centre).
 
@@ -69,6 +79,12 @@ planet's or small body's moons are a `satellite-system`.
 system's package, and puts a bound star inside its host's system.
 
 ![The 61 Cygni system: the card lists its two stars, and the view frames both](images/61-cygni-system.png)
+
+A bound star with bodies of its own hosts its system inside its host's. Epsilon Indi B
+is the pair of brown dwarfs Ba and Bb, inside Epsilon Indi A's system: its breadcrumb
+names that system, and zooming out hands the view to it.
+
+![Epsilon Indi B: the card lists its two brown dwarfs, and its breadcrumb names the Epsilon Indi system it is inside](images/epsilon-indi-b-system.png)
 
 Inside a stellar system, every nonstellar host with prepared satellite children
 has a [satellite-system view](satellite-system-navigation.md). Its

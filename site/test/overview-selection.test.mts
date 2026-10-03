@@ -42,6 +42,27 @@ test('a flight that lands as far from a body as its star is opens the system; a 
   assert.equal(selectionAtCamera({ world: camera(sun, 50 * au), viewport, objects, systems: objects, objectId: 'sun', overview: false, landed: true }), null, 'the star itself is its system');
 });
 
+test('a body inside an object with a scene of its own hands the view to it once the camera is outside that object', () => {
+  const kpc = 206_264.806e3 * au, cloud = frame([50 * kpc, 0, 0], 5 * kpc), star = frame([52 * kpc, 0, 0], 3e10);
+  const placed = [...objects, objectFixture('cloud', cloud, { classification: 'galaxy' }), objectFixture('cepheid', star, { classification: 'star' })];
+  // 2 kpc from the Cloud's centre, inside its 5 kpc: outside it from every direction 7 kpc from the star.
+  const inside = { id: 'cloud', originM: cloud.originM, radiusM: cloud.bodyRadiusM };
+  const at = (range: number, extra: Partial<Parameters<typeof selectionAtCamera>[0]> = {}) =>
+    selectionAtCamera({ world: camera(star, range), viewport, objects: placed, systems: placed, objectId: 'cepheid', overview: false, inside, ...extra });
+  assert.equal(at(6.9 * kpc), null, 'the star keeps its scene while the camera may be inside what it is inside');
+  assert.deepEqual(at(7.01 * kpc), { overview: false, objectId: 'cloud' });
+  assert.equal(at(9 * kpc, { restRangeM: 5 * kpc }), null, 'a scene that came to rest far out lasts twice as far');
+  assert.deepEqual(at(10.01 * kpc, { restRangeM: 5 * kpc }), { overview: false, objectId: 'cloud' });
+  assert.equal(at(8 * kpc, { exitScale: 1.25 }), null);
+  // A body at that centre (a galaxy's black hole) lasts out to the object's radius.
+  const centre = { id: 'cloud', originM: star.originM, radiusM: cloud.bodyRadiusM };
+  assert.equal(at(4.9 * kpc, { inside: centre }), null);
+  assert.deepEqual(at(5.01 * kpc, { inside: centre }), { overview: false, objectId: 'cloud' });
+  // A flight that landed far out chose a framing of the whole world: the Sun's overview shows it, as without the object.
+  assert.deepEqual(at(60 * kpc, { landed: true }), { overview: true, objectId: 'sun' });
+  assert.deepEqual(at(60 * kpc, { inside: null }), { overview: true, objectId: 'sun' });
+});
+
 test('the threshold follows the Sun origin even in a translated world frame', () => {
   const translatedSun = frame([20 * au, -40 * au, 60 * au], 10);
   const translatedObjects = [objectFixture('sun', translatedSun, { classification: 'star', systemName: 'Solar System', distance: testDistance(0) })];

@@ -71,6 +71,7 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
   await makeObjectThumbnail(id, defaultDataset, defaultBytes);
 }
 
+const galaxyCatalogues: string[] = [];
 // A galaxy volume's navigation image is its published face-on backing. The old slab textures are no longer
 // delivered; using the same backing as the map preserves its existing artwork qualification and source record.
 for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
@@ -78,6 +79,8 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
   let descriptor: unknown;
   try { descriptor = JSON.parse(await readFile(resolve(root, descriptorPath), 'utf8')); }
   catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
+  // The galaxy catalogue is found by what it is; its rows are read below.
+  if (sourceObject(descriptor).type === 'galaxy-catalog') galaxyCatalogues.push(folder.name);
   if (sourceObject(descriptor).type !== 'density-volume') continue;
   await read(descriptorPath);
   const id = folder.name, backingPath = `src/objects/${id}/prepared/backing.json`;
@@ -93,11 +96,12 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
 }
 
 // Catalogue IDs and detailed package IDs can differ (for example M 31).
-const cataloguePath = 'src/objects/local-group-galaxies/prepared/catalogue.json';
-const catalogue = sourceObject(await json(cataloguePath));
-for (const object of sourceArray(catalogue.objects, sourceObject)) {
-  if (typeof object.detailedObjectId === 'string' && defaults[object.detailedObjectId])
-    defaults[sourceText(object.id)] = defaults[object.detailedObjectId];
+for (const id of galaxyCatalogues) {
+  const catalogue = sourceObject(await json(`src/objects/${id}/prepared/catalogue.json`));
+  for (const object of sourceArray(catalogue.objects, sourceObject)) {
+    if (typeof object.detailedObjectId === 'string' && defaults[object.detailedObjectId])
+      defaults[sourceText(object.id)] = defaults[object.detailedObjectId];
+  }
 }
 const manifest = { schema: 'cssearth-sidebar-thumbnails@1', method: 'Complete prepared dataset previews at 80 px for 40 CSS px; Galaxy volumes use their published face-on backing, preserving existing source qualifications. Each object row shows its default image inside a margin, faded out before the image frame.',
   inputs: [...inputs.values()], images, defaults };

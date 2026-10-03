@@ -15,8 +15,6 @@ export type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; ne
 export interface PreparedUniverseOptions {
   /** Prepared catalogue point banks of the galaxies beyond the Local Group (background-points.ts). */
   backgroundCataloguePoints?: readonly BackgroundPointBank[];
-  /** Prepared banks of the catalogued stars the map draws as plain dots: no label, hover or click (catalogue-points.ts). */
-  starCataloguePoints?: readonly string[];
   /** Closed image meshes around the Sun seen from outside (the cosmic microwave background; image-mesh.ts). */
   /** `cutaway` answers, on each publication, whether a mesh with a cutaway is shown cut open (image-mesh.ts); open by default. */
   imageMeshes?: readonly { url: string; resolveResource(path: string): string; cutaway?(): boolean; hidden?(): boolean; hiddenCaption?: string }[];
@@ -55,8 +53,11 @@ export interface PreparedUniverseOptions {
   loadImageLayer?(id: string): Promise<PreparedImageLayerMount>;
   /** Packages that are only a prepared catalogue point bank (`catalogue-point-bank` descriptors), by URL: fetched and drawn
    * while the catalogue row that details to them (`detailedObjectId`) is selected, or, for a bank that belongs to a body's
-   * system (`host`), while the selected body is that host or orbits it. */
-  pointBanks?: readonly { id: string; url: string; host?: string }[];
+   * system (`host`), while the selected body is that host or orbits it. `stars`: its dots are the catalogued stars the map
+   * draws as plain dots (no label, hover or click), the ones inside `host`: they draw while the selected body is that host
+   * or is inside it (`setSelectionHolders`), dim as every other star does, leave out the dot at the place of a star a body
+   * marker draws, and paint under the layers mounted after the world's own star dots. */
+  pointBanks?: readonly { id: string; url: string; host?: string; stars?: true }[];
   /** Volume dataset banks are identified and framed from their descriptor alone; their heavy prepared
    * payload (all datasets, plus catalogue points) is fetched only through {@link loadVolumeDataset}, the
    * first time a bank is selected or comes into view. Nothing here downloads at construction time. */

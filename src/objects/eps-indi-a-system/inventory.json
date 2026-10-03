@@ -4,8 +4,8 @@
     {
       "location": "prepared",
       "filename": "members.json",
-      "bytes": 1604,
-      "sha256": "87f450202d53ff2db2d3ed1c2e2c6118a4ff99bb31389a5d19bc0d1bd633f345"
+      "bytes": 748,
+      "sha256": "851db0558f1e978c731fa83277b588bd2c4f329eaf3f4b534b8806751665ac04"
     },
     {
       "location": "prepared",
@@ -15,21 +15,15 @@
     },
     {
       "location": "prepared",
-      "filename": "orbits/eps-indi-bb.bin",
-      "bytes": 2255,
-      "sha256": "f44f0e08fde0f2afa96b68a5c484dbf7955ed6662173c94d8c28249f8d1880e6"
+      "filename": "places.json",
+      "bytes": 125,
+      "sha256": "a07c28a6ca20a30f06ca3f284315c9443d3a9dda0eb77e793c9e820e1bdd65ba"
     },
     {
       "location": "prepared",
       "filename": "views/eps-indi-a.json",
       "bytes": 30447,
       "sha256": "2205df836ad2ff6b7c8578ba84f7601da23180dfdb29adec1d9af8f148245e10"
-    },
-    {
-      "location": "prepared",
-      "filename": "views/eps-indi-ba.json",
-      "bytes": 30400,
-      "sha256": "985bf3ac98073fecdc30c78b2954ee29cc5917773028149131708af5168d0489"
     }
   ]
 }
