@@ -101,7 +101,7 @@
     "owners": [
       "packages/bake"
     ],
-    "reason": "Preserved distant-worlds Python writes display orientations read by bake; it cannot import TypeScript. display-orientation.test.ts pins its literal to the objects constant."
+    "reason": "Preserved distant-worlds Python writes display orientations read by bake; it cannot import TypeScript. packages/bake/src/sources/python-schema-identifiers.test.ts (packages lane, runs when author.py changes) pins its literal to the objects constant."
   },
   {
     "schema": "cssearth-facility-emblems@3",

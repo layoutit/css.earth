@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
-import { ARCHIVED_CAMERA_SCHEMA, OBJECT_TEXT_SCHEMA, SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects';
+import { ARCHIVED_CAMERA_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, OBJECT_TEXT_SCHEMA, SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects';
 
 test('unbuilt tooling and preserved Python use the objects source-manifest identifier', () => {
   const root = new URL('../../../../', import.meta.url);
@@ -24,4 +24,10 @@ test('preserved Python camera and text writers conform to the objects-owned sche
     assert.equal(literals.length, count, `${path} must retain its schema declarations`);
     for (const literal of literals) assert.equal(literal, schema, path);
   }
+});
+
+test('preserved Python display-orientation writer conforms to the objects-owned schema identifier', () => {
+  const python = readFileSync(new URL('../../authoring/distant-worlds/author.py', import.meta.url), 'utf8');
+  const literal = /write\(source\/'preparation\/rotation\.json',dict\(schema='([^']+)'/u.exec(python)?.[1];
+  assert.equal(literal, DISPLAY_ORIENTATION_SCHEMA, 'author.py must write the rotation record with the shared display-orientation schema');
 });

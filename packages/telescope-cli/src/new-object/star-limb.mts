@@ -1,4 +1,3 @@
-import { PUBLISHED_LIMB_DARKENING_SCHEMA } from '@cssearth/objects';
 /** `new-object --star-limb <id>...`: the limb darkening of stars already in the tree, including packages made by hand.
  *
  * The law comes from the first source that holds the star:
@@ -10,6 +9,7 @@ import { PUBLISHED_LIMB_DARKENING_SCHEMA } from '@cssearth/objects';
  *    (interferometric-limb.mts); the record is written beside the star and read as in 1.
  * A star that already has a color dataset gains the law on it; a placeholder that has none gains the color dataset with it
  * (color.mts, dataset.mts). A star no source covers is reported and left unchanged. */
+import { PUBLISHED_LIMB_DARKENING_SCHEMA } from '@cssearth/objects';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { parseCieTable } from '@cssearth/bake/objects/color';

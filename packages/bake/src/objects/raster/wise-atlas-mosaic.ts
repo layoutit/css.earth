@@ -1,10 +1,10 @@
-import type { TilePins, WiseBand } from '@cssearth/objects';
 /** AllWISE Atlas Images -> one background-matched TAN mosaic in DN, on a hips2fits-convention grid.
  * The atlas tiles are only background-matched within themselves (Explanatory Supplement IV.4.f),
  * so each tile keeps an unknown additive level. As Montage's mBgModel does (Berriman et al.), every
  * pair of overlapping tiles contributes the median of their difference, and one constant per tile
  * is solved by least squares with a zero-mean gauge. No pixel is interpolated: each tile pixel
  * centre lands in exactly one output pixel, whose value is the mean of what lands in it. */
+import type { TilePins, WiseBand } from '@cssearth/objects';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';

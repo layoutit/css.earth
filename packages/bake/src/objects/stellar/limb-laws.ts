@@ -5,8 +5,7 @@
  * temperature and gravity, trilinear when the grid also tabulates mass (spherical models). A grid that lacks a node beside the star is
  * read between the nearest nodes that all exist, never extrapolated. */
 import { requireFiniteNumber } from '@cssearth/core';
-import { checkLimbLaw } from '@cssearth/objects';
-import type { LimbLaw } from '@cssearth/objects';
+import { checkLimbLaw, type LimbLaw } from '@cssearth/objects';
 
 /** Intensity relative to the disc centre at mu = cos(angle from the line of sight). */
 export function limbIntensity(mu: number, law: LimbLaw | { readonly u1: number; readonly u2: number }): number {

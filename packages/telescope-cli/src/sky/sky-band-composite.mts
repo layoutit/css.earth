@@ -1,10 +1,9 @@
-import type { WiseBand } from '@cssearth/objects';
-import { parseTilePins } from '@cssearth/objects';
 /** Survey sky bands -> one asinh display raster and its TAN WCS.
  * The route owns every calibration factor, or states that a band has none, and which acquisition each band may use; a recipe names
  * bands, a grid, one background and one peak percentile for every band, and one common display.
  * Each band is divided by its own measured range, the usual survey false-color practice, because
  * infrared bands differ in brightness by an order of magnitude. No authored gain, crop or rotation. */
+import { parseTilePins, type WiseBand } from '@cssearth/objects';
 import { plainName } from '@cssearth/telescope/node';
 import { createWriteStream } from 'node:fs';
 import { mkdir, readFile, rename, rm, writeFile, stat } from 'node:fs/promises';
