@@ -1,0 +1,30 @@
+{
+ "id": "mirfak",
+ "classification": "star",
+ "order": 5475,
+ "physical": {
+  "name": "Mirfak",
+  "horizonsCode": null,
+  "meanRadiusKm": 36920799,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 5859
+ },
+ "physicalNotes": "Radius 53.07 +/- 1.45 solar radii from Baines et al. (2021), AJ 162, 198, HD 20902: radius 53.07 +1.37/-1.45 solar radii (Table 5), from the limb-darkened angular diameter 3.18 +/- 0.008 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/ac2431): 36,920,799 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5859 +/- 41 K from Baines et al. (2021), AJ 162, 198, HD 20902: effective temperature 5859 +/- 41 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ac2431). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 51.08061917,
+  "declinationDegrees": 49.86124305,
+  "positionEpochJulianYear": 1991.25,
+  "distanceParsecs": 155.28,
+  "properMotionRaMasPerYear": 23.75,
+  "properMotionDecMasPerYear": -26.23,
+  "radialVelocityKmPerS": -2.04,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry (https://doi.org/10.1134/S1063773712050015), VizieR V/137D/XHIP row HIP = 15863: RAJ2000 51.08061917, DEJ2000 49.86124305 (ICRS at epoch J1991.25), from the archived row src/objects/mirfak/source/photometry/catalogue-row.tsv; SIMBAD names it HD 20902",
+   "distance": "Baines et al. (2021), AJ 162, 198, HD 20902: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 6.44 +/- 0.17 mas, inverted (https://doi.org/10.3847/1538-3881/ac2431): 155.28 +/- 4.099 pc; Gaia DR3 cannot see the star",
+   "properMotion": "VizieR V/137D/XHIP row HIP = 15863 (same row): 23.75, -26.23 mas/yr",
+   "radialVelocity": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 15863: RV -2.04 +/- 0.05 km/s (quality A) (https://doi.org/10.1134/S1063773712050015)"
+  }
+ }
+}

@@ -771,19 +771,6 @@
   padding: calc(var(--explorer-divider-gap) + var(--explorer-divider-width) + 1px) 0 0;
   border: 0;
 }
-/* A card that shows its factsheet and its one color dataset together (ObjectInformationPanel.astro): "Datasets" reads as
-   the tab it stands for, and the row and its description are one block with no line between them. */
-.object-card-section-title {
-  margin: 0;
-  padding: 5px 0;
-  color: var(--shell-text);
-  font: var(--shell-font-introduction);
-  font-size: 14px;
-  text-transform: uppercase;
-}
-.object-information-panel[data-card-stacked] > .object-dataset-content { border-top: var(--explorer-divider-width) solid var(--explorer-divider); }
-.object-information-panel[data-card-stacked] > .object-dataset-content > .object-dataset-details { margin-top: 15px; padding-top: 0; }
-.object-information-panel[data-card-stacked] > .object-dataset-content > .object-dataset-details::before { content: none; }
 .object-dataset-content > .object-dataset-details::before {
   content: '';
   position: absolute;

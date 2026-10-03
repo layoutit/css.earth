@@ -1,0 +1,30 @@
+{
+ "id": "dubhe",
+ "classification": "star",
+ "order": 5464,
+ "physical": {
+  "name": "Dubhe",
+  "horizonsCode": null,
+  "meanRadiusKm": 11847771,
+  "gravitationalParameterKm3PerS2": 456530793744.2714,
+  "parent": null,
+  "effectiveTemperatureK": 5012
+ },
+ "physicalNotes": "Radius 17.03 +/- 0.13 solar radii from Baines et al. (2018), AJ 155, 30, HD 95689: radius 17.03 +/- 0.13 solar radii (Table 5), from the limb-darkened angular diameter 6.419 +/- 0.041 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/aa9d8b): 11,847,771 km at 695,700 km per solar radius. Mass 3.44 +/- 0.11 solar masses from Baines et al. (2018), AJ 155, 30, HD 95689: mass 3.44 +/- 0.11 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only (https://doi.org/10.3847/1538-3881/aa9d8b); GM is that mass times the JPL solar GM. Temperature 5012 +/- 65 K from Baines et al. (2018), AJ 155, 30, HD 95689: effective temperature 5012 +/- 65 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 165.93265337,
+  "declinationDegrees": 61.75111903,
+  "positionEpochJulianYear": 1991.25,
+  "distanceParsecs": 37.679,
+  "properMotionRaMasPerYear": -134.11,
+  "properMotionDecMasPerYear": -34.7,
+  "radialVelocityKmPerS": -9.4,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry (https://doi.org/10.1134/S1063773712050015), VizieR V/137D/XHIP row HIP = 54061: RAJ2000 165.93265337, DEJ2000 61.75111903 (ICRS at epoch J1991.25), from the archived row src/objects/dubhe/source/photometry/catalogue-row.tsv; SIMBAD names it HD 95689",
+   "distance": "Baines et al. (2018), AJ 155, 30, HD 95689: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 26.54 +/- 0.48 mas, inverted (https://doi.org/10.3847/1538-3881/aa9d8b): 37.679 +/- 0.681 pc; Gaia DR3 cannot see the star",
+   "properMotion": "VizieR V/137D/XHIP row HIP = 54061 (same row): -134.11, -34.7 mas/yr",
+   "radialVelocity": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 54061: RV -9.4 +/- 0.3 km/s (quality D) (https://doi.org/10.1134/S1063773712050015)"
+  }
+ }
+}

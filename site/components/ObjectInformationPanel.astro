@@ -20,9 +20,6 @@ import { childrenOf } from '../object-children.mts';
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], datasets } = Astro.props;
 const hasDatasets = Boolean(datasets && datasets.controls.length > 0);
 const hasFacts = facts.length + moreFacts.length > 0;
-// A body whose only dataset is one color has nothing to choose between: its factsheet and that dataset show together,
-// factsheet first, without tabs.
-const stacked = hasFacts && datasets?.controls.length === 1 && datasets.controls[0]!.color !== undefined && galleries.length === 0;
 const articleUrl = await readObjectArticleUrl(objectId);
 // Any object lists what is inside it (object-children.mts, ChildList.astro). An object seen from inside has no body of its
 // own to look at, so its list leads; any other opens on its datasets.
@@ -30,7 +27,6 @@ const zoom = OBJECTS.find(object => object.id === objectId)?.zoom;
 const objectById = new Map(OBJECTS.map(object => [object.id, object] as const));
 const inside = childrenOf(objectId), children = inside.rows;
 const opening = zoom && children.length ? 'bodies' : 'dataset';
-const together = stacked && !children.length;
 // The card's subject: the body, or the system it hosts.
 const system = objectById.get(systemObjectId(objectId));
 const cardSubject = namesSystem(Astro.url) && system ? 'system' : 'body';
@@ -44,14 +40,14 @@ const source = sourceDocumentation(objectId, title.label);
 const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.systemDataset)) || galleries.length > 0 && system?.classification !== 'satellite-system';
 ---
 
-<ObjectCard class="object-information-panel" data-card-subject={cardSubject} data-card-stacked={together || undefined}
+<ObjectCard class="object-information-panel" data-card-subject={cardSubject}
   data-card-view={cardSubject === 'body' ? undefined : 'overview'}>
   <SystemCard hostId={objectId} />
       <ObjectCardHeader {objectId} {title} {introduction} {articleUrl}
         data-source-subject={`object:${objectId}`} data-source-document={source.href} data-source-label={source.label}>
           {zoom ? <ObjectBreadcrumbs scope={objectId} /> : <ObjectBreadcrumbs {objectId} />}
       </ObjectCardHeader>
-      {hasFacts && !together && <InformationTabs idPrefix={objectId} initialTab={opening} tabs={[
+      {hasFacts && <InformationTabs idPrefix={objectId} initialTab={opening} tabs={[
         ...(children.length ? [{ id: 'bodies', label: 'Celestial bodies', count: children.length }] : []),
         { id: 'dataset', label: 'Datasets' },
         { id: 'factsheet', label: 'Factsheet' },
@@ -61,15 +57,7 @@ const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.system
       {children.length > 0 && <section class="object-results-scroll object-card-tabpanel" id={`${objectId}-bodies-content`} data-information-panel="bodies" aria-label="Celestial bodies">
         <ChildList {objectId} />
       </section>}
-      {together && <section class="object-card-tabpanel object-factsheet-content" id={`${objectId}-factsheet-content`} data-information-panel="factsheet" aria-label="Factsheet">
-        <h2 class="object-mobile-information-heading">Factsheet</h2>
-        <ObjectFactsheet id={objectId} {facts} {moreFacts} embedded />
-      </section>}
-      {together && datasets && <section class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" aria-label="Datasets">
-        <h2 class="object-card-section-title">Datasets</h2>
-        <DatasetList {objectId} {datasets} />
-      </section>}
-      {!together && <TreeDisclosure title="Datasets" class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" data-system-view-datasets={systemDatasets || undefined} open>
+      <TreeDisclosure title="Datasets" class="object-card-tabpanel object-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset" data-system-view-datasets={systemDatasets || undefined} open>
       <h2 class="object-mobile-information-heading">Datasets</h2>
       {hasDatasets && datasets && <DatasetList {objectId} {datasets} />}
       {galleries.map((gallery) => (
@@ -99,8 +87,8 @@ const systemDatasets = Boolean(datasets?.controls.some(dataset => dataset.system
         </div>
       </details>
       ))}
-      </TreeDisclosure>}
-      {hasFacts && !together && <section class="object-card-tabpanel object-factsheet-content" id={`${objectId}-factsheet-content`} data-information-panel="factsheet" aria-label="Factsheet">
+      </TreeDisclosure>
+      {hasFacts && <section class="object-card-tabpanel object-factsheet-content" id={`${objectId}-factsheet-content`} data-information-panel="factsheet" aria-label="Factsheet">
         <h2 class="object-mobile-information-heading">Factsheet</h2>
         <ObjectFactsheet id={objectId} {facts} {moreFacts} embedded />
       </section>}

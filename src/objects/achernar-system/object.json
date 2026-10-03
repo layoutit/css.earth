@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "achernar-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "achernar"
+    },
+    "catalog": {
+      "name": "Achernar system",
+      "systemName": "Achernar system",
+      "classification": "star-system",
+      "color": "#aac3ff",
+      "distanceAu": 8818517.6,
+      "description": "A Be star that spins so fast it is flattened, with a companion on a seven-year orbit."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        650003671721640600,
+        295261297209513800,
+        -1109363621237293400
+      ],
+      "presentationToReference": [
+        0.25058421018900723,
+        0.5589692772141704,
+        -0.7904181809236295,
+        -0.2098940387202748,
+        0.8284162136555355,
+        0.5192986322553892,
+        -0.9450672177753512,
+        -0.035776026656044985,
+        -0.3249123417216754
+      ],
+      "orbitUpReference": [
+        -0.5589692772141704,
+        -0.8284162136555355,
+        0.035776026656044985
+      ],
+      "metersPerUnit": 18595387.741935484,
+      "bodyRadiusM": 5764570200
+    }
+  }
+}

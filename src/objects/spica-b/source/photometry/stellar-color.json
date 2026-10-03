@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "spica-b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 20900,
+      "lowerKelvin": 20100,
+      "upperKelvin": 21700,
+      "citation": "Tkachenko et al. (2016), MNRAS 458, 1964, Tables 4 and 7: secondary Teff 20,900 +/- 800 K from the disentangled spectrum: 20900 +/- 800 K, https://doi.org/10.1093/mnras/stw255"
+    },
+    "note": "The archives do not resolve this companion from its star, so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

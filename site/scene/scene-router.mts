@@ -12,7 +12,7 @@ import type { BrowserWindow, SceneFactory } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import type { ObjectEntry } from '../objects.mts';
-import { type ObjectDescriptor, type WorldCameraPose } from '@cssearth/objects';
+import { isExtendedClassification, type ObjectDescriptor, type WorldCameraPose } from '@cssearth/objects';
 import type { NavigationIntent } from '../navigation/navigation-request.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import type { ObjectShell, ShellNavigationTransition } from '../shell/object-shell-types.mts';
@@ -105,7 +105,7 @@ export function createSceneRouter({
   // Whether a link flies in place; set once the router's modules have loaded (`ensureContext`).
   let navigable = (_id: string) => false;
   let shellOwner: { shell: ObjectShell | null } | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
-  // The header's Showcase pill tours the featured bodies through `navigate` (showcase.mts).
+  // The header's Slideshow pill tours the featured bodies through `navigate` (showcase.mts).
   let showcase: { destroy(): void } | null = null;
   let centeredObjectId: string | null = null;
   // The registry and what the router builds from it (navigation, selection, activation, history and the shell) arrive
@@ -367,7 +367,13 @@ export function createSceneRouter({
         historyOwner = createNavigationHistory({ windowTarget, capture: () => requests.current ? null : view.capture(), navigate, navigating: () => requests.current !== null, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
         // A link flies in place to any body the world draws; one whose entry has loaded must also share this frame.
         unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
-        showcase = registry.createShowcaseController({ documentTarget, windowTarget, navigate, readObjectId: () => objectId, onError: report });
+        showcase = registry.createShowcaseController({ documentTarget, windowTarget, navigate, readObjectId: () => objectId, onError: report,
+          isExtended: id => isExtendedClassification(registry.knownObject(id)?.classification),
+          // A reader who asked for reduced motion gets the tour's stops without the turn.
+          turn({ degrees, durationMilliseconds, signal }) {
+            if (reducedMotionActive || requests.current) return;
+            void scenes.current?.mount?.navigation?.turn?.(degrees, { durationMilliseconds, signal }).catch(report);
+          } });
       }
       // Any body the world draws, and any object the page already knows (a scale of the universe is no body of the world).
       navigable = id => (worldIds.has(id) || registry.knownObject(id) !== undefined) && (!registry.knownObject(id) || navigation.supports(objectId, id));

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "capella",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 4970,
+      "lowerKelvin": 4920,
+      "upperKelvin": 5020,
+      "citation": "Torres et al. (2015), ApJ 807, 26, Table 5: primary Teff 4970 +/- 50 K: 4970 +/- 50 K, https://doi.org/10.1088/0004-637X/807/1/26"
+    },
+    "note": "Every spectrum of Capella is the blended light of both giants, and the secondary is the brighter in the Hipparcos band, (l_B/l_A)_Hp = 1.204 +/- 0.060 (Torres et al. 2015, ApJ 807, 26, Table 4), so no archive spectrum is the primary's own, so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "zaurak",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Zaurak is HR 1231.",
+    "path": "photometry/pulkovo-table5.dat",
+    "format": "pulkovo-blocks",
+    "wavelength": {
+      "column": "lambda",
+      "unit": "nm"
+    },
+    "flux": {
+      "column": "1231",
+      "kind": "flux"
+    },
+    "service": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
+    "checked": "2026-10-03",
+    "gaps": [],
+    "note": "Ground-based photoelectric scans by Pulkovo astronomers, combined into one absolute energy distribution per star with a stated accuracy of 1.5-2%. The catalogue gives no observation dates. HR 1231's column is read from the raw flux file, which lists seven stars per block."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 249: HR 1231; VizieR III/202",
+    "spectrum": {
+      "path": "photometry/crosscheck-kharitonov-catalog.dat",
+      "format": "kharitonov-records",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "249",
+        "kind": "flux",
+        "missing": 0
+      },
+      "gaps": [
+        {
+          "fromNm": 757.5,
+          "toNm": 780,
+          "reason": "the spectrum ends at 757.5 nm; the last value is held to 780 nm, where the observer adds little"
+        }
+      ]
+    }
+  }
+}

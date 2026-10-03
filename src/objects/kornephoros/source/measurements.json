@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kornephoros",
+  "angularDiameterMas": 3.47,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 11,075,544 km at 42.66 pc = 3.47 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 42.662,
+  "distanceSource": "Baines et al. (2018), AJ 155, 30, HD 148856: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 23.44 +/- 0.58 mas, inverted (https://doi.org/10.3847/1538-3881/aa9d8b): 42.662 +/- 1.056 pc; Gaia DR3 parallax 22.0023 +/- 0.9867 mas (same row, RUWE 10.08), 22.3 standard errors, is not used",
+  "radiusKm": 11075544,
+  "radiusSource": "Radius 15.92 +/- 0.41 solar radii from Baines et al. (2018), AJ 155, 30, HD 148856: radius 15.92 +0.41/-0.39 solar radii (Table 5), from the limb-darkened angular diameter 3.472 +/- 0.008 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/aa9d8b): 11,075,544 km at 695,700 km per solar radius. Mass 2.91 +/- 0.11 solar masses from Baines et al. (2018), AJ 155, 30, HD 148856: mass 2.91 +/- 0.11 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only (https://doi.org/10.3847/1538-3881/aa9d8b); GM is that mass times the JPL solar GM. Temperature 5092 +/- 64 K from Baines et al. (2018), AJ 155, 30, HD 148856: effective temperature 5092 +/- 64 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5092,
+  "effectiveTemperatureSource": "Baines et al. (2018), AJ 155, 30, HD 148856: effective temperature 5092 +/- 64 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b)",
+  "surfaceGravityLogg": 2.5,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kornephoros.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.498, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

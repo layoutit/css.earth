@@ -1,0 +1,9 @@
+# Vindemiatrix credits
+
+Radius, mass and temperature: Radius 11.98 +/- 0.07 solar radii from Baines et al. (2018), AJ 155, 30, HD 113226: radius 11.98 +/- 0.07 solar radii (Table 5), from the limb-darkened angular diameter 3.318 +/- 0.013 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/aa9d8b); Mass 2.96 +/- 0.09 solar masses from Baines et al. (2018), AJ 155, 30, HD 113226: mass 2.96 +/- 0.09 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only (https://doi.org/10.3847/1538-3881/aa9d8b); temperature from Baines et al. (2018), AJ 155, 30, HD 113226: effective temperature 5020 +/- 64 K (Table 5), from the angular diameter and the bolometric flux of the SED fit.
+
+Color: Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Vindemiatrix is HR 4932., through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b). Cross-check: Kiehling (1987), spectrophotometry of 60 bright F, G, K and M stars, 320-880 nm in 1 nm steps as normalised magnitudes: Kiehling (1987), A&AS 69, 465; VizieR III/124. * eps Vir is HR 4932..
+
+Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
+
+Placement: Gaia DR3 source 3736865265441207424: position, proper motion; distance: Baines et al. (2018), AJ 155, 30, HD 113226: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 29.76 +/- 0.14 mas, inverted. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.

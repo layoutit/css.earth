@@ -62,7 +62,7 @@ test('every plain-dot star is a dot once: of the Milky Way\'s own bank when the 
   }
   // The summary names the objects with a dot bank, each in its own package: the objects those stars are inside.
   assert.ok(summary.dotBanks?.length);
-  assert.ok(!summary.dotBanks!.includes('milky-way') && !summary.dotBanks!.includes('observable-universe'), 'no page inside the Milky Way asks for a dot bank of the world\'s own');
+  assert.ok(!summary.dotBanks!.includes('observable-universe'), 'the world has no dot bank of its own: every page would ask for it');
   const points = new Map<string, { positionM: number[]; toleranceM: number }[]>();
   for (const id of summary.dotBanks!) {
     const name = 'plain-stars.bin', bank = parseCataloguePoints(decodeCatalogueBankBinary(unpackPreparedBinary(await readFile(new URL(`../../${id}/prepared/${name}`, prepared)), name), name), name);

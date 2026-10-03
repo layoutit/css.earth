@@ -1,0 +1,73 @@
+{
+  "id": "elnath",
+  "name": "Elnath",
+  "system": "Elnath system",
+  "parent": "milky-way",
+  "description": "A giant of type B7 III 41.1 parsecs away, 5.5 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 35497"
+  ],
+  "featured": true,
+  "order": 5477,
+  "target": "HD 35497",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "credit": "Baines et al. (2021), AJ 162, 198"
+  },
+  "radius": {
+    "value": 5.47,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 35497: radius 5.47 +/- 0.24 solar radii (Table 5), from the limb-darkened angular diameter 1.239 +/- 0.052 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "uncertainty": 0.24
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 12026,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 35497: effective temperature 12026 +/- 262 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "uncertainty": 262
+  },
+  "gravity": {
+    "value": 3.63,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 35497: log g 3.63, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 4)",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431"
+  },
+  "radialVelocity": {
+    "value": 9.2,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 25428: RV 9.2 +/- 2.5 km/s (quality A)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 2.5
+  },
+  "distance": {
+    "value": 41.051,
+    "source": "Baines et al. (2021), AJ 162, 198, HD 35497: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 24.36 +/- 0.34 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/ac2431",
+    "uncertainty": 0.573
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "25428"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "color": {
+    "skip": [],
+    "reason": "",
+    "companion": "Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists an occultation pair (OCC 115 Aa,Ab, 1930) that was never confirmed; Baines et al. (2021), AJ 162, 198, Sect. 4 fit Elnath as a single star"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A giant of type B7 III, 41 parsecs away: 5.5 times the Sun's width and 564 times its light.",
+    "introduction": "Its disc spans 1.239 milliarcseconds, which gives 5.47 solar radii and 12,026 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 35497: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": []
+}

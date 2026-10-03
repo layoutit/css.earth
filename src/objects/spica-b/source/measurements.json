@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "spica-b",
+  "radiusKm": 2601918,
+  "radiusSource": "Radius 3.74 +/- 0.53 solar radii from Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: secondary radius 3.74 +/- 0.53 solar radii (https://doi.org/10.1093/mnras/stw255): 2,601,918 km at 695,700 km per solar radius. GM from the mass 7.21 +/- 0.75 solar masses (Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: dynamical mass of the secondary 7.21 +/- 0.75 solar masses, https://doi.org/10.1093/mnras/stw255) times the JPL solar GM. Temperature 20900 +/- 800 K from Tkachenko et al. (2016), MNRAS 458, 1964, Tables 4 and 7: secondary Teff 20,900 +/- 800 K from the disentangled spectrum (https://doi.org/10.1093/mnras/stw255). A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.0145,
+  "orbitalPeriodSource": "Tkachenko et al. (2016), MNRAS 458, 1964, Table 2 (PHOEBE 2.0 solution): P 4.0145 d, T0 HJD 2,454,189.40 the time of periastron passage (Sect. 3; MJD 54188.90, HJD for BJD_TDB), e 0.133, longitude of periastron 255.6 degrees (the primary's, from its radial velocities), i 63.1; a 28.20 solar radii over the primary's 7.47 is 3.775 of its radii. The node's position angle on the sky is not measured and is drawn at 0, a display convention (https://doi.org/10.1093/mnras/stw255): P 4.0145 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of Spica B is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 20900,
+  "effectiveTemperatureSource": "Tkachenko et al. (2016), MNRAS 458, 1964, Tables 4 and 7: secondary Teff 20,900 +/- 800 K from the disentangled spectrum (https://doi.org/10.1093/mnras/stw255)",
+  "surfaceGravityLogg": 4.15,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/spica-b.json, log10(GM/R^2) in cgs, rounded to two decimals",
+  "massSource": "7.21 solar masses: Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: dynamical mass of the secondary 7.21 +/- 0.75 solar masses (https://doi.org/10.1093/mnras/stw255)."
+}

@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alkaid",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alkaid",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2365380
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alkaid-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alkaid",
+      "classification": "star",
+      "color": "#a9c3ff",
+      "distanceAu": 6573010.4,
+      "description": "A dwarf of type B3 V, 32 parsecs away: 3.4 times the Sun's width and 594 times its light.",
+      "systemName": "Alkaid system",
+      "aliases": [
+        "HD 120315"
+      ],
+      "order": 5466,
+      "context": {
+        "order": 5463
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -571759012180290800,
+        -289873269317554050,
+        745627558192359600
+      ],
+      "presentationToReference": [
+        -0.5814646086325621,
+        -0.6763301282989228,
+        -0.4521907412397383,
+        -0.29479386158520987,
+        -0.34288926147464005,
+        0.8919212597180628,
+        0.7582845693270183,
+        -0.651923700996166,
+        4.643153853345811e-17
+      ],
+      "orbitUpReference": [
+        0.6763301282989228,
+        0.34288926147464005,
+        0.651923700996166
+      ],
+      "metersPerUnit": 7630258.064516129,
+      "bodyRadiusM": 2365380000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
