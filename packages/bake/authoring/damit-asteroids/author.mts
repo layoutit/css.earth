@@ -11,11 +11,13 @@
  * snapshot and writes the source manifest. The astronomy record is written without elements; run
  * `node packages/astronomy/cli/generate-asteroids.mts --object=<ids>` next, then `node packages/bake/cli/prepare-object.mts <id>`.
  */
+import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA } from '@cssearth/objects';
+
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import sharp from 'sharp';
 import { createSourceManifest } from '@cssearth/objects/node';
-import { SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA } from '@cssearth/objects';
+
 import { ENTRY_EVIDENCE } from '@cssearth/bake/sources';
 import { shapeMaterialRaster, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/cli/lib/horizons.mts';
@@ -300,7 +302,7 @@ async function authorBody(body: Body) {
   const legendMiddle = (elevation[0]! + elevation[1]!) / 2;
   const fmt = (value: number) => String(Number(value.toPrecision(4)));
   const content = {
-    schema: 'cssearth-object-content@2', version: 1, id, displayName: name,
+    schema: OBJECT_CONTENT_SCHEMA, version: OBJECT_CONTENT_VERSION, id, displayName: name,
     panel: {
       facts: [
         { id: 'radius', label: 'Display reference radius', value: `${fmt(radiusKm)} km (size-calibrated model)`,

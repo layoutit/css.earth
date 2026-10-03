@@ -155,3 +155,8 @@ Saved CSS camera snapshots (`CameraPose`), their schema identifier and pure matr
 bounded proper-rotation validation; live restore retains finite-matrix admission before renderer projects
 it to a rotation. DOMMatrix, camera controls and URL/base64 transport stay in renderer. Contract tests
 use node:test in the packages lane.
+
+Authored object-content recipes, prepared panel content and facility emblem-library records have browser-safe
+contracts in `src/prepared-data/`, exported through `@cssearth/objects`. Source envelope admission, authored dataset
+metadata and panel field parsing preserve caller diagnostics. Asset production, editorial checks, Astro adapters,
+source binding resolution and image byte inspection stay in bake/site. Contract tests use node:test in the packages lane.

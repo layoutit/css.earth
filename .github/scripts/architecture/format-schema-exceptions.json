@@ -78,14 +78,6 @@
     "reason": "Preserved distant-worlds Python writes display orientations read by bake; it cannot import TypeScript. packages/bake/src/sources/python-schema-identifiers.test.ts (packages lane, runs when author.py changes) pins its literal to the objects constant."
   },
   {
-    "schema": "cssearth-facility-emblems@3",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
     "schema": "cssearth-fixed-wcs-catalogue-direction-gate@1",
     "owners": [
       "labs/nebula",
@@ -150,15 +142,6 @@
     "reason": "Reconstruction star-removal.py writes native operation receipts read by three lab TS boundaries; Python cannot import TypeScript. schema-protocols.test.ts pins producer and every TS check; existing star-removal/compiler tests exercise receipt validation without NOX."
   },
   {
-    "schema": "cssearth-object-content@2",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 3 owners (packages/bake, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
     "schema": "cssearth-object-text@1",
     "owners": [
       "packages/bake"
@@ -172,14 +155,6 @@
       "site"
     ],
     "reason": "Authored Earth recipe is read by bake and site; structural recipe validation must split from derived camera defaults while retaining site subset admission, outside the bounded E2f color/measurement packet."
-  },
-  {
-    "schema": "cssearth-prepared-content@2",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
   },
   {
     "schema": "cssearth-published-body-epoch-ephemeris@1",

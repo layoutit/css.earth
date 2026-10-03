@@ -2,44 +2,12 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
-import { authoredDatasetMetadata, parsePreparedPanelContent, parsePanelControls } from '../prepared-panel-content.mts';
+import { parsePanelControls } from '../prepared-panel-content.mts';
+import { parsePreparedPanelContent } from '@cssearth/objects';
 
 type PanelContentInput = { schema: string; title: { label: unknown }; facts: { value: unknown }[] };
 type PanelControlsInput = { datasets: { controls: Record<string, unknown>[] } };
 const read = async (id: string, file: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/${id}/prepared/${file}.json`, import.meta.url), 'utf8'));
-
-test('dataset source links come from the authored dataset records', async () => {
-  const source: unknown = JSON.parse(await readFile(new URL('../../src/objects/earth/source/content/object.json', import.meta.url), 'utf8'));
-  const { sourceUrls: urls } = authoredDatasetMetadata(source, 'earth');
-  assert.equal(urls.get('normal'), 'https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg');
-  assert.equal(urls.get('clouds'), 'https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif');
-  assert.throws(() => authoredDatasetMetadata(source, 'mars'), /metadata owner differs/u);
-});
-
-test('a dataset without a direct source link is omitted from source URLs', async () => {
-  const source: unknown = JSON.parse(await readFile(new URL('../../src/objects/sun/source/content/object.json', import.meta.url), 'utf8'));
-  const { sourceUrls: urls, systemDatasetIds } = authoredDatasetMetadata(source, 'sun');
-  assert.equal(urls.get('cor1-density'), undefined);
-  assert.ok(urls.get('photosphere'));
-  assert.equal(systemDatasetIds.has('cor1-density'), false, 'the corona belongs to the Sun card');
-});
-
-test('Betelgeuse atmosphere volumes remain on its body card', async () => {
-  const source: unknown = JSON.parse(await readFile(new URL('../../src/objects/betelgeuse/source/content/object.json', import.meta.url), 'utf8'));
-  assert.equal(authoredDatasetMetadata(source, 'betelgeuse').systemDatasetIds.size, 0);
-});
-
-test('debris discs stay with their host system card', async () => {
-  for (const [id, datasets] of [
-    ['beta-pictoris', ['debris-disc-visible', 'debris-disc-color', 'debris-disc']],
-    ['hd-181327', ['debris-ring']],
-    ['pds-70', ['dust-ring']],
-  ] as const) {
-    const source: unknown = JSON.parse(await readFile(new URL(`../../src/objects/${id}/source/content/object.json`, import.meta.url), 'utf8'));
-    const { systemDatasetIds } = authoredDatasetMetadata(source, id);
-    assert.deepEqual([...systemDatasetIds], datasets);
-  }
-});
 
 test('scenes supply typed shared panel content and controls', async () => {
   // The parsers are the same for every scene; each object's content is checked when it is prepared.

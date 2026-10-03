@@ -3,8 +3,8 @@ import { readFile, realpath } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { sourceArray, sourceDate, sourceId, sourceObject, sourcePath, sourceText, sourceUrl } from '@cssearth/objects/sources';
 import type { SourceResolver } from '@cssearth/objects/sources';
-import type { Fact } from '../objects/content/index.ts';
-import { orderFacts } from '@cssearth/objects';
+import { type Fact, orderFacts } from '@cssearth/objects';
+
 import { hasErrorCode } from '@cssearth/core';
 
 /** The same citation checks apply to full preparation, facts-only edits and Sources: every fact names its source. */
