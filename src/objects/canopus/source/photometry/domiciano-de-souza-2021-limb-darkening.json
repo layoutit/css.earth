@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "canopus",
+  "law": "power",
+  "source": "Domiciano de Souza et al. (2021), A&A 654, A19, Table 3, power-law limb darkening with bandwidth smearing, the paper's reference model, fitted to the VLTI/PIONIER data (https://doi.org/10.1051/0004-6361/202140478)",
+  "band": "VLTI/PIONIER H band, 1.5-1.8 um; not a visible band",
+  "alpha": {
+    "value": 0.1438,
+    "uncertainty": 0.0015,
+    "cell": "alpha_H = 0.1438 ± 0.0015"
+  },
+  "note": "I(mu)/I(1) = mu^alpha, as the paper's Table 2 defines its power law. Fitted with the angular diameter 7.184 mas to 1639 squared visibilities and 1059 closure phases. The only measured limb of Canopus; the visible limb is not measured."
+}

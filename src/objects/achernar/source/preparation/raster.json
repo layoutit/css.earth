@@ -31,7 +31,7 @@
           "path": "photometry/claret-2011-v-quadratic.tsv",
           "grid": {
             "teffK": 15539,
-            "logg": 3.39,
+            "logg": 3.38,
             "models": {
               "Filt": "V",
               "Met": "L",
@@ -45,7 +45,8 @@
             "u2": "b"
           }
         },
-        "qualification": "Photosphere color from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)), dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 15,539 K and log g 3.39 (u1 0.147, u2 0.292): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+        "qualification": "Photosphere color from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)), dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 15,539 K and log g 3.38 (u1 0.147, u2 0.292): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The surface is darkened by latitude from the published Roche-von Zeipel fit of Domiciano de Souza et al. (2014), A&A 569, A10: the hot poles brighter and bluer, the cool equator dimmer and redder.",
+        "gravityDarkening": "photometry/gravity-darkening.json"
       }
     }
   ],

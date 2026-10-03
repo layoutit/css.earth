@@ -2,11 +2,12 @@
   "id": "dubhe",
   "name": "Dubhe",
   "system": "Dubhe system",
-  "description": "A naked-eye star 37.7 parsecs away, 17.0 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "description": "A giant of type G9 III 37.7 parsecs away, 17.0 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
   "aliases": [
     "HD 95689"
   ],
   "featured": true,
+  "order": 5464,
   "target": "HD 95689",
   "paper": {
     "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
@@ -55,13 +56,17 @@
       "dec": "pmDE"
     }
   },
+  "color": {
+    "skip": [],
+    "reason": "",
+    "companion": "the spectrum includes Dubhe's companion, which is not drawn: Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 11037+6145 BU 1077 AB 0.8 arcsec apart at magnitudes 2.02 and 4.95, so it gives 6.3% of the light and can move a color channel by 16 levels of 255 at most; a Planck color at the star's NPOI temperature differs from the measured one by 25 levels, so the measurement is kept"
+  },
   "planets": [],
   "companions": [],
   "text": {
-    "card": "A naked-eye star 38 parsecs away whose disc the NPOI measured: 17.0 times the Sun's width.",
+    "card": "A giant of type G9 III, 38 parsecs away: 17.0 times the Sun's width and 165 times its light.",
     "introduction": "Its disc spans 6.419 milliarcseconds, which gives 17.03 solar radii and 5,012 K at its surface.",
     "locator": "Tables 1, 4 and 5, HD 95689: parallax, limb-darkened diameter, radius, Teff"
   },
-  "notes": [],
-  "order": 5464
+  "notes": []
 }

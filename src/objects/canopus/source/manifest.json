@@ -213,6 +213,23 @@
           }
         ]
       }
+    },
+    {
+      "id": "canopus-domiciano-de-souza-2021-limb-darkening",
+      "path": "photometry/domiciano-de-souza-2021-limb-darkening.json",
+      "origin": "https://doi.org/10.1051/0004-6361/202140478",
+      "credit": "Domiciano de Souza et al. (2021), A&A 654, A19",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, each value with its quoted cell",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published limb-darkening law transcribed with its cells; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -231,7 +248,8 @@
           "canopus-stellar-color",
           "canopus-pulkovo",
           "canopus-claret-2011-limb-darkening",
-          "canopus-preparation-raster"
+          "canopus-preparation-raster",
+          "canopus-domiciano-de-souza-2021-limb-darkening"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

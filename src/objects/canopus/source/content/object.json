@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Color from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "qualification": "Color from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved; darkening toward the edge from a published law.",
         "thumbnail": "canopus-dataset-color.webp",
         "surface": "canopus-surface-color@2x.webp",
         "poles": "canopus-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"
         },
         "falseColor": false,
-        "notes": "The color of the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 7,661 K and log g 1.7 (u1 0.402, u2 0.269): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+        "notes": "The color of the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 7,661 K and log g 1.7 (u1 0.402, u2 0.269): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention. The darkening toward the edge is the power law I(mu) = mu^0.1438 that Domiciano de Souza et al. (2021), A&A 654, A19 fit to the star's resolved disc (VLTI/PIONIER H band, 1.5-1.8 um; not a visible band)."
       }
     ]
   },

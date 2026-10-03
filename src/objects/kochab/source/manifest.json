@@ -172,7 +172,7 @@
       "licenseEvidence": [
         "https://cds.unistra.fr/vizier-org/licences_vizier.html"
       ],
-      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 4000..4250 K, log g 1.5..2, solar metallicity.",
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 4000..4250 K, log g 1..1.5, solar metallicity.",
       "redistribution": "Catalogue rows retained unchanged with their citation.",
       "consumers": [
         "assets",

@@ -2,34 +2,34 @@
   "schema": "cssearth-object-text@1",
   "objectId": "achernar",
   "card": {
-    "text": "A fast-spinning Be star eight times the Sun's width, with a companion on a seven-year orbit.",
+    "text": "A Be star that spins so fast it is flattened, with a companion on a seven-year orbit.",
     "sources": [
       {
         "catalogueId": "doi-10-1051-0004-6361-202244009",
         "url": "https://doi.org/10.1051/0004-6361/202244009",
         "label": "Kervella et al. (2022), Astronomy & Astrophysics 667 A111",
         "checked": "2026-10-03",
-        "locator": "Table 4"
+        "locator": "Table 4; Sect. 1 and Sect. 4.3, which give the flattening Domiciano de Souza et al. (2014) measured"
       }
     ]
   },
   "introduction": {
-    "text": "VLT and VLTI followed its companion for 13 years: the orbit weighs Achernar at 5.99 solar masses, with 15,539 K at its surface.",
+    "text": "Its equator is 1.35 times wider than its poles; 13 years of watching its companion's orbit weigh it at 5.99 solar masses.",
     "sources": [
       {
         "catalogueId": "doi-10-1051-0004-6361-202244009",
         "url": "https://doi.org/10.1051/0004-6361/202244009",
         "label": "Kervella et al. (2022), Astronomy & Astrophysics 667 A111",
         "checked": "2026-10-03",
-        "locator": "Table 4"
+        "locator": "Table 4; Sect. 1 and Sect. 4.3, which give the flattening Domiciano de Souza et al. (2014) measured"
       }
     ]
   },
   "datasets": {
     "color": {
       "title": "Photosphere color",
-      "detail": "From its spectrum",
-      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+      "detail": "Spectrum and spin",
+      "summary": "Measured color, with hot bright poles and a cool equator from the star's fast spin. The darker edge is a model."
     }
   }
 }

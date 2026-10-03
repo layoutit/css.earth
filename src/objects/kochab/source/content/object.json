@@ -51,7 +51,7 @@
           "url": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd131873/h_stis_ngsl_hd131873_v2.fits"
         },
         "falseColor": false,
-        "notes": "The color of the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 131873). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,008 K and log g 1.83 (u1 0.929, u2 -0.092): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+        "notes": "The color of the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 131873). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,008 K and log g 1.26 (u1 0.932, u2 -0.094): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
       }
     ]
   },

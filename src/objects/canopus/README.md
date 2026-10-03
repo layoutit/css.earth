@@ -8,7 +8,7 @@ VLTI measured its disc at 7.18 milliarcseconds, which at 95 parsecs is 73.2 sola
 
 **Color.** Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Canopus is HR 2326., cross-checked against Kiehling (1987), spectrophotometry of 60 bright F, G, K and M stars, 320-880 nm in 1 nm steps as normalised magnitudes: Kiehling (1987), A&AS 69, 465; VizieR III/124. * alf Car is HR 2326. (5 levels apart at most, the threshold is 12), through the CIE 1931 2° observer: #cedaff. Routes tried in order: stis-ngsl: HD 45348 is not in the library; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; kharitonov: HR 2326 is not in the catalogue; burnashev: found, not needed after the color and its cross-check; pulkovo: used.
 
-**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 7,661 K and log g 1.7 (u1 0.402, u2 0.269): a model, because no fit of this star's limb is used.
+**Limb.** The disc is dimmed toward the limb by the power law I(mu) = mu^0.1438 that Domiciano de Souza et al. (2021), A&A 654, A19 fit to the star's resolved disc (VLTI/PIONIER H band, 1.5-1.8 um; not a visible band). Gravity: log g from the mass and radius in packages/astronomy/data/bodies/canopus.json: 1.701.
 
 ## Evidence
 
@@ -21,6 +21,6 @@ Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
-- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
+- **Measured limb, other band.** The law was measured or fixed outside the visible band the color is drawn in; the visible limb is not measured.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

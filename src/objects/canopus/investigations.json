@@ -35,9 +35,9 @@
       "id": "limb-darkening",
       "subject": "Limb darkening",
       "status": "included",
-      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 7,661 K and log g 1.7 (u1 0.402, u2 0.269): a model, because no fit of this star's limb is used.",
+      "finding": "The disc is dimmed toward the limb by the power law I(mu) = mu^0.1438 that Domiciano de Souza et al. (2021), A&A 654, A19 fit to the star's resolved disc (VLTI/PIONIER H band, 1.5-1.8 um; not a visible band). Gravity: log g from the mass and radius in packages/astronomy/data/bodies/canopus.json: 1.701.",
       "evidence": [
-        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+        "https://doi.org/10.1051/0004-6361/202140478"
       ]
     }
   ]

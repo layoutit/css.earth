@@ -213,6 +213,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "achernar-roche-von-zeipel",
+      "path": "photometry/gravity-darkening.json",
+      "origin": "https://doi.org/10.1051/0004-6361/201424144",
+      "credit": "Domiciano de Souza et al. (2014), A&A 569, A10",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper's table, with each cell quoted",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "datasets",
+        "rotation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published model parameters transcribed in this package with their table cells; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [

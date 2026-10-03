@@ -8,14 +8,14 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "8.1 solar radii",
+        "value": "9.16 solar radii at the equator",
         "source": {
-          "catalogueId": "doi-10-1051-0004-6361-202244009",
-          "url": "https://doi.org/10.1051/0004-6361/202244009",
-          "label": "Kervella et al. (2022), Astronomy & Astrophysics 667 A111",
+          "catalogueId": "doi-10-1051-0004-6361-201424144",
+          "url": "https://doi.org/10.1051/0004-6361/201424144",
+          "label": "Domiciano de Souza et al. (2014), A&A 569, A10",
           "checked": "2026-10-03",
-          "path": "source/measurements.json",
-          "locator": "radiusKm; radiusSource"
+          "path": "source/photometry/gravity-darkening.json",
+          "locator": "model.equatorialRadiusSolar"
         }
       },
       {
@@ -29,6 +29,19 @@
           "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "37 hours",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201424144",
+          "url": "https://doi.org/10.1051/0004-6361/201424144",
+          "label": "Domiciano de Souza et al. (2014), A&A 569, A10",
+          "checked": "2026-10-03",
+          "path": "source/photometry/gravity-darkening.json",
+          "locator": "note"
         }
       }
     ],
@@ -51,7 +64,7 @@
           "url": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"
         },
         "falseColor": false,
-        "notes": "The color of the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 15,539 K and log g 3.39 (u1 0.147, u2 0.292): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+        "notes": "The color of the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 15,539 K and log g 3.38 (u1 0.147, u2 0.292): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
       }
     ]
   },
@@ -75,7 +88,7 @@
     },
     "physical": {
       "path": "../../../../../packages/astronomy/data/bodies/achernar.json",
-      "credit": "Kervella et al. radius; Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry position; cited distance; no measured rotation axis (display convention)"
+      "credit": "Domiciano de Souza et al. radius; Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry position; cited distance; measured rotation pole and flattening (Domiciano de Souza et al. (2014), A&A 569, A10)"
     }
   }
 }
