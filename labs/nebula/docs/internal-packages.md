@@ -103,3 +103,8 @@ node labs/nebula/packages/lab/src/adapters/application/delivery/run-cold-replay.
 ```
 
 Use `--objects m42,helix` to bound an explicitly selected run. A cold gate pass establishes parity for the inputs and code actually tested, not a new scientific interpretation. Record the tested revision, platform, selected objects and complete result before claiming clean-install success. Existing [clean-install evidence](clean-install-verification.md) remains tied to its recorded historical revision and environment.
+
+The lab CLI discovers every `*.test.ts`, `*.test.tsx`, `*.test.mts`, and `*.test.cts` under the lab
+packages and the volume viewer. CI calls `node labs/nebula/run.mts test` without a
+name filter. Bundling derives built workspace externals from the lab manifest's
+transitive dependency graph; source-exporting packages remain bundled.

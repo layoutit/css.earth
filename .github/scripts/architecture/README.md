@@ -38,3 +38,8 @@ Other preserved Python grid, registration and native star-processing protocols r
 [lab protocol conformance](../../../labs/nebula/packages/lab/src/server/services/schema-protocols.test.ts)
 pin their source checks and retained fixtures. Bake recipe routing identifiers stay bake-owned;
 the molecular catalogue wrapper stays lab-owned, separate from reconstruction table data.
+
+Workspace build order is derived from `pnpm-workspace.yaml` and package manifests by
+`packages/bake/src/preparation/workspace-graph.ts`, a Node-only bootstrap reader.
+`node .github/scripts/architecture/workspace-builds.mts` prints dependency-first build names;
+`--run` builds them. Optional package names select their dependency closure.

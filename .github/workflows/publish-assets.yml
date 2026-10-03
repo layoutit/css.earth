@@ -139,10 +139,8 @@ jobs:
             # the expensive authoring pass is actually restricted to this one object. The
             # global feature index is a tracked catalogue, not an asset needed by this job.
             pnpm prepare:catalog
-            pnpm build:objects
-            pnpm build:astronomy
+            node .github/scripts/architecture/workspace-builds.mts --run @cssearth/objects @cssearth/astronomy @cssearth/catalog
             node packages/bake/cli/prepare-solar-geometry.mts
-            pnpm build:catalog
             node packages/bake/cli/prepare-objects.mts "--object=$OBJECT"
           fi
       - name: Check the rebake reproduces the committed inventory

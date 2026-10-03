@@ -57,7 +57,7 @@
     "prepare:search-thumbnails": "node packages/bake/cli/prepare-search-thumbnails.mts",
     "prepare:nebulae": "node packages/bake/cli/prepare-nebulae.mts --if-missing && node site/build/prepare/prepare-facilities.mts",
     "prepare:object-json": "pnpm prepare:dataset-sprites && node packages/bake/cli/prepare-factsheets.mts --quiet && node site/build/prepare/prepare-feature-index.mts",
-    "prepare:objects": "pnpm prepare:catalog && pnpm build:objects && pnpm build:astronomy && node packages/bake/cli/prepare-solar-geometry.mts && pnpm build:catalog && node packages/bake/cli/prepare-objects.mts && node site/build/prepare/prepare-feature-index.mts",
+    "prepare:objects": "pnpm prepare:catalog && node .github/scripts/architecture/workspace-builds.mts --run @cssearth/objects @cssearth/astronomy @cssearth/catalog && node packages/bake/cli/prepare-solar-geometry.mts && node packages/bake/cli/prepare-objects.mts && node site/build/prepare/prepare-feature-index.mts",
     "prepare:shell": "pnpm prepare:catalog && pnpm prepare:titles && pnpm prepare:shell-assets",
     "prepare:shell-assets": "node site/build/prepare/prepare-shell-icons.mts",
     "prepare:typecheck": "node .github/scripts/ci/prepare-typecheck.mts",

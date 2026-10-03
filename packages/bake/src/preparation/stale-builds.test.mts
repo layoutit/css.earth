@@ -80,8 +80,8 @@ test('with the engine and the bake both stale, --run rebuilds the engine first',
     for (const name of ['engine', 'bake']) await utimes(join(root, `packages/${name}/src/index.ts`), 3000, 3000);
     const ran: string[] = [];
     await rebuildStale(root, BUILD_RULES, async command => { ran.push(command); });
-    // The volume viewer and the telescope CLI read the bake's sources, so they rebuild after it.
-    assert.deepEqual(ran, ['pnpm --filter @cssearth/engine build', 'pnpm build:bake', 'pnpm --filter @cssearth/volume-viewer build', 'pnpm --filter @cssearth/telescope-cli build']);
+    // The graph orders the source-reading viewer before bake, and the dependent telescope CLI after bake.
+    assert.deepEqual(ran, ['pnpm --filter @cssearth/engine build', 'pnpm --filter @cssearth/volume-viewer build', 'pnpm --filter @cssearth/bake build', 'pnpm --filter @cssearth/telescope-cli build']);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -140,7 +140,8 @@ test('the stale-build check loads from source with Node built-ins alone, so it r
     .matchAll(/^\s*(?:import|export)\b[^'"]*?\bfrom\s+['"]([^'"]+)['"]|^\s*import\s+['"]([^'"]+)['"]/gmu)].map(match => match[1] ?? match[2]);
   const library = await importsOf('packages/bake/src/preparation/stale-builds.ts');
   assert.ok(library.length > 0, 'the library imports Node built-ins');
-  assert.deepEqual(library.filter(specifier => !specifier!.startsWith('node:')), [], 'stale-builds.ts imports only node: built-ins');
+  assert.deepEqual(library.filter(specifier => !specifier!.startsWith('node:')), ['./workspace-graph.ts']);
+  assert.deepEqual((await importsOf('packages/bake/src/preparation/workspace-graph.ts')).filter(specifier => !specifier!.startsWith('node:')), [], 'bootstrap graph imports only Node built-ins');
   assert.deepEqual(await importsOf('packages/bake/cli/check-stale-builds.mts'), ['../src/preparation/stale-builds.ts'],
     'the command loads the library from source, not through the built entry');
 });
