@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "corot-7",
-      "members": "planets"
+      "host": "corot-7"
     },
     "catalog": {
       "name": "CoRoT-7 system",

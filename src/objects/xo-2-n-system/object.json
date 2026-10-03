@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "xo-2-n",
-      "members": "planets"
+      "host": "xo-2-n"
     },
     "catalog": {
       "name": "XO-2 N system",

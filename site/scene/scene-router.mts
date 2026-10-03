@@ -23,7 +23,7 @@ import { createNavigationHistory, bindNavigationLinks, navigationHref } from '..
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { createWorldViewport, stageSized } from '../world-viewport.mts';
 import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
-import { subjectHost, subjectOf, subjectView } from './scene-subject.mts';
+import { moonSystem, starSystem, subjectHost, subjectOf, subjectView } from './scene-subject.mts';
 import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import { WORLD_HOST_ID, namesSystem } from '../navigation/navigation-scope.mts';
@@ -469,12 +469,13 @@ export function createSceneRouter({
         const release = source?.mount?.navigation?.holdPresentation?.();
         if (release) request.own(release);
       }
-      const requestView = subjectView(request.subject);
-      world.current?.previewSelection?.(requestView === 'system' ? null : object.id);
+      // A star's system is the subject itself; a planet's is its host seen farther out, which stays the selected body.
+      const requestView = subjectView(request.subject), ofStar = starSystem(request.subject);
+      world.current?.previewSelection?.(ofStar ? null : object.id);
       request.own(() => {
         if (!requests.current || requests.owns(request)) world.current?.previewSelection?.();
       });
-      const selectionTransition = shellOwner?.shell?.beginNavigation?.(requestView === 'system'
+      const selectionTransition = shellOwner?.shell?.beginNavigation?.(ofStar
         ? { view: 'system', object, preview: request.camera.kind === 'frame' && request.camera.framing === 'center' }
         : { view: requestView, object,
           targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined });
@@ -547,7 +548,7 @@ export function createSceneRouter({
     if (mounted && session.mount?.navigation) followSelectionCamera(session, session.mount.navigation.capture());
     // Retained arrivals commit their URL after selection; page datasets must follow that committed address too.
     publishSelection();
-    if (mounted && subjectView(ready.selection.current) === 'system') aimAtSystemCenter(ready);
+    if (mounted && starSystem(ready.selection.current)) aimAtSystemCenter(ready);
     syncPlayback();
     if (mounted) {
       connectOverviewSelection(ready, session);
@@ -639,25 +640,25 @@ export function createSceneRouter({
     const selection = context?.selection;
     // A selection a zoom out of a centre reaches (a star's system, an object seen from inside) is the world seen around
     // that centre at that scope.
-    const subject = selection?.current, step = subject ? zoomStepOf(subject) : null, shownView = subject ? subjectView(subject) : 'body';
+    const subject = selection?.current, step = subject ? zoomStepOf(subject) : null, moons = subject ? moonSystem(subject) : false;
     scenes.current?.mount?.navigation?.setZoomOutCentering?.(step !== null);
     shellOwner?.shell?.presentSelection();
-    // The moons view has its own shell selection, but its world paths use the shared overview policy. Past the scope that
+    // A planet's system keeps its host selected, and its world paths use the shared overview policy. Past the scope that
     // the galaxy the centre is in, that galaxy's stars retire too.
-    world.current?.setOverview?.(step !== null || shownView === 'moons', step?.scope, shownView === 'moons',
+    world.current?.setOverview?.(step !== null || moons, step?.scope, moons,
       step !== null && pastCentreGalaxy(step.scope, step.centreId));
     if (stage.dataset) {
-      const value = shownView === 'system' ? 'system' : subject ? subjectHost(subject) : objectId;
+      const value = subject && starSystem(subject) ? 'system' : subject ? subjectHost(subject) : objectId;
       if (stage.dataset.selection !== value) stage.dataset.selection = value;
     }
     publication.publish();
   }
   function commitSelection(ready: RouterContext, request: NavigationRequest, transition?: ShellNavigationTransition | null) {
-    const current = ready.selection, wasOverview = subjectView(current.context) === 'system';
+    const current = ready.selection, wasOverview = starSystem(current.context);
     current.commit(request.subject, objectId, false);
     transition?.arrive({ subject: current.current });
     publishSelection();
-    if (!wasOverview && subjectView(current.current) === 'system') aimAtSystemCenter(ready);
+    if (!wasOverview && starSystem(current.current)) aimAtSystemCenter(ready);
   }
   /** A binary's overview is centred on the pair's centre of mass, not on the star the scene mounts. Entering the overview
    * turns the camera onto that centre at the same distance; zooming out then keeps the pair centred. */
@@ -711,8 +712,8 @@ export function createSceneRouter({
       isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current,
       documentTarget, windowTarget,
       onChange(next) {
-        if (subjectView(next) === 'moons' && subjectHost(next) !== objectId) {
-          void navigate(subjectHost(next), { kind: 'object', view: 'moons', camera: 'preserve' }).catch(report);
+        if (moonSystem(next) && subjectHost(next) !== objectId) {
+          void navigate(subjectHost(next), { kind: 'object', view: 'system', camera: 'preserve' }).catch(report);
           return;
         }
         current.commit(next, objectId);

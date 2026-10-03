@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "k2-376",
-      "members": "planets"
+      "host": "k2-376"
     },
     "catalog": {
       "name": "K2-376 system",

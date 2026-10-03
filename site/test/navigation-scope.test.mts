@@ -33,9 +33,9 @@ test('a system is an object with an address of its own, named after its host', (
 test('selecting a view moves the address between the object and its system and keeps the rest', () => {
   assert.equal(address(withView(url('/sun/?v=abc'), 'system')), '/solar-system/?v=abc');
   assert.equal(address(withView(url('/solar-system/?dataset=x'), 'body')), '/sun/?dataset=x');
-  assert.equal(address(withView(url('/jupiter/'), 'moons')), '/jupiter-system/');
+  assert.equal(address(withView(url('/jupiter/'), 'system')), '/jupiter-system/');
   assert.equal(address(withView(url('/jupiter-system/?v=abc'), 'body')), '/jupiter/?v=abc');
-  assert.equal(address(withView(url('/jupiter-system/'), 'moons')), '/jupiter-system/');
+  assert.equal(address(withView(url('/jupiter-system/'), 'system')), '/jupiter-system/');
 });
 
 test('a build of named pages builds the scene routes a system page mounts', async () => {
@@ -47,5 +47,5 @@ test('a build of named pages builds the scene routes a system page mounts', asyn
 
 test('the front page keeps its own address for its body', () => {
   assert.equal(address(withView(url('/'), 'body')), '/');
-  assert.equal(address(withView(url('/'), 'moons')), '/earth-system/');
+  assert.equal(address(withView(url('/'), 'system')), '/earth-system/');
 });

@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "asteroid-2001-sn263",
-      "members": "moons"
+      "host": "asteroid-2001-sn263"
     },
     "catalog": {
       "name": "2001 SN263 Alpha system",

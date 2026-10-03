@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "gq-lup",
-      "members": "planets"
+      "host": "gq-lup"
     },
     "catalog": {
       "name": "GQ Lup system",

@@ -3,7 +3,7 @@ import { parseDistanceSubject } from '../prepared-data/spatial-relations.js';
 import type { ObjectDiscovery } from './object-discovery.js';
 import { parseObjectDiscovery } from './object-discovery.js';
 import { isRecord } from '@cssearth/core';
-import { defineObject, OBJECT_CLASSIFICATIONS } from './object-schema.js';
+import { defineObject, isSystemClassification, OBJECT_CLASSIFICATIONS, SYSTEM_CLASSIFICATIONS } from './object-schema.js';
 import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.js';
 import type { NavigationDistance } from './navigation-distance.js';
 import { parseNavigationDistance } from './navigation-distance.js';
@@ -88,9 +88,8 @@ export function catalogueObject<Scene, Signal>(value: unknown,
   const zoom = objectZoom(descriptor);
   const { order: _order, context: _context, ...entry } = catalogEntry(descriptor, loadScene(descriptor), parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery));
   const system = objectSystem(descriptor);
-  const expected = system ? system.members === 'moons' ? 'satellite-system' : 'planetary-system' : null;
-  if ((entry.classification === 'planetary-system' || entry.classification === 'satellite-system') !== (system !== null) || expected !== null && entry.classification !== expected) {
-    throw new TypeError(`src/objects/${id}/object.json: a system object carries properties.system and the classification of its members (${expected ?? 'none'}); got classification ${entry.classification}${system ? '' : ' without properties.system'}.`);
+  if (isSystemClassification(entry.classification) !== (system !== null)) {
+    throw new TypeError(`src/objects/${id}/object.json: a system object carries properties.system and a system's classification (${SYSTEM_CLASSIFICATIONS.join(' or ')}); got classification ${entry.classification}${system ? '' : ' without properties.system'}.`);
   }
   // An id names a system exactly when its package is one, of the host the id names (system-address.ts): `/ring-system/`
   // would otherwise read as the system of `ring`, and a system named otherwise would have no address.

@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "ogle-smc-ecl-1421-a",
-      "members": "planets"
+      "host": "ogle-smc-ecl-1421-a"
     },
     "catalog": {
       "name": "OGLE-SMC-ECL-1421 system",

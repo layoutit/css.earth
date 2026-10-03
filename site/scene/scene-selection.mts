@@ -7,13 +7,13 @@ import { SYSTEM_RANGES } from '../system-framing.mts';
 import { subjectOfScope, zoomChain, zoomStepOf } from '../inside-view.mts';
 import { selectionKey, subjectOf, type SceneSubject } from './scene-subject.mts';
 import { systemObjectId } from '../navigation/system-address.mts';
-export { selectionKey, subjectHost, subjectOf, subjectView, type SceneSubject } from './scene-subject.mts';
+export { moonSystem, selectionKey, starSystem, subjectHost, subjectOf, subjectView, type SceneSubject } from './scene-subject.mts';
 
 /** The camera has crossed into a scope of the zoom another scene shows (an object seen from inside, or back to the centre's own system): the
  * view is handed to that scene. */
 export interface ZoomHandover { readonly objectId: string; readonly centreId: string }
 
-/** How far out an object's scene is seen: on the body, out to its moons, or (a star) out to its planetary system. */
+/** How far out an object's scene is seen: on the body, or out to its system. */
 export type SceneView = PageView;
 export type SceneContext = SceneSubject;
 export type SelectionTarget = SceneSubject;
@@ -22,7 +22,7 @@ export function selectionTargetFromUrl(url: URL, objectId: string, objects: Syst
   // A system's address shows its host out to its members: a planet's moons, or a star's planetary system. An address that
   // names the system of a host without one is the body.
   if (!namesSystem(url)) return { objectId };
-  return subjectOf(objectId, satelliteSystemByHost(objectId) ? 'moons' : systemById(objects, objectId) ? 'system' : 'body');
+  return subjectOf(objectId, satelliteSystemByHost(objectId) || systemById(objects, objectId) ? 'system' : 'body');
 }
 
 /** One committed subject. Mounted scene ownership and temporary browsing/flight previews remain independent. */

@@ -5,22 +5,21 @@ import { bodyViewAtCamera } from './zoom-scope.mts';
 import { OVERVIEW_SELECTION_POLICY } from './runtime-policy.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from './satellite-systems.mts';
 import type { SceneContext } from './scene/scene-selection.mts';
-import { subjectHost, subjectOf, subjectView } from './scene/scene-subject.mts';
+import { moonSystem, starSystem, subjectHost, subjectOf } from './scene/scene-subject.mts';
 
 /** The selected body's own close-up leads into its nearest prepared satellite family. */
 export function satelliteSelectionAtCamera(world: WorldCameraPose, optics: ReturnType<ObjectWorldNavigation['optics']>,
   objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[], selection: SceneContext): SceneContext | null {
-  const view = subjectView(selection);
-  if (view === 'system') return null;
-  const id = subjectHost(selection);
+  // A star's system is a step of the zoom out of the star (scene-selection.mts `followCamera`), not this hand-over.
+  if (starSystem(selection)) return null;
+  const id = subjectHost(selection), overview = moonSystem(selection);
   const family = satelliteSystemByHost(id) ?? satelliteSystemOfMember(id);
   if (!family) return null;
   const frame = objects.find(object => object.id === id)?.worldFrame;
   if (!frame) return null;
-  const card = bodyViewAtCamera(world, frame, optics, id,
-    view === 'moons' ? 'overview' : 'detail');
-  if (view === 'moons' && card === 'detail') return { objectId: id };
-  if (view === 'body' && card === 'overview') return subjectOf(family.hostId, 'moons');
+  const card = bodyViewAtCamera(world, frame, optics, id, overview ? 'overview' : 'detail');
+  if (overview && card === 'detail') return { objectId: id };
+  if (!overview && card === 'overview') return subjectOf(family.hostId, 'system');
   return null;
 }
 

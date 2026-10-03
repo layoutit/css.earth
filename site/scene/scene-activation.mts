@@ -1,5 +1,5 @@
 import { zoomStepOf } from '../inside-view.mts';
-import { subjectView } from './scene-subject.mts';
+import { moonSystem, subjectView } from './scene-subject.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
@@ -40,7 +40,8 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
         if (framed.cancelled || !isCurrent(session)) return false;
       }
     }
-    if (initialSelection && subjectView(initialSelection.subject) === 'moons' && !initialSelection.savedView) {
+    // A planet's system is its host seen out to its moons: framed the same way, around the host.
+    if (initialSelection && moonSystem(initialSelection.subject) && !initialSelection.savedView) {
       await loadSystemView(objectId);
       const target = navigation.systemTarget({ objectId, fromId: objectId, mount, force: true });
       if (!target) throw new Error(`No prepared satellite-system target for ${objectId}.`);

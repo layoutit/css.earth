@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "beta-pictoris",
-      "members": "planets"
+      "host": "beta-pictoris"
     },
     "catalog": {
       "name": "Beta Pictoris system",

@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "k2-344",
-      "members": "planets"
+      "host": "k2-344"
     },
     "catalog": {
       "name": "K2-344 system",

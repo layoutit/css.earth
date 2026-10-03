@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hip-8152",
-      "members": "planets"
+      "host": "hip-8152"
     },
     "catalog": {
       "name": "HIP 8152 system",

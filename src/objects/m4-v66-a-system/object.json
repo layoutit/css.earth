@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "m4-v66-a",
-      "members": "planets"
+      "host": "m4-v66-a"
     },
     "catalog": {
       "name": "M4 V66 system",

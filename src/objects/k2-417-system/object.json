@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "k2-417",
-      "members": "planets"
+      "host": "k2-417"
     },
     "catalog": {
       "name": "K2-417 system",

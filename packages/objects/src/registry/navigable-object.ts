@@ -24,19 +24,21 @@ export type NavigableObject<Scene = unknown, Signal = unknown> = ObjectEntry<Sce
   readonly system?: ObjectSystem;
 };
 
-/** `members`: what orbits the host. A planet's moons, or a star's planets with everything that orbits them. */
-export interface ObjectSystem { readonly host: string; readonly members: 'moons' | 'planets' }
-/** A system package's `properties.system`, checked: its host's id and what its members are. Null for any other object. */
+/** A system names its host. What is inside it is the object tree's to say (the objects whose `parent` it is), and what kind
+ * of system it is is its classification: a planet's or small body's moons (`satellite-system`), a star's planets
+ * (`planetary-system`). */
+export interface ObjectSystem { readonly host: string }
+/** A system package's `properties.system`, checked: its host's id. Null for any other object. */
 export function objectSystem(descriptor: unknown): ObjectSystem | null {
   const properties = typeof descriptor === 'object' && descriptor !== null && 'properties' in descriptor ? (descriptor as { properties?: unknown }).properties : undefined;
   const system = typeof properties === 'object' && properties !== null && 'system' in properties ? (properties as { system?: unknown }).system : undefined;
   if (system === undefined) return null;
   const id = typeof descriptor === 'object' && descriptor !== null && 'id' in descriptor ? String((descriptor as { id?: unknown }).id) : 'unknown';
-  const { host, members, ...rest } = (typeof system === 'object' && system !== null ? system : {}) as { host?: unknown; members?: unknown };
-  if (typeof host !== 'string' || !/^[a-z0-9][a-z0-9_.+-]*$/u.test(host) || (members !== 'moons' && members !== 'planets') || Object.keys(rest).length) {
-    throw new TypeError(`src/objects/${id}/object.json properties.system must be { host: an object id, members: "moons" or "planets" }; got ${JSON.stringify(system)}.`);
+  const { host, ...rest } = (typeof system === 'object' && system !== null ? system : {}) as { host?: unknown };
+  if (typeof host !== 'string' || !/^[a-z0-9][a-z0-9_.+-]*$/u.test(host) || Object.keys(rest).length) {
+    throw new TypeError(`src/objects/${id}/object.json properties.system must be { host: an object id }; got ${JSON.stringify(system)}.`);
   }
-  return Object.freeze({ host, members });
+  return Object.freeze({ host });
 }
 
 /** What the world context draws, names and selects: every object with a place of its own. */

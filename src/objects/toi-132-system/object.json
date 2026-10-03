@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "toi-132",
-      "members": "planets"
+      "host": "toi-132"
     },
     "catalog": {
       "name": "TOI-132 system",

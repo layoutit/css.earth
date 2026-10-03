@@ -1,5 +1,4 @@
 import { cardView, presentCardView } from '../selection-presentation.mts';
-import { createSystemBodiesPresentation } from '../system-bodies-fragment.mts';
 import { renderSourceLink } from '../source-link.mts';
 import { zoomStepOf } from '../inside-view.mts';
 import { isExtendedClassification } from '@cssearth/objects';
@@ -10,7 +9,7 @@ import { applySeoHead, objectSeo } from '../seo.mts';
 import { knownObject, loadObject } from '../object-directory.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
 import type { SceneLifetime } from '@cssearth/engine';
-import { selectionKey, subjectHost, subjectOf, subjectView, type SceneView } from '../scene/scene-selection.mts';
+import { selectionKey, starSystem, subjectOf, subjectView, type SceneView } from '../scene/scene-selection.mts';
 import type { DestinationPresentation } from '../destination-browser.mts';
 import type { ShellCamera, PlaybackState } from '../browser/browser-types.mts';
 import { errorMessage, requiredElement, sectionElement } from '../browser/browser-types.mts';
@@ -79,12 +78,11 @@ export function mountObjectShell({
   };
   drawer.ownerDocument.addEventListener('objectmotionchange', motionChanged, { capture: true });
   lifetime.onDispose(() => drawer.ownerDocument.removeEventListener('objectmotionchange', motionChanged, { capture: true }));
-  let systemBodies: { card: HTMLElement; presentation: ReturnType<typeof createSystemBodiesPresentation> } | null = null;
   function updateBodyCard() {
     if (coasting || navigationTransition?.retainsSourceCard) return;
     if (!information || !drawer.contains(sectionPlaceholder(information))) information = sectionElement(drawer, '.object-information-panel');
     const selected = readSelection();
-    // The card shows the selected view of its object: the body, its moons, or (a star's) its planetary system.
+    // The card shows the selected view of its object: the body or its system.
     const view = information ? navigationTransition?.cardView ?? cardView(information, subjectView(selected)) : 'body';
     if (information) presentCardView(information, view);
     // The card names its subjects' source documents. The selection is presented before the card's new content arrives, so
@@ -92,11 +90,6 @@ export function mountObjectShell({
     // planet's README (2026-10-02). The link is written only when it differs.
     const subject = selectionKey(selected), named = information && sectionElements(information, '[data-source-subject]').find(node => node.dataset.sourceSubject === subject);
     if (named) renderSourceLink(documentTarget, subject, new Map([[subject, named]]));
-    // The system's body list arrives the first time it is shown.
-    if (information && view === 'system') {
-      if (systemBodies?.card !== information) systemBodies = { card: information, presentation: createSystemBodiesPresentation(information, windowTarget) };
-      systemBodies.presentation.show(subjectHost(selected));
-    }
   }
   /** The page the shell shows changed in place: its head, and the forms and links that return to it. */
   function presentPage(route: string, seo: Parameters<typeof applySeoHead>[1]) {
@@ -124,7 +117,7 @@ export function mountObjectShell({
     viewReadout.setExtendedSubject(!step && shown?.worldFrame && isExtendedClassification(shown.classification) ? { name: shown.name, positionM: shown.worldFrame.originM } : null);
     viewReadout.setOverviewScope(step?.scope ?? 'system');
     updateBodyCard();
-    // The page is the subject's own object: the body, or its system when the view is out to its moons or its planets
+    // The page is the subject's own object: the body, or its system when the view is out to what is inside it
     // (navigation/system-address.mts). Its head and forms follow, once that object's entry is read.
     const pageId = subject.objectId;
     void loadObject(pageId).then(page => {
@@ -212,12 +205,14 @@ export function mountObjectShell({
       if (!keep) restoreBrowser();
     };
     const retainsSourceCard = target.object.id !== objectId;
+    // A star's system is the subject itself; a planet's is its host seen farther out, on the host's own card.
+    const ofStar = target.view === 'system' && starSystem(subjectOf(target.object.id, 'system'));
     const transition: NonNullable<typeof navigationTransition> = {
       // Removing the offscreen context rail repaints the resident 3D surface in
       // WebKit. Publish the prepared card only after the router retires that scene.
       retainsSourceCard,
       // A system's card is its star's: which parts it shows is read from the selection once the star's card is there.
-      cardView: target.view === 'system' ? null : target.view,
+      cardView: ofStar ? null : target.view,
       arrive({ subject, content }) {
         if (navigationTransition !== transition || arrived) return;
         const keep = content ? target.object.id === content.id : subjectView(subject) === target.view;
@@ -241,7 +236,7 @@ export function mountObjectShell({
     };
     navigationTransition = transition;
     try {
-      if (target.view === 'system') {
+      if (ofStar) {
         if (target.preview) restoreBrowser = objectBrowser.previewSelection(subjectOf(target.object.id, 'system'));
       } else {
         if (!retainsSourceCard) sheet.showSelection();

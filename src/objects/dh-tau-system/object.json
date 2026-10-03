@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "dh-tau",
-      "members": "planets"
+      "host": "dh-tau"
     },
     "catalog": {
       "name": "DH Tau system",

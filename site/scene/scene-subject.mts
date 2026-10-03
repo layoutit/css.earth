@@ -10,14 +10,22 @@ export interface SceneSubject { readonly objectId: string }
 /** The object whose scene shows `subject`: a system's host, or the subject itself. */
 export const subjectHost = (subject: SceneSubject): string => systemHostId(subject.objectId) ?? subject.objectId;
 
-/** How far out the scene of `subject` is seen, read from the object: a system is its host seen out to its moons or its
- * planets; anything else is itself, its body. */
-export function subjectView(subject: SceneSubject): PageView {
+/** How far out the scene of `subject` is seen, read from the object: a system is its host seen out to what is inside it;
+ * anything else is itself, its body. */
+export const subjectView = (subject: SceneSubject): PageView => systemHostId(subject.objectId) === null ? 'body' : 'system';
+
+/** Whether `subject` is the system of a star (or of a black hole): the camera's zoom out of that star passes through it
+ * (inside-view.mts `zoomStepOf`), and the star is then no longer the selected body. The system of a planet or a small body
+ * is its host seen out to its moons: the host stays the selected body, and no star's zoom passes through it. What a system
+ * is is its object's classification; before its entry is read, whether its host has prepared moons says it. */
+export function starSystem(subject: SceneSubject): boolean {
   const host = systemHostId(subject.objectId);
-  if (host === null) return 'body';
-  const members = knownObject(subject.objectId)?.system?.members ?? (satelliteSystemByHost(host) ? 'moons' : 'planets');
-  return members === 'moons' ? 'moons' : 'system';
+  if (host === null) return false;
+  const classification = knownObject(subject.objectId)?.classification;
+  return classification === undefined ? satelliteSystemByHost(host) === null : classification !== 'satellite-system';
 }
+/** Whether `subject` is the system of a planet or a small body: its host seen out to its moons. */
+export const moonSystem = (subject: SceneSubject): boolean => subjectView(subject) === 'system' && !starSystem(subject);
 
 /** The subject that is `hostId` seen in `view`: the body itself, or its system. */
 export const subjectOf = (hostId: string, view: PageView = 'body'): SceneSubject => ({ objectId: view === 'body' ? hostId : systemObjectId(hostId) });

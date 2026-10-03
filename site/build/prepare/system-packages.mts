@@ -29,14 +29,14 @@ const texts = JSON.parse(await readFile(resolve(objectsRoot, '../navigation/syst
 const SOLAR_SYSTEM_DESCRIPTION = 'The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.';
 
 const systems = [
-  ...allPlanetarySystems(bodies).filter(system => system.memberIds.length > 0).map(system => ({ hostId: system.id, members: 'planets' as const, name: system.name,
+  ...allPlanetarySystems(bodies).filter(system => system.memberIds.length > 0).map(system => ({ hostId: system.id, name: system.name,
     classification: 'planetary-system',
     // What the system's card has always said: its star's own description; the Solar System's is its own sentence.
     description: system.id === SOLAR_SYSTEM_ID ? SOLAR_SYSTEM_DESCRIPTION : hostOf(system.id).description })),
   ...allSatelliteSystems().map(system => {
     const text = texts.satellites[system.hostId]?.text;
     if (!text) throw new TypeError(`src/navigation/system-text.json satellites.${system.hostId}: the ${system.name} has no introduction.`);
-    return { hostId: system.hostId, members: 'moons' as const, name: system.name, classification: 'satellite-system', description: text };
+    return { hostId: system.hostId, name: system.name, classification: 'satellite-system', description: text };
   }),
 ];
 let written = 0;
@@ -53,11 +53,11 @@ for (const system of systems) {
   const descriptor = { schema: OBJECT_SCHEMA, id, parent, type: 'system',
     generator: 'site/build/prepare/system-packages.mts',
     properties: {
-      system: { host: system.hostId, members: system.members },
+      system: { host: system.hostId },
       catalog: { name: system.name, systemName: catalog.systemName, classification: system.classification, color: catalog.color, distanceAu: catalog.distanceAu, description: system.description },
       worldFrame: host.properties.worldFrame } };
   await mkdir(resolve(objectsRoot, id), { recursive: true });
   await writeFile(resolve(objectsRoot, id, 'object.json'), `${JSON.stringify(descriptor, null, 2)}\n`);
   written++;
 }
-console.log(`Wrote ${written} of ${systems.length} system packages (${systems.filter(system => system.members === 'planets').length} planetary, ${systems.filter(system => system.members === 'moons').length} satellite).`);
+console.log(`Wrote ${written} of ${systems.length} system packages (${systems.filter(system => system.classification === 'planetary-system').length} planetary, ${systems.filter(system => system.classification === 'satellite-system').length} satellite).`);

@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "ngts-11",
-      "members": "planets"
+      "host": "ngts-11"
     },
     "catalog": {
       "name": "NGTS-11 system",

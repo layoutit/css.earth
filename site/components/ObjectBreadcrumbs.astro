@@ -1,26 +1,25 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-interface Props extends HTMLAttributes<'nav'> { objectId?: string; scope?: string; systemId?: string; satelliteSystem?: boolean; includeObject?: boolean; currentPage?: boolean; }
+interface Props extends HTMLAttributes<'nav'> { objectId?: string; scope?: string; system?: boolean; includeObject?: boolean; currentPage?: boolean; }
 import { OBJECTS, ancestorsOf } from '../objects.mts';
-import { SOLAR_SYSTEM_ID } from '../object-systems.mts';
 import { systemObjectId } from '../navigation/system-address.mts';
 
-const { objectId, scope, systemId, satelliteSystem = false, includeObject: requestedIncludeObject,
+const { objectId, scope, system = false, includeObject: requestedIncludeObject,
   currentPage: requestedCurrentPage, ...attributes } = Astro.props;
 // The trail is the object tree: the objects the card's subject is inside, from the farthest in. The subject is the page's
-// object seen from inside (`scope`), a star's planetary system, a body's satellite system or the body itself.
-const subjectId = scope === 'system' ? systemObjectId(systemId ?? SOLAR_SYSTEM_ID) : scope ?? (satelliteSystem && objectId ? systemObjectId(objectId) : objectId);
+// object seen from inside (`scope`), the system the body hosts (`system`) or the body itself.
+const subjectId = scope ?? (system && objectId ? systemObjectId(objectId) : objectId);
 const subject = subjectId ? OBJECTS.find(object => object.id === subjectId) : undefined;
 // A body in a satellite system (a moon, or the planet it orbits) keeps itself in the three-crumb window; its heading
 // replaces that final crumb.
 const parent = subject?.parent ? OBJECTS.find(object => object.id === subject.parent) : undefined;
-const includeObject = requestedIncludeObject ?? Boolean(objectId && !scope && !satelliteSystem && parent?.system?.members === 'moons');
-const currentPage = requestedCurrentPage ?? (Boolean(scope) || satelliteSystem || includeObject);
+const includeObject = requestedIncludeObject ?? Boolean(objectId && !scope && !system && parent?.classification === 'satellite-system');
+const currentPage = requestedCurrentPage ?? (Boolean(scope) || system || includeObject);
 const crumbs = (subject ? [...ancestorsOf(subject.id)].reverse() : []).map(object => ({ label: object.name, href: object.route }));
-if (subject && (scope || satelliteSystem || includeObject)) crumbs.push({ label: subject.name, href: subject.route });
+if (subject && (scope || system || includeObject)) crumbs.push({ label: subject.name, href: subject.route });
 const trail = crumbs.slice(-3);
-// A card that names its subject in its heading drops the subject's crumb; the page of an object seen from inside and a
-// planetary system's card mark it as the current page.
+// A card that names its subject in its heading drops the subject's crumb; the page of an object seen from inside marks
+// it as the current page.
 const visibleCrumbs = currentPage && objectId ? trail.slice(0, -1) : trail;
 ---
 

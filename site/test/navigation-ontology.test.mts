@@ -33,7 +33,8 @@ test('every scene and every package the host draws has exactly one searchable de
     const host = requireObject(system.system!.host);
     assert.equal(system.id, systemObjectId(host.id), `${system.id} is named after its host`);
     assert.equal(system.route, `/${system.id}/`);
-    assert.equal(system.classification, system.system!.members === 'moons' ? 'satellite-system' : 'planetary-system', system.id);
+    // What kind of system it is is its classification: a star's planets, or a planet's or small body's moons.
+    assert.equal(system.classification, ['star', 'black-hole'].includes(host.classification) ? 'planetary-system' : 'satellite-system', system.id);
     assert.equal(host.system, undefined, `${host.id} hosts a system and is not one`);
   }
   // No other object's id reads as a system's.

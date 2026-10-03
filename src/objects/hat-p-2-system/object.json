@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hat-p-2",
-      "members": "planets"
+      "host": "hat-p-2"
     },
     "catalog": {
       "name": "HAT-P-2 system",

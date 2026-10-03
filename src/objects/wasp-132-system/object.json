@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "wasp-132",
-      "members": "planets"
+      "host": "wasp-132"
     },
     "catalog": {
       "name": "WASP-132 system",

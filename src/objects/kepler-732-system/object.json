@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "kepler-732",
-      "members": "planets"
+      "host": "kepler-732"
     },
     "catalog": {
       "name": "Kepler-732 system",

@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "moshup",
-      "members": "moons"
+      "host": "moshup"
     },
     "catalog": {
       "name": "Moshup–Squannit system",

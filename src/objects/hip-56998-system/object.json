@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hip-56998",
-      "members": "planets"
+      "host": "hip-56998"
     },
     "catalog": {
       "name": "HIP 56998 system",

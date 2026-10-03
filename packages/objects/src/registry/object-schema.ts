@@ -21,6 +21,11 @@ export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-plan
   | 'galaxy' | 'galaxy-cluster' | 'nebula' | 'globular-cluster'
   /** A host with the bodies that orbit it, as an object of its own: a star's planets, a planet's moons. */
   | 'planetary-system' | 'satellite-system';
+/** The classifications of a system object: what its host is says which (a star's is planetary, any other body's a satellite
+ * system). */
+export const SYSTEM_CLASSIFICATIONS = Object.freeze(['planetary-system', 'satellite-system'] as const);
+export const isSystemClassification = (classification: string): classification is (typeof SYSTEM_CLASSIFICATIONS)[number] =>
+  (SYSTEM_CLASSIFICATIONS as readonly string[]).includes(classification);
 /** A body placed by its astrometry (a position and a distance) rather than an orbit: stars, black holes and the galaxies,
  * clusters and nebulae beyond them. Each is a parentless world-context body; none draws a trajectory. */
 /** The placed bodies with no solid surface: their radius frames them, it occludes nothing. */

@@ -1,35 +1,36 @@
 ---
 import ObjectCardHeader from './ObjectCardHeader.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
-import SystemBodies from './SystemBodies.astro';
+import MoonList from './MoonList.astro';
+import ObjectFactsheet from './ObjectFactsheet.astro';
+import InformationTabs from './InformationTabs.astro';
 import Detached from './Detached.astro';
-import { SCENE_OBJECTS, requireObject } from '../objects.mts';
-import { systemObjectId } from '../navigation/system-address.mts';
-import { systemById } from '../object-systems.mts';
 import { namesSystem } from '../navigation/navigation-scope.mts';
-import { systemSourceDocumentation } from '../source-documentation.mts';
+import { systemCard } from '../system-card.mts';
 
 interface Props { hostId: string }
-/** A star's planetary system, as parts of the star's own card: its header and its body list, mounted only while the system
- * is the card's subject (`updateBodyCard` in object-shell-client.mts), as the satellite system's are. The body list of a
- * system that is not the page's opening view arrives when it is first shown (system-bodies-fragment.mts): the Sun's is
- * 549 rows. */
+/** A system, as parts of its host's own card: its header, its tabs and the list of what is inside it. They are mounted
+ * only while the system is the card's subject (`updateBodyCard` in object-shell-client.mts). A star's planetary system
+ * and a planet's moons are one card: what differs is read from the system's object (system-card.mts). */
 const { hostId } = Astro.props;
-const system = systemById(SCENE_OBJECTS, hostId);
-const star = system ? SCENE_OBJECTS.find(object => object.id === hostId) : null;
-const shown = namesSystem(Astro.url) && system !== null;
-// The header names the system's source document, as the moons' card does: a system opened from a breadcrumb has no row
-// in the lists to name it, and the footer link kept the previous page's (2026-10-02).
-const source = system ? systemSourceDocumentation(system) : null;
+const card = systemCard(hostId);
+const detached = !namesSystem(Astro.url);
+const prefix = `${hostId}-system`;
 ---
 
-{system && star && source && <>
-  <Detached detached={!shown}><ObjectCardHeader heading={false} title={{ label: system.name }} data-view-part="system"
-    data-source-subject={`object:${systemObjectId(system.id)}`} data-source-document={source.href} data-source-label={source.label}
-    introduction={requireObject(systemObjectId(system.id)).description}>
-    <ObjectBreadcrumbs scope="system" systemId={system.id} />
+{card && <>
+  <Detached {detached}><ObjectCardHeader title={{ label: card.system.name }} heading={false} introduction={card.system.description} data-view-part="system"
+    data-source-subject={`object:${card.system.id}`} data-source-document={card.source.href} data-source-label={card.source.label}>
+    <ObjectBreadcrumbs objectId={hostId} system />
   </ObjectCardHeader></Detached>
-  <Detached detached={!shown}><div data-view-part="system" data-system-bodies-slot>
-    {shown && <SystemBodies systemId={system.id} />}
+  <Detached {detached}><InformationTabs idPrefix={prefix} group="system" viewPart="system" label={`${card.system.name} information`}
+    tabs={[{ id: 'bodies', label: 'Celestial bodies', count: card.rows.length }, ...(card.facts ? [{ id: 'factsheet', label: 'Factsheet' }] : [])]} /></Detached>
+  <Detached {detached}><div id={`${prefix}-bodies-content`} class="object-results-scroll object-card-tabpanel" data-view-part="system"
+    role="region" aria-label={`Bodies in the ${card.system.name}`}>
+    <MoonList moons={card.rows} />
   </div></Detached>
+  {card.facts && <Detached detached><div id={`${prefix}-factsheet-content`} class="object-results-scroll object-card-tabpanel" data-view-part="system"
+    data-information-panel="factsheet" data-information-group="system" role="region" aria-label="Factsheet">
+    <ObjectFactsheet id={prefix} facts={card.facts} embedded />
+  </div></Detached>}
 </>}

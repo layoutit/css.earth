@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "ds-tuc-a",
-      "members": "planets"
+      "host": "ds-tuc-a"
     },
     "catalog": {
       "name": "DS Tuc system",

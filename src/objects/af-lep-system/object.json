@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "af-lep",
-      "members": "planets"
+      "host": "af-lep"
     },
     "catalog": {
       "name": "AF Lep system",

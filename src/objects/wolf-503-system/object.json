@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "wolf-503",
-      "members": "planets"
+      "host": "wolf-503"
     },
     "catalog": {
       "name": "Wolf 503 system",

@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hr-8799",
-      "members": "planets"
+      "host": "hr-8799"
     },
     "catalog": {
       "name": "HR 8799 system",

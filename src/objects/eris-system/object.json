@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "eris",
-      "members": "moons"
+      "host": "eris"
     },
     "catalog": {
       "name": "Eris–Dysnomia system",

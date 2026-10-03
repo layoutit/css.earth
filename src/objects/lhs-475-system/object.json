@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "lhs-475",
-      "members": "planets"
+      "host": "lhs-475"
     },
     "catalog": {
       "name": "LHS 475 system",

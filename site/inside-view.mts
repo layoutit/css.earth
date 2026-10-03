@@ -1,7 +1,7 @@
 import { isRecord } from '@cssearth/core';
 import { knownAncestors, knownObject, loadAncestors, loadObject } from './object-directory.mts';
 import { SOLAR_SYSTEM_ID } from './object-systems.mts';
-import { subjectHost, subjectOf, subjectView, type SceneSubject } from './scene/scene-subject.mts';
+import { starSystem, subjectHost, subjectOf, subjectView, type SceneSubject } from './scene/scene-subject.mts';
 
 /** An object the view hands over to as the camera backs out of something inside it (the Milky Way) is seen from inside: its
  * scene has no body, and its camera is centred on the star the zoom came out of. That star is the zoom's centre: the world's
@@ -27,9 +27,9 @@ export function setZoomCentre(id: string) {
  * readout, the opening framing, the hand-over between scenes) reads this and never asks what kind of object is mounted.
  */
 export function zoomStepOf(subject: SceneSubject): { readonly scope: string; readonly centreId: string } | null {
-  const view = subjectView(subject);
-  if (view === 'system') return { scope: 'system', centreId: subjectHost(subject) };
-  return view === 'body' && seenFromInside(subject.objectId) ? { scope: subject.objectId, centreId } : null;
+  // A planet's own system is its host seen out to its moons, not a step of the zoom out of a star.
+  if (subjectView(subject) === 'system') return starSystem(subject) ? { scope: 'system', centreId: subjectHost(subject) } : null;
+  return seenFromInside(subject.objectId) ? { scope: subject.objectId, centreId } : null;
 }
 
 /** The selection a scope is, around `centre`: the star's planetary system, or the object seen from inside. */

@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "kelt-20",
-      "members": "planets"
+      "host": "kelt-20"
     },
     "catalog": {
       "name": "KELT-20 system",

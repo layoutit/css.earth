@@ -6,8 +6,7 @@
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "qatar-2",
-      "members": "planets"
+      "host": "qatar-2"
     },
     "catalog": {
       "name": "Qatar-2 system",
