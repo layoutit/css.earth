@@ -1,3 +1,6 @@
+/** Local CI rebuilds dist. Execution shares a fail-fast checkout lock with pnpm typecheck;
+ * concurrent runs must wait, and nested typechecks inherit the owner token. --list needs no lock. */
+import { withCheckoutLock } from './checkout/lock.mts';
 import {readFile, mkdtemp, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve, join} from 'node:path';
@@ -215,6 +218,6 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
   if(major!==22)console.log(`NODE ${process.versions.node}: the CI runner uses Node 22; results may differ.`);
   if(args.includes('--quick'))console.log(`[ci] --quick skips: ${QUICK_SKIPPED_STEPS.join('; ')}.`);
   const temporary=await mkdtemp(join(tmpdir(),'cssearth-ci-'));
-  try{await runCiSteps(steps,root,temporary);}finally{await rm(temporary,{recursive:true,force:true});}
+  try{await withCheckoutLock(root,()=>runCiSteps(steps,root,temporary));}finally{await rm(temporary,{recursive:true,force:true});}
  }
 }
