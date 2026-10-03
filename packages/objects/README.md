@@ -151,3 +151,6 @@ math; objects depends on engine, which never imports objects. Runtime viewport/l
 projection stay in renderer. Shell facing-level selection remains in renderer.
 
 `parsePreparedDensityVolume` validates the prepared envelope, identity and authored physical frame without transport. Bake, telescope F16 and renderer share it; filesystem/fetch transport stays with callers. Its node:test suite runs in the packages lane.
+
+Shared prepared schema literals are enforced by the hard architecture ownership rule; see
+[prepared format ownership](../../docs/prepared-format-ownership.md) for the computed owner rule, schema/owner exceptions and migration limits.
