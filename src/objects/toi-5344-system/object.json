@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5344-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5344",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5344 system",
+      "systemName": "TOI-5344 system",
+      "classification": "planetary-system",
+      "color": "#ffb97a",
+      "distanceAu": 28235113.1,
+      "description": "TOI-5344 b crosses TOI-5344 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1774903466091359000,
+        3523845520789029400,
+        1507869265664821800
+      ],
+      "presentationToReference": [
+        0.42020344023915074,
+        0.16058815798115092,
+        0.8931072233093873,
+        0.834260588814618,
+        0.31882562989610047,
+        -0.44984384809847294,
+        0.3569850679816591,
+        -0.9341100905340739,
+        7.447152542347989e-7
+      ],
+      "orbitUpReference": [
+        -0.16058815798115092,
+        -0.31882562989610047,
+        0.9341100905340739
+      ],
+      "metersPerUnit": 1319585.8064516129,
+      "bodyRadiusM": 409071600
+    }
+  }
+}

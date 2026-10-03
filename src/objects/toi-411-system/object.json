@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-411-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-411",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-411 system",
+      "systemName": "TOI-411 system",
+      "classification": "planetary-system",
+      "color": "#f9f4ff",
+      "distanceAu": 12973923.4,
+      "description": "3 planets cross HD 22946 as seen from Earth: d, TOI-411 b, TOI-411 c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        820976122748104800,
+        1164641375146911500,
+        -1317797449885784800
+      ],
+      "presentationToReference": [
+        0.42299582676109876,
+        -0.391189912494279,
+        0.8173401879911529,
+        0.6000642743805215,
+        -0.5549485106934504,
+        -0.5761553758243515,
+        -0.6789678911074315,
+        -0.7341679663686231,
+        0.0000018131047572574947
+      ],
+      "orbitUpReference": [
+        0.391189912494279,
+        0.5549485106934504,
+        0.7341679663686231
+      ],
+      "metersPerUnit": 2506764.193548387,
+      "bodyRadiusM": 777096900
+    }
+  }
+}

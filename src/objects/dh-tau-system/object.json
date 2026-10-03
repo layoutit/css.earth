@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "dh-tau-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "dh-tau",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "DH Tau system",
+      "systemName": "DH Tau system",
+      "classification": "planetary-system",
+      "color": "#ffca91",
+      "distanceAu": 27525518.3,
+      "description": "Young T Tauri star 133 parsecs away in Taurus, with a planet-mass companion photographed far out."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1414190996532608300,
+        3401255230482643000,
+        1840506811874844000
+      ],
+      "presentationToReference": [
+        0.3434368684808476,
+        0.1716012408161101,
+        0.9233656542878559,
+        0.8259962396350945,
+        0.41271581460751805,
+        -0.3839216957682078,
+        0.44696904756006595,
+        -0.8945494231864577,
+        1.5268949521250137e-7
+      ],
+      "orbitUpReference": [
+        -0.1716012408161101,
+        -0.41271581460751805,
+        0.8945494231864577
+      ],
+      "metersPerUnit": 2827683.870967742,
+      "bodyRadiusM": 876582000
+    }
+  }
+}

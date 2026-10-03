@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gq-lup-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gq-lup",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GQ Lup system",
+      "systemName": "GQ Lup system",
+      "classification": "planetary-system",
+      "color": "#ffdab3",
+      "distanceAu": 31785330.3,
+      "description": "Young T Tauri star 154 parsecs away in Lupus, with its own disc and a companion photographed directly."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2087371156094428700,
+        -3251453450927250400,
+        -2771484385533527000
+      ],
+      "presentationToReference": [
+        -0.43898321369653975,
+        0.31487797794091227,
+        -0.8415138721973039,
+        -0.6837947726296092,
+        0.4904796693290182,
+        0.5402355068850231,
+        -0.5828537097909552,
+        -0.8125771058691842,
+        4.2616269133537e-7
+      ],
+      "orbitUpReference": [
+        -0.31487797794091227,
+        -0.4904796693290182,
+        0.8125771058691842
+      ],
+      "metersPerUnit": 3815129.0322580645,
+      "bodyRadiusM": 1182690000
+    }
+  }
+}

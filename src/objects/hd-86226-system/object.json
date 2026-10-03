@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-86226-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-86226",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 86226 system",
+      "systemName": "HD 86226 system",
+      "classification": "planetary-system",
+      "color": "#fff6fa",
+      "distanceAu": 9405612.4,
+      "description": "HD 86226 c crosses HD 86226 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1102380885461234200,
+        659162729320767100,
+        -574523761851092860
+      ],
+      "presentationToReference": [
+        -0.7834633987123216,
+        0.3504487514448105,
+        0.5131966245883847,
+        0.4684677311099173,
+        -0.20954417293648825,
+        0.8582710670278297,
+        -0.40831738609427876,
+        -0.9128400255242627,
+        0.000003741550470155214
+      ],
+      "orbitUpReference": [
+        -0.3504487514448105,
+        0.20954417293648825,
+        0.9128400255242627
+      ],
+      "metersPerUnit": 2363135.806451613,
+      "bodyRadiusM": 732572100
+    }
+  }
+}

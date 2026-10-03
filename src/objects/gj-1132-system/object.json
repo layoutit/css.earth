@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-1132-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-1132",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 1132 system",
+      "systemName": "GJ 1132 system",
+      "classification": "planetary-system",
+      "color": "#ffc778",
+      "distanceAu": 2600472.7,
+      "description": "GJ 1132 b crosses GJ 1132 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -237174732840922560,
+        117197116302755220,
+        -285225467254148000
+      ],
+      "presentationToReference": [
+        -0.6096501352251975,
+        0.6573491683340177,
+        0.4429658942971502,
+        0.30125147514537226,
+        -0.32475580646392915,
+        0.8965384625830062,
+        -0.7331945589968846,
+        -0.6800189240444257,
+        0.00003998532030403319
+      ],
+      "orbitUpReference": [
+        -0.6573491683340177,
+        0.32475580646392915,
+        0.6800189240444257
+      ],
+      "metersPerUnit": 496191.29032258067,
+      "bodyRadiusM": 153819300
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-34-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-34",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-34 system",
+      "systemName": "WASP-34 system",
+      "classification": "planetary-system",
+      "color": "#fff1ed",
+      "distanceAu": 27065134,
+      "description": "WASP-34 b crosses WASP-34 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3583241946540844500,
+        933416767120846000,
+        -1637861862525431800
+      ],
+      "presentationToReference": [
+        -0.8849957648880773,
+        0.3914550847094105,
+        0.2520821548331323,
+        0.23053701036356689,
+        -0.10197107255876954,
+        0.967705837129157,
+        -0.40451845814844545,
+        -0.9145298338580117,
+        9.175649184502901e-7
+      ],
+      "orbitUpReference": [
+        -0.3914550847094105,
+        0.10197107255876954,
+        0.9145298338580117
+      ],
+      "metersPerUnit": 2042216.1290322582,
+      "bodyRadiusM": 633087000
+    }
+  }
+}

@@ -1,3 +1,5 @@
+import { namesSystem } from './navigation/navigation-scope.mts';
+import { satelliteSystemByHost } from './satellite-systems.mts';
 import { eyeDistanceM } from '@cssearth/engine';
 import { createPreparedSceneOwnership } from './prepared-scene-ownership.mts';
 import { createPreparedArrival } from './prepared-arrival.mts';
@@ -246,7 +248,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       // A system target was provisionally framed before the destination transport
       // loaded. Resolve its final range with the destination's prepared fit before
       // starting motion, so its settled card uses the same zoom boundary.
-      const frameSatelliteSystem = centerSelection && query?.get('view') === 'satellites' && !saved;
+      const frameSatelliteSystem = centerSelection && url != null && namesSystem(url) && satelliteSystemByHost(toId) !== null && !saved;
       let targetOptics = optics;
       if (!saved && (!targetWorldCamera || frameSatelliteSystem) && cameraViewport) {
         const factory = await toFactory;

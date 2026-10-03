@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-341-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-341",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 341 system",
+      "systemName": "GJ 341 system",
+      "classification": "planetary-system",
+      "color": "#ffbf88",
+      "distanceAu": 2155457.3,
+      "description": "GJ 341 b crosses GJ 341 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -123160980023347470,
+        101908925090657140,
+        -280037719754160060
+      ],
+      "presentationToReference": [
+        -0.3819452635482268,
+        0.669158107023805,
+        0.637452149935502,
+        0.31603866223636873,
+        -0.5535926380056659,
+        0.770489944851829,
+        -0.8684684102631035,
+        -0.4957445097530036,
+        0.000037746946991981245
+      ],
+      "orbitUpReference": [
+        -0.669158107023805,
+        0.5535926380056659,
+        0.4957445097530036
+      ],
+      "metersPerUnit": 1136908.3870967743,
+      "bodyRadiusM": 352441600
+    }
+  }
+}

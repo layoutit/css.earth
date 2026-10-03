@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "yses-1-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "yses-1",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "YSES 1 system",
+      "systemName": "YSES 1 system",
+      "classification": "planetary-system",
+      "color": "#ffd9bd",
+      "distanceAu": 19436308.6,
+      "description": "Young Sun-like star 94 parsecs away in Musca, with two giant planets photographed directly."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1147484375679745700,
+        -447381060738774140,
+        -2633902851148623400
+      ],
+      "presentationToReference": [
+        -0.394646662901709,
+        0.8439798743198283,
+        -0.3632519555399964,
+        -0.15386479015587454,
+        0.3290556329218679,
+        0.9316909448914258,
+        -0.9058585087147074,
+        -0.42358040817001386,
+        0.0000019211836231793303
+      ],
+      "orbitUpReference": [
+        -0.8439798743198283,
+        -0.3290556329218679,
+        0.42358040817001386
+      ],
+      "metersPerUnit": 2266635.4838709678,
+      "bodyRadiusM": 702657000
+    }
+  }
+}

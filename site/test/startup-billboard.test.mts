@@ -15,8 +15,10 @@ test('default startup never overwrites a saved camera, dataset or context', () =
   assert.equal(usesDefaultStartupView('https://css.earth/earth/', 'earth'), true);
   assert.equal(usesDefaultStartupView('https://css.earth/', 'earth'), true);
   assert.equal(usesDefaultStartupView('https://css.earth/earth/?embed', 'earth'), true);
-  for (const key of ['v', 'dataset', 'feature', 'view', 'overview', 'settings'])
+  for (const key of ['v', 'dataset', 'feature', 'settings'])
     assert.equal(usesDefaultStartupView(`https://css.earth/earth/?${key}=custom`, 'earth'), false, key);
+  // A system's page opens on its host out to its members, never on the host's own photograph.
+  assert.equal(usesDefaultStartupView('https://css.earth/earth-system/', 'earth'), false);
 });
 
 test('startup uses the baked perspective and viewport texture demand before mounting', async () => {

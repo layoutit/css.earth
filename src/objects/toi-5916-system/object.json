@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5916-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5916",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5916 system",
+      "systemName": "TOI-5916 system",
+      "classification": "planetary-system",
+      "color": "#ffc88e",
+      "distanceAu": 40466890.7,
+      "description": "TOI-5916 b crosses TOI-5916 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4907348903082158000,
+        -3398074907934744600,
+        1009471189663427100
+      ],
+      "presentationToReference": [
+        0.8106279815463693,
+        0.13709367648192466,
+        -0.5692869218616644,
+        -0.5613162337067681,
+        -0.09492989613385022,
+        -0.8221389180651075,
+        0.16675239521910454,
+        -0.9859988025797424,
+        -7.605645858301819e-8
+      ],
+      "orbitUpReference": [
+        -0.13709367648192466,
+        0.09492989613385022,
+        0.9859988025797424
+      ],
+      "metersPerUnit": 1092922.2580645161,
+      "bodyRadiusM": 338805900
+    }
+  }
+}

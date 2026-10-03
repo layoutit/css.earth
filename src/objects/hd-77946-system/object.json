@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-77946-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-77946",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 77946 system",
+      "systemName": "HD 77946 system",
+      "classification": "planetary-system",
+      "color": "#fff7fd",
+      "distanceAu": 20484625.2,
+      "description": "HD 77946 b crosses HD 77946 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1532260754880972000,
+        1440029752137199900,
+        2229211468815990000
+      ],
+      "presentationToReference": [
+        -0.5000095250555289,
+        -0.5300883284024417,
+        0.6848334388340348,
+        0.46991257209644877,
+        0.498175685413907,
+        0.7286996370577412,
+        0.7274425403009124,
+        -0.6861686021335347,
+        -0.000002581979878195237
+      ],
+      "orbitUpReference": [
+        0.5300883284024417,
+        -0.498175685413907,
+        0.6861686021335347
+      ],
+      "metersPerUnit": 2956500.64516129,
+      "bodyRadiusM": 916515200
+    }
+  }
+}

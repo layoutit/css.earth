@@ -8,8 +8,8 @@ import { createWorldContextPlannerClient, type WorldPlannerWorker } from './worl
 // The summary every page reads, and one other system's file: TRAPPIST-1's seven planets (packages/bake/src/world-context/summary.ts).
 const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
 const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
-const trappistFile = JSON.parse(await readFile(new URL('world-systems/trappist-1.json', prepared), 'utf8')) as Record<string, unknown>;
-const trappist = parsePreparedWorldSystem(trappistFile, summary, 'trappist-1');
+const trappistFile = JSON.parse(await readFile(new URL('world-systems/trappist-1-system.json', prepared), 'utf8')) as Record<string, unknown>;
+const trappist = parsePreparedWorldSystem(trappistFile, summary, 'trappist-1-system');
 // The build's index of which holder has each body (world-index.json); a page never reads it.
 const index = parsePreparedWorldIndex(JSON.parse(await readFile(new URL('world-index.json', prepared), 'utf8')));
 
@@ -26,16 +26,16 @@ test('the summary holds the Sun\'s system and the bodies that orbit nothing, and
   assert.ok(summary.bodies.some(body => body.id === 'earth') && summary.bodies.some(body => body.id === 'trappist-1'));
   assert.equal(summary.bodies.some(body => body.id === 'trappist-1b'), false);
   assert.equal('deferred' in summary, false, 'a body is found through its holder, never through a list of the world');
-  assert.equal(index.holders['trappist-1b'], 'trappist-1');
-  assert.deepEqual(trappist.bodies.map(body => body.id).sort(), Object.keys(index.holders).filter(id => index.holders[id] === 'trappist-1').sort());
+  assert.equal(index.holders['trappist-1b'], 'trappist-1-system');
+  assert.deepEqual(trappist.bodies.map(body => body.id).sort(), Object.keys(index.holders).filter(id => index.holders[id] === 'trappist-1-system').sort());
   assert.equal(index.order.length, summary.worldBodyCount);
 });
 
 test('a holder file names itself and holds bodies', () => {
-  assert.throws(() => parsePreparedWorldSystem(trappistFile, summary, 'wasp-43'), /names trappist-1/);
+  assert.throws(() => parsePreparedWorldSystem(trappistFile, summary, 'wasp-43-system'), /names trappist-1-system/);
   const columns = trappistFile.bodies as Record<string, unknown[]>;
   const empty = { ...trappistFile, bodies: Object.fromEntries(Object.entries(columns).map(([field]) => [field, []])) };
-  assert.throws(() => parsePreparedWorldSystem(empty, summary, 'trappist-1'), /holds no body/);
+  assert.throws(() => parsePreparedWorldSystem(empty, summary, 'trappist-1-system'), /holds no body/);
 });
 
 test('a holder added to a plan keeps every earlier body at its index, and its own bodies follow', () => {

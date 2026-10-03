@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-133-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-133",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-133 system",
+      "systemName": "K2-133 system",
+      "classification": "planetary-system",
+      "color": "#ffc08a",
+      "distanceAu": 15547604.4,
+      "description": "4 planets cross K2-133 as seen from Earth: b, c, d, e."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        715723419022762500,
+        1982569473787437300,
+        983318697922119700
+      ],
+      "presentationToReference": [
+        0.3077200871986363,
+        0.14356057293861937,
+        0.9405842385623943,
+        0.8523913500090184,
+        0.39765273327145595,
+        -0.33956043667003255,
+        0.4227733841720249,
+        -0.9062354360867134,
+        0.000004056818149480301
+      ],
+      "orbitUpReference": [
+        -0.14356057293861937,
+        -0.39765273327145595,
+        0.9062354360867134
+      ],
+      "metersPerUnit": 1021108.0645161291,
+      "bodyRadiusM": 316543500
+    }
+  }
+}

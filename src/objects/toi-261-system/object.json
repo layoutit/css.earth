@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-261-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-261",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-261 system",
+      "systemName": "TOI-261 system",
+      "classification": "planetary-system",
+      "color": "#fef7ff",
+      "distanceAu": 23440010.2,
+      "description": "TOI-261 b crosses TOI-261 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3080808312916024300,
+        838106020671352000,
+        -1449921036500832500
+      ],
+      "presentationToReference": [
+        0.8785805499831492,
+        -0.3989862214202735,
+        0.2624999282058557,
+        0.23900988759793143,
+        -0.108537947022683,
+        -0.9649320119503371,
+        -0.4134857806765925,
+        -0.9105105760906206,
+        -0.000002322745552211357
+      ],
+      "orbitUpReference": [
+        0.3989862214202735,
+        0.108537947022683,
+        0.9105105760906206
+      ],
+      "metersPerUnit": 2872971.6129032257,
+      "bodyRadiusM": 890621200
+    }
+  }
+}

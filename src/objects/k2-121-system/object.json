@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-121-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-121",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-121 system",
+      "systemName": "K2-121 system",
+      "classification": "planetary-system",
+      "color": "#ffcfb0",
+      "distanceAu": 34918744.5,
+      "description": "K2-121 b crosses K2-121 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2992528767518985700,
+        3980373551871101000,
+        1577710087182339600
+      ],
+      "presentationToReference": [
+        -0.5728675182114678,
+        -0.18149696666270926,
+        0.7993007304328387,
+        0.76197319904339,
+        0.24140940663134633,
+        0.6009312292845863,
+        0.30202591034183873,
+        -0.9532997165016555,
+        -2.1665485361991146e-7
+      ],
+      "orbitUpReference": [
+        0.18149696666270926,
+        -0.24140940663134633,
+        0.9532997165016555
+      ],
+      "metersPerUnit": 1514830.6451612904,
+      "bodyRadiusM": 469597500
+    }
+  }
+}

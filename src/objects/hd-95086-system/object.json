@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-95086-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-95086",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 95086 system",
+      "systemName": "HD 95086 system",
+      "classification": "planetary-system",
+      "color": "#ced9ff",
+      "distanceAu": 17833970.5,
+      "description": "Young A-type star 86 parsecs away, with a giant planet between two belts of dust."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -934162301730827600,
+        263254176273113250,
+        -2485127074085717000
+      ],
+      "presentationToReference": [
+        -0.350145171125682,
+        0.8965646815098249,
+        0.27123814445345457,
+        0.09867362280990226,
+        -0.2526532152418612,
+        0.9625122695267416,
+        -0.9314836956699436,
+        -0.36378307368146745,
+        0.0000019819216653727904
+      ],
+      "orbitUpReference": [
+        -0.8965646815098249,
+        0.2526532152418612,
+        0.36378307368146745
+      ],
+      "metersPerUnit": 3413716.870967742,
+      "bodyRadiusM": 1058252230
+    }
+  }
+}

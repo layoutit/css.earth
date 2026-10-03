@@ -126,6 +126,8 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     const arrival = camera ? parseArrivalView({ defaultDataset, datasetIds: photographed, rotation: preparedDefaultViewRotation(camera) }) : undefined;
     return { imagery, illustration: false, featured: true, ...(arrival ? { arrival } : {}), ...(policy.orientationReference === undefined ? {} : { orientationReference: policy.orientationReference }) };
   }
+  // A system shows its host's scene: it has no imagery, illustration or sources of its own.
+  if (isRecord(descriptor) && isRecord(descriptor.properties) && descriptor.properties.system !== undefined) return { imagery: false, illustration: false, featured: false };
   if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.recipe) ||
       !Array.isArray(descriptor.properties.recipe.sources)) throw new TypeError(`Missing discovery recipe sources: ${isRecord(descriptor) ? String(descriptor.id) : 'unknown object'}.`);
   const inputs: unknown[] = [];

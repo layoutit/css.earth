@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-799-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-799",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-799 system",
+      "systemName": "TOI-799 system",
+      "classification": "planetary-system",
+      "color": "#ffeee7",
+      "distanceAu": 32561006.4,
+      "description": "TOI-799 b crosses TOI-799 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -437122834188616260,
+        2935630108635600000,
+        -3862408318836530700
+      ],
+      "presentationToReference": [
+        -0.08973859763013195,
+        0.11678017186783989,
+        0.9890952307810887,
+        0.6026665927655863,
+        -0.7842846125734003,
+        0.14727737248101055,
+        -0.7929312467419205,
+        -0.6093111175246264,
+        -0.0000010929930576498484
+      ],
+      "orbitUpReference": [
+        -0.11678017186783989,
+        0.7842846125734003,
+        0.6093111175246264
+      ],
+      "metersPerUnit": 2054601.935483871,
+      "bodyRadiusM": 636926600
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1669-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1669",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1669 system",
+      "systemName": "TOI-1669 system",
+      "classification": "planetary-system",
+      "color": "#ffede4",
+      "distanceAu": 23050368.4,
+      "description": "TOI-1669 c crosses TOI-1669 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        267735436395015870,
+        276851591917305950,
+        3426710883949001000
+      ],
+      "presentationToReference": [
+        0.07764181130036736,
+        0.6908536140702848,
+        0.7188136288802711,
+        0.08028544661969483,
+        0.7143159526058842,
+        -0.6952028242993725,
+        0.9937434257387942,
+        -0.11168707973071046,
+        0.000004706553394880333
+      ],
+      "orbitUpReference": [
+        -0.6908536140702848,
+        -0.7143159526058842,
+        0.11168707973071046
+      ],
+      "metersPerUnit": 2370092.9032258065,
+      "bodyRadiusM": 734728800
+    }
+  }
+}

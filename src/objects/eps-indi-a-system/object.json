@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "eps-indi-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "eps-indi-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Epsilon Indi system",
+      "systemName": "Epsilon Indi system",
+      "classification": "planetary-system",
+      "color": "#ffd5bc",
+      "distanceAu": 750390.9,
+      "description": "Sun-like K dwarf 3.6 parsecs away, with a cold giant planet and a pair of brown dwarfs."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        53698781135886570,
+        -29895864205780710,
+        -93937674853190320
+      ],
+      "presentationToReference": [
+        0.47845214836804856,
+        -0.7309224346945884,
+        -0.4866579252227729,
+        -0.26636997495355313,
+        0.40728737043451196,
+        -0.8735926020335704,
+        -0.8367380582746563,
+        -0.5476033165939336,
+        -0.00017172676497787838
+      ],
+      "orbitUpReference": [
+        0.7309224346945884,
+        -0.40728737043451196,
+        0.5476033165939336
+      ],
+      "metersPerUnit": 1600110,
+      "bodyRadiusM": 496034100
+    }
+  }
+}

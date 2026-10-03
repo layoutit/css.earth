@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "sgr-a-star-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "sgr-a-star",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Galactic Centre",
+      "systemName": "Galactic Centre",
+      "classification": "planetary-system",
+      "color": "#9a9a9a",
+      "distanceAu": 1707253791.2,
+      "description": "The black hole at the centre of the Milky Way, 4.3 million solar masses, with its S-stars in orbit."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -13959703919334212000,
+        -222925557062698830000,
+        -123851787125810950000
+      ],
+      "presentationToReference": [
+        -0.05465789263885499,
+        0.030306898065168827,
+        -0.9980450925193445,
+        -0.8728438106449133,
+        0.4839810832262482,
+        0.0624979463503726,
+        -0.48492906387547663,
+        -0.8745534877918073,
+        1.976901881051108e-7
+      ],
+      "orbitUpReference": [
+        -0.030306898065168827,
+        -0.4839810832262482,
+        0.8745534877918073
+      ],
+      "metersPerUnit": 97260307.74193548,
+      "bodyRadiusM": 30150695400
+    }
+  }
+}

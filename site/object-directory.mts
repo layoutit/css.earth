@@ -1,5 +1,5 @@
 import { importPackagedObjectRuntime } from './import-queue.mts';
-import { catalogueObject, levelOf } from '@cssearth/objects';
+import { catalogueObject, levelOf, objectSystem } from '@cssearth/objects';
 import type { OverviewObject } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './objects.mts';
 import overviews from './prepared-overview-objects.json' with { type: 'json' };
@@ -11,7 +11,8 @@ import { readObjectEntry } from './object-entries.mts';
  * them (a path names either an object or a level), so the directory starts with their few entries. Both lists are live: consumers that search them find
  * every object loaded so far. The build and the search function seed them from the full registry (`seedObjectDirectory`). */
 export const NAVIGABLE_OBJECTS: NavigableObject[] = [];
-/** Every object has a scene of its own: the same live list, under the name the scene code reads. */
+/** The same live list, under the name the scene code reads: it only ever holds the objects a page mounted or loaded,
+ * and the scene code asks it for hosts (a system mounts its host's scene). */
 export const SCENE_OBJECTS: ObjectEntry[] = NAVIGABLE_OBJECTS;
 
 const loading = new Map<string, Promise<NavigableObject | null>>();
@@ -33,6 +34,13 @@ export const knownObject = (id: string): NavigableObject | undefined => NAVIGABL
 /** A prepared catalogue entry as the directory serves it (`@cssearth/objects` catalogueObject), bound to the shell's scene loader. */
 export function objectFromEntry(value: unknown): NavigableObject {
   return catalogueObject(value, descriptor => async (signal?: AbortSignal) => {
+    // A system mounts its host's scene (its package's `system.host`).
+    const system = objectSystem(descriptor);
+    if (system) {
+      const host = await loadObject(system.host);
+      if (!host) throw new Error(`System ${String(descriptor.id)} is hosted by ${system.host}, which has no prepared entry.`);
+      return host.loadScene(signal);
+    }
     const { loadPackagedObject } = await importPackagedObjectRuntime();
     return loadPackagedObject(descriptor, signal);
   });

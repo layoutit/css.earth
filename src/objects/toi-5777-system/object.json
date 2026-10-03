@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5777-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5777",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5777 system",
+      "systemName": "TOI-5777 system",
+      "classification": "planetary-system",
+      "color": "#ffc39b",
+      "distanceAu": 23507026.1,
+      "description": "TOI-5777 b crosses TOI-5777 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -339753044909375040,
+        275109407746488600,
+        3489321665489066500
+      ],
+      "presentationToReference": [
+        -0.09661466283360957,
+        -0.7711414805129715,
+        0.6292904130509303,
+        0.07823212497190915,
+        0.6244086471063653,
+        0.7771702362038695,
+        0.9922425820070049,
+        -0.12431676657257823,
+        -0.000001005763942035426
+      ],
+      "orbitUpReference": [
+        0.7711414805129715,
+        -0.6244086471063653,
+        0.12431676657257823
+      ],
+      "metersPerUnit": 1507900.6451612904,
+      "bodyRadiusM": 467449200
+    }
+  }
+}

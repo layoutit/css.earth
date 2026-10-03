@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lhs-1140-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "lhs-1140",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "LHS 1140 system",
+      "systemName": "LHS 1140 system",
+      "classification": "planetary-system",
+      "color": "#ffcf80",
+      "distanceAu": 3086437.4,
+      "description": "2 planets cross LHS 1140 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        436852919755623550,
+        86892717843824340,
+        -121649768549792350
+      ],
+      "presentationToReference": [
+        0.9461413304771839,
+        -0.258377830218001,
+        0.19508326328699374,
+        0.18819329776651234,
+        -0.05138834799123459,
+        -0.980786684435763,
+        -0.2634385420522774,
+        -0.9646761811833905,
+        -0.000004335999030423514
+      ],
+      "orbitUpReference": [
+        0.258377830218001,
+        0.05138834799123459,
+        0.9646761811833905
+      ],
+      "metersPerUnit": 484521.29032258067,
+      "bodyRadiusM": 150201600
+    }
+  }
+}

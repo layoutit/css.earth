@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2015-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2015",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2015 system",
+      "systemName": "TOI-2015 system",
+      "classification": "planetary-system",
+      "color": "#ffcc83",
+      "distanceAu": 9761262,
+      "description": "TOI-2015 b crosses TOI-2015 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -796085911649617400,
+        -1023813329362831200,
+        671136700540651900
+      ],
+      "presentationToReference": [
+        -0.5451666721524551,
+        -0.28211673841515855,
+        -0.7894323564943425,
+        -0.7011164216233049,
+        -0.3628211802143465,
+        0.6138375636257536,
+        0.4595966306494751,
+        -0.8881277707029894,
+        -0.0000013372862075116862
+      ],
+      "orbitUpReference": [
+        0.28211673841515855,
+        0.3628211802143465,
+        0.8881277707029894
+      ],
+      "metersPerUnit": 734524.5161290322,
+      "bodyRadiusM": 227702600
+    }
+  }
+}

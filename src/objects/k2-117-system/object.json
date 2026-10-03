@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-117-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-117",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-117 system",
+      "systemName": "K2-117 system",
+      "classification": "planetary-system",
+      "color": "#ffc087",
+      "distanceAu": 21089607,
+      "description": "2 planets cross K2-117 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2149509936941506000,
+        2237125183287246300,
+        573282170140549250
+      ],
+      "presentationToReference": [
+        -0.6813113646352067,
+        -0.12589497603142352,
+        0.7210861803064595,
+        0.7090820029677387,
+        0.13102668619877206,
+        0.6928453799882255,
+        0.18170728517638582,
+        -0.9833526643650363,
+        1.0860977715291502e-7
+      ],
+      "orbitUpReference": [
+        0.12589497603142352,
+        -0.13102668619877206,
+        0.9833526643650363
+      ],
+      "metersPerUnit": 1144538.7096774194,
+      "bodyRadiusM": 354807000
+    }
+  }
+}

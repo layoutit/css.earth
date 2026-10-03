@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-9827-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-9827",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 9827 system",
+      "systemName": "GJ 9827 system",
+      "classification": "planetary-system",
+      "color": "#ffd8b0",
+      "distanceAu": 6116213.9,
+      "description": "3 planets cross GJ 9827 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        905328768750614700,
+        -130896299982851860,
+        -20513600118987530
+      ],
+      "presentationToReference": [
+        0.98945974800986,
+        -0.022200165805715426,
+        -0.14309633016420495,
+        -0.1430603162768539,
+        0.00321023572655273,
+        -0.9897087653917929,
+        -0.022431071642499422,
+        -0.9997483918590611,
+        -4.362914828689137e-7
+      ],
+      "orbitUpReference": [
+        0.022200165805715426,
+        -0.00321023572655273,
+        0.9997483918590611
+      ],
+      "metersPerUnit": 1301632.2580645161,
+      "bodyRadiusM": 403506000
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "l-168-9-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "l-168-9",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "L 168-9 system",
+      "systemName": "L 168-9 system",
+      "classification": "planetary-system",
+      "color": "#ffbf8b",
+      "distanceAu": 5194176.3,
+      "description": "L 168-9 b crosses L 168-9 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        381882508004679500,
+        -67153383928518984,
+        -673382350670049900
+      ],
+      "presentationToReference": [
+        0.49146506369736676,
+        -0.853507759610974,
+        -0.17316638082722371,
+        -0.0864232881696847,
+        0.15005869157249896,
+        -0.9848925851814954,
+        -0.8665985843669968,
+        -0.49900590514282034,
+        0.000014342651899476011
+      ],
+      "orbitUpReference": [
+        0.853507759610974,
+        -0.15005869157249896,
+        0.49900590514282034
+      ],
+      "metersPerUnit": 1355492.9032258065,
+      "bodyRadiusM": 420202800
+    }
+  }
+}

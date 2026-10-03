@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-321-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-321",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-321 system",
+      "systemName": "K2-321 system",
+      "classification": "planetary-system",
+      "color": "#ffc48d",
+      "distanceAu": 15874868.1,
+      "description": "K2-321 b crosses K2-321 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2174220782478198500,
+        949638072094799500,
+        104150203511699730
+      ],
+      "presentationToReference": [
+        -0.9155203392055247,
+        -0.040194451180917266,
+        0.4002585596776987,
+        0.3998733600983227,
+        0.017555924326460453,
+        0.9164022508727927,
+        0.0438611945195089,
+        -0.9990376347342018,
+        1.1554340621630794e-7
+      ],
+      "orbitUpReference": [
+        0.040194451180917266,
+        -0.017555924326460453,
+        0.9990376347342018
+      ],
+      "metersPerUnit": 1335295.1612903227,
+      "bodyRadiusM": 413941500
+    }
+  }
+}

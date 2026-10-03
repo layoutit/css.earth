@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wd-1856-534-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wd-1856-534",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WD 1856+534 system",
+      "systemName": "WD 1856+534 system",
+      "classification": "planetary-system",
+      "color": "#ffe2bf",
+      "distanceAu": 5106533.9,
+      "description": "A white dwarf smaller than the giant planet that orbits it."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        113111325944492180,
+        -439999704647143740,
+        614157910698874900
+      ],
+      "presentationToReference": [
+        0.14806434102746266,
+        0.20012429228528403,
+        -0.9685180527762081,
+        -0.5759658959627219,
+        -0.778646585985962,
+        -0.24894332853134465,
+        0.8039528827014445,
+        -0.5946929979154959,
+        0.00002502633729581372
+      ],
+      "orbitUpReference": [
+        -0.20012429228528403,
+        0.778646585985962,
+        0.5946929979154959
+      ],
+      "metersPerUnit": 27154.74193548387,
+      "bodyRadiusM": 8417970
+    }
+  }
+}

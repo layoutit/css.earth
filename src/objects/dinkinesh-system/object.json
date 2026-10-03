@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "dinkinesh-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "dinkinesh",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Dinkinesh–Selam system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#9a9a9a",
+      "distanceAu": 2.073581431805674,
+      "description": "Dinkinesh has a moon, Selam, made of two touching lobes. NASA's Lucy spacecraft revealed the pair during its first asteroid flyby."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -282231298529.8608,
+        114639206353.66275,
+        58561722532.6488
+      ],
+      "presentationToReference": [
+        -0.9101391966298745,
+        -8.673617379884035e-19,
+        0.4143025980583832,
+        0.38011520198722476,
+        0.3977771559319137,
+        0.8350363868939659,
+        0.16480010915086646,
+        -0.9174820620691818,
+        0.3620325811375883
+      ],
+      "orbitUpReference": [
+        8.673617379884035e-19,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1.6043478260869566,
+      "bodyRadiusM": 369
+    }
+  }
+}

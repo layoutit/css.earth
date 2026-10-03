@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-65-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-65",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-65 system",
+      "systemName": "K2-65 system",
+      "classification": "planetary-system",
+      "color": "#ffdbc6",
+      "distanceAu": 13016230.6,
+      "description": "K2-65 b crosses K2-65 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1706730672528081200,
+        -861641363393294600,
+        -369098731623726500
+      ],
+      "presentationToReference": [
+        0.8765065033442739,
+        -0.16920325428777536,
+        -0.4506735052492224,
+        -0.4425034779966586,
+        0.08542412011609181,
+        -0.8926888549003243,
+        -0.18954424696111224,
+        -0.9818721802968133,
+        -0.000001768313523248396
+      ],
+      "orbitUpReference": [
+        0.16920325428777536,
+        -0.08542412011609181,
+        0.9818721802968133
+      ],
+      "metersPerUnit": 1885122.5806451612,
+      "bodyRadiusM": 584388000
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-39-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-39",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-39 system",
+      "systemName": "WASP-39 system",
+      "classification": "planetary-system",
+      "color": "#ffebdf",
+      "distanceAu": 44419786.7,
+      "description": "Sun-like star about 215 parsecs away that hosts the hot giant WASP-39 b."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5274589978776910000,
+        -4022030352735982000,
+        -399248739167426100
+      ],
+      "presentationToReference": [
+        -0.7937556383000048,
+        0.047776393715391705,
+        -0.6063574876840426,
+        -0.6052620739703785,
+        0.036431095009646246,
+        0.7951921762250143,
+        -0.06008168173435319,
+        -0.998193463973768,
+        1.479263465410061e-7
+      ],
+      "orbitUpReference": [
+        -0.047776393715391705,
+        -0.036431095009646246,
+        0.998193463973768
+      ],
+      "metersPerUnit": 2107296.7741935486,
+      "bodyRadiusM": 653262000
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-352-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-352",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-352 system",
+      "systemName": "K2-352 system",
+      "classification": "planetary-system",
+      "color": "#fff2ee",
+      "distanceAu": 36737290,
+      "description": "3 planets cross K2-352 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4019099431948948500,
+        3319560117666358000,
+        1741092152132898800
+      ],
+      "presentationToReference": [
+        -0.7313013481877694,
+        -0.24425914919331124,
+        0.6368169330145913,
+        0.6040156086065963,
+        0.2017447663106224,
+        0.7710150412449003,
+        0.31680196132340116,
+        -0.9484917065012387,
+        -1.1906494262709343e-7
+      ],
+      "orbitUpReference": [
+        0.24425914919331124,
+        -0.2017447663106224,
+        0.9484917065012387
+      ],
+      "metersPerUnit": 2131983.870967742,
+      "bodyRadiusM": 660915000
+    }
+  }
+}

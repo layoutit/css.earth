@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "solar-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "sun",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Solar System",
+      "systemName": "Solar System",
+      "classification": "planetary-system",
+      "color": "#f5a623",
+      "distanceAu": 0,
+      "description": "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        0,
+        0,
+        0
+      ],
+      "presentationToReference": [
+        1,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 2244193.5483870967,
+      "bodyRadiusM": 695700000
+    }
+  }
+}

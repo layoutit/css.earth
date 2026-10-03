@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-21520-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-21520",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 21520 system",
+      "systemName": "HD 21520 system",
+      "classification": "planetary-system",
+      "color": "#fff5f7",
+      "distanceAu": 16383720.1,
+      "description": "HD 21520 b crosses HD 21520 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1101258616792522500,
+        1391453743927586800,
+        -1690662033404816400
+      ],
+      "presentationToReference": [
+        0.4493159940453787,
+        -0.42808218572890494,
+        0.7841305884586933,
+        0.5677162590038639,
+        -0.5408872609141768,
+        -0.6205958590285767,
+        -0.6897922779777048,
+        -0.7240073295501382,
+        8.027592427667456e-8
+      ],
+      "orbitUpReference": [
+        0.42808218572890494,
+        0.5408872609141768,
+        0.7240073295501382
+      ],
+      "metersPerUnit": 2342938.064516129,
+      "bodyRadiusM": 726310800
+    }
+  }
+}

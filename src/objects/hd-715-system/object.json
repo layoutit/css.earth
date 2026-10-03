@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-715-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-715",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 715 system",
+      "systemName": "HD 715 system",
+      "classification": "planetary-system",
+      "color": "#fff8fe",
+      "distanceAu": 34329299.2,
+      "description": "HD 715 b crosses HD 715 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5111301653870435000,
+        258286428764198100,
+        426812315020495600
+      ],
+      "presentationToReference": [
+        0.9952706626713885,
+        0.08300173482463184,
+        0.05046801008318833,
+        0.05029343257791401,
+        0.004194124617964448,
+        -0.9987256780308694,
+        0.08310763301397846,
+        -0.9965405768631754,
+        1.529664046586212e-7
+      ],
+      "orbitUpReference": [
+        -0.08300173482463184,
+        -0.004194124617964448,
+        0.9965405768631754
+      ],
+      "metersPerUnit": 5610483.870967742,
+      "bodyRadiusM": 1739250000
+    }
+  }
+}

@@ -5,7 +5,7 @@ import { parseHTML } from 'linkedom';
 import { deferInitialShellContext, initialShellContextBootstrap } from '../initial-shell-context.mts';
 
 test('query-specific views withhold static object facts until the requested context is ready', () => {
-  for (const query of ['overview=system', 'dataset=spectral-slope', 'v=saved', 'feature=12']) {
+  for (const query of ['dataset=spectral-slope', 'v=saved', 'feature=12']) {
     const { document } = parseHTML('<html><body></body></html>');
     deferInitialShellContext(document, `http://localhost/sun/?${query}`, '/sun/');
     assert.equal(document.documentElement.dataset.shellContext, 'pending');

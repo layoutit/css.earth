@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tres-1-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "tres-1",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TrES-1 system",
+      "systemName": "TrES-1 system",
+      "classification": "planetary-system",
+      "color": "#ffe7d6",
+      "distanceAu": 32924274.6,
+      "description": "TrES-1 b crosses TrES-1 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1092167864573651500,
+        -3798643044164252000,
+        2938887399634157600
+      ],
+      "presentationToReference": [
+        0.22174172626752864,
+        0.16487656250539579,
+        -0.9610652038068493,
+        -0.7712346182435184,
+        -0.5734487680622056,
+        -0.2763216857771269,
+        0.5966806268471191,
+        -0.8024788031744783,
+        -9.929850514196074e-7
+      ],
+      "orbitUpReference": [
+        -0.16487656250539579,
+        0.5734487680622056,
+        0.8024788031744783
+      ],
+      "metersPerUnit": 1907564.5161290322,
+      "bodyRadiusM": 591345000
+    }
+  }
+}

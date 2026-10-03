@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-330-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-330",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-330 system",
+      "systemName": "K2-330 system",
+      "classification": "planetary-system",
+      "color": "#f7f3ff",
+      "distanceAu": 32737099.7,
+      "description": "K2-330 b crosses K2-330 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2879524411700279300,
+        3835619795749419000,
+        990399287674172200
+      ],
+      "presentationToReference": [
+        -0.5879698900885342,
+        -0.1214141942955379,
+        0.7997187016525513,
+        0.7831949403052486,
+        0.16172720010303596,
+        0.6003748814091832,
+        0.2022302989898774,
+        -0.979337993835835,
+        -2.585845952281757e-7
+      ],
+      "orbitUpReference": [
+        0.1214141942955379,
+        -0.16172720010303596,
+        0.979337993835835
+      ],
+      "metersPerUnit": 3366290.3225806453,
+      "bodyRadiusM": 1043550000
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-871-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-871",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-871 system",
+      "systemName": "TOI-871 system",
+      "classification": "planetary-system",
+      "color": "#ffdeca",
+      "distanceAu": 13999114.4,
+      "description": "TOI-871 b crosses TOI-871 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        349720168493150660,
+        1281633825008931800,
+        -1618932394360623900
+      ],
+      "presentationToReference": [
+        0.16699291153073947,
+        -0.2034942481937685,
+        0.9647297333712378,
+        0.6119857625554068,
+        -0.7457726764169175,
+        -0.2632423627371262,
+        -0.77303738197319,
+        -0.6343604701287751,
+        0.0000031679184304616994
+      ],
+      "orbitUpReference": [
+        0.2034942481937685,
+        0.7457726764169175,
+        0.6343604701287751
+      ],
+      "metersPerUnit": 1613575.1612903227,
+      "bodyRadiusM": 500208300
+    }
+  }
+}

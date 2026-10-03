@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-155-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-155",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-155 system",
+      "systemName": "K2-155 system",
+      "classification": "planetary-system",
+      "color": "#ffc49a",
+      "distanceAu": 15043450.7,
+      "description": "3 planets cross K2-155 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        870179580494495000,
+        1906813183253083000,
+        819425443493455400
+      ],
+      "presentationToReference": [
+        0.3866654205596448,
+        0.15117239042101582,
+        0.9097454374262226,
+        0.8472949009513072,
+        0.3312523384882927,
+        -0.41516651968571855,
+        0.3641170187801548,
+        -0.9313532072315173,
+        0.000003770795405424413
+      ],
+      "orbitUpReference": [
+        -0.15117239042101582,
+        -0.3312523384882927,
+        0.9313532072315173
+      ],
+      "metersPerUnit": 1301632.2580645161,
+      "bodyRadiusM": 403506000
+    }
+  }
+}

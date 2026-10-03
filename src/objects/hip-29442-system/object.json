@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hip-29442-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hip-29442",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HIP 29442 system",
+      "systemName": "HIP 29442 system",
+      "classification": "planetary-system",
+      "color": "#ffe9db",
+      "distanceAu": 14025593.8,
+      "description": "3 planets cross TOI-469 as seen from Earth: b, HIP 29442 c, HIP 29442 d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -108279331139730720,
+        2027105216515735000,
+        -530621267690858050
+      ],
+      "presentationToReference": [
+        -0.05160573169550295,
+        0.013490776595141895,
+        0.9985764103978383,
+        0.9661146484674251,
+        -0.2525417458971233,
+        0.05333997184004136,
+        -0.2529018277372376,
+        -0.9674919459747935,
+        0.0000010353070872495321
+      ],
+      "orbitUpReference": [
+        -0.013490776595141895,
+        0.2525417458971233,
+        0.9674919459747935
+      ],
+      "metersPerUnit": 2199309.6774193547,
+      "bodyRadiusM": 681786000
+    }
+  }
+}

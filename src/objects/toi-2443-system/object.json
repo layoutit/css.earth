@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2443-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2443",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2443 system",
+      "systemName": "TOI-2443 system",
+      "classification": "planetary-system",
+      "color": "#ffc8a7",
+      "distanceAu": 4932100.3,
+      "description": "TOI-2443 b crosses TOI-2443 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        563589247822966600,
+        475945221035875700,
+        15457063389480044
+      ],
+      "presentationToReference": [
+        0.7638454554463345,
+        0.015996583212576805,
+        0.6452009218216485,
+        0.6450594924073708,
+        0.013508544508741912,
+        -0.7640129386865125,
+        0.020937321918693182,
+        -0.9997807902489317,
+        3.075146600145395e-7
+      ],
+      "orbitUpReference": [
+        -0.015996583212576805,
+        -0.013508544508741912,
+        0.9997807902489317
+      ],
+      "metersPerUnit": 1416086.1290322582,
+      "bodyRadiusM": 438986700
+    }
+  }
+}

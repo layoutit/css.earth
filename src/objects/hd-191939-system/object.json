@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-191939-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-191939",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 191939 system",
+      "systemName": "HD 191939 system",
+      "classification": "planetary-system",
+      "color": "#ffeee7",
+      "distanceAu": 11032124.1,
+      "description": "3 planets cross HD 191939 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        344083894183853400,
+        -550076413327182300,
+        1517492629228436700
+      ],
+      "presentationToReference": [
+        0.2084857761070224,
+        0.48759998693529594,
+        -0.8478089017589706,
+        -0.3332998430039117,
+        -0.7795454756499854,
+        -0.5303018631375961,
+        0.9194807751196435,
+        -0.39313496936082537,
+        0.000007144407361609423
+      ],
+      "orbitUpReference": [
+        -0.48759998693529594,
+        0.7795454756499854,
+        0.39313496936082537
+      ],
+      "metersPerUnit": 2109541.935483871,
+      "bodyRadiusM": 653958000
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "pluto-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "pluto",
+      "members": "moons"
+    },
+    "catalog": {
+      "name": "Pluto system",
+      "systemName": "Solar System",
+      "classification": "satellite-system",
+      "color": "#bca18a",
+      "distanceAu": 39,
+      "description": "Pluto has five moons: Charon, Styx, Nix, Kerberos and Hydra. Pluto and Charon always keep the same faces turned toward each other."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2975374171953.308,
+        -3880098072481.762,
+        -2107195959329.5664
+      ],
+      "presentationToReference": [
+        0.5603324772888365,
+        0,
+        -0.8282677797037354,
+        -0.7599208304680459,
+        0.39777715593191376,
+        -0.5140949967072947,
+        -0.3294660017605927,
+        -0.9174820620691818,
+        -0.222887459192237
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191376,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 5166.521739130435,
+      "bodyRadiusM": 1188300
+    }
+  }
+}

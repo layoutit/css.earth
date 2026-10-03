@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-39091-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-39091",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 39091 system",
+      "systemName": "HD 39091 system",
+      "classification": "planetary-system",
+      "color": "#fff8fd",
+      "distanceAu": 3772067.7,
+      "description": "HD 39091's planets b, pi Men c are placed on the orbits their papers measured."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        9279172307793958,
+        93049151725422610,
+        -556491393076920640
+      ],
+      "presentationToReference": [
+        0.01643856591353447,
+        -0.09795532082778084,
+        0.9950550380115831,
+        0.1648417605440409,
+        -0.9813061310847792,
+        -0.09932507778080683,
+        -0.9861830294278277,
+        -0.16565938614201356,
+        -0.000015862022715108303
+      ],
+      "orbitUpReference": [
+        0.09795532082778084,
+        0.9813061310847792,
+        0.16565938614201356
+      ],
+      "metersPerUnit": 2625706.4516129033,
+      "bodyRadiusM": 813969000
+    }
+  }
+}

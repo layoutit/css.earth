@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-152843-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-152843",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 152843 system",
+      "systemName": "HD 152843 system",
+      "classification": "planetary-system",
+      "color": "#f6f2ff",
+      "distanceAu": 22516396.6,
+      "description": "2 planets cross HD 152843 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -881086968840114200,
+        -3029747468991630300,
+        1179181158596103200
+      ],
+      "presentationToReference": [
+        -0.2615741669369076,
+        -0.09775477862959674,
+        -0.9602202655882354,
+        -0.8994613451971404,
+        -0.3361431941041855,
+        0.2792436956380331,
+        0.3500689127692052,
+        -0.9367239488304515,
+        2.6871631218263677e-7
+      ],
+      "orbitUpReference": [
+        0.09775477862959674,
+        0.3361431941041855,
+        0.9367239488304515
+      ],
+      "metersPerUnit": 3209196.7741935486,
+      "bodyRadiusM": 994851000
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1221-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1221",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1221 system",
+      "systemName": "TOI-1221 system",
+      "classification": "planetary-system",
+      "color": "#ffeee7",
+      "distanceAu": 28270296.1,
+      "description": "TOI-1221 b crosses TOI-1221 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -539477374426438300,
+        1668160338180258800,
+        -3848653748856723500
+      ],
+      "presentationToReference": [
+        -0.1275602944633112,
+        0.28002007151036995,
+        0.951481545185066,
+        0.3944391999316709,
+        -0.8658723048954882,
+        0.3077058159545221,
+        -0.9100253231826556,
+        -0.4145526639237797,
+        -3.320873482591917e-8
+      ],
+      "orbitUpReference": [
+        -0.28002007151036995,
+        0.8658723048954882,
+        0.4145526639237797
+      ],
+      "metersPerUnit": 2313763.5483870967,
+      "bodyRadiusM": 717266700
+    }
+  }
+}

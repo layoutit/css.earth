@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1174-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1174",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1174 system",
+      "systemName": "TOI-1174 system",
+      "classification": "planetary-system",
+      "color": "#ffe3d1",
+      "distanceAu": 19532427.5,
+      "description": "TOI-1174 b crosses TOI-1174 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -929776026250492700,
+        -519985427563560300,
+        2720895367794664400
+      ],
+      "presentationToReference": [
+        -0.31819938352760907,
+        -0.8127044347087615,
+        -0.4881195080381052,
+        -0.17795580639805234,
+        -0.4545243504057316,
+        0.8727768018557016,
+        0.9311717796904438,
+        -0.3645807409792241,
+        -0.000003895055519843487
+      ],
+      "orbitUpReference": [
+        0.8127044347087615,
+        0.4545243504057316,
+        0.3645807409792241
+      ],
+      "metersPerUnit": 1705587.0967741935,
+      "bodyRadiusM": 528732000
+    }
+  }
+}

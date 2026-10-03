@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1630-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1630",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1630 system",
+      "systemName": "TOI-1630 system",
+      "classification": "planetary-system",
+      "color": "#ffede5",
+      "distanceAu": 13615054.5,
+      "description": "TOI-1630 b crosses TOI-1630 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        503237788124716900,
+        -70576692215172900,
+        1972373269225133800
+      ],
+      "presentationToReference": [
+        0.24707308811053086,
+        0.9589920991062053,
+        -0.13888499913021535,
+        -0.03465081857259932,
+        -0.13449298775667864,
+        -0.9903085160779599,
+        0.9683771010839604,
+        -0.2494910621568555,
+        -2.634244309018784e-7
+      ],
+      "orbitUpReference": [
+        -0.9589920991062053,
+        0.13449298775667864,
+        0.2494910621568555
+      ],
+      "metersPerUnit": 1862680.6451612904,
+      "bodyRadiusM": 577431000
+    }
+  }
+}

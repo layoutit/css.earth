@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-538-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-538",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-538 system",
+      "systemName": "Kepler-538 system",
+      "classification": "planetary-system",
+      "color": "#ffefe7",
+      "distanceAu": 32098289.5,
+      "description": "Kepler-538 b crosses Kepler-538 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1435690020349618700,
+        -2759544010523513000,
+        3658051077757303000
+      ],
+      "presentationToReference": [
+        0.29898758981226115,
+        0.3516026766909775,
+        -0.8871200476158767,
+        -0.5746849257128225,
+        -0.6758100436100475,
+        -0.4615387536428913,
+        0.7618028992440913,
+        -0.6478088782191285,
+        -0.0000019420246967593002
+      ],
+      "orbitUpReference": [
+        -0.3516026766909775,
+        0.6758100436100475,
+        0.6478088782191285
+      ],
+      "metersPerUnit": 1956263.5483870967,
+      "bodyRadiusM": 606441700
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-10-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-10",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-10 system",
+      "systemName": "Kepler-10 system",
+      "classification": "planetary-system",
+      "color": "#fff2ee",
+      "distanceAu": 38412044,
+      "description": "2 planets cross Kepler-10 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        993197976088404600,
+        -3538342733939104000,
+        4417503997054718500
+      ],
+      "presentationToReference": [
+        0.17283994291456564,
+        0.207755775689654,
+        -0.9627896404723516,
+        -0.6157553386745168,
+        -0.7401413748029841,
+        -0.27025193468054926,
+        0.7687468484664645,
+        -0.6395531901041059,
+        -7.350517138866214e-7
+      ],
+      "orbitUpReference": [
+        -0.207755775689654,
+        0.7401413748029841,
+        0.6395531901041059
+      ],
+      "metersPerUnit": 2390066.129032258,
+      "bodyRadiusM": 740920500
+    }
+  }
+}

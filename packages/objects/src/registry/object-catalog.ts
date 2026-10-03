@@ -6,7 +6,8 @@ import { defineObject, OBJECT_CLASSIFICATIONS } from './object-schema.js';
 import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.js';
 import type { NavigationDistance } from './navigation-distance.js';
 import { parseNavigationDistance } from './navigation-distance.js';
-import { destinationSearchNames } from './navigable-object.js';
+import { destinationSearchNames, objectSystem } from './navigable-object.js';
+import { systemHostId, systemObjectId } from './system-address.js';
 import type { NavigableObject } from './navigable-object.js';
 import { overviewLevel } from './overview-object.js';
 import type { OverviewObject } from './overview-object.js';
@@ -86,8 +87,18 @@ export function catalogueObject<Scene, Signal>(value: unknown,
   if (value.descriptor.properties.catalog === undefined) throw new TypeError(`Invalid catalogue entry: ${id} has no catalogue entry.`);
   const ladder = overviewLevel(descriptor);
   const { order: _order, context: _context, ...entry } = catalogEntry(descriptor, loadScene(descriptor), parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery));
-  const object = ladder === null ? entry
-    : { ...entry, level: Object.freeze({ order: ladder.order, zoom: ladder.zoom, holds: ladder.holds, packages: ladder.packages }) };
+  const system = objectSystem(descriptor);
+  const expected = system ? system.members === 'moons' ? 'satellite-system' : 'planetary-system' : null;
+  if ((entry.classification === 'planetary-system' || entry.classification === 'satellite-system') !== (system !== null) || expected !== null && entry.classification !== expected) {
+    throw new TypeError(`src/objects/${id}/object.json: a system object carries properties.system and the classification of its members (${expected ?? 'none'}); got classification ${entry.classification}${system ? '' : ' without properties.system'}.`);
+  }
+  // An id names a system exactly when its package is one, of the host the id names (system-address.ts): `/ring-system/`
+  // would otherwise read as the system of `ring`, and a system named otherwise would have no address.
+  if (systemHostId(id) !== (system?.host ?? null)) {
+    throw new TypeError(`src/objects/${id}/object.json: ${system ? `the system of ${system.host} is ${systemObjectId(system.host)}, not ${id}` : `${id} reads as the system of ${systemHostId(id)}, and only a system package (properties.system) may be named so`}.`);
+  }
+  const object = { ...entry, ...(ladder === null ? {} : { level: Object.freeze({ order: ladder.order, zoom: ladder.zoom, holds: ladder.holds, packages: ladder.packages }) }),
+    ...(system ? { system } : {}) };
   // An object with alternate names is found by them: search matches its id, its name and each alias.
   return object.aliases.length ? { ...object, searchNames: Object.freeze(destinationSearchNames([id, object.name, ...object.aliases])) } : object;
 }

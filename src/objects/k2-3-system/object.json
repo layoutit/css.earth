@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-3-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-3",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-3 system",
+      "systemName": "K2-3 system",
+      "classification": "planetary-system",
+      "color": "#ffd09e",
+      "distanceAu": 9071685.1,
+      "description": "3 planets cross K2-3 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1344547065827499800,
+        180937774303309400,
+        -34468307213844604
+      ],
+      "presentationToReference": [
+        -0.9907467972817329,
+        0.025167499242735078,
+        0.13336933927202424,
+        0.13332632598371585,
+        -0.0033869540232367213,
+        0.9910664051122552,
+        -0.025394378820386664,
+        -0.9996775107625016,
+        -1.2364283044143758e-7
+      ],
+      "orbitUpReference": [
+        -0.025167499242735078,
+        0.0033869540232367213,
+        0.9996775107625016
+      ],
+      "metersPerUnit": 1225329.677419355,
+      "bodyRadiusM": 379852200
+    }
+  }
+}

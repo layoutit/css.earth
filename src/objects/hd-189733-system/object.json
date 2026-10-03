@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-189733-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-189733",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 189733 system",
+      "systemName": "HD 189733 system",
+      "classification": "planetary-system",
+      "color": "#ffe2cf",
+      "distanceAu": 4079046.3,
+      "description": "K dwarf in Vulpecula that hosts the hot Jupiter HD 189733b."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        283003600558321570,
+        -486598256742496600,
+        235574702816239970
+      ],
+      "presentationToReference": [
+        0.7107525521207679,
+        -0.6802951031591798,
+        -0.17896754530209058,
+        -0.6032231946001452,
+        -0.7203169572219824,
+        0.3424401533623944,
+        0.36187371713100464,
+        0.1354328385440757,
+        0.9223369010799058
+      ],
+      "orbitUpReference": [
+        0.6802951031591798,
+        0.7203169572219824,
+        -0.1354328385440757
+      ],
+      "metersPerUnit": 1687633.5483870967,
+      "bodyRadiusM": 523166400
+    }
+  }
+}

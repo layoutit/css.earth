@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1803-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1803",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1803 system",
+      "systemName": "TOI-1803 system",
+      "classification": "planetary-system",
+      "color": "#ffd9bf",
+      "distanceAu": 24550670.4,
+      "description": "2 planets cross TOI-1803 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3000446115659939000,
+        102377748477739620,
+        2115602273398675000
+      ],
+      "presentationToReference": [
+        -0.8169530806977984,
+        -0.5756951532099033,
+        0.03409918633930358,
+        0.027875127160492095,
+        0.019640056043723153,
+        0.999418453644111,
+        0.5760300697222003,
+        -0.8174285037660636,
+        -0.000002571311407986977
+      ],
+      "orbitUpReference": [
+        0.5756951532099033,
+        -0.019640056043723153,
+        0.8174285037660636
+      ],
+      "metersPerUnit": 1604598.3870967743,
+      "bodyRadiusM": 497425500
+    }
+  }
+}

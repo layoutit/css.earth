@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-269-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-269",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-269 system",
+      "systemName": "TOI-269 system",
+      "classification": "planetary-system",
+      "color": "#ffc384",
+      "distanceAu": 11738604,
+      "description": "TOI-269 b crosses TOI-269 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        251312471856322430,
+        996571907588165400,
+        -1423892162820489000
+      ],
+      "presentationToReference": [
+        0.14311196230739123,
+        -0.19826905547574722,
+        0.9696434127478427,
+        0.5675061019044495,
+        -0.7862220883362018,
+        -0.24452331609373879,
+        -0.8108364758357536,
+        -0.5852727650019407,
+        -0.000001112930109410867
+      ],
+      "orbitUpReference": [
+        0.19826905547574722,
+        0.7862220883362018,
+        0.5852727650019407
+      ],
+      "metersPerUnit": 893189.0322580645,
+      "bodyRadiusM": 276888600
+    }
+  }
+}

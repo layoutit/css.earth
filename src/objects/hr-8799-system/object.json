@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hr-8799-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hr-8799",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HR 8799 system",
+      "systemName": "HR 8799 system",
+      "classification": "planetary-system",
+      "color": "#f0f0ff",
+      "distanceAu": 8432043.3,
+      "description": "Young F0 star 41 parsecs away in Pegasus, orbited by four giant planets that were photographed directly."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1145816909685398400,
+        -267261730551865300,
+        454801487083550660
+      ],
+      "presentationToReference": [
+        0.9083569722163899,
+        0.35112528018614697,
+        -0.22715335929735322,
+        -0.21187421331865788,
+        -0.0819021756411376,
+        -0.9738589997303759,
+        0.3605508684727753,
+        -0.9327395516645833,
+        0.000002019767585485314
+      ],
+      "orbitUpReference": [
+        -0.35112528018614697,
+        0.0819021756411376,
+        0.9327395516645833
+      ],
+      "metersPerUnit": 3373406.9032258065,
+      "bodyRadiusM": 1045756140
+    }
+  }
+}

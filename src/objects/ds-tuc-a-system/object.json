@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ds-tuc-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "ds-tuc-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "DS Tuc system",
+      "systemName": "DS Tuc system",
+      "classification": "planetary-system",
+      "color": "#ffefeb",
+      "distanceAu": 9111961.7,
+      "description": "DS Tuc A b crosses DS Tuc A as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        482235764594191940,
+        -42901283991917590,
+        -1274257332636250400
+      ],
+      "presentationToReference": [
+        0.35377416199891976,
+        -0.9311228349673316,
+        -0.08862340833189188,
+        -0.031472916207306925,
+        0.08284662977189382,
+        -0.9960652044323437,
+        -0.9348012076625543,
+        -0.35517137009877064,
+        -0.0000038460583495899634
+      ],
+      "orbitUpReference": [
+        0.9311228349673316,
+        -0.08284662977189382,
+        0.35517137009877064
+      ],
+      "metersPerUnit": 2163402.580645161,
+      "bodyRadiusM": 670654800
+    }
+  }
+}

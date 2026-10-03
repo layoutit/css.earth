@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-367-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-367",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "GJ 367 system",
+      "systemName": "GJ 367 system",
+      "classification": "planetary-system",
+      "color": "#ffc589",
+      "distanceAu": 1942836.3,
+      "description": "GJ 367 b crosses GJ 367 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -168279030945005760,
+        112996103611169650,
+        -208298063812085000
+      ],
+      "presentationToReference": [
+        -0.5790043607561375,
+        0.5949825218743284,
+        0.557449324055058,
+        0.38879019103961604,
+        -0.39948959502716463,
+        0.8302109676560597,
+        -0.7166562199386508,
+        -0.6974265998147018,
+        0.000017150747321001913
+      ],
+      "orbitUpReference": [
+        -0.5949825218743284,
+        0.39948959502716463,
+        0.6974265998147018
+      ],
+      "metersPerUnit": 1025596.4516129033,
+      "bodyRadiusM": 317934900
+    }
+  }
+}

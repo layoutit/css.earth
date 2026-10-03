@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-50-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-50",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "WASP-50 system",
+      "systemName": "WASP-50 system",
+      "classification": "planetary-system",
+      "color": "#ffebde",
+      "distanceAu": 37595044.2,
+      "description": "WASP-50 b crosses WASP-50 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3993530602707761700,
+        3814712116429702000,
+        -1063305859983636000
+      ],
+      "presentationToReference": [
+        0.710069676373291,
+        -0.1367124803016581,
+        0.6907320409716771,
+        0.6782748568732613,
+        -0.13059085327256478,
+        -0.7231108127908891,
+        -0.18906155936278193,
+        -0.981965237048294,
+        -3.308883370766248e-8
+      ],
+      "orbitUpReference": [
+        0.1367124803016581,
+        0.13059085327256478,
+        0.981965237048294
+      ],
+      "metersPerUnit": 1891855.1612903227,
+      "bodyRadiusM": 586475100
+    }
+  }
+}

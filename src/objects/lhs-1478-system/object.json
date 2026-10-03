@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lhs-1478-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "lhs-1478",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "LHS 1478 system",
+      "systemName": "LHS 1478 system",
+      "classification": "planetary-system",
+      "color": "#ffc47c",
+      "distanceAu": 3757007.7,
+      "description": "LHS 1478 b crosses LHS 1478 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        93483827366255000,
+        91380359639989390,
+        546625792153097600
+      ],
+      "presentationToReference": [
+        0.16631499858970644,
+        0.6956016205486766,
+        0.698911801827785,
+        0.16257277025344566,
+        0.6797409817825311,
+        -0.7152078663279936,
+        0.97257874520073,
+        -0.2325738230656574,
+        0.00003476201885714932
+      ],
+      "orbitUpReference": [
+        -0.6956016205486766,
+        -0.6797409817825311,
+        0.2325738230656574
+      ],
+      "metersPerUnit": 552520.3225806452,
+      "bodyRadiusM": 171281300
+    }
+  }
+}

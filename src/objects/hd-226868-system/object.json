@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-226868-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-226868",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Cygnus X-1 system",
+      "systemName": "Cygnus X-1 system",
+      "classification": "planetary-system",
+      "color": "#a1bbff",
+      "distanceAu": 464662962.1,
+      "description": "A blue supergiant 40 times the Sun's mass, circling a black hole of 21 solar masses every 5.6 days."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        28047898872478134000,
+        -49392737354993540000,
+        40070849694842570000
+      ],
+      "presentationToReference": [
+        0.40349370560999653,
+        0.28465027066313087,
+        -0.8695786640347842,
+        -0.7105579892526674,
+        -0.5012727768927203,
+        -0.49379443805643186,
+        0.5764548320920901,
+        -0.8171290146345724,
+        -1.1369276501975747e-7
+      ],
+      "orbitUpReference": [
+        -0.28465027066313087,
+        0.5012727768927203,
+        0.8171290146345724
+      ],
+      "metersPerUnit": 50045516.12903226,
+      "bodyRadiusM": 15514110000
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-136352-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-136352",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 136352 system",
+      "systemName": "HD 136352 system",
+      "classification": "planetary-system",
+      "color": "#ffefe6",
+      "distanceAu": 3040005.2,
+      "description": "3 planets cross HD 136352 as seen from Earth: b, c, d."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -192634675242104640,
+        -233124764079222940,
+        -339658699473395400
+      ],
+      "presentationToReference": [
+        -0.42358607999616504,
+        0.47566499940059653,
+        -0.7709199966136,
+        -0.5126200942217833,
+        0.5757936124279758,
+        0.6369319860763722,
+        -0.7468570625183458,
+        -0.664984604507783,
+        0.00006272236445908374
+      ],
+      "orbitUpReference": [
+        -0.47566499940059653,
+        -0.5757936124279758,
+        0.664984604507783
+      ],
+      "metersPerUnit": 2374356.7741935486,
+      "bodyRadiusM": 736050600
+    }
+  }
+}

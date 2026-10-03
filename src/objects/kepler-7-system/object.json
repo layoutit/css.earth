@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-7-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-7",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Kepler-7 system",
+      "systemName": "Kepler-7 system",
+      "classification": "planetary-system",
+      "color": "#fff5f6",
+      "distanceAu": 199889445.3,
+      "description": "Kepler-7 b crosses Kepler-7 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        7181601802698877000,
+        -21362536512261534000,
+        19653451483856433000
+      ],
+      "presentationToReference": [
+        0.2401627418940263,
+        0.20943164678452858,
+        -0.9478714273207436,
+        -0.7143929005742393,
+        -0.6229791540173707,
+        -0.3186530358696215,
+        0.6572401699645788,
+        -0.7536812051424141,
+        -9.984680625871547e-8
+      ],
+      "orbitUpReference": [
+        -0.20943164678452858,
+        0.6229791540173707,
+        0.7536812051424141
+      ],
+      "metersPerUnit": 4412084.516129033,
+      "bodyRadiusM": 1367746200
+    }
+  }
+}

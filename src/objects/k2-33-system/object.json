@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-33-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-33",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-33 system",
+      "systemName": "K2-33 system",
+      "classification": "planetary-system",
+      "color": "#ffc88d",
+      "distanceAu": 28676174.3,
+      "description": "K2-33 b crosses K2-33 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1865463462997092400,
+        -3592906960696826000,
+        -1419246791697267700
+      ],
+      "presentationToReference": [
+        -0.4348508391875689,
+        0.15244764203995823,
+        -0.8875046276467093,
+        -0.8375283879709955,
+        0.29361652446185105,
+        0.4607988019793988,
+        -0.330833715030033,
+        -0.9436890658471146,
+        1.641738677090201e-7
+      ],
+      "orbitUpReference": [
+        -0.15244764203995823,
+        -0.29361652446185105,
+        0.9436890658471146
+      ],
+      "metersPerUnit": 2356403.2258064514,
+      "bodyRadiusM": 730485000
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-5720-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-5720",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-5720 system",
+      "systemName": "TOI-5720 system",
+      "classification": "planetary-system",
+      "color": "#ffc281",
+      "distanceAu": 7398838.6,
+      "description": "TOI-5720 b crosses TOI-5720 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -986633846904426500,
+        168429071888140960,
+        472549833618021400
+      ],
+      "presentationToReference": [
+        -0.8913865379407474,
+        -0.4208494807352651,
+        0.16827285741576486,
+        0.15216932582488035,
+        0.07183488623669812,
+        0.9857404553924741,
+        0.4269362203608521,
+        -0.9042817391080162,
+        -0.000007731211338492748
+      ],
+      "orbitUpReference": [
+        0.4208494807352651,
+        -0.07183488623669812,
+        0.9042817391080162
+      ],
+      "metersPerUnit": 859526.129032258,
+      "bodyRadiusM": 266453099.99999997
+    }
+  }
+}

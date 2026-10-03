@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2158-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2158",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2158 system",
+      "systemName": "TOI-2158 system",
+      "classification": "planetary-system",
+      "color": "#ffeadb",
+      "distanceAu": 40510362,
+      "description": "TOI-2158 b crosses TOI-2158 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        672974179107086200,
+        -5635442764034763000,
+        2125015087737074700
+      ],
+      "presentationToReference": [
+        0.11104702578470368,
+        0.041579034299219345,
+        -0.9929449843627369,
+        -0.9299006965681076,
+        -0.3481729979390985,
+        -0.11857595889660338,
+        0.3506469058561901,
+        -0.9365077401777546,
+        -7.97077792645316e-7
+      ],
+      "orbitUpReference": [
+        -0.041579034299219345,
+        0.3481729979390985,
+        0.9365077401777546
+      ],
+      "metersPerUnit": 3164312.9032258065,
+      "bodyRadiusM": 980937000
+    }
+  }
+}

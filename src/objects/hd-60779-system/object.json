@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-60779-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-60779",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 60779 system",
+      "systemName": "HD 60779 system",
+      "classification": "planetary-system",
+      "color": "#fff7ff",
+      "distanceAu": 7309197.4,
+      "description": "HD 60779 b crosses HD 60779 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -444137641364757900,
+        997367166393746400,
+        -60102743745543520
+      ],
+      "presentationToReference": [
+        -0.4061835571359827,
+        0.02236342858312401,
+        0.9135178131675197,
+        0.9121364768286913,
+        -0.050217951108529495,
+        0.40679872790484956,
+        -0.05497240717762309,
+        -0.9984878739616565,
+        7.929442774124552e-7
+      ],
+      "orbitUpReference": [
+        -0.02236342858312401,
+        0.050217951108529495,
+        0.9984878739616565
+      ],
+      "metersPerUnit": 2533694.5161290322,
+      "bodyRadiusM": 785445300
+    }
+  }
+}

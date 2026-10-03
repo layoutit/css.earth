@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-3984-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-3984-a",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-3984 system",
+      "systemName": "TOI-3984 system",
+      "classification": "planetary-system",
+      "color": "#ffca8a",
+      "distanceAu": 22458314.7,
+      "description": "TOI-3984 A b crosses TOI-3984 A as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1857690318681558800,
+        -1946473961268182300,
+        2011943780746722000
+      ],
+      "presentationToReference": [
+        -0.5529316621566064,
+        -0.4134484356319223,
+        -0.7234134143477355,
+        -0.5793576420873314,
+        -0.43321090777536525,
+        0.6904151156655332,
+        0.5988416314350063,
+        -0.8008674674738387,
+        -0.0000015165081986997433
+      ],
+      "orbitUpReference": [
+        0.4134484356319223,
+        0.43321090777536525,
+        0.8008674674738387
+      ],
+      "metersPerUnit": 1054770.9677419355,
+      "bodyRadiusM": 326979000
+    }
+  }
+}

@@ -126,14 +126,14 @@ test('the native response shows the card as its subject: the body, or the planet
   const card = (document: Document) => document.querySelector<HTMLElement>('.object-information-panel')!;
   const mounted = (document: Document) => [...card(document).children].filter(child => child.tagName !== 'TEMPLATE').map(child => child.textContent);
   // A star's system view mounts its system parts; the body view keeps them off the page (detached-sections.ts).
-  const system = await render('/trappist-1/?overview=system', data(), contextHtml.replace('data-search-object="saturn"', 'data-search-object="trappist-1"'));
+  const system = await render('/trappist-1-system/', data(), contextHtml.replace('data-search-object="saturn"', 'data-search-object="trappist-1"'));
   assert.equal(card(system).dataset.cardSubject, 'system');
   assert.equal(card(system).dataset.cardView, 'overview');
   assert.deepEqual(mounted(system), ['System header', 'Saturn', '']);
   const body = await render('/saturn/', data(), contextHtml);
   assert.equal(card(body).dataset.cardSubject, 'body');
   assert.deepEqual(mounted(body), ['Saturn']);
-  // A system overview is a view of its star's page: on a planet's page the address names the planet.
+  // A query names no view: the planet's own address is the planet.
   const planet = await render('/saturn/?overview=system', data(), contextHtml);
   assert.equal(card(planet).dataset.cardSubject, 'body');
   // The live shell presents the card itself (updateBodyCard), so the shared presentation leaves it alone there.
@@ -187,13 +187,13 @@ test('queries stay text, are bounded, and cannot become executable attributes or
 });
 
 test('Netlify routing keeps all query parameters, bypasses assets, and never recurses on its function', () => {
-  const result = searchRoute(new Request(`${origin}/saturn/?q=titan&dataset=visible&v=view&overview=system`));
+  const result = searchRoute(new Request(`${origin}/saturn/?q=titan&dataset=visible&v=view`));
   assert.equal(result?.pathname, '/.netlify/functions/search');
   assert.equal(result?.searchParams.get('object'), 'saturn');
   assert.equal(result?.searchParams.get('dataset'), 'visible');
   assert.equal(result?.searchParams.get('v'), 'view');
   assert.equal(searchRoute(new Request(result!)), undefined);
-  for (const query of ['overview=system', 'v=view', 'settings=1', 'feature=6152', 'dataset=visible']) {
+  for (const query of ['v=view', 'settings=1', 'feature=6152', 'dataset=visible']) {
     assert.equal(searchRoute(new Request(`${origin}/saturn/?${query}`))?.pathname, '/.netlify/functions/search');
   }
   // A catalogue focus's page is routed by its own id; the function renders it on its host scene's page.

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "mascara-1-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "mascara-1",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "MASCARA-1 system",
+      "systemName": "MASCARA-1 system",
+      "classification": "planetary-system",
+      "color": "#cdd9ff",
+      "distanceAu": 37578677.9,
+      "description": "MASCARA-1 b crosses MASCARA-1 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4075508572338482000,
+        -3727780863249921000,
+        1047511534257742500
+      ],
+      "presentationToReference": [
+        0.724961467123104,
+        0.1374927332611079,
+        -0.6749271216117384,
+        -0.6631068088232115,
+        -0.1257615981904101,
+        -0.7378843950869883,
+        0.18633365578717473,
+        -0.9824865234297027,
+        -5.485728826381867e-8
+      ],
+      "orbitUpReference": [
+        -0.1374927332611079,
+        0.1257615981904101,
+        0.9824865234297027
+      ],
+      "metersPerUnit": 4672410.9677419355,
+      "bodyRadiusM": 1448447400
+    }
+  }
+}

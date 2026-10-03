@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-2989-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-2989",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-2989 system",
+      "systemName": "TOI-2989 system",
+      "classification": "planetary-system",
+      "color": "#ffc49c",
+      "distanceAu": 40205713.5,
+      "description": "TOI-2989 b crosses TOI-2989 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5293545508486704000,
+        816526697278849700,
+        -2736447598215976400
+      ],
+      "presentationToReference": [
+        -0.8801032878255036,
+        0.44964282656942733,
+        0.15244517464778812,
+        0.13575548367476456,
+        -0.06935401886949492,
+        0.9883119288559055,
+        -0.4549600547421383,
+        -0.8905118464014421,
+        0.0000027793708663854487
+      ],
+      "orbitUpReference": [
+        -0.44964282656942733,
+        0.06935401886949492,
+        0.8905118464014421
+      ],
+      "metersPerUnit": 1705587.0967741935,
+      "bodyRadiusM": 528732000
+    }
+  }
+}

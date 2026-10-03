@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-519-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-519",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-519 system",
+      "systemName": "TOI-519 system",
+      "classification": "planetary-system",
+      "color": "#ffc281",
+      "distanceAu": 23761438.2,
+      "description": "TOI-519 b crosses TOI-519 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1901111421814928600,
+        2755136791256810500,
+        -1196080387514700000
+      ],
+      "presentationToReference": [
+        -0.5348219246246712,
+        0.19110281666767473,
+        0.8230706059643023,
+        0.7750769073289792,
+        -0.2769494721575082,
+        0.5679390615171868,
+        -0.33648372422170414,
+        -0.9416892817343514,
+        7.304015729023092e-7
+      ],
+      "orbitUpReference": [
+        -0.19110281666767473,
+        0.2769494721575082,
+        0.9416892817343514
+      ],
+      "metersPerUnit": 785467.7419354839,
+      "bodyRadiusM": 243495000
+    }
+  }
+}

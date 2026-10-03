@@ -76,7 +76,7 @@ import Detached from './Detached.astro';
     <div class="object-search-browser-shell">
       <form id={searchFormId} class="object-sidebar-search-card" role="search" aria-label="Object search"
         action={pageRoute ?? activeObject?.route} method="get" data-search-object={objectId} data-search-prompt={searchPlaceholder}>
-        {['v', 'view', 'overview', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
+        {['v', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
         {/* Enter in the field presses the form's first submit button. Without this one that is the first browse pill,
             and a typed query answered with the planets list. */}
         <button type="submit" hidden tabindex="-1" aria-hidden="true" data-search-submit></button>
@@ -125,7 +125,7 @@ import Detached from './Detached.astro';
 <div class="object-dataset-context-dock">
 <form id="object-settings-form" action={pageRoute ?? `/${objectId}/`} method="get" data-settings-form hidden>
   <input type="hidden" name="settings" value="1" />
-  {['v', 'view', 'overview', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
+  {['v', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
 </form>
 <section
   id="object-settings"

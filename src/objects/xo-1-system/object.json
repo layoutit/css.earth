@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "xo-1-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "xo-1",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "XO-1 system",
+      "systemName": "XO-1 system",
+      "classification": "planetary-system",
+      "color": "#fff1eb",
+      "distanceAu": 33545150.5,
+      "description": "XO-1 b crosses XO-1 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2175117123955465500,
+        -3852223110957638000,
+        2369052073033788400
+      ],
+      "presentationToReference": [
+        -0.4334386836272735,
+        -0.23211161740581746,
+        -0.8707784474828898,
+        -0.7676379795205232,
+        -0.4110803291311082,
+        0.4916755997597488,
+        0.4720835094907524,
+        -0.8815538327672992,
+        -4.237150114582096e-7
+      ],
+      "orbitUpReference": [
+        0.23211161740581746,
+        0.4110803291311082,
+        0.8815538327672992
+      ],
+      "metersPerUnit": 1974890.322580645,
+      "bodyRadiusM": 612216000
+    }
+  }
+}

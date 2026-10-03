@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1453-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "toi-1453",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "TOI-1453 system",
+      "systemName": "TOI-1453 system",
+      "classification": "planetary-system",
+      "color": "#ffdeca",
+      "distanceAu": 16271682.7,
+      "description": "2 planets cross TOI-1453 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -269155937309910660,
+        -1290950130070484200,
+        2046063714276676900
+      ],
+      "presentationToReference": [
+        -0.1105722334606869,
+        -0.17155433065790093,
+        -0.9789498929056764,
+        -0.5303365795860846,
+        -0.8228523592859733,
+        0.2041007280007599,
+        0.8405455927791473,
+        -0.5417408111357562,
+        -0.00000308624035430423
+      ],
+      "orbitUpReference": [
+        0.17155433065790093,
+        0.8228523592859733,
+        0.5417408111357562
+      ],
+      "metersPerUnit": 1615819.3548387096,
+      "bodyRadiusM": 500904000
+    }
+  }
+}

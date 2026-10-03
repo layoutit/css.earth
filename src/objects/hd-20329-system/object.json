@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-20329-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-20329",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 20329 system",
+      "systemName": "HD 20329 system",
+      "classification": "planetary-system",
+      "color": "#ffeee4",
+      "distanceAu": 13172538.8,
+      "description": "HD 20329 b crosses HD 20329 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1240389345854266600,
+        1435914402992702000,
+        531774774050701700
+      ],
+      "presentationToReference": [
+        0.6294508955350203,
+        0.17641429457623553,
+        0.756749342106969,
+        0.7286725010404782,
+        0.2042203540521356,
+        -0.6537051577112074,
+        0.26986655283227534,
+        -0.9628977327110027,
+        0.0000015605035616032757
+      ],
+      "orbitUpReference": [
+        -0.17641429457623553,
+        -0.2042203540521356,
+        0.9628977327110027
+      ],
+      "metersPerUnit": 2535938.709677419,
+      "bodyRadiusM": 786141000
+    }
+  }
+}

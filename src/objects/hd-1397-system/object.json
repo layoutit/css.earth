@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-1397-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hd-1397",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "HD 1397 system",
+      "systemName": "HD 1397 system",
+      "classification": "planetary-system",
+      "color": "#ffeee5",
+      "distanceAu": 16509925.9,
+      "description": "HD 1397 b crosses HD 1397 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        987440895747540200,
+        76805800415429040,
+        -2262569159724324600
+      ],
+      "presentationToReference": [
+        0.3997982022081362,
+        -0.9133174254901342,
+        0.07754145863481865,
+        0.031097376111797657,
+        -0.07103260529916396,
+        -0.9969891284178451,
+        -0.9160755158337677,
+        -0.40100579706593553,
+        -0.000003067593159557261
+      ],
+      "orbitUpReference": [
+        0.9133174254901342,
+        0.07103260529916396,
+        0.40100579706593553
+      ],
+      "metersPerUnit": 5242436.129032258,
+      "bodyRadiusM": 1625155200
+    }
+  }
+}

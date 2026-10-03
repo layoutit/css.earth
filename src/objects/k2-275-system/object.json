@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "k2-275-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "k2-275",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "K2-275 system",
+      "systemName": "K2-275 system",
+      "classification": "planetary-system",
+      "color": "#ffdac1",
+      "distanceAu": 25580988.4,
+      "description": "2 planets cross K2-275 as seen from Earth: b, c."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2407101614028605000,
+        2657470894717614600,
+        1337377427431709400
+      ],
+      "presentationToReference": [
+        -0.6290013266518943,
+        -0.23461129796171387,
+        0.7411577901762059,
+        0.6944254902138876,
+        0.2590137225709999,
+        0.6713308648208534,
+        0.34947184380341545,
+        -0.9369468663636338,
+        -9.04785749235764e-8
+      ],
+      "orbitUpReference": [
+        0.23461129796171387,
+        -0.2590137225709999,
+        0.9369468663636338
+      ],
+      "metersPerUnit": 1548493.5483870967,
+      "bodyRadiusM": 480033000
+    }
+  }
+}
