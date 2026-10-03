@@ -1,3 +1,4 @@
+import { BANDED_ELLIPSOID_SCHEMA, LAYERED_OBLATE_SCHEMA, SHAPE_MODEL_SCHEMA } from './recipe-identifiers.ts';
 import { buildPolyMeshTransform } from '@layoutit/polycss';
 import { multiply, reflection, rotation, type Matrix3 } from './world-navigation.ts';
 
@@ -21,7 +22,7 @@ export interface AuthoredPresentationBasis { readonly bodyToPresentation: Matrix
 /** `systemMatrix` is the solved system node transform of a lane whose frame is the ecliptic presentation frame. */
 export function authoredPresentationBasis(sources: ReadonlyMap<string, Value>, systemMatrix: Matrix3): AuthoredPresentationBasis {
   const model = sources.get('shape-model');
-  if (optional(model, 'schema') === 'cssearth-shape-model@2') return checked(systemMatrix, required(model, 'displayRadius'), 50);
+  if (optional(model, 'schema') === SHAPE_MODEL_SCHEMA) return checked(systemMatrix, required(model, 'displayRadius'), 50);
   const solar = sources.get('solar-system'), terrestrial = sources.get('terrestrial');
   const geometry = sources.get('geometry'), presentation = sources.get('presentation'), paged = sources.get('paged-ellipsoid');
   if (optional(solar, 'schema') === 'cssearth-solar-system-preparation@1') {
@@ -30,12 +31,12 @@ export function authoredPresentationBasis(sources: ReadonlyMap<string, Value>, s
   if (optional(terrestrial, 'schema') === 'cssearth-terrestrial-preparation@2') {
     if (required(terrestrial, 'kind') === 'solid-observation-body') return checked(systemMatrix, required(required(terrestrial, 'geometry'), 'radius'), 50);
   }
-  if (optional(geometry, 'schema') === 'cssearth-layered-oblate-preparation@2') {
+  if (optional(geometry, 'schema') === LAYERED_OBLATE_SCHEMA) {
     const p = required(geometry, 'parameters');
     return checked(chain(mesh([0, 0, required(p, 'objectPresentationNodeDegrees')]), mesh([required(p, 'objectObliquityDegrees'), 0, 0]), mesh([0, 0, required(p, 'meshRotationZ')])),
       required(p, 'equatorialRadius'), required(p, 'tileSize'));
   }
-  if (optional(geometry, 'schema') === 'cssearth-banded-ellipsoid@1') {
+  if (optional(geometry, 'schema') === BANDED_ELLIPSOID_SCHEMA) {
     const radius = () => required(required(geometry, 'shape'), 'equatorialRadius'), tile = () => required(required(geometry, 'planOptions'), 'tileSize');
     if (optional(presentation, 'schema') === 'cssearth-normalized-disc-presentation@2') {
       return checked(chain(mesh(required(presentation, 'systemRotation')), mesh([0, 0, negated(required(presentation, 'bodyRotationZDegrees'))])), radius(), tile());

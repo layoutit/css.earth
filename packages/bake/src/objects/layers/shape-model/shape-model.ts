@@ -16,7 +16,7 @@ interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<
 
 import { createSourceManifest } from '@cssearth/objects/node';
 import { prepareSolidBodySurface } from '../../../scene/index.ts';
-import { prepareSolarSystemScene, prepareSolarSystemSunPresentation, type SolarGeometry } from '../../scene/index.ts';
+import { SHAPE_MODEL_SCHEMA, prepareSolarSystemScene, prepareSolarSystemSunPresentation, type SolarGeometry } from '../../scene/index.ts';
 import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
 import { requirePreparedPresentation } from '../../../presentation/index.ts';
@@ -28,7 +28,7 @@ const writeJson = (dir:string, name:string, data:unknown) => writeFile(resolve(d
 /** Observational shape parameters, prepared through the same retained object runtime. */
 export async function prepareShapeModel({ descriptor, sources, objectDirectory, publicDirectory, outputDirectory, prepareContent, solarGeometry }:ShapeContext) {
   const config = parseShapeModelConfig(sources.get('shape-model')?.value), id = descriptor.id, shape = descriptor.recipe.shape;
-  if (config.schema !== 'cssearth-shape-model@2' || !['sphere', 'ellipsoid'].includes(shape.kind)) throw new TypeError('Expected a spherical or ellipsoidal shape model.');
+  if (config.schema !== SHAPE_MODEL_SCHEMA || !['sphere', 'ellipsoid'].includes(shape.kind)) throw new TypeError('Expected a spherical or ellipsoidal shape model.');
   const axes = [shape.radiusKm, shape.secondaryRadiusKm ?? shape.radiusKm, shape.polarRadiusKm ?? shape.radiusKm];
   const { latitudeSegments, longitudeSegments, width, height, poleSize } = config.mesh;
   const ringSegments = config.ring?.segments ?? 0;

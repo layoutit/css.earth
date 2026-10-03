@@ -32,3 +32,9 @@ and preserved Python distant-worlds authoring.
 pin the manifest, archived-camera and object-text Python literals to their browser-safe objects constants.
 The archived-camera and object-text exceptions retain only bake as an owner: preserved Python writers cannot
 import TypeScript. Changing any retained spelling must fail its conformance test.
+
+Other preserved Python grid, registration and native star-processing protocols retain specific ledger reasons.
+[Grid conformance](../../../packages/bake/src/shell/shell-grid-schema.test.ts) and
+[lab protocol conformance](../../../labs/nebula/packages/lab/src/server/services/schema-protocols.test.ts)
+pin their source checks and retained fixtures. Bake recipe routing identifiers stay bake-owned;
+the molecular catalogue wrapper stays lab-owned, separate from reconstruction table data.

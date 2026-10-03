@@ -8,7 +8,7 @@ import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readAuthoredSources, verifiedSource } from '@cssearth/bake/objects/sources';
 import { parseWorldContextSource } from '@cssearth/bake/world-context';
-import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement, LIT_DEFAULT_VIEW, MINIMUM_COVERED_SHARE, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame, prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3, preparePhysicalMaterialTracks } from '@cssearth/bake/objects/scene';
+import { SHAPE_MODEL_SCHEMA, authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement, LIT_DEFAULT_VIEW, MINIMUM_COVERED_SHARE, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame, prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3, preparePhysicalMaterialTracks } from '@cssearth/bake/objects/scene';
 import { readDefaultDatasetCoverage, coverageDirection, coveredShare, visibleCoverageShare, faceDatasetData, readDatasetCoverages, authoredFocusDatasets, bodyFixedCoverage } from '@cssearth/bake/objects/default-view';
 
 type Input = Record<string, any>;
@@ -190,7 +190,7 @@ function assertAtlasOrigins(id: string, raster: Input | undefined, placement: Su
 
 /** Lanes whose system node carries the ecliptic presentation frame directly. */
 function eclipticLane(sources: ReadonlyMap<string, Input>): boolean {
-  return sources.get('shape-model')?.schema === 'cssearth-shape-model@2' || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
+  return sources.get('shape-model')?.schema === SHAPE_MODEL_SCHEMA || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
     sources.get('terrestrial')?.kind === 'solid-observation-body' || sources.get('paged-ellipsoid')?.schema === 'cssearth-paged-ellipsoid@1';
 }
 

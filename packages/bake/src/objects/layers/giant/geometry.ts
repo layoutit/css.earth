@@ -1,3 +1,4 @@
+import { BANDED_ELLIPSOID_SCHEMA } from '../../scene/index.ts';
 import {parse} from '@cssearth/core/schema';
 import {bandedGeometryRecipe, type BandedGeometryRecipe} from './geometry-contract.ts';
 import type {Vector3} from '../../geometry/index.ts';
@@ -137,7 +138,7 @@ function textureLeaf(config:BandedGeometryRecipe,polygon:GeometryPolygon,index:n
 
 export function prepareBandedEllipsoid(input:unknown,images:BandedImagePixels){
   const config = parse(input, bandedGeometryRecipe, 'banded ellipsoid recipe');
-  if(config?.schema!=='cssearth-banded-ellipsoid@1'||!['fraction','step','bounds'].includes(config.coordinateArithmetic)||!['compact','annotated','explicit'].includes(config.leafRecord))throw new TypeError('Invalid banded ellipsoid recipe.');
+  if(config?.schema!==BANDED_ELLIPSOID_SCHEMA||!['fraction','step','bounds'].includes(config.coordinateArithmetic)||!['compact','annotated','explicit'].includes(config.leafRecord))throw new TypeError('Invalid banded ellipsoid recipe.');
   if(!Number.isInteger(config.latitudeSegments)||config.latitudeSegments<3||!Number.isInteger(config.longitudeSegments)||config.longitudeSegments<3||config.latitudeSegments*config.longitudeSegments>100000)throw new TypeError('Invalid ellipsoid tessellation.');
   if(config.coordinateArithmetic==='bounds')return prepareLatitudeBoundGeometry(config,images);
   const topology=[];for(let lat=1;lat<config.latitudeSegments-1;lat++)for(let lon=0;lon<config.longitudeSegments;lon++)topology.push(bodyPolygon(config,lat,lon,0));

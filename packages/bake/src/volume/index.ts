@@ -30,3 +30,4 @@ export * from './materials/slab-material.ts';
 export * from './materials/star-photometry.ts';
 export * from './sampling/layer-optimization.ts';
 export * from './sampling/registered-raster.ts';
+export * from './contracts/source-report-schema.ts';
