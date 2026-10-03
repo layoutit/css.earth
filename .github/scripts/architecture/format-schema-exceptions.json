@@ -99,10 +99,9 @@
   {
     "schema": "cssearth-display-orientation@1",
     "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
+      "packages/bake"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Preserved distant-worlds Python writes display orientations read by bake; it cannot import TypeScript. display-orientation.test.ts pins its literal to the objects constant."
   },
   {
     "schema": "cssearth-facility-emblems@3",
@@ -233,14 +232,6 @@
     "reason": "Spelled as a raw string by 2 owners (packages/astronomy, packages/bake); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
   },
   {
-    "schema": "cssearth-published-limb-darkening@1",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
     "schema": "cssearth-published-mutual-orbit@1",
     "owners": [
       "packages/astronomy",
@@ -315,14 +306,6 @@
     "reason": "Preserved heliosphere IBEX extract.py writes samples parsed and triangulated by bake; Python cannot import TypeScript. shell-grid-schema.test.ts pins writer and real fixture to SURFACE_GRID_SCHEMA; geometry stays bake."
   },
   {
-    "schema": "cssearth-synchronous-rotation@1",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
     "schema": "cssearth-telescope-product@1",
     "owners": [
       "packages/telescope",
@@ -371,13 +354,5 @@
       "site"
     ],
     "reason": "Spelled as a raw string by 3 owners (packages/bake, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
-    "schema": "cssearth-wise-atlas-tiles@1",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
   }
 ]

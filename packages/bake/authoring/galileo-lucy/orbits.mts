@@ -1,3 +1,4 @@
+import { DISPLAY_ORIENTATION_SCHEMA } from '@cssearth/objects';
 // Prepare explicitly illustrative moon phases using published size/period constraints.
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
@@ -16,7 +17,7 @@ const eclipticPoleToIcrf = (longitude: number, latitude: number) => {
 for (const body of bodies) {
   const s = `src/objects/${body.id}/source`;
   const pole = body.id === 'dactyl' ? { rightAscensionDegrees: 168.76, declinationDegrees: -87.1 } : eclipticPoleToIcrf(95.53, -87.05);
-  await write(`${s}/preparation/rotation.json`, { schema: 'cssearth-display-orientation@1', ...pole,
+  await write(`${s}/preparation/rotation.json`, { schema: DISPLAY_ORIENTATION_SCHEMA, ...pole,
     periodHours: body.periodHours, phase: 'arbitrary-display-phase', displayMeridianDegrees: 0,
     source: body.id === 'dactyl' ? 'Belton et al. (1996); candidate period from Celestia/Petit et al. (1997); parent pole from Ida package' : 'https://doi.org/10.3847/PSJ/ade23c',
     coordinateSystem: 'ICRF/J2000, right-handed Z-up model; illustrative zero meridian',

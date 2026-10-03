@@ -1,9 +1,10 @@
+import { WISE_ATLAS_TILES_SCHEMA, parseTilePins } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { gzipSync } from 'node:zlib';
 import { card } from '../geometry/fixtures/fits-helpers.mts';
-import { binWiseAtlasTile, matchTileBackgrounds, mosaicTiles, parseTilePins, wiseAtlasUrl } from '@cssearth/bake/objects/raster';
+import { binWiseAtlasTile, matchTileBackgrounds, mosaicTiles, wiseAtlasUrl } from '@cssearth/bake/objects/raster';
 
 const size = 64, scale = 0.01;
 function atlasTile(coaddId: string, ra: number, dec: number, sky: (ra: number, dec: number) => number, offset: number, extra: readonly string[] = []) {
@@ -20,7 +21,7 @@ function atlasTile(coaddId: string, ra: number, dec: number, sky: (ra: number, d
   }
   return gzipSync(Buffer.concat([header, data]));
 }
-const pins = parseTilePins({ schema: 'cssearth-wise-atlas-tiles@1', band: 'W4', tiles: [{ coaddId: '0544p242_ac51', bytes: 4000 }] });
+const pins = parseTilePins({ schema: WISE_ATLAS_TILES_SCHEMA, band: 'W4', tiles: [{ coaddId: '0544p242_ac51', bytes: 4000 }] });
 const grid = { width: 120, height: 80, fovDeg: 1.1, centerIcrsDegrees: [56.5, 24.2] as [number, number] };
 
 test('tile pixels bin into the hips2fits grid and overlap medians recover per-tile levels up to one constant', () => {
@@ -48,8 +49,6 @@ test('atlas identity, zero point, projection and pins are checked', () => {
   const w1 = parseTilePins({ ...pins, band: 'W1' });
   assert.throws(() => binWiseAtlasTile(atlasTile('0544p242_ac51', 56.5, 24.2, sky, 0), w1, '0544p242_ac51', grid), /unexpected/);
   assert.equal(binWiseAtlasTile(atlasTile('0544p242_ac51', 10, -60, sky, 0), pins, '0544p242_ac51', grid), undefined);
-  assert.throws(() => parseTilePins({ ...pins, tiles: [...pins.tiles, pins.tiles[0]] }), /unique/);
-  assert.throws(() => parseTilePins({ ...pins, band: 'W5' }), /Unsupported/);
   assert.equal(wiseAtlasUrl('0544p242_ac51', 'W4'), 'https://irsa.ipac.caltech.edu/ibe/data/wise/allwise/p3am_cdd/05/0544/0544p242_ac51/0544p242_ac51-w4-int-3.fits.gz');
 });
 

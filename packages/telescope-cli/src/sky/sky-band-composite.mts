@@ -1,3 +1,5 @@
+import type { WiseBand } from '@cssearth/objects';
+import { parseTilePins } from '@cssearth/objects';
 /** Survey sky bands -> one asinh display raster and its TAN WCS.
  * The route owns every calibration factor, or states that a band has none, and which acquisition each band may use; a recipe names
  * bands, a grid, one background and one peak percentile for every band, and one common display.
@@ -17,8 +19,7 @@ import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDi
 import { maskSaturatedStars, findPointSources } from '@cssearth/bake/objects/layers/observation';
 import { JWST_BANDS, JWST_UNITS_REFERENCE, bandOfHeader, type JwstBand } from '../archives/jwst/imaging/bands.mts';
 import { runImage3 } from '../archives/jwst/imaging/image3.mts';
-import { binWiseAtlasTile, gridWcs, parseSkyGrid, matchTileBackgrounds, mosaicTiles, MONTAGE_BACKGROUND_REFERENCE, parseTilePins, readWiseAtlasTile,
-  WISE_ATLAS_REFERENCE, wiseAtlasUrl, type SkyGrid, type WiseBand } from '@cssearth/bake/objects/raster';
+import { binWiseAtlasTile, gridWcs, parseSkyGrid, matchTileBackgrounds, mosaicTiles, MONTAGE_BACKGROUND_REFERENCE, readWiseAtlasTile, WISE_ATLAS_REFERENCE, wiseAtlasUrl, type SkyGrid } from '@cssearth/bake/objects/raster';
 
 export const HIPS2FITS = 'https://alasky.cds.unistra.fr/hips-image-services/hips2fits';
 const WISE_ATLAS_PIXEL_SR = (1.375 / 206264.80624709636) ** 2;

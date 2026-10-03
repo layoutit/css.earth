@@ -132,3 +132,9 @@ Authored preparation receipts, world-navigation preparation receipts and prepare
 Historical source-list and index/pre-build admission policies retain their accepted records and diagnostics.
 Frame/source auditing, camera solving, geometry, file I/O and inventory lookup stay with bake/site/tooling.
 Contract tests use node:test in the packages CI lane.
+
+WISE tile pins, authored display/synchronous rotation records and cited published limb coefficients have
+browser-safe schema identifiers, data types and pure validation in `packages/objects/src/prepared-data/`.
+Contract tests use node:test in the packages lane. WISE photometry, FITS/mosaicking, orbit/rotation evaluation,
+limb intensity, model-grid interpolation and file I/O remain with their scientific owners. The preserved
+Python display-orientation writer has a literal conformance test and a specific schema-ledger exception.

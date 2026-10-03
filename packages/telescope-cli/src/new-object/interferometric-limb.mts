@@ -1,3 +1,4 @@
+import { PUBLISHED_LIMB_DARKENING_SCHEMA } from '@cssearth/objects';
 /** A star's limb fitted to its own interferometry, for a star no paper gives a law for and no model grid reaches: the power law
  * I(mu) = mu^alpha that fitPowerLawDisc (@cssearth/telescope-cli, disc-fit.mts) fits inside the first lobe of the calibrated
  * visibilities an observation season records for it (packages/telescope-cli/src/archives/interferometry/seasons/). The first lobe
@@ -29,7 +30,7 @@ export async function fitInterferometricLimb(root: string, id: string, progress:
     const alpha = Number(fit.alpha.toFixed(2)), uncertainty = Math.ceil(Math.max(fit.alpha - fit.alphaRange[0], fit.alphaRange[1] - fit.alpha) * 100 - 1e-6) / 100;
     const sourceDirectory = resolve(root, 'src/objects', id, 'source'), input = relative(sourceDirectory, resolve(root, calibrated));
     const title = requireString(season.title, `${path} title`), record = {
-      schema: 'cssearth-published-limb-darkening@1', objectId: id,
+      schema: PUBLISHED_LIMB_DARKENING_SCHEMA, objectId: id,
       source: `${title}, the calibrated visibilities in ${input}`,
       fit: { tool: 'fitPowerLawDisc (packages/telescope-cli/src/archives/interferometry/disc-fit.mts), run by node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb', input, data: `the calibrated ${instrument.toUpperCase()} visibilities of ${title.split(',')[0]}, inside the first lobe` },
       band, law: 'power', basis: 'fit',

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { readPublishedLimbDarkening } from '@cssearth/objects';
 /** Navigation markers for placed stars and hosted planets, rendered from each body's own default dataset instead of the scaffold's
  * flat gray disc:
  *
@@ -21,7 +22,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { hostLitGray, linearToSrgb, srgbToLinear } from '@cssearth/bake/objects/color';
 import { loadDiscBandColor } from '@cssearth/bake/objects/layers/observation';
-import { limbIntensity, loadStellarPhotometricColor, readPublishedLimbDarkening } from '@cssearth/bake/objects/stellar';
+import { limbIntensity, loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
 import { colorForValue, loadScienceSurface } from '@cssearth/bake/objects/raster';
 import { MISSING_COVERAGE_STYLES } from '@cssearth/bake/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';

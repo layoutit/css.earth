@@ -1,3 +1,5 @@
+import type { WiseBand } from '@cssearth/objects';
+import { WISE_ATLAS_TILES_SCHEMA } from '@cssearth/objects';
 /** Author the pins of a sky band composite recipe: hips2fits responses, AllWISE atlas tile lists and JWST MAST products.
  * Usage: node packages/telescope-cli/src/sky/author-sky-bands.mts <recipe.json> [--cache=.local/nebula-lab/sky-bands]
  * A band without pins is acquired and pinned; existing pins are verified, never silently replaced.
@@ -9,7 +11,7 @@ import { basename, dirname, relative, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { acquireMastProduct, hips2fitsCachePath, parseSkyBandComposite, SKY_BANDS, skyBandUrl } from './sky-band-composite.mts';
-import { gridWcs, skyToGridPixel, WISE_ATLAS_BANDS, wiseAtlasUrl, type SkyGrid, type WiseBand } from '@cssearth/bake/objects/raster';
+import { gridWcs, skyToGridPixel, WISE_ATLAS_BANDS, wiseAtlasUrl, type SkyGrid } from '@cssearth/bake/objects/raster';
 
 const IBE_SEARCH = 'https://irsa.ipac.caltech.edu/ibe/search/wise/allwise/p3am_cdd';
 const stable = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
@@ -126,7 +128,7 @@ if (import.meta.main) {
       tiles.push({ coaddId, bytes: bytes.length });
       if ((index + 1) % 25 === 0 || index + 1 === coaddIds.length) console.log(`SKY_BAND ${id} tiles ${index + 1}/${coaddIds.length}`);
     }
-    const list = Buffer.from(stable({ schema: 'cssearth-wise-atlas-tiles@1', band: wiseBand, tiles }));
+    const list = Buffer.from(stable({ schema: WISE_ATLAS_TILES_SCHEMA, band: wiseBand, tiles }));
     await writeFile(resolve(root, listPath), list);
     bands.push({ band: id, tiles: { path: listPath } });
   }

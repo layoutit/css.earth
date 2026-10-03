@@ -1,3 +1,5 @@
+import type { LimbLaw } from '@cssearth/objects';
+import { readPublishedLimbDarkening, readPublishedPowerLaw } from '@cssearth/objects';
 // A photosphere color for a star with no image: its measured spectrum (Gaia XP, or an archived spectrophotometric file) where one
 // is published, otherwise a Planck spectrum at its catalogued photometric effective temperature, through the CIE 1931 2° observer
 // into sRGB (D65 white), scaled so the brightest linear channel is 1. A self-luminous disc shows chromaticity only; its brightness
@@ -7,7 +9,7 @@ import { linearToSrgb } from '../color/index.ts';
 import { gunzipSync } from 'node:zlib';
 import { binaryTable, numbers, readFitsHdus, tableColumn } from '../raster/index.ts';
 import { readCie1931ColorMatching } from '../sources/index.ts';
-import { interpolateGrid, limbIntensity, readHowarthNode, readPublishedLimbDarkening, readPublishedPowerLaw, type GridRead, type LimbLaw } from './limb-laws.ts';
+import { interpolateGrid, limbIntensity, readHowarthNode, type GridRead } from './limb-laws.ts';
 
 export type StellarColorRecord = {
   readonly spectrum: 'planck'; readonly temperaturePath: string; readonly sourceId: string;
