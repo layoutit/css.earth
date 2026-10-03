@@ -14,7 +14,7 @@
  * shared neutral gray, lit by its own star: no color of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node packages/bake/cli/prepare-object.mts <id> */
-import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, SYNCHRONOUS_ROTATION_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA, CSS_PRESENTATION_PROFILE_SCHEMA, CSS_GEOMETRY_PROFILE_SCHEMA, NAVIGATION_MARKER_SCHEMA } from '@cssearth/objects';
+import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, SYNCHRONOUS_ROTATION_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA, CSS_PRESENTATION_PROFILE_SCHEMA, CSS_GEOMETRY_PROFILE_SCHEMA, NAVIGATION_MARKER_SCHEMA, systemObjectId } from '@cssearth/objects';
 
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -48,6 +48,9 @@ export interface HostedPlanetScaffold {
   readonly selfLuminous?: { readonly temperatureK: number; readonly source: string };
 }
 
+/** The object a hosted body is inside: the system of the body its orbit record names (`physical.parent`). */
+export const hostedParent = systemObjectId;
+
 /** Every file of a new shape-only planet of another star, keyed by repository path. Pure: the caller writes them. */
 export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord: unknown, hostRecord: unknown, epochJdTt: number): Map<string, string> {
   if (!/^[a-z][a-z0-9-]*$/u.test(spec.id)) throw new TypeError('A planet needs a lowercase id.');
@@ -79,7 +82,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
   const glow = spec.selfLuminous, material = glow ? 'emission' : 'lighting';
   if (glow && !(glow.temperatureK > 0)) throw new TypeError(`${spec.id}: a self-luminous planet needs a positive effective temperature, not ${glow.temperatureK}.`);
 
-  put(`${o}/object.json`, { schema: OBJECT_SCHEMA, id, type: 'layered-body', properties: {
+  put(`${o}/object.json`, { schema: OBJECT_SCHEMA, id, parent: hostedParent(hostId), type: 'layered-body', properties: {
     preparation: { schema: 'cssearth-object-preparation@1', label: name,
       steps: ['verify-sources', 'assets', 'panel-content', 'datasets', 'starfield', ...(glow ? [] : ['sky-sun']), 'system-markers', 'scene', 'controls', 'presentation', 'runtime-assets'] },
     recipe: { schema: AUTHORED_OBJECT_SCHEMA,

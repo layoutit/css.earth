@@ -2,6 +2,10 @@
   "id": "toi-7137",
   "name": "TOI-7137",
   "system": "TOI-7394 B system",
+  "boundTo": {
+    "host": "toi-7394-b",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-7394 B and TOI-7137 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 1602132340256374528 and 1602132344550079232), 741 AU apart on the sky, with a chance-alignment probability of 1.8e-5: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to TOI-7394 B, 741 AU away.",
   "gaia": "1602132344550079232",
   "paper": {

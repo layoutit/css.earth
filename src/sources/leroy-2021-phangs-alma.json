@@ -40,6 +40,16 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/257/43/ReadMe",
       "checkedOn": "2026-10-02",
       "locator": "galaxies: row NGC3521: distance 13.24 Mpc, stellar scale length lstar 4.9 kpc; row NGC3351: distance 9.96 Mpc, lstar 2.1 kpc."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/257/43/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "galaxies: row NGC1365: centre 53.40166666666666, -36.140277777777776, position angle 201.1 +/- 7.5 deg, inclination 55.4 +/- 6.0 deg, distance 19.57 Mpc; row NGC4424: centre 186.79833333333332, 9.420555555555554, position angle 88.3 +/- 2.0 deg, inclination 58.2 +/- 6.0 deg, distance 16.2 Mpc; row NGC4536: centre 188.61291666666665, 2.188333333333333, position angle 305.6 +/- 2.3 deg, inclination 66.0 +/- 2.9 deg, distance 16.25 Mpc. NGC 4639 has no row. Query: SELECT * FROM \"J/ApJS/257/43/galaxies\" WHERE Name IN ('NGC1365','NGC4536','NGC4639','NGC4424')"
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/257/43/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "galaxies: stellar scale length lstar: row NGC1365 13.1 kpc at 19.57 Mpc (the table's largest), row NGC4424 2.2 kpc at 16.2 Mpc, row NGC4536 2.7 kpc at 16.25 Mpc. Note (2): orientations are from Lang et al. (2020, J/ApJ/897/122), Sheth et al. (2010) or LEDA; Lang et al.'s table1 has NGC1365 (PA 210.7, i 55.4) and NGC4536 (PA 305.5, i 67.7) and no row for NGC4424 or NGC4639. Query: SELECT Name, Dist, r25, Re, lstar, PA, e_PA, i, e_i FROM \"J/ApJS/257/43/galaxies\" WHERE Name IN ('NGC1365','NGC4536','NGC4424')"
     }
   ],
   "creators": [
@@ -57,7 +67,7 @@
     {
       "kind": "credit",
       "text": "Cite Leroy et al. (2021), ApJS 257, 43.",
-      "scope": "NGC 6744's stellar scale length; NGC 1637's disc centre, tilt, position angle and stellar scale length",
+      "scope": "NGC 6744's stellar scale length; NGC 1637's disc centre, tilt, position angle and stellar scale length; NGC 1365's, NGC 4424's and NGC 4536's disc centre and tilt, position angle and stellar scale length",
       "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/257/43/ReadMe"
     }
   ]

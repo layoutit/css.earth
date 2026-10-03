@@ -2,11 +2,10 @@ import type { CatalogueRow } from './catalogue-index.mts';
 
 const PREVIEW_PIXELS = 40;
 
-/** Inline overview rows have no observer distance; every row uses the same retained view. */
-export type ObjectResultEntry = Omit<CatalogueRow, 'kind' | 'detail'> & {
-  readonly kind: CatalogueRow['kind'] | 'overview'; readonly detail?: CatalogueRow['detail'];
-};
-export type ObjectResultSelection = Readonly<{ kind: ObjectResultEntry['kind']; id: string }> | null;
+/** A row with no observer distance leaves its detail out; every row uses the same retained view. */
+export type ObjectResultEntry = Omit<CatalogueRow, 'detail'> & { readonly detail?: CatalogueRow['detail'] };
+/** The selected object's row: its object's id. */
+export type ObjectResultSelection = Readonly<{ id: string }> | null;
 
 /** One retained row component for search results and server-rendered system members. */
 export interface ObjectResultView {
@@ -17,7 +16,7 @@ export interface ObjectResultView {
 
 /** The prepared search thumbnail of a scene object with a context sprite, as its row's marker says (`preview`). */
 export function searchPreviewUrl(marker: ObjectResultEntry['marker']): string | null {
-  return marker.kind === 'scene' && marker.preview ? `/navigation/search/${marker.id}@2x.webp` : null;
+  return marker.preview ? `/navigation/search/${marker.id}@2x.webp` : null;
 }
 
 function renderMarker(documentTarget: Document, entry: ObjectResultEntry) {
@@ -34,21 +33,6 @@ function renderMarker(documentTarget: Document, entry: ObjectResultEntry) {
     return image;
   }
   const marker = documentTarget.createElement('span');
-  if (entry.marker.kind === 'thumbnail') {
-    marker.className = `object-navigation-marker ${entry.marker.thumbnail ? 'context-navigation-thumbnail' : 'catalog-navigation-marker'}`;
-    marker.setAttribute('aria-hidden', 'true');
-    if (entry.marker.thumbnail) {
-      const image = documentTarget.createElement('img');
-      image.src = entry.marker.thumbnail;
-      image.width = PREVIEW_PIXELS;
-      image.height = PREVIEW_PIXELS;
-      image.alt = '';
-      image.setAttribute('loading', 'lazy');
-      image.setAttribute('decoding', 'async');
-      marker.append(image);
-    }
-    return marker;
-  }
   // The row carries its sprite's styles (prepared-catalogue-index.mts): a page holds no table of every object's marker.
   const sprite = entry.marker.sprite;
   if (!sprite) throw new Error(`Result row ${entry.id} carries no prepared marker for ${entry.marker.id}: neither a search thumbnail nor a sprite.`);
@@ -97,8 +81,8 @@ export function bindObjectResultView(documentTarget: Document, view: ObjectResul
   anchor.dataset.sourceDocument = entry.source.document;
   anchor.dataset.sourceLabel = entry.source.label;
   // A system row is a plain link to the system's overview, as the object list's overview rows are.
-  if (entry.kind === 'scene') anchor.dataset.objectId = entry.id; else delete anchor.dataset.objectId;
-  const selected = selection?.kind === entry.kind && selection.id === entry.id;
+  anchor.dataset.objectId = entry.id;
+  const selected = selection?.id === entry.id;
   anchor.classList.toggle('is-active', selected);
   if (selected) anchor.setAttribute('aria-current', 'page');
   else anchor.removeAttribute('aria-current');

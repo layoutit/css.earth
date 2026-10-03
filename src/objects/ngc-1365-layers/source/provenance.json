@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Portrait of the Great Barred Spiral",
+  "publisher": "NOIRLab",
+  "sourceId": "iotw2127a",
+  "sourcePage": "https://noirlab.edu/public/images/iotw2127a/",
+  "download": "https://storage.noirlab.edu/media/archives/images/large/iotw2127a.jpg",
+  "credit": "Dark Energy Survey/DOE/FNAL/DECam/CTIO/NOIRLab/NSF/AURA; image processing: Travis Rector (University of Alaska Anchorage/NSF NOIRLab), Jen Miller (Gemini Observatory/NSF NOIRLab), Mahdi Zamani & Davide de Martin (NSF NOIRLab)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      3383,
+      3263
+    ],
+    "bands": [
+      "DECam",
+      "Dark Energy Survey"
+    ],
+    "fieldOfViewDeg": [
+      0.247,
+      0.23833333333333334
+    ]
+  },
+  "checkedSource": {
+    "kind": "Publisher Large JPEG",
+    "dimensions": [
+      3383,
+      3263
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 55.4,
+    "lineOfNodesPaDeg": 201.1,
+    "reference": "Leroy et al. 2021"
+  },
+  "displayModel": "The photograph lies on one flat plane, the disc's midplane, as the Milky Way's backing image does. Nothing in the image has depth.",
+  "coverage": "Milky Way foreground stars (Gaia DR3) are removed where they show; fainter and uncatalogued stars remain.",
+  "acquisition": {
+    "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2127a.jpg",
+    "dimensions": [
+      3383,
+      3263
+    ],
+    "operation": "Download the publisher Large JPEG; no crop or resample."
+  }
+}

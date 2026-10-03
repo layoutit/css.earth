@@ -8,7 +8,6 @@ import { renderCatalogueRows } from '../search/catalogue-window.mts';
 import { renderDatasetResponse, UnreadableSavedView } from '../dataset-response.mts';
 import { createSelectionPresentation } from '../selection-presentation.mts';
 import { selectionTargetFromUrl } from '../scene/scene-selection.mts';
-import { WORLD_OBJECTS } from '../world-objects.mts';
 import { presentFeatureResults, createSearchPresentation } from '../search/search-results-presentation.mts';
 import { pageIdAtPath } from '../root-object.mts';
 import { systemHostId } from '../navigation/system-address.mts';
@@ -75,7 +74,7 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
     }
     presentation.setEmptyHidden(found.objects.total + detailCount > 0);
   }
-  createSelectionPresentation(document, { card: true }).present(selectionTargetFromUrl(url, objectId, WORLD_OBJECTS));
+  createSelectionPresentation(document, { card: true }).present(selectionTargetFromUrl(url, objectId));
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 
@@ -91,7 +90,7 @@ export async function handleSearchRequest(request: Request, data: SearchData, fe
   const response = await fetcher(new URL(`/${pageId}/`, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
   if (!response.ok || !response.headers.get('content-type')?.includes('text/html')) return response;
   const page = await response.text();
-  // The page's own address: a level's page is named by its path, which the rewrite to the function drops.
+  // The page's own address: a page whose scene is another object's is named by its path, which the rewrite to the function drops.
   const address = new URL(url);
   if (address.pathname === '/.netlify/functions/search') { address.pathname = `/${pageId}/`; address.searchParams.delete('object'); }
   const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher), target, data);

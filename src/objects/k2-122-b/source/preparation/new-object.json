@@ -2,6 +2,10 @@
   "id": "k2-122-b",
   "name": "K2-122B",
   "system": "K2-122 system",
+  "boundTo": {
+    "host": "k2-122",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list K2-122 and K2-122B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 663843343706623232 and 663843446785837952), 1,452 AU apart on the sky, with a chance-alignment probability of 5.2e-6: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to K2-122, 1,452 AU away.",
   "gaia": "663843446785837952",
   "paper": {

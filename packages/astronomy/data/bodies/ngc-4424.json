@@ -1,0 +1,27 @@
+{
+  "id": "ngc-4424",
+  "classification": "galaxy",
+  "physical": {
+    "name": "NGC 4424",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 4424 is recorded: it is an extended galaxy, and its package frames it at 8700 pc (object.json worldFrame.bodyRadiusM): RC3's isophotal diameter, log D25 = 1.56 (0.1 arcmin), halved and set at the Cepheid distance.",
+  "star": {
+    "rightAscensionDegrees": 186.79833333333332,
+    "declinationDegrees": 9.420555555555554,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 16443717,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 426,
+    "sources": {
+      "position": "Leroy et al. (2021), ApJS 257, 43, galaxies table (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43), row NGC4424: RAJ2000 186.79833333333332, DEJ2000 9.420555555555554",
+      "distance": "Riess et al. (2016), ApJ 826, 56, table 5 (https://arxiv.org/abs/1604.01424), row N4424: Cepheid distance modulus mu_Ceph 31.080 +/- 0.292 mag, 10^(mu/5 + 1) pc: 16443717 pc (-2068977/+2366768); the distance its Cepheids are placed at",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NGC 4424: 426 km/s, from 2022ApJS..261...21Y (https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract)"
+    }
+  }
+}

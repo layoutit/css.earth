@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "gj-1214-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "gj-1214",
-      "members": "planets"
+      "host": "gj-1214"
     },
     "catalog": {
       "name": "GJ 1214 system",

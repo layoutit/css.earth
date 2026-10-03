@@ -2,6 +2,10 @@
   "id": "hd-349013-b",
   "name": "HD 349013B",
   "system": "TOI-4463 system",
+  "boundTo": {
+    "host": "toi-4463-a",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-4463 A and HD 349013B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 4524517290642206336 and 4524517290642204928), 2,009 AU apart on the sky, with a chance-alignment probability of 1.4e-5: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to TOI-4463 A, 2,009 AU away.",
   "gaia": "4524517290642204928",
   "paper": {

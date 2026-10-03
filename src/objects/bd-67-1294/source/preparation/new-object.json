@@ -2,6 +2,10 @@
   "id": "bd-67-1294",
   "name": "BD+67 1294",
   "system": "TOI-6034 system",
+  "boundTo": {
+    "host": "toi-6034",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-6034 and BD+67 1294 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2270404997834401664 and 2270407952771897472), 4,700 AU apart on the sky, with a chance-alignment probability of 3.6e-4: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to TOI-6034, 4,700 AU away.",
   "gaia": "2270407952771897472",
   "paper": {

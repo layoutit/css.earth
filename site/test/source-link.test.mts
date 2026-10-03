@@ -57,9 +57,9 @@ test('a body reached by a map marker is named by its own card', () => {
 
 test('a card part that waits off the page still names its subject', () => {
   const { document } = parseHTML(`<html><body><nav class="object-browser"></nav>
-    <aside class="object-information-panel"><template data-detached-section><section data-source-subject="overview:system:eps-eridani" data-source-document="https://example.test/eps-eridani/README.md" data-source-label="Sources: NASA"></section></template></aside>
+    <aside class="object-information-panel"><template data-detached-section><section data-source-subject="object:eps-eridani-system" data-source-document="https://example.test/eps-eridani/README.md" data-source-label="Sources: NASA"></section></template></aside>
     <a data-source-link data-source-document="https://example.test/eps-eridani-b/README.md" data-source-label="Sources"><span data-source-link-label></span></a></body></html>`);
   // A star's card carries its system's header while the body is its subject; the planet's page it came from named neither.
-  renderSourceLink(document, 'overview:system:eps-eridani', new Map());
+  renderSourceLink(document, 'object:eps-eridani-system', new Map());
   assert.equal(document.querySelector('[data-source-link]')?.getAttribute('href'), 'https://example.test/eps-eridani/README.md');
 });

@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "trappist-1",
+  "parent": "trappist-1-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

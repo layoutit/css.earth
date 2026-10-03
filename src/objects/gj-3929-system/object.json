@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "gj-3929-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "gj-3929",
-      "members": "planets"
+      "host": "gj-3929"
     },
     "catalog": {
       "name": "GJ 3929 system",

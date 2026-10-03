@@ -55,6 +55,11 @@
       "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
       "checkedOn": "2026-10-02",
       "locator": "VII/155/rc3 row NGC 3351: B-VT = 0.80 +/- 0.01. Query: SELECT name, BT, \"B-VT\", \"e_B-VT\" FROM \"VII/155/rc3\" WHERE 1=CONTAINS(POINT('ICRS', RA2000, DE2000), CIRCLE('ICRS', 160.99, 11.704, 0.08))"
+    },
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-10-02",
+      "locator": "VII/155/rc3 rows NGC 1365 (PGC13179): type .SBS3.., log D25 2.05, B-VT 0.69 +/- 0.01; NGC 4424 (PGC40809): type .SBS1*., log D25 1.56, B-VT 0.68 +/- 0.05; NGC 4536 (PGC41823): type .SXT4.., log D25 1.88, B-VT 0.61 +/- 0.02; NGC 4639 (PGC42741): type .SXT4.., log D25 1.44, B-VT 0.70 +/- 0.01. Query: SELECT name, PGC, type, T, D25, R25, PA, \"B-VT\", \"e_B-VT\" FROM \"VII/155/rc3\" WHERE PGC IN ('PGC13179','PGC41823','PGC42741','PGC40809')"
     }
   ],
   "creators": [
@@ -72,7 +77,7 @@
     {
       "kind": "credit",
       "text": "Cite de Vaucouleurs et al. (1991), Third Reference Catalogue of Bright Galaxies.",
-      "scope": "Integrated colors of galaxies",
+      "scope": "Integrated colors of galaxies; morphological types and isophotal diameters of NGC 1365, NGC 4424, NGC 4536 and NGC 4639",
       "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/155"
     }
   ]

@@ -69,6 +69,12 @@
     },
     {
       "location": "public",
+      "filename": "ceres-billboard.webp",
+      "bytes": 17290,
+      "sha256": "e835d9dbbefd0ccc5a85df282ab2d120230b50146be77207e7be11f65fbc5820"
+    },
+    {
+      "location": "public",
       "filename": "ceres-bouguer-page-0-level-1040.webp",
       "bytes": 197652,
       "sha256": "a8d81e9ece2b3323affc6770a2853fe1c911eb6ae7d521cc7e9d09500eaea6f0"
@@ -990,12 +996,6 @@
       "filename": "world-navigation.json",
       "bytes": 1185,
       "sha256": "920d863047e01069e60c3015bb13bcb5017f4642f8727df02fbdc457fba978cb"
-    },
-    {
-      "location": "public",
-      "filename": "ceres-billboard.webp",
-      "bytes": 17290,
-      "sha256": "e835d9dbbefd0ccc5a85df282ab2d120230b50146be77207e7be11f65fbc5820"
     }
   ]
 }

@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "dinkinesh-system",
+  "parent": "solar-system",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "dinkinesh",
-      "members": "moons"
+      "host": "dinkinesh"
     },
     "catalog": {
       "name": "Dinkinesh–Selam system",

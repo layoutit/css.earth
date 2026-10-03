@@ -2,7 +2,7 @@
 // and cluster presentation recipes; the browser only validates it. It lists no system: a page reads a system's members
 // and framing from the bodies its world holds (site/object-systems.mts, site/system-framing.mts).
 import prepared from './prepared-world-presentation.json' with { type: 'json' };
-import { requireRecord, requireString, isRecord } from '@cssearth/core';
+import { isRecord } from '@cssearth/core';
 
 const ids = (value: unknown, name: string): readonly string[] => {
   if (!Array.isArray(value) || !value.every(id => typeof id === 'string' && id.length > 0)) throw new TypeError(`Prepared world presentation ${name} must list object ids.`);
@@ -41,11 +41,10 @@ function categoryFrames(value: unknown) {
 }
 
 function parseWorldPresentation(value: unknown) {
-  if (!isRecord(value) || value.schema !== 'cssearth-world-presentation@5' || !isRecord(value.moons)) {
-    throw new TypeError(`site/prepared-world-presentation.json is ${isRecord(value) ? String(value.schema) : typeof value}, not cssearth-world-presentation@5; run pnpm prepare:world-context.`);
+  if (!isRecord(value) || value.schema !== 'cssearth-world-presentation@6' || !isRecord(value.moons)) {
+    throw new TypeError(`site/prepared-world-presentation.json is ${isRecord(value) ? String(value.schema) : typeof value}, not cssearth-world-presentation@6; run pnpm prepare:world-context.`);
   }
   return Object.freeze({
-    satelliteSystemIntroductions: Object.freeze(Object.fromEntries(Object.entries(requireRecord(value.satelliteSystemIntroductions)).map(([id, text]) => [id, requireString(text)]))),
     moons: Object.freeze({ major: ids(value.moons.major, 'moons.major'), minor: ids(value.moons.minor, 'moons.minor') }),
     defaultFeatureIds: ids(value.defaultFeatureIds, 'defaultFeatureIds'),
     orbitFeatureIds: ids(value.orbitFeatureIds, 'orbitFeatureIds'),

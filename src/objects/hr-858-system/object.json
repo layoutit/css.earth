@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "hr-858-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hr-858",
-      "members": "planets"
+      "host": "hr-858"
     },
     "catalog": {
       "name": "HR 858 system",

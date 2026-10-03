@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "mascara-4-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "mascara-4",
-      "members": "planets"
+      "host": "mascara-4"
     },
     "catalog": {
       "name": "MASCARA-4 system",

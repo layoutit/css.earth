@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 2256,
+      "sha256": "ca6e90977c0f9cbc262491b1eb64db92d8560ecb5269942300f0aa46e6c00a55"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-1542b.bin",
+      "bytes": 1945,
+      "sha256": "caec5a210e0f49f5d5166ce62549dddd1598aad3baedf15ad5d3fbf262f363ac"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-1542c.bin",
+      "bytes": 1942,
+      "sha256": "9091d27c1daa9753a2754d26dc560219b227fcd0b60111d9e8c55fb3550b5a5c"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-1542d.bin",
+      "bytes": 1952,
+      "sha256": "123dd0d4996718dc37fda124ed2b45c08f42ec7c55caa0235e20a9a6602f2be9"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-1542e.bin",
+      "bytes": 1942,
+      "sha256": "0f75d25e04d3b3dc285d5fd6498bcaa1c1d5111f292c334adbc762f44ff1bb14"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/kepler-1542.json",
+      "bytes": 42672,
+      "sha256": "808c786eefa89c662adc18f7f85871ec3bf1ae89a5e013f316293cd085ad799c"
+    }
+  ]
+}

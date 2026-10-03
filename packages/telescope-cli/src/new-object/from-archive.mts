@@ -160,7 +160,7 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   if (existing(hostId)) notes.push(`${hostname} is already in the universe as ${hostId}`);
   const entry = existing(hostId) ? { host: hostId, planets, notes: skipped } : {
     // The host is named as its planets name it (pi Men for pi Men c), the archive's host name when they match.
-    id: hostId, name: prefix ?? hostname, system: `${(prefix ?? hostname).replace(/\s+[A-D]$/u, '')} system`, description: `Star of ${Math.round(kelvin).toLocaleString('en-US')} K${mid} with ${n} ${kind}.`,
+    id: hostId, name: prefix ?? hostname, system: `${(prefix ?? hostname).replace(/\s+[A-D]$/u, '')} system`, parent: 'milky-way', description: `Star of ${Math.round(kelvin).toLocaleString('en-US')} K${mid} with ${n} ${kind}.`,
     target: hostname, ...(star.gaiaDr3 ? { gaia: star.gaiaDr3 } : {}), paper: { url: star.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', credit: star.label },
     radius: ticRadius ?? cited(rad, 'radius'), temperature: temperature ?? cited(teff, 'temperature'), mass: ticMass ?? cited(mass, 'mass'),
     // The factsheet shows the star's size and distance; the text names its planets and whose values the star follows.
@@ -175,7 +175,7 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   let companions: Record<string, unknown>[] = [];
   if (star.stars > 1 && star.gaiaDr3) {
     const system = existing(hostId) ? universe.systems?.get(hostId) ?? `${prefix ?? hostname} system` : String((entry as { system?: string }).system);
-    const found = await wideCompanions(archive, { gaia: star.gaiaDr3, name: prefix ?? hostname, system }, (gaia, name) => universe.gaia?.get(gaia) ?? duplicateName(universe, name));
+    const found = await wideCompanions(archive, { id: hostId, gaia: star.gaiaDr3, name: prefix ?? hostname, system }, (gaia, name) => universe.gaia?.get(gaia) ?? duplicateName(universe, name));
     companions = found.companions; notes.push(...found.notes);
     const missing = star.stars - 1 - found.companions.length - found.notes.filter(note => note.includes('already in the universe')).length;
     if (missing > 0) notes.push(`${hostname}: a ${star.stars}-star system; ${missing} of its other stars ${missing === 1 ? 'is' : 'are'} too close to it for Gaia to separate, or not in the wide-binary catalogue, and ${missing === 1 ? 'is' : 'are'} not added`);

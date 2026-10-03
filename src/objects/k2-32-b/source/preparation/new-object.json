@@ -2,6 +2,10 @@
   "id": "k2-32-b",
   "name": "K2-32B",
   "system": "K2-32 system",
+  "boundTo": {
+    "host": "k2-32",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list K2-32 and K2-32B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 4130539180358512768 and 4130538428745313920), 2,316 AU apart on the sky, with a chance-alignment probability of 4.5e-5: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to K2-32, 2,316 AU away.",
   "gaia": "4130538428745313920",
   "paper": {

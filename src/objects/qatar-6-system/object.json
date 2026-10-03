@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "qatar-6-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "qatar-6",
-      "members": "planets"
+      "host": "qatar-6"
     },
     "catalog": {
       "name": "Qatar-6 system",

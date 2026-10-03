@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": -23.769515550140866,
   "radialVelocityKmPerS": 0,
   "presentationUp": "display-axis",
+  "boundTo": "hat-p-3",
   "sources": {
    "position": "Gaia DR3 source 1510191594552968960 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hat-p-3-b/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 7.2828 +/- 0.0608 mas (same row, RUWE 1.11): 137.31 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): -19.471, -23.770 mas/yr",
-   "radialVelocity": "No catalogued radial velocity: Gaia DR3 measures none for source 1510191594552968960 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 40,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%201510191594552968960)"
+   "radialVelocity": "No catalogued radial velocity: Gaia DR3 measures none for source 1510191594552968960 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 40,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%201510191594552968960)",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list HAT-P-3 and HAT-P-3B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 1510191594552968832 and 1510191594552968960), 1,321 AU apart on the sky, with a chance-alignment probability of 9.2e-6: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

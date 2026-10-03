@@ -2,6 +2,10 @@
   "id": "hat-p-3-b",
   "name": "HAT-P-3B",
   "system": "HAT-P-3 system",
+  "boundTo": {
+    "host": "hat-p-3",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list HAT-P-3 and HAT-P-3B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 1510191594552968832 and 1510191594552968960), 1,321 AU apart on the sky, with a chance-alignment probability of 9.2e-6: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to HAT-P-3, 1,321 AU away.",
   "gaia": "1510191594552968960",
   "paper": {

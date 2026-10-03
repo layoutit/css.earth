@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "gj-504-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "gj-504",
-      "members": "planets"
+      "host": "gj-504"
     },
     "catalog": {
       "name": "GJ 504 system",

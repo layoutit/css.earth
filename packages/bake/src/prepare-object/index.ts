@@ -77,9 +77,10 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   // from the world's orbit graph, so it follows the world step. Every system is rewritten: unchanged ones come out the same, in a second.
   { name: 'systems', purpose: 'write the package of every system, so a new host has its system page', scope: 'once', commands: async () => [node('site/build/prepare/system-packages.mts')] },
   { name: 'catalogues', purpose: 'rebuild the shared sources and facilities catalogues from the object\'s source records', scope: 'once', commands: async () => [node('site/build/prepare/prepare-facilities.mts', '--catalog-only')] },
-  // The world context is written under the Sun's prepared/; without this its inventory still pins the bytes from before the object existed.
+  // The world context is written under the Sun's prepared/ and into the package of each object that holds bodies; without this
+  // their inventories still pin the bytes from before the object existed.
   // The catalogue carries every descriptor as the pins leave it (prepared-registry.ts preparedCatalogueModule).
-  { name: 'pins', purpose: "pin the Sun's regenerated world files into its inventory", scope: 'once', commands: async () => [node('site/build/prepare/prepare-object-json.mts', 'sun'), node('site/build/prepare/prepare-catalog.mts')] },
+  { name: 'pins', purpose: "pin the regenerated world files into the Sun's inventory and into each object's that holds them", scope: 'once', commands: async () => [node('site/build/prepare/prepare-object-json.mts', 'sun'), node('site/build/prepare/pin-world-files.mts'), node('site/build/prepare/prepare-catalog.mts')] },
 ]);
 
 export type Progress = (line: string) => void;

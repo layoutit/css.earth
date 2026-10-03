@@ -1,17 +1,17 @@
 {
   "schema": "cssearth-object@2",
   "id": "ogle-lmc-ecl-09114-a-system",
+  "parent": "lmc",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "ogle-lmc-ecl-09114-a",
-      "members": "planets"
+      "host": "ogle-lmc-ecl-09114-a"
     },
     "catalog": {
       "name": "OGLE-LMC-ECL-09114 system",
       "systemName": "OGLE-LMC-ECL-09114 system",
-      "classification": "planetary-system",
+      "classification": "star-system",
       "color": "#ffead8",
       "distanceAu": 10290138654.1,
       "description": "The primary star of OGLE-LMC-ECL-09114, a pair that eclipse each other every 214.366 days."

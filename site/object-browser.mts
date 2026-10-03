@@ -3,6 +3,7 @@ import { createSelectionPresentation } from './selection-presentation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser/browser-types.mts';
 import type { SceneSubject } from './scene/scene-selection.mts';
+import { subjectView } from './scene/scene-subject.mts';
 import type { DestinationPresentation } from './destination-browser.mts';
 import { requiredElement, sectionElement } from './browser/browser-types.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
@@ -303,7 +304,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     refreshSelection() {
       const subject = readSelection();
       subjectOverride = null;
-      if (subject.view === 'system') destinations?.present(null);
+      if (subjectView(subject) === 'system') destinations?.present(null);
       refreshSelection();
     },
     bindObject(id: string) {

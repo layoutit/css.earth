@@ -72,10 +72,11 @@ export function parseObjectDescriptor(value: unknown): ObjectDescriptor {
   }
   const input = record(parsed, 'object');
   // `generator`: the script that writes a generated package (a system's, site/build/prepare/system-packages.mts).
-  allowedKeys(input, ['schema', 'id', 'type', 'generator', 'properties', 'prepared'], 'object');
+  allowedKeys(input, ['schema', 'id', 'type', 'parent', 'generator', 'properties', 'prepared'], 'object');
   if (input.generator !== undefined && (typeof input.generator !== 'string' || !input.generator)) throw new TypeError(`object.generator must name the script that writes the package; got ${JSON.stringify(input.generator)}.`);
   if (input.schema !== schema) throw new TypeError(`Unsupported object schema: ${String(input.schema)}.`);
   return Object.freeze({ schema, id: named(input.id, 'object.id'), type: named(input.type, 'object.type'),
+    ...(input.parent === undefined ? {} : { parent: named(input.parent, 'object.parent') }),
     properties: properties(input.properties),
     ...(input.prepared === undefined ? {} : { prepared: preparedReference(input.prepared) }),
   });
