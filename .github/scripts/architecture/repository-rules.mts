@@ -88,7 +88,8 @@ export function isBroken(findings: ReadonlyMap<string, readonly string[]>): bool
 }
 
 /** Count static import owners and require an independent pair. All declared workspace dependencies count;
- * nested lab packages belong to the labs owner, including their dependencies. */
+ * nested lab packages belong to the labs owner, including their dependencies. Only source files are checked;
+ * instruction and fixture data files such as `AGENTS.md` import nothing. */
 export function checkIntegrationOwners(root: string, files: readonly string[]): string[] {
   const packages = files.filter(file => /^(?:packages\/[^/]+|labs\/[^/]+(?:\/packages\/[^/]+)?)\/package\.json$/u.test(file))
     .map(file => declaredPackage(file, JSON.parse(readFileSync(resolve(root, file), 'utf8'))));
@@ -108,7 +109,7 @@ export function checkIntegrationOwners(root: string, files: readonly string[]): 
       return dependency !== undefined && reaches(owner(`${dependency.directory}/index.ts`) ?? dependency.directory, to, seen);
     });
   };
-  return files.filter(file => file.startsWith('integration/')).flatMap(file => {
+  return files.filter(file => file.startsWith('integration/') && /\.[cm]?[jt]sx?$/u.test(file)).flatMap(file => {
     if (!existsSync(resolve(root, file))) return [`${file}: integration file is missing`];
     const owners = new Set(importedSpecifiers(readFileSync(resolve(root, file), 'utf8'), file).flatMap(specifier => {
       const pkg = packages.find(item => specifier === item.name || specifier.startsWith(`${item.name}/`));
