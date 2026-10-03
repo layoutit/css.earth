@@ -25,7 +25,7 @@ function RUNTIME_ASSET_ORIGIN_FIXTURE(): string {
   return `https://earth-assets.lowpoly.cc/runtime-assets/${'c'.repeat(63)}/x.webp`;
 }
 
-test('the published world summary and system views must describe the same systems', async () => {
+test('the published world files and system views must describe the same systems', async () => {
   const root = projectRoot(import.meta.url), prepared = resolve(root, 'src/objects/sun/prepared');
   const summary = await readFile(resolve(prepared, 'world-context-summary.json'), 'utf8');
   // Every holder's members are named members.json in its own package: an address is read back through the inventories.
@@ -38,7 +38,7 @@ test('the published world summary and system views must describe the same system
     : (alter ?? ((_id, text) => text))(nameOf(url), await view(url));
   assert.ok(await checkPublishedWorldPair(root, read()) > 0);
   // A view for another system than its file names is caught.
-  await assert.rejects(checkPublishedWorldPair(root, read((id, text) => id === 'trappist-1' ? text.replace('"id":"trappist-1"', '"id":"sun"') : text)), /published world summary and system views disagree/);
+  await assert.rejects(checkPublishedWorldPair(root, read((id, text) => id === 'trappist-1' ? text.replace('"id":"trappist-1"', '"id":"sun"') : text)), /published world files disagree: Prepared system view for trappist-1 names sun/);
   // A read that fails is reported as that read, not as a disagreement.
   const unreachable = async (url: string) => { if (nameOf(url) === 'trappist-1-system') throw new Error(`Could not read ${url}.`); return read()(url); };
   await assert.rejects(checkPublishedWorldPair(root, unreachable), (error: Error) => /Could not read .*members\.json/.test(error.message) && !/disagree/.test(error.message));
