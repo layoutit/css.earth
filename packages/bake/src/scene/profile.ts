@@ -1,8 +1,8 @@
-import type { SurfaceGeometryProfile } from '@cssearth/objects';
+import { CSS_GEOMETRY_PROFILE_SCHEMA, type SurfaceGeometryProfile } from '@cssearth/objects';
 import type { SeamOutsetProfile } from './seam-outset.ts';
 
 export interface GeometryProfile {
-  schema: 'cssearth-css-geometry-profile@1'; namespace: string; surface: SurfaceGeometryProfile;
+  schema: typeof CSS_GEOMETRY_PROFILE_SCHEMA; namespace: string; surface: SurfaceGeometryProfile;
   projection: { tileSize: number; layerElevation: number; seamBleed: number; interiorSeamBleed: number;
     overlap: number; fitToSource: boolean; rasterScale: number; rasterGutter: number; rasterOverscan: number;
     projectivePoles: boolean; lightColor: string; ambientIntensity: number;
@@ -38,7 +38,7 @@ function raster(value: unknown, label: string) {
 /** Validates authored renderer parameters separately from semantic object capabilities. */
 export function parseGeometryProfile(value: unknown): GeometryProfile {
   const profile = object(value, 'geometry');
-  if (profile.schema !== 'cssearth-css-geometry-profile@1' || typeof profile.namespace !== 'string' || !/^[a-z][a-z0-9-]*$/.test(profile.namespace)) throw new TypeError('Unsupported geometry profile.');
+  if (profile.schema !== CSS_GEOMETRY_PROFILE_SCHEMA || typeof profile.namespace !== 'string' || !/^[a-z][a-z0-9-]*$/.test(profile.namespace)) throw new TypeError('Unsupported geometry profile.');
   numbers(profile, ['bodyRotationDegrees'], 'geometry');
   const surface = object(profile.surface, 'surface');
   numbers(surface, ['radius', 'polarRadius', 'latitudeSegments', 'longitudeSegments', 'surfaceLatitudeHeight', 'packedBandGutter', 'polarTileSize', 'polarRadiusScale', 'polarOffset'], 'surface');

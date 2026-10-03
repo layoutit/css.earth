@@ -1,5 +1,5 @@
 /** Public, static execution boundary for operations backed by a verified product descriptor. */
-import { parseDiscColorPhotometry } from '@cssearth/objects';
+import { parseDiscColorPhotometry, GAIA_NEBULA_FIELD_SCHEMA, type PyuvdataUvfitsRequest } from '@cssearth/objects';
 import { readEsoSpectrum, ESO_SPECTRUM_PROFILE } from './families/f03-eso-spectrum.mts';
 import { randomUUID } from 'node:crypto';
 import { constants } from 'node:fs';
@@ -32,7 +32,7 @@ import { exportSpatialObject, inspectSpatialObject } from './spatial-handoff.mts
 import { extractMixedNd, inspectMixedNd } from './families/f02-mixed-nd.mts';
 import { inspectHealpix, selectHealpix } from './families/f14-healpix.mts';
 import { previewUvfitsSelection } from './families/f11-measurement-set.mts';
-import { pyuvdataUvfits, type PyuvdataUvfitsRequest } from '@cssearth/telescope/node';
+import { pyuvdataUvfits } from '@cssearth/telescope/node';
 
 import { verifiedProduct } from './verified-product.mts';
 
@@ -187,7 +187,7 @@ const numericArray=(value:unknown,label:string)=>{if(!Array.isArray(value)||valu
 function spectrumSamples(bytes:Buffer,descriptor:ProductDescriptor):SpectrumSample[]{if(descriptor.dataset.profiles.some(profile=>profile.handlerId==='f03-spectrum'&&profile.profileId===ESO_SPECTRUM_PROFILE))return [...readEsoSpectrum(bytes).samples];const source=object(JSON.parse(bytes.toString()),'spectrum member');if(source.schema!=='cssmercury-mascs-global-spectrum@1')throw new TypeError('The public spectrum executor currently supports the pinned MASCS global-spectrum schema.');const wavelength=numericArray(source.wavelengthNanometers,'wavelengthNanometers'),values=numericArray(source.reflectanceIOverF,'reflectanceIOverF');if(wavelength.length!==values.length)throw new TypeError('Spectrum coordinate and value lengths differ.');return wavelength.map((item,index)=>({id:String(index),segment:'visible',wavelength:item,value:values[index]!}));}
 function photometryPoints(bytes:Buffer):PhotometryPoint[]{const point=parseDiscColorPhotometry(JSON.parse(bytes.toString()));return[{id:`geometric-albedo-${point.band.toLowerCase()}`,...point,segment:'occultation-area'}];}
 function timeSamples(bytes:Buffer):TimeSample[]{const curve=readTessLightCurve(bytes);return Array.from(curve.time,(time,index)=>({id:String(index),segment:`sector-${curve.sector}`,time,value:curve.flux[index]!,uncertainty:curve.error[index]!}));}
-function astrometryRows(bytes:Buffer):AstrometryRow[]{const text=bytes.toString();if(!text.trimStart().startsWith('{'))return readAstrometryCsv(text);const source=object(JSON.parse(text),'astrometry member');if(source.schema!=='cssearth-gaia-nebula-field@1'||!Array.isArray(source.stars))throw new TypeError('The public astrometry executor reads a Gaia-named CSV table or the pinned Gaia nebula-field schema.');const epoch=Number(source.coordinateEpochJulianYear);return source.stars.map((raw,index)=>{const row=object(raw,`star ${index}`);return{id:String(row.sourceId),raDeg:Number(row.raDeg),decDeg:Number(row.decDeg),epochJulianYear:epoch,pmRaCosDecMasYr:Number(row.pmRaMasYr),pmDecMasYr:Number(row.pmDecMasYr),...(row.parallaxMas===undefined?{}:{parallaxMas:Number(row.parallaxMas)}),...(row.parallaxErrorMas===undefined?{}:{parallaxErrorMas:Number(row.parallaxErrorMas)})};});}
+function astrometryRows(bytes:Buffer):AstrometryRow[]{const text=bytes.toString();if(!text.trimStart().startsWith('{'))return readAstrometryCsv(text);const source=object(JSON.parse(text),'astrometry member');if(source.schema!==GAIA_NEBULA_FIELD_SCHEMA||!Array.isArray(source.stars))throw new TypeError('The public astrometry executor reads a Gaia-named CSV table or the pinned Gaia nebula-field schema.');const epoch=Number(source.coordinateEpochJulianYear);return source.stars.map((raw,index)=>{const row=object(raw,`star ${index}`);return{id:String(row.sourceId),raDeg:Number(row.raDeg),decDeg:Number(row.decDeg),epochJulianYear:epoch,pmRaCosDecMasYr:Number(row.pmRaMasYr),pmDecMasYr:Number(row.pmDecMasYr),...(row.parallaxMas===undefined?{}:{parallaxMas:Number(row.parallaxMas)}),...(row.parallaxErrorMas===undefined?{}:{parallaxErrorMas:Number(row.parallaxErrorMas)})};});}
 async function absent(path:string){if(await stat(path).then(()=>true,error=>{if((error as NodeJS.ErrnoException).code==='ENOENT')return false;throw error;}))throw new Error(`Output directory already exists: ${path}.`);}
 async function customOutput(loaded:Awaited<ReturnType<typeof loadDescriptor>>,operation:FamilyOperation,params:FamilyOperationParameters,outputDirectory:string){
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;await absent(destination);await mkdir(dirname(destination),{recursive:true});await mkdir(staging);

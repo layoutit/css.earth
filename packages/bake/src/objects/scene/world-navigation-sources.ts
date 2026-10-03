@@ -1,3 +1,4 @@
+import { SOLAR_SYSTEM_PREPARATION_SCHEMA, PAGED_ELLIPSOID_SCHEMA } from '@cssearth/objects';
 import { BANDED_ELLIPSOID_SCHEMA, LAYERED_OBLATE_SCHEMA, SHAPE_MODEL_SCHEMA } from './recipe-identifiers.ts';
 import { buildPolyMeshTransform } from '@layoutit/polycss';
 import { multiply, reflection, rotation, type Matrix3 } from './world-navigation.ts';
@@ -25,7 +26,7 @@ export function authoredPresentationBasis(sources: ReadonlyMap<string, Value>, s
   if (optional(model, 'schema') === SHAPE_MODEL_SCHEMA) return checked(systemMatrix, required(model, 'displayRadius'), 50);
   const solar = sources.get('solar-system'), terrestrial = sources.get('terrestrial');
   const geometry = sources.get('geometry'), presentation = sources.get('presentation'), paged = sources.get('paged-ellipsoid');
-  if (optional(solar, 'schema') === 'cssearth-solar-system-preparation@1') {
+  if (optional(solar, 'schema') === SOLAR_SYSTEM_PREPARATION_SCHEMA) {
     return checked(systemMatrix, required(solar, 'bodyRadiusUnits'), 50);
   }
   if (optional(terrestrial, 'schema') === 'cssearth-terrestrial-preparation@2') {
@@ -45,7 +46,7 @@ export function authoredPresentationBasis(sources: ReadonlyMap<string, Value>, s
       return checked(chain(authoredTransform(required(presentation, 'systemTransform')), authoredTransform(required(presentation, 'meshTransform'))), radius(), tile());
     }
   }
-  if (optional(paged, 'schema') === 'cssearth-paged-ellipsoid@1') {
+  if (optional(paged, 'schema') === PAGED_ELLIPSOID_SCHEMA) {
     const p = required(paged, 'geometry');
     return checked(multiply(systemMatrix, chain(mesh([0, 0, required(p, 'MESH_ROTATION_Z')]))), required(p, 'EQUATORIAL_RADIUS'), required(p, 'TILE_SIZE'));
   }

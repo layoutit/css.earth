@@ -1,3 +1,4 @@
+import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import { execFileSync, spawn } from 'node:child_process';
 import { createServer } from 'node:http';
@@ -141,12 +142,12 @@ test('repository volume package restores a missing download from the object sour
   const origin = `http://127.0.0.1:${address.port}`;
   await writeRestore(root, origin);
   await json(resolve(root, 'src/objects/nebula/source/manifest.json'), {
-    schema: 'cssearth-volume-source-manifest@2', pathBase: 'repository', inputs: [{
+    schema: VOLUME_SOURCE_MANIFEST_SCHEMA, pathBase: 'repository', inputs: [{
       id: 'volume', path: 'src/objects/nebula/source.bin', origin: `${origin}/publisher.bin`,
     }], documents: [{ id: 'preview', path: 'src/objects/nebula/preview.png', origin: `${origin}/preview.png` }], generatedIntermediates: [],
   });
   await json(resolve(root, 'src/objects/nebula/source/presentation.json'), {
-    schema: 'cssearth-volume-presentation-source@2',
+    schema: VOLUME_PRESENTATION_SOURCE_SCHEMA,
   });
   await rm(resolve(root, 'site/objects.mts'));
   await run(root, [RESTORE, '--repository-volumes']);
@@ -180,10 +181,10 @@ test('repository volume restore refuses a publisher page and takes a built input
   await writeRestore(root, origin);
   const composite = 'src/objects/galaxy/source/optical-composite.jpg', generator = 'packages/bake/authoring/galaxy/compose-optical.mts';
   const manifest = (input: Record<string, unknown>) => json(resolve(root, 'src/objects/galaxy/source/manifest.json'), {
-    schema: 'cssearth-volume-source-manifest@2', pathBase: 'repository', documents: [], generatedIntermediates: [],
+    schema: VOLUME_SOURCE_MANIFEST_SCHEMA, pathBase: 'repository', documents: [], generatedIntermediates: [],
     inputs: [{ id: 'optical', path: composite, origin: `${origin}/public/images/panorama/`, ...input }],
   });
-  await json(resolve(root, 'src/objects/galaxy/source/presentation.json'), { schema: 'cssearth-volume-presentation-source@2' });
+  await json(resolve(root, 'src/objects/galaxy/source/presentation.json'), { schema: VOLUME_PRESENTATION_SOURCE_SCHEMA });
   await rm(resolve(root, 'site/objects.mts'));
 
   // A download whose origin turns out to be a page: both the mirror miss and the HTML body are named, and nothing is written.
