@@ -31,3 +31,10 @@ identifier is browser-safe and available from the main entry; its filesystem val
 remains in `@cssearth/objects/node`. The pre-build body-reference check and preserved
 Python distant-worlds authoring retain their raw manifest identifier. The objects
 schema-identifier tests pin both spellings; mutation checks must reject either drifting.
+Preserved Python camera and text writers likewise retain narrow, conformance-tested exceptions.
+Their TypeScript consumers import the objects-owned contracts.
+
+Archived-camera data (including `SpiceCamera`), cited object/prepared-text records and prepared destinations
+are browser-safe contracts in `packages/objects/src/prepared-data/`, exported from `@cssearth/objects`.
+Their node:test suites run in the packages lane. Camera fitting and kernel computation stay with bake/SPICE;
+text budgets and editorial checks stay in site; destination preparation and search projection stay with bake/site.

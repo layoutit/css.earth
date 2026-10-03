@@ -1,9 +1,8 @@
+import { OBJECT_TEXT_SCHEMA, parseObjectText } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import {
-  OBJECT_TEXT_SCHEMA, PREPARED_TEXT_SCHEMA, compositionWarnings, parseObjectText, parsePreparedText, readerTextErrors, readerTextWarnings,
-} from '../object-text.mts';
+import { compositionWarnings, readerTextErrors, readerTextWarnings } from '../object-text.mts';
 
 const source = { catalogueId: 'nasa-saturn-facts', url: 'https://science.nasa.gov/saturn/facts/', label: 'NASA Science · Saturn facts', checked: '2026-09-13' };
 const blocks = {
@@ -49,12 +48,4 @@ test('text shown together may not repeat a sentence or a six-word phrase, includ
     { source: 'mission:cassini', text: 'Explored Saturn and its rings from orbit, then dove into the planet.' },
   ]);
   assert.match(shared?.detail ?? '', /^shares “explored saturn and its rings from” with introduction$/u);
-});
-
-test('published text keeps the authored blocks and names the input it was checked from', () => {
-  const prepared = parsePreparedText({ schema: PREPARED_TEXT_SCHEMA, objectId: 'saturn', ...blocks }, 'saturn');
-  assert.equal(prepared.introduction.text, blocks.introduction.text);
-  assert.throws(() => parsePreparedText({ schema: PREPARED_TEXT_SCHEMA, objectId: 'saturn', ...blocks }, 'titan'), /belongs to saturn/u);
-  assert.throws(() => parsePreparedText({ schema: OBJECT_TEXT_SCHEMA, objectId: 'saturn', ...blocks }), /prepared text schema/u);
-  assert.throws(() => parsePreparedText(undefined, 'toi-6008b'), /^TypeError: toi-6008b: prepared\/text\.json is missing; run the bake's text step/u, 'a body baked short of its text step is named');
 });

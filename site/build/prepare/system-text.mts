@@ -1,5 +1,6 @@
+import { parseCitedText } from '@cssearth/objects';
 import { sourceId, sourceObject } from '@cssearth/objects/sources';
-import { parseCitedText, textBlockBudgetErrors } from '../../object-text.mts';
+import { textBlockBudgetErrors } from '../../object-text.mts';
 
 /** Prepare short, cited system introductions; the browser receives only their text. */
 export function prepareSystemIntroductions(input: unknown, hosts: readonly string[], catalogue: ReadonlySet<string>) {

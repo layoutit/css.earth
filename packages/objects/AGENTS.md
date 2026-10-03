@@ -117,4 +117,9 @@ Only shared-schema debt has schema/owner exceptions; owner-internal formats need
 
 Schema identifiers are exported from their format owners, including the browser-safe source-manifest identifier.
 Writers and readers import these constants; the pre-build body-reference check and preserved Python authoring
-keep conformance-tested source-manifest spellings in the schema exception ledger.
+keep conformance-tested source-manifest, archived-camera and object-text spellings in the schema exception ledger.
+
+Archived-camera data (including `SpiceCamera`), cited object/prepared-text records and prepared destinations
+are browser-safe contracts in `packages/objects/src/prepared-data/`, exported from `@cssearth/objects`.
+Their node:test suites run in the packages lane. Camera fitting and kernel computation stay with bake/SPICE;
+text budgets and editorial checks stay in site; destination preparation and search projection stay with bake/site.

@@ -62,3 +62,6 @@ Renderer runtime exceptions are file-scoped in [the architecture rule](../../.gi
 `src/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
 `src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
 The package keeps its renderer dependency for these four consumers. F16 validation uses objects contracts.
+
+Object-text scaffolding imports `OBJECT_TEXT_SCHEMA` from `@cssearth/objects`; cited-text
+format parsing belongs there, while wording generation and editorial policy stay with their owners.
