@@ -1,4 +1,5 @@
 /** Canonical published identities. Local files and claim-specific citations keep their own evidence. */
+export const SOURCE_CATALOG_SCHEMA = 'cssearth-source-catalog@1';
 export type SourceKind = 'data-product' | 'publication' | 'model' | 'reference-page' | 'software' | 'artwork';
 export type SourceRole = 'material' | 'method' | 'reference' | 'artwork';
 export type SourceEvidence =
@@ -14,7 +15,7 @@ export interface SourceRecord {
   readonly statements: readonly { readonly kind: 'credit' | 'rights' | 'limitation'; readonly text: string; readonly scope: string; readonly evidence: string }[];
 }
 export interface SourceCatalog {
-  readonly schema: 'cssearth-source-catalog@1'; readonly records: readonly SourceRecord[];
+  readonly schema: typeof SOURCE_CATALOG_SCHEMA; readonly records: readonly SourceRecord[];
 }
 export interface SourceCitation { readonly catalogueId: string; readonly checkedOn: string; readonly locator?: string; readonly evidence?: string; }
 export interface SourceReference { readonly catalogueId: string; readonly role: SourceRole; readonly evidence: string; readonly locator?: string; }
@@ -107,7 +108,7 @@ export function parseSourceCitation(raw: unknown, sources?: SourceResolver): Sou
 }
 export function parseSourceCatalog(raw: unknown): SourceCatalog {
   const value = sourceObject(raw, ['schema','records']);
-  if (value.schema !== 'cssearth-source-catalog@1') throw new TypeError('Unsupported source catalogue.');
+  if (value.schema !== SOURCE_CATALOG_SCHEMA) throw new TypeError('Unsupported source catalogue.');
   const records = sourceArray(value.records, raw => {
     const record = sourceObject(raw, ['id','kind','identityLevel','title','identifiers','links','evidence','creators','publisher','publicationDate','version','relations','statements']);
     const evidence = sourceArray(record.evidence, parseSourceEvidence);
@@ -139,7 +140,7 @@ export function parseSourceCatalog(raw: unknown): SourceCatalog {
     for (const relation of byId[id].relations) visit(relation.catalogueId, new Set([...ancestors,id]));
   };
   records.forEach(record => visit(record.id));
-  return Object.freeze({schema: 'cssearth-source-catalog@1', records});
+  return Object.freeze({schema: SOURCE_CATALOG_SCHEMA, records});
 }
 export function sourceResolver(catalog: SourceCatalog): SourceResolver {
   return Object.freeze(Object.fromEntries(catalog.records.map(record => [record.id, record])));

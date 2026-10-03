@@ -62,3 +62,12 @@ Renderer runtime exceptions are file-scoped in [the architecture rule](../../.gi
 `src/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
 `src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
 The package keeps its renderer dependency for these four consumers. F16 validation uses objects contracts.
+
+Object-text scaffolding imports `OBJECT_TEXT_SCHEMA` from `@cssearth/objects`; cited-text
+format parsing belongs there, while wording generation and editorial policy stay with their owners.
+
+WISE tile pins, authored display/synchronous rotation records and cited published limb coefficients have
+browser-safe schema identifiers, data types and pure validation in `packages/objects/src/prepared-data/`.
+Contract tests use node:test in the packages lane. WISE photometry, FITS/mosaicking, orbit/rotation evaluation,
+limb intensity, model-grid interpolation and file I/O remain with their scientific owners. The preserved
+Python display-orientation writer has a literal conformance test and a specific schema-ledger exception.

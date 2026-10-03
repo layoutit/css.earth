@@ -5,7 +5,7 @@ import { initialObjectSelection } from '@cssearth/renderer/runtime/object-contra
 import { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
 import { preparedSceneMatrix } from '@cssearth/engine';
 import { serializePreparedMatrix4 } from '@cssearth/core';
-import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
+import { CAMERA_POSE_SCHEMA, parsePreparedWorldCameraFrame } from '@cssearth/objects';
 import { distanceForSilhouetteRadius } from '@cssearth/engine';
 import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
 import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';
@@ -21,7 +21,7 @@ export function sphereHtml(prepared:Prepared, metadata:Record<string,unknown>, t
   const selection=initialObjectSelection(definition.controls);
   const navigation=definition.variants[0].navigation?.camera;
   const distanceM=distanceForSilhouetteRadius(frame.bodyRadiusM,1000,230,[0,0]);
-  const saved:SharedView={camera:{distanceKilometers:distanceM/1000,pose:{schema:'cssearth-camera-pose@2',scene:serializePreparedMatrix4(preparedSceneMatrix(definition.camera,
+  const saved:SharedView={camera:{distanceKilometers:distanceM/1000,pose:{schema:CAMERA_POSE_SCHEMA,scene:serializePreparedMatrix4(preparedSceneMatrix(definition.camera,
     navigation?.controlPitch??definition.camera.defaultControlPitchDegrees,navigation?.controlYaw??definition.camera.defaultControlYawDegrees))}},
     playback:{speed:1,motionRequested:false,times:[]},preparedEpochJdTt:frame.epochJdTt};
   const embedded={...definition,assets:{...definition.assets,entries:definition.assets.entries.map(entry=>({...entry,url:prepared.embeddedAssets[entry.url]}))}};

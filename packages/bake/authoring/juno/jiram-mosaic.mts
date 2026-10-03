@@ -26,13 +26,14 @@
  *
  * Output: a PDS3 simple-cylindrical float map with a detached label, as `pds3-float-map` reads it, and a receipt with
  * every frame's registration. */
+import type { SpiceCamera } from '@cssearth/objects';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
-import { numbers, utcToEt, spiceCamera, type PixelModelKeys, type SpiceCamera } from '@cssearth/spice';
+import { numbers, utcToEt, spiceCamera, type PixelModelKeys } from '@cssearth/spice';
 import { pds3Keyword } from '@cssearth/telescope';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, dot3 as dot, flagValue, positionalArguments } from '@cssearth/core';
 

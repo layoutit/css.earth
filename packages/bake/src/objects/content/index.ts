@@ -1,6 +1,5 @@
-// `@cssearth/bake/objects/content` (Node only): the object-content contract (facts, labels, dataset, legend and gallery
-// recipes, the prepared shell payload), the shared dataset vocabulary, dataset steps and prepared legends, and the billboard
-// color of each dataset control, and the legend labels a palette dataset derives from its reported stretch. The content preparer that reads factsheets and writes the payload is `site/build/content/prepare.ts`.
+// `@cssearth/bake/objects/content` (Node only): dataset preparation, legends and billboard colors.
+// Authored and prepared content wire contracts live in `@cssearth/objects`; file/callback APIs stay here.
 export * from './billboard-colors.ts';
 export * from './legend-labels.ts';
 export * from './datasets.ts';

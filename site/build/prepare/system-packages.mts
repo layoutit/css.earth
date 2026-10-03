@@ -8,6 +8,7 @@
  *
  * Usage: node site/build/prepare/system-packages.mts [host id ...]   (no ids: every system)
  */
+import { OBJECT_SCHEMA } from '@cssearth/objects';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../../objects.mts';
@@ -39,7 +40,7 @@ let written = 0;
 for (const system of systems) {
   if (only.size && !only.has(system.hostId)) continue;
   const id = systemObjectId(system.hostId), host = await descriptorOf(system.hostId), catalog = host.properties.catalog;
-  const descriptor = { schema: 'cssearth-object@2', id, type: 'system',
+  const descriptor = { schema: OBJECT_SCHEMA, id, type: 'system',
     generator: 'site/build/prepare/system-packages.mts',
     properties: {
       system: { host: system.hostId, members: system.members },

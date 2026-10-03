@@ -1,4 +1,4 @@
-import { OBJECT_RUNTIME_SCHEMA, PREPARED_CSS_OBJECT_FORMAT, parseAuthoredObjectDescriptor } from '@cssearth/objects';
+import { AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, OBJECT_RUNTIME_SCHEMA, PREPARED_CSS_OBJECT_FORMAT, parseAuthoredObjectDescriptor } from '@cssearth/objects';
 
 import {readAuthoredSources} from '../../sources/index.ts';
 import {parse} from '@cssearth/core/schema';
@@ -23,7 +23,7 @@ import sharp from 'sharp';
 import {inventoryPublicAssets} from '@cssearth/objects/node';
 import {requirePreparedPresentation} from '../../../presentation/index.ts';
 import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../presentation/index.ts';
-import { withFocusedCamera } from '../../scene/index.ts';
+import { LAYERED_OBLATE_SCHEMA, withFocusedCamera } from '../../scene/index.ts';
 import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
 import {prepareMaterialTracks} from '../../../presentation/index.ts';
 import { prepareCutawayMaterials } from './cutaway-materials.ts';
@@ -34,7 +34,7 @@ import {parseObservedSurfaceRecipe,prepareObservedSurfaces} from '../observed-su
 const json=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
 const writeJson=(path:string,value:unknown)=>writeFile(path,JSON.stringify(value)+'\n');
 
-export const isLayeredOblateRecipe=(value:unknown)=>isRecord(value)&&value.schema==='cssearth-layered-oblate-preparation@2';
+export const isLayeredOblateRecipe=(value:unknown)=>isRecord(value)&&value.schema===LAYERED_OBLATE_SCHEMA;
 
 /** A full source-to-consumer pipeline; no runtime product is a preparation input. */
 export async function prepareLayeredOblateObject({objectDirectory,publicDirectory,outputDirectory,write=false,prepareContent}: {objectDirectory:string;publicDirectory:string;outputDirectory:string;write?:boolean;prepareContent:(context: ContentPreparationContext) => Promise<PreparedObjectContentAssets>}) {
@@ -108,7 +108,7 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   if(write) {
     await writeFile(descriptorPath,JSON.stringify({...rawDescriptor,prepared:{format:PREPARED_CSS_OBJECT_FORMAT,url:'prepared/object.json'}},null,2)+'\n');
   }
-  await writeJson(resolve(outputDirectory,'authored-preparation.json'),{schema:'cssearth-authored-preparation@1',id:descriptor.id,sources:[...sources.values()].map(source=>source.reference),lanes:{radial:true,materials:true,geometry:true,content:true,celestial:true,presentation:true}});
+  await writeJson(resolve(outputDirectory,'authored-preparation.json'),{schema:AUTHORED_PREPARATION_SCHEMA,id:descriptor.id,sources:[...sources.values()].map(source=>source.reference),lanes:{radial:true,materials:true,geometry:true,content:true,celestial:true,presentation:true}} satisfies AuthoredPreparationReceipt);
   return {descriptor,sources,raster:surface,celestial:{sky,sun},scene,definition,content};
 }
 

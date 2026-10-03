@@ -1,11 +1,11 @@
-import { CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, parseVolumeRecipe, type VolumeSlices } from '@cssearth/objects';
-import { collectArtifacts } from '../workflows/density/io.ts';
 /** Offline material replacement on the exact named Alignment density cloud. Never infer new shape from an image. */
+import { parseDensityPlacement, OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, parseVolumeRecipe, type VolumeSlices } from '@cssearth/objects';
+import { collectArtifacts } from '../workflows/density/io.ts';
 import { mkdir, readFile, writeFile, readdir } from 'node:fs/promises';
 import { dirname, resolve, relative, isAbsolute, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
-import { parseDensityPlacement, densityPlacementTransform, createAlignedObservationMapping, parseCloudAppearance, prepareCloudDetail, CLOUD_DETAIL_METHOD } from '@cssearth/bake/volume';
+import { densityPlacementTransform, createAlignedObservationMapping, parseCloudAppearance, prepareCloudDetail, CLOUD_DETAIL_METHOD } from '@cssearth/bake/volume';
 import type { ReconstructionWork } from '../../features/reconstruction/reconstruction-types.ts';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { rectifyObservation, writeObservationPanel } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
@@ -113,11 +113,11 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   painted.slices.provenance=provenance;
   await json(resolve(output,'prepared/volume-slices.json'),painted.slices);
   const data=compileCssVolume({id:work.id,frame,slices:painted.slices,recipe:{anchors:[]}});
-  const prepared={schema:'cssearth-prepared-object@1',id:work.id,type:'density-volume',format:DENSITY_VOLUME_FORMAT,data};
+  const prepared={schema:PREPARED_OBJECT_SCHEMA,id:work.id,type:'density-volume',format:DENSITY_VOLUME_FORMAT,data};
   await json(resolve(output,'source/provenance.json'),provenance);
   await json(resolve(output,'source/validation.json'),validation);
   await json(resolve(output,'prepared/volume.json'),prepared);
-  const resultDescriptor={schema:'cssearth-object@2',id:work.id,type:'density-volume',properties:{volume:frame,
+  const resultDescriptor={schema:OBJECT_SCHEMA,id:work.id,type:'density-volume',properties:{volume:frame,
     preparation:{source:'source/provenance.json'}},prepared:{format:prepared.format,url:'prepared/volume.json'}};
   await json(resolve(output,'object.json'),resultDescriptor);
   const referenceLeafIds=data.stacks.flatMap(stack=>stack.leaves.map(leaf=>leaf.id)),partLeafIds=referenceLeafIds.map(id=>'all-light::'+id);

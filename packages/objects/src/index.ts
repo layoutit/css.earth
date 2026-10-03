@@ -195,3 +195,30 @@ export { worldCameraFromCenteredPresentation, worldCameraFromPresentation, camer
 export type { WorldCameraPose, LocalWorldCameraPresentation, PreparedWorldCameraViewport } from './prepared-data/world-camera-conversion.js';
 export { preparedDefaultViewRotation } from './prepared-data/prepared-arrival-view.js';
 export { parsePreparedDensityVolume } from './prepared-data/prepared-density-volume.js';
+export { AUTHORED_OBJECT_SCHEMA } from './authored.js';
+export { SOURCE_MANIFEST_SCHEMA } from './sources/source-manifest-schema.js';
+export { OBJECT_PAGE_SCHEMA } from './prepared-data/object-page-schema.js';
+export { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA } from './descriptor.js';
+
+export { OBJECT_TEXT_SCHEMA, PREPARED_TEXT_SCHEMA, parseCitedText, parseObjectText, parsePreparedText, type TextCitation, type CitedText, type ObjectTextDataset, type ObjectText, type PreparedObjectText } from './prepared-data/object-text.js';
+export { ARCHIVED_CAMERA_SCHEMA, archivedCameraFields, parseArchivedCamera, parseMatrixArchivedCamera, type ArchivedCamera, type SpiceCamera } from './prepared-data/archived-camera.js';
+export { PREPARED_DESTINATIONS_SCHEMA, parsePreparedDestinations, type PreparedDestination, type PreparedDestinations, type DestinationSearchRecord } from './prepared-data/prepared-destinations.js';
+export * from './prepared-data/authored-preparation.js';
+export * from './prepared-data/world-navigation-preparation.js';
+export * from './prepared-data/prepared-features.js';
+export { WISE_ATLAS_TILES_SCHEMA, WISE_BAND_NAMES, parseTilePins, type WiseBand, type TilePins } from './prepared-data/wise-atlas-tiles.js';
+export { DISPLAY_ORIENTATION_SCHEMA, parseAuthoredOrientation, type DisplayOrientation } from './prepared-data/display-orientation.js';
+export { SYNCHRONOUS_ROTATION_SCHEMA, parseSynchronousRotation, type SynchronousRotation } from './prepared-data/synchronous-rotation.js';
+export { PUBLISHED_LIMB_DARKENING_SCHEMA, readPublishedPowerLaw, readPublishedLimbDarkening, checkLimbLaw, type LimbLaw, type PublishedLimbCoefficient, type PublishedLimbDarkening } from './prepared-data/published-limb-darkening.js';
+
+export { DISC_INTEGRATED_COLOR_SCHEMA, parseDiscColorRecord, parseDiscColorPhotometry, type DiscColorRecord, type DiscColorPhotometry } from './prepared-data/disc-integrated-color.js';
+export { STELLAR_PHOTOMETRIC_COLOR_SCHEMA, PLANCK_FLOOR_KELVIN, parseStellarColorRecord, parseMeasuredSpectrumRecord, checkStellarTemperature, type StellarColorRecord, type StellarTemperature, type MeasuredSpectrumRecord } from './prepared-data/stellar-photometric-color.js';
+export { UNIFORM_DISC_STAR_SCHEMA, parseUniformDiscStarMeasurements, type UniformDiscStarMeasurements } from './prepared-data/uniform-disc-star.js';
+export { MEASURED_SPECTRUM_SCHEMA, parseMeasuredSpectrumDocument, type Measurement, type MeasuredSpectrumDocument } from './prepared-data/measured-spectrum.js';
+export { DENSITY_PLACEMENT_SCHEMA, parseDensityPlacement, type DensityPlacement } from './volume/density-placement.js';
+export { OBSERVED_STELLAR_CATALOGUE_SCHEMA, readObservedStellarCatalogueEnvelope, parseObservedStellarCatalogue,
+  type ObservedStar, type PhotometryKind, type ObservedStellarCatalogueEnvelope, type ObservedStellarCatalogue } from './volume/observed-stellar-catalogue.js';
+export { CAMERA_POSE_SCHEMA, parseCameraPose, parseCameraPoseMatrix, parseRestoredCameraPose, type CameraPose } from './prepared-data/camera-pose.js';
+export * from './prepared-data/object-content.js';
+export * from './prepared-data/prepared-content.js';
+export * from './prepared-data/facility-emblems.js';

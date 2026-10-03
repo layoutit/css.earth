@@ -1,9 +1,9 @@
+import { PREPARED_CATALOGUE_STARS_SCHEMA, type PreparedLmcStars } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Offline preparation of the published Bonanos et al. (2010) massive SMC star sample inside the current finite SMC model. */
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { STAR_PHOTOMETRY } from '@cssearth/bake/volume';
-import { type PreparedLmcStars } from '@cssearth/objects';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { loadFiniteModelStarContext, type FiniteModelStarContext } from '../../server/workflows/stars/finite-model-star-context.ts';
 import { placeCatalogueStarsInFiniteModel, preparedStarsLayerPath, readFiniteDatasetRecipe, finiteModelSubjectId,
@@ -62,7 +62,7 @@ export async function prepareSmcStars(root = process.cwd(), recipePath?: string)
   if (selection.inputRows !== 3654 || selection.stars.length < 100) throw new Error(`Unexpected catalogue sample: ${JSON.stringify({ ...selection, stars: selection.stars.length })}`);
   const finiteModel = await finiteModelStarProvenance(root, { context, subjectId, command: COMMAND,
     datasetRecipe: { path: finiteDatasetRecipe } });
-  const payload: PreparedLmcStars = { schema: 'cssearth-catalogue-stars@2', id: 'smc-stars', starIdPrefix: STAR_ID_PREFIX,
+  const payload: PreparedLmcStars = { schema: PREPARED_CATALOGUE_STARS_SCHEMA, id: 'smc-stars', starIdPrefix: STAR_ID_PREFIX,
     frame: context.frame, magnitudeBand: 'V', stars: selection.stars,
     sourceUrl: 'https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/140/416',
     credit: 'Bonanos et al. (2010), AJ 140, 416; CDS/VizieR J/AJ/140/416',

@@ -1,3 +1,4 @@
+import { parseObjectText } from '@cssearth/objects';
 /** Check what the preparation chain's later steps read, before its long bake, so a bad input fails in seconds.
  *
  *   node site/build/prepare/check-preparation-inputs.mts <object-id>...
@@ -15,7 +16,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
 import { hasErrorCode } from '@cssearth/core';
-import { parseObjectText, textBudgetErrors } from '../../object-text.mts';
+import { textBudgetErrors } from '../../object-text.mts';
 import type { TextFinding } from '../../object-text.mts';
 import { inventoryAssets } from '@cssearth/bake/delivery';
 import type { InventoryAsset } from '@cssearth/objects/node';

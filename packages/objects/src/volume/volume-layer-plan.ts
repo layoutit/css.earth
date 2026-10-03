@@ -1,10 +1,11 @@
+export const VOLUME_LAYER_PLAN_SCHEMA = 'cssearth-volume-layer-plan@1';
 import type { Axis } from './coordinates.js';
 
 /** Contiguous reference cells, including startCell and excluding endCell. */
 export interface VolumeLayerGroup { startCell: number; endCell: number }
 /** Offline thinning merges cells, never their integration samples. */
 export interface VolumeLayerPlan {
-  schema: 'cssearth-volume-layer-plan@1';
+  schema: typeof VOLUME_LAYER_PLAN_SCHEMA;
   referenceSliceCounts: Record<Axis, number>;
   referenceSamplesPerSlab: number;
   axes: Record<Axis, readonly VolumeLayerGroup[]>;
@@ -17,7 +18,7 @@ const integer = (v: unknown, min: number, max: number): v is number =>
   typeof v === 'number' && Number.isSafeInteger(v) && v >= min && v <= max;
 
 export function readVolumeLayerPlan(value: unknown): VolumeLayerPlan {
-  if (!record(value) || value.schema !== 'cssearth-volume-layer-plan@1' || !record(value.referenceSliceCounts) ||
+  if (!record(value) || value.schema !== VOLUME_LAYER_PLAN_SCHEMA || !record(value.referenceSliceCounts) ||
       !integer(value.referenceSamplesPerSlab, 1, 1024) || !record(value.axes))
     throw new TypeError('Invalid volume layer plan reference grid.');
   const counts: Record<Axis, number> = { x: 0, y: 0, z: 0 };

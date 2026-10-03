@@ -1,4 +1,4 @@
-import { OBJECT_RUNTIME_SCHEMA, parseObjectDescriptor, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, OBJECT_RUNTIME_SCHEMA, parseObjectDescriptor, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
 
 // Pinning a prepared object to its transport: the descriptor's `prepared` pin and page reference, and the body's inventory.
 // The `prepared/object.json` transport and the page data are built from the runtime when read (@cssearth/objects/node
@@ -20,11 +20,11 @@ const format = PREPARED_CSS_OBJECT_FORMAT;
 
 export function serializeObjectJson(descriptorValue:unknown, definitionValue:unknown) {
   const descriptor=requireRecord(descriptorValue),definition=requireRecord(definitionValue);
-  if (descriptor.schema !== 'cssearth-object@2' || typeof descriptor.type !== 'string' ||
+  if (descriptor.schema !== OBJECT_SCHEMA || typeof descriptor.type !== 'string' ||
       definition.id !== descriptor.id || definition.schema !== OBJECT_RUNTIME_SCHEMA) {
     throw new TypeError('Prepared object identity does not match its descriptor.');
   }
-  return JSON.stringify({ schema: 'cssearth-prepared-object@1', id: descriptor.id,
+  return JSON.stringify({ schema: PREPARED_OBJECT_SCHEMA, id: descriptor.id,
     type: descriptor.type, format, data: definition });
 }
 

@@ -2,7 +2,12 @@ import { randomUUID } from 'node:crypto';
 import { mkdir, readFile, realpath, rename, rm, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, resolve, sep } from 'node:path';
 import { parseMolecularTable, readMolecularRecipe } from './molecular-data.ts';
-import type { MolecularCatalogue, MolecularSourcePin } from '@cssearth/nebula-reconstruction/methods/kinematics/molecular-types';
+import type { ParsedMolecularTable, MolecularRecipe, MolecularSourcePin } from '@cssearth/nebula-reconstruction/methods/kinematics/molecular-types';
+
+export const MOLECULAR_CATALOGUE_SCHEMA = 'cssearth-molecular-catalogue@1';
+export interface MolecularCatalogue extends ParsedMolecularTable {
+  schema: typeof MOLECULAR_CATALOGUE_SCHEMA; recipe: MolecularRecipe; recipePath: string;
+}
 
 async function readRecipe(root: string, recipePath: string) {
   if (isAbsolute(recipePath)) throw new TypeError('Use a repository-relative molecular recipe.');
@@ -59,6 +64,6 @@ export async function loadMolecularCatalogue(root: string, recipePath: string): 
   const { recipe } = await readRecipe(root, recipePath);
   await readPinned(root, recipe.citation.readme);
   const table = await readPinned(root, recipe.table);
-  return { schema: 'cssearth-molecular-catalogue@1', recipe, recipePath,
+  return { schema: MOLECULAR_CATALOGUE_SCHEMA, recipe, recipePath,
     ...parseMolecularTable(table.toString('ascii'), recipe) };
 }

@@ -1,7 +1,8 @@
+import { parseFacilityEmblemLibrary, parseFacilityEmblemImage } from '@cssearth/objects';
 import { contextLineages } from '@cssearth/bake/sources';
 import { spatialSourceCitations } from '@cssearth/bake/sources';
 import { sourceResolver, parseSourceBinding } from '@cssearth/objects/sources';
-import { compileSourceUsage, sourceCredits } from '@cssearth/objects/provenance';
+import { PREPARED_EXPLORATION_SCHEMA, PREPARED_SOURCES_SCHEMA, compileSourceUsage, sourceCredits } from '@cssearth/objects/provenance';
 import type { SourceUse, SourceUsageObject } from '@cssearth/objects/provenance';
 import { parsePreparedSources } from '@cssearth/objects/provenance';
 import { readSourceCatalog } from '@cssearth/bake/sources';
@@ -91,15 +92,18 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   }
   async function artwork(file: string, emblem: boolean) {
     const library = explorationRecord(await json(file));
-    if (library.schema !== (emblem ? 'cssearth-facility-emblems@3' : 'cssearth-facility-render-library@3')) throw new TypeError('Unsupported artwork library.');
-    const entries = explorationArray(library.entries, explorationRecord).map((image, index) => {
+    const records = emblem ? parseFacilityEmblemLibrary(library).entries : (() => {
+      if (library.schema !== 'cssearth-facility-render-library@3') throw new TypeError('Unsupported artwork library.');
+      return explorationArray(library.entries, explorationRecord);
+    })();
+    const entries = records.map((image, index) => {
       const source = explorationRecord(image.source);
       const binding = parseSourceBinding(image.sourceBinding, sources), id = explorationText(image.id);
       inventory.push({ownerPath:file,localId:id,binding,used:true});
       if (binding.kind !== 'catalogued') throw new TypeError('Artwork needs a canonical source.');
       for (const ref of binding.references) metadata.push({catalogueId:sources[ref.catalogueId].id,kind:'artwork',consumerKind:'artwork',consumerId:`${emblem ? 'emblem' : 'render'}/${id}`,
         consumerLabel:`${id} ${emblem ? 'emblem' : 'artwork'}`,ownerPath:file,locator:`/entries/${index}/sourceBinding`,evidence:ref.evidence,datasetIds:[],limitations:[],credit:explorationText(source.credit)});
-      return parseExplorationImage({ id: image.id, src: emblem ? image.src : image.url,
+      return emblem ? parseFacilityEmblemImage(image, source) : parseExplorationImage({ id: image.id, src: image.url,
         width: image.width, height: image.height, bytes: image.bytes,
         kind: emblem ? 'emblem' : source.kind, sourceUrl: emblem ? source.sourceUrl : source.sourcePage, credit: source.credit,
         ...(image.subject === undefined ? {} : { subject: image.subject }) });
@@ -185,10 +189,10 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     }
   }
   metadata.push(...await spatialSourceCitations(root, sources, input));
-  const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,
+  const sourcePayload = {schema:PREPARED_SOURCES_SCHEMA,catalog:sourceCatalog,
     usage:compileSourceUsage(objects,sources,DATASET_ROUTES,metadata),inventory,closure:[...closure].sort()};
   const preparedSources = parsePreparedSources(sourcePayload,DATASET_ROUTES);
-  const payload = { schema: 'cssearth-prepared-exploration@3', catalog, agencies, images, emblems,
+  const payload = { schema: PREPARED_EXPLORATION_SCHEMA, catalog, agencies, images, emblems,
     graph: compileContributions(objects, catalog, DATASET_ROUTES) };
   const prepared = parsePreparedExploration(payload,sources,DATASET_ROUTES);
   const output = { path: resolve(root, 'site/prepared-facilities.json'), text: JSON.stringify(payload, null, 2) + '\n' };
