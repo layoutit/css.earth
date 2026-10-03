@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hat-p-40b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hat-p-40b-orbits",
+      "title": "HAT-P-40 b: orbits around Taika",
+      "output": "hat-p-40b-system-orbits.svg",
+      "system": "hat-p-40",
+      "highlight": "hat-p-40b",
+      "description": "The orbits of Taika's planets in this map from above, to scale, with HAT-P-40 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 4.4572181 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hat-p-40b-transit",
+      "title": "HAT-P-40 b: its transit",
+      "description": "HAT-P-40 b crossing its star, as TESS recorded it: 3 sectors (77, 83, 84) of the SPOC pipeline's 2-minute light curves of TIC 199671901, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 25-minute bins. Error bars are each bin's standard error.",
+      "output": "hat-p-40b-transit.svg",
+      "metadata": {
+        "tic": "TIC 199671901",
+        "sectors": [
+          77,
+          83,
+          84
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hat-p-40b",
+      "sources": [
+        "photometry/tess/tess2024085201119-s0077-0000000199671901-0272-s_lc.fits",
+        "photometry/tess/tess2024249191853-s0083-0000000199671901-0280-s_lc.fits",
+        "photometry/tess/tess2024274222008-s0084-0000000199671901-0281-s_lc.fits"
+      ],
+      "durationHours": 6.1368,
+      "binMinutes": 25,
+      "notes": [
+        "TESS 2-min SPOC · sectors 77, 83, 84",
+        "Folded on the app's orbit; 25-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

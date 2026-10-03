@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alqiladah",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alqiladah",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7597739.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alqiladah-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alqiladah",
+      "classification": "star",
+      "color": "#ffe2c0",
+      "distanceAu": 8983716.1,
+      "description": "A star 44 parsecs away, 11 times the Sun's width, measured from its light.",
+      "systemName": "Alqiladah system",
+      "aliases": [
+        "Omicron Sagittarii",
+        "HD 177241",
+        "HIP 93683",
+        "HR 7217"
+      ],
+      "order": 5474,
+      "context": {
+        "order": 5471
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        347676527930107200,
+        -1198945815331194600,
+        -497832900689872500
+      ],
+      "presentationToReference": [
+        0.2586988293766449,
+        -0.10316568672260149,
+        -0.9604331089473166,
+        -0.8921104935234265,
+        0.3557676546705715,
+        -0.27851075964061034,
+        -0.3704237884161092,
+        -0.9288628623070551,
+        -0.000001484096568066518
+      ],
+      "orbitUpReference": [
+        0.10316568672260149,
+        -0.3557676546705715,
+        0.9288628623070551
+      ],
+      "metersPerUnit": 24508837.741935484,
+      "bodyRadiusM": 7597739700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

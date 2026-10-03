@@ -1,0 +1,35 @@
+{
+  "id": "source-wasp-19b-archive-transmission-rows",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-19 b · wasp 19b archive transmission rows",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+centralwavelng%2Cbandwidth%2Cplntransdep%2Cplntransdeperr1%2Cplntransdeperr2%2Cplntransdeplim%2Cfacility%2Cinstrument%2Cplntranreflink+from+transitspec+where+plntname%3D%27WASP-19+b%27+order+by+centralwavelng&format=csv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-19b/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA Exoplanet Archive, transitspec table",
+      "scope": "The wasp 19b archive transmission rows input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA Exoplanet Archive data use: acknowledge the archive and the papers it cites",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

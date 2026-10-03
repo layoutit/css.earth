@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "arkab-posterior",
+  "card": {
+    "text": "A star 41 parsecs away, 4.1 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 95294: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta2-sagittarii",
+        "url": "https://en.wikipedia.org/wiki/Beta2_Sagittarii",
+        "label": "Wikipedia, \"Beta2 Sagittarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374781471",
+        "quote": "Beta2 Sagittarii is a star in the southern zodiac constellation of Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 29 times the Sun's luminosity at 6,615 K, so 4.106 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 95294: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta2-sagittarii",
+        "url": "https://en.wikipedia.org/wiki/Beta2_Sagittarii",
+        "label": "Wikipedia, \"Beta2 Sagittarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374781471",
+        "quote": "It is visible to the naked eye, having an apparent visual magnitude of +4.29."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "taiyi",
+  "card": {
+    "text": "A star about 29 parsecs away, 1.6 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1677302170674242560: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-8-draconis",
+        "url": "https://en.wikipedia.org/wiki/8_Draconis",
+        "label": "Wikipedia, \"8 Draconis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370772406",
+        "quote": "8 Draconis, formally named Taiyi, is a single star in the northern circumpolar constellation of Draco."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.6 solar radii and 1.48 solar masses (FLAME) and 7,094 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1677302170674242560: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-8-draconis",
+        "url": "https://en.wikipedia.org/wiki/8_Draconis",
+        "label": "Wikipedia, \"8 Draconis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370772406",
+        "quote": "Based upon an annual parallax shift of 33.97 mas as seen from the Earth, the star is located 96 light-years from the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,4 +1,4 @@
-# Xi Geminorum credits
+# Alzirr credits
 
 Radius, mass and temperature: Radius 2.71 +/- 0.021 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 48737: radius in solar radii, from the limb-darkened angular diameter 1.401 +/- 0.009 mas (CHARA) and the Hipparcos parallax, 2.71 +/- 0.021 (https://doi.org/10.1088/0004-637X/746/1/101); Mass 1.706 +/- 0.012 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 48737: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.706 +/- 0.012 (https://doi.org/10.1088/0004-637X/746/1/101); temperature from Boyajian et al. (2012), ApJ 746, 101, HD 48737: effective temperature in K, from the angular diameter and the bolometric flux, 6480 +/- 39.
 

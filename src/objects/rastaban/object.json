@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "rastaban",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Rastaban",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 28025578.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/rastaban-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Rastaban",
+      "classification": "star",
+      "color": "#ffe9cc",
+      "distanceAu": 24040006.3,
+      "description": "A star 117 parsecs away, 40 times the Sun's width, measured from its light.",
+      "systemName": "Rastaban system",
+      "aliases": [
+        "HD 159181",
+        "HIP 85670",
+        "HR 6536",
+        "Beta Draconis"
+      ],
+      "order": 5676,
+      "context": {
+        "order": 5673
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -282941143623528400,
+        -2180904651215322400,
+        2845560689110800400
+      ],
+      "presentationToReference": [
+        -0.07867509955742057,
+        -0.1017951721828081,
+        -0.9916894532210688,
+        -0.6064260869896091,
+        -0.784662585225672,
+        0.12865468652729292,
+        0.791238036072648,
+        -0.6115082748967813,
+        -0.0000021590703589227217
+      ],
+      "orbitUpReference": [
+        0.1017951721828081,
+        0.784662585225672,
+        0.6115082748967813
+      ],
+      "metersPerUnit": 90405092.90322581,
+      "bodyRadiusM": 28025578800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

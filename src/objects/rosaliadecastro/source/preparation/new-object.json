@@ -1,0 +1,53 @@
+{
+  "id": "rosaliadecastro",
+  "name": "Rosalíadecastro",
+  "system": "Rosalíadecastro system",
+  "description": "A star 1.8 solar radii and 1.11 solar masses, about 73 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 4432401099808805888",
+    "HD 149143",
+    "HIP 81022"
+  ],
+  "featured": true,
+  "target": "HD 149143",
+  "gaia": "4432401099808805888",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5745,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 4432401099808805888: teff_gspphot 5744.5547 K (16th-84th percentiles 5742.1235-5750.878), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 4.4
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.00 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 73 parsecs away, 1.8 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 1.8 solar radii and 1.11 solar masses (FLAME) and 5,745 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 4432401099808805888: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_149143",
+      "title": "HD 149143",
+      "revision": "1370777437",
+      "card": "HD 149143, also called Rosalíadecastro, is a star with a close orbiting exoplanet in the Ophiuchus constellation.",
+      "introduction": "Its apparent visual magnitude is 7.89 and the absolute magnitude is 3.87."
+    }
+  },
+  "notes": [],
+  "order": 5679
+}

@@ -4,7 +4,8 @@
     {
       "id": "wasp-52b",
       "name": "WASP-52 b",
-      "description": "Transiting planet of WASP-52 with a 1.75-day year, found in 2012.",
+      "description": "Transiting planet of Anadolu with a 1.75-day year, found in 2012.",
+      "order": 4823,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2013A%26A...549A.134H/abstract",
         "credit": "Hebrard et al. 2013"
@@ -15,10 +16,9 @@
       },
       "text": {
         "card": "WASP-52 b was found in 2012 by SuperWASP as it crossed its star.",
-        "introduction": "It is the only planet known around WASP-52. Its orbit and size follow Hebrard et al. 2013's fit, the archive's default.",
+        "introduction": "It is the only planet known around Anadolu. Its orbit and size follow Hebrard et al. 2013's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HEBRARD_ET_AL__2013): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.74978119, pl_radj 1.27, pl_bmassj 0.46"
-      },
-      "order": 4823
+      }
     }
   ]
 }

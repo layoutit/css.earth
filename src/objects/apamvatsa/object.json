@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "apamvatsa",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Apamvatsa",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 43816577.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/apamvatsa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Apamvatsa",
+      "classification": "star",
+      "color": "#ffcf8b",
+      "distanceAu": 25277587.9,
+      "description": "A star 123 parsecs away, 63 times the Sun's width, measured from its light.",
+      "systemName": "Apamvatsa system",
+      "aliases": [
+        "l Virginis",
+        "HD 117675",
+        "HIP 66006",
+        "HR 5095"
+      ],
+      "order": 5487,
+      "context": {
+        "order": 5484
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3460380444664328700,
+        -1468161081510692600,
+        -412080921590438200
+      ],
+      "presentationToReference": [
+        -0.9150881264362613,
+        0.10031551128293022,
+        -0.3905771614565011,
+        -0.38825117494321365,
+        0.042562239214749976,
+        0.9205701933846439,
+        -0.10897130819893612,
+        -0.9940448953588921,
+        5.846193306507654e-7
+      ],
+      "orbitUpReference": [
+        -0.10031551128293022,
+        -0.042562239214749976,
+        0.9940448953588921
+      ],
+      "metersPerUnit": 141343798.06451613,
+      "bodyRadiusM": 43816577400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

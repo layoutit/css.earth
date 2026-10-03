@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hat-p-42b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.28 Jupiter radii from Boisse et al. 2013 (2013A&A...558A..86B), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2013A%26A...558A..86B/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "1.044 Jupiter masses: Boisse et al. 2013, the mass the NASA Exoplanet Archive's composite table adopts (2013A&A...558A..86B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A%26A...558A..86B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2013A%26A...558A..86B/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 4.64183885 d; Boisse et al. 2013 (2013A&A...558A..86B), via the NASA Exoplanet Archive ps table (pl_refname BOISSE_ET_AL__2013): a/R* 8.08; Boisse et al. 2013 (2013A&A...558A..86B), via the NASA Exoplanet Archive ps table (pl_refname BOISSE_ET_AL__2013): inclination 85.9 degrees; Boisse et al. 2013 (2013A&A...558A..86B), via the NASA Exoplanet Archive ps table (pl_refname BOISSE_ET_AL__2013): e 0; Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2458941.87092 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2013A%26A...558A..86B/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B/abstract"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "alrumh",
+  "card": {
+    "text": "A star 216 parsecs away, 117 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 71995: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-34-bo-tis",
+        "url": "https://en.wikipedia.org/wiki/34_Bo%C3%B6tis",
+        "label": "Wikipedia, \"34 Boötis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374585256",
+        "quote": "34 Boötis, also named Alrumh, is a single variable star in the northern constellation Boötes, located around 700 light years away from the Sun."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 2,193 times the Sun's luminosity at 3,659 K, so 116.702 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 71995: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-34-bo-tis",
+        "url": "https://en.wikipedia.org/wiki/34_Bo%C3%B6tis",
+        "label": "Wikipedia, \"34 Boötis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374585256",
+        "quote": "At that distance, the visual magnitude of the star is diminished by an extinction of 0.49±0.02 due to interstellar dust."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

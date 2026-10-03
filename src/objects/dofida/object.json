@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "dofida",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Dofida",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 858394.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/dofida-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Dofida",
+      "classification": "star",
+      "color": "#fff2ec",
+      "distanceAu": 7770991.5,
+      "description": "A star about 38 parsecs away, 1.2 times the Sun's width, measured by Gaia.",
+      "systemName": "Dofida system",
+      "aliases": [
+        "Gaia DR3 6083860761505899904",
+        "HD 117618",
+        "HIP 66047"
+      ],
+      "order": 5534,
+      "context": {
+        "order": 5531
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -725509296197030300,
+        -309557072361191200,
+        -853974363722522000
+      ],
+      "presentationToReference": [
+        -0.6240856374848677,
+        0.6756510370363111,
+        -0.39244463716155376,
+        -0.26628207777339025,
+        0.28828223721635693,
+        0.9197756284889368,
+        -0.7345821752137691,
+        -0.6785197328429656,
+        -9.582030407696527e-7
+      ],
+      "orbitUpReference": [
+        -0.6756510370363111,
+        -0.28828223721635693,
+        0.6785197328429656
+      ],
+      "metersPerUnit": 2769014.5161290322,
+      "bodyRadiusM": 858394500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

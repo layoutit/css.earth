@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-161",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tislit",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1191038.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-161-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tislit",
+      "classification": "star",
+      "color": "#f6f2ff",
+      "distanceAu": 73461576.8,
+      "description": "WASP-161 b crosses Tislit as seen from Earth, which is how it was found.",
+      "systemName": "Tislit system",
+      "aliases": [
+        "WASP-161"
+      ],
+      "order": 5727,
+      "context": {
+        "order": 5724
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6381137014800158000,
+        8674862039478502000,
+        -2191179035197905200
+      ],
+      "presentationToReference": [
+        -0.5806473040385319,
+        0.11814451200480468,
+        0.8055374495303934,
+        0.7893632818801221,
+        -0.16061192924368128,
+        0.592544865309004,
+        -0.19938484779999602,
+        -0.9799212634022028,
+        5.602046712545766e-8
+      ],
+      "orbitUpReference": [
+        -0.11814451200480468,
+        0.16061192924368128,
+        0.9799212634022028
+      ],
+      "metersPerUnit": 3842059.35483871,
+      "bodyRadiusM": 1191038400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

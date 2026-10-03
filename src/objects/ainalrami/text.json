@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ainalrami",
+  "card": {
+    "text": "A star 345 parsecs away, 80 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 92761: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-nu1-sagittarii",
+        "url": "https://en.wikipedia.org/wiki/Nu1_Sagittarii",
+        "label": "Wikipedia, \"Nu1 Sagittarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1358417958",
+        "quote": "Nu1 Sagittarii (ν1 Sagittarii, abbreviated Nu1 Sgr, ν1 Sgr) is a triple star system about 1,100 light-years from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 2,010 times the Sun's luminosity at 4,314 K, so 80.369 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 92761: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-nu1-sagittarii",
+        "url": "https://en.wikipedia.org/wiki/Nu1_Sagittarii",
+        "label": "Wikipedia, \"Nu1 Sagittarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1358417958",
+        "quote": "The two resolved components are designated Nu1 Sagittarii A (officially named Ainalrami, the traditional name for the system), and B. Component A is itself a spectroscopic binary."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

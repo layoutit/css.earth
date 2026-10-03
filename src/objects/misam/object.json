@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "misam",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Misam",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 6269648.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/misam-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Misam",
+      "classification": "star",
+      "color": "#ffedcf",
+      "distanceAu": 7129815.5,
+      "description": "A star 35 parsecs away, 9.0 times the Sun's width, measured from its light.",
+      "systemName": "Misam system",
+      "aliases": [
+        "HD 19476",
+        "HIP 14668",
+        "HR 941",
+        "Kappa Persei"
+      ],
+      "order": 5621,
+      "context": {
+        "order": 5618
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        512013920598264600,
+        556341368541443400,
+        752311576077291500
+      ],
+      "presentationToReference": [
+        0.4800372831783094,
+        0.47765071885616833,
+        0.7358083972984905,
+        0.5215963636467311,
+        0.5189905885486109,
+        -0.6771897831689973,
+        0.705337819905678,
+        -0.7088713280801757,
+        0.000006045926637566153
+      ],
+      "orbitUpReference": [
+        -0.47765071885616833,
+        -0.5189905885486109,
+        0.7088713280801757
+      ],
+      "metersPerUnit": 20224672.258064516,
+      "bodyRadiusM": 6269648400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

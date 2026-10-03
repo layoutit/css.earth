@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "alruba",
+  "card": {
+    "text": "A star 165 parsecs away, 4.6 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 86782: D, Teff, L, Rad, Q"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 113 times the Sun's luminosity at 8,767 K, so 4.623 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 86782: D, Teff, L, Rad, Q"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

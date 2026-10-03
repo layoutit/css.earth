@@ -4,7 +4,8 @@
     {
       "id": "hat-p-3b",
       "name": "HAT-P-3 b",
-      "description": "Transiting planet of HAT-P-3 with a 2.9-day year, found in 2007.",
+      "description": "Transiting planet of Dombay with a 2.9-day year, found in 2007.",
+      "order": 3032,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
         "credit": "Stassun et al. 2017"
@@ -15,7 +16,7 @@
       },
       "text": {
         "card": "HAT-P-3 b was found in 2007 by HATNet as it crossed its star.",
-        "introduction": "It is the only planet known around HAT-P-3. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "introduction": "It is the only planet known around Dombay. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2007, disc_facility HATNet, sy_pnum 1; pl_orbper 2.89973815, pl_radj 0.94, pl_bmassj 0.65",
         "quotes": {
           "url": "https://en.wikipedia.org/wiki/HAT-P-3b",
@@ -33,8 +34,7 @@
         "source": "Todorov et al. 2013, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table)",
         "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...770..102T/abstract",
         "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
-      },
-      "order": 3032
+      }
     }
   ]
 }

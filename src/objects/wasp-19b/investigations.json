@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-19b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.415 Jupiter radii from Cortés-Zuleta et al. 2020 (2020A&A...636A..98C), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "1.154 Jupiter masses: Cortés-Zuleta et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020A&A...636A..98C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): P 0.78883900702 d; Cortés-Zuleta et al. 2020 (2020A&A...636A..98C), via the NASA Exoplanet Archive ps table (pl_refname CORT_EACUTE_S_ZULETA_ET_AL__2020): a/R* 3.533; Cortés-Zuleta et al. 2020 (2020A&A...636A..98C), via the NASA Exoplanet Archive ps table (pl_refname CORT_EACUTE_S_ZULETA_ET_AL__2020): inclination 79.08 degrees; Cortés-Zuleta et al. 2020 (2020A&A...636A..98C), via the NASA Exoplanet Archive ps table (pl_refname CORT_EACUTE_S_ZULETA_ET_AL__2020): e 0.0126; Cortés-Zuleta et al. 2020 (2020A&A...636A..98C), via the NASA Exoplanet Archive ps table (pl_refname CORT_EACUTE_S_ZULETA_ET_AL__2020): omega 51 degrees; Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): transit mid-time 2456402.71307265 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2025ApJ...993...78S/abstract"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A black body at the 2,346 K dayside brightness temperature measured in secondary eclipse at 3.6 µm (Anderson et al. 2013, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)): #ff9d3d. Chosen from the archive's emission rows by rule: 8 measured of 9 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2013MNRAS.430.3422A/abstract"
+      ]
+    }
+  ]
+}

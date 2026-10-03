@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gakyid",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Gakyid",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1935130.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gakyid-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Gakyid",
+      "classification": "star",
+      "color": "#ffe4cb",
+      "distanceAu": 17249681.4,
+      "description": "A star about 84 parsecs away, 2.8 times the Sun's width, measured by Gaia.",
+      "systemName": "Gakyid system",
+      "aliases": [
+        "Gaia DR3 603083781399095936",
+        "HD 73534",
+        "HIP 42446"
+      ],
+      "order": 5548,
+      "context": {
+        "order": 5545
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1610243336570494500,
+        1931647015639025700,
+        578720122051719000
+      ],
+      "presentationToReference": [
+        -0.6239999234791191,
+        -0.14360350814166334,
+        0.7681159599614248,
+        0.7485499629709127,
+        0.17226456654071484,
+        0.6403107620919589,
+        0.2242700346330272,
+        -0.97452703993473,
+        -0.0000013243623655654308
+      ],
+      "orbitUpReference": [
+        0.14360350814166334,
+        -0.17226456654071484,
+        0.97452703993473
+      ],
+      "metersPerUnit": 6242356.774193549,
+      "bodyRadiusM": 1935130600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

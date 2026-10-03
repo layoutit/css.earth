@@ -1,11 +1,13 @@
 {
   "id": "iota-piscium",
-  "name": "Iota Piscium",
-  "system": "Iota Piscium system",
+  "name": "Puwuh Atarung",
+  "system": "Puwuh Atarung system",
   "description": "A naked-eye star 13.7 parsecs away, 1.6 times the Sun's width: its disc was measured with the CHARA Array.",
   "aliases": [
-    "HD 222368"
+    "HD 222368",
+    "Iota Piscium"
   ],
+  "order": 5364,
   "target": "HD 222368",
   "paper": {
     "url": "https://doi.org/10.1088/0004-637X/746/1/101",
@@ -42,6 +44,5 @@
     "introduction": "Its disc spans 1.082 milliarcseconds, which gives 1.595 solar radii and 6,288 K at its surface.",
     "locator": "Tables 5 and 10, HD 222368: limb-darkened diameter, R, Teff"
   },
-  "notes": [],
-  "order": 5364
+  "notes": []
 }

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "rasalas",
+  "card": {
+    "text": "A star 38 parsecs away, 12 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 48455: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-mu-leonis",
+        "url": "https://en.wikipedia.org/wiki/Mu_Leonis",
+        "label": "Wikipedia, \"Mu Leonis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374937493",
+        "quote": "Mu Leonis, also named Rasalas, is a star in the equatorial-northern constellation of Leo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 51 times the Sun's luminosity at 4,504 K, so 11.79 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 48455: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-mu-leonis",
+        "url": "https://en.wikipedia.org/wiki/Mu_Leonis",
+        "label": "Wikipedia, \"Mu Leonis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374937493",
+        "quote": "The apparent visual magnitude of this star is 3.88, which is bright enough to be seen with the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

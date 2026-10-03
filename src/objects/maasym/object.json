@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "maasym",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Maasym",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 24729352.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/maasym-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Maasym",
+      "classification": "star",
+      "color": "#ffca93",
+      "distanceAu": 23359429.3,
+      "description": "A star 113 parsecs away, 36 times the Sun's width, measured from its light.",
+      "systemName": "Maasym system",
+      "aliases": [
+        "HD 158899",
+        "HIP 85693",
+        "HR 6526",
+        "Lambda Herculis"
+      ],
+      "order": 5604,
+      "context": {
+        "order": 5601
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -399541225794843650,
+        -3112346838495321600,
+        1537966229650637000
+      ],
+      "presentationToReference": [
+        -0.11433366800417857,
+        -0.056038480406497275,
+        -0.9918606258312913,
+        -0.8906365780833027,
+        -0.4365248983216064,
+        0.12732831156257526,
+        0.44010714393290107,
+        -0.8979452666276725,
+        4.276299705831159e-7
+      ],
+      "orbitUpReference": [
+        0.056038480406497275,
+        0.4365248983216064,
+        0.8979452666276725
+      ],
+      "metersPerUnit": 79772103.87096775,
+      "bodyRadiusM": 24729352200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

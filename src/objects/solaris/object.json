@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "solaris",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Solaris",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 603867.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/solaris-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Solaris",
+      "classification": "star",
+      "color": "#ffdbc4",
+      "distanceAu": 10260130.3,
+      "description": "A star 50 parsecs away, 87% of the Sun's width, measured from its light.",
+      "systemName": "Solaris system",
+      "aliases": [
+        "HIP 104780",
+        "BD+14 4559"
+      ],
+      "order": 5698,
+      "context": {
+        "order": 5695
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1110304845485727900,
+        -985714110249848300,
+        389216322637006400
+      ],
+      "presentationToReference": [
+        0.7233757487744366,
+        0.18962871248576563,
+        -0.6639039670660314,
+        -0.642203522283547,
+        -0.16835413111069125,
+        -0.7478178404561968,
+        0.253578709775937,
+        -0.9673147563947089,
+        0.0000030685670132469
+      ],
+      "orbitUpReference": [
+        -0.18962871248576563,
+        0.16835413111069125,
+        0.9673147563947089
+      ],
+      "metersPerUnit": 1947960,
+      "bodyRadiusM": 603867600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

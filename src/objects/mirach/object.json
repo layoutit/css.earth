@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "mirach",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Mirach",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 60157874.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/mirach-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Mirach",
+      "classification": "star",
+      "color": "#ffc983",
+      "distanceAu": 12485828,
+      "description": "A star 61 parsecs away, 86 times the Sun's width, measured from its light.",
+      "systemName": "Mirach system",
+      "aliases": [
+        "HD 6860",
+        "HIP 5447",
+        "HR 337",
+        "Beta Andromedae"
+      ],
+      "order": 5620,
+      "context": {
+        "order": 5617
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1448623502957518800,
+        454932215060691200,
+        1087843047959749400
+      ],
+      "presentationToReference": [
+        0.7755445614561661,
+        0.5556684074566601,
+        0.29960516375780677,
+        0.24355548914731448,
+        0.1744820281945983,
+        -0.9540632817288968,
+        0.5824185410012078,
+        -0.8128890716399615,
+        0.000017502743653959853
+      ],
+      "orbitUpReference": [
+        -0.5556684074566601,
+        -0.1744820281945983,
+        0.8128890716399615
+      ],
+      "metersPerUnit": 194057660.32258064,
+      "bodyRadiusM": 60157874700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

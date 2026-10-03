@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "HD 149026",
+      "label": "Ogma",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,12 +94,15 @@
       }
     },
     "catalog": {
-      "name": "HD 149026",
+      "name": "Ogma",
       "classification": "star",
       "color": "#fff7fe",
       "distanceAu": 15720989.9,
       "description": "HD 149026 b crosses HD 149026 as seen from Earth, which is how it was found.",
-      "systemName": "HD 149026 system",
+      "systemName": "Ogma system",
+      "aliases": [
+        "HD 149026"
+      ],
       "order": 3164,
       "context": {
         "order": 3161

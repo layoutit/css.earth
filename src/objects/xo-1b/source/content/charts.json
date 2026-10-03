@@ -5,11 +5,11 @@
     {
       "kind": "system-orbits",
       "id": "xo-1b-orbits",
-      "title": "XO-1 b: orbits around XO-1",
+      "title": "XO-1 b: orbits around Moldoveanu",
       "output": "xo-1b-system-orbits.svg",
       "system": "xo-1",
       "highlight": "xo-1b",
-      "description": "The orbits of XO-1's planets in this map from above, to scale, with XO-1 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "description": "The orbits of Moldoveanu's planets in this map from above, to scale, with XO-1 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
         "orbitSource": "Kokori et al. 2022 (2022ApJS..258...40K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2022): P 3.941505 d"
       }

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "yildun",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Yildun",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2084023.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/yildun-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Yildun",
+      "classification": "star",
+      "color": "#d7e0ff",
+      "distanceAu": 11535907.1,
+      "description": "A star about 56 parsecs away, 3.0 times the Sun's width, measured by Gaia.",
+      "systemName": "Yildun system",
+      "aliases": [
+        "Gaia DR3 1724851173788449536",
+        "HR 6789",
+        "Delta Ursae Minoris",
+        "HIP 85822",
+        "HD 166205"
+      ],
+      "order": 5753,
+      "context": {
+        "order": 5750
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -12422586786083672,
+        -101989110595097800,
+        1722686009455430000
+      ],
+      "presentationToReference": [
+        -0.007198719324603061,
+        -0.12070360922274062,
+        -0.9926624890468512,
+        -0.05910129600898906,
+        -0.9909015359615785,
+        0.1209180831763491,
+        0.9982260341476492,
+        -0.05953809494423333,
+        5.177023210648304e-7
+      ],
+      "orbitUpReference": [
+        0.12070360922274062,
+        0.9909015359615785,
+        0.05953809494423333
+      ],
+      "metersPerUnit": 6722657.419354838,
+      "bodyRadiusM": 2084023800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,30 @@
+{
+ "id": "hat-p-5",
+ "classification": "star",
+ "order": 5517,
+ "physical": {
+  "name": "Chasoň",
+  "horizonsCode": null,
+  "meanRadiusKm": 779184,
+  "gravitationalParameterKm3PerS2": 138020937643.61694,
+  "parent": null,
+  "effectiveTemperatureK": 5960
+ },
+ "physicalNotes": "Radius 1.12 +/- 0.09 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of HAT-P-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract): 779,184 km at 695,700 km per solar radius. Mass 1.04 +/- 0.29 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of HAT-P-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); GM is that mass times the JPL solar GM. Temperature 5960 +/- 100 K from Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 274.4055355848893,
+  "declinationDegrees": 36.621462460816105,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 310.7092911723319,
+  "properMotionRaMasPerYear": 11.924523189663736,
+  "properMotionDecMasPerYear": 5.903584605421854,
+  "radialVelocityKmPerS": 8.56191,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4606030169272920320 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hat-p-5/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 3.2184 +/- 0.0105 mas (same row, RUWE 0.91): 310.71 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 11.925, 5.904 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 8.56 +/- 1.11 km/s"
+  }
+ }
+}

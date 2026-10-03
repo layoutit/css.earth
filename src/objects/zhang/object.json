@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "zhang",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Zhang",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 10667168.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/zhang-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Zhang",
+      "classification": "star",
+      "color": "#ffead2",
+      "distanceAu": 16688029.2,
+      "description": "A star 81 parsecs away, 15 times the Sun's width, measured from its light.",
+      "systemName": "Zhang system",
+      "aliases": [
+        "Upsilon1 Hydrae",
+        "HD 85444",
+        "HIP 48356",
+        "HR 3903"
+      ],
+      "order": 5757,
+      "context": {
+        "order": 5754
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2043549788243727000,
+        1283426742331467500,
+        -639687813333467900
+      ],
+      "presentationToReference": [
+        -0.8185679966066851,
+        0.21698964237910207,
+        0.5318476567885839,
+        0.5140917355209633,
+        -0.13627772195245724,
+        0.8468400498137134,
+        -0.2562345066542792,
+        -0.9666146479335176,
+        -4.120565137794653e-17
+      ],
+      "orbitUpReference": [
+        -0.21698964237910207,
+        0.13627772195245724,
+        0.9666146479335176
+      ],
+      "metersPerUnit": 34410219.67741936,
+      "bodyRadiusM": 10667168100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

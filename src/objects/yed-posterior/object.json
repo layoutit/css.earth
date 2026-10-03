@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "yed-posterior",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Yed Posterior",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 6970218.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/yed-posterior-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Yed Posterior",
+      "classification": "star",
+      "color": "#ffe5c3",
+      "distanceAu": 6731843.5,
+      "description": "A star 33 parsecs away, 10 times the Sun's width, measured from its light.",
+      "systemName": "Yed Posterior system",
+      "aliases": [
+        "HD 146791",
+        "HIP 79882",
+        "HR 6075",
+        "Epsilon Ophiuchi"
+      ],
+      "order": 5751,
+      "context": {
+        "order": 5748
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -430820380187858800,
+        -906529639352272500,
+        -82381326188393780
+      ],
+      "presentationToReference": [
+        -0.4277960245427811,
+        0.03511391814855736,
+        -0.9031929883129347,
+        -0.900165808490196,
+        0.0738856641234745,
+        0.4292346978777756,
+        -0.08180512582096768,
+        -0.9966483438953228,
+        -3.5513672912334466e-7
+      ],
+      "orbitUpReference": [
+        -0.03511391814855736,
+        -0.0738856641234745,
+        0.9966483438953228
+      ],
+      "metersPerUnit": 22484575.16129032,
+      "bodyRadiusM": 6970218300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

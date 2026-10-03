@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "adhil",
+  "card": {
+    "text": "A star about 68 parsecs away, 12 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 398030875774246656: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-xi-andromedae",
+        "url": "https://en.wikipedia.org/wiki/Xi_Andromedae",
+        "label": "Wikipedia, \"Xi Andromedae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1348643124",
+        "quote": "Xi Andromedae is a solitary star in the northern constellation of Andromeda."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 11.9 solar radii and 2.70 solar masses (FLAME) and 4,666 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 398030875774246656: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-xi-andromedae",
+        "url": "https://en.wikipedia.org/wiki/Xi_Andromedae",
+        "label": "Wikipedia, \"Xi Andromedae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1348643124",
+        "quote": "It has the proper name Adhil ; the Bayer designation is Latinized from ξ Andromedae, abbreviated Xi And or ξ And, respectively."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,4 +1,4 @@
-# HAT-P-2 credits
+# Hunor credits
 
 Radius, mass and temperature: Radius 1.39 +/- 0.09 solar radii from Ment et al. 2018, the stellar radius of the default parameter set of HAT-P-2 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract); Mass 1.33 +/- 0.03 solar masses from Ment et al. 2018, the stellar mass of the default parameter set of HAT-P-2 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract); temperature from Ment et al. 2018, the stellar temperature of the default parameter set of HAT-P-2 b in the NASA Exoplanet Archive.
 

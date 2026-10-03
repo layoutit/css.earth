@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "elgafar",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Elgafar",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2952026.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/elgafar-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Elgafar",
+      "classification": "star",
+      "color": "#ffede0",
+      "distanceAu": 7673741.2,
+      "description": "A star about 37 parsecs away, 4.2 times the Sun's width, measured by Gaia.",
+      "systemName": "Elgafar system",
+      "aliases": [
+        "Gaia DR3 3649422995468596480",
+        "HR 5409",
+        "Phi Virginis",
+        "HIP 70755",
+        "HD 126868"
+      ],
+      "order": 5537,
+      "context": {
+        "order": 5534
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -915523446653680900,
+        -691138563693493000,
+        -44628501663254810
+      ],
+      "presentationToReference": [
+        -0.7975114227818252,
+        0.031027072537460045,
+        -0.6025054782342347,
+        -0.6020500089705967,
+        0.023423022880195873,
+        0.7981147465732344,
+        -0.038875663737268126,
+        -0.9992440556585308,
+        2.790035270844038e-7
+      ],
+      "orbitUpReference": [
+        -0.031027072537460045,
+        -0.023423022880195873,
+        0.9992440556585308
+      ],
+      "metersPerUnit": 9522667.41935484,
+      "bodyRadiusM": 2952026900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

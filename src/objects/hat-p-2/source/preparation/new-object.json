@@ -1,8 +1,12 @@
 {
   "id": "hat-p-2",
-  "name": "HAT-P-2",
-  "system": "HAT-P-2 system",
+  "name": "Hunor",
+  "system": "Hunor system",
   "description": "Star of 6,380 K, 128 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "HAT-P-2"
+  ],
+  "order": 3120,
   "target": "HAT-P-2",
   "gaia": "1380825667768742144",
   "paper": {
@@ -29,7 +33,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "HAT-P-2 b crosses HAT-P-2 as seen from Earth, which is how it was found.",
+    "card": "HAT-P-2 b crosses Hunor as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Ment et al. 2018.",
     "locator": "NASA Exoplanet Archive ps table (st_refname MENT_ET_AL__2018): st_teff 6380, st_rad 1.39, st_mass 1.33",
     "quotes": {
@@ -42,6 +46,5 @@
   },
   "notes": [
     "HAT-P-2 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
-  ],
-  "order": 3120
+  ]
 }

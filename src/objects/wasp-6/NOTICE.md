@@ -1,4 +1,4 @@
-# WASP-6 credits
+# Márohu credits
 
 Radius, mass and temperature: Radius 0.79 +/- 0.008 solar radii from McGruder et al. 2023, the stellar radius of the default parameter set of WASP-6 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract); Mass 0.854 +/- 0.027 solar masses from McGruder et al. 2023, the stellar mass of the default parameter set of WASP-6 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract); temperature from McGruder et al. 2023, the stellar temperature of the default parameter set of WASP-6 b in the NASA Exoplanet Archive.
 

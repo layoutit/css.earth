@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tonglingxing",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tonglingxing",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 11119373.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tonglingxing-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tonglingxing",
+      "classification": "star",
+      "color": "#ffd09f",
+      "distanceAu": 11620480.5,
+      "description": "A star 56 parsecs away, 16 times the Sun's width, measured from its light.",
+      "systemName": "Tonglingxing system",
+      "aliases": [
+        "HD 49878",
+        "HIP 33694",
+        "HR 2527"
+      ],
+      "order": 5733,
+      "context": {
+        "order": 5730
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -101512942618324200,
+        378343749452821250,
+        1693689074079156000
+      ],
+      "presentationToReference": [
+        -0.05839432120459948,
+        -0.25246240724744146,
+        0.9658430701609249,
+        0.2176385183702454,
+        0.9410028222662271,
+        0.25912769788002216,
+        0.974281057278986,
+        -0.22533624079100703,
+        0.000003676800330041961
+      ],
+      "orbitUpReference": [
+        0.25246240724744146,
+        -0.9410028222662271,
+        0.22533624079100703
+      ],
+      "metersPerUnit": 35868945.48387097,
+      "bodyRadiusM": 11119373100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

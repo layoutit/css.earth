@@ -1,0 +1,55 @@
+{
+  "id": "arxiv-0901-0934",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Famaey et al. (2009): Spectroscopic binaries among Hipparcos M giants I. Data, orbits, and intrinsic variations",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0901.0934"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/200810698"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2009A&A...498..627F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...498..627F",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/200810698",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...498..627F",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Famaey et al. (2009)",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2009A&A...498..627F"
+    }
+  ],
+  "creators": [
+    "B. Famaey",
+    "D. Pourbaix",
+    "A. Frankowski",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}

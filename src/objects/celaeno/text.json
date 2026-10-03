@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "celaeno",
+  "card": {
+    "text": "A star about 140 parsecs away, 3.4 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 65287458566524928: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-celaeno-star",
+        "url": "https://en.wikipedia.org/wiki/Celaeno_(star)",
+        "label": "Wikipedia, \"Celaeno (star)\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370774198",
+        "quote": "Celaeno, designated 16 Tauri, is a star in the constellation of Taurus and a member of the Pleiades open star cluster (M45) of stars."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 3.4 solar radii and 3.36 solar masses (FLAME) and 11,577 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 65287458566524928: radius_flame, mass_flame, teff_gspphot"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

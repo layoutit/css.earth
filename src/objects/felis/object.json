@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "felis",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Felis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 47771631.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/felis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Felis",
+      "classification": "star",
+      "color": "#ffc88b",
+      "distanceAu": 38844734.2,
+      "description": "A star 188 parsecs away, 69 times the Sun's width, measured from its light.",
+      "systemName": "Felis system",
+      "aliases": [
+        "HD 85951",
+        "HIP 48615",
+        "HR 3923"
+      ],
+      "order": 5542,
+      "context": {
+        "order": 5539
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4695400937675946000,
+        2852922392584252000,
+        -1892829975458632000
+      ],
+      "presentationToReference": [
+        -0.8080075695929907,
+        0.278369897688003,
+        0.5192629079200625,
+        0.4909448456602094,
+        -0.16913641258421347,
+        0.8546145519810765,
+        -0.3257252308312969,
+        -0.9454644752709186,
+        7.647950372780324e-7
+      ],
+      "orbitUpReference": [
+        -0.278369897688003,
+        0.16913641258421347,
+        0.9454644752709186
+      ],
+      "metersPerUnit": 154102038.38709676,
+      "bodyRadiusM": 47771631900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

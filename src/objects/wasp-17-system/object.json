@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-17-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-17",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Dìwö system",
+      "systemName": "Dìwö system",
+      "classification": "planetary-system",
+      "color": "#f8f3ff",
+      "distanceAu": 83135104.6,
+      "description": "WASP-17 b crosses Dìwö as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5493649434632843000,
+        -9500806262329338000,
+        -5850585609284585000
+      ],
+      "presentationToReference": [
+        -0.4417242027044838,
+        0.23548018258854922,
+        -0.8656955656309854,
+        -0.763924986698554,
+        0.40724369491841894,
+        0.5005708617636547,
+        -0.470423578748666,
+        -0.8824407382692944,
+        2.0109253612226764e-7
+      ],
+      "orbitUpReference": [
+        -0.23548018258854922,
+        -0.40724369491841894,
+        0.8824407382692944
+      ],
+      "metersPerUnit": 3343848.3870967743,
+      "bodyRadiusM": 1036593000
+    }
+  }
+}

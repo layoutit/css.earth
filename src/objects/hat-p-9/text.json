@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-9",
+  "card": {
+    "text": "HAT-P-9 b crosses Tevel as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaf6b6",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+        "label": "Wang et al. (2019), The Astronomical Journal 157 82",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname WANG_ET_AL__2019): st_teff 6350, st_rad 1.338, st_mass 1.281"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-9",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-9",
+        "label": "Wikipedia, \"HAT-P-9\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370776780",
+        "quote": "HAT-P-9 is a magnitude 12 F-type star approximately 1500 light-years away in the constellation Auriga."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Wang et al. 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaf6b6",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+        "label": "Wang et al. (2019), The Astronomical Journal 157 82",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname WANG_ET_AL__2019): st_teff 6350, st_rad 1.338, st_mass 1.281"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-9",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-9",
+        "label": "Wikipedia, \"HAT-P-9\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370776780",
+        "quote": "A search for a binary companion star using adaptive optics at the MMT Observatory was negative."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

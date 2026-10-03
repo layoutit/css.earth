@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "maasym",
+  "card": {
+    "text": "A star 113 parsecs away, 36 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 85693: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-lambda-herculis",
+        "url": "https://en.wikipedia.org/wiki/Lambda_Herculis",
+        "label": "Wikipedia, \"Lambda Herculis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370781642",
+        "quote": "Lambda Herculis, formally named Maasym, is a star in the constellation of Hercules."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 353 times the Sun's luminosity at 4,199 K, so 35.546 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 85693: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-lambda-herculis",
+        "url": "https://en.wikipedia.org/wiki/Lambda_Herculis",
+        "label": "Wikipedia, \"Lambda Herculis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370781642",
+        "quote": "From parallax measurements taken during the Gaia mission, it is approximately 393 light-years from the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

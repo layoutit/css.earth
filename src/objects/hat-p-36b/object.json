@@ -1,0 +1,138 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-36b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HAT-P-36 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 91295.3
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HAT-P-36 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 60567320.6,
+      "description": "HAT-P-36 b was found in 2011 by HATNet as it crossed its star.",
+      "systemName": "Tuiren system",
+      "order": 5736,
+      "context": {
+        "order": 5736
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6349705880445700000,
+        -922491475343795300,
+        6397444311229543000
+      ],
+      "presentationToReference": [
+        -0.6927153571652797,
+        -0.1786808711454242,
+        0.6987263986955778,
+        -0.15123461940462274,
+        0.9832717562719946,
+        0.10151228108621299,
+        0.7051762360154502,
+        0.03535250492539009,
+        0.7081501793790512
+      ],
+      "orbitUpReference": [
+        0.1786808711454242,
+        -0.9832717562719946,
+        -0.03535250492539009
+      ],
+      "metersPerUnit": 294500.96774193546,
+      "bodyRadiusM": 91295300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

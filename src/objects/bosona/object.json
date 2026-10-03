@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "bosona",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Bosona",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3297862.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/bosona-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Bosona",
+      "classification": "star",
+      "color": "#ffe3c8",
+      "distanceAu": 30495609.5,
+      "description": "A star about 150 parsecs away, 4.7 times the Sun's width, measured by Gaia.",
+      "systemName": "Bosona system",
+      "aliases": [
+        "Gaia DR3 2667434008056899712",
+        "HD 206610",
+        "HIP 107251"
+      ],
+      "order": 5507,
+      "context": {
+        "order": 5504
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3744094540186517000,
+        -2539351088919503000,
+        -588226187190938600
+      ],
+      "presentationToReference": [
+        0.8206993157798085,
+        -0.10671031645335971,
+        -0.5613069939355632,
+        -0.5566215486367291,
+        0.07237398036744937,
+        -0.827607671882651,
+        -0.12893829792503045,
+        -0.9916526182732519,
+        -1.4568042467242624e-8
+      ],
+      "orbitUpReference": [
+        0.10671031645335971,
+        -0.07237398036744937,
+        0.9916526182732519
+      ],
+      "metersPerUnit": 10638266.774193548,
+      "bodyRadiusM": 3297862700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

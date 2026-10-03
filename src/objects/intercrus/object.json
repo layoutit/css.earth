@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "intercrus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Intercrus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7192557.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/intercrus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Intercrus",
+      "classification": "star",
+      "color": "#ffe6d1",
+      "distanceAu": 17456113.7,
+      "description": "A star about 85 parsecs away, 10 times the Sun's width, measured by Gaia.",
+      "systemName": "Intercrus system",
+      "aliases": [
+        "Gaia DR3 818464227945910016",
+        "HR 3743",
+        "41 Lyncis",
+        "HIP 46471",
+        "HD 81688"
+      ],
+      "order": 5572,
+      "context": {
+        "order": 5569
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1443023878007305500,
+        1120674277519246200,
+        1865788797652437800
+      ],
+      "presentationToReference": [
+        -0.5525830721170124,
+        -0.5642973394276589,
+        0.6133681285529842,
+        0.4291444130320918,
+        0.4382414105125188,
+        0.7897971504603821,
+        0.7144837445128238,
+        -0.6996520412511232,
+        -2.6555435331853797e-7
+      ],
+      "orbitUpReference": [
+        0.5642973394276589,
+        -0.4382414105125188,
+        0.6996520412511232
+      ],
+      "metersPerUnit": 23201797.096774194,
+      "bodyRadiusM": 7192557100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

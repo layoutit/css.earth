@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "xo-5",
+  "card": {
+    "text": "XO-5 b crosses Absolutno as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1412-0451",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract",
+        "label": "Smith (2015), Acta Astron., 65, 117 (2015)",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SMITH_2015): st_teff 5430, st_rad 1.13, st_mass 1.04"
+      },
+      {
+        "catalogueId": "wikipedia-xo-5",
+        "url": "https://en.wikipedia.org/wiki/XO-5",
+        "label": "Wikipedia, \"XO-5\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374514051",
+        "quote": "XO-5, formally named Absolutno, is a likely binary star system, made up of a G-type dwarf and a red dwarf companion, located approximately 893 light-years away from Earth in the Lynx constellation."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Smith 2015.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1412-0451",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract",
+        "label": "Smith (2015), Acta Astron., 65, 117 (2015)",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SMITH_2015): st_teff 5430, st_rad 1.13, st_mass 1.04"
+      },
+      {
+        "catalogueId": "wikipedia-xo-5",
+        "url": "https://en.wikipedia.org/wiki/XO-5",
+        "label": "Wikipedia, \"XO-5\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374514051",
+        "quote": "It has a magnitude of about 12 and cannot be seen with the naked eye but is visible through a small telescope."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

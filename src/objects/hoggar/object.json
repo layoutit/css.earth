@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hoggar",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Hoggar",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 4289604.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hoggar-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Hoggar",
+      "classification": "star",
+      "color": "#ffebdc",
+      "distanceAu": 38426552.3,
+      "description": "A star about 190 parsecs away, 6.2 times the Sun's width, measured by Gaia.",
+      "systemName": "Hoggar system",
+      "aliases": [
+        "Gaia DR3 3282351760091020672",
+        "HD 28678",
+        "HIP 21109"
+      ],
+      "order": 5561,
+      "context": {
+        "order": 5558
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2159915182892112400,
+        5307551451790477000,
+        458547422469759900
+      ],
+      "presentationToReference": [
+        0.37573343779029417,
+        0.030067437160139723,
+        0.9262398895258765,
+        0.923288362906856,
+        0.07388458479064362,
+        -0.3769345660072737,
+        0.07976830603105926,
+        -0.9968134315672794,
+        5.789293160880581e-9
+      ],
+      "orbitUpReference": [
+        -0.030067437160139723,
+        -0.07388458479064362,
+        0.9968134315672794
+      ],
+      "metersPerUnit": 13837432.580645159,
+      "bodyRadiusM": 4289604099.9999995
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

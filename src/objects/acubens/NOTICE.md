@@ -1,0 +1,7 @@
+# Acubens credits
+
+Radius, mass and temperature: Radius 3.655 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 44066: radius 3.655 solar radii, implied by the fitted luminosity 49.134 solar luminosities (fractional uncertainty 0.079) and temperature (https://doi.org/10.1093/mnras/stx1433); No mass is measured, so GM is 0, the records' unpublished value; temperature from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 44066: effective temperature 7999 +/- 243 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.047).
+
+Color: Gaia DR3 XP spectrum, source 604789257076233728, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b). Cross-check: Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 528: HR 3572; VizieR III/202.
+
+Placement: Gaia DR3 source 604789257076233728: position, proper motion and radial velocity; distance: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 44066: distance 57.737 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.056), at which the luminosity and radius hold. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hoerikwaggo",
+  "card": {
+    "text": "A star about 10 parsecs away, the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 5264749303462961280: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-alpha-mensae",
+        "url": "https://en.wikipedia.org/wiki/Alpha_Mensae",
+        "label": "Wikipedia, \"Alpha Mensae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377637464",
+        "quote": "Alpha Mensae, also named Hoerikwaggo, is the brightest star in the constellation Mensa."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.0 solar radii and 0.88 solar masses (FLAME) and 5,496 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 5264749303462961280: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-alpha-mensae",
+        "url": "https://en.wikipedia.org/wiki/Alpha_Mensae",
+        "label": "Wikipedia, \"Alpha Mensae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377637464",
+        "quote": "At a magnitude of 5.09, it is the dimmest lucida in the sky, and the second-faintest star labeled \"alpha\", after Alpha Octantis."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

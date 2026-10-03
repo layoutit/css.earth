@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tianyi",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tianyi",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 50285891.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tianyi-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tianyi",
+      "classification": "star",
+      "color": "#ffc68a",
+      "distanceAu": 50776221.5,
+      "description": "A star 246 parsecs away, 72 times the Sun's width, measured from its light.",
+      "systemName": "Tianyi system",
+      "aliases": [
+        "7 Draconis",
+        "HD 111335",
+        "HIP 62423",
+        "HR 4863"
+      ],
+      "order": 5725,
+      "context": {
+        "order": 5722
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2929313564174430000,
+        -616941834832961500,
+        6981256547779778000
+      ],
+      "presentationToReference": [
+        -0.3856379260783363,
+        -0.8993393115954527,
+        -0.206087827367404,
+        -0.08121908579761367,
+        -0.18940869222750414,
+        0.9785334983590834,
+        0.9190684686530157,
+        -0.39409789383817306,
+        3.4145781329047533e-7
+      ],
+      "orbitUpReference": [
+        0.8993393115954527,
+        0.18940869222750414,
+        0.39409789383817306
+      ],
+      "metersPerUnit": 162212553.87096775,
+      "bodyRadiusM": 50285891700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

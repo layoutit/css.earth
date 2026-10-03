@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lumbung",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Lumbung",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 6126807.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/lumbung-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Lumbung",
+      "classification": "star",
+      "color": "#c1d1ff",
+      "distanceAu": 53376366.9,
+      "description": "A star about 260 parsecs away, 8.8 times the Sun's width, measured by Gaia.",
+      "systemName": "Lumbung system",
+      "aliases": [
+        "Gaia DR3 6059642884074103936",
+        "HR 4823",
+        "39 Crucis",
+        "HIP 61966",
+        "HD 110335"
+      ],
+      "order": 5603,
+      "context": {
+        "order": 5600
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3963049836076187000,
+        -733459500697896800,
+        -6893210553499953000
+      ],
+      "presentationToReference": [
+        -0.49631256961949827,
+        0.8488550960037017,
+        -0.18198587644714875,
+        -0.09185480490084771,
+        0.15710364109102568,
+        0.9833011444987589,
+        -0.8632708312310324,
+        -0.5047409949117353,
+        0.0000010925739559761593
+      ],
+      "orbitUpReference": [
+        -0.8488550960037017,
+        -0.15710364109102568,
+        0.5047409949117353
+      ],
+      "metersPerUnit": 19763894.51612903,
+      "bodyRadiusM": 6126807300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

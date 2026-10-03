@@ -1,0 +1,51 @@
+{
+  "id": "tres-3",
+  "name": "Pipoltr",
+  "system": "Pipoltr system",
+  "description": "Star of 5,650 K, 231 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "TrES-3",
+    "TOI-2126"
+  ],
+  "featured": true,
+  "target": "TrES-3",
+  "gaia": "4609131509318715136",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+    "credit": "Sozzetti et al. 2009"
+  },
+  "radius": {
+    "value": 0.829,
+    "source": "Sozzetti et al. 2009, the stellar radius of the default parameter set of TrES-3 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+    "uncertainty": 0.015
+  },
+  "mass": {
+    "value": 0.928,
+    "source": "Sozzetti et al. 2009, the stellar mass of the default parameter set of TrES-3 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+    "uncertainty": 0.028
+  },
+  "temperature": {
+    "value": 5650,
+    "source": "Sozzetti et al. 2009, the stellar temperature of the default parameter set of TrES-3 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+    "uncertainty": 75
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TrES-3 b crosses Pipoltr as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Sozzetti et al. 2009.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SOZZETTI_ET_AL__2009): st_teff 5650, st_rad 0.829, st_mass 0.928",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TrES-3b",
+      "title": "TrES-3b",
+      "revision": "1374222310",
+      "card": "TrES-3b is an extrasolar planet orbiting the star GSC 03089-00929.",
+      "introduction": "It has an orbital period of just 31 hours and nearly twice the mass of Jupiter."
+    }
+  },
+  "notes": [],
+  "order": 5666
+}

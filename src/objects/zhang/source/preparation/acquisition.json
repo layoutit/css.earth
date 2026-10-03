@@ -1,0 +1,39 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kharitonov-catalog.dat",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled.csv",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=5687035813759862272&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-source.csv",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "form": {
+        "REQUEST": "doQuery",
+        "LANG": "ADQL",
+        "FORMAT": "csv",
+        "QUERY": "SELECT s.source_id, s.ref_epoch, s.ra, s.dec, s.parallax, s.parallax_error, s.pmra, s.pmdec, s.radial_velocity, s.radial_velocity_error, s.ruwe, s.phot_g_mean_mag, s.bp_rp, s.has_xp_sampled, a.mass_flame, a.mass_flame_lower, a.mass_flame_upper, a.radius_flame, a.radius_flame_lower, a.radius_flame_upper FROM gaiadr3.gaia_source AS s LEFT JOIN gaiadr3.astrophysical_parameters AS a ON a.source_id = s.source_id WHERE s.source_id = 5687035813759862272"
+      },
+      "requiredPrefix": "source_id,"
+    }
+  ]
+}

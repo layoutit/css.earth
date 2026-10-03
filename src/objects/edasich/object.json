@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "edasich",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Edasich",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 8406143.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/edasich-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Edasich",
+      "classification": "star",
+      "color": "#ffdbad",
+      "distanceAu": 6399753.6,
+      "description": "A star 31 parsecs away, 12 times the Sun's width, measured from its light.",
+      "systemName": "Edasich system",
+      "aliases": [
+        "HD 137759",
+        "HIP 75458",
+        "HR 5744",
+        "Iota Draconis"
+      ],
+      "order": 5536,
+      "context": {
+        "order": 5533
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -309059985937762200,
+        -384836790127513500,
+        820351900922608000
+      ],
+      "presentationToReference": [
+        -0.322815784767778,
+        -0.5365367185026741,
+        -0.779691168863125,
+        -0.40196530144751286,
+        -0.6680884785980729,
+        0.6261642605552656,
+        0.8568628043840939,
+        -0.515544502892713,
+        -3.6272236103334244e-7
+      ],
+      "orbitUpReference": [
+        0.5365367185026741,
+        0.6680884785980729,
+        0.515544502892713
+      ],
+      "metersPerUnit": 27116590.64516129,
+      "bodyRadiusM": 8406143100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

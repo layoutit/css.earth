@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "baijiu",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Baijiu",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2084256.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/baijiu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Baijiu",
+      "classification": "star",
+      "color": "#ccd9ff",
+      "distanceAu": 13450907.4,
+      "description": "A star about 65 parsecs away, 3.0 times the Sun's width, measured by Gaia.",
+      "systemName": "Baijiu system",
+      "aliases": [
+        "Gaia DR3 6591574171318785664",
+        "HR 8305",
+        "Iota Piscis Austrini",
+        "HD 206742",
+        "HIP 107380"
+      ],
+      "order": 5500,
+      "context": {
+        "order": 5497
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1402550212730548000,
+        -937615090672708900,
+        -1096717267426814800
+      ],
+      "presentationToReference": [
+        0.6970160856624553,
+        -0.4531002526807133,
+        -0.5557596039192327,
+        -0.46596035880600584,
+        0.30290209865666673,
+        -0.8313430475145415,
+        -0.5450224952689264,
+        -0.8384214212733717,
+        -8.788304156243528e-7
+      ],
+      "orbitUpReference": [
+        0.4531002526807133,
+        -0.30290209865666673,
+        0.8384214212733717
+      ],
+      "metersPerUnit": 6723407.741935484,
+      "bodyRadiusM": 2084256400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

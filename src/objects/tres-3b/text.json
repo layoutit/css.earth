@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tres-3b",
+  "card": {
+    "text": "TrES-3 b was found in 2007 by TrES as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-691-2-1145",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+        "label": "Sozzetti et al. 2009",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SOZZETTI_ET_AL__2009): disc_year 2007, disc_facility TrES, sy_pnum 1; pl_orbper 1.30618626966, pl_radj 1.336, pl_bmassj 1.91"
+      },
+      {
+        "catalogueId": "wikipedia-tres-3b",
+        "url": "https://en.wikipedia.org/wiki/TrES-3b",
+        "label": "Wikipedia, \"TrES-3b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374222310",
+        "quote": "TrES-3b is an extrasolar planet orbiting the star GSC 03089-00929."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Pipoltr. Its orbit and size follow Sozzetti et al. 2009's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-691-2-1145",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+        "label": "Sozzetti et al. 2009",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SOZZETTI_ET_AL__2009): disc_year 2007, disc_facility TrES, sy_pnum 1; pl_orbper 1.30618626966, pl_radj 1.336, pl_bmassj 1.91"
+      },
+      {
+        "catalogueId": "wikipedia-tres-3b",
+        "url": "https://en.wikipedia.org/wiki/TrES-3b",
+        "label": "Wikipedia, \"TrES-3b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374222310",
+        "quote": "It has an orbital period of just 31 hours and nearly twice the mass of Jupiter."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 1,731 K day side measured in eclipse."
+    }
+  }
+}

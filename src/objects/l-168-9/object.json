@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "L 168-9",
+      "label": "Danfeng",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,12 +94,15 @@
       }
     },
     "catalog": {
-      "name": "L 168-9",
+      "name": "Danfeng",
       "classification": "star",
       "color": "#ffbf8b",
       "distanceAu": 5194176.3,
       "description": "L 168-9 b crosses L 168-9 as seen from Earth, which is how it was found.",
-      "systemName": "L 168-9 system",
+      "systemName": "Danfeng system",
+      "aliases": [
+        "L 168-9"
+      ],
       "order": 3797,
       "context": {
         "order": 3794

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hydor",
+  "card": {
+    "text": "A star about 95 parsecs away, 4.2 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2414783622022208128: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-2-ceti",
+        "url": "https://en.wikipedia.org/wiki/2_Ceti",
+        "label": "Wikipedia, \"2 Ceti\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370770854",
+        "quote": "2 Ceti, also named Hydor, is a single star in the equatorial constellation of Cetus, near the border with Aquarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 4.2 solar radii and 3.04 solar masses (FLAME) and 9,823 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2414783622022208128: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-2-ceti",
+        "url": "https://en.wikipedia.org/wiki/2_Ceti",
+        "label": "Wikipedia, \"2 Ceti\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370770854",
+        "quote": "It is visible to the naked eye with an apparent visual magnitude of 4.483."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

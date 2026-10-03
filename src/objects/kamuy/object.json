@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kamuy",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kamuy",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7043501.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kamuy-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kamuy",
+      "classification": "star",
+      "color": "#ffe5cd",
+      "distanceAu": 27923795.3,
+      "description": "A star about 140 parsecs away, 10 times the Sun's width, measured by Gaia.",
+      "systemName": "Kamuy system",
+      "aliases": [
+        "Gaia DR3 1315900158983769472",
+        "HD 145457",
+        "HIP 79219"
+      ],
+      "order": 5580,
+      "context": {
+        "order": 5577
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1721622713473304800,
+        -3309484811763980000,
+        1879759987805832000
+      ],
+      "presentationToReference": [
+        -0.41213409445704563,
+        -0.2076683259332339,
+        -0.8871411131213338,
+        -0.7922476366888652,
+        -0.3992030019316604,
+        0.46149826154565127,
+        0.4499879668913143,
+        -0.8930346183955238,
+        -4.272699015430672e-7
+      ],
+      "orbitUpReference": [
+        0.2076683259332339,
+        0.3992030019316604,
+        0.8930346183955238
+      ],
+      "metersPerUnit": 22720971.93548387,
+      "bodyRadiusM": 7043501300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

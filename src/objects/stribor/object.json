@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "stribor",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Stribor",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1166146.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/stribor-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Stribor",
+      "classification": "star",
+      "color": "#fff2ed",
+      "distanceAu": 16100693.2,
+      "description": "A star about 78 parsecs away, 1.7 times the Sun's width, measured by Gaia.",
+      "systemName": "Stribor system",
+      "aliases": [
+        "Gaia DR3 713135102814770432",
+        "HD 75898",
+        "HIP 43674"
+      ],
+      "order": 5704,
+      "context": {
+        "order": 5701
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1388614637853520600,
+        1465298536086762500,
+        1313828483796291000
+      ],
+      "presentationToReference": [
+        -0.5765159604975852,
+        -0.37520759500026163,
+        0.72584337700751,
+        0.6083530807820916,
+        0.39592314539037426,
+        0.6878600090477207,
+        0.5454684925772381,
+        -0.8381313283718204,
+        -0.0000026839032917896422
+      ],
+      "orbitUpReference": [
+        0.37520759500026163,
+        -0.39592314539037426,
+        0.8381313283718204
+      ],
+      "metersPerUnit": 3761762.2580645164,
+      "bodyRadiusM": 1166146300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

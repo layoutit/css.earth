@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "citala",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Citalá",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 967575.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/citala-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Citalá",
+      "classification": "star",
+      "color": "#fff3f0",
+      "distanceAu": 6171089,
+      "description": "A star about 30 parsecs away, 1.4 times the Sun's width, measured by Gaia.",
+      "systemName": "Citalá system",
+      "aliases": [
+        "Gaia DR3 3101382419728401408",
+        "HD 52265",
+        "HIP 33719"
+      ],
+      "order": 5521,
+      "context": {
+        "order": 5518
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -239040517432782820,
+        887507276799709800,
+        -86342716703817260
+      ],
+      "presentationToReference": [
+        -0.2589310456269898,
+        0.02432538076168859,
+        0.965589451817548,
+        0.961356633818791,
+        -0.09031285663865077,
+        0.26007116437307987,
+        -0.09353147183230245,
+        -0.9956163235787998,
+        5.637624110558915e-7
+      ],
+      "orbitUpReference": [
+        -0.02432538076168859,
+        0.09031285663865077,
+        0.9956163235787998
+      ],
+      "metersPerUnit": 3121210.3225806453,
+      "bodyRadiusM": 967575200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

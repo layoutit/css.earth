@@ -13,7 +13,7 @@
           "catalogueId": "doi-10-3847-1538-3881-ab7821",
           "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H",
           "label": "Hartman et al. 2020",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "doi-10-3847-1538-3881-ab7821",
           "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H",
           "label": "Hartman et al. 2020",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "orbitalPeriodDays; orbitalPeriodSource"
         }
@@ -39,7 +39,7 @@
           "catalogueId": "doi-10-3847-1538-3881-ab7821",
           "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H",
           "label": "Hartman et al. 2020",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "massSource"
         }
@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by HATS-72; the neutral gray is a display convention, not a measured color.",
+        "qualification": "A sphere of the published radius, lit by Zembra; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "hats-72b-dataset-shape.webp",
         "surface": "hats-72b-surface-shape@2x.webp",
         "poles": "hats-72b-poles-shape@2x.webp",
@@ -84,7 +84,7 @@
       "id": "hats-72b-orbits",
       "titleKey": "systemOrbits",
       "src": "/scenes/hats-72b/hats-72b-system-orbits.svg",
-      "alt": "The orbits of HATS-72's planets in this map from above, to scale, with HATS-72 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "alt": "The orbits of Zembra's planets in this map from above, to scale, with HATS-72 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "source": {
         "id": "hats-72b-observational-measurements",
         "path": "../manifest.json",

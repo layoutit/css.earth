@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "dingolay",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5007,
+      "lowerKelvin": 4882,
+      "upperKelvin": 5132,
+      "citation": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 54158: effective temperature 5007 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.028): 5007 +/- 125 K, https://doi.org/10.1093/mnras/stx1433"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: HD 96063 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

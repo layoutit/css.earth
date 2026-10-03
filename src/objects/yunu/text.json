@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "yunu",
+  "card": {
+    "text": "A star 91 parsecs away, 32 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 49637: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-31-leonis",
+        "url": "https://en.wikipedia.org/wiki/31_Leonis",
+        "label": "Wikipedia, \"31 Leonis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1350656718",
+        "quote": "31 Leonis, also named Yunü, is a binary star system in the equatorial constellation of Leo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 261 times the Sun's luminosity at 4,121 K, so 31.71 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 49637: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-31-leonis",
+        "url": "https://en.wikipedia.org/wiki/31_Leonis",
+        "label": "Wikipedia, \"31 Leonis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1350656718",
+        "quote": "The system is visible to the naked eye in unresolved form, having a combined apparent visual magnitude of 4.39."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "nihal",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Nihal",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 10779871.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/nihal-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Nihal",
+      "classification": "star",
+      "color": "#ffecd8",
+      "distanceAu": 10140771,
+      "description": "A star 49 parsecs away, 15 times the Sun's width, measured from its light.",
+      "systemName": "Nihal system",
+      "aliases": [
+        "HD 36079",
+        "HIP 25606",
+        "HR 1829",
+        "Beta Leporis"
+      ],
+      "order": 5647,
+      "context": {
+        "order": 5644
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        195919730697944350,
+        1404946255976641500,
+        -537722042431625660
+      ],
+      "presentationToReference": [
+        0.1291464584886566,
+        -0.04895440678121805,
+        0.9904164065263341,
+        0.92611312133085,
+        -0.351054333138587,
+        -0.1381135101409423,
+        -0.35445123608003953,
+        -0.9350745003695272,
+        1.0539489159075678e-7
+      ],
+      "orbitUpReference": [
+        0.04895440678121805,
+        0.351054333138587,
+        0.9350745003695272
+      ],
+      "metersPerUnit": 34773779.03225806,
+      "bodyRadiusM": 10779871500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

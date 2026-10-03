@@ -1,4 +1,4 @@
-# WASP-50 credits
+# Chaophraya credits
 
 Radius, mass and temperature: Radius 0.843 +/- 0.031 solar radii from Chakrabarty & Sengupta 2019, the stellar radius of the default parameter set of WASP-50 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract); Mass 0.892 +/- 0.08 solar masses from Chakrabarty & Sengupta 2019, the stellar mass of the default parameter set of WASP-50 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract); temperature from Chakrabarty & Sengupta 2019, the stellar temperature of the default parameter set of WASP-50 b in the NASA Exoplanet Archive.
 

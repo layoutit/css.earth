@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "bie",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Bie",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 20018071.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/bie-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Bie",
+      "classification": "star",
+      "color": "#ffe5cd",
+      "distanceAu": 35258904.3,
+      "description": "A star 171 parsecs away, 29 times the Sun's width, measured from its light.",
+      "systemName": "Bie system",
+      "aliases": [
+        "Theta Coronae Australis",
+        "HD 170845",
+        "HIP 90982",
+        "HR 6951"
+      ],
+      "order": 5506,
+      "context": {
+        "order": 5503
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        568189178220279000,
+        -3858909613939335700,
+        -3550772333606208500
+      ],
+      "presentationToReference": [
+        0.10772069877183034,
+        -0.09806011698784683,
+        -0.9893333434755135,
+        -0.7315951377660675,
+        0.6659947589213691,
+        -0.1456692674736718,
+        -0.6731751669908488,
+        -0.7394830589983771,
+        -0.0000011160123060642233
+      ],
+      "orbitUpReference": [
+        0.09806011698784683,
+        -0.6659947589213691,
+        0.7394830589983771
+      ],
+      "metersPerUnit": 64574425.161290325,
+      "bodyRadiusM": 20018071800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

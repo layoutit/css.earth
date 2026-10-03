@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tengshe",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tengshe",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 147306126.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tengshe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tengshe",
+      "classification": "star",
+      "color": "#ffc074",
+      "distanceAu": 101110159.6,
+      "description": "A star 490 parsecs away, 212 times the Sun's width, measured from its light.",
+      "systemName": "Tengshe system",
+      "aliases": [
+        "V424 Lacertae",
+        "HD 216946",
+        "HIP 113288",
+        "HR 8726"
+      ],
+      "order": 5717,
+      "context": {
+        "order": 5714
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        9402855839671933000,
+        -2676997954464980500,
+        11541740053559860000
+      ],
+      "presentationToReference": [
+        0.6216407794018658,
+        0.733883913433422,
+        -0.27381954456956975,
+        -0.1769814536398261,
+        -0.20893709114425169,
+        -0.9617810858047235,
+        0.763046726257426,
+        -0.6463433248265386,
+        -2.5617460028771262e-8
+      ],
+      "orbitUpReference": [
+        -0.733883913433422,
+        0.20893709114425169,
+        0.6463433248265386
+      ],
+      "metersPerUnit": 475181053.5483871,
+      "bodyRadiusM": 147306126600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

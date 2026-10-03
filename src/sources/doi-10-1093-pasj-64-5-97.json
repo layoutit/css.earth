@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-pasj-64-5-97",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sato et al. (2012): HAT-P-38b: A Saturn-Mass Planet Transiting a Late G Star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1201.5075"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/pasj/64.5.97"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2012PASJ...64...97S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012PASJ...64...97S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/pasj/64.5.97",
+      "label": "Publications of the Astronomical Society of Japan 64 97"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012PASJ...64...97S",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sato et al. (2012), Publications of the Astronomical Society of Japan 64 97",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2012PASJ...64...97S"
+    }
+  ],
+  "publisher": "Publications of the Astronomical Society of Japan 64 97",
+  "creators": [
+    "Bun'ei Sato",
+    "Joel D. Hartman",
+    "Gáspár Á. Bakos",
+    "et al."
+  ],
+  "publicationDate": "2012"
+}

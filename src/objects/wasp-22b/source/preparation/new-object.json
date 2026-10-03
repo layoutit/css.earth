@@ -1,0 +1,30 @@
+{
+  "host": "wasp-22",
+  "planets": [
+    {
+      "id": "wasp-22b",
+      "name": "WASP-22 b",
+      "description": "Transiting planet of Tojil with a 3.53-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "credit": "Stassun et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STASSUN_ET_AL__2017"
+      },
+      "text": {
+        "card": "WASP-22 b was found in 2010 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around Tojil. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.53272912, pl_radj 1.23, pl_bmassj 0.67",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-22",
+          "title": "WASP-22",
+          "revision": "1375720811",
+          "card": "It hosts one known exoplanet, WASP-22b; the nature of a likely third body is unclear."
+        }
+      },
+      "order": 5731
+    }
+  ]
+}

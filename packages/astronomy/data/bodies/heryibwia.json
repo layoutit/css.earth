@@ -1,0 +1,30 @@
+{
+ "id": "heryibwia",
+ "classification": "star",
+ "order": 5559,
+ "physical": {
+  "name": "Heryibwia",
+  "horizonsCode": null,
+  "meanRadiusKm": 40230243.9,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 3638
+ },
+ "physicalNotes": "Radius 57.827 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 89642: radius 57.827 solar radii, implied by the fitted luminosity 526.257 solar luminosities (fractional uncertainty 0.07) and temperature (https://doi.org/10.1093/mnras/stx1433): 40,230,244 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 3638 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 89642: effective temperature 3638 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.2) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 274.4060904518451,
+  "declinationDegrees": -36.76242931758906,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 44.743,
+  "properMotionRaMasPerYear": -131.80407046542277,
+  "properMotionDecMasPerYear": -166.30893037257962,
+  "radialVelocityKmPerS": 0.2,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4038055447778237312 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/heryibwia/source/photometry/gaia-dr3-source.csv; cross-identification HD 167618, HR 6832, HIP 89642: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+4038055447778237312",
+   "distance": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 89642: distance 44.743 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.011), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 44.743 +/- 0.492 pc; Gaia DR3 parallax 23.8859 +/- 0.4865 mas (same row, RUWE 1.51), 49.1 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): -131.804, -166.309 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 4038055447778237312 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract)"
+  }
+ }
+}

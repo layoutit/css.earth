@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "timir",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Timir",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2773060.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/timir-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Timir",
+      "classification": "star",
+      "color": "#ffe6cf",
+      "distanceAu": 14553554,
+      "description": "A star 71 parsecs away, 4.0 times the Sun's width, measured from its light.",
+      "systemName": "Timir system",
+      "aliases": [
+        "HD 148427",
+        "HIP 80687"
+      ],
+      "order": 5726,
+      "context": {
+        "order": 5723
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -823551075630168600,
+        -1951234464697409800,
+        -504542777357441200
+      ],
+      "presentationToReference": [
+        -0.37826490528477363,
+        0.09011235451321968,
+        -0.9213009416005095,
+        -0.8962206981664467,
+        0.2135038294088267,
+        0.3888503246826648,
+        -0.23174149738005143,
+        -0.9727774043386547,
+        4.4853400622263576e-7
+      ],
+      "orbitUpReference": [
+        -0.09011235451321968,
+        -0.2135038294088267,
+        0.9727774043386547
+      ],
+      "metersPerUnit": 8945355.483870968,
+      "bodyRadiusM": 2773060200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

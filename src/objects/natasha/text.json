@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "natasha",
+  "card": {
+    "text": "A star about 34 parsecs away, 84% of the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 5406324138654973824: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-85390",
+        "url": "https://en.wikipedia.org/wiki/HD_85390",
+        "label": "Wikipedia, \"HD 85390\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1371881643",
+        "quote": "HD 85390 is a star with an exoplanet companion in the southern constellation of Vela."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 0.8 solar radii and 0.81 solar masses (FLAME) and 5,085 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 5406324138654973824: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-85390",
+        "url": "https://en.wikipedia.org/wiki/HD_85390",
+        "label": "Wikipedia, \"HD 85390\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1371881643",
+        "quote": "It was given the proper name Natasha by Zambia during the 100th anniversary of the IAU."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

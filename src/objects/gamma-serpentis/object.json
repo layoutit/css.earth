@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Gamma Serpentis",
+      "label": "Muning",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,14 +94,15 @@
       }
     },
     "catalog": {
-      "name": "Gamma Serpentis",
+      "name": "Muning",
       "classification": "star",
       "color": "#f1f5ff",
       "distanceAu": 2321525,
       "description": "A naked-eye star 11 parsecs away whose disc the CHARA Array measured: 1.5 times the Sun's width.",
-      "systemName": "Gamma Serpentis system",
+      "systemName": "Muning system",
       "aliases": [
-        "HD 142860"
+        "HD 142860",
+        "Gamma Serpentis"
       ],
       "order": 5353,
       "context": {

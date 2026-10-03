@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "qedty",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Qedty",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7534431
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/qedty-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Qedty",
+      "classification": "star",
+      "color": "#ffe1c3",
+      "distanceAu": 11289745.4,
+      "description": "A star 55 parsecs away, 11 times the Sun's width, measured from its light.",
+      "systemName": "Qedty system",
+      "aliases": [
+        "Delta Coronae Australis",
+        "HD 177873",
+        "HIP 94005",
+        "HR 7242"
+      ],
+      "order": 5672,
+      "context": {
+        "order": 5669
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        377382890345746400,
+        -1227629604328040200,
+        -1096797525111482900
+      ],
+      "presentationToReference": [
+        0.223446300275701,
+        -0.19081771477787735,
+        -0.9558558210420911,
+        -0.7268726278197188,
+        0.6207386998963746,
+        -0.2938360927071675,
+        -0.6494058313716916,
+        -0.760442020260524,
+        -0.000001592154644294202
+      ],
+      "orbitUpReference": [
+        0.19081771477787735,
+        -0.6207386998963746,
+        0.760442020260524
+      ],
+      "metersPerUnit": 24304616.129032258,
+      "bodyRadiusM": 7534431000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ping",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ping",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 27956008.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ping-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Ping",
+      "classification": "star",
+      "color": "#ffce93",
+      "distanceAu": 13490133.1,
+      "description": "A star 65 parsecs away, 40 times the Sun's width, measured from its light.",
+      "systemName": "Ping system",
+      "aliases": [
+        "Epsilon Leporis",
+        "HD 32887",
+        "HIP 23685",
+        "HR 1654"
+      ],
+      "order": 5665,
+      "context": {
+        "order": 5662
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        439916276964552060,
+        1813611679199115500,
+        -768111028150631300
+      ],
+      "presentationToReference": [
+        0.2179862380701448,
+        -0.0897205272585395,
+        0.9718190299641574,
+        0.8986764254163853,
+        -0.36988229127862854,
+        -0.23572817608274993,
+        -0.3806083057591549,
+        -0.9247363503112233,
+        -4.735185838763712e-7
+      ],
+      "orbitUpReference": [
+        0.0897205272585395,
+        0.36988229127862854,
+        0.9247363503112233
+      ],
+      "metersPerUnit": 90180673.5483871,
+      "bodyRadiusM": 27956008800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

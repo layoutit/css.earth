@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "yunu",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Yunü",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 22060647
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/yunu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Yunü",
+      "classification": "star",
+      "color": "#ffcc93",
+      "distanceAu": 18683555.8,
+      "description": "A star 91 parsecs away, 32 times the Sun's width, measured from its light.",
+      "systemName": "Yunü system",
+      "aliases": [
+        "31 Leonis",
+        "HD 87837",
+        "HIP 49637"
+      ],
+      "order": 5754,
+      "context": {
+        "order": 5751
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2429833675918186500,
+        1293298079916396800,
+        485207306518138700
+      ],
+      "presentationToReference": [
+        -0.8693433649669307,
+        -0.15324552974785563,
+        0.4698488282418858,
+        0.4627148416987178,
+        0.0815652908567498,
+        0.8827468938485052,
+        0.17360037171534076,
+        -0.9848161812946378,
+        -7.366204018801071e-7
+      ],
+      "orbitUpReference": [
+        0.15324552974785563,
+        -0.0815652908567498,
+        0.9848161812946378
+      ],
+      "metersPerUnit": 71163377.41935484,
+      "bodyRadiusM": 22060647000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

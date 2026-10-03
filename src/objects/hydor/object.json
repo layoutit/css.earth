@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hydor",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Hydor",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2904574.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hydor-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Hydor",
+      "classification": "star",
+      "color": "#cedaff",
+      "distanceAu": 19630210.6,
+      "description": "A star about 95 parsecs away, 4.2 times the Sun's width, measured by Gaia.",
+      "systemName": "Hydor system",
+      "aliases": [
+        "Gaia DR3 2414783622022208128",
+        "HR 9098",
+        "2 Ceti",
+        "HIP 301",
+        "HD 225132"
+      ],
+      "order": 5567,
+      "context": {
+        "order": 5564
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2802863058043943400,
+        45750653213121020,
+        -875046604879251100
+      ],
+      "presentationToReference": [
+        0.9544464613095517,
+        -0.29793555127370785,
+        0.01632053249456068,
+        0.015579265970919014,
+        -0.0048627412913128994,
+        -0.9998668112398476,
+        -0.2979752321342859,
+        -0.954573601685258,
+        -3.9097772803633055e-7
+      ],
+      "orbitUpReference": [
+        0.29793555127370785,
+        0.0048627412913128994,
+        0.954573601685258
+      ],
+      "metersPerUnit": 9369596.129032258,
+      "bodyRadiusM": 2904574800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

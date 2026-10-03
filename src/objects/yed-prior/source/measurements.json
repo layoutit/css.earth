@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "yed-prior",
+  "angularDiameterMas": 9.62,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 37,755,639 km at 52.47 pc = 9.62 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 52.466,
+  "distanceSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 79593: distance 52.466 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.008), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 52.466 +/- 0.42 pc; Gaia DR3 parallax 20.4113 +/- 0.5400 mas (same row, RUWE 2.85), 37.8 standard errors, is not used",
+  "radiusKm": 37755639,
+  "radiusSource": "Radius 54.27 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 79593: radius 54.27 solar radii, implied by the fitted luminosity 558.166 solar luminosities (fractional uncertainty 0.066) and temperature (https://doi.org/10.1093/mnras/stx1433): 37,755,639 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 3811 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 79593: effective temperature 3811 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.037) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3811,
+  "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 79593: effective temperature 3811 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.037) (https://doi.org/10.1093/mnras/stx1433)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 146051) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

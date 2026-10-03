@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ukdah",
+  "card": {
+    "text": "A star 81 parsecs away, 30 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 47431: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-iota-hydrae",
+        "url": "https://en.wikipedia.org/wiki/Iota_Hydrae",
+        "label": "Wikipedia, \"Iota Hydrae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370780452",
+        "quote": "Iota Hydrae, formally named Ukdah, is a star in the constellation of Hydra, about 8° to the north-northwest of Alphard and just to the south of the celestial equator."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 271 times the Sun's luminosity at 4,310 K, so 29.544 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 47431: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-iota-hydrae",
+        "url": "https://en.wikipedia.org/wiki/Iota_Hydrae",
+        "label": "Wikipedia, \"Iota Hydrae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370780452",
+        "quote": "Visible to the naked eye, it is a suspected variable star with an apparent visual magnitude that ranges between 3.87 and 3.91."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

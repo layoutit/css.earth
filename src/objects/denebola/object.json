@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "denebola",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Denebola",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1120077
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/denebola-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Denebola",
+      "classification": "star",
+      "color": "#c3d5ff",
+      "distanceAu": 2268911.4,
+      "description": "A star 11 parsecs away, 1.6 times the Sun's width, measured from its light.",
+      "systemName": "Denebola system",
+      "aliases": [
+        "HD 102647",
+        "HIP 57632",
+        "HR 4534",
+        "Beta Leonis"
+      ],
+      "order": 5526,
+      "context": {
+        "order": 5523
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -328131705619844000,
+        15697579736549192,
+        85393402190074610
+      ],
+      "presentationToReference": [
+        -0.9667251714408551,
+        -0.2513157512996178,
+        0.04777903359589751,
+        0.046247422439955735,
+        0.012000517963579692,
+        0.9988579295807117,
+        0.2516021041651073,
+        -0.9678307603694535,
+        -0.00002150293044764043
+      ],
+      "orbitUpReference": [
+        0.2513157512996178,
+        -0.012000517963579692,
+        0.9678307603694535
+      ],
+      "metersPerUnit": 3613151.6129032257,
+      "bodyRadiusM": 1120077000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-22",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tojil",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 862668
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-22-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tojil",
+      "classification": "star",
+      "color": "#fff6f9",
+      "distanceAu": 65415387,
+      "description": "WASP-22 b crosses Tojil as seen from Earth, which is how it was found.",
+      "systemName": "Tojil system",
+      "aliases": [
+        "WASP-22"
+      ],
+      "order": 5730,
+      "context": {
+        "order": 5727
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5410383602316820000,
+        7132580423128693000,
+        -3952200990088663000
+      ],
+      "presentationToReference": [
+        0.552869962112845,
+        -0.24407295794634354,
+        0.7967202747468298,
+        0.7288557999127434,
+        -0.32176453988315834,
+        -0.6043482471285365,
+        -0.4038613969258468,
+        -0.9148201856502194,
+        -4.202659279355873e-8
+      ],
+      "orbitUpReference": [
+        0.24407295794634354,
+        0.32176453988315834,
+        0.9148201856502194
+      ],
+      "metersPerUnit": 2782800,
+      "bodyRadiusM": 862668000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

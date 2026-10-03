@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "darlugal",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Darlugal",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1403226.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/darlugal-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Darlugal",
+      "classification": "star",
+      "color": "#b9ccff",
+      "distanceAu": 4457025.5,
+      "description": "A star 22 parsecs away, 2.0 times the Sun's width, measured from its light.",
+      "systemName": "Darlugal system",
+      "aliases": [
+        "Zeta Leporis",
+        "HD 38678",
+        "HIP 27288",
+        "HR 1998"
+      ],
+      "order": 5525,
+      "context": {
+        "order": 5522
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        36668416549406290,
+        643531489866000900,
+        -170568419841644960
+      ],
+      "presentationToReference": [
+        0.05499479997374103,
+        -0.014552604021161087,
+        0.9983805855945176,
+        0.965159908508848,
+        -0.25540192775168935,
+        -0.05688766393439944,
+        -0.2558161898376265,
+        -0.9667254403484601,
+        1.879639826857081e-7
+      ],
+      "orbitUpReference": [
+        0.014552604021161087,
+        0.25540192775168935,
+        0.9667254403484601
+      ],
+      "metersPerUnit": 4526538.387096774,
+      "bodyRadiusM": 1403226900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

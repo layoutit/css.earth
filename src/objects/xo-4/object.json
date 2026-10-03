@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "xo-4",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Koit",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1008765
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/xo-4-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Koit",
+      "classification": "star",
+      "color": "#f6f2ff",
+      "distanceAu": 54550675,
+      "description": "XO-4 b crosses Koit as seen from Earth, which is how it was found.",
+      "systemName": "Koit system",
+      "aliases": [
+        "XO-4",
+        "TOI-1721"
+      ],
+      "order": 5587,
+      "context": {
+        "order": 5584
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1495244455071632000,
+        4023185510845524000,
+        6940797699731326000
+      ],
+      "presentationToReference": [
+        -0.18322589776785256,
+        -0.29630034513837183,
+        0.9373549892426274,
+        0.49299749924452807,
+        0.7972376318245694,
+        0.34837569395896983,
+        0.8505185101605997,
+        -0.5259451148871277,
+        -7.483531344261275e-7
+      ],
+      "orbitUpReference": [
+        0.29630034513837183,
+        -0.7972376318245694,
+        0.5259451148871277
+      ],
+      "metersPerUnit": 3254080.64516129,
+      "bodyRadiusM": 1008765000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

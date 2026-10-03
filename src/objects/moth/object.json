@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "moth",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Moth",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 638331
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/moth-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Moth",
+      "classification": "star",
+      "color": "#ffebdd",
+      "distanceAu": 7518524.1,
+      "description": "A star about 36 parsecs away, 92% of the Sun's width, measured by Gaia.",
+      "systemName": "Moth system",
+      "aliases": [
+        "Gaia DR3 5592237639209047424",
+        "HD 61005",
+        "HIP 36948"
+      ],
+      "order": 5629,
+      "context": {
+        "order": 5626
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -386301268236462500,
+        869799977334507400,
+        -599411018062485500
+      ],
+      "presentationToReference": [
+        -0.3434528117805838,
+        0.2163153146223593,
+        0.9139189519535311,
+        0.7733219444827868,
+        -0.4870534066439796,
+        0.4058967224034408,
+        -0.5329290161563476,
+        -0.84615995162636,
+        0.000001517725981826048
+      ],
+      "orbitUpReference": [
+        -0.2163153146223593,
+        0.4870534066439796,
+        0.84615995162636
+      ],
+      "metersPerUnit": 2059132.2580645161,
+      "bodyRadiusM": 638331000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

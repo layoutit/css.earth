@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "xo-4-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "xo-4",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Koit system",
+      "systemName": "Koit system",
+      "classification": "planetary-system",
+      "color": "#f6f2ff",
+      "distanceAu": 54550675,
+      "description": "XO-4 b crosses Koit as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1495244455071632000,
+        4023185510845524000,
+        6940797699731326000
+      ],
+      "presentationToReference": [
+        -0.18322589776785256,
+        -0.29630034513837183,
+        0.9373549892426274,
+        0.49299749924452807,
+        0.7972376318245694,
+        0.34837569395896983,
+        0.8505185101605997,
+        -0.5259451148871277,
+        -7.483531344261275e-7
+      ],
+      "orbitUpReference": [
+        0.29630034513837183,
+        -0.7972376318245694,
+        0.5259451148871277
+      ],
+      "metersPerUnit": 3254080.64516129,
+      "bodyRadiusM": 1008765000
+    }
+  }
+}

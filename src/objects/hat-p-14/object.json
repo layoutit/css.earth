@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-14",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Franz",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1266174
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-14-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Franz",
+      "classification": "star",
+      "color": "#efedff",
+      "distanceAu": 46380184.7,
+      "description": "HAT-P-14 b crosses Franz as seen from Earth, which is how it was found.",
+      "systemName": "Franz system",
+      "aliases": [
+        "HAT-P-14",
+        "WASP-27"
+      ],
+      "order": 5545,
+      "context": {
+        "order": 5542
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -935396644331289900,
+        -5368532442074706000,
+        4294760328433152500
+      ],
+      "presentationToReference": [
+        -0.1348148717846165,
+        -0.10624968894143076,
+        -0.9851578319972626,
+        -0.7737445042551407,
+        -0.609799472023811,
+        0.17165094248051108,
+        0.6189865850571108,
+        -0.7854015581340098,
+        7.526203332992717e-8
+      ],
+      "orbitUpReference": [
+        0.10624968894143076,
+        0.609799472023811,
+        0.7854015581340098
+      ],
+      "metersPerUnit": 4084432.2580645164,
+      "bodyRadiusM": 1266174000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

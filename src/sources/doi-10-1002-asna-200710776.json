@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1002-asna-200710776",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kharchenko et al. (2007): Astrophysical supplements to the ASCC‐2.5: Ia. Radial velocities of ∼55000 stars and mean radial velocities of 516 Galactic open clusters and associations",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0705.0878"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1002/asna.200710776"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2007AN....328..889K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2007AN....328..889K",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1002/asna.200710776",
+      "label": "Astronomische Nachrichten 328 889-896"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2007AN....328..889K",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kharchenko et al. (2007), Astronomische Nachrichten 328 889-896",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2007AN....328..889K"
+    }
+  ],
+  "publisher": "Astronomische Nachrichten 328 889-896",
+  "creators": [
+    "N.V. Kharchenko",
+    "R.‐D. Scholz",
+    "A.E. Piskunov",
+    "et al."
+  ],
+  "publicationDate": "2007"
+}

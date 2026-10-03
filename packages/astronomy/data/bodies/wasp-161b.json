@@ -1,0 +1,28 @@
+{
+ "id": "wasp-161b",
+ "classification": "exoplanet",
+ "order": 5728,
+ "physical": {
+  "name": "WASP-161 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 81715.4,
+  "gravitationalParameterKm3PerS2": 315449464.43,
+  "parent": "wasp-161"
+ },
+ "physicalNotes": "Radius 1.143 Jupiter radii from Barkaoui et al. 2019 (2019AJ....157...43B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract): 81,715.4 km at 71,492 km per Jupiter radius. GM from the mass 2.49 Jupiter masses (Barkaoui et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....157...43B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 5.4056202,
+  "semiMajorAxisStellarRadii": 8.49,
+  "inclinationDegrees": 89.01,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58940.41459,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 5.4056202 d",
+   "shape": "Barkaoui et al. 2019 (2019AJ....157...43B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL__2019): a/R* 8.49; Barkaoui et al. 2019 (2019AJ....157...43B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL__2019): inclination 89.01 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2458940.91459 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

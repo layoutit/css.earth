@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "arcalis",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Arcalís",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3907616.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/arcalis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Arcalís",
+      "classification": "star",
+      "color": "#ffe2c7",
+      "distanceAu": 27330597.1,
+      "description": "A star about 130 parsecs away, 5.6 times the Sun's width, measured by Gaia.",
+      "systemName": "Arcalís system",
+      "aliases": [
+        "Gaia DR3 1236429004715336576",
+        "HD 131496",
+        "HIP 72845"
+      ],
+      "order": 5488,
+      "context": {
+        "order": 5485
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2823985867809444400,
+        -2665500769664525300,
+        1279395295896029200
+      ],
+      "presentationToReference": [
+        -0.6906972649966433,
+        -0.22756128005518128,
+        -0.6864059673005505,
+        -0.6519345979896516,
+        -0.21478927322000288,
+        0.7272185696568086,
+        0.31291942744135964,
+        -0.9497796754665107,
+        7.080671124032241e-7
+      ],
+      "orbitUpReference": [
+        0.22756128005518128,
+        0.21478927322000288,
+        0.9497796754665107
+      ],
+      "metersPerUnit": 12605214.838709677,
+      "bodyRadiusM": 3907616600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

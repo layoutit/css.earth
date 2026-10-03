@@ -1,0 +1,55 @@
+{
+  "id": "lilii-borea",
+  "name": "Lilii Borea",
+  "system": "Lilii Borea system",
+  "description": "A star 53 parsecs away, 10 times the Sun's width, measured from its light.",
+  "aliases": [
+    "39 Arietis",
+    "HD 17361",
+    "HIP 13061",
+    "HR 824"
+  ],
+  "featured": true,
+  "target": "HIP 13061",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 10.224,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 13061: radius 10.224 solar radii, implied by the fitted luminosity 46.769 solar luminosities (fractional uncertainty 0.054) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4724,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 13061: effective temperature 4724 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.08)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 52.604,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 13061: distance 52.604 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.011), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 0.579
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 53 parsecs away, 10 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 47 times the Sun's luminosity at 4,724 K, so 10.224 solar radii.",
+    "locator": "Table 2, HIP 13061: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/39_Arietis",
+      "title": "39 Arietis",
+      "revision": "1334126839",
+      "card": "39 Arietis, officially named Lilii Borea, is a star in the northern constellation of Aries.",
+      "introduction": "It is visible to the naked eye with an apparent visual magnitude of +4.5."
+    }
+  },
+  "notes": [],
+  "order": 5599
+}

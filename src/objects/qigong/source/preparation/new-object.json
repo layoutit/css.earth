@@ -1,0 +1,61 @@
+{
+  "id": "qigong",
+  "name": "Qigong",
+  "system": "Qigong system",
+  "description": "A star 37 parsecs away, 11 times the Sun's width, measured from its light.",
+  "aliases": [
+    "Delta Bootis",
+    "HD 135722",
+    "HIP 74666",
+    "HR 5681"
+  ],
+  "featured": true,
+  "target": "HIP 74666",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 11.482,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 74666: radius 11.482 solar radii, implied by the fitted luminosity 64.041 solar luminosities (fractional uncertainty 0.052) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4822,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 74666: effective temperature 4822 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.094)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 37.341,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 74666: distance 37.341 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.006), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 0.224
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 37 parsecs away, 11 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 64 times the Sun's luminosity at 4,822 K, so 11.482 solar radii.",
+    "locator": "Table 2, HIP 74666: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Delta_Bo%C3%B6tis",
+      "title": "Delta Boötis",
+      "revision": "1374805681",
+      "card": "Delta Boötis, Latinized from δ Boötis formally named Qigong, is a double star in the northern constellation of Boötes, forming the easternmost member of the constellation's kite-shaped asterism of brighter stars.",
+      "introduction": "Based upon parallax measurements, it is located at a distance of approximately 120.5 light-years from the Earth."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -12.29,
+    "uncertainty": 0.16,
+    "source": "SIMBAD's radial velocity for Gaia DR3 1278391075717325312 (quality A), from 2008A&A...480...91S; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2008A&A...480...91S/abstract"
+  },
+  "order": 5673
+}

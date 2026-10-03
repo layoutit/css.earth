@@ -1,0 +1,138 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-15b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-15 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 100803.7
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WASP-15 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 59116366.1,
+      "description": "WASP-15 b was found in 2009 by SuperWASP as it crossed its star.",
+      "systemName": "Nyamien system",
+      "order": 5654,
+      "context": {
+        "order": 5654
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6552629736795771000,
+        -3621431563483733500,
+        -4707334385649602000
+      ],
+      "presentationToReference": [
+        -0.7050193240423259,
+        -0.534709730995677,
+        -0.46586828214145687,
+        -0.4701380276065184,
+        0.8442032916403072,
+        -0.25747045924129375,
+        -0.530959497254879,
+        -0.03750074615525741,
+        0.8465670122988758
+      ],
+      "orbitUpReference": [
+        0.534709730995677,
+        -0.8442032916403072,
+        0.03750074615525741
+      ],
+      "metersPerUnit": 325173.22580645164,
+      "bodyRadiusM": 100803700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

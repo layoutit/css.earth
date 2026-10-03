@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tureis",
+  "card": {
+    "text": "A star 19 parsecs away, 3.3 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 39757: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-rho-puppis",
+        "url": "https://en.wikipedia.org/wiki/Rho_Puppis",
+        "label": "Wikipedia, \"Rho Puppis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1347254680",
+        "quote": "Rho Puppis, formally named Tureis, is a star in the southern constellation of Puppis."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 21 times the Sun's luminosity at 6,799 K, so 3.334 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 39757: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-rho-puppis",
+        "url": "https://en.wikipedia.org/wiki/Rho_Puppis",
+        "label": "Wikipedia, \"Rho Puppis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1347254680",
+        "quote": "With an apparent visual magnitude of 2.7 or 2.8, it is the third-brightest member of this generally faint constellation."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

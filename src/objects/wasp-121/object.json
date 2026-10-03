@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-121",
+      "label": "Dilmun",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,16 +94,19 @@
       }
     },
     "catalog": {
-      "name": "WASP-121",
+      "name": "Dilmun",
       "classification": "star",
       "color": "#f1efff",
       "distanceAu": 54285571.2,
       "description": "F6 star in Puppis, 263 parsecs away, circled every 31 hours by a giant planet passing over its poles.",
-      "systemName": "WASP-121 system",
+      "systemName": "Dilmun system",
       "order": 1743,
       "context": {
         "order": 1740
-      }
+      },
+      "aliases": [
+        "WASP-121"
+      ]
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

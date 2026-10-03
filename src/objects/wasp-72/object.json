@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-72",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Diya",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1516626
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-72-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Diya",
+      "classification": "star",
+      "color": "#fdf7ff",
+      "distanceAu": 86343227.7,
+      "description": "WASP-72 b crosses Diya as seen from Earth, which is how it was found.",
+      "systemName": "Diya system",
+      "aliases": [
+        "WASP-72"
+      ],
+      "order": 5532,
+      "context": {
+        "order": 5529
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        8422813516872571000,
+        7332197242530566000,
+        -6491368323169818000
+      ],
+      "presentationToReference": [
+        0.6520840750986256,
+        -0.37905118218666545,
+        0.6565870546132184,
+        0.5676498770580056,
+        -0.32996996433271264,
+        -0.7542502500591562,
+        -0.5025534559415556,
+        -0.8645461375318032,
+        -1.979647288431443e-7
+      ],
+      "orbitUpReference": [
+        0.37905118218666545,
+        0.32996996433271264,
+        0.8645461375318032
+      ],
+      "metersPerUnit": 4892341.935483871,
+      "bodyRadiusM": 1516626000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

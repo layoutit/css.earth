@@ -1,8 +1,8 @@
-# HD 118203
+# Liesma
 
 ## Sources
 
-Its radius and temperature follow Zhang et al. 2024. It is also HIP 66192. The introduction is generated from Zhang et al. 2024's published values; the sections below are the data's own.
+Its radius and temperature follow Zhang et al. 2024. It is also HD 118203, HIP 66192. The introduction is generated from Zhang et al. 2024's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 1560420854826284928, parallax 10.864 ± 0.018 mas (92.04 pc). Radius 2.04 +/- 0.03 solar radii from Zhang et al. 2024, the stellar radius of the default parameter set of HD 118203 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..295Z/abstract). Mass 1.27 +/- 0.028 solar masses from Zhang et al. 2024, the stellar mass of the default parameter set of HD 118203 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..295Z/abstract). Temperature 5,742 K from Zhang et al. 2024, the stellar temperature of the default parameter set of HD 118203 b in the NASA Exoplanet Archive. log g 3.92 from the mass and radius.
 
@@ -12,7 +12,8 @@ Its radius and temperature follow Zhang et al. 2024. It is also HIP 66192. The i
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+
 
 ## Known problems
 

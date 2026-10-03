@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ainalrami",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ainalrami",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 55912713.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ainalrami-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Ainalrami",
+      "classification": "star",
+      "color": "#ffd096",
+      "distanceAu": 71125853.4,
+      "description": "A star 345 parsecs away, 80 times the Sun's width, measured from its light.",
+      "systemName": "Ainalrami system",
+      "aliases": [
+        "Nu1 Sagittarii",
+        "HD 174974",
+        "HIP 92761",
+        "HR 7116"
+      ],
+      "order": 5466,
+      "context": {
+        "order": 5463
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2297828956848157200,
+        -9540010357608012000,
+        -4113837932712576500
+      ],
+      "presentationToReference": [
+        0.2159557996624963,
+        -0.09053498968029734,
+        -0.9721967435841988,
+        -0.8965943959519116,
+        0.37587896640189017,
+        -0.2341655221510495,
+        -0.3866284802491388,
+        -0.9222355546498059,
+        -7.83807140232604e-8
+      ],
+      "orbitUpReference": [
+        0.09053498968029734,
+        -0.37587896640189017,
+        0.9222355546498059
+      ],
+      "metersPerUnit": 180363591.29032257,
+      "bodyRadiusM": 55912713300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

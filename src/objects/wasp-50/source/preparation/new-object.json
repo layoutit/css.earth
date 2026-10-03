@@ -1,8 +1,12 @@
 {
   "id": "wasp-50",
-  "name": "WASP-50",
-  "system": "WASP-50 system",
+  "name": "Chaophraya",
+  "system": "Chaophraya system",
   "description": "Star of 5,400 K, 185 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "WASP-50"
+  ],
+  "order": 4820,
   "target": "WASP-50",
   "gaia": "5160557726183065984",
   "paper": {
@@ -30,7 +34,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "WASP-50 b crosses WASP-50 as seen from Earth, which is how it was found.",
+    "card": "WASP-50 b crosses Chaophraya as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Chakrabarty & Sengupta 2019.",
     "locator": "NASA Exoplanet Archive ps table (st_refname CHAKRABARTY__AMP__SENGUPTA_2019): st_teff 5400, st_rad 0.843, st_mass 0.892",
     "quotes": {
@@ -41,6 +45,5 @@
       "introduction": "The star is older than the Sun and slightly depleted in heavy elements compared to the Sun, and has a close to average starspot activity."
     }
   },
-  "notes": [],
-  "order": 4820
+  "notes": []
 }

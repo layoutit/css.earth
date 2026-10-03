@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kronos",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kronos",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 775596.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kronos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kronos",
+      "classification": "star",
+      "color": "#fff3ef",
+      "distanceAu": 21187342.1,
+      "description": "A star about 100 parsecs away, 1.1 times the Sun's width, measured by Gaia.",
+      "systemName": "Kronos system",
+      "aliases": [
+        "Gaia DR3 1999550886837136640",
+        "HD 240430"
+      ],
+      "order": 5593,
+      "context": {
+        "order": 5590
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1597864266844632800,
+        -54686808992696220,
+        2736801885143107000
+      ],
+      "presentationToReference": [
+        0.5041234077873796,
+        0.8629537348990451,
+        -0.0342117106358031,
+        -0.01725359347682283,
+        -0.029542421575619583,
+        -0.9994146080779414,
+        0.863459265531951,
+        -0.504418572964197,
+        0.000003973307738691372
+      ],
+      "orbitUpReference": [
+        -0.8629537348990451,
+        0.029542421575619583,
+        0.504418572964197
+      ],
+      "metersPerUnit": 2501923.2258064514,
+      "bodyRadiusM": 775596200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

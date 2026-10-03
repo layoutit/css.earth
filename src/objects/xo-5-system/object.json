@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "xo-5-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "xo-5",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Absolutno system",
+      "systemName": "Absolutno system",
+      "classification": "planetary-system",
+      "color": "#ffecdf",
+      "distanceAu": 56484410.4,
+      "description": "XO-5 b crosses Absolutno as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2948333376765439500,
+        5857955923168815000,
+        5328535989399789000
+      ],
+      "presentationToReference": [
+        -0.3489170088554234,
+        -0.28350201718664514,
+        0.8932432631609866,
+        0.6932528305088334,
+        0.5632797175244911,
+        0.4495736567204757,
+        0.6306008515082064,
+        -0.776107316082404,
+        -7.016820323938459e-7
+      ],
+      "orbitUpReference": [
+        0.28350201718664514,
+        -0.5632797175244911,
+        0.776107316082404
+      ],
+      "metersPerUnit": 2535938.709677419,
+      "bodyRadiusM": 786141000
+    }
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "torcular",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Torcular",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 11254338.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/torcular-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Torcular",
+      "classification": "star",
+      "color": "#ffe8d0",
+      "distanceAu": 17674859.9,
+      "description": "A star 86 parsecs away, 16 times the Sun's width, measured from its light.",
+      "systemName": "Torcular system",
+      "aliases": [
+        "HD 10761",
+        "HIP 8198",
+        "HR 510",
+        "Omicron Piscium"
+      ],
+      "order": 5734,
+      "context": {
+        "order": 5731
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2339213278101288000,
+        1158600063691713000,
+        420838626686163140
+      ],
+      "presentationToReference": [
+        0.8846849163683077,
+        0.1426223466455319,
+        0.44383720550188477,
+        0.4381797974740833,
+        0.07063943709881598,
+        -0.896107434971909,
+        0.15915735558236668,
+        -0.9872532279834207,
+        5.864663473152571e-7
+      ],
+      "orbitUpReference": [
+        -0.1426223466455319,
+        -0.07063943709881598,
+        0.9872532279834207
+      ],
+      "metersPerUnit": 36304319.03225806,
+      "bodyRadiusM": 11254338900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

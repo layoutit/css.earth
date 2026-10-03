@@ -1,8 +1,8 @@
-# HD 149026
+# Ogma
 
 ## Sources
 
-Its radius and temperature follow Stassun et al. 2017. It is also HIP 80838. The introduction is generated from Stassun et al. 2017's published values; the sections below are the data's own.
+Its radius and temperature follow Stassun et al. 2017. It is also HD 149026, HIP 80838. The introduction is generated from Stassun et al. 2017's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 1331356474971716992, parallax 13.120 ± 0.016 mas (76.22 pc). Radius 1.41 +/- 0.03 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of HD 149026 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). Mass 1.42 +/- 0.33 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of HD 149026 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). Temperature 6,179 K from Stassun et al. 2017, the stellar temperature of the default parameter set of HD 149026 b in the NASA Exoplanet Archive. log g 4.29 from the mass and radius.
 
@@ -12,7 +12,8 @@ Its radius and temperature follow Stassun et al. 2017. It is also HIP 80838. The
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+
 
 ## Known problems
 

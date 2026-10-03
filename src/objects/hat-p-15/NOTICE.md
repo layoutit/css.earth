@@ -1,4 +1,4 @@
-# HAT-P-15 credits
+# Berehynia credits
 
 Radius, mass and temperature: Radius 1.07 +/- 0.07 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of HAT-P-15 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); Mass 1 +/- 0.23 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of HAT-P-15 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); temperature from Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-15 b in the NASA Exoplanet Archive.
 

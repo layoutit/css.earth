@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "illyrian",
+  "card": {
+    "text": "A star about 130 parsecs away, 4.8 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 797597524475897600: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-82886",
+        "url": "https://en.wikipedia.org/wiki/HD_82886",
+        "label": "Wikipedia, \"HD 82886\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370779272",
+        "quote": "HD 82886, also named Illyrian, is a star with an orbiting exoplanet located in the constellation Leo Minor."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 4.8 solar radii and 1.95 solar masses (FLAME) and 5,322 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 797597524475897600: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-82886",
+        "url": "https://en.wikipedia.org/wiki/HD_82886",
+        "label": "Wikipedia, \"HD 82886\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370779272",
+        "quote": "It has an apparent visual magnitude of 7.63, making it too faint to be viewed with the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

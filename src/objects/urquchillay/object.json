@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "urquchillay",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Urquchillay",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1384042.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/urquchillay-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Urquchillay",
+      "classification": "star",
+      "color": "#efefff",
+      "distanceAu": 9994086.2,
+      "description": "A star about 48 parsecs away, 2.0 times the Sun's width, measured by Gaia.",
+      "systemName": "Urquchillay system",
+      "aliases": [
+        "Gaia DR3 2096869455581362560",
+        "HR 7057",
+        "Zeta2 Lyrae",
+        "HIP 91973",
+        "HD 173649"
+      ],
+      "order": 5742,
+      "context": {
+        "order": 5739
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        230117357250529400,
+        -1162065377042208500,
+        912116326958126700
+      ],
+      "presentationToReference": [
+        0.15391511772324248,
+        0.11850699776526104,
+        -0.980951695047674,
+        -0.7772531001049333,
+        -0.5984512063608425,
+        -0.19425182620125586,
+        0.6100719260165239,
+        -0.7923460387267149,
+        7.564814679926784e-7
+      ],
+      "orbitUpReference": [
+        -0.11850699776526104,
+        0.5984512063608425,
+        0.7923460387267149
+      ],
+      "metersPerUnit": 4464652.580645162,
+      "bodyRadiusM": 1384042300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

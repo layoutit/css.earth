@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201424474",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Jofré et al. (2015): Stellar parameters and chemical abundances of 223 evolved stars with and without planets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1410.6422"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201424474"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015A&A...574A..50J"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...574A..50J",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201424474",
+      "label": "Astronomy & Astrophysics 574 A50"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...574A..50J",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Jofré et al. (2015), Astronomy & Astrophysics 574 A50",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015A&A...574A..50J"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 574 A50",
+  "creators": [
+    "E. Jofré",
+    "R. Petrucci",
+    "C. Saffe",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

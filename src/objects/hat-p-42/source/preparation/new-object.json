@@ -1,0 +1,44 @@
+{
+  "id": "hat-p-42",
+  "name": "Lerna",
+  "system": "Lerna system",
+  "description": "Star of 5,743 K, 405 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "HAT-P-42",
+    "TOI-571"
+  ],
+  "featured": true,
+  "target": "HAT-P-42",
+  "gaia": "583455604761166848",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B/abstract",
+    "credit": "Boisse et al. 2013"
+  },
+  "radius": {
+    "value": 1.53,
+    "source": "Boisse et al. 2013, the stellar radius of the default parameter set of HAT-P-42 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B/abstract",
+    "uncertainty": 0.14
+  },
+  "mass": {
+    "value": 1.178,
+    "source": "Boisse et al. 2013, the stellar mass of the default parameter set of HAT-P-42 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B/abstract",
+    "uncertainty": 0.068
+  },
+  "temperature": {
+    "value": 5743,
+    "source": "Boisse et al. 2013, the stellar temperature of the default parameter set of HAT-P-42 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-42 b crosses Lerna as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Boisse et al. 2013.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BOISSE_ET_AL__2013): st_teff 5743, st_rad 1.53, st_mass 1.178"
+  },
+  "notes": [],
+  "order": 5596
+}

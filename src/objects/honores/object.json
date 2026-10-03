@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "honores",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Honores",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1284872.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/honores-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Honores",
+      "classification": "star",
+      "color": "#f0efff",
+      "distanceAu": 5119014.4,
+      "description": "A star about 25 parsecs away, 1.8 times the Sun's width, measured by Gaia.",
+      "systemName": "Honores system",
+      "aliases": [
+        "Gaia DR3 1990723839987250176",
+        "HR 8830",
+        "7 Andromedae",
+        "HD 219080",
+        "HIP 114570"
+      ],
+      "order": 5562,
+      "context": {
+        "order": 5559
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        487648846451417700,
+        -102421206844152210,
+        581505298136599200
+      ],
+      "presentationToReference": [
+        0.6367925154293007,
+        0.7431315418930088,
+        -0.20555000300886192,
+        -0.13374594942159018,
+        -0.15608595312437107,
+        -0.9786466145910762,
+        0.7593466358037951,
+        -0.6506863197278516,
+        0.0000035330976375090985
+      ],
+      "orbitUpReference": [
+        -0.7431315418930088,
+        0.15608595312437107,
+        0.6506863197278516
+      ],
+      "metersPerUnit": 4144749.35483871,
+      "bodyRadiusM": 1284872300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

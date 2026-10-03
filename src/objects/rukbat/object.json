@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "rukbat",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Rukbat",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1719770.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/rukbat-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Rukbat",
+      "classification": "star",
+      "color": "#afc5ff",
+      "distanceAu": 11497405,
+      "description": "A star 56 parsecs away, 2.5 times the Sun's width, measured from its light.",
+      "systemName": "Rukbat system",
+      "aliases": [
+        "HD 181869",
+        "HIP 95347",
+        "HR 7348",
+        "Alpha Sagittarii"
+      ],
+      "order": 5680,
+      "context": {
+        "order": 5677
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        467289752757569500,
+        -1219119816020049400,
+        -1119706877072618100
+      ],
+      "presentationToReference": [
+        0.2716835415324967,
+        -0.232995151222474,
+        -0.9337565596916452,
+        -0.7087995985909141,
+        0.6078687702174556,
+        -0.357908769425502,
+        -0.6509924594783869,
+        -0.7590841967141291,
+        -0.000001070619562866158
+      ],
+      "orbitUpReference": [
+        0.232995151222474,
+        -0.6078687702174556,
+        0.7590841967141291
+      ],
+      "metersPerUnit": 5547646.451612903,
+      "bodyRadiusM": 1719770400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

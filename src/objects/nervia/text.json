@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "nervia",
+  "card": {
+    "text": "A star about 43 parsecs away, the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 951427000863064192: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-49674",
+        "url": "https://en.wikipedia.org/wiki/HD_49674",
+        "label": "Wikipedia, \"HD 49674\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374405305",
+        "quote": "HD 49674 is a solar-type star with an exoplanetary companion in the northern constellation of Auriga."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.0 solar radii and 0.91 solar masses (FLAME) and 5,592 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 951427000863064192: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-49674",
+        "url": "https://en.wikipedia.org/wiki/HD_49674",
+        "label": "Wikipedia, \"HD 49674\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374405305",
+        "quote": "It has an apparent visual magnitude of 8.10 and thus is an eighth-magnitude star that is too faint to be readily visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

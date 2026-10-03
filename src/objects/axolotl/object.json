@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "axolotl",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Axólotl",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1320540.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/axolotl-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Axólotl",
+      "classification": "star",
+      "color": "#fff1eb",
+      "distanceAu": 19496533.3,
+      "description": "A star about 95 parsecs away, 1.9 times the Sun's width, measured by Gaia.",
+      "systemName": "Axólotl system",
+      "aliases": [
+        "Gaia DR3 2340155679036275200",
+        "HD 224693",
+        "HIP 118319"
+      ],
+      "order": 5496,
+      "context": {
+        "order": 5493
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2696025721451851000,
+        -1153907252864814,
+        -1112758788008691100
+      ],
+      "presentationToReference": [
+        0.9243596375597289,
+        -0.38152205209812023,
+        -0.00042920075236293614,
+        -0.00039562874707962193,
+        0.00016643197220439406,
+        -0.9999999078891423,
+        -0.3815220883885244,
+        -0.9243597222203258,
+        -0.0000029019060503790352
+      ],
+      "orbitUpReference": [
+        0.38152205209812023,
+        -0.00016643197220439406,
+        0.9243597222203258
+      ],
+      "metersPerUnit": 4259809.0322580645,
+      "bodyRadiusM": 1320540800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

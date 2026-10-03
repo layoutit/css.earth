@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "baijiu",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 6591574171318785664: position at J2016.0. Distance: Gaia DR3 parallax 15.3346 +/- 0.1417 mas (same row, RUWE 0.96): 65.21 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): 31.169, -94.291 mas/yr. Radial velocity from SIMBAD's radial velocity for Gaia DR3 6591574171318785664 (quality B), from 2006AstL...32..759G; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 2.996 (2.931 to 3.062) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Mass 2.732 (2.691 to 2.774) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Temperature 10048 +/- 16.1 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6591574171318785664: teff_gspphot 10048.173 K (16th-84th percentiles 10034.558-10066.791), the temperature FLAME used.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1051/0004-6361/202243462"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 10,048 K, because gSP-Phot fits an extinction A_G = 0.00 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature, through the CIE 1931 2-degree observer: #ccd9ff. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243462"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 10,048 K and log g 3.92 (u1 0.226, u2 0.327): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

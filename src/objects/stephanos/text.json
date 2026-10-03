@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "stephanos",
+  "card": {
+    "text": "A star 75 parsecs away, 9.3 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 77048: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-pi-coronae-borealis",
+        "url": "https://en.wikipedia.org/wiki/Pi_Coronae_Borealis",
+        "label": "Wikipedia, \"Pi Coronae Borealis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1364467343",
+        "quote": "Pi Coronae Borealis is a solitary, orange-hued star in the northern constellation of Corona Borealis."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 38 times the Sun's luminosity at 4,682 K, so 9.325 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 77048: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-pi-coronae-borealis",
+        "url": "https://en.wikipedia.org/wiki/Pi_Coronae_Borealis",
+        "label": "Wikipedia, \"Pi Coronae Borealis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1364467343",
+        "quote": "It has the proper name Stephanos; Pi Coronae Borealis is its Bayer designation, which is Latinized from π Coronae Borealis and abbreviated Pi CrB or π CrB."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

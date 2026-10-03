@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "alchiba",
+  "card": {
+    "text": "A star 15 parsecs away, 1.4 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 59199: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-alpha-corvi",
+        "url": "https://en.wikipedia.org/wiki/Alpha_Corvi",
+        "label": "Wikipedia, \"Alpha Corvi\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374802356",
+        "quote": "Alpha Corvi is a binary star system in the southern constellation of Corvus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 4.137 times the Sun's luminosity at 7,039 K, so 1.37 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 59199: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-alpha-corvi",
+        "url": "https://en.wikipedia.org/wiki/Alpha_Corvi",
+        "label": "Wikipedia, \"Alpha Corvi\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374802356",
+        "quote": "Despite its \"alpha\" designation, it is the fifth-brightest star in Corvus with an apparent visual magnitude of 4.03."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

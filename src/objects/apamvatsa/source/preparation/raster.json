@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/apamvatsa/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "apamvatsa-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssapamvatsa-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "apamvatsa-surface-{id}{suffix}.webp",
+      "thumbnail": "apamvatsa-dataset-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "qualification": "Uniform photosphere color from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 657). No limb darkening is drawn: no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15). The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "apamvatsa-context-{id}{suffix}.webp",
+    "limbOutput": "apamvatsa-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssapamvatsa-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

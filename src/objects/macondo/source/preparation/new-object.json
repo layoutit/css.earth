@@ -1,0 +1,53 @@
+{
+  "id": "macondo",
+  "name": "Macondo",
+  "system": "Macondo system",
+  "description": "A star 29 parsecs away, 84% of the Sun's width, measured from its light.",
+  "aliases": [
+    "HD 93083",
+    "HIP 52521"
+  ],
+  "featured": true,
+  "target": "HIP 52521",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 0.838,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 52521: radius 0.838 solar radii, implied by the fitted luminosity 0.387 solar luminosities (fractional uncertainty 0.051) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4976,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 52521: effective temperature 4976 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.026)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 28.636,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 52521: distance 28.636 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.009), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 0.258
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 29 parsecs away, 84% of the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 0.387 times the Sun's luminosity at 4,976 K, so 0.838 solar radii.",
+    "locator": "Table 2, HIP 52521: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_93083",
+      "title": "HD 93083",
+      "revision": "1342004508",
+      "card": "HD 93083 is an orange-hued star in the southern constellation of Antlia.",
+      "introduction": "It has the proper name Macondo, after the mythical village of the novel One Hundred Years of Solitude."
+    }
+  },
+  "notes": [],
+  "order": 5605
+}

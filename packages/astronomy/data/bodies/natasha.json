@@ -1,0 +1,30 @@
+{
+ "id": "natasha",
+ "classification": "star",
+ "order": 5639,
+ "physical": {
+  "name": "Natasha",
+  "horizonsCode": null,
+  "meanRadiusKm": 582334.8,
+  "gravitationalParameterKm3PerS2": 107635867103.76675,
+  "parent": null,
+  "effectiveTemperatureK": 5085
+ },
+ "physicalNotes": "Radius 0.837 (0.820 to 0.855) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 582,335 km at 695,700 km per solar radius. Mass 0.811 (0.771 to 0.851) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 5085 +/- 0.8 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 5406324138654973824: teff_gspphot 5085.374 K (16th-84th percentiles 5084.5425-5086.242), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 147.5105715090425,
+  "declinationDegrees": -49.79053368319249,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 33.52638608064382,
+  "properMotionRaMasPerYear": 24.522848316079703,
+  "properMotionDecMasPerYear": -60.128231767290686,
+  "radialVelocityKmPerS": 32.938923,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5406324138654973824 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/natasha/source/photometry/gaia-dr3-source.csv; cross-identification HD 85390, HIP 48235: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5406324138654973824",
+   "distance": "Gaia DR3 parallax 29.8273 +/- 0.0153 mas (same row, RUWE 0.95): 33.53 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 24.523, -60.128 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 32.94 +/- 0.13 km/s"
+  }
+ }
+}

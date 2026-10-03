@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "aurwandilsta",
+  "card": {
+    "text": "A star about 110 parsecs away, 3.8 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1320255698202371072: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-iota-coronae-borealis",
+        "url": "https://en.wikipedia.org/wiki/Iota_Coronae_Borealis",
+        "label": "Wikipedia, \"Iota Coronae Borealis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374807895",
+        "quote": "Iota Coronae Borealis is a binary star system in the northern constellation of Corona Borealis."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 3.8 solar radii and 3.16 solar masses (FLAME) and 10,514 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1320255698202371072: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-iota-coronae-borealis",
+        "url": "https://en.wikipedia.org/wiki/Iota_Coronae_Borealis",
+        "label": "Wikipedia, \"Iota Coronae Borealis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374807895",
+        "quote": "It has the proper name Aurwandilsta; Iota Coronae Borealis is its Bayer designation, which is Latinized from ι Coronae Borealis and abbreviated Iota CrB or ι CrB."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

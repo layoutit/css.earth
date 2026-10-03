@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tepiamenit",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tepiamenit",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1035648.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tepiamenit-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tepiamenit",
+      "classification": "star",
+      "color": "#fff7f9",
+      "distanceAu": 3220486,
+      "description": "A star about 16 parsecs away, 1.5 times the Sun's width, measured by Gaia.",
+      "systemName": "Tepiamenit system",
+      "aliases": [
+        "Gaia DR3 1244571953471006720",
+        "HR 5185",
+        "Tau Bootis",
+        "HIP 67275",
+        "HD 120136"
+      ],
+      "order": 5718,
+      "context": {
+        "order": 5715
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -410178014554817900,
+        -207303069825221100,
+        144531419203600450
+      ],
+      "presentationToReference": [
+        -0.8513850053792432,
+        -0.2677377430607934,
+        -0.45106548699285176,
+        -0.43028811629835534,
+        -0.13532261666652345,
+        0.8924908550741224,
+        0.2999928492277756,
+        -0.9539414501735616,
+        -0.000007277594959480164
+      ],
+      "orbitUpReference": [
+        0.2677377430607934,
+        0.13532261666652345,
+        0.9539414501735616
+      ],
+      "metersPerUnit": 3340801.935483871,
+      "bodyRadiusM": 1035648600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

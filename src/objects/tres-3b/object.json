@@ -1,0 +1,138 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tres-3b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TrES-3 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "thermal",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 95513.3
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TrES-3 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 47850750.1,
+      "description": "TrES-3 b was found in 2007 by TrES as it crossed its star.",
+      "systemName": "Pipoltr system",
+      "order": 5667,
+      "context": {
+        "order": 5667
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -195202588593044700,
+        -5672225636306753000,
+        4362340891712826000
+      ],
+      "presentationToReference": [
+        0.1146887966609686,
+        -0.9931803621092843,
+        0.02095824994912633,
+        -0.7892633267806163,
+        -0.07828907435529373,
+        0.609043694520997,
+        0.6032494350761161,
+        0.08639206651691081,
+        0.7928597164210605
+      ],
+      "orbitUpReference": [
+        0.9931803621092843,
+        0.07828907435529373,
+        -0.08639206651691081
+      ],
+      "metersPerUnit": 308107.4193548387,
+      "bodyRadiusM": 95513300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

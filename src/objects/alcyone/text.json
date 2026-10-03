@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "alcyone",
+  "card": {
+    "text": "A star 124 parsecs away, 14 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 17702: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-alcyone-star",
+        "url": "https://en.wikipedia.org/wiki/Alcyone_(star)",
+        "label": "Wikipedia, \"Alcyone (star)\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374779784",
+        "quote": "The star has the Bayer designation Eta Tauri, Latinized from η Tauri and abbreviated Eta Tau or η Tau."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 844 times the Sun's luminosity at 8,392 K, so 13.762 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 17702: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-alcyone-star",
+        "url": "https://en.wikipedia.org/wiki/Alcyone_(star)",
+        "label": "Wikipedia, \"Alcyone (star)\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374779784",
+        "quote": "It is about 440 light-years distant."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

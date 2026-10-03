@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kenemu",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kenemu",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2263112.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kenemu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kenemu",
+      "classification": "star",
+      "color": "#d7e0ff",
+      "distanceAu": 8029066.5,
+      "description": "A star 39 parsecs away, 3.3 times the Sun's width, measured from its light.",
+      "systemName": "Kenemu system",
+      "aliases": [
+        "Rho1 Sagittarii",
+        "HD 181577",
+        "HIP 95168",
+        "HR 7340"
+      ],
+      "order": 5585,
+      "context": {
+        "order": 5582
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        398868935141329700,
+        -1071498158814803100,
+        -368118962703821900
+      ],
+      "presentationToReference": [
+        0.33207760486790405,
+        -0.10692009208724176,
+        -0.9371726405808336,
+        -0.8920738389267618,
+        0.2872226038387307,
+        -0.34886593663837323,
+        -0.30647794414552265,
+        -0.9518777598789433,
+        4.226599801004486e-7
+      ],
+      "orbitUpReference": [
+        0.10692009208724176,
+        -0.2872226038387307,
+        0.9518777598789433
+      ],
+      "metersPerUnit": 7300361.612903226,
+      "bodyRadiusM": 2263112100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

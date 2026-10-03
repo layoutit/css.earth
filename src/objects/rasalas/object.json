@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "rasalas",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Rasalas",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 8202303
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/rasalas-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Rasalas",
+      "classification": "star",
+      "color": "#ffdaae",
+      "distanceAu": 7848819.1,
+      "description": "A star 38 parsecs away, 12 times the Sun's width, measured from its light.",
+      "systemName": "Rasalas system",
+      "aliases": [
+        "HD 85503",
+        "HIP 48455",
+        "HR 3905",
+        "Mu Leonis"
+      ],
+      "order": 5675,
+      "context": {
+        "order": 5672
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -896765076488018800,
+        556253652681138500,
+        514841280366648000
+      ],
+      "presentationToReference": [
+        -0.7637449461608352,
+        -0.3726168407175026,
+        0.5271151176237411,
+        0.4737427082898078,
+        0.23112376250354388,
+        0.8497938883920285,
+        0.4384763432113768,
+        -0.8987427309413483,
+        -0.000004905726142869375
+      ],
+      "orbitUpReference": [
+        0.3726168407175026,
+        -0.23112376250354388,
+        0.8987427309413483
+      ],
+      "metersPerUnit": 26459041.93548387,
+      "bodyRadiusM": 8202303000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

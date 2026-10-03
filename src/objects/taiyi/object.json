@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "taiyi",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Taiyi",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1102787
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/taiyi-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Taiyi",
+      "classification": "star",
+      "color": "#f2f1ff",
+      "distanceAu": 6072584.9,
+      "description": "A star about 29 parsecs away, 1.6 times the Sun's width, measured by Gaia.",
+      "systemName": "Taiyi system",
+      "aliases": [
+        "Gaia DR3 1677302170674242560",
+        "HR 4916",
+        "8 Draconis",
+        "HIP 63076",
+        "HD 112429"
+      ],
+      "order": 5709,
+      "context": {
+        "order": 5706
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -366608255644479300,
+        -90515130971868380,
+        826243982688083500
+      ],
+      "presentationToReference": [
+        -0.4035540884187702,
+        -0.8829990980461104,
+        -0.2397012527506914,
+        -0.09963701200072618,
+        -0.21801182630730745,
+        0.9708466971822688,
+        0.9095144658333163,
+        -0.4156722704726739,
+        -1.7210130600826449e-7
+      ],
+      "orbitUpReference": [
+        0.8829990980461104,
+        0.21801182630730745,
+        0.4156722704726739
+      ],
+      "metersPerUnit": 3557377.419354839,
+      "bodyRadiusM": 1102787000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

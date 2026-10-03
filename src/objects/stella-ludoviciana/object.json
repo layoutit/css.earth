@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "stella-ludoviciana",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Stella Ludoviciana",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1109775.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/stella-ludoviciana-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Stella Ludoviciana",
+      "classification": "star",
+      "color": "#f0f0ff",
+      "distanceAu": 18811142.6,
+      "description": "A star about 91 parsecs away, 1.6 times the Sun's width, measured by Gaia.",
+      "systemName": "Stella Ludoviciana system",
+      "aliases": [
+        "Gaia DR3 1563586799775391104",
+        "HD 116798"
+      ],
+      "order": 5700,
+      "context": {
+        "order": 5697
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1508553064638132500,
+        -585607518799085600,
+        2302287770749451500
+      ],
+      "presentationToReference": [
+        -0.5360679393964772,
+        -0.7626743245764217,
+        -0.3618826315024167,
+        -0.2080970323522234,
+        -0.29606530379299834,
+        0.9322236646943465,
+        0.8181239450580899,
+        -0.575041920664797,
+        -8.537355149184198e-7
+      ],
+      "orbitUpReference": [
+        0.7626743245764217,
+        0.29606530379299834,
+        0.575041920664797
+      ],
+      "metersPerUnit": 3579921.290322581,
+      "bodyRadiusM": 1109775600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

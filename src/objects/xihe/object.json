@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "xihe",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Xihe",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 8607200.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/xihe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Xihe",
+      "classification": "star",
+      "color": "#ffe3c3",
+      "distanceAu": 28767614.4,
+      "description": "A star 139 parsecs away, 12 times the Sun's width, measured from its light.",
+      "systemName": "Xihe system",
+      "aliases": [
+        "HD 173416",
+        "HIP 91852"
+      ],
+      "order": 5749,
+      "context": {
+        "order": 5746
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        653723843794760000,
+        -3394532871527093000,
+        2563306386171548000
+      ],
+      "presentationToReference": [
+        0.15190288944632496,
+        0.11263491664970893,
+        -0.9819566628569566,
+        -0.7887724402412137,
+        -0.5848734266877821,
+        -0.18910608734361975,
+        0.5956203066499485,
+        -0.8032661142521853,
+        6.454120907847353e-7
+      ],
+      "orbitUpReference": [
+        -0.11263491664970893,
+        0.5848734266877821,
+        0.8032661142521853
+      ],
+      "metersPerUnit": 27765162.580645163,
+      "bodyRadiusM": 8607200400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

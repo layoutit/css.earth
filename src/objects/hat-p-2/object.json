@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "HAT-P-2",
+      "label": "Hunor",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,12 +94,15 @@
       }
     },
     "catalog": {
-      "name": "HAT-P-2",
+      "name": "Hunor",
       "classification": "star",
       "color": "#efeeff",
       "distanceAu": 26508468,
       "description": "HAT-P-2 b crosses HAT-P-2 as seen from Earth, which is how it was found.",
-      "systemName": "HAT-P-2 system",
+      "systemName": "Hunor system",
+      "aliases": [
+        "HAT-P-2"
+      ],
       "order": 3120,
       "context": {
         "order": 3117

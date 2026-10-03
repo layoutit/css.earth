@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-79",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Montuno",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1050507
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-79-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Montuno",
+      "classification": "star",
+      "color": "#eaebff",
+      "distanceAu": 50669459.5,
+      "description": "WASP-79 b crosses Montuno as seen from Earth, which is how it was found.",
+      "systemName": "Montuno system",
+      "aliases": [
+        "WASP-79"
+      ],
+      "order": 5623,
+      "context": {
+        "order": 5620
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2615086554300819000,
+        5977419836411906000,
+        -3858604693990932500
+      ],
+      "presentationToReference": [
+        0.3449962297728482,
+        -0.20403373720443246,
+        0.91615928501812,
+        0.7885732515965966,
+        -0.46636901954491305,
+        -0.40081437658233676,
+        -0.5090479626802281,
+        -0.8607381551268127,
+        5.84314994989133e-9
+      ],
+      "orbitUpReference": [
+        0.20403373720443246,
+        0.46636901954491305,
+        0.8607381551268127
+      ],
+      "metersPerUnit": 3388732.2580645164,
+      "bodyRadiusM": 1050507000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

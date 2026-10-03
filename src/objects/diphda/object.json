@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "diphda",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Diphda",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 11655757.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/diphda-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Diphda",
+      "classification": "star",
+      "color": "#ffe2bf",
+      "distanceAu": 6091716.4,
+      "description": "A star 30 parsecs away, 17 times the Sun's width, measured from its light.",
+      "systemName": "Diphda system",
+      "aliases": [
+        "HD 4128",
+        "HIP 3419",
+        "HR 188",
+        "Beta Ceti"
+      ],
+      "order": 5529,
+      "context": {
+        "order": 5526
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        851136826461172200,
+        163890640873455170,
+        -281403400994899140
+      ],
+      "presentationToReference": [
+        0.9339712715457467,
+        -0.3032281540539615,
+        0.189077630925099,
+        0.17984082647344402,
+        -0.05837489016401674,
+        -0.9819621425145103,
+        -0.3087959537632732,
+        -0.9511283082672737,
+        -0.000012331442251206506
+      ],
+      "orbitUpReference": [
+        0.3032281540539615,
+        0.05837489016401674,
+        0.9511283082672737
+      ],
+      "metersPerUnit": 37599218.70967742,
+      "bodyRadiusM": 11655757800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

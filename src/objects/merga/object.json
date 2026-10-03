@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "merga",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Merga",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1827677.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/merga-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Merga",
+      "classification": "star",
+      "color": "#fff6f7",
+      "distanceAu": 9903981.3,
+      "description": "A star about 48 parsecs away, 2.6 times the Sun's width, measured by Gaia.",
+      "systemName": "Merga system",
+      "aliases": [
+        "Gaia DR3 1589840624889560576",
+        "HR 5533",
+        "h Bootis",
+        "HIP 72487",
+        "HD 130945"
+      ],
+      "order": 5616,
+      "context": {
+        "order": 5613
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -759313145540597600,
+        -691593784293845500,
+        1067859144869166200
+      ],
+      "presentationToReference": [
+        -0.5124882053277492,
+        -0.5328489084570538,
+        -0.6733705370418793,
+        -0.4667819323407815,
+        -0.48532721724247907,
+        0.7393051601631613,
+        0.7207429965252169,
+        -0.693202375183321,
+        -2.3142604893981033e-7
+      ],
+      "orbitUpReference": [
+        0.5328489084570538,
+        0.48532721724247907,
+        0.693202375183321
+      ],
+      "metersPerUnit": 5895734.193548387,
+      "bodyRadiusM": 1827677600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

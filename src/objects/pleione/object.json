@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "pleione",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Pleione",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3962011.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/pleione-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Pleione",
+      "classification": "star",
+      "color": "#b7c4ff",
+      "distanceAu": 24152795.2,
+      "description": "A star 117 parsecs away, 5.7 times the Sun's width, measured from its light.",
+      "systemName": "Pleione system",
+      "aliases": [
+        "HD 23862",
+        "HIP 17851",
+        "HR 1180",
+        "28 Tauri"
+      ],
+      "order": 5668,
+      "context": {
+        "order": 5665
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1781496557913995500,
+        2774635218426606600,
+        1477474992005112300
+      ],
+      "presentationToReference": [
+        0.49305083245765285,
+        0.22092971233929706,
+        0.8414813954084138,
+        0.7679140316819391,
+        0.3440915267260316,
+        -0.5402860919747415,
+        0.4089118689385352,
+        -0.912573878346857,
+        4.124269060739442e-7
+      ],
+      "orbitUpReference": [
+        -0.22092971233929706,
+        -0.3440915267260316,
+        0.912573878346857
+      ],
+      "metersPerUnit": 12780682.258064516,
+      "bodyRadiusM": 3962011500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

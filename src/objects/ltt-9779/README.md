@@ -1,4 +1,4 @@
-# LTT 9779
+# Uúba
 
 ## Sources
 
@@ -12,7 +12,8 @@ Its radius and temperature follow Jenkins et al. 2020. It is also HIP 117883. Th
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+
 
 ## Known problems
 

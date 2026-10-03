@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wasp-79b",
+  "radiusKm": 109382.8,
+  "radiusSource": "Radius 1.53 Jupiter radii from Gressier et al. 2023 (2023A&A...672A..34G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract): 109,382.8 km at 71,492 km per Jupiter radius. GM from the mass 0.85 Jupiter masses (Gressier et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...672A..34G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 3.66239163,
+  "orbitalPeriodSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 3.66239163 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of WASP-79 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.85 Jupiter masses: Gressier et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...672A..34G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract)."
+}

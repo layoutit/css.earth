@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-9",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tevel",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 930846.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-9-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tevel",
+      "classification": "star",
+      "color": "#fcf6ff",
+      "distanceAu": 95378218.3,
+      "description": "HAT-P-9 b crosses Tevel as seen from Earth, which is how it was found.",
+      "systemName": "Tevel system",
+      "aliases": [
+        "HAT-P-9",
+        "TOI-1731"
+      ],
+      "order": 5719,
+      "context": {
+        "order": 5716
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3921594741192375300,
+        10676705023195849000,
+        8614852639459067000
+      ],
+      "presentationToReference": [
+        -0.27484501994528454,
+        -0.20817027974525634,
+        0.9386827737004968,
+        0.7482770145088725,
+        0.5667511439775311,
+        0.34478203311345634,
+        0.6037729081111249,
+        -0.7971563682433589,
+        -3.059667398717426e-7
+      ],
+      "orbitUpReference": [
+        0.20817027974525634,
+        -0.5667511439775311,
+        0.7971563682433589
+      ],
+      "metersPerUnit": 3002730.9677419355,
+      "bodyRadiusM": 930846600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-64-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-64",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Atakoraka system",
+      "systemName": "Atakoraka system",
+      "classification": "planetary-system",
+      "color": "#ffeee5",
+      "distanceAu": 74406274.7,
+      "description": "WASP-64 b crosses Atakoraka as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1802499787922254600,
+        9174829504993798000,
+        -6039297157912079000
+      ],
+      "presentationToReference": [
+        -0.16193482806849582,
+        0.10459421929523749,
+        0.9812426615004297,
+        0.8242577604745227,
+        -0.5323873637176822,
+        0.19277665639610295,
+        -0.5425645175976325,
+        -0.8400141333595263,
+        5.407454109365534e-7
+      ],
+      "orbitUpReference": [
+        -0.10459421929523749,
+        0.5323873637176822,
+        0.8400141333595263
+      ],
+      "metersPerUnit": 2374356.7741935486,
+      "bodyRadiusM": 736050600
+    }
+  }
+}

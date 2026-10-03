@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "HIP 65426",
+      "label": "Matza",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,16 +94,19 @@
       }
     },
     "catalog": {
-      "name": "HIP 65426",
+      "name": "Matza",
       "classification": "star",
       "color": "#bacdff",
       "distanceAu": 22171671.3,
       "description": "Young A-type star in Centaurus whose planet was the first exoplanet JWST photographed.",
-      "systemName": "HIP 65426 system",
+      "systemName": "Matza system",
       "order": 1750,
       "context": {
         "order": 1747
-      }
+      },
+      "aliases": [
+        "HIP 65426"
+      ]
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

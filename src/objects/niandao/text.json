@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "niandao",
+  "card": {
+    "text": "A star 91 parsecs away, 144 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 92862: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-r-lyrae",
+        "url": "https://en.wikipedia.org/wiki/R_Lyrae",
+        "label": "Wikipedia, \"R Lyrae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374585554",
+        "quote": "R Lyrae, also known by its Flamsteed designation 13 Lyrae and named Niandao, is a 4th magnitude semiregular variable star in the constellation Lyra, approximately 350 light-years away from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 2,398 times the Sun's luminosity at 3,363 K, so 144.458 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 92862: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-r-lyrae",
+        "url": "https://en.wikipedia.org/wiki/R_Lyrae",
+        "label": "Wikipedia, \"R Lyrae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374585554",
+        "quote": "It is visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-17",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Dìwö",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1036593
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-17-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Dìwö",
+      "classification": "star",
+      "color": "#f8f3ff",
+      "distanceAu": 83135104.6,
+      "description": "WASP-17 b crosses Dìwö as seen from Earth, which is how it was found.",
+      "systemName": "Dìwö system",
+      "aliases": [
+        "WASP-17"
+      ],
+      "order": 5530,
+      "context": {
+        "order": 5527
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5493649434632843000,
+        -9500806262329338000,
+        -5850585609284585000
+      ],
+      "presentationToReference": [
+        -0.4417242027044838,
+        0.23548018258854922,
+        -0.8656955656309854,
+        -0.763924986698554,
+        0.40724369491841894,
+        0.5005708617636547,
+        -0.470423578748666,
+        -0.8824407382692944,
+        2.0109253612226764e-7
+      ],
+      "orbitUpReference": [
+        -0.23548018258854922,
+        -0.40724369491841894,
+        0.8824407382692944
+      ],
+      "metersPerUnit": 3343848.3870967743,
+      "bodyRadiusM": 1036593000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

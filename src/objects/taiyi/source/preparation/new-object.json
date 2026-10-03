@@ -1,0 +1,61 @@
+{
+  "id": "taiyi",
+  "name": "Taiyi",
+  "system": "Taiyi system",
+  "description": "A star 1.6 solar radii and 1.48 solar masses, about 29 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 1677302170674242560",
+    "HR 4916",
+    "8 Draconis",
+    "HIP 63076",
+    "HD 112429"
+  ],
+  "featured": true,
+  "target": "HR 4916",
+  "gaia": "1677302170674242560",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 7094,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1677302170674242560: teff_gspphot 7094.3647 K (16th-84th percentiles 7089.9614-7099.009), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 4.5
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.00 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 29 parsecs away, 1.6 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 1.6 solar radii and 1.48 solar masses (FLAME) and 7,094 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1677302170674242560: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/8_Draconis",
+      "title": "8 Draconis",
+      "revision": "1370772406",
+      "card": "8 Draconis, formally named Taiyi, is a single star in the northern circumpolar constellation of Draco.",
+      "introduction": "Based upon an annual parallax shift of 33.97 mas as seen from the Earth, the star is located 96 light-years from the Sun."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 9,
+    "uncertainty": 2,
+    "source": "SIMBAD's radial velocity for Gaia DR3 1677302170674242560 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
+  },
+  "order": 5709
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-21-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-21",
+      "members": "planets"
+    },
+    "catalog": {
+      "name": "Mazaalai system",
+      "systemName": "Mazaalai system",
+      "classification": "planetary-system",
+      "color": "#fff0eb",
+      "distanceAu": 58614199.1,
+      "description": "HAT-P-21 b crosses Mazaalai as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6538347196202978000,
+        1003435767498903200,
+        5755933123569230000
+      ],
+      "presentationToReference": [
+        -0.7456585393837433,
+        -0.6488316333451977,
+        0.15169328994621153,
+        0.11443571690302932,
+        0.09957570442430541,
+        0.988427612820126,
+        0.6564280686724114,
+        -0.7543886204463892,
+        -3.8792086252281235e-8
+      ],
+      "orbitUpReference": [
+        0.6488316333451977,
+        -0.09957570442430541,
+        0.7543886204463892
+      ],
+      "metersPerUnit": 2715474.193548387,
+      "bodyRadiusM": 841797000
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "rosaliadecastro",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Rosalíadecastro",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1236243.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/rosaliadecastro-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Rosalíadecastro",
+      "classification": "star",
+      "color": "#fff0e9",
+      "distanceAu": 15135480.1,
+      "description": "A star about 73 parsecs away, 1.8 times the Sun's width, measured by Gaia.",
+      "systemName": "Rosalíadecastro system",
+      "aliases": [
+        "Gaia DR3 4432401099808805888",
+        "HD 149143",
+        "HIP 81022"
+      ],
+      "order": 5679,
+      "context": {
+        "order": 5676
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -839844409154100900,
+        -2101105289840956000,
+        82345451134620240
+      ],
+      "presentationToReference": [
+        -0.37091735187897357,
+        -0.01350005707167433,
+        -0.9285677501045098,
+        -0.9279533228202221,
+        -0.03377420911080131,
+        0.3711629473234747,
+        0.03637236233733378,
+        -0.9993383067099957,
+        -1.7387262291509945e-8
+      ],
+      "orbitUpReference": [
+        0.01350005707167433,
+        0.03377420911080131,
+        0.9993383067099957
+      ],
+      "metersPerUnit": 3987880.9677419355,
+      "bodyRadiusM": 1236243100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

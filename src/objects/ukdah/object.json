@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ukdah",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ukdah",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 20553760.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ukdah-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Ukdah",
+      "classification": "star",
+      "color": "#ffd5a0",
+      "distanceAu": 16647687,
+      "description": "A star 81 parsecs away, 30 times the Sun's width, measured from its light.",
+      "systemName": "Ukdah system",
+      "aliases": [
+        "Iota Hydrae",
+        "HD 83618",
+        "HIP 47431",
+        "HR 3845"
+      ],
+      "order": 5741,
+      "context": {
+        "order": 5738
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2038769018894147800,
+        1429452809926052600,
+        -49691055459785620
+      ],
+      "presentationToReference": [
+        -0.8186320441066816,
+        0.016334390649864423,
+        0.5740860249508029,
+        0.5739717765472603,
+        -0.011452675276898984,
+        0.8187949901875219,
+        -0.01994933805664216,
+        -0.9998009921534883,
+        -4.77522982285176e-8
+      ],
+      "orbitUpReference": [
+        -0.016334390649864423,
+        0.011452675276898984,
+        0.9998009921534883
+      ],
+      "metersPerUnit": 66302454.19354839,
+      "bodyRadiusM": 20553760800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

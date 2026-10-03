@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "udkadua",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 1125: HR 8961; VizieR III/202",
+    "path": "photometry/kharitonov-catalog.dat",
+    "format": "kharitonov-records",
+    "wavelength": {
+      "column": "lambda",
+      "unit": "nm"
+    },
+    "flux": {
+      "column": "1125",
+      "kind": "flux",
+      "missing": 0
+    },
+    "service": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+    "checked": "2026-10-03",
+    "gaps": [
+      {
+        "fromNm": 757.5,
+        "toNm": 780,
+        "reason": "the spectrum ends at 757.5 nm; the last value is held to 780 nm, where the observer adds little"
+      }
+    ],
+    "note": "Ground-based photoelectric scans from Alma-Ata, 322.5 to 757.5 nm in 5 nm steps, in absolute flux. The catalogue gives no observation dates."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 520 (BS 8961)",
+    "spectrum": {
+      "path": "photometry/crosscheck-III_126_part2.dat.gz",
+      "format": "burnashev-records",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "angstrom"
+      },
+      "flux": {
+        "column": "520",
+        "kind": "log10",
+        "missing": -9.999999
+      },
+      "gaps": [
+        {
+          "fromNm": 755,
+          "toNm": 780,
+          "reason": "the spectrum ends at 755 nm; the last value is held to 780 nm, where the observer adds little"
+        }
+      ]
+    }
+  }
+}

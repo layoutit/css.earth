@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "GJ 436",
+      "label": "Noquisi",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,12 +94,15 @@
       }
     },
     "catalog": {
-      "name": "GJ 436",
+      "name": "Noquisi",
       "classification": "star",
       "color": "#ffc78c",
       "distanceAu": 2016266.4,
       "description": "GJ 436 b crosses GJ 436 as seen from Earth, which is how it was found.",
-      "systemName": "GJ 436 system",
+      "systemName": "Noquisi system",
+      "aliases": [
+        "GJ 436"
+      ],
       "order": 3097,
       "context": {
         "order": 3094

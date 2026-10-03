@@ -13,7 +13,7 @@
           "catalogueId": "doi-10-1093-mnras-stv706",
           "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T",
           "label": "Triaud et al. 2015",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "doi-10-1093-mnras-stv706",
           "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T",
           "label": "Triaud et al. 2015",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "orbitalPeriodDays; orbitalPeriodSource"
         }
@@ -39,7 +39,7 @@
           "catalogueId": "doi-10-1093-mnras-stv706",
           "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T",
           "label": "Triaud et al. 2015",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "massSource"
         }
@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by WASP-80; the neutral gray is a display convention, not a measured color.",
+        "qualification": "A sphere of the published radius, lit by Petra; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "wasp-80b-dataset-shape.webp",
         "surface": "wasp-80b-surface-shape@2x.webp",
         "poles": "wasp-80b-poles-shape@2x.webp",
@@ -84,7 +84,7 @@
       "id": "wasp-80b-orbits",
       "titleKey": "systemOrbits",
       "src": "/scenes/wasp-80b/wasp-80b-system-orbits.svg",
-      "alt": "The orbits of WASP-80's planets in this map from above, to scale, with WASP-80 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "alt": "The orbits of Petra's planets in this map from above, to scale, with WASP-80 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "source": {
         "id": "wasp-80b-observational-measurements",
         "path": "../manifest.json",

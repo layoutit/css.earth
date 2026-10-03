@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "inquill",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Inquill",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1652694.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/inquill-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Inquill",
+      "classification": "star",
+      "color": "#fff1eb",
+      "distanceAu": 11480993,
+      "description": "A star about 56 parsecs away, 2.4 times the Sun's width, measured by Gaia.",
+      "systemName": "Inquill system",
+      "aliases": [
+        "Gaia DR3 5950535424666050304",
+        "HD 156411",
+        "HIP 84787"
+      ],
+      "order": 5570,
+      "context": {
+        "order": 5567
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -198132986154959680,
+        -1119530825189793400,
+        -1287365759113645300
+      ],
+      "presentationToReference": [
+        -0.1153605432172859,
+        0.13062015491684398,
+        -0.9846980858101191,
+        -0.6518333300933368,
+        0.7380674968993184,
+        0.17426898691449913,
+        -0.7495366934633981,
+        -0.6619627974065267,
+        0.0000012968165738994396
+      ],
+      "orbitUpReference": [
+        -0.13062015491684398,
+        -0.7380674968993184,
+        0.6619627974065267
+      ],
+      "metersPerUnit": 5331271.29032258,
+      "bodyRadiusM": 1652694100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

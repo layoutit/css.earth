@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "idigna",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Idigna",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1220257.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/idigna-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Idigna",
+      "classification": "star",
+      "color": "#fbf6ff",
+      "distanceAu": 7237424.5,
+      "description": "A star 35 parsecs away, 1.8 times the Sun's width, measured from its light.",
+      "systemName": "Idigna system",
+      "aliases": [
+        "Pi Piscium",
+        "HD 9919",
+        "HIP 7535",
+        "HR 463"
+      ],
+      "order": 5568,
+      "context": {
+        "order": 5565
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        964901406121395200,
+        435145559600959100,
+        227727992118441100
+      ],
+      "presentationToReference": [
+        0.891196615515537,
+        0.19173624829874533,
+        0.4111031544296083,
+        0.4019066067405312,
+        0.08646897154997431,
+        -0.9115888307879831,
+        0.21033228937080617,
+        -0.9776299545571482,
+        -7.898495376641858e-7
+      ],
+      "orbitUpReference": [
+        -0.19173624829874533,
+        -0.08646897154997431,
+        0.9776299545571482
+      ],
+      "metersPerUnit": 3936315.4838709678,
+      "bodyRadiusM": 1220257800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

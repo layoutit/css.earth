@@ -1,0 +1,61 @@
+{
+  "id": "jian",
+  "name": "Jian",
+  "system": "Jian system",
+  "description": "A star 112 parsecs away, 37 times the Sun's width, measured from its light.",
+  "aliases": [
+    "Xi2 Sagittarii",
+    "HD 175775",
+    "HIP 93085",
+    "HR 7150"
+  ],
+  "featured": true,
+  "target": "HIP 93085",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 37.091,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 93085: radius 37.091 solar radii, implied by the fitted luminosity 573.93 solar luminosities (fractional uncertainty 0.08) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4642,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 93085: effective temperature 4642 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.041)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 111.982,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 93085: distance 111.982 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.059), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 6.607
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 112 parsecs away, 37 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 574 times the Sun's luminosity at 4,642 K, so 37.091 solar radii.",
+    "locator": "Table 2, HIP 93085: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Xi2_Sagittarii",
+      "title": "Xi2 Sagittarii",
+      "revision": "1370792292",
+      "card": "Xi2 Sagittarii, also named Jian, is a star in the zodiac constellation of Sagittarius.",
+      "introduction": "Data collected during the Hipparcos mission suggests it is an astrometric binary, although nothing is known about the companion."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -20.1,
+    "uncertainty": 0.7,
+    "source": "SIMBAD's radial velocity for Gaia DR3 4084834822776246272 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
+  },
+  "order": 5575
+}

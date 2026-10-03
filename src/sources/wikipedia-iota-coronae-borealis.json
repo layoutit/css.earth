@@ -1,0 +1,44 @@
+{
+  "id": "wikipedia-iota-coronae-borealis",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "Wikipedia article: Iota Coronae Borealis",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://en.wikipedia.org/wiki/Iota_Coronae_Borealis"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://en.wikipedia.org/wiki/Iota_Coronae_Borealis",
+      "label": "Wikipedia, Iota Coronae Borealis"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://en.wikipedia.org/wiki/Iota_Coronae_Borealis",
+      "checkedOn": "2026-10-03",
+      "locator": "Lead section, as the REST summary API serves it; the quotes name the revision"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wikipedia contributors, \"Iota Coronae Borealis\", Wikipedia, The Free Encyclopedia",
+      "scope": "citation",
+      "evidence": "https://en.wikipedia.org/wiki/Iota_Coronae_Borealis"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution-ShareAlike 4.0; sentences quoted verbatim with attribution",
+      "scope": "Quoted text",
+      "evidence": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  ],
+  "creators": [
+    "Wikipedia contributors"
+  ]
+}

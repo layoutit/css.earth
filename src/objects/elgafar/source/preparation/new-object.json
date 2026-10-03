@@ -1,0 +1,55 @@
+{
+  "id": "elgafar",
+  "name": "Elgafar",
+  "system": "Elgafar system",
+  "description": "A star 4.2 solar radii and 1.84 solar masses, about 37 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 3649422995468596480",
+    "HR 5409",
+    "Phi Virginis",
+    "HIP 70755",
+    "HD 126868"
+  ],
+  "featured": true,
+  "target": "HR 5409",
+  "gaia": "3649422995468596480",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5477,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 3649422995468596480: teff_gspphot 5477.121 K (16th-84th percentiles 5475.831-5478.321), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 1.2
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.00 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 37 parsecs away, 4.2 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 4.2 solar radii and 1.84 solar masses (FLAME) and 5,477 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 3649422995468596480: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Phi_Virginis",
+      "title": "Phi Virginis",
+      "revision": "1374783357",
+      "card": "Phi Virginis is a binary star in the zodiac constellation of Virgo.",
+      "introduction": "It can be seen with the naked eye, having an apparent visual magnitude of +4.81."
+    }
+  },
+  "notes": [],
+  "order": 5537
+}

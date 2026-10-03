@@ -5,7 +5,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-52",
+      "label": "Anadolu",
       "steps": [
         "verify-sources",
         "assets",
@@ -94,12 +94,15 @@
       }
     },
     "catalog": {
-      "name": "WASP-52",
+      "name": "Anadolu",
       "classification": "star",
       "color": "#ffe6d0",
       "distanceAu": 36021421.8,
       "description": "WASP-52 b crosses WASP-52 as seen from Earth, which is how it was found.",
-      "systemName": "WASP-52 system",
+      "systemName": "Anadolu system",
+      "aliases": [
+        "WASP-52"
+      ],
       "order": 4822,
       "context": {
         "order": 4819
