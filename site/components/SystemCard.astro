@@ -15,7 +15,7 @@ interface Props { hostId: string }
 const { hostId } = Astro.props;
 const card = systemCard(hostId);
 const detached = !namesSystem(Astro.url);
-const prefix = `${hostId}-system`;
+const prefix = card?.system.id ?? '';
 ---
 
 {card && <>

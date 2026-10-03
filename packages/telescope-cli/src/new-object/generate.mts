@@ -26,7 +26,7 @@ import { gaiaCepheidClass } from '@cssearth/bake/photometry';
 import { CEPHEID_GRAVITIES } from './cepheids.mts';
 import { writeLedger } from './ledger.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
-import { hostedParent } from './new-hosted-planet.mts';
+import { packageParent, withParent } from './package-parent.mts';
 
 const SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938;
 const GAIA_LICENSE = { license: 'Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained', licenseEvidence: ['https://www.cosmos.esa.int/web/gaia-users/credits'] };
@@ -132,24 +132,6 @@ export function astronomyRecord(spec: StarSpec, row: GaiaRow | CatalogueRow, ids
         properMotion: place.properMotion.source,
         radialVelocity: gaia?.radialVelocity !== undefined ? `Gaia DR3 (same row): ${gaia.radialVelocity.toFixed(2)}${gaia.radialVelocityError ? ` +/- ${gaia.radialVelocityError.toFixed(2)}` : ''} km/s` : `${spec.radialVelocity!.source} (${spec.radialVelocity!.url})`,
         ...(spec.boundTo ? { binary: spec.boundTo.source } : {}) } } };
-}
-
-/** The object a package this tool writes is inside (packages/objects/src/registry/object-tree.ts). A star bound to another is
- * inside that star's system. Any other keeps the parent its package already has, since the systems step moves a star with planets
- * into its own system; a new package takes the parent its spec names, and is refused without one. */
-export async function packageParent(root: string, id: string, named: { readonly parent?: string; readonly boundTo?: { readonly host: string } }): Promise<string> {
-  if (named.boundTo) return hostedParent(named.boundTo.host);
-  const path = `src/objects/${id}/object.json`;
-  const existing = await readFile(resolve(root, path), 'utf8').then(text => (JSON.parse(text) as { parent?: unknown }).parent, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return undefined; throw error; });
-  const parent = typeof existing === 'string' ? existing : named.parent;
-  if (parent === undefined) throw new TypeError(`${id}: a new object names the object it is inside: give its spec a parent (its galaxy's id, "milky-way" for a star Gaia or Hipparcos places) or the star it is bound to (boundTo).`);
-  return parent;
-}
-/** `files` with the package's descriptor naming `parent`, written after its id. */
-export function withParent<Files extends Map<string, string | Buffer>>(files: Files, id: string, parent: string): Files {
-  const path = `src/objects/${id}/object.json`, { schema, id: own, parent: _drafted, ...rest } = JSON.parse(String(files.get(path))) as Record<string, unknown>;
-  files.set(path, `${JSON.stringify({ schema, id: own, parent, ...rest }, null, 2)}\n`);
-  return files;
 }
 
 /** A publication record in src/sources for a cited arXiv or DOI link. */

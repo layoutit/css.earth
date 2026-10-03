@@ -4,7 +4,6 @@ import type { BrowserWindow } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { readNavigationSelection } from '../navigation/navigation-request.mts';
-import { WORLD_OBJECTS } from '../world-objects.mts';
 import { withSceneDataset } from '../dataset-url.mts';
 import type { createPreparedWorldNavigation, WorldHandoff } from '../prepared-world-navigation.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
@@ -28,7 +27,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   async function frameInitialView(session: SceneSession) {
     const { objectId, request, mount, shell } = session;
     if (!mount || !shell) return false;
-    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS) : null;
+    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId) : null;
     // A page that opens on a zoom out (a star's system, an object seen from inside) opens framed as that scope says, around its centre.
     const step = initialSelection && !initialSelection.savedView ? zoomStepOf(initialSelection.subject) : null;
     if (step) {
@@ -55,7 +54,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   async function restore(session: SceneSession, handoff?: WorldHandoff) {
     const { objectId, request, mount, shell } = session;
     if (!mount || !shell) return false;
-    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS) : null;
+    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId) : null;
     let interrupted = false;
     if (handoff?.afterMount) {
       try {
@@ -100,7 +99,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   async function frameDatasetVolume(session: SceneSession) {
     const { objectId, request, mount } = session;
     if (!mount || !session.url || request?.camera.kind === 'restore') return true;
-    const selection = readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS);
+    const selection = readNavigationSelection(new URL(session.url), objectId);
     if (subjectView(selection.subject) !== 'body' || selection.savedView || selection.feature) return true;
     const datasets = mount.datasets, volume = datasets?.volumeOf(datasets.current() ?? datasets.defaultId);
     const target = volume ? navigation.datasetVolumeTarget({ objectId, volumeId: volume.objectId, mount }) : null;

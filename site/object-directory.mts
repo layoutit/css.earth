@@ -33,7 +33,11 @@ export function knownAncestors(id: string): readonly NavigableObject[] {
 /** Loads the objects `id` is inside, together: its entry names them (`ancestors`), so none waits for another. */
 export async function loadAncestors(id: string, read: (id: string) => Promise<unknown | null> = fetchEntry): Promise<readonly NavigableObject[]> {
   const entry = await read(id);
-  const ids = entry && typeof entry === 'object' && 'ancestors' in entry && Array.isArray(entry.ancestors) ? entry.ancestors.filter((value): value is string => typeof value === 'string') : [];
+  const listed: unknown = entry && typeof entry === 'object' && 'ancestors' in entry ? entry.ancestors : [];
+  if (!Array.isArray(listed) || !listed.every((value): value is string => typeof value === 'string')) {
+    throw new TypeError(`/objects/${id}/entry.json: ancestors must be a list of object ids; got ${JSON.stringify(listed)}.`);
+  }
+  const ids: readonly string[] = listed;
   await Promise.all(ids.map(ancestor => loadObject(ancestor, read)));
   return knownAncestors(id);
 }

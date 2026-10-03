@@ -3,8 +3,11 @@ import { systemObjectId } from './navigation/system-address.mts';
 import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 import { prepareBodyMoons, type MoonListEntry } from './prepare-body-moons.mts';
 import { systemSourceDocumentation } from './source-documentation.mts';
+import { APPLICATION_WORLD_CONTEXT } from './world-context-plan.mts';
 import overviewFacts from './source/overview-facts.json' with { type: 'json' };
 
+/** Each world body's place in the world's prepared order. */
+const worldOrder = new Map(APPLICATION_WORLD_CONTEXT.bodies.map((body, index) => [body.id, index]));
 const objects = new Map(OBJECTS.map(object => [object.id, object]));
 const bodies = new Map(SCENE_OBJECTS.map(object => [object.id, object]));
 const children = new Map<string, string[]>();
@@ -39,6 +42,8 @@ export function systemCard(hostId: string) {
       : (a, b) => Number(b.id === hostId) - Number(a.id === hostId) || a.name.localeCompare(b.name, 'en', { numeric: true })).map(row);
   const facts = hostId === SOLAR_SYSTEM_ID ? overviewFacts['solar-system'].facts : undefined;
   // The header names the system's source document: a system opened from a breadcrumb has no row in the lists to name it,
-  // and the footer link kept the previous page's (2026-10-02).
-  return { system, host, rows, facts, source: systemSourceDocumentation({ id: hostId, name: system.name, memberIds: members.map(body => body.id) }) };
+  // and the footer link kept the previous page's (2026-10-02). Its credits name the providers of everything inside it, in
+  // the world's prepared order of bodies, which says who is named first.
+  const credited = members.map(body => body.id).sort((a, b) => (worldOrder.get(a) ?? Number.MAX_SAFE_INTEGER) - (worldOrder.get(b) ?? Number.MAX_SAFE_INTEGER));
+  return { system, host, rows, facts, source: systemSourceDocumentation({ id: hostId, name: system.name, memberIds: credited }) };
 }

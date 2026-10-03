@@ -324,8 +324,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             publishSuppressedLabels();
             spatial.previewSelection(id);
           },
-          /** `scope`: the rung of the zoom ladder shown (a star's own `system`, or a level). `starsRetired`: the scope is past
-           * the level that holds the stars, as the host's ladder says. */
+          /** `scope`: what the zoom shows: a star's own `system`, or the id of an object seen from inside. `starsRetired`:
+           * the scope is past the object that holds the stars, as the host says. */
           setOverview(enabled: boolean, scope?: string, preserveSelection = false, starsRetired = false) {
             overview = enabled;
             spatial.setOverview(enabled, preserveSelection);

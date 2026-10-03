@@ -353,7 +353,7 @@ export function createSceneRouter({
       const objects = registry.WORLD_OBJECTS, worldIds = new Set(objects.map(object => object.id));
       const navigation = registry.createPreparedWorldNavigation({ objects: registry.SCENE_OBJECTS, motion: cameraMotion, windowTarget, documentTarget });
       const selection = registry.createSceneSelection({ objectId, systems: objects,
-        initial: registry.selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId, objects), onChange: publishSelection });
+        initial: registry.selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId), onChange: publishSelection });
       const activation = registry.createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent, getReducedMotion: () => reducedMotionActive });
       if (windowTarget.location?.href && !destroyed) {
         // Only a settled scene belongs to the entry that history names. An unfinished navigation

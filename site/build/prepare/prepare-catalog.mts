@@ -219,8 +219,8 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   // bound to another (the astronomy records' `boundTo`) is inside what that star is inside.
   const parentOf = (id: string) => { const descriptor = descriptors.get(id); return isRecord(descriptor) && typeof descriptor.parent === 'string' ? descriptor.parent : undefined; };
   const inTree = new Set(entries.map(({ id }) => id));
-  checkBankHosts([...descriptors].flatMap(([id, descriptor]) => inTree.has(id) || !isRecord(descriptor) || !isRecord(descriptor.properties) ? []
-    : [{ id, host: descriptor.properties.host }]), inTree);
+  checkBankHosts([...descriptors].flatMap(([id, descriptor]) => inTree.has(id) ? []
+    : [{ id, host: isRecord(descriptor) && isRecord(descriptor.properties) ? descriptor.properties.host : undefined }]), inTree);
   checkBoundStars(entries.map(({ id }) => { const parent = parentOf(id); return parent === undefined ? { id } : { id, parent }; }),
     STAR_IDS.flatMap(id => { const host = starAstrometry(id).boundTo; return host === undefined ? [] : [[id, host] as const]; }));
   const discoveries = await Promise.all(entries.map(async ({ id }) => {

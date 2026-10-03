@@ -83,7 +83,9 @@ system is an object of its own, the host's system (`/jupiter-system/`, `/trappis
 the same card, the host's: the system's header, tabs and list are parts of it
 ([`SystemCard.astro`](../site/components/SystemCard.astro)), mounted while the system is the view.
 A star's planets, a star's companion stars and a planet's moons are one card, read from the
-system's object and the objects inside it ([`system-card.mts`](../site/system-card.mts)).
+system's object and the objects inside it ([`system-card.mts`](../site/system-card.mts)). An address names a
+system by the registry's id rule alone, and whether it is a star's system or a planet's moons is
+what its host is ([`scene-subject.mts`](../site/scene/scene-subject.mts)): no table of systems is asked.
 
 ![The WASP-43 system overview: the star, WASP-43b and its orbit, with the system's card](images/wasp-43-system-overview.png)
 

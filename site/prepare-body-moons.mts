@@ -1,6 +1,6 @@
 import { SEARCH_OBJECTS } from './search/search-objects.mts';
 import type { ObjectEntry } from './objects.mts';
-import preparedWorld from '../src/objects/sun/prepared/world-context.json' with { type: 'json' };
+import { systemHostId, systemObjectId } from './navigation/system-address.mts';
 import moonCatalogues from './source/moon-catalogues.json' with { type: 'json' };
 import { sourceArray, sourceId, sourceObject, sourceText, sourceUnique } from '@cssearth/objects/sources';
 import { labelEligible } from '@cssearth/renderer/labels/universe-label-policy.ts';
@@ -29,11 +29,11 @@ export function parseMoonCatalogue(input: unknown) {
 const catalogues: Readonly<Record<string, ReturnType<typeof parseMoonCatalogue>>> = Object.fromEntries(
   moonCatalogues.systems.map(system => [sourceId(system.id), parseMoonCatalogue(system)]));
 
+/** A host's moons: the moons inside its system in the object tree, nearest the Sun first, or, where its moon catalogue
+ * names them, in the catalogue's order with the moons that have no package yet. */
 export function prepareBodyMoons(objectId: string): readonly MoonListEntry[] {
-  const children = new Set(preparedWorld.bodies
-    .filter(body => body.orbit?.centerBodyId === objectId).map(body => body.id));
-  const available = SEARCH_OBJECTS.filter(object =>
-    object.classification === 'satellite' && children.has(object.id));
+  const system = systemObjectId(objectId);
+  const available = SEARCH_OBJECTS.filter(object => object.classification === 'satellite' && object.parent === system);
   const catalogue = catalogues[objectId];
   if (!catalogue) return available.map(object => ({ id: object.id, name: object.name, object }));
   const byId = new Map(available.map(object => [object.id, object]));
@@ -47,8 +47,8 @@ export function prepareBodyRelations(objectId: string) {
   const moons = prepareBodyMoons(objectId);
   if (moons.length) return { label: 'Moons', moons, parent: undefined };
   const object = SEARCH_OBJECTS.find(object => object.id === objectId);
-  const parentId = object?.classification === 'satellite'
-    ? preparedWorld.bodies.find(body => body.id === objectId)?.orbit?.centerBodyId : undefined;
+  // A moon is inside its host's system.
+  const parentId = object?.classification === 'satellite' && object.parent ? systemHostId(object.parent) ?? undefined : undefined;
   const parent = SEARCH_OBJECTS.find(object => object.id === parentId);
   if (!parent) return null;
   return { label: `${parent.name} system`, parent,

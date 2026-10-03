@@ -2,7 +2,6 @@ import type { WorldCameraPose } from '@cssearth/objects';
 import { zoomScopeAtCamera } from '../zoom-scope.mts';
 import { namesSystem, type PageView } from '../navigation/navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
-import { satelliteSystemByHost } from '../satellite-systems.mts';
 import { SYSTEM_RANGES } from '../system-framing.mts';
 import { subjectOfScope, zoomChain, zoomStepOf } from '../inside-view.mts';
 import { selectionKey, subjectOf, type SceneSubject } from './scene-subject.mts';
@@ -18,11 +17,11 @@ export type SceneView = PageView;
 export type SceneContext = SceneSubject;
 export type SelectionTarget = SceneSubject;
 
-export function selectionTargetFromUrl(url: URL, objectId: string, objects: SystemObjects): SelectionTarget {
-  // A system's address shows its host out to its members: a planet's moons, or a star's planetary system. An address that
-  // names the system of a host without one is the body.
-  if (!namesSystem(url)) return { objectId };
-  return subjectOf(objectId, satelliteSystemByHost(objectId) || systemById(objects, objectId) ? 'system' : 'body');
+/** The selection an address names on the scene of `objectId`: its system when the address is a system's (the registry's
+ * rule, navigation/system-address.mts), which shows the host out to what is inside it; else the body. The build serves a
+ * system's address only for a system object, so no table of systems is asked. */
+export function selectionTargetFromUrl(url: URL, objectId: string): SelectionTarget {
+  return subjectOf(objectId, namesSystem(url) ? 'system' : 'body');
 }
 
 /** One committed subject. Mounted scene ownership and temporary browsing/flight previews remain independent. */

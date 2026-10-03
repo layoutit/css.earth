@@ -15,10 +15,6 @@ import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
 import { worldFilesOf } from '../../world-places.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
-import systemText from '../../../src/navigation/system-text.json' with { type: 'json' };
-import { allSatelliteSystems } from '../../satellite-systems.mts';
-import { readSourceCatalog } from '@cssearth/bake/sources';
-import { prepareSystemIntroductions } from './system-text.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { isExtremeTransNeptunian } from '@cssearth/astronomy';
 
@@ -136,13 +132,12 @@ function orbitCentres(context: typeof APPLICATION_WORLD_CONTEXT): ReadonlyMap<st
     ...Object.entries(context.orbitCenters ?? {}).map(([id, centre]) => [id, centre.centerBodyId] as const)]);
 }
 
-export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<Record<string, string>>) {
+export function prepareWorldPresentation() {
   const minor = minorMoonOrbitIds(APPLICATION_WORLD_CONTEXT.bodies);
   const defaultFeatureIds = SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id);
   const orbitFeatureIds = SCENE_OBJECTS.filter(orbitFeature).map(object => object.id);
   return {
-    schema: 'cssearth-world-presentation@5',
-    satelliteSystemIntroductions,
+    schema: 'cssearth-world-presentation@6',
     moons: { major: majorMoonIds(), minor },
     defaultFeatureIds,
     orbitFeatureIds,
@@ -158,9 +153,7 @@ export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<
 
 /** Write site/prepared-world-presentation.json, leaving an unchanged file untouched. */
 export async function writeWorldPresentation() {
-  const catalogue = await readSourceCatalog(resolve(import.meta.dirname, '../../..'));
-  const introductions = prepareSystemIntroductions(systemText, allSatelliteSystems().map(system => system.hostId), new Set(catalogue.records.map(record => record.id)));
-  const text = `${JSON.stringify(prepareWorldPresentation(introductions))}\n`;
+  const text = `${JSON.stringify(prepareWorldPresentation())}\n`;
   await mkdir(dirname(output), { recursive: true });
   if (await readFile(output, 'utf8').catch(() => null) !== text) await writeFile(output, text);
 }

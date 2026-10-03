@@ -5,7 +5,7 @@ import { OBJECTS, SCENE_OBJECTS as REGISTERED_SCENE_OBJECTS } from '../objects.m
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { resolve } from 'node:path';
 import { OBJECT_ENTRY_IDS, objectEntry } from '../object-entry.mts';
-import { knownObject, loadObject, objectFromEntry, NAVIGABLE_OBJECTS, SCENE_OBJECTS } from '../object-directory.mts';
+import { knownObject, loadAncestors, loadObject, objectFromEntry, NAVIGABLE_OBJECTS, SCENE_OBJECTS } from '../object-directory.mts';
 
 // Loaders are functions; compare everything else an object carries.
 const facts = (value: unknown) => JSON.parse(JSON.stringify(value));
@@ -46,4 +46,9 @@ test('the directory loads each object once, and only objects', async () => {
   await assert.rejects(loadObject('venus', async () => objectEntry('mars')), /The entry for venus names mars/);
   // A failed read is forgotten, so the next asks again.
   assert.equal(await loadObject('venus', async id => objectEntry(id)), knownObject('venus'));
+});
+
+test('an entry whose ancestors are not a list of object ids is refused, naming the entry', async () => {
+  await assert.rejects(loadAncestors('mars', async () => ({ ancestors: ['solar-system', 7] })), /\/objects\/mars\/entry\.json: ancestors must be a list of object ids; got \["solar-system",7\]/);
+  await assert.rejects(loadAncestors('mars', async () => ({ ancestors: 'solar-system' })), /ancestors must be a list of object ids/);
 });

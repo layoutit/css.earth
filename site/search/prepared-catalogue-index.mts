@@ -4,13 +4,10 @@ import { objectTypeLabel, SEARCH_OBJECTS } from './search-objects.mts';
 import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
 import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
 import { markerStyle } from '@cssearth/renderer/navigation/marker-presentation.ts';
-import { sourceDocumentation, systemSourceDocumentation } from '../source-documentation.mts';
-import { allPlanetarySystems } from '../object-systems.mts';
-import { SCENE_OBJECTS, requireObject } from '../objects.mts';
+import { sourceDocumentation } from '../source-documentation.mts';
 import type { CatalogueIndex, CatalogueIndexEntry } from './catalogue-index.mts';
 import { listDistance } from './list-distance.mts';
-import { systemObjectId } from '@cssearth/objects';
-import { allSatelliteSystems } from '../satellite-systems.mts';
+import { systemCard } from '../system-card.mts';
 
 /** A row's sprite is drawn at this share of its prepared size: the largest marker is 14 px. */
 const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS).map(({ presentation }) => presentation.size));
@@ -56,48 +53,33 @@ export function preparedCatalogueIndex(): CatalogueIndex {
   });
 }
 
-/** One row per system, leading to its own address: a star's planetary system or a planet's moons. search finds a system by name ("trappist" lists the TRAPPIST-1
- * system) and "planetary systems" lists them all, from the server, instead of a hidden row per system in every page. */
+/** One row per system object, leading to its own address: a star's planets, a star's companion stars or a planet's moons.
+ * Search finds a system by name ("trappist" lists the TRAPPIST-1 system) and "planetary systems" lists them all, from the
+ * server, instead of a hidden row per system in every page. The row is the system's own object's; its host gives its
+ * distance and marker, and what is inside it its sources (system-card.mts). */
 function systemEntries(): CatalogueIndexEntry[] {
-  return [...allPlanetarySystems(SCENE_OBJECTS).map(system => {
-    const star = SCENE_OBJECTS.find(object => object.id === system.id)!, source = systemSourceDocumentation(system);
-    const title = distanceDescription(star.distance), { value, unit } = listDistance(star.distance);
-    return Object.freeze({
-      id: systemObjectId(system.id),
-      name: system.name,
-      searchNames: Object.freeze([]),
-      // A star with planets is a planetary system; a star with only the stars bound to it, a star system.
-      classification: requireObject(systemObjectId(system.id)).classification,
-      classificationName: requireObject(systemObjectId(system.id)).classification.replaceAll('-', ' '),
-      systemName: system.name.toLocaleLowerCase('en'),
-      route: `/${systemObjectId(system.id)}/`,
-      illustration: false,
-      candidate: false,
-      distanceMeters: star.distance.meters,
-      detail: Object.freeze({ text: `${value} ${unit}`, value, unit, title, ariaLabel: `${value} ${unit}. ${title}` }),
-      source: Object.freeze({ subject: `object:${systemObjectId(system.id)}`, document: source.href, label: source.label }),
-      marker: objectResultMarker(star),
-    });
-  }), ...allSatelliteSystems().map(system => {
-    // A planet's moons are a system too, an object with its own address: search finds "Jupiter system" as it finds a star's.
-    const host = SCENE_OBJECTS.find(object => object.id === system.hostId)!, source = systemSourceDocumentation({ id: system.hostId, name: system.name, memberIds: system.memberIds });
+  return SEARCH_OBJECTS.flatMap(system => {
+    const card = system.system ? systemCard(system.system.host) : null;
+    if (!card) return [];
+    const { host, source } = card, moons = system.classification === 'satellite-system';
     const title = distanceDescription(host.distance), { value, unit } = listDistance(host.distance);
-    return Object.freeze({
-      id: systemObjectId(system.hostId),
+    return [Object.freeze({
+      id: system.id,
       name: system.name,
       searchNames: Object.freeze([]),
-      classification: 'satellite-system',
-      classificationName: 'moon system',
-      systemName: host.systemName.toLocaleLowerCase('en'),
-      route: `/${systemObjectId(system.hostId)}/`,
+      classification: system.classification,
+      classificationName: moons ? 'moon system' : system.classification.replaceAll('-', ' '),
+      // A planet's moons are found with its star's system; a star's system by its own name.
+      systemName: (moons ? host.systemName : system.name).toLocaleLowerCase('en'),
+      route: system.route,
       illustration: false,
       candidate: false,
       distanceMeters: host.distance.meters,
       detail: Object.freeze({ text: `${value} ${unit}`, value, unit, title, ariaLabel: `${value} ${unit}. ${title}` }),
-      source: Object.freeze({ subject: `object:${systemObjectId(system.hostId)}`, document: source.href, label: source.label }),
+      source: Object.freeze({ subject: `object:${system.id}`, document: source.href, label: source.label }),
       marker: objectResultMarker(host),
-    });
-  })];
+    })];
+  });
 }
 
 export const PREPARED_CATALOGUE_INDEX = preparedCatalogueIndex();

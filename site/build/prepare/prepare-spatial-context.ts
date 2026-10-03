@@ -212,7 +212,9 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   // pins by byte length, when its orbit comes into view. The full JSON above remains for build-time tools.
   const banks = worldOrbitBanks(prepared);
   // Every page reads the summary: frame, camera and sky facts and the Sun. Every other body is in the file of the object it
-  // is inside, by the object tree (summarizeWorldContext).
+  // is inside, by the object tree (summarizeWorldContext). The tree is the checkout's registry, as the bodies'
+  // classifications above are: `objectsDirectory` says where each object's files are read and written, not which objects
+  // exist or what they are inside.
   const tree = new Map(readPreparedObjects(process.cwd()).objects.map(object => [object.id, { parent: object.parent }] as const));
   const { summary, systems, places, index, plainStars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])),
     id => tree.get(id)?.parent, ASTEROID_DOT_BANK);

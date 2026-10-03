@@ -17,6 +17,8 @@ import { SCENE_OBJECTS } from '../../objects.mts';
 import { allPlanetarySystems, SOLAR_SYSTEM_ID } from '../../object-systems.mts';
 import { allSatelliteSystems } from '../../satellite-systems.mts';
 import { systemObjectId } from '../../navigation/system-address.mts';
+import { readSourceCatalog } from '@cssearth/bake/sources';
+import { prepareSystemIntroductions } from './system-text.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
 
 const objectsRoot = resolve(import.meta.dirname, '../../../src/objects');
@@ -26,7 +28,9 @@ const hostOf = (id: string) => { const host = bodies.find(object => object.id ==
 type Descriptor = { parent?: string; properties: { catalog: Record<string, unknown>; worldFrame: unknown } };
 const descriptorOf = async (id: string) => JSON.parse(await readFile(resolve(objectsRoot, id, 'object.json'), 'utf8')) as Descriptor;
 const existing = async (id: string) => descriptorOf(id).catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return undefined; throw error; });
-const texts = JSON.parse(await readFile(resolve(objectsRoot, '../navigation/system-text.json'), 'utf8')) as { satellites: Record<string, { text: string }> };
+// Each moon system's cited introduction, checked: its length, and its sources against the source catalogue (system-text.mts).
+const introductions = prepareSystemIntroductions(JSON.parse(await readFile(resolve(objectsRoot, '../navigation/system-text.json'), 'utf8')),
+  allSatelliteSystems().map(system => system.hostId), new Set((await readSourceCatalog(resolve(objectsRoot, '../..'))).records.map(record => record.id)));
 /** The Solar System's card sentence. */
 const SOLAR_SYSTEM_DESCRIPTION = 'The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.';
 
@@ -37,21 +41,30 @@ const classifications = new Map(APPLICATION_WORLD_CONTEXT.bodies.map(body => [bo
 /** What a member is: its package's classification, or for a body drawn from its record alone, the record's. */
 const classificationOf = async (id: string) => classifications.get(id)
   ?? (JSON.parse(await readFile(resolve(objectsRoot, '../../packages/astronomy/data/bodies', `${id}.json`), 'utf8')) as { classification: string }).classification;
+const COUNTS = ['two', 'three', 'four', 'five', 'six'];
+/** The card sentence of a star nothing orbits with the stars bound to it: its stars by name. Its host's own sentence
+ * describes one star; that the stars are bound is each companion's record (`sources.binary`). */
+const boundStarsDescription = (hostId: string, memberIds: readonly string[]) => {
+  const names = [hostId, ...memberIds].map(id => hostOf(id).name), count = COUNTS[names.length - 2];
+  if (!count) throw new TypeError(`src/objects/${systemObjectId(hostId)}/object.json: the system has ${names.length} stars; add its count word to system-packages.mts.`);
+  return `${names.slice(0, -1).join(', ')} and ${names.at(-1)!} are ${count} stars bound to each other by gravity.`;
+};
 const stellar = async (ids: readonly string[]) => (await Promise.all(ids.map(classificationOf))).every(classification => classification === 'star' || classification === 'black-hole');
 
 const systems = [
   ...await Promise.all(allPlanetarySystems(bodies).filter(system => system.memberIds.length > 0).map(async system => {
     // A star with only stars inside its system (a companion that orbits it, or one bound to it with no orbit in the
     // record) is a star system; with a planet it is a planetary system.
-    return { hostId: system.id, name: system.name, bound: system.memberIds.filter(id => boundTo.get(id) === system.id),
+    const bound = system.memberIds.filter(id => boundTo.get(id) === system.id);
+    return { hostId: system.id, name: system.name, bound,
       classification: await stellar(system.memberIds) ? 'star-system' : 'planetary-system',
-      // What the system's card has always said: its star's own description; the Solar System's is its own sentence.
-      description: system.id === SOLAR_SYSTEM_ID ? SOLAR_SYSTEM_DESCRIPTION : hostOf(system.id).description };
+      // What the system's card has always said: its star's own description; the Solar System's is its own sentence, and so
+      // is a system of bound stars alone.
+      description: system.id === SOLAR_SYSTEM_ID ? SOLAR_SYSTEM_DESCRIPTION
+        : bound.length === system.memberIds.length ? boundStarsDescription(system.id, bound) : hostOf(system.id).description };
   })),
   ...allSatelliteSystems().map(system => {
-    const text = texts.satellites[system.hostId]?.text;
-    if (!text) throw new TypeError(`src/navigation/system-text.json satellites.${system.hostId}: the ${system.name} has no introduction.`);
-    return { hostId: system.hostId, name: system.name, bound: [] as string[], classification: 'satellite-system', description: text };
+    return { hostId: system.hostId, name: system.name, bound: [] as string[], classification: 'satellite-system', description: introductions[system.hostId]! };
   }),
 ];
 let written = 0;
@@ -65,10 +78,11 @@ for (const system of systems) {
   if (host.parent !== id) {
     await writeFile(resolve(objectsRoot, system.hostId, 'object.json'), `${JSON.stringify({ ...host, parent: id }, null, 2)}\n`);
   }
-  // A star bound to the host is inside the host's system: itself, or its own system when it hosts one.
+  // A star bound to the host is inside the host's system (`checkBoundStars`, object-tree.ts). It hosts no system of its
+  // own: what orbits it belongs to the host's system (planetary-system-members.mts).
   for (const starId of system.bound) {
-    const inside = (await existing(systemObjectId(starId))) ? systemObjectId(starId) : starId, star = await existing(inside);
-    if (star && star.parent !== id) await writeFile(resolve(objectsRoot, inside, 'object.json'), `${JSON.stringify({ ...star, parent: id }, null, 2)}\n`);
+    const star = await existing(starId);
+    if (star && star.parent !== id) await writeFile(resolve(objectsRoot, starId, 'object.json'), `${JSON.stringify({ ...star, parent: id }, null, 2)}\n`);
   }
   const descriptor = { schema: OBJECT_SCHEMA, id, parent, type: 'system',
     generator: 'site/build/prepare/system-packages.mts',

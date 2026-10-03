@@ -37,8 +37,8 @@ export interface ResolvedNavigation {
 }
 
 /** Interpret destination intent here; dataset and camera owners still validate their payloads when applying them. */
-export function readNavigationSelection(url: URL, objectId: string, objects: SystemObjects) {
-  return { subject: selectionTargetFromUrl(url, objectId, objects), savedView: url.searchParams.has('v'),
+export function readNavigationSelection(url: URL, objectId: string) {
+  return { subject: selectionTargetFromUrl(url, objectId), savedView: url.searchParams.has('v'),
     dataset: url.searchParams.has('dataset'), feature: url.searchParams.get('feature') };
 }
 
@@ -52,7 +52,7 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
     hasPresented: boolean; reuseScene: boolean; mount: ShellCamera | null; pending: ResolvedNavigation | null };
 }): { destination: ResolvedNavigation; centeredObjectId: string | null } {
   if (intent.kind === 'link') {
-    const link = new URL(intent.url, current.href), selection = readNavigationSelection(link, object.id, objects);
+    const link = new URL(intent.url, current.href), selection = readNavigationSelection(link, object.id);
     const view = subjectView(selection.subject);
     if (view !== 'body' && !selection.savedView && !selection.dataset) intent = { kind: 'object', view, camera: 'frame' };
   }
@@ -90,7 +90,7 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
     withView(url, view ?? (plain && (familyTarget !== null || center && systemById(objects, object.id)) ? 'system' : 'body'));
     if (intent.kind === 'feature' && intent.id !== null) url.searchParams.set('feature', intent.id);
   }
-  const selection = readNavigationSelection(url, object.id, objects);
+  const selection = readNavigationSelection(url, object.id);
   const interruptedFlight = current.pending !== null
     && !(current.pending.camera.kind === 'frame' && current.pending.camera.framing === 'center') && !center;
   const restore = history.history === 'pop' || linked && selection.savedView;
