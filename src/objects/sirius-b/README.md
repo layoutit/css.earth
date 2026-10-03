@@ -16,4 +16,8 @@ Hubble and 150 years of measurements give its orbit and a mass of 1.018 solar ma
 
 Generated 2026-10-02 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/sirius-b.json).
 
+The limb law was added on 2026-10-03 with `--star-limb`. The page as it opens with it, beside two other stars whose laws were re-read that day (headless Chromium, local build):
+
+![Sirius B, WASP-18 and Proxima Centauri as their pages open, 3 October 2026](evidence/2026-10-03/limb.jpg)
+
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
