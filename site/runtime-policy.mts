@@ -134,6 +134,9 @@ export const OVERVIEW_SELECTION_POLICY = Object.freeze({
   enterSunDiameterPixels: 48,
   centerRadiusPixels: 160,
   settleMilliseconds: 180,
+  // This many times past an exit distance the camera is leaving, not hovering at the threshold: the crossing is reported
+  // at once instead of after the settle time, so the world shows the system as a fast zoom passes it.
+  clearExitScale: 1.25,
 });
 
 export const sceneCursor: RuntimePolicy["sceneCursor"] = ({ surface, pressed, enabled }) => {

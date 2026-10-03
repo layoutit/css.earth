@@ -1,4 +1,5 @@
 import { writeStyle } from '../rendering/retained-write.js';
+import { eyeAnchor } from '@cssearth/engine';
 import { isExtendedClassification, type PreparedWorldContext, type PreparedContextBody, type WorldCameraPose } from '@cssearth/objects';
 import { createContextLocator } from './context-locator.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
@@ -304,14 +305,18 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const paintedBodies = new Set<(typeof bodies)[number]>();
   let paintedOrder: typeof bodies = [], paintMembershipChanged = false;
   let skippedPublications = 0, bodyPublications = 0, depthPublications = 0;
-  const cameraState = new Float64Array(12).fill(NaN);
-  const sameCamera = (world: WorldCameraPose, viewport: WorldCameraViewport) =>
-    world.pose.positionM.every((value, axis) => value === cameraState[axis]) &&
-    world.pose.orientationXyzw.every((value, axis) => value === cameraState[axis + 3]) &&
-    viewport.focalPixels === cameraState[7] &&
-    (viewport.widthPixels ?? host.clientWidth) === cameraState[8] &&
-    (viewport.heightPixels ?? host.clientHeight) === cameraState[9] &&
-    viewport.principalOffsetPixels.every((value, axis) => value === cameraState[axis + 10]);
+  // The camera as last published: position, orientation, lens and viewport, then the eye's exact anchor (engine eyeAnchor).
+  // positionM alone calls two places the same when they differ by less than a double holds that far from the frame origin.
+  const cameraState = new Float64Array(18).fill(NaN);
+  const sameCamera = (world: WorldCameraPose, viewport: WorldCameraViewport) => {
+    const { originM, offsetM } = eyeAnchor(world.pose);
+    return world.pose.positionM.every((value, axis) => value === cameraState[axis] && originM[axis] === cameraState[axis + 12] && offsetM[axis] === cameraState[axis + 15]) &&
+      world.pose.orientationXyzw.every((value, axis) => value === cameraState[axis + 3]) &&
+      viewport.focalPixels === cameraState[7] &&
+      (viewport.widthPixels ?? host.clientWidth) === cameraState[8] &&
+      (viewport.heightPixels ?? host.clientHeight) === cameraState[9] &&
+      viewport.principalOffsetPixels.every((value, axis) => value === cameraState[axis + 10]);
+  };
   const settleHover = () => {
     fader.setAnimationEnabled(false);
     for (const entry of animatedAnnotations) {
@@ -326,8 +331,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   windowTarget.addEventListener('pointerdown', beginCameraInput, { capture: true });
   windowTarget.addEventListener('wheel', beginCameraInput, { capture: true, passive: true });
   const refresh = () => { requestPublication?.(); };
-  // Any change to what the planner decides also invalidates frames already captured.
-  const invalidatePolicy = () => { presentationRevision++; policyDirty = true; };
+  // A change to what the planner decides (a selection, a visibility, a blocker, a flight or a coast beginning or ending, a
+  // caption measured) reaches the next plan (policyDirty), and each caller asks for that frame. A plan already captured
+  // stays good: it is the frame the camera asked for a moment before the change, so it is drawn and the change follows
+  // one frame later. Counted as stale, such a plan was thrown away and the camera waited a frame for its replacement:
+  // three held frames at every hand-over of a zoom, one as the scenes swapped and two as the new one settled (2026-10-03).
+  const invalidatePolicy = () => { policyDirty = true; };
+  // The bodies themselves changed: a plan already captured indexes the old list and cannot be drawn.
+  const invalidatePlans = () => { presentationRevision++; policyDirty = true; };
   const invalidateLabelSizes = () => { invalidatePolicy(); for (const entry of bodies) entry.labelSize = { ...entry.labelSize, width: 0 }; };
   const fonts = host.ownerDocument.fonts;
   fonts?.addEventListener('loadingdone', invalidateLabelSizes);
@@ -520,7 +531,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       for (const entry of entries) if (entry.orbit) entry.parentPaint = entriesById.get(entry.orbit.centerBodyId)?.paint;
       systemFade = createSystemFade(next);
       anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
-      refreshDepthBodies(); invalidatePolicy(); refresh();
+      refreshDepthBodies(); invalidatePlans(); refresh();
     },
     /** The places of the stars this layer draws as plain dots: a dot bank that also holds them leaves them out. The same
      * list until a system joins. */
@@ -568,7 +579,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       presentationRevision++;
       const { ranksChanged, changed: depthChanged } = depthOrder.update(world.pose.orientationXyzw, rotating, selectedEntry);
       const { emphasizedId, width, height } = frame;
-      cameraState.set(world.pose.positionM, 0); cameraState.set(world.pose.orientationXyzw, 3);
+      const anchor = eyeAnchor(world.pose);
+      cameraState.set(world.pose.positionM, 0); cameraState.set(world.pose.orientationXyzw, 3); cameraState.set(anchor.originM, 12); cameraState.set(anchor.offsetM, 15);
       cameraState[7] = viewport.focalPixels; cameraState[8] = width; cameraState[9] = height;
       cameraState.set(viewport.principalOffsetPixels, 10);
       const resized = previousHeader?.width !== width || previousHeader?.height !== height;

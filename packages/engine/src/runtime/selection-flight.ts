@@ -170,6 +170,17 @@ export function eyeAnchor(pose: PhysicalCameraPose): { readonly originM: Positio
 }
 const ZERO: PositionM = Object.freeze([0, 0, 0]);
 
+/** The pose with its eye `ratio` times as far from its focus origin (eyeAnchor), looking the same way: a dolly along the
+ * line from that origin, which keeps the origin where it is on screen. A pose with no focus offset has no origin to
+ * dolly from and is returned as it is. */
+export function dollyPoseAboutFocus(pose: PhysicalCameraPose, ratio: number): PhysicalCameraPose {
+  const { originM, offsetM } = eyeAnchor(pose);
+  if (pose.focusOffset === undefined || originM !== pose.focusOffset.originM || !(ratio > 0) || !Number.isFinite(ratio)) return pose;
+  const offset: PositionM = Object.freeze([offsetM[0] * ratio, offsetM[1] * ratio, offsetM[2] * ratio]);
+  return Object.freeze({ positionM: Object.freeze([originM[0] + offset[0], originM[1] + offset[1], originM[2] + offset[2]]) as PositionM,
+    orientationXyzw: pose.orientationXyzw, focusOffset: Object.freeze({ originM, offsetM: offset }) });
+}
+
 /** A point's position from the eye in the reference frame, point - eye. Every reader of the camera's place goes through this:
  * `point - pose.positionM` loses whatever a double cannot hold at the eye's distance from the frame origin (a kilometre at 157
  * parsecs), while (point - origin) - offset keeps the eye's offset from the body it is near. */
@@ -179,6 +190,17 @@ export function fromEyeM(pose: PhysicalCameraPose, pointM: readonly number[]): P
 }
 /** The eye's distance from a point, through `fromEyeM`. */
 export function eyeDistanceM(pose: PhysicalCameraPose, pointM: readonly number[]): number { return Math.hypot(...fromEyeM(pose, pointM)); }
+/** Whether two poses put the eye in the same place, value for value: the same `positionM` and the same anchor (eyeAnchor).
+ * `positionM` alone calls two places the same when they differ by less than a double holds at the eye's distance from the
+ * frame origin: 790 m at PSR J0437-4715, where 82 of 159 frames of a slow zoom 55 km from the star kept `positionM` bit for
+ * bit (2026-10-02), so a "same view" check dropped them. */
+export function sameEyePlace(a: PhysicalCameraPose, b: PhysicalCameraPose): boolean {
+  const ea = eyeAnchor(a), eb = eyeAnchor(b);
+  for (let axis = 0; axis < 3; axis++) {
+    if (a.positionM[axis] !== b.positionM[axis] || ea.originM[axis] !== eb.originM[axis] || ea.offsetM[axis] !== eb.offsetM[axis]) return false;
+  }
+  return true;
+}
 
 export function cameraPoseFromReferenceFrame(pose: PhysicalCameraPose, frame: FocusFrame): PhysicalCameraPose {
   validatePose(pose); validateFrame(frame);

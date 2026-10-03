@@ -175,6 +175,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       labelEdge: preparedLabelEdge(definition, worldFrame),
       ...(definition.camera.framingScale === undefined ? {} : { framingScale: definition.camera.framingScale }),
       setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
+      setZoomOutOpen(open: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutOpen(open); },
+      zoomRate: () => lifetime.disposed ? 0 : getOrbit().zoomRate(),
+      resumeZoom(rate: number) { if (!lifetime.disposed) getOrbit().resumeZoom(rate); },
       holdPresentation() { return getSelection().holdPresentation(); },
       capture() { return getOrbit().captureWorldCamera(worldFrame); },
       apply(pose: Parameters<ObjectWorldNavigation['apply']>[0], options?: { signal: AbortSignal; departing?: boolean }) {

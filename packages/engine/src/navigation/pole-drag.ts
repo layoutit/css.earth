@@ -9,6 +9,9 @@ export interface PoleTurn { spin: number; tilt: number; }
 
 // The pole may reach the line of sight but not cross it: crossing would turn the body upside down.
 const POLE_TILT_MARGIN = 1e-6;
+// The grab's spin eases out near the pole while the pole is within POLE_NEAR of the line of sight, inside POLE_PIVOT_REACH
+// of the pole as a share of the body's radius. Both chosen by feel, not measured.
+const POLE_NEAR = 5 * Math.PI / 180, POLE_PIVOT_REACH = .25;
 
 /** The tumble's screen angles (yaw for rightward, pitch for downward pointer motion) as radians about the pole and across
  * it, measured along the pole's own screen direction rather than the screen's. */
@@ -29,13 +32,14 @@ export interface GrabSphere { center: Vector3; radius: number; opticalCenterX: n
 /** The pole turn that carries the surface point under the previous pointer to the point under the current one, as
  * Cesium's pan3D does about its constrained axis: the grabbed ground stays under the pointer while the pole keeps its
  * screen direction. Null when either pointer misses the body; the caller then turns by angle. Where no turn reaches the
- * pointer (a sideways drag close to the pole), the tilt goes as far as it can and the spin follows. */
+ * pointer (a sideways drag close to the pole), the tilt goes as far as it can and the spin follows. Where the tilt is held
+ * (the pole at the line of sight), the spin is measured with the tilt the turn is given and eases out near the pole. */
 export function poleGrabTurn({ previousX, previousY, currentX, currentY }: { previousX: number; previousY: number; currentX: number; currentY: number },
   sphere: GrabSphere, pole: Vector3): PoleTurn | null {
   if (![previousX, previousY, currentX, currentY].every(Number.isFinite)) throw new TypeError('Pole grab pointer is invalid.');
   const from = sphereHit(previousX, previousY, sphere), to = sphereHit(currentX, currentY, sphere);
   if (!from || !to) return null;
-  const { pole: axis, east } = poleFrame(pole);
+  const frame = poleFrame(pole), { pole: axis, east } = frame;
   // A tilt by t about east followed by nothing else must bring the target to the source's height along the pole:
   // rotating `to` by a = -t about east gives it height A cos a + B sin a; solve for the smallest |a|.
   const height = dot(axis, from);
@@ -45,11 +49,20 @@ export function poleGrabTurn({ previousX, previousY, currentX, currentY }: { pre
   const phase = Math.atan2(B, A);
   const spread = reach > 1e-12 ? Math.acos(Math.min(1, Math.max(-1, height / reach))) : 0;
   const a = [phase - spread, phase + spread].map(wrap).reduce((best, value) => Math.abs(value) < Math.abs(best) ? value : best);
-  const lifted = rotateVector(axisAngle(east, a), to);
+  // The tilt the turn is given (poleTurnRotation): the pole may reach the line of sight, not cross it.
+  const tilt = clampTilt(-a, frame);
+  const lifted = rotateVector(axisAngle(east, -tilt), to);
   // The spin about the pole between the source and the lifted target, both seen down the pole.
-  const u = reject(from, axis), v = reject(lifted, axis);
-  const spin = Math.hypot(...u) < 1e-12 || Math.hypot(...v) < 1e-12 ? 0 : Math.atan2(dot(axis, cross(u, v)), dot(u, v));
-  return { spin, tilt: -a };
+  const u = reject(from, axis), v = reject(lifted, axis), fromPole = Math.min(Math.hypot(...u), Math.hypot(...v));
+  const spin = fromPole < 1e-12 ? 0 : Math.atan2(dot(axis, cross(u, v)), dot(u, v));
+  // With the pole at the line of sight the ground cannot follow a pointer that crosses the pole: the spin that would keep
+  // it there turns half a circle within a pixel of the pole (172 degrees in one frame of a straight drag down Earth,
+  // 2026-10-02). Within POLE_NEAR of the line of sight the spin eases out inside POLE_PIVOT_REACH of the pole, fully at the
+  // line of sight itself: that drag stops at the pole, and a drag around the pole still turns the body.
+  const fromEye = poleFromEye(frame);
+  if (fromEye >= POLE_NEAR) return { spin, tilt };
+  const free = smoothstep(fromEye / POLE_NEAR), pivot = smoothstep(fromPole / POLE_PIVOT_REACH);
+  return { spin: spin * (free + (1 - free) * pivot), tilt };
 }
 
 function sphereHit(x: number, y: number, { center, radius, opticalCenterX, opticalCenterY, focalLength }: GrabSphere): Vector3 | null {
@@ -90,9 +103,11 @@ function poleFrame(pole: Vector3) {
   return { pole: unit, up, east: [up[1]!, -up[0]!, 0] };
 }
 
+/** The pole's angle from the eye, measured along its screen direction. */
+function poleFromEye({ pole, up }: { pole: Vector3; up: Vector3 }) { return Math.atan2(pole[0]! * up[0]! + pole[1]! * up[1]!, pole[2]!); }
 // A tilt by t about `east` moves the pole's angle from the eye from b to b - t; keep it within (0, pi).
-function clampTilt(tilt: number, { pole, up }: { pole: Vector3; up: Vector3 }) {
-  const fromEye = Math.atan2(pole[0]! * up[0]! + pole[1]! * up[1]!, pole[2]!);
+function clampTilt(tilt: number, frame: { pole: Vector3; up: Vector3 }) {
+  const fromEye = poleFromEye(frame);
   return Math.min(Math.max(tilt, fromEye - Math.PI + POLE_TILT_MARGIN), fromEye - POLE_TILT_MARGIN);
 }
 function axisAngle(axis: Vector3, angle: number): Quaternion {
@@ -104,3 +119,4 @@ function dot(a: Vector3, b: Vector3) { return a[0]! * b[0]! + a[1]! * b[1]! + a[
 function cross(a: Vector3, b: Vector3): Vector3 { return [a[1]! * b[2]! - a[2]! * b[1]!, a[2]! * b[0]! - a[0]! * b[2]!, a[0]! * b[1]! - a[1]! * b[0]!]; }
 function reject(a: Vector3, axis: Vector3): Vector3 { const d = dot(a, axis); return [a[0]! - axis[0]! * d, a[1]! - axis[1]! * d, a[2]! - axis[2]! * d]; }
 function wrap(angle: number) { return Math.atan2(Math.sin(angle), Math.cos(angle)); }
+function smoothstep(value: number) { const t = Math.min(1, Math.max(0, value)); return t * t * (3 - 2 * t); }

@@ -1,3 +1,5 @@
+import { createSteadyFrameTime } from './steady-frame-time.js';
+
 export interface OpacityWindow {
   requestAnimationFrame(callback: (time: number) => void): number;
   cancelAnimationFrame(id: number): void;
@@ -46,7 +48,10 @@ function createFrameClock(window: OpacityWindow) {
       if (publish(now(), advance)) active.add(publish); else active.delete(publish);
     }
   };
-  const tick = (time: number) => {
+  // Whole-millisecond frame times (Safari) are spaced one display interval apart before any owner paces motion by them.
+  const steadyTime = createSteadyFrameTime();
+  const tick = (reported: number) => {
+    const time = steadyTime(reported);
     frame = null; presenting = true; timestamp = time;
     const ready = [...lanes.input.values(), ...lanes.present.values()];
     lanes.input.clear(); lanes.present.clear();
