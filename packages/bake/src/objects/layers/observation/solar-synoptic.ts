@@ -3,7 +3,7 @@
 //   - the retired module's file writes are gone: the generic raster lane (packages/bake/src/raster/surfaces.ts) packs,
 //     encodes and names every output;
 //   - the retired polar sprite, 32-segment band atlas and proxy blend are not here: the generic lane samples its own
-//     polar sprite (packages/objects/src/baking/polar.ts) from the stabilized map (stabilizeMapPoles below) and closes
+//     polar sprite (packages/bake/src/baking/polar.ts) from the stabilized map (stabilizeMapPoles below) and closes
 //     each pole with one flat cap.
 // The photosphere is the JSOC HMI continuum mosaic (hmi-continuum.mts). The Fourier polar boundary continuation,
 // off-limb registration and rim plate are the retired lane's.

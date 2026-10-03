@@ -1,8 +1,8 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { createSurfacePatches } from './surface.js';
-import type { SurfaceGeometryProfile } from './surface.js';
+import { createSurfacePatches } from './surface.ts';
+import type { SurfaceGeometryProfile } from './surface.ts';
 
 const profile = {
   radius: 230, polarRadius: 230, latitudeSegments: 16, longitudeSegments: 32,

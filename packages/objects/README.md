@@ -2,11 +2,6 @@
 
 Shared JSON parsing, validation, object capabilities, and preparation contracts.
 
-The same surface geometry, polar sampling, coverage completion, atmosphere,
-lighting, and interior pixel operators serve every compatible object. Inputs
-are numbers, pixels, and validated recipes; outputs contain no DOM or CSS.
-Node file/image I/O and CSS projection are separate application adapters.
-
 `parseAuthoredObjectDescriptor()` is the authored-data boundary for migrated
 objects. It returns a typed `recipe` composed from declared source references,
 shape, surfaces and datasets, materials, frame banks, optional layers and motion,

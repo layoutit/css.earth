@@ -10,7 +10,7 @@ import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConne
 import { decodeCruiseResult, missingSources, repositoryFiles, type ImportGraph } from './graph.mts';
 import { formatDelta, formatFindings } from './report.mts';
 import { declaredPackage, undeclaredImports } from './declared-dependencies.mts';
-import { isBroken, objectCodeFiles, REPOSITORY_RULES, repositoryFindings, RETIRED_FOLDERS, retiredFiles } from './repository-rules.mts';
+import { isBroken, OBJECT_FORMAT_FOLDERS, objectCodeFiles, REPOSITORY_RULES, repositoryFindings, RETIRED_FOLDERS, retiredFiles } from './repository-rules.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
 import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './workspaces.mts';
 import { packageCycles, packageCycleText } from './package-cycles.mts';
@@ -475,5 +475,21 @@ test('manifest cycles fail without a baseline across all dependency fields', () 
     assert.equal(isBroken(findings()), true, 'self-dependency is a cycle');
     write('a', { dependencies: [] });
     assert.throws(findings, /dependencies/u, 'malformed fields fail rather than hiding edges');
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+
+test('objects format folder allow-list rejects a new algorithm folder, including an empty one', () => {
+  const root = mkdtempSync(join(tmpdir(), 'object-format-folders-'));
+  const check = () => REPOSITORY_RULES.find(rule => rule.id === 'objects-hold-data')!.check(root, []);
+  try {
+    for (const folder of OBJECT_FORMAT_FOLDERS) mkdirSync(join(root, 'packages/objects/src', folder), { recursive: true });
+    assert.deepEqual(check(), []);
+    const fake = join(root, 'packages/objects/src/fake-algorithm');
+    mkdirSync(fake);
+    assert.equal(check().length, 1);
+    assert.match(check()[0], /fake-algorithm/);
+    rmSync(fake, { recursive: true });
+    assert.deepEqual(check(), []);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

@@ -1,5 +1,5 @@
-export { normalizeOrZero as normalize } from '@cssearth/core';
-export function clamp(value: number, minimum: number, maximum: number): number { return Math.max(minimum, Math.min(maximum, value)); }
+import { clamp } from '@cssearth/core';
+export { clamp, normalizeOrZero as normalize } from '@cssearth/core';
 export function mix(start: number, end: number, amount: number): number { return start + (end - start) * amount; }
 export function smoothstep(start: number, end: number, value: number): number { const amount = clamp((value - start) / (end - start), 0, 1); return amount * amount * (3 - 2 * amount); }
 export const smoothStep = smoothstep;

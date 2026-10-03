@@ -373,3 +373,6 @@ uniform-disc authoring retains geometry generation and its expected sphere path.
 
 Authored and prepared content wire records and their pure parsers live in `@cssearth/objects`;
 `objects/content` retains dataset preparation and filesystem/callback APIs.
+
+Surface geometry and ellipsoid patches live in internal `src/surface-geometry/`; polar sprites, lighting,
+coverage, atmosphere and interior raster algorithms live in internal `src/baking/`. Tests stay beside them.
