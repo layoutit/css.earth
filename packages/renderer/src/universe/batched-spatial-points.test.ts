@@ -10,16 +10,14 @@ test('a spatial point field reprojects through one retained SVG path per paint c
     metersPerUnit:1,boundsUnits:{min:[-20,-20,-20] as const,max:[20,20,20] as const}};
   const style={colorCss:'#ffb38a',opacity:.85,radiusPx:1};
   assert.equal(pointPaint(style), '#ffb38ad9@1');
-  let clock=0;
   const field=mountBatchedSpatialPoints({host,before,frame,points:[{positionUnits:[1,0,-10] as const}],className:'test-points',
-    stylePoint:()=>style,paintPalette:[pointPaint(style)],now:()=>clock});
+    stylePoint:()=>style,paintPalette:[pointPaint(style)]});
   const viewport={focalPixels:100,principalOffsetPixels:[0,0] as const,widthPixels:1000,heightPixels:800};
   const world={referenceFrame:'sun-icrf',epochJdTt:2451545,pose:{positionM:[0,0,0] as const,orientationXyzw:[0,0,0,1] as const}};
   field.publish({world,viewport});
   const path=field.root.querySelector('path')!,first=path.getAttribute('d');
   assert.equal(field.root.querySelectorAll('path').length, 1);assert.equal(path.getAttribute('stroke'), '#ffb38ad9');
   assert.equal(field.root.querySelector('i'), null);assert.equal(field.stats().visiblePoints, 1);assert.match(first ?? '', /^M/);
-  clock=100;
   field.publish({world:{...world,pose:{...world.pose,positionM:[1,0,0]}},viewport});
   assert.notEqual(path.getAttribute('d'), first);assert.equal(field.stats().visiblePoints, 1);assert.equal(host.children.length, 2);
   field.destroy();assert.equal(host.children.length, 1);
@@ -126,12 +124,11 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
   const cells = catalogueCells(rows, undefined, 32);
   const points = rows.map(row => ({ positionUnits: [row[0], row[1], row[2]] as unknown as readonly [number, number, number], color: row[3] }));
   const styles = [{ colorCss: '#ffffff', opacity: .5, radiusPx: 1 }, { colorCss: '#ff8800', opacity: 1, radiusPx: 2.5 }];
-  // A clock 100 ms on every trial: every publication may repaint, so both fields decide by their paint alone.
-  let keep = 1, drawn = rows.length, clock = 0;
+  let keep = 1, drawn = rows.length;
   const mount = (withCells: boolean) => { const { document } = parseHTML('<div id="host"></div>');
     return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
       ...(withCells ? { cells: { boxes: Float64Array.from(cells.boxes.flat()), of: Int32Array.from(cells.of) } } : {}),
-      stylePoint: point => styles[point.color]!, paintPalette: styles.map(pointPaint), drawnCount: () => drawn, keepFraction: () => keep, now: () => clock }); };
+      stylePoint: point => styles[point.color]!, paintPalette: styles.map(pointPaint), drawnCount: () => drawn, keepFraction: () => keep }); };
   const dots = (field: ReturnType<typeof mount>) => [...field.root.querySelectorAll('path')]
     .map(path => [...(path.getAttribute('d') ?? '').matchAll(/M-?\d+ -?\d+h0/g)].map(match => match[0]).sort().join(''));
   const plain = mount(false), celled = mount(true);
@@ -153,7 +150,7 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
     if (trial % 3 !== 2) { keep = trial % 5 === 0 ? .4 : 1; drawn = trial % 7 === 0 ? Math.round(random() * rows.length) : rows.length; }
     const publication = { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: {
       positionM: position as unknown as readonly [number, number, number], orientationXyzw: orientation as unknown as readonly [number, number, number, number] } }, viewport };
-    clock += 100; plain.publish(publication); celled.publish(publication);
+    plain.publish(publication); celled.publish(publication);
     assert.deepEqual(dots(celled), dots(plain), `trial ${trial}`);
     assert.equal(celled.stats().visiblePoints, plain.stats().visiblePoints);
     assert.equal(celled.stats().candidates, plain.stats().candidates);
@@ -168,45 +165,40 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
   plain.destroy(); celled.destroy();
 });
 
-test('a travelling camera repaints at most every 25 ms, warps the frames between and settles to the exact paint', async () => {
+test('a travelling camera repaints every frame; a turning one warps and settles to the exact paint', async () => {
   const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
     metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20] as const, max: [20, 20, 20] as const } };
   const points = Array.from({ length: 30 }, (_, index) => ({ positionUnits: [(index % 6) - 2.5, Math.floor(index / 6) - 2, -10] as const }));
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
-  const at = (z: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
-  let clock = 0, settled = 0;
+  const at = (z: number, degrees = 0) => { const half = degrees * Math.PI / 360;
+    return { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, Math.sin(half), 0, Math.cos(half)] as const } }, viewport }; };
+  let settled = 0;
   const mount = () => { const { document } = parseHTML('<div id="host"></div>');
     return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
-      stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'], now: () => clock, onSettle: () => settled++ }); };
-  const exact0 = () => { const fresh = mount(); fresh.publish(at(-3)); const d = fresh.root.querySelector('path')!.getAttribute('d'); fresh.destroy(); return d; };
+      stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'], onSettle: () => settled++ }); };
+  const exactAt = (z: number, degrees = 0) => { const fresh = mount(); fresh.publish(at(z, degrees)); const d = fresh.root.querySelector('path')!.getAttribute('d'); fresh.destroy(); return d; };
   const field = mount(), path = field.root.querySelector('path')!, svg = field.root.querySelector('svg')!;
   field.publish(at(0));
-  const first = path.getAttribute('d');
-  clock = 16; field.publish(at(-1));
-  assert.equal(path.getAttribute('d'), first, 'a frame 16 ms after a repaint keeps it');
-  assert.match(svg.style.transform, /^matrix3d/, 'and warps it');
-  clock = 33; field.publish(at(-2));
-  assert.notEqual(path.getAttribute('d'), first, 'a frame 33 ms after it repaints');
-  assert.equal(svg.style.transform, '');
-  clock = 49; field.publish(at(-3));
-  assert.notEqual(path.getAttribute('d'), exact0(), 'another paced frame');
-  // The camera stops: a publication that barely moves may not keep a paint left behind by a paced frame.
-  clock = 60; field.publish(at(-3));
-  assert.equal(path.getAttribute('d'), exact0(), 'a stop right after a paced frame repaints exactly');
-  clock = 80; field.publish(at(-4));
-  await new Promise(resolve => setTimeout(resolve, 200));
-  const exact = mount(); exact.publish(at(-4));
-  assert.equal(path.getAttribute('d'), exact.root.querySelector('path')!.getAttribute('d'), 'a pause repaints exactly');
-  assert.equal(settled, 1, 'and tells its owner once, so a screen budget settles on the stopped view');
-  // A travelling camera that also turns repaints on every frame: a turn's projective warp would stretch the painted dots.
-  const turning = (z: number, degrees: number) => { const half = degrees * Math.PI / 360;
-    return { ...at(z), world: { ...at(z).world, pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, Math.sin(half), 0, Math.cos(half)] as const } } }; };
-  clock = 1000; field.publish(turning(-4, 0));
+  // Each frame of a zoom at the dots' own scale is the exact paint of its camera: none keeps the frame before.
+  for (const z of [-1, -2, -3, -4]) {
+    field.publish(at(z));
+    assert.equal(path.getAttribute('d'), exactAt(z), `the frame at ${z} is painted from its own camera`);
+    assert.equal(svg.style.transform, '');
+  }
+  // A turn alone moves the last paint as one warp, and the exact paint follows the pause.
   const before = path.getAttribute('d');
-  clock = 1010; field.publish(turning(-5, 6));
-  assert.notEqual(path.getAttribute('d'), before, 'a turn while travelling repaints within 25 ms');
+  field.publish(at(-4, 2));
+  assert.equal(path.getAttribute('d'), before, 'a small turn keeps the paint');
+  assert.match(svg.style.transform, /^matrix3d/, 'and warps it');
+  await new Promise(resolve => setTimeout(resolve, 200));
+  assert.equal(path.getAttribute('d'), exactAt(-4, 2), 'a pause repaints exactly');
   assert.equal(svg.style.transform, '');
+  assert.equal(settled, 1, 'and tells its owner once, so a screen budget settles on the stopped view');
+  // A travelling camera that also turns repaints: a turn's projective warp cannot follow dots that move with the travel.
+  field.publish(at(-5, 8));
+  assert.equal(path.getAttribute('d'), exactAt(-5, 8), 'a turn while travelling repaints');
   assert.equal(svg.style.transform, '');
+  const exact = mount();
   field.destroy(); exact.destroy();
 });
 
@@ -219,7 +211,7 @@ test('a turn warps the paint only while no dot grows or shrinks by more than a t
     return { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, Math.sin(half), 0, Math.cos(half)] as const } }, viewport }; };
   const { document } = parseHTML('<div id="host"></div>');
   const field = mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
-    stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'], now: () => 0 });
+    stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'] });
   const path = field.root.querySelector('path')!, svg = field.root.querySelector('svg')!;
   field.publish(turned(0));
   const first = path.getAttribute('d');

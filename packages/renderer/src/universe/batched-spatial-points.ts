@@ -32,12 +32,6 @@ const MAX_WARP_STRETCH = 1.1;
 const DOTS_PER_PACER_UNIT = 125;
 /** The exact paint follows the last warp once publications have paused this long. */
 const SETTLE_MS = 120;
-/** While the camera travels without turning (a zoom, a pinch), a full repaint waits this long after the last one: every
- * other frame at 60 Hz, every third at 120 Hz. Such a camera moves every drawn dot every frame (2026-09-30: 99.8% of the
- * dots a nearby-universe zoom drew moved more than MAX_PARALLAX_PIXELS a frame), so each repaint projects and rewrites them
- * all; the frames between keep the last paint, a frame behind the travel. A pause repaints exactly (SETTLE_MS), so a
- * still view is unchanged. */
-const MOTION_REPAINT_MS = 25;
 /** A dot seen through an occluding disc (a galaxy's, from outside it) is dimmed by where its sight line crosses the disc:
  * most at the centre, to OCCLUDED_FLOOR of its opacity, and not at all at the disc's edge, along (1 - (r/R)^2)^2, which
  * reaches the edge with no step and no slope, so the disc's outline does not show in the dots. The dimming is painted in
@@ -89,16 +83,14 @@ export interface BatchedSpatialPointStats { visiblePoints: number; candidates: n
  * and palette, and its own group (`parts[i].group`) whose opacity dims it alone, as its own layer's opacity did. */
 export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options: {
   host: HTMLElement; before?: Element; frame: DensityVolumeFrame; className: string;
-  /** The clock repaints are paced by (MOTION_REPAINT_MS); tests pass their own. */
-  now?(): number;
   /** Called after the exact repaint that follows a pause, so an owner that reads `stats()` (a screen budget) can settle
-   * on it: the counts of the paint before may be a paced frame's. */
+   * on it: the counts of the paint before may be a warped frame's. */
   onSettle?(): void;
   /** A disc that dims the dots behind it (OCCLUDED_FLOOR): a dot whose sight line from the camera crosses the disc
    * before reaching the dot is painted by a fainter path of its own color. */
   occluder?: BatchedSpatialPointOccluder;
 } & ({ parts: readonly BatchedSpatialPointPart<T>[] } | BatchedSpatialPointPart<T>)) {
-  const { host, before, frame, className, now = () => performance.now(), onSettle, occluder } = options;
+  const { host, before, frame, className, onSettle, occluder } = options;
   const inputs = 'parts' in options ? options.parts : [options];
   if (!inputs.length) throw new TypeError(`${className}: a point field needs a part.`);
   const root = host.ownerDocument.createElement('div'); root.className = className; root.ariaHidden = 'true';
@@ -148,14 +140,11 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   // The last full paint: the camera's position and everything else it depended on, how many points each part drew and
   // the nearest of them. A camera that only moved (a zoom, a pan around a planet) moves no point by a visible amount while
   // its translation is far below that nearest distance, so the paint is kept (parallaxPixels).
-  let painted: { at: number; position: readonly number[]; rest: readonly number[]; counts: readonly number[]; nearestUnits: number; keeps: readonly number[]; hiddens: readonly (ReadonlySet<number> | null)[];
+  let painted: { position: readonly number[]; rest: readonly number[]; counts: readonly number[]; nearestUnits: number; keeps: readonly number[]; hiddens: readonly (ReadonlySet<number> | null)[];
     axes: Matrix3; focal: number; cx: number; cy: number; width: number; height: number } | null = null, destroyed = false;
   // While the camera turns, the last paint is moved by one warp (a compositor transform) instead of repainted; the exact
   // paint follows once the publications pause.
   let warp = '', latest: VolumeCameraPublication | null = null, settle: ReturnType<typeof setTimeout> | null = null;
-  // A paced frame (MOTION_REPAINT_MS) left the paint a frame behind the camera's travel: the next still publication
-  // repaints exactly instead of keeping it.
-  let behind = false;
   const setWarp = (value: string) => { if (warp !== value) { svg.style.transform = value; warp = value; } };
   // A repaint the pacer runs for dots a zoom adds. The dots' paint is a paint exception of the motion contract
   // (docs/performance/motion-freezes-membership.md), so nothing holds it: the pacer only spaces it by the frame budget.
@@ -189,18 +178,16 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
       const same = counts.every((count, index) => count === painted!.counts[index]) && keeps.every((keep, index) => keep === painted!.keeps[index])
         && hiddens.every((hidden, index) => hidden === painted!.hiddens[index]);
       const turned = !rest.every((value, i) => value === painted!.rest[i]);
-      if (still && same && !turned && !behind) { setWarp(''); return; }
+      if (still && same && !turned) { setWarp(''); return; }
       // A turn or a zoom of the lens moves every far point by the same projective map of the screen. Warp the paint while
       // what it painted still covers the view. Dots a zoom adds (a longer prefix, a larger share) arrive at once, by a
       // repaint; dots it takes away wait for the pause, so a zoom warps while it only thins the view.
-      // A camera that only travels (a zoom, a pinch) and repainted less than MOTION_REPAINT_MS ago keeps its paint, a frame
-      // behind its travel. One that also turns repaints: the turn's warp is projective and would stretch the painted discs
-      // wherever it magnifies, which a turn of a travelling camera in 25 ms can make large.
-      const paced = !exact && !still && !turned && now() - painted.at < MOTION_REPAINT_MS;
-      if ((still || paced) && !exact && (turned || shift > 0) && painted.width === width && painted.height === height && width > 0 && height > 0) {
-        // Dots the zoom adds come through the pacer while the warp holds: a repaint as soon as the frame budget allows. A
-        // paced frame needs none: its next repaint, within MOTION_REPAINT_MS, draws them.
-        if (still && (counts.some((count, index) => count > painted!.counts[index]!) || keeps.some((keep, index) => keep > painted!.keeps[index]!))) { arriving = true; arrivals.request(true); }
+      // A camera whose travel moves the dots (a zoom, a pinch at their scale) repaints every frame. Keeping the paint
+      // on alternate frames left the dots at half the display's rate and cost more: on the iPad a slow zoom at the nearby
+      // universe had 72 to 75 frames over 20 ms in 240 that way and 34 to 38 repainting each frame (2026-10-03).
+      if (still && !exact && (turned || shift > 0) && painted.width === width && painted.height === height && width > 0 && height > 0) {
+        // Dots the zoom adds come through the pacer while the warp holds: a repaint as soon as the frame budget allows.
+        if (counts.some((count, index) => count > painted!.counts[index]!) || keeps.some((keep, index) => keep > painted!.keeps[index]!)) { arriving = true; arrivals.request(true); }
         const next = axesMatrix(r), turn = multiply(next, transpose(painted.axes));
         const forward = multiply(project(viewport.focalPixels, cx, cy), multiply(turn, unproject(painted.focal, painted.cx, painted.cy)));
         const back = multiply(project(painted.focal, painted.cx, painted.cy), multiply(transpose(turn), unproject(viewport.focalPixels, cx, cy)));
@@ -217,7 +204,6 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
           return px >= -OVERSCAN * width && px <= (1 + OVERSCAN) * width && py >= -OVERSCAN * height && py <= (1 + OVERSCAN) * height;
         });
         if (covered) {
-          if (paced) behind = true;
           const f = (value: number) => Number(value.toPrecision(10));
           setWarp(`matrix3d(${f(forward[0])},${f(forward[3])},0,${f(forward[6])},${f(forward[1])},${f(forward[4])},0,${f(forward[7])},0,0,1,0,${f(forward[2])},${f(forward[5])},0,${f(forward[8])})`);
           if (settle !== null) clearTimeout(settle);
@@ -321,8 +307,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     const nearestUnits = Math.sqrt(nearestSquared);
     setWarp('');
     // Counts for probes and tests, kept here: a per-frame dataset write is a DOM write (motion-freezes-membership.md).
-    behind = false;
-    painted={at:now(),position:[...local.positionUnits],rest,counts,nearestUnits,keeps,hiddens,axes:axesMatrix(r),focal:viewport.focalPixels,cx,cy,width,height};
+    painted={position:[...local.positionUnits],rest,counts,nearestUnits,keeps,hiddens,axes:axesMatrix(r),focal:viewport.focalPixels,cx,cy,width,height};
   };
   return Object.freeze({ root,
     /** Each part's group, whose opacity dims it, and its counts from the last paint. */
