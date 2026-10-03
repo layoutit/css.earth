@@ -5,6 +5,8 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { build, type BuildOptions, type Loader } from 'esbuild';
 import ts from 'typescript';
+import { readWorkspaceGraph, workspaceExternals, externalWorkspaceSpecifier } from '@cssearth/bake/preparation/workspace-graph';
+
 
 const LOADERS: Record<string, Loader> = { '.ts': 'ts', '.mts': 'ts', '.cts': 'ts', '.tsx': 'tsx', '.js': 'js', '.mjs': 'js', '.cjs': 'js', '.jsx': 'jsx' };
 
@@ -34,16 +36,13 @@ export async function buildLabModule(options: BuildOptions) {
     const path = resolve(options.absWorkingDir ?? process.cwd(), entry);
     return options.preserveSymlinks ? path : realpath(path);
   })));
+  const graph = readWorkspaceGraph(process.cwd());
+  const externals = workspaceExternals(graph, '@cssearth/nebula-lab');
   return build({ ...options, plugins: [{
     name: 'nebula-workspace-source-owners',
     setup(builder) {
       builder.onResolve({ filter: /^@cssearth\// }, args => {
-        // `@cssearth/bake`, `@cssearth/core`, `@cssearth/engine`, `@cssearth/fits`, `@cssearth/objects`, `@cssearth/spice` and `@cssearth/telescope` ship built JavaScript, not TypeScript owners. Node loads their ESM builds at
-        // run time: inlining the CommonJS build `require.resolve` finds would leave `require('node:crypto')` in an ESM
-        // bundle, which fails.
-        // `@cssearth/renderer` stays bundled, as it was when it was relative modules: its source subpaths are TypeScript whose
-        // sibling imports name `.js`, which Node cannot load unbundled.
-        if (/^@cssearth\/(?:bake|core|engine|fits|objects|spice|telescope)(?:\/|$)/.test(args.path)) return { path: args.path, external: true };
+        if (externalWorkspaceSpecifier(graph, externals, args.path)) return { path: args.path, external: true };
         const directory = args.resolveDir || options.absWorkingDir || process.cwd();
         const require = createRequire(resolve(directory, '__nebula_bundle__.cjs'));
         return { path: require.resolve(args.path) };

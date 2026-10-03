@@ -1,3 +1,4 @@
+import { readWorkspaceGraph, workspaceExternals, externalWorkspaceSpecifier } from '@cssearth/bake/preparation/workspace-graph';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { mkdtemp, readFile, realpath, rm, writeFile } from 'node:fs/promises';
@@ -37,12 +38,21 @@ test('workspace packages that ship built ES modules stay external instead of inl
   const directory = await realpath(await mkdtemp(join(tmpdir(), 'nebula-module-external-')));
   const entry = join(directory, 'entry.ts'), outfile = join(directory, 'bundle.mjs');
   try {
-    await writeFile(entry, `${['bake', 'core', 'engine', 'fits', 'objects', 'spice', 'telescope'].map((name, index) => `import * as owner${index} from '@cssearth/${name}';`).join('\n')}
-      console.log(typeof owner0, typeof owner1, typeof owner2, typeof owner3, typeof owner4, typeof owner5, typeof owner6);`);
+    const graph = readWorkspaceGraph(process.cwd());
+    const externals = workspaceExternals(graph, '@cssearth/nebula-lab');
+    const names = externals.map(name => {
+      const pkg = graph.find(pkg => pkg.name === name)!;
+      const keys = pkg.manifest.exports && typeof pkg.manifest.exports === 'object' ? Object.keys(pkg.manifest.exports) : ['.'];
+      const specifier = keys.filter(key => key.startsWith('.') && !key.includes('*')).map(key => key === '.' ? name : name + key.slice(1))
+        .find(specifier => externalWorkspaceSpecifier(graph, externals, specifier));
+      assert.ok(specifier, name + ' has a built runtime export');
+      return specifier;
+    });
+    await writeFile(entry, names.map((name, index) => `import * as owner${index} from '${name}'; console.log(owner${index});`).join('\n'));
     await buildLabModule({ entryPoints: [entry], outfile, bundle: true, platform: 'node', format: 'esm', packages: 'external' });
     const bundle = await readFile(outfile, 'utf8');
-    for (const name of ['bake', 'core', 'engine', 'fits', 'objects', 'spice', 'telescope'])
-      assert.match(bundle, new RegExp(`from "@cssearth/${name}"`), `@cssearth/${name} is bundled instead of imported`);
+    for (const name of names)
+      assert.match(bundle, new RegExp(`from "${name}"`), `@cssearth/${name} is bundled instead of imported`);
     assert.doesNotMatch(bundle, /__require\("@cssearth\//, 'a workspace CommonJS build was inlined');
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

@@ -131,7 +131,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   three layers).
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only). It holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `packages/bake/cli/prepare-object.mts` run through
   `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
-  because it must run, and `--run` must rebuild, while this package is unbuilt, so the module imports only Node built-ins.
+  because it must run, and `--run` must rebuild, while this package is unbuilt, so its source closure imports only Node built-ins. The workspace graph reader is also exported as `@cssearth/bake/preparation/workspace-graph` directly from source for bootstrap-safe CI discovery.
   Its tests are `node --test` suites in `src/preparation/`.
 - `src/run-implemented-objects/` is published as `@cssearth/bake/run-implemented-objects` (Node only): runs a registered
   scene object's acquire, prepare, test, browser or assemble command, and the concurrency-limited, memory-budgeted
