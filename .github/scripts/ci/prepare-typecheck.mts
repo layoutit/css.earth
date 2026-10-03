@@ -138,7 +138,9 @@ export async function restoreTypecheckInputs({ root = projectRoot, fetcher = fet
   // the world step of build:tools bakes without the bodies' imagery, so its own copies place stars in different files.
   const summary = resolve(root, `src/objects/${OBJECT_TREE_ROOT}/prepared/world.json`);
   const world = imports.includes(summary) ? await inventoryAssets(root, [OBJECT_TREE_ROOT], { location: 'prepared', filenames: ['world-index.json'] }) : [];
-  const initial = uniqueAssets([...await typecheckAssetsForPaths(imports, root), ...world, ...catalogue.assets, ...features.assets]);
+  const earthPlaces = await inventoryAssets(root, ['earth'], { location: 'public', filenames: ['earth-places.json'] });
+  if (earthPlaces.length !== 1) throw new TypeError('Typecheck preparation requires the inventoried public earth-places.json.');
+  const initial = uniqueAssets([...earthPlaces, ...await typecheckAssetsForPaths(imports, root), ...world, ...catalogue.assets, ...features.assets]);
   const first = await installRuntimeAssets(initial, { fetcher });
   const index = world.length ? parsePreparedWorldIndex(JSON.parse(await readFile(world[0]!.file, 'utf8'))) : null;
   const holders = index ? index.files : [];
