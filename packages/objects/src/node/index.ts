@@ -9,7 +9,7 @@ export type { SourceEntry, SourceInput, SourceManifest, SourceManifestLocation, 
 export { safeRelativePath } from './source-path.js';
 export { PREPARED_CATALOGUE, preparedCatalogueModule, readPreparedObjects } from './prepared-registry.js';
 export type { PreparedNavigableObject, PreparedObjectRegistry, PreparedSceneObject } from './prepared-registry.js';
-export { readCatalog, readContextObjects, readObjectDescriptors, readOverviews, type ObjectDescriptors } from './catalog-directory.js';
+export { readCatalog, readContextObjects, readObjectDescriptors, type ObjectDescriptors } from './catalog-directory.js';
 export { ASSET_LOCATIONS, INVENTORY_FILE, INVENTORY_SCHEMA, assembleRuntimeAssetClosure, bakedPreparedFiles, inventoryPreparedAssets,
   inventoryPublicAssets, inventoryText, isRegeneratedPreparedFile, mergeInventory, normalizeRuntimeAssetUrls, readInventory,
   requireInventory, updateInventory, validateInventory, verifyInventory } from './runtime-asset-closure.js';

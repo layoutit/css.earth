@@ -40,14 +40,14 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   // A city link (`city-<id>`) is selected by the page on arrival; only surface features are drawn here.
   const featureIds = featureParams.filter(id => !id.startsWith(PLACE_FEATURE_PREFIX));
   const views = url.searchParams.getAll('v');
-  // The page of a level the scene draws always renders its scene and subject; a scene's own page changes only for what its
+  // The page of an object seen from inside that the scene draws always renders its scene and subject; a scene's own page changes only for what its
   // query asks.
   if (!drawnPage && !url.searchParams.has('dataset') && !settingRequest && !featureIds.length && !views.length) return html;
   if (views.length > 1) throw new RangeError(`Invalid saved view: ${views.length} v parameters.`);
   let saved;
   try { saved = views.length ? parseSharedView(`v=${views[0]}`) : null; }
   catch { throw new UnreadableSavedView(views[0]!); }
-  // The page's scene: the page's own object, or the host of the level the page is.
+  // The page's scene: the page's own object, or the scene the page's object is seen in.
   const descriptorRegion = region(html, 'prepared-descriptor');
   const descriptor = parseObjectDescriptor(JSON.parse(requiredElement(descriptorRegion.document, 'script[data-prepared-descriptor]').textContent ?? ''));
   const objectId = descriptor.id;

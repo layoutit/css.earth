@@ -7,8 +7,8 @@ import { withDataset } from '../dataset-url.mts';
 import { withView } from './navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
-import { ladderOf } from '../level-view.mts';
-import { selectionKey, selectionTargetFromUrl, type SelectionTarget, type SceneSubject, type SceneView } from '../scene/scene-selection.mts';
+import { zoomStepOf } from '../inside-view.mts';
+import { selectionKey, selectionTargetFromUrl, subjectOf, subjectView, type SelectionTarget, type SceneSubject, type SceneView } from '../scene/scene-selection.mts';
 
 export type NavigationHistory = { history: 'push' | 'replace' } | { history: 'pop'; entry: string };
 export type NavigationIntent =
@@ -52,7 +52,8 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
 }): { destination: ResolvedNavigation; centeredObjectId: string | null } {
   if (intent.kind === 'link') {
     const link = new URL(intent.url, current.href), selection = readNavigationSelection(link, object.id, objects);
-    if (selection.subject.view !== 'body' && !selection.savedView && !selection.dataset) intent = { kind: 'object', view: selection.subject.view, camera: 'frame' };
+    const view = subjectView(selection.subject);
+    if (view !== 'body' && !selection.savedView && !selection.dataset) intent = { kind: 'object', view, camera: 'frame' };
   }
   const linked = intent.kind === 'link' || intent.kind === 'history';
   let url = new URL(intent.kind === 'link' || intent.kind === 'history' ? intent.url : current.href, current.href);
@@ -62,12 +63,13 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
   const family = satelliteSystemByHost(object.id);
   const view = intent.kind === 'object' ? intent.view ?? null : null;
   if (view === 'moons' && !family) throw new TypeError(`${object.id} has no satellite system.`);
-  // A destination on the zoom ladder (a star's system, a level) opens framed as that rung says, around its centre; the
-  // ladder's own hand-over keeps the camera, and history restores its own.
-  const ladder = intent.kind !== 'history' && !(intent.kind === 'object' && intent.camera === 'preserve') ? ladderOf({ objectId: object.id, view: view ?? 'body' }) : null;
-  const overviewTarget = ladder ? navigation.overviewTarget({ ...targetRequest, objectId: ladder.centreId, scope: ladder.scope }) : null;
-  const opensOverviewFocus = current.subject.view === 'system' && object.id === current.objectId;
-  const opensFamilyFocus = current.subject.view === 'moons' && object.id === current.objectId;
+  // A destination a zoom out reaches (a star's system, an object seen from inside) opens framed as that scope says, around its centre; the
+  // zoom's own hand-over keeps the camera, and history restores its own.
+  const step = intent.kind !== 'history' && !(intent.kind === 'object' && intent.camera === 'preserve') ? zoomStepOf(subjectOf(object.id, view ?? 'body')) : null;
+  const overviewTarget = step ? navigation.overviewTarget({ ...targetRequest, objectId: step.centreId, scope: step.scope }) : null;
+  const currentView = subjectView(current.subject);
+  const opensOverviewFocus = currentView === 'system' && object.id === current.objectId;
+  const opensFamilyFocus = currentView === 'moons' && object.id === current.objectId;
   const plain = intent.kind === 'object' && view === null;
   const familyTarget = view === 'moons' && intent.kind === 'object' && intent.camera === 'frame'
     ? navigation.systemTarget({ ...targetRequest, force: true })

@@ -2,12 +2,13 @@ import type { NavigationDistance } from './navigation-distance.js';
 import type { ObjectClassification, ObjectEntry, ObjectWorldFrame } from './object-schema.js';
 import type { ObjectDiscovery } from './object-discovery.js';
 import { normalizeDestinationQuery } from './destination-search.js';
-import type { OverviewHolding, OverviewZoom } from './overview-object.js';
+import type { ObjectZoom } from './object-zoom.js';
 
 /**
  * An object of the one registry: a package with a catalogue entry. It has an identity, a place in the world and a scene of
- * its own. A planet, a star, a galaxy and a cluster of galaxies are all this. There is no kind and no other shape. An
- * object that is also a level of the zoom ladder (the Milky Way) carries its place on the ladder as data (`level`).
+ * its own. A planet, a star, a galaxy and a cluster of galaxies are all this. There is no kind and no other shape. It is
+ * inside one other object (`parent`); an object seen from inside as the camera backs out of it (the Milky Way) carries
+ * its zoom facts as data (`zoom`).
  */
 export type NavigableObject<Scene = unknown, Signal = unknown> = ObjectEntry<Scene, Signal> & {
   readonly aliases: readonly string[];
@@ -15,9 +16,9 @@ export type NavigableObject<Scene = unknown, Signal = unknown> = ObjectEntry<Sce
   readonly parent?: string;
   /** The names an object with alternate names is found by: its id, its name and each alias. */
   readonly searchNames?: readonly string[];
-  /** Its place on the zoom ladder, for an object the view hands over to when the camera backs far enough out of a star's
-   * system: when it is entered and left, what it holds and the context packages it draws (its package's `overview`). */
-  readonly level?: ObjectLevel;
+  /** For an object the view hands over to as the camera backs out of something inside it: when the view enters and leaves
+   * it, and how its page frames the camera (its package's `zoom`). */
+  readonly zoom?: ObjectZoom;
   /** For an object that is a system: the host whose scene shows it, out to the bodies that orbit that host (its package's
    * `system`). A system has an address, a page and a card of its own; it mounts its host's scene. */
   readonly system?: ObjectSystem;
@@ -38,14 +39,7 @@ export function objectSystem(descriptor: unknown): ObjectSystem | null {
   return Object.freeze({ host, members });
 }
 
-export interface ObjectLevel {
-  readonly order: number;
-  readonly zoom: OverviewZoom;
-  readonly holds: readonly OverviewHolding[];
-  readonly packages: readonly string[];
-}
-
-/** What the world context draws, names and selects: every object, and a level that has a place of its own. */
+/** What the world context draws, names and selects: every object with a place of its own. */
 export interface WorldBody {
   readonly id: string;
   readonly name: string;

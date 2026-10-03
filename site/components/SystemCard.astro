@@ -6,7 +6,7 @@ import Detached from './Detached.astro';
 import { SCENE_OBJECTS, requireObject } from '../objects.mts';
 import { systemObjectId } from '../navigation/system-address.mts';
 import { systemById } from '../object-systems.mts';
-import { PAGE_VIEWS, namesSystem } from '../navigation/navigation-scope.mts';
+import { namesSystem } from '../navigation/navigation-scope.mts';
 import { systemSourceDocumentation } from '../source-documentation.mts';
 
 interface Props { hostId: string }
@@ -25,7 +25,7 @@ const source = system ? systemSourceDocumentation(system) : null;
 
 {system && star && source && <>
   <Detached detached={!shown}><ObjectCardHeader heading={false} title={{ label: system.name }} data-view-part="system"
-    data-source-subject={`${PAGE_VIEWS.system.identity}:${system.id}`} data-source-document={source.href} data-source-label={source.label}
+    data-source-subject={`object:${systemObjectId(system.id)}`} data-source-document={source.href} data-source-label={source.label}
     introduction={requireObject(systemObjectId(system.id)).description}>
     <ObjectBreadcrumbs scope="system" systemId={system.id} />
   </ObjectCardHeader></Detached>

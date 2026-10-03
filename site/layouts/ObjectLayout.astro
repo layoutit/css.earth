@@ -38,7 +38,7 @@ const worldCamera = worldCameraOf(worldSummary);
 
 interface Props {
   objectId: string;
-  /** What the page is: `objectId`, or a level of the zoom ladder its scene shows. */
+  /** What the page is: `objectId`, or an object seen from inside that its scene shows. */
   pageId?: string;
   navigation?: boolean;
   scene?: PreparedSceneMarkup & Pick<Awaited<ReturnType<typeof loadPreparedSceneMarkup>>, 'descriptor' | 'coverPlan'>;
@@ -69,8 +69,8 @@ const billboardWidthWithoutScript = (() => {
     ? `${share.diameterOverWidth * 100 * billboard.size / 2 / billboardBodyRadiusPixels(billboard, objectRecord.worldFrame.bodyRadiusM)}vw` : '70vmin';
 })();
 const billboardWithoutScript = `.object-stage:not([data-prepared-object]) ~ img[data-startup-billboard] { opacity: 1 !important; width: ${billboardWidthWithoutScript}; height: auto; left: 50%; top: 50%; transform: translate(-50%, -50%); }`;
-// A page that is its own scene places its arrival photograph from the HTML (startup-cover.mts); a level's page, drawn by
-// the world host's scene, leaves it to that scene's startup.
+// A page that is its own scene places its arrival photograph from the HTML (startup-cover.mts); the page of an object seen
+// from inside, drawn by the world host's scene, leaves it to that scene's startup.
 const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId === objectId ? {
   plan: scene.coverPlan, mobileQuery: MOBILE_VIEWPORT_QUERY,
   billboard: { size: startup.arrival.billboard.size, focalPixels: startup.arrival.billboard.focalPixels, distanceM: startup.arrival.billboard.distanceM },

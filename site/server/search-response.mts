@@ -91,7 +91,7 @@ export async function handleSearchRequest(request: Request, data: SearchData, fe
   const response = await fetcher(new URL(`/${pageId}/`, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
   if (!response.ok || !response.headers.get('content-type')?.includes('text/html')) return response;
   const page = await response.text();
-  // The page's own address: a level's page is named by its path, which the rewrite to the function drops.
+  // The page's own address: a page whose scene is another object's is named by its path, which the rewrite to the function drops.
   const address = new URL(url);
   if (address.pathname === '/.netlify/functions/search') { address.pathname = `/${pageId}/`; address.searchParams.delete('object'); }
   const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher), target, data);

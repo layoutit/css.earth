@@ -1,5 +1,5 @@
 import type { SceneView, SelectionTarget } from './scene/scene-selection.mts';
-import { selectionKey } from './scene/scene-selection.mts';
+import { selectionKey, subjectHost, subjectView } from './scene/scene-selection.mts';
 import { requiredSection, setLinkSelected } from './browser/browser-types.mts';
 import type { CatalogueSelection } from './search/catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
@@ -26,14 +26,16 @@ export function createSelectionPresentation(documentTarget: Document, { card: pr
   const present = (subject: SelectionTarget, sourceLinks?: ReadonlyMap<string, SourceDocumentReference>): CatalogueSelection => {
     if (presentsCard) {
       const card = sectionElements(documentTarget, '.object-information-panel')[0];
-      if (card) presentCardView(card, cardView(card, subject.view));
+      if (card) presentCardView(card, cardView(card, subjectView(subject)));
     }
     renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);
-    const kind = subject.view === 'system' ? 'system' : subject.view === 'moons' ? 'satellite-system' : 'object';
+    const view = subjectView(subject);
+    const kind = view === 'system' ? 'system' : view === 'moons' ? 'satellite-system' : 'object';
     if (documentTarget.documentElement.dataset.selection !== kind) documentTarget.documentElement.dataset.selection = kind;
-    const selection = subject.view === 'system' ? null : { kind: 'scene', id: subject.objectId } as const;
+    // A planet seen out to its moons keeps its own row marked; a star's planetary system marks none.
+    const selection = view === 'system' ? null : { id: subjectHost(subject) } as const;
     for (const anchor of browser.querySelectorAll<HTMLElement>('.object-link')) {
-      const selected = selection?.kind === 'scene' && anchor.dataset.objectId === selection.id;
+      const selected = selection !== null && anchor.dataset.objectId === selection.id;
       setLinkSelected(anchor, selected);
     }
     return selection;
