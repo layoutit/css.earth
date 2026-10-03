@@ -15,12 +15,15 @@ const SHELL = `<html><body data-object-shell>
 const REST: Readonly<Record<string, number>> = { tucked: 670, peek: 538, half: 253, full: 0 };
 const SHEET_TRANSFORM = /^translate\(0, calc\((-?[\d.]+)px - var\(--sheet-rest\)\)\)$/u;
 
-function mountSheet() {
-  const { document, window } = parseHTML(SHELL);
+function mountSheet(shell = SHELL) {
+  const { document, window } = parseHTML(shell);
   const sheet = document.querySelector<HTMLElement>('.object-sidebar')!;
   const toolbar = document.querySelector<HTMLElement>('.object-search-toolbar')!;
   const categories = document.querySelector<HTMLElement>('.object-search-categories')!;
   const search = document.querySelector<HTMLInputElement>('.object-sidebar-search')!;
+  // A browser checks an input that arrives with the attribute.
+  const handle = document.querySelector<HTMLInputElement>('.object-sheet-handle')!;
+  if (handle.hasAttribute('checked')) handle.checked = true;
   Object.defineProperty(sheet, 'offsetHeight', { value: 690 });
   for (const surface of [sheet, toolbar, categories]) Object.assign(surface, { setPointerCapture() {} });
   const frames: FrameRequestCallback[] = [];
@@ -29,6 +32,8 @@ function mountSheet() {
   const visualViewport = Object.assign(new EventTarget(), { height: 874, offsetTop: 0 });
   // Every forced style read, in order: what the sheet held and which class it wore when the page was restyled.
   const styleReads: { transform: string; classes: string }[] = [];
+  // The sheet's inline snap duration at each of those reads.
+  const snapAtRead: string[] = [];
   Object.assign(window, {
     innerHeight: 874,
     visualViewport,
@@ -39,7 +44,7 @@ function mountSheet() {
     clearTimeout() {},
     // Computes the sheet's transform the way shell-layout.css does: its inline offset less the state's rest.
     getComputedStyle(element: HTMLElement) {
-      if (element === sheet) styleReads.push({ transform: sheet.style.transform, classes: sheet.className });
+      if (element === sheet) { styleReads.push({ transform: sheet.style.transform, classes: sheet.className }); snapAtRead.push(sheet.style.getPropertyValue('--sheet-snap-duration')); }
       const offset = SHEET_TRANSFORM.exec(element.style.transform);
       const rest = REST[document.body.dataset.sheet ?? 'peek'] ?? 0;
       return {
@@ -62,7 +67,7 @@ function mountSheet() {
   };
   const runFrames = () => { for (const frame of frames.splice(0)) frame(time); };
   const inline = (element: HTMLElement) => ({ transform: element.style.transform, duration: element.style.getPropertyValue('--sheet-snap-duration') });
-  return { document, window, sheet, toolbar, categories, search, mobile, visualViewport, styleReads, controller, lifetime,
+  return { document, window, sheet, toolbar, categories, search, mobile, visualViewport, styleReads, snapAtRead, controller, lifetime,
     pointer, runFrames, inline, readers: [sheet, toolbar, categories] };
 }
 
@@ -97,6 +102,8 @@ test('a drag writes its offset on the sheet and the search riding on it, never o
   pointer('pointerdown', sheet, 800);
   pointer('pointermove', document, 700);
   assert.ok(sheet.classList.contains('is-dragging'));
+  // The riders are held with the sheet by their own class: no rule reads the sheet's from the body.
+  assert.ok(toolbar.classList.contains('is-dragging') && categories.classList.contains('is-dragging'));
   assert.equal(toolbar.style.transform, 'translate3d(0, 438px, 0)');
   assert.equal(categories.style.transform, 'translate3d(0, 438px, 0)');
   // The sheet rests at --sheet-rest, so it moves by the rest of the way.
@@ -274,4 +281,29 @@ test('a camera fit waits for the sheet to come to rest', async () => {
   sheet.dispatchEvent(end);
   await Promise.resolve();
   assert.equal(rested, true);
+});
+
+test('a sheet whose handle arrives checked rests open from its first publication, with no snap', () => {
+  // The server opens the sheet for a search or a dataset by checking its handle; no stylesheet rule reads the handle.
+  const { document, readers, styleReads, snapAtRead, inline, controller } = mountSheet(SHELL.replace('type="checkbox"', 'type="checkbox" checked'));
+  assert.equal(document.body.dataset.sheet, 'full');
+  assert.deepEqual([styleReads.length, snapAtRead], [1, ['0ms']], 'the open rest is committed with the snap duration at zero');
+  for (const reader of readers) assert.equal(inline(reader).duration, '', 'and the duration is given back');
+  controller.destroy();
+});
+
+test('a sheet that starts at its peek publishes it without touching the snap duration', () => {
+  const { document, styleReads, controller } = mountSheet();
+  assert.equal(document.body.dataset.sheet, 'peek');
+  assert.equal(styleReads.length, 0);
+  controller.destroy();
+});
+
+test('no rule of the shell stylesheets anchors :has() on the body: a page restyles whole when an element is added under such an anchor', async () => {
+  const { readFile } = await import('node:fs/promises');
+  for (const sheet of ['shell/shell-layout.css', 'shell/maps-shell.css', 'shell/settings-panel.css', 'object-shell.css']) {
+    const text = (await readFile(new URL(`../${sheet}`, import.meta.url), 'utf8')).replace(/\/\*[\s\S]*?\*\//gu, '');
+    const anchored = [...text.matchAll(/(?:^|[{},])\s*((?:html|body)[^{},]*:has\([^{]*)/gmu)].map(match => match[1]!.trim());
+    assert.deepEqual(anchored, [], `${sheet}: ${anchored.join(' | ')}`);
+  }
 });

@@ -112,3 +112,16 @@ test('Light curves is on by default and is its own preference, apart from illust
   assert.deepEqual(changes, ['playback'], 'the switch republishes playback');
   lifetime.destroy();
 });
+
+test('the gear carries its open panel as aria-expanded, and a new scene starts it closed', () => {
+  const { document, window } = parseHTML(`<html><body><button class="object-settings-action" popovertarget="object-settings" aria-expanded="true"></button>${settingsMarkup(false)}</body></html>`);
+  const lifetime = createSceneLifetime();
+  const preferences = createWorldPreferences({ getWorld: () => null, onMotionChange() {} });
+  createSettingsController(document, window as unknown as BrowserWindow, preferences, lifetime);
+  const gear = document.querySelector('.object-settings-action')!, panel = find(document, 'section')!;
+  assert.equal(gear.getAttribute('aria-expanded'), 'false', 'the scene before left the panel open');
+  const toggle = (newState: string) => panel.dispatchEvent(Object.assign(new window.Event('beforetoggle'), { newState }));
+  toggle('open'); assert.equal(gear.getAttribute('aria-expanded'), 'true');
+  toggle('closed'); assert.equal(gear.getAttribute('aria-expanded'), 'false');
+  lifetime.destroy();
+});

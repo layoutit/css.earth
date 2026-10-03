@@ -11,11 +11,17 @@
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { CATALOGUE_POINTS_SCHEMA } from '@cssearth/objects';
-import { publishedCatalogueBankPath, readCatalogueBank, writeCatalogueBank } from '@cssearth/bake/volume/node';
-import { inventoryPreparedAssets, packPreparedBinary, readInventory } from '@cssearth/objects/node';
+import { CATALOGUE_POINTS_SCHEMA, decodeCatalogueBankBinary } from '@cssearth/objects';
+import { writeCatalogueBank } from '@cssearth/bake/volume/node';
+import { inventoryPreparedAssets, packPreparedBinary, readInventory, unpackPreparedBinary } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/objects';
 import { POINT_FIELD_BANK_MAGIC, pointFieldBankRegions } from '@cssearth/objects';
+
+// Non-catalogue binary formats share the inventory; decode only their published bytes.
+function decodePublishedBank(bytes: Uint8Array, path: string): unknown {
+  try { return decodeCatalogueBankBinary(unpackPreparedBinary(bytes, path), path); }
+  catch { return null; }
+}
 
 const objects = process.argv.slice(2);
 if (!objects.length) throw new TypeError('Usage: pack-prepared-banks.mts <object-directory>...');
@@ -36,7 +42,7 @@ for (const objectArgument of objects) {
     if (!/^[^/]+\.(json|bin)$/u.test(name)) continue;
     const id = name.replace(/\.(json|bin)$/u, '');
     const bank = name.endsWith('.json') ? JSON.parse(await readFile(path, 'utf8')) as unknown
-      : publishedCatalogueBankPath(objectDirectory, id) === path ? await readCatalogueBank(objectDirectory, id).catch(() => null) : null;
+      : decodePublishedBank(await readFile(path), path);
     const record = bank as { schema?: unknown; points?: unknown } | null;
     if (record?.schema !== CATALOGUE_POINTS_SCHEMA) continue;
     if (!Array.isArray(record.points)) throw new TypeError(`${objectId}/prepared/${name}: a catalogue point bank without points.`);

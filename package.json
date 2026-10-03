@@ -75,7 +75,7 @@
     "test:run": "node --import ./packages/core/src/node/register-vite-suffix.mts --import ./site/test/navigation-router-context.mts --experimental-test-module-mocks --test --test-concurrency=4 --test-timeout=180000",
     "test:packages": "pnpm test:run \"packages/**/*.test.{ts,mts}\" \"integration/**/*.test.{ts,mts}\"",
     "test:site": "pnpm test:run \"site/**/!(rendered-page).test.{ts,mts}\" \"src/**/*.test.{ts,mts}\" \".github/**/*.test.mts\" \"labs/performance/*.test.mts\"",
-    "typecheck": "pnpm typecheck:pr && pnpm typecheck:tests && pnpm typecheck:nebula",
+    "typecheck": "node .github/scripts/ci/checkout/typecheck.mts",
     "typecheck:astro": "astro check --tsconfig site/astro.tsconfig.json",
     "typecheck:configs": "tsc -p tsconfig.configs.json",
     "typecheck:nebula": "pnpm run '/^typecheck:nebula:/'",
@@ -97,7 +97,9 @@
     "telescope": "node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/cli.mts",
     "test:lab": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && node --experimental-strip-types labs/nebula/run.mts test",
     "oracles:setup": "node packages/core/src/node/oracle/setup.mts",
-    "oracles:run": "node packages/core/src/node/oracle/run.mts"
+    "oracles:run": "node packages/core/src/node/oracle/run.mts",
+    "setup:checkout": "node .github/scripts/ci/checkout/setup.mts",
+    "typecheck:all": "pnpm typecheck:pr && pnpm typecheck:tests && pnpm typecheck:nebula"
   },
   "dependencies": {
     "@layoutit/polycss": "0.2.11",
