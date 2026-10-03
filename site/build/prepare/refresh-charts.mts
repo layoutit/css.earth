@@ -1,3 +1,4 @@
+import { PREPARED_CONTENT_SCHEMA } from '@cssearth/objects';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -36,7 +37,7 @@ export async function refreshObjectCharts(root: string, id: string, write = fals
     });
     if (previous.length !== contentAsset.bytes || sha256(previous) !== contentAsset.sha256) throw new Error(`${id}: local content differs from inventory.`);
     const content = requireRecord(JSON.parse(previous.toString('utf8')));
-    if (content.schema !== 'cssearth-prepared-content@2' || content.objectId !== id) throw new TypeError('Incompatible prepared chart content.');
+    if (content.schema !== PREPARED_CONTENT_SCHEMA || content.objectId !== id) throw new TypeError('Incompatible prepared chart content.');
     const charts = requireArray(content.charts).map(value => {
       const chart = requireRecord(value), src = requireString(chart.src);
       const size = result.dimensions.find(d => d.src === src);

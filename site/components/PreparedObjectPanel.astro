@@ -1,8 +1,9 @@
 ---
-import { parsePreparedText } from '@cssearth/objects';
+import { parsePreparedText, authoredDatasetMetadata, parsePreparedPanelContent } from '@cssearth/objects';
 import ObjectShell from "./ObjectShell.astro";
 
-import { authoredDatasetMetadata, parsePreparedPanelContent, parsePanelControls, uniformDatasetColors, withDatasetText } from '../prepared-panel-content.mts';
+import { parsePanelControls, uniformDatasetColors, withDatasetText } from '../prepared-panel-content.mts';
+
 interface Props { navigation?: boolean; preparedContent: unknown; preparedControls: unknown; }
 const { preparedContent, preparedControls } = Astro.props;
 const content = parsePreparedPanelContent(preparedContent);
