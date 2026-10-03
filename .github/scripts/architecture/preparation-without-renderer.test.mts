@@ -29,3 +29,17 @@ test('dependency fields and tsconfig references require exact file exceptions', 
   assert.equal(rendererUses('packages/bake/tsconfig.json', JSON.stringify({ references: [{ path: '../objects' }] })), false);
   assert.deepEqual(preparationRendererFindings(new Map([['packages/bake/package.json', '{"dependencies":{"@cssearth/objects":"workspace:*"}}']]), []), []);
 });
+
+test('literal sibling URLs and configuration dependency mutations fail, restoration passes', () => {
+  assert.equal(rendererUses('packages/bake/package.json', '{"imports":{"#safe":"@cssearth/renderer-example"}}'), false);
+  for (const [path, bad, good] of [
+    ['packages/bake/probe.mts', "new URL('../renderer/dist/index.js', import.meta.url)", "new URL('../objects/dist/index.js', import.meta.url)"],
+    ['packages/bake/tsconfig.json', '{"extends":"../renderer/tsconfig.json"}', '{"extends":"../objects/tsconfig.json"}'],
+    ['packages/bake/tsconfig.json', '{"compilerOptions":{"paths":{"alias":["../renderer/src/index.ts"]}}}', '{"compilerOptions":{"paths":{"alias":["../objects/src/index.ts"]}}}'],
+    ['packages/bake/package.json', '{"imports":{"#runtime":"@cssearth/renderer"}}', '{"imports":{"#runtime":"@cssearth/objects"}}'],
+  ]) {
+    assert.deepEqual(preparationRendererFindings(new Map([[path!, good!]]), []), []);
+    assert.match(preparationRendererFindings(new Map([[path!, bad!]]), [])[0]!, /must not depend on renderer/u);
+    assert.deepEqual(preparationRendererFindings(new Map([[path!, good!]]), []), []);
+  }
+});

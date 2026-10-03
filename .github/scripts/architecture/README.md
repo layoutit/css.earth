@@ -43,3 +43,23 @@ Workspace build order is derived from `pnpm-workspace.yaml` and package manifest
 `packages/bake/src/preparation/workspace-graph.ts`, a Node-only bootstrap reader.
 `node .github/scripts/architecture/workspace-builds.mts` prints dependency-first build names;
 `--run` builds them. Optional package names select their dependency closure.
+
+## Boundary and retained limitations
+
+This subsystem owns repository policy, CI findings and the repository-specific
+baseline. Its resolver, zones and exceptions describe this checkout; it is not a
+published architecture library. Keeping those authored inputs beside the check
+is intentional (A1); extraction would add an API without an external consumer.
+
+Integration independence currently uses declared workspace dependencies only.
+Non-workspace site, source and script owners have no manifest dependency edges;
+this is not proof of source-graph independence (A102). Extending it requires a
+resolved owner graph, including build/runtime distinctions, rather than guessing
+edges from owner names.
+
+Preparation additionally recognizes literal sibling renderer URLs, package
+imports targets, tsconfig extends and compiler-option paths. It still does not
+prove computed loaders, configuration inheritance or a dependency routed through
+an exempt consumer's re-export (A202/A251). The telescope implementation bundler
+also loads renderer build configuration through a computed path (A203); removing
+that coupling requires a shared source-entry resolver, not another exception.
