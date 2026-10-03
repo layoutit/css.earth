@@ -1,3 +1,4 @@
+import { FACILITY_EMBLEMS_SCHEMA } from '@cssearth/objects';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
@@ -67,5 +68,5 @@ for(const e of records){
  console.log(e.id,removed?'removed '+removed+' exterior pixels':'native alpha',png.length);
 }
 if(entries.length!==24||new Set(entries.map(e=>e.id)).size!==24)throw Error('Expected all 24');
-await fs.writeFile(path.join(root,'../emblem-library.json'),JSON.stringify({schema:'cssearth-facility-emblems@3',normalBuildPolicy:'Reuse committed PNGs; preparation and acquisition are explicit maintenance only.',entries},null,2)+'\n');
+await fs.writeFile(path.join(root,'../emblem-library.json'),JSON.stringify({schema:FACILITY_EMBLEMS_SCHEMA,normalBuildPolicy:'Reuse committed PNGs; preparation and acquisition are explicit maintenance only.',entries},null,2)+'\n');
 if(process.argv[2])await sharp({create:{width:960,height:744,channels:3,background:'#0d0d0d'}}).composite(layers).png().toFile(path.resolve(process.argv[2]));

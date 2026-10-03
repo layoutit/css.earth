@@ -179,8 +179,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     no topic. The recipe dispatcher is site-owned preparation in
     `site/build/charts/`; the spectrum reader and compact spectrum are in `site/overview/`, because
     `site/prepare-body-overview.mts` uses them and the runtime may not import the bake.
-  - `objects/content`: the object-content contract (facts, labels, dataset, legend and gallery recipes, the prepared shell
-    payload), the shared dataset vocabulary, dataset steps and prepared legends, each dataset control's billboard color, and the legend
+  - `objects/content`: the shared dataset vocabulary, dataset steps and prepared legends, each dataset control's billboard color, and the legend
     labels a palette dataset derives from the stretch its report states. It
     imports no topic. The content preparer that reads factsheets and writes the payload is site-owned preparation in `site/build/content/`
     (it reads the prepared shell titles).
@@ -371,3 +370,6 @@ Python display-orientation writer has a literal conformance test and a specific 
 Photometric color/stellar measurement records and measured-spectrum documents are parsed by `@cssearth/objects`.
 The color and stellar topics retain CIE/Planck evaluation, spectrum I/O and binning; charts retain recipes and drawing;
 uniform-disc authoring retains geometry generation and its expected sphere path.
+
+Authored and prepared content wire records and their pure parsers live in `@cssearth/objects`;
+`objects/content` retains dataset preparation and filesystem/callback APIs.

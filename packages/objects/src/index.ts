@@ -220,3 +220,7 @@ export { MEASURED_SPECTRUM_SCHEMA, parseMeasuredSpectrumDocument, type Measureme
 export { DENSITY_PLACEMENT_SCHEMA, parseDensityPlacement, type DensityPlacement } from './volume/density-placement.js';
 export { OBSERVED_STELLAR_CATALOGUE_SCHEMA, readObservedStellarCatalogueEnvelope, parseObservedStellarCatalogue,
   type ObservedStar, type PhotometryKind, type ObservedStellarCatalogueEnvelope, type ObservedStellarCatalogue } from './volume/observed-stellar-catalogue.js';
+export { CAMERA_POSE_SCHEMA, parseCameraPose, parseCameraPoseMatrix, parseRestoredCameraPose, type CameraPose } from './prepared-data/camera-pose.js';
+export * from './prepared-data/object-content.js';
+export * from './prepared-data/prepared-content.js';
+export * from './prepared-data/facility-emblems.js';

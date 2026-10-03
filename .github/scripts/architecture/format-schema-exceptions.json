@@ -5,7 +5,7 @@
       "packages/bake",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Bake/telescope-cli write acquisition operations read by bake and telescope-cli; extract the operation union and pure containment validation while preserving CLI admission in a separate 22-file packet after E2h camera (25-file scope cap)."
   },
   {
     "schema": "cssearth-archived-camera@1",
@@ -29,16 +29,6 @@
       "packages/telescope-cli"
     ],
     "reason": "Needs the resolution-evidence subformat and its pure compatibility checks extracted into objects first, then the product record; map combining, resolution calculation and sampled arrays stay in bake (about 26 files)."
-  },
-  {
-    "schema": "cssearth-camera-pose@2",
-    "owners": [
-      "labs/experiments",
-      "packages/renderer",
-      "packages/telescope-cli",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 4 owners (labs/experiments, packages/renderer, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
   },
   {
     "schema": "cssearth-chart-assets@1",
@@ -88,14 +78,6 @@
     "reason": "Preserved distant-worlds Python writes display orientations read by bake; it cannot import TypeScript. packages/bake/src/sources/python-schema-identifiers.test.ts (packages lane, runs when author.py changes) pins its literal to the objects constant."
   },
   {
-    "schema": "cssearth-facility-emblems@3",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
     "schema": "cssearth-fixed-wcs-catalogue-direction-gate@1",
     "owners": [
       "labs/nebula",
@@ -125,7 +107,7 @@
       "packages/bake",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Bake/telescope-cli write investigation ledgers read by bake and telescope-cli; split survey data and pure ledger/entry parsing from filesystem discovery and facility policy in a separate 19-file packet after E2h camera (25-file scope cap)."
   },
   {
     "schema": "cssearth-navigation-marker@2",
@@ -160,15 +142,6 @@
     "reason": "Reconstruction star-removal.py writes native operation receipts read by three lab TS boundaries; Python cannot import TypeScript. schema-protocols.test.ts pins producer and every TS check; existing star-removal/compiler tests exercise receipt validation without NOX."
   },
   {
-    "schema": "cssearth-object-content@2",
-    "owners": [
-      "packages/bake",
-      "packages/telescope-cli",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 3 owners (packages/bake, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
-  },
-  {
     "schema": "cssearth-object-text@1",
     "owners": [
       "packages/bake"
@@ -182,14 +155,6 @@
       "site"
     ],
     "reason": "Authored Earth recipe is read by bake and site; structural recipe validation must split from derived camera defaults while retaining site subset admission, outside the bounded E2f color/measurement packet."
-  },
-  {
-    "schema": "cssearth-prepared-content@2",
-    "owners": [
-      "packages/bake",
-      "site"
-    ],
-    "reason": "Spelled as a raw string by 2 owners (packages/bake, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
   },
   {
     "schema": "cssearth-published-body-epoch-ephemeris@1",
@@ -213,7 +178,7 @@
       "packages/telescope",
       "packages/telescope-cli"
     ],
-    "reason": "Spelled as a raw string by 2 owners (packages/telescope, packages/telescope-cli); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Telescope embedded Python writes UVFITS responses read by telescope and telescope-cli; move response validation and collapse CLI wire types with telescope dependency/build-order changes in a separate 13-file packet after E2h camera (25-file scope cap)."
   },
   {
     "schema": "cssearth-raster-recipe@2",
@@ -296,7 +261,7 @@
       "packages/telescope-cli",
       "site"
     ],
-    "reason": "Spelled as a raw string by 3 owners (packages/bake, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Bake/telescope-cli write presentation datasets/previews read by site and bake; move the pure presentation/preview records together with the context source manifest in a separate 19-file packet after E2h camera (25-file scope cap)."
   },
   {
     "schema": "cssearth-volume-source-manifest@2",
@@ -305,6 +270,6 @@
       "packages/telescope-cli",
       "site"
     ],
-    "reason": "Spelled as a raw string by 3 owners (packages/bake, packages/telescope-cli, site); no objects contract yet. Debt ledger entry: move the contract to packages/objects/src and delete this entry."
+    "reason": "Bake/telescope-cli write repository-path context manifests read by bake and site; extract input/document/intermediate parsing together with presentation records in the separate volume-source packet after E2h camera (25-file scope cap)."
   }
 ]

@@ -1,4 +1,4 @@
-import { parseObjectDescriptor, parsePreparedWorldCameraFrame } from '@cssearth/objects';
+import { CAMERA_POSE_SCHEMA, parseObjectDescriptor, parsePreparedWorldCameraFrame } from '@cssearth/objects';
 
 import { parseHTML } from 'linkedom';
 
@@ -129,7 +129,7 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   // fixed size overflowed a phone (2026-10-02).
   const share = defaultWidthShare(definition.camera);
   const view: SharedView | null = saved ?? (frame && share ? {
-    camera: { distanceKilometers: distanceForSilhouetteRadius(frame.bodyRadiusM, 1, share.diameterOverFocal / 2) / 1000, pose: { schema: 'cssearth-camera-pose@2',
+    camera: { distanceKilometers: distanceForSilhouetteRadius(frame.bodyRadiusM, 1, share.diameterOverFocal / 2) / 1000, pose: { schema: CAMERA_POSE_SCHEMA,
       scene: serializePreparedMatrix4(preparedSceneMatrix(definition.camera, definition.camera.defaultControlPitchDegrees, definition.camera.defaultControlYawDegrees)) } },
     playback: { speed: 1, motionRequested: false, times: (definition.motion ?? []).map(() => 0) }, preparedEpochJdTt: frame.epochJdTt,
   } : null);
