@@ -1,3 +1,4 @@
+import { PUBLISHED_MUTUAL_ORBIT_SCHEMA, PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA } from '@cssearth/objects';
 // Node-only, source-owned geometric snapshots. Never evaluate them at another epoch.
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -10,7 +11,7 @@ interface BodyEpochRequest { bodyRoot: string; bodyId: string; centerBodyId: str
 export async function loadBodyEpochEphemeris({ bodyRoot, bodyId, centerBodyId, target, center, epochJdTt }: BodyEpochRequest) {
   const path = resolve(bodyRoot, 'source/validation/epoch-state.json');
   const record = parseBodyEpochRecord(JSON.parse(await readFile(path, 'utf8')));
-  if (record.schema === 'cssearth-published-body-epoch-ephemeris@1') {
+  if (record.schema === PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA) {
     return loadPublishedRecord({ record, bodyRoot, bodyId, centerBodyId, epochJdTt });
   }
   if (record.schema !== 'cssearth-body-epoch-ephemeris@1' || record.id !== bodyId ||
@@ -100,7 +101,7 @@ async function loadPublishedRecord({ record, bodyRoot, bodyId, centerBodyId, epo
     throw new TypeError(`Published body ephemeris identity, epoch or convention differs: ${bodyId}.`);
   }
   const parameters = parsePublishedParameters(JSON.parse(await readFile(resolve(bodyRoot, record.source.path), 'utf8')));
-  if (parameters.schema !== 'cssearth-published-mutual-orbit@1' || parameters.id !== bodyId ||
+  if (parameters.schema !== PUBLISHED_MUTUAL_ORBIT_SCHEMA || parameters.id !== bodyId ||
       parameters.centerBodyId !== centerBodyId || typeof parameters.timeQualification !== 'string' ||
       !parameters.timeQualification.trim() || !parameters.citation || !record.validation) {
     throw new TypeError(`Published body ephemeris source identity/qualification differs: ${bodyId}.`);

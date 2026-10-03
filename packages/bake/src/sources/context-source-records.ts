@@ -1,3 +1,4 @@
+import { VOLUME_SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode } from '@cssearth/core';
@@ -28,7 +29,7 @@ export async function contextLineages({ route, root = process.cwd(), input = (pa
     if (raw.provenance === undefined) continue;
     const presentation = sourceObject(raw.provenance);
     const manifest = sourceObject(JSON.parse((await input(`${base}/source/manifest.json`)).toString()));
-    if (manifest.schema !== 'cssearth-volume-source-manifest@2' || manifest.pathBase !== 'repository') throw new TypeError(`Invalid context manifest: ${id}`);
+    if (manifest.schema !== VOLUME_SOURCE_MANIFEST_SCHEMA || manifest.pathBase !== 'repository') throw new TypeError(`Invalid context manifest: ${id}`);
     const products = sourceArray(presentation.products, raw => {
       const value = sourceObject(raw), interpretation = sourceObject(value.interpretation);
       return { id: sourceText(value.id), label: sourceText(value.label), inputs: [...sourceArray(value.inputs, sourceText)], parents: [], datasetIds: [],

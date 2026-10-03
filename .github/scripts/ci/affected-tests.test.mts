@@ -23,6 +23,12 @@ test('the offline tools join when they or another tool changed, not when the ren
   assert.deepEqual(affectedTests(['packages/bake/src/a.ts'], packages, site), { packages: ['bake', 'telescope-cli'], site: false, files: FOREIGN_TESTS.bake!.slice().sort() });
 });
 
+test('a pinned schema source outside packages/ selects the package whose test pins it', () => {
+  for (const path of ['.github/scripts/checks/check-body-references.mts', 'src/objects/heliosphere/source/ibex/extract.py'])
+    assert.deepEqual(affectedTests([path], packages, site), { packages: ['bake', 'telescope-cli'], site: true, files: FOREIGN_TESTS.bake!.slice().sort() }, path);
+  assert.deepEqual(affectedTests(['src/objects/heliosphere/source/ibex/other.py'], packages, site), { packages: [], site: true, files: [] });
+});
+
 test('object data and the site test no package; documentation tests nothing', () => {
   assert.deepEqual(affectedTests(['src/objects/mars/text.json'], packages, site), { packages: [], site: true, files: [] });
   assert.deepEqual(affectedTests(['docs/ci-cd.md'], packages, site), { packages: [], site: false, files: [] });

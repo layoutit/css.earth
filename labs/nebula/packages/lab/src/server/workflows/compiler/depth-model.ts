@@ -1,7 +1,8 @@
+import type { DepthRecipe } from '@cssearth/objects';
 import {readFile,realpath} from 'node:fs/promises';
 import {resolve,relative,isAbsolute} from 'node:path';
 import {jointPath} from '../../../features/joint-fit/model.ts';
-import {readDepthRecipe as readRecipe,verifyDepthEvidence,type DepthRecipe} from '@cssearth/nebula-reconstruction/methods/inference/depth-model';
+import {readDepthRecipe as readRecipe,verifyDepthEvidence} from '@cssearth/nebula-reconstruction/methods/inference/depth-model';
 export * from '@cssearth/nebula-reconstruction/methods/inference/depth-model';
 export function readDepthRecipe(value: unknown): DepthRecipe {return readRecipe(value,path=>path.startsWith('labs/nebula/models/'));}
 export interface ResolvedDepthModel {

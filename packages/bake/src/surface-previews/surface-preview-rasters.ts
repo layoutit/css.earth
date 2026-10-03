@@ -1,3 +1,4 @@
+import { PAGED_ELLIPSOID_SCHEMA } from '@cssearth/objects';
 import type {RasterImage} from '../objects/layers/observation/index.ts';
 import type {SurfacePreviewDirectories} from './surface-preview-source.ts';
 import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePolarPreview,parseObservedPreview,parseSpectralPreview,parseGeometryPreview} from './surface-preview-source.ts';
@@ -67,7 +68,7 @@ export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory,
       yield { id: dataset.id, raster: unpackSurfacePreview(image, { width, height, bandCount, gutter }) };
     }
   }
-  if (rawPaged?.schema === 'cssearth-paged-ellipsoid@1') {
+  if (rawPaged?.schema === PAGED_ELLIPSOID_SCHEMA) {
     const paged=parsePagedProfile(rawPaged),datasets=parsePreviewControls(rawDatasets);
     for (const map of paged.surface.maps) {
       const dataset = datasets.controls.find(l => l.thumbnailUrl === `${paged.publicBase}${map.thumbnail}`);

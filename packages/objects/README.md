@@ -197,3 +197,19 @@ Authored object-content recipes, prepared panel content and facility emblem-libr
 contracts in `src/prepared-data/`, exported through `@cssearth/objects`. Source envelope admission, authored dataset
 metadata and panel field parsing preserve caller diagnostics. Asset production, editorial checks, Astro adapters,
 source binding resolution and image byte inspection stay in bake/site. Contract tests use node:test in the packages lane.
+
+Astronomy published-orbit/epoch, solar-system preparation, investigation-ledger and acquisition-plan schema identifiers live in `src/prepared-data/`; acquisition operations and investigation entry types are shared, while scientific evaluation, survey expansion and acquisition validation/execution stay with their owners.
+Authored CSS presentation profiles and their pure parser belong to objects; compilation stays with bake.
+CSS geometry profile identifiers belong to objects; scene validation and generation stay with bake.
+Navigation marker recipe identifiers and wire types belong to objects; image/source validation and preparation stay with bake.
+Paged ellipsoid recipe identifiers belong to objects; camera derivation and asset preparation stay with bake/site.
+Chart asset recipe identifiers belong to objects; nested chart validation, rendering and file I/O stay with their consumers.
+Volume dataset manifest identifiers live in `src/volume/volume-dataset-manifest.ts`; output selection and byte checks stay with bake/lab.
+Compact density delivery identifiers live in `src/volume/compact-density-delivery.ts`; replay and source-owner admission stay with bake/lab.
+Nebula depth-model identifiers and `DepthRecipe`/`DepthSurface` wire types live in `src/volume/nebula-depth-model.ts`; joint-path admission, evidence policy and sampling stay with reconstruction/lab.
+Gaia nebula-field identifiers live in `src/volume/gaia-nebula-field.ts`; existing reader subsets, projection and selection stay with bake/telescope-cli.
+Nebula delivery identifiers live in `src/volume/nebula-delivery.ts`; existing envelope admission and compilation stay with bake/telescope-cli/lab.
+Circumstellar reconstruction identifiers live in `src/volume/circumstellar-reconstruction.ts`; solver-derived opacity types, reconstruction and file checks stay with lab/telescope-cli.
+UVFITS request/response types and pure validation live in `src/prepared-data/pyuvdata-uvfits.ts`; process and toolchain handling stay in telescope.
+Volume source-manifest identifiers live in `src/prepared-data/volume-source-manifest.ts`; source parsing and restoration stay with callers.
+Volume presentation-source identifiers and pure preview/dataset/presentation records live in `src/prepared-data/volume-presentation-source.ts`; preview creation and dataset text validation stay with callers.

@@ -88,6 +88,15 @@ test('a billboard startup page takes the selected scene and its prepared mark', 
   const unmarked = startup.replace('<script type="application/json" data-startup-discovery>{}</script>', '');
   await assert.rejects(renderDatasetResponse(unmarked, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', read), /identity drifted: requested saturn/);
 });
+test('the drag rule of a page without script finds the spinning meshes a native response draws, with no mark for it', async () => {
+  const layout = await readFile(new URL('../layouts/ObjectLayout.astro', import.meta.url), 'utf8');
+  const selector = /^ {2}(\.object-stage \.polycss-mesh\[style\*="[^"]+"\]) \{$/mu.exec(layout)?.[1];
+  assert.ok(selector, 'ObjectLayout names the spinning meshes by their inline animation');
+  const result = await renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', read);
+  const turning = [...parseHTML(result).document.querySelectorAll(selector)].map(node => node.getAttribute('class'));
+  assert.deepEqual(turning, ['polycss-mesh saturn-body saturn-body-polar', 'polycss-mesh saturn-body']);
+  assert.equal(result.includes('data-native'), false);
+});
 test('a city link is left to the page, which selects the city on arrival', async () => {
   // The native response used to reject every non-numeric feature, so a shared city link answered 400.
   assert.equal(await renderDatasetResponse(html, new URL('/saturn/?feature=city-3435910', origin), 'saturn', read), html);

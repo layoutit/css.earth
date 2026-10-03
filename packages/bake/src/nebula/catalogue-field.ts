@@ -1,7 +1,7 @@
 /** Offline Gaia/Bailer-Jones neighbourhoods in the shared physical volume frame. */
 import { readFile, realpath } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
-import { parseDensityVolumeFrame, type DensityVolumeFrame, validatePreparedCataloguePoints, type PreparedCataloguePoint } from '@cssearth/objects';
+import { parseDensityVolumeFrame, type DensityVolumeFrame, validatePreparedCataloguePoints, type PreparedCataloguePoint, GAIA_NEBULA_FIELD_SCHEMA } from '@cssearth/objects';
 import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '@cssearth/engine';
 
 import { ARCSECOND_RADIANS, METERS_PER_PARSEC } from './nebula-frame.ts';
@@ -30,7 +30,7 @@ function sky(raValue: unknown, decValue: unknown): [number, number] {
 }
 function parseField(input: unknown) {
   const value = record(input), selection = record(value.selection);
-  if (value.schema !== 'cssearth-gaia-nebula-field@1' || !/^[a-z][a-z0-9-]*$/.test(text(value.id))) {
+  if (value.schema !== GAIA_NEBULA_FIELD_SCHEMA || !/^[a-z][a-z0-9-]*$/.test(text(value.id))) {
     throw new TypeError('Invalid Gaia catalogue field schema or identity.');
   }
   const center = selection.centerIcrsDegrees;
