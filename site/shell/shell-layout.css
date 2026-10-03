@@ -424,9 +424,13 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 /* Slideshow sits with the app actions and is an icon-only circle like them; its name is its label and tooltip. */
 .object-showcase-action { width: var(--explorer-category-height); padding: 0; }
 .object-showcase-action span { display: none; }
-/* Eight pills with icons need 840 px of header row, which a landscape screen narrower than 1440 px does not have (732 px at
-   1280): there the pills are words alone, 648 px. */
-@media (min-width: 821px) and (max-width: 1439px) and (orientation: landscape) {
+/* Eight pills with icons need 840 px of header row. The row runs from the wordmark to the app actions, the window's width
+   less 488 px, so they fit from 1328 px. Narrower landscape screens get tighter pills, 792 px, which fit from 1280 px; below
+   that the pills are words alone. */
+@media (min-width: 821px) and (max-width: 1327px) and (orientation: landscape) {
+  .object-search-category { gap: 6px; padding-inline: 8px 10px; }
+}
+@media (min-width: 821px) and (max-width: 1279px) and (orientation: landscape) {
   .object-search-category .material-symbol { display: none; }
 }
 /* GitHub is an icon-only circle, like the panel toggles. */
@@ -622,13 +626,14 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     isolation: isolate;
   }
 
-  /* Search sits over the sidebar; the other controls share the top row. */
+  /* Search sits over the sidebar; the other controls share the top row. The first column is the wordmark's own width, so
+     the category pills can start beside it; search spans the row at the sidebar's width. */
   .explorer-shell-header {
     position: relative;
     inset: auto;
     margin: var(--explorer-header-top) calc(-1 * var(--explorer-panel-left)) var(--explorer-header-panel-gap);
     display: grid;
-    grid-template-columns: var(--explorer-panel-width) minmax(0, 1fr) minmax(0, max-content) max-content;
+    grid-template-columns: max-content minmax(0, 1fr) minmax(0, max-content) max-content;
     grid-template-rows: var(--explorer-header-bar-height) var(--explorer-search-height);
     /* One gap between every header control, matching the gap inside the pill groups. */
     column-gap: 8px;
@@ -639,7 +644,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   }
 
   .explorer-brand-row { grid-row: 1; grid-column: 1; justify-self: start; pointer-events: auto; }
-  .object-search-toolbar { grid-row: 2; grid-column: 1; pointer-events: auto; }
+  .object-search-toolbar { grid-row: 2; grid-column: 1 / -1; justify-self: start; width: var(--explorer-panel-width); pointer-events: auto; }
   .object-search-categories { grid-row: 1; grid-column: 3; }
   .object-header-actions { grid-row: 1; grid-column: 4; }
 
