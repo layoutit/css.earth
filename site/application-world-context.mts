@@ -13,7 +13,7 @@ import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { suppressMinorMoonOrbitPaint } from './moon-orbit-policy.mts';
 import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
 import { loadApplicationUniverse } from './application-world-resources.mts';
-import { knownAncestors, loadAncestors } from './object-directory.mts';
+import { ancestorIds, knownAncestors } from './object-directory.mts';
 
 /** The world's prepared data and planner worker, which `startup-boot.mts` starts while the first body still loads. */
 export { loadApplicationUniverse };
@@ -103,12 +103,11 @@ export function createApplicationWorldContext() {
             visibility.selectObject(id);
             layer.selectObject(id, frame, framingScale, edge);
             moonLabels.selectObject(id);
-            // The objects the body is inside, by the object tree, as far as the page has read them and again once it has read
-            // them all: a dot bank one of them hosts (another galaxy's plain stars, a system's bound star) draws around the body.
-            const holders = () => { if (!lifetime.disposed && selectedId === id) layer.setSelectionHolders(knownAncestors(id).map(object => object.id)); };
+            // The objects the body is inside, by the object tree, as its own entry names them: a bank of plain-dot stars one of
+            // them hosts (another galaxy's) draws around the body. No other entry is read for this.
             selectedId = id;
-            holders();
-            void loadAncestors(id).then(holders, () => {});
+            layer.setSelectionHolders(knownAncestors(id).map(object => object.id));
+            void ancestorIds(id).then(ids => { if (!lifetime.disposed && selectedId === id) layer.setSelectionHolders(ids); }, () => {});
           },
           setIllustrationModelsEnabled: visibility.setIllustrationModelsEnabled,
           setHighlightedClassification: visibility.setHighlightedClassification,

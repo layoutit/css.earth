@@ -29,7 +29,7 @@ import { createCameraMotion } from '@cssearth/renderer/navigation';
 import { WORLD_HOST_ID, namesSystem } from '../navigation/navigation-scope.mts';
 import { systemHostId } from '../navigation/system-address.mts';
 import { insideBody, pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../inside-view.mts';
-import { loadAncestors } from '../object-directory.mts';
+import { loadAncestors, loadHolder } from '../object-directory.mts';
 import { bodyInView, createCameraHandover } from './camera-handover.mts';
 import { OVERVIEW_SELECTION_POLICY } from '../runtime-policy.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
@@ -688,6 +688,10 @@ export function createSceneRouter({
   function publishFraming() { publishCamera(); publishWorld(); }
   function publishSelection() {
     const subject = context?.selection.current;
+    // A star's system is a step of the zoom out of that star: the objects the star is inside, which the zoom hands the view
+    // to next, are read now. A page has read the Sun's as it started.
+    const step = subject ? zoomStepOf(subject) : null;
+    if (step) void loadAncestors(step.centreId).catch(error => console.error(`The objects ${step.centreId} is inside could not be read; zooming out stops at its system.`, error));
     publishCamera();
     shellOwner?.shell?.presentSelection();
     publishWorld();
@@ -719,8 +723,9 @@ export function createSceneRouter({
     const owner = session.mount?.navigation;
     if (!owner) return;
     const { selection: current, objects, registry } = ready;
-    // The objects the mounted body is inside are read now: the nearest takes the view as the camera backs out of the body.
-    void loadAncestors(objectId).catch(error => console.error(`The objects ${objectId} is inside could not be read; zooming out of it skips them.`, error));
+    // The object the mounted body is inside is read now, when the page has not read it (another galaxy): it takes the view
+    // as the camera backs out of the body.
+    void loadHolder(objectId).catch(error => console.error(`The object ${objectId} is inside could not be read; zooming out of it skips it.`, error));
     const watch = registry.watchOverviewSelection({ navigation: owner, objects: registry.SCENE_OBJECTS, systems: objects, objectId,
       inside: () => { const frame = insideBody(objectId)?.worldFrame, id = insideBody(objectId)?.id; return frame && id !== undefined ? { id, originM: frame.originM, radiusM: frame.bodyRadiusM } : null; },
       // The scene of an object seen from inside is left by zooming (followSelectionCamera), not by this watcher.
