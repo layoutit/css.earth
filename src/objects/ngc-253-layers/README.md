@@ -11,7 +11,7 @@ face-on views are modelled more than seen; image brightness does not measure per
 | --- | --- |
 | [Spiral galaxy NGC 253](https://www.eso.org/public/images/eso0902c/) | [Record](../../sources/eso-eso0902c.json). The MPG/ESO 2.2-metre WFI view in [O III], V, R and H-alpha, 8285 × 7510 px over 32.87 × 29.79 arcmin (`source/source.jpg`, the Large JPEG, restored from its origin). The same field as eso0902a, which carries an inset drawn over the sky. Found with `telescope explore "ngc 253"`. |
 | [Lucero et al. (2015)](https://arxiv.org/abs/1504.04082) | [Record](../../sources/lucero-2015-ngc253-hi.json). Sect. 5: the H I disc at inclination 76° and position angle 235°, the disc the photograph and dots lie on. |
-| [Salo et al. (2015)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4) | [Record](../../sources/salo-2015-s4g-decompositions.json). S4G's 3.6 µm bulge-plus-disc fit: a Sérsic bulge (half-light radius 103.93″ = 1.75 kpc, n = 3.872, axis ratio 0.586, PA 66.65°, 28% of the light) and an exponential disc (scale length 185.12″ = 3.11 kpc, axis ratio 0.193, PA 51.29°). |
+| [Salo et al. (2015)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4) | [Record](../../sources/salo-2015-s4g-decompositions.json). S4G's 3.6 µm bulge-plus-disc fit: a Sérsic bulge (half-light radius 103.93″ = 1.75 kpc, n = 3.872, axis ratio 0.586, PA 66.65°, 28% of the light) and an exponential disc (scale length 185.12″ = 3.11 kpc, axis ratio 0.193, PA 51.29°, central surface brightness 19.835 face-on, 18.049 as projected on the sky). |
 | [Kregel et al. (2002)](https://arxiv.org/abs/astro-ph/0204154) | [Record](../../sources/kregel-2002-disc-flattening.json). Sect. 4.3: discs are on average 7.3 ± 2.2 times longer than thick, so the 3.11 kpc scale length gives a 426 pc scale height. |
 | [Gaia DR3](https://doi.org/10.1051/0004-6361/202243940) with [Ren et al. (2021)](https://doi.org/10.3847/1538-4357/abcda5) | The 910 Gaia DR3 sources within 0.38° of the photograph's centre that Ren et al.'s criterion marks as Milky Way stars (`source/gaia-dr3-foreground.csv`, restored by the query in the Gaia record). |
 | [RC3](../../sources/rc3-1991.json) | NGC 253's total B-V, 0.85 ± 0.05 as observed. |
@@ -42,8 +42,8 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 
 | Catalogue | Drawn | Left out |
 | --- | --- | --- |
-| Planetary nebulae (Congiu et al. 2025) | 571, 194 of them in the bulge | none |
-| Globular clusters (Cantiello et al. 2018) | 21, 3 of them in the bulge | 61 beyond the photograph |
+| Planetary nebulae (Congiu et al. 2025) | 571, 87 of them in the bulge | none |
+| Globular clusters (Cantiello et al. 2018) | 21, 2 of them in the bulge | 61 beyond the photograph |
 | Young star groups (Rodríguez et al. 2018) | 875 | none |
 
 Dots keep their place in the disc and rise along its axis to heights drawn from the 426 pc layer; old objects near the
@@ -51,13 +51,18 @@ centre are bulge members. Colors are the Milky Way's and M31's for each kind; ea
 
 ## Evidence
 
-- Dots from the photograph: the default view (left) and tilted (right), in the app with each dot's tone and color taken from the photograph. Captured on this branch on 2026-09-29.
+![NGC 253 before and after the disc-brightness correction](evidence/2026-10-03/disc-brightness.webp)
+
+The NGC 253 page in headless Chromium at 1440 × 900, device pixel ratio 2, zoomed in, on 2026-10-03: before (top) and after (bottom) the disc's central brightness was taken as projected on the sky; as the page opens, from the side and from above. An unchanged rebake reproduced the published bytes first, so the difference is the correction alone.
+
+- Dots from the photograph: the default view (left) and tilted (right), in the app with each dot's tone and color taken from the photograph. Captured on 2026-09-29, before the correction above; the dots' tones and colors are made the same way since.
 - The prepared bank's `approximation.limitations` records the foreground, color-tie and saturation counts quoted above.
-- Bytes: 166 layer images, 1.63 MB.
+- Bytes: 162 layer images, 1.69 MB.
 - Tests: `packages/bake/src/image-layers/bulge.test.mts` pins the bulge model and its fade (`extentKpc.fadeFrom`), on M81's fit.
 
 ## Known problems
 
+- Until 2026-10-03 the disc's central brightness was taken face-on, as S4G tabulates it, where the bulge model needs it as projected on the sky (1.79 mag brighter for a disc this steep). The bulge's share was too large: 74% of the light at 1 kpc where the fit gives 35%. Corrected, and the dots replaced.
 - Nearly edge-on: seen from above, the disc's light near the minor axis is thin and its outer edge smears; the bar and
   the starburst wind are not modelled.
 - The planetary nebulae cover the MUSE mosaic and the young groups the HST fields only.

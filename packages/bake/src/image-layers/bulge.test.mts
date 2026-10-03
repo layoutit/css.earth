@@ -33,7 +33,7 @@ const m81 = (fadeFrom?: number) => imageLayerBulgeModel({ target: { centerRaDeg:
   geometry: { kind: 'inclined-disk', inclinationDeg: 59, lineOfNodesPaDeg: 150.2, thicknessKpc: 2.208, supportRadiusKpc: 16.5, supportTaperFraction: 0.75,
     depthWeights: [1], depthScales: [1], bulge: { source: 'salo-2015-s4g-decompositions', positionAngleDeg: 145.02, sersicIndex: 3.557,
       halfLightRadiusKpc: 1.804, surfaceBrightnessAtHalfLight: 20.017, skyEllipticity: 0.346,
-      disc: { centralSurfaceBrightness: 19.833, scaleLengthKpc: 2.684, skyEllipticity: 0.457, positionAngleDeg: 156.3 },
+      disc: { centralSurfaceBrightness: 19.17, scaleLengthKpc: 2.684, skyEllipticity: 0.457, positionAngleDeg: 156.3 },
       extentKpc: { radius: 6, height: 4, ...(fadeFrom === undefined ? {} : { fadeFrom }) } } } });
 
 test('a fading bulge keeps its share inside fadeFrom and gives none at the extent radius', () => {

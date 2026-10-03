@@ -23,13 +23,18 @@
       "role": "archive",
       "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
       "label": "CDS J/ApJS/219/4"
+    },
+    {
+      "role": "original",
+      "url": "https://arxiv.org/abs/1503.06550",
+      "label": "arXiv:1503.06550"
     }
   ],
   "evidence": [
     {
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/219/4/ReadMe",
-      "checkedOn": "2026-09-29",
-      "locator": "table7: 3.6 micron bulge (Sersic) plus exponential disc models. NGC3031: bulge 45.8% of the light, mag 7.088, q 0.654, PA 145.02, Re 102.96 arcsec, n 3.557; disc mag 6.912, q 0.543, PA -23.7, hr 153.17 arcsec, mu0 19.833. NGC0253: bulge 28.3%, mag 7.508, q 0.586, PA 66.65, Re 103.93 arcsec, n 3.872; disc mag 6.502, q 0.193, PA 51.29, hr 185.12 arcsec, mu0 19.835."
+      "checkedOn": "2026-10-03",
+      "locator": "table7: 3.6 micron bulge (Sersic) plus exponential disc models. NGC3031: bulge 45.8% of the light, mag 7.088, q 0.654, PA 145.02, Re 102.96 arcsec, n 3.557; disc mag 6.912, q 0.543, PA -23.7, hr 153.17 arcsec, mu0 19.833. NGC0253: bulge 28.3%, mag 7.508, q 0.586, PA 66.65, Re 103.93 arcsec, n 3.872; disc mag 6.502, q 0.193, PA 51.29, hr 185.12 arcsec, mu0 19.835. The table's mu0 of an exponential disc is face-on (Salo et al. 2015, eq. 2 and the note of their table 7); as projected on the sky it is mu0 + 2.5 log10 q: 19.170 for NGC3031 and 18.049 for NGC0253, the values the recipes use since 2026-10-03."
     },
     {
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/219/4/ReadMe",
