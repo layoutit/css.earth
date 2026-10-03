@@ -4,7 +4,8 @@ const test = sourceTest();
 import { APPLICATION_WORLD_CONTEXT as context } from '../world-context-plan.mts';
 import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
 import { allSatelliteSystems, satelliteSystemByHost, satelliteSystemOfMember, satelliteSystems } from '../satellite-systems.mts';
-import { satelliteSelectionAtCamera, watchSatelliteSelection } from '../satellite-selection.mts';
+import { satelliteSelectionAtCamera } from '../satellite-selection.mts';
+import { watchCameraSelection } from '../overview-selection.mts';
 import { selectionTargetFromUrl, createSceneSelection, moonSystem, starSystem, type SceneContext } from '../scene/scene-selection.mts';
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from '../system-framing.mts';
 import type { WorldCameraPose } from '@cssearth/engine';
@@ -94,10 +95,9 @@ test("a moon's crossing into its planet's system is reported once, and so is the
   const timers = new Map<number, () => void>(), changes: SceneContext[] = [];
   let serial = 0, returns = 0;
   // The moon's scene stays mounted after the report (its planet's waits for the camera to rest): the selection is the moon's still.
-  const watch = watchSatelliteSelection({ objects: SCENE_OBJECTS, getSelection: () => ({ objectId: 'moon' }), isAvailable: () => true,
+  const watch = watchCameraSelection({ objects: SCENE_OBJECTS, systems: SCENE_OBJECTS, objectId: 'moon', getSelection: () => ({ objectId: 'moon' }), isAvailable: () => true,
     onChange: next => changes.push(next), onReturn: () => { returns++; },
     navigation: { optics: () => optics, subscribe(value: (world: WorldCameraPose) => void) { listener = value; return () => {}; } } as unknown as ObjectWorldNavigation,
-    documentTarget: new EventTarget() as unknown as Document,
     windowTarget: { setTimeout(callback: () => void) { timers.set(++serial, callback); return serial; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
   const at = (range: number) => listener!(camera(range));
   const settle = () => { const pending = [...timers.values()]; timers.clear(); for (const run of pending) run(); };

@@ -7,6 +7,6 @@ export { mountObjectShell } from '../shell/object-shell-client.mts';
 export { createSceneActivation } from './scene-activation.mts';
 export { createSceneSelection, selectionTargetFromUrl } from './scene-selection.mts';
 export { resolveNavigation } from '../navigation/navigation-request.mts';
-export { watchOverviewSelection } from '../overview-selection.mts';
+export { watchCameraSelection } from '../overview-selection.mts';
 export { SYSTEM_CENTERS, loadSystemView, systemViewLoaded } from '../system-framing.mts';
 export { createShowcaseController } from '../showcase.mts';

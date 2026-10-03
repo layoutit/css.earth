@@ -65,7 +65,7 @@ test('a camera that comes back before it rests leaves the mounted scene, and one
 
 test('a crossing with the camera at rest waits the settle time; a scene that cannot be replaced is left', () => {
   const still = fixture();
-  still.handover.cross({ objectId: 'milky-way' }, 'overview-watcher');
+  still.handover.cross({ objectId: 'milky-way' }, 'camera-watcher');
   assert.deepEqual(still.fetched, ['milky-way']);
   still.settle();
   assert.deepEqual(still.swaps, [{ objectId: 'milky-way' }]);

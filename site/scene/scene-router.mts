@@ -41,8 +41,7 @@ import { createWorldPreferences } from '../world-preferences.mts';
 import { createDatasetEffects } from './scene-datasets.mts';
 import { createSceneSessions, type SceneSession as Session } from './scene-session.mts';
 import { readPreparedDescriptor } from '../prepared-descriptor.mts';
-import { watchSatelliteSelection } from '../satellite-selection.mts';
-import { satelliteSystemByHost, satelliteSystemOfMember } from '../satellite-systems.mts';
+import { satelliteSystemOfMember } from '../satellite-systems.mts';
 import { systemOfObject } from '../object-systems.mts';
 import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
 import { observeSceneRetirement } from './scene-memory.mts';
@@ -119,7 +118,7 @@ export function createSceneRouter({
   const reducedMotion = windowTarget.matchMedia?.("(prefers-reduced-motion: reduce)");
   let reducedMotionActive = reducedMotion?.matches === true;
   // A header pill's flight holds the overview hand-over off until it lands, then settles it once.
-  let categoryFlight = false, refreshOverviewSelection: ((landed?: boolean) => void) | null = null, refreshSatelliteSelection: (() => void) | null = null;
+  let categoryFlight = false, refreshCameraSelection: ((landed?: boolean) => void) | null = null;
   // The zoom's hand-over to another scene (a body's system, an object seen from inside, or back to the centre's system):
   // the world shows the selection the camera has crossed into at once, and the scene is replaced when the camera rests.
   const handover = createCameraHandover({ windowTarget, documentTarget, mountedId: () => objectId, fetchAhead: fetchSceneReads,
@@ -413,7 +412,7 @@ export function createSceneRouter({
               if (!scenes.isCurrent(session)) return;
               // The hand-over, if the landing has one, runs inside this call.
               categoryDeparture = departed;
-              try { refreshOverviewSelection?.(true); } finally { categoryDeparture = null; }
+              try { refreshCameraSelection?.(true); } finally { categoryDeparture = null; }
             });
         },
         navigable: id => navigable(id),
@@ -578,8 +577,7 @@ export function createSceneRouter({
     if (mounted && starSystem(ready.selection.current)) aimAtSystemCenter(ready);
     syncPlayback();
     if (mounted) {
-      connectOverviewSelection(ready, session);
-      connectSatelliteSelection(ready, session);
+      connectCameraSelection(ready, session);
     }
     if (request && (interrupted || (request.scene === 'replace'
       ? request.history.history !== 'pop' : request.camera.kind !== 'restore'))) session.viewUrl?.flush();
@@ -749,64 +747,42 @@ export function createSceneRouter({
       targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM, centerSelection: true })
       .catch((error: unknown) => { if (!session.signal.aborted) reportError(error); });
   }
-  function connectOverviewSelection(ready: RouterContext, session: Session) {
+  /** One watcher follows the camera on a body's scene: out to its own system, its planet's or its star's, out to the
+   * object it is inside, and back onto the body. The scene of an object seen from inside is left by zooming
+   * (followSelectionCamera), not by this watcher. */
+  function connectCameraSelection(ready: RouterContext, session: Session) {
     const owner = session.mount?.navigation;
     if (!owner) return;
     const { selection: current, objects, registry } = ready;
     // The object the mounted body is inside is read now, when the page has not read it (another galaxy): it takes the view
     // as the camera backs out of the body.
     void loadHolder(objectId).catch(error => console.error(`The object ${objectId} is inside could not be read; zooming out of it skips it.`, error));
-    const watch = registry.watchOverviewSelection({ navigation: owner, objects: registry.SCENE_OBJECTS, systems: objects, objectId,
+    const watch = registry.watchCameraSelection({ navigation: owner, objects: registry.SCENE_OBJECTS, systems: objects, objectId,
       inside: () => { const frame = insideBody(objectId)?.worldFrame, id = insideBody(objectId)?.id; return frame && id !== undefined ? { id, originM: frame.originM, radiusM: frame.bodyRadiusM } : null; },
-      // The scene of an object seen from inside is left by zooming (followSelectionCamera), not by this watcher.
-      getOverview: () => zoomStepOf(current.context) !== null,
+      getSelection: () => current.context,
       // The pending flight owns the camera; repeat-click bookkeeping must not
       // suppress zoom-out deselection after that flight has finished.
       isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current && !categoryFlight,
       windowTarget,
-      // Back inside the system's exit the camera may still frame the planet's moons: that watcher is asked again.
-      onReturn() { handover.back(); refreshSatelliteSelection?.(); },
+      onReturn() { handover.back(); },
       onChange(next, landed) {
+        const own = current.ownScene(next);
+        // A pill's landing in another star's system is a place the reader chose, so it is its own entry: as a
+        // replacement, Back from the Planets pill skipped Earth for the page before it (2026-10-01).
+        if (landed && !own && zoomStepOf(next) !== null) {
+          void navigate(subjectHost(next), { kind: 'object', view: 'system', camera: 'preserve', ...(categoryDeparture ? { departed: categoryDeparture } : {}) });
+          return;
+        }
         // Every crossing shows in the world at once and takes the card and the address when the camera rests: into the
         // object the body is inside, into a system (the body's own shares the mounted scene), and back onto the body.
-        if (!next.overview) {
-          handover.cross({ objectId: next.objectId }, 'overview-watcher');
-          // A flight's landing is at rest already: the mounted body takes its card back at once.
-          if (landed && next.objectId === objectId) handover.due();
-          return;
-        }
-        if (next.objectId === objectId || !landed) {
-          handover.cross(subjectOf(next.objectId, 'system'), 'overview-watcher');
-          // A flight's landing is at rest already: the star's own system takes the card at once.
-          if (landed) handover.due();
-          return;
-        }
-        // A pill's landing is a place the reader chose, so it is its own entry: as a replacement, Back from the Planets
-        // pill skipped Earth for the page before it (2026-10-01).
-        void navigate(next.objectId, { kind: 'object', view: 'system', camera: 'preserve', ...(categoryDeparture ? { departed: categoryDeparture } : {}) });
+        handover.cross(next, 'camera-watcher');
+        // A flight's landing is at rest already: a selection of the mounted scene takes the card at once.
+        if (landed && own) handover.due();
       },
     });
     session.own(watch);
-    refreshOverviewSelection = watch.refresh;
-    session.own(() => { if (refreshOverviewSelection === watch.refresh) refreshOverviewSelection = null; });
-  }
-  function connectSatelliteSelection(ready: RouterContext, session: Session) {
-    if (!satelliteSystemByHost(objectId) && !satelliteSystemOfMember(objectId)) return;
-    const owner = session.mount?.navigation;
-    if (!owner) return;
-    const current = ready.selection;
-    const watch = watchSatelliteSelection({ navigation: owner, objects: ready.registry.SCENE_OBJECTS,
-      getSelection: () => current.context,
-      isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current,
-      documentTarget, windowTarget,
-      // What this watcher reports is a planet's system, or the mounted body again.
-      onReturn() { const pending = handover.subject; if (pending && (moonSystem(pending) || pending.objectId === objectId)) handover.back(); },
-      // The world shows the system at once (a planet's own, or a moon's planet's); its card and address follow at rest.
-      onChange(next) { handover.cross(next, 'satellite-watcher'); },
-    });
-    session.own(watch);
-    refreshSatelliteSelection = watch.refresh;
-    session.own(() => { if (refreshSatelliteSelection === watch.refresh) refreshSatelliteSelection = null; });
+    refreshCameraSelection = watch.refresh;
+    session.own(() => { if (refreshCameraSelection === watch.refresh) refreshCameraSelection = null; });
   }
   function fail(session: Session, error: unknown) {
     if (!scenes.isCurrent(session)) return;
