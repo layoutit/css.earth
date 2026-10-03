@@ -1,6 +1,5 @@
 import { OBJECTS, SCENE_OBJECTS, type ObjectEntry } from './objects.mts';
 import { systemObjectId } from './navigation/system-address.mts';
-import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 import { childrenOf } from './object-children.mts';
 import { systemSourceDocumentation } from './source-documentation.mts';
 import { APPLICATION_WORLD_CONTEXT } from './world-context-plan.mts';
@@ -18,6 +17,9 @@ const inside = (id: string): ObjectEntry[] => (children.get(id) ?? []).flatMap(c
   return [...(body ? [body] : []), ...inside(child)];
 });
 
+type SystemFacts = (typeof overviewFacts)['solar-system']['facts'];
+const isFactsRecord = (value: unknown): value is { facts: SystemFacts } => typeof value === 'object' && value !== null && 'facts' in value && Array.isArray(value.facts);
+
 /** The card of the system `hostId` hosts, read from the object tree: the system object names it and introduces it, and
  * the card lists what is inside it. Null for a body that hosts no system. */
 export function systemCard(hostId: string) {
@@ -26,7 +28,9 @@ export function systemCard(hostId: string) {
   const members = inside(system.id).filter(body => body.id !== hostId);
   // What the card lists is the one list of what is inside an object (object-children.mts).
   const list = childrenOf(system.id);
-  const facts = hostId === SOLAR_SYSTEM_ID ? overviewFacts['solar-system'].facts : undefined;
+  // A system with sourced facts of its own (site/source/overview-facts.json, by system id) shows them in a factsheet.
+  const sourced: unknown = (overviewFacts as Record<string, unknown>)[system.id];
+  const facts = isFactsRecord(sourced) ? sourced.facts : undefined;
   // The header names the system's source document: a system opened from a breadcrumb has no row in the lists to name it,
   // and the footer link kept the previous page's (2026-10-02). Its credits name the providers of everything inside it, in
   // the world's prepared order of bodies, which says who is named first.
