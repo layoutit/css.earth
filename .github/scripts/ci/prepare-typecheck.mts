@@ -44,12 +44,17 @@ export function preparedJsonImports(file: string, source: string, root: string):
   return [...paths].sort();
 }
 
+/** Generated modules that import prepared JSON found by rule, so that no authored file names its object: the application's
+ * context objects import the galaxy catalogue's display sample (site/build/prepare/prepare-catalog.mts contextObjectModule).
+ * The tools build writes them before this scan; git ignores them, so the listing below does not find them. */
+const GENERATED_IMPORTERS = ['site/prepared-context-objects.mts'];
+
 /** Scan maintained source, including test imports. Generated declarations are not an alternate data contract.
  * All authored TypeScript/Astro is a conservative superset of the application and test compiler programs, so a
  * newly introduced literal import automatically joins the plan without another hand-maintained body list. */
 export async function collectTypecheckPreparedImports(root = projectRoot) {
   const { stdout } = await exec('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { cwd: root, maxBuffer: 32 * 1024 * 1024 });
-  const files = [...new Set(stdout.split('\0').filter(path => /\.(?:[cm]?ts|tsx|astro)$/u.test(path)))];
+  const files = [...new Set([...stdout.split('\0').filter(path => /\.(?:[cm]?ts|tsx|astro)$/u.test(path)), ...GENERATED_IMPORTERS])];
   const paths = new Set<string>();
   for (const file of files) {
     const source = await readFile(resolve(root, file), 'utf8').catch((error: unknown) => {
