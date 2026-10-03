@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "spica",
+  "card": {
+    "text": "Two hot blue stars 77 parsecs away that circle each other every four days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stw255",
+        "url": "https://doi.org/10.1093/mnras/stw255",
+        "label": "Tkachenko et al. (2016), Monthly Notices of the Royal Astronomical Society 458 1964-1976",
+        "checked": "2026-10-03",
+        "locator": "Tables 2, 4 and 7"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Their orbit weighs the larger at 11.43 solar masses: it is 7.47 solar radii, 25,300 K at its surface, and pulsates.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stw255",
+        "url": "https://doi.org/10.1093/mnras/stw255",
+        "label": "Tkachenko et al. (2016), Monthly Notices of the Royal Astronomical Society 458 1964-1976",
+        "checked": "2026-10-03",
+        "locator": "Tables 2, 4 and 7"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

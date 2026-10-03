@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "spica",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 65474: position at J1991.25; Gaia cannot see the star. Distance: van Leeuwen (2007), A&A 474, 653, HIP 65474: Hipparcos parallax 13.06 +/- 0.70 mas, inverted (https://doi.org/10.1051/0004-6361:20078357): 76.57 +/- 4.1 pc; Gaia DR3 cannot see the star. Proper motion: VizieR V/137D/XHIP row HIP = 65474 (same row): -42.35, -30.67 mas/yr. Radial velocity from Tkachenko et al. (2016), MNRAS 458, 1964, Table 2: systemic velocity -0.5 +/- 1.1 km/s.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=V/137D/XHIP",
+        "https://doi.org/10.1051/0004-6361:20078357",
+        "https://doi.org/10.1093/mnras/stw255"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 7.47 +/- 0.54 solar radii from Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: primary radius 7.47 +/- 0.54 solar radii from the combined light- and radial-velocity-curve solution (https://doi.org/10.1093/mnras/stw255). Mass 11.43 +/- 1.15 solar masses from Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: dynamical mass of the primary 11.43 +/- 1.15 solar masses (https://doi.org/10.1093/mnras/stw255). Temperature 25300 +/- 500 K from Tkachenko et al. (2016), MNRAS 458, 1964, Tables 4 and 7: primary Teff 25,300 +/- 500 K from the disentangled spectrum.",
+      "evidence": [
+        "https://doi.org/10.1093/mnras/stw255"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 25,300 K, because every spectrum of Spica is the blended light of both stars, the secondary giving 14.5 +/- 1.5% of it (Tkachenko et al. 2016, MNRAS 458, 1964, Table 4), so no archive spectrum is the primary's own, through the CIE 1931 2-degree observer: #a5bdff. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://doi.org/10.1093/mnras/stw255"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 25,300 K and log g 3.75 (u1 0.092, u2 0.296): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

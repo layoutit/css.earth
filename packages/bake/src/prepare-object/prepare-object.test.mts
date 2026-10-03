@@ -26,7 +26,7 @@ test('reuse-images preparation reaches the authored preparation only when asked'
 test('several objects run each tool once: the id-list tools take every id, the authored preparation runs per object, the Sun and the world files are re-pinned last', async () => {
   const ids = ['hd-219134', 'hd-219134b'];
   const scopes = Object.fromEntries(PREPARATION_STEPS.map(step => [step.name, step.scope]));
-  assert.deepEqual(scopes, { builds: 'once', inputs: 'ids', catalogue: 'once', geometry: 'once', prepare: 'each', discovery: 'once', sources: 'each', page: 'ids', audit: 'each', text: 'ids', markers: 'ids', billboard: 'ids', world: 'once', catalogues: 'once', pins: 'once' });
+  assert.deepEqual(scopes, { builds: 'once', inputs: 'ids', catalogue: 'once', geometry: 'once', prepare: 'each', discovery: 'once', sources: 'each', page: 'ids', audit: 'each', text: 'ids', markers: 'ids', billboard: 'ids', world: 'once', systems: 'once', catalogues: 'once', pins: 'once' });
   assert.equal(PREPARATION_STEPS.find(step => step.name === 'prepare')?.parallel, true);
   for (const name of ['inputs', 'page', 'text', 'markers']) {
     const commands = await PREPARATION_STEPS.find(step => step.name === name)!.commands(ids);
@@ -48,6 +48,7 @@ test('a site that does not know a new object stops the billboard step before any
 test('every baked body gets its arrival billboard before the world files read the catalogue, from a site that must answer', async () => {
   const order = PREPARATION_STEPS.map(step => step.name), billboard = PREPARATION_STEPS.find(step => step.name === 'billboard')!;
   assert.ok(order.indexOf('billboard') > order.indexOf('page') && order.indexOf('billboard') < order.indexOf('world'));
+  assert.ok(order.indexOf('systems') > order.indexOf('world') && order.indexOf('systems') < order.indexOf('pins'), 'a system is read from the world, and the catalogue registers it');
   const previous = process.env.CSSEARTH_BILLBOARD_ORIGIN;
   process.env.CSSEARTH_BILLBOARD_ORIGIN = 'http://127.0.0.1:9';
   try { await assert.rejects(billboard.commands(['hd-219134']), /No site answers at http:\/\/127\.0\.0\.1:9: start it with pnpm dev/u); }

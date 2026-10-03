@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "cebalrai",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Cebalrai",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 8466669
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/cebalrai-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Cebalrai",
+      "classification": "star",
+      "color": "#ffdbb0",
+      "distanceAu": 5175981.8,
+      "description": "A giant of type K2 III, 25 parsecs away: 12.2 times the Sun's width and 58 times its light.",
+      "systemName": "Cebalrai system",
+      "aliases": [
+        "HD 161096"
+      ],
+      "order": 5470,
+      "context": {
+        "order": 5467
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -55618072565202100,
+        -769849265705297500,
+        61674753278758880
+      ],
+      "presentationToReference": [
+        -0.07182871065574443,
+        -0.0057386693874761875,
+        -0.9974004732298831,
+        -0.9942322271444561,
+        -0.07943539832215177,
+        0.07205758808602851,
+        0.07964241855260311,
+        -0.9968234974994632,
+        -1.7219594948393982e-7
+      ],
+      "orbitUpReference": [
+        0.0057386693874761875,
+        0.07943539832215177,
+        0.9968234974994632
+      ],
+      "metersPerUnit": 27311835.48387097,
+      "bodyRadiusM": 8466669000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

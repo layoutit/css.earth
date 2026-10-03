@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "cebalrai",
+  "angularDiameterMas": 4.51,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 8,466,669 km at 25.09 pc = 4.51 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 25.094,
+  "distanceSource": "Baines et al. (2018), AJ 155, 30, HD 161096: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 39.85 +/- 0.17 mas, inverted (https://doi.org/10.3847/1538-3881/aa9d8b): 25.094 +/- 0.107 pc; Gaia DR3 parallax 39.2284 +/- 0.2027 mas (same row, RUWE 2.72), 193.6 standard errors, is not used",
+  "radiusKm": 8466669,
+  "radiusSource": "Radius 12.17 +/- 0.06 solar radii from Baines et al. (2018), AJ 155, 30, HD 161096: radius 12.17 +/- 0.06 solar radii (Table 5), from the limb-darkened angular diameter 4.511 +/- 0.011 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/aa9d8b): 8,466,669 km at 695,700 km per solar radius. Mass 1.44 +/- 0.16 solar masses from Baines et al. (2018), AJ 155, 30, HD 161096: mass 1.44 +/- 0.16 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only (https://doi.org/10.3847/1538-3881/aa9d8b); GM is that mass times the JPL solar GM. Temperature 4559 +/- 57 K from Baines et al. (2018), AJ 155, 30, HD 161096: effective temperature 4559 +/- 57 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4559,
+  "effectiveTemperatureSource": "Baines et al. (2018), AJ 155, 30, HD 161096: effective temperature 4559 +/- 57 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b)",
+  "surfaceGravityLogg": 2.43,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/cebalrai.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.426, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

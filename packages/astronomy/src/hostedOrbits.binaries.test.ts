@@ -144,6 +144,18 @@ describe('Sirius B and Procyon B: white dwarfs on visual orbits', () => {
     { id: 'sirius-b', host: 'sirius', parallaxArcsec: 0.3789, rows: [[1997.2137, 3.6811, 191.864], [2003.2942, 5.8598, 121.202], [2008.0072, 7.9858, 97.585]] },
     { id: 'procyon-b', host: 'procyon', parallaxArcsec: 0.2850, rows: [[1995.1745, 4.9389, 42.977], [1999.8342, 4.4583, 69.771], [2002.8537, 3.8584, 91.939]] },
   ] as const
+  // Achernar B: offsets from A measured by VLTI and VLT (Kervella et al. 2022, A&A 667, A111, Table A.1: AMBER 2008, SPHERE 2015,
+  // GRAVITY 2016, MATISSE 2019; MJD, east and north in mas), scaled by the Hipparcos parallax the orbit uses. The paper's omega is the
+  // companion's too: the record's turn of 180 degrees puts B on the other side of A at every epoch if it is lost. Within 5 mas: the
+  // paper's own orbit leaves the MATISSE point 4.0 mas away (its error is 2 mas an axis), and lands within 0.1 mas of GRAVITY's.
+  it('achernar-b is where the VLTI measured it', () => {
+    const star = starAstrometry('achernar'), { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees)
+    for (const [mjd, eastMas, northMas] of [[54774.1213, 20.23, -46.54], [57336.1727, 27.94, -42.77], [57713.4683, -174.24, -4.79], [58749.0833, -227.70, 184.39]] as const) {
+      const position = hostedPlanetStateRelativeKm('achernar-b', mjd + 2400000.5).positionKm, toMas = 23.39 / AU_KM
+      const e = dot(position, east) * toMas, n = dot(position, north) * toMas
+      assert.ok(Math.hypot(e - eastMas, n - northMas) < 5, `achernar-b MJD ${mjd}: ${e.toFixed(2)}, ${n.toFixed(2)} mas, measured ${eastMas}, ${northMas}`)
+    }
+  })
   for (const { id, host, parallaxArcsec, rows } of measured) it(`${id} is where Hubble measured it`, () => {
     const star = starAstrometry(host), { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees)
     for (const [year, separation, angle] of rows) {

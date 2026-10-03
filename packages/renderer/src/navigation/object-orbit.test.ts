@@ -35,7 +35,7 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
   roots.forEach(root => { root.ownerDocument = { defaultView: view }; });
   const [stage, cameraElement, sceneElement, skyElement] = roots;
   let rotation = [1,0,0,0,1,0,0,0,1];
-  let physicalOwners = 0, publications = 0;
+  let physicalOwners = 0, publications = 0, yaw = 0;
   const callbacks: any = {};
   const control = { stop() {}, destroy() {}, update() {}, stats: () => ({}), invalidateTrackball() {} };
   const cameraMotion = createCameraMotion();
@@ -57,7 +57,7 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
       snapshot: () => ({ schema: 'cssearth-camera-pose@2', scene: worldRotationCss(rotation) }),
       captureCounterRotation: () => () => worldRotationCss(rotation),
       restore(pose: any) { const m = pose.scene.slice(9,-1).split(',').map(Number); rotation = [m[0],m[4],m[8],m[1],m[5],m[9],m[2],m[6],m[10]]; },
-      rotate(delta: any) { if (!delta.rotation) return;
+      rotate(delta: any) { yaw += delta.yawDelta ?? 0; if (!delta.rotation) return;
         const next = worldRotationFromQuaternion(delta.rotation);
         rotation = [0,1,2].flatMap(row => [0,1,2].map(column => [0,1,2].reduce((sum,k) => sum + next[row*3+k] * rotation[k*3+column], 0)));
       } };
@@ -71,7 +71,7 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
   let ticking: AbortSignal | undefined, started = 0;
   const paint = () => { const pending = [...frames.values()]; frames.clear(); pending.forEach(callback => callback(time)); };
   return { orbit, callbacks, roots, world, view,
-    get physicalOwners() { return physicalOwners; }, get publications() { return publications; },
+    get physicalOwners() { return physicalOwners; }, get publications() { return publications; }, get yaw() { return yaw; },
     tick(progress: number) {
       if (ticking !== cameraMotion.signal) { ticking = cameraMotion.signal; started = time; paint(); }
       time = started + progress * 1000; paint();
@@ -110,5 +110,27 @@ it('holds its last frame while a flight passes through the body, and still refus
   await f.orbit.applyWorldCamera(inside, frame, new AbortController().signal);
   assert.deepEqual(f.orbit.captureWorldCamera(frame).pose.positionM, before.pose.positionM, 'the flight step inside the body is not adopted');
   assert.throws(() => f.orbit.applyWorldCamera(inside, frame), /inside the focused body/u);
+  f.orbit.destroy();
+});
+
+it('turns sideways at a steady rate from the current view, keeping its distance, until its signal aborts', async () => {
+  const f = fixture();
+  const before = f.orbit.state();
+  const turn = f.orbit.turn(60, 1000);
+  for (const [progress, degrees] of [[.25, 15], [.5, 30], [1, 60]] as const) {
+    f.tick(progress); await Promise.resolve();
+    assert.ok(Math.abs(f.yaw - degrees) < 1e-9, `${degrees} degrees at ${progress}: ${f.yaw}`);
+  }
+  assert.deepEqual(await turn, { completed: true });
+  assert.equal(f.orbit.state().zoom, before.zoom);
+  assert.equal(f.orbit.state().distance, before.distance);
+  const takeover = new AbortController();
+  const stopped = f.orbit.turn(60, 1000, takeover.signal);
+  f.tick(.5); await Promise.resolve();
+  takeover.abort();
+  f.tick(1);
+  assert.deepEqual(await stopped, { completed: false });
+  assert.ok(Math.abs(f.yaw - 90) < 1e-9, `a taken-over turn stays where it was: ${f.yaw}`);
+  assert.deepEqual(await f.orbit.turn(60, 1000, takeover.signal), { completed: false });
   f.orbit.destroy();
 });

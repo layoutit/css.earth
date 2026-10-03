@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "spica",
+  "displayName": "Spica",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "7.5 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw255",
+          "url": "https://doi.org/10.1093/mnras/stw255",
+          "label": "Tkachenko et al. (2016), Monthly Notices of the Royal Astronomical Society 458 1964-1976",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "76.6 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-20078357",
+          "url": "https://doi.org/10.1051/0004-6361:20078357",
+          "label": "van Leeuwen (2007), A&A 474, 653, HIP 65474: Hipparcos parallax 13.06 +/- 0.70 mas, inverted",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "spica-dataset-color.webp",
+        "surface": "spica-surface-color@2x.webp",
+        "poles": "spica-poles-color@2x.webp",
+        "source": {
+          "id": "spica-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1093/mnras/stw255"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 25,300 K and log g 3.75 (u1 0.092, u2 0.296): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tkachenko et al. (2016), MNRAS 458, 1964",
+      "href": "https://doi.org/10.1093/mnras/stw255"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1093/mnras/stw255",
+      "credit": "Tkachenko et al. (2016), MNRAS 458, 1964"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/spica.json",
+      "credit": "Tkachenko et al. radius; Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

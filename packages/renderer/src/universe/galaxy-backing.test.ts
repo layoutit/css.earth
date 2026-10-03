@@ -12,11 +12,18 @@ test('a backing mounts the shared parsed leaf and removes it when destroyed', ()
     leaf: { texturePath: 'backing/backing.webp', style: { width: '32px', height: '16px', transform: 'translateZ(0px)',
       backgroundSize: '32px 16px', backgroundPosition: '0px 0px' } } });
   const mounted = mountGalaxyBacking({ host, before: null, payload, resolveResource: path => `/${path}` });
-  const leaf = mounted.root.querySelector<HTMLElement>('s')!;
+  const leaf = mounted.root.querySelector<HTMLImageElement>('img')!;
   assert.equal(leaf.style.width, payload.leaf.style.width);
+  assert.equal(leaf.style.height, payload.leaf.style.height);
   assert.equal(leaf.style.transform, payload.leaf.style.transform);
-  assert.equal(leaf.style.backgroundImage, 'url("/backing/backing.webp")');
+  assert.equal(leaf.style.transformOrigin, '0 0', 'placed from its corner, as a volume leaf is');
+  assert.equal(leaf.getAttribute('src'), '/backing/backing.webp', 'an image the browser composites as it is, not a painted box');
+  assert.equal(leaf.getAttribute('alt'), '');
   assert.equal(host.children.length, 1);
   mounted.destroy();
   assert.equal(host.children.length, 0);
+  // An img fills its box: a leaf prepared with any other placement of its image is refused by name.
+  const cropped = { ...payload, leaf: { ...payload.leaf, style: { ...payload.leaf.style, backgroundSize: '64px 16px' } } };
+  assert.throws(() => mountGalaxyBacking({ host, before: null, payload: cropped, resolveResource: path => `/${path}` }),
+    /backing: the backing leaf backing\/backing\.webp is drawn as an image filling its box; its backgroundSize must be "32px 16px" \(got "64px 16px"\)/);
 });

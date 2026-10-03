@@ -19,6 +19,17 @@ function sources(directory: string): string[] {
   });
 }
 
+/** Nor does anything ask whether two poses are the same place by `positionM` alone: at the pulsar a double steps every 790 m,
+ * and 82 of 159 frames of a slow zoom kept `positionM` bit for bit while the eye moved (2026-10-02). sameEyePlace compares the
+ * exact anchor too. */
+const PLACE_EQUALITY = /pose\.positionM\.(every|some)\(\(\w+, \w+\) => \w+ [!=]== [\w.]*pose\.positionM\[/u;
+
+it('no two poses are compared by positionM alone', () => {
+  const found = [resolve(root, 'packages/renderer/src'), resolve(root, 'site')].flatMap(sources).flatMap(path =>
+    readFileSync(path, 'utf8').split('\n').filter(line => PLACE_EQUALITY.test(line)).map(line => `${relative(root, path)}: ${line.trim()}`));
+  assert.deepEqual(found, [], 'compare eye places with sameEyePlace from @cssearth/engine');
+});
+
 it('every reader of the camera position goes through the eye-relative helpers', () => {
   const found = [resolve(root, 'packages/renderer/src'), resolve(root, 'site')].flatMap(sources).flatMap(path =>
     readFileSync(path, 'utf8').split('\n').filter(line => SUBTRACTIONS.some(pattern => pattern.test(line))).map(line => `${relative(root, path)}: ${line.trim()}`))

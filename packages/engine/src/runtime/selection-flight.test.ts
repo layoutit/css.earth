@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { buildSelectionFlightCurve, selectionFlightProgress, createSelectionFlight, createSelectionFlightSample,
-  sampleSelectionFlight, sampleSelectionFlightInto, cameraPoseToReferenceFrame, cameraPoseFromReferenceFrame } from './selection-flight.js';
+  sampleSelectionFlight, sampleSelectionFlightInto, cameraPoseToReferenceFrame, cameraPoseFromReferenceFrame, sameEyePlace } from './selection-flight.js';
 import type { PhysicalCameraPose, OrientationXyzw, PositionM } from './selection-flight.js';
 
 const identity: OrientationXyzw = [0, 0, 0, 1];
@@ -149,4 +149,21 @@ describe('a camera a few kilometres from a focus hundreds of parsecs away', () =
     const other = { ...frame, originM: [frame.originM[0] + 1e6, frame.originM[1], frame.originM[2]] as PositionM };
     assert.ok(Math.abs(cameraPoseFromReferenceFrame(world, other).positionM[0] + 1e6) < 2048);
   });
+  it('tells two places apart that positionM rounds to one value', () => {
+    const a = cameraPoseToReferenceFrame(local(137.25), frame), b = cameraPoseToReferenceFrame(local(137.5), frame);
+    assert.deepEqual([...a.positionM], [...b.positionM], 'a quarter metre is below what positionM holds here');
+    assert.equal(sameEyePlace(a, b), false);
+    assert.equal(sameEyePlace(a, cameraPoseToReferenceFrame(local(137.25), frame)), true);
+  });
+});
+
+it('a dolly about the focus scales the eye\'s offset from its origin and keeps the exact anchor', async () => {
+  const { dollyPoseAboutFocus, eyeAnchor, cameraPoseToReferenceFrame } = await import('./selection-flight.js');
+  const frame = { originM: [4.8e18, -2.1e18, 7.7e17] as const, localToReferenceXyzw: [0, 0, 0, 1] as const };
+  const pose = cameraPoseToReferenceFrame({ positionM: [0, 0, 3e7], orientationXyzw: [0, 0, 0, 1] }, frame);
+  const out = dollyPoseAboutFocus(pose, 1.5);
+  assert.deepEqual(eyeAnchor(out), { originM: frame.originM, offsetM: [0, 0, 4.5e7] }, 'half as far again from the same origin, exactly');
+  assert.deepEqual(out.orientationXyzw, pose.orientationXyzw);
+  assert.equal(dollyPoseAboutFocus({ positionM: [1, 2, 3], orientationXyzw: [0, 0, 0, 1] }, 2).positionM[0], 1, 'a pose with no focus offset is left as it is');
+  assert.equal(dollyPoseAboutFocus(pose, 0), pose, 'and so is a ratio that is not a distance');
 });

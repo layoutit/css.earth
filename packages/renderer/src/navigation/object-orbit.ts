@@ -302,6 +302,9 @@ export function createRetainedCubicSkyOrbit({
     initialResponsiveZoom: () => initialResponsiveZoom,
     currentResponsiveZoom: () => responsiveFit.zoom,
     setZoomOutCentering(enabled: boolean) { camera.setZoomOutCentering(enabled); },
+    setZoomOutOpen(open: boolean) { camera.setZoomOutOpen(open); },
+    zoomRate: () => controls.zoomRate(),
+    resumeZoom(rate: number) { controls.resumeZoom(rate); },
     captureWorldCamera(frame: PreparedWorldCameraFrame): WorldCameraPose {
       validateWorldFrame(frame);
       return camera.capture(frame);
@@ -349,6 +352,22 @@ export function createRetainedCubicSkyOrbit({
         return flyCamera(sample, 0, signal);
       }
       return flyCamera(sample, transition?.durationMilliseconds ?? 4500, signal);
+      } catch (error) { retireFailure(error); throw error; }
+    },
+    /** Turn the camera sideways around the body by `degrees` at a steady rate, from wherever it is and at its distance: the
+     * yaw a drag makes, driven as a flight, so input or a navigation takes it over. */
+    turn(degrees: number, durationMilliseconds: number, signal?: AbortSignal) {
+      if (lifetime.disposed || signal?.aborted) return Promise.resolve({ completed: false });
+      try {
+        if (!Number.isFinite(degrees)) throw new TypeError("Invalid camera turn.");
+        cameraMotion.cancel();
+        controls.stop();
+        let turned = 0;
+        return flyCamera(progress => {
+          const next = degrees * progress;
+          camera.rotate({ controlPitchDelta: 0, controlYawDelta: next - turned });
+          turned = next;
+        }, durationMilliseconds, signal);
       } catch (error) { retireFailure(error); throw error; }
     },
     // Native cache notifications report failures through the same fatal owner.

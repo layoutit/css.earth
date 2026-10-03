@@ -1,5 +1,6 @@
 import { opacityClockFor, type OpacityClock, type OpacityWindow } from '../stars/opacity-clock.js';
 import type { WorldFrameRequest } from './world-frame-presenter.js';
+import { sameEyePlace } from '@cssearth/engine';
 
 export interface PreparedWorldFrame {
   current(): boolean;
@@ -7,12 +8,16 @@ export interface PreparedWorldFrame {
 }
 export interface QueuedRequest extends WorldFrameRequest { cancelled?(): void; presented?(): void; }
 
+/** Whether two world cameras are the same, value for value: frame, epoch, scale, the eye's exact place and its turn. */
+const sameWorldCamera = (wa: WorldFrameRequest['world'], wb: WorldFrameRequest['world']) =>
+  wa.referenceFrame === wb.referenceFrame && wa.epochJdTt === wb.epochJdTt && wa.projectionScale === wb.projectionScale
+    && sameEyePlace(wa.pose, wb.pose)
+    && wa.pose.orientationXyzw.length === wb.pose.orientationXyzw.length && wa.pose.orientationXyzw.every((value, axis) => value === wb.pose.orientationXyzw[axis]);
+
 /** Whether two requests ask for the same view: the same world camera and the same viewport snapshot, value for value. */
 export function sameWorldView(a: Pick<WorldFrameRequest, 'world' | 'viewport'>, b: Pick<WorldFrameRequest, 'world' | 'viewport'>): boolean {
   const { world: wa, viewport: va } = a, { world: wb, viewport: vb } = b;
-  return wa.referenceFrame === wb.referenceFrame && wa.epochJdTt === wb.epochJdTt && wa.projectionScale === wb.projectionScale
-    && wa.pose.positionM.length === wb.pose.positionM.length && wa.pose.positionM.every((value, axis) => value === wb.pose.positionM[axis])
-    && wa.pose.orientationXyzw.length === wb.pose.orientationXyzw.length && wa.pose.orientationXyzw.every((value, axis) => value === wb.pose.orientationXyzw[axis])
+  return sameWorldCamera(wa, wb)
     && va.focalPixels === vb.focalPixels && va.projectionScale === vb.projectionScale && va.widthPixels === vb.widthPixels && va.heightPixels === vb.heightPixels
     && va.coveredTopPixels === vb.coveredTopPixels
     && va.principalOffsetPixels[0] === vb.principalOffsetPixels[0] && va.principalOffsetPixels[1] === vb.principalOffsetPixels[1];
@@ -48,9 +53,22 @@ export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => P
     const others = riders ?? [];
     try {
       if (!request.current()) {
-        discarded++; request.cancelled?.();
-        // A rider that is still current is replanned: its owner still waits for this view.
-        for (const rider of others) { if (!pending && rider.current()) pending = rider; else rider.cancelled?.(); }
+        // Its owner has gone (a retired scene). The same view asked again by another owner, a hand-over redrawing that
+        // scene's last frame, takes this plan: planned again it would be drawn a frame late, and that frame was a hold
+        // at every scene swap of a zoom (2026-10-03).
+        // The plan is drawn with the view it was made for; the heir only has to stand at the same camera.
+        const heir = pending && pending.current() && sameWorldCamera(pending.world, request.world) && frame.current() ? pending : null;
+        if (heir) {
+          pending = null; request.cancelled?.();
+          for (const rider of others) rider.cancelled?.();
+          frame.commit(() => heir.commit());
+          committed++; heir.presented?.();
+          if (refreshPending && latest?.current()) { requested++; pending = latest; }
+        } else {
+          discarded++; request.cancelled?.();
+          // A rider that is still current is replanned: its owner still waits for this view.
+          for (const rider of others) { if (!pending && rider.current()) pending = rider; else rider.cancelled?.(); }
+        }
       }
       else if (!frame.current()) {
         discarded++; if (!pending && running !== latest) pending = latest ?? request;
@@ -70,6 +88,8 @@ export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => P
     refreshPending = false;
     void pump();
   };
+  // Read after an await: another request may have arrived while this one was planned.
+  const waitingRequest = (): QueuedRequest | null => pending;
   const pump = async () => {
     if (destroyed || running || completed || warming || !pending) return;
     const request = pending; pending = null;
@@ -90,11 +110,16 @@ export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => P
     running = request;
     try {
       const frame = await prepare(request);
-      if (!destroyed && request.current()) {
+      // Its owner went while it was planned (a retired scene) and another owner waits at the same camera: the plan is its.
+      const waiting = waitingRequest();
+      const heir = !destroyed && !request.current() && waiting && waiting.current() && sameWorldCamera(waiting.world, request.world) ? waiting : null;
+      if (heir) { pending = null; request.cancelled?.(); }
+      const drawn = heir ?? request;
+      if (!destroyed && drawn.current()) {
         // The next plan reads this publication's retained label/visibility
         // history. Hold it until presentation, coalescing newer input meanwhile.
         // Camera, annotations and picking commit as one captured view per rAF.
-        completed = { request, frame, riders: null };
+        completed = { request: drawn, frame, riders: null };
         presentationFrame ??= clock.request(presentCompleted);
       } else { discarded++; request.cancelled?.(); }
     } catch (error) {

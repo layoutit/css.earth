@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "spica-b",
+  "parent": "spica-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Spica B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2601918
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/spica-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Spica B",
+      "classification": "star",
+      "color": "#aac1ff",
+      "distanceAu": 15793692.5,
+      "description": "The smaller star of Spica, 3.7 times the Sun's width, orbiting its partner every four days.",
+      "systemName": "Spica system",
+      "order": 5488,
+      "context": {
+        "order": 5488
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2159702776452760000,
+        -841942936972740900,
+        -457362422191342400
+      ],
+      "presentationToReference": [
+        -0.6508376645469447,
+        -0.7374840651351966,
+        -0.18035406310572508,
+        -0.7393298443421484,
+        0.66966209591739,
+        -0.07031399971942322,
+        -0.1726317342555924,
+        -0.08757814204008581,
+        0.9810852936237058
+      ],
+      "orbitUpReference": [
+        0.7374840651351966,
+        -0.66966209591739,
+        0.08757814204008581
+      ],
+      "metersPerUnit": 8393283.870967742,
+      "bodyRadiusM": 2601918000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

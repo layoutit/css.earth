@@ -68,7 +68,7 @@ test('a catalogue loads on its first publication and draws every point as the sa
   assert.equal(paths[0]!.getAttribute('stroke'), '#ffe2a8ff');
   assert.equal(paths[0]!.getAttribute('stroke-width'), '12', 'as wide as the dot, 1.5 px in eighths of a pixel');
   assert.equal(paths[0]!.getAttribute('d')!.match(/M/g)?.length, 2);
-  assert.match(paths[0]!.getAttribute('d') ?? '', /^(M-?[\d.]+ -?[\d.]+h0){2}$/);
+  assert.match(paths[0]!.getAttribute('d') ?? '', /^(M-?[\d.]+ -?[\d.]+h\.1){2}$/);
   const retainedPath = paths[0];
   points.publish({ world: {...world, pose: {...world.pose, positionM: [1,0,0]}}, viewport });
   assert.equal(points.root.querySelector('path'), retainedPath);
@@ -100,7 +100,7 @@ test('a catalogue shown during a body\'s first view loads once that view is inte
   points.destroy();
 });
 
-test('a level with a near opacity draws as its own part and dims to it as the innermost level fills the view', async () => {
+test('a level with a near opacity has its own group and dims to it as the innermost level fills the view; the others share one', async () => {
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   const points = [[0, 0, -10], [0, 1, -10], [1, 0, -10]];
   const stacked = { ...bank, points, ...baked(points, [1, 1, 1]), appearance: { ...bank.appearance, opacity: 1, levels: [
@@ -111,15 +111,15 @@ test('a level with a near opacity draws as its own part and dims to it as the in
   const at = (distance: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
     pose: { positionM: [0, 0, distance] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
   field.publish(at(1)); await new Promise(resolve => setTimeout(resolve, 0)); field.publish(at(1));
-  // The levels are groups of one svg: one layer (batched-spatial-points.ts), each group dimmed alone.
-  const parts = [...field.root.querySelectorAll('svg > g')] as unknown as HTMLElement[];
-  assert.equal(parts.length, 3, 'one part per level');
+  // The levels are groups of the bank's group in one svg: one layer (point-layer.ts), each group dimmed alone.
+  const parts = [...field.root.firstElementChild!.children] as unknown as HTMLElement[];
+  assert.equal(parts.length, 2, 'the two levels that never dim share their paths');
   assert.equal(parts[0]!.style.opacity, '1', 'before the innermost level appears');
   const halfWidthPerDistance = Math.hypot(1000, 800) / 200;
   field.publish(at(Math.sqrt(.01) / halfWidthPerDistance));
   assert.ok(Math.abs(Number(parts[0]!.style.opacity) - (.75)) < 10 ** -12 / 2, 'halfway through its window in the logarithm');
   field.publish(at(.001));
-  assert.deepEqual(parts.map(part => part.style.opacity), ['0.5', '1', '1']);
+  assert.deepEqual(parts.map(part => part.style.opacity), ['0.5', '1']);
   field.destroy();
   for (const nearOpacity of [0, 1.5]) {
     assert.throws(() => parseCataloguePoints({ ...stacked, appearance: { ...stacked.appearance, levels: [{ ...stacked.appearance.levels[0], nearOpacity }, ...stacked.appearance.levels.slice(1)] } }), { message: `test-stars: level 0 nearOpacity must be in (0, 1], got ${nearOpacity}.` });
@@ -235,7 +235,8 @@ test('an arriving level spends what the budget leaves, never thinning the levels
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   // 200 outer dots and 1,000 inner ones, all on screen; a budget of 500 keeps every outer dot and 300 inner ones.
   const points = Array.from({ length: 1200 }, (_, i) => [((i * 37) % 200 - 100) / 100, ((i * 91) % 160 - 80) / 100, -10]);
-  const levels = [{ points: 200, fullDetailUnits: 100 }, { points: 1000, appearUnits: [0.64, 0.064] }];
+  // The outer level dims on its own, so it keeps its own group and its dots can be counted apart.
+  const levels = [{ points: 200, fullDetailUnits: 100, nearOpacity: .5 }, { points: 1000, appearUnits: [0.64, 0.064] }];
   const budgeted = { ...bank, points, ...baked(points, levels.map(level => level.points)), appearance: { ...bank.appearance, opacity: 1, screenBudget: 500, levels } };
   const field = mountCataloguePoints({ host, url: '/dots.json', loadBank: async () => budgeted });
   const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
@@ -244,7 +245,7 @@ test('an arriving level spends what the budget leaves, never thinning the levels
   const drawn = (part: Element) => [...part.querySelectorAll('path')].map(path => path.getAttribute('d')!).join('').match(/M/g)?.length ?? 0;
   field.publish(at(0.05)); await new Promise(resolve => setTimeout(resolve, 0));
   field.publish(at(0.05)); field.publish(at(0.050005)); await new Promise(resolve => setTimeout(resolve, 200));
-  const [outer, inner] = [...field.root.querySelectorAll('svg > g')];
+  const [outer, inner] = [...field.root.firstElementChild!.children];
   assert.equal(drawn(outer!), 200, 'every outer dot');
   assert.ok(drawn(inner!) > 240);
   assert.ok(drawn(inner!) < 360);
@@ -262,13 +263,30 @@ test('a bank with fadeOutUnits fades out as the view narrows at its origin, and 
   points.publish(at(20));
   await new Promise(resolve => setTimeout(resolve, 0));
   points.publish(at(20));
-  assert.equal(points.root.style.opacity, '1', 'wider than the window, whole');
+  assert.equal(points.root.style.strokeOpacity, '1', 'wider than the window, whole');
   points.publish(at(Math.sqrt(27)));
-  assert.ok(Math.abs(Number(points.root.style.opacity) - 0.5) < 1e-9, `halfway through the window in the logarithm, got ${points.root.style.opacity}`);
+  assert.ok(Math.abs(Number(points.root.style.strokeOpacity) - 0.5) < 1e-9, `halfway through the window in the logarithm, got ${points.root.style.strokeOpacity}`);
   points.publish(at(2));
   assert.equal(points.root.style.display, 'none', 'narrower than the window, not drawn');
   assert.throws(() => parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, fadeOutUnits: [3, 9] } }), /test-stars: fadeOutUnits/);
   points.destroy();
+});
+
+test('banks mounted next to each other are groups of one layer, each dimmed by its own strokes', async () => {
+  const { document } = parseHTML('<div id="host"><b></b></div>'), host = document.getElementById('host')!, end = host.firstElementChild!;
+  const mount = () => mountCataloguePoints({ host, before: end, url: '/dots.json', loadBank: async () => ({ ...bank, appearance: { ...bank.appearance, opacity: 1 } }) });
+  const first = mount(), second = mount();
+  const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const publication = { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport };
+  first.publish(publication, .6); second.publish(publication); await new Promise(resolve => setTimeout(resolve, 0));
+  assert.equal(host.querySelectorAll('svg').length, 1, 'one svg for both banks');
+  assert.equal(first.root.parentElement, second.root.parentElement);
+  assert.deepEqual([first.root.style.strokeOpacity, second.root.style.strokeOpacity], ['0.6', '1'], 'on the strokes: a group opacity is an offscreen pass');
+  assert.ok(first.root.querySelector('path')!.getAttribute('d') && second.root.querySelector('path')!.getAttribute('d'));
+  second.publish(publication, 0);
+  assert.equal(second.root.style.display, 'none');
+  first.destroy(); second.destroy();
+  assert.equal(host.children.length, 1, 'the layer goes with its last bank');
 });
 
 test('a bank that loads under a still view takes its own fades without another publication', async () => {
@@ -280,9 +298,9 @@ test('a bank that loads under a still view takes its own fades without another p
   // Published once, before the bank is read: the view never changes again.
   const half = mountCataloguePoints({ host, url: 'half.json', loadBank: async () => faded });
   half.publish(at(Math.sqrt(27)));
-  assert.equal(half.root.style.opacity, '1', 'before it loads, what the caller asked for');
+  assert.equal(half.root.style.strokeOpacity, '1', 'before it loads, what the caller asked for');
   await new Promise(resolve => setTimeout(resolve, 0));
-  assert.ok(Math.abs(Number(half.root.style.opacity) - 0.5) < 1e-9, `halfway through its window once loaded, got ${half.root.style.opacity}`);
+  assert.ok(Math.abs(Number(half.root.style.strokeOpacity) - 0.5) < 1e-9, `halfway through its window once loaded, got ${half.root.style.strokeOpacity}`);
   assert.ok(half.root.querySelector('path'), 'and its dots are drawn');
   const gone = mountCataloguePoints({ host, url: 'gone.json', loadBank: async () => faded });
   gone.publish(at(2));

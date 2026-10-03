@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "spica",
+  "angularDiameterMas": 0.91,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 5,196,879 km at 76.57 pc = 0.91 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 76.57,
+  "distanceSource": "van Leeuwen (2007), A&A 474, 653, HIP 65474: Hipparcos parallax 13.06 +/- 0.70 mas, inverted (https://doi.org/10.1051/0004-6361:20078357): 76.57 +/- 4.1 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 5196879,
+  "radiusSource": "Radius 7.47 +/- 0.54 solar radii from Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: primary radius 7.47 +/- 0.54 solar radii from the combined light- and radial-velocity-curve solution (https://doi.org/10.1093/mnras/stw255): 5,196,879 km at 695,700 km per solar radius. Mass 11.43 +/- 1.15 solar masses from Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: dynamical mass of the primary 11.43 +/- 1.15 solar masses (https://doi.org/10.1093/mnras/stw255); GM is that mass times the JPL solar GM. Temperature 25300 +/- 500 K from Tkachenko et al. (2016), MNRAS 458, 1964, Tables 4 and 7: primary Teff 25,300 +/- 500 K from the disentangled spectrum (https://doi.org/10.1093/mnras/stw255). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 25300,
+  "effectiveTemperatureSource": "Tkachenko et al. (2016), MNRAS 458, 1964, Tables 4 and 7: primary Teff 25,300 +/- 500 K from the disentangled spectrum (https://doi.org/10.1093/mnras/stw255)",
+  "surfaceGravityLogg": 3.75,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/spica.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.749, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

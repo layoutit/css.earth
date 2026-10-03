@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "achernar-b",
+  "card": {
+    "text": "An A-type star 1.7 times the Sun's width on a seven-year, eccentric orbit around Achernar.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244009",
+        "url": "https://doi.org/10.1051/0004-6361/202244009",
+        "label": "Kervella et al. 2022",
+        "checked": "2026-10-03",
+        "locator": "Table 4 and abstract"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It comes within 2 au of Achernar at periastron; its disc spans 0.37 milliarcseconds, 1.70 solar radii, with 9,064 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244009",
+        "url": "https://doi.org/10.1051/0004-6361/202244009",
+        "label": "Kervella et al. 2022",
+        "checked": "2026-10-03",
+        "locator": "Table 4 and abstract"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}
