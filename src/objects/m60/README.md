@@ -1,6 +1,6 @@
 # M60
 
-M60 as an object of the world: its place, its card and its list marker. It has no surface. Its dataset shows the [M60 image layers](../m60-layers/README.md) bank, whose README holds the sources, processing and known problems of the imagery.
+M60 as an object of the world: its place, its card and its list marker. It has no surface. Its dataset shows the [M60 volume](../m60-volume/README.md) bank, whose README holds the sources, processing and known problems of the imagery.
 
 ## Sources
 

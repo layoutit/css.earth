@@ -1,6 +1,6 @@
 # M85
 
-M85 as an object of the world: its place, its card and its list marker. It has no surface. Its dataset shows the [M85 image layers](../m85-layers/README.md) bank, whose README holds the sources, processing and known problems of the imagery.
+M85 as an object of the world: its place, its card and its list marker. It has no surface. Its dataset shows the [M85 volume](../m85-volume/README.md) bank, whose README holds the sources, processing and known problems of the imagery.
 
 ## Sources
 

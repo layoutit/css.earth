@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m89-volume",
+  "entries": [
+    {
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
+      "status": "included",
+      "finding": "A 2100 x 2100 px hips2fits cutout of CDS/P/SDSS9/color, 17.7 arcmin wide on the HyperLEDA position. The red channel reaches 255 at the nucleus (brightest pixel 255, 220, 146 of 255). In 20 arcsec elliptical annuli the cleaned light comes within one count of the corner sky at 400 arcsec, inside the 530.884 arcsec the spheroid reaches.",
+      "evidence": [
+        "https://www.sdss.org/",
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+      ]
+    },
+    {
+      "id": "flat-picture",
+      "subject": "A flat picture facing the Sun",
+      "status": "excluded",
+      "finding": "M89 was first drawn as one flat Sloan picture facing the Sun, the route of the Messier galaxies with no published shape. Seen from the side that picture is a line. Kormendy et al. publish M89's profile and shape, so the volume replaces it."
+    },
+    {
+      "id": "mask-catalogues",
+      "subject": "Catalogues for the masks",
+      "status": "included",
+      "finding": "HyperLEDA PGC sizes 9 neighbours; the 2MASS Extended Source Catalog sizes 4 that HyperLEDA lists without a D25. NOX leaves the haloes of bright stars, so 18 Gaia DR3 stars brighter than G = 15 are masked too. At M87's three D25 radii a close neighbour's mask covers M89's own centre, so each mask stops at nine tenths of its distance from the centre.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+      ]
+    },
+    {
+      "id": "sersic-fit",
+      "subject": "Spheroid",
+      "status": "included",
+      "finding": "Kormendy et al. (2009), Table 1, row NGC 4552: major-axis Sérsic fit n = 9.22 (+1.13, -0.83), r_e = 138.6 (+33.4, -21.5) arcsec. Table 3 rows at 124.738 and 138.739 arcsec, interpolated to the half-light radius: ellipticity 0.143, position angle 140.04 degrees. Used as published; no fit was made here.",
+      "evidence": [
+        "https://arxiv.org/abs/0810.1681",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/182/216"
+      ]
+    },
+    {
+      "id": "globular-clusters",
+      "subject": "Globular cluster dots",
+      "status": "included",
+      "finding": "Jordán et al. (2009), Table 4, VCC 1632: the 456 sources with a probability of being a globular cluster of at least 0.5, the authors' own cut, drawn as dots through the same spheroid. They fill only the Hubble field on the centre.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/180/54"
+      ]
+    }
+  ]
+}

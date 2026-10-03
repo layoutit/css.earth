@@ -1,6 +1,6 @@
 # M59
 
-M59 as an object of the world: its place, its card and its list marker. It has no surface. Its dataset shows the [M59 image layers](../m59-layers/README.md) bank, whose README holds the sources, processing and known problems of the imagery.
+M59 as an object of the world: its place, its card and its list marker. It has no surface. Its dataset shows the [M59 volume](../m59-volume/README.md) bank, whose README holds the sources, processing and known problems of the imagery.
 
 ## Sources
 

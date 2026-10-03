@@ -1,6 +1,6 @@
 # M89
 
-M89 as an object of the world: its place, its card and its list marker. It has no surface. Its dataset shows the [M89 image layers](../m89-layers/README.md) bank, whose README holds the sources, processing and known problems of the imagery.
+M89 as an object of the world: its place, its card and its list marker. It has no surface. Its dataset shows the [M89 volume](../m89-volume/README.md) bank, whose README holds the sources, processing and known problems of the imagery.
 
 ## Sources
 

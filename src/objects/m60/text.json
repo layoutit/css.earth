@@ -29,14 +29,21 @@
     ]
   },
   "introduction": {
-    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, standing as a flat picture that faces the Sun.",
+    "text": "Its picture is the Sloan Digital Sky Survey's, with stars and neighbouring galaxies removed, given depth by Kormendy et al.'s measured profile of the galaxy.",
     "sources": [
       {
         "catalogueId": "sdss-dr9-color-hips",
         "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
         "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
         "checked": "2026-10-02",
-        "locator": "hips2fits cutout, 10.86 arcmin wide"
+        "locator": "hips2fits cutout, 23.1 arcmin wide"
+      },
+      {
+        "catalogueId": "kormendy-2009-virgo-ellipticals",
+        "url": "https://arxiv.org/abs/0810.1681",
+        "label": "Kormendy et al. (2009), ApJS 182, 216, Table 1",
+        "checked": "2026-10-03",
+        "locator": "NGC 4649: n = 5.36, r_e = 132.05 arcsec"
       },
       {
         "catalogueId": "wikipedia-messier-60",
@@ -51,15 +58,15 @@
   "datasets": {
     "optical": {
       "title": "M60 in visible light",
-      "detail": "3000 × 3000 px",
-      "summary": "Visible-light image on a flat plane facing the Sun; nothing in it has depth.",
+      "detail": "2700 × 2700 px",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
       "sources": [
         {
           "catalogueId": "sdss-dr9-color-hips",
           "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
           "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
           "checked": "2026-10-02",
-          "locator": "CDS/P/SDSS9/color, 10.86 × 10.86 arcmin on NGC 4649"
+          "locator": "CDS/P/SDSS9/color, 23.1 × 23.1 arcmin on NGC4649"
         }
       ]
     }

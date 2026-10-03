@@ -61,13 +61,13 @@
         "label": "SDSS · optical",
         "thumbnail": "m89-dataset-optical.webp",
         "volume": {
-          "objectId": "m89-layers",
+          "objectId": "m89-volume",
           "datasetId": "optical",
           "surface": "optical"
         },
         "source": {
-          "id": "m89-layers-optical",
-          "path": "../../m89-layers/source/manifest.json",
+          "id": "m89-volume-optical",
+          "path": "../../m89-volume/source/manifest.json",
           "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
         },
         "falseColor": false

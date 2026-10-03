@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m86-volume",
+  "entries": [
+    {
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
+      "status": "included",
+      "finding": "A 3000 x 3000 px hips2fits cutout of CDS/P/SDSS9/color, 26.7 arcmin wide on the HyperLEDA position. The red channel reaches 255 at the nucleus (brightest pixel 255, 222, 149 of 255). In 20 arcsec elliptical annuli the cleaned light comes within one count of the corner sky at 740 arcsec, inside the 799.834 arcsec the spheroid reaches.",
+      "evidence": [
+        "https://www.sdss.org/",
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+      ]
+    },
+    {
+      "id": "flat-picture",
+      "subject": "A flat picture facing the Sun",
+      "status": "excluded",
+      "finding": "M86 was first drawn as one flat Sloan picture facing the Sun, the route of the Messier galaxies with no published shape. Seen from the side that picture is a line. Kormendy et al. publish M86's profile and shape, so the volume replaces it."
+    },
+    {
+      "id": "mask-catalogues",
+      "subject": "Catalogues for the masks",
+      "status": "included",
+      "finding": "HyperLEDA PGC sizes 36 neighbours; the 2MASS Extended Source Catalog sizes 16 that HyperLEDA lists without a D25. NOX leaves the haloes of bright stars, so 24 Gaia DR3 stars brighter than G = 15 are masked too. At M87's three D25 radii a close neighbour's mask covers M86's own centre, so each mask stops at nine tenths of its distance from the centre.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+      ]
+    },
+    {
+      "id": "sersic-fit",
+      "subject": "Spheroid",
+      "status": "included",
+      "finding": "Kormendy et al. (2009), Table 1, row NGC 4406: major-axis Sérsic fit n = 10.27 (+0.49, -0.35), r_e = 2341.62 (+625, -357) arcsec. The fit's half-light radius (2341.62 arcsec) lies beyond the measured profile, which ends at 799.834 arcsec, so the shape is the last Table 3 row's: ellipticity 0.375, position angle 123.73 degrees. Used as published; no fit was made here. Kormendy et al. (Section 7.5) call this n unusually large and the outermost profile uncertain: NGC 4406's isophotes overlap its neighbours' at large radii.",
+      "evidence": [
+        "https://arxiv.org/abs/0810.1681",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/182/216"
+      ]
+    },
+    {
+      "id": "globular-clusters",
+      "subject": "Globular cluster dots",
+      "status": "included",
+      "finding": "Jordán et al. (2009), Table 4, VCC 881: the 367 sources with a probability of being a globular cluster of at least 0.5, the authors' own cut, drawn as dots through the same spheroid. They fill only the Hubble field on the centre.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/180/54"
+      ]
+    }
+  ]
+}

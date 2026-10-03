@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m84-volume",
+  "name": "M84",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m84-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "labs/nebula/models/m84/experiment.json"
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/m84-volume/source/delivery.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "SDSS · optical",
+      "title": "M84 in visible light",
+      "description": "The Sloan Digital Sky Survey's view of M84 with the Milky Way stars removed (NOX) and neighbouring galaxies masked, its light spread in depth through the spheroid of Kormendy et al.'s measured profile. Depth is modelled, not measured.",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "detail": "1950 × 1950 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "SDSS g, r, i"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "16.2 × 16.2 arcmin"
+        },
+        {
+          "id": "distance",
+          "label": "Distance",
+          "value": "17.9 Mpc"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": ".local/nebula-lab/planetary/m84-inferred-original.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=1950&height=1950&fov=0.270226&projection=TAN&coordsys=icrs&ra=186.26544&dec=12.887109&format=jpg"
+      }
+    }
+  ]
+}
