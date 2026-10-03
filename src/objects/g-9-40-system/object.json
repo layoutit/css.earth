@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "g-9-40-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "g-9-40",
-      "members": "planets"
+      "host": "g-9-40"
     },
     "catalog": {
       "name": "G 9-40 system",

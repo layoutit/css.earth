@@ -2,6 +2,10 @@
   "id": "cd-38-1467-b",
   "name": "CD-38 1467B",
   "system": "TOI-451 system",
+  "boundTo": {
+    "host": "toi-451",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-451 and CD-38 1467B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 4844691297067063424 and 4844691297067064576), 4,669 AU apart on the sky, with a chance-alignment probability of 8.0e-6: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to TOI-451, 4,669 AU away.",
   "gaia": "4844691297067064576",
   "paper": {

@@ -6,7 +6,7 @@ import { syncBuiltinESMExports } from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { preparedAssetWrites, publishPreparedObject, readPreparedBinaryOutputs, readPreparedJsonOutputs } from '@cssearth/bake/delivery';
+import { preparedAssetWrites, publishPreparedObject, readPreparedJsonOutputs } from '@cssearth/bake/delivery';
 import { inventoryPreparedAssets } from '@cssearth/objects/node';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 const manifest = (values: Record<string,string>) => ({ schema: 'cssearth-inventory@1', assets: Object.entries(values).map(([filename,text]) => ({location:'public',filename,bytes:Buffer.byteLength(text),sha256:createHash('sha256').update(text).digest('hex')})) });
@@ -27,18 +27,12 @@ test('private material masters stay staged while all consumer JSON is preflighte
   await writeFile(join(root,'unexpected.mjs'),'export default null;');
   await assert.rejects(readPreparedJsonOutputs(root),/only regular JSON/);
   await rm(join(root,'unexpected.mjs'));
-  // World orbit banks and system views are published per centre and per system beside the world context that owns them,
-  // and refused without it; a folder holds only its own kind of file.
-  await mkdir(join(root,'world-orbits')); await mkdir(join(root,'system-views'));
-  await writeFile(join(root,'world-orbits','sun.bin'),'orbits'); await writeFile(join(root,'system-views','sun.json'),'{}\n');
-  await assert.rejects(readPreparedBinaryOutputs(root),/beside world-context\.json/);
-  await writeFile(join(root,'world-context.json'),'{}\n');
-  assert.deepEqual((await readPreparedJsonOutputs(root)).map(output=>output.filename),['content.json','runtime.json','world-context.json']);
-  assert.deepEqual(await readPreparedBinaryOutputs(root),[{filename:'system-views/sun.json',path:join(root,'system-views','sun.json')},
-    {filename:'world-orbits/sun.bin',path:join(root,'world-orbits','sun.bin')}]);
-  await writeFile(join(root,'world-orbits','notes.txt'),'x');
-  await assert.rejects(readPreparedBinaryOutputs(root),/must hold only \.bin files; found notes\.txt/);
-  await rm(join(root,'world-orbits'),{recursive:true}); await rm(join(root,'system-views'),{recursive:true}); await rm(join(root,'world-context.json'));
+  // A prepared set is JSON only: a folder beside it is another step's (a system's views and its bodies' orbit banks are
+  // written into their own packages by the world step, src/objects/<object>/prepared/views/ and orbits/).
+  await mkdir(join(root,'orbits'));
+  await writeFile(join(root,'orbits','sun.bin'),'orbits');
+  assert.deepEqual((await readPreparedJsonOutputs(root)).map(output=>output.filename),['content.json','runtime.json']);
+  await rm(join(root,'orbits'),{recursive:true});
   await symlink(join(root,'runtime.json'),join(root,'linked.json'));
   await assert.rejects(readPreparedJsonOutputs(root),/only regular JSON/);
  }finally{await rm(root,{recursive:true,force:true});}

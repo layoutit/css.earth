@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "nearby-universe",
+  "parent": "observable-universe",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -57,34 +58,6 @@
       "description": "Galaxies and clusters of galaxies near the Milky Way, not a complete map.",
       "order": 5156
     },
-    "overview": {
-      "order": 3,
-      "zoom": {
-        "enter": {
-          "distancePc": 5000000
-        },
-        "returnBelow": {
-          "distancePc": 4000000
-        },
-        "frame": {
-          "distance": {
-            "distancePc": 100000000
-          }
-        }
-      },
-      "holds": [
-        {
-          "classifications": [
-            "galaxy-cluster"
-          ],
-          "list": "Galaxy clusters"
-        }
-      ],
-      "packages": [
-        "nearby-universe-galaxies",
-        "galaxy-clusters"
-      ]
-    },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
@@ -111,6 +84,19 @@
       ],
       "metersPerUnit": 2244193.5483870967,
       "bodyRadiusM": 695700000
+    },
+    "zoom": {
+      "enter": {
+        "distancePc": 5000000
+      },
+      "returnBelow": {
+        "distancePc": 4000000
+      },
+      "frame": {
+        "distance": {
+          "distancePc": 100000000
+        }
+      }
     }
   },
   "prepared": {

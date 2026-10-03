@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "wd-1856-534-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "wd-1856-534",
-      "members": "planets"
+      "host": "wd-1856-534"
     },
     "catalog": {
       "name": "WD 1856+534 system",

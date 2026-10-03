@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "toi-7394-b-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "toi-7394-b",
-      "members": "planets"
+      "host": "toi-7394-b"
     },
     "catalog": {
       "name": "TOI-7394 B system",

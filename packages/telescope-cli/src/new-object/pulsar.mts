@@ -51,6 +51,8 @@ const NSX = { path: 'photometry/nsx-limb-darkening.json', url: 'https://doi.org/
 
 export interface PulsarSpec {
   readonly id: string; readonly name: string; readonly system: string; readonly description: string; readonly order?: number; readonly aliases?: readonly string[];
+  /** The object the pulsar is inside: its galaxy (the star spec's `parent`, spec.mts). */
+  readonly parent?: string;
   readonly paper: { readonly url: string; readonly credit: string };
   readonly position: { readonly rightAscensionDegrees: number; readonly declinationDegrees: number; readonly epochJulianYear: number; readonly properMotionRaMasPerYear: number; readonly properMotionDecMasPerYear: number; readonly source: string; readonly url: string };
   readonly distance: Cited; readonly radialVelocity: Cited; readonly radius: Cited; readonly mass: Cited;
@@ -64,7 +66,7 @@ export interface PulsarSpec {
 export function parsePulsarSpec(value: unknown): PulsarSpec {
   const input = requireRecord(value, 'pulsar spec'), id = requireString(input.id, 'id'), at = (label: string) => `${id}.${label}`;
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a pulsar id is lowercase letters, digits and hyphens.`);
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'aliases', 'paper', 'position', 'distance', 'radialVelocity', 'radius', 'mass', 'spin', 'hotRegions', 'limb', 'posterior', 'text', 'notes']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'aliases', 'paper', 'position', 'distance', 'radialVelocity', 'radius', 'mass', 'spin', 'hotRegions', 'limb', 'posterior', 'text', 'notes', 'parent']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown pulsar spec fields ${unknown.join(', ')}.`);
   const url = (source: unknown, label: string) => { const text = requireString(source, label); if (!URL_PATTERN.test(text)) throw new TypeError(`${label} must be an https URL, not ${text}.`); return text; };
@@ -88,6 +90,7 @@ export function parsePulsarSpec(value: unknown): PulsarSpec {
   const aliases = input.aliases === undefined ? undefined : requireArray(input.aliases, at('aliases')).map(alias => requireString(alias, at('aliases')));
   return { id, name, system: input.system === undefined ? `${name} system` : requireString(input.system, at('system')), description: requireString(input.description, at('description')),
     ...(input.order === undefined ? {} : { order: requireFiniteNumber(input.order, at('order')) }), ...(aliases?.length ? { aliases } : {}),
+    ...(input.parent === undefined ? {} : { parent: requireString(input.parent, at('parent')) }),
     paper: { url: url(paper.url, at('paper.url')), credit: requireString(paper.credit, at('paper.credit')) },
     position: { rightAscensionDegrees: within(requireFiniteNumber(position.rightAscensionDegrees, at('position.rightAscensionDegrees')), at('position.rightAscensionDegrees'), 0, 360),
       declinationDegrees: within(requireFiniteNumber(position.declinationDegrees, at('position.declinationDegrees')), at('position.declinationDegrees'), -90, 90),

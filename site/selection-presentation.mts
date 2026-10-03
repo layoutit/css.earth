@@ -1,12 +1,12 @@
 import type { SceneView, SelectionTarget } from './scene/scene-selection.mts';
-import { selectionKey } from './scene/scene-selection.mts';
+import { selectionKey, starSystem, subjectHost, subjectView } from './scene/scene-selection.mts';
 import { requiredSection, setLinkSelected } from './browser/browser-types.mts';
 import type { CatalogueSelection } from './search/catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
 
-/** The view a card can show of its object: the one asked for when the card carries that view's parts (a star's card
- * carries its system's, a host's its moons'), otherwise the body. */
+/** The view a card can show of its object: its system when the card carries the system's parts (a host's card does),
+ * otherwise the body. */
 export const cardView = (card: HTMLElement, view: SceneView): SceneView => view === 'body'
   || sectionElements(card, '[data-view-part]').some(part => part.dataset.viewPart === view) ? view : 'body';
 
@@ -16,24 +16,32 @@ export function presentCardView(card: HTMLElement, view: SceneView) {
   const layout = view === 'body' ? 'detail' : 'overview';
   if (card.dataset.cardView !== layout) card.dataset.cardView = layout;
   if (card.dataset.cardSubject !== view) card.dataset.cardSubject = view;
-  for (const part of sectionElements(card, '[data-view-part]')) if (sectionPlaceholder(part).parentElement === card) showSection(part, part.dataset.viewPart === view);
+  const radios = sectionElements<HTMLInputElement>(card, 'input.object-native-tab');
+  // A closed tab's panel stays off the page: its tab mounts it (tab-panels.mts).
+  const closed = (part: HTMLElement) => part.classList.contains('object-card-tabpanel')
+    && radios.some(radio => radio.getAttribute('aria-controls') === part.id && !radio.checked);
+  for (const part of sectionElements(card, '[data-view-part]')) {
+    if (sectionPlaceholder(part).parentElement === card) showSection(part, part.dataset.viewPart === view && !closed(part));
+  }
 }
 
 /** Present the selected subject in the retained result rows and the source link. The card itself shows its subject's parts
- * (the body, its moons or its planetary system) in `updateBodyCard` (shell/object-shell-client.mts). */
+ * (the body or its system) in `updateBodyCard` (shell/object-shell-client.mts). */
 export function createSelectionPresentation(documentTarget: Document, { card: presentsCard = false }: { /** The server's document has no shell client: its card takes its subject here. */ card?: boolean } = {}) {
   const browser = requiredSection(documentTarget, '.object-browser');
   const present = (subject: SelectionTarget, sourceLinks?: ReadonlyMap<string, SourceDocumentReference>): CatalogueSelection => {
     if (presentsCard) {
       const card = sectionElements(documentTarget, '.object-information-panel')[0];
-      if (card) presentCardView(card, cardView(card, subject.view));
+      if (card) presentCardView(card, cardView(card, subjectView(subject)));
     }
     renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);
-    const kind = subject.view === 'system' ? 'system' : subject.view === 'moons' ? 'satellite-system' : 'object';
+    const view = subjectView(subject), ofStar = starSystem(subject);
+    const kind = view === 'body' ? 'object' : ofStar ? 'system' : 'satellite-system';
     if (documentTarget.documentElement.dataset.selection !== kind) documentTarget.documentElement.dataset.selection = kind;
-    const selection = subject.view === 'system' ? null : { kind: 'scene', id: subject.objectId } as const;
+    // A planet seen out to its moons keeps its own row marked; a star's planetary system marks none.
+    const selection = ofStar ? null : { id: subjectHost(subject) } as const;
     for (const anchor of browser.querySelectorAll<HTMLElement>('.object-link')) {
-      const selected = selection?.kind === 'scene' && anchor.dataset.objectId === selection.id;
+      const selected = selection !== null && anchor.dataset.objectId === selection.id;
       setLinkSelected(anchor, selected);
     }
     return selection;

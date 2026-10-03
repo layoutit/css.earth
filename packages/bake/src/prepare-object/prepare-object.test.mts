@@ -23,7 +23,7 @@ test('reuse-images preparation reaches the authored preparation only when asked'
     [['node', 'site/build/prepare/prepare-authored.ts', 'earth', '--write', '--reuse-images']]);
 });
 
-test('several objects run each tool once: the id-list tools take every id, the authored preparation runs per object, the Sun is re-pinned last', async () => {
+test('several objects run each tool once: the id-list tools take every id, the authored preparation runs per object, the Sun and the world files are re-pinned last', async () => {
   const ids = ['hd-219134', 'hd-219134b'];
   const scopes = Object.fromEntries(PREPARATION_STEPS.map(step => [step.name, step.scope]));
   assert.deepEqual(scopes, { builds: 'once', inputs: 'ids', catalogue: 'once', geometry: 'once', prepare: 'each', discovery: 'once', sources: 'each', page: 'ids', audit: 'each', text: 'ids', markers: 'ids', billboard: 'ids', world: 'once', catalogues: 'once', pins: 'once' });
@@ -32,7 +32,7 @@ test('several objects run each tool once: the id-list tools take every id, the a
     const commands = await PREPARATION_STEPS.find(step => step.name === name)!.commands(ids);
     assert.equal(commands.length, 1, name); assert.deepEqual(commands[0]!.slice(-2), ids, name);
   }
-  assert.deepEqual(await PREPARATION_STEPS.at(-1)!.commands(ids), [['node', 'site/build/prepare/prepare-object-json.mts', 'sun'], ['node', 'site/build/prepare/prepare-catalog.mts']]);
+  assert.deepEqual(await PREPARATION_STEPS.at(-1)!.commands(ids), [['node', 'site/build/prepare/prepare-object-json.mts', 'sun'], ['node', 'site/build/prepare/pin-world-files.mts'], ['node', 'site/build/prepare/prepare-catalog.mts']]);
 });
 
 test('a site that does not know a new object stops the billboard step before any page is photographed', async () => {

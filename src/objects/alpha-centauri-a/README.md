@@ -23,6 +23,6 @@ Run of 2026-09-21 (this version):
 
 ## Known problems
 
-Alpha Centauri is a triple system; this package is component A only. No mass or gravitational parameter is adopted, and the pair's mutual orbit is not drawn.
+Alpha Centauri is a triple system; this package is component A only. Alpha Centauri A, Alpha Centauri B and Proxima Centauri are one system here, the Alpha Centauri system: Akeson et al. (2021), AJ 162, 14 (https://arxiv.org/abs/2104.10086) fit the orbit of A and B and derive this star's mass, 1.0788 ± 0.0029 solar masses, which sets where the pair's centre of mass lies. The orbit itself is not adopted: each star is placed by its own position and proper motion, so the distance between A and B in the world is not their orbit's, and the pair's mutual orbit is not drawn.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

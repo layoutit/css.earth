@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "hip-29442-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hip-29442",
-      "members": "planets"
+      "host": "hip-29442"
     },
     "catalog": {
       "name": "HIP 29442 system",

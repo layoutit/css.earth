@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "vhs-1256-1257-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "vhs-1256-1257",
-      "members": "planets"
+      "host": "vhs-1256-1257"
     },
     "catalog": {
       "name": "VHS 1256-1257 system",

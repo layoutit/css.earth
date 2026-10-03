@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-4639",
+  "card": {
+    "text": "A weakly barred spiral galaxy 20.2 million parsecs away, tilted 51° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1604-01424",
+        "url": "https://arxiv.org/abs/1604.01424",
+        "label": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant",
+        "checked": "2026-10-02",
+        "locator": "table 5, row N4639 (SN 1990N): mu_Ceph 31.532 +/- 0.071 mag; 10^(mu/5 + 1) pc = 20.249 Mpc"
+      },
+      {
+        "catalogueId": "hyperleda-2014",
+        "url": "http://atlas.obs-hp.fr/hyperleda/",
+        "label": "HyperLEDA (Makarov et al. 2014, A&A 570, A13), meandata",
+        "checked": "2026-10-02",
+        "locator": "meandata row PGC 42741 (NGC4639): incl 51.02 deg"
+      },
+      {
+        "catalogueId": "rc3-1991",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/155",
+        "label": "Third Reference Catalogue of Bright Galaxies (RC3), CDS VII/155",
+        "checked": "2026-10-02",
+        "locator": "VII/155/rc3 row NGC 4639 (PGC 42741): type .SXT4.. (SX: between unbarred and barred)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its distance comes from Cepheids the Hubble Space Telescope timed in it. They set the true brightness of its supernova, SN 1990N, a step toward the Hubble constant.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1607-08658",
+        "url": "https://arxiv.org/abs/1607.08658",
+        "label": "Hoffmann et al. (2016): Optical Identification of Cepheids in 19 Host Galaxies of Type Ia Supernovae and NGC 4258 with the Hubble Space Telescope",
+        "checked": "2026-10-02",
+        "locator": "table 5, Gal N4639: the Cepheids found in NGC 4639"
+      },
+      {
+        "catalogueId": "arxiv-1604-01424",
+        "url": "https://arxiv.org/abs/1604.01424",
+        "label": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant",
+        "checked": "2026-10-02",
+        "locator": "table 5, row N4639: SN 1990N, mu_Ceph 31.532 +/- 0.071 mag"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "NGC 4639 in visible light",
+      "detail": "900 × 900 px",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "SDSS9 color; Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "SDSS9 color"
+        }
+      ]
+    }
+  }
+}

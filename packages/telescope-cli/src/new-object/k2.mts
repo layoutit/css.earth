@@ -58,7 +58,7 @@ export function draftFromK2(row: ReturnType<typeof parseK2Row>) {
   const radius = cite(row.radius, 'PARAM radius (solar radii)'), mass = cite(row.mass, 'PARAM mass (solar masses)'), distance = cite(row.distance, 'PARAM asteroseismic distance (pc)', 1);
   const id = name.toLowerCase().replace(' ', '-');
   return {
-    id, name, system: `${name} system`, target: name, gaia: row.gaia,
+    id, name, system: `${name} system`, parent: 'milky-way', target: name, gaia: row.gaia,
     description: `A red giant ${row.campaign === undefined ? `observed by ${mission}` : `in K2 campaign ${row.campaign}`}, ${radius.value.toFixed(1)} solar radii and ${mass.value.toFixed(2)} solar masses, weighed by its oscillations.`,
     paper: { url: K2.paper, credit: K2.credit },
     radius, mass, distance,

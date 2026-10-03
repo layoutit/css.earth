@@ -237,6 +237,37 @@ test('satellite ellipses are translated to their parent with exact prepared cent
     { ...centers, unused: { positionM: [0, 0, 0], centerBodyId: 'unused' } }), /hierarchy/);
 });
 
+test('a star nothing orbits is framed out to the stars bound to it, farthest first', async () => {
+  const source = parseWorldContextSource(await readSource() as unknown);
+  const bodies = ['host', 'near', 'far', 'planet'].map(id => ({ id, name: id, color: '#888888' }));
+  const placed = (positionM: [number, number, number]): OrbitalState => ({ positionM, centerBodyId: source.focus.id, centerPositionM: [0, 0, 0],
+    normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 1000, eccentricity: 0, trueAnomalyRadians: 0 });
+  const states: Record<string, OrbitalState> = { host: placed([1000, 0, 0]), near: placed([1000, 40, 0]), far: placed([1000, 0, 300]),
+    planet: { positionM: [1007, 0, 0], centerBodyId: 'host', centerPositionM: [1000, 0, 0],
+      normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 } };
+  const star = (radiusM: number, centerM?: [number, number, number]) => ({ radiusM, orbitStyle: 'none' as const, classification: 'star',
+    ...(centerM ? { boundTo: { hostId: 'host', centerM } } : {}) });
+  const facts = { host: star(2), near: star(1, [1000, 10, 0]), far: star(1, [1000, 0, 100]), planet: { radiusM: 1 } };
+  const policy = { minimumRadiusShare: .2, elevationsDegrees: [30, 45, 60], azimuthStepDegrees: 15 };
+  const config = { ...source, bodies: bodies.slice(0, 3), orbit: { ...source.orbit!, segments: 16 } };
+  const context = prepareWorldContext(config, facts, states, {}, policy);
+  const view = context.bodies[0]!.systemView!;
+  assert.deepEqual([view.memberIds, view.memberRadiiM, view.candidates.length], [['far', 'near'], [1, 1], 72]);
+  assert.equal(context.bodies[1]!.systemView, undefined, 'a bound star hosts no view of its own');
+  for (const candidate of view.candidates) {
+    const rotation = candidate.cameraToReference;
+    const project = (point: readonly number[]) => [0, 1, 2].map(axis =>
+      point.reduce((sum, value, row) => sum + (value - states.host!.positionM[row]!) * rotation[3 * row + axis]!, 0));
+    for (const [index, id] of view.memberIds.entries()) {
+      assert.deepEqual(candidate.memberPositionsM[index], project(states[id]!.positionM));
+      for (const [axis, value] of project(states[id]!.positionM).entries()) assert.ok(value - 1 >= candidate.minimumM[axis]! - 1e-10 && value + 1 <= candidate.maximumM[axis]! + 1e-10);
+    }
+  }
+  // With a planet, the system keeps its star's framing: the planet's orbit.
+  const withPlanet = prepareWorldContext({ ...config, bodies }, facts, states, {}, policy);
+  assert.deepEqual(withPlanet.bodies[0]!.systemView!.memberIds, ['planet']);
+});
+
 test('classification views share the root candidate angles and enclose their members\' positions', async () => {
   const source = parseWorldContextSource(await readSource() as unknown);
   const bodies = [{ id: 'parent', name: 'Parent', color: '#888888' }, { id: 'satellite', name: 'Satellite', color: '#999999' }];

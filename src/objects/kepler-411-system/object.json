@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "kepler-411-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "kepler-411",
-      "members": "planets"
+      "host": "kepler-411"
     },
     "catalog": {
       "name": "Kepler-411 system",

@@ -10,3 +10,6 @@ export const systemObjectId = (hostId: string): string => hostId === SOLAR_HOST 
 /** The host of the system `id` names, or null when `id` is not a system's. */
 export const systemHostId = (id: string | undefined): string | null =>
   id === SOLAR_SYSTEM ? SOLAR_HOST : id !== undefined && id.endsWith(SUFFIX) && id.length > SUFFIX.length ? id.slice(0, -SUFFIX.length) : null;
+
+/** Where a system view lives in the package of the system its host is inside, relative to that package's `prepared/`. */
+export const systemViewFile = (hostId: string): string => `views/${hostId}.json`;

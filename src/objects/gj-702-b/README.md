@@ -2,7 +2,7 @@
 
 ## Sources
 
-Interferometry gives it 0.6697 solar radii; with its total light, that makes its surface 4,393 K. The introduction is generated from Boyajian et al. (2012), ApJ 757, 112's published values; the sections below are the data's own.
+Interferometry gives it 0.6697 solar radii; with its total light, that makes its surface 4,393 K. It is bound to 70 Ophiuchi A: El-Badry, Rix & Heintz (2021), MNRAS 506, 2269 list the pair in their Gaia EDR3 wide-binary catalogue, 33 AU apart on the sky. Each star is placed where Gaia measures it, and no orbit of the pair is drawn. The introduction is generated from Boyajian et al. (2012), ApJ 757, 112's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 4468557611977674496, parallax 195.856 ± 0.253 mas (5.11 pc); its RUWE is 3.7, so the single-star astrometry fits poorly, and the parallax is used as published. Radius 0.6697 +/- 0.0089 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 702B: radius in solar radii, 0.6697 +/- 0.0089, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112). Mass 0.698 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 702B: mass 0.698 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112). Temperature 4,393 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 702B: effective temperature in K, 4393 +/- 149, from this work (CHARA). log g 4.63 from the mass and radius.
 
@@ -18,6 +18,7 @@ Generated 2026-10-02 by [new-object-cli.mts](../../../packages/telescope-cli/src
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
+- **Separation.** Gaia's parallaxes of the two stars differ (195.57 and 195.86 mas), so the world places them 1,565 AU apart, most of it along the line of sight; the wide-binary catalogue lists them 33 AU apart on the sky.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

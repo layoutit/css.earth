@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-4424-layers",
+  "entries": [
+    {
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
+      "status": "included",
+      "finding": "A 1125 x 1125 px hips2fits cutout of CDS/P/SDSS9/color, 7.5 arcmin wide at the HiPS's 0.40 arcsec per pixel. All 17 Gaia DR3 stars brighter than G = 19 in it have a star within 4 px of their requested places. Shallow: the outer envelope fades into the sky noise.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "https://www.sdss.org/collaboration/#image-use"
+      ]
+    },
+    {
+      "id": "press-images",
+      "subject": "Observatory press images of NGC 4424",
+      "status": "excluded",
+      "finding": "ESA/Hubble potw1713a covers 2.70 x 2.67 arcmin and potw1508a 1.57 x 1.54 arcmin of a galaxy whose RC3 isophotal diameter is 3.6 arcmin: both cut its ends. The ESO and NOIRLab image archives return nothing for NGC 4424.",
+      "evidence": [
+        "https://esahubble.org/images/potw1713a/",
+        "https://esahubble.org/images/potw1508a/"
+      ],
+      "revisitWhen": "A whole-disc photograph is published under an attribution licence."
+    },
+    {
+      "id": "legacy-surveys",
+      "subject": "DESI Legacy Surveys DR10 color HiPS",
+      "status": "deferred",
+      "finding": "Deeper than SDSS and shows more of the outer envelope; it draws saturated stars with ringed cores. Not used: the three SH0ES hosts in the SDSS footprint were prepared from one survey, and the other two fields are damaged in this one.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&get=record"
+      ],
+      "revisitWhen": "A deeper image of this galaxy is wanted."
+    },
+    {
+      "id": "orientation",
+      "subject": "Disc tilt, position angle and near side",
+      "status": "included",
+      "finding": "Leroy et al. (2021) give inclination 58.2 +/- 6.0 deg and position angle 88.3 +/- 2.0 deg. Lang et al. (2020) have no row for NGC 4424, and the galaxy shows no spiral arms, so neither the receding side nor the rotation sense is known: the near side drawn is one of two.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/897/122"
+      ],
+      "revisitWhen": "A velocity field with its receding side, or a published near side, is found."
+    },
+    {
+      "id": "dot-catalogues",
+      "subject": "Catalogues of NGC 4424's nebulae and clusters",
+      "status": "unresolved",
+      "finding": "The PHANGS-MUSE nebular catalogue (Groves et al. 2023, J/MNRAS/520/4902/catalog) has no rows for NGC 4424. No other catalogue of its nebulae or clusters was searched for in this change, so the bank has no dots.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/520/4902"
+      ],
+      "revisitWhen": "CDS is searched for its HII regions, clusters or remnants with sky positions."
+    }
+  ]
+}

@@ -145,6 +145,11 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       for (const bank of images) if (initialImages.has(bank.id)) void ensureImage(bank);
     },
     mountInitialCatalog() { if (catalogPayload) mountCatalog(catalogPayload); },
+    /** Packages of catalogue dots declared after mount (their host's entry brought them); a known id is ignored. */
+    addPointBanks(added: NonNullable<PreparedUniverseOptions['pointBanks']>) {
+      if (lifetime.disposed) return;
+      for (const bank of added) if (!points.some(point => point.id === bank.id)) points.push({ id: bank.id, url: bank.url, host: bank.host, mounted: null });
+    },
     focusBank(id: string) {
       const bank = byId.get(id);
       if (bank) return createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank));

@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "haumea-system",
+  "parent": "solar-system",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "haumea",
-      "members": "moons"
+      "host": "haumea"
     },
     "catalog": {
       "name": "Haumea system",

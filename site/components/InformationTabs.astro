@@ -9,7 +9,7 @@ interface Props {
   initialTab?: string;
   hidden?: boolean;
   /** The card view these tabs are a part of, when they are not the body's own (selection-presentation.mts). */
-  viewPart?: 'moons' | 'system';
+  viewPart?: 'system';
 }
 const { idPrefix, group, label = group === 'overview' ? 'Body overview' : 'Object information', panelSuffix = 'content',
   tabs = [{ id: 'dataset', label: 'Datasets' }, { id: 'factsheet', label: 'Factsheet' }, { id: 'moons', label: 'Moons' }], initialTab, hidden = false, viewPart } = Astro.props;

@@ -2,6 +2,10 @@
   "id": "ucac3-93-101439",
   "name": "UCAC3 93-101439",
   "system": "TOI-815 system",
+  "boundTo": {
+    "host": "toi-815",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-815 and UCAC3 93-101439 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 5415648821879172096 and 5415648821874435584), 359 AU apart on the sky, with a chance-alignment probability of 1.2e-6: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to TOI-815, 359 AU away.",
   "gaia": "5415648821874435584",
   "paper": {

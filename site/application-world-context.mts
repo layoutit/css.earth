@@ -60,7 +60,7 @@ export function createApplicationWorldContext() {
         // first view (startup-gate.ts).
         const approach = createWorldApproach();
         afterStartup(target, () => { if (!lifetime.disposed) approach.start(); });
-        const moonLabels = own(mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock, () => refreshWorld(), layer.depthBase));
+        const moonLabels = own(mountCatalogueMoonLabels(presentationHost, () => applicationContext.bodies, applicationContext.focus, layer.opacityClock, () => refreshWorld(), layer.depthBase));
         let heliosphereEnabled = false, shellsMounted = false;
         const frames = own(createApplicationWorldFrames({ layer, planner, moonLabels, lifetime,
           heliosphereEnabled: () => heliosphereEnabled, onFrame: world => approach.observe(world.pose.positionM) }));

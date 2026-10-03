@@ -1,9 +1,8 @@
 import { isRecord } from '@cssearth/core';
 
-/** One search result row as the find function sends it: what the row shows and where it leads. A `system` row leads to a
- * planetary system's overview and is drawn with its star's marker. */
+/** One search result row as the find function sends it: an object, what its row shows and where it leads. A system's row
+ * is drawn with its host's marker. */
 export interface CatalogueRow {
-  readonly kind: 'scene' | 'system';
   readonly id: string;
   readonly name: string;
   readonly classificationName: string;
@@ -16,11 +15,9 @@ export interface CatalogueRow {
     unit?: string;
   }>;
   readonly source: Readonly<{ subject: string; document: string; label: string }>;
-  readonly marker: Readonly<
-    // `preview`: the object has a prepared search thumbnail. `sprite`: the styles of its sprite of the marker sheet.
-    { kind: 'scene'; id: string; color: string; preview?: true; sprite?: Readonly<{ style: string; innerStyle: string; ringStyle?: string }> }
-    | { kind: 'thumbnail'; thumbnail: string | null }
-  >;
+  // `id`: the object whose marker the row shows (a system's host). `preview`: it has a prepared search thumbnail. `sprite`:
+  // the styles of its sprite of the marker sheet.
+  readonly marker: Readonly<{ id: string; color: string; preview?: true; sprite?: Readonly<{ style: string; innerStyle: string; ringStyle?: string }> }>;
 }
 
 /** A catalogue entry with the fields the find function matches and orders by; they never leave the server. */
@@ -44,7 +41,7 @@ const text = (value: unknown, label: string) => {
 
 /** Validate one row of a find response before it reaches the retained result list. */
 export function parseCatalogueRow(input: unknown, index: number): CatalogueRow {
-  if (!isRecord(input) || (input.kind !== 'scene' && input.kind !== 'system') || !isRecord(input.detail)
+  if (!isRecord(input) || !isRecord(input.detail)
       || !isRecord(input.source) || !isRecord(input.marker)) {
     throw new TypeError(`Invalid object catalogue row: ${index}.`);
   }
@@ -56,17 +53,11 @@ export function parseCatalogueRow(input: unknown, index: number): CatalogueRow {
     ...(input.detail.unit === undefined ? {} : { unit: text(input.detail.unit, 'detail unit') }),
   };
   if ((detail.value === undefined) !== (detail.unit === undefined)) throw new TypeError(`Catalogue detail parts are incomplete: ${index}.`);
-  const marker = input.marker.kind === 'scene'
-    ? { kind: 'scene' as const, id: text(input.marker.id, 'marker id'), color: text(input.marker.color, 'marker color'),
-      ...(input.marker.preview === true ? { preview: true as const } : {}),
-      ...(isRecord(input.marker.sprite) ? { sprite: Object.freeze({ style: text(input.marker.sprite.style, 'marker sprite style'), innerStyle: text(input.marker.sprite.innerStyle, 'marker sprite inner style'),
-        ...(input.marker.sprite.ringStyle === undefined ? {} : { ringStyle: text(input.marker.sprite.ringStyle, 'marker sprite ring style') }) }) } : {}) }
-    : input.marker.kind === 'thumbnail' && (input.marker.thumbnail === null || typeof input.marker.thumbnail === 'string')
-      ? { kind: 'thumbnail' as const, thumbnail: input.marker.thumbnail }
-      : null;
-  if (!marker) throw new TypeError(`Invalid object catalogue marker: ${index}.`);
+  const marker = { id: text(input.marker.id, 'marker id'), color: text(input.marker.color, 'marker color'),
+    ...(input.marker.preview === true ? { preview: true as const } : {}),
+    ...(isRecord(input.marker.sprite) ? { sprite: Object.freeze({ style: text(input.marker.sprite.style, 'marker sprite style'), innerStyle: text(input.marker.sprite.innerStyle, 'marker sprite inner style'),
+      ...(input.marker.sprite.ringStyle === undefined ? {} : { ringStyle: text(input.marker.sprite.ringStyle, 'marker sprite ring style') }) }) } : {}) };
   return Object.freeze({
-    kind: input.kind,
     id: text(input.id, 'id'),
     name: text(input.name, 'name'),
     classificationName: text(input.classificationName, 'classification name'),
@@ -99,6 +90,6 @@ export function parseCatalogueIndex(value: unknown): CatalogueIndex {
 }
 
 /** The wire row of an entry: its search fields stay on the server. */
-export function catalogueRow({ kind, id, name, classificationName, route, detail, source, marker }: CatalogueIndexEntry): CatalogueRow {
-  return { kind, id, name, classificationName, route, detail, source, marker };
+export function catalogueRow({ id, name, classificationName, route, detail, source, marker }: CatalogueIndexEntry): CatalogueRow {
+  return { id, name, classificationName, route, detail, source, marker };
 }

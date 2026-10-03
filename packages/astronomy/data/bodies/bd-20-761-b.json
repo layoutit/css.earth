@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": 19.948367136662196,
   "radialVelocityKmPerS": 4.1452727,
   "presentationUp": "display-axis",
+  "boundTo": "wasp-140",
   "sources": {
    "position": "Gaia DR3 source 5094154336332482176 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/bd-20-761-b/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 8.5934 +/- 0.0152 mas (same row, RUWE 1.04): 116.37 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): -18.400, 19.948 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): 4.15 +/- 2.71 km/s"
+   "radialVelocity": "Gaia DR3 (same row): 4.15 +/- 2.71 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list WASP-140 and BD-20 761B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 5094154336332482304 and 5094154336332482176), 845 AU apart on the sky, with a chance-alignment probability of 2.8e-8: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

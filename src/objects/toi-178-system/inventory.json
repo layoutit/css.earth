@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 2867,
+      "sha256": "8f475dcd2a60f0db2f3012db3031741e9cb577645b5f7e58036f01a099564871"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/toi-178b.bin",
+      "bytes": 1938,
+      "sha256": "bf9474c2191e85078bb3accd4b8e1cead1265545dc7035ca6f1c9e0f62577af9"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/toi-178c.bin",
+      "bytes": 1923,
+      "sha256": "f22972adf9beb2b052bc0f347d657907a47e04c9d00026196da0a058142e5e63"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/toi-178d.bin",
+      "bytes": 1942,
+      "sha256": "fb5ddf8290c4cdd90502e70b4c2d4a3469cd21e899307e1e9635090bfafa9574"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/toi-178e.bin",
+      "bytes": 1950,
+      "sha256": "9f13b06e6e0eb7ddd938448d3b94680c58e09066f1f079b269c12cea3accbce7"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/toi-178f.bin",
+      "bytes": 1926,
+      "sha256": "aec27c711ecbd184e172c581d86ab5eef2d2e5f91d62f43b5620b4f40031bfcd"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/toi-178g.bin",
+      "bytes": 1947,
+      "sha256": "4c388c1e75a160fc32aeea53d0724f0b664ddf834a47e5bec037d1028363f247"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/toi-178.json",
+      "bytes": 51392,
+      "sha256": "1e635d4e88428785c6d3abe34f539a815cbc4da9ba34b69cbd84d97457465fff"
+    }
+  ]
+}

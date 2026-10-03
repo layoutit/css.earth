@@ -21,14 +21,18 @@ import { readApplicationSystemView } from './world-system-views.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 
 /** Each bound pair's centre of mass and the separation of its stars: what the camera aims at once it is far enough out to
- * see both. The system keeps its star's framing, which is the planet orbits around it. */
+ * see both. A star with several bound to it aims at its nearest companion's pair. A system with planets keeps its star's
+ * framing, which is the planet orbits around it. */
 export function systemCenters(plan: Pick<PreparedWorldContext, 'bodies' | 'focus'>) {
   const hosts = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
-  return new Map(plan.bodies.flatMap(body => {
+  const centers = new Map<string, { readonly centerM: PositionM; readonly separationM: number }>();
+  for (const body of plan.bodies) {
     const host = body.boundTo ? hosts.get(body.boundTo.hostId) : undefined;
-    return host && body.boundTo ? [[body.boundTo.hostId, { centerM: body.boundTo.centerM as PositionM,
-      separationM: Math.hypot(...body.positionM.map((value, axis) => value - host.positionM[axis]!)) }] as const] : [];
-  }));
+    if (!host || !body.boundTo) continue;
+    const separationM = Math.hypot(...body.positionM.map((value, axis) => value - host.positionM[axis]!));
+    if (!(separationM >= (centers.get(host.id)?.separationM ?? Number.POSITIVE_INFINITY))) centers.set(host.id, { centerM: body.boundTo.centerM as PositionM, separationM });
+  }
+  return centers;
 }
 
 /** What a plan says about framing its systems: each host's framing radius from its prepared bounds, each bound pair's

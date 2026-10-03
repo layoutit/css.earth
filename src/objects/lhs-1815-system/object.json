@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "lhs-1815-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "lhs-1815",
-      "members": "planets"
+      "host": "lhs-1815"
     },
     "catalog": {
       "name": "LHS 1815 system",

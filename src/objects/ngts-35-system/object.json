@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "ngts-35-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "ngts-35",
-      "members": "planets"
+      "host": "ngts-35"
     },
     "catalog": {
       "name": "NGTS-35 system",

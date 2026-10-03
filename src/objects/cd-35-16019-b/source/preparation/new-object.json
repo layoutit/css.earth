@@ -2,6 +2,10 @@
   "id": "cd-35-16019-b",
   "name": "CD-35 16019B",
   "system": "WASP-8 system",
+  "boundTo": {
+    "host": "wasp-8",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list WASP-8 and CD-35 16019B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2312679845530628096 and 2312679845529776128), 406 AU apart on the sky, with a chance-alignment probability of 1.4e-9: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to WASP-8, 406 AU away.",
   "gaia": "2312679845529776128",
   "paper": {

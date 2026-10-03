@@ -5,7 +5,7 @@ import { OBJECTS, SCENE_OBJECTS as REGISTERED_SCENE_OBJECTS } from '../objects.m
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { resolve } from 'node:path';
 import { OBJECT_ENTRY_IDS, objectEntry } from '../object-entry.mts';
-import { knownObject, loadObject, objectFromEntry, NAVIGABLE_OBJECTS, SCENE_OBJECTS } from '../object-directory.mts';
+import { knownObject, loadAncestors, loadObject, objectFromEntry, NAVIGABLE_OBJECTS, SCENE_OBJECTS } from '../object-directory.mts';
 
 // Loaders are functions; compare everything else an object carries.
 const facts = (value: unknown) => JSON.parse(JSON.stringify(value));
@@ -23,11 +23,11 @@ test('every prepared entry rebuilds the object the registry holds', () => {
 test('preparation reads the registry the application holds, without its scene loader', async () => {
   const prepared = readPreparedObjects(resolve(import.meta.dirname, '../..'));
   assert.deepEqual(facts(prepared.objects), facts(OBJECTS));
-  // Preparation reads the same scene objects, galaxies, nebulae and the levels of the zoom ladder among them.
+  // Preparation reads the same scene objects, galaxies, nebulae and the objects seen from inside among them.
   assert.deepEqual(prepared.sceneObjects.map(object => object.id), REGISTERED_SCENE_OBJECTS.map(object => object.id));
   assert.equal(prepared.requireSceneObject('m31').id, 'm31');
-  assert.equal(prepared.objects.find(object => object.id === 'milky-way')?.level?.order, 1);
-  assert.deepEqual(prepared.levels.map(level => level.id), ['milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
+  assert.deepEqual(prepared.objects.filter(object => object.zoom).map(object => object.id).sort(), ['local-group', 'milky-way', 'nearby-universe', 'observable-universe']);
+  assert.equal(prepared.objects.find(object => object.id === 'milky-way')?.parent, 'local-group');
   assert.equal(prepared.requireSceneObject('mars').name, REGISTERED_SCENE_OBJECTS.find(object => object.id === 'mars')?.name);
   await assert.rejects(prepared.requireSceneObject('mars').loadScene(), /cannot mount a scene/);
 });
@@ -46,4 +46,9 @@ test('the directory loads each object once, and only objects', async () => {
   await assert.rejects(loadObject('venus', async () => objectEntry('mars')), /The entry for venus names mars/);
   // A failed read is forgotten, so the next asks again.
   assert.equal(await loadObject('venus', async id => objectEntry(id)), knownObject('venus'));
+});
+
+test('an entry whose ancestors are not a list of object ids is refused, naming the entry', async () => {
+  await assert.rejects(loadAncestors('mars', async () => ({ ancestors: ['solar-system', 7] })), /\/objects\/mars\/entry\.json: ancestors must be a list of object ids; got \["solar-system",7\]/);
+  await assert.rejects(loadAncestors('mars', async () => ({ ancestors: 'solar-system' })), /ancestors must be a list of object ids/);
 });

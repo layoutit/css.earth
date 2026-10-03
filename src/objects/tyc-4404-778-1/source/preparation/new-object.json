@@ -2,6 +2,10 @@
   "id": "tyc-4404-778-1",
   "name": "TYC 4404-778-1",
   "system": "TOI-1173 system",
+  "boundTo": {
+    "host": "toi-1173",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-1173 and TYC 4404-778-1 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 1686171213716517504 and 1686170870119133440), 11,463 AU apart on the sky, with a chance-alignment probability of 1.9e-5: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to TOI-1173, 11,463 AU away.",
   "gaia": "1686170870119133440",
   "paper": {

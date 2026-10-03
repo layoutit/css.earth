@@ -1,5 +1,5 @@
 import { isExtendedClassification } from '@cssearth/objects';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
@@ -606,7 +606,7 @@ test('the Solar System begins revealing context as the distance readout hands fr
 
 test('inside its authored range a system draws every member orbit, named or not, and retires beyond it', () => {
   const recorded = plan.bodies.filter(body => body.unpackaged === true);
-  { const values = recorded.map(body => body.id); assert.ok(['s29', 's301', 's1'].every(item => values.includes(item))); }
+  { const values = recorded.map(body => body.id); assert.ok(['s29', 's301', 's13'].every(item => values.includes(item))); }
   // The application gives a recorded body the tier of a planet of its host's system.
   const calculate = createWorldContextPlanner(plan, Object.fromEntries(recorded.map(body => [body.id, labelImportance('planet')]))), input = view();
   const host = plan.bodies.find(body => body.id === 'sgr-a-star')!;
@@ -631,15 +631,31 @@ test('inside its authored range a system draws every member orbit, named or not,
   for (const body of at(2.5)) assert.equal(body.orbitVisibility, 0, plan.bodies[body.index - 1]!.id);
 });
 
-/** The summary with every system's file read, as Node reads it (site/world-context-plan.mts). */
-const readWholeSummary = async (prepared: URL) => parseCompleteWorldContext(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')),
-  async id => JSON.parse(await readFile(new URL(`world-systems/${id}.json`, prepared), 'utf8')),
+/** The summary with every object's file read, as Node reads it (site/world-context-plan.mts): `prepared` is the root object's. */
+const readWholeSummary = async (prepared: URL) => parseCompleteWorldContext(JSON.parse(await readFile(new URL('world.json', prepared), 'utf8')),
+  async id => JSON.parse(await readFile(new URL(`../../${id}/prepared/members.json`, prepared), 'utf8')),
   JSON.parse(await readFile(new URL('world-index.json', prepared), 'utf8')));
 
+/** A body's orbit bank: in the package of the object whose file has the body (`<object>/prepared/orbits/<body>.bin`). */
+let orbitBankFiles: Promise<ReadonlyMap<string, URL>> | null = null;
+const orbitBankFile = async (prepared: URL, id: string) => {
+  orbitBankFiles ??= (async () => {
+    const { files } = JSON.parse(await readFile(new URL('world-index.json', prepared), 'utf8')) as { files: string[] };
+    const found = await Promise.all(files.map(async holder => {
+      const directory = new URL(`../../${holder}/prepared/orbits/`, prepared);
+      return (await readdir(directory).catch(() => [] as string[])).map(name => [name.replace(/\.bin$/u, ''), new URL(name, directory)] as const);
+    }));
+    return new Map(found.flat());
+  })();
+  const file = (await orbitBankFiles).get(id);
+  assert.ok(file, `no package holds the orbit bank of ${id}`);
+  return file;
+};
+
 test('the planner plans from the summary alone, names the paths it lacked, and draws them once their bank arrives', async () => {
-  const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
+  const prepared = new URL('../../../../../src/objects/observable-universe/prepared/', import.meta.url);
   const summary = await readWholeSummary(prepared);
-  const bank = async (id: string) => unpackPreparedBinary(await readFile(new URL(`world-orbits/${id}.bin`, prepared)), `world-orbits/${id}.bin`);
+  const bank = async (id: string) => unpackPreparedBinary(await readFile(await orbitBankFile(prepared, id)), `orbits/${id}.bin`);
   const planner = createWorldContextPlanner(summary), current = view();
   const before = planner(current), wanted = planner.takeWantedOrbits();
   // From 20 au over the Sun the planets' orbits would be drawn; without their banks none is, and each is named once.
@@ -662,7 +678,7 @@ test('the planner plans from the summary alone, names the paths it lacked, and d
 });
 
 test('host detail requests its major moons\' paths once the host is small enough to show them', async () => {
-  const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
+  const prepared = new URL('../../../../../src/objects/observable-universe/prepared/', import.meta.url);
   const summary = await readWholeSummary(prepared);
   for (const [hostId, satelliteId] of [['earth', 'moon'], ['jupiter', 'europa'], ['saturn', 'titan']]) {
     const host = summary.bodies.find(body => body.id === hostId)!;
@@ -686,7 +702,7 @@ test('host detail requests its major moons\' paths once the host is small enough
 });
 
 test('a minor path that cannot show is never requested; highlighting it requests its bank', async () => {
-  const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
+  const prepared = new URL('../../../../../src/objects/observable-universe/prepared/', import.meta.url);
   const summary = await readWholeSummary(prepared);
   const points = [summary.focus, ...summary.bodies], dots = new Set(summary.bodies.filter(body => body.plainDot).map(body => body.id));
   assert.ok(dots.size > 0);

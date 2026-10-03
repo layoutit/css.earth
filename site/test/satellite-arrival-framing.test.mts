@@ -1,4 +1,5 @@
 import { parsePreparedObjectRuntime } from '@cssearth/objects';
+import { readSystemViewFile } from './system-view-file.mts';
 
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -37,7 +38,7 @@ for (const [width, height, mobile] of [[390, 844, true], [820, 1080, true], [144
         requestAnimationFrame() { throw new Error('Reduced-motion preparation must not schedule a flight.'); } } as unknown as Window });
     for (const { hostId } of allSatelliteSystems()) {
       const object = required(SCENE_OBJECTS.find(object => object.id === hostId));
-      await loadSystemView(hostId, id => read(`../../src/objects/sun/prepared/system-views/${id}.json`));
+      await loadSystemView(hostId, readSystemViewFile);
       const data = await read(`../../src/objects/${hostId}/prepared/runtime.json`);
       const definition = parsePreparedObjectRuntime(data), { camera } = definition;
       const fit = selectPreparedResponsiveZoom({ plan: camera, viewport: cameraViewport, mobile });
@@ -56,7 +57,7 @@ for (const [width, height, mobile] of [[390, 844, true], [820, 1080, true], [144
         url: `https://css.earth/${hostId}-system/`, reducedMotion: true, signal: controller.signal });
       const target = required(handoff.mountOptions.initialWorldCamera);
       assert.equal(satelliteSelectionAtCamera(target, { ...optics, framingRadiusPixels }, SCENE_OBJECTS,
-        { objectId: hostId, view: 'moons' }), null, `${hostId} must not change its card at rest`);
+        { objectId: `${hostId}-system` }), null, `${hostId} must not change its card at rest`);
       assert.deepEqual(target.pose.orientationXyzw, from.pose.orientationXyzw, `${hostId} keeps the departure angle`);
       controller.abort();
     }

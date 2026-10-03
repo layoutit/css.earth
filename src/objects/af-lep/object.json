@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "af-lep",
+  "parent": "af-lep-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

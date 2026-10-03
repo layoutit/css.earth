@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "lp-890-9-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "lp-890-9",
-      "members": "planets"
+      "host": "lp-890-9"
     },
     "catalog": {
       "name": "LP 890-9 system",

@@ -35,6 +35,11 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/219/4/ReadMe",
       "checkedOn": "2026-10-01",
       "locator": "table7: NGC2903 (model _bdbarf): Sersic component 7.1% of the light, Re 7.29 arcsec, n 0.496, q 0.523; exponential disc 90.1%, q 0.487, PA 19.57, hr 54.89 arcsec; Ferrers bar 2.7%. NGC5457 (model _bd): Sersic bulge 5.0%, Re 55.3 arcsec, n 3.831, q 0.59, PA 83.25; exponential disc 95.0%, q 0.929, PA 37.69, hr 127.3 arcsec. Query: SELECT * FROM \"J/ApJS/219/4/table7\" WHERE Name IN ('NGC2903','NGC5457')"
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/219/4/ReadMe",
+      "checkedOn": "2026-10-02",
+      "locator": "table7: NGC4639 (model _bdbarf, quality 5): Sersic component 11.2% of the light, Re 1.6 arcsec, n 2.14; exponential disc 81.5%, q 0.653, PA -45.49, hr 17.53 arcsec; Ferrers bar 7.2%. Query: SELECT * FROM \"J/ApJS/219/4/table7\" WHERE Name LIKE 'NGC4639%'"
     }
   ],
   "creators": [
@@ -50,7 +55,7 @@
     {
       "kind": "credit",
       "text": "Cite Salo et al. (2015), ApJS 219, 4.",
-      "scope": "Bulge-plus-disc fits of M81 and NGC 253; disc scale lengths of NGC 2903 and M101",
+      "scope": "Bulge-plus-disc fits of M81 and NGC 253; disc scale lengths of NGC 2903 and M101; NGC 4639's disc axis ratio, position angle and scale length",
       "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/219/4/ReadMe"
     }
   ]

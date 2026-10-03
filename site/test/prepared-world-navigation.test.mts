@@ -1,4 +1,5 @@
 import { sourceTest } from '@cssearth/objects/node/source-test';
+import { readSystemViewFile } from './system-view-file.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { getEventListeners } from 'node:events';
@@ -19,7 +20,7 @@ import type { SceneFactory } from '../browser/browser-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
 import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
+await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, readSystemViewFile)));
 type Mutable<T> = { -readonly [K in keyof T]: T[K] };
 type Resources = { destroyed: number; destroy(): void };
 type MockLease = { resources: Resources; destroy(): void; projection(): undefined; prepareView(getView: () => ObjectPreparationView): Promise<void> };

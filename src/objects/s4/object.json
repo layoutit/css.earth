@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "s4",
+  "parent": "sgr-a-star-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "S4",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3638511
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/s4-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "S4",
+      "classification": "star",
+      "color": "#a4bcff",
+      "distanceAu": 1707252492.4,
+      "description": "A hot young star that swings around the Milky Way's central black hole every 77 years.",
+      "systemName": "Galactic Centre",
+      "order": 1256,
+      "context": {
+        "order": 1256
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -13959414675524856000,
+        -222925415351842080000,
+        -123851674141666260000
+      ],
+      "presentationToReference": [
+        -0.09132240439335204,
+        0.2105567839889786,
+        -0.9733067651938087,
+        -0.9381689109889908,
+        0.3095437511619985,
+        0.1549895498744675,
+        -0.33391512830290926,
+        -0.9272801663104724,
+        -0.169269549115233
+      ],
+      "orbitUpReference": [
+        -0.2105567839889786,
+        -0.3095437511619985,
+        0.9272801663104724
+      ],
+      "metersPerUnit": 11737132.258064516,
+      "bodyRadiusM": 3638511000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

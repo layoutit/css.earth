@@ -2,6 +2,10 @@
   "id": "pm-j02489-1432-e",
   "name": "PM J02489-1432E",
   "system": "TOI-1201 system",
+  "boundTo": {
+    "host": "toi-1201",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-1201 and PM J02489-1432E in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 5157183324996790272 and 5157183324996789760), 314 AU apart on the sky, with a chance-alignment probability of 1.4e-7: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to TOI-1201, 314 AU away.",
   "gaia": "5157183324996789760",
   "paper": {

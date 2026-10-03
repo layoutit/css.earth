@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "wolf-327-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "wolf-327",
-      "members": "planets"
+      "host": "wolf-327"
     },
     "catalog": {
       "name": "Wolf 327 system",

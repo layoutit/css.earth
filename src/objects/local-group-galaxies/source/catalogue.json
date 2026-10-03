@@ -277,6 +277,10 @@
     "ngc_4874": {
       "id": "ngc-4874",
       "focusRadiusM": 3.414425671023457e+21
+    },
+    "ngc_4424": {
+      "id": "ngc-4424",
+      "focusRadiusM": 268453949589748970000
     }
   },
   "distanceOverrides": {
@@ -293,6 +297,13 @@
       "valuePc": 6714288.52926,
       "minusPc": 137710.155706,
       "plusPc": 140593.735267,
+      "method": "cepheids",
+      "sourceRef": "Riess2016ApJ...826...56R"
+    },
+    "ngc_4424": {
+      "valuePc": 16443717.23215,
+      "minusPc": 2068977.173406,
+      "plusPc": 2366768.057038,
       "method": "cepheids",
       "sourceRef": "Riess2016ApJ...826...56R"
     }

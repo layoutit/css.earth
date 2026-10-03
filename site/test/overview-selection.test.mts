@@ -1,4 +1,5 @@
 import { testDistance } from './navigation-test-values.mts';
+import { readSystemViewFile } from './system-view-file.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
@@ -11,7 +12,7 @@ import type { ObjectWorldNavigationListener } from '@cssearth/renderer/runtime/w
 import type { OverviewSelection } from '../overview-selection.mts';
 import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
+await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, readSystemViewFile)));
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1] as const;
 /** CSS presentation to a right-handed reference: a reflection. */
 const reflection = [1, 0, 0, 0, -1, 0, 0, 0, 1] as const;

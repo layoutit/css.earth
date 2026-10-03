@@ -88,3 +88,27 @@ test('close-ups suppress distant banks while attached shells and the selected ne
   for (const node of attached.targets) assert.equal(node.style.opacity, '1');
   attached.lifetime.destroy();
 });
+
+test('a bank declared after mount is drawn and loaded as one declared with it, its billboard in the same layer', async () => {
+  const { document } = parseHTML('<div id="back"><span></span></div><div id="front"><span></span></div>');
+  const root = document.getElementById('back')!, frontRoot = document.getElementById('front')!, lifetime = createSceneLifetime();
+  const billboard = { cell: 0, radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, 1, 0] } as const;
+  const plan = { atlas: { columns: 2, rows: 1, cellPx: 256 }, banks: new Map() };
+  const loads: string[] = [];
+  const banks = createUniverseDatasetBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, frontRoot, frontEnd: frontRoot.firstElementChild!,
+    lifetime, declarations: [{ id: 'early', frame }], facts: [{ id: 'early', contextVisibility: 'independent', attached: false, billboard }],
+    frame, visibility, warmDomNodeBudget: 10000, billboards: { plan, atlasUrl: '/atlas.webp' },
+    load: async id => { loads.push(id); return { payload: { ...payload, id }, resolveResource: path => path }; } });
+  assert.equal(banks.focusBank('late'), null, 'unknown before its host brings it');
+  banks.declare({ id: 'late', frame }, { id: 'late', contextVisibility: 'independent', attached: true, billboard: { ...billboard, cell: 1 } });
+  banks.declare({ id: 'late', frame }, { id: 'late', contextVisibility: 'independent', attached: true });
+  assert.equal(root.dataset.volumeDatasetDeclaredBankCount, '2', 'declared once');
+  const layers = root.querySelectorAll('.prepared-dataset-billboards');
+  assert.equal(layers.length, 1, 'its billboard joins the layer the mount made');
+  assert.deepEqual([...layers[0]!.children].map(node => (node as HTMLElement).dataset.datasetBillboard), ['early', 'late']);
+  await banks.focusBank('late')!.load();
+  assert.deepEqual(loads, ['late'], 'loaded through the same loader, on demand');
+  assert.equal(root.dataset.volumeDatasetResidentBankCount, '1');
+  lifetime.destroy();
+  assert.equal(root.querySelectorAll('.prepared-dataset-billboards').length, 0, 'the scene takes its billboard with it');
+});

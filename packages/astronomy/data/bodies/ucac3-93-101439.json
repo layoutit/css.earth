@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": 7.278995280820913,
   "radialVelocityKmPerS": -3.5411503,
   "presentationUp": "display-axis",
+  "boundTo": "toi-815",
   "sources": {
    "position": "Gaia DR3 source 5415648821874435584 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/ucac3-93-101439/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 16.8565 +/- 0.0119 mas (same row, RUWE 1.16): 59.32 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): 10.087, 7.279 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): -3.54 +/- 0.59 km/s"
+   "radialVelocity": "Gaia DR3 (same row): -3.54 +/- 0.59 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-815 and UCAC3 93-101439 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 5415648821879172096 and 5415648821874435584), 359 AU apart on the sky, with a chance-alignment probability of 1.2e-6: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

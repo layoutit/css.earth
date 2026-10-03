@@ -1,5 +1,5 @@
 ---
-import { requireSceneObject } from '../objects.mts';
+import { requireObject } from '../objects.mts';
 import ObjectLayout from '../layouts/ObjectLayout.astro';
 import PreparedObjectHead from './PreparedObjectHead.astro';
 import PreparedObjectPanel from './PreparedObjectPanel.astro';
@@ -10,7 +10,7 @@ import shellCss from '../object-shell.css?inline';
 import { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
 import { rewriteSceneCss, resolveSceneAddressesDeep, withPreparedAssetOrigin } from '../asset-origin.mts';
 
-/** `objectId` owns the scene; `pageId` is what the page is: the object, or a level of the zoom ladder that scene shows when it differs. */
+/** `objectId` owns the scene; `pageId` is what the page is: the object, or an object seen from inside that scene shows when it differs. */
 interface Props { objectId: string; pageId?: string; navigation?: boolean; home?: boolean; }
 const { objectId, pageId = objectId, navigation = false, home = false } = Astro.props;
 const preparedPage = await loadObjectPageData(objectId);
@@ -28,7 +28,7 @@ const styles = await Promise.all(objectPageStyles(descriptor, { navigation })
 <ObjectLayout objectId={objectId} pageId={pageId} navigation={navigation} scene={scene} descriptor={descriptor} home={home}>
   <Fragment slot="object-head">
     {styles.map(({ path, css }) => <style is:inline data-object-style={path} set:html={css} />)}
-    {!navigation && !requireSceneObject(objectId).discovery?.arrival?.billboard && <PreparedObjectHead preparedAssets={preparedPage.assets} />}
+    {!navigation && !requireObject(objectId).discovery?.arrival?.billboard && <PreparedObjectHead preparedAssets={preparedPage.assets} />}
   </Fragment>
   <PreparedObjectPanel slot="object-ui" preparedContent={preparedContent} preparedControls={preparedPage.controls} navigation={navigation} />
 </ObjectLayout>

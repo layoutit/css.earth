@@ -36,8 +36,8 @@ interface WorldFlightRequest {
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
 import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, DATASET_VOLUMES, categoryZoomTarget, drawnGalaxiesZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
-import { bodyViewAtCamera, overviewFrameDistanceM } from './overview-context.mts';
-import { KNOWN_OVERVIEWS } from './object-directory.mts';
+import { bodyViewAtCamera, zoomFrameDistanceM } from './zoom-scope.mts';
+import { knownObject } from './object-directory.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createCameraMotion, createWorldSelectionTarget, savedWorldCamera, parseSharedView } from '@cssearth/renderer/navigation';
 import { worldCameraFromCenteredPresentation } from '@cssearth/objects';
@@ -103,15 +103,16 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       return worldCameraFromCenteredPresentation({ rotation: projection.rotation,
         distanceUnits: Math.max(current.distanceM, minimumDistance) / frame.metersPerUnit }, frame, optics);
     },
-    /** A rung of the zoom ladder framed around `objectId`: its own system, or a level. A level keeps the direction the camera
-     * looks in; a page opened cold has no view to keep and asks for `objectId`'s own default direction (`view: 'default'`). */
+    /** A scope of the zoom out of `objectId`, framed around it: its own system, or an object seen from inside, which keeps the
+     * direction the camera looks in; a page opened cold has no view to keep and asks for `objectId`'s own default direction
+     * (`view: 'default'`). */
     overviewTarget({ scope, objectId, fromId, mount, view }: TargetRequest & {scope: string; view?: 'default'}) {
       if (scope === 'system') {
         const world = this.systemTarget({ objectId, fromId, mount, force: true });
         return world ? { world, focusPositionM: frames.get(objectId)!.originM } : null;
       }
-      const overview = KNOWN_OVERVIEWS.find(candidate => candidate.id === scope);
-      if (!overview) return null;
+      const overview = knownObject(scope);
+      if (!overview?.zoom) return null;
       const owner = mount?.navigation;
       const from = owner?.capture() ?? lastCamera, current = owner?.optics() ?? lastOptics;
       if (!from || !current) return null;
@@ -119,7 +120,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       // it is reached (a cold load has no close-up to inherit).
       const optics = worldCameraViewport({ projectionScale: 1 }, current);
       // Its `zoom.frame` (object.json): fit what it draws, or a distance from the centre, looking the way the camera looks.
-      const distanceM = overviewFrameDistanceM(overview);
+      const distanceM = zoomFrameDistanceM({ zoom: overview.zoom });
       const frame = frames.get(objectId), arrival = view === 'default' ? arrivals.get(objectId) : undefined;
       // The centre's own default view, at its body: what a fit backs out from when the level opens by its page.
       const origin = arrival && frame ? worldCameraFromCenteredPresentation({ rotation: arrival.rotation, distanceUnits: 4 * frame.bodyRadiusM / frame.metersPerUnit }, frame, optics) : from;

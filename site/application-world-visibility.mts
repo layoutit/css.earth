@@ -61,20 +61,23 @@ export function createWorldVisibilityPolicy(objects: readonly WorldObject[], pla
   const placedStarIds = new Set(objects.filter(object => (object.classification === 'star' || object.classification === 'black-hole') && object.id !== plan.focus.id).map(object => object.id));
   // Each body's root and each placed star's members, walked once on the first selection that needs them.
   let placedSystems: { readonly rootOf: (id: string) => string; readonly members: ReadonlyMap<string, readonly string[]> } | null = null;
-  /** The placed star an object belongs to, with every body orbiting that star; empty inside the Solar System. */
+  /** The placed star an object belongs to, with every body orbiting that star and every star bound to it; empty inside the
+   * Solar System. */
   const placedSystemOf = (id: string): ReadonlySet<string> => {
     placedSystems ??= (() => {
+      // A star bound to another with no orbit in the record belongs to that star's system (planetary-system-members.mts).
+      const bonds = new Map(plan.bodies.flatMap(body => 'boundTo' in body && body.boundTo ? [[body.id, body.boundTo.hostId] as const] : []));
       const roots = new Map<string, string>();
       const rootOf = (start: string) => {
         const known = roots.get(start);
         if (known !== undefined) return known;
         let current = start;
-        for (let steps = 0; steps <= orbitCenters.size; steps++) { const center = orbitCenters.get(current); if (!center) break; current = center; }
+        for (let steps = 0; steps <= orbitCenters.size + bonds.size; steps++) { const center = orbitCenters.get(current) ?? bonds.get(current); if (!center) break; current = center; }
         roots.set(start, current);
         return current;
       };
       const members = new Map<string, string[]>();
-      for (const member of orbitCenters.keys()) {
+      for (const member of [...orbitCenters.keys(), ...bonds.keys()]) {
         if (Object.hasOwn(plan.orbitCenters ?? {}, member)) continue;
         const root = rootOf(member);
         if (placedStarIds.has(root)) (members.get(root) ?? members.set(root, []).get(root)!).push(member);

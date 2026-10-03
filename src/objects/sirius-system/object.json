@@ -1,17 +1,17 @@
 {
   "schema": "cssearth-object@2",
   "id": "sirius-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "sirius",
-      "members": "planets"
+      "host": "sirius"
     },
     "catalog": {
-      "name": "Canis Major",
-      "systemName": "Canis Major",
-      "classification": "planetary-system",
+      "name": "Sirius system",
+      "systemName": "Sirius system",
+      "classification": "star-system",
       "color": "#b3c8ff",
       "distanceAu": 543910,
       "description": "A-type star 2.64 parsecs away; its photosphere is not imaged here."

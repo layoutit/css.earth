@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { parseHTML } from 'linkedom';
 import { createShowcaseController, SHOWCASE_OBJECT_IDS } from '../showcase.mts';
-import { requireSceneObject } from '../objects.mts';
+import { requireObject } from '../objects.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { NavigationIntent } from '../navigation/navigation-request.mts';
 
@@ -23,7 +23,7 @@ function mount(ids: readonly string[], land: (flight: Flight) => Promise<boolean
 
 test('every showcase destination is a registered scene object, listed once', () => {
   assert.equal(new Set(SHOWCASE_OBJECT_IDS).size, SHOWCASE_OBJECT_IDS.length);
-  for (const id of SHOWCASE_OBJECT_IDS) requireSceneObject(id);
+  for (const id of SHOWCASE_OBJECT_IDS) requireObject(id);
 });
 
 test('the pill tours the showcase at random, never the shown body, with one history entry that later hops replace', async () => {

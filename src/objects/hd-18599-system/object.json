@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "hd-18599-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hd-18599",
-      "members": "planets"
+      "host": "hd-18599"
     },
     "catalog": {
       "name": "HD 18599 system",

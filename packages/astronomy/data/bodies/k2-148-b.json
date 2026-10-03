@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": -24.079402664919403,
   "radialVelocityKmPerS": -0.95831174,
   "presentationUp": "display-axis",
+  "boundTo": "k2-148",
   "sources": {
    "position": "Gaia DR3 source 2536443724641751680 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/k2-148-b/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 8.0650 +/- 0.0191 mas (same row, RUWE 1.00): 123.99 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): -38.326, -24.079 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): -0.96 +/- 1.61 km/s"
+   "radialVelocity": "Gaia DR3 (same row): -0.96 +/- 1.61 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list K2-148 and K2-148B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2536443724641751808 and 2536443724641751680), 1,163 AU apart on the sky, with a chance-alignment probability of 7.1e-7: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }
