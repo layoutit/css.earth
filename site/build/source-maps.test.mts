@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from 'vite';
 import type { Rollup } from 'vite';
-import type { MappingItem } from 'source-map-js';
+import type { MappingItem, RawSourceMap } from 'source-map-js';
 import { performanceSourceMaps } from './source-maps.mts';
 import { SourceMapConsumer } from 'source-map-js';
 
@@ -32,12 +32,22 @@ test('performance maps resolve generated callsites without changing served JS or
     const map = performance.find(c => c.fileName === chunk.fileName + '.map');
     assert.ok(map && map.type === 'asset');
     const mapText = String(map.source);
-    const consumer = new SourceMapConsumer(mapText);
+    const parsed: unknown = JSON.parse(mapText);
+    assert.ok(typeof parsed === 'object' && parsed !== null);
+    assert.ok('version' in parsed && (parsed.version === 3 || parsed.version === '3'));
+    assert.ok('sources' in parsed && Array.isArray(parsed.sources) && parsed.sources.every(s => typeof s === 'string'));
+    assert.ok('names' in parsed && Array.isArray(parsed.names) && parsed.names.every(n => typeof n === 'string'));
+    assert.ok('mappings' in parsed && typeof parsed.mappings === 'string');
+    assert.ok('sourcesContent' in parsed && Array.isArray(parsed.sourcesContent) && parsed.sourcesContent.every(s => typeof s === 'string'));
+    const raw: RawSourceMap = { version: String(parsed.version), sources: parsed.sources,
+      names: parsed.names, mappings: parsed.mappings, sourcesContent: parsed.sourcesContent };
+    const consumer = new SourceMapConsumer(raw);
     const mappings: MappingItem[] = [];
     consumer.eachMapping(m => { if (!mappings.length && m.originalLine === 1) mappings.push(m); });
     const position = mappings[0];
     assert.ok(position);
     assert.equal(position.originalLine, 1);
+    assert.ok(typeof position.source === 'string');
     assert.equal(consumer.sourceContentFor(position.source)?.includes('value + 17'), true);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

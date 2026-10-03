@@ -3,8 +3,7 @@ import assert from 'node:assert/strict';
 import { access, mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join, resolve } from 'node:path';
 import sharp from 'sharp';
 import catalogue from '../../sources/index.json' with { type: 'json' };
 import { catalogueSourceUrl } from './source-catalogue-paths.ts';
@@ -58,7 +57,8 @@ test('acquisition writes its receipt beside the catalogue recipe while leaving r
       url: 'https://invalid.example/never-fetched', bytes: 0, width: 2, height: 2,
       publisherUrl: 'https://invalid.example/fixture', credit: 'Fixture', license: 'CC0',
       output: { path: 'rasters/reference.webp', quality: 92, effort: 0 } }] }));
-    const command = fileURLToPath(new URL('../cli/commands/acquire-images.ts', import.meta.url));
+    // The lab runner bundles this test into its cache; the child must run the source command.
+    const command = resolve('labs/nebula/packages/lab/src/cli/commands/acquire-images.ts');
     const result = spawnSync(process.execPath, [command, recipe], { cwd: root, encoding: 'utf8', timeout: 30000 });
     assert.equal(result.status, 0, result.stderr);
     assert.match(result.stdout, /REFERENCE_READY fixture/u);
