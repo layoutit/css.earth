@@ -421,12 +421,9 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 .object-showcase-action:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
 .object-search-category .material-symbol,
 .object-showcase-action .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
-/* Slideshow sits with the app actions and keeps its icon and its word. A phone's single header row has no room for the
-   word: there it is an icon-only circle like the other actions. */
-@media (max-width: 699px) {
-  .object-showcase-action { width: var(--explorer-category-height); padding: 0; }
-  .object-showcase-action span { display: none; }
-}
+/* Slideshow sits with the app actions and is an icon-only circle like them; its name is its label and tooltip. */
+.object-showcase-action { width: var(--explorer-category-height); padding: 0; }
+.object-showcase-action span { display: none; }
 /* Eight pills with icons need 840 px of header row, which a landscape screen narrower than 1440 px does not have (732 px at
    1280): there the pills are words alone, 648 px. */
 @media (min-width: 821px) and (max-width: 1439px) and (orientation: landscape) {
