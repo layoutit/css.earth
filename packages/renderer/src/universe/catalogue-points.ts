@@ -307,7 +307,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         createSettlePacer(budget => {
           if (destroyed) return 0;
           // A slice takes the frame's whole budget, in points.
-          allowance = budget * POINTS_PER_PACER_UNIT;
+          allowance = Math.floor(budget * POINTS_PER_PACER_UNIT);
           try { return steps.next().done ? 0 : Math.max(1, budget); } catch (error) { fail(error); return 0; }
         }, { frame: view && typeof view.requestAnimationFrame === 'function' && view.performance ? framePacerFor(view) : null, holdWhile: 'never' }).request(true);
       }).catch(fail); });
