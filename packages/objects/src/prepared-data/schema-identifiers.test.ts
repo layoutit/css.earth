@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { preparedObjectTransport } from '@cssearth/objects/node';
-import { AUTHORED_OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, PREPARED_CATALOGUE_STARS_SCHEMA, COMPILER_BAKE_SCHEMA, COMPILER_STAR_SPRITES_SCHEMA, JOINT_FIT_VOLUME_SCHEMA, LAYER_OPTIMIZATION_SCHEMA, PREPARED_LMC_STARS_SCHEMA, NEBULA_PHYSICAL_EVIDENCE_SCHEMA, OBJECT_PAGE_SCHEMA, OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, VOLUME_LAYER_PLAN_SCHEMA, VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
+import { ARCHIVED_CAMERA_SCHEMA, OBJECT_TEXT_SCHEMA, AUTHORED_OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, PREPARED_CATALOGUE_STARS_SCHEMA, COMPILER_BAKE_SCHEMA, COMPILER_STAR_SPRITES_SCHEMA, JOINT_FIT_VOLUME_SCHEMA, LAYER_OPTIMIZATION_SCHEMA, PREPARED_LMC_STARS_SCHEMA, NEBULA_PHYSICAL_EVIDENCE_SCHEMA, OBJECT_PAGE_SCHEMA, OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, VOLUME_LAYER_PLAN_SCHEMA, VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
 import { SOURCE_CATALOG_SCHEMA } from '@cssearth/objects/sources';
 import { PREPARED_EXPLORATION_SCHEMA, PREPARED_SOURCES_SCHEMA } from '@cssearth/objects/provenance';
 
@@ -40,4 +40,17 @@ test('prepared object transport preserves its serialized envelope bytes', () => 
   const descriptor = { id: 'probe', type: 'density-volume', prepared: { format: 'density-volume@1', url: 'prepared/volume.json' } };
   assert.equal(preparedObjectTransport(descriptor, '{"value":1}'),
     '{"schema":"cssearth-prepared-object@1","id":"probe","type":"density-volume","format":"density-volume@1","data":{"value":1}}');
+});
+
+test('preserved Python camera and text writers conform to the objects-owned schema identifiers', () => {
+  const root = new URL('../../../../', import.meta.url);
+  for (const [path, name, schema, count] of [
+    ['packages/bake/cli/prepare-archived-camera.py', 'archived-camera', ARCHIVED_CAMERA_SCHEMA, 2],
+    ['packages/bake/authoring/distant-worlds/author.py', 'object-text', OBJECT_TEXT_SCHEMA, 1],
+  ] as const) {
+    const source = readFileSync(new URL(path, root), 'utf8');
+    const literals = [...source.matchAll(new RegExp(`(['"])(cssearth-${name}@[0-9]+)\\1`, 'gu'))].map(match => match[2]);
+    assert.equal(literals.length, count, `${path} must retain its schema declarations`);
+    for (const literal of literals) assert.equal(literal, schema, path);
+  }
 });

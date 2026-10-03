@@ -10,7 +10,7 @@ import { CHECKED } from './color.mts';
 import type { DraftQuotes } from './spec.mts';
 
 export const WIKIPEDIA_SUMMARY = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
-/** A citation quote's ceiling in the reader-text format (site/object-text.mts). */
+/** A citation quote's ceiling in the reader-text format (packages/objects/src/prepared-data/object-text.ts). */
 export const QUOTE_BUDGET = 300;
 
 export interface WikipediaLead { readonly title: string; readonly url: string; readonly revision: string; readonly extract: string; readonly description?: string }
@@ -109,4 +109,3 @@ export function quoteSource(quotes: DraftQuotes | undefined, key: 'card' | 'intr
   if (!record) throw new Error(`No publication record for the Wikipedia article ${quotes.url}.`);
   return [{ catalogueId: record.id, url: quotes.url, label: `Wikipedia, "${quotes.title}"`, checked: CHECKED, locator: `Lead section, revision ${quotes.revision}`, quote }];
 }
-

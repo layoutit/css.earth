@@ -15,7 +15,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import sharp from 'sharp';
 import { createSourceManifest } from '@cssearth/objects/node';
-import { SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+import { SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA } from '@cssearth/objects';
 import { ENTRY_EVIDENCE } from '@cssearth/bake/sources';
 import { shapeMaterialRaster, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/cli/lib/horizons.mts';
@@ -346,7 +346,7 @@ async function authorBody(body: Body) {
   const damitSource = sourceEntry(`damit-shape-${model.shapeFile}`, shapeUrl, `DAMIT shape ${model.shapeFile} · ${name}`, 'Dataset source');
   const cite = (keys: string[]) => [...keys.map(key => key === 'sbdb' ? sbdbSource : (({ url, label, locator, quote, catalogueId }) => sourceEntry(catalogueId, url, label, locator, quote))(body.papers[key]!)), damitSource];
   await write(resolve(pkg, 'text.json'), json({
-    schema: 'cssearth-object-text@1', objectId: id,
+    schema: OBJECT_TEXT_SCHEMA, objectId: id,
     card: { text: body.text.card, sources: cite(body.text.cardSources) },
     introduction: { text: body.text.introduction, sources: cite(body.text.introductionSources) },
     datasets: {

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import type { SpiceCamera } from '@cssearth/objects';
 /** A one-side map of one body in one JIRAM imager band from Juno JIRAM frames: Io's night-side 4.8 µm (M-band) thermal
  * emission is the first recipe.
  *
@@ -32,7 +33,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
-import { numbers, utcToEt, spiceCamera, type PixelModelKeys, type SpiceCamera } from '@cssearth/spice';
+import { numbers, utcToEt, spiceCamera, type PixelModelKeys } from '@cssearth/spice';
 import { pds3Keyword } from '@cssearth/telescope';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, dot3 as dot, flagValue, positionalArguments } from '@cssearth/core';
 

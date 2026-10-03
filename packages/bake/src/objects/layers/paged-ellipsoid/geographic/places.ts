@@ -1,7 +1,8 @@
+import type { PreparedDestinations } from '@cssearth/objects';
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { normalizeDestinationQuery } from '@cssearth/objects';
+import { normalizeDestinationQuery, PREPARED_DESTINATIONS_SCHEMA } from '@cssearth/objects';
 import { prepareLocationPoint, prepareLocationCamera } from "./prepare-location.ts";
 
 import type { GeographicScene } from './contracts.ts';
@@ -41,7 +42,7 @@ const places = rows.map(row => {
   };
 }).sort((a, b) => b.population - a.population || Number(a.id) - Number(b.id));
 if (new Set(places.map(place => place.id)).size !== places.length || places.length < 20000) throw new Error("Incomplete city catalogue.");
-const catalog = { schema: "cssearth-prepared-destinations@1", source: manifest.source,
+const catalog: PreparedDestinations = { schema: PREPARED_DESTINATIONS_SCHEMA, source: manifest.source,
   snapshotDate: manifest.snapshotDate, qualification: manifest.qualification, places };
 const bytes = Buffer.from(JSON.stringify(catalog) + "\n");
 const descriptor = { url: `${config.publicBase}${config.namespace}-places.json`, bytes: bytes.length, count: places.length,

@@ -1,3 +1,4 @@
+import { archivedCameraFields } from '@cssearth/objects';
 import { array, boolean, choice, dictionary, nullable, number, optional, requireRecord, shape, text, type Decoder } from '@cssearth/core';
 import { meshDimensions, parseMeshProfile, parseSurfaceSampling, parseTransform } from '../geometry/index.ts';
 export const dimensions = {width:number,height:number};
@@ -116,8 +117,6 @@ export const sipCameraFields = {matrix:array(array(number)),sip:shape({reference
 export const parseSipCamera = shape(sipCameraFields);
 export const parseLlorriCamera = shape({...sipCameraFields,target:text,startTime:text,width:number,height:number});
 
-export const archivedCameraFields = {schema:text,matrix:array(array(number)),rayMatrix:array(array(number)),positionKm:array(number),sunDirection:array(number)};
-export const parseArchivedCamera = shape(archivedCameraFields);
 export const parseReflectanceCamera = shape({...archivedCameraFields,...dimensions,target:text,startTime:text,filter:text,firstLine:number,firstSample:number});
 
 export const levelMatchingFields = {maximumAngleDegrees:optional(number),minimumPairs:number,maximumGain:number,samplesPerTriangle:optional(number)};

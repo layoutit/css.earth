@@ -1,12 +1,12 @@
+import type { ObjectText } from '@cssearth/objects';
+import { PREPARED_TEXT_SCHEMA, parseObjectText } from '@cssearth/objects';
 import { pathToFileURL } from 'node:url';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { datasetContributors } from '../../dataset-context.mts';
-import {
-  PREPARED_TEXT_SCHEMA, catalogueTextWarnings, compositionWarnings, parseObjectText, readerTextErrors, readerTextWarnings,
-} from '../../object-text.mts';
-import type { ObjectText, TextContext, TextFinding } from '../../object-text.mts';
+import { catalogueTextWarnings, compositionWarnings, readerTextErrors, readerTextWarnings } from '../../object-text.mts';
+import type { TextContext, TextFinding } from '../../object-text.mts';
 import { bodyLineage } from '@cssearth/bake/objects/lineage';
 import { parsePreparedExploration } from '@cssearth/objects/provenance';
 import { sourceResolver } from '@cssearth/objects/sources';
