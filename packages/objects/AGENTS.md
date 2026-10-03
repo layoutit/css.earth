@@ -5,7 +5,6 @@
 - **Allowed:** format types, schema-id constants, parsers, validators, binary encoders and decoders, and their fixtures.
 - **Not allowed:** algorithms that compute from the data: camera or navigation math, level or hysteresis walkers, geometry derivation, projection, sampling and fitting. They belong in `engine` (camera and navigation) or the owning package.
 - **Quick test:** if a function does more than read, check or (de)serialize a format, it does not belong here.
-- Known exceptions still to move out: `src/baking/` (raster algorithms) and `src/geometry/` (A255). Do not add to them.
 - `objects` imports `@cssearth/core` only; the `objects-imports-core-only` architecture rule enforces it.
 
 Own the shared object JSON parser, validation, reusable object types, and preparation contracts.

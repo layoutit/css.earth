@@ -1,6 +1,6 @@
 import { buildPolyMeshTransform } from '@layoutit/polycss';
-import { createSurfacePatches, createPolarPatch, createSectionPatch, outsideCutaway } from '@cssearth/objects';
-import type { SurfaceGeometryProfile, SurfacePatch, Pole } from '@cssearth/objects';
+import { createSurfacePatches, createPolarPatch, createSectionPatch, outsideCutaway } from '../surface-geometry/index.js';
+import type { SurfaceGeometryProfile, SurfacePatch, Pole } from '../surface-geometry/index.js';
 import type { GeometryProfile } from './profile.ts';
 import type { createLeafProjector, PreparedLeaf } from './projector.ts';
 export interface InteriorAssets extends Record<string, unknown> {

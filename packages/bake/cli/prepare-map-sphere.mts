@@ -1,4 +1,5 @@
-import { IMAGE_MESH_SCHEMA, createSurfacePatches } from '@cssearth/objects';
+import { IMAGE_MESH_SCHEMA } from '@cssearth/objects';
+import { createSurfacePatches } from '../src/surface-geometry/index.js';
 /**
  * Prepare an all-sky HEALPix map as a sphere of image patches around the Sun, seen from outside: the cosmic microwave
  * background at the distance its light left from. `source/<id>/sphere.json` names the map (its FITS file, column and

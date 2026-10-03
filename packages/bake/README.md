@@ -135,3 +135,6 @@ the packages CI lane on changes to either owner. Shell facing/material conforman
 `integration/renderer-bake/src/shell/shell.test.ts`; bake-owned shell assertions stay in `src/shell/`. Validated camera conversions come from `@cssearth/objects`; bake imports no renderer behavior helpers.
 
 Bake has no renderer dependency or imports. Renderer bundling belongs to the lab consumers; preparation reads shared contracts from objects.
+
+Surface geometry and ellipsoid patches live in internal `src/surface-geometry/`; polar sprites, lighting,
+coverage, atmosphere and interior raster algorithms live in internal `src/baking/`. Tests stay beside them.

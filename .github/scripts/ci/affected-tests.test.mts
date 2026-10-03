@@ -65,3 +65,9 @@ test('directly edited integration suites stay in the packages lane and two chang
   assert.equal(result.files.length, new Set(result.files).size);
   assert.ok(result.files.includes(file));
 });
+
+
+test('internal raster and surface geometry changes select bake and its direct consumers', () => {
+  for (const file of ['packages/bake/src/baking/polar.ts', 'packages/bake/src/surface-geometry/surface.ts'])
+    assert.deepEqual(affectedTests([file], packages, site), { packages: ['bake', 'telescope-cli'], site: false, files: FOREIGN_TESTS.bake!.slice().sort() });
+});

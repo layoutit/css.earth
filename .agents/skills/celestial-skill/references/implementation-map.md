@@ -472,3 +472,7 @@ interaction, raster appearance or line wrapping. The old Playwright conformance
 profiles are retired; inspect changed browser views and interactions as required
 by [qualification](qualification.md). Report unavailable assets and skipped tests
 separately from executed checks.
+
+Shared polar, lighting, coverage, atmosphere and interior raster operators are internal to
+`packages/bake/src/baking/`; shared surface patches are internal to
+`packages/bake/src/surface-geometry/`. Objects supplies format contracts, not these algorithms.
