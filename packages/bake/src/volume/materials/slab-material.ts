@@ -1,3 +1,4 @@
+import { validateChannelGain, type ChannelGain } from '@cssearth/objects';
 import { validateDatasetToneCurve, type DatasetToneCurve } from '@cssearth/objects';
 type Vector3 = [number, number, number];
 
@@ -77,15 +78,7 @@ export function alphaLimitedSlabMaterial(material: SlabMaterial, sampleEmission:
 }
 
 /** One dataset's per-channel material gain: the common factor is its exposure, the ratios its white balance. */
-export type ChannelGain = readonly [number, number, number];
-
-export function validateChannelGain(value: unknown): ChannelGain {
-  if (!Array.isArray(value) || value.length !== 3 ||
-    value.some(channel => typeof channel !== 'number' || !Number.isFinite(channel) || channel <= 0 || channel > 4))
-    throw new TypeError('A dataset channel gain must be three finite multipliers in (0,4].');
-  return [value[0] as number, value[1] as number, value[2] as number];
-}
-
+export { validateChannelGain, type ChannelGain } from '@cssearth/objects';
 /**
  * Split one dataset gain into the two parts that must straddle the alpha chroma limit.
  *

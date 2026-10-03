@@ -361,11 +361,7 @@ Historical source-list and index/pre-build admission policies retain their accep
 Frame/source auditing, camera solving, geometry, file I/O and inventory lookup stay with bake/site/tooling.
 Contract tests use node:test in the packages CI lane.
 
-WISE tile pins, authored display/synchronous rotation records and cited published limb coefficients have
-browser-safe schema identifiers, data types and pure validation in `packages/objects/src/prepared-data/`.
-Contract tests use node:test in the packages lane. WISE photometry, FITS/mosaicking, orbit/rotation evaluation,
-limb intensity, model-grid interpolation and file I/O remain with their scientific owners. The preserved
-Python display-orientation writer has a literal conformance test and a specific schema-ledger exception.
+See the [shared source-format ownership contract](../objects/AGENTS.md) for WISE pins, rotation records and published limb coefficients.
 
 Photometric color/stellar measurement records and measured-spectrum documents are parsed by `@cssearth/objects`.
 The color and stellar topics retain CIE/Planck evaluation, spectrum I/O and binning; charts retain recipes and drawing;

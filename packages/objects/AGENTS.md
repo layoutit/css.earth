@@ -143,7 +143,8 @@ Contract tests use node:test in the packages CI lane.
 WISE tile pins, authored display/synchronous rotation records and cited published limb coefficients have
 browser-safe schema identifiers, data types and pure validation in `packages/objects/src/prepared-data/`.
 Contract tests use node:test in the packages lane. WISE photometry, FITS/mosaicking, orbit/rotation evaluation,
-limb intensity, model-grid interpolation and file I/O remain with their scientific owners. The preserved
+model-grid interpolation and file I/O remain with their scientific owners. Limb intensity lives in
+`packages/core/src/math/limb-intensity.ts`. The preserved
 Python display-orientation writer has a literal conformance test and a specific schema-ledger exception.
 
 Disc-integrated and stellar photometric color records, uniform-disc star measurements, and measured-spectrum

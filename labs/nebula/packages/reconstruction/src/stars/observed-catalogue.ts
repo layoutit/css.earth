@@ -1,11 +1,11 @@
 import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
 export type CatalogueColor=(temperature:number,colorIndex:number)=>readonly [number,number,number];
 
-import { readObservedStellarCatalogueEnvelope, parseObservedStellarCatalogue, type ObservedStar, type EmissionFieldModel, type CompilerStarInput, type CompilerStarMaterial } from '@cssearth/objects';
+import { isStellarCoordinate, parseObservedStellarCatalogue, type ObservedStar, type EmissionFieldModel, type CompilerStarInput, type CompilerStarMaterial } from '@cssearth/objects';
 import { createCompilerStarDepthSampler } from './compiler.ts';
 
 const finite = coreIsFiniteNumber;
-const coordinate = (ra: unknown, dec: unknown): boolean => finite(ra) && ra >= 0 && ra < 360 && finite(dec) && dec >= -90 && dec <= 90;
+
 
 /** Exact TAN projection in the registered image's west/north frame, in arcseconds. */
 function project(raDegrees: number, decDegrees: number, center: [number, number]): [number, number] | null {
@@ -36,15 +36,16 @@ function appearance(star: ObservedStar, catalogueColor:CatalogueColor) {
  */
 export function prepareCatalogueStars(value: unknown, model: EmissionFieldModel,
   centerIcrsDegrees: [number, number], maximum: number, datasetIds: string[], catalogueColor:CatalogueColor) {
-  const envelope = readObservedStellarCatalogueEnvelope(value);
-  if (!Array.isArray(centerIcrsDegrees) || centerIcrsDegrees.length !== 2 || !coordinate(centerIcrsDegrees[0], centerIcrsDegrees[1]) ||
+  const envelope = parseObservedStellarCatalogue(value, () => {
+  if (!Array.isArray(centerIcrsDegrees) || centerIcrsDegrees.length !== 2 || !isStellarCoordinate(centerIcrsDegrees[0], centerIcrsDegrees[1]) ||
       !Number.isInteger(maximum) || maximum < 0 || maximum > 5000 || !Array.isArray(datasetIds) || datasetIds.length < 1 || datasetIds.length > 8 ||
       datasetIds.some(id => typeof id !== 'string' || !/^[a-z0-9][a-z0-9-]{0,95}$/.test(id)) || new Set(datasetIds).size !== datasetIds.length)
     throw new TypeError('Invalid catalogue star frame, maximum or dataset identities.');
   if (!model.bounds || !Array.isArray(model.bounds.min) || !Array.isArray(model.bounds.max) || model.bounds.min.length !== 3 ||
       model.bounds.max.length !== 3 || model.bounds.min.some((n, axis) => !finite(n) || !finite(model.bounds.max[axis]) || n >= model.bounds.max[axis]!))
     throw new TypeError('Invalid catalogue star model bounds.');
-  const sourceStars = parseObservedStellarCatalogue(envelope).stars;
+  });
+  const sourceStars = envelope.stars;
   const inFrame = sourceStars.flatMap(star => {
     const xy = project(star.raDegrees, star.decDegrees, centerIcrsDegrees);
     if (!xy || xy.some((n, axis) => n < model.bounds.min[axis]! || n > model.bounds.max[axis]!)) return [];

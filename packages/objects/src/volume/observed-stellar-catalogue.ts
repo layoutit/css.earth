@@ -6,7 +6,7 @@ export const OBSERVED_STELLAR_CATALOGUE_SCHEMA = 'cssearth-observed-stellar-cata
 const record = coreIsRecord;
 const finite = coreIsFiniteNumber;
 const text = (v: unknown): v is string => typeof v === 'string' && v.trim().length > 0 && v.length <= 128;
-const coordinate = (ra: unknown, dec: unknown): boolean => finite(ra) && ra >= 0 && ra < 360 && finite(dec) && dec >= -90 && dec <= 90;
+export const isStellarCoordinate = (ra: unknown, dec: unknown): boolean => finite(ra) && ra >= 0 && ra < 360 && finite(dec) && dec >= -90 && dec <= 90;
 const error = (v: unknown): v is number | null => v === null || finite(v) && v >= 0;
 export type PhotometryKind = 'johnson-measured' | 'tycho-johnson-approximation';
 export interface ObservedStar {
@@ -27,11 +27,11 @@ export interface ObservedStar {
 /** Decode consumed catalogue fields; extra source columns remain in the pinned source, not type assertions. */
 function readStar(value: unknown): ObservedStar {
   if (!record(value) || !text(value.id) || !finite(value.raDegrees) || !finite(value.decDegrees) ||
-      !coordinate(value.raDegrees, value.decDegrees) || !finite(value.properMotionRaCosDecMasPerYear) ||
+      !isStellarCoordinate(value.raDegrees, value.decDegrees) || !finite(value.properMotionRaCosDecMasPerYear) ||
       !finite(value.properMotionDecMasPerYear) || !finite(value.magnitudeV) || value.magnitudeV < -30 || value.magnitudeV > 40 ||
       !(value.colorIndexBV === null || finite(value.colorIndexBV) && value.colorIndexBV >= -2 && value.colorIndexBV <= 10) ||
       !text(value.sourceId) || !finite(value.sourceEpochJulianYear) || value.sourceEpochJulianYear < 1800 || value.sourceEpochJulianYear > 2200 ||
-      !finite(value.sourceRaDegrees) || !finite(value.sourceDecDegrees) || !coordinate(value.sourceRaDegrees, value.sourceDecDegrees) ||
+      !finite(value.sourceRaDegrees) || !finite(value.sourceDecDegrees) || !isStellarCoordinate(value.sourceRaDegrees, value.sourceDecDegrees) ||
       !record(value.photometry)) throw new TypeError('Invalid observed stellar catalogue record.');
   const p = value.photometry;
   if ((p.kind !== 'johnson-measured' && p.kind !== 'tycho-johnson-approximation') ||
@@ -57,8 +57,9 @@ export function readObservedStellarCatalogueEnvelope(value: unknown): ObservedSt
     coordinateEpochJulianYear: value.coordinateEpochJulianYear, stars: value.stars };
 }
 
-export function parseObservedStellarCatalogue(input: unknown): ObservedStellarCatalogue {
+export function parseObservedStellarCatalogue(input: unknown, beforeStars?: (envelope: ObservedStellarCatalogueEnvelope) => void): ObservedStellarCatalogue {
   const value = readObservedStellarCatalogueEnvelope(input);
+  beforeStars?.(value);
   const sourceStars = value.stars.map(readStar), ids = new Set<string>();
   for (const star of sourceStars) {
     if (ids.has(star.id)) throw new TypeError('Duplicate observed stellar catalogue identity.');

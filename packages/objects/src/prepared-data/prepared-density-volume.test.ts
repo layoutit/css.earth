@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parsePreparedDensityVolume } from './prepared-density-volume.js';
+import { parsePreparedDensityVolume, parsePreparedDensityVolumeText } from './prepared-density-volume.js';
 import { parseDensityVolumeObjectDescriptor } from '../density-volume.js';
 import { DENSITY_VOLUME_FORMAT } from '../volume/volume-schemas.js';
 import type { PreparedCssVolume } from '../volume/css-volume-types.js';
@@ -32,6 +32,8 @@ function inputs() {
 
 test('accepts the same prepared payload without altering its serialized bytes', () => {
   const { descriptor, envelope } = inputs();
+  assert.deepEqual(parsePreparedDensityVolumeText(JSON.stringify(envelope), descriptor), parsePreparedDensityVolume(envelope, descriptor));
+  assert.throws(() => parsePreparedDensityVolumeText('{', descriptor), SyntaxError);
   assert.equal(JSON.stringify(parsePreparedDensityVolume(envelope, descriptor)), JSON.stringify(envelope.data));
 });
 
