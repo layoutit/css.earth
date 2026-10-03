@@ -67,11 +67,13 @@ export function verifyOracleBytes(input: { path: string; bytes?: number }, bytes
 }
 
 export async function readOracleInput(input: { path: string; bytes?: number }, verifyKernelBank?: (set: string, kernels: readonly string[]) => Promise<unknown>) {
-  await assertPinnedInputs([input], verifyKernelBank);
-  try { return verifyOracleBytes(input, await readFile(oraclePath(input.path))); }
+  try {
+    await assertPinnedInputs([input], verifyKernelBank);
+    return verifyOracleBytes(input, await readFile(oraclePath(input.path)));
+  }
   catch (error) {
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT')
-      throw new Error(`Missing FITS oracle input ${input.path}. Run pnpm test:fits --restore.`, { cause: error });
+      throw new Error(`Missing oracle input ${input.path}. Restore it from its owner's declared source record.`, { cause: error });
     throw error;
   }
 }

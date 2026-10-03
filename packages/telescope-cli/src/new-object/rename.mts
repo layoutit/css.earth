@@ -9,26 +9,40 @@
  * rewritten specs; nothing is generated or baked here. */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { requireArray, requireRecord } from '@cssearth/core';
 import type { Archive } from './archives.mts';
 import { preferredName, simbadIdentifiers } from './display-name.mts';
 import { STORED_SPEC } from './refresh.mts';
 
-type Stored = Record<string, any>;
+type Stored = Record<string, unknown>;
 const NAMED = ['name', 'system', 'description'] as const;
 function renamed(entry: Stored, from: string, to: string) {
   for (const key of NAMED) if (typeof entry[key] === 'string') entry[key] = entry[key].replaceAll(from, to);
-  for (const key of ['card', 'introduction'] as const) if (typeof entry.text?.[key] === 'string') entry.text[key] = entry.text[key].replaceAll(from, to);
+  if (entry.text !== undefined) {
+    const text = requireRecord(entry.text, 'Stored spec text');
+    for (const key of ['card', 'introduction'] as const) if (typeof text[key] === 'string') text[key] = text[key].replaceAll(from, to);
+  }
 }
 
 /** Rewrites the stored specs of `ids` and their hosted bodies; returns one line per star and the ids to refresh. */
 export async function renameStars(root: string, ids: readonly string[], archive: Archive) {
-  const objects = resolve(root, 'src/objects'), read = async (id: string) => JSON.parse(await readFile(resolve(objects, id, STORED_SPEC), 'utf8')) as Stored;
+  const objects = resolve(root, 'src/objects'), read = async (id: string): Promise<Stored> => {
+    const path = resolve(objects, id, STORED_SPEC);
+    try { return requireRecord(JSON.parse(await readFile(path, 'utf8')), path); }
+    catch (error) {
+      if (error instanceof Error && 'code' in error && error.code === 'ENOENT') throw error;
+      throw new Error(`${path}: cannot read stored spec.`, { cause: error });
+    }
+  };
   const write = (id: string, spec: Stored) => writeFile(resolve(objects, id, STORED_SPEC), `${JSON.stringify(spec, null, 2)}\n`);
   const lines: string[] = [], refresh: string[] = [];
   // The bodies each star hosts, from their own stored specs.
   const hosted = new Map<string, string[]>();
   for (const id of await readdir(objects)) {
-    const spec = await read(id).catch(() => undefined);
+    const spec = await read(id).catch((error: unknown) => {
+      if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined;
+      throw error;
+    });
     if (typeof spec?.host === 'string' && ids.includes(spec.host)) hosted.set(spec.host, [...hosted.get(spec.host) ?? [], id]);
   }
   for (const id of ids) {
@@ -42,7 +56,7 @@ export async function renameStars(root: string, ids: readonly string[], archive:
     await write(id, spec);
     for (const hostedId of hosted.get(id) ?? []) {
       const addition = await read(hostedId);
-      for (const entry of [...addition.planets ?? [], ...addition.companions ?? []]) renamed(entry, base, preferred.name);
+      for (const entry of [...requireArray(addition.planets ?? []), ...requireArray(addition.companions ?? [])]) renamed(requireRecord(entry), base, preferred.name);
       await write(hostedId, addition);
     }
     refresh.push(id, ...hosted.get(id) ?? []);

@@ -1,6 +1,6 @@
 import { type PreparedDepthOrder, type PreparedPresentationDefinition, type PreparedTree, type SurfaceTriangle } from '@cssearth/objects';
 
-export interface DepthSurface { target: number; leaves: number[]; frontSigns?: number[]; bodyFromScene: number[]; }
+export interface PreparedDepthPartitionSurface { target: number; leaves: number[]; frontSigns?: number[]; bodyFromScene: number[]; }
 export type PresentationSource = PreparedPresentationDefinition & { id: string };
 type TreeNode = PreparedTree['nodes'][number];
 type RecompiledFields='tree'|'variants'|'materials'|'animations'|'viewBindings'|'motion'|'surfaceHit'|'depthPartitions';
@@ -126,7 +126,7 @@ export function partitionSurface(triangles: readonly SurfaceTriangle[], maximumL
 /** Emit the final retained DOM during preparation. All source leaves occur
  * once, and all node references are remapped together. Projected carriers share
  * the existing camera; selection writes retain their atomic resource owner. */
-export function prepareDepthPartitions<T extends PreparedPresentationDefinition>(definition: T, surface: DepthSurface | null): RecompiledPresentation<T> {
+export function prepareDepthPartitions<T extends PreparedPresentationDefinition>(definition: T, surface: PreparedDepthPartitionSurface | null): RecompiledPresentation<T> {
   if (!surface) return definition;
   if (!definition.surfaceHit) throw new TypeError('Depth partitions require a source surface.');
   const { groups, order } = partitionSurface(definition.surfaceHit.triangles, MAXIMUM_DEPTH_LEAVES, surface.frontSigns);

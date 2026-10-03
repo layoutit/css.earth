@@ -132,7 +132,7 @@ export function parseCli(args: readonly string[]): CliOptions {
       invalidOption: arg => `Unknown or repeated ${command} option ${arg}.` });
     const directory=values.get('--out'),background=values.get('--figure-background');
     if(background!==undefined&&background!=='transparent'&&background!=='opaque')throw new TypeError('--figure-background takes transparent or opaque');
-    const draws=values.get('--orbit-draws');if(draws!==undefined&&!/^\d+$/u.test(draws))throw new TypeError('--orbit-draws takes a whole number of posterior draws');
+    const draws=values.get('--orbit-draws');if(draws!==undefined&&(!/^\d+$/u.test(draws)||!Number.isSafeInteger(Number(draws))))throw new TypeError('--orbit-draws takes a whole number of posterior draws');
     const common={directory:resolve(directory??''),...(background?{figureBackground:background as 'transparent'|'opaque'}:{}),...(draws?{orbitDraws:Number(draws)}:{}),fitAstrometry:flags.has('--fit-astrometry'),fitOrbits:flags.has('--fit-orbits'),json:flags.has('--json'),verbose:flags.has('--verbose')};
     if(command==='candidates'){const epoch=values.get('--epoch');if(positional.length!==1||!epoch||!directory)throw new TypeError('Use telescope candidates STAR --epoch MJD|DATE --out DIRECTORY.');return{command,system:positional[0]!,epoch,...common};}
     const system=values.get('--system');if(positional.length!==1||!system||!directory)throw new TypeError('Use telescope associate MEASUREMENTS.csv --system STAR --out DIRECTORY.');return{command,measurements:resolve(positional[0]!),system,...common};
