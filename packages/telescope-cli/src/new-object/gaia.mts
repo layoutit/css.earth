@@ -43,7 +43,7 @@ export function draftFromGaia(row: ReturnType<typeof parseGaiaDraftRow>) {
   // About, because the parallax is inverted as it stands; the generator places the star by the same parallax.
   const parsecs = Math.round(1000 / row.parallax / 100) * 100;
   return {
-    id: `gaia-dr3-${row.sourceId}`, name, system: `${name} system`, target: name, gaia: row.sourceId,
+    id: `gaia-dr3-${row.sourceId}`, name, system: `${name} system`, parent: 'milky-way', target: name, gaia: row.sourceId,
     description: `A star ${row.radius.toFixed(1)} solar radii and ${row.mass.toFixed(2)} solar masses, about ${parsecs.toLocaleString('en-US')} parsecs away, measured by Gaia.`,
     paper: { url: GAIA_FLAME.paper, credit: GAIA_FLAME.credit },
     radius: 'gaia-flame', mass: 'gaia-flame',

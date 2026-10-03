@@ -13,6 +13,8 @@ import { VIZIER_ASU, type Archive } from './archives.mts';
 export const CEPHEID_GRAVITIES = { min: -1.33, max: 2.86, source: 'Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)', url: 'https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3' };
 export const CEPHEIDS = { source: 'J/A+A/550/A70/table10', paper: 'https://arxiv.org/abs/1212.5478', credit: 'Groenewegen (2013), A&A 550, A70' };
 const WHERE: Readonly<Record<string, string>> = { G: 'the Milky Way', L: 'the Large Magellanic Cloud', S: 'the Small Magellanic Cloud' };
+/** The object each of the table's locations is: the galaxy the star is inside (the spec's `parent`). */
+const INSIDE: Readonly<Record<string, string>> = { G: 'milky-way', L: 'lmc', S: 'smc' };
 const COLUMNS = ['Loc', 'Name', 'E(B-V)', 'e_E(B-V)', 'Per', 'Dist', 'e.D', 'Rad', 'e.R'] as const;
 
 export function parseCepheidRow(tsv: string, name: string) {
@@ -22,7 +24,8 @@ export function parseCepheidRow(tsv: string, name: string) {
   if (rows.length !== 1) throw new Error(`Groenewegen (2013) table10 has ${rows.length} rows for ${name}, not one; its names are as the paper writes them (HV 1005, DEL CEP).`);
   const cell = (column: typeof COLUMNS[number]) => rows[0]![header.indexOf(column)] ?? '';
   const value = (column: typeof COLUMNS[number]) => { const number = Number(cell(column)); if (!cell(column) || !Number.isFinite(number)) throw new Error(`Groenewegen (2013) ${name}: ${column} is empty.`); return number; };
-  return { name: cell('Name'), where: WHERE[cell('Loc')] ?? 'the Milky Way', reddening: [value('E(B-V)'), value('e_E(B-V)')] as const, periodDays: value('Per'),
+  if (!INSIDE[cell('Loc')]) throw new Error(`Groenewegen (2013) ${name}: Loc is ${JSON.stringify(cell('Loc'))}, not G, L or S, so the table does not say which galaxy the star is in.`);
+  return { name: cell('Name'), where: WHERE[cell('Loc')]!, inside: INSIDE[cell('Loc')]!, reddening: [value('E(B-V)'), value('e_E(B-V)')] as const, periodDays: value('Per'),
     distance: [value('Dist'), value('e.D')] as const, radius: [value('Rad'), value('e.R')] as const };
 }
 
@@ -31,7 +34,7 @@ export function draftFromCepheid(row: ReturnType<typeof parseCepheidRow>) {
   const id = row.name.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '');
   return {
     spec: {
-      id, name: row.name, system: `${row.name} system`, target: row.name, paper: { url: CEPHEIDS.paper, credit: CEPHEIDS.credit },
+      id, name: row.name, system: `${row.name} system`, parent: row.inside, target: row.name, paper: { url: CEPHEIDS.paper, credit: CEPHEIDS.credit },
       description: `A Cepheid in ${row.where} that pulsates every ${row.periodDays.toFixed(2)} days; its mean radius is ${row.radius[0]} solar radii.`,
       radius: cite(row.radius, 'Baade-Wesselink mean radius (solar radii)'), distance: cite(row.distance, 'Baade-Wesselink distance (pc)'),
       text: { card: `A Cepheid in ${row.where}, ${Math.round(row.radius[0])} times the Sun's width, that swells and shrinks every ${row.periodDays.toFixed(1)} days.`,

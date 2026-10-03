@@ -26,6 +26,7 @@ import { gaiaCepheidClass } from '@cssearth/bake/photometry';
 import { CEPHEID_GRAVITIES } from './cepheids.mts';
 import { writeLedger } from './ledger.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
+import { hostedParent } from './new-hosted-planet.mts';
 
 const SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938;
 const GAIA_LICENSE = { license: 'Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained', licenseEvidence: ['https://www.cosmos.esa.int/web/gaia-users/credits'] };
@@ -123,12 +124,32 @@ export function astronomyRecord(spec: StarSpec, row: GaiaRow | CatalogueRow, ids
       + ' presentationUp: the display axis is a sky-plane convention; the spin axis\'s position angle on the sky is not measured.',
     star: { rightAscensionDegrees: row.ra, declinationDegrees: row.dec, positionEpochJulianYear: gaia ? 2016 : catalogue!.epoch, distanceParsecs: place.parsecs,
       properMotionRaMasPerYear: place.properMotion.ra, properMotionDecMasPerYear: place.properMotion.dec, radialVelocityKmPerS: rv, presentationUp: 'display-axis',
+      ...(spec.boundTo ? { boundTo: spec.boundTo.host } : {}),
       sources: {
         position: gaia ? `Gaia DR3 source ${gaia.sourceId} (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/${spec.id}/source/photometry/gaia-dr3-source.csv${cross ? `; cross-identification ${cross}: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+${gaia.sourceId}` : ''}`
           : `${spec.position!.credit} (${spec.position!.url}), VizieR ${catalogue!.words}: RAJ2000 ${row.ra}, DEJ2000 ${row.dec}${catalogue!.epoch === 2000 ? '' : ` (ICRS at epoch J${catalogue!.epoch})`}, from the archived row src/objects/${spec.id}/source/${CATALOGUE_ROW_PATH}${spec.target ? `; SIMBAD names it ${spec.target}` : ''}`,
         distance: place.source,
         properMotion: place.properMotion.source,
-        radialVelocity: gaia?.radialVelocity !== undefined ? `Gaia DR3 (same row): ${gaia.radialVelocity.toFixed(2)}${gaia.radialVelocityError ? ` +/- ${gaia.radialVelocityError.toFixed(2)}` : ''} km/s` : `${spec.radialVelocity!.source} (${spec.radialVelocity!.url})` } } };
+        radialVelocity: gaia?.radialVelocity !== undefined ? `Gaia DR3 (same row): ${gaia.radialVelocity.toFixed(2)}${gaia.radialVelocityError ? ` +/- ${gaia.radialVelocityError.toFixed(2)}` : ''} km/s` : `${spec.radialVelocity!.source} (${spec.radialVelocity!.url})`,
+        ...(spec.boundTo ? { binary: spec.boundTo.source } : {}) } } };
+}
+
+/** The object a package this tool writes is inside (packages/objects/src/registry/object-tree.ts). A star bound to another is
+ * inside that star's system. Any other keeps the parent its package already has, since the systems step moves a star with planets
+ * into its own system; a new package takes the parent its spec names, and is refused without one. */
+export async function packageParent(root: string, id: string, named: { readonly parent?: string; readonly boundTo?: { readonly host: string } }): Promise<string> {
+  if (named.boundTo) return hostedParent(named.boundTo.host);
+  const path = `src/objects/${id}/object.json`;
+  const existing = await readFile(resolve(root, path), 'utf8').then(text => (JSON.parse(text) as { parent?: unknown }).parent, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return undefined; throw error; });
+  const parent = typeof existing === 'string' ? existing : named.parent;
+  if (parent === undefined) throw new TypeError(`${id}: a new object names the object it is inside: give its spec a parent (its galaxy's id, "milky-way" for a star Gaia or Hipparcos places) or the star it is bound to (boundTo).`);
+  return parent;
+}
+/** `files` with the package's descriptor naming `parent`, written after its id. */
+export function withParent<Files extends Map<string, string | Buffer>>(files: Files, id: string, parent: string): Files {
+  const path = `src/objects/${id}/object.json`, { schema, id: own, parent: _drafted, ...rest } = JSON.parse(String(files.get(path))) as Record<string, unknown>;
+  files.set(path, `${JSON.stringify({ schema, id: own, parent, ...rest }, null, 2)}\n`);
+  return files;
 }
 
 /** A publication record in src/sources for a cited arXiv or DOI link. */
@@ -212,7 +233,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   // The package the scaffold writes, then every file the data decide.
   const scaffold = scaffoldStarFiles({ id, name: spec.name, system: spec.system, temperatureK: spec.temperature.value, temperatureSource: `${spec.temperature.source} (${spec.temperature.url})`,
     description: spec.description, paper: spec.paper.url, paperCredit: spec.paper.credit, order, ...(spec.aliases ? { aliases: spec.aliases } : {}), ...(spec.featured ? { featured: true as const } : {}) }, body, solarEpoch.SOLAR_GEOMETRY_EPOCH_JD_TT);
-  const files = new Map<string, string | Buffer>(scaffold), read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
+  const files = withParent(new Map<string, string | Buffer>(scaffold), id, await packageParent(root, id, spec)), read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   files.set(`packages/astronomy/data/bodies/${id}.json`, `${JSON.stringify(body, null, 1)}\n`);
   if (gaiaRead) files.set(`${s}/photometry/gaia-dr3-source.csv`, gaiaRead.csv);
   if (catalogueRow) files.set(`${s}/${CATALOGUE_ROW_PATH}`, catalogueRow.tsv);
@@ -488,6 +509,7 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
     progress(`[${++done}/${total}] ${pulsar.id}: writing the pulsar from its cited values`);
     try {
       const { generatePulsar } = await import('./pulsar.mts'), generated = await generatePulsar(pulsar, { order: pulsar.order ?? next++, epochJdTt: solarEpoch.SOLAR_GEOMETRY_EPOCH_JD_TT });
+      withParent(generated.files, pulsar.id, await packageParent(root, pulsar.id, pulsar));
       results.push({ id: pulsar.id, kind: 'star', files: (await writeGenerated(generated, root)).written.length, color: `${generated.regions} hot regions`, todo: ['review the drafted card, introduction and README'] });
     } catch (error) { failed(pulsar.id, 'star', error); }
   }
