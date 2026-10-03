@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
+import ts from 'typescript';
 import { requireRecord } from '@cssearth/core';
 import { projectRoot } from '@cssearth/core/node';
 import { pathToFileURL } from 'node:url';
@@ -10,12 +11,34 @@ const root = pathToFileURL(projectRoot(import.meta.url) + '/');
 const lab = 'labs/nebula/packages/lab/src/';
 const reconstruction = 'labs/nebula/packages/reconstruction/src/';
 const models = 'labs/nebula/models/lmc/';
+function literalsInCode(source: string, path: string, name: string): string[] {
+  if (path.endsWith('.py')) {
+    const code = source.replace(/(['"])(?:\\.|(?!\1)[^\\\n])*?\1|#[^\n]*/gu,
+      token => token.startsWith('#') ? '' : token);
+    return [...code.matchAll(new RegExp(`(['"])(cssearth-${name}@[0-9]+)\\1`, 'gu'))].map(match => match[2]!);
+  }
+  const literals: string[] = [];
+  const visit = (node: ts.Node): void => {
+    if (ts.isStringLiteral(node) && new RegExp(`^cssearth-${name}@[0-9]+$`, 'u').test(node.text)) literals.push(node.text);
+    ts.forEachChild(node, visit);
+  };
+  visit(ts.createSourceFile(path, source, ts.ScriptTarget.Latest, true));
+  return literals;
+}
 function pin(path: string, name: string, schema: string, count: number): void {
-  const source = readFileSync(new URL(path, root), 'utf8');
-  const literals = [...source.matchAll(new RegExp(`(['"])(cssearth-${name}@[0-9]+)\\1`, 'gu'))].map(match => match[2]);
+  const literals = literalsInCode(readFileSync(new URL(path, root), 'utf8'), path, name);
   assert.equal(literals.length, count, `${path}: schema declarations/checks must remain present`);
   for (const literal of literals) assert.equal(literal, schema, path);
 }
+
+test('comments cannot substitute for Python or TypeScript protocol pins', () => {
+  for (const [path, comment] of [['probe.py', '#'], ['probe.ts', '//']]) {
+    const good = "schema='cssearth-probe@1'";
+    assert.deepEqual(literalsInCode(good, path!, 'probe'), ['cssearth-probe@1']);
+    assert.deepEqual(literalsInCode(`schema='wrong' ${comment} 'cssearth-probe@1'`, path!, 'probe'), []);
+    assert.deepEqual(literalsInCode(good, path!, 'probe'), ['cssearth-probe@1']);
+  }
+});
 function fixture(path: string, schema: string): Record<string, unknown> {
   const record = requireRecord(JSON.parse(readFileSync(new URL(path, root), 'utf8')));
   assert.equal(record.schema, schema, path);

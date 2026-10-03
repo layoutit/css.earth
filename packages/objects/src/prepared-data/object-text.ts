@@ -1,3 +1,5 @@
+/** Cited authored and prepared object text. Citations preserve reviewable source evidence;
+ * editorial budgets and source transport remain with the host. */
 import { sourceArray, sourceDate, sourceId, sourceObject, sourceText, sourceUrl } from '../sources/catalog.js';
 export const OBJECT_TEXT_SCHEMA = 'cssearth-object-text@1';
 export const PREPARED_TEXT_SCHEMA = 'cssearth-prepared-text@1';

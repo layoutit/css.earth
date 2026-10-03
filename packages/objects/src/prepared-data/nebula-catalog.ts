@@ -1,6 +1,6 @@
-export const PREPARED_NEBULA_CATALOG_SCHEMA = 'cssearth-nebula-catalog@1';
 import { validateSpatialPosition } from './spatial-relations.js';
 import type { PreparedGalaxyRecord, SpatialCatalogSource } from './galaxy-catalog.js';
+export const PREPARED_NEBULA_CATALOG_SCHEMA = 'cssearth-nebula-catalog@1';
 
 /** A sourced Galactic volume. The legacy nebula transport also carries stellar clusters;
  * the row kind preserves their scientific identity independently of the shared renderer. */

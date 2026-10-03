@@ -14,13 +14,14 @@
     },
     {
       "id": "volume",
-      "subject": "A volume of the Dumbbell Nebula",
+      "subject": "The shape of the Dumbbell Nebula",
       "status": "deferred",
-      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "finding": "The picture is flat. Depth needs the nebula's shape as a paper gives it, which is how the Ring and the Owl took theirs. For the Dumbbell, Meaburn et al. (2005) measure the kinematics and call the bright shell quasi-ellipsoidal or barrel-shaped, expanding at 35 km/s along its minor axis, but print no tilt of its axis to the line of sight. Kwok et al. (2008), The True Shapes of the Dumbbell and the Ring, is closed access and was not read.",
       "evidence": [
-        "https://noirlab.edu/public/images/noao-m27/"
+        "https://arxiv.org/abs/astro-ph/0501569",
+        "https://doi.org/10.1086/592103"
       ],
-      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+      "revisitWhen": "A paper that prints the shell's axes and its tilt is read."
     },
     {
       "id": "star-removal",

@@ -1,3 +1,4 @@
+import type { PreparedVolumeLeafStyle } from '../volume/css-volume-types.js';
 import type { PreparedLeafBounds } from './prepared-leaf-bounds.js';
 export type PreparedSkyVector = readonly [number, number, number];
 
@@ -18,7 +19,7 @@ export interface PreparedCssSky {
     readonly forwardIcrf: PreparedSkyVector;
     readonly rightIcrf: PreparedSkyVector;
     readonly upIcrf: PreparedSkyVector;
-    readonly style: { readonly width: string; readonly height: string; readonly transform: string; readonly backgroundSize: string; readonly backgroundPosition: string };
+    readonly style: PreparedVolumeLeafStyle;
     readonly boundsCssPixels?: PreparedLeafBounds;
   }[];
   readonly provenance: unknown;

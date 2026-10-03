@@ -14,13 +14,13 @@
     },
     {
       "id": "volume",
-      "subject": "A volume of M43",
+      "subject": "The shape of M43",
       "status": "deferred",
-      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "finding": "The picture is flat. Depth needs the nebula's shape as a paper gives it. Simón-Díaz et al. (2011) study M43 as a nearly round nebula lit by one star, HD 37061; the paper could not be fetched on 2026-10-03, so no radius was read and nothing is built.",
       "evidence": [
-        "https://noirlab.edu/public/images/noao-m43/"
+        "https://arxiv.org/abs/1103.3628"
       ],
-      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+      "revisitWhen": "The paper is read and prints the nebula's radius."
     },
     {
       "id": "star-removal",

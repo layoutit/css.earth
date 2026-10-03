@@ -1,4 +1,4 @@
-import { surfaceFeatureBankIndex, type PreparedSurfaceFeaturePlan, type ParsedSurfaceFeature as PreparedSurfaceFeature, type ParsedSurfaceFeatureCatalog as PreparedSurfaceFeatureCatalog } from '@cssearth/objects';
+import { surfaceFeatureBankIndex, type PreparedSurfaceFeaturePlan, type ParsedSurfaceFeature, type ParsedSurfaceFeatureCatalog } from '@cssearth/objects';
 
 import { writeData, writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
@@ -48,7 +48,7 @@ export interface SurfaceFeatureMountOptions {
 }
 
 interface Entry {
-  readonly element: HTMLElement; feature: PreparedSurfaceFeature | null; width: number; height: number; measured: boolean;
+  readonly element: HTMLElement; feature: ParsedSurfaceFeature | null; width: number; height: number; measured: boolean;
   targetOpacity: number; hideTimer: ReturnType<typeof setTimeout> | null; x: number; y: number;
 }
 
@@ -92,15 +92,15 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   let destroyed = false, playing = false, enabled = false, frames = 0, zoomGate = false, outlinePieces = 0;
   /** The default catalogue: requested (or held until a flight lands), fetched, written into the labels in batches, then loaded. */
   let load: { readonly kind: 'idle' } | { readonly kind: 'held' } | { readonly kind: 'fetching' }
-    | { readonly kind: 'populating'; readonly catalog: PreparedSurfaceFeatureCatalog; next: number }
-    | { readonly kind: 'loaded'; readonly catalog: PreparedSurfaceFeatureCatalog }
+    | { readonly kind: 'populating'; readonly catalog: ParsedSurfaceFeatureCatalog; next: number }
+    | { readonly kind: 'loaded'; readonly catalog: ParsedSurfaceFeatureCatalog }
     | { readonly kind: 'failed'; readonly error: string } = { kind: 'idle' };
   let view: Parameters<SurfaceFeatureLayerRuntime['publish']>[0] | null = null;
   let matrix: Float64Array | null = null, local: DOMMatrix | null = null, flight: SurfaceFlightHandle | null = null;
-  let resolveLoaded!: (catalog: PreparedSurfaceFeatureCatalog) => void, rejectLoaded!: (error: unknown) => void;
-  const loadedCatalog = new Promise<PreparedSurfaceFeatureCatalog>((resolve, reject) => { resolveLoaded = resolve; rejectLoaded = reject; });
+  let resolveLoaded!: (catalog: ParsedSurfaceFeatureCatalog) => void, rejectLoaded!: (error: unknown) => void;
+  const loadedCatalog = new Promise<ParsedSurfaceFeatureCatalog>((resolve, reject) => { resolveLoaded = resolve; rejectLoaded = reject; });
   loadedCatalog.catch(() => {});
-  const selectionBanks = new Map<string, Promise<PreparedSurfaceFeatureCatalog>>();
+  const selectionBanks = new Map<string, Promise<ParsedSurfaceFeatureCatalog>>();
   let pendingFrame: number | null = null, loopFrame: number | null = null;
   let visible = new Set<number>(), rects = new Map<string, LabelScreenRect>(), eligible = 0;
   let hoveredIndex: number | null = null, pinnedIndex: number | null = null, shownIndex: number | null = null;
@@ -230,13 +230,13 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     }
     return end - start;
   }, { frame: framePacerFor(windowTarget), holdWhile: 'never' });
-  function populateEntry(entry: Entry, feature: PreparedSurfaceFeature) {
+  function populateEntry(entry: Entry, feature: ParsedSurfaceFeature) {
     entry.feature = feature;
     entry.element.dataset.featureLabel = feature.id;
     entry.element.dataset.featureKind = feature.kind;
     entry.element.textContent = feature.name;
   }
-  async function selectionFeature(id: string): Promise<PreparedSurfaceFeature | null> {
+  async function selectionFeature(id: string): Promise<ParsedSurfaceFeature | null> {
     const resident = entries.find(entry => entry.feature?.id === id)?.feature;
     if (resident) return resident;
     if (!plan.selection) return null;
@@ -307,7 +307,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     local = readLocal();
     matrix = new windowTarget!.DOMMatrix(Array.from(projection.eyeFromScene)).multiply(local).toFloat64Array();
     const width = host.clientWidth, height = host.clientHeight;
-    const projectedEntries: { index: number; kind: PreparedSurfaceFeature['kind']; projected: NonNullable<ReturnType<typeof projectSurfaceFeature>> }[] = [];
+    const projectedEntries: { index: number; kind: ParsedSurfaceFeature['kind']; projected: NonNullable<ReturnType<typeof projectSurfaceFeature>> }[] = [];
     for (let index = 0; index < entries.length; index++) {
       const entry = entries[index]!, feature = entry.feature;
       // A search-only name labels the map only while it is the selected feature.
@@ -364,7 +364,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   }
   /** The published diameter, traced as retained screen chords like the orbit lines; the stroke
    * is a shell style in CSS pixels, so zooming changes the circle, never its weight. */
-  function presentOutline(feature: PreparedSurfaceFeature): void {
+  function presentOutline(feature: ParsedSurfaceFeature): void {
     const projection = view?.projection;
     if (!matrix || !projection) { hideOutline(); return; }
     const chords = projectSurfaceOutline(feature.outline, matrix, projection.focalPixels, projection.principalOffsetPixels, outline.length);

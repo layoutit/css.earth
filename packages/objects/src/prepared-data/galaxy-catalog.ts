@@ -1,6 +1,6 @@
-export const PREPARED_GALAXY_CATALOG_SCHEMA = 'cssearth-galaxy-catalog@1';
 import { validatePhysicalHosts, validateSpatialPosition } from './spatial-relations.js';
 import type { DistanceSubject, UnpositionedHost } from './spatial-relations.js';
+export const PREPARED_GALAXY_CATALOG_SCHEMA = 'cssearth-galaxy-catalog@1';
 /** Prepared scientific positions and their evidence. This does not alter GXCT. */
 export interface SpatialCitation {
   readonly id: string;
