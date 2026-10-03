@@ -1,4 +1,4 @@
-import { requireObjectControls } from '@cssearth/objects';
+import { AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, readPublishedPreparationSources, requireObjectControls } from '@cssearth/objects';
 
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
 import { readJsonSource } from '../../sources/index.ts';
@@ -53,8 +53,7 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const publishedPlan = reuseImages ? { scene: await published('scene'), 'surface-raster-plan': await published('surface-raster-plan'), datasets: await published('datasets') } : null;
   if (reuseImages) {
     const previous = await published('authored-preparation');
-    const publishedSources = new Map(requireArray(previous.sources, 'published sources').map(source => requireRecord(source, 'published source'))
-      .map(source => [requireString(source.id, 'source id'), JSON.stringify(source)] as const));
+    const publishedSources = readPublishedPreparationSources(previous);
     const current = entries.map(entry => entry.reference);
     const changed = [...new Set([...publishedSources.keys(), ...current.map(reference => reference.id)])]
       .filter(sourceId => publishedSources.get(sourceId) !== JSON.stringify(current.find(reference => reference.id === sourceId)));
@@ -107,7 +106,7 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const rawDefinition = await preparePagedEllipsoidPresentation({ config, plan: scene, datasets, sky, sun, catalog, textureLevels, controls });
   const definition = withFocusedCamera(rawDefinition, sky);
   for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, ...(catalog ? { places: catalog } : {}), datasets, content, runtime: definition })) await write(outputDirectory, name, value);
-  await write(outputDirectory, 'authored-preparation', { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: entries.map(entry => entry.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true} });
+  await write(outputDirectory, 'authored-preparation', { schema: AUTHORED_PREPARATION_SCHEMA, id: descriptor.id, sources: entries.map(entry => entry.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true} } satisfies AuthoredPreparationReceipt);
   return { descriptor, sources, raster: rasterAssets, celestial: { sky, sun }, scene, definition, content, recomputedImages };
 }
 

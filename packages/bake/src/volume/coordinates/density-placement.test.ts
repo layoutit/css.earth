@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { densityPlacementTransform, parseDensityPlacement, placeDensitySlices } from './density-placement.ts';
-import type { VolumeSlices } from '@cssearth/objects';
+import { densityPlacementTransform, placeDensitySlices } from './density-placement.ts';
+import { parseDensityPlacement, type VolumeSlices } from '@cssearth/objects';
 const placement = parseDensityPlacement({ schema: 'cssearth-density-placement@1', scale: 2, rotationZDegrees: 90,
   pivotUnits: [1, 2, 3], translationUnits: [4, 5, 6] });
 test('model placement transports full support with invertible points and rotated normals', () => {
@@ -9,7 +9,6 @@ test('model placement transports full support with invertible points and rotated
   assert.deepEqual(point, [5, 9, 11]); assert.deepEqual(transform.inverse(point), [2, 2, 4]);
   const normal = transform.normal([1, 0, 0]); assert.ok(Math.abs(normal[0]) < 1e-12); assert.equal(normal[1], 1);
   assert.deepEqual(transform.bounds({ min: [1, 2, 3], max: [2, 3, 4] }), { min: [3, 7, 9], max: [5, 9, 11] });
-  assert.throws(() => parseDensityPlacement({ ...placement, scale: 0 }));
 });
 test('authored placement changes coordinates only, retaining every texture path, pixel grid, UV and alpha statistic', () => {
   const quad = { id: 'z0', axis: 'z' as const, sliceIndex: 0, texturePath: 'slice.png', widthPx: 3, heightPx: 4,

@@ -1,4 +1,4 @@
-import { isDeepStrictEqual } from 'node:util';
+import { requireWorldNavigationReceiptIdentity, requireWorldNavigationReceiptContext, samePreparedWorldFrame } from '@cssearth/objects';
 import { resolve } from 'node:path';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import type { RuntimeSourceReader } from '../runtime-source/index.ts';
@@ -23,31 +23,6 @@ const fail = (detail: string): never => { throw new TypeError(`Authored physical
  * declared in the manifest, the frame must carry valid units, and an authored context must reproduce it.
  * `requireAuthoredWorldFrame` continues from here with the restored scene and runtime.
  */
-/** A physical frame is the same frame when every number agrees to double precision.
- *
- * The descriptor, the receipt and the prepared scene each hold the frame as some run computed it, and two runs
- * that multiply the same rotation in a different order differ in the last few digits: `hd-189733b` carries a
- * `presentationToReference` whose worst relative difference is 8.8e-13. Bit equality would make every such pair
- * a contract failure while nothing about the frame had changed. The bound is far above that roundoff and far
- * below any real change of origin, scale or orientation. Everything that is not a number still matches exactly.
- */
-const FRAME_TOLERANCE = 1e-9;
-export function sameFrame(a: unknown, b: unknown): boolean {
-  if (typeof a === 'number' && typeof b === 'number') {
-    if (Number.isNaN(a) && Number.isNaN(b)) return true;
-    if (!Number.isFinite(a) || !Number.isFinite(b)) return a === b;
-    return Math.abs(a - b) <= FRAME_TOLERANCE * Math.max(1, Math.abs(a), Math.abs(b));
-  }
-  if (Array.isArray(a) || Array.isArray(b)) {
-    return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((value, index) => sameFrame(value, b[index]));
-  }
-  if (a && b && typeof a === 'object' && typeof b === 'object') {
-    const left = a as Record<string, unknown>, right = b as Record<string, unknown>;
-    const keys = Object.keys(left);
-    return keys.length === Object.keys(right).length && keys.every(key => key in right && sameFrame(left[key], right[key]));
-  }
-  return isDeepStrictEqual(a, b);
-}
 
 export async function requireAuthoredWorldFrameReceipt({ descriptor: descriptorInput, directory, readText, closure }: AuthoredWorldFrameReceiptInput) {
   const descriptor = requireRecord(descriptorInput, 'Authored descriptor');
@@ -65,17 +40,11 @@ export async function requireAuthoredWorldFrameReceipt({ descriptor: descriptorI
     const path = requireString(source.path, 'Authored source path');
     if (!records.some(entry => `source/${String(entry.path)}` === path)) throw new TypeError(`Authored physical frame source ${path} is not declared in the manifest.`);
   }
-  if (receipt.schema !== 'cssearth-world-navigation-preparation@1' || receipt.id !== descriptor.id ||
-    !sameFrame(receipt.frame, frame)) fail('receipt differs from its descriptor');
-  if (typeof frame.epochJdTt !== 'number' || !Number.isFinite(frame.epochJdTt) || ![frame.bodyRadiusM, frame.metersPerUnit].every(value => typeof value === 'number' && Number.isFinite(value) && value > 0)) fail('has invalid physical units');
+  requireWorldNavigationReceiptIdentity(receipt, descriptor.id, frame);
   const context = sources.find(source => source.id === 'world-context');
   if (context) {
     const authored = requireRecord(JSON.parse(await readText(resolve(directory, requireString(context.path, 'World context source path')))), 'Authored world context');
-    const authoredFrame = requireRecord(authored.frame, 'Authored context frame');
-    const fields = ['referenceFrame', 'epochJdTt', 'originM', 'presentationToReference', 'metersPerUnit', 'bodyRadiusM'];
-    if (authoredFrame.orbitUpReference !== undefined) fields.push('orbitUpReference');
-    const numerical = Object.fromEntries(fields.map(field => [field, authoredFrame[field]]));
-    if (receipt.model !== 'authored-context-focus' || !sameFrame(frame, numerical)) fail('does not reproduce its authored context');
+    requireWorldNavigationReceiptContext(receipt, frame, authored.frame);
   }
   return { receipt, frame, recipe, contextual: Boolean(context) };
 }
@@ -85,7 +54,7 @@ export async function requireAuthoredWorldFrame({ scene: sceneInput, runtime: ru
   const scene = requireRecord(sceneInput, 'Authored scene');
   const runtime = requireRecord(runtimeInput, 'Authored runtime');
   const { receipt, frame, recipe, contextual } = await requireAuthoredWorldFrameReceipt(input);
-  if (scene.worldFrame !== undefined && !sameFrame(scene.worldFrame, frame)) fail('differs from the source scene frame');
+  if (scene.worldFrame !== undefined && !samePreparedWorldFrame(scene.worldFrame, frame)) fail('differs from the source scene frame');
   if (contextual) return;
   const camera = requireRecord(runtime.camera, 'Authored runtime camera');
   const shape = requireRecord(recipe.shape, 'Authored shape');

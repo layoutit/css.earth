@@ -1,12 +1,13 @@
 import { prepareDatasetCategoryLegend, prepareDatasetScaleLegend } from "./prepared-dataset-legends.ts";
-import type { DatasetRecipe, PreparedRasterAssets } from "./types.ts";
+import type { PreparedRasterAssets } from './types.ts';
+import type { ContentDatasetRecipe } from '@cssearth/objects';
 
 const assetUrl = (objectId: string, asset: string | undefined): string | undefined => {
   if (!asset) return undefined;
   return asset.startsWith("/") ? asset : `/scenes/${objectId}/${asset}`;
 };
 
-function prepareLegend(objectId: string, legend: DatasetRecipe["legend"]) {
+function prepareLegend(objectId: string, legend: ContentDatasetRecipe["legend"]) {
   if (!legend) return undefined;
   if (legend.kind === "ranges") {
     if (!legend.ranges?.length || legend.ranges.some(range =>
@@ -78,7 +79,7 @@ export function validateDatasetSteps(objectId: string, controls: readonly { id: 
 
 export function prepareDatasets(
   objectId: string,
-  recipe: { title: { label: string; src: string; width: number; height: number }; defaultDataset: string; controls: DatasetRecipe[] },
+  recipe: { title: { label: string; src: string; width: number; height: number }; defaultDataset: string; controls: ContentDatasetRecipe[] },
   assets: PreparedRasterAssets = {},
 ) {
   if (recipe.controls.length && !recipe.controls.some((control) => control.id === recipe.defaultDataset)) {

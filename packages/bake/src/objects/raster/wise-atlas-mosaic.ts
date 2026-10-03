@@ -4,19 +4,18 @@
  * pair of overlapping tiles contributes the median of their difference, and one constant per tile
  * is solved by least squares with a zero-mean gauge. No pixel is interpolated: each tile pixel
  * centre lands in exactly one output pixel, whose value is the mean of what lands in it. */
+import type { TilePins, WiseBand } from '@cssearth/objects';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { readFitsImage } from '@cssearth/fits';
-import { hasErrorCode, median, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { hasErrorCode, median, requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { offsetComponents, solveConstantOffsets } from './background-offsets.ts';
 
 export const WISE_ATLAS_BANDS = { W1: { band: 1, magzp: 20.5 }, W2: { band: 2, magzp: 19.5 }, W3: { band: 3, magzp: 18 }, W4: { band: 4, magzp: 13 } } as const;
-export type WiseBand = keyof typeof WISE_ATLAS_BANDS;
 export const WISE_ATLAS_REFERENCE = 'https://wise2.ipac.caltech.edu/docs/release/allsky/expsup/sec4_4f.html';
 export { MONTAGE_BACKGROUND_REFERENCE } from './background-offsets.ts';
 
-export interface TilePins { readonly schema: 'cssearth-wise-atlas-tiles@1'; readonly band: WiseBand; readonly tiles: readonly { readonly coaddId: string; readonly bytes: number }[] }
 export interface SkyGrid { readonly width: number; readonly height: number; readonly fovDeg: number; readonly centerIcrsDegrees: readonly [number, number] }
 
 /** A TAN output grid as a recipe states it. CDS hips2fits refuses requests above 50 million pixels; every route keeps that limit. */
@@ -30,18 +29,6 @@ export function parseSkyGrid(value: unknown): SkyGrid {
   return { width, height, fovDeg, centerIcrsDegrees: [center[0]!, center[1]!] };
 }
 
-export function parseTilePins(value: unknown): TilePins {
-  const row = requireRecord(value, 'WISE atlas tiles');
-  if (row.schema !== 'cssearth-wise-atlas-tiles@1' || typeof row.band !== 'string' || !Object.hasOwn(WISE_ATLAS_BANDS, row.band)) throw new TypeError('Unsupported WISE atlas tile list.');
-  const tiles = requireArray(row.tiles).map(raw => {
-    const tile = requireRecord(raw, 'WISE atlas tile'), coaddId = requireString(tile.coaddId, 'coadd_id');
-    const bytes = requireFiniteNumber(tile.bytes, 'Tile bytes');
-    if (!/^\d{4}[pm]\d{3}_ac51$/u.test(coaddId) || !Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`Invalid WISE atlas tile pin: ${coaddId}`);
-    return { coaddId, bytes };
-  });
-  if (!tiles.length || new Set(tiles.map(tile => tile.coaddId)).size !== tiles.length) throw new TypeError('WISE atlas tiles must be unique and non-empty.');
-  return { schema: row.schema, band: row.band as WiseBand, tiles };
-}
 
 export function wiseAtlasUrl(coaddId: string, band: WiseBand) {
   return `https://irsa.ipac.caltech.edu/ibe/data/wise/allwise/p3am_cdd/${coaddId.slice(0, 2)}/${coaddId.slice(0, 4)}/${coaddId}/${coaddId}-w${WISE_ATLAS_BANDS[band].band}-int-3.fits.gz`;
