@@ -53,7 +53,8 @@ gesture.
   (`packages/renderer/src/stars/opacity-clock.ts`), and one budget a frame that every owner shares in turn. A frame
   starts at 16 units and can grow to 64; after a frame over 25 ms the pacer waits a frame and halves it. Each owner says
   what holds its work: any motion (leaf-box steps and the seam outset, because a resized leaf repaints), only a coast, or
-  nothing (a mesh's reveal, a mount's activation and a body's feature names, which land during a zoom or a flight).
+  nothing (a mesh's reveal, a mount's activation, a body's feature names and a dot bank's load, which land during a zoom
+  or a flight).
 
 ## Mesh detail survives input reversals
 
@@ -82,7 +83,7 @@ These change paint every frame on purpose, and each has a budget:
 | Exception | What changes | Budget | Why it stays |
 | --- | --- | --- | --- |
 | Orbit strokes (`solar-system/prepared-orbit-lines.ts`) | SVG `points`, `stroke-opacity` | the visible runs | Static 3D chords cost 14 ms against 3.0 ms for the shared SVG ([prepared orbit strokes](prepared-orbit-strokes.md)) |
-| Batched star points (`universe/batched-spatial-points.ts`, `universe/point-layer.ts`) | SVG paths of round-capped dots (`M x y h.1`: a zero-length cap is painted twice by WebKit), one per prepared paint color with its alpha byte, in one svg layer for the banks mounted next to each other (on the iPad at the Milky Way a layer per bank left 37 and 77 frames over 20 ms in 690 and 202 MB of layers, the shared layers 25 and 25 and 130 MB, 2026-10-03); a bank dims by its strokes' opacity, since a group's opacity is an offscreen pass on each repaint; a turn or a zoom warps the layer's last paint, and dots a zoom adds arrive through the pacer; a camera whose travel moves the dots repaints them every frame (keeping the paint on alternate frames left more late frames on the iPad: 72 to 75 over 20 ms in 240 against 34 to 38, 2026-10-03), and those paints leave out the margin a turn warps in, a third of the dots written, which the pause paints back | One retained path per color | Camera motion changes paint, never DOM shape |
+| Batched star points (`universe/batched-spatial-points.ts`, `universe/point-layer.ts`) | SVG paths of round-capped dots (`M x y h.1`: a zero-length cap is painted twice by WebKit), one per prepared paint color with its alpha byte, in one svg layer for the banks mounted next to each other (on the iPad at the Milky Way a layer per bank left 37 and 77 frames over 20 ms in 690 and 202 MB of layers, the shared layers 25 and 25 and 130 MB, 2026-10-03); a bank dims by its strokes' opacity, since a group's opacity is an offscreen pass on each repaint; a turn or a zoom warps the layer's last paint, and dots a zoom adds arrive through the pacer; a bank that arrives during a zoom is read, styled and resolved in the pacer's slices and drawn once it is whole (the nearby galaxies' 39,916 points were one frame of 172 to 218 ms on the iPad and are frames of at most 33 ms, 2026-10-03); a camera whose travel moves the dots repaints them every frame (keeping the paint on alternate frames left more late frames on the iPad: 72 to 75 over 20 ms in 240 against 34 to 38, 2026-10-03), and those paints leave out the margin a turn warps in, a third of the dots written, which the pause paints back | One retained path per color | Camera motion changes paint, never DOM shape |
 | Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
 | Sky faces (`sky/prepared-sky-runtime.ts`) | `visibility` and the first `background-image` as a face crosses the view edge | the faces in view (at most 3) | A face's layer is about 85 MB at 3x; staging one ahead or keeping one through a spin would multiply memory |
 

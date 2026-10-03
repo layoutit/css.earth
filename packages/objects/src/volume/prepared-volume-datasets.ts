@@ -37,8 +37,12 @@ export interface PreparedVolumeDatasets {
   readonly provenance?: unknown;
 }
 export type PreparedVolumeDatasetBank = PreparedVolumeDatasets;
+/** The banks this validator has returned: frozen, so one handed back is answered as it is (css-volume-validation.ts). */
+const validated = new WeakSet<object>();
+
 export function validatePreparedVolumeDatasets(input: unknown): PreparedVolumeDatasets {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Prepared volume datasets must be an object.');
+  if (validated.has(input)) return input as PreparedVolumeDatasets;
   const value = input as PreparedVolumeDatasets, validId = (id: unknown) => typeof id === 'string' && /^[a-z][a-z0-9-]*$/u.test(id);
   if (value.schema !== PREPARED_VOLUME_DATASETS_SCHEMA || !validId(value.id) || !Number.isFinite(value.framingRadiusUnits) ||
       value.framingRadiusUnits <= 0 || !Array.isArray(value.datasets) || !value.datasets.length ||
@@ -81,11 +85,13 @@ export function validatePreparedVolumeDatasets(input: unknown): PreparedVolumeDa
       !Number.isFinite(visibility.fullAboveRadiusPixels) || visibility.fullAboveRadiusPixels <= visibility.hiddenBelowRadiusPixels) {
     throw new TypeError('Prepared point visibility needs increasing non-negative projected-radius thresholds.');
   }
-  return Object.freeze({ schema: value.schema, id: value.id, defaultDataset: value.defaultDataset,
+  const bank: PreparedVolumeDatasets = Object.freeze({ schema: value.schema, id: value.id, defaultDataset: value.defaultDataset,
     contextVisibility: value.contextVisibility ?? 'galactic', framingRadiusUnits: value.framingRadiusUnits, datasets: Object.freeze(datasets), starsEnabled: value.starsEnabled ?? true,
     ...(value.attachedTo === undefined ? {} : { attachedTo: value.attachedTo }),
     pointVisibility: Object.freeze({ ...visibility }),
     ...(Object.hasOwn(value, 'provenance') ? { provenance: value.provenance } : {}) });
+  validated.add(bank);
+  return bank;
 }
 
 /** Bounds describe coverage; the physical embedding and point identities must not change with a dataset. */

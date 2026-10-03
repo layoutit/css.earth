@@ -190,6 +190,8 @@ test('a sized palette draws one color at two radii as two paths, and refuses a r
 test('a stacked bank\'s levels are one layer, which switches on in one frame', async () => {
   const { document, window } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   const frames: FrameRequestCallback[] = [];
+  // linkedom's window is the global object: what this test sets is put back at its end, or the tests after it run on its clock.
+  const clock = ['requestAnimationFrame', 'cancelAnimationFrame', 'performance'] as const, before = clock.map(name => Object.getOwnPropertyDescriptor(window, name));
   Object.assign(window, { requestAnimationFrame: (callback: FrameRequestCallback) => frames.push(callback), cancelAnimationFrame() {}, performance: { now: () => 0 } });
   const points = [[0, 0, -10], [0, 1, -10], [1, 0, -10]];
   const stacked = { ...bank, points, ...baked(points, [1, 1, 1]), appearance: { ...bank.appearance, opacity: 1, levels: [
@@ -197,14 +199,22 @@ test('a stacked bank\'s levels are one layer, which switches on in one frame', a
   const field = mountCataloguePoints({ host, url: '/dots.json', loadBank: async () => stacked });
   const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
   field.publish({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 1] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
-  await new Promise(resolve => setTimeout(resolve, 0));
-  const layers = [...field.root.children] as HTMLElement[];
-  assert.equal(layers.length, 1, 'three levels, one layer');
-  const hidden = () => layers.filter(layer => layer.style.visibility === 'hidden').length;
-  assert.equal(hidden(), 1);
-  frames.shift()!(0);
-  assert.equal(hidden(), 0);
-  field.destroy();
+  try {
+    await new Promise(resolve => setTimeout(resolve, 0));
+    // The bank's load runs in slices of the document's pacer: nothing mounts in the task the bank arrived in, and a bank
+    // this small is read, mounted, resolved and painted in the first frame's slice.
+    assert.equal(field.root.children.length, 0, 'nothing mounts before a frame');
+    frames.shift()!(0);
+    const layers = [...field.root.children] as HTMLElement[];
+    assert.equal(layers.length, 1, 'three levels, one layer');
+    const hidden = () => layers.filter(layer => layer.style.visibility === 'hidden').length;
+    assert.equal(hidden(), 1);
+    frames.shift()!(0);
+    assert.equal(hidden(), 0);
+    field.destroy();
+  } finally {
+    clock.forEach((name, index) => { if (before[index]) Object.defineProperty(window, name, before[index]!); else Reflect.deleteProperty(window, name); });
+  }
 });
 
 test('an inner level with its own screen budget moves the bank\'s to it as the level appears', async () => {

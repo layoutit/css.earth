@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { parseCataloguePoints } from './catalogue-point-bank.js';
+import { parseCataloguePoints, parseCataloguePointSteps } from './catalogue-point-bank.js';
 import { catalogueCells, cataloguePointSpread, decodeCatalogueBankBinary } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 
@@ -50,4 +50,19 @@ test('catalogue point banks refuse malformed points and appearances, naming the 
   assert.throws(() => parseCataloguePoints(unspread), /test-stars \(catalogue points\): catalogue point bank field spread must be .* got undefined/);
   assert.throws(() => parseCataloguePoints({ ...bank, spread: { normal: [1, 1, 0], across: 1, along: 0 } }), /test-stars \(catalogue points\): catalogue point bank field spread/);
   assert.throws(() => parseCataloguePoints({ ...bank, spread: { ...bank.spread, across: -1 } }), /test-stars \(catalogue points\): catalogue point bank field spread/);
+});
+
+test('a bank read in steps is the bank read in one call, a few points a step, and refuses the same point', () => {
+  const points = Array.from({ length: 10 }, (_, index) => [index, 0, -10, index % 2]);
+  const colored = { ...bank, appearance: { ...bank.appearance, palette: ['#8ec9ff', '#ffc070'] }, points, ...baked(points) };
+  const steps = parseCataloguePointSteps(colored, 'steps', 4);
+  let step = steps.next(), pauses = 0;
+  for (; !step.done; step = steps.next()) pauses++;
+  // Ten points, four a step: a pause after the fourth and the eighth, and one before the cells are read.
+  assert.equal(pauses, 3);
+  assert.deepEqual(step.value, parseCataloguePoints(colored, 'steps'));
+  const broken = parseCataloguePointSteps({ ...colored, points: points.map((point, index) => index === 9 ? [9, 0, -10, 2] : point) }, 'steps', 4);
+  assert.equal(broken.next().done, false);
+  assert.equal(broken.next().done, false);
+  assert.throws(() => broken.next(), /test-stars: point 9 names palette color 2/);
 });
