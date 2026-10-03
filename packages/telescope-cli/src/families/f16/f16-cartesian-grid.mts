@@ -1,5 +1,5 @@
-import { DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, parsePreparedDensityVolume } from '@cssearth/objects';
 /** Bounded physical Cartesian FITS grids. Astropy owns FITS/WCS interpretation. */
+import { DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, parsePreparedDensityVolume } from '@cssearth/objects';
 import {spawn} from 'node:child_process';
 import {copyFile,mkdir,readFile,readdir,stat,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
