@@ -1,0 +1,28 @@
+{
+  "id": "m43",
+  "classification": "nebula",
+  "order": 5243,
+  "physical": {
+    "name": "M43",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M43 is recorded: it is an extended nebula, and its package frames it at 0.42 pc (object.json worldFrame.bodyRadiusM), half its picture's short side, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 83.87916666666666,
+    "declinationDegrees": -5.27,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 414,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "SIMBAD, M 43 (through the Nebula Lab's Messier inventory)",
+      "distance": "Menten et al. (2007), The distance to the Orion Nebula, A&A 474, 515: 414 ± 7 pc from radio parallaxes of four stars in the Orion Nebula Cluster; M43 is part of the same nebula complex, so it takes the Orion Nebula's distance (https://arxiv.org/abs/0709.0485)",
+      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Zero: no radial velocity is recorded for the nebula here."
+    }
+  }
+}

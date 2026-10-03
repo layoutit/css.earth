@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m16-layers",
+  "entries": [
+    {
+      "id": "eso0926a",
+      "subject": "ESO eso0926a",
+      "status": "included",
+      "finding": "The Eagle Nebula: B (451 nm), V (539 nm) and R (651 nm); 4000 × 4000 px over 32.08 × 32.08 arcmin. The file's embedded sky tags, used as they are: 0.4811 arcsec per pixel, north 0.0° left of vertical, the frame's centre at 274.7059174°, -13.7638973°. Not measured against Gaia here.",
+      "evidence": [
+        "https://www.eso.org/public/images/eso0926a/",
+        "https://www.eso.org/public/outreach/copyright/"
+      ]
+    },
+    {
+      "id": "volume",
+      "subject": "A volume of the Eagle Nebula",
+      "status": "deferred",
+      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "evidence": [
+        "https://www.eso.org/public/images/eso0926a/"
+      ],
+      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+    }
+  ]
+}

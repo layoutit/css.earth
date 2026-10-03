@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "M27, NGC 6853, Dumbbell Nebula",
+  "publisher": "NOIRLab",
+  "sourceId": "noao-m27",
+  "sourcePage": "https://noirlab.edu/public/images/noao-m27/",
+  "download": "https://storage.noirlab.edu/media/archives/images/large/noao-m27.jpg",
+  "credit": "REU program/NOIRLab/NSF/AURA",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      1750,
+      1500
+    ],
+    "bands": [
+      "Kitt Peak 2.1-meter"
+    ],
+    "fieldOfViewDeg": [
+      0.1484008,
+      0.1272007
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      1750,
+      1500
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.002087,
+    "lineOfNodesPaDeg": 179.965,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 7.5 arcsec from the nebula's position, which is the whole of the recipe's inclination. Not a measured orientation of the nebula."
+  },
+  "registration": {
+    "method": "The file's embedded sky tags, used as they are: 0.3053 arcsec per pixel, north 2.1° left of vertical, the frame's centre at 299.9038269°, 22.7212155°. Not measured against Gaia here.",
+    "pixelArcsec": 0.3053,
+    "northClockwiseDeg": -2.06
+  },
+  "displayModel": "The picture lies on one flat plane facing the Sun at the nebula's distance. Nothing in the picture has depth: seen from the side it is a line.",
+  "coverage": "The published frame inside a circle: the picture fades out between 70% and 98% of half its long side: the nebula stands on dark sky, so the frame's long edges show no straight line and the whole nebula is kept. Stars in front of and behind the nebula stand on its plane here, whatever their own distances.",
+  "acquisition": {
+    "url": "https://storage.noirlab.edu/media/archives/images/large/noao-m27.jpg",
+    "dimensions": [
+      1750,
+      1500
+    ],
+    "operation": "Download the publisher's JPEG; no crop or resample."
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m76",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Little Dumbbell Nebula",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 30527548808100.742
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Little Dumbbell Nebula",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 280318745,
+      "description": "The Little Dumbbell Nebula is a planetary nebula about 1,359 parsecs away.",
+      "aliases": [
+        "M76",
+        "Messier 76",
+        "NGC 650",
+        "NGC 651",
+        "Cork Nebula",
+        "Barbell Nebula"
+      ],
+      "order": 5276,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        23507100160621335000,
+        11253594828819325000,
+        32853072936628320000
+      ],
+      "presentationToReference": [
+        0.7088223441266541,
+        0,
+        0.7053870458597855,
+        0.6471799613923246,
+        0.3977771559319137,
+        -0.6503317859300338,
+        0.28058685293331986,
+        -0.9174820620691818,
+        -0.2819533361076927
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 98475963897099.17,
+      "bodyRadiusM": 30527548808100744
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

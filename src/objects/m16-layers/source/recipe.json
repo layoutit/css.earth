@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m16-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      4000,
+      4000
+    ],
+    "originalDimensions": [
+      4000,
+      4000
+    ],
+    "publisherUrl": "https://www.eso.org/public/images/eso0926a/",
+    "downloadUrl": "https://cdn.eso.org/images/publicationjpg/eso0926a.jpg",
+    "credit": "ESO",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 274.7059174,
+    "centerDecDeg": -13.7638973,
+    "fieldOfViewDeg": [
+      0.534592,
+      0.534592
+    ],
+    "northClockwiseDeg": -0.005
+  },
+  "target": {
+    "centerRaDeg": 274.67526577,
+    "centerDecDeg": -13.78958993,
+    "distancePc": 1698.44937756
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.03932,
+    "lineOfNodesPaDeg": 139.203,
+    "thicknessKpc": 0.00000792,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.0077651,
+    "supportTaperFraction": 0.7,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc"
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

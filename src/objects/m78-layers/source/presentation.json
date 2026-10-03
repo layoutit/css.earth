@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m78-layers",
+  "name": "M78",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m78-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m78-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m78-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "ESO · optical",
+      "title": "M78 in visible light",
+      "description": "ESO's photograph of M78, in B, V, R and H-alpha. It stands as one flat picture facing the Sun at the nebula's distance.",
+      "summary": "A flat picture facing the Sun at the nebula's distance; nothing in it has depth.",
+      "detail": "4000 × 3876 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "B, V, R and H-alpha"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4000 × 3876"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "34.43 × 33.36 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m78-layers/source/source.jpg",
+        "url": "https://cdn.eso.org/images/publicationjpg/eso1105a.jpg"
+      }
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m97",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Owl Nebula",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 26206425247332.89
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Owl Nebula",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 167283749,
+      "description": "The Owl Nebula is a planetary nebula about 811 parsecs away.",
+      "aliases": [
+        "M97",
+        "Messier 97",
+        "NGC 3587"
+      ],
+      "order": 5297,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -14068926953719888000,
+        2811554972987618000,
+        20504285610342300000
+      ],
+      "presentationToReference": [
+        -0.794981903231836,
+        0,
+        0.6066331457593522,
+        0.5565750294908051,
+        0.3977771559319137,
+        0.7293816358848277,
+        0.2413048074141852,
+        -0.9174820620691818,
+        0.3162256404848996
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 84536855636557.72,
+      "bodyRadiusM": 26206425247332892
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
