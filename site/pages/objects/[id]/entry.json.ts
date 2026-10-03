@@ -10,8 +10,8 @@ export const getStaticPaths: GetStaticPaths = async () => OBJECT_ENTRY_IDS.map(i
 export const GET: APIRoute = async ({ params }) => {
   const found = params.id ? objectEntry(params.id) : null;
   if (!found) return new Response('Not found', { status: 404 });
-  // A body the world summary does not hold whole names its holder here (`world`), with its own row when it is a star that
-  // is its own holder of one body: a page finds a body through the entry it already reads to open it.
+  // A world body names the files to read for it here (`world`), root first, with its own row when it is a plain-dot star
+  // with nothing round it: a page finds a body through the entry it already reads to open it.
   const world = worldPlaceOf(params.id!);
   const entry = world ? { ...(found as Record<string, unknown>), world } : found;
   // A flight covers its arrival with the entry's photograph, read as written: it carries its published address.

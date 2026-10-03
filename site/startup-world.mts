@@ -4,24 +4,25 @@ import { readWorldPlace } from './object-entries.mts';
 /** The world summary's address: bundled by Vite for the browser, the checked-in file in Node (`world-context-plan.mts`). */
 export const WORLD_SUMMARY_SOURCE = new URL('../src/objects/sun/prepared/world-context-summary.json', import.meta.url);
 
-/** The holder of a page's own body, as the page names it (`ObjectLayout.astro`): `<meta name="cssearth-world-holder">`,
- * absent when the summary holds the body whole. `row` says the body is a star that is its own holder of one body: its row
- * is in its object entry, not a file. */
-export function pageWorldPlace(document: Document | undefined): { readonly holder: string; readonly row: boolean } | null {
-  const meta = document?.querySelector<HTMLMetaElement>('meta[name="cssearth-world-holder"]');
-  return meta?.content ? { holder: meta.content, row: meta.dataset.row !== undefined } : null;
+/** The world files a page reads at startup, root first, as the page names them (`ObjectLayout.astro`):
+ * `<meta name="cssearth-world-files">`, with `data-row` naming the page's body when it is a plain-dot star whose row its
+ * object entry carries. */
+export function pageWorldFiles(document: Document | undefined): { readonly files: readonly string[]; readonly row?: string } {
+  const meta = document?.querySelector<HTMLMetaElement>('meta[name="cssearth-world-files"]');
+  const files = meta?.content.split(' ').filter(Boolean) ?? [];
+  return { files, ...(meta?.dataset.row ? { row: meta.dataset.row } : {}) };
 }
 
-/** What a page read before its application loaded: the world summary, and the page's own system when another file holds it. */
-export interface StartupWorld { readonly summary: unknown; readonly system: { readonly id: string; readonly value: unknown } | null }
+/** What a page read before its application loaded: the world summary and its startup files, root first. */
+export interface StartupWorld { readonly summary: unknown; readonly files: readonly { readonly id: string; readonly value: unknown }[] }
 const KEY = '__cssEarthWorld';
 /** The world this page read before its application, or undefined in Node and on a page that did not read one. */
 export function startupWorld(): StartupWorld | undefined {
   const value: unknown = typeof window === 'undefined' ? undefined : Reflect.get(window, KEY);
-  if (!value || typeof value !== 'object' || !('summary' in value) || !('system' in value)) return undefined;
-  const system: unknown = value.system;
-  if (system !== null && !(typeof system === 'object' && 'id' in system && typeof system.id === 'string' && 'value' in system)) return undefined;
-  return { summary: value.summary, system: system === null ? null : { id: String(system.id), value: system.value } };
+  if (!value || typeof value !== 'object' || !('summary' in value) || !('files' in value) || !Array.isArray(value.files)) return undefined;
+  const files: unknown[] = value.files;
+  if (!files.every(file => typeof file === 'object' && file !== null && 'id' in file && typeof file.id === 'string' && 'value' in file)) return undefined;
+  return { summary: value.summary, files: files as StartupWorld['files'] };
 }
 
 /** The world a page reads before it imports its application (`ObjectLayout.astro`), so no module waits for it.
@@ -37,13 +38,14 @@ export async function loadStartupWorld(windowTarget: Window): Promise<void> {
     if (!response.ok) throw new Error(`${name} request ${String(url)} failed: ${response.status}.`);
     return response.json() as Promise<unknown>;
   };
-  // The summary and the page's own holder are asked for together: the page names its holder, so neither waits for the other.
-  const place = pageWorldPlace(windowTarget.document);
-  const [summary, value] = await Promise.all([read(WORLD_SUMMARY_SOURCE, 'Prepared world context'),
-    !place ? null : place.row ? readWorldPlace(place.holder).then(own => {
-      if (own?.row === undefined) throw new TypeError(`/objects/${place.holder}/entry.json carries no world row for a star that is its own holder.`);
-      return own.row;
-    }) : read(`/world/systems/${place.holder}.json`, 'Prepared world system')]);
-  const world: StartupWorld = { summary, system: place ? { id: place.holder, value } : null };
+  // The summary and every file the page names are asked for together: none waits for another.
+  const own = pageWorldFiles(windowTarget.document);
+  const [summary, row, ...values] = await Promise.all([read(WORLD_SUMMARY_SOURCE, 'Prepared world context'),
+    own.row === undefined ? null : readWorldPlace(own.row).then(place => {
+      if (place?.row === undefined) throw new TypeError(`/objects/${own.row}/entry.json carries no world row for a plain-dot star.`);
+      return place.row;
+    }),
+    ...own.files.map(id => read(`/world/systems/${id}.json`, 'Prepared world file'))]);
+  const world: StartupWorld = { summary, files: [...own.files.map((id, at) => ({ id, value: values[at] })), ...(own.row === undefined ? [] : [{ id: own.row, value: row }])] };
   Reflect.set(windowTarget, KEY, world);
 }

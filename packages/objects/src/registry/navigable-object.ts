@@ -11,6 +11,8 @@ import type { OverviewHolding, OverviewZoom } from './overview-object.js';
  */
 export type NavigableObject<Scene = unknown, Signal = unknown> = ObjectEntry<Scene, Signal> & {
   readonly aliases: readonly string[];
+  /** The one object it is inside (object-tree.ts); only the root has none. */
+  readonly parent?: string;
   /** The names an object with alternate names is found by: its id, its name and each alias. */
   readonly searchNames?: readonly string[];
   /** Its place on the zoom ladder, for an object the view hands over to when the camera backs far enough out of a star's

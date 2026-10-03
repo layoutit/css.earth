@@ -19,14 +19,17 @@ export function readObjectEntry(id: string): Promise<unknown | null> {
   return entry;
 }
 
-/** Where the world keeps a body the summary does not hold: its holder, whose file has it (`/world/systems/<holder>.json`),
- * with the body's own row when it is a star that is its own holder of one body, which has no file. */
-export interface WorldPlace { readonly holder: string; readonly row?: unknown }
-/** A body's place in the world, from its entry's `world`; null for a body the summary holds whole, or no world body. */
+/** Where the world keeps a body: the files to read for it, root first (`/world/systems/<id>.json`: the file of the object it
+ * is inside and those of the objects that one is inside), with the body's own row when it is a plain-dot star with nothing
+ * round it, which no file has. */
+export interface WorldPlace { readonly files: readonly string[]; readonly row?: unknown }
+/** A body's place in the world, from its entry's `world`; null for an object that is no world body. */
 export async function readWorldPlace(id: string): Promise<WorldPlace | null> {
   const entry = await readObjectEntry(id);
   const world = entry && typeof entry === 'object' && 'world' in entry ? entry.world : undefined;
   if (world === undefined) return null;
-  if (!world || typeof world !== 'object' || !('holder' in world) || typeof world.holder !== 'string') throw new TypeError(`/objects/${id}/entry.json: world must name its holder; got ${JSON.stringify(world)}.`);
-  return { holder: world.holder, ...('row' in world ? { row: world.row } : {}) };
+  if (!world || typeof world !== 'object' || !('files' in world) || !Array.isArray(world.files) || !world.files.every(file => typeof file === 'string')) {
+    throw new TypeError(`/objects/${id}/entry.json: world must name the files to read for it; got ${JSON.stringify(world)}.`);
+  }
+  return { files: world.files as string[], ...('row' in world ? { row: world.row } : {}) };
 }

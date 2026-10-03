@@ -11,12 +11,5 @@ export const systemObjectId = (hostId: string): string => hostId === SOLAR_HOST 
 export const systemHostId = (id: string | undefined): string | null =>
   id === SOLAR_SYSTEM ? SOLAR_HOST : id !== undefined && id.endsWith(SUFFIX) && id.length > SUFFIX.length ? id.slice(0, -SUFFIX.length) : null;
 
-/** The system object that owns a host's system view (its camera candidates): the host's own system, or for a star bound to
- * another (Epsilon Indi Ba to A) the system it belongs to on the map. `boundTo` gives a body's host when it is bound. */
-export function systemViewOwner(hostId: string, boundTo: (id: string) => string | undefined): string {
-  let root = hostId;
-  for (let steps = 0, next = boundTo(root); next !== undefined && steps < 64; steps++, next = boundTo(root)) root = next;
-  return systemObjectId(root);
-}
-/** Where a system view lives in its owner's package, relative to that package's `prepared/`. */
+/** Where a system view lives in the package of the system its host is inside, relative to that package's `prepared/`. */
 export const systemViewFile = (hostId: string): string => `views/${hostId}.json`;

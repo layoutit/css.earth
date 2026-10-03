@@ -1,4 +1,4 @@
-import { defineObjects, levelOf } from '@cssearth/objects';
+import { checkObjectTree, defineObjects, levelOf } from '@cssearth/objects';
 import type { CatalogEntry as RegistryCatalogEntry, NavigableObject as RegistryNavigableObject, ObjectEntry as RegistryObjectEntry } from '@cssearth/objects';
 import { CATALOGUE_ENTRIES } from './prepared-catalogue.mjs';
 import { objectFromEntry } from './object-directory.mts';
@@ -12,6 +12,7 @@ export type NavigableObject = RegistryNavigableObject<SceneFactory, AbortSignal>
 /** The single application registry: every entry of the prepared catalogue (`pnpm prepare:catalog`), decoded as a page's
  * object directory decodes the one entry it loads. */
 export const OBJECTS = defineObjects<NavigableObject>(CATALOGUE_ENTRIES.map(objectFromEntry));
+checkObjectTree(OBJECTS);
 
 /** The objects with a scene of their own: every object but a system, which mounts its host's scene. */
 export const SCENE_OBJECTS = Object.freeze(OBJECTS.filter(object => !object.system));

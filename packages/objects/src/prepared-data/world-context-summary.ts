@@ -31,7 +31,7 @@ export function expandWorldContextSummary(value: unknown): unknown {
 /** One system's file in the shape `parsePreparedWorldSystem` checks. `placed` gives each body the world context already
  * holds (its star, at least), for an orbit centred on it. */
 export function expandWorldSystem(value: unknown, placed: (id: string) => unknown): Record<string, unknown> {
-  const input = record(value, 'world system', ['schema', 'id', 'systemNames', 'discoveries', 'billboard', 'orbitCenters', 'orbitBanks', 'bodies']);
+  const input = record(value, 'world system', ['schema', 'id', 'systemNames', 'discoveries', 'billboard', 'orbitCenters', 'orbitBanks', 'bodies', 'anywhere', 'places']);
   const where = `world system ${String(input.id)}`;
   if (input.schema !== PREPARED_WORLD_SYSTEM_SCHEMA) throw new TypeError(`${where} is ${String(input.schema)}, not ${PREPARED_WORLD_SYSTEM_SCHEMA}.`);
   const { systemNames, discoveries, billboard, bodies, ...rest } = input;

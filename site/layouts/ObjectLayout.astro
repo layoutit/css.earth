@@ -1,5 +1,5 @@
 ---
-import { worldPlaceOf } from '../world-places.mts';
+import { worldPlaceOf, worldStartupFiles } from '../world-places.mts';
 import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { webAnalyticsBootstrap } from "../web-analytics.mts";
@@ -51,8 +51,9 @@ const { objectId, pageId = objectId, navigation = false, scene, descriptor, home
 const objectUi = await Astro.slots.render('object-ui');
 const tabStyles = informationTabStyles(Astro.locals, objectUi);
 const objectRecord = requireSceneObject(objectId);
-// The holder of the page's own body, when the world summary does not hold it whole (site/world-places.mts).
-const worldPlace = worldPlaceOf(objectRecord.id);
+// The world files the page reads at startup, root first, and its body's own row when no file has it (site/world-places.mts).
+const worldFiles = worldStartupFiles(pageId);
+const ownRow = worldPlaceOf(objectRecord.id)?.row !== undefined;
 // Rules for a page without script. The phone sheet waits, hidden, for its controller to publish a snap state
 // (shell-layout.css); without script it rests at its peek, and the checkbox of its handle opens it.
 const sheetWithoutScript = 'body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: visible !important; }';
@@ -99,8 +100,8 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     <meta charset="UTF-8" />
     {!navigation && <script is:inline set:html={initialShellContextBootstrap(objectId)}></script>}
     {/* The first view's documents download while the HTML parses, beside the modules that read them (startup-requests.mts). */}
-    {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id), summaryUrl: worldSummaryUrl, ...(worldPlace && worldPlace.row === undefined ? { holder: worldPlace.holder } : {}), ...(bankFiles ? { bankFiles } : {}) })}></script>}
-    {!navigation && worldPlace && <meta name="cssearth-world-holder" content={worldPlace.holder} data-row={worldPlace.row === undefined ? undefined : ''} />}
+    {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id), summaryUrl: worldSummaryUrl, worldFiles, ...(bankFiles ? { bankFiles } : {}) })}></script>}
+    {!navigation && <meta name="cssearth-world-files" content={worldFiles.join(' ')} data-row={ownRow ? objectRecord.id : undefined} />}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     {!navigation && <script is:inline set:html={errorReportBootstrap}></script>}
     {/* One connection for the photograph (no CORS) and one for the scene's fetched files (CORS): browsers keep them apart. */}

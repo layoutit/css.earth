@@ -1,10 +1,10 @@
 import { readFile } from 'node:fs/promises';
-import { systemViewFile, systemViewOwner } from '@cssearth/objects';
-import { APPLICATION_WORLD_CONTEXT } from '../world-context-plan.mts';
+import { systemViewFile } from '@cssearth/objects';
+import { requireObject } from '../objects.mts';
 
-const boundTo = new Map(APPLICATION_WORLD_CONTEXT.bodies.flatMap(body => body.boundTo ? [[body.id, body.boundTo.hostId] as const] : []));
-/** A host's prepared system view, read from the package of the system that owns it (systemViewOwner). */
+/** A host's prepared system view, read from the package of the system its host is inside (its parent). */
 export async function readSystemViewFile(host: string): Promise<unknown> {
-  const owner = systemViewOwner(host, id => boundTo.get(id));
+  const owner = requireObject(host).parent;
+  if (owner === undefined) throw new TypeError(`${host} is inside no object, so no package has its system view.`);
   return JSON.parse(await readFile(new URL(`../../src/objects/${owner}/prepared/${systemViewFile(host)}`, import.meta.url), 'utf8'));
 }

@@ -11,7 +11,7 @@ import { worldOrbitBankRegions } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { parseWorldContextSource, PLAIN_STAR_DOT_BANK_IDS, plainStarDotBanks, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
 import { writeCatalogueBank } from '@cssearth/bake/volume/node';
-import { systemViewFile, systemViewOwner, worldOrbitBanks } from '@cssearth/objects';
+import { systemViewFile, worldOrbitBanks } from '@cssearth/objects';
 import type { OrbitalState, Vector3, WorldContextBodyFact } from '@cssearth/bake/world-context';
 import type { PreparedOrbitCenter as WorldContextOrbitCenter } from '@cssearth/objects';
 
@@ -218,9 +218,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   }
   for (const name of await readdir(bankDirectory).catch(() => [] as string[])) if (!keptBanks.has(name)) await rm(resolve(bankDirectory, name));
   await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
-  // Every page reads the summary: the Sun's own system and the bodies that orbit nothing. Each other star is a holder, its
-  // own file with the bodies that orbit it, read when a page shows that system or the camera approaches it (summarizeWorldContext).
-  const { summary, systems, index, plainStars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])), ASTEROID_DOT_BANK);
+  // Every page reads the summary: frame, camera and sky facts and the Sun. Every other body is in the file of the object it
+  // is inside, by the object tree (summarizeWorldContext).
+  const tree = new Map(readPreparedObjects(process.cwd()).objects.map(object => [object.id, object.parent] as const));
+  const { summary, systems, places, index, plainStars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])),
+    id => tree.get(id), ASTEROID_DOT_BANK);
   // The map draws those stars as dots, not as bodies. A star of the Milky Way is one of the galaxy's own dots
   // (src/objects/milky-way-volume/source/packaged-stars, written by paged-star-dot-positions.mts); the world's own banks
   // (`/world/dots/<id>.bin`) hold only the stars that table does not name: the ones in other galaxies.
@@ -232,29 +234,35 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   }
   // The summary names the banks this bake wrote, so the site asks for no other.
   await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify({ ...summary, ...(dotBanks.length ? { dotBanks: dotBanks.map(bank => bank.id) } : {}) })}\n`);
-  // Read by the build and Node tools only: which holder has each body, which the page reads from the body's own object entry.
+  // Read by the build and Node tools only: every body's place in the world's order, and the rows object entries carry.
   await writeIfChanged(worldIndexPath(options.outputPath), `${JSON.stringify(index)}\n`);
   await rm(resolve(dirname(options.outputPath), 'world-stars.json'), { force: true });
   // Each holder is an object: a star's system, or the asteroid dot bank. Its members are its own package's prepared file,
   // published with it; a holder without a package is refused, named.
-  const objectsRoot = dirname(dirname(dirname(options.outputPath))), holders = new Set<string>();
+  const objectsRoot = dirname(dirname(dirname(options.outputPath))), holders = new Set<string>(), placed = new Set<string>();
   for (const system of systems) {
     const directory = resolve(objectsRoot, system.id);
     await access(resolve(directory, 'object.json')).catch(() => { throw new TypeError(`World holder ${system.id} has no package (src/objects/${system.id}/object.json): run node site/build/prepare/system-packages.mts.`); });
     holders.add(system.id);
     await writeIfChanged(memberFilePath(objectsRoot, system.id), `${JSON.stringify(system.file)}\n`);
   }
-  // A package that holds no members any more loses its file, and the Sun's old folder of them goes.
+  for (const table of places) {
+    placed.add(table.id);
+    await writeIfChanged(placesFilePath(objectsRoot, table.id), `${JSON.stringify(table.file)}\n`);
+  }
+  // A package that holds no members or places any more loses its file, and the Sun's old folder of them goes.
   for (const entry of await readdir(objectsRoot, { withFileTypes: true })) {
     if (entry.isDirectory() && !holders.has(entry.name)) await rm(memberFilePath(objectsRoot, entry.name), { force: true });
+    if (entry.isDirectory() && !placed.has(entry.name)) await rm(placesFilePath(objectsRoot, entry.name), { force: true });
   }
   await rm(resolve(dirname(options.outputPath), 'world-systems'), { recursive: true, force: true });
   // System framing's camera candidates, one file per host, read when navigation frames that system: each in the package of
-  // the system that owns it (`systemViewOwner` in @cssearth/objects), which a host's system always has.
-  const boundTo = new Map(prepared.bodies.flatMap(body => 'boundTo' in body && body.boundTo ? [[body.id, body.boundTo.hostId] as const] : []));
+  // the system the host is inside (its parent), which a host with members always is.
   const owned = new Map<string, Set<string>>();
   for (const view of worldSystemViews(prepared)) {
-    const owner = systemViewOwner(view.id, id => boundTo.get(id)), file = resolve(objectsRoot, owner, 'prepared', systemViewFile(view.id));
+    const owner = tree.get(view.id);
+    if (owner === undefined) throw new TypeError(`src/objects/${view.id}/object.json: ${view.id} draws a system, so it is inside its system object, but it names no parent: run node site/build/prepare/system-packages.mts.`);
+    const file = resolve(objectsRoot, owner, 'prepared', systemViewFile(view.id));
     await access(resolve(objectsRoot, owner, 'object.json')).catch(() => { throw new TypeError(`The system view of ${view.id} belongs to ${owner}, which has no package (src/objects/${owner}/object.json): run node site/build/prepare/system-packages.mts.`); });
     (owned.get(owner) ?? owned.set(owner, new Set()).get(owner)!).add(`${view.id}.json`);
     await writeIfChanged(file, `${JSON.stringify(view)}\n`);
@@ -283,7 +291,7 @@ async function packagedGalaxyStars(objectsRoot: string): Promise<ReadonlySet<str
   return new Set(rows.map(row => row.slice(0, row.indexOf(','))));
 }
 
-/** `world-context.json` → `world-index.json`, beside it: the build's table of which holder has each body. */
+/** `world-context.json` → `world-index.json`, beside it: the build's table of the world's order and the rows entries carry. */
 export function worldIndexPath(outputPath: string): string {
   return resolve(dirname(outputPath), 'world-index.json');
 }
@@ -291,6 +299,11 @@ export function worldIndexPath(outputPath: string): string {
 /** A holder's members: its own package's prepared file (`src/objects/<holder>/prepared/members.json`). */
 export function memberFilePath(objectsRoot: string, holderId: string): string {
   return resolve(objectsRoot, holderId, 'prepared', 'members.json');
+}
+
+/** Where an object's children's files read on approach are: its own package's prepared file (`places.json`). */
+export function placesFilePath(objectsRoot: string, objectId: string): string {
+  return resolve(objectsRoot, objectId, 'prepared', 'places.json');
 }
 
 /** `world-context.json` → `world-orbits/`, beside it: `<orbit centre id>.bin` per centre. */

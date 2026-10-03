@@ -129,17 +129,18 @@ export async function restoreTypecheckInputs({ root = projectRoot, fetcher = fet
   const imports = await collectTypecheckPreparedImports(root);
   const catalogue = await volumeMetadataAssets(root);
   const features = await typecheckFeatureAssets(root);
-  // The world summary's index names the holders of its other bodies, which Node reads by computed path: each holder's
-  // `members.json` in its own package. They restore with the summary, after the index that names them: the world step of
-  // build:tools bakes without the bodies' imagery, so its own copies place stars in different holders.
+  // The world index names every object with a file of world bodies, which Node reads by computed path: each object's
+  // `members.json` and `places.json` in its own package. They restore with the summary, after the index that names them:
+  // the world step of build:tools bakes without the bodies' imagery, so its own copies place stars in different files.
   const summary = resolve(root, 'src/objects/sun/prepared/world-context-summary.json');
   const world = imports.includes(summary) ? await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: ['world-index.json'] }) : [];
   const initial = uniqueAssets([...await typecheckAssetsForPaths(imports, root), ...world, ...catalogue.assets, ...features.assets]);
   const first = await installRuntimeAssets(initial, { fetcher });
   const index = world.length ? parsePreparedWorldIndex(JSON.parse(await readFile(world[0]!.file, 'utf8'))) : null;
-  const holders = index ? [...new Set(Object.values(index.holders))].filter(id => !Object.hasOwn(index.rows, id)).sort() : [];
-  const members = uniqueAssets(holders.length ? await inventoryAssets(root, holders, { location: 'prepared', filenames: ['members.json'] }) : []);
-  if (members.length !== holders.length) throw new TypeError(`The world index names ${holders.length} holders and their packages' inventories publish ${members.length} members.json files.`);
+  const holders = index ? index.files : [];
+  const members = uniqueAssets(holders.length ? await inventoryAssets(root, holders, { location: 'prepared', filenames: ['members.json', 'places.json'] }) : []);
+  const memberFiles = members.filter(asset => asset.filename === 'members.json').length;
+  if (memberFiles !== holders.length) throw new TypeError(`The world index names ${holders.length} objects with files and their packages' inventories publish ${memberFiles} members.json files.`);
   const held = await installRuntimeAssets(members, { fetcher });
   const landmarkRuntimes: string[] = [];
   for (const asset of features.catalogues) {

@@ -14,7 +14,7 @@
   # Netlify's own tracing would leave the renderer's TypeScript subpaths external, which Node cannot load.
   directory = "netlify/functions-bundled"
   included_files = ["pnpm-workspace.yaml", "src/objects/sun/prepared/world-context-summary.json", "src/objects/sun/prepared/world-index.json",
-    "src/objects/*/prepared/members.json",
+    "src/objects/*/prepared/members.json", "src/objects/*/prepared/places.json",
     "dist/catalogue/index.json", "public/features/index.json", "public/scenes/*/*-places.json"]
 
 # This tiny router preserves optional view and category parameters. Search work

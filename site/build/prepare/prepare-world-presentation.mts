@@ -12,7 +12,7 @@ import clusters from '../../../src/objects/galaxy-clusters/source/presentation.j
 import { discoveryVisibility, type ObjectDiscovery } from '@cssearth/objects';
 import { WORLD_OBJECTS } from '../../world-objects.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
-import { worldHolderFilesOf } from '../../world-places.mts';
+import { worldFilesOf } from '../../world-places.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
 import systemText from '../../../src/navigation/system-text.json' with { type: 'json' };
@@ -152,7 +152,7 @@ export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<
     clusters: { fadeStartDistanceM: clusters.fadeStartDistanceM, fullDistanceM: clusters.fullDistanceM },
     categoryFrames: prepareCategoryFrames(WORLD_OBJECTS, new Set(defaultFeatureIds), new Set(orbitFeatureIds),
       notableBodies(WORLD_OBJECTS, new Set(defaultFeatureIds), orbitCentres(APPLICATION_WORLD_CONTEXT)), orbitCentres(APPLICATION_WORLD_CONTEXT),
-      APPLICATION_WORLD_CONTEXT.focus.id, worldHolderFilesOf),
+      APPLICATION_WORLD_CONTEXT.focus.id, worldFilesOf),
   };
 }
 

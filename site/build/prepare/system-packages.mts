@@ -4,7 +4,8 @@
  * already holds: a star's planetary system from the prepared world's orbit graph (site/object-systems.mts), a planet's or
  * small body's satellite system from its prepared moons (site/satellite-systems.mts) and its cited introduction
  * (src/navigation/system-text.json). A system places nothing and draws nothing of its own: it shows its host's scene out
- * to its members, and takes its host's place, color and distance.
+ * to its members, and takes its host's place, color and distance. It sits in the object tree where its host sat, and its
+ * host sits inside it: this writes both parents.
  *
  * Usage: node site/build/prepare/system-packages.mts [host id ...]   (no ids: every system)
  */
@@ -19,7 +20,9 @@ const objectsRoot = resolve(import.meta.dirname, '../../../src/objects');
 const only = new Set(process.argv.slice(2));
 const bodies = SCENE_OBJECTS.filter(object => !object.system);
 const hostOf = (id: string) => { const host = bodies.find(object => object.id === id); if (!host) throw new TypeError(`System host ${id} has no object package.`); return host; };
-const descriptorOf = async (id: string) => JSON.parse(await readFile(resolve(objectsRoot, id, 'object.json'), 'utf8')) as { properties: { catalog: Record<string, unknown>; worldFrame: unknown } };
+type Descriptor = { parent?: string; properties: { catalog: Record<string, unknown>; worldFrame: unknown } };
+const descriptorOf = async (id: string) => JSON.parse(await readFile(resolve(objectsRoot, id, 'object.json'), 'utf8')) as Descriptor;
+const existing = async (id: string) => descriptorOf(id).catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return undefined; throw error; });
 const texts = JSON.parse(await readFile(resolve(objectsRoot, '../navigation/system-text.json'), 'utf8')) as { satellites: Record<string, { text: string }> };
 /** The Solar System's card sentence. */
 const SOLAR_SYSTEM_DESCRIPTION = 'The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.';
@@ -39,7 +42,14 @@ let written = 0;
 for (const system of systems) {
   if (only.size && !only.has(system.hostId)) continue;
   const id = systemObjectId(system.hostId), host = await descriptorOf(system.hostId), catalog = host.properties.catalog;
-  const descriptor = { schema: 'cssearth-object@2', id, type: 'system',
+  // The host is inside its system, and the system sits where the host sat (packages/objects/src/registry/object-tree.ts):
+  // a star's system inside its galaxy, a planet's inside its star's system.
+  const parent = host.parent === id ? (await existing(id))?.parent : host.parent;
+  if (parent === undefined || parent === id) throw new TypeError(`src/objects/${system.hostId}/object.json: the host of ${id} names no parent, so the system has no place in the object tree.`);
+  if (host.parent !== id) {
+    await writeFile(resolve(objectsRoot, system.hostId, 'object.json'), `${JSON.stringify({ ...host, parent: id }, null, 2)}\n`);
+  }
+  const descriptor = { schema: 'cssearth-object@2', id, parent, type: 'system',
     generator: 'site/build/prepare/system-packages.mts',
     properties: {
       system: { host: system.hostId, members: system.members },

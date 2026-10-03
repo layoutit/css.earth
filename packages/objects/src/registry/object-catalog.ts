@@ -97,7 +97,11 @@ export function catalogueObject<Scene, Signal>(value: unknown,
   if (systemHostId(id) !== (system?.host ?? null)) {
     throw new TypeError(`src/objects/${id}/object.json: ${system ? `the system of ${system.host} is ${systemObjectId(system.host)}, not ${id}` : `${id} reads as the system of ${systemHostId(id)}, and only a system package (properties.system) may be named so`}.`);
   }
-  const object = { ...entry, ...(ladder === null ? {} : { level: Object.freeze({ order: ladder.order, zoom: ladder.zoom, holds: ladder.holds, packages: ladder.packages }) }),
+  const parent = descriptor.parent;
+  if (parent !== undefined && (typeof parent !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(parent) || parent === id)) {
+    throw new TypeError(`src/objects/${id}/object.json: parent names the object it is inside by its id; got ${JSON.stringify(parent)}.`);
+  }
+  const object = { ...entry, ...(typeof parent === 'string' ? { parent } : {}), ...(ladder === null ? {} : { level: Object.freeze({ order: ladder.order, zoom: ladder.zoom, holds: ladder.holds, packages: ladder.packages }) }),
     ...(system ? { system } : {}) };
   // An object with alternate names is found by them: search matches its id, its name and each alias.
   return object.aliases.length ? { ...object, searchNames: Object.freeze(destinationSearchNames([id, object.name, ...object.aliases])) } : object;

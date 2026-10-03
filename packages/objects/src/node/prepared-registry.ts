@@ -4,7 +4,7 @@
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
-import { catalogueObject, defineObjects, levelOf } from '../registry/index.js';
+import { catalogueObject, checkObjectTree, defineObjects, levelOf } from '../registry/index.js';
 import type { NavigableObject, NavigationDistance, ObjectDiscovery, ObjectEntry, OverviewObject, WorldBody } from '../registry/index.js';
 
 /** The catalogue files, relative to the checkout. `entries` is a module: each scene object's descriptor, as its folder's
@@ -71,6 +71,7 @@ function decodeRegistry(checkout: string): PreparedObjectRegistry {
   const entries = rows(catalogue, PREPARED_CATALOGUE.entries);
   const refuse = () => async (): Promise<never> => { throw new Error('Preparation cannot mount a scene.'); };
   const objects = defineObjects<PreparedNavigableObject>(entries.map(entry => catalogueObject<never, AbortSignal>(entry, refuse)));
+  checkObjectTree(objects);
   // A level of the zoom ladder is one of the objects; the levels file holds their rows again for the pages that read it alone.
   const levels = Object.freeze(objects.filter(object => object.level).map(levelOf).sort((a, b) => a.order - b.order));
   for (const row of rows(overviews, PREPARED_CATALOGUE.overviews)) {
