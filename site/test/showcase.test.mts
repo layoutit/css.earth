@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { parseHTML } from 'linkedom';
-import { createShowcaseController, SHOWCASE_OBJECT_IDS } from '../showcase.mts';
+import { createShowcaseController, SHOWCASE_OBJECT_IDS, SHOWCASE_TURN_DEGREES } from '../showcase.mts';
 import { requireSceneObject } from '../objects.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { NavigationIntent } from '../navigation/navigation-request.mts';
@@ -84,4 +84,23 @@ test('a flight that does not land ends the tour, and a hop stopped in flight sch
   assert.equal(stopped.flights.length, 1, 'the landing of a stopped tour flies no further');
   assert.equal(stopped.controller.playing, false);
   stopped.controller.destroy();
+});
+
+test('each landing turns the camera around the body for its stay, and ending the tour aborts the turn', async () => {
+  const { document, window } = parseHTML(markup);
+  const turns: { degrees: number; durationMilliseconds: number; signal: AbortSignal }[] = [];
+  let objectId = 'earth';
+  const controller = createShowcaseController({ documentTarget: document, windowTarget: window as unknown as BrowserWindow,
+    navigate: async id => { objectId = id; return true; }, readObjectId: () => objectId, ids: ['earth', 'mars', 'moon'], dwellMs: 20,
+    turn: options => { turns.push(options); }, onError: error => { throw error; } });
+  controller.start();
+  await wait(2);
+  assert.equal(turns.length, 1, 'the first landing turns once');
+  assert.deepEqual({ degrees: turns[0]!.degrees, durationMilliseconds: turns[0]!.durationMilliseconds }, { degrees: SHOWCASE_TURN_DEGREES, durationMilliseconds: 20 });
+  assert.equal(turns[0]!.signal.aborted, false);
+  document.querySelector('main')!.dispatchEvent(new window.Event('pointerdown', { bubbles: true }));
+  assert.equal(turns[0]!.signal.aborted, true, 'a takeover stops the turn');
+  await wait(30);
+  assert.equal(turns.length, 1, 'a stopped tour turns no further');
+  controller.destroy();
 });

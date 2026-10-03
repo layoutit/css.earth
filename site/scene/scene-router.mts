@@ -360,7 +360,12 @@ export function createSceneRouter({
         historyOwner = createNavigationHistory({ windowTarget, capture: () => requests.current ? null : view.capture(), navigate, navigating: () => requests.current !== null, embedded: 'embed' in documentTarget.documentElement.dataset, onError: report });
         // A link flies in place to any body the world draws; one whose entry has loaded must also share this frame.
         unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
-        showcase = registry.createShowcaseController({ documentTarget, windowTarget, navigate, readObjectId: () => objectId, onError: report });
+        showcase = registry.createShowcaseController({ documentTarget, windowTarget, navigate, readObjectId: () => objectId, onError: report,
+          // A reader who asked for reduced motion gets the tour's stops without the turn.
+          turn({ degrees, durationMilliseconds, signal }) {
+            if (reducedMotionActive || requests.current) return;
+            void scenes.current?.mount?.navigation?.turn?.(degrees, { durationMilliseconds, signal }).catch(report);
+          } });
       }
       // Any body the world draws, and any object the page already knows (a scale of the universe is no body of the world).
       navigable = id => (worldIds.has(id) || registry.knownObject(id) !== undefined) && (!registry.knownObject(id) || navigation.supports(objectId, id));

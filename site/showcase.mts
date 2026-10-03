@@ -14,6 +14,8 @@ export const SHOWCASE_OBJECT_IDS: readonly string[] = Object.freeze([
 ]);
 /** How long a body stays once its flight has landed, before the tour flies on. */
 export const SHOWCASE_DWELL_MS = 7000;
+/** How far the camera turns sideways around a body while it stays. */
+export const SHOWCASE_TURN_DEGREES = 60;
 
 export interface ShowcaseOptions {
   documentTarget: Document;
@@ -22,16 +24,19 @@ export interface ShowcaseOptions {
   navigate(id: string, intent: NavigationIntent): Promise<boolean | undefined>;
   /** The object whose scene is shown; the tour never flies to it. */
   readObjectId(): string;
+  /** Turn the camera sideways around the landed body for its stay. The signal aborts when the tour ends. */
+  turn?(options: { degrees: number; durationMilliseconds: number; signal: AbortSignal }): void;
   onError(error: unknown): void;
   ids?: readonly string[];
   dwellMs?: number;
   random?(): number;
 }
 
-/** The header's Showcase pill: a slideshow of the featured bodies. Pressed, it flies to one, dwells, and flies to the next,
- * until the reader takes over: a pointer or key on the page, a wheel, Back, the tab leaving the screen, or the pill again.
- * The first hop is a history entry; the rest replace it, so Back returns to the page the tour left. */
-export function createShowcaseController({ documentTarget, windowTarget, navigate, readObjectId, onError,
+/** The header's Showcase pill: a slideshow of the featured bodies. Pressed, it flies to one, stays while the camera turns
+ * around it, and flies to the next, until the reader takes over: a pointer or key on the page, a wheel, Back, the tab leaving
+ * the screen, or the pill again. The first hop is a history entry; the rest replace it, so Back returns to the page the tour
+ * left. */
+export function createShowcaseController({ documentTarget, windowTarget, navigate, readObjectId, turn, onError,
   ids = SHOWCASE_OBJECT_IDS, dwellMs = SHOWCASE_DWELL_MS, random = Math.random }: ShowcaseOptions) {
   const button = documentTarget.querySelector<HTMLElement>('.object-showcase-action');
   const events = new AbortController();
@@ -88,6 +93,7 @@ export function createShowcaseController({ documentTarget, windowTarget, navigat
     }
     if (run !== generation) return;
     if (landed !== true) { stop(); return; }
+    if (tour) turn?.({ degrees: SHOWCASE_TURN_DEGREES, durationMilliseconds: dwellMs, signal: tour.signal });
     timer = setTimeout(() => { timer = null; void hop(false); }, dwellMs);
   }
   return Object.freeze({

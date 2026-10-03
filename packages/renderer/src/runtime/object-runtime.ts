@@ -182,6 +182,10 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         setAllowed(false);
         return getOrbit().applyWorldCamera(pose, worldFrame, options?.signal, options?.departing);
       },
+      turn(degrees: number, { durationMilliseconds, signal }: { durationMilliseconds: number; signal: AbortSignal }) {
+        if (lifetime.disposed || signal.aborted) return Promise.resolve({ completed: false });
+        return getOrbit().turn(degrees, durationMilliseconds, signal);
+      },
       // Every prepared group is connected and painted once: an arriving flight
       // may resume before the remaining readiness bookkeeping settles.
       detailActivated() { return phase !== 'mounting' && !lifetime.disposed; },
