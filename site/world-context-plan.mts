@@ -1,6 +1,6 @@
 import { parseCompleteWorldContext, parsePreparedWorldIndex, systemObjectId } from '@cssearth/objects';
 import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
-import { WORLD_SUMMARY_SOURCE, pageWorldFiles, startupWorld } from './startup-world.mts';
+import { WORLD_ANYWHERE_SOURCE, WORLD_SUMMARY_SOURCE, anywhereFiles, pageWorldFiles, startupWorld } from './startup-world.mts';
 import { readWorldPlace } from './object-entries.mts';
 import type { PreparedWorldContext, PreparedWorldIndex, PreparedWorldSystem } from '@cssearth/objects';
 import { startupFetch } from './startup-requests.mts';
@@ -115,7 +115,8 @@ if (node) {
 } else if (startup) {
   adopt(startup.files);
 } else {
-  // A page that did not read its world before its application reads the files it names here.
+  // A page that did not read its world before its application reads the files every page reads and those it names here.
+  adopt(anywhereFiles(await fetchJson(WORLD_ANYWHERE_SOURCE)));
   const own = pageWorldFiles(globalThis.document);
   await loadFiles(own.files, own.row ? { id: own.row, value: (await readWorldPlace(own.row))?.row } : undefined);
 }

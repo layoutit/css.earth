@@ -43,11 +43,12 @@ export function worldPlaceOf(id: string): { readonly files: readonly string[]; r
   return APPLICATION_WORLD_FILE_OF.has(id) ? { files: chainFiles(id) } : null;
 }
 
-/** The files page `id` reads at startup, root first: its own object's and those of the objects it is inside, and every file
- * whose bodies the map draws from anywhere. */
+/** Every file whose bodies the map draws from anywhere (or that has places), root first: every page reads them at startup,
+ * together in one response (`pages/world/anywhere.json.ts`). */
+export const worldAnywhereFiles = (): readonly string[] => worldFiles().filter(file => flagsOf(file).anywhere);
+/** The other files page `id` reads at startup, root first: its own object's and those of the objects it is inside. */
 export function worldStartupFiles(id: string): readonly string[] {
-  const own = new Set(chainFiles(id));
-  return worldFiles().filter(file => own.has(file) || flagsOf(file).anywhere);
+  return chainFiles(id).filter(file => !flagsOf(file).anywhere);
 }
 
 /** The files a page does not read at startup that have bodies of `ids` (a category's marked members): read when that

@@ -22,8 +22,8 @@ export function startStartupRequests(window: Window, urls: readonly string[], tr
   window.__cssEarthStartupRequests = requests;
 }
 
-/** The head script of a body page: the world summary and the world files the page reads at startup (`world-context-plan.mts`), the page's directory entry, its system view
- * when it hosts one, and its object transport, named as `packaged-object-runtime.mts` reads it: a page that ships its body's
+/** The head script of a body page: the world summary and the world files the page reads at startup (`world-context-plan.mts`),
+ * the page's directory entry, its system view when it hosts one, and its object transport, named as `packaged-object-runtime.mts` reads it: a page that ships its body's
  * markup reads the first-view transport, a page with an arrival billboard the full one. */
 export function startupRequestsBootstrap({ objectId, serverMarkup, systemView, summaryUrl, worldFiles, bankFiles }:
   { objectId: string; serverMarkup: boolean; systemView: boolean; summaryUrl: string;
@@ -31,7 +31,7 @@ export function startupRequestsBootstrap({ objectId, serverMarkup, systemView, s
     worldFiles: readonly string[];
     /** The file list of the bank the page's default dataset shows (`/world/context-assets/<id>.json`), when it shows one. */
     bankFiles?: string }) {
-  const urls = [summaryUrl, ...worldFiles.map(id => `/world/systems/${id}.json`), `/objects/${objectId}/entry.json`, ...systemView ? [`/world/system-views/${objectId}.json`] : [], ...bankFiles ? [bankFiles] : []];
+  const urls = [summaryUrl, '/world/anywhere.json', ...worldFiles.map(id => `/world/systems/${id}.json`), `/objects/${objectId}/entry.json`, ...systemView ? [`/world/system-views/${objectId}.json`] : [], ...bankFiles ? [bankFiles] : []];
   const transportUrl = `/objects/${objectId}/${serverMarkup ? 'first-view' : 'object'}.json`;
   const args = [urls, transportUrl, `/${objectId}/`].map(value => JSON.stringify(value).replace(/</gu, '\\u003c'));
   return `(${startStartupRequests.toString()})(window, ${args.join(', ')});`;
