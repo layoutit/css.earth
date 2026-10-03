@@ -50,7 +50,7 @@
     "optical": {
       "title": "NGC 4639 in visible light",
       "detail": "900 × 900 px",
-      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "summary": "Flat picture on the measured disc; the bulge of a published fit stands through it. Depth is modelled.",
       "sources": [
         {
           "catalogueId": "sdss-dr9-color-hips",
@@ -58,6 +58,13 @@
           "label": "SDSS9 color; Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
           "checked": "2026-10-02",
           "locator": "SDSS9 color"
+        },
+        {
+          "catalogueId": "salo-2015-s4g-decompositions",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
+          "label": "Salo et al. (2015), ApJS 219, 4: S4G Pipeline 4 decompositions, table 7",
+          "checked": "2026-10-03",
+          "locator": "NGC4639, model _bdbarf: bulge 11.2% of the light, Re 1.6 arcsec, n 2.14"
         }
       ]
     }

@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m37",
+  "card": {
+    "text": "M37 is an open star cluster in the Milky Way, about 1,402 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2099: dist50, the median of the maximum-likelihood distance, 1401.57351157 pc (16th to 84th percentile 1400 to 1403)",
+        "checked": "2026-10-02",
+        "locator": "NGC_2099: dist50 1401.6 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-37",
+        "url": "https://en.wikipedia.org/wiki/Messier_37",
+        "label": "Wikipedia, \"Messier 37\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373098588",
+        "quote": "Messier 37 is the brightest and richest open cluster in the constellation Auriga."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M37 is drawn as 1,227 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2099: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_2099: 1,227 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-37",
+        "url": "https://en.wikipedia.org/wiki/Messier_37",
+        "label": "Wikipedia, \"Messier 37\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373098588",
+        "quote": "It was discovered by the Italian astronomer Giovanni Battista Hodierna before 1654."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "1,227 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2099: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_2099, inrt = True"
+        }
+      ]
+    }
+  }
+}

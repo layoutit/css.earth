@@ -1,0 +1,28 @@
+{
+  "id": "m100",
+  "classification": "galaxy",
+  "order": 5300,
+  "physical": {
+    "name": "M100",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M100 is recorded: it is an extended galaxy, and its package frames it at 16,180 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 185.728667,
+    "declinationDegrees": 15.822249,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 15210000,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 1574,
+    "sources": {
+      "position": "HyperLEDA (Makarov et al. 2014), NGC4321 = PGC 40153: centre, type SABb, D25 diameter 6.1 arcmin (http://atlas.obs-hp.fr/hyperleda/)",
+      "distance": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4321: distance 15.21 ± 0.5 Mpc, from the compilation of Anand et al. (2021) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43)",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "HyperLEDA (Makarov et al. 2014), NGC4321 = PGC 40153: heliocentric radial velocity 1574 ± 1.6 km/s (http://atlas.obs-hp.fr/hyperleda/)"
+    }
+  }
+}

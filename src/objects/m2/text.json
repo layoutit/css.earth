@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m2",
+  "card": {
+    "text": "M2 is a globular star cluster in the Milky Way, about 11,690 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_7089: Rsun 11.69 ± 0.11 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_7089: Rsun 11.69 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-2",
+        "url": "https://en.wikipedia.org/wiki/Messier_2",
+        "label": "Wikipedia, \"Messier 2\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1374794764",
+        "quote": "Messier 2 or M2 is a globular cluster in the constellation Aquarius, five degrees north of the star Beta Aquarii."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M2 is drawn as 1,209 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_7089: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_7089: 1,209 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-2",
+        "url": "https://en.wikipedia.org/wiki/Messier_2",
+        "label": "Wikipedia, \"Messier 2\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1374794764",
+        "quote": "It was discovered by Jean-Dominique Maraldi in 1746, and is one of the largest known globular clusters."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "1,209 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_7089: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_7089, inrt = True"
+        }
+      ]
+    }
+  }
+}

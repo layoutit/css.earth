@@ -1,0 +1,79 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "merrett-pne",
+  "table": {
+    "path": "table3.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/369/120/table3.dat",
+    "bytes": 330000,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        4
+      ],
+      "raH": [
+        6,
+        7
+      ],
+      "raM": [
+        9,
+        10
+      ],
+      "raS": [
+        12,
+        15
+      ],
+      "decSign": [
+        17,
+        17
+      ],
+      "decD": [
+        18,
+        19
+      ],
+      "decM": [
+        21,
+        22
+      ],
+      "decS": [
+        24,
+        27
+      ]
+    }
+  },
+  "filters": [
+    {
+      "column": [
+        43,
+        47
+      ],
+      "op": "==",
+      "value": "-",
+      "basis": "Note E or R marks a probable HII region or background galaxy, and 'other' an object excluded as a planetary nebula by its flux (ReadMe note 1)."
+    },
+    {
+      "column": [
+        49,
+        58
+      ],
+      "op": "==",
+      "value": "M32",
+      "basis": "The survey of M31 marks the host of each object that is not M31's own (ReadMe note 2); these are the rows it gives to M32, without those it marks as uncertain."
+    }
+  ],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the plane the picture stands on, facing the Sun (recipe.json), through the image-layer bake's own intersection."
+  },
+  "source": "merrett-2006-m31-planetary-nebulae",
+  "meaning": "Planetary nebulae of M32 from Merrett et al.'s (2006) survey of M31 with the Planetary Nebula Spectrograph, which marks them as this galaxy's: one dot per nebula at its catalogue position.",
+  "appearance": {
+    "colorCss": "#9dffcf",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the planetary-nebula color M31's and M33's dots share. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m58-layers",
+  "entries": [
+    {
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
+      "status": "included",
+      "finding": "A 3000 x 3000 px hips2fits cutout of CDS/P/SDSS9/color, 8.04 arcmin wide, 1.6 times NGC 4579's D25 diameter. Its sky level is (9, 9, 6) of 255.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "https://www.sdss.org/collaboration/#image-use"
+      ]
+    },
+    {
+      "id": "observatory-photographs",
+      "subject": "Observatory photographs of M58",
+      "status": "deferred",
+      "finding": "Not surveyed: the Messier galaxies of this batch share one survey so that they match. An observatory photograph with sky coordinates would show more detail.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+      ],
+      "revisitWhen": "A whole-galaxy photograph with sky coordinates is published under an attribution licence."
+    },
+    {
+      "id": "bulge",
+      "subject": "Bulge",
+      "status": "included",
+      "finding": "Salo et al. (2015), S4G Pipeline 4, table 7, NGC4579, model _bdbarf: a Sérsic bulge (11.3% of the light, magnitude 11.348, half-light radius 3.91″ = 0.37 kpc, n = 2.655, axis ratio 0.848, PA 86.11°) and an exponential disc (77.6% of the light, scale length 45.27″ = 4.28 kpc, axis ratio 0.747, PA 92.15°, face-on central surface brightness 19.533, 19.216 as projected on the sky) and a Ferrers bar (11.1% of the light, radius 45.0″ = 4.26 kpc, axis ratio 0.456, PA 57.29°, central surface brightness 18.823 on the sky). Used as published; the half-light surface brightness the bake needs, 17.305 mag per square arcsecond, follows from the bulge's magnitude, radius, index and axis ratio. At the disc's 40.2° the bulge's axis ratio is one an oblate spheroid in the disc plane can show (intrinsic 0.57).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4"
+      ]
+    },
+    {
+      "id": "star-removal",
+      "subject": "Stars in the picture",
+      "status": "included",
+      "finding": "The picture was first cleaned only by the bake's pass over the Gaia foreground stars, which leaves the brightest stars, the faint ones Gaia cannot certify and those it reads as extended. The Nebula Lab's NOX removes them all and keeps the galaxy's arms and dust lanes; it also takes the galaxy's own compact knots and clusters, most visibly in M51, which was looked at and accepted on 2026-10-03; the picture holds no Gaia star brighter than G 14. The lab's isophote fill, made for ellipticals, left a dark notch on a spiral, so the glow is filled from the ring around it.",
+      "evidence": [
+        "https://github.com/charvey2718/nox"
+      ]
+    }
+  ]
+}

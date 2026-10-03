@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m77",
+  "card": {
+    "text": "A spiral galaxy 14.0 million parsecs away, tilted 35° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC1068: distance 13.97 ± 2.11 Mpc, from the compilation of Anand et al. (2021)",
+        "checked": "2026-10-02",
+        "locator": "distance: 13.97 Mpc (11.86 to 16.08)"
+      },
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC1068: inclination 34.7 ± 5.0°, position angle 72.7 ± 10.0°",
+        "checked": "2026-10-02",
+        "locator": "inclination 34.7 deg"
+      },
+      {
+        "catalogueId": "wikipedia-messier-77",
+        "url": "https://en.wikipedia.org/wiki/Messier_77",
+        "label": "Wikipedia, \"Messier 77\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1376966728",
+        "quote": "Messier 77 (M77), also known as NGC 1068 or the Squid Galaxy, is a barred spiral galaxy in the constellation Cetus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, laid flat on its measured disc.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 9.78 arcmin wide"
+      },
+      {
+        "catalogueId": "wikipedia-messier-77",
+        "url": "https://en.wikipedia.org/wiki/Messier_77",
+        "label": "Wikipedia, \"Messier 77\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1376966728",
+        "quote": "It is 35 million light-years (11 Mpc) away from Earth, and was discovered by Pierre Méchain in 1780, who originally described it as a nebula."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M77 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 9.78 × 9.78 arcmin on NGC 1068"
+        }
+      ]
+    }
+  }
+}

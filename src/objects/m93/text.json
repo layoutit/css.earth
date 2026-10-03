@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m93",
+  "card": {
+    "text": "M93 is an open star cluster in the Milky Way, about 971 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2447: dist50, the median of the maximum-likelihood distance, 970.9115571 pc (16th to 84th percentile 970 to 972)",
+        "checked": "2026-10-02",
+        "locator": "NGC_2447: dist50 970.9 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-93",
+        "url": "https://en.wikipedia.org/wiki/Messier_93",
+        "label": "Wikipedia, \"Messier 93\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101449",
+        "quote": "Messier 93 or M93, also known as NGC 2447 or the Critter Cluster, is an open cluster in the modestly southern constellation Puppis, the imagined poop deck of the legendary Argo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M93 is drawn as 673 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2447: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_2447: 673 members inside the tidal radius with a color"
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "673 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2447: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_2447, inrt = True"
+        }
+      ]
+    }
+  }
+}

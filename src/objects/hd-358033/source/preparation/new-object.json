@@ -1,0 +1,35 @@
+{
+  "id": "hd-358033",
+  "name": "HD 358033",
+  "system": "HD 358033 system",
+  "description": "A star of M73, a chance alignment of stars once thought to be a small cluster.",
+  "aliases": [
+    "M73",
+    "Messier 73",
+    "NGC 6994"
+  ],
+  "target": "HD 358033",
+  "gaia": "6888763058975491840",
+  "paper": {
+    "url": "https://arxiv.org/abs/astro-ph/0111601",
+    "credit": "Odenkirchen & Soubiran (2002), A&A 383, 163"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5987.6,
+    "source": "Gaia DR3 astrophysical parameters (CDS I/355/paramp), source 6888763058975491840: Teff 5987.6 K from the BP/RP spectra (GSP-Phot)",
+    "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star of M73, a chance alignment of stars once thought to be a small cluster.",
+    "introduction": "M73 (NGC 6994) is an asterism: its stars lie at different distances and are not bound to each other.",
+    "locator": "Title and abstract: NGC 6994 = M73 is clearly not a physical stellar ensemble"
+  },
+  "notes": [
+    "M73 has no package of its own: it is a chance alignment of unrelated stars. Its three brightest are drawn as bodies; Gaia DR3 publishes no temperature or radius for the next (Gaia DR3 6888762676722910720), so it is left out."
+  ],
+  "order": 5463
+}

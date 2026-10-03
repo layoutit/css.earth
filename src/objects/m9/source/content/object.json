@@ -1,0 +1,114 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m9",
+  "displayName": "M9",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "8.30 kpc (± 0.14)",
+        "source": {
+          "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+          "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+          "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6333: Rsun 8.3 ± 0.14 kpc",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 259.799°, Dec -18.516°",
+        "source": {
+          "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+          "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+          "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6333: NGC_6333, RA 259.799086, DEC -18.516257",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "half-members",
+        "label": "Half its members within",
+        "value": "6.1 pc of the centre",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_6333: r50pc 6.10, the radius holding half its members inside the tidal radius",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "members",
+        "label": "Member stars drawn",
+        "value": "442 Gaia DR3 stars",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6333: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "members",
+    "controls": [
+      {
+        "id": "members",
+        "label": "Gaia DR3 members",
+        "thumbnail": "m9-dataset-members.webp",
+        "volume": {
+          "objectId": "m9-members",
+          "datasetId": "members",
+          "surface": "members"
+        },
+        "source": {
+          "id": "m9-members",
+          "path": "../../m9-members/source/manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6333: Rsun 8.3 ± 0.14 kpc",
+      "href": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6333: NGC_6333, RA 259.799086, DEC -18.516257",
+      "href": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_6333: r50pc 6.10, the radius holding half its members inside the tidal radius",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6333: members inside the tidal radius (inrt) with a Gaia DR3 color",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+      "credit": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6333: Rsun 8.3 ± 0.14 kpc"
+    }
+  }
+}

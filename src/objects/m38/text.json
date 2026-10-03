@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m38",
+  "card": {
+    "text": "M38 is an open star cluster in the Milky Way, about 1,085 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_1912: dist50, the median of the maximum-likelihood distance, 1085.45644325 pc (16th to 84th percentile 1084 to 1087)",
+        "checked": "2026-10-02",
+        "locator": "NGC_1912: dist50 1085.5 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-38",
+        "url": "https://en.wikipedia.org/wiki/Messier_38",
+        "label": "Wikipedia, \"Messier 38\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373098617",
+        "quote": "Messier 38 or M38, also known as NGC 1912 or Starfish Cluster, is an open cluster of stars in the constellation of Auriga."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M38 is drawn as 743 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_1912: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_1912: 743 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-38",
+        "url": "https://en.wikipedia.org/wiki/Messier_38",
+        "label": "Wikipedia, \"Messier 38\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373098617",
+        "quote": "It was discovered by Giovanni Batista Hodierna before 1654 and independently found by Guillaume Le Gentil in 1749."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "743 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_1912: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_1912, inrt = True"
+        }
+      ]
+    }
+  }
+}

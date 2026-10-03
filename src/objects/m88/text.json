@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m88",
+  "card": {
+    "text": "A spiral galaxy 19.5 million parsecs away, tilted 63° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 41517: distance modulus 31.445 ± 0.39 mag",
+        "checked": "2026-10-02",
+        "locator": "distance: 19.45 Mpc (16.26 to 23.28)"
+      },
+      {
+        "catalogueId": "hyperleda-2014",
+        "url": "http://atlas.obs-hp.fr/hyperleda/",
+        "label": "HyperLEDA (Makarov et al. 2014), NGC4501 = PGC 41517: inclination 62.95°, major-axis position angle 138.25°, from its outline at 25 mag per square arcsecond",
+        "checked": "2026-10-02",
+        "locator": "inclination 62.95 deg"
+      },
+      {
+        "catalogueId": "wikipedia-messier-88",
+        "url": "https://en.wikipedia.org/wiki/Messier_88",
+        "label": "Wikipedia, \"Messier 88\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373230569",
+        "quote": "Messier 88 is an unbarred spiral galaxy about 50 to 60 million light-years away from Earth in the constellation Coma Berenices."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with foreground stars removed, laid flat on its measured disc; its bulge stands through it, from a published fit.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 13.86 arcmin wide"
+      },
+      {
+        "catalogueId": "salo-2015-s4g-decompositions",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
+        "label": "Salo et al. (2015), ApJS 219, 4: S4G Pipeline 4 decompositions, table 7",
+        "checked": "2026-10-03",
+        "locator": "NGC4501, model _bd: bulge 5.9% of the light, Re 5.24 arcsec, n 2.081"
+      },
+      {
+        "catalogueId": "wikipedia-messier-88",
+        "url": "https://en.wikipedia.org/wiki/Messier_88",
+        "label": "Wikipedia, \"Messier 88\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373230569",
+        "quote": "It was discovered by Charles Messier in 1781."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M88 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Flat picture on the measured disc; the bulge of a published fit stands through it. Depth is modelled.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 13.86 × 13.86 arcmin on NGC 4501"
+        }
+      ]
+    }
+  }
+}

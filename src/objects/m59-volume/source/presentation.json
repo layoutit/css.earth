@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m59-volume",
+  "name": "M59",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m59-volume/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "labs/nebula/models/m59/experiment.json"
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/m59-volume/source/delivery.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "SDSS · optical",
+      "title": "M59 in visible light",
+      "description": "The Sloan Digital Sky Survey's view of M59 with the Milky Way stars removed (NOX) and neighbouring galaxies masked, its light spread in depth through the spheroid of Kormendy et al.'s measured profile. Depth is modelled, not measured.",
+      "summary": "Survey image on a modelled spheroid; depth is not measured.",
+      "detail": "2100 × 2100 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "SDSS g, r, i"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "17.1 × 17.1 arcmin"
+        },
+        {
+          "id": "distance",
+          "label": "Distance",
+          "value": "15.4 Mpc"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": ".local/nebula-lab/planetary/m59-inferred-original.jpg",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=2100&height=2100&fov=0.284268&projection=TAN&coordsys=icrs&ra=190.509333&dec=11.647273&format=jpg"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1161 @@
+{
+  "schema": "cssearth-compact-symmetry@1",
+  "recipe": {
+    "schema": "cssearth-emission-inference@1",
+    "id": "m86-inferred",
+    "source": {
+      "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.444352&projection=TAN&coordsys=icrs&ra=186.549081&dec=12.94581&format=jpg",
+      "width": 3000,
+      "height": 3000,
+      "publisher": "https://www.sdss.org/",
+      "credit": "Sloan Digital Sky Survey DR9, g, r and i color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+    },
+    "crop": {
+      "left": 0,
+      "top": 0,
+      "width": 3000,
+      "height": 3000
+    },
+    "pointMasks": [],
+    "neighbourMasks": {
+      "source": "paturel-2003-hyperleda-pgc and the 2MASS Extended Source Catalog (galaxies), gaia-2023-dr3 (stars)",
+      "fill": "isophote",
+      "masks": [
+        {
+          "name": "PGC 40914 (NGC4438)",
+          "x": -1080,
+          "y": 1072,
+          "radius": 1504
+        },
+        {
+          "name": "PGC 40455 (NGC4374)",
+          "x": 3361,
+          "y": 1898,
+          "radius": 1090
+        },
+        {
+          "name": "PGC 40581 (NGC4388)",
+          "x": 2182,
+          "y": 3414,
+          "radius": 928
+        },
+        {
+          "name": "PGC 40644 (NGC4402)",
+          "x": 1609,
+          "y": 378,
+          "radius": 599
+        },
+        {
+          "name": "PGC 40816 (NGC4425)",
+          "x": -194,
+          "y": 2926,
+          "radius": 498
+        },
+        {
+          "name": "PGC 40562 (NGC4387)",
+          "x": 2322,
+          "y": 2416,
+          "radius": 293
+        },
+        {
+          "name": "PGC 40754 (IC3355)",
+          "x": 420,
+          "y": -48,
+          "radius": 185
+        },
+        {
+          "name": "PGC 40485 (IC3303)",
+          "x": 3052,
+          "y": 3061,
+          "radius": 161
+        },
+        {
+          "name": "PGC 40659 (VCC882)",
+          "x": 1408,
+          "y": 1379,
+          "radius": 136
+        },
+        {
+          "name": "PGC 40611 (VCC854)",
+          "x": 1946,
+          "y": 2698,
+          "radius": 106
+        },
+        {
+          "name": "PGC 40548 (VCC815)",
+          "x": 2441,
+          "y": 168,
+          "radius": 99
+        },
+        {
+          "name": "PGC 40707 (VCC916)",
+          "x": 909,
+          "y": 2870,
+          "radius": 91
+        },
+        {
+          "name": "PGC 40505 (VCC793)",
+          "x": 2866,
+          "y": 640,
+          "radius": 79
+        },
+        {
+          "name": "PGC 40661 (VCC884)",
+          "x": 1406,
+          "y": 177,
+          "radius": 75
+        },
+        {
+          "name": "PGC 40641 (VCC872)",
+          "x": 1653,
+          "y": 2079,
+          "radius": 74
+        },
+        {
+          "name": "PGC 40725 (VCC930)",
+          "x": 715,
+          "y": 2191,
+          "radius": 70
+        },
+        {
+          "name": "PGC 40574 (VCC833)",
+          "x": 2242,
+          "y": 1012,
+          "radius": 64
+        },
+        {
+          "name": "PGC 40679 (VCC896)",
+          "x": 1208,
+          "y": 2596,
+          "radius": 60
+        },
+        {
+          "name": "PGC 1417787",
+          "x": 111,
+          "y": 2020,
+          "radius": 57
+        },
+        {
+          "name": "PGC 40523 (VCC804)",
+          "x": 2653,
+          "y": 1270,
+          "radius": 56
+        },
+        {
+          "name": "PGC 40769 (VCC956)",
+          "x": 287,
+          "y": 1415,
+          "radius": 51
+        },
+        {
+          "name": "PGC 169262",
+          "x": 2479,
+          "y": 2990,
+          "radius": 51
+        },
+        {
+          "name": "PGC 169281",
+          "x": 1154,
+          "y": 1366,
+          "radius": 50
+        },
+        {
+          "name": "PGC 169266",
+          "x": 2338,
+          "y": 813,
+          "radius": 49
+        },
+        {
+          "name": "PGC 169283",
+          "x": 1093,
+          "y": 2636,
+          "radius": 48
+        },
+        {
+          "name": "PGC 169300",
+          "x": 531,
+          "y": 1146,
+          "radius": 48
+        },
+        {
+          "name": "PGC 169291",
+          "x": 822,
+          "y": 1565,
+          "radius": 46
+        },
+        {
+          "name": "PGC 169308",
+          "x": 164,
+          "y": 1731,
+          "radius": 41
+        },
+        {
+          "name": "PGC 40577 (VCC838)",
+          "x": 2193,
+          "y": 2788,
+          "radius": 41
+        },
+        {
+          "name": "PGC 40592 (VCC844)",
+          "x": 2129,
+          "y": 323,
+          "radius": 38
+        },
+        {
+          "name": "PGC 40721 (VCC927)",
+          "x": 765,
+          "y": 605,
+          "radius": 38
+        },
+        {
+          "name": "PGC 40787 (VCC967)",
+          "x": 73,
+          "y": 2044,
+          "radius": 37
+        },
+        {
+          "name": "PGC 40691 (VCC903)",
+          "x": 1077,
+          "y": 1685,
+          "radius": 34
+        },
+        {
+          "name": "PGC 40593 (VCC843)",
+          "x": 2127,
+          "y": 2474,
+          "radius": 33
+        },
+        {
+          "name": "PGC 40718 (VCC923)",
+          "x": 830,
+          "y": 2473,
+          "radius": 31
+        },
+        {
+          "name": "PGC 40545 (VCC814)",
+          "x": 2456,
+          "y": 2146,
+          "radius": 27
+        },
+        {
+          "name": "2MASX J12250377+1253130",
+          "x": 3364,
+          "y": 1896,
+          "radius": 647
+        },
+        {
+          "name": "2MASX J12260756+1306460",
+          "x": 1615,
+          "y": 372,
+          "radius": 619
+        },
+        {
+          "name": "2MASX J12254682+1239434",
+          "x": 2185,
+          "y": 3415,
+          "radius": 523
+        },
+        {
+          "name": "2MASX J12271335+1244052",
+          "x": -190,
+          "y": 2923,
+          "radius": 378
+        },
+        {
+          "name": "2MASX J12260374+1306432",
+          "x": 1720,
+          "y": 377,
+          "radius": 294
+        },
+        {
+          "name": "2MASX J12254171+1248372",
+          "x": 2324,
+          "y": 2414,
+          "radius": 216
+        },
+        {
+          "name": "2MASX J12251519+1242519",
+          "x": 3052,
+          "y": 3061,
+          "radius": 73
+        },
+        {
+          "name": "2MASX J12262488+1258170",
+          "x": 1140,
+          "y": 1327,
+          "radius": 63
+        },
+        {
+          "name": "2MASX J12263322+1244350",
+          "x": 911,
+          "y": 2868,
+          "radius": 56
+        },
+        {
+          "name": "2MASX J12262844+1256440",
+          "x": 1043,
+          "y": 1501,
+          "radius": 53
+        },
+        {
+          "name": "2MASX J12270053+1254417",
+          "x": 163,
+          "y": 1730,
+          "radius": 49
+        },
+        {
+          "name": "2MASX J12270577+1247292",
+          "x": 18,
+          "y": 2541,
+          "radius": 32
+        },
+        {
+          "name": "2MASX J12262652+1246390",
+          "x": 1095,
+          "y": 2636,
+          "radius": 29
+        },
+        {
+          "name": "2MASX J12270237+1252077",
+          "x": 112,
+          "y": 2019,
+          "radius": 28
+        },
+        {
+          "name": "2MASX J12265437+1252077",
+          "x": 331,
+          "y": 2019,
+          "radius": 28
+        },
+        {
+          "name": "2MASX J12264726+1259537",
+          "x": 527,
+          "y": 1145,
+          "radius": 28
+        },
+        {
+          "name": "Gaia DR3 3908735769133270528 (G 9.9)",
+          "x": 2956,
+          "y": 56,
+          "radius": 137
+        },
+        {
+          "name": "Gaia DR3 3908704398692156160 (G 11.5)",
+          "x": 3042,
+          "y": 2702,
+          "radius": 66
+        },
+        {
+          "name": "Gaia DR3 3908736074075081728 (G 12.1)",
+          "x": 2819,
+          "y": 3,
+          "radius": 51
+        },
+        {
+          "name": "Gaia DR3 3908756144458123520 (G 12.6)",
+          "x": 2112,
+          "y": 182,
+          "radius": 41
+        },
+        {
+          "name": "Gaia DR3 3908713366583874688 (G 12.7)",
+          "x": 1197,
+          "y": 1822,
+          "radius": 38
+        },
+        {
+          "name": "Gaia DR3 3908731680324428800 (G 13.0)",
+          "x": 2169,
+          "y": 558,
+          "radius": 34
+        },
+        {
+          "name": "Gaia DR3 3908741232331707136 (G 13.1)",
+          "x": 372,
+          "y": 352,
+          "radius": 31
+        },
+        {
+          "name": "Gaia DR3 3908756488055507328 (G 13.2)",
+          "x": 2300,
+          "y": -12,
+          "radius": 31
+        },
+        {
+          "name": "Gaia DR3 3908706528995937152 (G 13.3)",
+          "x": 2399,
+          "y": 2264,
+          "radius": 30
+        },
+        {
+          "name": "Gaia DR3 3908718417465427968 (G 13.6)",
+          "x": 1429,
+          "y": 1017,
+          "radius": 25
+        },
+        {
+          "name": "Gaia DR3 3907957967735765760 (G 13.7)",
+          "x": 419,
+          "y": 2678,
+          "radius": 24
+        },
+        {
+          "name": "Gaia DR3 3908703333540266880 (G 14.0)",
+          "x": 2651,
+          "y": 2844,
+          "radius": 21
+        },
+        {
+          "name": "Gaia DR3 3908741610288833792 (G 14.2)",
+          "x": 100,
+          "y": 232,
+          "radius": 19
+        },
+        {
+          "name": "Gaia DR3 3908732642397079168 (G 14.4)",
+          "x": 2257,
+          "y": 287,
+          "radius": 18
+        },
+        {
+          "name": "Gaia DR3 3908714981491580160 (G 14.5)",
+          "x": 1282,
+          "y": 1404,
+          "radius": 17
+        },
+        {
+          "name": "Gaia DR3 3908732161360741120 (G 14.4)",
+          "x": 2551,
+          "y": 521,
+          "radius": 17
+        },
+        {
+          "name": "Gaia DR3 3908744393427626624 (G 14.5)",
+          "x": 864,
+          "y": 247,
+          "radius": 17
+        },
+        {
+          "name": "Gaia DR3 3908755216745211904 (G 14.5)",
+          "x": 1583,
+          "y": 236,
+          "radius": 17
+        },
+        {
+          "name": "Gaia DR3 3907986486318613248 (G 14.7)",
+          "x": 373,
+          "y": 1688,
+          "radius": 16
+        },
+        {
+          "name": "Gaia DR3 3908737933796822528 (G 14.8)",
+          "x": 677,
+          "y": 1161,
+          "radius": 15
+        },
+        {
+          "name": "Gaia DR3 3908712885547537024 (G 14.9)",
+          "x": 1557,
+          "y": 1809,
+          "radius": 14
+        },
+        {
+          "name": "Gaia DR3 3908713053050455808 (G 14.9)",
+          "x": 1983,
+          "y": 1768,
+          "radius": 14
+        },
+        {
+          "name": "Gaia DR3 3908716630759018368 (G 14.9)",
+          "x": 2691,
+          "y": 1675,
+          "radius": 14
+        },
+        {
+          "name": "Gaia DR3 3908730477733560064 (G 14.9)",
+          "x": 2785,
+          "y": 744,
+          "radius": 14
+        }
+      ]
+    },
+    "nativeRemoval": {
+      "directory": ".local/nebula-lab/m86/nox",
+      "model": {
+        "path": ".local/open-star-removal/noxGeneratorColor.pb"
+      }
+    },
+    "grid": {
+      "width": 150,
+      "height": 150,
+      "depth": 150
+    },
+    "prior": {
+      "axis": [
+        0.55528,
+        0.831663,
+        0
+      ],
+      "center": [
+        74.5,
+        74.5,
+        74.5
+      ],
+      "binWidth": 1
+    },
+    "tau": 0.001,
+    "iterations": 100,
+    "blackLevel": [
+      0.02,
+      0.02,
+      0.016
+    ],
+    "displayExposure": 1.5,
+    "slices": 48,
+    "assumptions": [
+      "Depth follows the deprojected density (Prugniel & Simien 1997) of Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4406: n = 10.27 (+0.49, -0.35), half-light radius 2341.62 (+625, -357) arcsec, on an oblate spheroid whose axis is M86's minor axis (position angle 213.73000000000002 degrees: the major axis is at 123.73 degrees in the last row of Table 3, at 799.834 arcsec, because the fit's half-light radius lies beyond the measured profile) in the plane of the sky, axis ratio 0.625 (1 - 0.375, the ellipticity of the same row). The survey image's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
+      "The prior ends at 0.342 half-light radii, where Kormendy et al.'s Table 3 profile of NGC 4406 stops (799.834 arcsec, 66.2 kpc at 17.1 Mpc); light beyond that spheroid is not drawn.",
+      "The 3000 x 3000 px cutout is requested on M86's HyperLEDA position (PGC 40653: 186.549081, +12.94581) in a tangent projection, north up and east left, 0.444352 degrees wide (twice 799.834 arcsec, 0.5332 arcsec per px), so its registration is the request's.",
+      "NOX removes stars; what it leaves is masked afterwards: 36 neighbouring galaxies from HyperLEDA PGC (Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) at 3 times their D25 radius, M87's rule; 16 from the 2MASS Extended Source Catalog (CDS VII/233), which sizes the galaxies HyperLEDA gives no D25, at 3 times their K-band 20 mag isophotal radius; and the 24 Gaia DR3 stars brighter than G = 15, whose haloes NOX leaves, at 45 arcsec for G = 11, scaled with brightness (a factor 10 in radius per 5 magnitudes). No mask reaches beyond nine tenths of its distance from M86's centre (chosen here), so every isophote keeps unmasked light. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the measured axis ratio and position angle), never more than it held.",
+      "Every pixel is clamped to the median of the 51 px square around it, so star haloes and small background galaxies that NOX and the masks leave are not spread through the spheroid.",
+      "Black level per channel: the median of the cleaned cutout's four 150 px corners, red 0.020, green 0.020, blue 0.016 (5, 5 and 4 of 255).",
+      "The color is the survey's published g, r, i display composite, not calibrated photometry. Single-image depth is modelled by the prior, not measured."
+    ],
+    "compactClamp": {
+      "windowPx": 51,
+      "basis": "51 px (27.2 arcsec, 2.2 kpc) is about two and a half of the grid's 20.0 px cells, the proportion M87's recipe uses: light more compact than that cannot be M86's smooth light at this grid."
+    },
+    "shapePrior": {
+      "components": [
+        {
+          "kind": "sersic",
+          "axis": [
+            0.55528,
+            0.831663,
+            0
+          ],
+          "radius": 219.573,
+          "radialSigma": 1,
+          "axialSigma": 1,
+          "weight": 1,
+          "sersicIndex": 10.27,
+          "axisRatio": 0.625
+        }
+      ],
+      "sigmaCutoff": 0.342
+    },
+    "modelReference": {
+      "paper": "https://arxiv.org/abs/0810.1681"
+    }
+  },
+  "channels": [
+    {
+      "path": "src/objects/m86-volume/source/compact/emission-0.f32.gz",
+      "bytes": 13500000
+    },
+    {
+      "path": "src/objects/m86-volume/source/compact/emission-1.f32.gz",
+      "bytes": 13500000
+    },
+    {
+      "path": "src/objects/m86-volume/source/compact/emission-2.f32.gz",
+      "bytes": 13500000
+    }
+  ],
+  "provenance": {
+    "method": "Image-conditioned emission in an authored geometric prior; no image-only depth inference",
+    "doi": "https://arxiv.org/abs/0810.1681",
+    "recipePath": "labs/nebula/models/m86/experiment.json",
+    "recipe": {
+      "schema": "cssearth-emission-inference@1",
+      "id": "m86-inferred",
+      "source": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.444352&projection=TAN&coordsys=icrs&ra=186.549081&dec=12.94581&format=jpg",
+        "width": 3000,
+        "height": 3000,
+        "publisher": "https://www.sdss.org/",
+        "credit": "Sloan Digital Sky Survey DR9, g, r and i color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service."
+      },
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 3000,
+        "height": 3000
+      },
+      "pointMasks": [],
+      "neighbourMasks": {
+        "source": "paturel-2003-hyperleda-pgc and the 2MASS Extended Source Catalog (galaxies), gaia-2023-dr3 (stars)",
+        "fill": "isophote",
+        "masks": [
+          {
+            "name": "PGC 40914 (NGC4438)",
+            "x": -1080,
+            "y": 1072,
+            "radius": 1504
+          },
+          {
+            "name": "PGC 40455 (NGC4374)",
+            "x": 3361,
+            "y": 1898,
+            "radius": 1090
+          },
+          {
+            "name": "PGC 40581 (NGC4388)",
+            "x": 2182,
+            "y": 3414,
+            "radius": 928
+          },
+          {
+            "name": "PGC 40644 (NGC4402)",
+            "x": 1609,
+            "y": 378,
+            "radius": 599
+          },
+          {
+            "name": "PGC 40816 (NGC4425)",
+            "x": -194,
+            "y": 2926,
+            "radius": 498
+          },
+          {
+            "name": "PGC 40562 (NGC4387)",
+            "x": 2322,
+            "y": 2416,
+            "radius": 293
+          },
+          {
+            "name": "PGC 40754 (IC3355)",
+            "x": 420,
+            "y": -48,
+            "radius": 185
+          },
+          {
+            "name": "PGC 40485 (IC3303)",
+            "x": 3052,
+            "y": 3061,
+            "radius": 161
+          },
+          {
+            "name": "PGC 40659 (VCC882)",
+            "x": 1408,
+            "y": 1379,
+            "radius": 136
+          },
+          {
+            "name": "PGC 40611 (VCC854)",
+            "x": 1946,
+            "y": 2698,
+            "radius": 106
+          },
+          {
+            "name": "PGC 40548 (VCC815)",
+            "x": 2441,
+            "y": 168,
+            "radius": 99
+          },
+          {
+            "name": "PGC 40707 (VCC916)",
+            "x": 909,
+            "y": 2870,
+            "radius": 91
+          },
+          {
+            "name": "PGC 40505 (VCC793)",
+            "x": 2866,
+            "y": 640,
+            "radius": 79
+          },
+          {
+            "name": "PGC 40661 (VCC884)",
+            "x": 1406,
+            "y": 177,
+            "radius": 75
+          },
+          {
+            "name": "PGC 40641 (VCC872)",
+            "x": 1653,
+            "y": 2079,
+            "radius": 74
+          },
+          {
+            "name": "PGC 40725 (VCC930)",
+            "x": 715,
+            "y": 2191,
+            "radius": 70
+          },
+          {
+            "name": "PGC 40574 (VCC833)",
+            "x": 2242,
+            "y": 1012,
+            "radius": 64
+          },
+          {
+            "name": "PGC 40679 (VCC896)",
+            "x": 1208,
+            "y": 2596,
+            "radius": 60
+          },
+          {
+            "name": "PGC 1417787",
+            "x": 111,
+            "y": 2020,
+            "radius": 57
+          },
+          {
+            "name": "PGC 40523 (VCC804)",
+            "x": 2653,
+            "y": 1270,
+            "radius": 56
+          },
+          {
+            "name": "PGC 40769 (VCC956)",
+            "x": 287,
+            "y": 1415,
+            "radius": 51
+          },
+          {
+            "name": "PGC 169262",
+            "x": 2479,
+            "y": 2990,
+            "radius": 51
+          },
+          {
+            "name": "PGC 169281",
+            "x": 1154,
+            "y": 1366,
+            "radius": 50
+          },
+          {
+            "name": "PGC 169266",
+            "x": 2338,
+            "y": 813,
+            "radius": 49
+          },
+          {
+            "name": "PGC 169283",
+            "x": 1093,
+            "y": 2636,
+            "radius": 48
+          },
+          {
+            "name": "PGC 169300",
+            "x": 531,
+            "y": 1146,
+            "radius": 48
+          },
+          {
+            "name": "PGC 169291",
+            "x": 822,
+            "y": 1565,
+            "radius": 46
+          },
+          {
+            "name": "PGC 169308",
+            "x": 164,
+            "y": 1731,
+            "radius": 41
+          },
+          {
+            "name": "PGC 40577 (VCC838)",
+            "x": 2193,
+            "y": 2788,
+            "radius": 41
+          },
+          {
+            "name": "PGC 40592 (VCC844)",
+            "x": 2129,
+            "y": 323,
+            "radius": 38
+          },
+          {
+            "name": "PGC 40721 (VCC927)",
+            "x": 765,
+            "y": 605,
+            "radius": 38
+          },
+          {
+            "name": "PGC 40787 (VCC967)",
+            "x": 73,
+            "y": 2044,
+            "radius": 37
+          },
+          {
+            "name": "PGC 40691 (VCC903)",
+            "x": 1077,
+            "y": 1685,
+            "radius": 34
+          },
+          {
+            "name": "PGC 40593 (VCC843)",
+            "x": 2127,
+            "y": 2474,
+            "radius": 33
+          },
+          {
+            "name": "PGC 40718 (VCC923)",
+            "x": 830,
+            "y": 2473,
+            "radius": 31
+          },
+          {
+            "name": "PGC 40545 (VCC814)",
+            "x": 2456,
+            "y": 2146,
+            "radius": 27
+          },
+          {
+            "name": "2MASX J12250377+1253130",
+            "x": 3364,
+            "y": 1896,
+            "radius": 647
+          },
+          {
+            "name": "2MASX J12260756+1306460",
+            "x": 1615,
+            "y": 372,
+            "radius": 619
+          },
+          {
+            "name": "2MASX J12254682+1239434",
+            "x": 2185,
+            "y": 3415,
+            "radius": 523
+          },
+          {
+            "name": "2MASX J12271335+1244052",
+            "x": -190,
+            "y": 2923,
+            "radius": 378
+          },
+          {
+            "name": "2MASX J12260374+1306432",
+            "x": 1720,
+            "y": 377,
+            "radius": 294
+          },
+          {
+            "name": "2MASX J12254171+1248372",
+            "x": 2324,
+            "y": 2414,
+            "radius": 216
+          },
+          {
+            "name": "2MASX J12251519+1242519",
+            "x": 3052,
+            "y": 3061,
+            "radius": 73
+          },
+          {
+            "name": "2MASX J12262488+1258170",
+            "x": 1140,
+            "y": 1327,
+            "radius": 63
+          },
+          {
+            "name": "2MASX J12263322+1244350",
+            "x": 911,
+            "y": 2868,
+            "radius": 56
+          },
+          {
+            "name": "2MASX J12262844+1256440",
+            "x": 1043,
+            "y": 1501,
+            "radius": 53
+          },
+          {
+            "name": "2MASX J12270053+1254417",
+            "x": 163,
+            "y": 1730,
+            "radius": 49
+          },
+          {
+            "name": "2MASX J12270577+1247292",
+            "x": 18,
+            "y": 2541,
+            "radius": 32
+          },
+          {
+            "name": "2MASX J12262652+1246390",
+            "x": 1095,
+            "y": 2636,
+            "radius": 29
+          },
+          {
+            "name": "2MASX J12270237+1252077",
+            "x": 112,
+            "y": 2019,
+            "radius": 28
+          },
+          {
+            "name": "2MASX J12265437+1252077",
+            "x": 331,
+            "y": 2019,
+            "radius": 28
+          },
+          {
+            "name": "2MASX J12264726+1259537",
+            "x": 527,
+            "y": 1145,
+            "radius": 28
+          },
+          {
+            "name": "Gaia DR3 3908735769133270528 (G 9.9)",
+            "x": 2956,
+            "y": 56,
+            "radius": 137
+          },
+          {
+            "name": "Gaia DR3 3908704398692156160 (G 11.5)",
+            "x": 3042,
+            "y": 2702,
+            "radius": 66
+          },
+          {
+            "name": "Gaia DR3 3908736074075081728 (G 12.1)",
+            "x": 2819,
+            "y": 3,
+            "radius": 51
+          },
+          {
+            "name": "Gaia DR3 3908756144458123520 (G 12.6)",
+            "x": 2112,
+            "y": 182,
+            "radius": 41
+          },
+          {
+            "name": "Gaia DR3 3908713366583874688 (G 12.7)",
+            "x": 1197,
+            "y": 1822,
+            "radius": 38
+          },
+          {
+            "name": "Gaia DR3 3908731680324428800 (G 13.0)",
+            "x": 2169,
+            "y": 558,
+            "radius": 34
+          },
+          {
+            "name": "Gaia DR3 3908741232331707136 (G 13.1)",
+            "x": 372,
+            "y": 352,
+            "radius": 31
+          },
+          {
+            "name": "Gaia DR3 3908756488055507328 (G 13.2)",
+            "x": 2300,
+            "y": -12,
+            "radius": 31
+          },
+          {
+            "name": "Gaia DR3 3908706528995937152 (G 13.3)",
+            "x": 2399,
+            "y": 2264,
+            "radius": 30
+          },
+          {
+            "name": "Gaia DR3 3908718417465427968 (G 13.6)",
+            "x": 1429,
+            "y": 1017,
+            "radius": 25
+          },
+          {
+            "name": "Gaia DR3 3907957967735765760 (G 13.7)",
+            "x": 419,
+            "y": 2678,
+            "radius": 24
+          },
+          {
+            "name": "Gaia DR3 3908703333540266880 (G 14.0)",
+            "x": 2651,
+            "y": 2844,
+            "radius": 21
+          },
+          {
+            "name": "Gaia DR3 3908741610288833792 (G 14.2)",
+            "x": 100,
+            "y": 232,
+            "radius": 19
+          },
+          {
+            "name": "Gaia DR3 3908732642397079168 (G 14.4)",
+            "x": 2257,
+            "y": 287,
+            "radius": 18
+          },
+          {
+            "name": "Gaia DR3 3908714981491580160 (G 14.5)",
+            "x": 1282,
+            "y": 1404,
+            "radius": 17
+          },
+          {
+            "name": "Gaia DR3 3908732161360741120 (G 14.4)",
+            "x": 2551,
+            "y": 521,
+            "radius": 17
+          },
+          {
+            "name": "Gaia DR3 3908744393427626624 (G 14.5)",
+            "x": 864,
+            "y": 247,
+            "radius": 17
+          },
+          {
+            "name": "Gaia DR3 3908755216745211904 (G 14.5)",
+            "x": 1583,
+            "y": 236,
+            "radius": 17
+          },
+          {
+            "name": "Gaia DR3 3907986486318613248 (G 14.7)",
+            "x": 373,
+            "y": 1688,
+            "radius": 16
+          },
+          {
+            "name": "Gaia DR3 3908737933796822528 (G 14.8)",
+            "x": 677,
+            "y": 1161,
+            "radius": 15
+          },
+          {
+            "name": "Gaia DR3 3908712885547537024 (G 14.9)",
+            "x": 1557,
+            "y": 1809,
+            "radius": 14
+          },
+          {
+            "name": "Gaia DR3 3908713053050455808 (G 14.9)",
+            "x": 1983,
+            "y": 1768,
+            "radius": 14
+          },
+          {
+            "name": "Gaia DR3 3908716630759018368 (G 14.9)",
+            "x": 2691,
+            "y": 1675,
+            "radius": 14
+          },
+          {
+            "name": "Gaia DR3 3908730477733560064 (G 14.9)",
+            "x": 2785,
+            "y": 744,
+            "radius": 14
+          }
+        ]
+      },
+      "nativeRemoval": {
+        "directory": ".local/nebula-lab/m86/nox",
+        "model": {
+          "path": ".local/open-star-removal/noxGeneratorColor.pb"
+        }
+      },
+      "grid": {
+        "width": 150,
+        "height": 150,
+        "depth": 150
+      },
+      "prior": {
+        "axis": [
+          0.55528,
+          0.831663,
+          0
+        ],
+        "center": [
+          74.5,
+          74.5,
+          74.5
+        ],
+        "binWidth": 1
+      },
+      "tau": 0.001,
+      "iterations": 100,
+      "blackLevel": [
+        0.02,
+        0.02,
+        0.016
+      ],
+      "displayExposure": 1.5,
+      "slices": 48,
+      "assumptions": [
+        "Depth follows the deprojected density (Prugniel & Simien 1997) of Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4406: n = 10.27 (+0.49, -0.35), half-light radius 2341.62 (+625, -357) arcsec, on an oblate spheroid whose axis is M86's minor axis (position angle 213.73000000000002 degrees: the major axis is at 123.73 degrees in the last row of Table 3, at 799.834 arcsec, because the fit's half-light radius lies beyond the measured profile) in the plane of the sky, axis ratio 0.625 (1 - 0.375, the ellipticity of the same row). The survey image's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
+        "The prior ends at 0.342 half-light radii, where Kormendy et al.'s Table 3 profile of NGC 4406 stops (799.834 arcsec, 66.2 kpc at 17.1 Mpc); light beyond that spheroid is not drawn.",
+        "The 3000 x 3000 px cutout is requested on M86's HyperLEDA position (PGC 40653: 186.549081, +12.94581) in a tangent projection, north up and east left, 0.444352 degrees wide (twice 799.834 arcsec, 0.5332 arcsec per px), so its registration is the request's.",
+        "NOX removes stars; what it leaves is masked afterwards: 36 neighbouring galaxies from HyperLEDA PGC (Paturel et al. 2003, CDS VII/237: every galaxy with a D25 whose mask reaches the cutout) at 3 times their D25 radius, M87's rule; 16 from the 2MASS Extended Source Catalog (CDS VII/233), which sizes the galaxies HyperLEDA gives no D25, at 3 times their K-band 20 mag isophotal radius; and the 24 Gaia DR3 stars brighter than G = 15, whose haloes NOX leaves, at 45 arcsec for G = 11, scaled with brightness (a factor 10 in radius per 5 magnitudes). No mask reaches beyond nine tenths of its distance from M86's centre (chosen here), so every isophote keeps unmasked light. A masked pixel takes the median of the unmasked light on its own isophote (the ellipse through it with the measured axis ratio and position angle), never more than it held.",
+        "Every pixel is clamped to the median of the 51 px square around it, so star haloes and small background galaxies that NOX and the masks leave are not spread through the spheroid.",
+        "Black level per channel: the median of the cleaned cutout's four 150 px corners, red 0.020, green 0.020, blue 0.016 (5, 5 and 4 of 255).",
+        "The color is the survey's published g, r, i display composite, not calibrated photometry. Single-image depth is modelled by the prior, not measured."
+      ],
+      "compactClamp": {
+        "windowPx": 51,
+        "basis": "51 px (27.2 arcsec, 2.2 kpc) is about two and a half of the grid's 20.0 px cells, the proportion M87's recipe uses: light more compact than that cannot be M86's smooth light at this grid."
+      },
+      "shapePrior": {
+        "components": [
+          {
+            "kind": "sersic",
+            "axis": [
+              0.55528,
+              0.831663,
+              0
+            ],
+            "radius": 219.573,
+            "radialSigma": 1,
+            "axialSigma": 1,
+            "weight": 1,
+            "sersicIndex": 10.27,
+            "axisRatio": 0.625
+          }
+        ],
+        "sigmaCutoff": 0.342
+      },
+      "modelReference": {
+        "paper": "https://arxiv.org/abs/0810.1681"
+      }
+    },
+    "nativeRemoval": {
+      "settings": {
+        "directory": ".local/nebula-lab/m86/nox",
+        "model": {
+          "path": ".local/open-star-removal/noxGeneratorColor.pb"
+        }
+      },
+      "source": ".local/nebula-lab/m86/nox-source.png",
+      "receipt": ".local/nebula-lab/m86/nox/result.json",
+      "diffuse": ".local/nebula-lab/m86/nox/diffuse.png",
+      "timing": {
+        "modelLoadSeconds": 0.23153037500014761,
+        "inferenceSeconds": 10.911969791000047,
+        "inferredTiles": 64,
+        "batchSize": 2,
+        "threads": 6
+      }
+    },
+    "uncoveredSignalFractions": [
+      0.021955914320672978,
+      0.019984689821874332,
+      0.0030917303497628367
+    ],
+    "projectionCaveat": "Agreement on supported rays is imposed by normalization and does not validate depth geometry.",
+    "coordinateMeaning": "Image x right, y up in display; dimensionless units. No measured gas density, scale, distance or sky registration.",
+    "reports": [
+      {
+        "iteration": 0,
+        "relativeChange": 0,
+        "relativeProjectionError": 0.021430380741048194
+      },
+      {
+        "iteration": 0,
+        "relativeChange": 0,
+        "relativeProjectionError": 0.019676627602071135
+      },
+      {
+        "iteration": 0,
+        "relativeChange": 0,
+        "relativeProjectionError": 0.012504080053467289
+      }
+    ]
+  },
+  "interpretation": "Three RGB emissivity voxel fields before optical integration, not rendered slices."
+}

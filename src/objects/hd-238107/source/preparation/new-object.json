@@ -1,0 +1,35 @@
+{
+  "id": "hd-238107",
+  "name": "HD 238107",
+  "system": "HD 238107 system",
+  "description": "One of the two unrelated stars that Charles Messier catalogued as M40.",
+  "aliases": [
+    "M40",
+    "Messier 40",
+    "Winnecke 4"
+  ],
+  "target": "HD 238107",
+  "gaia": "1575047353068482688",
+  "paper": {
+    "url": "https://arxiv.org/pdf/1612.00834",
+    "credit": "Merrifield, Gray & Haran (2016)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5290.9,
+    "source": "Gaia DR3 astrophysical parameters (CDS I/355/paramp), source 1575047353068482688: Teff 5290.9 K from the BP/RP spectra (GSP-Phot)",
+    "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "One of the two unrelated stars that Charles Messier catalogued as M40.",
+    "introduction": "M40, also called Winnecke 4, is an optical double: this giant star and HD 238108 lie at different distances.",
+    "locator": "Abstract: Messier 40 comprises a pair of entirely unrelated stars (Hipparcos/Gaia parallaxes)"
+  },
+  "notes": [
+    "M40 has no package of its own: it is two unrelated stars, each drawn as its own body."
+  ],
+  "order": 5465
+}

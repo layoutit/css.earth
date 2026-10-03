@@ -1,0 +1,28 @@
+{
+  "id": "m17",
+  "classification": "nebula",
+  "order": 5217,
+  "physical": {
+    "name": "Omega Nebula",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Omega Nebula is recorded: it is an extended nebula, and its package frames it at 8.09 pc (object.json worldFrame.bodyRadiusM), half its picture's short side, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 275.11875,
+    "declinationDegrees": -16.182777777777776,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 1680,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "Kuhn et al. (2019), Table 1, M17",
+      "distance": "Kuhn et al. (2019), Kinematics in young star clusters and associations with Gaia DR2, ApJ 870, 32; CDS J/ApJ/870/32, Table 1, M17: distance 1680 pc (-110 / +130) from the Gaia DR2 parallaxes of its young stars (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/870/32)",
+      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Zero: no radial velocity is recorded for the nebula here."
+    }
+  }
+}

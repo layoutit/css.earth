@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "hd-358033",
+  "displayName": "HD 358033",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.8 solar radii",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-358033",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "383 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-358033",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hd-358033-dataset-color.webp",
+        "surface": "hd-358033-surface-color@2x.webp",
+        "poles": "hd-358033-poles-color@2x.webp",
+        "source": {
+          "id": "hd-358033-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6888763058975491840&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,987.6 K and log g 4.01 (u1 0.413, u2 0.287): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Odenkirchen & Soubiran (2002), A&A 383, 163",
+      "href": "https://arxiv.org/abs/astro-ph/0111601"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/astro-ph/0111601",
+      "credit": "Odenkirchen & Soubiran (2002), A&A 383, 163"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-358033.json",
+      "credit": "Gaia DR3 FLAME radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

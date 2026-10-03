@@ -68,9 +68,9 @@ const packageRoot = resolve(import.meta.dirname, '..');
 const order = (a: {id: string; order?: number}, b: {id: string; order?: number}) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en');
 const kinds = { planet: 'PLANET_IDS', 'dwarf-planet': 'DWARF_PLANET_IDS', asteroid: 'ASTEROID_IDS',
   'trans-neptunian': 'TRANS_NEPTUNIAN_IDS', interstellar: 'INTERSTELLAR_IDS', comet: 'COMET_IDS', exoplanet: 'EXOPLANET_IDS',
-  'black-hole': 'BLACK_HOLE_IDS', galaxy: 'GALAXY_IDS', 'galaxy-cluster': 'GALAXY_CLUSTER_IDS', nebula: 'NEBULA_IDS', 'globular-cluster': 'GLOBULAR_CLUSTER_IDS' };
+  'black-hole': 'BLACK_HOLE_IDS', galaxy: 'GALAXY_IDS', 'galaxy-cluster': 'GALAXY_CLUSTER_IDS', nebula: 'NEBULA_IDS', 'globular-cluster': 'GLOBULAR_CLUSTER_IDS', 'open-cluster': 'OPEN_CLUSTER_IDS' };
 /** Classifications placed by astrometry, as @cssearth/objects PLACED_CLASSIFICATIONS lists them (this package does not import it). */
-const EXTENDED = ['galaxy', 'galaxy-cluster', 'nebula', 'globular-cluster'];
+const EXTENDED = ['galaxy', 'galaxy-cluster', 'nebula', 'globular-cluster', 'open-cluster'];
 const PLACED = ['star', 'black-hole', ...EXTENDED];
 const models = {
   asteroid: ['ASTEROID_ELEMENTS', "import type { KeplerianElements } from '../../kepler.js'", '{ query: string; elements: KeplerianElements }'],

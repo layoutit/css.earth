@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "feldmeier-pne",
+  "table": {
+    "path": "tab2-4.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/479/231/tab2-4.dat",
+    "bytes": 8934,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        7,
+        8
+      ],
+      "raH": [
+        10,
+        11
+      ],
+      "raM": [
+        13,
+        14
+      ],
+      "raS": [
+        16,
+        20
+      ],
+      "decSign": [
+        22,
+        22
+      ],
+      "decD": [
+        23,
+        24
+      ],
+      "decM": [
+        26,
+        27
+      ],
+      "decS": [
+        29,
+        32
+      ]
+    }
+  },
+  "filters": [
+    {
+      "column": [
+        1,
+        5
+      ],
+      "op": "==",
+      "value": "M  96",
+      "basis": "The table holds M101, M51 and M96; these are M96's rows."
+    }
+  ],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection."
+  },
+  "source": "feldmeier-1997-spiral-pne",
+  "meaning": "Planetary nebula candidates of M96 from Feldmeier et al.'s (1997) [O III] survey: one dot per nebula at its catalogue position.",
+  "appearance": {
+    "colorCss": "#9dffcf",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the planetary-nebula color M31's and M33's dots share. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

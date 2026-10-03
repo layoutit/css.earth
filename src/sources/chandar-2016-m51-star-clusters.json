@@ -1,0 +1,54 @@
+{
+  "id": "chandar-2016-m51-star-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The age, mass, and size distributions of star clusters in M51",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2016ApJ...824...71C"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/824/71"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...824...71C",
+      "label": "2016ApJ...824...71C"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/824/71",
+      "label": "CDS J/ApJ/824/71"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/824/71/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table1.dat: 3,812 rows; 3,812 drawn as Whirlpool Galaxy's star clusters."
+    }
+  ],
+  "creators": [
+    "R. Chandar",
+    "B. C. Whitmore",
+    "D. Dinino",
+    "R. C. Kennicutt",
+    "L.-H. Chien",
+    "E. Schinnerer"
+  ],
+  "publisher": "ApJ 824, 71",
+  "publicationDate": "2016",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Chandar et al. (2016), ApJ 824, 71.",
+      "scope": "Whirlpool Galaxy's star clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/824/71/ReadMe"
+    }
+  ]
+}

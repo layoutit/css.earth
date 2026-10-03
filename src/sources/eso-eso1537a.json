@@ -1,0 +1,52 @@
+{
+  "id": "eso-eso1537a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "The star formation region Messier 17",
+  "identifiers": [
+    {
+      "type": "ESO image",
+      "value": "eso1537a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1537a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/publicationjpg/eso1537a.jpg",
+      "label": "JPEG, 4000 x 3738 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.eso.org/public/outreach/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso1537a/",
+      "checkedOn": "2026-10-02",
+      "locator": "4000 x 3738 px; B, V, R and H-alpha. The file's embedded sky tags, used as they are: 0.5316 arcsec per pixel, north 0.0° left of vertical, the frame's centre at 275.2630836°, -16.1874792°. Not measured against Gaia here."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/eso1537a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/outreach/copyright/"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m41",
+  "card": {
+    "text": "M41 is an open star cluster in the Milky Way, about 715 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2287: dist50, the median of the maximum-likelihood distance, 715.05680547 pc (16th to 84th percentile 715 to 716)",
+        "checked": "2026-10-02",
+        "locator": "NGC_2287: dist50 715.1 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-41",
+        "url": "https://en.wikipedia.org/wiki/Messier_41",
+        "label": "Wikipedia, \"Messier 41\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1347235856",
+        "quote": "Messier 41 (also known as M41 or NGC 2287) is an open cluster in the constellation Canis Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M41 is drawn as 593 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2287: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_2287: 593 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-41",
+        "url": "https://en.wikipedia.org/wiki/Messier_41",
+        "label": "Wikipedia, \"Messier 41\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1347235856",
+        "quote": "Located approximately four degrees south of Sirius, it forms a roughly equilateral triangle with Sirius and Nu2 Canis Majoris, visible together in binoculars."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "593 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2287: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_2287, inrt = True"
+        }
+      ]
+    }
+  }
+}

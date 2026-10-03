@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m53",
+  "card": {
+    "text": "M53 is a globular star cluster in the Milky Way, about 18,500 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_5024: Rsun 18.5 ± 0.18 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_5024: Rsun 18.5 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-53",
+        "url": "https://en.wikipedia.org/wiki/Messier_53",
+        "label": "Wikipedia, \"Messier 53\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1375211023",
+        "quote": "Messier 53 is a globular cluster in the Coma Berenices constellation."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M53 is drawn as 697 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_5024: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_5024: 697 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-53",
+        "url": "https://en.wikipedia.org/wiki/Messier_53",
+        "label": "Wikipedia, \"Messier 53\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1375211023",
+        "quote": "It was discovered by Johann Elert Bode in 1775."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "697 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_5024: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_5024, inrt = True"
+        }
+      ]
+    }
+  }
+}

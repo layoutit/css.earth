@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m57-layers",
+  "entries": [
+    {
+      "id": "heic1310a",
+      "subject": "ESA/Hubble heic1310a",
+      "status": "included",
+      "finding": "Hubble image of the Ring Nebula (Messier 57): He II 469, H-beta 487, [O III] 502, continuum 645, H-alpha 656, [N II] 658 and [S II] 673 nm; 3179 × 3179 px over 2.10 × 2.10 arcmin. The file's embedded sky tags, used as they are: 0.0396 arcsec per pixel, north 11.7° left of vertical, the frame's centre at 283.3967177°, 33.0289252°. Not measured against Gaia here.",
+      "evidence": [
+        "https://esahubble.org/images/heic1310a/",
+        "https://esahubble.org/copyright/"
+      ]
+    },
+    {
+      "id": "volume",
+      "subject": "A volume of the Ring Nebula",
+      "status": "deferred",
+      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "evidence": [
+        "https://esahubble.org/images/heic1310a/"
+      ],
+      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+    },
+    {
+      "id": "star-removal",
+      "subject": "Stars in the picture",
+      "status": "included",
+      "finding": "The photograph first kept its stars, which stood on the nebula's plane whatever their own distances. The Nebula Lab's NOX removes them and keeps the nebula's structure. The glow of the brightest stars remains. A second pass over a quarter-size copy takes saturated stars, but on this picture it also took real nebula, so it is not used. The galaxies' glow fill, which needs a star table, erased nebula around the stars that light it and is not used on nebulae.",
+      "evidence": [
+        "https://github.com/charvey2718/nox"
+      ]
+    }
+  ]
+}

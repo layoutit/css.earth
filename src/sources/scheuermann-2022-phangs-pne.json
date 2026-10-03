@@ -30,6 +30,66 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
       "checkedOn": "2026-10-02",
       "locator": "table2: planetary nebulae and supernova remnants of 19 galaxies with J2000 positions and a type; for Galaxy = NGC3351, 142 rows of type PN and 10 of type SNR. Query: SELECT ID, RAJ2000, DEJ2000 FROM \"J/MNRAS/511/6087/table2\" WHERE Galaxy='NGC3351' AND Type LIKE 'PN%' (or 'SNR%')"
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 1,049 rows; 139 drawn as M74's planetary nebulae (The table holds 19 galaxies; these are the rows of NGC0628.; Type PN: a planetary nebula.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 1,049 rows; 10 drawn as M74's supernova remnants (The table holds 19 galaxies; these are the rows of NGC0628.; Type SNR: a supernova remnant.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 1,049 rows; 19 drawn as M61's planetary nebulae (The table holds 19 galaxies; these are the rows of NGC4303.; Type PN: a planetary nebula.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 1,049 rows; 8 drawn as M61's supernova remnants (The table holds 19 galaxies; these are the rows of NGC4303.; Type SNR: a supernova remnant.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 1,049 rows; 42 drawn as M99's planetary nebulae (The table holds 19 galaxies; these are the rows of NGC4254.; Type PN: a planetary nebula.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 1,049 rows; 23 drawn as M99's supernova remnants (The table holds 19 galaxies; these are the rows of NGC4254.; Type SNR: a supernova remnant.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 1,049 rows; 43 drawn as M66's planetary nebulae (The table holds 19 galaxies; these are the rows of NGC3627.; Type PN: a planetary nebula.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 1,049 rows; 8 drawn as M66's supernova remnants (The table holds 19 galaxies; these are the rows of NGC3627.; Type SNR: a supernova remnant.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 1,049 rows; 62 drawn as M100's planetary nebulae (The table holds 19 galaxies; these are the rows of NGC4321.; Type PN: a planetary nebula.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 1,049 rows; 11 drawn as M100's supernova remnants (The table holds 19 galaxies; these are the rows of NGC4321.; Type SNR: a supernova remnant.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 1,049 rows; 29 drawn as NGC 1365's planetary nebulae (The table holds 19 galaxies; these are the rows of NGC1365.; Type PN: a planetary nebula.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 1,049 rows; 5 drawn as NGC 1365's supernova remnants (The table holds 19 galaxies; these are the rows of NGC1365.; Type SNR: a supernova remnant.)."
     }
   ],
   "creators": [

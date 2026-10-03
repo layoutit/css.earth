@@ -1,0 +1,28 @@
+{
+  "id": "m44",
+  "classification": "open-cluster",
+  "order": 5244,
+  "physical": {
+    "name": "Beehive Cluster",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Beehive Cluster is recorded: it is an extended star cluster, and its package frames it at 10.5 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 130.08810396,
+    "declinationDegrees": 19.66587324,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 183.49109237,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 33.94081202,
+    "sources": {
+      "position": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2632: RA_ICRS 130.08810396, DE_ICRS 19.66587324, the densest point of its members (epoch 2016.0) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "distance": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2632: dist50, the median of the maximum-likelihood distance, 183.49109237 pc (16th to 84th percentile 183 to 184) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Hunt & Reffert (2023), Table 3, NGC_2632: mean Gaia DR3 radial velocity 33.94081202 km/s of 348 members (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)"
+    }
+  }
+}

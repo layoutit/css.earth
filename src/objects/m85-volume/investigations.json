@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m85-volume",
+  "entries": [
+    {
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
+      "status": "included",
+      "finding": "A 2400 x 2400 px hips2fits cutout of CDS/P/SDSS9/color, 20.2 arcmin wide on the HyperLEDA position. The red channel reaches 255 at the nucleus (brightest pixel 255, 237, 168 of 255). In 20 arcsec elliptical annuli the cleaned light comes within one count of the corner sky at 480 arcsec, inside the 605.341 arcsec the spheroid reaches.",
+      "evidence": [
+        "https://www.sdss.org/",
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+      ]
+    },
+    {
+      "id": "flat-picture",
+      "subject": "A flat picture facing the Sun",
+      "status": "excluded",
+      "finding": "M85 was first drawn as one flat Sloan picture facing the Sun, the route of the Messier galaxies with no published shape. Seen from the side that picture is a line. Kormendy et al. publish M85's profile and shape, so the volume replaces it."
+    },
+    {
+      "id": "mask-catalogues",
+      "subject": "Catalogues for the masks",
+      "status": "included",
+      "finding": "HyperLEDA PGC sizes 3 neighbours; the 2MASS Extended Source Catalog sizes 6 that HyperLEDA lists without a D25. NOX leaves the haloes of bright stars, so 17 Gaia DR3 stars brighter than G = 15 are masked too. At M87's three D25 radii a close neighbour's mask covers M85's own centre, so each mask stops at nine tenths of its distance from the centre. One more mask is placed by hand, 280 px (141 arcsec) about pixel (970, 1870): a pink and blue ghost of the star Gaia DR3 3947016847002445440 (G 10.4) in the survey camera, which no catalogue lists.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+      ]
+    },
+    {
+      "id": "sersic-fit",
+      "subject": "Spheroid",
+      "status": "included",
+      "finding": "Kormendy et al. (2009), Table 1, row NGC 4382: major-axis Sérsic fit n = 6.12 (+0.31, -0.27), r_e = 128.89 (+10.2, -8.8) arcsec. Table 3 rows at 125.603 and 137.784 arcsec, interpolated to the half-light radius: ellipticity 0.286, position angle 7.63 degrees. Used as published; no fit was made here. Kormendy et al. adopt type E2 for NGC 4382 (Table 1); the RC3 type is SA0+ pec and the VCC's S0_1(3) pec.",
+      "evidence": [
+        "https://arxiv.org/abs/0810.1681",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/182/216"
+      ]
+    },
+    {
+      "id": "globular-clusters",
+      "subject": "Globular cluster dots",
+      "status": "included",
+      "finding": "Jordán et al. (2009), Table 4, VCC 798: the 507 sources with a probability of being a globular cluster of at least 0.5, the authors' own cut, drawn as dots through the same spheroid. They fill only the Hubble field on the centre.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/180/54"
+      ]
+    }
+  ]
+}

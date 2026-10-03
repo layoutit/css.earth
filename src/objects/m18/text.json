@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m18",
+  "card": {
+    "text": "M18 is an open star cluster in the Milky Way, about 1,501 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_6613: dist50, the median of the maximum-likelihood distance, 1500.72440549 pc (16th to 84th percentile 1496 to 1506)",
+        "checked": "2026-10-02",
+        "locator": "NGC_6613: dist50 1500.7 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-18",
+        "url": "https://en.wikipedia.org/wiki/Messier_18",
+        "label": "Wikipedia, \"Messier 18\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100777",
+        "quote": "Messier 18 or M18, also designated NGC 6613 and sometimes known as the Black Swan Cluster, is an open cluster of stars in the constellation Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M18 is drawn as 156 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6613: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6613: 156 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-18",
+        "url": "https://en.wikipedia.org/wiki/Messier_18",
+        "label": "Wikipedia, \"Messier 18\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100777",
+        "quote": "It was discovered by Charles Messier in 1764 and included in his list of comet-like objects."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "156 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6613: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6613, inrt = True"
+        }
+      ]
+    }
+  }
+}

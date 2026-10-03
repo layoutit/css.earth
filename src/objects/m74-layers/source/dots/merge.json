@@ -1,0 +1,28 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "dots",
+  "published": true,
+  "meaning": "M74's catalogued objects as dots on its photograph's disc: hii region candidates, planetary nebulae, supernova remnants.",
+  "centreOnGalaxy": true,
+  "banks": [
+    {
+      "bank": "rousseau-hii",
+      "withinPcOfCentre": 16420,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 16.42 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "scheuermann-pne",
+      "withinPcOfCentre": 16420,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 16.42 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "scheuermann-snr",
+      "withinPcOfCentre": 16420,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 16.42 kpc support radius (recipe.json)."
+    }
+  ],
+  "colorTowardWhite": 0.5,
+  "colorTowardWhiteBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), so both galaxies' dots read as the same tints of starlight.",
+  "colorGamma": 1.6,
+  "colorGammaBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), picked there from three renders over its backing."
+}

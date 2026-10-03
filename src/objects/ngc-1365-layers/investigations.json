@@ -36,14 +36,32 @@
       "revisitWhen": "A kinematic fit with smaller errors is published."
     },
     {
-      "id": "phangs-muse-nebulae",
-      "subject": "PHANGS-MUSE nebular catalogue",
+      "id": "bulge",
+      "subject": "Bulge",
+      "status": "included",
+      "finding": "Salo et al. (2015), S4G Pipeline 4, table 7, NGC1365, model _bdbarfn: a Sérsic bulge (25.0% of the light, magnitude 10.204, half-light radius 12.64″ = 1.12 kpc, n = 0.857, axis ratio 0.577, PA 33.31°) and an exponential disc (53.8% of the light, scale length 95.05″ = 8.41 kpc, axis ratio 0.588, PA 31.66°, face-on central surface brightness 21.251, 20.674 as projected on the sky) and a Ferrers bar (14.3% of the light, radius 90.00″ = 7.97 kpc, axis ratio 0.504, PA 88.51°, central surface brightness 19.892 on the sky) and a point nucleus (7.0% of the light), which is neither bulge nor disc: its light stays on the flat picture. Used as published; the half-light surface brightness the bake needs, 17.74 mag per square arcsecond, follows from the bulge's magnitude, radius, index and axis ratio. At the disc's 55.4° the bulge's axis ratio is one an oblate spheroid in the disc plane can show (intrinsic 0.12).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4"
+      ]
+    },
+    {
+      "id": "dots",
+      "subject": "Catalogued objects as dots",
+      "status": "included",
+      "finding": "34 dots from 2 published tables: 29 planetary nebulae (Scheuermann et al. (2022), CDS J/MNRAS/511/6087, 1,049 rows in the file); 5 supernova remnants (Scheuermann et al. (2022), CDS J/MNRAS/511/6087, 1,049 rows in the file). Each dot is a catalogued object at its published sky position, placed where its sight line meets the disc. Its height above the disc is drawn from a 1674 pc layer, the scale length over 7.3 ([Kregel et al. 2002](https://arxiv.org/abs/astro-ph/0204154), [record](../../sources/kregel-2002-disc-flattening.json)); that height is not measured. Planetary nebulae near the centre can sit in the bulge, with the bulge's share of the fitted light there; that membership is drawn, not measured.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/511/6087",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/511/6087"
+      ]
+    },
+    {
+      "id": "dots-waiting",
+      "subject": "Ionised nebulae (Groves et al. 2023)",
       "status": "deferred",
-      "finding": "Groves et al. (2023) list 1,449 ionised nebulae in NGC 1365 (J/MNRAS/520/4902/catalog, Galaxy = NGC1365). Not drawn: this change adds the image only.",
+      "finding": "The table has rows for this galaxy, but CDS serves it per galaxy only through TAP, which answered with an error on 2026-10-03 (HTTP Error 503: Service Unavailable); the whole file is 43 MB. The dots follow when TAP answers.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/520/4902"
-      ],
-      "revisitWhen": "Dots are wanted for this galaxy."
+      ]
     }
   ]
 }

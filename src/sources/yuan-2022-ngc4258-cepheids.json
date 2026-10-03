@@ -1,0 +1,59 @@
+{
+  "id": "yuan-2022-ngc4258-cepheids",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Absolute calibration of Cepheid period-luminosity relations in NGC 4258",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2022ApJ...940...64Y"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/940/64"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...940...64Y",
+      "label": "2022ApJ...940...64Y"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/940/64",
+      "label": "CDS J/ApJ/940/64"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/940/64/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table2.dat: 669 rows; 669 drawn as M106's cepheids."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/940/64/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "table4.dat: 52 rows; 52 drawn as M106's hii regions."
+    }
+  ],
+  "creators": [
+    "W. Yuan",
+    "L. M. Macri",
+    "A. G. Riess",
+    "T. G. Brink",
+    "S. Casertano",
+    "A. V. Filippenko"
+  ],
+  "publisher": "ApJ 940, 64",
+  "publicationDate": "2022",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Yuan et al. (2022), ApJ 940, 64.",
+      "scope": "M106's cepheids",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/940/64/ReadMe"
+    }
+  ]
+}
