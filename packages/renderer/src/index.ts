@@ -6,7 +6,6 @@ export type { ObjectRuntimeServices } from './runtime/object-runtime.js';
 export { initialObjectSelection, requireObjectAction, reduceObjectSelection } from './runtime/object-contract.js';
 export type { ObjectAction, ObjectSelection } from './runtime/object-contract.js';
 export type { RuntimePolicy } from './navigation/runtime-policy.js';
-export type { CameraPose } from './navigation/types.js';
 export type { PerspectiveWorldContext } from './navigation/perspective-dolly.js';
 export { formatSharedView, parseSharedView } from './navigation/view-url.js';
 /** The document's one frame clock: every frame callback of the application goes through it. */
