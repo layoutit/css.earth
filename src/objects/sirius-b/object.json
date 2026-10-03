@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "sirius-b",
+  "parent": "sirius-system",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -100,7 +101,7 @@
       "color": "#a5bdff",
       "distanceAu": 543905,
       "description": "A white dwarf of one solar mass within 0.8% of the Sun's width, orbiting Sirius every 50 years.",
-      "systemName": "Canis Major",
+      "systemName": "Sirius system",
       "order": 5427,
       "context": {
         "order": 5427

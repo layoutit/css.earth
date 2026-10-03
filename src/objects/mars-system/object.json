@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "mars-system",
+  "parent": "solar-system",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "mars",
-      "members": "moons"
+      "host": "mars"
     },
     "catalog": {
       "name": "Mars system",

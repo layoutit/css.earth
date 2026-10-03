@@ -20,11 +20,11 @@ object scene is mounted at a time.
 ## Selection identity
 
 [`systemTarget`](../site/prepared-world-navigation.mts) already frames the main
-moons on first selection. [`bodyCardViewAtCamera`](../site/overview-context.mts)
+moons on first selection. [`bodyViewAtCamera`](../site/zoom-scope.mts)
 sets the camera threshold between the host family and the selected body.
-[`SceneContext`](../site/scene/scene-selection.mts) calls the family selection
-`satellite-system:<host-id>`, so its heading, source link, URL and card agree
-on the subject.
+[`SceneSubject`](../site/scene/scene-subject.mts) selects the family as its own
+object, `<host-id>-system`, so its heading, source link, URL and card agree on
+the subject.
 
 A *stellar* planetary system, such as the Solar System or WASP-43's, is an object
 of its own with its own address (`/solar-system/`, `/wasp-43-system/`). Satellite systems
@@ -83,10 +83,10 @@ systems around other stars without creating another shell or camera contract.
 
 ## Selection and URL contract
 
-The selection is the host with the view `moons`; its identity `satellite-system:<host-id>` refers to the host's
-mounted scene and shares its camera. It is distinct from the host's own `object:<id>` (the view `body`) and a star's
-`overview:system:<star-id>` (the view `system`). That distinction must survive search previews,
-navigation, history, source links, reading position and reload.
+The selection is the system object, `<host-id>-system`; its identity `object:<host-id>-system` refers to the host's
+mounted scene and shares its camera. It is distinct from the host's own `object:<id>` and a star's
+`object:<star-id>-system`. That distinction must survive search previews, navigation, history, source links, reading
+position and reload.
 
 A satellite system is an object too, `/<host>-system/` (`/earth-system/`,
 `/jupiter-system/`), whose page shows its host's scene out to its moons;

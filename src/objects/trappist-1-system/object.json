@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "trappist-1-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "trappist-1",
-      "members": "planets"
+      "host": "trappist-1"
     },
     "catalog": {
       "name": "TRAPPIST-1 system",

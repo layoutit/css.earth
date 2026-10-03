@@ -1,7 +1,7 @@
 import { PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_SYSTEM_VIEW_SCHEMA } from '@cssearth/objects';
 import type { PreparedWorldCameraFrame, PreparedContextCameraPresentation as WorldContextCameraPresentation, PreparedContextPointSource as WorldContextPointSource, PreparedVolumeOpacityProfile as VolumeOpacityProfile, PreparedOrbitCenter as WorldContextOrbitCenter, PreparedWorldContextData as PreparedWorldContext, PreparedOrbitDataLod as PreparedOrbitLod } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-import { prepareGroupView, prepareSystemView } from './system-view.ts';
+import { prepareBoundView, prepareGroupView, prepareSystemView } from './system-view.ts';
 import type { SystemViewPolicy } from './system-view.ts';
 import type { PreparedSystemView } from '@cssearth/objects';
 import { M_PER_AU } from '@cssearth/astronomy';
@@ -222,7 +222,9 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     bodies: freeze(bodies.map(body => {
       // The radius share leaves out small moons. A star frames all its planets, as the root system does.
       const policy = systemViewPolicy && facts[body.id]?.classification === 'star' ? { ...systemViewPolicy, minimumRadiusShare: 0 } : systemViewPolicy;
-      const systemView = policy === undefined ? undefined : prepareSystemView(body, bodies, states, policy, orbitCenters);
+      // A star nothing orbits, with stars bound to it, frames those stars.
+      const systemView = policy === undefined ? undefined : prepareSystemView(body, bodies, states, policy, orbitCenters)
+        ?? prepareBoundView(body, bodies.filter(other => 'boundTo' in other && other.boundTo?.hostId === body.id), policy);
       return systemView ? freeze({ ...body, systemView }) : body;
     })), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }

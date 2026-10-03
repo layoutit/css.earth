@@ -1,9 +1,9 @@
-import { ladderOf } from '../level-view.mts';
+import { zoomStepOf } from '../inside-view.mts';
+import { moonSystem, subjectView } from './scene-subject.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { readNavigationSelection } from '../navigation/navigation-request.mts';
-import { WORLD_OBJECTS } from '../world-objects.mts';
 import { withSceneDataset } from '../dataset-url.mts';
 import type { createPreparedWorldNavigation, WorldHandoff } from '../prepared-world-navigation.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
@@ -27,11 +27,11 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   async function frameInitialView(session: SceneSession) {
     const { objectId, request, mount, shell } = session;
     if (!mount || !shell) return false;
-    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS) : null;
-    // A page that opens on the zoom ladder (a star's system, a level) opens framed as that rung says, around its centre.
-    const ladder = initialSelection && !initialSelection.savedView ? ladderOf(initialSelection.subject) : null;
-    if (ladder) {
-      const target = navigation.overviewTarget({ scope: ladder.scope, objectId: ladder.centreId, fromId: objectId, mount, view: 'default' });
+    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId) : null;
+    // A page that opens on a zoom out (a star's system, an object seen from inside) opens framed as that scope says, around its centre.
+    const step = initialSelection && !initialSelection.savedView ? zoomStepOf(initialSelection.subject) : null;
+    if (step) {
+      const target = navigation.overviewTarget({ scope: step.scope, objectId: step.centreId, fromId: objectId, mount, view: 'default' });
       if (target) {
         const framed = await session.wait(navigation.focus({ objectId, mount,
           signal: session.signal, reducedMotion: true,
@@ -39,7 +39,8 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
         if (framed.cancelled || !isCurrent(session)) return false;
       }
     }
-    if (initialSelection?.subject.view === 'moons' && !initialSelection.savedView) {
+    // A planet's system is its host seen out to its moons: framed the same way, around the host.
+    if (initialSelection && moonSystem(initialSelection.subject) && !initialSelection.savedView) {
       await loadSystemView(objectId);
       const target = navigation.systemTarget({ objectId, fromId: objectId, mount, force: true });
       if (!target) throw new Error(`No prepared satellite-system target for ${objectId}.`);
@@ -53,7 +54,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   async function restore(session: SceneSession, handoff?: WorldHandoff) {
     const { objectId, request, mount, shell } = session;
     if (!mount || !shell) return false;
-    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS) : null;
+    const initialSelection = !request && session.url ? readNavigationSelection(new URL(session.url), objectId) : null;
     let interrupted = false;
     if (handoff?.afterMount) {
       try {
@@ -98,8 +99,8 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   async function frameDatasetVolume(session: SceneSession) {
     const { objectId, request, mount } = session;
     if (!mount || !session.url || request?.camera.kind === 'restore') return true;
-    const selection = readNavigationSelection(new URL(session.url), objectId, WORLD_OBJECTS);
-    if (selection.subject.view !== 'body' || selection.savedView || selection.feature) return true;
+    const selection = readNavigationSelection(new URL(session.url), objectId);
+    if (subjectView(selection.subject) !== 'body' || selection.savedView || selection.feature) return true;
     const datasets = mount.datasets, volume = datasets?.volumeOf(datasets.current() ?? datasets.defaultId);
     const target = volume ? navigation.datasetVolumeTarget({ objectId, volumeId: volume.objectId, mount }) : null;
     if (!target) return true;

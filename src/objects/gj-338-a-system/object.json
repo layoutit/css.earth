@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-338-a-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-338-a"
+    },
+    "catalog": {
+      "name": "GJ 338 system",
+      "systemName": "GJ 338 system",
+      "classification": "star-system",
+      "color": "#ffbf90",
+      "distanceAu": 1306424,
+      "description": "GJ 338 A and GJ 338 B are two stars bound to each other by gravity."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -88841149862893260,
+        78390161506881000,
+        155429547910748260
+      ],
+      "presentationToReference": [
+        -0.45455644429569975,
+        -0.5964162197022908,
+        0.6615633997020084,
+        0.4010838840248268,
+        0.5261158179009615,
+        0.749889234573988,
+        0.7953050716076252,
+        -0.6062094019647263,
+        -0.00006359842081433674
+      ],
+      "orbitUpReference": [
+        0.5964162197022908,
+        -0.5261158179009615,
+        0.6062094019647263
+      ],
+      "metersPerUnit": 1295572.9032258065,
+      "bodyRadiusM": 401627600
+    }
+  }
+}

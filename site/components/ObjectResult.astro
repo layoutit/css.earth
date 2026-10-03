@@ -12,7 +12,7 @@ const source = sourceDocumentation(object.id, object.name);
 const { value, unit } = listDistance(object.distance);
 const description = distanceDescription(object.distance);
 const markup = objectResultMarkup({
-  kind: 'scene', id: object.id, name: object.name, route: object.route,
+  id: object.id, name: object.name, route: object.route,
   classificationName: objectTypeLabel(object),
   detail: { text: `${value} ${unit}`, value, unit,
     title: description, ariaLabel: `${value} ${unit}. ${description}` },

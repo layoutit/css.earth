@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "local-group",
+  "parent": "nearby-universe",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -58,36 +59,6 @@
       "order": 5154,
       "context": {}
     },
-    "overview": {
-      "order": 2,
-      "zoom": {
-        "enter": {
-          "fade": "galaxy",
-          "at": "middle"
-        },
-        "returnBelow": {
-          "fade": "galaxy",
-          "at": "start"
-        },
-        "centreWithin": {
-          "distancePc": 5000000
-        },
-        "frame": {
-          "fit": "drawn-galaxies"
-        }
-      },
-      "holds": [
-        {
-          "classifications": [
-            "galaxy"
-          ],
-          "list": "Galaxies"
-        }
-      ],
-      "packages": [
-        "local-group-galaxies"
-      ]
-    },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
@@ -114,6 +85,19 @@
       ],
       "metersPerUnit": 2244193.5483870967,
       "bodyRadiusM": 695700000
+    },
+    "zoom": {
+      "enter": {
+        "fade": "galaxy",
+        "at": "middle"
+      },
+      "returnBelow": {
+        "fade": "galaxy",
+        "at": "start"
+      },
+      "frame": {
+        "fit": "drawn-galaxies"
+      }
     }
   },
   "prepared": {

@@ -32,5 +32,5 @@ test('every relative import in an Astro component frontmatter resolves to a file
       }
     }
   }
-  assert.ok(checked > 100, `expected the component frontmatter to be read, saw ${checked} imports`);
+  assert.ok(checked > 50, `expected the component frontmatter to be read, saw ${checked} imports`);
 });

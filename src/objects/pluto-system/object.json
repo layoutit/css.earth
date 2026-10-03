@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "pluto-system",
+  "parent": "solar-system",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "pluto",
-      "members": "moons"
+      "host": "pluto"
     },
     "catalog": {
       "name": "Pluto system",

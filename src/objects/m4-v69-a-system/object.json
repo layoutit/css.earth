@@ -1,17 +1,17 @@
 {
   "schema": "cssearth-object@2",
   "id": "m4-v69-a-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "m4-v69-a",
-      "members": "planets"
+      "host": "m4-v69-a"
     },
     "catalog": {
       "name": "M4 V69 system",
       "systemName": "M4 V69 system",
-      "classification": "planetary-system",
+      "classification": "star-system",
       "color": "#fff4f3",
       "distanceAu": 375402098,
       "description": "The primary star of M4 V69, a pair that eclipse each other every 48.188 days."

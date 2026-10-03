@@ -46,8 +46,10 @@ function parsePointFieldDescriptor(input: unknown): { readonly descriptor: Objec
     throw new TypeError('A point field requires its prepared artifact.');
   }
   const properties = descriptor.properties as Record<string, unknown>;
-  if (Object.keys(properties).length !== 2 || !('frame' in properties) || !('preparation' in properties)) {
-    throw new TypeError('Point-field descriptor properties are invalid.');
+  // `host`: the object the field draws for (the Milky Way for the stellar neighbourhood).
+  if (!('frame' in properties) || !('preparation' in properties) || Object.keys(properties).some(key => !['frame', 'preparation', 'host'].includes(key))
+      || (properties.host !== undefined && (typeof properties.host !== 'string' || !properties.host))) {
+    throw new TypeError(`src/objects/${descriptor.id}/object.json: a point field's properties are its frame, its preparation and an optional host.`);
   }
   const preparation = properties.preparation;
   if (!preparation || typeof preparation !== 'object' || Array.isArray(preparation)) throw new TypeError('Point-field preparation reference is invalid.');

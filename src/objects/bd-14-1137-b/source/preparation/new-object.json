@@ -2,6 +2,10 @@
   "id": "bd-14-1137-b",
   "name": "BD-14 1137B",
   "system": "TOI-421 system",
+  "boundTo": {
+    "host": "toi-421",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-421 and BD-14 1137B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2984582227215748864 and 2984582227215748224), 2,206 AU apart on the sky, with a chance-alignment probability of 1.1e-4: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to TOI-421, 2,206 AU away.",
   "gaia": "2984582227215748224",
   "paper": {

@@ -1,0 +1,27 @@
+{
+  "id": "ngc-4639",
+  "classification": "galaxy",
+  "physical": {
+    "name": "NGC 4639",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 4639 is recorded: it is an extended galaxy, and its package frames it at 8100 pc (object.json worldFrame.bodyRadiusM): RC3's isophotal diameter, log D25 = 1.44 (0.1 arcmin), halved and set at the Cepheid distance.",
+  "star": {
+    "rightAscensionDegrees": 190.718337,
+    "declinationDegrees": 13.2572415,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 20248833,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 981,
+    "sources": {
+      "position": "HyperLEDA meandata (Makarov et al. 2014, A&A 570, A13; http://atlas.obs-hp.fr/hyperleda/), PGC 42741: al2000 12.7145558 h, de2000 13.2572415 deg",
+      "distance": "Riess et al. (2016), ApJ 826, 56, table 5 (https://arxiv.org/abs/1604.01424), row N4639: Cepheid distance modulus mu_Ceph 31.532 +/- 0.071 mag, 10^(mu/5 + 1) pc: 20248833 pc (-651363/+673013); the distance its Cepheids are placed at",
+      "properMotion": "Zero: the galaxy is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "SIMBAD NGC 4639: 981 km/s, from 2022ApJS..261...21Y (https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract)"
+    }
+  }
+}

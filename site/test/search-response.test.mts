@@ -17,15 +17,15 @@ const index = { schema: 'cssearth-prepared-feature-index@2',
   features: [{ objectId: 'moon', id: 'tycho', name: 'Tycho', type: 'Crater', diameterKm: 85,
     searchNames: ['tycho'], searchContext: 'crater' }], places: [] };
 const pin = { url: '/features/index.json', count: 1 };
-const entry = (kind: 'scene' | 'bank', name: string, classification: string, distanceMeters: number, searchNames: string[] = []): CatalogueIndexEntry => {
+const entry = (name: string, classification: string, distanceMeters: number, searchNames: string[] = []): CatalogueIndexEntry => {
   const id = name.toLowerCase();
-  return { kind: 'scene', id, name, searchNames, classification, classificationName: classification, systemName: 'solar system',
+  return { id, name, searchNames, classification, classificationName: classification, systemName: 'solar system',
     route: `/${id}/`, illustration: false, distanceMeters,
     detail: { text: `${distanceMeters} m`, title: 'Observer distance', ariaLabel: `${distanceMeters} m. Observer distance` },
     source: { subject: `object:${id}`, document: `/sources/${id}/`, label: `Sources for ${name}` },
-    marker: kind === 'scene' ? { kind: 'scene', id: 'saturn', color: '#fff', preview: true } : { kind: 'thumbnail', thumbnail: null } };
+    marker: { id: 'saturn', color: '#fff', preview: true } };
 };
-const entries = [entry('scene', 'Saturn', 'planet', 1), entry('scene', 'Titan', 'satellite', 2), entry('bank', 'M42', 'nebula', 3, ['orion nebula', 'm42'])];
+const entries = [entry('Saturn', 'planet', 1), entry('Titan', 'satellite', 2), entry('M42', 'nebula', 3, ['orion nebula', 'm42'])];
 const reads: string[] = [];
 const data = (catalogue = entries, read: SearchData['read'] = async path => { reads.push(path); if (path === pin.url) return index; throw new Error(`${path} is not prepared.`); }): SearchData =>
   ({ pin, read, catalogue: async () => catalogue });
@@ -41,7 +41,7 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
     <details class="object-feature-results" hidden><summary>Named features <span class="object-panel-heading-count"></span></summary><p class="object-destination-hint"></p>
       <ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></details></div>
   </nav><div class="object-selected-content">
-    <section class="object-information-panel"><div data-view-part="system">System header</div><div class="body-part">Saturn</div><div data-view-part="system" data-system-bodies-slot></div></section></div></div><!--search-shell:end-->
+    <section class="object-information-panel"><div data-view-part="system">System header</div><div class="body-part">Saturn</div><div data-view-part="system"></div></section></div></div><!--search-shell:end-->
   <main class="object-stage"><u style='color: red;' data-prepared-node="0"></u></main><script type="module" src="/app.js"></script></body></html>`;
 const visibleNames = (document: Document) => [...document.querySelectorAll('[data-catalogue-list] .object-item .object-name')].map(element => element.textContent);
 const render = async (path: string, search = data(), source = html) => parseHTML(await renderSearchResponse(source, new URL(path, origin), search)).document;
@@ -85,7 +85,7 @@ test('empty submission browses all objects, keeps the view context, and pills re
 });
 
 test('native search lists planets first, then catalogue rows by their meter distances', async () => {
-  const farTitan = [entry('scene', 'Titan', 'satellite', 100), ...entries.filter(({ id }) => id !== 'titan')];
+  const farTitan = [entry('Titan', 'satellite', 100), ...entries.filter(({ id }) => id !== 'titan')];
   assert.deepEqual(visibleNames(await render('/saturn/?q=', data(farTitan))), ['Saturn', 'M42', 'Titan']);
 });
 
@@ -101,7 +101,7 @@ test('features are pinned, rendered into existing rows and have ordinary destina
   assert.equal(failure.querySelector('.object-destination-result')?.hasAttribute('href'), false);
 });
 
-test('typed search shows a flat result list, including queries that name a level of the zoom ladder', async () => {
+test('typed search shows a flat result list, including queries that name an object seen from inside', async () => {
   for (const query of ['t', 'Milky Way']) {
     const document = await render(`/saturn/?q=${encodeURIComponent(query)}`);
     assert.equal(document.querySelector<HTMLElement>('.object-selected-content')?.hidden, true);
@@ -112,7 +112,7 @@ test('typed search shows a flat result list, including queries that name a level
     if (query === 't') assert.deepEqual(visibleNames(document), ['Titan', 'Saturn']);
     // A level is an object: it is found as an ordinary row of the catalogue, here one the fixture adds.
     if (query === 'Milky Way') {
-      const found = await render('/saturn/?q=Milky%20Way', data([...entries, entry('scene', 'Milky Way', 'galaxy', 4)]));
+      const found = await render('/saturn/?q=Milky%20Way', data([...entries, entry('Milky Way', 'galaxy', 4)]));
       assert.deepEqual(visibleNames(found), ['Milky Way']);
       assert.equal(found.querySelector<HTMLElement>('[data-search-empty]')?.hidden, true);
     }
@@ -138,7 +138,7 @@ test('the native response shows the card as its subject: the body, or the planet
   assert.equal(card(planet).dataset.cardSubject, 'body');
   // The live shell presents the card itself (updateBodyCard), so the shared presentation leaves it alone there.
   const live = parseHTML(contextHtml).document;
-  createSelectionPresentation(live).present({ objectId: 'trappist-1', view: 'system' });
+  createSelectionPresentation(live).present({ objectId: 'trappist-1-system' });
   assert.equal(card(live).dataset.cardSubject, undefined);
 });
 
@@ -236,7 +236,7 @@ test('an unreadable saved view renders the page as if it were absent', async () 
 
 test('the bodies of one far system list by name, digits as numbers', () => {
   // Each body is a little nearer or farther by its place on its orbit.
-  const system = ['TRAPPIST-1h', 'TRAPPIST-1 system', 'TRAPPIST-1b', 'TRAPPIST-10', 'TRAPPIST-1', 'TRAPPIST-1c'].map((name, index) => entry('bank', name, 'exoplanet', 3.85e17 + (5 - index) * 1e9));
+  const system = ['TRAPPIST-1h', 'TRAPPIST-1 system', 'TRAPPIST-1b', 'TRAPPIST-10', 'TRAPPIST-1', 'TRAPPIST-1c'].map((name, index) => entry(name, 'exoplanet', 3.85e17 + (5 - index) * 1e9));
   assert.deepEqual(findObjects(system, 'trappist').objects.rows.map(row => row.name),
     ['TRAPPIST-1', 'TRAPPIST-1 system', 'TRAPPIST-1b', 'TRAPPIST-1c', 'TRAPPIST-1h', 'TRAPPIST-10']);
 });

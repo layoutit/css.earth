@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": -82.21641008112022,
   "radialVelocityKmPerS": -32.63069,
   "presentationUp": "display-axis",
+  "boundTo": "toi-1452",
   "sources": {
    "position": "Gaia DR3 source 2264839952875245696 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-1760/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 32.7913 +/- 0.0141 mas (same row, RUWE 1.27): 30.50 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): 6.845, -82.216 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): -32.63 +/- 35.32 km/s"
+   "radialVelocity": "Gaia DR3 (same row): -32.63 +/- 35.32 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-1452 and TOI-1760 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2264839957167921024 and 2264839952875245696), 97 AU apart on the sky, with a chance-alignment probability of 4.8e-8: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

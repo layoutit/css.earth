@@ -33,7 +33,8 @@
     },
     "preparation": {
       "source": "source/delivery.json"
-    }
+    },
+    "host": "eps-eridani"
   },
   "prepared": {
     "format": "cssearth-volume-datasets@1",

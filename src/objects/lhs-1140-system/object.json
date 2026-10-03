@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "lhs-1140-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "lhs-1140",
-      "members": "planets"
+      "host": "lhs-1140"
     },
     "catalog": {
       "name": "LHS 1140 system",

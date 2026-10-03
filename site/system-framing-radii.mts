@@ -20,6 +20,13 @@ export function systemFramingRadii(plan: Pick<PreparedWorldContext, 'focus' | 'b
       + bounds.radiusM + moon.radiusM;
     radii.set(parent.id, Math.max(radii.get(parent.id) ?? parent.radiusM, radius));
   }
+  // A star nothing orbits, with stars bound to it, is framed out to those stars (its system view's members).
+  for (const star of plan.bodies) {
+    const host = star.boundTo ? parents.get(star.boundTo.hostId) : undefined;
+    if (!host?.systemView?.memberIds.includes(star.id)) continue;
+    const radius = Math.hypot(...star.positionM.map((value, axis) => value - host.positionM[axis]!)) + star.radiusM;
+    radii.set(host.id, Math.max(radii.get(host.id) ?? host.radiusM, radius));
+  }
   return radii;
 }
 

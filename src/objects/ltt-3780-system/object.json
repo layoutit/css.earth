@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "ltt-3780-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "ltt-3780",
-      "members": "planets"
+      "host": "ltt-3780"
     },
     "catalog": {
       "name": "LTT 3780 system",

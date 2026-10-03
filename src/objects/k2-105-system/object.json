@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "k2-105-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "k2-105",
-      "members": "planets"
+      "host": "k2-105"
     },
     "catalog": {
       "name": "K2-105 system",

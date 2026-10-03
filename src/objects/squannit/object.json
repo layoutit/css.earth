@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "squannit",
+  "parent": "moshup-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

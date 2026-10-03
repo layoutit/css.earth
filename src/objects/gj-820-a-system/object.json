@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-820-a-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-820-a"
+    },
+    "catalog": {
+      "name": "61 Cygni system",
+      "systemName": "61 Cygni system",
+      "classification": "star-system",
+      "color": "#ffcfaa",
+      "distanceAu": 721069.9,
+      "description": "61 Cygni A and 61 Cygni B are two stars bound to each other by gravity."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        61269554077724510,
+        -57607794564506776,
+        67553181437283870
+      ],
+      "presentationToReference": [
+        0.5680683459496636,
+        0.45603052262479843,
+        -0.6850799345803135,
+        -0.5341179238481905,
+        -0.42901349441413733,
+        -0.7284678888150594,
+        0.6261121287390239,
+        -0.7797330210047053,
+        0.00013491020616168898
+      ],
+      "orbitUpReference": [
+        -0.45603052262479843,
+        0.42901349441413733,
+        0.7797330210047053
+      ],
+      "metersPerUnit": 1483636.4516129033,
+      "bodyRadiusM": 459927300
+    }
+  }
+}

@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "milky-way",
+  "parent": "local-group",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -57,52 +58,6 @@
       "order": 5155,
       "context": {}
     },
-    "overview": {
-      "order": 1,
-      "zoom": {
-        "enter": {
-          "fade": "system",
-          "at": "middle"
-        },
-        "returnBelow": {
-          "fade": "system",
-          "at": "start"
-        },
-        "centreWithin": {
-          "fade": "galaxy",
-          "at": "middle"
-        },
-        "frame": {
-          "between": [
-            {
-              "labels": "galaxy-handoff-end"
-            },
-            {
-              "fade": "galaxy",
-              "at": "middle"
-            }
-          ]
-        }
-      },
-      "holds": [
-        {
-          "classifications": [
-            "star"
-          ]
-        },
-        {
-          "classifications": [
-            "nebula",
-            "globular-cluster",
-            "black-hole"
-          ]
-        }
-      ],
-      "packages": [
-        "milky-way-volume",
-        "stellar-neighbourhood"
-      ]
-    },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
@@ -129,6 +84,27 @@
       ],
       "metersPerUnit": 2244193.5483870967,
       "bodyRadiusM": 695700000
+    },
+    "zoom": {
+      "enter": {
+        "fade": "system",
+        "at": "middle"
+      },
+      "returnBelow": {
+        "fade": "system",
+        "at": "start"
+      },
+      "frame": {
+        "between": [
+          {
+            "labels": "galaxy-handoff-end"
+          },
+          {
+            "fade": "galaxy",
+            "at": "middle"
+          }
+        ]
+      }
     }
   },
   "prepared": {

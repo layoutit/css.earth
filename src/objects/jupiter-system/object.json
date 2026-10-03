@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "jupiter-system",
+  "parent": "solar-system",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "jupiter",
-      "members": "moons"
+      "host": "jupiter"
     },
     "catalog": {
       "name": "Jupiter system",

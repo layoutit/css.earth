@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-1365-layers",
+  "entries": [
+    {
+      "id": "noirlab-decam",
+      "subject": "NOIRLab iotw2127a (Dark Energy Camera, Dark Energy Survey)",
+      "status": "included",
+      "finding": "The whole galaxy, 3383 x 3263 px over 14.82 x 14.30 arcmin (0.263 arcsec per pixel), CC BY 4.0. The page's centre, field and orientation hold: 72 of the 90 Gaia DR3 stars brighter than G = 19 in the frame have a star within 4 px, and a search over centre, scale, rotation and mirror finds nothing better than 73. The core is burned out.",
+      "evidence": [
+        "https://noirlab.edu/public/images/iotw2127a/",
+        "https://noirlab.edu/public/copyright/"
+      ]
+    },
+    {
+      "id": "eso-images",
+      "subject": "ESO press images of NGC 1365",
+      "status": "excluded",
+      "finding": "eso9920f (VLT FORS1) is 6.80 arcmin wide and eso1038a (HAWK-I, infrared) 6.50 arcmin, against an RC3 isophotal diameter of 11.2 arcmin: both cut the outer arms. potw1037a (Danish 1.5 m) holds the whole galaxy in 23.40 x 17.62 arcmin, but at 0.56 arcsec per pixel, half the resolution of the DECam image.",
+      "evidence": [
+        "https://www.eso.org/public/images/eso9920f/",
+        "https://www.eso.org/public/images/eso1038a/",
+        "https://www.eso.org/public/images/potw1037a/"
+      ],
+      "revisitWhen": "A sharper whole-disc photograph is published under an attribution licence."
+    },
+    {
+      "id": "orientation",
+      "subject": "Disc tilt and position angle",
+      "status": "included",
+      "finding": "Leroy et al. (2021) give inclination 55.4 +/- 6.0 deg and position angle 201.1 +/- 7.5 deg. Lang et al. (2020) fit 55.4 deg and 210.7 deg to the CO velocity field, the same receding side; the PHANGS table's own row is used.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/897/122"
+      ],
+      "revisitWhen": "A kinematic fit with smaller errors is published."
+    },
+    {
+      "id": "phangs-muse-nebulae",
+      "subject": "PHANGS-MUSE nebular catalogue",
+      "status": "deferred",
+      "finding": "Groves et al. (2023) list 1,449 ionised nebulae in NGC 1365 (J/MNRAS/520/4902/catalog, Galaxy = NGC1365). Not drawn: this change adds the image only.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/520/4902"
+      ],
+      "revisitWhen": "Dots are wanted for this galaxy."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "s8",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 28274,
+      "lowerKelvin": 28274,
+      "upperKelvin": 28274,
+      "citation": "Habibi et al. (2017), ApJ 847, 120, Table 3: Teff 28,274 K: 28274 K; the source gives no uncertainty, so the range is the value itself, https://arxiv.org/abs/1708.06353"
+    },
+    "note": "S8 is observed only in the near-infrared (the SINFONI H- and K-band spectra of Habibi et al. 2017); no spectrum of it covers visible light, so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

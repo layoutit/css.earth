@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "hat-p-22-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hat-p-22",
-      "members": "planets"
+      "host": "hat-p-22"
     },
     "catalog": {
       "name": "HAT-P-22 system",

@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "tic-117642575-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "tic-117642575",
-      "members": "planets"
+      "host": "tic-117642575"
     },
     "catalog": {
       "name": "TIC 117642575 system",

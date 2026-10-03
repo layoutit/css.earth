@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "didymos-system",
+  "parent": "solar-system",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "didymos",
-      "members": "moons"
+      "host": "didymos"
     },
     "catalog": {
       "name": "Didymos–Dimorphos system",

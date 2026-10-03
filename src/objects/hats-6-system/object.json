@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "hats-6-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hats-6",
-      "members": "planets"
+      "host": "hats-6"
     },
     "catalog": {
       "name": "HATS-6 system",

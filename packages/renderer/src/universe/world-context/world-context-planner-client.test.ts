@@ -7,7 +7,7 @@ import type { WorldPlannerInitialise, WorldPlannerWorker } from './world-context
 import { createWorldContextPlannerClient } from './world-context-planner-client.js';
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 
-const summaryText = await readFile(new URL('../../../../../src/objects/sun/prepared/world-context-summary.json', import.meta.url), 'utf8');
+const summaryText = await readFile(new URL('../../../../../src/objects/observable-universe/prepared/world.json', import.meta.url), 'utf8');
 const summary = parsePreparedWorldContextSummary(JSON.parse(summaryText));
 const source = { orbitBanksUrl: '/world/orbits/' };
 
