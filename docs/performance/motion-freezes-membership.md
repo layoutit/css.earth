@@ -22,6 +22,10 @@ held differently while coasting:
 - **Content** has to appear as it turns into view, or the scene would show holes. It is staged ahead instead: made
   resident a margin before it enters the view (image loaded, `display` on, opacity 0), then faded in. During a coast
   content is only added, never retired; retirement waits for the coast to stop.
+  A nebula's slices follow this (`volume/prepared-volume-runtime.ts`): an axis stack whose weight reached zero, an
+  optical copy whose alpha did and a slice that left the view stay as they are until the camera stops, then leave a
+  paced slice per frame. Hiding them as the camera turned flipped `display` on 2,016 slices in one throw of a drag at
+  the Milky Way (2026-10-03).
 
 ## Why
 
