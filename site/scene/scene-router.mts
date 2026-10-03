@@ -12,7 +12,7 @@ import type { BrowserWindow, SceneFactory } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import type { ObjectEntry } from '../objects.mts';
-import { type ObjectDescriptor, type WorldCameraPose } from '@cssearth/objects';
+import { isExtendedClassification, type ObjectDescriptor, type WorldCameraPose } from '@cssearth/objects';
 import type { NavigationIntent } from '../navigation/navigation-request.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import type { ObjectShell, ShellNavigationTransition } from '../shell/object-shell-types.mts';
@@ -361,6 +361,7 @@ export function createSceneRouter({
         // A link flies in place to any body the world draws; one whose entry has loaded must also share this frame.
         unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
         showcase = registry.createShowcaseController({ documentTarget, windowTarget, navigate, readObjectId: () => objectId, onError: report,
+          isExtended: id => isExtendedClassification(registry.knownObject(id)?.classification),
           // A reader who asked for reduced motion gets the tour's stops without the turn.
           turn({ degrees, durationMilliseconds, signal }) {
             if (reducedMotionActive || requests.current) return;

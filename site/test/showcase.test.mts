@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { parseHTML } from 'linkedom';
-import { createShowcaseController, SHOWCASE_OBJECT_IDS, SHOWCASE_TURN_DEGREES } from '../showcase.mts';
+import { createShowcaseController, SHOWCASE_EXTENDED_TURN_DEGREES, SHOWCASE_OBJECT_IDS, SHOWCASE_TURN_DEGREES } from '../showcase.mts';
 import { requireSceneObject } from '../objects.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { NavigationIntent } from '../navigation/navigation-request.mts';
@@ -103,4 +103,18 @@ test('each landing turns the camera around the body for its stay, and ending the
   await wait(30);
   assert.equal(turns.length, 1, 'a stopped tour turns no further');
   controller.destroy();
+});
+
+test('a galaxy or a nebula is turned around only a little', async () => {
+  const { document, window } = parseHTML(markup);
+  const turns: [string, number][] = [];
+  let objectId = 'earth';
+  const controller = createShowcaseController({ documentTarget: document, windowTarget: window as unknown as BrowserWindow,
+    navigate: async id => { objectId = id; return true; }, readObjectId: () => objectId, ids: ['earth', 'mars', 'm31'], dwellMs: 1,
+    isExtended: id => id === 'm31', turn: ({ degrees }) => { turns.push([objectId, degrees]); }, onError: error => { throw error; } });
+  controller.start();
+  while (turns.length < 4) await wait(2);
+  controller.destroy();
+  for (const [id, degrees] of turns) assert.equal(degrees, id === 'm31' ? SHOWCASE_EXTENDED_TURN_DEGREES : SHOWCASE_TURN_DEGREES, id);
+  assert.ok(turns.some(([id]) => id === 'm31'));
 });
