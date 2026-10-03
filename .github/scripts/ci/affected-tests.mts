@@ -54,9 +54,16 @@ const SHARED = [/^package\.json$/u, /^pnpm-lock\.yaml$/u, /^pnpm-workspace\.yaml
 const TOOLS = new Set(['bake', 'telescope-cli']);
 const SITE = [/^site\//u, /^src\//u, /^integration\//u, /^\.github\//u, /^labs\/performance\//u];
 
+/** Sources outside `packages/` whose schema literals a package test pins (see `packages/bake/src/sources/python-schema-identifiers.test.ts`
+ * and `shell-grid-schema.test.ts`): a change confined to one of them still selects the package that owns the pin. */
+const PINNED_SOURCE_OWNERS: Readonly<Record<string, string>> = Object.freeze({
+  '.github/scripts/checks/check-body-references.mts': 'bake',
+  'src/objects/heliosphere/source/ibex/extract.py': 'bake',
+});
+
 export function affectedTests(paths: readonly string[] | null, packages: readonly Workspace[], siteDependencies: readonly string[]): AffectedTests {
   if (paths === null || paths.some(path => SHARED.some(pattern => pattern.test(path)))) return { packages: 'all', site: true, files: [] };
-  const changed = new Set(paths.flatMap(path => /^packages\/([^/]+)\//u.exec(path)?.[1] ?? []));
+  const changed = new Set(paths.flatMap(path => /^packages\/([^/]+)\//u.exec(path)?.[1] ?? PINNED_SOURCE_OWNERS[path] ?? []));
   // Everything that imports a changed package can break with it: walk the dependents until nothing new joins.
   const byName = new Map(packages.map(workspace => [workspace.name, workspace.directory]));
   const joins = (workspace: Workspace) => workspace.dependencies.some(name => {

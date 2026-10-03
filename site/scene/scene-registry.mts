@@ -9,3 +9,4 @@ export { createSceneSelection, selectionTargetFromUrl } from './scene-selection.
 export { resolveNavigation } from '../navigation/navigation-request.mts';
 export { watchOverviewSelection } from '../overview-selection.mts';
 export { SYSTEM_CENTERS, loadSystemView, systemViewLoaded } from '../system-framing.mts';
+export { createShowcaseController } from '../showcase.mts';
